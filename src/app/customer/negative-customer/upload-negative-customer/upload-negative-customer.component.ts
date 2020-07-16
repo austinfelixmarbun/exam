@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-upload-negative-customer',
@@ -16,12 +17,12 @@ export class UploadNegativeCustomerComponent implements OnInit {
       subsectionId: 'UcUploadFile', 
       formatsAllowed: '.xls, .xlsx', 
       UploadTypeCode: 'UPL_NEG_CUST', 
-      ErrorDownloadUrl: AdInsConstant.GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType, 
-      TemplateUrl: AdInsConstant.DownloadTemplate, 
+      ErrorDownloadUrl: URLConstant.GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType, 
+      TemplateUrl: URLConstant.DownloadTemplate, 
       TemplateName: 'Upload_Negative_Customer_Template', 
       FileErrorName: "Upload_Negative_Customer_ErrorDownload", 
       environmentUrl: environment.FoundationR3Url,
-      apiQryPaging: AdInsConstant.GetPagingObjectBySQL,
+      apiQryPaging: URLConstant.GetPagingObjectBySQL,
       pagingJson: "./assets/ucpaging/searchNegativeCustomerMonitoring.json",
       ddlEnvironments: [
         {
@@ -33,7 +34,7 @@ export class UploadNegativeCustomerComponent implements OnInit {
           environment: environment.FoundationR3Url
         }
       ],
-      url: AdInsConstant.UploadFile
+      url: URLConstant.UploadFile
     }
   }
 }

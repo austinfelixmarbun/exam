@@ -7,6 +7,9 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { environment } from '../../../../environments/environment';
 import { ProdOfferingHDeactivateObj } from '../../../shared/model/ProdOfferingHDeactivateObj.Model';
 import { RefProductOfferingBrancMbrObj } from '../../../shared/model/RefProductOfferingBranchMbrObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 
 @Component({
@@ -24,10 +27,10 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
   arrCrit: any;
   getValueReasonModel: any;
   allRefReasonMethod: any;
-  viewObj: any;
   ProdOfferingBranchMemObj: any;
   OfficeList: any;
   ProdOfferingBranchUrl: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   ProdOfferingHDeactForm = this.fb.group({
     Reason: ['', [Validators.required, Validators.maxLength(50)]],
@@ -38,9 +41,9 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
-    this.editUrl = AdInsConstant.RequestOfferingDeactivation;
-    this.getValueReasonModel = AdInsConstant.GetListActiveRefReason;
-    this.ProdOfferingBranchUrl = AdInsConstant.GetListProdOfferingBranchOfficeMbrByProdHIdAndApp;
+    this.editUrl = URLConstant.RequestOfferingDeactivation;
+    this.getValueReasonModel = URLConstant.GetListActiveRefReason;
+    this.ProdOfferingBranchUrl = URLConstant.GetListProdOfferingBranchOfficeMbrByProdHIdAndApp;
 
     this.route.queryParams.subscribe(params => {
       if (params["prodOfferingHId"] != null) {
@@ -51,12 +54,17 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    var obj = { RefReasonTypeCode: AdInsConstant.RefReasonTypeCodeProdDeactivate };
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
+    var obj = { RefReasonTypeCode: CommonConstant.RefReasonTypeCodeProdDeactivate };
     this.http.post(this.getValueReasonModel, obj).subscribe(
       (response) => {
         console.log(response);
-        this.allRefReasonMethod = response['ReturnObject'];
-        this.ProdOfferingHDeactForm.patchValue({ Reason: response['ReturnObject'][0]['Key'] });
+        if (response['ReturnObject'].length > 0) {
+          this.allRefReasonMethod = response['ReturnObject'];
+          this.ProdOfferingHDeactForm.patchValue({ Reason: response['ReturnObject'][0]['Key'] });
+        }
       },
       (error) => {
         console.log(error);
@@ -68,15 +76,14 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
       response => {
         console.log("Response: ");
         console.log(response);
-        this.OfficeList = response['ReturnObject'];
+        if (response['ReturnObject'].length > 0) {          
+          this.OfficeList = response['ReturnObject'];
+        }
       },
       error => {
         console.log(error);
       }
     );
-
-
-    this.viewObj = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
   }
 
   SaveForm() {

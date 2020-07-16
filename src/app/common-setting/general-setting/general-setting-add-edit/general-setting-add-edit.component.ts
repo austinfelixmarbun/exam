@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-general-setting-add-edit',
@@ -45,7 +46,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
   ngOnInit() {
     this.gsObj = new GeneralSettingObj();
     this.gsObj.GeneralSettingId = this.generalSettingId
-    this.httpClient.post(AdInsConstant.GetGeneralSettingById, this.gsObj).subscribe(
+    this.httpClient.post(URLConstant.GetGeneralSettingById, this.gsObj).subscribe(
       (response) => {
         this.resultData = response;
         console.log(this.resultData);
@@ -68,7 +69,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
     this.gsObj.GsName = this.GeneralSettingForm.controls["GsName"].value;
     this.gsObj.GsValue = this.GeneralSettingForm.controls["GsValue"].value;
     this.gsObj.GsDescr = this.GeneralSettingForm.controls["GsDescr"].value;
-    this.httpClient.post(AdInsConstant.EditGeneralSetting, this.gsObj).subscribe(
+    this.httpClient.post(URLConstant.EditGeneralSetting, this.gsObj).subscribe(
       response => {
         this.service.successMessage(response["Message"]);
         this.router.navigate(["/CommonSetting/GeneralSetting"]);

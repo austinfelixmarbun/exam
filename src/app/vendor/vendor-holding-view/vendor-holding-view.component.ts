@@ -9,6 +9,9 @@ import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { environment } from 'environments/environment';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-vendor-holding-view',
@@ -19,18 +22,18 @@ export class VendorHoldingViewComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) UCGridFooter;
   @ViewChild(UCSearchComponent) UCSearchComponent;
   VendorId: any;
-  viewVendorHoldingObj: string;
+  viewVendorHoldingObj: UcViewGenericObj = new UcViewGenericObj();
   arrCrit: any[];
   vendorHoObj: VendorHoObj;
   MainInfo: any;
   vendorAddrObj: VendorHoObj;
   MrVendorTypeCode: any;
-  viewVendorHoldingMainPObj: string;
-  viewVendorHoldingMainCObj: string;
-  viewVendorHoldingTaxObj: string;
-  viewVendorHoldingTaxAddrObj: string;
-  viewVendorHoldingAddrObj: string;
-  viewVendorHoldingLtLgObj: string;
+  viewVendorHoldingMainPObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorHoldingMainCObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorHoldingTaxObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorHoldingTaxAddrObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorHoldingAddrObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorHoldingLtLgObj: UcViewGenericObj = new UcViewGenericObj();
   
   VendorGrp: any;
   GroupListObj: VendorGroupObj;
@@ -65,7 +68,7 @@ export class VendorHoldingViewComponent implements OnInit {
     var vendorObj = {
       VendorId: this.VendorId
     }
-    this.http.post(AdInsConstant.GetVendorByVendorId, vendorObj).subscribe(
+    this.http.post(URLConstant.GetVendorByVendorId, vendorObj).subscribe(
       response => {
         console.log(response);
         this.MrVendorTypeObj = response;
@@ -73,52 +76,58 @@ export class VendorHoldingViewComponent implements OnInit {
       },
       error => {
         console.log(error);
-      } 
+      }
     )
 
-
-    console.log(this.MrVendorTypeCode);
-    this.viewVendorHoldingObj = "./assets/ucviewgeneric/viewVendorHolding.json";
-    this.viewVendorHoldingMainPObj = "./assets/ucviewgeneric/viewVendorHoldingMainP.json";
-    this.viewVendorHoldingMainCObj = "./assets/ucviewgeneric/viewVendorHoldingMainC.json";
-    this.viewVendorHoldingTaxObj = "./assets/ucviewgeneric/viewVendorHoldingTax.json";
-    this.viewVendorHoldingTaxAddrObj = "./assets/ucviewgeneric/viewVendorHoldingTaxAddr.json";
-    this.viewVendorHoldingAddrObj = "./assets/ucviewgeneric/viewVendorHoldingAddr.json";
-    this.viewVendorHoldingLtLgObj = "./assets/ucviewgeneric/viewVendorHoldingLtLg.json";
-    this.GetListVendorContactPersonByVendorId();
+    this.viewVendorHoldingObj.viewInput = "./assets/ucviewgeneric/viewVendorHolding.json";
+    this.viewVendorHoldingObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorHoldingMainPObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingMainP.json";
+    this.viewVendorHoldingMainPObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorHoldingMainCObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingMainC.json";
+    this.viewVendorHoldingMainCObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorHoldingTaxObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingTax.json";
+    this.viewVendorHoldingTaxObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorHoldingTaxAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingTaxAddr.json";
+    this.viewVendorHoldingTaxAddrObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorHoldingAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingAddr.json";
+    this.viewVendorHoldingAddrObj.viewEnvironment = environment.FoundationR3Url;
+    this.viewVendorHoldingLtLgObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingLtLg.json";
+    this.viewVendorHoldingLtLgObj.viewEnvironment = environment.FoundationR3Url;
     
+    this.GetListVendorContactPersonByVendorId();
+
     this.listSelectedId = new Array();
     this.tempListId = new Array();
     this.tempData = new Array();
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + AdInsConstant.GetPagingObjectBySQL;
+    this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
 
     this.GroupListObj = new VendorGroupObj();
     this.GroupListObj.VendorId = this.VendorId;
 
-    this.http.post(AdInsConstant.GetListVendorGrpByVendorId, this.GroupListObj).subscribe(
+    this.http.post(URLConstant.GetListVendorGrpByVendorId, this.GroupListObj).subscribe(
       response => {
         console.log(response);
-        this.VendorGrp = response['ReturnObject']
+        this.VendorGrp = response[CommonConstant.ReturnObj]
 
       },
       error => {
         console.log(error);
-      } 
+      }
     )
     this.HoListObj = new VendorObj();
     this.HoListObj.VendorId = this.VendorId;
 
-    this.http.post(AdInsConstant.GetListHoByVendorId, this.HoListObj).subscribe(
+    this.http.post(URLConstant.GetListHoByVendorId, this.HoListObj).subscribe(
       response => {
         console.log(response);
-        this.Vendor = response['ReturnObject']
+        this.Vendor = response[CommonConstant.ReturnObj]
 
       },
       error => {
         console.log(error);
-      } 
+      }
     )
   }
 
@@ -143,7 +152,6 @@ export class VendorHoldingViewComponent implements OnInit {
     this.UCGridFooter.resultData = this.resultData;
   }
 
-
   onSelect(event) {
     this.pageNow = event.pageNow;
     this.pageSize = event.pageSize;
@@ -155,17 +163,15 @@ export class VendorHoldingViewComponent implements OnInit {
     var obj = {
       VendorId: this.VendorId
     }
-    var getListUrl = AdInsConstant.GetListVendorContactPersonByVendorId;
+    var getListUrl = URLConstant.GetListVendorContactPersonByVendorId;
     this.http.post(getListUrl, obj).subscribe(
       (response) => {
         console.log(response);
-        this.vendorContactPerson = response['ReturnObject'];
-        
+        this.vendorContactPerson = response[CommonConstant.ReturnObj];
       },
       (error) => {
         console.log(error);
       }
     );
   }
-
 }

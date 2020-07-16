@@ -11,6 +11,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { OrgJobTitleObj } from 'app/shared/model/OrgJobTitleObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-org-job-title-detail',
@@ -65,7 +67,7 @@ export class OrgJobTitleDetailComponent implements OnInit {
       }
       if (params["refOrgId"] != null) {
         this.refOrgId = params["refOrgId"];
-        console.log(params["refOrgId"] );
+        console.log(params["refOrgId"]);
       }
       if (params["orgMdlStrucId"] != null) {
         this.orgMdlStrucId = params["orgMdlStrucId"];
@@ -82,18 +84,18 @@ export class OrgJobTitleDetailComponent implements OnInit {
   ngOnInit() {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupRefJobTitle.json";
-    this.inputLookupObj.urlQryPaging = AdInsConstant.GetRefJobTitle;
+    this.inputLookupObj.urlQryPaging = URLConstant.GetRefJobTitle;
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
-    
+
     this.inputLookupObj2 = new InputLookupObj();
     this.inputLookupObj2.urlJson = "./assets/lookup/lookupParentForm.json";
-    this.inputLookupObj2.urlQryPaging = AdInsConstant.GetOrgJobTitlePaging;
+    this.inputLookupObj2.urlQryPaging = URLConstant.GetOrgJobTitlePaging;
     this.inputLookupObj2.urlEnviPaging = environment.FoundationR3Url;
     console.log("masuk");
     this.orgJobTitleObj = new OrgJobTitleObj();
     this.InitForm();
     if (this.type == "edit") {
-      this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgJobTitleByOrgJobTitleId;
+      this.apiUrl = this.foundationUrl + URLConstant.GetOrgJobTitleByOrgJobTitleId;
       this.orgJobTitleObj.orgJobTitleId = +this.orgJobTitleId;
       this.httpClient.post(this.apiUrl, this.orgJobTitleObj).subscribe(
         response => {
@@ -102,50 +104,50 @@ export class OrgJobTitleDetailComponent implements OnInit {
           console.log("obj", response["returnObject"]);
           this.inputLookupObj.idSelect = response["returnObject"]["refJobTitleId"];
           this.inputLookupObj2.idSelect = response["returnObject"]["parentOrgJobTitleId"];
-          if (response["returnObject"]["isActive"] == "1") {
+          if (response["returnObject"]["isActive"] == CommonConstant.TRUE_CONDITION) {
             this.isActive = true;
           } else {
             this.isActive = false;
           }
 
           /* #region Fill Lookup RefJobTitle */
-          console.log('fill lookup job title',+ this.inputLookupObj.idSelect )
+          console.log('fill lookup job title', + this.inputLookupObj.idSelect)
           var jobTitleObj: RefJobTitleObj = new RefJobTitleObj();
           var getJobTitleUrl: any =
-            this.foundationUrl + AdInsConstant.GetRefJobTitleById;
+            this.foundationUrl + URLConstant.GetRefJobTitleById;
           jobTitleObj.RefJobTitleId = + this.inputLookupObj.idSelect;
           this.httpClient
             .post(getJobTitleUrl, jobTitleObj)
             .subscribe(response => {
               console.log(jobTitleObj);
-              this.jobTitleName =  response["returnObject"]["jobTitleName"];
+              this.jobTitleName = response["returnObject"]["jobTitleName"];
               this.inputLookupObj.jsonSelect = response["returnObject"];
             });
           /* #endregion */
 
 
           /* #region Fill Lookup OrgJobTitle */
-          if(this.parentOrgJobTitleId != 0 && this.parentOrgJobTitleId != null){
-          console.log('fill lookup OrgJobTitle',this.parentOrgJobTitleId )
+          if (this.parentOrgJobTitleId != 0 && this.parentOrgJobTitleId != null) {
+            console.log('fill lookup OrgJobTitle', this.parentOrgJobTitleId)
 
-          var job: RefJobTitleObj = new RefJobTitleObj();
-          var orgJobTitle: OrgJobTitleObj = new OrgJobTitleObj();
-          var orgJobTitleUrl =
-            this.foundationUrl + AdInsConstant.GetOrgJobTitleByOrgJobTitleId;
-          var getJobUrl: any =
-            this.foundationUrl + AdInsConstant.GetRefJobTitleById;
-          orgJobTitle.orgJobTitleId = +this.parentOrgJobTitleId;
-          this.httpClient
-            .post(orgJobTitleUrl, orgJobTitle)
-            .subscribe(response => {
-              this.inputLookupObj2.jsonSelect = response["returnObject"];
-              job.RefJobTitleId = response["returnObject"]["refJobTitleId"];
-              this.httpClient
-                .post(getJobUrl, job)
-                .subscribe(response => {
-                  this.inputLookupObj2.nameSelect = response["returnObject"]["jobTitleName"];
-                });
-            });
+            var job: RefJobTitleObj = new RefJobTitleObj();
+            var orgJobTitle: OrgJobTitleObj = new OrgJobTitleObj();
+            var orgJobTitleUrl =
+              this.foundationUrl + URLConstant.GetOrgJobTitleByOrgJobTitleId;
+            var getJobUrl: any =
+              this.foundationUrl + URLConstant.GetRefJobTitleById;
+            orgJobTitle.orgJobTitleId = +this.parentOrgJobTitleId;
+            this.httpClient
+              .post(orgJobTitleUrl, orgJobTitle)
+              .subscribe(response => {
+                this.inputLookupObj2.jsonSelect = response["returnObject"];
+                job.RefJobTitleId = response["returnObject"]["refJobTitleId"];
+                this.httpClient
+                  .post(getJobUrl, job)
+                  .subscribe(response => {
+                    this.inputLookupObj2.nameSelect = response["returnObject"]["jobTitleName"];
+                  });
+              });
           }
           /* #endregion */
 
@@ -169,7 +171,7 @@ export class OrgJobTitleDetailComponent implements OnInit {
 
     //MODE-ADD
     if (this.type != "edit") {
-      this.apiUrl = this.foundationUrl + AdInsConstant.AddOrgJobTitle;
+      this.apiUrl = this.foundationUrl + URLConstant.AddOrgJobTitle;
       this.orgJobTitleObj = new OrgJobTitleObj();
       this.orgJobTitleObj.orgMdlStrucId = +this.orgMdlStrucId;
       this.orgJobTitleObj.refJobTitleId = lookupRefJobTitle.refJobTitleId;
@@ -192,7 +194,7 @@ export class OrgJobTitleDetailComponent implements OnInit {
     }
     //MODE-EDIT
     else {
-      this.apiUrl = this.foundationUrl + AdInsConstant.EditOrgJobTitle;
+      this.apiUrl = this.foundationUrl + URLConstant.EditOrgJobTitle;
       this.orgJobTitleObj.orgJobTitleId = +this.orgJobTitleId;
       this.orgJobTitleObj.orgMdlStrucId = +this.orgMdlStrucId;
       this.orgJobTitleObj.refJobTitleId = lookupRefJobTitle.idSelect;
@@ -254,5 +256,4 @@ export class OrgJobTitleDetailComponent implements OnInit {
     this.addCritOrgJobTitle.push(critParent);
     /* #endregion */
   }
-
 }

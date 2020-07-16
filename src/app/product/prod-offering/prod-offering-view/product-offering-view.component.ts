@@ -10,6 +10,9 @@ import { ProdOfferingHVersionObj } from "../../../shared/model/ProdOfferingHVers
 import { RefProductOfferingDetailObj } from "../../../shared/model/RefProductOfferingDetailObj.Model";
 import { ProdOfferingCodeVersion } from "../../../shared/model/ProdOfferingCodeVersion.Model";
 import { saveAs } from 'file-saver';
+import { URLConstant } from "app/shared/constant/URLConstant";
+import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
+import { CommonConstant } from "app/shared/constant/CommonConstant";
 
 
 @Component({
@@ -23,7 +26,6 @@ export class ProductOfferingViewComponent implements OnInit {
   prodOfferingHId: any;
   prodOfferingCode: any;
   prodOfferingVersion: any;
-  viewProdOfferMainInfoObj: any;
   ProdOfferingBranchMemObj: any;
   ProdOfferingVersionObj: any;
   GetProdOfferByVerCode: any;
@@ -41,16 +43,17 @@ export class ProductOfferingViewComponent implements OnInit {
   ProdOfferingCodeVersion: any;
   mainInfoByHIdOnly: boolean = true;
   IsLoaded: boolean = false;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   DlRuleObj = {
     CompntValue: "",
   };
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
 
-    this.ProdOfferingDUrl = AdInsConstant.GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode;
-    this.ProdOfferingBranchUrl = AdInsConstant.GetListProdOfferingBranchOfficeMbrByProdHId;
-    this.ProdOfferingVerUrl = AdInsConstant.GetListProdOfferingHVersionByProdOfferingHId;
-    this.ProdOfferingCodeVerUrl = AdInsConstant.GetProdOfferingHByCodeAndVerion;
+    this.ProdOfferingDUrl = URLConstant.GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode;
+    this.ProdOfferingBranchUrl = URLConstant.GetListProdOfferingBranchOfficeMbrByProdHId;
+    this.ProdOfferingVerUrl = URLConstant.GetListProdOfferingHVersionByProdOfferingHId;
+    this.ProdOfferingCodeVerUrl = URLConstant.GetProdOfferingHByCodeAndVerion;
 
     this.route.queryParams.subscribe(params => {
       if (params["prodOfferingHId"] != 0) {
@@ -93,11 +96,12 @@ export class ProductOfferingViewComponent implements OnInit {
     }
     //** Main Information **//
     if (this.mainInfoByHIdOnly == true) {
-      this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
+      this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
     }
     else {
-      this.viewProdOfferMainInfoObj = "./assets/ucviewgeneric/viewProductOfferingMainInformationByCode.json";
+      this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductOfferingMainInformationByCode.json";
     }
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
 
     if (this.prodOfferingHId == 0) {
@@ -111,7 +115,7 @@ export class ProductOfferingViewComponent implements OnInit {
       response => {
         console.log("Response: ");
         console.log(response);
-        this.ProdOfferingVersion = response['ReturnObject'];
+        this.ProdOfferingVersion = response[CommonConstant.ReturnObj];
 
       },
       error => {
@@ -126,7 +130,7 @@ export class ProductOfferingViewComponent implements OnInit {
       response => {
         console.log("Response: ");
         console.log(response);
-        this.ProdOfferingBranchMbr = response['ReturnObject'];
+        this.ProdOfferingBranchMbr = response[CommonConstant.ReturnObj];
 
       },
       error => {
@@ -138,12 +142,12 @@ export class ProductOfferingViewComponent implements OnInit {
     //** Product Component **//
     this.refProductDetailObj = new RefProductOfferingDetailObj;
     this.refProductDetailObj.ProdOfferingHId = this.prodOfferingHId;
-    this.refProductDetailObj.RefProdCompntGrpCode = ['GEN', 'SCHM', 'SCORE', 'RULE', 'OTHR','LOS'];
+    this.refProductDetailObj.RefProdCompntGrpCode = ['GEN', 'SCHM', 'SCORE', 'RULE', 'OTHR', 'LOS'];
     await this.http.post(this.ProdOfferingDUrl, this.refProductDetailObj).toPromise().then(
       response => {
         console.log("Response: ");
         console.log(response);
-        this.ProdComp = response['ReturnObject'].ProdOffComponents;
+        this.ProdComp = response[CommonConstant.ReturnObj].ProdOffComponents;
         console.log(this.ProdComp);
         this.GenData = this.ProdComp.filter(
           comp => comp.GroupCode == 'GEN');
@@ -160,7 +164,7 @@ export class ProductOfferingViewComponent implements OnInit {
   }
   DownloadRule(CompntValue, CompntValueDesc) {
     this.DlRuleObj.CompntValue = CompntValue;
-    this.http.post(AdInsConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
+    this.http.post(URLConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
       response => {
         saveAs(response, CompntValueDesc + '.xlsx');
       },

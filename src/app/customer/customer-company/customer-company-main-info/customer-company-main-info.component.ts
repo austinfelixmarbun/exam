@@ -3,6 +3,8 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-company-main-info',
@@ -37,36 +39,42 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
-    this.GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
 
   ngOnInit() {
     this.VipNotesRequired = true;
     var refMasterObjCustModel = {
-      RefMasterTypeCode: "CUST_MODEL",
-      ReserveField1: "COMPANY",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      ReserveField1: CommonConstant.CustTypeCompany,
       RowVersion: ""
     }
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
       (response) => {
-        this.tempCustModel = response["ReturnObject"];
-        this.CustomerCompanyForm.patchValue({
-          CustModel: this.tempCustModel[0].Key
-        });
+        console.log(response);
+        this.tempCustModel = response[CommonConstant.ReturnObj];
+        if (this.tempCustModel.length > 0) {
+          this.CustomerCompanyForm.patchValue({
+            CustModel: this.tempCustModel[0].Key
+          });
+        }
       }
     );
 
     var refMasterObjMrCompanyTypeCode = {
-      RefMasterTypeCode: "COMPANY_TYPE",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
       RowVersion: ""
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
-        this.tempCompanyTypeCode = response["ReturnObject"];
-        this.CustomerCompanyForm.patchValue({
-          MrCompanyTypeCode: this.tempCompanyTypeCode[0].Key
-        });
+        console.log(response);
+        this.tempCompanyTypeCode = response[CommonConstant.ReturnObj];
+        if (this.tempCompanyTypeCode.length > 0) {
+          this.CustomerCompanyForm.patchValue({
+            MrCompanyTypeCode: this.tempCompanyTypeCode[0].Key
+          });
+        }
       }
     );
   }
@@ -92,13 +100,13 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       this.CustomerCompanyForm.controls.VipNotes.disable();
       this.VipNotesRequired = false;
       this.CustomerCompanyForm.controls.IdExpiredDt.clearValidators();
-    
-      
+
+
 
     } else {
       this.CustomerCompanyForm.controls.VipNotes.enable();
       this.CustomerCompanyForm.controls.VipNotes.setValidators(Validators.required);
-      this.VipNotesRequired = true; 
+      this.VipNotesRequired = true;
     }
     this.CustomerCompanyForm.controls.VipNotes.updateValueAndValidity();
   }

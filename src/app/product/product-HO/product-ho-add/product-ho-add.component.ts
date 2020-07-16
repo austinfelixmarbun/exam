@@ -7,6 +7,8 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { RefProductHOObj } from 'app/shared/model/RefProductHOObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { formatDate } from '@angular/common';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-product-ho-add',
@@ -59,7 +61,7 @@ export class ProductHOAddComponent implements OnInit {
       this.RefProductHOForm.controls.ProdCode.disable();
       this.ProdHOBj = new RefProductHOObj();
       this.ProdHOBj.ProdHId = this.param;
-      this.UrlBackEnd = AdInsConstant.GetProductMainInfo;
+      this.UrlBackEnd = URLConstant.GetProductMainInfo;
       this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
         (response) => {
           this.ResultResponse = response;
@@ -87,8 +89,8 @@ export class ProductHOAddComponent implements OnInit {
   UrlBackEnd: any;
 
   ValidateDate() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    let businessDate = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    let businessDate = new Date(context[CommonConstant.BUSINESS_DT]);
     let startDate = new Date(this.RefProductHOForm.get("StartDt").value);
     let endDate = new Date(this.RefProductHOForm.get("EndDt").value);
 
@@ -113,7 +115,7 @@ export class ProductHOAddComponent implements OnInit {
 
       if (this.mode == "edit") {
         if (this.ValidateDate()) {
-          this.UrlBackEnd = AdInsConstant.EditProduct;
+          this.UrlBackEnd = URLConstant.EditProduct;
           this.ProdHOBj.ProdId = this.ResultResponse.ProdId;
           this.ProdHOBj.ProdCode = this.ResultResponse.ProdCode;
           this.ProdHOBj.RowVersion = this.ResultResponse.RowVersion;
@@ -129,7 +131,7 @@ export class ProductHOAddComponent implements OnInit {
         }
       } else {
         if (this.ValidateDate()) {
-          this.UrlBackEnd = AdInsConstant.AddProduct;
+          this.UrlBackEnd = URLConstant.AddProduct;
           this.ProdHOBj.RowVersion = "";
           this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
             (response) => {
@@ -147,7 +149,7 @@ export class ProductHOAddComponent implements OnInit {
       this.ProdHOBj = this.RefProductHOForm.value;
       if (this.mode == "edit") {
         if (this.ValidateDate()) {
-          this.UrlBackEnd = AdInsConstant.EditProduct;
+          this.UrlBackEnd = URLConstant.EditProduct;
           this.ProdHOBj.ProdId = this.ResultResponse.ProdId;
           this.ProdHOBj.ProdCode = this.ResultResponse.ProdCode;
           this.ProdHOBj.RowVersion = this.ResultResponse.RowVersion;
@@ -163,7 +165,7 @@ export class ProductHOAddComponent implements OnInit {
         }
       } else {
         if (this.ValidateDate()) {
-          this.UrlBackEnd = AdInsConstant.AddProduct;
+          this.UrlBackEnd = URLConstant.AddProduct;
           this.ProdHOBj.RowVersion = "";
           this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
             (response) => {

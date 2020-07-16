@@ -13,6 +13,8 @@ import { map, mergeMap } from 'rxjs/operators';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { AssetNegativeObj } from 'app/shared/model/AssetNegativeObj.Model';
 import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-negative-asset-detail',
@@ -96,18 +98,18 @@ export class NegativeAssetDetailComponent implements OnInit {
       var negativeAsset = new AssetNegativeObj();
       negativeAsset.AssetNegativeId = this.assetNegativeId;
       var refMasterObj = new RefMasterObj();
-      refMasterObj.RefMasterTypeCode = "NEG_ASSET_SOURCE";
-      this.httpClient.post(AdInsConstant.GetListActiveRefMaster, refMasterObj).pipe(
+      refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegAssetSource;
+      this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterObj).pipe(
         map((response) => {
-          this.negativeAssetSourceList = [...response["ReturnObject"]];
-          if(this.negativeAssetSourceList.length >0){
+          this.negativeAssetSourceList = [...response[CommonConstant.ReturnObj]];
+          if (this.negativeAssetSourceList.length > 0) {
             this.AssetNegativeForm.patchValue({
               MrNegAssetSourceCode: this.negativeAssetSourceList[0]["Key"]
             });
           }
         }),
         mergeMap(() => {
-          const assetNegativeData = this.httpClient.post(AdInsConstant.GetAssetNegativeByIdEditPage, negativeAsset);
+          const assetNegativeData = this.httpClient.post(URLConstant.GetAssetNegativeByIdEditPage, negativeAsset);
           return assetNegativeData;
         })
       ).subscribe(
@@ -162,10 +164,10 @@ export class NegativeAssetDetailComponent implements OnInit {
       );
     }
     else {
-      this.httpClient.post(AdInsConstant.GetListActiveRefMaster, { RefMasterTypeCode: "NEG_ASSET_SOURCE" }).subscribe(
+      this.httpClient.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNegAssetSource }).subscribe(
         (response) => {
-          this.negativeAssetSourceList = [...response["ReturnObject"]];
-          if(this.negativeAssetSourceList.length > 0){
+          this.negativeAssetSourceList = [...response[CommonConstant.ReturnObj]];
+          if (this.negativeAssetSourceList.length > 0) {
             this.AssetNegativeForm.patchValue({
               MrNegAssetSourceCode: this.negativeAssetSourceList[0]["Key"]
             });
@@ -183,7 +185,7 @@ export class NegativeAssetDetailComponent implements OnInit {
     this.serial3Mandatory = false;
     this.serial4Mandatory = false;
     this.serial5Mandatory = false;
-    this.httpClient.post(AdInsConstant.GetAssetTypeById, { AssetTypeId: e.assetTypeId }).subscribe(
+    this.httpClient.post(URLConstant.GetAssetTypeById, { AssetTypeId: e.assetTypeId }).subscribe(
       (response) => {
         if (response["IsMndtrySerialNo1"] == "1") {
           this.AssetNegativeForm.controls['SerialNo1'].setValidators([Validators.required]);
@@ -261,7 +263,7 @@ export class NegativeAssetDetailComponent implements OnInit {
   Save() {
     var assetNegativeObj = this.AssetNegativeForm.value;
     if (this.pageType == "add") {
-      this.httpClient.post(AdInsConstant.AddAssetNegative, assetNegativeObj).subscribe(
+      this.httpClient.post(URLConstant.AddAssetNegative, assetNegativeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/NegativeAsset/Paging"]);
@@ -272,7 +274,7 @@ export class NegativeAssetDetailComponent implements OnInit {
       );
     }
     else {
-      this.httpClient.post(AdInsConstant.EditAssetNegative, assetNegativeObj).subscribe(
+      this.httpClient.post(URLConstant.EditAssetNegative, assetNegativeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/NegativeAsset/Paging"]);

@@ -7,6 +7,8 @@ import { CustCompanyLegalDocObj } from 'app/shared/model/CustCompanyLegalDocObj.
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustLegalDocDetailComponent } from './cust-legal-doc-detail/cust-legal-doc-detail.component';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-cust-legal-doc',
@@ -15,12 +17,12 @@ import { Router, ActivatedRoute } from '@angular/router';
   providers: [NGXToastrService]
 })
 export class CustLegalDocComponent implements OnInit {
-   CustCompanyId: number;
+  CustCompanyId: number;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
-  
+
   custLegalDocs: any;
   IdCust: number;
-  Page : string;
+  Page: string;
   constructor(
     private router: Router,
     private httpClient: HttpClient,
@@ -37,28 +39,28 @@ export class CustLegalDocComponent implements OnInit {
         this.Page = params["Page"];
       }
     });
-   }
+  }
 
-  ngOnInit() { 
+  ngOnInit() {
 
-      var custObj = { CustId: this.IdCust };
-      this.httpClient.post(AdInsConstant.GetCustCompanyByCustId, custObj).subscribe(
-        (response: any) => {
-          
-          this.CustCompanyId = response['CustCompanyId'];
-          var custCompanyLegalDoc = new CustCompanyLegalDocObj();
-          custCompanyLegalDoc.CustCompanyId = this.CustCompanyId;
-          this.httpClient.post(AdInsConstant.GetListViewCustCompanyLegalDocByCustCompanyId, custCompanyLegalDoc).subscribe(
-            (response: any) => {
-              this.custLegalDocs = response.ListCustCompanyLegalDoc;
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
-        } 
-      ); 
- 
+    var custObj = { CustId: this.IdCust };
+    this.httpClient.post(URLConstant.GetCustCompanyByCustId, custObj).subscribe(
+      (response: any) => {
+
+        this.CustCompanyId = response['CustCompanyId'];
+        var custCompanyLegalDoc = new CustCompanyLegalDocObj();
+        custCompanyLegalDoc.CustCompanyId = this.CustCompanyId;
+        this.httpClient.post(URLConstant.GetListViewCustCompanyLegalDocByCustCompanyId, custCompanyLegalDoc).subscribe(
+          (response: any) => {
+            this.custLegalDocs = response.ListCustCompanyLegalDoc;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
+    );
+
   }
 
   openCustLegalDocDetail() {
@@ -69,7 +71,7 @@ export class CustLegalDocComponent implements OnInit {
         this.spinner.show();
         var custCompanyLegalDoc = new CustCompanyLegalDocObj();
         custCompanyLegalDoc.CustCompanyId = this.CustCompanyId;
-        this.httpClient.post(AdInsConstant.GetListViewCustCompanyLegalDocByCustCompanyId, custCompanyLegalDoc).subscribe(
+        this.httpClient.post(URLConstant.GetListViewCustCompanyLegalDocByCustCompanyId, custCompanyLegalDoc).subscribe(
           (response: any) => {
             this.custLegalDocs = response.ListCustCompanyLegalDoc;
           },
@@ -90,11 +92,11 @@ export class CustLegalDocComponent implements OnInit {
   }
 
   deleteCustLegalDoc(custCompanyLegalDocId, idx) {
-    var confirmation = confirm("Are you sure to delete this data ?");
-    if(confirmation == true){
+    var confirmation = confirm(ExceptionConstant.DELETE_CONFIRMATION);
+    if (confirmation == true) {
       var custCompanyLegalDoc = new CustCompanyLegalDocObj();
       custCompanyLegalDoc.CustCompanyLegalDocId = custCompanyLegalDocId;
-      this.httpClient.post(AdInsConstant.DeleteCustCompanyLegalDoc, custCompanyLegalDoc).subscribe(
+      this.httpClient.post(URLConstant.DeleteCustCompanyLegalDoc, custCompanyLegalDoc).subscribe(
         (response: any) => {
           this.custLegalDocs.splice(idx, 1);
           this.toastr.successMessage(response["message"]);

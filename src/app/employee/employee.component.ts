@@ -3,11 +3,11 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.scss'],
   providers: [NGXToastrService]
 })
 export class EmployeeComponent implements OnInit {
@@ -20,7 +20,7 @@ export class EmployeeComponent implements OnInit {
     this.inputPagingObj._url = "./assets/search/searchEmployee.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefEmployee;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefEmployee;
     this.inputPagingObj.pagingJson = "./assets/search/searchEmployee.json";
   }
 }

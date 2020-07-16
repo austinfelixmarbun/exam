@@ -7,7 +7,10 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UploadReviewCustomObj } from 'app/shared/model/UploadReviewCustomObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-review-upload-negative-asset-detail',
@@ -22,6 +25,7 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
   taskListId: any;
   UploadReviewUrl: string;
   CancelUpload: string;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -32,16 +36,18 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
         this.taskListId = params["TaskListId"];
       }
     });
-    this.viewUpload = "./assets/ucviewgeneric/viewReviewUploadAssetMaster.json";
   }
   ngOnInit() {
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewReviewUploadAssetMaster.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+    
     this.claimTask();
-    this.UploadReviewUrl = AdInsConstant.UploadReview;
-    this.CancelUpload = AdInsConstant.CancelUpload;
+    this.UploadReviewUrl = URLConstant.UploadReview;
+    this.CancelUpload = URLConstant.CancelUpload;
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadNegativeAssetDetail.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadNegativeAssetDetail.json";
     this.inputPagingObj.addCritInput = new Array();
     const addCritAssetMasterId = new CriteriaObj();
@@ -69,10 +75,10 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
     );
   }
   claimTask() {
-    var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
-    var wfClaimObj = { pWFTaskListID: this.taskListId, pUserID: currentUserContext["UserName"] };
+    var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var wfClaimObj = { pWFTaskListID: this.taskListId, pUserID: currentUserContext[CommonConstant.USER_NAME] };
     console.log(wfClaimObj);
-    this.http.post(AdInsConstant.ClaimTask, wfClaimObj).subscribe(
+    this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(
       (response) => {
       });
   }

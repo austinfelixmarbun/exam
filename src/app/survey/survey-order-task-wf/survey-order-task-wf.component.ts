@@ -6,6 +6,10 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SrvyTaskObj } from 'app/shared/model/SrvyTaskObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { environment } from 'environments/environment';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-survey-order-task-wf',
@@ -23,7 +27,6 @@ export class SurveyOrderTaskWfComponent implements OnInit {
     SurveyorCode: ['', [Validators.required]]
   });
   arrValue = [];
-  viewObj: string;
   modal: any;
   closeResult: any;
   SurveyTaskList: any;
@@ -38,6 +41,8 @@ export class SurveyOrderTaskWfComponent implements OnInit {
   TrxNo: string;
   TrxType: string;
   isDataAlreadyLoaded: boolean = false;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  
   constructor(private fb: FormBuilder, private modalService: NgbModal,
     private http: HttpClient, private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -51,25 +56,28 @@ export class SurveyOrderTaskWfComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyOrderTask.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     this.SurveyTaskList = new Array();
-    this.viewObj = "./assets/ucviewgeneric/viewSurveyOrderTask.json";
     this.SrvyTaskObj = new SrvyTaskObj();
 
     var SrvyObj = {
       TrxRefNo: this.TrxNo,
       MrSrvySourceCode: this.TrxType
     }
-    this.http.post(AdInsConstant.GetSrvyOrderByTrxRefNoAndSrvySourceCode, SrvyObj).subscribe(
+    this.http.post(URLConstant.GetSrvyOrderByTrxRefNoAndSrvySourceCode, SrvyObj).subscribe(
       response => {
         this.SrvyOrderObj = response;
         this.SrvyOrderId = this.SrvyOrderObj["SrvyOrderId"];
         this.arrValue.push(this.SrvyOrderId);
+        this.viewGenericObj.whereValue = this.arrValue;
         this.isDataAlreadyLoaded = true;
         var VendorObj = {
           VendorId: this.SrvyOrderObj.VendorId
         };
         console.log("WOIII");
-        this.http.post(AdInsConstant.GetVendorByVendorId, VendorObj).subscribe(
+        this.http.post(URLConstant.GetVendorByVendorId, VendorObj).subscribe(
           response => {
             this.VendorObj = response;
             console.log(this.VendorObj);
@@ -86,9 +94,9 @@ export class SurveyOrderTaskWfComponent implements OnInit {
           SrvyOrderId: this.SrvyOrderId
         }
 
-        this.http.post(AdInsConstant.GetListAllSrvyFormSchm, GetListSrvey).subscribe(
+        this.http.post(URLConstant.GetListAllSrvyFormSchm, GetListSrvey).subscribe(
           response => {
-            this.FormSchmList = response["ReturnObject"];
+            this.FormSchmList = response[CommonConstant.ReturnObj];
             this.SurveyTaskForm.patchValue({
               SrvyFormSchmId: this.FormSchmList[0].SrvyFormSchmId
             });
@@ -112,7 +120,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
   }
 
   SendSrvyOrder() {
-    this.http.post(AdInsConstant.SendSrvyOrder, this.SrvyOrderObj).subscribe(
+    this.http.post(URLConstant.SendSrvyOrder, this.SrvyOrderObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigate(["/Survey/Paging"]);
@@ -180,7 +188,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
     var TaskObj = {
       SrvyTaskId: ev
     }
-    this.http.post(AdInsConstant.GetSrvyTaskBySrvyTaskId, TaskObj).subscribe(
+    this.http.post(URLConstant.GetSrvyTaskBySrvyTaskId, TaskObj).subscribe(
       response => {
         this.SrvyTaskObj = response;
         this.onChange(this.SrvyTaskObj.MrSrvySubjCode);
@@ -204,7 +212,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
       var TaskObj = {
         SrvyTaskId: ev
       }
-      this.http.post(AdInsConstant.DeleteSrvyTask, TaskObj).subscribe(
+      this.http.post(URLConstant.DeleteSrvyTask, TaskObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.generateSurveyTaskList();
@@ -225,7 +233,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
     if (this.SurveyTaskForm.controls["SrvyTaskId"].value == "") {
       this.SrvyTaskObj.SrvyTaskNo = "";
 
-      this.http.post(AdInsConstant.AddSrvyTask, this.SrvyTaskObj).subscribe(
+      this.http.post(URLConstant.AddSrvyTask, this.SrvyTaskObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.generateSurveyTaskList();
@@ -240,7 +248,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
       this.SrvyTaskObj.SrvyTaskNo = this.SurveyTaskForm.controls["SrvyTaskNo"].value;
       this.SrvyTaskObj.RowVersion = this.SrvyTaskObj.RowVersion;
 
-      this.http.post(AdInsConstant.EditSrvyTask, this.SrvyTaskObj).subscribe(
+      this.http.post(URLConstant.EditSrvyTask, this.SrvyTaskObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.generateSurveyTaskList();
@@ -273,7 +281,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
     var obj = {
       SrvyOrderId: this.SrvyOrderId
     }
-    this.http.post(AdInsConstant.GetListSryvObject, obj).subscribe(
+    this.http.post(URLConstant.GetListSryvObject, obj).subscribe(
       response => {
         this.resultData = response;
         if (this.resultData.length != 0) {
@@ -297,7 +305,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
       SrvyOrderId: this.SrvyOrderId,
       RowVersion: ""
     }
-    this.http.post(AdInsConstant.GetListSrvyTaskBySrvyOrderId, SrvyTaskObj).subscribe(
+    this.http.post(URLConstant.GetListSrvyTaskBySrvyOrderId, SrvyTaskObj).subscribe(
       response => {
         this.SurveyTaskList = response;
       },

@@ -4,11 +4,10 @@ import { environment } from 'environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefZipcodeObj } from 'app/shared/model/RefZipcodeObj.Model';
-import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model'
 import { Validators, FormBuilder } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'add-zipcode',
@@ -35,16 +34,15 @@ export class ZipcodeAddComponent implements OnInit {
     City: ['', [Validators.required, Validators.maxLength(50)]],
     Zipcode: ['', [Validators.required, Validators.maxLength(10)]],
     SubZipcode: [' ', Validators.maxLength(4)],
-    PhnArea: ['', [Validators.required, Validators.maxLength(10)]],
     IsActive: [true, Validators.required]
   });
 
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.apiUrl = AdInsConstant.GetRefZipCodeById;
-    this.addUrl = AdInsConstant.AddRefZipcode;
-    this.editUrl = AdInsConstant.EditRefZipcode;
-    this.getRefDistrictUrl = AdInsConstant.GetRefProvDistrictById;
+    this.apiUrl = URLConstant.GetRefZipCodeById;
+    this.addUrl = URLConstant.AddRefZipcode;
+    this.editUrl = URLConstant.EditRefZipcode;
+    this.getRefDistrictUrl = URLConstant.GetRefProvDistrictById;
 
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
@@ -59,7 +57,7 @@ export class ZipcodeAddComponent implements OnInit {
   ngOnInit() {
     this.inputDistrictLookupObj = new InputLookupObj();
     this.inputDistrictLookupObj.urlJson = "./assets/lookup/lookupDistrict.json";
-    this.inputDistrictLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputDistrictLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputDistrictLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputDistrictLookupObj.pagingJson = "./assets/lookup/lookupDistrict.json";
     this.inputDistrictLookupObj.genericJson = "./assets/lookup/lookupDistrict.json";
@@ -79,7 +77,6 @@ export class ZipcodeAddComponent implements OnInit {
             Zipcode: this.resultData.Zipcode,
             SubZipcode: this.resultData.SubZipcode,
             RefProvDistrictId: this.resultData.RefProvDistrictId,
-            PhnArea: this.resultData.PhnArea,
             IsActive: this.resultData.IsActive
           });
           this.refDistrict = new RefProvDistrictObj();

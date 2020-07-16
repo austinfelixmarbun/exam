@@ -1,113 +1,18 @@
-<div class="row text-left">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-body">
-        <div class="px-3">
-          <form class="form form-horizontal" [formGroup]="QuestionGroupForm" (ngSubmit)="QuestionGroupForm.valid"
-            #enjiForm="ngForm">
-            <lib-ucSubsection [id]="'QuestionGroupId'" [title]="'Main Info'" [panel]="'QuestionGroup'">
-            </lib-ucSubsection>
-            <div class="form-body" id="QuestionGroup">
-              <div class="form-group">
-                <label class="col-md-3 adInsLabel" translate>Question Group Code: </label>
-                <label class="col-md-3 adInsLabel" translate>{{VerfQuestionGrpCode}} </label>
-                <label class="col-md-3 adInsLabel" translate>Question Group Name: </label>
-                <label class="col-md-3 adInsLabel" translate>{{VerfQuestionGrpName}} </label>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="col-md-12">
-          <div class="card">
-            <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)">
-            </lib-UCSearch>
-            <div [hidden]="resultData?.Data == null">
-              <table class="table table-responsive-md text-center table-hover">
-                <thead>
-                  <tr class="table-header">
-                    <th><input type="checkbox" [checked]="checkboxAll" (change)="SelectAll($event.target.checked)"
-                        id="checkAll" name="CheckAll"></th>
-                    <th><span translate class="thead-header" (click)="searchSort($event)"
-                        name='VQA.VERF_QUESTION_CODE'>Question Code</span></th>
-                    <th><span translate class="thead-header" (click)="searchSort($event)"
-                        name='VQA.VERF_QUESTION_TEXT'>Question Text</span></th>
-                    <th><span translate class="thead-header" (click)="searchSort($event)"
-                        name='VAT.VERF_ANSWER_TYPE_DESCR'>Answer Type</span></th>
-                    <th><span translate class="thead-header" (click)="searchSort($event)"
-                        name='VQA.VERF_ANSWER'>Answer</span></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of resultData?.Data">
-                    <td>
-                      <div *ngIf="listSelectedId.indexOf(item.VerfQuestionAnswerId) >- 1">
-                        <input type="checkbox" id="checkSame" name="itemSame"
-                          (change)="Checked(item.VerfQuestionAnswerId,  $event.target.checked)" [checked]="true">
-                      </div>
-                      <div *ngIf="listSelectedId.indexOf(item.VerfQuestionAnswerId) < 0">
-                        <input type="checkbox" id="checkDiff" name="itemDiff"
-                          (change)="Checked(item.VerfQuestionAnswerId,  $event.target.checked)" [checked]=false>
-                      </div>
-                    </td>
-                    <td>{{item.VerfQuestionCode}}</td>
-                    <td>{{item.VerfQuestionText}}</td>
-                    <td>{{item.VerfAnswerTypeDescr}}</td>
-                    <td>{{item.VerfAnswer}}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
-
-              <div class="card-header">
-                <div class="text-right">
-                  <button type="button" (click)="addToTemp()" class="btn btn-raised btn-warning mr-1">
-                    <i class="fa ft-plus"></i> Add To Temp
-                  </button>
-                </div>
-              </div>
-
-              <table class="table table-responsive-md text-center table-hover">
-                <thead>
-                  <tr class="table-header">
-                    <th><span translate>Question Code</span></th>
-                    <th><span translate>Question Text</span></th>
-                    <th><span translate>Answer Type</span></th>
-                    <th><span translate>Answer</span></th>
-                    <th translate>Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of tempData">
-                    <td>{{item.VerfQuestionCode}}</td>
-                    <td>{{item.VerfQuestionText}}</td>
-                    <td>{{item.VerfAnswerTypeDescr}}</td>
-                    <td>{{item.VerfAnswer}}</td>
-                    <td>
-                      <div>
-                        <a class="danger p-0" data-original-title="" title=""
-                          (click)="deleteFromTemp(item.VerfQuestionAnswerId)">
-                          <i class="ft-trash-2 font-medium-3 mr-2"></i>
-                        </a></div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="card-header">
-                <div class="text-right">
-                  <button type="button" class="btn btn-raised btn-warning mr-1"
-                    [routerLink]="['/Verification/QuestionGroupMemberPaging']"
-                    [queryParams]="{VerfQuestionGrpHId:VerfQuestionGrpHId}" translate>
-                    <i class="fa fa-arrow-left"></i> Back
-                  </button>
-                  <button type="submit" (click)="SaveQuestionGroupMember()" class="btn btn-raised btn-primary"
-                    translate>
-                    <i class="fa fa-check"></i> Submit
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+<div class="card">
+  <div class="card-body">
+    <lib-ucviewgeneric [viewInput]="viewObj"> </lib-ucviewgeneric>
+    <lib-ucaddtotemp *ngIf="tempPagingObj.isReady" [tempPagingObj]="tempPagingObj" (callback)="getListTemp($event)">
+    </lib-ucaddtotemp>
+    <div class="card-header">
+      <div class="text-right">
+        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Verification/QuestionGroupMemberPaging']"
+        [queryParams]="{VerfQuestionGrpHId:VerfQuestionGrpHId}"  translate>
+          <i class="far fa-window-close"></i> Cancel
+        </button>
+        <button type="submit" (click)="SaveQuestionGroupMember()" class="btn btn-raised btn-primary" translate>
+          <i class="far fa-check-square"></i> Save
+        </button>
       </div>
     </div>
   </div>
+</div>

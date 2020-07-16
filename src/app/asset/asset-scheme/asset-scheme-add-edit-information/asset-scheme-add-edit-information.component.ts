@@ -6,6 +6,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
 import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-asset-scheme-add-edit-information',
@@ -39,12 +41,12 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
 
   ngOnInit() {
     var assetTypeObj = {
-      RefMasterTypeCode: "ASSET_TYPE_ID",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeAssetTypeId,
       RowVersion: ""
     }
-    this.http.post(AdInsConstant.GetListActiveAssetType, assetTypeObj).subscribe(
+    this.http.post(URLConstant.GetListActiveAssetType, assetTypeObj).subscribe(
       (response) => {
-        this.ItemAssetType = response["ReturnObject"];
+        this.ItemAssetType = response[CommonConstant.ReturnObj];
         if (this.pageType == "add") {
           this.AssetSchemeInfoForm.patchValue({
             AssetTypeId: this.ItemAssetType[0].AssetTypeId,
@@ -59,7 +61,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
       this.AssetSchemeInfoForm.controls["AssetSchmCode"].disable();
 
-      this.http.post(AdInsConstant.GetAssetSchmHById, this.assetSchmHObj).subscribe(
+      this.http.post(URLConstant.GetAssetSchmHById, this.assetSchmHObj).subscribe(
         (response: AssetSchemeHObj) => {
           this.resultData = response;
           this.RowVersion = this.resultData.RowVersion;
@@ -88,7 +90,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
     }
     if (this.pageType == "add") {
       this.assetSchmHObj.RowVersion = "";
-      this.http.post(AdInsConstant.AddAssetSchmH, this.assetSchmHObj).subscribe(
+      this.http.post(URLConstant.AddAssetSchmH, this.assetSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Scheme/Paging"]);
@@ -102,7 +104,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
       this.assetSchmHObj.RowVersion = this.RowVersion;
       this.assetSchmHObj.AssetSchmCode = this.AssetSchmCode;
-      this.http.post(AdInsConstant.EditAssetSchmH, this.assetSchmHObj).subscribe(
+      this.http.post(URLConstant.EditAssetSchmH, this.assetSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Scheme/Paging"]);

@@ -4,14 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-view-personal-financial-section',
-  templateUrl: './customer-view-personal-financial-section.component.html',
-  styleUrls: ['./customer-view-personal-financial-section.component.scss']
+  templateUrl: './customer-view-personal-financial-section.component.html'
 })
 export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
-  GetCustPersonalFinDataForCustViewByCustIdUrl = AdInsConstant.GetCustPersonalFinDataForCustViewByCustId;
+  GetCustPersonalFinDataForCustViewByCustIdUrl = URLConstant.GetCustPersonalFinDataForCustViewByCustId;
   custObj: CustObj;
   tempCustObj: Object;
   IdCust: number;

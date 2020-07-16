@@ -3,6 +3,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-negative-customer',
@@ -18,7 +19,7 @@ export class NegativeCustomerComponent implements OnInit {
     this.inputPagingObj._url = "./assets/ucpaging/searchNegativeCustomer.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteNegativeCustomer;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteNegativeCustomer;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNegativeCustomer.json";
 
     this.inputPagingObj.ddlEnvironments = [

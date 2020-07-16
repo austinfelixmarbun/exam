@@ -12,6 +12,8 @@ import { AssetCategoryObj } from 'app/shared/model/AssetCategoryObj.Model';
 import { AssetSchmListObj } from 'app/shared/model/AssetSchmListObj.Model';
 import { ListAssetSchmDObj } from 'app/shared/model/ListAssetSchmDObj.Model';
 import { map, mergeMap } from 'rxjs/operators';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-asset-master-add-edit-child',
@@ -75,7 +77,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
       this.AssetMasterChildForm.controls["AssetName"].disable();
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
-      this.http.post(AdInsConstant.GetAssetMasterById, this.assetMasterObj).subscribe(
+      this.http.post(URLConstant.GetAssetMasterById, this.assetMasterObj).subscribe(
         (response: AssetMasterObj) => {
           this.resultData = response;
           this.AssetMasterChildForm.patchValue({
@@ -94,7 +96,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
 
           this.assetMasterObj = new AssetMasterObj();
           this.assetMasterObj.AssetMasterId = this.resultData.ParentId;
-          this.http.post(AdInsConstant.GetAssetMasterById, this.assetMasterObj).subscribe(
+          this.http.post(URLConstant.GetAssetMasterById, this.assetMasterObj).subscribe(
             (response: AssetMasterObj) => {
               this.resultParentMaster = response;
               this.AssetMasterChildForm.patchValue({
@@ -113,7 +115,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
 
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
-          this.http.post(AdInsConstant.GetAssetTypeById, this.assetTypeObj).subscribe(
+          this.http.post(URLConstant.GetAssetTypeById, this.assetTypeObj).subscribe(
             (response: AssetTypeObj) => {
               this.resultAssetType = response;
               this.AssetMasterChildForm.patchValue({
@@ -140,9 +142,9 @@ export class AssetMasterAddEditChildComponent implements OnInit {
               this.listRequest = new ListRequestCriteriaObj();
               this.listRequest.criteria = new Array();
               this.listRequest.criteria.push(critObj);
-              this.http.post(AdInsConstant.GetListAssetCategory, this.listRequest).subscribe(
+              this.http.post(URLConstant.GetListAssetCategory, this.listRequest).subscribe(
                 response => {
-                  this.resultAssetCategory = response['ReturnObject'];
+                  this.resultAssetCategory = response[CommonConstant.ReturnObj];
                   this.AssetMasterChildForm.patchValue({ AssetCategoryId: this.resultData.AssetCategoryId });
                 },
                 (error) => {
@@ -153,9 +155,9 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           this.assetSchmListDObj = new AssetSchmListObj();
           this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
           this.assetSchmListDObj.AssetTypeId = this.resultData.AssetTypeId;
-          this.http.post(AdInsConstant.GetListAssetSchmH, this.assetSchmListDObj).subscribe(
+          this.http.post(URLConstant.GetListAssetSchmH, this.assetSchmListDObj).subscribe(
             response => {
-              this.listAssetScheme = response['ReturnObject'];
+              this.listAssetScheme = response[CommonConstant.ReturnObj];
               for (let i = 0; i < this.listAssetScheme.length; i++) {
                 if (this.listAssetScheme[i].AssetSchmHIdFromD != null) {
                   this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
@@ -172,7 +174,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
     if (this.pageType == "add") {
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
-      this.http.post(AdInsConstant.GetAssetMasterById, this.assetMasterObj).subscribe(
+      this.http.post(URLConstant.GetAssetMasterById, this.assetMasterObj).subscribe(
         (response: AssetMasterObj) => {
           this.resultData = response;
           this.AssetMasterChildForm.patchValue({
@@ -187,7 +189,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
 
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
-          this.http.post(AdInsConstant.GetAssetTypeById, this.assetTypeObj).subscribe(
+          this.http.post(URLConstant.GetAssetTypeById, this.assetTypeObj).subscribe(
             (response: AssetTypeObj) => {
               this.resultAssetType = response;
               this.AssetMasterChildForm.patchValue({
@@ -214,11 +216,11 @@ export class AssetMasterAddEditChildComponent implements OnInit {
               this.listRequest = new ListRequestCriteriaObj();
               this.listRequest.criteria = new Array();
               this.listRequest.criteria.push(critObj);
-              this.http.post(AdInsConstant.GetListAssetCategory, this.listRequest).subscribe(
+              this.http.post(URLConstant.GetListAssetCategory, this.listRequest).subscribe(
                 response => {
-                  this.resultAssetCategory = response['ReturnObject'];
-                  if(this.resultAssetCategory.length > 0){
-                    this.AssetMasterChildForm.patchValue({ AssetCategoryId: response['ReturnObject'][0]['Key'] });
+                  this.resultAssetCategory = response[CommonConstant.ReturnObj];
+                  if (this.resultAssetCategory.length > 0) {
+                    this.AssetMasterChildForm.patchValue({ AssetCategoryId: response[CommonConstant.ReturnObj][0]['Key'] });
                   }
                 },
                 (error) => {
@@ -229,9 +231,9 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           this.assetSchmListDObj = new AssetSchmListObj();
           this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
           this.assetSchmListDObj.AssetTypeId = this.resultData.AssetTypeId;
-          this.http.post(AdInsConstant.GetListAssetSchmH, this.assetSchmListDObj).subscribe(
+          this.http.post(URLConstant.GetListAssetSchmH, this.assetSchmListDObj).subscribe(
             response => {
-              this.listAssetScheme = response['ReturnObject'];
+              this.listAssetScheme = response[CommonConstant.ReturnObj];
               for (let i = 0; i < this.listAssetScheme.length; i++) {
                 if (this.listAssetScheme[i].AssetSchmHIdFromD != null) {
                   this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
@@ -313,13 +315,13 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           }
         }
 
-        this.http.post(AdInsConstant.AddAssetMaster, this.assetMasterObj).pipe(
+        this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj).pipe(
           map((response) => {
             return response;
           }),
           mergeMap((response) => {
             this.listAssetSchmDObj.AssetMasterId = response["AssetMasterId"];
-            return this.http.post(AdInsConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj);
+            return this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj);
           })
         ).subscribe(
           (response) => {
@@ -371,12 +373,12 @@ export class AssetMasterAddEditChildComponent implements OnInit {
         }
 
         // Reynard: add / edit kok response ny beda ??
-        this.http.post(AdInsConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj).subscribe(
-          response => {
+        this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj).subscribe(
+          (response) => {
           });
       }
 
-      this.http.post(AdInsConstant.EditAssetMaster, this.assetMasterObj).subscribe(
+      this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/AssetMaster/Paging"]);

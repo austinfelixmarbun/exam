@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-vendor-groupmember',
@@ -33,7 +35,7 @@ export class VendorGroupmemberComponent implements OnInit {
   ngOnInit() {
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/vendorGrpMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/vendorGrpMbrTempPaging.json";
 
     var crit1Obj = new CriteriaObj();
@@ -46,19 +48,19 @@ export class VendorGroupmemberComponent implements OnInit {
       var crit2Obj = new CriteriaObj();
       crit2Obj.propName = "MR_VENDOR_CLASS";
       crit2Obj.restriction = AdInsConstant.RestrictionEq;
-      crit2Obj.value = "HOLDING";
+      crit2Obj.value = CommonConstant.Holding;
       this.tempPagingObj.addCritInput.push(crit2Obj);
     } else if (this.MrVendorCategoryCode.includes("_HO")) {
       var crit2Obj = new CriteriaObj();
       crit2Obj.propName = "MR_VENDOR_CLASS";
       crit2Obj.restriction = AdInsConstant.RestrictionEq;
-      crit2Obj.value = "HO";
+      crit2Obj.value = CommonConstant.HeadOffice;
       this.tempPagingObj.addCritInput.push(crit2Obj);
     } else if (this.MrVendorCategoryCode.includes("_BRANCH")) {
       var crit2Obj = new CriteriaObj();
       crit2Obj.propName = "MR_VENDOR_CLASS";
       crit2Obj.restriction = AdInsConstant.RestrictionEq;
-      crit2Obj.value = "BRANCH";
+      crit2Obj.value = CommonConstant.Branch;
       this.tempPagingObj.addCritInput.push(crit2Obj);
     }
 
@@ -66,11 +68,11 @@ export class VendorGroupmemberComponent implements OnInit {
   }
 
   GetListVendorGrpMbrByVendorGrpId() {
-    this.http.post(AdInsConstant.GetListVendorGrpMbrByVendorGrpId, { VendorGrpId: this.VendorGrpId }).subscribe(
+    this.http.post(URLConstant.GetListVendorGrpMbrByVendorGrpId, { VendorGrpId: this.VendorGrpId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
-        for (let index = 0; index < response["ReturnObject"].length; index++) {
-          arrMemberList.push(response["ReturnObject"][index].VendorId)
+        for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
+          arrMemberList.push(response[CommonConstant.ReturnObj][index].VendorId)
         }
 
         if (arrMemberList.length != 0) {
@@ -104,7 +106,7 @@ export class VendorGroupmemberComponent implements OnInit {
       VendorId: this.listSelectedId
     }
 
-    this.http.post(AdInsConstant.AddVendorGrpMbr, obj).subscribe(
+    this.http.post(URLConstant.AddVendorGrpMbr, obj).subscribe(
       (response) => {
         this.router.navigate(['/Vendor/Group/View/'], { queryParams: { VendorGrpId: this.VendorGrpId, MrVendorCategoryCode: this.MrVendorCategoryCode } });
       },

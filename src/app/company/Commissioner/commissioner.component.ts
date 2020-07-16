@@ -11,6 +11,7 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-commissioner',
@@ -44,11 +45,11 @@ export class CommissionerComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchCommissioner.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetCommissionerPaging;
+    this.inputObj.apiQryPaging = URLConstant.GetCommissionerPaging;
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetCommissionerPaging;
+    this.apiUrl = this.foundationUrl + URLConstant.GetCommissionerPaging;
   }
 
   getResult(event) {
@@ -107,7 +108,7 @@ export class CommissionerComponent implements OnInit {
 
   delete(coyCommissionerId: any) {
     if (confirm("Are you sure to delete this record?")) {
-      this.editUrl = this.foundationUrl + AdInsConstant.DeleteCoyCommissioner;
+      this.editUrl = this.foundationUrl + URLConstant.DeleteCoyCommissioner;
       this.commissionerObj = new CoyCommissionerObj();
       this.commissionerObj.coyCommissionerId = coyCommissionerId;
       this.http.post(this.editUrl, this.commissionerObj).subscribe(

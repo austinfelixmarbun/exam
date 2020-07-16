@@ -11,6 +11,9 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
 import { CustBankStmntDObj } from 'app/shared/model/CustBankStmntDObj.Model';
 import { CustBankStmntHObj } from 'app/shared/model/CustBankStmntHObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-cust-bank-acc-detail-section-findata',
@@ -70,7 +73,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     var criteriaObj = new CriteriaObj();
     criteriaObj.restriction = AdInsConstant.RestrictionEq;
     criteriaObj.propName = 'IS_ACTIVE';
-    criteriaObj.value = "1";
+    criteriaObj.value = CommonConstant.TRUE_CONDITION;
     criteriaList.push(criteriaObj);
     this.inputLookupBank.addCritInput = criteriaList;
 
@@ -81,7 +84,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     if (this.pageType == "edit") {
       var custBankAcc = new CustBankAccObj();
       custBankAcc.CustBankAccId = this.CustBankAccId;
-      this.httpClient.post(AdInsConstant.GetCustBankAccByCustBankAccIdWithRefBank, custBankAcc).subscribe(
+      this.httpClient.post(URLConstant.GetCustBankAccByCustBankAccIdWithRefBank, custBankAcc).subscribe(
         (response: any) => {
           this.inputLookupBank.nameSelect = response.RefBankObj.BankName;
           this.inputLookupBank.jsonSelect = response.RefBankObj;
@@ -108,7 +111,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     else if (this.pageType == "editStmnt") {
       var custBankAcc = new CustBankAccObj();
       custBankAcc.CustBankAccId = this.CustBankAccId;
-      this.httpClient.post(AdInsConstant.GetCBAForCustFinDataEditModeByCustBankAccId, custBankAcc).subscribe(
+      this.httpClient.post(URLConstant.GetCBAForCustFinDataEditModeByCustBankAccId, custBankAcc).subscribe(
         (response: any) => {
           this.bankName = response.RefBankObj.BankName;
           this.CustBankAccForm.patchValue({
@@ -183,7 +186,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
   }
 
   removeCustBankStmnt(i) {
-    var confirmation = confirm("Are you sure to delete this data ?");
+    var confirmation = confirm(ExceptionConstant.DELETE_CONFIRMATION);
     if(confirmation == true){
       var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
       formArray.removeAt(i);
@@ -215,7 +218,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     custBankAccObj.IsActive = formData.IsActive;
 
     if (this.pageType == "add") {
-      this.httpClient.post(AdInsConstant.AddCustBankAcc, custBankAccObj).subscribe(
+      this.httpClient.post(URLConstant.AddCustBankAcc, custBankAccObj).subscribe(
         (response) => {
           this.activeModal.close(response);
         },
@@ -229,7 +232,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
 
       if (this.pageType == "edit") {
         var custBankData = this.CustBankAccForm.value;
-        this.httpClient.post(AdInsConstant.EditCustBankAcc, custBankData).subscribe(
+        this.httpClient.post(URLConstant.EditCustBankAcc, custBankData).subscribe(
           (response) => {
             this.activeModal.close(response);
           },
@@ -238,20 +241,20 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
           }
         );
       }
-      else if(this.pageType == "editStmnt"){
-        var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
+      else if (this.pageType == "editStmnt") {
+        var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
         var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
         var listCustBankStmntD = new Array<CustBankStmntDObj>();
         var totalBalance = 0;
         for (var i = 0; i < formArray.length; i++) {
           const bankStmnt = formArray.at(i).value;
-          for (var j = 0; j < formArray.length; j++){
-            if(i == j){
+          for (var j = 0; j < formArray.length; j++) {
+            if (i == j) {
               continue;
             }
             const bankStmntCompare = formArray.at(j).value;
             if(bankStmnt.Month == bankStmntCompare.Month && bankStmnt.Year == bankStmntCompare.Year){
-              this.toastr.warningMessage("Cannot Input Statement With The Same Month and Year");
+              this.toastr.warningMessage(ExceptionConstant.STATEMENT_WITH_SAME_MONTH_AND_YEAR);
               return false;
             }
           }
@@ -279,7 +282,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
         custBankStmntH.BalanceAmt = totalBalance;
 
         var reqObj = { "custBankAccObj": custBankAccObj, "custBankStmntH": custBankStmntH, "custBankStmntDObjs": listCustBankStmntD };
-        this.httpClient.post(AdInsConstant.EditCBAForCustFinData, reqObj).subscribe(
+        this.httpClient.post(URLConstant.EditCBAForCustFinData, reqObj).subscribe(
           (response) => {
             this.activeModal.close(response);
           },

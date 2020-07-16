@@ -6,11 +6,12 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfSchemeDObj } from 'app/shared/model/VerfSchemeDObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-verification-question-scheme-member-edit',
   templateUrl: './verification-question-scheme-member-edit.component.html',
-  styleUrls: ['./verification-question-scheme-member-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
@@ -54,10 +55,10 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
 
   ngOnInit() {
     var verfGroupObj = { VerfSchemeDId: this.VerfSchemeDId }
-    this.http.post(AdInsConstant.GetQuestionGrpHAndRowVersionVerfSchemeDForUpdateById, verfGroupObj).subscribe(
+    this.http.post(URLConstant.GetQuestionGrpHAndRowVersionVerfSchemeDForUpdateById, verfGroupObj).subscribe(
       (response) => {
         console.log(response);
-        this.verfQuestionGroup = response["ReturnObject"];
+        this.verfQuestionGroup = response[CommonConstant.ReturnObj];
         this.QuestionGroupForm.patchValue({
           VerfQuestionGrpDId: this.verfQuestionGroup.VerfQuestionGrpDId,
           VerfQuestionGrpHId: this.verfQuestionGroup.VerfQuestionGrpHId,
@@ -77,7 +78,7 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
     this.verfSchemeDObj.VerfSchemeHId = this.VerfSchemeHId;
     this.verfSchemeDObj.VerfSchemeDId = this.VerfSchemeDId;
     console.log(this.verfSchemeDObj);
-    this.http.post(AdInsConstant.EditVerfSchemeD, this.verfSchemeDObj).subscribe(
+    this.http.post(URLConstant.EditVerfSchemeD, this.verfSchemeDObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.router.navigateByUrl('/Verification/QuestionSchemeMemberPaging?VerfSchemeHId=' + this.VerfSchemeHId);

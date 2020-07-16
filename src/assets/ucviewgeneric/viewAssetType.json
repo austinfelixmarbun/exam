@@ -4,7 +4,7 @@
     {
       "subSectionId": "AssetTypeId",
       "subSectionTitle": "Asset Type",
-      "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+      "mainInfoPath": "/Generic/GetDataViewBySQL",
       "mainInfo": [
         {
           "type": "text",
@@ -16,8 +16,6 @@
           "label": "Asset Type Name",
           "property": "AssetTypeName"
         } 
-        
-       
       ],
       "querystring": {
         "select": "SELECT ASSET_TYPE_CODE AS AssetTypeCode , ASSET_TYPE_NAME AS AssetTypeName",

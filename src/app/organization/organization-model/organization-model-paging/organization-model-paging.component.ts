@@ -12,6 +12,8 @@ import { Location, DecimalPipe } from "@angular/common";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-organization-model-paging',
@@ -52,12 +54,12 @@ export class OrganizationModelPagingComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOrgModel.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetOrgMdlPaging;
+    this.inputObj.apiQryPaging = URLConstant.GetOrgMdlPaging;
     
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
     this.pageSize = this.show[0];
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgMdlPaging;
+    this.apiUrl = this.foundationUrl + URLConstant.GetOrgMdlPaging;
     this.initiateForm()
   }
 
@@ -88,7 +90,7 @@ export class OrganizationModelPagingComponent implements OnInit {
   }
 
   initiateForm() {
-    var getOrgUrl = this.foundationUrl + AdInsConstant.GetRefOrg;
+    var getOrgUrl = this.foundationUrl + URLConstant.GetRefOrg;
     this.orgObj = new OrganizationObj();
     this.orgObj.refOrgId = +this.refOrgId;
     this.https.post(getOrgUrl, this.orgObj).subscribe(
@@ -111,8 +113,8 @@ export class OrganizationModelPagingComponent implements OnInit {
   }
 
   del(id: any) {
-    if (confirm("Are you sure to delete this record?")) {
-      this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteOrgMdl;
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
+      this.deleteUrl = this.foundationUrl + URLConstant.DeleteOrgMdl;
       this.orgModelObj = new OrgMdlObj();
       this.orgModelObj.orgMdlId = +id;
       console.log(this.orgModelObj);

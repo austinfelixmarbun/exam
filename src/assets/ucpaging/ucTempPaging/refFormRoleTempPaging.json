@@ -1,0 +1,86 @@
+{
+    "title": "Role Search",
+    "keyProperty": "RefRoleId",
+    "keyPropCriteria": "REF_ROLE_ID",
+    "component": [
+        {
+            "type": "textbox",
+            "name": "ROLE_CODE",
+            "id": "RoleCodeId",
+            "value": "",
+            "label": "Role Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "ROLE_NAME",
+            "id": "RoleNameId",
+            "value": "",
+            "label": "Role Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "name": "IS_ACTIVE",
+            "id": "ActiveStatusId",
+            "label": "Active Status",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "isSelectOne": false,
+            "items": [
+                {
+                    "key": "1",
+                    "value": "Yes"
+                },
+                {
+                    "key": "0",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        }
+    ],
+    "querystring": {
+        "select": "SELECT ROLE_CODE AS RoleCode, ROLE_NAME AS RoleName, REF_ROLE_ID AS RefRoleId, IS_ACTIVE AS IsActive",
+        "from": "FROM dbo.REF_ROLE WITH(NOLOCK)",
+        "where": "WHERE IS_ACTIVE = 1"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Role Code",
+            "name": "ROLE_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Role Name",
+            "name": "ROLE_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Active Status",
+            "name": "IS_ACTIVE"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "RoleCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "RoleName"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        }
+    ]
+}

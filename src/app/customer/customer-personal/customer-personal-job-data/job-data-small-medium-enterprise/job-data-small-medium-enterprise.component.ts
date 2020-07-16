@@ -15,6 +15,8 @@ import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPerso
 import { formatDate } from '@angular/common';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
  
 @Component({
   selector: 'app-job-data-sme',
@@ -94,14 +96,14 @@ export class JobDataSmeComponent implements OnInit {
   businessDtMin: Date;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.getCustById = AdInsConstant.GetCustByCustId;
-    this.getListActiveRefMaster = AdInsConstant.GetListActiveRefMaster;
-    this.addJobData = AdInsConstant.AddCustPersonalJobData;
-    this.editJobData = AdInsConstant.EditCustPersonalJobData;
-    this.getJobDataByCustId = AdInsConstant.GetCustPersonalJobDataByCustId;
-    this.getCustAddr = AdInsConstant.GetCustAddr;
-    this.getRefProfession = AdInsConstant.GetRefProfessionById;
-    this.getRefIndustryType = AdInsConstant.GetRefIndustryTypeById;
+    this.getCustById = URLConstant.GetCustByCustId;
+    this.getListActiveRefMaster = URLConstant.GetListActiveRefMaster;
+    this.addJobData = URLConstant.AddCustPersonalJobData;
+    this.editJobData = URLConstant.EditCustPersonalJobData;
+    this.getJobDataByCustId = URLConstant.GetCustPersonalJobDataByCustId;
+    this.getCustAddr = URLConstant.GetCustAddr;
+    this.getRefProfession = URLConstant.GetRefProfessionById;
+    this.getRefIndustryType = URLConstant.GetRefIndustryTypeById;
 
     this.route.queryParams.subscribe(params => {
         if (params["IdCust"] != null) {
@@ -122,8 +124,8 @@ export class JobDataSmeComponent implements OnInit {
   }
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDtMin = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.inputJobAddressObj = new InputFieldObj();
     this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
@@ -147,19 +149,19 @@ export class JobDataSmeComponent implements OnInit {
     this.industryLookUpObj.isRequired = true;
 
     this.jobPosition = new RefMasterObj();
-    this.jobPosition.RefMasterTypeCode = "JOB_POSITION";
+    this.jobPosition.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobPosition;
     this.http.post(this.getListActiveRefMaster, this.jobPosition).subscribe(
     (response) => {
-        this.listJobPosition = response['ReturnObject'];
-        this.JobDataSmeForm.patchValue({ JobPosition: response['ReturnObject'][0]['Key'] });
+        this.listJobPosition = response[CommonConstant.ReturnObj];
+        this.JobDataSmeForm.patchValue({ JobPosition: response[CommonConstant.ReturnObj][0]['Key'] });
     });
 
     this.companyScale = new RefMasterObj();
-    this.companyScale.RefMasterTypeCode = "COY_SCALE";
+    this.companyScale.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCoyScale;
     this.http.post(this.getListActiveRefMaster, this.companyScale).subscribe(
     (response) => {
-        this.listCompanyScale = response['ReturnObject'];
-        this.JobDataSmeForm.patchValue({ CompanyScale: response['ReturnObject'][0]['Key'] });
+        this.listCompanyScale = response[CommonConstant.ReturnObj];
+        this.JobDataSmeForm.patchValue({ CompanyScale: response[CommonConstant.ReturnObj][0]['Key'] });
     });
     
     this.objCust = new CustObj();
@@ -306,7 +308,7 @@ export class JobDataSmeComponent implements OnInit {
 
   setJobAddr(){
     this.jobAddressObj.CustId = this.IdCust;
-    this.jobAddressObj.MrCustAddrTypeCode = 'JOB';
+    this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
     this.jobAddressObj.Addr = this.JobDataSmeForm.controls["jobAddress"]["controls"].Addr.value; 
     this.jobAddressObj.FullAddr = this.JobDataSmeForm.controls["jobAddress"]["controls"].Addr.value + " RT: " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode3.value + " " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode1.value + " " + this.JobDataSmeForm.controls["jobAddressZipcode"]["controls"].value.value;  
     this.jobAddressObj.AreaCode3 = this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode3.value;
@@ -332,7 +334,7 @@ export class JobDataSmeComponent implements OnInit {
 
   setOthBizAddr(){
     this.otherAddressObj.CustId = this.IdCust;
-    this.otherAddressObj.MrCustAddrTypeCode = 'OTH_BIZ';
+    this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
     this.otherAddressObj.Addr = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].Addr.value;
     this.otherAddressObj.FullAddr = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].Addr.value + " RT: " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode3.value + " " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode2.value + ", " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode1.value + " " + this.JobDataSmeForm.controls["otherBusinessAddressZipcode"]["controls"].value.value; 
     this.otherAddressObj.AreaCode3 = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode3.value;
@@ -388,8 +390,8 @@ export class JobDataSmeComponent implements OnInit {
       this.custPersonalJobDataObj.JobAddrId = this.jobAddrId;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
-      this.jobAddressObj.MrCustAddrTypeCode = 'JOB';
-      this.otherAddressObj.MrCustAddrTypeCode = 'OTH_BIZ';
+      this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
+      this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.JobAddr = this.jobAddressObj;
       this.reqCustPersonalJobDataObj.OthBizAddr = this.otherAddressObj;

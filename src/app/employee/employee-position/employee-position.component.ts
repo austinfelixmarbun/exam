@@ -13,10 +13,11 @@ import { formatDate, DecimalPipe } from '@angular/common';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 @Component({
   selector: 'app-employee-position',
   templateUrl: './employee-position.component.html',
-  styleUrls: ['./employee-position.component.scss'],
   providers: [NGXToastrService, DecimalPipe]
 })
 export class EmployeePositionComponent implements OnInit {
@@ -44,8 +45,8 @@ export class EmployeePositionComponent implements OnInit {
   getEmpUrl:any;
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetEmpPositionPaging;
-    this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteEmpPosition;
+    this.apiUrl = this.foundationUrl + URLConstant.GetEmpPositionPaging;
+    this.deleteUrl = this.foundationUrl + URLConstant.DeleteEmpPosition;
     
     this.route.queryParams.subscribe(params => {
       if (params['refEmpId'] != null) {
@@ -64,8 +65,8 @@ export class EmployeePositionComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchEmpList.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetEmpPositionPaging;
-    this.getEmpUrl = this.foundationUrl + AdInsConstant.GetRefEmployeeById;
+    this.inputObj.apiQryPaging = URLConstant.GetEmpPositionPaging;
+    this.getEmpUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
     this.inputObj.ddlEnvironments = [
       {
         name: "refOfficeId",
@@ -122,7 +123,7 @@ export class EmployeePositionComponent implements OnInit {
   }
 
   delete(empPositionId: any) {
-    if (confirm("Are you sure to delete this record?")) {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       this.empPositionObj = new EmpPositionObj();
       this.empPositionObj.empPositionId = empPositionId;
       this.httpClient.post(this.deleteUrl, this.empPositionObj).subscribe(

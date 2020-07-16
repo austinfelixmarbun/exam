@@ -9,6 +9,8 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-check',
@@ -18,7 +20,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 })
 export class CustomerCompanyManagementShareholderCheckComponent implements OnInit {
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
-  @Input() TotalShare : number;
+  @Input() TotalShare: number;
 
   tempCustCompanyObj: any;
   tempListCompanyManagementShareholder: any;
@@ -33,9 +35,9 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   resCustObj: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
-    this.getCustCompanyIdUrl = AdInsConstant.GetCustCompanyByCustId;
-    this.getListCompanyManagementShareholderByCustCompanyIdUrl = AdInsConstant.GetListCustCompanyMgmntShrholderByCustCompanyId;
-    this.DeleteCustCompanyMgmntShrholderUrl = AdInsConstant.DeleteCustCompanyMgmntShrholder;
+    this.getCustCompanyIdUrl = URLConstant.GetCustCompanyByCustId;
+    this.getListCompanyManagementShareholderByCustCompanyIdUrl = URLConstant.GetListCustCompanyMgmntShrholderByCustCompanyId;
+    this.DeleteCustCompanyMgmntShrholderUrl = URLConstant.DeleteCustCompanyMgmntShrholder;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -49,12 +51,11 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
     console.log(this.IdCust)
   }
 
-  openView(ShareholderCustNo)
-  {
+  openView(ShareholderCustNo) {
     // GetCustByCustNo
     var custObj = new CustObj;
     custObj.CustNo = ShareholderCustNo
-    this.http.post(AdInsConstant.GetCustByCustNo, custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustNo, custObj).subscribe(
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);
@@ -66,29 +67,25 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   }
 
   addPersonal() {
-    if(this.tempListCompanyManagementShareholder.length == 0)
-    {
-      this.outputValue.emit({ mode: 'addPersonal'});
+    if (this.tempListCompanyManagementShareholder.length == 0) {
+      this.outputValue.emit({ mode: 'addPersonal' });
     }
-    else
-    {
+    else {
       this.outputValue.emit({ mode: 'addPersonal', TotalShare: this.tempListCompanyManagementShareholder[0].TotalShare });
     }
   }
 
   addCompany() {
-    if(this.tempListCompanyManagementShareholder.length == 0)
-    {
-      this.outputValue.emit({ mode: 'addCompany'});
+    if (this.tempListCompanyManagementShareholder.length == 0) {
+      this.outputValue.emit({ mode: 'addCompany' });
     }
-    else
-    {
+    else {
       this.outputValue.emit({ mode: 'addCompany', TotalShare: this.tempListCompanyManagementShareholder[0].TotalShare });
     }
   }
 
   deleteItem(CustCompanyMgmntShrholderId: any) {
-    if (confirm('Are you sure to delete this record?')) {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
       this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId = CustCompanyMgmntShrholderId;
 
@@ -124,11 +121,10 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
             this.tempListCompanyManagementShareholder = response["ReturnObject"];
             // console.log("testdata")
             // console.log(this.tempListCompanyManagementShareholder.length);
-            if(this.tempListCompanyManagementShareholder.length != 0)
-            {
+            if (this.tempListCompanyManagementShareholder.length != 0) {
               this.TotalShare = this.tempListCompanyManagementShareholder[0].TotalShare;
             }
-            
+
             //this.outputValue.emit({ TotalShare: this.TotalShare});
           });
       }
@@ -136,10 +132,10 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   }
   //TotalShare: number;
   next() {
-    this.outputValue.emit({ stepMode: 'next'});
+    this.outputValue.emit({ stepMode: 'next' });
   }
 
   back() {
-    this.outputValue.emit({ stepMode: 'previous'});
+    this.outputValue.emit({ stepMode: 'previous' });
   }
 }

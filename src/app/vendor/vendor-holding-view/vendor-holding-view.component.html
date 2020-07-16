@@ -1,4 +1,4 @@
-<lib-ucviewgeneric [viewInput]="viewVendorHoldingObj"></lib-ucviewgeneric>
+<lib-ucviewgeneric [viewGenericObj]="viewVendorHoldingObj"></lib-ucviewgeneric>
 <!-- <form>
   <div class="form-actions right">
     <span class="mr-1">
@@ -17,11 +17,11 @@
           <br>
           <div>
             <ng-container *ngIf="MrVendorTypeCode == 'P'">
-              <lib-ucviewgeneric [viewInput]="viewVendorHoldingMainPObj"></lib-ucviewgeneric>
+              <lib-ucviewgeneric [viewGenericObj]="viewVendorHoldingMainPObj"></lib-ucviewgeneric>
             </ng-container>
 
             <ng-container *ngIf="MrVendorTypeCode == 'C'">
-              <lib-ucviewgeneric [viewInput]="viewVendorHoldingMainCObj"></lib-ucviewgeneric>
+              <lib-ucviewgeneric [viewGenericObj]="viewVendorHoldingMainCObj"></lib-ucviewgeneric>
             </ng-container>
           </div>
         </div>
@@ -33,8 +33,8 @@
       <div class="card">
         <div class="card-body">
           <div>
-            <lib-ucviewgeneric [viewInput]="viewVendorHoldingAddrObj"></lib-ucviewgeneric>
-            <lib-ucviewgeneric [viewInput]="viewVendorHoldingLtLgObj"></lib-ucviewgeneric>
+            <lib-ucviewgeneric [viewGenericObj]="viewVendorHoldingAddrObj"></lib-ucviewgeneric>
+            <lib-ucviewgeneric [viewGenericObj]="viewVendorHoldingLtLgObj"></lib-ucviewgeneric>
           </div>
         </div>
       </div>

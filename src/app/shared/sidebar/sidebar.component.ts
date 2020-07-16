@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { ContextMenuComponent } from 'ngx-contextmenu';
 import { ROUTES } from './sidebar-routes.config';
 import { environment } from 'environments/environment';
+import { CommonConstant } from '../constant/CommonConstant';
 
 declare var $: any;
 
@@ -16,14 +17,14 @@ declare var $: any;
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
-    public menu:any[];
-    private url:string;
-    version : string;
+    public menu: any[];
+    private url: string;
+    version: string;
     @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
 
     constructor(private router: Router,
         private route: ActivatedRoute, public translate: TranslateService, private http: HttpClient) {
-            this.version = localStorage.getItem("Version");
+        this.version = localStorage.getItem(CommonConstant.VERSION);
 
     }
 
@@ -32,6 +33,8 @@ export class SidebarComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log("ev")
+
         $.getScript('./assets/js/app-sidebar.js');
         // this.url = "./assets/menu.json";
         // this.getJSON(this.url).subscribe
@@ -39,12 +42,11 @@ export class SidebarComponent implements OnInit {
         //         this.menuItems = data;
         //     }
         //     );
-        if(environment.production==false){
+        if (environment.production == false) {
             this.menuItems = ROUTES.filter(menuItem => menuItem);
         }
-        else
-        {
-            this.menuItems = JSON.parse(localStorage.getItem("Menu"));
+        else {
+            this.menuItems = JSON.parse(localStorage.getItem(CommonConstant.MENU));
         }
     }
     genParam(params: [{ 'attr': string, 'value': string }]) {
@@ -61,4 +63,11 @@ export class SidebarComponent implements OnInit {
         if (path.indexOf('forms/ngx') != -1)
             this.router.navigate(['forms/ngx/wizard'], { skipLocationChange: false });
     }
+
+    navigateSkipLocationChange(ev) {
+        this.router.navigateByUrl("/dashboard/dash-board", { skipLocationChange: true }).then(() => {
+            this.router.navigate([ev.Path], { queryParams: this.genParam(ev.Params) });
+        });
+    }
+
 }

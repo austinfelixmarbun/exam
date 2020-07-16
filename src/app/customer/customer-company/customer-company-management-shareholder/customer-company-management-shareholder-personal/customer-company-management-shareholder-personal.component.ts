@@ -9,6 +9,8 @@ import { DatePipe } from '@angular/common';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-personal',
@@ -59,11 +61,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.KTP = RefMasterConstant.EKtp;
-    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
-    this.addManagementShareholderUrl = AdInsConstant.AddCustCompanyMgmntShrholder;
-    this.getCustCompanyMgmntShrholderUrl = AdInsConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
-    this.editManagementShareholderUrl = AdInsConstant.EditCustCompanyMgmntShrholder; 
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
+    this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholder;
+    this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
+    this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholder; 
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
 
   ngOnInit() {
@@ -77,60 +79,68 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.inputLookupCustPersonalObj.genericJson = "./assets/lookup/lookUpExistingCustPersonal.json";
     this.inputLookupCustPersonalObj.isRequired = false;
     var refMasterObjMrGenderCode= {
-      RefMasterTypeCode: "GENDER",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
       (response) => {
-        this.tempMrGenderCode = response["ReturnObject"];
-        this.ManagementShareholderForm.patchValue({
-          MrGenderCode: this.tempMrGenderCode[0].Key
-        });
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.tempMrGenderCode = response[CommonConstant.ReturnObj];
+          this.ManagementShareholderForm.patchValue({
+            MrGenderCode: this.tempMrGenderCode[0].Key
+          });
+        }
       }
     );
 	
 	   var refMasterObjMrIdTypeCode = {
-      RefMasterTypeCode: "ID_TYPE"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
-        this.tempIdType = response["ReturnObject"];
-        this.ManagementShareholderForm.patchValue({
-          MrIdTypeCode: this.tempIdType[0].Key
-        });
-        if (this.tempIdType[0].Key == this.KTP) {
-          this.tempKTPCheck = true; 
-        } else {
-          this.tempKTPCheck = false;
-          this.ManagementShareholderForm.controls.IdExpiredDt.setValidators(Validators.required);  
-          this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.tempIdType = response[CommonConstant.ReturnObj];
+          this.ManagementShareholderForm.patchValue({
+            MrIdTypeCode: this.tempIdType[0].Key
+          });
+          if (this.tempIdType[0].Key == this.KTP) {
+            this.tempKTPCheck = true; 
+          } else {
+            this.tempKTPCheck = false;
+            this.ManagementShareholderForm.controls.IdExpiredDt.setValidators(Validators.required);  
+            this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
+          }
         }
       }
     );
    
     var refMasterObjMrJobPositionCode = {
-      RefMasterTypeCode: "JOB_POSITION",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrJobPositionCode).subscribe(
       (response) => {
-        this.tempMrJobPositionCode = response["ReturnObject"];
-        this.ManagementShareholderForm.patchValue({
-          MrJobPositionCode: this.tempMrJobPositionCode[0].Key
-        });
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.tempMrJobPositionCode = response[CommonConstant.ReturnObj];
+          this.ManagementShareholderForm.patchValue({
+            MrJobPositionCode: this.tempMrJobPositionCode[0].Key
+          });
+        }
       }
     );
     var refMasterObjMrCustModelCode = {
-      RefMasterTypeCode: "CUST_MODEL",
-      Reservefield1: "PERSONAL",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      Reservefield1: CommonConstant.CustTypePersonal,
       RowVersion: ""
     }
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjMrCustModelCode).subscribe(
       (response) => {
-        this.tempMrCustModelCode = response["ReturnObject"];
-        this.ManagementShareholderForm.patchValue({
-          MrCustModelCode: this.tempMrCustModelCode[0].Key
-        });
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.tempMrCustModelCode = response[CommonConstant.ReturnObj];
+          this.ManagementShareholderForm.patchValue({
+            MrCustModelCode: this.tempMrCustModelCode[0].Key
+          });
+        }
       }
     );
     if(this.CustCompanyMgmntShrholderId!=null){

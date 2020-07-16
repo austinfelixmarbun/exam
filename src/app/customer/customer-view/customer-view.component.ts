@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-view',
@@ -23,7 +24,7 @@ export class CustomerViewComponent implements OnInit {
   viewCustJobDataAddress: string;
 
   constructor(private http: HttpClient, private route: ActivatedRoute) { 
-    this.getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
+    this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
   }
 
   ngOnInit() {

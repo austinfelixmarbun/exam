@@ -6,6 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-vendor-scheme-add-edit',
@@ -46,9 +48,9 @@ export class VendorSchemeAddEditComponent implements OnInit {
 
 
   ngOnInit() {
-    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: "VENDOR_CATEGORY"}).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: "VENDOR_CATEGORY"}).subscribe(
       (response) => {
-        this.itemCategoryType = response["ReturnObject"];
+        this.itemCategoryType = response[CommonConstant.ReturnObj];
         if(this.itemCategoryType.length > 0){
           this.VendorSchmForm.patchValue({
             MrVendorCategoryCode: this.MrVendorCategoryCode
@@ -62,7 +64,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
           this.vendorSchemeObj.VendorSchmId = this.VendorSchmId;
           this.VendorSchmForm.controls.MrVendorCategoryCode.disable();
           this.VendorSchmForm.controls.VendorSchmCode.disable();
-          this.http.post(AdInsConstant.GetVendorSchmByVendorSchmId, this.vendorSchemeObj).subscribe(
+          this.http.post(URLConstant.GetVendorSchmByVendorSchmId, this.vendorSchemeObj).subscribe(
               (response) => {
                   this.result = response;
                   this.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
@@ -92,7 +94,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
           this.vendorSchemeObj.VendorSchmCode = this.result.VendorSchmCode;
           this.vendorSchemeObj.VendorSchmId = this.VendorSchmId;
           
-          this.http.post(AdInsConstant.EditVendorSchm, this.vendorSchemeObj).subscribe(
+          this.http.post(URLConstant.EditVendorSchm, this.vendorSchemeObj).subscribe(
               (response) => {
                   this.toastr.successMessage(response["message"]);
                   this.router.navigateByUrl('/Vendor/VendorScheme/Paging');
@@ -103,7 +105,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
       }
       else {
           this.vendorSchemeObj.VendorSchmId = "0";
-          this.http.post(AdInsConstant.AddVendorSchm, this.vendorSchemeObj).subscribe(
+          this.http.post(URLConstant.AddVendorSchm, this.vendorSchemeObj).subscribe(
               (response) => {
                   this.toastr.successMessage(response["message"]);
                   this.router.navigateByUrl('/Vendor/VendorScheme/Paging');

@@ -15,6 +15,8 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { ActivatedRoute } from '@angular/router';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-contact-add',
@@ -100,10 +102,10 @@ export class CustomerContactAddComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.KTP = RefMasterConstant.EKtp;
-    this.GetListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
-    this.addCustPersonalContactPersonUrl = AdInsConstant.AddNewCustPersonalContactPerson;
-    this.editCustPersonalContactPersonUrl = AdInsConstant.EditCustPersonalContactPerson;
-    this.GetGeneralSettingByCodeUrl = AdInsConstant.GetGeneralSettingByCode;
+    this.GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
+    this.addCustPersonalContactPersonUrl = URLConstant.AddNewCustPersonalContactPerson;
+    this.editCustPersonalContactPersonUrl = URLConstant.EditCustPersonalContactPerson;
+    this.GetGeneralSettingByCodeUrl = URLConstant.GetGeneralSettingByCode;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -112,18 +114,18 @@ export class CustomerContactAddComponent implements OnInit {
   }
   isAdd: any;
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDtMin = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
-    this.businessDtMax = new Date(context["BusinessDt"]);
+    this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
 
     this.UcAddressObj = new UcAddressObj();
 
     var generalSettingObjDefLocalNationality = {
-      GsCode: "DEF_LOCAL_NATIONALITY"
+      GsCode: CommonConstant.GSCodeDefLocalNationality
     }
-     
+
     this.http.post(this.GetGeneralSettingByCodeUrl, generalSettingObjDefLocalNationality).subscribe(
       (response) => {
         this.Country = response;
@@ -141,17 +143,15 @@ export class CustomerContactAddComponent implements OnInit {
         this.criteriaObj.value = this.Country.GsValue;
         this.criteriaList.push(this.criteriaObj);
         this.lookUpObj.addCritInput = this.criteriaList;
-      
+
         var countryCode = {
           CountryCode: this.Country.GsValue
         };
-        this.http.post(AdInsConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+        this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
           (response) => {
             this.LocalCountry = response;
             console.log(this.LocalCountry.CountryName);
           });
-
-
       });
     this.professionLookUpObj = new InputLookupObj();
     this.professionLookUpObj.isRequired = false;
@@ -168,7 +168,7 @@ export class CustomerContactAddComponent implements OnInit {
     this.existingCustomerLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.existingCustomerLookUpObj.pagingJson = "./assets/lookup/lookupExistingCustomer.json";
     this.existingCustomerLookUpObj.genericJson = "./assets/lookup/lookupExistingCustomer.json";
-    if(this.listCustIdToExclude.length > 0){
+    if (this.listCustIdToExclude.length > 0) {
       var criteriaListCust = new Array();
       var criteriaCustObj = new CriteriaObj();
       criteriaCustObj.DataType = "text";
@@ -183,25 +183,25 @@ export class CustomerContactAddComponent implements OnInit {
     this.criteriaExistingObj = new CriteriaObj();
     this.criteriaExistingObj.restriction = AdInsConstant.RestrictionEq;
     this.criteriaExistingObj.propName = 'MR_CUST_TYPE_CODE';
-    this.criteriaExistingObj.value = AdInsConstant.CustomerPersonal;
+    this.criteriaExistingObj.value = CommonConstant.CustomerPersonal;
     this.criteriaExistingList.push(this.criteriaExistingObj);
-    if(this.existingCustomerLookUpObj.addCritInput){
+    if (this.existingCustomerLookUpObj.addCritInput) {
       this.existingCustomerLookUpObj.addCritInput.push(this.criteriaExistingObj);
     }
-    else{
+    else {
       this.existingCustomerLookUpObj.addCritInput = this.criteriaExistingList;
     }
-    
+
     this.inputFieldObj = new InputFieldObj();
     this.inputFieldObj.inputLookupObj = new InputLookupObj();
 
     var refMasterObjMrIdTypeCode = {
-      RefMasterTypeCode: "ID_TYPE"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
-        this.tempIdType = response["ReturnObject"];
-        if(this.tempIdType.length > 0){
+        this.tempIdType = response[CommonConstant.ReturnObj];
+        if (this.tempIdType.length > 0) {
           this.CustomerContactForm.patchValue({
             MrIdTypeCode: this.tempIdType[0].Key
           });
@@ -217,24 +217,24 @@ export class CustomerContactAddComponent implements OnInit {
     );
 
     var refMasterObjMrNationalityCode = {
-      RefMasterTypeCode: "NATIONALITY"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrNationalityCode).subscribe(
       (response) => {
-        this.tempNationality = response["ReturnObject"];
+        this.tempNationality = response[CommonConstant.ReturnObj];
         this.CustomerContactForm.patchValue({
-          MrNationalityCode: "LOCAL"
+          MrNationalityCode: CommonConstant.NationalityCodeLocal
         });
         this.lookUpObj.isRequired = false;
         this.flag = true;
       });
     var refMasterObjMrMaritalStatCode = {
-      RefMasterTypeCode: "MARITAL_STAT"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrMaritalStatCode).subscribe(
       (response) => {
-        this.tempMrMaritalStatCode = response["ReturnObject"];
-        if(this.tempMrMaritalStatCode.length > 0){
+        this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
+        if (this.tempMrMaritalStatCode.length > 0) {
           this.CustomerContactForm.patchValue({
             MrMaritalStatCode: this.tempMrMaritalStatCode[0].Key
           });
@@ -242,24 +242,24 @@ export class CustomerContactAddComponent implements OnInit {
       });
 
     var refMasterObjMrEducationCode = {
-      RefMasterTypeCode: "EDUCATION"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrEducationCode).subscribe(
       (response) => {
-        this.tempMrEducationCode = response["ReturnObject"];
-        if(this.tempMrEducationCode.length > 0){
+        this.tempMrEducationCode = response[CommonConstant.ReturnObj];
+        if (this.tempMrEducationCode.length > 0) {
           this.CustomerContactForm.patchValue({
             MrEducationCode: this.tempMrEducationCode[0].Key
           });
         }
       });
     var refMasterObjMrReligionCode = {
-      RefMasterTypeCode: "RELIGION"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrReligionCode).subscribe(
       (response) => {
-        this.tempMrReligionCode = response["ReturnObject"];
-        if(this.tempMrReligionCode.length > 0){
+        this.tempMrReligionCode = response[CommonConstant.ReturnObj];
+        if (this.tempMrReligionCode.length > 0) {
           this.CustomerContactForm.patchValue({
             MrReligionCode: this.tempMrReligionCode[0].Key
           });
@@ -267,12 +267,12 @@ export class CustomerContactAddComponent implements OnInit {
       });
 
     var refMasterObjMrCustRelationshipCode = {
-      RefMasterTypeCode: "CUST_RELATIONSHIP"
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrCustRelationshipCode).subscribe(
       (response) => {
-        this.tempMrCustRelationshipCode = response["ReturnObject"];
-        if(this.tempMrCustRelationshipCode.length > 0){
+        this.tempMrCustRelationshipCode = response[CommonConstant.ReturnObj];
+        if (this.tempMrCustRelationshipCode.length > 0) {
           this.CustomerContactForm.patchValue({
             MrCustRelationshipCode: this.tempMrCustRelationshipCode[0].Key
           });
@@ -280,13 +280,13 @@ export class CustomerContactAddComponent implements OnInit {
       });
 
     var refMasterObjMrGenderCode = {
-      RefMasterTypeCode: "GENDER",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       RowVersion: ""
     }
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
       (response) => {
-        this.tempMrGenderCode = response["ReturnObject"];
-        if(this.tempMrGenderCode.length > 0){
+        this.tempMrGenderCode = response[CommonConstant.ReturnObj];
+        if (this.tempMrGenderCode.length > 0) {
           this.CustomerContactForm.patchValue({
             MrGenderCode: this.tempMrGenderCode[0].Key
           });
@@ -297,8 +297,7 @@ export class CustomerContactAddComponent implements OnInit {
     if (this.custPersonalContactPersonId != null) {
       this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.custPersonalContactPersonId;
-      console.log("aaaaaa");
-      this.http.post(AdInsConstant.GetCustPersonalContactPersonByCustPersonalContactPersonId, this.custPersonalContactPersonObj).subscribe(
+      this.http.post(URLConstant.GetCustPersonalContactPersonByCustPersonalContactPersonId, this.custPersonalContactPersonObj).subscribe(
         (response) => {
           var datePipe = new DatePipe("en-US");
           this.tempCustPersonalContactPerson = response;
@@ -326,20 +325,19 @@ export class CustomerContactAddComponent implements OnInit {
               ProfessionCode: this.tempCustPersonalContactPerson.MrJobProfessionCode,
               RowVersion: ""
             }
-            this.http.post(AdInsConstant.GetRefProfessionByProfessionCode, ProfessionCodeObj).subscribe(
+            this.http.post(URLConstant.GetRefProfessionByProfessionCode, ProfessionCodeObj).subscribe(
               (response) => {
-                console.log("awdawdawd");
                 this.tempProfessionCodeObj = response;
                 this.professionLookUpObj.nameSelect = this.tempProfessionCodeObj.ProfessionName;
               }
             );
           }
-          if (this.tempCustPersonalContactPerson.MrNationalityCode != "LOCAL") {
+          if (this.tempCustPersonalContactPerson.MrNationalityCode != CommonConstant.NationalityCodeLocal) {
             this.flag = false;
             var countryCode = {
               CountryCode: this.tempCustPersonalContactPerson.NationalityCountryCode
             };
-            this.http.post(AdInsConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+            this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
               (response) => {
 
                 this.tempCountry = response;
@@ -446,7 +444,7 @@ export class CustomerContactAddComponent implements OnInit {
     this.custPersonalObj = new CustPersonalObj();
     this.custObj.CustId = this.tempCustId;
     this.custPersonalObj.CustId = this.tempCustId;
-    this.http.post(AdInsConstant.GetCustPersonalbyCustId, this.custObj).subscribe(
+    this.http.post(URLConstant.GetCustPersonalbyCustId, this.custObj).subscribe(
       (response) => {
         this.tempCustPersonal = response;
         this.CustomerContactForm.patchValue({
@@ -460,12 +458,12 @@ export class CustomerContactAddComponent implements OnInit {
           MobilePhnNo2: this.tempCustPersonal.MobilePhnNo2,
           Email: this.tempCustPersonal.Email1
         });
-        if (this.tempCustPersonal.MrNationalityCode != "LOCAL") {
+        if (this.tempCustPersonal.MrNationalityCode != CommonConstant.NationalityCodeLocal) {
           this.flag = false;
           var countryCode = {
             CountryCode: this.tempCustPersonal.WnaCountryCode
           };
-          this.http.post(AdInsConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+          this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
             (response) => {
 
               this.tempCountry = response;
@@ -483,7 +481,7 @@ export class CustomerContactAddComponent implements OnInit {
       }
 
     );
-    this.http.post(AdInsConstant.GetCustByCustId, this.custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, this.custObj).subscribe(
       (response) => {
         this.tempCust = response;
         this.CustomerContactForm.patchValue({
@@ -499,7 +497,7 @@ export class CustomerContactAddComponent implements OnInit {
     this.custAddrObj.CustId = this.tempCustId;
     console.log(this.tempCustId);
     this.custAddrObj.MrCustAddrTypeCode = RefMasterConstant.LegalAddr;
-    this.http.post(AdInsConstant.GetCustAddrByMrCustAddrType, this.custAddrObj).subscribe(
+    this.http.post(URLConstant.GetCustAddrByMrCustAddrType, this.custAddrObj).subscribe(
       (response) => {
         this.tempCustAddress = response;
         this.UcAddressObj.AreaCode1 = this.tempCustAddress.AreaCode1;
@@ -543,7 +541,7 @@ export class CustomerContactAddComponent implements OnInit {
     this.CustomerContactForm.controls.IdExpiredDt.updateValueAndValidity();
   }
   onOptionsNationalitySelected(event) {
-    if (event.target.value == "LOCAL") {
+    if (event.target.value == CommonConstant.NationalityCodeLocal) {
       this.lookUpObj.isRequired = false;
       this.flag = true;
     } else {

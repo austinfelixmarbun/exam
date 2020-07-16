@@ -9,11 +9,11 @@ import { ActivatedRoute } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { Observable } from 'rxjs';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-upload-setting-paging',
   templateUrl: './upload-setting-paging.component.html',
-  styleUrls: ['./upload-setting-paging.component.scss'],
   providers: [NGXToastrService]
 })
 export class UploadSettingPagingComponent implements OnInit {
@@ -49,10 +49,10 @@ export class UploadSettingPagingComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = './assets/search/searchUploadTypePaging.json';
     this.inputObj.enviromentUrl = this.foundationUrl;
-    this.inputObj.apiQryPaging = AdInsConstant.GetUploadTypePaging;
+    this.inputObj.apiQryPaging = URLConstant.GetUploadTypePaging;
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetUploadTypePaging;
+    this.apiUrl = this.foundationUrl + URLConstant.GetUploadTypePaging;
     this.initiateForm()
   }
 

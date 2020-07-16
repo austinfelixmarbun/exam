@@ -2,18 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { DatePipe } from '@angular/common';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
-import { ifStmt } from '@angular/compiler/src/output/output_ast';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-edit-main-data-personal',
   templateUrl: './edit-main-data-personal.component.html',
-  styleUrls: ['./edit-main-data-personal.component.scss'],
   providers: [NGXToastrService]
 })
 export class EditMainDataPersonalComponent implements OnInit {
@@ -53,12 +52,12 @@ export class EditMainDataPersonalComponent implements OnInit {
   businessDtMax: any;
   VipNotesRequired : boolean;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService) {
-    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
-    this.getCustPersonalByCustIdUrl = AdInsConstant.GetCustPersonalbyCustId;
-    this.getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
-    this.editCustUrl = AdInsConstant.EditCust;
-    this.editCustPersonalUrl = AdInsConstant.EditCustPersonal; 
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
+    this.getCustPersonalByCustIdUrl = URLConstant.GetCustPersonalbyCustId;
+    this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
+    this.editCustUrl = URLConstant.EditCust;
+    this.editCustPersonalUrl = URLConstant.EditCustPersonal; 
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
@@ -70,19 +69,19 @@ export class EditMainDataPersonalComponent implements OnInit {
   }
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDtMin = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
-    this.businessDtMax = new Date(context["BusinessDt"]);
+    this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
   
     var refMasterObjGender = {
-      RefMasterTypeCode: "GENDER",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjGender).subscribe(
       (response) => {
-        this.tempGender = response["ReturnObject"];
+        this.tempGender = response[CommonConstant.ReturnObj];
         if(this.tempGender.length > 0){
           this.CustomerPersonalForm.patchValue({
             Gender: this.tempGender[0].Key
@@ -91,12 +90,12 @@ export class EditMainDataPersonalComponent implements OnInit {
       }
     );
     var refMasterObjMrIdTypeCode = {
-      RefMasterTypeCode: "ID_TYPE",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
-        this.tempIdType = response["ReturnObject"];
+        this.tempIdType = response[CommonConstant.ReturnObj];
         if(this.tempIdType.length > 0){
           this.CustomerPersonalForm.patchValue({
             MrIdTypeCode: this.tempIdType[0].Key
@@ -110,14 +109,14 @@ export class EditMainDataPersonalComponent implements OnInit {
       }
     );
     var refMasterObjCustModel = {
-      RefMasterTypeCode: "CUST_MODEL",
-      ReserveField1: "PERSONAL",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      ReserveField1: CommonConstant.CustTypePersonal,
       RowVersion: ""
     }
 
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
       (response) => {
-        this.tempCustModel = response["ReturnObject"];
+        this.tempCustModel = response[CommonConstant.ReturnObj];
         if(this.tempCustModel.length > 0){
           this.CustomerPersonalForm.patchValue({
             CustModel: this.tempCustModel[0].Key

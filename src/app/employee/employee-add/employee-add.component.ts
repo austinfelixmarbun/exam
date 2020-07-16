@@ -1,4 +1,4 @@
-import { Component, OnInit} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { environment } from "environments/environment";
 import { HttpClient } from "@angular/common/http";
@@ -15,11 +15,13 @@ import { EmpBankAccObj } from "app/shared/model/EmpBankAccObj.Model";
 import { map, mergeMap } from "rxjs/operators";
 import { GeneralSettingObj } from "app/shared/model/GeneralSettingObj.Model";
 import { forkJoin } from "rxjs";
+import { CommonConstant } from "app/shared/constant/CommonConstant";
+import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Component({
   selector: "app-employee-add",
   templateUrl: "./employee-add.component.html",
-  styleUrls: ["./employee-add.component.scss"],
   providers: [NGXToastrService]
 })
 export class EmployeeAddComponent implements OnInit {
@@ -34,9 +36,9 @@ export class EmployeeAddComponent implements OnInit {
   refUserObj: any;
   empBankAccObj: any;
   refBankObj: any;
-  IdTypeList:any;
+  IdTypeList: any;
   businessDt: Date;
-  
+
   RefEmpForm = this.fb.group({
     RefUserId: [0, [Validators.required]],
     Username: ['', [Validators.required]],
@@ -102,8 +104,8 @@ export class EmployeeAddComponent implements OnInit {
     });
 
     this.generalSettingObj = new GeneralSettingObj();
-    this.generalSettingObj.GsCode = "PASSWORD_REGEX";
-    httpClient.post(AdInsConstant.GetGeneralSettingByCode, this.generalSettingObj).subscribe(
+    this.generalSettingObj.GsCode = CommonConstant.GsCodePasswordRegex;
+    httpClient.post(URLConstant.GetGeneralSettingByCode, this.generalSettingObj).subscribe(
       (response) => {
         this.resultData = response;
         this.passwordPattern = this.resultData.GsValue;
@@ -115,19 +117,21 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDt = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
 
     var RefMasterIdType = {
-      RefMasterTypeCode: "ID_TYPE",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
     }
-    this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
       (response) => {
-        this.IdTypeList = response["ReturnObject"];
-        if (this.pageType != "edit") {
-          this.RefEmpForm.patchValue({
-            MrIdTypeCode: this.IdTypeList[0].Key
-          });
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.IdTypeList = response[CommonConstant.ReturnObj];
+          if (this.pageType != "edit") {
+            this.RefEmpForm.patchValue({
+              MrIdTypeCode: this.IdTypeList[0].Key
+            });
+          }
         }
       }
     );
@@ -150,8 +154,8 @@ export class EmployeeAddComponent implements OnInit {
       var empObj = new RefEmpObj();
       empObj.RefEmpId = this.RefEmpId;
 
-      this.httpClient.post(AdInsConstant.GetRefEmployeeById, empObj).pipe(
-        map( response => {
+      this.httpClient.post(URLConstant.GetRefEmployeeById, empObj).pipe(
+        map(response => {
           return response;
         }),
         mergeMap((response: any) => {
@@ -163,8 +167,8 @@ export class EmployeeAddComponent implements OnInit {
           var tempResponse = [];
           tempResponse.push(response);
 
-          const refUserObj = this.httpClient.post(AdInsConstant.GetRefUserByRefEmpId, tempRefUser);
-          const empBankAccObj = this.httpClient.post(AdInsConstant.GetEmpBankAccByRefEmpId, tempEmpBankAcc);
+          const refUserObj = this.httpClient.post(URLConstant.GetRefUserByRefEmpId, tempRefUser);
+          const empBankAccObj = this.httpClient.post(URLConstant.GetEmpBankAccByRefEmpId, tempEmpBankAcc);
 
           return forkJoin([tempResponse, refUserObj, empBankAccObj]);
         }),
@@ -179,8 +183,7 @@ export class EmployeeAddComponent implements OnInit {
           var tempResponseEmpBank = [];
           tempResponseEmpBank.push(response[2]);
 
-          const refBankObj = this.httpClient.post(AdInsConstant.GetRefBankByRefBankIdAsync, tempRefBank);
-
+          const refBankObj = this.httpClient.post(URLConstant.GetRefBankByRefBankIdAsync, tempRefBank);
           return forkJoin([tempResponseEmp, tempResponseUsr, tempResponseEmpBank, refBankObj]);
         })
       ).subscribe(
@@ -253,7 +256,7 @@ export class EmployeeAddComponent implements OnInit {
     }
   }
 
-  getLookupZipCodeResponse(e){
+  getLookupZipCodeResponse(e) {
     this.RefEmpForm.patchValue({
       Zipcode: e.Zipcode,
       AreaCode1: e.AreaCode1,
@@ -262,7 +265,7 @@ export class EmployeeAddComponent implements OnInit {
     });
   }
 
-  getLookupBankResponse(e){
+  getLookupBankResponse(e) {
     this.RefEmpForm.patchValue({
       RefBankId: e.refBankId,
       BankBranchRegCode: e.regRptCode
@@ -270,8 +273,8 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   SaveForm() {
-    if (Date.parse(this.RefEmpForm.controls.JoinDt.value) > Date.parse(formatDate(this.businessDt,  'yyyy-MM-dd', 'en-US'))) {
-      this.toastr.warningMessage("Join Date Must Be Lesser Than Business Date")
+    if (Date.parse(this.RefEmpForm.controls.JoinDt.value) > Date.parse(formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US'))) {
+      this.toastr.warningMessage(ExceptionConstant.JOIN_DATE_MUST_LESS_THAN_ + "Business Date")
       return;
     }
 
@@ -332,14 +335,14 @@ export class EmployeeAddComponent implements OnInit {
     empBankAccData.RefEmpId = refEmpFormData.RefEmpId;
 
     if (this.pageType == "add") {
-      this.httpClient.post(AdInsConstant.AddRefEmp, refEmpData).pipe(
-        map( response => {
+      this.httpClient.post(URLConstant.AddRefEmp, refEmpData).pipe(
+        map(response => {
           this.resultData = response;
           refUserData.RefEmpId = this.resultData.RefEmpId;
           empBankAccData.RefEmpId = this.resultData.RefEmpId;
         }),
-        mergeMap(() => this.httpClient.post(AdInsConstant.AddEmpBankAcc, empBankAccData)),
-        mergeMap(() => this.httpClient.post(AdInsConstant.AddRefUserR3, refUserData))
+        mergeMap(() => this.httpClient.post(URLConstant.AddEmpBankAcc, empBankAccData)),
+        mergeMap(() => this.httpClient.post(URLConstant.AddRefUserR3, refUserData))
       ).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
@@ -353,10 +356,10 @@ export class EmployeeAddComponent implements OnInit {
     else {
       empBankAccData.RowVersion = this.empBankAccObj.RowVersion;
       refUserData.RowVersion = this.refUserObj.RowVersion;
-      this.httpClient.post(AdInsConstant.EditRefEmp, refEmpFormData).pipe(
-        map( () => {}),
-        mergeMap(() => this.httpClient.post(AdInsConstant.EditEmpBankAcc, empBankAccData)),
-        mergeMap(() => this.httpClient.post(AdInsConstant.EditRefUserForRefEmpR3, refUserData))
+      this.httpClient.post(URLConstant.EditRefEmp, refEmpFormData).pipe(
+        map(() => { }),
+        mergeMap(() => this.httpClient.post(URLConstant.EditEmpBankAcc, empBankAccData)),
+        mergeMap(() => this.httpClient.post(URLConstant.EditRefUserForRefEmpR3, refUserData))
       ).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);

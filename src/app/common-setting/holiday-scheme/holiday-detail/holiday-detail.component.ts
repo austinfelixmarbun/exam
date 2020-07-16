@@ -9,6 +9,9 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { HolidayCopyObj } from 'app/shared/model/HolidayCopy.Model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-holiday-detail',
@@ -21,8 +24,8 @@ export class HolidayDetailComponent implements OnInit {
   inputPagingObjHolidayScheme : InputLookupObj;
   inputPagingObjHolidayDetail : any;
   copyHoliday : any;
-  viewObj : any;
   title : string = "Holiday Scheme Info";
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   HolidayManagementForm = this.fb.group({
 
@@ -39,6 +42,9 @@ export class HolidayDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewHolidayDetail.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     this.inputPagingObjHolidayScheme = new InputLookupObj;
     var critInputNotIn = new CriteriaObj();
     critInputNotIn.propName = "HOLIDAY_SCHM_H_ID";
@@ -58,16 +64,14 @@ export class HolidayDetailComponent implements OnInit {
     this.inputPagingObjHolidayDetail.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObjHolidayDetail.apiQryPaging = "/Generic/GetPagingObjectBySQL";
     this.inputPagingObjHolidayDetail.pagingJson = "./assets/ucpaging/searchHolidayDetail.json";
-    this.inputPagingObjHolidayDetail.deleteUrl = AdInsConstant.DeleteHolidaySchmD;
+    this.inputPagingObjHolidayDetail.deleteUrl = URLConstant.DeleteHolidaySchmD;
     this.inputPagingObjHolidayDetail.addCritInput = new Array();
     
     var critInput = new CriteriaObj();
     critInput.propName = "HoliH.HOLIDAY_SCHM_H_ID";
     critInput.restriction = AdInsConstant.RestrictionEq;
     critInput.value = this.HolidaySchmHId;
-    this.inputPagingObjHolidayDetail.addCritInput.push(critInput);
-    this.viewObj = "./assets/ucviewgeneric/viewHolidayDetail.json";
-    
+    this.inputPagingObjHolidayDetail.addCritInput.push(critInput);    
   }
 
   getHolidaySchmHId(ev){
@@ -75,12 +79,12 @@ export class HolidayDetailComponent implements OnInit {
   }
 
   Copy(key: any, value: any) {
-    if (confirm("The copy will replace all existing holiday listings")) {
+    if (confirm(ExceptionConstant.COPY_REPLACE_CONFIRMATION + "holiday listings")) {
       this.copyHoliday = new HolidayCopyObj();
       this.copyHoliday.HolidaySchmHId = this.HolidaySchmHId;
       this.copyHoliday.HolidaySchmHIdCopy = this.HolidaySchmHIdCopy;
 
-      this.http.post(AdInsConstant.CopyHolidaySchmH, this.copyHoliday).subscribe((response) => {
+      this.http.post(URLConstant.CopyHolidaySchmH, this.copyHoliday).subscribe((response) => {
         this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
         this.toastr.successMessage(response['message']);
     },

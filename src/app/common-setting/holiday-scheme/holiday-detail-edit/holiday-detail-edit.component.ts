@@ -6,6 +6,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { HolidayDObj } from 'app/shared/model/HolidayDObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { formatDate } from '@angular/common';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { environment } from 'environments/environment';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-holiday-detail-edit',
@@ -21,10 +24,9 @@ export class HolidayDetailEditComponent implements OnInit {
     Date: ['', Validators.required],
     Descr: ['', Validators.required]
   })
-
-  viewObj: any;
   title: string;
   result: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
@@ -34,12 +36,13 @@ export class HolidayDetailEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.viewObj = "./assets/ucviewgeneric/viewHolidayDetail.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewHolidayDetail.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.title = "Holiday Scheme-Edit";
     var HolidayObj = new HolidayDObj;
     HolidayObj.HolidaySchmDId = this.HolidaySchmDId;
-    this.http.post(AdInsConstant.GetHolidaySchmDById, HolidayObj).subscribe(
+    this.http.post(URLConstant.GetHolidaySchmDById, HolidayObj).subscribe(
       (response) => {
         this.result = response;
         this.HolidayListForm.patchValue({
@@ -63,7 +66,7 @@ export class HolidayDetailEditComponent implements OnInit {
     HolidayObj.HolidaySchmDId = this.result.HolidaySchmDId;
     HolidayObj.RowVersion = this.result.RowVersion;
 
-    this.http.post(AdInsConstant.EditHolidaySchmD, HolidayObj).subscribe(
+    this.http.post(URLConstant.EditHolidaySchmD, HolidayObj).subscribe(
       (response) => {
         this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
         this.toastr.successMessage(response['message']);

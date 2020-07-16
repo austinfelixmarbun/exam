@@ -4,12 +4,13 @@
       {
         "subSectionId": "BranchInformationSurId",
         "subSectionTitle": "Main Info",
-        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
+        "mainInfoPath": "/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
             "type": "link",
             "label": "Surveyor HO:",
             "property": "SurveyorHo",
+            "name": "LinkSurveyorHO",
             "target": "_blank",
             "path": "/Vendor/HO/View",
             "param": [

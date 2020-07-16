@@ -4,7 +4,7 @@
       <div class="px-3">
         <form class="form form-horizontal" (ngSubmit)="SendSrvyOrder()">
           <div class="form-body">
-            <lib-ucviewgeneric *ngIf="isDataAlreadyLoaded == true" [viewInput]="viewObj" [whereValue]="arrValue"></lib-ucviewgeneric>
+            <lib-ucviewgeneric *ngIf="isDataAlreadyLoaded == true" [viewGenericObj]="viewGenericObj"></lib-ucviewgeneric>
           </div>
           <lib-ucSubsection [id]="'SurveyOrderTaskFormId'" [title]="'Survey Task'" [panel]="'SurveyOrderTaskForm'">
           </lib-ucSubsection>
@@ -105,7 +105,7 @@
                     </div>
                     <div class="form-actions right">
                       <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Back()" translate>
-                        <i class="ft-arrow-left"></i> Back
+                        <i class="far fa-window-close"></i> Cancel
                       </button>
                       <button type="submit" class="btn btn-raised btn-primary" translate>
                         <i class="far fa-check-square"></i> Send
@@ -118,7 +118,7 @@
           </div>
           <div class="form-actions right">
             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Survey/Paging']" translate>
-              <i class="ft-x"></i> Cancel
+              <i class="far fa-window-close"></i> Cancel
             </button>
             <button type="submit" class="btn btn-raised btn-primary" translate>
               <i class="far fa-check-square"></i> Send

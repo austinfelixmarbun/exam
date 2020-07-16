@@ -4,6 +4,8 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-role-form-paging',
@@ -11,8 +13,8 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 })
 export class RoleFormPagingComponent implements OnInit {
   RefRoleId: string;
-  viewObj: any;
   inputPagingObj: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private route: ActivatedRoute){
     this.route.queryParams.subscribe(params => {
@@ -21,13 +23,16 @@ export class RoleFormPagingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewRoleRefForm.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchRoleRefForm.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRoleRefForm.json";
     this.inputPagingObj.addCritInput = new Array();
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteAuthForm;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteAuthForm;
 
     var critInput = new CriteriaObj();
     critInput.DataType = "numeric";
@@ -35,8 +40,6 @@ export class RoleFormPagingComponent implements OnInit {
     critInput.restriction = AdInsConstant.RestrictionEq;
     critInput.value = this.RefRoleId;
     this.inputPagingObj.addCritInput.push(critInput);
-
-    this.viewObj = "./assets/ucviewgeneric/viewRoleRefForm.json";
   }
 
 }

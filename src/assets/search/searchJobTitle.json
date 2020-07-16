@@ -90,10 +90,6 @@
               "property": "edit"
             }
           ]
-        },
-        {
-          "type": "delete",
-          "property": "refJobTitleId"
         }
       ]
     }

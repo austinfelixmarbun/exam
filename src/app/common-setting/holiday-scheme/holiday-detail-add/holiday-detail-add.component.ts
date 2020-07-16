@@ -6,6 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { HolidayDObj } from 'app/shared/model/HolidayDObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HolidayDByYearObj } from 'app/shared/model/HolidayDByYearObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-holiday-detail-add',
@@ -15,12 +18,12 @@ import { HolidayDByYearObj } from 'app/shared/model/HolidayDByYearObj.Model';
 export class HolidayDetailAddComponent implements OnInit {
 
   HolidaySchmHId: string;
-  viewObj: any;
   title: string = "Holiday Detail";
   holidayDetailObj: HolidayDObj;
   holidayDetailByYearObj: HolidayDByYearObj;
   check: boolean = false;
   mode: any = "";
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   HolidayListForm = this.fb.group({
     IsPublicHoliday: [false, Validators.required],
@@ -44,10 +47,10 @@ export class HolidayDetailAddComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.viewObj = "./assets/ucviewgeneric/viewHolidayDetail.json";
-
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewHolidayDetail.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
   }
+  
   SaveForm() {
     if (this.HolidayListForm.controls.IsPublicHoliday.value) {
       this.holidayDetailObj = new HolidayDObj;
@@ -58,7 +61,7 @@ export class HolidayDetailAddComponent implements OnInit {
       this.holidayDetailObj.Descr = this.HolidayListForm.controls.Descr.value;
 
       console.log(this.holidayDetailObj);
-      this.http.post(AdInsConstant.AddHolidaySchmD, this.holidayDetailObj).subscribe((response) => {
+      this.http.post(URLConstant.AddHolidaySchmD, this.holidayDetailObj).subscribe((response) => {
         this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
         this.toastr.successMessage(response['message']);
       },
@@ -94,7 +97,7 @@ export class HolidayDetailAddComponent implements OnInit {
       if (this.HolidayListForm.controls.Saturday.value) {
         this.holidayDetailByYearObj.DictOfDays.push("Saturday");
       }
-      this.http.post(AdInsConstant.AddHolidaySchmDUntilYear, this.holidayDetailByYearObj).subscribe((response) => {
+      this.http.post(URLConstant.AddHolidaySchmDUntilYear, this.holidayDetailByYearObj).subscribe((response) => {
         this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
         this.toastr.successMessage(response['message']);
       },

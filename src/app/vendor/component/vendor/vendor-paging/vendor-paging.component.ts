@@ -7,11 +7,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-vendor-paging',
-  templateUrl: './vendor-paging.component.html',
-  styleUrls: ['./vendor-paging.component.scss']
+  templateUrl: './vendor-paging.component.html'
 })
 export class VendorPagingComponent implements OnInit {
   inputPagingObj: any;
@@ -34,7 +34,7 @@ export class VendorPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
 
 
 
@@ -90,12 +90,12 @@ export class VendorPagingComponent implements OnInit {
 
         var WVAddrTypeObj = new WhereValueObj();
         WVAddrTypeObj.property = "AddrType";
-        WVAddrTypeObj.value = "TAX";
+        WVAddrTypeObj.value = CommonConstant.AddrTypeTax;
         this.inputPagingObj.whereValue.push(WVAddrTypeObj);
 
         var WVendorClassObj = new WhereValueObj();
         WVendorClassObj.property = "VendorClass";
-        WVendorClassObj.value = "HO";
+        WVendorClassObj.value = CommonConstant.HeadOffice;
         this.inputPagingObj.whereValue.push(WVendorClassObj);
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {

@@ -5,11 +5,12 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsService } from 'app/shared/services/adIns.service';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { FormBuilder } from '@angular/forms';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-view-coy-legal',
-  templateUrl: './customer-view-coy-legal.component.html',
-  styleUrls: ['./customer-view-coy-legal.component.scss']
+  templateUrl: './customer-view-coy-legal.component.html'
 })
 
 export class CustomerViewCoyLegalComponent implements OnInit {
@@ -35,8 +36,8 @@ export class CustomerViewCoyLegalComponent implements OnInit {
     private adInsService: AdInsService,
     private fb: FormBuilder
   ) {
-    this.GetCustCompanyLegalDocForCustViewByCustIdUrl= AdInsConstant.GetCustCompanyLegalDocForCustViewByCustId
-   }
+    this.GetCustCompanyLegalDocForCustViewByCustIdUrl = URLConstant.GetCustCompanyLegalDocForCustViewByCustId
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -47,7 +48,9 @@ export class CustomerViewCoyLegalComponent implements OnInit {
     var custObj = { "CustId": this.CustId };
     this.http.post(this.GetCustCompanyLegalDocForCustViewByCustIdUrl, custObj).subscribe(
       response => {
-        this.responseResultLegal = response['ReturnObject'];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.responseResultLegal = response[CommonConstant.ReturnObj];
+        }
       },
       error => {
         this.router.navigateByUrl('Error');

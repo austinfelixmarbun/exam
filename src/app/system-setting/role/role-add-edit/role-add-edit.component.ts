@@ -7,6 +7,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 
 @Component({
@@ -55,7 +56,7 @@ export class RoleAddEditComponent implements OnInit {
       this.RefRoleForm.controls["RoleCode"].disable();
       this.refRoleObj = new RefRoleObj();
       this.refRoleObj.RefRoleId = this.RefRoleId;
-      this.httpClient.post(AdInsConstant.GetRefRoleByRefRoleId, this.refRoleObj).subscribe(
+      this.httpClient.post(URLConstant.GetRefRoleByRefRoleId, this.refRoleObj).subscribe(
         response => {
           this.resultData = response;
           this.RefRoleForm.patchValue({
@@ -77,7 +78,7 @@ export class RoleAddEditComponent implements OnInit {
       this.refRoleObj.RoleCode = this.RefRoleForm.controls["RoleCode"].value
       this.refRoleObj.RoleName = this.RefRoleForm.controls["RoleName"].value;
       this.refRoleObj.IsActive = this.RefRoleForm.controls["IsActive"].value;
-      this.httpClient.post(AdInsConstant.AddRefRole, this.refRoleObj).subscribe(
+      this.httpClient.post(URLConstant.AddRefRole, this.refRoleObj).subscribe(
         response => {
             this.service.successMessage(response["Message"]);
             this.router.navigate(["/SystemSetting/Role"]);
@@ -92,7 +93,7 @@ export class RoleAddEditComponent implements OnInit {
       this.refRoleObj.RoleCode = this.RefRoleForm.controls["RoleCode"].value;
       this.refRoleObj.RoleName = this.RefRoleForm.controls["RoleName"].value;
       this.refRoleObj.IsActive = this.RefRoleForm.controls["IsActive"].value;
-      this.httpClient.post(AdInsConstant.EditRefRole, this.refRoleObj).subscribe(
+      this.httpClient.post(URLConstant.EditRefRole, this.refRoleObj).subscribe(
         response => {
           console.log(response);
           this.service.successMessage(response["Message"]);

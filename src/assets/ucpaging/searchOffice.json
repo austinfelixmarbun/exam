@@ -209,10 +209,6 @@
                             "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type": "delete",
-                    "property": "RefOfficeId"
                 }
             ]
         }

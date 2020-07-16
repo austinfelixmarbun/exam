@@ -5,6 +5,8 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VendorGroupObj } from 'app/shared/model/VendorGroupObj.Model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 
 @Component({
@@ -15,8 +17,8 @@ export class VendorGroupViewComponent implements OnInit {
   VendorGrpId: any;
   vendorGrpObj: VendorGroupObj;
   inputPagingObj: any;
-  inputViewObj: any;
   MrVendorCategoryCode: any;
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private router: Router, private route: ActivatedRoute, ) {
     this.route.queryParams.subscribe(params => {
@@ -31,15 +33,15 @@ export class VendorGroupViewComponent implements OnInit {
 
 
   ngOnInit() {
-
-    this.inputViewObj = "./assets/ucviewgeneric/viewVendorGrp.json";
-
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorGrp.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
+    
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchVendor.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendor.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteVendorGrpMemberById;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteVendorGrpMemberById;
     this.inputPagingObj.addCritInput = new Array();
 
 

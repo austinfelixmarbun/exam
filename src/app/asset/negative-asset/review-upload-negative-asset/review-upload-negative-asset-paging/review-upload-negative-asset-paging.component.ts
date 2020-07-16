@@ -6,6 +6,7 @@ import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-review-upload-negative-asset-paging',
@@ -19,7 +20,7 @@ export class ReviewUploadNegativeAssetPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadNegativeAsset.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadNegativeAsset.json";
     this.inputPagingObj.ddlEnvironments = [
       {
@@ -33,7 +34,7 @@ export class ReviewUploadNegativeAssetPagingComponent implements OnInit {
     wfObj.TaskListId = ev.RowObj.TaskListId;
     wfObj.TransactionNo = ev.RowObj.UploadNo;
     wfObj.ListValue = { "Status": "RJC" };
-    this.http.post(AdInsConstant.CancelUpload, wfObj).subscribe(
+    this.http.post(URLConstant.CancelUpload, wfObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

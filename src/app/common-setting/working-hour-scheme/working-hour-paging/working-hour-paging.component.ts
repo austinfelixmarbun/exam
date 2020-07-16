@@ -1,14 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UcgridfooterComponent } from '@adins/ucgridfooter';
-import { UCSearchComponent } from '@adins/ucsearch';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
-import { WorkingHourSchmHObj } from 'app/shared/model/WorkingHourSchmHObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { DecimalPipe } from '@angular/common';
-import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-working-hour-paging',
@@ -24,8 +20,8 @@ export class WorkingHourPagingComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchWorkingHourSchm.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchWorkingHourSchm.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteWorkingHourSchm;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteWorkingHourSchm;
   }
 }

@@ -12,6 +12,7 @@ import { environment } from 'environments/environment';
 import { UserTitleRoleObj } from 'app/shared/model/UserTitleRoleObj';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 
 @Component({
@@ -77,12 +78,12 @@ export class UserRoleDetailComponent implements OnInit {
   ngOnInit() {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupRole.json";
-    this.inputLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/lookup/lookupRole.json";
     this.inputLookupObj.genericJson = "./assets/lookup/lookupRole.json";
-    
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRolePaging;
+
+    this.apiUrl = this.foundationUrl + URLConstant.GetRefRolePaging;
     this.initiateForm()
   }
 
@@ -91,8 +92,8 @@ export class UserRoleDetailComponent implements OnInit {
     var refRoleObj: RefRoleObj = new RefRoleObj();
     this.userTitleRoleObj = new UserTitleRoleObj();
     var empPositionObj: EmpPositionObj = new EmpPositionObj();
-    var getRoleUrl: any = this.foundationUrl + AdInsConstant.GetRefRoleByEmpPositionId;
-    var getUserTitleRole: any = this.foundationUrl + AdInsConstant.GetUserTitleRoleByEmpPositionIdAndRefRoleId;
+    var getRoleUrl: any = this.foundationUrl + URLConstant.GetRefRoleByEmpPositionId;
+    var getUserTitleRole: any = this.foundationUrl + URLConstant.GetUserTitleRoleByEmpPositionIdAndRefRoleId;
     empPositionObj.empPositionId = this.empPositionId;
 
     this.httpClient.post(getRoleUrl, empPositionObj).subscribe(
@@ -110,18 +111,18 @@ export class UserRoleDetailComponent implements OnInit {
           console.log('A', refRoleObj);
           this.httpClient.post(getUserTitleRole, this.userTitleRoleObj).subscribe(
             (response) => {
-              this.userTitleRoleObj =  response['returnObject'];
+              this.userTitleRoleObj = response['returnObject'];
               console.log('B', this.userTitleRoleObj);
 
               if (this.userTitleRoleObj.isActive == '1') { this.isActive = true } else { this.isActive = false }
               //this.userTitleRoleId = this.userTitleRoleObj.userTitleRoleId;
-          },
-          (error) => {
-            console.log('Error Get');
-            console.log(error);
-            this.spinner.hide();
-          }
-        );
+            },
+            (error) => {
+              console.log('Error Get');
+              console.log(error);
+              this.spinner.hide();
+            }
+          );
           this.spinner.hide();
         }
       },
@@ -140,14 +141,13 @@ export class UserRoleDetailComponent implements OnInit {
 
   Save(UserRoleDetailForm: NgForm, lookupRole: any): void {
     this.spinner.show();
-    if (this.mode == 'edit')
-    {
-      console.log ('edit');
-      this.apiUrl = this.foundationUrl + AdInsConstant.EditUserTitleRole;
+    if (this.mode == 'edit') {
+      console.log('edit');
+      this.apiUrl = this.foundationUrl + URLConstant.EditUserTitleRole;
       //this.userTitleRoleObj.userTitleRoleId = +this.userTitleRoleId;
       this.userTitleRoleObj.empPositionId = +this.empPositionId;
       this.userTitleRoleObj.refRoleId = lookupRole.idSelect;
-      if (UserRoleDetailForm.value.isActive){this.userTitleRoleObj.isActive = '1'} else {this.userTitleRoleObj.isActive = '0'}  ;
+      if (UserRoleDetailForm.value.isActive) { this.userTitleRoleObj.isActive = '1' } else { this.userTitleRoleObj.isActive = '0' };
 
       this.httpClient.post(this.apiUrl, this.userTitleRoleObj).subscribe(
         (response) => {
@@ -166,13 +166,12 @@ export class UserRoleDetailComponent implements OnInit {
       );
 
     }
-    else
-    {
+    else {
       console.log("add");
-      this.apiUrl = this.foundationUrl + AdInsConstant.AddUserTitleRole;
+      this.apiUrl = this.foundationUrl + URLConstant.AddUserTitleRole;
       this.userTitleRoleObj.empPositionId = +this.empPositionId;
       this.userTitleRoleObj.refRoleId = lookupRole.idSelect;
-      if(UserRoleDetailForm.value.isActive){this.userTitleRoleObj.isActive = '1'} else {this.userTitleRoleObj.isActive = '0'} ;
+      if (UserRoleDetailForm.value.isActive) { this.userTitleRoleObj.isActive = '1' } else { this.userTitleRoleObj.isActive = '0' };
 
       this.httpClient.post(this.apiUrl, this.userTitleRoleObj).subscribe(
         (response) => {
@@ -190,10 +189,9 @@ export class UserRoleDetailComponent implements OnInit {
         }
       );
     }
-
   }
 
-  getLookupResponse(e){
+  getLookupResponse(e) {
     this.userTitleRoleObj.refRoleId = e.RefRoleId
   }
 }

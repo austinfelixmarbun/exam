@@ -22,6 +22,8 @@ import { OfficeAreaAddEditComponent } from './office-area/office-area-add-edit/o
 import { OfficeAreaPagingComponent } from './office-area/office-area-paging/office-area-paging.component';
 import { OfficeAreaMemberPagingComponent } from './office-area/office-area-member/office-area-member-paging/office-area-member-paging.component';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
+import { UcaddtotempModule } from '@adins/ucaddtotemp';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
     UcaddressModule,
     UclookupgenericModule,
     UcShowErrorsModule,
-    UcviewgenericModule
+    UcviewgenericModule,
+    UcaddtotempModule
   ],
   declarations: [
     OfficeComponent,
@@ -52,6 +55,9 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
     OfficeGroupMemberAddComponent,
     OfficeAreaMemberPagingComponent,
     OfficeAreaMemberAddComponent
+  ],
+  providers: [
+    NGXToastrService
   ]
 })
 export class OfficeModule { }

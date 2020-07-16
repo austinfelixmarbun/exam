@@ -1,4 +1,4 @@
-import { CriteriaObj } from "../CriteriaObj.model";
+import { CriteriaObj } from '../CriteriaObj.model';
 
 export class UcTempPagingObj {
     urlJson: string;
@@ -8,6 +8,7 @@ export class UcTempPagingObj {
     isReady: boolean;
     addCritInput: Array<CriteriaObj>;
     ddlEnvironments: Array<EnviObj>;
+    whereValue: Array<WhereValueObj>;
 
     constructor() {
         this.urlJson = "";
@@ -17,6 +18,7 @@ export class UcTempPagingObj {
         this.isReady = false;
         this.addCritInput = new Array<CriteriaObj>();
         this.ddlEnvironments = new Array<EnviObj>();
+        this.whereValue = new Array<WhereValueObj>();
     }
 }
 
@@ -27,5 +29,14 @@ export class EnviObj {
     constructor() {
         this.name = "";
         this.environment = "";
+    }
+}
+
+export class WhereValueObj {
+    property: string;
+    value: any;
+
+    constructor() {
+        this.property = "";
     }
 }

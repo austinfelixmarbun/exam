@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-office-area-add-edit',
@@ -40,7 +41,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
   ngOnInit() {
     if (this.mode == "edit") {
       this.title = "Area-Edit";
-      this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOfficeAreaByRefOfficeAreaId;
+      this.apiUrl = this.foundationUrl + URLConstant.GetRefOfficeAreaByRefOfficeAreaId;
       this.refOfficeAreaObj = new RefOfficeAreaObj();
       this.refOfficeAreaObj.RefOfficeAreaId = this.RefOfficeAreaId;
       this.OfficeAreaForm.controls.AreaCode.disable();
@@ -68,7 +69,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
       this.refOfficeAreaObj.AreaCode = this.result.AreaCode;
       this.refOfficeAreaObj.RefOfficeAreaId = this.RefOfficeAreaId;
 
-      this.http.post(AdInsConstant.EditRefOfficeArea, this.refOfficeAreaObj).subscribe(
+      this.http.post(URLConstant.EditRefOfficeArea, this.refOfficeAreaObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigateByUrl('/Office/OfficeArea');
@@ -79,7 +80,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
     }
     else {
       this.refOfficeAreaObj.RefOfficeAreaId = "0";
-      this.http.post(AdInsConstant.AddRefOfficeArea, this.refOfficeAreaObj).subscribe(
+      this.http.post(URLConstant.AddRefOfficeArea, this.refOfficeAreaObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigateByUrl('/Office/OfficeArea');
