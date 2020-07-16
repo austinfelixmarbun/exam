@@ -811,4 +811,14 @@ export class URLConstant {
 
     // Workflow Engine
     public static ClaimTask = environment.FoundationR3Url + "/Workflow/ClaimTask";
+
+    //SCORE CATEGORY SCHM H
+    public static GetScoreCategorySchmHById = environment.FoundationR3Url + "/ScoreCategorySchmH/GetScoreCategorySchmHById";
+    public static AddScoreCategorySchmH = environment.FoundationR3Url + "/ScoreCategorySchmH/AddScoreCategorySchmH";
+    public static EditScoreCategorySchmH = environment.FoundationR3Url + "/ScoreCategorySchmH/EditScoreCategorySchmH";
+    public static GetRefScoreCategoryTypeWithDetailById = environment.FoundationR3Url + "/ScoreCategorySchmH/GetScoreCategorySchmHWithDetailById";
+
+    // REF SCORE CATEGORY
+    public static AddRangeAndDeleteScoreCategorySchmD = environment.FoundationR3Url + "/ScoreCategorySchmD/AddRangeAndDeleteScoreCategorySchmD";
+
 }

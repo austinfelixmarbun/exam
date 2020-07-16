@@ -2,13 +2,6 @@
 <div class="row text-left">
   <div class="col-md-12">
     <div class="card">
-      <div class="card-header header-title">
-        <div class="row">
-          <div class="col-md-8">
-            <h4 class="card-title" translate>Employee Business Unit</h4>
-          </div>
-        </div>
-      </div>
       <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
       <div class="card-body">
         <div class="px-3">
@@ -64,7 +57,7 @@
 
               <div class="form-actions right">
                 <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Employee/EmployeeBusinessUnit/Paging']" [queryParams]="{RefUserId:RefUserId}">
-                  <i class="ft-x"></i> Cancel
+                  <i class="far fa-window-close"></i> Cancel
                 </button>
                 
                 <button type="submit" class="btn btn-raised btn-primary">

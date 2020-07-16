@@ -3,247 +3,216 @@
     <div class="card-header header-title">
       <div class="row">
         <div class="col-md-8">
+          <h4 class="form-section card-title" translate>Office</h4>
         </div>
       </div>
     </div>
-
-    <div class="row text-left">
-      <div class="card-body">
-        <div class="px-3">
-          <form class="form form-horizontal" [formGroup]="OfficeForm" (ngSubmit)="OfficeForm.valid && SaveForm()"
-            #enjiForm="ngForm">
-            <div class="form-body">
-              <div class="row text-left">
-                <div class="card-body">
-                  <div class="px-3">
-                    <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Office-Add/Edit</h4>
-                    <div class="form-group row adins-required">
-                      <label class="col-md-3  adInsLabel" translate>Office Code </label>
-                      <div class="col-md-9">
-                        <input type="text" class="form-control adInsInput code" formControlName="OfficeCode">
-                        <lib-uc-show-errors [control]="OfficeForm.controls.OfficeCode" [submit]="enjiForm.submitted">
-                        </lib-uc-show-errors>
-                      </div>
-                    </div>
-                    <div class="form-group row adins-required">
-                      <label class="col-md-3  adInsLabel" translate>Office Name </label>
-                      <div class="col-md-9">
-                        <input type="text" class="form-control adInsInput name" formControlName="OfficeName">
-                        <lib-uc-show-errors [control]="OfficeForm.controls.OfficeName" [submit]="enjiForm.submitted">
-                        </lib-uc-show-errors>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-md-3  adInsLabel" translate>Office Short Name </label>
-                      <div class="col-md-9">
-                        <input type="text" class="form-control adInsInput name"
-                          formControlName="OfficeShortName">
-                        <lib-uc-show-errors [control]="OfficeForm.controls.OfficeShortName"
-                          [submit]="enjiForm.submitted">
-                        </lib-uc-show-errors>
-                      </div>
-                    </div>
-                    <div class="form-group row adins-required">
-                      <label class="col-md-3  adInsLabel" translate>Office Type </label>
-                      <div class="col-md-9">
-                        <select class="form-control adInsInput" style="width: auto" formControlName="OfficeType"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.OfficeType.invalid }"
-                          (change)="checkType()">
-                          <option *ngFor="let ot of allOfficeType" value="{{ot.Key}}">
-                            {{ot.Value}}</option>
-                        </select>
-                        <lib-uc-show-errors [control]="OfficeForm.controls.OfficeType" [submit]="enjiForm.submitted">
-                        </lib-uc-show-errors>
-                      </div>
-                    </div>
-                    <ng-container *ngIf="OfficeForm.controls.OfficeType.value == 'CG'">
-                      <div class="form-group row adins-required">
-                        <label class="col-md-3  adInsLabel" translate>Center Group Type </label>
-                        <div class="col-md-9">
-                          <select class="form-control adInsInput" style="width: auto"
-                            formControlName="MrCenterGrpTypeCode"
-                            [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.MrCenterGrpTypeCode.invalid }">
-                            <option *ngFor="let ct of allCgType" value="{{ct.Key}}">
-                              {{ct.Value}}</option>
-                          </select>
-                          <lib-uc-show-errors [control]="OfficeForm.controls.MrCenterGrpTypeCode"
-                            [submit]="enjiForm.submitted">
-                          </lib-uc-show-errors>
-                        </div>
-                      </div>
-                    </ng-container>
-                    <div [hidden]="OfficeForm.controls.OfficeType.value == 'HO'">
-                    <div class="form-group row adins-required">
-                      <label class="col-md-3  adInsLabel" translate>Office Parent </label>
-                      <div class="col-md-9">
-                        <lib-uclookupgeneric [lookupInput]="InputLookupObj" [parentForm]='OfficeForm'
-                          [enjiForm]="enjiForm" [identifier]="'lookupOfficeParent'" (lookup)="getLookUp($event)">
-                        </lib-uclookupgeneric>
-                      </div>
-                    </div>
-                    </div>
-                    <div class="form-group row row adins-required">
-                      <label class="col-md-3  adInsLabel" translate>Konvensional/Syariah</label>
-                      <div class="col-md-9">
-                        <select class="form-control adInsInput" style="width: auto" formControlName="KonSya"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.KonSya.invalid }">
-                          <option *ngFor="let ky of allKonSya" value="{{ky.Key}}">
-                            {{ky.Value}}</option>
-                        </select>
-                        <lib-uc-show-errors [control]="OfficeForm.controls.KonSya" [submit]="enjiForm.submitted">
-                        </lib-uc-show-errors>
-                      </div>
-                    </div>
-                    <div class="form-group row row adins-required">
-                      <label class="col-md-3  adInsLabel" translate>Office Class</label>
-                      <div class="col-md-9">
-                        <select class="form-control adInsInput" style="width: auto" formControlName="MrOfficeClassCode"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.MrOfficeClassCode.invalid }">
-                          <option *ngFor="let oc of allOfficeClass" value="{{oc.Key}}">
-                            {{oc.Value}}</option>
-                        </select>
-                        <lib-uc-show-errors [control]="OfficeForm.controls.MrOfficeClassCode"
-                          [submit]="enjiForm.submitted">
-                        </lib-uc-show-errors>
-                      </div>
-                    </div>
-                    <div class="form-group row row adins-required">
-                      <label class="col-md-3  adInsLabel" translate>Holiday Scheme</label>
-                      <div class="col-md-9">
-                        <select class="form-control adInsInput" style="width: auto" formControlName="HolidayScheme"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.HolidayScheme.invalid }">
-                          <option *ngFor="let hs of allHolidaySchm" value="{{hs.HolidaySchmHId}}">
-                            {{hs.HolidaySchmName}}</option>
-                        </select>
-                        <lib-uc-show-errors [control]="OfficeForm.controls.HolidayScheme" [submit]="enjiForm.submitted">
-                        </lib-uc-show-errors>
-                      </div>
-                    </div>
-                    <div class="form-group row row adins-required">
-                      <label class="col-md-3  adInsLabel" translate>Working Hour Scheme</label>
-                      <div class="col-md-9">
-                        <select class="form-control adInsInput" style="width: auto" formControlName="WorkingHourScheme"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.WorkingHourScheme.invalid }">
-                          <option *ngFor="let oc of allWorkingHourSchm" value="{{oc.WorkingHourSchmHId}}">
-                            {{oc.WorkingHourSchmName}}</option>
-                        </select>
-                        <lib-uc-show-errors [control]="OfficeForm.controls.WorkingHourScheme"
-                          [submit]="enjiForm.submitted">
-                        </lib-uc-show-errors>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-md-3 adInsLabel">Active Status</label>
-                      <div class="col-md-9">
-                        <input type="checkbox" class="border-primary" formControlName="IsActive">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-md-3 adInsLabel">Office Close </label>
-                      <div class="col-md-9">
-                        <input type="checkbox" class="border-primary" formControlName="OfficeClose">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-md-3 adInsLabel">Allow APP Created </label>
-                      <div class="col-md-9">
-                        <input type="checkbox" class="border-primary" formControlName="AllowAppCreated">
-                      </div>
-                    </div>
-                    <!-- <app-ucAddress #ucAddress [parentForm]='OfficeReqForm'></app-ucAddress> -->
-                    <div style="margin-left: 10px;">
-                    <lib-ucaddress [UCAddrForm]="OfficeForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'"
-                      [default]="addressObj" [inputField]="inputFieldAddr">
-                    </lib-ucaddress>
-                  </div>
-                    <!-- <app-ucContactInfo #ucContactInfo [parentForm]='OfficeReqForm'></app-ucContactInfo> -->
-
-
-                    <div class="form-body">
-                      <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Contact Information
-                      </h4>
-                      <div class="form-group row">
-                        <label class="col-md-3 adins-required-label adInsLabel" translate>Contact Person Name </label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control adInsInput width-30-per"
-                            formControlName="CntctPersonName"
-                            [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.CntctPersonName.invalid }">
-                          <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonName"
-                            [submit]="enjiForm.submitted">
-                          </lib-uc-show-errors>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label class="col-md-3 adins-required-label adInsLabel" translate>Contact Person Job Title
-                        </label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control adInsInput width-30-per"
-                            formControlName="CntctPersonJobTitle"
-                            [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.CntctPersonJobTitle.invalid }">
-                          <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonJobTitle"
-                            [submit]="enjiForm.submitted">
-                          </lib-uc-show-errors>
-                        </div>
-                      </div>
-                      <div class="form-group row adins-required">
-                        <label class="col-md-3  adInsLabel" translate>Email 1 </label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control adInsInput width-30-per"
-                            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="CntctPersonEmail1">
-                          <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonEmail1"
-                            [submit]="enjiForm.submitted">
-                          </lib-uc-show-errors>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label class="col-md-3  adInsLabel" translate>Email 2 </label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control adInsInput width-30-per"
-                            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" formControlName="CntctPersonEmail2">
-                          <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonEmail2"
-                            [submit]="enjiForm.submitted">
-                          </lib-uc-show-errors>
-                        </div>
-                      </div>
-                      <div class="form-group row adins-required">
-                        <label class="col-md-3  adInsLabel" translate>Mobile Phone 1 </label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control adInsInput width-30-per"
-                            formControlName="CntctPersonMobilePhnNo1">
-                          <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonMobilePhnNo1"
-                            [submit]="enjiForm.submitted">
-                          </lib-uc-show-errors>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label class="col-md-3  adInsLabel" translate>Mobile Phone 2 </label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control adInsInput width-30-per"
-                            formControlName="CntctPersonMobilePhnNo2">
-                          <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonMobilePhnNo2"
-                            [submit]="enjiForm.submitted">
-                          </lib-uc-show-errors>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="form-actions right">
-                      <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Office/Paging']"
-                        translate>
-                        <i class="ft-x"></i> Cancel
-                      </button>
-                      <button type="submit" class="btn btn-raised btn-primary" translate>
-                        <i class="far fa-check-square"></i> Save
-                      </button>
-                    </div>
-
-                    <!-- </form> -->
-                  </div>
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal" [formGroup]="OfficeForm" (ngSubmit)="OfficeForm.valid && SaveForm()"
+          #enjiForm="ngForm">
+          <lib-ucSubsection [id]="'OfficeDetailId'" [title]="'Office-' + this.pageType" [panel]="'OfficeDetail'">
+          </lib-ucSubsection>
+          <div id="OfficeDetail">
+            <div class="form-group row adins-required">
+              <label class="col-md-3  adInsLabel" translate>Office Code </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control" formControlName="OfficeCode">
+                <lib-uc-show-errors [control]="OfficeForm.controls.OfficeCode" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+            <div class="form-group row adins-required">
+              <label class="col-md-3  adInsLabel" translate>Office Name </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control" formControlName="OfficeName">
+                <lib-uc-show-errors [control]="OfficeForm.controls.OfficeName" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3  adInsLabel" translate>Office Short Name </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control" formControlName="OfficeShortName">
+                <lib-uc-show-errors [control]="OfficeForm.controls.OfficeShortName" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+            <div class="form-group row adins-required">
+              <label class="col-md-3  adInsLabel" translate>Office Type </label>
+              <div class="col-md-4">
+                <select class="form-control" style="width: auto" formControlName="OfficeType"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.OfficeType.invalid }"
+                  (change)="checkType()">
+                  <option *ngFor="let ot of allOfficeType" value="{{ot.Key}}">
+                    {{ot.Value}}</option>
+                </select>
+                <lib-uc-show-errors [control]="OfficeForm.controls.OfficeType" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+            <ng-container *ngIf="OfficeForm.controls.OfficeType.value == 'CG'">
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Center Group Type </label>
+                <div class="col-md-4">
+                  <select class="form-control" style="width: auto" formControlName="MrCenterGrpTypeCode"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.MrCenterGrpTypeCode.invalid }">
+                    <option *ngFor="let ct of allCgType" value="{{ct.Key}}">
+                      {{ct.Value}}</option>
+                  </select>
+                  <lib-uc-show-errors [control]="OfficeForm.controls.MrCenterGrpTypeCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+            </ng-container>
+            <div [hidden]="OfficeForm.controls.OfficeType.value == 'HO'">
+              <div class="form-group row adins-required">
+                <label class="col-md-3  adInsLabel" translate>Office Parent </label>
+                <div class="col-md-4">
+                  <lib-uclookupgeneric [lookupInput]="InputLookupObj" [parentForm]='OfficeForm' [enjiForm]="enjiForm"
+                    [identifier]="'lookupOfficeParent'" (lookup)="getLookUp($event)">
+                  </lib-uclookupgeneric>
                 </div>
               </div>
             </div>
-          </form>
-        </div>
+            <div class="form-group row row adins-required">
+              <label class="col-md-3  adInsLabel" translate>Konvensional/Syariah</label>
+              <div class="col-md-4">
+                <select class="form-control" style="width: auto" formControlName="KonSya"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.KonSya.invalid }">
+                  <option *ngFor="let ky of allKonSya" value="{{ky.Key}}">
+                    {{ky.Value}}</option>
+                </select>
+                <lib-uc-show-errors [control]="OfficeForm.controls.KonSya" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+            <div class="form-group row row adins-required">
+              <label class="col-md-3  adInsLabel" translate>Office Class</label>
+              <div class="col-md-4">
+                <select class="form-control" style="width: auto" formControlName="MrOfficeClassCode"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.MrOfficeClassCode.invalid }">
+                  <option *ngFor="let oc of allOfficeClass" value="{{oc.Key}}">
+                    {{oc.Value}}</option>
+                </select>
+                <lib-uc-show-errors [control]="OfficeForm.controls.MrOfficeClassCode" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+            <div class="form-group row row adins-required">
+              <label class="col-md-3  adInsLabel" translate>Holiday Scheme</label>
+              <div class="col-md-4">
+                <select class="form-control" style="width: auto" formControlName="HolidayScheme"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.HolidayScheme.invalid }">
+                  <option *ngFor="let hs of allHolidaySchm" value="{{hs.HolidaySchmHId}}">
+                    {{hs.HolidaySchmName}}</option>
+                </select>
+                <lib-uc-show-errors [control]="OfficeForm.controls.HolidayScheme" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+            <div class="form-group row row adins-required">
+              <label class="col-md-3  adInsLabel" translate>Working Hour Scheme</label>
+              <div class="col-md-4">
+                <select class="form-control" style="width: auto" formControlName="WorkingHourScheme"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.WorkingHourScheme.invalid }">
+                  <option *ngFor="let oc of allWorkingHourSchm" value="{{oc.WorkingHourSchmHId}}">
+                    {{oc.WorkingHourSchmName}}</option>
+                </select>
+                <lib-uc-show-errors [control]="OfficeForm.controls.WorkingHourScheme" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 adInsLabel">Active Status</label>
+              <div class="col-md-4">
+                <input type="checkbox" class="border-primary" formControlName="IsActive">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 adInsLabel">Office Close </label>
+              <div class="col-md-4">
+                <input type="checkbox" class="border-primary" formControlName="OfficeClose">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 adInsLabel">Allow APP Created </label>
+              <div class="col-md-4">
+                <input type="checkbox" class="border-primary" formControlName="AllowAppCreated">
+              </div>
+            </div>
+          </div>
+          <lib-ucaddress [UCAddrForm]="OfficeForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'"
+            [default]="addressObj" [inputField]="inputFieldAddr">
+          </lib-ucaddress>
+          <lib-ucSubsection [id]="'ContactInfoId'" [title]="'Contact Information'" [panel]="'ContactInfo'">
+          </lib-ucSubsection>
+          <div id="ContactInfo">
+            <div class="form-group row">
+              <label class="col-md-3 adins-required-label adInsLabel" translate>Contact Person Name </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control" formControlName="CntctPersonName"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.CntctPersonName.invalid }">
+                <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonName" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 adins-required-label adInsLabel" translate>Contact Person Job Title
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control" formControlName="CntctPersonJobTitle"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.CntctPersonJobTitle.invalid }">
+                <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonJobTitle" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+            <div class="form-group row adins-required">
+              <label class="col-md-3  adInsLabel" translate>Email 1 </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control"
+                  formControlName="CntctPersonEmail1">
+                <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonEmail1" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3  adInsLabel" translate>Email 2 </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control"
+                  formControlName="CntctPersonEmail2">
+                <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonEmail2" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+            <div class="form-group row adins-required">
+              <label class="col-md-3  adInsLabel" translate>Mobile Phone 1 </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control" formControlName="CntctPersonMobilePhnNo1">
+                <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonMobilePhnNo1"
+                  [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3  adInsLabel" translate>Mobile Phone 2 </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control" formControlName="CntctPersonMobilePhnNo2">
+                <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonMobilePhnNo2"
+                  [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Office/Paging']" translate>
+              <i class="ft-x"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary" translate>
+              <i class="far fa-check-square"></i> Save
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

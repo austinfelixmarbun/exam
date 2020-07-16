@@ -378,10 +378,6 @@
                 }
               }
           ]
-        },
-        {
-          "type": "delete",
-          "property": "AssetMasterId"
         }
       ]
     }

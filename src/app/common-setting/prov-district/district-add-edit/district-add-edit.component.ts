@@ -28,6 +28,7 @@ export class DistrictAddEditComponent implements OnInit {
     ProvDistrictCode: ['', [Validators.required, Validators.maxLength(50)]],
     ProvDistrictName: ['', [Validators.required, Validators.maxLength(100)]],
     DistrictRegRptCode: ['', Validators.maxLength(100)],
+    PhnArea: ['', [Validators.required, Validators.maxLength(10)]],
     IsActive: [true]
   });
 
@@ -73,7 +74,8 @@ export class DistrictAddEditComponent implements OnInit {
             ProvDistrictCode: this.resultData.ProvDistrictCode,
             ProvDistrictName: this.resultData.ProvDistrictName,
             DistrictRegRptCode: this.resultData.DistrictRegRptCode,
-            IsActive: this.resultData.IsActive
+            IsActive: this.resultData.IsActive,
+            PhnArea: this.resultData.PhnArea
           });
         },
         error => {
@@ -90,6 +92,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.refProvDistrictObj.ProvDistrictName = this.DistrictForm.controls["ProvDistrictName"].value;
       this.refProvDistrictObj.DistrictRegRptCode = this.DistrictForm.controls["DistrictRegRptCode"].value;
       this.refProvDistrictObj.IsActive = this.DistrictForm.controls["IsActive"].value;
+      this.refProvDistrictObj.PhnArea = this.DistrictForm.controls["PhnArea"].value;
       this.refProvDistrictObj.ParentId = this.parentId;
       this.refProvDistrictObj.Type = CommonConstant.RefProvDistrictTypeDis;
       this.http.post(this.addUrl, this.refProvDistrictObj).subscribe(
@@ -107,6 +110,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.refProvDistrictObj.ProvDistrictName = this.DistrictForm.controls["ProvDistrictName"].value;
       this.refProvDistrictObj.DistrictRegRptCode = this.DistrictForm.controls["DistrictRegRptCode"].value;
       this.refProvDistrictObj.IsActive = this.DistrictForm.controls["IsActive"].value;
+      this.refProvDistrictObj.PhnArea = this.DistrictForm.controls["PhnArea"].value;
       this.refProvDistrictObj.Type =  CommonConstant.RefProvDistrictTypeDis;
       this.http.post(this.editUrl, this.refProvDistrictObj).subscribe(
         response => {
