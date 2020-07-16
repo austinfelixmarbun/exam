@@ -31,6 +31,7 @@ import { NegativeAssetUploadComponent } from './negative-asset/negative-asset-up
 import { ReviewUploadNegativeAssetPagingComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-paging/review-upload-negative-asset-paging.component';
 import { ReviewUploadNegativeAssetDetailComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-detail/review-upload-negative-asset-detail.component';
 import { UcaddtotempModule } from "@adins/ucaddtotemp";
+import { AssetAttributeComponent } from './asset-attribute/asset-attribute.component';
 
 @NgModule({
   imports: [
@@ -67,7 +68,8 @@ import { UcaddtotempModule } from "@adins/ucaddtotemp";
     ReviewUploadAssetMasterPagingComponent,
     NegativeAssetUploadComponent,
     ReviewUploadNegativeAssetPagingComponent,
-    ReviewUploadNegativeAssetDetailComponent
+    ReviewUploadNegativeAssetDetailComponent,
+    AssetAttributeComponent
   ],
   providers: [
     NGXToastrService

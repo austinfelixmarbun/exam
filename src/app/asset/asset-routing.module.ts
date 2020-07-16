@@ -26,6 +26,7 @@ import { ReviewUploadAssetMasterDetailComponent } from './asset-master/review-up
 import { NegativeAssetUploadComponent } from './negative-asset/negative-asset-upload/negative-asset-upload.component';
 import { ReviewUploadNegativeAssetPagingComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-paging/review-upload-negative-asset-paging.component';
 import { ReviewUploadNegativeAssetDetailComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-detail/review-upload-negative-asset-detail.component';
+import { AssetAttributeComponent } from './asset-attribute/asset-attribute.component';
 
 const routes: Routes = [
   {
@@ -118,6 +119,13 @@ const routes: Routes = [
       {
         path: 'Accessory/Paging',
         component: AssetAccessoryPagingComponent,
+        data: {
+          title: 'Asset Accessory Paging'
+        },
+      },
+      {
+        path: 'Attribute/Paging',
+        component: AssetAttributeComponent,
         data: {
           title: 'Asset Accessory Paging'
         },
