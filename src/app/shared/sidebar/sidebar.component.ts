@@ -65,6 +65,8 @@ export class SidebarComponent implements OnInit {
     }
 
     navigateSkipLocationChange(ev) {
+        //sementara Sementara begini dulu, belum ketemu solusi lain
+        //problem : ketika di 'click' halaman memasuki halaman /dashboard/dash-board terlebih dahulu
         this.router.navigateByUrl("/dashboard/dash-board", { skipLocationChange: true }).then(() => {
             this.router.navigate([ev.Path], { queryParams: this.genParam(ev.Params) });
         });
