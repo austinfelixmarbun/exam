@@ -34,7 +34,6 @@ export class ZipcodeAddComponent implements OnInit {
     City: ['', [Validators.required, Validators.maxLength(50)]],
     Zipcode: ['', [Validators.required, Validators.maxLength(10)]],
     SubZipcode: [' ', Validators.maxLength(4)],
-    PhnArea: ['', [Validators.required, Validators.maxLength(10)]],
     IsActive: [true, Validators.required]
   });
 
@@ -78,7 +77,6 @@ export class ZipcodeAddComponent implements OnInit {
             Zipcode: this.resultData.Zipcode,
             SubZipcode: this.resultData.SubZipcode,
             RefProvDistrictId: this.resultData.RefProvDistrictId,
-            PhnArea: this.resultData.PhnArea,
             IsActive: this.resultData.IsActive
           });
           this.refDistrict = new RefProvDistrictObj();
