@@ -8,6 +8,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-vendor-branch-office-member-add',
@@ -73,7 +74,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
 
   SaveVendorOfficeMember() {
     if (this.listSelectedId.length == 0) {
-      this.toastr.typeErrorCustom('Please Add At Least One Data');
+      this.toastr.errorMessage(ExceptionConstant.ADD_MIN_1_DATA);
       return;
     }
 

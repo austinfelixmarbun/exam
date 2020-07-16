@@ -9,6 +9,7 @@ import { empty } from 'rxjs';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-search-office-offering',
@@ -62,7 +63,7 @@ export class SearchOfficeComponentOffering implements OnInit {
 
   SaveForm(){
     if (this.listSelectedId.length == 0) {
-      this.toastr.errorMessage('Please Add At Least One Data');
+      this.toastr.errorMessage(ExceptionConstant.ADD_MIN_1_DATA);
       return;
     }
 
