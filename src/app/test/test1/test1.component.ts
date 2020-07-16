@@ -22,6 +22,8 @@ export class Test1Component implements OnInit {
   listSelectedId: Array<number> = new Array<number>();
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
 
+  color: string = "black";
+
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, public toastr: ToastrService) {
     this.route.queryParams.subscribe(params => {
       this.VendorSchmId = params['VendorSchmId'];
