@@ -27,8 +27,24 @@
             "placeholder": "Placeholder"
         },
         {
+            "type": "textbox",
+            "name": "RA.ATTR_VALUE",
+            "id": "AssetAttrTypeCode",
+            "value": "",
+            "label": "Asset Attribute Value",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "RM.DESCR",
+            "id": "AssetAttrTypeCode",
+            "value": "",
+            "label": "Asset Attribute Input Type",
+            "placeholder": "Placeholder"
+        },
+        {
             "type": "dropdown",
-            "name": "IS_ACTIVE",
+            "name": "AST.IS_EDITABLE_AFTER_GO_LIVE",
             "id": "isActive",
             "value": "Editable After Go Live",
             "placeholder": "Placeholder",
@@ -76,14 +92,20 @@
         },
         {
             "type": "sort",
+            "position": "left",
+            "label": "ASSET ATTRIBUTE INPUT TYPE",
+            "name": "RM.DESCR"
+        },
+        {
+            "type": "sort",
             "position": "center",
             "label": "EDITABLE AFTER GO LIVE",
             "name": "AST.IS_EDITABLE_AFTER_GO_LIVE"
         }
     ],
     "querystring": {
-        "select": "SELECT RA.ATTR_CODE AS AttrCode, RA.ATTR_NAME AS AttrName, RA.ATTR_TYPE_CODE AS AttrTypeCode, RA.ATTR_VALUE AS AttrValue, AST.IS_EDITABLE_AFTER_GO_LIVE AS IsEditable",
-        "from": "FROM dbo.ASSET_ATTR AST WITH(NOLOCK) JOIN dbo.REF_ATTR RA WITH(NOLOCK) ON RA.REF_ATTR_ID = AST.REF_ATTR_ID"
+        "select": "SELECT RA.ATTR_CODE AS AttrCode, RA.ATTR_NAME AS AttrName, RA.ATTR_TYPE_CODE AS AttrTypeCode, RA.ATTR_VALUE AS AttrValue, AST.IS_EDITABLE_AFTER_GO_LIVE AS IsEditable, RM.DESCR AS AttrInputType",
+        "from": "FROM dbo.ASSET_ATTR AST WITH(NOLOCK) JOIN dbo.REF_ATTR RA WITH(NOLOCK) ON RA.REF_ATTR_ID = AST.REF_ATTR_ID LEFT JOIN dbo.REF_MASTER RM WITH(NOLOCK) ON RM.MASTER_CODE = RA.ATTR_INPUT_TYPE AND RM.REF_MASTER_TYPE_CODE = 'ATTR_INPUT_TYPE'"
     },
     "bodyList": [
         {
@@ -105,6 +127,11 @@
             "type": "text",
             "position": "left",
             "property": "AttrValue"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "AttrInputType"
         },
         {
             "type": "boolean",
