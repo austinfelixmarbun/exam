@@ -2,7 +2,8 @@
 <form>
   <div class="form-actions right">
     <span class="mr-1">
-        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/HO/Paging']" translate>
+        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Paging']"
+        [queryParams]="{ MrVendorCategoryCode:MrVendorCategoryCode}" translate>
           <i class="far fa-window-close"></i> Cancel
         </button>
     </span>
