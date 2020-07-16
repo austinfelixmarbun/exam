@@ -3,6 +3,7 @@ export class RefProvDistrictObj {
     ProvDistrictCode: any;
     ProvDistrictName: any;
     DistrictRegRptCode: any;
+    PhnArea : any;
     ParentId: any;
     Type: any;
     IsActive: any;

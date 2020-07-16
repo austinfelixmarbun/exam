@@ -30,13 +30,15 @@ import { ReviewUploadAssetMasterPagingComponent } from "./asset-master/review-up
 import { NegativeAssetUploadComponent } from './negative-asset/negative-asset-upload/negative-asset-upload.component';
 import { ReviewUploadNegativeAssetPagingComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-paging/review-upload-negative-asset-paging.component';
 import { ReviewUploadNegativeAssetDetailComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-detail/review-upload-negative-asset-detail.component';
+import { UcaddtotempModule } from "@adins/ucaddtotemp";
 
 @NgModule({
   imports: [
     CommonModule,
     AssetRoutingComponent,
     AdInsModule,
-    SharingComponentModule
+    SharingComponentModule,
+    UcaddtotempModule
   ],
   declarations: [
     AssetTypePagingComponent,
