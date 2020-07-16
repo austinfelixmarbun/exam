@@ -159,7 +159,8 @@ thead tr th {
 .ucSearch-Button-Right{
     z-index:1 ;
     position:absolute;
-    right: 50px; 
+    right: 50px;
+    top: 18px;
     text-decoration-line: underline;
 }
 
