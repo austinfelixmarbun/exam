@@ -329,6 +329,12 @@ export class URLConstant {
     public static EditListAssetSchmDByAssetMasterId = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmDByAssetMasterId";
     public static GetUploadAssetMasterByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + '/AssetMaster/GetUploadAssetMasterByUploadMonitoringNoAndTrxType';
 
+    //REF ATTR
+    public static GetListActiveRefAttrType = environment.FoundationR3Url + "/RefAttrType/GetListActiveRefAttrType";
+    public static GetRefAttrById = environment.FoundationR3Url + "/RefAttr/GetRefAttrById";
+    public static AddRefAttr = environment.FoundationR3Url + "/RefAttr/AddRefAttr";
+    public static EditRefAttr = environment.FoundationR3Url + "/RefAttr/EditRefAttr";
+
     //REF PROFESSION
     public static AddRefProfession = environment.FoundationR3Url + "/RefProfession/AddRefProfession";
     public static EditRefProfession = environment.FoundationR3Url + "/RefProfession/EditRefProfession";
