@@ -1,5 +1,5 @@
 {
-    "title": "Office Parent",
+    "sectionTitle": "Office Parent",
     "component": [
         {
             "type": "textbox",

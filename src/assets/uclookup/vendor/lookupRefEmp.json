@@ -1,5 +1,5 @@
 {
-    "title": "Employee",
+    "sectionTitle": "Employee",
     "component": [
         {
             "type": "textbox",
