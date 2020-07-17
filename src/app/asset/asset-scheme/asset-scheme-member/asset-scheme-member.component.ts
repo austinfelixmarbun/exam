@@ -41,19 +41,7 @@ export class AssetSchemeMemberComponent implements OnInit {
     critObj.propName = 'ASD.ASSET_SCHM_H_ID';
     critObj.value = this.AssetSchmHId.toString();
 
-    var critObjIsActive = new CriteriaObj();
-    critObjIsActive.restriction = AdInsConstant.RestrictionEq;
-    critObjIsActive.propName = 'AM.IS_ACTIVE';
-    critObjIsActive.value = "true";
-
-    var critObjIsFinal = new CriteriaObj();
-    critObjIsFinal.restriction = AdInsConstant.RestrictionEq;
-    critObjIsFinal.propName = 'AM.IS_FINAL';
-    critObjIsFinal.value = "true";
-
     this.arrCrit.push(critObj);
-    this.arrCrit.push(critObjIsActive);
-    this.arrCrit.push(critObjIsFinal);
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
 }

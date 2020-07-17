@@ -1,5 +1,4 @@
 {
-    "title": "Branch Office Member Search",
     "keyProperty": "RefOfficeId",
     "keyPropCriteria": "REF_OFFICE_ID",
     "component": [
