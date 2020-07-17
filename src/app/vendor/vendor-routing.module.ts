@@ -30,6 +30,8 @@ import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch
 import { VendorBranchOfficeMemberAddComponent } from './vendor-branch/vendor-branch-office-member-add/vendor-branch-office-member-add.component';
 import { VendorBranchViewComponent } from './vendor-branch/vendor-branch-view/vendor-branch-view.component';
 import { VendorPagingComponent } from './component/vendor/vendor-paging/vendor-paging.component';
+import { VendorATPMAddEditComponent } from './vendor-ATPM/vendor-atpm-add-edit/vendor-atpm-add-edit.component';
+import { VendorATPMRegistrationComponent } from './vendor-ATPM/vendor-atpm-registration/vendor-atpm-registration.component';
 
 const routes: Routes = [
   {
@@ -231,7 +233,21 @@ const routes: Routes = [
         data: {
           title: 'Vendor Branch Member Add'
         },
-      }
+      },
+      {
+        path: 'ATPM/Detail',
+        component: VendorATPMAddEditComponent,
+        data: {
+          title: 'Vendor ATPM Detail'
+        },
+      },
+      {
+        path: 'ATPM/Registration',
+        component: VendorATPMRegistrationComponent,
+        data: {
+          title: 'Vendor ATPM Registration'
+        },
+      },
     ]
 
   }
