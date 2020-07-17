@@ -1,50 +1,42 @@
-<div class="row text-left">
-  <div class="col-md-12">
-    <div class="card">
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
       <div class="card-header header-title">
         <div class="row">
-          <div class="col-md-12">
-            <div class="ucSearch-Button-Right">
-              <span class="mr-1 ">
-                <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/CommonSetting/Holiday']">
-                  <i class="far fa-window-close"></i> Cancel
-                </button>
-              </span>
-            </div>
-            <h4 class="card-title" translate>HOLIDAY MANAGEMENT</h4>
-            <hr>
+          <div class="col-md-8">
+            <h4 class="form-section card-title" translate>Holiday Management</h4>
           </div>
         </div>
       </div>
-
-      <div class="card-body">
-        <div class="px-3">
-          <lib-ucSubsection [id]="'subsectionExistingHolidaySchemeId'" [title]="title"
-            [panel]="'subsectionExistingHolidayScheme'"></lib-ucSubsection>
-          <div id="subsectionExistingHolidayScheme" class="px-3">
-            <form class="form form-horizontal" [formGroup]="HolidayManagementForm" #HolidayManagement="ngForm">
-              <div class="form-body">
-                <div class="form-group row">
-                  <label class="col-md-3 adInsLabel">Existing Holiday Scheme </label>
-                  <div class="col-md-3">
-                    <lib-uclookupgeneric [enjiForm]="HolidayManagement" [lookupInput]="inputPagingObjHolidayScheme"
-                      [parentForm]="HolidayManagementForm" [identifier]="'lookupValueHolidayScheme'"
-                      (lookup)="getHolidaySchmHId($event)"></lib-uclookupgeneric>
-                  </div>
-                  <button type="button" class="btn btn-raised btn-primary" (click)="Copy()">
-                    <i class="far fa-check-square"></i> Copy
-                  </button>
+      <div class="ucSearch-Button-Right">
+        <span class="mr-1">
+          <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/CommonSetting/Holiday']">
+            <i class="far fa-window-close"></i> Cancel
+          </button>
+          <button type="button" class="btn btn-raised btn-primary mr-1" (click)="AddNavigate()">
+            <i class="fa fa-plus"></i> Add
+          </button>
+        </span>
+      </div>
+      <div class="px-3">
+        <lib-ucSubsection [id]="'subsectionExistingHolidaySchemeId'" [title]="title"
+          [panel]="'subsectionExistingHolidayScheme'"></lib-ucSubsection>
+        <div id="subsectionExistingHolidayScheme">
+          <form class="form form-horizontal" [formGroup]="HolidayManagementForm" #HolidayManagement="ngForm">
+            <div class="form-body">
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel">Existing Holiday Scheme </label>
+                <div class="col-md-3">
+                  <lib-uclookupgeneric [enjiForm]="HolidayManagement" [lookupInput]="inputPagingObjHolidayScheme"
+                    [parentForm]="HolidayManagementForm" [identifier]="'lookupValueHolidayScheme'"
+                    (lookup)="getHolidaySchmHId($event)"></lib-uclookupgeneric>
                 </div>
+                <button type="button" class="btn btn-raised btn-primary" (click)="Copy()">
+                  <i class="far fa-check-square"></i> Copy
+                </button>
               </div>
-              <div class="ucSearch-Button-Right">
-                <span class="mr-1">
-                  <button type="button" class="btn btn-raised btn-primary mr-1" (click)="AddNavigate()">
-                    <i class="fa fa-plus"></i> Add
-                  </button>
-                </span>
-              </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
       <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>

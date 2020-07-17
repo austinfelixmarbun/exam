@@ -1,49 +1,54 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
-      <div class="px-3">
-        <!-- <h4 class="form-section card-title" translate><i class="ft-file-text"></i>ROLE</h4> -->
-        <div class="addEdit">
-          <form class="form form-horizontal" [formGroup]="RefRoleForm" (ngSubmit)="RefRoleForm.valid && SaveForm()"
-                #enjiForm="ngForm">
-            <lib-ucSubsection [id]="'RoleInfoId'" [title]="title" [panel]="'RoleInfo'"></lib-ucSubsection>
-            <div class="form-body" id="RoleInfo">
-              
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel" translate>Role Code </label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput code" formControlName="RoleCode"
-                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefRoleForm.controls.RoleCode.invalid }">
-                  <lib-uc-show-errors [control]="RefRoleForm.controls.RoleCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                </div>
-              </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3  adInsLabel " translate>Role Name </label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput name" formControlName="RoleName"
-                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefRoleForm.controls.RoleName.invalid }">
-                  <lib-uc-show-errors [control]="RefRoleForm.controls.RoleName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3  adInsLabel" translate>Active </label>
-                <div class="col-md-9">
-                  <input class="border-primary" type="checkbox" data-md-icheck
-                         formControlName="IsActive" />
-                </div>
-              </div>
-            </div>
-            <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/SystemSetting/Role']"
-                translate>
-                <i class="far fa-window-close"></i> Cancel
-              </button>
-              <button type="submit" class="btn btn-raised btn-primary" translate>
-                <i class="far fa-check-square"></i> Save
-              </button>
-            </div>
-          </form>
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="form-section card-title" translate>Role Registration</h4>
+          </div>
         </div>
+      </div>
+      <div class="px-3">
+        <form class="form form-horizontal" [formGroup]="RefRoleForm" (ngSubmit)="RefRoleForm.valid && SaveForm()"
+          #enjiForm="ngForm">
+          <lib-ucSubsection [id]="'RoleInfoId'" [title]="title" [panel]="'RoleInfo'"></lib-ucSubsection>
+          <div class="form-body" id="RoleInfo">
+
+            <div class="form-group row adins-required">
+              <label class="col-md-3  adInsLabel" translate>Role Code </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control adInsInput code" formControlName="RoleCode"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefRoleForm.controls.RoleCode.invalid }">
+                <lib-uc-show-errors [control]="RefRoleForm.controls.RoleCode" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+            <div class="form-group row adins-required">
+              <label class="col-md-3  adInsLabel " translate>Role Name </label>
+              <div class="col-md-9">
+                <input type="text" class="form-control adInsInput name" formControlName="RoleName"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefRoleForm.controls.RoleName.invalid }">
+                <lib-uc-show-errors [control]="RefRoleForm.controls.RoleName" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3  adInsLabel" translate>Active </label>
+              <div class="col-md-9">
+                <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsActive" />
+              </div>
+            </div>
+          </div>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/SystemSetting/Role']"
+              translate>
+              <i class="far fa-window-close"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary" translate>
+              <i class="far fa-check-square"></i> Save
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

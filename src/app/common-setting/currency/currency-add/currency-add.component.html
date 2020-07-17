@@ -1,18 +1,26 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="form-section card-title" translate>Currency Registration</h4>
+          </div>
+        </div>
+      </div>
       <div class="px-3">
-        <div class="addEdit">
-          <form class="form form-horizontal" [formGroup]="RefCurrForm" (ngSubmit)="RefCurrForm.valid && SaveForm()"
-            #enjiForm="ngForm">
-            <div class="form-body">
-              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Currency {{this.pageType}}</h4>
+        <form class="form form-horizontal" [formGroup]="RefCurrForm" (ngSubmit)="RefCurrForm.valid && SaveForm()"
+          #enjiForm="ngForm">
+          <div class="form-body">
+            <lib-ucSubsection [id]="'CurrencyInfoId'" [title]="'Currency '+ pageType" [panel]="'CurrencyInfo'"></lib-ucSubsection>
+            <div id="CurrencyInfo">
               <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" translate>Currency Code </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput code" formControlName="CurrCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefCurrForm.controls.CurrCode.invalid }">
-                  <lib-uc-show-errors [control]="RefCurrForm.controls.CurrCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                  <lib-uc-show-errors [control]="RefCurrForm.controls.CurrCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <!-- <div class="form-group row adins-required">
@@ -33,7 +41,8 @@
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput name" formControlName="CurrName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefCurrForm.controls.CurrName.invalid }">
-                  <lib-uc-show-errors [control]="RefCurrForm.controls.CurrName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                  <lib-uc-show-errors [control]="RefCurrForm.controls.CurrName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <!--<div class="form-group row">
@@ -57,7 +66,8 @@
                 <div class="col-md-9">
                   <textarea class="form-control adInsInput" formControlName="RegRptCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefCurrForm.controls.RegRptCode.invalid }"></textarea>
-                  <lib-uc-show-errors [control]="RefCurrForm.controls.RegRptCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                  <lib-uc-show-errors [control]="RefCurrForm.controls.RegRptCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
@@ -67,17 +77,17 @@
                 </div>
               </div>
             </div>
-            <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1"
-                [routerLink]="['/CommonSetting/Currency/Paging']" translate>
-                <i class="far fa-window-close"></i> Cancel
-              </button>
-              <button type="submit" class="btn btn-raised btn-primary" translate>
-                <i class="far fa-check-square"></i> Save
-              </button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1"
+              [routerLink]="['/CommonSetting/Currency/Paging']" translate>
+              <i class="far fa-window-close"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary" translate>
+              <i class="far fa-check-square"></i> Save
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
