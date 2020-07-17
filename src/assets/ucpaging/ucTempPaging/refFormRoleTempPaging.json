@@ -1,5 +1,4 @@
 {
-    "title": "Role Search",
     "keyProperty": "RefRoleId",
     "keyPropCriteria": "REF_ROLE_ID",
     "component": [

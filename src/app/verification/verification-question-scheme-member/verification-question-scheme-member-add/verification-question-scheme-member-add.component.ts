@@ -7,12 +7,10 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfSchemeDObj } from 'app/shared/model/VerfSchemeDObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { UcgridfooterComponent } from '@adins/ucgridfooter';
-import { UCSearchComponent } from '@adins/ucsearch';
-import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-verification-question-scheme-member-add',
@@ -25,7 +23,7 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
   verfSchemeDObj: VerfSchemeDObj;
   VerfSchemeHId: number;
-
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -34,7 +32,8 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.viewObj = "./assets/ucviewgeneric/viewVerifQuestSchmMbr.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVerifQuestSchmMbr.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/verifQuestionSchmMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;

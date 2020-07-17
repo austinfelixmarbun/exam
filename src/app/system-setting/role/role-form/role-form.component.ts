@@ -12,6 +12,7 @@ import { URLConstant } from "app/shared/constant/URLConstant";
 import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
 import { UcTempPagingObj } from "app/shared/model/TempPaging/UcTempPagingObj.model";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
+import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
 
 @Component({
   selector: 'app-role-form',
@@ -77,7 +78,7 @@ export class RoleFormComponent implements OnInit {
 
   SaveListAuthForm() {
     if (this.listSelectedId.length == 0) {
-      this.toastr.errorMessage('Please Add At Least One Data');
+      this.toastr.errorMessage(ExceptionConstant.ADD_MIN_1_DATA);
       return;
     }
 

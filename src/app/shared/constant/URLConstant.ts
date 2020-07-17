@@ -514,6 +514,8 @@ export class URLConstant {
     public static DeleteVendorHO = "/Vendor/DeleteVendorHO";
     public static AddVendorHolding = environment.FoundationR3Url + "/Vendor/AddVendorHolding";
     public static EditVendorHolding = environment.FoundationR3Url + "/Vendor/EditVendorHolding";
+    public static AddVendorATPM = environment.FoundationR3Url + "/Vendor/AddVendorATPM";
+    public static EditVendorATPM = environment.FoundationR3Url + "/Vendor/EditVendorATPM";
     public static GetVendorAndVendorAddr = environment.FoundationR3Url + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
     public static GetVendorByVendorId = environment.FoundationR3Url + "/Vendor/GetVendorByVendorId";
     public static AddVendorAddr = environment.FoundationR3Url + "/VendorAddr/AddVendorAddr";
