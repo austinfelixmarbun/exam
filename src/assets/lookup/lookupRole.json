@@ -1,6 +1,6 @@
 {
   "url": "",
-  "title":"Lookup Role",
+  "sectionTitle":"Lookup Role",
   "component": [
     {
       "type": "textbox",

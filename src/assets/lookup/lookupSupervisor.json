@@ -1,6 +1,6 @@
 {
     "url": "",
-    "title":"Lookup Supervisor",
+    "sectionTitle":"Lookup Supervisor",
     "component": [
       {
         "type": "textbox",

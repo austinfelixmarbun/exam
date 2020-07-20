@@ -49,11 +49,11 @@ export class SidebarComponent implements OnInit {
             this.menuItems = JSON.parse(localStorage.getItem(CommonConstant.MENU));
         }
     }
-    genParam(params: [{ 'attr': string, 'value': string }]) {
+    genParam(params: [{ 'Attr': string, 'Value': string }]) {
         var arrList = {};
         if(params != undefined){
             for (var i = 0; i < params.length; i++) {
-                arrList[params[i].attr] = params[i].value;
+                arrList[params[i].Attr] = params[i].Value;
             }
         }
         return arrList;
