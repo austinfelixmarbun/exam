@@ -45,6 +45,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
   listSelectedId: Array<number> = [];
   checkboxAll: boolean = false;
   listAssetMasterAttrContent: Array<Object>;
+  isReadyAssetMasterAttr: boolean = false;
 
   AssetMasterChildForm = this.fb.group({
     AssetCategoryId: [''],
@@ -153,6 +154,23 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 (error) => {
                   console.log(error);
                 });
+
+              if (this.isFinal){
+                this.http.post(URLConstant.GetAssetMasterAttrContentForAssetMaster, { AssetMasterId: this.AssetMasterId }).pipe(first()).subscribe(
+                  (response) => {
+                    this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
+                    var formGroupObject = new Object();
+                    for (const masterAttr of this.listAssetMasterAttrContent) {
+                      formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AttrContent"], [Validators.required]];
+                    }
+                    this.AssetMasterChildForm.addControl("AssetMasterAttrContent", this.fb.group(formGroupObject));
+                    this.isReadyAssetMasterAttr = true;
+                  },
+                  (error) => {
+                    console.log(error);
+                  }
+                );
+              }
             });
 
           this.assetSchmListDObj = new AssetSchmListObj();
@@ -229,6 +247,23 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 (error) => {
                   console.log(error);
                 });
+
+              if (this.isFinal){
+                this.http.post(URLConstant.GetAssetMasterAttrContentForAssetMaster, { AssetMasterId: this.AssetMasterId }).pipe(first()).subscribe(
+                  (response) => {
+                    this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
+                    var formGroupObject = new Object();
+                    for (const masterAttr of this.listAssetMasterAttrContent) {
+                      formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AttrContent"], [Validators.required]];
+                    }
+                    this.AssetMasterChildForm.addControl("AssetMasterAttrContent", this.fb.group(formGroupObject));
+                    this.isReadyAssetMasterAttr = true;
+                  },
+                  (error) => {
+                    console.log(error);
+                  }
+                );
+              }
             });
 
           this.assetSchmListDObj = new AssetSchmListObj();
@@ -249,21 +284,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
         }
       );
     }
-
-    this.http.post(URLConstant.GetAssetMasterAttrContentForAssetMaster, { AssetMasterId: this.AssetMasterId }).pipe(first()).subscribe(
-      (response) => {
-        this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
-        console.log("listAssetMasterAttrContent: " + JSON.stringify(this.listAssetMasterAttrContent));
-        var formGroupObject = new Object();
-        for (const masterAttr of this.listAssetMasterAttrContent) {
-          formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AttrContent"], [Validators.required]];
-        }
-        this.AssetMasterChildForm.addControl("AssetMasterAttrContent", this.fb.group(formGroupObject));
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
   }
 
   SplitAttrListValue(value){
