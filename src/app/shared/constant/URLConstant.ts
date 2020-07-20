@@ -328,6 +328,8 @@ export class URLConstant {
     public static GetListAssetMasterByAssetSchmHId = environment.FoundationR3Url + "/AssetMaster/GetListAssetMasterByAssetSchmHId";
     public static EditListAssetSchmDByAssetMasterId = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmDByAssetMasterId";
     public static GetUploadAssetMasterByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + '/AssetMaster/GetUploadAssetMasterByUploadMonitoringNoAndTrxType';
+    public static AddAssetMasterAttrContent = environment.FoundationR3Url + "/AssetMasterAttrContent/AddAssetMasterAttrContent";
+    public static GetAssetMasterAttrContentForAssetMaster = environment.FoundationR3Url + "/AssetMasterAttrContent/GetAssetMasterAttrContentForAssetMaster";
 
     //REF ATTR
     public static GetListActiveRefAttrType = environment.FoundationR3Url + "/RefAttrType/GetListActiveRefAttrType";
