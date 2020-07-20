@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-personal-main-info',
@@ -61,38 +61,38 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
     this.KTP = RefMasterConstant.EKtp;
-    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
   }
 
   ngOnInit() {
     this.VipNotesRequired = true;
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDtMin = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
-    this.businessDtMax = new Date(context["BusinessDt"]);
+    this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
 
 
     var refMasterObj = {
-      RefMasterTypeCode: "GENDER",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObj).subscribe(
       (response) => {
-        this.tempGender = response["ReturnObject"];
+        this.tempGender = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
           Gender: this.tempGender[0].Key
         });
       }
     );
     var refMasterObjMrIdTypeCode = {
-      RefMasterTypeCode: "ID_TYPE",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
-        this.tempIdType = response["ReturnObject"];
+        this.tempIdType = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
           MrIdTypeCode: this.tempIdType[0].Key
         });
@@ -107,14 +107,14 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
       }
     );
     var refMasterObjCustModel = {
-      RefMasterTypeCode: "CUST_MODEL",
-      ReserveField1: "PERSONAL",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      ReserveField1: CommonConstant.CustTypePersonal,
       RowVersion: ""
     }
 
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
       (response) => {
-        this.tempCustModel = response["ReturnObject"];
+        this.tempCustModel = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
           CustModel: this.tempCustModel[0].Key
         });

@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-verification-question-group-paging',
-  templateUrl: './verification-question-group-paging.component.html',
-  styleUrls: ['./verification-question-group-paging.component.scss']
+  templateUrl: './verification-question-group-paging.component.html'
 })
 export class VerificationQuestionGroupPagingComponent implements OnInit {
 
@@ -16,8 +15,8 @@ export class VerificationQuestionGroupPagingComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/verification/searchVerificationQuestionGroupForPaging.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/verification/searchVerificationQuestionGroupForPaging.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteVerfQuestionGroupHById;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteVerfQuestionGroupHById;
   }
 }

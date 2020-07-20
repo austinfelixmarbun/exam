@@ -6,11 +6,13 @@ import { NgForm } from "@angular/forms";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { HttpClient } from "@angular/common/http";
+import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
+import { CommonConstant } from "app/shared/constant/CommonConstant";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Component({
   selector: "app-org-add-edit",
   templateUrl: "./org-add-edit.component.html",
-  styleUrls: ["./org-add-edit.component.scss"],
   providers: [NGXToastrService]
 })
 export class OrgAddEditComponent implements OnInit {
@@ -18,7 +20,7 @@ export class OrgAddEditComponent implements OnInit {
   apiUrl: any;
   parents: any;
   orgObj: OrganizationObj;
-  pageType:any;
+  pageType: any;
 
   param: string;
   mode: string = "add";
@@ -26,7 +28,7 @@ export class OrgAddEditComponent implements OnInit {
   parentId: any;
   orgName: any;
   hierarchyNo: any;
-  isActive: boolean=true;
+  isActive: boolean = true;
   result: any;
   GetUrl: any;
 
@@ -59,11 +61,11 @@ export class OrgAddEditComponent implements OnInit {
       (OrgObjectForm.value.parentId == undefined ||
         OrgObjectForm.value.parentId == "None")
     ) {
-      this.service.typeErrorCustom("Must Have Parent");
+      this.service.typeErrorCustom(ExceptionConstant.MUST_HAVE_PARENT);
     } else {
-      this.GetUrl = this.foundationUrl + AdInsConstant.GetRefOrg;
+      this.GetUrl = this.foundationUrl + URLConstant.GetRefOrg;
       if (this.mode != "edit") {
-        this.apiUrl = this.foundationUrl + AdInsConstant.AddRefOrg;
+        this.apiUrl = this.foundationUrl + URLConstant.AddRefOrg;
 
         //GENERATE OBJECT
         this.orgObj = new OrganizationObj();
@@ -74,9 +76,9 @@ export class OrgAddEditComponent implements OnInit {
           this.orgObj.parentId = OrgObjectForm.value.parentId;
         }
         if (OrgObjectForm.value.isActive) {
-          this.orgObj.isActive = "1";
+          this.orgObj.isActive = CommonConstant.TRUE_CONDITION;
         } else {
-          this.orgObj.isActive = "0";
+          this.orgObj.isActive = CommonConstant.FALSE_CONDITION;
         }
         var orgObjParent = { RefOrgId: OrgObjectForm.value.parentId != null ? OrgObjectForm.value.parentId : 1 }
         this.http.post(this.GetUrl, orgObjParent).subscribe(
@@ -108,7 +110,7 @@ export class OrgAddEditComponent implements OnInit {
 
       } else {
         this.apiUrl =
-          this.foundationUrl + AdInsConstant.EditRefOrg;
+          this.foundationUrl + URLConstant.EditRefOrg;
 
         //GENERATE OBJECT
         this.orgObj.oldParentId = this.orgObj.parentId;
@@ -120,9 +122,9 @@ export class OrgAddEditComponent implements OnInit {
           this.orgObj.parentId = OrgObjectForm.value.parentId;
         }
         if (OrgObjectForm.value.isActive) {
-          this.orgObj.isActive = "1";
+          this.orgObj.isActive = CommonConstant.TRUE_CONDITION;
         } else {
-          this.orgObj.isActive = "0";
+          this.orgObj.isActive = CommonConstant.FALSE_CONDITION;
         }
         var orgObjParent = { RefOrgId: OrgObjectForm.value.parentId != null ? OrgObjectForm.value.parentId : 1 }
         this.http.post(this.GetUrl, orgObjParent).subscribe(
@@ -153,7 +155,7 @@ export class OrgAddEditComponent implements OnInit {
   }
 
   GetListParents() {
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetListAllRefOrg;
+    this.apiUrl = this.foundationUrl + URLConstant.GetListAllRefOrg;
     var organizationObj = new OrganizationObj();
     this.http.post(this.apiUrl, organizationObj).subscribe(
       response => {
@@ -165,7 +167,7 @@ export class OrgAddEditComponent implements OnInit {
   }
 
   FillFormEdit() {
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefOrg;
+    this.apiUrl = this.foundationUrl + URLConstant.GetRefOrg;
     this.orgObj = new OrganizationObj();
     this.orgObj.refOrgId = +this.param;
 
@@ -173,7 +175,7 @@ export class OrgAddEditComponent implements OnInit {
       response => {
         this.orgObj = response["returnObject"];
 
-        if (this.orgObj.isActive == "1") {
+        if (this.orgObj.isActive == CommonConstant.TRUE_CONDITION) {
           this.isActive = true;
         } else {
           this.isActive = false;

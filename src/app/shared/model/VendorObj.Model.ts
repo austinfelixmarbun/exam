@@ -1,27 +1,28 @@
 export class VendorObj{
-    VendorId: any;
-    MrVendorCategoryCode: any;
-    VendorCode: any;
-    VendorName: any;
-    MrVendorTypeCode: any;
-    RegistrationNo: any;
-    LicenseNo: any;
-    MrIdTypeCode: any;
-    IdNo: any;
-    MobilePhnNo1: any;
-    MobilePhnNo2: any;
-    Email: any;
+    VendorId: number;
+    MrVendorCategoryCode: string;
+    VendorCode: string;
+    VendorName: string;
+    MrVendorTypeCode: string;
+    RegistrationNo: string;
+    LicenseNo: string;
+    MrIdTypeCode: string;
+    IdNo: string;
+    MobilePhnNo1: string;
+    MobilePhnNo2: string;
+    Email: string;
     VendorRating: any;
     EstablishmentDt: any;
     PartnershipDt: any;
     IsActive: any;
-    VendorParentId : any;
-    MrTaxCalcMethodCode: any;
+    VendorParentId : number;
+    MrTaxCalcMethodCode: string;
     IsVat: any;
-    TaxpayerNo: any;
-    TaxpayerName: any;
-    MrVendorClass: any;
+    TaxpayerNo: string;
+    TaxpayerName: string;
+    MrVendorClass: string;
     RowVersion: any;
     IsNpwpExist: boolean;
+    VendorAtpmCode: string;
     constructor() { this.VendorId = 0; }
 }

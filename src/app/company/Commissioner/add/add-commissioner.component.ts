@@ -8,6 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { CoyCommissionerObj } from 'app/shared/model/CoyCommissionerObj.Model';
 import { UcInfoComponent } from 'app/shared/UserControl/uc-info/uc-info.component';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
     selector: 'add-commissioner',
@@ -49,7 +50,7 @@ export class CommissionerAddComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.idTypeUrl = this.settingUrl + AdInsConstant.GetRefMasterList;
+        this.idTypeUrl = this.settingUrl + URLConstant.GetRefMasterList;
         var refMasterObj = new RefMasterObj();
         // refMasterObj.refMasterTypeCode = "ID_TYPE";
         this.http.post(this.idTypeUrl, refMasterObj).subscribe(
@@ -59,7 +60,7 @@ export class CommissionerAddComponent implements OnInit {
             }
         );
         if (this.mode == "edit") {
-            this.apiUrl = this.foundationUrl + AdInsConstant.GetCoyCommissioner;
+            this.apiUrl = this.foundationUrl + URLConstant.GetCoyCommissioner;
             var coyCommissionerObj = new CoyCommissionerObj();
             coyCommissionerObj.coyCommissionerId = this.param;
             this.http.post(this.apiUrl, coyCommissionerObj).subscribe(
@@ -129,7 +130,7 @@ export class CommissionerAddComponent implements OnInit {
 
             console.log(coyCommisionerObj);
             if (this.mode == "edit") {
-                this.editUrl = this.foundationUrl + AdInsConstant.EditCoyCommissioner;
+                this.editUrl = this.foundationUrl + URLConstant.EditCoyCommissioner;
                 coyCommisionerObj.coyCommissionerId = this.param;
                 this.http.post(this.editUrl, coyCommisionerObj).subscribe(
                     (response) => {
@@ -142,7 +143,7 @@ export class CommissionerAddComponent implements OnInit {
                     });
             }
             else {
-                this.editUrl = this.foundationUrl + AdInsConstant.AddCoyCommissioner;
+                this.editUrl = this.foundationUrl + URLConstant.AddCoyCommissioner;
                 this.http.post(this.editUrl, coyCommisionerObj).subscribe(
                     (response) => {
                         console.log(response);

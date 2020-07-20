@@ -6,6 +6,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { WizardComponent } from 'angular-archwizard';
 import { saveAs } from 'file-saver';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-product-component-HO',
@@ -42,8 +44,8 @@ export class ProductComponentHOComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.UrlGetProdCompGrouped = AdInsConstant.GetProductHOComponentGrouped;
-    this.UrlPostAddEditProdD = AdInsConstant.AddOrEditProductDetail;
+    this.UrlGetProdCompGrouped = URLConstant.GetProductHOComponentGrouped;
+    this.UrlPostAddEditProdD = URLConstant.AddOrEditProductDetail;
 
     this.FormProdComp = this.fb.group(
       {
@@ -118,7 +120,7 @@ export class ProductComponentHOComponent implements OnInit {
       var payload = JSON.parse(obj.ProdCompntDtaValue);
       await this.http.post(url, payload).toPromise().then(
         (response) => {
-          this.dictOptions[obj.RefProdCompntCode] = response["ReturnObject"];
+          this.dictOptions[obj.RefProdCompntCode] = response[CommonConstant.ReturnObj];
         },
         (error) => {
           console.log(error);
@@ -131,10 +133,10 @@ export class ProductComponentHOComponent implements OnInit {
     var bhvrTypeCode = obj.BehaviourType;
     if(this.dictBehaviour[bhvrTypeCode] == undefined)
     {
-      var url = AdInsConstant.GetRefBehaviourByBehaviourTypeCode;
+      var url = URLConstant.GetRefBehaviourByBehaviourTypeCode;
       await this.http.post(url, { RowVersion : "", BehaviourTypeCode : bhvrTypeCode}).toPromise().then(
         (response) => {
-          this.dictBehaviour[bhvrTypeCode] = response["ReturnObject"];
+          this.dictBehaviour[bhvrTypeCode] = response[CommonConstant.ReturnObj];
         },
         (error) => {
           console.log(error);
@@ -153,8 +155,8 @@ export class ProductComponentHOComponent implements OnInit {
     this.http.post(this.UrlGetProdCompGrouped, ProdHOComponent).toPromise().then(
       async (response) => {
         console.log(response);
-        for (var i = 0; i < response["ReturnObject"].length; i++) {
-          var group = response["ReturnObject"][i];
+        for (var i = 0; i < response[CommonConstant.ReturnObj].length; i++) {
+          var group = response[CommonConstant.ReturnObj][i];
           var fa_group = this.FormProdComp.controls['groups'] as FormArray;
           fa_group.push(this.addGroup(group.GroupCode, group.GroupName));
 
@@ -264,7 +266,7 @@ export class ProductComponentHOComponent implements OnInit {
   }
   DownloadRule(CompntValue, CompntValueDesc) {
     this.DlRuleObj.CompntValue = CompntValue;
-    this.http.post(AdInsConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
+    this.http.post(URLConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
       response => {
         saveAs(response, CompntValueDesc + '.xlsx');
       },

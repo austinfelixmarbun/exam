@@ -1,16 +1,16 @@
 <div class="card">
   <div class="card-body">
-    <lib-ucviewgeneric [viewInput]="viewObj"> </lib-ucviewgeneric>
+    <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
     <lib-ucaddtotemp *ngIf="tempPagingObj.isReady" [tempPagingObj]="tempPagingObj" (callback)="getListTemp($event)">
     </lib-ucaddtotemp>
     <div class="card-header">
       <div class="text-right">
         <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Verification/QuestionSchemeMemberPaging']"
         [queryParams]="{VerfSchemeHId:VerfSchemeHId}" translate>
-          <i class="fa fa-arrow-left"></i> Back
+          <i class="far fa-window-close"></i> Cancel
         </button>
         <button type="submit" (click)="SaveQuestionSchemeMember()" class="btn btn-raised btn-primary" translate>
-          <i class="far fa-check-square"></i> Submit
+          <i class="far fa-check-square"></i> Save
         </button>
       </div>
     </div>

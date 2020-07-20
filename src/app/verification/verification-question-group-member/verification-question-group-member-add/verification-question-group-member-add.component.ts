@@ -8,12 +8,15 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionGrpHObj } from 'app/shared/model/VerfQuestionGrpHObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { VerfQuestionGrpDObj } from 'app/shared/model/VerfQuestionGrpDObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-verification-question-group-member-add',
   templateUrl: './verification-question-group-member-add.component.html',
-  styleUrls: ['./verification-question-group-member-add.component.scss']
+  providers: [NGXToastrService]
 })
 export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   viewObj: any;
@@ -22,6 +25,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   verfQuestionGrpDObj: VerfQuestionGrpDObj;
   VerfQuestionGrpHId: number;
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -33,30 +37,31 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   })
 
   ngOnInit() {
-    this.viewObj = "./assets/ucviewgeneric/viewVerifQuestGrpMbr.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVerifQuestGrpMbr.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/verifQuestionGrpMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/verifQuestionGrpMbrTempPaging.json";
-    this.tempPagingObj.ddlEnvironments = 
-    [
-      {
-        name: "VQA.REF_VERF_ANSWER_TYPE_ID",
-        environment: environment.FoundationR3Url
-      }
-    ];
-    
+    this.tempPagingObj.ddlEnvironments =
+      [
+        {
+          name: "VQA.REF_VERF_ANSWER_TYPE_ID",
+          environment: environment.FoundationR3Url
+        }
+      ];
+
     this.GetListVerfQuestionGrpDByVerfQuestionGrpHId();
   }
 
   GetListVerfQuestionGrpDByVerfQuestionGrpHId() {
-    this.http.post(AdInsConstant.GetActiveVerfQuestionGrpDForUpdateByGrpHId,{ VerfQuestionGrpHId: this.VerfQuestionGrpHId }).subscribe(
+    this.http.post(URLConstant.GetActiveVerfQuestionGrpDForUpdateByGrpHId, { VerfQuestionGrpHId: this.VerfQuestionGrpHId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
 
-        for (let index = 0; index < response["ReturnObject"].length; index++) {
-          arrMemberList.push(response["ReturnObject"][index].VerfQuestionAnswerId)
+        for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
+          arrMemberList.push(response[CommonConstant.ReturnObj][index].VerfQuestionAnswerId)
         }
 
         if (arrMemberList.length != 0) {
@@ -90,7 +95,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
     this.verfQuestionGrpDObj.VerfQuestionGrpDId = "0";
     this.verfQuestionGrpDObj.ListVerfQuestionAnswerId = this.listSelectedId;
 
-    this.http.post(AdInsConstant.AddListVerfQuestionGrpD, this.verfQuestionGrpDObj).subscribe(
+    this.http.post(URLConstant.AddListVerfQuestionGrpD, this.verfQuestionGrpDObj).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(["/Verification/QuestionGroupMemberPaging"], { queryParams: { "VerfQuestionGrpHId": this.VerfQuestionGrpHId } });
@@ -100,5 +105,4 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
       }
     );
   }
-
 }

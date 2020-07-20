@@ -1,8 +1,13 @@
+<span [ngStyle]="{'color': color}">
+  <i class="font-medium-3 mr-2 fa fa-circle"></i>
+</span>
+
+<input type="text" [(ngModel)]="color">
 <!-- UC View Generic -->
-<app-uc-view [viewGenericObj]="viewGenericObj"></app-uc-view>
+<!-- <app-uc-view [viewGenericObj]="viewGenericObj"></app-uc-view> -->
 
 <!-- UC Add To Temp -->
-<div class="card">
+<!-- <div class="card">
   <div class="card-header">
     <h4 class="card-title" translate> Vendor Scheme Member </h4>
   </div>
@@ -14,7 +19,7 @@
       <div class="text-right">
         <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/VendorScheme/Member']"
           [queryParams]="{VendorSchmId:VendorSchmId,MrVendorCategoryCode:MrVendorCategoryCode}" translate>
-          <i class="fa fa-arrow-left"></i> Back
+          <i class="far fa-window-close"></i> Cancel
         </button>
         <button type="submit" (click)="SaveVendorSchemeMember()" class="btn btn-raised btn-primary" translate>
           <i class="far fa-check-square"></i> Submit
@@ -22,4 +27,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

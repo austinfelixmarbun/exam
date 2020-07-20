@@ -3,14 +3,11 @@ import { environment } from 'environments/environment';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { Location } from '@angular/common';
 import { map, mergeMap } from 'rxjs/operators';
-import { RefEconomicSectorObj } from 'app/shared/model/RefEconomicSectorObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-ref-industry-type-detail',
@@ -56,23 +53,23 @@ export class RefIndustryTypeDetailComponent implements OnInit {
   ngOnInit() {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
-    this.inputLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
     this.inputLookupObj.genericJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
-    
+
     if (this.type == 'edit') {
       this.title = "Industry Type - Edit";
       this.refIndustryType = new RefIndustryTypeObj();
       this.refIndustryType.RefIndustryTypeId = this.RefIndustryTypeId;
-      this.httpClient.post(AdInsConstant.GetRefIndustryTypeById, this.refIndustryType).pipe(
-        map( response => {
+      this.httpClient.post(URLConstant.GetRefIndustryTypeById, this.refIndustryType).pipe(
+        map(response => {
           this.resultData = response;
           this.economicSectorObj = new RefIndustryTypeObj();
           this.economicSectorObj.RefEconomicSectorId = this.resultData.RefEconomicSectorId;
           return this.economicSectorObj;
         }),
-        mergeMap((economicSectorObj) => this.httpClient.post(AdInsConstant.GetRefEconomicSectorById, economicSectorObj))
+        mergeMap((economicSectorObj) => this.httpClient.post(URLConstant.GetRefEconomicSectorById, economicSectorObj))
       ).subscribe(
         (response2) => {
           this.economicSectorObj = response2;
@@ -93,7 +90,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     }
   }
 
-  getLookupResponse(e){
+  getLookupResponse(e) {
     this.RefIndustryTypeForm.patchValue({
       RefEconomicSectorId: e.RefEconomicSectorId,
     });
@@ -104,7 +101,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
 
     //MODE-ADD
     if (this.type != 'edit') {
-      this.httpClient.post(AdInsConstant.AddRefIndustryType, this.refIndustryType).subscribe(
+      this.httpClient.post(URLConstant.AddRefIndustryType, this.refIndustryType).subscribe(
         //SAVE
         (response) => {
           this.service.successMessage(response["Message"]);
@@ -118,7 +115,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     //MODE-EDIT
     else {
       //SAVE
-      this.httpClient.post(AdInsConstant.EditRefIndustryType, this.refIndustryType).subscribe(
+      this.httpClient.post(URLConstant.EditRefIndustryType, this.refIndustryType).subscribe(
         (response) => {
           this.service.successMessage(response["Message"]);
           this.router.navigate(['/CommonSetting/IndustryType/Paging']);
@@ -129,5 +126,4 @@ export class RefIndustryTypeDetailComponent implements OnInit {
       );
     }
   }
-
 }

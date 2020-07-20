@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-view-personal-customer-group',
-  templateUrl: './customer-view-personal-customer-group.component.html',
-  styleUrls: ['./customer-view-personal-customer-group.component.scss']
+  templateUrl: './customer-view-personal-customer-group.component.html'
 })
 export class CustomerViewPersonalCustomerGroupComponent implements OnInit {
   CustId: number;
-  GetListCustGrpForCustViewByCustIdUrl = AdInsConstant.GetListCustGrpForCustViewByCustId;
   responseObj: any;
 
   constructor(
@@ -26,9 +26,9 @@ export class CustomerViewPersonalCustomerGroupComponent implements OnInit {
       }
     });
     var custObj = { "CustId": this.CustId };
-    this.http.post(this.GetListCustGrpForCustViewByCustIdUrl, custObj).subscribe(
+    this.http.post(URLConstant.GetListCustGrpForCustViewByCustId, custObj).subscribe(
       response => {
-        this.responseObj = response['ReturnObject'];
+        this.responseObj = response[CommonConstant.ReturnObj];
       },
       error => {
         this.router.navigateByUrl('Error');

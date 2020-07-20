@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'uc-prod-comp',
@@ -85,7 +86,7 @@ export class UcProdCompComponent implements OnInit {
     var payload = JSON.parse(obj.ProdCompntDtaValue);
     await this.http.post(url, payload).toPromise().then(
       (response) => {
-        this.dictOptions[obj.RefProdCompntCode] = response["ReturnObject"];
+        this.dictOptions[obj.RefProdCompntCode] = response[CommonConstant.ReturnObj];
       },
       (error) => {
         console.log(error);
@@ -109,8 +110,8 @@ export class UcProdCompComponent implements OnInit {
         console.log(response)
 
 
-        for (var i = 0; i < response["ReturnObject"].length; i++) {
-          var group = response["ReturnObject"][i];
+        for (var i = 0; i < response[CommonConstant.ReturnObj].length; i++) {
+          var group = response[CommonConstant.ReturnObj][i];
           var fa_group = this.FormProdComp.controls['groups'] as FormArray;
           fa_group.push(this.addGroup(group.GroupCode, group.GroupName));
 

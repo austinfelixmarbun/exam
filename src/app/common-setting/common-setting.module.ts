@@ -50,6 +50,11 @@ import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { HolidayDetailEditComponent } from './holiday-scheme/holiday-detail-edit/holiday-detail-edit.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { ScoreCategoryPagingComponent } from './score-category/score-category-paging/score-category-paging';
+import { ScoreCategoryTypeComponent } from './score-category/score-category-type/score-category-type.component';
+import { ScoreCategoryScoringComponent } from './score-category/score-category-scoring/score-category-scoring.component';
+
 
 @NgModule({
   imports: [
@@ -68,7 +73,8 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
     UcSubsectionModule,
     UcviewgenericModule,
     UcShowErrorsModule,
-    UcSubsectionModule
+    UcSubsectionModule,
+    ColorPickerModule
   ],
   declarations: [
     MasterPagingComponent,
@@ -104,7 +110,10 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
     ZipcodeComponent,
     ZipcodeAddComponent,
     RefIndustryTypeDetailComponent,
-    HolidayDetailEditComponent
+    HolidayDetailEditComponent,
+    ScoreCategoryPagingComponent,
+    ScoreCategoryTypeComponent,
+    ScoreCategoryScoringComponent
   ],
   providers: [
     NGXToastrService,

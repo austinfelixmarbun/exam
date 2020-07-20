@@ -6,6 +6,7 @@ import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-review-upload-negative-customer-paging',
@@ -18,11 +19,11 @@ export class ReviewUploadNegativeCustomerPagingComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService){}
 
   ngOnInit() {
-    this.CancelUpload = AdInsConstant.CancelUpload;
+    this.CancelUpload = URLConstant.CancelUpload;
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadNegativeCustomer.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadNegativeCustomer.json";
     this.inputPagingObj.ddlEnvironments = [
       {

@@ -8,7 +8,9 @@ import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NotificationHObj } from 'app/shared/model/NotificationHObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-notification-approval-detail',
@@ -43,8 +45,8 @@ export class NotificationApprovalDetailComponent implements OnInit {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewNotificationOnApproval.json";
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
-    this.getUrl = this.settingUrl + AdInsConstant.GetNotificationHByNotificationHId;
-    this.submitUrl = this.settingUrl + AdInsConstant.EditNotificationH;
+    this.getUrl = this.settingUrl + URLConstant.GetNotificationHByNotificationHId;
+    this.submitUrl = this.settingUrl + URLConstant.EditNotificationH;
     this.notificationHObj = new NotificationHObj();
     this.notificationHObj.NotificationHId = this.NotificationHId;
     this.http.post(this.getUrl, this.notificationHObj).subscribe(
@@ -59,9 +61,9 @@ export class NotificationApprovalDetailComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchNotificationDOnApproval.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNotificationDOnApproval.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteNotificationD;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteNotificationD;
 
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
@@ -74,7 +76,7 @@ export class NotificationApprovalDetailComponent implements OnInit {
 
   SaveForm(event: any)
   {
-    var currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
+    var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     var notificationResultStat;
     var resultForMsg;
 

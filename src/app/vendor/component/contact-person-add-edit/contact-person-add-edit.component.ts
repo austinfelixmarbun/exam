@@ -8,6 +8,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-contact-person-add-edit',
@@ -20,7 +22,7 @@ export class ContactPersonAddEditComponent implements OnInit {
   @Output() objOutput: EventEmitter<any> = new EventEmitter();
   HiddenState: boolean = false;
   mode: string;
-  businessDt : Date;
+  businessDt: Date;
 
   title: string = "Contact Person Main Info";
   title2: string = "Contact Person Address Info";
@@ -55,16 +57,16 @@ export class ContactPersonAddEditComponent implements OnInit {
     this.mode = this.objInput["mode"];
     this.VendorContactPersonId = this.objInput["VendorContactPersonId"];
 
-    var context = JSON.parse(localStorage.getItem("UserAccess"));
-    this.businessDt = new Date(context["BusinessDt"]);
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
 
     var JobPosition = {
-      RefMasterTypeCode: "JOB_POSITION",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition,
       RowVersion: ""
     }
-    this.http.post(AdInsConstant.GetListActiveRefMaster, JobPosition).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, JobPosition).subscribe(
       (response) => {
-        this.itemJobPosition = response["ReturnObject"];
+        this.itemJobPosition = response[CommonConstant.ReturnObj];
         this.ContactPersonForm.patchValue({
           JobPosition: this.itemJobPosition[0].Key
         });
@@ -72,7 +74,7 @@ export class ContactPersonAddEditComponent implements OnInit {
     )
 
     this.inputZipcodeLookupObj.urlJson = "./assets/lookup/lookupZipcode.json";
-    this.inputZipcodeLookupObj.urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputZipcodeLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputZipcodeLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputZipcodeLookupObj.pagingJson = "./assets/lookup/lookupZipcode.json";
     this.inputZipcodeLookupObj.genericJson = "./assets/lookup/lookupZipcode.json";
@@ -80,7 +82,7 @@ export class ContactPersonAddEditComponent implements OnInit {
     if (this.mode == "edit") {
       var contactPerson = new VendorContactPersonObj();
       contactPerson.VendorContactPersonId = this.VendorContactPersonId;
-      await this.http.post(AdInsConstant.GetVendorContactPersonById, contactPerson).toPromise().then(
+      await this.http.post(URLConstant.GetVendorContactPersonById, contactPerson).toPromise().then(
         (response) => {
           this.result = response;
           this.ContactPersonForm.patchValue({
@@ -97,7 +99,7 @@ export class ContactPersonAddEditComponent implements OnInit {
             City: this.result.City,
             ProvDistrictName: this.result.Province
           })
-          this.inputZipcodeLookupObj.jsonSelect = {Zipcode: this.result.Zipcode};
+          this.inputZipcodeLookupObj.jsonSelect = { Zipcode: this.result.Zipcode };
           this.zipcodee = this.result.Zipcode;
         },
         (error) => {
@@ -129,7 +131,7 @@ export class ContactPersonAddEditComponent implements OnInit {
     this.zipcodee = ev.Zipcode;
   }
 
-  SaveForm() {    
+  SaveForm() {
     if (this.mode == "edit") {
       this.contactPersonObj = new VendorContactPersonObj();
       this.contactPersonObj.VendorContactPersonId = this.VendorContactPersonId;
@@ -148,7 +150,7 @@ export class ContactPersonAddEditComponent implements OnInit {
       this.contactPersonObj.Province = this.ContactPersonForm.controls.ProvDistrictName.value;
       this.contactPersonObj.Zipcode = this.zipcodee;
       this.contactPersonObj.RowVersion = this.result.RowVersion;
-      this.http.post(AdInsConstant.EditVendorContactPerson, this.contactPersonObj).subscribe(
+      this.http.post(URLConstant.EditVendorContactPerson, this.contactPersonObj).subscribe(
         (response) => {
           this.HiddenCheck();
           this.toastr.successMessage(response['message']);
@@ -176,7 +178,7 @@ export class ContactPersonAddEditComponent implements OnInit {
 
       this.contactPersonObj.VendorContactPersonId = "0";
       this.contactPersonObj.RowVersion = "";
-      this.http.post(AdInsConstant.AddVendorContactPerson, this.contactPersonObj).subscribe((response) => {
+      this.http.post(URLConstant.AddVendorContactPerson, this.contactPersonObj).subscribe((response) => {
         this.toastr.successMessage(response['message']);
         this.HiddenCheck();
       },
@@ -186,8 +188,8 @@ export class ContactPersonAddEditComponent implements OnInit {
     }
   }
 
-  HiddenCheck(){
-    var obj={
+  HiddenCheck() {
+    var obj = {
       HiddenState: true
     }
     this.objOutput.emit(obj);

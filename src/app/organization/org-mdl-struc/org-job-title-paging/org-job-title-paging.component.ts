@@ -12,6 +12,8 @@ import { Location, DecimalPipe } from "@angular/common";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from "app/shared/model/InputSearchObj.Model";
+import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Component({
   selector: "app-org-job-title-paging",
@@ -65,11 +67,11 @@ export class OrgJobTitlePagingComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOrgJobTitle.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetOrgJobTitlePaging;
+    this.inputObj.apiQryPaging = URLConstant.GetOrgJobTitlePaging;
     
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgJobTitlePaging;
+    this.apiUrl = this.foundationUrl + URLConstant.GetOrgJobTitlePaging;
     this.initiateForm();
   }
 
@@ -116,8 +118,8 @@ export class OrgJobTitlePagingComponent implements OnInit {
   }
 
   del(id: any) {
-    if (confirm("Are you sure to delete this record?")) {
-      this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteOrgJobTitle;
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
+      this.deleteUrl = this.foundationUrl + URLConstant.DeleteOrgJobTitle;
       this.orgJobTitleObj = new OrgJobTitleObj();
       this.orgJobTitleObj.orgJobTitleId = +id;
 

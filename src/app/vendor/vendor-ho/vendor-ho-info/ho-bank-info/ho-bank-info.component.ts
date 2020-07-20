@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-ho-bank-info',
-  templateUrl: './ho-bank-info.component.html',
-  styleUrls: ['./ho-bank-info.component.scss']
+  templateUrl: './ho-bank-info.component.html'
 })
 export class HoBankInfoComponent implements OnInit {
 VendorId: any;
@@ -23,9 +24,9 @@ ListData : any = new Array();
       VendorId : this.VendorId
     }
 
-    this.http.post(AdInsConstant.GetListVendorBankAccByVendorId, obj).subscribe(
+    this.http.post(URLConstant.GetListVendorBankAccByVendorId, obj).subscribe(
       (response) => {
-        this.ListData = response["ReturnObject"];
+        this.ListData = response[CommonConstant.ReturnObj];
       }
     ); 
   }

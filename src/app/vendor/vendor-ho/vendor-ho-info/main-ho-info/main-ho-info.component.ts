@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
 
@@ -27,7 +28,7 @@ export class MainHoInfoComponent implements OnInit {
       VendorId: this.VendorId
     }
 
-    this.http.post(AdInsConstant.GetVendorByVendorId, obj).subscribe(
+    this.http.post(URLConstant.GetVendorByVendorId, obj).subscribe(
       (response) => {
         this.MrVendorTypeCode = response["MrVendorTypeCode"];
       }

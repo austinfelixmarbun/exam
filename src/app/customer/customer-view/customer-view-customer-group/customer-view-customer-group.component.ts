@@ -3,15 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-view-customer-group',
-  templateUrl: './customer-view-customer-group.component.html',
-  styleUrls: ['./customer-view-customer-group.component.scss']
+  templateUrl: './customer-view-customer-group.component.html'
 })
 export class CustomerViewCustomerGroupComponent implements OnInit {
   CustId: number;
-  GetListCustGrpForCustViewByCustIdUrl = AdInsConstant.GetListCustGrpForCustViewByCustId;
+  GetListCustGrpForCustViewByCustIdUrl = URLConstant.GetListCustGrpForCustViewByCustId;
   responseObj: any;
   custViewUrl: string;
 

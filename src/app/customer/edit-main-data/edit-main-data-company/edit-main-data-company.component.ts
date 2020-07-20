@@ -6,6 +6,8 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-edit-main-data-company',
@@ -35,12 +37,12 @@ export class EditMainDataCompanyComponent implements OnInit {
   GetListActiveRefMasterWithReserveFieldAllUrl : string;
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService) {
-    this.getListActiveRefMasterUrl = AdInsConstant.GetListActiveRefMaster;
-    this.getCustCompanyByCustIdUrl = AdInsConstant.GetCustCompanyByCustId;
-    this.getCustByCustIdUrl = AdInsConstant.GetCustByCustId;
-    this.editCustUrl = AdInsConstant.EditCust;
-    this.editCustCompanyUrl = AdInsConstant.EditCustCompany; 
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = AdInsConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
+    this.getCustCompanyByCustIdUrl = URLConstant.GetCustCompanyByCustId;
+    this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
+    this.editCustUrl = URLConstant.EditCust;
+    this.editCustCompanyUrl = URLConstant.EditCustCompany; 
+    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
@@ -62,13 +64,13 @@ export class EditMainDataCompanyComponent implements OnInit {
 
   ngOnInit() {
     var refMasterObjCustModel = {
-      RefMasterTypeCode: "CUST_MODEL",
-      ReserveField1: "COMPANY",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      ReserveField1: CommonConstant.CustTypeCompany,
       RowVersion: ""
     }
     this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
       (response) => {
-        this.tempCustModel = response["ReturnObject"];
+        this.tempCustModel = response[CommonConstant.ReturnObj];
         if(this.tempCustModel.length > 0){
           this.CustomerCompanyForm.patchValue({
             CustModel: this.tempCustModel[0].Key
@@ -77,12 +79,12 @@ export class EditMainDataCompanyComponent implements OnInit {
       }
     );
     var refMasterObjMrCompanyTypeCode = {
-      RefMasterTypeCode: "COMPANY_TYPE",
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
       RowVersion: ""
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
-        this.tempCompanyTypeCode = response["ReturnObject"];
+        this.tempCompanyTypeCode = response[CommonConstant.ReturnObj];
         if(this.tempCompanyTypeCode.length > 0){
           this.CustomerCompanyForm.patchValue({
             MrCompanyTypeCode: this.tempCompanyTypeCode[0].Key

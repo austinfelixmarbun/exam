@@ -1,5 +1,4 @@
 {
-  "title": "District",
   "exportExcel": false,
   "component": [
     {
@@ -129,10 +128,6 @@
               "property": "edit"
             }
           ]
-        },
-        {
-          "type": "delete",
-          "property": "refProvDistrictId"
         }
       ]
     }

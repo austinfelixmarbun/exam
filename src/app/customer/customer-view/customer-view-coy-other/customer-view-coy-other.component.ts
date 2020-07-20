@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-customer-view-coy-other',
-  templateUrl: './customer-view-coy-other.component.html',
-  styleUrls: ['./customer-view-coy-other.component.scss']
+  templateUrl: './customer-view-coy-other.component.html'
 })
 export class CustomerViewCoyOtherComponent implements OnInit {
   CustId: number;
-  GetCustAttrContentForCustViewByCustIdUrl = AdInsConstant.GetCustAttrContentForCustViewByCustId;
+  GetCustAttrContentForCustViewByCustIdUrl = URLConstant.GetCustAttrContentForCustViewByCustId;
   responseCustAttr: any;
 
   constructor(

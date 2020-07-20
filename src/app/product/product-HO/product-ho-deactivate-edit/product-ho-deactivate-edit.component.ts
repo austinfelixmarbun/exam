@@ -7,6 +7,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ProdHDeactivateObj } from '../../../shared/model/ProdHDeactivateObj.Model';
 import { environment } from '../../../../environments/environment';
 import { ProdOfferingVersionObj } from '../../../shared/model/ProdOfferingVersionObj.Mode';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 
@@ -40,9 +42,9 @@ export class ProductHODeactivateEditComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
-    this.requestDeactURL = AdInsConstant.RequestDeactivation;
-    this.getValueReasonModel = AdInsConstant.GetListActiveRefReason;
-    this.prodOfferVerUrl = AdInsConstant.GetListProdOfferingVersionByProdId;
+    this.requestDeactURL = URLConstant.RequestDeactivation;
+    this.getValueReasonModel = URLConstant.GetListActiveRefReason;
+    this.prodOfferVerUrl = URLConstant.GetListProdOfferingVersionByProdId;
 
     this.route.queryParams.subscribe(params => {
       if (params["prodHId"] != null) {
@@ -58,13 +60,13 @@ export class ProductHODeactivateEditComponent implements OnInit {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductMainInformation.json";
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
-    var obj = { RefReasonTypeCode: AdInsConstant.RefReasonTypeCodeProdDeactivate };
+    var obj = { RefReasonTypeCode: CommonConstant.RefReasonTypeCodeProdDeactivate };
     this.http.post(this.getValueReasonModel, obj).subscribe(
       (response) => {
         console.log(response);
-        this.allRefReasonMethod = response['ReturnObject'];
-        if(this.allRefReasonMethod.length > 0){
-          this.ProdHDeactForm.patchValue({ Reason: response['ReturnObject'][0]['Key'] });
+        this.allRefReasonMethod = response[CommonConstant.ReturnObj];
+        if (this.allRefReasonMethod.length > 0) {
+          this.ProdHDeactForm.patchValue({ Reason: response[CommonConstant.ReturnObj][0]['Key'] });
         }
       },
       (error) => {
@@ -78,7 +80,7 @@ export class ProductHODeactivateEditComponent implements OnInit {
       response => {
         console.log("Response: ");
         console.log(response);
-        this.ProdOfferVer = response['ReturnObject'];
+        this.ProdOfferVer = response[CommonConstant.ReturnObj];
       },
       error => {
         console.log(error);
@@ -103,6 +105,5 @@ export class ProductHODeactivateEditComponent implements OnInit {
         console.log(error);
       }
     );
-
   }
 }

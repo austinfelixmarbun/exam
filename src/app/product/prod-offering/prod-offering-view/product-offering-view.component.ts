@@ -10,7 +10,9 @@ import { ProdOfferingHVersionObj } from "../../../shared/model/ProdOfferingHVers
 import { RefProductOfferingDetailObj } from "../../../shared/model/RefProductOfferingDetailObj.Model";
 import { ProdOfferingCodeVersion } from "../../../shared/model/ProdOfferingCodeVersion.Model";
 import { saveAs } from 'file-saver';
+import { URLConstant } from "app/shared/constant/URLConstant";
 import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
+import { CommonConstant } from "app/shared/constant/CommonConstant";
 
 
 @Component({
@@ -48,10 +50,10 @@ export class ProductOfferingViewComponent implements OnInit {
   };
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
 
-    this.ProdOfferingDUrl = AdInsConstant.GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode;
-    this.ProdOfferingBranchUrl = AdInsConstant.GetListProdOfferingBranchOfficeMbrByProdHId;
-    this.ProdOfferingVerUrl = AdInsConstant.GetListProdOfferingHVersionByProdOfferingHId;
-    this.ProdOfferingCodeVerUrl = AdInsConstant.GetProdOfferingHByCodeAndVerion;
+    this.ProdOfferingDUrl = URLConstant.GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode;
+    this.ProdOfferingBranchUrl = URLConstant.GetListProdOfferingBranchOfficeMbrByProdHId;
+    this.ProdOfferingVerUrl = URLConstant.GetListProdOfferingHVersionByProdOfferingHId;
+    this.ProdOfferingCodeVerUrl = URLConstant.GetProdOfferingHByCodeAndVerion;
 
     this.route.queryParams.subscribe(params => {
       if (params["prodOfferingHId"] != 0) {
@@ -113,7 +115,7 @@ export class ProductOfferingViewComponent implements OnInit {
       response => {
         console.log("Response: ");
         console.log(response);
-        this.ProdOfferingVersion = response['ReturnObject'];
+        this.ProdOfferingVersion = response[CommonConstant.ReturnObj];
 
       },
       error => {
@@ -128,7 +130,7 @@ export class ProductOfferingViewComponent implements OnInit {
       response => {
         console.log("Response: ");
         console.log(response);
-        this.ProdOfferingBranchMbr = response['ReturnObject'];
+        this.ProdOfferingBranchMbr = response[CommonConstant.ReturnObj];
 
       },
       error => {
@@ -145,7 +147,7 @@ export class ProductOfferingViewComponent implements OnInit {
       response => {
         console.log("Response: ");
         console.log(response);
-        this.ProdComp = response['ReturnObject'].ProdOffComponents;
+        this.ProdComp = response[CommonConstant.ReturnObj].ProdOffComponents;
         console.log(this.ProdComp);
         this.GenData = this.ProdComp.filter(
           comp => comp.GroupCode == 'GEN');
@@ -162,7 +164,7 @@ export class ProductOfferingViewComponent implements OnInit {
   }
   DownloadRule(CompntValue, CompntValueDesc) {
     this.DlRuleObj.CompntValue = CompntValue;
-    this.http.post(AdInsConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
+    this.http.post(URLConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
       response => {
         saveAs(response, CompntValueDesc + '.xlsx');
       },

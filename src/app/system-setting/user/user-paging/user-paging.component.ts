@@ -10,6 +10,7 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from "@angular/common";
 import { InputSearchObj } from "app/shared/model/InputSearchObj.Model";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Component({
   selector: "app-user-paging",
@@ -41,14 +42,14 @@ export class UserPagingComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchUser.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetRefUserPaging;
+    this.inputObj.apiQryPaging = URLConstant.GetRefUserPaging;
     
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefUserPaging;
+    this.apiUrl = this.foundationUrl + URLConstant.GetRefUserPaging;
 
     this.initiateForm();
-    // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
+    // this.adInsService.postData(this.foundationUrl + URLConstant.GetListOffice, null)
     //   .subscribe(data => {
     //     console.log(data);
     //   }
@@ -101,7 +102,7 @@ export class UserPagingComponent implements OnInit {
 
   resetPassword(id: any) {
     if (confirm("Are you sure to reset this password to default?")) {
-      var resetPassUrl = this.foundationUrl + AdInsConstant.ResetPassword;
+      var resetPassUrl = this.foundationUrl + URLConstant.ResetPassword;
       var refUser = new RefUserObj();
       // refUser.refUserId = id;
       this.https.post(resetPassUrl, refUser).subscribe(

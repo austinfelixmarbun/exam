@@ -1,5 +1,5 @@
 {
-    "title": "Office Parent",
+    "sectionTitle": "Office Parent",
     "component": [
         {
             "type": "textbox",
@@ -33,10 +33,18 @@
             "value": "",
             "label": "Office Name",
             "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "A.OFFICE_ADDR",
+            "id": "OfficeAddrId",
+            "value": "",
+            "label": "Office Address",
+            "placeholder": "Placeholder"
         }
     ],
     "querystring": {
-        "select": "SELECT A.OFFICE_CODE AS OfficeCode, A.OFFICE_NAME AS OfficeName, A.MR_OFFICE_TYPE_CODE AS MrOfficeType, REF_OFFICE_ID AS RefOfficeId, B.DESCR AS Descr, A.PARENT_ID AS ParentId",
+        "select": "SELECT A.OFFICE_CODE AS OfficeCode, A.OFFICE_NAME AS OfficeName, A.MR_OFFICE_TYPE_CODE AS MrOfficeType, REF_OFFICE_ID AS RefOfficeId, B.DESCR AS Descr, A.PARENT_ID AS ParentId, A.OFFICE_ADDR AS OfficeAddr",
         "from": "FROM dbo.REF_OFFICE A WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER B WITH(NOLOCK) ON A.MR_OFFICE_TYPE_CODE = B.MASTER_CODE AND B.REF_MASTER_TYPE_CODE = 'OFFICE_TYPE'",
       "where":"WHERE A.IS_ACTIVE = 1"
     },
@@ -45,21 +53,26 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "OFFICE CODE",
-            "name": "OfficeCode"
+            "label": "Office Code",
+            "name": "A.OFFICE_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Office Name",
+            "name": "A.OFFICE_NAME"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "OFFICE NAME",
-            "name": "OfficeName"
-        },
-
+            "label": "Office Type",
+            "name": " B.DESCR"
+        },        
         {
             "type": "sort",
-            "position": "center",
-            "label": "OFFICE TYPE",
-            "name": " MrOfficeType"
+            "position": "left",
+            "label": "Office Address",
+            "name": " A.OFFICE_ADDR"
         },
         {
             "type": "label",
@@ -70,7 +83,7 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "left",
+            "position": "center",
             "property": "OfficeCode"
         },
         {
@@ -80,8 +93,12 @@
         },
         {
             "type": "text",
-            "position": "left",
+            "position": "center",
             "property": "Descr"
+        },        {
+            "type": "text",
+            "position": "left",
+            "property": "OfficeAddr"
         },
         {
             "type": "action",

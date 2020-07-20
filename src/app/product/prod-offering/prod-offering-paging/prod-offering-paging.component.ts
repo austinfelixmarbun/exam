@@ -3,11 +3,11 @@ import { UcPagingObj, WhereValueObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute, Router } from '@angular/router';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-prod-offering-paging',
-  templateUrl: './prod-offering-paging.component.html',
-  styleUrls: ['./prod-offering-paging.component.scss']
+  templateUrl: './prod-offering-paging.component.html'
 })
 export class ProdOfferingPagingComponent implements OnInit {
 
@@ -21,7 +21,7 @@ export class ProdOfferingPagingComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/product/searchProductOffering.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.deleteUrl = "/RefBank/DeleteRefBank";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductOffering.json";
     this.inputPagingObj.ddlEnvironments = [

@@ -9,6 +9,7 @@ import { VendorService } from 'app/vendor/vendor.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-bank-info',
@@ -197,7 +198,7 @@ export class BankInfoComponent implements OnInit {
       if (this.objInput.VendorId != undefined && this.objInput.VendorId != null) {
         this.vendorService.GetListVendorBankAccByVendorId({VendorId: this.objInput.VendorId, VendorEmpId: null}).subscribe(
           response => {
-            this.ListData = response["ReturnObject"];
+            this.ListData = response[CommonConstant.ReturnObj];
           }
         );
       }
@@ -205,7 +206,7 @@ export class BankInfoComponent implements OnInit {
       if (this.objInput.VendorEmpId != undefined && this.objInput.VendorEmpId != null) {
         this.vendorService.GetListVendorBankAccByVendorEmpId({VendorId: null, VendorEmpId: this.objInput.VendorEmpId}).subscribe(
           response => {
-            this.ListData = response["ReturnObject"];
+            this.ListData = response[CommonConstant.ReturnObj];
           }
         );
       }

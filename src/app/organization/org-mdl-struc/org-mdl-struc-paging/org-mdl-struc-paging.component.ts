@@ -13,6 +13,7 @@ import { Location, DecimalPipe } from "@angular/common";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-org-mdl-struc-paging',
@@ -63,14 +64,14 @@ export class OrgMdlStrucPagingComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOrgMdlStruc.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetOrgMdlStrucPaging;
+    this.inputObj.apiQryPaging = URLConstant.GetOrgMdlStrucPaging;
     
     this.spinner.show();
     console.log('masuk');
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
     this.pageSize = this.show[0];
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetOrgMdlStrucPaging;
+    this.apiUrl = this.foundationUrl + URLConstant.GetOrgMdlStrucPaging;
     this.initiateForm();
     this.spinner.hide();
   }
@@ -102,7 +103,7 @@ export class OrgMdlStrucPagingComponent implements OnInit {
   }
 
   initiateForm() {
-    var getOrgMdlUrl = this.foundationUrl + AdInsConstant.GetOrgMdlByOrgMdlId;
+    var getOrgMdlUrl = this.foundationUrl + URLConstant.GetOrgMdlByOrgMdlId;
     this.orgMdlObj = new OrgMdlObj();
     this.orgMdlObj.orgMdlId = +this.orgMdlId;
     this.https.post(getOrgMdlUrl, this.orgMdlObj).subscribe(
@@ -129,7 +130,7 @@ export class OrgMdlStrucPagingComponent implements OnInit {
 
   del(id: any) {
     if (confirm("Are you sure to delete this record?")) {
-      this.deleteUrl = this.foundationUrl + AdInsConstant.DeleteOrgMdlStruc;
+      this.deleteUrl = this.foundationUrl + URLConstant.DeleteOrgMdlStruc;
       this.orgMdlStrucObj = new OrgMdlStrucObj();
       this.orgMdlStrucObj.orgMdlStrucId = +id;
 

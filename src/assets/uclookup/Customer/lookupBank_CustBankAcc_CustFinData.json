@@ -1,5 +1,5 @@
 {
-    "title": "Lookup - Bank",
+    "sectionTitle": "Lookup - Bank",
     "component": [
         {
             "type": "textbox",

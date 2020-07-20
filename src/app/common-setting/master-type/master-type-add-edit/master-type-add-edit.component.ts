@@ -8,6 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-master-type-add-edit',
@@ -48,7 +50,7 @@ export class MasterTypeAddEditComponent implements OnInit {
 
   ngOnInit() {
     if (this.type == 'edit') {
-      this.apiUrl = this.foundationUrl + AdInsConstant.GetRefRoleByRefRoleId;
+      this.apiUrl = this.foundationUrl + URLConstant.GetRefRoleByRefRoleId;
       this.refRoleObj = new RefRoleObj()
       this.refRoleObj.RefRoleId = +this.refRoleId
       this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(
@@ -75,7 +77,7 @@ export class MasterTypeAddEditComponent implements OnInit {
 
   Save(RoleAddEditForm: NgForm): void {
     this.spinner.show();
-    var getRoleUrl = this.foundationUrl + AdInsConstant.GetRefRole;
+    var getRoleUrl = this.foundationUrl + URLConstant.GetRefRole;
     var getRoleUrlGateway = 'http://01-05-0064-0618/FOUNDATION_R3/RefRole/GetRefRole'
     var roleObj: RefRoleObj;
     roleObj = new RefRoleObj()
@@ -92,10 +94,10 @@ export class MasterTypeAddEditComponent implements OnInit {
           console.log("Success Check Duplicate");
           roleObj = response['returnObject'];
           if (roleObj != null) {
-            this.service.typeErrorCustom('Code Has Been Used');
+            this.service.typeErrorCustom(ExceptionConstant.CODE_HAS_BEEN_USED);
           }
           else {
-            this.apiUrl = this.foundationUrl + AdInsConstant.AddRefRole;
+            this.apiUrl = this.foundationUrl + URLConstant.AddRefRole;
 
             this.refRoleObj = new RefRoleObj();
             this.refRoleObj.RoleCode = RoleAddEditForm.value.roleCodeModel;
@@ -107,7 +109,7 @@ export class MasterTypeAddEditComponent implements OnInit {
               (response) => {
                 console.log("Success Save");
 
-                this.service.typeSave('Save Successed');
+                this.service.typeSave(ExceptionConstant.SAVE_SUCCESSED);
                 this.location.back();
                 this.spinner.hide();
 
@@ -131,7 +133,7 @@ export class MasterTypeAddEditComponent implements OnInit {
     }
     //MODE-EDIT
     else {
-      this.apiUrl = this.foundationUrl + AdInsConstant.EditRefRole;
+      this.apiUrl = this.foundationUrl + URLConstant.EditRefRole;
 
       this.refRoleObj.RefRoleId = this.refRoleId;
       this.refRoleObj.RoleCode = RoleAddEditForm.value.roleCodeModel;
@@ -143,7 +145,7 @@ export class MasterTypeAddEditComponent implements OnInit {
         (response) => {
           console.log("Success Edit");
 
-          this.service.typeSave('Edit Successed');
+          this.service.typeSave(ExceptionConstant.EDIT_SUCCESSED);
           this.location.back();
           this.spinner.hide();
 

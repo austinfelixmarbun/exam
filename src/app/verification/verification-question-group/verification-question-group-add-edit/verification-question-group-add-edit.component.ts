@@ -6,11 +6,11 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionGrpHObj } from 'app/shared/model/VerfQuestionGrpHObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-verification-question-group-add-edit',
   templateUrl: './verification-question-group-add-edit.component.html',
-  styleUrls: ['./verification-question-group-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class VerificationQuestionGroupAddEditComponent implements OnInit {
@@ -40,7 +40,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
     console.log("test");
     if (this.mode == "edit") {
       var verfGroupObj = { VerfQuestionGrpHId: this.VerfQuestionGrpHId }
-      this.http.post<VerfQuestionGrpHObj>(AdInsConstant.GetQuestionGrpHById, verfGroupObj).subscribe(
+      this.http.post<VerfQuestionGrpHObj>(URLConstant.GetQuestionGrpHById, verfGroupObj).subscribe(
         (response) => {
           this.verfQuestionGrpHObj = response;
           this.QuestionGroupForm.patchValue({
@@ -60,7 +60,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
     this.verfQuestionGrpHObj.VerfQuestionGrpName = this.QuestionGroupForm.value.VerfQuestionGrpName;
     this.verfQuestionGrpHObj.IsActive = this.QuestionGroupForm.value.IsActive;
     if (this.mode == "edit") {
-      this.http.post(AdInsConstant.EditVerfQuestionGrpH, this.verfQuestionGrpHObj).subscribe(
+      this.http.post(URLConstant.EditVerfQuestionGrpH, this.verfQuestionGrpHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Verification/QuestionGroup/Paging']);
@@ -71,7 +71,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
     }
     else {
       this.verfQuestionGrpHObj.VerfQuestionGrpHId = "0";
-      this.http.post(AdInsConstant.AddVerfQuestionGrpH, this.verfQuestionGrpHObj).subscribe(
+      this.http.post(URLConstant.AddVerfQuestionGrpH, this.verfQuestionGrpHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Verification/QuestionGroup/Paging']);

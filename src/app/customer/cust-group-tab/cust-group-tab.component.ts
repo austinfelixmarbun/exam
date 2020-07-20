@@ -9,6 +9,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-cust-group-tab',
@@ -38,7 +40,7 @@ export class CustGroupTabComponent implements OnInit {
     var custGrp = new CustGrpObj();
     custGrp.CustId = this.CustId;
     console.log(custGrp.CustId);
-    this.httpClient.post(AdInsConstant.GetListCustGrpByCustIdForCustGrpTab, custGrp).subscribe(
+    this.httpClient.post(URLConstant.GetListCustGrpByCustIdForCustGrpTab, custGrp).subscribe(
       (response: any) => {
         this.CustGrpList = response.CustGrpObjForCustGrpTabs;
         for (const item of this.CustGrpList) {
@@ -53,7 +55,7 @@ export class CustGroupTabComponent implements OnInit {
     // GetCustByCustNo
     var custObj = new CustObj;
     custObj.CustNo = CustNo
-    this.http.post(AdInsConstant.GetCustByCustNo, custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustNo, custObj).subscribe(
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);
@@ -74,7 +76,7 @@ export class CustGroupTabComponent implements OnInit {
         this.spinner.show();
         var custGrp = new CustGrpObj();
         custGrp.CustId = this.CustId;
-        this.httpClient.post(AdInsConstant.GetListCustGrpByCustIdForCustGrpTab, custGrp).subscribe(
+        this.httpClient.post(URLConstant.GetListCustGrpByCustIdForCustGrpTab, custGrp).subscribe(
           (response: any) => {
             this.CustGrpList = response.CustGrpObjForCustGrpTabs;
             this.listCustIdToExclude = new Array<number>();
@@ -94,10 +96,10 @@ export class CustGroupTabComponent implements OnInit {
   }
 
   deleteCustGrp(CustGrpId, i) {
-    if(confirm('Are you sure to delete this record?')){
+    if(confirm(ExceptionConstant.DELETE_CONFIRMATION)){
     var custGrp = new CustGrpObj();
     custGrp.CustGrpId = CustGrpId;
-    this.httpClient.post(AdInsConstant.DeleteCustGrp, custGrp).subscribe(
+    this.httpClient.post(URLConstant.DeleteCustGrp, custGrp).subscribe(
       (response: any) => {
         var idExclude = 0;
         for (let index = 0; index < this.listCustIdToExclude.length; index++) {

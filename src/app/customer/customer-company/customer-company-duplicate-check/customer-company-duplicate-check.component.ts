@@ -9,6 +9,8 @@ import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { DuplicateCustObj } from 'app/shared/model/DuplicateCust.Model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { RequestNegativeCustObj } from 'app/shared/model/RequestNegativeCustObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-company-duplicate-check',
@@ -47,7 +49,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
   urlGetDescByMasterCode: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
-    this.urlGetDescByMasterCode = AdInsConstant.GetRefMasterByMasterCode;
+    this.urlGetDescByMasterCode = URLConstant.GetRefMasterByMasterCode;
     this.route.queryParams.subscribe(params => {
       if (params["CustModel"] != null) {
         this.CustModel = params["CustModel"];
@@ -73,20 +75,19 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
     });
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.DuplicateCustObj = new DuplicateCustObj();
     this.DuplicateCustObj.CustName = this.CustName;
     this.DuplicateCustObj.MrCustTypeCode = RefMasterConstant.Company;
     this.DuplicateCustObj.TaxIdNo = this.TaxIdNo;
     console.log(this.DuplicateCustObj);
-    this.http.post(AdInsConstant.GetCustomerAndNegativeCustDuplicateCheck, this.DuplicateCustObj).subscribe(
+    this.http.post(URLConstant.GetCustomerAndNegativeCustDuplicateCheck, this.DuplicateCustObj).subscribe(
       (response) => {
         this.DuplicateStatus = response["Status"];
         console.log(this.DuplicateStatus);
-        if (this.DuplicateStatus != null && this.DuplicateStatus != undefined)
-        {
-          this.ResultDuplicate = response["ReturnObject"]["CustDuplicate"];
-          this.ResultDuplicateNegative = response["ReturnObject"]["NegativeCustDuplicate"];
+        if (this.DuplicateStatus != null && this.DuplicateStatus != undefined) {
+          this.ResultDuplicate = response[CommonConstant.ReturnObj]["CustDuplicate"];
+          this.ResultDuplicateNegative = response[CommonConstant.ReturnObj]["NegativeCustDuplicate"];
         }
         else
           this.SaveValue();
@@ -129,30 +130,30 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
       this.StatusIsVip = "No";
     }
   }
-  
+
   SaveValue() {
     this.addCustObj = new AddCustObj();
     this.addCustObj.CustObj = new CustObj();
     this.addCustObj.CustCompanyObj = new CustCompanyObj();
     this.addCustObj.CustObj.CustName = this.CustName;
     this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
-    this.addCustObj.CustObj.MrCustTypeCode =  RefMasterConstant.Company;
+    this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Company;
     this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
     this.addCustObj.CustObj.MrIdTypeCode = RefMasterConstant.Npwp;
     this.addCustObj.CustObj.IdNo = this.TaxIdNo;
     this.addCustObj.CustObj.TaxIdNo = this.TaxIdNo;
-    if(this.IsVip === "true"){
+    if (this.IsVip === "true") {
       this.addCustObj.CustObj.IsVip = true;
-    }else{
+    } else {
       this.addCustObj.CustObj.IsVip = false;
     }
-    if(this.IsAffiliateWithMf === "true"){
+    if (this.IsAffiliateWithMf === "true") {
       this.addCustObj.CustObj.IsAffiliateWithMf = true;
-    }else{
+    } else {
       this.addCustObj.CustObj.IsAffiliateWithMf = false;
-    } 
+    }
     this.addCustObj.CustObj.VipNotes = this.VipNotes;
-    this.http.post(AdInsConstant.AddNewCust, this.addCustObj).subscribe(
+    this.http.post(URLConstant.AddNewCust, this.addCustObj).subscribe(
       (response) => {
         this.resultData = response;
         this.CustId = this.resultData.CustObj.CustId;
@@ -164,10 +165,9 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
     );
   }
 
-  EditCustCompany(item)
-  {
-     var custObj = {CustNo: item.CustNo, CustName: item.CustName, TaxIdNo: item.TaxIdNo};
-    this.http.post(AdInsConstant.GetCustCompanyForUpdateByCustNo, custObj).subscribe(
+  EditCustCompany(item) {
+    var custObj = { CustNo: item.CustNo, CustName: item.CustName, TaxIdNo: item.TaxIdNo };
+    this.http.post(URLConstant.GetCustCompanyForUpdateByCustNo, custObj).subscribe(
       (response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.CustObj = response['CustObj'];
@@ -179,18 +179,18 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
         this.addCustObj.CustObj.MrIdTypeCode = RefMasterConstant.Npwp;
         this.addCustObj.CustObj.IdNo = item.TaxIdNo;
         this.addCustObj.CustObj.TaxIdNo = item.TaxIdNo;
-        if(this.IsVip === "true"){
+        if (this.IsVip === "true") {
           this.addCustObj.CustObj.IsVip = true;
-        }else{
+        } else {
           this.addCustObj.CustObj.IsVip = false;
         }
-        if(this.IsAffiliateWithMf === "true"){
+        if (this.IsAffiliateWithMf === "true") {
           this.addCustObj.CustObj.IsAffiliateWithMf = true;
-        }else{
+        } else {
           this.addCustObj.CustObj.IsAffiliateWithMf = false;
-        } 
+        }
         this.addCustObj.CustObj.VipNotes = this.VipNotes;
-        this.http.post(AdInsConstant.EditDuplicateCust, this.addCustObj).subscribe(
+        this.http.post(URLConstant.EditDuplicateCust, this.addCustObj).subscribe(
           () => {
             this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId, 'From': 'CustPaging' } });
           },
@@ -205,10 +205,9 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
     );
   }
 
-  EditNegativeCustCompany(item)
-  {
-    var NegativeCustObj = {CustNo: item.CustNo, CustName: item.CustName, MrCustTypeCode: item.MrCustTypeCode, TaxIdNo: item.TaxIdNo};
-    this.http.post<RequestNegativeCustObj>(AdInsConstant.GetNegativeCustByNegativeCustNameAndCustType, NegativeCustObj).subscribe(
+  EditNegativeCustCompany(item) {
+    var NegativeCustObj = { CustNo: item.CustNo, CustName: item.CustName, MrCustTypeCode: item.MrCustTypeCode, TaxIdNo: item.TaxIdNo };
+    this.http.post<RequestNegativeCustObj>(URLConstant.GetNegativeCustByNegativeCustNameAndCustType, NegativeCustObj).subscribe(
       (response) => {
         this.RequestNegativeCustObj = response;
         this.RequestNegativeCustObj.CustName = item.CustName;
@@ -218,18 +217,18 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
         this.RequestNegativeCustObj.MrIdTypeCode = RefMasterConstant.Npwp;
         this.RequestNegativeCustObj.IdNo = item.TaxIdNo;
         this.RequestNegativeCustObj.TaxIdNo = item.TaxIdNo;
-        if(this.IsVip === "true"){
+        if (this.IsVip === "true") {
           this.RequestNegativeCustObj.IsVip = true;
-        }else{
+        } else {
           this.RequestNegativeCustObj.IsVip = false;
         }
-        if(this.IsAffiliateWithMf === "true"){
+        if (this.IsAffiliateWithMf === "true") {
           this.RequestNegativeCustObj.IsAffiliateWithMf = true;
-        }else{
-          this.RequestNegativeCustObj.IsAffiliateWithMf = false; 
-        } 
+        } else {
+          this.RequestNegativeCustObj.IsAffiliateWithMf = false;
+        }
         this.RequestNegativeCustObj.VipNotes = this.VipNotes;
-        this.http.post(AdInsConstant.EditDuplicateNegativeCust, this.RequestNegativeCustObj).subscribe(
+        this.http.post(URLConstant.EditDuplicateNegativeCust, this.RequestNegativeCustObj).subscribe(
           (response) => {
             var custId = response['CustId'];
             this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { 'IdCust': custId, 'From': 'CustPaging' } });

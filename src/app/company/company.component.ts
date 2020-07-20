@@ -6,6 +6,7 @@ import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-company',
@@ -28,7 +29,7 @@ export class CompanyComponent implements OnInit {
 
   search() {
     this.pageNow = 1;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetRefCoyPaging;
+    this.apiUrl = this.foundationUrl + URLConstant.GetRefCoyPaging;
     this.http.post(this.apiUrl, null)
       .subscribe(
         (response) => {

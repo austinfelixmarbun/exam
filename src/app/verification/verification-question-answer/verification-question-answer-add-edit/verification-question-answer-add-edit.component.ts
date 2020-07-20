@@ -6,11 +6,12 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionAnswerObj } from 'app/shared/model/VerfQuestionAnswerObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-verification-question-answer-add-edit',
   templateUrl: './verification-question-answer-add-edit.component.html',
-  styleUrls: ['./verification-question-answer-add-edit.component.scss'],
   providers: [NGXToastrService]
 })
 export class VerificationQuestionAnswerAddEditComponent implements OnInit {
@@ -44,9 +45,9 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
 
   ngOnInit() {
     var refAnswerObj = {}
-    this.http.post(AdInsConstant.GetActiveRefVerfAnswerTypes, refAnswerObj).subscribe(
+    this.http.post(URLConstant.GetActiveRefVerfAnswerTypes, refAnswerObj).subscribe(
       (response) => {
-        this.itemVerfQuestionAnswer = response["ReturnObject"];
+        this.itemVerfQuestionAnswer = response[CommonConstant.ReturnObj];
         console.log(this.itemVerfQuestionAnswer);
         if (this.itemVerfQuestionAnswer.length > 0) {
           let VerfAnswerData = this.itemVerfQuestionAnswer.find(x => x.VerfAnswerTypeCode == "DDL");
@@ -59,12 +60,12 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
 
     if (this.mode == "edit") {
       var verfAnswerObj = { VerfQuestionAnswerId: this.VerfQuestionAnswerId }
-      this.http.post(AdInsConstant.GetVerfQuestionAnswerForUpdateById, verfAnswerObj).subscribe(
+      this.http.post(URLConstant.GetVerfQuestionAnswerForUpdateById, verfAnswerObj).subscribe(
         (response) => {
-          this.verfQuestionAnswer = response["ReturnObject"];
+          this.verfQuestionAnswer = response[CommonConstant.ReturnObj];
 
           refAnswerObj = { RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId }
-          this.http.post(AdInsConstant.GetRefVerfAnswerTypeById, refAnswerObj).subscribe(
+          this.http.post(URLConstant.GetRefVerfAnswerTypeById, refAnswerObj).subscribe(
             (respond) => {
               this.answerTypeCode = respond["VerfAnswerTypeCode"];
             }
@@ -109,7 +110,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     if (this.mode == "edit") {
       this.verfQuestionAnswerObj.VerfQuestionAnswerId = this.VerfQuestionAnswerId;
       this.verfQuestionAnswerObj.RowVersion = this.verfQuestionAnswerObj.RowVersion;
-      this.http.post(AdInsConstant.EditVerfQuestionAnswer, this.verfQuestionAnswerObj).subscribe(
+      this.http.post(URLConstant.EditVerfQuestionAnswer, this.verfQuestionAnswerObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Verification/QuestionAnswer/Paging']);
@@ -120,7 +121,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     }
     else {
       this.verfQuestionAnswerObj.VerfQuestionAnswerId = "0";
-      this.http.post(AdInsConstant.AddVerfQuestionAnswer, this.verfQuestionAnswerObj).subscribe(
+      this.http.post(URLConstant.AddVerfQuestionAnswer, this.verfQuestionAnswerObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Verification/QuestionAnswer/Paging']);

@@ -2,12 +2,13 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder } from '@angular/forms';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalContactPerson.Obj.Model';
 import { ActivatedRoute } from '@angular/router';
 import { CustObj } from 'app/shared/model/CustObj.Model';
-import { environment } from 'environments/environment.sit';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-contact-check',
@@ -21,15 +22,12 @@ export class CustomerContactCheckComponent implements OnInit {
   isAdd: boolean;
   IdCust: number;
   tempCustomerPersonalContactPerson: any;
-  getCustomerPersonalContactPersonUrl: string;
-  deleteCustomerPersonalContactPersonUrl: string;
   custPersonContactPersonObj: CustPersonalContactPersonObj;
-  resCustObj:any;
+  resCustObj: any;
   listCustIdToExclude: Array<string>;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.getCustomerPersonalContactPersonUrl = AdInsConstant.GetListCustPersonalContactPersonByCustId;
-    this.deleteCustomerPersonalContactPersonUrl = AdInsConstant.DeleteCustPersonalContactPerson;
+
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -47,10 +45,10 @@ export class CustomerContactCheckComponent implements OnInit {
     this.outputValue.emit({ isAdd: this.isAdd });
   }
   deleteItem(custId: any) {
-    if (confirm('Are you sure to delete this record?')) {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       this.custPersonContactPersonObj = new CustPersonalContactPersonObj();
       this.custPersonContactPersonObj.CustPersonalContactPersonId = custId;
-      this.http.post(this.deleteCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj).subscribe(
+      this.http.post(URLConstant.DeleteCustPersonalContactPerson, this.custPersonContactPersonObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.getList();
@@ -70,27 +68,23 @@ export class CustomerContactCheckComponent implements OnInit {
   getList() {
     this.custPersonContactPersonObj = new CustPersonalContactPersonObj();
     this.custPersonContactPersonObj.CustId = this.IdCust;
-    this.http.post(this.getCustomerPersonalContactPersonUrl, this.custPersonContactPersonObj).subscribe(
+    this.http.post(URLConstant.GetListCustPersonalContactPersonByCustId, this.custPersonContactPersonObj).subscribe(
       (response) => {
-        this.tempCustomerPersonalContactPerson = response["ReturnObject"];
+        this.tempCustomerPersonalContactPerson = response[CommonConstant.ReturnObj];
         console.log("Contact Person: " + JSON.stringify(this.tempCustomerPersonalContactPerson));
         for (const item of this.tempCustomerPersonalContactPerson) {
-          if(item["ContactPersonCustNo"] != null){
+          if (item["ContactPersonCustNo"] != null) {
             this.listCustIdToExclude.push(item["ContactPersonCustNo"]);
           }
         }
-        // console.log("contperson")
-        // console.log(this.tempCustomerPersonalContactPerson)
-        // console.log("aaaa" + this.tempCustomerPersonalContactPerson);
       });
   }
 
-  openView(ContactPersonCustNo)
-  {
+  openView(ContactPersonCustNo) {
     // GetCustByCustNo
     var custObj = new CustObj;
     custObj.CustNo = ContactPersonCustNo
-    this.http.post(AdInsConstant.GetCustByCustNo, custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustNo, custObj).subscribe(
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);

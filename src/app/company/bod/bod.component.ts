@@ -10,6 +10,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-bod',
@@ -42,11 +43,11 @@ export class BODComponent implements OnInit {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchBod.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = AdInsConstant.GetCoyBodPaging;
+    this.inputObj.apiQryPaging = URLConstant.GetCoyBodPaging;
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + AdInsConstant.GetCoyBodPaging;
+    this.apiUrl = this.foundationUrl + URLConstant.GetCoyBodPaging;
   }
 
   getResult(event) {
@@ -105,7 +106,7 @@ export class BODComponent implements OnInit {
 
   delete(coyBodId: any) {
     if (confirm("Are you sure to delete this record?")) {
-      this.editUrl = this.foundationUrl + AdInsConstant.DeleteCoyBod;
+      this.editUrl = this.foundationUrl + URLConstant.DeleteCoyBod;
       this.bodObj = new CoyBodObj();
       this.bodObj.coyBodId = coyBodId;
       this.http.post(this.editUrl, this.bodObj).subscribe(

@@ -12,6 +12,8 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 
 @Component({
@@ -110,8 +112,8 @@ export class OfficeAddComponent implements OnInit {
     // Fax:  ['',Validators.max(4)],
     CntctPersonName: ['', Validators.required],
     CntctPersonJobTitle: ['', Validators.required],
-    CntctPersonEmail1: ['', Validators.required],
-    CntctPersonEmail2: [''],
+    CntctPersonEmail1: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    CntctPersonEmail2: ['', Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')],
     CntctPersonMobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     CntctPersonMobilePhnNo2: ['', [Validators.pattern('^[0-9]+$')]],
     IsActive: false,
@@ -123,19 +125,19 @@ export class OfficeAddComponent implements OnInit {
 
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.apiUrl = AdInsConstant.GetRefOfficeByRefOfficeId;
-    this.addUrl = AdInsConstant.AddRefOffice;
-    this.editUrl = this.foundationUrl + AdInsConstant.EditRefOffice;
-    this.officeClassUrl = AdInsConstant.GetRefMasterListKeyValueActiveByCode;
-    this.refOrgUrl = this.foundationUrl + AdInsConstant.GetListAllRefOrg;
-    this.orgMdlUrl = this.foundationUrl + AdInsConstant.GetAllActiveOrgMdlByRefOrgId;
-    this.officeParentUrl = AdInsConstant.GetListUpperHierarchyRefOfficeByRefOrgId;
-    this.areaUrl = this.foundationUrl + AdInsConstant.GetAllListArea;
-    this.holidaySchmUrl = AdInsConstant.GetListActiveHolidaySchemeH;
-    this.workingHourSchmUrl = AdInsConstant.GetListActiveWorkingSchmH;
-    this.getRefOrgUrl = this.foundationUrl + AdInsConstant.GetRefOrg;
-    this.konSyaUrl = AdInsConstant.GetRefMasterListKeyValueActiveByCode
-    this.officeTypeUrl = AdInsConstant.GetRefMasterListKeyValueActiveByCode
+    this.apiUrl = URLConstant.GetRefOfficeByRefOfficeId;
+    this.addUrl = URLConstant.AddRefOffice;
+    this.editUrl = this.foundationUrl + URLConstant.EditRefOffice;
+    this.officeClassUrl = URLConstant.GetRefMasterListKeyValueActiveByCode;
+    this.refOrgUrl = this.foundationUrl + URLConstant.GetListAllRefOrg;
+    this.orgMdlUrl = this.foundationUrl + URLConstant.GetAllActiveOrgMdlByRefOrgId;
+    this.officeParentUrl = URLConstant.GetListUpperHierarchyRefOfficeByRefOrgId;
+    this.areaUrl = this.foundationUrl + URLConstant.GetAllListArea;
+    this.holidaySchmUrl = URLConstant.GetListActiveHolidaySchemeH;
+    this.workingHourSchmUrl = URLConstant.GetListActiveWorkingSchmH;
+    this.getRefOrgUrl = this.foundationUrl + URLConstant.GetRefOrg;
+    this.konSyaUrl = URLConstant.GetRefMasterListKeyValueActiveByCode
+    this.officeTypeUrl = URLConstant.GetRefMasterListKeyValueActiveByCode
 
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
@@ -151,8 +153,6 @@ export class OfficeAddComponent implements OnInit {
     this.InputLookupObj.urlJson = "./assets/lookup/lookupOfficeParent.json";
     this.InputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
     this.InputLookupObj.urlEnviPaging = environment.FoundationR3Url;
-    this.InputLookupObj.pagingJson = "./assets/lookup/lookupOfficeParent.json";
-    this.InputLookupObj.genericJson = "./assets/lookup/lookupOfficeParent.json";
     this.InputLookupObj.isRequired = true;
     this.InputLookupObj.ddlEnvironments = [
       {
@@ -162,21 +162,21 @@ export class OfficeAddComponent implements OnInit {
     ];
 
     this.refMasterObj = new RefMasterObj();
-    this.refMasterObj.RefMasterTypeCode = 'OFFICE_CLASS';
+    this.refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeOfficeClass;
     this.refMasterOfficeType = new RefMasterObj();
-    this.refMasterOfficeType.RefMasterTypeCode = 'OFFICE_TYPE';
+    this.refMasterOfficeType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeOfficeType;
     this.refMasterCgType = new RefMasterObj();
-    this.refMasterCgType.RefMasterTypeCode = 'CENTER_GRP_TYPE';
+    this.refMasterCgType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCenterGrpType;
     this.refMasterKonsyaType = new RefMasterObj();
-    this.refMasterKonsyaType.RefMasterTypeCode = 'KONVEN_SYARIAH';
+    this.refMasterKonsyaType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeKonvenSyariah;
 
     this.lookUpRefMasterOfficeObj = new RefMasterObj();
-    this.lookUpRefMasterOfficeObj.RefMasterTypeCode = "OFFICE_TYPE";
+    this.lookUpRefMasterOfficeObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeOfficeType;
 
-    this.httpClient.post(AdInsConstant.GetRefMasterTypeOfficeWithoutCG, this.lookUpRefMasterOfficeObj).subscribe(
+    this.httpClient.post(URLConstant.GetRefMasterTypeOfficeWithoutCG, this.lookUpRefMasterOfficeObj).subscribe(
       (response) => {
-        if (response['ReturnObject'].length > 0) {
-          this.lookupOfficeType = response['ReturnObject'];
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.lookupOfficeType = response[CommonConstant.ReturnObj];
 
           this.arrCrit = new Array();
           var critObj = new CriteriaObj();
@@ -186,7 +186,7 @@ export class OfficeAddComponent implements OnInit {
           this.lookupOfficeType.forEach(element => {
             critObj.listValue.push(element.Key);
           });
-  
+
           this.arrCrit.push(critObj);
           this.InputLookupObj.addCritInput = this.arrCrit;
         }
@@ -197,10 +197,10 @@ export class OfficeAddComponent implements OnInit {
       });
 
     if (this.pageType == "add") {
-      this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
+      this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
         (response) => {
-          if (response['ReturnObject'].length > 0) {
-            this.allOfficeClass = response['ReturnObject'];
+          if (response[CommonConstant.ReturnObj].length > 0) {
+            this.allOfficeClass = response[CommonConstant.ReturnObj];
             this.OfficeForm.patchValue({
               MrOfficeClassCode: this.allOfficeClass[0].Key
             });
@@ -210,10 +210,10 @@ export class OfficeAddComponent implements OnInit {
           console.log(error);
         });
 
-      this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
+      this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
         (response) => {
-          if (response['ReturnObject'].length > 0) {
-            this.allCgType = response['ReturnObject'];
+          if (response[CommonConstant.ReturnObj].length > 0) {
+            this.allCgType = response[CommonConstant.ReturnObj];
             this.OfficeForm.patchValue({
               MrCenterGrpTypeCode: this.allCgType[0].Key
             });
@@ -223,10 +223,10 @@ export class OfficeAddComponent implements OnInit {
         (error) => {
           console.log(error);
         });
-      this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterKonsyaType).subscribe(
+      this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterKonsyaType).subscribe(
         (response) => {
-          if (response['ReturnObject'].length > 0) {
-            this.allKonSya = response['ReturnObject'];
+          if (response[CommonConstant.ReturnObj].length > 0) {
+            this.allKonSya = response[CommonConstant.ReturnObj];
             this.OfficeForm.patchValue({
               KonSya: this.allKonSya[0].Key
             });
@@ -235,10 +235,10 @@ export class OfficeAddComponent implements OnInit {
         (error) => {
           console.log(error);
         })
-      this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterOfficeType).subscribe(
+      this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterOfficeType).subscribe(
         (response) => {
-          if (response['ReturnObject'].length > 0) {
-            this.allOfficeType = response['ReturnObject'];
+          if (response[CommonConstant.ReturnObj].length > 0) {
+            this.allOfficeType = response[CommonConstant.ReturnObj];
             this.OfficeForm.patchValue({
               OfficeType: this.allOfficeType[0].Key
             });
@@ -250,8 +250,8 @@ export class OfficeAddComponent implements OnInit {
 
       this.httpClient.post(this.holidaySchmUrl, null).subscribe(
         (response) => {
-          if (response['ReturnObject'].length > 0) {
-            this.allHolidaySchm = response['ReturnObject'];
+          if (response[CommonConstant.ReturnObj].length > 0) {
+            this.allHolidaySchm = response[CommonConstant.ReturnObj];
             this.OfficeForm.patchValue({
               HolidayScheme: this.allHolidaySchm[0].HolidaySchmHId
             });
@@ -262,8 +262,8 @@ export class OfficeAddComponent implements OnInit {
         })
       this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
         (response) => {
-          if (response['ReturnObject'].length > 0) {
-            this.allWorkingHourSchm = response['ReturnObject'];
+          if (response[CommonConstant.ReturnObj].length > 0) {
+            this.allWorkingHourSchm = response[CommonConstant.ReturnObj];
             this.OfficeForm.patchValue({
               WorkingHourScheme: this.allWorkingHourSchm[0].WorkingHourSchmHId
             });
@@ -284,16 +284,16 @@ export class OfficeAddComponent implements OnInit {
       this.addressObj = new UcAddressObj();
       this.officeObj.RefOfficeId = this.RefOfficeId;
       // this.centerGrpObj.RefOfficeId = this.RefOfficeId;
-      this.httpClient.post(AdInsConstant.GetRefOfficeByRefOfficeId, this.officeObj).subscribe(
+      this.httpClient.post(URLConstant.GetRefOfficeByRefOfficeId, this.officeObj).subscribe(
         (response) => {
           this.resultData = response;
-          this.InputLookupObj.jsonSelect = {OfficeCode: this.resultData.ParentOfficeCode, RefOfficeId: this.resultData.ParentId};
+          this.InputLookupObj.jsonSelect = { OfficeCode: this.resultData.ParentOfficeCode, RefOfficeId: this.resultData.ParentId };
           this.InputLookupObj.nameSelect = this.resultData["ParentOfficeCode"];
           this.InputLookupObj.jsonSelect = { OfficeCode: this.resultData["ParentOfficeCode"] };
           this.OfficeForm.patchValue({
             OfficeCode: this.resultData.OfficeCode,
             OfficeName: this.resultData.OfficeName,
-            OfficeParent : this.resultData.ParentId,
+            OfficeParent: this.resultData.ParentId,
             OfficeType: this.resultData.MrOfficeTypeCode,
             OfficeShortName: this.resultData.OfficeShortName,
             MrOfficeClassCode: this.resultData.MrOfficeClassCode,
@@ -331,10 +331,10 @@ export class OfficeAddComponent implements OnInit {
           this.inputFieldAddr.inputLookupObj = new InputLookupObj();
           this.inputFieldAddr.inputLookupObj.jsonSelect = { Zipcode: this.resultData.Zipcode };
           this.inputFieldAddr.inputLookupObj.nameSelect = this.resultData.Zipcode;
-          this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
+          this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
             (response) => {
-              if (response['ReturnObject'].length > 0) {
-                this.allCgType = response['ReturnObject'];
+              if (response[CommonConstant.ReturnObj].length > 0) {
+                this.allCgType = response[CommonConstant.ReturnObj];
                 this.OfficeForm.patchValue({
                   MrCenterGrpTypeCode: this.resultData.MrCenterGrpTypeCode
                 });
@@ -345,10 +345,10 @@ export class OfficeAddComponent implements OnInit {
               console.log(error);
             })
 
-          this.httpClient.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
+          this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
             (response) => {
-              if (response['ReturnObject'].length > 0) {
-                this.allOfficeClass = response['ReturnObject'];
+              if (response[CommonConstant.ReturnObj].length > 0) {
+                this.allOfficeClass = response[CommonConstant.ReturnObj];
                 this.OfficeForm.patchValue({
                   MrOfficeClassCode: this.resultData.MrOfficeClassCode
                 });
@@ -359,8 +359,8 @@ export class OfficeAddComponent implements OnInit {
             })
           this.httpClient.post(this.officeTypeUrl, this.refMasterOfficeType).subscribe(
             (response) => {
-              if (response['ReturnObject'].length > 0) {
-                this.allOfficeType = response['ReturnObject'];
+              if (response[CommonConstant.ReturnObj].length > 0) {
+                this.allOfficeType = response[CommonConstant.ReturnObj];
                 this.OfficeForm.patchValue({
                   OfficeType: this.resultData.MrOfficeTypeCode
                 });
@@ -371,9 +371,9 @@ export class OfficeAddComponent implements OnInit {
             })
           this.httpClient.post(this.konSyaUrl, this.refMasterKonsyaType).subscribe(
             (response) => {
-              if (response['ReturnObject'].length > 0) {
-                this.allKonSya = response['ReturnObject'];
-  
+              if (response[CommonConstant.ReturnObj].length > 0) {
+                this.allKonSya = response[CommonConstant.ReturnObj];
+
                 this.OfficeForm.patchValue({
                   KonSya: this.resultData.MrKonvenSyariahCode
                 });
@@ -384,8 +384,8 @@ export class OfficeAddComponent implements OnInit {
             })
           this.httpClient.post(this.holidaySchmUrl, null).subscribe(
             (response) => {
-              if (response['ReturnObject'].length > 0) {
-                this.allHolidaySchm = response['ReturnObject'];
+              if (response[CommonConstant.ReturnObj].length > 0) {
+                this.allHolidaySchm = response[CommonConstant.ReturnObj];
                 this.OfficeForm.patchValue({
                   HolidayScheme: this.resultData.HolidaySchmHId
                 });
@@ -396,8 +396,8 @@ export class OfficeAddComponent implements OnInit {
             })
           this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
             (response) => {
-              if (response['ReturnObject'].length > 0) {
-                this.allWorkingHourSchm = response['ReturnObject'];
+              if (response[CommonConstant.ReturnObj].length > 0) {
+                this.allWorkingHourSchm = response[CommonConstant.ReturnObj];
                 this.OfficeForm.patchValue({
                   WorkingHourScheme: this.resultData.WorkingHourSchmHId
                 });
@@ -430,14 +430,14 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.CntctPersonName = this.OfficeForm.value.CntctPersonName;
     this.officeObj.CntctPersonJobTitle = this.OfficeForm.value.CntctPersonJobTitle;
 
-    if(this.OfficeForm.controls.OfficeType.value == 'HO'){
+    if (this.OfficeForm.controls.OfficeType.value == CommonConstant.HeadOffice) {
       this.officeObj.ParentId = null;
     }
-    if(this.OfficeForm.controls.OfficeType.value != 'HO'){
+    if (this.OfficeForm.controls.OfficeType.value != CommonConstant.HeadOffice) {
       this.officeObj.ParentId = this.OfficeForm.value.OfficeParent;
     }
 
-    if (this.officeObj.MrOfficeTypeCode == "CG") {
+    if (this.officeObj.MrOfficeTypeCode == CommonConstant.CollectionGroup) {
       this.centerGrpObj.MrCenterGrpTypeCode = this.OfficeForm.value.MrCenterGrpTypeCode;
       this.centerGrpObj.CenterGrpCode = this.OfficeForm.value.OfficeCode;
       this.centerGrpObj.CenterGrpName = this.OfficeForm.value.OfficeName;
@@ -471,8 +471,8 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.Fax = this.OfficeForm.value.UcAddress.Fax;
 
     if (this.pageType == "add") {
-      if (this.officeObj.MrOfficeTypeCode == "CG") {
-        this.httpClient.post(AdInsConstant.AddRefOffice, this.officeObj).subscribe(
+      if (this.officeObj.MrOfficeTypeCode == CommonConstant.CollectionGroup) {
+        this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
           (response) => {
             this.toastr.successMessage(response['message']);
             this.router.navigate(["/Office/Paging"]);
@@ -482,7 +482,7 @@ export class OfficeAddComponent implements OnInit {
           }
         );
 
-        this.httpClient.post(AdInsConstant.AddCenterGrp, this.centerGrpObj).subscribe(
+        this.httpClient.post(URLConstant.AddCenterGrp, this.centerGrpObj).subscribe(
           (response) => {
             this.toastr.successMessage(response['message']);
             this.router.navigate(["/Office/Paging"]);
@@ -490,11 +490,10 @@ export class OfficeAddComponent implements OnInit {
           (error) => {
             console.log(error);
           }
-
         );
       }
       else {
-        this.httpClient.post(AdInsConstant.AddRefOffice, this.officeObj).subscribe(
+        this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
           (response) => {
             this.toastr.successMessage(response['message']);
             this.router.navigate(["/Office/Paging"]);
@@ -523,7 +522,7 @@ export class OfficeAddComponent implements OnInit {
     }
   }
   checkType() {
-    if (this.OfficeForm.controls.OfficeType.value == 'HO') {
+    if (this.OfficeForm.controls.OfficeType.value == CommonConstant.HeadOffice) {
       this.OfficeForm.patchValue({
         OfficeParent: null
       });
@@ -531,7 +530,7 @@ export class OfficeAddComponent implements OnInit {
       this.OfficeForm.controls.OfficeParent.clearValidators();
       this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
     }
-    else{
+    else {
       this.InputLookupObj.isRequired = true;
       this.OfficeForm.controls.OfficeParent.setValidators([Validators.required]);
       this.OfficeForm.controls.OfficeParent.updateValueAndValidity();

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-asset-document-master-paging',
@@ -15,8 +15,8 @@ export class AssetDocumentMasterPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetDocumentMaster.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetDocumentMaster.json";
-    this.inputPagingObj.deleteUrl = AdInsConstant.DeleteRefAssetDocData;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefAssetDocData;
   }
 }

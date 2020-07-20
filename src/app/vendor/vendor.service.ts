@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { AdInsConstant } from "app/shared/AdInstConstant";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Injectable({
     providedIn: 'root'
@@ -10,42 +10,50 @@ export class VendorService {
     constructor(private http: HttpClient) { }
 
     GetListVendorBankAccByVendorId(Obj: any): Observable<Object> {
-        return this.http.post(AdInsConstant.GetListVendorBankAccByVendorId, Obj);
+        return this.http.post(URLConstant.GetListVendorBankAccByVendorId, Obj);
     }
 
     AddVendorBankAcc(Obj: any): Observable<Object> {
-        return this.http.post(AdInsConstant.AddVendorBankAcc, Obj);
+        return this.http.post(URLConstant.AddVendorBankAcc, Obj);
     }
 
     EditVendorBankAcc(Obj: any): Observable<Object> {
-        return this.http.post(AdInsConstant.EditVendorBankAcc, Obj);
+        return this.http.post(URLConstant.EditVendorBankAcc, Obj);
     }
 
     GetVendorBankAccByVendorBankAccId(Obj: any): Observable<Object> {
-        return this.http.post(AdInsConstant.GetVendorBankAccByVendorBankAccId, Obj);
+        return this.http.post(URLConstant.GetVendorBankAccByVendorBankAccId, Obj);
     }
 
-    DeleteVendorBankAcc(Obj: any):Observable<Object> {
-        return this.http.post(AdInsConstant.DeleteVendorBankAcc, Obj);
+    DeleteVendorBankAcc(Obj: any): Observable<Object> {
+        return this.http.post(URLConstant.DeleteVendorBankAcc, Obj);
     }
 
-    GetRefMasterListKeyValuePair(Obj : any) : Observable<Object> {
-        return this.http.post(AdInsConstant.GetRefMasterListKeyValueActiveByCode, Obj);
+    GetRefMasterListKeyValuePair(Obj: any): Observable<Object> {
+        return this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, Obj);
     }
 
-    GetVendorAndVendorAddrByVendorId(Obj : any) : Observable<Object> {
-        return this.http.post(AdInsConstant.GetVendorAndVendorAddr, Obj);
+    GetVendorAndVendorAddrByVendorId(Obj: any): Observable<Object> {
+        return this.http.post(URLConstant.GetVendorAndVendorAddr, Obj);
     }
 
-    EditVendorHolding(Obj : any) :  Observable<Object> {
-        return this.http.post(AdInsConstant.EditVendorHolding, Obj);
+    EditVendorHolding(Obj: any): Observable<Object> {
+        return this.http.post(URLConstant.EditVendorHolding, Obj);
     }
-    
-    AddVendorHolding(Obj : any) :  Observable<Object> {
-        return this.http.post(AdInsConstant.AddVendorHolding, Obj);
+
+    AddVendorHolding(Obj: any): Observable<Object> {
+        return this.http.post(URLConstant.AddVendorHolding, Obj);
     }
-    
+
+    EditVendorATPM(Obj: any): Observable<Object> {
+        return this.http.post(URLConstant.EditVendorATPM, Obj);
+    }
+
+    AddVendorATPM(Obj: any): Observable<Object> {
+        return this.http.post(URLConstant.AddVendorATPM, Obj);
+    }
+
     GetListVendorBankAccByVendorEmpId(Obj: any): Observable<Object> {
-        return this.http.post(AdInsConstant.GetListVendorBankAccByVendorEmpId, Obj);
+        return this.http.post(URLConstant.GetListVendorBankAccByVendorEmpId, Obj);
     }
 }

@@ -7,11 +7,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-vendor-paging',
-  templateUrl: './vendor-paging.component.html',
-  styleUrls: ['./vendor-paging.component.scss']
+  templateUrl: './vendor-paging.component.html'
 })
 export class VendorPagingComponent implements OnInit {
   inputPagingObj: any;
@@ -34,7 +34,7 @@ export class VendorPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
 
 
 
@@ -90,12 +90,12 @@ export class VendorPagingComponent implements OnInit {
 
         var WVAddrTypeObj = new WhereValueObj();
         WVAddrTypeObj.property = "AddrType";
-        WVAddrTypeObj.value = "TAX";
+        WVAddrTypeObj.value = CommonConstant.AddrTypeTax;
         this.inputPagingObj.whereValue.push(WVAddrTypeObj);
 
         var WVendorClassObj = new WhereValueObj();
         WVendorClassObj.property = "VendorClass";
-        WVendorClassObj.value = "HO";
+        WVendorClassObj.value = CommonConstant.HeadOffice;
         this.inputPagingObj.whereValue.push(WVendorClassObj);
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {
@@ -115,6 +115,24 @@ export class VendorPagingComponent implements OnInit {
         WVendorClassObj.value = "HOLDING";
         this.inputPagingObj.whereValue.push(WVendorClassObj);
       }
+      else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_ATPM){
+        
+        this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSupplierATPM.json";
+        this.inputPagingObj._url = "./assets/ucpaging/searchSupplierATPM.json";
+        this.inputPagingObj.addCritInput = new Array();
+        var critObj = new CriteriaObj();
+        critObj.propName = "V.MR_VENDOR_CATEGORY_CODE";
+        critObj.restriction = AdInsConstant.RestrictionEq;
+        critObj.value = this.MrVendorCategoryCode;
+
+        this.inputPagingObj.addCritInput.push(critObj);
+
+        var WVendorClassObj = new WhereValueObj();
+        WVendorClassObj.property = "VendorClass";
+        WVendorClassObj.value = CommonConstant.ATPM;
+        this.inputPagingObj.whereValue.push(WVendorClassObj);
+        console.log(this.inputPagingObj);
+      }
     }
 
   }
@@ -128,6 +146,9 @@ export class VendorPagingComponent implements OnInit {
     }
     else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {
       this.router.navigate(["/Vendor/Holding/Detail"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
+    }
+    else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_ATPM) {
+      this.router.navigate(["/Vendor/ATPM/Detail"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
     }
     if (this.Type == "Scheme") {
       this.router.navigate(["/Vendor/VendorScheme/Detail"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });

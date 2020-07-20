@@ -6,6 +6,8 @@ import { FormBuilder } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-personal-address-check',
@@ -45,9 +47,9 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   getListCustAddr: string;
   From : string;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.getCustById = AdInsConstant.GetCustByCustId;
-    this.getListCustAddr = AdInsConstant.GetListCustAddr;
-    this.deleteCustAddr = AdInsConstant.DeleteCustAddr;
+    this.getCustById = URLConstant.GetCustByCustId;
+    this.getListCustAddr = URLConstant.GetListCustAddr;
+    this.deleteCustAddr = URLConstant.DeleteCustAddr;
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -75,7 +77,7 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
       this.custAddrObj.MrCustAddrTypeCode = "-";
       this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
         (response) => {
-            this.listCustAddr = response["ReturnObject"];
+            this.listCustAddr = response[CommonConstant.ReturnObj];
             console.log(this.listCustAddr);
         });
   }

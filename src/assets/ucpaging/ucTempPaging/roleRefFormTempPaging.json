@@ -1,5 +1,4 @@
 {
-    "title": "Ref Form Search",
     "keyProperty": "RefFormId",
     "keyPropCriteria": "REF_FORM_ID",
     "component": [
