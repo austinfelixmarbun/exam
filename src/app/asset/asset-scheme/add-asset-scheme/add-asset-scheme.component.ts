@@ -11,6 +11,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-add-asset-scheme',
@@ -83,20 +84,6 @@ export class AddAssetSchemeComponent implements OnInit {
             addCritAssetMasterId.listValue = arr;
             this.tempPagingObj.addCritInput.push(addCritAssetMasterId);
 
-            const addCritIsFinal = new CriteriaObj();
-            addCritIsFinal.DataType = 'boolean';
-            addCritIsFinal.propName = 'AM.IS_FINAL';
-            addCritIsFinal.restriction = AdInsConstant.RestrictionEq;
-            addCritIsFinal.value = 'true';
-            this.tempPagingObj.addCritInput.push(addCritIsFinal);
-
-            const addCritIsActive = new CriteriaObj();
-            addCritIsActive.DataType = 'boolean';
-            addCritIsActive.propName = 'AM.IS_ACTIVE';
-            addCritIsActive.restriction = AdInsConstant.RestrictionEq;
-            addCritIsActive.value = 'true';
-            this.tempPagingObj.addCritInput.push(addCritIsActive);
-
             const addCritAssetType = new CriteriaObj();
             addCritAssetType.DataType = 'numeric';
             addCritAssetType.propName = 'AM.ASSET_TYPE_ID';
@@ -117,7 +104,7 @@ export class AddAssetSchemeComponent implements OnInit {
 
   SaveAssetSchmMember() {
     if (this.listSelectedId.length == 0) {
-      this.toastr.errorMessage('Please Add At Least One Data');
+      this.toastr.errorMessage(ExceptionConstant.ADD_MIN_1_DATA);
       return;
     }
 

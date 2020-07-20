@@ -60,11 +60,12 @@ export const ROUTES: RouteInfo[] = [
         Path: '', Title: 'Supplier', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
         Submenu: [
           
-          { Path: '/Vendor/Paging', Title: 'Supplier Holding', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_HOLDING }] },
-          { Path: '/Vendor/Paging', Title: 'Supplier HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_HO }] },
-          { Path: '/Vendor/Paging', Title: 'Supplier Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
-          { Path: '/Vendor/Paging', Title: 'Supplier Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Scheme" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
-          { Path: '/Vendor/Paging', Title: 'Supplier Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier ATPM', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.SUPPLIER_ATPM }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier Holding', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.SUPPLIER_HOLDING }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.SUPPLIER_HO }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.SUPPLIER_BRANCH }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Scheme" }, { attr: "MrVendorCategoryCode", value: CommonConstant.SUPPLIER_BRANCH }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Group" }, { attr: "MrVendorCategoryCode", value: CommonConstant.SUPPLIER_BRANCH }] },
       
         ], Params : [] 
       },{

@@ -1,5 +1,5 @@
 {
-    "title": "Industry Type",
+    "sectionTitle": "Industry Type",
     "component": [
       {
         "type": "textbox",
