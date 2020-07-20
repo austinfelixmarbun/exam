@@ -4,7 +4,7 @@
       <div class="card-header header-title">
           <div class="row">
             <div class="col-md-12">
-              <h4 class="card-title" id="horz-layout-colored-controls" translate> Holding Registration </h4>
+              <h4 class="card-title" id="horz-layout-colored-controls" translate> ATPM Registration </h4>
             </div>
           </div>
       </div>
@@ -14,11 +14,11 @@
         <form>
           <div class="form-actions right">
             <span class="mr-1">
-              <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Vendor/Holding/Detail']"
+              <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Vendor/ATPM/Detail']"
               [queryParams]="{VendorId: this.VendorId, mode:'edit'}">
               <i class="ft-plus-circle"></i> Edit Main Info
             </button>
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Paging']" [queryParams]= "{ MrVendorCategoryCode: this.MrVendorCategoryCode  }"   
+            <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Finish()"
             translate> <i class="far fa-check-square"></i> Finish
             </button>
             </span>

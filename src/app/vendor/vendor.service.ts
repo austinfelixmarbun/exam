@@ -45,6 +45,14 @@ export class VendorService {
         return this.http.post(URLConstant.AddVendorHolding, Obj);
     }
 
+    EditVendorATPM(Obj: any): Observable<Object> {
+        return this.http.post(URLConstant.EditVendorATPM, Obj);
+    }
+
+    AddVendorATPM(Obj: any): Observable<Object> {
+        return this.http.post(URLConstant.AddVendorATPM, Obj);
+    }
+
     GetListVendorBankAccByVendorEmpId(Obj: any): Observable<Object> {
         return this.http.post(URLConstant.GetListVendorBankAccByVendorEmpId, Obj);
     }

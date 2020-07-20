@@ -1,6 +1,4 @@
 {
-  "title": "Asset Scheme Member",
-  "exportExcel": false,
   "component": [
     {
       "type": "textbox",
@@ -57,7 +55,8 @@
   ],
   "querystring": {
     "select": "SELECT AM.FULL_ASSET_CODE AS FullAssetCode, AM.FULL_ASSET_NAME AS FullAssetName,AC.ASSET_CATEGORY_NAME AS AssetCategoryName ,ASD.ASSET_SCHM_D_ID AS AssetSchmDId",
-    "from": "FROM dbo.ASSET_MASTER AM WITH(NOLOCK) JOIN dbo.ASSET_CATEGORY AC WITH(NOLOCK) ON AC.ASSET_CATEGORY_ID = AM.ASSET_CATEGORY_ID JOIN dbo.ASSET_SCHM_D ASD WITH(NOLOCK) ON ASD.ASSET_MASTER_ID = AM.ASSET_MASTER_ID"
+    "from": "FROM dbo.ASSET_MASTER AM WITH(NOLOCK) JOIN dbo.ASSET_CATEGORY AC WITH(NOLOCK) ON AC.ASSET_CATEGORY_ID = AM.ASSET_CATEGORY_ID JOIN dbo.ASSET_SCHM_D ASD WITH(NOLOCK) ON ASD.ASSET_MASTER_ID = AM.ASSET_MASTER_ID",
+    "where": "WHERE AM.IS_ACTIVE = 1 AND AM.IS_FINAL = 1"
   },
   "bodyList": [
     {

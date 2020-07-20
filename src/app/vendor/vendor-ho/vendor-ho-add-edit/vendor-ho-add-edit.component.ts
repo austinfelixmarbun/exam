@@ -31,6 +31,7 @@ export class VendorHoAddEditComponent implements OnInit {
   result: any;
   check: any;
   inputLookupParentObj: InputLookupObj = new InputLookupObj();
+  inputLookupATPMObj: InputLookupObj = new InputLookupObj();
   inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
   MrVendorCategoryCode: any;
   arrCrit: any;
@@ -78,7 +79,8 @@ export class VendorHoAddEditComponent implements OnInit {
     Province: [{ value: '', disabled: true }],
     RowVersionVendor: [''],
     RowVersionVendorAddr: [''],
-    IsNpwpExist: [false]
+    IsNpwpExist: [false],
+    VendorAtpmCode: [{ value: '' }]
   })
 
   ngOnInit() {
@@ -132,7 +134,8 @@ export class VendorHoAddEditComponent implements OnInit {
           City: this.result.VendorAddrObj.City,
           Province: this.result.VendorAddrObj.Province,
           RowVersionVendorAddr: this.result.VendorAddrObj.RowVersion,
-          IsNpwpExist: this.result.VendorObj.IsNpwpExist
+          IsNpwpExist: this.result.VendorObj.IsNpwpExist,
+          VendorAtpmCode: this.result.VendorObj.VendorAtpmCode,
         });
 
         this.setLookup();
@@ -241,6 +244,15 @@ export class VendorHoAddEditComponent implements OnInit {
     });
   }
 
+  getLookupATPM(ev){
+    // console.log(ev);
+    // console.log(this.VendorForm);
+    
+    this.VendorForm.patchValue({
+      VendorAtpmCode: ev.VendorCode,
+    });
+  }
+
   updateValueAndValidityForm() {
     this.VendorForm.controls.MrIdTypeCode.updateValueAndValidity();
     this.VendorForm.controls.IdNo.updateValueAndValidity();
@@ -289,6 +301,23 @@ export class VendorHoAddEditComponent implements OnInit {
 
     if (this.MrVendorCategoryCode != "SUPPLIER_HO") {
       this.inputLookupParentObj.isRequired = false;
+    }else{
+      this.inputLookupATPMObj.urlJson = "./assets/uclookup/vendor/lookupVendorParent.json";
+      this.inputLookupATPMObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
+      this.inputLookupATPMObj.urlEnviPaging = environment.FoundationR3Url;
+      this.inputLookupATPMObj.pagingJson = "./assets/uclookup/vendor/lookupVendorParent.json";
+      this.inputLookupATPMObj.genericJson = "./assets/uclookup/vendor/lookupVendorParent.json";
+      this.inputLookupATPMObj.isRequired = false;
+      this.inputLookupATPMObj.addCritInput = new Array();
+
+      var critInput = new CriteriaObj();
+      critInput.propName = "MR_VENDOR_CATEGORY_CODE";
+      critInput.restriction = AdInsConstant.RestrictionEq;
+      critInput.value = CommonConstant.SUPPLIER_ATPM;
+      this.inputLookupATPMObj.addCritInput.push(critInput);
+      this.inputLookupATPMObj.title = CommonConstant.TITLE_SUPPLIER_ATPM;
+      this.inputLookupATPMObj.isReady = true;
+
     }
 
     var critVendorClass = new CriteriaObj();
@@ -310,6 +339,9 @@ export class VendorHoAddEditComponent implements OnInit {
       }
       if (this.result.VendorAddrObj != null) {
         this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.result["VendorAddrObj"].Zipcode };
+      }
+      if (this.result.VendorObj.VendorAtpmCode != null || this.result.VendorObj.VendorAtpmCode != "") {
+        this.inputLookupATPMObj.jsonSelect = { VendorName: this.result.VendorObj.VendorAtpmName };
       }
     }
 
@@ -350,6 +382,7 @@ export class VendorHoAddEditComponent implements OnInit {
       this.vendorHoObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
       this.vendorHoObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
       this.vendorHoObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value;
+      this.vendorHoObj.VendorObj.VendorAtpmCode = this.VendorForm.controls.VendorAtpmCode.value;
 
 
       if (this.vendorHoObj.VendorObj.MrVendorTypeCode == "P") {

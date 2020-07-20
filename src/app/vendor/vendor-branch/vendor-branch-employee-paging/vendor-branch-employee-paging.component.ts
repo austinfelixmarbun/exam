@@ -5,6 +5,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-vendor-branch-employee-paging',
@@ -15,8 +16,9 @@ export class VendorBranchEmployeePagingComponent implements OnInit {
   VendorId: string;
   inputPagingObj: any;
   arrCrit = new Array();
+  MrVendorCategoryCode: string = "";
 
-  constructor(private route: ActivatedRoute) { 
+  constructor(private route: ActivatedRoute, private http : HttpClient) { 
     this.route.queryParams.subscribe(params => {
       if (params["VendorId"] != null) {
         this.VendorId = params["VendorId"];
@@ -37,6 +39,16 @@ export class VendorBranchEmployeePagingComponent implements OnInit {
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.value = this.VendorId;
     this.inputPagingObj.addCritInput.push(critObj);
+
+    
+    this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { VendorId: this.VendorId }).subscribe(
+      (response) => {
+        this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 }

@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { VendorService } from '../vendor.service';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
-  selector: 'app-vendor-holding-registration',
-  templateUrl: './vendor-holding-registration.component.html'
+  selector: 'app-vendor-atpm-registration',
+  templateUrl: './vendor-atpm-registration.component.html'
 })
-export class VendorHoldingRegistrationComponent implements OnInit {
+export class VendorATPMRegistrationComponent implements OnInit {
   VendorId : any;
   objPassing: any = {};
   objPassingCP: any = {};
@@ -20,29 +18,19 @@ export class VendorHoldingRegistrationComponent implements OnInit {
   show : boolean = false;
   ButtonText : string = "Back";
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
-  MrVendorCategoryCode: string = "";
   
-  constructor(private route: ActivatedRoute, private http : HttpClient, private vendorService: VendorService) {
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
     });
    }
 
   ngOnInit() {
-    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorHolding.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorATPM.json";
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.VendorId = this.objPassing["VendorId"];
     this.objPassing["Type"]="Vendor";
-
-    this.vendorService.GetVendorAndVendorAddrByVendorId({ VendorId: this.VendorId }).subscribe(
-      (response) => {
-        this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"];
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
   }
 
   outputValue(ev){
@@ -63,5 +51,9 @@ export class VendorHoldingRegistrationComponent implements OnInit {
   OnExit()
   {
     this.ButtonText = "Back";
+  }
+
+  Finish() {
+    this.router.navigate(["/Vendor/Paging"], { queryParams: { "MrVendorCategoryCode": CommonConstant.SUPPLIER_ATPM } });
   }
 }

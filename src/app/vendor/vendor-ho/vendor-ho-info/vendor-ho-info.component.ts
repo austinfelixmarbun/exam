@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { VendorService } from 'app/vendor/vendor.service';
 
 @Component({
   selector: 'app-vendor-ho-info',
@@ -8,15 +8,23 @@ import { HttpClient } from '@angular/common/http';
 })
 export class VendorHoInfoComponent implements OnInit {
   VendorId: any;
+  MrVendorCategoryCode: string = "";
   
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private vendorService: VendorService) {
     this.route.queryParams.subscribe(params => {
       this.VendorId = params['VendorId'];
     });
   }
 
   ngOnInit() {
-    
+    this.vendorService.GetVendorAndVendorAddrByVendorId({ VendorId: this.VendorId }).subscribe(
+      (response) => {
+        this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 }

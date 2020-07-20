@@ -115,6 +115,24 @@ export class VendorPagingComponent implements OnInit {
         WVendorClassObj.value = "HOLDING";
         this.inputPagingObj.whereValue.push(WVendorClassObj);
       }
+      else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_ATPM){
+        
+        this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSupplierATPM.json";
+        this.inputPagingObj._url = "./assets/ucpaging/searchSupplierATPM.json";
+        this.inputPagingObj.addCritInput = new Array();
+        var critObj = new CriteriaObj();
+        critObj.propName = "V.MR_VENDOR_CATEGORY_CODE";
+        critObj.restriction = AdInsConstant.RestrictionEq;
+        critObj.value = this.MrVendorCategoryCode;
+
+        this.inputPagingObj.addCritInput.push(critObj);
+
+        var WVendorClassObj = new WhereValueObj();
+        WVendorClassObj.property = "VendorClass";
+        WVendorClassObj.value = CommonConstant.ATPM;
+        this.inputPagingObj.whereValue.push(WVendorClassObj);
+        console.log(this.inputPagingObj);
+      }
     }
 
   }
@@ -128,6 +146,9 @@ export class VendorPagingComponent implements OnInit {
     }
     else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {
       this.router.navigate(["/Vendor/Holding/Detail"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
+    }
+    else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_ATPM) {
+      this.router.navigate(["/Vendor/ATPM/Detail"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
     }
     if (this.Type == "Scheme") {
       this.router.navigate(["/Vendor/VendorScheme/Detail"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });

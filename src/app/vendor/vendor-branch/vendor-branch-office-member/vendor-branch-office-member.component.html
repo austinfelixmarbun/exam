@@ -6,7 +6,7 @@
         <app-main-info-view></app-main-info-view>
         <form>
           <div class="form-actions right">
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Branch/Paging']"
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Paging']" [queryParams]= "{ MrVendorCategoryCode: this.MrVendorCategoryCode  }"   
               translate>
               Back
             </button>
