@@ -1,11 +1,15 @@
 <div class="ucSearch-Button-Right">
-  <button type="button" class="backButton" [routerLink]="['/Vendor/VendorScheme/Paging']" translate>
-    <i class="far fa-window-close"></i> Cancel
-  </button>
-  <button type="button" class="addButton" [routerLink]="['/Vendor/VendorScheme/Member/Add']"
-    [queryParams]="{VendorSchmId: this.VendorSchmId, MrVendorCategoryCode:this.MrVendorCategoryCode}">
-    <i class="ft-plus-circle"></i> Add
-  </button>
+  <span class="mr-1">
+ <button type="button" class="btn btn-raised btn-warning mr-1"
+               [routerLink]="['/Vendor/Paging']"
+                [queryParams]="{ Type: 'Scheme', MrVendorCategoryCode : this.MrVendorCategoryCode }" translate>
+      <i class="far fa-window-close"></i> Cancel
+    </button>
+    <button type="button" class="addButton" [routerLink]="['/Vendor/VendorScheme/Member/Add']"
+      [queryParams]="{VendorSchmId: this.VendorSchmId, MrVendorCategoryCode:this.MrVendorCategoryCode}">
+      <i class="ft-plus-circle"></i> Add
+    </button>
+  </span>
 </div>
 <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
 <lib-ucpaging id="memberUcPaging" [searchObj]="inputPagingObj"></lib-ucpaging>

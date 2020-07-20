@@ -17,7 +17,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
     AssetCategoryCode: ['', [Validators.required, Validators.maxLength(50)]],
     IsActive: [true]
   });
-  pageType: string;
+  pageType: string = 'add';
   AssetTypeId: number;
   AssetCategoryId: number;
   result: AssetCategoryObj;

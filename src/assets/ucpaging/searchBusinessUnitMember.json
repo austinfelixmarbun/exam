@@ -1,4 +1,5 @@
 {
+    "title": "Business Unit Member",
     "component": [
         {
             "type": "textbox",
@@ -94,8 +95,14 @@
         {
             "type": "sort",
             "position": "left",
-            "label": "Username",
-            "name": "RU.USERNAME"
+            "label": "Office Name",
+            "name": "RO.OFFICE_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Employee No",
+            "name": "RE.EMP_NO"
         },
         {
             "type": "sort",
@@ -105,10 +112,12 @@
         },
         {
             "type": "sort",
-            "position": "center",
-            "label": "Employee No",
-            "name": "RE.EMP_NO"
+            "position": "left",
+            "label": "Username",
+            "name": "RU.USERNAME"
         },
+
+
         {
             "type": "sort",
             "position": "left",
@@ -121,12 +130,7 @@
             "label": "Supervisor",
             "name": "SPVEMP.EMP_NAME"
         },
-        {
-            "type": "sort",
-            "position": "left",
-            "label": "Office Name",
-            "name": "RO.OFFICE_NAME"
-        },
+
         {
             "type": "sort",
             "position": "center",
@@ -138,18 +142,20 @@
         {
             "type": "text",
             "position": "left",
-            "property": "Username"
-        },
-        {
-            "type": "text",
-            "position": "left",
-            "property": "EmpName"
+            "property": "OfficeName"
         },
         {
             "type": "text",
             "position": "center",
             "property": "EmpNo"
         },
+
+        {
+            "type": "text",
+            "position": "left",
+            "property": "EmpName"
+        },
+
         {
             "type": "text",
             "position": "left",
@@ -158,13 +164,14 @@
         {
             "type": "text",
             "position": "left",
-            "property": "SpvName"
+            "property": "Username"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "OfficeName"
+            "property": "SpvName"
         },
+
         {
             "type": "boolean",
             "position": "center",

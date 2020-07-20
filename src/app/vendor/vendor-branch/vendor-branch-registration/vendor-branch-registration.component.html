@@ -18,7 +18,7 @@
               [queryParams]="{VendorId: this.VendorId, mode:'edit'}">
               <i class="ft-plus-circle"></i> Edit Main Info
             </button>
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Branch/Paging']"
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Paging']" [queryParams]= "{ MrVendorCategoryCode: this.MrVendorCategoryCode  }"   
             translate> Finish </button>
             </span>
           </div>

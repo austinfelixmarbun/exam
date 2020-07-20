@@ -1,12 +1,19 @@
 <div class="col-md-12">
     <div class="card">
       <div class="card-body">
+        <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="form-section card-title" translate>Profession Registration</h4>
+            </div>
+          </div>
+        </div>
         <div class="px-3">
-          <div class="addEdit">
             <form class="form form-horizontal" [formGroup]="RefProfessionForm" (ngSubmit)="RefProfessionForm.valid && SaveForm()"
                   #enjiForm="ngForm">
               <div class="form-body">
-                <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Profession {{this.pageType}}</h4>
+                <lib-ucSubsection [id]="'ProfessionInfoId'" [title]="'Profession '+ pageType" [panel]="'ProfessionInfo'"></lib-ucSubsection>
+                <div id="ProfessionInfo">
                 <div class="form-group row">
                   <label class="col-md-3  adInsLabel adins-required adins-required-label" translate>Profession Code </label>
                   <div class="col-md-9">
@@ -41,6 +48,7 @@
                   </div>
                 </div>
               </div>
+              </div>
               <div class="form-actions right">
                 <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/CommonSetting/Profession/Paging']"
                   translate>
@@ -51,7 +59,6 @@
                 </button>
               </div>
             </form>
-          </div>
         </div>
       </div>
     </div>

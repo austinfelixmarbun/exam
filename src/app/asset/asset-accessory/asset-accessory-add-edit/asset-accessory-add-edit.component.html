@@ -1,12 +1,19 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="form-section card-title" translate>Asset Accesory Registration</h4>
+          </div>
+        </div>
+      </div>
       <div class="px-3">
-        <div class="addEdit">
           <form class="form form-horizontal" [formGroup]="AssetAccessoryForm"
             (ngSubmit)="AssetAccessoryForm.valid && SaveForm()" #enjiForm="ngForm">
             <div class="form-body">
-              <h4 class="form-section card-title" translate>Asset Accessory</h4>
+              <lib-ucSubsection [id]="'AssetAccesoryId'" [title]="'Asset Accesory '+ pageType" [panel]="'AssetAccesory'"></lib-ucSubsection>
+              <div id="AssetAccesory">
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" translate>Asset Type Name</label>
                 <div class="col-md-9">
@@ -40,6 +47,7 @@
                 </div>
               </div>
             </div>
+            </div>
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['../Paging']"
                 [queryParams]="{ AssetTypeId: this.AssetTypeId }" translate>
@@ -50,7 +58,6 @@
               </button>
             </div>
           </form>
-        </div>
       </div>
     </div>
   </div>

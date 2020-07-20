@@ -1,12 +1,18 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="form-section card-title" translate>Asset Type Registration</h4>
+          </div>
+        </div>
+      </div>
       <div class="px-3">
         <form class="form form-horizontal" [formGroup]="AssetTypeForm" (ngSubmit)="AssetTypeForm.valid && SaveForm()"
           #enjiForm="ngForm">
           <div class="form-body">
-            <h4 class="form-section card-title" translate>Asset Type Information</h4>
-            <lib-ucSubsection [id]="'AssetType'" [title]="this.pageType+ ' Asset Type'" [panel]="'AssetTypeId'">
+            <lib-ucSubsection [id]="'AssetType'" [title]="'Asset Type Information '+ pageType" [panel]="'AssetTypeId'">
             </lib-ucSubsection>
             <div id="AssetTypeId">
               <div class="form-group row adins-required">

@@ -1,50 +1,60 @@
-
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="form-section card-title" translate>Job Title</h4>
+          </div>
+        </div>
+      </div>
       <div class="px-3">
-        <div class="addEdit">
-          <form class="form form-horizontal" [formGroup]="RefJobTitleForm" (ngSubmit)="RefJobTitleForm.valid && SaveForm()"
-                #enjiForm="ngForm">
-            <div class="form-body">
-              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Job Title Information</h4>
+        <form class="form form-horizontal" [formGroup]="RefJobTitleForm"
+          (ngSubmit)="RefJobTitleForm.valid && SaveForm()" #enjiForm="ngForm">
+          <div class="form-body">
+            <lib-ucSubsection [id]="'JobTitleInfoId'" [title]="'Job Title Information'" [panel]="'JobTitleInfo'">
+            </lib-ucSubsection>
+            <div class="form-body" id="JobTitleInfo">
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Job Title Code </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput code" formControlName="JobTitleCode"
-                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefJobTitleForm.controls.JobTitleCode.invalid }"
-                         [attr.disabled]="pageType == 'edit' ? true : null">
-                  <lib-uc-show-errors [control]="RefJobTitleForm.controls.JobTitleCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefJobTitleForm.controls.JobTitleCode.invalid }"
+                    [attr.disabled]="pageType == 'edit' ? true : null">
+                  <lib-uc-show-errors [control]="RefJobTitleForm.controls.JobTitleCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Job Title Name </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput name" formControlName="JobTitleName"
-                         [ngClass]="{ 'is-invalid': enjiForm.submitted && RefJobTitleForm.controls.JobTitleName.invalid }">
-                  <lib-uc-show-errors [control]="RefJobTitleForm.controls.JobTitleName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefJobTitleForm.controls.JobTitleName.invalid }">
+                  <lib-uc-show-errors [control]="RefJobTitleForm.controls.JobTitleName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Description </label>
                 <div class="col-md-9">
                   <textarea type="text" class="form-control adInsInput" formControlName="Descr"
-                            [ngClass]="{ 'is-invalid': enjiForm.submitted && RefJobTitleForm.controls.Descr.invalid }"></textarea>
-                  <lib-uc-show-errors [control]="RefJobTitleForm.controls.Descr" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefJobTitleForm.controls.Descr.invalid }"></textarea>
+                  <lib-uc-show-errors [control]="RefJobTitleForm.controls.Descr" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
             </div>
-            <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Organization/JobTitle']"
-                      translate>
-                <i class="far fa-window-close"></i> Cancel
-              </button>
-              <button type="submit" class="btn btn-raised btn-primary" translate>
-                <i class="far fa-check-square"></i> Save
-              </button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Organization/JobTitle']"
+              translate>
+              <i class="far fa-window-close"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary" translate>
+              <i class="far fa-check-square"></i> Save
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

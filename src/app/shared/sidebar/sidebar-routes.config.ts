@@ -61,54 +61,54 @@ export const ROUTES: RouteInfo[] = [
         Path: '', Title: 'Supplier', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
         Submenu: [
           
-          { Path: '/Vendor/Paging', Title: 'Supplier ATPM', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.SUPPLIER_ATPM }] },
-          { Path: '/Vendor/Paging', Title: 'Supplier Holding', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.SUPPLIER_HOLDING }] },
-          { Path: '/Vendor/Paging', Title: 'Supplier HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.SUPPLIER_HO }] },
-          { Path: '/Vendor/Paging', Title: 'Supplier Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.SUPPLIER_BRANCH }] },
-          { Path: '/Vendor/Paging', Title: 'Supplier Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Scheme" }, { attr: "MrVendorCategoryCode", value: CommonConstant.SUPPLIER_BRANCH }] },
-          { Path: '/Vendor/Paging', Title: 'Supplier Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Group" }, { attr: "MrVendorCategoryCode", value: CommonConstant.SUPPLIER_BRANCH }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier ATPM', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_ATPM }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier Holding', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_HOLDING }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_HO }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Scheme" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
       
         ], Params : [] 
       },{
         Path: '', Title: 'Asset Insurance', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
         Submenu: [
           
-          { Path: '/Vendor/Paging', Title: 'Insurance HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.ASSET_INSCO_HO }] },
-          { Path: '/Vendor/Paging', Title: 'Insurance Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.ASSET_INSCO_BRANCH }] },
-          { Path: '/Vendor/Paging', Title: 'Insurance Branch Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Scheme" },{ attr: "MrVendorCategoryCode", value: CommonConstant.ASSET_INSCO_BRANCH }] },
-          { Path: '/Vendor/Paging', Title: 'Insurance Branch Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Group" }, { attr: "MrVendorCategoryCode", value: CommonConstant.ASSET_INSCO_BRANCH }] },
+          { Path: '/Vendor/Paging', Title: 'Insurance HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.ASSET_INSCO_HO }] },
+          { Path: '/Vendor/Paging', Title: 'Insurance Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.ASSET_INSCO_BRANCH }] },
+          { Path: '/Vendor/Paging', Title: 'Insurance Branch Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Scheme" },{ Attr: "MrVendorCategoryCode", Value: CommonConstant.ASSET_INSCO_BRANCH }] },
+          { Path: '/Vendor/Paging', Title: 'Insurance Branch Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.ASSET_INSCO_BRANCH }] },
       
         ], Params : [] 
       },{
         Path: '', Title: 'Life Insurance', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
         Submenu: [
           
-          { Path: '/Vendor/Paging', Title: 'Life Insurance HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.LIFE_INSCO_HO }] },
-          { Path: '/Vendor/Paging', Title: 'Life Insurance Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.LIFE_INSCO_BRANCH }] },      
-          { Path: '/Vendor/Paging', Title: 'Life Insurance Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Scheme" }, { attr: "MrVendorCategoryCode", value: CommonConstant.LIFE_INSCO_BRANCH }] },      
-          { Path: '/Vendor/Paging', Title: 'Life Insurance Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [],  Params: [{ attr: "Type", value: "Group" }, { attr: "MrVendorCategoryCode", value: CommonConstant.LIFE_INSCO_BRANCH }] },      
+          { Path: '/Vendor/Paging', Title: 'Life Insurance HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.LIFE_INSCO_HO }] },
+          { Path: '/Vendor/Paging', Title: 'Life Insurance Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.LIFE_INSCO_BRANCH }] },      
+          { Path: '/Vendor/Paging', Title: 'Life Insurance Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Scheme" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.LIFE_INSCO_BRANCH }] },      
+          { Path: '/Vendor/Paging', Title: 'Life Insurance Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [],  Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.LIFE_INSCO_BRANCH }] },      
         ], Params : [] 
       },
       {
         Path: '', Title: 'Surveyor', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
         Submenu: [
           
-          { Path: '/Vendor/Paging', Title: 'Surveyor HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.SURVEYOR_HO }] },
-          { Path: '/Vendor/Paging', Title: 'Surveyor Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.SURVEYOR_BRANCH }] },  
-          { Path: '/Vendor/Paging', Title: 'Surveyor Branch Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Scheme" }, { attr: "MrVendorCategoryCode", value: CommonConstant.SURVEYOR_BRANCH }] },      
-          { Path: '/Vendor/Paging', Title: 'Surveyor Branch Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Group" }, { attr: "MrVendorCategoryCode", value: CommonConstant.SURVEYOR_BRANCH }] },   
+          { Path: '/Vendor/Paging', Title: 'Surveyor HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SURVEYOR_HO }] },
+          { Path: '/Vendor/Paging', Title: 'Surveyor Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SURVEYOR_BRANCH }] },  
+          { Path: '/Vendor/Paging', Title: 'Surveyor Branch Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Scheme" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SURVEYOR_BRANCH }] },      
+          { Path: '/Vendor/Paging', Title: 'Surveyor Branch Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SURVEYOR_BRANCH }] },   
         ], Params : [] 
       },
       {
         Path: '', Title: 'Agency', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
         Submenu: [
           
-          { Path: '/Vendor/Paging', Title: 'Agency Personal', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.AGENCY_PERSONAL }] },
-          { Path: '/Vendor/Paging', Title: 'Agency Company', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "MrVendorCategoryCode", value: CommonConstant.AGENCY_COMPANY }] },  
-          { Path: '/Vendor/Paging', Title: 'Agency Personal Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Scheme" }, { attr: "MrVendorCategoryCode", value: CommonConstant.AGENCY_PERSONAL }] },      
-          { Path: '/Vendor/Paging', Title: 'Agency Company Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Scheme" }, { attr: "MrVendorCategoryCode", value: CommonConstant.AGENCY_COMPANY }] },      
-          { Path: '/Vendor/Paging', Title: 'Agency Personal Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Group" }, { attr: "MrVendorCategoryCode", value: CommonConstant.AGENCY_PERSONAL }] }, 
-          { Path: '/Vendor/Paging', Title: 'Agency Company Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ attr: "Type", value: "Group" }, { attr: "MrVendorCategoryCode", value: CommonConstant.AGENCY_COMPANY }] }, 
+          { Path: '/Vendor/Paging', Title: 'Agency Personal', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.AGENCY_PERSONAL }] },
+          { Path: '/Vendor/Paging', Title: 'Agency Company', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.AGENCY_COMPANY }] },  
+          { Path: '/Vendor/Paging', Title: 'Agency Personal Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Scheme" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.AGENCY_PERSONAL }] },      
+          { Path: '/Vendor/Paging', Title: 'Agency Company Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Scheme" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.AGENCY_COMPANY }] },      
+          { Path: '/Vendor/Paging', Title: 'Agency Personal Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.AGENCY_PERSONAL }] }, 
+          { Path: '/Vendor/Paging', Title: 'Agency Company Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.AGENCY_COMPANY }] }, 
       
         ], Params : [] 
       },

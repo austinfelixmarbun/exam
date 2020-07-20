@@ -1,19 +1,27 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="form-section card-title" translate>Asset Document Master Registration</h4>
+          </div>
+        </div>
+      </div>
       <div class="px-3">
-        <div class="addEdit">
-          <form class="form form-horizontal" [formGroup]="RefAssetDocForm"
-            (ngSubmit)="RefAssetDocForm.valid && SaveForm()" #enjiForm="ngForm">
-            <div class="form-body">
-              <h4 class="form-section card-title" translate> Asset Document Master Information</h4>
+        <form class="form form-horizontal" [formGroup]="RefAssetDocForm"
+          (ngSubmit)="RefAssetDocForm.valid && SaveForm()" #enjiForm="ngForm">
+          <div class="form-body">
+            <lib-ucSubsection [id]="'AssetDocMasterInfoId'" [title]="'Asset Document Master Information '+ pageType"
+              [panel]="'AssetDocMasterInfo'"></lib-ucSubsection>
+            <div id="AssetDocMasterInfo">
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" translate>Asset Document Code </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="AssetDocCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAssetDocForm.controls.AssetDocCode.invalid}">
-                  <lib-uc-show-errors [control]="RefAssetDocForm.controls.AssetDocCode"
-                  [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                  <lib-uc-show-errors [control]="RefAssetDocForm.controls.AssetDocCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
@@ -21,8 +29,8 @@
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="AssetDocName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAssetDocForm.controls.AssetDocName.invalid}">
-                  <lib-uc-show-errors [control]="RefAssetDocForm.controls.AssetDocName"
-                  [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                  <lib-uc-show-errors [control]="RefAssetDocForm.controls.AssetDocName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
@@ -32,17 +40,17 @@
                 </div>
               </div>
             </div>
-            <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['../Paging']"
-                [queryParams]="{ AssetTypeId: this.AssetTypeId }" translate>
-                <i class="far fa-window-close"></i> Cancel
-              </button>
-              <button type="submit" class="btn btn-raised btn-primary" translate>
-                <i class="far fa-check-square"></i> Save
-              </button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['../Paging']"
+              [queryParams]="{ AssetTypeId: this.AssetTypeId }" translate>
+              <i class="far fa-window-close"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary" translate>
+              <i class="far fa-check-square"></i> Save
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
