@@ -68,6 +68,14 @@
                 <span class="bs-stepper-label">Financial Data</span>
               </button>
             </div>
+            <div class="line"></div>
+            <div class="step" data-target="#cust-attr-tab">
+              <button type="button" class="step-trigger" role="tab" aria-controls="cust-attr-tab"
+                id="cust-attr-tab-trigger" (click)="EnterTab('CustAttr')" [disabled]="CustStepIndex < 7">
+                <span class="bs-stepper-circle">7</span>
+                <span class="bs-stepper-label">Customer Attribute</span>
+              </button>
+            </div>
           </div>
           <br><br>
           <div class="bs-stepper-content">
@@ -93,6 +101,10 @@
             <div id="financial-tab" class="content" role="tabpanel" aria-labelledby="financial-tab-trigger">
               <app-cust-fin-data-tab [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 6">
               </app-cust-fin-data-tab>
+            </div>
+            <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
+              <app-cust-attr-section [CustId]="IdCust" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 7">
+              </app-cust-attr-section>
             </div>
           </div>
         </div>

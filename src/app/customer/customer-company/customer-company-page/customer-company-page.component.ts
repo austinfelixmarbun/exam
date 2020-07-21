@@ -97,6 +97,9 @@ export class CustomerCompanyPageComponent implements OnInit {
     if (type == "Legal") {
       this.stepper.to(7);
     }
+    if (type == "CustAttr") {
+      this.stepper.to(8);
+    }
   }
   
   getValue(ev: any) {

@@ -756,6 +756,9 @@ export class URLConstant {
 
     // CUST ATTR CONTENT
     public static GetCustAttrContentForCustViewByCustId = environment.FoundationR3Url + "/CustAttrContent/GetCustAttrContentForCustViewByCustId";
+    public static AddListCustAttrContent = environment.FoundationR3Url + "/CustAttrContent/AddListCustAttrContent";
+    public static EditListCustAttrContent = environment.FoundationR3Url + "/CustAttrContent/EditListCustAttrContent";
+    public static GetListCustAttrContentByCustIdForCust = environment.FoundationR3Url + "/CustAttrContent/GetListCustAttrContentByCustIdForCust";
 
     //CUST CONTACT PERSON
     public static GetCustCompanyContactPersonForCustViewByCustId = environment.FoundationR3Url + "/CustCompanyContactPerson/GetCustCompanyContactPersonForCustViewByCustId";
