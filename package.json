@@ -30,7 +30,7 @@
     "@adins/uc-subsection": "^1.0.4",
     "@adins/ucaddress": "^1.0.14",
     "@adins/ucaddtotemp": "^1.0.11",
-    "@adins/ucapproval": "^1.0.6",
+    "@adins/ucapproval": "^1.0.7",
     "@adins/ucapprovalhist": "^1.0.14",
     "@adins/ucapprovalrecommendation": "^1.0.0",
     "@adins/ucapprovalsummary": "^1.0.2",
