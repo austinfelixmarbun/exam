@@ -201,7 +201,10 @@ export class ProdOfferingAddComponent implements OnInit {
 
   ProdName = "";
   handleOutput(event) {
-    console.log(this.inputLookupObj.CurrentProdHId)
+    console.log(this.inputLookupObj.CurrentProdHId);
+    this.ProdOfferingForm.patchValue({
+      ProdName: event.ProdName
+    });
   }
 
   ValidateDate() {
