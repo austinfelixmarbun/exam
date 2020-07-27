@@ -1,40 +1,33 @@
-<div class="row text-left">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-body">
-        <div class="card-header header-title">
-          <div class="row">
-              <div class="col-md-12">
-                <h4 class="card-title" id="horz-layout-colored-controls" translate> Branch Registration </h4>
-              </div>
-          </div>
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Vendor/Branch/Add']"
+      [queryParams]="{VendorId: this.VendorId, mode:'edit'}">
+      <i class="ft-plus-circle"></i> Edit Main Info
+    </button>
+    <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Paging']"
+      [queryParams]="{ MrVendorCategoryCode: this.MrVendorCategoryCode  }" translate> Finish
+    </button>
+  </span>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="card-header header-title">
+      <div class="row">
+        <div class="col-md-12">
+          <h4 class="card-title" id="horz-layout-colored-controls" translate> Branch Registration </h4>
         </div>
-        <br>
-        <app-main-info-view></app-main-info-view>
-        <form>
-          <div class="form-actions right">
-            <span class="mr-1">
-              <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Vendor/Branch/Add']"
-              [queryParams]="{VendorId: this.VendorId, mode:'edit'}">
-              <i class="ft-plus-circle"></i> Edit Main Info
-            </button>
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Paging']" [queryParams]= "{ MrVendorCategoryCode: this.MrVendorCategoryCode  }"   
-            translate> Finish </button>
-            </span>
-          </div>
-        </form>
-        <aw-wizard #wizard navBarLayout="large-empty-symbols" [awNavigationMode] navigateBackward="allow"
-          navigateForward="allow">
-          <aw-wizard-step [stepTitle]="'Address'"
-            [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-            <app-address [objInput]="objPassing"> </app-address>
-          </aw-wizard-step>
-          <aw-wizard-step [stepTitle]="'Bank Info'"
-            [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
-            <app-bank-info [objInput]="objPassing"> </app-bank-info>
-          </aw-wizard-step>
-        </aw-wizard>
       </div>
     </div>
+    <br>
+    <app-main-info-view></app-main-info-view>
+    <aw-wizard #wizard navBarLayout="large-empty-symbols" [awNavigationMode] navigateBackward="allow"
+      navigateForward="allow">
+      <aw-wizard-step [stepTitle]="'Address'" [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+        <app-address [objInput]="objPassing"> </app-address>
+      </aw-wizard-step>
+      <aw-wizard-step [stepTitle]="'Bank Info'" [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome' }">
+        <app-bank-info [objInput]="objPassing"> </app-bank-info>
+      </aw-wizard-step>
+    </aw-wizard>
   </div>
 </div>

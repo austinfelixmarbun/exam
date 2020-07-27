@@ -8,16 +8,6 @@
           </div>
         </div>
       </div>
-      <div class="ucSearch-Button-Right">
-        <span class="mr-1">
-          <button type="button" class="btn btn-raised btn-warning mr-1" (click)="BackNavigate()">
-            <i class="far fa-window-close"></i> Cancel
-          </button>
-          <button type="submit" class="btn btn-raised btn-primary" translate>
-            <i class="far fa-check-square"></i> Save
-          </button>
-        </span>
-      </div>
       <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
       <div class="px-3">
         <form class="form form-horizontal" [formGroup]="HolidayListForm" #HolidayListReqForm="ngForm"
@@ -127,6 +117,16 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="form-actions right">
+            <span class="mr-1">
+              <button type="button" class="btn btn-raised btn-warning mr-1" (click)="BackNavigate()">
+                <i class="far fa-window-close"></i> Cancel
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary" translate>
+                <i class="far fa-check-square"></i> Save
+              </button>
+            </span>
           </div>
         </form>
       </div>

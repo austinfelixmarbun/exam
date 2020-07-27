@@ -33,8 +33,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
     this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/vendorBranchMemberTempPaging.json";
 
-    const addCritIsActive = new CriteriaObj();
-    addCritIsActive.DataType = 'boolean';
+    var addCritIsActive = new CriteriaObj();
     addCritIsActive.propName = 'RO.IS_ACTIVE';
     addCritIsActive.restriction = AdInsConstant.RestrictionEq;
     addCritIsActive.value = "true";
