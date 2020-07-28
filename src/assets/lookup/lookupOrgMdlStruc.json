@@ -1,6 +1,6 @@
 {
   "url": "http://getOrgMdlStruc",
-  "title":"Lookup Organization Model Structure",
+  "sectionTitle":"Lookup Organization Model Structure",
   "component": [
     {
       "type": "numeric",

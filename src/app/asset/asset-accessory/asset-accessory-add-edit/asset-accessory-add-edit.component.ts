@@ -17,7 +17,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
     AssetAccessoryCode: ['', [Validators.required, Validators.maxLength(50)]],
     IsActive: [true]
   });
-  pageType: string;
+  pageType: string = 'add';
   AssetTypeId: number;
   AssetAccessoryId: number;
   result: AssetAccessoryObj = new AssetAccessoryObj();

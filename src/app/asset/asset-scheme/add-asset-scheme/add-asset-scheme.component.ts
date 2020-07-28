@@ -84,20 +84,6 @@ export class AddAssetSchemeComponent implements OnInit {
             addCritAssetMasterId.listValue = arr;
             this.tempPagingObj.addCritInput.push(addCritAssetMasterId);
 
-            const addCritIsFinal = new CriteriaObj();
-            addCritIsFinal.DataType = 'boolean';
-            addCritIsFinal.propName = 'AM.IS_FINAL';
-            addCritIsFinal.restriction = AdInsConstant.RestrictionEq;
-            addCritIsFinal.value = 'true';
-            this.tempPagingObj.addCritInput.push(addCritIsFinal);
-
-            const addCritIsActive = new CriteriaObj();
-            addCritIsActive.DataType = 'boolean';
-            addCritIsActive.propName = 'AM.IS_ACTIVE';
-            addCritIsActive.restriction = AdInsConstant.RestrictionEq;
-            addCritIsActive.value = 'true';
-            this.tempPagingObj.addCritInput.push(addCritIsActive);
-
             const addCritAssetType = new CriteriaObj();
             addCritAssetType.DataType = 'numeric';
             addCritAssetType.propName = 'AM.ASSET_TYPE_ID';

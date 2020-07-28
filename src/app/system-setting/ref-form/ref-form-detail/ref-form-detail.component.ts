@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -10,6 +10,7 @@ import { RefFormObj } from 'app/shared/model/RefFormObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ParameterObj } from 'app/shared/model/ParameterObj.Model';
 
 @Component({
   selector: 'app-ref-form-detail',
@@ -26,6 +27,7 @@ export class RefFormDetailComponent implements OnInit {
   resultRefForm: any;
   RefFormId: number;
   checkClass: boolean = false;
+  parameterObj : Array<ParameterObj> = new Array<ParameterObj>();
 
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -46,8 +48,12 @@ export class RefFormDetailComponent implements OnInit {
     IsHidden: false,
     IsExternalLink: false
   });
-
+  ParamForm = this.fb.group({
+    ParameterValue : [''],
+    ParameterAttribute : ['']
+  });
   ngOnInit() {
+    
     var refMasterModuleObj = {
     }
 
@@ -91,6 +97,7 @@ export class RefFormDetailComponent implements OnInit {
           this.resultRefForm = response;
           this.refFormObj = response;
           this.refFormObj.RefFormId = this.RefFormId;
+          this.parameterObj = this.resultRefForm.ParameterList;
           this.refFormObj.RowVersion = this.refFormObj.RowVersion;
           this.RefForm.patchValue({
             RefModuleId: this.refFormObj.RefModuleId,
@@ -113,6 +120,19 @@ export class RefFormDetailComponent implements OnInit {
       this.mode = "add";
       this.setLookup();
     }
+  }
+
+  AddParam(){
+    if( this.ParamForm.controls.ParameterAttribute.value == "" || this.ParamForm.controls.ParameterValue.value == ""){
+      this.toastr.errorMessage("Parameter Attribute and Parameter Value cannot be empty.")
+      return;
+    }
+    var paramObj = new ParameterObj();
+    paramObj.Attr = this.ParamForm.controls.ParameterAttribute.value;
+    paramObj.Value = this.ParamForm.controls.ParameterValue.value;
+    this.parameterObj.push(paramObj);
+    this.ParamForm.reset();
+    
   }
 
   CheckClass() {
@@ -156,6 +176,10 @@ export class RefFormDetailComponent implements OnInit {
     this.refFormObj.ParentId = ev.RefFormId;
   }
 
+  DeleteParam(i){
+    this.parameterObj.splice(i,1)
+  }
+
   SaveForm() {
     this.refFormObj.RefModuleId = this.RefForm.controls.RefModuleId.value;
     this.refFormObj.Class = this.RefForm.controls.Class.value;
@@ -166,6 +190,8 @@ export class RefFormDetailComponent implements OnInit {
     this.refFormObj.HierarchyNo = this.RefForm.controls.HierarchyNo.value;
     this.refFormObj.IsHidden = this.RefForm.controls.IsHidden.value;
     this.refFormObj.IsExternalLink = this.RefForm.controls.IsExternalLink.value;
+    this.refFormObj.ParameterList = this.parameterObj;
+    
     if (this.refFormObj.Class == "has-sub") {
       this.refFormObj.Path = "";
     } else if (this.refFormObj.Class == "no-sub") {

@@ -1,23 +1,27 @@
-
 <div class="row text-left">
   <div class="col-md-12">
     <div class="card">
-
       <div class="card-body">
+        <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="card-title" id="horz-layout-colored-controls" translate> Bank Registration</h4>
+              <br>
+            </div>
+          </div>
+        </div>
         <div class="px-3">
           <form class="form form-horizontal" [formGroup]="BankAddForm" #BankAddReqForm="ngForm"
             (ngSubmit)="BankAddForm.valid && SaveForm()">
             <lib-ucSubsection [id]="'BankInformationId'" [title]="title" [panel]="'BankInformation'"></lib-ucSubsection>
-
             <div class="form-body" id="BankInformation">
-              <!-- <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Bank Information</h4> -->
-              
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="bankCode" translate>Bank Code </label>
                 <div class="col-md-9">
                   <input type="text" id="bankCode" class="form-control adInsInput width-25-per"
                     formControlName="BankCode">
-                  <lib-uc-show-errors [control]="BankAddForm.controls.BankCode" [submit]="BankAddReqForm.submitted"></lib-uc-show-errors>
+                  <lib-uc-show-errors [control]="BankAddForm.controls.BankCode" [submit]="BankAddReqForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
@@ -25,7 +29,8 @@
                 <div class="col-md-9">
                   <input type="text" id="bankName" class="form-control adInsInput width-25-per"
                     formControlName="BankName">
-                  <lib-uc-show-errors [control]="BankAddForm.controls.BankName" [submit]="BankAddReqForm.submitted"></lib-uc-show-errors>
+                  <lib-uc-show-errors [control]="BankAddForm.controls.BankName" [submit]="BankAddReqForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
@@ -33,28 +38,26 @@
                 <div class="col-md-9">
                   <input type="text" id="regRptCode" class="form-control adInsInput width-25-per"
                     formControlName="RegRptCode">
-                    <lib-uc-show-errors [control]="BankAddForm.controls.RegRptCode" [submit]="BankAddReqForm.submitted"></lib-uc-show-errors>
+                  <lib-uc-show-errors [control]="BankAddForm.controls.RegRptCode" [submit]="BankAddReqForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" translate>Active Status </label>
                 <div class="col-md-9">
-                  <input class="border-primary" type="checkbox" 
-                    formControlName="IsActive">
+                  <input class="border-primary" type="checkbox" formControlName="IsActive">
                 </div>
               </div>
             </div>
-          
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/CommonSetting/Bank/Paging']" translate>
+              <button type="button" class="btn btn-raised btn-warning mr-1"
+                [routerLink]="['/CommonSetting/Bank/Paging']" translate>
                 <i class="far fa-window-close"></i> Cancel
               </button>
-              
               <button type="submit" class="btn btn-raised btn-primary">
                 <i class="far fa-check-square"></i> Save
               </button>
             </div>
-
           </form>
         </div>
       </div>

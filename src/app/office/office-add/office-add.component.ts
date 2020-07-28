@@ -153,8 +153,6 @@ export class OfficeAddComponent implements OnInit {
     this.InputLookupObj.urlJson = "./assets/lookup/lookupOfficeParent.json";
     this.InputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
     this.InputLookupObj.urlEnviPaging = environment.FoundationR3Url;
-    this.InputLookupObj.pagingJson = "./assets/lookup/lookupOfficeParent.json";
-    this.InputLookupObj.genericJson = "./assets/lookup/lookupOfficeParent.json";
     this.InputLookupObj.isRequired = true;
     this.InputLookupObj.ddlEnvironments = [
       {

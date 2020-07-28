@@ -1,6 +1,6 @@
 {
     "url": "http://getSupplier",
-    "title":"Lookup Product",
+    "sectionTitle":"Lookup Product",
     "component": [
       {
         "type": "textbox",

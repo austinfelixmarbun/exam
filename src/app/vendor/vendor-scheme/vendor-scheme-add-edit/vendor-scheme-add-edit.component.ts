@@ -97,7 +97,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
           this.http.post(URLConstant.EditVendorSchm, this.vendorSchemeObj).subscribe(
               (response) => {
                   this.toastr.successMessage(response["message"]);
-                  this.router.navigateByUrl('/Vendor/VendorScheme/Paging');
+                  this.router.navigate(["/Vendor/Paging/"], { queryParams: { "Type" : "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode } });
               },
               (error) => {
                   console.log(error);
@@ -108,7 +108,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
           this.http.post(URLConstant.AddVendorSchm, this.vendorSchemeObj).subscribe(
               (response) => {
                   this.toastr.successMessage(response["message"]);
-                  this.router.navigateByUrl('/Vendor/VendorScheme/Paging');
+                  this.router.navigate(["/Vendor/Paging/"], { queryParams: { "Type" : "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode } });
               },
               (error) => {
                   console.log(error);

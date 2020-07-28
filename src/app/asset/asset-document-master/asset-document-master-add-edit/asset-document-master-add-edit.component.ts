@@ -13,7 +13,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 })
 
 export class AssetDocumentMasterAddEditComponent implements OnInit {
-  pageType: string;
+  pageType: string = 'add';
   RefAssetDocId: number;
   result: RefAssetDocObj = new RefAssetDocObj();
   refAssetObj: RefAssetDocObj = new RefAssetDocObj();

@@ -18,7 +18,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 export class ProductHOAddComponent implements OnInit {
 
   param: any;
-  mode: string = "add";
+  mode: string = 'add';
   key: any;
   criteria: CriteriaObj[] = [];
   source:string="";
@@ -53,7 +53,6 @@ export class ProductHOAddComponent implements OnInit {
       }
     })
   }
-
 
   ResultResponse: any;
   ngOnInit() {

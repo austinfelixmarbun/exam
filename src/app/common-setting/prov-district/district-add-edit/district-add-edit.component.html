@@ -1,12 +1,20 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="form-section card-title" translate>District Registration</h4>
+          </div>
+        </div>
+      </div>
       <div class="px-3">
-        <div class="addEdit">
-          <form class="form form-horizontal" [formGroup]="DistrictForm" (ngSubmit)="DistrictForm.valid && SaveForm()"
-                #enjiForm="ngForm">
-            <div class="form-body">
-              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> District {{this.pageType}}</h4>
+        <form class="form form-horizontal" [formGroup]="DistrictForm" (ngSubmit)="DistrictForm.valid && SaveForm()"
+          #enjiForm="ngForm">
+          <div class="form-body">
+            <lib-ucSubsection [id]="'DistrictInfoId'" [title]="'District '+ pageType" [panel]="'DistrictInfo'">
+            </lib-ucSubsection>
+            <div id="DistrictInfo">
               <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" translate>Province Name </label>
                 <div class="col-md-9">
@@ -17,16 +25,27 @@
                 <label class="col-md-3  adInsLabel" translate>District Code </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="ProvDistrictCode"
-                         [ngClass]="{ 'is-invalid': enjiForm.submitted && DistrictForm.controls.ProvDistrictCode.invalid }">
-                  <lib-uc-show-errors [control]="DistrictForm.controls.ProvDistrictCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && DistrictForm.controls.ProvDistrictCode.invalid }">
+                  <lib-uc-show-errors [control]="DistrictForm.controls.ProvDistrictCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" translate>District Name </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput adins-required" formControlName="ProvDistrictName"
-                         [ngClass]="{ 'is-invalid': enjiForm.submitted && DistrictForm.controls.ProvDistrictName.invalid }">
-                  <lib-uc-show-errors [control]="DistrictForm.controls.ProvDistrictName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && DistrictForm.controls.ProvDistrictName.invalid }">
+                  <lib-uc-show-errors [control]="DistrictForm.controls.ProvDistrictName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel  adins-required-label" translate>Phone Area Number </label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-20-per" formControlName="PhnArea"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && DistrictForm.controls.PhnArea.invalid }">
+                  <lib-uc-show-errors [control]="DistrictForm.controls.PhnArea" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
@@ -38,22 +57,21 @@
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Active </label>
                 <div class="col-md-9">
-                  <input class="border-primary" type="checkbox" data-md-icheck
-                         formControlName="IsActive" />
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsActive" />
                 </div>
               </div>
             </div>
-            <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/CommonSetting/District/Paging']" [queryParams]="{refProvDistrictId:parentId}"
-                translate>
-                <i class="far fa-window-close"></i> Cancel
-              </button>
-              <button type="submit" class="btn btn-raised btn-primary" translate>
-                <i class="far fa-check-square"></i> Save
-              </button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="form-actions right">
+            <button type="button" class="btn btn-raised btn-warning mr-1"
+              [routerLink]="['/CommonSetting/District/Paging']" [queryParams]="{refProvDistrictId:parentId}" translate>
+              <i class="far fa-window-close"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary" translate>
+              <i class="far fa-check-square"></i> Save
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

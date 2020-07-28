@@ -1,12 +1,21 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="form-section card-title" translate>Employee Leave Management</h4>
+          </div>
+        </div>
+      </div>
       <div class="px-3">
-        <div class="addEdit">
-          <form class="form form-horizontal" [formGroup]="RefEmpLeaveMngmntForm"
-            (ngSubmit)="RefEmpLeaveMngmntForm.valid && SaveForm()" #enjiForm="ngForm">
+        <form class="form form-horizontal" [formGroup]="RefEmpLeaveMngmntForm"
+          (ngSubmit)="RefEmpLeaveMngmntForm.valid && SaveForm()" #enjiForm="ngForm">
+
+          <lib-ucSubsection [id]="'EmpLeaveMngmntId'" [title]="'Employee Leave Detail'" [panel]="'EmpLeaveMngmnt'">
+          </lib-ucSubsection>
+          <div class="form-body" id="EmpLeaveMngmnt">
             <div class="form-body">
-              <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Employee Leave Management</h4>
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Employee Name </label>
                 <div class="col-md-9" *ngIf="this.pageType == 'add'">
@@ -21,7 +30,8 @@
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Start Date </label>
                 <div class="col-md-9">
-                  <input type="date" min="{{businessDt | date: 'yyyy-MM-dd'}}" class="form-control adInsInput" formControlName="StartDt"
+                  <input type="date" min="{{businessDt | date: 'yyyy-MM-dd'}}" class="form-control adInsInput"
+                    formControlName="StartDt"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpLeaveMngmntForm.controls.StartDt.invalid }">
                   <lib-uc-show-errors [control]="RefEmpLeaveMngmntForm.controls.StartDt" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
@@ -36,7 +46,6 @@
                   </lib-uc-show-errors>
                 </div>
               </div>
-
             </div>
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Employee/Leave/Paging']"
@@ -47,8 +56,8 @@
                 <i class="far fa-check-square"></i> Save
               </button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>

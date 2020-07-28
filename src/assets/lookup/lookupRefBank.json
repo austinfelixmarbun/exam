@@ -1,6 +1,6 @@
 {
     "url": "http://getRefBank",
-    "title":"Lookup Bank",
+    "sectionTitle":"Lookup Bank",
     "component": [
       {
         "type": "textbox",

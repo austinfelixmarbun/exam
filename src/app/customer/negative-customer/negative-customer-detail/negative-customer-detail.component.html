@@ -1,12 +1,14 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
-      <div class="px-3">
+      <div class="card-header header-title">
         <div class="row">
           <div class="col-md-8">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i>NEGATIVE CUSTOMER</h4>
+            <h4 class="form-section card-title" translate>Negative Custiomer</h4>
           </div>
         </div>
+      </div>
+      <div class="px-3">
         <form class="form form-horizontal" [formGroup]="NegativeCustForm" #enjiForm="ngForm" novalidate
           (ngSubmit)="enjiForm.form.valid && SaveForm(enjiForm)">
           <div class="form-body">

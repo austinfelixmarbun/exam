@@ -1,11 +1,9 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
+      <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"></lib-ucviewgeneric>
       <div class="px-3">
         <form class="form form-horizontal" (ngSubmit)="SendSrvyOrder()">
-          <div class="form-body">
-            <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"></lib-ucviewgeneric>
-          </div>
           <lib-ucSubsection [id]="'SurveyOrderTaskFormId'" [title]="'Survey Task'" [panel]="'SurveyOrderTaskForm'">
           </lib-ucSubsection>
           <div class="form-body" id="SurveyOrderTaskForm">

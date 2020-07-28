@@ -1,5 +1,5 @@
 {
-    "title": "Lookup Employee",
+    "sectionTitle": "Lookup Employee",
     "component": [
         {
             "type": "textbox",

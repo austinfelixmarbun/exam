@@ -1,5 +1,5 @@
 {
-    "title": "LOOK UP - HOLIDAY SCHEME",
+    "sectionTitle": "LOOK UP - HOLIDAY SCHEME",
     "exportExcel": false,
     "component": [
         {
@@ -15,7 +15,7 @@
             "name": "HOLIDAY_SCHM_NAME",
             "id": "HolidaySchmName",
             "value": "",
-            "label": "Holidayd Scheme Name",
+            "label": "Holiday Scheme Name",
             "placeholder": "Placeholder"
         }
     ],

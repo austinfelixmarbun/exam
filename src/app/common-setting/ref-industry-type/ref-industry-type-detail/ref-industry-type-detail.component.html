@@ -1,12 +1,18 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="form-section card-title" translate>Industry Type Registration</h4>
+          </div>
+        </div>
+      </div>
       <div class="px-3">
         <form class="form form-horizontal" [formGroup]="RefIndustryTypeForm" #enjiForm="ngForm" novalidate
           (ngSubmit)="enjiForm.form.valid && Save(enjiForm)">
-          <lib-ucSubsection [id]="'IndustryTypeId'" [title]="this.title" [panel]="'IndustryType'">
-          </lib-ucSubsection>
-          <div id="'IndustryType'">
+          <lib-ucSubsection [id]="'IndustryTypeInfoId'" [title]="'Industry Type ' + type" [panel]="'IndustryTypeInfo'"></lib-ucSubsection>
+          <div id="IndustryTypeInfo">
             <div class="form-group row">
               <label class="col-md-3 adins-required-label" for="IndustryTypeCode">Industry Type Code</label>
               <div class="col-md-4">
