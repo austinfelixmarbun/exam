@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ContentPagesRoutingModule } from "app/pages/content-pages/content-pages-routing.module";
 import { LoginPageComponent } from "app/pages/content-pages/login/login-page.component";
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { PagesComponent } from './pages/pages.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ],
     declarations: [
         LoginPageComponent,
-        ChangePasswordComponent
+        ChangePasswordComponent,
+        PagesComponent
     ]
 })
 export class ContentPagesModule { }

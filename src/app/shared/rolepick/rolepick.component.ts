@@ -18,14 +18,12 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   }
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-    private http: HttpClient,
-    private router: Router) {
+    private http: HttpClient, private router: Router) {
     this.listRole = data["response"];
   }
 
   chooseRole(item) {
     console.log(item);
-    var url = environment.FoundationR3Url + URLConstant.GetAllActiveRefFormByRefRoleId;
     var roleUrl = environment.FoundationR3Url + URLConstant.LoginByRole;
     var roleObject = {
       UserName: this.data.user,
@@ -46,7 +44,10 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           localStorage.setItem("Token", response["Token"]);
           localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
           AdInsHelper.CreateUserAccess(response);
-          window.location.reload();
+          let currPath = this.router.routerState.snapshot.url;
+          this.router.navigateByUrl("/pages/content", { skipLocationChange: true }).then(() => {
+            this.router.navigateByUrl(currPath);
+          });
         },
         (error) => {
           console.log(error);
@@ -60,7 +61,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           localStorage.setItem("Token", response["Token"]);
           localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
           AdInsHelper.CreateUserAccess(response);
-          window.location.reload();
+          this.router.navigate(["/dashboard/dash-board"]);
         },
         (error) => {
           console.log(error);
