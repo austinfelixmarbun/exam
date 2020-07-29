@@ -12,6 +12,7 @@ import { environment } from 'environments/environment';
 import { IfStmt } from '@angular/compiler';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 
 @Component({
   selector: 'app-prod-offering-add',
@@ -46,19 +47,17 @@ export class ProdOfferingAddComponent implements OnInit {
   ProdOfferingHId: number;
 
   ProdOfferingForm = this.fb.group({
-    ProdName: ['',Validators.required],
-    ProdOfferingCode: ['',Validators.required],
-    ProdOfferingName: ['',Validators.required],
-    ProdOfferingDescr: ['',Validators.required],
-    StartDt: ['',Validators.required],
-    EndDt: ['',Validators.required]
+    ProdOfferingCode: ['', Validators.required],
+    ProdOfferingName: ['', Validators.required],
+    ProdOfferingDescr: ['', Validators.required],
+    StartDt: ['', Validators.required],
+    EndDt: ['', Validators.required]
   });
 
   ngOnInit() {
-    this.inputLookupObj = new UcLookupObj();
+    this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-
 
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
 
@@ -117,48 +116,6 @@ export class ProdOfferingAddComponent implements OnInit {
     }
   }
 
-  AddDetail() {
-    if (this.ProdOfferingForm.valid) {
-      this.prodOfferingObj = new ProdOfferingObj();
-      this.prodOfferingObj = this.ProdOfferingForm.value;
-
-      if (this.ValidateDate()) {
-        if (this.mode == "edit") {
-          this.prodOfferingObj.ProdOfferingCode = this.resultData.ProdOfferingCode;
-          this.prodOfferingObj.ProdHId = this.inputLookupObj.jsonSelect.CurrentProdHId;
-          this.prodOfferingObj.ProdOfferingId = this.resultData.ProdOfferingId;
-          this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
-          this.prodOfferingObj.ProdOfferingHId = this.ProdOfferingHId;
-          this.http.post(URLConstant.EditProdOffering, this.prodOfferingObj).subscribe(
-            response => {
-              this.toastr.successMessage(response["message"]);
-              this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingId": response["ProdOfferingId"], "ProdOfferingHId": response["DraftProdOfferingHId"], source: this.source } });
-            },
-            error => {
-              console.log(error);
-            }
-          );
-        } else {
-
-          this.prodOfferingObj.ProdHId = this.inputLookupObj.jsonSelect.CurrentProdHId;
-          this.prodOfferingObj.ProdOfferingId = "0";
-          this.prodOfferingObj.RowVersion = "";
-          this.http.post(URLConstant.AddProdOffering, this.prodOfferingObj).subscribe(
-            response => {
-              this.toastr.successMessage(response["message"]);
-              this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingId": response["ProdOfferingId"], "ProdOfferingHId": response["DraftProdOfferingHId"], source: this.source } });
-            },
-            error => {
-              console.log(error);
-            }
-          );
-        }
-      }
-
-    }
-  }
-
-
   SaveForm() {
     this.prodOfferingObj = new ProdOfferingObj();
     this.prodOfferingObj = this.ProdOfferingForm.value;
@@ -189,7 +146,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.http.post(URLConstant.AddProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.BackToPaging();
+            this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingId": response["ProdOfferingId"], "ProdOfferingHId": response["DraftProdOfferingHId"], source: this.source } });
           },
           error => {
             console.log(error);
@@ -199,9 +156,11 @@ export class ProdOfferingAddComponent implements OnInit {
     }
   }
 
-  ProdName = "";
+  ProdName = "ProdName";
   handleOutput(event) {
-    console.log(this.inputLookupObj.CurrentProdHId)
+    this.ProdOfferingForm.patchValue({
+      ProdName: event.ProdName
+    });
   }
 
   ValidateDate() {

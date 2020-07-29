@@ -10,7 +10,7 @@
       </div>
       <div class="card-body">
         <div class="px-3">
-          <form class="form form-horizontal" [formGroup]="ProdOfferingForm" (ngSubmit)="ProdOfferingForm.valid && AddDetail()" #enjiForm="ngForm">
+          <form class="form form-horizontal" [formGroup]="ProdOfferingForm" (ngSubmit)="ProdOfferingForm.valid && SaveForm()" #enjiForm="ngForm">
             <div class="form-body">
               <lib-ucSubsection [id]="'ProductOfferingInfoId'" [title]="'Main Information'" [panel]="'ProductOfferingInfo'"></lib-ucSubsection>
               <div id="ProductOfferingInfo">
@@ -59,7 +59,7 @@
               <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Cancel()" translate>
                 <i class="far fa-window-close"></i> Cancel
               </button>
-              <button type="submit" (click)="AddDetail()" class="btn btn-raised btn-primary">
+              <button type="submit" class="btn btn-raised btn-primary">
                 <i class="far fa-check-square"></i> Save
               </button>
             </div>
