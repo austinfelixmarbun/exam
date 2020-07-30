@@ -167,4 +167,6 @@ export class CommonConstant {
     public static LTE = "Less Than Equal";
     public static LT = "Less Than";
 
+    //Status Code
+    public static STATUS_CODE_USER_LOCKED = "002";
 }

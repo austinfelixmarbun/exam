@@ -151,7 +151,8 @@ export class URLConstant {
     public static GetRefUserRoleById = environment.FoundationR3Url + "/RefUserRole/GetRefUserRoleById";
     public static ChangePasswordRefUserByUsername = environment.FoundationR3Url + "/RefUser/ChangePasswordRefUserByUsername";
     public static DeleteRefUserRole = "/RefUserRole/DeleteRefUserRole";
-
+    public static GetRefUserByResetCode = environment.FoundationR3Url + "/RefUser/GetRefUserByResetCode";
+    public static ResetPasswordByUsername = environment.FoundationR3Url + "/RefUser/ResetPasswordByUsername";
     //REF-ROLE
     public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
     public static AddRefRole = environment.FoundationR3Url + "/RefRole/AddRefRole";
@@ -823,4 +824,6 @@ export class URLConstant {
     // REF SCORE CATEGORY
     public static AddRangeAndDeleteScoreCategorySchmD = environment.FoundationR3Url + "/ScoreCategorySchmD/AddRangeAndDeleteScoreCategorySchmD";
 
+    // Authentication
+    public static RequestNewPassword = environment.FoundationR3Url + "/Authenticate/RequestNewPassword";
 }
