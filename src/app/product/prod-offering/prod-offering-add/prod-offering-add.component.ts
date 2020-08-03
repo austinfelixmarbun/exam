@@ -127,7 +127,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.http.post(URLConstant.EditProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.BackToPaging();
+            this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingId": response["ProdOfferingId"], "ProdOfferingHId": response["DraftProdOfferingHId"], source: this.source } });
           },
           error => {
             console.log(error);
