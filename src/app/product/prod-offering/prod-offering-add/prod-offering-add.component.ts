@@ -95,8 +95,6 @@ export class ProdOfferingAddComponent implements OnInit {
       prodOfferingObj.ProdOfferingHId = this.ProdOfferingHId;
       this.http.post(URLConstant.GetProductOfferingMainInfo, prodOfferingObj).subscribe(
         (response) => {
-          console.log("response: ");
-          console.log(response);
           this.resultData = response;
           this.inputLookupObj.nameSelect = this.resultData.ProdName;
           this.inputLookupObj.jsonSelect = { ProdName: this.resultData.ProdName, CurrentProdHId: this.resultData.ProdHId };
@@ -115,17 +113,15 @@ export class ProdOfferingAddComponent implements OnInit {
       );
     }
   }
-
   SaveForm() {
     this.prodOfferingObj = new ProdOfferingObj();
     this.prodOfferingObj = this.ProdOfferingForm.value;
-    console.log(this.prodOfferingObj);
 
     if (this.ValidateDate()) {
       if (this.mode == "edit") {
         this.prodOfferingObj.ProdOfferingCode = this.resultData.ProdOfferingCode;
         this.prodOfferingObj.ProdOfferingId = this.resultData.ProdOfferingId;
-        this.prodOfferingObj.ProdHId = this.resultData.ProdHId;
+        this.prodOfferingObj.ProdHId =  this.inputLookupObj.jsonSelect.CurrentProdHId;
         this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
         this.prodOfferingObj.ProdOfferingHId = this.ProdOfferingHId;
         this.http.post(URLConstant.EditProdOffering, this.prodOfferingObj).subscribe(
