@@ -83,9 +83,6 @@ export class SearchOfficeComponent implements OnInit {
           result: []
         }
         this.componentIsOn.emit(obj);
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

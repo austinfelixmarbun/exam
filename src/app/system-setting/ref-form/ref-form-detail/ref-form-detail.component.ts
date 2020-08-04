@@ -203,18 +203,12 @@ export class RefFormDetailComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigateByUrl('/SystemSetting/RefForm/Paging');
-        },
-        (error) => {
-          console.log(error);
         });
     } else {
       this.http.post(URLConstant.AddRefFormData, this.refFormObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/SystemSetting/RefForm/Paging']);
-        },
-        (error) => {
-          console.log(error);
         });
     }
   }

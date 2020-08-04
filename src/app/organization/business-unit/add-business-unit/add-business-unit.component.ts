@@ -52,7 +52,6 @@ export class AddBusinessUnitComponent implements OnInit {
             this.http.post(this.apiUrl, this.bizUnitObj).subscribe(
                 (response) => {
                     this.result = response;
-                    console.log(this.result);
                     this.BizUnitForm.patchValue({
                         BizUnitCode: this.result.BizUnitCode,
                         BizUnitName: this.result.BizUnitName,
@@ -60,9 +59,6 @@ export class AddBusinessUnitComponent implements OnInit {
                         IsActive: this.result.IsActive,
                         RowVersion: this.result.RowVersion,
                     });
-                },
-                (error) => {
-                    console.log(error);
                 }
             );
         }
@@ -80,9 +76,6 @@ export class AddBusinessUnitComponent implements OnInit {
                 (response) => {
                     this.toastr.successMessage(response["message"]);
                     this.router.navigateByUrl('/Organization/BusinessUnit');
-                },
-                (error) => {
-                    console.log(error);
                 });
         }
         else {
@@ -91,9 +84,6 @@ export class AddBusinessUnitComponent implements OnInit {
                 (response) => {
                     this.toastr.successMessage(response["message"]);
                     this.router.navigateByUrl('/Organization/BusinessUnit');
-                },
-                (error) => {
-                    console.log(error);
                 });
         }
     }

@@ -120,7 +120,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
         this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
           (response) => {
             this.LocalCountry = response;
-            console.log(this.LocalCountry.CountryName);
           });
 
       });
@@ -302,9 +301,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
         this.toastr.successMessage(response["Message"]);
         // this.wizard.goToNextStep();
         this.outputTab.emit({ CustPersonalId: this.tempCustPersonalObj.CustPersonalId, stepMode: "next" });
-      },
-      error => {
-        console.log(error);
       }
     );
   }

@@ -112,7 +112,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
     let requestNegativeSource = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterNegativeSourceObj);
     forkJoin([requestIdType, requestNegativeCustType, requestNegativeSource]).subscribe(
       (response) => {
-        // console.log(response);
         if (response[0][CommonConstant.ReturnObj].length > 0) {
           this.refMasterIdType = response[0];
           this.NegativeCustForm.patchValue({
@@ -168,7 +167,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Shinano');
     var datePipe = new DatePipe("en-US");
     var criteriaList;
     var criteriaObj;
@@ -277,7 +275,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
             IsActive: negativeCustData.IsActive,
             RowVersion: negativeCustData.RowVersion
           });
-          console.log(this.NegativeCustForm.controls);
           if (this.custType == CommonConstant.CustomerPersonal) {
             if (this.NegativeCustForm.controls.MrIdTypeCode.value == RefMasterConstant.EKtp) {
               this.tempKTPCheck = true;
@@ -314,7 +311,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
           this.NegativeCustForm.controls.IdExpiredDt.updateValueAndValidity();
           this.negativeDataHistoryList = response[1].ReturnObject;
 
-          console.log('Shinano');
           if (this.NegativeCustForm.controls.MrCustTypeCode.value == '' || this.NegativeCustForm.controls.MrCustTypeCode.value == null)
             this.NegativeCustForm.controls.MrCustTypeCode.enable();
           if (this.NegativeCustForm.controls.CustName.value == '' || this.NegativeCustForm.controls.CustName.value == null)
@@ -502,9 +498,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
         });
         this.isFromLookup = true;
         this.inputLookupZipcodeObj.nameSelect = response.Zipcode;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -541,9 +534,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
         });
         this.isFromLookup = true;
         this.inputLookupZipcodeObj.nameSelect = response.Zipcode;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -610,9 +600,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
           var responseNegativeCust = response[0];
           this.toastr.successMessage(responseNegativeCust["message"]);
           this.router.navigate(['/Customer/NegativeCustomer/Paging']);
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -644,9 +631,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
           var responseNegativeCust = response[0];
           this.toastr.successMessage(responseNegativeCust["message"]);
           this.router.navigate(['/Customer/NegativeCustomer/Paging']);
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

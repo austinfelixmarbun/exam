@@ -85,9 +85,6 @@ export class VendorGroupmemberComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListVendorGrp);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -110,9 +107,6 @@ export class VendorGroupmemberComponent implements OnInit {
     this.http.post(URLConstant.AddVendorGrpMbr, obj).subscribe(
       (response) => {
         this.router.navigate(['/Vendor/Group/View/'], { queryParams: { VendorGrpId: this.VendorGrpId, MrVendorCategoryCode: this.MrVendorCategoryCode } });
-      },
-      (error) => {
-        console.log(error);
       });
   }
 }

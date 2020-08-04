@@ -107,9 +107,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
               this.resultData.FullAssetName = this.resultParentMaster.FullAssetName;
               this.isFinal = this.resultData.IsFinal;
               this.AssetTypeId = this.resultData.AssetTypeId;
-            },
-            error => {
-              console.log(error);
             }
           );
 
@@ -146,9 +143,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 response => {
                   this.resultAssetCategory = response[CommonConstant.ReturnObj];
                   this.AssetMasterChildForm.patchValue({ AssetCategoryId: this.resultData.AssetCategoryId });
-                },
-                (error) => {
-                  console.log(error);
                 });
             });
 
@@ -164,9 +158,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 }
               }
             });
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -222,9 +213,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                   if (this.resultAssetCategory.length > 0) {
                     this.AssetMasterChildForm.patchValue({ AssetCategoryId: response[CommonConstant.ReturnObj][0]['Key'] });
                   }
-                },
-                (error) => {
-                  console.log(error);
                 });
             });
 
@@ -240,9 +228,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 }
               }
             });
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -327,9 +312,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response["Message"]);
             this.router.navigate(["/Asset/AssetMaster/Paging"]);
-          },
-          (error) => {
-            console.log(error);
           });
       }
 
@@ -382,9 +364,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/AssetMaster/Paging"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     }

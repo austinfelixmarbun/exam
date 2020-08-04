@@ -98,8 +98,6 @@ export class JobDataNonProfessionalComponent implements OnInit {
     this.http.post(this.getJobDataByCustId, this.custJobDataObj).subscribe(
       (response: any) => {
           this.returnCustJobDataObj = response;
-          console.log("ccc")
-          console.log(this.returnCustJobDataObj)
           
           if(this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
             this.JobDataNonProForm.patchValue({ 
@@ -148,17 +146,12 @@ export class JobDataNonProfessionalComponent implements OnInit {
 
       this.http.post(this.editJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          // console.log(response)
           this.outputTab.emit({ stepMode: "next"});
-        },
-        (error) => {
-          console.log(error);
         }
       );
     } else {
@@ -177,17 +170,12 @@ export class JobDataNonProfessionalComponent implements OnInit {
 
       this.http.post(this.addJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          // console.log(response)
           this.outputTab.emit({ stepMode: "next"});
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

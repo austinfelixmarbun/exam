@@ -14,7 +14,6 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   listRole: any;
 
   ngAfterViewInit(): void {
-    console.log("Role Pick");
   }
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -23,7 +22,6 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   }
 
   chooseRole(item) {
-    console.log(item);
     var roleUrl = environment.FoundationR3Url + URLConstant.LoginByRole;
     var roleObject = {
       UserName: this.data.user,
@@ -49,9 +47,6 @@ export class RolepickComponent implements OnInit, AfterViewInit {
             this.router.navigateByUrl(currPath);
             this.dialog.closeAll();
           });
-        },
-        (error) => {
-          console.log(error);
         }
       );
 
@@ -64,15 +59,11 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           AdInsHelper.CreateUserAccess(response);
           this.router.navigate(["/dashboard/dash-board"]);
           this.dialog.closeAll();
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
   }
 
   ngOnInit() {
-    console.log("Role Pick");
   }
 }

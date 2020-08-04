@@ -118,7 +118,6 @@ export class VendorBranchAddEditComponent implements OnInit {
   getData() {
     this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { VendorId: this.VendorId }).subscribe(
       (response) => {
-        console.log(response);
         this.result = response;
         this.setDropdown();
         this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
@@ -164,9 +163,6 @@ export class VendorBranchAddEditComponent implements OnInit {
           VendorAtpmCode: this.result.VendorObj.VendorAtpmCode,
         });
         this.setLookup();
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -354,9 +350,6 @@ export class VendorBranchAddEditComponent implements OnInit {
   }
 
   getLookupATPM(ev){
-    // console.log(ev);
-    // console.log(this.VendorForm);
-    
     this.VendorForm.patchValue({
       VendorAtpmCode: ev.VendorCode,
     });
@@ -463,7 +456,6 @@ export class VendorBranchAddEditComponent implements OnInit {
     }
 
     if (this.mode == "edit") {
-      // console.log(this.result);
       if (this.result.VendorObj.VendorParentId != null) {
         this.inputLookupParentObj.jsonSelect = { VendorName: this.result.VendorParentName };
       }
@@ -587,23 +579,16 @@ export class VendorBranchAddEditComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Vendor/Branch/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": "edit" } });
-        },
-        (error) => {
-          console.log(error);
         });
     }
     else {
       this.vendorBranchObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
       this.vendorBranchObj.MrVendorTypeCode = this.MrVendorTypeCode;
 
-      console.log(this.vendorBranchObj);
       this.http.post(URLConstant.AddVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Vendor/Branch/Registration'], { queryParams: { "VendorId": response['VendorObj'].VendorId } });
-        },
-        (error) => {
-          console.log(error);
         });
     }
   }

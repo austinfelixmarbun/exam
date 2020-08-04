@@ -86,13 +86,7 @@ export class ZipcodeAddComponent implements OnInit {
               this.resultDistrictData = response;
               this.inputDistrictLookupObj.jsonSelect = this.resultDistrictData;
               this.inputDistrictLookupObj.nameSelect = this.resultDistrictData.ProvDistrictName;
-            },
-            (error) => {
-              console.log(error);
             });
-        },
-        error => {
-          console.log(error);
         });
     }
   }
@@ -110,9 +104,6 @@ export class ZipcodeAddComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(["/CommonSetting/Zipcode/Paging"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -122,9 +113,6 @@ export class ZipcodeAddComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(["/CommonSetting/Zipcode/Paging"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     }

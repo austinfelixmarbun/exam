@@ -97,7 +97,6 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.http.post(this.getListCustAddrUrl, this.custAddrObj).subscribe(
       (response) => {
         this.listCustAddr = response[CommonConstant.ReturnObj];
-        console.log(this.listCustAddr);
         if (this.listCustAddr.length > 0) {
           this.CustDataCompanyForm.patchValue({ CopyAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'] });
         }
@@ -215,9 +214,6 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputValue.emit({ mode: 'check' });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     } else {
@@ -227,9 +223,6 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputValue.emit({ mode: 'check' });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

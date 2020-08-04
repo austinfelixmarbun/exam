@@ -156,14 +156,8 @@ export class EditMainDataCompanyComponent implements OnInit {
             } else {
               this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { IdCust: this.CustId, From:'CustPaging'  } });
             }
-          },
-          error => {
-            console.log(error);
           }
         );
-      },
-      error => {
-        console.log(error);
       }
     );
   }

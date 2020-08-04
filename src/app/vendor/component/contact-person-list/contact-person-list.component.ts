@@ -41,9 +41,6 @@ export class ContactPersonListComponent implements OnInit {
     this.http.post(URLConstant.GetListVendorContactPersonByVendorId, this.VendorContactPerson).subscribe(
       (response) => {
         this.resultData = response[CommonConstant.ReturnObj];
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -61,10 +58,7 @@ export class ContactPersonListComponent implements OnInit {
       this.http.post(URLConstant.DeleteVendorContactPerson, this.VendorContactPerson).subscribe((response) => {
         this.toastr.successMessage(response['message']);
         this.loadTableListData();
-      },
-        (error) => {
-          console.log(error);
-        });
+      });
 
     }
   }

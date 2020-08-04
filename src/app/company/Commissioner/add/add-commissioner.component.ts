@@ -65,16 +65,10 @@ export class CommissionerAddComponent implements OnInit {
             coyCommissionerObj.coyCommissionerId = this.param;
             this.http.post(this.apiUrl, coyCommissionerObj).subscribe(
                 (response) => {
-                    console.log("Success");
-                    console.log(response);
                     this.result = response['returnObject'];
                     this.ucAddr.setData(this.result);
                     this.ucInfo.setData(this.result);
                     this.setData(this.result);
-                },
-                (error) => {
-                    console.log("Error");
-                    console.log(error);
                 }
             );
         }
@@ -96,8 +90,6 @@ export class CommissionerAddComponent implements OnInit {
 
     Save(form, ucAddress, ucInfo) {
             var coyCommisionerObj = new CoyCommissionerObj();
-            console.log(ucAddress);
-            console.log(ucInfo);
             coyCommisionerObj.refCoyId = +this.refCoyId;
             coyCommisionerObj.name = form.value.name;
             coyCommisionerObj.jobTitle = form.value.jobTitle;
@@ -128,30 +120,21 @@ export class CommissionerAddComponent implements OnInit {
             coyCommisionerObj.zipcodeNumber = ucAddress.zipcodeNumber;
             coyCommisionerObj.refCoyId = this.refCoyId;
 
-            console.log(coyCommisionerObj);
             if (this.mode == "edit") {
                 this.editUrl = this.foundationUrl + URLConstant.EditCoyCommissioner;
                 coyCommisionerObj.coyCommissionerId = this.param;
                 this.http.post(this.editUrl, coyCommisionerObj).subscribe(
                     (response) => {
-                        console.log(response);
                         this.toastr.successMessage(response['message']);
                         this.router.navigateByUrl('/company/commissioner?refCoyId=' + this.refCoyId);
-                    },
-                    (error) => {
-                        console.log(error);
                     });
             }
             else {
                 this.editUrl = this.foundationUrl + URLConstant.AddCoyCommissioner;
                 this.http.post(this.editUrl, coyCommisionerObj).subscribe(
                     (response) => {
-                        console.log(response);
                         this.toastr.successMessage(response['message']);
                         this.router.navigateByUrl('/company/commissioner?refCoyId=' + this.refCoyId);
-                    },
-                    (error) => {
-                        console.log(error);
                     });
             }
 

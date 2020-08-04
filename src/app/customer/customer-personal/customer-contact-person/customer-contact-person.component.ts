@@ -25,7 +25,6 @@ export class CustomerContactPersonComponent implements OnInit {
   }
 
   terimaValue(ev : any){
-    console.log(ev);
     this.isAdd = ev.isAdd;
     this.custPersonalContactPersonId =  ev.custPersonalContactPersonId;
     this.listCustIdToExclude = this.CPPaging.listCustIdToExclude;

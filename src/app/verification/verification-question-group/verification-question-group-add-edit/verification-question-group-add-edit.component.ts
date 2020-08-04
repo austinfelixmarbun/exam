@@ -37,7 +37,6 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
   })
 
   ngOnInit() {
-    console.log("test");
     if (this.mode == "edit") {
       var verfGroupObj = { VerfQuestionGrpHId: this.VerfQuestionGrpHId }
       this.http.post<VerfQuestionGrpHObj>(URLConstant.GetQuestionGrpHById, verfGroupObj).subscribe(
@@ -64,9 +63,6 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Verification/QuestionGroup/Paging']);
-        },
-        (error) => {
-          console.log(error);
         });
     }
     else {
@@ -75,9 +71,6 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Verification/QuestionGroup/Paging']);
-        },
-        (error) => {
-          console.log(error);
         });
     }
   }

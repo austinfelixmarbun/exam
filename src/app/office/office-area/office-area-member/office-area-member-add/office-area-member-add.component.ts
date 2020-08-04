@@ -53,9 +53,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListVendorGrp);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -78,9 +75,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
       (response) => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(["/Office/OfficeArea/Member"], { queryParams: { "RefOfficeAreaId": this.RefOfficeAreaId } });
-      },
-      (error) => {
-          console.log(error);
       });
     
   }

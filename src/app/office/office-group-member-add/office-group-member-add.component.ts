@@ -58,9 +58,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListRefOffice);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -83,9 +80,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
     this.http.post(URLConstant.AddCenterGrpOfficeMember, obj).subscribe(
       (response) => {
         this.router.navigate(['/Office/Group/Member'], { queryParams: { RefOfficeId: this.RefOfficeId, CenterGrpId: this.CenterGrpId } });
-      },
-      (error) => {
-        console.log(error);
       });
   }
 }

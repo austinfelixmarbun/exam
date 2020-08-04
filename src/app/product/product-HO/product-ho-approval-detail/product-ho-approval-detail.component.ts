@@ -78,9 +78,6 @@ export class ProductHOApprovalDetailComponent implements OnInit {
       () => {
         this.toastr.successMessage("Success");
         this.router.navigate(["/Product/HOApproval"]);
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

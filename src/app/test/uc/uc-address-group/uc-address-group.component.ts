@@ -73,7 +73,6 @@ export class UcAddressGroupComponent implements OnInit {
   }
 
   getLookup(event) {
-    console.log(event);
     this.UCAddrForm.controls[this.identifier].patchValue(
       {
         AreaCode2: event.areaCode2,
@@ -82,7 +81,6 @@ export class UcAddressGroupComponent implements OnInit {
         City: event.city,
         ZipcodeNumber: event.zipcodeNumber
       });
-    console.log(this.UCAddrForm.controls[this.identifier]["controls"]);
     this.inputLookupObj.nameSelect = event.zipcode;
     this.inputLookupObj.idSelect = event.zipcode;
   }

@@ -62,9 +62,6 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
         (response) => {
           this.toastr.success(response['message'], 'Success!');
           this.GetListVerfSchmD();
-        },
-        (error) => {
-          console.log(error);
         });
     }
   }

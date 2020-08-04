@@ -49,17 +49,13 @@ export class GeneralSettingAddEditComponent implements OnInit {
     this.httpClient.post(URLConstant.GetGeneralSettingById, this.gsObj).subscribe(
       (response) => {
         this.resultData = response;
-        console.log(this.resultData);
         this.GeneralSettingForm.patchValue({
           GsCode: this.resultData.GsCode,
           GsName: this.resultData.GsName,
           GsValue: this.resultData.GsValue,
           GsDescr: this.resultData.GsDescr
           }); 
-        },
-      (error) => {
-        console.log(error);
-      }
+        }
     ); 
   }
 
@@ -73,9 +69,6 @@ export class GeneralSettingAddEditComponent implements OnInit {
       response => {
         this.service.successMessage(response["Message"]);
         this.router.navigate(["/CommonSetting/GeneralSetting"]);
-      },
-      error => {
-        console.log(error);
       }
     );
   }

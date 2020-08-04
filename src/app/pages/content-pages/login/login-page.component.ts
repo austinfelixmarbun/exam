@@ -47,7 +47,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("Init Login");
     this.FoundationR3Url = environment.FoundationR3Url;
 
 
@@ -55,7 +54,6 @@ export class LoginPageComponent implements OnInit {
       localStorage.setItem("Token", this.token);
       this.http.post(AdInsConstant.LoginWithToken, { ModuleCode: environment.Module }).subscribe(
         (response) => {
-          console.log(response);
           AdInsHelper.CreateUserAccess(response);
           // var currentUserContext = new CurrentUserContext;
           // currentUserContext.UserName = response["Identity"].UserName;
@@ -68,9 +66,6 @@ export class LoginPageComponent implements OnInit {
           // localStorage.setItem("UserAccess", JSON.stringify(response["Identity"]));
           // this.currentUserContextService.addCurrentUserContext(currentUserContext);
           this.router.navigate(['dashboard/dash-board']);
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -83,11 +78,9 @@ export class LoginPageComponent implements OnInit {
     this.apiUrl = this.FoundationR3Url + AdInsConstant.Login;
     var requestObj = { "Username": username, "Password": password };
     localStorage.setItem("Username", username);
-    console.log("Login Page Comp");
     //this.rolePickService.openDialog(data.returnObject);
     this.http.post(this.apiUrl, requestObj).subscribe(
       (response) => {
-        console.log(response);
         if (response["StatusCode"] == CommonConstant.STATUS_CODE_USER_LOCKED) {
           this.isLocked = true;
         }
@@ -121,9 +114,6 @@ export class LoginPageComponent implements OnInit {
 
             })
         };
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

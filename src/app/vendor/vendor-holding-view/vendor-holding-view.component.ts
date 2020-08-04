@@ -70,12 +70,8 @@ export class VendorHoldingViewComponent implements OnInit {
     }
     this.http.post(URLConstant.GetVendorByVendorId, vendorObj).subscribe(
       response => {
-        console.log(response);
         this.MrVendorTypeObj = response;
         this.MrVendorTypeCode = this.MrVendorTypeObj.MrVendorTypeCode;
-      },
-      error => {
-        console.log(error);
       }
     )
 
@@ -108,12 +104,8 @@ export class VendorHoldingViewComponent implements OnInit {
 
     this.http.post(URLConstant.GetListVendorGrpByVendorId, this.GroupListObj).subscribe(
       response => {
-        console.log(response);
         this.VendorGrp = response[CommonConstant.ReturnObj]
 
-      },
-      error => {
-        console.log(error);
       }
     )
     this.HoListObj = new VendorObj();
@@ -121,12 +113,8 @@ export class VendorHoldingViewComponent implements OnInit {
 
     this.http.post(URLConstant.GetListHoByVendorId, this.HoListObj).subscribe(
       response => {
-        console.log(response);
         this.Vendor = response[CommonConstant.ReturnObj]
 
-      },
-      error => {
-        console.log(error);
       }
     )
   }
@@ -145,7 +133,6 @@ export class VendorHoldingViewComponent implements OnInit {
 
   getResult(event) {
     this.resultData = event.response;
-    console.log(this.resultData);
     this.totalData = event.response.Count;
     this.UCGridFooter.pageNow = event.pageNow;
     this.UCGridFooter.totalData = this.totalData;
@@ -166,11 +153,7 @@ export class VendorHoldingViewComponent implements OnInit {
     var getListUrl = URLConstant.GetListVendorContactPersonByVendorId;
     this.http.post(getListUrl, obj).subscribe(
       (response) => {
-        console.log(response);
         this.vendorContactPerson = response[CommonConstant.ReturnObj];
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

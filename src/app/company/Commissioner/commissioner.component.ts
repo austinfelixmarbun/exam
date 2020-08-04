@@ -113,7 +113,6 @@ export class CommissionerComponent implements OnInit {
       this.commissionerObj.coyCommissionerId = coyCommissionerId;
       this.http.post(this.editUrl, this.commissionerObj).subscribe(
         (response) => {
-          console.log(response);
           this.searchPagination(1);
         });
     }

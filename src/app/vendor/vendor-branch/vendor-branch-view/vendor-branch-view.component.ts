@@ -86,9 +86,6 @@ export class VendorBranchViewComponent implements OnInit {
         this.MrVendorTypeObj = response;
         this.MrVendorTypeCode = this.MrVendorTypeObj.MrVendorTypeCode;
         this.MrVendorCategoryCode = this.MrVendorTypeObj.MrVendorCategoryCode;
-      },
-      error => {
-        console.log(error);
       }
     )
 
@@ -141,9 +138,6 @@ export class VendorBranchViewComponent implements OnInit {
       response => {
         this.VendorBankAcc = response[CommonConstant.ReturnObj]
 
-      },
-      error => {
-        console.log(error);
       }
     )
 
@@ -151,27 +145,18 @@ export class VendorBranchViewComponent implements OnInit {
       response => {
         this.VendorGrp = response[CommonConstant.ReturnObj]
 
-      },
-      error => {
-        console.log(error);
       }
     )
 
     this.http.post(URLConstant.GetListVendorEmpByVendorId, { VendorId: this.VendorId }).subscribe(
       response => {
         this.VendorEmp = response[CommonConstant.ReturnObj]
-      },
-      error => {
-        console.log(error);
       }
     )
 
     this.http.post(URLConstant.GetListVendorOfficeMbrByVendorId, { VendorId: this.VendorId }).subscribe(
       response => {
         this.VendorOfficeMbr = response[CommonConstant.ReturnObj]
-      },
-      error => {
-        console.log(error);
       }
     )
   }

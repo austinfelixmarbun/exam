@@ -76,17 +76,12 @@ export class SurveyOrderTaskWfComponent implements OnInit {
         var VendorObj = {
           VendorId: this.SrvyOrderObj.VendorId
         };
-        console.log("WOIII");
         this.http.post(URLConstant.GetVendorByVendorId, VendorObj).subscribe(
           response => {
             this.VendorObj = response;
-            console.log(this.VendorObj);
             this.SurveyTaskForm.patchValue({
               SurveyorCode: this.VendorObj.VendorCode
             });
-          },
-          error => {
-            console.log(error);
           }
         );
 
@@ -100,18 +95,12 @@ export class SurveyOrderTaskWfComponent implements OnInit {
             this.SurveyTaskForm.patchValue({
               SrvyFormSchmId: this.FormSchmList[0].SrvyFormSchmId
             });
-          },
-          error => {
-            console.log(error);
           }
         );
 
         this.generateSurveyTaskList();
         this.generateListSrvyObject();
 
-      },
-      error => {
-        console.log(error);
       }
     );
 
@@ -124,9 +113,6 @@ export class SurveyOrderTaskWfComponent implements OnInit {
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigate(["/Survey/Paging"]);
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -200,9 +186,6 @@ export class SurveyOrderTaskWfComponent implements OnInit {
           SrvyFormSchmId: this.SrvyTaskObj.SrvyFormSchmId,
           SurveyorCode: this.SrvyTaskObj.SurveyorCode,
         });
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -216,9 +199,6 @@ export class SurveyOrderTaskWfComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.generateSurveyTaskList();
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -238,9 +218,6 @@ export class SurveyOrderTaskWfComponent implements OnInit {
           this.toastr.successMessage(response["Message"]);
           this.generateSurveyTaskList();
           this.modal.close();
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -253,9 +230,6 @@ export class SurveyOrderTaskWfComponent implements OnInit {
           this.toastr.successMessage(response["Message"]);
           this.generateSurveyTaskList();
           this.modal.close();
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -293,9 +267,6 @@ export class SurveyOrderTaskWfComponent implements OnInit {
           });
           this.setSrvyObjList();
         }
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -308,9 +279,6 @@ export class SurveyOrderTaskWfComponent implements OnInit {
     this.http.post(URLConstant.GetListSrvyTaskBySrvyOrderId, SrvyTaskObj).subscribe(
       response => {
         this.SurveyTaskList = response;
-      },
-      error => {
-        console.log(error);
       }
     );
   }

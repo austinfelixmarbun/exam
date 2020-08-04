@@ -60,14 +60,10 @@ export class HolidayDetailAddComponent implements OnInit {
       this.holidayDetailObj.HolidayDt = this.HolidayListForm.controls.Date.value;
       this.holidayDetailObj.Descr = this.HolidayListForm.controls.Descr.value;
 
-      console.log(this.holidayDetailObj);
       this.http.post(URLConstant.AddHolidaySchmD, this.holidayDetailObj).subscribe((response) => {
         this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
         this.toastr.successMessage(response['message']);
-      },
-        (error) => {
-          console.log(error);
-        });
+      });
     }
     else {
       this.holidayDetailByYearObj = new HolidayDByYearObj;
@@ -100,10 +96,7 @@ export class HolidayDetailAddComponent implements OnInit {
       this.http.post(URLConstant.AddHolidaySchmDUntilYear, this.holidayDetailByYearObj).subscribe((response) => {
         this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
         this.toastr.successMessage(response['message']);
-      },
-        (error) => {
-          console.log(error);
-        });
+      });
     }
   }
 

@@ -137,9 +137,6 @@ export class VendorATPMAddEditComponent implements OnInit {
 
         this.setLookup();
         this.checkType();
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -312,9 +309,6 @@ export class VendorATPMAddEditComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response["message"]);
             this.router.navigate(['/Vendor/ATPM/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": 'edit' } });
-          },
-          (error) => {
-            console.log(error);
           });
       } else {
         this.vendorATPMObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
@@ -323,9 +317,6 @@ export class VendorATPMAddEditComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response["message"]);
             this.router.navigate(['/Vendor/ATPM/Registration'], { queryParams: { "VendorId": response['VendorObj'].VendorId } });
-          },
-          (error) => {
-            console.log(error);
           });
       }
     }

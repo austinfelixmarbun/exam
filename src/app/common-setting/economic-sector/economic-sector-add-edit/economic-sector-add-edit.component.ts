@@ -51,9 +51,6 @@ export class EconomicSectorAddEditComponent implements OnInit {
             IsActive: this.resultData.IsActive
           });
 
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -71,9 +68,6 @@ export class EconomicSectorAddEditComponent implements OnInit {
             this.toastr.successMessage(response["Message"]);
             this.router.navigate(["/CommonSetting/EconomicSector/Paging"]);
           
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -84,12 +78,8 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.refEconomicSectorObj.IsActive = this.RefEconomicSectorForm.controls["IsActive"].value;
       this.http.post(URLConstant.EditRefEconomicSector, this.refEconomicSectorObj).subscribe(
         response => {
-          console.log(response);
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/CommonSetting/EconomicSector/Paging"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     }

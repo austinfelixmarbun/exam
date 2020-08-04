@@ -176,8 +176,6 @@ export class JobDataSmeComponent implements OnInit {
     this.http.post(this.getJobDataByCustId, this.custJobDataObj).subscribe(
       (response: any) => {
           this.returnCustJobDataObj = response;
-          console.log("ddd")
-          console.log(this.returnCustJobDataObj)
 
           if(this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
             this.JobDataSmeForm.patchValue({ 
@@ -398,17 +396,12 @@ export class JobDataSmeComponent implements OnInit {
 
       this.http.post(this.editJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          // console.log(response);
           this.outputTab.emit({ stepMode: "next"});
-        },
-        (error) => {
-          console.log(error);
         }
       );
     } else {
@@ -425,17 +418,12 @@ export class JobDataSmeComponent implements OnInit {
 
       this.http.post(this.addJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          // console.log(response)
           this.outputTab.emit({ stepMode: "next"});
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

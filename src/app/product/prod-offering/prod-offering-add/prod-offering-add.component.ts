@@ -106,9 +106,6 @@ export class ProdOfferingAddComponent implements OnInit {
             StartDt: formatDate(this.resultData['StartDt'], 'yyyy-MM-dd', 'en-US'),
             EndDt: formatDate(this.resultData['EndDt'], 'yyyy-MM-dd', 'en-US')
           })
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -128,9 +125,6 @@ export class ProdOfferingAddComponent implements OnInit {
           response => {
             this.toastr.successMessage(response["message"]);
             this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingId": response["ProdOfferingId"], "ProdOfferingHId": response["DraftProdOfferingHId"], source: this.source } });
-          },
-          error => {
-            console.log(error);
           }
         );
       }
@@ -143,9 +137,6 @@ export class ProdOfferingAddComponent implements OnInit {
           response => {
             this.toastr.successMessage(response["message"]);
             this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingId": response["ProdOfferingId"], "ProdOfferingHId": response["DraftProdOfferingHId"], source: this.source } });
-          },
-          error => {
-            console.log(error);
           }
         );
       }

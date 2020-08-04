@@ -239,12 +239,8 @@ export class JobDataProfessionalComponent implements OnInit {
 
       this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response["message"]);
           this.outputTab.emit({ stepMode: "next" });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     } else {
@@ -261,12 +257,8 @@ export class JobDataProfessionalComponent implements OnInit {
 
       this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response["message"]);
           this.outputTab.emit({ stepMode: "next" });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

@@ -83,9 +83,6 @@ export class ProductHoAdddetailComponent implements OnInit {
           StartDt: formatDate(this.ResultResponse.StartDt, 'yyyy-MM-dd', 'en-US'),
           EndDt: formatDate(this.ResultResponse.EndDt, 'yyyy-MM-dd', 'en-US')
         });
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

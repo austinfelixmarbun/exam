@@ -39,12 +39,9 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
 
   ngOnInit() {
     this.mode = "check";
-    console.log("checkIdCust");
-    console.log(this.custCompanyId);
   }
 
   terimaValue(ev) {
-    console.log(ev);
     this.mode = ev.mode;
     this.CustCompanyMgmntShrholderId = ev.CustCompanyMgmntShrholderId;
     this.TotalShare = ev.TotalShare;

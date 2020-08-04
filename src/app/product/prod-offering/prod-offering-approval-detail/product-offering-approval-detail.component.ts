@@ -76,9 +76,6 @@ export class ProductOfferingApprovalDetailComponent implements OnInit {
       () => {
         this.toastr.successMessage("Success");
         this.router.navigate(["/Product/OfferingApproval"]);
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

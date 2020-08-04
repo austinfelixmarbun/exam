@@ -64,9 +64,6 @@ export class DistrictComponent implements OnInit {
     this.http.post(this.getUrl, this.refProvDistrictObj).subscribe(
       response => {
         this.resultData = response;
-      },
-      error => {
-        console.log(error);
       }
     );
   }

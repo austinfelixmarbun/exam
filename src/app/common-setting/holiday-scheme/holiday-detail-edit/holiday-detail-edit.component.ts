@@ -50,9 +50,6 @@ export class HolidayDetailEditComponent implements OnInit {
           Date: formatDate(this.result.HolidayDt, 'yyyy-MM-dd', 'en-US'),
           Descr: this.result.Descr
         })
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -70,9 +67,6 @@ export class HolidayDetailEditComponent implements OnInit {
       (response) => {
         this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
         this.toastr.successMessage(response['message']);
-      },
-      (error) => {
-        console.log(error);
       });
   }
 

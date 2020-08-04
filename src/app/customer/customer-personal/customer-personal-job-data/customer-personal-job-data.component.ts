@@ -46,14 +46,10 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   ngOnInit() {
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    console.log(this.objCust);
     this.http.post(this.getCustById, this.objCust).subscribe(
       (response) => {
         this.custObj = response;
         this.CustModel = this.custObj.MrCustModelCode;
-      },
-      (error) => {
-        console.log(error);
       });
   }
 

@@ -63,8 +63,6 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
 
   ngOnInit() {
     
-    console.log(this.From);
-    console.log(this.IdCust);
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
     this.http.post(this.getCustById, this.objCust).subscribe(
@@ -78,7 +76,6 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
       this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
         (response) => {
             this.listCustAddr = response[CommonConstant.ReturnObj];
-            console.log(this.listCustAddr);
         });
   }
 
@@ -92,9 +89,6 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   //   this.http.post(this.deleteCustAddr, custAddr).subscribe(
   //     (response: any) => {
   //       this.toastr.successMessage(response["message"]);
-  //     },
-  //     (error) => {
-  //       console.log(error);
   //     }
   //   );
   //   //this.outputTab.emit({ mode: 'edit', AddrId: custAddrObj.CustAddrId });

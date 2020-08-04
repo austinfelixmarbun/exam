@@ -123,9 +123,6 @@ export class AddressComponent implements OnInit {
           this.toastr.successMessage(response["message"]);
           this.wizard.goToNextStep();
           this.refreshVendorAddress();
-        },
-        (error) => {
-          console.log(error);
         });
     }
     else {
@@ -137,9 +134,6 @@ export class AddressComponent implements OnInit {
           this.toastr.successMessage(response["message"]);
           this.wizard.goToNextStep();
           this.refreshVendorAddress();
-        },
-        (error) => {
-          console.log(error);
         });
     }
   }
@@ -166,9 +160,6 @@ export class AddressComponent implements OnInit {
         } else {
           this.mode = "edit";
         }
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

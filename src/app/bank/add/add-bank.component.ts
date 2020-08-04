@@ -57,9 +57,6 @@ export class BankAddComponent implements OnInit {
                         RegRptCode : this.result.RegRptCode,
                         IsActive : this.result.IsActive
                     })
-                },
-                (error) => {
-                    console.log(error);
                 }
             );
         }
@@ -77,9 +74,6 @@ export class BankAddComponent implements OnInit {
                 (response) => {
                     this.router.navigate(["/CommonSetting/Bank/Paging"]);
                     this.toastr.successMessage(response['message']);
-                },
-                (error) => {
-                    console.log(error);
                 });
         }
         else {
@@ -91,10 +85,7 @@ export class BankAddComponent implements OnInit {
             this.http.post(URLConstant.AddRefBankAsync, this.bankObj).subscribe((response) => {
                 this.toastr.successMessage(response['message']);
                 this.router.navigate(["/CommonSetting/Bank/Paging"]);
-            },
-                (error) => {
-                    console.log(error);
-                });
+            });
         }
     }
 }

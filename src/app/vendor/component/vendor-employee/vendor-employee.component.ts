@@ -269,9 +269,6 @@ export class VendorEmployeeComponent implements OnInit {
           IsNpwpExist: this.resultVendorEmpAndAddr.VendorEmpObj.IsNpwpExist
         });
         this.setLookup();
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -347,9 +344,6 @@ export class VendorEmployeeComponent implements OnInit {
           this.objOutput.emit(response["VendorEmpId"]);
           this.toastr.successMessage(response["message"]);
           this.wizard.goToNextStep();
-        },
-        (error) => {
-          console.log(error);
         });
     } else {
       this.VendorBranchEmpObj.VendorEmpObj.VendorEmpId = this.objInput.VendorEmpId;
@@ -362,9 +356,6 @@ export class VendorEmployeeComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.wizard.goToNextStep();
-        },
-        (error) => {
-          console.log(error);
         });
     }
   }

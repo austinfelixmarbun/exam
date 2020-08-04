@@ -57,8 +57,6 @@ export class UserAddEditComponent implements OnInit {
       if (params["refUserId"] != null) {
         this.RefUserId = params["refUserId"];
       }
-      console.log(this.type);
-      console.log(this.RefUserId);
     });
   }
 
@@ -80,10 +78,8 @@ export class UserAddEditComponent implements OnInit {
       // this.refUserObj.refUserId = this.RefUserId;
       this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
         response => {
-          console.log("Success Get");
           userTemp = new RefUserObj();
           userTemp = response["returnObject"];
-          console.log("A", userTemp);
           // this.refUserObj.refUserId = userTemp.refUserId;
           // this.refUserObj.username = userTemp.username;
           // this.refUserObj.refEmpId = userTemp.refEmpId;
@@ -112,10 +108,6 @@ export class UserAddEditComponent implements OnInit {
             this.inputLookupObj.jsonSelect = response["returnObject"];
             // this.inputLookupObj.idSelect = empObj.refEmpId;
           });
-        },
-        error => {
-          console.log("Error Get");
-          console.log(error);
         }
       );
     } else if (this.type == "changePassword") {
@@ -127,9 +119,7 @@ export class UserAddEditComponent implements OnInit {
       // this.refUserObj.refUserId = this.RefUserId;
       this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
         response => {
-          console.log("Success Get");
           this.refUserObj = response["returnObject"];
-          console.log("A", this.refUserObj);
 
           // this.Username = this.refUserObj.username;
 
@@ -142,10 +132,6 @@ export class UserAddEditComponent implements OnInit {
             this.inputLookupObj.jsonSelect = response["returnObject"];
             // this.inputLookupObj.idSelect = empObj.refEmpId;
           });
-        },
-        error => {
-          console.log("Error Get");
-          console.log(error);
         }
       );
     }
@@ -156,10 +142,8 @@ export class UserAddEditComponent implements OnInit {
   }
 
   Save(UserAddEditForm: NgForm, lookupEmp: any): void {
-    console.log("Masuk Save");
 
     this.spinner.show();
-    console.log(UserAddEditForm.value);
     var getUserUrl = this.foundationUrl + URLConstant.GetUserByUsername;
     var getCountUserUrl =
       this.foundationUrl + URLConstant.GetCountRefUserByRefEmpId;
@@ -172,15 +156,12 @@ export class UserAddEditComponent implements OnInit {
 
     //MODE-ADD
     if (this.type == "add" || this.type == '' || this.type ==  undefined) {
-      console.log("add");
       if (UserAddEditForm.value.Password != UserAddEditForm.value.RePassword) {
-        console.log("Password and Re-Password Not Valid");
         this.service.typeErrorCustom("Password and Re-Password Not Valid");
         this.spinner.hide();
       } else {
         this.httpClient.post(getUserUrl, userObj).subscribe(
           response => {
-            console.log("Success Check Duplicate");
             userObj = response["returnObject"];
             if (userObj != null) {
               this.service.typeErrorCustom("Username Has Been Used");
@@ -188,13 +169,11 @@ export class UserAddEditComponent implements OnInit {
             } else {
               this.httpClient.post(getCountUserUrl, empObj).subscribe(
                 response => {
-                  console.log(response);
                   if (response['returnObject'] > 0) {
                     this.service.typeErrorCustom("Employee Already Have User");
                     this.spinner.hide();
                   } else {
                     this.apiUrl = this.foundationUrl + URLConstant.AddRefUser;
-                    console.log(lookupEmp);
                     // this.refUserObj.refEmpId = lookupEmp.idSelect;
                     // this.refUserObj.username = UserAddEditForm.value.Username;
                     // this.refUserObj.password = UserAddEditForm.value.Password;
@@ -213,7 +192,6 @@ export class UserAddEditComponent implements OnInit {
                       .post(this.apiUrl, this.refUserObj)
                       .subscribe(
                         response => {
-                          console.log("Success Save");
 
                           this.service.typeSave(response['message']);
                           this.router.navigateByUrl('/systemSetting/refUser', { skipLocationChange: true }).then(() =>
@@ -221,7 +199,6 @@ export class UserAddEditComponent implements OnInit {
                           this.spinner.hide();
                         },
                         error => {
-                          console.log("Error Save");
                           this.service.typeErrorCustom(error);
                           this.spinner.hide();
                         }
@@ -236,7 +213,6 @@ export class UserAddEditComponent implements OnInit {
             }
           },
           error => {
-            console.log("Error Check Duplicate");
             this.service.typeErrorCustom(error);
             this.spinner.hide();
           }
@@ -245,7 +221,6 @@ export class UserAddEditComponent implements OnInit {
     }
     //MODE-EDIT
     // else if (this.type == "edit") {
-    //   console.log("edit");
     //   this.apiUrl = this.foundationUrl + AdInsConstant.EditRefUser;
     //   this.httpClient.post(getCountUserUrl, empObj).subscribe(
     //     response => {
@@ -268,14 +243,12 @@ export class UserAddEditComponent implements OnInit {
             //SAVE
       //       this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
       //         response => {
-      //           console.log("Success Edit");
 
       //           this.service.typeSave(response['message']);
       //           this.location.back();
       //           this.spinner.hide();
       //         },
       //         error => {
-      //           console.log("Error Edit");
 
       //           this.service.typeErrorCustom(error);
       //           this.spinner.hide();
@@ -290,7 +263,6 @@ export class UserAddEditComponent implements OnInit {
       // );
     //CHANE PASSWORD
     // } else if (this.type == "changePassword") {
-    //   console.log("changePassword");
     //   var validateOldPassUrl: any =
     //     this.foundationUrl + AdInsConstant.ValidatePwd;
     //   var oldUser: RefUserObj;
@@ -299,7 +271,6 @@ export class UserAddEditComponent implements OnInit {
     //     UserAddEditForm.value.NewPassword !=
     //     UserAddEditForm.value.NewRePassword
     //   ) {
-    //     console.log("New Password and New Re-Password Not Valid");
     //     this.service.typeErrorCustom(
     //       "New Password and New Re-Password Not Valid"
     //     );
@@ -312,13 +283,11 @@ export class UserAddEditComponent implements OnInit {
     //     this.apiUrl = this.foundationUrl + AdInsConstant.ChangePassword;
     //     this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
     //       response => {
-    //         console.log("Success Edit");
     //         this.service.typeSave(response['message']);
     //         this.location.back();
     //         this.spinner.hide();
     //       },
     //       error => {
-    //         console.log("Error Edit");
     //         this.service.typeErrorCustom(error);
     //         this.spinner.hide();
     //       }
