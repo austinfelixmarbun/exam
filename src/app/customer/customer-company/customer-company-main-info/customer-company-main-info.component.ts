@@ -46,18 +46,14 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   ngOnInit() {
     this.VipNotesRequired = true;
     var refMasterObjCustModel = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
-      ReserveField1: CommonConstant.CustTypeCompany,
-      RowVersion: ""
+      MrCustTypeCode: CommonConstant.CustTypeCompany
     }
-    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
       (response) => {
-        this.tempCustModel = response[CommonConstant.ReturnObj];
-        if (this.tempCustModel.length > 0) {
-          this.CustomerCompanyForm.patchValue({
-            CustModel: this.tempCustModel[0].Key
-          });
-        }
+        this.tempCustModel = response["ReturnObject"];
+        this.CustomerCompanyForm.patchValue({
+          CustModel: this.tempCustModel[0].Key
+        });
       }
     );
 
