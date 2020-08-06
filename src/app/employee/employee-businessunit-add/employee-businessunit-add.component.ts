@@ -68,7 +68,6 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
 
       this.http.post(URLConstant.GetRefUserRoleById, this.userRole).subscribe(
         (response) => {
-          console.log(response);
           this.result = response;
           this.userRole = this.result;
           this.EmployeeBusinessUnitForm.patchValue({
@@ -109,8 +108,6 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
           Office.RefOfficeId = this.result["RefOfficeId"];
           this.http.post(URLConstant.GetRefOfficeByRefOfficeId, Office).subscribe(
             (response) => {
-              console.log("isi Office");
-              console.log(Office);
               this.inputPagingObjOffice.nameSelect = response["OfficeName"];
             }
           )
@@ -122,9 +119,6 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
               this.inputPagingObjRole.nameSelect = response["RoleName"];
             }
           )
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -203,9 +197,6 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response['message']);
           this.router.navigate(['/Employee/EmployeeBusinessUnit/Paging'], { queryParams: { RefUserId: this.RefUserId } });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -216,10 +207,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.http.post(URLConstant.AddRefUserRole, this.userRole).subscribe((response) => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(['/Employee/EmployeeBusinessUnit/Paging'], { queryParams: { RefUserId: this.RefUserId } });
-      },
-        (error) => {
-          console.log(error);
-        });
+      });
     }
   }
 }

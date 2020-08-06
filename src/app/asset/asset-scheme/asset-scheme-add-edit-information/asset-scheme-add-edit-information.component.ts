@@ -72,9 +72,6 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
             IsActive: this.resultData.IsActive,
           });
           this.AssetSchmCode = this.resultData.AssetSchmCode;
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -94,9 +91,6 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Scheme/Paging"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -108,9 +102,6 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Scheme/Paging"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     }

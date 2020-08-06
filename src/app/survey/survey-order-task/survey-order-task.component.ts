@@ -67,19 +67,12 @@ export class SurveyOrderTaskComponent implements OnInit {
         this.http.post(URLConstant.GetVendorByVendorId, VendorObj).subscribe(
           response => {
             this.VendorObj = response;
-            console.log(this.VendorObj);
             this.SurveyTaskForm.patchValue({
               SurveyorCode: this.VendorObj.VendorCode
             });
-          },
-          error => {
-            console.log(error);
           }
         );
 
-      },
-      error => {
-        console.log(error);
       }
     );
 
@@ -89,9 +82,6 @@ export class SurveyOrderTaskComponent implements OnInit {
         this.SurveyTaskForm.patchValue({
           SrvyFormSchmId: this.FormSchmList[0].SrvyFormSchmId
         });
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -101,9 +91,6 @@ export class SurveyOrderTaskComponent implements OnInit {
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigate(["/Survey/Paging"]);
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -177,9 +164,6 @@ export class SurveyOrderTaskComponent implements OnInit {
           SrvyFormSchmId: this.SrvyTaskObj.SrvyFormSchmId,
           SurveyorCode: this.SrvyTaskObj.SurveyorCode,
         });
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -193,9 +177,6 @@ export class SurveyOrderTaskComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.generateSurveyTaskList();
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -214,7 +195,6 @@ export class SurveyOrderTaskComponent implements OnInit {
     let srvyObj = this.SrvyObjList.find(x => x.Key == this.SrvyTaskObj.MrSrvyObjCode);
     this.SrvyTaskObj.MrSrvyObj = srvyObj.Value;
 
-    console.log(this.SrvyTaskObj);
     if (this.SurveyTaskForm.controls["SrvyTaskId"].value == "") {
       this.SrvyTaskObj.SrvyTaskNo = "";
 
@@ -223,9 +203,6 @@ export class SurveyOrderTaskComponent implements OnInit {
           this.toastr.successMessage(response["Message"]);
           this.generateSurveyTaskList();
           this.modal.close();
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -238,9 +215,6 @@ export class SurveyOrderTaskComponent implements OnInit {
           this.toastr.successMessage(response["Message"]);
           this.generateSurveyTaskList();
           this.modal.close();
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -268,7 +242,6 @@ export class SurveyOrderTaskComponent implements OnInit {
     }
     this.http.post(URLConstant.GetListSryvObject, obj).subscribe(
       (response) => {
-        console.log(JSON.stringify(response));
         this.resultData = response;
         if (this.resultData.length != 0) {
           for (let i = 0; i < this.resultData.length; i++) {
@@ -279,9 +252,6 @@ export class SurveyOrderTaskComponent implements OnInit {
           });
           this.setSrvyObjList();
         }
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -294,9 +264,6 @@ export class SurveyOrderTaskComponent implements OnInit {
     this.http.post(URLConstant.GetListSrvyTaskBySrvyOrderId, SrvyTaskObj).subscribe(
       response => {
         this.SurveyTaskList = response;
-      },
-      error => {
-        console.log(error);
       }
     );
   }

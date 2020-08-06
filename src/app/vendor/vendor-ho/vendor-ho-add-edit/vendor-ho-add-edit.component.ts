@@ -140,9 +140,6 @@ export class VendorHoAddEditComponent implements OnInit {
 
         this.setLookup();
         this.checkType();
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -245,9 +242,6 @@ export class VendorHoAddEditComponent implements OnInit {
   }
 
   getLookupATPM(ev){
-    // console.log(ev);
-    // console.log(this.VendorForm);
-    
     this.VendorForm.patchValue({
       VendorAtpmCode: ev.VendorCode,
     });
@@ -422,9 +416,6 @@ export class VendorHoAddEditComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response["message"]);
             this.router.navigate(['/Vendor/HO/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": "edit" } });
-          },
-          (error) => {
-            console.log(error);
           });
       }
       else {
@@ -434,9 +425,6 @@ export class VendorHoAddEditComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response["message"]);
             this.router.navigate(['/Vendor/HO/Registration'], { queryParams: { "VendorId": response['VendorObj'].VendorId } });
-          },
-          (error) => {
-            console.log(error);
           });
       }
     }

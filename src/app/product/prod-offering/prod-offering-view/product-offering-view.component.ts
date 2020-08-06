@@ -78,13 +78,8 @@ export class ProductOfferingViewComponent implements OnInit {
     this.GetProdOfferByVerCode.ProdOfferingVersion = this.prodOfferingVersion;
     await this.http.post(this.ProdOfferingCodeVerUrl, this.GetProdOfferByVerCode).toPromise().then(
       response => {
-        console.log("Response: ");
-        console.log(response);
         this.ProdOfferingCodeVersion = response;
         this.prodOfferingHId = this.ProdOfferingCodeVersion.ProdOfferingHId
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -113,13 +108,8 @@ export class ProductOfferingViewComponent implements OnInit {
     this.ProdOfferingVersionObj.ProdOfferingHId = this.prodOfferingHId;
     await this.http.post(this.ProdOfferingVerUrl, this.ProdOfferingVersionObj).toPromise().then(
       response => {
-        console.log("Response: ");
-        console.log(response);
         this.ProdOfferingVersion = response[CommonConstant.ReturnObj];
 
-      },
-      error => {
-        console.log(error);
       }
     );
 
@@ -128,13 +118,8 @@ export class ProductOfferingViewComponent implements OnInit {
     this.ProdOfferingBranchMemObj.ProdOfferingHId = this.prodOfferingHId;
     await this.http.post(this.ProdOfferingBranchUrl, this.ProdOfferingBranchMemObj).toPromise().then(
       response => {
-        console.log("Response: ");
-        console.log(response);
         this.ProdOfferingBranchMbr = response[CommonConstant.ReturnObj];
 
-      },
-      error => {
-        console.log(error);
       }
     );
 
@@ -145,19 +130,12 @@ export class ProductOfferingViewComponent implements OnInit {
     this.refProductDetailObj.RefProdCompntGrpCode = ['GEN', 'SCHM', 'SCORE', 'RULE', 'OTHR', 'LOS'];
     await this.http.post(this.ProdOfferingDUrl, this.refProductDetailObj).toPromise().then(
       response => {
-        console.log("Response: ");
-        console.log(response);
         this.ProdComp = response[CommonConstant.ReturnObj].ProdOffComponents;
-        console.log(this.ProdComp);
         this.GenData = this.ProdComp.filter(
           comp => comp.GroupCode == 'GEN');
         this.ProdCompGen = this.GenData[0];
         this.ProdCompNonGen = this.ProdComp.filter(
           comp => comp.GroupCode != 'GEN');
-        console.log(this.ProdCompNonGen);
-      },
-      error => {
-        console.log(error);
       }
     );
     this.IsLoaded = true;
@@ -167,9 +145,6 @@ export class ProductOfferingViewComponent implements OnInit {
     this.http.post(URLConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
       response => {
         saveAs(response, CompntValueDesc + '.xlsx');
-      },
-      error => {
-        console.log(error);
       }
     );
   }

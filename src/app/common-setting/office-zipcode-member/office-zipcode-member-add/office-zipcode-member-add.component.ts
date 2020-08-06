@@ -56,7 +56,6 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("test");
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeZipcodeMember.json";
     this.inputObj.enviromentUrl = this.settingUrl;
@@ -80,9 +79,6 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
         this.officeCode = response['returnObject']['officeCode'];
         this.officeName = response['returnObject']['officeName'];
         this.city = response['returnObject']['city'];
-      },
-      (error) => {
-        console.log(error);
       });
 
   }
@@ -128,16 +124,12 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
   }
 
   Checked(refZipcodeId: any, isChecked: any): void {
-    console.log(refZipcodeId);
     if (isChecked) {
       this.listSelectedId.push(refZipcodeId);
     } else {
       let index = this.listSelectedId.indexOf(refZipcodeId)
-      console.log(index);
       if (index > -1) { this.listSelectedId.splice(index, 1); }
     }
-    console.log('Sel', this.listSelectedId);
-    console.log('Del', this.listDeletedId);
   }
 
   AddToTemp() {
@@ -164,8 +156,6 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
       this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
 
       this.listSelectedId = [];
-      console.log(this.listSelectedId);
-      console.log(this.tempData);
     } else {
       this.toastr.typeErrorCustom(ExceptionConstant.PLEASE_SELECT_MIN_1_ZIPCODE);
     }
@@ -194,10 +184,6 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
       };
     }
     this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
-    console.log("selectedID : " + this.listSelectedId)
-    console.log("templateID : " + this.tempListId);
-    console.log(this.tempData);
-    console.log(this.resultData.data);
   }
   
   saveZipMember() {
@@ -211,16 +197,11 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
       listObj.push(arrZipMember);
     }
     var zipCodeMemberList = { listOfOfficeZipcodeMember: listObj };
-    console.log(zipCodeMemberList);
 
     this.http.post(this.addUrl, zipCodeMemberList).subscribe(
       (response) => {
-          console.log(response);
           this.toastr.successMessage(response['message']);
           this.router.navigateByUrl('/commonSetting/officeZipcodeMember/Paging?refOfficeId=' + this.refOfficeId);
-      },
-      (error) => {
-          console.log(error);
       });
 
   }

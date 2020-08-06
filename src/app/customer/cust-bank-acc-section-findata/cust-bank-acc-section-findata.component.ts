@@ -32,9 +32,6 @@ export class CustBankAccSectionFindataComponent implements OnInit {
     this.httpClient.post(URLConstant.GetCBAForCustFinDataByCustId, custBankAccObj).subscribe(
       (response: any) => {
         this.cbaFinDataList = response.ListCBAForCustFinData;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -70,9 +67,6 @@ export class CustBankAccSectionFindataComponent implements OnInit {
         this.httpClient.post(URLConstant.GetCBAForCustFinDataByCustId, custBankAccObj).subscribe(
           (response: any) => {
             this.cbaFinDataList = response.ListCBAForCustFinData;
-          },
-          (error) => {
-            console.log(error);
           }
         );
         this.spinner.hide();

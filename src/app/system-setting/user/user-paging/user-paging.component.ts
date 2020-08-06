@@ -49,11 +49,6 @@ export class UserPagingComponent implements OnInit {
     this.apiUrl = this.foundationUrl + URLConstant.GetRefUserPaging;
 
     this.initiateForm();
-    // this.adInsService.postData(this.foundationUrl + URLConstant.GetListOffice, null)
-    //   .subscribe(data => {
-    //     console.log(data);
-    //   }
-    //   )
   }
 
   getResult(event) {
@@ -113,10 +108,6 @@ export class UserPagingComponent implements OnInit {
               skipLocationChange: true
             })
             .then(() => this.router.navigate(["/systemSetting/refUser"]));
-        },
-        error => {
-          console.log(error);
-          this.service.typeErrorCustom(error);
         }
       );
     }

@@ -157,10 +157,6 @@ export class WorkingHourDDetailComponent implements OnInit {
           }
         }
         this.items.removeAt(0);
-        console.log(this.WorkingHourSchmDForm);
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -218,9 +214,6 @@ export class WorkingHourDDetailComponent implements OnInit {
       response => {
         this.toastr.successMessage(response["message"]);
         this.router.navigate(["/CommonSetting/WorkingHour"]);
-      },
-      error => {
-        console.log(error);
       }
     );
   }

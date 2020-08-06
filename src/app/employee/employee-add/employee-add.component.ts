@@ -109,9 +109,6 @@ export class EmployeeAddComponent implements OnInit {
       (response) => {
         this.resultData = response;
         this.passwordPattern = this.resultData.GsValue;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -248,9 +245,6 @@ export class EmployeeAddComponent implements OnInit {
           });
           this.inputLookupZipCodeObj.nameSelect = refEmpData.Zipcode;
           this.inputLookupBankObj.nameSelect = refBankData.BankName;
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -347,9 +341,6 @@ export class EmployeeAddComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(["/Employee/Paging"]);
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -364,9 +355,6 @@ export class EmployeeAddComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(["/Employee/Paging"]);
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

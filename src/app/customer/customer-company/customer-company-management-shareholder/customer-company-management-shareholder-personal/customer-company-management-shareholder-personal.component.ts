@@ -69,8 +69,6 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
 
   ngOnInit() {
-    console.log("TotalShare")
-    console.log(this.TotalShare)
     this.inputLookupCustPersonalObj = new InputLookupObj();
     this.inputLookupCustPersonalObj.urlJson = "./assets/lookup/lookUpExistingCustPersonal.json";
     this.inputLookupCustPersonalObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -150,7 +148,6 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
         (response) => {
           this.tempCustCompanyMgmntShrholderObj = response;
           var datePipe = new DatePipe("en-US");
-          console.log(this.tempCustCompanyMgmntShrholderObj);
           this.ManagementShareholderForm.patchValue({ 
             
             MgmntShrholderName: this.tempCustCompanyMgmntShrholderObj.MgmntShrholderName,
@@ -181,8 +178,6 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
           }
 
           this.TotalShare = this.TotalShare - parseFloat(this.tempCustCompanyMgmntShrholderObj.SharePrcnt);
-          console.log("TotalShare")
-          console.log(this.TotalShare);
         }
       );
       
@@ -193,8 +188,6 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   TotalShareCurrent: number;
   SaveValue(){
     this.TotalShareCurrent = this.TotalShare + parseFloat(this.ManagementShareholderForm.controls["SharePrcnt"].value);
-    console.log("TotalShareCurrent")
-    console.log(this.TotalShareCurrent);
     if(this.TotalShareCurrent > 100){
       this.LeftShare = 100 - this.TotalShare;
       this.toastr.warningMessage("Total Share left is "+this.LeftShare+"%");
@@ -224,13 +217,9 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.outputTab.emit({mode : 'check'});
-        },
-        error => {
-          console.log(error);
         }
       );
     }else{
-      console.log(" ");
       if(this.tempShareholderCustNo!=null){
         this.custCompanyMgmntShrholderObj.ShareholderCustNo = this.tempShareholderCustNo;
       }
@@ -254,9 +243,6 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.outputTab.emit({mode : 'check'});
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -293,7 +279,6 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }); 
     this.tempShareholderCustNo = event.CustNo;
     
-    console.log(this.tempShareholderCustNo);
     this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
     this.ManagementShareholderForm.controls.MrCustModelCode.disable();
     this.ManagementShareholderForm.controls.MrIdTypeCode.disable();

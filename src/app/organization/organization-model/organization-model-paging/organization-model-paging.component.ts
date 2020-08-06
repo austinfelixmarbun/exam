@@ -117,7 +117,6 @@ export class OrganizationModelPagingComponent implements OnInit {
       this.deleteUrl = this.foundationUrl + URLConstant.DeleteOrgMdl;
       this.orgModelObj = new OrgMdlObj();
       this.orgModelObj.orgMdlId = +id;
-      console.log(this.orgModelObj);
       this.https.post(this.deleteUrl, this.orgModelObj).subscribe(
         (response) => {
           this.service.successMessage(response['message']);

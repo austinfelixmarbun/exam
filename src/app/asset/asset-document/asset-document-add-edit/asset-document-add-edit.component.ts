@@ -55,7 +55,6 @@ export class AssetDocumentAddEditComponent implements OnInit {
   ngOnInit() {
     this.http.post(URLConstant.GetListRefAssetDoc, this.assetDocListObj).subscribe(
       (response) => {
-        // console.log(response);
         this.tempAssetName = response[CommonConstant.ReturnObj];
         if (this.tempAssetName.length > 0) {
           this.AssetDocumentForm.patchValue({
@@ -75,11 +74,8 @@ export class AssetDocumentAddEditComponent implements OnInit {
     this.http.post(URLConstant.GetListGeneralSettingByListGsCode, generalSettingObj).subscribe(
       (response) => {
         var tempResponse = response['ResponseGeneralSettingObj'];
-        // console.log(tempResponse);
         let GSIsShowCbxBorrow = tempResponse.find(x => x.GsCode == "IS_SHOW_CBX_BORROW");
         let GSIsShowCbxPledge = tempResponse.find(x => x.GsCode == "IS_SHOW_CBX_PLEDGE");
-        // console.log(GSIsShowCbxBorrow);
-        // console.log(GSIsShowCbxPledge);
 
         if (GSIsShowCbxBorrow != undefined || GSIsShowCbxBorrow != null)
           this.isShowCbxBorrow = GSIsShowCbxBorrow["GsValue"];
@@ -109,9 +105,6 @@ export class AssetDocumentAddEditComponent implements OnInit {
             IsMandatoryUsed: this.result.IsMandatoryUsed,
             IsActive: this.result.IsActive,
           })
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -133,9 +126,6 @@ export class AssetDocumentAddEditComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Document/Paging"], { queryParams: { "AssetTypeId": this.assetDocListObj.AssetTypeId } });
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -153,9 +143,6 @@ export class AssetDocumentAddEditComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Document/Paging"], { queryParams: { "AssetTypeId": this.assetDocListObj.AssetTypeId } });
-        },
-        error => {
-          console.log(error);
         }
       );
     }

@@ -113,9 +113,6 @@ export class BankInfoComponent implements OnInit {
           this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
           this.BankRegisForm.controls.AccName.updateValueAndValidity();
           enjiForm.reset();
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -137,9 +134,6 @@ export class BankInfoComponent implements OnInit {
           this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
           this.BankRegisForm.controls.AccName.updateValueAndValidity();
           enjiForm.reset();
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -186,10 +180,7 @@ export class BankInfoComponent implements OnInit {
       this.vendorService.DeleteVendorBankAcc({VendorBankAccId: vendorBankAccId}).subscribe(response => {
         this.toastr.successMessage(response["Message"]);
         this.getListData();
-      },
-        error => {
-          console.log(error);
-        });
+      });
     }
   }
 

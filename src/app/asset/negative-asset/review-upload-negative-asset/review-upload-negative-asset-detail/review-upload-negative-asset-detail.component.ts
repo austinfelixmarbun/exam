@@ -68,16 +68,12 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigate(["/Asset/AssetMaster/ReviewUploadPaging"]);
-      },
-      error => {
-        console.log(error);
       }
     );
   }
   claimTask() {
     var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     var wfClaimObj = { pWFTaskListID: this.taskListId, pUserID: currentUserContext[CommonConstant.USER_NAME] };
-    console.log(wfClaimObj);
     this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(
       (response) => {
       });

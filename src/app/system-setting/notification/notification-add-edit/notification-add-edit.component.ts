@@ -114,9 +114,6 @@ export class NotificationAddEditComponent implements OnInit {
             PublishDate: formatDate(this.resultDataH.PublishDt, 'yyyy-MM-dd', 'en-US')
 
           });
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -131,9 +128,6 @@ export class NotificationAddEditComponent implements OnInit {
         for (let i = 0; i < this.refOfficeObj.length; i++) {
           this.dropdownListOffice.push({ item_id: this.refOfficeObj[i].RefOfficeId, item_text: this.refOfficeObj[i].OfficeName });
         }
-      },
-      (error) => {
-        console.log(error);
       }
     );
 
@@ -144,9 +138,6 @@ export class NotificationAddEditComponent implements OnInit {
         for (let i = 0; i < this.refRoleObj.length; i++) {
           this.dropdownListRole.push({ item_id: this.refRoleObj[i].RefRoleId, item_text: this.refRoleObj[i].RoleName });
         }
-      },
-      (error) => {
-        console.log(error);
       }
     );
 
@@ -191,9 +182,6 @@ export class NotificationAddEditComponent implements OnInit {
             this.toastr.successMessage(response["Message"]);
             this.router.navigate(["/SystemSetting/Notification"]);
 
-          },
-          error => {
-            console.log(error);
           }
         );
       }

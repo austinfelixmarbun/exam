@@ -77,7 +77,6 @@ export class CustomerCompanyDetailComponent implements OnInit {
           EstablishmentDt: datePipe.transform(this.tempCustCompanyObj.EstablishmentDt, 'yyyy-MM-dd'),
         });
         
-        console.log(this.tempCustCompanyObj.EstablishmentDt);
         if (this.tempCustCompanyObj.RefIndustryTypeId != null) {
           this.refIndustryTypeObj = new RefIndustryTypeObj();
           this.refIndustryTypeObj.RefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
@@ -107,9 +106,6 @@ export class CustomerCompanyDetailComponent implements OnInit {
           (response) => { 
             this.toastr.successMessage(response["Message"]);
             this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next'});
-          },
-          error => {
-            console.log(error);
           }
         );  
   }

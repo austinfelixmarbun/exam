@@ -151,7 +151,8 @@ export class URLConstant {
     public static GetRefUserRoleById = environment.FoundationR3Url + "/RefUserRole/GetRefUserRoleById";
     public static ChangePasswordRefUserByUsername = environment.FoundationR3Url + "/RefUser/ChangePasswordRefUserByUsername";
     public static DeleteRefUserRole = "/RefUserRole/DeleteRefUserRole";
-
+    public static GetRefUserByResetCode = environment.FoundationR3Url + "/RefUser/GetRefUserByResetCode";
+    public static ResetPasswordByUsername = environment.FoundationR3Url + "/RefUser/ResetPasswordByUsername";
     //REF-ROLE
     public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
     public static AddRefRole = environment.FoundationR3Url + "/RefRole/AddRefRole";
@@ -704,7 +705,7 @@ export class URLConstant {
     public static EditCustPersonalFinData = environment.FoundationR3Url + "/CustPersonalFinData/EditCustPersonalFinData";
     public static GetCustPersonalFinDataForCustViewByCustId = environment.FoundationR3Url + "/CustPersonalFinData/GetCustPersonalFinDataForCustViewByCustId";
     public static EditCustBankAcc = environment.FoundationR3Url + "/CustBankAcc/EditCustBankAcc";
-    
+
     // CUSTOMER ADDRESS
     public static GetListCustAddr = environment.FoundationR3Url + "/CustAddr/GetListCustAddr";
     public static AddCustAddr = environment.FoundationR3Url + "/CustAddr/AddCustAddr";
@@ -822,5 +823,12 @@ export class URLConstant {
 
     // REF SCORE CATEGORY
     public static AddRangeAndDeleteScoreCategorySchmD = environment.FoundationR3Url + "/ScoreCategorySchmD/AddRangeAndDeleteScoreCategorySchmD";
+
+    // Authentication
+    public static RequestNewPassword = environment.FoundationR3Url + "/Authenticate/RequestNewPassword";
+
+    //REF CUST MODEL
+    public static GetListKeyValueByMrCustTypeCode = environment.FoundationR3Url + "/RefCustModel/GetListKeyValueByMrCustTypeCode";
+    public static GetRefCustModelByCode = environment.FoundationR3Url + "/RefCustModel/GetRefCustModelByCode";
 
 }

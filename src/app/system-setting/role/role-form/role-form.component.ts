@@ -65,9 +65,6 @@ export class RoleFormComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListRefFormId);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -97,9 +94,6 @@ export class RoleFormComponent implements OnInit {
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.router.navigate(['/SystemSetting/RoleForm'], { queryParams: { "RefRoleId": this.RefRoleId } });
-      },
-      (error) => {
-        console.log(error);
       });
   }
 }

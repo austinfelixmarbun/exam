@@ -47,7 +47,6 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
       this.http.post(URLConstant.GetVerfSchemeHForUpdateById, verfGroupObj).subscribe(
         (response) => {
           this.verfQuestionScheme = response;
-          console.log(this.verfQuestionScheme);
           this.QuestionSchemeForm.patchValue({
             VerfSchemeHId: this.verfQuestionScheme.VerfSchemeHId,
             VerfSchemeCode: this.verfQuestionScheme.VerfSchemeCode,
@@ -69,9 +68,6 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Verification/QuestionScheme/Paging']);
-        },
-        (error) => {
-          console.log(error);
         });
     }
     else {
@@ -80,9 +76,6 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Verification/QuestionScheme/Paging']);
-        },
-        (error) => {
-          console.log(error);
         });
     }
   }

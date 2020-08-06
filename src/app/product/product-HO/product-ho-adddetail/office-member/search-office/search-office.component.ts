@@ -6,6 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-search-office',
@@ -60,7 +61,7 @@ export class SearchOfficeComponent implements OnInit {
 
   SaveForm() {
     if (this.listSelectedId["TempListId"].length == 0) {
-      this.toastr.errorMessage('Please Add At Least One Data');
+      this.toastr.errorMessage(ExceptionConstant.ADD_MIN_1_DATA);
       return;
     }
 
@@ -82,9 +83,6 @@ export class SearchOfficeComponent implements OnInit {
           result: []
         }
         this.componentIsOn.emit(obj);
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

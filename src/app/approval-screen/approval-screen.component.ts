@@ -14,11 +14,11 @@ import { TestComponent } from './test/test.component';
 
 export class ApprovalScreenComponent implements OnInit {
 
-  inputObj : any;
-  FormApv : FormGroup;
-  apvBaseUrl : string;
-  instanceHistObj : any;
-  taskHistObj : any;
+  inputObj: any;
+  FormApv: FormGroup;
+  apvBaseUrl: string;
+  instanceHistObj: any;
+  taskHistObj: any;
 
   constructor(
     private fb: FormBuilder
@@ -26,60 +26,47 @@ export class ApprovalScreenComponent implements OnInit {
 
   ngOnInit() {
     var obj = {
-      taskId : 75839,
-      instanceId : 70649,
-      approvalBaseUrl : environment.ApprovalURL
+      taskId: 75839,
+      instanceId: 70649,
+      approvalBaseUrl: environment.ApprovalURL
     }
 
     this.inputObj = obj;
 
     this.instanceHistObj = {
-      approvalBaseUrl : environment.ApprovalURL,
-      type : 'instance',
-      refId : 60388
+      approvalBaseUrl: environment.ApprovalURL,
+      type: 'instance',
+      refId: 60388
     }
 
     this.taskHistObj = {
-      approvalBaseUrl : environment.ApprovalURL,
-      type : 'task',
-      refId : 60473
+      approvalBaseUrl: environment.ApprovalURL,
+      type: 'task',
+      refId: 60473
     }
 
     this.FormApv = this.fb.group(
       {
-        approveById : [''],
-        recommendations : this.fb.array([]),
+        approveById: [''],
+        recommendations: this.fb.array([]),
       }
     )
-
     this.apvBaseUrl = environment.ApprovalURL;
   }
 
-  onCancelClick()
-  {
-    console.log("cancel click")
+  onCancelClick() {
   }
 
-  onChange(event)
-  {
-    console.log(event.target.value);
+  onChange(event) {
   }
 
-  Test()
-  {
-    console.log(this.FormApv.value);
+  Test() {
   }
 
-    onApprovalSubmited(event)
-    {
-      console.log("AAAAA");
-      console.log(event)
-    }
+  onApprovalSubmited(event) {
+  }
 
-    onAvailableNextTask(event)
-    {
-      console.log("BBBBB");
-      console.log(event)
-    }
+  onAvailableNextTask(event) {
+  }
 }
 

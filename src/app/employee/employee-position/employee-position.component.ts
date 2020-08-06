@@ -87,7 +87,6 @@ export class EmployeePositionComponent implements OnInit {
     var refEmpObj = { RefEmpId: this.refEmpId };
     this.httpClient.post(this.getEmpUrl, refEmpObj).subscribe(
       (response) => {
-        console.log(response);
         this.empNo = response["returnObject"].empNo;
         this.empName = response["returnObject"].empName;
       });
@@ -105,7 +104,6 @@ export class EmployeePositionComponent implements OnInit {
         key: this.orderByKey,
         value: this.orderByValue
       }
-      console.log("asd")
       this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrCrit);
     }
   }
@@ -130,10 +128,6 @@ export class EmployeePositionComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response['message']);
           this.searchPagination(this.pageNow);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
         });
     }
   }

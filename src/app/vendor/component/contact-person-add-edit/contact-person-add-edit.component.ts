@@ -101,9 +101,6 @@ export class ContactPersonAddEditComponent implements OnInit {
           })
           this.inputZipcodeLookupObj.jsonSelect = { Zipcode: this.result.Zipcode };
           this.zipcodee = this.result.Zipcode;
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -154,9 +151,6 @@ export class ContactPersonAddEditComponent implements OnInit {
         (response) => {
           this.HiddenCheck();
           this.toastr.successMessage(response['message']);
-        },
-        (error) => {
-          console.log(error);
         });
     }
     else {
@@ -181,10 +175,7 @@ export class ContactPersonAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddVendorContactPerson, this.contactPersonObj).subscribe((response) => {
         this.toastr.successMessage(response['message']);
         this.HiddenCheck();
-      },
-        (error) => {
-          console.log(error);
-        });
+      });
     }
   }
 

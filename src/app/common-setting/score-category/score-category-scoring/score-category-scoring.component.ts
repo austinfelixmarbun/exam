@@ -62,9 +62,6 @@ export class ScoreCategoryScoringComponent implements OnInit {
             this.ListHexColorValue.push(listScoreCategorySchmD[i].HexColorValue);
           }
         }
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

@@ -42,8 +42,6 @@ export class MasterTypeAddEditComponent implements OnInit {
       if (params['efRoleId'] != null) {
         this.refRoleId = params['refRoleId'];
       }
-      console.log(this.type)
-      console.log(this.refRoleId)
     });
   }
 
@@ -55,17 +53,11 @@ export class MasterTypeAddEditComponent implements OnInit {
       this.refRoleObj.RefRoleId = +this.refRoleId
       this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(
         (response) => {
-          console.log('Success Get');
           this.refRoleObj = response['returnObject'];
-          console.log(this.refRoleObj);
           this.roleCodeModel = response['returnObject']['roleCode']
           this.roleNameModel = response['returnObject']['roleName']
           this.isActive = this.refRoleObj.IsActive;
 
-        },
-        (error) => {
-          console.log('Error Get');
-          console.log(error);
         }
       );
     }
@@ -91,7 +83,6 @@ export class MasterTypeAddEditComponent implements OnInit {
       //CHECK-DUPLICATE-CODE
       this.httpClient.post(getRoleUrl, roleObj).subscribe(
         (response) => {
-          console.log("Success Check Duplicate");
           roleObj = response['returnObject'];
           if (roleObj != null) {
             this.service.typeErrorCustom(ExceptionConstant.CODE_HAS_BEEN_USED);
@@ -107,16 +98,12 @@ export class MasterTypeAddEditComponent implements OnInit {
             //SAVE
             this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(
               (response) => {
-                console.log("Success Save");
-
                 this.service.typeSave(ExceptionConstant.SAVE_SUCCESSED);
                 this.location.back();
                 this.spinner.hide();
 
               },
               (error) => {
-                console.log("Error Save");
-
                 this.service.typeErrorCustom(error);
                 this.spinner.hide();
               }
@@ -124,7 +111,6 @@ export class MasterTypeAddEditComponent implements OnInit {
           }
         },
         (error) => {
-          console.log("Error Check Duplicate");
           this.service.typeErrorCustom(error);
         }
       );
@@ -143,16 +129,12 @@ export class MasterTypeAddEditComponent implements OnInit {
       //SAVE
       this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(
         (response) => {
-          console.log("Success Edit");
-
           this.service.typeSave(ExceptionConstant.EDIT_SUCCESSED);
           this.location.back();
           this.spinner.hide();
 
         },
         (error) => {
-          console.log("Error Edit");
-
           this.service.typeErrorCustom(error);
           this.spinner.hide();
         }

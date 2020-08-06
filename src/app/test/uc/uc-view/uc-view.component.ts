@@ -90,9 +90,6 @@ export class UcViewComponent implements OnInit {
                 }
               }
               this.isReady = true;
-            },
-            (error) => {
-              console.log(error);
             });
         } else {
           if (this.viewList.subsection[i].mainInfoPath != undefined && this.viewList.subsection[i].mainInfoPath != "") {
@@ -108,9 +105,6 @@ export class UcViewComponent implements OnInit {
           this.http.post(this.viewList.subsection[i].fullpath, this.getList).subscribe(
             (response) => {
               this.viewInfoObjList[i] = response["Data"];
-            },
-            (error) => {
-              console.log(error);
             })
         }
       }

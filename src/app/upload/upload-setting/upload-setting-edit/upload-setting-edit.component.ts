@@ -79,7 +79,6 @@ export class UploadSettingEditComponent implements OnInit {
         this.uploadTypeObject = { uploadTypeId: this.uploadTypeId };
         this.uploadService.getUploadTypeByUploadTypeId(this.uploadTypeObject).subscribe(
           response => {
-            console.log(response);
             this.uploadTypeCode = response['returnObject'].uploadTypeCode;
             this.uploadTypeName = response['returnObject'].uploadTypeName;
             if (response['isActive']) {
@@ -92,7 +91,6 @@ export class UploadSettingEditComponent implements OnInit {
         this.uploadService.getListRefRoleByUploadTypeId(this.uploadTypeObject).subscribe(
           response => {
             this.tempRefRole = response['returnObject'];
-            console.log(this.tempRefRole);
             for (let index = 0; index < this.tempRefRole.length; index++) {
               this.listRefRoleId.push(this.tempRefRole[index].refRoleId);
             }
@@ -154,17 +152,11 @@ export class UploadSettingEditComponent implements OnInit {
     this.apiUrl = this.foundationUrl + URLConstant.AssignRoleToUploadSetting;
     this.httpClient.post(this.apiUrl, assignRoleToUpload).subscribe(
       (response) => {
-        console.log(response);
 
         this.service.typeSave('Assign Role to Upload Setting Success');
         this.location.back();
         this.spinner.hide();
 
-      },
-      (error) => {
-        console.log(error);
-        this.service.typeErrorCustom(error);
-        this.spinner.hide();
       }
     );
   }

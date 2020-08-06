@@ -51,8 +51,6 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
     this.http.post(URLConstant.GetCustByCustId, this.custObj).subscribe(
       (response) => {
         this.tempCustObj = response;
-        console.log("aaa")
-        console.log(this.tempCustObj)
         var refMasterObjMrCustModelCode = {
           MasterCode: this.tempCustObj.MrCustModelCode
         }
@@ -84,7 +82,6 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
         this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrCompanyTypeCode).subscribe(
           (response) => {
             this.tempMrCompanyTypeCode = response;
-            console.log(this.tempMrCompanyTypeCode);
           }
         );
       });

@@ -43,12 +43,8 @@ export class ProductComponentComponent implements OnInit {
     this.generateSaveObj(event);
     this.http.post(this.UrlBackEnd, this.listProductComponentObj).subscribe(
       (response) => {
-        console.log(response);
         this.toastr.successMessage(response["message"]);
         this.BackToPaging();
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -58,12 +54,8 @@ export class ProductComponentComponent implements OnInit {
     this.generateSaveObj(event);
     this.http.post(this.UrlBackEnd, this.listProductComponentObj).subscribe(
       (response) => {
-        console.log(response);
         this.toastr.successMessage(response["message"]);
         this.wizard.goToNextStep();
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

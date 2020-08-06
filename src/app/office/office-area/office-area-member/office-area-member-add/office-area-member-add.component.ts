@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { Location } from '@angular/common';
@@ -6,8 +6,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
-import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
@@ -55,9 +53,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListVendorGrp);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -68,7 +63,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
 
   SaveOfficeAreaMember() {
     if (this.listSelectedId.length == 0) {
-      this.toastr.errorMessage('Please Add At Least One Data');
+      this.toastr.errorMessage(ExceptionConstant.ADD_MIN_1_DATA);
       return;
     }
     
@@ -80,9 +75,6 @@ export class OfficeAreaMemberAddComponent implements OnInit {
       (response) => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(["/Office/OfficeArea/Member"], { queryParams: { "RefOfficeAreaId": this.RefOfficeAreaId } });
-      },
-      (error) => {
-          console.log(error);
       });
     
   }

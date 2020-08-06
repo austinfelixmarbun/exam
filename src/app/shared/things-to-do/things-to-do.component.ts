@@ -19,7 +19,6 @@ export class ThingsToDoComponent implements OnInit {
     };
     this.http.post(url, obj).subscribe((response) => 
     {
-      console.log(response);
       this.ListThingsToDo = response["ListThingsToDo"];
     });
   }

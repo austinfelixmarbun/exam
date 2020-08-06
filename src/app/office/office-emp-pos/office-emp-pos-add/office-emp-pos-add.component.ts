@@ -109,24 +109,15 @@ export class OfficeEmpPosAddComponent implements OnInit {
     this.httpClient.post(this.refOfficeUrl, null).subscribe(
       (response) => {
         this.allRefOffice = response['returnObject']
-      },
-      (error) => {
-        console.log(error);
       })
     this.refOfficeObj.refOfficeId = this.refOfficeId
     this.httpClient.post(this.supervisorUrl, this.refOfficeObj).subscribe(
       (response) => {
         this.allSupervisor = response['returnObject']
-      },
-      (error) => {
-        console.log(error);
       })
     this.httpClient.post(this.bizUrl, this.refOfficeObj).subscribe(
       (response) => {
         this.allBiz = response['returnObject']
-      },
-      (error) => {
-        console.log(error);
       })
     if (this.pageType == "edit") {
       this.empPositionObj = new EmpPositionObj();
@@ -134,9 +125,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
       this.onChangeBiz(this.refBizUnitId)
       this.httpClient.post(this.getEditUrl, this.empPositionObj).subscribe(
         (response) => {
-          console.log("Success");
           this.resultData = response['returnObject'];
-          console.log(this.resultData);
           this.refOfficeId = response['returnObject']['refOfficeId']
           this.orgJobTitleId = response['returnObject']['orgJobTitleId']
           this.positionStartDt = formatDate(response['returnObject']['positionStartDt'], 'yyyy-MM-dd', 'en-US')
@@ -161,11 +150,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
     this.orgJobTitleObj.orgMdlStrucId = bizValue
     this.httpClient.post(this.orgJobTitleUrl, this.orgJobTitleObj).subscribe(
       (response) => {
-        console.log(response);
         this.allOrgJobTitle = response['returnObject']
-      },
-      (error) => {
-        console.log(error);
       })
   }
 
@@ -181,20 +166,12 @@ export class OfficeEmpPosAddComponent implements OnInit {
         this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
       }
 
-      console.log(JSON.stringify(this.empPositionObj))
-      console.log(this.empPositionObj);
       this.httpClient.post(this.addUrl, this.empPositionObj).subscribe(
         (response) => {
-          console.log("Success");
-          console.log(response);
           if (response['isError'] != true) {
             this.toastr.successMessage(response['message']);
             this.router.navigate(["/employee"]);
           }
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
         }
       );
     } else {
@@ -208,18 +185,10 @@ export class OfficeEmpPosAddComponent implements OnInit {
       else {
         this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
       }
-      console.log(JSON.stringify(this.empPositionObj))
-      console.log(this.empPositionObj);
       this.httpClient.post(this.editUrl, this.empPositionObj).subscribe(
         (response) => {
-          console.log("Success");
-          console.log(response);
           this.toastr.successMessage(response['message']);
           this.router.navigate(["/office"]);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
         }
       );
 

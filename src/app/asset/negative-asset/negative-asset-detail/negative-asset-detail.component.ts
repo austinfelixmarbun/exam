@@ -157,9 +157,6 @@ export class NegativeAssetDetailComponent implements OnInit {
           this.serial3Disabled = response["AssetTypeObj"]["SerialNo3Label"] == "" ? true : false;
           this.serial4Disabled = response["AssetTypeObj"]["SerialNo4Label"] == "" ? true : false;
           this.serial5Disabled = response["AssetTypeObj"]["SerialNo5Label"] == "" ? true : false;
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -172,9 +169,6 @@ export class NegativeAssetDetailComponent implements OnInit {
               MrNegAssetSourceCode: this.negativeAssetSourceList[0]["Key"]
             });
           }
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -267,9 +261,6 @@ export class NegativeAssetDetailComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/NegativeAsset/Paging"]);
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -278,9 +269,6 @@ export class NegativeAssetDetailComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/NegativeAsset/Paging"]);
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

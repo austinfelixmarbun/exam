@@ -1,7 +1,7 @@
 <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"></lib-ucviewgeneric>
 <lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
-<form>
-  <div class="form-actions right">
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
     <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/SystemSetting/NotificationApproval']"
       translate>
       <i class="far fa-window-close"></i> Cancel
@@ -15,5 +15,5 @@
     <button id="btnApprove" (click)="SaveForm($event)" class="btn btn-raised btn-primary" translate>
       <i class="far fa-check-square"></i> Approve
     </button>
-  </div>
-</form>
+  </span>
+</div>

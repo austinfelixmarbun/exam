@@ -65,9 +65,6 @@ export class CurrencyAddComponent implements OnInit {
             IsActive: this.resultData.IsActive
           });
 
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -104,9 +101,6 @@ export class CurrencyAddComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/CommonSetting/Currency/Paging"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -119,9 +113,6 @@ export class CurrencyAddComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/CommonSetting/Currency/Paging"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     }

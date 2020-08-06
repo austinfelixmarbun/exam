@@ -60,7 +60,6 @@ export class OrgMdlStrucDetailComponent implements OnInit {
       }
       if (params["orgMdlId"] != null) {
         this.orgMdlId = params["orgMdlId"];
-        console.log("MdlCode", this.orgMdlId);
       }
       if (params["orgMdlStrucId"] != null) {
         this.orgMdlStrucId = params["orgMdlStrucId"];
@@ -87,7 +86,6 @@ export class OrgMdlStrucDetailComponent implements OnInit {
     this.inputLookupObj2.genericJson = "./assets/form-setting/bizUnitGeneric.json";
     this.inputLookupObj2.isRequired = true;
 
-    console.log("masuk");
     this.orgMdlStrucObj = new OrgMdlStrucObj();
     this.InitForm();
     if (this.type == "edit") {
@@ -96,9 +94,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
       this.orgMdlStrucObj.orgMdlStrucId = +this.orgMdlStrucId;
       this.httpClient.post(this.apiUrl, this.orgMdlStrucObj).subscribe(
         response => {
-          console.log("Success Get");
           this.orgMdlStrucObj = response["returnObject"];
-          console.log('obj', response['returnObject']);
           //this.orgMdlLvl = response["returnObject"]["orgMdlLvl"];
           this.inputLookupObj2.idSelect = response["returnObject"]["refBizUnitId"];
           this.inputLookupObj.idSelect = response["returnObject"]["parentId"];
@@ -119,7 +115,6 @@ export class OrgMdlStrucDetailComponent implements OnInit {
             this.httpClient
               .post(getOrgMdlSructUrl, orgMdlStruc)
               .subscribe(response => {
-                console.log("obj", response["returnObject"]);
                 this.inputLookupObj.jsonSelect = response["returnObject"];
                 var bizUnit: BusinessUnitObj = new BusinessUnitObj();
                 bizUnit.RefBizUnitId = response["returnObject"]["refBizUnitId"];
@@ -145,10 +140,6 @@ export class OrgMdlStrucDetailComponent implements OnInit {
               this.inputLookupObj2.jsonSelect = response["returnObject"];
             });
           /* #endregion */
-        },
-        error => {
-          console.log("Error Get");
-          console.log(error);
         }
       );
     }
@@ -160,8 +151,6 @@ export class OrgMdlStrucDetailComponent implements OnInit {
 
   Save(OrgMdlForm: NgForm, lookupBizUnit: any, lookupMdlStruc: any): void {
     this.spinner.show();
-    console.log('lms', lookupMdlStruc);
-    console.log('lbu', lookupBizUnit);
 
     if (OrgMdlForm.value.orgMdlLvl > 1 && this.inputLookupObj2.idSelect == undefined) {
       this.service.typeSuccess();
@@ -178,7 +167,6 @@ export class OrgMdlStrucDetailComponent implements OnInit {
         this.httpClient
           .post(getOrgMdlSructCheckUrl, orgMdlStrucCheck)
           .subscribe(response => {
-            console.log(response)
             var lvlMust: number = + response['returnObject']['orgMdlLvl'] + 1;
             if (+OrgMdlForm.value.orgMdlLvl != lvlMust) {
               this.service.typeErrorCustom(

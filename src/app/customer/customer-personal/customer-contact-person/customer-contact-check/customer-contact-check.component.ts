@@ -52,9 +52,6 @@ export class CustomerContactCheckComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.getList();
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -71,7 +68,6 @@ export class CustomerContactCheckComponent implements OnInit {
     this.http.post(URLConstant.GetListCustPersonalContactPersonByCustId, this.custPersonContactPersonObj).subscribe(
       (response) => {
         this.tempCustomerPersonalContactPerson = response[CommonConstant.ReturnObj];
-        console.log("Contact Person: " + JSON.stringify(this.tempCustomerPersonalContactPerson));
         for (const item of this.tempCustomerPersonalContactPerson) {
           if (item["ContactPersonCustNo"] != null) {
             this.listCustIdToExclude.push(item["ContactPersonCustNo"]);
@@ -88,9 +84,6 @@ export class CustomerContactCheckComponent implements OnInit {
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);
-      },
-      error => {
-        console.log(error);
       }
     );
   }
