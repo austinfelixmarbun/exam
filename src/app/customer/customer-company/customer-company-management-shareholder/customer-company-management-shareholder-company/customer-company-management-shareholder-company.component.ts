@@ -87,7 +87,6 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.tempMrCustModelCode = response[CommonConstant.ReturnObj];
-          console.log(this.tempMrCustModelCode);
           this.ManagementShareholderForm.patchValue({
             MrCustModelCode: this.tempMrCustModelCode[0].Key
           });
@@ -102,7 +101,6 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
         (response) => {
           this.tempCustCompanyMgmntShrholderObj = response;
           
-          console.log(this.tempCustCompanyMgmntShrholderObj);
           this.ManagementShareholderForm.patchValue({ 
             MgmntShrholderName: this.tempCustCompanyMgmntShrholderObj.MgmntShrholderName,
             MrCustModelCode:  this.tempCustCompanyMgmntShrholderObj.MrCustModelCode,
@@ -151,9 +149,6 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.outputValue.emit({mode : 'check'});
-        },
-        error => {
-          console.log(error);
         }
       );
     }else{
@@ -172,9 +167,6 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.outputValue.emit({mode : 'check'});
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -185,7 +177,6 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   }
 
   getLookUpCustomer(event) {
-    console.log(event); 
     this.ManagementShareholderForm.patchValue({
       MgmntShrholderName: event.CustName,
       MrCustModelCode: event.MrCustModelCode,

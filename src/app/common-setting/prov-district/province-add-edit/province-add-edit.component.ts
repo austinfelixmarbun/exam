@@ -58,9 +58,6 @@ export class ProvinceAddEditComponent implements OnInit {
             IsActive: this.resultData.IsActive
           });
 
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -77,9 +74,6 @@ export class ProvinceAddEditComponent implements OnInit {
         response => {
             this.toastr.successMessage(response["Message"]);
             this.router.navigate(["/CommonSetting/RefProvince/Paging"]);        
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -89,12 +83,8 @@ export class ProvinceAddEditComponent implements OnInit {
       this.refProvDistrictObj.IsActive = this.ProvinceForm.controls["IsActive"].value;
       this.http.post(this.editUrl, this.refProvDistrictObj).subscribe(
         response => {
-          console.log(response);
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/CommonSetting/RefProvince/Paging"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     }

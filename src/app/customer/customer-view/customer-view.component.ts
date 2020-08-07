@@ -43,12 +43,6 @@ export class CustomerViewComponent implements OnInit {
         this.custResultData = response;
         this.custModel = this.custResultData['MrCustModelCode'];
         this.custType  = this.custResultData['MrCustTypeCode'];
-        console.log(this.custType);
-      },
-      (error) =>{
-        this.custModel = "";
-        this.custType = "";
-        console.log(error);
       }
     );
   } 

@@ -56,7 +56,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     ngOnInit() {
         this.GetListNotifH();
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
-        console.log(this.userAccess.UserName);
+        
         var _hubConnection = new HubConnectionBuilder()
             .withUrl(URLConstant.WebSocketUrl)
             //.withUrl("Http://localhost:5000/Notificationhub")
@@ -97,9 +97,6 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
             (response) => {
                 this.TotalUnread = response["TotalUnreadNotification"];
                 this.NotificationHListObj = response["ResponseNotificationHCustomObjs"];
-            },
-            (error) => {
-                console.log(error);
             });
     }
 
@@ -122,9 +119,6 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     ClickNotification(item) {
         this.http.post(URLConstant.UpdateReadNotification, { NotificationDId: item.NotificationDId }).subscribe(
             (response) => {
-            },
-            (error) => {
-                console.log(error);
             });
         if (item.MrNotificationMethodCode == CommonConstant.NotificationMethodExtLink) {
             window.open(item.Url, "_blank");

@@ -53,11 +53,6 @@ export class OrganizationComponent implements OnInit {
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + URLConstant.GetRefOrgPaging;
     this.show = AdInsConstant.showData.split(',');
-    // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
-    //   .subscribe(data => {
-    //     console.log(data);
-    //   }
-    //   )
   }
 
   getResult(event) {
@@ -116,12 +111,6 @@ export class OrganizationComponent implements OnInit {
             }
           }
           this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
-        },
-        (error) => {
-          console.log("Error Delete");
-          console.log(error);
-          this.service.typeSave('error');
-          this.spinner.hide();
         }
       );
     }

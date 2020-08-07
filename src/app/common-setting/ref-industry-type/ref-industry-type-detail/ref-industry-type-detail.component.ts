@@ -80,9 +80,6 @@ export class RefIndustryTypeDetailComponent implements OnInit {
             RowVersion: this.resultData.RowVersion
           });
           this.inputLookupObj.nameSelect = this.economicSectorObj.EconomicSectorName;
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

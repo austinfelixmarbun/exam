@@ -23,7 +23,6 @@ export class UcInfoComponent implements OnInit {
   cntctPersonJobTitle: any;
 
   setData(data) {
-    console.log(data);
     if (this.useName) {
       this.cntctPersonName = data.cntctPersonName;
     }

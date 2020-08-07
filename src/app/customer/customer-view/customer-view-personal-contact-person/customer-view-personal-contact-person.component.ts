@@ -50,9 +50,6 @@ export class CustomerViewPersonalContactPersonComponent implements OnInit {
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);
-      },
-      error => {
-        console.log(error);
       }
     );
   }

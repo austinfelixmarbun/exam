@@ -115,12 +115,8 @@ export class GeneralDataComponent implements OnInit {
     this.generateSaveObj(event);
     this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
       (response) => {
-        console.log(response);
         this.toastr.successMessage(response["message"]);
         this.router.navigate(["/Product/ProdOffering/Paging"]);
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -135,9 +131,6 @@ export class GeneralDataComponent implements OnInit {
           (response) => {
             this.toastr.successMessage("Product Offering Copied Successfully");
             window.location.reload();
-          },
-          (error) => {
-            console.log(error);
           }
         );
       }
@@ -149,12 +142,8 @@ export class GeneralDataComponent implements OnInit {
     this.generateSaveObj(event);
     this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
       (response) => {
-        console.log(response);
         this.toastr.successMessage(response["message"]);
         this.wizard.goToNextStep();
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

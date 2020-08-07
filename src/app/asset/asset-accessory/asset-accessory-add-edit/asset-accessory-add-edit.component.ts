@@ -57,9 +57,6 @@ export class AssetAccessoryAddEditComponent implements OnInit {
             AssetAccessoryName: this.result.AssetAccessoryName,
             IsActive: this.result.IsActive
           })
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -75,9 +72,6 @@ export class AssetAccessoryAddEditComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Accessory/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -89,9 +83,6 @@ export class AssetAccessoryAddEditComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Accessory/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
-        },
-        error => {
-          console.log(error);
         }
       );
     }

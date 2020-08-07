@@ -35,9 +35,6 @@ export class SurveyOrderViewComponent implements OnInit {
     this.http.post(URLConstant.GetListSrvyTaskBySrvyOrderId, SrvyTaskObj).subscribe(
       response => {
         this.TaskList = response[CommonConstant.ReturnObj];
-      },
-      error => {
-        console.log(error);
       }
     );
 

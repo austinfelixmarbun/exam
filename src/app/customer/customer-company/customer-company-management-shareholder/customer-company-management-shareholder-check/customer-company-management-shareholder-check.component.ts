@@ -47,8 +47,6 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
 
   ngOnInit() {
     this.getList();
-    console.log("testid")
-    console.log(this.IdCust)
   }
 
   openView(ShareholderCustNo) {
@@ -59,9 +57,6 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -89,14 +84,10 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
       this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
       this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId = CustCompanyMgmntShrholderId;
 
-      console.log(CustCompanyMgmntShrholderId);
       this.http.post(this.DeleteCustCompanyMgmntShrholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.getList();
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -119,8 +110,6 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
         this.http.post(this.getListCompanyManagementShareholderByCustCompanyIdUrl, this.tempCustCompanyObj).subscribe(
           (response) => {
             this.tempListCompanyManagementShareholder = response["ReturnObject"];
-            // console.log("testdata")
-            // console.log(this.tempListCompanyManagementShareholder.length);
             if (this.tempListCompanyManagementShareholder.length != 0) {
               this.TotalShare = this.tempListCompanyManagementShareholder[0].TotalShare;
             }

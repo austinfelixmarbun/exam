@@ -52,9 +52,6 @@ export class NotificationApprovalDetailComponent implements OnInit {
     this.http.post(this.getUrl, this.notificationHObj).subscribe(
       response => {
         this.resultData = response;
-      },
-      error => {
-        console.log(error);
       }
     );
 
@@ -102,12 +99,8 @@ export class NotificationApprovalDetailComponent implements OnInit {
     
       this.http.post(this.submitUrl, this.notificationHObj).subscribe(
         response => {
-          console.log(response);
           this.toastr.successMessage(resultForMsg + " " + response["Message"]);
           this.router.navigate(["/SystemSetting/NotificationApproval"]);
-        },
-        error => {
-          console.log(error);
         }
       );
   }

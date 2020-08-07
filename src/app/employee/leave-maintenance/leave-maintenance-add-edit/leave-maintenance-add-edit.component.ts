@@ -72,8 +72,6 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
       this.http.post(this.apiUrl, this.relmObj).subscribe(
         response => {
           this.resultData = response;
-          console.log("Response: ");
-          console.log(response);
           this.refEmpLeaveMngmntId = this.resultData.RefEmpLeaveMngmntId;
           this.inputEmpLookupObj.idSelect = this.resultData.RefEmpId;
           this.RefEmpLeaveMngmntForm.patchValue({
@@ -90,14 +88,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
               this.empName = this.resultEmpData.EmpName;
               this.inputEmpLookupObj.jsonSelect = this.resultEmpData;
               this.inputEmpLookupObj.nameSelect = this.resultEmpData.EmpName;
-            },
-            (error) => {
-              console.log(error);
             });
-        },
-
-        error => {
-          console.log(error);
         });
     }
   }
@@ -132,9 +123,6 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
           response => {
             this.toastr.successMessage(response["message"]);
             this.router.navigate(["Employee/Leave/Paging"]);
-          },
-          error => {
-            console.log(error);
           }
         );
       } else {
@@ -144,9 +132,6 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
           response => {
             this.toastr.successMessage(response["message"]);
             this.router.navigate(["Employee/Leave/Paging"]);
-          },
-          error => {
-            console.log(error);
           }
         );
       }

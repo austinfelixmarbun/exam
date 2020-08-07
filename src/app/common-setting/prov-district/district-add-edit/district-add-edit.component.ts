@@ -58,9 +58,6 @@ export class DistrictAddEditComponent implements OnInit {
         this.DistrictForm.patchValue({
           ProvinceName: this.resultData.ProvDistrictName
         });
-      },
-      error => {
-        console.log(error);
       }
     );
     if (this.pageType == "edit") {
@@ -77,9 +74,6 @@ export class DistrictAddEditComponent implements OnInit {
             IsActive: this.resultData.IsActive,
             PhnArea: this.resultData.PhnArea
           });
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -99,9 +93,6 @@ export class DistrictAddEditComponent implements OnInit {
         response => {
             this.toastr.successMessage(response["Message"]);
             this.router.navigateByUrl("/CommonSetting/District/Paging?refProvDistrictId=" + this.parentId);        
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -116,9 +107,6 @@ export class DistrictAddEditComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigateByUrl("/CommonSetting/District/Paging?refProvDistrictId=" + this.parentId);        
-        },
-        error => {
-          console.log(error);
         }
       );
     }

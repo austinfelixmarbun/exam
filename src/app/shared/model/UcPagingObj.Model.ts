@@ -11,8 +11,8 @@ export class UcPagingObj {
     ddlEnvironments: Array<EnviObj>;
     whereValue: Array<WhereValueObj>;
     isHideSearch: boolean;
-    delay: number;
     isSearched: boolean;
+    delay: number;
 
     constructor() {
         this._url = "";

@@ -39,7 +39,6 @@ export class CustGroupTabComponent implements OnInit {
   ngOnInit() {
     var custGrp = new CustGrpObj();
     custGrp.CustId = this.CustId;
-    console.log(custGrp.CustId);
     this.httpClient.post(URLConstant.GetListCustGrpByCustIdForCustGrpTab, custGrp).subscribe(
       (response: any) => {
         this.CustGrpList = response.CustGrpObjForCustGrpTabs;
@@ -59,9 +58,6 @@ export class CustGroupTabComponent implements OnInit {
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -111,9 +107,6 @@ export class CustGroupTabComponent implements OnInit {
         this.listCustIdToExclude.splice(idExclude, 1);
         this.CustGrpList.splice(i, 1);
         this.toastr.successMessage(response["message"]);
-      },
-      (error) => {
-        console.log(error);
       }
     );
     }

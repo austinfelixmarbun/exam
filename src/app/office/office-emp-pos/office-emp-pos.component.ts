@@ -124,10 +124,6 @@ export class OfficeEmpPosComponent implements OnInit {
       this.httpClient.post(this.deleteUrl, this.empPositionObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
         });
     }
   }

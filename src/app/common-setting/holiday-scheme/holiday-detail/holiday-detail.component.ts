@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -19,25 +19,25 @@ import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
   providers: [NGXToastrService]
 })
 export class HolidayDetailComponent implements OnInit {
-  HolidaySchmHIdCopy : string;
-  HolidaySchmHId : string;
-  inputPagingObjHolidayScheme : InputLookupObj;
-  inputPagingObjHolidayDetail : any;
-  copyHoliday : any;
-  title : string = "Copy Holiday Scheme";
+  HolidaySchmHIdCopy: string;
+  HolidaySchmHId: string;
+  inputPagingObjHolidayScheme: InputLookupObj;
+  inputPagingObjHolidayDetail: any;
+  copyHoliday: any;
+  title: string = "Copy Holiday Scheme";
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   HolidayManagementForm = this.fb.group({
 
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
       this.HolidaySchmHId = params["HolidaySchmHId"];
     })
   }
 
-  AddNavigate(){
+  AddNavigate() {
     this.router.navigate(['/CommonSetting/Holiday/Detail/Add'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
   }
 
@@ -66,15 +66,15 @@ export class HolidayDetailComponent implements OnInit {
     this.inputPagingObjHolidayDetail.pagingJson = "./assets/ucpaging/searchHolidayDetail.json";
     this.inputPagingObjHolidayDetail.deleteUrl = URLConstant.DeleteHolidaySchmD;
     this.inputPagingObjHolidayDetail.addCritInput = new Array();
-    
+
     var critInput = new CriteriaObj();
     critInput.propName = "HoliH.HOLIDAY_SCHM_H_ID";
     critInput.restriction = AdInsConstant.RestrictionEq;
     critInput.value = this.HolidaySchmHId;
-    this.inputPagingObjHolidayDetail.addCritInput.push(critInput);    
+    this.inputPagingObjHolidayDetail.addCritInput.push(critInput);
   }
 
-  getHolidaySchmHId(ev){
+  getHolidaySchmHId(ev) {
     this.HolidaySchmHIdCopy = ev.HolidaySchmHId;
   }
 
@@ -87,10 +87,7 @@ export class HolidayDetailComponent implements OnInit {
       this.http.post(URLConstant.CopyHolidaySchmH, this.copyHoliday).subscribe((response) => {
         this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
         this.toastr.successMessage(response['message']);
-    },
-        (error) => {
-            console.log(error);
-        });
+      });
     }
   }
 }

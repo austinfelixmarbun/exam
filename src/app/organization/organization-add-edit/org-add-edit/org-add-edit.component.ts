@@ -84,26 +84,15 @@ export class OrgAddEditComponent implements OnInit {
         this.http.post(this.GetUrl, orgObjParent).subscribe(
           response => {
             this.orgObj.hierarchyNo = +response["returnObject"].hierarchyNo + 1;
-            console.log(response);
-            console.log(this.orgObj);
             //SAVE
             this.http.post(this.apiUrl, this.orgObj).subscribe(
               response => {
-                console.log(response);
 
-                console.log("Success Save");
 
                 this.service.successMessage(response["message"]);
                 this.router.navigateByUrl("/organization/organization");
-              },
-              error => {
-                console.log("Error Save");
-                console.log(error);
               }
             );
-          },
-          error => {
-            console.log(error);
           }
         );
 
@@ -130,23 +119,13 @@ export class OrgAddEditComponent implements OnInit {
         this.http.post(this.GetUrl, orgObjParent).subscribe(
           response => {
             this.orgObj.hierarchyNo = +response["returnObject"].hierarchyNo + 1;
-            console.log(response);
 
-            console.log(this.orgObj);
             //SAVE
             this.http.post(this.apiUrl, this.orgObj).subscribe(
               response => {
-                console.log("Success Edit");
                 this.service.typeSave(response["message"]);
                 this.router.navigateByUrl("/organization/organization");
-              },
-              error => {
-                console.log("Error Edit");
-                console.log(error);
               });
-          },
-          error => {
-            console.log(error);
           }
         );
 
@@ -160,9 +139,6 @@ export class OrgAddEditComponent implements OnInit {
     this.http.post(this.apiUrl, organizationObj).subscribe(
       response => {
         this.parents = response;
-      },
-      error => {
-        console.log(error);
       });
   }
 
@@ -191,14 +167,7 @@ export class OrgAddEditComponent implements OnInit {
         this.http.post(this.apiUrl, orgObjParent).subscribe(
           response => {
             this.hierarchyNo = +response["returnObject"].hierarchyNo + 1;
-            console.log(response);
-          },
-          error => {
-            console.log(error);
           });
-      },
-      error => {
-        console.log(error);
       }
     );
   }

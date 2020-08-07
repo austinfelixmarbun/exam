@@ -35,7 +35,6 @@ export class UserRoleComponent implements OnInit {
       if (params['refUserId'] != null) {
         this.refUserId = params['refUserId'];
       }
-      console.log(this.refUserId)
     });
   }
 
@@ -59,35 +58,18 @@ export class UserRoleComponent implements OnInit {
 
     this.httpClient.post(urlGetUser, this.refUserObj).subscribe(
       (response) => {
-        console.log('Success Get');
         this.refUserObj = response['returnObject'];
         // this.refEmpObj.refEmpId = +this.refUserObj.refEmpId;
         this.httpClient.post(urlGetEmp, this.refEmpObj).subscribe(
           (response) => {
             this.refEmpObj = response["returnObject"];
-            console.log(this.refEmpObj);
 
             // empObj.refEmpId = this.refEmpObj.refEmpId;
             this.httpClient.post(urlGetListEmpPos, empObj).subscribe(
               (response) => {
-                console.log('Get Result Data');
-                console.log(response);
                 this.resultData = response["returnObject"];
-                console.log('Result Data', this.resultData);
-              },
-              (error) => {
-                console.log('Error Get');
-                console.log(error);
               })
-          },
-          (error) => {
-            console.log('Error Get');
-            console.log(error);
           })
-      },
-      (error) => {
-        console.log('Error Get');
-        console.log(error);
       }
     );
   }

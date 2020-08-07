@@ -57,7 +57,6 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
     var verfGroupObj = { VerfSchemeDId: this.VerfSchemeDId }
     this.http.post(URLConstant.GetQuestionGrpHAndRowVersionVerfSchemeDForUpdateById, verfGroupObj).subscribe(
       (response) => {
-        console.log(response);
         this.verfQuestionGroup = response[CommonConstant.ReturnObj];
         this.QuestionGroupForm.patchValue({
           VerfQuestionGrpDId: this.verfQuestionGroup.VerfQuestionGrpDId,
@@ -77,14 +76,10 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
     this.verfSchemeDObj = this.QuestionGroupForm.value;
     this.verfSchemeDObj.VerfSchemeHId = this.VerfSchemeHId;
     this.verfSchemeDObj.VerfSchemeDId = this.VerfSchemeDId;
-    console.log(this.verfSchemeDObj);
     this.http.post(URLConstant.EditVerfSchemeD, this.verfSchemeDObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.router.navigateByUrl('/Verification/QuestionSchemeMemberPaging?VerfSchemeHId=' + this.VerfSchemeHId);
-      },
-      (error) => {
-        console.log(error);
       });
   }
 }

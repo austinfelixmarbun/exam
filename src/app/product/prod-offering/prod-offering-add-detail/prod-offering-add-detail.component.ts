@@ -17,8 +17,6 @@ export class ProdOfferingAddDetailComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,private fb:FormBuilder, private toastr: NGXToastrService) { 
     this.route.queryParams.subscribe(params => {
-      // console.log("param: ");
-      // console.log(params);
       
       this.objPassing["param"] = params["ProdOfferingHId"];
       this.objPassing["ProdOfferingId"] = params["ProdOfferingId"];
@@ -59,8 +57,6 @@ export class ProdOfferingAddDetailComponent implements OnInit {
     this.http.post(URLConstant.GetProductOfferingMainInfo, prodOfferingObj).subscribe(
       (response) => {
         this.resultData=response;
-        console.log("response: ");
-        console.log(response);
         this.ProdOfferingForm.patchValue({
           ProdOfferingCode : this.resultData.ProdOfferingCode,
           ProdOfferingName : this.resultData.ProdOfferingName,
@@ -70,9 +66,6 @@ export class ProdOfferingAddDetailComponent implements OnInit {
           ProdOfferingStat : this.resultData.ProdOfferingStat,
           ReturnNotes : this.resultData.ReturnNotes
         })
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

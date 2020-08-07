@@ -57,7 +57,6 @@ export class ChangePasswordComponent implements OnInit {
       var requestObj = { "Username": this.username, "Password": password, "NewPassword": newpassword };
       this.http.post(URLConstant.ChangePasswordRefUserByUsername, requestObj).subscribe(
         (response) => {
-          console.log(response);
           if (response["Message"] == "Success") {
             this.toastr.successMessage(response["message"]);
             this.router.navigateByUrl('/dashboard/dash-board');
@@ -65,9 +64,6 @@ export class ChangePasswordComponent implements OnInit {
           else {
             this.toastr.errorMessage("Invalid Password.");
           }
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

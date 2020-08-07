@@ -10,6 +10,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
@@ -48,7 +49,6 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
     this.http.post(URLConstant.GetVerfSchemeDsByVerfSchemeHId, verfGroupObj).subscribe(
       (response) => {
         var arrMemberList = new Array();
-        console.log(arrMemberList);
         for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
           arrMemberList.push(response[CommonConstant.ReturnObj][index].VerfQuestionGrpHId)
         }
@@ -62,9 +62,6 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListVerfQuestionGrpHId);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -75,7 +72,7 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
 
   SaveQuestionSchemeMember(verfSchemeDObj: any) {
     if (this.listSelectedId.length == 0) {
-      this.toastr.errorMessage('Please Add At Least One Data');
+      this.toastr.errorMessage(ExceptionConstant.ADD_MIN_1_DATA);
       return;
     }
 
@@ -88,9 +85,6 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
       response => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(["/Verification/QuestionSchemeMemberPaging"], { queryParams: { "VerfSchemeHId": this.VerfSchemeHId } });
-      },
-      error => {
-        console.log(error);
       }
     );
   }

@@ -35,7 +35,6 @@ export class CustomerCompanyAddressComponent implements OnInit {
     this.mode = "check";
   }
   terimaValue(ev: any) {
-    console.log(ev);
     this.mode = ev.mode;
     this.AddrId = ev.AddrId;
 

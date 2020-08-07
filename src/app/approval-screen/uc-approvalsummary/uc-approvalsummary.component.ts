@@ -37,16 +37,10 @@ export class UcApprovalsummaryComponent implements OnInit {
       isNeedSummaryView: false
     }
 
-    console.log("aaa")
-    console.log(GetApvInfoReq)
-
     this.http.post(this.URLGetApprovalInfo, GetApvInfoReq).subscribe(
       (response) => {
         this.RFARoot = response;
         this.RFAInformation = this.RFARoot["RFAInformation"]
-      },
-      (error) => {
-        console.log(error);
       }
     )
   }

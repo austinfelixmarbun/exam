@@ -168,9 +168,6 @@ export class UcProdOfferingCompComponent implements OnInit {
     await this.http.post(url, payload).toPromise().then(
       (response) => {
         this.dictOptions[obj.RefProdCompntCode] = response["ReturnObject"];
-      },
-      (error) => {
-        console.log(error);
       }
     )
   }
@@ -187,9 +184,6 @@ export class UcProdOfferingCompComponent implements OnInit {
           for (let i = 0; i < result.length; i++) {
             this.dictMultiOptions[obj.RefProdCompntCode].push({ item_id: result[i].Key, item_text: result[i].Value });
           }
-        },
-        (error) => {
-          console.log(error);
         }
       )
     }
@@ -249,21 +243,12 @@ export class UcProdOfferingCompComponent implements OnInit {
             fa_comp.push(this.addComponent(comp));
           }
         }
-      },
-      (error) => {
-        console.log(error);
       }
     )
   }
 
 
   GetBehaviourValue(refProdCompntCode, behaviourCode) {
-    // console.log("THIS")
-    // console.log(this.dictBehaviour);
-    // console.log(refProdCompntCode + ":" + behaviourCode)
-    // console.log(this.dictBehaviour[refProdCompntCode])
-    // console.log(this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode))
-    // console.log(this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode).Value)
     return this.dictBehaviour[refProdCompntCode].find(f => f.Key == behaviourCode).Value
   }
 
@@ -280,7 +265,6 @@ export class UcProdOfferingCompComponent implements OnInit {
 
   Cancel()
   {
-    console.log("cancel emit");
     this.OnCancel.emit();
   }
 
@@ -318,15 +302,11 @@ export class UcProdOfferingCompComponent implements OnInit {
     this.http.post(URLConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
       response => {
         saveAs(response, CompntValueDesc + '.xlsx');
-      },
-      error => {
-        console.log(error);
       }
     );
   }
 
   test(){
-    console.log(this.FormProdOfferingComp);
   }
 }
 

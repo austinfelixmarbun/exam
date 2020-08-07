@@ -33,9 +33,6 @@ export class HoGroupInfoComponent implements OnInit {
     this.http.post(URLConstant.GetListVendorGrpByVendorId, this.VendorGroupObj).subscribe(
       (response) => {
         this.resultData = response[CommonConstant.ReturnObj];
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

@@ -51,8 +51,6 @@ export class RefJobTitleAddComponent implements OnInit {
       this.http.post(this.apiUrl, this.rjtObj).subscribe(
         response => {
           this.resultData = response;
-          console.log("Response: ");
-          console.log(response);
           this.refJobTitleId = this.resultData.RefJobTitleId;
           this.RefJobTitleForm.patchValue({
             JobTitleCode: this.resultData.JobTitleCode,
@@ -60,9 +58,6 @@ export class RefJobTitleAddComponent implements OnInit {
             Descr: this.resultData.Descr
           });
 
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -77,9 +72,6 @@ export class RefJobTitleAddComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(["/Organization/JobTitle"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -89,9 +81,6 @@ export class RefJobTitleAddComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(["/Organization/JobTitle"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     }

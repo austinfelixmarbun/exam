@@ -9,7 +9,6 @@ import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { UcpagingModule } from '@adins/ucpaging';
 import { UcSubsectionModule } from '@adins/uc-subsection';
-import { VendorComponent } from './vendor.component';
 import { VendorRoutingModule } from './vendor-routing.module';
 import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
 import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
@@ -86,7 +85,6 @@ import { VendorATPMRegistrationComponent } from './vendor-ATPM/vendor-atpm-regis
     UcaddtotempModule
   ],
   declarations: [
-    VendorComponent,
     VendorHoldingPagingComponent,
     VendorHoldingAddEditComponent,
    BankInfoComponent,

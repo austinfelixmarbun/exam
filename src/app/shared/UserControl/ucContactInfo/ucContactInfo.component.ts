@@ -29,7 +29,6 @@ export class UcContactInfoComponent implements OnInit {
   ngOnInit() { }
 
   setData(data) {
-    console.log(data);
     if (this.useName) {
       this.cntctPersonName = data.cntctPersonName;
     }

@@ -51,14 +51,10 @@ export class ProfessionAddEditComponent implements OnInit {
   ngOnInit() {
     this.http.post(this.getValueCustModel, null).subscribe(
       (response) => {
-        console.log(response);
         this.allRefProfessionMethod = response[CommonConstant.ReturnObj];
         if (this.allRefProfessionMethod.length > 0) {
           this.RefProfessionForm.patchValue({ MrCustModelCode: response[CommonConstant.ReturnObj][0]['Key'] });
         }
-      },
-      (error) => {
-        console.log(error);
       });
 
     if (this.pageType == "edit") {
@@ -75,9 +71,6 @@ export class ProfessionAddEditComponent implements OnInit {
             RegRptCode: this.resultData.RegRptCode
           });
 
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -95,9 +88,6 @@ export class ProfessionAddEditComponent implements OnInit {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/CommonSetting/Profession/Paging"]);
 
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -108,12 +98,8 @@ export class ProfessionAddEditComponent implements OnInit {
       this.refProfessionObj.RegRptCode = this.RefProfessionForm.controls["RegRptCode"].value;
       this.http.post(this.editUrl, this.refProfessionObj).subscribe(
         response => {
-          console.log(response);
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/CommonSetting/Profession/Paging"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     }

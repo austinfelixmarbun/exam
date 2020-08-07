@@ -76,9 +76,6 @@ export class VendorSchemeAddEditComponent implements OnInit {
                       IsActive: this.result.IsActive,
                       RowVersion: this.result.RowVersion,
                   });
-              },
-              (error) => {
-                  console.log(error);
               }
           );
       }
@@ -98,9 +95,6 @@ export class VendorSchemeAddEditComponent implements OnInit {
               (response) => {
                   this.toastr.successMessage(response["message"]);
                   this.router.navigate(["/Vendor/Paging/"], { queryParams: { "Type" : "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode } });
-              },
-              (error) => {
-                  console.log(error);
               });
       }
       else {
@@ -109,9 +103,6 @@ export class VendorSchemeAddEditComponent implements OnInit {
               (response) => {
                   this.toastr.successMessage(response["message"]);
                   this.router.navigate(["/Vendor/Paging/"], { queryParams: { "Type" : "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode } });
-              },
-              (error) => {
-                  console.log(error);
               });
       }
   }

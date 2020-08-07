@@ -20,9 +20,6 @@ export class VendorHoInfoComponent implements OnInit {
     this.vendorService.GetVendorAndVendorAddrByVendorId({ VendorId: this.VendorId }).subscribe(
       (response) => {
         this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"];
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

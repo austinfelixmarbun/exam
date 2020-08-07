@@ -102,9 +102,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             IsActive: response.CustBankAccObj.IsActive,
             RowVersion: response.CustBankAccObj.RowVersion
           });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -157,9 +154,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
               this.rowCustBankStmnt++;
             }
           }
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -221,9 +215,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       this.httpClient.post(URLConstant.AddCustBankAcc, custBankAccObj).subscribe(
         (response) => {
           this.activeModal.close(response);
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -235,9 +226,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
         this.httpClient.post(URLConstant.EditCustBankAcc, custBankData).subscribe(
           (response) => {
             this.activeModal.close(response);
-          },
-          (error) => {
-            console.log(error);
           }
         );
       }
@@ -285,9 +273,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
         this.httpClient.post(URLConstant.EditCBAForCustFinData, reqObj).subscribe(
           (response) => {
             this.activeModal.close(response);
-          },
-          (error) => {
-            console.log(error);
           }
         );
       }

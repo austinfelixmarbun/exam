@@ -6,13 +6,13 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './uc-approvalhist.component.html',
 })
 export class UcApprovalhistComponent implements OnInit {
-  @Input() inputObj : any;
-  refId : number;
-  apvBaseUrl : string;
-  historyType : string;
-  
-  ListApprovalHist : any;
-  
+  @Input() inputObj: any;
+  refId: number;
+  apvBaseUrl: string;
+  historyType: string;
+
+  ListApprovalHist: any;
+
   constructor(
     private http: HttpClient,
   ) { }
@@ -21,15 +21,10 @@ export class UcApprovalhistComponent implements OnInit {
     this.refId = this.inputObj.refId;
     this.apvBaseUrl = this.inputObj.approvalBaseUrl;
     this.historyType = this.inputObj.type;
-
-    console.log(this.historyType);
-
-    if(this.historyType == 'instance')
-    {
+    if (this.historyType == 'instance') {
       this.LoadApprovalInstanceHist();
     }
-    else if(this.historyType == 'task')
-    {
+    else if (this.historyType == 'task') {
       this.LoadApprovalTaskHist();
     }
   }

@@ -39,9 +39,6 @@ export class ReviewUploadAssetMasterPagingComponent implements OnInit {
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate(['/Asset/AssetMaster/ReviewUploadPaging']);
         });
-      },
-      error => {
-        console.log(error);
       });
   }
 }

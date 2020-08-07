@@ -187,8 +187,6 @@ export class JobDataEmployeeComponent implements OnInit {
     this.http.post(this.getJobDataByCustId, this.custJobDataObj).subscribe(
       (response: any) => {
         this.returnCustJobDataObj = response;
-        console.log("aaa")
-        console.log(this.returnCustJobDataObj)
 
         if (this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
           this.JobDataEmpForm.patchValue({
@@ -407,22 +405,14 @@ export class JobDataEmployeeComponent implements OnInit {
       this.reqCustPersonalJobDataObj.JobAddr = this.jobAddressObj;
       this.reqCustPersonalJobDataObj.OthBizAddr = this.otherAddressObj;
 
-      console.log("ccc");
-      console.log(this.reqCustPersonalJobDataObj)
-
       this.http.post(this.editJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          // console.log(response);
           this.outputTab.emit({ stepMode: "next" });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     } else {
@@ -437,22 +427,15 @@ export class JobDataEmployeeComponent implements OnInit {
       this.reqCustPersonalJobDataObj.JobAddr = this.jobAddressObj;
       this.reqCustPersonalJobDataObj.OthBizAddr = this.otherAddressObj;
 
-      console.log("ccc");
-      console.log(this.reqCustPersonalJobDataObj)
 
       this.http.post(this.addJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          // console.log(response);
           this.outputTab.emit({ stepMode: "next" });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

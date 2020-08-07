@@ -81,7 +81,6 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrJobPositionCode).subscribe(
       (response) => {
-        console.log(response);
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrJobPositionCode = response[CommonConstant.ReturnObj];
       }
@@ -92,7 +91,6 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
       (response) => {
-        console.log(response);
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrGenderCode = response[CommonConstant.ReturnObj];
       }
@@ -110,8 +108,6 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
         this.http.post(this.getCustCompanyContactPersonByCustCompanyIdUrl, this.custCompanyContactPersonObj).subscribe(
           (response) => {
             this.tempCustCompanyContactPersonObj = response;
-            // console.log("testcontact")
-            // console.log(this.tempCustCompanyContactPersonObj);
             this.ContactInformationForm.patchValue({
               ContactPersonName: this.tempCustCompanyContactPersonObj.ContactPersonName,
               MrGenderCode: this.tempCustCompanyContactPersonObj.MrGenderCode,
@@ -210,23 +206,14 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       this.custCompanyContactPersonObj = this.tempCustCompanyContactPersonObj;
       this.custCompanyContactPersonObj.RowVersion = this.tempCustCompanyContactPersonObj.RowVersion;
 
-      // console.log("tempcust")
-      // console.log(this.custCompanyContactPersonObj)
-
       this.http.post(this.editCustAddrUrl, this.custAddrObj).subscribe(
         (response) => {
           this.http.post(this.editCustCompanyContactPersonByCustCompanyIdUrl, this.custCompanyContactPersonObj).subscribe(
             (response) => {
               this.toastr.successMessage(response["Message"]);
               this.outputTab.emit({ stepMode: 'next' });
-            },
-            error => {
-              console.log(error);
             }
           );
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -236,14 +223,8 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
             (response) => {
               this.toastr.successMessage(response["Message"]);
               this.outputTab.emit({ stepMode: 'next' });
-            },
-            error => {
-              console.log(error);
             }
           );
-        },
-        error => {
-          console.log(error);
         }
       );
     }

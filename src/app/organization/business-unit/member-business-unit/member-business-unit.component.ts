@@ -48,6 +48,5 @@ export class MemberBusinessUnitComponent implements OnInit {
     critInput.restriction = AdInsConstant.RestrictionEq;
     critInput.value = this.RefBizUnitId;
     this.inputPagingObj.addCritInput.push(critInput);
-    console.log(this.inputPagingObj);
   }
 }

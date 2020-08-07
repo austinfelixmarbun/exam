@@ -67,7 +67,6 @@ export class OrgJobTitleDetailComponent implements OnInit {
       }
       if (params["refOrgId"] != null) {
         this.refOrgId = params["refOrgId"];
-        console.log(params["refOrgId"]);
       }
       if (params["orgMdlStrucId"] != null) {
         this.orgMdlStrucId = params["orgMdlStrucId"];
@@ -91,7 +90,6 @@ export class OrgJobTitleDetailComponent implements OnInit {
     this.inputLookupObj2.urlJson = "./assets/lookup/lookupParentForm.json";
     this.inputLookupObj2.urlQryPaging = URLConstant.GetOrgJobTitlePaging;
     this.inputLookupObj2.urlEnviPaging = environment.FoundationR3Url;
-    console.log("masuk");
     this.orgJobTitleObj = new OrgJobTitleObj();
     this.InitForm();
     if (this.type == "edit") {
@@ -99,9 +97,7 @@ export class OrgJobTitleDetailComponent implements OnInit {
       this.orgJobTitleObj.orgJobTitleId = +this.orgJobTitleId;
       this.httpClient.post(this.apiUrl, this.orgJobTitleObj).subscribe(
         response => {
-          console.log("Success Get");
           this.orgJobTitleObj = response["returnObject"];
-          console.log("obj", response["returnObject"]);
           this.inputLookupObj.idSelect = response["returnObject"]["refJobTitleId"];
           this.inputLookupObj2.idSelect = response["returnObject"]["parentOrgJobTitleId"];
           if (response["returnObject"]["isActive"] == CommonConstant.TRUE_CONDITION) {
@@ -111,7 +107,6 @@ export class OrgJobTitleDetailComponent implements OnInit {
           }
 
           /* #region Fill Lookup RefJobTitle */
-          console.log('fill lookup job title', + this.inputLookupObj.idSelect)
           var jobTitleObj: RefJobTitleObj = new RefJobTitleObj();
           var getJobTitleUrl: any =
             this.foundationUrl + URLConstant.GetRefJobTitleById;
@@ -119,7 +114,6 @@ export class OrgJobTitleDetailComponent implements OnInit {
           this.httpClient
             .post(getJobTitleUrl, jobTitleObj)
             .subscribe(response => {
-              console.log(jobTitleObj);
               this.jobTitleName = response["returnObject"]["jobTitleName"];
               this.inputLookupObj.jsonSelect = response["returnObject"];
             });
@@ -128,7 +122,6 @@ export class OrgJobTitleDetailComponent implements OnInit {
 
           /* #region Fill Lookup OrgJobTitle */
           if (this.parentOrgJobTitleId != 0 && this.parentOrgJobTitleId != null) {
-            console.log('fill lookup OrgJobTitle', this.parentOrgJobTitleId)
 
             var job: RefJobTitleObj = new RefJobTitleObj();
             var orgJobTitle: OrgJobTitleObj = new OrgJobTitleObj();
@@ -151,10 +144,6 @@ export class OrgJobTitleDetailComponent implements OnInit {
           }
           /* #endregion */
 
-        },
-        error => {
-          console.log("Error Get");
-          console.log(error);
         }
       );
     }
@@ -166,8 +155,6 @@ export class OrgJobTitleDetailComponent implements OnInit {
 
   Save(OrgJobTitleForm: NgForm, lookupRefJobTitle: any, lookupOrgJobTitle: any): void {
     this.spinner.show();
-    console.log('lms', lookupRefJobTitle);
-    console.log('lbu', lookupOrgJobTitle);
 
     //MODE-ADD
     if (this.type != "edit") {
