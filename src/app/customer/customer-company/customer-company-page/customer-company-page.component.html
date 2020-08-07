@@ -76,6 +76,14 @@
                 <span class="bs-stepper-label">Legal Document</span>
               </button>
             </div>
+            <div class="line"></div>
+            <div class="step" data-target="#cust-attr-tab">
+              <button type="button" class="step-trigger" role="tab" aria-controls="cust-attr-tab" id="cust-attr-tab-trigger"
+                (click)="EnterTab('CustAttr')">
+                <span class="bs-stepper-circle">8</span>
+                <span class="bs-stepper-label">Customer Attribute</span>
+              </button>
+            </div>
           </div>
           <br><br>
           <div class="bs-stepper-content">
@@ -109,6 +117,9 @@
           <div id="legal-tab" class="content" role="tabpanel" aria-labelledby="legal-tab-trigger">
             <app-cust-legal-doc   (outputTab)="getValue($event)">
             </app-cust-legal-doc>
+          </div>
+          <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
+            <app-cust-attr-section [CustId]="IdCust" (outputTab)="getValue($event)" (outputTab)="getValue($event)"></app-cust-attr-section>
           </div>
         </div>
       </div>
