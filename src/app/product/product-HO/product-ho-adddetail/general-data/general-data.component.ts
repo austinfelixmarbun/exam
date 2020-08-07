@@ -75,7 +75,7 @@ export class GeneralDataHOComponent implements OnInit {
 
     this.ProdHId = this.objInput["param"];
     this.ProdId = this.objInput["ProdId"];
-    this.LoadProdComponent(this.ProdHId, "GEN", false);
+    this.LoadProdComponent(this.ProdHId, "GEN", true);
 
 
     this.inputLookUpObj = new InputLookupObj();
