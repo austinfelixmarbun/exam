@@ -7,6 +7,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { FormBuilder } from '@angular/forms';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { environment } from 'environments/environment';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
     DdlAddress: ['']
   });
   
-  viewCustFinData: string;
+  viewCustFinData: any;
 
   constructor(
     private http: HttpClient,
@@ -45,6 +46,8 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
+    this.viewCustFinData.viewInput =   "./assets/ucviewgeneric/viewCustFinData.json";
+    this.viewCustFinData.viewEnvironment = environment.FoundationR3Url;
     var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
