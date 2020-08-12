@@ -329,6 +329,14 @@ export class URLConstant {
     public static GetListAssetMasterByAssetSchmHId = environment.FoundationR3Url + "/AssetMaster/GetListAssetMasterByAssetSchmHId";
     public static EditListAssetSchmDByAssetMasterId = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmDByAssetMasterId";
     public static GetUploadAssetMasterByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + '/AssetMaster/GetUploadAssetMasterByUploadMonitoringNoAndTrxType';
+    public static AddAssetMasterAttrContent = environment.FoundationR3Url + "/AssetMasterAttrContent/AddAssetMasterAttrContent";
+    public static GetAssetMasterAttrContentForAssetMaster = environment.FoundationR3Url + "/AssetMasterAttrContent/GetAssetMasterAttrContentForAssetMaster";
+
+    //REF ATTR
+    public static GetListActiveRefAttrType = environment.FoundationR3Url + "/RefAttrType/GetListActiveRefAttrType";
+    public static GetRefAttrById = environment.FoundationR3Url + "/RefAttr/GetRefAttrById";
+    public static AddRefAttr = environment.FoundationR3Url + "/RefAttr/AddRefAttr";
+    public static EditRefAttr = environment.FoundationR3Url + "/RefAttr/EditRefAttr";
 
     //REF PROFESSION
     public static AddRefProfession = environment.FoundationR3Url + "/RefProfession/AddRefProfession";
@@ -749,6 +757,9 @@ export class URLConstant {
 
     // CUST ATTR CONTENT
     public static GetCustAttrContentForCustViewByCustId = environment.FoundationR3Url + "/CustAttrContent/GetCustAttrContentForCustViewByCustId";
+    public static AddListCustAttrContent = environment.FoundationR3Url + "/CustAttrContent/AddListCustAttrContent";
+    public static EditListCustAttrContent = environment.FoundationR3Url + "/CustAttrContent/EditListCustAttrContent";
+    public static GetListCustAttrContentByCustIdForCust = environment.FoundationR3Url + "/CustAttrContent/GetListCustAttrContentByCustIdForCust";
 
     //CUST CONTACT PERSON
     public static GetCustCompanyContactPersonForCustViewByCustId = environment.FoundationR3Url + "/CustCompanyContactPerson/GetCustCompanyContactPersonForCustViewByCustId";

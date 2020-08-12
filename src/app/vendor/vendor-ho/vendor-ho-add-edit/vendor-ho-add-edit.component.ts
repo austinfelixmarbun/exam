@@ -10,7 +10,6 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { formatDate } from '@angular/common';
-import { areaChartYAxisLabel } from 'app/shared/configs/ngx-charts.config';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -80,7 +79,7 @@ export class VendorHoAddEditComponent implements OnInit {
     RowVersionVendor: [''],
     RowVersionVendorAddr: [''],
     IsNpwpExist: [false],
-    VendorAtpmCode: [{ value: '' }]
+    VendorAtpmCode: []
   })
 
   ngOnInit() {

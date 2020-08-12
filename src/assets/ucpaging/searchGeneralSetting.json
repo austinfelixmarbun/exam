@@ -77,7 +77,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.GS_CODE as gsCode,A.GENERAL_SETTING_ID as generalSettingId,A.GS_NAME as gsName,A.GS_DESCR as gsDescr,A.GS_VALUE as gsValue, A.MODULE_CODE as moduleCode, A.IS_UPDATEABLE as isUpdateable",
+    "select": "SELECT A.GS_CODE as gsCode,A.GENERAL_SETTING_ID as generalSettingId,A.GS_NAME as gsName,A.GS_DESCR as gsDescr,A.GS_VALUE as gsValue, A.MODULE_CODE as moduleCode, A.IS_UPDATABLE as isUpdatable",
     "from": "FROM dbo.GENERAL_SETTING A WITH(NOLOCK)"
   },
   "bodyList": [
@@ -111,7 +111,7 @@
             {
               "conditions": [
                 {
-                  "property": "isUpdateable",
+                  "property": "isUpdatable",
                   "value": "1",
                   "restriction": "EQ"
                 }

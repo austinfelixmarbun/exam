@@ -1,12 +1,10 @@
+<span class="mr-1 pull-right">
+  <button type="button" class="addButton" (click)="openModalAddCustGroup()" translate>
+    <i class="ft-plus-circle"></i> Add
+  </button>
+</span>
 <lib-ucSubsection [id]="'CustGrpSectionId'" [title]="'Customer Group'" [panel]="'CustGrpSection'"></lib-ucSubsection>
 <div id="CustGrpSection">
-  <div class="col-md-12" style="padding: 0; text-align: right;">
-    <span class="mr-1">
-      <button type="button" class="addButton" (click)="openModalAddCustGroup()" translate>
-        <i class="ft-plus-circle"></i> Add
-      </button>
-    </span>
-  </div>
   <div class="col-md-12" style="padding: 0; text-align: right;">
     <table class="table table-responsive-md text-center table-hover">
       <thead>
@@ -27,7 +25,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of CustGrpList; let i = index">
-          <td style="color: blue; cursor: pointer; text-align: left;"><a (click)="openView(item.CustNo)">{{item.CustNo}}</a></td>
+          <td style="color: blue; cursor: pointer; text-align: left;"><a
+              (click)="openView(item.CustNo)">{{item.CustNo}}</a></td>
           <td style="text-align: left;">{{item.CustName}}</td>
           <td style="text-align: left;">{{item.Relationship}}</td>
           <td style="text-align: center;">
@@ -44,9 +43,6 @@
 <br>
 <br>
 <div class="form-actions right" style="text-align: right;">
-  <!-- <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
-    <i class="far fa-window-close"></i> Cancel
-  </button> -->
   <button type="submit" class="btn btn-raised btn-primary" (click)="next()" translate>
     <i class="far fa-check-square"></i> Save and Continue
   </button>

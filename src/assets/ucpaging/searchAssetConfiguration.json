@@ -74,6 +74,11 @@
         "type": "label",
         "position": "center",
         "label": "ASSET ACCESORY"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "ASSET ATTRIBUTE"
       }
     ],
     "querystring": { 
@@ -138,6 +143,22 @@
           {
             "type": "edit",
             "path": "/Asset/Accessory/Paging",
+            "param": [
+              {
+                "type": "AssetTypeId",
+                "property": "AssetTypeId"
+              } 
+            ]
+          }
+        ] 
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "edit",
+            "path": "/Asset/Attribute/Paging",
             "param": [
               {
                 "type": "AssetTypeId",

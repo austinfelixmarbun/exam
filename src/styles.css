@@ -326,3 +326,7 @@ form.form-horizontal .form-group .label-control {
     text-align: left;
     padding-top: 10px;
 }
+
+.pull-right {
+    float: right !important;
+}

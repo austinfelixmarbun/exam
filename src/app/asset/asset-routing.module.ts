@@ -26,6 +26,9 @@ import { ReviewUploadAssetMasterDetailComponent } from './asset-master/review-up
 import { NegativeAssetUploadComponent } from './negative-asset/negative-asset-upload/negative-asset-upload.component';
 import { ReviewUploadNegativeAssetPagingComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-paging/review-upload-negative-asset-paging.component';
 import { ReviewUploadNegativeAssetDetailComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-detail/review-upload-negative-asset-detail.component';
+import { AssetAttributeComponent } from './asset-attribute/asset-attribute.component';
+import { RefAttrComponent } from './ref-attr/ref-attr.component';
+import { RefAttrDetailComponent } from './ref-attr/ref-attr-detail/ref-attr-detail.component';
 
 const routes: Routes = [
   {
@@ -118,6 +121,13 @@ const routes: Routes = [
       {
         path: 'Accessory/Paging',
         component: AssetAccessoryPagingComponent,
+        data: {
+          title: 'Asset Accessory Paging'
+        },
+      },
+      {
+        path: 'Attribute/Paging',
+        component: AssetAttributeComponent,
         data: {
           title: 'Asset Accessory Paging'
         },
@@ -232,6 +242,20 @@ const routes: Routes = [
         component: ReviewUploadAssetMasterDetailComponent,
         data: {
           title: 'Upload Asset Master'
+        },
+      },
+      {
+        path: 'RefAttr/Paging',
+        component: RefAttrComponent,
+        data: {
+          title: 'Ref Attr Paging'
+        },
+      },
+      {
+        path: 'RefAttr/Detail',
+        component: RefAttrDetailComponent,
+        data: {
+          title: 'Ref Attr Detail'
         },
       }
     ]

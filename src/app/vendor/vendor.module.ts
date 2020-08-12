@@ -60,6 +60,20 @@ import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { VendorPagingComponent } from './component/vendor/vendor-paging/vendor-paging.component';
 import { VendorATPMAddEditComponent } from './vendor-ATPM/vendor-atpm-add-edit/vendor-atpm-add-edit.component';
 import { VendorATPMRegistrationComponent } from './vendor-ATPM/vendor-atpm-registration/vendor-atpm-registration.component';
+import { NgxCurrencyModule } from 'ngx-currency';
+
+
+export const customCurrencyMaskConfig = {     
+  align: "right",     
+  allowNegative: true,     
+  allowZero: true,     
+  decimal: ".",     
+  precision: 2,     
+  prefix: "",     
+  suffix: "",     
+  thousands: ",",     
+  nullable: false
+};
 
 @NgModule({
   imports: [
@@ -82,7 +96,8 @@ import { VendorATPMRegistrationComponent } from './vendor-ATPM/vendor-atpm-regis
     MatTabsModule,
     UcShowErrorsModule,
     UcaddressModule,
-    UcaddtotempModule
+    UcaddtotempModule,
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
   ],
   declarations: [
     VendorHoldingPagingComponent,
