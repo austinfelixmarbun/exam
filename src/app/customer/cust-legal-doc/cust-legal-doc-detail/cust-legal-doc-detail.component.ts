@@ -39,7 +39,6 @@ export class CustLegalDocDetailComponent implements OnInit {
 
   ngOnInit() {
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
-    console.log(context);
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -54,9 +53,6 @@ export class CustLegalDocDetailComponent implements OnInit {
           CustCompanyId: this.CustCompanyId,
           MrLegalDocTypeCode: response.ReturnObject[0].Key
         });
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -67,9 +63,6 @@ export class CustLegalDocDetailComponent implements OnInit {
     this.httpClient.post(URLConstant.AddCustCompanyLegalDoc, custCompanyLegalDocData).subscribe(
       (response) => {
         this.activeModal.close(response);
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

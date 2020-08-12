@@ -1,6 +1,4 @@
 {
-    "title": "Holiday Scheme Detail",
-    "exportExcel": false,
     "component": [
         {
             "type": "dropdown",

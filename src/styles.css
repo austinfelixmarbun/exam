@@ -156,11 +156,15 @@ thead tr th {
     text-decoration-color: blue !important;
 }
 
+.ucSearch-title{
+    margin: 3px;
+}
+
 .ucSearch-Button-Right{
     z-index:1 ;
     position:absolute;
     right: 50px;
-    top: 18px;
+    top: 3px;
     text-decoration-line: underline;
 }
 
@@ -219,7 +223,7 @@ label.custom-control-label{
     border: 1px solid transparent;
     border-color: #009DA0;
     border-radius: 0.2rem;
-    margin-right: 0.375rem !important;
+    margin-left: 0.375rem !important;
     margin-bottom: 1rem;
     padding: 0.25rem 0.5rem;
     display: inline-block;
@@ -239,7 +243,7 @@ label.custom-control-label{
     border-color: #FF8D60;
     border: 1px solid transparent;
     border-radius: 0.2rem;
-    margin-right: 0.375rem !important;
+    margin-left: 0.375rem !important;
     margin-bottom: 1rem;
     padding: 0.25rem 0.5rem;
     display: inline-block;
@@ -321,4 +325,8 @@ label {
 form.form-horizontal .form-group .label-control {
     text-align: left;
     padding-top: 10px;
+}
+
+.pull-right {
+    float: right !important;
 }

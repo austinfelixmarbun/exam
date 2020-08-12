@@ -97,7 +97,6 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
   ngOnInit() {
     this.pageType = this.mode;
-    console.log(this.pageType);
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
 
@@ -107,8 +106,6 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.http.post(this.getRefMasterWithReserveField, this.addressType).subscribe(
       (response) => {
           this.listAddressType = response[CommonConstant.ReturnObj];
-          // console.log("ccc")
-          // console.log(this.listAddressType)
           this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response[CommonConstant.ReturnObj][0]['Key'] });
       });
     
@@ -198,8 +195,6 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           this.inputFieldAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.copyCustomerAddrFrom.Zipcode};
           
       });
-      // console.log("vvv")
-      // console.log(this.CustDataPersonalForm)
   }
 
   setCustAddr(){
@@ -231,23 +226,16 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   SaveForm(){
     this.custAddressObj = new CustAddrObj();
     this.setCustAddr();
-    // console.log("vvv")
-    // console.log(this.custAddressObj)
 
     if(this.pageType == "add"){
       this.http.post(this.addCustAddr, this.custAddressObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
           this.outputValue.emit({mode : 'check'});
-          console.log(response)
-        },
-        (error) => {
-          console.log(error);
         }
       );
     } else {
@@ -255,17 +243,12 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
       this.custAddressObj.RowVersion = this.getCustomerAddr.RowVersion;
       this.http.post(this.editCustAddr, this.custAddressObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
           this.outputValue.emit({mode : 'check'});
-          console.log(response)
-        },
-        (error) => {
-          console.log(error);
         }
       );
     } 

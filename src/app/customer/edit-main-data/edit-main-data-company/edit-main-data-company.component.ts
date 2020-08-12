@@ -64,18 +64,14 @@ export class EditMainDataCompanyComponent implements OnInit {
 
   ngOnInit() {
     var refMasterObjCustModel = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
-      ReserveField1: CommonConstant.CustTypeCompany,
-      RowVersion: ""
+      MrCustTypeCode: CommonConstant.CustTypeCompany
     }
-    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
       (response) => {
-        this.tempCustModel = response[CommonConstant.ReturnObj];
-        if(this.tempCustModel.length > 0){
-          this.CustomerCompanyForm.patchValue({
-            CustModel: this.tempCustModel[0].Key
-          });
-        }
+        this.tempCustModel = response["ReturnObject"];
+        this.CustomerCompanyForm.patchValue({
+          CustModel: this.tempCustModel[0].Key
+        });
       }
     );
     var refMasterObjMrCompanyTypeCode = {
@@ -103,6 +99,7 @@ export class EditMainDataCompanyComponent implements OnInit {
         this.CustomerCompanyForm.patchValue({
           CustName: this.tempCustObj.CustName,
           TaxIdNo: this.tempCustObj.TaxIdNo,
+          CustModel : this.tempCustObj.MrCustModelCode,
           MrCustModelCode: this.tempCustObj.MrCustModelCode, 
           IsVip :this.tempCustObj.IsVip,
           IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
@@ -156,14 +153,8 @@ export class EditMainDataCompanyComponent implements OnInit {
             } else {
               this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { IdCust: this.CustId, From:'CustPaging'  } });
             }
-          },
-          error => {
-            console.log(error);
           }
         );
-      },
-      error => {
-        console.log(error);
       }
     );
   }

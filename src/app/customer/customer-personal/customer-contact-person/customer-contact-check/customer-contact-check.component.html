@@ -1,14 +1,10 @@
-<div class="ucSearch-Button-Right">
-  <span class="mr-1">
-    <button type="button" class="addButton" (click)="keluarinValue()" translate>
-      <i class="ft-plus-circle"></i> Add
-    </button>
-
-  </span>
-</div>
-
 <form class="form form-horizontal">
   <div class="form-body">
+    <div class="form-actions right">
+      <button type="button" class="addButton" (click)="keluarinValue()" translate>
+        <i class="ft-plus-circle"></i> Add
+      </button>
+    </div>
     <h4 class="form-section card-title" translate>
       Contact Person Listing
     </h4>
@@ -21,7 +17,8 @@
       <th class="text-center"><span class="thead-header" name='CustNo' translate>CUSTOMER NO.</span></th>
       <th class="text-left"><span class="thead-header" name='Name' translate>NAME</span></th>
       <th class="text-left"><span class="thead-header" name='Gender' translate>GENDER</span></th>
-      <th class="text-left"><span class="thead-header" name='CustomerRelationship' translate>CUSTOMER RELATIONSHIP</span></th>
+      <th class="text-left"><span class="thead-header" name='CustomerRelationship' translate>CUSTOMER
+          RELATIONSHIP</span></th>
       <th class="text-left"><span class="thead-header" name='IdType' translate>ID TYPE</span></th>
       <th class="text-center"><span class="thead-header" name='IdNo' translate>ID NO.</span></th>
       <th class="text-center"><span class="thead-header" name='BirthDate' translate>BIRTH DATE</span></th>
@@ -32,7 +29,8 @@
   <tbody>
     <tr *ngFor="let item of tempCustomerPersonalContactPerson">
       <td class="text-left">{{item.MrNegCustTypeCode}}</td>
-      <td class="text-center" style="color: blue; cursor: pointer; text-align: center;"><a (click)="openView(item.ContactPersonCustNo)">{{item.ContactPersonCustNo}}</a></td>
+      <td class="text-center" style="color: blue; cursor: pointer; text-align: center;"><a
+          (click)="openView(item.ContactPersonCustNo)">{{item.ContactPersonCustNo}}</a></td>
       <td class="text-left">{{item.ContactPersonName}}</td>
       <td class="text-left">{{item.MrGenderCode}}</td>
       <td class="text-left">{{item.MrCustRelationshipCode}}</td>

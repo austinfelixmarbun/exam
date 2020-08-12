@@ -195,7 +195,6 @@ export class EditMainDataPersonalComponent implements OnInit {
       (response) => {
         this.http.post(this.editCustPersonalUrl, this.custPersonalObj).subscribe(
           (response) => {
-            console.log(this.custObj.CustNo);
             this.toastr.successMessage(response["Message"]);
             
             if (this.From == "EditMainData") {
@@ -203,14 +202,8 @@ export class EditMainDataPersonalComponent implements OnInit {
             } else {
               this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId,From:'CustPaging' } });
             } 
-          },
-          error => {
-            console.log(error);
           }
         );
-      },  
-      error => {
-        console.log(error);
       }
     );
   }
@@ -245,7 +238,6 @@ checkState() {
     this.CustomerPersonalForm.controls.VipNotes.enable();
     this.CustomerPersonalForm.controls.VipNotes.setValidators(Validators.required);
     this.VipNotesRequired = true;
-    console.log(this.VipNotesRequired);
   }
   this.CustomerPersonalForm.controls.VipNotes.updateValueAndValidity();
 }

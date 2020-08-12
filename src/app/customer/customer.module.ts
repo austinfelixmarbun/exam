@@ -2,10 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { SharingModule } from 'app/shared/sharing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerRoutingModule } from 'app/customer/customer-routing.module';
-// import { ArchwizardModule } from 'angular-archwizard';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
@@ -89,6 +87,7 @@ import { UploadNegativeCustomerComponent } from './negative-customer/upload-nega
 import { ReviewUploadNegativeCustomerDetailComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-detail/review-upload-negative-customer-detail.component';
 import { ReviewUploadNegativeCustomerPagingComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-paging/review-upload-negative-customer-paging.component';
 import { UcuploadModule } from '@adins/ucupload';
+import { CustAttrSectionComponent } from './cust-attr-section/cust-attr-section.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -192,7 +191,8 @@ export const customCurrencyMaskConfig = {
     CustomerViewAddressComponent,
     UploadNegativeCustomerComponent,
     ReviewUploadNegativeCustomerDetailComponent,
-    ReviewUploadNegativeCustomerPagingComponent
+    ReviewUploadNegativeCustomerPagingComponent,
+    CustAttrSectionComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })

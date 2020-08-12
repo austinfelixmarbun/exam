@@ -81,14 +81,10 @@ export class VerificationQuestionGroupMemberEditComponent implements OnInit {
     this.verfQuestionGrpDObj = this.QuestionGroupForm.value;
     this.verfQuestionGrpDObj.IsActive = this.verfQuestionGrpDObj.IsActive;
       this.verfQuestionGrpDObj.RowVersion = this.verfQuestionGrpDObj.RowVersion;
-      console.log(this.verfQuestionGrpDObj);
       this.http.post(URLConstant.EditVerfQuestionGrpD, this.verfQuestionGrpDObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigateByUrl('/Verification/QuestionGroupMemberPaging?VerfQuestionGrpHId=' + this.VerfQuestionGrpHId);
-        },
-        (error) => {
-          console.log(error);
         });
     
   }

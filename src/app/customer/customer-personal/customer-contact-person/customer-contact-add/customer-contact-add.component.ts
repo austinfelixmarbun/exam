@@ -150,7 +150,6 @@ export class CustomerContactAddComponent implements OnInit {
         this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
           (response) => {
             this.LocalCountry = response;
-            console.log(this.LocalCountry.CountryName);
           });
       });
     this.professionLookUpObj = new InputLookupObj();
@@ -405,32 +404,23 @@ export class CustomerContactAddComponent implements OnInit {
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.tempCustPersonalContactPerson.CustPersonalContactPersonId;
 
       this.custPersonalContactPersonObj.RowVersion = this.tempCustPersonalContactPerson.RowVersion;
-      console.log(this.editCustPersonalContactPersonUrl);
       this.http.post(this.editCustPersonalContactPersonUrl, this.custPersonalContactPersonObj).subscribe(
         response => {
-          console.log(response);
           this.toastr.successMessage(response["Message"]);
           // this.wizard.goToNextStep();
           this.isAdd = false;
           this.outputTab.emit({ isAdd: this.isAdd });
           // this.outputTab.emit({ stepMode: "next"});
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
 
       this.http.post(this.addCustPersonalContactPersonUrl, this.custPersonalContactPersonObj).subscribe(
         response => {
-          console.log(response);
           this.toastr.successMessage(response["Message"]);
           this.isAdd = false;
           this.outputTab.emit({ isAdd: this.isAdd });
           // this.wizard.goToNextStep();
-        },
-        error => {
-          console.log(error);
         }
       );
 
@@ -495,7 +485,6 @@ export class CustomerContactAddComponent implements OnInit {
     );
     this.custAddrObj = new CustAddrObj();
     this.custAddrObj.CustId = this.tempCustId;
-    console.log(this.tempCustId);
     this.custAddrObj.MrCustAddrTypeCode = RefMasterConstant.LegalAddr;
     this.http.post(URLConstant.GetCustAddrByMrCustAddrType, this.custAddrObj).subscribe(
       (response) => {

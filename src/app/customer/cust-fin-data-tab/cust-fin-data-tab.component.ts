@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustPersonalFinDataObj } from 'app/shared/model/CustPersonalFinDataObj.Model';
 import { CustCompanyFinDataObj } from 'app/shared/model/CustCompanyFinDataObj.Model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
@@ -113,7 +112,6 @@ export class CustFinDataTabComponent implements OnInit {
           else{
             this.mrMaritalStatCode = response.MrMaritalStatCode;
           }
-          console.log(this.mrMaritalStatCode);
           custPersonalData = response;
           return response;
         }),
@@ -129,7 +127,6 @@ export class CustFinDataTabComponent implements OnInit {
       ).subscribe(
         (response: any) => {
           var custFinData = response[0];
-          console.log("Cust Fin Data: " + JSON.stringify(custFinData));
           var sourceIncome = response[1];
           this.CustPersonalFinDataForm.patchValue({
             CustPersonalFinDataId: custFinData.CustPersonalFinDataId,
@@ -148,9 +145,6 @@ export class CustFinDataTabComponent implements OnInit {
             RowVersion: custFinData.RowVersion
           });
           this.sourceOfIncomeList = sourceIncome;
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -200,9 +194,6 @@ export class CustFinDataTabComponent implements OnInit {
             CurrRatio: response.CurrRatio,
             RowVersion: response.RowVersion,
           });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -290,9 +281,6 @@ export class CustFinDataTabComponent implements OnInit {
   //       (response) => {
   //         this.toastr.successMessage(response["Message"]);
   //         this.outputTab.emit({ stepMode: "next"});
-  //       },
-  //       (error) => {
-  //         console.log(error);
   //       }
   //     );
   //   }
@@ -361,8 +349,6 @@ export class CustFinDataTabComponent implements OnInit {
       if(response.SpouseMonthlyIncomeAmt == ""){
         response.SpouseMonthlyIncomeAmt = this.spouseMonthlyIncomeAmt;
       }
-      console.log("URL : " + url);
-      console.log("Request : " + JSON.stringify(response));
       this.httpClient.post(url, response).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
@@ -377,9 +363,6 @@ export class CustFinDataTabComponent implements OnInit {
             this.outputTab.emit({ stepMode: "next"});
           }
           this.outputTab.emit({ stepMode: "next"});
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

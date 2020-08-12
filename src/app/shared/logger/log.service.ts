@@ -129,7 +129,6 @@ export class LogService {
   }
 
   private writeToLog(msg: string, level: LogLevel, params: any[]) {
-    console.log("testatas");
     if (this.shouldLog(level)) {
       // Declare variables
       let entry: LogEntry = new LogEntry();
@@ -139,13 +138,11 @@ export class LogService {
       entry.level = level;
       entry.extraInfo = params;
       entry.logWithDate = this.logWithDate;
-      console.log("testtengah");
       for (let logger of this.publishers) {
         console.log(logger);
         logger.log(entry)
           .subscribe(response => console.log(response));
       }
     }
-    console.log("test");
   }
 }

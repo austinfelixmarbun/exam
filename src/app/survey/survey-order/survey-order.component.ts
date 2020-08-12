@@ -47,9 +47,6 @@ export class SurveyOrderComponent implements OnInit {
       response => {
         this.toastr.successMessage(response["Message"]);
         this.ucPaging.searchPagination(1);
-      },
-      error => {
-        console.log(error);
       }
     );
   }

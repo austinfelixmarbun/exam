@@ -62,6 +62,8 @@ export class CommonConstant {
     public static SUPPLIER_HO = "SUPPLIER_HO";
     public static SURVEYOR_HO = "SURVEYOR_HO";
     public static SUPPLIER_HOLDING = "SUPPLIER_HOLDING";
+    public static SUPPLIER_ATPM = "SUPPLIER_ATPM";
+    public static TITLE_SUPPLIER_ATPM = "Supplier ATPM";
 
     // NOTIFICATION METHOD
     public static NotificationMethodIntLink = "INT_LINK";
@@ -69,6 +71,7 @@ export class CommonConstant {
     //OFFICE TYPE
     public static HeadOffice = "HO";
     public static CollectionGroup = "CG";
+    public static ATPM = "ATPM";
     public static Holding = "HOLDING";
     public static Branch = "BRANCH";
     
@@ -164,4 +167,6 @@ export class CommonConstant {
     public static LTE = "Less Than Equal";
     public static LT = "Less Than";
 
+    //Status Code
+    public static STATUS_CODE_USER_LOCKED = "002";
 }

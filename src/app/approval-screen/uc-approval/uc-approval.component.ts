@@ -14,7 +14,7 @@ export class UcApprovalComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private http: HttpClient,
     // private cdRef:ChangeDetectorRef
-    ) { }
+  ) { }
 
   @Input() inputObj: any;
   @Input() showCancel: boolean = false;
@@ -28,9 +28,9 @@ export class UcApprovalComponent implements OnInit {
   URLGetApprovalInfo: string;
   URLGetMinFinLevel: string;
   URLGetReason: string;
-  URLGetNextPerson : string;
-  URLPostCompleteTask : string;
-  baseUrl : string;
+  URLGetNextPerson: string;
+  URLPostCompleteTask: string;
+  baseUrl: string;
   RFAInformation: any;
   FormApproval: FormGroup;
   RFARoot: any;
@@ -51,7 +51,7 @@ export class UcApprovalComponent implements OnInit {
     this.taskId = this.inputObj.taskId;
     this.instanceId = this.inputObj.instanceId;
     this.baseUrl = this.inputObj.approvalBaseUrl;
-     
+
     this.FormApproval = this.fb.group(
       {
         taskId: [this.taskId],
@@ -97,10 +97,6 @@ export class UcApprovalComponent implements OnInit {
         this.FormApproval.patchValue({
           trxNo: this.RFAInformation.TrxNo
         })
-
-      },
-      (error) => {
-        console.log(error);
       }
     )
   }
@@ -109,9 +105,6 @@ export class UcApprovalComponent implements OnInit {
     this.http.post(this.URLGetMinFinLevel, { runtimeId: this.instanceId }).subscribe(
       (response) => {
         this.ListMinFinLevel = response;
-      },
-      (error) => {
-        console.log(error);
       }
     )
   }
@@ -120,42 +113,31 @@ export class UcApprovalComponent implements OnInit {
     this.http.post(this.URLGetReason, { instanceId: this.instanceId, reasonType: "REJECT_FINAL" }).subscribe(
       (response) => {
         this.ListReason = response;
-        console.log(this.taskId)
-        console.log(this.ListReason)
-      },
-      (error) => {
-        console.log(error);
       }
     )
   }
 
-  LoadNextPersonNode(result : string)
-  {
+  LoadNextPersonNode(result: string) {
     var _result = this.remakeApprovalResult(result);
 
-    this.http.post(this.URLGetNextPerson, { TaskId : this.taskId, Result: _result }).subscribe(
+    this.http.post(this.URLGetNextPerson, { TaskId: this.taskId, Result: _result }).subscribe(
       (response) => {
-        if(response["NodeObj"].length > 0)
-        {
+        if (response["NodeObj"].length > 0) {
           var fa_node = this.FormApproval.get("nodes") as FormArray
           this.clearFormArray(fa_node);
           var members = response["NextNodePersons"];
 
-          for (let i = 0; i < response["NodeObj"].length ; i++) {
+          for (let i = 0; i < response["NodeObj"].length; i++) {
             var node = response["NodeObj"][i];
-            fa_node.push(this.addNode(node.Key,node.Value));
-            var node_members = members.filter(f=>f.NodeId == node.Key);
+            fa_node.push(this.addNode(node.Key, node.Value));
+            var node_members = members.filter(f => f.NodeId == node.Key);
             this.dictMember[node.Key] = node_members;
           }
           this.setDDLNextPersonVisibility(true);
         }
-        else
-        {
+        else {
           this.setDDLNextPersonVisibility(false);
         }
-      },
-      (error) => {
-        console.log(error);
       }
     )
   }
@@ -175,48 +157,42 @@ export class UcApprovalComponent implements OnInit {
     }
   }
 
-  Submit()
-  {
+  Submit() {
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     var nodes = this.FormApproval.get("nodes").value;
     var ListNodePersonObj = new Array();
-    for (let i = 0; i < nodes.length ; i++) {
-      ListNodePersonObj.push({ Key : nodes[i].nodeId, Value : nodes[i].slcMemberId})
+    for (let i = 0; i < nodes.length; i++) {
+      ListNodePersonObj.push({ Key: nodes[i].nodeId, Value: nodes[i].slcMemberId })
     }
 
     var result = this.remakeApprovalResult(this.FormApproval.get("result").value);
 
     var SubmitObj = {
-      taskId : this.FormApproval.get("taskId").value,
-      result : result,
-      instanceId : this.FormApproval.get("instanceId").value,
-      reason : this.FormApproval.get("reason").value,
-      reasonType : this.FormApproval.get("reasonType").value,
-      minFinalLevel : this.FormApproval.get("minFinalLevel").value,
-      notes : this.FormApproval.get("notes").value,
-      nextPersonPerNodeObj : ListNodePersonObj,
-      context : { 
-        UserId : context[CommonConstant.USER_NAME],
-        BusinessDt : context[CommonConstant.BUSINESS_DT]
+      taskId: this.FormApproval.get("taskId").value,
+      result: result,
+      instanceId: this.FormApproval.get("instanceId").value,
+      reason: this.FormApproval.get("reason").value,
+      reasonType: this.FormApproval.get("reasonType").value,
+      minFinalLevel: this.FormApproval.get("minFinalLevel").value,
+      notes: this.FormApproval.get("notes").value,
+      nextPersonPerNodeObj: ListNodePersonObj,
+      context: {
+        UserId: context[CommonConstant.USER_NAME],
+        BusinessDt: context[CommonConstant.BUSINESS_DT]
       }
     }
     this.CompleteTask(SubmitObj);
   }
 
-  onCancelClick()
-  {
+  onCancelClick() {
     this.onCancel.emit();
   }
 
-  CompleteTask(SubmitObj)
-  {
+  CompleteTask(SubmitObj) {
     this.http.post(this.URLPostCompleteTask, SubmitObj).subscribe(
       (response) => {
         this.result.emit(SubmitObj);
         this.nextTask.emit(response);
-      },
-      (error) => {
-        console.log(error);
       }
     )
   }
@@ -224,7 +200,7 @@ export class UcApprovalComponent implements OnInit {
   addNode(nodeId, nodeName) {
     return this.fb.group({
       nodeId: nodeId,
-      nodeName : nodeName,
+      nodeName: nodeName,
       slcMemberId: ['', Validators.required],
     })
   }
@@ -262,21 +238,18 @@ export class UcApprovalComponent implements OnInit {
     }
   }
 
-  isFinalChange(event)
-  {
+  isFinalChange(event) {
     var result = this.FormApproval.get("result").value;
     this.LoadNextPersonNode(result);
 
-    if(result == "Reject" && this.isFinal )
-    {
+    if (result == "Reject" && this.isFinal) {
       this.setDDLReasonVisibility(true);
     }
-    else
-    {
+    else {
       this.setDDLReasonVisibility(false);
     }
   }
-  
+
   clearFormArray(formArray: FormArray) {
     while (formArray.length > 0) {
       formArray.removeAt(0);

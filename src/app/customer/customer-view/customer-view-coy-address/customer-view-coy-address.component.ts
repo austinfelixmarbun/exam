@@ -66,7 +66,6 @@ export class CustomerViewCoyAddressComponent implements OnInit {
       }
     );
     var refMasterObj = new RefMasterObj();
-    console.log('bugde');
     refMasterObj.RefMasterTypeCode = RefMasterConstant.AddrType;
     this.http.post(this.GetListActiveRefMasterUrl, refMasterObj).subscribe(
       response => {

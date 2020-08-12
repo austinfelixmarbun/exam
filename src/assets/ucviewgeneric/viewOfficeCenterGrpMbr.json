@@ -1,26 +1,27 @@
 {
-    "subsection": [
-      {
-        "subSectionId": "Office Center Group Info",
-        "subSectionTitle": "Office Center Group Info",
-        "mainInfoPath": "/Generic/GetDataViewBySQL",
-        "mainInfo": [
-          {
-            "type": "text",
-            "label": "Office Code",
-            "property": "OfficeCode"
-          },
-          {
-            "type": "text",
-            "label": "Office Name",
-            "property": "OfficeName"
-          } 
-        ],
-        "querystring": {
-            "select": "SELECT OFFICE_CODE AS OfficeCode, OFFICE_NAME AS OfficeName",
-            "from": "FROM dbo.REF_OFFICE WITH(NOLOCK)", 
-            "where": "WHERE REF_OFFICE_ID = {0}" 
+  "title": "Office Member",
+  "subsection": [
+    {
+      "subSectionId": "Office Center Group Info",
+      "subSectionTitle": "Office Center Group Info",
+      "mainInfoPath": "/Generic/GetDataViewBySQL",
+      "mainInfo": [
+        {
+          "type": "text",
+          "label": "Office Code",
+          "property": "OfficeCode"
+        },
+        {
+          "type": "text",
+          "label": "Office Name",
+          "property": "OfficeName"
         }
+      ],
+      "querystring": {
+        "select": "SELECT OFFICE_CODE AS OfficeCode, OFFICE_NAME AS OfficeName",
+        "from": "FROM dbo.REF_OFFICE WITH(NOLOCK)",
+        "where": "WHERE REF_OFFICE_ID = {0}"
       }
-    ]
-  }
+    }
+  ]
+}

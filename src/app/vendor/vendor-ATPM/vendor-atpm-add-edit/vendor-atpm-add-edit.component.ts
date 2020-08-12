@@ -1,0 +1,364 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { environment } from 'environments/environment';
+import { formatDate } from '@angular/common';
+import { VendorObj } from 'app/shared/model/VendorObj.Model';
+import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
+import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { VendorService } from '../../vendor.service';
+
+@Component({
+  selector: 'app-vendor-atpm-add-edit',
+  templateUrl: './vendor-atpm-add-edit.component.html',
+  providers: [NGXToastrService]
+})
+export class VendorATPMAddEditComponent implements OnInit {
+  itemCategoryType: any;
+  itemType: any;
+  itemIdType: any;
+  itemAssignmentType: any;
+  itemCalcMethodType: any;
+
+  result: any;
+  check: any;
+  inputLookupParentObj: InputLookupObj = new InputLookupObj();
+  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
+  MrVendorCategoryCode: any;
+  arrCrit: any;
+  mode: string = "add";
+  vendorATPMObj: any;
+  VendorId: any;
+  businessDt: Date;
+  isHidden: boolean = true;
+
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private vendorService: VendorService) {
+    this.route.queryParams.subscribe(params => {
+      this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      this.VendorId = params['VendorId'];
+      this.mode = params['mode'];
+    });
+  }
+
+  VendorForm = this.fb.group({
+    MrVendorCategoryCode: [{ value: '', disabled: true }],
+    VendorCode: ['', Validators.required],
+    VendorName: ['', Validators.required],
+    MrVendorTypeCode: ['', Validators.required],
+    RegistrationNo: ['', Validators.required],
+    LicenseNo: ['', Validators.required],
+    MrIdTypeCode: [''],
+    IdNo: [''],
+    MobilePhnNo1: [''],
+    MobilePhnNo2: [''],
+    Email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    VendorRating: [''],
+    EstablishmentDt: ['', Validators.required],
+    PartnershipDt: ['', Validators.required],
+    IsActive: [true],
+    VendorParentId: [''],
+    ReservedField1: [''],
+    ReservedField2: [''],
+    MrTaxCalcMethodCode: ['', Validators.required],
+    IsVat: [true, Validators.required],
+    TaxIdNo: [''],
+    TaxpayerName: [''],
+    MrAddrTypeCode: [''],
+    Addr: [''],
+    AreaCode2: [{ value: '', disabled: true }], //kelurahan
+    AreaCode1: [{ value: '', disabled: true }], //kecamatan
+    City: [{ value: '', disabled: true }],
+    Province: [{ value: '', disabled: true }],
+    RowVersionVendor: [''],
+    RowVersionVendorAddr: [''],
+    IsNpwpExist: [false]
+  });
+
+
+  ngOnInit() {
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
+    if (this.mode == "edit") {
+      this.VendorForm.controls.VendorCode.disable();
+      this.getData();
+    } else {
+      this.setDropdown();
+      this.setLookup();
+      this.checkType();
+    }
+
+  }
+
+  getData() {
+    this.vendorService.GetVendorAndVendorAddrByVendorId({ VendorId: this.VendorId }).subscribe(
+      (response) => {
+        this.result = response;
+        this.setDropdown();
+        this.VendorForm.patchValue({
+          MrVendorCategoryCode: this.result.VendorObj.MrVendorCategoryCode,
+          VendorCode: this.result.VendorObj.VendorCode,
+          VendorName: this.result.VendorObj.VendorName,
+          MrVendorTypeCode: this.result.VendorObj.MrVendorTypeCode,
+          RegistrationNo: this.result.VendorObj.RegistrationNo,
+          LicenseNo: this.result.VendorObj.LicenseNo,
+          MrIdTypeCode: this.result.VendorObj.MrIdTypeCode,
+          IdNo: this.result.VendorObj.IdNo,
+          MobilePhnNo1: this.result.VendorObj.MobilePhnNo1,
+          MobilePhnNo2: this.result.VendorObj.MobilePhnNo2,
+          Email: this.result.VendorObj.Email,
+          EstablishmentDt: formatDate(this.result.VendorObj['EstablishmentDt'], 'yyyy-MM-dd', 'en-US'),
+          PartnershipDt: formatDate(this.result.VendorObj['PartnershipDt'], 'yyyy-MM-dd', 'en-US'),
+          IsActive: this.result.VendorObj.IsActive,
+          VendorParentId: this.result.VendorObj.VendorParentId,
+          ReservedField1: this.result.VendorObj.ReservedField1,
+          ReservedField2: this.result.VendorObj.ReservedField2,
+          MrTaxCalcMethodCode: this.result.VendorObj.MrTaxCalcMethodCode,
+          IsVat: this.result.VendorObj.IsVat,
+          TaxIdNo: this.result.VendorObj.TaxIdNo,
+          TaxpayerName: this.result.VendorObj.TaxpayerName,
+          RowVersionVendor: this.result.VendorObj.RowVersion,
+          MrAddrTypeCode: this.result.VendorObj.MrAddrTypeCode,
+          Addr: this.result.VendorAddrObj.Addr,
+          AreaCode2: this.result.VendorAddrObj.AreaCode2,
+          AreaCode1: this.result.VendorAddrObj.AreaCode1,
+          City: this.result.VendorAddrObj.City,
+          Province: this.result.VendorAddrObj.Province,
+          Zipcode: this.result.VendorAddrObj.Zipcode,
+          RowVersionVendorAddr: this.result.VendorAddrObj.RowVersion,
+          IsNpwpExist: this.result.VendorObj.IsNpwpExist
+        });
+
+        this.setLookup();
+        this.checkType();
+      }
+    );
+  }
+
+  setDropdown() {
+    var refMasterCategoryObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCategory,
+      ReserveField1: CommonConstant.ATPM
+    }
+    this.vendorService.GetRefMasterListKeyValuePair(refMasterCategoryObj).subscribe(
+      (response) => {
+        this.itemCategoryType = response[CommonConstant.ReturnObj];
+        if (this.itemCategoryType.length > 0) {
+          this.VendorForm.patchValue({
+            MrVendorCategoryCode: response[CommonConstant.ReturnObj][0].Key
+          });
+        }
+      }
+    );
+
+    var refMasterTypeObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorType,
+    }
+    this.vendorService.GetRefMasterListKeyValuePair(refMasterTypeObj).subscribe(
+      (response) => {
+        this.itemType = response[CommonConstant.ReturnObj];
+        if (this.itemType.length > 0) {
+          if (this.mode != "edit") {
+            this.VendorForm.patchValue({
+              MrVendorTypeCode: this.itemType[0].Key
+            });
+          }
+        }
+      }
+    );
+
+    var refMasterIdObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
+    }
+    this.vendorService.GetRefMasterListKeyValuePair(refMasterIdObj).subscribe(
+      (response) => {
+        this.itemIdType = response[CommonConstant.ReturnObj];
+        if (this.itemIdType.length > 0) {
+          this.VendorForm.patchValue({
+            MrIdTypeCode: this.itemIdType[0].Key
+          });
+        }
+      }
+    );
+
+    var refMasterCalcMethodObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeTaxCalcMethod,
+    }
+    this.vendorService.GetRefMasterListKeyValuePair(refMasterCalcMethodObj).subscribe(
+      (response) => {
+        this.itemCalcMethodType = response[CommonConstant.ReturnObj];
+        if (this.itemCalcMethodType.length > 0) {
+          if (this.mode != "edit") {
+            this.VendorForm.patchValue({
+              MrTaxCalcMethodCode: this.itemCalcMethodType[0].Key
+            });
+          }
+        }
+      }
+    );
+  }
+
+  NpwpCheck(isGetData: boolean = false) {
+    if (this.VendorForm.controls.IsNpwpExist.value == true) {
+      this.isHidden = false;
+      this.inputLookupZipcodeObj.isRequired = true;
+      this.VendorForm.controls.TaxIdNo.setValidators(Validators.required);
+      this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
+    } else {
+      this.inputLookupZipcodeObj.isRequired = false;
+      if (!isGetData) this.VendorForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
+      this.VendorForm.controls.TaxIdNo.clearValidators();
+      this.VendorForm.controls.TaxpayerName.clearValidators();
+      this.isHidden = true;
+    }
+    this.VendorForm.controls.TaxIdNo.updateValueAndValidity();
+    this.VendorForm.controls.TaxpayerName.updateValueAndValidity();
+  }
+
+  getLookupZipcode(event) {
+    this.VendorForm.patchValue({
+      AreaCode2: event.AreaCode2,
+      AreaCode1: event.AreaCode1,
+      City: event.City,
+      Province: event.Province
+    });
+  }
+
+  updateValueAndValidityForm() {
+    this.VendorForm.controls.MrIdTypeCode.updateValueAndValidity();
+    this.VendorForm.controls.IdNo.updateValueAndValidity();
+    this.VendorForm.controls.RegistrationNo.updateValueAndValidity();
+    this.VendorForm.controls.LicenseNo.updateValueAndValidity();
+  }
+
+  SaveForm() {
+    if (Date.parse(this.VendorForm.controls.EstablishmentDt.value) > Date.parse(formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US'))) {
+      this.toastr.warningMessage("Establishment Date Must Be Lesser Than Business Date");
+    }
+    else if (Date.parse(this.VendorForm.controls.PartnershipDt.value) > Date.parse(formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US'))) {
+      this.toastr.warningMessage("Partnership Date Must Be Lesser Than Business Date");
+    }
+    else {
+      this.vendorATPMObj = new VendorHoObj();
+      this.vendorATPMObj.VendorObj = new VendorObj();
+      this.vendorATPMObj.VendorAddrObj = new VendorAddrObj();
+
+      this.vendorATPMObj.VendorObj.MrVendorCategoryCode = this.VendorForm.controls.MrVendorCategoryCode.value;
+      this.vendorATPMObj.VendorObj.VendorCode = this.VendorForm.controls.VendorCode.value;
+      this.vendorATPMObj.VendorObj.VendorName = this.VendorForm.controls.VendorName.value;
+      this.vendorATPMObj.VendorObj.MrVendorTypeCode = this.VendorForm.controls.MrVendorTypeCode.value;
+      this.vendorATPMObj.VendorObj.RegistrationNo = this.VendorForm.controls.RegistrationNo.value;
+      this.vendorATPMObj.VendorObj.LicenseNo = this.VendorForm.controls.LicenseNo.value;
+      this.vendorATPMObj.VendorObj.MrIdTypeCode = "";
+      this.vendorATPMObj.VendorObj.IdNo = this.VendorForm.controls.IdNo.value;
+      this.vendorATPMObj.VendorObj.MobilePhnNo1 = this.VendorForm.controls.MobilePhnNo1.value;
+      this.vendorATPMObj.VendorObj.MobilePhnNo2 = this.VendorForm.controls.MobilePhnNo2.value;
+      this.vendorATPMObj.VendorObj.Email = this.VendorForm.controls.Email.value;
+      this.vendorATPMObj.VendorObj.EstablishmentDt = this.VendorForm.controls.EstablishmentDt.value;
+      this.vendorATPMObj.VendorObj.PartnershipDt = this.VendorForm.controls.PartnershipDt.value;
+      this.vendorATPMObj.VendorObj.IsActive = this.VendorForm.controls.IsActive.value;
+      this.vendorATPMObj.VendorObj.VendorParentId = this.VendorForm.controls.VendorParentId.value;
+      this.vendorATPMObj.VendorObj.ReservedField1 = this.VendorForm.controls.ReservedField1.value;
+      this.vendorATPMObj.VendorObj.ReservedField2 = this.VendorForm.controls.ReservedField2.value;
+      this.vendorATPMObj.VendorObj.MrVendorClass = CommonConstant.ATPM;
+      this.vendorATPMObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
+      this.vendorATPMObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
+      this.vendorATPMObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value;
+
+      if (this.vendorATPMObj.VendorObj.MrVendorTypeCode == "P") {
+        this.vendorATPMObj.VendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value
+      }
+
+      if (this.VendorForm.controls.IsNpwpExist.value == true) {
+        this.vendorATPMObj.VendorObj.TaxIdNo = this.VendorForm.controls.TaxIdNo.value;
+        this.vendorATPMObj.VendorObj.TaxpayerName = this.VendorForm.controls.TaxpayerName.value;
+
+        this.vendorATPMObj.VendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeTax;
+        this.vendorATPMObj.VendorAddrObj.Addr = this.VendorForm.controls.Addr.value;
+        this.vendorATPMObj.VendorAddrObj.Zipcode = this.VendorForm.controls["Zipcode"]["controls"].value.value;
+        this.vendorATPMObj.VendorAddrObj.AreaCode2 = this.VendorForm.controls.AreaCode2.value;
+        this.vendorATPMObj.VendorAddrObj.AreaCode1 = this.VendorForm.controls.AreaCode1.value;
+        this.vendorATPMObj.VendorAddrObj.City = this.VendorForm.controls.City.value;
+        this.vendorATPMObj.VendorAddrObj.Province = this.VendorForm.controls.Province.value;
+      } else if (this.result != null) {
+        this.vendorATPMObj.VendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeTax;
+        this.vendorATPMObj.VendorAddrObj.Addr = this.result.VendorAddrObj.Addr;
+        this.vendorATPMObj.VendorAddrObj.Zipcode = this.result.VendorAddrObj.Zipcode;
+        this.vendorATPMObj.VendorAddrObj.AreaCode2 = this.result.VendorAddrObj.AreaCode2;
+        this.vendorATPMObj.VendorAddrObj.AreaCode1 = this.result.VendorAddrObj.AreaCode1;
+        this.vendorATPMObj.VendorAddrObj.City = this.result.VendorAddrObj.City;
+        this.vendorATPMObj.VendorAddrObj.Province = this.result.VendorAddrObj.Province;
+      }
+
+
+      if (this.mode == "edit") {
+        this.vendorATPMObj.VendorObj.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
+        this.vendorATPMObj.VendorObj.VendorCode = this.result.VendorObj.VendorCode;
+        this.vendorATPMObj.VendorObj.VendorId = this.VendorId;
+        this.vendorATPMObj.VendorAddrObj.VendorAddrId = this.result.VendorAddrObj.VendorAddrId;
+        this.vendorATPMObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
+        this.vendorATPMObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
+
+        this.vendorService.EditVendorATPM(this.vendorATPMObj).subscribe(
+          (response) => {
+            this.toastr.successMessage(response["message"]);
+            this.router.navigate(['/Vendor/ATPM/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": 'edit' } });
+          });
+      } else {
+        this.vendorATPMObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
+
+        this.vendorService.AddVendorATPM(this.vendorATPMObj).subscribe(
+          (response) => {
+            this.toastr.successMessage(response["message"]);
+            this.router.navigate(['/Vendor/ATPM/Registration'], { queryParams: { "VendorId": response['VendorObj'].VendorId } });
+          });
+      }
+    }
+  }
+
+  Back() {
+    if (this.mode == "edit") {
+      this.router.navigate(['/Vendor/ATPM/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": 'edit' } });
+    } else {
+      this.router.navigate(["/Vendor/Paging"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
+    }
+
+  }
+
+  setLookup() {
+    this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
+    this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+
+    if (this.result != null) {
+      this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.result["VendorAddrObj"].Zipcode };
+    }
+
+    this.inputLookupZipcodeObj.isReady = true;
+    this.NpwpCheck(true);
+  }
+
+  checkType() {
+    if (this.VendorForm.controls.MrVendorTypeCode.value == 'C') {
+      this.VendorForm.controls.MrIdTypeCode.clearValidators();
+      this.VendorForm.controls.IdNo.clearValidators();
+      this.VendorForm.controls.RegistrationNo.setValidators(Validators.required);
+      this.VendorForm.controls.LicenseNo.setValidators(Validators.required);
+      this.updateValueAndValidityForm();
+    } else if (this.VendorForm.controls.MrVendorTypeCode.value == 'P') {
+      this.VendorForm.controls.RegistrationNo.clearValidators();
+      this.VendorForm.controls.LicenseNo.clearValidators();
+      this.VendorForm.controls.MrIdTypeCode.setValidators(Validators.required);
+      this.VendorForm.controls.IdNo.setValidators(Validators.required);
+      this.updateValueAndValidityForm();
+    }
+  }
+}

@@ -53,9 +53,6 @@ export class CustLegalDocComponent implements OnInit {
         this.httpClient.post(URLConstant.GetListViewCustCompanyLegalDocByCustCompanyId, custCompanyLegalDoc).subscribe(
           (response: any) => {
             this.custLegalDocs = response.ListCustCompanyLegalDoc;
-          },
-          (error) => {
-            console.log(error);
           }
         );
       }
@@ -74,9 +71,6 @@ export class CustLegalDocComponent implements OnInit {
         this.httpClient.post(URLConstant.GetListViewCustCompanyLegalDocByCustCompanyId, custCompanyLegalDoc).subscribe(
           (response: any) => {
             this.custLegalDocs = response.ListCustCompanyLegalDoc;
-          },
-          (error) => {
-            console.log(error);
           }
         );
         this.spinner.hide();
@@ -100,9 +94,6 @@ export class CustLegalDocComponent implements OnInit {
         (response: any) => {
           this.custLegalDocs.splice(idx, 1);
           this.toastr.successMessage(response["message"]);
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

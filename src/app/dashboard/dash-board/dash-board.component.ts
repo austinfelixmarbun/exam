@@ -17,7 +17,6 @@ export class DashBoardComponent implements OnInit {
   }
   
   showMessage(message: any) {
-    console.log(message);
   }
 
   @ViewChild('treemenu') public gridContextMenu: ContextMenuComponent;

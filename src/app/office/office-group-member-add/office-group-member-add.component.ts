@@ -8,6 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-office-group-member-add',
@@ -57,9 +58,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListRefOffice);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -70,7 +68,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
 
   SaveOfficeGroupMember() {
     if (this.listSelectedId.length == 0) {
-      this.toastr.errorMessage('Please Add At Least One Data');
+      this.toastr.errorMessage(ExceptionConstant.ADD_MIN_1_DATA);
       return;
     }
 
@@ -82,9 +80,6 @@ export class OfficeGroupMemberAddComponent implements OnInit {
     this.http.post(URLConstant.AddCenterGrpOfficeMember, obj).subscribe(
       (response) => {
         this.router.navigate(['/Office/Group/Member'], { queryParams: { RefOfficeId: this.RefOfficeId, CenterGrpId: this.CenterGrpId } });
-      },
-      (error) => {
-        console.log(error);
       });
   }
 }

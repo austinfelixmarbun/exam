@@ -93,9 +93,6 @@ export class AssetMasterAddEditParentComponent implements OnInit {
             } else {
               this.AssetMasterParentForm.patchValue({ AssetCategoryId: response[CommonConstant.ReturnObj][0]['Key'] });
             }
-          },
-          (error) => {
-            console.log(error);
           });
 
         this.assetSchmListDObj = new AssetSchmListObj();
@@ -110,9 +107,6 @@ export class AssetMasterAddEditParentComponent implements OnInit {
               }
             }
           });
-      },
-      (error) => {
-        console.log(error);
       });
   }
 
@@ -138,9 +132,6 @@ export class AssetMasterAddEditParentComponent implements OnInit {
               }
             }
           });
-      },
-      (error) => {
-        console.log(error);
       });
 
 
@@ -192,9 +183,6 @@ export class AssetMasterAddEditParentComponent implements OnInit {
                   } else {
                     this.AssetMasterParentForm.patchValue({ AssetCategoryId: response[CommonConstant.ReturnObj][0]['Key'] });
                   }
-                },
-                (error) => {
-                  console.log(error);
                 });
             });
 
@@ -210,9 +198,6 @@ export class AssetMasterAddEditParentComponent implements OnInit {
                 }
               }
             });
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -294,9 +279,6 @@ export class AssetMasterAddEditParentComponent implements OnInit {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/AssetMaster/Paging"]);
 
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -346,9 +328,6 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/AssetMaster/Paging"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     }

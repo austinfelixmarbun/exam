@@ -22,13 +22,11 @@ export class UCGridFooterComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("Grid Footer Init");
     this.pageNow = 1;
     this.pageSize = 10;
   }
 
   searchPagination(event: number) {
-    console.log("Grid Footer Page Change");
     this.pageNow = event;
     var paging = {pageNow:event,pageSize:this.pageSize};
     this.select.emit(paging);
@@ -36,7 +34,6 @@ export class UCGridFooterComponent implements OnInit {
 
   onChange()
   {
-    console.log("Grid Footer Page Change");
     var paging = {pageNow:this.pageNow,pageSize:this.pageSize};
     this.select.emit(paging);
   }

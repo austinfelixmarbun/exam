@@ -8,6 +8,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-vendor-groupmember',
@@ -84,9 +85,6 @@ export class VendorGroupmemberComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListVendorGrp);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -97,7 +95,7 @@ export class VendorGroupmemberComponent implements OnInit {
 
   SaveVendorGroupMember() {
     if (this.listSelectedId.length == 0) {
-      this.toastr.errorMessage('Please Add At Least One Data');
+      this.toastr.errorMessage(ExceptionConstant.ADD_MIN_1_DATA);
       return;
     }
 
@@ -109,9 +107,6 @@ export class VendorGroupmemberComponent implements OnInit {
     this.http.post(URLConstant.AddVendorGrpMbr, obj).subscribe(
       (response) => {
         this.router.navigate(['/Vendor/Group/View/'], { queryParams: { VendorGrpId: this.VendorGrpId, MrVendorCategoryCode: this.MrVendorCategoryCode } });
-      },
-      (error) => {
-        console.log(error);
       });
   }
 }

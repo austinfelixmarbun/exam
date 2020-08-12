@@ -98,7 +98,6 @@ export class UserRoleDetailComponent implements OnInit {
 
     this.httpClient.post(getRoleUrl, empPositionObj).subscribe(
       (response) => {
-        console.log('Success Get');
         if (response['returnObject'] !== null) {
           this.mode = 'edit';
           refRoleObj = response['returnObject'];
@@ -108,28 +107,16 @@ export class UserRoleDetailComponent implements OnInit {
           this.userTitleRoleObj.empPositionId = this.empPositionId;
           this.userTitleRoleObj.refRoleId = refRoleObj.RefRoleId;
 
-          console.log('A', refRoleObj);
           this.httpClient.post(getUserTitleRole, this.userTitleRoleObj).subscribe(
             (response) => {
               this.userTitleRoleObj = response['returnObject'];
-              console.log('B', this.userTitleRoleObj);
 
               if (this.userTitleRoleObj.isActive == '1') { this.isActive = true } else { this.isActive = false }
               //this.userTitleRoleId = this.userTitleRoleObj.userTitleRoleId;
-            },
-            (error) => {
-              console.log('Error Get');
-              console.log(error);
-              this.spinner.hide();
             }
           );
           this.spinner.hide();
         }
-      },
-      (error) => {
-        console.log('Error Get');
-        console.log(error);
-        this.spinner.hide();
       }
     );
   }
@@ -142,7 +129,6 @@ export class UserRoleDetailComponent implements OnInit {
   Save(UserRoleDetailForm: NgForm, lookupRole: any): void {
     this.spinner.show();
     if (this.mode == 'edit') {
-      console.log('edit');
       this.apiUrl = this.foundationUrl + URLConstant.EditUserTitleRole;
       //this.userTitleRoleObj.userTitleRoleId = +this.userTitleRoleId;
       this.userTitleRoleObj.empPositionId = +this.empPositionId;
@@ -151,7 +137,6 @@ export class UserRoleDetailComponent implements OnInit {
 
       this.httpClient.post(this.apiUrl, this.userTitleRoleObj).subscribe(
         (response) => {
-          console.log("Success Edit");
 
           this.service.typeSave('Edit Successed');
           this.location.back();
@@ -159,7 +144,6 @@ export class UserRoleDetailComponent implements OnInit {
 
         },
         (error) => {
-          console.log("Error Edit");
           this.service.typeErrorCustom(error);
           this.spinner.hide();
         }
@@ -167,7 +151,6 @@ export class UserRoleDetailComponent implements OnInit {
 
     }
     else {
-      console.log("add");
       this.apiUrl = this.foundationUrl + URLConstant.AddUserTitleRole;
       this.userTitleRoleObj.empPositionId = +this.empPositionId;
       this.userTitleRoleObj.refRoleId = lookupRole.idSelect;
@@ -175,7 +158,6 @@ export class UserRoleDetailComponent implements OnInit {
 
       this.httpClient.post(this.apiUrl, this.userTitleRoleObj).subscribe(
         (response) => {
-          console.log("Success Save");
 
           this.service.typeSave('Save Successed');
           this.location.back();
@@ -183,7 +165,6 @@ export class UserRoleDetailComponent implements OnInit {
 
         },
         (error) => {
-          console.log("Error Save");
           this.service.typeErrorCustom(error);
           this.spinner.hide();
         }

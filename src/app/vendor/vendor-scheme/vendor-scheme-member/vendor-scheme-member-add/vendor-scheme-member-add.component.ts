@@ -7,6 +7,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { ToastrService } from 'ngx-toastr';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-vendor-scheme-member-add',
@@ -59,9 +60,6 @@ export class VendorSchemeMemberAddComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListVendorId);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -72,7 +70,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
 
   SaveVendorSchemeMember() {
     if (this.listSelectedId.length == 0) {
-      this.toastr.error('Please add at least one data');
+      this.toastr.error(ExceptionConstant.ADD_MIN_1_DATA);
       return;
     }
     
@@ -85,9 +83,6 @@ export class VendorSchemeMemberAddComponent implements OnInit {
       (response) => {
         this.toastr.success(response["message"], 'Success!');
         this.router.navigate(['/Vendor/VendorScheme/Member'], { queryParams: { VendorSchmId: this.VendorSchmId, MrVendorCategoryCode: this.MrVendorCategoryCode } });
-      },
-      (error) => {
-        console.log(error);
       });
   }
 }

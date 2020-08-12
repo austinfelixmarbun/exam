@@ -33,14 +33,7 @@ export class CompanyComponent implements OnInit {
     this.http.post(this.apiUrl, null)
       .subscribe(
         (response) => {
-          console.log("Success");
           this.resultData = response["returnObject"];
-          console.log(response);
-          console.log(this.resultData);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
         }
       );
   }

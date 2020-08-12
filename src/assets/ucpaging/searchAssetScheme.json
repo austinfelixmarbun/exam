@@ -63,31 +63,31 @@
       "type": "sort",
       "position": "left",
       "label": "Asset Scheme Code",
-      "name": "AssetSchmCode"
+      "name": "ASH.ASSET_SCHM_CODE"
     },
     {
       "type": "sort",
       "position": "left",
       "label": "Asset Scheme Name",
-      "name": "AssetSchmName"
+      "name": "ASH.ASSET_SCHM_NAME"
     },
     {
       "type": "sort",
       "position": "left",
       "label": "Asset Type Name",
-      "name": "AssetTypeName"
+      "name": "ATH.ASSET_TYPE_NAME"
     },
     {
       "type": "sort",
       "position": "right",
       "label": "Num Of Asset",
-      "name": "NumOfAsset"
+      "name": "COUNT(ASD.ASSET_SCHM_D_ID)"
     },
     {
       "type": "sort",
       "position": "center",
       "label": "Active Status",
-      "name": "IsActive"
+      "name": "ASH.IS_ACTIVE"
     },
     {
       "type": "label",

@@ -73,9 +73,6 @@ export class Test1Component implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListVendorId);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

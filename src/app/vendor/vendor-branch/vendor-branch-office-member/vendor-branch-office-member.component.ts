@@ -5,6 +5,8 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { VendorService } from 'app/vendor/vendor.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-vendor-branch-office-member',
@@ -14,8 +16,9 @@ export class VendorBranchOfficeMemberComponent implements OnInit {
   inputPagingObj: any;
   VendorId: string;
   objPassing: any = {};
+  MrVendorCategoryCode: string = "";
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private http : HttpClient) {
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
       this.objPassing["VendorEmpId"] = params['VendorEmpId'];
@@ -37,6 +40,12 @@ export class VendorBranchOfficeMemberComponent implements OnInit {
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.value = this.VendorId;
     this.inputPagingObj.addCritInput.push(critObj);
+
+    this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { VendorId: this.VendorId }).subscribe(
+      (response) => {
+        this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"];
+      }
+    );
   }
 
 }

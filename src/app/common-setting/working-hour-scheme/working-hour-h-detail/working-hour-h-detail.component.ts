@@ -121,14 +121,10 @@ export class WorkingHourHDetailComponent implements OnInit {
             WorkingHourSchmName: this.resultData.WorkingHourSchmName,
             IsActive: this.resultData.IsActive
           });
-        },
-        error => {
-          console.log(error);
         }
       );
       // this.http.post(this.api2Url, this.workingHourSchmHObj).subscribe(
       //   response => {
-      //     console.log(response["returnObject"]);
       //     this.listOfDay = new Array();
       //     for (var i = 0; i < response["returnObject"].length; i++) {
       //       var eachDayDetail = {
@@ -141,11 +137,6 @@ export class WorkingHourHDetailComponent implements OnInit {
       //       }
       //       this.listOfDay.push(eachDayDetail);
       //     }
-      //     console.log(this.listOfDay);
-      //     console.log(eachDayDetail);
-      //   },
-      //   error => {
-      //     console.log(error);
       //   }
       // );
     }
@@ -177,9 +168,6 @@ export class WorkingHourHDetailComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(["/CommonSetting/WorkingHour"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -190,9 +178,6 @@ export class WorkingHourHDetailComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(["/CommonSetting/WorkingHour"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     }

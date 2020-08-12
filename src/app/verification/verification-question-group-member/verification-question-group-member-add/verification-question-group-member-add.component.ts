@@ -11,6 +11,8 @@ import { VerfQuestionGrpDObj } from 'app/shared/model/VerfQuestionGrpDObj.Model'
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-verification-question-group-member-add',
@@ -24,6 +26,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   verfQuestionGrpDObj: VerfQuestionGrpDObj;
   VerfQuestionGrpHId: number;
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -35,7 +38,8 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   })
 
   ngOnInit() {
-    this.viewObj = "./assets/ucviewgeneric/viewVerifQuestGrpMbr.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVerifQuestGrpMbr.json";
+    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/verifQuestionGrpMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
@@ -70,9 +74,6 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListVerfQuestionAnswerId);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -83,7 +84,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
 
   SaveQuestionGroupMember() {
     if (this.listSelectedId.length == 0) {
-      this.toastr.errorMessage('Please Add At Least One Data');
+      this.toastr.errorMessage(ExceptionConstant.ADD_MIN_1_DATA);
       return;
     }
 
@@ -96,9 +97,6 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
       response => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(["/Verification/QuestionGroupMemberPaging"], { queryParams: { "VerfQuestionGrpHId": this.VerfQuestionGrpHId } });
-      },
-      error => {
-        console.log(error);
       }
     );
   }

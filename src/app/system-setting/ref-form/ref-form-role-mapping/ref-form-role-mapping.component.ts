@@ -11,6 +11,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-ref-form-role-mapping',
@@ -63,9 +64,6 @@ export class RefFormRoleMappingComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListRefRoleId);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -77,7 +75,7 @@ export class RefFormRoleMappingComponent implements OnInit {
 
   SaveListAuthForm() {
     if (this.listSelectedId.length == 0) {
-      this.toastr.errorMessage('Please Add At Least One Data');
+      this.toastr.errorMessage(ExceptionConstant.ADD_MIN_1_DATA);
       return;
     }
 
@@ -96,9 +94,6 @@ export class RefFormRoleMappingComponent implements OnInit {
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.router.navigate(['/SystemSetting/RefForm/RoleMapping'], { queryParams: { "RefFormId": this.RefFormId } });
-      },
-      (error) => {
-        console.log(error);
       });
   }
 }

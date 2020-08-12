@@ -51,9 +51,6 @@ export class ListOfficeMemberComponent implements OnInit {
     this.http.post(url, obj).subscribe(
       (response) => {
         this.resultData = response[CommonConstant.ReturnObj];
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -114,9 +111,6 @@ export class ListOfficeMemberComponent implements OnInit {
           var idx = this.resultData.findIndex(x => x.ProdBranchMbrId == ev.ProdBranchMbrId);
           if (idx > -1) this.resultData.splice(idx, 1);
           this.toastr.successMessage(response["message"]);
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -126,9 +120,6 @@ export class ListOfficeMemberComponent implements OnInit {
     this.http.post(environment.FoundationR3Url + "/Product/SubmitProduct", { ProdHId: this.ProdHId }).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-      },
-      (error) => {
-        console.log(error);
       }
     );
     this.toastr.successMessage("Submitted");

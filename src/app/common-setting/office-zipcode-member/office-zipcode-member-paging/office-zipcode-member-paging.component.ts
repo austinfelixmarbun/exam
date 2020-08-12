@@ -47,7 +47,6 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("test");
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeZipcodeMember.json";
     this.inputObj.enviromentUrl = this.foundationUrl;
@@ -79,9 +78,6 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
         this.officeCode = response['returnObject']['officeCode'];
         this.officeName = response['returnObject']['officeName'];
         this.city = response['returnObject']['city'];
-      },
-      (error) => {
-        console.log(error);
       });
 
   }
@@ -143,10 +139,6 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response['message']);
           this.searchPagination(this.pageNow);
-        },
-        (error) => {
-          console.log("Error");
-          console.log(error);
         });
     }
   }

@@ -17,8 +17,6 @@ export class UcSubsectionComponent implements OnInit {
     @Inject(DOCUMENT) private _document) { }
 
   ngOnInit() {
-    console.log(this.title);
-    console.log(this.panel);
     let js = this._renderer2.createElement('script');
     js.text = `
           $(document).ready(function(){

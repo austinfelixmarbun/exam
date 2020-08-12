@@ -1,5 +1,5 @@
 {
-    "title": "Office Area Search",
+    "title": "Office List Search",
     "keyProperty": "RefOfficeId",
     "keyPropCriteria": "REF_OFFICE_ID",
     "component": [

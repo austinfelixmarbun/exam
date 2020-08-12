@@ -12,6 +12,7 @@ import { URLConstant } from "app/shared/constant/URLConstant";
 import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
 import { UcTempPagingObj } from "app/shared/model/TempPaging/UcTempPagingObj.model";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
+import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
 
 @Component({
   selector: 'app-role-form',
@@ -64,9 +65,6 @@ export class RoleFormComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListRefFormId);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -77,7 +75,7 @@ export class RoleFormComponent implements OnInit {
 
   SaveListAuthForm() {
     if (this.listSelectedId.length == 0) {
-      this.toastr.errorMessage('Please Add At Least One Data');
+      this.toastr.errorMessage(ExceptionConstant.ADD_MIN_1_DATA);
       return;
     }
 
@@ -96,9 +94,6 @@ export class RoleFormComponent implements OnInit {
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.router.navigate(['/SystemSetting/RoleForm'], { queryParams: { "RefRoleId": this.RefRoleId } });
-      },
-      (error) => {
-        console.log(error);
       });
   }
 }

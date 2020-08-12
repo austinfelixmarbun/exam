@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { VendorService } from 'app/vendor/vendor.service';
 
 @Component({
   selector: 'app-vendor-ho-registration',
@@ -12,8 +13,9 @@ export class VendorHoRegistrationComponent implements OnInit {
   HiddenState: boolean = true;
   mode: string;
   VendorContactPersonId:any;
+  MrVendorCategoryCode: string = "";
 
-  constructor(private route: ActivatedRoute) { 
+  constructor(private route: ActivatedRoute, private vendorService: VendorService) { 
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
     });
@@ -22,6 +24,12 @@ export class VendorHoRegistrationComponent implements OnInit {
   ngOnInit() {
     this.VendorId = this.objPassing["VendorId"];
     this.objPassing["Type"]="Vendor";
+
+    this.vendorService.GetVendorAndVendorAddrByVendorId({ VendorId: this.VendorId }).subscribe(
+      (response) => {
+        this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"];
+      }
+    );
   }
 
   outputValue(ev){

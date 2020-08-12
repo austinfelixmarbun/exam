@@ -13,7 +13,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 })
 
 export class AssetDocumentMasterAddEditComponent implements OnInit {
-  pageType: string;
+  pageType: string = 'add';
   RefAssetDocId: number;
   result: RefAssetDocObj = new RefAssetDocObj();
   refAssetObj: RefAssetDocObj = new RefAssetDocObj();
@@ -46,9 +46,6 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
             AssetDocName: this.result.AssetDocName,
             IsActive: this.result.IsActive
           })
-        },
-        (error) => {
-          console.log(error);
         });
     }
   }
@@ -64,9 +61,6 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/DocumentMaster/Paging"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -80,9 +74,6 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/DocumentMaster/Paging"]);
-        },
-        error => {
-          console.log(error);
         });
     }
   }

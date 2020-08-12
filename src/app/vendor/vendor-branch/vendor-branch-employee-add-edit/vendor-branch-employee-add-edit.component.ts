@@ -27,7 +27,6 @@ export class VendorBranchEmployeeAddEditComponent implements OnInit {
   }
 
   outputValue(ev){
-    console.log("TESST")
     this.VendorEmpId = ev;
     this.objPassing["VendorEmpId"] = this.VendorEmpId;
     this.objPassing["mode"] = "edit";

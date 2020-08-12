@@ -91,7 +91,6 @@ export class UcSearchComponent implements OnInit {
 
   initiateForm() {
     this.getJSON(this.searchInput._url).subscribe(data => {
-      console.log(data);
       this.configuration = data;
       this.urlGet = data.url;
       this.exportData = data.exportExcel;
@@ -269,7 +268,6 @@ export class UcSearchComponent implements OnInit {
         response: response,
         pageNow: pageNo
       }
-      console.log(qryPaging);
       this.result.emit(qryPaging);
       return response;
     });
@@ -314,9 +312,6 @@ export class UcSearchComponent implements OnInit {
       response => {
         this.ExcelData = response["Data"];
         this.excelService.exportAsExcelFile(this.ExcelData, 'sample');
-      },
-      (error) => {
-        console.log(error);
       });
   }
 

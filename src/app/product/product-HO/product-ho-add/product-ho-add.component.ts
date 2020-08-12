@@ -18,7 +18,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 export class ProductHOAddComponent implements OnInit {
 
   param: any;
-  mode: string = "add";
+  mode: string = 'add';
   key: any;
   criteria: CriteriaObj[] = [];
   source:string="";
@@ -54,7 +54,6 @@ export class ProductHOAddComponent implements OnInit {
     })
   }
 
-
   ResultResponse: any;
   ngOnInit() {
     if (this.mode == "edit") {
@@ -72,9 +71,6 @@ export class ProductHOAddComponent implements OnInit {
             StartDt: formatDate(this.ResultResponse.StartDt, 'yyyy-MM-dd', 'en-US'),
             EndDt: formatDate(this.ResultResponse.EndDt, 'yyyy-MM-dd', 'en-US')
           });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -123,9 +119,6 @@ export class ProductHOAddComponent implements OnInit {
             (response) => {
               this.toastr.successMessage(response["message"]);
               this.BackToPaging();
-            },
-            (error) => {
-              console.log(error);
             }
           );
         }
@@ -137,9 +130,6 @@ export class ProductHOAddComponent implements OnInit {
             (response) => {
               this.toastr.successMessage(response["message"]);
               this.BackToPaging();
-            },
-            (error) => {
-              console.log(error);
             }
           );
         }
@@ -157,9 +147,6 @@ export class ProductHOAddComponent implements OnInit {
             (response) => {
               this.toastr.successMessage(response["message"]);
               this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": response["DraftProdHId"], "ProdId" : response["ProdId"], "mode": this.mode, source : this.source } });
-            },
-            (error) => {
-              console.log(error);
             }
           );
         }
@@ -171,9 +158,6 @@ export class ProductHOAddComponent implements OnInit {
             (response) => {
               this.toastr.successMessage(response["message"]);
               this.router.navigate(["/Product/HOadddetail"], { queryParams: { "ProdHId": response["DraftProdHId"],"ProdId" : response["ProdId"], "mode": this.mode, source : this.source } });
-            },
-            (error) => {
-              console.log(error);
             }
           );
         }

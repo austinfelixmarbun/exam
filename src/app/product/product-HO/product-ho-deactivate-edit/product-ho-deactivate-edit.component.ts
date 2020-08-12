@@ -63,14 +63,10 @@ export class ProductHODeactivateEditComponent implements OnInit {
     var obj = { RefReasonTypeCode: CommonConstant.RefReasonTypeCodeProdDeactivate };
     this.http.post(this.getValueReasonModel, obj).subscribe(
       (response) => {
-        console.log(response);
         this.allRefReasonMethod = response[CommonConstant.ReturnObj];
         if (this.allRefReasonMethod.length > 0) {
           this.ProdHDeactForm.patchValue({ Reason: response[CommonConstant.ReturnObj][0]['Key'] });
         }
-      },
-      (error) => {
-        console.log(error);
       });
 
     this.ProdOfferingObj = new ProdOfferingVersionObj
@@ -78,12 +74,7 @@ export class ProductHODeactivateEditComponent implements OnInit {
     this.ProdOfferingObj.ProdOfferingStat = 'ACT';
     this.http.post(this.prodOfferVerUrl, this.ProdOfferingObj).subscribe(
       response => {
-        console.log("Response: ");
-        console.log(response);
         this.ProdOfferVer = response[CommonConstant.ReturnObj];
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -100,9 +91,6 @@ export class ProductHODeactivateEditComponent implements OnInit {
       response => {
         this.toastr.successMessage(response["message"]);
         this.router.navigate(["/Product/HODeactivate"]);
-      },
-      error => {
-        console.log(error);
       }
     );
   }

@@ -71,9 +71,6 @@ export class ScoreCategoryTypeComponent implements OnInit {
             IsActive: response["IsActive"],
             RowVersion: response["RowVersion"]
           });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

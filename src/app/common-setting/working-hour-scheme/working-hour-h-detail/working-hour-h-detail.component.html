@@ -4,7 +4,7 @@
       <div class="card-header header-title">
         <div class="row">
           <div class="col-md-8">
-            <!-- <h4 class="card-title" id="horz-layout-colored-controls" translate> WORKING HOUR SCHEME {{pageType}} </h4> -->
+            <h4 class="form-section card-title" translate>Working Hour Scheme</h4>
           </div>
         </div>
       </div>
@@ -12,7 +12,8 @@
         <form class="form form-horizontal" [formGroup]="WorkingHourSchmHForm" (ngSubmit)="WorkingHourSchmHForm.valid && SaveForm()"
         #enjiForm="ngForm">
           <div class="form-body">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i> Working Hour Scheme - {{pageType}} </h4>
+            <lib-ucSubsection [id]="'WorkingHourSchmId'" [title]="'Working Hour Scheme '+ pageType" [panel]="'WorkingHourSchm'"></lib-ucSubsection>
+            <div class="form-body" id="WorkingHourSchm">
             <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" translate>Working Hour Scheme Code </label>
               <div class="col-md-9">
@@ -35,6 +36,7 @@
                 <input class="border-primary" type="checkbox" data-md-icheck
                 formControlName="IsActive">
               </div>
+            </div>
             </div>
           <div class="form-actions right">
             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/CommonSetting/WorkingHour']" translate>

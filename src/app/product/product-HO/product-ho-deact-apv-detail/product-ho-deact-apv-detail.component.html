@@ -1,4 +1,17 @@
-<h4 class="form-section card-title" translate><i class="ft-file-text"></i> Product Deactivate Approval</h4>
-<lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
-<br />
-<lib-ucapproval [inputObj]="inputObj"  [showCancel]="'true'" (onCancel)="onCancelClick()" (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)"></lib-ucapproval>
+<div class="row text-left">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header header-title">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4 class="form-section card-title" translate>Product Deactivate Approval</h4>
+                    </div>
+                </div>
+            </div>
+            <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
+            <br />
+            <lib-ucapproval [inputObj]="inputObj" [showCancel]="'true'" (onCancel)="onCancelClick()"
+                (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)"></lib-ucapproval>
+        </div>
+    </div>
+</div>

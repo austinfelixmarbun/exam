@@ -59,15 +59,12 @@ export class MasterAddEditComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log('masuk');
     this.GetListMasterType();
     if (this.type == 'edit') {
       this.refMasterObj.RefMasterId = this.RefMasterId;
       var getRefMasterUrl = this.settingUrl + URLConstant.GetRefMasterByRefMasterId;
       this.httpClient.post(getRefMasterUrl, this.refMasterObj).subscribe(
         (response) => {
-          console.log('Success Get');
-          console.log(JSON.stringify(response));
           this.resultData = response;
           this.RefMasterForm.patchValue({
             RefMasterId: this.resultData.RefMasterId,
@@ -80,10 +77,6 @@ export class MasterAddEditComponent implements OnInit {
             IsDeletable: this.resultData.IsDeletable,
             IsSystem: this.resultData.IsSystem
           });
-        },
-        (error) => {
-          console.log('Error Get');
-          console.log(error);
         }
       );
     }
@@ -103,12 +96,10 @@ export class MasterAddEditComponent implements OnInit {
       this.httpClient.post(addRefMasterUrl, this.refMasterObj).subscribe(
         //SAVE
         (response) => {
-          console.log("Success Save");
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(['/CommonSetting/Master']);
         },
         (error) => {
-          console.log("Error Save : ");
           this.toastr.typeErrorCustom(error);
         }
       );
@@ -119,13 +110,11 @@ export class MasterAddEditComponent implements OnInit {
       //SAVE
       this.httpClient.post(addRefMasterUrl, this.refMasterObj).subscribe(
         (response) => {
-          console.log("Success Edit");
           this.toastr.successMessage(response["Message"]);
           this.location.back();
           this.spinner.hide();
         },
         (error) => {
-          console.log("Error Edit");
           this.toastr.typeErrorCustom(error);
           this.spinner.hide();
         }
@@ -138,9 +127,6 @@ export class MasterAddEditComponent implements OnInit {
     this.httpClient.post(url, null).subscribe(
       (response) => {
         this.refMasterTypeObj = response;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

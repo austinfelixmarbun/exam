@@ -58,10 +58,6 @@ export class UserChangePasswordComponent implements OnInit {
         this.httpClient.post(getEmpUrl, this.refEmpObj).subscribe(response => {
           this.refEmpObj = response["returnObject"];
         });
-      },
-      error => {
-        console.log("Error Get");
-        console.log(error);
       }
     );
   }
@@ -72,7 +68,6 @@ export class UserChangePasswordComponent implements OnInit {
 
   Save(UserAddEditForm: NgForm): void {
     this.spinner.show();
-    console.log(UserAddEditForm.value);
     if (
       UserAddEditForm.value.NewPassword != UserAddEditForm.value.NewRePassword
     ) {

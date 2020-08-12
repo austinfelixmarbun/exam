@@ -80,11 +80,9 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
     this.DuplicateCustObj.CustName = this.CustName;
     this.DuplicateCustObj.MrCustTypeCode = RefMasterConstant.Company;
     this.DuplicateCustObj.TaxIdNo = this.TaxIdNo;
-    console.log(this.DuplicateCustObj);
     this.http.post(URLConstant.GetCustomerAndNegativeCustDuplicateCheck, this.DuplicateCustObj).subscribe(
       (response) => {
         this.DuplicateStatus = response["Status"];
-        console.log(this.DuplicateStatus);
         if (this.DuplicateStatus != null && this.DuplicateStatus != undefined) {
           this.ResultDuplicate = response[CommonConstant.ReturnObj]["CustDuplicate"];
           this.ResultDuplicateNegative = response[CommonConstant.ReturnObj]["NegativeCustDuplicate"];
@@ -158,9 +156,6 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
         this.resultData = response;
         this.CustId = this.resultData.CustObj.CustId;
         this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.CustId, 'From': 'CustPaging' } });
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -193,14 +188,8 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
         this.http.post(URLConstant.EditDuplicateCust, this.addCustObj).subscribe(
           () => {
             this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId, 'From': 'CustPaging' } });
-          },
-          error => {
-            console.log(error);
           }
         );
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -232,14 +221,8 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
           (response) => {
             var custId = response['CustId'];
             this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { 'IdCust': custId, 'From': 'CustPaging' } });
-          },
-          error => {
-            console.log(error);
           }
         );
-      },
-      error => {
-        console.log(error);
       }
     );
   }

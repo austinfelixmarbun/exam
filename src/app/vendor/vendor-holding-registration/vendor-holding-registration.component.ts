@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { VendorService } from '../vendor.service';
 
 @Component({
   selector: 'app-vendor-holding-registration',
@@ -17,8 +20,9 @@ export class VendorHoldingRegistrationComponent implements OnInit {
   show : boolean = false;
   ButtonText : string = "Back";
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  MrVendorCategoryCode: string = "";
   
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private http : HttpClient, private vendorService: VendorService) {
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
     });
@@ -30,6 +34,12 @@ export class VendorHoldingRegistrationComponent implements OnInit {
 
     this.VendorId = this.objPassing["VendorId"];
     this.objPassing["Type"]="Vendor";
+
+    this.vendorService.GetVendorAndVendorAddrByVendorId({ VendorId: this.VendorId }).subscribe(
+      (response) => {
+        this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"];
+      }
+    );
   }
 
   outputValue(ev){
