@@ -42,6 +42,8 @@ export class NegativeCustomerDetailComponent implements OnInit {
   businessDate: any;
   businessDateIdExp: any;
   tempKTPCheck: boolean;
+  TempCustType: any;
+  TempGender : any;
   NegativeCustForm = this.fb.group({
     NegativeCustId: [0, [Validators.required]],
     CustId: [0],
@@ -213,6 +215,29 @@ export class NegativeCustomerDetailComponent implements OnInit {
     this.inputLookupCustCompanyObj.addCritInput = criteriaList;
     this.inputLookupCustCompanyObj.isRequired = false;
 
+    console.log("aaa");
+    var RefMasterTypeCodeCustType = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustType
+    }
+    var RefMasterTypeCodeGender = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender
+    }
+    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterTypeCodeCustType).subscribe(
+      (response) => {
+        this.TempCustType = response[CommonConstant.ReturnObj];
+      });
+
+  
+    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterTypeCodeGender).subscribe(
+      (response) => {
+        this.TempGender = response[CommonConstant.ReturnObj];
+        if (this.TempGender.length > 0) {
+          this.NegativeCustForm.patchValue({ MrGenderCode: response[CommonConstant.ReturnObj][0]['Key'] });
+        }
+      });
+
+
+
     if (this.pageType == "edit") {
       var negativeCustObj = new NegativeCustObj();
       negativeCustObj.NegativeCustId = this.negativeCustId;
@@ -317,15 +342,12 @@ export class NegativeCustomerDetailComponent implements OnInit {
             this.NegativeCustForm.controls.CustName.enable();
 
           if (this.custType.toUpperCase() == CommonConstant.CustomerPersonal.toUpperCase()) {
-            if (this.NegativeCustForm.controls.MrIdTypeCode.value == '' || this.NegativeCustForm.controls.MrIdTypeCode.value == null)
-            {
+            if (this.NegativeCustForm.controls.MrIdTypeCode.value == '' || this.NegativeCustForm.controls.MrIdTypeCode.value == null) {
               this.NegativeCustForm.controls.MrIdTypeCode.enable();
               this.NegativeCustForm.controls.IdExpiredDt.enable();
             }
-            else
-            {
-              if (this.NegativeCustForm.controls.MrIdTypeCode.value == RefMasterConstant.EKtp)
-              {
+            else {
+              if (this.NegativeCustForm.controls.MrIdTypeCode.value == RefMasterConstant.EKtp) {
                 if (this.NegativeCustForm.controls.IdExpiredDt.value == '' || this.NegativeCustForm.controls.IdExpiredDt.value == null)
                   this.NegativeCustForm.controls.IdExpiredDt.disable();
               }
@@ -450,8 +472,9 @@ export class NegativeCustomerDetailComponent implements OnInit {
           MrCustTypeCode: selected,
           MrIdTypeCode: this.refMasterIdType.ReturnObject[0].Key,
           MrNegCustTypeCode: this.negativeTypeList.ReturnObject[0].Key,
-          MrNegCustSourceCode: this.negativeSourceList.ReturnObject[0].Key
-        });
+          MrNegCustSourceCode: this.negativeSourceList.ReturnObject[0].Key,
+          MrGenderCode: this.TempGender[0].Key 
+        }); 
       });
   }
 
