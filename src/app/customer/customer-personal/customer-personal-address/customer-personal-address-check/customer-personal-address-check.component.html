@@ -38,7 +38,7 @@
       <tr *ngFor="let item of listCustAddr">
         <td style="text-align: left;" hidden>{{item.CustAddrId}}</td>
         <td style="text-align: left;">{{item.MrCustAddrTypeCode}}</td>
-        <td style="text-align: left;">{{item.FullAddr}}</td>
+        <td style="text-align: left;">{{item.Addr}}</td>
         <td style="text-align: left;">{{item.MrBuildingOwnershipCode}}</td>
         <td style="text-align: left;">{{item.PhnArea1}}-{{item.Phn1}}-{{item.PhnExt1}}</td>
         <td style="text-align: left;">{{item.PhnArea2}}-{{item.Phn2}}-{{item.PhnExt2}}</td>
@@ -48,11 +48,6 @@
           <a [hidden]="item.MrCustAddrTypeCode == 'LEGAL' && From == 'CustPaging'" (click)="editItem(item)">
             <i class="fa fa-pen"></i>
           </a>
-          <!-- &nbsp;&nbsp;&nbsp;
-          <a *ngIf="item.MrCustAddrTypeCode != 'Legal Address'"
-            (click)="deleteItem(item)">
-            <i class="fa fa-trash"></i>
-          </a> -->
         </td>
       </tr>
     </tbody>

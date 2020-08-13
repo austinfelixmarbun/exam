@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
@@ -31,7 +31,7 @@ export class AddressComponent implements OnInit {
 
   AddressForm = this.fb.group({
     MrAddrTypeCode: [''],
-    Addr: [''],
+    Addr: ['', Validators.required],
     Zipcode: [''],
     AreaCode2: [''], //kelurahan
     AreaCode1: [''], //kecamatan

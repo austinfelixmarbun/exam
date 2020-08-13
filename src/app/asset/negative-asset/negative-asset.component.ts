@@ -24,6 +24,14 @@ export class NegativeAssetComponent implements OnInit {
       {
         name: "A.MR_NEG_ASSET_SOURCE_CODE",
         environment: environment.FoundationR3Url
+      },
+      {
+        name: "ATH.ASSET_TYPE_CODE",
+        environment: environment.FoundationR3Url
+      },
+      {
+        name: "AC.ASSET_CATEGORY_CODE",
+        environment: environment.FoundationR3Url
       }
     ];
 

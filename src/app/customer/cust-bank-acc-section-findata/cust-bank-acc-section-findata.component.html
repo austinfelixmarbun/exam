@@ -1,12 +1,10 @@
+<span class="mr-1 pull-right">
+  <button type="button" class="addButton" (click)="custBankHandler('add', '0')" style="margin-right: 0!important;" translate>
+    <i class="ft-plus-circle"></i> Add
+  </button>
+</span>
 <lib-ucSubsection [id]="'CustBankAccId'" [title]="'Customer Bank Account'" [panel]="'CustBankAccSection'"></lib-ucSubsection>
 <div id="CustBankAccSection">
-  <div style="text-align: right;">
-    <span class="mr-1">
-      <button type="button" class="addButton" (click)="custBankHandler('add', '0')" style="margin-right: 0!important;" translate>
-        <i class="ft-plus-circle"></i> Add
-      </button>
-    </span>
-  </div>
   <div class="col-md-12" style="padding: 0;">
     <div class="col-md-12" *ngFor="let item of cbaFinDataList" style="padding: 0; margin-top: 20px;">
       <div class="col-md-12" style="padding: 0;">

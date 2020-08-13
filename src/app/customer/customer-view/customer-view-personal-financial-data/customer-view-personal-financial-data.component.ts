@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-customer-view-personal-financial-data',
@@ -10,7 +11,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 export class CustomerViewPersonalFinancialDataComponent implements OnInit {
   CustId: number;
   GetCBAForCustFinDataByCustIdUrl = URLConstant.GetCBAForCustFinDataByCustId;
-  viewCustFinData =   "./assets/ucviewgeneric/viewCustFinData.json";
+  viewCustFinData: any;
   responseCBAObj: any;
   allBankStmntList : any;
 
@@ -26,6 +27,9 @@ export class CustomerViewPersonalFinancialDataComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
+    this.viewCustFinData.viewInput =   "./assets/ucviewgeneric/viewCustFinData.json";
+    this.viewCustFinData.viewEnvironment = environment.FoundationR3Url;
+    
     var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetCBAForCustFinDataByCustIdUrl, custAddrObj).subscribe(
       response => {

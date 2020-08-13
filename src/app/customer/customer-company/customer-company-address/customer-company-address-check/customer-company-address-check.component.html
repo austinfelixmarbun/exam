@@ -1,14 +1,9 @@
-<div class="ucSearch-Button-Right">
-  <span class="mr-1">
+<div class="addEdit">
+  <span class="mr-1 pull-right">
     <button type="button" class="addButton" (click)="addAddr()" translate>
       <i class="ft-plus-circle"></i> Add
     </button>
   </span>
-</div>
-<br>
-<br>
-<br>
-<div class="addEdit">
   <table class="table table-responsive-md text-center table-hover">
     <thead>
       <tr class="table-header">
@@ -39,7 +34,7 @@
       <tr *ngFor="let item of listCustAddr">
         <td style="text-align: left;" hidden>{{item.CustAddrId}}</td>
         <td style="text-align: left;">{{item.MrCustAddrTypeCode}}</td>
-        <td style="text-align: left;">{{item.FullAddr}}</td>
+        <td style="text-align: left;">{{item.Addr}}</td>
         <td style="text-align: left;">{{item.MrBuildingOwnershipCode}}</td>
         <td style="text-align: left;">{{item.PhnArea1}}-{{item.Phn1}}-{{item.PhnExt1}}</td>
         <td style="text-align: left;">{{item.PhnArea2}}-{{item.Phn2}}-{{item.PhnExt2}}</td>

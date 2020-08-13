@@ -8,6 +8,7 @@ import { FormBuilder } from '@angular/forms';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-customer-view-address',
@@ -28,7 +29,7 @@ export class CustomerViewAddressComponent implements OnInit {
   CustForm = this.fb.group({
     DdlAddress: ['']
   });
-  viewCustFinData: string;
+  viewCustFinData: any;
   GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
   GetCustByCustIdUrl = URLConstant.GetCustByCustId;
   CustType: any;
@@ -49,6 +50,8 @@ export class CustomerViewAddressComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
+    this.viewCustFinData.viewInput =   "./assets/ucviewgeneric/viewCustFinData.json";
+    this.viewCustFinData.viewEnvironment = environment.FoundationR3Url;
     var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {

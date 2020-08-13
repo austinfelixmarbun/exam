@@ -100,7 +100,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     RowVersionVendor: [''],
     RowVersionVendorAddr: [''],
     IsNpwpExist: [false],
-    VendorAtpmCode: [{ value: '' }]
+    VendorAtpmCode: []
   })
 
   ngOnInit() {
