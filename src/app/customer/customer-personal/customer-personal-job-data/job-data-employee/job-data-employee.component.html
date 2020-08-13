@@ -108,7 +108,7 @@
             <div class="form-group row">
               <label class="col-md-2 adInsLabel" translate>Previous Company Name </label>
               <div class="col-md-4">
-                <input type="text" class="form-control adInsInput" formControlName="PreviIndustryName" required
+                <input type="text" class="form-control adInsInput" formControlName="PreviIndustryName"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.PreviIndustryName.invalid }">
                 <lib-uc-show-errors [control]="JobDataEmpForm.controls.PreviIndustryName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
@@ -116,7 +116,7 @@
           <div class="form-group row">
             <label class="col-md-2 adInsLabel" translate>Previous Employment Date </label>
             <div class="col-md-4">
-              <input type="date" id="previEmploymentDate" class="form-control adInsInput" formControlName="PreviEmploymentDate" [max]="businessDtMin | date: 'yyyy-MM-dd'" required
+              <input type="date" id="previEmploymentDate" class="form-control adInsInput" formControlName="PreviEmploymentDate" [max]="businessDtMin | date: 'yyyy-MM-dd'"
                 [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.PreviEmploymentDate.invalid }">
               <lib-uc-show-errors [control]="JobDataEmpForm.controls.PreviEmploymentDate" [submit]="enjiForm.submitted"></lib-uc-show-errors>
             </div>
