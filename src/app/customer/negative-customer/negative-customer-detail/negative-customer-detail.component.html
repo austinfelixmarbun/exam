@@ -15,13 +15,12 @@
             <div class="form-group row">
               <label class="col-md-3 adInsLabel" for="MrCustTypeCode" translate>Customer Type</label>
               <div class="col-md-9">
-                <select class="form-control adInsInput" formControlName="MrCustTypeCode"
-                  (change)="custTypeHandler($event)"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.MrCustTypeCode.invalid }"
-                  [attr.disabled]="pageType == 'edit' ? true : null">
-                  <option value="PERSONAL">Personal</option>
-                  <option value="COMPANY">Company</option>
-                </select>
+                <select class="form-control" style="width: auto" formControlName="MrCustTypeCode" (change)="custTypeHandler($event)"
+                [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.MrCustTypeCode.invalid }"  [attr.disabled]="pageType == 'edit' ? true : null">
+                <option *ngFor="let it of TempCustType" value="{{it.Key}}">
+                  {{it.Value}}</option>
+              </select>
+
                 <lib-uc-show-errors [control]="NegativeCustForm.controls.MrCustTypeCode" [submit]="enjiForm.submitted">
                 </lib-uc-show-errors>
               </div>
@@ -93,12 +92,11 @@
               <div class="form-group row" *ngIf="custType == 'PERSONAL'">
                 <label class="col-md-3 adInsLabel" for="gender" translate>Gender</label>
                 <div class="col-md-9">
-                  <select class="form-control adInsInput" formControlName="MrGenderCode"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.MrGenderCode.invalid }"
-                    [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null">
-                    <option [value]="'MALE'">Male</option>
-                    <option [value]="'FEMALE'">Female</option>
-                  </select>
+                  <select class="form-control" style="width: auto" formControlName="MrGenderCode"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && NegativeCustForm.controls.MrGenderCode.invalid }"   [attr.disabled]="pageType == 'edit' || isFromLookup ? true : null">
+                  <option *ngFor="let it of TempGender" value="{{it.Key}}">
+                    {{it.Value}}</option>
+                </select>
                 </div>
               </div>
               <div class="form-group row" *ngIf="custType == 'PERSONAL'">
