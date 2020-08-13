@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-customer-view',
@@ -28,8 +29,11 @@ export class CustomerViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.viewCustMainInfoHeaderObj =  "./assets/ucviewgeneric/viewCustMainInfoHeader.json";
-    this.viewCustCoyMainInfoHeader =  "./assets/ucviewgeneric/viewCustCoyMainInfoHeader.json";
+    this.viewCustMainInfoHeaderObj.viewInput = "./assets/ucviewgeneric/viewCustMainInfoHeader.json";
+    this.viewCustMainInfoHeaderObj.viewEnvironment = environment.FoundationR3Url;
+
+    this.viewCustCoyMainInfoHeader.viewInput = "./assets/ucviewgeneric/viewCustCoyMainInfoHeader.json";
+    this.viewCustCoyMainInfoHeader.viewEnvironment = environment.FoundationR3Url;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];

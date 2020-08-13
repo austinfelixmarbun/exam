@@ -84,7 +84,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeCustCompanyRelationship = "CUST_COMPANY_RELATIONSHIP";
     public static RefMasterTypeCodeCustPersonalRelationship = "CUST_PERSONAL_RELATIONSHIP";
     public static RefMasterTypeCodeCustRelationship = "CUST_RELATIONSHIP";
-
+    public static RefMasterTypeCodeCustType = "CUST_TYPE";
     public static RefMasterTypeCodeLegalDocType = "LEGAL_DOC_TYPE";
     public static RefMasterTypeCodeCustAddrType = "CUST_ADDR_TYPE";
     public static RefMasterTypeCodeAddrType = "ADDR_TYPE";
