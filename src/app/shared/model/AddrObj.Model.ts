@@ -17,7 +17,7 @@ export class AddrObj {
     FaxArea: any;
     Fax: any;
     MrHouseOwnershipCode: any;
-
+    StayLength : any;
 constructor() { 
     this.Addr = '';
     this.AreaCode4 = '';
@@ -37,5 +37,6 @@ constructor() {
     this.FaxArea = '';
     this.Fax = '';
     this.MrHouseOwnershipCode = '';
+    this.StayLength = '';
  }
 }
