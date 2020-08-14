@@ -132,9 +132,11 @@ export class JobDataEmployeeComponent implements OnInit {
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.inputJobAddressObj = new InputFieldObj();
     this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
+
     this.inputOtherAddressObj = new InputFieldObj();
     this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
-
+    this.inputOtherAddressObj.inputLookupObj.isRequired = false;
+    
     this.professionLookUpObj = new InputLookupObj();
     this.professionLookUpObj.isRequired = false;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
@@ -395,11 +397,13 @@ export class JobDataEmployeeComponent implements OnInit {
       this.jobAddressObj = new CustAddrObj;
       this.otherAddressObj = new CustAddrObj;
       this.setCustJobData();
+      this.setJobAddr();
+      this.setOthBizAddr();
       this.custPersonalJobDataObj.OthBizAddrId = this.othBizAddrId
       this.custPersonalJobDataObj.JobAddrId = this.jobAddrId;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
-      this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
+      this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob; 
       this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.JobAddr = this.jobAddressObj;

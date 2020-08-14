@@ -131,7 +131,7 @@ export class JobDataSmeComponent implements OnInit {
     this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
     this.inputOtherAddressObj = new InputFieldObj();
     this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
-    
+    this.inputOtherAddressObj.inputLookupObj.isRequired = false;
     this.professionLookUpObj = new InputLookupObj();
     this.professionLookUpObj.isRequired = true;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
@@ -384,6 +384,8 @@ export class JobDataSmeComponent implements OnInit {
       this.jobAddressObj = new CustAddrObj;
       this.otherAddressObj = new CustAddrObj;
       this.setCustJobData();
+      this.setJobAddr();
+      this.setOthBizAddr();
       this.custPersonalJobDataObj.OthBizAddrId = this.othBizAddrId
       this.custPersonalJobDataObj.JobAddrId = this.jobAddrId;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
