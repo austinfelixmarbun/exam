@@ -12,7 +12,7 @@
             "property": "SupplierHo",
             "name": "LinkSupplierHO",
             "target": "_blank",
-            "path": "/Vendor/HO/View",
+            "path": "/View/VendorHO",
             "param": [
               {
                 "type": "VendorId",
