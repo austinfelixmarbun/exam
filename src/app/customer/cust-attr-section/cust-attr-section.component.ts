@@ -79,7 +79,7 @@ export class CustAttrSectionComponent implements OnInit {
         };
         custAttrRequest.push(custAttr);
       }
-      this.httpClient.post(url, custAttrRequest).pipe(first()).subscribe(
+      this.httpClient.post(url, { CustAttrContentObjs: custAttrRequest }).pipe(first()).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.outputTab.emit({ stepMode: "next"});
