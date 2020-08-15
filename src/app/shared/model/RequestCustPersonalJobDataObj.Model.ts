@@ -5,4 +5,5 @@ export class RequestCustPersonalJobDataObj {
     CustPersonalJobData : CustPersonalJobDataObj;
     JobAddr : CustAddrObj;
     OthBizAddr : CustAddrObj;
+    PreJobAddr : CustAddrObj;
 }  

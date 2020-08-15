@@ -149,6 +149,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
               this.addressObj.FaxArea = this.getCustomerAddr.FaxArea;
               this.addressObj.Fax = this.getCustomerAddr.Fax;
               this.addressObj.MrHouseOwnershipCode = this.getCustomerAddr.MrBuildingOwnershipCode;
+              this.addressObj.StayLength = this.getCustomerAddr.StayLength;
 
               this.inputFieldAddressObj = new InputFieldObj();
               this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
@@ -188,7 +189,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           this.addressObj.FaxArea = this.copyCustomerAddrFrom.FaxArea;
           this.addressObj.Fax = this.copyCustomerAddrFrom.Fax;
           this.addressObj.MrHouseOwnershipCode = this.copyCustomerAddrFrom.MrBuildingOwnershipCode;
-
+          this.addressObj.StayLength = this.copyCustomerAddrFrom.StayLength;
           this.inputFieldAddressObj = new InputFieldObj();
           this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
           this.inputFieldAddressObj.inputLookupObj.nameSelect = this.copyCustomerAddrFrom.Zipcode;
@@ -220,6 +221,9 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.custAddressObj.FaxArea = this.CustDataPersonalForm.controls["custAddress"]["controls"].FaxArea.value;
     this.custAddressObj.Fax = this.CustDataPersonalForm.controls["custAddress"]["controls"].Fax.value;
     this.custAddressObj.MrBuildingOwnershipCode = this.CustDataPersonalForm.controls["custAddress"]["controls"].MrHouseOwnershipCode.value;
+    if(this.custAddressObj.MrCustAddrTypeCode == 'RESIDENCE' || this.custAddressObj.MrCustAddrTypeCode == 'LEGAL' ){
+      this.custAddressObj.StayLength = this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.value;
+    }
     this.custAddressObj.Notes = this.CustDataPersonalForm.controls["Notes"].value;
   }
 
