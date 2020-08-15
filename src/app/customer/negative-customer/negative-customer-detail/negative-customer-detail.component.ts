@@ -215,7 +215,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
     this.inputLookupCustCompanyObj.addCritInput = criteriaList;
     this.inputLookupCustCompanyObj.isRequired = false;
 
-    console.log("aaa");
     var RefMasterTypeCodeCustType = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustType
     }

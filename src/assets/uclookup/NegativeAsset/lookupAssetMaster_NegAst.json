@@ -26,8 +26,9 @@
         "datatype" : "text",
         "isSelectOne" : false,
         "items" : [],
+        "path": "/AssetType/GetListKeyValueActiveByCode",
         "isFromURL" : true, 
-        "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/AssetType/GetListKeyValueActiveByCode", 
+        "url" : "", 
         "itemsUrl" : []
       }
     ],

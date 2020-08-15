@@ -22,7 +22,6 @@
           <div class="col-md-3">
             <select class="form-control adInsInput" formControlName="CopyAddrFrom">
               <option *ngFor="let ram of listCustAddr" [value]="ram.CustAddrId">
-                {{ram.MrCustAddrTypeCode}}
               </option>
             </select>
           </div>
@@ -33,9 +32,12 @@
           </div>
         </div>
         <div id="CustMainDataPersonal">
-          <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Customer Address'"
+          <lib-ucaddress *ngIf="this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value =='RESIDENCE' || this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value =='LEGAL'" #UcAddrGrp [showSubsection]="false" [title]="'Customer Address'"
+          [UCAddrForm]="CustDataPersonalForm" [enjiForm]="enjiForm" [identifier]="'custAddress'"
+          [default]="addressObj" [inputField]="inputFieldAddressObj" [showOwnership]="true"  [showStayLength]="true"></lib-ucaddress>
+          <lib-ucaddress *ngIf="this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value !='RESIDENCE' && this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value !='LEGAL'" #UcAddrGrp [showSubsection]="false" [title]="'Customer Address'"
             [UCAddrForm]="CustDataPersonalForm" [enjiForm]="enjiForm" [identifier]="'custAddress'"
-            [default]="addressObj" [inputField]="inputFieldAddressObj" [showOwnership]="true" ></lib-ucaddress>
+            [default]="addressObj" [inputField]="inputFieldAddressObj" [showOwnership]="true"></lib-ucaddress>
         </div>
         <div class="form-group row">
           <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>

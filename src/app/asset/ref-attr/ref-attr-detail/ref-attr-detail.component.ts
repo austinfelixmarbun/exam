@@ -103,13 +103,13 @@ export class RefAttrDetailComponent implements OnInit {
           this.RefAttrForm.patchValue({...refAttr});
 
           switch (refAttr["AttrInputType"]) {
-            case 'T':
-              this.RefAttrForm.addControl("AttrValue", this.fb.control(refAttr["AttrValue"], [Validators.required]));
-              break;
+            // case 'T':
+            //   this.RefAttrForm.addControl("AttrValue", this.fb.control(refAttr["AttrValue"], [Validators.required]));
+            //   break;
             
-            case 'N':
-              this.RefAttrForm.addControl("AttrValue", this.fb.control(refAttr["AttrValue"], [Validators.required, Validators.pattern('^[0-9]+$')]));
-              break;
+            // case 'N':
+            //   this.RefAttrForm.addControl("AttrValue", this.fb.control(refAttr["AttrValue"], [Validators.required, Validators.pattern('^[0-9]+$')]));
+            //   break;
 
             case 'L':
               var valueList = refAttr["AttrValue"].split(";");
@@ -121,17 +121,17 @@ export class RefAttrDetailComponent implements OnInit {
               this.RefAttrForm.addControl("AttrValue", formArray);
               break;
 
-            case 'P':
-              this.RefAttrForm.addControl("AttrValue", this.fb.control(refAttr["AttrValue"], [Validators.required]));
-              break;
+            // case 'P':
+            //   this.RefAttrForm.addControl("AttrValue", this.fb.control(refAttr["AttrValue"], [Validators.required]));
+            //   break;
 
-            case 'D':
-              this.RefAttrForm.addControl("AttrValue", this.fb.control(datePipe.transform(refAttr["AttrValue"], "yyyy-MM-dd"), [Validators.required]));
-              break;
+            // case 'D':
+            //   this.RefAttrForm.addControl("AttrValue", this.fb.control(datePipe.transform(refAttr["AttrValue"], "yyyy-MM-dd"), [Validators.required]));
+            //   break;
 
-            case 'A':
-              this.RefAttrForm.addControl("AttrValue", this.fb.control(refAttr["AttrValue"], [Validators.required]));
-              break;
+            // case 'A':
+            //   this.RefAttrForm.addControl("AttrValue", this.fb.control(refAttr["AttrValue"], [Validators.required]));
+            //   break;
           
             default:
               break;
@@ -162,29 +162,29 @@ export class RefAttrDetailComponent implements OnInit {
     }
 
     switch (type) {
-      case 'T':
-        this.RefAttrForm.addControl("AttrValue", this.fb.control('', [Validators.required]));
-        break;
+      // case 'T':
+      //   this.RefAttrForm.addControl("AttrValue", this.fb.control('', [Validators.required]));
+      //   break;
       
-      case 'N':
-        this.RefAttrForm.addControl("AttrValue", this.fb.control('', [Validators.required, Validators.pattern('^[0-9]+$')]));
-        break;
+      // case 'N':
+      //   this.RefAttrForm.addControl("AttrValue", this.fb.control('', [Validators.required, Validators.pattern('^[0-9]+$')]));
+      //   break;
 
       case 'L':
         this.RefAttrForm.addControl("AttrValue", this.fb.array([]));
         break;
 
-      case 'P':
-        this.RefAttrForm.addControl("AttrValue", this.fb.control('', [Validators.required]));
-        break;
+      // case 'P':
+      //   this.RefAttrForm.addControl("AttrValue", this.fb.control('', [Validators.required]));
+      //   break;
 
-      case 'D':
-        this.RefAttrForm.addControl("AttrValue", this.fb.control('', [Validators.required]));
-        break;
+      // case 'D':
+      //   this.RefAttrForm.addControl("AttrValue", this.fb.control('', [Validators.required]));
+      //   break;
 
-      case 'A':
-        this.RefAttrForm.addControl("AttrValue", this.fb.control('', [Validators.required]));
-        break;
+      // case 'A':
+      //   this.RefAttrForm.addControl("AttrValue", this.fb.control('', [Validators.required]));
+      //   break;
 
       default:
         break;

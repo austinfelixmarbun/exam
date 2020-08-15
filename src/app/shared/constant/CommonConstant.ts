@@ -152,6 +152,7 @@ export class CommonConstant {
     public static CustAddrTypeResidence = "RESIDENCE";
     public static CustAddrTypeJob = "JOB";
     public static CustAddrTypeOthBiz = "OTH_BIZ";
+    public static CustAddrTypePreJob = "PREV_JOB";
 
 
     // ADDR TYPE 
