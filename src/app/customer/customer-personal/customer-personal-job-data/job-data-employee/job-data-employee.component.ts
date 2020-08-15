@@ -140,9 +140,11 @@ export class JobDataEmployeeComponent implements OnInit {
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.inputJobAddressObj = new InputFieldObj();
     this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
+
     this.inputOtherAddressObj = new InputFieldObj();
     this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
     this.inputOtherAddressObj.inputLookupObj.isRequired = false;
+    
     this.inputPreJobAddressObj =  new InputFieldObj();
     this.inputPreJobAddressObj.inputLookupObj = new InputLookupObj();
     this.inputPreJobAddressObj.inputLookupObj.isRequired = false;
@@ -476,12 +478,14 @@ export class JobDataEmployeeComponent implements OnInit {
       this.jobAddressObj = new CustAddrObj;
       this.otherAddressObj = new CustAddrObj;
       this.setCustJobData();
+      this.setJobAddr();
+      this.setOthBizAddr();
       this.custPersonalJobDataObj.OthBizAddrId = this.othBizAddrId
       this.custPersonalJobDataObj.JobAddrId = this.jobAddrId;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
       this.custPersonalJobDataObj.PrevJobAddrId = this.preJobAddrId;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
-      this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
+      this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob; 
       this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.jobAddressObj = new CustAddrObj;

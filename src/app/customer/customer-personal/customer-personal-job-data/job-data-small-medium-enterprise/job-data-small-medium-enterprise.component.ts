@@ -140,6 +140,7 @@ export class JobDataSmeComponent implements OnInit {
     this.inputOtherAddressObj = new InputFieldObj();
     this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
     this.inputOtherAddressObj.inputLookupObj.isRequired = false;
+    
     this.inputPreJobAddressObj =  new InputFieldObj();
     this.inputPreJobAddressObj.inputLookupObj = new InputLookupObj();
     this.inputPreJobAddressObj.inputLookupObj.isRequired = false;
@@ -465,6 +466,8 @@ export class JobDataSmeComponent implements OnInit {
       this.jobAddressObj = new CustAddrObj;
       this.otherAddressObj = new CustAddrObj;
       this.setCustJobData();
+      this.setJobAddr();
+      this.setOthBizAddr();
       this.custPersonalJobDataObj.OthBizAddrId = this.othBizAddrId
       this.custPersonalJobDataObj.JobAddrId = this.jobAddrId;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
