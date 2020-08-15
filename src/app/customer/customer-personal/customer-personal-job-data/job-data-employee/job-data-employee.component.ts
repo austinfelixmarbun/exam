@@ -145,6 +145,10 @@ export class JobDataEmployeeComponent implements OnInit {
     this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
     this.inputOtherAddressObj.inputLookupObj.isRequired = false;
     
+    this.inputPreJobAddressObj =  new InputFieldObj();
+    this.inputPreJobAddressObj.inputLookupObj = new InputLookupObj();
+    this.inputPreJobAddressObj.inputLookupObj.isRequired = false;
+
     this.professionLookUpObj = new InputLookupObj();
     this.professionLookUpObj.isRequired = false;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
