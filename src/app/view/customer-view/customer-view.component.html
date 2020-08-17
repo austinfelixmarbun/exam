@@ -1,0 +1,113 @@
+<!-- <div class="col-md-12"> -->
+	<div class="card">
+		<div class="card-body">
+			<div class="px-3">
+				<div class="form-body">
+					<h4 class="form-section card-title" *ngIf="custType == 'PERSONAL'" translate>CUSTOMER PERSONAL</h4>
+					<h4 class="form-section card-title" *ngIf="custType == 'COMPANY'" translate>CUSTOMER COMPANY</h4>
+					<div *ngIf="custType == 'PERSONAL'">
+						<app-customer-view-header-personal></app-customer-view-header-personal> 
+						<mat-tab-group>
+							<mat-tab label="Main Data">
+								<ng-template matTabContent>
+									<app-customer-view-personal-detail></app-customer-view-personal-detail>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Address">
+								<ng-template matTabContent>
+									<app-customer-view-address></app-customer-view-address>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Contact Person">
+								<ng-template matTabContent>
+									<app-customer-view-personal-contact-person></app-customer-view-personal-contact-person>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Customer Group">
+								<ng-template matTabContent>
+									<app-customer-view-customer-group></app-customer-view-customer-group>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Job Data">
+								<ng-template matTabContent>
+									<app-customer-view-personal-job-data *ngIf="custModel == 'PROF'">
+									</app-customer-view-personal-job-data>
+									<app-customer-view-personal-job-data-non-prof *ngIf="custModel == 'NONPROF'">
+									</app-customer-view-personal-job-data-non-prof>
+									<app-customer-view-personal-job-data-emp *ngIf="custModel == 'EMP'">
+									</app-customer-view-personal-job-data-emp>
+									<app-customer-view-personal-job-data-sme *ngIf="custModel == 'SME'">
+									</app-customer-view-personal-job-data-sme>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Financial Data">
+								<ng-template matTabContent>
+									<app-customer-view-personal-financial-data>
+									</app-customer-view-personal-financial-data>
+								</ng-template>
+							</mat-tab>
+							<!-- <mat-tab label="Other Attribute">
+									<ng-template matTabContent>
+										<app-customer-view-coy-other></app-customer-view-coy-other>
+									</ng-template>
+								  </mat-tab>   
+								  <mat-tab label="Application Listing">
+									<ng-template matTabContent>
+									  <app-customer-view-personal-app-listing *ngIf="isAppListing == true">
+									  </app-customer-view-personal-app-listing>
+									</ng-template>
+								  </mat-tab> -->
+						</mat-tab-group>
+	 
+	
+					</div>
+					<div *ngIf="custType == 'COMPANY'">
+						<app-customer-view-header-company></app-customer-view-header-company>
+						<mat-tab-group>
+							<mat-tab label="Main Data">
+								<ng-template matTabContent>
+									<app-customer-view-coy-detail></app-customer-view-coy-detail>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Address">
+								<ng-template matTabContent>
+									<app-customer-view-address></app-customer-view-address>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Management / Shareholder">
+								<ng-template matTabContent>
+									<app-customer-view-coy-management> </app-customer-view-coy-management>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Customer Group">
+								<ng-template matTabContent>
+									<app-customer-view-customer-group></app-customer-view-customer-group>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Contact Information">
+								<ng-template matTabContent>
+									<app-customer-view-coy-contact>
+									</app-customer-view-coy-contact>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Financial Data">
+								<ng-template matTabContent>
+									<app-customer-view-coy-financial></app-customer-view-coy-financial>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Legal Document">
+								<ng-template matTabContent>
+									<app-customer-view-coy-legal></app-customer-view-coy-legal>
+								</ng-template>
+							</mat-tab>
+							<!-- <mat-tab label="Other Attribute">
+									<ng-template matTabContent>
+										<app-customer-view-coy-other></app-customer-view-coy-other>
+									</ng-template>
+								  </mat-tab>  -->
+						</mat-tab-group>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> 

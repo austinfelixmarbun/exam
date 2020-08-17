@@ -179,7 +179,7 @@
             "type": "link",
             "position": "center",
             "property": "SrvyOrderNo",
-            "path": "/Survey/View",
+            "path": "/View/SurveyOrder",
             "target": "_blank",
             "param": [
                 {

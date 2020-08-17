@@ -141,7 +141,7 @@
       "type": "link",
       "position": "center",
       "property": "CurrentProdOfrVersion",
-      "path": "../../OfferingView",
+      "path": "/View/Offering",
       "target": "_blank",
       "param": [
           {
@@ -154,7 +154,7 @@
       "type": "link",
       "position": "center",
       "property": "DraftProdOfrVersion",
-      "path": "../../OfferingView",
+      "path": "/View/Offering",
       "target": "_blank",
       "param": [
           {

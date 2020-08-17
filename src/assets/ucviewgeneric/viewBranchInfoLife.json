@@ -12,7 +12,7 @@
             "property": "LifeHo",
             "name": "LinkLifeHO",
             "target": "_blank",
-            "path": "/Vendor/HO/View",
+            "path": "/View/VendorHO",
             "param": [
               {
                 "type": "VendorId",
