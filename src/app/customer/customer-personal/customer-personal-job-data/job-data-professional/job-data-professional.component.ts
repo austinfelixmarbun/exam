@@ -73,6 +73,7 @@ export class JobDataProfessionalComponent implements OnInit {
   });
   businessDtMin: Date;
   inputAddressObj: any;
+  inputPreviousAddressObj: InputAddressObj;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
@@ -189,7 +190,8 @@ export class JobDataProfessionalComponent implements OnInit {
                 this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
                 this.inputFieldAddressObj.inputLookupObj.nameSelect = this.getCustomerAddr.Zipcode;
                 this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getCustomerAddr.Zipcode };
-
+                this.inputAddressObj.default = this.addressObj;
+                this.inputAddressObj.inputField = this.inputFieldAddressObj;
               });
           }
           if (this.returnCustJobDataObj.PrevJobAddrId != null) {
@@ -228,6 +230,9 @@ export class JobDataProfessionalComponent implements OnInit {
                 this.inputPreJobAddressObj.inputLookupObj.nameSelect = this.getPreJobAddr.Zipcode;
                 this.inputPreJobAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getPreJobAddr.Zipcode };
 
+                this.inputPreviousAddressObj.default = this.preJobAddrObj;
+                this.inputPreviousAddressObj.inputField = this.inputPreJobAddressObj;
+
               });
           }
           this.preJobAddrId = this.returnCustJobDataObj.PrevJobAddrId;
@@ -243,9 +248,14 @@ export class JobDataProfessionalComponent implements OnInit {
       this.inputAddressObj.showSubsection = false;
       this.inputAddressObj.title = "Job Address";
       this.inputAddressObj.UCAddrForm = this.JobDataProForm;
-      this.inputAddressObj.default = this.addressObj;
-      this.inputAddressObj.inputField = this.inputFieldAddressObj;
       this.inputAddressObj.showOwnership = true;
+      
+      this.inputPreviousAddressObj = new InputAddressObj();
+      this.inputPreviousAddressObj.showSubsection = false;
+      this.inputPreviousAddressObj.isRequired = false;
+      this.inputPreviousAddressObj.title = "Previous Job Address";
+      this.inputPreviousAddressObj.UCAddrForm = this.JobDataProForm;
+      this.inputPreviousAddressObj.showOwnership = true;
   }
 
   setJobAddr() {

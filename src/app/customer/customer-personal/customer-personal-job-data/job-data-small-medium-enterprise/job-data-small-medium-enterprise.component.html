@@ -88,10 +88,10 @@
         </lib-ucSubsection>
         <div id="jobAddr">
           <div id="CustMainDataPersonal">
-            <!-- <lib-ucaddress #UcAddrGrp [addressObj]="inputAddressObjForJobAddr" [enjiForm]="enjiForm" [identifier]="'jobAddress'"></lib-ucaddress> -->
-            <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Job Address'" [UCAddrForm]="JobDataSmeForm"
+            <lib-ucaddress #UcAddrGrp [addressObj]="inputAddressObjForJobAddr" [enjiForm]="enjiForm" [identifier]="'jobAddress'"></lib-ucaddress>
+            <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Job Address'" [UCAddrForm]="JobDataSmeForm"
               [enjiForm]="enjiForm" [identifier]="'jobAddress'" [default]="addressObj" [inputField]="inputJobAddressObj"
-              [showOwnership]="true"></lib-ucaddress>
+              [showOwnership]="true"></lib-ucaddress> -->
           </div>
           <div class="form-group row">
             <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
@@ -126,8 +126,9 @@
         <lib-ucSubsection [id]="'prejobAddrId'" [title]="'Previous Job Address'" [panel]="'prejobAddr'">
         </lib-ucSubsection>
         <div id="prejobAddr">
-            <div> 
-                <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Previous Job Address'" [UCAddrForm]="JobDataSmeForm" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [default]="preJobAddrObj" [inputField]="inputPreJobAddressObj" [showOwnership]="true"></lib-ucaddress>
+            <div>
+                <lib-ucaddress #UcAddrGrp [addressObj]="inputPreviousAddressObj" [enjiForm]="enjiForm" [identifier]="'prejobAddress'"></lib-ucaddress>
+                <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Previous Job Address'" [UCAddrForm]="JobDataSmeForm" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [default]="preJobAddrObj" [inputField]="inputPreJobAddressObj" [showOwnership]="true"></lib-ucaddress> -->
             </div>
             <div class="form-group row">
                 <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
@@ -220,10 +221,10 @@
         </lib-ucSubsection>
         <div id="otherBusinessAddr">
           <div id="CustMainDataPersonal">
-            <!-- <lib-ucaddress #UcAddrGrp [addressObj]="inputAddressObjForOthBiz" [enjiForm]="enjiForm" [identifier]="'otherBusinessAddress'"></lib-ucaddress> -->
-            <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Other Business Address'"
+            <lib-ucaddress #UcAddrGrp [addressObj]="inputAddressObjForOthBiz" [enjiForm]="enjiForm" [identifier]="'otherBusinessAddress'"></lib-ucaddress>
+            <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Other Business Address'"
               [UCAddrForm]="JobDataSmeForm" [enjiForm]="enjiForm" [identifier]="'otherBusinessAddress'"
-              [default]="otherAddrObj" [inputField]="inputOtherAddressObj" [showOwnership]="true"></lib-ucaddress>
+              [default]="otherAddrObj" [inputField]="inputOtherAddressObj" [showOwnership]="true"></lib-ucaddress> -->
           </div>
           <div class="form-group row">
             <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>

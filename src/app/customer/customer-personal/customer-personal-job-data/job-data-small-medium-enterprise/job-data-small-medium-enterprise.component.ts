@@ -105,6 +105,7 @@ export class JobDataSmeComponent implements OnInit {
   businessDtMin: Date;
   inputAddressObjForJobAddr: any;
   inputAddressObjForOthBiz: InputAddressObj;
+  inputPreviousAddressObj: InputAddressObj;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     this.getCustById = URLConstant.GetCustByCustId;
@@ -135,6 +136,27 @@ export class JobDataSmeComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('test');
+    console.log('job data sme');
+    this.inputAddressObjForJobAddr = new InputAddressObj();
+    this.inputAddressObjForJobAddr.showSubsection = false;
+    this.inputAddressObjForJobAddr.title = "Job Address";
+    this.inputAddressObjForJobAddr.UCAddrForm = this.JobDataSmeForm;
+    this.inputAddressObjForJobAddr.showOwnership = true;
+    
+    this.inputAddressObjForOthBiz = new InputAddressObj();
+    this.inputAddressObjForOthBiz.showSubsection = false;
+    this.inputAddressObjForOthBiz.isRequired = false;
+    this.inputAddressObjForOthBiz.title = "Other Business Address";
+    this.inputAddressObjForOthBiz.UCAddrForm = this.JobDataSmeForm;
+    this.inputAddressObjForOthBiz.showOwnership = true;
+
+    this.inputPreviousAddressObj = new InputAddressObj();
+    this.inputPreviousAddressObj.showSubsection = false;
+    this.inputPreviousAddressObj.isRequired = false;
+    this.inputPreviousAddressObj.title = "Previous Job Address";
+    this.inputPreviousAddressObj.UCAddrForm = this.JobDataSmeForm;
+    this.inputPreviousAddressObj.showOwnership = true;
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -271,7 +293,8 @@ export class JobDataSmeComponent implements OnInit {
                     this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
                     this.inputJobAddressObj.inputLookupObj.nameSelect = this.getJobAddr.Zipcode;
                     this.inputJobAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.getJobAddr.Zipcode};
-                    
+                    this.inputAddressObjForJobAddr.default = this.addressObj;
+                    this.inputAddressObjForJobAddr.inputField = this.inputJobAddressObj;
                 });
             }
 
@@ -310,7 +333,8 @@ export class JobDataSmeComponent implements OnInit {
                     this.inputOtherAddressObj.inputLookupObj.isRequired = false;
                     this.inputOtherAddressObj.inputLookupObj.nameSelect = this.getOthBizAddr.Zipcode;
                     this.inputOtherAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.getOthBizAddr.Zipcode};
-                    
+                    this.inputAddressObjForOthBiz.default = this.otherAddrObj;
+                    this.inputAddressObjForOthBiz.inputField = this.inputOtherAddressObj;
                 });
             }
             if (this.returnCustJobDataObj.PrevJobAddrId != null) {
@@ -348,7 +372,9 @@ export class JobDataSmeComponent implements OnInit {
                   this.inputPreJobAddressObj.inputLookupObj.isRequired = false;
                   this.inputPreJobAddressObj.inputLookupObj.nameSelect = this.getPreJobAddr.Zipcode;
                   this.inputPreJobAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getPreJobAddr.Zipcode };
-  
+                  this.inputPreviousAddressObj.default = this.preJobAddrObj;
+                  this.inputPreviousAddressObj.inputField = this.inputPreJobAddressObj;
+
                 });
             }
             this.preJobAddrId = this.returnCustJobDataObj.PrevJobAddrId;
@@ -359,24 +385,6 @@ export class JobDataSmeComponent implements OnInit {
             this.typePage = "edit";
           }
       });
-      console.log('test');
-      console.log('job data sme');
-      this.inputAddressObjForJobAddr = new InputAddressObj();
-      this.inputAddressObjForJobAddr.showSubsection = false;
-      this.inputAddressObjForJobAddr.title = "Job Address";
-      this.inputAddressObjForJobAddr.UCAddrForm = this.JobDataSmeForm;
-      this.inputAddressObjForJobAddr.default = this.addressObj;
-      this.inputAddressObjForJobAddr.inputField = this.inputJobAddressObj;
-      this.inputAddressObjForJobAddr.showOwnership = true;
-      
-      this.inputAddressObjForOthBiz = new InputAddressObj();
-      this.inputAddressObjForOthBiz.showSubsection = false;
-      this.inputAddressObjForOthBiz.isRequired = false;
-      this.inputAddressObjForOthBiz.title = "Other Business Address";
-      this.inputAddressObjForOthBiz.UCAddrForm = this.JobDataSmeForm;
-      this.inputAddressObjForOthBiz.default = this.otherAddrObj;
-      this.inputAddressObjForOthBiz.inputField = this.inputOtherAddressObj;
-      this.inputAddressObjForOthBiz.showOwnership = true;
   }
 
   setJobAddr(){
