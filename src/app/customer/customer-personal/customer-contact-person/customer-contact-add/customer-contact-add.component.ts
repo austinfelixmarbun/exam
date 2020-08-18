@@ -17,6 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 
 @Component({
   selector: 'app-customer-contact-add',
@@ -99,6 +100,7 @@ export class CustomerContactAddComponent implements OnInit {
   });
   criteriaExistingList: any[];
   criteriaExistingObj: CriteriaObj;
+  inputAddressObj: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.KTP = RefMasterConstant.EKtp;
@@ -356,6 +358,15 @@ export class CustomerContactAddComponent implements OnInit {
           this.UcAddressObj.City = this.tempCustPersonalContactPerson.City;
         });
     }
+    console.log('test');
+    console.log('cust contact add');
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.showSubsection = false;
+    this.inputAddressObj.title = "Customer Address";
+    this.inputAddressObj.UCAddrForm = this.CustomerContactForm;
+    this.inputAddressObj.default = UcAddressObj;
+    this.inputAddressObj.inputField = this.inputFieldObj;
+    this.inputAddressObj.showAllPhn= false;
   }
   SaveValue() {
 

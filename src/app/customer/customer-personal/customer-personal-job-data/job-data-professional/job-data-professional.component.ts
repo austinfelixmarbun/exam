@@ -14,6 +14,7 @@ import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 
 @Component({
   selector: 'app-job-data-professional',
@@ -63,6 +64,7 @@ export class JobDataProfessionalComponent implements OnInit {
     StayLength: ['']
   });
   businessDtMin: Date;
+  inputAddressObj: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
@@ -83,7 +85,7 @@ export class JobDataProfessionalComponent implements OnInit {
     this.tempRefIndustryType = event.RefIndustryTypeId;
   }
 
-  ngOnInit() {
+  ngOnInit() { 
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -184,6 +186,15 @@ export class JobDataProfessionalComponent implements OnInit {
           this.typePage = "edit";
         }
       });
+      console.log('test');
+      console.log('job data prof');
+      this.inputAddressObj = new InputAddressObj();
+      this.inputAddressObj.showSubsection = false;
+      this.inputAddressObj.title = "Job Address";
+      this.inputAddressObj.UCAddrForm = this.JobDataProForm;
+      this.inputAddressObj.default = this.addressObj;
+      this.inputAddressObj.inputField = this.inputFieldAddressObj;
+      this.inputAddressObj.showOwnership = true;
   }
 
   setJobAddr() {

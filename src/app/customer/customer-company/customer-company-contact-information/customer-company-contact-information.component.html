@@ -89,9 +89,10 @@
         </div>
       </div>
       <div id="ContactPersonAddressId">
-        <lib-ucaddress [UCAddrForm]="ContactInformationForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'"
+        <lib-ucaddress [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'UcAddress'"></lib-ucaddress>
+        <!-- <lib-ucaddress [UCAddrForm]="ContactInformationForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'"
           [default]="UcAddressObj" [inputField]="inputFieldObj" [showPhn3]="false">
-        </lib-ucaddress>
+        </lib-ucaddress> -->
       </div>
     </div>
     <div class="form-actions right">

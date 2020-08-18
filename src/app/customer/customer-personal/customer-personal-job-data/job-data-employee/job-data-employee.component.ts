@@ -16,6 +16,7 @@ import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 
 @Component({
   selector: 'app-job-data-employee',
@@ -97,6 +98,8 @@ export class JobDataEmployeeComponent implements OnInit {
     OtherStayLength: ['']
   });
   businessDtMin: Date;
+  inputAddressObj: any;
+  inputOthBizAddressObj: InputAddressObj;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustById = URLConstant.GetCustByCustId;
@@ -228,7 +231,21 @@ export class JobDataEmployeeComponent implements OnInit {
                 this.tempRefIndustryType = this.returnIndustryTypeObj.RefIndustryTypeId;
               });
           }
+          console.log('test');
+          console.log('job data emp');
+          this.inputAddressObj = new InputAddressObj();
+          this.inputAddressObj.showSubsection = false;
+          this.inputAddressObj.title = "Job Address";
+          this.inputAddressObj.UCAddrForm = this.JobDataEmpForm;
 
+          this.inputAddressObj.showOwnership = true;
+      
+          this.inputOthBizAddressObj = new InputAddressObj();
+          this.inputOthBizAddressObj.showSubsection = false;
+          this.inputOthBizAddressObj.isRequired = false;
+          this.inputOthBizAddressObj.title = "Other Business Address";
+          this.inputOthBizAddressObj.UCAddrForm = this.JobDataEmpForm;
+          this.inputOthBizAddressObj.showOwnership = true;
           if (this.returnCustJobDataObj.JobAddrId != null) {
             this.custJobAddrObj = new CustAddrObj();
             this.custJobAddrObj.CustAddrId = this.returnCustJobDataObj.JobAddrId;
@@ -263,7 +280,8 @@ export class JobDataEmployeeComponent implements OnInit {
                 this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
                 this.inputJobAddressObj.inputLookupObj.nameSelect = this.getJobAddr.Zipcode;
                 this.inputJobAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getJobAddr.Zipcode };
-
+                this.inputAddressObj.default = this.addressObj;
+                this.inputAddressObj.inputField = this.inputJobAddressObj;
               });
           }
 
@@ -301,7 +319,8 @@ export class JobDataEmployeeComponent implements OnInit {
                 this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
                 this.inputOtherAddressObj.inputLookupObj.nameSelect = this.getOthBizAddr.Zipcode;
                 this.inputOtherAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getOthBizAddr.Zipcode };
-
+                this.inputOthBizAddressObj.default = this.otherAddrObj;
+                this.inputOthBizAddressObj.inputField = this.inputOtherAddressObj;
               });
           }
 
@@ -312,6 +331,7 @@ export class JobDataEmployeeComponent implements OnInit {
           this.typePage = "edit";
         }
       });
+
   }
 
   setJobAddr() {

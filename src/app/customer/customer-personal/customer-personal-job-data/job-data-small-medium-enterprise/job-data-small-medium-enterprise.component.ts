@@ -17,6 +17,7 @@ import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
  
 @Component({
   selector: 'app-job-data-sme',
@@ -94,6 +95,8 @@ export class JobDataSmeComponent implements OnInit {
     OtherStayLength: ['']
   });
   businessDtMin: Date;
+  inputAddressObjForJobAddr: any;
+  inputAddressObjForOthBiz: InputAddressObj;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     this.getCustById = URLConstant.GetCustByCustId;
@@ -302,6 +305,24 @@ export class JobDataSmeComponent implements OnInit {
             this.typePage = "edit";
           }
       });
+      console.log('test');
+      console.log('job data sme');
+      this.inputAddressObjForJobAddr = new InputAddressObj();
+      this.inputAddressObjForJobAddr.showSubsection = false;
+      this.inputAddressObjForJobAddr.title = "Job Address";
+      this.inputAddressObjForJobAddr.UCAddrForm = this.JobDataSmeForm;
+      this.inputAddressObjForJobAddr.default = this.addressObj;
+      this.inputAddressObjForJobAddr.inputField = this.inputJobAddressObj;
+      this.inputAddressObjForJobAddr.showOwnership = true;
+      
+      this.inputAddressObjForOthBiz = new InputAddressObj();
+      this.inputAddressObjForOthBiz.showSubsection = false;
+      this.inputAddressObjForOthBiz.isRequired = false;
+      this.inputAddressObjForOthBiz.title = "Other Business Address";
+      this.inputAddressObjForOthBiz.UCAddrForm = this.JobDataSmeForm;
+      this.inputAddressObjForOthBiz.default = this.otherAddrObj;
+      this.inputAddressObjForOthBiz.inputField = this.inputOtherAddressObj;
+      this.inputAddressObjForOthBiz.showOwnership = true;
   }
 
   setJobAddr(){
