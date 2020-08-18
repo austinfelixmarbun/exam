@@ -84,7 +84,7 @@
             "type": "link",
             "position": "left",
             "property": "CustNo",
-            "path": "../CustomerView/Page",
+            "path": "/View/Customer",
             "target": "_blank",
             "param": [
                 {

@@ -353,16 +353,16 @@ export class CustFinDataTabComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["Message"]);
           if(this.MrCustTypeCode == CommonConstant.CustTypePersonal){  
-            if (this.Page != null) {
-              this.router.navigate(["/Customer/EditMainData/Paging"]);
-            } else {
-              this.router.navigate(["/Customer/Paging"]);
-            }
+            // if (this.Page != null) {
+            //   this.router.navigate(["/Customer/EditMainData/Paging"]);
+            // } else {
+            //   this.router.navigate(["/Customer/Paging"]);
+            // }
+            this.outputTab.emit({ stepMode: "next"});
           }
           else if(this.MrCustTypeCode == CommonConstant.CustTypeCompany){
             this.outputTab.emit({ stepMode: "next"});
           }
-          this.outputTab.emit({ stepMode: "next"});
         }
       );
     }

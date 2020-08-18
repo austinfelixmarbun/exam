@@ -65,7 +65,7 @@ export class CustomerContactAddComponent implements OnInit {
 
   flag: boolean;
   tempKTPCheck: boolean;
-
+  tempMobilePhone1 : boolean;
   businessDtMin: Date;
   businessDtMax: Date;
 
@@ -116,6 +116,7 @@ export class CustomerContactAddComponent implements OnInit {
   }
   isAdd: any;
   ngOnInit() {
+    console.log("aaa")
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -278,6 +279,15 @@ export class CustomerContactAddComponent implements OnInit {
             MrCustRelationshipCode: this.tempMrCustRelationshipCode[0].Key
           });
         }
+        if (this.tempMrCustRelationshipCode[0].Key == "SPOUSE") {
+          this.CustomerContactForm.controls.MobilePhnNo1.setValidators(Validators.required);
+          this.tempMobilePhone1 = true;
+        } else {
+            this.tempMobilePhone1 = false;
+          this.CustomerContactForm.controls.MobilePhnNo1.clearValidators();
+        }
+        this.CustomerContactForm.controls.MobilePhnNo1.updateValueAndValidity();
+
       });
 
     var refMasterObjMrGenderCode = {
@@ -549,6 +559,17 @@ export class CustomerContactAddComponent implements OnInit {
       this.lookUpObj.isRequired = true;
     }
   }
+  Check() {
+    if (this.CustomerContactForm.controls.MrCustRelationshipCode.value == "SPOUSE") {
+      this.CustomerContactForm.controls.MobilePhnNo1.setValidators(Validators.required);
+      this.tempMobilePhone1 = true;
+    } else {
+      this.CustomerContactForm.controls.MobilePhnNo1.clearValidators();
+      this.tempMobilePhone1 = false;
+    }
+    this.CustomerContactForm.controls.MobilePhnNo1.updateValueAndValidity();
+  }
+
   back() {
     this.isAdd = false;
     this.outputTab.emit({ isAdd: this.isAdd });

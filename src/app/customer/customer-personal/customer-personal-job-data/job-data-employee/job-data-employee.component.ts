@@ -100,6 +100,7 @@ export class JobDataEmployeeComponent implements OnInit {
   businessDtMin: Date;
   inputAddressObj: any;
   inputOthBizAddressObj: InputAddressObj;
+  inputPreviousJobAddressObj: InputAddressObj;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustById = URLConstant.GetCustByCustId;
@@ -237,9 +238,17 @@ export class JobDataEmployeeComponent implements OnInit {
           this.inputAddressObj.showSubsection = false;
           this.inputAddressObj.title = "Job Address";
           this.inputAddressObj.UCAddrForm = this.JobDataEmpForm;
-
           this.inputAddressObj.showOwnership = true;
-      
+
+          this.inputPreviousJobAddressObj = new InputAddressObj();
+          this.inputPreviousJobAddressObj.showSubsection = false;
+          this.inputPreviousJobAddressObj.isRequired = false;
+          this.inputPreviousJobAddressObj.title = "Previous Job Address"
+          this.inputPreviousJobAddressObj.UCAddrForm = this.JobDataEmpForm;
+          this.inputPreviousJobAddressObj.default = this.preJobAddrObj;
+          this.inputPreviousJobAddressObj.inputField = this.inputPreJobAddressObj;
+          this.inputPreviousJobAddressObj.showOwnership = true;
+          
           this.inputOthBizAddressObj = new InputAddressObj();
           this.inputOthBizAddressObj.showSubsection = false;
           this.inputOthBizAddressObj.isRequired = false;

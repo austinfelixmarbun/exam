@@ -200,7 +200,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'HO/View',
+        path: 'View/VendorHO',
         component: VendorHoInfoComponent,
         data: {
           title: 'Vendor HO View'

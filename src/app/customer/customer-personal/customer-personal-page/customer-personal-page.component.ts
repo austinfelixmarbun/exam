@@ -122,4 +122,12 @@ export class CustomerPersonalPageComponent implements OnInit {
       }
     }
   }
+  
+  endStepper(ev:any){
+    if (this.Page != null) {
+      this.router.navigate(["/Customer/EditMainData/Paging"]);
+    } else {
+      this.router.navigate(["/Customer/Paging"]);
+    }
+  }
 }

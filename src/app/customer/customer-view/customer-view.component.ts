@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-customer-view',
@@ -12,8 +13,8 @@ import { environment } from 'environments/environment';
 export class CustomerViewComponent implements OnInit {
   custModel: any;
   custResultData: any;
-  viewCustMainInfoHeaderObj: any;
-  viewCustCoyMainInfoHeader: any;
+  viewCustMainInfoHeaderObj: UcViewGenericObj = new UcViewGenericObj();
+  viewCustCoyMainInfoHeader: UcViewGenericObj= new UcViewGenericObj();
 
   CustId: number;
 
