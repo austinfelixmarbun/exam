@@ -312,7 +312,6 @@ export class CustomerContactAddComponent implements OnInit {
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.custPersonalContactPersonId;
       this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalContactPersonByCustPersonalContactPersonId, this.custPersonalContactPersonObj).subscribe(
         (response) => {
-          console.log(response);
           var datePipe = new DatePipe("en-US");
           this.tempCustPersonalContactPerson = response;
           this.CustomerContactForm.patchValue({
