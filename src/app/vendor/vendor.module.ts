@@ -9,7 +9,6 @@ import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { UcpagingModule } from '@adins/ucpaging';
 import { UcSubsectionModule } from '@adins/uc-subsection';
-import { VendorComponent } from './vendor.component';
 import { VendorRoutingModule } from './vendor-routing.module';
 import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
 import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
@@ -61,6 +60,20 @@ import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { VendorPagingComponent } from './component/vendor/vendor-paging/vendor-paging.component';
 import { VendorATPMAddEditComponent } from './vendor-ATPM/vendor-atpm-add-edit/vendor-atpm-add-edit.component';
 import { VendorATPMRegistrationComponent } from './vendor-ATPM/vendor-atpm-registration/vendor-atpm-registration.component';
+import { NgxCurrencyModule } from 'ngx-currency';
+
+
+export const customCurrencyMaskConfig = {     
+  align: "right",     
+  allowNegative: true,     
+  allowZero: true,     
+  decimal: ".",     
+  precision: 2,     
+  prefix: "",     
+  suffix: "",     
+  thousands: ",",     
+  nullable: false
+};
 
 @NgModule({
   imports: [
@@ -83,10 +96,10 @@ import { VendorATPMRegistrationComponent } from './vendor-ATPM/vendor-atpm-regis
     MatTabsModule,
     UcShowErrorsModule,
     UcaddressModule,
-    UcaddtotempModule
+    UcaddtotempModule,
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
   ],
   declarations: [
-    VendorComponent,
     VendorHoldingPagingComponent,
     VendorHoldingAddEditComponent,
    BankInfoComponent,

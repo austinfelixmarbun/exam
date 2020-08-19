@@ -10,7 +10,7 @@
       </div>
       <div class="card-body">
         <div class="px-3">
-          <form class="form form-horizontal" [formGroup]="ProdOfferingForm" (ngSubmit)="ProdOfferingForm.valid && AddDetail()" #enjiForm="ngForm">
+          <form class="form form-horizontal" [formGroup]="ProdOfferingForm" (ngSubmit)="ProdOfferingForm.valid && SaveForm()" #enjiForm="ngForm">
             <div class="form-body">
               <lib-ucSubsection [id]="'ProductOfferingInfoId'" [title]="'Main Information'" [panel]="'ProductOfferingInfo'"></lib-ucSubsection>
               <div id="ProductOfferingInfo">

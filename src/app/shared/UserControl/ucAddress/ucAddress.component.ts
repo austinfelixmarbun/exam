@@ -76,7 +76,6 @@ export class UcAddressComponent implements OnInit {
   }
 
   onSelect(event) {
-    console.log(event);
     this.areaCode2 = event.areaCode2;
     this.areaCode1 = event.areaCode1;
     this.phnArea1 = event.phnArea;
@@ -87,7 +86,6 @@ export class UcAddressComponent implements OnInit {
   }
 
   getLookup(event) {
-    console.log(event);
     this.areaCode2 = event.areaCode2;
     this.areaCode1 = event.areaCode1;
     this.phnArea1 = event.phnArea;

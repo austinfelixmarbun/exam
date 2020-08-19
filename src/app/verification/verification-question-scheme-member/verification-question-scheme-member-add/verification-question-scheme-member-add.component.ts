@@ -49,7 +49,6 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
     this.http.post(URLConstant.GetVerfSchemeDsByVerfSchemeHId, verfGroupObj).subscribe(
       (response) => {
         var arrMemberList = new Array();
-        console.log(arrMemberList);
         for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
           arrMemberList.push(response[CommonConstant.ReturnObj][index].VerfQuestionGrpHId)
         }
@@ -63,9 +62,6 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListVerfQuestionGrpHId);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -89,9 +85,6 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
       response => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(["/Verification/QuestionSchemeMemberPaging"], { queryParams: { "VerfSchemeHId": this.VerfSchemeHId } });
-      },
-      error => {
-        console.log(error);
       }
     );
   }

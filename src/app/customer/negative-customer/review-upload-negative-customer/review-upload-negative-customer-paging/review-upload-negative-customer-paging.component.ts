@@ -43,9 +43,6 @@ export class ReviewUploadNegativeCustomerPagingComponent implements OnInit {
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate(['/Customer/NegativeCustomer/ReviewUploadPaging']);
       }); 
-      },
-      error => {
-        console.log(error);
       }
     );
   }

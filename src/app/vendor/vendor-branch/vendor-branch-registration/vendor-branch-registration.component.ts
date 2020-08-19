@@ -28,9 +28,6 @@ export class VendorBranchRegistrationComponent implements OnInit {
     this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { VendorId: this.VendorId }).subscribe(
       (response) => {
         this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"];
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

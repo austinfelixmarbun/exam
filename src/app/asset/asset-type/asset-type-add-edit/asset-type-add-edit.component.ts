@@ -144,15 +144,9 @@ export class AssetTypeAddEditComponent implements OnInit {
               this.HierarchyNumber = this.resultData.MaxHierarchyLevel;
               var tempArr = [this.resultData.HierarchyLabelLevel1, this.resultData.HierarchyLabelLevel2, this.resultData.HierarchyLabelLevel3, this.resultData.HierarchyLabelLevel4, this.resultData.HierarchyLabelLevel5];
               this.onHierarchyLevelChanged(tempArr);
-            },
-            error => {
-              console.log(error);
             }
           );
         }
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -259,9 +253,6 @@ export class AssetTypeAddEditComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Type/Paging"]);
-        },
-        error => {
-          console.log(error);
         });
     } else {
       this.assetTypeObj.AssetTypeCode = this.assetTypeCode;
@@ -271,9 +262,6 @@ export class AssetTypeAddEditComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Type/Paging"]);
-        },
-        error => {
-          console.log(error);
         });
     }
   }

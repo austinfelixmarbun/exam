@@ -14,6 +14,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 
 
 @Component({
@@ -122,6 +123,7 @@ export class OfficeAddComponent implements OnInit {
   })
   InputLookupObj: any;
   addressObj: UcAddressObj;
+  inputAddressObj: InputAddressObj;
 
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -191,9 +193,6 @@ export class OfficeAddComponent implements OnInit {
           this.InputLookupObj.addCritInput = this.arrCrit;
         }
 
-      },
-      (error) => {
-        console.log(error);
       });
 
     if (this.pageType == "add") {
@@ -205,9 +204,6 @@ export class OfficeAddComponent implements OnInit {
               MrOfficeClassCode: this.allOfficeClass[0].Key
             });
           }
-        },
-        (error) => {
-          console.log(error);
         });
 
       this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
@@ -219,9 +215,6 @@ export class OfficeAddComponent implements OnInit {
             });
           }
 
-        },
-        (error) => {
-          console.log(error);
         });
       this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterKonsyaType).subscribe(
         (response) => {
@@ -231,9 +224,6 @@ export class OfficeAddComponent implements OnInit {
               KonSya: this.allKonSya[0].Key
             });
           }
-        },
-        (error) => {
-          console.log(error);
         })
       this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterOfficeType).subscribe(
         (response) => {
@@ -243,9 +233,6 @@ export class OfficeAddComponent implements OnInit {
               OfficeType: this.allOfficeType[0].Key
             });
           }
-        },
-        (error) => {
-          console.log(error);
         })
 
       this.httpClient.post(this.holidaySchmUrl, null).subscribe(
@@ -256,9 +243,6 @@ export class OfficeAddComponent implements OnInit {
               HolidayScheme: this.allHolidaySchm[0].HolidaySchmHId
             });
           }
-        },
-        (error) => {
-          console.log(error);
         })
       this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
         (response) => {
@@ -268,9 +252,6 @@ export class OfficeAddComponent implements OnInit {
               WorkingHourScheme: this.allWorkingHourSchm[0].WorkingHourSchmHId
             });
           }
-        },
-        (error) => {
-          console.log(error);
         })
 
 
@@ -340,9 +321,6 @@ export class OfficeAddComponent implements OnInit {
                 });
               }
 
-            },
-            (error) => {
-              console.log(error);
             })
 
           this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
@@ -353,9 +331,6 @@ export class OfficeAddComponent implements OnInit {
                   MrOfficeClassCode: this.resultData.MrOfficeClassCode
                 });
               }
-            },
-            (error) => {
-              console.log(error);
             })
           this.httpClient.post(this.officeTypeUrl, this.refMasterOfficeType).subscribe(
             (response) => {
@@ -365,9 +340,6 @@ export class OfficeAddComponent implements OnInit {
                   OfficeType: this.resultData.MrOfficeTypeCode
                 });
               }
-            },
-            (error) => {
-              console.log(error);
             })
           this.httpClient.post(this.konSyaUrl, this.refMasterKonsyaType).subscribe(
             (response) => {
@@ -378,9 +350,6 @@ export class OfficeAddComponent implements OnInit {
                   KonSya: this.resultData.MrKonvenSyariahCode
                 });
               }
-            },
-            (error) => {
-              console.log(error);
             })
           this.httpClient.post(this.holidaySchmUrl, null).subscribe(
             (response) => {
@@ -390,9 +359,6 @@ export class OfficeAddComponent implements OnInit {
                   HolidayScheme: this.resultData.HolidaySchmHId
                 });
               }
-            },
-            (error) => {
-              console.log(error);
             })
           this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
             (response) => {
@@ -402,14 +368,13 @@ export class OfficeAddComponent implements OnInit {
                   WorkingHourScheme: this.resultData.WorkingHourSchmHId
                 });
               }
-            },
-            (error) => {
-              console.log(error);
             })
 
         })
     }
-
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.default = this.addressObj;
+    this.inputAddressObj.inputField = this.inputFieldAddr;
   }
   SaveForm(): void {
     this.officeObj = new OfficeObj();
@@ -476,9 +441,6 @@ export class OfficeAddComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response['message']);
             this.router.navigate(["/Office/Paging"]);
-          },
-          (error) => {
-            console.log(error);
           }
         );
 
@@ -486,9 +448,6 @@ export class OfficeAddComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response['message']);
             this.router.navigate(["/Office/Paging"]);
-          },
-          (error) => {
-            console.log(error);
           }
         );
       }
@@ -497,9 +456,6 @@ export class OfficeAddComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response['message']);
             this.router.navigate(["/Office/Paging"]);
-          },
-          (error) => {
-            console.log(error);
           }
         );
       }
@@ -513,9 +469,6 @@ export class OfficeAddComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response['message']);
           this.router.navigate(["/Office/Paging"]);
-        },
-        (error) => {
-          console.log(error);
         }
       );
 

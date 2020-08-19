@@ -84,7 +84,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeCustCompanyRelationship = "CUST_COMPANY_RELATIONSHIP";
     public static RefMasterTypeCodeCustPersonalRelationship = "CUST_PERSONAL_RELATIONSHIP";
     public static RefMasterTypeCodeCustRelationship = "CUST_RELATIONSHIP";
-
+    public static RefMasterTypeCodeCustType = "CUST_TYPE";
     public static RefMasterTypeCodeLegalDocType = "LEGAL_DOC_TYPE";
     public static RefMasterTypeCodeCustAddrType = "CUST_ADDR_TYPE";
     public static RefMasterTypeCodeAddrType = "ADDR_TYPE";
@@ -152,6 +152,7 @@ export class CommonConstant {
     public static CustAddrTypeResidence = "RESIDENCE";
     public static CustAddrTypeJob = "JOB";
     public static CustAddrTypeOthBiz = "OTH_BIZ";
+    public static CustAddrTypePreJob = "PREV_JOB";
 
 
     // ADDR TYPE 
@@ -167,4 +168,6 @@ export class CommonConstant {
     public static LTE = "Less Than Equal";
     public static LT = "Less Than";
 
+    //Status Code
+    public static STATUS_CODE_USER_LOCKED = "002";
 }

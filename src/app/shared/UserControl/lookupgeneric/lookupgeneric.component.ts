@@ -69,7 +69,6 @@ export class LookupgenericComponent implements OnInit {
     
     /*is Required */
     this.isRequired = this.lookupInput.isRequired;
-    console.log(this.isRequired);
     /* #endregion */
 
     this.initiateForm();
@@ -95,7 +94,6 @@ export class LookupgenericComponent implements OnInit {
   }
 
   getSelect(event) {
-    console.log(event);
     this.lookupInput.jsonSelect = event;
     this.value = event[this.genericJson.propertyName];
     this.lookupInput.nameSelect = event[this.genericJson.propertyName];

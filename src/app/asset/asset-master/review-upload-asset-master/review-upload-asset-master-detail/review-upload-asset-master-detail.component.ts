@@ -61,9 +61,6 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigate(["/Asset/AssetMaster/ReviewUploadPaging"]);
-      },
-      error => {
-        console.log(error);
       }
     );
   }

@@ -67,7 +67,6 @@ export class OrgMdlStrucPagingComponent implements OnInit {
     this.inputObj.apiQryPaging = URLConstant.GetOrgMdlStrucPaging;
     
     this.spinner.show();
-    console.log('masuk');
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
     this.pageSize = this.show[0];
@@ -110,8 +109,6 @@ export class OrgMdlStrucPagingComponent implements OnInit {
       (response) => {
         this.orgMdlObj = response['returnObject'];
         this.refOrgId += response['returnObject']['refOrgId'];
-        console.log('response',response['returnObject'])
-        console.log(this.refOrgId)
       },
       (error) => {
         this.service.typeErrorCustom(error);

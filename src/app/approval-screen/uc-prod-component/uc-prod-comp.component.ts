@@ -87,9 +87,6 @@ export class UcProdCompComponent implements OnInit {
     await this.http.post(url, payload).toPromise().then(
       (response) => {
         this.dictOptions[obj.RefProdCompntCode] = response[CommonConstant.ReturnObj];
-      },
-      (error) => {
-        console.log(error);
       }
     )
   }
@@ -106,10 +103,6 @@ export class UcProdCompComponent implements OnInit {
 
     this.http.post(this.UrlGetProdCompGrouped, ProdHOComponent).toPromise().then(
       async (response) => {
-        console.log("AAA")
-        console.log(response)
-
-
         for (var i = 0; i < response[CommonConstant.ReturnObj].length; i++) {
           var group = response[CommonConstant.ReturnObj][i];
           var fa_group = this.FormProdComp.controls['groups'] as FormArray;
@@ -129,9 +122,6 @@ export class UcProdCompComponent implements OnInit {
           //   fa_comp.push(this.addComponent(comp));
           // }
         }
-      },
-      (error) => {
-        console.log(error);
       }
     )
   }
@@ -148,12 +138,9 @@ export class UcProdCompComponent implements OnInit {
         this.list.push(Object.assign({}, ...this.FormProdComp.controls.groups.controls[i].controls["components"].controls[j].value));
       }
     }
-    console.log(this.list)
   }
 
   checkValue() {
-    console.log(this.dictOptions)
-    console.log(this.dictOptions["LOB"])
   }
 
   onChangeEvent(val,event,index,indexparent)

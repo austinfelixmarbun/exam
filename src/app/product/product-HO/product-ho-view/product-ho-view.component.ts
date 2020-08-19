@@ -71,9 +71,6 @@ export class ProductHOViewComponent implements OnInit {
     this.http.post(this.ProdVerUrl, this.ProdVersionObj).subscribe(
       response => {
         this.ProdVersion = response[CommonConstant.ReturnObj];
-      },
-      error => {
-        console.log(error);
       }
     );
 
@@ -83,9 +80,6 @@ export class ProductHOViewComponent implements OnInit {
     this.http.post(this.ProdBranchUrl, this.ProdBranchMemObj).subscribe(
       response => {
         this.ProdBranchMbr = response[CommonConstant.ReturnObj];
-      },
-      error => {
-        console.log(error);
       }
     );
 
@@ -95,20 +89,13 @@ export class ProductHOViewComponent implements OnInit {
     this.refProductDetailObj.GroupCodes = ['GEN', 'SCHM', 'SCORE', 'RULE', 'OTHR', 'LOS'];
     await this.http.post(this.ProdDUrl, this.refProductDetailObj).toPromise().then(
       response => {
-        console.log("Response: ");
-        console.log(response);
         this.ProdComp = response[CommonConstant.ReturnObj].ProdOffComponents;
-        console.log(this.ProdComp);
         this.GenData = this.ProdComp.filter(
           comp => comp.GroupCode == 'GEN');
         this.ProdCompGen = this.GenData[0];
         this.ProdCompNonGen = this.ProdComp.filter(
           comp => comp.GroupCode != 'GEN');
-        console.log(this.ProdCompNonGen);
         this.IsLoaded = true;
-      },
-      error => {
-        console.log(error);
       }
     );
 
@@ -119,9 +106,6 @@ export class ProductHOViewComponent implements OnInit {
     this.http.post(URLConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
       response => {
         saveAs(response, CompntValueDesc + '.xlsx');
-      },
-      error => {
-        console.log(error);
       }
     );
   }

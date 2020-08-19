@@ -69,8 +69,8 @@
                 </div>
               </div>
               <div class="form-group row adins-required" *ngIf="RefAttrForm.contains('AttrValue')">
-                <label class="col-md-3 adInsLabel" for="AttrValue" translate>Attribute Value</label>
-                <div class="col-md-9" *ngIf="RefAttrForm.controls.AttrInputType.value == 'T'">
+                <label class="col-md-3 adInsLabel" *ngIf="RefAttrForm.controls.AttrInputType.value == 'L'" for="AttrValue" translate>Attribute Value</label>
+                <!-- <div class="col-md-9" *ngIf="RefAttrForm.controls.AttrInputType.value == 'T'">
                   <input type="text" class="form-control adInsInput" formControlName="AttrValue" 
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrValue.invalid }" />
                   <lib-uc-show-errors [control]="RefAttrForm.controls.AttrValue" [submit]="enjiForm.submitted"></lib-uc-show-errors>
@@ -79,7 +79,7 @@
                   <input type="number" class="form-control adInsInput" formControlName="AttrValue" 
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrValue.invalid }" />
                   <lib-uc-show-errors [control]="RefAttrForm.controls.AttrValue" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                </div>
+                </div> -->
                 <div class="col-md-9" *ngIf="RefAttrForm.controls.AttrInputType.value == 'L'" formArrayName="AttrValue">
                   <div class="col-md-12" style="padding: 0;">
                     <button type="button" class="btn btn-raised btn-primary" (click)="AttrValueRowHandler()">
@@ -99,7 +99,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-9" *ngIf="RefAttrForm.controls.AttrInputType.value == 'P'">
+                <!-- <div class="col-md-9" *ngIf="RefAttrForm.controls.AttrInputType.value == 'P'">
                   <textarea class="form-control adInsInput" formControlName="AttrValue" 
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrValue.invalid }"></textarea>
                   <lib-uc-show-errors [control]="RefAttrForm.controls.AttrValue" [submit]="enjiForm.submitted"></lib-uc-show-errors>
@@ -108,12 +108,12 @@
                   <input type="date" class="form-control adInsInput" formControlName="AttrValue" 
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrValue.invalid }" />
                   <lib-uc-show-errors [control]="RefAttrForm.controls.AttrValue" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                </div>
-                <div class="col-md-9" *ngIf="RefAttrForm.controls.AttrInputType.value == 'A'">
+                </div> -->
+                <!-- <div class="col-md-9" *ngIf="RefAttrForm.controls.AttrInputType.value == 'A'">
                   <input type="" currencyMask class="form-control adInsInput" formControlName="AttrValue" 
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrValue.invalid }" />
                   <lib-uc-show-errors [control]="RefAttrForm.controls.AttrValue" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                </div>
+                </div> -->
               </div>
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" for="PatternCode" translate>Pattern Code</label>

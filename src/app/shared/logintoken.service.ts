@@ -20,15 +20,11 @@ export class LogintokenService {
     localStorage.setItem("Token", token);
     this.http.post(AdInsConstant.LoginWithToken, { ModuleCode: environment.Module }).subscribe(
       (response) => {
-        console.log(response);
         localStorage.setItem("BusinessDateRaw", response["Identity"].BusinessDt);
         var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
         localStorage.setItem("BusinessDate", DateParse);
         localStorage.setItem("UserAccess", JSON.stringify(response["Identity"]));
         //window.location.href = url;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }

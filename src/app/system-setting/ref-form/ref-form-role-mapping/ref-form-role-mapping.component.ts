@@ -64,9 +64,6 @@ export class RefFormRoleMappingComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListRefRoleId);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -97,9 +94,6 @@ export class RefFormRoleMappingComponent implements OnInit {
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.router.navigate(['/SystemSetting/RefForm/RoleMapping'], { queryParams: { "RefFormId": this.RefFormId } });
-      },
-      (error) => {
-        console.log(error);
       });
   }
 }

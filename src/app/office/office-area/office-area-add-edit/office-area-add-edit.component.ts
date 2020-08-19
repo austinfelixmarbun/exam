@@ -54,9 +54,6 @@ export class OfficeAreaAddEditComponent implements OnInit {
             IsActive: this.result.IsActive,
             RowVersion: this.result.RowVersion,
           });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -73,9 +70,6 @@ export class OfficeAreaAddEditComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigateByUrl('/Office/OfficeArea');
-        },
-        (error) => {
-          console.log(error);
         });
     }
     else {
@@ -84,9 +78,6 @@ export class OfficeAreaAddEditComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigateByUrl('/Office/OfficeArea');
-        },
-        (error) => {
-          console.log(error);
         });
     }
   }

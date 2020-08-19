@@ -80,7 +80,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     RowVersionVendor: [''],
     RowVersionVendorAddr: [''],
     IsNpwpExist: [false],
-    VendorAtpmCode: [{ value: '' }]
+    VendorAtpmCode: []
   });
 
 
@@ -140,9 +140,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
         this.setLookup();
         this.checkType();
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -237,9 +234,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
   }
 
   getLookupATPM(ev){
-    // console.log(ev);
-    // console.log(this.VendorForm);
-    
     this.VendorForm.patchValue({
       VendorAtpmCode: ev.VendorCode,
     });
@@ -325,9 +319,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response["message"]);
             this.router.navigate(['/Vendor/Holding/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": 'edit' } });
-          },
-          (error) => {
-            console.log(error);
           });
       } else {
         this.vendorHoldingObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
@@ -336,9 +327,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response["message"]);
             this.router.navigate(['/Vendor/Holding/Registration'], { queryParams: { "VendorId": response['VendorObj'].VendorId } });
-          },
-          (error) => {
-            console.log(error);
           });
       }
     }

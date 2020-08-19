@@ -42,6 +42,8 @@ export class NegativeCustomerDetailComponent implements OnInit {
   businessDate: any;
   businessDateIdExp: any;
   tempKTPCheck: boolean;
+  TempCustType: any;
+  TempGender : any;
   NegativeCustForm = this.fb.group({
     NegativeCustId: [0, [Validators.required]],
     CustId: [0],
@@ -112,7 +114,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
     let requestNegativeSource = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterNegativeSourceObj);
     forkJoin([requestIdType, requestNegativeCustType, requestNegativeSource]).subscribe(
       (response) => {
-        // console.log(response);
         if (response[0][CommonConstant.ReturnObj].length > 0) {
           this.refMasterIdType = response[0];
           this.NegativeCustForm.patchValue({
@@ -168,7 +169,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Shinano');
     var datePipe = new DatePipe("en-US");
     var criteriaList;
     var criteriaObj;
@@ -214,6 +214,28 @@ export class NegativeCustomerDetailComponent implements OnInit {
     criteriaList.push(criteriaObj);
     this.inputLookupCustCompanyObj.addCritInput = criteriaList;
     this.inputLookupCustCompanyObj.isRequired = false;
+
+    var RefMasterTypeCodeCustType = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustType
+    }
+    var RefMasterTypeCodeGender = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender
+    }
+    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterTypeCodeCustType).subscribe(
+      (response) => {
+        this.TempCustType = response[CommonConstant.ReturnObj];
+      });
+
+  
+    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterTypeCodeGender).subscribe(
+      (response) => {
+        this.TempGender = response[CommonConstant.ReturnObj];
+        if (this.TempGender.length > 0) {
+          this.NegativeCustForm.patchValue({ MrGenderCode: response[CommonConstant.ReturnObj][0]['Key'] });
+        }
+      });
+
+
 
     if (this.pageType == "edit") {
       var negativeCustObj = new NegativeCustObj();
@@ -277,7 +299,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
             IsActive: negativeCustData.IsActive,
             RowVersion: negativeCustData.RowVersion
           });
-          console.log(this.NegativeCustForm.controls);
           if (this.custType == CommonConstant.CustomerPersonal) {
             if (this.NegativeCustForm.controls.MrIdTypeCode.value == RefMasterConstant.EKtp) {
               this.tempKTPCheck = true;
@@ -314,22 +335,18 @@ export class NegativeCustomerDetailComponent implements OnInit {
           this.NegativeCustForm.controls.IdExpiredDt.updateValueAndValidity();
           this.negativeDataHistoryList = response[1].ReturnObject;
 
-          console.log('Shinano');
           if (this.NegativeCustForm.controls.MrCustTypeCode.value == '' || this.NegativeCustForm.controls.MrCustTypeCode.value == null)
             this.NegativeCustForm.controls.MrCustTypeCode.enable();
           if (this.NegativeCustForm.controls.CustName.value == '' || this.NegativeCustForm.controls.CustName.value == null)
             this.NegativeCustForm.controls.CustName.enable();
 
           if (this.custType.toUpperCase() == CommonConstant.CustomerPersonal.toUpperCase()) {
-            if (this.NegativeCustForm.controls.MrIdTypeCode.value == '' || this.NegativeCustForm.controls.MrIdTypeCode.value == null)
-            {
+            if (this.NegativeCustForm.controls.MrIdTypeCode.value == '' || this.NegativeCustForm.controls.MrIdTypeCode.value == null) {
               this.NegativeCustForm.controls.MrIdTypeCode.enable();
               this.NegativeCustForm.controls.IdExpiredDt.enable();
             }
-            else
-            {
-              if (this.NegativeCustForm.controls.MrIdTypeCode.value == RefMasterConstant.EKtp)
-              {
+            else {
+              if (this.NegativeCustForm.controls.MrIdTypeCode.value == RefMasterConstant.EKtp) {
                 if (this.NegativeCustForm.controls.IdExpiredDt.value == '' || this.NegativeCustForm.controls.IdExpiredDt.value == null)
                   this.NegativeCustForm.controls.IdExpiredDt.disable();
               }
@@ -454,8 +471,9 @@ export class NegativeCustomerDetailComponent implements OnInit {
           MrCustTypeCode: selected,
           MrIdTypeCode: this.refMasterIdType.ReturnObject[0].Key,
           MrNegCustTypeCode: this.negativeTypeList.ReturnObject[0].Key,
-          MrNegCustSourceCode: this.negativeSourceList.ReturnObject[0].Key
-        });
+          MrNegCustSourceCode: this.negativeSourceList.ReturnObject[0].Key,
+          MrGenderCode: this.TempGender[0].Key 
+        }); 
       });
   }
 
@@ -502,9 +520,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
         });
         this.isFromLookup = true;
         this.inputLookupZipcodeObj.nameSelect = response.Zipcode;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -541,9 +556,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
         });
         this.isFromLookup = true;
         this.inputLookupZipcodeObj.nameSelect = response.Zipcode;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -610,9 +622,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
           var responseNegativeCust = response[0];
           this.toastr.successMessage(responseNegativeCust["message"]);
           this.router.navigate(['/Customer/NegativeCustomer/Paging']);
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -644,9 +653,6 @@ export class NegativeCustomerDetailComponent implements OnInit {
           var responseNegativeCust = response[0];
           this.toastr.successMessage(responseNegativeCust["message"]);
           this.router.navigate(['/Customer/NegativeCustomer/Paging']);
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

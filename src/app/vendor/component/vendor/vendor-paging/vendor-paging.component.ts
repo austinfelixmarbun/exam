@@ -131,7 +131,6 @@ export class VendorPagingComponent implements OnInit {
         WVendorClassObj.property = "VendorClass";
         WVendorClassObj.value = CommonConstant.ATPM;
         this.inputPagingObj.whereValue.push(WVendorClassObj);
-        console.log(this.inputPagingObj);
       }
     }
 

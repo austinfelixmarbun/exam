@@ -61,7 +61,6 @@ export class SearchComponent implements OnInit {
 
   initiateForm() {
     this.getJSON(this.searchInput._url).subscribe(data => {
-      console.log(data);
       this.configuration = data;
       this.urlGet = data.url;
       this.exportData = data.exportExcel;
@@ -146,7 +145,6 @@ export class SearchComponent implements OnInit {
       var critObj = new CriteriaObj();
       var component = this.myForm.nativeElement[i];
       critObj.DataType = component.getAttribute('data-type');
-      console.log(component);
       //Ini khusus kalau dari Drop Down
       if (component.value != "") {
         if (component.nodeName == 'SELECT') {
@@ -196,7 +194,6 @@ export class SearchComponent implements OnInit {
         response: response,
         pageNow: pageNo
       }
-      console.log(qryPaging);
       this.result.emit(qryPaging);
       return response;
     });
@@ -216,9 +213,7 @@ export class SearchComponent implements OnInit {
     val.subscribe(tempData => {
       obj.itemsUrl = tempData.returnObject;
       
-    console.log(tempData);
     });
-    console.log(crit);
   }
 
   transformAmount(element: any) {
@@ -243,10 +238,6 @@ export class SearchComponent implements OnInit {
       response => {
         this.ExcelData = response["returnObject"]["data"];
         this.excelService.exportAsExcelFile(this.ExcelData, 'sample');
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
       });
   }
 

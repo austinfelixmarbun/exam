@@ -75,7 +75,7 @@ export class GeneralDataHOComponent implements OnInit {
 
     this.ProdHId = this.objInput["param"];
     this.ProdId = this.objInput["ProdId"];
-    this.LoadProdComponent(this.ProdHId, "GEN", false);
+    this.LoadProdComponent(this.ProdHId, "GEN", true);
 
 
     this.inputLookUpObj = new InputLookupObj();
@@ -169,9 +169,6 @@ export class GeneralDataHOComponent implements OnInit {
           if (obj.RefProdCompntCode == "LOB") {
             this.LOBSelected = compValue
           }
-        },
-        (error) => {
-          console.log(error);
         }
       )
     }
@@ -189,9 +186,6 @@ export class GeneralDataHOComponent implements OnInit {
           for (let i = 0; i < result.length; i++) {
             this.dictMultiOptions[obj.RefProdCompntCode].push({ item_id: result[i].Key, item_text: result[i].Value});
           }
-        },
-        (error) => {
-          console.log(error);
         }
       )
     }
@@ -220,9 +214,6 @@ export class GeneralDataHOComponent implements OnInit {
             }
           }
         }
-      },
-      (error) => {
-        console.log(error);
       }
     )
   }
@@ -238,9 +229,6 @@ export class GeneralDataHOComponent implements OnInit {
         for (let i = 0; i < result.length; i++) {
           this.dictMultiOptions["INST_SCHM"].push({ item_id: result[i].Key, item_text: result[i].Value});
         }
-      },
-      (error) => {
-        console.log(error);
       }
     )
   }
@@ -277,9 +265,6 @@ export class GeneralDataHOComponent implements OnInit {
             fa_comp.push(this.addComponent(comp));
           }
         }
-      },
-      (error) => {
-        console.log(error);
       }
     )
   }
@@ -352,9 +337,6 @@ export class GeneralDataHOComponent implements OnInit {
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.BackToPaging();
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -365,9 +347,6 @@ export class GeneralDataHOComponent implements OnInit {
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.wizard.goToNextStep();
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -398,9 +377,6 @@ export class GeneralDataHOComponent implements OnInit {
           (response) => {
             this.toastr.successMessage("Product Copied Successfully");
             window.location.reload();
-          },
-          (error) => {
-            console.log(error);
           }
         );
       }
@@ -408,14 +384,10 @@ export class GeneralDataHOComponent implements OnInit {
   }
 
   test(){
-    console.log(this.FormProdComp);
-    console.log(this.selectedMultiDDLItems);
     var objPost = this.BuildReqProdDetail();
-    console.log(objPost);
   }
   
   onSelect(){
-    console.log("event");
   }
 
   Cancel()

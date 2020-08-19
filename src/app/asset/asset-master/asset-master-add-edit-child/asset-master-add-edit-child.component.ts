@@ -111,9 +111,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
               this.resultData.FullAssetName = this.resultParentMaster.FullAssetName;
               this.isFinal = this.resultData.IsFinal;
               this.AssetTypeId = this.resultData.AssetTypeId;
-            },
-            error => {
-              console.log(error);
             }
           );
 
@@ -150,18 +147,15 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 response => {
                   this.resultAssetCategory = response[CommonConstant.ReturnObj];
                   this.AssetMasterChildForm.patchValue({ AssetCategoryId: this.resultData.AssetCategoryId });
-                },
-                (error) => {
-                  console.log(error);
                 });
 
-              if (this.isFinal){
+              if (this.isFinal) {
                 this.http.post(URLConstant.GetAssetMasterAttrContentForAssetMaster, { AssetMasterId: this.AssetMasterId }).pipe(first()).subscribe(
                   (response) => {
                     this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
                     var formGroupObject = new Object();
                     for (const masterAttr of this.listAssetMasterAttrContent) {
-                      formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AttrContent"], [Validators.required]];
+                      formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AssetAttrId"], [Validators.required]];
                     }
                     this.AssetMasterChildForm.addControl("AssetMasterAttrContent", this.fb.group(formGroupObject));
                     this.isReadyAssetMasterAttr = true;
@@ -172,7 +166,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 );
               }
             });
-
           this.assetSchmListDObj = new AssetSchmListObj();
           this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
           this.assetSchmListDObj.AssetTypeId = this.resultData.AssetTypeId;
@@ -185,9 +178,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 }
               }
             });
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -243,18 +233,15 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                   if (this.resultAssetCategory.length > 0) {
                     this.AssetMasterChildForm.patchValue({ AssetCategoryId: response[CommonConstant.ReturnObj][0]['Key'] });
                   }
-                },
-                (error) => {
-                  console.log(error);
                 });
 
-              if (this.isFinal){
+              if (this.isFinal) {
                 this.http.post(URLConstant.GetAssetMasterAttrContentForAssetMaster, { AssetMasterId: this.AssetMasterId }).pipe(first()).subscribe(
                   (response) => {
                     this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
                     var formGroupObject = new Object();
                     for (const masterAttr of this.listAssetMasterAttrContent) {
-                      formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AttrContent"], [Validators.required]];
+                      formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AttrAssetAttrIdContent"], [Validators.required]];
                     }
                     this.AssetMasterChildForm.addControl("AssetMasterAttrContent", this.fb.group(formGroupObject));
                     this.isReadyAssetMasterAttr = true;
@@ -265,7 +252,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 );
               }
             });
-
           this.assetSchmListDObj = new AssetSchmListObj();
           this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
           this.assetSchmListDObj.AssetTypeId = this.resultData.AssetTypeId;
@@ -278,17 +264,15 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 }
               }
             });
-        },
-        error => {
-          console.log(error);
         }
       );
     }
   }
 
-  SplitAttrListValue(value){
+  SplitAttrListValue(value) {
     return value.split(";");
   }
+
 
   SelectAll(condition) {
     this.checkboxAll = condition;
@@ -322,8 +306,8 @@ export class AssetMasterAddEditChildComponent implements OnInit {
     var formValue = this.AssetMasterChildForm.value;
     var assetMasterAttrValues = new Array<Object>();
 
-    if(this.AssetMasterChildForm.contains("AssetMasterAttrContent")){
-      if(Object.keys(formValue["AssetMasterAttrContent"]).length > 0 && formValue["AssetMasterAttrContent"].constructor === Object){
+    if (this.AssetMasterChildForm.contains("AssetMasterAttrContent")) {
+      if (Object.keys(formValue["AssetMasterAttrContent"]).length > 0 && formValue["AssetMasterAttrContent"].constructor === Object) {
         for (const key in formValue["AssetMasterAttrContent"]) {
           var assetMasterAttr = {
             AssetMasterId: this.AssetMasterId,
@@ -372,7 +356,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
             this.listAssetScheme[i].AssetMasterId = null;
           }
         }
-
         this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj).pipe(
           map((response) => {
             return response;
@@ -387,11 +370,16 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response[1]["Message"]);
             this.router.navigate(["/Asset/AssetMaster/Paging"]);
-          },
-          (error) => {
-            console.log(error);
           });
       }
+      else{
+        this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj).subscribe(
+          (response) => {
+            this.toastr.successMessage(response["Message"]);
+            this.router.navigate(["/Asset/AssetMaster/Paging"]);
+          });
+      }
+
 
     } else {
       this.assetMasterObj = this.resultData;
@@ -446,7 +434,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           }
         );
       }
-      else{
+      else {
         this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj).subscribe(
           response => {
             this.toastr.successMessage(response["Message"]);

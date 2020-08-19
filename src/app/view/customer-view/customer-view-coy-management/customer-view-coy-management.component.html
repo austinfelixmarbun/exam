@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-body">
+    <div class="px-3">
+      <lib-ucSubsection [id]="'ShareId'" [title]="'Management / Shareholder Listing'" [panel]="'MngmntId'">
+      </lib-ucSubsection>
+      <div id="MngmntId">
+        <br>
+        <table class="table table-responsive-md text-center table-hover">
+          <thead>
+            <tr class="table-header">
+              <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>STATUS</span> </th>
+              <th class="text-left"><span class="thead-header" name='fullAssetName' translate>SHAREHOLDER NAME</span>
+              </th>
+              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>TYPE</span> </th>
+              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>CUSTOMER MODEL</span>
+              </th>
+              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>TAX ID NO</span> </th>
+              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>SHARE (%)</span> </th>
+              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>DEFAULT SIGNER</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let item of responseObj">
+              <tr>
+                <td></td>
+                <td class="text-left" *ngIf="item.CustId != 0"><a href="{{custUrl + item.CustId}}" target="_blank">{{item.ShrholderName}}</a></td>
+                <td class="text-left" *ngIf="item.CustId == 0">{{item.ShrholderName}}</td>
+                <td class="text-left">{{item.Type}}</td>
+                <td class="text-left">{{item.CustModel}}</td>
+                <td class="text-left">{{item.TaxIdNo}}</td>
+                <td class="text-left">{{item.SharePrcnt}}</td>
+                <td *ngIf="item.IsSigner == true" class="text-left">Yes</td>
+                <td *ngIf="item.IsSigner == false" class="text-left">No</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -78,6 +78,12 @@ export class NegativeAssetDetailComponent implements OnInit {
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/uclookup/NegativeAsset/lookupAssetMaster_NegAst.json";
     this.inputLookupObj.genericJson = "./assets/uclookup/NegativeAsset/lookupAssetMaster_NegAst.json";
+    this.inputLookupObj.ddlEnvironments = [
+      {
+        name: "asset_Type_Name",
+        environment: environment.FoundationR3Url
+      }
+    ];
 
     this.criteriaList = new Array();
     this.criteriaObj = new CriteriaObj();
@@ -157,9 +163,6 @@ export class NegativeAssetDetailComponent implements OnInit {
           this.serial3Disabled = response["AssetTypeObj"]["SerialNo3Label"] == "" ? true : false;
           this.serial4Disabled = response["AssetTypeObj"]["SerialNo4Label"] == "" ? true : false;
           this.serial5Disabled = response["AssetTypeObj"]["SerialNo5Label"] == "" ? true : false;
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -172,9 +175,6 @@ export class NegativeAssetDetailComponent implements OnInit {
               MrNegAssetSourceCode: this.negativeAssetSourceList[0]["Key"]
             });
           }
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -267,9 +267,6 @@ export class NegativeAssetDetailComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/NegativeAsset/Paging"]);
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -278,9 +275,6 @@ export class NegativeAssetDetailComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/NegativeAsset/Paging"]);
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

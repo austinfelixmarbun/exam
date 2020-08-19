@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 
 @Component({
   selector: 'app-customer-company-address-add',
@@ -53,8 +53,9 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     MrCustAddrTypeCode: [''],
     CopyAddrFrom: ['']
   });
+  inputAddressObj: InputAddressObj;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.getRefMasterWithReserveFieldUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
     this.getListCustAddrUrl = URLConstant.GetListCustAddr;
     this.addCustAddrUrl = URLConstant.AddCustAddr;
@@ -97,7 +98,6 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.http.post(this.getListCustAddrUrl, this.custAddrObj).subscribe(
       (response) => {
         this.listCustAddr = response[CommonConstant.ReturnObj];
-        console.log(this.listCustAddr);
         if (this.listCustAddr.length > 0) {
           this.CustDataCompanyForm.patchValue({ CopyAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'] });
         }
@@ -139,9 +139,15 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
           this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
           this.inputFieldAddressObj.inputLookupObj.nameSelect = this.copyCustomerAddr.Zipcode;
           this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.copyCustomerAddr.Zipcode };
+          this.inputAddressObj.default = this.addressObj;
+          this.inputAddressObj.inputField = this.inputFieldAddressObj;
 
         });
     }
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.showSubsection = false;
+    this.inputAddressObj.title = "Customer Address";
+    this.inputAddressObj.showOwnership = true;
   }
 
   copyAddress() {
@@ -178,6 +184,8 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
         this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
         this.inputFieldAddressObj.inputLookupObj.nameSelect = this.copyCustomerAddrFrom.Zipcode;
         this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.copyCustomerAddrFrom.Zipcode };
+        this.inputAddressObj.default = this.addressObj;
+        this.inputAddressObj.inputField = this.inputFieldAddressObj;
       });
   }
 
@@ -215,9 +223,6 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputValue.emit({ mode: 'check' });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     } else {
@@ -227,9 +232,6 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputValue.emit({ mode: 'check' });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

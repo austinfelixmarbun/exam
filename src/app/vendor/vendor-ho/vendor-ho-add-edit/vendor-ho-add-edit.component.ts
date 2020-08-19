@@ -10,7 +10,6 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { formatDate } from '@angular/common';
-import { areaChartYAxisLabel } from 'app/shared/configs/ngx-charts.config';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -80,7 +79,7 @@ export class VendorHoAddEditComponent implements OnInit {
     RowVersionVendor: [''],
     RowVersionVendorAddr: [''],
     IsNpwpExist: [false],
-    VendorAtpmCode: [{ value: '' }]
+    VendorAtpmCode: []
   })
 
   ngOnInit() {
@@ -140,9 +139,6 @@ export class VendorHoAddEditComponent implements OnInit {
 
         this.setLookup();
         this.checkType();
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -245,9 +241,6 @@ export class VendorHoAddEditComponent implements OnInit {
   }
 
   getLookupATPM(ev){
-    // console.log(ev);
-    // console.log(this.VendorForm);
-    
     this.VendorForm.patchValue({
       VendorAtpmCode: ev.VendorCode,
     });
@@ -422,9 +415,6 @@ export class VendorHoAddEditComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response["message"]);
             this.router.navigate(['/Vendor/HO/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": "edit" } });
-          },
-          (error) => {
-            console.log(error);
           });
       }
       else {
@@ -434,9 +424,6 @@ export class VendorHoAddEditComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response["message"]);
             this.router.navigate(['/Vendor/HO/Registration'], { queryParams: { "VendorId": response['VendorObj'].VendorId } });
-          },
-          (error) => {
-            console.log(error);
           });
       }
     }

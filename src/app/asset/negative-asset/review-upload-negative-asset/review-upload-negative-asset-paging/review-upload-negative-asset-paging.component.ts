@@ -40,9 +40,6 @@ export class ReviewUploadNegativeAssetPagingComponent implements OnInit {
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate(['/Asset/NegativeAsset/ReviewUploadPaging']);
         });
-      },
-      error => {
-        console.log(error);
       }
     );
   }

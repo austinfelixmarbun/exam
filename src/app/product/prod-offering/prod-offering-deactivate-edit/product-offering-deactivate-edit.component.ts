@@ -60,28 +60,19 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
     var obj = { RefReasonTypeCode: CommonConstant.RefReasonTypeCodeProdDeactivate };
     this.http.post(this.getValueReasonModel, obj).subscribe(
       (response) => {
-        console.log(response);
         if (response['ReturnObject'].length > 0) {
           this.allRefReasonMethod = response['ReturnObject'];
           this.ProdOfferingHDeactForm.patchValue({ Reason: response['ReturnObject'][0]['Key'] });
         }
-      },
-      (error) => {
-        console.log(error);
       });
 
     this.ProdOfferingBranchMemObj = new RefProductOfferingBrancMbrObj
     this.ProdOfferingBranchMemObj.ProdOfferingHId = this.prodOfferingHId;
     this.http.post(this.ProdOfferingBranchUrl, this.ProdOfferingBranchMemObj).subscribe(
       response => {
-        console.log("Response: ");
-        console.log(response);
         if (response['ReturnObject'].length > 0) {          
           this.OfficeList = response['ReturnObject'];
         }
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -95,9 +86,6 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
       response => {
         this.toastr.successMessage(response["message"]);
         this.router.navigate(["/Product/OfferingDeactivate"]);
-      },
-      error => {
-        console.log(error);
       }
     );
 

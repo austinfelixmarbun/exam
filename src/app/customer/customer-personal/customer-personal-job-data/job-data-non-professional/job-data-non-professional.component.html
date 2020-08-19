@@ -3,6 +3,9 @@
       #enjiForm="ngForm">
     <div class="form-body">
       <div id="jobData">
+        <lib-ucSubsection [id]="'custAddrId'" [title]="'Job Data'" [panel]="'mainJobData'">
+        </lib-ucSubsection>
+        <div id="mainJobData">
           <div class="form-group row">
             <label class="col-md-2 adInsLabel adins-required-label" translate>Profession Name</label>
             <div class="col-md-4">
@@ -19,6 +22,7 @@
                 <lib-uc-show-errors [control]="JobDataNonProForm.controls.JobTitleName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
           </div>
+        </div>
       </div>
     </div>
     <div class="form-actions right" style="text-align: right;" >

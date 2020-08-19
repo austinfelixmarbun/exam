@@ -44,8 +44,6 @@ export class RoleAddEditComponent implements OnInit {
       if (params['RefRoleId'] != null) {
         this.RefRoleId = params['RefRoleId'];
       }
-      console.log(this.type)
-      console.log(this.RefRoleId)
     });
   }
 
@@ -64,9 +62,6 @@ export class RoleAddEditComponent implements OnInit {
             RoleName: this.resultData.RoleName,
             IsActive: this.resultData.IsActive
           });
-        },
-        error => {
-          console.log(error);
         }
       );
     }
@@ -82,9 +77,6 @@ export class RoleAddEditComponent implements OnInit {
         response => {
             this.service.successMessage(response["Message"]);
             this.router.navigate(["/SystemSetting/Role"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -95,12 +87,8 @@ export class RoleAddEditComponent implements OnInit {
       this.refRoleObj.IsActive = this.RefRoleForm.controls["IsActive"].value;
       this.httpClient.post(URLConstant.EditRefRole, this.refRoleObj).subscribe(
         response => {
-          console.log(response);
           this.service.successMessage(response["Message"]);
           this.router.navigate(["/SystemSetting/Role"]);
-        },
-        error => {
-          console.log(error);
         }
       );
     }

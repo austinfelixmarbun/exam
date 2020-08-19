@@ -123,9 +123,6 @@ export class AddAssetSchemeComponent implements OnInit {
       response => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(["/Asset/Scheme/MemberDetail"], { queryParams: { "AssetSchmHId": this.AssetSchmHId } });
-      },
-      error => {
-        console.log(error);
       }
     );
   }

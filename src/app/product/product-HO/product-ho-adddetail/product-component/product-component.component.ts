@@ -121,9 +121,6 @@ export class ProductComponentHOComponent implements OnInit {
       await this.http.post(url, payload).toPromise().then(
         (response) => {
           this.dictOptions[obj.RefProdCompntCode] = response[CommonConstant.ReturnObj];
-        },
-        (error) => {
-          console.log(error);
         }
       )
     }
@@ -137,9 +134,6 @@ export class ProductComponentHOComponent implements OnInit {
       await this.http.post(url, { RowVersion : "", BehaviourTypeCode : bhvrTypeCode}).toPromise().then(
         (response) => {
           this.dictBehaviour[bhvrTypeCode] = response[CommonConstant.ReturnObj];
-        },
-        (error) => {
-          console.log(error);
         }
       )
     }
@@ -154,7 +148,6 @@ export class ProductComponentHOComponent implements OnInit {
     }
     this.http.post(this.UrlGetProdCompGrouped, ProdHOComponent).toPromise().then(
       async (response) => {
-        console.log(response);
         for (var i = 0; i < response[CommonConstant.ReturnObj].length; i++) {
           var group = response[CommonConstant.ReturnObj][i];
           var fa_group = this.FormProdComp.controls['groups'] as FormArray;
@@ -171,8 +164,6 @@ export class ProductComponentHOComponent implements OnInit {
               await this.PopulateRefBehaviour(comp);
             }
           }
-          console.log("Behaviour")
-          console.log(this.dictBehaviour)
 
           for (var j = 0; j < group.Components.length; j++) {
             var comp = group.Components[j];
@@ -185,9 +176,6 @@ export class ProductComponentHOComponent implements OnInit {
             fa_comp.push(comp_group);
           }
         }
-      },
-      (error) => {
-        console.log(error);
       }
     )
   }
@@ -228,9 +216,6 @@ export class ProductComponentHOComponent implements OnInit {
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.BackToPaging();
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -241,9 +226,6 @@ export class ProductComponentHOComponent implements OnInit {
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.wizard.goToNextStep();
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -261,7 +243,6 @@ export class ProductComponentHOComponent implements OnInit {
     else
     {
       this.NextDetail();
-      console.log(this.FormProdComp);
     }
   }
   DownloadRule(CompntValue, CompntValueDesc) {
@@ -269,9 +250,6 @@ export class ProductComponentHOComponent implements OnInit {
     this.http.post(URLConstant.DownloadProductRule, this.DlRuleObj, { responseType: 'blob' }).subscribe(
       response => {
         saveAs(response, CompntValueDesc + '.xlsx');
-      },
-      error => {
-        console.log(error);
       }
     );
   }

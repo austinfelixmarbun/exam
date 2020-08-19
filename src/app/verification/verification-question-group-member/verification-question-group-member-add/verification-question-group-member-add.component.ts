@@ -74,9 +74,6 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListVerfQuestionAnswerId);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -100,9 +97,6 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
       response => {
         this.toastr.successMessage(response['message']);
         this.router.navigate(["/Verification/QuestionGroupMemberPaging"], { queryParams: { "VerfQuestionGrpHId": this.VerfQuestionGrpHId } });
-      },
-      error => {
-        console.log(error);
       }
     );
   }

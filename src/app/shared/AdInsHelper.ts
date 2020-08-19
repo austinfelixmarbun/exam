@@ -145,7 +145,7 @@ export class AdInsHelper {
         return parsedValue;
     }
     public static OpenCustomerViewByCustId(CustId){
-        var url = environment.FoundationR3Web + "/Customer/CustomerView/Page?CustId=" + CustId;
+        var url = environment.FoundationR3Web + "/View/Customer?CustId=" + CustId;
         window.open(url, "_blank");
     }
 }

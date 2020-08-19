@@ -48,7 +48,6 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     this.http.post(URLConstant.GetActiveRefVerfAnswerTypes, refAnswerObj).subscribe(
       (response) => {
         this.itemVerfQuestionAnswer = response[CommonConstant.ReturnObj];
-        console.log(this.itemVerfQuestionAnswer);
         if (this.itemVerfQuestionAnswer.length > 0) {
           let VerfAnswerData = this.itemVerfQuestionAnswer.find(x => x.VerfAnswerTypeCode == "DDL");
           this.QuestionAnswerForm.patchValue({
@@ -114,9 +113,6 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Verification/QuestionAnswer/Paging']);
-        },
-        (error) => {
-          console.log(error);
         });
     }
     else {
@@ -125,9 +121,6 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Verification/QuestionAnswer/Paging']);
-        },
-        (error) => {
-          console.log(error);
         });
     }
   }

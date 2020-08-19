@@ -53,6 +53,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
   DuplicateStatus: string;
   MotherMaidenName: string;
   IsAffiliateWithMf: string;
+  MrMaritalStatCode: string;
 
   addCustUrl: string;
   resultPersonalUrl: string;
@@ -104,6 +105,9 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
       if (params["VipNotes"] != null) {
         this.VipNotes = params["VipNotes"];
       }
+      if (params["MrMaritalStatCode"] != null) {
+        this.MrMaritalStatCode = params["MrMaritalStatCode"];
+      }
     });
   }
 
@@ -115,11 +119,9 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.DuplicateCustObj.TaxIdNo = this.TaxIdNo;
     this.DuplicateCustObj.MotherMaidenName = this.MotherMaidenName;
     this.DuplicateCustObj.BirthDt = this.BirthDt;
-    console.log(this.DuplicateCustObj);
     this.http.post(URLConstant.GetCustomerAndNegativeCustDuplicateCheck, this.DuplicateCustObj).subscribe(
       (response) => {
         this.DuplicateStatus = response["Status"];
-        console.log(this.DuplicateStatus);
         if (this.DuplicateStatus != null && this.DuplicateStatus != undefined) {
           this.ResultDuplicate = response[CommonConstant.ReturnObj]["CustDuplicate"];
           this.ResultDuplicateNegative = response[CommonConstant.ReturnObj]["NegativeCustDuplicate"];
@@ -199,15 +201,13 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.addCustObj.CustPersonalObj.BirthDt = this.BirthDt;
     this.addCustObj.CustPersonalObj.MotherMaidenName = this.MotherMaidenName;
     this.addCustObj.CustPersonalObj.IsRestInPeace = false;
+    this.addCustObj.CustPersonalObj.MrMaritalStatCode = this.MrMaritalStatCode;
 
     this.http.post(this.addCustUrl, this.addCustObj).subscribe(
       (response) => {
         this.resultData = response;
         this.IdCust = this.resultData.CustObj.CustId;
         this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.IdCust, 'From': 'CustPaging' } });
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -246,14 +246,8 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         this.http.post(URLConstant.EditDuplicateCust, this.addCustObj).subscribe(
           (response) => {
             this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId, 'From': 'CustPaging' } });
-          },
-          error => {
-            console.log(error);
           }
         );
-      },
-      error => {
-        console.log(error);
       }
     );
   }
@@ -291,14 +285,8 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
           (response) => {
             var custId = response['CustId'];
             this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { 'IdCust': custId, 'From': 'CustPaging' } });
-          },
-          error => {
-            console.log(error);
           }
         );
-      },
-      error => {
-        console.log(error);
       }
     );
   }

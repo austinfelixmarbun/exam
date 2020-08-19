@@ -46,20 +46,12 @@ export class ViewgenericComponent implements OnInit {
 
           this.http.post(this.viewList.subsection[i].mainInfoUrl, queryObj).subscribe(
             (response) => {
-              console.log(response);
               this.viewInfoObjList[i] = response["returnObject"];
-            },
-            (error) => {
-              console.log(error);
             })
         } else {
           this.http.post(this.viewList.subsection[i].mainInfoUrl, this.getList).subscribe(
             (response) => {
-              console.log(response);
               this.viewInfoObjList[i] = response["returnObject"];
-            },
-            (error) => {
-              console.log(error);
             })
         }
       }

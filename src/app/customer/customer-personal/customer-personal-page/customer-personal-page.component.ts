@@ -74,7 +74,6 @@ export class CustomerPersonalPageComponent implements OnInit {
       linear: false,
       animation: true
     })
-    console.log(this.stepper);
     this.EnterTab("Detail");
     this.CustStepIndex = 1;
     this.stepper.to(this.CustStepIndex);
@@ -112,7 +111,6 @@ export class CustomerPersonalPageComponent implements OnInit {
   }
 
   getValue(ev: any) {
-    console.log("GetValue: " + JSON.stringify(ev));
     if (ev.stepMode != undefined) {
       if (ev.stepMode == "next"){
         this.stepper.next();
@@ -122,6 +120,14 @@ export class CustomerPersonalPageComponent implements OnInit {
         this.stepper.previous();
         this.CustStepIndex--;
       }
+    }
+  }
+  
+  endStepper(ev:any){
+    if (this.Page != null) {
+      this.router.navigate(["/Customer/EditMainData/Paging"]);
+    } else {
+      this.router.navigate(["/Customer/Paging"]);
     }
   }
 }

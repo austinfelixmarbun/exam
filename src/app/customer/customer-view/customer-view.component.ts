@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { environment } from 'environments/environment';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-customer-view',
@@ -11,8 +13,8 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 export class CustomerViewComponent implements OnInit {
   custModel: any;
   custResultData: any;
-  viewCustMainInfoHeaderObj: any;
-  viewCustCoyMainInfoHeader: any;
+  viewCustMainInfoHeaderObj: UcViewGenericObj = new UcViewGenericObj();
+  viewCustCoyMainInfoHeader: UcViewGenericObj= new UcViewGenericObj();
 
   CustId: number;
 
@@ -28,8 +30,11 @@ export class CustomerViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.viewCustMainInfoHeaderObj =  "./assets/ucviewgeneric/viewCustMainInfoHeader.json";
-    this.viewCustCoyMainInfoHeader =  "./assets/ucviewgeneric/viewCustCoyMainInfoHeader.json";
+    this.viewCustMainInfoHeaderObj.viewInput = "./assets/ucviewgeneric/viewCustMainInfoHeader.json";
+    this.viewCustMainInfoHeaderObj.viewEnvironment = environment.FoundationR3Url;
+
+    this.viewCustCoyMainInfoHeader.viewInput = "./assets/ucviewgeneric/viewCustCoyMainInfoHeader.json";
+    this.viewCustCoyMainInfoHeader.viewEnvironment = environment.FoundationR3Url;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
@@ -43,12 +48,6 @@ export class CustomerViewComponent implements OnInit {
         this.custResultData = response;
         this.custModel = this.custResultData['MrCustModelCode'];
         this.custType  = this.custResultData['MrCustTypeCode'];
-        console.log(this.custType);
-      },
-      (error) =>{
-        this.custModel = "";
-        this.custType = "";
-        console.log(error);
       }
     );
   } 

@@ -51,7 +51,6 @@ export class CustomerCompanyPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.IdCust);
     if (this.IdCust == null) {
       this.router.navigate(["/Customer/Paging"]);
     }
@@ -62,13 +61,11 @@ export class CustomerCompanyPageComponent implements OnInit {
           this.CustCompanyId = response['CustCompanyId'];
         } 
       );
-      console.log(this.CustCompanyId);
 
       this.stepper = new Stepper(document.querySelector('#stepper1'), {
         linear: false,
         animation: true
       })
-      console.log(this.stepper);
       this.EnterTab("Detail");
       this.CustStepIndex = 1;
       this.stepper.to(this.CustStepIndex);

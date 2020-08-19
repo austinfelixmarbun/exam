@@ -48,7 +48,6 @@ export class OrganizationModelDetailComponent implements OnInit {
       }
       if (params['orgMdlId'] != null) {
         this.orgMdlId = params['orgMdlId'];
-        console.log('MdlCode', this.orgMdlId);
       }
       if (params['refOrgId'] != null) {
         this.refOrgId = params['refOrgId'];
@@ -58,7 +57,6 @@ export class OrganizationModelDetailComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log('masuk');
     this.orgModelObj = new OrgMdlObj()
     this.GetRefOrg();
     if (this.type == 'edit') {
@@ -67,16 +65,10 @@ export class OrganizationModelDetailComponent implements OnInit {
       this.orgModelObj.orgMdlId = +this.orgMdlId;
       this.httpClient.post(this.apiUrl, this.orgModelObj).subscribe(
         (response) => {
-          console.log('Success Get');
           this.orgModelObj = response['returnObject'];
-          console.log('obj', response['returnObject'])
           this.modelCode = response['returnObject']['orgMdlCode'];
           this.modelName = response['returnObject']['orgMdlName'];
           if (response['returnObject']['isActive'] == '1') { this.isActive = true; } else { this.isActive = false; }
-        },
-        (error) => {
-          console.log('Error Get');
-          console.log(error);
         }
       );
     }
@@ -100,7 +92,6 @@ export class OrganizationModelDetailComponent implements OnInit {
       //CHECK-DUPLICATE-CODE
       this.httpClient.post(getOrgModel, orgMdlObj).subscribe(
         (response) => {
-          console.log("Success Check Duplicate");
           if (response['returnObject'] != null) {
             this.service.typeErrorCustom(ExceptionConstant.CODE_HAS_BEEN_USED);
           }
@@ -115,21 +106,18 @@ export class OrganizationModelDetailComponent implements OnInit {
             //SAVE
             this.httpClient.post(this.apiUrl, this.orgModelObj).subscribe(
               (response) => {
-                console.log("Success Save");
                 this.service.typeSave(response['message']);
                 this.location.back();
                 // this.router.navigate(['/commonSetting/master/Detail']);
 
               },
               (error) => {
-                console.log("Error Save");
                 this.service.typeErrorCustom(error);
               }
             );
           }
         },
         (error) => {
-          console.log("Error Check Duplicate");
           this.service.typeErrorCustom(error);
         }
       );
@@ -145,13 +133,11 @@ export class OrganizationModelDetailComponent implements OnInit {
       //SAVE
       this.httpClient.post(this.apiUrl, this.orgModelObj).subscribe(
         (response) => {
-          console.log("Success Edit");
           this.service.typeSave(response['message']);
           this.location.back();
           this.spinner.hide();
         },
         (error) => {
-          console.log("Error Edit");
           this.service.typeErrorCustom(error);
           this.spinner.hide();
         }

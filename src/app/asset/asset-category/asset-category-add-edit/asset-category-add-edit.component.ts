@@ -56,9 +56,6 @@ export class AssetCategoryAddEditComponent implements OnInit {
             AssetCategoryName: this.result.AssetCategoryName,
             IsActive: this.result.IsActive
           })
-        },
-        (error) => {
-          console.log(error);
         });
     }
   }
@@ -74,9 +71,6 @@ export class AssetCategoryAddEditComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Category/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
-        },
-        error => {
-          console.log(error);
         });
     } else {
       this.acObj = this.result;
@@ -88,9 +82,6 @@ export class AssetCategoryAddEditComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Category/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
-        },
-        error => {
-          console.log(error);
         });
     }
   }

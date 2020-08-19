@@ -42,7 +42,6 @@ export class UcLookupGroupComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     console.log("generic");
-    console.log(this.lookupInput.jsonSelect);
     this.parentForm.addControl(this.identifier, this.fb.group({
       value: ['']
     }));
@@ -98,8 +97,6 @@ export class UcLookupGroupComponent implements OnInit, OnChanges {
   }
 
   getSelect(event) {
-    console.log(event);
-    console.log(this.inputValue);
     this.lookupInput.jsonSelect = event;
     this.parentForm.controls[this.identifier].patchValue({ value: event[this.genericJson.propertyName] });
     this.lookupInput.nameSelect = event[this.genericJson.propertyName];

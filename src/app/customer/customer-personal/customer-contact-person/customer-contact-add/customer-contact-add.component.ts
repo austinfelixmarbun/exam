@@ -17,6 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 
 @Component({
   selector: 'app-customer-contact-add',
@@ -64,7 +65,7 @@ export class CustomerContactAddComponent implements OnInit {
 
   flag: boolean;
   tempKTPCheck: boolean;
-
+  tempMobilePhone1 : boolean;
   businessDtMin: Date;
   businessDtMax: Date;
 
@@ -99,6 +100,7 @@ export class CustomerContactAddComponent implements OnInit {
   });
   criteriaExistingList: any[];
   criteriaExistingObj: CriteriaObj;
+  inputAddressObj: any;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.KTP = RefMasterConstant.EKtp;
@@ -114,6 +116,7 @@ export class CustomerContactAddComponent implements OnInit {
   }
   isAdd: any;
   ngOnInit() {
+    console.log("aaa")
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -150,7 +153,6 @@ export class CustomerContactAddComponent implements OnInit {
         this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
           (response) => {
             this.LocalCountry = response;
-            console.log(this.LocalCountry.CountryName);
           });
       });
     this.professionLookUpObj = new InputLookupObj();
@@ -277,6 +279,15 @@ export class CustomerContactAddComponent implements OnInit {
             MrCustRelationshipCode: this.tempMrCustRelationshipCode[0].Key
           });
         }
+        if (this.tempMrCustRelationshipCode[0].Key == "SPOUSE") {
+          this.CustomerContactForm.controls.MobilePhnNo1.setValidators(Validators.required);
+          this.tempMobilePhone1 = true;
+        } else {
+            this.tempMobilePhone1 = false;
+          this.CustomerContactForm.controls.MobilePhnNo1.clearValidators();
+        }
+        this.CustomerContactForm.controls.MobilePhnNo1.updateValueAndValidity();
+
       });
 
     var refMasterObjMrGenderCode = {
@@ -357,6 +368,12 @@ export class CustomerContactAddComponent implements OnInit {
           this.UcAddressObj.City = this.tempCustPersonalContactPerson.City;
         });
     }
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.showSubsection = false;
+    this.inputAddressObj.title = "Customer Address";
+    this.inputAddressObj.default = UcAddressObj;
+    this.inputAddressObj.inputField = this.inputFieldObj;
+    this.inputAddressObj.showAllPhn= false;
   }
   SaveValue() {
 
@@ -405,32 +422,23 @@ export class CustomerContactAddComponent implements OnInit {
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.tempCustPersonalContactPerson.CustPersonalContactPersonId;
 
       this.custPersonalContactPersonObj.RowVersion = this.tempCustPersonalContactPerson.RowVersion;
-      console.log(this.editCustPersonalContactPersonUrl);
       this.http.post(this.editCustPersonalContactPersonUrl, this.custPersonalContactPersonObj).subscribe(
         response => {
-          console.log(response);
           this.toastr.successMessage(response["Message"]);
           // this.wizard.goToNextStep();
           this.isAdd = false;
           this.outputTab.emit({ isAdd: this.isAdd });
           // this.outputTab.emit({ stepMode: "next"});
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
 
       this.http.post(this.addCustPersonalContactPersonUrl, this.custPersonalContactPersonObj).subscribe(
         response => {
-          console.log(response);
           this.toastr.successMessage(response["Message"]);
           this.isAdd = false;
           this.outputTab.emit({ isAdd: this.isAdd });
           // this.wizard.goToNextStep();
-        },
-        error => {
-          console.log(error);
         }
       );
 
@@ -495,7 +503,6 @@ export class CustomerContactAddComponent implements OnInit {
     );
     this.custAddrObj = new CustAddrObj();
     this.custAddrObj.CustId = this.tempCustId;
-    console.log(this.tempCustId);
     this.custAddrObj.MrCustAddrTypeCode = RefMasterConstant.LegalAddr;
     this.http.post(URLConstant.GetCustAddrByMrCustAddrType, this.custAddrObj).subscribe(
       (response) => {
@@ -549,6 +556,17 @@ export class CustomerContactAddComponent implements OnInit {
       this.lookUpObj.isRequired = true;
     }
   }
+  Check() {
+    if (this.CustomerContactForm.controls.MrCustRelationshipCode.value == "SPOUSE") {
+      this.CustomerContactForm.controls.MobilePhnNo1.setValidators(Validators.required);
+      this.tempMobilePhone1 = true;
+    } else {
+      this.CustomerContactForm.controls.MobilePhnNo1.clearValidators();
+      this.tempMobilePhone1 = false;
+    }
+    this.CustomerContactForm.controls.MobilePhnNo1.updateValueAndValidity();
+  }
+
   back() {
     this.isAdd = false;
     this.outputTab.emit({ isAdd: this.isAdd });

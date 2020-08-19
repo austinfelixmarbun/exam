@@ -47,7 +47,6 @@ export class MasterTypePagingComponent implements OnInit {
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = URLConstant.GetRefRolePaging;
     
-    console.log('masuk');
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
     this.pageSize = this.show[0];
@@ -55,7 +54,6 @@ export class MasterTypePagingComponent implements OnInit {
     this.initiateForm()
     // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
     //   .subscribe(data => {
-    //     console.log(data);
     //   }
     //   )
   }
@@ -95,7 +93,6 @@ export class MasterTypePagingComponent implements OnInit {
       this.deleteUrl = this.foundationUrl + URLConstant.DeleteRefRole;
       this.refRoleObj = new RefRoleObj();
       this.refRoleObj.RefRoleId = +id;
-      console.log(this.refRoleObj);
       this.https.post(this.deleteUrl, this.refRoleObj).subscribe(
         (response) => {
           this.service.successMessage(response['message']);

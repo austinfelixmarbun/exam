@@ -33,7 +33,6 @@ export class UcgridviewComponent implements OnInit {
 
   initiateForm() {
     this.getJSON(this.gridInput.pagingJson).subscribe(data => {
-      console.log(data);
       this.isSeq = data.isSeq;
       this.headerList = data.headerList;
       this.bodyList = data.bodyList;
@@ -111,9 +110,6 @@ export class UcgridviewComponent implements OnInit {
         (response) => {
           this.toastr.success(response['message'], 'Success!');
           this.searchPagination(this.pageNow);
-        },
-        (error) => {
-          console.log(error);
         });
     }
   }

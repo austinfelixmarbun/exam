@@ -60,9 +60,6 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListRefOfficeId);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -85,9 +82,6 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
     this.http.post(URLConstant.AddListVendorOfficeMember, obj).subscribe(
       (response) => {
         this.router.navigate(['/Vendor/Branch/Member/Paging'], { queryParams: { VendorId: this.VendorId } });
-      },
-      (error) => {
-        console.log(error);
       });
   }
 }

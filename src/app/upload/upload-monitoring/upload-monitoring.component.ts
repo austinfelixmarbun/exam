@@ -123,10 +123,6 @@ export class UploadMonitoringComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response['message']);
           this.searchPagination(this.pageNow);
-        },
-        (error) => {
-          console.log('Error');
-          console.log(error);
         });
     }
   }

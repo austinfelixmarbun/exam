@@ -57,16 +57,12 @@ export class VendorGroupComponent implements OnInit {
     if (this.pageType == "add") {
       this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
         (response) => {
-          console.log(response);
           this.allVendorCategory = response[CommonConstant.ReturnObj];
           if (this.allVendorCategory.length > 0) {
             this.VendorGroupFrom.patchValue({
               MrVendorCategoryCode: this.MrVendorCategoryCode
             });
           }
-        },
-        (error) => {
-          console.log(error);
         })
     }
     else if (this.pageType == "edit") {
@@ -76,7 +72,6 @@ export class VendorGroupComponent implements OnInit {
 
       this.httpClient.post(URLConstant.GetVendorGrpByVendorGrpId, this.vendorGrpObj).subscribe(
         (response) => {
-          console.log(response);
           this.resultData = response;
           this.MrVendorCategoryCode = this.resultData.MrVendorCategoryCode;
           this.VendorGroupFrom.patchValue({
@@ -90,16 +85,12 @@ export class VendorGroupComponent implements OnInit {
 
           this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
             (response) => {
-              console.log(response);
               this.allVendorCategory = response[CommonConstant.ReturnObj];
               if (this.allVendorCategory.length > 0) {
                 this.VendorGroupFrom.patchValue({
                   MrVendorCategoryCode: this.resultData.MrVendorCategoryCode
                 });
               }
-            },
-            (error) => {
-              console.log(error);
             })
         })
     }
@@ -109,18 +100,12 @@ export class VendorGroupComponent implements OnInit {
     this.vendorGrpObj = this.VendorGroupFrom.value;
     this.vendorGrpObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
     this.vendorGrpObj.RowVersion = "";
-    console.log(this.VendorGroupFrom.value);
-    console.log(this.vendorGrpObj);
 
     if (this.pageType == "add") {
       this.httpClient.post(URLConstant.AddVendorGrp, this.vendorGrpObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response['message']);
           this.router.navigate(["/Vendor/Paging"], { queryParams: { "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode } });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }
@@ -130,12 +115,8 @@ export class VendorGroupComponent implements OnInit {
 
       this.httpClient.post(URLConstant.EditVendorGrp, this.vendorGrpObj).subscribe(
         (response) => {
-          console.log(response);
           this.toastr.successMessage(response['message']);
           this.router.navigate(["/Vendor/Paging"], { queryParams: { "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode } });
-        },
-        (error) => {
-          console.log(error);
         }
       );
     }

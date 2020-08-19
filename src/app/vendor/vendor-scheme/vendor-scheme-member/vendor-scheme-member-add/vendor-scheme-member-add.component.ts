@@ -60,9 +60,6 @@ export class VendorSchemeMemberAddComponent implements OnInit {
           this.tempPagingObj.addCritInput.push(addCritListVendorId);
         }
         this.tempPagingObj.isReady = true;
-      },
-      (error) => {
-        console.log(error);
       }
     );
   }
@@ -86,9 +83,6 @@ export class VendorSchemeMemberAddComponent implements OnInit {
       (response) => {
         this.toastr.success(response["message"], 'Success!');
         this.router.navigate(['/Vendor/VendorScheme/Member'], { queryParams: { VendorSchmId: this.VendorSchmId, MrVendorCategoryCode: this.MrVendorCategoryCode } });
-      },
-      (error) => {
-        console.log(error);
       });
   }
 }

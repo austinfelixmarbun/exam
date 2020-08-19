@@ -73,7 +73,7 @@
             "isSelectOne" : false,
             "items" : [],
             "isFromURL" : true, 
-            "url" : "http://r3app-server.ad-ins.com/FOUNDATION_R3/RefMaster/GetListKeyValueActiveByCode", 
+            "url" : "", 
             "path": "/RefMaster/GetListKeyValueActiveByCode",
             "itemsUrl" : [], 
             "criteriaPropName" : "RefMasterTypeCode",
@@ -143,7 +143,7 @@
             "type" : "link", 
             "position" : "left", 
             "property" : "custName",
-            "path": "/Customer/NegativeCustomer/View",
+            "path": "/View/NegativeCustomer",
             "target": "_blank",
             "param": [
                 {

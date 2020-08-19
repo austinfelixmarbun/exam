@@ -50,16 +50,10 @@ export class EditCompanyComponent implements OnInit {
             refCoyObj.refCoyId = this.param;
             this.http.post(this.apiUrl, refCoyObj).subscribe(
                 (response) => {
-                    console.log("Success");
-                    console.log(response);
                     this.result = response['returnObject'];
                     this.ucAddr.setData(this.result);
                     this.ucContact.setData(this.result);
                     this.setData(this.result);
-                },
-                (error) => {
-                    console.log("Error");
-                    console.log(error);
                 }
             );
         }
@@ -79,8 +73,6 @@ export class EditCompanyComponent implements OnInit {
 
     Save(form, ucAddress, ucContactInfo) {
         var refCoyObj = new RefCoyObj();
-        console.log(ucAddress);
-        console.log(ucContactInfo);
         refCoyObj.coyCode = form.value.coyCode;
         refCoyObj.fullName = form.value.fullName;
         refCoyObj.shortName = form.value.shortName;
@@ -114,28 +106,19 @@ export class EditCompanyComponent implements OnInit {
         refCoyObj.licenseNo = form.value.licenseNo;
         refCoyObj.refCoyId = this.param;
 
-        console.log(refCoyObj);
         if (this.mode == "edit") {
             this.editUrl = this.foundationUrl + URLConstant.EditRefCoy;
             refCoyObj.refCoyId = this.param;
             this.http.post(this.editUrl, refCoyObj).subscribe(
                 (response) => {
-                    console.log(response);
                     this.router.navigateByUrl('/company');
-                },
-                (error) => {
-                    console.log(error);
                 });
         }
         else {
             this.editUrl = this.foundationUrl + URLConstant.AddCoyCommissioner;
             this.http.post(this.editUrl, refCoyObj).subscribe(
                 (response) => {
-                    console.log(response);
                     this.router.navigateByUrl('/company');
-                },
-                (error) => {
-                    console.log(error);
                 });
         }
     }

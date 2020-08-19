@@ -13,5 +13,4 @@ export const environment = {
   Module:"FOU",
   ApprovalURL : 'http://r3app-server.ad-ins.com/APPROVAL',
   FoundationR3Web:'http://r3web-server.ad-ins.com/Foundation'
-  // comment
 };

@@ -65,7 +65,7 @@ export class EmployeePositionAddComponent implements OnInit {
     refMasterTypeCode: any;
     masterCode: any;
     inputLookupObj: any;
-    getEmpUrl:any;
+    getEmpUrl: any;
 
     RefEmpPositionForm = this.fb.group({});
 
@@ -121,48 +121,33 @@ export class EmployeePositionAddComponent implements OnInit {
         this.httpClient.post(this.refOfficeUrl, null).subscribe(
             (response) => {
                 this.allRefOffice = response['returnObject']
-            },
-            (error) => {
-                console.log(error);
             });
 
         this.refMasterTypeCode = CommonConstant.RefMasterTypeCodeSkillLvl;
         var RefMasterObj = { RefMasterTypeCode: this.refMasterTypeCode, MasterCode: "" };
         this.httpClient.post(this.refMasterUrl, RefMasterObj).subscribe(
             (response) => {
-                console.log(response);
                 this.allSkillLvl = response['returnObject'];
                 this.masterCode = this.allSkillLvl[0].masterCode;
-            },
-            (error) => {
-                console.log(error);
             });
         // this.httpClient.post(this.supervisorUrl, this.refOfficeObj).subscribe(
         //     (response) => {
         //         this.allSupervisor = response['returnObject']
-        //     },
-        //     (error) => {
-        //         console.log(error);
         //     })
         this.httpClient.post(this.bizUrl, this.refOfficeObj).subscribe(
             (response) => {
                 this.allBiz = response['returnObject'];
                 this.refBizUnitId = this.allBiz[0].orgMdlStrucId;
-                if (this.pageType != "edit"){
+                if (this.pageType != "edit") {
                     this.onChangeBiz(this.refBizUnitId);
                 }
-            },
-            (error) => {
-                console.log(error);
             })
         if (this.pageType == "edit") {
             this.empPositionObj.empPositionId = this.empPositionId
             this.onChangeBiz(this.refBizUnitId)
             this.httpClient.post(this.getEditUrl, this.empPositionObj).subscribe(
                 (response) => {
-                    console.log("Success");
                     this.resultData = response['returnObject'];
-                    console.log(this.resultData);
                     this.refOfficeId = response['returnObject']['refOfficeId']
                     this.orgJobTitleId = response['returnObject']['orgJobTitleId']
                     this.positionStartDt = formatDate(response['returnObject']['positionStartDt'], 'yyyy-MM-dd', 'en-US')
@@ -172,7 +157,6 @@ export class EmployeePositionAddComponent implements OnInit {
                     var refEmpObj = { RefEmpId: response['returnObject']['superiorRefEmpId'] };
                     this.httpClient.post(this.getEmpUrl, refEmpObj).subscribe(
                         (response) => {
-                            console.log(response);
                             this.inputLookupObj.nameSelect = response["returnObject"].empName;
                             this.inputLookupObj.jsonSelect = response["returnObject"];
                             this.inputLookupObj.idSelect = response['returnObject'].refEmpId;
@@ -193,15 +177,11 @@ export class EmployeePositionAddComponent implements OnInit {
         this.orgJobTitleObj.orgMdlStrucId = bizValue
         this.httpClient.post(this.orgJobTitleUrl, this.orgJobTitleObj).subscribe(
             (response) => {
-                console.log(response);
                 this.allOrgJobTitle = response['returnObject'];
                 this.orgJobTitleId = this.allOrgJobTitle.orgJobTitleId;
-                if (this.pageType != "edit"){
+                if (this.pageType != "edit") {
                     this.orgJobTitleId = this.allOrgJobTitle[0].orgJobTitleId;
                 }
-            },
-            (error) => {
-                console.log(error);
             })
     }
 
@@ -218,20 +198,12 @@ export class EmployeePositionAddComponent implements OnInit {
                 this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
             }
 
-            console.log(JSON.stringify(this.empPositionObj))
-            console.log(this.empPositionObj);
             this.httpClient.post(this.addUrl, this.empPositionObj).subscribe(
                 (response) => {
-                    console.log("Success");
-                    console.log(response);
                     if (response['isError'] != true) {
                         this.toastr.successMessage(response['message']);
-                        this.router.navigate(["/employee/employeePosition"], { queryParams: {refEmpId:this.refEmpId }});
+                        this.router.navigate(["/employee/employeePosition"], { queryParams: { refEmpId: this.refEmpId } });
                     }
-                },
-                (error) => {
-                    console.log("Error");
-                    console.log(error);
                 }
             );
         } else {
@@ -246,21 +218,12 @@ export class EmployeePositionAddComponent implements OnInit {
             else {
                 this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
             }
-            console.log(JSON.stringify(this.empPositionObj))
-            console.log(this.empPositionObj);
             this.httpClient.post(this.editUrl, this.empPositionObj).subscribe(
                 (response) => {
-                    console.log("Success");
-                    console.log(response);
                     this.toastr.successMessage(response['message']);
-                    this.router.navigate(["/employee/employeePosition"], { queryParams: {refEmpId:this.refEmpId }});
-                },
-                (error) => {
-                    console.log("Error");
-                    console.log(error);
+                    this.router.navigate(["/employee/employeePosition"], { queryParams: { refEmpId: this.refEmpId } });
                 }
             );
-
         }
     }
 
@@ -268,7 +231,7 @@ export class EmployeePositionAddComponent implements OnInit {
         this.isActive = e.target.checked;
     }
 
-    getLookupResponse(e){
+    getLookupResponse(e) {
         this.empPositionObj.superiorRefEmpId = e.RefEmpId
     }
 }

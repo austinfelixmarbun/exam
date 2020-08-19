@@ -57,9 +57,6 @@ export class HolidayAddComponent implements OnInit {
                         HolidaySchmName: this.result.HolidaySchmName,
                         IsActive: this.result.IsActive
                     })
-                },
-                (error) => {
-                    console.log(error);
                 }
             );
         }
@@ -76,9 +73,6 @@ export class HolidayAddComponent implements OnInit {
                 (response) => {
                     this.router.navigateByUrl('/CommonSetting/Holiday');
                     this.toastr.successMessage(response['message']);
-                },
-                (error) => {
-                    console.log(error);
                 });
         }
         else {
@@ -90,10 +84,7 @@ export class HolidayAddComponent implements OnInit {
             this.http.post(URLConstant.AddHolidaySchmH, this.holidayObj).subscribe((response) => {
                 this.router.navigateByUrl('/CommonSetting/Holiday');
                 this.toastr.successMessage(response['message']);
-            },
-                (error) => {
-                    console.log(error);
-                });
+            });
         }
     }
 }

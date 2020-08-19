@@ -67,16 +67,10 @@ export class BodAddComponent implements OnInit {
             coyBodObj.coyBodId = this.param;
             this.http.post(this.apiUrl, coyBodObj).subscribe(
                 (response) => {
-                    console.log("Success");
-                    console.log(response);
                     this.result = response['returnObject'];
                     this.ucAddr.setData(this.result);
                     this.ucInfo.setData(this.result);
                     this.setData(this.result);
-                },
-                (error) => {
-                    console.log("Error");
-                    console.log(error);
                 }
             );
         }
@@ -98,8 +92,6 @@ export class BodAddComponent implements OnInit {
 
     Save(form, ucAddress, ucInfo) {
         var coyAdd = new CoyBodObj();
-        console.log(ucAddress);
-        console.log(ucInfo);
         coyAdd.name = form.value.name;
         coyAdd.jobTitle = form.value.jobTitle;
         coyAdd.taxIdNo = form.value.taxIdNo;
@@ -129,30 +121,21 @@ export class BodAddComponent implements OnInit {
         coyAdd.zipcodeNumber = ucAddress.zipcodeNumber;
         coyAdd.refCoyId = this.refCoyId;
 
-        console.log(coyAdd);
         if (this.mode == "edit") {
             this.editUrl = this.foundationUrl + URLConstant.EditCoyBod;
             coyAdd.coyBodId = this.param;
             this.http.post(this.editUrl, coyAdd).subscribe(
                 (response) => {
-                    console.log(response);
                     this.toastr.successMessage(response['message']);
                     this.router.navigateByUrl('/company/bod?refCoyId=' + this.refCoyId);
-                },
-                (error) => {
-                    console.log(error);
                 });
         }
         else {
             this.editUrl = this.foundationUrl + URLConstant.AddCoyBod;
             this.http.post(this.editUrl, coyAdd).subscribe(
                 (response) => {
-                    console.log(response);
                     this.toastr.successMessage(response['message']);
                     this.router.navigateByUrl('/company/bod?refCoyId=' + this.refCoyId);
-                },
-                (error) => {
-                    console.log(error);
                 });
         }
     }

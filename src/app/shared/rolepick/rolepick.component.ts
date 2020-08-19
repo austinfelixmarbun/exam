@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, Inject, Injector } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
@@ -14,16 +14,14 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   listRole: any;
 
   ngAfterViewInit(): void {
-    console.log("Role Pick");
   }
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-    private http: HttpClient, private router: Router) {
+    private http: HttpClient, private router: Router, public dialog: MatDialog) {
     this.listRole = data["response"];
   }
 
   chooseRole(item) {
-    console.log(item);
     var roleUrl = environment.FoundationR3Url + URLConstant.LoginByRole;
     var roleObject = {
       UserName: this.data.user,
@@ -47,10 +45,8 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           let currPath = this.router.routerState.snapshot.url;
           this.router.navigateByUrl("/pages/content", { skipLocationChange: true }).then(() => {
             this.router.navigateByUrl(currPath);
+            this.dialog.closeAll();
           });
-        },
-        (error) => {
-          console.log(error);
         }
       );
 
@@ -62,15 +58,12 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
           AdInsHelper.CreateUserAccess(response);
           this.router.navigate(["/dashboard/dash-board"]);
-        },
-        (error) => {
-          console.log(error);
+          this.dialog.closeAll();
         }
       );
     }
   }
 
   ngOnInit() {
-    console.log("Role Pick");
   }
 }

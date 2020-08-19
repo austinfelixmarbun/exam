@@ -12,6 +12,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 
 @Component({
   selector: 'app-customer-company-contact-information',
@@ -54,6 +55,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     Email1: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
     Email2: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
   });
+  inputAddressObj: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
@@ -81,7 +83,6 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrJobPositionCode).subscribe(
       (response) => {
-        console.log(response);
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrJobPositionCode = response[CommonConstant.ReturnObj];
       }
@@ -92,7 +93,6 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     }
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
       (response) => {
-        console.log(response);
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrGenderCode = response[CommonConstant.ReturnObj];
       }
@@ -110,8 +110,6 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
         this.http.post(this.getCustCompanyContactPersonByCustCompanyIdUrl, this.custCompanyContactPersonObj).subscribe(
           (response) => {
             this.tempCustCompanyContactPersonObj = response;
-            // console.log("testcontact")
-            // console.log(this.tempCustCompanyContactPersonObj);
             this.ContactInformationForm.patchValue({
               ContactPersonName: this.tempCustCompanyContactPersonObj.ContactPersonName,
               MrGenderCode: this.tempCustCompanyContactPersonObj.MrGenderCode,
@@ -160,7 +158,10 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
         this.inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrObj.Zipcode;
         this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrObj.Zipcode };
       });
-
+      this.inputAddressObj = new InputAddressObj();
+      this.inputAddressObj.default = this.UcAddressObj;
+      this.inputAddressObj.inputField = this.inputFieldObj;
+      this.inputAddressObj.showPhn3 = false;
   }
 
   // back() {
@@ -210,23 +211,14 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       this.custCompanyContactPersonObj = this.tempCustCompanyContactPersonObj;
       this.custCompanyContactPersonObj.RowVersion = this.tempCustCompanyContactPersonObj.RowVersion;
 
-      // console.log("tempcust")
-      // console.log(this.custCompanyContactPersonObj)
-
       this.http.post(this.editCustAddrUrl, this.custAddrObj).subscribe(
         (response) => {
           this.http.post(this.editCustCompanyContactPersonByCustCompanyIdUrl, this.custCompanyContactPersonObj).subscribe(
             (response) => {
               this.toastr.successMessage(response["Message"]);
               this.outputTab.emit({ stepMode: 'next' });
-            },
-            error => {
-              console.log(error);
             }
           );
-        },
-        error => {
-          console.log(error);
         }
       );
     } else {
@@ -236,14 +228,8 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
             (response) => {
               this.toastr.successMessage(response["Message"]);
               this.outputTab.emit({ stepMode: 'next' });
-            },
-            error => {
-              console.log(error);
             }
           );
-        },
-        error => {
-          console.log(error);
         }
       );
     }

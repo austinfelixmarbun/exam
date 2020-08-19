@@ -26,7 +26,7 @@
               <tbody>
                 <tr *ngFor="let item of SurveyTaskList?.ReturnObject">
                   <td>
-                    <a target="_blank" [routerLink]="['/Survey/View/Task']"
+                    <a target="_blank" [routerLink]="['/View/SurveyTask']"
                       [queryParams]="{ SrvyTaskId: item.SrvyTaskId }">{{item.SrvyTaskNo}}</a>
                   </td>
                   <td>{{item.MrSrvySubjCode + ' - ' + item.MrSrvySubj}}</td>

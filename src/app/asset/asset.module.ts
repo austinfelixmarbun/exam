@@ -31,6 +31,7 @@ import { NegativeAssetUploadComponent } from './negative-asset/negative-asset-up
 import { ReviewUploadNegativeAssetPagingComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-paging/review-upload-negative-asset-paging.component';
 import { ReviewUploadNegativeAssetDetailComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-detail/review-upload-negative-asset-detail.component';
 import { UcaddtotempModule } from "@adins/ucaddtotemp";
+import { AssetAttributeComponent } from './asset-attribute/asset-attribute.component';
 import { RefAttrComponent } from './ref-attr/ref-attr.component';
 import { RefAttrDetailComponent } from './ref-attr/ref-attr-detail/ref-attr-detail.component';
 
@@ -82,6 +83,7 @@ export const customCurrencyMaskConfig = {
     NegativeAssetUploadComponent,
     ReviewUploadNegativeAssetPagingComponent,
     ReviewUploadNegativeAssetDetailComponent,
+    AssetAttributeComponent,
     RefAttrComponent,
     RefAttrDetailComponent
   ],
