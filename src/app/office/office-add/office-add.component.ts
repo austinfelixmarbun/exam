@@ -372,10 +372,7 @@ export class OfficeAddComponent implements OnInit {
 
         })
     }
-    console.log('test');
-    console.log('office add');
     this.inputAddressObj = new InputAddressObj();
-    this.inputAddressObj.UCAddrForm = this.OfficeForm;
     this.inputAddressObj.default = this.addressObj;
     this.inputAddressObj.inputField = this.inputFieldAddr;
   }

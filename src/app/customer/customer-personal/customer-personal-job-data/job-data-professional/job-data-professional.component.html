@@ -51,7 +51,7 @@
           </lib-ucSubsection>
           <div id="jobAddress">
               <div id="CustMainDataPersonal"> 
-                <lib-ucaddress #UcAddrGrp [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'jobAddress'"></lib-ucaddress>
+                <lib-ucaddress #UcAddrGrp [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [UCAddrForm]="JobDataProForm"></lib-ucaddress>
                   <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Job Address'" [UCAddrForm]="JobDataProForm" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [default]="addressObj" [inputField]="inputFieldAddressObj" [showOwnership]="true"></lib-ucaddress> -->
               </div>
               <div class="form-group row">
@@ -87,7 +87,7 @@
           </lib-ucSubsection>
           <div id="prejobAddr">
               <div> 
-                <lib-ucaddress #UcAddrGrp [addressObj]="inputPreviousAddressObj" [enjiForm]="enjiForm" [identifier]="'prejobAddress'"></lib-ucaddress>
+                <lib-ucaddress #UcAddrGrp [addressObj]="inputPreviousAddressObj" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [UCAddrForm]="JobDataProForm"></lib-ucaddress>
                   <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Previous Job Address'" [UCAddrForm]="JobDataProForm" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [default]="preJobAddrObj" [inputField]="inputPreJobAddressObj" [showOwnership]="true"></lib-ucaddress> -->
               </div>
               <div class="form-group row">

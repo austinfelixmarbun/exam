@@ -164,12 +164,9 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           }
         });
     }
-    console.log('test');
-    console.log('cust personal address add');
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.UCAddrForm = this.CustDataPersonalForm;
     this.inputAddressObj.showOwnership = true;
   }
 

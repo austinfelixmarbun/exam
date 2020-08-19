@@ -368,12 +368,9 @@ export class CustomerContactAddComponent implements OnInit {
           this.UcAddressObj.City = this.tempCustPersonalContactPerson.City;
         });
     }
-    console.log('test');
-    console.log('cust contact add');
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.UCAddrForm = this.CustomerContactForm;
     this.inputAddressObj.default = UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn= false;

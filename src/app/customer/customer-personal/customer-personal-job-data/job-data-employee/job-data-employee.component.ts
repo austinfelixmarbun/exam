@@ -143,13 +143,11 @@ export class JobDataEmployeeComponent implements OnInit {
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Job Address";
-    this.inputAddressObj.UCAddrForm = this.JobDataEmpForm;
     this.inputAddressObj.showOwnership = true;
 
     this.inputPreviousAddressObj = new InputAddressObj();
     this.inputPreviousAddressObj.showSubsection = false;
     this.inputPreviousAddressObj.title = "Previous Job Address";
-    this.inputPreviousAddressObj.UCAddrForm = this.JobDataEmpForm;
     this.inputPreviousAddressObj.showOwnership = true;
     this.inputPreviousAddressObj.isRequired = false;
 
@@ -157,7 +155,6 @@ export class JobDataEmployeeComponent implements OnInit {
     this.inputOthBizAddressObj.showSubsection = false;
     this.inputOthBizAddressObj.isRequired = false;
     this.inputOthBizAddressObj.title = "Other Business Address";
-    this.inputOthBizAddressObj.UCAddrForm = this.JobDataEmpForm;
     this.inputOthBizAddressObj.showOwnership = true;
 
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));

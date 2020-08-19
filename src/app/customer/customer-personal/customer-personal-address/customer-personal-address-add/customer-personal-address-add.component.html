@@ -32,7 +32,7 @@
           </div>
         </div>
         <div id="CustMainDataPersonal">
-          <lib-ucaddress #UcAddrGrp [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'custAddress'"></lib-ucaddress>
+          <lib-ucaddress #UcAddrGrp [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'custAddress'" [UCAddrForm]="CustDataPersonalForm"></lib-ucaddress>
           <!-- <lib-ucaddress *ngIf="this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value =='RESIDENCE' || this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value =='LEGAL'" #UcAddrGrp [showSubsection]="false" [title]="'Customer Address'"
           [UCAddrForm]="CustDataPersonalForm" [enjiForm]="enjiForm" [identifier]="'custAddress'"
           [default]="addressObj" [inputField]="inputFieldAddressObj" [showOwnership]="true"  [showStayLength]="true"></lib-ucaddress>

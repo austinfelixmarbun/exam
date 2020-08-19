@@ -242,19 +242,15 @@ export class JobDataProfessionalComponent implements OnInit {
           this.typePage = "edit";
         }
       });
-      console.log('test');
-      console.log('job data prof');
       this.inputAddressObj = new InputAddressObj();
       this.inputAddressObj.showSubsection = false;
       this.inputAddressObj.title = "Job Address";
-      this.inputAddressObj.UCAddrForm = this.JobDataProForm;
       this.inputAddressObj.showOwnership = true;
       
       this.inputPreviousAddressObj = new InputAddressObj();
       this.inputPreviousAddressObj.showSubsection = false;
       this.inputPreviousAddressObj.isRequired = false;
       this.inputPreviousAddressObj.title = "Previous Job Address";
-      this.inputPreviousAddressObj.UCAddrForm = this.JobDataProForm;
       this.inputPreviousAddressObj.showOwnership = true;
   }
 

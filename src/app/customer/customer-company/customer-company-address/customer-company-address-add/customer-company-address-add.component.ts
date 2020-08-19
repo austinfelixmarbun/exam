@@ -144,12 +144,9 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
 
         });
     }
-    console.log('test');
-    console.log('cust company address add');
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.UCAddrForm = this.CustDataCompanyForm;
     this.inputAddressObj.showOwnership = true;
   }
 

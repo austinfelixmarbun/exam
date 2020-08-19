@@ -136,27 +136,23 @@ export class JobDataSmeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('test');
-    console.log('job data sme');
     this.inputAddressObjForJobAddr = new InputAddressObj();
     this.inputAddressObjForJobAddr.showSubsection = false;
     this.inputAddressObjForJobAddr.title = "Job Address";
-    this.inputAddressObjForJobAddr.UCAddrForm = this.JobDataSmeForm;
     this.inputAddressObjForJobAddr.showOwnership = true;
     
     this.inputAddressObjForOthBiz = new InputAddressObj();
     this.inputAddressObjForOthBiz.showSubsection = false;
     this.inputAddressObjForOthBiz.isRequired = false;
     this.inputAddressObjForOthBiz.title = "Other Business Address";
-    this.inputAddressObjForOthBiz.UCAddrForm = this.JobDataSmeForm;
     this.inputAddressObjForOthBiz.showOwnership = true;
 
     this.inputPreviousAddressObj = new InputAddressObj();
     this.inputPreviousAddressObj.showSubsection = false;
     this.inputPreviousAddressObj.isRequired = false;
     this.inputPreviousAddressObj.title = "Previous Job Address";
-    this.inputPreviousAddressObj.UCAddrForm = this.JobDataSmeForm;
     this.inputPreviousAddressObj.showOwnership = true;
+
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);

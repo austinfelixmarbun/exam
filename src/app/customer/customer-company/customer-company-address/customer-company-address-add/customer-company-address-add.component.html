@@ -36,7 +36,7 @@
                       </div>
                     </div>
                     <div id="CustMainDataCompany">
-                      <lib-ucaddress [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'custAddress'"></lib-ucaddress> 
+                      <lib-ucaddress #UcAddrGrp [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'custAddress'" [UCAddrForm]="CustDataCompanyForm"></lib-ucaddress> 
                         <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Customer Address'" [UCAddrForm]="CustDataCompanyForm" [enjiForm]="enjiForm" [identifier]="'custAddress'" [default]="addressObj" [inputField]="inputFieldAddressObj" [showOwnership]="true"></lib-ucaddress> -->
                     </div>
                     <div class="form-group row">

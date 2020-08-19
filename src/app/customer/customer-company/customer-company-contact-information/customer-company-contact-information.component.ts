@@ -158,10 +158,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
         this.inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrObj.Zipcode;
         this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrObj.Zipcode };
       });
-      console.log('test');
-      console.log('cust company contact info');
       this.inputAddressObj = new InputAddressObj();
-      this.inputAddressObj.UCAddrForm = this.ContactInformationForm;
       this.inputAddressObj.default = this.UcAddressObj;
       this.inputAddressObj.inputField = this.inputFieldObj;
       this.inputAddressObj.showPhn3 = false;
