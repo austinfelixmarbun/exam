@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-md-4" style="text-align-last: right">
                   <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
-                    <i class="far fa-window-close"></i> Cancel
+                    <i class="fa fa-arrow-left"></i> Back
                   </button>
                 </div>
               </div>
@@ -119,7 +119,7 @@
             </app-cust-legal-doc>
           </div>
           <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
-            <app-cust-attr-section [CustId]="IdCust" (outputTab)="getValue($event)" (outputTab)="getValue($event)"></app-cust-attr-section>
+            <app-cust-attr-section [CustId]="IdCust"></app-cust-attr-section>
           </div>
         </div>
       </div>

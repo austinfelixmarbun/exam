@@ -41,7 +41,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
   tempSalutation: any;
   tempCountryCode: any;
   tempNationality: any;
-  tempCustPersonalObj: any;
+  tempCustPersonalObj: CustPersonalObj;
   tempMrMaritalStatCode: any;
 
   Page: String;
@@ -133,7 +133,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
       });
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj.CustId = this.IdCust;
-    this.http.post(this.GetCustPersonalbyCustIdUrl, this.custPersonalObj).subscribe(
+    this.http.post<CustPersonalObj>(this.GetCustPersonalbyCustIdUrl, this.custPersonalObj).subscribe(
       (response) => {
         this.tempCustPersonalObj = response;
         var refMasterObjMrNationalityCode = {
@@ -224,23 +224,23 @@ export class CustomerPersonalDetailComponent implements OnInit {
             }
           }
         );
-        var refMasterObjMrMaritalStatCode = {
-          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat
-        }
-        this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrMaritalStatCode).subscribe(
-          (response) => {
-            this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
-            if (this.tempCustPersonalObj.MrMaritalStatCode != null) {
-              this.CustomerDetailForm.patchValue({
-                MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode
-              });
-            } else {
-              this.CustomerDetailForm.patchValue({
-                MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
-              });
-            }
-          }
-        );
+        // var refMasterObjMrMaritalStatCode = {
+        //   RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat
+        // }
+        // this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrMaritalStatCode).subscribe(
+        //   (response) => {
+        //     this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
+        //     if (this.tempCustPersonalObj.MrMaritalStatCode != null) {
+        //       this.CustomerDetailForm.patchValue({
+        //         MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode
+        //       });
+        //     } else {
+        //       this.CustomerDetailForm.patchValue({
+        //         MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
+        //       });
+        //     }
+        //   }
+        // );
 
 
         this.CustomerDetailForm.patchValue({
@@ -261,7 +261,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
   }
  async SaveValue() {
 
-    await this.http.post(this.GetCustPersonalbyCustIdUrl, this.custPersonalObj).toPromise().then(
+    await this.http.post<CustPersonalObj>(this.GetCustPersonalbyCustIdUrl, this.custPersonalObj).toPromise().then(
       (response) => {
         this.tempCustPersonalObj = response;
         this.custPersonalObj = new CustPersonalObj();
@@ -271,7 +271,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.CustFullName = this.tempCustObj.CustName;
     this.custPersonalObj.NickName = this.CustomerDetailForm.controls["NickName"].value;
     this.custPersonalObj.MrSalutationCode = this.CustomerDetailForm.controls["MrSalutationCode"].value;
-    this.custPersonalObj.MrMaritalStatCode = this.CustomerDetailForm.controls["MrMaritalStatCode"].value;
+    this.custPersonalObj.MrMaritalStatCode = this.tempCustPersonalObj.MrMaritalStatCode;
     this.custPersonalObj.CustPrefixName = this.CustomerDetailForm.controls["CustPrefixName"].value;
     this.custPersonalObj.CustSuffixName = this.CustomerDetailForm.controls["CustSuffixName"].value;
     this.custPersonalObj.NoOfDependents = this.CustomerDetailForm.controls["NoOfDependents"].value;

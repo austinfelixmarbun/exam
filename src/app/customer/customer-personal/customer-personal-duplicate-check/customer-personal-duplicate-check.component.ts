@@ -53,6 +53,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
   DuplicateStatus: string;
   MotherMaidenName: string;
   IsAffiliateWithMf: string;
+  MrMaritalStatCode: string;
 
   addCustUrl: string;
   resultPersonalUrl: string;
@@ -103,6 +104,9 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
       }
       if (params["VipNotes"] != null) {
         this.VipNotes = params["VipNotes"];
+      }
+      if (params["MrMaritalStatCode"] != null) {
+        this.MrMaritalStatCode = params["MrMaritalStatCode"];
       }
     });
   }
@@ -197,6 +201,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
     this.addCustObj.CustPersonalObj.BirthDt = this.BirthDt;
     this.addCustObj.CustPersonalObj.MotherMaidenName = this.MotherMaidenName;
     this.addCustObj.CustPersonalObj.IsRestInPeace = false;
+    this.addCustObj.CustPersonalObj.MrMaritalStatCode = this.MrMaritalStatCode;
 
     this.http.post(this.addCustUrl, this.addCustObj).subscribe(
       (response) => {

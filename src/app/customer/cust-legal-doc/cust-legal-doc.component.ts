@@ -98,13 +98,14 @@ export class CustLegalDocComponent implements OnInit {
       );
     }
   }
-  next() {
-    this.router.navigate(['/Customer/Paging']);
-    if (this.Page != null) {
-      this.router.navigate(["/Customer/EditMainData/Paging"]);
-    } else {
-      this.router.navigate(["/Customer/Paging"]);
-    }
+  next() {    
+    this.outputTab.emit({ stepMode: 'next'});
+    // this.router.navigate(['/Customer/Paging']);
+    // if (this.Page != null) {
+    //   this.router.navigate(["/Customer/EditMainData/Paging"]);
+    // } else {
+    //   this.router.navigate(["/Customer/Paging"]);
+    // }
   }
   // back(){
   //   this.outputTab.emit({ stepMode: 'previous'});
