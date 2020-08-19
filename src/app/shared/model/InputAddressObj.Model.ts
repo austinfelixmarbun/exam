@@ -3,7 +3,6 @@ import {FormGroup} from '@angular/forms';
 import { InputFieldObj } from './InputFieldObj.Model';
 
 export class InputAddressObj {
-    UCAddrForm: FormGroup;
     default: any;
     title : string;
     inputField: InputFieldObj;
