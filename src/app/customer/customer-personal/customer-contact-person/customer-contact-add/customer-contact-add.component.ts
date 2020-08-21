@@ -45,7 +45,7 @@ export class CustomerContactAddComponent implements OnInit {
   tempMrMaritalStatCode: any;
   tempProfessionCodeObj: any;
   tempMrCustRelationshipCode: any;
-  tempCustPersonalContactPerson: any;
+  tempCustPersonalContactPerson: CustPersonalContactPersonObj;
 
   lookUpObj: InputLookupObj;
   inputFieldObj: InputFieldObj;
@@ -59,6 +59,7 @@ export class CustomerContactAddComponent implements OnInit {
   custPersonalObj: CustPersonalObj;
   criteriaList: Array<CriteriaObj>;
   custPersonalContactPersonObj: CustPersonalContactPersonObj;
+  listCustAddr: Array<CustAddrObj>
 
   IdCust: number;
   tempCustId: number;
@@ -97,10 +98,11 @@ export class CustomerContactAddComponent implements OnInit {
     MobilePhnNo2: ['', [Validators.pattern("^[0-9]+$")]],
     Email: ['', [Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
     ContactPersonCustNo: [''],
+    CopyFromContactPerson: [''],
   });
   criteriaExistingList: any[];
   criteriaExistingObj: CriteriaObj;
-  inputAddressObj: any;
+  inputAddressObj: InputAddressObj;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.KTP = RefMasterConstant.EKtp;
@@ -308,7 +310,7 @@ export class CustomerContactAddComponent implements OnInit {
     if (this.custPersonalContactPersonId != null) {
       this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.custPersonalContactPersonId;
-      this.http.post(URLConstant.GetCustPersonalContactPersonByCustPersonalContactPersonId, this.custPersonalContactPersonObj).subscribe(
+      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalContactPersonByCustPersonalContactPersonId, this.custPersonalContactPersonObj).subscribe(
         (response) => {
           var datePipe = new DatePipe("en-US");
           this.tempCustPersonalContactPerson = response;
@@ -366,6 +368,8 @@ export class CustomerContactAddComponent implements OnInit {
           this.UcAddressObj.AreaCode4 = this.tempCustPersonalContactPerson.AreaCode4;
           this.UcAddressObj.Addr = this.tempCustPersonalContactPerson.Addr;
           this.UcAddressObj.City = this.tempCustPersonalContactPerson.City;
+          this.inputAddressObj.default = this.UcAddressObj;
+          this.inputAddressObj.inputField = this.inputFieldObj;
         });
     }
     this.inputAddressObj = new InputAddressObj();
@@ -374,7 +378,55 @@ export class CustomerContactAddComponent implements OnInit {
     this.inputAddressObj.default = UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn= false;
+
+    var tempCustAddrObj = new CustAddrObj();
+    tempCustAddrObj.CustId = this.IdCust;
+    tempCustAddrObj.MrCustAddrTypeCode = "-";
+    this.http.post(URLConstant.GetListCustAddr, tempCustAddrObj).subscribe(
+      (response) => {
+        console.log(response);
+        this.listCustAddr = response[CommonConstant.ReturnObj];
+        if (this.listCustAddr.length > 0) {
+          this.CustomerContactForm.patchValue({ CopyFromContactPerson: response[CommonConstant.ReturnObj][0]['CustAddrId'] });
+        }
+      });
   }
+
+  copyAddress() {
+    var custAddrFromObj = new CustAddrObj();
+    custAddrFromObj.CustAddrId = this.CustomerContactForm.controls["CopyFromContactPerson"].value;
+    this.http.post<CustAddrObj>(URLConstant.GetCustAddr, custAddrFromObj).subscribe(
+      (response) => {
+        var copyCustomerAddrFrom = response;
+
+        this.UcAddressObj = new UcAddressObj();
+        this.UcAddressObj.Addr = copyCustomerAddrFrom.Addr;
+        this.UcAddressObj.AreaCode3 = copyCustomerAddrFrom.AreaCode3;
+        this.UcAddressObj.AreaCode4 = copyCustomerAddrFrom.AreaCode4;
+        this.UcAddressObj.AreaCode1 = copyCustomerAddrFrom.AreaCode1;
+        this.UcAddressObj.AreaCode2 = copyCustomerAddrFrom.AreaCode2;
+        this.UcAddressObj.City = copyCustomerAddrFrom.City;
+        this.UcAddressObj.PhnArea1 = copyCustomerAddrFrom.PhnArea1;
+        this.UcAddressObj.Phn1 = copyCustomerAddrFrom.Phn1;
+        this.UcAddressObj.PhnExt1 = copyCustomerAddrFrom.PhnExt1;
+        this.UcAddressObj.PhnArea2 = copyCustomerAddrFrom.PhnArea2;
+        this.UcAddressObj.Phn2 = copyCustomerAddrFrom.Phn2;
+        this.UcAddressObj.PhnExt2 = copyCustomerAddrFrom.PhnExt2;
+        this.UcAddressObj.PhnArea3 = copyCustomerAddrFrom.PhnArea3;
+        this.UcAddressObj.Phn3 = copyCustomerAddrFrom.Phn3;
+        this.UcAddressObj.PhnExt3 = copyCustomerAddrFrom.PhnExt3;
+        this.UcAddressObj.FaxArea = copyCustomerAddrFrom.FaxArea;
+        this.UcAddressObj.Fax = copyCustomerAddrFrom.Fax;
+
+        this.inputFieldObj = new InputFieldObj();
+        this.inputFieldObj.inputLookupObj = new InputLookupObj();
+        this.inputFieldObj.inputLookupObj.nameSelect = copyCustomerAddrFrom.Zipcode;
+        this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: copyCustomerAddrFrom.Zipcode };
+        this.inputAddressObj.default = this.UcAddressObj;
+        this.inputAddressObj.inputField = this.inputFieldObj;
+      });
+  }
+
   SaveValue() {
 
     this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
@@ -409,7 +461,10 @@ export class CustomerContactAddComponent implements OnInit {
     this.custPersonalContactPersonObj.SubZipcode = this.CustomerContactForm.value.UcAddressZipcode.value;
     if (this.tempCust != null) {
       this.custPersonalContactPersonObj.ContactPersonCustNo = this.tempCust.CustNo;
+    } else if (this.tempCustPersonalContactPerson.ContactPersonCustNo != null) {
+      this.custPersonalContactPersonObj.ContactPersonCustNo = this.tempCustPersonalContactPerson.ContactPersonCustNo;
     }
+
     if (this.tempCustPersonal != null) {
       this.custPersonalContactPersonObj.NationalityCountryCode = this.tempCustPersonal.WnaCountryCode;
 
