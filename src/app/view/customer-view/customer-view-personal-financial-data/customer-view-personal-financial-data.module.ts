@@ -10,26 +10,25 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { UcSubsectionModule } from "@adins/uc-subsection";
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UcgridfooterModule } from "@adins/ucgridfooter";
-import { ViewRoutingModule } from "./view-routing.module";
-import { UclookupgenericComponent, UclookupgenericModule } from "@adins/uclookupgeneric";
 import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneric";
 import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcapprovalhistModule, UcapprovalhistComponent } from "@adins/ucapprovalhist";
-
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
-import { CustomerViewComponent } from "app/customer/customer-view/customer-view.component";
-import { CustomerViewModule } from "./customer-view/customer-view.module";
+import { CustomerViewPersonalFinancialDataComponent } from "./customer-view-personal-financial-data.component";
+import { CustomerViewPersonalFinancialDataRoutingModule } from "./customer-view-personal-financial-data-routing.module";
+import { CustomerViewPersonalFinancialSectionComponent } from "../customer-view-personal-financial-section/customer-view-personal-financial-section.component";
+
+
 
 @NgModule({
   imports: [
-    ViewRoutingModule,
+    CustomerViewPersonalFinancialDataRoutingModule,
     CommonModule,
     FormsModule,
     HttpModule,
     UCSearchModule,
     UcgridfooterModule,
     UcpagingModule,
-    UclookupgenericModule,
     UcviewgenericModule,
     UcgridviewModule,
     NgbModule,
@@ -40,17 +39,18 @@ import { CustomerViewModule } from "./customer-view/customer-view.module";
     SharingComponentModule,
     UcapprovalhistModule,
     UcShowErrorsModule,
-
-    
   ],
   declarations: [
+    ///customer
+    CustomerViewPersonalFinancialDataComponent,
+    CustomerViewPersonalFinancialSectionComponent
+
   ],
   entryComponents: [
-    UclookupgenericComponent,
     UcviewgenericComponent,
     UcgridviewComponent,
     UcapprovalhistComponent
   ]
 
 })
-export class ViewModule { }
+export class CustomerViewPersonalFinancialDataModule { }

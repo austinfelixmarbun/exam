@@ -10,19 +10,18 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { UcSubsectionModule } from "@adins/uc-subsection";
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UcgridfooterModule } from "@adins/ucgridfooter";
-import { ViewRoutingModule } from "./view-routing.module";
 import { UclookupgenericComponent, UclookupgenericModule } from "@adins/uclookupgeneric";
 import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneric";
 import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcapprovalhistModule, UcapprovalhistComponent } from "@adins/ucapprovalhist";
 
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
-import { CustomerViewComponent } from "app/customer/customer-view/customer-view.component";
-import { CustomerViewModule } from "./customer-view/customer-view.module";
+import { NegativeCustomerViewComponent } from "./negative-customer-view.component";
+import { NegativeCustomerViewRoutingModule } from "./negative-customer-view-routing.module";
 
 @NgModule({
   imports: [
-    ViewRoutingModule,
+    NegativeCustomerViewRoutingModule,
     CommonModule,
     FormsModule,
     HttpModule,
@@ -40,10 +39,12 @@ import { CustomerViewModule } from "./customer-view/customer-view.module";
     SharingComponentModule,
     UcapprovalhistModule,
     UcShowErrorsModule,
-
     
   ],
   declarations: [
+    ///Negative Customer
+    NegativeCustomerViewComponent
+
   ],
   entryComponents: [
     UclookupgenericComponent,
@@ -53,4 +54,4 @@ import { CustomerViewModule } from "./customer-view/customer-view.module";
   ]
 
 })
-export class ViewModule { }
+export class NegativeCustomerViewModule { }

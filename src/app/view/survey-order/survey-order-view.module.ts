@@ -10,19 +10,19 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { UcSubsectionModule } from "@adins/uc-subsection";
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UcgridfooterModule } from "@adins/ucgridfooter";
-import { ViewRoutingModule } from "./view-routing.module";
 import { UclookupgenericComponent, UclookupgenericModule } from "@adins/uclookupgeneric";
 import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneric";
 import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcapprovalhistModule, UcapprovalhistComponent } from "@adins/ucapprovalhist";
 
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
-import { CustomerViewComponent } from "app/customer/customer-view/customer-view.component";
-import { CustomerViewModule } from "./customer-view/customer-view.module";
+import { SurveyOrderViewComponent } from "./survey-order-view/survey-order-view.component";
+import { SurveyTaskViewComponent } from "./survey-task-view/survey-task-view.component";
+import { SurveyOrderViewRoutingModule } from "./survey-order-routing.module";
 
 @NgModule({
   imports: [
-    ViewRoutingModule,
+    SurveyOrderViewRoutingModule,
     CommonModule,
     FormsModule,
     HttpModule,
@@ -40,10 +40,13 @@ import { CustomerViewModule } from "./customer-view/customer-view.module";
     SharingComponentModule,
     UcapprovalhistModule,
     UcShowErrorsModule,
-
     
   ],
   declarations: [
+    // Survey Order
+    SurveyOrderViewComponent,
+    SurveyTaskViewComponent
+
   ],
   entryComponents: [
     UclookupgenericComponent,
@@ -53,4 +56,4 @@ import { CustomerViewModule } from "./customer-view/customer-view.module";
   ]
 
 })
-export class ViewModule { }
+export class SurveyOrderViewModule { }

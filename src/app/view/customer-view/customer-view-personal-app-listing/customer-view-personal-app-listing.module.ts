@@ -10,26 +10,24 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { UcSubsectionModule } from "@adins/uc-subsection";
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UcgridfooterModule } from "@adins/ucgridfooter";
-import { ViewRoutingModule } from "./view-routing.module";
-import { UclookupgenericComponent, UclookupgenericModule } from "@adins/uclookupgeneric";
 import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneric";
 import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcapprovalhistModule, UcapprovalhistComponent } from "@adins/ucapprovalhist";
-
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
-import { CustomerViewComponent } from "app/customer/customer-view/customer-view.component";
-import { CustomerViewModule } from "./customer-view/customer-view.module";
+import { CustomerViewPersonalAppListingRoutingModule } from "./customer-view-personal-app-listing-routing.module";
+import { CustomerViewPersonalAppListingComponent } from "./customer-view-personal-app-listing.component";
+
+
 
 @NgModule({
   imports: [
-    ViewRoutingModule,
+    CustomerViewPersonalAppListingRoutingModule,
     CommonModule,
     FormsModule,
     HttpModule,
     UCSearchModule,
     UcgridfooterModule,
     UcpagingModule,
-    UclookupgenericModule,
     UcviewgenericModule,
     UcgridviewModule,
     NgbModule,
@@ -40,17 +38,17 @@ import { CustomerViewModule } from "./customer-view/customer-view.module";
     SharingComponentModule,
     UcapprovalhistModule,
     UcShowErrorsModule,
-
-    
   ],
   declarations: [
+    ///customer
+    CustomerViewPersonalAppListingComponent
+
   ],
   entryComponents: [
-    UclookupgenericComponent,
     UcviewgenericComponent,
     UcgridviewComponent,
     UcapprovalhistComponent
   ]
 
 })
-export class ViewModule { }
+export class CustomerViewPersonalAppListingModule { }
