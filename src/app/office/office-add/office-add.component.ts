@@ -14,6 +14,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 
 
 @Component({
@@ -122,6 +123,7 @@ export class OfficeAddComponent implements OnInit {
   })
   InputLookupObj: any;
   addressObj: UcAddressObj;
+  inputAddressObj: InputAddressObj;
 
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -370,7 +372,9 @@ export class OfficeAddComponent implements OnInit {
 
         })
     }
-
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.default = this.addressObj;
+    this.inputAddressObj.inputField = this.inputFieldAddr;
   }
   SaveForm(): void {
     this.officeObj = new OfficeObj();

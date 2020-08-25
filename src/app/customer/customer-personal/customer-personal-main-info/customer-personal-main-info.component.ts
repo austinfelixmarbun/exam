@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
 
 @Component({
   selector: 'app-customer-personal-main-info',
@@ -40,8 +41,10 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   MrIdTypeCode: string;
   MotherMaidenName: string;
   IsAffiliateWithMf: string;
+  MrMaritalStatCode: string;
   getListActiveRefMasterUrl: string;
   GetListActiveRefMasterWithReserveFieldAllUrl: string;
+  tempMrMaritalStatCode: Array<KeyValueObj> = new Array<KeyValueObj>();
 
   CustomerPersonalForm = this.fb.group({
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -52,6 +55,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     TaxIdNo: [''],
     IdExpiredDt: [''],
+    MrMaritalStatCode: [''],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     CustModel: ['', [Validators.required]],
     IsVip: [true],
@@ -120,6 +124,15 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         });
       }
     );
+
+    this.http.post(this.getListActiveRefMasterUrl, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat}).toPromise().then(
+      (response) => {
+        this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
+        this.CustomerPersonalForm.patchValue({
+          MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
+        });        
+      }
+    );
   }
   checkState() {
     if (this.CustomerPersonalForm.controls.IsVip.value === true) {
@@ -148,12 +161,13 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.TaxIdNo = this.CustomerPersonalForm.controls["TaxIdNo"].value;
     this.IdExpiredDt = this.CustomerPersonalForm.controls["IdExpiredDt"].value;
     this.MotherMaidenName = this.CustomerPersonalForm.controls["MotherMaidenName"].value;
+    this.MrMaritalStatCode = this.CustomerPersonalForm.controls["MrMaritalStatCode"].value;
     this.IsVip = this.CustomerPersonalForm.controls["IsVip"].value;
     this.IsAffiliateWithMf = this.CustomerPersonalForm.controls["IsAffiliateWithMf"].value;
     if(this.IsVip){
       this.VipNotes = this.CustomerPersonalForm.controls["VipNotes"].value;
     } 
-    this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"], { queryParams: { "CustName": this.CustName, "Gender": this.Gender, "MrIdTypeCode": this.MrIdTypeCode, "CustModel": this.CustModel, "BirthPlace": this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo, "IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName, "IsVip": this.IsVip, "IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes } });
+    this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"], { queryParams: { "CustName": this.CustName, "Gender": this.Gender, "MrIdTypeCode": this.MrIdTypeCode, "CustModel": this.CustModel, "BirthPlace": this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo, "IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName, "IsVip": this.IsVip, "IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes, "MrMaritalStatCode": this.MrMaritalStatCode } });
   }
   onOptionsSelected(event) {
     if (event.target.value == this.KTP) {
