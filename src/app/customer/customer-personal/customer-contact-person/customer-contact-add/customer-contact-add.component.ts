@@ -393,6 +393,9 @@ export class CustomerContactAddComponent implements OnInit {
   }
 
   copyAddress() {
+    if(this.listCustAddr.length<1){
+      return
+    }
     var custAddrFromObj = new CustAddrObj();
     custAddrFromObj.CustAddrId = this.CustomerContactForm.controls["CopyFromContactPerson"].value;
     this.http.post<CustAddrObj>(URLConstant.GetCustAddr, custAddrFromObj).subscribe(
