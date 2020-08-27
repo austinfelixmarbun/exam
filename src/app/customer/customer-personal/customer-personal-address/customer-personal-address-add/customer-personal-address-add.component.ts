@@ -180,6 +180,10 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   }
 
   copyAddress() {
+
+    if(this.listCustAddr.length<1){
+      return
+    }
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.CustDataPersonalForm.controls["CopyAddrFrom"].value;
     this.http.post(this.getCustAddr, this.custAddrFromObj).subscribe(
