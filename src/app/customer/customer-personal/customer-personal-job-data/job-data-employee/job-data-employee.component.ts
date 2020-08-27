@@ -16,6 +16,7 @@ import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 
 @Component({
   selector: 'app-job-data-employee',
@@ -105,6 +106,9 @@ export class JobDataEmployeeComponent implements OnInit {
     NotesPreJob: ['']
   });
   businessDtMin: Date;
+  inputAddressObj: InputAddressObj;
+  inputPreviousAddressObj: InputAddressObj;
+  inputOthBizAddressObj: InputAddressObj;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustById = URLConstant.GetCustByCustId;
@@ -135,6 +139,24 @@ export class JobDataEmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('test')
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.showSubsection = false;
+    this.inputAddressObj.title = "Job Address";
+    this.inputAddressObj.showOwnership = true;
+
+    this.inputPreviousAddressObj = new InputAddressObj();
+    this.inputPreviousAddressObj.showSubsection = false;
+    this.inputPreviousAddressObj.title = "Previous Job Address";
+    this.inputPreviousAddressObj.showOwnership = true;
+    this.inputPreviousAddressObj.isRequired = false;
+
+    this.inputOthBizAddressObj = new InputAddressObj();
+    this.inputOthBizAddressObj.showSubsection = false;
+    this.inputOthBizAddressObj.isRequired = false;
+    this.inputOthBizAddressObj.title = "Other Business Address";
+    this.inputOthBizAddressObj.showOwnership = true;
+
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -279,6 +301,8 @@ export class JobDataEmployeeComponent implements OnInit {
                 this.inputJobAddressObj.inputLookupObj = new InputLookupObj();              
                 this.inputJobAddressObj.inputLookupObj.nameSelect = this.getJobAddr.Zipcode;
                 this.inputJobAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getJobAddr.Zipcode };
+                this.inputAddressObj.inputField = this.inputJobAddressObj; 
+                this.inputAddressObj.default = this.addressObj; 
 
               });
           }
@@ -318,7 +342,8 @@ export class JobDataEmployeeComponent implements OnInit {
                 this.inputOtherAddressObj.inputLookupObj.isRequired = false;
                 this.inputOtherAddressObj.inputLookupObj.nameSelect = this.getOthBizAddr.Zipcode;
                 this.inputOtherAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getOthBizAddr.Zipcode };
-
+                this.inputOthBizAddressObj.default = this.otherAddrObj;
+                this.inputOthBizAddressObj.inputField = this.inputOtherAddressObj;
               });
           }
           if (this.returnCustJobDataObj.PrevJobAddrId != null) {
@@ -357,6 +382,8 @@ export class JobDataEmployeeComponent implements OnInit {
                 this.inputPreJobAddressObj.inputLookupObj.nameSelect = this.getPreJobAddr.Zipcode;
                 this.inputPreJobAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getPreJobAddr.Zipcode };
 
+                this.inputPreviousAddressObj.inputField = this.inputPreJobAddressObj; 
+                this.inputPreviousAddressObj.default = this.preJobAddrObj; 
               });
           }
           this.othBizAddrId = this.returnCustJobDataObj.OthBizAddrId;

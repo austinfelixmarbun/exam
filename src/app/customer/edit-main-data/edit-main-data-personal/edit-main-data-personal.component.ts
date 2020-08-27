@@ -9,6 +9,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
 
 @Component({
   selector: 'app-edit-main-data-personal',
@@ -25,6 +26,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     IdNo: ['', [Validators.required]],
     TaxIdNo: [''],
     IdExpiredDt: [''],
+    MrMaritalStatCode: [''],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     CustModel: ['', [Validators.required]],
     IsVip: [true],
@@ -42,11 +44,12 @@ export class EditMainDataPersonalComponent implements OnInit {
   getCustPersonalByCustIdUrl: string;
   getCustByCustIdUrl: string;
   GetListActiveRefMasterWithReserveFieldAllUrl  :string;
-  tempCustPersonalObj: any;
+  tempCustPersonalObj: CustPersonalObj;
   tempCustObj: any;
   CustId: number;
   custObj: CustObj;
-  custPersonalObj: any;
+  custPersonalObj: CustPersonalObj;
+  tempMrMaritalStatCode: Array<KeyValueObj> = new Array<KeyValueObj>();
   From:string;
   businessDtMin : any;
   businessDtMax: any;
@@ -68,7 +71,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -154,7 +157,7 @@ export class EditMainDataPersonalComponent implements OnInit {
         }
       }
     );
-    this.http.post(this.getCustPersonalByCustIdUrl, this.custPersonalObj).subscribe(
+    await this.http.post<CustPersonalObj>(this.getCustPersonalByCustIdUrl, this.custPersonalObj).toPromise().then(
       (response) => {
         this.tempCustPersonalObj = response;
         this.CustomerPersonalForm.patchValue({
@@ -163,7 +166,22 @@ export class EditMainDataPersonalComponent implements OnInit {
           BirthDt: datePipe.transform(this.tempCustPersonalObj.BirthDt, 'yyyy-MM-dd'),
           MotherMaidenName: this.tempCustPersonalObj.MotherMaidenName,
           IsRestInPeace: this.tempCustPersonalObj.IsRestInPeace,
+          MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode,
         });
+      }
+    );
+    await this.http.post(this.getListActiveRefMasterUrl, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat}).toPromise().then(
+      (response) => {
+        this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
+        if (this.tempCustPersonalObj.MrMaritalStatCode != null) {
+          this.CustomerPersonalForm.patchValue({
+            MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode
+          });
+        } else {
+          this.CustomerPersonalForm.patchValue({
+            MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
+          });
+        }
       }
     );
   }
@@ -191,6 +209,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custPersonalObj.BirthPlace = this.CustomerPersonalForm.controls["BirthPlace"].value;
     this.custPersonalObj.BirthDt = this.CustomerPersonalForm.controls["BirthDt"].value;
     this.custPersonalObj.MotherMaidenName = this.CustomerPersonalForm.controls["MotherMaidenName"].value;
+    this.custPersonalObj.MrMaritalStatCode = this.CustomerPersonalForm.controls["MrMaritalStatCode"].value;
     this.http.post(this.editCustUrl, this.custObj).subscribe(
       (response) => {
         this.http.post(this.editCustPersonalUrl, this.custPersonalObj).subscribe(
