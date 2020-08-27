@@ -6,10 +6,10 @@
 export const environment = {
     production: true,
     navbarColor: 'lime',
-    LosURL : 'http://R3STWEBFE1.ad-ins.com/LOSR/',
-    WebSocketURL : 'http://R3STWEBBE1.ad-ins.com/FOUNDATION',
-    FoundationR3Url: 'http://R3STWEBBE1.ad-ins.com/FOUNDATION',
+    LosURL : 'http://R3STWEBFE.ad-ins.com/LOS/',
+    WebSocketURL : 'http://R3STWEBBE.ad-ins.com/FOUNDATION',
+    FoundationR3Url: 'http://R3STWEBBE.ad-ins.com/FOUNDATION',
     Module:"FOU",
-    ApprovalURL : 'http://R3STWEBBE1.ad-ins.com/APPROVAL',
-    FoundationR3Web:'http://R3STWEBFE1.ad-ins.com/Foundation'
+    ApprovalURL : 'http://r3stengine.ad-ins.com/approval',
+    FoundationR3Web:'http://R3STWEBFE.ad-ins.com/FOUNDATION'
   };
