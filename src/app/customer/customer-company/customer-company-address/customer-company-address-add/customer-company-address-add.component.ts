@@ -151,6 +151,9 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   }
 
   copyAddress() {
+    if(this.listCustAddr.length<1){
+      return
+    }
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.CustDataCompanyForm.controls["CopyAddrFrom"].value;
     this.http.post(this.getCustAddrUrl, this.custAddrFromObj).subscribe(
