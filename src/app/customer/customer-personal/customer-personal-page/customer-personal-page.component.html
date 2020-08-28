@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-md-4" style="text-align-last: right">
                   <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
-                    <i class="far fa-window-close"></i> Cancel
+                    <i class="fa fa-arrow-left"></i> Back
                   </button>
                 </div>
               </div>
@@ -23,7 +23,7 @@
           <div class="bs-stepper-header" role="tablist" style="overflow-x: auto;">
             <div class="step" data-target="#customer-detail-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="customer-detail-tab"
-                id="customer-detail-tab-trigger" (click)="EnterTab('Detail')">
+                id="customer-detail-tab-trigger">
                 <span class="bs-stepper-circle">1</span>
                 <span class="bs-stepper-label">Customer Detail</span>
               </button>
@@ -31,7 +31,7 @@
             <div class="line"></div>
             <div class="step" data-target="#address-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="address-tab" id="address-tab-trigger"
-                (click)="EnterTab('Address')" [disabled]="CustStepIndex < 2">
+                (click)="EnterTab('Address')">
                 <span class="bs-stepper-circle">2</span>
                 <span class="bs-stepper-label">Address Information</span>
               </button>
@@ -39,7 +39,7 @@
             <div class="line"></div>
             <div class="step" data-target="#contact-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="contact-tab" id="contact-tab-trigger"
-                (click)="EnterTab('Contact')" [disabled]="CustStepIndex < 3">
+                (click)="EnterTab('Contact')">
                 <span class="bs-stepper-circle">3</span>
                 <span class="bs-stepper-label">Contact Person</span>
               </button>
@@ -47,7 +47,7 @@
             <div class="line"></div>
             <div class="step" data-target="#group-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="group-tab" id="group-tab-trigger"
-                (click)="EnterTab('Group')" [disabled]="CustStepIndex < 4">
+                (click)="EnterTab('Group')">
                 <span class="bs-stepper-circle">4</span>
                 <span class="bs-stepper-label">Customer Group</span>
               </button>
@@ -55,7 +55,7 @@
             <div class="line"></div>
             <div class="step" data-target="#job-data-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="job-data-tab"
-                id="job-data-tab-trigger" (click)="EnterTab('Job')" [disabled]="CustStepIndex < 5">
+                id="job-data-tab-trigger" (click)="EnterTab('Job')">
                 <span class="bs-stepper-circle">5</span>
                 <span class="bs-stepper-label">Customer Job Data</span>
               </button>
@@ -63,7 +63,7 @@
             <div class="line"></div>
             <div class="step" data-target="#financial-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="financial-tab"
-                id="financial-tab-trigger" (click)="EnterTab('Financial')" [disabled]="CustStepIndex < 6">
+                id="financial-tab-trigger" (click)="EnterTab('Financial')">
                 <span class="bs-stepper-circle">6</span>
                 <span class="bs-stepper-label">Financial Data</span>
               </button>
@@ -71,7 +71,7 @@
             <div class="line"></div>
             <div class="step" data-target="#cust-attr-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="cust-attr-tab"
-                id="cust-attr-tab-trigger" (click)="EnterTab('CustAttr')" [disabled]="CustStepIndex < 7">
+                id="cust-attr-tab-trigger" (click)="EnterTab('CustAttr')">
                 <span class="bs-stepper-circle">7</span>
                 <span class="bs-stepper-label">Customer Attribute</span>
               </button>
@@ -103,7 +103,7 @@
               </app-cust-fin-data-tab>
             </div>
             <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
-              <app-cust-attr-section [CustId]="IdCust" (outputTab)="endStepper($event)" *ngIf="CustStepIndex == 7">
+              <app-cust-attr-section [CustId]="IdCust" *ngIf="CustStepIndex == 7">
               </app-cust-attr-section>
             </div>
           </div>

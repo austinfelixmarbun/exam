@@ -141,9 +141,10 @@
             </div>
           </div>
         </div>
-        <lib-ucaddress [UCAddrForm]="OfficeForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'" [default]="addressObj"
+        <lib-ucaddress [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'UcAddress'" [UCAddrForm]="OfficeForm"></lib-ucaddress>
+        <!-- <lib-ucaddress [UCAddrForm]="OfficeForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'" [default]="addressObj"
           [inputField]="inputFieldAddr">
-        </lib-ucaddress>
+        </lib-ucaddress> -->
         <lib-ucSubsection [id]="'ContactInfoId'" [title]="'Contact Information'" [panel]="'ContactInfo'">
         </lib-ucSubsection>
         <div id="ContactInfo">
