@@ -150,7 +150,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 });
 
               if (this.isFinal) {
-                this.http.post(URLConstant.GetAssetMasterAttrContentForAssetMaster, { AssetMasterId: this.AssetMasterId }).pipe(first()).subscribe(
+                this.http.post(URLConstant.GetAssetMasterAttrContentForAssetMasterByAttrTypeCode, { AssetMasterId: this.AssetMasterId,  AttrTypeCode: CommonConstant.AttrTypeCodeMaster}).pipe(first()).subscribe(
                   (response) => {
                     this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
                     var formGroupObject = new Object();

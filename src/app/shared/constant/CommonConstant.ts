@@ -170,4 +170,7 @@ export class CommonConstant {
 
     //Status Code
     public static STATUS_CODE_USER_LOCKED = "002";
+
+    //Attribute Type Code
+    public static AttrTypeCodeMaster = "MASTER";
 }
