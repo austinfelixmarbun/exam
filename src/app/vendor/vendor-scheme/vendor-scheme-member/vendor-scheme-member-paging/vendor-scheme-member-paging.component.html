@@ -1,11 +1,11 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
- <button type="button" class="btn btn-raised btn-warning mr-1"
+ <button type="button"  class="btn btn-raised btn-warning mr-1"
                [routerLink]="['/Vendor/Paging']"
                 [queryParams]="{ Type: 'Scheme', MrVendorCategoryCode : this.MrVendorCategoryCode }" translate>
-      <i class="far fa-window-close"></i> Cancel
+                <i class="fa fa-arrow-left"> </i> Back 
     </button>
-    <button type="button" class="addButton" [routerLink]="['/Vendor/VendorScheme/Member/Add']"
+    <button type="button" class="btn btn-raised btn-primary" [routerLink]="['/Vendor/VendorScheme/Member/Add']"
       [queryParams]="{VendorSchmId: this.VendorSchmId, MrVendorCategoryCode:this.MrVendorCategoryCode}">
       <i class="ft-plus-circle"></i> Add
     </button>

@@ -1,5 +1,4 @@
 {
-  "title": "Office Search",
   "keyProperty": "RefOfficeId",
   "keyPropCriteria": "RO.REF_OFFICE_ID",
   "component": [
