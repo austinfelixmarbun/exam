@@ -443,13 +443,6 @@ export class OfficeAddComponent implements OnInit {
             this.router.navigate(["/Office/Paging"]);
           }
         );
-
-        this.httpClient.post(URLConstant.AddCenterGrp, this.centerGrpObj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response['message']);
-            this.router.navigate(["/Office/Paging"]);
-          }
-        );
       }
       else {
         this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
