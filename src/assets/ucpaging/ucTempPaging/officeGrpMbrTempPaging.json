@@ -19,6 +19,14 @@
             "placeholder": "Placeholder"
         },
         {
+            "type": "textbox",
+            "name": "OFFICE_ADDR",
+            "id": "OfficeAddrId",
+            "value": "",
+            "label": "Office Address",
+            "placeholder": "Placeholder"
+        },
+        {
             "type": "dropdown",
             "name": "IS_ACTIVE",
             "id": "ActiveStatusId",
@@ -41,7 +49,7 @@
         }
     ],
     "querystring": {
-       "select": "SELECT OFFICE_CODE AS OfficeCode, OFFICE_NAME AS OfficeName, REF_OFFICE_ID AS RefOfficeId, IS_ACTIVE AS IsActive, MR_OFFICE_TYPE_CODE AS MrOfficeTypeCode",
+       "select": "SELECT OFFICE_CODE AS OfficeCode, OFFICE_NAME AS OfficeName, REF_OFFICE_ID AS RefOfficeId, IS_ACTIVE AS IsActive, MR_OFFICE_TYPE_CODE AS MrOfficeTypeCode, OFFICE_ADDR AS OfficeAddr",
         "from": "FROM dbo.REF_OFFICE WITH(NOLOCK)",
         "where": "WHERE IS_ACTIVE = 1 AND MR_OFFICE_TYPE_CODE != N'CG'"
     },
@@ -60,6 +68,12 @@
         },
         {
             "type": "sort",
+            "position": "left",
+            "label": "Office Address",
+            "name": "OFFICE_ADDR"
+        },
+        {
+            "type": "sort",
             "position": "center",
             "label": "Active Status",
             "name": "IS_ACTIVE"
@@ -75,6 +89,11 @@
             "type": "text",
             "position": "left",
             "property": "OfficeName"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "OfficeAddr"
         },
         {
             "type": "boolean",
