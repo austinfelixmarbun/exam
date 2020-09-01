@@ -92,7 +92,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-
     var generalSettingObjDefLocalNationality = {
       GsCode: CommonConstant.GSCodeDefLocalNationality
     }
@@ -139,9 +138,9 @@ export class CustomerPersonalDetailComponent implements OnInit {
         var refMasterObjMrNationalityCode = {
           RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality
         }
-        this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrNationalityCode).subscribe(
+        this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, refMasterObjMrNationalityCode).subscribe(
           (response) => {
-            this.tempNationality = response[CommonConstant.ReturnObj];
+            this.tempNationality = response["RefMasterObjs"];
 
             if (this.tempCustPersonalObj.MrNationalityCode != null) {
               this.CustomerDetailForm.patchValue({
@@ -310,6 +309,10 @@ export class CustomerPersonalDetailComponent implements OnInit {
       this.lookUpObj.isRequired = false;
     } else {
       this.flag = false;
+      var foreign = this.tempNationality.find(x => x["MasterCode"] == event.target.value);
+      this.lookUpObj.nameSelect = foreign.ReserveField2;
+      this.lookUpObj.jsonSelect = foreign.ReserveField1;
+      this.tempCountryCode = foreign.ReserveField1;
       this.lookUpObj.isRequired = true;
     }
   }
