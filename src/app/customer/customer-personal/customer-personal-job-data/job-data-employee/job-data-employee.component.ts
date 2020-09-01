@@ -166,10 +166,12 @@ export class JobDataEmployeeComponent implements OnInit {
     this.inputOtherAddressObj = new InputFieldObj();
     this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
     this.inputOtherAddressObj.inputLookupObj.isRequired = false;
+    this.inputOthBizAddressObj.inputField = this.inputOtherAddressObj;
     
     this.inputPreJobAddressObj =  new InputFieldObj();
     this.inputPreJobAddressObj.inputLookupObj = new InputLookupObj();
     this.inputPreJobAddressObj.inputLookupObj.isRequired = false;
+    this.inputPreviousAddressObj.inputField = this.inputPreJobAddressObj; 
 
     this.professionLookUpObj = new InputLookupObj();
     this.professionLookUpObj.isRequired = false;
