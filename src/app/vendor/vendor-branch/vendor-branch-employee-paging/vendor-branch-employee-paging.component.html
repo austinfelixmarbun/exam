@@ -10,10 +10,10 @@
 </div>
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Paging']" [queryParams]= "{ MrVendorCategoryCode: this.MrVendorCategoryCode  }"   translate>
+    <button type="button" class="backButton" [routerLink]="['/Vendor/Paging']" [queryParams]= "{ MrVendorCategoryCode: this.MrVendorCategoryCode  }"   translate>
       <i class="fa fa-arrow-left"> </i> Back 
     </button>
-    <button type="button" class="btn btn-raised btn-primary" [routerLink]="['/Vendor/Branch/Employee/Detail']"
+    <button type="button" class="addButton" [routerLink]="['/Vendor/Branch/Employee/Detail']"
       [queryParams]="{VendorId: VendorId}" translate>
       <i class="ft-plus-circle"></i> Add
     </button>
