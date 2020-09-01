@@ -1,20 +1,18 @@
-<div class="ucSearch-Button-Right">
-  <span class="mr-1">
-    <button type="button" class="backButton" [routerLink]="['../../Configuration/Paging']" translate>
-      <i class="far fa-window-close"></i> Cancel
-    </button>
-  </span>
-</div>
-<form class="form form-horizontal">
-  <div class="form-body">
-    <div class="card">
-      <div class="px-3">
-        <div class="card-body">
-          <h4 class="form-section card-title" translate>Asset Attribute</h4>
-        </div>
+<div class="card">
+  <div class="card-header header-title">
+    <div class="row">
+      <div class="col-md-8">
+        <h4 class="form-section card-title" translate>Asset Attribute</h4>
       </div>
     </div>
   </div>
-</form>
+</div>
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" class="btn btn-raised btn-warning" [routerLink]="['../../Configuration/Paging']" translate>
+      <i class="fa fa-arrow-left"> </i> Back
+    </button>
+  </span>
+</div>
 <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"></lib-ucviewgeneric>
 <lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>

@@ -6,19 +6,17 @@
       </div>
     </div>
   </div>
-  <div class="px-3">
-    <div class="ucSearch-Button-Right">
-      <span class="mr-1">
-        <button type="button" class="backButton" [routerLink]="['../../Configuration/Paging']" translate>
-          <i class="far fa-window-close"></i> Cancel
-        </button>
-        <button type="button" class="addButton" [routerLink]="['../Detail']"
-          [queryParams]="{mode:'add',AssetTypeId:AssetTypeId}" translate>
-          <i class="ft-plus-circle"></i> Add
-        </button>
-      </span>
-    </div>
+</div>
+  <div class="ucSearch-Button-Right">
+    <span class="mr-1">
+      <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['../../Configuration/Paging']" translate>
+        <i class="fa fa-arrow-left"> </i> Back
+      </button>
+      <button type="button" class="btn btn-raised btn-primary" [routerLink]="['../Detail']"
+        [queryParams]="{mode:'add',AssetTypeId:AssetTypeId}" translate>
+        <i class="ft-plus-circle"></i> Add
+      </button>
+    </span>
   </div>
   <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"></lib-ucviewgeneric>
   <lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
-</div>
