@@ -45,7 +45,7 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Office Addr",
+            "label": "Office Address",
             "name": "ROCGOM.OFFICE_ADDR"
         },
         {
