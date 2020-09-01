@@ -76,7 +76,6 @@ export class OfficeAddComponent implements OnInit {
   isAllowAppCreated: boolean = true;
   officeClose: boolean = true;
   officeObj: OfficeObj;
-  centerGrpObj: OfficeObj;
   refMasterObj: RefMasterObj;
   lookUpRefMasterOfficeObj: RefMasterObj;
   refMasterOfficeType: RefMasterObj;
@@ -261,10 +260,8 @@ export class OfficeAddComponent implements OnInit {
       this.OfficeForm.controls["OfficeType"].disable();
       this.OfficeForm.controls["MrCenterGrpTypeCode"].disable();
       this.officeObj = new OfficeObj();
-      this.centerGrpObj = new OfficeObj();
       this.addressObj = new UcAddressObj();
       this.officeObj.RefOfficeId = this.RefOfficeId;
-      // this.centerGrpObj.RefOfficeId = this.RefOfficeId;
       this.httpClient.post(URLConstant.GetRefOfficeByRefOfficeId, this.officeObj).subscribe(
         (response) => {
           this.resultData = response;
@@ -378,7 +375,6 @@ export class OfficeAddComponent implements OnInit {
   }
   SaveForm(): void {
     this.officeObj = new OfficeObj();
-    this.centerGrpObj = new OfficeObj();
     this.officeObj.RowVersion = "";
 
     this.officeObj.OfficeCode = this.OfficeForm.value.OfficeCode;
@@ -403,13 +399,10 @@ export class OfficeAddComponent implements OnInit {
     }
 
     if (this.officeObj.MrOfficeTypeCode == CommonConstant.CollectionGroup) {
-      this.centerGrpObj.MrCenterGrpTypeCode = this.OfficeForm.value.MrCenterGrpTypeCode;
-      this.centerGrpObj.CenterGrpCode = this.OfficeForm.value.OfficeCode;
-      this.centerGrpObj.CenterGrpName = this.OfficeForm.value.OfficeName;
+      this.officeObj.MrCenterGrpTypeCode = this.OfficeForm.value.MrCenterGrpTypeCode;
     } else {
       this.officeObj.MrCenterGrpTypeCode = "";
     }
-
 
     this.officeObj.CntctPersonEmail1 = this.OfficeForm.value.CntctPersonEmail1;
     this.officeObj.CntctPersonEmail2 = this.OfficeForm.value.CntctPersonEmail2;
