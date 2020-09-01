@@ -252,6 +252,7 @@ export class JobDataProfessionalComponent implements OnInit {
       this.inputPreviousAddressObj.isRequired = false;
       this.inputPreviousAddressObj.title = "Previous Job Address";
       this.inputPreviousAddressObj.showOwnership = true;
+      this.inputPreviousAddressObj.inputField = this.inputPreJobAddressObj;
   }
 
   setJobAddr() {
