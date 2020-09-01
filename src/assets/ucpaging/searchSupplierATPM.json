@@ -80,7 +80,7 @@
             "property": "VendorCode"
         },
         {
-            "type" : "link",
+            "type" : "text",
             "property" : "VendorName",
             "path" : "/Vendor/ATPM/View",
             "target": "_blank",
