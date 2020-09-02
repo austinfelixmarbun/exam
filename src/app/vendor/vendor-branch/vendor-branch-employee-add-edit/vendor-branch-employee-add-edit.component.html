@@ -3,14 +3,12 @@
     <div class="card">
       <div class="card-body">
         <app-main-info-view></app-main-info-view>
-        <form>
-          <div class="form-actions right">
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Branch/Employee/Paging']"
-            [queryParams]="{VendorId: this.VendorId}" translate>
-            Back
-            </button>
-          </div>
-        </form>
+        <div class="px-3 text-right">
+          <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Branch/Employee/Paging']" [queryParams]="{VendorId: this.VendorId}" translate>
+            <i class="fa fa-arrow-left"></i> Back
+          </button>
+        </div>  
+
         <aw-wizard #wizard navBarLayout="large-empty-symbols" [awNavigationMode] navigateBackward="allow"
         navigateForward="allow" >
         <aw-wizard-step [stepTitle]="'Employee'"

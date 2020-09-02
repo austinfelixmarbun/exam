@@ -62,6 +62,7 @@ export class VendorPagingComponent implements OnInit {
       if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
         this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranch.json";
         this.inputPagingObj._url = "./assets/ucpaging/searchBranch.json";
+        this.inputPagingObj.title = typeof(CommonConstant["TITLE_"+this.MrVendorCategoryCode]) != 'undefined' ? CommonConstant["TITLE_"+this.MrVendorCategoryCode] : this.MrVendorCategoryCode.replace(/_/g,' ');
         this.inputPagingObj.addCritInput = new Array();
         var critObj = new CriteriaObj();
         critObj.propName = "vdr.MR_VENDOR_CATEGORY_CODE";

@@ -63,7 +63,14 @@ export class CommonConstant {
     public static SURVEYOR_HO = "SURVEYOR_HO";
     public static SUPPLIER_HOLDING = "SUPPLIER_HOLDING";
     public static SUPPLIER_ATPM = "SUPPLIER_ATPM";
+
     public static TITLE_SUPPLIER_ATPM = "Supplier ATPM";
+    public static TITLE_SUPPLIER_BRANCH = "Supplier Branch";
+    public static TITLE_ASSET_INSCO_BRANCH = "Insurance Branch";
+    public static TITLE_LIFE_INSCO_BRANCH = "Life Insurance Branch";
+    public static TITLE_SURVEYOR_BRANCH = "Surveyor Branch";
+    public static TITLE_AGENCY_COMPANY = "Agency Company";
+    public static TITLE_AGENCY_PERSONAL = "Agency Personal";
 
     // NOTIFICATION METHOD
     public static NotificationMethodIntLink = "INT_LINK";
