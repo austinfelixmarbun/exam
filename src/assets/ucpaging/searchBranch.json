@@ -90,7 +90,7 @@
             "name": "BranchRating"
         },
         {
-            "type": "label",
+            "type": "sort",
             "position": "center",
             "label": "Active Status",
             "name": "IsActive"
