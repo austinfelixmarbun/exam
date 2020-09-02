@@ -69,31 +69,31 @@
             "type": "sort",
             "position": "center",
             "label": "BRANCH CODE",
-            "name": "BranchCode"
+            "name": "vdr.VENDOR_CODE"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "BRANCH NAME",
-            "name": "BranchName"
+            "name": "vdr.VENDOR_NAME"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "BRANCH ADDRESS",
-            "name": "BranchAddress"
+            "name": "ADDR"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "RATING",
-            "name": "BranchRating"
+            "name": "vdr.VENDOR_RATING"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "Active Status",
-            "name": "IsActive"
+            "name": "vdr.IS_ACTIVE"
         },
         {
             "type": "label",
