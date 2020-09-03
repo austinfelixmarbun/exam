@@ -223,9 +223,9 @@ export class CustomerContactAddComponent implements OnInit {
     var refMasterObjMrNationalityCode = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality
     }
-    this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrNationalityCode).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, refMasterObjMrNationalityCode).subscribe(
       (response) => {
-        this.tempNationality = response[CommonConstant.ReturnObj];
+        this.tempNationality = response["RefMasterObjs"];
         this.CustomerContactForm.patchValue({
           MrNationalityCode: CommonConstant.NationalityCodeLocal
         });
@@ -611,6 +611,10 @@ export class CustomerContactAddComponent implements OnInit {
       this.flag = true;
     } else {
       this.flag = false;
+      var foreign = this.tempNationality.find(x => x["MasterCode"] == event.target.value);
+      this.lookUpObj.nameSelect = foreign.ReserveField2;
+      this.lookUpObj.jsonSelect = foreign.ReserveField1;
+      this.tempCountryCode = foreign.ReserveField1;
       this.lookUpObj.isRequired = true;
     }
   }
