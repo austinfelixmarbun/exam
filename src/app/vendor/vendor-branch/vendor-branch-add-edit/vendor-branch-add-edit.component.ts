@@ -49,7 +49,8 @@ export class VendorBranchAddEditComponent implements OnInit {
   businessDt: Date;
 
   isHidden: boolean = true;
-
+  RsvField: string;
+  
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params["MrVendorCategoryCode"] != null) {
@@ -248,12 +249,14 @@ export class VendorBranchAddEditComponent implements OnInit {
           if (this.MrVendorCategoryCode == "AGENCY_PERSONAL") {
             var object = this.itemType.find(x => x.Key == 'P');
             this.MrVendorTypeCode = object.Key;
+            this.RsvField = CommonConstant.CustTypePersonal
             this.VendorForm.patchValue({
               MrVendorTypeCode: object.Key
             });
           } else if (this.MrVendorCategoryCode == "AGENCY_COMPANY") {
             var object = this.itemType.find(x => x.Key == 'C');
             this.MrVendorTypeCode = object.Key;
+            this.RsvField = CommonConstant.CustTypeCompany
             this.VendorForm.patchValue({
               MrVendorTypeCode: object.Key
             });
@@ -262,6 +265,23 @@ export class VendorBranchAddEditComponent implements OnInit {
               MrVendorTypeCode: this.itemType[0].Key
             });
           }
+
+          var refMasterIdObj = {
+            RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
+            ReserveField1: this.RsvField,
+          }
+          this.http.post(URLConstant.GetListActiveRefMasterWithReserveFieldAll, refMasterIdObj).subscribe(
+            (response) => {
+              this.itemIdType = response[CommonConstant.ReturnObj];
+              if (this.mode != "edit") {
+                if (this.itemIdType.length > 0) {
+                  this.VendorForm.patchValue({
+                    MrIdTypeCode: this.itemIdType[0].Key
+                  });
+                }
+              }
+            }
+          );
         }
         if (this.MrVendorCategoryCode == "AGENCY_PERSONAL" || this.MrVendorCategoryCode == "AGENCY_COMPANY") {
           this.VendorForm.controls.MrVendorTypeCode.disable();
@@ -371,13 +391,36 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.VendorForm.controls.IdNo.clearValidators();
       this.VendorForm.controls.RegistrationNo.setValidators(Validators.required);
       this.VendorForm.controls.LicenseNo.setValidators(Validators.required);
+      this.RsvField = CommonConstant.CustTypeCompany
     } else if (this.MrVendorTypeCode == 'P') {
       this.VendorForm.controls.RegistrationNo.clearValidators();
       this.VendorForm.controls.LicenseNo.clearValidators();
       this.VendorForm.controls.MrIdTypeCode.setValidators(Validators.required);
       this.VendorForm.controls.IdNo.setValidators(Validators.required);
+      this.RsvField = CommonConstant.CustTypePersonal
     }
     this.updateValueAndValidityForm();
+    
+    var refMasterIdObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
+      ReserveField1: this.RsvField,
+    }
+    this.http.post(URLConstant.GetListActiveRefMasterWithReserveFieldAll, refMasterIdObj).subscribe(
+      (response) => {
+        this.itemIdType = response[CommonConstant.ReturnObj];
+        if (this.itemIdType.length > 0) {
+          if(this.mode!="edit"){
+            this.VendorForm.patchValue({
+              MrIdTypeCode: this.itemIdType[0].Key
+            });
+          }else{
+            this.VendorForm.patchValue({
+              MrIdTypeCode: this.result.VendorObj.MrIdTypeCode
+            });
+          }
+        }
+      }
+    );
   }
 
   setLookup() {
