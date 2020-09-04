@@ -2,6 +2,22 @@
     "title": "Head Office",
     "component": [
         {
+            "type": "textbox",
+            "name": "V.VENDOR_CODE",
+            "id": "VendorCodeId",
+            "value": "",
+            "label": "Head Office Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "V.VENDOR_NAME",
+            "id": "VendorNameId",
+            "value": "",
+            "label": "Head Office Name",
+            "placeholder": "Placeholder"
+        },
+        {
             "type": "dropdown",
             "name": "V.IS_ACTIVE",
             "id": "ActiveStatusId",
@@ -21,24 +37,7 @@
                 }
             ],
             "itemsUrl": []
-        },
-        {
-            "type": "textbox",
-            "name": "V.VENDOR_CODE",
-            "id": "VendorCodeId",
-            "value": "",
-            "label": "Head Office Code",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "textbox",
-            "name": "V.VENDOR_NAME",
-            "id": "VendorNameId",
-            "value": "",
-            "label": "Head Office Name",
-            "placeholder": "Placeholder"
         }
-       
     ],
     "querystring": {
         "select": "select V.VENDOR_CODE AS VendorCode, V.VENDOR_NAME AS VendorName, V.IS_ACTIVE AS IsActive, V.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, V.VENDOR_ID AS VendorId, VA.ADDR AS VendorAddr",

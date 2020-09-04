@@ -2,6 +2,22 @@
     "title": "Vendor Scheme",
     "component": [
         {
+            "type": "textbox",
+            "name": "VS.VENDOR_SCHM_CODE",
+            "id": "VendorSchemeCodeId",
+            "value": "",
+            "label": "Scheme Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "VS.VENDOR_SCHM_NAME",
+            "id": "VendorSchemeNameId",
+            "value": "",
+            "label": "Scheme Name",
+            "placeholder": "Placeholder"
+        },
+        {
             "type": "dropdown",
             "name": "VS.IS_ACTIVE",
             "id": "ActiveStatusId",
@@ -21,22 +37,6 @@
                 }
             ],
             "itemsUrl": []
-        },
-        {
-            "type": "textbox",
-            "name": "VS.VENDOR_SCHM_CODE",
-            "id": "VendorSchemeCodeId",
-            "value": "",
-            "label": "Scheme Code",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "textbox",
-            "name": "VS.VENDOR_SCHM_NAME",
-            "id": "VendorSchemeNameId",
-            "value": "",
-            "label": "Scheme Name",
-            "placeholder": "Placeholder"
         }
     ],
     "querystring": {
