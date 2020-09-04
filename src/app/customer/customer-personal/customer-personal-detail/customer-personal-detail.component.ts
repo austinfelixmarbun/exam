@@ -311,7 +311,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
       this.flag = false;
       var foreign = this.tempNationality.find(x => x["MasterCode"] == event.target.value);
       this.lookUpObj.nameSelect = foreign.ReserveField2;
-      this.lookUpObj.jsonSelect = foreign.ReserveField1;
+      this.lookUpObj.jsonSelect =  { CountryName: foreign.ReserveField2};
       this.tempCountryCode = foreign.ReserveField1;
       this.lookUpObj.isRequired = true;
     }
