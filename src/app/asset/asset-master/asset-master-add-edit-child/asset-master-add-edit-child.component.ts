@@ -126,7 +126,10 @@ export class AssetMasterAddEditChildComponent implements OnInit {
               if (this.resultAssetType.MaxHierarchyLevel == (this.AssetMasterChildForm.controls["HierarchyLvl"].value)) {
                 this.AssetMasterChildForm.patchValue({
                   IsFinal: true
-                });
+                })
+                console.log("Masuk Final");
+                  this.AssetMasterChildForm.controls["AssetCategoryId"].setValidators([Validators.required]);
+                  this.AssetMasterChildForm.controls['AssetCategoryId'].updateValueAndValidity();
               }
               else {
                 this.AssetMasterChildForm.patchValue({
@@ -210,7 +213,9 @@ export class AssetMasterAddEditChildComponent implements OnInit {
               if (this.resultAssetType.MaxHierarchyLevel == (this.AssetMasterChildForm.controls["HierarchyLvl"].value)) {
                 this.AssetMasterChildForm.patchValue({
                   IsFinal: true
-                });
+                })
+                this.AssetMasterChildForm.controls["AssetCategoryId"].setValidators([Validators.required]);
+                this.AssetMasterChildForm.controls['AssetCategoryId'].updateValueAndValidity();
               }
               else {
                 this.AssetMasterChildForm.patchValue({
@@ -363,8 +368,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           mergeMap((response) => {
             this.listAssetSchmDObj.AssetMasterId = response["AssetMasterId"];
             let observableBatch = [];
-            if(assetMasterAttrValues.length > 0)
-            {
+            if (assetMasterAttrValues.length > 0) {
               let addAssetMasterAttr = this.http.post(URLConstant.AddAssetMasterAttrContent, { AssetMasterAttrContentObjs: assetMasterAttrValues });
               observableBatch.push(addAssetMasterAttr);
             }
@@ -374,11 +378,11 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           })
         ).subscribe(
           (response) => {
-            this.toastr.successMessage(response[response.length-1]["Message"]);
+            this.toastr.successMessage(response[response.length - 1]["Message"]);
             this.router.navigate(["/Asset/AssetMaster/Paging"]);
           });
       }
-      else{
+      else {
         this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
@@ -430,15 +434,14 @@ export class AssetMasterAddEditChildComponent implements OnInit {
         let editAssetMaster = this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj);
         let editAssetSchm = this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj);
         let observableBatch = [editAssetMaster, editAssetSchm];
-        if (assetMasterAttrValues.length > 0)
-        {
+        if (assetMasterAttrValues.length > 0) {
           let addAssetMasterAttr = this.http.post(URLConstant.AddAssetMasterAttrContent, { AssetMasterAttrContentObjs: assetMasterAttrValues });
           observableBatch.push(addAssetMasterAttr);
         }
-        
+
         forkJoin(observableBatch).subscribe(
           (response) => {
-            this.toastr.successMessage(response[response.length-1]["Message"]);
+            this.toastr.successMessage(response[response.length - 1]["Message"]);
             this.router.navigate(["/Asset/AssetMaster/Paging"]);
           },
           (error) => {
