@@ -8,7 +8,7 @@
             "name": "VQA.VERF_QUESTION_CODE",
             "id": "SchemeCodeId",
             "value": "",
-            "label": "QUESTION CODE",
+            "label": "Question Code",
             "placeholder": "Placeholder"
         },
         {
@@ -16,7 +16,7 @@
             "name": "VQA.VERF_QUESTION_TEXT",
             "id": "SchemeNameId",
             "value": "",
-            "label": "QUESTION TEXT",
+            "label": "Question Text",
             "placeholder": "Placeholder"
         },
         {
@@ -33,32 +33,12 @@
             "label": "Answer Type",
             "items": [],
             "itemsUrl": []
-        },
-        {
-            "type": "dropdown",
-            "name": "VQA.IS_ACTIVE",
-            "id": "ActiveStatusId",
-            "label": "ACTIVE STATUS",
-            "value": "",
-            "placeholder": "Placeholder",
-            "isFromURL": false,
-            "isSelectOne": false,
-            "items": [
-                {
-                    "key": "1",
-                    "value": "Yes"
-                },
-                {
-                    "key": "0",
-                    "value": "No"
-                }
-            ],
-            "itemsUrl": []
         }
     ],
     "querystring": {
         "select": "SELECT VQA.VERF_QUESTION_ANSWER_ID AS VerfQuestionAnswerId,VQA.REF_VERF_ANSWER_TYPE_ID AS RefAnswerTypeId,VQA.VERF_QUESTION_CODE AS VerfQuestionCode, VQA.VERF_QUESTION_TEXT AS VerfQuestionText, VAT.VERF_ANSWER_TYPE_DESCR AS VerfAnswerTypeDescr, VQA.IS_ACTIVE AS IsActive",
-        "from": "FROM dbo.VERF_QUESTION_ANSWER VQA WITH(NOLOCK) JOIN dbo.REF_VERF_ANSWER_TYPE VAT WITH(NOLOCK) ON VAT.REF_VERF_ANSWER_TYPE_ID = VQA.REF_VERF_ANSWER_TYPE_ID"
+        "from": "FROM dbo.VERF_QUESTION_ANSWER VQA WITH(NOLOCK) JOIN dbo.REF_VERF_ANSWER_TYPE VAT WITH(NOLOCK) ON VAT.REF_VERF_ANSWER_TYPE_ID = VQA.REF_VERF_ANSWER_TYPE_ID",
+        "where": "WHERE VQA.IS_ACTIVE=1"
     },
     "headerList": [
         {
@@ -78,12 +58,6 @@
             "position": "left",
             "label": "Answer Type",
             "name": "VerfAnswerTypeDescr"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "Active",
-            "name": "IsActive"
         },
         {
             "type": "label",
@@ -108,11 +82,6 @@
             "property": "VerfAnswerTypeDescr"
         },
         {
-            "type": "boolean",
-            "position": "center",
-            "property": "IsActive"
-        },
-        {
             "type": "action",
             "position": "center",
             "action": [
@@ -129,10 +98,6 @@
                             "property": "edit"
                         }
                     ]
-                },
-                {
-                    "type": "delete",
-                    "property": "VerfQuestionAnswerId"
                 }
             ]
         }

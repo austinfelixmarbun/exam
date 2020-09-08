@@ -1,5 +1,4 @@
 {
-    "title": "Office Search",
     "keyProperty": "RefOfficeId",
     "keyPropCriteria": "REF_OFFICE_ID",
     "component": [
@@ -20,29 +19,16 @@
             "placeholder": "Placeholder"
         },
         {
-            "type": "dropdown",
-            "name": "IS_ACTIVE",
-            "id": "ActiveStatusId",
-            "label": "Active Status",
+            "type": "textbox",
+            "name": "OFFICE_ADDR",
+            "id": "OfficeAddrId",
             "value": "",
-            "placeholder": "Placeholder",
-            "isFromURL": false,
-            "isSelectOne": false,
-            "items": [
-                {
-                    "key": "1",
-                    "value": "Yes"
-                },
-                {
-                    "key": "0",
-                    "value": "No"
-                }
-            ],
-            "itemsUrl": []
+            "label": "Office Address",
+            "placeholder": "Placeholder"
         }
     ],
     "querystring": {
-       "select": "SELECT OFFICE_CODE AS OfficeCode, OFFICE_NAME AS OfficeName, REF_OFFICE_ID AS RefOfficeId, IS_ACTIVE AS IsActive, MR_OFFICE_TYPE_CODE AS MrOfficeTypeCode",
+       "select": "SELECT OFFICE_CODE AS OfficeCode, OFFICE_NAME AS OfficeName, REF_OFFICE_ID AS RefOfficeId, IS_ACTIVE AS IsActive, MR_OFFICE_TYPE_CODE AS MrOfficeTypeCode, OFFICE_ADDR AS OfficeAddr",
         "from": "FROM dbo.REF_OFFICE WITH(NOLOCK)",
         "where": "WHERE IS_ACTIVE = 1 AND MR_OFFICE_TYPE_CODE != N'CG'"
     },
@@ -61,9 +47,9 @@
         },
         {
             "type": "sort",
-            "position": "center",
-            "label": "Active Status",
-            "name": "IS_ACTIVE"
+            "position": "left",
+            "label": "Office Address",
+            "name": "OFFICE_ADDR"
         }
     ],
     "bodyList": [
@@ -78,9 +64,9 @@
             "property": "OfficeName"
         },
         {
-            "type": "boolean",
-            "position": "center",
-            "property": "IsActive"
+            "type": "text",
+            "position": "left",
+            "property": "OfficeAddr"
         }
     ]
 }

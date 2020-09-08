@@ -39,6 +39,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
   VendorId: any;
   businessDt: Date;
   isHidden: boolean = true;
+  RsvField: string;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private vendorService: VendorService) {
     this.route.queryParams.subscribe(params => {
@@ -57,8 +58,8 @@ export class VendorHoldingAddEditComponent implements OnInit {
     LicenseNo: ['', Validators.required],
     MrIdTypeCode: [''],
     IdNo: [''],
-    MobilePhnNo1: [''],
-    MobilePhnNo2: [''],
+    MobilePhnNo1: ['', Validators.pattern("^[0-9]+$")],
+    MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
     Email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
     VendorRating: [''],
     EstablishmentDt: ['', Validators.required],
@@ -171,21 +172,36 @@ export class VendorHoldingAddEditComponent implements OnInit {
             this.VendorForm.patchValue({
               MrVendorTypeCode: this.itemType[0].Key
             });
-          }
-        }
-      }
-    );
 
-    var refMasterIdObj = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-    }
-    this.vendorService.GetRefMasterListKeyValuePair(refMasterIdObj).subscribe(
-      (response) => {
-        this.itemIdType = response[CommonConstant.ReturnObj];
-        if (this.itemIdType.length > 0) {
-          this.VendorForm.patchValue({
-            MrIdTypeCode: this.itemIdType[0].Key
-          });
+            if (this.itemType[0].Key == "C") {
+              this.RsvField = CommonConstant.CustTypeCompany
+            } else {
+              this.RsvField = CommonConstant.CustTypePersonal
+            }
+          }else{
+            if (this.VendorForm.controls.MrVendorTypeCode.value == "C") {
+              this.RsvField = CommonConstant.CustTypeCompany
+            } else {
+              this.RsvField = CommonConstant.CustTypePersonal
+            }
+          }
+
+          var refMasterIdObj = {
+            RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
+            ReserveField1: this.RsvField,
+          }
+          this.vendorService.GetListActiveRefMasterWithReserveFieldAll(refMasterIdObj).subscribe(
+            (response) => {
+              this.itemIdType = response[CommonConstant.ReturnObj];
+              if (this.mode != "edit") {
+                if (this.itemIdType.length > 0) {
+                  this.VendorForm.patchValue({
+                    MrIdTypeCode: this.itemIdType[0].Key
+                  });
+                }
+              }
+            }
+          );
         }
       }
     );
@@ -264,7 +280,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.vendorHoldingObj.VendorObj.MrVendorTypeCode = this.VendorForm.controls.MrVendorTypeCode.value;
       this.vendorHoldingObj.VendorObj.RegistrationNo = this.VendorForm.controls.RegistrationNo.value;
       this.vendorHoldingObj.VendorObj.LicenseNo = this.VendorForm.controls.LicenseNo.value;
-      this.vendorHoldingObj.VendorObj.MrIdTypeCode = "";
       this.vendorHoldingObj.VendorObj.IdNo = this.VendorForm.controls.IdNo.value;
       this.vendorHoldingObj.VendorObj.MobilePhnNo1 = this.VendorForm.controls.MobilePhnNo1.value;
       this.vendorHoldingObj.VendorObj.MobilePhnNo2 = this.VendorForm.controls.MobilePhnNo2.value;
@@ -280,10 +295,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.vendorHoldingObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
       this.vendorHoldingObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value;
       this.vendorHoldingObj.VendorObj.VendorAtpmCode = this.VendorForm.controls.VendorAtpmCode.value;
-
-      if (this.vendorHoldingObj.VendorObj.MrVendorTypeCode == "P") {
-        this.vendorHoldingObj.VendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value
-      }
+      this.vendorHoldingObj.VendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value
 
       if (this.VendorForm.controls.IsNpwpExist.value == true) {
         this.vendorHoldingObj.VendorObj.TaxIdNo = this.VendorForm.controls.TaxIdNo.value;
@@ -348,7 +360,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
-    
+
     this.inputLookupATPMObj.urlJson = "./assets/uclookup/vendor/lookupVendorParent.json";
     this.inputLookupATPMObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputLookupATPMObj.urlEnviPaging = environment.FoundationR3Url;
@@ -364,7 +376,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     this.inputLookupATPMObj.addCritInput.push(critInput);
     this.inputLookupATPMObj.title = CommonConstant.TITLE_SUPPLIER_ATPM;
     this.inputLookupATPMObj.isReady = true;
-    
+
     if (this.result != null) {
       this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.result["VendorAddrObj"].Zipcode };
 
@@ -372,7 +384,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.inputLookupATPMObj.jsonSelect = { VendorName: this.result.VendorObj.VendorAtpmName };
       }
     }
-    
+
     this.inputLookupZipcodeObj.isReady = true;
     this.NpwpCheck(true);
   }
@@ -383,13 +395,36 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.VendorForm.controls.IdNo.clearValidators();
       this.VendorForm.controls.RegistrationNo.setValidators(Validators.required);
       this.VendorForm.controls.LicenseNo.setValidators(Validators.required);
+      this.RsvField = CommonConstant.CustTypeCompany
       this.updateValueAndValidityForm();
     } else if (this.VendorForm.controls.MrVendorTypeCode.value == 'P') {
       this.VendorForm.controls.RegistrationNo.clearValidators();
       this.VendorForm.controls.LicenseNo.clearValidators();
       this.VendorForm.controls.MrIdTypeCode.setValidators(Validators.required);
       this.VendorForm.controls.IdNo.setValidators(Validators.required);
+      this.RsvField = CommonConstant.CustTypePersonal
       this.updateValueAndValidityForm();
     }
+
+    var refMasterIdObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
+      ReserveField1: this.RsvField,
+    }
+    this.vendorService.GetListActiveRefMasterWithReserveFieldAll(refMasterIdObj).subscribe(
+      (response) => {
+        this.itemIdType = response[CommonConstant.ReturnObj];
+        if (this.itemIdType.length > 0) {
+          if(this.mode!="edit"){
+            this.VendorForm.patchValue({
+              MrIdTypeCode: this.itemIdType[0].Key
+            });
+          }else{
+            this.VendorForm.patchValue({
+              MrIdTypeCode: this.result.VendorObj.MrIdTypeCode
+            });
+          }
+        }
+      }
+    );
   }
 }

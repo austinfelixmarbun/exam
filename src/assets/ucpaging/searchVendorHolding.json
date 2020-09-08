@@ -2,6 +2,24 @@
     "title": "Vendor Holding",
     "component": [
         {
+            "type": "textbox",
+            "name": "V.VENDOR_CODE",
+            "id": "HoldingCodeId",
+            "value": "",
+            "label": "Holding Code",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "textbox",
+            "name": "V.VENDOR_NAME",
+            "id": "HoldingNameId",
+            "value": "",
+            "label": "Holding Name",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
             "type": "dropdown",
             "name": "V.IS_ACTIVE",
             "id": "IsActiveId",
@@ -22,24 +40,6 @@
                 }
             ],
             "itemsUrl": []
-        },
-        {
-            "type": "textbox",
-            "name": "V.VENDOR_CODE",
-            "id": "HoldingCodeId",
-            "value": "",
-            "label": "Holding Code",
-            "placeholder": "Placeholder",
-            "datatype": "text"
-        },
-        {
-            "type": "textbox",
-            "name": "V.VENDOR_NAME",
-            "id": "HoldingNameId",
-            "value": "",
-            "label": "Holding Name",
-            "placeholder": "Placeholder",
-            "datatype": "text"
         }
     ],
     "querystring": {

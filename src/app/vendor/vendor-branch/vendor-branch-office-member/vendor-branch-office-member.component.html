@@ -1,23 +1,23 @@
-<div class="row text-left">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-body">
-        <br>
-        <app-main-info-view></app-main-info-view>
-        <form>
-          <div class="form-actions right">
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Paging']" [queryParams]= "{ MrVendorCategoryCode: this.MrVendorCategoryCode  }"   
-              translate>
-              Back
-            </button>
-            <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Vendor/Branch/Member/Add']"
-            [queryParams]="{VendorId: VendorId}">
-              <i class="ft-plus-circle"></i> Add
-            </button>
-          </div>
-        </form>
-        <lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
+<div class="card">
+  <div class="card-header header-title">
+    <div class="row">
+      <div class="col-md-8">
+        <h4 class="form-section card-title" translate>Office Member</h4>
       </div>
     </div>
   </div>
+  <app-main-info-view></app-main-info-view>
 </div>
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" class="backButton" [routerLink]="['/Vendor/Paging']"
+      [queryParams]="{ MrVendorCategoryCode: this.MrVendorCategoryCode  }" translate>
+      <i class="fa fa-arrow-left"> </i> Back
+    </button>
+    <button type="button" class="addButton" [routerLink]="['/Vendor/Branch/Member/Add']"
+      [queryParams]="{VendorId: VendorId}">
+      <i class="ft-plus-circle"></i> Add
+    </button>
+  </span>
+</div>
+<lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>

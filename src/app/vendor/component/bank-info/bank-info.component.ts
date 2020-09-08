@@ -27,7 +27,7 @@ export class BankInfoComponent implements OnInit {
   VendorBankAccId: number;
   ListData: any = new Array();
   BankRegisForm = this.fb.group({
-    AccNumber: ['', [Validators.required]],
+    AccNumber: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     AccName: ['', [Validators.required]],
     IsDefault: [false],
     RefBankId: [],

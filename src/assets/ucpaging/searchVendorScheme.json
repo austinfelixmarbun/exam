@@ -2,6 +2,22 @@
     "title": "Vendor Scheme",
     "component": [
         {
+            "type": "textbox",
+            "name": "VS.VENDOR_SCHM_CODE",
+            "id": "VendorSchemeCodeId",
+            "value": "",
+            "label": "Scheme Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "VS.VENDOR_SCHM_NAME",
+            "id": "VendorSchemeNameId",
+            "value": "",
+            "label": "Scheme Name",
+            "placeholder": "Placeholder"
+        },
+        {
             "type": "dropdown",
             "name": "VS.IS_ACTIVE",
             "id": "ActiveStatusId",
@@ -21,22 +37,6 @@
                 }
             ],
             "itemsUrl": []
-        },
-        {
-            "type": "textbox",
-            "name": "VS.VENDOR_SCHM_CODE",
-            "id": "VendorSchemeCodeId",
-            "value": "",
-            "label": "Scheme Code",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "textbox",
-            "name": "VS.VENDOR_SCHM_NAME",
-            "id": "VendorSchemeNameId",
-            "value": "",
-            "label": "Scheme Name",
-            "placeholder": "Placeholder"
         }
     ],
     "querystring": {
@@ -49,25 +49,25 @@
             "type": "sort",
             "position": "center",
             "label": "Scheme Code",
-            "name": "VendorSchmCode"
+            "name": "VS.VENDOR_SCHM_CODE"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Scheme Name",
-            "name": "VendorSchmName"
+            "name": "VS.VENDOR_SCHM_NAME"
         },
         {
-            "type": "label",
+            "type": "sort",
             "position": "center",
             "label": "Active Status",
-            "name": "IsActive"
+            "name": "VS.IS_ACTIVE"
         },
         {
-            "type": "label",
+            "type": "sort",
             "position": "center",
             "label": "# of Member",
-            "name": "NumOfMbr"
+            "name": "COUNT(VSM.VENDOR_SCHM_MBR_ID)"
         },
         {
             "type": "label",

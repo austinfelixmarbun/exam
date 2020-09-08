@@ -1,10 +1,10 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/SystemSetting/RefForm/Paging']"
+    <button type="button" class="backButton" [routerLink]="['/SystemSetting/RefForm/Paging']"
       translate>
-      <i class="far fa-window-close"></i> Cancel
+      <i class="far fa-arrow-left"></i> Back
     </button>
-    <button type="button" class="btn btn-raised btn-primary mr-1"
+    <button type="button" class="addButton"
       [routerLink]="['/SystemSetting/RefForm/RoleMapping/Add']" [queryParams]="{RefFormId: this.RefFormId}">
       <i class="ft-plus-circle"></i> Add
     </button>

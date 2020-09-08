@@ -127,6 +127,12 @@
               [panel]="'AssetMasterAttrSection'" *ngIf="isReadyAssetMasterAttr"></lib-ucSubsection>
             <div id="AssetMasterAttrSection" class="col-md-12" style="padding: 0;" *ngIf="isReadyAssetMasterAttr"
               formGroupName="AssetMasterAttrContent">
+              <div *ngIf="this.listAssetMasterAttrContent?.length == 0" class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel adInsLabel" style="padding-left: 0;"
+                    translate>No Data Found</label>
+                </div>
+              </div>
               <div class="form-group row" *ngFor="let attr of listAssetMasterAttrContent">
                 <div class="col-md-12" *ngIf="attr.AttrInputType == 'T'">
                   <label class="col-md-3 adInsLabel adins-required-label" style="padding-left: 0;"

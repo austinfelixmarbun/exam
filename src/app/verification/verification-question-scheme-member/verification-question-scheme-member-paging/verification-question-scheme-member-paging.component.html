@@ -1,10 +1,10 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Verification/QuestionScheme/Paging']"
+    <button type="button" class="backButton" [routerLink]="['/Verification/QuestionScheme/Paging']"
       translate>
-      <i class="far fa-window-close"></i> Cancel
+      <i class="fa fa-arrow-left"> </i> Back 
     </button>
-    <button type="button" class="btn btn-raised btn-primary mr-1"
+    <button type="button" class="addButton"
       [routerLink]="['/Verification/QuestionSchemeMember/Add']" [queryParams]="{VerfSchemeHId: this.VerfSchemeHId}">
       <i class="ft-plus-circle"></i> Add
     </button>

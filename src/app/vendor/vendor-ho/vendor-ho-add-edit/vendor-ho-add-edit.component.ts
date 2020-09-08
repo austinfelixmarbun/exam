@@ -38,6 +38,7 @@ export class VendorHoAddEditComponent implements OnInit {
   vendorHoObj: any;
   VendorId: any;
   isHidden: boolean = true;
+  RsvField: string;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -58,8 +59,8 @@ export class VendorHoAddEditComponent implements OnInit {
     LicenseNo: ['', Validators.required],
     MrIdTypeCode: [''],
     IdNo: [''],
-    MobilePhnNo1: [''],
-    MobilePhnNo2: [''],
+    MobilePhnNo1: ['', Validators.pattern("^[0-9]+$")],
+    MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
     Email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
     VendorRating: [''],
     EstablishmentDt: ['', Validators.required],
@@ -170,27 +171,39 @@ export class VendorHoAddEditComponent implements OnInit {
             this.VendorForm.patchValue({
               MrVendorTypeCode: this.itemType[0].Key
             });
+            if (this.itemType[0].Key == "C") {
+              this.RsvField = CommonConstant.CustTypeCompany
+            } else {
+              this.RsvField = CommonConstant.CustTypePersonal
+            }
+          }else{
+            if (this.VendorForm.controls.MrVendorTypeCode.value == "C") {
+              this.RsvField = CommonConstant.CustTypeCompany
+            } else {
+              this.RsvField = CommonConstant.CustTypePersonal
+            }
           }
+
+          var refMasterIdObj = {
+            RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
+            ReserveField1: this.RsvField,
+          }
+          this.http.post(URLConstant.GetListActiveRefMasterWithReserveFieldAll, refMasterIdObj).subscribe(
+            (response) => {
+              this.itemIdType = response[CommonConstant.ReturnObj];
+              if (this.mode != "edit") {
+                if (this.itemIdType.length > 0) {
+                  this.VendorForm.patchValue({
+                    MrIdTypeCode: this.itemIdType[0].Key
+                  });
+                }
+              }
+            }
+          );
         }
       }
     );
-
-    var refMasterIdObj = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-    }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterIdObj).subscribe(
-      (response) => {
-        this.itemIdType = response[CommonConstant.ReturnObj];
-        if (this.itemIdType.length > 0) {
-          if (this.mode != "edit") {
-            this.VendorForm.patchValue({
-              MrIdTypeCode: this.itemIdType[0].Key
-            });
-          }
-        }
-      }
-    );
-
+    
     var refMasterCalcMethodObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeTaxCalcMethod,
     }
@@ -259,14 +272,37 @@ export class VendorHoAddEditComponent implements OnInit {
       this.VendorForm.controls.IdNo.clearValidators();
       this.VendorForm.controls.RegistrationNo.setValidators(Validators.required);
       this.VendorForm.controls.LicenseNo.setValidators(Validators.required);
+      this.RsvField = CommonConstant.CustTypeCompany
       this.updateValueAndValidityForm();
     } else {
       this.VendorForm.controls.RegistrationNo.clearValidators();
       this.VendorForm.controls.LicenseNo.clearValidators();
       this.VendorForm.controls.MrIdTypeCode.setValidators(Validators.required);
       this.VendorForm.controls.IdNo.setValidators(Validators.required);
+      this.RsvField = CommonConstant.CustTypePersonal
       this.updateValueAndValidityForm();
     }
+
+      var refMasterIdObj = {
+        RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
+        ReserveField1: this.RsvField,
+      }
+      this.http.post(URLConstant.GetListActiveRefMasterWithReserveFieldAll, refMasterIdObj).subscribe(
+        (response) => {
+          this.itemIdType = response[CommonConstant.ReturnObj];
+          if (this.itemIdType.length > 0) {
+            if(this.mode!="edit"){
+              this.VendorForm.patchValue({
+                MrIdTypeCode: this.itemIdType[0].Key
+              });
+            }else{
+              this.VendorForm.patchValue({
+                MrIdTypeCode: this.result.VendorObj.MrIdTypeCode
+              });
+            }
+          }
+        }
+      );
   }
 
   Back() {
@@ -361,7 +397,6 @@ export class VendorHoAddEditComponent implements OnInit {
       this.vendorHoObj.VendorObj.MrVendorTypeCode = this.VendorForm.controls.MrVendorTypeCode.value;
       this.vendorHoObj.VendorObj.RegistrationNo = this.VendorForm.controls.RegistrationNo.value;
       this.vendorHoObj.VendorObj.LicenseNo = this.VendorForm.controls.LicenseNo.value;
-      this.vendorHoObj.VendorObj.MrIdTypeCode = "";
       this.vendorHoObj.VendorObj.IdNo = this.VendorForm.controls.IdNo.value;
       this.vendorHoObj.VendorObj.MobilePhnNo1 = this.VendorForm.controls.MobilePhnNo1.value;
       this.vendorHoObj.VendorObj.MobilePhnNo2 = this.VendorForm.controls.MobilePhnNo2.value;
@@ -376,11 +411,7 @@ export class VendorHoAddEditComponent implements OnInit {
       this.vendorHoObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
       this.vendorHoObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value;
       this.vendorHoObj.VendorObj.VendorAtpmCode = this.VendorForm.controls.VendorAtpmCode.value;
-
-
-      if (this.vendorHoObj.VendorObj.MrVendorTypeCode == "P") {
-        this.vendorHoObj.VendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value;
-      }
+      this.vendorHoObj.VendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value;
 
       if (this.VendorForm.controls.IsNpwpExist.value == true) {
         this.vendorHoObj.VendorObj.TaxIdNo = this.VendorForm.controls.TaxIdNo.value;

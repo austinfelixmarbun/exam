@@ -1,6 +1,4 @@
 {
-    "title": "Asset Attribute",
-    "exportExcel": false,
     "component": [
         {
             "type": "textbox",

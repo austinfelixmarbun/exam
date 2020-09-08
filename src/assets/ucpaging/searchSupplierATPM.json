@@ -2,6 +2,24 @@
     "title": "Vendor ATPM",
     "component": [
         {
+            "type": "textbox",
+            "name": "V.VENDOR_CODE",
+            "id": "ATPMCodeId",
+            "value": "",
+            "label": "ATPM Code",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "textbox",
+            "name": "V.VENDOR_NAME",
+            "id": "ATPMNameId",
+            "value": "",
+            "label": "ATPM Name",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
             "type": "dropdown",
             "name": "V.IS_ACTIVE",
             "id": "IsActiveId",
@@ -22,24 +40,6 @@
                 }
             ],
             "itemsUrl": []
-        },
-        {
-            "type": "textbox",
-            "name": "V.VENDOR_CODE",
-            "id": "ATPMCodeId",
-            "value": "",
-            "label": "ATPM Code",
-            "placeholder": "Placeholder",
-            "datatype": "text"
-        },
-        {
-            "type": "textbox",
-            "name": "V.VENDOR_NAME",
-            "id": "ATPMNameId",
-            "value": "",
-            "label": "ATPM Name",
-            "placeholder": "Placeholder",
-            "datatype": "text"
         }
     ],
     "querystring": {
@@ -80,7 +80,7 @@
             "property": "VendorCode"
         },
         {
-            "type" : "link",
+            "type" : "text",
             "property" : "VendorName",
             "path" : "/Vendor/ATPM/View",
             "target": "_blank",

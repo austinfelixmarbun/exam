@@ -73,11 +73,11 @@ export class ContactPersonAddEditComponent implements OnInit {
       }
     )
 
-    this.inputZipcodeLookupObj.urlJson = "./assets/lookup/lookupZipcode.json";
+    this.inputZipcodeLookupObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputZipcodeLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputZipcodeLookupObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputZipcodeLookupObj.pagingJson = "./assets/lookup/lookupZipcode.json";
-    this.inputZipcodeLookupObj.genericJson = "./assets/lookup/lookupZipcode.json";
+    this.inputZipcodeLookupObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputZipcodeLookupObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
     if (this.mode == "edit") {
       var contactPerson = new VendorContactPersonObj();

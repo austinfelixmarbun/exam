@@ -150,12 +150,12 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 });
 
               if (this.isFinal) {
-                this.http.post(URLConstant.GetAssetMasterAttrContentForAssetMaster, { AssetMasterId: this.AssetMasterId }).pipe(first()).subscribe(
+                this.http.post(URLConstant.GetAssetMasterAttrContentForAssetMasterByAttrTypeCode, { AssetMasterId: this.AssetMasterId,  AttrTypeCode: CommonConstant.AttrTypeCodeMaster}).pipe(first()).subscribe(
                   (response) => {
                     this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
                     var formGroupObject = new Object();
                     for (const masterAttr of this.listAssetMasterAttrContent) {
-                      formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AssetAttrId"], [Validators.required]];
+                      formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AttrContent"], [Validators.required]];
                     }
                     this.AssetMasterChildForm.addControl("AssetMasterAttrContent", this.fb.group(formGroupObject));
                     this.isReadyAssetMasterAttr = true;
@@ -362,13 +362,19 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           }),
           mergeMap((response) => {
             this.listAssetSchmDObj.AssetMasterId = response["AssetMasterId"];
-            let addAssetMasterAttr = this.http.post(URLConstant.AddAssetMasterAttrContent, { AssetMasterAttrContentObjs: assetMasterAttrValues });
+            let observableBatch = [];
+            if(assetMasterAttrValues.length > 0)
+            {
+              let addAssetMasterAttr = this.http.post(URLConstant.AddAssetMasterAttrContent, { AssetMasterAttrContentObjs: assetMasterAttrValues });
+              observableBatch.push(addAssetMasterAttr);
+            }
             let editListAssetSchm = this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj);
-            return forkJoin(editListAssetSchm, addAssetMasterAttr);
+            observableBatch.push(editListAssetSchm);
+            return forkJoin(observableBatch);
           })
         ).subscribe(
           (response) => {
-            this.toastr.successMessage(response[1]["Message"]);
+            this.toastr.successMessage(response[response.length-1]["Message"]);
             this.router.navigate(["/Asset/AssetMaster/Paging"]);
           });
       }
@@ -423,10 +429,16 @@ export class AssetMasterAddEditChildComponent implements OnInit {
         // Reynard: add / edit kok response ny beda ??
         let editAssetMaster = this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj);
         let editAssetSchm = this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj);
-        let addAssetMasterAttr = this.http.post(URLConstant.AddAssetMasterAttrContent, { AssetMasterAttrContentObjs: assetMasterAttrValues });
-        forkJoin(editAssetMaster, editAssetSchm, addAssetMasterAttr).subscribe(
+        let observableBatch = [editAssetMaster, editAssetSchm];
+        if (assetMasterAttrValues.length > 0)
+        {
+          let addAssetMasterAttr = this.http.post(URLConstant.AddAssetMasterAttrContent, { AssetMasterAttrContentObjs: assetMasterAttrValues });
+          observableBatch.push(addAssetMasterAttr);
+        }
+        
+        forkJoin(observableBatch).subscribe(
           (response) => {
-            this.toastr.successMessage(response[2]["Message"]);
+            this.toastr.successMessage(response[response.length-1]["Message"]);
             this.router.navigate(["/Asset/AssetMaster/Paging"]);
           },
           (error) => {
