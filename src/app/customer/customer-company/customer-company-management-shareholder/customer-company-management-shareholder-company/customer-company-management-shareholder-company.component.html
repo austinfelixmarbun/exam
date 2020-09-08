@@ -18,6 +18,14 @@
                       (lookup)=" getLookUpCustomer($event)"></lib-uclookupgeneric>
                   </div>
                 </div>
+                <div class="form-group row">
+                  <label class="col-md-2 adins-required-label" translate>Industry Type Name </label>
+                  <div class="col-md-4">
+                    <lib-uclookupgeneric [lookupInput]="lookUpIndustryTypeObj" [parentForm]="ManagementShareholderForm" [enjiForm]="enjiForm"
+                      [identifier]="'RefIndustryTypeId'" (lookup)=getLookUpIndustry($event)>
+                    </lib-uclookupgeneric>
+                  </div>
+                </div>
                 <div class="form-group row  ">
                   <label class="col-md-2 adins-required-label" translate>Full Name</label>
                   <div class="col-md-10">
