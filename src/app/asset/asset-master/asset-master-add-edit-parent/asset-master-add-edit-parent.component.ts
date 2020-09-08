@@ -67,7 +67,9 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         if (this.resultAssetType.MaxHierarchyLevel == 1) {
           this.AssetMasterParentForm.patchValue({
             IsFinal: true
-          });
+          })
+          this.AssetMasterParentForm.controls["AssetCategoryId"].setValidators([Validators.required]);
+          this.AssetMasterParentForm.controls['AssetCategoryId'].updateValueAndValidity();
         }
         else {
           this.AssetMasterParentForm.patchValue({
@@ -136,10 +138,9 @@ export class AssetMasterAddEditParentComponent implements OnInit {
 
 
     if (this.pageType == "edit") {
-      this.AssetMasterParentForm.controls["AssetTypeId"].disable();
-      this.AssetMasterParentForm.controls["AssetCategoryId"].disable();
-      this.AssetMasterParentForm.controls["AssetCode"].disable();
-      this.AssetMasterParentForm.controls["AssetName"].disable();
+      // this.AssetMasterParentForm.controls["AssetTypeId"].disable();
+      // this.AssetMasterParentForm.controls["AssetCode"].disable();
+      // this.AssetMasterParentForm.controls["AssetName"].disable();
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
       this.http.post(URLConstant.GetAssetMasterById, this.assetMasterObj).subscribe(
@@ -159,6 +160,11 @@ export class AssetMasterAddEditParentComponent implements OnInit {
           });
 
           this.isFinal = this.resultData.IsFinal;
+          if(this.isFinal)
+          {            
+            this.AssetMasterParentForm.controls["AssetCategoryId"].setValidators([Validators.required]);
+            this.AssetMasterParentForm.controls['AssetCategoryId'].updateValueAndValidity();
+          }
 
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
