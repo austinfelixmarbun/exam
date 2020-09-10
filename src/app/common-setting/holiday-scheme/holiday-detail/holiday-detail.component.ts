@@ -86,12 +86,10 @@ export class HolidayDetailComponent implements OnInit {
 
       this.http.post(URLConstant.CopyHolidaySchmH, this.copyHoliday).subscribe(
         (response) => {
-          console.log("success");
           this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
           this.toastr.successMessage(response['message']);
         },
         (error) => {
-          console.log("error");
           this.toastr.warningMessage(error['message']);
         }
       );
