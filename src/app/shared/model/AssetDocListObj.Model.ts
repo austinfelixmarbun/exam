@@ -9,4 +9,5 @@ export class AssetDocListObj {
     IsMandatoryNew : any;
     IsMandatoryUsed : any;
     IsActive:any;
+    IsExpDtMandatory: any;
 }  

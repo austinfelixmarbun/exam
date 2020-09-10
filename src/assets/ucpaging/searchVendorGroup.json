@@ -3,6 +3,22 @@
     "exportExcel": false,
     "component": [
         {
+            "type": "textbox",
+            "name": "VG.VENDOR_GRP_CODE",
+            "id": "VendorGrpCodeId",
+            "value": "",
+            "label": "Group Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "VG.VENDOR_GRP_NAME",
+            "id": "VendorGrpNameId",
+            "value": "",
+            "label": "Group Name",
+            "placeholder": "Placeholder"
+        },
+        {
             "type": "dropdown",
             "name": "VG.IS_ACTIVE",
             "id": "ActiveStatusId",
@@ -22,22 +38,6 @@
                 }
             ],
             "itemsUrl": []
-        },
-        {
-            "type": "textbox",
-            "name": "VG.VENDOR_GRP_CODE",
-            "id": "VendorGrpCodeId",
-            "value": "",
-            "label": "Group Code",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "textbox",
-            "name": "VG.VENDOR_GRP_NAME",
-            "id": "VendorGrpNameId",
-            "value": "",
-            "label": "Group Name",
-            "placeholder": "Placeholder"
         }
     ],
     "querystring": {

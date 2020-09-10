@@ -1,6 +1,4 @@
 {
-  "title": "Branch Employee",
-  "exportExcel": false,
   "component": [
     {
       "type": "textbox",

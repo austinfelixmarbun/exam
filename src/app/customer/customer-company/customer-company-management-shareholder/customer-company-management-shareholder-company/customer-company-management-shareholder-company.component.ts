@@ -23,6 +23,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   @Input() CustCompanyMgmntShrholderId: number;
   @Input() TotalShare : number;
   @Output () outputValue : EventEmitter<object> = new EventEmitter();
+  lookUpIndustryTypeObj: InputLookupObj;
 
   inputLookupCustCompanyObj : InputLookupObj;
   custCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
@@ -44,6 +45,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     MrCompanyTypeCode: ['',[Validators.required]],
     TaxIdNo: [''],
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
+    MrIndustryTypeCode: [''],
     IsSigner: [false],
     IsActive: [false],
   });
@@ -68,6 +70,15 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
       RowVersion: ""
     }
+
+    this.lookUpIndustryTypeObj = new InputLookupObj();
+    this.lookUpIndustryTypeObj.urlJson = "./assets/lookup/lookupIndustryType.json";
+    this.lookUpIndustryTypeObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.lookUpIndustryTypeObj.urlEnviPaging = environment.FoundationR3Url;
+    this.lookUpIndustryTypeObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
+    this.lookUpIndustryTypeObj.genericJson = "./assets/lookup/lookupIndustryType.json";
+    this.lookUpIndustryTypeObj.isRequired = true;
+
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
@@ -100,6 +111,15 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.http.post(this.getCustCompanyMgmntShrholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.tempCustCompanyMgmntShrholderObj = response;
+          this.http.post(URLConstant.GetRefIndustryTypeByIndustryTypeCode, { IndustryTypeCode: response["MrIndustryTypeCode"] }).subscribe(
+            (response) => {
+              this.lookUpIndustryTypeObj.nameSelect = response["IndustryTypeName"]; 
+              this.lookUpIndustryTypeObj.jsonSelect = response;
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
           
           this.ManagementShareholderForm.patchValue({ 
             MgmntShrholderName: this.tempCustCompanyMgmntShrholderObj.MgmntShrholderName,
@@ -108,7 +128,8 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
             TaxIdNo:  this.tempCustCompanyMgmntShrholderObj.TaxIdNo,
             SharePrcnt: this.tempCustCompanyMgmntShrholderObj.SharePrcnt,
             IsSigner: this.tempCustCompanyMgmntShrholderObj.IsSigner,
-            IsActive: this.tempCustCompanyMgmntShrholderObj.IsActive
+            IsActive: this.tempCustCompanyMgmntShrholderObj.IsActive,
+            MrIndustryTypeCode: this.tempCustCompanyMgmntShrholderObj.MrIndustryTypeCode
           });
           if(this.tempCustCompanyMgmntShrholderObj.ShareholderCustNo!=null){ 
             this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
@@ -122,6 +143,12 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     } 
   }
 
+  getLookUpIndustry(e){
+    this.ManagementShareholderForm.patchValue({
+      MrIndustryTypeCode: e.IndustryTypeCode
+    });
+  }
+
   LeftShare: number;
   TotalShareCurrent: number;
   SaveValue() {
@@ -131,6 +158,11 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.LeftShare = 100 - this.TotalShare;
       this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_LEFT +this.LeftShare+"%");
       return;
+    }
+
+    if(!this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value){
+      this.toastr.warningMessage("Industry Type Is Required");
+      return false;
     }
 
     this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
@@ -145,6 +177,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.custCompanyMgmntShrholderObj.TaxIdNo = this.ManagementShareholderForm.controls["TaxIdNo"].value;
       this.custCompanyMgmntShrholderObj.IsActive = this.ManagementShareholderForm.controls["IsActive"].value; 
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Company;
+      this.custCompanyMgmntShrholderObj.MrIndustryTypeCode = this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value; 
       this.http.post(this.editManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
@@ -163,6 +196,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.custCompanyMgmntShrholderObj.TaxIdNo = this.ManagementShareholderForm.controls["TaxIdNo"].value;
       this.custCompanyMgmntShrholderObj.IsActive = this.ManagementShareholderForm.controls["IsActive"].value; 
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Company;
+      this.custCompanyMgmntShrholderObj.MrIndustryTypeCode = this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value; 
       this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
