@@ -181,7 +181,7 @@
                 *ngIf="MrVendorCategoryCode=='SUPPLIER_HO' || MrVendorCategoryCode=='SUPPLIER_HOLDING' || MrVendorCategoryCode=='SUPPLIER_BRANCH'">
                 <div class="form-body" *ngIf="inputLookupParentObj.isReady">
                   <div class="form-group row">
-                    <label class="col-md-3 adins-required-label">Supplier HO</label>
+                    <label class="col-md-3">Supplier HO</label>
                     <div class="col-md-3">
                       <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
                         [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
