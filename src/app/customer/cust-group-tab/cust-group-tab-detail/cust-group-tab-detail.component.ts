@@ -76,7 +76,7 @@ export class CustGroupTabDetailComponent implements OnInit {
         criteriaObj.listValue = this.ListCustIdToExclude;
         criteriaList.push(criteriaObj);
         this.inputLookupCustPersonalObj.addCritInput = criteriaList;
-        this.inputLookupCustPersonalObj.isRequired = false;
+        this.inputLookupCustPersonalObj.isRequired = true;
       }
 
       // criteriaList = new Array();
@@ -110,7 +110,7 @@ export class CustGroupTabDetailComponent implements OnInit {
         criteriaObj.listValue = this.ListCustIdToExclude;
         criteriaList.push(criteriaObj);
         this.inputLookupCustCompanyObj.addCritInput = criteriaList;
-        this.inputLookupCustCompanyObj.isRequired = false;
+        this.inputLookupCustCompanyObj.isRequired = true;
       }
 
       // criteriaList = new Array();
