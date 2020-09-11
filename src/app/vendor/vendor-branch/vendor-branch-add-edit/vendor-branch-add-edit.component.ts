@@ -435,7 +435,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupVendorParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-    this.inputLookupParentObj.isRequired = true;
+    this.inputLookupParentObj.isRequired = false;
     this.inputLookupParentObj.addCritInput = new Array();
 
     if (this.MrVendorCategoryCode == "SUPPLIER_BRANCH") {
