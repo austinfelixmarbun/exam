@@ -12,6 +12,8 @@ import { AssetSchmListObj } from 'app/shared/model/AssetSchmListObj.Model';
 import { ListAssetSchmDObj } from 'app/shared/model/ListAssetSchmDObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { map, mergeMap, first } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';;
 
 @Component({
   selector: 'app-asset-master-add-edit-parent',
@@ -112,8 +114,9 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       });
   }
 
-  ngOnInit() {
-    this.http.post(URLConstant.GetValueAssetType, null).subscribe(
+  async ngOnInit() { 
+    
+    await this.http.post(URLConstant.GetValueAssetType, null).toPromise().then(
       (response) => {
         this.allAssetMasterMethod = response[CommonConstant.ReturnObj];
         if(this.allAssetMasterMethod.length > 0){
@@ -121,21 +124,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
             AssetTypeId: response[CommonConstant.ReturnObj][0]['Key']
           });
         }
-
-        this.assetSchmListDObj = new AssetSchmListObj();
-        this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
-        this.assetSchmListDObj.AssetTypeId = response[CommonConstant.ReturnObj][0]['Key'];
-        this.http.post(URLConstant.GetListAssetSchmH, this.assetSchmListDObj).subscribe(
-          (response) => {
-            this.listAssetScheme = response[CommonConstant.ReturnObj];
-            for (let i = 0; i < this.listAssetScheme.length; i++) {
-              if (this.listAssetScheme[i].AssetSchmHIdFromD != null) {
-                this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
-              }
-            }
-          });
       });
-
 
     if (this.pageType == "edit") {
       // this.AssetMasterParentForm.controls["AssetTypeId"].disable();
@@ -206,6 +195,20 @@ export class AssetMasterAddEditParentComponent implements OnInit {
             });
         }
       );
+    }else{ 
+          this.assetSchmListDObj = new AssetSchmListObj();
+          this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
+          this.assetSchmListDObj.AssetTypeId = this.allAssetMasterMethod[0]['Key'];
+          this.http.post(URLConstant.GetListAssetSchmH, this.assetSchmListDObj).subscribe(
+            (response) => {
+              this.listAssetScheme = response[CommonConstant.ReturnObj];
+              for (let i = 0; i < this.listAssetScheme.length; i++) {
+                if (this.listAssetScheme[i].AssetSchmHIdFromD != null) {
+                  this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
+                }
+              }
+            });
+   
     }
   }
 
@@ -274,19 +277,46 @@ export class AssetMasterAddEditParentComponent implements OnInit {
             this.listAssetScheme[i].AssetMasterId = null;
           }
         }
-
-        this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj).subscribe(
+        this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj).pipe(
+          map((response) => {
+            return response;
+          }),
+          mergeMap((response) => {
+            this.listAssetSchmDObj.AssetMasterId = response["AssetMasterId"];
+            let observableBatch = []; 
+            let editListAssetSchm = this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj);
+            observableBatch.push(editListAssetSchm);
+            return forkJoin(observableBatch);
+          })
+        ).subscribe(
           (response) => {
+            this.toastr.successMessage(response[response.length - 1]["Message"]);
+            this.router.navigate(["/Asset/AssetMaster/Paging"]);
           });
+  
+
+
+
+      }else{
+        this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj).subscribe(
+          (response) => {
+            this.toastr.successMessage(response["Message"]);
+            this.router.navigate(["/Asset/AssetMaster/Paging"]);
+  
+          }
+        );
       }
 
-      this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj).subscribe(
-        (response) => {
-          this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/AssetMaster/Paging"]);
+    
 
-        }
-      );
+
+  
+
+
+
+
+
+      
     } else {
       this.assetMasterObj = this.resultData;
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
@@ -324,18 +354,34 @@ export class AssetMasterAddEditParentComponent implements OnInit {
           } else {
             this.listAssetScheme[i].AssetMasterId = null;
           }
-        }
-        this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj).subscribe(
-          (response) => {
-          });
-      }
+        } 
+  
+        let editAssetMaster = this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj);
+        let editAssetSchm = this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj);
+        let observableBatch = [editAssetMaster, editAssetSchm];
+      
 
-      this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj).subscribe(
-        (response) => {
-          this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/AssetMaster/Paging"]);
-        }
-      );
+        forkJoin(observableBatch).subscribe(
+          (response) => {
+            this.toastr.successMessage(response[response.length - 1]["Message"]);
+            this.router.navigate(["/Asset/AssetMaster/Paging"]);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }else{
+        this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj).subscribe(
+          (response) => {
+            this.toastr.successMessage(response["Message"]);
+            this.router.navigate(["/Asset/AssetMaster/Paging"]);
+          }
+        );
+         
+      }
+        
+    
+
     }
   }
 }
