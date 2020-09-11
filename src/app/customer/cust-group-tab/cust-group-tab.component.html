@@ -1,5 +1,5 @@
 <span class="mr-1 pull-right">
-  <button type="button" class="addButton" (click)="openModalAddCustGroup()" translate>
+  <button type="button" class="addButton" (click)="openModalAddCustGroup()" translate *ngIf = "CustGrpList.length == 0">
     <i class="ft-plus-circle"></i> Add
   </button>
 </span>
