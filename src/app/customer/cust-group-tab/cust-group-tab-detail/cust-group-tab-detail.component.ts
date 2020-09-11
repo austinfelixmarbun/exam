@@ -34,7 +34,7 @@ export class CustGroupTabDetailComponent implements OnInit {
     MrCustRelationshipCode: [''],
     CustGrpNotes: [''],
     IsActive: [true],
-    IsBothWays: [false],
+    //IsBothWays: [false],
     RowVersion: [''],
     CustNo: [''],
     CustName: ['']
@@ -140,7 +140,7 @@ export class CustGroupTabDetailComponent implements OnInit {
       CustName: e.custName
     });
     if(e.mrCustTypeCode == CommonConstant.MR_CUST_TYPE_CODE_PERSONAL){
-      refMasterRelationship.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustCompanyRelationship;
+      refMasterRelationship.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustPersonalRelationship;
     }
     else{
       refMasterRelationship.RefMasterTypeCode =CommonConstant.RefMasterTypeCodeCustCompanyRelationship ;
@@ -186,7 +186,7 @@ export class CustGroupTabDetailComponent implements OnInit {
   Save(){
     var custGrpData = this.CustGrpForm.value;
     
-    if(custGrpData.IsBothWays){
+    /*if(custGrpData.IsBothWays){
       this.httpClient.post(URLConstant.AddCustGrpBothWays, custGrpData).subscribe(
         (response) => {
           this.activeModal.close(response);
@@ -194,11 +194,12 @@ export class CustGroupTabDetailComponent implements OnInit {
       );
     }
     else{
+    */
       this.httpClient.post(URLConstant.AddCustGrp, custGrpData).subscribe(
         (response) => {
           this.activeModal.close(response);
         }
       );
-    }
+    //}
   }
 }
