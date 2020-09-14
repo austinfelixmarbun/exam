@@ -98,20 +98,6 @@
             "position": "center",
             "action": [
                 {
-                    "type": "edit",
-                    "path": "/CommonSetting/Holiday/Detail/Edit",
-                    "param": [
-                        {
-                            "type": "HolidaySchmHId",
-                            "property": "HolidaySchmHId"
-                        },
-                        {
-                            "type": "HolidaySchmDId",
-                            "property": "HolidaySchmDId"
-                        }
-                    ]
-                },
-                {
                     "type": "delete",
                     "property": "HolidaySchmDId"
                 }

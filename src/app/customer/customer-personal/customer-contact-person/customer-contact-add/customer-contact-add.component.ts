@@ -118,7 +118,6 @@ export class CustomerContactAddComponent implements OnInit {
   }
   isAdd: any;
   ngOnInit() {
-    console.log("aaa")
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -384,7 +383,6 @@ export class CustomerContactAddComponent implements OnInit {
     tempCustAddrObj.MrCustAddrTypeCode = "-";
     this.http.post(URLConstant.GetListCustAddr, tempCustAddrObj).subscribe(
       (response) => {
-        console.log(response);
         this.listCustAddr = response[CommonConstant.ReturnObj];
         if (this.listCustAddr.length > 0) {
           this.CustomerContactForm.patchValue({ CopyFromContactPerson: response[CommonConstant.ReturnObj][0]['CustAddrId'] });
@@ -464,8 +462,6 @@ export class CustomerContactAddComponent implements OnInit {
     this.custPersonalContactPersonObj.SubZipcode = this.CustomerContactForm.value.UcAddressZipcode.value;
     if (this.tempCust != null) {
       this.custPersonalContactPersonObj.ContactPersonCustNo = this.tempCust.CustNo;
-    } else if (this.tempCustPersonalContactPerson.ContactPersonCustNo != null) {
-      this.custPersonalContactPersonObj.ContactPersonCustNo = this.tempCustPersonalContactPerson.ContactPersonCustNo;
     }
 
     if (this.tempCustPersonal != null) {

@@ -27,15 +27,15 @@ export class RefAttrDetailComponent implements OnInit {
     AttrTypeCode: ['', [Validators.required]],
     AttrInputType: ['', [Validators.required]],
     AttrGroup: ['', [Validators.required]],
-    PatternCode: [''],
-    PatternValue: [''],
+    // PatternCode: [''],
+    // PatternValue: [''],
     IsSystem: [false],
     IsActive: [true],
-    RsvField1: [''],
-    RsvField2: [''],
-    RsvField3: [''],
-    RsvField4: [''],
-    RsvField5: [''],
+    // RsvField1: [''],
+    // RsvField2: [''],
+    // RsvField3: [''],
+    // RsvField4: [''],
+    // RsvField5: [''],
     RowVersion: ['']
   });
 

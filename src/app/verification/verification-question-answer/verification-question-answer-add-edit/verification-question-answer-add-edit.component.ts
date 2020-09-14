@@ -54,35 +54,34 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
             RefVerfAnswerTypeId: VerfAnswerData.RefVerfAnswerTypeId
           });
         }
-      })
 
+        if (this.mode == "edit") {
+          var verfAnswerObj = { VerfQuestionAnswerId: this.VerfQuestionAnswerId }
+          this.http.post(URLConstant.GetVerfQuestionAnswerForUpdateById, verfAnswerObj).subscribe(
+            (response) => {
+              this.verfQuestionAnswer = response[CommonConstant.ReturnObj];
 
-    if (this.mode == "edit") {
-      var verfAnswerObj = { VerfQuestionAnswerId: this.VerfQuestionAnswerId }
-      this.http.post(URLConstant.GetVerfQuestionAnswerForUpdateById, verfAnswerObj).subscribe(
-        (response) => {
-          this.verfQuestionAnswer = response[CommonConstant.ReturnObj];
+              refAnswerObj = { RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId }
+              this.http.post(URLConstant.GetRefVerfAnswerTypeById, refAnswerObj).subscribe(
+                (respond) => {
+                  this.answerTypeCode = respond["VerfAnswerTypeCode"];
+                }
+              )
 
-          refAnswerObj = { RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId }
-          this.http.post(URLConstant.GetRefVerfAnswerTypeById, refAnswerObj).subscribe(
-            (respond) => {
-              this.answerTypeCode = respond["VerfAnswerTypeCode"];
+              this.QuestionAnswerForm.patchValue({
+                VerfQuestionCode: this.verfQuestionAnswer.VerfQuestionCode,
+                VerfQuestionText: this.verfQuestionAnswer.VerfQuestionText,
+                VerfAnswer: this.verfQuestionAnswer.VerfAnswer,
+                RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId,
+                IsActive: this.verfQuestionAnswer.IsActive,
+                RowVersion: this.verfQuestionAnswer.RowVersion
+              });
+
+              this.AnswerTypeChanged(this.verfQuestionAnswer.RefVerfAnswerTypeId);
             }
-          )
-
-          this.QuestionAnswerForm.patchValue({
-            VerfQuestionCode: this.verfQuestionAnswer.VerfQuestionCode,
-            VerfQuestionText: this.verfQuestionAnswer.VerfQuestionText,
-            VerfAnswer: this.verfQuestionAnswer.VerfAnswer,
-            RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId,
-            IsActive: this.verfQuestionAnswer.IsActive,
-            RowVersion: this.verfQuestionAnswer.RowVersion
-          });
-
-          this.AnswerTypeChanged(this.verfQuestionAnswer.RefVerfAnswerTypeId);
+          );
         }
-      );
-    }
+      })
   }
 
   AnswerTypeChanged(RefVerfAnswerTypeId) {

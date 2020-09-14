@@ -1,5 +1,7 @@
 
 {
+    "keyProperty": "VerfQuestionAnswerId",
+    "keyPropCriteria": "VQA.VERF_QUESTION_ANSWER_ID",
     "title": "Verification Question Answer",
     "component": [
         {
