@@ -7,6 +7,7 @@ import { ContextMenuComponent } from 'ngx-contextmenu';
 import { ROUTES } from './sidebar-routes.config';
 import { environment } from 'environments/environment';
 import { CommonConstant } from '../constant/CommonConstant';
+import { URLConstant } from '../constant/URLConstant';
 
 declare var $: any;
 
@@ -44,7 +45,33 @@ export class SidebarComponent implements OnInit {
             this.menuItems = ROUTES.filter(menuItem => menuItem);
         }
         else {
-            this.menuItems = JSON.parse(localStorage.getItem(CommonConstant.MENU));
+            //Update menu if change of environment
+            let currEnvi = localStorage.getItem('EnvironmentModule');
+            var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+            if(currEnvi && currentUserContext && currEnvi != environment.Module)
+            {
+                var roleObject = {
+                    UserName: currentUserContext.UserName,
+                    Password: null,
+                    OfficeCode: currentUserContext.OfficeCode,
+                    RoleCode: currentUserContext.RoleCode,
+                    JobTitleCode: currentUserContext.JobTitleCode,
+                    RequestDateTime: currentUserContext.BusinessDt,
+                    ModuleCode: environment.Module,
+                    Ip: "",
+                    RowVersion: ""
+                };
+                var updateRoleUrl = environment.FoundationR3Url + URLConstant.UpdateToken;
+                this.http.post(updateRoleUrl, roleObject).subscribe(
+                (response) => {
+                    localStorage.setItem("Token", response["Token"]);
+                    localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
+                    localStorage.setItem("EnvironmentModule", environment.Module); 
+                    this.menuItems = JSON.parse(localStorage.getItem("Menu"));
+                });
+            }
+            else
+                this.menuItems = JSON.parse(localStorage.getItem(CommonConstant.MENU));
         }
     }
     genParam(params: [{ 'Attr': string, 'Value': string }]) {

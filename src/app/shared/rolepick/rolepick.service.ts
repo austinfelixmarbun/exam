@@ -66,6 +66,7 @@ export class RolePickService {
                     (response) => {
                         localStorage.setItem("Menu", JSON.stringify(response["returnObject"]));
                         localStorage.setItem("Token", response["Token"]);
+                        localStorage.setItem("EnvironmentModule", environment.Module);
                         AdInsHelper.CreateUserAccess(response);
                         // var currentUserContext = new CurrentUserContext;
                         // currentUserContext.UserName = localStorage.getItem("Username");
