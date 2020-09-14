@@ -87,7 +87,7 @@ export class CommonConstant {
     public static RefProvDistrictTypePrv = "PRV";
 
     // REF MASTER TYPE
-    public static RefMasterTypeCodeSourceIncome = "SOURCE_INCOME";
+    public static RefMasterTypeCodeSourceIncome = "SOURCE_OF_INCOME";
     public static RefMasterTypeCodeCustCompanyRelationship = "CUST_COMPANY_RELATIONSHIP";
     public static RefMasterTypeCodeCustPersonalRelationship = "CUST_PERSONAL_RELATIONSHIP";
     public static RefMasterTypeCodeCustRelationship = "CUST_RELATIONSHIP";
