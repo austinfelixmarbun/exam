@@ -53,6 +53,9 @@ import { NegativeCustomerViewComponent } from "./negative-customer-view/negative
 import { ProductHOViewComponent } from "./product-ho-view/product-ho-view.component";
 import { SurveyOrderViewComponent } from "./survey-order-view/survey-order-view.component";
 import { SurveyTaskViewComponent } from "./survey-task-view/survey-task-view.component";
+import { CustomerViewCoyAddressComponent } from "./customer-view/customer-view-coy-address/customer-view-coy-address.component";
+import { CustomerViewPersonalAddressComponent } from "./customer-view/customer-view-personal-address/customer-view-personal-address.component";
+import { CustomerViewPersonalCustomerGroupComponent } from "./customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component";
 
 @NgModule({
   imports: [
@@ -118,7 +121,10 @@ import { SurveyTaskViewComponent } from "./survey-task-view/survey-task-view.com
     ProductHOViewComponent,
     // Survey Order
     SurveyOrderViewComponent,
-    SurveyTaskViewComponent
+    SurveyTaskViewComponent,
+    CustomerViewCoyAddressComponent,
+    CustomerViewPersonalAddressComponent,
+    CustomerViewPersonalCustomerGroupComponent
 
   ],
   entryComponents: [
