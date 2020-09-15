@@ -158,12 +158,12 @@
         {
             "type": "text",
             "position": "left",
-            "property": "JobTitleName"
+            "property": "Username"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "Username"
+            "property": "JobTitleName"
         },
         {
             "type": "text",
