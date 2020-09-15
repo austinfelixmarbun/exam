@@ -1,5 +1,6 @@
 
 import {FormGroup} from '@angular/forms';
+import { environment } from 'environments/environment';
 import { InputFieldObj } from './InputFieldObj.Model';
 
 export class InputAddressObj {
@@ -15,6 +16,7 @@ export class InputAddressObj {
     showSubsection: boolean;
     showStayLength: boolean;
     isRequired: boolean;
+    environmentUrl: string;
 
     constructor() {
         this.title = "Address Information";
@@ -28,5 +30,6 @@ export class InputAddressObj {
         this.showSubsection = true;
         this.showStayLength = false;
         this.isRequired = true;
+        this.environmentUrl = environment.FoundationR3Url
     }
 }
