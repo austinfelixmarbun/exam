@@ -33,7 +33,7 @@ export class SearchOfficeComponentOffering implements OnInit {
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/productHOfficeMbrTempPaging.json";
     this.tempPagingObj.ddlEnvironments = [
       {
-        name: "roa.AREA_CODE",
+        name: "ROA.AREA_CODE",
         environment: environment.FoundationR3Url
       }
     ];
@@ -41,7 +41,7 @@ export class SearchOfficeComponentOffering implements OnInit {
     if(this.ListOfficeMemberObjInput["result"].length!=0){
       var addCrit = new CriteriaObj();
       addCrit.DataType = "numeric";
-      addCrit.propName = "ro.REF_OFFICE_ID";
+      addCrit.propName = "RO.REF_OFFICE_ID";
       addCrit.restriction = AdInsConstant.RestrictionNotIn;
       addCrit.listValue = this.ListOfficeMemberObjInput["result"];
       this.tempPagingObj.addCritInput.push(addCrit);
