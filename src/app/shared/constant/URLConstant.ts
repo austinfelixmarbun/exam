@@ -231,7 +231,7 @@ export class URLConstant {
     public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByMasterCode";
     public static GetRefMasterTypeOfficeWithoutCG = environment.FoundationR3Url + "/RefMaster/GetListKeyValueOfficeTypeWithoutCg";
     public static GetListActiveRefMasterWithReserveFieldAll = environment.FoundationR3Url + "/RefMaster/GetListActiveRefMasterWithReserveFieldAll";
-
+    public static GetListActiveRefMasterByRefMasterTypeCode = environment.FoundationR3Url + "/RefMaster/GetListActiveRefMasterByRefMasterTypeCode";
     //REF COUNTRY
     public static GetListRefCountry = environment.FoundationR3Url + "/RefCountry/GetListRefCountry";
     public static GetRefCountryByCountryCode = environment.FoundationR3Url + "/RefCountry/GetRefCountryByCountryCode";
@@ -241,6 +241,7 @@ export class URLConstant {
     public static AddRefIndustryType = environment.FoundationR3Url + "/RefIndustryType/AddRefIndustryType";
     public static EditRefIndustryType = environment.FoundationR3Url + "/RefIndustryType/EditRefIndustryType";
     public static DeleteRefIndustryType = "/RefIndustryType/DeleteRefIndustryType";
+    public static GetRefIndustryTypeByIndustryTypeCode = environment.FoundationR3Url + "/RefIndustryType/GetRefIndustryTypeByIndustryTypeCode";
 
     //REF PROV DISTRICT
     public static GetRefProvDistrictPaging = "/RefProvDistrict/GetRefProvDistrictPaging";
@@ -331,6 +332,7 @@ export class URLConstant {
     public static GetUploadAssetMasterByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + '/AssetMaster/GetUploadAssetMasterByUploadMonitoringNoAndTrxType';
     public static AddAssetMasterAttrContent = environment.FoundationR3Url + "/AssetMasterAttrContent/AddAssetMasterAttrContent";
     public static GetAssetMasterAttrContentForAssetMaster = environment.FoundationR3Url + "/AssetMasterAttrContent/GetAssetMasterAttrContentForAssetMaster";
+    public static GetAssetMasterAttrContentForAssetMasterByAttrTypeCode = environment.FoundationR3Url + "/AssetMasterAttrContent/GetAssetMasterAttrContentForAssetMasterByAttrTypeCode";
 
     //REF ATTR
     public static GetListActiveRefAttrType = environment.FoundationR3Url + "/RefAttrType/GetListActiveRefAttrType";

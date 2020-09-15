@@ -25,7 +25,7 @@
             "type": "datepicker",
             "name": "HOLIDAY_DT",
             "id": "HolidayDtIdGte",
-            "value": "BD-10",
+            "value": "",
             "label": "Date From",
             "restriction": "gte",
             "datatype": "date"
@@ -42,7 +42,7 @@
             "type": "datepicker",
             "name": "HOLIDAY_DT",
             "id": "HolidayDtIdLte",
-            "value": "BD+10",
+            "value": "",
             "label": "Date To",
             "restriction": "lte",
             "datatype": "date"
@@ -57,19 +57,19 @@
             "type": "sort",
             "position": "left",
             "label": "DATE",
-            "name": "HolidayDt"
+            "name": "HoliD.HOLIDAY_DT"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "DESCRIPTION",
-            "name": "Descr"
+            "name": "HoliD.DESCR"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "PUBLIC HOLIDAY",
-            "name": "IsPublicHoliday"
+            "name": "HoliD.IS_PUBLIC_HOLIDAY"
         },
         {
             "type": "label",
@@ -97,20 +97,6 @@
             "type": "action",
             "position": "center",
             "action": [
-                {
-                    "type": "edit",
-                    "path": "/CommonSetting/Holiday/Detail/Edit",
-                    "param": [
-                        {
-                            "type": "HolidaySchmHId",
-                            "property": "HolidaySchmHId"
-                        },
-                        {
-                            "type": "HolidaySchmDId",
-                            "property": "HolidaySchmDId"
-                        }
-                    ]
-                },
                 {
                     "type": "delete",
                     "property": "HolidaySchmDId"

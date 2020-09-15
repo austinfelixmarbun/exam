@@ -26,6 +26,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
     IsMandatoryNew: [false],
     IsMandatoryUsed: [false],
     IsActive: [true],
+    IsExpDtMandatory: [false]
   });
   assetTypeName: string;
   assetDocName: string;
@@ -104,6 +105,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
             IsMandatoryNew: this.result.IsMandatoryNew,
             IsMandatoryUsed: this.result.IsMandatoryUsed,
             IsActive: this.result.IsActive,
+            IsExpDtMandatory: this.result.IsExpDtMandatory
           })
         }
       );
@@ -120,6 +122,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.assetDocListObj.IsMandatoryNew = this.AssetDocumentForm.controls["IsMandatoryNew"].value;
       this.assetDocListObj.IsMandatoryUsed = this.AssetDocumentForm.controls["IsMandatoryUsed"].value;
       this.assetDocListObj.IsActive = this.AssetDocumentForm.controls["IsActive"].value;
+      this.assetDocListObj.IsExpDtMandatory = this.AssetDocumentForm.controls["IsExpDtMandatory"].value;
       this.assetDocListObj.AssetTypeId = this.AssetTypeId;
 
       this.http.post(URLConstant.AddNewAssetDocList, this.assetDocListObj).subscribe(
@@ -138,6 +141,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.assetDocListObj.IsMandatoryNew = this.AssetDocumentForm.controls["IsMandatoryNew"].value;
       this.assetDocListObj.IsMandatoryUsed = this.AssetDocumentForm.controls["IsMandatoryUsed"].value;
       this.assetDocListObj.IsActive = this.AssetDocumentForm.controls["IsActive"].value;
+      this.assetDocListObj.IsExpDtMandatory = this.AssetDocumentForm.controls["IsExpDtMandatory"].value;
 
       this.http.post(URLConstant.EditAssetDocList, this.assetDocListObj).subscribe(
         response => {

@@ -73,6 +73,18 @@
                   </div>
                 </div>
               </div>
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>ID Type</label>
+                <div class="col-md-9">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="MrIdTypeCode"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrIdTypeCode.invalid }">
+                    <option *ngFor="let it of itemIdType" value="{{it.Key}}">
+                      {{it.Value}}</option>
+                  </select>
+                  <lib-uc-show-errors [control]="VendorForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
               <div [hidden]="VendorForm.controls.MrVendorTypeCode.value != 'C'">
                 <div class="form-group row">
                   <label class="col-md-3  adins-required-label" translate>Registration Number</label>
@@ -92,18 +104,6 @@
                 </div>
               </div>
               <div [hidden]="VendorForm.controls.MrVendorTypeCode.value != 'P'">
-                <div class="form-group row">
-                  <label class="col-md-3  adins-required-label" translate>ID Type</label>
-                  <div class="col-md-9">
-                    <select class="form-control adInsInput" style="width: auto" formControlName="MrIdTypeCode"
-                      [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.MrIdTypeCode.invalid }">
-                      <option *ngFor="let it of itemIdType" value="{{it.Key}}">
-                        {{it.Value}}</option>
-                    </select>
-                    <lib-uc-show-errors [control]="VendorForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
-                    </lib-uc-show-errors>
-                  </div>
-                </div>
                 <div class="form-group row">
                   <label class="col-md-3  adins-required-label" translate>ID Number</label>
                   <div class="col-md-9">
@@ -181,7 +181,7 @@
                 *ngIf="MrVendorCategoryCode=='SUPPLIER_HO' || MrVendorCategoryCode=='SUPPLIER_HOLDING' || MrVendorCategoryCode=='SUPPLIER_BRANCH'">
                 <div class="form-body" *ngIf="inputLookupParentObj.isReady">
                   <div class="form-group row">
-                    <label class="col-md-3 adins-required-label">Supplier HO</label>
+                    <label class="col-md-3">Supplier HO</label>
                     <div class="col-md-3">
                       <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
                         [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">

@@ -32,10 +32,10 @@
     </div> 
     <div class="ucSearch-Button-Right">
         <span class="mr-1">
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/CommonSetting/RefProvince/Paging']" translate>
-                <i class="far fa-window-close"></i> Cancel
+            <button type="button" class="backButton" [routerLink]="['/CommonSetting/RefProvince/Paging']" translate>
+                <i class="fa fa-arrow-left"> </i> Back 
             </button>
-            <button type="button" class="btn btn-raised btn-primary" [routerLink]="['/CommonSetting/District/Detail']" [queryParams]="{parentId:parentId}" translate>
+            <button type="button" class="addButton" [routerLink]="['/CommonSetting/District/Detail']" [queryParams]="{parentId:parentId}" translate>
                 <i class="ft-plus-circle"></i> Add
             </button>
         </span>

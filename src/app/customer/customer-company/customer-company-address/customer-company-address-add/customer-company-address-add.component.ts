@@ -9,6 +9,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 
 @Component({
   selector: 'app-customer-company-address-add',
@@ -52,6 +53,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     MrCustAddrTypeCode: [''],
     CopyAddrFrom: ['']
   });
+  inputAddressObj: InputAddressObj;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.getRefMasterWithReserveFieldUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
@@ -137,12 +139,21 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
           this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
           this.inputFieldAddressObj.inputLookupObj.nameSelect = this.copyCustomerAddr.Zipcode;
           this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.copyCustomerAddr.Zipcode };
+          this.inputAddressObj.default = this.addressObj;
+          this.inputAddressObj.inputField = this.inputFieldAddressObj;
 
         });
     }
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.showSubsection = false;
+    this.inputAddressObj.title = "Customer Address";
+    this.inputAddressObj.showOwnership = true;
   }
 
   copyAddress() {
+    if(this.listCustAddr.length<1){
+      return
+    }
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.CustDataCompanyForm.controls["CopyAddrFrom"].value;
     this.http.post(this.getCustAddrUrl, this.custAddrFromObj).subscribe(
@@ -176,6 +187,8 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
         this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
         this.inputFieldAddressObj.inputLookupObj.nameSelect = this.copyCustomerAddrFrom.Zipcode;
         this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.copyCustomerAddrFrom.Zipcode };
+        this.inputAddressObj.default = this.addressObj;
+        this.inputAddressObj.inputField = this.inputFieldAddressObj;
       });
   }
 

@@ -1,7 +1,6 @@
 
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from 'app/app-routing.module';
 import { SharedModule } from "app/shared/shared.module";
@@ -10,14 +9,9 @@ import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { StoreModule } from '@ngrx/store';
-import { DragulaModule } from 'ng2-dragula';
-import {  ReactiveFormsModule } from '@angular/forms';
-
 import { AppComponent } from 'app/app.component';
 import { ContentLayoutComponent } from "app/layouts/content/content-layout.component";
 import { FullLayoutComponent } from "app/layouts/full/full-layout.component";
-
 import { AuthService } from 'app/shared/auth/auth.service';
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
 import { StorageServiceModule } from 'angular-webstorage-service';
@@ -31,13 +25,7 @@ import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 import { ErrorDialogComponent } from 'app/error-dialog/error-dialog.component';
 import { RolepickComponent } from 'app/shared/rolepick/rolepick.component';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { subscribeOn } from 'rxjs/operators';
-import { DatePipe, formatDate } from '@angular/common';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GrowlModule } from 'primeng/primeng';
-import { environment } from 'environments/environment';
-import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -55,11 +43,9 @@ export function createTranslateLoader(http: HttpClient) {
     imports: [
         HttpModule,
         BrowserAnimationsModule,
-        StoreModule.forRoot({}),
         AppRoutingModule,
         NgxSpinnerModule,
         SharedModule,
-        DragulaModule.forRoot(),
         HttpClientModule,
         ToastrModule.forRoot(),
         NgbModule.forRoot(),
@@ -77,7 +63,6 @@ export function createTranslateLoader(http: HttpClient) {
         MatDialogModule,
         BrowserAnimationsModule,
         GrowlModule,
-        TreeViewModule,
         NgMultiSelectDropDownModule.forRoot()
     ],
     providers: [
@@ -91,8 +76,7 @@ export function createTranslateLoader(http: HttpClient) {
     entryComponents: [ErrorDialogComponent, RolepickComponent]
 })
 export class AppModule {
-    constructor(private http: HttpClient,
-        private errorDialogService: ErrorDialogService) {
+    constructor() {
 
         // localStorage.setItem("LocalIp", window.location.origin);
         // console.log(window.location.origin); // 192.168.0.122

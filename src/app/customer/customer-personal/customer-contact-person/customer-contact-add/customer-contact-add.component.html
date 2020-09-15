@@ -51,8 +51,8 @@
                     <select (change)="onOptionsNationalitySelected($event)" class="form-control adInsInput"
                       style="width: auto" formControlName="MrNationalityCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrNationalityCode.invalid }">
-                      <option *ngFor="let it of tempNationality" [value]="it.Key">
-                        {{it.Value}}</option>
+                      <option *ngFor="let it of tempNationality" [value]="it.MasterCode">
+                        {{it.Descr}}</option>
                     </select>
                     <lib-uc-show-errors [control]="CustomerContactForm.controls.MrNationalityCode"
                       [submit]="enjiForm.submitted">
@@ -228,9 +228,30 @@
               </div>  
    
               <div id="ContactPersonAddressId">
-                <lib-ucaddress [UCAddrForm]="CustomerContactForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'"
-                  [default]="UcAddressObj" [inputField]="inputFieldObj" [showAllPhn]="false">
+                <div class="form-group row">
+                  <label class="col-md-2" translate>Copy Address From</label>
+                  <div class="col-md-4">
+                    <div class="input-group">
+                      <select class="form-control" formControlName="CopyFromContactPerson">
+                        <option *ngFor="let item of listCustAddr" [value]="item.CustAddrId">
+                          {{item.MrCustAddrTypeCode}}
+                        </option>
+                      </select>
+                      <div class="input-group-append">
+                          <span class="input-group-btn">
+                              <button class="btn btn-raised btn-primary" type="button" (click)="copyAddress()">
+                                  <i class="fa fa-check-square-o"></i>Copy
+                              </button>
+                          </span>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerContactForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'">
                 </lib-ucaddress> 
+                <!-- <lib-ucaddress [UCAddrForm]="CustomerContactForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'"
+                  [default]="UcAddressObj" [inputField]="inputFieldObj" [showAllPhn]="false">
+                </lib-ucaddress>  -->
               </div> 
             </div>
 

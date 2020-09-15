@@ -14,6 +14,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 
 
 @Component({
@@ -75,7 +76,6 @@ export class OfficeAddComponent implements OnInit {
   isAllowAppCreated: boolean = true;
   officeClose: boolean = true;
   officeObj: OfficeObj;
-  centerGrpObj: OfficeObj;
   refMasterObj: RefMasterObj;
   lookUpRefMasterOfficeObj: RefMasterObj;
   refMasterOfficeType: RefMasterObj;
@@ -122,6 +122,7 @@ export class OfficeAddComponent implements OnInit {
   })
   InputLookupObj: any;
   addressObj: UcAddressObj;
+  inputAddressObj: InputAddressObj;
 
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -259,10 +260,8 @@ export class OfficeAddComponent implements OnInit {
       this.OfficeForm.controls["OfficeType"].disable();
       this.OfficeForm.controls["MrCenterGrpTypeCode"].disable();
       this.officeObj = new OfficeObj();
-      this.centerGrpObj = new OfficeObj();
       this.addressObj = new UcAddressObj();
       this.officeObj.RefOfficeId = this.RefOfficeId;
-      // this.centerGrpObj.RefOfficeId = this.RefOfficeId;
       this.httpClient.post(URLConstant.GetRefOfficeByRefOfficeId, this.officeObj).subscribe(
         (response) => {
           this.resultData = response;
@@ -370,11 +369,12 @@ export class OfficeAddComponent implements OnInit {
 
         })
     }
-
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.default = this.addressObj;
+    this.inputAddressObj.inputField = this.inputFieldAddr;
   }
   SaveForm(): void {
     this.officeObj = new OfficeObj();
-    this.centerGrpObj = new OfficeObj();
     this.officeObj.RowVersion = "";
 
     this.officeObj.OfficeCode = this.OfficeForm.value.OfficeCode;
@@ -399,13 +399,10 @@ export class OfficeAddComponent implements OnInit {
     }
 
     if (this.officeObj.MrOfficeTypeCode == CommonConstant.CollectionGroup) {
-      this.centerGrpObj.MrCenterGrpTypeCode = this.OfficeForm.value.MrCenterGrpTypeCode;
-      this.centerGrpObj.CenterGrpCode = this.OfficeForm.value.OfficeCode;
-      this.centerGrpObj.CenterGrpName = this.OfficeForm.value.OfficeName;
+      this.officeObj.MrCenterGrpTypeCode = this.OfficeForm.value.MrCenterGrpTypeCode;
     } else {
       this.officeObj.MrCenterGrpTypeCode = "";
     }
-
 
     this.officeObj.CntctPersonEmail1 = this.OfficeForm.value.CntctPersonEmail1;
     this.officeObj.CntctPersonEmail2 = this.OfficeForm.value.CntctPersonEmail2;
@@ -434,13 +431,6 @@ export class OfficeAddComponent implements OnInit {
     if (this.pageType == "add") {
       if (this.officeObj.MrOfficeTypeCode == CommonConstant.CollectionGroup) {
         this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response['message']);
-            this.router.navigate(["/Office/Paging"]);
-          }
-        );
-
-        this.httpClient.post(URLConstant.AddCenterGrp, this.centerGrpObj).subscribe(
           (response) => {
             this.toastr.successMessage(response['message']);
             this.router.navigate(["/Office/Paging"]);

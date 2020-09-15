@@ -63,7 +63,14 @@ export class CommonConstant {
     public static SURVEYOR_HO = "SURVEYOR_HO";
     public static SUPPLIER_HOLDING = "SUPPLIER_HOLDING";
     public static SUPPLIER_ATPM = "SUPPLIER_ATPM";
+
     public static TITLE_SUPPLIER_ATPM = "Supplier ATPM";
+    public static TITLE_SUPPLIER_BRANCH = "Supplier Branch";
+    public static TITLE_ASSET_INSCO_BRANCH = "Insurance Branch";
+    public static TITLE_LIFE_INSCO_BRANCH = "Life Insurance Branch";
+    public static TITLE_SURVEYOR_BRANCH = "Surveyor Branch";
+    public static TITLE_AGENCY_COMPANY = "Agency Company";
+    public static TITLE_AGENCY_PERSONAL = "Agency Personal";
 
     // NOTIFICATION METHOD
     public static NotificationMethodIntLink = "INT_LINK";
@@ -80,7 +87,7 @@ export class CommonConstant {
     public static RefProvDistrictTypePrv = "PRV";
 
     // REF MASTER TYPE
-    public static RefMasterTypeCodeSourceIncome = "SOURCE_INCOME";
+    public static RefMasterTypeCodeSourceIncome = "SOURCE_OF_INCOME";
     public static RefMasterTypeCodeCustCompanyRelationship = "CUST_COMPANY_RELATIONSHIP";
     public static RefMasterTypeCodeCustPersonalRelationship = "CUST_PERSONAL_RELATIONSHIP";
     public static RefMasterTypeCodeCustRelationship = "CUST_RELATIONSHIP";
@@ -170,4 +177,7 @@ export class CommonConstant {
 
     //Status Code
     public static STATUS_CODE_USER_LOCKED = "002";
+
+    //Attribute Type Code
+    public static AttrTypeCodeMaster = "MASTER";
 }

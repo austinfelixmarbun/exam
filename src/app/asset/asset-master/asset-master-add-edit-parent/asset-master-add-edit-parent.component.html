@@ -15,9 +15,9 @@
             <lib-ucSubsection [id]="'AssetMasterInfoId'" [title]="'Asset Master Information '+ pageType" [panel]="'AssetMasterInfo'"></lib-ucSubsection>
             <div id="AssetMasterInfo">
               <div class="form-group row">
-                <label class="col-md-3  adInsLabel adins-required" translate>Asset Type Name </label>
+                <label class="col-md-3  adInsLabel adins-required-label" translate>Asset Type Name </label>
                 <div class="col-md-9">
-                  <select class="form-control adInsInput" formControlName="AssetTypeId" (change)="onChange()">
+                  <select class="form-control adInsInput" formControlName="AssetTypeId" (change)="onChange()" [attr.disabled]="pageType == 'edit' ? true : null">
                     <option *ngFor="let ram of allAssetMasterMethod" [ngValue]="ram.Key">
                       {{ram.Value}}
                     </option>
@@ -27,7 +27,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3  adInsLabel adins-required" translate>Hierarchy Level </label>
+                <label class="col-md-3 adInsLabel adins-required-label" translate>Hierarchy Level </label>
                 <div class="col-md-9">
                   <label style="font-size: larger;">
                     1
@@ -35,28 +35,29 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3  adInsLabel adins-required" translate>Asset Code </label>
+                <label class="col-md-3 adInsLabel adins-required-label" translate>Asset Code </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="AssetCode"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterParentForm.controls.AssetCode.invalid }">
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterParentForm.controls.AssetCode.invalid }" [attr.disabled]="pageType == 'edit' ? true : null">
                   <lib-uc-show-errors [control]="AssetMasterParentForm.controls.AssetCode"
                     [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3  adInsLabel adins-required" translate>Asset Name </label>
+                <label class="col-md-3 adInsLabel adins-required-label" translate>Asset Name </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="AssetName"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterParentForm.controls.AssetName.invalid }">
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterParentForm.controls.AssetName.invalid }" [attr.disabled]="pageType == 'edit' ? true : null">
                   <lib-uc-show-errors [control]="AssetMasterParentForm.controls.AssetName"
                     [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </div>
               </div>
+
               <div *ngIf="isFinal == true">
                 <div class="form-group row">
-                  <label class="col-md-3  adInsLabel adins-required" translate>Asset Category </label>
+                  <label class="col-md-3  adInsLabel adins-required-label" translate>Asset Category </label>
                   <div class="col-md-9">
-                    <select class="form-control adInsInput" formControlName="AssetCategoryId">
+                    <select class="form-control adInsInput" formControlName="AssetCategoryId" [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterParentForm.controls.AssetCategoryId.invalid }" [attr.disabled]="pageType == 'edit' ? true : null">
                       <option *ngFor="let ram of resultAssetCategory" [value]="ram.Key">
                         {{ram.Value}}
                       </option>

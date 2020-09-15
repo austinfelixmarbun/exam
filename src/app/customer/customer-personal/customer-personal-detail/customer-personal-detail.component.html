@@ -29,7 +29,7 @@
             <lib-uc-show-errors [control]="CustomerDetailForm.controls.MrSalutationCode" [submit]="enjiForm.submitted">
             </lib-uc-show-errors>
           </div>
-          <label class="col-md-2 adInsLabel" translate>Marital Status</label>
+          <!-- <label class="col-md-2 adInsLabel" translate>Marital Status</label>
           <div class="col-md-4">
             <select class="form-control adInsInput" style="width: auto" formControlName="MrMaritalStatCode"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.MrMaritalStatCode.invalid }">
@@ -38,7 +38,7 @@
             </select>
             <lib-uc-show-errors [control]="CustomerDetailForm.controls.MrMaritalStatCode" [submit]="enjiForm.submitted">
             </lib-uc-show-errors>
-          </div>
+          </div> -->
         </div>
         <div class="form-group row  ">
           <label class="col-md-2 adInsLabel" translate>Gelar Depan Nama</label>
@@ -70,8 +70,8 @@
             <select (change)="onOptionsSelected($event)" class="form-control adInsInput" style="width: auto"
               formControlName="MrNationalityCode"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.MrNationalityCode.invalid }">
-              <option *ngFor="let it of tempNationality" [value]="it.Key">
-                {{it.Value}}</option>
+              <option *ngFor="let it of tempNationality" [value]="it.MasterCode">
+                {{it.Descr}}</option>
             </select>
             <lib-uc-show-errors [control]="CustomerDetailForm.controls.MrNationalityCode" [submit]="enjiForm.submitted">
             </lib-uc-show-errors>

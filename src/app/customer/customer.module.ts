@@ -88,6 +88,9 @@ import { ReviewUploadNegativeCustomerDetailComponent } from './negative-customer
 import { ReviewUploadNegativeCustomerPagingComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-paging/review-upload-negative-customer-paging.component';
 import { UcuploadModule } from '@adins/ucupload';
 import { CustAttrSectionComponent } from './cust-attr-section/cust-attr-section.component';
+import { CustomerViewCoyAddressComponent } from './customer-view/customer-view-coy-address/customer-view-coy-address.component';
+import { CustomerViewPersonalAddressComponent } from './customer-view/customer-view-personal-address/customer-view-personal-address.component';
+import { CustomerViewPersonalCustomerGroupComponent } from './customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -192,7 +195,10 @@ export const customCurrencyMaskConfig = {
     UploadNegativeCustomerComponent,
     ReviewUploadNegativeCustomerDetailComponent,
     ReviewUploadNegativeCustomerPagingComponent,
-    CustAttrSectionComponent
+    CustAttrSectionComponent,
+    CustomerViewCoyAddressComponent,
+    CustomerViewPersonalAddressComponent,
+    CustomerViewPersonalCustomerGroupComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })
