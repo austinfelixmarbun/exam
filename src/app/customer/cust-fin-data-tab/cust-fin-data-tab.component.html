@@ -6,7 +6,6 @@
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="MonthlyIncomeAmt" translate>Monthly Income</label>
           <div class="col-md-6">
-            <!-- <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'MonthlyIncomeAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.MonthlyIncomeAmt.value"></lib-ucinputnumber> -->
             <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyIncomeAmt"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.MonthlyIncomeAmt.invalid }" />
             <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.MonthlyIncomeAmt" [submit]="enjiForm.submitted"></lib-uc-show-errors>
@@ -15,7 +14,6 @@
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="OtherIncomeAmt" translate>Other Income</label>
           <div class="col-md-6">
-            <!-- <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'OtherIncomeAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.OtherIncomeAmt.value"></lib-ucinputnumber> -->
             <input type="" currencyMask class="form-control adInsInput" formControlName="OtherIncomeAmt" 
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.OtherIncomeAmt.invalid }" />
             <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.OtherIncomeAmt" [submit]="enjiForm.submitted"></lib-uc-show-errors>
@@ -34,7 +32,6 @@
         <div class="form-group row" *ngIf="mrMaritalStatCode == maritalConstant">
           <label class="col-md-2 adInsLabel" for="SpouseMonthlyIncomeAmt" translate>Spouse Monthly Income Amount</label>
           <div class="col-md-6">
-            <!-- <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'SpouseMonthlyIncomeAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.SpouseMonthlyIncomeAmt.value"></lib-ucinputnumber> -->
             <input type="" currencyMask class="form-control adInsInput" formControlName="SpouseMonthlyIncomeAmt" 
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.SpouseMonthlyIncomeAmt.invalid }" />
             <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.SpouseMonthlyIncomeAmt" [submit]="enjiForm.submitted"></lib-uc-show-errors>
@@ -49,7 +46,6 @@
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="MonthlyInstallmentAmt" translate>Monthly Installment Amount</label>
           <div class="col-md-6">
-            <!-- <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'MonthlyInstallmentAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.MonthlyInstallmentAmt.value"></lib-ucinputnumber> -->
             <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyInstallmentAmt" 
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.MonthlyInstallmentAmt.invalid }" />
             <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.MonthlyInstallmentAmt" [submit]="enjiForm.submitted"></lib-uc-show-errors>
@@ -58,7 +54,6 @@
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" for="MonthlyExpenseAmt" translate>Monthly Expense Amount</label>
           <div class="col-md-6">
-            <!-- <lib-ucinputnumber [parentForm]="CustPersonalFinDataForm" [identifier]="'MonthlyExpenseAmt'" [enjiForm]="enjiForm" [isRequired]="false" ucNumber="CustPersonalFinDataForm.controls.MonthlyExpenseAmt.value"></lib-ucinputnumber> -->
             <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyExpenseAmt" 
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustPersonalFinDataForm.controls.MonthlyExpenseAmt.invalid }" />
             <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.MonthlyExpenseAmt" [submit]="enjiForm.submitted"></lib-uc-show-errors>
