@@ -85,7 +85,7 @@
             "type": "link",
             "property": "VendorName",
             "target": "_blank",
-            "path": "/View/VendorHO",
+            "path": "/View/Vendor/VendorHO",
             "param": [
                 {
                     "type": "VendorId",

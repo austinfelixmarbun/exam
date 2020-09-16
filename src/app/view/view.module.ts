@@ -4,7 +4,7 @@ import { HttpModule } from "@angular/http";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { SharingModule } from 'app/shared/sharing.module';
 import { ArchwizardModule } from 'angular-archwizard';
-import { UcSubsectionModule } from "@adins/uc-subsection";
+import { UcSubsectionModule, UcSubsectionComponent } from "@adins/uc-subsection";
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { ViewRoutingModule } from "./view-routing.module";
 import { UcgridviewComponent } from "@adins/ucgridview";
@@ -43,6 +43,7 @@ import { ProductHOViewComponent } from "./product-ho-view/product-ho-view.compon
 import { CustomerViewCoyAddressComponent } from "./customer-view/customer-view-coy-address/customer-view-coy-address.component";
 import { CustomerViewPersonalAddressComponent } from "./customer-view/customer-view-personal-address/customer-view-personal-address.component";
 import { CustomerViewPersonalCustomerGroupComponent } from "./customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component";
+import { FormBuilder, ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -56,46 +57,20 @@ import { CustomerViewPersonalCustomerGroupComponent } from "./customer-view/cust
     UcSubsectionModule,
     SharingComponentModule,
     UcapprovalhistModule,
-    
+    ReactiveFormsModule,
+    FormsModule 
   ],
   declarations: [
-    ///customer
-   CustomerViewComponent,
-   CustomerViewPersonalContactPersonComponent,
-   CustomerViewPersonalFinancialDataComponent,
-   CustomerViewPersonalJobDataNonProfComponent,
-   CustomerViewPersonalJobDataEmpComponent,
-   CustomerViewPersonalJobDataSmeComponent,
-   CustomerViewPersonalOtherAttrComponent,
-   CustomerViewPersonalAppListingComponent,
-   CustomerViewCoyManagementComponent,
-   CustomerViewCoyContactComponent,
-   CustomerViewCoyFinancialComponent,
-   CustomerViewCoyLegalComponent,
-   CustomerViewCoyOtherComponent,
-   CustomerViewCoyAppListingComponent,
-   CustomerViewCoyExposureComponent,
-   CustomerViewCoyCustScoreComponent,
-   CustomerViewCoyCustAddColateralComponent,
-   CustomerViewCoyDetailComponent,
-   CustomerViewHeaderPersonalComponent, 
-   CustomerViewHeaderCompanyComponent,
-   CustomerViewPersonalFinancialSectionComponent,
-   CustomerViewCustomerGroupComponent,
-   CustomerViewAddressComponent,
-   CustomerViewPersonalDetailComponent,
-   CustomerViewPersonalJobDataComponent,
-   ///product offering view
-   ProductOfferingViewComponent,
 
-    CustomerViewCoyAddressComponent,
-    CustomerViewPersonalAddressComponent,
-    CustomerViewPersonalCustomerGroupComponent
+   ///product offering view
+  //  ProductOfferingViewComponent,
+
 
   ],
   entryComponents: [
     UcgridviewComponent,
-    UcapprovalhistComponent
+    UcapprovalhistComponent,
+    UcSubsectionComponent
   ]
 
 })
