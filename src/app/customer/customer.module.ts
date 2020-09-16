@@ -76,7 +76,6 @@ import { CustomerCompanyAddressCheckComponent } from './customer-company/custome
 import { CustomerPersonalAddressCheckComponent } from './customer-personal/customer-personal-address/customer-personal-address-check/customer-personal-address-check.component';
 import { CustomerViewHeaderPersonalComponent } from './customer-view/customer-view-header-personal/customer-view-header-personal.component';
 import { CustomerViewHeaderCompanyComponent } from './customer-view/customer-view-header-company/customer-view-header-company.component';
-import { UcinputnumberModule } from '@adins/ucinputnumber';
 import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/customer-view-personal-financial-section/customer-view-personal-financial-section.component';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { CustomerViewCustomerGroupComponent } from './customer-view/customer-view-customer-group/customer-view-customer-group.component';
@@ -125,7 +124,6 @@ export const customCurrencyMaskConfig = {
     UcviewgenericModule,
     UcaddressModule,
     UcShowErrorsModule,
-    UcinputnumberModule,
     MatTabsModule,
     UcuploadModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig)

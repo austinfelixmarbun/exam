@@ -10,7 +10,7 @@
       </div>
       <div class="px-3">
         <form class="form form-horizontal" [formGroup]="AssetNegativeForm" #enjiForm="ngForm" novalidate
-          (ngSubmit)="enjiForm.form.valid && Save(enjiForm)">
+          (ngSubmit)="enjiForm.form.valid && Save()">
           <div class="form-body">
             <lib-ucSubsection [id]="'NegativeAssetSectionId'" [title]="'Negative Asset Information '+ pageType"
               [panel]="'NegativeAssetSection'"></lib-ucSubsection>

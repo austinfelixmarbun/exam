@@ -70,7 +70,7 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
     this.listSelectedId = ev.TempListId;
   }
 
-  SaveQuestionSchemeMember(verfSchemeDObj: any) {
+  SaveQuestionSchemeMember() {
     if (this.listSelectedId.length == 0) {
       this.toastr.errorMessage(ExceptionConstant.ADD_MIN_1_DATA);
       return;

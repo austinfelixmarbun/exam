@@ -1,5 +1,5 @@
 <form class="form form-horizontal" [formGroup]="CustGrpForm" #enjiForm="ngForm"
-  (ngSubmit)="enjiForm.form.valid && Save(enjiForm)">
+  (ngSubmit)="enjiForm.form.valid && Save()">
   <div class="modal-header">
     <h4 class="modal-title">Add Customer Group Member</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('0')">

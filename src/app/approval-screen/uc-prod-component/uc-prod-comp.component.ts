@@ -140,6 +140,10 @@ export class UcProdCompComponent implements OnInit {
     }
   }
 
+  submit(){
+    
+  }
+
   checkValue() {
   }
 

@@ -39,7 +39,7 @@
                 <div class="form-group row adins">
                   <label class="col-md-2 adInsLabel" translate>Customer Model</label>
                   <div class="col-md-10">
-                    <select class="form-control adInsInput" (change)="onOptionsSelected($event)" style="width: auto"
+                    <select class="form-control adInsInput" style="width: auto"
                       formControlName="MrCustModelCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.MrCustModelCode.invalid }">
                       <option *ngFor="let it of tempMrCustModelCode " [value]="it.Key">
@@ -50,7 +50,7 @@
                 <div class="form-group row">
                   <label class="col-md-2 adins-required-label" translate>Company Type</label>
                   <div class="col-md-10">
-                    <select class="form-control adInsInput" (change)="onOptionsSelected($event)" style="width: auto"
+                    <select class="form-control adInsInput" style="width: auto"
                       formControlName="MrCompanyTypeCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && ManagementShareholderForm.controls.MrCompanyTypeCode.invalid }">
                       <option *ngFor="let it of tempMrCompanyTypeCode " [value]="it.Key">

@@ -13,7 +13,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
   GetCustPersonalFinDataForCustViewByCustIdUrl = URLConstant.GetCustPersonalFinDataForCustViewByCustId;
   custObj: CustObj;
-  tempCustObj: Object;
+  tempCustObj: any;
   IdCust: number;
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
