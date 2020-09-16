@@ -23,6 +23,7 @@ import { EmployeeBusinessunitAddComponent } from './employee-businessunit-add/em
 import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-paging/employee-businessunit-paging.component';
 import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
+import { UcaddressModule } from '@adins/ucaddress';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
     UcSubsectionModule,
     UcpagingModule,
     UcSubsectionModule,
-    UcShowErrorsModule
+    UcShowErrorsModule,
+    UcaddressModule
   ],
   declarations: [
     EmployeePositionAddComponent,
