@@ -56,6 +56,7 @@ import { SurveyTaskViewComponent } from "./survey-task-view/survey-task-view.com
 import { CustomerViewCoyAddressComponent } from "./customer-view/customer-view-coy-address/customer-view-coy-address.component";
 import { CustomerViewPersonalAddressComponent } from "./customer-view/customer-view-personal-address/customer-view-personal-address.component";
 import { CustomerViewPersonalCustomerGroupComponent } from "./customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -69,7 +70,8 @@ import { CustomerViewPersonalCustomerGroupComponent } from "./customer-view/cust
     UcSubsectionModule,
     SharingComponentModule,
     UcapprovalhistModule,
-    
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     ///customer
