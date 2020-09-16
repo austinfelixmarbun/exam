@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+
 const routes: Routes = [
     {
         path: '',
@@ -66,6 +67,11 @@ const routes: Routes = [
           {
             path: 'CoyLegal',
             loadChildren: './customer-view-coy-legal/customer-view-coy-legal.module#CustomerViewCoyLegalModule'
+          },
+          //CustGroup
+          {
+            path: 'CustomerGroup',
+            loadChildren: './customer-view-customer-group/customer-view-customer-group.module#CustomerViewGroupModule'
           }
         ]
       }
