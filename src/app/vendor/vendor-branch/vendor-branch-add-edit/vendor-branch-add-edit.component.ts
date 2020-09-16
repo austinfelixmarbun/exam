@@ -85,7 +85,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     ReservedField4: [''], //Supplier Class
     ReservedField5: [''], //BPKBAging
     ReservedField6: [''], //DaysPAfterGolive
-    ReservedField7: [''], //ASSGMNT_TYPE tele, field
+    ReservedField9: [''], //ASSGMNT_TYPE tele, field
     MrTaxCalcMethodCode: ['', Validators.required],
     IsVat: [true, Validators.required],
     TaxIdNo: ['', Validators.required],
@@ -143,7 +143,7 @@ export class VendorBranchAddEditComponent implements OnInit {
           ReservedField4: this.result.VendorObj.ReservedField4,
           ReservedField5: this.result.VendorObj.ReservedField5,
           ReservedField6: this.result.VendorObj.ReservedField6,
-          ReservedField7: this.result.VendorObj.ReservedField7,
+          ReservedField9: this.result.VendorObj.ReservedField9,
           MrTaxCalcMethodCode: this.result.VendorObj.MrTaxCalcMethodCode,
           IsVat: this.result.VendorObj.IsVat,
           TaxIdNo: this.result.VendorObj.TaxIdNo,
@@ -191,7 +191,7 @@ export class VendorBranchAddEditComponent implements OnInit {
         this.itemAssignmentTypeTele = response[CommonConstant.ReturnObj];
         if (this.itemAssignmentTypeTele.length > 0) {
           this.VendorForm.patchValue({
-            ReservedField7: this.itemAssignmentTypeTele[0].Key
+            ReservedField9: this.itemAssignmentTypeTele[0].Key
           });
         }
       }
@@ -546,7 +546,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.ReservedField4 = "";
       this.vendorBranchObj.VendorObj.ReservedField5 = "";
       this.vendorBranchObj.VendorObj.ReservedField6 = "";
-      this.vendorBranchObj.VendorObj.ReservedField7 = "";
+      this.vendorBranchObj.VendorObj.ReservedField9 = "";
       this.vendorBranchObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
       this.vendorBranchObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
       this.vendorBranchObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value;
@@ -561,7 +561,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     }
     if (this.vendorBranchObj.VendorObj.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH) {
       this.vendorBranchObj.VendorObj.ReservedField2 = this.VendorForm.controls.ReservedField2.value;
-      this.vendorBranchObj.VendorObj.ReservedField7 = this.VendorForm.controls.ReservedField7.value;
+      this.vendorBranchObj.VendorObj.ReservedField9 = this.VendorForm.controls.ReservedField9.value;
     }
 
     if (this.VendorForm.controls.IsNpwpExist.value == true) {
