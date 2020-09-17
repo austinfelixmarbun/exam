@@ -81,15 +81,59 @@
     },
     "bodyList": [
         {
-            "type": "link",
-            "position": "left",
-            "property": "CustNo",
-            "path": "/View/Customer/PersonalDetail",
-            "target": "_blank",
-            "param": [
+            "type": "action",
+            "position": "center",
+            "action": [
                 {
-                    "type": "CustId",
-                    "property": "CustId"
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrCustTypeCode",
+                                    "value": "PERSONAL",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "link",
+                                "position": "left",
+                                "property": "CustNo",
+                                "path": "/View/Customer/PersonalDetail",
+                                "target": "_blank",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "CustId"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrCustTypeCode",
+                                    "value": "COMPANY",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "link",
+                                "position": "left",
+                                "property": "CustNo",
+                                "path": "/View/Customer/CoyDetail",
+                                "target": "_blank",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "CustId"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        }
+                    ]
                 }
             ]
         },
@@ -169,6 +213,5 @@
                 }
             ]
         }
-                
     ]
 }
