@@ -43,7 +43,7 @@ import { ProductHOViewComponent } from "./product-ho-view/product-ho-view.compon
 import { CustomerViewCoyAddressComponent } from "./customer-view/customer-view-coy-address/customer-view-coy-address.component";
 import { CustomerViewPersonalAddressComponent } from "./customer-view/customer-view-personal-address/customer-view-personal-address.component";
 import { CustomerViewPersonalCustomerGroupComponent } from "./customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component";
-import { FormBuilder, ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -57,8 +57,8 @@ import { FormBuilder, ReactiveFormsModule, FormsModule } from "@angular/forms";
     UcSubsectionModule,
     SharingComponentModule,
     UcapprovalhistModule,
+    FormsModule,
     ReactiveFormsModule,
-    FormsModule 
   ],
   declarations: [
 

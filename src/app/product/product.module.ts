@@ -14,8 +14,8 @@ import { OfficeMemberHOComponent } from './product-HO/product-ho-adddetail/offic
 import { ProductComponentHOComponent } from './product-HO/product-ho-adddetail/product-component/product-component.component';
 import { GeneralDataComponent } from './prod-offering/prod-offering-add-detail/general-data/general-data.component';
 import { ProductComponentComponent } from './prod-offering/prod-offering-add-detail/product-component/product-component.component';
-import { ProductHODeactivatePagingComponent } from "./product-ho/product-ho-deactivate-paging/product-ho-deactivate.component";
-import { ProductHODeactivateEditComponent } from "./product-ho/product-ho-deactivate-edit/product-ho-deactivate-edit.component";
+import { ProductHODeactivatePagingComponent } from "./product-HO/product-ho-deactivate-paging/product-ho-deactivate.component";
+import { ProductHODeactivateEditComponent } from "./product-HO/product-ho-deactivate-edit/product-ho-deactivate-edit.component";
 import { SharingComponentModule } from "../shared/sharingcomponent.module";
 import { HttpModule } from "@angular/http";
 import { UcviewgenericModule } from "@adins/ucviewgeneric";

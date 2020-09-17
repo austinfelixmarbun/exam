@@ -235,28 +235,6 @@
                     </div>
                   </div>
 
-                  <div class="form-group row">
-                    <label class="col-md-3 adins-required-label">Max Refund Type</label>
-                    <div class="col-md-9">
-                      <select class="form-control adInsInput" style="width: auto" formControlName="ReservedField7"
-                        [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField7.invalid }">
-                        <option *ngFor="let it of itemMaxRefundType" value="{{it.Key}}">
-                          {{it.Value}}</option>
-                      </select>
-                      <lib-uc-show-errors [control]="VendorForm.controls.ReservedField7" [submit]="enjiForm.submitted">
-                      </lib-uc-show-errors>
-                    </div>
-                  </div>
-
-                  <div class="form-group row">
-                    <label class="col-md-3 adins-required-label">Max Refund Value </label>
-                    <div class="col-md-9">
-                      <input type="" currencyMask class="form-control adInsInput width-50-per"
-                        formControlName="ReservedField8" [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.ReservedField8.invalid}">
-                      <lib-uc-show-errors [control]="VendorForm.controls.ReservedField8" [submit]="enjiForm.submitted">
-                      </lib-uc-show-errors>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

@@ -21,6 +21,7 @@ export class CustomerViewCoyAddressComponent implements OnInit {
   inputObj: any;
   responseResultCustAddr: any;
   responseResultCustAddrHist: any;
+  selectedOption: any;
 
   GetListCustAddrByCustIdForCustomerPersonalViewUrl = URLConstant.GetListCustAddrByCustIdForCustomerPersonalView;
   GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = URLConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;

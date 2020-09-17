@@ -78,7 +78,7 @@ export class HolidayDetailComponent implements OnInit {
     this.HolidaySchmHIdCopy = ev.HolidaySchmHId;
   }
 
-  Copy(key: any, value: any) {
+  Copy() {
     if (confirm(ExceptionConstant.COPY_REPLACE_CONFIRMATION + "holiday listings")) {
       this.copyHoliday = new HolidayCopyObj();
       this.copyHoliday.HolidaySchmHId = this.HolidaySchmHId;

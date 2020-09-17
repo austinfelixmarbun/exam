@@ -10,7 +10,7 @@
       </div>
       <div class="px-3">
         <form class="form form-horizontal" [formGroup]="NegativeCustForm" #enjiForm="ngForm" novalidate
-          (ngSubmit)="enjiForm.form.valid && SaveForm(enjiForm)">
+          (ngSubmit)="enjiForm.form.valid && SaveForm()">
           <div class="form-body">
             <div class="form-group row">
               <label class="col-md-3 adInsLabel" for="MrCustTypeCode" translate>Customer Type</label>
