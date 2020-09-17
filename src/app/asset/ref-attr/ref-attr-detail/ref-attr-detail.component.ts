@@ -76,7 +76,6 @@ export class RefAttrDetailComponent implements OnInit {
     this.inputLookupRefMasterType.isRequired = false;
     var datePipe = new DatePipe("en-US");
     let getAttrType = this.httpClient.post(URLConstant.GetListActiveRefAttrType, new Object()).pipe(first());
-    console.log("aaaa")
     var RefMasterInputType = new RefMasterObj();
     RefMasterInputType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeAttrInputType;
     let getRefMasterInputType = this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterInputType);

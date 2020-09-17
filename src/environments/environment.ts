@@ -8,7 +8,7 @@ export const environment = {
   navbarColor: 'lightgray',
   LosURL : 'http://r3web-server.ad-ins.com/LOS_DEMO/',
   WebSocketURL : 'http://r3app-server.ad-ins.com/FOUNDATION_DEMO',
- FoundationR3Url: 'http://localhost:5000',
+  FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
   Module:"FOU",
   ApprovalURL : 'http://r3app-server/APPROVAL_DEMO',
   FoundationR3Web:'http://r3web-server.ad-ins.com/FOUNDATION_DEMO'
