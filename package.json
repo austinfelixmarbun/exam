@@ -41,7 +41,7 @@
     "@adins/ucinputnumber": "^1.0.1",
     "@adins/uclookupgeneric": "^2.0.23",
     "@adins/ucpaging": "^2.0.26",
-    "@adins/ucreport": "^1.0.3",
+    "@adins/ucreport": "^1.0.4",
     "@adins/ucsearch": "^2.0.37",
     "@adins/ucthingstodo": "^1.0.3",
     "@adins/ucupload": "^1.7.2",
