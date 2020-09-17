@@ -6,11 +6,9 @@ import { NotificationAddEditComponent } from 'app/system-setting/notification/no
 import { NotificationApprovalPagingComponent } from 'app/system-setting/notification/notification-approval-paging/notification-approval-paging.component';
 import { NotificationApprovalDetailComponent } from 'app/system-setting/notification/notification-approval-detail/notification-approval-detail.component';
 import { UserPagingComponent } from 'app/system-setting/user/user-paging/user-paging.component';
-import { UserAddEditComponent } from 'app/system-setting/user/user-add-edit/user-add-edit.component';
 import { RoleAddEditComponent } from 'app/system-setting/role/role-add-edit/role-add-edit.component';
 import { RolePagingComponent } from 'app/system-setting/role/role-paging/role-paging.component';
 import { UserRoleComponent } from 'app/system-setting/user/user-role/user-role.component';
-import { UserRoleDetailComponent } from 'app/system-setting/user/user-role-detail/user-role-detail.component';
 import { RoleFormComponent } from 'app/system-setting/role/role-form/role-form.component';
 import { UserChangePasswordComponent } from 'app/system-setting/user/user-change-password/user-change-password.component';
 import { RefFormPagingComponent } from './ref-form/ref-form-paging/ref-form-paging.component';
@@ -59,13 +57,6 @@ const routes: Routes = [
         },
       },
       {
-        path: 'RefUser/Detail',
-        component: UserAddEditComponent,
-        data: {
-          title: 'User Maintenance Add Edit'
-        },
-      },
-      {
         path: 'Role',
         component: RolePagingComponent,
         data: {
@@ -82,13 +73,6 @@ const routes: Routes = [
       {
         path: 'UserRole',
         component: UserRoleComponent,
-        data: {
-          title: 'Assign User to Role'
-        },
-      },
-      {
-        path: 'UserRole/Detail',
-        component: UserRoleDetailComponent,
         data: {
           title: 'Assign User to Role'
         },

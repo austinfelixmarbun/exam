@@ -38,12 +38,12 @@
                     <th><span translate class="thead-header">Action</span></th>
                   </tr>
                 </thead>
-                <tbody *ngIf = "ScoreCategoryForm.controls.ScoreCategorySchmDObjs.controls.length == 0">
+                <tbody *ngIf = "ScoreCategoryForm.controls.ScoreCategorySchmDObjs.['controls'].length == 0">
                   <tr>
                     <td colspan="100%">No Data Available</td>
                   </tr>
                 </tbody>
-                <tbody *ngIf = "ScoreCategoryForm.controls.ScoreCategorySchmDObjs.controls.length > 0">
+                <tbody *ngIf = "ScoreCategoryForm.controls.ScoreCategorySchmDObjs.['controls'].length > 0">
                   <tr *ngFor="let item of ScoreCategoryForm.controls.ScoreCategorySchmDObjs.controls;let i = index">
                     <td [formGroupName]="i" class="text-center">
                       <input type="number" max="maxBottomValue[i]" class="form-control" formControlName="BottomValue" style="width: 100%;" (change)="BottomValueChanged($event, i)"

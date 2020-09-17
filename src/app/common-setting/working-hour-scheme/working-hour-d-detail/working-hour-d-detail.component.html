@@ -23,7 +23,7 @@
                 <label class="col-md-4 text-center" translate>Working Hour After Break </label>
               </div> 
               <div formArrayName="items">
-                <div *ngFor="let item of WorkingHourSchmDForm.controls.items.controls;let i = index;">
+                <div *ngFor="let item of WorkingHourSchmDForm.controls.items['controls'];let i = index;">
                   <div class="form-group row" [formGroupName]="i">
                     <label class="col-md-2 text-center" translate>{{item.controls.Label.value}}</label>
                     <div class="col-md-2" style="border-right: 1px solid grey">

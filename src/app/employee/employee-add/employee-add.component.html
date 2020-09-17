@@ -10,7 +10,7 @@
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal" [formGroup]="RefEmpForm" #enjiForm="ngForm"
-          (ngSubmit)="enjiForm.form.valid && SaveForm(enjiForm)">
+          (ngSubmit)="enjiForm.form.valid && SaveForm()">
           <lib-ucSubsection [id]="'UserPanelId'" [title]="'User - Detail'" [panel]="'UserPanel'"></lib-ucSubsection>
           <div class="form-body" id="UserPanel">
             <div class="form-group row adins-required">
