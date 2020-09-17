@@ -46,7 +46,7 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="AttrInputType">Attribute Input Type</label>
                 <div class="col-md-9">
-                  <select formControlName="AttrInputType" class="form-control" (change)="AttrInputTypeHandler()" 
+                  <select formControlName="AttrInputType" class="form-control" (change)="AttrInputTypeHandler()"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrInputType.invalid }">
                     <option *ngFor="let inputType of attrInputTypeList" [value]="inputType.Key">
                       {{inputType.Value}}
@@ -55,8 +55,8 @@
                   <lib-uc-show-errors [control]="RefAttrForm.controls.AttrInputType" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
-              </div>  
-              <div *ngIf ="this.isTextBox">
+              </div>
+              <div *ngIf="this.isTextBox">
                 <div class="form-group row adins-required">
                   <label class="col-md-3 adInsLabel" for="AttrLength" translate>Attribute Length</label>
                   <div class="col-md-9">
@@ -66,27 +66,27 @@
                     </lib-uc-show-errors>
                   </div>
                 </div>
-              <div class="form-group row">
-                <label class="col-md-3 adInsLabel" for="PatternCode" translate>Pattern Code</label>
-                <div class="col-md-9">  
-                  <select formControlName="PatternCode" class="form-control" (change) = "patternCodeChange($event)" 
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.PatternCode.invalid }">
-                  <option *ngFor="let inputType of patternCodeList" [value]="inputType.Key">
-                    {{inputType.Key}}
-                  </option>
-                </select>
-                <lib-uc-show-errors [control]="RefAttrForm.controls.PatternCode" [submit]="enjiForm.submitted">
-                </lib-uc-show-errors>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" for="PatternCode" translate>Pattern Code</label>
+                  <div class="col-md-9">
+                    <select formControlName="PatternCode" class="form-control" (change)="patternCodeChange($event)"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.PatternCode.invalid }">
+                      <option *ngFor="let inputType of patternCodeList" [value]="inputType.Key">
+                        {{inputType.Key}}
+                      </option>
+                    </select>
+                    <lib-uc-show-errors [control]="RefAttrForm.controls.PatternCode" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel " for="PatternValue" translate>Pattern Value</label>
+                  <div class="col-md-9">
+                    <label class="adInsLabel form-control"
+                      style="height: 2.5rem; border:none ">{{RefAttrForm.controls.PatternValue.value}}</label>
+                  </div>
                 </div>
               </div>
-              <div class="form-group row" >
-                <label class="col-md-3 adInsLabel " for="PatternValue"translate>Pattern Value</label>
-                <div class="col-md-9"> 
-                  <label class="adInsLabel form-control"style="height: 2.5rem; border:none ">{{RefAttrForm.controls.PatternValue.value}}</label>
-                </div>
-              </div>
-            </div>
- 
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="AttrGroup" translate>Attribute Group</label>
                 <div class="col-md-9">
@@ -96,22 +96,22 @@
                   </lib-uc-show-errors>
                 </div>
               </div>
- 
-              <div class="form-group row adins-required" [hidden] = "RefAttrForm.controls.AttrInputType.value != 'RM'"> 
 
-              <label class="col-md-3 adInsLabel">Attribute Value</label>
-            
+              <div class="form-group row adins-required" [hidden]="RefAttrForm.controls.AttrInputType.value != 'RM'">
+
+                <label class="col-md-3 adInsLabel">Attribute Value</label>
+
                 <div class="col-md-9">
-                  <lib-uclookupgeneric [lookupInput]="inputLookupRefMasterType" [parentForm]="RefAttrForm" [enjiForm]="enjiForm"
-                  [identifier]="'lookupRefMasterType'" (lookup)="getLookupAttrValue($event)">
-                </lib-uclookupgeneric>
+                  <lib-uclookupgeneric [lookupInput]="inputLookupRefMasterType" [parentForm]="RefAttrForm"
+                    [enjiForm]="enjiForm" [identifier]="'lookupRefMasterType'" (lookup)="getLookupAttrValue($event)">
+                  </lib-uclookupgeneric>
                 </div>
-             
-              </div>  
+
+              </div>
               <div class="form-group row adins-required" *ngIf="RefAttrForm.contains('AttrValue')">
                 <label class="col-md-3 adInsLabel" *ngIf="RefAttrForm.controls.AttrInputType.value == 'L' "
                   for="AttrValue" translate>Attribute Value</label>
-            
+
                 <div class="col-md-9" *ngIf="RefAttrForm.controls.AttrInputType.value == 'L'" formArrayName="AttrValue">
                   <div class="col-md-12" style="padding: 0;">
                     <button type="button" class="btn btn-raised btn-primary" (click)="AttrValueRowHandler()">
@@ -134,53 +134,6 @@
                   </div>
                 </div>
               </div>
-              <!-- 
-  
-              <div class="form-group row">
-                <label class="col-md-3 adInsLabel" for="RsvField1" translate>Reserve Field 1</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="RsvField1"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.RsvField1.invalid }" />
-                  <lib-uc-show-errors [control]="RefAttrForm.controls.RsvField1" [submit]="enjiForm.submitted">
-                  </lib-uc-show-errors>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3 adInsLabel" for="RsvField2" translate>Reserve Field 2</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="RsvField2"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.RsvField2.invalid }" />
-                  <lib-uc-show-errors [control]="RefAttrForm.controls.RsvField2" [submit]="enjiForm.submitted">
-                  </lib-uc-show-errors>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3 adInsLabel" for="RsvField3" translate>Reserve Field 3</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="RsvField3"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.RsvField3.invalid }" />
-                  <lib-uc-show-errors [control]="RefAttrForm.controls.RsvField3" [submit]="enjiForm.submitted">
-                  </lib-uc-show-errors>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3 adInsLabel" for="RsvField4" translate>Reserve Field 4</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="RsvField4"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.RsvField4.invalid }" />
-                  <lib-uc-show-errors [control]="RefAttrForm.controls.RsvField4" [submit]="enjiForm.submitted">
-                  </lib-uc-show-errors>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-md-3 adInsLabel" for="RsvField5" translate>Reserve Field 5</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="RsvField5"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.RsvField5.invalid }" />
-                  <lib-uc-show-errors [control]="RefAttrForm.controls.RsvField5" [submit]="enjiForm.submitted">
-                  </lib-uc-show-errors>
-                </div>
-              </div> --> 
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" for="isActive">Active Status</label>
                 <div class="col-md-9">

@@ -33,13 +33,7 @@ export class RefAttrDetailComponent implements OnInit {
     AttrTypeCode: ['', [Validators.required]],
     AttrInputType: ['', [Validators.required]],
     AttrGroup: ['', [Validators.required]],
-
     IsActive: [true],
-    // RsvField1: [''],
-    // RsvField2: [''],
-    // RsvField3: [''],
-    // RsvField4: [''],
-    // RsvField5: [''],
     RowVersion: ['']
   });
 
@@ -83,18 +77,16 @@ export class RefAttrDetailComponent implements OnInit {
     RefMasterPatternCode.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeRegularExpression;
     let getRefMasterPatternCode = this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterPatternCode);
 
-
     if (this.pageType == "edit") {
       let getRefAttr = this.httpClient.post(URLConstant.GetRefAttrById, { RefAttrId: this.refAttrId }).pipe(first());
       forkJoin([getRefAttr, getAttrType, getRefMasterInputType, getRefMasterPatternCode]).subscribe(
         (response) => {
           var refAttr = response[0];
-
           var attrTypeList = response[1];
-          this.attrTypeCodeList = [...attrTypeList["ReturnObject"]];
+          this.attrTypeCodeList = [...attrTypeList[CommonConstant.ReturnObj]];
           this.RefAttrForm.patchValue({ ...refAttr });
-          this.attrInputTypeList = response[2]["ReturnObject"];
-          this.patternCodeList = response[3]["ReturnObject"];
+          this.attrInputTypeList = response[2][CommonConstant.ReturnObj];
+          this.patternCodeList = response[3][CommonConstant.ReturnObj];
           switch (refAttr["AttrInputType"]) {
             case 'L':
               var valueList = refAttr["AttrValue"].split(";");
@@ -122,11 +114,8 @@ export class RefAttrDetailComponent implements OnInit {
                 PatternCode: refAttr["PatternCode"],
                 PatternValue: refAttr["PatternValue"],
                 AttrLength: refAttr["AttrLength"],
-
-
               });
               break;
-
 
             default:
               break;
@@ -140,9 +129,9 @@ export class RefAttrDetailComponent implements OnInit {
     else {
       forkJoin([getAttrType, getRefMasterInputType, getRefMasterPatternCode]).subscribe(
         (response) => {
-          this.attrTypeCodeList = response[0]["ReturnObject"];
-          this.attrInputTypeList = response[1]["ReturnObject"];
-          this.patternCodeList = response[2]["ReturnObject"];
+          this.attrTypeCodeList = response[0][CommonConstant.ReturnObj];
+          this.attrInputTypeList = response[1][CommonConstant.ReturnObj];
+          this.patternCodeList = response[2][CommonConstant.ReturnObj];
           this.RefAttrForm.patchValue({
             AttrTypeCode: this.attrTypeCodeList[0].AttrTypeCode,
             AttrInputType: this.attrInputTypeList[0].Key,
@@ -154,15 +143,11 @@ export class RefAttrDetailComponent implements OnInit {
           console.log(error);
         }
       );
-
-
     }
   }
 
   AttrInputTypeHandler() {
-
     var type = this.RefAttrForm.controls["AttrInputType"].value;
-
     if (this.RefAttrForm.contains("AttrValue")) {
       this.RefAttrForm.removeControl("AttrValue");
     }
@@ -191,13 +176,11 @@ export class RefAttrDetailComponent implements OnInit {
       this.inputLookupRefMasterType.isRequired = false;
       this.RefAttrForm.controls.lookupRefMasterType["controls"].value.clearValidators();
       this.RefAttrForm.controls.lookupRefMasterType["controls"].value.setValue("");
-
       this.RefAttrForm.controls.lookupRefMasterType.updateValueAndValidity();
     }
     if (type == 'L') {
       this.RefAttrForm.addControl("AttrValue", this.fb.array([]));
     }
-
   }
 
   AttrValueRowHandler() {
@@ -222,7 +205,6 @@ export class RefAttrDetailComponent implements OnInit {
       if (formValue["AttrValue"].length < 1) {
         this.toastr.warningMessage("Minimal 1 Attribute Value");
         return;
-
       }
       var attrValue = "";
       for (let index = 0; index < formValue["AttrValue"].length; index++) {
@@ -257,8 +239,5 @@ export class RefAttrDetailComponent implements OnInit {
     this.RefAttrForm.patchValue({
       AttrValue: e.RefMasterTypeCode
     });
-  }
-  tes() {
-    console.log(this.RefAttrForm)
   }
 }
