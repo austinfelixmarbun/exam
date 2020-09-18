@@ -12,7 +12,7 @@
     <button type="button" class="backButton" [routerLink]="['/Asset/Scheme/Paging']" translate>
       <i class="fa fa-arrow-left"> </i> Back 
     </button>
-    <button type="button" class="addButton" [routerLink]="['/Asset/Scheme/AddMember']"
+    <button type="button" *ngIf="!AssetSchmHIsSystem" class="addButton" [routerLink]="['/Asset/Scheme/AddMember']"
       [queryParams]="{AssetSchmHId:AssetSchmHId}" translate>
       <i class="ft-plus-circle"></i> Add
     </button>
