@@ -6,45 +6,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
-import { FormEngineModule } from '@adins/form-engine';
-import { LookupparentformModule } from '@adins/lookupparentform';
-import { LookupemployeeModule } from '@adins/lookupemployee';
-import { LookupdistrictModule } from '@adins/lookupdistrict';
-import { LookuproleModule } from '@adins/lookuprole';
-import { LookuporgmdlstrucModule } from '@adins/lookuporgmdlstruc';
-import { LookupzipcodeModule } from '@adins/lookupzipcode';
-import { LookuprefbankModule } from '@adins/lookuprefbank';
-import { LookuprefjobtitleModule } from '@adins/lookuprefjobtitle';
-import { LookuporgjobtitleModule } from '@adins/lookuporgjobtitle';
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import { UcSubsectionModule } from '@adins/uc-subsection';
-import { LookupsupervisorModule } from '@adins/lookupsupervisor';
 import { MatStepperModule, MatIconModule, MatExpansionModule, MatTabsModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
-import { lookupbizunitmodule } from '@adins/lookupbizunit';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   exports: [
     CommonModule,
-    LookupemployeeModule,
-    LookupzipcodeModule,
     NgbModule,
-    LookuprefbankModule,
-    LookuproleModule,
-    LookupdistrictModule,
-    LookupparentformModule,
     TranslateModule,
-    lookupbizunitmodule,
-    LookuporgmdlstrucModule,
-    LookuporgjobtitleModule,
-    LookuprefjobtitleModule,
     UCSearchModule,
     UcgridfooterModule,
-    FormEngineModule,
     UcSubsectionModule,
     AngularFileUploaderModule,
-    LookupsupervisorModule,
     MatStepperModule,
     MatIconModule,
     MatExpansionModule,
@@ -59,7 +35,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     UCSearchModule,
     UcgridfooterModule,
     TranslateModule,
-    LookupzipcodeModule,
     UcSubsectionModule,
     NgMultiSelectDropDownModule
   ],
