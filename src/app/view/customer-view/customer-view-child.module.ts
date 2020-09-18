@@ -42,6 +42,9 @@ import { CustomerViewAddressComponent } from "./customer-view-address/customer-v
 import { CustomerViewPersonalDetailComponent } from "./customer-view-personal-detail/customer-view-personal-detail.component";
 import { CustomerViewPersonalJobDataComponent } from "./customer-view-personal-job-data/customer-view-personal-job-data.component";
 import { CustomerViewChildRoutingModule } from "./customer-view-child-routing.module";
+import { CustomerViewPersonalAddressComponent } from "./customer-view-personal-address/customer-view-personal-address.component";
+import { CustomerViewPersonalCustomerGroupComponent } from "./customer-view-personal-customer-group/customer-view-personal-customer-group.component";
+import { CustomerViewCoyAddressComponent } from "./customer-view-coy-address/customer-view-coy-address.component";
 
 
 @NgModule({
@@ -73,22 +76,25 @@ import { CustomerViewChildRoutingModule } from "./customer-view-child-routing.mo
     // CustomerViewPersonalJobDataNonProfComponent,
     // CustomerViewPersonalJobDataEmpComponent,
     // CustomerViewPersonalJobDataSmeComponent,
-    // CustomerViewPersonalOtherAttrComponent,
+    CustomerViewPersonalOtherAttrComponent,
     // CustomerViewPersonalAppListingComponent,
     // CustomerViewCoyManagementComponent,
     // CustomerViewCoyContactComponent,
     // CustomerViewCoyFinancialComponent,
     // CustomerViewCoyLegalComponent,
     // CustomerViewCoyOtherComponent,
-    // CustomerViewCoyAppListingComponent,
-    // CustomerViewCoyExposureComponent,
-    // CustomerViewCoyCustScoreComponent,
-    // CustomerViewCoyCustAddColateralComponent,
+    CustomerViewCoyAppListingComponent,
+    CustomerViewCoyExposureComponent,
+    CustomerViewCoyCustScoreComponent,
+    CustomerViewCoyCustAddColateralComponent,
     // CustomerViewCoyDetailComponent,
     // CustomerViewPersonalFinancialSectionComponent,
     // CustomerViewCustomerGroupComponent,
     // CustomerViewAddressComponent,
-    // CustomerViewPersonalJobDataComponent
+    // CustomerViewPersonalJobDataComponent,
+    CustomerViewPersonalAddressComponent,
+    CustomerViewCoyAddressComponent,
+    CustomerViewPersonalCustomerGroupComponent
   ],
   entryComponents: [
     UcviewgenericComponent,
