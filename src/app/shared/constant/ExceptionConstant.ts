@@ -20,6 +20,7 @@ export class ExceptionConstant {
     public static PLEASE_COMPLETE_RESIDENCE_ADDRESS = "Please complete Residence Address First";
     public static PLEASE_COMPLETE_LEGAL_AND_RESIDENCE_ADDRESS = "Please complete Legal and Residence Address First";
     public static ADD_MIN_1_DATA = "Please select at least one Office";
+    public static Add_Min_1_Owner = "Please Input at least 1 Owner";
 
     public static JOIN_DATE_MUST_LESS_THAN_ = "Join Date Must Be Lesser Than ";
     public static START_DATE_MUST_EQUAL_OR_MORE_THAN = "Start Date must be equal or more than ";

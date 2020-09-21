@@ -56,10 +56,6 @@ export const Full_ROUTES: Routes = [
     loadChildren: './upload/upload.module#UploadModule'
   },
   {
-    path: 'test',
-    loadChildren: './test/test.module#TestModule'
-  },
-  {
     path: 'product',
     loadChildren: './product/product.module#ProductModule'
   },

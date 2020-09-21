@@ -28,7 +28,7 @@ export class CustomerViewCoyManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.custUrl = environment.FoundationR3Web + '/View/Customer?CustId=';
+    this.custUrl = environment.FoundationR3Web + '/View/Customer/PersonalDetail?CustId=';
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
         this.CustId = params['CustId'];

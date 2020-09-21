@@ -4,6 +4,7 @@ export class AssetSchemeHObj {
     AssetSchmCode : any;
     AssetSchmName : any;
     IsActive: any;
+    IsSystem: any;
     RowVersion : any;
     constructor () { this.AssetSchmHId = 0, this.RowVersion = ""}
 }

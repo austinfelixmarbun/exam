@@ -13,6 +13,7 @@ export class CustomerViewPersonalDetailComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("terpanggil");
     this.viewCustMainDataMainInfo.viewInput =  "./assets/ucviewgeneric/viewCustMainDataMainInfo.json";
     this.viewCustMainDataMainInfo.viewEnvironment = environment.FoundationR3Url;
     this.viewCustMainDataContactInformation.viewInput  = "./assets/ucviewgeneric/viewCustMainDataContactInformation.json";

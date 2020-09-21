@@ -25,6 +25,7 @@ export class CustomerViewAddressComponent implements OnInit {
 
   GetListCustAddrByCustIdForCustomerPersonalViewUrl: string;
   GetListCustAddrHistByCustIdForCustomerPersonalViewUrl: string;
+  selectedOption: any;
 
   CustForm = this.fb.group({
     DdlAddress: ['']

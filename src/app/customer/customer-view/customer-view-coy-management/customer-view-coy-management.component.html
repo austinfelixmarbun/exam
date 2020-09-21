@@ -15,8 +15,10 @@
               <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>CUSTOMER MODEL</span>
               </th>
               <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>TAX ID NO</span> </th>
-              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>SHARE (%)</span> </th>
-              <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>DEFAULT SIGNER</span>
+              <th class="text-right"><span class="thead-header" name='assetCategoryName' translate>SHARE (%)</span> </th>
+              <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>DEFAULT SIGNER</span>
+              </th>
+              <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>OWNER</span>
               </th>
             </tr>
           </thead>
@@ -29,9 +31,11 @@
                 <td class="text-left">{{item.Type}}</td>
                 <td class="text-left">{{item.CustModel}}</td>
                 <td class="text-left">{{item.TaxIdNo}}</td>
-                <td class="text-left">{{item.SharePrcnt}}</td>
-                <td *ngIf="item.IsSigner == true" class="text-left">Yes</td>
-                <td *ngIf="item.IsSigner == false" class="text-left">No</td>
+                <td class="text-right">{{item.SharePrcnt| number:'.6':'en-US'}}</td>
+                <td *ngIf="item.IsSigner == true" class="text-center">Yes</td>
+                <td *ngIf="item.IsSigner == false" class="text-center">No</td>
+                <td *ngIf="item.IsOwner == true" class="text-center">Yes</td>
+                <td *ngIf="item.IsOwner == false" class="text-center">No</td>
               </tr>
             </ng-container>
           </tbody>

@@ -82,7 +82,7 @@
         {
             "type" : "link",
             "property" : "VendorName",
-            "path" : "/View/VendorHolding",
+            "path" : "/View/Vendor/VendorHolding",
             "target": "_blank",
             "param" :
             [

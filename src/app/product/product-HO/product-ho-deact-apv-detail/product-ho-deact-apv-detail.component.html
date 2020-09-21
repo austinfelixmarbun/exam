@@ -11,7 +11,7 @@
             <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
             <br />
             <lib-ucapproval [inputObj]="inputObj" [showCancel]="'true'" (onCancel)="onCancelClick()"
-                (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)"></lib-ucapproval>
+                (nextTask)="onAvailableNextTask()" (result)="onApprovalSubmited()"></lib-ucapproval>
         </div>
     </div>
 </div>

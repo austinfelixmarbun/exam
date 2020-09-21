@@ -10,7 +10,7 @@
       </div>
       <div class="px-3">
         <form class="form form-horizontal" [formGroup]="RefIndustryTypeForm" #enjiForm="ngForm" novalidate
-          (ngSubmit)="enjiForm.form.valid && Save(enjiForm)">
+          (ngSubmit)="enjiForm.form.valid && Save()">
           <lib-ucSubsection [id]="'IndustryTypeInfoId'" [title]="'Industry Type ' + type" [panel]="'IndustryTypeInfo'"></lib-ucSubsection>
           <div id="IndustryTypeInfo">
             <div class="form-group row">
