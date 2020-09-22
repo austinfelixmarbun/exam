@@ -3,10 +3,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Location, DatePipe } from '@angular/common';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { first } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-ref-attr-detail',
@@ -16,26 +20,20 @@ import { forkJoin } from 'rxjs';
 export class RefAttrDetailComponent implements OnInit {
   pageType: string;
   refAttrId: number;
-  attrInputTypeList: Array<Object>;
-  attrTypeCodeList: Array<Object>;
-
+  attrInputTypeList: any;
+  attrTypeCodeList: any;
+  patternCodeList: any;
+  patternValueList: any;
+  isTextBox: boolean = false;
+  inputLookupRefMasterType: InputLookupObj;
   RefAttrForm = this.fb.group({
     RefAttrId: [0, [Validators.required]],
     AttrCode: ['', [Validators.required]],
     AttrName: ['', [Validators.required]],
-    AttrLength: ['', [Validators.required]],
     AttrTypeCode: ['', [Validators.required]],
     AttrInputType: ['', [Validators.required]],
     AttrGroup: ['', [Validators.required]],
-    // PatternCode: [''],
-    // PatternValue: [''],
-    IsSystem: [false],
     IsActive: [true],
-    // RsvField1: [''],
-    // RsvField2: [''],
-    // RsvField3: [''],
-    // RsvField4: [''],
-    // RsvField5: [''],
     RowVersion: ['']
   });
 
@@ -46,71 +44,50 @@ export class RefAttrDetailComponent implements OnInit {
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder
-  ) { 
+  ) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
         this.pageType = params['mode'];
       }
-      else{
+      else {
         this.pageType = "add";
       }
-      
+
       if (params['refAttrId'] != null) {
         this.refAttrId = params['refAttrId'];
       }
     });
 
-    this.attrInputTypeList = new Array<Object>();
-    this.attrInputTypeList.push(
-      {
-        Key: "T",
-        Value: "Text"
-      },
-      {
-        Key: "N",
-        Value: "Numeric"
-      },
-      {
-        Key: "L",
-        Value: "List"
-      },
-      {
-        Key: "P",
-        Value: "Textarea"
-      },
-      {
-        Key: "D",
-        Value: "Date"
-      },
-      {
-        Key: "A",
-        Value: "Amount"
-      }
-    );
   }
 
   ngOnInit() {
+    this.inputLookupRefMasterType = new InputLookupObj();
+    this.inputLookupRefMasterType.urlJson = "./assets/lookup/lookupRefMasterType.json";
+    this.inputLookupRefMasterType.urlQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.inputLookupRefMasterType.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupRefMasterType.pagingJson = "./assets/lookup/lookupRefMasterType.json";
+    this.inputLookupRefMasterType.genericJson = "./assets/lookup/lookupRefMasterType.json";
+    this.inputLookupRefMasterType.isRequired = false;
     var datePipe = new DatePipe("en-US");
     let getAttrType = this.httpClient.post(URLConstant.GetListActiveRefAttrType, new Object()).pipe(first());
-    if(this.pageType == "edit"){
+    var RefMasterInputType = new RefMasterObj();
+    RefMasterInputType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeAttrInputType;
+    let getRefMasterInputType = this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterInputType);
+    var RefMasterPatternCode = new RefMasterObj();
+    RefMasterPatternCode.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeRegularExpression;
+    let getRefMasterPatternCode = this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterPatternCode);
+
+    if (this.pageType == "edit") {
       let getRefAttr = this.httpClient.post(URLConstant.GetRefAttrById, { RefAttrId: this.refAttrId }).pipe(first());
-      forkJoin([getRefAttr, getAttrType]).subscribe(
+      forkJoin([getRefAttr, getAttrType, getRefMasterInputType, getRefMasterPatternCode]).subscribe(
         (response) => {
           var refAttr = response[0];
           var attrTypeList = response[1];
-          this.attrTypeCodeList = [...attrTypeList["ReturnObject"]];
-          console.log("TypeCodeList: " + JSON.stringify(this.attrTypeCodeList));
-          this.RefAttrForm.patchValue({...refAttr});
-
+          this.attrTypeCodeList = [...attrTypeList[CommonConstant.ReturnObj]];
+          this.RefAttrForm.patchValue({ ...refAttr });
+          this.attrInputTypeList = response[2][CommonConstant.ReturnObj];
+          this.patternCodeList = response[3][CommonConstant.ReturnObj];
           switch (refAttr["AttrInputType"]) {
-            // case 'T':
-            //   this.RefAttrForm.addControl("AttrValue", this.fb.control(refAttr["AttrValue"], [Validators.required]));
-            //   break;
-            
-            // case 'N':
-            //   this.RefAttrForm.addControl("AttrValue", this.fb.control(refAttr["AttrValue"], [Validators.required, Validators.pattern('^[0-9]+$')]));
-            //   break;
-
             case 'L':
               var valueList = refAttr["AttrValue"].split(";");
               console.log("ValueList: " + JSON.stringify(valueList));
@@ -121,18 +98,25 @@ export class RefAttrDetailComponent implements OnInit {
               this.RefAttrForm.addControl("AttrValue", formArray);
               break;
 
-            // case 'P':
-            //   this.RefAttrForm.addControl("AttrValue", this.fb.control(refAttr["AttrValue"], [Validators.required]));
-            //   break;
+            case 'RM':
+              this.RefAttrForm.addControl("AttrValue", this.fb.control(refAttr["AttrValue"], [Validators.required]));
+              this.inputLookupRefMasterType.nameSelect = refAttr["AttrValueDescr"];
+              this.inputLookupRefMasterType.jsonSelect = { Descr: refAttr["AttrValueDescr"] };
+              this.inputLookupRefMasterType.isRequired = true;
+              break;
 
-            // case 'D':
-            //   this.RefAttrForm.addControl("AttrValue", this.fb.control(datePipe.transform(refAttr["AttrValue"], "yyyy-MM-dd"), [Validators.required]));
-            //   break;
+            case 'T':
+              this.isTextBox = true;
+              this.RefAttrForm.addControl("PatternCode", this.fb.control(''));
+              this.RefAttrForm.addControl("PatternValue", this.fb.control(''));
+              this.RefAttrForm.addControl("AttrLength", this.fb.control('', [Validators.required]));
+              this.RefAttrForm.patchValue({
+                PatternCode: refAttr["PatternCode"],
+                PatternValue: refAttr["PatternValue"],
+                AttrLength: refAttr["AttrLength"],
+              });
+              break;
 
-            // case 'A':
-            //   this.RefAttrForm.addControl("AttrValue", this.fb.control(refAttr["AttrValue"], [Validators.required]));
-            //   break;
-          
             default:
               break;
           }
@@ -142,10 +126,18 @@ export class RefAttrDetailComponent implements OnInit {
         }
       );
     }
-    else{
-      getAttrType.subscribe(
+    else {
+      forkJoin([getAttrType, getRefMasterInputType, getRefMasterPatternCode]).subscribe(
         (response) => {
-          this.attrTypeCodeList = [...response["ReturnObject"]];
+          this.attrTypeCodeList = response[0][CommonConstant.ReturnObj];
+          this.attrInputTypeList = response[1][CommonConstant.ReturnObj];
+          this.patternCodeList = response[2][CommonConstant.ReturnObj];
+          this.RefAttrForm.patchValue({
+            AttrTypeCode: this.attrTypeCodeList[0].AttrTypeCode,
+            AttrInputType: this.attrInputTypeList[0].Key,
+            PatternCode: this.patternCodeList[0].Key,
+            PatternValue: this.patternCodeList[0].Value
+          });
         },
         (error) => {
           console.log(error);
@@ -154,49 +146,49 @@ export class RefAttrDetailComponent implements OnInit {
     }
   }
 
-  AttrInputTypeHandler(){
+  AttrInputTypeHandler() {
     var type = this.RefAttrForm.controls["AttrInputType"].value;
-
-    if(this.RefAttrForm.contains("AttrValue")){
+    if (this.RefAttrForm.contains("AttrValue")) {
       this.RefAttrForm.removeControl("AttrValue");
     }
+    if (type == 'T') {
+      this.isTextBox = true;
+      this.RefAttrForm.addControl("PatternCode", this.fb.control(''));
+      this.RefAttrForm.addControl("PatternValue", this.fb.control(''));
+      this.RefAttrForm.addControl("AttrLength", this.fb.control('', [Validators.required]));
 
-    switch (type) {
-      // case 'T':
-      //   this.RefAttrForm.addControl("AttrValue", this.fb.control('', [Validators.required]));
-      //   break;
-      
-      // case 'N':
-      //   this.RefAttrForm.addControl("AttrValue", this.fb.control('', [Validators.required, Validators.pattern('^[0-9]+$')]));
-      //   break;
-
-      case 'L':
-        this.RefAttrForm.addControl("AttrValue", this.fb.array([]));
-        break;
-
-      // case 'P':
-      //   this.RefAttrForm.addControl("AttrValue", this.fb.control('', [Validators.required]));
-      //   break;
-
-      // case 'D':
-      //   this.RefAttrForm.addControl("AttrValue", this.fb.control('', [Validators.required]));
-      //   break;
-
-      // case 'A':
-      //   this.RefAttrForm.addControl("AttrValue", this.fb.control('', [Validators.required]));
-      //   break;
-
-      default:
-        break;
+      this.RefAttrForm.patchValue({
+        PatternCode: this.patternCodeList[0].Key,
+        PatternValue: this.patternCodeList[0].Value
+      });
+    }
+    else if (type != 'T') {
+      this.RefAttrForm.removeControl("AttrLength");
+      this.RefAttrForm.removeControl("PatternCode");
+      this.RefAttrForm.removeControl("PatternValue");
+      this.isTextBox = false;
+    }
+    if (type == 'RM') {
+      this.RefAttrForm.addControl('AttrValue', this.fb.control('', [Validators.required]));
+      this.inputLookupRefMasterType.isRequired = true;
+    }
+    else if (type != 'RM') {
+      this.inputLookupRefMasterType.isRequired = false;
+      this.RefAttrForm.controls.lookupRefMasterType["controls"].value.clearValidators();
+      this.RefAttrForm.controls.lookupRefMasterType["controls"].value.setValue("");
+      this.RefAttrForm.controls.lookupRefMasterType.updateValueAndValidity();
+    }
+    if (type == 'L') {
+      this.RefAttrForm.addControl("AttrValue", this.fb.array([]));
     }
   }
 
-  AttrValueRowHandler(){
+  AttrValueRowHandler() {
     var formArray = this.RefAttrForm.get("AttrValue") as FormArray;
     formArray.push(this.fb.control('', [Validators.required]));
   }
 
-  RemoveAttrValueRow(idx){
+  RemoveAttrValueRow(idx) {
     var formArray = this.RefAttrForm.get("AttrValue") as FormArray;
     formArray.removeAt(idx);
   }
@@ -205,17 +197,21 @@ export class RefAttrDetailComponent implements OnInit {
     this.location.back();
   }
 
-  Save(enjiForm){
+  Save(enjiForm) {
     var formValue = this.RefAttrForm.value;
     var url = this.pageType == "add" ? URLConstant.AddRefAttr : URLConstant.EditRefAttr;
 
-    if(formValue["AttrInputType"] == "L"){
+    if (formValue["AttrInputType"] == "L") {
+      if (formValue["AttrValue"].length < 1) {
+        this.toastr.warningMessage("Minimal 1 Attribute Value");
+        return;
+      }
       var attrValue = "";
       for (let index = 0; index < formValue["AttrValue"].length; index++) {
-        if(index < formValue["AttrValue"].length - 1){
+        if (index < formValue["AttrValue"].length - 1) {
           attrValue += formValue["AttrValue"][index] + ";";
         }
-        else{
+        else {
           attrValue += formValue["AttrValue"][index];
         }
       }
@@ -232,5 +228,16 @@ export class RefAttrDetailComponent implements OnInit {
       }
     );
   }
-
+  patternCodeChange(e) {
+    this.RefAttrForm.controls.PatternCode
+    var temp = this.patternCodeList.find(x => x.Key == e.target.value)
+    this.RefAttrForm.patchValue({
+      PatternValue: temp.Value
+    });
+  }
+  getLookupAttrValue(e) {
+    this.RefAttrForm.patchValue({
+      AttrValue: e.RefMasterTypeCode
+    });
+  }
 }

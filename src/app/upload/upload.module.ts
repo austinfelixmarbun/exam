@@ -11,7 +11,6 @@ import { UploadSettingEditComponent } from './upload-setting/upload-setting-edit
 import { SharingComponentModule } from "app/shared/sharingcomponent.module";
 import { UCSearchModule } from "@adins/ucsearch";
 import { UcgridfooterModule } from "@adins/ucgridfooter";
-import { LookuproleModule } from "@adins/lookuprole";
 import { UcSubsectionModule } from "@adins/uc-subsection";
 import { UcpagingModule } from "@adins/ucpaging";
 import { UcviewgenericModule } from "@adins/ucviewgeneric";
@@ -28,7 +27,6 @@ import { UclookupgenericModule } from "@adins/uclookupgeneric";
         UCSearchModule,
         UcgridfooterModule,
         ReactiveFormsModule,
-        LookuproleModule,
         UcSubsectionModule,
         UploadRoutingModule,
         UcpagingModule,

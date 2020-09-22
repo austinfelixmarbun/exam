@@ -20,7 +20,6 @@ import { HolidayDetailAddComponent } from './holiday-scheme/holiday-detail-add/h
 import { OfficeZipcodeMemberComponent } from './office-zipcode-member/office-zipcode-member.component';
 import { OfficeZipcodeMemberAddComponent } from './office-zipcode-member/office-zipcode-member-add/office-zipcode-member-add.component';
 import { OfficeZipcodeMemberPagingComponent } from './office-zipcode-member/office-zipcode-member-paging/office-zipcode-member-paging.component';
-import { LookupemployeeComponent } from '@adins/lookupemployee';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
@@ -116,12 +115,7 @@ import { ScoreCategoryScoringComponent } from './score-category/score-category-s
     ScoreCategoryScoringComponent
   ],
   providers: [
-    NGXToastrService,
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => LookupemployeeComponent),
-      multi: true
-    }
+    NGXToastrService
   ]
 })
 export class CommonSettingModule { }
