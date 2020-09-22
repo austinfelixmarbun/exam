@@ -103,7 +103,7 @@
               </app-cust-fin-data-tab>
             </div>
             <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
-              <app-cust-attr-section [CustId]="IdCust" *ngIf="CustStepIndex == 7">
+              <app-cust-attr-section [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" *ngIf="CustStepIndex == 7">
               </app-cust-attr-section>
             </div>
           </div>
