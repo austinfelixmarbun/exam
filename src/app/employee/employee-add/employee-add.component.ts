@@ -34,10 +34,10 @@ export class EmployeeAddComponent implements OnInit {
   resultData: any;
   generalSettingObj: GeneralSettingObj;
   passwordPattern: string;
-  refEmpObj: any;
-  refUserObj: any;
-  empBankAccObj: any;
-  refBankObj: any;
+  refEmpObj: RefEmpObj;
+  refUserObj: RefUserObj;
+  empBankAccObj: EmpBankAccObj;
+  refBankObj: RefBankObj;
   IdTypeList: any;
   businessDt: Date;
 
@@ -59,7 +59,7 @@ export class EmployeeAddComponent implements OnInit {
     MobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
     MobilePhnNo2: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
     Email1: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
-    Email2: ['', [Validators.pattern('^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$')]],
+    Email2: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
     RowVersion: [''],
     EmpBankAccId: [0, [Validators.required]],
     RefBankId: [0, [Validators.required]],
@@ -128,110 +128,74 @@ export class EmployeeAddComponent implements OnInit {
     this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
 
-    if (this.pageType == "edit") {
+    if (this.pageType == "edit") 
+    {
       var empObj = new RefEmpObj();
       empObj.RefEmpId = this.RefEmpId;
 
-      this.httpClient.post(URLConstant.GetRefEmployeeById, empObj).pipe(
-        map(response => {
-          return response;
-        }),
-        mergeMap((response: any) => {
-          var tempRefUser = new RefUserObj();
-          tempRefUser.RefEmpId = response.RefEmpId;
-          var tempEmpBankAcc = new EmpBankAccObj();
-          tempEmpBankAcc.RefEmpId = response.RefEmpId;
-
-          var tempResponse = [];
-          tempResponse.push(response);
-
-          const refUserObj = this.httpClient.post(URLConstant.GetRefUserByRefEmpId, tempRefUser);
-          const empBankAccObj = this.httpClient.post(URLConstant.GetEmpBankAccByRefEmpId, tempEmpBankAcc);
-
-          return forkJoin([tempResponse, refUserObj, empBankAccObj]);
-        }),
-        mergeMap((response: any) => {
-          var tempRefBank = new RefBankObj();
-          tempRefBank.RefBankId = response[2].RefBankId;
-
-          var tempResponseEmp = [];
-          tempResponseEmp.push(response[0]);
-          var tempResponseUsr = [];
-          tempResponseUsr.push(response[1]);
-          var tempResponseEmpBank = [];
-          tempResponseEmpBank.push(response[2]);
-
-          const refBankObj = this.httpClient.post(URLConstant.GetRefBankByRefBankIdAsync, tempRefBank);
-          return forkJoin([tempResponseEmp, tempResponseUsr, tempResponseEmpBank, refBankObj]);
-        })
-      ).subscribe(
-        (response: any) => {
-          var refEmpData = response[0];
-          var refUserData = response[1];
-          var empBankAccData = response[2];
-          var refBankData = response[3];
-
-          this.refEmpObj = refEmpData;
-          this.refUserObj = refUserData;
-          this.empBankAccObj = empBankAccData;
-          this.refBankObj = refBankData;
+      this.http.post(URLConstant.GetEmpForUpdateById, empObj).subscribe(
+        (response) => {
+          this.refEmpObj = response['RefEmpObj'];
+          this.refUserObj = response['RefUserObj'];
+          this.empBankAccObj = response['EmpBankAccObj'];
+          this.refBankObj = response['RefBankObj'];
 
           var datePipe = new DatePipe("en-US");
-          var joinDt = datePipe.transform(refEmpData.JoinDt, 'yyyy-MM-dd');
-
+          var joinDt = datePipe.transform(this.refEmpObj.JoinDt, 'yyyy-MM-dd');
           this.RefEmpForm.patchValue({
-            RefUserId: refUserData.RefUserId,
-            Username: refUserData.Username,
-            IsLockedOut: refUserData.IsLockedOut,
-            LoggedInMethod: refUserData.LoggedInMethod,
-            RefEmpId: refEmpData.RefEmpId,
-            EmpNo: refEmpData.EmpNo,
-            EmpName: refEmpData.EmpName,
+            RefUserId: this.refUserObj.RefUserId,
+            Username: this.refUserObj.Username,
+            IsLockedOut: this.refUserObj.IsLockedOut,
+            LoggedInMethod: this.refUserObj.LoggedInMethod,
+            RefEmpId: this.refEmpObj.RefEmpId,
+            EmpNo: this.refEmpObj.EmpNo,
+            EmpName: this.refEmpObj.EmpName,
             JoinDt: joinDt,
-            MrIdTypeCode: refEmpData.MrIdTypeCode,
-            IdNo: refEmpData.IdNo,
-            TaxIdNo: refEmpData.TaxIdNo,
-            IsExt: refEmpData.IsExt,
-            IsActive: refEmpData.IsActive,
-            IsLeave: refEmpData.IsLeave,   
-            MobilePhnNo1: refEmpData.MobilePhnNo1,
-            MobilePhnNo2: refEmpData.MobilePhnNo2,
-            Email1: refEmpData.Email1,
-            Email2: refEmpData.Email2,
-            RowVersion: refEmpData.RowVersion,
-            EmpBankAccId: empBankAccData.EmpBankAccId,
-            RefBankId: empBankAccData.RefBankId,
-            BankBranch: empBankAccData.BankBranch,
-            BankBranchRegCode: empBankAccData.BankBranchRegCode,
-            BankAccNo: empBankAccData.BankAccNo,
-            BankAccName: empBankAccData.BankAccName
+            MrIdTypeCode: this.refEmpObj.MrIdTypeCode,
+            IdNo: this.refEmpObj.IdNo,
+            TaxIdNo: this.refEmpObj.TaxIdNo,
+            IsExt: this.refEmpObj.IsExt,
+            IsActive: this.refEmpObj.IsActive,
+            IsLeave: this.refEmpObj.IsLeave,   
+            MobilePhnNo1: this.refEmpObj.MobilePhnNo1,
+            MobilePhnNo2: this.refEmpObj.MobilePhnNo2,
+            Email1: this.refEmpObj.Email1,
+            Email2: this.refEmpObj.Email2,
+            RowVersion: this.refEmpObj.RowVersion,
+            EmpBankAccId: this.empBankAccObj.EmpBankAccId,
+            RefBankId: this.empBankAccObj.RefBankId,
+            BankBranch: this.empBankAccObj.BankBranch,
+            BankBranchRegCode: this.empBankAccObj.BankBranchRegCode,
+            BankAccNo: this.empBankAccObj.BankAccNo,
+            BankAccName: this.empBankAccObj.BankAccName
           });
           
-          this.inputLookupBankObj.nameSelect = refBankData.BankName;
-          this.addressObj.Addr = refEmpData.Addr;
-          this.addressObj.AreaCode4 = refEmpData.AreaCode4;
-          this.addressObj.AreaCode3 = refEmpData.AreaCode3;
-          this.addressObj.AreaCode2 = refEmpData.AreaCode2;
-          this.addressObj.AreaCode1 = refEmpData.AreaCode1;
-          this.addressObj.City = refEmpData.City;
-          this.addressObj.PhnArea1 = refEmpData.PhnArea1;
-          this.addressObj.Phn1 = refEmpData.Phn1;
-          this.addressObj.PhnExt1 = refEmpData.PhnExt1;
-          this.addressObj.PhnArea2 = refEmpData.PhnArea2;
-          this.addressObj.Phn2 = refEmpData.Phn2;
-          this.addressObj.PhnExt2 = refEmpData.PhnExt2;
-          this.addressObj.PhnArea3 = refEmpData.PhnArea3;
-          this.addressObj.Phn3 = refEmpData.Phn3;
-          this.addressObj.PhnExt3 = refEmpData.PhnExt3;
-          this.addressObj.FaxArea = refEmpData.FaxArea;
-          this.addressObj.Fax = refEmpData.Fax;
+          this.inputLookupBankObj.nameSelect = this.refBankObj.BankName;
+          this.addressObj.Addr = this.refEmpObj.Addr;
+          this.addressObj.AreaCode4 = this.refEmpObj.AreaCode4;
+          this.addressObj.AreaCode3 = this.refEmpObj.AreaCode3;
+          this.addressObj.AreaCode2 = this.refEmpObj.AreaCode2;
+          this.addressObj.AreaCode1 = this.refEmpObj.AreaCode1;
+          this.addressObj.City = this.refEmpObj.City;
+          this.addressObj.PhnArea1 = this.refEmpObj.PhnArea1;
+          this.addressObj.Phn1 = this.refEmpObj.Phn1;
+          this.addressObj.PhnExt1 = this.refEmpObj.PhnExt1;
+          this.addressObj.PhnArea2 = this.refEmpObj.PhnArea2;
+          this.addressObj.Phn2 = this.refEmpObj.Phn2;
+          this.addressObj.PhnExt2 = this.refEmpObj.PhnExt2;
+          this.addressObj.PhnArea3 = this.refEmpObj.PhnArea3;
+          this.addressObj.Phn3 = this.refEmpObj.Phn3;
+          this.addressObj.PhnExt3 = this.refEmpObj.PhnExt3;
+          this.addressObj.FaxArea = this.refEmpObj.FaxArea;
+          this.addressObj.Fax = this.refEmpObj.Fax;
           this.inputFieldAddr.inputLookupObj = new InputLookupObj();
-          this.inputFieldAddr.inputLookupObj.jsonSelect = { Zipcode: refEmpData.Zipcode };
-          this.inputFieldAddr.inputLookupObj.nameSelect = refEmpData.Zipcode;
+          this.inputFieldAddr.inputLookupObj.jsonSelect = { Zipcode: this.refEmpObj.Zipcode };
+          this.inputFieldAddr.inputLookupObj.nameSelect = this.refEmpObj.Zipcode;
         }
       );
     }
     this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.requiredPhn1 = true;
     this.inputAddressObj.default = this.addressObj;
     this.inputAddressObj.inputField = this.inputFieldAddr;
   }

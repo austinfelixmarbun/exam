@@ -121,6 +121,7 @@ export class URLConstant {
     public static DeleteRefEmpAndEmpBankAcc = "/RefEmp/DeleteRefEmpAndEmpBankAcc";
     public static GetListEmployeebyRefEmpId = "/EmpPosition/GetListEmployeebyRefEmpId";
     public static GetEmpListByOfficeIdAndIsActive = "/RefEmp/GetEmpListByOfficeIdAndIsActive";
+    public static GetEmpForUpdateById = environment.FoundationR3Url + "/RefEmp/GetRefEmpForUpdateByRefEmpId"
 
     //EMP_POSITION
     public static GetEmpPositionPaging = "/EmpPosition/GetEmpPositionPaging";

@@ -1,3 +1,4 @@
+import { AdInsModule } from "app/components/adins-module/adins.module";
 import { EmployeeRoutingModule } from 'app/employee/employee-routing.module';
 import { EmployeeAddComponent } from 'app/employee/employee-add/employee-add.component';
 import { EmployeeComponent } from 'app/employee/employee.component';
@@ -11,16 +12,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LeaveMaintenanceComponent } from './leave-maintenance/leave-maintenance/leave-maintenance.component';
 import { LeaveMaintenanceAddEditComponent } from './leave-maintenance/leave-maintenance-add-edit/leave-maintenance-add-edit.component';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
-import { UCSearchModule } from '@adins/ucsearch';
-import { UcgridfooterModule } from '@adins/ucgridfooter';
-import { UcpagingModule } from '@adins/ucpaging';
-import { UclookupgenericModule } from '@adins/uclookupgeneric';
-import { UcSubsectionModule } from '@adins/uc-subsection';
 import { EmployeeBusinessunitAddComponent } from './employee-businessunit-add/employee-businessunit-add.component';
 import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-paging/employee-businessunit-paging.component';
-import { UcviewgenericModule } from '@adins/ucviewgeneric';
-import { UcShowErrorsModule } from '@adins/uc-show-errors';
-import { UcaddressModule } from '@adins/ucaddress';
 
 @NgModule({
   imports: [
@@ -30,16 +23,7 @@ import { UcaddressModule } from '@adins/ucaddress';
     HttpModule,
     NgbModule,
     SharingComponentModule,
-    UCSearchModule,
-    UclookupgenericModule,
-    UcgridfooterModule,
-    UcviewgenericModule,
-    ReactiveFormsModule,
-    UcSubsectionModule,
-    UcpagingModule,
-    UcSubsectionModule,
-    UcShowErrorsModule,
-    UcaddressModule
+    AdInsModule
   ],
   declarations: [
     EmployeePositionAddComponent,
