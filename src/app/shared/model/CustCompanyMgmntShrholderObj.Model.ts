@@ -5,6 +5,7 @@ export class CustCompanyMgmntShrholderObj {
     MrJobPositionCode: any;
     SharePrcnt: number;
     IsSigner: any;
+    IsOwner : any;
     MrIdTypeCode: any;
     IdNo: any;
     IdExpiredDt: any;

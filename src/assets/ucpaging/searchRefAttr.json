@@ -28,28 +28,6 @@
         },
         {
             "type": "dropdown",
-            "name": "IS_SYSTEM",
-            "id": "IsSystem",
-            "value": "",
-            "placeholder": "Placeholder",
-            "isFromURL": false,
-            "isSelectOne" : false,
-            "url": "",
-            "label": "System",
-            "items": [
-                {
-                    "key": "1",
-                    "value": "Yes"
-                },
-                {
-                    "key": "0",
-                    "value": "No"
-                }
-            ],
-            "itemsUrl": []
-        },
-        {
-            "type": "dropdown",
             "name": "IS_ACTIVE",
             "id": "IsActive",
             "value": "",
@@ -97,12 +75,6 @@
         {
             "type" : "sort", 
             "position" : "left", 
-            "label" : "System", 
-            "name" : "IS_SYSTEM"
-        },
-        {
-            "type" : "sort", 
-            "position" : "left", 
             "label" : "Active Status", 
             "name" : "IS_ACTIVE"
         },
@@ -127,11 +99,6 @@
             "type" : "text", 
             "position" : "left", 
             "property" : "attrGroup" 
-        },
-        {
-            "type" : "boolean", 
-            "position" : "left", 
-            "property" : "isSystem" 
         },
         {
             "type" : "boolean", 

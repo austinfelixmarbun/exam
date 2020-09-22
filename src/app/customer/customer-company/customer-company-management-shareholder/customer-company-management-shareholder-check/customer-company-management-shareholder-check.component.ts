@@ -20,6 +20,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 })
 export class CustomerCompanyManagementShareholderCheckComponent implements OnInit {
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
+  @Output() IsOwner: EventEmitter<object> = new EventEmitter();
   @Input() TotalShare: number;
 
   tempCustCompanyObj: any;
@@ -33,7 +34,7 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   DeleteCustCompanyMgmntShrholderUrl: string;
   getListCompanyManagementShareholderByCustCompanyIdUrl: string;
   resCustObj: any;
-
+  isOwner: boolean = false;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.getCustCompanyIdUrl = URLConstant.GetCustCompanyByCustId;
     this.getListCompanyManagementShareholderByCustCompanyIdUrl = URLConstant.GetListCustCompanyMgmntShrholderByCustCompanyId;
@@ -109,11 +110,17 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
         this.tempCustCompanyObj = response;
         this.http.post(this.getListCompanyManagementShareholderByCustCompanyIdUrl, this.tempCustCompanyObj).subscribe(
           (response) => {
-            this.tempListCompanyManagementShareholder = response["ReturnObject"];
+            this.tempListCompanyManagementShareholder = response["ReturnObject"]; 
+            let temp = this.tempListCompanyManagementShareholder.find(element => element.IsOwner == true);
+            if( temp !=null ){
+              this.isOwner = true;
+            }else{
+              this.isOwner = false;
+            } 
+            this.IsOwner.emit({ isOwner: this.isOwner });
             if (this.tempListCompanyManagementShareholder.length != 0) {
               this.TotalShare = this.tempListCompanyManagementShareholder[0].TotalShare;
-            }
-
+            } 
             //this.outputValue.emit({ TotalShare: this.TotalShare});
           });
       }
