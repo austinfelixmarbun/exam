@@ -1,7 +1,7 @@
 import { UserPagingComponent } from 'app/system-setting/user/user-paging/user-paging.component';
-import { NgModule, forwardRef } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SystemSettingRoutingModule } from 'app/system-setting/system-setting-routing.module';
@@ -12,11 +12,9 @@ import { RoleUserComponent } from 'app/system-setting/role/role-user/role-user.c
 import { RoleFormComponent } from 'app/system-setting/role/role-form/role-form.component';
 import { UserChangePasswordComponent } from 'app/system-setting/user/user-change-password/user-change-password.component';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
-import { LookupemployeeComponent, LookupemployeeModule } from '@adins/lookupemployee';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
-import { LookuproleModule } from '@adins/lookuprole';
 import { UcpagingModule } from '@adins/ucpaging';
 import { UcSubsectionModule } from '@adins/uc-subsection'; 
 import { NotificationPagingComponent } from 'app/system-setting/notification/notification-paging/notification-paging.component';
@@ -49,8 +47,6 @@ import { UcaddtotempModule } from '@adins/ucaddtotemp';
     UcgridfooterModule,
     UcpagingModule,
     UcSubsectionModule,
-    LookupemployeeModule,
-    LookuproleModule,
     ReactiveFormsModule,
     TreeViewModule,
     NgMultiSelectDropDownModule,
@@ -80,12 +76,7 @@ import { UcaddtotempModule } from '@adins/ucaddtotemp';
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [
-    NGXToastrService,
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() =>LookupemployeeComponent),
-      multi: true
-    }
+    NGXToastrService
   ]
 })
 export class SystemSettingModule { }

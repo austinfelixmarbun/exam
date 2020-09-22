@@ -1,6 +1,5 @@
 import { OrgJobTitlePagingComponent } from './org-mdl-struc/org-job-title-paging/org-job-title-paging.component';
-import { OrgJobTitleDetailComponent } from './org-mdl-struc/org-job-title-detail/org-job-title-detail.component';
-import { NgModule, NgModuleFactory } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrganizationRoutingModule } from 'app/organization/organization-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,10 +18,6 @@ import { OrgMdlStrucPagingComponent } from 'app/organization/org-mdl-struc/org-m
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
-import { LookuporgjobtitleModule } from '@adins/lookuporgjobtitle';
-import { LookuporgmdlstrucModule } from '@adins/lookuporgmdlstruc';
-import { LookuprefjobtitleModule } from '@adins/lookuprefjobtitle';
-import { lookupbizunitmodule } from '@adins/lookupbizunit';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
 import { MemberBusinessUnitComponent } from './business-unit/member-business-unit/member-business-unit.component';
@@ -40,10 +35,6 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
     SharingComponentModule,
     UCSearchModule,
     UcgridfooterModule,
-    LookuporgjobtitleModule,
-    LookuprefjobtitleModule,
-    lookupbizunitmodule,
-    LookuporgmdlstrucModule,
     UclookupgenericModule,
     UcpagingModule,
     ReactiveFormsModule,
@@ -63,7 +54,6 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
     OrganizationModelDetailComponent,
     OrgMdlStrucPagingComponent,
     OrgMdlStrucDetailComponent,
-    OrgJobTitleDetailComponent,
     OrgJobTitlePagingComponent,
     MemberBusinessUnitComponent
 
