@@ -112,19 +112,14 @@ export class EditMainDataPersonalComponent implements OnInit {
       }
     );
     var refMasterObjCustModel = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
-      ReserveField1: CommonConstant.CustTypePersonal,
-      RowVersion: ""
+      MrCustTypeCode: CommonConstant.CustTypePersonal
     }
-
-    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
       (response) => {
-        this.tempCustModel = response[CommonConstant.ReturnObj];
-        if(this.tempCustModel.length > 0){
-          this.CustomerPersonalForm.patchValue({
-            CustModel: this.tempCustModel[0].Key
-          });
-        }
+        this.tempCustModel = response["ReturnObject"];
+        this.CustomerPersonalForm.patchValue({
+          CustModel: this.tempCustModel[0].Key
+        });
       }
     );
     this.custObj = new CustObj();

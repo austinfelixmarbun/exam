@@ -34,6 +34,7 @@ export class CustAttrSectionComponent implements OnInit {
   isAdd: boolean = true; 
   isReady : boolean= false;
   attrGroup: string;
+  From : string;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -45,6 +46,11 @@ export class CustAttrSectionComponent implements OnInit {
     this.pageType = "add";
     this.listCustAttrContent = new Array<Object>();
     this.isCustAttrReady = false;
+    this.route.queryParams.subscribe(params => {
+      if (params["IdCust"] != null) {
+        this.From = params["From"];
+      } 
+    });
   }
 
   OtherInformationForm = this.fb.group({
@@ -141,6 +147,7 @@ export class CustAttrSectionComponent implements OnInit {
   }
 
   SaveForm(){
+    if (this.OtherInformationForm.valid != true) return;
     var formValue = this.CustAttrContentForm.value;
     var custAttrRequest = new Array<Object>();
     var url = URLConstant.AddEditListCustAttrContent  
@@ -166,7 +173,11 @@ export class CustAttrSectionComponent implements OnInit {
           this.httpClient.post(URLConstant.AddEditCustOtherInfo, custOtherInfo).subscribe(
             (response) => { 
               this.toastr.successMessage(response["Message"]);
-              this.outputTab.emit({ stepMode: "next"});
+                 if (this.From == 'CustPaging') {
+                  this.router.navigate(["/Customer/Paging"]);
+            } else {
+              this.router.navigate(["/Customer/EditMainData/Paging"]);
+            }
             }); 
 
         },
@@ -204,12 +215,15 @@ export class CustAttrSectionComponent implements OnInit {
 
                 var formGroupObject = new Object();
                 formGroupObject["CustAttrContentId"] = [0];
-                formGroupObject["RefAttrId"] = [refAttr["RefAttrId"], [Validators.required]];
-                if (refAttr["AttrInputType"] == 'L') { 
+                formGroupObject["RefAttrId"] = [refAttr["RefAttrId"]];
+                if(refAttr["AttrInputType"] == 'T'&& refAttr["PatternValue"] != "" && refAttr["PatternValue"] != null){ 
+                  formGroupObject["AttrValue"] = ['', [Validators.pattern(refAttr["PatternValue"])]];
+                } 
+                else if (refAttr["AttrInputType"] == 'L') { 
                   var temp = refAttr["AttrValue"].split(";"); 
-                  formGroupObject["AttrValue"] = [temp[0], [Validators.required]];
+                  formGroupObject["AttrValue"] = [temp[0]];
                 }else{
-                  formGroupObject["AttrValue"] = [refAttr["AttrValue"], [Validators.required]];
+                  formGroupObject["AttrValue"] = [null];
                 }
 
                 parentFormGroup[refAttr["AttrCode"]] = this.fb.group(formGroupObject);
@@ -221,7 +235,7 @@ export class CustAttrSectionComponent implements OnInit {
                   _temp[refAttr["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
                   _temp[refAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                   _temp[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-
+                  _temp[refAttr["AttrCode"]].isRequired = false;
                   var arrAddCrit = new Array();
                   var critAssetObj = new CriteriaObj();
                   critAssetObj.DataType = 'text';
@@ -254,12 +268,15 @@ export class CustAttrSectionComponent implements OnInit {
                 if (item == undefined) {
                   var formGroupObject = new Object();
                   formGroupObject["CustAttrContentId"] = [0];
-                  formGroupObject["RefAttrId"] = [refAttr["RefAttrId"], [Validators.required]];
-                  if (refAttr["AttrInputType"] == 'L') { 
+                  formGroupObject["RefAttrId"] = [refAttr["RefAttrId"]];
+                  if(refAttr["AttrInputType"] == 'T' && refAttr["PatternValue"] != "" && refAttr["PatternValue"] != null){ 
+                    formGroupObject["AttrValue"] = ['', Validators.pattern(refAttr["PatternValue"])];
+                  } 
+                  else if (refAttr["AttrInputType"] == 'L') { 
                     var temp = refAttr["AttrValue"].split(";"); 
-                    formGroupObject["AttrValue"] = [temp[0], [Validators.required]];
+                    formGroupObject["AttrValue"] = [temp[0]];
                   } else{
-                    formGroupObject["AttrValue"] = [refAttr["AttrValue"], [Validators.required]];
+                    formGroupObject["AttrValue"] = [null];
                   }
                   parentFormGroup[refAttr["AttrCode"]] = this.fb.group(formGroupObject);
 
@@ -271,6 +288,7 @@ export class CustAttrSectionComponent implements OnInit {
                     _temp[refAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                     _temp[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
 
+                    _temp[refAttr["AttrCode"]].isRequired = false;
                     var arrAddCrit = new Array();
                     var critAssetObj = new CriteriaObj();
                     critAssetObj.DataType = 'text';
@@ -283,11 +301,16 @@ export class CustAttrSectionComponent implements OnInit {
 
                 } else { 
                   var formGroupObject = new Object();
-                  formGroupObject["CustAttrContentId"] = [item["CustAttrContentId"], [Validators.required]];
-                  formGroupObject["RefAttrId"] = [item["RefAttrId"], [Validators.required]];
-                  formGroupObject["AttrValue"] = [item["AttrValue"], [Validators.required]];
-                  parentFormGroup[item["AttrCode"]] = this.fb.group(formGroupObject);
+                  formGroupObject["CustAttrContentId"] = [item["CustAttrContentId"]];
+                  formGroupObject["RefAttrId"] = [item["RefAttrId"]];
+                  if(refAttr["AttrInputType"] == 'T' && (refAttr["PatternValue"] != "" && refAttr["PatternValue"] != null)){ 
+                    formGroupObject["AttrValue"] = [ item["AttrValue"],[Validators.pattern(refAttr['PatternValue'])]   ];
+                  }  else{ 
+                    formGroupObject["AttrValue"] = [item["AttrValue"]];
+                  }
  
+                  parentFormGroup[item["AttrCode"]] = this.fb.group(formGroupObject);
+
                   if (item["AttrInputType"] == 'RM') {
                     _temp[item["AttrCode"]] = new InputLookupObj();
                     _temp[item["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -297,6 +320,7 @@ export class CustAttrSectionComponent implements OnInit {
                     _temp[item["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                     _temp[item["AttrCode"]].jsonSelect = { Descr: item["Descr"] }
 
+                  _temp[refAttr["AttrCode"]].isRequired = false;
                     var arrAddCrit = new Array();
                     var critAssetObj = new CriteriaObj();
                     critAssetObj.DataType = 'text';

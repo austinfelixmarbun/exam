@@ -110,15 +110,12 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         }
       }
     );
-    var refMasterObjCustModel = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
-      ReserveField1: CommonConstant.CustTypePersonal,
-      RowVersion: ""
+   var refMasterObjCustModel = {
+      MrCustTypeCode: CommonConstant.CustTypePersonal
     }
-
-    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
       (response) => {
-        this.tempCustModel = response[CommonConstant.ReturnObj];
+        this.tempCustModel = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
           CustModel: this.tempCustModel[0].Key
         });

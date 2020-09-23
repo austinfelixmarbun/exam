@@ -52,7 +52,7 @@
       <!-- <div>{{CustAttrContentForm.controls[this.listCustAttrContent[0]["AttrCode"]].controls["RefAttrId"].value}}</div> -->
       <div class="form-group row" *ngFor="let attr of RefAttrList">
         <div class="row col-md-12" *ngIf="attr.AttrInputType == 'T'" [formGroupName]="attr.AttrCode" style="margin: 0;">
-          <label class="col-md-3 adInsLabel adins-required-label" style="padding-left: 0;"
+          <label class="col-md-3 adInsLabel" style="padding-left: 0;"
             translate>{{attr.AttrName}}</label>
           <div class="col-md-9" style="padding-right: 0; display: inline-block;">
             <input type="text" class="form-control adInsInput" formControlName="AttrValue"
@@ -63,17 +63,17 @@
           </div>
         </div>
         <div class="row col-md-12" *ngIf="attr.AttrInputType == 'N'" [formGroupName]="attr.AttrCode" style="margin: 0;">
-          <label class="col-md-3 adInsLabel adins-required-label" style="padding-left: 0"
+          <label class="col-md-3 adInsLabel" style="padding-left: 0"
             translate>{{attr.AttrName}}</label>
           <div class="col-md-9" style="padding-right: 0; display: inline-block;">
-            <input type="number" class="form-control adInsInput" formControlName="AttrValue"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustAttrContentForm.controls[attr['AttrCode']].controls.AttrValue.invalid }" />
+            <input currencyMask type="" class="form-control adInsInput" formControlName="AttrValue"
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustAttrContentForm.controls[attr['AttrCode']].controls.AttrValue.invalid }"[options]="{align: 'right'}" />
             <lib-uc-show-errors [control]="CustAttrContentForm.controls[attr['AttrCode']].controls.AttrValue"
               [submit]="enjiForm.submitted"></lib-uc-show-errors>
           </div>
         </div>
         <div class="row col-md-12" *ngIf="attr.AttrInputType == 'L'" [formGroupName]="attr.AttrCode" style="margin: 0;">
-          <label class="col-md-3 adInsLabel adins-required-label" style="padding-left: 0;"
+          <label class="col-md-3 adInsLabel" style="padding-left: 0;"
             translate>{{attr.AttrName}}</label>
           <div class="col-md-9" style="padding-right: 0; display: inline-block;">
             <select class="form-control adInsInput" formControlName="AttrValue"
@@ -88,7 +88,7 @@
         </div>
         <div class="row col-md-12" *ngIf="attr.AttrInputType == 'TA'" [formGroupName]="attr.AttrCode"
           style="margin: 0;">
-          <label class="col-md-3 adInsLabel adins-required-label" style="padding-left: 0;"
+          <label class="col-md-3 adInsLabel" style="padding-left: 0;"
             translate>{{attr.AttrName}}</label>
           <div class="col-md-9" style="padding-right: 0; display: inline-block;">
             <textarea class="form-control adInsInput" formControlName="AttrValue"
@@ -98,7 +98,7 @@
           </div>
         </div>
         <div class="row col-md-12" *ngIf="attr.AttrInputType == 'D'" [formGroupName]="attr.AttrCode" style="margin: 0;">
-          <label class="col-md-3 adInsLabel adins-required-label" style="padding-left: 0;"
+          <label class="col-md-3 adInsLabel" style="padding-left: 0;"
             translate>{{attr.AttrName}}</label>
           <div class="col-md-9" style="padding-right: 0; display: inline-block;">
             <input type="date" class="form-control adInsInput" formControlName="AttrValue"
@@ -108,7 +108,7 @@
           </div>
         </div>
         <div class="row col-md-12" *ngIf="attr.AttrInputType == 'P'" [formGroupName]="attr.AttrCode" style="margin: 0;">
-          <label class="col-md-3 adInsLabel adins-required-label" style="padding-left: 0;"
+          <label class="col-md-3 adInsLabel" style="padding-left: 0;"
             translate>{{attr.AttrName}}</label>
           <div class="col-md-9" style="padding-right: 0; display: inline-block;">
             <input type="" currencyMask class="form-control adInsInput" formControlName="AttrValue"
@@ -119,7 +119,7 @@
         </div>
         <div class="row col-md-12" *ngIf="attr.AttrInputType == 'RM'" [formGroupName]="attr.AttrCode"
           style="margin: 0;">
-          <label class="col-md-3 adInsLabel adins-required-label" style="padding-left: 0;"
+          <label class="col-md-3 adInsLabel" style="padding-left: 0;"
             translate>{{attr.AttrName}}</label>
           <div class="col-md-9" style="padding-right: 0; display: inline-block;">
             <lib-uclookupgeneric [lookupInput]="ListInputLookUpObj[0][attr['AttrCode']]"
