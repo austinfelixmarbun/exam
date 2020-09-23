@@ -453,12 +453,16 @@ export class CustFinDataTabComponent implements OnInit {
 
                 var formGroupObject = new Object();
                 formGroupObject["CustAttrContentId"] = [0];
-                formGroupObject["RefAttrId"] = [refAttr["RefAttrId"], [Validators.required]];
-                if (refAttr["AttrInputType"] == 'L') {
+                formGroupObject["RefAttrId"] = [refAttr["RefAttrId"]];
+ 
+                if(refAttr["AttrInputType"] == 'T' && refAttr["PatternValue"] != "" && refAttr["PatternValue"] != null ){ 
+                  formGroupObject["AttrValue"] = ['', [Validators.pattern(refAttr["PatternValue"])]];
+                } 
+                else if (refAttr["AttrInputType"] == 'L') {
                   var temp = refAttr["AttrValue"].split(";");
-                  formGroupObject["AttrValue"] = [temp[0], [Validators.required]];
+                  formGroupObject["AttrValue"] = [temp[0]];
                 } else {
-                  formGroupObject["AttrValue"] = [refAttr["AttrValue"], [Validators.required]];
+                  formGroupObject["AttrValue"] = [''];
                 }
                 parentFormGroup[refAttr["AttrCode"]] = this.fb.group(formGroupObject);
 
@@ -469,7 +473,7 @@ export class CustFinDataTabComponent implements OnInit {
                   _temp[refAttr["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
                   _temp[refAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                   _temp[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-
+                  _temp[refAttr["AttrCode"]].isRequired = false;
                   var arrAddCrit = new Array();
                   var critAssetObj = new CriteriaObj();
                   critAssetObj.DataType = 'text';
@@ -504,12 +508,16 @@ export class CustFinDataTabComponent implements OnInit {
                 if (item == undefined) {
                   var formGroupObject = new Object();
                   formGroupObject["CustAttrContentId"] = [0];
-                  formGroupObject["RefAttrId"] = [refAttr["RefAttrId"], [Validators.required]];
-                  if (refAttr["AttrInputType"] == 'L') {
+                  formGroupObject["RefAttrId"] = [refAttr["RefAttrId"]];
+ 
+                  if(refAttr["AttrInputType"] == 'T' && refAttr["PatternValue"] != "" && refAttr["PatternValue"] != null ){ 
+                    formGroupObject["AttrValue"] = ['', [Validators.pattern(refAttr["PatternValue"])]];
+                  } 
+                  else if (refAttr["AttrInputType"] == 'L') {
                     var temp = refAttr["AttrValue"].split(";");
-                    formGroupObject["AttrValue"] = [temp[0], [Validators.required]];
+                    formGroupObject["AttrValue"] = [temp[0]];
                   } else {
-                    formGroupObject["AttrValue"] = [refAttr["AttrValue"], [Validators.required]];
+                    formGroupObject["AttrValue"] = [''];
                   }
                   parentFormGroup[refAttr["AttrCode"]] = this.fb.group(formGroupObject);
 
@@ -520,8 +528,9 @@ export class CustFinDataTabComponent implements OnInit {
                     _temp[refAttr["AttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
                     _temp[refAttr["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
                     _temp[refAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                    _temp[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-
+                    _temp[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json"; 
+                    _temp[refAttr["AttrCode"]].isRequired = false;
+                    
                     var arrAddCrit = new Array();
                     var critAssetObj = new CriteriaObj();
                     critAssetObj.DataType = 'text';
@@ -534,11 +543,16 @@ export class CustFinDataTabComponent implements OnInit {
 
                 } else {
                   var formGroupObject = new Object();
-                  formGroupObject["CustAttrContentId"] = [item["CustAttrContentId"], [Validators.required]];
-                  formGroupObject["RefAttrId"] = [item["RefAttrId"], [Validators.required]];
-                  formGroupObject["AttrValue"] = [item["AttrValue"], [Validators.required]];
-                  parentFormGroup[item["AttrCode"]] = this.fb.group(formGroupObject);
+                  formGroupObject["CustAttrContentId"] = [item["CustAttrContentId"]];
+                  formGroupObject["RefAttrId"] = [item["RefAttrId"]]; 
+                 
 
+                  if (refAttr["AttrInputType"] == 'T' && refAttr["PatternValue"] != ""&& refAttr["PatternValue"] != null) {
+                    formGroupObject["AttrValue"] = [item["AttrValue"], [ Validators.pattern(refAttr["PatternValue"])]];
+                  } else {
+                    formGroupObject["AttrValue"] = [item["AttrValue"]];
+                  }
+                  parentFormGroup[item["AttrCode"]] = this.fb.group(formGroupObject);
                   if (item["AttrInputType"] == 'RM') {
                     _temp[item["AttrCode"]] = new InputLookupObj();
                     _temp[item["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -546,6 +560,7 @@ export class CustFinDataTabComponent implements OnInit {
                     _temp[item["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
                     _temp[item["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                     _temp[item["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+                    _temp[refAttr["AttrCode"]].isRequired = false;
                     _temp[item["AttrCode"]].jsonSelect = { Descr: item["Descr"] }
                     var arrAddCrit = new Array();
                     var critAssetObj = new CriteriaObj();

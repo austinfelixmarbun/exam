@@ -41,7 +41,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   addManagementShareholderUrl : string;
   editManagementShareholderUrl : string;
   getCustCompanyMgmntShrholderUrl : string;
-  GetListActiveRefMasterWithReserveFieldAllUrl: string;
+  getListKeyValueByMrCustTypeCode: string;
 
   ManagementShareholderForm = this.fb.group({
     MgmntShrholderName: ['', [Validators.required,Validators.maxLength(100)]],
@@ -66,7 +66,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholder;
     this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
     this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholder; 
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListKeyValueByMrCustTypeCode = URLConstant.GetListKeyValueByMrCustTypeCode;
   }
 
   ngOnInit() {
@@ -127,21 +127,20 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
         }
       }
     );
-    var refMasterObjMrCustModelCode = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
-      Reservefield1: CommonConstant.CustTypePersonal,
-      RowVersion: ""
+    var refMasterObjCustModel = {
+      MrCustTypeCode: CommonConstant.CustTypePersonal
     }
-    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjMrCustModelCode).subscribe(
+    this.http.post(this.getListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
       (response) => {
+        this.tempMrCustModelCode = response;
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.tempMrCustModelCode = response[CommonConstant.ReturnObj];
           this.ManagementShareholderForm.patchValue({
             MrCustModelCode: this.tempMrCustModelCode[0].Key
           });
-        }
       }
-    );
+    }
+    ); 
     if(this.CustCompanyMgmntShrholderId!=null){
       this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
       this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId  = this.CustCompanyMgmntShrholderId;
