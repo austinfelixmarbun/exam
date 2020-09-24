@@ -63,7 +63,7 @@ export class EmployeeAddComponent implements OnInit {
     PhnArea1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     City: ['', [Validators.required]],
     Phn1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    PhnExt1: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(4)]],
+    PhnExt1: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(4)]],
     PhnArea2: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(4)]],
     Phn2: ['', [Validators.pattern('^[0-9]+$')]],
     PhnExt2: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(4)]],
