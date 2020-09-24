@@ -13,10 +13,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-cust-fin-data-tab',
@@ -35,10 +31,6 @@ export class CustFinDataTabComponent implements OnInit {
   mrMaritalStatCode: string;
   maritalConstant: string = CommonConstant.MR_MARITAL_STAT_CODE_MARRIED;
   Page: string;
-  RefAttrList: any;
-  ListAttrContent: any;
-  isRefAttrFormReady: boolean = false;
-  ListInputLookUpObj = new Array();
   attrGroup:string;
   CustPersonalFinDataForm = this.fb.group({
     CustPersonalFinDataId: [0, [Validators.required]],
@@ -87,8 +79,6 @@ export class CustFinDataTabComponent implements OnInit {
     RowVersion: ['']
   });
 
-  RefAttrForm: FormGroup;
-  isAdd: boolean = true;
   constructor(
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
@@ -110,7 +100,6 @@ export class CustFinDataTabComponent implements OnInit {
   }
 
   async ngOnInit() {
-    console.log("aaaa")
     this.attrGroup = this.MrCustTypeCode==CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyFinData : CommonConstant.AttrGroupCustPersonalFinData;
  
     var datePipe = new DatePipe("en-US");
@@ -162,7 +151,7 @@ export class CustFinDataTabComponent implements OnInit {
         }
       );
 
-      this.bindFinancialAttribute();
+     // this.bindFinancialAttribute();
 
     }
     else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
@@ -214,7 +203,7 @@ export class CustFinDataTabComponent implements OnInit {
         }
       );
 
-      this.bindFinancialAttribute();
+    //  this.bindFinancialAttribute();
 
     }
   }
@@ -309,8 +298,7 @@ export class CustFinDataTabComponent implements OnInit {
   //   }
   // }
 
-  next() {
-    if (this.RefAttrForm.valid != true) return;
+  next() { 
     var response;
     var url;
 
@@ -371,10 +359,12 @@ export class CustFinDataTabComponent implements OnInit {
         response.SpouseMonthlyIncomeAmt = this.spouseMonthlyIncomeAmt;
       }
       this.httpClient.post(url, response).subscribe(
-        (response) => {
-          this.toastr.successMessage(response["Message"]);
-
-          var formValue = this.RefAttrForm.value;
+        (response) => { 
+          if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
+            var formValue = this.CustCompanyFinDataForm['controls']['AttrList'].value;
+          } else {
+            var formValue = this.CustPersonalFinDataForm['controls']['AttrList'].value;
+          }
           var custAttrRequest = new Array<Object>();
           var urlAttr = URLConstant.AddEditListCustAttrContent;
           if (Object.keys(formValue).length > 0 && formValue.constructor === Object) {
@@ -400,184 +390,11 @@ export class CustFinDataTabComponent implements OnInit {
               }
             );
           }
-          // if(this.MrCustTypeCode == CommonConstant.CustTypePersonal){  
-          //   // if (this.Page != null) {
-          //   //   this.router.navigate(["/Customer/EditMainData/Paging"]);
-          //   // } else {
-          //   //   this.router.navigate(["/Customer/Paging"]);
-          //   // }
-          //   this.outputTab.emit({ stepMode: "next"});
-          // }
-          // else if(this.MrCustTypeCode == CommonConstant.CustTypeCompany){
-          //   this.outputTab.emit({ stepMode: "next"});
-          // }  
         }
       );
     }
     else {
       this.toastr.warningMessage("Please Calculate First");
     }
-  }
-  SplitAttrListValue(value, attrCode) {
-    return value.split(";");
-  }
-  getLookUp(e, AttrCode) {
-    console.log(this.RefAttrForm)
-    this.RefAttrForm["controls"][AttrCode].patchValue({
-      AttrValue: e.MasterCode
-    });
-    console.log(this.RefAttrForm)
-
-  }
-  async bindFinancialAttribute() {
-    var AttrContent = {
-      CustId: this.CustId,
-      AttrGroup: this.attrGroup
-    };
-
-    await this.httpClient.post(URLConstant.GetListCustAttrContentByCustIdAndAttrGroup, AttrContent).toPromise().then(
-      (response) => {
-        console.log(response)
-        this.ListAttrContent = response[CommonConstant.ReturnObj]
-        if (this.ListAttrContent.length < 1) {
-          var custGrp = {
-            AttrGroup: this.attrGroup
-          };
-          this.httpClient.post(URLConstant.GetListActiveRefAttrByAttrGroup, custGrp).subscribe(
-            (response: any) => {
-              var parentFormGroup = new Object();
-              this.RefAttrList = response[CommonConstant.ReturnObj];
-
-              let _temp = {};
-              for (const refAttr of this.RefAttrList) {
-
-                var formGroupObject = new Object();
-                formGroupObject["CustAttrContentId"] = [0];
-                formGroupObject["RefAttrId"] = [refAttr["RefAttrId"]];
- 
-                if(refAttr["AttrInputType"] == 'T' && refAttr["PatternValue"] != "" && refAttr["PatternValue"] != null ){ 
-                  formGroupObject["AttrValue"] = ['', [Validators.pattern(refAttr["PatternValue"])]];
-                } 
-                else if (refAttr["AttrInputType"] == 'L') {
-                  var temp = refAttr["AttrValue"].split(";");
-                  formGroupObject["AttrValue"] = [temp[0]];
-                } else {
-                  formGroupObject["AttrValue"] = [''];
-                }
-                parentFormGroup[refAttr["AttrCode"]] = this.fb.group(formGroupObject);
-
-                if (refAttr["AttrInputType"] == 'RM') {
-                  _temp[refAttr["AttrCode"]] = new InputLookupObj();
-                  _temp[refAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                  _temp[refAttr["AttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-                  _temp[refAttr["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
-                  _temp[refAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                  _temp[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                  _temp[refAttr["AttrCode"]].isRequired = false;
-                  var arrAddCrit = new Array();
-                  var critAssetObj = new CriteriaObj();
-                  critAssetObj.DataType = 'text';
-                  critAssetObj.restriction = AdInsConstant.RestrictionEq;
-                  critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
-                  critAssetObj.value = refAttr.AttrValue;
-                  arrAddCrit.push(critAssetObj);
-                  _temp[refAttr["AttrCode"]].addCritInput = arrAddCrit;
-                }
-
-              }
-              this.ListInputLookUpObj.push(_temp);
-              this.RefAttrForm = this.fb.group(parentFormGroup);
-              this.isRefAttrFormReady = true;
-
-            }
-          );
-        }
-        else {
-          this.isAdd = false;
-          var parentFormGroup = new Object();
-          let _temp = {};
-
-          var custGrp = {
-            AttrGroup: this.attrGroup
-          };
-          this.httpClient.post(URLConstant.GetListActiveRefAttrByAttrGroup, custGrp).subscribe(
-            (response: any) => {
-              this.RefAttrList = response[CommonConstant.ReturnObj];
-              for (const refAttr of this.RefAttrList) {
-                var item = this.ListAttrContent.find(x => x.RefAttrId == refAttr.RefAttrId);
-                if (item == undefined) {
-                  var formGroupObject = new Object();
-                  formGroupObject["CustAttrContentId"] = [0];
-                  formGroupObject["RefAttrId"] = [refAttr["RefAttrId"]];
- 
-                  if(refAttr["AttrInputType"] == 'T' && refAttr["PatternValue"] != "" && refAttr["PatternValue"] != null ){ 
-                    formGroupObject["AttrValue"] = ['', [Validators.pattern(refAttr["PatternValue"])]];
-                  } 
-                  else if (refAttr["AttrInputType"] == 'L') {
-                    var temp = refAttr["AttrValue"].split(";");
-                    formGroupObject["AttrValue"] = [temp[0]];
-                  } else {
-                    formGroupObject["AttrValue"] = [''];
-                  }
-                  parentFormGroup[refAttr["AttrCode"]] = this.fb.group(formGroupObject);
-
-
-                  if (refAttr["AttrInputType"] == 'RM') {
-                    _temp[refAttr["AttrCode"]] = new InputLookupObj();
-                    _temp[refAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                    _temp[refAttr["AttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-                    _temp[refAttr["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
-                    _temp[refAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                    _temp[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json"; 
-                    _temp[refAttr["AttrCode"]].isRequired = false;
-                    
-                    var arrAddCrit = new Array();
-                    var critAssetObj = new CriteriaObj();
-                    critAssetObj.DataType = 'text';
-                    critAssetObj.restriction = AdInsConstant.RestrictionEq;
-                    critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
-                    critAssetObj.value = refAttr.AttrValue;
-                    arrAddCrit.push(critAssetObj);
-                    _temp[refAttr["AttrCode"]].addCritInput = arrAddCrit;
-                  }
-
-                } else {
-                  var formGroupObject = new Object();
-                  formGroupObject["CustAttrContentId"] = [item["CustAttrContentId"]];
-                  formGroupObject["RefAttrId"] = [item["RefAttrId"]]; 
-                 
-
-                  if (refAttr["AttrInputType"] == 'T' && refAttr["PatternValue"] != ""&& refAttr["PatternValue"] != null) {
-                    formGroupObject["AttrValue"] = [item["AttrValue"], [ Validators.pattern(refAttr["PatternValue"])]];
-                  } else {
-                    formGroupObject["AttrValue"] = [item["AttrValue"]];
-                  }
-                  parentFormGroup[item["AttrCode"]] = this.fb.group(formGroupObject);
-                  if (item["AttrInputType"] == 'RM') {
-                    _temp[item["AttrCode"]] = new InputLookupObj();
-                    _temp[item["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                    _temp[item["AttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-                    _temp[item["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
-                    _temp[item["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                    _temp[item["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                    _temp[refAttr["AttrCode"]].isRequired = false;
-                    _temp[item["AttrCode"]].jsonSelect = { Descr: item["Descr"] }
-                    var arrAddCrit = new Array();
-                    var critAssetObj = new CriteriaObj();
-                    critAssetObj.DataType = 'text';
-                    critAssetObj.restriction = AdInsConstant.RestrictionEq;
-                    critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
-                    critAssetObj.value = item.MasterCode;
-                    arrAddCrit.push(critAssetObj);
-                    _temp[item["AttrCode"]].addCritInput = arrAddCrit;
-                  }
-                }
-              }
-              this.ListInputLookUpObj.push(_temp);
-              this.RefAttrForm = this.fb.group(parentFormGroup);
-              this.isRefAttrFormReady = true;
-            });
-        }
-      });
   }
 }

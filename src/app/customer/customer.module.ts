@@ -90,6 +90,7 @@ import { CustAttrSectionComponent } from './cust-attr-section/cust-attr-section.
 import { CustomerViewCoyAddressComponent } from './customer-view/customer-view-coy-address/customer-view-coy-address.component';
 import { CustomerViewPersonalAddressComponent } from './customer-view/customer-view-personal-address/customer-view-personal-address.component';
 import { CustomerViewPersonalCustomerGroupComponent } from './customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component';
+import { CustAttrListComponent } from './cust-attr-list/cust-attr-list.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -196,7 +197,8 @@ export const customCurrencyMaskConfig = {
     CustAttrSectionComponent,
     CustomerViewCoyAddressComponent,
     CustomerViewPersonalAddressComponent,
-    CustomerViewPersonalCustomerGroupComponent
+    CustomerViewPersonalCustomerGroupComponent,
+    CustAttrListComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })
