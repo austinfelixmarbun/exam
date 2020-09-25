@@ -24,7 +24,6 @@ export class InputAddressObj {
     isRequired: boolean;
     environmentUrl: string;
     isReadonly: boolean;
-    requiredPhn1: boolean;
 
     constructor() {
         this.title = "Address Information";
@@ -46,6 +45,5 @@ export class InputAddressObj {
         this.isRequired = true;
         this.environmentUrl = environment.FoundationR3Url;
         this.isReadonly = false;
-        this.requiredPhn1 = false;
     }
 }
