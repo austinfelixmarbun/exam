@@ -54,7 +54,7 @@ export class CustAttrListComponent implements OnInit {
             AttrGroup: this.attrGroup
           };
           this.httpClient.post(URLConstant.GetListActiveRefAttrByAttrGroup, custGrp).subscribe(
-            (response: any) => {
+            async (response: any) => {
               var parentFormGroup = new Object();
               this.RefAttrList = response[CommonConstant.ReturnObj];
 
@@ -97,12 +97,12 @@ export class CustAttrListComponent implements OnInit {
                   tempLookup[refAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                   tempLookup[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
 
+                  tempLookup[refAttr["AttrCode"]].title = refAttr.AttrName;
                   if (refAttr["IsMandatory"] == true) {
                     tempLookup[refAttr["AttrCode"]].isRequired = true;
                   } else {
                     tempLookup[refAttr["AttrCode"]].isRequired = false;
                   }
-                  tempLookup[refAttr["AttrCode"]].title = refAttr.AttrName;
                   var arrAddCrit = new Array();
                   var critAssetObj = new CriteriaObj();
                   critAssetObj.DataType = 'text';
@@ -117,7 +117,7 @@ export class CustAttrListComponent implements OnInit {
                       RefMasterTypeCode: refAttr["AttrValue"],
                       MasterCode: refAttr["DefaultValue"]
                     };
-                    this.httpClient.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).subscribe(
+                  await this.httpClient.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).toPromise().then(
                       (response) => {
                         tempLookup[refAttr["AttrCode"]].jsonSelect = { Descr: response['Descr'] }
                       });
@@ -140,7 +140,7 @@ export class CustAttrListComponent implements OnInit {
             AttrGroup: this.attrGroup
           };
           this.httpClient.post(URLConstant.GetListActiveRefAttrByAttrGroup, custGrp).subscribe(
-            (response: any) => {
+            async (response: any) => {
               this.RefAttrList = response[CommonConstant.ReturnObj];
               for (const refAttr of this.RefAttrList) {
                 var item = this.ListAttrContent.find(x => x.RefAttrId == refAttr.RefAttrId);
@@ -187,18 +187,26 @@ export class CustAttrListComponent implements OnInit {
                         MasterCode: refAttr["DefaultValue"]
                       };
                       this.httpClient.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).subscribe(
-                        (response) => {
-
+                        (response) => { 
                           tempLookup[refAttr["AttrCode"]].jsonSelect = { Descr: response['Descr'] }
                         });
-                    }
+                    } 
+                    tempLookup[refAttr["AttrCode"]].title = refAttr.AttrName;
                     if (refAttr["IsMandatory"] == true) {
                       tempLookup[refAttr["AttrCode"]].isRequired = true;
                     } else {
                       tempLookup[refAttr["AttrCode"]].isRequired = false;
                     }
-                    tempLookup[refAttr["AttrCode"]].title = refAttr.AttrName;
-
+                    if (refAttr["DefaultValue"] != null) {
+                      var refMaster = {
+                        RefMasterTypeCode: refAttr["AttrValue"],
+                        MasterCode: refAttr["DefaultValue"]
+                      };
+                    await this.httpClient.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).toPromise().then(
+                        (response) => {
+                          tempLookup[refAttr["AttrCode"]].jsonSelect = { Descr: response['Descr'] }
+                        });
+                    }
                     var arrAddCrit = new Array();
                     var critAssetObj = new CriteriaObj();
                     critAssetObj.DataType = 'text';
@@ -207,16 +215,7 @@ export class CustAttrListComponent implements OnInit {
                     critAssetObj.value = refAttr.AttrValue;
                     arrAddCrit.push(critAssetObj);
                     tempLookup[refAttr["AttrCode"]].addCritInput = arrAddCrit;
-                    if (refAttr["DefaultValue"] != null) {
-                      var refMaster = {
-                        RefMasterTypeCode: refAttr["AttrValue"],
-                        MasterCode: refAttr["DefaultValue"]
-                      };
-                      this.httpClient.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).subscribe(
-                        (response) => {
-                          tempLookup[refAttr["AttrCode"]].jsonSelect = { Descr: response['Descr'] }
-                        });
-                    }
+              
                   }
 
                 } else {
@@ -245,13 +244,13 @@ export class CustAttrListComponent implements OnInit {
                     tempLookup[item["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
                     tempLookup[item["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                     tempLookup[item["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                    tempLookup[item["AttrCode"]].jsonSelect = { Descr: item["Descr"] }
                     tempLookup[refAttr["AttrCode"]].title = refAttr.AttrName;
                     if (refAttr["IsMandatory"] == true) {
                       tempLookup[refAttr["AttrCode"]].isRequired = true;
                     } else {
                       tempLookup[refAttr["AttrCode"]].isRequired = false;
                     }
+                     tempLookup[item["AttrCode"]].jsonSelect = { Descr: item["Descr"] }
                     var arrAddCrit = new Array();
                     var critAssetObj = new CriteriaObj();
                     critAssetObj.DataType = 'text';
