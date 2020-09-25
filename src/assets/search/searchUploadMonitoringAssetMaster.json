@@ -33,7 +33,7 @@
       "id": "UploadNoId",
       "value": "",
       "label": "Upload No",
-      "placeholder": "Placeholder",
+      "placeholder": "Placeholder"
       "datatype": "text"
     },
     {
