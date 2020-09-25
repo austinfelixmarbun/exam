@@ -7,7 +7,7 @@
     "start": "ng serve",
     "build": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --aot --base-href /Foundation/",
     "sit": "ng build --configuration=sit --base-href /FOUNDATION_SIT/",
-    "demo": "ng build --configuration=demo_env --base-href /FOUNDATION_DEMO/",
+    "demo": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=demo_env --base-href /FOUNDATION_DEMO/",
     "test": "ng test",
     "version:patch": "npm version prerelease -m UpVersion && git push origin HEAD:master --follow-tags --force",
     "lint": "ng lint",
