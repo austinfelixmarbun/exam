@@ -180,4 +180,8 @@ export class CommonConstant {
 
     //Attribute Type Code
     public static AttrTypeCodeMaster = "MASTER";
+    public static AttrGroupCustCompanyFinData = "CUST_COMPANY_FINDATA"
+    public static AttrGroupCustPersonalFinData = "CUST_PERSONAL_FINDATA"
+    public static AttrGroupCustCompanyOther = "CUST_COMPANY_OTH"
+    public static AttrGroupCustPersonalOther= "CUST_PERSONAL_OTH"
 }
