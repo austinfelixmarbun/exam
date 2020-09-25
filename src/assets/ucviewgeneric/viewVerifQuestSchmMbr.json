@@ -1,27 +1,27 @@
 {
-    "title": "Verification Question Scheme Member",
-    "subsection": [
-      {
-        "subSectionId": "MainInfoId",
-        "subSectionTitle": "Main Info",
-        "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
-        "mainInfo": [
-          {
-            "type": "text",
-            "label": "Verification Question Scheme Code",
-            "property": "VerfSchmCode"
-          },
-          {
-            "type": "text",
-            "label": "Verification Question Scheme Name",
-            "property": "VerfSchmName"
-          }
-        ],
-        "querystring": {
-            "select": "SELECT VERF_SCHEME_CODE AS VerfSchmCode, VERF_SCHEME_NAME AS VerfSchmName, VERF_SCHEME_H_ID AS VerfSchmHId",
-            "from": "FROM DBO.VERF_SCHEME_H WITH(NOLOCK)", 
-            "where": "WHERE VERF_SCHEME_H_ID = {0}" 
+  "title": "Verification Question Scheme Member",
+  "subsection": [
+    {
+      "subSectionId": "MainInfoId",
+      "subSectionTitle": "Main Info",
+      "mainInfoUrl": "Generic/GetDataViewBySQL",
+      "mainInfo": [
+        {
+          "type": "text",
+          "label": "Verification Question Scheme Code",
+          "property": "VerfSchmCode"
+        },
+        {
+          "type": "text",
+          "label": "Verification Question Scheme Name",
+          "property": "VerfSchmName"
         }
+      ],
+      "querystring": {
+          "select": "SELECT VERF_SCHEME_CODE AS VerfSchmCode, VERF_SCHEME_NAME AS VerfSchmName, VERF_SCHEME_H_ID AS VerfSchmHId",
+          "from": "FROM DBO.VERF_SCHEME_H WITH(NOLOCK)", 
+          "where": "WHERE VERF_SCHEME_H_ID = {0}" 
       }
-    ]
-  }
+    }
+  ]
+}
