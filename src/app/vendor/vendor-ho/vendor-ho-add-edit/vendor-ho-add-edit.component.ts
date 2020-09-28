@@ -80,6 +80,8 @@ export class VendorHoAddEditComponent implements OnInit {
     RowVersionVendor: [''],
     RowVersionVendorAddr: [''],
     IsNpwpExist: [false],
+    SupplBadStatus:[''],
+    IsOneAffiliate: [false],
     VendorAtpmCode: []
   })
 
@@ -136,6 +138,8 @@ export class VendorHoAddEditComponent implements OnInit {
           RowVersionVendorAddr: this.result.VendorAddrObj.RowVersion,
           IsNpwpExist: this.result.VendorObj.IsNpwpExist,
           VendorAtpmCode: this.result.VendorObj.VendorAtpmCode,
+          IsOneAffiliate: this.result.VendorObj.IsOneAffiliate,
+          SupplBadStatus: this.result.VendorObj.SupplBadStatus,
         });
 
         this.setLookup();
@@ -412,6 +416,8 @@ export class VendorHoAddEditComponent implements OnInit {
       this.vendorHoObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value;
       this.vendorHoObj.VendorObj.VendorAtpmCode = this.VendorForm.controls.VendorAtpmCode.value;
       this.vendorHoObj.VendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value;
+      this.vendorHoObj.VendorObj.IsOneAffiliate = this.VendorForm.controls.IsOneAffiliate.value;
+      this.vendorHoObj.VendorObj.SupplBadStatus = this.VendorForm.controls.SupplBadStatus.value;
 
       if (this.VendorForm.controls.IsNpwpExist.value == true) {
         this.vendorHoObj.VendorObj.TaxIdNo = this.VendorForm.controls.TaxIdNo.value;

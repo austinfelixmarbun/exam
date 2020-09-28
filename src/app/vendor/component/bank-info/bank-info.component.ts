@@ -32,6 +32,8 @@ export class BankInfoComponent implements OnInit {
     IsDefault: [false],
     RefBankId: [],
     BankBranchRegCode: [],
+    BankBranch:[''],
+    Notes:['']
   });
   objEdit: any;
 
@@ -49,7 +51,9 @@ export class BankInfoComponent implements OnInit {
       AccNumber: "",
       AccName: "",
       RefBankId: "",
-      IsDefault: false
+      IsDefault: false,
+      BankBranch :"",
+      Notes:""
     });
     this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
     this.BankRegisForm.controls.AccName.updateValueAndValidity();
@@ -94,6 +98,8 @@ export class BankInfoComponent implements OnInit {
     this.VendorBankAcc.BankAccountNo = this.BankRegisForm.controls.AccNumber.value;
     this.VendorBankAcc.BankAccountName = this.BankRegisForm.controls.AccName.value;
     this.VendorBankAcc.IsDefault = this.BankRegisForm.controls.IsDefault.value;
+    this.VendorBankAcc.Notes = this.BankRegisForm.controls.Notes.value;
+    this.VendorBankAcc.BankBranch = this.BankRegisForm.controls.BankBranch.value;
 
     if (this.mode == "add") {
       this.VendorBankAcc.VendorBankAccId = 0;
@@ -107,7 +113,9 @@ export class BankInfoComponent implements OnInit {
             AccNumber: "",
             AccName: "",
             RefBankId: "",
-            IsDefault: false
+            IsDefault: false,
+            BankBranch:"",
+            Notes:""
           });
           this.inputLookupBankObj.jsonSelect = { bankName: "" };
           this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
@@ -128,7 +136,9 @@ export class BankInfoComponent implements OnInit {
             AccNumber: "",
             AccName: "",
             RefBankId: "",
-            IsDefault: false
+            IsDefault: false,
+            BankBranch:"",
+            Notes:""
           });
           this.inputLookupBankObj.jsonSelect = { bankName: "" };
           this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
@@ -149,6 +159,8 @@ export class BankInfoComponent implements OnInit {
         AccName: response["BankAccountName"],
         RefBankId: response["RefBankId"],
         IsDefault: response["IsDefault"],
+        BankBranch: response["BankBranch"],
+        Notes:response["Notes"],
         RowVersion: response["RowVersion"]
       });
       this.setLookup();

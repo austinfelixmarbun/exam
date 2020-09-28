@@ -84,7 +84,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     ReservedField3: [''],//Supplier calc up method
     ReservedField4: [''], //Supplier Class
     ReservedField5: [''], //BPKBAging
-    ReservedField6: [''], //DaysPAfterGolive
+    // ReservedField6: [''], //DaysPAfterGolive
     ReservedField9: [''], //ASSGMNT_TYPE tele, field
     MrTaxCalcMethodCode: ['', Validators.required],
     IsVat: [true, Validators.required],
@@ -99,7 +99,13 @@ export class VendorBranchAddEditComponent implements OnInit {
     RowVersionVendor: [''],
     RowVersionVendorAddr: [''],
     IsNpwpExist: [false],
-    VendorAtpmCode: []
+    VendorAtpmCode: [],
+    IsOneAffiliate: [false],
+    SupplBadStatus:[''],
+    MainDocAging:[''],
+    ApDueAfterGlv:[''],
+    MrAssetCondition:[''],
+    SpkNo:[''],
   })
 
   ngOnInit() {
@@ -142,7 +148,7 @@ export class VendorBranchAddEditComponent implements OnInit {
           ReservedField3: this.result.VendorObj.ReservedField3,
           ReservedField4: this.result.VendorObj.ReservedField4,
           ReservedField5: this.result.VendorObj.ReservedField5,
-          ReservedField6: this.result.VendorObj.ReservedField6,
+          // ReservedField6: this.result.VendorObj.ReservedField6,
           ReservedField9: this.result.VendorObj.ReservedField9,
           MrTaxCalcMethodCode: this.result.VendorObj.MrTaxCalcMethodCode,
           IsVat: this.result.VendorObj.IsVat,
@@ -158,6 +164,12 @@ export class VendorBranchAddEditComponent implements OnInit {
           RowVersionVendorAddr: this.result.VendorAddrObj.RowVersion,
           IsNpwpExist: this.result.VendorObj.IsNpwpExist,
           VendorAtpmCode: this.result.VendorObj.VendorAtpmCode,
+          IsOneAffiliate: this.result.VendorObj.IsOneAffiliate,
+          SupplBadStatus: this.result.VendorObj.SupplBadStatus,
+          MainDocAging: this.result.VendorObj.MainDocAging,
+          ApDueAfterGlv: this.result.VendorObj.ApDueAfterGlv,
+          MrAssetCondition: this.result.VendorObj.MrAssetCondition,
+          SpkNo: this.result.VendorObj.SpkNo,
         });
         this.setLookup();
       }
@@ -450,7 +462,8 @@ export class VendorBranchAddEditComponent implements OnInit {
 
       this.VendorForm.controls.ReservedField3.setValidators(Validators.required);
       this.VendorForm.controls.ReservedField4.setValidators(Validators.required);
-      this.VendorForm.controls.ReservedField6.setValidators(Validators.required);
+      // this.VendorForm.controls.ReservedField6.setValidators(Validators.required);
+      this.VendorForm.controls.ApDueAfterGlv.setValidators(Validators.required);
 
       this.UpdateValueAndValidity();
     }
@@ -510,7 +523,8 @@ export class VendorBranchAddEditComponent implements OnInit {
   UpdateValueAndValidity() {
     this.VendorForm.controls.ReservedField3.updateValueAndValidity();
     this.VendorForm.controls.ReservedField4.updateValueAndValidity();
-    this.VendorForm.controls.ReservedField6.updateValueAndValidity();
+    // this.VendorForm.controls.ReservedField6.updateValueAndValidity();
+    this.VendorForm.controls.ApDueAfterGlv.updateValueAndValidity();
   }
 
   SaveForm() {
@@ -545,19 +559,26 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.ReservedField3 = "";
       this.vendorBranchObj.VendorObj.ReservedField4 = "";
       this.vendorBranchObj.VendorObj.ReservedField5 = "";
-      this.vendorBranchObj.VendorObj.ReservedField6 = "";
+      // this.vendorBranchObj.VendorObj.ReservedField6 = "";
       this.vendorBranchObj.VendorObj.ReservedField9 = "";
       this.vendorBranchObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
       this.vendorBranchObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
       this.vendorBranchObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value;
       this.vendorBranchObj.VendorObj.VendorAtpmCode = this.VendorForm.controls.VendorAtpmCode.value;
+      this.vendorBranchObj.VendorObj.IsOneAffiliate = this.VendorForm.controls.IsOneAffiliate.value;
+      this.vendorBranchObj.VendorObj.SupplBadStatus = this.VendorForm.controls.SupplBadStatus.value;
+      this.vendorBranchObj.VendorObj.MainDocAging = this.VendorForm.controls.MainDocAging.value;
+      this.vendorBranchObj.VendorObj.ApDueAfterGlv = this.VendorForm.controls.ApDueAfterGlv.value;
+      this.vendorBranchObj.VendorObj.MrAssetCondition = this.VendorForm.controls.MrAssetCondition.value;
+      this.vendorBranchObj.VendorObj.SpkNo = this.VendorForm.controls.SpkNo.value;
     }
 
     if (this.vendorBranchObj.VendorObj.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH) {
       this.vendorBranchObj.VendorObj.ReservedField3 = this.VendorForm.controls.ReservedField3.value;
       this.vendorBranchObj.VendorObj.ReservedField4 = this.VendorForm.controls.ReservedField4.value;
       this.vendorBranchObj.VendorObj.ReservedField5 = this.VendorForm.controls.ReservedField5.value;
-      this.vendorBranchObj.VendorObj.ReservedField6 = this.VendorForm.controls.ReservedField6.value;
+      // this.vendorBranchObj.VendorObj.ReservedField6 = this.VendorForm.controls.ReservedField6.value;
+      this.vendorBranchObj.VendorObj.ApDueAfterGlv = this.VendorForm.controls.ApDueAfterGlv.value;
     }
     if (this.vendorBranchObj.VendorObj.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH) {
       this.vendorBranchObj.VendorObj.ReservedField2 = this.VendorForm.controls.ReservedField2.value;
