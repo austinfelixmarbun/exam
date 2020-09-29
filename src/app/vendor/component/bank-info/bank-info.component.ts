@@ -32,7 +32,7 @@ export class BankInfoComponent implements OnInit {
     IsDefault: [false],
     RefBankId: [],
     BankBranchRegCode: [],
-    BankBranch:[''],
+    BankBranch:['', [Validators.required]],
     Notes:['']
   });
   objEdit: any;
@@ -57,6 +57,7 @@ export class BankInfoComponent implements OnInit {
     });
     this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
     this.BankRegisForm.controls.AccName.updateValueAndValidity();
+    this.BankRegisForm.controls.BankBranch.updateValueAndValidity();
 
     this.modal = this.modalService.open(content);
     this.modal.result.then((result) => {
@@ -120,6 +121,7 @@ export class BankInfoComponent implements OnInit {
           this.inputLookupBankObj.jsonSelect = { bankName: "" };
           this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
           this.BankRegisForm.controls.AccName.updateValueAndValidity();
+          this.BankRegisForm.controls.BankBranch.updateValueAndValidity();
           enjiForm.reset();
         }
       );
@@ -143,6 +145,7 @@ export class BankInfoComponent implements OnInit {
           this.inputLookupBankObj.jsonSelect = { bankName: "" };
           this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
           this.BankRegisForm.controls.AccName.updateValueAndValidity();
+          this.BankRegisForm.controls.BankBranch.updateValueAndValidity();
           enjiForm.reset();
         }
       );
