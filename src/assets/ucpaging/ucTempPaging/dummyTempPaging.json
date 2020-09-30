@@ -99,11 +99,6 @@
             "position": "center",
             "label": "ACTIVE STATUS",
             "name": "IsActive"
-        },
-        {
-            "type": "label",
-            "position": "center",
-            "label": "checkbox input"
         }
     ],
     "bodyListTemp": [
@@ -121,11 +116,6 @@
             "type": "boolean",
             "position": "center",
             "property": "IsActive"
-        },
-        {
-            "type": "checkbox",
-            "position": "center",
-            "property": "IsAllowedCrt"
         }
     ]
 }
