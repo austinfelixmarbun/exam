@@ -50,7 +50,13 @@ export class VendorBranchAddEditComponent implements OnInit {
 
   isHidden: boolean = true;
   RsvField: string;
-  
+  VendorAttrList: any;
+  ListInputLookUpObj = new Array<any>();
+  vendorAttrRequest = new Array<any>();
+  isFormReady: boolean = false;
+  reqVendorAttrObj: { listVendorAttrContentObj: any[]; };
+  ListVendorAttrContent: any;
+
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params["MrVendorCategoryCode"] != null) {
@@ -64,7 +70,7 @@ export class VendorBranchAddEditComponent implements OnInit {
   }
 
   VendorForm = this.fb.group({
-    MrVendorCategoryCode: [{ value: '', disabled: true }],
+    MrVendorCategoryCode: [{ value: '', disabled: true }],  //form control name
     VendorCode: ['', Validators.required],
     VendorName: ['', Validators.required],
     MrVendorTypeCode: ['', Validators.required],
@@ -101,11 +107,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     IsNpwpExist: [false],
     VendorAtpmCode: [],
     IsOneAffiliate: [false],
-    SupplBadStatus:[''],
-    MainDocAging:[''],
-    ApDueAfterGlv:[''],
-    MrAssetCondition:[''],
-    SpkNo:[''],
+    // SupplBadStatus:[''],
+    // MainDocAging:[''],
+    // ApDueAfterGlv:[''],
+    // MrAssetCondition:[''],
+    // SpkNo:[''],
   })
 
   ngOnInit() {
@@ -118,8 +124,150 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.setDropdown();
       this.setLookup();
     }
-  }
+    var reqListVendor = { "VendorId": this.VendorId };
+    this.http.post(URLConstant.GetListVendorAttrContentByVendorId, reqListVendor).toPromise().then(
+      (response) => {
+        this.ListVendorAttrContent = response[CommonConstant.ReturnObj]
+        if (this.ListVendorAttrContent.length < 1) {
+          var reqObj = { VendorCategoryCode: "SUPPLIER_BRANCH" };
+          this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, reqObj).subscribe(
+            async (response: any) => {
+              var parentFormGroup = new Object();
+              this.VendorAttrList = response[CommonConstant.ReturnObj];
 
+              let tempLookup = {};
+              for (const vendorAttr of this.VendorAttrList) {
+                var formGroupObject = new Object();
+                formGroupObject["VendorAttrContentId"] = [0];
+                formGroupObject["VendorAttrId"] = [vendorAttr["VendorAttrId"]];
+                if (vendorAttr["VendorAttrType"] == 'T') {
+                  formGroupObject["VendorAttrValue"] = [''];
+                }
+                else if (vendorAttr["VendorAttrType"] == 'L') {
+                  var temp = vendorAttr["VendorAttrValue"].split(";");
+                  formGroupObject["VendorAttrValue"] = [temp[0]];
+                }
+                else {
+                  formGroupObject["VendorAttrValue"] = [''];
+                }
+                parentFormGroup[vendorAttr["VendorAttrCode"]] = this.fb.group(formGroupObject);
+
+                if (vendorAttr["VendorAttrType"] == 'RM') {
+                  tempLookup[vendorAttr["VendorAttrCode"]] = new InputLookupObj();
+                  tempLookup[vendorAttr["VendorAttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+                  tempLookup[vendorAttr["VendorAttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
+                  tempLookup[vendorAttr["VendorAttrCode"]].urlEnviPaging = environment.FoundationR3Url;
+                  tempLookup[vendorAttr["VendorAttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+                  tempLookup[vendorAttr["VendorAttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+                  tempLookup[vendorAttr["VendorAttrCode"]].title = vendorAttr.VendorAttrName;
+                  tempLookup[vendorAttr["VendorAttrCode"]].isRequired = false;
+                  var arrAddCrit = new Array();
+                  var critAssetObj = new CriteriaObj();
+                  critAssetObj.DataType = 'text';
+                  critAssetObj.restriction = AdInsConstant.RestrictionEq;
+                  critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
+                  critAssetObj.value = vendorAttr.VendorAttrValue;
+                  arrAddCrit.push(critAssetObj);
+                  tempLookup[vendorAttr["VendorAttrCode"]].addCritInput = arrAddCrit;
+                }
+
+              }
+              this.ListInputLookUpObj.push(tempLookup);
+              console.log(this.VendorAttrList);
+              console.log(this.VendorForm);
+              this.VendorForm.addControl("VendorAttrList", this.fb.group(parentFormGroup));
+              console.log(this.VendorForm);
+              this.isFormReady = true;
+            }
+          );
+        }
+        // else{
+
+        //   var reqObj = { VendorCategoryCode: "SUPPLIER_BRANCH" };
+        //   this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, reqObj).subscribe(
+        //     async (response: any) => {
+        //       var parentFormGroup = new Object();
+        //       let tempLookup = {};
+        //       this.VendorAttrList = response[CommonConstant.ReturnObj];
+        //       for (const vendorAttr of this.VendorAttrList) {
+        //         var item = this.ListVendorAttrContent.find(x => x.VendorAttrId == vendorAttr.VendorAttrId);
+        //         if (item == undefined) {
+        //           var formGroupObject = new Object();
+        //           formGroupObject["VendorAttrContentId"] = [0];
+        //           formGroupObject["VendorAttrId"] = [vendorAttr["VendorAttrId"]];
+
+        //           if (vendorAttr["VendorAttrType"] == 'L') {
+        //             var temp = vendorAttr["VendorAttrValue"].split(";");
+        //             formGroupObject["VendorAttrValue"] = [temp[0]];
+        //           } else {
+        //             formGroupObject["VendorAttrValue"] = [''];
+        //           }
+        //           parentFormGroup[vendorAttr["VendorAttrCode"]] = this.fb.group(formGroupObject);
+
+        //           if (vendorAttr["VendorAttrType"] == 'RM') {
+        //             tempLookup[vendorAttr["VendorAttrCode"]] = new InputLookupObj();
+        //             tempLookup[vendorAttr["VendorAttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+        //             tempLookup[vendorAttr["VendorAttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
+        //             tempLookup[vendorAttr["VendorAttrCode"]].urlEnviPaging = environment.FoundationR3Url;
+        //             tempLookup[vendorAttr["VendorAttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+        //             tempLookup[vendorAttr["VendorAttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+        //             tempLookup[vendorAttr["VendorAttrCode"]].title = vendorAttr.AttrName;
+        //             tempLookup[vendorAttr["VendorAttrCode"]].isRequired = false;
+
+        //             var arrAddCrit = new Array();
+        //             var critAssetObj = new CriteriaObj();
+        //             critAssetObj.DataType = 'text';
+        //             critAssetObj.restriction = AdInsConstant.RestrictionEq;
+        //             critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
+        //             critAssetObj.value = vendorAttr.VendorAttrValue;
+        //             arrAddCrit.push(critAssetObj);
+        //             tempLookup[vendorAttr["VendorAttrCode"]].addCritInput = arrAddCrit;
+        //           }
+        //         } 
+        //         else {
+        //           var formGroupObject = new Object();
+        //           formGroupObject["VendorAttrContentId"] = [0];
+        //           formGroupObject["VendorAttrId"] = [vendorAttr["VendorAttrId"]];
+
+        //           if (vendorAttr["VendorAttrType"] == 'T') {
+        //               formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
+        //             }
+        //           else {
+        //             formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
+        //           }
+                  
+        //           parentFormGroup[vendorAttr["VendorAttrCode"]] = this.fb.group(formGroupObject);
+        //           if (item["VendorAttrType"] == 'RM') {
+        //             tempLookup[vendorAttr["VendorAttrCode"]] = new InputLookupObj();
+        //             tempLookup[vendorAttr["VendorAttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+        //             tempLookup[vendorAttr["VendorAttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
+        //             tempLookup[vendorAttr["VendorAttrCode"]].urlEnviPaging = environment.FoundationR3Url;
+        //             tempLookup[vendorAttr["VendorAttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+        //             tempLookup[vendorAttr["VendorAttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+        //             tempLookup[vendorAttr["VendorAttrCode"]].title = vendorAttr.AttrName;
+        //               tempLookup[vendorAttr["VendorAttrCode"]].isRequired = false;
+        //             //  tempLookup[vendorAttr["VendorAttrCode"]].jsonSelect = { Descr: item["AttrContent"] };
+        //             var arrAddCrit = new Array();
+        //             var critAssetObj = new CriteriaObj();
+        //             critAssetObj.DataType = 'text';
+        //             critAssetObj.restriction = AdInsConstant.RestrictionEq;
+        //             critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
+        //             // critAssetObj.value = item.MasterCode;
+        //             critAssetObj.value = vendorAttr.VendorAttrValue;
+        //             arrAddCrit.push(critAssetObj);
+        //             tempLookup[vendorAttr["VendorAttrCode"]].addCritInput = arrAddCrit;
+        //           }
+        //         }
+        //       }
+        //       this.ListInputLookUpObj.push(tempLookup);
+        //       this.VendorForm.addControl("VendorAttrList", this.fb.group(parentFormGroup));
+        //       this.isFormReady = true;
+              
+        //     });
+        // }
+      }
+    );
+  }
   getData() {
     this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { VendorId: this.VendorId }).subscribe(
       (response) => {
@@ -165,11 +313,11 @@ export class VendorBranchAddEditComponent implements OnInit {
           IsNpwpExist: this.result.VendorObj.IsNpwpExist,
           VendorAtpmCode: this.result.VendorObj.VendorAtpmCode,
           IsOneAffiliate: this.result.VendorObj.IsOneAffiliate,
-          SupplBadStatus: this.result.VendorObj.SupplBadStatus,
-          MainDocAging: this.result.VendorObj.MainDocAging,
-          ApDueAfterGlv: this.result.VendorObj.ApDueAfterGlv,
-          MrAssetCondition: this.result.VendorObj.MrAssetCondition,
-          SpkNo: this.result.VendorObj.SpkNo,
+          // SupplBadStatus: this.result.VendorObj.SupplBadStatus,
+          // MainDocAging: this.result.VendorObj.MainDocAging,
+          // ApDueAfterGlv: this.result.VendorObj.ApDueAfterGlv,
+          // MrAssetCondition: this.result.VendorObj.MrAssetCondition,
+          // SpkNo: this.result.VendorObj.SpkNo,
         });
         this.setLookup();
       }
@@ -367,7 +515,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     });
   }
 
-  getLookupATPM(ev){
+  getLookupATPM(ev) {
     this.VendorForm.patchValue({
       VendorAtpmCode: ev.VendorCode,
     });
@@ -398,7 +546,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.RsvField = CommonConstant.CustTypePersonal
     }
     this.updateValueAndValidityForm();
-    
+
     var refMasterIdObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
       ReserveField1: this.RsvField,
@@ -407,11 +555,11 @@ export class VendorBranchAddEditComponent implements OnInit {
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {
-          if(this.mode!="edit"){
+          if (this.mode != "edit") {
             this.VendorForm.patchValue({
               MrIdTypeCode: this.itemIdType[0].Key
             });
-          }else{
+          } else {
             this.VendorForm.patchValue({
               MrIdTypeCode: this.result.VendorObj.MrIdTypeCode
             });
@@ -463,7 +611,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.VendorForm.controls.ReservedField3.setValidators(Validators.required);
       this.VendorForm.controls.ReservedField4.setValidators(Validators.required);
       // this.VendorForm.controls.ReservedField6.setValidators(Validators.required);
-      this.VendorForm.controls.ApDueAfterGlv.setValidators(Validators.required);
+      // this.VendorForm.controls.ApDueAfterGlv.setValidators(Validators.required);
 
       this.UpdateValueAndValidity();
     }
@@ -524,7 +672,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.VendorForm.controls.ReservedField3.updateValueAndValidity();
     this.VendorForm.controls.ReservedField4.updateValueAndValidity();
     // this.VendorForm.controls.ReservedField6.updateValueAndValidity();
-    this.VendorForm.controls.ApDueAfterGlv.updateValueAndValidity();
+    // this.VendorForm.controls.ApDueAfterGlv.updateValueAndValidity();
   }
 
   SaveForm() {
@@ -566,11 +714,11 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value;
       this.vendorBranchObj.VendorObj.VendorAtpmCode = this.VendorForm.controls.VendorAtpmCode.value;
       this.vendorBranchObj.VendorObj.IsOneAffiliate = this.VendorForm.controls.IsOneAffiliate.value;
-      this.vendorBranchObj.VendorObj.SupplBadStatus = this.VendorForm.controls.SupplBadStatus.value;
-      this.vendorBranchObj.VendorObj.MainDocAging = this.VendorForm.controls.MainDocAging.value;
-      this.vendorBranchObj.VendorObj.ApDueAfterGlv = this.VendorForm.controls.ApDueAfterGlv.value;
-      this.vendorBranchObj.VendorObj.MrAssetCondition = this.VendorForm.controls.MrAssetCondition.value;
-      this.vendorBranchObj.VendorObj.SpkNo = this.VendorForm.controls.SpkNo.value;
+      // this.vendorBranchObj.VendorObj.SupplBadStatus = this.VendorForm.controls.SupplBadStatus.value;
+      // this.vendorBranchObj.VendorObj.MainDocAging = this.VendorForm.controls.MainDocAging.value;
+      // this.vendorBranchObj.VendorObj.ApDueAfterGlv = this.VendorForm.controls.ApDueAfterGlv.value;
+      // this.vendorBranchObj.VendorObj.MrAssetCondition = this.VendorForm.controls.MrAssetCondition.value;
+      // this.vendorBranchObj.VendorObj.SpkNo = this.VendorForm.controls.SpkNo.value;
     }
 
     if (this.vendorBranchObj.VendorObj.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH) {
@@ -578,7 +726,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.ReservedField4 = this.VendorForm.controls.ReservedField4.value;
       this.vendorBranchObj.VendorObj.ReservedField5 = this.VendorForm.controls.ReservedField5.value;
       // this.vendorBranchObj.VendorObj.ReservedField6 = this.VendorForm.controls.ReservedField6.value;
-      this.vendorBranchObj.VendorObj.ApDueAfterGlv = this.VendorForm.controls.ApDueAfterGlv.value;
+      // this.vendorBranchObj.VendorObj.ApDueAfterGlv = this.VendorForm.controls.ApDueAfterGlv.value;
     }
     if (this.vendorBranchObj.VendorObj.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH) {
       this.vendorBranchObj.VendorObj.ReservedField2 = this.VendorForm.controls.ReservedField2.value;
@@ -606,6 +754,23 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorAddrObj.Province = this.result.VendorAddrObj.Province;
     }
 
+    var formValue = this.VendorForm['controls']['VendorAttrList'].value;
+
+    if (Object.keys(formValue).length > 0 && formValue.constructor === Object) {
+      for (const key in formValue) {
+        if (formValue[key]["VendorAttrValue"] != null) {
+          var vendorAttr = {
+            VendorAttrContentId: formValue[key]["VendorAttrContentId"],
+            VendorId: this.VendorId,
+            VendorAttrId: formValue[key]["VendorAttrId"],
+            AttrContent: formValue[key]["VendorAttrValue"],
+          };
+          this.vendorAttrRequest.push(vendorAttr);
+        }
+      }
+      this.reqVendorAttrObj = { listVendorAttrContentObj: this.vendorAttrRequest };
+    }
+
     if (this.mode == "edit") {
       if (this.MrVendorCategoryCode == "AGENCY_PERSONAL" || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY) {
         this.vendorBranchObj.VendorObj.MrVendorTypeCode = this.result.VendorObj.MrVendorTypeCode;
@@ -622,6 +787,11 @@ export class VendorBranchAddEditComponent implements OnInit {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Vendor/Branch/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": "edit" } });
         });
+      this.http.post(URLConstant.EditListVendorAttrContent, this.reqVendorAttrObj).subscribe(
+        (response) => {
+          console.log(response);
+        }
+      );
     }
     else {
       this.vendorBranchObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
@@ -632,6 +802,11 @@ export class VendorBranchAddEditComponent implements OnInit {
           this.toastr.successMessage(response["message"]);
           this.router.navigate(['/Vendor/Branch/Registration'], { queryParams: { "VendorId": response['VendorObj'].VendorId } });
         });
+      this.http.post(URLConstant.AddRangeVendorAttrContent, this.reqVendorAttrObj).subscribe(
+        (response) => {
+          console.log(response);
+        }
+      );
     }
   }
 
@@ -641,5 +816,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     } else {
       this.router.navigate(["/Vendor/Paging"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
     }
+  }
+
+  getLookUpAttr(e, VendorAttrCode) {
+    this.VendorForm['controls']["VendorAttrList"]["controls"][VendorAttrCode].patchValue({
+      VendorAttrValue: e.MasterCode
+    });
   }
 }

@@ -591,6 +591,16 @@ export class URLConstant {
     public static DeleteVendorSchmMember = "/VendorSchmMbr/DeleteVendorSchmMember"
     public static GetListVendorSchmMemberByVendorSchmId = environment.FoundationR3Url + "/VendorSchmMbr/GetListVendorSchmMemberByVendorSchmId"
 
+    // VENDOR ATTR
+    public static GetListActiveVendorAttrByVendorCategoryCode = environment.FoundationR3Url + "/VendorAttr/GetListActiveVendorAttrByVendorCategoryCode";
+
+    // VENDOR ATTR CONTENT
+    public static AddRangeVendorAttrContent = environment.FoundationR3Url + "/VendorAttrContent/AddRangeVendorAttrContent";
+    public static EditListVendorAttrContent = environment.FoundationR3Url + "/VendorAttrContent/EditListVendorAttrContent";
+    public static DeleteRangeVendorAttrContentByIds = environment.FoundationR3Url + "/VendorAttrContent/DeleteRangeVendorAttrContentByIds";
+    public static GetListVendorAttrContentByVendorAttrId = environment.FoundationR3Url + "/VendorAttrContent/GetListVendorAttrContentByVendorAttrId";
+    public static GetListVendorAttrContentByVendorId = environment.FoundationR3Url + "/VendorAttrContent/GetListVendorAttrContentByVendorId";
+
     // VERIFICATION
     // REF VERF ANSWER TYPE
     public static AddRefVerfAnswerType = environment.FoundationR3Url + "/RefVerfAnswerType/AddRefVerfAnswerType";
