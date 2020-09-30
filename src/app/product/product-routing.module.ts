@@ -6,8 +6,8 @@ import { ProdOfferingAddDetailComponent } from './prod-offering/prod-offering-ad
 import { ProductHOPagingComponent } from './product-HO/product-ho-paging/product-ho-paging.component';
 import { ProductHOAddComponent } from './product-HO/product-ho-add/product-ho-add.component';
 import { ProductHoAdddetailComponent } from "./product-HO/product-ho-adddetail/product-ho-adddetail.component";
-import { ProductHODeactivatePagingComponent } from "./product-ho/product-ho-deactivate-paging/product-ho-deactivate.component";
-import { ProductHODeactivateEditComponent } from "./product-ho/product-ho-deactivate-edit/product-ho-deactivate-edit.component";
+import { ProductHODeactivatePagingComponent } from "./product-HO/product-ho-deactivate-paging/product-ho-deactivate.component";
+import { ProductHODeactivateEditComponent } from "./product-HO/product-ho-deactivate-edit/product-ho-deactivate-edit.component";
 import { ProductHOViewComponent } from "./product-HO/product-ho-view/product-ho-view.component";
 import { ProductOfferingViewComponent } from "./prod-offering/prod-offering-view/product-offering-view.component";
 import { ProductHOApprovalComponent } from "./product-HO/product-ho-approval/product-ho-approval.component";

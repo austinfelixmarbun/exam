@@ -37,7 +37,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   addManagementShareholderUrl: string;
   editManagementShareholderUrl: string;
   getCustCompanyMgmntShrholderUrl: string;
-  GetListActiveRefMasterWithReserveFieldAllUrl: string;
+  getListKeyValueByMrCustTypeCode: string;
 
   ManagementShareholderForm = this.fb.group({
     MgmntShrholderName: ['', [Validators.maxLength(100) ,Validators.required]],
@@ -48,6 +48,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     MrIndustryTypeCode: [''],
     IsSigner: [false],
     IsActive: [false],
+    IsOwner: [false]
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -55,7 +56,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholder;
     this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
     this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholder; 
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListKeyValueByMrCustTypeCode = URLConstant.GetListKeyValueByMrCustTypeCode;
   }
 
   ngOnInit() {  
@@ -89,22 +90,22 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
         }
       }
     );
-    var refMasterObjMrCustModelCode = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
-      Reservefield1: CommonConstant.CustTypeCompany,
-      RowVersion: ""
+    
+    var refMasterObjCustModel = {
+      MrCustTypeCode: CommonConstant.CustTypeCompany
     }
-    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjMrCustModelCode).subscribe(
+    this.http.post(this.getListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
       (response) => {
+        this.tempMrCustModelCode = response;
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.tempMrCustModelCode = response[CommonConstant.ReturnObj];
           this.ManagementShareholderForm.patchValue({
             MrCustModelCode: this.tempMrCustModelCode[0].Key
           });
-        }
       }
+    }
     );
- 
+
     if(this.CustCompanyMgmntShrholderId!=null){
       this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
       this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId  = this.CustCompanyMgmntShrholderId;
@@ -129,6 +130,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
             SharePrcnt: this.tempCustCompanyMgmntShrholderObj.SharePrcnt,
             IsSigner: this.tempCustCompanyMgmntShrholderObj.IsSigner,
             IsActive: this.tempCustCompanyMgmntShrholderObj.IsActive,
+            IsOwner: this.tempCustCompanyMgmntShrholderObj.IsOwner,
             MrIndustryTypeCode: this.tempCustCompanyMgmntShrholderObj.MrIndustryTypeCode
           });
           if(this.tempCustCompanyMgmntShrholderObj.ShareholderCustNo!=null){ 
@@ -175,7 +177,8 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
       this.custCompanyMgmntShrholderObj.TaxIdNo = this.ManagementShareholderForm.controls["TaxIdNo"].value;
-      this.custCompanyMgmntShrholderObj.IsActive = this.ManagementShareholderForm.controls["IsActive"].value; 
+      this.custCompanyMgmntShrholderObj.IsActive = this.ManagementShareholderForm.controls["IsActive"].value;  
+      this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value;  
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Company;
       this.custCompanyMgmntShrholderObj.MrIndustryTypeCode = this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value; 
       this.http.post(this.editManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
@@ -195,6 +198,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
       this.custCompanyMgmntShrholderObj.TaxIdNo = this.ManagementShareholderForm.controls["TaxIdNo"].value;
       this.custCompanyMgmntShrholderObj.IsActive = this.ManagementShareholderForm.controls["IsActive"].value; 
+      this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value;  
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Company;
       this.custCompanyMgmntShrholderObj.MrIndustryTypeCode = this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value; 
       this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(

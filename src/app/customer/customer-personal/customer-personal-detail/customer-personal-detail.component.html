@@ -60,7 +60,7 @@
           
           <label class="col-md-2 adInsLabel" translate>Num Of Dependents</label>
           <div class="col-md-4">
-            <input type="text" class="form-control adInsInput" formControlName="NoOfDependents"
+            <input type="number" class="form-control adInsInput" formControlName="NoOfDependents"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.NoOfDependents.invalid}">
             <lib-uc-show-errors [control]="CustomerDetailForm.controls.NoOfDependents" [submit]="enjiForm.submitted">
             </lib-uc-show-errors>
@@ -80,7 +80,7 @@
         <div class="form-group row"> 
           <label class="col-md-2" translate>Num Of Residence (Last 3 Years)</label>
           <div class="col-md-4">
-            <input type="text" class="form-control adInsInput" formControlName="NoOfResidence"
+            <input type="number" class="form-control adInsInput" formControlName="NoOfResidence"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.NoOfResidence.invalid}">
             <lib-uc-show-errors [control]="CustomerDetailForm.controls.NoOfResidence" [submit]="enjiForm.submitted">
             </lib-uc-show-errors>

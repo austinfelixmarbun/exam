@@ -39,7 +39,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT v.VENDOR_CODE AS VendorCode, v.VENDOR_NAME AS VendorName, v.IS_ACTIVE AS IsActive, vsm.VENDOR_SCHM_MBR_ID AS VendorSchmMbrId",
+        "select": "SELECT v.VENDOR_CODE AS VendorCode, v.VENDOR_NAME AS VendorName, v.IS_ACTIVE AS IsActive, vsm.VENDOR_SCHM_MBR_ID AS VendorSchmMbrId, VS.VENDOR_SCHM_CODE AS VendorSchmCode",
         "from": "FROM dbo.VENDOR v JOIN dbo.VENDOR_SCHM_MBR vsm ON vsm.VENDOR_ID = v.VENDOR_ID LEFT JOIN dbo.VENDOR_SCHM vs ON vs.VENDOR_SCHM_ID = vsm.VENDOR_SCHM_ID"
     },
     "headerList": [
@@ -88,9 +88,25 @@
             "position": "center",
             "action": [
                 {
-                    "type": "delete",
-                    "property": "VendorSchmMbrId"
+                    "type" : "switch", 
+                    "case" : [ 
+                      {
+                        "conditions" : [ 
+                          {
+                            "property" : "VendorSchmCode", 
+                            "value" : "ALL",
+                            "restriction": "NEQ"
+                          }
+                        ],
+                        "result" : 
+                        {
+                            "type": "delete",
+                            "property": "VendorSchmMbrId"
+                        }
+                      }
+                    ]
                 }
+                
             ]
         }
     ]

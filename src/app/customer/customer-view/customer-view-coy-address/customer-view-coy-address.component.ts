@@ -25,6 +25,7 @@ export class CustomerViewCoyAddressComponent implements OnInit {
   GetListCustAddrByCustIdForCustomerPersonalViewUrl = URLConstant.GetListCustAddrByCustIdForCustomerPersonalView;
   GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = URLConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
   GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
+  selectedOption: any;
 
   CustForm = this.fb.group({
     DdlAddress: ['']

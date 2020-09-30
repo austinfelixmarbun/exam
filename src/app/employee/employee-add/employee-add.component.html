@@ -9,12 +9,11 @@
     </div>
     <div class="card-body">
       <div class="px-3">
-        <form class="form form-horizontal" [formGroup]="RefEmpForm" #enjiForm="ngForm"
-          (ngSubmit)="enjiForm.form.valid && SaveForm(enjiForm)">
+        <form class="form form-horizontal" [formGroup]="RefEmpForm" #enjiForm="ngForm" (ngSubmit)="RefEmpForm.valid && SaveForm()">
           <lib-ucSubsection [id]="'UserPanelId'" [title]="'User - Detail'" [panel]="'UserPanel'"></lib-ucSubsection>
           <div class="form-body" id="UserPanel">
             <div class="form-group row adins-required">
-              <label class="col-md-3  adInsLabel" for="Username">Username</label>
+              <label class="col-md-2  adInsLabel" for="Username">Username</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput code" formControlName="Username" required
                   [attr.disabled]="pageType == 'edit' ? true : null" [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.Username.invalid }">
@@ -22,7 +21,7 @@
               </div>
             </div>
             <div class="form-group row" *ngIf="pageType == 'edit'">
-              <label class="col-md-3  adInsLabel" for="IsLockedOut">Locked</label>
+              <label class="col-md-2  adInsLabel" for="IsLockedOut">Locked</label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsLockedOut" />
               </div>
@@ -31,7 +30,7 @@
           <lib-ucSubsection [id]="'EmployeePanelId'" [title]="'Employee - Detail'" [panel]="'EmployeePanel'"></lib-ucSubsection>
           <div class="form-body" id="EmployeePanel">
             <div class="form-group row adins-required">
-              <label class="col-md-3  adInsLabel" for="EmpNo">Employee No </label>
+              <label class="col-md-2  adInsLabel" for="EmpNo">Employee No </label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput code" formControlName="EmpNo" required
                   [attr.disabled]="pageType == 'edit' ? true : null" [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.EmpNo.invalid }">
@@ -39,7 +38,7 @@
               </div>
             </div>
             <div class="form-group row adins-required">
-              <label class="col-md-3  adInsLabel" for="EmpName">Employee Name </label>
+              <label class="col-md-2  adInsLabel" for="EmpName">Employee Name </label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput name" formControlName="EmpName" required 
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.EmpName.invalid }">
@@ -47,7 +46,7 @@
               </div>
             </div>
             <div class="form-group row adins-required">
-              <label class="col-md-3  adInsLabel" for="JoinDt">Join Date </label>
+              <label class="col-md-2  adInsLabel" for="JoinDt">Join Date </label>
               <div class="col-md-9">
                 <input type="date" id="joinDt" max="{{businessDt | date: 'yyyy-MM-dd'}}" class="form-control adInsInput width-25-per" formControlName="JoinDt" required
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.JoinDt.invalid }">
@@ -55,7 +54,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 adins-required-label" translate>ID Type </label>
+              <label class="col-md-2 adins-required-label" translate>ID Type </label>
               <div class="col-md-9">
                 <select class="form-control" style="width: auto" formControlName="MrIdTypeCode"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.MrIdTypeCode.invalid }">
@@ -66,7 +65,7 @@
               </div>
             </div>
             <div class="form-group row adins-required">
-              <label class="col-md-3  adInsLabel" for="IdNo">ID No</label>
+              <label class="col-md-2  adInsLabel" for="IdNo">ID No</label>
               <div class="col-md-9">
                 <input type="pattern" class="form-control adInsInput width-75-per" formControlName="IdNo" required 
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.IdNo.invalid }">
@@ -74,177 +73,37 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3  adInsLabel" for="NpwpNo">Tax Id No</label>
+              <label class="col-md-2  adInsLabel" for="NpwpNo">Tax Id No</label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput width-75-per" formControlName="TaxIdNo"/>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3  adInsLabel" for="IsExt">External Employee</label>
+              <label class="col-md-2  adInsLabel" for="IsExt">External Employee</label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsExt">
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3  adInsLabel" for="IsActive">Active Status</label>
+              <label class="col-md-2  adInsLabel" for="IsActive">Active Status</label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsActive">
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3  adInsLabel" for="IsLeave">Leave Status</label>
+              <label class="col-md-2  adInsLabel" for="IsLeave">Leave Status</label>
               <div class="col-md-9">
                 <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsLeave">
               </div>
             </div>
           </div>
-          <lib-ucSubsection [id]="'AddressPanelId'" [title]="'Address'" [panel]="'AddressPanel'"></lib-ucSubsection>
-          <div class="form-body" id="AddressPanel">
-            <div class="form-group row adins-required">
-              <label class="col-md-3 adInsLabel" for="Address">Address</label>
-              <div class="col-md-9">
-                <textarea class="form-control adInsInput width-75-per" formControlName="Addr" required 
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.Addr.invalid }"></textarea>
-                <lib-uc-show-errors [control]="RefEmpForm.controls.Addr" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-            </div>
-            <div class="form-group row adins-required">
-              <label class="col-md-3 adInsLabel" for="RT/RW">RT/RW</label>
-              <div class="col-md-2">
-                <input type="text" class="form-control adInsInput" formControlName="AreaCode4" required 
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.AreaCode4.invalid }" />
-                <lib-uc-show-errors [control]="RefEmpForm.controls.AreaCode4" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
-                /
-              </div>
-              <div class="col-md-2">
-                <input type="text" class="form-control adInsInput" formControlName="AreaCode3" required 
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.AreaCode3.invalid }" />
-                <lib-uc-show-errors [control]="RefEmpForm.controls.AreaCode3" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-            </div>
-            <div class="form-group row adins-required">
-              <label class="col-md-3 adInsLabel" for="Zipcode">Zipcode</label>
-              <div class="col-md-9">
-                <div class="width-75-per">
-                <lib-uclookupgeneric [lookupInput]="inputLookupZipCodeObj" [parentForm]='RefEmpForm' [enjiForm]='enjiForm' [identifier]="'ZipcodeLookup'"
-                    (lookup)="getLookupZipCodeResponse($event)"></lib-uclookupgeneric>
-                </div>
-              </div>
-            </div>
-            <div class="form-group row adins-required">
-              <label class="col-md-3 adInsLabel" for="Kelurahan">Kelurahan</label>
-              <div class="col-md-9">
-                <input class="form-control adInsInput width-75-per" formControlName="AreaCode2" required 
-                  [attr.disabled]=true [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.AreaCode2.invalid }" />
-                <lib-uc-show-errors [control]="RefEmpForm.controls.AreaCode2" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-            </div>
-            <div class="form-group row adins-required">
-              <label class="col-md-3 adInsLabel" for="Kecamatan">Kecamatan</label>
-              <div class="col-md-9">
-                <input class="form-control adInsInput width-75-per" formControlName="AreaCode1" required 
-                  [attr.disabled]=true [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.AreaCode1.invalid }" />
-                <lib-uc-show-errors [control]="RefEmpForm.controls.AreaCode1" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-            </div>
-            <div class="form-group row adins-required">
-              <label class="col-md-3 adInsLabel" for="City">City</label>
-              <div class="col-md-9">
-                <input class="form-control adInsInput width-75-per" formControlName="City" required 
-                  [attr.disabled]=true [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.City.invalid }" />
-                <lib-uc-show-errors [control]="RefEmpForm.controls.City" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-            </div>
-          </div>
+
+          <lib-ucaddress [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'UcAddress'" [UCAddrForm]="RefEmpForm"></lib-ucaddress>
+
           <lib-ucSubsection [id]="'ContactInformationPanelId'" [title]="'Contact Information'" [panel]="'ContactInformationPanel'"></lib-ucSubsection>
           <div class="form-body" id="ContactInformationPanel">
             <div class="form-group row adins-required">
-              <label class="col-md-3 adInsLabel" for="Phone1Area">Phone 1</label>
-              <div class="col-md-2">
-                <input class="form-control adInsInput" formControlName="PhnArea1" required 
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.PhnArea1.invalid }" />
-                <lib-uc-show-errors [control]="RefEmpForm.controls.PhnArea1" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
-                -
-              </div>
-              <div class="col-md-2">
-                <input class="form-control adInsInput" formControlName="Phn1" required 
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.Phn1.invalid }" />
-                  <lib-uc-show-errors [control]="RefEmpForm.controls.Phn1" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
-                /
-              </div> 
-              <div class="col-md-2">
-                <input class="form-control adInsInput" formControlName="PhnExt1" required 
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.PhnExt1.invalid }" />
-                <lib-uc-show-errors [control]="RefEmpForm.controls.PhnExt1" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-3 adInsLabel">Phone 2</label>
-              <div class="col-md-2">
-                <input class="form-control adInsInput" formControlName="PhnArea2" 
-                [ngClass]="{ 'is-invalid': RefEmpForm.controls.PhnArea2.invalid }" />
-                <lib-uc-show-errors [control]="RefEmpForm.controls.PhnArea2" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
-                -
-              </div>
-              <div class="col-md-2">
-                <input class="form-control adInsInput" formControlName="Phn2" 
-                [ngClass]="{ 'is-invalid': RefEmpForm.controls.Phn2.invalid }"/>
-                <lib-uc-show-errors [control]="RefEmpForm.controls.Phn2" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
-                /
-              </div>
-              <div class="col-md-2">
-                <input class="form-control adInsInput" formControlName="PhnExt2" 
-                [ngClass]="{ 'is-invalid': RefEmpForm.controls.PhnExt2.invalid }"/>
-                <lib-uc-show-errors [control]="RefEmpForm.controls.PhnExt2" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-3 adInsLabel" for="Phone3">Phone 3</label>
-              <div class="col-md-2">
-                <input class="form-control adInsInput" formControlName="PhnArea3"  />
-                <lib-uc-show-errors [control]="RefEmpForm.controls.PhnArea3" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
-                -
-              </div>
-              <div class="col-md-2">
-                <input class="form-control adInsInput" formControlName="Phn3"  />
-                <lib-uc-show-errors [control]="RefEmpForm.controls.Phn3" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
-                /
-              </div>
-              <div class="col-md-2">
-                <input class="form-control adInsInput" formControlName="PhnExt3"  />
-                <lib-uc-show-errors [control]="RefEmpForm.controls.PhnExt3" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-3 adInsLabel" for="Fax">Fax</label>
-              <div class="col-md-2">
-                <input class="form-control adInsInput" formControlName="FaxArea" [ngClass]="{ 'is-invalid': RefEmpForm.controls.FaxArea.invalid }" />
-                <lib-uc-show-errors [control]="RefEmpForm.controls.FaxArea" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-              <div class="d-flex justify-content-center align-items-center" style="font-size:25px; font-weight: 100; margin: 0">
-                -
-              </div>
-              <div class="col-md-2">
-                <input class="form-control adInsInput" formControlName="Fax" [ngClass]="{ 'is-invalid': RefEmpForm.controls.Fax.invalid }" />
-                <lib-uc-show-errors [control]="RefEmpForm.controls.Fax" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-              </div>
-            </div>
-            <div class="form-group row adins-required">
-              <label class="col-md-3 adInsLabel" for="MobilePhone1">Mobile Phone 1</label>
+              <label class="col-md-2 adInsLabel" for="MobilePhone1">Mobile Phone 1</label>
               <div class="col-md-9">
                 <input class="form-control adInsInput width-75-per" formControlName="MobilePhnNo1" required 
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.MobilePhnNo1.invalid }" />
@@ -252,14 +111,14 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 adInsLabel" for="MobilePhone2">Mobile Phone 2</label>
+              <label class="col-md-2 adInsLabel" for="MobilePhone2">Mobile Phone 2</label>
               <div class="col-md-9">
                 <input class="form-control adInsInput width-75-per" formControlName="MobilePhnNo2" [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.MobilePhnNo2.invalid }" />
                 <lib-uc-show-errors [control]="RefEmpForm.controls.MobilePhnNo2" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
             </div>
             <div class="form-group row adins-required">
-              <label class="col-md-3 adInsLabel" for="Email1">Email 1</label>
+              <label class="col-md-2 adInsLabel" for="Email1">Email 1</label>
               <div class="col-md-9">
                 <input class="form-control adInsInput width-75-per" formControlName="Email1" required 
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.Email1.invalid }" />
@@ -267,7 +126,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 adInsLabel" for="Email2">Email 2</label>
+              <label class="col-md-2 adInsLabel" for="Email2">Email 2</label>
               <div class="col-md-9">
                 <input class="form-control adInsInput width-75-per" formControlName="Email2"/>
                 <lib-uc-show-errors [control]="RefEmpForm.controls.Email2" [submit]="enjiForm.submitted"></lib-uc-show-errors>
@@ -277,7 +136,7 @@
           <lib-ucSubsection [id]="'BankPanelId'" [title]="'Bank Information'" [panel]="'BankPanel'"></lib-ucSubsection>
           <div class="form-body" id="BankPanel">
             <div class="form-group row adins-required">
-              <label class="col-md-3  adInsLabel" for="BankName" translate>Bank Name </label>
+              <label class="col-md-2  adInsLabel" for="BankName" translate>Bank Name </label>
               <div class="col-md-9">
                 <div class="width-75-per">
                   <lib-uclookupgeneric [lookupInput]="inputLookupBankObj" [parentForm]='RefEmpForm' [enjiForm]='enjiForm' [identifier]="'BankName'"
@@ -286,7 +145,7 @@
               </div>
             </div>
             <div class="form-group row adins-required">
-              <label class="col-md-3  adInsLabel" for="BankBranch">Bank Branch </label>
+              <label class="col-md-2  adInsLabel" for="BankBranch">Bank Branch </label>
               <div class="col-md-9">
                 <input type="text" class="form-control adInsInput width-75-per" formControlName="BankBranch" required
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.BankBranch.invalid }">
@@ -294,13 +153,13 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3  adInsLabel" for="BankBranchRegCode">Bank BI Code</label>
+              <label class="col-md-2  adInsLabel" for="BankBranchRegCode">Bank BI Code</label>
               <div class="col-md-9">
                 <input [attr.disabled]="true" type="text" class="form-control adInsInput width-75-per" formControlName="BankBranchRegCode" />
               </div>
             </div>
             <div class="form-group row adins-required">
-              <label class="col-md-3  adInsLabel" for="BankAccName">Account Name</label>
+              <label class="col-md-2  adInsLabel" for="BankAccName">Account Name</label>
               <div class="col-md-9">
                 <input type="text" id="bankAccName" class="form-control adInsInput width-75-per" formControlName="BankAccName" required
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.BankAccName.invalid }" />
@@ -308,7 +167,7 @@
               </div>
             </div>
             <div class="form-group row adins-required">
-              <label class="col-md-3  adInsLabel" for="BankAccNo">Account No</label>
+              <label class="col-md-2  adInsLabel" for="BankAccNo">Account No</label>
               <div class="col-md-9">
                 <input type="text" id="bankAccNo" class="form-control adInsInput width-75-per" formControlName="BankAccNo" required
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.BankAccNo.invalid }" />

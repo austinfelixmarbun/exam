@@ -126,17 +126,32 @@
             "position": "center",
             "action": [
                 {
-                    "type": "edit",
-                    "path": "/Vendor/VendorScheme/Detail",
-                    "param": [
+                    "type" : "switch", 
+                    "case" : [ 
+                      {
+                        "conditions" : [ 
+                          {
+                            "property" : "VendorSchmCode", 
+                            "value" : "ALL",
+                            "restriction": "NEQ"
+                          }
+                        ],
+                        "result" : 
                         {
-                            "type": "VendorSchmId",
-                            "property": "VendorSchmId"
-                        },
-                        {
-                            "type": "mode",
-                            "property": "edit"
+                          "type": "url",
+                          "path": "/Vendor/VendorScheme/Detail",
+                          "param": [
+                            {
+                              "type": "VendorSchmId",
+                              "property": "VendorSchmId"
+                            },
+                            {
+                              "type": "mode",
+                              "property": "edit"
+                            }
+                          ]
                         }
+                      }
                     ]
                 }
             ]

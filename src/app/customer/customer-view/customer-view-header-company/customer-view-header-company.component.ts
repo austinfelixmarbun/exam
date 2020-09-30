@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -41,7 +40,7 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
       else if (params["CustId"] != null) {
         this.IdCust = params["CustId"];
       }
-      this.custUrl = environment.FoundationR3Web + '/View/Customer?CustId=' + this.IdCust;
+      this.custUrl = environment.FoundationR3Web + '/View/Customer/PersonalDetail?CustId=' + this.IdCust;
     });
   }
   ngOnInit() {
@@ -52,9 +51,9 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
       (response) => {
         this.tempCustObj = response;
         var refMasterObjMrCustModelCode = {
-          MasterCode: this.tempCustObj.MrCustModelCode
+          CustModelCode: this.tempCustObj.MrCustModelCode
         }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrCustModelCode).subscribe(
+        this.http.post(URLConstant.GetRefCustModelByCode, refMasterObjMrCustModelCode).subscribe(
           (response) => {
             this.tempMrCustModelCode = response;
           }

@@ -32,10 +32,6 @@ export const Full_ROUTES: Routes = [
     loadChildren: './customer/customer.module#CustomerModule'
   },
   {
-    path: 'zipcode',
-    loadChildren: './zipcode/zipcode.module#ZipcodeModule'
-  },
-  {
     path: 'SystemSetting',
     loadChildren: './system-setting/system-setting.module#SystemSettingModule'
   },
@@ -58,10 +54,6 @@ export const Full_ROUTES: Routes = [
   {
     path: 'Upload',
     loadChildren: './upload/upload.module#UploadModule'
-  },
-  {
-    path: 'test',
-    loadChildren: './test/test.module#TestModule'
   },
   {
     path: 'product',

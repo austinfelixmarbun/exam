@@ -6,6 +6,8 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { HttpClient } from '@angular/common/http';
+import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
 
 @Component({
   selector: 'app-asset-scheme-member',
@@ -17,8 +19,10 @@ export class AssetSchemeMemberComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();
   arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  assetSchmHObj: AssetSchemeHObj;
+  AssetSchmHIsSystem: false;
   
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetSchmHId"] != null) {
         this.AssetSchmHId = params["AssetSchmHId"];
@@ -43,5 +47,14 @@ export class AssetSchemeMemberComponent implements OnInit {
 
     this.arrCrit.push(critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
+
+    this.assetSchmHObj = new AssetSchemeHObj();
+    this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
+    this.http.post(URLConstant.GetAssetSchmHById, this.assetSchmHObj).subscribe(
+      (response: AssetSchemeHObj) => {
+        this.assetSchmHObj = response;
+        this.AssetSchmHIsSystem = response.IsSystem;
+      }
+    );
   }
 }

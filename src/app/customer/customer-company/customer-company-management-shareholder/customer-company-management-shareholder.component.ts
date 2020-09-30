@@ -25,7 +25,7 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
   IdCust: number;
   tempCustCompanyObj: any;
   tempListCompanyManagementShareholder: any;
-
+  isOwner : boolean;
   custCompanyObj: CustCompanyObj;
   custCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
 
@@ -40,17 +40,22 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
   ngOnInit() {
     this.mode = "check";
   }
-
+  checkIsOwner(ev){
+    this.isOwner = ev.isOwner;
+  }
   terimaValue(ev) {
     this.mode = ev.mode;
     this.CustCompanyMgmntShrholderId = ev.CustCompanyMgmntShrholderId;
-    this.TotalShare = ev.TotalShare;
-
+    this.TotalShare = ev.TotalShare; 
     if (ev.stepMode != undefined) {
       this.outputTab.emit({ stepMode: ev.stepMode })
     }
   }
   next() {
+    if(this.isOwner == false){
+      this.toastr.warningMessage(ExceptionConstant.Add_Min_1_Owner);
+      return;
+    }
     this.custCompanyObj = new CustCompanyObj;
     this.custCompanyObj.CustId = this.IdCust;
     this.http.post(URLConstant.GetCustCompanyByCustId, this.custCompanyObj).subscribe(

@@ -4,7 +4,7 @@ import { HttpModule } from "@angular/http";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { SharingModule } from 'app/shared/sharing.module';
 import { ArchwizardModule } from 'angular-archwizard';
-import { UcSubsectionModule } from "@adins/uc-subsection";
+import { UcSubsectionModule, UcSubsectionComponent } from "@adins/uc-subsection";
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { ViewRoutingModule } from "./view-routing.module";
 import { UcgridviewComponent } from "@adins/ucgridview";
@@ -37,22 +37,13 @@ import { CustomerViewAddressComponent } from "./customer-view/customer-view-addr
 import { CustomerViewPersonalDetailComponent } from "./customer-view/customer-view-personal-detail/customer-view-personal-detail.component";
 import { CustomerViewPersonalJobDataComponent } from "./customer-view/customer-view-personal-job-data/customer-view-personal-job-data.component";
 import { ProductOfferingViewComponent } from "./prod-offering-view/product-offering-view.component";
-import { VendorBranchViewComponent } from "./vendor-branch-view/vendor-branch-view.component";
-import { VendorHoldingViewComponent } from "./vendor-holding-view/vendor-holding-view.component";
-import { VendorHoInfoComponent } from "./vendor-ho-info/vendor-ho-info.component";
-import { HoAddressInfoComponent } from "./vendor-ho-info/ho-address-info/ho-address-info.component";
-import { HoBankInfoComponent } from "./vendor-ho-info/ho-bank-info/ho-bank-info.component";
-import { HoBranchInfoComponent } from "./vendor-ho-info/ho-branch-info/ho-branch-info.component";
-import { HoContactPersonInfoComponent } from "./vendor-ho-info/ho-contact-person-info/ho-contact-person-info.component";
-import { HoGroupInfoComponent } from "./vendor-ho-info/ho-group-info/ho-group-info.component";
-import { HoInfoComponent } from "./vendor-ho-info/ho-info/ho-info.component";
-import { HoTaxInfoComponent } from "./vendor-ho-info/ho-tax-info/ho-tax-info.component";
-import { MainHoInfoComponent } from "./vendor-ho-info/main-ho-info/main-ho-info.component";
-import { MainInfoViewComponent } from "./vendor-ho-info/main-info-view/main-info-view.component";
 import { NegativeCustomerViewComponent } from "./negative-customer-view/negative-customer-view.component";
 import { ProductHOViewComponent } from "./product-ho-view/product-ho-view.component";
-import { SurveyOrderViewComponent } from "./survey-order-view/survey-order-view.component";
-import { SurveyTaskViewComponent } from "./survey-task-view/survey-task-view.component";
+
+import { CustomerViewCoyAddressComponent } from "./customer-view/customer-view-coy-address/customer-view-coy-address.component";
+import { CustomerViewPersonalAddressComponent } from "./customer-view/customer-view-personal-address/customer-view-personal-address.component";
+import { CustomerViewPersonalCustomerGroupComponent } from "./customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -66,64 +57,20 @@ import { SurveyTaskViewComponent } from "./survey-task-view/survey-task-view.com
     UcSubsectionModule,
     SharingComponentModule,
     UcapprovalhistModule,
-    
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
-    ///customer
-   CustomerViewComponent,
-   CustomerViewPersonalContactPersonComponent,
-   CustomerViewPersonalFinancialDataComponent,
-   CustomerViewPersonalJobDataNonProfComponent,
-   CustomerViewPersonalJobDataEmpComponent,
-   CustomerViewPersonalJobDataSmeComponent,
-   CustomerViewPersonalOtherAttrComponent,
-   CustomerViewPersonalAppListingComponent,
-   CustomerViewCoyManagementComponent,
-   CustomerViewCoyContactComponent,
-   CustomerViewCoyFinancialComponent,
-   CustomerViewCoyLegalComponent,
-   CustomerViewCoyOtherComponent,
-   CustomerViewCoyAppListingComponent,
-   CustomerViewCoyExposureComponent,
-   CustomerViewCoyCustScoreComponent,
-   CustomerViewCoyCustAddColateralComponent,
-   CustomerViewCoyDetailComponent,
-   CustomerViewHeaderPersonalComponent, 
-   CustomerViewHeaderCompanyComponent,
-   CustomerViewPersonalFinancialSectionComponent,
-   CustomerViewCustomerGroupComponent,
-   CustomerViewAddressComponent,
-   CustomerViewPersonalDetailComponent,
-   CustomerViewPersonalJobDataComponent,
+
    ///product offering view
-   ProductOfferingViewComponent,
-   ///vendor branch view
-    VendorBranchViewComponent,
-    ///vendor holding view
-    VendorHoldingViewComponent,
-    ///vendor ho
-    VendorHoInfoComponent,
-    HoAddressInfoComponent,
-    HoBankInfoComponent,
-    HoBranchInfoComponent,
-    HoContactPersonInfoComponent,
-    HoGroupInfoComponent,
-    HoInfoComponent,
-    HoTaxInfoComponent,
-    MainHoInfoComponent,
-    MainInfoViewComponent,
-    ///Negative Customer
-    NegativeCustomerViewComponent,
-    //Product HO
-    ProductHOViewComponent,
-    // Survey Order
-    SurveyOrderViewComponent,
-    SurveyTaskViewComponent
+  //  ProductOfferingViewComponent,
+
 
   ],
   entryComponents: [
     UcgridviewComponent,
-    UcapprovalhistComponent
+    UcapprovalhistComponent,
+    UcSubsectionComponent
   ]
 
 })

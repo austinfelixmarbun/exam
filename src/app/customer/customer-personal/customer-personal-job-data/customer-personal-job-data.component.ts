@@ -27,10 +27,6 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   getCustById: string;
   getListActiveRefMaster: string;
 
-  CustJobDataForm = this.fb.group({
-    JobDataType: [''],
-  });
-
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustById = URLConstant.GetCustByCustId;
     this.getListActiveRefMaster = URLConstant.GetListActiveRefMaster;

@@ -138,8 +138,8 @@ export class CommonConstant {
     public static RefMasterTypeCodeTaskAssignmentType = "TASK_ASSIGNMENT_TYPE";
 
     public static RefMasterTypeCodeScoreTrxType = "SCORE_TRX_TYPE";
-    
-    
+    public static RefMasterTypeCodeAttrInputType = "ATTR_INPUT_TYPE";
+    public static RefMasterTypeCodeRegularExpression = "REGULAR_EXPRESSION";
     
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
@@ -183,4 +183,8 @@ export class CommonConstant {
 
     // ID TYPE
     public static MrIdTypeCodeEKTP = "EKTP";
+    public static AttrGroupCustCompanyFinData = "CUST_COMPANY_FINDATA"
+    public static AttrGroupCustPersonalFinData = "CUST_PERSONAL_FINDATA"
+    public static AttrGroupCustCompanyOther = "CUST_COMPANY_OTH"
+    public static AttrGroupCustPersonalOther= "CUST_PERSONAL_OTH"
 }

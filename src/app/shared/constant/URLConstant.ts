@@ -121,6 +121,7 @@ export class URLConstant {
     public static DeleteRefEmpAndEmpBankAcc = "/RefEmp/DeleteRefEmpAndEmpBankAcc";
     public static GetListEmployeebyRefEmpId = "/EmpPosition/GetListEmployeebyRefEmpId";
     public static GetEmpListByOfficeIdAndIsActive = "/RefEmp/GetEmpListByOfficeIdAndIsActive";
+    public static GetEmpForUpdateById = environment.FoundationR3Url + "/RefEmp/GetRefEmpForUpdateByRefEmpId"
 
     //EMP_POSITION
     public static GetEmpPositionPaging = "/EmpPosition/GetEmpPositionPaging";
@@ -232,6 +233,8 @@ export class URLConstant {
     public static GetRefMasterTypeOfficeWithoutCG = environment.FoundationR3Url + "/RefMaster/GetListKeyValueOfficeTypeWithoutCg";
     public static GetListActiveRefMasterWithReserveFieldAll = environment.FoundationR3Url + "/RefMaster/GetListActiveRefMasterWithReserveFieldAll";
     public static GetListActiveRefMasterByRefMasterTypeCode = environment.FoundationR3Url + "/RefMaster/GetListActiveRefMasterByRefMasterTypeCode";
+    public static GetRefMasterByRefMasterTypeCodeAndMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByRefMasterTypeCodeAndMasterCode"
+  
     //REF COUNTRY
     public static GetListRefCountry = environment.FoundationR3Url + "/RefCountry/GetListRefCountry";
     public static GetRefCountryByCountryCode = environment.FoundationR3Url + "/RefCountry/GetRefCountryByCountryCode";
@@ -339,7 +342,7 @@ export class URLConstant {
     public static GetRefAttrById = environment.FoundationR3Url + "/RefAttr/GetRefAttrById";
     public static AddRefAttr = environment.FoundationR3Url + "/RefAttr/AddRefAttr";
     public static EditRefAttr = environment.FoundationR3Url + "/RefAttr/EditRefAttr";
-
+    public static GetListActiveRefAttrByAttrGroup = environment.FoundationR3Url + "/RefAttr/GetListActiveRefAttrByAttrGroup"
     //REF PROFESSION
     public static AddRefProfession = environment.FoundationR3Url + "/RefProfession/AddRefProfession";
     public static EditRefProfession = environment.FoundationR3Url + "/RefProfession/EditRefProfession";
@@ -759,10 +762,9 @@ export class URLConstant {
 
     // CUST ATTR CONTENT
     public static GetCustAttrContentForCustViewByCustId = environment.FoundationR3Url + "/CustAttrContent/GetCustAttrContentForCustViewByCustId";
-    public static AddListCustAttrContent = environment.FoundationR3Url + "/CustAttrContent/AddListCustAttrContent";
-    public static EditListCustAttrContent = environment.FoundationR3Url + "/CustAttrContent/EditListCustAttrContent";
-    public static GetListCustAttrContentByCustIdForCust = environment.FoundationR3Url + "/CustAttrContent/GetListCustAttrContentByCustIdForCust";
-
+    public static AddEditListCustAttrContent = environment.FoundationR3Url + "/CustAttrContent/AddEditListCustAttrContent";
+     public static GetListCustAttrContentByCustIdForCust = environment.FoundationR3Url + "/CustAttrContent/GetListCustAttrContentByCustIdForCust";
+    public static GetListCustAttrContentByCustIdAndAttrGroup = environment.FoundationR3Url + "/CustAttrContent/GetListCustAttrContentByCustIdAndAttrGroup"
     //CUST CONTACT PERSON
     public static GetCustCompanyContactPersonForCustViewByCustId = environment.FoundationR3Url + "/CustCompanyContactPerson/GetCustCompanyContactPersonForCustViewByCustId";
     public static GetListCustPersonalContactPersonForCustViewByCustId = environment.FoundationR3Url + "/CustPersonalContactPerson/GetListCustPersonalContactPersonForCustViewByCustId";
@@ -782,6 +784,11 @@ export class URLConstant {
     public static GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + '/NegativeCust/GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType';
     public static GetNegativeCustByNegativeCustNameAndCustType = environment.FoundationR3Url + "/NegativeCust/GetNegativeCustByNegativeCustNameAndCustType";
 
+    // CUSTOMER OTHER INFO
+    public static AddEditCustOtherInfo = environment.FoundationR3Url + "/CustOtherInfo/AddEditCustOtherInfo"
+    public static GetCustOtherInfoByCustId = environment.FoundationR3Url + "/CustOtherInfo/GetCustOtherInfoByCustId"
+
+    
     //REF BEHAVIOUR
     public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
     public static GetRefBehaviourByBehaviourTypeCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByBehaviourTypeCode";
@@ -843,5 +850,6 @@ export class URLConstant {
     //REF CUST MODEL
     public static GetListKeyValueByMrCustTypeCode = environment.FoundationR3Url + "/RefCustModel/GetListKeyValueByMrCustTypeCode";
     public static GetRefCustModelByCode = environment.FoundationR3Url + "/RefCustModel/GetRefCustModelByCode";
+
 
 }

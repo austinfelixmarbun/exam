@@ -41,7 +41,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   addManagementShareholderUrl : string;
   editManagementShareholderUrl : string;
   getCustCompanyMgmntShrholderUrl : string;
-  GetListActiveRefMasterWithReserveFieldAllUrl: string;
+  getListKeyValueByMrCustTypeCode: string;
 
   ManagementShareholderForm = this.fb.group({
     MgmntShrholderName: ['', [Validators.required,Validators.maxLength(100)]],
@@ -57,6 +57,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
     IsSigner: [false],
     IsActive: [false],
+    IsOwner: [false]
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -65,7 +66,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholder;
     this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
     this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholder; 
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListKeyValueByMrCustTypeCode = URLConstant.GetListKeyValueByMrCustTypeCode;
   }
 
   ngOnInit() {
@@ -126,21 +127,20 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
         }
       }
     );
-    var refMasterObjMrCustModelCode = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
-      Reservefield1: CommonConstant.CustTypePersonal,
-      RowVersion: ""
+    var refMasterObjCustModel = {
+      MrCustTypeCode: CommonConstant.CustTypePersonal
     }
-    this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObjMrCustModelCode).subscribe(
+    this.http.post(this.getListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
       (response) => {
+        this.tempMrCustModelCode = response;
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.tempMrCustModelCode = response[CommonConstant.ReturnObj];
           this.ManagementShareholderForm.patchValue({
             MrCustModelCode: this.tempMrCustModelCode[0].Key
           });
-        }
       }
-    );
+    }
+    ); 
     if(this.CustCompanyMgmntShrholderId!=null){
       this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
       this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId  = this.CustCompanyMgmntShrholderId;
@@ -163,7 +163,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
             TaxIdNo:  this.tempCustCompanyMgmntShrholderObj.TaxIdNo,
             SharePrcnt: this.tempCustCompanyMgmntShrholderObj.SharePrcnt,
             IsSigner: this.tempCustCompanyMgmntShrholderObj.IsSigner,
-            IsActive: this.tempCustCompanyMgmntShrholderObj.IsActive
+            IsActive: this.tempCustCompanyMgmntShrholderObj.IsActive,
+            IsOwner: this.tempCustCompanyMgmntShrholderObj.IsOwner
           });
           if(this.tempCustCompanyMgmntShrholderObj.ShareholderCustNo!=null){ 
             this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
@@ -211,6 +212,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
       this.custCompanyMgmntShrholderObj.IsActive = this.ManagementShareholderForm.controls["IsActive"].value;
+      this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value;
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Personal;
       
       this.http.post(this.editManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
@@ -237,6 +239,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
       this.custCompanyMgmntShrholderObj.IsActive = this.ManagementShareholderForm.controls["IsActive"].value;
+      this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value; 
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Personal;
 
       this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(

@@ -76,7 +76,6 @@ import { CustomerCompanyAddressCheckComponent } from './customer-company/custome
 import { CustomerPersonalAddressCheckComponent } from './customer-personal/customer-personal-address/customer-personal-address-check/customer-personal-address-check.component';
 import { CustomerViewHeaderPersonalComponent } from './customer-view/customer-view-header-personal/customer-view-header-personal.component';
 import { CustomerViewHeaderCompanyComponent } from './customer-view/customer-view-header-company/customer-view-header-company.component';
-import { UcinputnumberModule } from '@adins/ucinputnumber';
 import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/customer-view-personal-financial-section/customer-view-personal-financial-section.component';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { CustomerViewCustomerGroupComponent } from './customer-view/customer-view-customer-group/customer-view-customer-group.component';
@@ -88,6 +87,10 @@ import { ReviewUploadNegativeCustomerDetailComponent } from './negative-customer
 import { ReviewUploadNegativeCustomerPagingComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-paging/review-upload-negative-customer-paging.component';
 import { UcuploadModule } from '@adins/ucupload';
 import { CustAttrSectionComponent } from './cust-attr-section/cust-attr-section.component';
+import { CustomerViewCoyAddressComponent } from './customer-view/customer-view-coy-address/customer-view-coy-address.component';
+import { CustomerViewPersonalAddressComponent } from './customer-view/customer-view-personal-address/customer-view-personal-address.component';
+import { CustomerViewPersonalCustomerGroupComponent } from './customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component';
+import { CustAttrListComponent } from './cust-attr-list/cust-attr-list.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -122,7 +125,6 @@ export const customCurrencyMaskConfig = {
     UcviewgenericModule,
     UcaddressModule,
     UcShowErrorsModule,
-    UcinputnumberModule,
     MatTabsModule,
     UcuploadModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
@@ -192,7 +194,11 @@ export const customCurrencyMaskConfig = {
     UploadNegativeCustomerComponent,
     ReviewUploadNegativeCustomerDetailComponent,
     ReviewUploadNegativeCustomerPagingComponent,
-    CustAttrSectionComponent
+    CustAttrSectionComponent,
+    CustomerViewCoyAddressComponent,
+    CustomerViewPersonalAddressComponent,
+    CustomerViewPersonalCustomerGroupComponent,
+    CustAttrListComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })

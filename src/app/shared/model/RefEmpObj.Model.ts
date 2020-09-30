@@ -1,3 +1,6 @@
+import { EmpBankAccObj } from "./EmpBankAccObj.Model";
+import { RefUserObj } from "./RefUserObj.Model";
+
 export class RefEmpObj {
     RefEmpId: any;
     EmpNo: any;
@@ -33,6 +36,8 @@ export class RefEmpObj {
     Loginsoftphone: any;
     IsLeave: any;
     IsActive: any;
+    RefUser: RefUserObj;
+    EmpBankAcc: EmpBankAccObj;
     RowVersion: any;
     constructor() { this.RefEmpId = 0, this.RowVersion = "" }
 }  
