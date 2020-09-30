@@ -180,4 +180,7 @@ export class CommonConstant {
 
     //Attribute Type Code
     public static AttrTypeCodeMaster = "MASTER";
+
+    // ID TYPE
+    public static MrIdTypeCodeEKTP = "EKTP";
 }

@@ -271,12 +271,20 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       MrCustModelCode: event.MrCustModelCode,
       MrIdTypeCode : event.MrIdTypeCode,
       IdNo: event.IdNo, 
-      IdExpiredDt: datePipe.transform(event.IdExpiredDt, 'yyyy-MM-dd'),
+      // IdExpiredDt: datePipe.transform(event.IdExpiredDt, 'yyyy-MM-dd'),
       BirthDt: datePipe.transform(event.BirthDt, 'yyyy-MM-dd'),
       MrGenderCode : event.MrGenderCode,
       BirthPlace: event.BirthPlace, 
       TaxIdNo : event.TaxIdNo,
     }); 
+
+    if(event.MrIdTypeCode != CommonConstant.MrIdTypeCodeEKTP){
+      if(event.IdExpiredDt){
+        this.ManagementShareholderForm.patchValue({
+          IdExpiredDt: datePipe.transform(event.IdExpiredDt, 'yyyy-MM-dd')
+        });
+      }
+    }
     this.tempShareholderCustNo = event.CustNo;
     
     this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
