@@ -8,11 +8,13 @@ export class OfficeMemberComponent implements OnInit {
 
   isOn: any;
   @Input() objInput: any;
+  @Input() ProdHId: any;
   ListOfficeMemberObj: any = {};
   
   constructor() { }
 
   ngOnInit() {
+    console.log("BBBBBBBBBBB");
     this.isOn = true;
     this.ListOfficeMemberObj["param"]=this.objInput["param"];
     this.ListOfficeMemberObj["result"] = [];
