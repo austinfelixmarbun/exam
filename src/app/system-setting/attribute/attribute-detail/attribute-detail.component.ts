@@ -13,17 +13,19 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 
 @Component({
-  selector: 'app-ref-attr-detail',
-  templateUrl: './ref-attr-detail.component.html',
-  styles: []
+  selector: 'app-attribute-detail',
+  templateUrl: './attribute-detail.component.html'
 })
-export class RefAttrDetailComponent implements OnInit {
+export class AttributeDetailComponent implements OnInit {
+
+ 
   pageType: string;
   refAttrId: number;
   attrInputTypeList: any;
   attrTypeCodeList: any;
   patternCodeList: any;
   patternValueList: any;
+  attributeGroupList: any;
   isTextBox: boolean = false;
   inputLookupRefMasterType: InputLookupObj;
   RefAttrForm = this.fb.group({
@@ -34,6 +36,8 @@ export class RefAttrDetailComponent implements OnInit {
     AttrInputType: ['', [Validators.required]],
     AttrGroup: ['', [Validators.required]],
     IsActive: [true],
+    DefaultValue: [''],
+    IsMandatory: [true],
     RowVersion: ['']
   });
 
@@ -73,13 +77,22 @@ export class RefAttrDetailComponent implements OnInit {
     var RefMasterInputType = new RefMasterObj();
     RefMasterInputType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeAttrInputType;
     let getRefMasterInputType = this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterInputType);
+
     var RefMasterPatternCode = new RefMasterObj();
     RefMasterPatternCode.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeRegularExpression;
     let getRefMasterPatternCode = this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterPatternCode);
 
+    var RefMasterAttributeGroup = new RefMasterObj();
+    RefMasterAttributeGroup.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeAttributeGroup;
+    let getRefMasterAttributeGroup = this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterAttributeGroup);
+
+
+
+
+    
     if (this.pageType == "edit") {
       let getRefAttr = this.httpClient.post(URLConstant.GetRefAttrById, { RefAttrId: this.refAttrId }).pipe(first());
-      forkJoin([getRefAttr, getAttrType, getRefMasterInputType, getRefMasterPatternCode]).subscribe(
+      forkJoin([getRefAttr, getAttrType, getRefMasterInputType, getRefMasterPatternCode, getRefMasterAttributeGroup]).subscribe(
         (response) => {
           var refAttr = response[0];
           var attrTypeList = response[1];
@@ -87,6 +100,7 @@ export class RefAttrDetailComponent implements OnInit {
           this.RefAttrForm.patchValue({ ...refAttr });
           this.attrInputTypeList = response[2][CommonConstant.ReturnObj];
           this.patternCodeList = response[3][CommonConstant.ReturnObj];
+          this.attributeGroupList = response[4][CommonConstant.ReturnObj];
           switch (refAttr["AttrInputType"]) {
             case 'L':
               var valueList = refAttr["AttrValue"].split(";");
@@ -127,16 +141,20 @@ export class RefAttrDetailComponent implements OnInit {
       );
     }
     else {
-      forkJoin([getAttrType, getRefMasterInputType, getRefMasterPatternCode]).subscribe(
+      forkJoin([getAttrType, getRefMasterInputType, getRefMasterPatternCode, getRefMasterAttributeGroup]).subscribe(
         (response) => {
           this.attrTypeCodeList = response[0][CommonConstant.ReturnObj];
           this.attrInputTypeList = response[1][CommonConstant.ReturnObj];
           this.patternCodeList = response[2][CommonConstant.ReturnObj];
+          this.attributeGroupList = response[3][CommonConstant.ReturnObj];
+          
           this.RefAttrForm.patchValue({
             AttrTypeCode: this.attrTypeCodeList[0].AttrTypeCode,
             AttrInputType: this.attrInputTypeList[0].Key,
             PatternCode: this.patternCodeList[0].Key,
-            PatternValue: this.patternCodeList[0].Value
+            PatternValue: this.patternCodeList[0].Value,
+            AttrGroup: this.attributeGroupList[0].Key,
+            
           });
         },
         (error) => {
@@ -221,7 +239,7 @@ export class RefAttrDetailComponent implements OnInit {
     this.httpClient.post(url, formValue).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);
-        this.router.navigate(["/Asset/RefAttr/Paging"]);
+        this.router.navigate(["/SystemSetting/Attribute/Paging"]);
       },
       (error) => {
         console.log(error);

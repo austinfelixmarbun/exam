@@ -56,6 +56,15 @@
                   </lib-uc-show-errors>
                 </div>
               </div>
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel" for="DefaultValue" translate>Default Value</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput" formControlName="DefaultValue"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.DefaultValue.invalid }" />
+                  <lib-uc-show-errors [control]="RefAttrForm.controls.DefaultValue" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
               <div *ngIf="this.isTextBox">
                 <div class="form-group row adins-required">
                   <label class="col-md-3 adInsLabel" for="AttrLength" translate>Attribute Length</label>
@@ -90,8 +99,15 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="AttrGroup" translate>Attribute Group</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="AttrGroup"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrGroup.invalid }" />
+                  <!-- <input type="text" class="form-control adInsInput" formControlName="AttrGroup"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrGroup.invalid }" /> -->
+                    <select formControlName="AttrGroup" class="form-control"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrGroup.invalid }">
+                    <option *ngFor="let inputType of attributeGroupList" [value]="inputType.Key">
+                      {{inputType.Value}}
+                    </option>
+                  </select>
+ 
                   <lib-uc-show-errors [control]="RefAttrForm.controls.AttrGroup" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -99,8 +115,7 @@
 
               <div class="form-group row adins-required" [hidden]="RefAttrForm.controls.AttrInputType.value != 'RM'">
 
-                <label class="col-md-3 adInsLabel">Attribute Value</label>
-
+                <label class="col-md-3 adInsLabel">Attribute Value</label> 
                 <div class="col-md-9">
                   <lib-uclookupgeneric [lookupInput]="inputLookupRefMasterType" [parentForm]="RefAttrForm"
                     [enjiForm]="enjiForm" [identifier]="'lookupRefMasterType'" (lookup)="getLookupAttrValue($event)">
@@ -140,6 +155,14 @@
                   <input type="checkbox" formControlName="IsActive">
                 </div>
               </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel" for="isActive">Mandatory</label>
+                <div class="col-md-9">
+                  <input type="checkbox" formControlName="IsMandatory">
+                </div>
+              </div>
+ 
             </div>
           </div>
           <div class="form-actions right">
