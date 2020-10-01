@@ -93,6 +93,11 @@
       "position": "center",
       "label": "Office Area",
       "name": "ROA.AREA_CODE"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Allowed To Create Offering"
     }
   ],
   "bodyListTemp": [
@@ -110,6 +115,11 @@
       "type": "text",
       "position": "center",
       "property": "AreaName"
+    },
+    {
+      "type": "checkbox",
+      "position": "center",
+      "property": "IsAllowedCrt"
     }
   ]
 }

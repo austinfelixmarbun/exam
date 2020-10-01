@@ -33,10 +33,10 @@ export class SearchOfficeComponentOffering implements OnInit {
   }
 
   ngOnInit() {
-    this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/productHOfficeMbrTempPaging.json";
+    this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/productOfficeMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/productHOfficeMbrTempPaging.json";
+    this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/productOfficeMbrTempPaging.json";
     this.tempPagingObj.ddlEnvironments = [
       {
         name: "ROA.AREA_CODE",
