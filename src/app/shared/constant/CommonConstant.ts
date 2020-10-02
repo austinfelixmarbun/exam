@@ -140,7 +140,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeScoreTrxType = "SCORE_TRX_TYPE";
     public static RefMasterTypeCodeAttrInputType = "ATTR_INPUT_TYPE";
     public static RefMasterTypeCodeRegularExpression = "REGULAR_EXPRESSION";
-    
+    public static RefMasterTypeCodeAttributeGroup = "ATTRIBUTE_GROUP";
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
     // GENERAL SETTING CODE
