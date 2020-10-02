@@ -1,14 +1,15 @@
+ 
 import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 
 @Component({
-  selector: 'app-ref-attr',
-  templateUrl: './ref-attr.component.html',
-  styles: []
+  selector: 'app-attribute',
+  templateUrl: './attribute.component.html'
 })
-export class RefAttrComponent implements OnInit {
+export class AttributeComponent implements OnInit {
 
+ 
   inputPagingObj: UcPagingObj;
 
   constructor() { 

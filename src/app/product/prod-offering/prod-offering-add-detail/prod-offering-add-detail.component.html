@@ -60,7 +60,7 @@
       
                   <aw-wizard-step [stepTitle]="'Office Member'" 
                     [navigationSymbol]="{ symbol: '3', fontFamily: 'FontAwesome' }" (stepEnter)="EnterTab('officeMbr')">
-                    <app-office-member *ngIf="isOfficeMbr == true" [objInput]="objPassing"></app-office-member>
+                    <app-office-member *ngIf="isOfficeMbr == true" [ProdHId]="ProdHId" [objInput]="objPassing"></app-office-member>
                   </aw-wizard-step>
                 </aw-wizard>
               </div>

@@ -16,6 +16,8 @@ import { RefFormDetailComponent } from './ref-form/ref-form-detail/ref-form-deta
 import { RefFormRoleMappingComponent } from './ref-form/ref-form-role-mapping/ref-form-role-mapping.component';
 import { RefFormRolePagingComponent } from './ref-form/ref-form-role-paging/ref-form-role-paging.component';
 import { RoleFormPagingComponent } from './role/role-form-paging/role-form-paging.component';
+import { AttributeComponent } from './attribute/attribute.component';
+import { AttributeDetailComponent } from './attribute/attribute-detail/attribute-detail.component';
 
 const routes: Routes = [
   {
@@ -132,7 +134,21 @@ const routes: Routes = [
         data: {
           title: 'Ref Form Role Mapping Add'
         },
-      }
+      },
+      {
+        path: 'Attribute/Paging',
+        component: AttributeComponent,
+        data: {
+          title: 'Attribute Paging'
+        },
+      },
+      {
+        path: 'Attribute/Detail',
+        component: AttributeDetailComponent,
+        data: {
+          title: 'Attribute Detail'
+        },
+      },
     ]
   }
 ];
