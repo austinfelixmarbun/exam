@@ -471,6 +471,12 @@ export class URLConstant {
     public static GetlistAssetAccessorybyAssetTypeId = environment.FoundationR3Url + "/AssetAccessory/GetListAssetAccessoryByAssetTypeId"
     public static DeleteAssetAccessory = "/AssetAccessory/DeleteAssetAccessory"
 
+    //asset attr
+    public static AddAssetAttr = environment.FoundationR3Url +"/AssetAttr/AddAssetAttr";
+    public static EditAssetAttr = environment.FoundationR3Url +"/AssetAttr/EditAssetAttr";
+    public static GetListAssetAttrByAssetTypeId = environment.FoundationR3Url +"/AssetAttr/GetListAssetAttrByAssetTypeId";
+    public static GetAssetAttrByAssetAttrId = environment.FoundationR3Url +"/AssetAttr/GetAssetAttrByAssetAttrId";
+
     //asset category
     public static AddNewAssetCategory = environment.FoundationR3Url + "/AssetCategory/AddAssetCategory"
     public static EditAssetCategory = environment.FoundationR3Url + "/AssetCategory/EditAssetCategory"

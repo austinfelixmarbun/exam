@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { HttpClient } from '@angular/common/http';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 @Component({
   selector: 'app-asset-attribute',
   templateUrl: './asset-attribute.component.html',
@@ -19,7 +21,7 @@ export class AssetAttributeComponent implements OnInit {
   critObj: CriteriaObj = new CriteriaObj();
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private http:HttpClient, private toastr : NGXToastrService, private router: Router) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
@@ -36,11 +38,15 @@ export class AssetAttributeComponent implements OnInit {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewAssetType.json";
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
-    this.critObj.restriction = AdInsConstant.RestrictionLike;
+    this.critObj.restriction = AdInsConstant.RestrictionEq;
     this.critObj.propName = 'ASSET_TYPE_ID';
     this.critObj.value = this.AssetTypeId.toString();
     this.arrCrit.push(this.critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
+  }
+
+  edit(ev) {
+    this.router.navigate(["/Asset/Attribute/Detail"], { queryParams: { "AssetTypeId": this.AssetTypeId,"AssetAttrId": ev.RowObj.AssetAttrId, mode:"edit"} });
   }
 
 }
