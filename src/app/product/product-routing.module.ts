@@ -22,6 +22,7 @@ import { ProductOfferingDeactivateApprovalDetailComponent } from "./prod-offerin
 import { ProductOfferingDeactivateEditComponent } from "./prod-offering/prod-offering-deactivate-edit/product-offering-deactivate-edit.component";
 import { ProductReturnHoPagingComponent } from './product-HO/product-return-ho-paging/product-return-ho-paging.component';
 import { ProdOfferingReturnPagingComponent } from './prod-offering/prod-offering-return-paging/prod-offering-return-paging.component';
+import { ProductReviewComponent } from './product-HO/product-review/product-review.component';
 
 const routes: Routes = [
     {
@@ -181,6 +182,13 @@ const routes: Routes = [
         component: ProductOfferingDeactivateApprovalDetailComponent,
         data: {
           title: 'Product Offering Deactivate Approval Detail'
+        }
+      },
+      {
+        path: 'HOReview',
+        component: ProductReviewComponent,
+        data: {
+          title: 'Product HO Review'
         }
       },
     ]
