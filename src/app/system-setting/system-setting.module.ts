@@ -32,7 +32,9 @@ import { RefFormRolePagingComponent } from './ref-form/ref-form-role-paging/ref-
 import { RoleFormPagingComponent } from './role/role-form-paging/role-form-paging.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { UcaddtotempModule } from '@adins/ucaddtotemp';
+import { UcaddtotempModule } from '@adins/ucaddtotemp'; 
+import { AttributeComponent } from './attribute/attribute.component';
+import { AttributeDetailComponent } from './attribute/attribute-detail/attribute-detail.component';
 
 
 @NgModule({
@@ -72,7 +74,9 @@ import { UcaddtotempModule } from '@adins/ucaddtotemp';
     RefFormDetailComponent,
     RefFormRoleMappingComponent,
     RefFormRolePagingComponent,
-    RoleFormPagingComponent
+    RoleFormPagingComponent,
+    AttributeComponent,
+    AttributeDetailComponent
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [

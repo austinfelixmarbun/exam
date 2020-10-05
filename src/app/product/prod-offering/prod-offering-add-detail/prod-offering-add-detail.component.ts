@@ -33,7 +33,7 @@ export class ProdOfferingAddDetailComponent implements OnInit {
   prodOfferingObj : ProdOfferingObj;
   resultData : any;
   ProdOfferingHId: any;
-
+  ProdHId: any;
   isGeneralData: boolean = true;
   isProdCompnt: boolean = false;
   isOfficeMbr: boolean = false;
@@ -52,11 +52,13 @@ export class ProdOfferingAddDetailComponent implements OnInit {
   });
 
   ngOnInit() {
+    console.log("CCCCCCCCCCCCCCCCCCCC");
     var prodOfferingObj = new ProdOfferingObj();
     prodOfferingObj.ProdOfferingHId = this.objPassing.param;
     this.http.post(URLConstant.GetProductOfferingMainInfo, prodOfferingObj).subscribe(
       (response) => {
         this.resultData=response;
+        this.ProdHId = response["ProdHId"];
         this.ProdOfferingForm.patchValue({
           ProdOfferingCode : this.resultData.ProdOfferingCode,
           ProdOfferingName : this.resultData.ProdOfferingName,

@@ -86,5 +86,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'Survey',
     loadChildren: './survey/survey.module#SurveyModule'
-  }
+  },
+  {
+    path: 'Integration',
+    loadChildren: './integration/integration.module#IntegrationModule'
+  },
 ];

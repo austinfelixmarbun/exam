@@ -20,6 +20,8 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
   providers: [NGXToastrService]
 })
 export class ProdOfferingAddComponent implements OnInit {
+  businessDt: Date;
+  startActiveDt: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -60,7 +62,10 @@ export class ProdOfferingAddComponent implements OnInit {
     this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
 
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
-
+    this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
+    this.businessDt.setDate(this.businessDt.getDate());
+    this.startActiveDt = new Date(context[CommonConstant.BUSINESS_DT]);
+    this.startActiveDt.setDate(this.businessDt.getDate());
     var currOfcCode = context["OfficeCode"];
     if (currOfcCode == CommonConstant.HeadOffice) {
       this.inputLookupObj.urlJson = "./assets/uclookup/product/lookupProductForHO.json";
@@ -106,10 +111,20 @@ export class ProdOfferingAddComponent implements OnInit {
             StartDt: formatDate(this.resultData['StartDt'], 'yyyy-MM-dd', 'en-US'),
             EndDt: formatDate(this.resultData['EndDt'], 'yyyy-MM-dd', 'en-US')
           })
+          this.updateMinDtForEndDt();
+
         }
       );
     }
   }
+
+  updateMinDtForEndDt(){
+    this.startActiveDt = this.ProdOfferingForm.controls.StartDt.value;
+    if(this.ProdOfferingForm.controls.EndDt.value < this.startActiveDt){
+      this.ProdOfferingForm.controls.EndDt.setValue("");
+    }
+  }
+
   SaveForm() {
     this.prodOfferingObj = new ProdOfferingObj();
     this.prodOfferingObj = this.ProdOfferingForm.value;
