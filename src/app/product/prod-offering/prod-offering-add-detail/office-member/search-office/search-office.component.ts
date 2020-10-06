@@ -10,6 +10,8 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { ActivatedRoute } from '@angular/router';
+import { ProdOfferingObj } from 'app/shared/model/ProdOfferingObj.Model';
 
 @Component({
   selector: 'app-search-office-offering',
@@ -17,28 +19,47 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 })
 export class SearchOfficeComponentOffering implements OnInit {
   listSelectedId: Array<number> = new Array<number>();
+  arrListId: Array<number> = new Array<number>();
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
   @Output() componentIsOn: EventEmitter<any> = new EventEmitter();
   @Input() ListOfficeMemberObjInput: any;
+  @Input() ProdHId: any;
+  obj: ProdOfferingObj = new ProdOfferingObj();
 
   constructor(
     private http: HttpClient,
     private toastr: NGXToastrService
-  ) { }
-  
+  ) {
+  }
+
   ngOnInit() {
-    this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/productHOfficeMbrTempPaging.json";
+    this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/productOfficeMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/productHOfficeMbrTempPaging.json";
+    this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/productOfficeMbrTempPaging.json";
     this.tempPagingObj.ddlEnvironments = [
       {
         name: "ROA.AREA_CODE",
         environment: environment.FoundationR3Url
       }
     ];
+    this.obj.ProdHId = this.ProdHId;
+    this.http.post(URLConstant.GetListProdBranchOfficeMbrByProdHId, this.obj).subscribe(
+      response => {
+        this.toastr.successMessage(response["message"]);
+        for (let i = 0; i < response["ReturnObject"].length; i++) {
+          this.arrListId.push(response["ReturnObject"][i]["RefOfficeId"]);
+        }
+        var addCrit = new CriteriaObj();
+        addCrit.DataType = "numeric";
+        addCrit.propName = "RO.REF_OFFICE_ID";
+        addCrit.restriction = AdInsConstant.RestrictionIn;
+        addCrit.listValue = this.arrListId;
+        this.tempPagingObj.addCritInput.push(addCrit);
 
-    if(this.ListOfficeMemberObjInput["result"].length!=0){
+      }
+    );
+    if (this.ListOfficeMemberObjInput["result"].length != 0) {
       var addCrit = new CriteriaObj();
       addCrit.DataType = "numeric";
       addCrit.propName = "RO.REF_OFFICE_ID";
@@ -61,7 +82,7 @@ export class SearchOfficeComponentOffering implements OnInit {
     this.listSelectedId = ev.TempListId;
   }
 
-  SaveForm(){
+  SaveForm() {
     if (this.listSelectedId.length == 0) {
       this.toastr.errorMessage(ExceptionConstant.ADD_MIN_1_DATA);
       return;
@@ -72,8 +93,8 @@ export class SearchOfficeComponentOffering implements OnInit {
       RowVersion: ""
     };
 
-    for(var i=0;i<this.listSelectedId.length;i++){
-      var tempObj={
+    for (var i = 0; i < this.listSelectedId.length; i++) {
+      var tempObj = {
         ProdOfferingHId: this.ListOfficeMemberObjInput["param"],
         RefOfficeId: this.listSelectedId[i],
         IsAllowedCrt: true,

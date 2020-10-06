@@ -140,7 +140,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeScoreTrxType = "SCORE_TRX_TYPE";
     public static RefMasterTypeCodeAttrInputType = "ATTR_INPUT_TYPE";
     public static RefMasterTypeCodeRegularExpression = "REGULAR_EXPRESSION";
-    
+    public static RefMasterTypeCodeAttributeGroup = "ATTRIBUTE_GROUP";
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
     // GENERAL SETTING CODE
@@ -180,8 +180,15 @@ export class CommonConstant {
 
     //Attribute Type Code
     public static AttrTypeCodeMaster = "MASTER";
+
+    // ID TYPE
+    public static MrIdTypeCodeEKTP = "EKTP";
     public static AttrGroupCustCompanyFinData = "CUST_COMPANY_FINDATA"
     public static AttrGroupCustPersonalFinData = "CUST_PERSONAL_FINDATA"
     public static AttrGroupCustCompanyOther = "CUST_COMPANY_OTH"
     public static AttrGroupCustPersonalOther= "CUST_PERSONAL_OTH"
+
+    // Integration
+    public static DailyMasterTypeSingle = "Date";
+    public static DailyMasterTypeRange = "Range";
 }
