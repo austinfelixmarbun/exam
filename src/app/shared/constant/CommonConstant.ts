@@ -65,7 +65,7 @@ export class CommonConstant {
     public static SUPPLIER_ATPM = "SUPPLIER_ATPM";
 
     public static TITLE_SUPPLIER_ATPM = "Supplier ATPM";
-    public static TITLE_SUPPLIER_BRANCH = "Supplier Branch";
+    public static TITLE_SUPPLIER_BRANCH = "Supplier";
     public static TITLE_ASSET_INSCO_BRANCH = "Insurance Branch";
     public static TITLE_LIFE_INSCO_BRANCH = "Life Insurance Branch";
     public static TITLE_SURVEYOR_BRANCH = "Surveyor Branch";

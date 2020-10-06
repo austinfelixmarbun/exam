@@ -50,7 +50,9 @@ export class VendorBranchAddEditComponent implements OnInit {
 
   isHidden: boolean = true;
   RsvField: string;
-  
+  Registration: string;
+  Code: string;
+  Name: string;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params["MrVendorCategoryCode"] != null) {
@@ -98,8 +100,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     Province: [{ value: '', disabled: true }],
     RowVersionVendor: [''],
     RowVersionVendorAddr: [''],
-    IsNpwpExist: [false],
-    VendorAtpmCode: []
+    IsNpwpExist: [false] 
   })
 
   ngOnInit() {
@@ -109,6 +110,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.VendorForm.controls.VendorCode.disable();
       this.getData();
     } else {
+      this.bindText()
       this.setDropdown();
       this.setLookup();
     }
@@ -119,7 +121,8 @@ export class VendorBranchAddEditComponent implements OnInit {
       (response) => {
         this.result = response;
         this.setDropdown();
-        this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
+        this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode; 
+        this.bindText();
         this.MrVendorTypeCode = this.result.VendorObj.MrVendorTypeCode;
         this.VendorForm.patchValue({
           MrVendorCategoryCode: this.result.VendorObj.MrVendorCategoryCode,
@@ -157,7 +160,6 @@ export class VendorBranchAddEditComponent implements OnInit {
           Province: this.result.VendorAddrObj.Province,
           RowVersionVendorAddr: this.result.VendorAddrObj.RowVersion,
           IsNpwpExist: this.result.VendorObj.IsNpwpExist,
-          VendorAtpmCode: this.result.VendorObj.VendorAtpmCode,
         });
         this.setLookup();
       }
@@ -344,20 +346,14 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.VendorForm.patchValue({
       VendorParentId: event.VendorId
     });
-  }
 
+}
   getLookupZipcode(event) {
     this.VendorForm.patchValue({
       AreaCode2: event.AreaCode2,
       AreaCode1: event.AreaCode1,
       City: event.City,
       Province: event.Province
-    });
-  }
-
-  getLookupATPM(ev){
-    this.VendorForm.patchValue({
-      VendorAtpmCode: ev.VendorCode,
     });
   }
 
@@ -432,21 +428,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.inputLookupParentObj.addCritInput.push(critInput);
       this.inputLookupParentObj.title = "Supplier HO";
 
-      this.inputLookupATPMObj.urlJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-      this.inputLookupATPMObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-      this.inputLookupATPMObj.urlEnviPaging = environment.FoundationR3Url;
-      this.inputLookupATPMObj.pagingJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-      this.inputLookupATPMObj.genericJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-      this.inputLookupATPMObj.isRequired = false;
-      this.inputLookupATPMObj.addCritInput = new Array();
 
-      var critInput = new CriteriaObj();
-      critInput.propName = "MR_VENDOR_CATEGORY_CODE";
-      critInput.restriction = AdInsConstant.RestrictionEq;
-      critInput.value = CommonConstant.SUPPLIER_ATPM;
-      this.inputLookupATPMObj.addCritInput.push(critInput);
-      this.inputLookupATPMObj.title = CommonConstant.TITLE_SUPPLIER_ATPM;
-      this.inputLookupATPMObj.isReady = true;
 
       this.VendorForm.controls.ReservedField3.setValidators(Validators.required);
       this.VendorForm.controls.ReservedField4.setValidators(Validators.required);
@@ -488,9 +470,6 @@ export class VendorBranchAddEditComponent implements OnInit {
       }
       if (this.result.VendorAddrObj != null) {
         this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.result["VendorAddrObj"].Zipcode };
-      }
-      if (this.result.VendorObj.VendorAtpmCode != null || this.result.VendorObj.VendorAtpmCode != "") {
-        this.inputLookupATPMObj.jsonSelect = { VendorName: this.result.VendorObj.VendorAtpmName };
       }
     }
 
@@ -550,7 +529,6 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
       this.vendorBranchObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
       this.vendorBranchObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value;
-      this.vendorBranchObj.VendorObj.VendorAtpmCode = this.VendorForm.controls.VendorAtpmCode.value;
     }
 
     if (this.vendorBranchObj.VendorObj.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH) {
@@ -620,5 +598,16 @@ export class VendorBranchAddEditComponent implements OnInit {
     } else {
       this.router.navigate(["/Vendor/Paging"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
     }
+  }
+  bindText(){
+    if(this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH){ 
+      this.Registration = "SUPPLIER REGISTRATION";
+      this.Code = "Supplier Code";
+      this.Name =  "Supplier Name";
+    }else{
+      this.Registration = "BRANCH REGISTRATION";
+      this.Code = "Branch Code";
+      this.Name =  "Branch Name";
+    } 
   }
 }

@@ -27,8 +27,7 @@
                   </lib-uc-show-errors>
                 </div>
               </div>
-              
-              <div *ngIf="MrVendorCategoryCode == 'SUPPLIER_HO'">
+              <div *ngIf="MrVendorCategoryCode == 'SUPPLIER_HO' && VendorForm.controls.MrVendorTypeCode.value == 'C'">
                 <div class="form-group row">
                   <label class="col-md-3 adInsLabel">Supplier ATPM</label>
                   <div class="col-md-3" *ngIf="inputLookupATPMObj.isReady">

@@ -30,7 +30,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
   result: any;
   check: any;
   inputLookupParentObj: InputLookupObj = new InputLookupObj();
-  inputLookupATPMObj: InputLookupObj = new InputLookupObj();
   inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
   MrVendorCategoryCode: any;
   arrCrit: any;
@@ -80,8 +79,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     Province: [{ value: '', disabled: true }],
     RowVersionVendor: [''],
     RowVersionVendorAddr: [''],
-    IsNpwpExist: [false],
-    VendorAtpmCode: []
+    IsNpwpExist: [false]
   });
 
 
@@ -249,11 +247,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
     });
   }
 
-  getLookupATPM(ev){
-    this.VendorForm.patchValue({
-      VendorAtpmCode: ev.VendorCode,
-    });
-  }
 
   updateValueAndValidityForm() {
     this.VendorForm.controls.MrIdTypeCode.updateValueAndValidity();
@@ -293,8 +286,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.vendorHoldingObj.VendorObj.MrVendorClass = "HOLDING";
       this.vendorHoldingObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
       this.vendorHoldingObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
-      this.vendorHoldingObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value;
-      this.vendorHoldingObj.VendorObj.VendorAtpmCode = this.VendorForm.controls.VendorAtpmCode.value;
+      this.vendorHoldingObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value; 
       this.vendorHoldingObj.VendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value
 
       if (this.VendorForm.controls.IsNpwpExist.value == true) {
@@ -361,28 +353,10 @@ export class VendorHoldingAddEditComponent implements OnInit {
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
 
-    this.inputLookupATPMObj.urlJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-    this.inputLookupATPMObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputLookupATPMObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookupATPMObj.pagingJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-    this.inputLookupATPMObj.genericJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-    this.inputLookupATPMObj.isRequired = false;
-    this.inputLookupATPMObj.addCritInput = new Array();
-
-    var critInput = new CriteriaObj();
-    critInput.propName = "MR_VENDOR_CATEGORY_CODE";
-    critInput.restriction = AdInsConstant.RestrictionEq;
-    critInput.value = CommonConstant.SUPPLIER_ATPM;
-    this.inputLookupATPMObj.addCritInput.push(critInput);
-    this.inputLookupATPMObj.title = CommonConstant.TITLE_SUPPLIER_ATPM;
-    this.inputLookupATPMObj.isReady = true;
 
     if (this.result != null) {
       this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.result["VendorAddrObj"].Zipcode };
 
-      if (this.result.VendorObj.VendorAtpmCode != null || this.result.VendorObj.VendorAtpmCode != "") {
-        this.inputLookupATPMObj.jsonSelect = { VendorName: this.result.VendorObj.VendorAtpmName };
-      }
     }
 
     this.inputLookupZipcodeObj.isReady = true;
