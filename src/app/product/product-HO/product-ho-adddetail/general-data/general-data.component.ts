@@ -104,8 +104,7 @@ export class GeneralDataHOComponent implements OnInit {
   }
 
   addComponent(obj) {
-    var compValue;
-    var compDescr;
+    var compValue, compDescr;
     if (obj.ProdCompntType == "DDL") {
       if (obj.RefProdCompntCode == "LOB") {
         if(this.LOBSelected != ""){
@@ -143,7 +142,6 @@ export class GeneralDataHOComponent implements OnInit {
       compValue = obj.CompntValue;
       compDescr = obj.CompntValueDesc;
     }
-    var test123 = obj.ProdCompntName;
     return this.fb.group({
       RefProdCompntId: obj.RefProdCompntId,
       RefProdCompntCode: obj.RefProdCompntCode,
@@ -166,8 +164,7 @@ export class GeneralDataHOComponent implements OnInit {
       await this.http.post(url, payload).toPromise().then(
         (response) => {
           this.dictOptions[obj.RefProdCompntCode] = response[CommonConstant.ReturnObj];
-          var compValue;
-          var  compDescr;
+          var compValue, compDescr;
           if (obj.CompntValue == "") {
             compValue = this.dictOptions[obj.RefProdCompntCode][0].Key;
             compDescr = this.dictOptions[obj.RefProdCompntCode][0].Value;
@@ -287,12 +284,9 @@ export class GeneralDataHOComponent implements OnInit {
       }
     )
   }
-
   ChangeDropdown() {
-
     // this.dictOptions["COMP3"] = [{ "key": "oeoe", "value": "oeoe" }];
   }
-
 
   onChangeEvent(val, event, index, indexparent) {
     if (val == "LOB") {
