@@ -1,6 +1,6 @@
 {
   "name": "apex",
-  "version": "1.0.0-306",
+  "version": "1.0.0-308",
   "license": "",
   "scripts": {
     "ng": "ng",
@@ -8,6 +8,7 @@
     "build": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --aot --base-href /Foundation/",
     "sit": "ng build --configuration=sit --base-href /FOUNDATION_SIT/",
     "demo": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=demo_env --base-href /FOUNDATION_DEMO/",
+    "integration": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=integration_env --base-href /FOUNDATION_INTEGRATION/",
     "test": "ng test",
     "version:patch": "npm version prerelease -m UpVersion && git push origin HEAD:master --follow-tags --force",
     "lint": "ng lint",
@@ -134,7 +135,7 @@
     "@angular/cli": "^7.3.10",
     "@angular/compiler-cli": "^7.2.16",
     "@angular/language-service": "7.0.0",
-    "@fortawesome/fontawesome-free": "^5.14.0",
+    "@fortawesome/fontawesome-free": "^5.15.0",
     "@types/core-js": "2.5.0",
     "@types/jasmine": "2.8.9",
     "@types/node": "10.12.0",
