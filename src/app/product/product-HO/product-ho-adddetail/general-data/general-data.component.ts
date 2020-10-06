@@ -22,7 +22,6 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 export class GeneralDataHOComponent implements OnInit {
 
   @Input() objInput: any;
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -30,7 +29,7 @@ export class GeneralDataHOComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: NGXToastrService,
     private wizard: WizardComponent
-  ) { 
+  ) {
     this.route.queryParams.subscribe(params => {
       this.source = params["source"];
     })
@@ -47,11 +46,11 @@ export class GeneralDataHOComponent implements OnInit {
   ProdHId: number;
   ProdId: number;
   StateSave: string;
-  LOBSelected: string;
-
+  LOBSelected: string ="";
+  LOBDescrSelected: string="";
   inputLookUpObj: any;
   indentifierTemp;
-  source:string="";
+  source: string = "";
 
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
@@ -75,7 +74,7 @@ export class GeneralDataHOComponent implements OnInit {
 
     this.ProdHId = this.objInput["param"];
     this.ProdId = this.objInput["ProdId"];
-    this.LoadProdComponent(this.ProdHId, "GEN", true);
+    this.LoadProdComponent(this.ProdHId, "GEN", true, "");
 
 
     this.inputLookUpObj = new InputLookupObj();
@@ -105,29 +104,38 @@ export class GeneralDataHOComponent implements OnInit {
   }
 
   addComponent(obj) {
-    var compValue, compDescr;
-
+    var compValue;
+    var compDescr;
     if (obj.ProdCompntType == "DDL") {
-      if (obj.CompntValue == "") {
-        compValue = this.dictOptions[obj.RefProdCompntCode][0].Key;
-        compDescr = this.dictOptions[obj.RefProdCompntCode][0].Value;
+      if (obj.RefProdCompntCode == "LOB") {
+        if(this.LOBSelected != ""){
+          compValue = this.LOBSelected;
+          compDescr = this.LOBDescrSelected;
+        }
+        else{
+          compValue = -1;
+          compDescr = "-Select One-";
+        }        
+      }
+      else if(obj.CompntValue == "" || this.dictOptions[obj.RefProdCompntCode] == null || this.dictOptions[obj.RefProdCompntCode].find(f => f.Key == obj.CompntValue) == null) {
+        compValue = -1;
+        compDescr = "-Select One-";
       }
       else {
         compValue = obj.CompntValue;
         compDescr = obj.CompntValueDesc;
       }
-    }else if(obj.ProdCompntType == "MULTI_DDL"){
+    } else if (obj.ProdCompntType == "MULTI_DDL") {
       if (obj.CompntValue != "") {
         compValue = obj.CompntValue;
         compDescr = obj.CompntValueDesc;
-
         var selectedId = obj.CompntValue.split(";");
         var selectedText = obj.CompntValueDesc.split(",");
 
         this.selectedMultiDDLItems[obj.RefProdCompntCode] = new Array();
 
-        for(var i = 0; i < selectedId.length; i++){
-          this.selectedMultiDDLItems[obj.RefProdCompntCode].push({item_id: selectedId[i], item_text: selectedText[i]});
+        for (var i = 0; i < selectedId.length; i++) {
+          this.selectedMultiDDLItems[obj.RefProdCompntCode].push({ item_id: selectedId[i], item_text: selectedText[i] });
         }
       }
     }
@@ -135,7 +143,7 @@ export class GeneralDataHOComponent implements OnInit {
       compValue = obj.CompntValue;
       compDescr = obj.CompntValueDesc;
     }
-
+    var test123 = obj.ProdCompntName;
     return this.fb.group({
       RefProdCompntId: obj.RefProdCompntId,
       RefProdCompntCode: obj.RefProdCompntCode,
@@ -159,15 +167,18 @@ export class GeneralDataHOComponent implements OnInit {
         (response) => {
           this.dictOptions[obj.RefProdCompntCode] = response[CommonConstant.ReturnObj];
           var compValue;
+          var  compDescr;
           if (obj.CompntValue == "") {
             compValue = this.dictOptions[obj.RefProdCompntCode][0].Key;
+            compDescr = this.dictOptions[obj.RefProdCompntCode][0].Value;
           }
           else {
             compValue = obj.CompntValue;
+            compDescr = obj.CompntValueDesc;
           }
-
-          if (obj.RefProdCompntCode == "LOB") {
-            this.LOBSelected = compValue
+          if (obj.RefProdCompntCode == "LOB" && this.LOBSelected == "") {
+              this.LOBSelected = compValue;
+              this.LOBDescrSelected = compDescr;
           }
         }
       )
@@ -184,7 +195,7 @@ export class GeneralDataHOComponent implements OnInit {
           this.dictMultiOptions[obj.RefProdCompntCode] = new Array();
           this.selectedMultiDDLItems[obj.RefProdCompntCode] = new Array();
           for (let i = 0; i < result.length; i++) {
-            this.dictMultiOptions[obj.RefProdCompntCode].push({ item_id: result[i].Key, item_text: result[i].Value});
+            this.dictMultiOptions[obj.RefProdCompntCode].push({ item_id: result[i].Key, item_text: result[i].Value });
           }
         }
       )
@@ -227,21 +238,26 @@ export class GeneralDataHOComponent implements OnInit {
         this.selectedMultiDDLItems["INST_SCHM"] = new Array();
 
         for (let i = 0; i < result.length; i++) {
-          this.dictMultiOptions["INST_SCHM"].push({ item_id: result[i].Key, item_text: result[i].Value});
+          this.dictMultiOptions["INST_SCHM"].push({ item_id: result[i].Key, item_text: result[i].Value });
         }
       }
     )
   }
 
-  LoadProdComponent(ProdHId, CompGroups, IsFilterBizTmpltCode) {
+  LoadProdComponent(ProdHId, CompGroups, IsFilterBizTmpltCode, Lob) {
     var ProdHOComponent = {
       ProdHId: ProdHId,
       GroupCodes: CompGroups.split(","),
       IsFilterBizTmpltCode: IsFilterBizTmpltCode,
+      Lob: Lob,
       RowVersion: ""
     }
     this.http.post(this.UrlGetProdCompGrouped, ProdHOComponent).toPromise().then(
       async (response) => {
+        var fa_group = this.FormProdComp.controls['groups'] as FormArray;
+        while(fa_group.length){
+          fa_group.removeAt(0);
+        }
         for (var i = 0; i < response[CommonConstant.ReturnObj].length; i++) {
           var group = response[CommonConstant.ReturnObj][i];
           var fa_group = this.FormProdComp.controls['groups'] as FormArray;
@@ -249,20 +265,23 @@ export class GeneralDataHOComponent implements OnInit {
 
           for (var j = 0; j < group.Components.length; j++) {
             var comp = group.Components[j];
-            if (comp.ProdCompntType == "DDL") {
-              await this.PopulateDDL(comp);
-            }
-            if(comp.ProdCompntType == "MULTI_DDL"){
-              await this.PopulateMultiDDL(comp);
-            }
+              if (comp.ProdCompntType == "DDL") {
+                await this.PopulateDDL(comp);
+              }
+              if (comp.ProdCompntType == "MULTI_DDL") {
+                await this.PopulateMultiDDL(comp);
+              }
           }
           await this.PopulateFinMapFromLOB();
           await this.PopulateInstallmentSchedule();
-
+          var fa_comp = (<FormArray>this.FormProdComp.controls['groups']).at(i).get('components') as FormArray;
+          while(fa_comp.length){
+            fa_comp.removeAt(0);
+          }
           for (var j = 0; j < group.Components.length; j++) {
             var comp = group.Components[j];
-            var fa_comp = (<FormArray>this.FormProdComp.controls['groups']).at(i).get('components') as FormArray;
-            fa_comp.push(this.addComponent(comp));
+              var fa_comp = (<FormArray>this.FormProdComp.controls['groups']).at(i).get('components') as FormArray;
+              fa_comp.push(this.addComponent(comp));
           }
         }
       }
@@ -278,8 +297,10 @@ export class GeneralDataHOComponent implements OnInit {
   onChangeEvent(val, event, index, indexparent) {
     if (val == "LOB") {
       this.LOBSelected = event.target.value;
-      this.PopulateFinMapFromLOB()
-      this.PopulateInstallmentSchedule();
+      this.LOBDescrSelected = this.dictOptions[val].find(f => f.Key == event.target.value).Value;
+      this.LoadProdComponent(this.ProdHId, "GEN", true, this.LOBSelected);
+      // this.PopulateFinMapFromLOB()
+      // this.PopulateInstallmentSchedule();
     }
     this.FormProdComp.controls["groups"].controls[indexparent].controls["components"].controls[index].patchValue({
       CompntValueDesc: this.dictOptions[val].find(f => f.Key == event.target.value).Value
@@ -290,7 +311,7 @@ export class GeneralDataHOComponent implements OnInit {
     var selectedId = this.selectedMultiDDLItems[refProdCompntCode].map(x => x.item_id);
     var selectedText = this.selectedMultiDDLItems[refProdCompntCode].map(x => x.item_text);
     this.FormProdComp.controls["groups"].controls[indexparent].controls["components"].controls[index].patchValue({
-      CompntValue : selectedId.join(";"),
+      CompntValue: selectedId.join(";"),
       CompntValueDesc: selectedText.join(",")
     })
   }
@@ -301,17 +322,17 @@ export class GeneralDataHOComponent implements OnInit {
       for (let j = 0; j < this.FormProdComp.controls.groups.controls[i].controls["components"].length; j++) {
         var prodCompntType = this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j].controls.ProdCompntType.value;
 
-        if(prodCompntType == "AMT"){
+        if (prodCompntType == "AMT") {
           this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j].patchValue({
-            CompntValueDesc : this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j].controls.CompntValue.value
+            CompntValueDesc: this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j].controls.CompntValue.value
           });
         }
-        if(prodCompntType == "MULTI_DDL"){
+        if (prodCompntType == "MULTI_DDL") {
           var refProdCompntCode = this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j].controls.RefProdCompntCode.value;
           var selectedId = this.selectedMultiDDLItems[refProdCompntCode].map(x => x.item_id);
           var selectedText = this.selectedMultiDDLItems[refProdCompntCode].map(x => x.item_text);
           this.FormProdComp.controls["groups"].controls[i].controls["components"].controls[j].patchValue({
-            CompntValue : selectedId.join(";"),
+            CompntValue: selectedId.join(";"),
             CompntValueDesc: selectedText.join(", ")
           });
         }
@@ -365,12 +386,10 @@ export class GeneralDataHOComponent implements OnInit {
   }
 
   reload() {
-    if(this.inputLookUpObj.jsonSelect["ProdId"] == undefined)
-    {
+    if (this.inputLookUpObj.jsonSelect["ProdId"] == undefined) {
       this.toastr.warningMessage("Please select Product to copied");
     }
-    else
-    {
+    else {
       if (confirm('This action will overwrite your Product Component and Product Branch Member, Are you sure to copy this Product ?')) {
         var url = environment.FoundationR3Url + "/Product/CopyProduct";
         this.http.post(url, { prodHId: this.ProdHId, fromProdId: this.inputLookUpObj.jsonSelect["ProdId"] }).subscribe(
@@ -383,26 +402,22 @@ export class GeneralDataHOComponent implements OnInit {
     }
   }
 
-  test(){
+  test() {
     var objPost = this.BuildReqProdDetail();
   }
-  
-  onSelect(){
+
+  onSelect() {
   }
 
-  Cancel()
-  {
+  Cancel() {
     this.BackToPaging();
   }
 
-  BackToPaging()
-  {
-    if(this.source == "return")
-    {
+  BackToPaging() {
+    if (this.source == "return") {
       this.router.navigate(["/Product/HOReturnPaging"]);
     }
-    else
-    {
+    else {
       this.router.navigate(["/product/HOpaging"]);
     }
   }
