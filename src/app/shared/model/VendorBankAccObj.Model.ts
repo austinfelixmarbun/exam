@@ -8,6 +8,7 @@ export class VendorBankAccObj {
     IsDefault: any;
     RowVersion : any;
     BankName:any;
-    
+    Notes:string;
+    BankBranch:string;
     constructor() {this.RowVersion = "";}
 }
