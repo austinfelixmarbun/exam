@@ -81,6 +81,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     RowVersionVendor: [''],
     RowVersionVendorAddr: [''],
     IsNpwpExist: [false],
+    IsOneAffiliate: [false],
     VendorAtpmCode: []
   });
 
@@ -136,6 +137,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
           Zipcode: this.result.VendorAddrObj.Zipcode,
           RowVersionVendorAddr: this.result.VendorAddrObj.RowVersion,
           IsNpwpExist: this.result.VendorObj.IsNpwpExist,
+          IsOneAffiliate: this.result.VendorObj.IsOneAffiliate,
           VendorAtpmCode: this.result.VendorObj.VendorAtpmCode,
         });
 
@@ -294,6 +296,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.vendorHoldingObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
       this.vendorHoldingObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
       this.vendorHoldingObj.VendorObj.IsNpwpExist = this.VendorForm.controls.IsNpwpExist.value;
+      this.vendorHoldingObj.VendorObj.IsOneAffiliate = this.VendorForm.controls.IsOneAffiliate.value;
       this.vendorHoldingObj.VendorObj.VendorAtpmCode = this.VendorForm.controls.VendorAtpmCode.value;
       this.vendorHoldingObj.VendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value
 
