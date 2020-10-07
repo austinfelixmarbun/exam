@@ -42,7 +42,9 @@ export class ProductHOAddComponent implements OnInit {
     
     this.route.queryParams.subscribe(params => {
       this.param = params["ProdHId"];
-      this.mode = params["mode"];
+      if(params["mode"] != null){
+        this.mode = params["mode"];
+      }
       this.key = params["key"];
       this.source = params["source"];
       if (this.mode == "edit") {

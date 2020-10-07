@@ -34,6 +34,7 @@
                 <select formControlName="CompntValue" class="form-control width-50-per" id="CompValue{{l}}"
                   name="CompntValue{{l}}"
                   (change)="onChangeEvent(type.controls['components'].value[l].RefProdCompntCode,$event,l,j);">
+                  <option  [value]="-1">-Select One-</option>
                   <option *ngFor="let m of dictOptions[type.controls['components'].value[l].RefProdCompntCode]"
                     value={{m.Key}}>{{m.Value}}</option>
                 </select>
