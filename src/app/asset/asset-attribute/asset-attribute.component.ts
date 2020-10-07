@@ -33,7 +33,7 @@ export class AssetAttributeComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetAttribute.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAttr;
     
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewAssetType.json";
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;

@@ -149,6 +149,10 @@
                 "type": "callback",
                 "property": "AssetAttrId",
                 "icon" : "ft-edit"
+              },
+              {
+                "type": "delete",
+                "property": "AssetAttrId"
               }
             ]
         }
