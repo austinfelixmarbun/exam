@@ -187,4 +187,8 @@ export class CommonConstant {
     public static AttrGroupCustPersonalFinData = "CUST_PERSONAL_FINDATA"
     public static AttrGroupCustCompanyOther = "CUST_COMPANY_OTH"
     public static AttrGroupCustPersonalOther= "CUST_PERSONAL_OTH"
+
+    // Integration
+    public static DailyMasterTypeSingle = "Date";
+    public static DailyMasterTypeRange = "Range";
 }
