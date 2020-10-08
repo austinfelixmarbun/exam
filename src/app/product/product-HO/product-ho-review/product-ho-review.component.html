@@ -1,12 +1,11 @@
- 
 <app-product-ho-view [inputProdHId]="ProdHId"></app-product-ho-view>
 <div class="card">
   <div class="card-body">
     <div class="px-3">
-      <lib-ucSubsection [id]="'productHOReviewId'" [title]="'REQUEST FOR APPROVAL'" [panel]="'productHOReview'">
-      </lib-ucSubsection>
       <form class="form form-horizontal" [formGroup]="FormObj" (ngSubmit)="FormObj.valid && SaveForm()"
         #enjiForm="ngForm">
+        <lib-ucSubsection [id]="'productHOReviewId'" [title]="'REQUEST FOR APPROVAL'" [panel]="'productHOReview'">
+        </lib-ucSubsection>
         <div id="productHOReview">
           <div class="form-group row">
             <div class="form-group col-md-2">
@@ -17,7 +16,7 @@
                 [schemeCode]="'APV_HO_ACT_SCHM'" [enjiForm]="enjiForm" [isRequired]="'true'"
                 (onChange)="onChangeApprover($event)">
               </lib-ucapproveby>
-              <lib-uc-show-errors [control]="ApprovedById" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+              <lib-uc-show-errors [control]="FormObj.controls.ApprovedById" [submit]="enjiForm.submitted"></lib-uc-show-errors>
             </div>
             <div class="form-group col-md-2">
               <label class="adInsLabel">Notes</label>
@@ -25,7 +24,7 @@
             <div class="col-md-4">
               <textarea type="textarea" row="5" class="form-control" formControlName="Notes"
                 [ngClass]="{ 'is-invalid': enjiForm.submitted && FormObj.controls.Notes.invalid}"></textarea>
-              <lib-uc-show-errors [control]="Notes" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+              <lib-uc-show-errors [control]="FormObj.controls.Notes" [submit]="enjiForm.submitted"></lib-uc-show-errors>
             </div>
           </div>
         </div>
