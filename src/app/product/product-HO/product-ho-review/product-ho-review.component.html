@@ -1,12 +1,11 @@
- 
 <app-product-ho-view [inputProdHId]="ProdHId"></app-product-ho-view>
 <div class="card">
   <div class="card-body">
     <div class="px-3">
-      <lib-ucSubsection [id]="'productHOReviewId'" [title]="'REQUEST FOR APPROVAL'" [panel]="'productHOReview'">
-      </lib-ucSubsection>
       <form class="form form-horizontal" [formGroup]="FormObj" (ngSubmit)="FormObj.valid && SaveForm()"
         #enjiForm="ngForm">
+        <lib-ucSubsection [id]="'productHOReviewId'" [title]="'REQUEST FOR APPROVAL'" [panel]="'productHOReview'">
+        </lib-ucSubsection>
         <div id="productHOReview">
           <div class="form-group row">
             <div class="form-group col-md-2">
