@@ -1,12 +1,16 @@
+import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AssetAttrObj } from 'app/shared/model/AssetAttrObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-asset-attribute-detail',
@@ -24,6 +28,13 @@ export class AssetAttributeDetailComponent implements OnInit {
   pageType: string = "add";
   AssetAttrId: number =0;
   isReady : boolean = false;
+  responseListAssetAttr: Array<any>;
+  listRefAttrId: Array<number> = new Array();
+  criteriaList: any[];
+  criteriaObj: any;
+  reqGetListObj: any;
+  @ViewChild('LookupAssetAttr') ucLookupAssetAttr: UclookupgenericComponent;
+  
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) { 
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
@@ -45,18 +56,56 @@ export class AssetAttributeDetailComponent implements OnInit {
     this.inputLookupObj.pagingJson = "./assets/uclookup/AssetAttribute/lookupAssetAttribute.json";
     this.inputLookupObj.genericJson = "./assets/uclookup/AssetAttribute/lookupAssetAttribute.json";
     this.inputLookupObj.isRequired = true;
+    this.inputLookupObj.addCritInput = new CriteriaObj();
+
+    this.criteriaList = new Array();
+    this.criteriaObj = new CriteriaObj();
+    this.criteriaObj.restriction = AdInsConstant.RestrictionNotIn;
+    this.criteriaObj.propName = 'A.REF_ATTR_ID';
+
     this.assetAttrObj = new AssetAttrObj();
 
     this.assetAttrObj.AssetAttrId = this.AssetAttrId;
-    if(this.pageType == "edit"){
-      this.http.post(URLConstant.GetAssetAttrByAssetAttrId, this.assetAttrObj).subscribe(
+    this.reqGetListObj = new AssetAttrObj();
+    this.reqGetListObj.AssetTypeId = this.AssetTypeId;
+    let getListAssetAttr = this.http.post(URLConstant.GetListAssetAttrByAssetTypeId, this.reqGetListObj);
+    let getAssetAttr = this.http.post(URLConstant.GetAssetAttrByAssetAttrId, this.assetAttrObj);
+    if(this.pageType == "add"){
+    getListAssetAttr.subscribe(
+      response => {
+          this.responseListAssetAttr = response['ListAssetAttrObj'];
+          for(var i=0;i<this.responseListAssetAttr.length;i++){
+            this.listRefAttrId.push(this.responseListAssetAttr[i]['RefAttrId']);
+          }
+          this.criteriaObj.listValue = this.listRefAttrId;
+          this.criteriaList.push(this.criteriaObj);
+          this.inputLookupObj.addCritInput = this.criteriaList;
+          this.ucLookupAssetAttr.setAddCritInput();
+      }
+    );
+  }
+    else if(this.pageType == "edit"){
+      forkJoin([getAssetAttr,getListAssetAttr]) .subscribe(
         response => {
           this.AssetAttrForm.patchValue({
-            IsEditableAfterGoLive : response['IsEditableAfterGoLive'],
-            RefAttrId : response['RefAttrId']
+            IsEditableAfterGoLive : response[0]['IsEditableAfterGoLive'],
+            RefAttrId : response[0]['RefAttrId']
           });
-          this.inputLookupObj.nameSelect = response['AssetAttrName'];
-          this.inputLookupObj.jsonSelect = {AttrName: response['AssetAttrName']};
+          this.inputLookupObj.nameSelect = response[0]['AssetAttrName'];
+          this.inputLookupObj.jsonSelect = {AttrName: response[0]['AssetAttrName']};
+
+          this.responseListAssetAttr = response[1]['ListAssetAttrObj'];
+          for(var i=0;i<this.responseListAssetAttr.length;i++){
+            this.listRefAttrId.push(this.responseListAssetAttr[i]['RefAttrId']);
+          }
+          let index = this.listRefAttrId.indexOf(response[0]['RefAttrId'])
+          if(index > -1){
+            this.listRefAttrId.splice(index,1);
+          }
+          this.criteriaObj.listValue = this.listRefAttrId;
+          this.criteriaList.push(this.criteriaObj);
+          this.inputLookupObj.addCritInput = this.criteriaList;
+          this.ucLookupAssetAttr.setAddCritInput();
         });  
     }
   }

@@ -1,5 +1,5 @@
 {
-    "sectionTitle": "Lookup Asset Master",
+    "sectionTitle": "Asset Master Attribute",
     "component": [
       {
         "type": "textbox",
@@ -15,11 +15,19 @@
         "id": "AttrName",
         "value": "",
         "label": "Attribute Name",
-        "placeholder": "Full Asset Name"
+        "placeholder": "Attribute Name"
+      },
+      {
+        "type": "textbox",
+        "name": "A.ATTR_TYPE_CODE",
+        "id": "AttrTypeCode",
+        "value": "",
+        "label": "Attribute Type Code",
+        "placeholder": "Attribute Type Code"
       }
     ],
     "querystring": {
-      "select": "SELECT A.REF_ATTR_ID AS RefAttrId, A.ATTR_CODE AS AttrCode, A.ATTR_NAME AS AttrName",
+      "select": "SELECT A.REF_ATTR_ID AS RefAttrId, A.ATTR_CODE AS AttrCode, A.ATTR_NAME AS AttrName, A.ATTR_TYPE_CODE AS AttrTypeCode",
       "from": "FROM REF_ATTR A WITH(NOLOCK)"
     },
     "headerList": [
@@ -34,6 +42,12 @@
           "position": "left",
           "label": "Asset Attribute Name",
           "name": "AttrName"
+        },
+        {
+          "type": "sort",
+          "position": "center",
+          "label": "Attribute Type Code",
+          "name": "AttrTypeCode"
         },
         {
           "type": "label",
@@ -51,6 +65,11 @@
         "type": "text",
         "position": "left",
         "property": "AttrName"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "AttrTypeCode"
       },
       {
         "type": "action",
