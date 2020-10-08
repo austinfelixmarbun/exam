@@ -1,0 +1,91 @@
+{
+    "title": "Product HO Review",
+    "exportExcel": false,
+    "component": [{
+        "type": "textbox",
+        "name": "A.PROD_CODE",
+        "id": "ProdCodeId",
+        "value": "",
+        "label": "Product Code",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "A.PROD_NAME",
+        "id": "ProdNameId",
+        "value": "",
+        "label": "Product Name",
+        "placeholder": "Placeholder"
+      }
+    ],
+    "headerList": [{
+        "type": "sort",
+        "position": "center",
+        "label": "Product Code",
+        "name": "ProdCode"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Product Name",
+        "name": "ProdName"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "End Date",
+        "name": "EndDt"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Action"
+      }
+    ],
+    "querystring": {
+      "select": "SELECT A.PROD_CODE AS ProdCode, A.PROD_NAME AS ProdName, A.END_DT AS EndDt, A.PROD_STAT AS ProdStat, A.PROD_ID AS ProdId, WTL.WF_TASK_LIST_ID AS WfTaskListId, B.PROD_H_ID AS ProdHId, WTL.END_EXECUTING_DATE as EndExecutingDate",
+      "from": "FROM dbo.PROD A WITH(NOLOCK) JOIN dbo.V_WF_TASK_LIST WTL WITH(NOLOCK) ON A.PROD_CODE = WTL.TRANSACTION_CODE LEFT JOIN dbo.PROD_H B WITH(NOLOCK) ON A.DRAFT_PROD_H_ID=B.PROD_H_ID",
+      "where": "WHERE WTL.ACT_CODE = N'PROD_HO_RVW' and WTL.END_EXECUTING_DATE IS NULL"
+    },
+    "bodyList": [{
+        "type": "text",
+        "position": "center",
+        "property": "ProdCode"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "ProdName"
+      },
+      {
+        "type": "date",
+        "position": "center",
+        "property": "EndDt"
+      }, 
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "edit",
+            "path": "/Product/HOReview",
+            "param": [
+              {
+                "type": "ProdHId",
+                "property": "ProdHId"
+              },
+              {
+                "type": "ProdId",
+                "property": "ProdId"
+              },
+              {
+                "type": "WfTaskListId",
+                "property": "WfTaskListId"
+              }
+            ]
+          }
+        ] 
+      }
+      
+    ]
+  }

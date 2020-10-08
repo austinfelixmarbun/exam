@@ -19,7 +19,7 @@
           <aw-wizard #wizard navBarLayout="large-empty-symbols" [defaultStepIndex]="0">
             <aw-wizard-step [stepTitle]="'General Data'" (stepEnter)="EnterTab('GeneralData')"
               [navigationSymbol]="{ symbol: '1', fontFamily: 'FontAwesome' }">
-              <app-general-data-HO *ngIf="type == 'GeneralData'" [objInput]="objPassing"></app-general-data-HO>
+              <app-general-data-HO *ngIf="type == 'GeneralData'" [objInput]="objPassing"  (ApproverId)="ChangeComponent($event)" ></app-general-data-HO>
             </aw-wizard-step> 
           
             <aw-wizard-step [stepTitle]="'Product Component'" (stepEnter)="EnterTab('ProductComponent')"

@@ -435,7 +435,9 @@ export class URLConstant {
     public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
     public static DownloadProductRule = environment.FoundationR3Url + "/Product/DownloadProductRule";
     public static UpdateProductPostApv = environment.FoundationR3Url + "/Product/UpdateProductPostApv";
+    public static ReviewProduct = environment.FoundationR3Url + "/Product/ReviewProduct";
 
+    
     //PRODUCT OFFERING
     public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
     public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering";
