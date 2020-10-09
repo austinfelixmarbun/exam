@@ -108,8 +108,8 @@ export class VendorBranchAddEditComponent implements OnInit {
     Province: [{ value: '', disabled: true }],
     RowVersionVendor: [''],
     RowVersionVendorAddr: [''],
-    IsNpwpExist: [false] 
-    IsOneAffiliate: [false],
+    IsNpwpExist: [false],
+    IsOneAffiliate: [false]
   })
 
   ngOnInit() {
@@ -249,8 +249,9 @@ export class VendorBranchAddEditComponent implements OnInit {
                     critAssetObj.value = vendorAttr.VendorAttrValue;
                     arrAddCrit.push(critAssetObj);
                     tempLookup[vendorAttr["VendorAttrCode"]].addCritInput = arrAddCrit;
-                    var refMaster = { RefMasterTypeCode: vendorAttr.VendorAttrValue,
-                      MasterCode : item["AttrContent"]
+                    var refMaster = {
+                      RefMasterTypeCode: vendorAttr.VendorAttrValue,
+                      MasterCode: item["AttrContent"]
                     };
                     await this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).toPromise().then(
                       (response) => {
@@ -278,7 +279,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       (response) => {
         this.result = response;
         this.setDropdown();
-        this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode; 
+        this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
         this.bindText();
         this.MrVendorTypeCode = this.result.VendorObj.MrVendorTypeCode;
         this.VendorForm.patchValue({
@@ -504,7 +505,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       VendorParentId: event.VendorId
     });
 
-}
+  }
   getLookupZipcode(event) {
     this.VendorForm.patchValue({
       AreaCode2: event.AreaCode2,
@@ -769,16 +770,17 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.router.navigate(["/Vendor/Paging"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
     }
   }
-  bindText(){
-    if(this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH){ 
+  bindText() {
+    if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH) {
       this.Registration = "SUPPLIER REGISTRATION";
       this.Code = "Supplier Code";
-      this.Name =  "Supplier Name";
-    }else{
+      this.Name = "Supplier Name";
+    } else {
       this.Registration = "BRANCH REGISTRATION";
       this.Code = "Branch Code";
-      this.Name =  "Branch Name";
-    } 
+      this.Name = "Branch Name";
+    }
+  }
 
   getLookUpAttr(e, VendorAttrCode) {
     this.VendorForm['controls']["VendorAttrList"]["controls"][VendorAttrCode].patchValue({
