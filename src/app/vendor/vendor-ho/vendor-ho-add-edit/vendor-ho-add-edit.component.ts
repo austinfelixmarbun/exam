@@ -91,6 +91,7 @@ export class VendorHoAddEditComponent implements OnInit {
   })
 
   ngOnInit() {
+    console.log("aaa")
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     this.VendorForm.controls.VendorRating.disable();
@@ -436,6 +437,10 @@ export class VendorHoAddEditComponent implements OnInit {
       this.VendorForm.controls.IdNo.setValidators(Validators.required);
       this.RsvField = CommonConstant.CustTypePersonal
       this.updateValueAndValidityForm();
+      this.inputLookupATPMObj.jsonSelect = { VendorName: ""} 
+      this.VendorForm.patchValue({
+        VendorAtpmCode: null
+      });
     }
 
       var refMasterIdObj = {
