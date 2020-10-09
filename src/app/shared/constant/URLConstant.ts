@@ -454,6 +454,7 @@ export class URLConstant {
     public static GetListProdOfferingBranchOfficeMbrByProdHIdAndApp = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHIdAndApp"
     public static CopyProductOffering = environment.FoundationR3Url + "/ProductOffering/CopyProductOffering";
     public static UpdateProdOfferingPostApv = environment.FoundationR3Url + "/ProductOffering/UpdateProdOfferingPostApv";
+    public static ReviewProdOffering = environment.FoundationR3Url + "/ProductOffering/ReviewProdOffering";
 
     // PRODUCT COMPONENT
     public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
