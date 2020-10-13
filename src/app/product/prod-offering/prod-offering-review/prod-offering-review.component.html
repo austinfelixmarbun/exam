@@ -1,4 +1,5 @@
-<app-product-ho-view [inputProdHId]="ProdHId"></app-product-ho-view>
+<app-product-offering-view [inputProdOfferingHId]="ProdOfferingHId"></app-product-offering-view>
+<br />
 <div class="card">
   <div class="card-body">
     <div class="px-3">
@@ -13,10 +14,10 @@
             </div>
             <div class="col-md-4">
               <lib-ucapproveby [apvBaseUrl]="apvBaseUrl" [parentForm]="FormObj" [identifier]="'ApprovedById'"
-                [schemeCode]="'APV_HO_ACT_SCHM'" [enjiForm]="enjiForm" [isRequired]="'true'"
+                [schemeCode]="'APV_OFR_ACT_SCHM'" [enjiForm]="enjiForm" [isRequired]="'true'"
                 (onChange)="onChangeApprover($event)">
               </lib-ucapproveby>
-             </div>
+              </div>
             <div class="form-group col-md-2">
               <label class="adins-required-label">Notes</label>
             </div>
