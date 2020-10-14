@@ -28,8 +28,16 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
   isOwner : boolean;
   custCompanyObj: CustCompanyObj;
   custCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
+  ShareholderData: Object;
+  IsFromFamily: boolean;
+  IsFromShareholder: boolean;
+  FamilyData: Object;
 
   constructor(private route: ActivatedRoute, private toastr: NGXToastrService, private http: HttpClient,) {
+    this.IsFromShareholder = true;
+    this.IsFromFamily = false;
+    this.ShareholderData = new Object();
+    this.FamilyData = new Object();
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -49,6 +57,9 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
     this.TotalShare = ev.TotalShare; 
     if (ev.stepMode != undefined) {
       this.outputTab.emit({ stepMode: ev.stepMode })
+    }
+    if(this.mode == "duplicatePersonal" || this.mode == "duplicateCompany"){
+      this.ShareholderData = ev.ShareholderData;
     }
   }
   next() {

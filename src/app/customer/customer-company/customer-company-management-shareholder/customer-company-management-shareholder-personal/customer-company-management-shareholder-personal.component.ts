@@ -22,7 +22,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   @Input() custCompanyId : number;
   @Input() CustCompanyMgmntShrholderId : number;
   @Input() TotalShare : number;
-  @Output () outputTab : EventEmitter<object>= new EventEmitter();
+  @Output() outputTab : EventEmitter<object>= new EventEmitter();
+  isExistingCust: boolean;
   
   tempIdType: any;
   tempMrGenderCode: any;
@@ -63,10 +64,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholder;
+    this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholderNew;
     this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
-    this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholder; 
+    this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholderNew; 
     this.getListKeyValueByMrCustTypeCode = URLConstant.GetListKeyValueByMrCustTypeCode;
+    this.isExistingCust = false;
   }
 
   ngOnInit() {
@@ -144,7 +146,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     if(this.CustCompanyMgmntShrholderId!=null){
       this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
       this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId  = this.CustCompanyMgmntShrholderId;
-      this.http.post(this.getCustCompanyMgmntShrholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
+      // this.http.post(this.getCustCompanyMgmntShrholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
+      this.http.post(URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderIdNew, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.tempCustCompanyMgmntShrholderObj = response;
           var datePipe = new DatePipe("en-US");
@@ -159,7 +162,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
             BirthPlace : this.tempCustCompanyMgmntShrholderObj.BirthPlace,   
             BirthDt: datePipe.transform(this.tempCustCompanyMgmntShrholderObj.BirthDt, 'yyyy-MM-dd'),
             MrJobPositionCode : this.tempCustCompanyMgmntShrholderObj.MrJobPositionCode,
-            MrCompanyTypeCode: this.tempCustCompanyMgmntShrholderObj.MrCompanyTypeCode ,
+            // MrCompanyTypeCode: this.tempCustCompanyMgmntShrholderObj.MrCompanyTypeCode ,
             TaxIdNo:  this.tempCustCompanyMgmntShrholderObj.TaxIdNo,
             SharePrcnt: this.tempCustCompanyMgmntShrholderObj.SharePrcnt,
             IsSigner: this.tempCustCompanyMgmntShrholderObj.IsSigner,
@@ -175,7 +178,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
             this.ManagementShareholderForm.controls.BirthPlace.disable();
             this.ManagementShareholderForm.controls.BirthDt.disable();
             this.ManagementShareholderForm.controls.MrGenderCode.disable();
-            this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
+            this.ManagementShareholderForm.controls.TaxIdNo.disable(); 
           }
 
           this.TotalShare = this.TotalShare - parseFloat(this.tempCustCompanyMgmntShrholderObj.SharePrcnt);
@@ -242,12 +245,17 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value; 
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Personal;
 
-      this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
-        (response) => {
-          this.toastr.successMessage(response["Message"]);
-          this.outputTab.emit({mode : 'check'});
-        }
-      );
+      if(this.isExistingCust){
+        this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
+          (response) => {
+            this.toastr.successMessage(response["Message"]);
+            this.outputTab.emit({mode : 'check'});
+          }
+        );
+      }
+      else{
+        this.outputTab.emit({mode : 'duplicatePersonal', ShareholderData: this.custCompanyMgmntShrholderObj});
+      }
     }
   }
 
@@ -267,7 +275,6 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
 
   getLookUpCustomer(event) {
-    
     var datePipe = new DatePipe("en-US");
     this.ManagementShareholderForm.patchValue({
       MgmntShrholderName: event.CustName,
@@ -298,6 +305,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.ManagementShareholderForm.controls.BirthPlace.disable();
     this.ManagementShareholderForm.controls.BirthDt.disable();
     this.ManagementShareholderForm.controls.MrGenderCode.disable();
-    this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
+    this.ManagementShareholderForm.controls.TaxIdNo.disable(); 
+    this.isExistingCust = true;
   }
 }

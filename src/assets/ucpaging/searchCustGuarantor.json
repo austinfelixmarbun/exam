@@ -7,7 +7,7 @@
             "name": "C.CUST_NO",
             "id": "CustNo",
             "value": "",
-            "label": "Customer No",
+            "label": "Guarantor Cust No.",
             "placeholder": "Placeholder"
         },
         {
@@ -15,7 +15,15 @@
             "name": "C.CUST_NAME",
             "id": "CustName",
             "value": "",
-            "label": "Customer Name",
+            "label": "Guarantor Customer Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "ID_NO",
+            "id": "IdNo",
+            "value": "",
+            "label": "Guarantor Id No.",
             "placeholder": "Placeholder"
         },
         {
@@ -34,29 +42,9 @@
             "criteriaPropValue": "CUST_TYPE",
             "items": [],
             "itemsUrl": []
-        },
-        {
-            "type": "textbox",
-            "name": "ID_NO",
-            "id": "IdNo",
-            "value": "",
-            "label": "Id No",
-            "placeholder": "Placeholder"
         }
     ],
     "headerList": [
-        {
-            "type": "sort",
-            "position": "left",
-            "label": "CUSTOMER NO",
-            "name": "C.CUST_NO"
-        },
-        {
-            "type": "sort",
-            "position": "left",
-            "label": "CUSTOMER NAME",
-            "name": "C.CUST_NAME"
-        },
         {
             "type": "sort",
             "position": "left",
@@ -66,13 +54,25 @@
         {
             "type": "sort",
             "position": "left",
-            "label": "ID NO",
+            "label": "GUARANTOR CUSTOMER NO",
+            "name": "C.CUST_NO"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "GUARANTOR CUSTOMER NAME",
+            "name": "C.CUST_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "GUARANTOR ID NO",
             "name": "C.ID_NO"
         },
         {
             "type": "label",
             "position": "center",
-            "label": "EDIT  "
+            "label": "ACTION"
         }
     ],
     "querystring": {
@@ -80,6 +80,11 @@
         "from": "FROM dbo.CUST C WITH(NOLOCK) INNER JOIN dbo.REF_MASTER RM WITH(NOLOCK) on C.MR_CUST_TYPE_CODE = RM.MASTER_CODE AND RM.REF_MASTER_TYPE_CODE = 'CUST_TYPE'"
     },
     "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "MrCustTypeCode"
+        },
         {
             "type": "action",
             "position": "center",
@@ -145,11 +150,6 @@
         {
             "type": "text",
             "position": "left",
-            "property": "MrCustTypeCode"
-        },
-        {
-            "type": "text",
-            "position": "left",
             "property": "IdNo"
         },
         {
@@ -178,7 +178,7 @@
                                     },
                                     {
                                         "type": "From",
-                                        "property": "CustPaging"
+                                        "property": "CustGuarantor"
                                     }
                                 ]
                             },
@@ -203,7 +203,7 @@
                                     },
                                     {
                                         "type": "From",
-                                        "property": "CustPaging"
+                                        "property": "CustGuarantor"
                                     }
                                 ]
                             },

@@ -1,0 +1,162 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+      <div class="px-3">
+        <div class="addEdit">
+          <form class="form form-horizontal" [formGroup]="CustomerFamilyForm"
+            (ngSubmit)="CustomerFamilyForm.valid && SaveValue()" #enjiForm="ngForm">
+            <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
+            </lib-ucSubsection>
+            <div class="form-body" id="MainInfoId">
+              <!-- <div class="form-group row">
+                <label class="col-md-2 adInsLabel" translate>Find Existing Customer</label>
+                <div class="col-md-4">
+                  <lib-uclookupgeneric [lookupInput]="existingCustomerLookUpObj" [parentForm]="CustomerContactForm"
+                    [enjiForm]="enjiForm" [identifier]="'ExistingCustomer'" (lookup)=getLookUpCustomer($event)>
+                  </lib-uclookupgeneric>
+                </div>
+              </div> -->
+              <div class="form-group row">
+                <label class="col-md-2 adins-required-label" translate>Customer Name </label>
+                <div class="col-md-4">
+                  <!-- <input type="text" class="form-control adInsInput" formControlName="CustName"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.CustName.invalid}">
+                  <lib-uc-show-errors [control]="CustomerFamilyForm.controls.CustName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors> -->
+                  <lib-uclookupgeneric [lookupInput]="existingCustomerLookUpObj" [parentForm]="CustomerContactForm"
+                    [enjiForm]="enjiForm" [identifier]="'ExistingCustomer'" (lookup)=getLookUpCustomer($event)>
+                  </lib-uclookupgeneric>
+                </div>
+                <label class="col-md-2  adins-required-label" translate>Gender </label>
+                <div class="col-md-4">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="Gender"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.Gender.invalid }">
+                    <option *ngFor="let it of tempGender" [value]="it.Key">
+                      {{it.Value}}</option>
+                  </select>
+                  <lib-uc-show-errors [control]="CustomerFamilyForm.controls.Gender" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+             </div>
+             <div class="form-group row">
+              <label class="col-md-2 adins-required-label" translate>ID Type </label>
+              <div class="col-md-4">
+                <select class="form-control adInsInput" (change)="onOptionsSelected($event)" style="width: auto" formControlName="MrIdTypeCode"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.MrIdTypeCode.invalid }">
+                  <option *ngFor="let it of tempIdType " [value]="it.Key" >
+                    {{it.Value}}</option>
+                </select>
+                <lib-uc-show-errors [control]="CustomerFamilyForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div>
+              <label class="col-md-2  adins-required-label" translate>Birth Place</label>
+              <div class="col-md-4">
+                <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.BirthPlace.invalid}">
+                <lib-uc-show-errors [control]="CustomerFamilyForm.controls.BirthPlace" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
+              </div> 
+            </div>
+              <div class="form-group row  ">
+                <label class="col-md-2 adins-required-label" translate>ID No</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control adInsInput" formControlName="IdNo"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.IdNo.invalid}">
+                  <lib-uc-show-errors [control]="CustomerFamilyForm.controls.IdNo" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>  
+                <label class="col-md-2 adins-required-label" translate>Birth Date</label>
+                <div class="col-md-4">
+                  <input type="date" class="form-control adInsInput" formControlName="BirthDt" 
+                  [max]="businessDtMin | date: 'yyyy-MM-dd'"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.BirthDt.invalid}">
+                  <lib-uc-show-errors [control]="CustomerFamilyForm.controls.BirthDt" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>             
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 adInsLabel" [ngClass]="{'adins-required-label' : tempKTPCheck==false}" translate>ID Expired Date</label>
+                <div class="col-md-4">
+                  <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt" 
+                  [min]="businessDtMax | date: 'yyyy-MM-dd'"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.IdExpiredDt.invalid } " >
+                  <lib-uc-show-errors [control]="CustomerFamilyForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+                <label class="col-md-2 adInsLabel" translate>Tax Id No</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.TaxIdNo.invalid}">
+                  <lib-uc-show-errors [control]="CustomerFamilyForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              <div class="form-group row ">
+                <label class="col-md-2 adInsLabel" translate>Marital Status</label>
+                <div class="col-md-4">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="MrMaritalStatCode"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.MrMaritalStatCode.invalid }">
+                    <option *ngFor="let it of tempMrMaritalStatCode" [value]="it.Key">
+                      {{it.Value}}</option>
+                  </select>
+                  <lib-uc-show-errors [control]="CustomerFamilyForm.controls.MrMaritalStatCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+                <label class="col-md-2 adins-required-label" translate>Mother Maiden Name</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control adInsInput" formControlName="MotherMaidenName"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.MotherMaidenName.invalid}">
+                  <lib-uc-show-errors [control]="CustomerFamilyForm.controls.MotherMaidenName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>            
+              <div class="form-group row">
+                <label class="col-md-2 adInsLabel adins-required-label" translate>Mobile Phone</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control adInsInput" formControlName="MobilePhnNo1"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.MobilePhnNo1.invalid}">
+                  <lib-uc-show-errors [control]="CustomerFamilyForm.controls.MobilePhnNo1" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                  <label class="col-md-2" translate>Email</label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control adins-required" formControlName="Email1"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.Email1.invalid}">
+                    <lib-uc-show-errors [control]="CustomerFamilyForm.controls.Email1" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 adins-required-label" translate>Customer Relationship</label>
+                <div class="col-md-4">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="MrCustRelationship"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.MrCustRelationship.invalid }"  (change)="Check()"> 
+                    <option *ngFor="let it of CustRelationshipList " [value]="it.Key">
+                      {{it.Value}}</option>
+                  </select>
+                  <lib-uc-show-errors [control]="CustomerFamilyForm.controls.MrCustRelationship"
+                    [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+            </div>
+            <lib-ucSubsection [id]="'LegalAddr'" [title]="'Legal Address'" [panel]="'LegalAddrSection'">
+            </lib-ucSubsection>
+            <div class="form-body" id="LegalAddrSection">
+              <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerFamilyForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'">
+              </lib-ucaddress> 
+            </div>
+            <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1"  [routerLink]="['../../Paging']" translate>
+               <i class="far fa-window-close"></i> Cancel
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary" translate>
+                <i class="far fa-check-square"></i> Save and Continue
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

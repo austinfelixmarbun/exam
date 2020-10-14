@@ -20,12 +20,12 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 
 @Component({
-  selector: 'app-customer-contact-add',
-  templateUrl: './customer-contact-add.component.html',
-  styleUrls: [],
+  selector: 'app-customer-emergency-contact',
+  templateUrl: './customer-emergency-contact.component.html',
+  styles: [],
   providers: [NGXToastrService],
 })
-export class CustomerContactAddComponent implements OnInit {
+export class CustomerEmergencyContactComponent implements OnInit {
   @Output() outputTab: EventEmitter<any> = new EventEmitter();
   @Input() custPersonalContactPersonId: number;
   @Input() listCustIdToExclude: Array<string>;
@@ -309,7 +309,6 @@ export class CustomerContactAddComponent implements OnInit {
     if (this.custPersonalContactPersonId != null) {
       this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.custPersonalContactPersonId;
-      // this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalContactPersonByCustPersonalContactPersonId, this.custPersonalContactPersonObj).subscribe(
       this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustPersonalEmergencyContactId, this.custPersonalContactPersonObj).subscribe(
         (response) => {
           var datePipe = new DatePipe("en-US");
@@ -477,7 +476,6 @@ export class CustomerContactAddComponent implements OnInit {
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.tempCustPersonalContactPerson.CustPersonalContactPersonId;
 
       this.custPersonalContactPersonObj.RowVersion = this.tempCustPersonalContactPerson.RowVersion;
-      // this.http.post(this.editCustPersonalContactPersonUrl, this.custPersonalContactPersonObj).subscribe(
       this.http.post(URLConstant.EditCustPersonalEmergencyContact, this.custPersonalContactPersonObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
@@ -489,7 +487,6 @@ export class CustomerContactAddComponent implements OnInit {
       );
     } else {
 
-      // this.http.post(this.addCustPersonalContactPersonUrl, this.custPersonalContactPersonObj).subscribe(
       this.http.post(URLConstant.AddCustPersonalEmergencyContact, this.custPersonalContactPersonObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);

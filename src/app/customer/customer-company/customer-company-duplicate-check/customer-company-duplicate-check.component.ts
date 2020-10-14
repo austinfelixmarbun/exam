@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -18,6 +18,9 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
   styleUrls: [],
 })
 export class CustomerCompanyDuplicateCheckComponent implements OnInit {
+  @Input() IsFromCustMgmntShareholder: boolean;
+  @Input() CustMgmntShareholderData: Object;
+  @Output() ResponseSaveData: EventEmitter<any>;
 
   resultData: any;
   tempCustModel: any;
@@ -77,9 +80,16 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
 
   ngOnInit() {
     this.DuplicateCustObj = new DuplicateCustObj();
-    this.DuplicateCustObj.CustName = this.CustName;
-    this.DuplicateCustObj.MrCustTypeCode = RefMasterConstant.Company;
-    this.DuplicateCustObj.TaxIdNo = this.TaxIdNo;
+    if(this.IsFromCustMgmntShareholder){
+      this.DuplicateCustObj.CustName = this.CustMgmntShareholderData["MgmntShrholderName"];
+      this.DuplicateCustObj.MrCustTypeCode = RefMasterConstant.Company;
+      this.DuplicateCustObj.TaxIdNo = this.CustMgmntShareholderData["TaxIdNo"];
+    }
+    else{
+      this.DuplicateCustObj.CustName = this.CustName;
+      this.DuplicateCustObj.MrCustTypeCode = RefMasterConstant.Company;
+      this.DuplicateCustObj.TaxIdNo = this.TaxIdNo;
+    }
     this.http.post(URLConstant.GetCustomerAndNegativeCustDuplicateCheck, this.DuplicateCustObj).subscribe(
       (response) => {
         this.DuplicateStatus = response["Status"];
@@ -130,34 +140,47 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
   }
 
   SaveValue() {
-    this.addCustObj = new AddCustObj();
-    this.addCustObj.CustObj = new CustObj();
-    this.addCustObj.CustCompanyObj = new CustCompanyObj();
-    this.addCustObj.CustObj.CustName = this.CustName;
-    this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
-    this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Company;
-    this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
-    this.addCustObj.CustObj.MrIdTypeCode = RefMasterConstant.Npwp;
-    this.addCustObj.CustObj.IdNo = this.TaxIdNo;
-    this.addCustObj.CustObj.TaxIdNo = this.TaxIdNo;
-    if (this.IsVip === "true") {
-      this.addCustObj.CustObj.IsVip = true;
-    } else {
-      this.addCustObj.CustObj.IsVip = false;
+    if(this.IsFromCustMgmntShareholder){
+      this.http.post(URLConstant.AddCustCompanyMgmntShrholderNew, this.CustMgmntShareholderData).toPromise().then(
+        (response) => {
+          this.ResponseSaveData.emit({mode : 'check'});
+        }
+      ).catch(
+        (error) => {
+          console.log(error);
+        }
+      )
     }
-    if (this.IsAffiliateWithMf === "true") {
-      this.addCustObj.CustObj.IsAffiliateWithMf = true;
-    } else {
-      this.addCustObj.CustObj.IsAffiliateWithMf = false;
-    }
-    this.addCustObj.CustObj.VipNotes = this.VipNotes;
-    this.http.post(URLConstant.AddNewCust, this.addCustObj).subscribe(
-      (response) => {
-        this.resultData = response;
-        this.CustId = this.resultData.CustObj.CustId;
-        this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.CustId, 'From': 'CustPaging' } });
+    else{
+      this.addCustObj = new AddCustObj();
+      this.addCustObj.CustObj = new CustObj();
+      this.addCustObj.CustCompanyObj = new CustCompanyObj();
+      this.addCustObj.CustObj.CustName = this.CustName;
+      this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
+      this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Company;
+      this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
+      this.addCustObj.CustObj.MrIdTypeCode = RefMasterConstant.Npwp;
+      this.addCustObj.CustObj.IdNo = this.TaxIdNo;
+      this.addCustObj.CustObj.TaxIdNo = this.TaxIdNo;
+      if (this.IsVip === "true") {
+        this.addCustObj.CustObj.IsVip = true;
+      } else {
+        this.addCustObj.CustObj.IsVip = false;
       }
-    );
+      if (this.IsAffiliateWithMf === "true") {
+        this.addCustObj.CustObj.IsAffiliateWithMf = true;
+      } else {
+        this.addCustObj.CustObj.IsAffiliateWithMf = false;
+      }
+      this.addCustObj.CustObj.VipNotes = this.VipNotes;
+      this.http.post(URLConstant.AddNewCust, this.addCustObj).subscribe(
+        (response) => {
+          this.resultData = response;
+          this.CustId = this.resultData.CustObj.CustId;
+          this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.CustId, 'From': 'CustPaging' } });
+        }
+      );
+    }
   }
 
   EditCustCompany(item) {
@@ -187,7 +210,20 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
         this.addCustObj.CustObj.VipNotes = this.VipNotes;
         this.http.post(URLConstant.EditDuplicateCust, this.addCustObj).subscribe(
           () => {
-            this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId, 'From': 'CustPaging' } });
+            if(this.IsFromCustMgmntShareholder){
+              this.http.post(URLConstant.AddCustCompanyMgmntShrholderNew, this.CustMgmntShareholderData).toPromise().then(
+                (response) => {
+                  this.ResponseSaveData.emit({mode : 'check'});
+                }
+              ).catch(
+                (error) => {
+                  console.log(error);
+                }
+              )
+            }
+            else{
+              this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { "IdCust": this.addCustObj.CustObj.CustId, 'From': 'CustPaging' } });
+            }
           }
         );
       }
@@ -219,8 +255,21 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
         this.RequestNegativeCustObj.VipNotes = this.VipNotes;
         this.http.post(URLConstant.EditDuplicateNegativeCust, this.RequestNegativeCustObj).subscribe(
           (response) => {
-            var custId = response['CustId'];
-            this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { 'IdCust': custId, 'From': 'CustPaging' } });
+            if(this.IsFromCustMgmntShareholder){
+              this.http.post(URLConstant.AddCustCompanyMgmntShrholderNew, this.CustMgmntShareholderData).toPromise().then(
+                (response) => {
+                  this.ResponseSaveData.emit({mode : 'check'});
+                }
+              ).catch(
+                (error) => {
+                  console.log(error);
+                }
+              )
+            }
+            else{
+              var custId = response['CustId'];
+              this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { 'IdCust': custId, 'From': 'CustPaging' } });
+            }
           }
         );
       }

@@ -772,6 +772,11 @@ export class URLConstant {
     public static GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId"
     public static EditCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholder"
     public static GetCustCompanyMgmntShrholderForCustViewByCustId = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderForCustViewByCustId";
+    public static AddCustCompanyMgmntShrholderNew = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderNew";
+    public static EditCustCompanyMgmntShrholderNew = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholderNew";
+    public static DeleteCustCompanyMgmntShrholderNew = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/DeleteCustCompanyMgmntShrholderNew";
+    public static GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderIdNew = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderIdNew";
+    public static GetListCustCompanyMgmntShrholderNewByCustId = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetListCustCompanyMgmntShrholderNewByCustId";
 
     // CUST ATTR CONTENT
     public static GetCustAttrContentForCustViewByCustId = environment.FoundationR3Url + "/CustAttrContent/GetCustAttrContentForCustViewByCustId";
@@ -812,6 +817,15 @@ export class URLConstant {
     public static DeleteCustPersonalContactPerson = environment.FoundationR3Url + "/CustPersonalContactPerson/DeleteCustPersonalContactPerson"
     public static EditCustPersonalContactPerson = environment.FoundationR3Url + "/CustPersonalContactPerson/EditCustPersonalContactPerson"
     public static GetCustPersonalContactPersonByCustPersonalContactPersonId = environment.FoundationR3Url + "/CustPersonalContactPerson/GetCustPersonalContactPersonByCustPersonalContactPersonId"
+    public static AddCustPersonalEmergencyContact = environment.FoundationR3Url + "/CustPersonalContactPerson/AddCustPersonalEmergencyContact";
+    public static EditCustPersonalEmergencyContact = environment.FoundationR3Url + "/CustPersonalContactPerson/EditCustPersonalEmergencyContact";
+    public static GetCustPersonalEmergencyContactByCustPersonalEmergencyContactId = environment.FoundationR3Url + "/CustPersonalContactPerson/GetCustPersonalEmergencyContactByCustPersonalEmergencyContactId";
+    public static AddCustPersonalFamily = environment.FoundationR3Url + "/CustPersonalFamily/AddCustPersonalFamily";
+    public static EditCustPersonalFamily = environment.FoundationR3Url + "/CustPersonalFamily/EditCustPersonalFamily";
+    public static DeleteCustPersonalFamily = environment.FoundationR3Url + "/CustPersonalFamily/DeleteCustPersonalFamily";
+    public static GetCustPersonalFamilyByCustPersonalFamilyId = environment.FoundationR3Url + "/CustPersonalFamily/GetCustPersonalFamilyByCustPersonalFamilyId";
+    public static GetListCustPersonalFamilyByCustId = environment.FoundationR3Url + "/CustPersonalFamily/GetListCustPersonalFamilyByCustId";
+    public static GetListCustPersonalEmergencyContactByCustId = environment.FoundationR3Url + "/CustPersonalContactPerson/GetListCustPersonalEmergencyContactByCustId";
 
     // SURVEY TASK
     public static GetListSrvyTaskBySrvyOrderId = environment.FoundationR3Url + "/SrvyTask/GetListSrvyTaskBySrvyOrderId";

@@ -57,7 +57,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     IdExpiredDt: [''],
     MrMaritalStatCode: [''],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
-    CustModel: ['', [Validators.required]],
+    CustModel: [''],
     IsVip: [true],
     IsAffiliateWithMf: [true],
     VipNotes: ['', [Validators.required]]
@@ -149,7 +149,8 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   }
   SaveValue() {
     this.CustName = this.CustomerPersonalForm.controls["CustName"].value;
-    this.CustModel = this.CustomerPersonalForm.controls["CustModel"].value;
+    // this.CustModel = this.CustomerPersonalForm.controls["CustModel"].value;
+    this.CustModel = "";
     this.Gender = this.CustomerPersonalForm.controls["Gender"].value;
     this.MrIdTypeCode = this.CustomerPersonalForm.controls["MrIdTypeCode"].value;
     this.BirthPlace = this.CustomerPersonalForm.controls["BirthPlace"].value;

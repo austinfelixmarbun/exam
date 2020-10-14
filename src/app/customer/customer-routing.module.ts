@@ -24,6 +24,9 @@ import { EditMainDataCompanyComponent } from './edit-main-data/edit-main-data-co
 import { UploadNegativeCustomerComponent } from './negative-customer/upload-negative-customer/upload-negative-customer.component';
 import { ReviewUploadNegativeCustomerPagingComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-paging/review-upload-negative-customer-paging.component';
 import { ReviewUploadNegativeCustomerDetailComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-detail/review-upload-negative-customer-detail.component';
+import { CustomerFamilyMenuComponent } from './customer-family-menu/customer-family-menu.component';
+import { CustomerShareholderMenuComponent } from './customer-shareholder-menu/customer-shareholder-menu.component';
+import { CustomerGuarantorMenuComponent } from './customer-guarantor-menu/customer-guarantor-menu.component';
 
 const routes: Routes = [
   {
@@ -190,6 +193,27 @@ const routes: Routes = [
           title: 'Edit Main Data Company Page'
         }
       },
+      {
+        path: 'CustFamily/Paging',
+        component: CustomerFamilyMenuComponent,
+        data: {
+          title: 'Customer Family'
+        }
+      },
+      {
+        path: 'CustShareholder/Paging',
+        component: CustomerShareholderMenuComponent,
+        data: {
+          title: 'Customer Shareholder'
+        }
+      },
+      {
+        path: 'CustGuarantor/Paging',
+        component: CustomerGuarantorMenuComponent,
+        data: {
+          title: 'CustomerGuarantor'
+        }
+      }
     ]
   }
 ];

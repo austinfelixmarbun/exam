@@ -37,18 +37,26 @@
               </button>
             </div>
             <div class="line"></div>
+            <div class="step" data-target="#family-tab">
+              <button type="button" class="step-trigger" role="tab" aria-controls="family-tab" id="family-tab-trigger"
+                (click)="EnterTab('Family')">
+                <span class="bs-stepper-circle">3</span>
+                <span class="bs-stepper-label">Customer Family</span>
+              </button>
+            </div>
+            <div class="line"></div>
             <div class="step" data-target="#contact-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="contact-tab" id="contact-tab-trigger"
                 (click)="EnterTab('Contact')">
-                <span class="bs-stepper-circle">3</span>
-                <span class="bs-stepper-label">Contact Person</span>
+                <span class="bs-stepper-circle">4</span>
+                <span class="bs-stepper-label">Emergency Contact Person</span>
               </button>
             </div>
             <div class="line"></div>
             <div class="step" data-target="#group-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="group-tab" id="group-tab-trigger"
                 (click)="EnterTab('Group')">
-                <span class="bs-stepper-circle">4</span>
+                <span class="bs-stepper-circle">5</span>
                 <span class="bs-stepper-label">Customer Group</span>
               </button>
             </div>
@@ -56,7 +64,7 @@
             <div class="step" data-target="#job-data-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="job-data-tab"
                 id="job-data-tab-trigger" (click)="EnterTab('Job')">
-                <span class="bs-stepper-circle">5</span>
+                <span class="bs-stepper-circle">6</span>
                 <span class="bs-stepper-label">Customer Job Data</span>
               </button>
             </div>
@@ -64,7 +72,7 @@
             <div class="step" data-target="#financial-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="financial-tab"
                 id="financial-tab-trigger" (click)="EnterTab('Financial')">
-                <span class="bs-stepper-circle">6</span>
+                <span class="bs-stepper-circle">7</span>
                 <span class="bs-stepper-label">Financial Data</span>
               </button>
             </div>
@@ -72,7 +80,7 @@
             <div class="step" data-target="#cust-attr-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="cust-attr-tab"
                 id="cust-attr-tab-trigger" (click)="EnterTab('CustAttr')">
-                <span class="bs-stepper-circle">7</span>
+                <span class="bs-stepper-circle">8</span>
                 <span class="bs-stepper-label">Other Info</span>
               </button>
             </div>
@@ -87,23 +95,27 @@
               <app-customer-personal-address (outputTab)="getValue($event)" *ngIf="CustStepIndex == 2">
               </app-customer-personal-address>
             </div>
+            <div id="family-tab" class="content" role="tabpanel" aria-labelledby="family-tab-trigger">
+              <app-customer-family [CustId]="IdCust" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 3">
+              </app-customer-family>
+            </div>
             <div id="contact-tab" class="content" role="tabpanel" aria-labelledby="contact-tab-trigger">
-              <app-customer-contact-person (outputTab)="getValue($event)" *ngIf="CustStepIndex == 3">
+              <app-customer-contact-person (outputTab)="getValue($event)" *ngIf="CustStepIndex == 4">
               </app-customer-contact-person>
             </div>
             <div id="group-tab" class="content" role="tabpanel" aria-labelledby="group-tab-trigger">
-              <app-cust-group-tab [MrCustTypeCode]="'PERSONAL'" [CustId]="IdCust" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 4">
+              <app-cust-group-tab [MrCustTypeCode]="'PERSONAL'" [CustId]="IdCust" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 5">
               </app-cust-group-tab>
             </div>
             <div id="job-data-tab" class="content" role="tabpanel" aria-labelledby="job-data-tab-trigger">
-              <app-customer-personal-job-data (outputTab)="getValue($event)" *ngIf="CustStepIndex == 5"> </app-customer-personal-job-data>
+              <app-customer-personal-job-data (outputTab)="getValue($event)" *ngIf="CustStepIndex == 6"> </app-customer-personal-job-data>
             </div>
             <div id="financial-tab" class="content" role="tabpanel" aria-labelledby="financial-tab-trigger">
-              <app-cust-fin-data-tab [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 6">
+              <app-cust-fin-data-tab [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 7">
               </app-cust-fin-data-tab>
             </div>
             <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
-              <app-cust-attr-section [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" *ngIf="CustStepIndex == 7">
+              <app-cust-attr-section [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" *ngIf="CustStepIndex == 8">
               </app-cust-attr-section>
             </div>
           </div>
