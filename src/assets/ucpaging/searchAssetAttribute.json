@@ -99,10 +99,15 @@
             "position": "center",
             "label": "EDITABLE AFTER GO LIVE",
             "name": "AST.IS_EDITABLE_AFTER_GO_LIVE"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "ACTION"
         }
     ],
     "querystring": {
-        "select": "SELECT RA.ATTR_CODE AS AttrCode, RA.ATTR_NAME AS AttrName, RA.ATTR_TYPE_CODE AS AttrTypeCode, RA.ATTR_VALUE AS AttrValue, AST.IS_EDITABLE_AFTER_GO_LIVE AS IsEditable, RM.DESCR AS AttrInputType",
+        "select": "SELECT AST.ASSET_ATTR_ID AS AssetAttrId, RA.ATTR_CODE AS AttrCode, RA.ATTR_NAME AS AttrName, RA.ATTR_TYPE_CODE AS AttrTypeCode, RA.ATTR_VALUE AS AttrValue, RA.REF_ATTR_ID AS RefAttrId, AST.IS_EDITABLE_AFTER_GO_LIVE AS IsEditable, RM.DESCR AS AttrInputType",
         "from": "FROM dbo.ASSET_ATTR AST WITH(NOLOCK) JOIN dbo.REF_ATTR RA WITH(NOLOCK) ON RA.REF_ATTR_ID = AST.REF_ATTR_ID LEFT JOIN dbo.REF_MASTER RM WITH(NOLOCK) ON RM.MASTER_CODE = RA.ATTR_INPUT_TYPE AND RM.REF_MASTER_TYPE_CODE = 'ATTR_INPUT_TYPE'"
     },
     "bodyList": [
@@ -135,6 +140,21 @@
             "type": "boolean",
             "position": "center",
             "property": "IsEditable"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+              {
+                "type": "callback",
+                "property": "AssetAttrId",
+                "icon" : "ft-edit"
+              },
+              {
+                "type": "delete",
+                "property": "AssetAttrId"
+              }
+            ]
         }
     ]
 }

@@ -454,6 +454,7 @@ export class URLConstant {
     public static GetListProdOfferingBranchOfficeMbrByProdHIdAndApp = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHIdAndApp"
     public static CopyProductOffering = environment.FoundationR3Url + "/ProductOffering/CopyProductOffering";
     public static UpdateProdOfferingPostApv = environment.FoundationR3Url + "/ProductOffering/UpdateProdOfferingPostApv";
+    public static ReviewProdOffering = environment.FoundationR3Url + "/ProductOffering/ReviewProdOffering";
 
     // PRODUCT COMPONENT
     public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
@@ -473,6 +474,13 @@ export class URLConstant {
     public static GetAssetAccessorybyAssetAccessoryId = environment.FoundationR3Url + "/AssetAccessory/GetAssetAccessoryById"
     public static GetlistAssetAccessorybyAssetTypeId = environment.FoundationR3Url + "/AssetAccessory/GetListAssetAccessoryByAssetTypeId"
     public static DeleteAssetAccessory = "/AssetAccessory/DeleteAssetAccessory"
+
+    //asset attr
+    public static AddAssetAttr = environment.FoundationR3Url +"/AssetAttr/AddAssetAttr";
+    public static EditAssetAttr = environment.FoundationR3Url +"/AssetAttr/EditAssetAttr";
+    public static GetListAssetAttrByAssetTypeId = environment.FoundationR3Url +"/AssetAttr/GetListAssetAttrByAssetTypeId";
+    public static GetAssetAttrByAssetAttrId = environment.FoundationR3Url +"/AssetAttr/GetAssetAttrByAssetAttrId";
+    public static DeleteAssetAttr = "/AssetAttr/DeleteAssetAttr";
 
     //asset category
     public static AddNewAssetCategory = environment.FoundationR3Url + "/AssetCategory/AddAssetCategory"

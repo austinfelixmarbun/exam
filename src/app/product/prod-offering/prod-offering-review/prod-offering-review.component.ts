@@ -8,32 +8,30 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
 
 @Component({
-  selector: 'app-product-ho-review',
-  templateUrl: './product-ho-review.component.html',
-  providers: [NGXToastrService]
+  selector: 'app-prod-offering-review',
+  templateUrl: './prod-offering-review.component.html'
 })
-export class ProductHoReviewComponent implements OnInit {
-
-  ProdId: number;
+export class ProdOfferingReviewComponent implements OnInit {
+ 
+  ProdOfferingHId: number;
   WfTaskListId: number;
-  ProdHId: number; 
+  ProdOfferingId: number; 
   FormObj = this.fb.group({
     ApprovedById: ['', Validators.required],
     Notes: ['', Validators.required]
   });
   constructor(private toastr: NGXToastrService, private http: HttpClient, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
-      if (params["ProdId"] != null) {
-        this.ProdId = params["ProdId"];
+      if (params["ProdOfferingHId"] != null) {
+        this.ProdOfferingHId = params["ProdOfferingHId"];
       }
       if (params["WfTaskListId"] != null) {
         this.WfTaskListId = params["WfTaskListId"];
       }
-      if (params["ProdHId"] != null) {
-        this.ProdHId = params["ProdHId"];
+      if (params["ProdOfferingId"] != null) {
+        this.ProdOfferingId = params["ProdOfferingId"];
       }
     });
-
   }
   apvBaseUrl = environment.ApprovalURL;
   ngOnInit() { 
@@ -48,16 +46,16 @@ export class ProductHoReviewComponent implements OnInit {
 
   SaveForm() {
     var data = {
-      ProdHId: this.ProdHId,
-      ProdId: this.ProdId,
+      ProdOfferingId: this.ProdOfferingId,
+      ProdOfferingHId: this.ProdOfferingHId,
       ApprovedById: this.FormObj.controls.ApprovedById.value,
       Notes: this.FormObj.controls.Notes.value,
       WfTaskListId: this.WfTaskListId,
     } 
-    this.http.post(URLConstant.ReviewProduct, data).subscribe(
+    this.http.post(URLConstant.ReviewProdOffering, data).subscribe(
       (response) => {
         this.toastr.successMessage("Success");
-        this.router.navigate(["/Product/HOReview"]);
+        this.router.navigate(["/Product/OfferingReview"]);
       });
   }
   async ClaimTask(WfTaskListId) {
@@ -65,5 +63,4 @@ export class ProductHoReviewComponent implements OnInit {
     var wfClaimObj = { pWFTaskListID: WfTaskListId, pUserID: currentUserContext[CommonConstant.USER_NAME], isLoading: false };
     this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(() => { });
   }
-
 }

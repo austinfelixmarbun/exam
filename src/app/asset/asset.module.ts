@@ -32,6 +32,7 @@ import { ReviewUploadNegativeAssetPagingComponent } from './negative-asset/revie
 import { ReviewUploadNegativeAssetDetailComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-detail/review-upload-negative-asset-detail.component';
 import { UcaddtotempModule } from "@adins/ucaddtotemp";
 import { AssetAttributeComponent } from './asset-attribute/asset-attribute.component';
+import { AssetAttributeDetailComponent } from './asset-attribute/asset-attribute-detail/asset-attribute-detail.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -81,7 +82,8 @@ export const customCurrencyMaskConfig = {
     NegativeAssetUploadComponent,
     ReviewUploadNegativeAssetPagingComponent,
     ReviewUploadNegativeAssetDetailComponent,
-    AssetAttributeComponent
+    AssetAttributeComponent,
+    AssetAttributeDetailComponent
   ],
   providers: [
     NGXToastrService

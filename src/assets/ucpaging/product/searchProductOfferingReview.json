@@ -1,34 +1,34 @@
 {
-    "title": "Product HO Review",
+    "title": "Product Offering Review",
     "exportExcel": false,
     "component": [{
         "type": "textbox",
-        "name": "A.PROD_CODE",
+        "name": "A.PROD_OFFERING_CODE",
         "id": "ProdCodeId",
         "value": "",
-        "label": "Product Code",
+        "label": "Product Offering Code",
         "placeholder": "Placeholder"
       },
       {
         "type": "textbox",
-        "name": "A.PROD_NAME",
+        "name": "A.PROD_OFFERING_NAME",
         "id": "ProdNameId",
         "value": "",
-        "label": "Product Name",
+        "label": "Product Offering Name",
         "placeholder": "Placeholder"
       }
     ],
     "headerList": [{
         "type": "sort",
         "position": "center",
-        "label": "Product Code",
-        "name": "ProdCode"
+        "label": "Product Offering Code",
+        "name": "ProdOfferingCode"
       },
       {
         "type": "sort",
         "position": "center",
-        "label": "Product Name",
-        "name": "ProdName"
+        "label": "Product Offering Name",
+        "name": "ProdOfferingName"
       },
       {
         "type": "sort",
@@ -43,19 +43,19 @@
       }
     ],
     "querystring": {
-      "select": "SELECT A.PROD_CODE AS ProdCode, A.PROD_NAME AS ProdName, A.END_DT AS EndDt, A.PROD_STAT AS ProdStat, A.PROD_ID AS ProdId, WTL.WF_TASK_LIST_ID AS WfTaskListId, B.PROD_H_ID AS ProdHId, WTL.END_EXECUTING_DATE as EndExecutingDate",
-      "from": "FROM dbo.PROD A WITH(NOLOCK) JOIN dbo.V_WF_TASK_LIST WTL WITH(NOLOCK) ON A.PROD_CODE = WTL.TRANSACTION_CODE LEFT JOIN dbo.PROD_H B WITH(NOLOCK) ON A.DRAFT_PROD_H_ID=B.PROD_H_ID",
-      "where": "WHERE WTL.ACT_CODE = N'PROD_HO_RVW' and WTL.END_EXECUTING_DATE IS NULL"
+      "select": "SELECT A.PROD_OFFERING_CODE AS ProdOfferingCode, A.PROD_OFFERING_NAME AS ProdOfferingName, A.END_DT AS EndDt, A.PROD_OFFERING_STAT AS ProdOfferingStat, A.PROD_OFFERING_ID AS ProdOfferingId, B.PROD_OFFERING_H_ID AS ProdOfferingHId, WTL.WF_TASK_LIST_ID AS WfTaskListId,  WTL.END_EXECUTING_DATE as EndExecutingDate",
+      "from": "FROM dbo.PROD_OFFERING A WITH(NOLOCK) JOIN dbo.V_WF_TASK_LIST WTL WITH(NOLOCK) ON A.PROD_OFFERING_CODE = WTL.TRANSACTION_CODE LEFT JOIN dbo.PROD_OFFERING_H B WITH(NOLOCK) ON A.DRAFT_PROD_OFFERING_H_ID=B.PROD_OFFERING_H_ID",
+      "where": "WHERE WTL.ACT_CODE = N'PROD_OFFERING_RVW' and WTL.END_EXECUTING_DATE IS NULL"
     },
     "bodyList": [{
         "type": "text",
         "position": "center",
-        "property": "ProdCode"
+        "property": "ProdOfferingCode"
       },
       {
         "type": "text",
         "position": "center",
-        "property": "ProdName"
+        "property": "ProdOfferingName"
       },
       {
         "type": "date",
@@ -68,15 +68,15 @@
         "action": [
           {
             "type": "edit",
-            "path": "/Product/HOReview/Detail",
+            "path": "/Product/OfferingReview/Detail",
             "param": [
               {
-                "type": "ProdHId",
-                "property": "ProdHId"
+                "type": "ProdOfferingHId",
+                "property": "ProdOfferingHId"
               },
               {
-                "type": "ProdId",
-                "property": "ProdId"
+                "type": "ProdOfferingId",
+                "property": "ProdOfferingId"
               },
               {
                 "type": "WfTaskListId",
@@ -86,6 +86,5 @@
           }
         ] 
       }
-      
     ]
   }

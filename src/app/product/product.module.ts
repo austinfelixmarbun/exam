@@ -50,8 +50,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcapprovebyModule } from '@adins/ucapproveby';
-import { ProductHoReviewPagingComponent } from './product-HO/product-ho-review-paging/product-ho-review-paging.component';
 import { ProductHoReviewComponent } from './product-HO/product-ho-review/product-ho-review.component';
+import { ProdOfferingReviewComponent } from './prod-offering/prod-offering-review/prod-offering-review.component';
+import { ProdOfferingReviewPagingComponent } from './prod-offering/prod-offering-review-paging/prod-offering-review-paging.component';
+import { ProductHoReviewPagingComponent } from './product-HO/product-ho-review-paging/product-ho-review-paging.component';
 
 
 @NgModule({
@@ -111,7 +113,9 @@ import { ProductHoReviewComponent } from './product-HO/product-ho-review/product
     ProductReturnHoPagingComponent,
     ProdOfferingReturnPagingComponent,
     ProductHoReviewPagingComponent,
-    ProductHoReviewComponent
+    ProductHoReviewComponent,
+    ProdOfferingReviewComponent,
+    ProdOfferingReviewPagingComponent
   ],
   providers: [
     NGXToastrService
