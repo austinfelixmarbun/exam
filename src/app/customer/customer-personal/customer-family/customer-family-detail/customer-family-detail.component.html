@@ -23,7 +23,7 @@
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.CustName.invalid}">
                   <lib-uc-show-errors [control]="CustomerFamilyForm.controls.CustName" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors> -->
-                  <lib-uclookupgeneric [lookupInput]="existingCustomerLookUpObj" [parentForm]="CustomerContactForm"
+                  <lib-uclookupgeneric [lookupInput]="existingCustomerLookUpObj" [parentForm]="CustomerFamilyForm"
                     [enjiForm]="enjiForm" [identifier]="'ExistingCustomer'" (lookup)=getLookUpCustomer($event)>
                   </lib-uclookupgeneric>
                 </div>
@@ -130,7 +130,7 @@
                 <label class="col-md-2 adins-required-label" translate>Customer Relationship</label>
                 <div class="col-md-4">
                   <select class="form-control adInsInput" style="width: auto" formControlName="MrCustRelationship"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.MrCustRelationship.invalid }"  (change)="Check()"> 
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.MrCustRelationship.invalid }" > 
                     <option *ngFor="let it of CustRelationshipList " [value]="it.Key">
                       {{it.Value}}</option>
                   </select>

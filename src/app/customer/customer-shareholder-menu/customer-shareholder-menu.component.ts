@@ -1,6 +1,6 @@
-import { UcPagingObj } from '@adins/ucpaging/lib/model/UcPagingObj.Model';
 import { Component, OnInit } from '@angular/core';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 
 @Component({
