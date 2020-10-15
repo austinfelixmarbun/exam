@@ -29,6 +29,7 @@ export class CustomerCompanyPageComponent implements OnInit {
   isManagement: boolean;
 
   Page: string;
+  From: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
 
@@ -39,12 +40,15 @@ export class CustomerCompanyPageComponent implements OnInit {
       if (params["Page"] != null) {
         this.Page = params["Page"];
       }
+      if (params["From"] != null) {
+        this.From = params["From"];
+      }
     });
   }
   
   back() {
-    if (this.Page != null) {
-      this.router.navigate(["/Customer/EditMainData/Paging"]);
+    if (this.From) {
+      this.router.navigate(["/Customer/"+this.From+"/Paging"]);
     } else {
       this.router.navigate(["/Customer/Paging"]);
     }

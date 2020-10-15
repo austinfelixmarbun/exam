@@ -22,15 +22,17 @@ export class CustomerFamilyComponent implements OnInit {
     this.IsFromFamily = true;
     this.IsFromShareholder = false;
     this.ShareholderObject = new Object();
+    this.Mode = "Paging";
   }
 
   ngOnInit() {
+    console.log("Cust Family Mode: " + this.Mode);
   }
 
   PagingToDetailHandler(event){
     this.Mode = event.Mode;
     this.CustPersonalFamilyId = event.CustPersonalFamilyId;
-    this.FamilyIdToExclude = event.CustToExclude;
+    this.FamilyIdToExclude = event.CustIdToExclude;
   }
 
   DetailToPagingHandler(event){

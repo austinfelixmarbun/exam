@@ -169,8 +169,10 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       return false;
     }
 
+    // this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
+    // this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
     this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
-    this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
+    this.custCompanyMgmntShrholderObj.CustId = this.custCompanyId;
     if(this.CustCompanyMgmntShrholderId!=null){ 
       this.custCompanyMgmntShrholderObj = this.tempCustCompanyMgmntShrholderObj;
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;

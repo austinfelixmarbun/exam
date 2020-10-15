@@ -20,6 +20,7 @@ export class CustomerFamilyPagingComponent implements OnInit {
   constructor(private http: HttpClient, private toastr: NGXToastrService) { 
     this.CustFamilyList = new Array<Object>();
     this.CustToExclude = new Array<number>();
+    this.OutputDetailHandler = new EventEmitter<any>();
   }
 
   ngOnInit() {

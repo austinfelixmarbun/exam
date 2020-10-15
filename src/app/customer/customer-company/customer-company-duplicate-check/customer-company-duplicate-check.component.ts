@@ -52,6 +52,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
   urlGetDescByMasterCode: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
+    this.ResponseSaveData = new EventEmitter<any>();
     this.urlGetDescByMasterCode = URLConstant.GetRefMasterByMasterCode;
     this.route.queryParams.subscribe(params => {
       if (params["CustModel"] != null) {

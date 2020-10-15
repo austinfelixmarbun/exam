@@ -280,7 +280,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
       };
       this.http.post(URLConstant.AddCustCompanyMgmntShrholderNew, requestShareholderPersonal).toPromise().then(
         (response) => {
-          this.ResponseSaveData.emit(response);
+          this.ResponseSaveData.emit({mode : 'check'});
         }
       ).catch(
         (error) => {
@@ -384,8 +384,8 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
                 IsSigner: this.CustMgmntShareholderData["IsSigner"]
               }
               this.http.post(URLConstant.AddCustCompanyMgmntShrholderNew, requestShareholderPersonal).toPromise().then(
-                (responseFamily) => {
-                  this.ResponseSaveData.emit(responseFamily);
+                (responseShareholder) => {
+                  this.ResponseSaveData.emit({mode : 'check'});
                 }
               ).catch(
                 (error) => {
@@ -460,8 +460,9 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
                 IsSigner: this.CustMgmntShareholderData["IsSigner"]
               }
               this.http.post(URLConstant.AddCustCompanyMgmntShrholderNew, requestShareholderPersonal).toPromise().then(
-                (responseFamily) => {
-                  this.ResponseSaveData.emit(responseFamily);
+                (responseShareholder) => {
+                  // this.ResponseSaveData.emit(responseFamily);
+                  this.ResponseSaveData.emit({mode : 'check'});
                 }
               ).catch(
                 (error) => {

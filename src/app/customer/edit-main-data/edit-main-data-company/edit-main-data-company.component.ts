@@ -150,7 +150,14 @@ export class EditMainDataCompanyComponent implements OnInit {
             this.toastr.successMessage(response["Message"]);
             if (this.From == "EditMainData") {
               this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit', From:'EditMainData'} });
-            } else {
+            }
+            else if(this.From == "CustShareholder"){
+              this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit', From: 'CustShareholder' } });
+            }
+            else if(this.From == "CustGuarantor"){
+              this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit', From: 'CustGuarantor' } });
+            }
+            else {
               this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { IdCust: this.CustId, From:'CustPaging'  } });
             }
           }
@@ -163,8 +170,14 @@ export class EditMainDataCompanyComponent implements OnInit {
     if (this.From == "CustPaging") {
       this.router.navigate(["/Customer/Paging"]);
     }
-    else if (this.From = "EditMainData") {
+    else if (this.From == "EditMainData") {
       this.router.navigate(["/Customer/EditMainData/Paging"]);
+    }
+    else if(this.From == "CustShareholder"){
+      this.router.navigate(["/Customer/CustShareholder/Paging"]);
+    }
+    else if(this.From == "CustGuarantor"){
+      this.router.navigate(["/Customer/CustGuarantor/Paging"]);
     }
   }
   checkState() {

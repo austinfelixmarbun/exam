@@ -15,7 +15,7 @@
       <div class="form-group row">
         <label class="col-md-2 adInsLabel" translate>Customer Model</label>
         <div class="col-md-4">
-          <select class="form-control adInsInput" [(ngModel)]="CustModel">
+          <select class="form-control adInsInput" [(ngModel)]="CustModel" [ngModelOptions]="{standalone: true}">
             <option *ngFor="let it of tempCustModel" [value]="it.Key">
               {{it.Value}}
             </option>

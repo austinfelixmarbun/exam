@@ -117,13 +117,13 @@
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.MobilePhnNo1.invalid}">
                   <lib-uc-show-errors [control]="CustomerFamilyForm.controls.MobilePhnNo1" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
-                  <label class="col-md-2" translate>Email</label>
-                  <div class="col-md-4">
-                    <input type="text" class="form-control adins-required" formControlName="Email1"
-                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.Email1.invalid}">
-                    <lib-uc-show-errors [control]="CustomerFamilyForm.controls.Email1" [submit]="enjiForm.submitted">
-                    </lib-uc-show-errors>
-                  </div>
+                </div>
+                <label class="col-md-2" translate>Email</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control adins-required" formControlName="Email1"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.Email1.invalid}">
+                  <lib-uc-show-errors [control]="CustomerFamilyForm.controls.Email1" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">
@@ -147,11 +147,11 @@
               </lib-ucaddress> 
             </div>
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1"  [routerLink]="['../../Paging']" translate>
+              <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
                <i class="far fa-window-close"></i> Cancel
               </button>
               <button type="submit" class="btn btn-raised btn-primary" translate>
-                <i class="far fa-check-square"></i> Save and Continue
+                <i class="far fa-check-square"></i> Save
               </button>
             </div>
           </form>

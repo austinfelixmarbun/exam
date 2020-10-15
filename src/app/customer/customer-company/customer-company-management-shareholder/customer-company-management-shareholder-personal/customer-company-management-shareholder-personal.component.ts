@@ -45,6 +45,9 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   getListKeyValueByMrCustTypeCode: string;
 
   ManagementShareholderForm = this.fb.group({
+    CustCompanyMgmntShrholderId: [0],
+    CustId: [0],
+    ShareholderId: [0],
     MgmntShrholderName: ['', [Validators.required,Validators.maxLength(100)]],
     MrCustModelCode: [''],
     MrIdTypeCode: ['',[Validators.required]],
@@ -152,7 +155,9 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
           this.tempCustCompanyMgmntShrholderObj = response;
           var datePipe = new DatePipe("en-US");
           this.ManagementShareholderForm.patchValue({ 
-            
+            CustCompanyMgmntShrholderId: this.tempCustCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId,
+            CustId: this.tempCustCompanyMgmntShrholderObj.CustId,
+            ShareholderId: this.tempCustCompanyMgmntShrholderObj.ShareholderId,
             MgmntShrholderName: this.tempCustCompanyMgmntShrholderObj.MgmntShrholderName,
             MrCustModelCode:  this.tempCustCompanyMgmntShrholderObj.MrCustModelCode,
             MrIdTypeCode: this.tempCustCompanyMgmntShrholderObj.MrIdTypeCode,
@@ -185,6 +190,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
         }
       );
       
+    }
+    else{
+      this.ManagementShareholderForm.patchValue({ 
+        CustId: this.custCompanyId
+      });
     } 
   }
 
@@ -199,7 +209,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }
 
     this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
-    this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
+    this.custCompanyMgmntShrholderObj.CustId = this.custCompanyId;
     if(this.CustCompanyMgmntShrholderId!=null){ 
       this.custCompanyMgmntShrholderObj = this.tempCustCompanyMgmntShrholderObj;
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
@@ -228,7 +238,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       if(this.tempShareholderCustNo!=null){
         this.custCompanyMgmntShrholderObj.ShareholderCustNo = this.tempShareholderCustNo;
       }
-      this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
+      // this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
       this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;
       this.custCompanyMgmntShrholderObj.MrIdTypeCode = this.ManagementShareholderForm.controls["MrIdTypeCode"].value;

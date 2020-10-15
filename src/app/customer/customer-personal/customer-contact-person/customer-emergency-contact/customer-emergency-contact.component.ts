@@ -92,8 +92,6 @@ export class CustomerEmergencyContactComponent implements OnInit {
     MrNationalityCode: [''],
     TaxIdNo: [''],
     MrCustRelationshipCode: [''],
-    IsEmergencyContact: [true],
-    IsFamily: [true],
     MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     MobilePhnNo2: ['', [Validators.pattern("^[0-9]+$")]],
     Email: ['', [Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
@@ -447,8 +445,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.custPersonalContactPersonObj.TaxIdNo = this.CustomerContactForm.controls["TaxIdNo"].value;
     this.custPersonalContactPersonObj.MrJobProfessionCode = this.tempProfession;
     this.custPersonalContactPersonObj.MrCustRelationshipCode = this.CustomerContactForm.controls["MrCustRelationshipCode"].value;
-    this.custPersonalContactPersonObj.IsFamily = this.CustomerContactForm.controls["IsFamily"].value;
-    this.custPersonalContactPersonObj.IsEmergencyContact = this.CustomerContactForm.controls["IsEmergencyContact"].value;
+    // this.custPersonalContactPersonObj.IsFamily = this.CustomerContactForm.controls["IsFamily"].value;
+    // this.custPersonalContactPersonObj.IsEmergencyContact = this.CustomerContactForm.controls["IsEmergencyContact"].value;
     this.custPersonalContactPersonObj.MobilePhnNo1 = this.CustomerContactForm.controls["MobilePhnNo1"].value;
     this.custPersonalContactPersonObj.MobilePhnNo2 = this.CustomerContactForm.controls["MobilePhnNo2"].value;
     this.custPersonalContactPersonObj.Email = this.CustomerContactForm.controls["Email"].value;

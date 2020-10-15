@@ -1,5 +1,5 @@
 <app-customer-family-paging *ngIf="Mode == 'Paging'" [CustId]="CustId" (OutputDetailHandler)="PagingToDetailHandler($event)"></app-customer-family-paging>
-<app-customer-family-detail *ngIf="Mode != 'Paging'" [listCustIdToExclude]="FamilyIdToExclude" [customerPersonalFamilyId]="CustPersonalFamilyId" [custIdInput]="CustId" (ResponseSaveFamily)="DetailToPagingHandler($event)"></app-customer-family-detail>
+<app-customer-family-detail *ngIf="Mode != 'Paging' && Mode != 'DuplicateChecking'" [listCustIdToExclude]="FamilyIdToExclude" [customerPersonalFamilyId]="CustPersonalFamilyId" [custIdInput]="CustId" (ResponseSaveFamily)="DetailToPagingHandler($event)"></app-customer-family-detail>
 <app-customer-personal-duplicate-check *ngIf="Mode == 'DuplicateChecking'" [IsFromCustFamilyTab]="IsFromFamily" [CustFamilyTabData]="FamilyData" [IsFromCustMgmntShareholder]="IsFromShareholder" [CustMgmntShareholderData]="ShareholderObject" (ResponseSaveData)="DetailToPagingHandler($event)"></app-customer-personal-duplicate-check>
 <div *ngIf="Mode == 'Paging'" class="form-actions right" style="text-align: right;">
   <button type="button" class="btn btn-raised btn-primary" (click)="next()" translate>
