@@ -24,6 +24,7 @@ export class CustPersonalJobDataObj {
     OthBizJobPosition : any;
     OthBizEstablishmentDt : any;
     OthBizAddrId : any;
+    MrCustModelCode: any;
     RowVersion:any;
   }
   

@@ -191,4 +191,12 @@ export class CommonConstant {
     // Integration
     public static DailyMasterTypeSingle = "Date";
     public static DailyMasterTypeRange = "Range";
+
+    // CUST MODEL
+    public static CUST_MODEL_EMP = "EMP";
+    public static CUST_MODEL_PROF = "PROF";
+    public static CUST_MODEL_SME = "SME";
+    public static CUST_MODEL_SMETBU = "SMETBU";
+    public static CUST_MODEL_SMEBU = "SMEBU";
+    public static CUST_MODEL_NONPROF = "NONPROF";
 }

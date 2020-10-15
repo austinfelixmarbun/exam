@@ -339,6 +339,7 @@ export class JobDataProfessionalComponent implements OnInit {
       this.reqCustPersonalJobDataObj.JobAddr = this.jobAddressObj;
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;
+      this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_PROF;
 
       this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
@@ -360,6 +361,7 @@ export class JobDataProfessionalComponent implements OnInit {
       this.preJobAddressObj = new CustAddrObj;
       this.setPreJobAddr();
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
+      this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_PROF;
 
       this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {

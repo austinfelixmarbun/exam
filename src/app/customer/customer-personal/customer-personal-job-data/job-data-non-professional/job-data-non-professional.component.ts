@@ -143,6 +143,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.JobAddr = this.jobAddrObj;
       this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;
+      this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_NONPROF;
 
       this.http.post(this.editJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
@@ -167,6 +168,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.JobAddr = this.jobAddrObj;
       this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;
+      this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_NONPROF;
 
       this.http.post(this.addJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {

@@ -12,6 +12,16 @@
                         <lib-uc-show-errors [control]="CustJobDataForm.controls.JobDataType" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                       </div>
                     </div> -->
+      <div class="form-group row">
+        <label class="col-md-2 adInsLabel" translate>Customer Model</label>
+        <div class="col-md-4">
+          <select class="form-control adInsInput" [(ngModel)]="CustModel">
+            <option *ngFor="let it of tempCustModel" [value]="it.Key">
+              {{it.Value}}
+            </option>
+          </select>
+        </div>
+      </div>
       <div *ngIf="this.CustModel == 'EMP'">
         <app-job-data-employee (outputTab)="getValue($event)"></app-job-data-employee>
       </div>
