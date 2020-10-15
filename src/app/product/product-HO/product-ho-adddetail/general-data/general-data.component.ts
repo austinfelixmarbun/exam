@@ -173,7 +173,7 @@ export class GeneralDataHOComponent implements OnInit {
             compValue = obj.CompntValue;
             compDescr = obj.CompntValueDesc;
           }
-          if (obj.RefProdCompntCode == "LOB" && this.LOBSelected == "") {
+          if (obj.RefProdCompntCode == "LOB" && obj.CompntValue != "" && this.LOBSelected == "") {
               this.LOBSelected = compValue;
               this.LOBDescrSelected = compDescr;
           }
