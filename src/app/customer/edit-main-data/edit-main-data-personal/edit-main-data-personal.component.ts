@@ -150,6 +150,9 @@ export class EditMainDataPersonalComponent implements OnInit {
         if(this.tempCustObj.IsVip==false){ 
         this.CustomerPersonalForm.controls.VipNotes.disable();
         }
+        this.CustomerPersonalForm.controls["MrIdTypeCode"].disable();
+        this.CustomerPersonalForm.controls["IdNo"].disable();
+        this.CustomerPersonalForm.controls["TaxIdNo"].disable();
       }
     );
     await this.http.post<CustPersonalObj>(this.getCustPersonalByCustIdUrl, this.custPersonalObj).toPromise().then(

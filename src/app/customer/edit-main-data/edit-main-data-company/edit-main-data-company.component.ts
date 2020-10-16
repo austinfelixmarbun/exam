@@ -113,6 +113,7 @@ export class EditMainDataCompanyComponent implements OnInit {
         if(this.tempCustObj.IsVip==false){ 
         this.CustomerCompanyForm.controls.VipNotes.disable();
         }
+        this.CustomerCompanyForm.controls["TaxIdNo"].disable();
       }
     );
     this.http.post(this.getCustCompanyByCustIdUrl, this.custCompanyObj).subscribe(
