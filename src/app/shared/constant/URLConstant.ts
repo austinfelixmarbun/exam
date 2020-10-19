@@ -650,8 +650,7 @@ export class URLConstant {
     public static GetVerfQuestionGrpDById = environment.FoundationR3Url + "/VerfQuestionGrpD/GetVerfQuestionGrpDById";
     public static GetVerfQuestionGrpDByGrpHId = environment.FoundationR3Url + "/VerfQuestionGrpD/GetVerfQuestionGrpDByGrpHId";
     public static GetVerfQuestionGrpDForUpdateById = environment.FoundationR3Url + "/VerfQuestionGrpD/GetVerfQuestionGrpDForUpdateById";
-    public static GetActiveVerfQuestionGrpDForUpdateByGrpHId = environment.FoundationR3Url + "/VerfQuestionGrpD/GetActiveVerfQuestionGrpDForUpdateByGrpHId";
-
+    
     // VERF RESULT
     public static AddVerfResult = environment.FoundationR3Url + "/VerfResult/AddVerfResult";
     public static EditVerfResult = environment.FoundationR3Url + "/VerfResult/EditVerfResult";
