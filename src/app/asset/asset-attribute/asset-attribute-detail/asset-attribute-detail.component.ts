@@ -33,6 +33,7 @@ export class AssetAttributeDetailComponent implements OnInit {
   criteriaList: any[];
   criteriaObj: any;
   reqGetListObj: any;
+  RowVersion: any;
   @ViewChild('LookupAssetAttr') ucLookupAssetAttr: UclookupgenericComponent;
   
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) { 
@@ -106,6 +107,7 @@ export class AssetAttributeDetailComponent implements OnInit {
           this.criteriaList.push(this.criteriaObj);
           this.inputLookupObj.addCritInput = this.criteriaList;
           this.ucLookupAssetAttr.setAddCritInput();
+          this.RowVersion = response[0]['RowVersion'];
         });  
     }
   }
@@ -123,7 +125,7 @@ export class AssetAttributeDetailComponent implements OnInit {
     }
     else if(this.pageType == "edit"){
       this.assetAttrObj.AssetAttrId = this.AssetAttrId;
-
+      this.assetAttrObj.RowVersion = this.RowVersion;
       this.http.post(URLConstant.EditAssetAttr, this.assetAttrObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
