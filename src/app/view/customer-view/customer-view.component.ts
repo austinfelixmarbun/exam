@@ -97,7 +97,7 @@ export class CustomerViewComponent implements OnInit {
           });
         else if (this.custModel == "SME")
           this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
-            this.router.navigate(['/View/Customer/CustomerViewPersonalJobDataSmeComponent'], { queryParams: { "CustId": this.CustId } });
+            this.router.navigate(['/View/Customer/PersonalJobDataSme'], { queryParams: { "CustId": this.CustId } });
           });
       }
       else if (ev == 5) {
