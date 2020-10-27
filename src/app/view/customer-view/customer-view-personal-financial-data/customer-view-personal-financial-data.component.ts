@@ -11,7 +11,6 @@ import { environment } from 'environments/environment';
 export class CustomerViewPersonalFinancialDataComponent implements OnInit {
   CustId: number;
   GetCBAForCustFinDataByCustIdUrl = URLConstant.GetCBAForCustFinDataByCustId;
-  viewCustFinData: any;
   responseCBAObj: any;
   allBankStmntList : any;
 
@@ -27,8 +26,6 @@ export class CustomerViewPersonalFinancialDataComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-    this.viewCustFinData.viewInput =   "./assets/ucviewgeneric/viewCustFinData.json";
-    this.viewCustFinData.viewEnvironment = environment.FoundationR3Url;
     
     var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetCBAForCustFinDataByCustIdUrl, custAddrObj).subscribe(
