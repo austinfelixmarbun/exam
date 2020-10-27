@@ -21,13 +21,13 @@ export class AssetAttributeDetailComponent implements OnInit {
   inputLookupObj: InputLookupObj = new InputLookupObj();
   AssetAttrForm = this.fb.group({
     IsEditableAfterGoLive: [false],
-    RefAttrId:['']
+    RefAttrId: ['']
   });
   assetAttrObj: AssetAttrObj;
-  AssetTypeId: number =0;
+  AssetTypeId: number = 0;
   pageType: string = "add";
-  AssetAttrId: number =0;
-  isReady : boolean = false;
+  AssetAttrId: number = 0;
+  isReady: boolean = false;
   responseListAssetAttr: Array<any>;
   listRefAttrId: Array<number> = new Array();
   criteriaList: any[];
@@ -35,8 +35,8 @@ export class AssetAttributeDetailComponent implements OnInit {
   reqGetListObj: any;
   RowVersion: any;
   @ViewChild('LookupAssetAttr') ucLookupAssetAttr: UclookupgenericComponent;
-  
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) { 
+
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
@@ -71,59 +71,63 @@ export class AssetAttributeDetailComponent implements OnInit {
     this.reqGetListObj.AssetTypeId = this.AssetTypeId;
     let getListAssetAttr = this.http.post(URLConstant.GetListAssetAttrByAssetTypeId, this.reqGetListObj);
     let getAssetAttr = this.http.post(URLConstant.GetAssetAttrByAssetAttrId, this.assetAttrObj);
-    if(this.pageType == "add"){
-    getListAssetAttr.subscribe(
-      response => {
+    if (this.pageType == "add") {
+      getListAssetAttr.subscribe(
+        response => {
           this.responseListAssetAttr = response['ListAssetAttrObj'];
-          for(var i=0;i<this.responseListAssetAttr.length;i++){
-            this.listRefAttrId.push(this.responseListAssetAttr[i]['RefAttrId']);
+          if (this.responseListAssetAttr.length > 0) {
+            for (var i = 0; i < this.responseListAssetAttr.length; i++) {
+              this.listRefAttrId.push(this.responseListAssetAttr[i]['RefAttrId']);
+            }
+            this.criteriaObj.listValue = this.listRefAttrId;
+            this.criteriaList.push(this.criteriaObj);
+            this.inputLookupObj.addCritInput = this.criteriaList;
+            this.ucLookupAssetAttr.setAddCritInput();
           }
-          this.criteriaObj.listValue = this.listRefAttrId;
-          this.criteriaList.push(this.criteriaObj);
-          this.inputLookupObj.addCritInput = this.criteriaList;
-          this.ucLookupAssetAttr.setAddCritInput();
-      }
-    );
-  }
-    else if(this.pageType == "edit"){
-      forkJoin([getAssetAttr,getListAssetAttr]) .subscribe(
+        }
+      );
+    }
+    else if (this.pageType == "edit") {
+      forkJoin([getAssetAttr, getListAssetAttr]).subscribe(
         response => {
           this.AssetAttrForm.patchValue({
-            IsEditableAfterGoLive : response[0]['IsEditableAfterGoLive'],
-            RefAttrId : response[0]['RefAttrId']
+            IsEditableAfterGoLive: response[0]['IsEditableAfterGoLive'],
+            RefAttrId: response[0]['RefAttrId']
           });
           this.inputLookupObj.nameSelect = response[0]['AssetAttrName'];
-          this.inputLookupObj.jsonSelect = {AttrName: response[0]['AssetAttrName']};
+          this.inputLookupObj.jsonSelect = { AttrName: response[0]['AssetAttrName'] };
 
           this.responseListAssetAttr = response[1]['ListAssetAttrObj'];
-          for(var i=0;i<this.responseListAssetAttr.length;i++){
+          for (var i = 0; i < this.responseListAssetAttr.length; i++) {
             this.listRefAttrId.push(this.responseListAssetAttr[i]['RefAttrId']);
           }
           let index = this.listRefAttrId.indexOf(response[0]['RefAttrId'])
-          if(index > -1){
-            this.listRefAttrId.splice(index,1);
+          if (index > -1) {
+            this.listRefAttrId.splice(index, 1);
           }
-          this.criteriaObj.listValue = this.listRefAttrId;
-          this.criteriaList.push(this.criteriaObj);
-          this.inputLookupObj.addCritInput = this.criteriaList;
-          this.ucLookupAssetAttr.setAddCritInput();
-          this.RowVersion = response[0]['RowVersion'];
-        });  
+          if (this.listRefAttrId.length > 0) {
+            this.criteriaObj.listValue = this.listRefAttrId;
+            this.criteriaList.push(this.criteriaObj);
+            this.inputLookupObj.addCritInput = this.criteriaList;
+            this.ucLookupAssetAttr.setAddCritInput();
+            this.RowVersion = response[0]['RowVersion'];
+          }
+        });
     }
   }
-  Save(){
+  Save() {
     this.assetAttrObj.IsEditableAfterGoLive = this.AssetAttrForm.controls["IsEditableAfterGoLive"].value;
     this.assetAttrObj.AssetTypeId = this.AssetTypeId;
     this.assetAttrObj.RefAttrId = this.AssetAttrForm.controls["RefAttrId"].value;
 
-    if(this.pageType == "add"){
+    if (this.pageType == "add") {
       this.http.post(URLConstant.AddAssetAttr, this.assetAttrObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.router.navigate(["/Asset/Attribute/Paging"], { queryParams: { "AssetTypeId": this.AssetTypeId } });
         });
     }
-    else if(this.pageType == "edit"){
+    else if (this.pageType == "edit") {
       this.assetAttrObj.AssetAttrId = this.AssetAttrId;
       this.assetAttrObj.RowVersion = this.RowVersion;
       this.http.post(URLConstant.EditAssetAttr, this.assetAttrObj).subscribe(
