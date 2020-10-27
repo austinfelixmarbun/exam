@@ -12,7 +12,7 @@
       "isFromURL": true,
       "isSelectOne": true,
       "url": "",
-      "path": "/RefMasterType/GetListActiveRefMasterTypeKeyValue",
+      "path": "/RefMasterType/GetListKeyValueActiveByCode",
       "label": "Master Type",
       "items": [],
       "itemsUrl": []

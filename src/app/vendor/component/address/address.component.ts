@@ -38,7 +38,8 @@ export class AddressComponent implements OnInit {
     City: [''],
     Province: [''],
     Latitude: [''],
-    Longitude: ['']
+    Longitude: [''],
+    RowVersion:['']
   });
 
   ngOnInit() {
@@ -118,6 +119,7 @@ export class AddressComponent implements OnInit {
     this.vendorAddrObj.PhnArea2 = "";
 
     if (this.mode == "edit") {
+      this.vendorAddrObj.RowVersion = this.AddressForm.controls.RowVersion.value;
       this.http.post(URLConstant.EditVendorAddr, this.vendorAddrObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
@@ -151,6 +153,7 @@ export class AddressComponent implements OnInit {
           Province: this.vendorAddrObj.Province,
           Latitude: this.vendorAddrObj.Latitude,
           Longitude: this.vendorAddrObj.Longitude,
+          RowVersion: this.vendorAddrObj.RowVersion,
         });
         this.setLookup();
         this.VendorAddrId = this.vendorAddrObj.VendorAddrId;

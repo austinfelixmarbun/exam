@@ -38,6 +38,6 @@ export class RefCoyObj {
     taxIdNo : any;
     registrationNo: any;
     licenseNo: any;
-
+    RowVersion: any;
     constructor() { this.refCoyId = 0 }
 }

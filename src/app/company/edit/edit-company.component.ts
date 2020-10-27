@@ -109,6 +109,7 @@ export class EditCompanyComponent implements OnInit {
         if (this.mode == "edit") {
             this.editUrl = this.foundationUrl + URLConstant.EditRefCoy;
             refCoyObj.refCoyId = this.param;
+            refCoyObj.RowVersion = this.result.RowVersion;
             this.http.post(this.editUrl, refCoyObj).subscribe(
                 (response) => {
                     this.router.navigateByUrl('/company');

@@ -3,4 +3,5 @@ export class AssetAttrObj{
     RefAttrId : number;
     AssetTypeId: number;
     AssetAttrId: number;
+    RowVersion: any;
 }
