@@ -110,8 +110,8 @@ export class AssetAttributeDetailComponent implements OnInit {
             this.criteriaList.push(this.criteriaObj);
             this.inputLookupObj.addCritInput = this.criteriaList;
             this.ucLookupAssetAttr.setAddCritInput();
-            this.RowVersion = response[0]['RowVersion'];
           }
+          this.RowVersion = response[0]['RowVersion'];
         });
     }
   }
