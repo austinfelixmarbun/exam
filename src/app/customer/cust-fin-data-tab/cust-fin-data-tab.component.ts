@@ -358,38 +358,36 @@ export class CustFinDataTabComponent implements OnInit {
       if (response.SpouseMonthlyIncomeAmt == "") {
         response.SpouseMonthlyIncomeAmt = this.spouseMonthlyIncomeAmt;
       }
-      this.httpClient.post(url, response).subscribe(
-        (response) => { 
-          if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
-            var formValue = this.CustCompanyFinDataForm['controls']['AttrList'].value;
-          } else {
-            var formValue = this.CustPersonalFinDataForm['controls']['AttrList'].value;
+
+      if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
+        var formValue = this.CustCompanyFinDataForm['controls']['AttrList'].value;
+      } else {
+        var formValue = this.CustPersonalFinDataForm['controls']['AttrList'].value;
+      }
+      var custAttrRequest = new Array<Object>();
+      var urlAttr = URLConstant.AddEditListCustAttrContent;
+      if (Object.keys(formValue).length > 0 && formValue.constructor === Object) {
+        for (const key in formValue) {
+          if (formValue[key]["AttrValue"] != null) {
+            var custAttr = {
+              CustAttrContentId: formValue[key]["CustAttrContentId"],
+              CustId: this.CustId,
+              RefAttrId: formValue[key]["RefAttrId"],
+              AttrValue: formValue[key]["AttrValue"],
+              AttrGroup: this.attrGroup
+            };
+            custAttrRequest.push(custAttr);
           }
-          var custAttrRequest = new Array<Object>();
-          var urlAttr = URLConstant.AddEditListCustAttrContent;
-          if (Object.keys(formValue).length > 0 && formValue.constructor === Object) {
-            for (const key in formValue) {
-              if (formValue[key]["AttrValue"] != null) {
-                var custAttr = {
-                  CustAttrContentId: formValue[key]["CustAttrContentId"],
-                  CustId: this.CustId,
-                  RefAttrId: formValue[key]["RefAttrId"],
-                  AttrValue: formValue[key]["AttrValue"],
-                  AttrGroup: this.attrGroup
-                };
-                custAttrRequest.push(custAttr);
-              }
-            }
-            this.httpClient.post(urlAttr, { CustAttrContentObjs: custAttrRequest }).pipe(first()).subscribe(
-              (response) => {
-                this.toastr.successMessage(response["Message"]);
-                this.outputTab.emit({ stepMode: "next" });
-              },
-              (error) => {
-                console.log(error);
-              }
-            );
-          }
+        }
+      }
+      var CustFinDataCustomObj= {
+        CustAttrContentObjs: custAttrRequest,
+        CustFinDataObj: response
+      }
+      this.httpClient.post(url, CustFinDataCustomObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          this.outputTab.emit({ stepMode: "next" });
         }
       );
     }
