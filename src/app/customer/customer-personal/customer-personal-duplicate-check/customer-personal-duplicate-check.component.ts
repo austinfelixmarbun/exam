@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -13,6 +13,7 @@ import { RequestNegativeCustObj } from 'app/shared/model/RequestNegativeCustObj.
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-customer-personal-duplicate-check',
@@ -20,7 +21,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
   styleUrls: [],
   providers: [NGXToastrService]
 })
-export class CustomerPersonalDuplicateCheckComponent implements OnInit {
+export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestroy {
   @Input() IsFromCustFamilyTab: boolean;
   @Input() IsFromCustMgmntShareholder: boolean;
   @Input() CustFamilyTabData: Object;
@@ -314,6 +315,16 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
       this.addCustObj.CustPersonalObj.MotherMaidenName = this.MotherMaidenName;
       this.addCustObj.CustPersonalObj.IsRestInPeace = false;
       this.addCustObj.CustPersonalObj.MrMaritalStatCode = this.MrMaritalStatCode;
+
+      var custAddr = JSON.parse(sessionStorage.getItem("CustAddr"));
+      this.addCustObj.CustAddr.Addr = custAddr["Addr"];
+      this.addCustObj.CustAddr.AreaCode1 = custAddr["AreaCode1"];
+      this.addCustObj.CustAddr.AreaCode2 = custAddr["AreaCode2"];
+      this.addCustObj.CustAddr.AreaCode3 = custAddr["AreaCode3"];
+      this.addCustObj.CustAddr.AreaCode4 = custAddr["AreaCode4"];
+      this.addCustObj.CustAddr.City = custAddr["City"];
+      this.addCustObj.CustAddr.Zipcode = custAddr["Zipcode"];
+      this.addCustObj.CustAddr.SubZipcode = custAddr["SubZipcode"];
       this.http.post(this.addCustUrl, this.addCustObj).subscribe(
         (response) => {
           this.resultData = response;
@@ -326,11 +337,20 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
 
   EditCustPersonal(item) {
     var CustObj = { CustNo: item.CustNo, CustName: this.CustName, IdNo: item.IdNo };
-    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustObj).subscribe(
-      (response) => {
+    // this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustObj).subscribe(
+    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustObj).pipe(
+      map((response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.CustObj = response['CustObj'];
         this.addCustObj.CustPersonalObj = response['CustPersonalObj'];
+        return response;
+      }),
+      mergeMap((response) => {
+        return this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.addCustObj.CustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal });
+      })
+    ).subscribe(
+      (response) => {
+        this.addCustObj.CustAddr = response as CustAddrObj;
         this.addCustObj.CustObj.CustName = item.CustName;
         this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Personal;
         this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
@@ -355,6 +375,16 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         this.addCustObj.CustPersonalObj.BirthDt = item.BirthDt;
         this.addCustObj.CustPersonalObj.MotherMaidenName = item.MotherMaidenName;
         this.addCustObj.CustPersonalObj.IsRestInPeace = false;
+
+        var custAddr = JSON.parse(sessionStorage.getItem("CustAddr"));
+        this.addCustObj.CustAddr.Addr = custAddr["Addr"];
+        this.addCustObj.CustAddr.AreaCode1 = custAddr["AreaCode1"];
+        this.addCustObj.CustAddr.AreaCode2 = custAddr["AreaCode2"];
+        this.addCustObj.CustAddr.AreaCode3 = custAddr["AreaCode3"];
+        this.addCustObj.CustAddr.AreaCode4 = custAddr["AreaCode4"];
+        this.addCustObj.CustAddr.City = custAddr["City"];
+        this.addCustObj.CustAddr.Zipcode = custAddr["Zipcode"];
+        this.addCustObj.CustAddr.SubZipcode = custAddr["SubZipcode"];
         this.http.post(URLConstant.EditDuplicateCust, this.addCustObj).subscribe(
           (response) => {
             if(this.IsFromCustFamilyTab){
@@ -431,6 +461,15 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         this.RequestNegativeCustObj.BirthDt = item.BirthDt;
         this.RequestNegativeCustObj.MotherMaidenName = item.MotherMaidenName;
         this.RequestNegativeCustObj.IsRestInPeace = false;
+
+        var custAddr = JSON.parse(sessionStorage.getItem("CustAddr"));
+        this.RequestNegativeCustObj.LegalAddr = custAddr["Addr"];
+        this.RequestNegativeCustObj.AreaCode1 = custAddr["AreaCode1"];
+        this.RequestNegativeCustObj.AreaCode2 = custAddr["AreaCode2"];
+        this.RequestNegativeCustObj.AreaCode3 = custAddr["AreaCode3"];
+        this.RequestNegativeCustObj.AreaCode4 = custAddr["AreaCode4"];
+        this.RequestNegativeCustObj.City = custAddr["City"];
+        this.RequestNegativeCustObj.Zipcode = custAddr["Zipcode"];
         this.http.post(URLConstant.EditDuplicateNegativeCust, this.RequestNegativeCustObj).subscribe(
           (response) => {
             if(this.IsFromCustFamilyTab){
@@ -478,5 +517,9 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit {
         );
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    sessionStorage.removeItem("CustAddr");
   }
 }
