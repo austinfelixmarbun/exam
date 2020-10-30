@@ -826,7 +826,7 @@ export class URLConstant {
     public static GetCustPersonalContactPersonByCustPersonalContactPersonId = environment.FoundationR3Url + "/CustPersonalContactPerson/GetCustPersonalContactPersonByCustPersonalContactPersonId"
     public static AddCustPersonalEmergencyContact = environment.FoundationR3Url + "/CustPersonalContactPerson/AddCustPersonalEmergencyContact";
     public static EditCustPersonalEmergencyContact = environment.FoundationR3Url + "/CustPersonalContactPerson/EditCustPersonalEmergencyContact";
-    public static GetCustPersonalEmergencyContactByCustPersonalEmergencyContactId = environment.FoundationR3Url + "/CustPersonalContactPerson/GetCustPersonalEmergencyContactByCustPersonalEmergencyContactId";
+    public static GetCustPersonalEmergencyContactByCustId = environment.FoundationR3Url + "/CustPersonalContactPerson/GetCustPersonalEmergencyContactByCustId";
     public static AddCustPersonalFamily = environment.FoundationR3Url + "/CustPersonalFamily/AddCustPersonalFamily";
     public static EditCustPersonalFamily = environment.FoundationR3Url + "/CustPersonalFamily/EditCustPersonalFamily";
     public static DeleteCustPersonalFamily = environment.FoundationR3Url + "/CustPersonalFamily/DeleteCustPersonalFamily";
