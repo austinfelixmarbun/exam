@@ -210,6 +210,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
     this.addCustObj = new AddCustObj();
     this.addCustObj.CustObj = new CustObj();
     this.addCustObj.CustPersonalObj = new CustPersonalObj();
+    this.addCustObj.CustAddr = new CustAddrObj();
     var custAddrObj = new CustAddrObj();
 
     if(this.IsFromCustFamilyTab){
@@ -325,6 +326,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       this.addCustObj.CustAddr.City = custAddr["City"];
       this.addCustObj.CustAddr.Zipcode = custAddr["Zipcode"];
       this.addCustObj.CustAddr.SubZipcode = custAddr["SubZipcode"];
+      this.addCustObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
       this.http.post(this.addCustUrl, this.addCustObj).subscribe(
         (response) => {
           this.resultData = response;

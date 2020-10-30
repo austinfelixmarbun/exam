@@ -158,6 +158,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       this.addCustObj = new AddCustObj();
       this.addCustObj.CustObj = new CustObj();
       this.addCustObj.CustCompanyObj = new CustCompanyObj();
+      this.addCustObj.CustAddr = new CustAddrObj();
       this.addCustObj.CustObj.CustName = this.CustName;
       this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
       this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Company;

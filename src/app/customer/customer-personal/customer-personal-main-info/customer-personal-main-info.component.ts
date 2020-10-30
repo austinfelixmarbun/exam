@@ -7,10 +7,10 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
-import { InputAddressObj } from '@adins/ucaddress/lib/model/InputAddressObj.model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 
 @Component({
   selector: 'app-customer-personal-main-info',

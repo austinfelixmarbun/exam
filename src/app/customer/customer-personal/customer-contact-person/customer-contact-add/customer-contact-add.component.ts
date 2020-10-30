@@ -310,7 +310,7 @@ export class CustomerContactAddComponent implements OnInit {
       this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.custPersonalContactPersonId;
       // this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalContactPersonByCustPersonalContactPersonId, this.custPersonalContactPersonObj).subscribe(
-      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustPersonalEmergencyContactId, this.custPersonalContactPersonObj).subscribe(
+      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustId, this.custPersonalContactPersonObj).subscribe(
         (response) => {
           var datePipe = new DatePipe("en-US");
           this.tempCustPersonalContactPerson = response;

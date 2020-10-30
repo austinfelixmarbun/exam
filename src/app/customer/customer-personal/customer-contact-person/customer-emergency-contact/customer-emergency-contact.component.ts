@@ -124,6 +124,13 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
 
+    this.lookUpObj = new InputLookupObj();
+    this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
+    this.lookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
+    this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
+    this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";
+
     this.UcAddressObj = new UcAddressObj();
 
     var generalSettingObjDefLocalNationality = {
@@ -133,13 +140,6 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.http.post(this.GetGeneralSettingByCodeUrl, generalSettingObjDefLocalNationality).subscribe(
       (response) => {
         this.Country = response;
-
-        this.lookUpObj = new InputLookupObj();
-        this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
-        this.lookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-        this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
-        this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
-        this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";
         this.criteriaList = new Array();
         this.criteriaObj = new CriteriaObj();
         this.criteriaObj.restriction = AdInsConstant.RestrictionNeq;
@@ -306,6 +306,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       }
     );
 
+    console.log("Emergency Comp Cust Id: " + this.custId);
     if (this.custId > 0) {
       this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
       this.custPersonalContactPersonObj.CustId = this.custId;
@@ -313,6 +314,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
         (response) => {
           var datePipe = new DatePipe("en-US");
           this.tempCustPersonalContactPerson = response;
+          console.log("tempCustPersonalContactPerson: " + JSON.stringify(this.tempCustPersonalContactPerson));
           this.CustomerContactForm.patchValue({
             ContactPersonName: this.tempCustPersonalContactPerson.ContactPersonName,
             MrIdTypeCode: this.tempCustPersonalContactPerson.MrIdTypeCode,
@@ -471,7 +473,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       this.custPersonalContactPersonObj.NationalityCountryCode = this.tempCountryCode;
     }
 
-    if (this.tempCustPersonalContactPerson != null) {
+    if (this.tempCustPersonalContactPerson && this.tempCustPersonalContactPerson.CustPersonalContactPersonId > 0) {
 
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.tempCustPersonalContactPerson.CustPersonalContactPersonId;
 
