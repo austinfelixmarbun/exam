@@ -27,8 +27,9 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 })
 export class CustomerEmergencyContactComponent implements OnInit {
   @Output() outputTab: EventEmitter<any> = new EventEmitter();
-  @Input() custPersonalContactPersonId: number;
-  @Input() listCustIdToExclude: Array<string>;
+  @Input() custId: number;
+  // @Input() custPersonalContactPersonId: number;
+  // @Input() listCustIdToExclude: Array<string>;
 
   Country: any;
   tempCust: any;
@@ -113,6 +114,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
         this.IdCust = params["IdCust"];
       }
     });
+    this.custId = 0;
   }
   isAdd: any;
   ngOnInit() {
@@ -169,16 +171,16 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.existingCustomerLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.existingCustomerLookUpObj.pagingJson = "./assets/lookup/lookupExistingCustomer.json";
     this.existingCustomerLookUpObj.genericJson = "./assets/lookup/lookupExistingCustomer.json";
-    if (this.listCustIdToExclude.length > 0) {
-      var criteriaListCust = new Array();
-      var criteriaCustObj = new CriteriaObj();
-      criteriaCustObj.DataType = "text";
-      criteriaCustObj.restriction = AdInsConstant.RestrictionNotIn;
-      criteriaCustObj.propName = 'CUST_NO';
-      criteriaCustObj.listValue = this.listCustIdToExclude;
-      criteriaListCust.push(criteriaCustObj);
-      this.existingCustomerLookUpObj.addCritInput = criteriaListCust;
-    }
+    // if (this.listCustIdToExclude.length > 0) {
+    //   var criteriaListCust = new Array();
+    //   var criteriaCustObj = new CriteriaObj();
+    //   criteriaCustObj.DataType = "text";
+    //   criteriaCustObj.restriction = AdInsConstant.RestrictionNotIn;
+    //   criteriaCustObj.propName = 'CUST_NO';
+    //   criteriaCustObj.listValue = this.listCustIdToExclude;
+    //   criteriaListCust.push(criteriaCustObj);
+    //   this.existingCustomerLookUpObj.addCritInput = criteriaListCust;
+    // }
 
     this.criteriaExistingList = new Array();
     this.criteriaExistingObj = new CriteriaObj();
@@ -304,10 +306,10 @@ export class CustomerEmergencyContactComponent implements OnInit {
       }
     );
 
-    if (this.custPersonalContactPersonId != null) {
+    if (this.custId > 0) {
       this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
-      this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.custPersonalContactPersonId;
-      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustPersonalEmergencyContactId, this.custPersonalContactPersonObj).subscribe(
+      this.custPersonalContactPersonObj.CustId = this.custId;
+      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustId, this.custPersonalContactPersonObj).subscribe(
         (response) => {
           var datePipe = new DatePipe("en-US");
           this.tempCustPersonalContactPerson = response;
@@ -479,18 +481,18 @@ export class CustomerEmergencyContactComponent implements OnInit {
           this.toastr.successMessage(response["Message"]);
           // this.wizard.goToNextStep();
           this.isAdd = false;
-          this.outputTab.emit({ isAdd: this.isAdd });
-          // this.outputTab.emit({ stepMode: "next"});
+          // this.outputTab.emit({ isAdd: this.isAdd });
+          this.outputTab.emit({ stepMode: "next"});
         }
       );
     } else {
-
       this.http.post(URLConstant.AddCustPersonalEmergencyContact, this.custPersonalContactPersonObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.isAdd = false;
-          this.outputTab.emit({ isAdd: this.isAdd });
+          // this.outputTab.emit({ isAdd: this.isAdd });
           // this.wizard.goToNextStep();
+          this.outputTab.emit({ stepMode: "next" });
         }
       );
 
