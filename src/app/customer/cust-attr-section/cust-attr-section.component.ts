@@ -137,8 +137,7 @@ export class CustAttrSectionComponent implements OnInit {
     if(Object.keys(formValue).length > 0 && formValue.constructor === Object){
       for (const key in formValue) {
         if(formValue[key]["AttrValue"]!=null ) { 
-        var custAttr = {
-          CustAttrContentId: formValue[key]["CustAttrContentId"],
+        var custAttr = { 
           CustId: this.CustId,
           RefAttrId: formValue[key]["RefAttrId"],
           AttrValue: formValue[key]["AttrValue"],
