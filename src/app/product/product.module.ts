@@ -49,6 +49,11 @@ import { ProdOfferingReturnPagingComponent } from './prod-offering/prod-offering
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { UcapprovebyModule } from '@adins/ucapproveby';
+import { ProductHoReviewComponent } from './product-HO/product-ho-review/product-ho-review.component';
+import { ProdOfferingReviewComponent } from './prod-offering/prod-offering-review/prod-offering-review.component';
+import { ProdOfferingReviewPagingComponent } from './prod-offering/prod-offering-review-paging/prod-offering-review-paging.component';
+import { ProductHoReviewPagingComponent } from './product-HO/product-ho-review-paging/product-ho-review-paging.component';
 
 
 @NgModule({
@@ -71,7 +76,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
     UcShowErrorsModule,
     UcapprovalModule,
     NgMultiSelectDropDownModule,
-    UcaddtotempModule
+    UcaddtotempModule,
+    UcapprovebyModule
   ],
   declarations: [
     ProductHOApprovalComponent,
@@ -105,7 +111,11 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
     SearchOfficeComponentOffering,
     ProductOfferingDeactivateEditComponent,
     ProductReturnHoPagingComponent,
-    ProdOfferingReturnPagingComponent
+    ProdOfferingReturnPagingComponent,
+    ProductHoReviewPagingComponent,
+    ProductHoReviewComponent,
+    ProdOfferingReviewComponent,
+    ProdOfferingReviewPagingComponent
   ],
   providers: [
     NGXToastrService

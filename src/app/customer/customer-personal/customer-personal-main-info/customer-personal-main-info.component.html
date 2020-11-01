@@ -5,11 +5,11 @@
         <div class="addEdit">
           <h4 class="form-section card-title" translate> Customer Personal
           </h4>
-          <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
-          </lib-ucSubsection>
           <form class="form form-horizontal" [formGroup]="CustomerPersonalForm"
-            (ngSubmit)="CustomerPersonalForm.valid && SaveValue()" #enjiForm="ngForm" id="MainInfoId">
-            <div class="form-body">
+            (ngSubmit)="CustomerPersonalForm.valid && SaveValue()" #enjiForm="ngForm">
+            <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
+            </lib-ucSubsection>
+            <div class="form-body" id="MainInfoId">
               <div class="form-group row">
                 <label class="col-md-2 adins-required-label" translate>Customer Name </label>
                 <div class="col-md-4">
@@ -30,7 +30,7 @@
                 </div>
              </div>
               <div class="form-group row ">
-                <label class="col-md-2 adInsLabel" translate>Customer Model </label>
+                <!-- <label class="col-md-2 adInsLabel" translate>Customer Model </label>
                 <div class="col-md-4">
                  <select class="form-control adInsInput" style="width: auto" formControlName="CustModel"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.CustModel.invalid }">
@@ -39,7 +39,7 @@
                   </select>
                   <lib-uc-show-errors [control]="CustomerPersonalForm.controls.CustModel" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
-                </div>
+                </div> -->
                 <label class="col-md-2  adins-required-label" translate>Birth Place</label>
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
@@ -126,12 +126,17 @@
                 <label class="col-md-2 adInsLabel" translate [ngClass]="{'adins-required-label' : VipNotesRequired==true}">VIP Notes</label>
                 <div class="col-md-4">
                     <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes"  
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.VipNotes.invalid }"></textarea>
-
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.VipNotes.invalid }"></textarea>
                     <lib-uc-show-errors [control]="CustomerPersonalForm.controls.VipNotes" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
               </div>
+            </div>
+            <lib-ucSubsection [id]="'LegalAddr'" [title]="'Legal Address'" [panel]="'LegalAddrSection'">
+            </lib-ucSubsection>
+            <div class="form-body" id="LegalAddrSection">
+              <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerPersonalForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'">
+              </lib-ucaddress> 
             </div>
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1"  [routerLink]="['../../Paging']" translate>

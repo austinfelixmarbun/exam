@@ -29,14 +29,6 @@
                 </div>
               </div>
 
-              <div class="form-group row">
-                <label class="col-md-3 adInsLabel">Supplier ATPM</label>
-                <div class="col-md-3" *ngIf="inputLookupATPMObj.isReady">
-                  <lib-uclookupgeneric [lookupInput]="inputLookupATPMObj" [parentForm]="VendorForm"
-                    [enjiForm]="enjiForm" [identifier]="'lookupATPM'" (lookup)="getLookupATPM($event)">
-                  </lib-uclookupgeneric>
-                </div>
-              </div>
 
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Holding Code</label>
@@ -168,6 +160,12 @@
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                   </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3">One Affiliate</label>
+                <div class="col-md-3">
+                  <input type="checkbox" formControlName="IsOneAffiliate">
                 </div>
               </div>
             </div>

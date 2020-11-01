@@ -65,7 +65,8 @@ export class CustomerContactCheckComponent implements OnInit {
   getList() {
     this.custPersonContactPersonObj = new CustPersonalContactPersonObj();
     this.custPersonContactPersonObj.CustId = this.IdCust;
-    this.http.post(URLConstant.GetListCustPersonalContactPersonByCustId, this.custPersonContactPersonObj).subscribe(
+    // this.http.post(URLConstant.GetListCustPersonalContactPersonByCustId, this.custPersonContactPersonObj).subscribe(
+    this.http.post(URLConstant.GetListCustPersonalEmergencyContactByCustId, this.custPersonContactPersonObj).subscribe(
       (response) => {
         this.tempCustomerPersonalContactPerson = response[CommonConstant.ReturnObj];
         for (const item of this.tempCustomerPersonalContactPerson) {

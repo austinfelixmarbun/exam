@@ -29,6 +29,7 @@ export class CustomerPersonalPageComponent implements OnInit {
   isContact: boolean;
   isFinancial: boolean;
   Page: string;
+  From: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) { 
     this.route.queryParams.subscribe(params => {
@@ -38,6 +39,9 @@ export class CustomerPersonalPageComponent implements OnInit {
       if (params["Page"] != null) {
         this.Page = params["Page"];
       }
+      if (params["From"] != null) {
+        this.From = params["From"];
+      }
     });
   }
   
@@ -45,12 +49,13 @@ export class CustomerPersonalPageComponent implements OnInit {
   CustStep = {
     "Detail": 1,
     "Address": 2,
-    "Contact": 3,
-    "Group": 4,
-    "Job": 5,
-    "Financial": 6,
-    "CustAttr": 7,
-    "Other": 8
+    "Family": 3,
+    "Contact": 4,
+    "Group": 5,
+    "Job": 6,
+    "Financial": 7,
+    "CustAttr": 8,
+    "Other": 9
   }
 
   back() {
@@ -87,25 +92,27 @@ export class CustomerPersonalPageComponent implements OnInit {
     if (type == "Address") {
       this.CustStepIndex = 2;
     }
-
-    if (type == "Contact") {
+    if (type == "Family") {
       this.CustStepIndex = 3;
     }
-    if (type == "Group") {
+    if (type == "Contact") {
       this.CustStepIndex = 4;
     }
-    if (type == "Job") {
+    if (type == "Group") {
       this.CustStepIndex = 5;
     }
-    if (type == "Financial") {
+    if (type == "Job") {
       this.CustStepIndex = 6;
     }
-    if (type == "CustAttr") {
+    if (type == "Financial") {
       this.CustStepIndex = 7;
+    }
+    if (type == "CustAttr") {
+      this.CustStepIndex = 8;
     }
 
     if (type == "Other") {
-      this.CustStepIndex = 8;
+      this.CustStepIndex = 9;
     }
     this.stepper.to(this.CustStepIndex);
   }
@@ -124,8 +131,8 @@ export class CustomerPersonalPageComponent implements OnInit {
   }
   
   endStepper(ev:any){
-    if (this.Page != null) {
-      this.router.navigate(["/Customer/EditMainData/Paging"]);
+    if (this.From) {
+      this.router.navigate(["/Customer/"+this.From+"/Paging"]);
     } else {
       this.router.navigate(["/Customer/Paging"]);
     }

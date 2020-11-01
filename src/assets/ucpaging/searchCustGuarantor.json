@@ -1,0 +1,217 @@
+{
+    "title": "Customer",
+    "exportExcel": true,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "C.CUST_NO",
+            "id": "CustNo",
+            "value": "",
+            "label": "Guarantor Cust No.",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "C.CUST_NAME",
+            "id": "CustName",
+            "value": "",
+            "label": "Guarantor Customer Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "ID_NO",
+            "id": "IdNo",
+            "value": "",
+            "label": "Guarantor Id No.",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "name": "C.MR_CUST_TYPE_CODE",
+            "id": "CustTypeCodeId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "url": "",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Type",
+            "criteriaPropName": "RefMasterTypeCode",
+            "criteriaPropValue": "CUST_TYPE",
+            "items": [],
+            "itemsUrl": []
+        }
+    ],
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "TYPE",
+            "name": "C.MR_CUST_TYPE_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "GUARANTOR CUSTOMER NO",
+            "name": "C.CUST_NO"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "GUARANTOR CUSTOMER NAME",
+            "name": "C.CUST_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "GUARANTOR ID NO",
+            "name": "C.ID_NO"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "ACTION"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT C.CUST_NO AS CustNo, C.CUST_NAME AS CustName, C.MR_CUST_TYPE_CODE as MrCustTypeCode, C.ID_NO as IdNo, C.CUST_ID as CustId",
+        "from": "FROM dbo.CUST C WITH(NOLOCK) INNER JOIN dbo.REF_MASTER RM WITH(NOLOCK) on C.MR_CUST_TYPE_CODE = RM.MASTER_CODE AND RM.REF_MASTER_TYPE_CODE = 'CUST_TYPE'"
+    },
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "MrCustTypeCode"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrCustTypeCode",
+                                    "value": "PERSONAL",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "link",
+                                "position": "left",
+                                "property": "CustNo",
+                                "path": "/View/Customer/PersonalDetail",
+                                "target": "_blank",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "CustId"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrCustTypeCode",
+                                    "value": "COMPANY",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "link",
+                                "position": "left",
+                                "property": "CustNo",
+                                "path": "/View/Customer/CoyDetail",
+                                "target": "_blank",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "CustId"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "CustName"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "IdNo"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrCustTypeCode",
+                                    "value": "PERSONAL",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "url",
+                                "path": "/Customer/CustomerPersonal/Page",
+                                "icon": "ft-edit-2",
+                                "param": [
+                                    {
+                                        "type": "IdCust",
+                                        "property": "CustId"
+                                    },
+                                    {
+                                        "type": "From",
+                                        "property": "CustGuarantor"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrCustTypeCode",
+                                    "value": "COMPANY",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "url",
+                                "path": "/Customer/CustomerCompany/Page",
+                                "icon": "ft-edit-2",
+                                "param": [
+                                    {
+                                        "type": "IdCust",
+                                        "property": "CustId"
+                                    },
+                                    {
+                                        "type": "From",
+                                        "property": "CustGuarantor"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

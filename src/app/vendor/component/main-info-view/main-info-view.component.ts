@@ -14,7 +14,7 @@ export class MainInfoViewComponent implements OnInit {
   VendorId: number;
   MrVendorClass: string;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
-
+  MrVendorCategoryCode: string;
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       this.VendorId = params["VendorId"];
@@ -28,12 +28,15 @@ export class MainInfoViewComponent implements OnInit {
     this.http.post(URLConstant.GetVendorByVendorId, vendorObj).subscribe(
       (response) => {
         this.MrVendorClass = response["MrVendorClass"];
+        this.MrVendorCategoryCode = response["MrVendorCategoryCode"]
         if (this.MrVendorClass == CommonConstant.Holding) {
           this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingMainInfo.json";
         } else if (this.MrVendorClass == CommonConstant.HeadOffice) {
           this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorHOMainInfo.json";
-        } else if (this.MrVendorClass == CommonConstant.Branch) {
+        } else if (this.MrVendorClass == CommonConstant.Branch && this.MrVendorCategoryCode != CommonConstant.SUPPLIER_BRANCH) {
           this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchMainInfo.json";
+        }else{
+          this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSupplierBranchMainInfo.json";
         }
         this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
       }

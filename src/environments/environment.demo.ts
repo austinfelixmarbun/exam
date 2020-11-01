@@ -7,10 +7,10 @@ export const environment = {
   production: true,
   navbarColor: 'lightgray',
   LosURL : 'http://r3web.ad-ins.com/LOS_DEMO/',
-  FoundationR3Url: 'http://r3app.ad-ins.com/FOUNDATION_DEMO',
-  WebSocketURL : 'http://r3app.ad-ins.com/FOUNDATION_DEMO',
+  FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_DEMO',
+  WebSocketURL : 'http://r3app-server.ad-ins.com/FOUNDATION_DEMO',
   Module:"FOU",
-  ApprovalURL : 'http://r3app.ad-ins.com/APPROVAL_DEMO',
+  ApprovalURL : 'http://r3app-server.ad-ins.com/APPROVAL_DEMO',
   FoundationR3Web:'http://r3web.ad-ins.com/FOUNDATION_DEMO'
 };
 

@@ -30,7 +30,8 @@ export class ProductHOAddComponent implements OnInit {
     StartDt: ['',Validators.required],
     EndDt: ['',Validators.required]
   });
-
+  businessDt: any;
+  startActiveDt : any;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -41,7 +42,9 @@ export class ProductHOAddComponent implements OnInit {
     
     this.route.queryParams.subscribe(params => {
       this.param = params["ProdHId"];
-      this.mode = params["mode"];
+      if(params["mode"] != null){
+        this.mode = params["mode"];
+      }
       this.key = params["key"];
       this.source = params["source"];
       if (this.mode == "edit") {
@@ -56,6 +59,11 @@ export class ProductHOAddComponent implements OnInit {
 
   ResultResponse: any;
   ngOnInit() {
+    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
+    this.businessDt.setDate(this.businessDt.getDate());
+    this.startActiveDt = new Date(context[CommonConstant.BUSINESS_DT]);
+    this.startActiveDt.setDate(this.businessDt.getDate());
     if (this.mode == "edit") {
       this.RefProductHOForm.controls.ProdCode.disable();
       this.ProdHOBj = new RefProductHOObj();
@@ -71,11 +79,18 @@ export class ProductHOAddComponent implements OnInit {
             StartDt: formatDate(this.ResultResponse.StartDt, 'yyyy-MM-dd', 'en-US'),
             EndDt: formatDate(this.ResultResponse.EndDt, 'yyyy-MM-dd', 'en-US')
           });
+          this.updateMinDtForEndDt();
+
         }
       );
     }
   }
-
+  updateMinDtForEndDt(){
+    this.startActiveDt = this.RefProductHOForm.controls.StartDt.value;
+    if(this.RefProductHOForm.controls.EndDt.value < this.startActiveDt){
+      this.RefProductHOForm.controls.EndDt.setValue("");
+    }
+  }
   SaveMode;
   ClickSave(ev) {
     this.SaveMode = ev;

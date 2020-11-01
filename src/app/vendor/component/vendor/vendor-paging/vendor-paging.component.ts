@@ -60,8 +60,13 @@ export class VendorPagingComponent implements OnInit {
     }
     else if (this.Type == "Default") {
       if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
-        this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranch.json";
-        this.inputPagingObj._url = "./assets/ucpaging/searchBranch.json";
+        if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH) {
+          this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSupplier.json";
+          this.inputPagingObj._url = "./assets/ucpaging/searchSupplier.json";
+        } else {
+          this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranch.json";
+          this.inputPagingObj._url = "./assets/ucpaging/searchBranch.json";
+        } 
         this.inputPagingObj.title = typeof(CommonConstant["TITLE_"+this.MrVendorCategoryCode]) != 'undefined' ? CommonConstant["TITLE_"+this.MrVendorCategoryCode] : this.MrVendorCategoryCode.replace(/_/g,' ');
         this.inputPagingObj.addCritInput = new Array();
         var critObj = new CriteriaObj();

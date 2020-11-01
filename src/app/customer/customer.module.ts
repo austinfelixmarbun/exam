@@ -91,6 +91,13 @@ import { CustomerViewCoyAddressComponent } from './customer-view/customer-view-c
 import { CustomerViewPersonalAddressComponent } from './customer-view/customer-view-personal-address/customer-view-personal-address.component';
 import { CustomerViewPersonalCustomerGroupComponent } from './customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component';
 import { CustAttrListComponent } from './cust-attr-list/cust-attr-list.component';
+import { CustomerEmergencyContactComponent } from './customer-personal/customer-contact-person/customer-emergency-contact/customer-emergency-contact.component';
+import { CustomerFamilyComponent } from './customer-personal/customer-family/customer-family.component';
+import { CustomerFamilyDetailComponent } from './customer-personal/customer-family/customer-family-detail/customer-family-detail.component';
+import { CustomerFamilyPagingComponent } from './customer-personal/customer-family/customer-family-paging/customer-family-paging.component';
+import { CustomerFamilyMenuComponent } from './customer-family-menu/customer-family-menu.component';
+import { CustomerShareholderMenuComponent } from './customer-shareholder-menu/customer-shareholder-menu.component';
+import { CustomerGuarantorMenuComponent } from './customer-guarantor-menu/customer-guarantor-menu.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -198,7 +205,14 @@ export const customCurrencyMaskConfig = {
     CustomerViewCoyAddressComponent,
     CustomerViewPersonalAddressComponent,
     CustomerViewPersonalCustomerGroupComponent,
-    CustAttrListComponent
+    CustAttrListComponent,
+    CustomerEmergencyContactComponent,
+    CustomerFamilyComponent,
+    CustomerFamilyDetailComponent,
+    CustomerFamilyPagingComponent,
+    CustomerFamilyMenuComponent,
+    CustomerShareholderMenuComponent,
+    CustomerGuarantorMenuComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })

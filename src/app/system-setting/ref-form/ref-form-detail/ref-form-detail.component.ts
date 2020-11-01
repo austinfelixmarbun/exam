@@ -46,7 +46,8 @@ export class RefFormDetailComponent implements OnInit {
     OrderNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     HierarchyNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     IsHidden: false,
-    IsExternalLink: false
+    IsExternalLink: false,
+    RowVersion: ['']
   });
   ParamForm = this.fb.group({
     ParameterValue : [''],
@@ -109,7 +110,8 @@ export class RefFormDetailComponent implements OnInit {
             OrderNo: this.refFormObj.OrderNo,
             HierarchyNo: this.refFormObj.HierarchyNo,
             IsHidden: this.refFormObj.IsHidden,
-            IsExternalLink: this.refFormObj.IsExternalLink
+            IsExternalLink: this.refFormObj.IsExternalLink,
+            RowVersion: this.refFormObj.RowVersion,
           });
           this.RefForm.controls.FormCode.disable();
           this.setLookup();
@@ -199,6 +201,7 @@ export class RefFormDetailComponent implements OnInit {
     }
 
     if (this.mode == "edit") {
+      this.refFormObj.RowVersion = this.RefForm.controls.RowVersion.value;
       this.http.post(URLConstant.EditRefFormData, this.refFormObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);

@@ -24,6 +24,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   @Input() TotalShare : number;
   @Output () outputValue : EventEmitter<object> = new EventEmitter();
   lookUpIndustryTypeObj: InputLookupObj;
+  isExistingCust: boolean;
 
   inputLookupCustCompanyObj : InputLookupObj;
   custCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
@@ -53,10 +54,11 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholder;
-    this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
-    this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholder; 
+    this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholderNew;
+    this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderIdNew;
+    this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholderNew; 
     this.getListKeyValueByMrCustTypeCode = URLConstant.GetListKeyValueByMrCustTypeCode;
+    this.isExistingCust = false;
   }
 
   ngOnInit() {  
@@ -167,8 +169,10 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       return false;
     }
 
+    // this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
+    // this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
     this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
-    this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
+    this.custCompanyMgmntShrholderObj.CustId = this.custCompanyId;
     if(this.CustCompanyMgmntShrholderId!=null){ 
       this.custCompanyMgmntShrholderObj = this.tempCustCompanyMgmntShrholderObj;
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
@@ -201,12 +205,18 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value;  
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Company;
       this.custCompanyMgmntShrholderObj.MrIndustryTypeCode = this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value; 
-      this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
-        (response) => {
-          this.toastr.successMessage(response["Message"]);
-          this.outputValue.emit({mode : 'check'});
-        }
-      );
+
+      if(this.isExistingCust){
+        this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
+          (response) => {
+            this.toastr.successMessage(response["Message"]);
+            this.outputValue.emit({mode : 'check'});
+          }
+        );
+      }
+      else{
+        this.outputValue.emit({mode : 'duplicateCompany', ShareholderData: this.custCompanyMgmntShrholderObj});
+      }
     }
   }
 
@@ -226,6 +236,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
     this.ManagementShareholderForm.controls.MrCustModelCode.disable();  
     this.ManagementShareholderForm.controls.MrCompanyTypeCode.disable(); 
-    this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
+    this.ManagementShareholderForm.controls.TaxIdNo.disable(); 
+    this.isExistingCust = true;
   }
 }

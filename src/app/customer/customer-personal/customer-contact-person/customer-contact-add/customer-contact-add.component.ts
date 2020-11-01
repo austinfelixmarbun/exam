@@ -309,7 +309,8 @@ export class CustomerContactAddComponent implements OnInit {
     if (this.custPersonalContactPersonId != null) {
       this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.custPersonalContactPersonId;
-      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalContactPersonByCustPersonalContactPersonId, this.custPersonalContactPersonObj).subscribe(
+      // this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalContactPersonByCustPersonalContactPersonId, this.custPersonalContactPersonObj).subscribe(
+      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustId, this.custPersonalContactPersonObj).subscribe(
         (response) => {
           var datePipe = new DatePipe("en-US");
           this.tempCustPersonalContactPerson = response;
@@ -328,8 +329,8 @@ export class CustomerContactAddComponent implements OnInit {
             MobilePhnNo1: this.tempCustPersonalContactPerson.MobilePhnNo1,
             MobilePhnNo2: this.tempCustPersonalContactPerson.MobilePhnNo2,
             Email: this.tempCustPersonalContactPerson.Email,
-            IsFamily: this.tempCustPersonalContactPerson.IsFamily,
-            IsEmergencyContact: this.tempCustPersonalContactPerson.IsEmergencyContact,
+            // IsFamily: this.tempCustPersonalContactPerson.IsFamily,
+            // IsEmergencyContact: this.tempCustPersonalContactPerson.IsEmergencyContact,
             MrCustRelationshipCode: this.tempCustPersonalContactPerson.MrCustRelationshipCode,
           });
           if (this.tempCustPersonalContactPerson.MrJobProfessionCode != null) {
@@ -476,7 +477,8 @@ export class CustomerContactAddComponent implements OnInit {
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.tempCustPersonalContactPerson.CustPersonalContactPersonId;
 
       this.custPersonalContactPersonObj.RowVersion = this.tempCustPersonalContactPerson.RowVersion;
-      this.http.post(this.editCustPersonalContactPersonUrl, this.custPersonalContactPersonObj).subscribe(
+      // this.http.post(this.editCustPersonalContactPersonUrl, this.custPersonalContactPersonObj).subscribe(
+      this.http.post(URLConstant.EditCustPersonalEmergencyContact, this.custPersonalContactPersonObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           // this.wizard.goToNextStep();
@@ -487,7 +489,8 @@ export class CustomerContactAddComponent implements OnInit {
       );
     } else {
 
-      this.http.post(this.addCustPersonalContactPersonUrl, this.custPersonalContactPersonObj).subscribe(
+      // this.http.post(this.addCustPersonalContactPersonUrl, this.custPersonalContactPersonObj).subscribe(
+      this.http.post(URLConstant.AddCustPersonalEmergencyContact, this.custPersonalContactPersonObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.isAdd = false;

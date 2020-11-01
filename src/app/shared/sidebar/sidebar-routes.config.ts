@@ -36,7 +36,7 @@ export const ROUTES: RouteInfo[] = [
       { Path: '/SystemSetting/Notification', Title: 'Notification', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/SystemSetting/NotificationApproval', Title: 'Notification Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/SystemSetting/RefForm/Paging', Title: 'Ref Form', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
-      { Path: '/Asset/RefAttr/Paging', Title: 'Ref Attribute', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  }
+      { Path: '/SystemSetting/Attribute/Paging', Title: 'Attribute Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  }
     ], Params : [] 
   },
   {
@@ -64,7 +64,7 @@ export const ROUTES: RouteInfo[] = [
           { Path: '/Vendor/Paging', Title: 'Supplier ATPM', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_ATPM }] },
           { Path: '/Vendor/Paging', Title: 'Supplier Holding', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_HOLDING }] },
           { Path: '/Vendor/Paging', Title: 'Supplier HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_HO }] },
-          { Path: '/Vendor/Paging', Title: 'Supplier Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
+          { Path: '/Vendor/Paging', Title: 'Supplier', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
           { Path: '/Vendor/Paging', Title: 'Supplier Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Scheme" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
           { Path: '/Vendor/Paging', Title: 'Supplier Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
       
@@ -118,11 +118,13 @@ export const ROUTES: RouteInfo[] = [
     Path: '', Title: 'Product', Icon: 'ft-package', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
       { Path: '/Product/HOpaging', Title: 'Product HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Product/HOReview', Title: 'Product HO Review', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/Product/HOApproval', Title: 'Product HO Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/Product/HOReturnPaging', Title: 'Product HO Return', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/Product/HODeactivate', Title: 'Product HO Deactivation', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/Product/HODeactivateApproval', Title: 'Product HO Deactivate Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/Product/ProdOffering/Paging', Title: 'Product Offering', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/Product/OfferingReview', Title: 'Product Offering Review', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/Product/OfferingApproval', Title: 'Product Offering Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/Product/ProdOffering/Returnpaging', Title: 'Product Offering Return', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/Product/OfferingDeactivate', Title: 'Product Offering Deactivation', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
@@ -152,10 +154,20 @@ export const ROUTES: RouteInfo[] = [
     Submenu: [
       { Path: '/Customer/Paging', Title: 'Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/Customer/EditMainData/Paging', Title: 'Edit Main Data Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },  
+      { Path: '/Customer/CustFamily/Paging', Title: 'Customer Family', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },  
+      { Path: '/Customer/CustShareholder/Paging', Title: 'Customer Shareholder', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },  
+      { Path: '/Customer/CustGuarantor/Paging', Title: 'Customer Guarantor', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },  
       { Path: '/Customer/NegativeCustomer/Paging', Title: 'Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },   
       { Path: '/Customer/NegativeCustomer/Upload', Title: 'Upload Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },         
       { Path: '/Customer/NegativeCustomer/ReviewUploadPaging', Title: 'Review Upload Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },      
     ], Params : [] 
+  },
+  {
+    Path: '', Title: 'Integration', Icon: 'ft-home', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+    Submenu: [
+      { Path: '/Integration/SendDailyMaster', Title: 'Send Daily Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: CommonConstant.DailyMasterTypeSingle }] },
+      { Path: '/Integration/SendDailyMaster', Title: 'Send Daily Master With Range Date', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: CommonConstant.DailyMasterTypeRange }] },
+    ], Params: []
   },
   // {
   //     Path: '', Title: 'LOS', Icon: 'ft-users', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,

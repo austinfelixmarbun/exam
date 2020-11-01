@@ -18,11 +18,15 @@
                 <thead>
                   <tr class="table-header">
                     <th><span translate class="thead-header">Bank</span></th>
-                    <th><span translate class="thead-header" name='AccountNo'>Account
-                        No</span>
+                    <th><span translate class="thead-header" name='BankBranch'>Bank Branch</span>
                     </th>
+                    <th><span translate class="thead-header" name='AccountNo'>Account
+                      No</span>
+                  </th>
                     <th><span translate class="thead-header" name='AccountName'>Account
                         Name</span>
+                    </th>
+                    <th><span translate class="thead-header" name='Notes'>Notes</span>
                     </th>
                     <th><span translate class="thead-header" name='IsDefault'>Default</span>
                     </th>
@@ -32,8 +36,10 @@
                 <tbody>
                   <tr *ngFor="let item of ListData; let i = index">
                     <td>{{item.BankName}}</td>
+                    <td>{{item.BankBranch}}</td>
                     <td>{{item.BankAccountNo}}</td>
                     <td>{{item.BankAccountName}}</td>
+                    <td>{{item.Notes}}</td>
                     <td *ngIf="item.IsDefault === true">Yes</td>
                     <td *ngIf="item.IsDefault === false">No</td>
                     <td>
@@ -72,6 +78,17 @@
                         </div>
                       </div>
                       <div class="form-group row">
+                        <label class="col-md-2 adins-required-label" for="name" translate>Bank Branch</label>
+                        <div class="col-md-4">
+                          <input type="text" class="form-control adInsInput"
+                            [ngClass]="{ 'is-invalid': enjiForm.submitted && BankRegisForm.controls.BankBranch.invalid }"
+                            formControlName="BankBranch">
+                          <lib-uc-show-errors [control]="BankRegisForm.controls.BankBranch"
+                            [submit]="enjiForm.submitted">
+                          </lib-uc-show-errors>
+                        </div>
+                      </div>
+                      <div class="form-group row">
                         <label class="col-md-2 adins-required-label" for="AccNumber" translate>Account Number</label>
                         <div class="col-md-4">
                           <input type="text" class="form-control adInsInput"
@@ -89,6 +106,17 @@
                             [ngClass]="{ 'is-invalid': enjiForm.submitted && BankRegisForm.controls.AccName.invalid }"
                             formControlName="AccName">
                           <lib-uc-show-errors [control]="BankRegisForm.controls.AccName"
+                            [submit]="enjiForm.submitted">
+                          </lib-uc-show-errors>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-2" for="name" translate>Notes</label>
+                        <div class="col-md-4">
+                          <input type="text" class="form-control adInsInput"
+                            [ngClass]="{ 'is-invalid': enjiForm.submitted && BankRegisForm.controls.Notes.invalid }"
+                            formControlName="Notes">
+                          <lib-uc-show-errors [control]="BankRegisForm.controls.Notes"
                             [submit]="enjiForm.submitted">
                           </lib-uc-show-errors>
                         </div>

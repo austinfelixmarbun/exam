@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { first } from 'rxjs/operators';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
@@ -25,6 +24,7 @@ export class CustAttrSectionComponent implements OnInit {
   isLookupReady: boolean;
   attrGroup: string;
   From : string;
+  CustOtherInfo : any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -52,11 +52,14 @@ export class CustAttrSectionComponent implements OnInit {
   inputDebitorBusinessScaleLookupObj: InputLookupObj;
   inputCounterpartCategoryLookupObj: InputLookupObj;
   inputSustaianableFinancialBusinessLookupObj: InputLookupObj;
-  ngOnInit() { 
+  async ngOnInit() { 
     this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyOther:CommonConstant.AttrGroupCustPersonalOther;
-  
     var custOtherInfo = new CustOtherInfoObj();
     custOtherInfo.CustId = this.CustId;
+    await this.httpClient.post(URLConstant.GetCustOtherInfoByCustId, custOtherInfo).toPromise().then(
+      (response:any) => { 
+        this.CustOtherInfo = response;  
+      }); 
     this.inputDebitorGroupLookupObj = new InputLookupObj();
     this.inputDebitorGroupLookupObj.urlJson = "./assets/lookup/lookupDebitorGroup.json";
     this.inputDebitorGroupLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
@@ -87,23 +90,20 @@ export class CustAttrSectionComponent implements OnInit {
     this.inputSustaianableFinancialBusinessLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputSustaianableFinancialBusinessLookupObj.pagingJson = "./assets/lookup/lookupSustainableFinancialBusiness.json";
     this.inputSustaianableFinancialBusinessLookupObj.genericJson = "./assets/lookup/lookupSustainableFinancialBusiness.json";
-    this.inputSustaianableFinancialBusinessLookupObj.isReady = true;
-    this.httpClient.post(URLConstant.GetCustOtherInfoByCustId, custOtherInfo).subscribe(
-      (response:any) => {  
-      if(response.CustOtherInfoId !=null){
-        this.inputDebitorGroupLookupObj.jsonSelect =  {Descr: response.LbppmsDebtGrpDescr};
-        this.inputDebitorBusinessScaleLookupObj.jsonSelect = {Descr: response.LbppmsBizSclDescr};
-        this.inputCounterpartCategoryLookupObj.jsonSelect = {Descr: response.LbppmsCntrprtDescr};
-        this.inputSustaianableFinancialBusinessLookupObj.jsonSelect = {Descr: response.LbppmsBizSustainDescr};
+    this.inputSustaianableFinancialBusinessLookupObj.isReady = true;  
+      if(this.CustOtherInfo.CustOtherInfoId != 0){
+        this.inputDebitorGroupLookupObj.jsonSelect =  {Descr: this.CustOtherInfo.LbppmsDebtGrpDescr};
+        this.inputDebitorBusinessScaleLookupObj.jsonSelect = {Descr: this.CustOtherInfo.LbppmsBizSclDescr};
+        this.inputCounterpartCategoryLookupObj.jsonSelect = {Descr: this.CustOtherInfo.LbppmsCntrprtDescr};
+        this.inputSustaianableFinancialBusinessLookupObj.jsonSelect = {Descr: this.CustOtherInfo.LbppmsBizSustainDescr};
 
         this.OtherInformationForm.patchValue({
-          LbppmsDebtGrpCode:   response.LbppmsDebtGrpCode,
-          LbppmsCntrprtId: response.LbppmsCntrprtId,
-          LbppmsBizSustainId: response.LbppmsBizSustainId,
-          LbppmsBizSclCode: response.LbppmsBizSclCode
+          LbppmsDebtGrpCode:   this.CustOtherInfo.LbppmsDebtGrpCode,
+          LbppmsCntrprtId: this.CustOtherInfo.LbppmsCntrprtId,
+          LbppmsBizSustainId: this.CustOtherInfo.LbppmsBizSustainId,
+          LbppmsBizSclCode: this.CustOtherInfo.LbppmsBizSclCode
         });
       }
-      }); 
       this.isLookupReady = true;
     // this.httpClient.post(URLConstant.GetListCustAttrContentByCustIdForCust, { CustId: this.CustId }).pipe(first()).subscribe(
     //   (response) => {
@@ -130,7 +130,6 @@ export class CustAttrSectionComponent implements OnInit {
     // );
   }
 
-
   SaveForm(){ 
     var formValue = this.OtherInformationForm['controls']['AttrList'].value;
     var custAttrRequest = new Array<Object>();
@@ -146,37 +145,30 @@ export class CustAttrSectionComponent implements OnInit {
           AttrGroup: this.attrGroup
         };
         custAttrRequest.push(custAttr);}
-
       }  
-      this.httpClient.post(url, { CustAttrContentObjs: custAttrRequest }).pipe(first()).subscribe(
-        (response) => { 
-          var custOtherInfo = new CustOtherInfoObj();
-          custOtherInfo = this.OtherInformationForm.value;
-          custOtherInfo.CustId = this.CustId;
+      var custOtherInfo = new CustOtherInfoObj();
+      custOtherInfo = this.OtherInformationForm.value;
+      custOtherInfo.CustId = this.CustId;
 
-          this.httpClient.post(URLConstant.AddEditCustOtherInfo, custOtherInfo).subscribe(
-            (response) => { 
-              this.toastr.successMessage(response["Message"]);
-                 if (this.From == 'CustPaging') {
-                  this.router.navigate(["/Customer/Paging"]);
-            } else {
-              this.router.navigate(["/Customer/EditMainData/Paging"]);
-            }
-            }); 
-
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      var RequestAppCustOtherInfoObj= {
+        CustAttrContentObjs: custAttrRequest,
+        RequestCustOtherInfoObj:custOtherInfo
+      }
+      this.httpClient.post(URLConstant.AddEditCustOtherInfo, RequestAppCustOtherInfoObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          if (this.From == 'CustPaging') {
+            this.router.navigate(["/Customer/Paging"]);
+          } else {
+            this.router.navigate(["/Customer/EditMainData/Paging"]);
+          }
+        }); 
     }
     else{
       this.toastr.errorMessage("No Attribute To Save");
     }
   }
- 
- 
-  
+
   getLookupDebitorGroup(e){
     this.OtherInformationForm.patchValue({
       LbppmsDebtGrpCode: e.LbppmsDebtGrpCode

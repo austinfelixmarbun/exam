@@ -8,6 +8,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 
 @Component({
   selector: 'app-edit-main-data-company',
@@ -35,6 +40,9 @@ export class EditMainDataCompanyComponent implements OnInit {
   getListActiveRefMasterUrl: string;
   getCustCompanyByCustIdUrl: string;
   GetListActiveRefMasterWithReserveFieldAllUrl : string;
+  inputFieldObj: InputFieldObj;
+  inputAddressObj: InputAddressObj;
+  UcAddressObj: UcAddressObj;
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
@@ -63,6 +71,15 @@ export class EditMainDataCompanyComponent implements OnInit {
   });
 
   ngOnInit() {
+    this.inputFieldObj = new InputFieldObj();
+    this.inputFieldObj.inputLookupObj = new InputLookupObj();
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.showSubsection = false;
+    this.inputAddressObj.title = "Customer Address";
+    this.inputAddressObj.default = UcAddressObj;
+    this.inputAddressObj.inputField = this.inputFieldObj;
+    this.inputAddressObj.showAllPhn = false;
+
     var refMasterObjCustModel = {
       MrCustTypeCode: CommonConstant.CustTypeCompany
     }
@@ -113,6 +130,22 @@ export class EditMainDataCompanyComponent implements OnInit {
         if(this.tempCustObj.IsVip==false){ 
         this.CustomerCompanyForm.controls.VipNotes.disable();
         }
+        this.CustomerCompanyForm.controls["TaxIdNo"].disable();
+
+        this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.tempCustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
+          (response: CustAddrObj) => {
+            this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
+            this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
+            this.UcAddressObj.AreaCode1 = response.AreaCode1;
+            this.UcAddressObj.AreaCode2 = response.AreaCode2;
+            this.UcAddressObj.AreaCode3 = response.AreaCode3;
+            this.UcAddressObj.AreaCode4 = response.AreaCode4;
+            this.UcAddressObj.Addr = response.Addr;
+            this.UcAddressObj.City = response.City;
+            this.inputAddressObj.default = this.UcAddressObj;
+            this.inputAddressObj.inputField = this.inputFieldObj;
+          }
+        );
       }
     );
     this.http.post(this.getCustCompanyByCustIdUrl, this.custCompanyObj).subscribe(
@@ -143,6 +176,17 @@ export class EditMainDataCompanyComponent implements OnInit {
     }else{
       this.custObj.VipNotes = null;
     }
+
+    var formValue = this.CustomerCompanyForm.value;
+    this.custObj.CustAddr = new CustAddrObj();
+    this.custObj.CustAddr.Addr = formValue["UcAddress"]["Addr"];
+    this.custObj.CustAddr.AreaCode1 = formValue["UcAddress"]["AreaCode1"];
+    this.custObj.CustAddr.AreaCode2 = formValue["UcAddress"]["AreaCode2"];
+    this.custObj.CustAddr.AreaCode3 = formValue["UcAddress"]["AreaCode3"];
+    this.custObj.CustAddr.AreaCode4 = formValue["UcAddress"]["AreaCode4"];
+    this.custObj.CustAddr.City = formValue["UcAddress"]["City"];
+    this.custObj.CustAddr.Zipcode = formValue["UcAddressZipcode"]["value"];
+    this.custObj.CustAddr.SubZipcode = formValue["UcAddressZipcode"]["value"];
     this.http.post(this.editCustUrl, this.custObj).subscribe(
       (response) => {
         this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
@@ -150,7 +194,14 @@ export class EditMainDataCompanyComponent implements OnInit {
             this.toastr.successMessage(response["Message"]);
             if (this.From == "EditMainData") {
               this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit', From:'EditMainData'} });
-            } else {
+            }
+            else if(this.From == "CustShareholder"){
+              this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit', From: 'CustShareholder' } });
+            }
+            else if(this.From == "CustGuarantor"){
+              this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit', From: 'CustGuarantor' } });
+            }
+            else {
               this.router.navigate(["/Customer/CustomerCompany/Page"], { queryParams: { IdCust: this.CustId, From:'CustPaging'  } });
             }
           }
@@ -163,8 +214,14 @@ export class EditMainDataCompanyComponent implements OnInit {
     if (this.From == "CustPaging") {
       this.router.navigate(["/Customer/Paging"]);
     }
-    else if (this.From = "EditMainData") {
+    else if (this.From == "EditMainData") {
       this.router.navigate(["/Customer/EditMainData/Paging"]);
+    }
+    else if(this.From == "CustShareholder"){
+      this.router.navigate(["/Customer/CustShareholder/Paging"]);
+    }
+    else if(this.From == "CustGuarantor"){
+      this.router.navigate(["/Customer/CustGuarantor/Paging"]);
     }
   }
   checkState() {

@@ -1,0 +1,90 @@
+{
+    "title": "Product Offering Review",
+    "exportExcel": false,
+    "component": [{
+        "type": "textbox",
+        "name": "A.PROD_OFFERING_CODE",
+        "id": "ProdCodeId",
+        "value": "",
+        "label": "Product Offering Code",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "A.PROD_OFFERING_NAME",
+        "id": "ProdNameId",
+        "value": "",
+        "label": "Product Offering Name",
+        "placeholder": "Placeholder"
+      }
+    ],
+    "headerList": [{
+        "type": "sort",
+        "position": "center",
+        "label": "Product Offering Code",
+        "name": "ProdOfferingCode"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Product Offering Name",
+        "name": "ProdOfferingName"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "End Date",
+        "name": "EndDt"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Action"
+      }
+    ],
+    "querystring": {
+      "select": "SELECT A.PROD_OFFERING_CODE AS ProdOfferingCode, A.PROD_OFFERING_NAME AS ProdOfferingName, A.END_DT AS EndDt, A.PROD_OFFERING_STAT AS ProdOfferingStat, A.PROD_OFFERING_ID AS ProdOfferingId, B.PROD_OFFERING_H_ID AS ProdOfferingHId, WTL.WF_TASK_LIST_ID AS WfTaskListId,  WTL.END_EXECUTING_DATE as EndExecutingDate",
+      "from": "FROM dbo.PROD_OFFERING A WITH(NOLOCK) JOIN dbo.V_WF_TASK_LIST WTL WITH(NOLOCK) ON A.PROD_OFFERING_CODE = WTL.TRANSACTION_CODE LEFT JOIN dbo.PROD_OFFERING_H B WITH(NOLOCK) ON A.DRAFT_PROD_OFFERING_H_ID=B.PROD_OFFERING_H_ID",
+      "where": "WHERE WTL.ACT_CODE = N'PROD_OFFERING_RVW' and WTL.END_EXECUTING_DATE IS NULL"
+    },
+    "bodyList": [{
+        "type": "text",
+        "position": "center",
+        "property": "ProdOfferingCode"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "ProdOfferingName"
+      },
+      {
+        "type": "date",
+        "position": "center",
+        "property": "EndDt"
+      }, 
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "edit",
+            "path": "/Product/OfferingReview/Detail",
+            "param": [
+              {
+                "type": "ProdOfferingHId",
+                "property": "ProdOfferingHId"
+              },
+              {
+                "type": "ProdOfferingId",
+                "property": "ProdOfferingId"
+              },
+              {
+                "type": "WfTaskListId",
+                "property": "WfTaskListId"
+              }
+            ]
+          }
+        ] 
+      }
+    ]
+  }

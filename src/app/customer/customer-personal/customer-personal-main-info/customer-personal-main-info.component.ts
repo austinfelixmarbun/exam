@@ -7,6 +7,10 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
+import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 
 @Component({
   selector: 'app-customer-personal-main-info',
@@ -45,6 +49,8 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   getListActiveRefMasterUrl: string;
   GetListActiveRefMasterWithReserveFieldAllUrl: string;
   tempMrMaritalStatCode: Array<KeyValueObj> = new Array<KeyValueObj>();
+  inputAddressObj: InputAddressObj;
+  inputFieldObj: InputFieldObj;
 
   CustomerPersonalForm = this.fb.group({
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -57,7 +63,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     IdExpiredDt: [''],
     MrMaritalStatCode: [''],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
-    CustModel: ['', [Validators.required]],
+    CustModel: [''],
     IsVip: [true],
     IsAffiliateWithMf: [true],
     VipNotes: ['', [Validators.required]]
@@ -67,6 +73,8 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.inputAddressObj = new InputAddressObj();
+    this.inputFieldObj = new InputFieldObj();
   }
 
   ngOnInit() {
@@ -77,6 +85,14 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
 
+    this.inputFieldObj = new InputFieldObj();
+    this.inputFieldObj.inputLookupObj = new InputLookupObj();
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.showSubsection = false;
+    this.inputAddressObj.title = "Customer Address";
+    this.inputAddressObj.default = UcAddressObj;
+    this.inputAddressObj.inputField = this.inputFieldObj;
+    this.inputAddressObj.showAllPhn = false;
 
     var refMasterObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
@@ -149,7 +165,8 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   }
   SaveValue() {
     this.CustName = this.CustomerPersonalForm.controls["CustName"].value;
-    this.CustModel = this.CustomerPersonalForm.controls["CustModel"].value;
+    // this.CustModel = this.CustomerPersonalForm.controls["CustModel"].value;
+    this.CustModel = "";
     this.Gender = this.CustomerPersonalForm.controls["Gender"].value;
     this.MrIdTypeCode = this.CustomerPersonalForm.controls["MrIdTypeCode"].value;
     this.BirthPlace = this.CustomerPersonalForm.controls["BirthPlace"].value;
@@ -164,6 +181,18 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     if(this.IsVip){
       this.VipNotes = this.CustomerPersonalForm.controls["VipNotes"].value;
     } 
+
+    var custAddr = new Object();
+    var formValue = this.CustomerPersonalForm.value;
+    custAddr["Addr"] = formValue["UcAddress"]["Addr"];
+    custAddr["AreaCode1"] = formValue["UcAddress"]["AreaCode1"];
+    custAddr["AreaCode2"] = formValue["UcAddress"]["AreaCode2"];
+    custAddr["AreaCode3"] = formValue["UcAddress"]["AreaCode3"];
+    custAddr["AreaCode4"] = formValue["UcAddress"]["AreaCode4"];
+    custAddr["City"] = formValue["UcAddress"]["City"];
+    custAddr["Zipcode"] = formValue["UcAddressZipcode"]["value"];
+    custAddr["SubZipcode"] = formValue["UcAddressZipcode"]["value"];
+    sessionStorage.setItem("CustAddr", JSON.stringify(custAddr));
     this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"], { queryParams: { "CustName": this.CustName, "Gender": this.Gender, "MrIdTypeCode": this.MrIdTypeCode, "CustModel": this.CustModel, "BirthPlace": this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo, "IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName, "IsVip": this.IsVip, "IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes, "MrMaritalStatCode": this.MrMaritalStatCode } });
   }
   onOptionsSelected(event) {

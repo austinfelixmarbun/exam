@@ -1,0 +1,327 @@
+{
+    "title": "Shareholder",
+    "exportExcel": true,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "CS.CUST_NO",
+            "id": "ShareholderCustNo",
+            "value": "",
+            "label": "Mgmnt / Shareholder No.",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "C.CUST_NO",
+            "id": "CustNo",
+            "value": "",
+            "label": "Customer No.",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "CS.CUST_NAME",
+            "id": "ShareholderCustName",
+            "value": "",
+            "label": "Mgmnt / Shareholder Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "C.CUST_NAME",
+            "id": "CustName",
+            "value": "",
+            "label": "Customer Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "CS.ID_NO",
+            "id": "ShareholderIdNo",
+            "value": "",
+            "label": "Mgmnt / Shareholder ID No.",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "C.ID_NO",
+            "id": "IdNo",
+            "value": "",
+            "label": "ID No.",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "name": "CS.MR_CUST_TYPE_CODE",
+            "id": "ShareholderCustTypeCodeId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "url": "",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Mgmnt / Shareholder Type",
+            "criteriaPropName": "RefMasterTypeCode",
+            "criteriaPropValue": "CUST_TYPE",
+            "items": [],
+            "itemsUrl": []
+        }
+    ],
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "MGMNT / SHAREHOLDER TYPE",
+            "name": "CS.MR_CUST_TYPE_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "MGMNT / SHAREHOLDER NO.",
+            "name": "CS.CUST_NO"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "MGMNT / SHAREHOLDER NAME",
+            "name": "CS.CUST_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "MGMNT / SHAREHOLDER ID NO.",
+            "name": "CS.ID_NO"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "CUSTOMER NO.",
+            "name": "C.CUST_NO"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "CUSTOMER NAME",
+            "name": "C.CUST_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "ID NO",
+            "name": "C.ID_NO"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "ACTION"
+        }
+    ],
+    "querystring": {
+        "select": "SELECT CS.MR_CUST_TYPE_CODE AS ShareholderMrCustTypeCode, CS.CUST_NO AS ShareholderCustNo, CS.CUST_NAME AS ShareholderCustName, CS.ID_NO AS ShareholderIdNo, C.CUST_NO AS CustNo, C.CUST_NAME AS CustName, C.ID_NO AS IdNo, CS.CUST_ID AS ShareholderId, C.CUST_ID AS CustId, C.MR_CUST_TYPE_CODE AS MrCustTypeCode",
+        "from": "FROM CUST_COMPANY_MGMNT_SHAREHOLDER_NEW AS CCS INNER JOIN CUST AS C ON CCS.CUST_ID = C.CUST_ID INNER JOIN CUST AS CS ON CCS.SHAREHOLDER_ID = CS.CUST_ID"
+    },
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "ShareholderMrCustTypeCode"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "ShareholderMrCustTypeCode",
+                                    "value": "PERSONAL",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "link",
+                                "position": "left",
+                                "property": "ShareholderCustNo",
+                                "path": "/View/Customer/PersonalDetail",
+                                "target": "_blank",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "ShareholderId"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "property": "ShareholderMrCustTypeCode",
+                                    "value": "COMPANY",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "link",
+                                "position": "left",
+                                "property": "ShareholderCustNo",
+                                "path": "/View/Customer/CoyDetail",
+                                "target": "_blank",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "ShareholderId"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "ShareholderCustName"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "ShareholderIdNo"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrCustTypeCode",
+                                    "value": "PERSONAL",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "link",
+                                "position": "left",
+                                "property": "CustNo",
+                                "path": "/View/Customer/PersonalDetail",
+                                "target": "_blank",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "CustId"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrCustTypeCode",
+                                    "value": "COMPANY",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "link",
+                                "position": "left",
+                                "property": "CustNo",
+                                "path": "/View/Customer/CoyDetail",
+                                "target": "_blank",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "CustId"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "CustName"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "IdNo"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "ShareholderMrCustTypeCode",
+                                    "value": "PERSONAL",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "url",
+                                "path": "/Customer/EditMainData/Personal",
+                                "icon": "ft-edit-2",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "CustId"
+                                    },
+                                    {
+                                        "type": "From",
+                                        "property": "CustShareholder"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "property": "ShareholderMrCustTypeCode",
+                                    "value": "COMPANY",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "url",
+                                "path": "/Customer/EditMainData/Company",
+                                "icon": "ft-edit-2",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "CustId"
+                                    },
+                                    {
+                                        "type": "From",
+                                        "property": "CustShareholder"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        }
+                    ]
+                }
+            ]
+        }
+                
+    ]
+}

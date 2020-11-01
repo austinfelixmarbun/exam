@@ -3,6 +3,7 @@ export class RefOfficeAreaObj {
   AreaCode: any;
   AreaName: any;
   IsActive: any;
+  RowVersion: any;
 
   constructor() { this.RefOfficeAreaId = 0 }
 }

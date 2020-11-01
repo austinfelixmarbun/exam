@@ -9,6 +9,7 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-personal-job-data',
@@ -18,6 +19,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 })
 export class CustomerPersonalJobDataComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
+  tempCustModel: Array<Object>;
 
   custObj: any;
   objCust: CustObj;
@@ -30,7 +32,7 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustById = URLConstant.GetCustByCustId;
     this.getListActiveRefMaster = URLConstant.GetListActiveRefMaster;
-
+    this.tempCustModel = new Array<Object>();
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -46,7 +48,20 @@ export class CustomerPersonalJobDataComponent implements OnInit {
       (response) => {
         this.custObj = response;
         this.CustModel = this.custObj.MrCustModelCode;
-      });
+
+        var refMasterObjCustModel = {
+          MrCustTypeCode: CommonConstant.CustTypePersonal
+        }
+        this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+          (response) => {
+            this.tempCustModel = response["ReturnObject"];
+            if(!this.CustModel){
+              this.CustModel = this.tempCustModel[0]["Key"];
+            }
+          }
+        );
+      }
+    );
   }
 
   getValue(ev)

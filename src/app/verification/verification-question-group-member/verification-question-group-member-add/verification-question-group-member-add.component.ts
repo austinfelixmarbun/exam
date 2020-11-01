@@ -57,7 +57,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   }
 
   GetListVerfQuestionGrpDByVerfQuestionGrpHId() {
-    this.http.post(URLConstant.GetActiveVerfQuestionGrpDForUpdateByGrpHId, { VerfQuestionGrpHId: this.VerfQuestionGrpHId }).subscribe(
+    this.http.post(URLConstant.GetVerfQuestionGrpDByGrpHId, { VerfQuestionGrpHId: this.VerfQuestionGrpHId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
 

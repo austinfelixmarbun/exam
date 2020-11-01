@@ -1,3 +1,5 @@
+import { CustAddrObj } from "./CustAddrObj.Model";
+
 export class CustObj{
     CustId : any;
     CustNo :any;
@@ -12,6 +14,6 @@ export class CustObj{
     IsAffiliateWithMf :any;
     VipNotes :any;
     OriginalOfficeCode:any;
-   
-
+    RowVersion: any;
+    CustAddr: CustAddrObj;
 }

@@ -21,7 +21,11 @@ import { ProductOfferingDeactivateApprovalComponent } from "./prod-offering/prod
 import { ProductOfferingDeactivateApprovalDetailComponent } from "./prod-offering/prod-offering-deact-apv-detail/product-offering-deact-apv-detail.component";
 import { ProductOfferingDeactivateEditComponent } from "./prod-offering/prod-offering-deactivate-edit/product-offering-deactivate-edit.component";
 import { ProductReturnHoPagingComponent } from './product-HO/product-return-ho-paging/product-return-ho-paging.component';
-import { ProdOfferingReturnPagingComponent } from './prod-offering/prod-offering-return-paging/prod-offering-return-paging.component';
+import { ProdOfferingReturnPagingComponent } from './prod-offering/prod-offering-return-paging/prod-offering-return-paging.component';  
+import { ProductHoReviewComponent } from './product-HO/product-ho-review/product-ho-review.component';
+import { ProdOfferingReviewPagingComponent } from './prod-offering/prod-offering-review-paging/prod-offering-review-paging.component';
+import { ProdOfferingReviewComponent } from './prod-offering/prod-offering-review/prod-offering-review.component';
+import { ProductHoReviewPagingComponent } from './product-HO/product-ho-review-paging/product-ho-review-paging.component';
 
 const routes: Routes = [
     {
@@ -181,6 +185,34 @@ const routes: Routes = [
         component: ProductOfferingDeactivateApprovalDetailComponent,
         data: {
           title: 'Product Offering Deactivate Approval Detail'
+        }
+      },
+      {
+        path: 'HOReview/Detail',
+        component: ProductHoReviewComponent,
+        data: {
+          title: 'Product HO Review'
+        }
+      },
+      {
+        path: 'HOReview',
+        component: ProductHoReviewPagingComponent,
+        data: {
+          title: 'Product HO Review Paging'
+        }
+      },
+      {
+        path: 'OfferingReview/Detail',
+        component: ProdOfferingReviewComponent,
+        data: {
+          title: 'Product Offering Review'
+        }
+      },
+      {
+        path: 'OfferingReview',
+        component: ProdOfferingReviewPagingComponent,
+        data: {
+          title: 'Product Offering Review Paging'
         }
       },
     ]

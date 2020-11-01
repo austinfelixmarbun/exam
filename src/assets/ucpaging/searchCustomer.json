@@ -169,11 +169,11 @@
                             ],
                             "result": {
                                 "type": "url",
-                                "path": "/Customer/EditMainData/Personal",
+                                "path": "/Customer/CustomerPersonal/Page",
                                 "icon": "ft-edit-2",
                                 "param": [
                                     {
-                                        "type": "CustId",
+                                        "type": "IdCust",
                                         "property": "CustId"
                                     },
                                     {
@@ -194,11 +194,11 @@
                             ],
                             "result": {
                                 "type": "url",
-                                "path": "/Customer/EditMainData/Company",
+                                "path": "/Customer/CustomerCompany/Page",
                                 "icon": "ft-edit-2",
                                 "param": [
                                     {
-                                        "type": "CustId",
+                                        "type": "IdCust",
                                         "property": "CustId"
                                     },
                                     {

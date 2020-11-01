@@ -10,6 +10,12 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
+import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { ResponseOptions } from '@angular/http';
 
 @Component({
   selector: 'app-edit-main-data-personal',
@@ -54,6 +60,9 @@ export class EditMainDataPersonalComponent implements OnInit {
   businessDtMin : any;
   businessDtMax: any;
   VipNotesRequired : boolean;
+  inputFieldObj: InputFieldObj;
+  inputAddressObj: InputAddressObj;
+  UcAddressObj: UcAddressObj;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = URLConstant.GetCustPersonalbyCustId;
@@ -77,6 +86,15 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
+
+    this.inputFieldObj = new InputFieldObj();
+    this.inputFieldObj.inputLookupObj = new InputLookupObj();
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.showSubsection = false;
+    this.inputAddressObj.title = "Customer Address";
+    this.inputAddressObj.default = UcAddressObj;
+    this.inputAddressObj.inputField = this.inputFieldObj;
+    this.inputAddressObj.showAllPhn = false;
   
     var refMasterObjGender = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
@@ -150,6 +168,24 @@ export class EditMainDataPersonalComponent implements OnInit {
         if(this.tempCustObj.IsVip==false){ 
         this.CustomerPersonalForm.controls.VipNotes.disable();
         }
+        this.CustomerPersonalForm.controls["MrIdTypeCode"].disable();
+        this.CustomerPersonalForm.controls["IdNo"].disable();
+        this.CustomerPersonalForm.controls["TaxIdNo"].disable();
+
+        this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.tempCustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
+          (response: CustAddrObj) => {
+            this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
+            this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
+            this.UcAddressObj.AreaCode1 = response.AreaCode1;
+            this.UcAddressObj.AreaCode2 = response.AreaCode2;
+            this.UcAddressObj.AreaCode3 = response.AreaCode3;
+            this.UcAddressObj.AreaCode4 = response.AreaCode4;
+            this.UcAddressObj.Addr = response.Addr;
+            this.UcAddressObj.City = response.City;
+            this.inputAddressObj.default = this.UcAddressObj;
+            this.inputAddressObj.inputField = this.inputFieldObj;
+          }
+        );
       }
     );
     await this.http.post<CustPersonalObj>(this.getCustPersonalByCustIdUrl, this.custPersonalObj).toPromise().then(
@@ -181,7 +217,6 @@ export class EditMainDataPersonalComponent implements OnInit {
     );
   }
   SaveValue() {
-    
     this.custObj = new CustObj();
     this.custPersonalObj = new CustPersonalObj();
     this.custObj = this.tempCustObj;
@@ -205,6 +240,17 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custPersonalObj.BirthDt = this.CustomerPersonalForm.controls["BirthDt"].value;
     this.custPersonalObj.MotherMaidenName = this.CustomerPersonalForm.controls["MotherMaidenName"].value;
     this.custPersonalObj.MrMaritalStatCode = this.CustomerPersonalForm.controls["MrMaritalStatCode"].value;
+
+    var formValue = this.CustomerPersonalForm.value;
+    this.custObj.CustAddr = new CustAddrObj();
+    this.custObj.CustAddr.Addr = formValue["UcAddress"]["Addr"];
+    this.custObj.CustAddr.AreaCode1 = formValue["UcAddress"]["AreaCode1"];
+    this.custObj.CustAddr.AreaCode2 = formValue["UcAddress"]["AreaCode2"];
+    this.custObj.CustAddr.AreaCode3 = formValue["UcAddress"]["AreaCode3"];
+    this.custObj.CustAddr.AreaCode4 = formValue["UcAddress"]["AreaCode4"];
+    this.custObj.CustAddr.City = formValue["UcAddress"]["City"];
+    this.custObj.CustAddr.Zipcode = formValue["UcAddressZipcode"]["value"];
+    this.custObj.CustAddr.SubZipcode = formValue["UcAddressZipcode"]["value"];
     this.http.post(this.editCustUrl, this.custObj).subscribe(
       (response) => {
         this.http.post(this.editCustPersonalUrl, this.custPersonalObj).subscribe(
@@ -213,7 +259,17 @@ export class EditMainDataPersonalComponent implements OnInit {
             
             if (this.From == "EditMainData") {
               this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit', From: 'EditMainData' } });
-            } else {
+            }
+            else if(this.From == "CustFamily"){
+              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit', From: 'CustFamily' } });
+            }
+            else if(this.From == "CustShareholder"){
+              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit', From: 'CustShareholder' } });
+            }
+            else if(this.From == "CustGuarantor"){
+              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit', From: 'CustGuarantor' } });
+            }
+            else {
               this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId,From:'CustPaging' } });
             } 
           }
@@ -235,8 +291,17 @@ export class EditMainDataPersonalComponent implements OnInit {
     if(this.From =="CustPaging"){
       this.router.navigate(["/Customer/Paging"]); 
     }
-    else if(this.From = "EditMainData"){
+    else if(this.From == "EditMainData"){
       this.router.navigate(["/Customer/EditMainData/Paging"]);
+    }
+    else if(this.From == "CustFamily"){
+      this.router.navigate(["/Customer/CustFamily/Paging"]);
+    }
+    else if(this.From == "CustShareholder"){
+      this.router.navigate(["/Customer/CustShareholder/Paging"]);
+    }
+    else if(this.From == "CustGuarantor"){
+      this.router.navigate(["/Customer/CustGuarantor/Paging"]);
     }
 }
 checkState() {

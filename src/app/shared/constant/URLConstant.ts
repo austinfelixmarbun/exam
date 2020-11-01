@@ -234,6 +234,7 @@ export class URLConstant {
     public static GetListActiveRefMasterWithReserveFieldAll = environment.FoundationR3Url + "/RefMaster/GetListActiveRefMasterWithReserveFieldAll";
     public static GetListActiveRefMasterByRefMasterTypeCode = environment.FoundationR3Url + "/RefMaster/GetListActiveRefMasterByRefMasterTypeCode";
     public static GetRefMasterByRefMasterTypeCodeAndMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByRefMasterTypeCodeAndMasterCode"
+    public static GetRefMasterByRefMasterTypeCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByRefMasterTypeCode"
   
     //REF COUNTRY
     public static GetListRefCountry = environment.FoundationR3Url + "/RefCountry/GetListRefCountry";
@@ -434,7 +435,9 @@ export class URLConstant {
     public static AddOrEditProductDetail = environment.FoundationR3Url + "/Product/AddOrEditProductDetail";
     public static DownloadProductRule = environment.FoundationR3Url + "/Product/DownloadProductRule";
     public static UpdateProductPostApv = environment.FoundationR3Url + "/Product/UpdateProductPostApv";
+    public static ReviewProduct = environment.FoundationR3Url + "/Product/ReviewProduct";
 
+    
     //PRODUCT OFFERING
     public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
     public static AddProdOffering = environment.FoundationR3Url + "/ProductOffering/AddProdOffering";
@@ -451,6 +454,7 @@ export class URLConstant {
     public static GetListProdOfferingBranchOfficeMbrByProdHIdAndApp = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHIdAndApp"
     public static CopyProductOffering = environment.FoundationR3Url + "/ProductOffering/CopyProductOffering";
     public static UpdateProdOfferingPostApv = environment.FoundationR3Url + "/ProductOffering/UpdateProdOfferingPostApv";
+    public static ReviewProdOffering = environment.FoundationR3Url + "/ProductOffering/ReviewProdOffering";
 
     // PRODUCT COMPONENT
     public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
@@ -470,6 +474,13 @@ export class URLConstant {
     public static GetAssetAccessorybyAssetAccessoryId = environment.FoundationR3Url + "/AssetAccessory/GetAssetAccessoryById"
     public static GetlistAssetAccessorybyAssetTypeId = environment.FoundationR3Url + "/AssetAccessory/GetListAssetAccessoryByAssetTypeId"
     public static DeleteAssetAccessory = "/AssetAccessory/DeleteAssetAccessory"
+
+    //asset attr
+    public static AddAssetAttr = environment.FoundationR3Url +"/AssetAttr/AddAssetAttr";
+    public static EditAssetAttr = environment.FoundationR3Url +"/AssetAttr/EditAssetAttr";
+    public static GetListAssetAttrByAssetTypeId = environment.FoundationR3Url +"/AssetAttr/GetListAssetAttrByAssetTypeId";
+    public static GetAssetAttrByAssetAttrId = environment.FoundationR3Url +"/AssetAttr/GetAssetAttrByAssetAttrId";
+    public static DeleteAssetAttr = "/AssetAttr/DeleteAssetAttr";
 
     //asset category
     public static AddNewAssetCategory = environment.FoundationR3Url + "/AssetCategory/AddAssetCategory"
@@ -591,6 +602,16 @@ export class URLConstant {
     public static DeleteVendorSchmMember = "/VendorSchmMbr/DeleteVendorSchmMember"
     public static GetListVendorSchmMemberByVendorSchmId = environment.FoundationR3Url + "/VendorSchmMbr/GetListVendorSchmMemberByVendorSchmId"
 
+    // VENDOR ATTR
+    public static GetListActiveVendorAttrByVendorCategoryCode = environment.FoundationR3Url + "/VendorAttr/GetListActiveVendorAttrByVendorCategoryCode";
+
+    // VENDOR ATTR CONTENT
+    public static AddRangeVendorAttrContent = environment.FoundationR3Url + "/VendorAttrContent/AddRangeVendorAttrContent";
+    public static EditListVendorAttrContent = environment.FoundationR3Url + "/VendorAttrContent/EditListVendorAttrContent";
+    public static DeleteRangeVendorAttrContentByIds = environment.FoundationR3Url + "/VendorAttrContent/DeleteRangeVendorAttrContentByIds";
+    public static GetListVendorAttrContentByVendorAttrId = environment.FoundationR3Url + "/VendorAttrContent/GetListVendorAttrContentByVendorAttrId";
+    public static GetListVendorAttrContentByVendorId = environment.FoundationR3Url + "/VendorAttrContent/GetListVendorAttrContentByVendorId";
+
     // VERIFICATION
     // REF VERF ANSWER TYPE
     public static AddRefVerfAnswerType = environment.FoundationR3Url + "/RefVerfAnswerType/AddRefVerfAnswerType";
@@ -629,8 +650,7 @@ export class URLConstant {
     public static GetVerfQuestionGrpDById = environment.FoundationR3Url + "/VerfQuestionGrpD/GetVerfQuestionGrpDById";
     public static GetVerfQuestionGrpDByGrpHId = environment.FoundationR3Url + "/VerfQuestionGrpD/GetVerfQuestionGrpDByGrpHId";
     public static GetVerfQuestionGrpDForUpdateById = environment.FoundationR3Url + "/VerfQuestionGrpD/GetVerfQuestionGrpDForUpdateById";
-    public static GetActiveVerfQuestionGrpDForUpdateByGrpHId = environment.FoundationR3Url + "/VerfQuestionGrpD/GetActiveVerfQuestionGrpDForUpdateByGrpHId";
-
+    
     // VERF RESULT
     public static AddVerfResult = environment.FoundationR3Url + "/VerfResult/AddVerfResult";
     public static EditVerfResult = environment.FoundationR3Url + "/VerfResult/EditVerfResult";
@@ -759,11 +779,16 @@ export class URLConstant {
     public static GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId"
     public static EditCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholder"
     public static GetCustCompanyMgmntShrholderForCustViewByCustId = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderForCustViewByCustId";
+    public static AddCustCompanyMgmntShrholderNew = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderNew";
+    public static EditCustCompanyMgmntShrholderNew = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholderNew";
+    public static DeleteCustCompanyMgmntShrholderNew = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/DeleteCustCompanyMgmntShrholderNew";
+    public static GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderIdNew = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderIdNew";
+    public static GetListCustCompanyMgmntShrholderNewByCustId = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetListCustCompanyMgmntShrholderNewByCustId";
 
     // CUST ATTR CONTENT
     public static GetCustAttrContentForCustViewByCustId = environment.FoundationR3Url + "/CustAttrContent/GetCustAttrContentForCustViewByCustId";
     public static AddEditListCustAttrContent = environment.FoundationR3Url + "/CustAttrContent/AddEditListCustAttrContent";
-     public static GetListCustAttrContentByCustIdForCust = environment.FoundationR3Url + "/CustAttrContent/GetListCustAttrContentByCustIdForCust";
+    public static GetListCustAttrContentByCustIdForCust = environment.FoundationR3Url + "/CustAttrContent/GetListCustAttrContentByCustIdForCust";
     public static GetListCustAttrContentByCustIdAndAttrGroup = environment.FoundationR3Url + "/CustAttrContent/GetListCustAttrContentByCustIdAndAttrGroup"
     //CUST CONTACT PERSON
     public static GetCustCompanyContactPersonForCustViewByCustId = environment.FoundationR3Url + "/CustCompanyContactPerson/GetCustCompanyContactPersonForCustViewByCustId";
@@ -799,6 +824,15 @@ export class URLConstant {
     public static DeleteCustPersonalContactPerson = environment.FoundationR3Url + "/CustPersonalContactPerson/DeleteCustPersonalContactPerson"
     public static EditCustPersonalContactPerson = environment.FoundationR3Url + "/CustPersonalContactPerson/EditCustPersonalContactPerson"
     public static GetCustPersonalContactPersonByCustPersonalContactPersonId = environment.FoundationR3Url + "/CustPersonalContactPerson/GetCustPersonalContactPersonByCustPersonalContactPersonId"
+    public static AddCustPersonalEmergencyContact = environment.FoundationR3Url + "/CustPersonalContactPerson/AddCustPersonalEmergencyContact";
+    public static EditCustPersonalEmergencyContact = environment.FoundationR3Url + "/CustPersonalContactPerson/EditCustPersonalEmergencyContact";
+    public static GetCustPersonalEmergencyContactByCustId = environment.FoundationR3Url + "/CustPersonalContactPerson/GetCustPersonalEmergencyContactByCustId";
+    public static AddCustPersonalFamily = environment.FoundationR3Url + "/CustPersonalFamily/AddCustPersonalFamily";
+    public static EditCustPersonalFamily = environment.FoundationR3Url + "/CustPersonalFamily/EditCustPersonalFamily";
+    public static DeleteCustPersonalFamily = environment.FoundationR3Url + "/CustPersonalFamily/DeleteCustPersonalFamily";
+    public static GetCustPersonalFamilyByCustPersonalFamilyId = environment.FoundationR3Url + "/CustPersonalFamily/GetCustPersonalFamilyByCustPersonalFamilyId";
+    public static GetListCustPersonalFamilyByCustId = environment.FoundationR3Url + "/CustPersonalFamily/GetListCustPersonalFamilyByCustId";
+    public static GetListCustPersonalEmergencyContactByCustId = environment.FoundationR3Url + "/CustPersonalContactPerson/GetListCustPersonalEmergencyContactByCustId";
 
     // SURVEY TASK
     public static GetListSrvyTaskBySrvyOrderId = environment.FoundationR3Url + "/SrvyTask/GetListSrvyTaskBySrvyOrderId";
@@ -851,5 +885,6 @@ export class URLConstant {
     public static GetListKeyValueByMrCustTypeCode = environment.FoundationR3Url + "/RefCustModel/GetListKeyValueByMrCustTypeCode";
     public static GetRefCustModelByCode = environment.FoundationR3Url + "/RefCustModel/GetRefCustModelByCode";
 
-
+    // INTEGRATION
+    public static SendMasterDailyToRabbitMq = environment.FoundationR3Url + "/Integration/SendMasterDailyToRabbitMq";
 }

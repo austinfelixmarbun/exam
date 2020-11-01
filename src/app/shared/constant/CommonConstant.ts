@@ -65,7 +65,7 @@ export class CommonConstant {
     public static SUPPLIER_ATPM = "SUPPLIER_ATPM";
 
     public static TITLE_SUPPLIER_ATPM = "Supplier ATPM";
-    public static TITLE_SUPPLIER_BRANCH = "Supplier Branch";
+    public static TITLE_SUPPLIER_BRANCH = "Supplier";
     public static TITLE_ASSET_INSCO_BRANCH = "Insurance Branch";
     public static TITLE_LIFE_INSCO_BRANCH = "Life Insurance Branch";
     public static TITLE_SURVEYOR_BRANCH = "Surveyor Branch";
@@ -140,7 +140,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeScoreTrxType = "SCORE_TRX_TYPE";
     public static RefMasterTypeCodeAttrInputType = "ATTR_INPUT_TYPE";
     public static RefMasterTypeCodeRegularExpression = "REGULAR_EXPRESSION";
-    
+    public static RefMasterTypeCodeAttributeGroup = "ATTRIBUTE_GROUP";
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
     // GENERAL SETTING CODE
@@ -180,8 +180,23 @@ export class CommonConstant {
 
     //Attribute Type Code
     public static AttrTypeCodeMaster = "MASTER";
+
+    // ID TYPE
+    public static MrIdTypeCodeEKTP = "EKTP";
     public static AttrGroupCustCompanyFinData = "CUST_COMPANY_FINDATA"
     public static AttrGroupCustPersonalFinData = "CUST_PERSONAL_FINDATA"
     public static AttrGroupCustCompanyOther = "CUST_COMPANY_OTH"
     public static AttrGroupCustPersonalOther= "CUST_PERSONAL_OTH"
+
+    // Integration
+    public static DailyMasterTypeSingle = "Date";
+    public static DailyMasterTypeRange = "Range";
+
+    // CUST MODEL
+    public static CUST_MODEL_EMP = "EMP";
+    public static CUST_MODEL_PROF = "PROF";
+    public static CUST_MODEL_SME = "SME";
+    public static CUST_MODEL_SMETBU = "SMETBU";
+    public static CUST_MODEL_SMEBU = "SMEBU";
+    public static CUST_MODEL_NONPROF = "NONPROF";
 }
