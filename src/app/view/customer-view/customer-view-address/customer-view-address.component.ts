@@ -50,8 +50,8 @@ export class CustomerViewAddressComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-    this.viewCustFinData.viewInput =   "./assets/ucviewgeneric/viewCustFinData.json";
-    this.viewCustFinData.viewEnvironment = environment.FoundationR3Url;
+    // this.viewCustFinData.viewInput =   "./assets/ucviewgeneric/viewCustFinData.json";
+    // this.viewCustFinData.viewEnvironment = environment.FoundationR3Url;
     var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
       response => {
