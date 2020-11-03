@@ -1,5 +1,5 @@
 <app-customer-contact-check #ContactPersonPaging *ngIf="isAdd == false" (outputValue)="terimaValue($event)"> </app-customer-contact-check>
-<app-customer-emergency-contact  *ngIf="isAdd == true" [listCustIdToExclude]="listCustIdToExclude" [custPersonalContactPersonId]="this.custPersonalContactPersonId" (outputTab)="terimaValue($event)" > </app-customer-emergency-contact>
+<!-- <app-customer-emergency-contact  *ngIf="isAdd == true" [listCustIdToExclude]="listCustIdToExclude" [custPersonalContactPersonId]="this.custPersonalContactPersonId" (outputTab)="terimaValue($event)" > </app-customer-emergency-contact> -->
 <div *ngIf="isAdd == false" class="form-actions right" style="text-align: right;">
     <!-- <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
       <i class="far fa-window-close"></i> Cancel

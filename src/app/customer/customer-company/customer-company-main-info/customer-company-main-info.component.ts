@@ -5,6 +5,10 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
+import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 
 @Component({
   selector: 'app-customer-company-main-info',
@@ -27,6 +31,8 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   MrCompanyTypeCode: string;
   GetListActiveRefMasterUrl: string;
   GetListActiveRefMasterWithReserveFieldAllUrl: string;
+  inputFieldObj: InputFieldObj;
+  inputAddressObj: InputAddressObj;
 
   CustomerCompanyForm = this.fb.group({
     CustModel: ['', [Validators.required]],
@@ -45,6 +51,16 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
 
   ngOnInit() {
     this.VipNotesRequired = true;
+
+    this.inputFieldObj = new InputFieldObj();
+    this.inputFieldObj.inputLookupObj = new InputLookupObj();
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.showSubsection = false;
+    this.inputAddressObj.title = "Customer Address";
+    this.inputAddressObj.default = UcAddressObj;
+    this.inputAddressObj.inputField = this.inputFieldObj;
+    this.inputAddressObj.showAllPhn = false;
+
     var refMasterObjCustModel = {
       MrCustTypeCode: CommonConstant.CustTypeCompany
     }
@@ -83,6 +99,18 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     if (this.IsVip == true) {
       this.VipNotes = this.CustomerCompanyForm.controls["VipNotes"].value;
     }
+
+    var custAddr = new Object();
+    var formValue = this.CustomerCompanyForm.value;
+    custAddr["Addr"] = formValue["UcAddress"]["Addr"];
+    custAddr["AreaCode1"] = formValue["UcAddress"]["AreaCode1"];
+    custAddr["AreaCode2"] = formValue["UcAddress"]["AreaCode2"];
+    custAddr["AreaCode3"] = formValue["UcAddress"]["AreaCode3"];
+    custAddr["AreaCode4"] = formValue["UcAddress"]["AreaCode4"];
+    custAddr["City"] = formValue["UcAddress"]["City"];
+    custAddr["Zipcode"] = formValue["UcAddressZipcode"]["value"];
+    custAddr["SubZipcode"] = formValue["UcAddressZipcode"]["value"];
+    sessionStorage.setItem("CustAddr", JSON.stringify(custAddr));
     this.router.navigate(["/Customer/CustomerCompany/DuplicateCheck"], { queryParams: { "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "TaxIdNo": this.TaxIdNo, "IsAffiliateWithMf": this.IsAffiliateWithMf, "IsVip": this.IsVip, "VipNotes": this.VipNotes } });
   }
 

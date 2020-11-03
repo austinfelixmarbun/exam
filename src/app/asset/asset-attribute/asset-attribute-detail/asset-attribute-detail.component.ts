@@ -75,13 +75,15 @@ export class AssetAttributeDetailComponent implements OnInit {
     getListAssetAttr.subscribe(
       response => {
           this.responseListAssetAttr = response['ListAssetAttrObj'];
-          for(var i=0;i<this.responseListAssetAttr.length;i++){
-            this.listRefAttrId.push(this.responseListAssetAttr[i]['RefAttrId']);
+          if(this.responseListAssetAttr.length > 0){
+            for(var i=0;i<this.responseListAssetAttr.length;i++){
+              this.listRefAttrId.push(this.responseListAssetAttr[i]['RefAttrId']);
+            }
+            this.criteriaObj.listValue = this.listRefAttrId;
+            this.criteriaList.push(this.criteriaObj);
+            this.inputLookupObj.addCritInput = this.criteriaList;
+            this.ucLookupAssetAttr.setAddCritInput();
           }
-          this.criteriaObj.listValue = this.listRefAttrId;
-          this.criteriaList.push(this.criteriaObj);
-          this.inputLookupObj.addCritInput = this.criteriaList;
-          this.ucLookupAssetAttr.setAddCritInput();
       }
     );
   }
@@ -103,10 +105,13 @@ export class AssetAttributeDetailComponent implements OnInit {
           if(index > -1){
             this.listRefAttrId.splice(index,1);
           }
-          this.criteriaObj.listValue = this.listRefAttrId;
-          this.criteriaList.push(this.criteriaObj);
-          this.inputLookupObj.addCritInput = this.criteriaList;
-          this.ucLookupAssetAttr.setAddCritInput();
+          if(this.listRefAttrId.length > 0){
+            this.criteriaObj.listValue = this.listRefAttrId;
+            this.criteriaList.push(this.criteriaObj);
+            this.inputLookupObj.addCritInput = this.criteriaList;
+            this.ucLookupAssetAttr.setAddCritInput();
+          }
+
           this.RowVersion = response[0]['RowVersion'];
         });  
     }

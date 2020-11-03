@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -11,13 +11,15 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { RequestNegativeCustObj } from 'app/shared/model/RequestNegativeCustObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { map, mergeMap } from 'rxjs/operators';
+import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 
 @Component({
   selector: 'app-customer-company-duplicate-check',
   templateUrl: './customer-company-duplicate-check.component.html',
   styleUrls: [],
 })
-export class CustomerCompanyDuplicateCheckComponent implements OnInit {
+export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy {
   @Input() IsFromCustMgmntShareholder: boolean;
   @Input() CustMgmntShareholderData: Object;
   @Output() ResponseSaveData: EventEmitter<any>;
@@ -156,6 +158,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
       this.addCustObj = new AddCustObj();
       this.addCustObj.CustObj = new CustObj();
       this.addCustObj.CustCompanyObj = new CustCompanyObj();
+      this.addCustObj.CustAddr = new CustAddrObj();
       this.addCustObj.CustObj.CustName = this.CustName;
       this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
       this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Company;
@@ -174,6 +177,17 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
         this.addCustObj.CustObj.IsAffiliateWithMf = false;
       }
       this.addCustObj.CustObj.VipNotes = this.VipNotes;
+
+      var custAddr = JSON.parse(sessionStorage.getItem("CustAddr"));
+      this.addCustObj.CustAddr.Addr = custAddr["Addr"];
+      this.addCustObj.CustAddr.AreaCode1 = custAddr["AreaCode1"];
+      this.addCustObj.CustAddr.AreaCode2 = custAddr["AreaCode2"];
+      this.addCustObj.CustAddr.AreaCode3 = custAddr["AreaCode3"];
+      this.addCustObj.CustAddr.AreaCode4 = custAddr["AreaCode4"];
+      this.addCustObj.CustAddr.City = custAddr["City"];
+      this.addCustObj.CustAddr.Zipcode = custAddr["Zipcode"];
+      this.addCustObj.CustAddr.SubZipcode = custAddr["SubZipcode"];
+
       this.http.post(URLConstant.AddNewCust, this.addCustObj).subscribe(
         (response) => {
           this.resultData = response;
@@ -186,11 +200,19 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
 
   EditCustCompany(item) {
     var custObj = { CustNo: item.CustNo, CustName: item.CustName, TaxIdNo: item.TaxIdNo };
-    this.http.post(URLConstant.GetCustCompanyForUpdateByCustNo, custObj).subscribe(
-      (response) => {
+    this.http.post(URLConstant.GetCustCompanyForUpdateByCustNo, custObj).pipe(
+      map((response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.CustObj = response['CustObj'];
         this.addCustObj.CustCompanyObj = response['CustCompanyObj'];
+        return response;
+      }),
+      mergeMap((response) => {
+        return this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.addCustObj.CustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal });
+      })
+    ).subscribe(
+      (response) => {
+        this.addCustObj.CustAddr = response as CustAddrObj;
         this.addCustObj.CustObj.CustName = item.CustName;
         this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
         this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Company;
@@ -209,6 +231,16 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
           this.addCustObj.CustObj.IsAffiliateWithMf = false;
         }
         this.addCustObj.CustObj.VipNotes = this.VipNotes;
+
+        var custAddr = JSON.parse(sessionStorage.getItem("CustAddr"));
+        this.addCustObj.CustAddr.Addr = custAddr["Addr"];
+        this.addCustObj.CustAddr.AreaCode1 = custAddr["AreaCode1"];
+        this.addCustObj.CustAddr.AreaCode2 = custAddr["AreaCode2"];
+        this.addCustObj.CustAddr.AreaCode3 = custAddr["AreaCode3"];
+        this.addCustObj.CustAddr.AreaCode4 = custAddr["AreaCode4"];
+        this.addCustObj.CustAddr.City = custAddr["City"];
+        this.addCustObj.CustAddr.Zipcode = custAddr["Zipcode"];
+        this.addCustObj.CustAddr.SubZipcode = custAddr["SubZipcode"];
         this.http.post(URLConstant.EditDuplicateCust, this.addCustObj).subscribe(
           () => {
             if(this.IsFromCustMgmntShareholder){
@@ -254,6 +286,15 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
           this.RequestNegativeCustObj.IsAffiliateWithMf = false;
         }
         this.RequestNegativeCustObj.VipNotes = this.VipNotes;
+
+        var custAddr = JSON.parse(sessionStorage.getItem("CustAddr"));
+        this.RequestNegativeCustObj.LegalAddr = custAddr["Addr"];
+        this.RequestNegativeCustObj.AreaCode1 = custAddr["AreaCode1"];
+        this.RequestNegativeCustObj.AreaCode2 = custAddr["AreaCode2"];
+        this.RequestNegativeCustObj.AreaCode3 = custAddr["AreaCode3"];
+        this.RequestNegativeCustObj.AreaCode4 = custAddr["AreaCode4"];
+        this.RequestNegativeCustObj.City = custAddr["City"];
+        this.RequestNegativeCustObj.Zipcode = custAddr["Zipcode"];
         this.http.post(URLConstant.EditDuplicateNegativeCust, this.RequestNegativeCustObj).subscribe(
           (response) => {
             if(this.IsFromCustMgmntShareholder){
@@ -275,5 +316,9 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit {
         );
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    sessionStorage.removeItem("CustAddr");
   }
 }
