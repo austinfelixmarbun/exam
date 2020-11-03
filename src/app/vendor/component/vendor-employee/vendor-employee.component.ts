@@ -188,6 +188,13 @@ export class VendorEmployeeComponent implements OnInit {
     critObj.value = this.objInput.VendorId;
     this.inputLookupSpvObj.addCritInput.push(critObj);
 
+    if (this.mode == "edit") {
+      var critObj = new CriteriaObj();
+      critObj.propName = 'VENDOR_EMP_ID';
+      critObj.restriction = AdInsConstant.RestrictionNeq;
+      critObj.value = this.VendorEmpId + '';
+      this.inputLookupSpvObj.addCritInput.push(critObj);
+    }
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
     this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
