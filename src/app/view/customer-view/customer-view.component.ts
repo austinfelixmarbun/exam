@@ -144,12 +144,12 @@ export class CustomerViewComponent implements OnInit {
       }
       else if (ev == 5) {
         this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/View/Customer/CoyLegal'], { queryParams: { "CustId": this.CustId } });
+          this.router.navigate(['/View/Customer/CoyFinancial'], { queryParams: { "CustId": this.CustId } });
         });
       }
       else if (ev == 6) {
         this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/View/Customer/CoyManagement'], { queryParams: { "CustId": this.CustId } });
+          this.router.navigate(['/View/Customer/CoyLegal'], { queryParams: { "CustId": this.CustId } });
         });
       }
       else if (ev == 7) {
