@@ -22,6 +22,7 @@ export class CustomerViewAddressComponent implements OnInit {
   inputObj: any;
   responseResultCustAddr: any;
   responseResultCustAddrHist: any;
+  selectedOption: any;
 
   GetListCustAddrByCustIdForCustomerPersonalViewUrl: string;
   GetListCustAddrHistByCustIdForCustomerPersonalViewUrl: string;
