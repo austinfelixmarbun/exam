@@ -160,13 +160,13 @@ export class EditMainDataPersonalComponent implements OnInit {
           IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
           VipNotes: this.tempCustObj.VipNotes,
         });
-        if(this.tempCustObj.VipNotes!= null){
+        if (this.tempCustObj.VipNotes != null) {
           this.VipNotesRequired = true;
-        }else{
+        } else {
           this.VipNotesRequired = false;
         }
-        if(this.tempCustObj.IsVip==false){ 
-        this.CustomerPersonalForm.controls.VipNotes.disable();
+        if (this.tempCustObj.IsVip == false) {
+          this.CustomerPersonalForm.controls.VipNotes.disable();
         }
         this.CustomerPersonalForm.controls["MrIdTypeCode"].disable();
         this.CustomerPersonalForm.controls["IdNo"].disable();
@@ -251,6 +251,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custObj.CustAddr.City = formValue["UcAddress"]["City"];
     this.custObj.CustAddr.Zipcode = formValue["UcAddressZipcode"]["value"];
     this.custObj.CustAddr.SubZipcode = formValue["UcAddressZipcode"]["value"];
+    this.custObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
     this.http.post(this.editCustUrl, this.custObj).subscribe(
       (response) => {
         this.http.post(this.editCustPersonalUrl, this.custPersonalObj).subscribe(
