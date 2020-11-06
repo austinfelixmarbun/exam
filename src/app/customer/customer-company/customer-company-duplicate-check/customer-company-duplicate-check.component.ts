@@ -187,6 +187,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       this.addCustObj.CustAddr.City = custAddr["City"];
       this.addCustObj.CustAddr.Zipcode = custAddr["Zipcode"];
       this.addCustObj.CustAddr.SubZipcode = custAddr["SubZipcode"];
+      this.addCustObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
 
       this.http.post(URLConstant.AddNewCust, this.addCustObj).subscribe(
         (response) => {
