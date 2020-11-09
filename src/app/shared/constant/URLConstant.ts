@@ -352,6 +352,14 @@ export class URLConstant {
     public static GetValueCustModel = environment.FoundationR3Url + "/RefCustModel/GetListKeyValueByCode";
     public static GetRefProfessionByProfessionCode = environment.FoundationR3Url + "/RefProfession/GetRefProfessionByProfessionCode"
 
+    //REF REASON
+    public static AddRefReason = environment.FoundationR3Url + "/RefReason/AddRefReason";
+    public static EditRefReason = environment.FoundationR3Url + "/RefReason/EditRefReason";
+    public static GetRefReasonById = environment.FoundationR3Url + "/RefReason/GetRefReasonByRefReasonId";
+
+    //REF REASON TYPE
+    public static GetValueReasonType = environment.FoundationR3Url + "/RefReasonType/GetListKeyValueByCode";
+
     //GENERIC
     public static GetObjectBySQL = "/Generic/GetObjectBySQL";
     public static AddObjectBySQL = "/Generic/AddObjectBySQL";
