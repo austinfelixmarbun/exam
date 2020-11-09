@@ -351,6 +351,7 @@ export class URLConstant {
     public static GetRefProfessionById = environment.FoundationR3Url + "/RefProfession/GetRefProfessionByRefProfessionId";
     public static GetValueCustModel = environment.FoundationR3Url + "/RefCustModel/GetListKeyValueByCode";
     public static GetRefProfessionByProfessionCode = environment.FoundationR3Url + "/RefProfession/GetRefProfessionByProfessionCode"
+    public static GetRefProfessionByRefProfessionId = environment.FoundationR3Url + "/RefProfession/GetRefProfessionByRefProfessionId";
 
     //GENERIC
     public static GetObjectBySQL = "/Generic/GetObjectBySQL";
@@ -887,4 +888,16 @@ export class URLConstant {
 
     // INTEGRATION
     public static SendMasterDailyToRabbitMq = environment.FoundationR3Url + "/Integration/SendMasterDailyToRabbitMq";
+
+    // UPDATE MASTER CUST
+    public static GetCustDataForUpdateMasterCustDetail = environment.FoundationR3Url + "/UpdateMasterCust/GetCustDataForUpdateMasterCustDetail";
+    public static GetCustAddrDataForUpdateMasterCustAddr = environment.FoundationR3Url + "/UpdateMasterCust/GetCustAddrDataForUpdateMasterCustAddr";
+    public static GetCustFamilyDataForUpdateMasterCustFamily = environment.FoundationR3Url + "/UpdateMasterCust/GetCustFamilyDataForUpdateMasterCustFamily";
+    public static GetCustEmergencyDataForUpdateMasterCustEmergency = environment.FoundationR3Url + "/UpdateMasterCust/GetCustEmergencyDataForUpdateMasterCustEmergency";
+    public static GetCustJobDataForUpdateMasterCustJobData = environment.FoundationR3Url + "/UpdateMasterCust/GetCustJobDataForUpdateMasterCustJobData";
+    public static EditMasterCustomer = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustomer";
+    public static EditMasterCustAddr = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustAddr";
+    public static EditMasterCustFamily = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustFamily";
+    public static EditMasterCustEmergency = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustEmergency";
+    public static EditMasterCustJobData = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustJobData";
 }

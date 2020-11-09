@@ -141,6 +141,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeAttrInputType = "ATTR_INPUT_TYPE";
     public static RefMasterTypeCodeRegularExpression = "REGULAR_EXPRESSION";
     public static RefMasterTypeCodeAttributeGroup = "ATTRIBUTE_GROUP";
+    public static RefMasterTypeCodeBuildingOwnership = "BUILDING_OWNERSHIP";
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
     // GENERAL SETTING CODE

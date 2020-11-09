@@ -98,6 +98,16 @@ import { CustomerFamilyPagingComponent } from './customer-personal/customer-fami
 import { CustomerFamilyMenuComponent } from './customer-family-menu/customer-family-menu.component';
 import { CustomerShareholderMenuComponent } from './customer-shareholder-menu/customer-shareholder-menu.component';
 import { CustomerGuarantorMenuComponent } from './customer-guarantor-menu/customer-guarantor-menu.component';
+import { CustomerUpdateMasterComponent } from './customer-update-master/customer-update-master.component';
+import { CustomerUpdateMasterDetailComponent } from './customer-update-master/customer-update-master-detail/customer-update-master-detail.component';
+import { UpdateCustomerPersonalDetailComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-personal-detail/update-customer-personal-detail.component';
+import { UpdateCustomerAddressComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-address/update-customer-address.component';
+import { UpdateCustomerFamilyComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-family/update-customer-family.component';
+import { UpdateCustomerEmergencyComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-emergency/update-customer-emergency.component';
+import { UpdateCustomerJobDataComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-job-data/update-customer-job-data.component';
+import { UpdateCustomerFinancialDataComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-financial-data/update-customer-financial-data.component';
+import { UpdateCustomerEmergencyDetailComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-emergency/update-customer-emergency-detail/update-customer-emergency-detail.component';
+import { UpdateCustomerEmergencyMainCompComponent } from './customer-personal/customer-update-master/update-customer-emergency/update-customer-emergency-main-comp/update-customer-emergency-main-comp.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -212,7 +222,17 @@ export const customCurrencyMaskConfig = {
     CustomerFamilyPagingComponent,
     CustomerFamilyMenuComponent,
     CustomerShareholderMenuComponent,
-    CustomerGuarantorMenuComponent
+    CustomerGuarantorMenuComponent,
+    CustomerUpdateMasterComponent,
+    CustomerUpdateMasterDetailComponent,
+    UpdateCustomerPersonalDetailComponent,
+    UpdateCustomerAddressComponent,
+    UpdateCustomerFamilyComponent,
+    UpdateCustomerEmergencyComponent,
+    UpdateCustomerJobDataComponent,
+    UpdateCustomerFinancialDataComponent,
+    UpdateCustomerEmergencyDetailComponent,
+    UpdateCustomerEmergencyMainCompComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })
