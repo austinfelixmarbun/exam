@@ -33,6 +33,7 @@ export const ROUTES: RouteInfo[] = [
       { Path: '/CommonSetting/EconomicSector/Paging', Title: 'Economic Sector', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/CommonSetting/Currency/Paging', Title: 'Currency', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/CommonSetting/Profession/Paging', Title: 'Profession', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/Reason/Paging', Title: 'Reason', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/SystemSetting/Notification', Title: 'Notification', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/SystemSetting/NotificationApproval', Title: 'Notification Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/SystemSetting/RefForm/Paging', Title: 'Ref Form', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
