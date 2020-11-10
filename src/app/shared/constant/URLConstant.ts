@@ -895,9 +895,11 @@ export class URLConstant {
     public static GetCustFamilyDataForUpdateMasterCustFamily = environment.FoundationR3Url + "/UpdateMasterCust/GetCustFamilyDataForUpdateMasterCustFamily";
     public static GetCustEmergencyDataForUpdateMasterCustEmergency = environment.FoundationR3Url + "/UpdateMasterCust/GetCustEmergencyDataForUpdateMasterCustEmergency";
     public static GetCustJobDataForUpdateMasterCustJobData = environment.FoundationR3Url + "/UpdateMasterCust/GetCustJobDataForUpdateMasterCustJobData";
+    public static GetCustFinDataForUpdateMasterCustFinData = environment.FoundationR3Url + "/UpdateMasterCust/GetCustFinDataForUpdateMasterCustFinData";
     public static EditMasterCustomer = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustomer";
     public static EditMasterCustAddr = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustAddr";
     public static EditMasterCustFamily = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustFamily";
     public static EditMasterCustEmergency = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustEmergency";
     public static EditMasterCustJobData = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustJobData";
+    public static EditMasterCustFinData = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustFinData";
 }

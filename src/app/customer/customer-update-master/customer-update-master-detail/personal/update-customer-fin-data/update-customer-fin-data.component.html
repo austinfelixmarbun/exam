@@ -1,0 +1,249 @@
+<form class="form form-horizontal" [formGroup]="CustomerFinDataForm"
+  (ngSubmit)="CustomerFinDataForm.valid && SaveValue()" #enjiForm="ngForm">
+  <div class="form-body">
+    <div class="form-group row">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">Application Data</div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-raised btn-primary" (click)="CopyAllHandler()">Copy All</button>
+      </div>
+      <div class="col-md-4">Master Customer Data</div>
+    </div>
+    <lib-ucSubsection [id]="'FinancialId'" [title]="'Financial'" [panel]="'FinancialSection'">
+    </lib-ucSubsection>
+    <div id="FinancialSection">
+      <div class="form-group row">
+        <label class="col-md-2 adInsLabel" translate>Monthly Income</label>
+        <div class="col-md-4">
+          <label>{{AppCustFinData.MonthlyIncomeAmt}}</label>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MonthlyIncomeAmt')">Copy</button>
+        </div>
+        <div class="col-md-4">
+          <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyIncomeAmt"
+            [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFinDataForm.controls.MonthlyIncomeAmt.invalid}">
+          <lib-uc-show-errors [control]="CustomerFinDataForm.controls.MonthlyIncomeAmt" [submit]="enjiForm.submitted">
+          </lib-uc-show-errors>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 adInsLabel" translate>Source Of Income</label>
+        <div class="col-md-4">
+          <label>{{AppCustFinData.MrSourceOfIncomeCode}}</label>
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-4">
+          <select class="form-control adInsInput" formControlName="MrSourceOfIncomeCode"
+            [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFinDataForm.controls.MrSourceOfIncomeCode.invalid}">
+            <option *ngFor="let item of SourceIncomeList" [value]="item.Key">{{item.Value}}</option>
+          </select>
+          <lib-uc-show-errors [control]="CustomerFinDataForm.controls.MrSourceOfIncomeCode" [submit]="enjiForm.submitted">
+          </lib-uc-show-errors>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 adInsLabel" translate>Join Income</label>
+        <div class="col-md-4">
+          <label>{{AppCustFinData.IsJoinIncome ?? 'Yes' : 'No'}}</label>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IsJoinIncome')">Copy</button>
+        </div>
+        <div class="col-md-4">
+          <input type="checkbox" formControlName="IsJoinIncome" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 adInsLabel" translate>Spouse Monthly Income</label>
+        <div class="col-md-4">
+          <label>{{AppCustFinData.SpouseMonthlyIncomeAmt}}</label>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('SpouseMonthlyIncomeAmt')">Copy</button>
+        </div>
+        <div class="col-md-4">
+          <input type="" currencyMask class="form-control adInsInput" formControlName="SpouseMonthlyIncomeAmt"
+            [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFinDataForm.controls.SpouseMonthlyIncomeAmt.invalid}">
+          <lib-uc-show-errors [control]="CustomerFinDataForm.controls.SpouseMonthlyIncomeAmt" [submit]="enjiForm.submitted">
+          </lib-uc-show-errors>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 adInsLabel" translate>Total Income</label>
+        <div class="col-md-4">
+          <label>{{AppCustFinData.TotalIncomeAmt}}</label>
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-4">
+          <label>{{CustomerFinDataForm.controls.TotalIncomeAmt.value}}</label>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 adInsLabel" translate>Monthly Expense</label>
+        <div class="col-md-4">
+          <label>{{AppCustFinData.MonthlyExpenseAmt}}</label>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MonthlyExpenseAmt')">Copy</button>
+        </div>
+        <div class="col-md-4">
+          <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyExpenseAmt"
+            [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFinDataForm.controls.MonthlyExpenseAmt.invalid}">
+          <lib-uc-show-errors [control]="CustomerFinDataForm.controls.MonthlyExpenseAmt" [submit]="enjiForm.submitted">
+          </lib-uc-show-errors>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 adInsLabel" translate>Monthly Installment</label>
+        <div class="col-md-4">
+          <label>{{AppCustFinData.MonthlyInstallmentAmt}}</label>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MonthlyInstallmentAmt')">Copy</button>
+        </div>
+        <div class="col-md-4">
+          <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyInstallmentAmt"
+            [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFinDataForm.controls.MonthlyInstallmentAmt.invalid}">
+          <lib-uc-show-errors [control]="CustomerFinDataForm.controls.MonthlyInstallmentAmt" [submit]="enjiForm.submitted">
+          </lib-uc-show-errors>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 adInsLabel" translate>Nett Income</label>
+        <div class="col-md-4">
+          <label>{{AppCustFinData.NettIncomeAmt}}</label>
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-4">
+          <label>{{CustomerFinDataForm.controls.NettIncomeAmt.value}}</label>
+        </div>
+      </div>
+    </div>
+    <lib-ucSubsection [id]="'BankAccId'" [title]="'Bank Account'" [panel]="'BankAccSection'">
+    </lib-ucSubsection>
+    <div id="BankAccSection">
+      <div class="form-group row" *ngFor="let item of ArrayNum(num).fill(1); let i = index">
+        <div class="col-md-6">
+          <div *ngIf="AppCustBankAcc.BankAccNo">
+            <div class="col-md-12" style="padding: 0;">
+              <label class="col-md-9" style="padding-left: 0;">{{i}}. {{AppCustBankAcc.BankName}} - {{AppCustBankAcc.BankAccNo}} - {{AppCustBankAcc.BankAccName}} - {{AppCustBankAcc.BankBranch}}{{AppCustBankAcc.IsDefault ? ' - Default' : ''}}</label>
+              <div class="col-md-3" *ngIf="!AppCustBankAcc.IsMasterData && !AppCustBankAcc.IsAddedBankAcc"><button type="button" class="btn btn-raised btn-primary" (click)="AddNewBankAcc(i)">Add As New Data</button></div>
+            </div>
+            <div class="col-md-12" style="padding: 0;">
+              <label class="col-md-4" style="padding-left: 0;">Bank Statement</label>
+              <div class="col-md-4" *ngIf="!AppCustBankAcc.IsMasterStmnt && !AppCustBankAcc.IsAddedBankStmnt"><button type="button" class="btn btn-raised btn-primary" (click)="AddNewBankStmnt(i)">Add As New Data</button></div>
+            </div>
+            <div class="col-md-12">
+              <table class="table table-responsive-md text-center table-hover">
+                <thead>
+                  <tr class="table-header">
+                    <th style="text-align: left;">
+                      <span class="thead-header" name='Month' translate>
+                        MONTH
+                      </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span class="thead-header" name='Year' translate>  
+                        YEAR
+                      </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span class="thead-header" name='Debit' translate>
+                        DEBIT
+                      </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span class="thead-header" name='Credit' translate>
+                        CREDIT
+                      </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span class="thead-header" name='Balance' translate>
+                        BALANCE
+                      </span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let appStmnt of AppCustBankAcc[i].CustBankStmntList;">
+                    <td style="text-align: left;">{{appStmnt.Month}}</td>
+                    <td style="text-align: left;">{{appStmnt.Year}}</td>
+                    <td style="text-align: left;">{{appStmnt.DebitAmt}}</td>
+                    <td style="text-align: left;">{{appStmnt.CreditAmt}}</td>
+                    <td style="text-align: left;">{{appStmnt.BalanceAmt}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div *ngIf="MainCustBankAcc.BankAccNo">
+            <div class="col-md-12" style="padding: 0;">
+              <label class="col-md-9" style="padding-left: 0;">{{i}}. {{MainCustBankAcc.BankName}} - {{MainCustBankAcc.BankAccNo}} - {{MainCustBankAcc.BankAccName}} - {{MainCustBankAcc.BankBranch}}{{MainCustBankAcc.IsDefault ? ' - Default' : ''}}</label>
+              <div class="col-md-3" *ngIf="!MainCustBankAcc.IsMasterData"><button type="button" class="btn btn-raised btn-primary" (click)="CancelBankAcc(i)">Cancel Add Bank Account</button></div>
+            </div>
+            <div class="col-md-12" style="padding: 0;">
+              <label class="col-md-4" style="padding-left: 0;">Bank Statement</label>
+              <div class="col-md-4" *ngIf="!MainCustBankAcc.IsMasterStmnt"><button type="button" class="btn btn-raised btn-primary" (click)="CancelBankStmnt(i)">Cancel Add Bank Statement</button></div>
+            </div>
+            <div class="col-md-12">
+              <table class="table table-responsive-md text-center table-hover">
+                <thead>
+                  <tr class="table-header">
+                    <th style="text-align: left;">
+                      <span class="thead-header" name='Month' translate>
+                        MONTH
+                      </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span class="thead-header" name='Year' translate>  
+                        YEAR
+                      </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span class="thead-header" name='Debit' translate>
+                        DEBIT
+                      </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span class="thead-header" name='Credit' translate>
+                        CREDIT
+                      </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span class="thead-header" name='Balance' translate>
+                        BALANCE
+                      </span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let mainStmnt of MainCustBankAcc[i].CustBankStmntList;">
+                    <td style="text-align: left;">{{mainStmnt.Month}}</td>
+                    <td style="text-align: left;">{{mainStmnt.Year}}</td>
+                    <td style="text-align: left;">{{mainStmnt.DebitAmt}}</td>
+                    <td style="text-align: left;">{{mainStmnt.CreditAmt}}</td>
+                    <td style="text-align: left;">{{mainStmnt.BalanceAmt}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-actions right">
+    <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
+      <i class="far fa-window-close"></i> Cancel
+    </button>
+    <button type="submit" class="btn btn-raised btn-primary" translate>
+      <i class="far fa-check-square"></i> Save
+    </button>
+  </div>
+</form>

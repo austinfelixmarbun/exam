@@ -108,6 +108,7 @@ import { UpdateCustomerJobDataComponent } from './customer-update-master/custome
 import { UpdateCustomerFinancialDataComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-financial-data/update-customer-financial-data.component';
 import { UpdateCustomerEmergencyDetailComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-emergency/update-customer-emergency-detail/update-customer-emergency-detail.component';
 import { UpdateCustomerEmergencyMainCompComponent } from './customer-personal/customer-update-master/update-customer-emergency/update-customer-emergency-main-comp/update-customer-emergency-main-comp.component';
+import { UpdateCustomerFinDataComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-fin-data/update-customer-fin-data.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -232,7 +233,8 @@ export const customCurrencyMaskConfig = {
     UpdateCustomerJobDataComponent,
     UpdateCustomerFinancialDataComponent,
     UpdateCustomerEmergencyDetailComponent,
-    UpdateCustomerEmergencyMainCompComponent
+    UpdateCustomerEmergencyMainCompComponent,
+    UpdateCustomerFinDataComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })
