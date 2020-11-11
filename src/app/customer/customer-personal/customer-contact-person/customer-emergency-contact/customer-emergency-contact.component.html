@@ -35,7 +35,7 @@
         </div>
 
         <div class="form-group row  ">
-          <label class="col-md-2 adInsLabel" translate>ID TYPE </label>
+          <label class="col-md-2 adins-required-label" translate>ID Type </label>
           <div class="col-md-4">
             <select class="form-control adInsInput" (change)="onOptionIdTypeSelected($event)"
               style="width: auto" formControlName="MrIdTypeCode"
@@ -84,7 +84,8 @@
           <label class="col-md-2 adInsLabel" [ngClass]="{'adins-required-label' : tempKTPCheck==false} "
             translate>ID Expired Date</label>
           <div class="col-md-4">
-            <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt"
+            <input *ngIf="['NPWP','AKTA','EKTP'].includes(CustomerContactForm.controls.MrIdTypeCode.value)" readonly type="date" class="form-control" id="idExpDt" formControlName="IdExpiredDt">
+            <input *ngIf="!['NPWP','AKTA','EKTP'].includes(CustomerContactForm.controls.MrIdTypeCode.value)" type="date" class="form-control adInsInput" formControlName="IdExpiredDt"
               [min]="businessDtMax | date: 'yyyy-MM-dd'"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.IdExpiredDt.invalid}">
             <lib-uc-show-errors [control]="CustomerContactForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
@@ -102,7 +103,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-md-2 adInsLabel" translate>Gender</label>
+          <label class="col-md-2 adins-required-label" translate>Gender</label>
           <div class="col-md-4">
             <select class="form-control adInsInput" style="width: auto" formControlName="MrGenderCode"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrGenderCode.invalid }">
@@ -144,7 +145,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-md-2 adInsLabel" translate>Birth Date</label>
+          <label class="col-md-2 adins-required-label" translate>Birth Date</label>
           <div class="col-md-4">
             <input type="date" class="form-control adInsInput" formControlName="BirthDt"
               [max]="businessDtMin | date: 'yyyy-MM-dd'"
@@ -187,7 +188,7 @@
       </lib-ucSubsection>
       <div id="ContactInfromationId">
         <div class="form-group row">
-          <label class="col-md-2 adInsLabel" translate [ngClass]="{'adins-required-label' : tempMobilePhone1==true} " >Mobile Phone 1 </label>
+          <label class="col-md-2 adins-required-label" translate [ngClass]="{'adins-required-label' : tempMobilePhone1==true} " >Mobile Phone 1 </label>
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="MobilePhnNo1"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MobilePhnNo1.invalid}">
@@ -235,11 +236,10 @@
             </div>
           </div>
         </div>
-        <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerContactForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'">
-        </lib-ucaddress> 
-        <!-- <lib-ucaddress [UCAddrForm]="CustomerContactForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'"
-          [default]="UcAddressObj" [inputField]="inputFieldObj" [showAllPhn]="false">
+        <!-- <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerContactForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'">
         </lib-ucaddress>  -->
+        <lib-ucaddress [UCAddrForm]="CustomerContactForm" [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'UcAddress'">
+        </lib-ucaddress> 
       </div> 
     </div>
 

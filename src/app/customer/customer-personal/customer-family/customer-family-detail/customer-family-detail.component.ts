@@ -147,8 +147,14 @@ export class CustomerFamilyDetailComponent implements OnInit {
       criteriaCustObj.propName = 'CUST_NO';
       criteriaCustObj.listValue = this.listCustIdToExclude;
       criteriaListCust.push(criteriaCustObj);
-      this.existingCustomerLookUpObj.addCritInput = criteriaListCust;
     }
+    var criteriaCustObj = new CriteriaObj();
+    criteriaCustObj.DataType = "text";
+    criteriaCustObj.restriction = AdInsConstant.RestrictionNeq;
+    criteriaCustObj.propName = 'CUST_ID';
+    criteriaCustObj.value = this.custIdInput.toString();
+    criteriaListCust.push(criteriaCustObj);
+    this.existingCustomerLookUpObj.addCritInput = criteriaListCust;
 
     this.criteriaExistingList = new Array();
     this.criteriaExistingObj = new CriteriaObj();
@@ -351,6 +357,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
           value: custAddrData.Zipcode
         });
 
+        this.existingCustomerLookUpObj.isReadonly = true;
         this.CustomerFamilyForm.controls.Gender.disable();
         this.CustomerFamilyForm.controls.MrIdTypeCode.disable();
         this.CustomerFamilyForm.controls.BirthPlace.disable();
@@ -457,8 +464,12 @@ export class CustomerFamilyDetailComponent implements OnInit {
     // this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"], { queryParams: { "CustName": this.CustName, "Gender": this.Gender, "MrIdTypeCode": this.MrIdTypeCode, "CustModel": this.CustModel, "BirthPlace": this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo, "IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName, "IsVip": this.IsVip, "IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes, "MrMaritalStatCode": this.MrMaritalStatCode } });
   }
   onOptionsSelected(event) {
-    if (event.target.value == this.KTP) {
+    let noExpDate = [CommonConstant.MrIdTypeCodeEKTP, CommonConstant.MrIdTypeCodeNPWP, CommonConstant.MrIdTypeCodeAKTA];
+    if (noExpDate.includes(event.target.value)) {
       this.CustomerFamilyForm.controls.IdExpiredDt.clearValidators();
+      this.CustomerFamilyForm.patchValue({
+        IdExpiredDt : ''
+      })
       this.tempKTPCheck = true;
     } else {
       this.CustomerFamilyForm.controls.IdExpiredDt.setValidators(Validators.required);

@@ -133,6 +133,10 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       this.DuplicateCustObj.TaxIdNo = this.CustFamilyTabData["TaxIdNo"];
       this.DuplicateCustObj.MotherMaidenName = this.CustFamilyTabData["MotherMaidenName"];
       this.DuplicateCustObj.BirthDt = this.CustFamilyTabData["BirthDt"];
+      this.BirthPlace = this.CustFamilyTabData["BirthPlace"];
+      this.Gender = this.CustFamilyTabData["Gender"];
+      this.MrIdTypeCode = this.CustFamilyTabData["MrIdTypeCode"];
+      this.CustModel = this.CustFamilyTabData["CustModel"];
       this.IsAffiliateWithMf = "false";
       this.IsVip = "false";
     }
@@ -143,6 +147,10 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       this.DuplicateCustObj.TaxIdNo = this.CustMgmntShareholderData["TaxIdNo"];
       this.DuplicateCustObj.MotherMaidenName = "";
       this.DuplicateCustObj.BirthDt = this.CustMgmntShareholderData["BirthDt"];
+      this.BirthPlace = this.CustMgmntShareholderData["BirthPlace"];
+      this.Gender = this.CustMgmntShareholderData["Gender"];
+      this.MrIdTypeCode = this.CustMgmntShareholderData["MrIdTypeCode"];
+      this.CustModel = this.CustMgmntShareholderData["CustModel"];
       this.IsAffiliateWithMf = "false";
       this.IsVip = "false";
     }
@@ -378,15 +386,15 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
         this.addCustObj.CustPersonalObj.MotherMaidenName = item.MotherMaidenName;
         this.addCustObj.CustPersonalObj.IsRestInPeace = false;
 
-        var custAddr = JSON.parse(sessionStorage.getItem("CustAddr"));
-        this.addCustObj.CustAddr.Addr = custAddr["Addr"];
-        this.addCustObj.CustAddr.AreaCode1 = custAddr["AreaCode1"];
-        this.addCustObj.CustAddr.AreaCode2 = custAddr["AreaCode2"];
-        this.addCustObj.CustAddr.AreaCode3 = custAddr["AreaCode3"];
-        this.addCustObj.CustAddr.AreaCode4 = custAddr["AreaCode4"];
-        this.addCustObj.CustAddr.City = custAddr["City"];
-        this.addCustObj.CustAddr.Zipcode = custAddr["Zipcode"];
-        this.addCustObj.CustAddr.SubZipcode = custAddr["SubZipcode"];
+        // var custAddr = JSON.parse(sessionStorage.getItem("CustAddr"));
+        // this.addCustObj.CustAddr.Addr = custAddr["Addr"];
+        // this.addCustObj.CustAddr.AreaCode1 = custAddr["AreaCode1"];
+        // this.addCustObj.CustAddr.AreaCode2 = custAddr["AreaCode2"];
+        // this.addCustObj.CustAddr.AreaCode3 = custAddr["AreaCode3"];
+        // this.addCustObj.CustAddr.AreaCode4 = custAddr["AreaCode4"];
+        // this.addCustObj.CustAddr.City = custAddr["City"];
+        // this.addCustObj.CustAddr.Zipcode = custAddr["Zipcode"];
+        // this.addCustObj.CustAddr.SubZipcode = custAddr["SubZipcode"];
         this.http.post(URLConstant.EditDuplicateCust, this.addCustObj).subscribe(
           (response) => {
             if(this.IsFromCustFamilyTab){

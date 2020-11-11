@@ -11,10 +11,13 @@ import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { formatDate } from '@angular/common';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-customer-personal-main-info',
-  templateUrl: './customer-personal-main-info.component.html'
+  templateUrl: './customer-personal-main-info.component.html',
+  providers : [NGXToastrService]
 })
 export class CustomerPersonalMainInfoComponent implements OnInit {
 
@@ -69,7 +72,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     VipNotes: ['', [Validators.required]]
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
@@ -164,6 +167,20 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.CustomerPersonalForm.controls.VipNotes.updateValueAndValidity();
   }
   SaveValue() {
+    var UserAccess = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var MaxDate = formatDate(UserAccess.BusinessDt, 'yyyy-MM-dd', 'en-US');
+    var Max17YO = formatDate(UserAccess.BusinessDt, 'yyyy-MM-dd', 'en-US');
+    let max17Yodt = new Date(Max17YO);
+    let d1 = new Date(this.CustomerPersonalForm.controls["BirthDt"].value);
+    let d2 = new Date(MaxDate);
+    max17Yodt.setFullYear(d2.getFullYear() - 17);
+
+    if(d1 > max17Yodt){
+      this.toastr.warningMessage("Customer age must be at least 17 year old.");
+      return;
+    }
+
+    if(this.CustomerPersonalForm.controls["BirthDt"].value)
     this.CustName = this.CustomerPersonalForm.controls["CustName"].value;
     // this.CustModel = this.CustomerPersonalForm.controls["CustModel"].value;
     this.CustModel = "";
@@ -196,8 +213,12 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"], { queryParams: { "CustName": this.CustName, "Gender": this.Gender, "MrIdTypeCode": this.MrIdTypeCode, "CustModel": this.CustModel, "BirthPlace": this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo, "IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName, "IsVip": this.IsVip, "IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes, "MrMaritalStatCode": this.MrMaritalStatCode } });
   }
   onOptionsSelected(event) {
-    if (event.target.value == this.KTP) {
+    let noExpDate = [CommonConstant.MrIdTypeCodeEKTP, CommonConstant.MrIdTypeCodeNPWP, CommonConstant.MrIdTypeCodeAKTA];
+    if (noExpDate.includes(event.target.value)) {
       this.CustomerPersonalForm.controls.IdExpiredDt.clearValidators();
+      this.CustomerPersonalForm.patchValue({
+        IdExpiredDt : ''
+      })
       this.tempKTPCheck = true;
     } else {
       this.CustomerPersonalForm.controls.IdExpiredDt.setValidators(Validators.required);
