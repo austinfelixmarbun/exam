@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 
 @Component({
@@ -97,7 +98,8 @@ export class MasterAddEditComponent implements OnInit {
         //SAVE
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(['/CommonSetting/Master']);
+          //this.router.navigate(['/CommonSetting/Master']);
+          AdInsHelper.navigateUrlMasking(this.router,['/CommonSetting/Master'],{});
         },
         (error) => {
           this.toastr.typeErrorCustom(error);
@@ -111,7 +113,8 @@ export class MasterAddEditComponent implements OnInit {
       this.httpClient.post(addRefMasterUrl, this.refMasterObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.location.back();
+          //this.location.back();
+          AdInsHelper.navigateUrlMasking(this.router,['/CommonSetting/Master'],{});
           this.spinner.hide();
         },
         (error) => {

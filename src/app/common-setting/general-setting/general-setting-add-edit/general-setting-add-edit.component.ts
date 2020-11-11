@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-general-setting-add-edit',
@@ -68,7 +69,8 @@ export class GeneralSettingAddEditComponent implements OnInit {
     this.httpClient.post(URLConstant.EditGeneralSetting, this.gsObj).subscribe(
       response => {
         this.service.successMessage(response["Message"]);
-        this.router.navigate(["/CommonSetting/GeneralSetting"]);
+        //this.router.navigate(["/CommonSetting/GeneralSetting"]);
+        AdInsHelper.navigateUrlMasking(this.router,["/CommonSetting/GeneralSetting"],{});
       }
     );
   }

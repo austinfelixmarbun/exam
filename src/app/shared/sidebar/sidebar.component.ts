@@ -8,6 +8,7 @@ import { ROUTES } from './sidebar-routes.config';
 import { environment } from 'environments/environment';
 import { CommonConstant } from '../constant/CommonConstant';
 import { URLConstant } from '../constant/URLConstant';
+import { AdInsHelper } from '../AdInsHelper';
 
 declare var $: any;
 
@@ -93,7 +94,8 @@ export class SidebarComponent implements OnInit {
         //sementara Sementara begini dulu, belum ketemu solusi lain
         //problem : ketika di 'click' halaman memasuki halaman /dashboard/dash-board terlebih dahulu
         this.router.navigateByUrl("/dashboard/dash-board", { skipLocationChange: true }).then(() => {
-            this.router.navigate([ev.Path], { queryParams: this.genParam(ev.Params) });
+        this.router.navigate([ev.Path], { queryParams: this.genParam(ev.Params) });
+         // AdInsHelper.navigateUrlMasking(this.router,[ev.Path],{ queryParams: this.genParam(ev.Params) });
         });
     }
 
