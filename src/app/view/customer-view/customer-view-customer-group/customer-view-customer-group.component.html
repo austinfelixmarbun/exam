@@ -4,7 +4,7 @@
       <table class="table table-responsive-md text-center table-hover">
         <thead>
           <tr class="table-header">
-            <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>STATUS</span> </th>
+            <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>NEGATIVE STATUS</span> </th>
             <th class="text-center"><span class="thead-header" name='fullAssetName' translate>CUSTOMER NO.</span> </th>
             <th class="text-left"><span class="thead-header" name='assetCategoryName' translate>CUSTOMER NAME</span>
             </th>
@@ -18,7 +18,9 @@
         <tbody>
           <ng-container *ngFor="let item of responseObj">
             <tr>
-              <td class="text-left"></td>
+              <td *ngIf="item.NegativeStatus == null" class="text-left">Normal</td>
+              <td *ngIf="item.NegativeStatus == 'BAD'" class="text-left">Bad</td>
+              <td *ngIf="item.NegativeStatus == 'WARNING'" class="text-left">Warning</td>
               <td class="text-center"><a href="{{custViewUrl + item.CustId}}" target="_blank">{{item.CustNo}}</a></td>
               <td class="text-left">{{item.CustName}}</td>
               <td class="text-left">{{item.CustRelationship}}</td>
