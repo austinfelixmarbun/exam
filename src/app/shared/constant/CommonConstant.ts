@@ -183,6 +183,10 @@ export class CommonConstant {
 
     // ID TYPE
     public static MrIdTypeCodeEKTP = "EKTP";
+    public static MrIdTypeCodeSIM = "SIM";
+    public static MrIdTypeCodeKITAS = "KITAS";
+    public static MrIdTypeCodeNPWP = "NPWP";
+    public static MrIdTypeCodeAKTA = "AKTA";
     public static AttrGroupCustCompanyFinData = "CUST_COMPANY_FINDATA"
     public static AttrGroupCustPersonalFinData = "CUST_PERSONAL_FINDATA"
     public static AttrGroupCustCompanyOther = "CUST_COMPANY_OTH"

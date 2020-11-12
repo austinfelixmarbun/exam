@@ -103,13 +103,14 @@ export class JobDataEmployeeComponent implements OnInit {
     OtherStayLength: [''],
     PreviIndustryName: [''],
     PreviEmploymentDate: [''],
-    NotesPreJob: ['']
+    NotesPreJob: [''],
+    NoOfEmploy: ['']
   });
   businessDtMin: Date;
   inputAddressObj: InputAddressObj;
   inputPreviousAddressObj: InputAddressObj;
   inputOthBizAddressObj: InputAddressObj;
-
+  
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getCustById = URLConstant.GetCustByCustId;
     this.getListActiveRefMaster = URLConstant.GetListActiveRefMaster;
@@ -228,6 +229,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
         if (this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
           this.JobDataEmpForm.patchValue({
+            NoOfEmploy: this.returnCustJobDataObj.NoOfEmploy,
             JobPosition: this.returnCustJobDataObj.MrJobPositionCode,
             JobTitleName: this.returnCustJobDataObj.JobTitleName,
             JobStatus: this.returnCustJobDataObj.MrJobStatCode,
@@ -485,6 +487,7 @@ export class JobDataEmployeeComponent implements OnInit {
     this.custPersonalJobDataObj.CoyName = this.JobDataEmpForm.controls["IndustryName"].value;
     this.custPersonalJobDataObj.IsMfEmp = this.JobDataEmpForm.controls["InternalEmployee"].value;
     this.custPersonalJobDataObj.RefIndustryTypeId = this.tempRefIndustryType;
+    this.custPersonalJobDataObj.NoOfEmploy = this.JobDataEmpForm.controls.NoOfEmploy.value;
     this.custPersonalJobDataObj.MrCoyScaleCode = this.JobDataEmpForm.controls["CompanyScale"].value;
     this.custPersonalJobDataObj.EmploymentEstablishmentDt = this.JobDataEmpForm.controls["EmpEstablishmentDate"].value;
     this.custPersonalJobDataObj.OthBizName = this.JobDataEmpForm.controls["OtherBusinessName"].value;

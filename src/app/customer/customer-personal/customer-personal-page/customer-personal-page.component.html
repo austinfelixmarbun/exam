@@ -100,8 +100,10 @@
               </app-customer-family>
             </div>
             <div id="contact-tab" class="content" role="tabpanel" aria-labelledby="contact-tab-trigger">
-              <app-customer-contact-person (outputTab)="getValue($event)" *ngIf="CustStepIndex == 4">
-              </app-customer-contact-person>
+              <!-- <app-customer-contact-person (outputTab)="getValue($event)" *ngIf="CustStepIndex == 4">
+              </app-customer-contact-person> -->
+              <app-customer-emergency-contact *ngIf="CustStepIndex == 4" [custId]="IdCust" (outputTab)="getValue($event)" > 
+              </app-customer-emergency-contact>
             </div>
             <div id="group-tab" class="content" role="tabpanel" aria-labelledby="group-tab-trigger">
               <app-cust-group-tab [MrCustTypeCode]="'PERSONAL'" [CustId]="IdCust" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 5">

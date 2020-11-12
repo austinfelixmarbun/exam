@@ -31,11 +31,11 @@ export class CustFinDataTabComponent implements OnInit {
   mrMaritalStatCode: string;
   maritalConstant: string = CommonConstant.MR_MARITAL_STAT_CODE_MARRIED;
   Page: string;
-  attrGroup:string;
+  attrGroup: string;
   CustPersonalFinDataForm = this.fb.group({
     CustPersonalFinDataId: [0, [Validators.required]],
     CustPersonalId: [0, [Validators.required]],
-    MonthlyIncomeAmt: [''],
+    MonthlyIncomeAmt: ['', Validators.required],
     MonthlyExpenseAmt: [''],
     MonthlyInstallmentAmt: [''],
     MrSourceOfIncomeCode: [''],
@@ -100,8 +100,8 @@ export class CustFinDataTabComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.attrGroup = this.MrCustTypeCode==CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyFinData : CommonConstant.AttrGroupCustPersonalFinData;
- 
+    this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyFinData : CommonConstant.AttrGroupCustPersonalFinData;
+
     var datePipe = new DatePipe("en-US");
     if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
       var custPersonalData;
@@ -151,7 +151,7 @@ export class CustFinDataTabComponent implements OnInit {
         }
       );
 
-     // this.bindFinancialAttribute();
+      // this.bindFinancialAttribute();
 
     }
     else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
@@ -203,7 +203,7 @@ export class CustFinDataTabComponent implements OnInit {
         }
       );
 
-    //  this.bindFinancialAttribute();
+      //  this.bindFinancialAttribute();
 
     }
   }
@@ -298,7 +298,8 @@ export class CustFinDataTabComponent implements OnInit {
   //   }
   // }
 
-  next() { 
+  next() {
+    console.log("ameng");
     var response;
     var url;
 
@@ -355,41 +356,47 @@ export class CustFinDataTabComponent implements OnInit {
     }
 
     if (this.isCalculated) {
+      var custAttrRequest = new Array<Object>();
       if (response.SpouseMonthlyIncomeAmt == "") {
         response.SpouseMonthlyIncomeAmt = this.spouseMonthlyIncomeAmt;
       }
-      this.httpClient.post(url, response).subscribe(
-        (response) => { 
-          if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
-            var formValue = this.CustCompanyFinDataForm['controls']['AttrList'].value;
-          } else {
-            var formValue = this.CustPersonalFinDataForm['controls']['AttrList'].value;
-          }
-          var custAttrRequest = new Array<Object>();
-          var urlAttr = URLConstant.AddEditListCustAttrContent;
-          if (Object.keys(formValue).length > 0 && formValue.constructor === Object) {
-            for (const key in formValue) {
-              if (formValue[key]["AttrValue"] != null) {
-                var custAttr = {
-                  CustAttrContentId: formValue[key]["CustAttrContentId"],
-                  CustId: this.CustId,
-                  RefAttrId: formValue[key]["RefAttrId"],
-                  AttrValue: formValue[key]["AttrValue"],
-                  AttrGroup: this.attrGroup
-                };
-                custAttrRequest.push(custAttr);
-              }
+      if (this.CustPersonalFinDataForm.get('AttrList') != undefined || this.CustCompanyFinDataForm.get('AttrList') != undefined) {
+        if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
+          var formValue = this.CustCompanyFinDataForm['controls']['AttrList'].value;
+        } else {
+          var formValue = this.CustPersonalFinDataForm['controls']['AttrList'].value;
+        }
+        var urlAttr = URLConstant.AddEditListCustAttrContent;
+        if (Object.keys(formValue).length > 0 && formValue.constructor === Object) {
+          for (const key in formValue) {
+            if (formValue[key]["AttrValue"] != null) {
+              var custAttr = {
+                CustId: this.CustId,
+                RefAttrId: formValue[key]["RefAttrId"],
+                AttrValue: formValue[key]["AttrValue"],
+                AttrGroup: this.attrGroup
+              };
+              custAttrRequest.push(custAttr);
             }
-            this.httpClient.post(urlAttr, { CustAttrContentObjs: custAttrRequest }).pipe(first()).subscribe(
-              (response) => {
-                this.toastr.successMessage(response["Message"]);
-                this.outputTab.emit({ stepMode: "next" });
-              },
-              (error) => {
-                console.log(error);
-              }
-            );
           }
+        }
+      }
+      else{
+        custAttrRequest.push({
+          CustId: 0,
+          RefAttrId: 0,
+          AttrValue: "",
+          AttrGroup: ""
+        });
+      }
+      var CustFinDataCustomObj = {
+        CustAttrContentObjs: custAttrRequest,
+        CustFinDataObj: response
+      }
+      this.httpClient.post(url, CustFinDataCustomObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          this.outputTab.emit({ stepMode: "next" });
         }
       );
     }

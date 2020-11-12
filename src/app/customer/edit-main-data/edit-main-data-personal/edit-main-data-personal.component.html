@@ -4,11 +4,11 @@
       <div class="px-3">
         <div class="addEdit">
           <h4 class="form-section card-title" translate> Customer Personal</h4>
-          <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
-          </lib-ucSubsection>
           <form class="form form-horizontal" [formGroup]="CustomerPersonalForm"
-            (ngSubmit)="CustomerPersonalForm.valid && SaveValue()" #enjiForm="ngForm" id="MainInfoId">
-            <div class="form-body">
+            (ngSubmit)="CustomerPersonalForm.valid && SaveValue()" #enjiForm="ngForm">
+            <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
+            </lib-ucSubsection>
+            <div class="form-body" id="MainInfoId">
               <div class="form-group row">
                 <label class="col-md-2 adins-required-label" translate>Customer Name </label>
                 <div class="col-md-4">
@@ -133,6 +133,12 @@
                   </lib-uc-show-errors>
                 </div>
               </div>
+            </div>
+            <lib-ucSubsection [id]="'LegalAddr'" [title]="'Legal Address'" [panel]="'LegalAddrSection'">
+            </lib-ucSubsection>
+            <div class="form-body" id="LegalAddrSection">
+              <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerPersonalForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'">
+              </lib-ucaddress> 
             </div>
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
