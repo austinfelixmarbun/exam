@@ -44,4 +44,5 @@ export class RequestNegativeCustObj {
     VipNotes: string;
     MrCompanyTypeCode: string;
     IsRestInPeace: boolean;
+    RowVersion: string;
 }  

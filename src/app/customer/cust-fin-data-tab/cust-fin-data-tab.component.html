@@ -3,7 +3,7 @@
   <form class="form form-horizontal" [formGroup]="CustPersonalFinDataForm" #enjiForm="ngForm"
     (ngSubmit)="enjiForm.form.valid && next()" *ngIf="MrCustTypeCode == 'PERSONAL'">
     <div class="form-body">
-      <div class="form-group row">
+      <div class="form-group row adins-required">
         <label class="col-md-2 adInsLabel" for="MonthlyIncomeAmt" translate>Monthly Income</label>
         <div class="col-md-6">
           <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyIncomeAmt"

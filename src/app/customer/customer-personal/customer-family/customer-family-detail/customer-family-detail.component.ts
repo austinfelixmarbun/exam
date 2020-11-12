@@ -20,6 +20,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NullViewportScroller } from '@angular/common/src/viewport_scroller';
 
 @Component({
   selector: 'app-customer-family-detail',
@@ -116,6 +117,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("ameng");
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -130,7 +132,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     this.inputAddressObj.title = "Customer Address";
     this.inputAddressObj.default = UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
-    this.inputAddressObj.showAllPhn= false;
+    this.inputAddressObj.showAllPhn = false;
 
     this.existingCustomerLookUpObj = new InputLookupObj();
     this.existingCustomerLookUpObj.isReadonly = false;
@@ -139,16 +141,26 @@ export class CustomerFamilyDetailComponent implements OnInit {
     this.existingCustomerLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.existingCustomerLookUpObj.pagingJson = "./assets/lookup/lookupExistingCustomer.json";
     this.existingCustomerLookUpObj.genericJson = "./assets/lookup/lookupExistingCustomer.json";
+
+    var criteriaListCust = new Array();
     if (this.listCustIdToExclude.length > 0) {
-      var criteriaListCust = new Array();
+      
       var criteriaCustObj = new CriteriaObj();
       criteriaCustObj.DataType = "text";
       criteriaCustObj.restriction = AdInsConstant.RestrictionNotIn;
       criteriaCustObj.propName = 'CUST_NO';
       criteriaCustObj.listValue = this.listCustIdToExclude;
       criteriaListCust.push(criteriaCustObj);
-      this.existingCustomerLookUpObj.addCritInput = criteriaListCust;
     }
+    if (this.custIdInput != 0 || this.custIdInput == null) {
+      var criteriaCustObj = new CriteriaObj();
+      criteriaCustObj.DataType = "text";
+      criteriaCustObj.restriction = AdInsConstant.RestrictionNeq;
+      criteriaCustObj.propName = 'CUST_ID';
+      criteriaCustObj.value = this.custIdInput.toString();
+      criteriaListCust.push(criteriaCustObj);
+    }
+    this.existingCustomerLookUpObj.addCritInput = criteriaListCust;
 
     this.criteriaExistingList = new Array();
     this.criteriaExistingObj = new CriteriaObj();
@@ -163,7 +175,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
       this.existingCustomerLookUpObj.addCritInput = this.criteriaExistingList;
     }
 
-    if(this.customerPersonalFamilyId && this.customerPersonalFamilyId > 0){
+    if (this.customerPersonalFamilyId && this.customerPersonalFamilyId > 0) {
       this.http.post(URLConstant.GetCustPersonalFamilyByCustPersonalFamilyId, { CustPersonalFamilyId: this.customerPersonalFamilyId }).pipe(
         map((response) => {
           this.custPersonalFamilyObj = response;
@@ -188,7 +200,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
             CustId: this.custPersonalFamilyObj["CustId"],
             FamilyId: this.custPersonalFamilyObj["FamilyId"],
             MrCustRelationship: this.custPersonalFamilyObj["MrCustRelationship"],
-            
+
             CustNo: custData.CustNo,
             CustName: custData.CustName,
             Gender: custPersonalData.MrGenderCode,
@@ -239,7 +251,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
         }
       );
     }
-    else{
+    else {
       this.CustomerFamilyForm.patchValue({
         CustId: this.custIdInput,
       });
@@ -269,21 +281,21 @@ export class CustomerFamilyDetailComponent implements OnInit {
         });
         if (this.tempIdType[0].Key == this.KTP) {
           this.tempKTPCheck = true;
-        
+
         } else {
           this.tempKTPCheck = false;
-          this.CustomerFamilyForm.controls.IdExpiredDt.setValidators(Validators.required);  
+          this.CustomerFamilyForm.controls.IdExpiredDt.setValidators(Validators.required);
           this.CustomerFamilyForm.controls.IdExpiredDt.updateValueAndValidity();
         }
       }
     );
 
-    this.http.post(this.getListActiveRefMasterUrl, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat}).toPromise().then(
+    this.http.post(this.getListActiveRefMasterUrl, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat }).toPromise().then(
       (response) => {
         this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
         this.CustomerFamilyForm.patchValue({
           MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
-        });        
+        });
       }
     );
 
@@ -351,6 +363,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
           value: custAddrData.Zipcode
         });
 
+        this.existingCustomerLookUpObj.isReadonly = true;
         this.CustomerFamilyForm.controls.Gender.disable();
         this.CustomerFamilyForm.controls.MrIdTypeCode.disable();
         this.CustomerFamilyForm.controls.BirthPlace.disable();
@@ -378,7 +391,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
       this.CustomerFamilyForm.controls.VipNotes.disable();
       this.VipNotesRequired = false;
       this.CustomerFamilyForm.controls.IdExpiredDt.clearValidators();
-  
+
     } else {
       this.CustomerFamilyForm.controls.VipNotes.enable();
       this.CustomerFamilyForm.controls.VipNotes.setValidators(Validators.required);
@@ -389,9 +402,9 @@ export class CustomerFamilyDetailComponent implements OnInit {
 
   SaveValue() {
     console.log("FormValue: " + JSON.stringify(this.CustomerFamilyForm.value));
-    if(this.isEditCustFamily){
-      var requestEdit = { 
-        CustPersonalFamilyId: this.CustomerFamilyForm.controls["CustPersonalFamilyId"].value, 
+    if (this.isEditCustFamily) {
+      var requestEdit = {
+        CustPersonalFamilyId: this.CustomerFamilyForm.controls["CustPersonalFamilyId"].value,
         MrCustRelationship: this.CustomerFamilyForm.controls["MrCustRelationship"].value,
         RowVersion: this.CustomerFamilyForm.controls["RowVersion"].value
       };
@@ -406,8 +419,8 @@ export class CustomerFamilyDetailComponent implements OnInit {
         }
       );
     }
-    else{
-      if(this.isExistingCust){
+    else {
+      if (this.isExistingCust) {
         var requestExisting = {
           CustId: this.CustomerFamilyForm.controls["CustId"].value,
           FamilyId: this.CustomerFamilyForm.controls["FamilyId"].value,
@@ -424,7 +437,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
           }
         );
       }
-      else{
+      else {
         var formValue = this.CustomerFamilyForm.value;
         this.custDataToCheckDuplicate["Addr"] = formValue["UcAddress"]["Addr"];
         this.custDataToCheckDuplicate["AreaCode1"] = formValue["UcAddress"]["AreaCode1"];
@@ -457,8 +470,12 @@ export class CustomerFamilyDetailComponent implements OnInit {
     // this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"], { queryParams: { "CustName": this.CustName, "Gender": this.Gender, "MrIdTypeCode": this.MrIdTypeCode, "CustModel": this.CustModel, "BirthPlace": this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo, "IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName, "IsVip": this.IsVip, "IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes, "MrMaritalStatCode": this.MrMaritalStatCode } });
   }
   onOptionsSelected(event) {
-    if (event.target.value == this.KTP) {
+    let noExpDate = [CommonConstant.MrIdTypeCodeEKTP, CommonConstant.MrIdTypeCodeNPWP, CommonConstant.MrIdTypeCodeAKTA];
+    if (noExpDate.includes(event.target.value)) {
       this.CustomerFamilyForm.controls.IdExpiredDt.clearValidators();
+      this.CustomerFamilyForm.patchValue({
+        IdExpiredDt: ''
+      })
       this.tempKTPCheck = true;
     } else {
       this.CustomerFamilyForm.controls.IdExpiredDt.setValidators(Validators.required);
@@ -467,7 +484,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     this.CustomerFamilyForm.controls.IdExpiredDt.updateValueAndValidity();
   }
 
-  back(){
-    this.ResponseSaveFamily.emit({StatusCode: 200});
+  back() {
+    this.ResponseSaveFamily.emit({ StatusCode: 200 });
   }
 }

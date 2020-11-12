@@ -35,7 +35,7 @@ export class CustFinDataTabComponent implements OnInit {
   CustPersonalFinDataForm = this.fb.group({
     CustPersonalFinDataId: [0, [Validators.required]],
     CustPersonalId: [0, [Validators.required]],
-    MonthlyIncomeAmt: [''],
+    MonthlyIncomeAmt: ['', Validators.required],
     MonthlyExpenseAmt: [''],
     MonthlyInstallmentAmt: [''],
     MrSourceOfIncomeCode: [''],
