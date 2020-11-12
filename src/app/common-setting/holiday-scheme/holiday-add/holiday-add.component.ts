@@ -7,6 +7,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { HolidayObj } from 'app/shared/model/HolidayObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
     selector: 'app-holiday-add',
@@ -71,7 +72,8 @@ export class HolidayAddComponent implements OnInit {
             this.holidayObj.RowVersion = this.result.RowVersion;
             this.http.post(URLConstant.EditHolidaySchmH, this.holidayObj).subscribe(
                 (response) => {
-                    this.router.navigateByUrl('/CommonSetting/Holiday');
+                    //this.router.navigateByUrl('/CommonSetting/Holiday');
+                    AdInsHelper.navigateUrlMasking(this.router,['/CommonSetting/Holiday'],{})
                     this.toastr.successMessage(response['message']);
                 });
         }
@@ -82,7 +84,8 @@ export class HolidayAddComponent implements OnInit {
             this.holidayObj.RowVersion = "";
 
             this.http.post(URLConstant.AddHolidaySchmH, this.holidayObj).subscribe((response) => {
-                this.router.navigateByUrl('/CommonSetting/Holiday');
+                //this.router.navigateByUrl('/CommonSetting/Holiday');
+                AdInsHelper.navigateUrlMasking(this.router,['/CommonSetting/Holiday'],{})
                 this.toastr.successMessage(response['message']);
             });
         }

@@ -3,6 +3,7 @@ import { AdInsConstant } from "app/shared/AdInstConstant";
 import { CurrentUserContext } from "./model/CurrentUserContext.model";
 import { environment } from "environments/environment";
 import { CommonConstant } from "./constant/CommonConstant";
+import { Router } from "@angular/router";
 
 export class AdInsHelper {
     //Function
@@ -147,5 +148,9 @@ export class AdInsHelper {
     public static OpenCustomerViewByCustId(CustId){
         var url = environment.FoundationR3Web + "/View/Customer/PersonalDetail?CustId=" + CustId;
         window.open(url, "_blank");
+    }
+
+    public static navigateUrlMasking(router: Router, url: Array<string>, queryParams: {}){
+        router.navigate(url, { queryParams: queryParams, skipLocationChange: true });
     }
 }

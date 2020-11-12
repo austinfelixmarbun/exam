@@ -9,6 +9,7 @@ import { HolidayDByYearObj } from 'app/shared/model/HolidayDByYearObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-holiday-detail-add',
@@ -61,7 +62,8 @@ export class HolidayDetailAddComponent implements OnInit {
       this.holidayDetailObj.Descr = this.HolidayListForm.controls.Descr.value;
 
       this.http.post(URLConstant.AddHolidaySchmD, this.holidayDetailObj).subscribe((response) => {
-        this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
+        //this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
+        AdInsHelper.navigateUrlMasking(this.router,['/CommonSetting/Holiday/Detail/'],{ HolidaySchmHId: this.HolidaySchmHId });
         this.toastr.successMessage(response['message']);
       });
     }
@@ -94,7 +96,8 @@ export class HolidayDetailAddComponent implements OnInit {
         this.holidayDetailByYearObj.DictOfDays.push("Saturday");
       }
       this.http.post(URLConstant.AddHolidaySchmDUntilYear, this.holidayDetailByYearObj).subscribe((response) => {
-        this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
+        //this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
+        AdInsHelper.navigateUrlMasking(this.router,['/CommonSetting/Holiday/Detail/'],{ HolidaySchmHId: this.HolidaySchmHId })
         this.toastr.successMessage(response['message']);
       });
     }
@@ -124,6 +127,7 @@ export class HolidayDetailAddComponent implements OnInit {
 
   }
   BackNavigate() {
-    this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
+    //this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
+    AdInsHelper.navigateUrlMasking(this.router,['/CommonSetting/Holiday/Detail/'],{ HolidaySchmHId: this.HolidaySchmHId })
   }
 }
