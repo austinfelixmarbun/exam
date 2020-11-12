@@ -31,6 +31,9 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
   inputLookupBank: InputLookupObj;
   maxYear: number;
   bankName: string;
+  IsActive : boolean;
+
+
   private custBankStmntH: CustBankStmntHObj;
 
   CustBankAccForm = this.fb.group({
@@ -102,6 +105,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             IsActive: response.CustBankAccObj.IsActive,
             RowVersion: response.CustBankAccObj.RowVersion
           });
+          this.CheckDefault();
         }
       );
     }
@@ -125,7 +129,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             IsActive: response.CustBankAccObj.IsActive,
             RowVersion: response.CustBankAccObj.RowVersion
           });
-
+          this.CheckDefault();
           if (response.CustBankAccObj.IsBankStmnt) {
             var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
             this.custBankStmntH = new CustBankStmntHObj();
@@ -209,7 +213,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     custBankAccObj.BalanceAmt = parseFloat(formData.BalanceAmt);
     custBankAccObj.IsDefault = formData.IsDefault;
     custBankAccObj.RowVersion = formData.RowVersion;
-    custBankAccObj.IsActive = formData.IsActive;
+    custBankAccObj.IsActive = this.IsActive;
 
     if (this.pageType == "add") {
       this.httpClient.post(URLConstant.AddCustBankAcc, custBankAccObj).subscribe(
@@ -276,6 +280,19 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
           }
         );
       }
+    }
+  }
+  CheckDefault(){
+    if(this.CustBankAccForm.controls.IsDefault.value){
+      this.CustBankAccForm.patchValue({
+        IsActive : true
+      });
+      this.IsActive = true;
+      this.CustBankAccForm.controls.IsActive.disable();
+    }
+    else{
+      this.IsActive = false;
+      this.CustBankAccForm.controls.IsActive.enable();
     }
   }
 }

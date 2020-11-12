@@ -16,4 +16,16 @@ export class UcAddressObj{
         PhnExt3: any;
         FaxArea: any;
         Fax: any;
+
+        constructor(){
+                this.Phn1="";
+                this.PhnArea1="";
+                this.PhnExt1="";
+                this.Phn2="";
+                this.PhnArea2="";
+                this.PhnExt2="";
+                this.Phn3="";
+                this.PhnArea3="";
+                this.PhnExt3="";
+        }
 }

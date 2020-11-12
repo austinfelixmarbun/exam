@@ -85,8 +85,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
     IdExpiredDt: [''],
     IdNo: [''],
     BirthPlace: [''],
-    BirthDt: [''],
-    MrGenderCode: [''],
+    BirthDt: ['', Validators.required],
+    MrGenderCode: ['', Validators.required],
     MrReligionCode: [''],
     MrEducationCode: [''],
     MrMaritalStatCode: [''],
@@ -101,6 +101,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
   });
   criteriaExistingList: any[];
   criteriaExistingObj: CriteriaObj;
+  criteriaCurrentCust : CriteriaObj;
   inputAddressObj: InputAddressObj;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -171,18 +172,14 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.existingCustomerLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.existingCustomerLookUpObj.pagingJson = "./assets/lookup/lookupExistingCustomer.json";
     this.existingCustomerLookUpObj.genericJson = "./assets/lookup/lookupExistingCustomer.json";
-    // if (this.listCustIdToExclude.length > 0) {
-    //   var criteriaListCust = new Array();
-    //   var criteriaCustObj = new CriteriaObj();
-    //   criteriaCustObj.DataType = "text";
-    //   criteriaCustObj.restriction = AdInsConstant.RestrictionNotIn;
-    //   criteriaCustObj.propName = 'CUST_NO';
-    //   criteriaCustObj.listValue = this.listCustIdToExclude;
-    //   criteriaListCust.push(criteriaCustObj);
-    //   this.existingCustomerLookUpObj.addCritInput = criteriaListCust;
-    // }
 
     this.criteriaExistingList = new Array();
+    this.criteriaCurrentCust = new CriteriaObj();
+    this.criteriaCurrentCust.restriction = AdInsConstant.RestrictionNeq;
+    this.criteriaCurrentCust.propName = 'CUST_ID';
+    this.criteriaCurrentCust.value = this.custId.toString();
+    this.criteriaExistingList.push(this.criteriaCurrentCust);
+
     this.criteriaExistingObj = new CriteriaObj();
     this.criteriaExistingObj.restriction = AdInsConstant.RestrictionEq;
     this.criteriaExistingObj.propName = 'MR_CUST_TYPE_CODE';
@@ -367,6 +364,15 @@ export class CustomerEmergencyContactComponent implements OnInit {
           this.UcAddressObj.AreaCode2 = this.tempCustPersonalContactPerson.AreaCode2;
           this.UcAddressObj.AreaCode3 = this.tempCustPersonalContactPerson.AreaCode3;
           this.UcAddressObj.AreaCode4 = this.tempCustPersonalContactPerson.AreaCode4;
+          this.UcAddressObj.Phn1 = this.tempCustPersonalContactPerson.Phn1;
+          this.UcAddressObj.Phn2 = this.tempCustPersonalContactPerson.Phn2;
+          this.UcAddressObj.Phn3 = this.tempCustPersonalContactPerson.Phn3;
+          this.UcAddressObj.PhnArea1 = this.tempCustPersonalContactPerson.PhnArea1;
+          this.UcAddressObj.PhnArea2 = this.tempCustPersonalContactPerson.PhnArea2;
+          this.UcAddressObj.PhnArea3 = this.tempCustPersonalContactPerson.PhnArea3;
+          this.UcAddressObj.PhnExt1 = this.tempCustPersonalContactPerson.PhnExt1;
+          this.UcAddressObj.PhnExt2 = this.tempCustPersonalContactPerson.PhnExt2;
+          this.UcAddressObj.PhnExt3 = this.tempCustPersonalContactPerson.PhnExt3;
           this.UcAddressObj.Addr = this.tempCustPersonalContactPerson.Addr;
           this.UcAddressObj.City = this.tempCustPersonalContactPerson.City;
           this.inputAddressObj.default = this.UcAddressObj;
@@ -378,7 +384,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.inputAddressObj.title = "Customer Address";
     this.inputAddressObj.default = UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
-    this.inputAddressObj.showAllPhn= false;
+    this.inputAddressObj.showAllPhn= true;
+    this.inputAddressObj.showFax= false;
 
     var tempCustAddrObj = new CustAddrObj();
     tempCustAddrObj.CustId = this.IdCust;
@@ -431,7 +438,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
   }
 
   SaveValue() {
-
+    console.log("ameng");
     this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
     this.custPersonalContactPersonObj.CustId = this.IdCust;
     this.custPersonalContactPersonObj.ContactPersonName = this.CustomerContactForm.controls["ContactPersonName"].value;
@@ -461,7 +468,15 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.custPersonalContactPersonObj.AreaCode4 = this.CustomerContactForm.value.UcAddress.AreaCode4;
     this.custPersonalContactPersonObj.City = this.CustomerContactForm.value.UcAddress.City;
     this.custPersonalContactPersonObj.Zipcode = this.CustomerContactForm.value.UcAddressZipcode.value;
-    this.custPersonalContactPersonObj.SubZipcode = this.CustomerContactForm.value.UcAddressZipcode.value;
+    this.custPersonalContactPersonObj["Phn1"] = this.CustomerContactForm.value.UcAddress.Phn1;
+    this.custPersonalContactPersonObj["PhnArea1"] = this.CustomerContactForm.value.UcAddress.PhnArea1;
+    this.custPersonalContactPersonObj["PhnExt1"] = this.CustomerContactForm.value.UcAddress.PhnExt1;
+    this.custPersonalContactPersonObj["Phn2"] = this.CustomerContactForm.value.UcAddress.Phn2;
+    this.custPersonalContactPersonObj["PhnArea2"] = this.CustomerContactForm.value.UcAddress.PhnArea2;
+    this.custPersonalContactPersonObj["PhnExt2"] = this.CustomerContactForm.value.UcAddress.PhnExt2;
+    this.custPersonalContactPersonObj["Phn3"] = this.CustomerContactForm.value.UcAddress.Phn3;
+    this.custPersonalContactPersonObj["PhnArea3"] = this.CustomerContactForm.value.UcAddress.PhnArea3;
+    this.custPersonalContactPersonObj["PhnExt3"] = this.CustomerContactForm.value.UcAddress.PhnArea3;
     if (this.tempCust != null) {
       this.custPersonalContactPersonObj.ContactPersonCustNo = this.tempCust.CustNo;
     }
@@ -594,8 +609,12 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.tempProfession = event.ProfessionCode;
   }
   onOptionIdTypeSelected(event) {
-    if (event.target.value == this.KTP) {
+    let noExpDate = [CommonConstant.MrIdTypeCodeEKTP, CommonConstant.MrIdTypeCodeNPWP, CommonConstant.MrIdTypeCodeAKTA];
+    if (noExpDate.includes(event.target.value)) {
       this.CustomerContactForm.controls.IdExpiredDt.clearValidators();
+      this.CustomerContactForm.patchValue({
+        IdExpiredDt : ''
+      })
       this.tempKTPCheck = true;
     } else {
       this.CustomerContactForm.controls.IdExpiredDt.setValidators(Validators.required);
