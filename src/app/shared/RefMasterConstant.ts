@@ -8,4 +8,7 @@ export class RefMasterConstant {
     public static Npwp = "NPWP";
     public static Company = "COMPANY";
     public static Personal = "PERSONAL";
+    public static KITAS = "KITAS";
+    public static SIM = "SIM";
+    public static AKTA = "AKTA";
 }

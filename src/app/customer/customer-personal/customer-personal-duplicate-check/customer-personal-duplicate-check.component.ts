@@ -276,6 +276,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       var requestShareholderPersonal = {
         CustId: this.CustMgmntShareholderData["CustId"],
         MgmntShrholderName: this.CustMgmntShareholderData["MgmntShrholderName"],
+        MrCustModelCode: this.CustMgmntShareholderData["MrCustModelCode"],
         MrIdTypeCode: this.CustMgmntShareholderData["MrIdTypeCode"],
         IdNo: this.CustMgmntShareholderData["IdNo"],
         IdExpiredDt: this.CustMgmntShareholderData["IdExpiredDt"],
