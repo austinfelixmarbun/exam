@@ -57,9 +57,6 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
     this.ResponseSaveData = new EventEmitter<any>();
     this.urlGetDescByMasterCode = URLConstant.GetRefMasterByMasterCode;
-    console.log("constructor");
-    console.log(this.IsFromCustMgmntShareholder);
-    console.log(this.CustMgmntShareholderData);
     
     this.route.queryParams.subscribe(params => {
       if (params["CustModel"] != null) {
