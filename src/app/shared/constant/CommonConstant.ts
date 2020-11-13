@@ -191,6 +191,8 @@ export class CommonConstant {
     public static AttrGroupCustPersonalFinData = "CUST_PERSONAL_FINDATA"
     public static AttrGroupCustCompanyOther = "CUST_COMPANY_OTH"
     public static AttrGroupCustPersonalOther= "CUST_PERSONAL_OTH"
+    public static AttrGroupAsset = "ASSET";
+
 
     // Integration
     public static DailyMasterTypeSingle = "Date";
@@ -203,4 +205,6 @@ export class CommonConstant {
     public static CUST_MODEL_SMETBU = "SMETBU";
     public static CUST_MODEL_SMEBU = "SMEBU";
     public static CUST_MODEL_NONPROF = "NONPROF";
+
+    //ATTR GROUP
 }
