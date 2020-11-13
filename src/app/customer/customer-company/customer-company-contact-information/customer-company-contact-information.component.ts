@@ -153,7 +153,6 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
         this.http.post(this.getCustCompanyContactPersonByCustCompanyIdUrl, this.custCompanyContactPersonObj).subscribe(
           (response) => {
             this.tempCustCompanyContactPersonObj = response;
-            console.log(this.tempCustCompanyContactPersonObj);
             this.ContactInformationForm.patchValue({
               ContactPersonName: this.tempCustCompanyContactPersonObj.ContactPersonName,
               MrGenderCode: this.tempCustCompanyContactPersonObj.MrGenderCode,
