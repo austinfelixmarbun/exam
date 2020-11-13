@@ -57,6 +57,10 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
     this.ResponseSaveData = new EventEmitter<any>();
     this.urlGetDescByMasterCode = URLConstant.GetRefMasterByMasterCode;
+    console.log("constructor");
+    console.log(this.IsFromCustMgmntShareholder);
+    console.log(this.CustMgmntShareholderData);
+    
     this.route.queryParams.subscribe(params => {
       if (params["CustModel"] != null) {
         this.CustModel = params["CustModel"];
@@ -79,10 +83,16 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       if (params["VipNotes"] != null) {
         this.VipNotes = params["VipNotes"];
       }
-    });
+    });     
   }
 
   ngOnInit() {
+    if(this.IsFromCustMgmntShareholder){
+      this.CustModel = this.CustMgmntShareholderData.MrCustModelCode;
+      this.CustName = this.CustMgmntShareholderData.MgmntShrholderName;
+      this.MrCompanyTypeCode = this.CustMgmntShareholderData.MrCompanyTypeCode;
+      this.TaxIdNo = this.CustMgmntShareholderData.TaxIdNo;
+    }
     this.DuplicateCustObj = new DuplicateCustObj();
     if(this.IsFromCustMgmntShareholder){
       this.DuplicateCustObj.CustName = this.CustMgmntShareholderData["MgmntShrholderName"];
