@@ -13,6 +13,8 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-customer-company-contact-information',
@@ -24,10 +26,18 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   @Input() custCompanyId: number;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
 
+  readonly IdTypeNpwp: string = CommonConstant.MrIdTypeCodeNPWP;
+  readonly IdTypeKitas: string = CommonConstant.MrIdTypeCodeKITAS;
+  readonly IdTypeSim: string = CommonConstant.MrIdTypeCodeSIM;
+
+  isIdExpiredDtRequired: boolean;
+
   tempCustAddrObj: any;
-  tempMrGenderCode: any;
-  tempMrJobPositionCode: any;
+  tempMrGenderCode: KeyValueObj;
+  tempMrJobPositionCode: KeyValueObj;
   tempCustCompanyContactPersonObj: any;
+  tempMrIdTypeCode: KeyValueObj;
+  tempMrCustRelationshipCode: KeyValueObj;
 
   custAddrObj: CustAddrObj;
   UcAddressObj: UcAddressObj;
@@ -45,15 +55,24 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   editCustCompanyContactPersonByCustCompanyIdUrl: string;
   getCustCompanyContactPersonByCustCompanyIdUrl: string;
 
+  UserAccess: Object;
+  MaxDate: Date;
+
   ContactInformationForm = this.fb.group({
     ContactPersonName: ['', [Validators.maxLength(100), Validators.required]],
-    MrGenderCode: ['', [Validators.maxLength(100)]],
+    MrGenderCode: ['', [Validators.required, Validators.maxLength(100)]],
     MrJobPositionCode: ['', [Validators.required]],
     JobTitleName: ['', [Validators.required]],
     MobilePhnNo1: ['', [Validators.pattern("^[0-9]+$"), Validators.maxLength(100), Validators.required]],
     MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
     Email1: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
     Email2: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    MrIdTypeCode: [''],
+    IdNo: [''],
+    IdExpiredDt: [''],
+    BirthPlace: [''],
+    BirthDt: [''],
+    MrCustRelationshipCode: [''],
   });
   inputAddressObj: any;
 
@@ -74,6 +93,8 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.UserAccess = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.MaxDate = this.UserAccess[CommonConstant.BUSINESS_DT];
     this.UcAddressObj = new UcAddressObj();
     this.inputFieldObj = new InputFieldObj();
     this.inputFieldObj.inputLookupObj = new InputLookupObj();
@@ -98,6 +119,28 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       }
     );
 
+    var refMasterObjMrIdTypeCode = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
+      RowVersion: ""
+    }
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
+      (response) => {
+        if (response[CommonConstant.ReturnObj].length > 0)
+          this.tempMrIdTypeCode = response[CommonConstant.ReturnObj];
+      }
+    );
+
+    var refMasterObjMrCustRelationshipCode = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship,
+      RowVersion: ""
+    }
+    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCustRelationshipCode).subscribe(
+      (response) => {
+        if (response[CommonConstant.ReturnObj].length > 0)
+          this.tempMrCustRelationshipCode = response[CommonConstant.ReturnObj];
+      }
+    );
+
     this.custCompanyContactPersonObj = new CustCompanyContactPersonObj();
     this.custAddrObj = new CustAddrObj();
 
@@ -110,6 +153,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
         this.http.post(this.getCustCompanyContactPersonByCustCompanyIdUrl, this.custCompanyContactPersonObj).subscribe(
           (response) => {
             this.tempCustCompanyContactPersonObj = response;
+            console.log(this.tempCustCompanyContactPersonObj);
             this.ContactInformationForm.patchValue({
               ContactPersonName: this.tempCustCompanyContactPersonObj.ContactPersonName,
               MrGenderCode: this.tempCustCompanyContactPersonObj.MrGenderCode,
@@ -119,6 +163,12 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
               MobilePhnNo2: this.tempCustCompanyContactPersonObj.MobilePhnNo2,
               Email1: this.tempCustCompanyContactPersonObj.Email1,
               Email2: this.tempCustCompanyContactPersonObj.Email2,
+              MrIdTypeCode: this.tempCustCompanyContactPersonObj.MrIdTypeCode,
+              IdNo: this.tempCustCompanyContactPersonObj.IdNo,
+              IdExpiredDt: this.tempCustCompanyContactPersonObj.IdExpiredDt,
+              BirthPlace: this.tempCustCompanyContactPersonObj.BirthPlace,
+              BirthDt: this.tempCustCompanyContactPersonObj.BirthDt != null ? formatDate(this.tempCustCompanyContactPersonObj.BirthDt, 'yyyy-MM-dd', 'en-US') : "",
+              MrCustRelationshipCode: this.tempCustCompanyContactPersonObj.MrCustRelationshipCode,
             });
 
             if (this.tempCustCompanyContactPersonObj.MrGenderCode == null) {
@@ -132,6 +182,19 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
               });
             }
 
+            if (this.tempCustCompanyContactPersonObj.MrIdTypeCode == null) {
+              this.ContactInformationForm.patchValue({
+                MrIdTypeCode: this.tempMrIdTypeCode[0].Key
+              });
+            }
+
+            if (this.tempCustCompanyContactPersonObj.MrCustRelationshipCode == null) {
+              this.ContactInformationForm.patchValue({
+                MrCustRelationshipCode: this.tempMrCustRelationshipCode[0].Key
+              });
+            }
+
+            this.ChangeIdType(true);
           });
       }
     );
@@ -164,6 +227,27 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       this.inputAddressObj.showPhn3 = false;
   }
 
+  ChangeIdType(FirstInit: boolean = false) {
+    let IdTypeCode = this.ContactInformationForm.get("MrIdTypeCode").value;
+    if (IdTypeCode == this.IdTypeNpwp) {
+      this.ContactInformationForm.get("IdNo").setValidators(Validators.required);
+    } else {
+      this.ContactInformationForm.get("IdNo").clearValidators();
+    }
+    this.ContactInformationForm.get("IdNo").updateValueAndValidity();
+
+    if (IdTypeCode == this.IdTypeKitas || IdTypeCode == this.IdTypeSim) {
+      this.ContactInformationForm.get("IdExpiredDt").setValidators(Validators.required);
+      this.isIdExpiredDtRequired = true;
+    } else {
+      this.ContactInformationForm.get("IdExpiredDt").clearValidators();
+      this.isIdExpiredDtRequired = false;
+    }
+    
+    if(!FirstInit) this.ContactInformationForm.controls.IdExpiredDt.patchValue("");
+    this.ContactInformationForm.get("IdExpiredDt").updateValueAndValidity();
+  }
+
   // back() {
   //   this.outputTab.emit({ stepMode: 'previous' });
   // }
@@ -185,6 +269,12 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custCompanyContactPersonObj.MobilePhnNo2 = this.ContactInformationForm.controls["MobilePhnNo2"].value;
     this.custCompanyContactPersonObj.Email1 = this.ContactInformationForm.controls["Email1"].value;
     this.custCompanyContactPersonObj.Email2 = this.ContactInformationForm.controls["Email2"].value;
+    this.custCompanyContactPersonObj.MrIdTypeCode = this.ContactInformationForm.controls["MrIdTypeCode"].value;
+    this.custCompanyContactPersonObj.IdNo = this.ContactInformationForm.controls["IdNo"].value;
+    this.custCompanyContactPersonObj.IdExpiredDt = this.ContactInformationForm.controls["IdExpiredDt"].value;
+    this.custCompanyContactPersonObj.BirthPlace = this.ContactInformationForm.controls["BirthPlace"].value;
+    this.custCompanyContactPersonObj.BirthDt = this.ContactInformationForm.controls["BirthDt"].value;
+    this.custCompanyContactPersonObj.MrCustRelationshipCode = this.ContactInformationForm.controls["MrCustRelationshipCode"].value; 
 
     this.custAddrObj.CustId = this.IdCust;
     this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeContact;
