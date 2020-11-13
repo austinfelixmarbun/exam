@@ -30,8 +30,7 @@
                 [routerLinkActiveOptions]="{exact: true}">
                 <span *ngIf="menuItem.Class != 'has-sub'; then internalNoSubBlock else internalHasSubBlock"></span>
                 <ng-template #internalNoSubBlock>
-                    <a (click)="navigateSkipLocationChange(menuItem)" [routerLink]="menuItem.Class != 'has-sub' ? [menuItem.Path] : null"
-                        [queryParams]="genParam(menuItem.Params)" skipLocationChange
+                    <a (click)="navigateSkipLocationChange(menuItem)"
                         *ngIf="!menuItem.IsExternalLink; else externalLinkBlock" [contextMenu]="basicMenu"
                         [contextMenuSubject]="menuItem">
                         <i [ngClass]="[menuItem.Icon]"></i>
