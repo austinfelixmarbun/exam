@@ -164,7 +164,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
               Email2: this.tempCustCompanyContactPersonObj.Email2,
               MrIdTypeCode: this.tempCustCompanyContactPersonObj.MrIdTypeCode,
               IdNo: this.tempCustCompanyContactPersonObj.IdNo,
-              IdExpiredDt: this.tempCustCompanyContactPersonObj.IdExpiredDt,
+              IdExpiredDt: this.tempCustCompanyContactPersonObj.IdExpiredDt != null ? formatDate(this.tempCustCompanyContactPersonObj.IdExpiredDt, 'yyyy-MM-dd', 'en-US') : "",
               BirthPlace: this.tempCustCompanyContactPersonObj.BirthPlace,
               BirthDt: this.tempCustCompanyContactPersonObj.BirthDt != null ? formatDate(this.tempCustCompanyContactPersonObj.BirthDt, 'yyyy-MM-dd', 'en-US') : "",
               MrCustRelationshipCode: this.tempCustCompanyContactPersonObj.MrCustRelationshipCode,

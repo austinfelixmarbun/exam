@@ -73,7 +73,7 @@
           <label class="col-md-2 adInsLabel" translate>Birth Date</label>
           <div class="col-md-4">
             <input type="date" class="form-control" formControlName="BirthDt"
-              max="{{BusinessDate | date:'yyyy-MM-dd'}}"
+              max="{{MaxDate | date:'yyyy-MM-dd'}}"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && ContactInformationForm.controls.BirthDt.invalid}">
             <lib-uc-show-errors [control]="ContactInformationForm.controls.BirthDt" [submit]="enjiForm.submitted">
             </lib-uc-show-errors>
