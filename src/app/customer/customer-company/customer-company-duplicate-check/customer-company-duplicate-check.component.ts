@@ -106,17 +106,10 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       }
     );
 
-    this.http.post(this.urlGetDescByMasterCode, refMasterObjCustModel).subscribe(
-      (response) => {
-        this.tempCustModel = response;
-      }
-    );
-
     var refMasterObjCustModel = {
-      MasterCode: this.CustModel,
-      RowVersion: ""
+      CustModelCode: this.CustModel
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetRefCustModelByCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
       }
