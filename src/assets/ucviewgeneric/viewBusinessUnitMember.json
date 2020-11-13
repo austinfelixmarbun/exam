@@ -18,9 +18,7 @@
           } 
         ],
         "querystring": {
-            "select": "SELECT BIZ_UNIT_CODE AS BizUnitCode, BIZ_UNIT_NAME AS BizUnitName",
-            "from": "FROM dbo.REF_BIZ_UNIT WITH(NOLOCK)", 
-            "where": "WHERE REF_BIZ_UNIT_ID = {0}" 
+            "name": "viewBusinessUnitMember"
         }
       }
     ]

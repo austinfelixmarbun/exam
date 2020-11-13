@@ -76,8 +76,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT C.CUST_NO AS CustNo, C.CUST_NAME AS CustName, C.MR_CUST_TYPE_CODE as MrCustTypeCode, C.ID_NO as IdNo, C.CUST_ID as CustId",
-        "from": "FROM dbo.CUST C WITH(NOLOCK) INNER JOIN dbo.REF_MASTER RM WITH(NOLOCK) on C.MR_CUST_TYPE_CODE = RM.MASTER_CODE AND RM.REF_MASTER_TYPE_CODE = 'CUST_TYPE'"
+        "name": "searchCustomer"
     },
     "bodyList": [
         {

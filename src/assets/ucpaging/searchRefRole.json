@@ -72,8 +72,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.ROLE_CODE AS RoleCode, A.REF_ROLE_ID AS RefRoleId, A.ROLE_NAME AS RoleName, A.IS_ACTIVE AS IsActive",
-    "from": "FROM dbo.REF_ROLE A WITH(NOLOCK)"
+    "name": "searchRefRole"
   },
   "bodyList": [
     {

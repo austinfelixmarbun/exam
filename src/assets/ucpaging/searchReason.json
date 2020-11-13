@@ -59,8 +59,7 @@
       }
     ],
     "querystring": {
-      "select": "SELECT A.REASON_CODE as reasonCode, A.REF_REASON_ID as refReasonId, A.REASON_DESCR as reasonDescr, A.IS_ACTIVE as isActive, A.IS_SYSTEM AS isSystem",
-      "from": "FROM dbo.REF_REASON A WITH(NOLOCK)"
+      "name": "searchReason"
     },
     "headerList": [
       {

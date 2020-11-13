@@ -39,9 +39,7 @@
   
           ],
           "querystring": {
-            "select": "SELECT RM1.DESCR AS NotificationTypeDescr, RM2.DESCR AS NotificationMethodDescr,NH.TITLE AS Title, NH.SHORT_DESC AS ShortDesc, NH.LONG_DESC AS LongDesc, NH.PUBLISH_DT AS PublishDt",
-            "from": "FROM dbo.NOTIFICATION_H NH WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER RM1 WITH(NOLOCK) ON NH.MR_NOTIFICATION_TYPE_CODE = RM1.MASTER_CODE AND RM1.REF_MASTER_TYPE_CODE = 'NOTIFICATION_TYPE' LEFT JOIN dbo.REF_MASTER RM2 WITH(NOLOCK) ON NH.MR_NOTIFICATION_METHOD_CODE = RM2.MASTER_CODE AND RM2.REF_MASTER_TYPE_CODE = 'NOTIFICATION_METHOD'",
-            "where": " WHERE NH.NOTIFICATION_H_ID = {0}"            
+            "name": "viewNotificationOnApproval"       
           }
         }
       ]

@@ -73,8 +73,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT RM.MODULE_NAME AS ModuleName, RF.PATH AS Path, RF.REF_MODULE_ID AS RefModuleId, RF.ORDER_NO AS OrderNo, RF.TITLE AS Title, RF.IS_HIDDEN AS IsHidden, RF.REF_FORM_ID AS RefFormId, RF.CLASS AS Class",
-        "from": "FROM REF_FORM RF WITH(NOLOCK) JOIN REF_MODULE RM WITH(NOLOCK) ON RF.REF_MODULE_ID = RM.REF_MODULE_ID"
+        "name": "searchRefForm"
     },
     "headerList": [
         {

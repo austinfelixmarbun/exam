@@ -101,8 +101,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT CF.CUST_NO AS FamilyCustNo, CF.CUST_NAME AS FamilyCustName, CF.ID_NO AS FamilyIdNo, CPF.MR_CUST_RELATIONSHIP AS MrCustRelationship, C.CUST_NO AS CustNo, C.CUST_NAME AS CustName, C.ID_NO AS IdNo, RM.DESCR AS CustRelationship, CF.CUST_ID AS FamilyId, C.CUST_ID AS CustId",
-        "from": "FROM CUST_PERSONAL_FAMILY AS CPF INNER JOIN CUST AS C ON CPF.CUST_ID = C.CUST_ID INNER JOIN CUST AS CF ON CPF.FAMILY_ID = CF.CUST_ID LEFT JOIN REF_MASTER AS RM ON CPF.MR_CUST_RELATIONSHIP = RM.MASTER_CODE AND RM.REF_MASTER_TYPE_CODE = 'CUST_RELATIONSHIP'"
+        "name": "searchCustFamily"
     },
     "bodyList": [
         {

@@ -18,9 +18,7 @@
         }
       ],
       "querystring": {
-        "select": "SELECT OFFICE_CODE AS OfficeCode, OFFICE_NAME AS OfficeName",
-        "from": "FROM dbo.REF_OFFICE WITH(NOLOCK)",
-        "where": "WHERE REF_OFFICE_ID = {0}"
+        "name": "viewOfficeCenterGrpMbr"
       }
     }
   ]

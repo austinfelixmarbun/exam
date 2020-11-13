@@ -118,8 +118,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT CS.MR_CUST_TYPE_CODE AS ShareholderMrCustTypeCode, CS.CUST_NO AS ShareholderCustNo, CS.CUST_NAME AS ShareholderCustName, CS.ID_NO AS ShareholderIdNo, C.CUST_NO AS CustNo, C.CUST_NAME AS CustName, C.ID_NO AS IdNo, CS.CUST_ID AS ShareholderId, C.CUST_ID AS CustId, C.MR_CUST_TYPE_CODE AS MrCustTypeCode",
-        "from": "FROM CUST_COMPANY_MGMNT_SHAREHOLDER_NEW AS CCS INNER JOIN CUST AS C ON CCS.CUST_ID = C.CUST_ID INNER JOIN CUST AS CS ON CCS.SHAREHOLDER_ID = CS.CUST_ID"
+        "name": "searchCustShareholder"
     },
     "bodyList": [
         {
