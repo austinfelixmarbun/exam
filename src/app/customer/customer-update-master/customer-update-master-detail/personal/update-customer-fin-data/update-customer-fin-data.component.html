@@ -46,7 +46,7 @@
       <div class="form-group row">
         <label class="col-md-2 adInsLabel" translate>Join Income</label>
         <div class="col-md-4">
-          <label>{{AppCustFinData.IsJoinIncome ?? 'Yes' : 'No'}}</label>
+          <label>{{AppCustFinData.IsJoinIncome ? 'Yes' : 'No'}}</label>
         </div>
         <div class="col-md-2">
           <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IsJoinIncome')">Copy</button>
