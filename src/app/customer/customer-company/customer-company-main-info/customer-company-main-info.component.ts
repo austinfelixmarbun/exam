@@ -57,7 +57,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.default = UcAddressObj;
+    this.inputAddressObj.default = new UcAddressObj();
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
 
@@ -111,6 +111,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     custAddr["Zipcode"] = formValue["UcAddressZipcode"]["value"];
     custAddr["SubZipcode"] = formValue["UcAddressZipcode"]["value"];
     sessionStorage.setItem("CustAddr", JSON.stringify(custAddr));
+    
     this.router.navigate(["/Customer/CustomerCompany/DuplicateCheck"], { queryParams: { "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "TaxIdNo": this.TaxIdNo, "IsAffiliateWithMf": this.IsAffiliateWithMf, "IsVip": this.IsVip, "VipNotes": this.VipNotes } });
   }
 

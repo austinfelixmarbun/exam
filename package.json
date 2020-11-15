@@ -1,12 +1,12 @@
 {
   "name": "apex",
-  "version": "1.0.0-362",
+  "version": "1.0.0-389",
   "license": "",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --aot --base-href /Foundation/",
-    "sit": "ng build --configuration=sit --base-href /FOUNDATION_SIT/",
+    "sit": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=sit --base-href /FOUNDATION_SIT/",
     "demo": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=demo_env --base-href /FOUNDATION_DEMO/",
     "integration": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=integration_env --base-href /FOUNDATION_INTEGRATION/",
     "test": "ng test",

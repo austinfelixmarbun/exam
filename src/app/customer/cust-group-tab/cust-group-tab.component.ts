@@ -38,12 +38,13 @@ export class CustGroupTabComponent implements OnInit {
 
   ngOnInit() {
     var custGrp = new CustGrpObj();
-    custGrp.CustId = this.CustId;
-    this.httpClient.post(URLConstant.GetListCustGrpByCustIdForCustGrpTab, custGrp).subscribe(
+    custGrp.MemberCustId = this.CustId;
+    this.httpClient.post(URLConstant.GetListCustGrpByMemberCustIdForCustGrpTab, custGrp).subscribe(
       (response: any) => {
         this.CustGrpList = response.CustGrpObjForCustGrpTabs;
+        this.listCustIdToExclude.push(this.CustId);
         for (const item of this.CustGrpList) {
-          this.listCustIdToExclude.push(item["MemberCustId"]);
+          this.listCustIdToExclude.push(item["CustId"]);
         }
       }
     );
@@ -71,8 +72,8 @@ export class CustGroupTabComponent implements OnInit {
       (response) => {
         this.spinner.show();
         var custGrp = new CustGrpObj();
-        custGrp.CustId = this.CustId;
-        this.httpClient.post(URLConstant.GetListCustGrpByCustIdForCustGrpTab, custGrp).subscribe(
+        custGrp.MemberCustId = this.CustId;
+        this.httpClient.post(URLConstant.GetListCustGrpByMemberCustIdForCustGrpTab, custGrp).subscribe(
           (response: any) => {
             this.CustGrpList = response.CustGrpObjForCustGrpTabs;
             this.listCustIdToExclude = new Array<number>();
@@ -99,7 +100,7 @@ export class CustGroupTabComponent implements OnInit {
       (response: any) => {
         var idExclude = 0;
         for (let index = 0; index < this.listCustIdToExclude.length; index++) {
-          if(this.listCustIdToExclude[index] == this.CustGrpList[i]["MemberCustId"]){
+          if(this.listCustIdToExclude[index] == this.CustGrpList[i]["CustId"]){
             idExclude = index;
             break;
           } 

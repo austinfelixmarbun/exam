@@ -29,7 +29,7 @@ export class CustomerFamilyPagingComponent implements OnInit {
         this.CustFamilyList = response["CustPersonalFamilyList"];
         for (const item of this.CustFamilyList) {
           if(item["FamilyId"] && item["FamilyId"] > 0){
-            this.CustToExclude.push(item["FamilyId"]);
+            this.CustToExclude.push(item["CustNo"]);
           }
         }
       }

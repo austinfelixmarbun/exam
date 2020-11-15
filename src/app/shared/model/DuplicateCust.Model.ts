@@ -9,6 +9,8 @@ export class DuplicateCustObj {
     MotherMaidenName: any;
     MobilePhnNo1: any;
     Status: any;
+    Descr: any;
+    IdExpiredDt: any;
     RowVersion:any;
   }
   

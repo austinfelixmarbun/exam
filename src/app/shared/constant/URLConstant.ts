@@ -353,6 +353,14 @@ export class URLConstant {
     public static GetRefProfessionByProfessionCode = environment.FoundationR3Url + "/RefProfession/GetRefProfessionByProfessionCode"
     public static GetRefProfessionByRefProfessionId = environment.FoundationR3Url + "/RefProfession/GetRefProfessionByRefProfessionId";
 
+    //REF REASON
+    public static AddRefReason = environment.FoundationR3Url + "/RefReason/AddRefReason";
+    public static EditRefReason = environment.FoundationR3Url + "/RefReason/EditRefReason";
+    public static GetRefReasonById = environment.FoundationR3Url + "/RefReason/GetRefReasonByRefReasonId";
+
+    //REF REASON TYPE
+    public static GetValueReasonType = environment.FoundationR3Url + "/RefReasonType/GetListKeyValueByCode";
+
     //GENERIC
     public static GetObjectBySQL = "/Generic/GetObjectBySQL";
     public static AddObjectBySQL = "/Generic/AddObjectBySQL";
@@ -710,7 +718,7 @@ export class URLConstant {
     public static GetCustPersonalForUpdateByCustNo = environment.FoundationR3Url + "/Cust/GetCustPersonalForUpdateByCustNo";
     public static GetCustCompanyForUpdateByCustNo = environment.FoundationR3Url + "/Cust/GetCustCompanyForUpdateByCustNo";
     public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
-    public static GetListCustGrpByCustIdForCustGrpTab = environment.FoundationR3Url + "/CustGrp/GetListCustGrpByCustIdForCustGrpTab";
+    public static GetListCustGrpByMemberCustIdForCustGrpTab = environment.FoundationR3Url + "/CustGrp/GetListCustGrpByMemberCustIdForCustGrpTab";
     public static GetCustByCustNo = environment.FoundationR3Url + "/Cust/GetCustByCustNo";
 
     // CUSTOMER COMPANY

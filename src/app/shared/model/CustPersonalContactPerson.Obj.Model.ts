@@ -27,6 +27,15 @@ export class CustPersonalContactPersonObj {
     AreaCode2: string;
     AreaCode3: string;
     AreaCode4: string;
+    Phn1: string;
+    PhnExt1: string;
+    PhnArea1: string;
+    Phn2: string;
+    PhnExt2: string;
+    PhnArea2: string;
+    Phn3: string;
+    PhnExt3: string;
+    PhnArea3: string;
     City: string;
     SubZipcode: string;
     Zipcode : string;
