@@ -57,6 +57,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
     this.ResponseSaveData = new EventEmitter<any>();
     this.urlGetDescByMasterCode = URLConstant.GetRefMasterByMasterCode;
+    
     this.route.queryParams.subscribe(params => {
       if (params["CustModel"] != null) {
         this.CustModel = params["CustModel"];
@@ -79,10 +80,16 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       if (params["VipNotes"] != null) {
         this.VipNotes = params["VipNotes"];
       }
-    });
+    });     
   }
 
   ngOnInit() {
+    if(this.IsFromCustMgmntShareholder){
+      this.CustModel = this.CustMgmntShareholderData.MrCustModelCode;
+      this.CustName = this.CustMgmntShareholderData.MgmntShrholderName;
+      this.MrCompanyTypeCode = this.CustMgmntShareholderData.MrCompanyTypeCode;
+      this.TaxIdNo = this.CustMgmntShareholderData.TaxIdNo;
+    }
     this.DuplicateCustObj = new DuplicateCustObj();
     if(this.IsFromCustMgmntShareholder){
       this.DuplicateCustObj.CustName = this.CustMgmntShareholderData["MgmntShrholderName"];
@@ -106,17 +113,10 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       }
     );
 
-    this.http.post(this.urlGetDescByMasterCode, refMasterObjCustModel).subscribe(
-      (response) => {
-        this.tempCustModel = response;
-      }
-    );
-
     var refMasterObjCustModel = {
-      MasterCode: this.CustModel,
-      RowVersion: ""
+      CustModelCode: this.CustModel
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetRefCustModelByCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
       }
