@@ -15,6 +15,12 @@ export class CustCompanyContactPersonObj{
     PhnArea2 : any;
     Phn2 : any;
     PhnExt2 : any;
+    MrIdTypeCode: string;
+    IdNo: string;
+    IdExpiredDt: Date;
+    BirthPlace: string;
+    BirthDt: Date;
+    MrCustRelationshipCode: string; 
     RowVersion: any;
    
 }
