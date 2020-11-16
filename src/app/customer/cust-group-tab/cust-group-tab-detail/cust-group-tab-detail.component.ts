@@ -162,7 +162,7 @@ export class CustGroupTabDetailComponent implements OnInit {
     this.isCustPicked = true;
     var refMasterRelationship = new RefMasterObj();
     this.CustGrpForm.patchValue({
-      MemberCustId: e.custId,
+      CustId: e.custId,
       CustNo: e.custNo,
       CustName: e.custName
     });
