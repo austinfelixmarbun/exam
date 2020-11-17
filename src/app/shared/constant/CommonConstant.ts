@@ -10,7 +10,7 @@ export class CommonConstant {
     public static CURRENT_USER_CONTEXT = "currentUserContext"
     public static PAGE_ACCESS = "PageAccess";
     public static TOKEN = "Token";
-    public static LOCAL_IP = "LocalIp"; 
+    public static LOCAL_IP = "LocalIp";
     public static VERSION = "Version";
     public static LAST_ACCESS_TIME = "LastAccessTime";
     public static MENU = "Menu"
@@ -81,7 +81,7 @@ export class CommonConstant {
     public static ATPM = "ATPM";
     public static Holding = "HOLDING";
     public static Branch = "BRANCH";
-    
+
     //REF PROV DISTRICT
     public static RefProvDistrictTypeDis = "DIS";
     public static RefProvDistrictTypePrv = "PRV";
@@ -124,14 +124,14 @@ export class CommonConstant {
     public static RefMasterTypeCodeNotificationMethod = "NOTIFICATION_METHOD";
     public static RefMasterTypeCodeVendorPosition = "VENDOR_POSITION";
     public static RefMasterTypeCodeTaxCalcMethod = "TAX_CALC_METHOD";
-    
+
 
     public static RefMasterTypeCodeVendorCategory = "VENDOR_CATEGORY";
     public static RefMasterTypeCodeMaxRefundType = "MAX_REFUND_TYPE";
     public static RefMasterTypeCodeAssgmntType = "ASSGMNT_TYPE";
     public static RefMasterTypeCodeSupplierClass = "SUPPLIER_CLASS";
 
-    
+
     public static RefMasterTypeCodeSupplierUpCalcMethod = "SUPPLIER_UP_CALC_METHOD";
     public static RefMasterTypeCodeVendorType = "VENDOR_TYPE";
     public static RefMasterTypeCodeIdTypeVendor = "ID_TYPE_VENDOR";
@@ -206,5 +206,18 @@ export class CommonConstant {
     public static CUST_MODEL_SMEBU = "SMEBU";
     public static CUST_MODEL_NONPROF = "NONPROF";
 
+    // REF PROD COMPNT
+    public static RefProdCompntLob = "LOB";
+    public static RefProdCompntGrpGen = "GEN";
+
+    // LOB
+    public static FL4W = "FL4W";
+    public static CF4W = "CF4W";
+    public static FCTR = "FCTR";
+    public static CFRFN4W = "CFRFN4W";
+    public static CFRFN = "CFRFN";
+    public static CFNEWCAR = "CFNEWCAR";
+    public static CFNA = "CFNA";
+    
     //ATTR GROUP
 }
