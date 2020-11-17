@@ -4,7 +4,7 @@
       <ng-container *ngIf="ShowComparison == false">
         <div class="col-md-12" formArrayName="groups" *ngFor="let type of FormProdOfferingComp.controls['groups'].controls; let j = index">
           <div class="form-group row" [formGroupName]="j">
-            <div class="col-md-12">
+            <div class="col-md-12" *ngIf="!ListHide[j]">
               <h4 class="form-section card-title" translate><i class="ft-file-text"></i>{{FormProdOfferingComp.controls['groups'].value[j].groupName}}</h4>
             </div>
             <div class="col-md-12" formArrayName="components" *ngFor="let node of type.controls['components'].controls; let l = index">
@@ -60,7 +60,7 @@
         </div>
         <div class="col-md-12" formArrayName="groups" *ngFor="let type of FormProdOfferingComp.controls['groups'].controls; let j = index">
           <div class="form-group row" [formGroupName]="j">
-            <div class="col-md-12">
+            <div class="col-md-12" *ngIf="!ListHide[j]">
               <h4 class="form-section card-title" translate><i class="ft-file-text"></i>{{FormProdOfferingComp.controls['groups'].value[j].groupName}}</h4>
             </div>
             <div class="col-md-12" formArrayName="components" *ngFor="let node of type.controls['components'].controls; let l = index">
