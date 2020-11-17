@@ -310,6 +310,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       this.addCustObj.CustObj.IdNo = this.IdNo;
       this.addCustObj.CustObj.IdExpiredDt = this.IdExpiredDt;
       this.addCustObj.CustObj.TaxIdNo = this.TaxIdNo;
+      this.addCustObj.CustObj.IsCustomer = true;
       if (this.IsVip === "true") {
         this.addCustObj.CustObj.IsVip = true;
       } else {
