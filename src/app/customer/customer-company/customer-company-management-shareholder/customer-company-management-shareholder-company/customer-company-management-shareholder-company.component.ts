@@ -11,6 +11,8 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+
 
 @Component({
   selector: 'app-customer-company-management-shareholder-company',
@@ -44,7 +46,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     MgmntShrholderName: ['', [Validators.maxLength(100) ,Validators.required]],
     MrCustModelCode: [''],
     MrCompanyTypeCode: ['',[Validators.required]],
-    TaxIdNo: [''],
+    TaxIdNo: ['', [Validators.required]],
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
     MrIndustryTypeCode: [''],
     IsSigner: [false],
@@ -69,6 +71,17 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     this.inputLookupCustCompanyObj.pagingJson = "./assets/lookup/lookUpExistingCustCompany.json";
     this.inputLookupCustCompanyObj.genericJson = "./assets/lookup/lookUpExistingCustCompany.json";
     this.inputLookupCustCompanyObj.isRequired = false;
+
+    var arrCrit = new Array();
+    var addCrit = new CriteriaObj();
+    addCrit.DataType = "numeric";
+    addCrit.propName = "c.CUST_ID";
+    addCrit.restriction = AdInsConstant.RestrictionNeq;
+    addCrit.value = this.custCompanyId.toString();    
+    arrCrit.push(addCrit);
+
+    this.inputLookupCustCompanyObj.addCritInput = arrCrit;
+
     var refMasterObjMrCompanyTypeCode = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
       RowVersion: ""

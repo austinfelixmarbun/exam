@@ -150,10 +150,11 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       this.DuplicateCustObj.TaxIdNo = this.CustMgmntShareholderData["TaxIdNo"];
       this.DuplicateCustObj.MotherMaidenName = "";
       this.DuplicateCustObj.BirthDt = this.CustMgmntShareholderData["BirthDt"];
+      this.DuplicateCustObj.IdExpiredDt = this.CustMgmntShareholderData.IdExpiredDt;
       this.BirthPlace = this.CustMgmntShareholderData["BirthPlace"];
-      this.Gender = this.CustMgmntShareholderData["Gender"];
+      this.Gender = this.CustMgmntShareholderData["MrGenderCode"];
       this.MrIdTypeCode = this.CustMgmntShareholderData["MrIdTypeCode"];
-      this.CustModel = this.CustMgmntShareholderData["CustModel"];
+      this.CustModel = this.CustMgmntShareholderData["MrCustModelCode"];
       this.IsAffiliateWithMf = "false";
       this.IsVip = "false";
     }
@@ -207,10 +208,10 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
     );
 
     var refMasterObjCustModel = {
-      MasterCode: this.CustModel,
+      CustModelCode: this.CustModel,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetRefCustModelByCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
       }
@@ -277,6 +278,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       var requestShareholderPersonal = {
         CustId: this.CustMgmntShareholderData["CustId"],
         MgmntShrholderName: this.CustMgmntShareholderData["MgmntShrholderName"],
+        MrCustModelCode: this.CustMgmntShareholderData["MrCustModelCode"],
         MrIdTypeCode: this.CustMgmntShareholderData["MrIdTypeCode"],
         IdNo: this.CustMgmntShareholderData["IdNo"],
         IdExpiredDt: this.CustMgmntShareholderData["IdExpiredDt"],
@@ -309,6 +311,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       this.addCustObj.CustObj.IdNo = this.IdNo;
       this.addCustObj.CustObj.IdExpiredDt = this.IdExpiredDt;
       this.addCustObj.CustObj.TaxIdNo = this.TaxIdNo;
+      this.addCustObj.CustObj.IsCustomer = true;
       if (this.IsVip === "true") {
         this.addCustObj.CustObj.IsVip = true;
       } else {

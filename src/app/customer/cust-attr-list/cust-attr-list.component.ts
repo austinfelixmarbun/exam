@@ -103,7 +103,7 @@ export class CustAttrListComponent implements OnInit {
       } else {
         formGroupObject["AttrValue"] = [''];
       }
-      if (refAttr["DefaultValue"] != null) {
+      if (refAttr["DefaultValue"] != null && refAttr["DefaultValue"].trim() != '') {
         formGroupObject["AttrValue"] = [refAttr.DefaultValue];
       }
 
