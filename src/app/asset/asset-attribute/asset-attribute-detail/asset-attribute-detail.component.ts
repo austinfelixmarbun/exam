@@ -11,6 +11,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { forkJoin } from 'rxjs';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-asset-attribute-detail',
@@ -125,7 +126,7 @@ export class AssetAttributeDetailComponent implements OnInit {
       this.http.post(URLConstant.AddAssetAttr, this.assetAttrObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/Attribute/Paging"], { queryParams: { "AssetTypeId": this.AssetTypeId } });
+          AdInsHelper.RedirectUrl(this.router,["/Asset/Attribute/Paging"],{ "AssetTypeId": this.AssetTypeId });
         });
     }
     else if(this.pageType == "edit"){
@@ -134,7 +135,7 @@ export class AssetAttributeDetailComponent implements OnInit {
       this.http.post(URLConstant.EditAssetAttr, this.assetAttrObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/Attribute/Paging"], { queryParams: { "AssetTypeId": this.AssetTypeId } });
+          AdInsHelper.RedirectUrl(this.router,["/Asset/Attribute/Paging"],{ "AssetTypeId": this.AssetTypeId });
         });
     }
   }

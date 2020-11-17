@@ -72,8 +72,7 @@ export class HolidayAddComponent implements OnInit {
             this.holidayObj.RowVersion = this.result.RowVersion;
             this.http.post(URLConstant.EditHolidaySchmH, this.holidayObj).subscribe(
                 (response) => {
-                    //this.router.navigateByUrl('/CommonSetting/Holiday');
-                    AdInsHelper.navigateUrlMasking(this.router,['/CommonSetting/Holiday'],{})
+                    AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Holiday'],{})
                     this.toastr.successMessage(response['message']);
                 });
         }
@@ -84,8 +83,7 @@ export class HolidayAddComponent implements OnInit {
             this.holidayObj.RowVersion = "";
 
             this.http.post(URLConstant.AddHolidaySchmH, this.holidayObj).subscribe((response) => {
-                //this.router.navigateByUrl('/CommonSetting/Holiday');
-                AdInsHelper.navigateUrlMasking(this.router,['/CommonSetting/Holiday'],{})
+                AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Holiday'],{})
                 this.toastr.successMessage(response['message']);
             });
         }

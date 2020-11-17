@@ -8,6 +8,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { map, mergeMap } from 'rxjs/operators';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-ref-industry-type-detail',
@@ -100,7 +101,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
         //SAVE
         (response) => {
           this.service.successMessage(response["Message"]);
-          this.router.navigate(['/CommonSetting/IndustryType/Paging']);
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/IndustryType/Paging'],{});
         },
         (error) => {
           this.service.typeErrorCustom(error);
@@ -113,7 +114,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
       this.httpClient.post(URLConstant.EditRefIndustryType, this.refIndustryType).subscribe(
         (response) => {
           this.service.successMessage(response["Message"]);
-          this.router.navigate(['/CommonSetting/IndustryType/Paging']);
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/IndustryType/Paging'],{});
         },
         (error) => {
           this.service.typeErrorCustom(error);

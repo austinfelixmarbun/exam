@@ -92,9 +92,8 @@ export class DistrictAddEditComponent implements OnInit {
       this.refProvDistrictObj.Type = CommonConstant.RefProvDistrictTypeDis;
       this.http.post(this.addUrl, this.refProvDistrictObj).subscribe(
         response => {
-            this.toastr.successMessage(response["Message"]);
-            //this.router.navigateByUrl("/CommonSetting/District/Paging?refProvDistrictId=" + this.parentId);   
-            AdInsHelper.navigateUrlMasking(this.router,['/CommonSetting/District/Paging/'],{refProvDistrictId: this.parentId});     
+            this.toastr.successMessage(response["Message"]);  
+            AdInsHelper.RedirectUrl(this.router,['/CommonSetting/District/Paging/'],{"refProvDistrictId": this.parentId});     
         }
       );
     } else {
@@ -107,9 +106,8 @@ export class DistrictAddEditComponent implements OnInit {
       this.refProvDistrictObj.Type =  CommonConstant.RefProvDistrictTypeDis;
       this.http.post(this.editUrl, this.refProvDistrictObj).subscribe(
         response => {
-          this.toastr.successMessage(response["Message"]);
-          //this.router.navigateByUrl("/CommonSetting/District/Paging?refProvDistrictId=" + this.parentId);  
-          AdInsHelper.navigateUrlMasking(this.router,['/CommonSetting/District/Paging/'],{refProvDistrictId: this.parentId});       
+          this.toastr.successMessage(response["Message"]);  
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/District/Paging/'],{"refProvDistrictId": this.parentId});       
         }
       );
     }

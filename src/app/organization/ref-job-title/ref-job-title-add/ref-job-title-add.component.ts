@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-ref-job-title-add',
@@ -71,7 +72,7 @@ export class RefJobTitleAddComponent implements OnInit {
       this.http.post(this.addUrl, this.rjtObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/Organization/JobTitle"]);
+          AdInsHelper.RedirectUrl(this.router,["/Organization/JobTitle"],{});
         }
       );
     } else {
@@ -80,7 +81,7 @@ export class RefJobTitleAddComponent implements OnInit {
       this.http.post(this.editUrl, this.rjtObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/Organization/JobTitle"]);
+          AdInsHelper.RedirectUrl(this.router,["/Organization/JobTitle"],{});
         }
       );
     }

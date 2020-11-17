@@ -8,6 +8,7 @@ import { FormBuilder } from '@angular/forms';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-view-coy-address',
@@ -53,7 +54,7 @@ export class CustomerViewCoyAddressComponent implements OnInit {
         }
       },
       error => {
-        this.router.navigateByUrl('Error');
+        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
       }
     );
     this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
@@ -63,7 +64,7 @@ export class CustomerViewCoyAddressComponent implements OnInit {
         }
       },
       error => {
-        this.router.navigateByUrl('Error');
+        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
       }
     );
     var refMasterObj = new RefMasterObj();

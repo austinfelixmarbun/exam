@@ -12,6 +12,7 @@ import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.mod
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-verification-question-scheme-member-add',
@@ -84,7 +85,7 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
     this.http.post(URLConstant.AddListVerfSchemeD, this.verfSchemeDObj).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
-        this.router.navigate(["/Verification/QuestionSchemeMemberPaging"], { queryParams: { "VerfSchemeHId": this.VerfSchemeHId } });
+        AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionSchemeMemberPaging"],{ "VerfSchemeHId": this.VerfSchemeHId });
       }
     );
   }

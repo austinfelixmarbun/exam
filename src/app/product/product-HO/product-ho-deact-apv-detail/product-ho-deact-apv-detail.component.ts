@@ -6,6 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-product-ho-deact-apv-detail',
@@ -65,9 +66,9 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
   onApprovalSubmited()
   {
     this.toastr.successMessage("Success");
-    this.router.navigate(["/Product/HODeactivateApproval"]);
+    AdInsHelper.RedirectUrl(this.router,["/Product/HODeactivateApproval"],{ });
   }
   onCancelClick() {
-    this.router.navigate(["/Product/HODeactivateApproval"]);
+    AdInsHelper.RedirectUrl(this.router,["/Product/HODeactivateApproval"],{ });
   }
 }

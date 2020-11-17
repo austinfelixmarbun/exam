@@ -69,8 +69,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
     this.httpClient.post(URLConstant.EditGeneralSetting, this.gsObj).subscribe(
       response => {
         this.service.successMessage(response["Message"]);
-        //this.router.navigate(["/CommonSetting/GeneralSetting"]);
-        AdInsHelper.navigateUrlMasking(this.router,["/CommonSetting/GeneralSetting"],{});
+        AdInsHelper.RedirectUrl(this.router,["/CommonSetting/GeneralSetting"],{});
       }
     );
   }

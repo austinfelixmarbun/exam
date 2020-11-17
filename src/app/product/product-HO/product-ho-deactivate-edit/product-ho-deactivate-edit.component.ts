@@ -10,6 +10,7 @@ import { ProdOfferingVersionObj } from '../../../shared/model/ProdOfferingVersio
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 
 @Component({
@@ -90,7 +91,7 @@ export class ProductHODeactivateEditComponent implements OnInit {
     this.http.post(this.requestDeactURL, this.prodHDeactivateObj).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(["/Product/HODeactivate"]);
+        AdInsHelper.RedirectUrl(this.router,["/Product/HODeactivate"],{ });
       }
     );
   }

@@ -7,6 +7,7 @@ import { BusinessUnitObj } from 'app/shared/model/BusinessUnitObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
     selector: 'add-app-business-unit',
@@ -75,7 +76,7 @@ export class AddBusinessUnitComponent implements OnInit {
             this.http.post(this.editUrl, this.bizUnitObj).subscribe(
                 (response) => {
                     this.toastr.successMessage(response["message"]);
-                    this.router.navigateByUrl('/Organization/BusinessUnit');
+                    AdInsHelper.RedirectUrl(this.router,["/Organization/BusinessUnit"],{});
                 });
         }
         else {
@@ -83,7 +84,7 @@ export class AddBusinessUnitComponent implements OnInit {
             this.http.post(this.editUrl, this.bizUnitObj).subscribe(
                 (response) => {
                     this.toastr.successMessage(response["message"]);
-                    this.router.navigateByUrl('/Organization/BusinessUnit');
+                    AdInsHelper.RedirectUrl(this.router,["/Organization/BusinessUnit"],{});
                 });
         }
     }

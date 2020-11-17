@@ -26,7 +26,7 @@
               <tbody>
                 <tr *ngFor="let item of SurveyTaskList?.ReturnObject">
                   <td>
-                    <a target="_blank" [routerLink]="['/View/SurveyTask']"
+                    <a target="_blank" [routerLink]="['/View/SurveyTask']" skipLocationChange
                       [queryParams]="{ SrvyTaskId: item.SrvyTaskId }">{{item.SrvyTaskNo}}</a>
                   </td>
                   <td>{{item.MrSrvySubjCode + ' - ' + item.MrSrvySubj}}</td>
@@ -125,7 +125,7 @@
             </ng-template>
           </div>
           <div class="form-actions right">
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Survey/Paging']" translate>
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Survey/Paging']" skipLocationChange translate>
               <i class="far fa-window-close"></i> Cancel
             </button>
             <button type="submit" class="btn btn-raised btn-primary" translate>

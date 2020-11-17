@@ -8,6 +8,7 @@ import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
 import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-asset-scheme-add-edit-information',
@@ -90,7 +91,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       this.http.post(URLConstant.AddAssetSchmH, this.assetSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/Scheme/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,["/Asset/Scheme/Paging"],{});
         }
       );
     }
@@ -101,7 +102,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       this.http.post(URLConstant.EditAssetSchmH, this.assetSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/Scheme/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,["/Asset/Scheme/Paging"],{});
         }
       );
     }

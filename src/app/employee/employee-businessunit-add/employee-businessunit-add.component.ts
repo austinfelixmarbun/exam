@@ -15,6 +15,7 @@ import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-employee-businessunit-add',
@@ -196,7 +197,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.http.post(URLConstant.EditRefUserRole, this.userRole).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          this.router.navigate(['/Employee/EmployeeBusinessUnit/Paging'], { queryParams: { RefUserId: this.RefUserId } });
+          AdInsHelper.RedirectUrl(this.router,["/Employee/EmployeeBusinessUnit/Paging"],{ "RefUserId": this.RefUserId });
         }
       );
     }
@@ -206,7 +207,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.userRole.RefUserId = this.RefUserId;
       this.http.post(URLConstant.AddRefUserRole, this.userRole).subscribe((response) => {
         this.toastr.successMessage(response['message']);
-        this.router.navigate(['/Employee/EmployeeBusinessUnit/Paging'], { queryParams: { RefUserId: this.RefUserId } });
+        AdInsHelper.RedirectUrl(this.router,["/Employee/EmployeeBusinessUnit/Paging"],{ "RefUserId": this.RefUserId });
       });
     }
   }

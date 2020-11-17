@@ -8,6 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfSchemeDObj } from 'app/shared/model/VerfSchemeDObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-verification-question-scheme-member-edit',
@@ -79,7 +80,7 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
     this.http.post(URLConstant.EditVerfSchemeD, this.verfSchemeDObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigateByUrl('/Verification/QuestionSchemeMemberPaging?VerfSchemeHId=' + this.VerfSchemeHId);
+        AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionSchemeMemberPaging"],{ "VerfSchemeHId": this.VerfSchemeHId });
       });
   }
 }

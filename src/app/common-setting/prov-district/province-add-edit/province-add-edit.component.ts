@@ -74,8 +74,7 @@ export class ProvinceAddEditComponent implements OnInit {
       this.http.post(this.addUrl, this.refProvDistrictObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            //this.router.navigate(["/CommonSetting/RefProvince/Paging"]);
-            AdInsHelper.navigateUrlMasking(this.router,['/CommonSetting/RefProvince/Paging'],{});     
+            AdInsHelper.RedirectUrl(this.router,['/CommonSetting/RefProvince/Paging'],{});     
         }
       );
     } else {
@@ -86,8 +85,7 @@ export class ProvinceAddEditComponent implements OnInit {
       this.http.post(this.editUrl, this.refProvDistrictObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          //this.router.navigate(["/CommonSetting/RefProvince/Paging"]);
-          AdInsHelper.navigateUrlMasking(this.router,['/CommonSetting/RefProvince/Paging'],{});   
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/RefProvince/Paging'],{});   
         }
       );
     }

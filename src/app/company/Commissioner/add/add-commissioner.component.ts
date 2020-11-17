@@ -9,6 +9,7 @@ import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.c
 import { CoyCommissionerObj } from 'app/shared/model/CoyCommissionerObj.Model';
 import { UcInfoComponent } from 'app/shared/UserControl/uc-info/uc-info.component';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
     selector: 'add-commissioner',
@@ -126,7 +127,7 @@ export class CommissionerAddComponent implements OnInit {
                 this.http.post(this.editUrl, coyCommisionerObj).subscribe(
                     (response) => {
                         this.toastr.successMessage(response['message']);
-                        this.router.navigateByUrl('/company/commissioner?refCoyId=' + this.refCoyId);
+                        AdInsHelper.RedirectUrl(this.router,["/company/commissioner"],{ "refCoyId": this.refCoyId });
                     });
             }
             else {
@@ -134,7 +135,7 @@ export class CommissionerAddComponent implements OnInit {
                 this.http.post(this.editUrl, coyCommisionerObj).subscribe(
                     (response) => {
                         this.toastr.successMessage(response['message']);
-                        this.router.navigateByUrl('/company/commissioner?refCoyId=' + this.refCoyId);
+                        AdInsHelper.RedirectUrl(this.router,["/company/commissioner"],{ "refCoyId": this.refCoyId });
                     });
             }
 

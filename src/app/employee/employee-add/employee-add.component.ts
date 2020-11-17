@@ -21,6 +21,7 @@ import { URLConstant } from "app/shared/constant/URLConstant";
 import { UcAddressObj } from "app/shared/model/UcAddressObj.Model";
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
+import { AdInsHelper } from "app/shared/AdInsHelper";
 
 @Component({
   selector: "app-employee-add",
@@ -272,7 +273,7 @@ export class EmployeeAddComponent implements OnInit {
       this.httpClient.post(URLConstant.AddRefEmp, refEmpData).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/Employee/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,["/Employee/Paging"],{});
         }
       );
     }
@@ -282,7 +283,7 @@ export class EmployeeAddComponent implements OnInit {
       this.httpClient.post(URLConstant.EditRefEmp, refEmpData).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/Employee/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,["/Employee/Paging"],{});
         }
       );
     }

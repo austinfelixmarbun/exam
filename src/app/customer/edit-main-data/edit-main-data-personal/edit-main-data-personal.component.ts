@@ -16,6 +16,7 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { ResponseOptions } from '@angular/http';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-edit-main-data-personal',
@@ -259,19 +260,19 @@ export class EditMainDataPersonalComponent implements OnInit {
             this.toastr.successMessage(response["Message"]);
             
             if (this.From == "EditMainData") {
-              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit', From: 'EditMainData' } });
+              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerPersonal/Page"],{ "IdCust": this.CustId, Page: 'Edit', From: 'EditMainData' });
             }
             else if(this.From == "CustFamily"){
-              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit', From: 'CustFamily' } });
+              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerPersonal/Page"],{ "IdCust": this.CustId, Page: 'Edit', From: 'CustFamily' });
             }
             else if(this.From == "CustShareholder"){
-              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit', From: 'CustShareholder' } });
+              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerPersonal/Page"],{ "IdCust": this.CustId, Page: 'Edit', From: 'CustShareholder' });
             }
             else if(this.From == "CustGuarantor"){
-              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId, Page: 'Edit', From: 'CustGuarantor' } });
+              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerPersonal/Page"],{ "IdCust": this.CustId, Page: 'Edit', From: 'CustGuarantor' });
             }
             else {
-              this.router.navigate(["/Customer/CustomerPersonal/Page"], { queryParams: { IdCust: this.CustId,From:'CustPaging' } });
+              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerPersonal/Page"],{ "IdCust": this.CustId, From: 'CustPaging' });
             } 
           }
         );
@@ -290,19 +291,19 @@ export class EditMainDataPersonalComponent implements OnInit {
   }
   back(){
     if(this.From =="CustPaging"){
-      this.router.navigate(["/Customer/Paging"]); 
+      AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
     }
     else if(this.From == "EditMainData"){
-      this.router.navigate(["/Customer/EditMainData/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Customer/EditMainData/Paging"],{});
     }
     else if(this.From == "CustFamily"){
-      this.router.navigate(["/Customer/CustFamily/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Customer/CustFamily/Paging"],{});
     }
     else if(this.From == "CustShareholder"){
-      this.router.navigate(["/Customer/CustShareholder/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Customer/CustShareholder/Paging"],{});
     }
     else if(this.From == "CustGuarantor"){
-      this.router.navigate(["/Customer/CustGuarantor/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Customer/CustGuarantor/Paging"],{});
     }
 }
 checkState() {

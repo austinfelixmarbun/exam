@@ -12,6 +12,7 @@ import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-ref-form-role-mapping',
@@ -93,7 +94,7 @@ export class RefFormRoleMappingComponent implements OnInit {
     this.http.post(URLConstant.AddListAuthForm, this.listAuthFormObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(['/SystemSetting/RefForm/RoleMapping'], { queryParams: { "RefFormId": this.RefFormId } });
+        AdInsHelper.RedirectUrl(this.router,["/SystemSetting/RefForm/RoleMapping"],{ "RefFormId": this.RefFormId });
       });
   }
 }

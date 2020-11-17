@@ -10,6 +10,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-review-upload-asset-master-detail',
@@ -60,7 +61,7 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
     this.http.post(URLConstant.UploadReview, uploadObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
-        this.router.navigate(["/Asset/AssetMaster/ReviewUploadPaging"]);
+        AdInsHelper.RedirectUrl(this.router,["/Asset/AssetMaster/ReviewUploadPaging"],{});
       }
     );
   }

@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-asset-document-master-add-edit',
@@ -60,7 +61,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddNewRefAssetDocData, this.refAssetObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/DocumentMaster/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,["/Asset/DocumentMaster/Paging"],{});
         }
       );
     }
@@ -73,7 +74,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditRefAssetDocData, this.refAssetObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/DocumentMaster/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,["/Asset/DocumentMaster/Paging"],{});
         });
     }
   }

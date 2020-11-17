@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-review-upload-negative-customer-paging',
@@ -41,7 +42,7 @@ export class ReviewUploadNegativeCustomerPagingComponent implements OnInit {
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/Customer/NegativeCustomer/ReviewUploadPaging']);
+          AdInsHelper.RedirectUrl(this.router,["/Customer/NegativeCustomer/ReviewUploadPaging"],{});
       }); 
       }
     );

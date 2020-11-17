@@ -9,6 +9,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-office-area-member-add',
@@ -74,7 +75,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
     this.http.post(URLConstant.AddRefOfficeAreaMember, RequestItem).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
-        this.router.navigate(["/Office/OfficeArea/Member"], { queryParams: { "RefOfficeAreaId": this.RefOfficeAreaId } });
+        AdInsHelper.RedirectUrl(this.router,["/Office/OfficeArea/Member"],{ "RefOfficeAreaId": this.RefOfficeAreaId });
       });
     
   }

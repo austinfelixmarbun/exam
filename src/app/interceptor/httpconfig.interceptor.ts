@@ -42,7 +42,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         if (checkSession == "1") {
             // this.errorDialogService.openDialog(AdInsErrorMessage.SessionTimeout);
             this.spinner.hide();
-            this.router.navigate(["/pages/login"]);
+            AdInsHelper.RedirectUrl(this.router,["/pages/login"],{});
         }
 
         if (request.url.includes("Add") || request.url.includes("Edit") || request.url.includes("Delete")) {

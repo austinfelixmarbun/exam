@@ -3,13 +3,13 @@
     <div ngbDropdown>
       <button class="btn btn-primary btn-flat" id="dropdownAdd" ngbDropdownToggle>Add</button>
       <div ngbDropdownMenu aria-labelledby="dropdownAdd">
-          <button class="dropdown-item" [routerLink]="['/Vendor/HO/Detail']"
+          <button class="dropdown-item" [routerLink]="['/Vendor/HO/Detail']" skipLocationChange
           [queryParams]="{MrVendorCategoryCode:'SUPPLIER_HO'}">Add Supplier</button>
-          <button class="dropdown-item" [routerLink]="['/Vendor/HO/Detail']"
+          <button class="dropdown-item" [routerLink]="['/Vendor/HO/Detail']" skipLocationChange
           [queryParams]="{MrVendorCategoryCode:'LIFE_INSCO_HO'}">Add Life Insurance</button>
-          <button class="dropdown-item" [routerLink]="['/Vendor/HO/Detail']"
+          <button class="dropdown-item" [routerLink]="['/Vendor/HO/Detail']" skipLocationChange
           [queryParams]="{MrVendorCategoryCode:'ASSET_INSCO_HO'}">Add Asset Insurance</button>
-          <button class="dropdown-item" [routerLink]="['/Vendor/HO/Detail']"
+          <button class="dropdown-item" [routerLink]="['/Vendor/HO/Detail']" skipLocationChange
           [queryParams]="{MrVendorCategoryCode:'SURVEYOR_HO'}">Add Surveyor</button>
       </div>
       </div>

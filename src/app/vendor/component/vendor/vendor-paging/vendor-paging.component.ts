@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-vendor-paging',
@@ -144,22 +145,22 @@ export class VendorPagingComponent implements OnInit {
 
   navigate() {
     if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
-      this.router.navigate(["/Vendor/Branch/Add"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
+      AdInsHelper.RedirectUrl(this.router,["/Vendor/Branch/Add"],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
     else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO) {
-      this.router.navigate(["/Vendor/HO/Detail"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
+      AdInsHelper.RedirectUrl(this.router,["/Vendor/HO/Detail"],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });   
     }
     else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {
-      this.router.navigate(["/Vendor/Holding/Detail"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
+      AdInsHelper.RedirectUrl(this.router,["/Vendor/Holding/Detail"],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });    
     }
     else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_ATPM) {
-      this.router.navigate(["/Vendor/ATPM/Detail"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
+      AdInsHelper.RedirectUrl(this.router,["/Vendor/ATPM/Detail"],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });    
     }
     if (this.Type == "Scheme") {
-      this.router.navigate(["/Vendor/VendorScheme/Detail"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
+      AdInsHelper.RedirectUrl(this.router,["/Vendor/VendorScheme/Detail"],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });    
     }
     else if (this.Type == "Group") {
-      this.router.navigate(["/Vendor/Group/Add"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
+      AdInsHelper.RedirectUrl(this.router,["/Vendor/Group/Add"],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });    
     }
   }
 
