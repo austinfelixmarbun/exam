@@ -15,10 +15,10 @@ export class CustomerGuarantorMenuComponent implements OnInit {
 
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj._url = "./assets/ucpaging/searchCustShareholder.json";
+    this.inputPagingObj._url = "./assets/ucpaging/searchCustGuarantor.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCustShareholder.json";
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCustGuarantor.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
     this.inputPagingObj.ddlEnvironments = [
       {
