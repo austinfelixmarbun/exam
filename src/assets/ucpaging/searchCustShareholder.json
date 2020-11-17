@@ -95,7 +95,7 @@
         },
         {
             "type": "sort",
-            "position": "left",
+            "position": "center",
             "label": "CUSTOMER NO.",
             "name": "C.CUST_NO"
         },
@@ -211,7 +211,7 @@
                             ],
                             "result": {
                                 "type": "link",
-                                "position": "left",
+                                "position": "center",
                                 "property": "CustNo",
                                 "path": "/View/Customer/PersonalDetail",
                                 "target": "_blank",
@@ -234,7 +234,7 @@
                             ],
                             "result": {
                                 "type": "link",
-                                "position": "left",
+                                "position": "center",
                                 "property": "CustNo",
                                 "path": "/View/Customer/CoyDetail",
                                 "target": "_blank",
