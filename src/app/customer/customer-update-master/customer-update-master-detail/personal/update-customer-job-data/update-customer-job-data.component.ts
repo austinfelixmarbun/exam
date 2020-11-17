@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { UpdateMasterCustJobDataObj } from 'app/shared/model/UpdateMasterCust/UpdateMasterCustJobDataObj.Model';
 import { environment } from 'environments/environment';
 import { forkJoin } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
@@ -17,11 +19,11 @@ import { map, mergeMap } from 'rxjs/operators';
 export class UpdateCustomerJobDataComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
-  AppJobData: Object;
-  CustModelList: Array<Object>;
-  JobPositionList: Array<Object>;
-  JobStatusList: Array<Object>;
-  CompanyScaleList: Array<Object>;
+  AppJobData: UpdateMasterCustJobDataObj;
+  CustModelList: Array<any>;
+  JobPositionList: Array<any>;
+  JobStatusList: Array<any>;
+  CompanyScaleList: Array<any>;
   lookupProfessionObj: InputLookupObj;
   lookupIndustryTypeObj: InputLookupObj;
   lookupZipcodeObj: InputLookupObj;
@@ -58,12 +60,14 @@ export class UpdateCustomerJobDataComponent implements OnInit {
   constructor(
     private http: HttpClient, 
     private toastr: NGXToastrService, 
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
-    this.AppJobData = new Object();
-    this.CustModelList = new Array<Object>();
-    this.JobPositionList = new Array<Object>();
-    this.JobStatusList = new Array<Object>();
+    this.AppJobData = new UpdateMasterCustJobDataObj();
+    this.CustModelList = new Array<any>();
+    this.JobPositionList = new Array<any>();
+    this.JobStatusList = new Array<any>();
+    this.CompanyScaleList = new Array<any>();
     this.ResponseTab = new EventEmitter<any>();
 
     this.lookupIndustryTypeObj = new InputLookupObj();
@@ -93,12 +97,14 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     let getCustModel = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel });
     let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition });
     let getJobStatus = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobStat });
-    forkJoin([getDetail, getCustModel, getJobPosition, getJobStatus]).pipe(
+    let getCompanyScale = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCompanyScale });
+    forkJoin([getDetail, getCustModel, getJobPosition, getJobStatus, getCompanyScale]).pipe(
       map((response) => {
         this.AppJobData = response[0]["AppCustJobData"];
         this.CustModelList = response[1][CommonConstant.ReturnObj];
         this.JobPositionList = response[2][CommonConstant.ReturnObj];
         this.JobStatusList = response[3][CommonConstant.ReturnObj];
+        this.CompanyScaleList = response[4][CommonConstant.ReturnObj];
         this.CustomerJobForm.patchValue({...response[0]["MasterCustJobData"]});
         this.lookupZipcodeObj.nameSelect = response[0]["MasterCustJobData"]["Zipcode"];
         return response[0];
@@ -157,6 +163,10 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     var obj = new Object();
     obj[formControlName] = this.AppJobData[formControlName];
     this.CustomerJobForm.patchValue(obj);
+  }
+
+  back(){
+    this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
   }
 
   SaveValue(){

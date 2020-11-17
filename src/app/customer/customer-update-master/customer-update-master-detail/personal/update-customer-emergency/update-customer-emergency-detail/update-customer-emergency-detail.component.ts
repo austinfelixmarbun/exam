@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { UpdateCustEmergencyObj } from 'app/shared/model/UpdateMasterCust/UpdateCustEmergencyObj.Model';
 import { environment } from 'environments/environment';
 import { forkJoin } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
@@ -17,12 +19,12 @@ import { map, mergeMap } from 'rxjs/operators';
 export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
-  AppEmergencyData: Object;
-  CustRelationList: Array<Object>;
-  IdTypeList: Array<Object>;
-  GenderList: Array<Object>;
-  lookupObj: Object;
-  DisplayName: Object;
+  AppEmergencyData: UpdateCustEmergencyObj;
+  CustRelationList: Array<any>;
+  IdTypeList: Array<any>;
+  GenderList: Array<any>;
+  lookupObj: Record<string, any>;
+  DisplayName: Record<string, any>;
 
   CustomerEmergencyForm = this.fb.group({
     CustEmergencyId: [0],
@@ -51,15 +53,16 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   constructor(
     private http: HttpClient, 
     private toastr: NGXToastrService, 
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.ResponseTab = new EventEmitter<any>();
     this.CustRelationList = new Array<Object>();
-    this.IdTypeList = new Array<Object>();
-    this.GenderList = new Array<Object>();
-    this.AppEmergencyData = new Object();
-    this.DisplayName = new Object();
-    this.lookupObj = new Object();
+    this.IdTypeList = new Array<any>();
+    this.GenderList = new Array<any>();
+    this.AppEmergencyData = new UpdateCustEmergencyObj();
+    // this.DisplayName = new Object();
+    // this.lookupObj = new Object();
 
     this.lookupObj["Zipcode"] = new InputLookupObj();
     this.lookupObj["Zipcode"].urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
@@ -144,7 +147,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   }
 
   back(){
-    
+    this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
   }
 
   SaveValue(){

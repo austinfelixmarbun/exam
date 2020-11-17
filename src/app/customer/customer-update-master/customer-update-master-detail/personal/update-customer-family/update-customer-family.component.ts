@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UpdateCustFamilyObj } from 'app/shared/model/UpdateMasterCust/UpdateCustFamilyObj.Model';
 
 @Component({
   selector: 'app-update-customer-family',
@@ -11,16 +13,17 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 export class UpdateCustomerFamilyComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
-  ListAppFamily: Array<Object>;
-  ListCustFamily: Array<Object>;
+  ListAppFamily: Array<UpdateCustFamilyObj>;
+  ListCustFamily: Array<UpdateCustFamilyObj>;
 
   constructor(
     private http: HttpClient, 
     private toastr: NGXToastrService, 
+    private router: Router
   ) { 
     this.ResponseTab = new EventEmitter<any>();
-    this.ListAppFamily = new Array<Object>();
-    this.ListCustFamily = new Array<Object>();
+    this.ListAppFamily = new Array<UpdateCustFamilyObj>();
+    this.ListCustFamily = new Array<UpdateCustFamilyObj>();
   }
 
   ngOnInit() {
@@ -41,8 +44,8 @@ export class UpdateCustomerFamilyComponent implements OnInit {
         for (const item of this.ListCustFamily) {
           item["IsMasterData"] = true;
         }
-        this.ListCustFamily.sort((a, b) => (a["CustName"] > b["CustName"]) ? 1 : -1);
-        this.ListAppFamily.sort((a, b) => (a["CustName"] > b["CustName"]) ? 1 : -1);
+        // this.ListCustFamily.sort((a, b) => (a["CustName"] > b["CustName"]) ? 1 : -1);
+        // this.ListAppFamily.sort((a, b) => (a["CustName"] > b["CustName"]) ? 1 : -1);
       }
     ).catch(
       (error) => {
@@ -54,17 +57,17 @@ export class UpdateCustomerFamilyComponent implements OnInit {
   addFamilyHandler(idx){
     this.ListCustFamily.push(this.ListAppFamily[idx]);
     this.ListAppFamily.splice(idx, 1);
-    this.ListCustFamily.sort((a, b) => (a["CustName"] > b["CustName"]) ? 1 : -1);
+    // this.ListCustFamily.sort((a, b) => (a["CustName"] > b["CustName"]) ? 1 : -1);
   }
 
   cancelFamilyHandler(idx){
     this.ListAppFamily.push(this.ListCustFamily[idx]);
     this.ListCustFamily.splice(idx, 1);
-    this.ListAppFamily.sort((a, b) => (a["CustName"] > b["CustName"]) ? 1 : -1);
+    // this.ListAppFamily.sort((a, b) => (a["CustName"] > b["CustName"]) ? 1 : -1);
   }
 
   back(){
-    
+    this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
   }
 
   SaveValue(){

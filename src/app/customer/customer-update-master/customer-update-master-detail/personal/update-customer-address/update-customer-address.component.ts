@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { UpdateCustAddrObj } from 'app/shared/model/UpdateMasterCust/UpdateCustAddrObj.Model';
 import { environment } from 'environments/environment';
 import { forkJoin } from 'rxjs';
 
@@ -16,52 +18,22 @@ import { forkJoin } from 'rxjs';
 export class UpdateCustomerAddressComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
-  AppCustPersonalAddr: Object;
+  CustId: number;
   ZipcodeLookupObj: InputLookupObj;
-  OwnershipList: Array<Object>;
-  DetailData: Object;
-  
+  OwnershipList: Array<any>;
+  ZipcodeLookupList: Array<InputLookupObj>;
   CustomerAddressForm = this.fb.group({
-    CustAddrLegalId: [0],
-    CustAddrResidenceId: [0],
-    CustId: [0],
-    ResidenceAddress: [''],
-    ResidenceAreaCode1: [{value: '', disabled: true}],
-    ResidenceAreaCode2: [{value: '', disabled: true}],
-    ResidenceAreaCode3: [''],
-    ResidenceAreaCode4: [''],
-    ResidenceZipcode: [''],
-    ResidenceCity: [{value: '', disabled: true}],
-    PhnArea1: [''],
-    Phn1: [''],
-    PhnExt1: [''],
-    PhnArea2: [''],
-    Phn2: [''],
-    PhnExt2: [''],
-    FaxArea: [''],
-    Fax: [''],
-    OwnershipStatus: [''],
-    StayLength: [''],
-    LegalAddress: [''],
-    LegalAreaCode1: [{value: '', disabled: true}],
-    LegalAreaCode2: [{value: '', disabled: true}],
-    LegalAreaCode3: [''],
-    LegalAreaCode4: [''],
-    LegalZipcode: [''],
-    LegalCity: [{value: '', disabled: true}],
-    RowVersionResidenceAddr: [''],
-    RowVersionLegalAddr: ['']
+    AddressList: this.fb.array([])
   });
 
   constructor(
     private http: HttpClient, 
     private toastr: NGXToastrService, 
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) { 
-    this.AppCustPersonalAddr = new Object();
     this.ResponseTab = new EventEmitter<any>();
-    this.OwnershipList = new Array<Object>();
-    this.DetailData = new Object();
+    this.OwnershipList = new Array<any>();
     this.ZipcodeLookupObj = new InputLookupObj();
     this.ZipcodeLookupObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.ZipcodeLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -75,10 +47,73 @@ export class UpdateCustomerAddressComponent implements OnInit {
     let getDetail = this.http.post(URLConstant.GetCustAddrDataForUpdateMasterCustAddr, { CustDataTrxId: this.CustDataTrxId });
     forkJoin([getDetail, getOwnershipList]).toPromise().then(
       (response) => {
-        this.DetailData = response[0];
-        this.AppCustPersonalAddr = response[0]["AppCustAddr"];
-        this.CustomerAddressForm.patchValue({...response[0]["MasterCustAddr"]});
+        var responseAddr = response[0]["CustAddObjList"] as Array<any>;
+        this.CustId = response[0]["CustId"];
         this.OwnershipList = response[1][CommonConstant.ReturnObj];
+        var formArray = this.CustomerAddressForm.get("AddressList") as FormArray;
+        for (const key in responseAddr) {
+          var formGroup = this.fb.group({
+            AddrType: key,
+            MasterAddr: this.fb.group({
+              CustAddrId: [responseAddr[key]["MasterCustAddr"]["CustAddrId"]],
+              CustId: [responseAddr[key]["MasterCustAddr"]["CustId"]],
+              MrCustAddrTypeCode: [responseAddr[key]["MasterCustAddr"]["MrCustAddrTypeCode"]],
+              Addr: [responseAddr[key]["MasterCustAddr"]["Addr"], [Validators.required]],
+              AreaCode1: [responseAddr[key]["MasterCustAddr"]["AreaCode1"], [Validators.required]],
+              AreaCode2: [responseAddr[key]["MasterCustAddr"]["AreaCode2"], [Validators.required]],
+              AreaCode3: [responseAddr[key]["MasterCustAddr"]["AreaCode3"], [Validators.required]],
+              AreaCode4: [responseAddr[key]["MasterCustAddr"]["AreaCode4"], [Validators.required]],
+              City: [responseAddr[key]["MasterCustAddr"]["City"], [Validators.required]],
+              Zipcode: [responseAddr[key]["MasterCustAddr"]["Zipcode"], [Validators.required]],
+              SubZipcode: [responseAddr[key]["MasterCustAddr"]["SubZipcode"]],
+              MrBuildingOwnershipCode: [responseAddr[key]["MasterCustAddr"]["MrBuildingOwnershipCode"]],
+              PhnArea1: [responseAddr[key]["MasterCustAddr"]["PhnArea1"]],
+              Phn1: [responseAddr[key]["MasterCustAddr"]["Phn1"]],
+              PhnExt1: [responseAddr[key]["MasterCustAddr"]["PhnExt1"]],
+              PhnArea2: [responseAddr[key]["MasterCustAddr"]["PhnArea2"]],
+              Phn2: [responseAddr[key]["MasterCustAddr"]["Phn2"]],
+              PhnExt2: [responseAddr[key]["MasterCustAddr"]["PhnExt2"]],
+              PhnArea3: [responseAddr[key]["MasterCustAddr"]["PhnArea3"]],
+              Phn3: [responseAddr[key]["MasterCustAddr"]["Phn3"]],
+              PhnExt3: [responseAddr[key]["MasterCustAddr"]["PhnExt3"]],
+              FaxArea: [responseAddr[key]["MasterCustAddr"]["FaxArea"]],
+              Fax: [responseAddr[key]["MasterCustAddr"]["Fax"]],
+              Notes: [responseAddr[key]["MasterCustAddr"]["Notes"]],
+              StayLength: [responseAddr[key]["MasterCustAddr"]["StayLength"]],
+              RowVersion: [responseAddr[key]["MasterCustAddr"]["RowVersion"]]
+            }),
+            AppAddr: this.fb.group({
+              MrCustAddrTypeCode: [responseAddr[key]["AppCustAddr"]["MrCustAddrTypeCode"]],
+              Addr: [responseAddr[key]["AppCustAddr"]["Addr"], [Validators.required]],
+              AreaCode1: [responseAddr[key]["AppCustAddr"]["AreaCode1"], [Validators.required]],
+              AreaCode2: [responseAddr[key]["AppCustAddr"]["AreaCode2"], [Validators.required]],
+              AreaCode3: [responseAddr[key]["AppCustAddr"]["AreaCode3"], [Validators.required]],
+              AreaCode4: [responseAddr[key]["AppCustAddr"]["AreaCode4"], [Validators.required]],
+              City: [responseAddr[key]["AppCustAddr"]["City"], [Validators.required]],
+              Zipcode: [responseAddr[key]["AppCustAddr"]["Zipcode"], [Validators.required]],
+              SubZipcode: [responseAddr[key]["AppCustAddr"]["SubZipcode"]],
+              MrBuildingOwnershipCode: [responseAddr[key]["AppCustAddr"]["MrBuildingOwnershipCode"]],
+              PhnArea1: [responseAddr[key]["AppCustAddr"]["PhnArea1"]],
+              Phn1: [responseAddr[key]["AppCustAddr"]["Phn1"]],
+              PhnExt1: [responseAddr[key]["AppCustAddr"]["PhnExt1"]],
+              PhnArea2: [responseAddr[key]["AppCustAddr"]["PhnArea2"]],
+              Phn2: [responseAddr[key]["AppCustAddr"]["Phn2"]],
+              PhnExt2: [responseAddr[key]["AppCustAddr"]["PhnExt2"]],
+              PhnArea3: [responseAddr[key]["AppCustAddr"]["PhnArea3"]],
+              Phn3: [responseAddr[key]["AppCustAddr"]["Phn3"]],
+              PhnExt3: [responseAddr[key]["AppCustAddr"]["PhnExt3"]],
+              FaxArea: [responseAddr[key]["AppCustAddr"]["FaxArea"]],
+              Fax: [responseAddr[key]["AppCustAddr"]["Fax"]],
+              Notes: [responseAddr[key]["AppCustAddr"]["Notes"]],
+              StayLength: [responseAddr[key]["AppCustAddr"]["StayLength"]]
+            })
+          });
+          formArray.push(formGroup);
+
+          var zipcodeObj = this.ZipcodeLookupObj;
+          zipcodeObj.nameSelect = responseAddr[key]["MasterCustAddr"]["Zipcode"];
+          this.ZipcodeLookupList.push(zipcodeObj);
+        }
       }
     ).catch(
       (error) => {
@@ -88,22 +123,33 @@ export class UpdateCustomerAddressComponent implements OnInit {
   }
 
   CopyAllHandler(){
-    this.CustomerAddressForm.patchValue({
-      ResidenceAddress: this.AppCustPersonalAddr["ResidenceAddress"],
-      OwnershipStatus: this.AppCustPersonalAddr["OwnershipStatus"],
-      StayLength: this.AppCustPersonalAddr["StayLength"],
-      LegalAddress: this.AppCustPersonalAddr["LegalAddress"]
-    });
+    var formArray = this.CustomerAddressForm.get("AddressList") as FormArray;
+    for (const item of formArray.controls) {
+      var appData = item.get("AppAddr").value;
+      var formGroup = item.get("MasterAddr") as FormGroup;
+      formGroup.patchValue({
+        Addr: appData["Addr"],
+        MrBuildingOwnershipCode: appData["MrBuildingOwnershipCode"],
+        StayLength: appData["StayLength"]
+      });
+    }
   }
 
-  CopyHandler(formControlName){
+  CopyHandler(formControlName, idx){
+    var formArray = this.CustomerAddressForm.get("AddressList") as FormArray;
+    var formGroup = formArray.controls[idx] as FormGroup;
+    var appData = formGroup.get("AppAddr").value;
+    var masterData = formGroup.get("MasterAddr") as FormGroup;
     var obj = new Object();
-    obj[formControlName] = this.AppCustPersonalAddr[formControlName];
-    this.CustomerAddressForm.patchValue(obj);
+    obj[formControlName] = appData[formControlName];
+    masterData.patchValue(obj);
   }
 
-  getResidenceZipCode(e){
-    this.CustomerAddressForm.patchValue({
+  getZipcode(e, idx){
+    var formArray = this.CustomerAddressForm.get("AddressList") as FormArray;
+    var formGroup = formArray.controls[idx] as FormGroup;
+    var masterData = formGroup.get("MasterAddr") as FormGroup;
+    masterData.patchValue({
       ResidenceZipcode: e.Zipcode,
       ResidenceAreaCode1: e.AreaCode1,
       ResidenceAreaCode2: e.AreaCode2,
@@ -111,21 +157,22 @@ export class UpdateCustomerAddressComponent implements OnInit {
     });
   }
 
-  getLegalZipCode(e){
-    this.CustomerAddressForm.patchValue({
-      LegalZipcode: e.Zipcode,
-      LegalAreaCode1: e.AreaCode1,
-      LegalAreaCode2: e.AreaCode2,
-      LegalCity: e.City
-    });
-  }
-
   back(){
-    
+    this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
   }
 
   SaveValue(){
-    this.http.post(URLConstant.EditMasterCustAddr, this.CustomerAddressForm.value).toPromise().then(
+    var formArray = this.CustomerAddressForm.get("AddressList") as FormArray;
+    var requestList = new Array<UpdateCustAddrObj>();
+    for (const item of formArray.controls) {
+      var masterData = new UpdateCustAddrObj();
+      masterData = {...item.get("MasterAddr").value};
+      if(!masterData.CustAddrId || masterData.CustAddrId <= 0){
+        masterData.MrCustAddrTypeCode = item.get("AddrType").value;
+      }
+      requestList.push(masterData);
+    }
+    this.http.post(URLConstant.EditMasterCustAddr, { CustAddrList: requestList, CustId: this.CustId }).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

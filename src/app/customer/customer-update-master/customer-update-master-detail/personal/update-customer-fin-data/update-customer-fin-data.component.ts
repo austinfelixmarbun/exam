@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UpdateCustPersonalFinDataObj } from 'app/shared/model/UpdateMasterCust/UpdateCustPersonalFinDataObj.Model';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -14,10 +16,10 @@ import { forkJoin } from 'rxjs';
 export class UpdateCustomerFinDataComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
-  SourceIncomeList: Array<Object>;
-  AppCustFinData: Object;
-  MainCustBankAcc: Array<Object>;
-  AppCustBankAcc: Array<Object>;
+  SourceIncomeList: Array<any>;
+  AppCustFinData: UpdateCustPersonalFinDataObj;
+  MainCustBankAcc: Array<any>;
+  AppCustBankAcc: Array<any>;
   ArrayNum: Array<number>;
   num: number;
 
@@ -38,12 +40,13 @@ export class UpdateCustomerFinDataComponent implements OnInit {
   constructor(
     private http: HttpClient, 
     private toastr: NGXToastrService, 
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) { 
-    this.SourceIncomeList = new Array<Object>();
-    this.AppCustFinData = new Object();
-    this.MainCustBankAcc = new Array<Object>();
-    this.AppCustBankAcc = new Array<Object>();
+    this.SourceIncomeList = new Array<any>();
+    this.AppCustFinData = new UpdateCustPersonalFinDataObj();
+    this.MainCustBankAcc = new Array<any>();
+    this.AppCustBankAcc = new Array<any>();
   }
 
   ngOnInit() {
@@ -175,7 +178,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     obj["IsAddedBankAcc"] = this.AppCustBankAcc[idx]["IsAddedBankAcc"];
     obj["IsAddedBankStmnt"] = this.AppCustBankAcc[idx]["IsAddedBankStmnt"];
     this.MainCustBankAcc.push(obj);
-    this.MainCustBankAcc.sort((a, b) => (a["IsDefault"]) ? -1 : 1);
+    // this.MainCustBankAcc.sort((a, b) => (a["IsDefault"]) ? -1 : 1);
   }
 
   AddNewBankStmnt(idx){
@@ -221,7 +224,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
   }
 
   back(){
-    
+    this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
   }
 
   SaveValue(){

@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { UpdateCustPersonalDetailObj } from 'app/shared/model/UpdateMasterCust/UpdateCustPersonalDetailObj.Model';
 import { environment } from 'environments/environment';
 import { forkJoin } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
@@ -19,14 +21,14 @@ import { map, mergeMap } from 'rxjs/operators';
 export class UpdateCustomerPersonalDetailComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
-  AppCustPersonalDetail: object;
-  MrMaritalStatCodeList: Array<Object>;
-  MrNationalityCodeList: Array<Object>;
-  MrEducationCodeList: Array<Object>;
-  MrReligionCodeList: Array<Object>;
+  AppCustPersonalDetail: UpdateCustPersonalDetailObj;
+  MrMaritalStatCodeList: Array<any>;
+  MrNationalityCodeList: Array<any>;
+  MrEducationCodeList: Array<any>;
+  MrReligionCodeList: Array<any>;
   DefaultCountry: string;
   LocalNationalityConstant: string;
-  DetailData: Object;
+  // DetailData: Object;
   CustGrpLookupObj: InputLookupObj;
   lookUpObj: InputLookupObj;
 
@@ -59,15 +61,16 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
   constructor(
     private http: HttpClient, 
     private toastr: NGXToastrService, 
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) { 
-    this.AppCustPersonalDetail = new Object();  
-    this.MrMaritalStatCodeList = new Array<Object>();
-    this.MrNationalityCodeList = new Array<Object>();
-    this.MrEducationCodeList = new Array<Object>();
-    this.MrReligionCodeList = new Array<Object>();
+    this.AppCustPersonalDetail = new UpdateCustPersonalDetailObj();  
+    this.MrMaritalStatCodeList = new Array<any>();
+    this.MrNationalityCodeList = new Array<any>();
+    this.MrEducationCodeList = new Array<any>();
+    this.MrReligionCodeList = new Array<any>();
     this.ResponseTab = new EventEmitter<any>();
-    this.DetailData = new Object();
+    // this.DetailData = new Object();
     this.LocalNationalityConstant = CommonConstant.NationalityCodeLocal;
   }
 
@@ -80,13 +83,13 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     let getGeneralSettingNationality = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GSCodeDefLocalNationality });
     forkJoin([getDetail, getMaritalStat, getNationality, getEducation, getReligion, getGeneralSettingNationality]).pipe(
       map((response) => {
-        this.DetailData = response[0];
-        this.AppCustPersonalDetail = this.DetailData["AppCustDetail"];
+        var detailData = response[0];
+        this.AppCustPersonalDetail = {...detailData["AppCustDetail"]};
         this.MrMaritalStatCodeList = response[1][CommonConstant.ReturnObj];
         this.MrNationalityCodeList = response[2][CommonConstant.ReturnObj];
         this.MrEducationCodeList = response[3][CommonConstant.ReturnObj];
         this.MrReligionCodeList = response[4][CommonConstant.ReturnObj];
-        this.CustomerDetailForm.patchValue({...this.DetailData["MasterCustDetail"]});
+        this.CustomerDetailForm.patchValue({...detailData["MasterCustDetail"]});
 
         var country = response[5];
         this.lookUpObj = new InputLookupObj();
@@ -102,7 +105,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
         criteriaObj.value = country["GsValue"];
         criteriaList.push(criteriaObj);
         this.lookUpObj.addCritInput = criteriaList;
-        this.DetailData["GsValueCountry"] = country["GsValue"];
+        detailData["GsValueCountry"] = country["GsValue"];
 
         this.CustGrpLookupObj = new InputLookupObj();
         this.CustGrpLookupObj.urlJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
@@ -120,13 +123,13 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
         criteriaObj = new CriteriaObj();
         criteriaObj.restriction = AdInsConstant.RestrictionNeq;
         criteriaObj.propName = 'A.CUST_ID';
-        criteriaObj.value = this.DetailData["MasterCustDetail"]["CustId"];
+        criteriaObj.value = detailData["MasterCustDetail"]["CustId"];
         criteriaList.push(criteriaObj);
         this.CustGrpLookupObj.addCritInput = criteriaList;
-        this.CustGrpLookupObj.nameSelect = this.DetailData["MasterCustDetail"]["CustomerGroupParentCustName"];
+        this.CustGrpLookupObj.nameSelect = detailData["MasterCustDetail"]["CustomerGroupParentCustName"];
         this.CustGrpLookupObj.isReady = true;
 
-        return this.DetailData;
+        return detailData;
       }),
       mergeMap((response) => {
         let getMasterCountry = this.http.post(URLConstant.GetRefCountryByCountryCode, { CountryCode: response["MasterCustDetail"]["Country"] });
@@ -190,7 +193,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
   }
 
   back(){
-
+    this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
   }
 
   SaveValue(){

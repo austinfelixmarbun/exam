@@ -109,6 +109,11 @@ import { UpdateCustomerFinancialDataComponent } from './customer-update-master/c
 import { UpdateCustomerEmergencyDetailComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-emergency/update-customer-emergency-detail/update-customer-emergency-detail.component';
 import { UpdateCustomerEmergencyMainCompComponent } from './customer-personal/customer-update-master/update-customer-emergency/update-customer-emergency-main-comp/update-customer-emergency-main-comp.component';
 import { UpdateCustomerFinDataComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-fin-data/update-customer-fin-data.component';
+import { UpdateCustomerCompanyDetailComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-company-detail/update-customer-company-detail.component';
+import { UpdateCustomerMgmntShareholderComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-mgmnt-shareholder/update-customer-mgmnt-shareholder.component';
+import { UpdateCustomerContactInfoComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-contact-info/update-customer-contact-info.component';
+import { UpdateCustomerCompanyFinDataComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-company-fin-data/update-customer-company-fin-data.component';
+import { UpdateCustomerCompanyLegalDocComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-company-legal-doc/update-customer-company-legal-doc.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -234,7 +239,12 @@ export const customCurrencyMaskConfig = {
     UpdateCustomerFinancialDataComponent,
     UpdateCustomerEmergencyDetailComponent,
     UpdateCustomerEmergencyMainCompComponent,
-    UpdateCustomerFinDataComponent
+    UpdateCustomerFinDataComponent,
+    UpdateCustomerCompanyDetailComponent,
+    UpdateCustomerMgmntShareholderComponent,
+    UpdateCustomerContactInfoComponent,
+    UpdateCustomerCompanyFinDataComponent,
+    UpdateCustomerCompanyLegalDocComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })

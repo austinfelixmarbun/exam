@@ -112,6 +112,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeSkillLvl = "SKILL_LVL"
     public static RefMasterTypeCodeOfficeClass = "OFFICE_CLASS";
     public static RefMasterTypeCodeOfficeType = "OFFICE_TYPE";
+    public static RefMasterTypeCompanyScale = "COMPANY_SCALE";
 
     public static RefMasterTypeCodeCenterGrpType = "CENTER_GRP_TYPE";
 

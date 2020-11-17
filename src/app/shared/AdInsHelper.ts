@@ -148,4 +148,7 @@ export class AdInsHelper {
         var url = environment.FoundationR3Web + "/View/Customer/PersonalDetail?CustId=" + CustId;
         window.open(url, "_blank");
     }
+    public static OpenProdOfferingViewByCodeAndVersion(Code, Version) {
+        window.open(environment.FoundationR3Web + "/View/Offering?prodOfferingHId=0&prodOfferingCode=" + Code + "&prodOfferingVersion=" + Version, "_blank");
+      }
 }
