@@ -436,7 +436,7 @@ export class URLConstant {
     public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct"
     public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation"
     public static GetListProdBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/Product/GetListProdBranchOfficeMbrByProdHId"
-    public static GetListProdHVersionByProdHId = environment.FoundationR3Url + "/Product/GetListProdHVersionByProdHId";
+    public static GetListProdHByProdCurrentProdHId = environment.FoundationR3Url + "/Product/GetListProdHByProdCurrentProdHId";
     public static AddProductOfficeMbrBatch = environment.FoundationR3Url + "/Product/AddProductOfficeMbrBatch";
     public static DeleteProductOfficeMbr = environment.FoundationR3Url + "/Product/DeleteProductOfficeMbr";
     public static GetListProdHVersionByProdId = environment.FoundationR3Url + "/Product/GetListProdHVersionByProdId";
@@ -457,7 +457,7 @@ export class URLConstant {
     public static GetListProdOfferingBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHId"
     public static GetProductOfferingComponentGrouped = environment.FoundationR3Url + "/ProductComponent/GetProductOfferingComponentGrouped";
     public static GetProdOfferingHByCodeAndVerion = environment.FoundationR3Url + "/ProductOffering/GetProdOfferingHByCodeAndVerion";
-    public static GetListProdOfferingHVersionByProdOfferingHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingHVersionByProdOfferingHId"
+    public static GetListProdOfferingHByProdOfferingCurrentProdHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingHByProdOfferingCurrentProdHId"
     public static GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode"
     public static RequestOfferingDeactivation = environment.FoundationR3Url + "/ProductOffering/RequestProdOfferingDeactivationProdOffering"
     public static GetListProdOfferingBranchOfficeMbrByProdHIdAndApp = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHIdAndApp"

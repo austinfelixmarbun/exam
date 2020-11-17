@@ -16,4 +16,5 @@ export class CustObj{
     OriginalOfficeCode:any;
     RowVersion: any;
     CustAddr: CustAddrObj;
+    IsCustomer: boolean;
 }
