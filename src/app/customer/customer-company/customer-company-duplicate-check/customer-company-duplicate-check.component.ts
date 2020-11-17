@@ -167,6 +167,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       this.addCustObj.CustObj.MrIdTypeCode = RefMasterConstant.Npwp;
       this.addCustObj.CustObj.IdNo = this.TaxIdNo;
       this.addCustObj.CustObj.TaxIdNo = this.TaxIdNo;
+      this.addCustObj.CustObj.IsCustomer = true;
       if (this.IsVip === "true") {
         this.addCustObj.CustObj.IsVip = true;
       } else {

@@ -3,6 +3,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
   selector: 'app-edit-main-data-paging',
@@ -25,5 +26,11 @@ export class EditMainDataPagingComponent implements OnInit {
         environment: environment.FoundationR3Url
       }
     ];
+    this.inputPagingObj.addCritInput = [];
+    var critObj = new CriteriaObj();
+    critObj.propName = "C.IS_CUSTOMER";
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.value = '1';
+    this.inputPagingObj.addCritInput.push(critObj);
   }
 }
