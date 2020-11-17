@@ -89,7 +89,11 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.http.post(this.getRefMasterWithReserveFieldUrl, this.addressType).subscribe(
       (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
-        //this.CustDataCompanyForm.patchValue({ MrCustAddrTypeCode: response[CommonConstant.ReturnObj][0]['Key'] });
+        let idxCompany = this.listAddressType.findIndex(x => x.Key == CommonConstant.CustAddrTypeCompany);
+        this.listAddressType.splice(idxCompany, 1)
+        this.CustDataCompanyForm.patchValue({
+          MrCustAddrTypeCode: this.listAddressType[0].Key
+        })
       });
 
     this.custAddrObj = new CustAddrObj();
