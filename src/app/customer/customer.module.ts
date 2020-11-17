@@ -103,7 +103,6 @@ import { CustomerUpdateMasterDetailComponent } from './customer-update-master/cu
 import { UpdateCustomerPersonalDetailComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-personal-detail/update-customer-personal-detail.component';
 import { UpdateCustomerAddressComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-address/update-customer-address.component';
 import { UpdateCustomerFamilyComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-family/update-customer-family.component';
-import { UpdateCustomerEmergencyComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-emergency/update-customer-emergency.component';
 import { UpdateCustomerJobDataComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-job-data/update-customer-job-data.component';
 import { UpdateCustomerFinancialDataComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-financial-data/update-customer-financial-data.component';
 import { UpdateCustomerEmergencyDetailComponent } from './customer-update-master/customer-update-master-detail/personal/update-customer-emergency/update-customer-emergency-detail/update-customer-emergency-detail.component';
@@ -234,7 +233,6 @@ export const customCurrencyMaskConfig = {
     UpdateCustomerPersonalDetailComponent,
     UpdateCustomerAddressComponent,
     UpdateCustomerFamilyComponent,
-    UpdateCustomerEmergencyComponent,
     UpdateCustomerJobDataComponent,
     UpdateCustomerFinancialDataComponent,
     UpdateCustomerEmergencyDetailComponent,

@@ -120,6 +120,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
         else{
           this.num = this.MainCustBankAcc.length;
         }
+        this.ArrayNum = new Array<number>(this.num).fill(1);
       }
     ).catch(
       (error) => {

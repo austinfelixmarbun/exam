@@ -126,7 +126,7 @@
     <lib-ucSubsection [id]="'BankAccId'" [title]="'Bank Account'" [panel]="'BankAccSection'">
     </lib-ucSubsection>
     <div id="BankAccSection">
-      <div class="form-group row" *ngFor="let item of ArrayNum(num).fill(1); let i = index">
+      <div class="form-group row" *ngFor="let item of ArrayNum; let i = index">
         <div class="col-md-6">
           <div *ngIf="AppCustBankAcc.BankAccNo">
             <div class="col-md-12" style="padding: 0;">

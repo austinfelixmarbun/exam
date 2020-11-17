@@ -11,7 +11,7 @@
     <div class="col-md-4">Master Customer Data</div>
   </div>
   <div formArrayName="AddressList">
-    <div *ngFor="let custAddr of CustomerAddressForm.get('AddressList').controls; index as i" [formGroupName]="i">
+    <div *ngFor="let custAddr of AddressFormList.controls; index as i" [formGroupName]="i">
       <lib-ucSubsection [id]="custAddr.get('AddrType').value + 'Id'" [title]="custAddr.get('AddrType').value + ' Address'" [panel]="custAddr.get('AddrType').value + 'Section'">
       </lib-ucSubsection>
       <div id="{{custAddr.get('AddrType').value + 'Section'}}">

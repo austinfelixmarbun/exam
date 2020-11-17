@@ -122,6 +122,10 @@ export class UpdateCustomerAddressComponent implements OnInit {
     );
   }
 
+  get AddressFormList(){
+    return this.CustomerAddressForm.get("AddressList") as FormArray;
+  }
+
   CopyAllHandler(){
     var formArray = this.CustomerAddressForm.get("AddressList") as FormArray;
     for (const item of formArray.controls) {

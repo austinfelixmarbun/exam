@@ -25,4 +25,6 @@ export class UpdateMasterCustJobDataObj {
     RowVersionCustJobData: any;
     RowVersionJobAddr: any;
     RowVersionCust: any;
+    ProfessionName: any;
+    IndustryTypeName: any;
 }

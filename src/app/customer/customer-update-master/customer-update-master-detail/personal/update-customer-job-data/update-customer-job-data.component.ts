@@ -120,8 +120,8 @@ export class UpdateCustomerJobDataComponent implements OnInit {
       (response) => {
         this.lookupProfessionObj.nameSelect = response[0]["ProfessionName"];
         this.lookupIndustryTypeObj.nameSelect = response[1]["IndustryTypeName"];
-        this.AppJobData["ProfessionName"] = response[2]["ProfessionName"];
-        this.AppJobData["IndustryTypeName"] = response[3]["IndustryTypeName"];
+        this.AppJobData.ProfessionName = response[2]["ProfessionName"];
+        this.AppJobData.IndustryTypeName = response[3]["IndustryTypeName"];
       }
     ).catch(
       (error) => {
