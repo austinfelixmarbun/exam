@@ -199,7 +199,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     );
 
     this.custAddrObj.CustId = this.IdCust;
-    this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeContact;
+    this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeCompany;
     this.http.post(this.getCustAddrByMrCustAddrTypeUrl, this.custAddrObj).subscribe(
       (response) => {
         this.tempCustAddrObj = response;
@@ -276,7 +276,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custCompanyContactPersonObj.MrCustRelationshipCode = this.ContactInformationForm.controls["MrCustRelationshipCode"].value; 
 
     this.custAddrObj.CustId = this.IdCust;
-    this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeContact;
+    this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeCompany;
     this.custAddrObj.Addr = this.ContactInformationForm.value.UcAddress.Addr;
     this.custAddrObj.AreaCode1 = this.ContactInformationForm.value.UcAddress.AreaCode1;
     this.custAddrObj.AreaCode2 = this.ContactInformationForm.value.UcAddress.AreaCode2;
