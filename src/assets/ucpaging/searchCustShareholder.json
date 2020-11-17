@@ -71,12 +71,6 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "left",
-            "label": "MGMNT / SHAREHOLDER TYPE",
-            "name": "CS.MR_CUST_TYPE_CODE"
-        },
-        {
-            "type": "sort",
             "position": "center",
             "label": "MGMNT / SHAREHOLDER NO.",
             "name": "CS.CUST_NO"
@@ -92,6 +86,12 @@
             "position": "left",
             "label": "MGMNT / SHAREHOLDER ID NO.",
             "name": "CS.ID_NO"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "MGMNT / SHAREHOLDER TYPE",
+            "name": "CS.MR_CUST_TYPE_CODE"
         },
         {
             "type": "sort",
@@ -122,11 +122,6 @@
         "from": "FROM CUST_COMPANY_MGMNT_SHAREHOLDER_NEW AS CCS INNER JOIN CUST AS C ON CCS.CUST_ID = C.CUST_ID INNER JOIN CUST AS CS ON CCS.SHAREHOLDER_ID = CS.CUST_ID"
     },
     "bodyList": [
-        {
-            "type": "text",
-            "position": "left",
-            "property": "ShareholderMrCustTypeCode"
-        },
         {
             "type": "action",
             "position": "center",
@@ -193,6 +188,11 @@
             "type": "text",
             "position": "left",
             "property": "ShareholderIdNo"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "ShareholderMrCustTypeCode"
         },
         {
             "type": "action",
