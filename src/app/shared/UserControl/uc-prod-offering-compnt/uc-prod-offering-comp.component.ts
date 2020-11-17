@@ -26,7 +26,6 @@ export class UcProdOfferingCompComponent implements OnInit {
   UrlGetProdOfferingCompGrouped : any;
   dictMultiOptions: { [key: string]: any; } = {};
   selectedMultiDDLItems: { [key: string]: any; } = {};
-  ListHide: Array<boolean> = new Array();
 
   @Input() CompGroups : string;
   @Input() ProdOfferingHId : number;
@@ -223,14 +222,6 @@ export class UcProdOfferingCompComponent implements OnInit {
           var fa_group = this.FormProdOfferingComp.controls['groups'] as FormArray;
           var behaviourDDL = response[CommonConstant.ReturnObj]["BehaviourDropDownList"];
 
-          if(group["GroupCode"] != CommonConstant.RefProdCompntGrpGen){
-            var ProdOffCmpnt = response[CommonConstant.ReturnObj]["ProdOffComponents"].find(x => x["GroupCode"] == group["GroupCode"]);
-            let IsHide = ProdOffCmpnt["Components"].length > 0 ? false : true;
-            this.ListHide.push(IsHide);
-          }else{
-            this.ListHide.push(false);
-          }
-
           fa_group.push(this.addGroup(group.GroupCode, group.GroupName));
 
           for (var j = 0; j < group.Components.length; j++) {
@@ -253,8 +244,6 @@ export class UcProdOfferingCompComponent implements OnInit {
             fa_comp.push(this.addComponent(comp));
           }
         }
-        console.log(this.ListHide)
-        console.log(this.FormProdOfferingComp);
       }
     )
   }
