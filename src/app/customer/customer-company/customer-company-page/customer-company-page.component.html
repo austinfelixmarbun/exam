@@ -88,38 +88,38 @@
           <br><br>
           <div class="bs-stepper-content">
             <div id="customer-detail-tab" class="content" role="tabpanel" aria-labelledby="customer-detail-tab-trigger">
-              <app-customer-company-detail (outputTab)="getValue($event)">
+              <app-customer-company-detail *ngIf="CustStepIndex == 1" (outputTab)="getValue($event)">
               </app-customer-company-detail>
             </div>
             <div id="address-tab" class="content" role="tabpanel" aria-labelledby="address-tab-trigger">
-              <app-customer-company-address (outputTab)="getValue($event)">
+              <app-customer-company-address *ngIf="CustStepIndex == 2" (outputTab)="getValue($event)">
               </app-customer-company-address>
             </div>
           </div>
           <div id="shareholder-tab" class="content" role="tabpanel" aria-labelledby="shareholder-tab-trigger">
-            <app-customer-company-management-shareholder [custCompanyId]="IdCust"
+            <app-customer-company-management-shareholder *ngIf="CustStepIndex == 3" [custCompanyId]="IdCust"
               (outputTab)="getValue($event)">
             </app-customer-company-management-shareholder>
           </div>
           <div id="group-tab" class="content" role="tabpanel" aria-labelledby="group-tab-trigger">
-            <app-cust-group-tab [MrCustTypeCode]="'COMPANY'" [CustId]="IdCust" (outputTab)="getValue($event)">
+            <app-cust-group-tab *ngIf="CustStepIndex == 4" [MrCustTypeCode]="'COMPANY'" [CustId]="IdCust" (outputTab)="getValue($event)">
             </app-cust-group-tab>
           </div>
           <div id="contact-tab" class="content" role="tabpanel" aria-labelledby="contact-tab-trigger">
-            <app-customer-company-contact-information [custCompanyId]="this.CustCompanyId"
+            <app-customer-company-contact-information *ngIf="CustStepIndex == 5" [custCompanyId]="this.CustCompanyId"
               (outputTab)="getValue($event)">
             </app-customer-company-contact-information>
           </div>
           <div id="financial-tab" class="content" role="tabpanel" aria-labelledby="financial-tab-trigger">
-            <app-cust-fin-data-tab [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'" (outputTab)="getValue($event)">
+            <app-cust-fin-data-tab *ngIf="CustStepIndex == 6" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'" (outputTab)="getValue($event)">
             </app-cust-fin-data-tab>
           </div>
           <div id="legal-tab" class="content" role="tabpanel" aria-labelledby="legal-tab-trigger">
-            <app-cust-legal-doc   (outputTab)="getValue($event)">
+            <app-cust-legal-doc *ngIf="CustStepIndex == 7" (outputTab)="getValue($event)">
             </app-cust-legal-doc>
           </div>
           <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
-            <app-cust-attr-section [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'"></app-cust-attr-section>
+            <app-cust-attr-section *ngIf="CustStepIndex == 8" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'"></app-cust-attr-section>
           </div>
         </div>
       </div>

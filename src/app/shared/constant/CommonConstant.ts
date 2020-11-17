@@ -190,7 +190,9 @@ export class CommonConstant {
     public static AttrGroupCustCompanyFinData = "CUST_COMPANY_FINDATA"
     public static AttrGroupCustPersonalFinData = "CUST_PERSONAL_FINDATA"
     public static AttrGroupCustCompanyOther = "CUST_COMPANY_OTH"
-    public static AttrGroupCustPersonalOther = "CUST_PERSONAL_OTH"
+    public static AttrGroupCustPersonalOther= "CUST_PERSONAL_OTH"
+    public static AttrGroupAsset = "ASSET";
+
 
     // Integration
     public static DailyMasterTypeSingle = "Date";
@@ -216,4 +218,6 @@ export class CommonConstant {
     public static CFRFN = "CFRFN";
     public static CFNEWCAR = "CFNEWCAR";
     public static CFNA = "CFNA";
+    
+    //ATTR GROUP
 }
