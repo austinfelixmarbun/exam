@@ -52,7 +52,7 @@ export class ProductOfferingViewComponent implements OnInit {
 
     this.ProdOfferingDUrl = URLConstant.GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode;
     this.ProdOfferingBranchUrl = URLConstant.GetListProdOfferingBranchOfficeMbrByProdHId;
-    this.ProdOfferingVerUrl = URLConstant.GetListProdOfferingHVersionByProdOfferingHId;
+    this.ProdOfferingVerUrl = URLConstant.GetListProdOfferingHByProdOfferingCurrentProdHId;
     this.ProdOfferingCodeVerUrl = URLConstant.GetProdOfferingHByCodeAndVerion;
 
     this.route.queryParams.subscribe(params => {

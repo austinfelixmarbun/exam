@@ -78,37 +78,43 @@ export class CustomerCompanyPageComponent implements OnInit {
 
   EnterTab(type) {
     if (type == "Detail") {
-      this.stepper.to(1);
+      this.CustStepIndex = 1;
     }
     if (type == "Address") {
-      this.stepper.to(2);
+      this.CustStepIndex = 2;
     }
     if (type == "Management") {
-      this.stepper.to(3);
+      this.CustStepIndex = 3;
     }
     if (type == "Group") {
-      this.stepper.to(4);
+      this.CustStepIndex = 4;
     }
     if (type == "Contact") {
-      this.stepper.to(5);
+      this.CustStepIndex = 5;
     }
     if (type == "Financial") {
-      this.stepper.to(6);
+      this.CustStepIndex = 6;
     }
     if (type == "Legal") {
-      this.stepper.to(7);
+      this.CustStepIndex = 7;
     }
     if (type == "CustAttr") {
-      this.stepper.to(8);
+      this.CustStepIndex = 8;
     }
+
+    this.stepper.to(this.CustStepIndex);
   }
   
   getValue(ev: any) {
     if (ev.stepMode != undefined) {
-      if (ev.stepMode == "next")
+      if (ev.stepMode == "next"){
         this.stepper.next();
-      else
+        this.CustStepIndex++;
+      }
+      else{
         this.stepper.previous();
+        this.CustStepIndex--;
+      }
     }
   }
 }

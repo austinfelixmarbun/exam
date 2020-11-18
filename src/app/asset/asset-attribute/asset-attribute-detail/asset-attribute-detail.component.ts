@@ -11,6 +11,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { forkJoin } from 'rxjs';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-asset-attribute-detail',
@@ -57,9 +58,16 @@ export class AssetAttributeDetailComponent implements OnInit {
     this.inputLookupObj.pagingJson = "./assets/uclookup/AssetAttribute/lookupAssetAttribute.json";
     this.inputLookupObj.genericJson = "./assets/uclookup/AssetAttribute/lookupAssetAttribute.json";
     this.inputLookupObj.isRequired = true;
-    this.inputLookupObj.addCritInput = new CriteriaObj();
+
+    var addCritAttrGroup = new CriteriaObj();
+    addCritAttrGroup.DataType = "text";
+    addCritAttrGroup.propName = "A.ATTR_GROUP";
+    addCritAttrGroup.restriction = AdInsConstant.RestrictionEq;
+    addCritAttrGroup.value = CommonConstant.AttrGroupAsset;    
+
 
     this.criteriaList = new Array();
+    this.criteriaList.push(addCritAttrGroup);
     this.criteriaObj = new CriteriaObj();
     this.criteriaObj.restriction = AdInsConstant.RestrictionNotIn;
     this.criteriaObj.propName = 'A.REF_ATTR_ID';
