@@ -87,15 +87,15 @@ export class SidebarComponent implements OnInit {
     //NGX Wizard - skip url change
     ngxWizardFunction(path: string) {
         if (path.indexOf('forms/ngx') != -1)
-            this.router.navigate(['forms/ngx/wizard'], { skipLocationChange: false });
+            this.router.navigate(['forms/ngx/wizard'], { skipLocationChange: true });
     }
 
     navigateSkipLocationChange(ev) {
         //sementara Sementara begini dulu, belum ketemu solusi lain
         //problem : ketika di 'click' halaman memasuki halaman /dashboard/dash-board terlebih dahulu
         this.router.navigateByUrl("/dashboard/dash-board", { skipLocationChange: true }).then(() => {
-        this.router.navigate([ev.Path], { queryParams: this.genParam(ev.Params) });
-        //AdInsHelper.navigateUrlMasking(this.router,[ev.Path],{ queryParams: this.genParam(ev.Params) });
+        //this.router.navigate([ev.Path], { queryParams: this.genParam(ev.Params) });
+        AdInsHelper.navigateUrlMasking(this.router,[ev.Path],{ queryParams: this.genParam(ev.Params) });
         });
     }
 
