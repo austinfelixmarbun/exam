@@ -28,9 +28,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT u.REF_USER_ID as RefUserId, u.USERNAME as Username, e.EMP_NO as EmployeeNo, e.EMP_NAME as EmployeeName",
-        "from": "FROM dbo.REF_USER u WITH(NOLOCK) LEFT JOIN dbo.REF_EMP e WITH(NOLOCK) on u.REF_EMP_ID = e.REF_EMP_ID ",
-        "where":"WHERE e.IS_ACTIVE = 1"
+        "name": "lookupEmployeeSupervisor"
     },
     "headerList": [
         {

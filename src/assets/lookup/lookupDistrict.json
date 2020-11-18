@@ -39,9 +39,7 @@
   ],
 
   "querystring": {
-    "select": "SELECT A.DISTRICT_REG_RPT_CODE AS districtRegRptCode, A.REF_PROV_DISTRICT_ID AS refProvDistrictId, A.PROV_DISTRICT_NAME AS provDistrictName",
-    "from": "FROM dbo.REF_PROV_DISTRICT A WITH(NOLOCK)",
-    "where":"WHERE IS_ACTIVE = 1"
+    "name": "lookupDistrict"
   },
 
   "bodyList": [
