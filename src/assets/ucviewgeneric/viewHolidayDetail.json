@@ -18,9 +18,7 @@
           }
         ],
         "querystring": {
-            "select": "SELECT HOLIDAY_SCHM_NAME AS HolidaySchmName, HOLIDAY_SCHM_CODE AS HolidaySchmCode",
-            "from": "FROM dbo.HOLIDAY_SCHM_H",
-            "where": "WHERE HOLIDAY_SCHM_H_ID = {0}" 
+            "name": "viewHolidayDetail"
         }
       }
     ]

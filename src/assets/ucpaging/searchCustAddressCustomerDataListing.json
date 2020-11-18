@@ -41,8 +41,7 @@
         
       ],
     "querystring": {
-      "select": "SELECT RMADD.DESCR AS AddressTypeName, CA.ADDR AS Address, RMBUI.DESCR AS BuildingOwnership, CONCAT(CA.PHN_AREA_1, '-', CA.PHN_1 ) AS Phone1, CONCAT(CA.PHN_AREA_2, '-', CA.PHN_2 ) AS Phone2, CA.NOTES AS Notes",
-      "from": "FROM CUST_ADDR CA JOIN dbo.REF_MASTER RMADD ON RMADD.REF_MASTER_TYPE_CODE = 'ADDR_TYPE' AND RMADD.MASTER_CODE = CA.MR_CUST_ADDR_TYPE_CODE JOIN dbo.REF_MASTER RMBUI ON RMBUI.REF_MASTER_TYPE_CODE = 'BUILDING_OWNERSHIP' AND RMBUI.MASTER_CODE = CA.MR_BUILDING_OWNERSHIP_CODE"
+      "name": "searchCustAddressCustomerDataListing"
     },
     "bodyList": [
       {

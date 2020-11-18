@@ -39,8 +39,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT B.PROD_OFFERING_CODE as prodOfferingCode, B.PROD_OFFERING_NAME as prodOfferingName, C.PROD_OFFERING_VERSION AS currentProdOfferingVersion , B.END_DT AS endDt, B.PROD_OFFERING_STAT AS ProdOfferingStat",
-    "from": "FROM dbo.PROD A WITH(NOLOCK) LEFT JOIN dbo.PROD_OFFERING B WITH(NOLOCK) ON A.PROD_ID=B.PROD_ID LEFT JOIN dbo.PROD_OFFERING_H C WITH(NOLOCK) ON B.CURRENT_PROD_OFFERING_H_ID = C.PROD_OFFERING_H_ID"
+    "name": "searchProductOfferingForProductHODeactivate"
   },
   "bodyList": [
     {

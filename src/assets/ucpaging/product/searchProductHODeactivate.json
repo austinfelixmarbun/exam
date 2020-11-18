@@ -62,8 +62,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.PROD_CODE as prodCode,A.PROD_ID as prodId,A.PROD_NAME as prodName, B.PROD_VERSION as prodVersion, A.END_DT as endDt, A.PROD_STAT as prodStat, A.CURRENT_PROD_H_ID as prodHId",
-    "from": "FROM dbo.PROD A WITH(NOLOCK) LEFT JOIN dbo.PROD_H B WITH(NOLOCK) ON A.CURRENT_PROD_H_ID=B.PROD_H_ID"
+    "name": "searchProductHODeactivate"
   },
   "bodyList": [
     {

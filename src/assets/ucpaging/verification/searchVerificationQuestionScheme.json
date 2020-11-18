@@ -21,9 +21,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT VERF_SCHEME_H_ID AS VerfSchemeHId, VERF_SCHEME_CODE AS VerfSchemeCode, VERF_SCHEME_NAME AS VerfSchemeName, IS_ACTIVE AS IsActive",
-        "from": "FROM dbo.VERF_SCHEME_H WITH(NOLOCK)",
-        "where": "WHERE IS_ACTIVE=1"
+        "name": "searchVerificationQuestionScheme"
     },
     "headerList": [
         {

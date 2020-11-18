@@ -98,9 +98,7 @@
           }
         ],
         "querystring": {
-            "select":"SELECT V.REGISTRATION_NO AS RegistrationNo, V.LICENSE_NO AS LicenseNo, V.ESTABLISHMENT_DT AS EstablishmentDt, V.PARTNERSHIP_DT AS PartnershipDt, V.VENDOR_RATING AS VendorRating, V.EMAIL AS Email, V.MOBILE_PHN_NO_1 AS Mp1, V.MOBILE_PHN_NO_2 AS Mp2, V.MR_TAX_CALC_METHOD_CODE AS MrTaxCalcMethod, V.TAXPAYER_NAME AS TaxpayerName, V.IS_VAT AS IsVat, VADDR.ADDR AS Address, VADDR.ZIPCODE AS ZipCode, VADDR.AREA_CODE_1 AS Kecamatan,VADDR.AREA_CODE_2 AS Kelurahan, VADDR.CITY AS City,VADDR.PROVINCE AS Province",
-            "from":"FROM dbo.VENDOR V WITH(NOLOCK) JOIN dbo.VENDOR_ADDR VADDR WITH(NOLOCK) ON V.VENDOR_ID = VADDR.VENDOR_ID",
-            "where":"WHERE V.MR_VENDOR_CLASS = N'HOLDING' AND V.VENDOR_ID = {0} AND VADDR.MR_ADDR_TYPE_CODE = N'TAX'"
+            "name":"viewVendorHoldingMainC"
         }
       }
     ]

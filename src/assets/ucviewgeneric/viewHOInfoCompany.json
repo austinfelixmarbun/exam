@@ -47,9 +47,7 @@
           }
         ],
         "querystring": {
-            "select": "SELECT REGISTRATION_NO AS RegistrationNo, VENDOR_RATING AS VendorRating, LICENSE_NO AS LicenseNo, EMAIL AS Email, ESTABLISHMENT_DT AS EstablishmentDt, MOBILE_PHN_NO_1 AS MobilePhnNo1, PARTNERSHIP_DT AS PartnershipDt, MOBILE_PHN_NO_2 AS MobilePhnNo2",
-            "from": "FROM DBO.VENDOR", 
-            "where": "WHERE VENDOR_ID = {0}" 
+            "name": "viewHOInfoCompany"
         }
       }
     ]

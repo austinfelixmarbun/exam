@@ -13,9 +13,7 @@
           }
         ],
         "querystring": {
-          "select": "SELECT TITLE AS Title",
-          "from": "FROM dbo.REF_FORM WITH(NOLOCK)",
-          "where": "WHERE REF_FORM_ID = {0}"
+          "name": "viewRefForm"
         }
       }
     ]

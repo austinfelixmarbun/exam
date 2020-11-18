@@ -18,8 +18,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT RF.FORM_CODE AS FormCode, RF.TITLE AS Title, AF.AUTH_FORM_ID AS AuthFormId, RR.REF_ROLE_ID AS RefRoleId",
-        "from": "FROM DBO.AUTH_FORM AF WITH(NOLOCK) JOIN DBO.REF_FORM RF WITH(NOLOCK) ON AF.REF_FORM_ID = RF.REF_FORM_ID JOIN DBO.REF_ROLE RR WITH(NOLOCK) ON AF.REF_ROLE_ID = RR.REF_ROLE_ID"
+        "name": "searchRoleRefForm"
     },
     "headerList": [
         {

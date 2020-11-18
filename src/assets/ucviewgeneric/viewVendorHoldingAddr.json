@@ -38,10 +38,7 @@
           }
         ],
         "querystring": {
-         "select": "SELECT A.ADDR AS Address, A.ZIPCODE AS ZipCode,A.AREA_CODE_1 AS Kecamatan,A.AREA_CODE_2 AS Kelurahan, A.CITY AS City,A.PROVINCE AS Province",
-            "from":"FROM dbo.VENDOR_ADDR A WITH (NOLOCK) LEFT JOIN dbo.VENDOR B WITH(NOLOCK) ON B.VENDOR_ID = A.VENDOR_ID",
-            "where":"WHERE B.MR_VENDOR_CLASS = N'HOLDING' AND A.MR_ADDR_TYPE_CODE = N'LEGAL' AND B.VENDOR_ID = {0}"
-            
+         "name": "viewVendorHoldingAddr"
         }
       }
     ]
