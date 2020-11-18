@@ -1,5 +1,5 @@
 {
-    "title": "Customer",
+    "title": "Guarantor",
     "exportExcel": true,
     "component": [
         {
@@ -47,13 +47,7 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "left",
-            "label": "TYPE",
-            "name": "C.MR_CUST_TYPE_CODE"
-        },
-        {
-            "type": "sort",
-            "position": "left",
+            "position": "center",
             "label": "GUARANTOR CUSTOMER NO",
             "name": "C.CUST_NO"
         },
@@ -70,6 +64,12 @@
             "name": "C.ID_NO"
         },
         {
+            "type": "sort",
+            "position": "left",
+            "label": "GUARANTOR TYPE",
+            "name": "C.MR_CUST_TYPE_CODE"
+        },
+        {
             "type": "label",
             "position": "center",
             "label": "ACTION"
@@ -79,11 +79,6 @@
         "name": "searchCustGuarantor"
     },
     "bodyList": [
-        {
-            "type": "text",
-            "position": "left",
-            "property": "MrCustTypeCode"
-        },
         {
             "type": "action",
             "position": "center",
@@ -101,7 +96,7 @@
                             ],
                             "result": {
                                 "type": "link",
-                                "position": "left",
+                                "position": "center",
                                 "property": "CustNo",
                                 "path": "/View/Customer/PersonalDetail",
                                 "target": "_blank",
@@ -124,7 +119,7 @@
                             ],
                             "result": {
                                 "type": "link",
-                                "position": "left",
+                                "position": "center",
                                 "property": "CustNo",
                                 "path": "/View/Customer/CoyDetail",
                                 "target": "_blank",
@@ -150,6 +145,11 @@
             "type": "text",
             "position": "left",
             "property": "IdNo"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "MrCustTypeCode"
         },
         {
             "type": "action",

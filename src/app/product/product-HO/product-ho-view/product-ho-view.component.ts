@@ -44,7 +44,7 @@ export class ProductHOViewComponent implements OnInit {
 
     this.ProdDUrl = URLConstant.GetProductDetailComponentInfo;
     this.ProdBranchUrl = URLConstant.GetListProdBranchOfficeMbrByProdHId;
-    this.ProdVerUrl = URLConstant.GetListProdHVersionByProdHId;
+    this.ProdVerUrl = URLConstant.GetListProdHByProdCurrentProdHId;
 
     this.route.queryParams.subscribe(params => {
       if (params["prodHId"] != null) {

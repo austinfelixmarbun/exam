@@ -34,7 +34,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   inputLookupCustPersonalObj : InputLookupObj;
   custCompanyMgmntShrholderObj : CustCompanyMgmntShrholderObj;
 
-  tempKTPCheck: boolean;
+  isIdExpiredDtRequired: boolean;
 
   KTP: string;
   tempShareholderCustNo: string;
@@ -44,18 +44,22 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   getCustCompanyMgmntShrholderUrl : string;
   getListKeyValueByMrCustTypeCode: string;
 
+  MaxDate: Date;
+  UserAccess: Object;
+
+
   ManagementShareholderForm = this.fb.group({
     CustCompanyMgmntShrholderId: [0],
     CustId: [0],
     ShareholderId: [0],
     MgmntShrholderName: ['', [Validators.required,Validators.maxLength(100)]],
-    MrCustModelCode: [''],
+    MrCustModelCode: ['', [Validators.required]],
     MrIdTypeCode: ['',[Validators.required]],
-    IdNo: ['',Validators.pattern("^[0-9]+$")],
+    IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     IdExpiredDt: [''],
-    MrGenderCode: [''],
-    BirthPlace: [''],
-    BirthDt: [''],
+    MrGenderCode: ['', [Validators.required]],
+    BirthPlace: ['', [Validators.required]],
+    BirthDt: ['', [Validators.required]],
     TaxIdNo: [''],
     MrJobPositionCode: ['',[Validators.required]],
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
@@ -75,6 +79,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
 
   ngOnInit() {
+    this.UserAccess = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.MaxDate = this.UserAccess[CommonConstant.BUSINESS_DT];
     this.inputLookupCustPersonalObj = new InputLookupObj();
     this.inputLookupCustPersonalObj.urlJson = "./assets/lookup/lookUpExistingCustPersonal.json";
     this.inputLookupCustPersonalObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -107,13 +113,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
           this.ManagementShareholderForm.patchValue({
             MrIdTypeCode: this.tempIdType[0].Key
           });
-          if (this.tempIdType[0].Key == this.KTP) {
-            this.tempKTPCheck = true; 
-          } else {
-            this.tempKTPCheck = false;
-            this.ManagementShareholderForm.controls.IdExpiredDt.setValidators(Validators.required);  
-            this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
-          }
+          this.ChangeIdType(this.tempIdType[0].Key);
         }
       }
     );
@@ -274,13 +274,26 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
 
   onOptionsSelected(event){  
-    if(event.target.value == this.KTP){
+    this.ChangeIdType(event.target.value);
+  }
+
+  ChangeIdType(IdType: string) {
+    this.ManagementShareholderForm.controls.IdExpiredDt.patchValue("");
+
+    if (IdType == RefMasterConstant.KITAS || IdType == RefMasterConstant.SIM) {
+      this.ManagementShareholderForm.controls.IdExpiredDt.setValidators([Validators.required]);
+      this.isIdExpiredDtRequired = true;
+    } else {
       this.ManagementShareholderForm.controls.IdExpiredDt.clearValidators();
-      this.tempKTPCheck= true;
-    }else{
-      this.ManagementShareholderForm.controls.IdExpiredDt.setValidators(Validators.required);  
-      this.tempKTPCheck=false;
+      this.isIdExpiredDtRequired = false;
     }
+
+    if(IdType == RefMasterConstant.Npwp || IdType == RefMasterConstant.EKtp || IdType == RefMasterConstant.AKTA){
+      this.ManagementShareholderForm.controls.IdExpiredDt.disable();
+    }else{
+      this.ManagementShareholderForm.controls.IdExpiredDt.enable();
+    }
+
     this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
   }
 

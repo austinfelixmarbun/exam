@@ -174,10 +174,6 @@
                                     {
                                         "type": "IdCust",
                                         "property": "CustId"
-                                    },
-                                    {
-                                        "type": "From",
-                                        "property": "CustPaging"
                                     }
                                 ]
                             },
@@ -199,10 +195,6 @@
                                     {
                                         "type": "IdCust",
                                         "property": "CustId"
-                                    },
-                                    {
-                                        "type": "From",
-                                        "property": "CustPaging"
                                     }
                                 ]
                             },

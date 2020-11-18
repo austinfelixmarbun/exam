@@ -71,13 +71,7 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "left",
-            "label": "MGMNT / SHAREHOLDER TYPE",
-            "name": "CS.MR_CUST_TYPE_CODE"
-        },
-        {
-            "type": "sort",
-            "position": "left",
+            "position": "center",
             "label": "MGMNT / SHAREHOLDER NO.",
             "name": "CS.CUST_NO"
         },
@@ -96,6 +90,12 @@
         {
             "type": "sort",
             "position": "left",
+            "label": "MGMNT / SHAREHOLDER TYPE",
+            "name": "CS.MR_CUST_TYPE_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
             "label": "CUSTOMER NO.",
             "name": "C.CUST_NO"
         },
@@ -122,11 +122,6 @@
     },
     "bodyList": [
         {
-            "type": "text",
-            "position": "left",
-            "property": "ShareholderMrCustTypeCode"
-        },
-        {
             "type": "action",
             "position": "center",
             "action": [
@@ -143,7 +138,7 @@
                             ],
                             "result": {
                                 "type": "link",
-                                "position": "left",
+                                "position": "center",
                                 "property": "ShareholderCustNo",
                                 "path": "/View/Customer/PersonalDetail",
                                 "target": "_blank",
@@ -166,7 +161,7 @@
                             ],
                             "result": {
                                 "type": "link",
-                                "position": "left",
+                                "position": "center",
                                 "property": "ShareholderCustNo",
                                 "path": "/View/Customer/CoyDetail",
                                 "target": "_blank",
@@ -194,6 +189,11 @@
             "property": "ShareholderIdNo"
         },
         {
+            "type": "text",
+            "position": "left",
+            "property": "ShareholderMrCustTypeCode"
+        },
+        {
             "type": "action",
             "position": "center",
             "action": [
@@ -210,7 +210,7 @@
                             ],
                             "result": {
                                 "type": "link",
-                                "position": "left",
+                                "position": "center",
                                 "property": "CustNo",
                                 "path": "/View/Customer/PersonalDetail",
                                 "target": "_blank",
@@ -233,7 +233,7 @@
                             ],
                             "result": {
                                 "type": "link",
-                                "position": "left",
+                                "position": "center",
                                 "property": "CustNo",
                                 "path": "/View/Customer/CoyDetail",
                                 "target": "_blank",
