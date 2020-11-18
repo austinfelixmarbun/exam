@@ -9,6 +9,7 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-view-address',
@@ -61,7 +62,7 @@ export class CustomerViewAddressComponent implements OnInit {
         }
       },
       error => {
-        this.router.navigateByUrl('Error');
+        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
       }
     );
     var custObj = new CustObj();
@@ -90,7 +91,7 @@ export class CustomerViewAddressComponent implements OnInit {
         }
       },
       error => {
-        this.router.navigateByUrl('Error');
+        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
       }
     );
   }

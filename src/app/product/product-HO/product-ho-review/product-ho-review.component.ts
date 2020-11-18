@@ -6,6 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-product-ho-review',
@@ -57,7 +58,7 @@ export class ProductHoReviewComponent implements OnInit {
     this.http.post(URLConstant.ReviewProduct, data).subscribe(
       (response) => {
         this.toastr.successMessage("Success");
-        this.router.navigate(["/Product/HOReview"]);
+        AdInsHelper.RedirectUrl(this.router,["/Product/HOReview"],{ });
       });
   }
   async ClaimTask(WfTaskListId) {

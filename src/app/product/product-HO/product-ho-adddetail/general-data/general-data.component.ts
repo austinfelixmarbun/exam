@@ -13,6 +13,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-general-data-HO',
@@ -409,10 +410,10 @@ export class GeneralDataHOComponent implements OnInit {
 
   BackToPaging() {
     if (this.source == "return") {
-      this.router.navigate(["/Product/HOReturnPaging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Product/HOReturnPaging"],{ });
     }
     else {
-      this.router.navigate(["/product/HOpaging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Product/HOpaging"],{ });
     }
   }
 }

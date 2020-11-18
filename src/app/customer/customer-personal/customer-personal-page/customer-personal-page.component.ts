@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import Stepper from 'bs-stepper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-personal-page',
@@ -60,9 +61,9 @@ export class CustomerPersonalPageComponent implements OnInit {
 
   back() {
     if (this.Page != null) {
-      this.router.navigate(["/Customer/EditMainData/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Customer/EditMainData/Paging"],{});
     } else {
-      this.router.navigate(["/Customer/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
     }
   }
  
@@ -132,9 +133,9 @@ export class CustomerPersonalPageComponent implements OnInit {
   
   endStepper(ev:any){
     if (this.From) {
-      this.router.navigate(["/Customer/"+this.From+"/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Customer/"+this.From+"/Paging"],{});
     } else {
-      this.router.navigate(["/Customer/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
     }
   }
 }

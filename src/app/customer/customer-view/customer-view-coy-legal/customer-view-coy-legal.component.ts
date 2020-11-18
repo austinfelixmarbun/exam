@@ -7,6 +7,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { FormBuilder } from '@angular/forms';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-view-coy-legal',
@@ -53,7 +54,7 @@ export class CustomerViewCoyLegalComponent implements OnInit {
         }
       },
       error => {
-        this.router.navigateByUrl('Error');
+        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
       }
     );
   }

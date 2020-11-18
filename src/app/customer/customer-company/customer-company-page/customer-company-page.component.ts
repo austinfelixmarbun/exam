@@ -5,6 +5,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import Stepper from 'bs-stepper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-company-page',
@@ -48,15 +49,15 @@ export class CustomerCompanyPageComponent implements OnInit {
   
   back() {
     if (this.From) {
-      this.router.navigate(["/Customer/"+this.From+"/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Customer/"+this.From+"/Paging"],{});
     } else {
-      this.router.navigate(["/Customer/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
     }
   }
 
   ngOnInit() {
     if (this.IdCust == null) {
-      this.router.navigate(["/Customer/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
     }
     else {
       var custObj = { CustId: this.IdCust };

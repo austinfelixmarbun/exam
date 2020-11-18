@@ -13,6 +13,7 @@ import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
 import { UcTempPagingObj } from "app/shared/model/TempPaging/UcTempPagingObj.model";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
+import { AdInsHelper } from "app/shared/AdInsHelper";
 
 @Component({
   selector: 'app-role-form',
@@ -93,7 +94,7 @@ export class RoleFormComponent implements OnInit {
     this.http.post(URLConstant.AddListAuthForm, this.listAuthFormObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(['/SystemSetting/RoleForm'], { queryParams: { "RefRoleId": this.RefRoleId } });
+        AdInsHelper.RedirectUrl(this.router,["/SystemSetting/RoleForm"],{ "RefRoleId": this.RefRoleId });
       });
   }
 }

@@ -45,7 +45,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           AdInsHelper.CreateUserAccess(response);
           let currPath = this.router.routerState.snapshot.url;
           this.router.navigateByUrl("/pages/content", { skipLocationChange: true }).then(() => {
-            this.router.navigateByUrl(currPath);
+            AdInsHelper.RedirectUrl(this.router,[currPath],{});
             this.dialog.closeAll();
           });
         }

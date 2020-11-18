@@ -13,6 +13,7 @@ import { IfStmt } from '@angular/compiler';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-prod-offering-add',
@@ -139,7 +140,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.http.post(URLConstant.EditProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingId": response["ProdOfferingId"], "ProdOfferingHId": response["DraftProdOfferingHId"], source: this.source } });
+            AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/AddDetail"],{ "ProdOfferingId": response["ProdOfferingId"], "ProdOfferingHId": response["DraftProdOfferingHId"], source: this.source });
           }
         );
       }
@@ -151,7 +152,7 @@ export class ProdOfferingAddComponent implements OnInit {
         this.http.post(URLConstant.AddProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(["/Product/ProdOffering/AddDetail"], { queryParams: { "ProdOfferingId": response["ProdOfferingId"], "ProdOfferingHId": response["DraftProdOfferingHId"], source: this.source } });
+            AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/AddDetail"],{ "ProdOfferingId": response["ProdOfferingId"], "ProdOfferingHId": response["DraftProdOfferingHId"], source: this.source });
           }
         );
       }
@@ -189,10 +190,10 @@ export class ProdOfferingAddComponent implements OnInit {
 
   BackToPaging() {
     if (this.source == "return") {
-      this.router.navigate(["/Product/ProdOffering/Returnpaging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/Returnpaging"],{ });
     }
     else {
-      this.router.navigate(["/Product/ProdOffering/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/Paging"],{ });
     }
   }
 }

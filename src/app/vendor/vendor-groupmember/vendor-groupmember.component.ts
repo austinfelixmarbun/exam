@@ -9,6 +9,7 @@ import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.mod
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-vendor-groupmember',
@@ -106,7 +107,7 @@ export class VendorGroupmemberComponent implements OnInit {
 
     this.http.post(URLConstant.AddVendorGrpMbr, obj).subscribe(
       (response) => {
-        this.router.navigate(['/Vendor/Group/View/'], { queryParams: { VendorGrpId: this.VendorGrpId, MrVendorCategoryCode: this.MrVendorCategoryCode } });
+        AdInsHelper.RedirectUrl(this.router,["/Vendor/Group/View"],{ "VendorGrpId": this.VendorGrpId, "MrVendorCategoryCode": this.MrVendorCategoryCode });
       });
   }
 }

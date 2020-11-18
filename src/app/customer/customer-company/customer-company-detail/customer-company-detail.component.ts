@@ -10,6 +10,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 import { DatePipe } from '@angular/common';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-company-detail',
@@ -114,9 +115,9 @@ export class CustomerCompanyDetailComponent implements OnInit {
   }
   back() {
     if (this.Page != null) {
-      this.router.navigate(["/Customer/EditMainData/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,['/Customer/EditMainData/Paging'],{});
     } else {
-      this.router.navigate(["/Customer/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,['/Customer/Paging'],{});
     }
   }
   }

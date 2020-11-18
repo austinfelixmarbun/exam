@@ -8,6 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VendorGroupObj } from 'app/shared/model/VendorGroupObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-vendor-group',
@@ -105,7 +106,7 @@ export class VendorGroupComponent implements OnInit {
       this.httpClient.post(URLConstant.AddVendorGrp, this.vendorGrpObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          this.router.navigate(["/Vendor/Paging"], { queryParams: { "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode } });
+          AdInsHelper.RedirectUrl(this.router,["/Vendor/Paging"],{ "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode });
         }
       );
     }
@@ -116,7 +117,7 @@ export class VendorGroupComponent implements OnInit {
       this.httpClient.post(URLConstant.EditVendorGrp, this.vendorGrpObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          this.router.navigate(["/Vendor/Paging"], { queryParams: { "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode } });
+          AdInsHelper.RedirectUrl(this.router,["/Vendor/Paging"],{ "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode });
         }
       );
     }

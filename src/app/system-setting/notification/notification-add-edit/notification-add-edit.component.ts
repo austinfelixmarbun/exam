@@ -11,6 +11,7 @@ import { formatDate } from '@angular/common';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-notification-add-edit',
@@ -180,7 +181,7 @@ export class NotificationAddEditComponent implements OnInit {
         this.http.post(this.addUrl, this.notificationHObj).subscribe(
           response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/SystemSetting/Notification"]);
+            AdInsHelper.RedirectUrl(this.router,["/SystemSetting/Notification"],{ });
 
           }
         );

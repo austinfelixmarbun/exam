@@ -150,7 +150,7 @@ export class AdInsHelper {
         window.open(url, "_blank");
     }
 
-    public static navigateUrlMasking(router: Router, url: Array<string>, queryParams: {}){
+    public static RedirectUrl(router: Router, url: Array<string>, queryParams: {}){
         router.navigate(url, { queryParams: queryParams, skipLocationChange: true });
     }
 }

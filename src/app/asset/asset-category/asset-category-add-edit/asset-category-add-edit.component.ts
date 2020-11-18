@@ -6,6 +6,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AssetCategoryObj } from 'app/shared/model/AssetCategoryObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-asset-category-add-edit',
@@ -70,7 +71,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddNewAssetCategory, this.acObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/Category/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
+          AdInsHelper.RedirectUrl(this.router,["/Asset/Category/Paging"],{ "AssetTypeId": this.acObj.AssetTypeId });
         });
     } else {
       this.acObj = this.result;
@@ -81,7 +82,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditAssetCategory, this.acObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/Category/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
+          AdInsHelper.RedirectUrl(this.router,["/Asset/Category/Paging"],{ "AssetTypeId": this.acObj.AssetTypeId });
         });
     }
   }

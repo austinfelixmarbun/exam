@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-profession-add-edit',
@@ -86,8 +87,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.http.post(this.addUrl, this.refProfessionObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/CommonSetting/Profession/Paging"]);
-
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Profession/Paging'],{});
         }
       );
     } else {
@@ -99,7 +99,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.http.post(this.editUrl, this.refProfessionObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/CommonSetting/Profession/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Profession/Paging'],{});
         }
       );
     }

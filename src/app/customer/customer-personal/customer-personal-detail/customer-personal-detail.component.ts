@@ -11,6 +11,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-personal-detail',
@@ -321,9 +322,9 @@ export class CustomerPersonalDetailComponent implements OnInit {
   }
   back() {
     if (this.Page != null) {
-      this.router.navigate(["/Customer/EditMainData/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Customer/EditMainData/Paging"],{});
     } else {
-      this.router.navigate(["/Customer/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
     }
   }
 }

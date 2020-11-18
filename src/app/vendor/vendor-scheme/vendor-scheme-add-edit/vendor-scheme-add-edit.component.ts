@@ -8,6 +8,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-vendor-scheme-add-edit',
@@ -94,7 +95,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
           this.http.post(URLConstant.EditVendorSchm, this.vendorSchemeObj).subscribe(
               (response) => {
                   this.toastr.successMessage(response["message"]);
-                  this.router.navigate(["/Vendor/Paging/"], { queryParams: { "Type" : "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode } });
+                  AdInsHelper.RedirectUrl(this.router,["/Vendor/Paging"],{ "Type" : "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
               });
       }
       else {
@@ -102,7 +103,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
           this.http.post(URLConstant.AddVendorSchm, this.vendorSchemeObj).subscribe(
               (response) => {
                   this.toastr.successMessage(response["message"]);
-                  this.router.navigate(["/Vendor/Paging/"], { queryParams: { "Type" : "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode } });
+                  AdInsHelper.RedirectUrl(this.router,["/Vendor/Paging"],{ "Type" : "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
               });
       }
   }

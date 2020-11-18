@@ -13,6 +13,7 @@ import { RefProductOfferingDetailObj } from 'app/shared/model/RefProductOffering
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-general-data',
@@ -116,7 +117,7 @@ export class GeneralDataComponent implements OnInit {
     this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(["/Product/ProdOffering/Paging"]);
+        AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/Paging"],{ });
       }
     );
   }
@@ -177,10 +178,10 @@ export class GeneralDataComponent implements OnInit {
 
   BackToPaging() {
     if (this.source == "return") {
-      this.router.navigate(["/Product/ProdOffering/Returnpaging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/Returnpaging"],{ });
     }
     else {
-      this.router.navigate(["/Product/ProdOffering/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/Paging"],{ });
     }
   }
 }

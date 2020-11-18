@@ -6,6 +6,7 @@ import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-product-offering-deact-apv-detail',
@@ -63,9 +64,9 @@ export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit 
 
   onApprovalSubmited() {
     this.toastr.successMessage("Success");
-    this.router.navigate(["/Product/OfferingDeactivateApproval"]);
+    AdInsHelper.RedirectUrl(this.router,["/Product/OfferingDeactivateApproval"],{ });
   }
   onCancelClick() {
-    this.router.navigate(["/Product/OfferingDeactivateApproval"]);
+    AdInsHelper.RedirectUrl(this.router,["/Product/OfferingDeactivateApproval"],{ });
   }
 }

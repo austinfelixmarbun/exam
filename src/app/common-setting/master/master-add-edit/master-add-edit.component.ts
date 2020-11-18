@@ -98,8 +98,7 @@ export class MasterAddEditComponent implements OnInit {
         //SAVE
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          //this.router.navigate(['/CommonSetting/Master']);
-          AdInsHelper.navigateUrlMasking(this.router,['/CommonSetting/Master'],{});
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Master'],{});
         },
         (error) => {
           this.toastr.typeErrorCustom(error);
@@ -114,7 +113,7 @@ export class MasterAddEditComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["Message"]);
           //this.location.back();
-          AdInsHelper.navigateUrlMasking(this.router,['/CommonSetting/Master'],{});
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Master'],{});
           this.spinner.hide();
         },
         (error) => {
