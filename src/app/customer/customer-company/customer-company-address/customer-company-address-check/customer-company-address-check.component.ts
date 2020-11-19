@@ -53,7 +53,7 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
       (response) => {
         this.listCustAddr = response["ReturnObject"];
         let idxCompany = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode == CommonConstant.CustAddrTypeCompany);
-        this.listCustAddr.splice(idxCompany, 1)
+        if(idxCompany != -1) this.listCustAddr.splice(idxCompany, 1)
       });
   }
 
