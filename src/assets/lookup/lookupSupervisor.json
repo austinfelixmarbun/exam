@@ -18,9 +18,7 @@
       }
     ],
     "querystring": {
-      "select": "SELECT EMP_NO AS EmpNo, EMP_NAME AS EmpName, REF_EMP_ID AS RefEmpId",
-      "from": "FROM DBO.REF_EMP WITH(NOLOCK)",
-      "where": "WHERE IS_ACTIVE = 1"
+      "name": "lookupSupervisor"
     },
     "headerList": [
         {
