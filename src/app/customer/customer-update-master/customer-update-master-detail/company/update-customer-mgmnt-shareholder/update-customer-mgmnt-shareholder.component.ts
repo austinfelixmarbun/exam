@@ -9,7 +9,8 @@ import { UpdateCustCompanyShareholderObj } from 'app/shared/model/UpdateMasterCu
 @Component({
   selector: 'app-update-customer-mgmnt-shareholder',
   templateUrl: './update-customer-mgmnt-shareholder.component.html',
-  styles: []
+  styles: [],
+  providers: [NGXToastrService]
 })
 export class UpdateCustomerMgmntShareholderComponent implements OnInit {
   @Input() CustDataTrxId: number;

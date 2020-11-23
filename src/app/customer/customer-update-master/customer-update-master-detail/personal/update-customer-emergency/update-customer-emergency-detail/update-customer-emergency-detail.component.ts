@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -14,7 +15,8 @@ import { map, mergeMap } from 'rxjs/operators';
 @Component({
   selector: 'app-update-customer-emergency-detail',
   templateUrl: './update-customer-emergency-detail.component.html',
-  styles: []
+  styles: [],
+  providers: [NGXToastrService]
 })
 export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   @Input() CustDataTrxId: number;
@@ -63,25 +65,36 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     this.AppEmergencyData = new UpdateCustEmergencyObj();
     // this.DisplayName = new Object();
     // this.lookupObj = new Object();
+    this.lookupObj = {
+      Zipcode: new InputLookupObj(),
+      Profession: new InputLookupObj()
+    };
+    this.DisplayName = {
+      Zipcode: "",
+      Profession: ""
+    };
 
-    this.lookupObj["Zipcode"] = new InputLookupObj();
+    // this.lookupObj["Zipcode"] = new InputLookupObj();
     this.lookupObj["Zipcode"].urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.lookupObj["Zipcode"].urlQryPaging = "/Generic/GetPagingObjectBySQL";
     this.lookupObj["Zipcode"].urlEnviPaging = environment.FoundationR3Url;
     this.lookupObj["Zipcode"].pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.lookupObj["Zipcode"].genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.lookupObj["Zipcode"].isRequired = false;
 
-    this.lookupObj["Profession"] = new InputLookupObj();
+    // this.lookupObj["Profession"] = new InputLookupObj();
     this.lookupObj["Profession"].urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.lookupObj["Profession"].urlQryPaging = "/Generic/GetPagingObjectBySQL";
     this.lookupObj["Profession"].urlEnviPaging = environment.FoundationR3Url;
     this.lookupObj["Profession"].pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.lookupObj["Profession"].genericJson = "./assets/lookup/lookupCustomerProfession.json";
+    this.lookupObj["Profession"].isRequired = false;
   }
 
   ngOnInit() {
+    var datePipe = new DatePipe("en-US");
     let getDetail = this.http.post(URLConstant.GetCustEmergencyDataForUpdateMasterCustEmergency, { CustDataTrxId: this.CustDataTrxId });
-    let getCustRelationship = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship });
+    let getCustRelationship = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustPersonalRelationship });
     let getIdType = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType });
     let getGender = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender });
     forkJoin([getDetail, getCustRelationship, getIdType, getGender]).pipe(
@@ -90,6 +103,9 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
         this.CustRelationList = response[1][CommonConstant.ReturnObj];
         this.IdTypeList = response[2][CommonConstant.ReturnObj];
         this.GenderList = response[3][CommonConstant.ReturnObj];
+        if(response[0]["MasterCustEmergency"]["BirthDate"]){
+          response[0]["MasterCustEmergency"]["BirthDate"] = datePipe.transform(response[0]["MasterCustEmergency"]["BirthDate"], 'yyyy-MM-dd');
+        }
         this.CustomerEmergencyForm.patchValue({...response[0]["MasterCustEmergency"]});
         this.DisplayName["Zipcode"] = this.AppEmergencyData["Zipcode"];
         return response[0];
@@ -102,6 +118,11 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     ).toPromise().then(
       (response) => {
         this.lookupObj["Profession"]["nameSelect"] = response[0]["ProfessionName"];
+        this.lookupObj["Zipcode"]["nameSelect"] = this.CustomerEmergencyForm.controls["Zipcode"].value;
+        this.lookupObj["Profession"]["jsonSelect"] = { Zipcode: this.CustomerEmergencyForm.controls["Zipcode"].value };
+        this.lookupObj["Zipcode"]["jsonSelect"] = { ProfessionName: response[0]["ProfessionName"] };
+        this.lookupObj["Profession"]["isReady"] = true;
+        this.lookupObj["Zipcode"]["isReady"] = true;
         this.DisplayName["Profession"] = response[1]["ProfessionName"];
       }
     ).catch(
@@ -120,6 +141,9 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       this.lookupObj[lookupName]["isReady"] = false;
       this.lookupObj[lookupName]["nameSelect"] = this.DisplayName[formControlName];
       this.lookupObj[lookupName]["isReady"] = true;
+      this.CustomerEmergencyForm.get(lookupName + "Lookup").patchValue({
+        value: this.DisplayName[formControlName]
+      });
     }
   }
 
@@ -144,6 +168,27 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     this.lookupObj["Profession"]["isReady"] = false;
     this.lookupObj["Profession"]["nameSelect"] = this.DisplayName["Profession"];
     this.lookupObj["Profession"]["isReady"] = true;
+    this.CustomerEmergencyForm.get("ProfessionLookup").patchValue({
+      value: this.DisplayName["Profession"]
+    });
+    this.CustomerEmergencyForm.get("ZipcodeLookup").patchValue({
+      value: this.DisplayName["Zipcode"]
+    });
+  }
+
+  getProfessionData(e){
+    this.CustomerEmergencyForm.patchValue({
+      Profession: e.ProfessionCode
+    });
+  }
+
+  getZipcodeData(e){
+    this.CustomerEmergencyForm.patchValue({
+      Zipcode: e.Zipcode,
+      AreaCode1: e.AreaCode1,
+      AreaCode2: e.AreaCode2,
+      City: e.City
+    });
   }
 
   back(){

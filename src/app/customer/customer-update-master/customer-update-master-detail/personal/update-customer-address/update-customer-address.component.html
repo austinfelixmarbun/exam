@@ -21,7 +21,7 @@
             <label>{{custAddr.get('AppAddr').get('Addr').value}}</label>
           </div>
           <div class="col-md-2"><button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Addr', i)">Copy</button></div>
-          <div class="col-md-4" [formGroupName]="MasterAddr">
+          <div class="col-md-4" [formGroupName]="'MasterAddr'">
             <textarea class="form-control adInsInput" formControlName="Addr"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && custAddr.get('MasterAddr').get('Addr').invalid}"></textarea>
             <lib-uc-show-errors [control]="custAddr.get('MasterAddr').get('Addr')" [submit]="enjiForm.submitted">
@@ -34,14 +34,14 @@
             <label>{{custAddr.get('AppAddr').get('AreaCode4').value}}/{{custAddr.get('AppAddr').get('AreaCode3').value}}</label>
           </div>
           <div class="col-md-2"></div>
-          <div class="col-md-4" [formGroupName]="MasterAddr">
-            <div class="col-md-6" style="padding-left: 0;">
+          <div class="col-md-4 row" [formGroupName]="'MasterAddr'">
+            <div class="col-md-6">
               <input type="text" class="form-control adInsInput" formControlName="AreaCode4"
                 [ngClass]="{ 'is-invalid': enjiForm.submitted && custAddr.get('MasterAddr').get('AreaCode4').invalid}">
               <lib-uc-show-errors [control]="custAddr.get('MasterAddr').get('AreaCode4')" [submit]="enjiForm.submitted">
               </lib-uc-show-errors>
             </div>
-            <div class="col-md-6" style="padding-right: 0;">
+            <div class="col-md-6">
               <input type="text" class="form-control adInsInput" formControlName="AreaCode3"
                 [ngClass]="{ 'is-invalid': enjiForm.submitted && custAddr.get('MasterAddr').get('AreaCode3').invalid}">
               <lib-uc-show-errors [control]="custAddr.get('MasterAddr').get('AreaCode3')" [submit]="enjiForm.submitted">
@@ -67,7 +67,7 @@
             {{custAddr.get('AppAddr').get('AreaCode2').value}}
           </div>
           <div class="col-md-2"></div>
-          <div class="col-md-4" [formGroupName]="MasterAddr">
+          <div class="col-md-4" [formGroupName]="'MasterAddr'">
             <input type="text" class="form-control adInsInput" formControlName="AreaCode2"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && custAddr.get('MasterAddr').get('AreaCode2').invalid}">
             <lib-uc-show-errors [control]="custAddr.get('MasterAddr').get('AreaCode2')" [submit]="enjiForm.submitted">
@@ -80,7 +80,7 @@
             {{custAddr.get('AppAddr').get('AreaCode1').value}}
           </div>
           <div class="col-md-2"></div>
-          <div class="col-md-4" [formGroupName]="MasterAddr">
+          <div class="col-md-4" [formGroupName]="'MasterAddr'">
             <input type="text" class="form-control adInsInput" formControlName="AreaCode1"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && custAddr.get('MasterAddr').get('AreaCode1').invalid}">
             <lib-uc-show-errors [control]="custAddr.get('MasterAddr').get('AreaCode1')" [submit]="enjiForm.submitted">
@@ -93,7 +93,7 @@
             {{custAddr.get('AppAddr').get('City').value}}
           </div>
           <div class="col-md-2"></div>
-          <div class="col-md-4" [formGroupName]="MasterAddr">
+          <div class="col-md-4" [formGroupName]="'MasterAddr'">
             <input type="text" class="form-control adInsInput" formControlName="City"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && custAddr.get('MasterAddr').get('City').invalid}">
             <lib-uc-show-errors [control]="custAddr.get('MasterAddr').get('City')" [submit]="enjiForm.submitted">
@@ -103,10 +103,10 @@
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" translate>Phone 1</label>
           <div class="col-md-4">
-            <label>{{custAddr.get('AppAddr').get('PhnArea1').value}} - {{custAddr.get('AppAddr').get('Phn1').value}} - ext. {{custAddr.get('AppAddr').get('PhnExt1').value}}</label>
+            <label *ngIf="custAddr.get('AppAddr').get('Phn1').value">{{custAddr.get('AppAddr').get('PhnArea1').value}} - {{custAddr.get('AppAddr').get('Phn1').value}} - ext. {{custAddr.get('AppAddr').get('PhnExt1').value}}</label>
           </div>
           <div class="col-md-2"></div>
-          <div class="col-md-4" [formGroupName]="MasterAddr">
+          <div class="col-md-4 row" [formGroupName]="'MasterAddr'">
             <div class="col-md-4">
               <input type="text" class="form-control adInsInput" formControlName="PhnArea1"
                 [ngClass]="{ 'is-invalid': enjiForm.submitted && custAddr.get('MasterAddr').get('PhnArea1').invalid}">
@@ -130,10 +130,10 @@
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" translate>Phone 2</label>
           <div class="col-md-4">
-            <label>{{custAddr.get('AppAddr').get('PhnArea2').value}} - {{custAddr.get('AppAddr').get('Phn2').value}} - ext. {{custAddr.get('AppAddr').get('PhnExt2').value}}</label>
+            <label *ngIf="custAddr.get('AppAddr').get('Phn2').value">{{custAddr.get('AppAddr').get('PhnArea2').value}} - {{custAddr.get('AppAddr').get('Phn2').value}} - ext. {{custAddr.get('AppAddr').get('PhnExt2').value}}</label>
           </div>
           <div class="col-md-2"></div>
-          <div class="col-md-4" [formGroupName]="MasterAddr">
+          <div class="col-md-4 row" [formGroupName]="'MasterAddr'">
             <div class="col-md-4">
               <input type="text" class="form-control adInsInput" formControlName="PhnArea2"
                 [ngClass]="{ 'is-invalid': enjiForm.submitted && custAddr.get('MasterAddr').get('PhnArea2').invalid}">
@@ -157,10 +157,10 @@
         <div class="form-group row">
           <label class="col-md-2 adInsLabel" translate>Fax</label>
           <div class="col-md-4">
-            <label>{{custAddr.get('AppAddr').get('FaxArea').value}} - {{custAddr.get('AppAddr').get('Fax').value}}</label>
+            <label *ngIf="custAddr.get('AppAddr').get('Fax').value">{{custAddr.get('AppAddr').get('FaxArea').value}} - {{custAddr.get('AppAddr').get('Fax').value}}</label>
           </div>
           <div class="col-md-2"></div>
-          <div class="col-md-4" [formGroupName]="MasterAddr">
+          <div class="col-md-4 row" [formGroupName]="'MasterAddr'">
             <div class="col-md-4">
               <input type="text" class="form-control adInsInput" formControlName="FaxArea"
                 [ngClass]="{ 'is-invalid': enjiForm.submitted && custAddr.get('MasterAddr').get('FaxArea').invalid}">
@@ -183,7 +183,7 @@
           <div class="col-md-2">
             <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrBuildingOwnershipCode', i)">Copy</button>
           </div>
-          <div class="col-md-4" [formGroupName]="MasterAddr">
+          <div class="col-md-4" [formGroupName]="'MasterAddr'">
             <select class="form-control adInsInput" formControlName="MrBuildingOwnershipCode"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && custAddr.get('MasterAddr').get('MrBuildingOwnershipCode').invalid}">
               <option *ngFor="let item of OwnershipList" [value]="item.Key">{{item.Value}}</option>
@@ -200,7 +200,7 @@
           <div class="col-md-2">
             <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('StayLength', i)">Copy</button>
           </div>
-          <div class="col-md-4" [formGroupName]="MasterAddr">
+          <div class="col-md-4" [formGroupName]="'MasterAddr'">
             <input type="number" class="form-control adInsInput" formControlName="StayLength"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && custAddr.get('MasterAddr').get('StayLength').invalid}">
             <lib-uc-show-errors [control]="custAddr.get('MasterAddr').get('StayLength')" [submit]="enjiForm.submitted">

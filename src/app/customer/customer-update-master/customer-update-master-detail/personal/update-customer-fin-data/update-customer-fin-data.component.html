@@ -52,7 +52,7 @@
           <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IsJoinIncome')">Copy</button>
         </div>
         <div class="col-md-4">
-          <input type="checkbox" formControlName="IsJoinIncome" />
+          <input type="checkbox" formControlName="IsJoinIncome" (change)="CalculateFinData()" />
         </div>
       </div>
       <div class="form-group row">
@@ -64,7 +64,7 @@
           <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('SpouseMonthlyIncomeAmt')">Copy</button>
         </div>
         <div class="col-md-4">
-          <input type="" currencyMask class="form-control adInsInput" formControlName="SpouseMonthlyIncomeAmt"
+          <input type="" currencyMask class="form-control adInsInput" formControlName="SpouseMonthlyIncomeAmt" (blur)="CalculateFinData()"
             [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFinDataForm.controls.SpouseMonthlyIncomeAmt.invalid}">
           <lib-uc-show-errors [control]="CustomerFinDataForm.controls.SpouseMonthlyIncomeAmt" [submit]="enjiForm.submitted">
           </lib-uc-show-errors>
@@ -128,16 +128,16 @@
     <div id="BankAccSection">
       <div class="form-group row" *ngFor="let item of ArrayNum; let i = index">
         <div class="col-md-6">
-          <div *ngIf="AppCustBankAcc.BankAccNo">
-            <div class="col-md-12" style="padding: 0;">
-              <label class="col-md-9" style="padding-left: 0;">{{i}}. {{AppCustBankAcc.BankName}} - {{AppCustBankAcc.BankAccNo}} - {{AppCustBankAcc.BankAccName}} - {{AppCustBankAcc.BankBranch}}{{AppCustBankAcc.IsDefault ? ' - Default' : ''}}</label>
-              <div class="col-md-3" *ngIf="!AppCustBankAcc.IsMasterData && !AppCustBankAcc.IsAddedBankAcc"><button type="button" class="btn btn-raised btn-primary" (click)="AddNewBankAcc(i)">Add As New Data</button></div>
+          <div *ngIf="AppCustBankAcc[i].BankAccNo">
+            <div class="col-md-12 row" style="padding: 0; margin: 0;">
+              <label class="col-md-9" style="padding-left: 0;">{{i+1}}. {{AppCustBankAcc[i].BankName}} - {{AppCustBankAcc[i].BankAccNo}} - {{AppCustBankAcc[i].BankAccName}} - {{AppCustBankAcc[i].BankBranch}}{{AppCustBankAcc[i].IsDefault ? ' - Default' : ''}}</label>
+              <div class="col-md-3" *ngIf="!AppCustBankAcc[i].IsMasterData && !AppCustBankAcc[i].IsAddedBankAcc"><button type="button" class="btn btn-raised btn-primary" (click)="AddNewBankAcc(i)">Add As New Data</button></div>
             </div>
-            <div class="col-md-12" style="padding: 0;">
+            <div class="col-md-12 row" style="padding: 0; margin: 0;">
               <label class="col-md-4" style="padding-left: 0;">Bank Statement</label>
-              <div class="col-md-4" *ngIf="!AppCustBankAcc.IsMasterStmnt && !AppCustBankAcc.IsAddedBankStmnt"><button type="button" class="btn btn-raised btn-primary" (click)="AddNewBankStmnt(i)">Add As New Data</button></div>
+              <div class="col-md-4" *ngIf="!AppCustBankAcc[i].IsMasterStmnt && !AppCustBankAcc[i].IsAddedBankStmnt"><button type="button" class="btn btn-raised btn-primary" (click)="AddNewBankStmnt(i)">Add As New Data</button></div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12" style="padding: 0;">
               <table class="table table-responsive-md text-center table-hover">
                 <thead>
                   <tr class="table-header">
@@ -182,16 +182,16 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div *ngIf="MainCustBankAcc.BankAccNo">
-            <div class="col-md-12" style="padding: 0;">
-              <label class="col-md-9" style="padding-left: 0;">{{i}}. {{MainCustBankAcc.BankName}} - {{MainCustBankAcc.BankAccNo}} - {{MainCustBankAcc.BankAccName}} - {{MainCustBankAcc.BankBranch}}{{MainCustBankAcc.IsDefault ? ' - Default' : ''}}</label>
-              <div class="col-md-3" *ngIf="!MainCustBankAcc.IsMasterData"><button type="button" class="btn btn-raised btn-primary" (click)="CancelBankAcc(i)">Cancel Add Bank Account</button></div>
+          <div *ngIf="MainCustBankAcc[i].BankAccNo">
+            <div class="col-md-12 row" style="padding: 0; margin: 0;">
+              <label class="col-md-9" style="padding-left: 0;">{{i+1}}. {{MainCustBankAcc[i].BankName}} - {{MainCustBankAcc[i].BankAccNo}} - {{MainCustBankAcc[i].BankAccName}} - {{MainCustBankAcc[i].BankBranch}}{{MainCustBankAcc[i].IsDefault ? ' - Default' : ''}}</label>
+              <div class="col-md-3" *ngIf="!MainCustBankAcc[i].IsMasterData"><button type="button" class="btn btn-raised btn-primary" (click)="CancelBankAcc(i)">Cancel Add Bank Account</button></div>
             </div>
-            <div class="col-md-12" style="padding: 0;">
+            <div class="col-md-12 row" style="padding: 0; margin: 0;">
               <label class="col-md-4" style="padding-left: 0;">Bank Statement</label>
-              <div class="col-md-4" *ngIf="!MainCustBankAcc.IsMasterStmnt"><button type="button" class="btn btn-raised btn-primary" (click)="CancelBankStmnt(i)">Cancel Add Bank Statement</button></div>
+              <div class="col-md-4" *ngIf="!MainCustBankAcc[i].IsMasterStmnt"><button type="button" class="btn btn-raised btn-primary" (click)="CancelBankStmnt(i)">Cancel Add Bank Statement</button></div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12" style="padding: 0;">
               <table class="table table-responsive-md text-center table-hover">
                 <thead>
                   <tr class="table-header">

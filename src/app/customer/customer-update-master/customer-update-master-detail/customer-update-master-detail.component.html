@@ -7,14 +7,14 @@
             <div class="form-body">
               <div class="row">
                 <div class="col-md-8">
-                  <h4 class="card-title" id="horz-layout-colored-controls" translate>Update Data Customer</h4>
+                  <!-- <h4 class="card-title" id="horz-layout-colored-controls" translate>Update Data Customer</h4> -->
                 </div>
               </div>
             </div>
           </form>
           <lib-ucviewgeneric [viewGenericObj]="ViewGenericObj" (callback)="GetCallback($event)"></lib-ucviewgeneric>
         </div>
-        <div id="CompanyWizard" class="bs-stepper" *ngIf="MrCustTypeCode == PersonalConstant">
+        <div id="PersonalWizard" class="bs-stepper">
           <div class="bs-stepper-header" role="tablist" style="overflow-x: auto;">
             <div class="step" data-target="#customer-detail-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="customer-detail-tab"
@@ -67,26 +67,26 @@
           <br><br>
           <div class="bs-stepper-content">
             <div id="customer-detail-tab" class="content" role="tabpanel" aria-labelledby="customer-detail-tab-trigger">
-              <app-update-customer-personal-detail *ngIf="StepIdx == 1" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-personal-detail>
+              <app-update-customer-personal-detail *ngIf="StepIdx == 1 && MrCustTypeCode == PersonalConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-personal-detail>
             </div>
             <div id="address-tab" class="content" role="tabpanel" aria-labelledby="address-tab-trigger">
-              <app-update-customer-address *ngIf="StepIdx == 2" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-address>
+              <app-update-customer-address *ngIf="StepIdx == 2 && MrCustTypeCode == PersonalConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-address>
             </div>
             <div id="family-tab" class="content" role="tabpanel" aria-labelledby="family-tab-trigger">
-              <app-update-customer-family *ngIf="StepIdx == 3" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-family>
+              <app-update-customer-family *ngIf="StepIdx == 3 && MrCustTypeCode == PersonalConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-family>
             </div>
             <div id="emergency-tab" class="content" role="tabpanel" aria-labelledby="emergency-tab-trigger">
-              <app-update-customer-emergency-detail *ngIf="StepIdx == 4" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-emergency-detail>
+              <app-update-customer-emergency-detail *ngIf="StepIdx == 4 && MrCustTypeCode == PersonalConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-emergency-detail>
             </div>
             <div id="job-tab" class="content" role="tabpanel" aria-labelledby="job-tab-trigger">
-              <app-update-customer-job-data *ngIf="StepIdx == 5" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-job-data>
+              <app-update-customer-job-data *ngIf="StepIdx == 5 && MrCustTypeCode == PersonalConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-job-data>
             </div>
             <div id="fin-tab" class="content" role="tabpanel" aria-labelledby="fin-tab-trigger">
-              <app-update-customer-fin-data *ngIf="StepIdx == 6" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-fin-data>
+              <app-update-customer-fin-data *ngIf="StepIdx == 6 && MrCustTypeCode == PersonalConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-fin-data>
             </div>
           </div>
         </div>
-        <div id="CompanyWizard" class="bs-stepper" *ngIf="MrCustTypeCode == CompanyConstant">
+        <div id="CompanyWizard" class="bs-stepper">
           <div class="bs-stepper-header" role="tablist" style="overflow-x: auto;">
             <div class="step" data-target="#customer-detail-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="customer-detail-tab"
@@ -139,22 +139,22 @@
           <br><br>
           <div class="bs-stepper-content">
             <div id="customer-detail-tab" class="content" role="tabpanel" aria-labelledby="customer-detail-tab-trigger">
-              <app-update-customer-company-detail *ngIf="StepIdx == 1" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-company-detail>
+              <app-update-customer-company-detail *ngIf="StepIdx == 1 && MrCustTypeCode == CompanyConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-company-detail>
             </div>
             <div id="address-tab" class="content" role="tabpanel" aria-labelledby="address-tab-trigger">
-              <app-update-customer-address *ngIf="StepIdx == 2" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-address>
+              <app-update-customer-address *ngIf="StepIdx == 2 && MrCustTypeCode == CompanyConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-address>
             </div>
             <div id="shareholder-tab" class="content" role="tabpanel" aria-labelledby="shareholder-tab-trigger">
-              <app-update-customer-mgmnt-shareholder *ngIf="StepIdx == 3" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-mgmnt-shareholder>
+              <app-update-customer-mgmnt-shareholder *ngIf="StepIdx == 3 && MrCustTypeCode == CompanyConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-mgmnt-shareholder>
             </div>
             <div id="contact-tab" class="content" role="tabpanel" aria-labelledby="contact-tab-trigger">
-              <app-update-customer-contact-info *ngIf="StepIdx == 4" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-contact-info>
+              <app-update-customer-contact-info *ngIf="StepIdx == 4 && MrCustTypeCode == CompanyConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-contact-info>
             </div>
             <div id="financial-tab" class="content" role="tabpanel" aria-labelledby="financial-tab-trigger">
-              <app-update-customer-company-fin-data *ngIf="StepIdx == 5" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-company-fin-data>
+              <app-update-customer-company-fin-data *ngIf="StepIdx == 5 && MrCustTypeCode == CompanyConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-company-fin-data>
             </div>
             <div id="legal-tab" class="content" role="tabpanel" aria-labelledby="legal-tab-trigger">
-              <app-update-customer-company-legal-doc *ngIf="StepIdx == 6" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-company-legal-doc>
+              <app-update-customer-company-legal-doc *ngIf="StepIdx == 6 && MrCustTypeCode == CompanyConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-company-legal-doc>
             </div>
           </div>
         </div>

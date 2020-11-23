@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -14,7 +15,8 @@ import { map, mergeMap } from 'rxjs/operators';
 @Component({
   selector: 'app-update-customer-job-data',
   templateUrl: './update-customer-job-data.component.html',
-  styles: []
+  styles: [],
+  providers: [NGXToastrService]
 })
 export class UpdateCustomerJobDataComponent implements OnInit {
   @Input() CustDataTrxId: number;
@@ -76,6 +78,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     this.lookupIndustryTypeObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookupIndustryTypeObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookupIndustryTypeObj.genericJson = "./assets/lookup/lookupIndustryType.json";
+    this.lookupIndustryTypeObj.isRequired = false;
 
     this.lookupProfessionObj = new InputLookupObj();
     this.lookupProfessionObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
@@ -83,6 +86,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     this.lookupProfessionObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookupProfessionObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.lookupProfessionObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
+    this.lookupProfessionObj.isRequired = false;
 
     this.lookupZipcodeObj = new InputLookupObj();
     this.lookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
@@ -90,9 +94,11 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     this.lookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.lookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.lookupZipcodeObj.isRequired = false;
   }
 
   ngOnInit() {
+    var datePipe = new DatePipe("en-US");
     let getDetail = this.http.post(URLConstant.GetCustJobDataForUpdateMasterCustJobData, { CustDataTrxId: this.CustDataTrxId });
     let getCustModel = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel });
     let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition });
@@ -105,6 +111,9 @@ export class UpdateCustomerJobDataComponent implements OnInit {
         this.JobPositionList = response[2][CommonConstant.ReturnObj];
         this.JobStatusList = response[3][CommonConstant.ReturnObj];
         this.CompanyScaleList = response[4][CommonConstant.ReturnObj];
+        if(response[0]["MasterCustJobData"]["EstablishmentDate"]){
+          response[0]["MasterCustJobData"]["EstablishmentDate"] = datePipe.transform(response[0]["MasterCustJobData"]["EstablishmentDate"], "yyyy-MM-dd");
+        }
         this.CustomerJobForm.patchValue({...response[0]["MasterCustJobData"]});
         this.lookupZipcodeObj.nameSelect = response[0]["MasterCustJobData"]["Zipcode"];
         return response[0];
@@ -119,7 +128,9 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     ).toPromise().then(
       (response) => {
         this.lookupProfessionObj.nameSelect = response[0]["ProfessionName"];
+        this.lookupProfessionObj.jsonSelect = { ProfessionName: response[0]["ProfessionName"] }
         this.lookupIndustryTypeObj.nameSelect = response[1]["IndustryTypeName"];
+        this.lookupIndustryTypeObj.jsonSelect = { IndustryTypeName: response[1]["IndustryTypeName"] };
         this.AppJobData.ProfessionName = response[2]["ProfessionName"];
         this.AppJobData.IndustryTypeName = response[3]["IndustryTypeName"];
       }

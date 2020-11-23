@@ -9,7 +9,8 @@ import { UpdateCustCompanyFinDataObj } from 'app/shared/model/UpdateMasterCust/U
 @Component({
   selector: 'app-update-customer-company-fin-data',
   templateUrl: './update-customer-company-fin-data.component.html',
-  styles: []
+  styles: [],
+  providers: [NGXToastrService]
 })
 export class UpdateCustomerCompanyFinDataComponent implements OnInit {
   @Input() CustDataTrxId: number;

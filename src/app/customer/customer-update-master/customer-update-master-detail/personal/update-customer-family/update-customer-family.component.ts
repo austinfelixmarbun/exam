@@ -8,7 +8,8 @@ import { UpdateCustFamilyObj } from 'app/shared/model/UpdateMasterCust/UpdateCus
 @Component({
   selector: 'app-update-customer-family',
   templateUrl: './update-customer-family.component.html',
-  styles: []
+  styles: [],
+  providers: [NGXToastrService]
 })
 export class UpdateCustomerFamilyComponent implements OnInit {
   @Input() CustDataTrxId: number;
@@ -44,8 +45,8 @@ export class UpdateCustomerFamilyComponent implements OnInit {
         for (const item of this.ListCustFamily) {
           item["IsMasterData"] = true;
         }
-        // this.ListCustFamily.sort((a, b) => (a["CustName"] > b["CustName"]) ? 1 : -1);
-        // this.ListAppFamily.sort((a, b) => (a["CustName"] > b["CustName"]) ? 1 : -1);
+        this.ListCustFamily.sort((a, b) => (a["CustName"] > b["CustName"]) ? 1 : -1);
+        this.ListAppFamily.sort((a, b) => (a["CustName"] > b["CustName"]) ? 1 : -1);
       }
     ).catch(
       (error) => {

@@ -16,7 +16,8 @@ import { map, mergeMap } from 'rxjs/operators';
 @Component({
   selector: 'app-update-customer-personal-detail',
   templateUrl: './update-customer-personal-detail.component.html',
-  styles: []
+  styles: [],
+  providers: [NGXToastrService]
 })
 export class UpdateCustomerPersonalDetailComponent implements OnInit {
   @Input() CustDataTrxId: number;
@@ -72,6 +73,30 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     this.ResponseTab = new EventEmitter<any>();
     // this.DetailData = new Object();
     this.LocalNationalityConstant = CommonConstant.NationalityCodeLocal;
+
+    this.CustGrpLookupObj = new InputLookupObj();
+    this.CustGrpLookupObj.urlJson = "./assets/uclookup/Customer/CustomerGroup/lookupCustGrp_UpdateMasterCust.json";
+    this.CustGrpLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.CustGrpLookupObj.urlEnviPaging = environment.FoundationR3Url;
+    this.CustGrpLookupObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCustGrp_UpdateMasterCust.json";
+    this.CustGrpLookupObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCustGrp_UpdateMasterCust.json";
+    this.CustGrpLookupObj.ddlEnvironments = [
+      {
+        name: "A.MR_CUST_TYPE_CODE",
+        environment: environment.FoundationR3Url
+      }
+    ];
+    this.CustGrpLookupObj.isReady = false;
+    this.CustGrpLookupObj.isRequired = false;
+
+    this.lookUpObj = new InputLookupObj();
+    this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
+    this.lookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
+    this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
+    this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
+    this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";
+    this.lookUpObj.isReady = false;
+    this.lookUpObj.isRequired = false;
   }
 
   ngOnInit() {
@@ -92,12 +117,6 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
         this.CustomerDetailForm.patchValue({...detailData["MasterCustDetail"]});
 
         var country = response[5];
-        this.lookUpObj = new InputLookupObj();
-        this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
-        this.lookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-        this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
-        this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
-        this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";
         var criteriaList = new Array();
         var criteriaObj = new CriteriaObj();
         criteriaObj.restriction = AdInsConstant.RestrictionNeq;
@@ -107,18 +126,6 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
         this.lookUpObj.addCritInput = criteriaList;
         detailData["GsValueCountry"] = country["GsValue"];
 
-        this.CustGrpLookupObj = new InputLookupObj();
-        this.CustGrpLookupObj.urlJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
-        this.CustGrpLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-        this.CustGrpLookupObj.urlEnviPaging = environment.FoundationR3Url;
-        this.CustGrpLookupObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
-        this.CustGrpLookupObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
-        this.CustGrpLookupObj.ddlEnvironments = [
-          {
-            name: "A.MR_CUST_TYPE_CODE",
-            environment: environment.FoundationR3Url
-          }
-        ];
         criteriaList = new Array();
         criteriaObj = new CriteriaObj();
         criteriaObj.restriction = AdInsConstant.RestrictionNeq;
@@ -127,7 +134,6 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
         criteriaList.push(criteriaObj);
         this.CustGrpLookupObj.addCritInput = criteriaList;
         this.CustGrpLookupObj.nameSelect = detailData["MasterCustDetail"]["CustomerGroupParentCustName"];
-        this.CustGrpLookupObj.isReady = true;
 
         return detailData;
       }),
@@ -142,6 +148,8 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
         this.lookUpObj.nameSelect = response[0]["CountryName"];
         this.AppCustPersonalDetail["CountryName"] = response[1]["CountryName"];
         this.DefaultCountry = response[2]["CountryName"];
+        this.CustGrpLookupObj.isReady = true;
+        this.lookUpObj.isReady = true;
       }
     ).catch(
       (error) => {
@@ -190,6 +198,16 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     var obj = new Object();
     obj[formControlName] = this.AppCustPersonalDetail[formControlName];
     this.CustomerDetailForm.patchValue(obj);
+  }
+
+  CopyCustGrpHandler(){
+    this.CustomerDetailForm.patchValue({
+      CustomerGroupParentCustId: this.AppCustPersonalDetail["CustomerGroupParentCustId"],
+      CustomerGroupParentCustName: this.AppCustPersonalDetail["CustomerGroupParentCustName"]
+    });
+    this.CustGrpLookupObj.isReady = false;
+    this.CustGrpLookupObj.nameSelect = this.AppCustPersonalDetail["CustomerGroupParentCustName"];
+    this.CustGrpLookupObj.isReady = true;
   }
 
   back(){

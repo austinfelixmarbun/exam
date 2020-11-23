@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -44,7 +44,8 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { 
     this.route.queryParams.subscribe(params => {
       if (params["CustDataTrxId"] != null) {
@@ -77,12 +78,16 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
             linear: false,
             animation: true
           });
+          document.getElementById('PersonalWizard').style.display = 'block';
+          document.getElementById('CompanyWizard').style.display = 'none';
         }
         else{
           this.CompanyWizard = new Stepper(document.querySelector('#CompanyWizard'), {
             linear: false,
             animation: true
           });
+          document.getElementById('PersonalWizard').style.display = 'none';
+          document.getElementById('CompanyWizard').style.display = 'block';
         }
       }
     ).catch(
@@ -143,11 +148,11 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     }
   }
 
-  ResponseTab(e){
+  StepperHandler(e){
     if(e.StatusCode == 200){
       if(this.MrCustTypeCode == CommonConstant.CustTypePersonal){
         if(this.StepIdx == this.CustPersonalStep["FIN"]){
-
+          this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
         }
         else{
           this.StepIdx++;
@@ -156,7 +161,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
       }
       else{
         if(this.StepIdx == this.CustCompanyStep["LEGAL"]){
-
+          this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
         }
         else{
           this.StepIdx++;

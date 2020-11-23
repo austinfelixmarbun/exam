@@ -11,7 +11,8 @@ import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-update-customer-fin-data',
   templateUrl: './update-customer-fin-data.component.html',
-  styles: []
+  styles: [],
+  providers: [NGXToastrService]
 })
 export class UpdateCustomerFinDataComponent implements OnInit {
   @Input() CustDataTrxId: number;
@@ -47,6 +48,8 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     this.AppCustFinData = new UpdateCustPersonalFinDataObj();
     this.MainCustBankAcc = new Array<any>();
     this.AppCustBankAcc = new Array<any>();
+    this.ResponseTab = new EventEmitter<any>();
+    this.ArrayNum = new Array<number>();
   }
 
   ngOnInit() {
@@ -87,15 +90,17 @@ export class UpdateCustomerFinDataComponent implements OnInit {
                 isMasterData = true;
 
                 if(item["CustBankStmntList"].length == main["CustBankStmntList"].length){
-                  for (const key in item["CustBankStmntList"]) {
-                    if(item["CustBankStmntList"][key] == main["CustBankStmntList"][key]){
-                      isMasterStmnt = true;
-                    }
-                    else{
-                      isMasterStmnt = false;
-                      break;
-                    }
-                  } 
+                  for (let i = 0; i < item["CustBankStmntList"].length; i++) {
+                    for (const key in item["CustBankStmntList"][i]) {
+                      if(item["CustBankStmntList"][key] == main["CustBankStmntList"][key]){
+                        isMasterStmnt = true;
+                      }
+                      else{
+                        isMasterStmnt = false;
+                        break;
+                      }
+                    } 
+                  }
                 }
                 break;
             }

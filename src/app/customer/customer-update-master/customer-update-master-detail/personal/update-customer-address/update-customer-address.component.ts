@@ -8,12 +8,13 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UpdateCustAddrObj } from 'app/shared/model/UpdateMasterCust/UpdateCustAddrObj.Model';
 import { environment } from 'environments/environment';
-import { forkJoin } from 'rxjs';
+import { BehaviorSubject, forkJoin, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-update-customer-address',
   templateUrl: './update-customer-address.component.html',
-  styles: []
+  styles: [],
+  providers: [NGXToastrService]
 })
 export class UpdateCustomerAddressComponent implements OnInit {
   @Input() CustDataTrxId: number;
@@ -34,12 +35,15 @@ export class UpdateCustomerAddressComponent implements OnInit {
   ) { 
     this.ResponseTab = new EventEmitter<any>();
     this.OwnershipList = new Array<any>();
+    this.ZipcodeLookupList = new Array<InputLookupObj>();
     this.ZipcodeLookupObj = new InputLookupObj();
     this.ZipcodeLookupObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.ZipcodeLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
     this.ZipcodeLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.ZipcodeLookupObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.ZipcodeLookupObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.ZipcodeLookupObj.isReady = false;
+    this.ZipcodeLookupObj.isRequired = false;
   }
 
   ngOnInit() {
@@ -59,11 +63,11 @@ export class UpdateCustomerAddressComponent implements OnInit {
               CustId: [responseAddr[key]["MasterCustAddr"]["CustId"]],
               MrCustAddrTypeCode: [responseAddr[key]["MasterCustAddr"]["MrCustAddrTypeCode"]],
               Addr: [responseAddr[key]["MasterCustAddr"]["Addr"], [Validators.required]],
-              AreaCode1: [responseAddr[key]["MasterCustAddr"]["AreaCode1"], [Validators.required]],
-              AreaCode2: [responseAddr[key]["MasterCustAddr"]["AreaCode2"], [Validators.required]],
+              AreaCode1: [{value: responseAddr[key]["MasterCustAddr"]["AreaCode1"], disabled: true}, [Validators.required]],
+              AreaCode2: [{value: responseAddr[key]["MasterCustAddr"]["AreaCode2"], disabled: true}, [Validators.required]],
               AreaCode3: [responseAddr[key]["MasterCustAddr"]["AreaCode3"], [Validators.required]],
               AreaCode4: [responseAddr[key]["MasterCustAddr"]["AreaCode4"], [Validators.required]],
-              City: [responseAddr[key]["MasterCustAddr"]["City"], [Validators.required]],
+              City: [{value: responseAddr[key]["MasterCustAddr"]["City"], disabled: true}, [Validators.required]],
               Zipcode: [responseAddr[key]["MasterCustAddr"]["Zipcode"], [Validators.required]],
               SubZipcode: [responseAddr[key]["MasterCustAddr"]["SubZipcode"]],
               MrBuildingOwnershipCode: [responseAddr[key]["MasterCustAddr"]["MrBuildingOwnershipCode"]],
@@ -84,13 +88,13 @@ export class UpdateCustomerAddressComponent implements OnInit {
             }),
             AppAddr: this.fb.group({
               MrCustAddrTypeCode: [responseAddr[key]["AppCustAddr"]["MrCustAddrTypeCode"]],
-              Addr: [responseAddr[key]["AppCustAddr"]["Addr"], [Validators.required]],
-              AreaCode1: [responseAddr[key]["AppCustAddr"]["AreaCode1"], [Validators.required]],
-              AreaCode2: [responseAddr[key]["AppCustAddr"]["AreaCode2"], [Validators.required]],
-              AreaCode3: [responseAddr[key]["AppCustAddr"]["AreaCode3"], [Validators.required]],
-              AreaCode4: [responseAddr[key]["AppCustAddr"]["AreaCode4"], [Validators.required]],
-              City: [responseAddr[key]["AppCustAddr"]["City"], [Validators.required]],
-              Zipcode: [responseAddr[key]["AppCustAddr"]["Zipcode"], [Validators.required]],
+              Addr: [responseAddr[key]["AppCustAddr"]["Addr"]],
+              AreaCode1: [responseAddr[key]["AppCustAddr"]["AreaCode1"]],
+              AreaCode2: [responseAddr[key]["AppCustAddr"]["AreaCode2"]],
+              AreaCode3: [responseAddr[key]["AppCustAddr"]["AreaCode3"]],
+              AreaCode4: [responseAddr[key]["AppCustAddr"]["AreaCode4"]],
+              City: [responseAddr[key]["AppCustAddr"]["City"]],
+              Zipcode: [responseAddr[key]["AppCustAddr"]["Zipcode"]],
               SubZipcode: [responseAddr[key]["AppCustAddr"]["SubZipcode"]],
               MrBuildingOwnershipCode: [responseAddr[key]["AppCustAddr"]["MrBuildingOwnershipCode"]],
               PhnArea1: [responseAddr[key]["AppCustAddr"]["PhnArea1"]],
@@ -110,8 +114,10 @@ export class UpdateCustomerAddressComponent implements OnInit {
           });
           formArray.push(formGroup);
 
-          var zipcodeObj = this.ZipcodeLookupObj;
+          var zipcodeObj = {...this.ZipcodeLookupObj};
           zipcodeObj.nameSelect = responseAddr[key]["MasterCustAddr"]["Zipcode"];
+          zipcodeObj.jsonSelect = { Zipcode: responseAddr[key]["MasterCustAddr"]["Zipcode"] };
+          zipcodeObj.isReady = true;
           this.ZipcodeLookupList.push(zipcodeObj);
         }
       }
@@ -154,10 +160,10 @@ export class UpdateCustomerAddressComponent implements OnInit {
     var formGroup = formArray.controls[idx] as FormGroup;
     var masterData = formGroup.get("MasterAddr") as FormGroup;
     masterData.patchValue({
-      ResidenceZipcode: e.Zipcode,
-      ResidenceAreaCode1: e.AreaCode1,
-      ResidenceAreaCode2: e.AreaCode2,
-      ResidenceCity: e.City
+      Zipcode: e.Zipcode,
+      AreaCode1: e.AreaCode1,
+      AreaCode2: e.AreaCode2,
+      City: e.City
     });
   }
 
@@ -170,7 +176,8 @@ export class UpdateCustomerAddressComponent implements OnInit {
     var requestList = new Array<UpdateCustAddrObj>();
     for (const item of formArray.controls) {
       var masterData = new UpdateCustAddrObj();
-      masterData = {...item.get("MasterAddr").value};
+      var currFormGroup = item.get("MasterAddr") as FormGroup;
+      masterData = {...currFormGroup.getRawValue()};
       if(!masterData.CustAddrId || masterData.CustAddrId <= 0){
         masterData.MrCustAddrTypeCode = item.get("AddrType").value;
       }

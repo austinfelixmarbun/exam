@@ -20,5 +20,6 @@ export class CustomerUpdateMasterComponent implements OnInit {
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchUpdateMasterCust.json";
     this.inputPagingObj.deleteUrl = "";
+    this.inputPagingObj.ddlEnvironments = [];
   }
 }

@@ -9,7 +9,8 @@ import { UpdateCustLegalDocObj } from 'app/shared/model/UpdateMasterCust/UpdateC
 @Component({
   selector: 'app-update-customer-company-legal-doc',
   templateUrl: './update-customer-company-legal-doc.component.html',
-  styles: []
+  styles: [],
+  providers: [NGXToastrService]
 })
 export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
   @Input() CustDataTrxId: number;

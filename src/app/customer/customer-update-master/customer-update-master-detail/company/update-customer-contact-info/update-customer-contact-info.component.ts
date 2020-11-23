@@ -13,7 +13,8 @@ import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-update-customer-contact-info',
   templateUrl: './update-customer-contact-info.component.html',
-  styles: []
+  styles: [],
+  providers: [NGXToastrService]
 })
 export class UpdateCustomerContactInfoComponent implements OnInit {
   @Input() CustDataTrxId: number;

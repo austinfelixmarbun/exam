@@ -14,7 +14,8 @@ import { map, mergeMap } from 'rxjs/operators';
 @Component({
   selector: 'app-update-customer-company-detail',
   templateUrl: './update-customer-company-detail.component.html',
-  styles: []
+  styles: [],
+  providers: [NGXToastrService]
 })
 export class UpdateCustomerCompanyDetailComponent implements OnInit {
   @Input() CustDataTrxId: number;

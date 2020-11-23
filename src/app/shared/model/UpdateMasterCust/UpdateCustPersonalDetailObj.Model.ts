@@ -5,6 +5,7 @@ export class UpdateCustPersonalDetailObj {
     MrMaritalStatCode: any;
     MrNationalityCode: any;
     Country: any;
+    CountryName: any;
     MrEducationCode: any;
     MrReligionCode: any;
     FamilyCardNo: any;

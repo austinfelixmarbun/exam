@@ -158,10 +158,10 @@
           <label>{{AppCustPersonalDetail.CustomerGroupParentCustName}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CustomerGroup')">Copy</button>
+          <button type="button" class="btn btn-raised btn-primary" (click)="CopyCustGrpHandler()">Copy</button>
         </div>
         <div class="col-md-4">
-          <lib-uclookupgeneric *ngIf="CustGrpLookupObj.isReady" [lookupInput]="CustGrpLookupObj" [parentForm]="CustomerDetailForm" [enjiForm]="enjiForm"
+          <lib-uclookupgeneric [lookupInput]="CustGrpLookupObj" [parentForm]="CustomerDetailForm" [enjiForm]="enjiForm"
             [identifier]="'ParentCust'" (lookup)="getParentCust($event)">
           </lib-uclookupgeneric>
         </div>
