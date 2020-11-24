@@ -39,8 +39,8 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
     CustId: [0],
     MrCustAddrTypeCode: [''],
     Addr: ['', [Validators.required]],
-    AreaCode1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-    AreaCode2: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    AreaCode1: ['', [Validators.required]],
+    AreaCode2: ['', [Validators.required]],
     AreaCode3: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     AreaCode4: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     City: ['', [Validators.required]],
@@ -76,6 +76,7 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
         this.GenderList = [...response[2][CommonConstant.ReturnObj]];
         this.CustomerContactInfoForm.patchValue({...response[0]["MasterContactInfo"]});
         this.ZipcodeLookupObj.nameSelect = response[0]["MasterContactInfo"]["Zipcode"];
+        this.ZipcodeLookupObj.jsonSelect = { Zipcode: response[0]["MasterContactInfo"]["Zipcode"] };
       }
     ).catch(
       (error) => {

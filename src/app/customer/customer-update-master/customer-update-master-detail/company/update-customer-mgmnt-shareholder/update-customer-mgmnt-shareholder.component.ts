@@ -33,6 +33,7 @@ export class UpdateCustomerMgmntShareholderComponent implements OnInit {
   ngOnInit() {
     this.http.post(URLConstant.GetShareholderForUpdateMasterCustCompanyShareholder, { CustDataTrxId: this.CustDataTrxId }).toPromise().then(
       (response) => {
+        console.log("Response Shareholder: " + JSON.stringify(response));
         this.MasterShareholder = response["MasterCustShareholder"];
         this.AppShareholder = response["AppCustSHareholder"];
         this.CustId = response["CustId"];
