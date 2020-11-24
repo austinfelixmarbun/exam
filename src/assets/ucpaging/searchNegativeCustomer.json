@@ -81,10 +81,16 @@
         }
     ],
     "querystring": { 
-        "select": "SELECT A.CUST_NO AS custNo, A.CUST_NAME AS custName, D.DESCR AS mrCustTypeCode, A.ID_NO AS idNo, B.DESCR AS mrNegCustSource, C.DESCR AS mrNegCustType, A.IS_ACTIVE AS isActive, A.NEGATIVE_CUST_ID AS negativeCustId",
+        "select": "SELECT A.NEGATIVE_CUST_NO AS NegCustNo, A.CUST_NO AS custNo, A.CUST_NAME AS custName, D.DESCR AS mrCustTypeCode, A.ID_NO AS idNo, B.DESCR AS mrNegCustSource, C.DESCR AS mrNegCustType, A.IS_ACTIVE AS isActive, A.NEGATIVE_CUST_ID AS negativeCustId",
         "from": "FROM dbo.NEGATIVE_CUST AS A WITH(NOLOCK) INNER JOIN dbo.REF_MASTER AS B WITH(NOLOCK) ON A.MR_NEG_CUST_SOURCE_CODE = B.MASTER_CODE AND B.REF_MASTER_TYPE_CODE = 'NEG_CUST_SOURCE' INNER JOIN dbo.REF_MASTER AS C WITH(NOLOCK) ON A.MR_NEG_CUST_TYPE_CODE = C.MASTER_CODE AND C.REF_MASTER_TYPE_CODE = 'NEG_CUST_TYPE' INNER JOIN dbo.REF_MASTER AS D WITH(NOLOCK) ON A.MR_CUST_TYPE_CODE = D.MASTER_CODE AND D.REF_MASTER_TYPE_CODE = 'CUST_TYPE'"
     },
     "headerList" : [ 
+        {
+            "type" : "sort", 
+            "position" : "left", 
+            "label" : "Negative Customer No",
+            "name" : "A.NEGATIVE_CUST_NO" 
+        },
         {
             "type" : "sort", 
             "position" : "left", 
@@ -134,6 +140,11 @@
         }
     ],
     "bodyList" : [
+        {
+            "type" : "text", 
+            "position" : "left", 
+            "property" : "NegCustNo"
+        },
         {
             "type" : "text", 
             "position" : "left", 
