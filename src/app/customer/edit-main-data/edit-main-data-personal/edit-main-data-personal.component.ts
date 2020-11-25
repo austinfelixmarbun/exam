@@ -15,8 +15,6 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { ResponseOptions } from '@angular/http';
-
 @Component({
   selector: 'app-edit-main-data-personal',
   templateUrl: './edit-main-data-personal.component.html',
@@ -62,7 +60,8 @@ export class EditMainDataPersonalComponent implements OnInit {
   VipNotesRequired : boolean;
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
-  UcAddressObj: UcAddressObj;
+  UcAddressObj: UcAddressObj = new UcAddressObj();
+  
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = URLConstant.GetCustPersonalbyCustId;
