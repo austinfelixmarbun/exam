@@ -839,7 +839,7 @@ export class URLConstant {
     public static EditCustPersonalFamily = environment.FoundationR3Url + "/CustPersonalFamily/EditCustPersonalFamily";
     public static DeleteCustPersonalFamily = environment.FoundationR3Url + "/CustPersonalFamily/DeleteCustPersonalFamily";
     public static GetCustPersonalFamilyByCustPersonalFamilyId = environment.FoundationR3Url + "/CustPersonalFamily/GetCustPersonalFamilyByCustPersonalFamilyId";
-    public static GetListCustPersonalFamilyByCustId = environment.FoundationR3Url + "/CustPersonalFamily/GetListCustPersonalFamilyByCustId";
+    public static GetMainCustAndListCustPersonalFamilyByCustId = environment.FoundationR3Url + "/CustPersonalFamily/GetMainCustAndListCustPersonalFamilyByCustId";
     public static GetListCustPersonalEmergencyContactByCustId = environment.FoundationR3Url + "/CustPersonalContactPerson/GetListCustPersonalEmergencyContactByCustId";
 
     // SURVEY TASK
