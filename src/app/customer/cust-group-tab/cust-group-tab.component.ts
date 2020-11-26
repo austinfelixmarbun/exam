@@ -22,7 +22,7 @@ export class CustGroupTabComponent implements OnInit {
   @Input() CustId: number;
   @Input() MrCustTypeCode: string;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
-  CustGrpList: any;
+  CustGrpList: Array<CustGrpObj> = new Array();
   resCustObj: any;
   listCustIdToExclude: Array<number>;
 
@@ -40,8 +40,8 @@ export class CustGroupTabComponent implements OnInit {
     var custGrp = new CustGrpObj();
     custGrp.MemberCustId = this.CustId;
     this.httpClient.post(URLConstant.GetListCustGrpByMemberCustIdForCustGrpTab, custGrp).subscribe(
-      (response: any) => {
-        this.CustGrpList = response.CustGrpObjForCustGrpTabs;
+      (response) => {
+        this.CustGrpList = response["CustGrpObjForCustGrpTabs"];
         this.listCustIdToExclude.push(this.CustId);
         for (const item of this.CustGrpList) {
           this.listCustIdToExclude.push(item["CustId"]);
