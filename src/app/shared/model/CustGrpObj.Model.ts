@@ -1,11 +1,14 @@
 export class CustGrpObj {
-    CustGrpId: any;
-    CustId: any;
-    MemberCustId: any;
-    MrCustRelationshipCode: any;
-    CustGrpNotes: any;
-    IsActive: any;
-    IsBothWays: any;
+    CustGrpId: number;
+    CustId: number;
+    CustNo: string;
+    CustName: string;
+    MemberCustId: number;
+    MrCustRelationshipCode: string;
+    Relationship: string;
+    CustGrpNotes: string;
+    IsActive: boolean;
+    IsBothWays: boolean;
     RowVersion: any;
     constructor(){this.CustGrpId = 0, this.RowVersion = ""}
 }
