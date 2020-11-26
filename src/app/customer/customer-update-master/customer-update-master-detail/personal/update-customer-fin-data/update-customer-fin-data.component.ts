@@ -16,6 +16,7 @@ import { forkJoin } from 'rxjs';
 })
 export class UpdateCustomerFinDataComponent implements OnInit {
   @Input() CustDataTrxId: number;
+  @Input() WfTaskListId: number;
   @Output() ResponseTab: EventEmitter<any>;
   SourceIncomeList: Array<any>;
   AppCustFinData: UpdateCustPersonalFinDataObj;
@@ -35,7 +36,8 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     SpouseMonthlyIncomeAmt: [0],
     IsJoinIncome: [false],
     TotalIncomeAmt: [0],
-    NettIncomeAmt: [0]
+    NettIncomeAmt: [0],
+    TaskListId: [0]
   });
 
   constructor(
@@ -53,6 +55,9 @@ export class UpdateCustomerFinDataComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.CustomerFinDataForm.patchValue({
+      TaskListId: this.WfTaskListId
+    });
     let getDetail = this.http.post(URLConstant.GetCustFinDataForUpdateMasterCustFinData, { CustDataTrxId: this.CustDataTrxId });
     let getSourceIncome = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSourceIncome });
     forkJoin([getDetail, getSourceIncome]).toPromise().then(
@@ -235,7 +240,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
 
   SaveValue(){
     var formValue = this.CustomerFinDataForm.value;
-    var requestBankAcc = new Array<Object>();
+    var requestBankAcc = new Array<any>();
     for (const item of this.MainCustBankAcc) {
       if(!item["IsMasterData"]){
         requestBankAcc.push(item);

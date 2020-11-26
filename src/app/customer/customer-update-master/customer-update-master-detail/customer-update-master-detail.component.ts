@@ -24,6 +24,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   MrCustTypeCode: string;
   CompanyConstant: string;
   PersonalConstant: string;
+  WfTaskListId: number;
 
   CustPersonalStep = {
     "CUST": 1,
@@ -54,6 +55,9 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
       if (params["CustNo"] != null) {
         this.CustNo = params["CustNo"];
       }
+      if (params["WfTaskListId"] != null) {
+        this.WfTaskListId = params["WfTaskListId"];
+      }
     });
     this.StepIdx = 1;
     this.PersonalConstant = CommonConstant.CustTypePersonal;
@@ -70,6 +74,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.claimTask();
     this.http.post(URLConstant.GetCustByCustNo, { CustNo: this.CustNo }).toPromise().then(
       (response: CustObj) => {
         this.MrCustTypeCode = response.MrCustTypeCode;
@@ -95,6 +100,14 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  claimTask() {
+    var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var wfClaimObj = { pWFTaskListID: this.WfTaskListId, pUserID: currentUserContext[CommonConstant.USER_NAME] };
+    this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(
+      (response) => {
+      });
   }
 
   EnterTab(step){

@@ -14,6 +14,7 @@ import { UpdateCustLegalDocObj } from 'app/shared/model/UpdateMasterCust/UpdateC
 })
 export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
   @Input() CustDataTrxId: number;
+  @Input() WfTaskListId: number;
   @Output() ResponseTab: EventEmitter<any>;
   AppLegalDoc: Array<UpdateCustLegalDocObj>;
   MasterLegalDoc: Array<UpdateCustLegalDocObj>;
@@ -78,7 +79,7 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
         request.push(item);
       }
     }
-    this.http.post(URLConstant.EditMasterCustCompanyShareholder, { CustCompanyId: this.CustCompanyId, LegalDocList: request }).toPromise().then(
+    this.http.post(URLConstant.EditMasterCustCompanyShareholder, { CustCompanyId: this.CustCompanyId, TaskListId: this.WfTaskListId, LegalDocList: request }).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

@@ -82,7 +82,7 @@
               <app-update-customer-job-data *ngIf="StepIdx == 5 && MrCustTypeCode == PersonalConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-job-data>
             </div>
             <div id="fin-tab" class="content" role="tabpanel" aria-labelledby="fin-tab-trigger">
-              <app-update-customer-fin-data *ngIf="StepIdx == 6 && MrCustTypeCode == PersonalConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-fin-data>
+              <app-update-customer-fin-data *ngIf="StepIdx == 6 && MrCustTypeCode == PersonalConstant" [CustDataTrxId]="CustDataTrxId" [WfTaskListId]="WfTaskListId" (ResponseTab)="StepperHandler($event)"></app-update-customer-fin-data>
             </div>
           </div>
         </div>
@@ -154,7 +154,7 @@
               <app-update-customer-company-fin-data *ngIf="StepIdx == 5 && MrCustTypeCode == CompanyConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-company-fin-data>
             </div>
             <div id="legal-tab" class="content" role="tabpanel" aria-labelledby="legal-tab-trigger">
-              <app-update-customer-company-legal-doc *ngIf="StepIdx == 6 && MrCustTypeCode == CompanyConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-company-legal-doc>
+              <app-update-customer-company-legal-doc *ngIf="StepIdx == 6 && MrCustTypeCode == CompanyConstant" [CustDataTrxId]="CustDataTrxId" [WfTaskListId]="WfTaskListId" (ResponseTab)="StepperHandler($event)"></app-update-customer-company-legal-doc>
             </div>
           </div>
         </div>
