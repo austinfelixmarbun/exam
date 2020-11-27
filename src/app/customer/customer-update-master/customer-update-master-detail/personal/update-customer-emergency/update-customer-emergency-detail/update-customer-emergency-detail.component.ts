@@ -27,6 +27,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   GenderList: Array<any>;
   lookupObj: Record<string, any>;
   DisplayName: Record<string, any>;
+  IsAddressDifferent: boolean;
 
   CustomerEmergencyForm = this.fb.group({
     CustEmergencyId: [0],
@@ -58,6 +59,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router
   ) {
+    this.IsAddressDifferent = false;
     this.ResponseTab = new EventEmitter<any>();
     this.CustRelationList = new Array<Object>();
     this.IdTypeList = new Array<any>();
@@ -106,8 +108,20 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
         if(response[0]["MasterCustEmergency"]["BirthDate"]){
           response[0]["MasterCustEmergency"]["BirthDate"] = datePipe.transform(response[0]["MasterCustEmergency"]["BirthDate"], 'yyyy-MM-dd');
         }
+        if(this.AppEmergencyData["BirthDate"]){
+          this.AppEmergencyData["BirthDate"] = datePipe.transform(this.AppEmergencyData["BirthDate"], 'yyyy-MM-dd');
+        }
         this.CustomerEmergencyForm.patchValue({...response[0]["MasterCustEmergency"]});
         this.DisplayName["Zipcode"] = this.AppEmergencyData["Zipcode"];
+        if(response[0]["MasterCustEmergency"]["Address"] != response[0]["AppCustEmergency"]["Address"] ||
+              response[0]["MasterCustEmergency"]["AreaCode1"] != response[0]["AppCustEmergency"]["AreaCode1"] ||
+              response[0]["MasterCustEmergency"]["AreaCode2"] != response[0]["AppCustEmergency"]["AreaCode2"] ||
+              response[0]["MasterCustEmergency"]["AreaCode3"] != response[0]["AppCustEmergency"]["AreaCode3"] ||
+              response[0]["MasterCustEmergency"]["AreaCode4"] != response[0]["AppCustEmergency"]["AreaCode4"] ||
+              response[0]["MasterCustEmergency"]["Zipcode"] != response[0]["AppCustEmergency"]["Zipcode"] ||
+              response[0]["MasterCustEmergency"]["City"] != response[0]["AppCustEmergency"]["City"]){
+          this.IsAddressDifferent = true;
+        }
         return response[0];
       }),
       mergeMap((response) => {
@@ -133,9 +147,22 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   }
 
   CopyHandler(formControlName, lookupName){
-    var obj = new Object();
-    obj[formControlName] = this.AppEmergencyData[formControlName];
-    this.CustomerEmergencyForm.patchValue(obj);
+    if(formControlName == "Address"){
+      this.CustomerEmergencyForm.patchValue({
+        Address: this.AppEmergencyData["Address"],
+        Zipcode: this.AppEmergencyData["Zipcode"],
+        AreaCode1: this.AppEmergencyData["AreaCode1"],
+        AreaCode2: this.AppEmergencyData["AreaCode2"],
+        AreaCode3: this.AppEmergencyData["AreaCode3"],
+        AreaCode4: this.AppEmergencyData["AreaCode4"],
+        City: this.AppEmergencyData["City"]
+      });
+    }
+    else{
+      var obj = new Object();
+      obj[formControlName] = this.AppEmergencyData[formControlName];
+      this.CustomerEmergencyForm.patchValue(obj);
+    }
 
     if(lookupName){
       this.lookupObj[lookupName]["isReady"] = false;
@@ -148,20 +175,18 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   }
 
   CopyAllHandler(){
-    this.CustomerEmergencyForm.patchValue({
-      CustName: this.AppEmergencyData["CustName"],
-      CustRelation: this.AppEmergencyData["CustRelation"],
-      IdType: this.AppEmergencyData["IdType"],
-      IdNo: this.AppEmergencyData["IdNo"],
-      BirthPlace: this.AppEmergencyData["BirthPlace"],
-      BirthDate: this.AppEmergencyData["BirthDate"],
-      Gender: this.AppEmergencyData["Gender"],
-      Profession: this.AppEmergencyData["Profession"],
-      Email: this.AppEmergencyData["Email"],
-      MobilePhn1: this.AppEmergencyData["MobilePhn1"],
-      MobilePhn2: this.AppEmergencyData["MobilePhn2"],
-      Address: this.AppEmergencyData["Address"]
-    });
+    var obj = new Object();
+    for (const key in this.CustomerEmergencyForm.controls) {
+      if(key == "CustEmergencyId" || key == "CustId" || key == "RowVersion"){
+        continue;
+      }
+      else{
+        if(this.AppEmergencyData[key]){
+          obj[key] = this.AppEmergencyData[key];
+        }
+      }
+    }
+    this.CustomerEmergencyForm.patchValue(obj);
     this.lookupObj["Zipcode"]["isReady"] = false;
     this.lookupObj["Zipcode"]["nameSelect"] = this.DisplayName["Zipcode"];
     this.lookupObj["Zipcode"]["isReady"] = true;

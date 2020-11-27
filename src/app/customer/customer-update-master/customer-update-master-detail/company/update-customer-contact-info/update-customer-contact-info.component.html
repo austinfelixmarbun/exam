@@ -17,7 +17,7 @@
         <label>{{AppContactInfo.ContactPersonName}}</label>
       </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ContactPersonName')">Copy</button>
+        <button *ngIf="CustomerContactInfoForm.controls.ContactPersonName.value != AppContactInfo.ContactPersonName" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ContactPersonName')">Copy</button>
       </div>
       <div class="col-md-4">
         <input type="text" class="form-control adInsInput" formControlName="ContactPersonName"
@@ -32,7 +32,7 @@
         <label>{{AppContactInfo.MrGenderCode}}</label>
       </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrGenderCode')">Copy</button>
+        <button *ngIf="CustomerContactInfoForm.controls.MrGenderCode.value != AppContactInfo.MrGenderCode" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrGenderCode')">Copy</button>
       </div>
       <div class="col-md-4">
         <select class="form-control adInsInput" formControlName="MrGenderCode"
@@ -49,7 +49,7 @@
         <label>{{AppContactInfo.MrJobPositionCode}}</label>
       </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrJobPositionCode')">Copy</button>
+        <button *ngIf="CustomerContactInfoForm.controls.MrJobPositionCode.value != AppContactInfo.MrJobPositionCode" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrJobPositionCode')">Copy</button>
       </div>
       <div class="col-md-4">
         <select class="form-control adInsInput" formControlName="MrJobPositionCode"
@@ -66,7 +66,7 @@
         <label>{{AppContactInfo.JobTitleName}}</label>
       </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('JobTitleName')">Copy</button>
+        <button *ngIf="CustomerContactInfoForm.controls.JobTitleName.value != AppContactInfo.JobTitleName" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('JobTitleName')">Copy</button>
       </div>
       <div class="col-md-4">
         <input type="text" class="form-control adInsInput" formControlName="JobTitleName"
@@ -81,7 +81,7 @@
         <label>{{AppContactInfo.MobilePhnNo1}}</label>
       </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MobilePhnNo1')">Copy</button>
+        <button *ngIf="CustomerContactInfoForm.controls.MobilePhnNo1.value != AppContactInfo.MobilePhnNo1" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MobilePhnNo1')">Copy</button>
       </div>
       <div class="col-md-4">
         <input type="text" class="form-control adInsInput" formControlName="MobilePhnNo1"
@@ -96,7 +96,7 @@
         <label>{{AppContactInfo.MobilePhnNo2}}</label>
       </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MobilePhnNo2')">Copy</button>
+        <button *ngIf="CustomerContactInfoForm.controls.MobilePhnNo2.value != AppContactInfo.MobilePhnNo2" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MobilePhnNo2')">Copy</button>
       </div>
       <div class="col-md-4">
         <input type="text" class="form-control adInsInput" formControlName="MobilePhnNo2"
@@ -111,7 +111,7 @@
         <label>{{AppContactInfo.Email1}}</label>
       </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Email1')">Copy</button>
+        <button *ngIf="CustomerContactInfoForm.controls.Email1.value != AppContactInfo.Email1" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Email1')">Copy</button>
       </div>
       <div class="col-md-4">
         <input type="text" class="form-control adInsInput" formControlName="Email1"
@@ -126,7 +126,7 @@
         <label>{{AppContactInfo.Email2}}</label>
       </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Email2')">Copy</button>
+        <button *ngIf="CustomerContactInfoForm.controls.Email2.value != AppContactInfo.Email2" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Email2')">Copy</button>
       </div>
       <div class="col-md-4">
         <input type="text" class="form-control adInsInput" formControlName="Email2"
@@ -141,7 +141,7 @@
         <label>{{AppContactInfo.Addr}}</label>
       </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Addr')">Copy</button>
+        <button *ngIf="IsAddrDifferent" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Addr')">Copy</button>
       </div>
       <div class="col-md-4">
         <textarea class="form-control adInsInput" formControlName="Addr"

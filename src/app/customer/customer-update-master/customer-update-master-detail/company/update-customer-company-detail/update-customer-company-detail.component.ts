@@ -82,20 +82,36 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
   }
 
   CopyAllHandler(){
-    this.CustomerDetailForm.patchValue({
-      RefIndustryTypeId: this.AppCustCompanyDetail.RefIndustryTypeId,
-      NumOfEmp: this.AppCustCompanyDetail.NumOfEmp,
-      EstablishmentDt: this.AppCustCompanyDetail.EstablishmentDt,
-    });
+    var obj = new Object();
+    for (const key in this.AppCustCompanyDetail) {
+      if(key == "CustCompanyId"){
+        continue;
+      }
+      else{
+        if(this.AppCustCompanyDetail[key]){
+          obj[key] = this.AppCustCompanyDetail[key];
+        }
+      }
+    }
+    this.CustomerDetailForm.patchValue(obj);
     this.IndustryLookupObj.isReady = false;
     this.IndustryLookupObj.nameSelect = this.AppIndustryName;
     this.IndustryLookupObj.isReady = true;
+    this.CustomerDetailForm.get("IndustryLookup").patchValue({
+      value: this.AppIndustryName
+    });
   }
 
   CopyHandler(formControlName){
     var obj = new Object();
     obj[formControlName] = this.AppCustCompanyDetail[formControlName];
     this.CustomerDetailForm.patchValue(obj);
+
+    if(formControlName == "RefIndustryTypeId"){
+      this.CustomerDetailForm.get("IndustryLookup").patchValue({
+        value: this.AppIndustryName
+      });
+    }
   }
 
   back(){

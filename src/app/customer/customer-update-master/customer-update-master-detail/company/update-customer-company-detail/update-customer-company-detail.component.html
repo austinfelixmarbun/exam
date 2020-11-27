@@ -16,7 +16,9 @@
       <div class="col-md-4">
         <label>{{AppIndustryName}}</label>
       </div>
-      <div class="col-md-2"></div>
+      <div class="col-md-2">
+        <button *ngIf="CustomerDetailForm.controls.RefIndustryTypeId.value != AppCustPersonalDetail.RefIndustryTypeId" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('RefIndustryTypeId')">Copy</button>
+      </div>
       <div class="col-md-4">
         <lib-uclookupgeneric [lookupInput]="IndustryLookupObj" [parentForm]="CustomerDetailForm" [enjiForm]="enjiForm"
             [identifier]="'IndustryLookup'" (lookup)="getIndustry($event)">
@@ -28,7 +30,9 @@
       <div class="col-md-4">
         <label>{{AppCustCompanyDetail.NumOfEmp}}</label>
       </div>
-      <div class="col-md-2"></div>
+      <div class="col-md-2">
+        <button *ngIf="CustomerDetailForm.controls.NumOfEmp.value != AppCustPersonalDetail.NumOfEmp" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('NumOfEmp')">Copy</button>
+      </div>
       <div class="col-md-4">
         <input type="text" class="form-control adInsInput" formControlName="NumOfEmp"
           [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.NumOfEmp.invalid}">
@@ -41,7 +45,9 @@
       <div class="col-md-4">
         <label>{{AppCustCompanyDetail.EstablishmentDt}}</label>
       </div>
-      <div class="col-md-2"></div>
+      <div class="col-md-2">
+        <button *ngIf="CustomerDetailForm.controls.EstablishmentDt.value != AppCustPersonalDetail.EstablishmentDt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('EstablishmentDt')">Copy</button>
+      </div>
       <div class="col-md-4">
         <input type="date" class="form-control adInsInput" formControlName="EstablishmentDt" [max]="businessDtMax"
           [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.EstablishmentDt.invalid}">

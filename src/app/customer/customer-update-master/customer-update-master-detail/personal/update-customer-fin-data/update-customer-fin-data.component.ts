@@ -140,13 +140,22 @@ export class UpdateCustomerFinDataComponent implements OnInit {
   }
 
   CopyAllHandler(){
-    this.CustomerFinDataForm.patchValue({
-      MonthlyIncomeAmt: this.AppCustFinData["MonthlyIncomeAmt"],
-      IsJoinIncome: this.AppCustFinData["IsJoinIncome"],
-      SpouseMonthlyIncomeAmt: this.AppCustFinData["SpouseMonthlyIncomeAmt"],
-      MonthlyExpenseAmt: this.AppCustFinData["MonthlyExpenseAmt"],
-      MonthlyInstallmentAmt: this.AppCustFinData["MonthlyInstallmentAmt"],
-    });
+    var obj = new Object();
+    for (const key in this.AppCustFinData) {
+      if(key == "CustPersonalFinDataId" || key == "CustPersonalId" || key == "CustId" || key == "CustBankAccList"){
+        continue;
+      }
+      else{
+        if(this.AppCustFinData[key]){
+          obj[key] = this.AppCustFinData[key];
+        }
+      }
+    }
+    this.CustomerFinDataForm.patchValue(obj);
+    this.MainCustBankAcc = new Array<any>();
+    for (let i = 0; i < this.AppCustBankAcc.length; i++) {
+      this.AddNewBankAcc(i);
+    }
     this.CalculateFinData();
   }
 
@@ -176,6 +185,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
 
   AddNewBankAcc(idx){
     this.AppCustBankAcc[idx]["IsAddedBankAcc"] = true;
+    this.AppCustBankAcc[idx]["IsAddedBankStmnt"] = true;
     var obj = new Object();
     obj["RefBankId"] = this.AppCustBankAcc[idx]["RefBankId"];
     obj["BankName"] = this.AppCustBankAcc[idx]["BankName"];
@@ -183,7 +193,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     obj["BankAccNo"] = this.AppCustBankAcc[idx]["BankAccNo"];
     obj["BankAccName"] = this.AppCustBankAcc[idx]["BankAccName"];
     obj["IsDefault"] = this.AppCustBankAcc[idx]["IsDefault"];
-    obj["CustBankStmntList"] = new Array<Object>();
+    obj["CustBankStmntList"] = this.AppCustBankAcc[idx]["CustBankStmntList"];
     obj["IsMasterData"] = this.AppCustBankAcc[idx]["IsMasterData"];
     obj["IsMasterStmnt"] = this.AppCustBankAcc[idx]["IsMasterStmnt"];
     obj["IsAddedBankAcc"] = this.AppCustBankAcc[idx]["IsAddedBankAcc"];
@@ -214,6 +224,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
           item["BankAccNo"] == this.MainCustBankAcc[idx]["BankAccNo"] &&
           item["BankAccName"] == this.MainCustBankAcc[idx]["BankAccName"]){
             item["IsAddedBankAcc"] = false;
+            item["IsAddedBankStmnt"] = false;
             this.MainCustBankAcc.splice(idx, 1);
             break;
       }

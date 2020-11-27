@@ -16,7 +16,7 @@
       <label>{{AppEmergencyData.CustName}}</label>
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CustName', '')">Copy</button>
+      <button *ngIf="CustomerEmergencyForm.controls.CustName.value != AppEmergencyData.CustName" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CustName', '')">Copy</button>
     </div>
     <div class="col-md-4">
       <input type="text" class="form-control adInsInput" formControlName="CustName"
@@ -31,7 +31,7 @@
       <label>{{AppEmergencyData.CustRelation}}</label>
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CustRelation', '')">Copy</button>
+      <button *ngIf="CustomerEmergencyForm.controls.CustRelation.value != AppEmergencyData.CustRelation" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CustRelation', '')">Copy</button>
     </div>
     <div class="col-md-4">
       <select class="form-control adInsInput" formControlName="CustRelation"
@@ -48,7 +48,7 @@
       <label>{{AppEmergencyData.IdType}}</label>
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IdType', '')">Copy</button>
+      <button *ngIf="CustomerEmergencyForm.controls.IdType.value != AppEmergencyData.IdType" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IdType', '')">Copy</button>
     </div>
     <div class="col-md-4">
       <select class="form-control adInsInput" formControlName="IdType"
@@ -65,7 +65,7 @@
       {{AppEmergencyData.IdNo}}
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IdNo', '')">Copy</button>
+      <button *ngIf="CustomerEmergencyForm.controls.IdNo.value != AppEmergencyData.IdNo" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IdNo', '')">Copy</button>
     </div>
     <div class="col-md-4">
       <input type="text" class="form-control adInsInput" formControlName="IdNo"
@@ -80,7 +80,7 @@
       {{AppEmergencyData.BirthPlace}}
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('BirthPlace', '')">Copy</button>
+      <button *ngIf="CustomerEmergencyForm.controls.BirthPlace.value != AppEmergencyData.BirthPlace" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('BirthPlace', '')">Copy</button>
     </div>
     <div class="col-md-4">
       <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
@@ -95,7 +95,7 @@
       {{AppEmergencyData.BirthDate}}
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('BirthDate', '')">Copy</button>
+      <button *ngIf="CustomerEmergencyForm.controls.BirthDate.value != AppEmergencyData.BirthDate" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('BirthDate', '')">Copy</button>
     </div>
     <div class="col-md-4">
       <input type="date" class="form-control adInsInput" formControlName="BirthDate"
@@ -110,7 +110,7 @@
       <label>{{AppEmergencyData.Gender}}</label>
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Gender', '')">Copy</button>
+      <button *ngIf="CustomerEmergencyForm.controls.Gender.value != AppEmergencyData.Gender" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Gender', '')">Copy</button>
     </div>
     <div class="col-md-4">
       <select class="form-control adInsInput" formControlName="Gender"
@@ -127,7 +127,7 @@
       <label>{{AppEmergencyData.Profession}}</label>
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Profession', 'Profession')">Copy</button>
+      <button *ngIf="CustomerEmergencyForm.controls.Profession.value != AppEmergencyData.Profession" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Profession', 'Profession')">Copy</button>
     </div>
     <div class="col-md-4">
       <lib-uclookupgeneric [lookupInput]="lookupObj['Profession']" [parentForm]="CustomerEmergencyForm" [enjiForm]="enjiForm"
@@ -141,7 +141,7 @@
       <label>{{AppEmergencyData.Email}}</label>
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Email', '')">Copy</button>
+      <button *ngIf="CustomerEmergencyForm.controls.Email.value != AppEmergencyData.Email" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Email', '')">Copy</button>
     </div>
     <div class="col-md-4">
       <input type="text" class="form-control adInsInput" formControlName="Email"
@@ -156,7 +156,7 @@
       <label>{{AppEmergencyData.MobilePhn1}}</label>
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MobilePhn1', '')">Copy</button>
+      <button *ngIf="CustomerEmergencyForm.controls.MobilePhn1.value != AppEmergencyData.MobilePhn1" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MobilePhn1', '')">Copy</button>
     </div>
     <div class="col-md-4">
       <input type="text" class="form-control adInsInput" formControlName="MobilePhn1"
@@ -171,7 +171,7 @@
       <label>{{AppEmergencyData.MobilePhn2}}</label>
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MobilePhn2', '')">Copy</button>
+      <button *ngIf="CustomerEmergencyForm.controls.MobilePhn2.value != AppEmergencyData.MobilePhn2" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MobilePhn2', '')">Copy</button>
     </div>
     <div class="col-md-4">
       <input type="text" class="form-control adInsInput" formControlName="MobilePhn2"
@@ -186,7 +186,7 @@
       <label>{{AppEmergencyData.Address}}</label>
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Address', '')">Copy</button>
+      <button *ngIf="IsAddressDifferent" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Address', '')">Copy</button>
     </div>
     <div class="col-md-4">
       <textarea class="form-control adInsInput" formControlName="Address"

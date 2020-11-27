@@ -20,7 +20,9 @@
           <div class="col-md-4">
             <label>{{custAddr.get('AppAddr').get('Addr').value}}</label>
           </div>
-          <div class="col-md-2"><button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Addr', i)">Copy</button></div>
+          <div class="col-md-2">
+            <button *ngIf="custAddr.get('IsAddrDifferent').value" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Addr', i)">Copy</button>
+          </div>
           <div class="col-md-4" [formGroupName]="'MasterAddr'">
             <textarea class="form-control adInsInput" formControlName="Addr"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && custAddr.get('MasterAddr').get('Addr').invalid}"></textarea>
@@ -181,7 +183,7 @@
             <label>{{custAddr.get('AppAddr').get('MrBuildingOwnershipCode').value}}</label>
           </div>
           <div class="col-md-2">
-            <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrBuildingOwnershipCode', i)">Copy</button>
+            <button *ngIf="custAddr.get('MasterAddr').get('MrBuildingOwnershipCode').value != custAddr.get('AppAddr').get('MrBuildingOwnershipCode').value" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrBuildingOwnershipCode', i)">Copy</button>
           </div>
           <div class="col-md-4" [formGroupName]="'MasterAddr'">
             <select class="form-control adInsInput" formControlName="MrBuildingOwnershipCode"
@@ -198,7 +200,7 @@
             <label>{{custAddr.get('AppAddr').get('StayLength').value}}</label>
           </div>
           <div class="col-md-2">
-            <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('StayLength', i)">Copy</button>
+            <button *ngIf="custAddr.get('MasterAddr').get('StayLength').value != custAddr.get('AppAddr').get('StayLength').value" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('StayLength', i)">Copy</button>
           </div>
           <div class="col-md-4" [formGroupName]="'MasterAddr'">
             <input type="number" class="form-control adInsInput" formControlName="StayLength"

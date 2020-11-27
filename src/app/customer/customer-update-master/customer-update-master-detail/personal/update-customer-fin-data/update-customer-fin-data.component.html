@@ -18,7 +18,7 @@
           <label>{{AppCustFinData.MonthlyIncomeAmt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MonthlyIncomeAmt')">Copy</button>
+          <button *ngIf="CustomerFinDataForm.controls.MonthlyIncomeAmt.value != AppCustFinData.MonthlyIncomeAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MonthlyIncomeAmt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyIncomeAmt"
@@ -33,6 +33,7 @@
           <label>{{AppCustFinData.MrSourceOfIncomeCode}}</label>
         </div>
         <div class="col-md-2">
+          <button *ngIf="CustomerFinDataForm.controls.MrSourceOfIncomeCode.value != AppCustFinData.MrSourceOfIncomeCode" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrSourceOfIncomeCode')">Copy</button>
         </div>
         <div class="col-md-4">
           <select class="form-control adInsInput" formControlName="MrSourceOfIncomeCode"
@@ -49,7 +50,7 @@
           <label>{{AppCustFinData.IsJoinIncome ? 'Yes' : 'No'}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IsJoinIncome')">Copy</button>
+          <button *ngIf="CustomerFinDataForm.controls.IsJoinIncome.value != AppCustFinData.IsJoinIncome" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IsJoinIncome')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="checkbox" formControlName="IsJoinIncome" (change)="CalculateFinData()" />
@@ -61,7 +62,7 @@
           <label>{{AppCustFinData.SpouseMonthlyIncomeAmt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('SpouseMonthlyIncomeAmt')">Copy</button>
+          <button *ngIf="CustomerFinDataForm.controls.SpouseMonthlyIncomeAmt.value != AppCustFinData.SpouseMonthlyIncomeAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('SpouseMonthlyIncomeAmt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="SpouseMonthlyIncomeAmt" (blur)="CalculateFinData()"
@@ -87,7 +88,7 @@
           <label>{{AppCustFinData.MonthlyExpenseAmt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MonthlyExpenseAmt')">Copy</button>
+          <button *ngIf="CustomerFinDataForm.controls.MonthlyExpenseAmt.value != AppCustFinData.MonthlyExpenseAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MonthlyExpenseAmt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyExpenseAmt"
@@ -102,7 +103,7 @@
           <label>{{AppCustFinData.MonthlyInstallmentAmt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MonthlyInstallmentAmt')">Copy</button>
+          <button *ngIf="CustomerFinDataForm.controls.MonthlyInstallmentAmt.value != AppCustFinData.MonthlyInstallmentAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MonthlyInstallmentAmt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyInstallmentAmt"
@@ -135,7 +136,7 @@
             </div>
             <div class="col-md-12 row" style="padding: 0; margin: 0;">
               <label class="col-md-4" style="padding-left: 0;">Bank Statement</label>
-              <div class="col-md-4" *ngIf="!AppCustBankAcc[i].IsMasterStmnt && !AppCustBankAcc[i].IsAddedBankStmnt"><button type="button" class="btn btn-raised btn-primary" (click)="AddNewBankStmnt(i)">Add As New Data</button></div>
+              <!-- <div class="col-md-4" *ngIf="!AppCustBankAcc[i].IsMasterStmnt && !AppCustBankAcc[i].IsAddedBankStmnt && AppCustBankAcc[i].IsAddedBankAcc"><button type="button" class="btn btn-raised btn-primary" (click)="AddNewBankStmnt(i)">Add As New Data</button></div> -->
             </div>
             <div class="col-md-12" style="padding: 0;">
               <table class="table table-responsive-md text-center table-hover">
@@ -189,7 +190,7 @@
             </div>
             <div class="col-md-12 row" style="padding: 0; margin: 0;">
               <label class="col-md-4" style="padding-left: 0;">Bank Statement</label>
-              <div class="col-md-4" *ngIf="!MainCustBankAcc[i].IsMasterStmnt"><button type="button" class="btn btn-raised btn-primary" (click)="CancelBankStmnt(i)">Cancel Add Bank Statement</button></div>
+              <!-- <div class="col-md-4" *ngIf="!MainCustBankAcc[i].IsMasterStmnt"><button type="button" class="btn btn-raised btn-primary" (click)="CancelBankStmnt(i)">Cancel Add Bank Statement</button></div> -->
             </div>
             <div class="col-md-12" style="padding: 0;">
               <table class="table table-responsive-md text-center table-hover">

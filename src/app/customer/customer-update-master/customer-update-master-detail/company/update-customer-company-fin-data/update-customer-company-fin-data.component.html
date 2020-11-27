@@ -15,7 +15,7 @@
           <label>{{AppCompanyFinData.GrossMonthlyIncomeAmt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('GrossMonthlyIncomeAmt')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.GrossMonthlyIncomeAmt.value != AppCompanyFinData.GrossMonthlyIncomeAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('GrossMonthlyIncomeAmt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control" formControlName="GrossMonthlyIncomeAmt"
@@ -31,7 +31,7 @@
           <label>{{AppCompanyFinData.GrossProfitAmt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('GrossProfitAmt')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.GrossProfitAmt.value != AppCompanyFinData.GrossProfitAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('GrossProfitAmt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="GrossProfitAmt"
@@ -48,7 +48,7 @@
           <label>{{AppCompanyFinData.ReturnOfInvestmentPrcnt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ReturnOfInvestmentPrcnt')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.ReturnOfInvestmentPrcnt.value != AppCompanyFinData.ReturnOfInvestmentPrcnt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ReturnOfInvestmentPrcnt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="ReturnOfInvestmentPrcnt"
@@ -64,7 +64,7 @@
           <label>{{AppCompanyFinData.ReturnOfEquityPrcnt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ReturnOfEquityPrcnt')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.ReturnOfEquityPrcnt.value != AppCompanyFinData.ReturnOfEquityPrcnt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ReturnOfEquityPrcnt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="ReturnOfEquityPrcnt"
@@ -80,7 +80,7 @@
           <label>{{AppCompanyFinData.ReturnOfAssetPrcnt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ReturnOfAssetPrcnt')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.ReturnOfAssetPrcnt.value != AppCompanyFinData.ReturnOfAssetPrcnt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ReturnOfAssetPrcnt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="ReturnOfAssetPrcnt"
@@ -96,7 +96,7 @@
           <label>{{AppCompanyFinData.ProfitMarginPrcnt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ProfitMarginPrcnt')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.ProfitMarginPrcnt.value != AppCompanyFinData.ProfitMarginPrcnt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ProfitMarginPrcnt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="ProfitMarginPrcnt"
@@ -112,7 +112,7 @@
           <label>{{AppCompanyFinData.CurrentRatioPrcnt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CurrentRatioPrcnt')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.CurrentRatioPrcnt.value != AppCompanyFinData.CurrentRatioPrcnt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CurrentRatioPrcnt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="CurrentRatioPrcnt"
@@ -128,7 +128,7 @@
           <label>{{AppCompanyFinData.DebtEquityRatioPrcnt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('DebtEquityRatioPrcnt')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.DebtEquityRatioPrcnt.value != AppCompanyFinData.DebtEquityRatioPrcnt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('DebtEquityRatioPrcnt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="DebtEquityRatioPrcnt"
@@ -144,7 +144,7 @@
           <label>{{AppCompanyFinData.InvTurnOverPrcnt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('InvTurnOverPrcnt')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.InvTurnOverPrcnt.value != AppCompanyFinData.InvTurnOverPrcnt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('InvTurnOverPrcnt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="InvTurnOverPrcnt"
@@ -161,7 +161,7 @@
           <label>{{AppCompanyFinData.ArTurnOverPrcnt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ArTurnOverPrcnt')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.ArTurnOverPrcnt.value != AppCompanyFinData.ArTurnOverPrcnt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ArTurnOverPrcnt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="ArTurnOverPrcnt"
@@ -178,7 +178,7 @@
           <label>{{AppCompanyFinData.GrowthPrcnt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('GrowthPrcnt')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.GrowthPrcnt.value != AppCompanyFinData.GrowthPrcnt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('GrowthPrcnt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="GrowthPrcnt"
@@ -195,7 +195,7 @@
           <label>{{AppCompanyFinData.WorkingCapitalAmt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('WorkingCapitalAmt')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.WorkingCapitalAmt.value != AppCompanyFinData.WorkingCapitalAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('WorkingCapitalAmt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="WorkingCapitalAmt"
@@ -211,7 +211,7 @@
           <label>{{AppCompanyFinData.OthMonthlyInstAmt}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('OthMonthlyInstAmt')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.OthMonthlyInstAmt.value != AppCompanyFinData.OthMonthlyInstAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('OthMonthlyInstAmt')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="OthMonthlyInstAmt"
@@ -227,7 +227,7 @@
           <label>{{AppCompanyFinData.DateAsOf}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('DateAsOf')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.DateAsOf.value != AppCompanyFinData.DateAsOf" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('DateAsOf')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="date" class="form-control adInsInput" formControlName="DateAsOf"
@@ -242,7 +242,7 @@
           <label>{{AppCompanyFinData.Revenue}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Revenue')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.Revenue.value != AppCompanyFinData.Revenue" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Revenue')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="Revenue"
@@ -258,7 +258,7 @@
           <label>{{AppCompanyFinData.OprCost}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('OprCost')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.OprCost.value != AppCompanyFinData.OprCost" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('OprCost')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="OprCost"
@@ -274,7 +274,7 @@
           <label>{{AppCompanyFinData.ProfitBeforeTax}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ProfitBeforeTax')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.ProfitBeforeTax.value != AppCompanyFinData.ProfitBeforeTax" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ProfitBeforeTax')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="ProfitBeforeTax"
@@ -291,7 +291,7 @@
           <label>{{AppCompanyFinData.CurrAsset}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CurrAsset')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.CurrAsset.value != AppCompanyFinData.CurrAsset" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CurrAsset')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="CurrAsset"
@@ -308,7 +308,7 @@
           <label>{{AppCompanyFinData.NetFixedAsset}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('NetFixedAsset')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.NetFixedAsset.value != AppCompanyFinData.NetFixedAsset" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('NetFixedAsset')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="NetFixedAsset"
@@ -325,7 +325,7 @@
           <label>{{AppCompanyFinData.TotalAsset}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('TotalAsset')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.TotalAsset.value != AppCompanyFinData.TotalAsset" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('TotalAsset')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="TotalAsset"
@@ -342,7 +342,7 @@
           <label>{{AppCompanyFinData.CurrLiablts}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CurrLiablts')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.CurrLiablts.value != AppCompanyFinData.CurrLiablts" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CurrLiablts')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="CurrLiablts"
@@ -359,7 +359,7 @@
           <label>{{AppCompanyFinData.LongTemrLiablts}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('LongTemrLiablts')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.LongTemrLiablts.value != AppCompanyFinData.LongTemrLiablts" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('LongTemrLiablts')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="LongTemrLiablts"
@@ -376,7 +376,7 @@
           <label>{{AppCompanyFinData.ShareholderEquity}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ShareholderEquity')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.ShareholderEquity.value != AppCompanyFinData.ShareholderEquity" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('ShareholderEquity')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="" currencyMask class="form-control adInsInput" formControlName="ShareholderEquity"
@@ -393,7 +393,7 @@
           <label>{{AppCompanyFinData.CurrRatio}}</label>
         </div>
         <div class="col-md-2">
-          <button type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CurrRatio')">Copy</button>
+          <button *ngIf="CustomerCompanyFinDataForm.controls.CurrRatio.value != AppCompanyFinData.CurrRatio" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CurrRatio')">Copy</button>
         </div>
         <div class="col-md-4">
           <input type="text" class="form-control adInsInput" formControlName="CurrRatio"

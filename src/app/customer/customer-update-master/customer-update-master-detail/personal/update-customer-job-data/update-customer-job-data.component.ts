@@ -29,6 +29,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
   lookupProfessionObj: InputLookupObj;
   lookupIndustryTypeObj: InputLookupObj;
   lookupZipcodeObj: InputLookupObj;
+  IsAddrDifferent: boolean;
 
   CustomerJobForm = this.fb.group({
     CustJobDataId: [0],
@@ -65,6 +66,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router
   ) {
+    this.IsAddrDifferent = false;
     this.AppJobData = new UpdateMasterCustJobDataObj();
     this.CustModelList = new Array<any>();
     this.JobPositionList = new Array<any>();
@@ -114,8 +116,22 @@ export class UpdateCustomerJobDataComponent implements OnInit {
         if(response[0]["MasterCustJobData"]["EstablishmentDate"]){
           response[0]["MasterCustJobData"]["EstablishmentDate"] = datePipe.transform(response[0]["MasterCustJobData"]["EstablishmentDate"], "yyyy-MM-dd");
         }
+        if(this.AppJobData["EstablishmentDate"]){
+          this.AppJobData["EstablishmentDate"] = datePipe.transform(this.AppJobData["EstablishmentDate"], "yyyy-MM-dd");
+        }
         this.CustomerJobForm.patchValue({...response[0]["MasterCustJobData"]});
         this.lookupZipcodeObj.nameSelect = response[0]["MasterCustJobData"]["Zipcode"];
+        this.lookupZipcodeObj.jsonSelect = { Zipcode: response[0]["MasterCustJobData"]["Zipcode"] };
+
+        if(response[0]["MasterCustJobData"]["Address"] != this.AppJobData["Address"] ||
+            response[0]["MasterCustJobData"]["AreaCode1"] != this.AppJobData["AreaCode1"] ||
+            response[0]["MasterCustJobData"]["AreaCode2"] != this.AppJobData["AreaCode2"] ||
+            response[0]["MasterCustJobData"]["AreaCode3"] != this.AppJobData["AreaCode3"] ||
+            response[0]["MasterCustJobData"]["AreaCode4"] != this.AppJobData["AreaCode4"] ||
+            response[0]["MasterCustJobData"]["Zipcode"] != this.AppJobData["Zipcode"] ||
+            response[0]["MasterCustJobData"]["City"] != this.AppJobData["City"]){
+          this.IsAddrDifferent = true;
+        }
         return response[0];
       }),
       mergeMap((response) => {
@@ -163,17 +179,64 @@ export class UpdateCustomerJobDataComponent implements OnInit {
   }
 
   CopyAllHandler(){
-    this.CustomerJobForm.patchValue({
-      JobPosition: this.AppJobData["JobPosition"],
-      JobTitleName: this.AppJobData["JobTitleName"],
-      Address: this.AppJobData["Address"]
+    var obj = new Object();
+    for (const key in this.AppJobData) {
+      if(key == "CustJobDataId" || key == "CustId" || key == "RowVersionCustJobData" || key == "RowVersionJobAddr" ||
+          key == "RowVersionCust" || key == "ProfessionName" || key == "IndustryTypeName"){
+        continue;
+      }
+      else{
+        if(this.AppJobData[key]){
+          obj[key] = this.AppJobData[key];
+        }
+      }
+    }
+    this.CustomerJobForm.patchValue(obj);
+    this.CustomerJobForm.get("ZipcodeLookup").patchValue({
+      value: this.AppJobData.Zipcode
+    });
+    this.CustomerJobForm.get("ProfessionLookup").patchValue({
+      value: this.AppJobData.ProfessionName
+    });
+    this.CustomerJobForm.get("IndustryTypeLookup").patchValue({
+      value: this.AppJobData.IndustryTypeName
     });
   }
 
   CopyHandler(formControlName){
-    var obj = new Object();
-    obj[formControlName] = this.AppJobData[formControlName];
-    this.CustomerJobForm.patchValue(obj);
+    if(formControlName == "Address"){
+      this.CustomerJobForm.patchValue({
+        Address: this.AppJobData.Address,
+        Zipcode: this.AppJobData.Zipcode,
+        AreaCode1: this.AppJobData.AreaCode1,
+        AreaCode2: this.AppJobData.AreaCode2,
+        AreaCode3: this.AppJobData.AreaCode3,
+        AreaCode4: this.AppJobData.AreaCode4,
+        City: this.AppJobData.City,
+        Phn1: this.AppJobData.Phn1,
+        Phn2: this.AppJobData.Phn2,
+        Fax: this.AppJobData.Fax
+      });
+      this.CustomerJobForm.get("ZipcodeLookup").patchValue({
+        value: this.AppJobData.Zipcode
+      });
+    }
+    else{
+      var obj = new Object();
+      obj[formControlName] = this.AppJobData[formControlName];
+      this.CustomerJobForm.patchValue(obj);
+      
+      if(formControlName == "IndustryTypeId"){
+        this.CustomerJobForm.get("IndustryTypeLookup").patchValue({
+          value: this.AppJobData.IndustryTypeName
+        });
+      }
+      else if(formControlName == "ProfessionId"){
+        this.CustomerJobForm.get("ProfessionId").patchValue({
+          value: this.AppJobData.ProfessionName
+        });
+      }
+    }
   }
 
   back(){

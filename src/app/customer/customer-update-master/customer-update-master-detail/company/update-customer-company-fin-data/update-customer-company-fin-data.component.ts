@@ -70,7 +70,18 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
   }
 
   CopyAllHandler(){
-    this.CustomerCompanyFinDataForm.patchValue({...this.AppCompanyFinData});
+    var obj = new Object();
+    for (const key in this.AppCompanyFinData) {
+      if(key == "CustCompanyFinDataId" || key == "CustCompanyId" || key == "RowVersion"){
+        continue;
+      }
+      else{
+        if(this.AppCompanyFinData[key]){
+          obj[key] = this.AppCompanyFinData[key];
+        }
+      }
+    }
+    this.CustomerCompanyFinDataForm.patchValue(obj);
   }
 
   CopyHandler(formControlName){

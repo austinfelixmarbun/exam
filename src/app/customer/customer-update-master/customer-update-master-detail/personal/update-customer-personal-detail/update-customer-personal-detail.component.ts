@@ -182,22 +182,40 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
   }
 
   CopyAllHandler(){
-    this.CustomerDetailForm.patchValue({
-      MrMaritalStatCode: this.AppCustPersonalDetail["MrMaritalStatCode"],
-      NoOfResidence: this.AppCustPersonalDetail["NoOfResidence"],
-      NoOfDependents: this.AppCustPersonalDetail["NoOfDependents"],
-      CustomerGroupParentCustId: this.AppCustPersonalDetail["CustomerGroupParentCustId"],
-      CustomerGroupParentCustName: this.AppCustPersonalDetail["CustomerGroupParentCustName"],
-    });
+    var obj = new Object();
+    for (const key in this.AppCustPersonalDetail) {
+      if(key == "CustId" || key == "CustPersonalId" || key == "CountryName" || key == "CustomerGroupParentCustName" || key == "RowVersionCust" || 
+          key == "RowVersionCustPersonal" || key == "RowVersionCustGrp"){
+        continue;
+      }
+      else{
+        if(this.AppCustPersonalDetail[key]){
+          obj[key] = this.AppCustPersonalDetail[key];
+        }
+      }
+    }
+    this.CustomerDetailForm.patchValue(obj);
     this.CustGrpLookupObj.isReady = false;
     this.CustGrpLookupObj.nameSelect = this.AppCustPersonalDetail["CustomerGroupParentCustName"];
     this.CustGrpLookupObj.isReady = true;
+    this.CustomerDetailForm.get("CountryCode").patchValue({
+      value: this.AppCustPersonalDetail["CountryName"]
+    });
+    this.CustomerDetailForm.get("ParentCust").patchValue({
+      value: this.AppCustPersonalDetail["CustomerGroupParentCustName"]
+    });
   }
 
   CopyHandler(formControlName){
     var obj = new Object();
     obj[formControlName] = this.AppCustPersonalDetail[formControlName];
     this.CustomerDetailForm.patchValue(obj);
+
+    if(formControlName == "Country"){
+      this.CustomerDetailForm.get("CountryCode").patchValue({
+        value: this.AppCustPersonalDetail["CountryName"]
+      });
+    }
   }
 
   CopyCustGrpHandler(){
@@ -208,6 +226,9 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     this.CustGrpLookupObj.isReady = false;
     this.CustGrpLookupObj.nameSelect = this.AppCustPersonalDetail["CustomerGroupParentCustName"];
     this.CustGrpLookupObj.isReady = true;
+    this.CustomerDetailForm.get("ParentCust").patchValue({
+      value: this.AppCustPersonalDetail["CustomerGroupParentCustName"]
+    });
   }
 
   back(){

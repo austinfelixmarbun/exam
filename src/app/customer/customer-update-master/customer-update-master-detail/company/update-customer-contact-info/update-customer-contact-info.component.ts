@@ -23,6 +23,7 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
   ZipcodeLookupObj: InputLookupObj;
   JobPositionList: Array<any>;
   GenderList: Array<any>;
+  IsAddrDifferent: boolean;
 
   CustomerContactInfoForm = this.fb.group({
     CustCompanyContactPersonId: [0],
@@ -55,6 +56,7 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router
   ) { 
+    this.IsAddrDifferent = false;
     this.ResponseTab = new EventEmitter<any>();
     this.AppContactInfo = new UpdateCustContactInfoObj();
     this.ZipcodeLookupObj = new InputLookupObj();
@@ -77,6 +79,15 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
         this.CustomerContactInfoForm.patchValue({...response[0]["MasterContactInfo"]});
         this.ZipcodeLookupObj.nameSelect = response[0]["MasterContactInfo"]["Zipcode"];
         this.ZipcodeLookupObj.jsonSelect = { Zipcode: response[0]["MasterContactInfo"]["Zipcode"] };
+        if(response[0]["MasterContactInfo"]["Addr"] != this.AppContactInfo["Addr"] ||
+            response[0]["MasterContactInfo"]["AreaCode1"] != this.AppContactInfo["AreaCode1"] ||
+            response[0]["MasterContactInfo"]["AreaCode2"] != this.AppContactInfo["AreaCode2"] ||
+            response[0]["MasterContactInfo"]["AreaCode3"] != this.AppContactInfo["AreaCode3"] ||
+            response[0]["MasterContactInfo"]["AreaCode4"] != this.AppContactInfo["AreaCode4"] ||
+            response[0]["MasterContactInfo"]["Zipcode"] != this.AppContactInfo["Zipcode"] ||
+            response[0]["MasterContactInfo"]["City"] != this.AppContactInfo["City"]){
+          this.IsAddrDifferent = true;
+        }
       }
     ).catch(
       (error) => {
@@ -95,23 +106,44 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
   }
 
   CopyAllHandler(){
-    this.CustomerContactInfoForm.patchValue({
-      ContactPersonName: this.AppContactInfo.ContactPersonName,
-      MrJobPositionCode: this.AppContactInfo.MrJobPositionCode,
-      JobTitleName: this.AppContactInfo.JobTitleName,
-      MobilePhnNo1: this.AppContactInfo.MobilePhnNo1,
-      MobilePhnNo2: this.AppContactInfo.MobilePhnNo2,
-      Email1: this.AppContactInfo.Email1,
-      Email2: this.AppContactInfo.Email2,
-      MrGenderCode: this.AppContactInfo.MrGenderCode,
-      Addr: this.AppContactInfo.Addr,
+    var obj = new Object();
+    for (const key in this.AppContactInfo) {
+      if(key == "CustCompanyContactPersonId" || key == "CustCompanyId" || key == "RowVersionContactInfo" || key == "RowVersionContactInfoAddr" ||
+         key == "CustId" || key == "CustAddrId"){
+        continue;
+      }
+      else{
+        if(this.AppContactInfo[key]){
+          obj[key] = this.AppContactInfo[key];
+        }
+      }
+    }
+    this.CustomerContactInfoForm.patchValue(obj);
+    this.CustomerContactInfoForm.get("ZipcodeLookup").patchValue({
+      value: this.AppContactInfo.Zipcode
     });
   }
 
   CopyHandler(formControlName){
-    var obj = new Object();
-    obj[formControlName] = this.AppContactInfo[formControlName];
-    this.CustomerContactInfoForm.patchValue(obj);
+    if(formControlName == "Addr"){
+      this.CustomerContactInfoForm.patchValue({
+        Addr: this.AppContactInfo.Addr,
+        AreaCode1: this.AppContactInfo.AreaCode1,
+        AreaCode2: this.AppContactInfo.AreaCode2,
+        AreaCode3: this.AppContactInfo.AreaCode3,
+        AreaCode4: this.AppContactInfo.AreaCode4,
+        City: this.AppContactInfo.City,
+        Zipcode: this.AppContactInfo.Zipcode,
+      });
+      this.CustomerContactInfoForm.get("ZipcodeLookup").patchValue({
+        value: this.AppContactInfo.Zipcode
+      });
+    }
+    else{
+      var obj = new Object();
+      obj[formControlName] = this.AppContactInfo[formControlName];
+      this.CustomerContactInfoForm.patchValue(obj);
+    }
   }
 
   back(){
