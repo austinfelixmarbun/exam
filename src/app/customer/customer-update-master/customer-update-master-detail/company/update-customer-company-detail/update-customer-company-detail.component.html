@@ -17,7 +17,7 @@
         <label>{{AppIndustryName}}</label>
       </div>
       <div class="col-md-2">
-        <button *ngIf="CustomerDetailForm.controls.RefIndustryTypeId.value != AppCustPersonalDetail.RefIndustryTypeId" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('RefIndustryTypeId')">Copy</button>
+        <button *ngIf="CustomerDetailForm.controls.RefIndustryTypeId.value != AppCustCompanyDetail.RefIndustryTypeId" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('RefIndustryTypeId')">Copy</button>
       </div>
       <div class="col-md-4">
         <lib-uclookupgeneric [lookupInput]="IndustryLookupObj" [parentForm]="CustomerDetailForm" [enjiForm]="enjiForm"
@@ -31,7 +31,7 @@
         <label>{{AppCustCompanyDetail.NumOfEmp}}</label>
       </div>
       <div class="col-md-2">
-        <button *ngIf="CustomerDetailForm.controls.NumOfEmp.value != AppCustPersonalDetail.NumOfEmp" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('NumOfEmp')">Copy</button>
+        <button *ngIf="CustomerDetailForm.controls.NumOfEmp.value != AppCustCompanyDetail.NumOfEmp" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('NumOfEmp')">Copy</button>
       </div>
       <div class="col-md-4">
         <input type="text" class="form-control adInsInput" formControlName="NumOfEmp"
@@ -46,7 +46,7 @@
         <label>{{AppCustCompanyDetail.EstablishmentDt}}</label>
       </div>
       <div class="col-md-2">
-        <button *ngIf="CustomerDetailForm.controls.EstablishmentDt.value != AppCustPersonalDetail.EstablishmentDt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('EstablishmentDt')">Copy</button>
+        <button *ngIf="CustomerDetailForm.controls.EstablishmentDt.value != AppCustCompanyDetail.EstablishmentDt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('EstablishmentDt')">Copy</button>
       </div>
       <div class="col-md-4">
         <input type="date" class="form-control adInsInput" formControlName="EstablishmentDt" [max]="businessDtMax"
