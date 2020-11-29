@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -39,17 +39,17 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     BirthPlace: [''],
     BirthDate: [''],
     Gender: [''],
-    Profession: [''],
+    Profession: ['', [Validators.required]],
     Email: [''],
     MobilePhn1: [''],
     MobilePhn2: [''],
-    Address: [''],
-    Zipcode: [''],
-    AreaCode1: [{value: '', disabled: true}],
-    AreaCode2: [{value: '', disabled: true}],
-    AreaCode3: [''],
-    AreaCode4: [''],
-    City: [''],
+    Address: ['', [Validators.required]],
+    Zipcode: ['', [Validators.required]],
+    AreaCode1: [{value: '', disabled: true}, [Validators.required]],
+    AreaCode2: [{value: '', disabled: true}, [Validators.required]],
+    AreaCode3: ['', [Validators.required]],
+    AreaCode4: ['', [Validators.required]],
+    City: ['', [Validators.required]],
     RowVersion: ['']
   });
 
@@ -82,7 +82,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     this.lookupObj["Zipcode"].urlEnviPaging = environment.FoundationR3Url;
     this.lookupObj["Zipcode"].pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.lookupObj["Zipcode"].genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.lookupObj["Zipcode"].isRequired = false;
+    // this.lookupObj["Zipcode"].isRequired = false;
 
     // this.lookupObj["Profession"] = new InputLookupObj();
     this.lookupObj["Profession"].urlJson = "./assets/lookup/lookupCustomerProfession.json";
@@ -90,7 +90,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     this.lookupObj["Profession"].urlEnviPaging = environment.FoundationR3Url;
     this.lookupObj["Profession"].pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.lookupObj["Profession"].genericJson = "./assets/lookup/lookupCustomerProfession.json";
-    this.lookupObj["Profession"].isRequired = false;
+    // this.lookupObj["Profession"].isRequired = false;
   }
 
   ngOnInit() {
@@ -157,20 +157,24 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
         AreaCode4: this.AppEmergencyData["AreaCode4"],
         City: this.AppEmergencyData["City"]
       });
+      this.CustomerEmergencyForm.get("ZipcodeLookup").patchValue({
+        value: this.DisplayName["Zipcode"]
+      });
+      this.IsAddressDifferent = false;
     }
     else{
       var obj = new Object();
       obj[formControlName] = this.AppEmergencyData[formControlName];
       this.CustomerEmergencyForm.patchValue(obj);
-    }
 
-    if(lookupName){
-      this.lookupObj[lookupName]["isReady"] = false;
-      this.lookupObj[lookupName]["nameSelect"] = this.DisplayName[formControlName];
-      this.lookupObj[lookupName]["isReady"] = true;
-      this.CustomerEmergencyForm.get(lookupName + "Lookup").patchValue({
-        value: this.DisplayName[formControlName]
-      });
+      if(lookupName){
+        this.lookupObj[lookupName]["isReady"] = false;
+        this.lookupObj[lookupName]["nameSelect"] = this.DisplayName[formControlName];
+        this.lookupObj[lookupName]["isReady"] = true;
+        this.CustomerEmergencyForm.get(lookupName + "Lookup").patchValue({
+          value: this.DisplayName[formControlName]
+        });
+      }
     }
   }
 
@@ -199,6 +203,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     this.CustomerEmergencyForm.get("ZipcodeLookup").patchValue({
       value: this.DisplayName["Zipcode"]
     });
+    this.IsAddressDifferent = false;
   }
 
   getProfessionData(e){

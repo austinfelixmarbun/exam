@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -35,23 +35,23 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     CustJobDataId: [0],
     CustId: [0],
     CustModel: [''],
-    ProfessionId: [0],
+    ProfessionId: [0, [Validators.required]],
     InternalEmployee: [false],
     JobPosition: [''],
     JobTitleName: [''],
     JobStatus: [''],
     EstablishmentDate: [''],
     CompanyName: [''],
-    IndustryTypeId: [0],
+    IndustryTypeId: [0, [Validators.required]],
     CompanyScale: [''],
     NumOfEmployee: [''],
-    Address: [''],
-    Zipcode: [''],
-    AreaCode1: [{value: '', disabled: true}],
-    AreaCode2: [{value: '', disabled: true}],
-    AreaCode3: [''],
-    AreaCode4: [''],
-    City: [{value: '', disabled: true}],
+    Address: ['', [Validators.required]],
+    Zipcode: ['', [Validators.required]],
+    AreaCode1: [{value: '', disabled: true}, [Validators.required]],
+    AreaCode2: [{value: '', disabled: true}, [Validators.required]],
+    AreaCode3: ['', [Validators.required]],
+    AreaCode4: ['', [Validators.required]],
+    City: [{value: '', disabled: true}, [Validators.required]],
     Phn1: [''],
     Phn2: [''],
     Fax: [''],
@@ -80,7 +80,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     this.lookupIndustryTypeObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookupIndustryTypeObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookupIndustryTypeObj.genericJson = "./assets/lookup/lookupIndustryType.json";
-    this.lookupIndustryTypeObj.isRequired = false;
+    // this.lookupIndustryTypeObj.isRequired = false;
 
     this.lookupProfessionObj = new InputLookupObj();
     this.lookupProfessionObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
@@ -88,7 +88,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     this.lookupProfessionObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookupProfessionObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.lookupProfessionObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
-    this.lookupProfessionObj.isRequired = false;
+    // this.lookupProfessionObj.isRequired = false;
 
     this.lookupZipcodeObj = new InputLookupObj();
     this.lookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
@@ -96,7 +96,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     this.lookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.lookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.lookupZipcodeObj.isRequired = false;
+    // this.lookupZipcodeObj.isRequired = false;
   }
 
   ngOnInit() {
@@ -201,6 +201,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     this.CustomerJobForm.get("IndustryTypeLookup").patchValue({
       value: this.AppJobData.IndustryTypeName
     });
+    this.IsAddrDifferent = false;
   }
 
   CopyHandler(formControlName){
@@ -220,6 +221,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
       this.CustomerJobForm.get("ZipcodeLookup").patchValue({
         value: this.AppJobData.Zipcode
       });
+      this.IsAddrDifferent = false;
     }
     else{
       var obj = new Object();
