@@ -96,6 +96,7 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
 
   }
   editItem(custCompanyMgmntShrholderObj: any) {
+    console.log("hello")
     if (custCompanyMgmntShrholderObj.MrCustTypeCode == RefMasterConstant.Personal) {
       this.outputValue.emit({ mode: 'addPersonal', CustCompanyMgmntShrholderId: custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId, TotalShare: this.tempListCompanyManagementShareholder[0].TotalShare });
     } else if (custCompanyMgmntShrholderObj.MrCustTypeCode == RefMasterConstant.Company) {
