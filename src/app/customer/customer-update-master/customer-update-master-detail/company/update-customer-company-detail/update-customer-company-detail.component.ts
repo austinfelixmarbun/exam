@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -50,10 +51,13 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    var datePipe = new DatePipe("en-US");
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.http.post(URLConstant.GetCustCompanyDataForUpdateMasterCustCompany, { CustDataTrxId: this.CustDataTrxId }).pipe(
       map((response) => {
+        response["AppCustCompany"]["EstablishmentDt"] = datePipe.transform(response["AppCustCompany"]["EstablishmentDt"], "yyyy-MM-dd");
+        response["MasterCustCompany"]["EstablishmentDt"] = datePipe.transform(response["MasterCustCompany"]["EstablishmentDt"], "yyyy-MM-dd");
         this.AppCustCompanyDetail = {...response["AppCustCompany"]};
         this.CustomerDetailForm.patchValue({...response["MasterCustCompany"]});
         return response;
@@ -88,9 +92,9 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
         continue;
       }
       else{
-        if(this.AppCustCompanyDetail[key]){
+        // if(this.AppCustCompanyDetail[key]){
           obj[key] = this.AppCustCompanyDetail[key];
-        }
+        // }
       }
     }
     this.CustomerDetailForm.patchValue(obj);

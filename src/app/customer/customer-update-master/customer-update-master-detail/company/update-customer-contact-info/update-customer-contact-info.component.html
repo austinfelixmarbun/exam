@@ -144,7 +144,7 @@
         <button *ngIf="IsAddrDifferent" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Addr')">Copy</button>
       </div>
       <div class="col-md-4">
-        <textarea class="form-control adInsInput" formControlName="Addr"
+        <textarea class="form-control adInsInput" formControlName="Addr" (blur)="AddressCopyButtonHandler()"
           [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactInfoForm.controls.Addr.invalid}"></textarea>
         <lib-uc-show-errors [control]="CustomerContactInfoForm.controls.Addr" [submit]="enjiForm.submitted">
         </lib-uc-show-errors>
@@ -158,13 +158,13 @@
       <div class="col-md-2"></div>
       <div class="col-md-4 row" style="margin: 0;">
         <div class="col-md-6" style="padding-left: 0;">
-          <input type="text" class="form-control adInsInput" formControlName="AreaCode4"
+          <input type="text" class="form-control adInsInput" formControlName="AreaCode4" (blur)="AddressCopyButtonHandler()"
             [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactInfoForm.controls.AreaCode4.invalid }">
           <lib-uc-show-errors [control]="CustomerContactInfoForm.controls.AreaCode4" [submit]="enjiForm.submitted">
           </lib-uc-show-errors>
         </div>
         <div class="col-md-6" style="padding-right: 0;">
-          <input type="text" class="form-control adInsInput" formControlName="AreaCode3"
+          <input type="text" class="form-control adInsInput" formControlName="AreaCode3" (blur)="AddressCopyButtonHandler()"
             [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactInfoForm.controls.AreaCode3.invalid }">
           <lib-uc-show-errors [control]="CustomerContactInfoForm.controls.AreaCode3" [submit]="enjiForm.submitted">
           </lib-uc-show-errors>

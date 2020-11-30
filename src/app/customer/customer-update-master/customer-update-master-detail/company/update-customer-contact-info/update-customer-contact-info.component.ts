@@ -40,11 +40,11 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
     CustId: [0],
     MrCustAddrTypeCode: [''],
     Addr: ['', [Validators.required]],
-    AreaCode1: ['', [Validators.required]],
-    AreaCode2: ['', [Validators.required]],
+    AreaCode1: [{value: '', disabled: true}, [Validators.required]],
+    AreaCode2: [{value: '', disabled: true}, [Validators.required]],
     AreaCode3: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     AreaCode4: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-    City: ['', [Validators.required]],
+    City: [{value: '', disabled: true}, [Validators.required]],
     Zipcode: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     RowVersionContactInfo: [''],
     RowVersionContactInfoAddr: [''],
@@ -113,7 +113,23 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
         continue;
       }
       else{
-        if(this.AppContactInfo[key]){
+        if(key == "MrGenderCode"){
+          if(this.AppContactInfo[key]){
+            obj[key] = this.AppContactInfo[key];
+          }
+          else{
+            obj[key] = this.GenderList[0].Key;
+          }
+        }
+        else if(key == "MrJobPositionCode"){
+          if(this.AppContactInfo[key]){
+            obj[key] = this.AppContactInfo[key];
+          }
+          else{
+            obj[key] = this.JobPositionList[0].Key;
+          }
+        }
+        else{
           obj[key] = this.AppContactInfo[key];
         }
       }
@@ -122,6 +138,7 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
     this.CustomerContactInfoForm.get("ZipcodeLookup").patchValue({
       value: this.AppContactInfo.Zipcode
     });
+    this.IsAddrDifferent = false;
   }
 
   CopyHandler(formControlName){
@@ -138,11 +155,52 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
       this.CustomerContactInfoForm.get("ZipcodeLookup").patchValue({
         value: this.AppContactInfo.Zipcode
       });
+      this.IsAddrDifferent = false;
+    }
+    else if(formControlName == "MrGenderCode"){
+      if(this.AppContactInfo["MrGenderCode"]){
+        this.CustomerContactInfoForm.patchValue({
+          MrGenderCode: this.AppContactInfo["MrGenderCode"]
+        });
+      }
+      else{
+        this.CustomerContactInfoForm.patchValue({
+          MrGenderCode: this.GenderList[0].Key
+        });
+      }
+    }
+    else if(formControlName == "MrJobPositionCode"){
+      if(this.AppContactInfo["MrJobPositionCode"]){
+        this.CustomerContactInfoForm.patchValue({
+          MrJobPositionCode: this.AppContactInfo["MrJobPositionCode"]
+        });
+      }
+      else{
+        this.CustomerContactInfoForm.patchValue({
+          MrJobPositionCode: this.JobPositionList[0].Key
+        });
+      }
     }
     else{
       var obj = new Object();
       obj[formControlName] = this.AppContactInfo[formControlName];
       this.CustomerContactInfoForm.patchValue(obj);
+    }
+  }
+
+  AddressCopyButtonHandler(){
+    var masterCustForm = this.CustomerContactInfoForm.value;
+    if(masterCustForm["Address"] != this.AppContactInfo["Address"] ||
+        masterCustForm["AreaCode1"] != this.AppContactInfo["AreaCode1"] ||
+        masterCustForm["AreaCode2"] != this.AppContactInfo["AreaCode2"] ||
+        masterCustForm["AreaCode3"] != this.AppContactInfo["AreaCode3"] ||
+        masterCustForm["AreaCode4"] != this.AppContactInfo["AreaCode4"] ||
+        masterCustForm["Zipcode"] != this.AppContactInfo["Zipcode"] ||
+        masterCustForm["City"] != this.AppContactInfo["City"]){
+      this.IsAddrDifferent = true;
+    }
+    else{
+      this.IsAddrDifferent = false;
     }
   }
 

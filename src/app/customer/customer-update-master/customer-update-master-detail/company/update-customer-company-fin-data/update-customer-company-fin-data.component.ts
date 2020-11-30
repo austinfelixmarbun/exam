@@ -1,6 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -20,7 +21,7 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
   CustomerCompanyFinDataForm = this.fb.group({
     CustCompanyFinDataId: [0],
     CustCompanyId: [0],
-    GrossMonthlyIncomeAmt: [0],
+    GrossMonthlyIncomeAmt: [0, [Validators.required]],
     GrossProfitAmt: [0],
     ReturnOfInvestmentPrcnt: [0],
     ReturnOfEquityPrcnt: [0],
@@ -57,8 +58,11 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
   }
 
   ngOnInit() {
+    var datePipe = new DatePipe("en-US");
     this.http.post(URLConstant.GetFinDataForUpdateMasterCustCompanyFinData, { CustDataTrxId: this.CustDataTrxId }).toPromise().then(
       (response) => {
+        response["AppCompanyFinData"]["DateAsOf"] = datePipe.transform(response["AppCompanyFinData"]["DateAsOf"], "yyyy-MM-dd");
+        response["MasterCompanyFinData"]["DateAsOf"] = datePipe.transform(response["MasterCompanyFinData"]["DateAsOf"], "yyyy-MM-dd");
         this.AppCompanyFinData = response["AppCompanyFinData"];
         this.CustomerCompanyFinDataForm.patchValue({...response["MasterCompanyFinData"]});
       }
@@ -76,9 +80,9 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
         continue;
       }
       else{
-        if(this.AppCompanyFinData[key]){
+        // if(this.AppCompanyFinData[key]){
           obj[key] = this.AppCompanyFinData[key];
-        }
+        // }
       }
     }
     this.CustomerCompanyFinDataForm.patchValue(obj);
