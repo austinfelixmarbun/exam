@@ -37,6 +37,7 @@ export class CustomerViewCoyManagementComponent implements OnInit {
     var custObj = { "CustId": this.CustId };
     this.http.post(this.GetCustCompanyMgmntShrholderForCustViewByCustIdUrl, custObj).subscribe(
       response => {
+        console.log(response);
         this.responseObj = response[CommonConstant.ReturnObj];
       },
       error => {
