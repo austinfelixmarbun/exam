@@ -36,23 +36,23 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
   CustomerDetailForm = this.fb.group({
     CustId: [0],
     CustPersonalId: [0],
-    CustFullName: [''],
-    MrMaritalStatCode: [''],
-    MrNationalityCode: [''],
-    Country: [''],
-    MrEducationCode: [''],
-    MrReligionCode: [''],
-    FamilyCardNo: ['', Validators.pattern("^[0-9]+$")],
-    NoOfResidence: ['', Validators.pattern("^[0-9]+$")],
+    CustFullName: ['', [Validators.required]],
+    MrMaritalStatCode: ['', [Validators.required]],
+    MrNationalityCode: ['', [Validators.required]],
+    Country: ['', [Validators.required]],
+    MrEducationCode: ['', [Validators.required]],
+    MrReligionCode: ['', [Validators.required]],
+    FamilyCardNo: ['', [Validators.pattern("^[0-9]+$")]],
+    NoOfResidence: ['', [Validators.pattern("^[0-9]+$")]],
     NoOfDependents: ['', [Validators.pattern("^[0-9]+$")]],
     CustomerGroupParentCustId: [0],
     CustomerGroupParentCustName: [''],
     IsAffiliationWithMf: [false],
     IsVip: [false],
     VipNotes: [''],
-    MobilePhnNo1: ['', [Validators.pattern("^[0-9]+$")]],
-    MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
-    Email1: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    MobilePhnNo2: ['', [Validators.pattern("^[0-9]+$")]],
+    Email1: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
     Email2: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
     RowVersionCust: [''],
     RowVersionCustPersonal: [''],
@@ -189,9 +189,9 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
         continue;
       }
       else{
-        if(this.AppCustPersonalDetail[key]){
+        // if(this.AppCustPersonalDetail[key]){
           obj[key] = this.AppCustPersonalDetail[key];
-        }
+        // }
       }
     }
     this.CustomerDetailForm.patchValue(obj);
@@ -211,7 +211,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     obj[formControlName] = this.AppCustPersonalDetail[formControlName];
     this.CustomerDetailForm.patchValue(obj);
 
-    if(formControlName == "Country"){
+    if(formControlName == "MrNationalityCode"){
       this.CustomerDetailForm.get("CountryCode").patchValue({
         value: this.AppCustPersonalDetail["CountryName"]
       });

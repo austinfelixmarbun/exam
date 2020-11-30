@@ -32,16 +32,16 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   CustomerEmergencyForm = this.fb.group({
     CustEmergencyId: [0],
     CustId: [0],
-    CustName: [''],
-    CustRelation: [''],
+    CustName: ['', [Validators.required]],
+    CustRelation: ['', [Validators.required]],
     IdType: [''],
     IdNo: [''],
-    BirthPlace: [''],
-    BirthDate: [''],
-    Gender: [''],
-    Profession: ['', [Validators.required]],
+    BirthPlace: ['', [Validators.required]],
+    BirthDate: ['', [Validators.required]],
+    Gender: ['', [Validators.required]],
+    Profession: [''],
     Email: [''],
-    MobilePhn1: [''],
+    MobilePhn1: ['', [Validators.required]],
     MobilePhn2: [''],
     Address: ['', [Validators.required]],
     Zipcode: ['', [Validators.required]],
@@ -49,7 +49,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     AreaCode2: [{value: '', disabled: true}, [Validators.required]],
     AreaCode3: ['', [Validators.required]],
     AreaCode4: ['', [Validators.required]],
-    City: ['', [Validators.required]],
+    City: [{value: '', disabled: true}, [Validators.required]],
     RowVersion: ['']
   });
 
@@ -90,7 +90,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     this.lookupObj["Profession"].urlEnviPaging = environment.FoundationR3Url;
     this.lookupObj["Profession"].pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.lookupObj["Profession"].genericJson = "./assets/lookup/lookupCustomerProfession.json";
-    // this.lookupObj["Profession"].isRequired = false;
+    this.lookupObj["Profession"].isRequired = false;
   }
 
   ngOnInit() {
@@ -180,14 +180,14 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
 
   CopyAllHandler(){
     var obj = new Object();
-    for (const key in this.CustomerEmergencyForm.controls) {
+    for (const key in this.AppEmergencyData) {
       if(key == "CustEmergencyId" || key == "CustId" || key == "RowVersion"){
         continue;
       }
       else{
-        if(this.AppEmergencyData[key]){
+        // if(this.AppEmergencyData[key]){
           obj[key] = this.AppEmergencyData[key];
-        }
+        // }
       }
     }
     this.CustomerEmergencyForm.patchValue(obj);
@@ -204,6 +204,22 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       value: this.DisplayName["Zipcode"]
     });
     this.IsAddressDifferent = false;
+  }
+
+  AddressCopyButtonHandler(){
+    var masterCustForm = this.CustomerEmergencyForm.value;
+    if(masterCustForm["Address"] != this.AppEmergencyData["Address"] ||
+        masterCustForm["AreaCode1"] != this.AppEmergencyData["AreaCode1"] ||
+        masterCustForm["AreaCode2"] != this.AppEmergencyData["AreaCode2"] ||
+        masterCustForm["AreaCode3"] != this.AppEmergencyData["AreaCode3"] ||
+        masterCustForm["AreaCode4"] != this.AppEmergencyData["AreaCode4"] ||
+        masterCustForm["Zipcode"] != this.AppEmergencyData["Zipcode"] ||
+        masterCustForm["City"] != this.AppEmergencyData["City"]){
+      this.IsAddressDifferent = true;
+    }
+    else{
+      this.IsAddressDifferent = false;
+    }
   }
 
   getProfessionData(e){
