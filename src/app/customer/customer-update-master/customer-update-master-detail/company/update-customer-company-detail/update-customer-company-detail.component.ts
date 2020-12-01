@@ -88,7 +88,7 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
   CopyAllHandler(){
     var obj = new Object();
     for (const key in this.AppCustCompanyDetail) {
-      if(key == "CustCompanyId"){
+      if(key == "CustCompanyId" || key == "RowVersion"){
         continue;
       }
       else{
