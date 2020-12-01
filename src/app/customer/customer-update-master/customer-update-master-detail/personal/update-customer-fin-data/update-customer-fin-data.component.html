@@ -77,6 +77,7 @@
           <label>{{AppCustFinData.TotalIncomeAmt}}</label>
         </div>
         <div class="col-md-2">
+          <button *ngIf="CustomerFinDataForm.controls.TotalIncomeAmt.value != AppCustFinData.TotalIncomeAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('TotalIncomeAmt')">Copy</button>
         </div>
         <div class="col-md-4">
           <label>{{CustomerFinDataForm.controls.TotalIncomeAmt.value}}</label>
@@ -118,6 +119,7 @@
           <label>{{AppCustFinData.NettIncomeAmt}}</label>
         </div>
         <div class="col-md-2">
+          <button *ngIf="CustomerFinDataForm.controls.NettIncomeAmt.value != AppCustFinData.NettIncomeAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('NettIncomeAmt')">Copy</button>
         </div>
         <div class="col-md-4">
           <label>{{CustomerFinDataForm.controls.NettIncomeAmt.value}}</label>

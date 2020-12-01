@@ -49,12 +49,12 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     Zipcode: ['', [Validators.required]],
     AreaCode1: [{value: '', disabled: true}, [Validators.required]],
     AreaCode2: [{value: '', disabled: true}, [Validators.required]],
-    AreaCode3: ['', [Validators.required]],
-    AreaCode4: ['', [Validators.required]],
+    AreaCode3: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    AreaCode4: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     City: [{value: '', disabled: true}, [Validators.required]],
-    Phn1: [''],
-    Phn2: [''],
-    Fax: [''],
+    Phn1: ['', Validators.pattern("^[0-9]+$")],
+    Phn2: ['', Validators.pattern("^[0-9]+$")],
+    Fax: ['', Validators.pattern("^[0-9]+$")],
     RowVersionCustJobData: [''],
     RowVersionJobAddr: [''],
     RowVersionCust: ['']
@@ -105,7 +105,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     let getCustModel = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel });
     let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition });
     let getJobStatus = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobStat });
-    let getCompanyScale = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCompanyScale });
+    let getCompanyScale = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCoyScale });
     forkJoin([getDetail, getCustModel, getJobPosition, getJobStatus, getCompanyScale]).pipe(
       map((response) => {
         this.AppJobData = response[0]["AppCustJobData"];
@@ -270,36 +270,36 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     else if(formControlName == "CustModel"){
       if(this.AppJobData[formControlName]){
         this.CustomerJobForm.patchValue({
-          CompanyScale: this.AppJobData["CustModel"]
+          CustModel: this.AppJobData["CustModel"]
         });
       }
       else{
         this.CustomerJobForm.patchValue({
-          CompanyScale: this.CustModelList[0].Key
+          CustModel: this.CustModelList[0].Key
         });
       }
     }
     else if(formControlName == "JobPosition"){
       if(this.AppJobData[formControlName]){
         this.CustomerJobForm.patchValue({
-          CompanyScale: this.AppJobData["JobPosition"]
+          JobPosition: this.AppJobData["JobPosition"]
         });
       }
       else{
         this.CustomerJobForm.patchValue({
-          CompanyScale: this.JobPositionList[0].Key
+          JobPosition: this.JobPositionList[0].Key
         });
       }
     }
     else if(formControlName == "JobStatus"){
       if(this.AppJobData[formControlName]){
         this.CustomerJobForm.patchValue({
-          CompanyScale: this.AppJobData["JobStatus"]
+          JobStatus: this.AppJobData["JobStatus"]
         });
       }
       else{
         this.CustomerJobForm.patchValue({
-          CompanyScale: this.JobStatusList[0].Key
+          JobStatus: this.JobStatusList[0].Key
         });
       }
     }

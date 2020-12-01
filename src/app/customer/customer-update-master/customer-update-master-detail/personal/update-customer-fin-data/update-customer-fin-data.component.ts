@@ -29,7 +29,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     CustPersonalFinDataId: [0],
     CustPersonalId: [0],
     CustId: [0],
-    MonthlyIncomeAmt: [0, [Validators.required]],
+    MonthlyIncomeAmt: [0, [Validators.required, Validators.min(1)]],
     MonthlyExpenseAmt: [0],
     MonthlyInstallmentAmt: [0],
     MrSourceOfIncomeCode: [''],
@@ -156,14 +156,14 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     for (let i = 0; i < this.AppCustBankAcc.length; i++) {
       this.AddNewBankAcc(i);
     }
-    this.CalculateFinData();
+    // this.CalculateFinData();
   }
 
   CopyHandler(formControlName){
     var obj = new Object();
     obj[formControlName] = this.AppCustFinData[formControlName];
     this.CustomerFinDataForm.patchValue(obj);
-    this.CalculateFinData();
+    // this.CalculateFinData();
   }
 
   CalculateFinData(){
