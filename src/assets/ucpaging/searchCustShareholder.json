@@ -283,7 +283,7 @@
                                 "param": [
                                     {
                                         "type": "CustId",
-                                        "property": "CustId"
+                                        "property": "ShareholderId"
                                     },
                                     {
                                         "type": "From",
@@ -308,7 +308,7 @@
                                 "param": [
                                     {
                                         "type": "CustId",
-                                        "property": "CustId"
+                                        "property": "ShareholderId"
                                     },
                                     {
                                         "type": "From",
