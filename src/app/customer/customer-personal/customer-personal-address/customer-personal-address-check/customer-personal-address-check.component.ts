@@ -76,6 +76,8 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
       this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
         (response) => {
             this.listCustAddr = response[CommonConstant.ReturnObj];
+            let idxEmergency = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode == CommonConstant.CustAddrTypeEmergency);
+            if(idxEmergency != -1) this.listCustAddr.splice(idxEmergency, 1)
         });
   }
 

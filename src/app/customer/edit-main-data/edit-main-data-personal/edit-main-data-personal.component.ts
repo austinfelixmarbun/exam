@@ -15,8 +15,6 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { ResponseOptions } from '@angular/http';
-
 @Component({
   selector: 'app-edit-main-data-personal',
   templateUrl: './edit-main-data-personal.component.html',
@@ -62,7 +60,8 @@ export class EditMainDataPersonalComponent implements OnInit {
   VipNotesRequired : boolean;
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
-  UcAddressObj: UcAddressObj;
+  UcAddressObj: UcAddressObj = new UcAddressObj();
+  
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = URLConstant.GetCustPersonalbyCustId;
@@ -160,13 +159,13 @@ export class EditMainDataPersonalComponent implements OnInit {
           IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
           VipNotes: this.tempCustObj.VipNotes,
         });
-        if(this.tempCustObj.VipNotes!= null){
+        if (this.tempCustObj.VipNotes != null) {
           this.VipNotesRequired = true;
-        }else{
+        } else {
           this.VipNotesRequired = false;
         }
-        if(this.tempCustObj.IsVip==false){ 
-        this.CustomerPersonalForm.controls.VipNotes.disable();
+        if (this.tempCustObj.IsVip == false) {
+          this.CustomerPersonalForm.controls.VipNotes.disable();
         }
         this.CustomerPersonalForm.controls["MrIdTypeCode"].disable();
         this.CustomerPersonalForm.controls["IdNo"].disable();
@@ -251,6 +250,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custObj.CustAddr.City = formValue["UcAddress"]["City"];
     this.custObj.CustAddr.Zipcode = formValue["UcAddressZipcode"]["value"];
     this.custObj.CustAddr.SubZipcode = formValue["UcAddressZipcode"]["value"];
+    this.custObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
     this.http.post(this.editCustUrl, this.custObj).subscribe(
       (response) => {
         this.http.post(this.editCustPersonalUrl, this.custPersonalObj).subscribe(

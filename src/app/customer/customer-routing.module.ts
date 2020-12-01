@@ -27,6 +27,8 @@ import { ReviewUploadNegativeCustomerDetailComponent } from './negative-customer
 import { CustomerFamilyMenuComponent } from './customer-family-menu/customer-family-menu.component';
 import { CustomerShareholderMenuComponent } from './customer-shareholder-menu/customer-shareholder-menu.component';
 import { CustomerGuarantorMenuComponent } from './customer-guarantor-menu/customer-guarantor-menu.component';
+import { CustomerUpdateMasterComponent } from './customer-update-master/customer-update-master.component';
+import { CustomerUpdateMasterDetailComponent } from './customer-update-master/customer-update-master-detail/customer-update-master-detail.component';
 
 const routes: Routes = [
   {
@@ -212,6 +214,20 @@ const routes: Routes = [
         component: CustomerGuarantorMenuComponent,
         data: {
           title: 'CustomerGuarantor'
+        }
+      },
+      {
+        path: 'UpdateDataCustomer/Paging',
+        component: CustomerUpdateMasterComponent,
+        data: {
+          title: 'Update Data Customer'
+        }
+      },
+      {
+        path: 'UpdateDataCustomer/Detail',
+        component: CustomerUpdateMasterDetailComponent,
+        data: {
+          title: 'Update Data Customer Detail'
         }
       }
     ]

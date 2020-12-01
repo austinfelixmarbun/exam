@@ -53,6 +53,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { ScoreCategoryPagingComponent } from './score-category/score-category-paging/score-category-paging';
 import { ScoreCategoryTypeComponent } from './score-category/score-category-type/score-category-type.component';
 import { ScoreCategoryScoringComponent } from './score-category/score-category-scoring/score-category-scoring.component';
+import { ReasonComponent } from './reason/reason-paging/reason.component';
+import { ReasonAddEditComponent } from './reason/reason-add-edit/reason-add-edit.component';
 
 
 @NgModule({
@@ -112,7 +114,9 @@ import { ScoreCategoryScoringComponent } from './score-category/score-category-s
     HolidayDetailEditComponent,
     ScoreCategoryPagingComponent,
     ScoreCategoryTypeComponent,
-    ScoreCategoryScoringComponent
+    ScoreCategoryScoringComponent,
+    ReasonComponent,
+    ReasonAddEditComponent
   ],
   providers: [
     NGXToastrService

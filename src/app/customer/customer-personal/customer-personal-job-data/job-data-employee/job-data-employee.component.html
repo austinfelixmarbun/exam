@@ -86,6 +86,14 @@
               <lib-uc-show-errors [control]="JobDataEmpForm.controls.EmpEstablishmentDate" [submit]="enjiForm.submitted"></lib-uc-show-errors>
             </div>
         </div>
+        <div class="form-group row">
+          <label class="col-md-2 adInsLabel" translate>Number of Employee </label>
+          <div class="col-md-4">
+            <input type="text" class="form-control adInsInput" formControlName="NoOfEmploy"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.NoOfEmploy.invalid }">
+            <lib-uc-show-errors [control]="JobDataEmpForm.controls.NoOfEmploy" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+          </div>
+      </div>
         </div>
           <lib-ucSubsection [id]="'jobAddrId'" [title]="'Address'" [panel]="'jobAddr'">
           </lib-ucSubsection>

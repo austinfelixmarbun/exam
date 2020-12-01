@@ -27,12 +27,12 @@
       <td class="text-left">{{item.CustName}}</td>
       <td class="text-left">{{item.MrCustRelationshipDesc}}</td>
       <td>
-        <a class="success p-0" data-original-title="" title="" (click)="editFamilyHandler(item.CustPersonalFamilyId)">
+        <a *ngIf="item.CustPersonalFamilyId != 0" class="success p-0" data-original-title="" title="" (click)="editFamilyHandler(item.CustPersonalFamilyId)">
           <i class="ft-edit-2 font-medium-3 mr-2"></i>
         </a>
       </td>
       <td>
-        <a class="danger p-0" data-original-title="" title="" (click)="deleteFamilyHandler(item.CustPersonalFamilyId, i)">
+        <a *ngIf="item.CustPersonalFamilyId != 0" class="danger p-0" data-original-title="" title="" (click)="deleteFamilyHandler(item.CustPersonalFamilyId, i)">
           <i class="ft-trash-2 font-medium-3 mr-2"></i>
         </a>
       </td>

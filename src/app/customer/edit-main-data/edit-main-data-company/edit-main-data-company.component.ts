@@ -187,6 +187,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.custObj.CustAddr.City = formValue["UcAddress"]["City"];
     this.custObj.CustAddr.Zipcode = formValue["UcAddressZipcode"]["value"];
     this.custObj.CustAddr.SubZipcode = formValue["UcAddressZipcode"]["value"];
+    this.custObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
     this.http.post(this.editCustUrl, this.custObj).subscribe(
       (response) => {
         this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(

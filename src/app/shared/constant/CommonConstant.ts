@@ -10,7 +10,7 @@ export class CommonConstant {
     public static CURRENT_USER_CONTEXT = "currentUserContext"
     public static PAGE_ACCESS = "PageAccess";
     public static TOKEN = "Token";
-    public static LOCAL_IP = "LocalIp"; 
+    public static LOCAL_IP = "LocalIp";
     public static VERSION = "Version";
     public static LAST_ACCESS_TIME = "LastAccessTime";
     public static MENU = "Menu"
@@ -81,7 +81,7 @@ export class CommonConstant {
     public static ATPM = "ATPM";
     public static Holding = "HOLDING";
     public static Branch = "BRANCH";
-    
+
     //REF PROV DISTRICT
     public static RefProvDistrictTypeDis = "DIS";
     public static RefProvDistrictTypePrv = "PRV";
@@ -112,6 +112,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeSkillLvl = "SKILL_LVL"
     public static RefMasterTypeCodeOfficeClass = "OFFICE_CLASS";
     public static RefMasterTypeCodeOfficeType = "OFFICE_TYPE";
+    public static RefMasterTypeCompanyScale = "COMPANY_SCALE";
 
     public static RefMasterTypeCodeCenterGrpType = "CENTER_GRP_TYPE";
 
@@ -124,14 +125,14 @@ export class CommonConstant {
     public static RefMasterTypeCodeNotificationMethod = "NOTIFICATION_METHOD";
     public static RefMasterTypeCodeVendorPosition = "VENDOR_POSITION";
     public static RefMasterTypeCodeTaxCalcMethod = "TAX_CALC_METHOD";
-    
+
 
     public static RefMasterTypeCodeVendorCategory = "VENDOR_CATEGORY";
     public static RefMasterTypeCodeMaxRefundType = "MAX_REFUND_TYPE";
     public static RefMasterTypeCodeAssgmntType = "ASSGMNT_TYPE";
     public static RefMasterTypeCodeSupplierClass = "SUPPLIER_CLASS";
 
-    
+
     public static RefMasterTypeCodeSupplierUpCalcMethod = "SUPPLIER_UP_CALC_METHOD";
     public static RefMasterTypeCodeVendorType = "VENDOR_TYPE";
     public static RefMasterTypeCodeIdTypeVendor = "ID_TYPE_VENDOR";
@@ -141,6 +142,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeAttrInputType = "ATTR_INPUT_TYPE";
     public static RefMasterTypeCodeRegularExpression = "REGULAR_EXPRESSION";
     public static RefMasterTypeCodeAttributeGroup = "ATTRIBUTE_GROUP";
+    public static RefMasterTypeCodeBuildingOwnership = "BUILDING_OWNERSHIP";
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
     // GENERAL SETTING CODE
@@ -156,7 +158,9 @@ export class CommonConstant {
     // CUST ADDR TYPE 
     public static CustAddrTypeLegal = "LEGAL";
     public static CustAddrTypeContact = "CONTACT";
+    public static CustAddrTypeCompany = "COMPANY";
     public static CustAddrTypeResidence = "RESIDENCE";
+    public static CustAddrTypeEmergency = "EMERGENCY";
     public static CustAddrTypeJob = "JOB";
     public static CustAddrTypeOthBiz = "OTH_BIZ";
     public static CustAddrTypePreJob = "PREV_JOB";
@@ -183,10 +187,16 @@ export class CommonConstant {
 
     // ID TYPE
     public static MrIdTypeCodeEKTP = "EKTP";
+    public static MrIdTypeCodeSIM = "SIM";
+    public static MrIdTypeCodeKITAS = "KITAS";
+    public static MrIdTypeCodeNPWP = "NPWP";
+    public static MrIdTypeCodeAKTA = "AKTA";
     public static AttrGroupCustCompanyFinData = "CUST_COMPANY_FINDATA"
     public static AttrGroupCustPersonalFinData = "CUST_PERSONAL_FINDATA"
     public static AttrGroupCustCompanyOther = "CUST_COMPANY_OTH"
     public static AttrGroupCustPersonalOther= "CUST_PERSONAL_OTH"
+    public static AttrGroupAsset = "ASSET";
+
 
     // Integration
     public static DailyMasterTypeSingle = "Date";
@@ -199,4 +209,19 @@ export class CommonConstant {
     public static CUST_MODEL_SMETBU = "SMETBU";
     public static CUST_MODEL_SMEBU = "SMEBU";
     public static CUST_MODEL_NONPROF = "NONPROF";
+
+    // REF PROD COMPNT
+    public static RefProdCompntLob = "LOB";
+    public static RefProdCompntGrpGen = "GEN";
+
+    // LOB
+    public static FL4W = "FL4W";
+    public static CF4W = "CF4W";
+    public static FCTR = "FCTR";
+    public static CFRFN4W = "CFRFN4W";
+    public static CFRFN = "CFRFN";
+    public static CFNEWCAR = "CFNEWCAR";
+    public static CFNA = "CFNA";
+    
+    //ATTR GROUP
 }

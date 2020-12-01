@@ -37,6 +37,8 @@ import { HolidayDetailEditComponent } from './holiday-scheme/holiday-detail-edit
 import { ScoreCategoryPagingComponent } from './score-category/score-category-paging/score-category-paging';
 import { ScoreCategoryTypeComponent } from './score-category/score-category-type/score-category-type.component';
 import { ScoreCategoryScoringComponent } from './score-category/score-category-scoring/score-category-scoring.component';
+import { ReasonComponent } from './reason/reason-paging/reason.component';
+import { ReasonAddEditComponent } from './reason/reason-add-edit/reason-add-edit.component';
 
 const routes: Routes = [
   {
@@ -306,6 +308,20 @@ const routes: Routes = [
         component: ScoreCategoryScoringComponent,
         data: {
           title: 'Score Category Scoring'
+        },
+      },
+      {
+        path: 'Reason/Paging',
+        component: ReasonComponent,
+        data: {
+          title: 'Reason Paging'
+        },
+      },
+      {
+        path: 'Reason/Detail',
+        component: ReasonAddEditComponent,
+        data: {
+          title: 'Reason Paging'
         },
       },
     ]

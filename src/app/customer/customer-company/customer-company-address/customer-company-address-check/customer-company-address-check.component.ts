@@ -7,6 +7,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model'; 
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-company-address-check',
@@ -51,6 +52,8 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
     this.http.post(this.getListCustAddrUrl, this.custAddrObj).subscribe(
       (response) => {
         this.listCustAddr = response["ReturnObject"];
+        let idxCompany = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode == CommonConstant.CustAddrTypeCompany);
+        if(idxCompany != -1) this.listCustAddr.splice(idxCompany, 1)
       });
   }
 

@@ -26,6 +26,7 @@ export class UcProdOfferingCompComponent implements OnInit {
   UrlGetProdOfferingCompGrouped : any;
   dictMultiOptions: { [key: string]: any; } = {};
   selectedMultiDDLItems: { [key: string]: any; } = {};
+
   @Input() CompGroups : string;
   @Input() ProdOfferingHId : number;
   @Input() ShowComparison : boolean;
@@ -216,10 +217,10 @@ export class UcProdOfferingCompComponent implements OnInit {
 
     this.http.post(this.UrlGetProdOfferingCompGrouped, ProdOfferingComponent).toPromise().then(
       async (response) => {
-        for (var i = 0; i < response["ReturnObject"]["ProdOffComponents"].length; i++) {
-          var group = response["ReturnObject"]["ProdOffComponents"][i];
+        for (var i = 0; i < response[CommonConstant.ReturnObj]["ProdOffComponents"].length; i++) {
+          var group = response[CommonConstant.ReturnObj]["ProdOffComponents"][i];
           var fa_group = this.FormProdOfferingComp.controls['groups'] as FormArray;
-          var behaviourDDL = response["ReturnObject"]["BehaviourDropDownList"];
+          var behaviourDDL = response[CommonConstant.ReturnObj]["BehaviourDropDownList"];
 
           fa_group.push(this.addGroup(group.GroupCode, group.GroupName));
 

@@ -13,6 +13,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { map, mergeMap } from 'rxjs/operators';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 
 @Component({
   selector: 'app-customer-company-duplicate-check',
@@ -21,7 +22,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 })
 export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy {
   @Input() IsFromCustMgmntShareholder: boolean;
-  @Input() CustMgmntShareholderData: Object;
+  @Input() CustMgmntShareholderData: CustCompanyMgmntShrholderObj;
   @Output() ResponseSaveData: EventEmitter<any>;
 
   resultData: any;
@@ -56,6 +57,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
     this.ResponseSaveData = new EventEmitter<any>();
     this.urlGetDescByMasterCode = URLConstant.GetRefMasterByMasterCode;
+    
     this.route.queryParams.subscribe(params => {
       if (params["CustModel"] != null) {
         this.CustModel = params["CustModel"];
@@ -78,10 +80,16 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       if (params["VipNotes"] != null) {
         this.VipNotes = params["VipNotes"];
       }
-    });
+    });     
   }
 
   ngOnInit() {
+    if(this.IsFromCustMgmntShareholder){
+      this.CustModel = this.CustMgmntShareholderData.MrCustModelCode;
+      this.CustName = this.CustMgmntShareholderData.MgmntShrholderName;
+      this.MrCompanyTypeCode = this.CustMgmntShareholderData.MrCompanyTypeCode;
+      this.TaxIdNo = this.CustMgmntShareholderData.TaxIdNo;
+    }
     this.DuplicateCustObj = new DuplicateCustObj();
     if(this.IsFromCustMgmntShareholder){
       this.DuplicateCustObj.CustName = this.CustMgmntShareholderData["MgmntShrholderName"];
@@ -105,17 +113,10 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       }
     );
 
-    this.http.post(this.urlGetDescByMasterCode, refMasterObjCustModel).subscribe(
-      (response) => {
-        this.tempCustModel = response;
-      }
-    );
-
     var refMasterObjCustModel = {
-      MasterCode: this.CustModel,
-      RowVersion: ""
+      CustModelCode: this.CustModel
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetRefCustModelByCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
       }
@@ -166,6 +167,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       this.addCustObj.CustObj.MrIdTypeCode = RefMasterConstant.Npwp;
       this.addCustObj.CustObj.IdNo = this.TaxIdNo;
       this.addCustObj.CustObj.TaxIdNo = this.TaxIdNo;
+      this.addCustObj.CustObj.IsCustomer = true;
       if (this.IsVip === "true") {
         this.addCustObj.CustObj.IsVip = true;
       } else {
@@ -187,6 +189,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       this.addCustObj.CustAddr.City = custAddr["City"];
       this.addCustObj.CustAddr.Zipcode = custAddr["Zipcode"];
       this.addCustObj.CustAddr.SubZipcode = custAddr["SubZipcode"];
+      this.addCustObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
 
       this.http.post(URLConstant.AddNewCust, this.addCustObj).subscribe(
         (response) => {
@@ -212,35 +215,41 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       })
     ).subscribe(
       (response) => {
-        this.addCustObj.CustAddr = response as CustAddrObj;
-        this.addCustObj.CustObj.CustName = item.CustName;
-        this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
-        this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Company;
-        this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
-        this.addCustObj.CustObj.MrIdTypeCode = RefMasterConstant.Npwp;
-        this.addCustObj.CustObj.IdNo = item.TaxIdNo;
-        this.addCustObj.CustObj.TaxIdNo = item.TaxIdNo;
-        if (this.IsVip === "true") {
-          this.addCustObj.CustObj.IsVip = true;
-        } else {
-          this.addCustObj.CustObj.IsVip = false;
-        }
-        if (this.IsAffiliateWithMf === "true") {
-          this.addCustObj.CustObj.IsAffiliateWithMf = true;
-        } else {
-          this.addCustObj.CustObj.IsAffiliateWithMf = false;
-        }
-        this.addCustObj.CustObj.VipNotes = this.VipNotes;
+        if(this.IsFromCustMgmntShareholder){
+          this.addCustObj.CustObj.MrCustModelCode = this.CustMgmntShareholderData.MrCustModelCode;
+          this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.CustMgmntShareholderData.MrCompanyTypeCode;
+        }else{
+          this.addCustObj.CustAddr = response as CustAddrObj;
+          this.addCustObj.CustObj.CustName = item.CustName;
+          this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
+          this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Company;
+          this.addCustObj.CustObj.MrCustModelCode = this.CustModel;
+          this.addCustObj.CustObj.MrIdTypeCode = RefMasterConstant.Npwp;
+          this.addCustObj.CustObj.IdNo = item.TaxIdNo;
+          this.addCustObj.CustObj.TaxIdNo = item.TaxIdNo;
+          if (this.IsVip === "true") {
+            this.addCustObj.CustObj.IsVip = true;
+          } else {
+            this.addCustObj.CustObj.IsVip = false;
+          }
+          if (this.IsAffiliateWithMf === "true") {
+            this.addCustObj.CustObj.IsAffiliateWithMf = true;
+          } else {
+            this.addCustObj.CustObj.IsAffiliateWithMf = false;
+          }
+          this.addCustObj.CustObj.VipNotes = this.VipNotes;
 
-        var custAddr = JSON.parse(sessionStorage.getItem("CustAddr"));
-        this.addCustObj.CustAddr.Addr = custAddr["Addr"];
-        this.addCustObj.CustAddr.AreaCode1 = custAddr["AreaCode1"];
-        this.addCustObj.CustAddr.AreaCode2 = custAddr["AreaCode2"];
-        this.addCustObj.CustAddr.AreaCode3 = custAddr["AreaCode3"];
-        this.addCustObj.CustAddr.AreaCode4 = custAddr["AreaCode4"];
-        this.addCustObj.CustAddr.City = custAddr["City"];
-        this.addCustObj.CustAddr.Zipcode = custAddr["Zipcode"];
-        this.addCustObj.CustAddr.SubZipcode = custAddr["SubZipcode"];
+          var custAddr = JSON.parse(sessionStorage.getItem("CustAddr"));
+          this.addCustObj.CustAddr.Addr = custAddr["Addr"];
+          this.addCustObj.CustAddr.AreaCode1 = custAddr["AreaCode1"];
+          this.addCustObj.CustAddr.AreaCode2 = custAddr["AreaCode2"];
+          this.addCustObj.CustAddr.AreaCode3 = custAddr["AreaCode3"];
+          this.addCustObj.CustAddr.AreaCode4 = custAddr["AreaCode4"];
+          this.addCustObj.CustAddr.City = custAddr["City"];
+          this.addCustObj.CustAddr.Zipcode = custAddr["Zipcode"];
+          this.addCustObj.CustAddr.SubZipcode = custAddr["SubZipcode"];
+        }
+        
         this.http.post(URLConstant.EditDuplicateCust, this.addCustObj).subscribe(
           () => {
             if(this.IsFromCustMgmntShareholder){
@@ -268,33 +277,38 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
     this.http.post<RequestNegativeCustObj>(URLConstant.GetNegativeCustByNegativeCustNameAndCustType, NegativeCustObj).subscribe(
       (response) => {
         this.RequestNegativeCustObj = response;
-        this.RequestNegativeCustObj.CustName = item.CustName;
-        this.RequestNegativeCustObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
-        this.RequestNegativeCustObj.MrCustTypeCode = RefMasterConstant.Company;
-        this.RequestNegativeCustObj.MrCustModelCode = this.CustModel;
-        this.RequestNegativeCustObj.MrIdTypeCode = RefMasterConstant.Npwp;
-        this.RequestNegativeCustObj.IdNo = item.TaxIdNo;
-        this.RequestNegativeCustObj.TaxIdNo = item.TaxIdNo;
-        if (this.IsVip === "true") {
-          this.RequestNegativeCustObj.IsVip = true;
-        } else {
-          this.RequestNegativeCustObj.IsVip = false;
-        }
-        if (this.IsAffiliateWithMf === "true") {
-          this.RequestNegativeCustObj.IsAffiliateWithMf = true;
-        } else {
-          this.RequestNegativeCustObj.IsAffiliateWithMf = false;
-        }
-        this.RequestNegativeCustObj.VipNotes = this.VipNotes;
+        if(this.IsFromCustMgmntShareholder){
+          this.RequestNegativeCustObj.MrCustModelCode = this.CustMgmntShareholderData.MrCustModelCode;
+          this.RequestNegativeCustObj.MrCompanyTypeCode = this.CustMgmntShareholderData.MrCompanyTypeCode;
+        }else{
+          this.RequestNegativeCustObj.CustName = item.CustName;
+          this.RequestNegativeCustObj.MrCompanyTypeCode = this.MrCompanyTypeCode;
+          this.RequestNegativeCustObj.MrCustTypeCode = RefMasterConstant.Company;
+          this.RequestNegativeCustObj.MrCustModelCode = this.CustModel;
+          this.RequestNegativeCustObj.MrIdTypeCode = RefMasterConstant.Npwp;
+          this.RequestNegativeCustObj.IdNo = item.TaxIdNo;
+          this.RequestNegativeCustObj.TaxIdNo = item.TaxIdNo;
+          if (this.IsVip === "true") {
+            this.RequestNegativeCustObj.IsVip = true;
+          } else {
+            this.RequestNegativeCustObj.IsVip = false;
+          }
+          if (this.IsAffiliateWithMf === "true") {
+            this.RequestNegativeCustObj.IsAffiliateWithMf = true;
+          } else {
+            this.RequestNegativeCustObj.IsAffiliateWithMf = false;
+          }
+          this.RequestNegativeCustObj.VipNotes = this.VipNotes;
 
-        var custAddr = JSON.parse(sessionStorage.getItem("CustAddr"));
-        this.RequestNegativeCustObj.LegalAddr = custAddr["Addr"];
-        this.RequestNegativeCustObj.AreaCode1 = custAddr["AreaCode1"];
-        this.RequestNegativeCustObj.AreaCode2 = custAddr["AreaCode2"];
-        this.RequestNegativeCustObj.AreaCode3 = custAddr["AreaCode3"];
-        this.RequestNegativeCustObj.AreaCode4 = custAddr["AreaCode4"];
-        this.RequestNegativeCustObj.City = custAddr["City"];
-        this.RequestNegativeCustObj.Zipcode = custAddr["Zipcode"];
+          var custAddr = JSON.parse(sessionStorage.getItem("CustAddr"));
+          this.RequestNegativeCustObj.LegalAddr = custAddr["Addr"];
+          this.RequestNegativeCustObj.AreaCode1 = custAddr["AreaCode1"];
+          this.RequestNegativeCustObj.AreaCode2 = custAddr["AreaCode2"];
+          this.RequestNegativeCustObj.AreaCode3 = custAddr["AreaCode3"];
+          this.RequestNegativeCustObj.AreaCode4 = custAddr["AreaCode4"];
+          this.RequestNegativeCustObj.City = custAddr["City"];
+          this.RequestNegativeCustObj.Zipcode = custAddr["Zipcode"];
+      }
         this.http.post(URLConstant.EditDuplicateNegativeCust, this.RequestNegativeCustObj).subscribe(
           (response) => {
             if(this.IsFromCustMgmntShareholder){

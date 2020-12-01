@@ -1,0 +1,104 @@
+<div class="form-body">
+  <lib-ucSubsection [id]="'FamilyId'" [title]="'Family'" [panel]="'FamilySection'">
+  </lib-ucSubsection>
+  <div id="FamilySection">
+    <div class="form-group row" style="margin-bottom: 15px;">
+      <div class="col-md-6" style="text-align: center;">
+        Application Data
+      </div>
+      <div class="col-md-6" style="text-align: center;">
+        Master Customer Data
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-6">
+        <table class="table table-responsive-md text-center table-hover">
+          <thead>
+            <tr class="table-header">
+              <th style="text-align: left;">
+                <span class="thead-header" name='AppName' translate>
+                  NAME
+                </span>
+              </th>
+              <th style="text-align: left;">
+                <span class="thead-header" name='AppIdTypeIdNo' translate>  
+                  ID Type / ID No.
+                </span>
+              </th>
+              <th style="text-align: left;">
+                <span class="thead-header" name='AppRelationship' translate>
+                  Relationship
+                </span>
+              </th>
+              <th style="text-align: left;">
+                <span class="thead-header" name='AppAction' translate>
+                  Action
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of ListAppFamily; let i = index">
+              <td style="text-align: left;">{{item.CustName}}</td>
+              <td style="text-align: left;">{{item.CustIdType}} / {{item.CustIdNo}}</td>
+              <td style="text-align: left;">{{item.CustRelationship}}</td>
+              <td style="text-align: center;">
+                <a (click)="addFamilyHandler(i)" *ngIf="!item.IsMasterData">
+                  Add as New Data
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <table class="table table-responsive-md text-center table-hover">
+          <thead>
+            <tr class="table-header">
+              <th style="text-align: left;">
+                <span class="thead-header" name='CustName' translate>
+                  NAME
+                </span>
+              </th>
+              <th style="text-align: left;">
+                <span class="thead-header" name='CustIdTypeIdNo' translate>  
+                  ID Type / ID No.
+                </span>
+              </th>
+              <th style="text-align: left;">
+                <span class="thead-header" name='CustRelationship' translate>
+                  Relationship
+                </span>
+              </th>
+              <th style="text-align: left;">
+                <span class="thead-header" name='CustAction' translate>
+                  Action
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of ListCustFamily; let i = index">
+              <td style="text-align: left;">{{item.CustName}}</td>
+              <td style="text-align: left;">{{item.CustIdType}} / {{item.CustIdNo}}</td>
+              <td style="text-align: left;">{{item.CustRelationship}}</td>
+              <td style="text-align: center;">
+                <a (click)="cancelFamilyHandler(i)" *ngIf="!item.IsMasterData">
+                  Cancel
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="form-actions right" style="text-align: right;">
+    <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
+      <i class="far fa-window-close"></i> Cancel
+    </button>
+    <button type="button" class="btn btn-raised btn-primary" (click)="SaveValue()" translate>
+      <i class="far fa-check-square"></i> Save
+    </button>
+  </div>
+</div>
