@@ -70,7 +70,7 @@
           </div>
           <div class="col-md-2"></div>
           <div class="col-md-4" [formGroupName]="'MasterAddr'">
-            <input type="text" class="form-control adInsInput" formControlName="AreaCode2" 
+            <input type="text" class="form-control adInsInput" formControlName="AreaCode2" [readonly]="true"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && custAddr.get('MasterAddr').get('AreaCode2').invalid}">
             <lib-uc-show-errors [control]="custAddr.get('MasterAddr').get('AreaCode2')" [submit]="enjiForm.submitted">
             </lib-uc-show-errors>
@@ -83,7 +83,7 @@
           </div>
           <div class="col-md-2"></div>
           <div class="col-md-4" [formGroupName]="'MasterAddr'">
-            <input type="text" class="form-control adInsInput" formControlName="AreaCode1"
+            <input type="text" class="form-control adInsInput" formControlName="AreaCode1" [readonly]="true"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && custAddr.get('MasterAddr').get('AreaCode1').invalid}">
             <lib-uc-show-errors [control]="custAddr.get('MasterAddr').get('AreaCode1')" [submit]="enjiForm.submitted">
             </lib-uc-show-errors>
@@ -96,7 +96,7 @@
           </div>
           <div class="col-md-2"></div>
           <div class="col-md-4" [formGroupName]="'MasterAddr'">
-            <input type="text" class="form-control adInsInput" formControlName="City"
+            <input type="text" class="form-control adInsInput" formControlName="City" [readonly]="true"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && custAddr.get('MasterAddr').get('City').invalid}">
             <lib-uc-show-errors [control]="custAddr.get('MasterAddr').get('City')" [submit]="enjiForm.submitted">
             </lib-uc-show-errors>

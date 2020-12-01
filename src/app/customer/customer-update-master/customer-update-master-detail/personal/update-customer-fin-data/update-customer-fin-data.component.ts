@@ -160,9 +160,16 @@ export class UpdateCustomerFinDataComponent implements OnInit {
   }
 
   CopyHandler(formControlName){
-    var obj = new Object();
-    obj[formControlName] = this.AppCustFinData[formControlName];
-    this.CustomerFinDataForm.patchValue(obj);
+    this.CustomerFinDataForm.patchValue({
+      MonthlyIncomeAmt: this.AppCustFinData.MonthlyIncomeAmt,
+      MonthlyExpenseAmt: this.AppCustFinData.MonthlyExpenseAmt,
+      MonthlyInstallmentAmt: this.AppCustFinData.MonthlyInstallmentAmt,
+      MrSourceOfIncomeCode: this.AppCustFinData.MrSourceOfIncomeCode,
+      SpouseMonthlyIncomeAmt: this.AppCustFinData.SpouseMonthlyIncomeAmt,
+      IsJoinIncome: this.AppCustFinData.IsJoinIncome,
+      TotalIncomeAmt: this.AppCustFinData.TotalIncomeAmt,
+      NettIncomeAmt: this.AppCustFinData.NettIncomeAmt,
+    });
     // this.CalculateFinData();
   }
 

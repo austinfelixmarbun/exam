@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -45,11 +45,11 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     MobilePhn2: ['', [Validators.pattern("^[0-9]+$")]],
     Address: ['', [Validators.required]],
     Zipcode: ['', [Validators.required]],
-    AreaCode1: [{value: '', disabled: true}, [Validators.required]],
-    AreaCode2: [{value: '', disabled: true}, [Validators.required]],
+    AreaCode1: ['', [Validators.required]],
+    AreaCode2: ['', [Validators.required]],
     AreaCode3: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     AreaCode4: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-    City: [{value: '', disabled: true}, [Validators.required]],
+    City: ['', [Validators.required]],
     RowVersion: ['']
   });
 
