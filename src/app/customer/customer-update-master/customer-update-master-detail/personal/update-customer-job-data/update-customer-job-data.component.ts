@@ -34,7 +34,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
   CustomerJobForm = this.fb.group({
     CustJobDataId: [0],
     CustId: [0],
-    CustModel: [''],
+    CustModel: ['', [Validators.required]],
     ProfessionId: [0, [Validators.required]],
     InternalEmployee: [false],
     JobPosition: [''],
@@ -186,7 +186,39 @@ export class UpdateCustomerJobDataComponent implements OnInit {
         continue;
       }
       else{
-        if(this.AppJobData[key]){
+        if(key == "CompanyScale"){
+          if(this.AppJobData[key]){
+            obj[key] = this.AppJobData[key];
+          }
+          else{
+            obj[key] = this.CompanyScaleList[0].Key;
+          }
+        }
+        else if(key == "CustModel"){
+          if(this.AppJobData[key]){
+            obj[key] = this.AppJobData[key];
+          }
+          else{
+            obj[key] = this.CustModelList[0].Key;
+          }
+        }
+        else if(key == "JobPosition"){
+          if(this.AppJobData[key]){
+            obj[key] = this.AppJobData[key];
+          }
+          else{
+            obj[key] = this.JobPositionList[0].Key;
+          }
+        }
+        else if(key == "JobStatus"){
+          if(this.AppJobData[key]){
+            obj[key] = this.AppJobData[key];
+          }
+          else{
+            obj[key] = this.JobStatusList[0].Key;
+          }
+        }
+        else{
           obj[key] = this.AppJobData[key];
         }
       }
@@ -223,6 +255,54 @@ export class UpdateCustomerJobDataComponent implements OnInit {
       });
       this.IsAddrDifferent = false;
     }
+    else if(formControlName == "CompanyScale"){
+      if(this.AppJobData[formControlName]){
+        this.CustomerJobForm.patchValue({
+          CompanyScale: this.AppJobData["CompanyScale"]
+        });
+      }
+      else{
+        this.CustomerJobForm.patchValue({
+          CompanyScale: this.CompanyScaleList[0].Key
+        });
+      }
+    }
+    else if(formControlName == "CustModel"){
+      if(this.AppJobData[formControlName]){
+        this.CustomerJobForm.patchValue({
+          CompanyScale: this.AppJobData["CustModel"]
+        });
+      }
+      else{
+        this.CustomerJobForm.patchValue({
+          CompanyScale: this.CustModelList[0].Key
+        });
+      }
+    }
+    else if(formControlName == "JobPosition"){
+      if(this.AppJobData[formControlName]){
+        this.CustomerJobForm.patchValue({
+          CompanyScale: this.AppJobData["JobPosition"]
+        });
+      }
+      else{
+        this.CustomerJobForm.patchValue({
+          CompanyScale: this.JobPositionList[0].Key
+        });
+      }
+    }
+    else if(formControlName == "JobStatus"){
+      if(this.AppJobData[formControlName]){
+        this.CustomerJobForm.patchValue({
+          CompanyScale: this.AppJobData["JobStatus"]
+        });
+      }
+      else{
+        this.CustomerJobForm.patchValue({
+          CompanyScale: this.JobStatusList[0].Key
+        });
+      }
+    }
     else{
       var obj = new Object();
       obj[formControlName] = this.AppJobData[formControlName];
@@ -238,6 +318,25 @@ export class UpdateCustomerJobDataComponent implements OnInit {
           value: this.AppJobData.ProfessionName
         });
       }
+    }
+  }
+
+  AddressCopyButtonHandler(){
+    var masterCustForm = this.CustomerJobForm.value;
+    if(masterCustForm["Address"] != this.AppJobData["Address"] ||
+        masterCustForm["AreaCode1"] != this.AppJobData["AreaCode1"] ||
+        masterCustForm["AreaCode2"] != this.AppJobData["AreaCode2"] ||
+        masterCustForm["AreaCode3"] != this.AppJobData["AreaCode3"] ||
+        masterCustForm["AreaCode4"] != this.AppJobData["AreaCode4"] ||
+        masterCustForm["Zipcode"] != this.AppJobData["Zipcode"] ||
+        masterCustForm["City"] != this.AppJobData["City"] ||
+        masterCustForm["Phn1"] != this.AppJobData["Phn1"] ||
+        masterCustForm["Phn2"] != this.AppJobData["Phn2"] ||
+        masterCustForm["Fax"] != this.AppJobData["Fax"]){
+      this.IsAddrDifferent = true;
+    }
+    else{
+      this.IsAddrDifferent = false;
     }
   }
 

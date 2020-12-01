@@ -11,7 +11,7 @@
     <div class="col-md-4">Master Customer Data</div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adInsLabel" translate>Customer Model</label>
+    <label class="col-md-2 adInsLabel adins-required-label" translate>Customer Model</label>
     <div class="col-md-4">
       <label>{{AppJobData.CustModel}}</label>
     </div>
@@ -42,7 +42,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adins-required-label" translate>Internal Employee</label>
+    <label class="col-md-2" translate>Internal Employee</label>
     <div class="col-md-4">
       <label>{{AppJobData.InternalEmployee ? 'Yes' : 'No'}}</label>
     </div>
@@ -54,7 +54,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adins-required-label" translate>Job Position</label>
+    <label class="col-md-2" translate>Job Position</label>
     <div class="col-md-4">
       {{AppJobData.JobPosition}}
     </div>
@@ -71,7 +71,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adins-required-label" translate>Job Title Name</label>
+    <label class="col-md-2" translate>Job Title Name</label>
     <div class="col-md-4">
       {{AppJobData.JobTitleName}}
     </div>
@@ -86,7 +86,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adins-required-label" translate>Job Status</label>
+    <label class="col-md-2" translate>Job Status</label>
     <div class="col-md-4">
       {{AppJobData.JobStatus}}
     </div>
@@ -179,7 +179,7 @@
         <button *ngIf="IsAddrDifferent" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Address')">Copy</button>
       </div>
       <div class="col-md-4">
-        <textarea class="form-control adInsInput" formControlName="Address"
+        <textarea class="form-control adInsInput" formControlName="Address" (blur)="AddressCopyButtonHandler()"
           [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerJobForm.controls.Address.invalid}"></textarea>
         <lib-uc-show-errors [control]="CustomerJobForm.controls.Address" [submit]="enjiForm.submitted">
         </lib-uc-show-errors>
@@ -193,13 +193,13 @@
       <div class="col-md-2">
       </div>
       <div class="col-md-2">
-        <input type="text" class="form-control adInsInput" formControlName="AreaCode4"
+        <input type="text" class="form-control adInsInput" formControlName="AreaCode4" (blur)="AddressCopyButtonHandler()"
           [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerJobForm.controls.AreaCode4.invalid}">
         <lib-uc-show-errors [control]="CustomerJobForm.controls.AreaCode4" [submit]="enjiForm.submitted">
         </lib-uc-show-errors>
       </div>
       <div class="col-md-2">
-        <input type="text" class="form-control adInsInput" formControlName="AreaCode3"
+        <input type="text" class="form-control adInsInput" formControlName="AreaCode3" (blur)="AddressCopyButtonHandler()"
           [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerJobForm.controls.AreaCode3.invalid}">
         <lib-uc-show-errors [control]="CustomerJobForm.controls.AreaCode3" [submit]="enjiForm.submitted">
         </lib-uc-show-errors>
@@ -268,7 +268,7 @@
       <div class="col-md-2">
       </div>
       <div class="col-md-4">
-        <input type="text" class="form-control adInsInput" formControlName="Phn1"
+        <input type="text" class="form-control adInsInput" formControlName="Phn1" (blur)="AddressCopyButtonHandler()"
           [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerJobForm.controls.Phn1.invalid}">
         <lib-uc-show-errors [control]="CustomerJobForm.controls.Phn1" [submit]="enjiForm.submitted">
         </lib-uc-show-errors>
@@ -282,7 +282,7 @@
       <div class="col-md-2">
       </div>
       <div class="col-md-4">
-        <input type="text" class="form-control adInsInput" formControlName="Phn2"
+        <input type="text" class="form-control adInsInput" formControlName="Phn2" (blur)="AddressCopyButtonHandler()"
           [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerJobForm.controls.Phn2.invalid}">
         <lib-uc-show-errors [control]="CustomerJobForm.controls.Phn2" [submit]="enjiForm.submitted">
         </lib-uc-show-errors>
@@ -296,7 +296,7 @@
       <div class="col-md-2">
       </div>
       <div class="col-md-4">
-        <input type="text" class="form-control adInsInput" formControlName="Fax"
+        <input type="text" class="form-control adInsInput" formControlName="Fax" (blur)="AddressCopyButtonHandler()"
           [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerJobForm.controls.Fax.invalid}">
         <lib-uc-show-errors [control]="CustomerJobForm.controls.Fax" [submit]="enjiForm.submitted">
         </lib-uc-show-errors>

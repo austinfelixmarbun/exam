@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -29,7 +29,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     CustPersonalFinDataId: [0],
     CustPersonalId: [0],
     CustId: [0],
-    MonthlyIncomeAmt: [0],
+    MonthlyIncomeAmt: [0, [Validators.required]],
     MonthlyExpenseAmt: [0],
     MonthlyInstallmentAmt: [0],
     MrSourceOfIncomeCode: [''],
@@ -146,9 +146,9 @@ export class UpdateCustomerFinDataComponent implements OnInit {
         continue;
       }
       else{
-        if(this.AppCustFinData[key]){
+        // if(this.AppCustFinData[key]){
           obj[key] = this.AppCustFinData[key];
-        }
+        // }
       }
     }
     this.CustomerFinDataForm.patchValue(obj);

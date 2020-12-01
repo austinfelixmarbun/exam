@@ -12,7 +12,7 @@
         <div class="col-md-4">Master Customer Data</div>
       </div>
       <div class="form-group row">
-        <label class="col-md-2 adInsLabel" translate>Customer Full Name</label>
+        <label class="col-md-2 adInsLabel adins-required-label" translate>Customer Full Name</label>
         <div class="col-md-4">
           <label>{{AppCustPersonalDetail.CustFullName}}</label>
         </div>
@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-md-2 adInsLabel" translate>Marital Status</label>
+        <label class="col-md-2 adInsLabel adins-required-label" translate>Marital Status</label>
         <div class="col-md-4">
           <label>{{AppCustPersonalDetail.MrMaritalStatCode}}</label>
         </div>
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-md-2 adins-required-label" translate>Nationality</label>
+        <label class="col-md-2 adins-required-label adins-required-label" translate>Nationality</label>
         <div class="col-md-4">
           <label>{{AppCustPersonalDetail.MrNationalityCode}}</label>
         </div>
@@ -67,10 +67,10 @@
       <div class="form-group row">
         <label class="col-md-2 adins-required-label" translate>Country</label>
         <div class="col-md-4">
-          {{AppCustPersonalDetail.Country}}
+          {{AppCustPersonalDetail.CountryName}}
         </div>
         <div class="col-md-2">
-          <button *ngIf="CustomerDetailForm.controls.MrNationalityCode.value != LocalNationalityConstant && CustomerDetailForm.controls.Country.value != AppCustPersonalDetail.Country" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Country')">Copy</button>
+          <!-- <button *ngIf="CustomerDetailForm.controls.MrNationalityCode.value != LocalNationalityConstant && CustomerDetailForm.controls.Country.value != AppCustPersonalDetail.Country" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Country')">Copy</button> -->
         </div>
         <div class="col-md-4" *ngIf="CustomerDetailForm.controls.MrNationalityCode.value != LocalNationalityConstant">
           <lib-uclookupgeneric [lookupInput]="lookUpObj" [parentForm]="CustomerDetailForm" [enjiForm]="enjiForm"
@@ -181,7 +181,7 @@
       <div class="form-group row">
         <label class="col-md-2 adInsLabel" translate>Affiliation With MF</label>
         <div class="col-md-4">
-          <label>{{AppCustPersonalDetail.IsAffiliationWithMf}}</label>
+          <label>{{AppCustPersonalDetail.IsAffiliationWithMf ? 'Yes' : 'No'}}</label>
         </div>
         <div class="col-md-2">
           <button *ngIf="CustomerDetailForm.controls.IsAffiliationWithMf.value != AppCustPersonalDetail.IsAffiliationWithMf" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IsAffiliationWithMf')">Copy</button>
@@ -193,7 +193,7 @@
       <div class="form-group row">
         <label class="col-md-2 adInsLabel" translate>VIP</label>
         <div class="col-md-4">
-          <label>{{AppCustPersonalDetail.IsVip}}</label>
+          <label>{{AppCustPersonalDetail.IsVip ? 'Yes' : 'No'}}</label>
         </div>
         <div class="col-md-2">
           <button *ngIf="CustomerDetailForm.controls.IsVip.value != AppCustPersonalDetail.IsVip" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IsVip')">Copy</button>
@@ -252,7 +252,7 @@
           </lib-uc-show-errors>
         </div>
       </div>
-      <div class="form-group row  ">
+      <div class="form-group row">
         <label class="col-md-2 adins-required-label" translate>Email 1 </label>
         <div class="col-md-4">
           <label>{{AppCustPersonalDetail.Email1}}</label>

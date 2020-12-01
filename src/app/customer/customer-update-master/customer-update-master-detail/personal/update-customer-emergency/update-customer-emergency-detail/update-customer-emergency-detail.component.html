@@ -11,7 +11,7 @@
     <div class="col-md-4">Master Customer Data</div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adInsLabel" translate>Name</label>
+    <label class="col-md-2 adInsLabel adins-required-label" translate>Name</label>
     <div class="col-md-4">
       <label>{{AppEmergencyData.CustName}}</label>
     </div>
@@ -26,7 +26,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adInsLabel" translate>Customer Relationship</label>
+    <label class="col-md-2 adInsLabel adins-required-label" translate>Customer Relationship</label>
     <div class="col-md-4">
       <label>{{AppEmergencyData.CustRelation}}</label>
     </div>
@@ -105,7 +105,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adInsLabel" translate>Gender</label>
+    <label class="col-md-2 adInsLabel adins-required-label" translate>Gender</label>
     <div class="col-md-4">
       <label>{{AppEmergencyData.Gender}}</label>
     </div>
@@ -122,7 +122,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adInsLabel adins-required-label" translate>Profession</label>
+    <label class="col-md-2 adInsLabel" translate>Profession</label>
     <div class="col-md-4">
       <label>{{AppEmergencyData.Profession}}</label>
     </div>
@@ -189,7 +189,7 @@
       <button *ngIf="IsAddressDifferent" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Address', '')">Copy</button>
     </div>
     <div class="col-md-4">
-      <textarea class="form-control adInsInput" formControlName="Address"
+      <textarea class="form-control adInsInput" formControlName="Address" (blur)="AddressCopyButtonHandler()"
         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerEmergencyForm.controls.Address.invalid}"></textarea>
       <lib-uc-show-errors [control]="CustomerEmergencyForm.controls.Address" [submit]="enjiForm.submitted">
       </lib-uc-show-errors>
@@ -203,13 +203,13 @@
     <div class="col-md-2">
     </div>
     <div class="col-md-2">
-      <input type="text" class="form-control adInsInput" formControlName="AreaCode4"
+      <input type="text" class="form-control adInsInput" formControlName="AreaCode4" (blur)="AddressCopyButtonHandler()"
         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerEmergencyForm.controls.AreaCode4.invalid}">
       <lib-uc-show-errors [control]="CustomerEmergencyForm.controls.AreaCode4" [submit]="enjiForm.submitted">
       </lib-uc-show-errors>
     </div>
     <div class="col-md-2">
-      <input type="text" class="form-control adInsInput" formControlName="AreaCode3"
+      <input type="text" class="form-control adInsInput" formControlName="AreaCode3" (blur)="AddressCopyButtonHandler()"
         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerEmergencyForm.controls.AreaCode3.invalid}">
       <lib-uc-show-errors [control]="CustomerEmergencyForm.controls.AreaCode3" [submit]="enjiForm.submitted">
       </lib-uc-show-errors>
