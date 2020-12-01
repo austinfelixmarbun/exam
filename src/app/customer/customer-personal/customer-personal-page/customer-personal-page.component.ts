@@ -60,14 +60,13 @@ export class CustomerPersonalPageComponent implements OnInit {
 
   back() {
     if (this.Page != null) {
-      this.router.navigate(["/Customer/EditMainData/Paging"]);
+      this.router.navigate(["/Customer/"+this.From+"/Paging"]);
     } else {
       this.router.navigate(["/Customer/Paging"]);
     }
   }
  
   ngOnInit() {
-
     var custObj = { CustId: this.IdCust };
     this.http.post(URLConstant.GetCustPersonalbyCustId, custObj).subscribe(
       (response: any) => {
