@@ -112,6 +112,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeSkillLvl = "SKILL_LVL"
     public static RefMasterTypeCodeOfficeClass = "OFFICE_CLASS";
     public static RefMasterTypeCodeOfficeType = "OFFICE_TYPE";
+    public static RefMasterTypeCompanyScale = "COMPANY_SCALE";
 
     public static RefMasterTypeCodeCenterGrpType = "CENTER_GRP_TYPE";
 
@@ -141,6 +142,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeAttrInputType = "ATTR_INPUT_TYPE";
     public static RefMasterTypeCodeRegularExpression = "REGULAR_EXPRESSION";
     public static RefMasterTypeCodeAttributeGroup = "ATTRIBUTE_GROUP";
+    public static RefMasterTypeCodeBuildingOwnership = "BUILDING_OWNERSHIP";
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
     // GENERAL SETTING CODE
@@ -158,6 +160,7 @@ export class CommonConstant {
     public static CustAddrTypeContact = "CONTACT";
     public static CustAddrTypeCompany = "COMPANY";
     public static CustAddrTypeResidence = "RESIDENCE";
+    public static CustAddrTypeEmergency = "EMERGENCY";
     public static CustAddrTypeJob = "JOB";
     public static CustAddrTypeOthBiz = "OTH_BIZ";
     public static CustAddrTypePreJob = "PREV_JOB";

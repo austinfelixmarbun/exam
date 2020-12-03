@@ -146,4 +146,7 @@ export class AdInsHelper {
     public static RedirectUrl(router: Router, url: Array<string>, queryParams: {}) {
         router.navigate(url, { queryParams: queryParams, skipLocationChange: true });
     }
+    public static OpenProdOfferingViewByCodeAndVersion(Code, Version) {
+        window.open(environment.FoundationR3Web + "/View/Offering?prodOfferingHId=0&prodOfferingCode=" + Code + "&prodOfferingVersion=" + Version, "_blank");
+      }
 }

@@ -40,6 +40,7 @@ export class ProdOfferingAddComponent implements OnInit {
   }
 
   source: string = "";
+  ProductName: string ="";
   mode: string = "add";
   key: any;
   criteria: CriteriaObj[] = [];
@@ -54,7 +55,7 @@ export class ProdOfferingAddComponent implements OnInit {
     ProdOfferingName: ['', Validators.required],
     ProdOfferingDescr: ['', Validators.required],
     StartDt: ['', Validators.required],
-    EndDt: ['', Validators.required]
+    EndDt: ['', Validators.required],
   });
 
   ngOnInit() {
@@ -105,12 +106,14 @@ export class ProdOfferingAddComponent implements OnInit {
           this.inputLookupObj.nameSelect = this.resultData.ProdName;
           this.inputLookupObj.jsonSelect = { ProdName: this.resultData.ProdName, CurrentProdHId: this.resultData.ProdHId };
           prodOfferingObj.ProdHId = this.resultData.ProdHId;
+          this.ProductName = this.resultData.ProdName;
           this.ProdOfferingForm.patchValue({
             ProdOfferingCode: this.resultData.ProdOfferingCode,
             ProdOfferingName: this.resultData.ProdOfferingName,
             ProdOfferingDescr: this.resultData.ProdOfferingDescr,
             StartDt: formatDate(this.resultData['StartDt'], 'yyyy-MM-dd', 'en-US'),
-            EndDt: formatDate(this.resultData['EndDt'], 'yyyy-MM-dd', 'en-US')
+            EndDt: formatDate(this.resultData['EndDt'], 'yyyy-MM-dd', 'en-US'),
+            
           })
           this.updateMinDtForEndDt();
 
@@ -134,9 +137,10 @@ export class ProdOfferingAddComponent implements OnInit {
       if (this.mode == "edit") {
         this.prodOfferingObj.ProdOfferingCode = this.resultData.ProdOfferingCode;
         this.prodOfferingObj.ProdOfferingId = this.resultData.ProdOfferingId;
-        this.prodOfferingObj.ProdHId =  this.inputLookupObj.jsonSelect.CurrentProdHId;
+        this.prodOfferingObj.ProdHId =  this.resultData.ProdHId;
         this.prodOfferingObj.RowVersion = this.resultData.RowVersion;
         this.prodOfferingObj.ProdOfferingHId = this.ProdOfferingHId;
+        this.prodOfferingObj.ProdName = this.ProductName;
         this.http.post(URLConstant.EditProdOffering, this.prodOfferingObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
@@ -158,7 +162,6 @@ export class ProdOfferingAddComponent implements OnInit {
       }
     }
   }
-
   ProdName = "ProdName";
   handleOutput(event) {
     this.ProdOfferingForm.patchValue({

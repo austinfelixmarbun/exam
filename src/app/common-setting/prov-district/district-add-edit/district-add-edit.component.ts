@@ -29,7 +29,7 @@ export class DistrictAddEditComponent implements OnInit {
     ProvDistrictCode: ['', [Validators.required, Validators.maxLength(50)]],
     ProvDistrictName: ['', [Validators.required, Validators.maxLength(100)]],
     DistrictRegRptCode: ['', Validators.maxLength(100)],
-    PhnArea: ['', [Validators.required, Validators.maxLength(10)]],
+    PhnArea: ['', [Validators.maxLength(10)]],
     IsActive: [true]
   });
 

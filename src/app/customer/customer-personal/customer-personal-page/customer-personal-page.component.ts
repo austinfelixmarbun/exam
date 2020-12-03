@@ -61,14 +61,13 @@ export class CustomerPersonalPageComponent implements OnInit {
 
   back() {
     if (this.Page != null) {
-      AdInsHelper.RedirectUrl(this.router,["/Customer/EditMainData/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,["/Customer/"+this.From+"/Paging"],{});
     } else {
       AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
     }
   }
  
   ngOnInit() {
-
     var custObj = { CustId: this.IdCust };
     this.http.post(URLConstant.GetCustPersonalbyCustId, custObj).subscribe(
       (response: any) => {

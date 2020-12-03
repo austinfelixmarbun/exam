@@ -90,14 +90,14 @@ export class AssetAttributeDetailComponent implements OnInit {
             }
             this.criteriaObj.listValue = this.listRefAttrId;
             this.criteriaList.push(this.criteriaObj);
-            this.inputLookupObj.addCritInput = this.criteriaList;
-            this.ucLookupAssetAttr.setAddCritInput();
           }
-        }
-      );
-    }
-    else if (this.pageType == "edit") {
-      forkJoin([getAssetAttr, getListAssetAttr]).subscribe(
+          this.inputLookupObj.addCritInput = this.criteriaList;
+          this.ucLookupAssetAttr.setAddCritInput();
+      }
+    );
+  }
+    else if(this.pageType == "edit"){
+      forkJoin([getAssetAttr,getListAssetAttr]) .subscribe(
         response => {
           this.AssetAttrForm.patchValue({
             IsEditableAfterGoLive: response[0]['IsEditableAfterGoLive'],
@@ -117,9 +117,10 @@ export class AssetAttributeDetailComponent implements OnInit {
           if (this.listRefAttrId.length > 0) {
             this.criteriaObj.listValue = this.listRefAttrId;
             this.criteriaList.push(this.criteriaObj);
-            this.inputLookupObj.addCritInput = this.criteriaList;
-            this.ucLookupAssetAttr.setAddCritInput();
           }
+          this.inputLookupObj.addCritInput = this.criteriaList;
+          this.ucLookupAssetAttr.setAddCritInput();
+
           this.RowVersion = response[0]['RowVersion'];
         });
     }

@@ -87,6 +87,12 @@
         {
             "type" : "sort", 
             "position" : "left", 
+            "label" : "Negative Customer No",
+            "name" : "A.NEGATIVE_CUST_NO" 
+        },
+        {
+            "type" : "sort", 
+            "position" : "left", 
             "label" : "Customer No",
             "name" : "A.CUST_NO" 
         },
@@ -133,6 +139,11 @@
         }
     ],
     "bodyList" : [
+        {
+            "type" : "text", 
+            "position" : "left", 
+            "property" : "NegCustNo"
+        },
         {
             "type" : "text", 
             "position" : "left", 
