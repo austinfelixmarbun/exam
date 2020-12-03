@@ -27,7 +27,6 @@ import { RolepickComponent } from 'app/shared/rolepick/rolepick.component';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { GrowlModule } from 'primeng/primeng';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { CookieService } from 'ngx-cookie-service';
 import { CookieModule } from 'ngx-cookie';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -73,7 +72,6 @@ export function createTranslateLoader(http: HttpClient) {
         AuthGuard,
         ErrorDialogService,
         RolePickService,
-        CookieService,
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
     bootstrap: [AppComponent],
