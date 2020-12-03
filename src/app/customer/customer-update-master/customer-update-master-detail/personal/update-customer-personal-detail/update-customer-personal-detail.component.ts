@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -239,7 +240,8 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
   }
 
   back(){
-    this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
   }
 
   SaveValue(){
