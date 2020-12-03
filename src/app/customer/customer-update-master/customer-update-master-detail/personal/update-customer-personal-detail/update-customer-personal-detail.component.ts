@@ -198,6 +198,8 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     this.CustGrpLookupObj.isReady = false;
     this.CustGrpLookupObj.nameSelect = this.AppCustPersonalDetail["CustomerGroupParentCustName"];
     this.CustGrpLookupObj.isReady = true;
+    this.lookUpObj.nameSelect = this.AppCustPersonalDetail["CountryName"];
+    this.lookUpObj.jsonSelect = { CountryName: this.AppCustPersonalDetail["CountryName"] };
     this.CustomerDetailForm.get("CountryCode").patchValue({
       value: this.AppCustPersonalDetail["CountryName"]
     });
@@ -212,9 +214,14 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     this.CustomerDetailForm.patchValue(obj);
 
     if(formControlName == "MrNationalityCode"){
+      this.CustomerDetailForm.patchValue({
+        Country: this.AppCustPersonalDetail.Country
+      });
       this.CustomerDetailForm.get("CountryCode").patchValue({
         value: this.AppCustPersonalDetail["CountryName"]
       });
+      this.lookUpObj.nameSelect = this.AppCustPersonalDetail["CountryName"];
+      this.lookUpObj.jsonSelect = { CountryName: this.AppCustPersonalDetail["CountryName"] };
     }
   }
 
