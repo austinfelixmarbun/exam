@@ -27,6 +27,8 @@ import { RolepickComponent } from 'app/shared/rolepick/rolepick.component';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { GrowlModule } from 'primeng/primeng';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CookieService } from 'ngx-cookie-service';
+import { CookieModule } from 'ngx-cookie';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -59,6 +61,7 @@ export function createTranslateLoader(http: HttpClient) {
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyBr5_picK8YJK7fFR2CPzTVMj6GG1TtRGo'
         }),
+        CookieModule.forRoot(),
         StorageServiceModule,
         MatDialogModule,
         BrowserAnimationsModule,
@@ -70,6 +73,7 @@ export function createTranslateLoader(http: HttpClient) {
         AuthGuard,
         ErrorDialogService,
         RolePickService,
+        CookieService,
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
     bootstrap: [AppComponent],

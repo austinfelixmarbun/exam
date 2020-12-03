@@ -12,11 +12,11 @@ import { NotificationHObj } from '../model/NotificationH/NotificationHObj.model'
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from '../constant/URLConstant';
 import { CommonConstant } from '../constant/CommonConstant';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.scss'],
     providers: [RolePickService, NGXToastrService]
 })
 
@@ -39,7 +39,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     notifications: object[] = [];
 
     constructor(public translate: TranslateService,
-        private router: Router,
+        private router: Router, private cookieService: CookieService,
         private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService) {
         const browserLang: string = translate.getBrowserLang();
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
@@ -132,6 +132,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         var url = environment.FoundationR3Url + AdInsConstant.Logout;
         this.http.post(url, "");
         AdInsHelper.ClearAllLog();
+        this.cookieService.removeAll();
         this.router.navigate(['pages/login']);
     }
 

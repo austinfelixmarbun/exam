@@ -17,11 +17,12 @@ import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CookieService } from 'ngx-cookie';
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
     count = 0;
-    constructor(public errorDialogService: ErrorDialogService, private spinner: NgxSpinnerService, private router: Router, public toastr: ToastrService) { }
+    constructor(public errorDialogService: ErrorDialogService, private spinner: NgxSpinnerService, private router: Router, public toastr: ToastrService, private cookieService: CookieService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log(request);
         if (request.method == "POST" && (request.body == null || request.body.isLoading == undefined || request.body.isLoading == true)) {
@@ -38,7 +39,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         let today = new Date();
         var businessDt = formatDate(today, 'yyyy-MM-dd', 'en-US');
 
-        var checkSession = AdInsHelper.CheckSessionTimeout();
+        var checkSession = AdInsHelper.CheckSessionTimeout(this.cookieService);
         if (checkSession == "1") {
             // this.errorDialogService.openDialog(AdInsErrorMessage.SessionTimeout);
             this.spinner.hide();
@@ -82,7 +83,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         }
 
         if (!request.headers.has('Content-Type')) {
-            request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
+            request = request.clone({ headers: request.headers.set('Content-Type', 'application/json'), withCredentials: true });
         }
         request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
         request = request.clone({ headers: request.headers.set('Authentication', 'my-authentication') });
@@ -165,7 +166,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 }
 
                 if (request.method == "POST") {
-                    AdInsHelper.ClearPageAccessLog();
+                    AdInsHelper.ClearPageAccessLog(this.cookieService);
                 }
                 if (this.count == 0) {
                     this.spinner.hide();
