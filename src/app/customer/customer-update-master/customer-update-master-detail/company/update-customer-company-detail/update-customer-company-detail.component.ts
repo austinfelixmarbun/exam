@@ -9,6 +9,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UpdateCustCompanyDetailObj } from 'app/shared/model/UpdateMasterCust/UpdateCustCompanyDetailObj.Model';
 import { environment } from 'environments/environment';
+import { CookieService } from 'ngx-cookie';
 import { forkJoin } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
@@ -38,7 +39,8 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
     private http: HttpClient, 
     private toastr: NGXToastrService, 
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService 
   ) { 
     this.AppCustCompanyDetail = new UpdateCustCompanyDetailObj();
     this.ResponseTab = new EventEmitter<any>();
@@ -52,7 +54,8 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
 
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    // var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = this.cookieService.get(CommonConstant.USER_ACCESS);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.http.post(URLConstant.GetCustCompanyDataForUpdateMasterCustCompany, { CustDataTrxId: this.CustDataTrxId }).pipe(
       map((response) => {
