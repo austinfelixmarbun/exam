@@ -14,6 +14,7 @@ import { WizardComponent } from 'angular-archwizard';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-vendor-employee',
@@ -66,7 +67,7 @@ export class VendorEmployeeComponent implements OnInit {
     IsNpwpExist: [false]
   });
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
         this.mode = params["mode"];
@@ -85,7 +86,7 @@ export class VendorEmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
-    var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var currentUserContext = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(currentUserContext[CommonConstant.BUSINESS_DT]);
 
     if (this.mode == undefined) {
@@ -294,7 +295,7 @@ export class VendorEmployeeComponent implements OnInit {
   SaveForm() {
     var joinDt = new Date(this.VendorEmpForm.controls.JoinDt.value);
     joinDt.setHours(0, 0, 0, 0);
-    var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var currentUserContext = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
     var businessDt = new Date(currentUserContext[CommonConstant.BUSINESS_DT]);
     businessDt.setHours(0, 0, 0, 0);
     if (joinDt > businessDt) {

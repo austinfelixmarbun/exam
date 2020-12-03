@@ -12,6 +12,7 @@ import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-review-upload-negative-asset-detail',
@@ -28,7 +29,7 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
   CancelUpload: string;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       if (params["UploadNo"] != null) {
         this.uploadNo = params["UploadNo"];
@@ -73,7 +74,7 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
     );
   }
   claimTask() {
-    var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var currentUserContext = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
     var wfClaimObj = { pWFTaskListID: this.taskListId, pUserID: currentUserContext[CommonConstant.USER_NAME] };
     this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(
       (response) => {

@@ -9,6 +9,7 @@ import { environment } from 'environments/environment';
 import { CommonConstant } from '../constant/CommonConstant';
 import { URLConstant } from '../constant/URLConstant';
 import { AdInsHelper } from '../AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 declare var $: any;
 
@@ -25,7 +26,7 @@ export class SidebarComponent implements OnInit {
     @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
 
     constructor(private router: Router,
-        private route: ActivatedRoute, public translate: TranslateService, private http: HttpClient) {
+        private route: ActivatedRoute, public translate: TranslateService, private http: HttpClient, private cookieService: CookieService) {
         this.version = localStorage.getItem(CommonConstant.VERSION);
 
     }
@@ -47,8 +48,8 @@ export class SidebarComponent implements OnInit {
         }
         else {
             //Update menu if change of environment
-            let currEnvi = localStorage.getItem('EnvironmentModule');
-            var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+            let currEnvi = this.cookieService.get('EnvironmentModule');
+            var currentUserContext = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
             if(currEnvi && currentUserContext && currEnvi != environment.Module)
             {
                 var roleObject = {
@@ -68,11 +69,11 @@ export class SidebarComponent implements OnInit {
                     localStorage.setItem("Token", response["Token"]);
                     localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
                     localStorage.setItem("EnvironmentModule", environment.Module); 
-                    this.menuItems = JSON.parse(localStorage.getItem("Menu"));
+                    this.menuItems = JSON.parse(this.cookieService.get(CommonConstant.MENU));
                 });
             }
             else
-                this.menuItems = JSON.parse(localStorage.getItem(CommonConstant.MENU));
+                this.menuItems = JSON.parse(this.cookieService.get(CommonConstant.MENU));
         }
     }
     genParam(params: [{ 'Attr': string, 'Value': string }]) {

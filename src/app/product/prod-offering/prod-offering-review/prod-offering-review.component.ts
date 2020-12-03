@@ -7,6 +7,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-prod-offering-review',
@@ -21,7 +22,7 @@ export class ProdOfferingReviewComponent implements OnInit {
     ApprovedById: ['', Validators.required],
     Notes: ['', Validators.required]
   });
-  constructor(private toastr: NGXToastrService, private http: HttpClient, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
+  constructor(private toastr: NGXToastrService, private http: HttpClient, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       if (params["ProdOfferingHId"] != null) {
         this.ProdOfferingHId = params["ProdOfferingHId"];
@@ -60,7 +61,7 @@ export class ProdOfferingReviewComponent implements OnInit {
       });
   }
   async ClaimTask(WfTaskListId) {
-    var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var currentUserContext = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
     var wfClaimObj = { pWFTaskListID: WfTaskListId, pUserID: currentUserContext[CommonConstant.USER_NAME], isLoading: false };
     this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(() => { });
   }

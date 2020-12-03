@@ -33,7 +33,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             this.count++;
         }
 
-        var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+        var currentUserContext = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
         var token: string = "";
         var myObj;
         let today = new Date();
@@ -92,7 +92,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Methods', 'POST') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Headers', 'Content-Type,Accept,Authorization') });
         request = request.clone({ body: myObj });
-        AdInsHelper.InsertLog(request.url, "API", request.body);
+        AdInsHelper.InsertLog(this.cookieService, request.url, "API", request.body);
         console.log(JSON.stringify(request.body));
         // if (request.url.includes("Add") || request.url.includes("Edit") || request.url.includes("Delete")) {
         //     var q = "AddQueue";

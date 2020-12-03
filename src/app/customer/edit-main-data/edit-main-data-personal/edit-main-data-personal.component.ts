@@ -16,6 +16,7 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-edit-main-data-personal',
@@ -64,7 +65,7 @@ export class EditMainDataPersonalComponent implements OnInit {
   inputAddressObj: InputAddressObj;
   UcAddressObj: UcAddressObj = new UcAddressObj();
   
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService, private cookieService: CookieService) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = URLConstant.GetCustPersonalbyCustId;
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
@@ -82,7 +83,7 @@ export class EditMainDataPersonalComponent implements OnInit {
   }
 
   async ngOnInit() {
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
