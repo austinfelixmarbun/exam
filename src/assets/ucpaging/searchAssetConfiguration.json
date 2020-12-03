@@ -82,8 +82,7 @@
       }
     ],
     "querystring": { 
-      "select": "SELECT ASSET_TYPE_CODE AS AssetTypeCode, ASSET_TYPE_NAME AS AssetTypeName, IS_ACTIVE AS IsActive, ASSET_TYPE_ID AS AssetTypeId",
-      "from": "FROM dbo.ASSET_TYPE WITH(NOLOCK)"
+      "name": "searchAssetConfiguration"
     },
     "bodyList": [
       {

@@ -18,9 +18,7 @@
           }
         ],
         "querystring": {
-            "select": "SELECT VERF_QUESTION_GRP_CODE AS VerfQuestionGrpCode, VERF_QUESTION_GRP_NAME AS VerfQuestionGrpName, VERF_QUESTION_GRP_H_ID AS VerfQuestionGrpHId",
-            "from": " FROM DBO.VERF_QUESTION_GRP_H WITH(NOLOCK) ", 
-            "where": "WHERE VERF_QUESTION_GRP_H_ID = {0}" 
+            "name": "viewVerifQuestGrpMbr"
         }
       }
     ]

@@ -18,9 +18,7 @@
         }
       ],
       "querystring": {
-          "select": "SELECT VERF_SCHEME_CODE AS VerfSchmCode, VERF_SCHEME_NAME AS VerfSchmName, VERF_SCHEME_H_ID AS VerfSchmHId",
-          "from": "FROM DBO.VERF_SCHEME_H WITH(NOLOCK)", 
-          "where": "WHERE VERF_SCHEME_H_ID = {0}" 
+          "name": "viewVerifQuestSchmMbr"
       }
     }
   ]

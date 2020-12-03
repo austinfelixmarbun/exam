@@ -20,9 +20,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT REF_BIZ_UNIT_ID As RefBizUnitId,BIZ_UNIT_CODE AS BusinessUnitCode, BIZ_UNIT_NAME AS BusinessUnitName",
-        "from": "FROM dbo.REF_BIZ_UNIT WITH(NOLOCK)",
-        "where": "WHERE IS_ACTIVE = 1"
+        "name": "lookupEmployeeBusinessUnit"
     },
     "headerList": [
         {

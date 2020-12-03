@@ -9,6 +9,7 @@ import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.mod
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-vendor-branch-office-member-add',
@@ -81,7 +82,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
 
     this.http.post(URLConstant.AddListVendorOfficeMember, obj).subscribe(
       (response) => {
-        this.router.navigate(['/Vendor/Branch/Member/Paging'], { queryParams: { VendorId: this.VendorId } });
+        AdInsHelper.RedirectUrl(this.router,["/Vendor/Branch/Member/Paging"],{ "VendorId": this.VendorId });
       });
   }
 }

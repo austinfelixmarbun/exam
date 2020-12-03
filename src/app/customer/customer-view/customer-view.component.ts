@@ -5,6 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-customer-view',
@@ -25,8 +26,9 @@ export class CustomerViewComponent implements OnInit {
   getCustByCustIdUrl: string;
   viewCustJobDataAddress: string;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) { 
+  constructor(private http: HttpClient, private route: ActivatedRoute, private location: Location) { 
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
+    this.location.replaceState(environment.FoundationR3Web + "/View/Customer/");
   }
 
   ngOnInit() {

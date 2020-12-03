@@ -15,6 +15,7 @@ import { String, StringBuilder } from 'typescript-string-operations';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-working-hour-d-detail',
@@ -213,7 +214,7 @@ export class WorkingHourDDetailComponent implements OnInit {
     this.http.post(this.addUrl, this.listWorkingHourSchmDObj).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(["/CommonSetting/WorkingHour"]);
+        AdInsHelper.RedirectUrl(this.router,['/CommonSetting/WorkingHour'],{});
       }
     );
   }

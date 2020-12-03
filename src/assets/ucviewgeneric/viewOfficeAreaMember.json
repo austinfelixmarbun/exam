@@ -18,9 +18,7 @@
           } 
         ],
         "querystring": {
-            "select": "SELECT AREA_CODE AS AreaCode, AREA_NAME AS AreaName",
-            "from": "FROM dbo.REF_OFFICE_AREA WITH(NOLOCK) ", 
-            "where": "WHERE REF_OFFICE_AREA_ID = {0}" 
+            "name": "viewOfficeAreaMember"
         }
       }
     ]

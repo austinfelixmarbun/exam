@@ -27,9 +27,7 @@
                 }
             ],
             "querystring": {
-                "select":"SELECT  C.DESCR AS Descri, A.VENDOR_GRP_CODE AS VendorGrpCode,A.VENDOR_GRP_NAME AS VendorGrpName, A.IS_ACTIVE AS IsActive",
-               "from": "FROM dbo.VENDOR_GRP A WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER C WITH(NOLOCK) ON C.MASTER_CODE = A.MR_VENDOR_CATEGORY_CODE AND C.REF_MASTER_TYPE_CODE = 'VENDOR_CATEGORY'",
-                "where":"WHERE A.VENDOR_GRP_ID = {0}"
+                "name":"viewVendorGrp"
             }
         }
     ]

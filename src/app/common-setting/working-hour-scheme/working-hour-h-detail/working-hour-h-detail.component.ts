@@ -7,6 +7,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NgForm, FormBuilder, Validators } from '@angular/forms';
 import { WorkingHourSchmHObj } from 'app/shared/model/WorkingHourSchmHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-working-hour-h-detail',
@@ -167,7 +168,7 @@ export class WorkingHourHDetailComponent implements OnInit {
       this.http.post(this.addUrl, this.workingHourSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/CommonSetting/WorkingHour"]);
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/WorkingHour'],{});
         }
       );
     } else {
@@ -177,7 +178,7 @@ export class WorkingHourHDetailComponent implements OnInit {
       this.http.post(this.editUrl, this.workingHourSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/CommonSetting/WorkingHour"]);
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/WorkingHour'],{});
         }
       );
     }

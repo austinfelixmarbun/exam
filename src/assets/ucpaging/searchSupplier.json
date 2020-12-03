@@ -60,9 +60,7 @@
         }
     ],
     "querystring": {
-        "select": " SELECT vdr.MR_VENDOR_CLASS AS MrVendorClass, vdr.VENDOR_ID AS VendorId, vdr.MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode, vdr.VENDOR_CODE AS BranchCode, vdr.VENDOR_NAME AS BranchName, ADDR AS BranchAddress, vdr.VENDOR_RATING AS BranchRating, vdr.IS_ACTIVE AS IsActive",
-        "from": "FROM dbo.VENDOR vdr WITH(NOLOCK) LEFT JOIN dbo.VENDOR_ADDR vaddr WITH(NOLOCK) on vdr.VENDOR_ID = vaddr.VENDOR_ID AND vaddr.MR_ADDR_TYPE_CODE ='TAX'",
-        "where": "WHERE vdr.MR_VENDOR_CLASS = N'{0}'"
+        "name": "searchSupplier"
     },
     "headerList": [
         {

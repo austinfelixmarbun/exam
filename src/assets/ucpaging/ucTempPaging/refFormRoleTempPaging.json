@@ -41,9 +41,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT ROLE_CODE AS RoleCode, ROLE_NAME AS RoleName, REF_ROLE_ID AS RefRoleId, IS_ACTIVE AS IsActive",
-        "from": "FROM dbo.REF_ROLE WITH(NOLOCK)",
-        "where": "WHERE IS_ACTIVE = 1"
+        "name": "refFormRoleTempPaging"
     },
     "headerList": [
         {

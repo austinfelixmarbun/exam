@@ -45,11 +45,14 @@
                         </div>
                         <div class="form-actions right">
                             <button type="button" class="btn btn-raised btn-warning mr-1"
-                                [routerLink]="['/Office/OfficeArea']" translate>
+                                [routerLink]="['/Office/OfficeArea']" skipLocationChange translate>
                                 <i class="fa fa-arrow-left"></i> Cancel
                             </button>
                             <button type="submit" class="btn btn-raised btn-primary" translate>
                                 <i class="far fa-check-square"></i> Save
+                            </button>
+                            <button type="button" (click)="TestCookies()" class="btn btn-raised btn-primary" translate>
+                                <i class="far fa-check-square"></i> Test Cookies
                             </button>
                         </div>
                     </form>

@@ -3,20 +3,18 @@ import { MatDialog } from '@angular/material';
 import { RolepickComponent } from 'app/shared/rolepick/rolepick.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
-import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { CurrentUserContextService } from 'app/shared/CurrentUserContext/current-user-context.service';
 import { AdInsHelper } from '../AdInsHelper';
 import { URLConstant } from '../constant/URLConstant';
 import { CommonConstant } from '../constant/CommonConstant';
+import { CookieService } from 'ngx-cookie';
 
 @Injectable()
 export class RolePickService {
     constructor(public dialog: MatDialog, private http: HttpClient,
         private currentUserContextService: CurrentUserContextService,
-        private router: Router) { }
+        private router: Router, private cookieService: CookieService) { }
     openDialog(data, type = ""): void {
         if (type == "modal") {
             var loginByRole = environment.FoundationR3Url + URLConstant.LoginByToken;
@@ -24,8 +22,8 @@ export class RolePickService {
                 RequestDateTime: localStorage.getItem(CommonConstant.BUSINESS_DATE_RAW),
                 Ip: "",
                 RowVersion: ""
-
             };
+
             this.http.post(loginByRole, roleObject2).subscribe(
                 (response) => {
                     const object = {
@@ -62,22 +60,13 @@ export class RolePickService {
                     RowVersion: ""
 
                 };
-                this.http.post(url, roleObject).subscribe(
+                this.http.post(url, roleObject, { withCredentials: true}).subscribe(
                     (response) => {
                         localStorage.setItem("Menu", JSON.stringify(response["returnObject"]));
-                        localStorage.setItem("Token", response["Token"]);
+                        this.cookieService.put('access_token', response['Token']);
                         localStorage.setItem("EnvironmentModule", environment.Module);
-                        AdInsHelper.CreateUserAccess(response);
-                        // var currentUserContext = new CurrentUserContext;
-                        // currentUserContext.UserName = localStorage.getItem("Username");
-                        // currentUserContext.Office = item.OfficeCode;
-                        // currentUserContext.Role = item.RoleCode;
-                        // currentUserContext.BusinessDate = item.BusinessDt;
-                        // localStorage.setItem("BusinessDateRaw",item.BusinessDt);
-                        // var DateParse = formatDate(item.BusinessDt, 'yyyy/MM/dd', 'en-US');
-                        // localStorage.setItem("BusinessDate", DateParse);
-                        // localStorage.setItem("UserAccess", JSON.stringify(response["Identity"]));
-                        // this.currentUserContextService.addCurrentUserContext(currentUserContext);
+                        localStorage.setItem("Token", response["Token"]);
+                        AdInsHelper.CreateUserAccess(this.cookieService, response);
                         this.router.navigate(['dashboard/dash-board']);
                     }
                 )

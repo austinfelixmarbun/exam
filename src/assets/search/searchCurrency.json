@@ -67,8 +67,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.REF_CURR_ID as refCurrId,A.CURR_CODE as currCode,A.CURR_NAME as currName,A.IS_ACTIVE as isActive",
-    "from": "FROM REF_CURR A WITH(NOLOCK)"
+    "name": "searchCurrency_2"
   },
   "bodyList": [
     {

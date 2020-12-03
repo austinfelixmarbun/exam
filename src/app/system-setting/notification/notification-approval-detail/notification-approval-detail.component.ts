@@ -11,6 +11,7 @@ import { NotificationHObj } from 'app/shared/model/NotificationHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-notification-approval-detail',
@@ -100,7 +101,7 @@ export class NotificationApprovalDetailComponent implements OnInit {
       this.http.post(this.submitUrl, this.notificationHObj).subscribe(
         response => {
           this.toastr.successMessage(resultForMsg + " " + response["Message"]);
-          this.router.navigate(["/SystemSetting/NotificationApproval"]);
+          AdInsHelper.RedirectUrl(this.router,["/SystemSetting/NotificationApproval"],{ });
         }
       );
   }

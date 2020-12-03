@@ -9,6 +9,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-score-category-type',
@@ -91,7 +92,7 @@ export class ScoreCategoryTypeComponent implements OnInit {
         //SAVE
         (response) => {
           this.service.successMessage(response["Message"]);
-          this.router.navigate(['/CommonSetting/ScoreCategory/Paging']);
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/ScoreCategory/Paging'],{});
         },
         (error) => {
           this.service.typeErrorCustom(error);
@@ -104,7 +105,7 @@ export class ScoreCategoryTypeComponent implements OnInit {
       this.httpClient.post(URLConstant.EditScoreCategorySchmH, this.scoreCategorySchmHObj).subscribe(
         (response) => {
           this.service.successMessage(response["Message"]);
-          this.router.navigate(['/CommonSetting/ScoreCategory/Paging']);
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/ScoreCategory/Paging'],{});
         },
         (error) => {
           this.service.typeErrorCustom(error);

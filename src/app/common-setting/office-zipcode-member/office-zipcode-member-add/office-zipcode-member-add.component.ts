@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-office-zipcode-member-add',
@@ -201,7 +202,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
     this.http.post(this.addUrl, zipCodeMemberList).subscribe(
       (response) => {
           this.toastr.successMessage(response['message']);
-          this.router.navigateByUrl('/commonSetting/officeZipcodeMember/Paging?refOfficeId=' + this.refOfficeId);
+          AdInsHelper.RedirectUrl(this.router,["/commonSetting/officeZipcodeMember/Paging"],{ "refOfficeId": this.refOfficeId });
       });
 
   }

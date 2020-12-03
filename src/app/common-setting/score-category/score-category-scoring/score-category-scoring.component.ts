@@ -9,6 +9,7 @@ import { ScoreCategorySchmHObj } from 'app/shared/model/ScoreCategory/ScoreCateg
 import { ScoreCategorySchmDObj } from 'app/shared/model/ScoreCategory/ScoreCategorySchmDObj.model';
 import { ListScoreCategorySchmDObj } from 'app/shared/model/ScoreCategory/ListScoreCategorySchmDObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-score-category-scoring',
@@ -151,7 +152,7 @@ export class ScoreCategoryScoringComponent implements OnInit {
       //SAVE
       (response) => {
         this.toastr.successMessage(response["Message"]);
-        this.router.navigate(['/CommonSetting/ScoreCategory/Paging']);
+        AdInsHelper.RedirectUrl(this.router,['/CommonSetting/ScoreCategory/Paging'],{});
       },
       (error) => {
         this.toastr.typeErrorCustom(error);

@@ -9,6 +9,7 @@ import { HttpClient } from "@angular/common/http";
 import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { URLConstant } from "app/shared/constant/URLConstant";
+import { AdInsHelper } from "app/shared/AdInsHelper";
 
 @Component({
   selector: "app-org-add-edit",
@@ -87,10 +88,8 @@ export class OrgAddEditComponent implements OnInit {
             //SAVE
             this.http.post(this.apiUrl, this.orgObj).subscribe(
               response => {
-
-
                 this.service.successMessage(response["message"]);
-                this.router.navigateByUrl("/organization/organization");
+                AdInsHelper.RedirectUrl(this.router,["/organization/organization"],{});
               }
             );
           }
@@ -124,7 +123,7 @@ export class OrgAddEditComponent implements OnInit {
             this.http.post(this.apiUrl, this.orgObj).subscribe(
               response => {
                 this.service.typeSave(response["message"]);
-                this.router.navigateByUrl("/organization/organization");
+                AdInsHelper.RedirectUrl(this.router,["/organization/organization"],{});
               });
           }
         );

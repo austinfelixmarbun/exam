@@ -12,6 +12,7 @@ import { HolidayCopyObj } from 'app/shared/model/HolidayCopy.Model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-holiday-detail',
@@ -38,7 +39,7 @@ export class HolidayDetailComponent implements OnInit {
   }
 
   AddNavigate() {
-    this.router.navigate(['/CommonSetting/Holiday/Detail/Add'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
+    AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Holiday/Detail/Add'],{ "HolidaySchmHId": this.HolidaySchmHId })
   }
 
   ngOnInit() {
@@ -86,7 +87,7 @@ export class HolidayDetailComponent implements OnInit {
 
       this.http.post(URLConstant.CopyHolidaySchmH, this.copyHoliday).subscribe(
         (response) => {
-          this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Holiday/Detail/'],{ HolidaySchmHId: this.HolidaySchmHId })
           this.toastr.successMessage(response['message']);
         },
         (error) => {

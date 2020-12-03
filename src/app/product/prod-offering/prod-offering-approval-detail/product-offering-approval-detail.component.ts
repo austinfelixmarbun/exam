@@ -6,6 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-product-offering-approval-detail',
@@ -75,13 +76,13 @@ export class ProductOfferingApprovalDetailComponent implements OnInit {
     this.http.post(URLConstant.UpdateProdOfferingPostApv, data).subscribe(
       () => {
         this.toastr.successMessage("Success");
-        this.router.navigate(["/Product/OfferingApproval"]);
+        AdInsHelper.RedirectUrl(this.router,["/Product/OfferingApproval"],{ });
       }
     );
   }
 
   onCancelClick()
   {
-    this.router.navigate(["/Product/OfferingApproval"]);
+    AdInsHelper.RedirectUrl(this.router,["/Product/OfferingApproval"],{ });
   }
 }

@@ -84,8 +84,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT ECONOMIC_SECTOR_CODE as EconomicSectorCode, REF_ECONOMIC_SECTOR_ID as RefEconomicSectorId, ECONOMIC_SECTOR_NAME as EconomicSectorName, REG_RPT_CODE as RegRptCode, IS_ACTIVE as IsActive",
-    "from": "FROM dbo.REF_ECONOMIC_SECTOR WITH(NOLOCK)"
+    "name": "searchEconomicSector"
   },
   "bodyList": [
     {

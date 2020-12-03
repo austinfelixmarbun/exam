@@ -15,6 +15,7 @@ import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 
 @Component({
@@ -433,7 +434,7 @@ export class OfficeAddComponent implements OnInit {
         this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
           (response) => {
             this.toastr.successMessage(response['message']);
-            this.router.navigate(["/Office/Paging"]);
+            AdInsHelper.RedirectUrl(this.router,["/Office/Paging"],{});
           }
         );
       }
@@ -441,7 +442,7 @@ export class OfficeAddComponent implements OnInit {
         this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
           (response) => {
             this.toastr.successMessage(response['message']);
-            this.router.navigate(["/Office/Paging"]);
+            AdInsHelper.RedirectUrl(this.router,["/Office/Paging"],{});
           }
         );
       }
@@ -454,7 +455,7 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(this.editUrl, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          this.router.navigate(["/Office/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,["/Office/Paging"],{});
         }
       );
 

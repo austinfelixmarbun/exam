@@ -6,6 +6,7 @@ import { CurrObj } from 'app/shared/model/CurrObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-currency-add',
@@ -100,7 +101,7 @@ export class CurrencyAddComponent implements OnInit {
       this.http.post(this.addUrl, this.currObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/CommonSetting/Currency/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,["/CommonSetting/Currency/Paging"],{});
         }
       );
     } else {
@@ -112,7 +113,7 @@ export class CurrencyAddComponent implements OnInit {
       this.http.post(this.editUrl, this.currObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/CommonSetting/Currency/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,["/CommonSetting/Currency/Paging"],{});
         }
       );
     }

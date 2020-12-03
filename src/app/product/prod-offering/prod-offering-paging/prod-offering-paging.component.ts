@@ -4,6 +4,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-prod-offering-paging',
@@ -46,11 +47,11 @@ export class ProdOfferingPagingComponent implements OnInit {
   {
     if(e.RowObj.DraftProdOfferingHId == null)
     {
-      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.prodOfferingHId, "mode" : "edit" } });
+      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/add"],{ "ProdOfferingHId": e.RowObj.prodOfferingHId, "mode" : "edit" });
     }
     else
     {
-      this.router.navigate(["/Product/ProdOffering/add"], { queryParams: { "ProdOfferingHId": e.RowObj.DraftProdOfferingHId, "mode" : "edit" } });
+      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/add"],{ "ProdOfferingHId": e.RowObj.DraftProdOfferingHId, "mode" : "edit" });
     }
   }
 

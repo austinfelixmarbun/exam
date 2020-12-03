@@ -1,7 +1,7 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
     <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/SystemSetting/RefForm/RoleMapping']"
-      [queryParams]="{RefFormId: RefFormId}" translate>
+      [queryParams]="{RefFormId: RefFormId}" skipLocationChange translate>
       <i class="far fa-window-close"></i> Cancel
     </button>
     <button type="submit" (click)="SaveListAuthForm()" class="btn btn-raised btn-primary" translate>

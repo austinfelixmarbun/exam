@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-office-area-add-edit',
@@ -59,6 +60,13 @@ export class OfficeAreaAddEditComponent implements OnInit {
     }
   }
 
+  TestCookies() {
+    console.log('Shinano');
+    var url = environment.FoundationR3Url + "/Authenticate/TestCookies";
+    this.http.post(url, this.refOfficeAreaObj).subscribe(
+      (response) => { });
+  }
+
   SaveForm() {
     this.refOfficeAreaObj = new RefOfficeAreaObj();
     this.refOfficeAreaObj = this.OfficeAreaForm.value;
@@ -69,7 +77,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditRefOfficeArea, this.refOfficeAreaObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Office/OfficeArea');
+          AdInsHelper.RedirectUrl(this.router,["/Office/OfficeArea"],{});
         });
     }
     else {
@@ -77,7 +85,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddRefOfficeArea, this.refOfficeAreaObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Office/OfficeArea');
+          AdInsHelper.RedirectUrl(this.router,["/Office/OfficeArea"],{});
         });
     }
   }

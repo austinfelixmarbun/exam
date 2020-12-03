@@ -72,8 +72,7 @@
         }
       ],
       "querystring": {
-        "select": "SELECT A.WORKING_HOUR_SCHM_H_ID as workingHourSchmHId,A.WORKING_HOUR_SCHM_CODE as workingHourSchmCode,A.WORKING_HOUR_SCHM_NAME as workingHourSchmName,A.IS_ACTIVE as isActive",
-        "from": "FROM dbo.WORKING_HOUR_SCHM_H A WITH(NOLOCK)"
+        "name": "searchWorkingHourSchm"
         },
       "bodyList": [
         {

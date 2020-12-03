@@ -36,7 +36,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     UcgridfooterModule,
     TranslateModule,
     UcSubsectionModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
   ],
   declarations: [
   ]

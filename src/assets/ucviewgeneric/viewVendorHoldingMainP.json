@@ -49,9 +49,7 @@
 
         ],
         "querystring": {
-            "select":"SELECT MR_ID_TYPE_CODE AS IdType,ID_NO AS IdNo,ESTABLISHMENT_DT AS EstablishmentDt,PARTNERSHIP_DT AS PartnershipDt,VENDOR_RATING AS VendorRating,EMAIL AS Email,MOBILE_PHN_NO_1 AS Mp1,MOBILE_PHN_NO_2 AS Mp2",
-            "from":"FROM dbo.VENDOR WITH(NOLOCK)",
-            "where":"WHERE MR_VENDOR_CLASS = N'HOLDING' AND VENDOR_ID = {0}"
+            "name":"viewVendorHoldingMainP"
         }
       }
     ]

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-product-ho-approval',
@@ -65,7 +66,7 @@ export class ProductHOApprovalComponent implements OnInit {
       if (String.Format("{0:L}", ev.RowObj.CURRENT_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
         this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_PROCESS_TASK);
       } else {
-        this.router.navigate(["/Product/HOApproval/Detail"], { queryParams: { "ProdHId": ev.RowObj.ProdHId, "TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId } });
+        AdInsHelper.RedirectUrl(this.router,["/Product/HOApproval/Detail"],{ "ProdHId": ev.RowObj.ProdHId, "TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId });
       }
     }
     else if (ev.Key == "HoldTask") {

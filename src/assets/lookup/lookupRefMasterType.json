@@ -39,8 +39,7 @@
     ],
   
     "querystring": {
-      "select": "SELECT REF_MASTER_TYPE_CODE AS RefMasterTypeCode, DESCR AS Descr",
-      "from": "FROM dbo.REF_MASTER_TYPE WITH(NOLOCK)"
+      "name": "lookupRefMasterType"
     },
   
     "bodyList": [

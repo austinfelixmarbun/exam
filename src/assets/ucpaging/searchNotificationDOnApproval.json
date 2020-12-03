@@ -37,8 +37,7 @@
       }
     ],
     "querystring": {
-      "select": "SELECT RU.USERNAME AS Username, RE.EMP_NAME AS EmpName, ND.NOTIFICATION_H_ID AS NotificationHId, ND.NOTIFICATION_D_ID AS NotificationDId",
-      "from": "FROM dbo.NOTIFICATION_D ND WITH(NOLOCK) LEFT JOIN dbo.REF_USER RU WITH(NOLOCK) ON RU.REF_USER_ID = ND.REF_USER_ID LEFT JOIN dbo.REF_EMP RE WITH(NOLOCK) ON RE.REF_EMP_ID = RU.REF_EMP_ID"
+      "name": "searchNotificationDOnApproval"
     },
     "bodyList": [
       {

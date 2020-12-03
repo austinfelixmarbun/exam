@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 
 @Component({
@@ -76,7 +77,7 @@ export class RoleAddEditComponent implements OnInit {
       this.httpClient.post(URLConstant.AddRefRole, this.refRoleObj).subscribe(
         response => {
             this.service.successMessage(response["Message"]);
-            this.router.navigate(["/SystemSetting/Role"]);
+            AdInsHelper.RedirectUrl(this.router,["/SystemSetting/Role"],{ });
         }
       );
     } else {
@@ -88,7 +89,7 @@ export class RoleAddEditComponent implements OnInit {
       this.httpClient.post(URLConstant.EditRefRole, this.refRoleObj).subscribe(
         response => {
           this.service.successMessage(response["Message"]);
-          this.router.navigate(["/SystemSetting/Role"]);
+          AdInsHelper.RedirectUrl(this.router,["/SystemSetting/Role"],{ });
         }
       );
     }

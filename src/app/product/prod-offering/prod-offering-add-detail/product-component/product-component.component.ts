@@ -7,6 +7,7 @@ import { WizardComponent } from 'angular-archwizard';
 import { ListRefProductOfferingDetailObj } from 'app/shared/model/ListRefProductOfferingDetailObj.Model'
 import { RefProductOfferingDetailObj } from 'app/shared/model/RefProductOfferingDetailObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-product-component',
@@ -92,11 +93,11 @@ export class ProductComponentComponent implements OnInit {
   {
     if(this.source == "return")
     {
-      this.router.navigate(["/Product/ProdOffering/Returnpaging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/Returnpaging"],{ });
     }
     else
     {
-      this.router.navigate(["/Product/ProdOffering/Paging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/Paging"],{ });
     }
   }
 

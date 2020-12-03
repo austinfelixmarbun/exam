@@ -40,8 +40,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT AREA_CODE AS AreaCode, IS_ACTIVE AS IsActive, AREA_NAME AS AreaName, REF_OFFICE_AREA_ID AS RefOfficeAreaId",
-        "from": "FROM dbo.REF_OFFICE_AREA WITH(NOLOCK)"
+        "name": "searchOfficeArea"
     },
     "headerList": [
         {

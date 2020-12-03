@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionGrpHObj } from 'app/shared/model/VerfQuestionGrpHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-verification-question-group-add-edit',
@@ -62,7 +63,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditVerfQuestionGrpH, this.verfQuestionGrpHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(['/Verification/QuestionGroup/Paging']);
+          AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionGroup/Paging"],{});
         });
     }
     else {
@@ -70,7 +71,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddVerfQuestionGrpH, this.verfQuestionGrpHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(['/Verification/QuestionGroup/Paging']);
+          AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionGroup/Paging"],{});
         });
     }
   }

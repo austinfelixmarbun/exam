@@ -96,8 +96,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.AREA_CODE_2 AS areaCode2, A.REF_ZIPCODE_ID AS refZipcodeId, A.AREA_CODE_1 AS areaCode1, A.CITY AS city, A.ZIPCODE AS zipcode, A.REF_PROV_DISTRICT_ID as refProvDistrictId, A.SUB_ZIPCODE AS subZipcode, B.PROV_DISTRICT_NAME as provDistrictName",
-    "from": "FROM dbo.REF_ZIPCODE A WITH(NOLOCK) LEFT JOIN dbo.REF_PROV_DISTRICT B WITH(NOLOCK) ON A.REF_PROV_DISTRICT_ID=B.REF_PROV_DISTRICT_ID"
+    "name": "searchZip"
   },
 
   "bodyList": [

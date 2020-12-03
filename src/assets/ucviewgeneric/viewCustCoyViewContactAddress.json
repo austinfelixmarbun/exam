@@ -53,9 +53,7 @@
           }
         ],
         "querystring": {
-          "select": "SELECT CA.ADDR AS Addr, CONCAT(CA.AREA_CODE_4, '/', CA.AREA_CODE_3) AS RtRw, CA.AREA_CODE_1 AS Kecamatan, CA.AREA_CODE_2 AS Kelurahan, CA.CITY AS City, CA.ZIPCODE AS ZipCode, CONCAT(CA.PHN_AREA_1,' ',CA.PHN_1, '-',CA.PHN_EXT_1) AS Phone1, CONCAT(CA.PHN_AREA_2,' ',CA.PHN_2, '-',CA.PHN_EXT_2) AS Phone2, CONCAT(CA.FAX_AREA,' ',CA.FAX) AS Fax",
-          "from": "FROM dbo.CUST_COMPANY_CONTACT_PERSON CCCP WITH(NOLOCK) JOIN dbo.CUST_COMPANY CC ON CC.CUST_COMPANY_ID = CCCP.CUST_COMPANY_ID JOIN dbo.CUST_ADDR CA WITH(NOLOCK) ON CA.CUST_ID = CC.CUST_ID AND CA.MR_CUST_ADDR_TYPE_CODE = 'CONTACT' JOIN dbo.CUST C WITH(NOLOCK) ON C.CUST_ID = CC.CUST_ID",
-          "where": "WHERE C.CUST_ID = {0}"
+          "name": "viewCustCoyViewContactAddress"
         }
       }
     ]
