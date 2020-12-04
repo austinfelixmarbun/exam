@@ -63,7 +63,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
     else {
       this.http.post(roleUrl, roleObject, { withCredentials: true}).subscribe(
         (response) => {
-          // localStorage.setItem("Token", response["Token"]);
+          localStorage.setItem("Token", response["Token"]);
           localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
           localStorage.setItem("EnvironmentModule", environment.Module);
           AdInsHelper.CreateUserAccess(this.cookieService, response);
