@@ -29,9 +29,7 @@
           }
         ],
         "querystring": {
-          "select": "SELECT T.REF_NO AS AppNo, O.OFFICE_NAME AS OfficeName, C.CUST_NAME AS CustName, T.CUST_DATA_TRX_ID AS AppId, T.PROD_OFFERING_NAME AS ProdOfferingName, T.PROD_OFFERING_CODE AS ProdOfferingCode, T.PROD_OFFERING_VERSION AS ProdOfferingVersion",
-          "from": "FROM TASK_UPD_CUST_DATA AS T INNER JOIN CUST AS C ON T.CUST_NO = C.CUST_NO INNER JOIN REF_OFFICE AS O ON T.REF_OFFICE_ID = O.REF_OFFICE_ID",
-          "where": "WHERE T.CUST_DATA_TRX_ID = {0}"
+          "name": "viewUpdateMasterCust"
         }
       }
     ]
