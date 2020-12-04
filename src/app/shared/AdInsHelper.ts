@@ -14,7 +14,7 @@ export class AdInsHelper {
 
         var listPageAccess = [];
         listPageAccess = JSON.parse(localStorage.getItem(CommonConstant.PAGE_ACCESS));
-        var userAcc = JSON.parse(cookieService.get(CommonConstant.USER_ACCESS));
+        var userAcc = cookieService.get(CommonConstant.USER_ACCESS) ? JSON.parse(cookieService.get(CommonConstant.USER_ACCESS)) : null;
         var pageAccess = listPageAccess;
         if (listPageAccess == null) {
             pageAccess = [];

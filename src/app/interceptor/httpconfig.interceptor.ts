@@ -33,7 +33,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             this.count++;
         }
 
-        var currentUserContext = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+        var currentUserContext = this.cookieService.get(CommonConstant.USER_ACCESS) ? JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS)) : null;
         var token: string = "";
         var myObj;
         let today = new Date();
@@ -71,7 +71,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             }
             myObj["Ip"] = localStorage.getItem(CommonConstant.LOCAL_IP);
             myObj["RequestDateTime"] = businessDt;
-            token = localStorage.getItem(CommonConstant.TOKEN);
+            token = localStorage.getItem(CommonConstant.TOKEN); 
         }
 
         if (token == null) {
