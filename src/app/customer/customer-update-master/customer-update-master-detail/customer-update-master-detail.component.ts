@@ -47,7 +47,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private router: Router, 
+    private router: Router,
     private cookieService: CookieService
   ) { 
     this.route.queryParams.subscribe(params => {
@@ -167,7 +167,8 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     if(e.StatusCode == 200){
       if(this.MrCustTypeCode == CommonConstant.CustTypePersonal){
         if(this.StepIdx == this.CustPersonalStep["FIN"]){
-          this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+          // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+          AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
         }
         else{
           this.StepIdx++;
@@ -176,7 +177,8 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
       }
       else{
         if(this.StepIdx == this.CustCompanyStep["LEGAL"]){
-          this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+          // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+          AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
         }
         else{
           this.StepIdx++;

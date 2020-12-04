@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UpdateCustPersonalFinDataObj } from 'app/shared/model/UpdateMasterCust/UpdateCustPersonalFinDataObj.Model';
@@ -24,6 +25,8 @@ export class UpdateCustomerFinDataComponent implements OnInit {
   AppCustBankAcc: Array<any>;
   ArrayNum: Array<number>;
   num: number;
+  IsCopyAll: boolean;
+  CustBankAccToDelete: Array<number>;
 
   CustomerFinDataForm = this.fb.group({
     CustPersonalFinDataId: [0],
@@ -52,6 +55,8 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     this.AppCustBankAcc = new Array<any>();
     this.ResponseTab = new EventEmitter<any>();
     this.ArrayNum = new Array<number>();
+    this.IsCopyAll = false;
+    this.CustBankAccToDelete = new Array<number>();
   }
 
   ngOnInit() {
@@ -101,6 +106,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
                         isMasterStmnt = true;
                       }
                       else{
+                        isMasterData = false;
                         isMasterStmnt = false;
                         break;
                       }
@@ -156,6 +162,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     for (let i = 0; i < this.AppCustBankAcc.length; i++) {
       this.AddNewBankAcc(i);
     }
+    this.IsCopyAll = true;
     // this.CalculateFinData();
   }
 
@@ -193,6 +200,19 @@ export class UpdateCustomerFinDataComponent implements OnInit {
   AddNewBankAcc(idx){
     this.AppCustBankAcc[idx]["IsAddedBankAcc"] = true;
     this.AppCustBankAcc[idx]["IsAddedBankStmnt"] = true;
+    var idxToDelete = 0;
+    for (var i = 0; i < this.MainCustBankAcc.length; i++) {
+      if(this.MainCustBankAcc[i]["RefBankId"] == this.AppCustBankAcc[idx]["RefBankId"] &&
+          this.MainCustBankAcc[i]["BankName"] == this.AppCustBankAcc[idx]["BankName"] &&
+          this.MainCustBankAcc[i]["BankBranch"] == this.AppCustBankAcc[idx]["BankBranch"] &&
+          this.MainCustBankAcc[i]["BankAccNo"] == this.AppCustBankAcc[idx]["BankAccNo"] &&
+          this.MainCustBankAcc[i]["BankAccName"] == this.AppCustBankAcc[idx]["BankAccName"]){
+        this.CustBankAccToDelete.push(this.MainCustBankAcc[i]["CustBankAccId"]);
+        idxToDelete = i;
+        break;
+      }
+    }
+    this.MainCustBankAcc.splice(idxToDelete, 1);
     var obj = new Object();
     obj["RefBankId"] = this.AppCustBankAcc[idx]["RefBankId"];
     obj["BankName"] = this.AppCustBankAcc[idx]["BankName"];
@@ -253,7 +273,8 @@ export class UpdateCustomerFinDataComponent implements OnInit {
   }
 
   back(){
-    this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
   }
 
   SaveValue(){
@@ -265,6 +286,8 @@ export class UpdateCustomerFinDataComponent implements OnInit {
       }
     }
     formValue["CustBankAccList"] = requestBankAcc;
+    formValue["IsCopyAll"] = this.IsCopyAll;
+    formValue["CustBankAccIdToDelete"] = this.CustBankAccToDelete;
     this.http.post(URLConstant.EditMasterCustFinData, formValue).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
