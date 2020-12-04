@@ -22,6 +22,7 @@ import { UcAddressObj } from "app/shared/model/UcAddressObj.Model";
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { AdInsHelper } from "app/shared/AdInsHelper";
+import { CookieService } from "ngx-cookie";
 
 @Component({
   selector: "app-employee-add",
@@ -80,7 +81,8 @@ export class EmployeeAddComponent implements OnInit {
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     private spinner: NgxSpinnerService,
-    private http: HttpClient
+    private http: HttpClient, 
+    private cookieService: CookieService
   ) {
     this.route.queryParams.subscribe(params => {
       if (params["RefEmpId"] != null) {
@@ -102,7 +104,7 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     this.addressObj = new UcAddressObj();
 

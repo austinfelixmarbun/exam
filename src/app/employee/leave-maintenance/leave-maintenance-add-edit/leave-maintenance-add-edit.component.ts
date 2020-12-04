@@ -12,6 +12,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-leave-maintenance-add-edit',
@@ -40,7 +41,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
   businessDt: Date;
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.apiUrl = URLConstant.GetRefEmpLeaveMngmntById;
     this.addUrl = URLConstant.AddRefEmpLeaveMngmnt;
     this.editUrl = URLConstant.EditRefEmpLeaveMngmnt;
@@ -57,7 +58,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
 
     this.inputEmpLookupObj = new InputLookupObj();
@@ -95,7 +96,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
   }
 
   SaveForm() {
-    var businessDtRaw = new Date(localStorage.getItem(CommonConstant.BUSINESS_DATE_RAW));
+    var businessDtRaw = new Date(this.cookieService.get(CommonConstant.BUSINESS_DATE_RAW));
     var StartDt = new Date(this.RefEmpLeaveMngmntForm.controls["StartDt"].value);
     if (StartDt < businessDtRaw) {
       this.toastr.warningMessage(ExceptionConstant.START_DATE_MUST_EQUAL_OR_MORE_THAN + "Business Date");
@@ -106,7 +107,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
     else {
       this.relmObj = new RefEmpLeaveMngmntObj();
       this.relmObj = this.RefEmpLeaveMngmntForm.value;
-      var Business_Date = localStorage.getItem(CommonConstant.BUSINESS_DATE);
+      var Business_Date = this.cookieService.get(CommonConstant.BUSINESS_DATE);
       var datePipe = new DatePipe("en-US");
       var value = datePipe.transform(Business_Date, "yyyy-MM-dd");
       var businessDt = new Date(value);

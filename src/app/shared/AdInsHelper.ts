@@ -6,14 +6,15 @@ import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie";
 
 export class AdInsHelper {
+
     //Function
-    public static InsertLog(url, type, param = "") {
+    public static InsertLog(cookieService: CookieService, url, type, param = "") {
         let today = new Date();
         var dateNow = formatDate(today, 'yyyy-MM-dd hh:mm:ss', 'en-US');
 
         var listPageAccess = [];
         listPageAccess = JSON.parse(localStorage.getItem(CommonConstant.PAGE_ACCESS));
-        var userAcc = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+        var userAcc = cookieService.get(CommonConstant.USER_ACCESS) ? JSON.parse(cookieService.get(CommonConstant.USER_ACCESS)) : null;
         var pageAccess = listPageAccess;
         if (listPageAccess == null) {
             pageAccess = [];
@@ -66,7 +67,7 @@ export class AdInsHelper {
 
     public static CheckSessionTimeout(cookieService: CookieService) {
         let today = new Date();
-        var businessDtBefore = localStorage.getItem(CommonConstant.LAST_ACCESS_TIME);
+        var businessDtBefore = cookieService.get(CommonConstant.LAST_ACCESS_TIME);
         var businessDtNow = formatDate(today, 'yyyy-MM-dd HH:mm:ss', 'en-US');
         if (businessDtBefore == undefined || businessDtBefore == null) {
             localStorage.setItem("LastAccessTime", businessDtNow);
@@ -98,8 +99,8 @@ export class AdInsHelper {
         cookieService.put("UserAccess", JSON.stringify(response["Identity"]));
     }
 
-    public static IsGrantAccess(formPath) {
-        var temp = localStorage.getItem(CommonConstant.MENU);
+    public static IsGrantAccess(cookieService: CookieService, formPath) {
+        var temp = cookieService.get(CommonConstant.MENU);
         var objectMenu = [];
         objectMenu = JSON.parse(temp);
         if (objectMenu != null) {

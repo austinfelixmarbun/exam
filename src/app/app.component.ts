@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
         //     .catch(err => console.log('Error while establishing connection :('));
 
         // this._hubConnection.on('BroadcastMessage', (type: string, payload: string, user: string) => {
-        //     var currentUser = JSON.parse(localStorage.getItem('UserAccess'));
+        //     var currentUser = JSON.parse(this.cookieService.get('UserAccess'));
         //     var userId = currentUser['refUserId'].toString();
         //     if (userId == user) {
         //         this.msgs.push({ severity: type, summary: payload });

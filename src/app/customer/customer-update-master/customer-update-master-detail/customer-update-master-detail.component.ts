@@ -8,6 +8,7 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import Stepper from 'bs-stepper';
 import { environment } from 'environments/environment';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-customer-update-master-detail',
@@ -46,7 +47,8 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private router: Router
+    private router: Router, 
+    private cookieService: CookieService
   ) { 
     this.route.queryParams.subscribe(params => {
       if (params["CustDataTrxId"] != null) {
@@ -103,7 +105,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   }
 
   claimTask() {
-    var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var currentUserContext = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
     var wfClaimObj = { pWFTaskListID: this.WfTaskListId, pUserID: currentUserContext[CommonConstant.USER_NAME] };
     this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(
       (response) => {

@@ -13,6 +13,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-product-ho-approval',
@@ -23,9 +24,9 @@ export class ProductHOApprovalComponent implements OnInit {
 
   inputPagingObj: any;
   arrCrit: any;
-  userContext: CurrentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+  userContext: CurrentUserContext = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
 
-  constructor(private toastr: NGXToastrService, private httpClient: HttpClient, private router: Router) { }
+  constructor(private toastr: NGXToastrService, private httpClient: HttpClient, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit() {
     this.inputPagingObj = new UcpagingModule();

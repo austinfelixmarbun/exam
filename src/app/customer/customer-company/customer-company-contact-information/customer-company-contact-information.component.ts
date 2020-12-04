@@ -15,6 +15,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
 import { formatDate } from '@angular/common';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-customer-company-contact-information',
@@ -76,7 +77,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   });
   inputAddressObj: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -93,7 +94,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.UserAccess = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    this.UserAccess = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
     this.MaxDate = this.UserAccess[CommonConstant.BUSINESS_DT];
     this.UcAddressObj = new UcAddressObj();
     this.inputFieldObj = new InputFieldObj();

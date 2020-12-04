@@ -18,6 +18,7 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-customer-contact-add',
@@ -104,7 +105,7 @@ export class CustomerContactAddComponent implements OnInit {
   criteriaExistingObj: CriteriaObj;
   inputAddressObj: InputAddressObj;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
     this.GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.addCustPersonalContactPersonUrl = URLConstant.AddNewCustPersonalContactPerson;
@@ -118,7 +119,7 @@ export class CustomerContactAddComponent implements OnInit {
   }
   isAdd: any;
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);

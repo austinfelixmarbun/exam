@@ -10,6 +10,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { DOCUMENT } from '@angular/platform-browser';
 import { ExcelService } from '../excel-service/excel-service';
 import { CommonConstant } from '../constant/CommonConstant';
+import { CookieService } from 'ngx-cookie';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -41,7 +42,7 @@ export class SearchComponent implements OnInit {
   amount = 0;
   apiUrl: string;
   arrCrit: any;
-  constructor(private http: HttpClient, private excelService: ExcelService, private _renderer2: Renderer2, @Inject(DOCUMENT) private _document) {
+  constructor(private http: HttpClient, private excelService: ExcelService, private _renderer2: Renderer2, @Inject(DOCUMENT) private _document, private cookieService: CookieService) {
   }
 
   ngOnInit() {
@@ -93,7 +94,7 @@ export class SearchComponent implements OnInit {
         //pengecekan tanggal
         if (data.component[i].type == "datepicker") {
           if (data.component[i].value.includes("BD")) {
-            let businessDate = new Date(JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS)).BusinessDate);
+            let businessDate = new Date(JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS)).BusinessDate);
             var operator = data.component[i].value.charAt(2);
             var dateShow = new Date();
             if (operator == "-") {

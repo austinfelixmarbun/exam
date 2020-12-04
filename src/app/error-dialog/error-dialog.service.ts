@@ -5,13 +5,14 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CookieService } from 'ngx-cookie';
 
 @Injectable()
 export class ErrorDialogService {
-    constructor(public dialog: MatDialog,private http:HttpClient) { }
+    constructor(public dialog: MatDialog,private http:HttpClient, private cookieService: CookieService) { }
     openDialog(data): void {
         //Ini Logout jadi panggil Service untuk Call Logoutnya
-        if(data.status=="001" && localStorage.getItem(CommonConstant.USER_NAME) != undefined)
+        if(data.status=="001" && this.cookieService.get(CommonConstant.USER_NAME) != undefined)
         {   
 
             var url = environment.FoundationR3Url+AdInsConstant.Logout;
