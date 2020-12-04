@@ -27,6 +27,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
   num: number;
   IsCopyAll: boolean;
   CustBankAccToDelete: Array<number>;
+  MonthNames: Array<string>;
 
   CustomerFinDataForm = this.fb.group({
     CustPersonalFinDataId: [0],
@@ -57,6 +58,8 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     this.ArrayNum = new Array<number>();
     this.IsCopyAll = false;
     this.CustBankAccToDelete = new Array<number>();
+    this.MonthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
   }
 
   ngOnInit() {
@@ -102,7 +105,10 @@ export class UpdateCustomerFinDataComponent implements OnInit {
                 if(item["CustBankStmntList"].length == main["CustBankStmntList"].length){
                   for (let i = 0; i < item["CustBankStmntList"].length; i++) {
                     for (const key in item["CustBankStmntList"][i]) {
-                      if(item["CustBankStmntList"][key] == main["CustBankStmntList"][key]){
+                      if(key == "Month"){
+                        item["CustBankStmntList"][i][key] = this.MonthNames[item["CustBankStmntList"][i][key]-1];
+                      }
+                      if(item["CustBankStmntList"][i][key] == main["CustBankStmntList"][i][key]){
                         isMasterStmnt = true;
                       }
                       else{

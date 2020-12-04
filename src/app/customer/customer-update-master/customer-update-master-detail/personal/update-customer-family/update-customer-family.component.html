@@ -42,7 +42,7 @@
               <td style="text-align: left;">{{item.CustName}}</td>
               <td style="text-align: left;">{{item.CustIdType}} / {{item.CustIdNo}}</td>
               <td style="text-align: left;">{{item.CustRelationship}}</td>
-              <td style="text-align: center;">
+              <td style="text-align: center; padding-left: 0;">
                 <a (click)="addFamilyHandler(i)" *ngIf="!item.IsMasterData">
                   Copy
                 </a>
@@ -82,7 +82,7 @@
               <td style="text-align: left;">{{item.CustName}}</td>
               <td style="text-align: left;">{{item.CustIdType}} / {{item.CustIdNo}}</td>
               <td style="text-align: left;">{{item.CustRelationship}}</td>
-              <td style="text-align: center;">
+              <td style="text-align: center; padding-left: 0;">
                 <a (click)="cancelFamilyHandler(i)" *ngIf="!item.IsMasterData">
                   Undo
                 </a>

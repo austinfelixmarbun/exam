@@ -54,7 +54,7 @@
               <td style="text-align: left;">{{item.DocNo}}</td>
               <td style="text-align: left;">{{item.DocDt | date: 'yyyy-MM-dd'}}</td>
               <td style="text-align: left;">{{item.DocExpiredDt | date: 'yyyy-MM-dd'}}</td>
-              <td style="text-align: center;">
+              <td style="text-align: center; padding-left: 0;">
                 <a (click)="addLegalDocHandler(i)" *ngIf="!item.IsMasterData">
                   Copy
                 </a>
@@ -106,7 +106,7 @@
               <td style="text-align: left;">{{item.DocNo}}</td>
               <td style="text-align: left;">{{item.DocDt | date: 'yyyy-MM-dd'}}</td>
               <td style="text-align: left;">{{item.DocExpiredDt | date: 'yyyy-MM-dd'}}</td>
-              <td style="text-align: center;">
+              <td style="text-align: center; padding-left: 0;">
                 <a (click)="cancelLegalDocHandler(i)" *ngIf="!item.IsMasterData">
                   Undo
                 </a>

@@ -48,7 +48,7 @@
               <td style="text-align: left;">{{item.MrCustTypeCodeDescr}}</td>
               <td style="text-align: left;">{{item.SharePrcnt}}</td>
               <td style="text-align: left;">{{item.IsOwner ? 'Yes' : 'No'}}</td>
-              <td style="text-align: center;">
+              <td style="text-align: center; padding-left: 0;">
                 <a (click)="addShareholderHandler(i)" *ngIf="!item.IsMasterData">
                   Copy
                 </a>
@@ -94,7 +94,7 @@
               <td style="text-align: left;">{{item.MrCustTypeCodeDescr}}</td>
               <td style="text-align: left;">{{item.SharePrcnt}}</td>
               <td style="text-align: left;">{{item.IsOwner ? 'Yes' : 'No'}}</td>
-              <td style="text-align: center;">
+              <td style="text-align: center; padding-left: 0;">
                 <a (click)="cancelShareholderHandler(i)" *ngIf="!item.IsMasterData">
                   Undo
                 </a>
