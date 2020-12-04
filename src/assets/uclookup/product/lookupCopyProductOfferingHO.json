@@ -18,8 +18,7 @@
       }
     ],
     "querystring": {
-      "select": "SELECT PO.PROD_OFFERING_CODE AS ProdOfferingCode, PO.PROD_OFFERING_NAME AS ProdOfferingName, PO.PROD_OFFERING_ID AS ProdOfferingId",
-      "from": "FROM dbo.PROD_OFFERING PO WITH(NOLOCK)"
+        "name": "lookupCopyProductOfferingHO"
     },
     "headerList": [
         {
