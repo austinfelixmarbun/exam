@@ -11,8 +11,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT TITLE AS Title, REF_FORM_ID AS RefFormId, CLASS AS Class",
-        "from": "FROM REF_FORM WITH(NOLOCK)"
+        "name": "lookupRefFormParent"
     },
     "headerList": [
         {
