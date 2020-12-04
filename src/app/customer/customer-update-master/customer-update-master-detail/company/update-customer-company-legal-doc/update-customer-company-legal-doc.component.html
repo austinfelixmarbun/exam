@@ -42,7 +42,7 @@
               </th>
               <th style="text-align: left;">
                 <span class="thead-header" name='Action' translate>
-                  ACTION
+                  COPY
                 </span>
               </th>
             </tr>
@@ -56,7 +56,7 @@
               <td style="text-align: left;">{{item.DocExpiredDt | date: 'yyyy-MM-dd'}}</td>
               <td style="text-align: center;">
                 <a (click)="addLegalDocHandler(i)" *ngIf="!item.IsMasterData">
-                  Add as New Data
+                  Copy
                 </a>
               </td>
             </tr>
@@ -94,7 +94,7 @@
               </th>
               <th style="text-align: left;">
                 <span class="thead-header" name='Action' translate>
-                  ACTION
+                  UNDO
                 </span>
               </th>
             </tr>
@@ -108,7 +108,7 @@
               <td style="text-align: left;">{{item.DocExpiredDt | date: 'yyyy-MM-dd'}}</td>
               <td style="text-align: center;">
                 <a (click)="cancelLegalDocHandler(i)" *ngIf="!item.IsMasterData">
-                  Cancel
+                  Undo
                 </a>
               </td>
             </tr>

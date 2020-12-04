@@ -37,7 +37,7 @@
               </th>
               <th style="text-align: left;">
                 <span class="thead-header" name='Action' translate>
-                  ACTION
+                  COPY
                 </span>
               </th>
             </tr>
@@ -50,7 +50,7 @@
               <td style="text-align: left;">{{item.IsOwner ? 'Yes' : 'No'}}</td>
               <td style="text-align: center;">
                 <a (click)="addShareholderHandler(i)" *ngIf="!item.IsMasterData">
-                  Add as New Data
+                  Copy
                 </a>
               </td>
             </tr>
@@ -83,7 +83,7 @@
               </th>
               <th style="text-align: left;">
                 <span class="thead-header" name='Action' translate>
-                  ACTION
+                  UNDO
                 </span>
               </th>
             </tr>
@@ -96,7 +96,7 @@
               <td style="text-align: left;">{{item.IsOwner ? 'Yes' : 'No'}}</td>
               <td style="text-align: center;">
                 <a (click)="cancelShareholderHandler(i)" *ngIf="!item.IsMasterData">
-                  Cancel
+                  Undo
                 </a>
               </td>
             </tr>

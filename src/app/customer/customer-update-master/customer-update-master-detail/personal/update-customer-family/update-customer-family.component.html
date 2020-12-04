@@ -22,17 +22,17 @@
               </th>
               <th style="text-align: left;">
                 <span class="thead-header" name='AppIdTypeIdNo' translate>  
-                  ID Type / ID No.
+                  ID TYPE / ID NO.
                 </span>
               </th>
               <th style="text-align: left;">
                 <span class="thead-header" name='AppRelationship' translate>
-                  Relationship
+                  RELATIONSHIP
                 </span>
               </th>
               <th style="text-align: left;">
                 <span class="thead-header" name='AppAction' translate>
-                  Action
+                  COPY
                 </span>
               </th>
             </tr>
@@ -44,7 +44,7 @@
               <td style="text-align: left;">{{item.CustRelationship}}</td>
               <td style="text-align: center;">
                 <a (click)="addFamilyHandler(i)" *ngIf="!item.IsMasterData">
-                  Add as New Data
+                  Copy
                 </a>
               </td>
             </tr>
@@ -62,17 +62,17 @@
               </th>
               <th style="text-align: left;">
                 <span class="thead-header" name='CustIdTypeIdNo' translate>  
-                  ID Type / ID No.
+                  ID TYPE / ID NO.
                 </span>
               </th>
               <th style="text-align: left;">
                 <span class="thead-header" name='CustRelationship' translate>
-                  Relationship
+                  RELATIONSHIP
                 </span>
               </th>
               <th style="text-align: left;">
                 <span class="thead-header" name='CustAction' translate>
-                  Action
+                  UNDO
                 </span>
               </th>
             </tr>
@@ -84,7 +84,7 @@
               <td style="text-align: left;">{{item.CustRelationship}}</td>
               <td style="text-align: center;">
                 <a (click)="cancelFamilyHandler(i)" *ngIf="!item.IsMasterData">
-                  Cancel
+                  Undo
                 </a>
               </td>
             </tr>

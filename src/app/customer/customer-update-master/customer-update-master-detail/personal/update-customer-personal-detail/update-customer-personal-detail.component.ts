@@ -234,6 +234,9 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
       this.lookUpObj.nameSelect = this.AppCustPersonalDetail["CountryName"];
       this.lookUpObj.jsonSelect = { CountryName: this.AppCustPersonalDetail["CountryName"] };
     }
+    else if(formControlName == "IsVip"){
+      this.VipHandler();
+    }
   }
 
   CopyCustGrpHandler(){
@@ -254,8 +257,20 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
   }
 
+  VipHandler(){
+    if(this.CustomerDetailForm.controls["IsVip"].value){
+      this.CustomerDetailForm.controls["VipNotes"].enable();
+    }
+    else{
+      this.CustomerDetailForm.controls["VipNotes"].disable();
+      this.CustomerDetailForm.patchValue({
+        VipNotes: ""
+      });
+    }
+  }
+
   SaveValue(){
-    var formValue = this.CustomerDetailForm.value;
+    var formValue = this.CustomerDetailForm.getRawValue();
     this.http.post(URLConstant.EditMasterCustomer, formValue).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);

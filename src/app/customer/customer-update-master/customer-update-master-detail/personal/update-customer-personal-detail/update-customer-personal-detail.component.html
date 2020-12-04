@@ -199,7 +199,7 @@
           <button *ngIf="CustomerDetailForm.controls.IsVip.value != AppCustPersonalDetail.IsVip" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IsVip')">Copy</button>
         </div>
         <div class="col-md-4">
-          <input type="checkbox" formControlName="IsVip" />
+          <input type="checkbox" formControlName="IsVip" (change)="VipHandler()" />
         </div>
       </div>
       <div class="form-group row">
@@ -208,7 +208,7 @@
           <label>{{AppCustPersonalDetail.VipNotes}}</label>
         </div>
         <div class="col-md-2">
-          <button *ngIf="CustomerDetailForm.controls.VipNotes.value != AppCustPersonalDetail.VipNotes" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('VipNotes')">Copy</button>
+          <button *ngIf="CustomerDetailForm.controls.IsVip.value && CustomerDetailForm.controls.VipNotes.value != AppCustPersonalDetail.VipNotes" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('VipNotes')">Copy</button>
         </div>
         <div class="col-md-4">
           <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes"  
