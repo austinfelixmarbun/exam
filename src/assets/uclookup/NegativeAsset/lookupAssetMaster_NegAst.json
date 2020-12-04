@@ -33,8 +33,7 @@
       }
     ],
     "querystring": {
-      "select": "SELECT A.FULL_ASSET_CODE AS fullAssetCode, A.FULL_ASSET_NAME AS fullAssetName, A.ASSET_MASTER_ID AS assetMasterId, A.ASSET_TYPE_ID AS assetTypeId",
-      "from": "FROM ASSET_MASTER AS A WITH(NOLOCK) INNER JOIN ASSET_TYPE AS B WITH(NOLOCK) ON A.ASSET_TYPE_ID = B.ASSET_TYPE_ID"
+      "name": "lookupAssetMaster_NegAst"
     },
     "headerList": [
         {

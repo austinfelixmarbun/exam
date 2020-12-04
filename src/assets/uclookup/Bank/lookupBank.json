@@ -11,9 +11,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT REF_BANK_ID AS refBankId, BANK_NAME AS bankName, REG_RPT_CODE AS regRptCode",
-        "from": "FROM REF_BANK WITH(NOLOCK)",
-        "where":"WHERE IS_ACTIVE = 1"
+        "name": "lookupBank"
     },
     "headerList": [
         {
