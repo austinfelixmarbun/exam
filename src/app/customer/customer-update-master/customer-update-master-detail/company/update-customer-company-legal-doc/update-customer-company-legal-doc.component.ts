@@ -81,7 +81,7 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
         request.push(item);
       }
     }
-    this.http.post(URLConstant.EditMasterCustCompanyShareholder, { CustCompanyId: this.CustCompanyId, TaskListId: this.WfTaskListId, LegalDocList: request }).toPromise().then(
+    this.http.post(URLConstant.EditMasterCustCompanyLegalDoc, { CustCompanyId: this.CustCompanyId, TaskListId: this.WfTaskListId, LegalDocList: request }).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }
