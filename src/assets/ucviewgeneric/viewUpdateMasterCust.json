@@ -1,36 +1,36 @@
 {
-  "title": "Update Data Customer",
-  "subsection": [
-    {
-      "subSectionId": "UpdateMasterCustId",
-      "subSectionTitle": "Main Info",
-      "mainInfoPath": "/Generic/GetDataViewBySQL",
-      "mainInfo": [
-        {
-          "type": "text",
-          "label": "App No.",
-          "property": "AppNo"
-        },
-        {
-          "type": "text",
-          "label": "Office",
-          "property": "OfficeName"
-        },
-        {
-          "type": "text",
-          "label": "Customer Name",
-          "property": "CustName"
-        },
-        {
-          "type": "callback",
-          "key": "ViewProdOffering",
-          "label": "Product Offering",
-          "property": "ProdOfferingName"
+    "title": "Update Data Customer",
+    "subsection": [
+      {
+        "subSectionId": "UpdateMasterCustId",
+        "subSectionTitle": "Main Info",
+        "mainInfoPath": "/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "App No.",
+            "property": "AppNo"
+          },
+          {
+            "type": "text",
+            "label": "Office",
+            "property": "OfficeName"
+          },
+          {
+            "type": "text",
+            "label": "Customer Name",
+            "property": "CustName"
+          },
+          {
+            "type": "callback",
+            "key": "ViewProdOffering",
+            "label": "Product Offering",
+            "property": "ProdOfferingName"
+          }
+        ],
+        "querystring": {
+          "name": "viewUpdateMasterCust"
         }
-      ],
-      "querystring": {
-        "name": "viewUpdateMasterCust"
-      }
     }
   ]
 }

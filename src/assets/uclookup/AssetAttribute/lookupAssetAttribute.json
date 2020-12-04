@@ -27,8 +27,7 @@
       }
     ],
     "querystring": {
-      "select": "SELECT A.REF_ATTR_ID AS RefAttrId, A.ATTR_CODE AS AttrCode, A.ATTR_NAME AS AttrName, A.ATTR_TYPE_CODE AS AttrTypeCode",
-      "from": "FROM REF_ATTR A WITH(NOLOCK)"
+      "name": "lookupAssetAttribute"
     },
     "headerList": [
         {

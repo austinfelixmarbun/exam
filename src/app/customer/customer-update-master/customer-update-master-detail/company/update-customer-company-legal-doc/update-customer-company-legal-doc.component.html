@@ -52,8 +52,8 @@
               <td style="text-align: left;">{{i+1}}</td>
               <td style="text-align: left;">{{item.MrLegalDocTypeCode}}</td>
               <td style="text-align: left;">{{item.DocNo}}</td>
-              <td style="text-align: left;">{{item.DocDt}}</td>
-              <td style="text-align: left;">{{item.DocExpiredDt}}</td>
+              <td style="text-align: left;">{{item.DocDt | date: 'yyyy-MM-dd'}}</td>
+              <td style="text-align: left;">{{item.DocExpiredDt | date: 'yyyy-MM-dd'}}</td>
               <td style="text-align: center;">
                 <a (click)="addLegalDocHandler(i)" *ngIf="!item.IsMasterData">
                   Add as New Data
@@ -108,7 +108,7 @@
               <td style="text-align: left;">{{item.DocExpiredDt | date: 'yyyy-MM-dd'}}</td>
               <td style="text-align: center;">
                 <a (click)="cancelLegalDocHandler(i)" *ngIf="!item.IsMasterData">
-                  Add as New Data
+                  Cancel
                 </a>
               </td>
             </tr>

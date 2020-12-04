@@ -35,8 +35,8 @@
       }
     ],
     "querystring": {
-        "name": "lookupZipcode"
-      },
+      "name": "lookupZipcode"
+    },
     "headerList": [
         {
             "type": "sort",

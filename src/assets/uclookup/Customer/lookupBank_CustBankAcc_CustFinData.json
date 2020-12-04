@@ -19,8 +19,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT BANK_CODE AS bankCode, BANK_NAME AS bankName, REG_RPT_CODE AS regRptCode, REF_BANK_ID AS refBankId",
-        "from": "FROM dbo.REF_BANK WITH(NOLOCK)"
+        "name": "lookupBank_CustBankAcc_CustFinData"
     },
     "headerList": [
         {
