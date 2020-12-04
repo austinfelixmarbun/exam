@@ -31,6 +31,10 @@ export class UpdateCustomerJobDataComponent implements OnInit {
   lookupIndustryTypeObj: InputLookupObj;
   lookupZipcodeObj: InputLookupObj;
   IsAddrDifferent: boolean;
+  appCustModel: string;
+  appJobPosition: string;
+  appJobStatus: string;
+  appCompanyScale: string;
 
   CustomerJobForm = this.fb.group({
     CustJobDataId: [0],
@@ -150,6 +154,11 @@ export class UpdateCustomerJobDataComponent implements OnInit {
         this.lookupIndustryTypeObj.jsonSelect = { IndustryTypeName: response[1]["IndustryTypeName"] };
         this.AppJobData.ProfessionName = response[2]["ProfessionName"];
         this.AppJobData.IndustryTypeName = response[3]["IndustryTypeName"];
+
+        this.appCompanyScale = this.CompanyScaleList.find(x => x.Key == this.AppJobData.CompanyScale).Value;
+        this.appCustModel = this.CustModelList.find(x => x.Key == this.AppJobData.CustModel).Value;
+        this.appJobPosition = this.JobPositionList.find(x => x.Key == this.AppJobData.JobPosition).Value;
+        this.appJobStatus = this.JobStatusList.find(x => x.Key == this.AppJobData.JobStatus).Value;
       }
     ).catch(
       (error) => {

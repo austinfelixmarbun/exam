@@ -33,6 +33,10 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
   // DetailData: Object;
   CustGrpLookupObj: InputLookupObj;
   lookUpObj: InputLookupObj;
+  appMaritalStatDescr: string;
+  appNationalityDescr: string;
+  appEducationDescr: string;
+  appReligionDescr: string;
 
   CustomerDetailForm = this.fb.group({
     CustId: [0],
@@ -135,6 +139,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
         criteriaList.push(criteriaObj);
         this.CustGrpLookupObj.addCritInput = criteriaList;
         this.CustGrpLookupObj.nameSelect = detailData["MasterCustDetail"]["CustomerGroupParentCustName"];
+        this.CustGrpLookupObj.jsonSelect = { custName: detailData["MasterCustDetail"]["CustomerGroupParentCustName"] };
 
         return detailData;
       }),
@@ -151,6 +156,11 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
         this.DefaultCountry = response[2]["CountryName"];
         this.CustGrpLookupObj.isReady = true;
         this.lookUpObj.isReady = true;
+
+        this.appMaritalStatDescr = this.MrMaritalStatCodeList.find(x => x.Key == this.AppCustPersonalDetail.MrMaritalStatCode).Value;
+        this.appNationalityDescr = this.MrNationalityCodeList.find(x => x.Key == this.AppCustPersonalDetail.MrNationalityCode).Value;
+        this.appEducationDescr = this.MrEducationCodeList.find(x => x.Key == this.AppCustPersonalDetail.MrEducationCode).Value;
+        this.appReligionDescr = this.MrReligionCodeList.find(x => x.Key == this.AppCustPersonalDetail.MrReligionCode).Value;
       }
     ).catch(
       (error) => {
