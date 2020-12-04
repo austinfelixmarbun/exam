@@ -103,6 +103,9 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
                     for (const key in item["CustBankStmntList"][i]) {
                       if(key == "Month"){
                         item["CustBankStmntList"][i][key] = this.MonthNames[item["CustBankStmntList"][i][key]-1];
+                        if(!isNaN(main["CustBankStmntList"][i][key]) && !isNaN(parseInt(main["CustBankStmntList"][i][key]))){
+                          main["CustBankStmntList"][i][key] = this.MonthNames[item["CustBankStmntList"][i][key]-1];
+                        }
                       }
                       if(item["CustBankStmntList"][i][key] == main["CustBankStmntList"][i][key]){
                         isMasterStmnt = true;
@@ -208,6 +211,7 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
     obj["IsAddedBankAcc"] = this.AppCustBankAcc[idx]["IsAddedBankAcc"];
     obj["IsAddedBankStmnt"] = this.AppCustBankAcc[idx]["IsAddedBankStmnt"];
     this.MainCustBankAcc.push(obj);
+    this.MainCustBankAcc.sort((a, b) => (a["IsDefault"]) ? -1 : 1);
   }
 
   back(){
@@ -220,6 +224,9 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
     var requestBankAcc = new Array<any>();
     for (const item of this.MainCustBankAcc) {
       if(!item["IsMasterData"]){
+        for (const stmnt of item["CustBankStmntList"]) {
+          stmnt["Month"] = this.MonthNames.findIndex(x => x == stmnt["Month"]) + 1;
+        }
         requestBankAcc.push(item);
       }
     }
