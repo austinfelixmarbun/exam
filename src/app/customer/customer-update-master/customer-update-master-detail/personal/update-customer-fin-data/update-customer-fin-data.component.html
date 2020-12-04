@@ -137,7 +137,7 @@
     <div id="BankAccSection">
       <div class="form-group row" *ngFor="let item of ArrayNum; let i = index">
         <div class="col-md-6">
-          <div *ngIf="AppCustBankAcc[i].BankAccNo">
+          <div *ngIf="AppCustBankAcc[i] && AppCustBankAcc[i].BankAccNo">
             <div class="col-md-12 row" style="padding: 0; margin: 0;">
               <label class="col-md-9" style="padding-left: 0;">{{i+1}}. {{AppCustBankAcc[i].BankName}} - {{AppCustBankAcc[i].BankAccNo}} - {{AppCustBankAcc[i].BankAccName}} - {{AppCustBankAcc[i].BankBranch}}{{AppCustBankAcc[i].IsDefault ? ' - Default' : ''}}</label>
               <div class="col-md-3" *ngIf="!AppCustBankAcc[i].IsMasterData && !AppCustBankAcc[i].IsMasterStmnt && !AppCustBankAcc[i].IsAddedBankAcc"><button type="button" class="btn btn-raised btn-primary" (click)="AddNewBankAcc(i)">Add As New Data</button></div>
@@ -191,7 +191,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div *ngIf="MainCustBankAcc[i].BankAccNo">
+          <div *ngIf="MainCustBankAcc[i] && MainCustBankAcc[i].BankAccNo">
             <div class="col-md-12 row" style="padding: 0; margin: 0;">
               <label class="col-md-9" style="padding-left: 0;">{{i+1}}. {{MainCustBankAcc[i].BankName}} - {{MainCustBankAcc[i].BankAccNo}} - {{MainCustBankAcc[i].BankAccName}} - {{MainCustBankAcc[i].BankBranch}}{{MainCustBankAcc[i].IsDefault ? ' - Default' : ''}}</label>
               <!-- <div class="col-md-3" *ngIf="!MainCustBankAcc[i].IsMasterData"><button type="button" class="btn btn-raised btn-primary" (click)="CancelBankAcc(i)">Cancel Add Bank Account</button></div> -->
