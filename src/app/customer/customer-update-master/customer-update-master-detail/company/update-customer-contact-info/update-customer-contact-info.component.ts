@@ -25,6 +25,8 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
   JobPositionList: Array<any>;
   GenderList: Array<any>;
   IsAddrDifferent: boolean;
+  appJobPosition: string;
+  appGender: string;
 
   CustomerContactInfoForm = this.fb.group({
     CustCompanyContactPersonId: [0],
@@ -89,6 +91,9 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
             response[0]["MasterContactInfo"]["City"] != this.AppContactInfo["City"]){
           this.IsAddrDifferent = true;
         }
+
+        this.appGender = this.GenderList.find(x => x.Key == this.AppContactInfo.MrGenderCode).Value;
+        this.appJobPosition = this.JobPositionList.find(x => x.Key == this.AppContactInfo.MrJobPositionCode).Value;
       }
     ).catch(
       (error) => {

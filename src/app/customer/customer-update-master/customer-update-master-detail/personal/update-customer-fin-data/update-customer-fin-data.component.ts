@@ -113,6 +113,10 @@ export class UpdateCustomerFinDataComponent implements OnInit {
                     } 
                   }
                 }
+                else{
+                  isMasterData = false;
+                  isMasterStmnt = false;
+                }
                 break;
             }
           }

@@ -29,6 +29,9 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   lookupObj: Record<string, any>;
   DisplayName: Record<string, any>;
   IsAddressDifferent: boolean;
+  appCustRelationship: string;
+  appIdType: string;
+  appGender: string;
 
   CustomerEmergencyForm = this.fb.group({
     CustEmergencyId: [0],
@@ -139,6 +142,10 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
         this.lookupObj["Profession"]["isReady"] = true;
         this.lookupObj["Zipcode"]["isReady"] = true;
         this.DisplayName["Profession"] = response[1]["ProfessionName"];
+
+        this.appCustRelationship = this.CustRelationList.find(x => x.Key == this.AppEmergencyData.CustRelation).Value;
+        this.appIdType = this.IdTypeList.find(x => x.Key == this.AppEmergencyData.IdType).Value;
+        this.appGender = this.GenderList.find(x => x.Key == this.AppEmergencyData.Gender).Value;
       }
     ).catch(
       (error) => {

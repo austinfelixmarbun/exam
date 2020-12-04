@@ -28,7 +28,7 @@
   <div class="form-group row">
     <label class="col-md-2 adInsLabel adins-required-label" translate>Customer Relationship</label>
     <div class="col-md-4">
-      <label>{{AppEmergencyData.CustRelation}}</label>
+      <label>{{appCustRelationship}}</label>
     </div>
     <div class="col-md-2">
       <button *ngIf="CustomerEmergencyForm.controls.CustRelation.value != AppEmergencyData.CustRelation" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CustRelation', '')">Copy</button>
@@ -45,7 +45,7 @@
   <div class="form-group row">
     <label class="col-md-2 adins-required-label" translate>ID Type</label>
     <div class="col-md-4">
-      <label>{{AppEmergencyData.IdType}}</label>
+      <label>{{appIdType}}</label>
     </div>
     <div class="col-md-2">
       <button *ngIf="CustomerEmergencyForm.controls.IdType.value != AppEmergencyData.IdType" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IdType', '')">Copy</button>
@@ -107,7 +107,7 @@
   <div class="form-group row">
     <label class="col-md-2 adInsLabel adins-required-label" translate>Gender</label>
     <div class="col-md-4">
-      <label>{{AppEmergencyData.Gender}}</label>
+      <label>{{appGender}}</label>
     </div>
     <div class="col-md-2">
       <button *ngIf="CustomerEmergencyForm.controls.Gender.value != AppEmergencyData.Gender" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Gender', '')">Copy</button>
