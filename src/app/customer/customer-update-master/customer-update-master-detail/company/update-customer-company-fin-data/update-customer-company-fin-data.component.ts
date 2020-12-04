@@ -78,8 +78,8 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
         this.AppCompanyFinData = response["AppCompanyFinData"];
         this.CustomerCompanyFinDataForm.patchValue({...response["MasterCompanyFinData"]});
 
-        this.MainCustBankAcc = response[0]["MasterCustFinData"]["CustBankAccList"];
-        this.AppCustBankAcc = response[0]["AppCustFinData"]["CustBankAccList"];
+        this.MainCustBankAcc = response["MasterCompanyFinData"]["CustBankAccList"];
+        this.AppCustBankAcc = response["AppCompanyFinData"]["CustBankAccList"];
         for (const item of this.MainCustBankAcc) {
           item["IsMasterData"] = true;
           item["IsMasterStmnt"] = true;
@@ -137,6 +137,8 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
           this.num = this.MainCustBankAcc.length;
         }
         this.ArrayNum = new Array<number>(this.num).fill(1);
+        this.MainCustBankAcc.sort((a, b) => (a["IsDefault"]) ? -1 : 1);
+        this.AppCustBankAcc.sort((a, b) => (a["IsDefault"]) ? -1 : 1);
       }
     ).catch(
       (error) => {
