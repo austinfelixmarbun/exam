@@ -86,12 +86,24 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
         for (const item of this.MainCustBankAcc) {
           item["IsMasterData"] = true;
           item["IsMasterStmnt"] = true;
+          item["CustBankStmntList"].sort((a, b) => {
+            if(a["Year"] < b["Year"]) return -1;
+            if(a["Year"] > b["Year"]) return 1;
+            if(a["Month"] < b["Month"]) return -1;
+            if(a["Month"] > b["Month"]) return 1;
+          });
         }
         for (const item of this.AppCustBankAcc) {
           var isMasterData = false;
           var isMasterStmnt = false;
           var isAddedBankAcc = false;
           var isAddedBankStmnt = false;
+          item["CustBankStmntList"].sort((a, b) => {
+            if(a["Year"] < b["Year"]) return -1;
+            if(a["Year"] > b["Year"]) return 1;
+            if(a["Month"] < b["Month"]) return -1;
+            if(a["Month"] > b["Month"]) return 1;
+          });
           for (const main of this.MainCustBankAcc) {
             if(item["RefBankId"] == main["RefBankId"] &&
                 item["BankAccNo"] == main["BankAccNo"] && 
