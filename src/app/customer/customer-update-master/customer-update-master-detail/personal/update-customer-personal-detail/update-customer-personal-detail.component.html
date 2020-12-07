@@ -29,7 +29,7 @@
       <div class="form-group row">
         <label class="col-md-2 adInsLabel adins-required-label" translate>Marital Status</label>
         <div class="col-md-4">
-          <label>{{AppCustPersonalDetail.MrMaritalStatCode}}</label>
+          <label>{{appMaritalStatDescr}}</label>
         </div>
         <div class="col-md-2">
           <button *ngIf="CustomerDetailForm.controls.MrMaritalStatCode.value != AppCustPersonalDetail.MrMaritalStatCode" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrMaritalStatCode')">Copy</button>
@@ -48,7 +48,7 @@
       <div class="form-group row">
         <label class="col-md-2 adins-required-label adins-required-label" translate>Nationality</label>
         <div class="col-md-4">
-          <label>{{AppCustPersonalDetail.MrNationalityCode}}</label>
+          <label>{{appNationalityDescr}}</label>
         </div>
         <div class="col-md-2">
           <button *ngIf="CustomerDetailForm.controls.MrNationalityCode.value != AppCustPersonalDetail.MrNationalityCode" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrNationalityCode')">Copy</button>
@@ -84,7 +84,7 @@
       <div class="form-group row">
         <label class="col-md-2 adins-required-label" translate>Education</label>
         <div class="col-md-4">
-          {{AppCustPersonalDetail.MrEducationCode}}
+          {{appEducationDescr}}
         </div>
         <div class="col-md-2">
           <button *ngIf="CustomerDetailForm.controls.MrEducationCode.value != AppCustPersonalDetail.MrEducationCode" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrEducationCode')">Copy</button>
@@ -103,7 +103,7 @@
       <div class="form-group row">
         <label class="col-md-2 adins-required-label" translate>Religion</label>
         <div class="col-md-4">
-          {{AppCustPersonalDetail.MrReligionCode}}
+          {{appReligionDescr}}
         </div>
         <div class="col-md-2">
           <button *ngIf="CustomerDetailForm.controls.MrReligionCode.value != AppCustPersonalDetail.MrReligionCode" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrReligionCode')">Copy</button>
@@ -199,7 +199,7 @@
           <button *ngIf="CustomerDetailForm.controls.IsVip.value != AppCustPersonalDetail.IsVip" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IsVip')">Copy</button>
         </div>
         <div class="col-md-4">
-          <input type="checkbox" formControlName="IsVip" />
+          <input type="checkbox" formControlName="IsVip" (change)="VipHandler()" />
         </div>
       </div>
       <div class="form-group row">
@@ -208,7 +208,7 @@
           <label>{{AppCustPersonalDetail.VipNotes}}</label>
         </div>
         <div class="col-md-2">
-          <button *ngIf="CustomerDetailForm.controls.VipNotes.value != AppCustPersonalDetail.VipNotes" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('VipNotes')">Copy</button>
+          <button *ngIf="CustomerDetailForm.controls.IsVip.value && CustomerDetailForm.controls.VipNotes.value != AppCustPersonalDetail.VipNotes" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('VipNotes')">Copy</button>
         </div>
         <div class="col-md-4">
           <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes"  

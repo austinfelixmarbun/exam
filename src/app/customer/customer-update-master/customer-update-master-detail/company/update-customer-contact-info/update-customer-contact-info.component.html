@@ -29,7 +29,7 @@
     <div class="form-group row">
       <label class="col-md-2 adInsLabel adins-required-label" translate>Gender</label>
       <div class="col-md-4">
-        <label>{{AppContactInfo.MrGenderCode}}</label>
+        <label>{{appGender}}</label>
       </div>
       <div class="col-md-2">
         <button *ngIf="CustomerContactInfoForm.controls.MrGenderCode.value != AppContactInfo.MrGenderCode" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrGenderCode')">Copy</button>
@@ -46,7 +46,7 @@
     <div class="form-group row">
       <label class="col-md-2 adInsLabel adins-required-label" translate>Job Position</label>
       <div class="col-md-4">
-        <label>{{AppContactInfo.MrJobPositionCode}}</label>
+        <label>{{appJobPosition}}</label>
       </div>
       <div class="col-md-2">
         <button *ngIf="CustomerContactInfoForm.controls.MrJobPositionCode.value != AppContactInfo.MrJobPositionCode" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrJobPositionCode')">Copy</button>
