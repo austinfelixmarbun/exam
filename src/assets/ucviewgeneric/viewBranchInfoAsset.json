@@ -3,7 +3,7 @@
     "subsection": [
       {
         "subSectionId": "BranchInformationAssetId",
-        "subSectionTitle": "Main Info",
+        "subSectionTitle": "Asset Insco Branch Info",
         "mainInfoPath" : "/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
