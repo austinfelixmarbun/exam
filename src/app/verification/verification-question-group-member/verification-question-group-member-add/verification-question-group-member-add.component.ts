@@ -13,6 +13,7 @@ import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.mod
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-verification-question-group-member-add',
@@ -96,7 +97,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
     this.http.post(URLConstant.AddListVerfQuestionGrpD, this.verfQuestionGrpDObj).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
-        this.router.navigate(["/Verification/QuestionGroupMemberPaging"], { queryParams: { "VerfQuestionGrpHId": this.VerfQuestionGrpHId } });
+        AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionGroupMemberPaging"],{ "VerfQuestionGrpHId": this.VerfQuestionGrpHId });
       }
     );
   }

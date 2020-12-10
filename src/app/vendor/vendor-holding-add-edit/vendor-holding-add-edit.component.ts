@@ -14,6 +14,7 @@ import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-vendor-holding-add-edit',
@@ -325,7 +326,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorService.EditVendorHolding(this.vendorHoldingObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(['/Vendor/Holding/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": 'edit' } });
+            AdInsHelper.RedirectUrl(this.router,["/Vendor/Holding/Registration"],{ "VendorId": this.VendorId, "mode": 'edit' });
           });
       } else {
         this.vendorHoldingObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
@@ -333,7 +334,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorService.AddVendorHolding(this.vendorHoldingObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(['/Vendor/Holding/Registration'], { queryParams: { "VendorId": response['VendorObj'].VendorId } });
+            AdInsHelper.RedirectUrl(this.router,["/Vendor/Holding/Registration"],{ "VendorId": response['VendorObj'].VendorId });
           });
       }
     }
@@ -341,9 +342,9 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
   Back() {
     if (this.mode == "edit") {
-      this.router.navigate(['/Vendor/Holding/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": 'edit' } });
+      AdInsHelper.RedirectUrl(this.router,["/Vendor/Holding/Registration"],{ "VendorId": this.VendorId, "mode": 'edit' });
     } else {
-      this.router.navigate(["/Vendor/Paging"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
+      AdInsHelper.RedirectUrl(this.router,["/Vendor/Paging"],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
 
   }

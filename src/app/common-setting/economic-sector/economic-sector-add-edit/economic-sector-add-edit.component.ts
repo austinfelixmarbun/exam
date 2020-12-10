@@ -6,6 +6,7 @@ import { RefEconomicSectorObj } from 'app/shared/model/RefEconomicSectorObj.Mode
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-economic-sector-add-edit',
@@ -66,8 +67,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddRefEconomicSector, this.refEconomicSectorObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/CommonSetting/EconomicSector/Paging"]);
-          
+            AdInsHelper.RedirectUrl(this.router,["/CommonSetting/EconomicSector/Paging"],{});         
         }
       );
     } else {
@@ -79,7 +79,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditRefEconomicSector, this.refEconomicSectorObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/CommonSetting/EconomicSector/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,["/CommonSetting/EconomicSector/Paging"],{});  
         }
       );
     }

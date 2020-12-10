@@ -68,8 +68,7 @@
           }
     ],
     "querystring": {
-        "select": "SELECT ASSET_TYPE_CODE AS AssetTypeCode, UPLOAD_MONITORING_NO, ASSET_CATEGORY_CODE AS AssetCategoryCode, ASSET_CODE AS AssetCode, ASSET_NAME AS AssetName, PARENT_FULL_ASSET_CODE AS ParentAssetCode, IS_ACTIVE AS ActiveStatus",
-        "from": "FROM dbo.UPLOAD_ASSET_MASTER WITH(NOLOCK)"
+        "name": "searchReviewUploadAssetMasterDetail"
     },
     "headerList": [
         {

@@ -4,6 +4,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -30,6 +31,10 @@ export class UpdateCustomerJobDataComponent implements OnInit {
   lookupIndustryTypeObj: InputLookupObj;
   lookupZipcodeObj: InputLookupObj;
   IsAddrDifferent: boolean;
+  appCustModel: string;
+  appJobPosition: string;
+  appJobStatus: string;
+  appCompanyScale: string;
 
   CustomerJobForm = this.fb.group({
     CustJobDataId: [0],
@@ -47,14 +52,14 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     NumOfEmployee: [''],
     Address: ['', [Validators.required]],
     Zipcode: ['', [Validators.required]],
-    AreaCode1: [{value: '', disabled: true}, [Validators.required]],
-    AreaCode2: [{value: '', disabled: true}, [Validators.required]],
-    AreaCode3: ['', [Validators.required]],
-    AreaCode4: ['', [Validators.required]],
-    City: [{value: '', disabled: true}, [Validators.required]],
-    Phn1: [''],
-    Phn2: [''],
-    Fax: [''],
+    AreaCode1: ['', [Validators.required]],
+    AreaCode2: ['', [Validators.required]],
+    AreaCode3: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    AreaCode4: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    City: ['', [Validators.required]],
+    Phn1: ['', Validators.pattern("^[0-9]+$")],
+    Phn2: ['', Validators.pattern("^[0-9]+$")],
+    Fax: ['', Validators.pattern("^[0-9]+$")],
     RowVersionCustJobData: [''],
     RowVersionJobAddr: [''],
     RowVersionCust: ['']
@@ -105,7 +110,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     let getCustModel = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel });
     let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition });
     let getJobStatus = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobStat });
-    let getCompanyScale = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCompanyScale });
+    let getCompanyScale = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCoyScale });
     forkJoin([getDetail, getCustModel, getJobPosition, getJobStatus, getCompanyScale]).pipe(
       map((response) => {
         this.AppJobData = response[0]["AppCustJobData"];
@@ -149,6 +154,11 @@ export class UpdateCustomerJobDataComponent implements OnInit {
         this.lookupIndustryTypeObj.jsonSelect = { IndustryTypeName: response[1]["IndustryTypeName"] };
         this.AppJobData.ProfessionName = response[2]["ProfessionName"];
         this.AppJobData.IndustryTypeName = response[3]["IndustryTypeName"];
+
+        this.appCompanyScale = this.CompanyScaleList.find(x => x.Key == this.AppJobData.CompanyScale).Value;
+        this.appCustModel = this.CustModelList.find(x => x.Key == this.AppJobData.CustModel).Value;
+        this.appJobPosition = this.JobPositionList.find(x => x.Key == this.AppJobData.JobPosition).Value;
+        this.appJobStatus = this.JobStatusList.find(x => x.Key == this.AppJobData.JobStatus).Value;
       }
     ).catch(
       (error) => {
@@ -270,36 +280,36 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     else if(formControlName == "CustModel"){
       if(this.AppJobData[formControlName]){
         this.CustomerJobForm.patchValue({
-          CompanyScale: this.AppJobData["CustModel"]
+          CustModel: this.AppJobData["CustModel"]
         });
       }
       else{
         this.CustomerJobForm.patchValue({
-          CompanyScale: this.CustModelList[0].Key
+          CustModel: this.CustModelList[0].Key
         });
       }
     }
     else if(formControlName == "JobPosition"){
       if(this.AppJobData[formControlName]){
         this.CustomerJobForm.patchValue({
-          CompanyScale: this.AppJobData["JobPosition"]
+          JobPosition: this.AppJobData["JobPosition"]
         });
       }
       else{
         this.CustomerJobForm.patchValue({
-          CompanyScale: this.JobPositionList[0].Key
+          JobPosition: this.JobPositionList[0].Key
         });
       }
     }
     else if(formControlName == "JobStatus"){
       if(this.AppJobData[formControlName]){
         this.CustomerJobForm.patchValue({
-          CompanyScale: this.AppJobData["JobStatus"]
+          JobStatus: this.AppJobData["JobStatus"]
         });
       }
       else{
         this.CustomerJobForm.patchValue({
-          CompanyScale: this.JobStatusList[0].Key
+          JobStatus: this.JobStatusList[0].Key
         });
       }
     }
@@ -341,7 +351,8 @@ export class UpdateCustomerJobDataComponent implements OnInit {
   }
 
   back(){
-    this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
   }
 
   SaveValue(){

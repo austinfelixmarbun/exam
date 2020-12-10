@@ -36,7 +36,7 @@ export class CustomerViewPersonalContactPersonComponent implements OnInit {
         this.responseObj = response[CommonConstant.ReturnObj];
       },
       error => {
-        this.router.navigateByUrl('Error');
+        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
       }
     );
   }

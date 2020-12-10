@@ -19,8 +19,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT A.CUST_NO AS custNo, A.CUST_NAME AS custName, A.TAX_ID_NO AS taxIdNo, A.CUST_ID AS custId",
-        "from": "FROM CUST AS A WITH(NOLOCK) INNER JOIN CUST_COMPANY AS B WITH(NOLOCK) ON A.CUST_ID = B.CUST_ID"
+        "name": "lookupCust_NegCust_Company"
     },
     "headerList": [
         {

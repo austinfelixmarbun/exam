@@ -4,11 +4,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UpdateCustCompanyDetailObj } from 'app/shared/model/UpdateMasterCust/UpdateCustCompanyDetailObj.Model';
 import { environment } from 'environments/environment';
+import { CookieService } from 'ngx-cookie';
 import { forkJoin } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
@@ -38,7 +40,8 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
     private http: HttpClient, 
     private toastr: NGXToastrService, 
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService 
   ) { 
     this.AppCustCompanyDetail = new UpdateCustCompanyDetailObj();
     this.ResponseTab = new EventEmitter<any>();
@@ -52,7 +55,8 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
 
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    // var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.http.post(URLConstant.GetCustCompanyDataForUpdateMasterCustCompany, { CustDataTrxId: this.CustDataTrxId }).pipe(
       map((response) => {
@@ -88,7 +92,7 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
   CopyAllHandler(){
     var obj = new Object();
     for (const key in this.AppCustCompanyDetail) {
-      if(key == "CustCompanyId"){
+      if(key == "CustCompanyId" || key == "RowVersion"){
         continue;
       }
       else{
@@ -119,7 +123,8 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
   }
 
   back(){
-    this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
   }
 
   SaveValue(){

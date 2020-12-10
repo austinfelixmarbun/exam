@@ -9,6 +9,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-survey-order-task',
@@ -90,7 +91,7 @@ export class SurveyOrderTaskComponent implements OnInit {
     this.http.post(URLConstant.SendSrvyOrder, this.SrvyOrderObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
-        this.router.navigate(["/Survey/Paging"]);
+        AdInsHelper.RedirectUrl(this.router,["/Survey/Paging"],{ });
       }
     );
   }

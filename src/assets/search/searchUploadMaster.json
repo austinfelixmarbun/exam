@@ -37,8 +37,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT UMH.UPLOAD_MONITORING_NO AS UploadMonitoringNo, UMH.OFFICE_CODE AS OfficeCode, UMH.FILE_NAME AS [FileName], UMH.TOTAL_RECORD AS TotalRecord, UMH.TOTAL_RECORD_PROCESSED AS TotalRecordProcessed, UMH.TOTAL_RECORD_ERROR AS TotalRecordError, RS.DESCR AS UploadStatus, UMH.IS_EXECUTED AS IsExecuted, UMH.ERROR_MESSAGE AS ErrorMessage",
-        "from": "FROM dbo.UPLOAD_MONITORING_H UMH WITH(NOLOCK) LEFT JOIN dbo.REF_STATUS RS WITH(NOLOCK) ON RS.REF_STATUS_CODE = UMH.UPLOAD_STATUS AND RS.STATUS_GRP_CODE='UPLOAD_STATUS'"
+        "name": "searchUploadMaster"
     },
     "headerList": [
         {

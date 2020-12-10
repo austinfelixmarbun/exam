@@ -53,9 +53,7 @@
         }
       ],
       "querystring": {
-        "select": "SELECT RE.OFFICE_NAME AS OfficeName, SO.TRX_REF_NO AS TrxRefNo, SO.SRVY_ORDER_NO AS SrvyOrderNo, SO.MR_SRVY_STAT_CODE AS MrSrvyStatCode, SO.MR_SRVY_SOURCE_CODE AS MrSrvySourceCode, SO.REQ_BY_USER AS ReqByUser, SO.NOTES AS Notes, SO.REQ_DT AS ReqDt, V.VENDOR_NAME AS VendorName, SO.TASK_TOTAL AS TaskTotal, SO.SRVY_ORDER_ID AS SrvyOrderId",
-        "from": "FROM dbo.SRVY_ORDER SO WITH(NOLOCK) JOIN dbo.REF_OFFICE RE WITH(NOLOCK) ON RE.REF_OFFICE_ID = SO.REF_OFFICE_ID LEFT JOIN dbo.VENDOR V WITH(NOLOCK) ON SO.VENDOR_ID = V.VENDOR_ID",
-        "where": "WHERE SO.SRVY_ORDER_ID = {0}"
+        "name": "viewSurveyOrderTask"
       }
     }
   ]

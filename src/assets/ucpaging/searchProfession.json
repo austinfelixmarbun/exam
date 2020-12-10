@@ -37,8 +37,7 @@
       }
     ],
     "querystring": {
-      "select": "SELECT A.PROFESSION_CODE as professionCode,A.REF_PROFESSION_ID as refProfessionId,A.PROFESSION_NAME as professionName,A.MR_CUST_MODEL_CODE as custModelName",
-      "from": "FROM dbo.REF_PROFESSION A WITH(NOLOCK)"
+      "name": "searchProfession"
     },
     "headerList": [
       {

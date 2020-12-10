@@ -78,6 +78,6 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['login'], { relativeTo: this.route.parent });
+    this.router.navigate(['login'], { relativeTo: this.route.parent, skipLocationChange: true });
   }
 }

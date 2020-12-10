@@ -10,6 +10,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-survey-order-task-wf',
@@ -112,7 +113,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
     this.http.post(URLConstant.SendSrvyOrder, this.SrvyOrderObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
-        this.router.navigate(["/Survey/Paging"]);
+        AdInsHelper.RedirectUrl(this.router,["/Survey/Paging"],{ });
       }
     );
   }

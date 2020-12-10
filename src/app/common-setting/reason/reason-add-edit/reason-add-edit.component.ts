@@ -7,6 +7,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { RefReasonObj } from 'app/shared/model/RefReasonObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-reason-add-edit',
@@ -77,7 +78,7 @@ export class ReasonAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddRefReason, refReasonObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/CommonSetting/Reason/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Reason/Paging'],{});
         }
       );
     } else {
@@ -88,7 +89,7 @@ export class ReasonAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditRefReason, refReasonObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/CommonSetting/Reason/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Reason/Paging'],{});
         }
       );
     }

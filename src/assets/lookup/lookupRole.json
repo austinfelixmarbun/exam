@@ -18,9 +18,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT ROLE_CODE AS RoleCode, ROLE_NAME AS RoleName, IS_ACTIVE AS IsActive, REF_ROLE_ID AS RefRoleId",
-    "from": "FROM DBO.REF_ROLE WITH(NOLOCK)",
-    "where": "WHERE IS_ACTIVE = 1"
+    "name": "lookupRole"
   },
   "headerList": [
       {

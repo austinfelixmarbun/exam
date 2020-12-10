@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-district-add-edit',
@@ -91,8 +92,8 @@ export class DistrictAddEditComponent implements OnInit {
       this.refProvDistrictObj.Type = CommonConstant.RefProvDistrictTypeDis;
       this.http.post(this.addUrl, this.refProvDistrictObj).subscribe(
         response => {
-            this.toastr.successMessage(response["Message"]);
-            this.router.navigateByUrl("/CommonSetting/District/Paging?refProvDistrictId=" + this.parentId);        
+            this.toastr.successMessage(response["Message"]);  
+            AdInsHelper.RedirectUrl(this.router,['/CommonSetting/District/Paging/'],{"refProvDistrictId": this.parentId});     
         }
       );
     } else {
@@ -105,8 +106,8 @@ export class DistrictAddEditComponent implements OnInit {
       this.refProvDistrictObj.Type =  CommonConstant.RefProvDistrictTypeDis;
       this.http.post(this.editUrl, this.refProvDistrictObj).subscribe(
         response => {
-          this.toastr.successMessage(response["Message"]);
-          this.router.navigateByUrl("/CommonSetting/District/Paging?refProvDistrictId=" + this.parentId);        
+          this.toastr.successMessage(response["Message"]);  
+          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/District/Paging/'],{"refProvDistrictId": this.parentId});       
         }
       );
     }

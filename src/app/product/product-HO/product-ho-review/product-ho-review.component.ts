@@ -6,6 +6,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { UcInputRFAObj } from 'app/shared/model/UcInputRFAObj.Model';
 
 @Component({
   selector: 'app-product-ho-review',
@@ -13,7 +15,7 @@ import { environment } from 'environments/environment';
   providers: [NGXToastrService]
 })
 export class ProductHoReviewComponent implements OnInit {
-
+  InputObj: UcInputRFAObj;
   ProdId: number;
   WfTaskListId: number;
   ProdHId: number; 
@@ -21,6 +23,8 @@ export class ProductHoReviewComponent implements OnInit {
     ApprovedById: ['', Validators.required],
     Notes: ['', Validators.required]
   });
+  IsReady:Boolean=false;
+
   constructor(private toastr: NGXToastrService, private http: HttpClient, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       if (params["ProdId"] != null) {
@@ -37,7 +41,9 @@ export class ProductHoReviewComponent implements OnInit {
   }
   apvBaseUrl = environment.ApprovalURL;
   ngOnInit() { 
+    this.initInputApprovalObj();
     this.ClaimTask(this.WfTaskListId);
+
   }
 
   onChangeApprover(ev) {
@@ -46,7 +52,31 @@ export class ProductHoReviewComponent implements OnInit {
     });
   }
 
-  SaveForm() {
+  initInputApprovalObj(){
+    this.InputObj = new UcInputRFAObj();
+    this.InputObj.ApvTypecodes = ["Limit"];
+    this.InputObj.EnvUrl = environment.FoundationR3Url;
+    this.InputObj.PathUrlGetSchemeBySchemeCode = URLConstant.GetSchemesBySchemeCode;
+    this.InputObj.PathUrlGetCategoryByCategoryCode = URLConstant.GetRefSingleCategoryByCategoryCode;
+    this.InputObj.PathUrlGetAdtQuestion = URLConstant.GetRefAdtQuestion;
+    this.InputObj.PathUrlGetPossibleMemberAndAttributeExType = URLConstant.GetPossibleMemberAndAttributeExType;
+    this.InputObj.PathUrlGetApprovalReturnHistory = URLConstant.GetApprovalReturnHistory;
+    this.InputObj.PathUrlCreateNewRFA = URLConstant.CreateNewRFA;
+    this.InputObj.PathUrlCreateJumpRFA = URLConstant.CreateJumpRFA;
+    this.InputObj.CategoryCode = CommonConstant.CAT_CODE_PRD_HO_APV;
+    this.InputObj.SchemeCode = CommonConstant.SCHM_CODE_APV_HO_ACT_SCHM;
+
+    var data = {
+      ProdId: this.ProdId
+    } 
+    this.http.post(URLConstant.GetProductById, data).subscribe(
+      (response) => {
+        this.InputObj.TrxNo = response["ProdCode"];
+        this.IsReady = true;
+      });
+  }
+
+  SaveForm(event) {
     var data = {
       ProdHId: this.ProdHId,
       ProdId: this.ProdId,
@@ -54,10 +84,10 @@ export class ProductHoReviewComponent implements OnInit {
       Notes: this.FormObj.controls.Notes.value,
       WfTaskListId: this.WfTaskListId,
     } 
-    this.http.post(URLConstant.ReviewProduct, data).subscribe(
+    this.http.post(URLConstant.NewReviewProduct, data).subscribe(
       (response) => {
         this.toastr.successMessage("Success");
-        this.router.navigate(["/Product/HOReview"]);
+        AdInsHelper.RedirectUrl(this.router,["/Product/HOReview"],{ });
       });
   }
   async ClaimTask(WfTaskListId) {

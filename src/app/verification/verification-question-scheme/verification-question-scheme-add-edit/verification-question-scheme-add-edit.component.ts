@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VerfSchemeHObj } from 'app/shared/model/VerfSchemeHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-verification-question-scheme-add-edit',
@@ -67,7 +68,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditVerfSchemeH, this.verfSchemeHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(['/Verification/QuestionScheme/Paging']);
+          AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionScheme/Paging"],{ });
         });
     }
     else {
@@ -75,7 +76,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddVerfSchemeH, this.verfSchemeHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(['/Verification/QuestionScheme/Paging']);
+          AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionScheme/Paging"],{ });
         });
     }
   }

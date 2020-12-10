@@ -8,6 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionGrpDObj } from 'app/shared/model/VerfQuestionGrpDObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-verification-question-group-member-edit',
@@ -84,7 +85,7 @@ export class VerificationQuestionGroupMemberEditComponent implements OnInit {
       this.http.post(URLConstant.EditVerfQuestionGrpD, this.verfQuestionGrpDObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/Verification/QuestionGroupMemberPaging?VerfQuestionGrpHId=' + this.VerfQuestionGrpHId);
+          AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionGroupMemberPaging"],{ "VerfQuestionGrpHId": this.VerfQuestionGrpHId });
         });
     
   }

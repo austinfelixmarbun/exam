@@ -54,7 +54,8 @@ import { ProductHoReviewComponent } from './product-HO/product-ho-review/product
 import { ProdOfferingReviewComponent } from './prod-offering/prod-offering-review/prod-offering-review.component';
 import { ProdOfferingReviewPagingComponent } from './prod-offering/prod-offering-review-paging/prod-offering-review-paging.component';
 import { ProductHoReviewPagingComponent } from './product-HO/product-ho-review-paging/product-ho-review-paging.component';
-
+import { UcapprovalcreateModule } from '@adins/Ucapprovalcreate';
+import { UcapprovalR3Module } from '@adins/ucapproval-r3';
 
 @NgModule({
   imports: [
@@ -77,7 +78,9 @@ import { ProductHoReviewPagingComponent } from './product-HO/product-ho-review-p
     UcapprovalModule,
     NgMultiSelectDropDownModule,
     UcaddtotempModule,
-    UcapprovebyModule
+    UcapprovebyModule,
+    UcapprovalcreateModule,
+    UcapprovalR3Module
   ],
   declarations: [
     ProductHOApprovalComponent,

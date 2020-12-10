@@ -6,7 +6,7 @@
         "name": "CUST_NO",
         "id": "custNoId",
         "value": "",
-        "label": "Cust No",
+        "label": "Customer No",
         "placeholder": "Cust No"
       },
       {
@@ -14,7 +14,7 @@
         "name": "CUST_NAME",
         "id": "custNameId",
         "value": "",
-        "label": "Cust Name",
+        "label": "Customer Name",
         "placeholder": "Cust Name"
       }
     ],
@@ -39,8 +39,7 @@
     ],
   
     "querystring": {
-      "select": "SELECT CUST_NO AS CustNo, CUST_NAME AS CustName , CUST_ID AS CustId, MR_CUST_TYPE_CODE AS MrCustTypeCode",
-      "from": "FROM dbo.Cust WITH(NOLOCK)"
+      "name": "lookupExistingCustomer"
     },
   
     "bodyList": [

@@ -83,8 +83,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.PROV_DISTRICT_CODE as provDistrictCode,A.REF_PROV_DISTRICT_ID as refProvDistrictId,A.PROV_DISTRICT_NAME as provDistrictName,A.DISTRICT_REG_RPT_CODE as districtRegRptCode,A.IS_ACTIVE as isActive,A.TYPE as type,A.PARENT_ID as parentId",
-    "from": "FROM dbo.REF_PROV_DISTRICT A WITH(NOLOCK)"
+    "name": "searchDistrict"
     },
   "bodyList": [
     {

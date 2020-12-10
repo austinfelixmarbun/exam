@@ -11,6 +11,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ParameterObj } from 'app/shared/model/ParameterObj.Model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-ref-form-detail',
@@ -205,13 +206,14 @@ export class RefFormDetailComponent implements OnInit {
       this.http.post(URLConstant.EditRefFormData, this.refFormObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigateByUrl('/SystemSetting/RefForm/Paging');
+          AdInsHelper.RedirectUrl(this.router,["/SystemSetting/RefForm/Paging"],{});
+          
         });
     } else {
       this.http.post(URLConstant.AddRefFormData, this.refFormObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(['/SystemSetting/RefForm/Paging']);
+          AdInsHelper.RedirectUrl(this.router,["/SystemSetting/RefForm/Paging"],{});
         });
     }
   }

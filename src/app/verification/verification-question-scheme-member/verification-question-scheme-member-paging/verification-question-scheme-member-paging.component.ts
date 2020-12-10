@@ -6,6 +6,7 @@ import { VerfSchemeHObj } from 'app/shared/model/VerfSchemeHObj.Model';
 import { ToastrService } from 'ngx-toastr';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-verification-question-scheme-member-paging',
@@ -50,7 +51,7 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
   }
 
   Edit(item) {
-    this.router.navigateByUrl('/Verification/QuestionSchemeMember/Edit?VerfSchemeHId=' + this.VerfSchemeHId + '&VerfSchemeDId=' + item.VerfSchemeDId + '&VerfQuestionGrpHId=' + item.VerfQuestionGrpHId);
+    AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionSchemeMember/Edit"],{ "VerfSchemeHId": this.VerfSchemeHId, "VerfSchemeDId": item.VerfSchemeDId, "VerfQuestionGrpHId": item.VerfQuestionGrpHId });
   }
 
   DeleteData(VerfSchemeDId) {

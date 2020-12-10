@@ -8,6 +8,7 @@ import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model'
 import { Validators, FormBuilder } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'add-zipcode',
@@ -103,7 +104,7 @@ export class ZipcodeAddComponent implements OnInit {
       this.http.post(this.addUrl, this.rzcObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/CommonSetting/Zipcode/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,["/CommonSetting/Zipcode/Paging"],{});
         }
       );
     } else {
@@ -112,7 +113,7 @@ export class ZipcodeAddComponent implements OnInit {
       this.http.post(this.editUrl, this.rzcObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(["/CommonSetting/Zipcode/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,["/CommonSetting/Zipcode/Paging"],{});
         }
       );
     }

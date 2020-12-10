@@ -11,6 +11,7 @@ import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.c
 import { UcInfoComponent } from 'app/shared/UserControl/uc-info/uc-info.component';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
     selector: 'add-bod',
@@ -127,7 +128,7 @@ export class BodAddComponent implements OnInit {
             this.http.post(this.editUrl, coyAdd).subscribe(
                 (response) => {
                     this.toastr.successMessage(response['message']);
-                    this.router.navigateByUrl('/company/bod?refCoyId=' + this.refCoyId);
+                    AdInsHelper.RedirectUrl(this.router,["/company/bod"],{ "refCoyId": this.refCoyId });
                 });
         }
         else {
@@ -135,7 +136,7 @@ export class BodAddComponent implements OnInit {
             this.http.post(this.editUrl, coyAdd).subscribe(
                 (response) => {
                     this.toastr.successMessage(response['message']);
-                    this.router.navigateByUrl('/company/bod?refCoyId=' + this.refCoyId);
+                    AdInsHelper.RedirectUrl(this.router,["/company/bod"],{ "refCoyId": this.refCoyId });
                 });
         }
     }

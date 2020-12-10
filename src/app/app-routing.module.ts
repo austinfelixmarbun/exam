@@ -17,6 +17,7 @@ const appRoutes: Routes = [
   },
   { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES, canActivate: [AuthGuard] },
   { path: '', component: ContentLayoutComponent, data: { title: 'content Views' }, children: CONTENT_ROUTES },
+  { path: '**', redirectTo: 'pages/login' }
 ];
 
 @NgModule({

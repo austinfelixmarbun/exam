@@ -11,6 +11,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from "@angular/common";
 import { InputSearchObj } from "app/shared/model/InputSearchObj.Model";
 import { URLConstant } from "app/shared/constant/URLConstant";
+import { AdInsHelper } from "app/shared/AdInsHelper";
 
 @Component({
   selector: "app-user-paging",
@@ -107,7 +108,9 @@ export class UserPagingComponent implements OnInit {
             .navigateByUrl("/dashboard/dash-board", {
               skipLocationChange: true
             })
-            .then(() => this.router.navigate(["/systemSetting/refUser"]));
+            .then(() => 
+            AdInsHelper.RedirectUrl(this.router,["/systemSetting/refUser"],{})
+            );
         }
       );
     }

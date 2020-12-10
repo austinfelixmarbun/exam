@@ -12,6 +12,7 @@ import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-add-asset-scheme',
@@ -93,7 +94,7 @@ export class AddAssetSchemeComponent implements OnInit {
           });
       },
       error => {
-        this.router.navigateByUrl('Error');
+        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
       }
     );
   }
@@ -122,7 +123,7 @@ export class AddAssetSchemeComponent implements OnInit {
     this.http.post(URLConstant.AddRangeAssetSchmD, AssetSchmObj).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
-        this.router.navigate(["/Asset/Scheme/MemberDetail"], { queryParams: { "AssetSchmHId": this.AssetSchmHId } });
+        AdInsHelper.RedirectUrl(this.router,["/Asset/Scheme/MemberDetail"],{ "AssetSchmHId": this.AssetSchmHId });
       }
     );
   }

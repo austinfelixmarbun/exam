@@ -45,8 +45,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT SCSH.SCORE_CATEGORY_SCHM_H_ID AS ScoreCategorySchmHId, SCSH.SCORE_CATEGORY_SCHM_H_CODE AS ScoreCategorySchmHCode, SCSH.SCORE_CATEGORY_SCHM_H_NAME AS ScoreCategorySchmHName, SCSH.IS_ACTIVE AS IsActive",
-        "from": "FROM SCORE_CATEGORY_SCHM_H AS SCSH WITH(NOLOCK)"
+        "name": "searchScoreCategory"
     },
     "headerList": [
         {

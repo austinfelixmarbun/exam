@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UpdateCustPersonalFinDataObj } from 'app/shared/model/UpdateMasterCust/UpdateCustPersonalFinDataObj.Model';
@@ -24,12 +25,15 @@ export class UpdateCustomerFinDataComponent implements OnInit {
   AppCustBankAcc: Array<any>;
   ArrayNum: Array<number>;
   num: number;
+  IsCopyAll: boolean;
+  CustBankAccToDelete: Array<number>;
+  MonthNames: Array<string>;
 
   CustomerFinDataForm = this.fb.group({
     CustPersonalFinDataId: [0],
     CustPersonalId: [0],
     CustId: [0],
-    MonthlyIncomeAmt: [0, [Validators.required]],
+    MonthlyIncomeAmt: [0, [Validators.required, Validators.min(1)]],
     MonthlyExpenseAmt: [0],
     MonthlyInstallmentAmt: [0],
     MrSourceOfIncomeCode: [''],
@@ -52,6 +56,10 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     this.AppCustBankAcc = new Array<any>();
     this.ResponseTab = new EventEmitter<any>();
     this.ArrayNum = new Array<number>();
+    this.IsCopyAll = false;
+    this.CustBankAccToDelete = new Array<number>();
+    this.MonthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
   }
 
   ngOnInit() {
@@ -82,12 +90,24 @@ export class UpdateCustomerFinDataComponent implements OnInit {
         for (const item of this.MainCustBankAcc) {
           item["IsMasterData"] = true;
           item["IsMasterStmnt"] = true;
+          item["CustBankStmntList"].sort((a, b) => {
+            if(a["Year"] < b["Year"]) return -1;
+            if(a["Year"] > b["Year"]) return 1;
+            if(a["Month"] < b["Month"]) return -1;
+            if(a["Month"] > b["Month"]) return 1;
+          });
         }
         for (const item of this.AppCustBankAcc) {
           var isMasterData = false;
           var isMasterStmnt = false;
           var isAddedBankAcc = false;
           var isAddedBankStmnt = false;
+          item["CustBankStmntList"].sort((a, b) => {
+            if(a["Year"] < b["Year"]) return -1;
+            if(a["Year"] > b["Year"]) return 1;
+            if(a["Month"] < b["Month"]) return -1;
+            if(a["Month"] > b["Month"]) return 1;
+          });
           for (const main of this.MainCustBankAcc) {
             if(item["RefBankId"] == main["RefBankId"] &&
                 item["BankAccNo"] == main["BankAccNo"] && 
@@ -97,15 +117,27 @@ export class UpdateCustomerFinDataComponent implements OnInit {
                 if(item["CustBankStmntList"].length == main["CustBankStmntList"].length){
                   for (let i = 0; i < item["CustBankStmntList"].length; i++) {
                     for (const key in item["CustBankStmntList"][i]) {
-                      if(item["CustBankStmntList"][key] == main["CustBankStmntList"][key]){
+                      if(key == "Month"){
+                        item["CustBankStmntList"][i][key] = this.MonthNames[item["CustBankStmntList"][i][key]-1];
+                        if(!isNaN(main["CustBankStmntList"][i][key]) && !isNaN(parseInt(main["CustBankStmntList"][i][key]))){
+                          var monthIdx = parseInt(main["CustBankStmntList"][i][key]) - 1;
+                          main["CustBankStmntList"][i][key] = this.MonthNames[monthIdx];
+                        }
+                      }
+                      if(item["CustBankStmntList"][i][key] == main["CustBankStmntList"][i][key]){
                         isMasterStmnt = true;
                       }
                       else{
+                        isMasterData = false;
                         isMasterStmnt = false;
                         break;
                       }
                     } 
                   }
+                }
+                else{
+                  isMasterData = false;
+                  isMasterStmnt = false;
                 }
                 break;
             }
@@ -131,6 +163,8 @@ export class UpdateCustomerFinDataComponent implements OnInit {
           this.num = this.MainCustBankAcc.length;
         }
         this.ArrayNum = new Array<number>(this.num).fill(1);
+        this.MainCustBankAcc.sort((a, b) => (a["IsDefault"]) ? -1 : 1);
+        this.AppCustBankAcc.sort((a, b) => (a["IsDefault"]) ? -1 : 1);
       }
     ).catch(
       (error) => {
@@ -156,14 +190,22 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     for (let i = 0; i < this.AppCustBankAcc.length; i++) {
       this.AddNewBankAcc(i);
     }
-    this.CalculateFinData();
+    this.IsCopyAll = true;
+    // this.CalculateFinData();
   }
 
   CopyHandler(formControlName){
-    var obj = new Object();
-    obj[formControlName] = this.AppCustFinData[formControlName];
-    this.CustomerFinDataForm.patchValue(obj);
-    this.CalculateFinData();
+    this.CustomerFinDataForm.patchValue({
+      MonthlyIncomeAmt: this.AppCustFinData.MonthlyIncomeAmt,
+      MonthlyExpenseAmt: this.AppCustFinData.MonthlyExpenseAmt,
+      MonthlyInstallmentAmt: this.AppCustFinData.MonthlyInstallmentAmt,
+      MrSourceOfIncomeCode: this.AppCustFinData.MrSourceOfIncomeCode,
+      SpouseMonthlyIncomeAmt: this.AppCustFinData.SpouseMonthlyIncomeAmt,
+      IsJoinIncome: this.AppCustFinData.IsJoinIncome,
+      TotalIncomeAmt: this.AppCustFinData.TotalIncomeAmt,
+      NettIncomeAmt: this.AppCustFinData.NettIncomeAmt,
+    });
+    // this.CalculateFinData();
   }
 
   CalculateFinData(){
@@ -186,6 +228,27 @@ export class UpdateCustomerFinDataComponent implements OnInit {
   AddNewBankAcc(idx){
     this.AppCustBankAcc[idx]["IsAddedBankAcc"] = true;
     this.AppCustBankAcc[idx]["IsAddedBankStmnt"] = true;
+    var idxToDelete = 0;
+    var isDelete = false;
+    for (var i = 0; i < this.MainCustBankAcc.length; i++) {
+      if(this.MainCustBankAcc[i]["RefBankId"] == this.AppCustBankAcc[idx]["RefBankId"] &&
+          this.MainCustBankAcc[i]["BankName"] == this.AppCustBankAcc[idx]["BankName"] &&
+          this.MainCustBankAcc[i]["BankBranch"] == this.AppCustBankAcc[idx]["BankBranch"] &&
+          this.MainCustBankAcc[i]["BankAccNo"] == this.AppCustBankAcc[idx]["BankAccNo"] &&
+          this.MainCustBankAcc[i]["BankAccName"] == this.AppCustBankAcc[idx]["BankAccName"]){
+        this.CustBankAccToDelete.push(this.MainCustBankAcc[i]["CustBankAccId"]);
+        idxToDelete = i;
+        isDelete = true;
+        break;
+      }
+    }
+    if(isDelete){
+      this.MainCustBankAcc.splice(idxToDelete, 1);
+    }
+    else{
+      this.AppCustBankAcc.push(new Object());
+      this.ArrayNum.push(1);
+    }
     var obj = new Object();
     obj["RefBankId"] = this.AppCustBankAcc[idx]["RefBankId"];
     obj["BankName"] = this.AppCustBankAcc[idx]["BankName"];
@@ -199,6 +262,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     obj["IsAddedBankAcc"] = this.AppCustBankAcc[idx]["IsAddedBankAcc"];
     obj["IsAddedBankStmnt"] = this.AppCustBankAcc[idx]["IsAddedBankStmnt"];
     this.MainCustBankAcc.push(obj);
+    this.MainCustBankAcc.sort((a, b) => (a["IsDefault"]) ? -1 : 1);
     // this.MainCustBankAcc.sort((a, b) => (a["IsDefault"]) ? -1 : 1);
   }
 
@@ -246,7 +310,8 @@ export class UpdateCustomerFinDataComponent implements OnInit {
   }
 
   back(){
-    this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
   }
 
   SaveValue(){
@@ -254,10 +319,15 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     var requestBankAcc = new Array<any>();
     for (const item of this.MainCustBankAcc) {
       if(!item["IsMasterData"]){
+        for (const stmnt of item["CustBankStmntList"]) {
+          stmnt["Month"] = this.MonthNames.findIndex(x => x == stmnt["Month"]) + 1;
+        }
         requestBankAcc.push(item);
       }
     }
     formValue["CustBankAccList"] = requestBankAcc;
+    formValue["IsCopyAll"] = this.IsCopyAll;
+    formValue["CustBankAccIdToDelete"] = this.CustBankAccToDelete;
     this.http.post(URLConstant.EditMasterCustFinData, formValue).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);

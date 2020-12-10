@@ -8,6 +8,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 @Component({
   selector: 'app-asset-attribute',
   templateUrl: './asset-attribute.component.html',
@@ -46,7 +47,7 @@ export class AssetAttributeComponent implements OnInit {
   }
 
   edit(ev) {
-    this.router.navigate(["/Asset/Attribute/Detail"], { queryParams: { "AssetTypeId": this.AssetTypeId,"AssetAttrId": ev.RowObj.AssetAttrId, mode:"edit"} });
+    AdInsHelper.RedirectUrl(this.router,["/Asset/Attribute/Detail"],{ "AssetTypeId": this.AssetTypeId,"AssetAttrId": ev.RowObj.AssetAttrId, mode:"edit" });
   }
 
 }

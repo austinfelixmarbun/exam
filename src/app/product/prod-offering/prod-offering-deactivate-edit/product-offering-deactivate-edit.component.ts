@@ -10,6 +10,7 @@ import { RefProductOfferingBrancMbrObj } from '../../../shared/model/RefProductO
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 
 @Component({
@@ -85,7 +86,7 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
     this.http.post(this.editUrl, this.prodOfferingHDeactivateObj).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(["/Product/OfferingDeactivate"]);
+        AdInsHelper.RedirectUrl(this.router,["/Product/OfferingDeactivate"],{ });
       }
     );
 

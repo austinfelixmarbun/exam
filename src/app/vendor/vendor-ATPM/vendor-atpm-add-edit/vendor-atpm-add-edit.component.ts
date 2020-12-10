@@ -14,6 +14,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { VendorService } from '../../vendor.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-vendor-atpm-add-edit',
@@ -319,7 +320,7 @@ export class VendorATPMAddEditComponent implements OnInit {
         this.vendorService.EditVendorATPM(this.vendorATPMObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(['/Vendor/ATPM/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": 'edit' } });
+            AdInsHelper.RedirectUrl(this.router,["/Vendor/ATPM/Registration"],{ "VendorId": this.VendorId, "mode": 'edit' });
           });
       } else {
         this.vendorATPMObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
@@ -327,7 +328,7 @@ export class VendorATPMAddEditComponent implements OnInit {
         this.vendorService.AddVendorATPM(this.vendorATPMObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(['/Vendor/ATPM/Registration'], { queryParams: { "VendorId": response['VendorObj'].VendorId } });
+            AdInsHelper.RedirectUrl(this.router,["/Vendor/ATPM/Registration"],{ "VendorId": response['VendorObj'].VendorId });
           });
       }
     }
@@ -335,9 +336,9 @@ export class VendorATPMAddEditComponent implements OnInit {
 
   Back() {
     if (this.mode == "edit") {
-      this.router.navigate(['/Vendor/ATPM/Registration'], { queryParams: { "VendorId": this.VendorId, "mode": 'edit' } });
+      AdInsHelper.RedirectUrl(this.router,["/Vendor/ATPM/Registration"],{ "VendorId": this.VendorId, "mode": 'edit' });
     } else {
-      this.router.navigate(["/Vendor/Paging"], { queryParams: { "MrVendorCategoryCode": this.MrVendorCategoryCode } });
+      AdInsHelper.RedirectUrl(this.router,["/Vendor/Paging"],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
 
   }

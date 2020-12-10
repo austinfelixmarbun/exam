@@ -263,7 +263,7 @@ export class URLConstant {
     public static UpdateFormFeatureAuthForm = "/MenuManagement/UpdateFormFeatureAuthForm";
     public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
     public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
-    public static LoginByRole = "/Authenticate/LoginByRole";
+    public static LoginByRole = "/Authenticate/LoginCookies";
     public static LoginByToken = "/Authenticate/LoginByToken";
     public static UpdateToken = "/Authenticate/UpdateRole";
     public static LoginURLFrontEnd = "pages/login";
@@ -445,7 +445,9 @@ export class URLConstant {
     public static DownloadProductRule = environment.FoundationR3Url + "/Product/DownloadProductRule";
     public static UpdateProductPostApv = environment.FoundationR3Url + "/Product/UpdateProductPostApv";
     public static ReviewProduct = environment.FoundationR3Url + "/Product/ReviewProduct";
-
+    public static NewReviewProduct = environment.FoundationR3Url + "/Product/NewReviewProduct";
+    public static GetProductById = environment.FoundationR3Url + "/Product/GetProductById";
+    public static GetProductByHId = environment.FoundationR3Url + "/Product/GetProductByHId";
     
     //PRODUCT OFFERING
     public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
@@ -920,4 +922,20 @@ export class URLConstant {
     public static EditMasterCustCompanyLegalDoc = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyLegalDoc";
     public static EditMasterCustCompanyContactInfo = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyContactInfo";
     public static EditMasterCustCompanyFinData = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyFinData";
+
+    // New Approval R3
+    public static CreateNewRFA = "/Approval/CreateNewRFA";
+    public static CreateJumpRFA = "/Approval/CreateJumpRFA";
+    public static GetRefSingleCategoryByCategoryCode = "/Approval/GetRefSingleCategoryByCategoryCode";
+    public static GetSchemesBySchemeCode = "/Approval/GetSchemesBySchemeCode";
+    public static GetRefAdtQuestion = "/Approval/GetRefAdtQuestion";
+    public static GetPossibleMemberAndAttributeExType = "/Approval/GetPossibleMemberAndAttributeExType";
+    public static GetApprovalReturnHistory = "/Approval/GetApprovalReturnHistory";
+    public static GetSchemesByCategoryId = "/Approval/GetSchemesByCategoryId";
+    public static SubmitApproval = "RFA/SubmitApproval";
+    public static GetLevelVoting = "RFA/GetLevelVoting";
+    public static GetPossibleResult = "ApprovalInstance/GetPossibleResult";
+    public static GetNextNodeMember = "ApprovalInstance/GetNextNodeMember";
+    public static GetRefReasonActive = "RefReason/GetRefReasonActive";
+    public static GetCanChangeMinFinalLevel = "ApprovalInstance/GetCanChangeMinFinalLevel";
 }

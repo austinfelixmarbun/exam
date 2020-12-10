@@ -9,6 +9,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { CustOtherInfoObj } from 'app/shared/model/CustOtherInfoObj.Model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-cust-attr-section',
@@ -157,9 +158,9 @@ export class CustAttrSectionComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["Message"]);
           if (this.From == 'CustPaging') {
-            this.router.navigate(["/Customer/Paging"]);
+            AdInsHelper.RedirectUrl(this.router,['/Customer/Paging'],{});
           } else {
-            this.router.navigate(["/Customer/EditMainData/Paging"]);
+            AdInsHelper.RedirectUrl(this.router,['/Customer/EditMainData/Paging'],{});
           }
         }); 
     }

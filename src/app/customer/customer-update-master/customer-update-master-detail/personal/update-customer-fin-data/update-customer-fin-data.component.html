@@ -15,16 +15,17 @@
       <div class="form-group row">
         <label class="col-md-2 adInsLabel adins-required-label" translate>Monthly Income</label>
         <div class="col-md-4">
-          <label>{{AppCustFinData.MonthlyIncomeAmt}}</label>
+          <label>{{AppCustFinData.MonthlyIncomeAmt | number:'.2':'en-US'}}</label>
         </div>
         <div class="col-md-2">
           <button *ngIf="CustomerFinDataForm.controls.MonthlyIncomeAmt.value != AppCustFinData.MonthlyIncomeAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MonthlyIncomeAmt')">Copy</button>
         </div>
         <div class="col-md-4">
-          <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyIncomeAmt"
+          <label>{{CustomerFinDataForm.controls.MonthlyIncomeAmt.value | number:'.2':'en-US'}}</label>
+          <!-- <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyIncomeAmt"
             [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFinDataForm.controls.MonthlyIncomeAmt.invalid}">
           <lib-uc-show-errors [control]="CustomerFinDataForm.controls.MonthlyIncomeAmt" [submit]="enjiForm.submitted">
-          </lib-uc-show-errors>
+          </lib-uc-show-errors> -->
         </div>
       </div>
       <div class="form-group row">
@@ -33,15 +34,16 @@
           <label>{{AppCustFinData.MrSourceOfIncomeCode}}</label>
         </div>
         <div class="col-md-2">
-          <button *ngIf="CustomerFinDataForm.controls.MrSourceOfIncomeCode.value != AppCustFinData.MrSourceOfIncomeCode" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrSourceOfIncomeCode')">Copy</button>
+          <!-- <button *ngIf="CustomerFinDataForm.controls.MrSourceOfIncomeCode.value != AppCustFinData.MrSourceOfIncomeCode" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MrSourceOfIncomeCode')">Copy</button> -->
         </div>
         <div class="col-md-4">
-          <select class="form-control adInsInput" formControlName="MrSourceOfIncomeCode"
+          <label>{{CustomerFinDataForm.controls.MrSourceOfIncomeCode.value}}</label>
+          <!-- <select class="form-control adInsInput" formControlName="MrSourceOfIncomeCode"
             [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFinDataForm.controls.MrSourceOfIncomeCode.invalid}">
             <option *ngFor="let item of SourceIncomeList" [value]="item.Key">{{item.Value}}</option>
           </select>
           <lib-uc-show-errors [control]="CustomerFinDataForm.controls.MrSourceOfIncomeCode" [submit]="enjiForm.submitted">
-          </lib-uc-show-errors>
+          </lib-uc-show-errors> -->
         </div>
       </div>
       <div class="form-group row">
@@ -50,77 +52,83 @@
           <label>{{AppCustFinData.IsJoinIncome ? 'Yes' : 'No'}}</label>
         </div>
         <div class="col-md-2">
-          <button *ngIf="CustomerFinDataForm.controls.IsJoinIncome.value != AppCustFinData.IsJoinIncome" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IsJoinIncome')">Copy</button>
+          <!-- <button *ngIf="CustomerFinDataForm.controls.IsJoinIncome.value != AppCustFinData.IsJoinIncome" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IsJoinIncome')">Copy</button> -->
         </div>
         <div class="col-md-4">
-          <input type="checkbox" formControlName="IsJoinIncome" (change)="CalculateFinData()" />
+          <label>{{CustomerFinDataForm.controls.IsJoinIncome.value ? 'Yes' : 'No'}}</label>
+          <!-- <input type="checkbox" formControlName="IsJoinIncome" (change)="CalculateFinData()" /> -->
         </div>
       </div>
       <div class="form-group row">
         <label class="col-md-2 adInsLabel" translate>Spouse Monthly Income</label>
         <div class="col-md-4">
-          <label>{{AppCustFinData.SpouseMonthlyIncomeAmt}}</label>
+          <label>{{AppCustFinData.SpouseMonthlyIncomeAmt | number:'.2':'en-US'}}</label>
         </div>
         <div class="col-md-2">
-          <button *ngIf="CustomerFinDataForm.controls.SpouseMonthlyIncomeAmt.value != AppCustFinData.SpouseMonthlyIncomeAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('SpouseMonthlyIncomeAmt')">Copy</button>
+          <!-- <button *ngIf="CustomerFinDataForm.controls.SpouseMonthlyIncomeAmt.value != AppCustFinData.SpouseMonthlyIncomeAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('SpouseMonthlyIncomeAmt')">Copy</button> -->
         </div>
         <div class="col-md-4">
-          <input type="" currencyMask class="form-control adInsInput" formControlName="SpouseMonthlyIncomeAmt" (blur)="CalculateFinData()"
+          <label>{{CustomerFinDataForm.controls.SpouseMonthlyIncomeAmt.value | number:'.2':'en-US'}}</label>
+          <!-- <input type="" currencyMask class="form-control adInsInput" formControlName="SpouseMonthlyIncomeAmt" (blur)="CalculateFinData()"
             [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFinDataForm.controls.SpouseMonthlyIncomeAmt.invalid}">
           <lib-uc-show-errors [control]="CustomerFinDataForm.controls.SpouseMonthlyIncomeAmt" [submit]="enjiForm.submitted">
-          </lib-uc-show-errors>
+          </lib-uc-show-errors> -->
         </div>
       </div>
       <div class="form-group row">
         <label class="col-md-2 adInsLabel" translate>Total Income</label>
         <div class="col-md-4">
-          <label>{{AppCustFinData.TotalIncomeAmt}}</label>
+          <label>{{AppCustFinData.TotalIncomeAmt | number:'.2':'en-US'}}</label>
         </div>
         <div class="col-md-2">
+          <!-- <button *ngIf="CustomerFinDataForm.controls.TotalIncomeAmt.value != AppCustFinData.TotalIncomeAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('TotalIncomeAmt')">Copy</button> -->
         </div>
         <div class="col-md-4">
-          <label>{{CustomerFinDataForm.controls.TotalIncomeAmt.value}}</label>
+          <label>{{CustomerFinDataForm.controls.TotalIncomeAmt.value | number:'.2':'en-US'}}</label>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-md-2 adInsLabel" translate>Monthly Expense</label>
         <div class="col-md-4">
-          <label>{{AppCustFinData.MonthlyExpenseAmt}}</label>
+          <label>{{AppCustFinData.MonthlyExpenseAmt | number:'.2':'en-US'}}</label>
         </div>
         <div class="col-md-2">
-          <button *ngIf="CustomerFinDataForm.controls.MonthlyExpenseAmt.value != AppCustFinData.MonthlyExpenseAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MonthlyExpenseAmt')">Copy</button>
+          <!-- <button *ngIf="CustomerFinDataForm.controls.MonthlyExpenseAmt.value != AppCustFinData.MonthlyExpenseAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MonthlyExpenseAmt')">Copy</button> -->
         </div>
         <div class="col-md-4">
-          <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyExpenseAmt"
+          <label>{{CustomerFinDataForm.controls.MonthlyExpenseAmt.value | number:'.2':'en-US'}}</label>
+          <!-- <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyExpenseAmt"
             [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFinDataForm.controls.MonthlyExpenseAmt.invalid}">
           <lib-uc-show-errors [control]="CustomerFinDataForm.controls.MonthlyExpenseAmt" [submit]="enjiForm.submitted">
-          </lib-uc-show-errors>
+          </lib-uc-show-errors> -->
         </div>
       </div>
       <div class="form-group row">
         <label class="col-md-2 adInsLabel" translate>Monthly Installment</label>
         <div class="col-md-4">
-          <label>{{AppCustFinData.MonthlyInstallmentAmt}}</label>
+          <label>{{AppCustFinData.MonthlyInstallmentAmt | number:'.2':'en-US'}}</label>
         </div>
         <div class="col-md-2">
-          <button *ngIf="CustomerFinDataForm.controls.MonthlyInstallmentAmt.value != AppCustFinData.MonthlyInstallmentAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MonthlyInstallmentAmt')">Copy</button>
+          <!-- <button *ngIf="CustomerFinDataForm.controls.MonthlyInstallmentAmt.value != AppCustFinData.MonthlyInstallmentAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('MonthlyInstallmentAmt')">Copy</button> -->
         </div>
         <div class="col-md-4">
-          <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyInstallmentAmt"
+          <label>{{CustomerFinDataForm.controls.MonthlyInstallmentAmt.value | number:'.2':'en-US'}}</label>
+          <!-- <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyInstallmentAmt"
             [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFinDataForm.controls.MonthlyInstallmentAmt.invalid}">
           <lib-uc-show-errors [control]="CustomerFinDataForm.controls.MonthlyInstallmentAmt" [submit]="enjiForm.submitted">
-          </lib-uc-show-errors>
+          </lib-uc-show-errors> -->
         </div>
       </div>
       <div class="form-group row">
         <label class="col-md-2 adInsLabel" translate>Nett Income</label>
         <div class="col-md-4">
-          <label>{{AppCustFinData.NettIncomeAmt}}</label>
+          <label>{{AppCustFinData.NettIncomeAmt | number:'.2':'en-US'}}</label>
         </div>
         <div class="col-md-2">
+          <!-- <button *ngIf="CustomerFinDataForm.controls.NettIncomeAmt.value != AppCustFinData.NettIncomeAmt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('NettIncomeAmt')">Copy</button> -->
         </div>
         <div class="col-md-4">
-          <label>{{CustomerFinDataForm.controls.NettIncomeAmt.value}}</label>
+          <label>{{CustomerFinDataForm.controls.NettIncomeAmt.value | number:'.2':'en-US'}}</label>
         </div>
       </div>
     </div>
@@ -129,10 +137,10 @@
     <div id="BankAccSection">
       <div class="form-group row" *ngFor="let item of ArrayNum; let i = index">
         <div class="col-md-6">
-          <div *ngIf="AppCustBankAcc[i].BankAccNo">
+          <div *ngIf="AppCustBankAcc[i] && AppCustBankAcc[i].BankAccNo">
             <div class="col-md-12 row" style="padding: 0; margin: 0;">
               <label class="col-md-9" style="padding-left: 0;">{{i+1}}. {{AppCustBankAcc[i].BankName}} - {{AppCustBankAcc[i].BankAccNo}} - {{AppCustBankAcc[i].BankAccName}} - {{AppCustBankAcc[i].BankBranch}}{{AppCustBankAcc[i].IsDefault ? ' - Default' : ''}}</label>
-              <div class="col-md-3" *ngIf="!AppCustBankAcc[i].IsMasterData && !AppCustBankAcc[i].IsAddedBankAcc"><button type="button" class="btn btn-raised btn-primary" (click)="AddNewBankAcc(i)">Add As New Data</button></div>
+              <div class="col-md-3" *ngIf="!AppCustBankAcc[i].IsMasterData && !AppCustBankAcc[i].IsAddedBankAcc"><button type="button" class="btn btn-raised btn-primary" (click)="AddNewBankAcc(i)">Copy</button></div>
             </div>
             <div class="col-md-12 row" style="padding: 0; margin: 0;">
               <label class="col-md-4" style="padding-left: 0;">Bank Statement</label>
@@ -183,10 +191,10 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div *ngIf="MainCustBankAcc[i].BankAccNo">
+          <div *ngIf="MainCustBankAcc[i] && MainCustBankAcc[i].BankAccNo">
             <div class="col-md-12 row" style="padding: 0; margin: 0;">
               <label class="col-md-9" style="padding-left: 0;">{{i+1}}. {{MainCustBankAcc[i].BankName}} - {{MainCustBankAcc[i].BankAccNo}} - {{MainCustBankAcc[i].BankAccName}} - {{MainCustBankAcc[i].BankBranch}}{{MainCustBankAcc[i].IsDefault ? ' - Default' : ''}}</label>
-              <div class="col-md-3" *ngIf="!MainCustBankAcc[i].IsMasterData"><button type="button" class="btn btn-raised btn-primary" (click)="CancelBankAcc(i)">Cancel Add Bank Account</button></div>
+              <!-- <div class="col-md-3" *ngIf="!MainCustBankAcc[i].IsMasterData"><button type="button" class="btn btn-raised btn-primary" (click)="CancelBankAcc(i)">Cancel Add Bank Account</button></div> -->
             </div>
             <div class="col-md-12 row" style="padding: 0; margin: 0;">
               <label class="col-md-4" style="padding-left: 0;">Bank Statement</label>

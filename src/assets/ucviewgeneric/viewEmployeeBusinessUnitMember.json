@@ -23,9 +23,7 @@
         }
       ],
       "querystring": {
-        "select": "SELECT usr.USERNAME AS Username, emp.EMP_NO AS EmpNo, emp.EMP_NAME AS EmployeeName",
-        "from": "FROM dbo.REF_USER usr WITH(NOLOCK) JOIN dbo.REF_EMP emp WITH(NOLOCK) on usr.REF_EMP_ID = emp.REF_EMP_ID",
-        "where": "WHERE usr.REF_USER_ID = {0}"
+        "name": "viewEmployeeBusinessUnitMember"
       }
     }
   ]

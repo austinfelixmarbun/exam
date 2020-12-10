@@ -18,6 +18,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-negative-customer-detail',
@@ -621,7 +622,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
         (response) => {
           var responseNegativeCust = response[0];
           this.toastr.successMessage(responseNegativeCust["message"]);
-          this.router.navigate(['/Customer/NegativeCustomer/Paging']);
+          AdInsHelper.RedirectUrl(this.router,["/Customer/NegativeCustomer/Paging"],{});
         }
       );
     }
@@ -652,7 +653,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
         (response) => {
           var responseNegativeCust = response[0];
           this.toastr.successMessage(responseNegativeCust["message"]);
-          this.router.navigate(['/Customer/NegativeCustomer/Paging']);
+          AdInsHelper.RedirectUrl(this.router,["/Customer/NegativeCustomer/Paging"],{});
         }
       );
     }

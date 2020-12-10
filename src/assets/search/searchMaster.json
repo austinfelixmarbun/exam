@@ -83,8 +83,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT MASTER_CODE AS MasterCode, DESCR AS Descr, SEQ_NO AS SeqNo, IS_ACTIVE AS IsActive, IS_SYSTEM AS IsSystem, REF_MASTER_ID AS RefMasterId",
-    "from": "FROM REF_MASTER WITH(NOLOCK)"
+    "name": "searchMaster"
   },
   "headerList": [
     {

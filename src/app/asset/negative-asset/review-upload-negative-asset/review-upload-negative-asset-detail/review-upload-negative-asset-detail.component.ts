@@ -11,6 +11,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-review-upload-negative-asset-detail',
@@ -67,7 +68,7 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
     this.http.post(this.UploadReviewUrl, uploadObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
-        this.router.navigate(["/Asset/AssetMaster/ReviewUploadPaging"]);
+        AdInsHelper.RedirectUrl(this.router,["/Asset/AssetMaster/ReviewUploadPaging"],{});
       }
     );
   }

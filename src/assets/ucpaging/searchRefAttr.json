@@ -50,8 +50,7 @@
         }
     ],
     "querystring": { 
-        "select": "SELECT ATTR_CODE AS attrCode, ATTR_NAME AS attrName, ATTR_GROUP AS attrGroup, IS_SYSTEM AS isSystem, IS_ACTIVE AS isActive, REF_ATTR_ID AS refAttrId", 
-        "from": "FROM dbo.REF_ATTR WITH(NOLOCK)"
+        "name": "searchRefAttr"
     },
     "headerList" : [ 
         {

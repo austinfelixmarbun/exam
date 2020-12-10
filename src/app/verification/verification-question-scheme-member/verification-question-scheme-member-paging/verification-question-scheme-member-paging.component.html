@@ -1,11 +1,11 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="button" class="backButton" [routerLink]="['/Verification/QuestionScheme/Paging']"
+    <button type="button" class="backButton" [routerLink]="['/Verification/QuestionScheme/Paging']" skipLocationChange
       translate>
       <i class="fa fa-arrow-left"> </i> Back 
     </button>
     <button type="button" class="addButton"
-      [routerLink]="['/Verification/QuestionSchemeMember/Add']" [queryParams]="{VerfSchemeHId: this.VerfSchemeHId}">
+      [routerLink]="['/Verification/QuestionSchemeMember/Add']" skipLocationChange [queryParams]="{VerfSchemeHId: this.VerfSchemeHId}">
       <i class="ft-plus-circle"></i> Add
     </button>
   </span>

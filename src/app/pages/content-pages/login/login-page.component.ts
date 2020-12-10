@@ -1,9 +1,7 @@
 import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
-import { formatDate } from '@angular/common';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { HttpClient } from '@angular/common/http';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { environment } from 'environments/environment';
@@ -11,6 +9,7 @@ import { CurrentUserContextService } from 'app/shared/CurrentUserContext/current
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-login-page',
@@ -30,8 +29,7 @@ export class LoginPageComponent implements OnInit {
   result: any;
   isLocked: boolean = false;
   constructor(private router: Router, private http: HttpClient, public rolePickService: RolePickService,
-    private route: ActivatedRoute,
-    private currentUserContextService: CurrentUserContextService) {
+    private route: ActivatedRoute, private currentUserContextService: CurrentUserContextService, private cookieService: CookieService) {
     //Ini buat check klo misal udah login jadi lgsg lempar ke tempat laennya lagi
 
     this.version = localStorage.getItem(CommonConstant.VERSION);
@@ -41,7 +39,7 @@ export class LoginPageComponent implements OnInit {
       }
     });
 
-    if (localStorage.getItem(CommonConstant.USER_ACCESS) != null) {
+    if (this.cookieService.get(CommonConstant.USER_ACCESS) != null) {
       this.router.navigate(['dashboard/dash-board']);
     }
   }
@@ -49,22 +47,12 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
     this.FoundationR3Url = environment.FoundationR3Url;
 
-
     if (this.token != null) {
       localStorage.setItem("Token", this.token);
+      this.cookieService.put('access_token', this.token)
       this.http.post(AdInsConstant.LoginWithToken, { ModuleCode: environment.Module }).subscribe(
         (response) => {
-          AdInsHelper.CreateUserAccess(response);
-          // var currentUserContext = new CurrentUserContext;
-          // currentUserContext.UserName = response["Identity"].UserName;
-          // currentUserContext.Office = response["Identity"].OfficeCode;
-          // currentUserContext.Role = response["Identity"].RoleCode;
-          // currentUserContext.BusinessDate = response["Identity"].BusinessDt;
-          // localStorage.setItem("BusinessDateRaw",response["Identity"].BusinessDt);
-          // var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
-          // localStorage.setItem("BusinessDate", DateParse);
-          // localStorage.setItem("UserAccess", JSON.stringify(response["Identity"]));
-          // this.currentUserContextService.addCurrentUserContext(currentUserContext);
+          AdInsHelper.CreateUserAccess(this.cookieService, response);
           this.router.navigate(['dashboard/dash-board']);
         }
       );
@@ -78,6 +66,7 @@ export class LoginPageComponent implements OnInit {
     this.apiUrl = this.FoundationR3Url + AdInsConstant.Login;
     var requestObj = { "Username": username, "Password": password };
     localStorage.setItem("Username", username);
+    this.cookieService.put("username", username);
     //this.rolePickService.openDialog(data.returnObject);
     this.http.post(this.apiUrl, requestObj).subscribe(
       (response) => {
@@ -86,6 +75,7 @@ export class LoginPageComponent implements OnInit {
         }
         else {
           localStorage.setItem("Username", username);
+          this.cookieService.put("username", username);
           const object = {
             response: response[CommonConstant.ReturnObj],
             user: username,
@@ -110,8 +100,6 @@ export class LoginPageComponent implements OnInit {
                 };
                 this.http.post(URLConstant.SendNotificationRemainingPasswordExpirationDaysToUser, object2).subscribe();
               }
-
-
             })
         };
       }

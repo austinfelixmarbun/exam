@@ -20,9 +20,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT REF_OFFICE_ID As RefOfficeId, OFFICE_CODE AS OfficeCode, OFFICE_NAME AS OfficeName",
-        "from": "FROM dbo.REF_OFFICE WITH(NOLOCK)",
-        "where": "WHERE IS_ACTIVE = 1"
+        "name": "lookupEmployeeOffice"
     },
     "headerList": [
         {

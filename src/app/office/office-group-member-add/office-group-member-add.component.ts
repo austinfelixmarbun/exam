@@ -9,6 +9,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-office-group-member-add',
@@ -79,7 +80,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
 
     this.http.post(URLConstant.AddCenterGrpOfficeMember, obj).subscribe(
       (response) => {
-        this.router.navigate(['/Office/Group/Member'], { queryParams: { RefOfficeId: this.RefOfficeId, CenterGrpId: this.CenterGrpId } });
+        AdInsHelper.RedirectUrl(this.router,["/Office/Group/Member"],{ "RefOfficeId": this.RefOfficeId, "CenterGrpId": this.CenterGrpId });
       });
   }
 }

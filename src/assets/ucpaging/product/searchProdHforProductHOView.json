@@ -39,8 +39,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.PROD_VERSION as prodVersion ,A.START_DT as startDt, A.END_DT as endDt, A.PROD_STAT as prodStat",
-    "from": "FROM dbo.PROD_H A WITH(NOLOCK) INNER JOIN dbo.PROD B WITH(NOLOCK) ON A.PROD_ID=B.PROD_ID"
+    "name": "searchProdHforProductHOView"
   },
   "bodyList": [
     {
