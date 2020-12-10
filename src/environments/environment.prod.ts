@@ -4,14 +4,18 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-    production: true,
-    navbarColor: 'transparent',
-    LosURL : 'http://r3web-server.ad-ins.com/LOSR3/',
-    FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
-    WebSocketURL : 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
-    Module:"FOU",
-    ApprovalURL : 'http://r3app-server/APPROVAL',
-    FoundationR3Web:'http://r3web-server.ad-ins.com/Foundation'
-  };
+  production: true,
+  navbarColor: "transparent",
+  LosURL: "http://r3impl-websvr.ad-ins.com/LOSDSF/",
+  FoundationR3Url: "http://r3impl-appsvr.ad-ins.com/FOUDSF",
+  WebSocketURL: "http://r3impl-appsvr.ad-ins.com/FOUDSF",
+  Module: "FOU",
+  ApprovalURL: "http://r3impl-appsvr.ad-ins.com/APPROVAL_DSF",
+  FoundationR3Web: "http://r3impl-websvr.ad-ins.com/FOUDSF",
+  FoundationControlerR3Web: "http://r3impl-appsvr.ad-ins.com/FOUDSF",
+  FoundationR3ControllerUrl: "http://r3impl-appsvr.ad-ins.com/FOUDSF",
+  ApprovalR3Url: "http://r3impl-appsvr.ad-ins.com/APPROVAL_DSF",
+  ConfinsR2Url: "http://r3impl-appsvr.ad-ins.com/CONFINSR2/api/"
+};
   
   
