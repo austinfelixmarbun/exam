@@ -3,7 +3,7 @@
     "subsection": [
       {
         "subSectionId": "BranchInformationSurId",
-        "subSectionTitle": "Main Info",
+        "subSectionTitle": "Surveyor Branch Info",
         "mainInfoPath": "/Generic/GetDataViewBySQL",
         "mainInfo": [
           {

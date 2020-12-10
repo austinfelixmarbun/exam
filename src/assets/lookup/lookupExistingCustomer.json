@@ -6,7 +6,7 @@
         "name": "CUST_NO",
         "id": "custNoId",
         "value": "",
-        "label": "Cust No",
+        "label": "Customer No",
         "placeholder": "Cust No"
       },
       {
@@ -14,7 +14,7 @@
         "name": "CUST_NAME",
         "id": "custNameId",
         "value": "",
-        "label": "Cust Name",
+        "label": "Customer Name",
         "placeholder": "Cust Name"
       }
     ],
