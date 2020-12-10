@@ -21,6 +21,7 @@ export const ROUTES: RouteInfo[] = [
   {
     Path: '', Title: 'System Setting', Icon: 'ft-users', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
+      { Path: "/CommonSetting/AppSource/Paging", Title: "Application Source", Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: '/CommonSetting/GeneralSetting', Title: 'General Setting', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] , Params : [] },
       { Path: '/CommonSetting/Holiday', Title: 'Holiday Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] , Params : [] },
       { Path: '/CommonSetting/WorkingHour', Title: 'Working Hour', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },

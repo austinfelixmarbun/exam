@@ -143,6 +143,9 @@ export class CommonConstant {
     public static RefMasterTypeCodeRegularExpression = "REGULAR_EXPRESSION";
     public static RefMasterTypeCodeAttributeGroup = "ATTRIBUTE_GROUP";
     public static RefMasterTypeCodeBuildingOwnership = "BUILDING_OWNERSHIP";
+
+    public static RefMasterTypeCodeAppSrcType = "APP_SRC_TYPE";
+    
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
     // GENERAL SETTING CODE

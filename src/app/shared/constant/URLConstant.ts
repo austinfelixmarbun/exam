@@ -490,7 +490,7 @@ export class URLConstant {
     public static GetListAssetAttrByAssetTypeId = environment.FoundationR3Url +"/AssetAttr/GetListAssetAttrByAssetTypeId";
     public static GetAssetAttrByAssetAttrId = environment.FoundationR3Url +"/AssetAttr/GetAssetAttrByAssetAttrId";
     public static DeleteAssetAttr = "/AssetAttr/DeleteAssetAttr";
-
+    
     //asset category
     public static AddNewAssetCategory = environment.FoundationR3Url + "/AssetCategory/AddAssetCategory"
     public static EditAssetCategory = environment.FoundationR3Url + "/AssetCategory/EditAssetCategory"
@@ -920,4 +920,14 @@ export class URLConstant {
     public static EditMasterCustCompanyLegalDoc = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyLegalDoc";
     public static EditMasterCustCompanyContactInfo = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyContactInfo";
     public static EditMasterCustCompanyFinData = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyFinData";
+
+    //Application Source
+    public static AddRefAppSrc = environment.FoundationR3Url + "/RefAppSrc/AddRefAppSrc";
+    public static AddRefAppSrcOfficeMbr = environment.FoundationR3Url + "/RefAppSrc/AddRefAppSrcOfficeMbr";
+    public static DeleteRefAppSrcOfficeMbr = "/RefAppSrc/DeleteRefAppSrcOfficeMbr";
+    public static EditRefAppSrc = environment.FoundationR3Url + "/RefAppSrc/EditRefAppSrc";
+    public static GetRefAppSrcByRefAppSrcId = environment.FoundationR3Url + "/RefAppSrc/GetRefAppSrcByRefAppSrcId";
+    public static GetListRefAppSrcOfficeMbrByRefAppSrcId = environment.FoundationR3Url + "/RefAppSrc/GetListRefAppSrcOfficeMbrByRefAppSrcId"
+    
+    
 }

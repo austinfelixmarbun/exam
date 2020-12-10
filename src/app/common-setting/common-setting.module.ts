@@ -55,7 +55,10 @@ import { ScoreCategoryTypeComponent } from './score-category/score-category-type
 import { ScoreCategoryScoringComponent } from './score-category/score-category-scoring/score-category-scoring.component';
 import { ReasonComponent } from './reason/reason-paging/reason.component';
 import { ReasonAddEditComponent } from './reason/reason-add-edit/reason-add-edit.component';
-
+import { AppSourceAddEditComponent } from './app-source/app-source-add-edit/app-source-add-edit.component';
+import { AppSourcePagingComponent } from './app-source/app-source-paging/app-source-paging.component';
+import { AppSourceOfficeMemberPagingComponent } from './app-source/app-source-office-member/app-source-office-member-paging/app-source-office-member-paging.component';
+import { AppSourceOfficeMemberAddComponent } from './app-source/app-source-office-member/app-source-office-member-add/app-source-office-member-add.component';
 
 @NgModule({
   imports: [
@@ -116,7 +119,11 @@ import { ReasonAddEditComponent } from './reason/reason-add-edit/reason-add-edit
     ScoreCategoryTypeComponent,
     ScoreCategoryScoringComponent,
     ReasonComponent,
-    ReasonAddEditComponent
+    ReasonAddEditComponent,
+    AppSourceAddEditComponent,
+    AppSourcePagingComponent,
+    AppSourceOfficeMemberPagingComponent,
+    AppSourceOfficeMemberAddComponent
   ],
   providers: [
     NGXToastrService
