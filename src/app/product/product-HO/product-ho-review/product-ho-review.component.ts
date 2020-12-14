@@ -54,7 +54,7 @@ export class ProductHoReviewComponent implements OnInit {
 
   initInputApprovalObj(){
     this.InputObj = new UcInputRFAObj();
-    this.InputObj.ApvTypecodes = ["Limit"];
+    this.InputObj.ApvTypecodes = ["PRD_APV_TYPE"];
     this.InputObj.EnvUrl = environment.FoundationR3Url;
     this.InputObj.PathUrlGetSchemeBySchemeCode = URLConstant.GetSchemesBySchemeCode;
     this.InputObj.PathUrlGetCategoryByCategoryCode = URLConstant.GetRefSingleCategoryByCategoryCode;
@@ -80,10 +80,11 @@ export class ProductHoReviewComponent implements OnInit {
     var data = {
       ProdHId: this.ProdHId,
       ProdId: this.ProdId,
-      ApprovedById: this.FormObj.controls.ApprovedById.value,
-      Notes: this.FormObj.controls.Notes.value,
+      // ApprovedById: this.FormObj.controls.ApprovedById.value,
+      // Notes: this.FormObj.controls.Notes.value, 
       WfTaskListId: this.WfTaskListId,
-    } 
+    }
+    console.log(data);
     this.http.post(URLConstant.NewReviewProduct, data).subscribe(
       (response) => {
         this.toastr.successMessage("Success");
