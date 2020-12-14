@@ -932,10 +932,10 @@ export class URLConstant {
     public static GetPossibleMemberAndAttributeExType = "/Approval/GetPossibleMemberAndAttributeExType";
     public static GetApprovalReturnHistory = "/Approval/GetApprovalReturnHistory";
     public static GetSchemesByCategoryId = "/Approval/GetSchemesByCategoryId";
-    public static SubmitApproval = "RFA/SubmitApproval";
-    public static GetLevelVoting = "RFA/GetLevelVoting";
-    public static GetPossibleResult = "ApprovalInstance/GetPossibleResult";
-    public static GetNextNodeMember = "ApprovalInstance/GetNextNodeMember";
-    public static GetRefReasonActive = "RefReason/GetRefReasonActive";
-    public static GetCanChangeMinFinalLevel = "ApprovalInstance/GetCanChangeMinFinalLevel";
+    public static SubmitApproval = "/Approval/SubmitApproval";
+    public static GetLevelVoting = "/Approval/GetLevelVoting";
+    public static GetPossibleResult = "/Approval/GetPossibleResult";
+    public static GetNextNodeMember = "/Approval/GetNextNodeMember";
+    public static GetRefReasonActive = "/Approval/GetRefReasonActive";
+    public static GetCanChangeMinFinalLevel = "/Approval/GetCanChangeMinFinalLevel";
 }
