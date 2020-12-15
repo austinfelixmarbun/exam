@@ -89,6 +89,9 @@ export class OfficeAddComponent implements OnInit {
   officeTypeUrl: any;
   officeparentId: any;
 
+  resultDataLawCourt: any;
+
+  cbIsNationalCourt: boolean;
 
   OfficeForm = this.fb.group({
     OfficeCode: ['', Validators.required],
@@ -119,7 +122,9 @@ export class OfficeAddComponent implements OnInit {
     CntctPersonMobilePhnNo2: ['', [Validators.pattern('^[0-9]+$')]],
     IsActive: false,
     OfficeClose: false,
-    AllowAppCreated: false
+    AllowAppCreated: false,
+    IsNationalCourt: false,
+    NationalCourtOffice : ['']
   })
   InputLookupObj: any;
   addressObj: UcAddressObj;
@@ -151,6 +156,9 @@ export class OfficeAddComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.cbIsNationalCourt = false;
+    this.IsNationalCourtChange();
+
     this.InputLookupObj = new InputLookupObj();
     this.InputLookupObj.urlJson = "./assets/lookup/lookupOfficeParent.json";
     this.InputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -263,6 +271,7 @@ export class OfficeAddComponent implements OnInit {
       this.officeObj = new OfficeObj();
       this.addressObj = new UcAddressObj();
       this.officeObj.RefOfficeId = this.RefOfficeId;
+      
       this.httpClient.post(URLConstant.GetRefOfficeByRefOfficeId, this.officeObj).subscribe(
         (response) => {
           this.resultData = response;
@@ -288,6 +297,9 @@ export class OfficeAddComponent implements OnInit {
             CntctPersonEmail2: this.resultData.CntctPersonEmail2,
             CntctPersonMobilePhnNo1: this.resultData.CntctPersonMobilePhnNo1,
             CntctPersonMobilePhnNo2: this.resultData.CntctPersonMobilePhnNo2,
+
+            IsNationalCourt: this.resultData.IsNationalCourt,
+            NationalCourtOffice: this.resultData.NationalCourtOffice
           })
           this.checkType();
           this.addressObj.Addr = this.resultData.OfficeAddr;
@@ -368,6 +380,17 @@ export class OfficeAddComponent implements OnInit {
               }
             })
 
+            this.cbIsNationalCourt = this.resultData.IsNationalCourt;
+
+            if (this.cbIsNationalCourt == true) {
+              this.OfficeForm.controls.NationalCourtOffice.enable()
+              this.OfficeForm.controls.NationalCourtOffice.clearValidators();
+              this.OfficeForm.controls.NationalCourtOffice.setValidators([Validators.required]);
+            } else {
+              this.OfficeForm.controls.NationalCourtOffice.disable()
+              this.OfficeForm.controls.NationalCourtOffice.clearValidators();
+            }
+            this.OfficeForm.controls.NationalCourtOffice.updateValueAndValidity();
         })
     }
     this.inputAddressObj = new InputAddressObj();
@@ -391,6 +414,9 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.IsOfficeClose = this.OfficeForm.value.OfficeClose;
     this.officeObj.CntctPersonName = this.OfficeForm.value.CntctPersonName;
     this.officeObj.CntctPersonJobTitle = this.OfficeForm.value.CntctPersonJobTitle;
+
+    this.officeObj.IsNationalCourt = this.OfficeForm.value.IsNationalCourt;
+    this.officeObj.NationalCourtOffice = this.OfficeForm.value.NationalCourtOffice;
 
     if (this.OfficeForm.controls.OfficeType.value == CommonConstant.HeadOffice) {
       this.officeObj.ParentId = null;
@@ -495,5 +521,19 @@ export class OfficeAddComponent implements OnInit {
     // });
     // this.InputLookupObj.nameSelect = ev.zipcode;
     // this.InputLookupObj.idSelect = ev.zipcode;
+  }
+
+  IsNationalCourtChange(){
+    if(this.cbIsNationalCourt == true)
+    {
+      this.OfficeForm.controls.NationalCourtOffice.enable()
+      this.OfficeForm.controls.NationalCourtOffice.clearValidators();
+      this.OfficeForm.controls.NationalCourtOffice.setValidators([Validators.required]);
+    }else{
+      this.OfficeForm.controls.NationalCourtOffice.setValue("");
+      this.OfficeForm.controls.NationalCourtOffice.disable()
+      this.OfficeForm.controls.NationalCourtOffice.clearValidators();
+    }
+    this.OfficeForm.controls.NationalCourtOffice.updateValueAndValidity();
   }
 }
