@@ -626,6 +626,9 @@ export class URLConstant {
     public static GetListVendorAttrContentByVendorAttrId = environment.FoundationR3Url + "/VendorAttrContent/GetListVendorAttrContentByVendorAttrId";
     public static GetListVendorAttrContentByVendorId = environment.FoundationR3Url + "/VendorAttrContent/GetListVendorAttrContentByVendorId";
 
+    // VENDOR ATPM MAPPING
+    public static GetListVendorAtpmMappingByVendorId = environment.FoundationR3Url + "/Vendor/GetListVendorAtpmMappingByVendorId"
+    
     // VERIFICATION
     // REF VERF ANSWER TYPE
     public static AddRefVerfAnswerType = environment.FoundationR3Url + "/RefVerfAnswerType/AddRefVerfAnswerType";

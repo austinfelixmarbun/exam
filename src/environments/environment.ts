@@ -6,11 +6,11 @@
 export const environment = {
   production: false,
   navbarColor: 'lightgray',
-  LosURL : 'http://r3web-server.ad-ins.com/LOSR3/',
-  WebSocketURL : 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
-  FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
-  //FoundationR3Url: 'https://localhost:5000',
+  LosURL : 'http://r3impl-websvr.ad-ins.com/LOSDSF/',
+  WebSocketURL : 'http://r3impl-appsvr.ad-ins.com/FOUDSF',
+  FoundationR3Url: 'http://r3impl-appsvr.ad-ins.com/FOUDSF',
+  //FoundationR3Url: 'http://localhost:5000',
   Module:"FOU",
-  ApprovalURL : 'http://r3app-server.ad-ins.com/APPROVAL',
-  FoundationR3Web:'http://r3web-server.ad-ins.com/Foundation'
+  ApprovalURL : 'http://r3impl-appsvr.ad-ins.com/APPROVAL_DSF',
+  FoundationR3Web:'http:/r3impl-websvr.ad-ins.com/FOUDSF'
 };

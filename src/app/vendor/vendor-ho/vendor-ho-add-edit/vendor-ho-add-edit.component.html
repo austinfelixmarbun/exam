@@ -28,7 +28,7 @@
                   </lib-uc-show-errors>
                 </div>
               </div>
-              <div *ngIf="MrVendorCategoryCode == 'SUPPLIER_HO' && VendorForm.controls.MrVendorTypeCode.value == 'C'">
+              <!-- <div *ngIf="MrVendorCategoryCode == 'SUPPLIER_HO' && VendorForm.controls.MrVendorTypeCode.value == 'C'">
                 <div class="form-group row">
                   <label class="col-md-3 adInsLabel">Supplier ATPM</label>
                   <div class="col-md-3" *ngIf="inputLookupATPMObj.isReady">
@@ -37,7 +37,7 @@
                     </lib-uclookupgeneric>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>HO Code</label>
@@ -291,6 +291,51 @@
                         [enjiForm]="enjiForm" [identifier]="'lookupParent'" (lookup)="getLookupParent($event)">
                       </lib-uclookupgeneric>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="MrVendorCategoryCode == 'SUPPLIER_HO' && VendorForm.controls.MrVendorTypeCode.value == 'C'">
+              <span class="mr-1 pull-right">
+                <button type="button" class="addButton" (click)="AddAtpmClick()" style="margin-right: 0!important;" translate><!--(click)="custBankHandler('add', '0')"-->
+                  <i class="ft-plus-circle"></i> Add ATPM
+                </button>
+              </span>
+              <lib-ucSubsection [id]="'ATPMInfo'" [title]="'ATPM Info'" [panel]="'ATPMInformation'">
+              </lib-ucSubsection>
+              <div id="ATPMInformation">
+                <div class="col-md-12" style="padding: 0;">
+                  <div class="col-md-12">
+                    <table class="table table-responsive-md text-center table-hover">
+                      <thead>
+                        <tr class="table-header">
+                          <th style="text-align: center;">
+                            <span class="thead-header" name='vendorAtpmCode' translate>VENDOR CODE</span>
+                          </th>
+                          <th style="text-align: left;">
+                            <span class="thead-header" name='vendorAtpmName' translate>VENDOR NAME</span>
+                          </th>
+                          <th style="text-align: left;">
+                            <span class="thead-header" name='vendorAddress' translate>VENDOR LEGAL ADDRESS</span>
+                          </th>
+                          <th style="text-align: center;">
+                            <span class="thead-header" name='endingBalance' translate>DELETE</span>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of vendorAtpmList; let i = index">
+                          <td style="text-align: center;">{{item.VendorAtpmCode}}</td>
+                          <td style="text-align: left;">{{item.VendorAtpmName}}</td>
+                          <td style="text-align: left;">{{item.VendorAtpmLegalAddr}}</td>
+                          <td style="text-align: center;">
+                            <a class="warning p-0" (click)="deleteAtpm(item)">
+                              <i class="ft-trash-2 font-medium-3 mr-2"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>

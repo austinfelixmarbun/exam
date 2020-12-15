@@ -61,6 +61,7 @@ import { VendorPagingComponent } from './component/vendor/vendor-paging/vendor-p
 import { VendorATPMAddEditComponent } from './vendor-ATPM/vendor-atpm-add-edit/vendor-atpm-add-edit.component';
 import { VendorATPMRegistrationComponent } from './vendor-ATPM/vendor-atpm-registration/vendor-atpm-registration.component';
 import { NgxCurrencyModule } from 'ngx-currency';
+import { VendorAtpmSelectComponent } from './vendor-ATPM/vendor-atpm-select/vendor-atpm-select.component';
 
 
 export const customCurrencyMaskConfig = {     
@@ -140,9 +141,10 @@ export const customCurrencyMaskConfig = {
     HoBranchInfoComponent,
     VendorPagingComponent,
     VendorATPMAddEditComponent,
-    VendorATPMRegistrationComponent
+    VendorATPMRegistrationComponent,
+    VendorAtpmSelectComponent
   ],
-  entryComponents : [UcviewgenericComponent],
+  entryComponents : [UcviewgenericComponent, VendorAtpmSelectComponent],
   providers: [
     VendorService,
     NGXToastrService
