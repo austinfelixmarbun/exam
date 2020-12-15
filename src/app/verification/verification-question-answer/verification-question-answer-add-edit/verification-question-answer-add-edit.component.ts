@@ -8,6 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionAnswerObj } from 'app/shared/model/VerfQuestionAnswerObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-verification-question-answer-add-edit',
@@ -111,7 +112,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditVerfQuestionAnswer, this.verfQuestionAnswerObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(['/Verification/QuestionAnswer/Paging']);
+          AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionAnswer/Paging"],{});
         });
     }
     else {
@@ -119,7 +120,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddVerfQuestionAnswer, this.verfQuestionAnswerObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.router.navigate(['/Verification/QuestionAnswer/Paging']);
+          AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionAnswer/Paging"],{});
         });
     }
   }

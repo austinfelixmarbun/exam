@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UpdateCustLegalDocObj } from 'app/shared/model/UpdateMasterCust/UpdateCustLegalDocObj.Model';
 
@@ -69,7 +70,8 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
   }
 
   back(){
-    this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
   }
 
   SaveValue(){
@@ -79,7 +81,7 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
         request.push(item);
       }
     }
-    this.http.post(URLConstant.EditMasterCustCompanyShareholder, { CustCompanyId: this.CustCompanyId, TaskListId: this.WfTaskListId, LegalDocList: request }).toPromise().then(
+    this.http.post(URLConstant.EditMasterCustCompanyLegalDoc, { CustCompanyId: this.CustCompanyId, TaskListId: this.WfTaskListId, LegalDocList: request }).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

@@ -13,8 +13,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT UPLOAD_MONITORING_NO AS UploadMonitoringNo, MR_CUST_TYPE_CODE AS MrCustTypeCode, CUST_NO AS CustNo,CUST_NAME AS CustName,MR_ID_TYPE_CODE AS MrIdTypeCode,ID_NO AS IdNo, ID_EXPIRED_DT AS IdExpiredDt,  TAX_ID_NO AS TaxIdNo, BIRTH_PLACE AS BirthPlace, BIRTH_DT AS BirthDt,MR_GENDER_CODE AS MrGenderCode,MOTHER_MAIDEN_NAME AS MotherMaidenName, LEGAL_ADDR AS LegalAddr, MOBILE_PHN AS MobilePhn,MR_NEG_CUST_TYPE_CODE AS MrNegCustTypeCode, MR_NEG_CUST_SOURCE_CODE AS MrNegCustSourceCode, UPLOAD_STATUS AS UploadStatus,  NEG_CUST_CAUSE AS NegCustCause, NOTES AS Notes, IS_ACTIVE AS IsActive, NEGATIVE_CUST_ID AS NegativeCustId, CUST_ID AS CustId",
-        "from": "FROM dbo.UPLOAD_NEGATIVE_CUST WITH(NOLOCK) "
+        "name": "searchReviewUploadNegativeCustomerDetail"
     },
     "headerList": [
         {

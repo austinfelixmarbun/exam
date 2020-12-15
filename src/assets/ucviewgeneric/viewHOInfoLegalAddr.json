@@ -42,9 +42,7 @@
                 }
             ],
             "querystring": {
-                "select": "SELECT ADDR AS Addr, ZIPCODE AS Zipcode, AREA_CODE_2 AS Kelurahan, AREA_CODE_1 AS Kecamatan, CITY AS City, PROVINCE AS Province",
-                "from": "FROM DBO.VENDOR_ADDR",
-                "where": "WHERE VENDOR_ID = {0} AND MR_ADDR_TYPE_CODE = N'LEGAL'"
+                "name": "viewHOInfoLegalAddr_HOLegalAddressId"
             }
         },
         {
@@ -65,9 +63,7 @@
                 }
             ],
             "querystring": {
-                "select": "SELECT LATITUDE AS Latitude, LONGITUDE AS Longitude",
-                "from": "FROM DBO.VENDOR_ADDR",
-                "where": "WHERE VENDOR_ID = {0} AND MR_ADDR_TYPE_CODE = N'LEGAL'"
+                "name": "viewHOInfoLegalAddr_HOLatLongId"
             }
         }
     ]

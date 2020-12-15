@@ -8,6 +8,7 @@ import { environment } from 'environments/environment';
 import { empty } from 'rxjs';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-list-office-member',
@@ -132,10 +133,10 @@ export class ListOfficeMemberComponent implements OnInit {
 
   BackToPaging() {
     if (this.source == "return") {
-      this.router.navigate(["/Product/HOReturnPaging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Product/HOReturnPaging"],{ });
     }
     else {
-      this.router.navigate(["/product/HOpaging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Product/HOpaging"],{ });
     }
   }
 }

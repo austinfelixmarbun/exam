@@ -9,6 +9,7 @@ import { formatDate } from '@angular/common';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-holiday-detail-edit',
@@ -65,12 +66,12 @@ export class HolidayDetailEditComponent implements OnInit {
 
     this.http.post(URLConstant.EditHolidaySchmD, HolidayObj).subscribe(
       (response) => {
-        this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
+        AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Holiday/Detail/'],{ "HolidaySchmHId": this.HolidaySchmHId })
         this.toastr.successMessage(response['message']);
       });
   }
 
   BackNavigate() {
-    this.router.navigate(['/CommonSetting/Holiday/Detail/'], { queryParams: { HolidaySchmHId: this.HolidaySchmHId } });
+    AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Holiday/Detail/'],{ "HolidaySchmHId": this.HolidaySchmHId })
   }
 }

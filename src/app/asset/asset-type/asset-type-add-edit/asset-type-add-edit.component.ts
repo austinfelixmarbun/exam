@@ -6,6 +6,7 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-asset-type-add-edit',
@@ -252,7 +253,7 @@ export class AssetTypeAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddAssetType, this.assetTypeObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/Type/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,["/Asset/Type/Paging"],{});
         });
     } else {
       this.assetTypeObj.AssetTypeCode = this.assetTypeCode;
@@ -261,7 +262,7 @@ export class AssetTypeAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditAssetType, this.assetTypeObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/Type/Paging"]);
+          AdInsHelper.RedirectUrl(this.router,["/Asset/Type/Paging"],{});
         });
     }
   }

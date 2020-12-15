@@ -9,6 +9,7 @@ import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
 import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-asset-document-add-edit',
@@ -128,7 +129,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddNewAssetDocList, this.assetDocListObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/Document/Paging"], { queryParams: { "AssetTypeId": this.assetDocListObj.AssetTypeId } });
+          AdInsHelper.RedirectUrl(this.router,["/Asset/Document/Paging"],{ "AssetTypeId": this.assetDocListObj.AssetTypeId });
         }
       );
     }
@@ -146,7 +147,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditAssetDocList, this.assetDocListObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/Document/Paging"], { queryParams: { "AssetTypeId": this.assetDocListObj.AssetTypeId } });
+          AdInsHelper.RedirectUrl(this.router,["/Asset/Document/Paging"],{ "AssetTypeId": this.assetDocListObj.AssetTypeId });
         }
       );
     }

@@ -1,8 +1,9 @@
 import { formatDate } from "@angular/common";
 import { AdInsConstant } from "app/shared/AdInstConstant";
-import { CurrentUserContext } from "./model/CurrentUserContext.model";
 import { environment } from "environments/environment";
 import { CommonConstant } from "./constant/CommonConstant";
+import { Router } from "@angular/router";
+import { CookieService } from "ngx-cookie";
 
 export class AdInsHelper {
     //Function
@@ -39,7 +40,7 @@ export class AdInsHelper {
         localStorage.setItem('PageAccess', JSON.stringify(pageAccess));
     }
 
-    public static ForceLogOut(timeLeft,toastr) {
+    public static ForceLogOut(timeLeft, toastr) {
         let interval = setInterval(() => {
             if (timeLeft > 0) {
                 console.log("Time Left : " + timeLeft)
@@ -53,29 +54,23 @@ export class AdInsHelper {
     }
 
     public static ClearAllLog() {
-        // localStorage.removeItem("UserContext");
-        // localStorage.removeItem("PageAccess");
-        // localStorage.removeItem("RoleId");
-        // localStorage.removeItem("Username");
-        // localStorage.removeItem("BusinessDate");
-        // localStorage.removeItem("UserAccess");
-        // localStorage.removeItem("Token");
-        // localStorage.removeItem("Menu");
         let version = localStorage.getItem(CommonConstant.VERSION);
         localStorage.clear();
         localStorage.setItem("Version", version);
     }
 
-    public static ClearPageAccessLog() {
+    public static ClearPageAccessLog(cookieService: CookieService) {
         localStorage.removeItem("PageAccess");
+        cookieService.remove("PageAccess");
     }
 
-    public static CheckSessionTimeout() {
+    public static CheckSessionTimeout(cookieService: CookieService) {
         let today = new Date();
         var businessDtBefore = localStorage.getItem(CommonConstant.LAST_ACCESS_TIME);
         var businessDtNow = formatDate(today, 'yyyy-MM-dd HH:mm:ss', 'en-US');
         if (businessDtBefore == undefined || businessDtBefore == null) {
             localStorage.setItem("LastAccessTime", businessDtNow);
+            cookieService.put("LastAccessTime", businessDtNow);
         }
         else {
             var bsDtBefore = new Date(businessDtBefore);
@@ -86,22 +81,21 @@ export class AdInsHelper {
                 return "1";
             }
             localStorage.setItem("LastAccessTime", businessDtNow);
+            cookieService.put("LastAccessTime", businessDtNow);
         }
         return "0";
 
     }
 
-    public static CreateUserAccess(response) {
-        // var currentUserContext = new CurrentUserContext;
-        // currentUserContext.UserName = response["Identity"].UserName;
-        // currentUserContext.Office = response["Identity"].OfficeCode;
-        // currentUserContext.Role = response["Identity"].RoleCode;
-        // currentUserContext.BusinessDate = response["Identity"].BusinessDt;
-        localStorage.setItem("BusinessDateRaw", response["Identity"].BusinessDt);
+    public static CreateUserAccess(cookieService: CookieService, response) {
         var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
+        localStorage.setItem("BusinessDateRaw", response["Identity"].BusinessDt);
         localStorage.setItem("BusinessDate", DateParse);
         localStorage.setItem("UserAccess", JSON.stringify(response["Identity"]));
-        //localStorage.setItem("UserContext",JSON.stringify(currentUserContext));
+
+        cookieService.put("BusinessDateRaw", response["Identity"].BusinessDt);
+        cookieService.put("BusinessDate", DateParse);
+        cookieService.put("UserAccess", JSON.stringify(response["Identity"]));
     }
 
     public static IsGrantAccess(formPath) {
@@ -144,9 +138,13 @@ export class AdInsHelper {
         }
         return parsedValue;
     }
-    public static OpenCustomerViewByCustId(CustId){
+    public static OpenCustomerViewByCustId(CustId) {
         var url = environment.FoundationR3Web + "/View/Customer/PersonalDetail?CustId=" + CustId;
         window.open(url, "_blank");
+    }
+
+    public static RedirectUrl(router: Router, url: Array<string>, queryParams: {}) {
+        router.navigate(url, { queryParams: queryParams, skipLocationChange: false });
     }
     public static OpenProdOfferingViewByCodeAndVersion(Code, Version) {
         window.open(environment.FoundationR3Web + "/View/Offering?prodOfferingHId=0&prodOfferingCode=" + Code + "&prodOfferingVersion=" + Version, "_blank");

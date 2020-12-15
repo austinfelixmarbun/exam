@@ -1,9 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -28,6 +29,9 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   lookupObj: Record<string, any>;
   DisplayName: Record<string, any>;
   IsAddressDifferent: boolean;
+  appCustRelationship: string;
+  appIdType: string;
+  appGender: string;
 
   CustomerEmergencyForm = this.fb.group({
     CustEmergencyId: [0],
@@ -40,16 +44,16 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     BirthDate: ['', [Validators.required]],
     Gender: ['', [Validators.required]],
     Profession: [''],
-    Email: [''],
-    MobilePhn1: ['', [Validators.required]],
-    MobilePhn2: [''],
+    Email: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    MobilePhn1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    MobilePhn2: ['', [Validators.pattern("^[0-9]+$")]],
     Address: ['', [Validators.required]],
     Zipcode: ['', [Validators.required]],
-    AreaCode1: [{value: '', disabled: true}, [Validators.required]],
-    AreaCode2: [{value: '', disabled: true}, [Validators.required]],
-    AreaCode3: ['', [Validators.required]],
-    AreaCode4: ['', [Validators.required]],
-    City: [{value: '', disabled: true}, [Validators.required]],
+    AreaCode1: ['', [Validators.required]],
+    AreaCode2: ['', [Validators.required]],
+    AreaCode3: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    AreaCode4: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    City: ['', [Validators.required]],
     RowVersion: ['']
   });
 
@@ -138,6 +142,10 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
         this.lookupObj["Profession"]["isReady"] = true;
         this.lookupObj["Zipcode"]["isReady"] = true;
         this.DisplayName["Profession"] = response[1]["ProfessionName"];
+
+        this.appCustRelationship = this.CustRelationList.find(x => x.Key == this.AppEmergencyData.CustRelation).Value;
+        this.appIdType = this.IdTypeList.find(x => x.Key == this.AppEmergencyData.IdType).Value;
+        this.appGender = this.GenderList.find(x => x.Key == this.AppEmergencyData.Gender).Value;
       }
     ).catch(
       (error) => {
@@ -238,7 +246,8 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   }
 
   back(){
-    this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
   }
 
   SaveValue(){

@@ -1,10 +1,10 @@
 <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="button" class="backButton" [routerLink]="['/Employee/Paging']" translate>
+    <button type="button" class="backButton" [routerLink]="['/Employee/Paging']" skipLocationChange translate>
       <i class="fa fa-arrow-left"> </i> Back 
     </button>
-    <button type="button" class="addButton" [routerLink]="['/Employee/EmployeeBusinessUnit/Add']"
+    <button type="button" class="addButton" [routerLink]="['/Employee/EmployeeBusinessUnit/Add']" skipLocationChange
     [queryParams]="{RefUserId:RefUserId}" translate>
       <i class="ft-plus-circle"></i> Add
     </button>

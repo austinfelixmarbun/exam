@@ -8,6 +8,7 @@ import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.mod
 import { ToastrService } from 'ngx-toastr';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-vendor-scheme-member-add',
@@ -82,7 +83,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
     this.http.post(URLConstant.AddVendorSchmMember, obj).subscribe(
       (response) => {
         this.toastr.success(response["message"], 'Success!');
-        this.router.navigate(['/Vendor/VendorScheme/Member'], { queryParams: { VendorSchmId: this.VendorSchmId, MrVendorCategoryCode: this.MrVendorCategoryCode } });
+        AdInsHelper.RedirectUrl(this.router,["/Vendor/VendorScheme/Member"],{ "VendorSchmId" : this.VendorSchmId, "MrVendorCategoryCode": this.MrVendorCategoryCode });
       });
   }
 }

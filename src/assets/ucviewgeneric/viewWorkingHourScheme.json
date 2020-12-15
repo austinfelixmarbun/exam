@@ -18,9 +18,7 @@
           }
         ],
         "querystring": {
-            "select": "SELECT WORKING_HOUR_SCHM_CODE AS WorkingHourSchmCode, WORKING_HOUR_SCHM_NAME AS WorkingHourSchmName, WORKING_HOUR_SCHM_H_ID AS WorkingHourSchmHId",
-            "from": "FROM WORKING_HOUR_SCHM_H WITH(NOLOCK)", 
-            "where": "WHERE WORKING_HOUR_SCHM_H_ID = {0}" 
+            "name": "viewWorkingHourScheme"
         }
       }
     ]

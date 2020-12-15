@@ -119,8 +119,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT B.EMP_NO as empNo, B.EMP_NAME as empName,A.REF_EMP_LEAVE_MNGMNT_ID as refEmpLeaveMngmntId,A.REF_EMP_ID as refEmpId,A.START_DT as startDt,A.END_DT as endDt, A.IS_PASSED as isPassed",
-    "from": "FROM dbo.REF_EMP_LEAVE_MNGMNT A WITH(NOLOCK) LEFT JOIN dbo.REF_EMP B WITH(NOLOCK) ON A.REF_EMP_ID=B.REF_EMP_ID"
+    "name": "searchLeaveMaintenance"
   },
   "bodyList": [
     {

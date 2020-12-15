@@ -91,8 +91,7 @@
       }
     ],
     "querystring": {
-      "select": "SELECT RM.DESCR AS NotificationTypeDescr,NH.TITLE AS Title, NH.SHORT_DESC AS ShortDesc, NH.REQ_BY AS ReqBy, RS.DESCR AS StatusDescr, NH.MR_NOTIFICATION_TYPE_CODE, NH.NOTIFICATION_H_ID as NotificationHId, NH.STATUS as Status",
-      "from": "FROM dbo.NOTIFICATION_H NH WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER RM WITH(NOLOCK) ON NH.MR_NOTIFICATION_TYPE_CODE = RM.MASTER_CODE AND RM.REF_MASTER_TYPE_CODE = 'NOTIFICATION_TYPE' LEFT JOIN dbo.REF_STATUS RS WITH(NOLOCK) ON RS.REF_STATUS_CODE = NH.[STATUS] AND RS.STATUS_GRP_CODE = 'NOTIFICATION_STAT'"
+      "name": "searchNotificationApproval"
     },
     "bodyList": [
       {

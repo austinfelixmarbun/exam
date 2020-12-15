@@ -4,23 +4,21 @@
         {
             "type": "textbox",
             "name": "bank_Name",
-            "id": "bankName",
+            "id": "BankName",
             "value": "",
             "label": "Bank Name",
             "placeholder": "Placeholder"
         }
     ],
     "querystring": {
-        "select": "SELECT REF_BANK_ID AS refBankId, BANK_NAME AS bankName, REG_RPT_CODE AS regRptCode",
-        "from": "FROM REF_BANK WITH(NOLOCK)",
-        "where":"WHERE IS_ACTIVE = 1"
+        "name": "lookupBank"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "left",
             "label": "Bank Name",
-            "name": "bankName"
+            "name": "BankName"
         },
         {
             "type": "label",
@@ -32,7 +30,7 @@
         {
             "type": "text",
             "position": "left",
-            "property": "bankName"
+            "property": "BankName"
         },
         {
             "type": "action",
@@ -40,11 +38,11 @@
             "action": [
                 {
                     "type": "select",
-                    "property": "refBankId"
+                    "property": "RefBankId"
                 }
             ]
         }
     ],
-    "propertyId": "refBankId",
-    "propertyName": "bankName"
+    "propertyId": "RefBankId",
+    "propertyName": "BankName"
 }

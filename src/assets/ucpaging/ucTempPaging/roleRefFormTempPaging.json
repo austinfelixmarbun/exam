@@ -20,8 +20,7 @@
         }
     ],
     "querystring": {
-       "select": "SELECT FORM_CODE AS FormCode, TITLE AS Title, REF_FORM_ID AS RefFormId",
-        "from": "FROM dbo.REF_FORM WITH(NOLOCK)"
+       "name": "roleRefFormTempPaging"
     },
     "headerList": [
         {

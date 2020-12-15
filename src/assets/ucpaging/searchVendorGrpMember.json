@@ -39,7 +39,6 @@
         }
     ],
     "querystring": {
-       "select": "SELECT VENDOR_CODE AS VendorCode, VENDOR_NAME AS VendorName,  IS_ACTIVE IsActive, VENDOR_ID AS VendorId, MR_VENDOR_CATEGORY_CODE AS MrVendorCategoryCode",
-        "from": "FROM dbo.VENDOR WITH(NOLOCK)"
+       "name": "searchVendorGrpMember"
     }
 }

@@ -21,9 +21,7 @@
           }
         ],
         "querystring": {
-            "select": "SELECT P.VENDOR_NAME AS Parent, P.VENDOR_ID AS VendorParentId",
-            "from": "FROM DBO.VENDOR C JOIN DBO.VENDOR P ON C.VENDOR_PARENT_ID = P.VENDOR_ID", 
-            "where": "WHERE C.VENDOR_ID = {0}" 
+            "name": "viewHOInfoSupplier"
         }
       }
     ]

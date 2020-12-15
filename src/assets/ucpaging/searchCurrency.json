@@ -67,8 +67,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT A.CURR_CODE as currCode,A.REF_CURR_ID as refCurrId,A.CURR_NAME as currName,A.IS_ACTIVE as isActive",
-    "from": "FROM dbo.REF_CURR A WITH(NOLOCK)"
+    "name": "searchCurrency"
   },
   "bodyList": [
     {

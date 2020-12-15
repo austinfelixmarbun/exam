@@ -44,9 +44,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT A.OFFICE_CODE AS OfficeCode, A.OFFICE_NAME AS OfficeName, A.MR_OFFICE_TYPE_CODE AS MrOfficeType, REF_OFFICE_ID AS RefOfficeId, B.DESCR AS Descr, A.PARENT_ID AS ParentId, A.OFFICE_ADDR AS OfficeAddr",
-        "from": "FROM dbo.REF_OFFICE A WITH(NOLOCK) LEFT JOIN dbo.REF_MASTER B WITH(NOLOCK) ON A.MR_OFFICE_TYPE_CODE = B.MASTER_CODE AND B.REF_MASTER_TYPE_CODE = 'OFFICE_TYPE'",
-      "where":"WHERE A.IS_ACTIVE = 1"
+        "name": "lookupOfficeParent"
     },
 
     "headerList": [

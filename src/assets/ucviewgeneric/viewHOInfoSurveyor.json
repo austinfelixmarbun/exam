@@ -20,9 +20,7 @@
           }
         ],
         "querystring": {
-            "select": "SELECT RESERVED_FIELD_1 AS AssignmentType, RESERVED_FIELD_2 AS MaxTaskLoad",
-            "from": "FROM DBO.VENDOR", 
-            "where": "WHERE VENDOR_ID = {0}" 
+            "name": "viewHOInfoSurveyor"
         }
       }
     ]

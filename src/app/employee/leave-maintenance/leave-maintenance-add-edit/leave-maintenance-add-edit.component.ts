@@ -11,6 +11,7 @@ import { RefEmpObj } from '../../../shared/model/RefEmpObj.Model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-leave-maintenance-add-edit',
@@ -122,7 +123,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         this.http.post(this.addUrl, this.relmObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(["Employee/Leave/Paging"]);
+            AdInsHelper.RedirectUrl(this.router,["/Employee/Leave/Paging"],{});
           }
         );
       } else {
@@ -131,7 +132,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         this.http.post(this.editUrl, this.relmObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(["Employee/Leave/Paging"]);
+            AdInsHelper.RedirectUrl(this.router,["/Employee/Leave/Paging"],{});
           }
         );
       }

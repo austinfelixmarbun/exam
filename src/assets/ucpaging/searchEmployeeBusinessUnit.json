@@ -63,8 +63,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT ur.REF_USER_ROLE_ID AS RefUserRoleId, usr.REF_USER_ID AS RefUserId, bu.BIZ_UNIT_NAME AS BusinessUnitName,ussr.USERNAME AS SupervisorName, jt.JOB_TITLE_NAME AS JobTitleName, ofc.OFFICE_NAME AS OfficeName, rl.ROLE_NAME AS RoleName, ur.IS_ACTIVE AS IsActive",
-        "from": "FROM dbo.REF_USER usr WITH(NOLOCK) JOIN dbo.REF_USER_ROLE ur WITH(NOLOCK) on usr.REF_USER_ID = ur.REF_USER_ID JOIN dbo.REF_BIZ_UNIT bu WITH(NOLOCK) on bu.REF_BIZ_UNIT_ID = ur.REF_BIZ_UNIT_ID JOIN REF_OFFICE ofc WITH(NOLOCK) on ofc.REF_OFFICE_ID = ur.REF_OFFICE_ID JOIN REF_ROLE rl WITH(NOLOCK) on rl.REF_ROLE_ID = ur.REF_ROLE_ID JOIN dbo.REF_JOB_TITLE jt WITH(NOLOCK) on jt.REF_JOB_TITLE_ID = ur.REF_JOB_TITLE_ID LEFT JOIN REF_USER ussr WITH(NOLOCK) on ur.SPV_ID = ussr.REF_USER_ID"
+        "name": "searchEmployeeBusinessUnit"
     },
     "headerList": [
         {

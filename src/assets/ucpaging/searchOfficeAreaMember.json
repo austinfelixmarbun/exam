@@ -26,9 +26,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT A.AREA_CODE AS AreaCode, A.REF_OFFICE_AREA_ID AS RefOfficeAreaId, B.OFFICE_CODE AS OfficeCode, B.OFFICE_NAME AS OfficeName, B.REF_OFFICE_ID AS RefOfficeId, B.OFFICE_ADDR AS OfficeAddr",
-        "from": "FROM dbo.REF_OFFICE_AREA A WITH(NOLOCK) JOIN dbo.REF_OFFICE B WITH(NOLOCK) ON B.REF_OFFICE_AREA_ID = A.REF_OFFICE_AREA_ID",
-        "where": "WHERE B.REF_OFFICE_AREA_ID = {0}"
+        "name": "searchOfficeAreaMember"
     },
     "headerList": [
         {

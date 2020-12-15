@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -85,27 +86,27 @@ export class UpdateCustomerAddressComponent implements OnInit {
               CustId: [responseAddr[key]["MasterCustAddr"]["CustId"]],
               MrCustAddrTypeCode: [responseAddr[key]["MasterCustAddr"]["MrCustAddrTypeCode"]],
               Addr: [responseAddr[key]["MasterCustAddr"]["Addr"], [Validators.required]],
-              AreaCode1: [{value: responseAddr[key]["MasterCustAddr"]["AreaCode1"], disabled: true}, [Validators.required]],
-              AreaCode2: [{value: responseAddr[key]["MasterCustAddr"]["AreaCode2"], disabled: true}, [Validators.required]],
-              AreaCode3: [responseAddr[key]["MasterCustAddr"]["AreaCode3"], [Validators.required]],
-              AreaCode4: [responseAddr[key]["MasterCustAddr"]["AreaCode4"], [Validators.required]],
-              City: [{value: responseAddr[key]["MasterCustAddr"]["City"], disabled: true}, [Validators.required]],
+              AreaCode1: [responseAddr[key]["MasterCustAddr"]["AreaCode1"], [Validators.required]],
+              AreaCode2: [responseAddr[key]["MasterCustAddr"]["AreaCode2"], [Validators.required]],
+              AreaCode3: [responseAddr[key]["MasterCustAddr"]["AreaCode3"], [Validators.required, Validators.pattern("^[0-9]+$")]],
+              AreaCode4: [responseAddr[key]["MasterCustAddr"]["AreaCode4"], [Validators.required, Validators.pattern("^[0-9]+$")]],
+              City: [responseAddr[key]["MasterCustAddr"]["City"], [Validators.required]],
               Zipcode: [responseAddr[key]["MasterCustAddr"]["Zipcode"], [Validators.required]],
               SubZipcode: [responseAddr[key]["MasterCustAddr"]["SubZipcode"]],
               MrBuildingOwnershipCode: [responseAddr[key]["MasterCustAddr"]["MrBuildingOwnershipCode"]],
-              PhnArea1: [responseAddr[key]["MasterCustAddr"]["PhnArea1"]],
-              Phn1: [responseAddr[key]["MasterCustAddr"]["Phn1"]],
-              PhnExt1: [responseAddr[key]["MasterCustAddr"]["PhnExt1"]],
-              PhnArea2: [responseAddr[key]["MasterCustAddr"]["PhnArea2"]],
-              Phn2: [responseAddr[key]["MasterCustAddr"]["Phn2"]],
-              PhnExt2: [responseAddr[key]["MasterCustAddr"]["PhnExt2"]],
-              PhnArea3: [responseAddr[key]["MasterCustAddr"]["PhnArea3"]],
-              Phn3: [responseAddr[key]["MasterCustAddr"]["Phn3"]],
-              PhnExt3: [responseAddr[key]["MasterCustAddr"]["PhnExt3"]],
-              FaxArea: [responseAddr[key]["MasterCustAddr"]["FaxArea"]],
-              Fax: [responseAddr[key]["MasterCustAddr"]["Fax"]],
+              PhnArea1: [responseAddr[key]["MasterCustAddr"]["PhnArea1"], [Validators.pattern("^[0-9]+$")]],
+              Phn1: [responseAddr[key]["MasterCustAddr"]["Phn1"], [Validators.pattern("^[0-9]+$")]],
+              PhnExt1: [responseAddr[key]["MasterCustAddr"]["PhnExt1"], [Validators.pattern("^[0-9]+$")]],
+              PhnArea2: [responseAddr[key]["MasterCustAddr"]["PhnArea2"], [Validators.pattern("^[0-9]+$")]],
+              Phn2: [responseAddr[key]["MasterCustAddr"]["Phn2"], [Validators.pattern("^[0-9]+$")]],
+              PhnExt2: [responseAddr[key]["MasterCustAddr"]["PhnExt2"], [Validators.pattern("^[0-9]+$")]],
+              PhnArea3: [responseAddr[key]["MasterCustAddr"]["PhnArea3"], [Validators.pattern("^[0-9]+$")]],
+              Phn3: [responseAddr[key]["MasterCustAddr"]["Phn3"], [Validators.pattern("^[0-9]+$")]],
+              PhnExt3: [responseAddr[key]["MasterCustAddr"]["PhnExt3"], [Validators.pattern("^[0-9]+$")]],
+              FaxArea: [responseAddr[key]["MasterCustAddr"]["FaxArea"], [Validators.pattern("^[0-9]+$")]],
+              Fax: [responseAddr[key]["MasterCustAddr"]["Fax"], [Validators.pattern("^[0-9]+$")]],
               Notes: [responseAddr[key]["MasterCustAddr"]["Notes"]],
-              StayLength: [responseAddr[key]["MasterCustAddr"]["StayLength"]],
+              StayLength: [responseAddr[key]["MasterCustAddr"]["StayLength"], [Validators.pattern("^[0-9]+$")]],
               RowVersion: [responseAddr[key]["MasterCustAddr"]["RowVersion"]]
             }),
             AppAddr: this.fb.group({
@@ -284,7 +285,8 @@ export class UpdateCustomerAddressComponent implements OnInit {
   }
 
   back(){
-    this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+    AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
   }
 
   SaveValue(){

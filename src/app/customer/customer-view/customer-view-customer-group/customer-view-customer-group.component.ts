@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-view-customer-group',
@@ -34,7 +35,7 @@ export class CustomerViewCustomerGroupComponent implements OnInit {
         this.responseObj = response['ReturnObject'];
       },
       error => {
-        this.router.navigateByUrl('Error');
+        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
       }
     );
   }

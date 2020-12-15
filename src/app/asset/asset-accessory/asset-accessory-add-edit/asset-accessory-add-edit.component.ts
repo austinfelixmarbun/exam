@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-asset-accessory-add-edit',
@@ -71,7 +72,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddNewAssetAccesory, this.acObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/Accessory/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
+          AdInsHelper.RedirectUrl(this.router,["/Asset/Accessory/Paging"],{ "AssetTypeId": this.acObj.AssetTypeId });
         }
       );
     } else {
@@ -82,7 +83,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditAssetAccessory, this.acObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          this.router.navigate(["/Asset/Accessory/Paging"], { queryParams: { "AssetTypeId": this.acObj.AssetTypeId } });
+          AdInsHelper.RedirectUrl(this.router,["/Asset/Accessory/Paging"],{ "AssetTypeId": this.acObj.AssetTypeId });
         }
       );
     }

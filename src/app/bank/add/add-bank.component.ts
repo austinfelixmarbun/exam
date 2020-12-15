@@ -7,6 +7,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
     selector: 'add-bank',
@@ -72,7 +73,7 @@ export class BankAddComponent implements OnInit {
 
             this.http.post(URLConstant.EditRefBank, this.bankObj).subscribe(
                 (response) => {
-                    this.router.navigate(["/CommonSetting/Bank/Paging"]);
+                    AdInsHelper.RedirectUrl(this.router,["/CommonSetting/Bank/Paging"],{});
                     this.toastr.successMessage(response['message']);
                 });
         }
@@ -84,7 +85,7 @@ export class BankAddComponent implements OnInit {
 
             this.http.post(URLConstant.AddRefBankAsync, this.bankObj).subscribe((response) => {
                 this.toastr.successMessage(response['message']);
-                this.router.navigate(["/CommonSetting/Bank/Paging"]);
+                AdInsHelper.RedirectUrl(this.router,["/CommonSetting/Bank/Paging"],{});
             });
         }
     }

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-vendor-atpm-registration',
@@ -54,6 +55,6 @@ export class VendorATPMRegistrationComponent implements OnInit {
   }
 
   Finish() {
-    this.router.navigate(["/Vendor/Paging"], { queryParams: { "MrVendorCategoryCode": CommonConstant.SUPPLIER_ATPM } });
+    AdInsHelper.RedirectUrl(this.router,["/Vendor/Paging"],{ "MrVendorCategoryCode": CommonConstant.SUPPLIER_ATPM });
   }
 }

@@ -3,7 +3,7 @@
     "subsection": [
       {
         "subSectionId": "BranchMainCId",
-        "subSectionTitle": "Main Info",
+        "subSectionTitle": "Main Branch Info",
         "mainInfoPath": "/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
@@ -49,9 +49,7 @@
 
         ],
         "querystring": {
-            "select":"SELECT REGISTRATION_NO AS RegistrationNo,LICENSE_NO AS LicenseNo,ESTABLISHMENT_DT AS EstablishmentDt,PARTNERSHIP_DT AS PartnershipDt,VENDOR_RATING AS VendorRating,EMAIL AS Email,MOBILE_PHN_NO_1 AS Mp1,MOBILE_PHN_NO_2 AS Mp2",
-            "from":"FROM dbo.VENDOR WITH (NOLOCK)",
-            "where":"WHERE MR_VENDOR_CLASS = N'BRANCH' AND VENDOR_ID = {0}"
+            "name":"viewVendorBranchMainC"
         }
       }
     ]

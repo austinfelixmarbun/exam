@@ -20,7 +20,7 @@
           <span *ngIf="body.type == 'decimal'">{{ item[body.property] | number }}</span>
           <span *ngIf="body.type == 'date'">{{ item[body.property] | date: 'dd-MMM-yyyy' }}</span>
           <span *ngIf="body.type == 'link'">
-            <a [target]="body.target" [routerLink]="[body.path]"
+            <a [target]="body.target" [routerLink]="[body.path]" skipLocationChange
               [queryParams]="genAction(item,body.param)">{{ item[body.property] }}</a>
           </span>
           <span *ngIf="body.type == 'boolean'">
@@ -31,7 +31,7 @@
           <span *ngIf="body.type == 'action'">
             <span *ngFor="let act of body?.action">
               <span *ngIf="act.type == 'edit'">
-                <a class="success p-0" [routerLink]="[act.path]" [queryParams]="genAction(item,act.param)">
+                <a class="success p-0" [routerLink]="[act.path]" [queryParams]="genAction(item,act.param)"> skipLocationChange
                   <i class="font-medium-3 mr-2"
                     [ngClass]=" act.icon == undefined || act.icon == '' ? 'ft-edit-2' : act.icon "></i>
                 </a>
@@ -50,7 +50,7 @@
               <span *ngIf="act.type == 'switch'">
                 <span *ngFor="let cs of act?.case">
                   <span *ngIf="switchCase(item,cs) && cs.isHide != true">
-                    <a class="success p-0" [routerLink]="[cs.result.path]"
+                    <a class="success p-0" [routerLink]="[cs.result.path]" skipLocationChange
                       [queryParams]="genAction(item,cs.result.param)">
                       <i class="font-medium-3 mr-2"
                         [ngClass]=" cs.icon == undefined || cs.icon == '' ? 'ft-edit-2' : cs.icon "></i>

@@ -35,8 +35,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT RO.OFFICE_CODE AS OfficeCode, RO.OFFICE_NAME AS OfficeName, ROA.AREA_NAME AS AreaName, ROA.AREA_CODE AS AreaCode, RO.REF_OFFICE_ID AS RefOfficeId",
-    "from": "FROM dbo.REF_OFFICE RO WITH(NOLOCK) LEFT JOIN dbo.REF_OFFICE_AREA ROA WITH(NOLOCK) ON RO.REF_OFFICE_AREA_ID = ROA.REF_OFFICE_AREA_ID"
+    "name": "productOfficeMbrTempPaging"
   },
   "headerList": [
     {

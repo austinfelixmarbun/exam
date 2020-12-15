@@ -13,7 +13,7 @@
   <div class="form-group row">
     <label class="col-md-2 adInsLabel adins-required-label" translate>Customer Model</label>
     <div class="col-md-4">
-      <label>{{AppJobData.CustModel}}</label>
+      <label>{{appCustModel}}</label>
     </div>
     <div class="col-md-2">
       <button *ngIf="CustomerJobForm.controls.CustModel.value != AppJobData.CustModel" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CustModel')">Copy</button>
@@ -56,7 +56,7 @@
   <div class="form-group row">
     <label class="col-md-2" translate>Job Position</label>
     <div class="col-md-4">
-      {{AppJobData.JobPosition}}
+      {{appJobPosition}}
     </div>
     <div class="col-md-2">
       <button *ngIf="CustomerJobForm.controls.JobPosition.value != AppJobData.JobPosition" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('JobPosition')">Copy</button>
@@ -88,7 +88,7 @@
   <div class="form-group row">
     <label class="col-md-2" translate>Job Status</label>
     <div class="col-md-4">
-      {{AppJobData.JobStatus}}
+      {{appJobStatus}}
     </div>
     <div class="col-md-2">
       <button *ngIf="CustomerJobForm.controls.JobStatus.value != AppJobData.JobStatus" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('JobStatus')">Copy</button>
@@ -152,7 +152,7 @@
     <div class="form-group row">
       <label class="col-md-2 adInsLabel" translate>Company Scale</label>
       <div class="col-md-4">
-        <label>{{AppJobData.CompanyScale}}</label>
+        <label>{{appCompanyScale}}</label>
       </div>
       <div class="col-md-2">
         <button *ngIf="CustomerJobForm.controls.CompanyScale.value != AppJobData.CompanyScale" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CompanyScale')">Copy</button>
@@ -226,7 +226,7 @@
       <div class="col-md-2">
       </div>
       <div class="col-md-4">
-        <input type="text" class="form-control adInsInput" formControlName="AreaCode2"
+        <input type="text" class="form-control adInsInput" formControlName="AreaCode2" [readonly]="true"
           [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerJobForm.controls.AreaCode2.invalid}">
         <lib-uc-show-errors [control]="CustomerJobForm.controls.AreaCode2" [submit]="enjiForm.submitted">
         </lib-uc-show-errors>
@@ -240,7 +240,7 @@
       <div class="col-md-2">
       </div>
       <div class="col-md-4">
-        <input type="text" class="form-control adInsInput" formControlName="AreaCode1"
+        <input type="text" class="form-control adInsInput" formControlName="AreaCode1" [readonly]="true"
           [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerJobForm.controls.AreaCode1.invalid}">
         <lib-uc-show-errors [control]="CustomerJobForm.controls.AreaCode1" [submit]="enjiForm.submitted">
         </lib-uc-show-errors>
@@ -254,7 +254,7 @@
       <div class="col-md-2">
       </div>
       <div class="col-md-4">
-        <input type="text" class="form-control adInsInput" formControlName="City"
+        <input type="text" class="form-control adInsInput" formControlName="City" [readonly]="true"
           [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerJobForm.controls.City.invalid}">
         <lib-uc-show-errors [control]="CustomerJobForm.controls.City" [submit]="enjiForm.submitted">
         </lib-uc-show-errors>

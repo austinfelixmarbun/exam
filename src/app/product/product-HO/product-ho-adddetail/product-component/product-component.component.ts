@@ -8,6 +8,7 @@ import { WizardComponent } from 'angular-archwizard';
 import { saveAs } from 'file-saver';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-product-component-HO',
@@ -263,11 +264,11 @@ export class ProductComponentHOComponent implements OnInit {
   {
     if(this.source == "return")
     {
-      this.router.navigate(["/Product/HOReturnPaging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Product/HOReturnPaging"],{ });
     }
     else
     {
-      this.router.navigate(["/product/HOpaging"]);
+      AdInsHelper.RedirectUrl(this.router,["/Product/HOpaging"],{ });
     }
   }
  }

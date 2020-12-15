@@ -12,6 +12,7 @@ import { formatDate } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-office-emp-pos-add',
@@ -170,7 +171,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
         (response) => {
           if (response['isError'] != true) {
             this.toastr.successMessage(response['message']);
-            this.router.navigate(["/employee"]);
+            AdInsHelper.RedirectUrl(this.router,["/employee"],{});
           }
         }
       );
@@ -188,7 +189,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
       this.httpClient.post(this.editUrl, this.empPositionObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          this.router.navigate(["/office"]);
+          AdInsHelper.RedirectUrl(this.router,["/office"],{});
         }
       );
 

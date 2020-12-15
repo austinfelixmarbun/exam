@@ -3,6 +3,7 @@ import { environment } from 'environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WhereValueObj, UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-product-ho-paging',
@@ -46,10 +47,10 @@ export class ProductHOPagingComponent implements OnInit {
 
   EditButtonClick(e) {
     if (e.RowObj.DraftProdHId == null) {
-      this.router.navigate(["/Product/HOadd"], { queryParams: { "ProdHId": e.RowObj.prodHId, "mode": "edit" } });
+      AdInsHelper.RedirectUrl(this.router,["/Product/HOadd"],{ "ProdHId": e.RowObj.prodHId, "mode": "edit" });
     }
     else {
-      this.router.navigate(["/Product/HOadd"], { queryParams: { "ProdHId": e.RowObj.DraftProdHId, "mode": "edit" } });
+      AdInsHelper.RedirectUrl(this.router,["/Product/HOadd"],{ "ProdHId": e.RowObj.DraftProdHId, "mode": "edit" });
     }
   }
 }

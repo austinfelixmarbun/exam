@@ -28,9 +28,7 @@
         }
     ],
     "querystring": {
-       "select": "SELECT OFFICE_CODE AS OfficeCode, OFFICE_NAME AS OfficeName, REF_OFFICE_ID AS RefOfficeId, IS_ACTIVE AS IsActive, MR_OFFICE_TYPE_CODE AS MrOfficeTypeCode, OFFICE_ADDR AS OfficeAddr",
-        "from": "FROM dbo.REF_OFFICE WITH(NOLOCK)",
-        "where": "WHERE IS_ACTIVE = 1 AND MR_OFFICE_TYPE_CODE != N'CG'"
+       "name": "officeGrpMbrTempPaging"
     },
     "headerList": [
         {

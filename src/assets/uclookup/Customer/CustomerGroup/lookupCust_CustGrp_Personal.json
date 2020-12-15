@@ -36,8 +36,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT A.CUST_NO AS custNo, A.CUST_NAME AS custName, A.MR_ID_TYPE_CODE AS idType, A.ID_NO as idNo, A.ID_EXPIRED_DT AS idExpiredDate, A.TAX_ID_NO AS taxIdNo, A.MR_CUST_TYPE_CODE AS mrCustTypeCode, A.CUST_ID AS custId",
-        "from": "FROM CUST AS A WITH(NOLOCK)"
+        "name": "lookupCust_CustGrp_Personal"
     },
     "headerList": [
         {

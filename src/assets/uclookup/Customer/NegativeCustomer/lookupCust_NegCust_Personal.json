@@ -19,8 +19,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT A.CUST_NO AS custNo, A.CUST_NAME AS custName, A.MR_ID_TYPE_CODE AS idType, A.ID_NO as idNo, A.ID_EXPIRED_DT AS idExpiredDate, A.TAX_ID_NO AS taxIdNo, B.BIRTH_PLACE AS birthPlace, B.BIRTH_DT AS birthDate, B.MOTHER_MAIDEN_NAME AS motherMaidenName, B.MOBILE_PHN_NO_1 AS mobilePhn, B.MR_GENDER_CODE AS gender, B.MOBILE_PHN_NO_1 AS mobilePhone, A.CUST_ID AS custId",
-        "from": "FROM CUST AS A WITH(NOLOCK) INNER JOIN CUST_PERSONAL AS B WITH(NOLOCK) ON A.CUST_ID = B.CUST_ID"
+        "name": "lookupCust_NegCust_Personal"
     },
     "headerList": [
         {

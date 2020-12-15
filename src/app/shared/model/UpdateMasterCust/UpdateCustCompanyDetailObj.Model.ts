@@ -3,4 +3,5 @@ export class UpdateCustCompanyDetailObj {
     RefIndustryTypeId: any;
     NumOfEmp: any;
     EstablishmentDt: any;
+    RowVersion: any;
 }

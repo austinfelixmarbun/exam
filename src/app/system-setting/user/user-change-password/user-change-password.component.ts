@@ -11,6 +11,7 @@ import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
 import { URLConstant } from "app/shared/constant/URLConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
+import { AdInsHelper } from "app/shared/AdInsHelper";
 
 @Component({
   selector: "app-user-change-password",
@@ -84,12 +85,9 @@ export class UserChangePasswordComponent implements OnInit {
       this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
         response => {
           this.service.typeSave(response["message"]);
-          this.router
-            .navigateByUrl("/systemSetting/refUser", {
-              skipLocationChange: true
-            })
+          this.router.navigateByUrl("/systemSetting/refUser", { skipLocationChange: true })
             .then(() =>
-              this.router.navigate(["/systemSetting/changePassword"])
+              AdInsHelper.RedirectUrl(this.router,["/systemSetting/changePassword"],{})
             );
           this.spinner.hide();
         },

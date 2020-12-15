@@ -49,8 +49,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT RO.OFFICE_CODE AS OfficeCode, RO.OFFICE_NAME AS OfficeName, RO.OFFICE_ADDR AS OfficeAddr, RO.IS_ACTIVE AS IsActive, RO.REF_OFFICE_ID AS RefOfficeId",
-        "from": "FROM dbo.REF_OFFICE RO WITH(NOLOCK)"
+        "name": "vendorBranchMemberTempPaging"
     },
     "headerList": [
         {

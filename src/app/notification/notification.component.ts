@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-notification',
@@ -38,7 +39,9 @@ export class NotificationComponent implements OnInit {
       (response) => {
         this.toastr.successMessage(response['message']);
         this.router.navigateByUrl('/office', { skipLocationChange: true }).then(() =>
-          this.router.navigateByUrl("/notification"));
+          AdInsHelper.RedirectUrl(this.router,["/notification"],{})
+          );
+          
       }
     );
   }

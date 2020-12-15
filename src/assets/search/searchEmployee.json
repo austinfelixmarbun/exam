@@ -49,8 +49,7 @@
         }
     ],
     "querystring": { 
-        "select": "SELECT A.REF_EMP_ID AS RefEmpId, B.USERNAME AS username, A.EMP_NO AS empNo, A.EMP_NAME AS empName, A.IS_ACTIVE AS isActive, B.REF_USER_ID AS RefUserId",
-        "from": "FROM REF_EMP AS A INNER JOIN REF_USER AS B ON A.REF_EMP_ID = B.REF_EMP_ID"
+        "name": "searchEmployee"
     },
     "headerList" : [ 
         {

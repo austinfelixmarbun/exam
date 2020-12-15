@@ -18,9 +18,7 @@
     }
   ],
   "querystring": {
-    "select": "SELECT JOB_TITLE_CODE AS JobTitleCode, JOB_TITLE_NAME AS JobTitleName, REF_JOB_TITLE_ID AS RefJobTitleId",
-    "from": "FROM DBO.REF_JOB_TITLE WITH(NOLOCK)",
-    "where": "WHERE IS_ACTIVE = 1"
+    "name": "lookupRefJobTitle"
   },
   "headerList": [
       {

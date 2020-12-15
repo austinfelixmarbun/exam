@@ -1,7 +1,7 @@
 <!-- Sidebar Header starts -->
 <div class="sidebar-header">
     <div class="logo clearfix">
-        <a [routerLink]="['/']" class="logo-text float-left">
+        <a [routerLink]="['/']" skipLocationChange class="logo-text float-left">
             <div class="logo-img">
                 <img src="assets/img/icon-confins.png" />
             </div>
@@ -30,8 +30,7 @@
                 [routerLinkActiveOptions]="{exact: true}">
                 <span *ngIf="menuItem.Class != 'has-sub'; then internalNoSubBlock else internalHasSubBlock"></span>
                 <ng-template #internalNoSubBlock>
-                    <a (click)="navigateSkipLocationChange(menuItem)" [routerLink]="menuItem.Class != 'has-sub' ? [menuItem.Path] : null"
-                        [queryParams]="genParam(menuItem.Params)"
+                    <a (click)="navigateSkipLocationChange(menuItem)"
                         *ngIf="!menuItem.IsExternalLink; else externalLinkBlock" [contextMenu]="basicMenu"
                         [contextMenuSubject]="menuItem">
                         <i [ngClass]="[menuItem.Icon]"></i>

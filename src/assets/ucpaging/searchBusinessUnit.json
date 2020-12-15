@@ -40,8 +40,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT REF_BIZ_UNIT_ID AS RefBizUnitId, BIZ_UNIT_CODE AS BizUnitCode, BIZ_UNIT_NAME AS BizUnitName, DESCR AS Descr, IS_ACTIVE AS IsActive",
-        "from": "FROM dbo.REF_BIZ_UNIT WITH(NOLOCK)"
+        "name": "searchBusinessUnit"
     },
     "headerList": [
         {

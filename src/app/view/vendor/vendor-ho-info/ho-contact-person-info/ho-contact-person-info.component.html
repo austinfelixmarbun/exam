@@ -10,8 +10,7 @@
               <table class="table table-responsive-md text-center table-hover">
                 <thead>
                   <tr class="table-header">
-                    <th class="text-left"><span class="thead-header" name='Name' translate>Name
-                        Code</span>
+                    <th class="text-left"><span class="thead-header" name='Name' translate>Contact Person Name</span>
                     </th>
                     <th class="text-left"><span class="thead-header" name='Position' translate>Position
                       </span>
@@ -27,6 +26,11 @@
                   </th>
                   </tr>
                 </thead>
+                <tbody *ngIf = "resultData?.length == 0">
+                  <tr>
+                    <td colspan="100%">No Data Available</td>
+                  </tr>
+                </tbody>
                 <tbody>
                   <tr *ngFor="let item of resultData">
                     <td class="text-left">{{item.Name}}</td>

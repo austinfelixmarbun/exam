@@ -13,6 +13,7 @@ import { formatDate } from '@angular/common';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
     selector: 'app-employee-position',
@@ -202,7 +203,7 @@ export class EmployeePositionAddComponent implements OnInit {
                 (response) => {
                     if (response['isError'] != true) {
                         this.toastr.successMessage(response['message']);
-                        this.router.navigate(["/employee/employeePosition"], { queryParams: { refEmpId: this.refEmpId } });
+                        AdInsHelper.RedirectUrl(this.router,["/employee/employeePosition"],{ "refEmpId": this.refEmpId });
                     }
                 }
             );
@@ -221,7 +222,7 @@ export class EmployeePositionAddComponent implements OnInit {
             this.httpClient.post(this.editUrl, this.empPositionObj).subscribe(
                 (response) => {
                     this.toastr.successMessage(response['message']);
-                    this.router.navigate(["/employee/employeePosition"], { queryParams: { refEmpId: this.refEmpId } });
+                    AdInsHelper.RedirectUrl(this.router,["/employee/employeePosition"],{ "refEmpId": this.refEmpId });
                 }
             );
         }

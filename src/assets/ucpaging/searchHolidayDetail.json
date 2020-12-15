@@ -49,8 +49,7 @@
         }
     ],
     "querystring": {
-        "select": "SELECT HoliD.HOLIDAY_DT AS HolidayDt, HoliD.DESCR AS Descr, HoliD.IS_PUBLIC_HOLIDAY AS IsPublicHoliday, HoliD.HOLIDAY_SCHM_D_ID AS HolidaySchmDId, HoliH.HOLIDAY_SCHM_H_ID AS HolidaySchmHId",
-        "from": "FROM dbo.HOLIDAY_SCHM_H HoliH WITH(NOLOCK) JOIN dbo.HOLIDAY_SCHM_D HoliD WITH(NOLOCK) on HoliH.HOLIDAY_SCHM_H_ID = HoliD.HOLIDAY_SCHM_H_ID"
+        "name": "searchHolidayDetail"
     },
     "headerList": [
         {

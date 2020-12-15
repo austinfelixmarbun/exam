@@ -3,7 +3,7 @@
     "subsection": [
       {
         "subSectionId": "BranchInformationLifeId",
-        "subSectionTitle": "Main Info",
+        "subSectionTitle": "Life Insco Branch Info",
         "mainInfoPath": "/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
@@ -22,10 +22,7 @@
           }
         ],
         "querystring": {
-           "select":" SELECT B.VENDOR_NAME AS LifeHo, A.VENDOR_PARENT_ID AS VendorParentId",
-            "from":"FROM dbo.VENDOR A WITH(NOLOCK) JOIN dbo.VENDOR B WITH(NOLOCK) ON A.VENDOR_PARENT_ID = B.VENDOR_ID",
-           "where":"WHERE A.MR_VENDOR_CLASS = N'BRANCH' AND A.MR_VENDOR_CATEGORY_CODE = N'LIFE_INSCO_BRANCH' AND A.VENDOR_ID = {0}"
-            
+           "name":"viewBranchInfoLife"
         }
       }
     ]

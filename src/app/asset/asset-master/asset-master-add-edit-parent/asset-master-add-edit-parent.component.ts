@@ -13,7 +13,8 @@ import { ListAssetSchmDObj } from 'app/shared/model/ListAssetSchmDObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { map, mergeMap, first } from 'rxjs/operators';
-import { forkJoin } from 'rxjs';;
+import { forkJoin } from 'rxjs';import { AdInsHelper } from 'app/shared/AdInsHelper';
+;
 
 @Component({
   selector: 'app-asset-master-add-edit-parent',
@@ -291,7 +292,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         ).subscribe(
           (response) => {
             this.toastr.successMessage(response[response.length - 1]["Message"]);
-            this.router.navigate(["/Asset/AssetMaster/Paging"]);
+            AdInsHelper.RedirectUrl(this.router,["/Asset/AssetMaster/Paging"],{});
           });
   
 
@@ -301,7 +302,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/Asset/AssetMaster/Paging"]);
+            AdInsHelper.RedirectUrl(this.router,["/Asset/AssetMaster/Paging"],{});
   
           }
         );
@@ -364,7 +365,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         forkJoin(observableBatch).subscribe(
           (response) => {
             this.toastr.successMessage(response[response.length - 1]["Message"]);
-            this.router.navigate(["/Asset/AssetMaster/Paging"]);
+            AdInsHelper.RedirectUrl(this.router,["/Asset/AssetMaster/Paging"],{});
           },
           (error) => {
             console.log(error);
@@ -374,7 +375,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
-            this.router.navigate(["/Asset/AssetMaster/Paging"]);
+            AdInsHelper.RedirectUrl(this.router,["/Asset/AssetMaster/Paging"],{});
           }
         );
          
