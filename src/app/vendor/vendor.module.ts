@@ -67,6 +67,7 @@ import { VendorGradingRequestDetailComponent } from './vendor-grading/vendor-gra
 import { VendorGradingApprovalPagingComponent } from './vendor-grading/vendor-grading-approval/vendor-grading-approval-paging/vendor-grading-approval-paging.component';
 import { VendorGradingApprovalDetailComponent } from './vendor-grading/vendor-grading-approval/vendor-grading-approval-detail/vendor-grading-approval-detail.component';
 import { VendorGradingInquiryPagingComponent } from './vendor-grading/vendor-grading-inquiry-paging/vendor-grading-inquiry-paging.component';
+import { UcapprovalModule } from '@adins/ucapproval';
 
 
 export const customCurrencyMaskConfig = {     
@@ -103,6 +104,7 @@ export const customCurrencyMaskConfig = {
     UcShowErrorsModule,
     UcaddressModule,
     UcaddtotempModule,
+    UcapprovalModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
   ],
   declarations: [
