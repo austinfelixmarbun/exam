@@ -55,19 +55,19 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
     this.HoldTask(ApvHoldObj);
   }
 
-  HoldTask(obj){
+  HoldTask(obj : any){
     this.http.post(AdInsConstant.ApvHoldTaskUrl, obj).subscribe(
       (response)=>{
       }
     )
   }
 
-  onAvailableNextTask(event)
+  onAvailableNextTask(event : any)
   {
     
   }
 
-  onApprovalSubmited(event)
+  onApprovalSubmited(event : any)
   {
     this.toastr.successMessage("Success");
     this.router.navigate(["/Vendor/VendorGrading/Approval/Paging"]);
@@ -78,7 +78,7 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
     this.router.navigate(["/Vendor/VendorGrading/Approval/Paging"]);
   }
 
-  GetCallBack(e){
+  GetCallBack(e : any){
     // AdInsHelper.OpenProdOfferingViewByCodeAndVersion(e.ViewObj.ProdOfferingCode, e.ViewObj.ProdOfferingVersion);
   }
 }
