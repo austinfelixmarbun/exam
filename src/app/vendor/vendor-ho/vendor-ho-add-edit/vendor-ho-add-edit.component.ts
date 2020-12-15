@@ -15,6 +15,11 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { VendorAttrContentObj } from 'app/shared/model/VendorAttrContentObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { VendorAtpmSelectComponent } from 'app/vendor/vendor-ATPM/vendor-atpm-select/vendor-atpm-select.component';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { VendorAtpmMappingObj } from "app/shared/model/VendorAtpmMappingObj.Model";
 
 @Component({
   selector: 'app-vendor-ho-add-edit',
@@ -30,6 +35,7 @@ export class VendorHoAddEditComponent implements OnInit {
 
   businessDt: Date;
   result: any;
+  resultAtpmMapping: any;
   check: any;
   inputLookupParentObj: InputLookupObj = new InputLookupObj();
   inputLookupATPMObj: InputLookupObj = new InputLookupObj();
@@ -46,8 +52,9 @@ export class VendorHoAddEditComponent implements OnInit {
   ListVendorAttrContent = new Array<any>();
   VendorAttrList = new Array<any>();
   vendorAttrRequest = new Array<VendorAttrContentObj>();
+  vendorAtpmList = new Array();
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private modalService: NgbModal,private spinner: NgxSpinnerService) {
     this.route.queryParams.subscribe(params => {
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
       this.VendorId = params['VendorId'];
@@ -295,10 +302,19 @@ export class VendorHoAddEditComponent implements OnInit {
           IsOneAffiliate: this.result.VendorObj.IsOneAffiliate,
         });
 
+        
+
         this.setLookup();
         this.checkType();
       }
     );
+
+    this.http.post(URLConstant.GetListVendorAtpmMappingByVendorId, { VendorId: this.VendorId }).subscribe(
+      (response) => {
+        this.resultAtpmMapping = response;
+
+        this.vendorAtpmList = this.resultAtpmMapping;
+      });
   }
 
   setDropdown() {
@@ -541,6 +557,50 @@ export class VendorHoAddEditComponent implements OnInit {
     this.NpwpCheck(true);
   }
 
+  AddAtpmClick()
+  {
+    const modalAddAtpm = this.modalService.open(VendorAtpmSelectComponent);
+
+    if(this.vendorAtpmList.length > 0)
+      modalAddAtpm.componentInstance.listExistingAtpmCode = this.vendorAtpmList.map(a => a.VendorAtpmCode);
+
+    modalAddAtpm.result.then(
+      (response) => {
+        this.spinner.show();
+        
+        this.spinner.hide();
+        this.toastr.successMessage(response["message"]);
+      }
+    ).catch(
+      (error) => {
+        if(error != 0){
+          console.log(error);
+        }
+      }
+    );
+
+    modalAddAtpm.componentInstance.emitData.subscribe(($e) => {
+      var obj = 
+      {
+        VendorAtpmId: $e.VendorId,
+        VendorAtpmCode: $e.VendorCode,
+        VendorAtpmName: $e.VendorName,
+        VendorAtpmLegalAddr: $e.LegalAddr
+      };
+
+      this.vendorAtpmList.push(obj);
+    })
+  }
+
+  deleteAtpm(item)
+  {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION))
+    {
+      let index = this.vendorAtpmList.map(function(e) { return e.VendorAtpmCode; }).indexOf(item.VendorAtpmCode);
+      this.vendorAtpmList.splice(index,1);
+    }
+  }
+
   SaveForm() {
     if (Date.parse(this.VendorForm.controls.EstablishmentDt.value) > Date.parse(formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US'))) {
       this.toastr.warningMessage("Establishment Date Must Be Lesser Than Business Date");
@@ -610,6 +670,20 @@ export class VendorHoAddEditComponent implements OnInit {
         }
         this.vendorHoObj.VendorAttrContentObjs = this.vendorAttrRequest;
       }
+
+      if(this.vendorAtpmList.length > 0)
+      {
+        this.vendorHoObj.VendorAtpmMappingObjs = new Array<VendorAtpmMappingObj>();
+
+        for (let i = 0; i < this.vendorAtpmList.length; i++) {
+
+          var vendorAtpmMappingObj = new VendorAtpmMappingObj();
+          vendorAtpmMappingObj.VendorAtpmId = this.vendorAtpmList[i].VendorAtpmId;
+
+          this.vendorHoObj.VendorAtpmMappingObjs.push(vendorAtpmMappingObj);
+        }
+      }
+
       if (this.mode == "edit") {
         this.vendorHoObj.VendorObj.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
         this.vendorHoObj.VendorObj.VendorCode = this.result.VendorObj.VendorCode;
