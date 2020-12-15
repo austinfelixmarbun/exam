@@ -77,4 +77,8 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
   {
     this.router.navigate(["/Vendor/VendorGrading/Approval/Paging"]);
   }
+
+  GetCallBack(e){
+    // AdInsHelper.OpenProdOfferingViewByCodeAndVersion(e.ViewObj.ProdOfferingCode, e.ViewObj.ProdOfferingVersion);
+  }
 }
