@@ -62,7 +62,7 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
     )
   }
 
-  onAvailableNextTask()
+  onAvailableNextTask(event)
   {
     
   }
