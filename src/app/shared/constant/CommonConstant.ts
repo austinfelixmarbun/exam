@@ -72,6 +72,13 @@ export class CommonConstant {
     public static TITLE_AGENCY_COMPANY = "Agency Company";
     public static TITLE_AGENCY_PERSONAL = "Agency Personal";
 
+    //VENDOR GRADING PROCESS
+    public static VENDOR_GRADING_STATUS_REQ = "REQ";
+    public static VENDOR_GRADING_STATUS_RJC = "RJC";
+    public static VENDOR_GRADING_STATUS_APV = "APV";
+    public static VENDOR_GRADING_STATUS_EXE = "EXE";
+    public static VENDOR_GRADING_APV = "VENDOR_GRADING_APV";
+
     // NOTIFICATION METHOD
     public static NotificationMethodIntLink = "INT_LINK";
     public static NotificationMethodExtLink = "EXT_LINK";

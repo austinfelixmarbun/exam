@@ -1,0 +1,116 @@
+{
+  "title": "Supplier Branch Grading Request",
+  "component": [
+    {
+      "type": "textbox",
+      "name": "vdr.VENDOR_CODE",
+      "id": "VendorCodeId",
+      "value": "",
+      "label": "Branch Code",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "textbox",
+      "name": "vdr.VENDOR_NAME",
+      "id": "VendorNameId",
+      "value": "",
+      "label": "Branch Name",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "numeric",
+      "name": "vdr.VENDOR_RATING",
+      "id": "VendorRatingGteId",
+      "value": 0,
+      "label": "Rating >=",
+      "restriction": "gte",
+      "datatype": "numeric",
+      "placeholder": "Placeholder"
+    },
+    {
+      "type": "numeric",
+      "name": "vdr.VENDOR_RATING",
+      "id": "VendorRatingLteId",
+      "value": 100,
+      "label": "Rating <=",
+      "restriction": "lte",
+      "datatype": "numeric",
+      "placeholder": "Placeholder"
+    }
+  ],
+  "querystring": {
+    "name": "searchRequestSupplBranchGrading"
+  },
+  "headerList": [
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "BRANCH CODE",
+      "name": "vdr.VENDOR_CODE"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "BRANCH NAME",
+      "name": "vdr.VENDOR_NAME"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "RATING",
+      "name": "vdr.VENDOR_RATING"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "ACTION"
+    }
+  ],
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "center",
+      "property": "VendorCode"
+    },
+    {
+      "type": "link",
+      "position": "center",
+      "property": "VendorName",
+      "target": "_blank",
+      "path": "/View/VendorBranch",
+      "param": [
+        {
+          "type": "VendorId",
+          "property": "VendorId"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "position": "center",
+      "property": "VendorRating"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "edit",
+          "path": "/Vendor/VendorGrading/Request/Detail",
+
+          "param": [
+            {
+              "type": "VendorId",
+              "property": "VendorId"
+            },
+            {
+              "type": "mode",
+              "property": "edit"
+            }
+          ],
+          "icon": "ft-edit-2"
+        }
+      ]
+    }
+  ]
+}

@@ -564,6 +564,11 @@ export class URLConstant {
     public static GetListVendorBankAccByVendorEmpId = environment.FoundationR3Url + "/VendorBankAcc/GetListVendorBankAccByVendorEmpId";
     public static GetVendorAddrByVendorAddrId = environment.FoundationR3Url + "/VendorAddr/GetVendorAddrByVendorAddrId";
 
+    // VENDOR GRADING
+    public static SubmitRequestVendorGrading = environment.FoundationR3Url + "/VendorGrading/SubmitRequestVendorGrading";
+    public static GetRuleVendorGrading = environment.FoundationR3Url + "/VendorGrading/GetRuleVendorGrading";
+    public static GetVendorGrade = environment.FoundationR3Url + "/VendorGrading/GetVendorGrade";
+
     // VENDOR OFFICE MEMBER
     public static AddListVendorOfficeMember = environment.FoundationR3Url + "/VendorOfficeMbr/AddListVendorOfficeMember"
     public static GetListVendorOfficeMbrByVendorId = environment.FoundationR3Url + "/VendorOfficeMbr/GetListVendorOfficeMbrByVendorId"
@@ -929,5 +934,8 @@ export class URLConstant {
     public static GetRefAppSrcByRefAppSrcId = environment.FoundationR3Url + "/RefAppSrc/GetRefAppSrcByRefAppSrcId";
     public static GetListRefAppSrcOfficeMbrByRefAppSrcId = environment.FoundationR3Url + "/RefAppSrc/GetListRefAppSrcOfficeMbrByRefAppSrcId"
     
+    // List Approver
+    public static GetApprovedBy = environment.ApprovalURL + "/api/RFAWeb/GetApprovedBy/";
+    public static GetRecommendations = environment.ApprovalURL + "/api/RFAWeb/GetRecommendations/";
     
 }

@@ -1,0 +1,39 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "VendorGradingInfo",
+        "subSectionTitle": "Main Information",
+        "mainInfoPath": "/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Supplier Branch Code",
+            "property": "VendorCode"
+          },
+          {
+            "type": "text",
+            "label": "Supplier Branch Name",
+            "property": "VendorName"
+          },
+          {
+            "type": "text",
+            "label": "Rating",
+            "property": "Rating"
+          },
+          {
+            "type": "text",
+            "label": "Grade",
+            "property": "Grade"
+          }
+  
+        ],
+        "querystring": {
+          "select": "select vdr.vendor_name AS VendorName, vdr.vendor_code AS VendorCode, hist.NEW_RATING AS Rating, hist.NEW_GRADE AS Grade",
+          "from": "FROM vendor vdr WITH(NOLOCK) JOIN vendor_grading_hist hist WITH(NOLOCK) ON vdr.vendor_id = hist.vendor_id",
+          "where": "WHERE hist.VENDOR_GRADING_HIST_id = {0}"
+        }
+      }
+    ]
+  }
+  
