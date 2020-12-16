@@ -13,6 +13,7 @@ export class RefMasterObj {
     isSystem: any;
     IsActive: any;
     IsDefaultValue: boolean;
+    DefaultCode: string;
     DefaultValue: string;
     MappingCode: string;
     RowVersion: any;
