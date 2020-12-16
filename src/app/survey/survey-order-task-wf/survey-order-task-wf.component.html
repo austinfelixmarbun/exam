@@ -86,9 +86,11 @@
                       <div class="form-group row">
                         <label class="col-md-2 label-control adins-required-label" translate>Surveyee Object</label>
                         <div class="col-md-4">
-                          <select class="form-control" formControlName="MrSrvyObjCode" 
+                          <select class="form-control" style="width: 100%;" formControlName="MrSrvyObjCode"
                             [ngClass]="{ 'is-invalid': enjiForm.submitted && SurveyTaskForm.controls.MrSrvyObjCode.invalid }">
-                            <option *ngFor="let item of SrvyObjList" [value]="item.Key">{{item.Value}}</option>
+                            <option *ngFor="let item of SrvyObjList" [value]="item.Key">
+                              {{item.Key + ' - ' + item.Value}}
+                            </option>
                           </select>
                           <lib-uc-show-errors [control]="SurveyTaskForm.controls.MrSrvyObjCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                         </div>
@@ -105,7 +107,7 @@
                       </div>
                       <div class="form-group row">
                         <label class="col-md-2 label-control adins-required-label" translate>Surveyor Name</label>
-                        <label class="col-md-4" translate>{{VendorObj.VendorName}}</label>
+                        <label class="col-md-4 label-control" translate>{{VendorObj.VendorName}}</label>
                       </div>
                     </div>
                     <div class="form-actions right">
