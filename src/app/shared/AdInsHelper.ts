@@ -4,7 +4,7 @@ import { environment } from "environments/environment";
 import { CommonConstant } from "./constant/CommonConstant";
 import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie";
-
+declare const CryptoJS: any;
 export class AdInsHelper {
     //Function
     public static InsertLog(url, type, param = "") {
@@ -138,6 +138,20 @@ export class AdInsHelper {
         }
         return parsedValue;
     }
+
+    public static Encrypt128CBC(plain: string, k: string, i: string) {
+        var key = CryptoJS.enc.Utf8.parse(k);
+        var iv = CryptoJS.enc.Utf8.parse(i);
+    
+        var encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(plain), key,
+          {
+            keySize: 128 / 8,
+            iv: iv,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+          });
+        return encrypted
+      }
     public static OpenCustomerViewByCustId(CustId) {
         var url = environment.FoundationR3Web + "/View/Customer/PersonalDetail?CustId=" + CustId;
         window.open(url, "_blank");

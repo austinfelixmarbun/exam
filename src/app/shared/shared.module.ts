@@ -11,6 +11,8 @@ import { NotificationSidebarComponent } from 'app/shared/notification-sidebar/no
 import { ToggleFullscreenDirective } from "app/shared/directives/toggle-fullscreen.directive";
 import { ContextMenuModule } from 'ngx-contextmenu';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { DmsIframeComponent } from './dms-iframe/dms-iframe.component';
+import { SafePipe } from './pipe/safepipe';
 
 @NgModule({
     exports: [
@@ -22,7 +24,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
         NotificationSidebarComponent,
         ToggleFullscreenDirective,
         NgbModule,
-        TranslateModule
+        TranslateModule,
+        DmsIframeComponent
     ],
     imports: [
         RouterModule,
@@ -38,7 +41,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
         SidebarComponent,
         CustomizerComponent,
         NotificationSidebarComponent,
-        ToggleFullscreenDirective
+        ToggleFullscreenDirective,
+        DmsIframeComponent,
+        SafePipe
     ]
 })
 export class SharedModule { }

@@ -25,7 +25,7 @@
               <button type="button" class="step-trigger" role="tab" aria-controls="customer-detail-tab"
                 id="customer-detail-tab-trigger" (click)="EnterTab('Detail')">
                 <span class="bs-stepper-circle">1</span>
-                <span class="bs-stepper-label">Customer Detail</span>
+                <span class="bs-stepper-label">Customer abecede Detail</span>
               </button>
             </div>
             <div class="line"></div>
@@ -77,10 +77,18 @@
               </button>
             </div>
             <div class="line"></div>
+            <div class="step" data-target="#upload-tab">
+              <button type="button" class="step-trigger" role="tab" aria-controls="upload-tab"
+                id="upload-tab-trigger" (click)="EnterTab('Upload')">
+                <span class="bs-stepper-circle">8</span>
+                <span class="bs-stepper-label">Upload Document</span>
+              </button>
+            </div>
+            <div class="line"></div>
             <div class="step" data-target="#cust-attr-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="cust-attr-tab"
                 id="cust-attr-tab-trigger" (click)="EnterTab('CustAttr')">
-                <span class="bs-stepper-circle">8</span>
+                <span class="bs-stepper-circle">9</span>
                 <span class="bs-stepper-label">Other Info</span>
               </button>
             </div>
@@ -116,8 +124,11 @@
               <app-cust-fin-data-tab [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 7">
               </app-cust-fin-data-tab>
             </div>
+            <div id="upload-tab" class="content" role="tabpanel" aria-labelledby="upload-tab-trigger">
+              <app-dms-iframe  *ngIf="CustStepIndex == 8" [dmsObj]="dmsObj" [showButton]="true" (outputTab)="getValue($event)" (outputCancel)="getValue($event)"></app-dms-iframe>
+            </div>
             <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
-              <app-cust-attr-section [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" *ngIf="CustStepIndex == 8">
+              <app-cust-attr-section  [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" *ngIf="CustStepIndex == 9">
               </app-cust-attr-section>
             </div>
           </div>
