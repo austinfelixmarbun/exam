@@ -19,6 +19,7 @@ export class BankAddComponent implements OnInit {
         BankCode : ['',Validators.required],
         BankName : ['', Validators.required],
         RegRptCode : ['',Validators.required],
+        RtgsCode :[''],
         IsActive : [false]
     });
 
@@ -56,6 +57,7 @@ export class BankAddComponent implements OnInit {
                         BankCode : this.result.BankCode,
                         BankName : this.result.BankName,
                         RegRptCode : this.result.RegRptCode,
+                        RtgsCode: this.result.RtgsCode,
                         IsActive : this.result.IsActive
                     })
                 }
