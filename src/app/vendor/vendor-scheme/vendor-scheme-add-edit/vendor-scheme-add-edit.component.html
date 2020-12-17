@@ -28,7 +28,7 @@
                   </lib-uc-show-errors>
                 </div>
               </div>
-              <div class="form-group row adins-required">
+              <div *ngIf="!isAuto" class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" translate>Scheme Code </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput width-75-per" formControlName="VendorSchmCode">

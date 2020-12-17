@@ -58,6 +58,8 @@ export class AssetCategoryAddEditComponent implements OnInit {
             IsActive: this.result.IsActive
           })
         });
+    }else{
+      this.checkIsAutoFormNoFromSetting('AC');
     }
   }
 
@@ -86,4 +88,28 @@ export class AssetCategoryAddEditComponent implements OnInit {
         });
     }
   }
+
+    //check is automatic/not form no 4
+    isAuto: boolean = false;
+    checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
+      var generalSettingObj = {
+        GsCode: "MASTER_AUTO_GNRT_CODE"
+      }
+      var result: any;
+      this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+        (response) => {
+          result = response;
+
+          if (result.GsValue != undefined && result.GsValue != "") {
+            if (result.GsValue.split(';').find(x => x == msAutoGenCode)) {
+              this.isAuto = true;
+              //patch value form no
+              this.AssetCategoryForm.patchValue({
+                AssetCategoryCode: '-'
+              });
+            }
+          }
+        });
+    }
+    //check is automatic/not form no 4
 }

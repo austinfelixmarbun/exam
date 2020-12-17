@@ -15,7 +15,7 @@
             <lib-ucSubsection [id]="'AssetType'" [title]="'Asset Type Information '+ pageType" [panel]="'AssetTypeId'">
             </lib-ucSubsection>
             <div id="AssetTypeId">
-              <div class="form-group row adins-required">
+              <div *ngIf="!isAuto" class="form-group row adins-required">
                 <label class="col-md-4 adInsLabel" translate>Asset Type Code </label>
                 <div class="col-md-7">
                   <input type="text" class="form-control adInsInput" formControlName="AssetTypeCode"

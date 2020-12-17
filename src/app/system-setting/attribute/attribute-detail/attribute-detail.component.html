@@ -11,7 +11,7 @@
           (ngSubmit)="enjiForm.form.valid && Save(enjiForm)">
           <div class="form-body">
             <div id="RefAttrSection">
-              <div class="form-group row adins-required">
+              <div *ngIf="!isAuto" class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="AttrCode" translate>Attribute Code</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="AttrCode"

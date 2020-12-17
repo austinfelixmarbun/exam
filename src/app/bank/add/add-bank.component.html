@@ -15,7 +15,7 @@
             (ngSubmit)="BankAddForm.valid && SaveForm()">
             <lib-ucSubsection [id]="'BankInformationId'" [title]="title" [panel]="'BankInformation'"></lib-ucSubsection>
             <div class="form-body" id="BankInformation">
-              <div class="form-group row adins-required">
+              <div *ngIf="!isAuto" class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="bankCode" translate>Bank Code </label>
                 <div class="col-md-9">
                   <input type="text" id="bankCode" class="form-control adInsInput width-25-per"

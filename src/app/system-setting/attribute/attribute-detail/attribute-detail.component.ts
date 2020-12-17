@@ -48,7 +48,7 @@ export class AttributeDetailComponent implements OnInit {
     private location: Location,
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
@@ -142,6 +142,8 @@ export class AttributeDetailComponent implements OnInit {
       );
     }
     else {
+      this.checkIsAutoFormNoFromSetting('AR');
+
       forkJoin([getAttrType, getRefMasterInputType, getRefMasterPatternCode, getRefMasterAttributeGroup]).subscribe(
         (response) => {
           this.attrTypeCodeList = response[0][CommonConstant.ReturnObj];
@@ -259,4 +261,27 @@ export class AttributeDetailComponent implements OnInit {
       AttrValue: e.RefMasterTypeCode
     });
   }
+
+  //check is automatic/not form no 4
+  isAuto: boolean = false;
+  checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
+    var generalSettingObj = {
+      GsCode: "MASTER_AUTO_GNRT_CODE"
+    }
+    var result: any;
+    this.httpClient.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+      (response) => {
+        result = response;
+
+        if (result.GsValue != undefined && result.GsValue != "") {
+          if (result.GsValue.split(';').find(x => x == msAutoGenCode)) {
+            this.isAuto = true;
+            this.RefAttrForm.patchValue({
+              AttrCode: '-'
+            });
+          }
+        }
+      });
+  }
+  //check is automatic/not form no 4
 }

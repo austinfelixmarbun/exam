@@ -37,7 +37,8 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private service: NGXToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private http: HttpClient
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
@@ -83,6 +84,8 @@ export class RefIndustryTypeDetailComponent implements OnInit {
           this.inputLookupObj.nameSelect = this.economicSectorObj.EconomicSectorName;
         }
       );
+    }else{
+      this.checkIsAutoFormNoFromSetting('IT');
     }
   }
 
@@ -122,4 +125,28 @@ export class RefIndustryTypeDetailComponent implements OnInit {
       );
     }
   }
+
+  //check is automatic/not form no 4
+  isAuto: boolean = false;
+  checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
+    var generalSettingObj = {
+      GsCode: "MASTER_AUTO_GNRT_CODE"
+    }
+    var result: any;
+    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+      (response) => {
+        result = response;
+
+        if (result.GsValue != undefined && result.GsValue != "") {
+          if (result.GsValue.split(';').find(x => x == msAutoGenCode)) {
+            this.isAuto = true;
+            this.RefIndustryTypeForm.patchValue({
+              IndustryTypeCode: '-'
+            });
+          }
+        }
+      });
+  }
+  //check is automatic/not form no 4
+
 }

@@ -53,6 +53,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
             AssetTypeId: this.ItemAssetType[0].AssetTypeId,
             IsActive: true
           });
+        this.checkIsAutoFormNoFromSetting('AS');
         }
       }
     );
@@ -107,4 +108,29 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       );
     }
   }
+
+  
+  //check is automatic/not form no 4
+  isAuto: boolean = false;
+  checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
+    var generalSettingObj = {
+      GsCode: "MASTER_AUTO_GNRT_CODE"
+    }
+    var result: any;
+    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+      (response) => {
+        result = response;
+
+        if (result.GsValue != undefined && result.GsValue != "") {
+          if (result.GsValue.split(';').find(x => x == msAutoGenCode)) {
+            this.isAuto = true;
+            this.AssetSchemeInfoForm.patchValue({
+              AssetSchmCode: '-'
+            });
+          }
+        }
+      });
+  }
+  //check is automatic/not form no 4
+
 }
