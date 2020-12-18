@@ -32,7 +32,8 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
   maxYear: number;
   bankName: string;
   IsActive : boolean;
-
+  begBalance: number;
+  isAlreadyCalc: boolean = false;
 
   private custBankStmntH: CustBankStmntHObj;
 
@@ -48,6 +49,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     BalanceAmt: [0],
     IsDefault: [false],
     IsActive: [false],
+    BegBalanceAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     RowVersion: [''],
     CustBankStmnts: this.fb.array([])
   });
@@ -127,6 +129,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             BalanceAmt: parseFloat(response.CustBankAccObj.BalanceAmt),
             IsDefault: response.CustBankAccObj.IsDefault,
             IsActive: response.CustBankAccObj.IsActive,
+            BegBalanceAmt: response.CustBankStmntHObj.BegBalanceAmt,
             RowVersion: response.CustBankAccObj.RowVersion
           });
           this.CheckDefault();
@@ -141,6 +144,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             this.custBankStmntH.StartPeriod = response.CustBankStmntHObj.StartPeriod;
             this.custBankStmntH.EndPeriod = response.CustBankStmntHObj.EndPeriod;
             this.custBankStmntH.BalanceAmt = parseFloat(response.CustBankStmntHObj.BalanceAmt);
+            this.custBankStmntH.BegBalanceAmt = parseFloat(response.CustBankStmntHObj.BegBalanceAmt);
             this.custBankStmntH.RowVersion = response.CustBankStmntHObj.RowVersion;
 
             for (const item of response.CustBankStmntDObjs) {
@@ -149,9 +153,11 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
                 CustBankStmntHId: [item.CustBankStmntHId, [Validators.required]],
                 Month: [this.monthOfYear.indexOf(item.Month), [Validators.required]],
                 Year: [item.Year, [Validators.required, Validators.pattern("^[0-9]+$")]],
+                DebitTrxCount: [item.DebitTrxCount],
                 DebitAmt: [item.DebitAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
+                CreditTrxCount: [item.CreditTrxCount],
                 CreditAmt: [item.CreditAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
-                BalanceAmt: [parseFloat(item.BalanceAmt), [Validators.required, Validators.pattern("^[0-9]+$")]],
+                BalanceAmt: [parseFloat(item.BalanceAmt)],
                 RowVersion: [item.RowVersion]
               });
               formArray.push(formGroup);
@@ -174,13 +180,17 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       CustBankStmntHId: [this.custBankStmntH.CustBankStmntHId, [Validators.required]],
       Month: ['', [Validators.required]],
       Year: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+      DebitTrxCount: [''],
       DebitAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+      CreditTrxCount: [''],
       CreditAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-      BalanceAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+      BalanceAmt: [''],
       RowVersion: ['']
     });
     formArray.push(formGroup);
     this.rowCustBankStmnt++;
+
+    this.isAlreadyCalc = false;
   }
 
   removeCustBankStmnt(i) {
@@ -199,7 +209,48 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     });
   }
 
+  calculate()
+  {
+    this.begBalance = this.CustBankAccForm.controls['BegBalanceAmt'].value;
+
+    var startBegBalance = this.begBalance;
+
+    var arrayControl = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
+
+    for (let i = 0;i < arrayControl.length;i++) 
+    {
+      const bankStmntD = arrayControl.at(i).value;
+
+      bankStmntD.BalanceAmt = startBegBalance - bankStmntD.DebitAmt + bankStmntD.CreditAmt;
+      startBegBalance = bankStmntD.BalanceAmt;
+    }
+
+    this.isAlreadyCalc = true;
+  }
+
+  onBegBalanceAmtChange(e)
+  {
+    this.isAlreadyCalc = false;
+  }
+  onDebitAmtChange(e)
+  {
+    this.isAlreadyCalc = false;
+  }
+
+  onCreditAmtChange(e)
+  {
+    this.isAlreadyCalc = false;
+  }
+
   Save(enjiForm) {
+
+    if(this.isAlreadyCalc == false)
+    {
+      this.toastr.warningMessage(ExceptionConstant.CALC_FIRST);
+      return false;
+    }
+
+    
     var formData = this.CustBankAccForm.value;
     var custBankAccObj = new CustBankAccObj();
     custBankAccObj.CustBankAccId = formData.CustBankAccId;
@@ -255,7 +306,9 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
           custBankStmntD.RowVersion = bankStmnt.RowVersion;
           custBankStmntD.Month = this.monthOfYear[bankStmnt.Month];
           custBankStmntD.Year = bankStmnt.Year;
+          custBankStmntD.DebitTrxCount = bankStmnt.DebitTrxCount == "" ? null :bankStmnt.DebitTrxCount;
           custBankStmntD.DebitAmt = bankStmnt.DebitAmt;
+          custBankStmntD.CreditTrxCount = bankStmnt.CreditTrxCount == "" ? null :bankStmnt.CreditTrxCount;
           custBankStmntD.CreditAmt = bankStmnt.CreditAmt;
           custBankStmntD.BalanceAmt = parseFloat(bankStmnt.BalanceAmt);
           listCustBankStmntD.push(custBankStmntD);
@@ -272,6 +325,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
         custBankStmntH.StartPeriod = new Date();
         custBankStmntH.EndPeriod = new Date();
         custBankStmntH.BalanceAmt = totalBalance;
+        custBankStmntH.BegBalanceAmt = this.CustBankAccForm.controls.BegBalanceAmt.value;
 
         var reqObj = { "custBankAccObj": custBankAccObj, "custBankStmntH": custBankStmntH, "custBankStmntDObjs": listCustBankStmntD };
         this.httpClient.post(URLConstant.EditCBAForCustFinData, reqObj).subscribe(
