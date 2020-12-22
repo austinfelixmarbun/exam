@@ -14,6 +14,7 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { formatDate } from '@angular/common';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 
 @Component({
   selector: 'app-customer-personal-main-info',
@@ -130,6 +131,9 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         }
       }
     );
+
+    this.getIdNoInputPattern(true);
+    
    var refMasterObjCustModel = {
       MrCustTypeCode: CommonConstant.CustTypePersonal
     }
@@ -226,7 +230,58 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
       this.tempKTPCheck = false;
     }
     this.CustomerPersonalForm.controls.IdExpiredDt.updateValueAndValidity();
+
+    this.getIdNoInputPattern();
   }
 
+  tempIdTypePattern: any;
+  controlNameIdNo: any = 'IdNo';
+  controlNameIdType:any = 'MrIdTypeCode';
+  customPattern:Array<CustomPatternObj>;
+  getIdNoInputPattern(oninit: boolean = false) {
+    console.log('hi');
+    var idTypeValue = this.CustomerPersonalForm.controls[this.controlNameIdType].value;
+
+    if (idTypeValue != undefined) {
+      if (oninit) {
+        var RefMasterPatternCode = {
+          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeRegularExpression,
+          RowVersion: ""
+        }
+        this.http.post(this.getListActiveRefMasterUrl, RefMasterPatternCode).subscribe(
+          (response) => {
+            this.tempIdTypePattern = response[CommonConstant.ReturnObj];
+
+            this.tempIdTypePattern.forEach(element => {
+              let pattern : CustomPatternObj = new CustomPatternObj();
+              pattern.pattern = element.Value;
+              pattern.invalidMsg = 'invalid format';
+            });
+
+            this.customPattern.push(pattern);
+          }
+        );
+      }
+
+      if (this.tempIdTypePattern != undefined) {
+        // var result = this.tempIdTypePattern.filter(item =>
+        //   Object.keys(item).some(k => item[k] != null &&
+        //     item[k].toString().toLowerCase()
+        //     .includes(idTypeValue))
+        // );
+
+        var result = this.tempIdTypePattern.find(x => x.Key == idTypeValue)
+
+        if (result != undefined) {
+          var pattern = result.Value;
+          if (pattern != undefined) {
+            //ganti form sama control name
+            this.CustomerPersonalForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+            this.CustomerPersonalForm.controls[this.controlNameIdNo].updateValueAndValidity();
+          }
+        }
+      }
+    }
+  }
 }
 
