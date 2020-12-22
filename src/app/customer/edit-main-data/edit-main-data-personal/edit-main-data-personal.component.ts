@@ -50,7 +50,7 @@ export class EditMainDataPersonalComponent implements OnInit {
   editCustPersonalUrl: string;
   getCustPersonalByCustIdUrl: string;
   getCustByCustIdUrl: string;
-  GetListActiveRefMasterWithReserveFieldAllUrl  :string;
+  GetListActiveRefMasterWithMappingCodeAllUrl  :string;
   tempCustPersonalObj: CustPersonalObj;
   tempCustObj: any;
   CustId: number;
@@ -71,7 +71,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
     this.editCustUrl = URLConstant.EditCust;
     this.editCustPersonalUrl = URLConstant.EditCustPersonal; 
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];

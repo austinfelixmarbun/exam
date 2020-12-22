@@ -630,9 +630,10 @@ export class CustomerEmergencyContactComponent implements OnInit {
     } else {
       this.flag = false;
       var foreign = this.tempNationality.find(x => x["MasterCode"] == event.target.value);
-      this.lookUpObj.nameSelect = foreign.ReserveField2;
-      this.lookUpObj.jsonSelect =  { CountryName: foreign.ReserveField2};
-      this.tempCountryCode = foreign.ReserveField1;
+      var setCountry = foreign.DefaultValue.split(';');
+      this.lookUpObj.nameSelect = setCountry[1] ? setCountry[1] : setCountry[0];
+      this.lookUpObj.jsonSelect =  { CountryName: setCountry[1] ? setCountry[1] : setCountry[0]};
+      this.tempCountryCode = setCountry[0];
       this.lookUpObj.isRequired = true;
     }
   }

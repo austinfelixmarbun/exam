@@ -75,7 +75,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
   IsAffiliateWithMf: string;
   MrMaritalStatCode: string;
   getListActiveRefMasterUrl: string;
-  GetListActiveRefMasterWithReserveFieldAllUrl: string;
+  GetListActiveRefMasterWithMappingCodeAllUrl: string;
   tempMrMaritalStatCode: Array<KeyValueObj> = new Array<KeyValueObj>();
 
   CustomerFamilyForm = this.fb.group({
@@ -104,7 +104,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.isExistingCust = false;
     this.isEditCustFamily = false;
     this.ResponseSaveFamily = new EventEmitter<any>();

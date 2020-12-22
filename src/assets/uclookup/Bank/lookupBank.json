@@ -4,7 +4,7 @@
         {
             "type": "textbox",
             "name": "bank_Name",
-            "id": "bankName",
+            "id": "BankName",
             "value": "",
             "label": "Bank Name",
             "placeholder": "Placeholder"
@@ -18,7 +18,7 @@
             "type": "sort",
             "position": "left",
             "label": "Bank Name",
-            "name": "bankName"
+            "name": "BankName"
         },
         {
             "type": "label",
@@ -30,7 +30,7 @@
         {
             "type": "text",
             "position": "left",
-            "property": "bankName"
+            "property": "BankName"
         },
         {
             "type": "action",
@@ -38,11 +38,11 @@
             "action": [
                 {
                     "type": "select",
-                    "property": "refBankId"
+                    "property": "RefBankId"
                 }
             ]
         }
     ],
-    "propertyId": "refBankId",
-    "propertyName": "bankName"
+    "propertyId": "RefBankId",
+    "propertyName": "BankName"
 }

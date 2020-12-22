@@ -12,6 +12,9 @@ export class RefMasterObj {
     IsDeletable: any;
     isSystem: any;
     IsActive: any;
+    IsDefaultValue: boolean;
+    DefaultValue: string;
+    MappingCode: string;
     RowVersion: any;
     constructor() { this.RefMasterId = 0, this.RowVersion = "" }
 }

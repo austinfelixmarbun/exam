@@ -150,7 +150,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
   setDropdown() {
     var refMasterCategoryObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCategory,
-      ReserveField1: CommonConstant.Holding
+      MappingCode: CommonConstant.Holding
     }
     this.vendorService.GetRefMasterListKeyValuePair(refMasterCategoryObj).subscribe(
       (response) => {
@@ -190,9 +190,9 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
           var refMasterIdObj = {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-            ReserveField1: this.RsvField,
+            MappingCode: this.RsvField,
           }
-          this.vendorService.GetListActiveRefMasterWithReserveFieldAll(refMasterIdObj).subscribe(
+          this.vendorService.GetListActiveRefMasterWithMappingCodeAll(refMasterIdObj).subscribe(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -387,9 +387,9 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
     var refMasterIdObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-      ReserveField1: this.RsvField,
+      MappingCode: this.RsvField,
     }
-    this.vendorService.GetListActiveRefMasterWithReserveFieldAll(refMasterIdObj).subscribe(
+    this.vendorService.GetListActiveRefMasterWithMappingCodeAll(refMasterIdObj).subscribe(
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {

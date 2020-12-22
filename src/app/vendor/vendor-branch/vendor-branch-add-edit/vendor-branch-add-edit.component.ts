@@ -416,9 +416,9 @@ export class VendorBranchAddEditComponent implements OnInit {
 
           var refMasterIdObj = {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-            ReserveField1: this.RsvField,
+            MappingCode: this.RsvField,
           }
-          this.http.post(URLConstant.GetListActiveRefMasterWithReserveFieldAll, refMasterIdObj).subscribe(
+          this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -545,9 +545,9 @@ export class VendorBranchAddEditComponent implements OnInit {
 
     var refMasterIdObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-      ReserveField1: this.RsvField,
+      MappingCode: this.RsvField,
     }
-    this.http.post(URLConstant.GetListActiveRefMasterWithReserveFieldAll, refMasterIdObj).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {
