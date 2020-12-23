@@ -58,7 +58,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
 
     this.inputEmpLookupObj = new InputLookupObj();
@@ -96,7 +96,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
   }
 
   SaveForm() {
-    var businessDtRaw = new Date(this.cookieService.get(CommonConstant.BUSINESS_DATE_RAW));
+    var businessDtRaw = new Date(AdInsHelper.GetCookie(this.cookieService, CommonConstant.BUSINESS_DATE_RAW));
     var StartDt = new Date(this.RefEmpLeaveMngmntForm.controls["StartDt"].value);
     if (StartDt < businessDtRaw) {
       this.toastr.warningMessage(ExceptionConstant.START_DATE_MUST_EQUAL_OR_MORE_THAN + "Business Date");
@@ -107,7 +107,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
     else {
       this.relmObj = new RefEmpLeaveMngmntObj();
       this.relmObj = this.RefEmpLeaveMngmntForm.value;
-      var Business_Date = this.cookieService.get(CommonConstant.BUSINESS_DATE);
+      var Business_Date = AdInsHelper.GetCookie(this.cookieService, CommonConstant.BUSINESS_DATE);
       var datePipe = new DatePipe("en-US");
       var value = datePipe.transform(Business_Date, "yyyy-MM-dd");
       var businessDt = new Date(value);

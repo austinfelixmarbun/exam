@@ -115,7 +115,7 @@ export class VendorBranchAddEditComponent implements OnInit {
   })
 
   ngOnInit() {
-    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     if (this.mode == "edit") {
       this.VendorForm.controls.VendorCode.disable();

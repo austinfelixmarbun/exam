@@ -39,7 +39,7 @@ export class LoginPageComponent implements OnInit {
       }
     });
 
-    if (this.cookieService.get(CommonConstant.USER_ACCESS) != null) {
+    if (AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS) != null) {
       this.router.navigate(['dashboard/dash-board']);
     }
   }

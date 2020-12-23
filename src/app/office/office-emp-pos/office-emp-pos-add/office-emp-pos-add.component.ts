@@ -105,7 +105,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    const getuserAccess = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    const getuserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.refOfficeId = getuserAccess.refOfficeId
     this.refOfficeObj = new RefOfficeObj()
     this.httpClient.post(this.refOfficeUrl, null).subscribe(

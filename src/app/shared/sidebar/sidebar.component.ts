@@ -48,8 +48,8 @@ export class SidebarComponent implements OnInit {
         }
         else {
             //Update menu if change of environment
-            let currEnvi = this.cookieService.get('EnvironmentModule');
-            var currentUserContext = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+            let currEnvi = AdInsHelper.GetCookie(this.cookieService, 'EnvironmentModule');
+            var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
             if(currEnvi && currentUserContext && currEnvi != environment.Module)
             {
                 var roleObject = {
@@ -69,11 +69,11 @@ export class SidebarComponent implements OnInit {
                     localStorage.setItem("Token", response["Token"]);
                     localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
                     localStorage.setItem("EnvironmentModule", environment.Module); 
-                    this.menuItems = JSON.parse(this.cookieService.get(CommonConstant.MENU));
+                    this.menuItems = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.MENU));
                 });
             }
             else
-                this.menuItems = JSON.parse(this.cookieService.get(CommonConstant.MENU));
+                this.menuItems = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.MENU));
         }
     }
     genParam(params: [{ 'Attr': string, 'Value': string }]) {

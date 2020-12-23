@@ -19,6 +19,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
  
 @Component({
   selector: 'app-job-data-sme',
@@ -154,7 +155,7 @@ export class JobDataSmeComponent implements OnInit {
     this.inputPreviousAddressObj.title = "Previous Job Address";
     this.inputPreviousAddressObj.showOwnership = true;
 
-    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.inputJobAddressObj = new InputFieldObj();

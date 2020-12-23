@@ -16,6 +16,7 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
 import { formatDate } from '@angular/common';
 import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-company-contact-information',
@@ -94,7 +95,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.UserAccess = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.MaxDate = this.UserAccess[CommonConstant.BUSINESS_DT];
     this.UcAddressObj = new UcAddressObj();
     this.inputFieldObj = new InputFieldObj();

@@ -11,6 +11,7 @@ import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-contact-person-add-edit',
@@ -58,7 +59,7 @@ export class ContactPersonAddEditComponent implements OnInit {
     this.mode = this.objInput["mode"];
     this.VendorContactPersonId = this.objInput["VendorContactPersonId"];
 
-    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
 
     var JobPosition = {

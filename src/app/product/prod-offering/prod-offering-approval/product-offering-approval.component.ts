@@ -24,7 +24,7 @@ export class ProductOfferingApprovalComponent implements OnInit {
 
   inputPagingObj: any;
   arrCrit: any;
-  userContext: CurrentUserContext = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+  userContext: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
 
   constructor(private toastr: NGXToastrService, private httpClient: HttpClient, private router: Router, private cookieService: CookieService) { }
 

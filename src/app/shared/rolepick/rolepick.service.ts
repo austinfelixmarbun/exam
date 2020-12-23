@@ -19,7 +19,7 @@ export class RolePickService {
         if (type == "modal") {
             var loginByRole = environment.FoundationR3Url + URLConstant.LoginByToken;
             var roleObject2 = {
-                RequestDateTime: this.cookieService.get(CommonConstant.BUSINESS_DATE_RAW),
+                RequestDateTime: AdInsHelper.GetCookie(this.cookieService, CommonConstant.BUSINESS_DATE_RAW),
                 Ip: "",
                 RowVersion: ""
             };

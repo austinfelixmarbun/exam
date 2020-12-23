@@ -15,7 +15,8 @@ export class AdInsHelper {
 
         var listPageAccess = [];
         listPageAccess = JSON.parse(localStorage.getItem(CommonConstant.PAGE_ACCESS));
-        var userAcc = cookieService.get(CommonConstant.USER_ACCESS) ? JSON.parse(cookieService.get(CommonConstant.USER_ACCESS)) : null;
+        var userAccess = this.GetCookie(cookieService, CommonConstant.USER_ACCESS);
+        var userAcc = userAccess ? JSON.parse(userAccess) : null;
         var pageAccess = listPageAccess;
         if (listPageAccess == null) {
             pageAccess = [];
@@ -167,6 +168,7 @@ export class AdInsHelper {
 
     private static DecryptString(chipperText: string){
         //console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+        if(chipperText == undefined || chipperText.trim() == '') return null;
         var chipperKey = CryptoJS.enc.Utf8.parse('AdInsFOU12345678');
         var iv = CryptoJS.lib.WordArray.create([0x00, 0x00, 0x00, 0x00]);  
         //console.log('Start Decrypting.......')

@@ -22,6 +22,7 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NullViewportScroller } from '@angular/common/src/viewport_scroller';
 import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-family-detail',
@@ -119,7 +120,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
 
   ngOnInit() {
     console.log("ameng");
-    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
