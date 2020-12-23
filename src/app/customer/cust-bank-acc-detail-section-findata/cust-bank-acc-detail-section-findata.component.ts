@@ -49,7 +49,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     BalanceAmt: [0],
     IsDefault: [false],
     IsActive: [false],
-    BegBalanceAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    BegBalanceAmt: [''],
     RowVersion: [''],
     CustBankStmnts: this.fb.array([])
   });
@@ -114,6 +114,9 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     else if (this.pageType == "editStmnt") {
       var custBankAcc = new CustBankAccObj();
       custBankAcc.CustBankAccId = this.CustBankAccId;
+
+      this.CustBankAccForm.controls['BegBalanceAmt'].setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
+
       this.httpClient.post(URLConstant.GetCBAForCustFinDataEditModeByCustBankAccId, custBankAcc).subscribe(
         (response: any) => {
           this.bankName = response.RefBankObj.BankName;
@@ -129,11 +132,15 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             BalanceAmt: parseFloat(response.CustBankAccObj.BalanceAmt),
             IsDefault: response.CustBankAccObj.IsDefault,
             IsActive: response.CustBankAccObj.IsActive,
-            BegBalanceAmt: response.CustBankStmntHObj.BegBalanceAmt,
+            //BegBalanceAmt: response.CustBankStmntHObj.BegBalanceAmt,
             RowVersion: response.CustBankAccObj.RowVersion
           });
           this.CheckDefault();
           if (response.CustBankAccObj.IsBankStmnt) {
+            this.CustBankAccForm.patchValue({
+              BegBalanceAmt: response.CustBankStmntHObj.BegBalanceAmt,
+            });
+
             var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
             this.custBankStmntH = new CustBankStmntHObj();
             this.custBankStmntH.CustBankStmntHId = response.CustBankStmntHObj.CustBankStmntHId;
@@ -244,11 +251,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
 
   Save(enjiForm) {
 
-    if(this.isAlreadyCalc == false)
-    {
-      this.toastr.warningMessage(ExceptionConstant.CALC_FIRST);
-      return false;
-    }
+    
 
     
     var formData = this.CustBankAccForm.value;
@@ -285,6 +288,12 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
         );
       }
       else if (this.pageType == "editStmnt") {
+        if(this.isAlreadyCalc == false)
+        {
+          this.toastr.warningMessage(ExceptionConstant.CALC_FIRST);
+          return false;
+        }
+
         var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
         var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
         var listCustBankStmntD = new Array<CustBankStmntDObj>();
