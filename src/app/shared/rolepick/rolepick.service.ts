@@ -63,7 +63,7 @@ export class RolePickService {
                 this.http.post(url, roleObject, { withCredentials: true}).subscribe(
                     (response) => {
                         localStorage.setItem("Menu", JSON.stringify(response["returnObject"]));
-                        this.cookieService.put('access_token', response['Token']);
+                        //this.cookieService.put('access_token', response['Token']);
                         localStorage.setItem("EnvironmentModule", environment.Module);
                         localStorage.setItem("Token", response["Token"]);
                         AdInsHelper.CreateUserAccess(this.cookieService, response);

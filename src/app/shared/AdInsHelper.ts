@@ -4,6 +4,7 @@ import { environment } from "environments/environment";
 import { CommonConstant } from "./constant/CommonConstant";
 import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie";
+import * as CryptoJS from 'crypto-js';
 
 export class AdInsHelper {
 
@@ -94,10 +95,18 @@ export class AdInsHelper {
         localStorage.setItem("BusinessDate", DateParse);
         localStorage.setItem("UserAccess", JSON.stringify(response["Identity"]));
 
-        cookieService.put("BusinessDateRaw", response["Identity"].BusinessDt);
-        cookieService.put("BusinessDate", DateParse);
-        cookieService.put("UserAccess", JSON.stringify(response["Identity"]));
+        //cookieService.put("BusinessDateRaw", response["Identity"].BusinessDt);
+        //cookieService.put("BusinessDate", DateParse);
+        //cookieService.put("UserAccess", JSON.stringify(response["Identity"]));
     }
+
+    public static GetCookie(cookieService: CookieService, key, isEncrypted=true)
+    {
+        var value = cookieService.get(key);
+        if(!isEncrypted) return value;
+        return this.DecryptString(value);
+    }
+    
 
     public static IsGrantAccess(cookieService: CookieService, formPath) {
         var temp = cookieService.get(CommonConstant.MENU);
@@ -149,5 +158,26 @@ export class AdInsHelper {
     }
     public static OpenProdOfferingViewByCodeAndVersion(Code, Version) {
         window.open(environment.FoundationR3Web + "/View/Offering?prodOfferingHId=0&prodOfferingCode=" + Code + "&prodOfferingVersion=" + Version, "_blank");
-      }
+    }
+
+    private static EncryptString(plaintext: string){
+
+
+    }
+
+    private static DecryptString(chipperText: string){
+        //console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+        var chipperKey = CryptoJS.enc.Utf8.parse('AdInsFOU12345678');
+        var iv = CryptoJS.lib.WordArray.create([0x00, 0x00, 0x00, 0x00]);  
+        //console.log('Start Decrypting.......')
+        //console.log('Chipper Text: '+chipperText);
+        //console.log('IV: '+iv);
+        var decrypted = CryptoJS.AES.decrypt(chipperText, chipperKey, {iv: iv}); 
+        var plainText =  decrypted.toString(CryptoJS.enc.Utf8);   
+        //console.log('Decrypted: '+plainText);
+        //console.log('End Encrypting.......')
+        //console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+        return plainText;
+
+    }
 }

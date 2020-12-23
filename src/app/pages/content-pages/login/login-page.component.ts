@@ -75,7 +75,7 @@ export class LoginPageComponent implements OnInit {
         }
         else {
           localStorage.setItem("Username", username);
-          this.cookieService.put("username", username);
+          //this.cookieService.put("username", username);
           const object = {
             response: response[CommonConstant.ReturnObj],
             user: username,

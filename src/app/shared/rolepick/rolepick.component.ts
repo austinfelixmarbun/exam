@@ -44,12 +44,12 @@ export class RolepickComponent implements OnInit, AfterViewInit {
       this.http.post(updateRoleUrl, roleObject, { withCredentials: true}).subscribe(
         (response) => {
           localStorage.setItem("Token", response["Token"]);
-          localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
+          //localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
           localStorage.setItem("EnvironmentModule", environment.Module);
           AdInsHelper.CreateUserAccess(this.cookieService, response);
 
           const cookieOptions: CookieOptions = {httpOnly: false, secure: true, sameSite: 'lax', expires: response['Exp']};
-          this.cookieService.put('access_token', localStorage['Token'], cookieOptions);
+          //this.cookieService.put('access_token', localStorage['Token'], cookieOptions);
 
           let currPath = this.router.routerState.snapshot.url;
           this.router.navigateByUrl("/pages/content", { skipLocationChange: true }).then(() => {
@@ -72,12 +72,13 @@ export class RolepickComponent implements OnInit, AfterViewInit {
 
           // const cookieOptions: CookieOptions = {httpOnly: false, secure: true, sameSite: 'lax'};
           var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
-          this.cookieService.put('access_token', response['Token']);
-          this.cookieService.put("Menu", response["Menu"]);
           this.cookieService.put("EnvironmentModule", environment.Module);
-          this.cookieService.put('BusinessDateRaw', response["Identity"].BusinessDt);
-          this.cookieService.put("BusinessDate", DateParse);
-          this.cookieService.put("UserAccess", JSON.stringify(response["Identity"]));
+
+          //this.cookieService.put('access_token', response['Token']);
+          this.cookieService.put("Menu", JSON.stringify(response["Menu"]));
+          //this.cookieService.put('BusinessDateRaw', response["Identity"].BusinessDt);
+          //this.cookieService.put("BusinessDate", DateParse);
+          //this.cookieService.put("UserAccess", JSON.stringify(response["Identity"]));
 
           this.router.navigate(["/dashboard/dash-board"]);
           this.dialog.closeAll();
