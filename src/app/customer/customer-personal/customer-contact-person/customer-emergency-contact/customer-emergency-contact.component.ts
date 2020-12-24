@@ -18,12 +18,14 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { RegexService } from 'app/customer/regex.service';
+import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 
 @Component({
   selector: 'app-customer-emergency-contact',
   templateUrl: './customer-emergency-contact.component.html',
   styles: [],
-  providers: [NGXToastrService],
+  providers: [NGXToastrService, RegexService],
 })
 export class CustomerEmergencyContactComponent implements OnInit {
   @Output() outputTab: EventEmitter<any> = new EventEmitter();
@@ -104,7 +106,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
   criteriaCurrentCust : CriteriaObj;
   inputAddressObj: InputAddressObj;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private regexService: RegexService, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.KTP = RefMasterConstant.EKtp;
     this.GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.addCustPersonalContactPersonUrl = URLConstant.AddNewCustPersonalContactPerson;
@@ -119,6 +121,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
   }
   isAdd: any;
   ngOnInit() {
+    this.customPattern = new Array<CustomPatternObj>();
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -212,6 +215,11 @@ export class CustomerEmergencyContactComponent implements OnInit {
           this.tempKTPCheck = false;
           this.CustomerContactForm.controls.IdExpiredDt.setValidators(Validators.required);
           this.CustomerContactForm.controls.IdExpiredDt.updateValueAndValidity();
+        }
+
+        if(this.tempIdType != undefined)
+        {
+          this.getInitPattern();
         }
       }
     );
@@ -621,6 +629,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
       this.tempKTPCheck = false;
     }
     this.CustomerContactForm.controls.IdExpiredDt.updateValueAndValidity();
+
+    this.setValidatorPattern();
   }
   onOptionsNationalitySelected(event) {
     if (event.target.value == CommonConstant.NationalityCodeLocal) {
@@ -650,4 +660,55 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.isAdd = false;
     this.outputTab.emit({ isAdd: this.isAdd });
   }
+
+
+  //START URS-LOS-041
+  controlNameIdNo: any = 'IdNo';
+  controlNameIdType: any = 'MrIdTypeCode';
+  customPattern: Array<CustomPatternObj>;
+  initIdTypeCode: any;
+  resultPattern: any;
+
+  getInitPattern() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if(this.resultPattern != undefined)
+        {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+    
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+            this.customPattern.push(patternObj);
+          }
+          this.setValidatorPattern();
+        }
+      }
+    );
+  }
+  setValidatorPattern(){
+    let idTypeValue: string;
+
+    idTypeValue = this.CustomerContactForm.controls[this.controlNameIdType].value;
+
+    if (this.resultPattern != undefined) {
+      var result = this.resultPattern.find(x => x.Key == idTypeValue)
+
+      if (result != undefined) {
+        var pattern = result.Value;
+        if (pattern != undefined) {
+          this.setValidator(pattern);
+        }
+      }
+    }
+  }
+  setValidator(pattern: string) {
+    if (pattern != undefined) {
+      this.CustomerContactForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.CustomerContactForm.controls[this.controlNameIdNo].updateValueAndValidity();
+    }
+  }
+  //END OF URS-LOS-041
 }

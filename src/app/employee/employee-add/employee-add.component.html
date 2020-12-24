@@ -69,7 +69,7 @@
               <div class="col-md-9">
                 <input type="pattern" class="form-control adInsInput width-75-per" formControlName="IdNo" required 
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.IdNo.invalid }">
-                <lib-uc-show-errors [control]="RefEmpForm.controls.IdNo" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                <lib-uc-show-errors [customPattern]="customPattern" [control]="RefEmpForm.controls.IdNo" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
             </div>
             <div class="form-group row">

@@ -11,12 +11,14 @@ import { environment } from 'environments/environment';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { RegexService } from 'app/customer/regex.service';
+import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-personal',
   templateUrl: './customer-company-management-shareholder-personal.component.html',
   styleUrls: [],
-  providers: [NGXToastrService],
+  providers: [NGXToastrService, RegexService],
 })
 export class CustomerCompanyManagementShareholderPersonalComponent implements OnInit {
   @Input() custCompanyId : number;
@@ -68,7 +70,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     IsOwner: [false]
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private regexService: RegexService,private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholderNew;
@@ -79,6 +81,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
 
   ngOnInit() {
+    this.customPattern = new Array<CustomPatternObj>();
     this.UserAccess = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.MaxDate = this.UserAccess[CommonConstant.BUSINESS_DT];
     this.inputLookupCustPersonalObj = new InputLookupObj();
@@ -114,6 +117,10 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
             MrIdTypeCode: this.tempIdType[0].Key
           });
           this.ChangeIdType(this.tempIdType[0].Key);
+          if(this.tempIdType != undefined)
+          {
+            this.getInitPattern();
+          }
         }
       }
     );
@@ -275,6 +282,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
 
   onOptionsSelected(event){  
     this.ChangeIdType(event.target.value);
+    this.setValidatorPattern();
   }
 
   ChangeIdType(IdType: string) {
@@ -331,4 +339,54 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.ManagementShareholderForm.controls.TaxIdNo.disable(); 
     this.isExistingCust = true;
   }
+
+  //START URS-LOS-041
+  controlNameIdNo: any = 'IdNo';
+  controlNameIdType: any = 'MrIdTypeCode';
+  customPattern: Array<CustomPatternObj>;
+  initIdTypeCode: any;
+  resultPattern: any;
+
+  getInitPattern() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if(this.resultPattern != undefined)
+        {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+    
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+            this.customPattern.push(patternObj);
+          }
+          this.setValidatorPattern();
+        }
+      }
+    );
+  }
+  setValidatorPattern(){
+    let idTypeValue: string;
+
+    idTypeValue = this.ManagementShareholderForm.controls[this.controlNameIdType].value;
+
+    if (this.resultPattern != undefined) {
+      var result = this.resultPattern.find(x => x.Key == idTypeValue)
+
+      if (result != undefined) {
+        var pattern = result.Value;
+        if (pattern != undefined) {
+          this.setValidator(pattern);
+        }
+      }
+    }
+  }
+  setValidator(pattern: string) {
+    if (pattern != undefined) {
+      this.ManagementShareholderForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.ManagementShareholderForm.controls[this.controlNameIdNo].updateValueAndValidity();
+    }
+  }
+  //END OF URS-LOS-041
 }

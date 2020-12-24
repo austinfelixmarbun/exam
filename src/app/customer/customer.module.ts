@@ -113,6 +113,7 @@ import { UpdateCustomerMgmntShareholderComponent } from './customer-update-maste
 import { UpdateCustomerContactInfoComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-contact-info/update-customer-contact-info.component';
 import { UpdateCustomerCompanyFinDataComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-company-fin-data/update-customer-company-fin-data.component';
 import { UpdateCustomerCompanyLegalDocComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-company-legal-doc/update-customer-company-legal-doc.component';
+import { RegexService } from './regex.service';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -245,6 +246,10 @@ export const customCurrencyMaskConfig = {
     UpdateCustomerCompanyLegalDocComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
+  ,
+  providers: [
+    RegexService
+  ]
 })
 export class CustomerModule {
   constructor() {

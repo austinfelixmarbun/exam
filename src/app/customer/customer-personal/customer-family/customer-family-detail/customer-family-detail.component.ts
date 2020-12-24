@@ -21,12 +21,14 @@ import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NullViewportScroller } from '@angular/common/src/viewport_scroller';
+import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
+import { RegexService } from 'app/customer/regex.service';
 
 @Component({
   selector: 'app-customer-family-detail',
   templateUrl: './customer-family-detail.component.html',
   styles: [],
-  providers: [NGXToastrService]
+  providers: [NGXToastrService, RegexService]
 })
 export class CustomerFamilyDetailComponent implements OnInit {
   @Input() listCustIdToExclude: Array<string>;
@@ -100,7 +102,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     RowVersionCustPersonal: ['']
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
+  constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
@@ -116,8 +118,8 @@ export class CustomerFamilyDetailComponent implements OnInit {
     this.inputAddressObj = new InputAddressObj();
   }
 
-  ngOnInit() {
-    console.log("ameng");
+  ngOnInit(){
+    this.customPattern = new Array<CustomPatternObj>();
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -286,6 +288,11 @@ export class CustomerFamilyDetailComponent implements OnInit {
           this.tempKTPCheck = false;
           this.CustomerFamilyForm.controls.IdExpiredDt.setValidators(Validators.required);
           this.CustomerFamilyForm.controls.IdExpiredDt.updateValueAndValidity();
+        }
+
+        if(this.tempIdType != undefined)
+        {
+          this.getInitPattern();
         }
       }
     );
@@ -482,9 +489,60 @@ export class CustomerFamilyDetailComponent implements OnInit {
       this.tempKTPCheck = false;
     }
     this.CustomerFamilyForm.controls.IdExpiredDt.updateValueAndValidity();
+    this.setValidatorPattern();
   }
 
   back() {
     this.ResponseSaveFamily.emit({ StatusCode: 200 });
   }
+
+  //START URS-LOS-041
+  controlNameIdNo: any = 'IdNo';
+  controlNameIdType: any = 'MrIdTypeCode';
+  customPattern: Array<CustomPatternObj>;
+  initIdTypeCode: any;
+  resultPattern: any;
+
+  getInitPattern() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if(this.resultPattern != undefined)
+        {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+    
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+            this.customPattern.push(patternObj);
+          }
+          this.setValidatorPattern();
+        }
+      }
+    );
+  }
+  setValidatorPattern(){
+    let idTypeValue: string;
+
+    idTypeValue = this.CustomerFamilyForm.controls[this.controlNameIdType].value;
+
+    if (this.resultPattern != undefined) {
+      var result = this.resultPattern.find(x => x.Key == idTypeValue)
+
+      if (result != undefined) {
+        var pattern = result.Value;
+        if (pattern != undefined) {
+          this.setValidator(pattern);
+        }
+      }
+    }
+  }
+  setValidator(pattern: string) {
+    if (pattern != undefined) {
+      this.CustomerFamilyForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.CustomerFamilyForm.controls[this.controlNameIdNo].updateValueAndValidity();
+    }
+  }
+  //END OF URS-LOS-041
 }
