@@ -43,23 +43,24 @@ export class AdInsHelper {
         localStorage.setItem('PageAccess', JSON.stringify(pageAccess));
     }
 
-    public static ForceLogOut(timeLeft, toastr) {
+    public static ForceLogOut(cookieService: CookieService, timeLeft, toastr) {
         let interval = setInterval(() => {
             if (timeLeft > 0) {
                 console.log("Time Left : " + timeLeft)
                 toastr.errorMessage("Automatic Log out at : " + timeLeft);
                 timeLeft--;
             } else {
-                this.ClearAllLog();
+                this.ClearAllLog(cookieService);
                 window.location.reload();
             }
         }, 1000)
     }
 
-    public static ClearAllLog() {
+    public static ClearAllLog(cookieService: CookieService) {
         let version = localStorage.getItem(CommonConstant.VERSION);
         localStorage.clear();
         localStorage.setItem("Version", version);
+        cookieService.removeAll();
     }
 
     public static ClearPageAccessLog(cookieService: CookieService) {
@@ -80,7 +81,7 @@ export class AdInsHelper {
             var tempDate = today.getTime() - bsDtBefore.getTime();
             if (tempDate > AdInsConstant.TimeoutSession) {
                 var data = { status: "001", reason: "Session Time Out" };
-                AdInsHelper.ClearAllLog();
+                AdInsHelper.ClearAllLog(cookieService);
                 return "1";
             }
             localStorage.setItem("LastAccessTime", businessDtNow);
@@ -90,27 +91,19 @@ export class AdInsHelper {
 
     }
 
-    public static CreateUserAccess(cookieService: CookieService, response) {
-        var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
-        localStorage.setItem("BusinessDateRaw", response["Identity"].BusinessDt);
-        localStorage.setItem("BusinessDate", DateParse);
-        localStorage.setItem("UserAccess", JSON.stringify(response["Identity"]));
-
-        //cookieService.put("BusinessDateRaw", response["Identity"].BusinessDt);
-        //cookieService.put("BusinessDate", DateParse);
-        //cookieService.put("UserAccess", JSON.stringify(response["Identity"]));
-    }
-
-    public static GetCookie(cookieService: CookieService, key, isEncrypted=true)
+    public static GetCookie(cookieService: CookieService, key:string)
     {
         var value = cookieService.get(key);
-        if(!isEncrypted) return value;
-        return this.DecryptString(value);
+        return this.DecryptString(value, environment.ChipperKeyCookie);
+    }
+
+    public static SetCookie(cookieService: CookieService, key:string, value:string)
+    {
+        cookieService.put(key, this.EncryptString(value, environment.ChipperKeyCookie));
     }
     
-
-    public static IsGrantAccess(cookieService: CookieService, formPath) {
-        var temp = cookieService.get(CommonConstant.MENU);
+    public static IsGrantAccess(formPath) {
+        var temp = AdInsHelper.GetLocalStorage(CommonConstant.MENU);
         var objectMenu = [];
         objectMenu = JSON.parse(temp);
         if (objectMenu != null) {
@@ -161,25 +154,35 @@ export class AdInsHelper {
         window.open(environment.FoundationR3Web + "/View/Offering?prodOfferingHId=0&prodOfferingCode=" + Code + "&prodOfferingVersion=" + Version, "_blank");
     }
 
-    private static EncryptString(plaintext: string){
-
-
+    public static SetLocalStorage(key:string, value:string)
+    {
+        return localStorage.setItem(key, this.EncryptString(value, environment.ChipperKeyLocalStorage));
     }
 
-    private static DecryptString(chipperText: string){
-        //console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
-        if(chipperText == undefined || chipperText.trim() == '') return null;
-        var chipperKey = CryptoJS.enc.Utf8.parse('AdInsFOU12345678');
-        var iv = CryptoJS.lib.WordArray.create([0x00, 0x00, 0x00, 0x00]);  
-        //console.log('Start Decrypting.......')
-        //console.log('Chipper Text: '+chipperText);
-        //console.log('IV: '+iv);
-        var decrypted = CryptoJS.AES.decrypt(chipperText, chipperKey, {iv: iv}); 
-        var plainText =  decrypted.toString(CryptoJS.enc.Utf8);   
-        //console.log('Decrypted: '+plainText);
-        //console.log('End Encrypting.......')
-        //console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
-        return plainText;
+    public static GetLocalStorage(key:string)
+    {
+        return this.DecryptString(localStorage.getItem(key), environment.ChipperKeyLocalStorage);
+    }
 
+    private static EncryptString(plaintext: string, chipperKey:string="")
+    {
+        if(chipperKey == undefined || chipperKey.trim() == '') return plaintext;
+        var chipperKeyArr = CryptoJS.enc.Utf8.parse(chipperKey);
+        var iv = CryptoJS.lib.WordArray.create([0x00, 0x00, 0x00, 0x00]);
+        var encrypted = CryptoJS.AES.encrypt(plaintext, chipperKeyArr, { iv: iv});
+        var result = CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
+        return result;
+    }
+
+    private static DecryptString(chipperText: string, chipperKey:string){
+        if(
+            chipperKey == undefined || chipperKey.trim() == '' ||
+            chipperText == undefined || chipperText.trim() == ''
+        ) return chipperText;
+        var chipperKeyArr = CryptoJS.enc.Utf8.parse(chipperKey);
+        var iv = CryptoJS.lib.WordArray.create([0x00, 0x00, 0x00, 0x00]);  
+        var decrypted = CryptoJS.AES.decrypt(chipperText, chipperKeyArr, {iv: iv}); 
+        var plainText =  decrypted.toString(CryptoJS.enc.Utf8);   
+        return plainText;
     }
 }
