@@ -22,11 +22,12 @@ import { UcAddressObj } from "app/shared/model/UcAddressObj.Model";
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { AdInsHelper } from "app/shared/AdInsHelper";
-
+import { RegexService } from 'app/customer/regex.service';
+import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 @Component({
   selector: "app-employee-add",
   templateUrl: "./employee-add.component.html",
-  providers: [NGXToastrService]
+  providers: [NGXToastrService, RegexService]
 })
 export class EmployeeAddComponent implements OnInit {
   pageType: string = "add";
@@ -74,6 +75,7 @@ export class EmployeeAddComponent implements OnInit {
   inputAddressObj: InputAddressObj;
   
   constructor(
+    private regexService: RegexService, 
     private router: Router,
     private route: ActivatedRoute,
     private httpClient: HttpClient,
@@ -102,6 +104,7 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.customPattern = new Array<CustomPatternObj>();
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     this.addressObj = new UcAddressObj();
@@ -117,6 +120,10 @@ export class EmployeeAddComponent implements OnInit {
             this.RefEmpForm.patchValue({
               MrIdTypeCode: this.IdTypeList[0].Key
             });
+          }
+          if(this.IdTypeList != undefined)
+          {
+            this.getInitPattern();
           }
         }
       }
@@ -288,4 +295,54 @@ export class EmployeeAddComponent implements OnInit {
       );
     }
   }
+
+  //START URS-LOS-041
+  controlNameIdNo: any = 'IdNo';
+  controlNameIdType: any = 'MrIdTypeCode';
+  customPattern: Array<CustomPatternObj>;
+  initIdTypeCode: any;
+  resultPattern: any;
+
+  getInitPattern() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if(this.resultPattern != undefined)
+        {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+    
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+            this.customPattern.push(patternObj);
+          }
+          this.setValidatorPattern();
+        }
+      }
+    );
+  }
+  setValidatorPattern(){
+    let idTypeValue: string;
+
+    idTypeValue = this.RefEmpForm.controls[this.controlNameIdType].value;
+
+    if (this.resultPattern != undefined) {
+      var result = this.resultPattern.find(x => x.Key == idTypeValue)
+
+      if (result != undefined) {
+        var pattern = result.Value;
+        if (pattern != undefined) {
+          this.setValidator(pattern);
+        }
+      }
+    }
+  }
+  setValidator(pattern: string) {
+    if (pattern != undefined) {
+      this.RefEmpForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.RefEmpForm.controls[this.controlNameIdNo].updateValueAndValidity();
+    }
+  }
+  //END OF URS-LOS-041
 }

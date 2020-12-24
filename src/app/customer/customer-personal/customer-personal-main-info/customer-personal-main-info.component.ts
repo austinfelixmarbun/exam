@@ -15,11 +15,11 @@ import { formatDate } from '@angular/common';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
-
+import { RegexService } from 'app/customer/regex.service';
 @Component({
   selector: 'app-customer-personal-main-info',
   templateUrl: './customer-personal-main-info.component.html',
-  providers : [NGXToastrService]
+  providers: [NGXToastrService,RegexService]
 })
 export class CustomerPersonalMainInfoComponent implements OnInit {
 
@@ -74,7 +74,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     VipNotes: ['', [Validators.required]]
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
+  constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
@@ -83,6 +83,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.customPattern = new Array<CustomPatternObj>();
     this.VipNotesRequired = true;
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -123,18 +124,20 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         });
         if (this.tempIdType[0].Key == this.KTP) {
           this.tempKTPCheck = true;
-        
+
         } else {
           this.tempKTPCheck = false;
-          this.CustomerPersonalForm.controls.IdExpiredDt.setValidators(Validators.required);  
+          this.CustomerPersonalForm.controls.IdExpiredDt.setValidators(Validators.required);
           this.CustomerPersonalForm.controls.IdExpiredDt.updateValueAndValidity();
+        }
+        if(this.tempIdType != undefined)
+        {
+          this.getInitPattern();
         }
       }
     );
 
-    this.getIdNoInputPattern(true);
-    
-   var refMasterObjCustModel = {
+    var refMasterObjCustModel = {
       MrCustTypeCode: CommonConstant.CustTypePersonal
     }
     this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
@@ -146,12 +149,12 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
       }
     );
 
-    this.http.post(this.getListActiveRefMasterUrl, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat}).toPromise().then(
+    this.http.post(this.getListActiveRefMasterUrl, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat }).toPromise().then(
       (response) => {
         this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
           MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
-        });        
+        });
       }
     );
   }
@@ -163,7 +166,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
       this.CustomerPersonalForm.controls.VipNotes.disable();
       this.VipNotesRequired = false;
       this.CustomerPersonalForm.controls.IdExpiredDt.clearValidators();
-  
+
     } else {
       this.CustomerPersonalForm.controls.VipNotes.enable();
       this.CustomerPersonalForm.controls.VipNotes.setValidators(Validators.required);
@@ -180,13 +183,13 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     let d2 = new Date(MaxDate);
     max17Yodt.setFullYear(d2.getFullYear() - 17);
 
-    if(d1 > max17Yodt){
+    if (d1 > max17Yodt) {
       this.toastr.warningMessage("Customer age must be at least 17 year old.");
       return;
     }
 
-    if(this.CustomerPersonalForm.controls["BirthDt"].value)
-    this.CustName = this.CustomerPersonalForm.controls["CustName"].value;
+    if (this.CustomerPersonalForm.controls["BirthDt"].value)
+      this.CustName = this.CustomerPersonalForm.controls["CustName"].value;
     // this.CustModel = this.CustomerPersonalForm.controls["CustModel"].value;
     this.CustModel = "";
     this.Gender = this.CustomerPersonalForm.controls["Gender"].value;
@@ -200,9 +203,9 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.MrMaritalStatCode = this.CustomerPersonalForm.controls["MrMaritalStatCode"].value;
     this.IsVip = this.CustomerPersonalForm.controls["IsVip"].value;
     this.IsAffiliateWithMf = this.CustomerPersonalForm.controls["IsAffiliateWithMf"].value;
-    if(this.IsVip){
+    if (this.IsVip) {
       this.VipNotes = this.CustomerPersonalForm.controls["VipNotes"].value;
-    } 
+    }
 
     var custAddr = new Object();
     var formValue = this.CustomerPersonalForm.value;
@@ -215,14 +218,14 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     custAddr["Zipcode"] = formValue["UcAddressZipcode"]["value"];
     custAddr["SubZipcode"] = formValue["UcAddressZipcode"]["value"];
     sessionStorage.setItem("CustAddr", JSON.stringify(custAddr));
-    AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerPersonal/DuplicateCheck"],{ "CustName": this.CustName, "Gender": this.Gender, "MrIdTypeCode": this.MrIdTypeCode, "CustModel": this.CustModel, "BirthPlace": this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo, "IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName, "IsVip": this.IsVip, "IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes, "MrMaritalStatCode": this.MrMaritalStatCode });
+    AdInsHelper.RedirectUrl(this.router, ["/Customer/CustomerPersonal/DuplicateCheck"], { "CustName": this.CustName, "Gender": this.Gender, "MrIdTypeCode": this.MrIdTypeCode, "CustModel": this.CustModel, "BirthPlace": this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo, "IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName, "IsVip": this.IsVip, "IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes, "MrMaritalStatCode": this.MrMaritalStatCode });
   }
   onOptionsSelected(event) {
     let noExpDate = [CommonConstant.MrIdTypeCodeEKTP, CommonConstant.MrIdTypeCodeNPWP, CommonConstant.MrIdTypeCodeAKTA];
     if (noExpDate.includes(event.target.value)) {
       this.CustomerPersonalForm.controls.IdExpiredDt.clearValidators();
       this.CustomerPersonalForm.patchValue({
-        IdExpiredDt : ''
+        IdExpiredDt: ''
       })
       this.tempKTPCheck = true;
     } else {
@@ -231,57 +234,57 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     }
     this.CustomerPersonalForm.controls.IdExpiredDt.updateValueAndValidity();
 
-    this.getIdNoInputPattern();
+    this.setValidatorPattern();
   }
 
-  tempIdTypePattern: any;
+  //START URS-LOS-041
   controlNameIdNo: any = 'IdNo';
-  controlNameIdType:any = 'MrIdTypeCode';
-  customPattern:Array<CustomPatternObj>;
-  getIdNoInputPattern(oninit: boolean = false) {
-    console.log('hi');
-    var idTypeValue = this.CustomerPersonalForm.controls[this.controlNameIdType].value;
+  controlNameIdType: any = 'MrIdTypeCode';
+  customPattern: Array<CustomPatternObj>;
+  initIdTypeCode: any;
+  resultPattern: any;
 
-    if (idTypeValue != undefined) {
-      if (oninit) {
-        var RefMasterPatternCode = {
-          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeRegularExpression,
-          RowVersion: ""
+  getInitPattern() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if(this.resultPattern != undefined)
+        {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+    
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+            this.customPattern.push(patternObj);
+          }
+          this.setValidatorPattern();
         }
-        this.http.post(this.getListActiveRefMasterUrl, RefMasterPatternCode).subscribe(
-          (response) => {
-            this.tempIdTypePattern = response[CommonConstant.ReturnObj];
-
-            this.tempIdTypePattern.forEach(element => {
-              let pattern : CustomPatternObj = new CustomPatternObj();
-              pattern.pattern = element.Value;
-              pattern.invalidMsg = 'invalid format';
-            });
-
-            this.customPattern.push(pattern);
-          }
-        );
       }
+    );
+  }
+  setValidatorPattern(){
+    let idTypeValue: string;
 
-      if (this.tempIdTypePattern != undefined) {
-        // var result = this.tempIdTypePattern.filter(item =>
-        //   Object.keys(item).some(k => item[k] != null &&
-        //     item[k].toString().toLowerCase()
-        //     .includes(idTypeValue))
-        // );
+    idTypeValue = this.CustomerPersonalForm.controls[this.controlNameIdType].value;
 
-        var result = this.tempIdTypePattern.find(x => x.Key == idTypeValue)
+    if (this.resultPattern != undefined) {
+      var result = this.resultPattern.find(x => x.Key == idTypeValue)
 
-        if (result != undefined) {
-          var pattern = result.Value;
-          if (pattern != undefined) {
-            //ganti form sama control name
-            this.CustomerPersonalForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
-            this.CustomerPersonalForm.controls[this.controlNameIdNo].updateValueAndValidity();
-          }
+      if (result != undefined) {
+        var pattern = result.Value;
+        if (pattern != undefined) {
+          this.setValidator(pattern);
         }
       }
     }
   }
+  setValidator(pattern: string) {
+    if (pattern != undefined) {
+      this.CustomerPersonalForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.CustomerPersonalForm.controls[this.controlNameIdNo].updateValueAndValidity();
+    }
+  }
+  //END OF URS-LOS-041
 }
 

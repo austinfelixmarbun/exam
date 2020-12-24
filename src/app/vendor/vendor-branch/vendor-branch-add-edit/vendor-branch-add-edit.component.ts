@@ -16,11 +16,13 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { VendorAttrContentObj } from 'app/shared/model/VendorAttrContentObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { RegexService } from 'app/customer/regex.service';
+import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 
 @Component({
   selector: 'app-vendor-branch-add-edit',
   templateUrl: './vendor-branch-add-edit.component.html',
-  providers: [NGXToastrService]
+  providers: [NGXToastrService, RegexService]
 })
 export class VendorBranchAddEditComponent implements OnInit {
 
@@ -62,7 +64,7 @@ export class VendorBranchAddEditComponent implements OnInit {
   reqVendorAttrObj: { listVendorAttrContentObj: any[]; };
   ListVendorAttrContent: any;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private regexService: RegexService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params["MrVendorCategoryCode"] != null) {
         this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
@@ -114,6 +116,7 @@ export class VendorBranchAddEditComponent implements OnInit {
   })
 
   ngOnInit() {
+    this.customPattern = new Array<CustomPatternObj>();
     var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     if (this.mode == "edit") {
@@ -430,6 +433,11 @@ export class VendorBranchAddEditComponent implements OnInit {
                   });
                 }
               }
+
+              if(this.itemIdType != undefined)
+              {
+                this.getInitPattern();
+              }
             }
           );
         }
@@ -450,6 +458,11 @@ export class VendorBranchAddEditComponent implements OnInit {
           this.VendorForm.patchValue({
             MrIdTypeCode: this.itemIdType[0].Key
           });
+        }
+
+        if(this.itemIdType != undefined)
+        {
+          this.getInitPattern();
         }
       }
     );
@@ -563,6 +576,8 @@ export class VendorBranchAddEditComponent implements OnInit {
             });
           }
         }
+
+        this.setValidatorPattern();
       }
     );
   }
@@ -814,4 +829,54 @@ export class VendorBranchAddEditComponent implements OnInit {
       });
   }
   //check is automatic/not form no 4
+
+  //START URS-LOS-041
+  controlNameIdNo: any = 'IdNo';
+  controlNameIdType: any = 'MrIdTypeCode';
+  customPattern: Array<CustomPatternObj>;
+  initIdTypeCode: any;
+  resultPattern: any;
+
+  getInitPattern() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if(this.resultPattern != undefined)
+        {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+    
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+            this.customPattern.push(patternObj);
+          }
+          this.setValidatorPattern();
+        }
+      }
+    );
+  }
+  setValidatorPattern(){
+    let idTypeValue: string;
+
+    idTypeValue = this.VendorForm.controls[this.controlNameIdType].value;
+
+    if (this.resultPattern != undefined) {
+      var result = this.resultPattern.find(x => x.Key == idTypeValue)
+
+      if (result != undefined) {
+        var pattern = result.Value;
+        if (pattern != undefined) {
+          this.setValidator(pattern);
+        }
+      }
+    }
+  }
+  setValidator(pattern: string) {
+    if (pattern != undefined) {
+      this.VendorForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.VendorForm.controls[this.controlNameIdNo].updateValueAndValidity();
+    }
+  }
+  //END OF URS-LOS-041
 }
