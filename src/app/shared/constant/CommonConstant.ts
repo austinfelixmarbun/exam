@@ -15,7 +15,7 @@ export class CommonConstant {
     public static LAST_ACCESS_TIME = "LastAccessTime";
     public static MENU = "Menu"
     public static ReturnObj = 'ReturnObject';
-    public static EnvironmentModule = 'EnvironmentModule';
+    public static ENVIRONMENT_MODULE = 'EnvironmentModule';
 
     //APPROVAL TASK MAPPER - TRX TYPE
     public static ApvTrxTypeProductHO = "PROD_HO_APV";

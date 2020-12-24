@@ -48,8 +48,6 @@ export class LoginPageComponent implements OnInit {
     this.FoundationR3Url = environment.FoundationR3Url;
 
     if (this.token != null) {
-      localStorage.setItem("Token", this.token);
-      this.cookieService.put('access_token', this.token)
       this.http.post(AdInsConstant.LoginWithToken, {ModuleCode: environment.Module},  {withCredentials: true}).subscribe(
         (response) => {
           this.router.navigate(['dashboard/dash-board']);
@@ -64,7 +62,6 @@ export class LoginPageComponent implements OnInit {
     const password = this.userPassRef.nativeElement.value;
     this.apiUrl = this.FoundationR3Url + AdInsConstant.Login;
     var requestObj = { "Username": username, "Password": password };
-    this.cookieService.put("username", username);
     //this.rolePickService.openDialog(data.returnObject);
     this.http.post(this.apiUrl, requestObj).subscribe(
       (response) => {

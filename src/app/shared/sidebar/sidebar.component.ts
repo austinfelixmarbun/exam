@@ -48,7 +48,7 @@ export class SidebarComponent implements OnInit {
         }
         else {
             //Update menu if change of environment
-            let currEnvi = AdInsHelper.GetLocalStorage(CommonConstant.EnvironmentModule);
+            let currEnvi = AdInsHelper.GetLocalStorage(CommonConstant.ENVIRONMENT_MODULE);
             var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
             if(currEnvi && currentUserContext && currEnvi != environment.Module)
             {
@@ -66,9 +66,8 @@ export class SidebarComponent implements OnInit {
                 var updateRoleUrl = environment.FoundationR3Url + URLConstant.UpdateToken;
                 this.http.post(updateRoleUrl, roleObject).subscribe(
                 (response) => {
-                    localStorage.setItem("Token", response["Token"]);
                     AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
-                    AdInsHelper.SetLocalStorage(CommonConstant.EnvironmentModule, environment.Module); 
+                    AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module); 
                     this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
                 });
             }

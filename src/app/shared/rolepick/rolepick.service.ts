@@ -63,8 +63,7 @@ export class RolePickService {
                 this.http.post(url, roleObject, { withCredentials: true}).subscribe(
                     (response) => {
                         AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response["returnObject"]));
-                        AdInsHelper.SetLocalStorage(CommonConstant.EnvironmentModule, environment.Module);
-                        localStorage.setItem("Token", response["Token"]);
+                        AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
                         this.router.navigate(['dashboard/dash-board']);
                     }
                 )

@@ -91,17 +91,6 @@ export class AdInsHelper {
 
     }
 
-    public static GetCookie(cookieService: CookieService, key:string)
-    {
-        var value = cookieService.get(key);
-        return this.DecryptString(value, environment.ChipperKeyCookie);
-    }
-
-    public static SetCookie(cookieService: CookieService, key:string, value:string)
-    {
-        cookieService.put(key, this.EncryptString(value, environment.ChipperKeyCookie));
-    }
-    
     public static IsGrantAccess(formPath) {
         var temp = AdInsHelper.GetLocalStorage(CommonConstant.MENU);
         var objectMenu = [];
@@ -162,6 +151,18 @@ export class AdInsHelper {
     public static GetLocalStorage(key:string)
     {
         return this.DecryptString(localStorage.getItem(key), environment.ChipperKeyLocalStorage);
+    }
+
+    public static SetCookie(cookieService: CookieService, key:string, value:string)
+    {
+        cookieService.put(key, this.EncryptString(value, environment.ChipperKeyCookie));
+    }
+
+    public static GetCookie(cookieService: CookieService, key:string)
+    {
+        var value = cookieService.get(key);
+        if(value == undefined || value.trim() == '') return null;
+        return this.DecryptString(value, environment.ChipperKeyCookie);
     }
 
     private static EncryptString(plaintext: string, chipperKey:string="")
