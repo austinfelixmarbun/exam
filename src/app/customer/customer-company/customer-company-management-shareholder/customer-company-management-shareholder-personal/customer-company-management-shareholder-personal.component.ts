@@ -366,22 +366,38 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       }
     );
   }
-  setValidatorPattern(){
+  // setValidatorPattern(){
+  //   let idTypeValue: string;
+
+  //   idTypeValue = this.ManagementShareholderForm.controls[this.controlNameIdType].value;
+
+  //   if (this.resultPattern != undefined) {
+  //     var result = this.resultPattern.find(x => x.Key == idTypeValue)
+
+  //     if (result != undefined) {
+  //       var pattern = result.Value;
+  //       if (pattern != undefined) {
+  //         this.setValidator(pattern);
+  //       }
+  //     }
+  //   }
+  // }
+
+  setValidatorPattern() {
     let idTypeValue: string;
-
     idTypeValue = this.ManagementShareholderForm.controls[this.controlNameIdType].value;
-
-    if (this.resultPattern != undefined) {
-      var result = this.resultPattern.find(x => x.Key == idTypeValue)
-
-      if (result != undefined) {
-        var pattern = result.Value;
-        if (pattern != undefined) {
-          this.setValidator(pattern);
+    var pattern: string = '';
+    if (idTypeValue != undefined) {
+      if (this.resultPattern != undefined) {
+        var result = this.resultPattern.find(x => x.Key == idTypeValue)
+        if (result != undefined) {
+          pattern = result.Value;
         }
       }
     }
+    this.setValidator(pattern);
   }
+
   setValidator(pattern: string) {
     if (pattern != undefined) {
       this.ManagementShareholderForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
