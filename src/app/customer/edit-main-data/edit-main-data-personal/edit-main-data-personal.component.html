@@ -10,6 +10,22 @@
             </lib-ucSubsection>
             <div class="form-body" id="MainInfoId">
               <div class="form-group row">
+                <label class="col-md-2 adInsLabel" translate>Is Supplier</label>
+                <div class="col-md-4">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsSupplier"
+                    (click)="checkIsSupplier()" />
+                </div>
+              </div>
+              <div class="form-group row" *ngIf="IsSupplier == true">
+                <label class="col-md-2 adinsLabel" for="LinkSupplier" translate>Link Supplier </label>
+                <div class="col-md-4">
+                  <lib-uclookupgeneric *ngIf="inputLookupObj?.isReady" [lookupInput]="inputLookupObj"
+                    [parentForm]='CustomerPersonalForm' [enjiForm]='enjiForm' [identifier]="'lookupSupp'"
+                    #LookupSupplier (lookup)="SetSupplier($event)">
+                  </lib-uclookupgeneric>
+                </div>
+              </div>
+              <div class="form-group row">
                 <label class="col-md-2 adins-required-label" translate>Customer Name </label>
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="CustName"
@@ -43,7 +59,8 @@
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.BirthPlace.invalid}">
-                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.BirthPlace" [submit]="enjiForm.submitted">
+                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.BirthPlace"
+                    [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
               </div>
@@ -56,13 +73,14 @@
                     <option *ngFor="let it of tempIdType " [value]="it.Key">
                       {{it.Value}}</option>
                   </select>
-                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
+                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.MrIdTypeCode"
+                    [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
                 <label class="col-md-2 adins-required-label" translate>Birth Date</label>
                 <div class="col-md-4">
-                  <input type="date" class="form-control adInsInput" formControlName="BirthDt" 
-                  [max]="businessDtMin | date: 'yyyy-MM-dd'"
+                  <input type="date" class="form-control adInsInput" formControlName="BirthDt"
+                    [max]="businessDtMin | date: 'yyyy-MM-dd'"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.BirthDt.invalid}">
                   <lib-uc-show-errors [control]="CustomerPersonalForm.controls.BirthDt" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
@@ -88,17 +106,19 @@
                 <label class="col-md-2 adInsLabel" [ngClass]="{'adins-required-label' : tempKTPCheck==false}"
                   translate>ID Expired Date</label>
                 <div class="col-md-4">
-                  <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt" 
-                  [min]="businessDtMax | date: 'yyyy-MM-dd'"
+                  <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt"
+                    [min]="businessDtMax | date: 'yyyy-MM-dd'"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.IdExpiredDt.invalid } ">
-                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
+                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.IdExpiredDt"
+                    [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
                 <label class="col-md-2 adins-required-label" translate>Mother Maiden Name</label>
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput " formControlName="MotherMaidenName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.MotherMaidenName.invalid}">
-                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.MotherMaidenName" [submit]="enjiForm.submitted">
+                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.MotherMaidenName"
+                    [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
               </div>
@@ -114,7 +134,8 @@
                     <option *ngFor="let it of tempMrMaritalStatCode" [value]="it.Key">
                       {{it.Value}}</option>
                   </select>
-                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.MrMaritalStatCode" [submit]="enjiForm.submitted">
+                  <lib-uc-show-errors [control]="CustomerPersonalForm.controls.MrMaritalStatCode"
+                    [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
               </div>
@@ -124,7 +145,8 @@
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsVip"
                     (click)="checkState()" />
                 </div>
-                <label class="col-md-2 adInsLabel" [ngClass]="{'adins-required-label' : VipNotesRequired==true}"translate>VIP Notes</label>
+                <label class="col-md-2 adInsLabel" [ngClass]="{'adins-required-label' : VipNotesRequired==true}"
+                  translate>VIP Notes</label>
                 <div class="col-md-4">
                   <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes" required
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.VipNotes.invalid }"></textarea>
@@ -134,11 +156,13 @@
                 </div>
               </div>
             </div>
+
             <lib-ucSubsection [id]="'LegalAddr'" [title]="'Legal Address'" [panel]="'LegalAddrSection'">
             </lib-ucSubsection>
             <div class="form-body" id="LegalAddrSection">
-              <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerPersonalForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'">
-              </lib-ucaddress> 
+              <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerPersonalForm" [enjiForm]="enjiForm"
+                [identifier]="'UcAddress'">
+              </lib-ucaddress>
             </div>
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
