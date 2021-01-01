@@ -3,12 +3,12 @@
     <lib-ucaddtotemp *ngIf="tempPagingObj.isReady" [tempPagingObj]="tempPagingObj" (callback)="getListTemp($event)">
     </lib-ucaddtotemp>
     <div class="card-header">
-      <div class="text-right" *ngIf="tempDataExists">
+      <div class="text-right">
         <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Office/OfficeArea/Member']" skipLocationChange
           [queryParams]="{RefOfficeAreaId : RefOfficeAreaId}" translate>
           <i class="far fa-window-close"></i> Cancel
         </button>
-        <button type="submit" (click)="SaveOfficeAreaMember()" class="btn btn-raised btn-primary" translate>
+        <button type="submit" (click)="SaveOfficeAreaMember()" class="btn btn-raised btn-primary" translate *ngIf="tempDataExists">
           <i class="far fa-check-square"></i> Save
         </button>
       </div>
