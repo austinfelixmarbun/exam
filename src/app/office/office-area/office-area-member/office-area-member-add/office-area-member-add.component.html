@@ -3,7 +3,7 @@
     <lib-ucaddtotemp *ngIf="tempPagingObj.isReady" [tempPagingObj]="tempPagingObj" (callback)="getListTemp($event)">
     </lib-ucaddtotemp>
     <div class="card-header">
-      <div class="text-right">
+      <div class="text-right" *ngIf="tempDataExists">
         <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Office/OfficeArea/Member']" skipLocationChange
           [queryParams]="{RefOfficeAreaId : RefOfficeAreaId}" translate>
           <i class="far fa-window-close"></i> Cancel
