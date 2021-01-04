@@ -162,7 +162,7 @@ export class NotificationAddEditComponent implements OnInit {
       return false;
     }
     else {
-      var currentUserContext = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+      var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
 
       if (this.mode == "add") {
         this.notificationHObj = new NotificationHObj();

@@ -62,7 +62,7 @@ export class ProductHOAddComponent implements OnInit {
 
   ResultResponse: any;
   ngOnInit() {
-    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDt.setDate(this.businessDt.getDate());
     this.startActiveDt = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -103,7 +103,7 @@ export class ProductHOAddComponent implements OnInit {
   UrlBackEnd: any;
 
   ValidateDate() {
-    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     let businessDate = new Date(context[CommonConstant.BUSINESS_DT]);
     let startDate = new Date(this.RefProductHOForm.get("StartDt").value);
     let endDate = new Date(this.RefProductHOForm.get("EndDt").value);

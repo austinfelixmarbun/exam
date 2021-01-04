@@ -84,7 +84,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
 
   ngOnInit() {
     this.VipNotesRequired = true;
-    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -169,7 +169,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.CustomerPersonalForm.controls.VipNotes.updateValueAndValidity();
   }
   SaveValue() {
-    var UserAccess = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     var MaxDate = formatDate(UserAccess.BusinessDt, 'yyyy-MM-dd', 'en-US');
     var Max17YO = formatDate(UserAccess.BusinessDt, 'yyyy-MM-dd', 'en-US');
     let max17Yodt = new Date(Max17YO);

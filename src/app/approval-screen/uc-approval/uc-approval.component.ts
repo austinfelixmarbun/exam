@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-uc-approval',
@@ -160,7 +161,7 @@ export class UcApprovalComponent implements OnInit {
   }
 
   Submit() {
-    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     var nodes = this.FormApproval.get("nodes").value;
     var ListNodePersonObj = new Array();
     for (let i = 0; i < nodes.length; i++) {

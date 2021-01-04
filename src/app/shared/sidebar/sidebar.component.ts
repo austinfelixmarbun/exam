@@ -48,8 +48,8 @@ export class SidebarComponent implements OnInit {
         }
         else {
             //Update menu if change of environment
-            let currEnvi = this.cookieService.get('EnvironmentModule');
-            var currentUserContext = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+            let currEnvi = AdInsHelper.GetLocalStorage(CommonConstant.ENVIRONMENT_MODULE);
+            var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
             if(currEnvi && currentUserContext && currEnvi != environment.Module)
             {
                 var roleObject = {
@@ -66,14 +66,13 @@ export class SidebarComponent implements OnInit {
                 var updateRoleUrl = environment.FoundationR3Url + URLConstant.UpdateToken;
                 this.http.post(updateRoleUrl, roleObject).subscribe(
                 (response) => {
-                    localStorage.setItem("Token", response["Token"]);
-                    localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
-                    localStorage.setItem("EnvironmentModule", environment.Module); 
-                    this.menuItems = JSON.parse(this.cookieService.get(CommonConstant.MENU));
+                    AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
+                    AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module); 
+                    this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
                 });
             }
             else
-                this.menuItems = JSON.parse(this.cookieService.get(CommonConstant.MENU));
+                this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
         }
     }
     genParam(params: [{ 'Attr': string, 'Value': string }]) {

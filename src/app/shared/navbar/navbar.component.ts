@@ -43,8 +43,8 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService) {
         const browserLang: string = translate.getBrowserLang();
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
-        var userAccess = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
-        var businessDate = this.cookieService.get(CommonConstant.BUSINESS_DATE);
+        var userAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+        var businessDate = AdInsHelper.GetCookie(this.cookieService, CommonConstant.BUSINESS_DATE);
         var date = new Date(businessDate.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
         businessDate = formatDate(date, 'dd-MMM-yyyy', 'en-US');
         this.businessDate = businessDate;
@@ -131,7 +131,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     logout() {
         var url = environment.FoundationR3Url + AdInsConstant.Logout;
         this.http.post(url, "");
-        AdInsHelper.ClearAllLog();
+        AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();
         this.router.navigate(['pages/login']);
     }

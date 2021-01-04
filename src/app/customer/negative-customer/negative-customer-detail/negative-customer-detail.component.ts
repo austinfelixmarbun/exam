@@ -175,7 +175,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
     var criteriaList;
     var criteriaObj;
-    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDate = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDate.setDate(this.businessDate.getDate() - 1);
     this.businessDateIdExp = new Date(context[CommonConstant.BUSINESS_DT]);

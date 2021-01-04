@@ -55,7 +55,7 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
 
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
-    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.http.post(URLConstant.GetCustCompanyDataForUpdateMasterCustCompany, { CustDataTrxId: this.CustDataTrxId }).pipe(
       map((response) => {

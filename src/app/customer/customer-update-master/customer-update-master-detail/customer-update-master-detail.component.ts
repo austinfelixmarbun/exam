@@ -105,7 +105,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   }
 
   claimTask() {
-    var currentUserContext = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     var wfClaimObj = { pWFTaskListID: this.WfTaskListId, pUserID: currentUserContext[CommonConstant.USER_NAME] };
     this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(
       (response) => {

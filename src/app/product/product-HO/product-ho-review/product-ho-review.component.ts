@@ -63,7 +63,7 @@ export class ProductHoReviewComponent implements OnInit {
       });
   }
   async ClaimTask(WfTaskListId) {
-    var currentUserContext = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     var wfClaimObj = { pWFTaskListID: WfTaskListId, pUserID: currentUserContext[CommonConstant.USER_NAME], isLoading: false };
     this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(() => { });
   }

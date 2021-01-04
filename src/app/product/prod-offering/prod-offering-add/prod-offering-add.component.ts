@@ -64,7 +64,7 @@ export class ProdOfferingAddComponent implements OnInit {
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
 
-    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDt.setDate(this.businessDt.getDate());
     this.startActiveDt = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -171,7 +171,7 @@ export class ProdOfferingAddComponent implements OnInit {
   }
 
   ValidateDate() {
-    var context = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     let businessDate = new Date(context[CommonConstant.BUSINESS_DT]);
     let startDate = new Date(this.ProdOfferingForm.get("StartDt").value);
     let endDate = new Date(this.ProdOfferingForm.get("EndDt").value);

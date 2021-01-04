@@ -12,6 +12,7 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-personal',
@@ -80,7 +81,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
 
   ngOnInit() {
-    this.UserAccess = JSON.parse(this.cookieService.get(CommonConstant.USER_ACCESS));
+    this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.MaxDate = this.UserAccess[CommonConstant.BUSINESS_DT];
     this.inputLookupCustPersonalObj = new InputLookupObj();
     this.inputLookupCustPersonalObj.urlJson = "./assets/lookup/lookUpExistingCustPersonal.json";
