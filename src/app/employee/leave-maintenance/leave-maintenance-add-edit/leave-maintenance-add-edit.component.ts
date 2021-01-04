@@ -61,11 +61,11 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
 
     this.inputEmpLookupObj = new InputLookupObj();
-    this.inputEmpLookupObj.urlJson = "./assets/lookup/lookupEmp.json";
+    this.inputEmpLookupObj.urlJson = "./assets/lookup/lookupEmpLeave.json";
     this.inputEmpLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputEmpLookupObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputEmpLookupObj.pagingJson = "./assets/lookup/lookupEmp.json";
-    this.inputEmpLookupObj.genericJson = "./assets/lookup/lookupEmp.json";
+    this.inputEmpLookupObj.pagingJson = "./assets/lookup/lookupEmpLeave.json";
+    this.inputEmpLookupObj.genericJson = "./assets/lookup/lookupEmpLeave.json";
 
     if (this.pageType == "edit") {
       this.relmObj = new RefEmpLeaveMngmntObj();
