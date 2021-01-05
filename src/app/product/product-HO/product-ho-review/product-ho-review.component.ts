@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -8,23 +8,24 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { UcInputRFAObj } from 'app/shared/model/UcInputRFAObj.Model';
-
+import { UcapprovalcreateComponent } from '@adins/Ucapprovalcreate';
 @Component({
   selector: 'app-product-ho-review',
   templateUrl: './product-ho-review.component.html',
   providers: [NGXToastrService]
 })
 export class ProductHoReviewComponent implements OnInit {
+  @ViewChild(UcapprovalcreateComponent) createComponent;
+  ApprovalCreateOutput: any;
   InputObj: UcInputRFAObj;
+  IsReady: Boolean = false;
   ProdId: number;
   WfTaskListId: number;
   ProdHId: number; 
   FormObj = this.fb.group({
-    ApprovedById: ['', Validators.required],
     Notes: ['', Validators.required]
   });
-  IsReady:Boolean=false;
-
+  
   constructor(private toastr: NGXToastrService, private http: HttpClient, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       if (params["ProdId"] != null) {
@@ -40,21 +41,19 @@ export class ProductHoReviewComponent implements OnInit {
 
   }
   apvBaseUrl = environment.ApprovalURL;
-  ngOnInit() { 
-    this.initInputApprovalObj();
+  ngOnInit() {  
     this.ClaimTask(this.WfTaskListId);
-
-  }
-
-  onChangeApprover(ev) {
-    this.FormObj.patchValue({
-      ApprovedById: ev.target.selectedOptions[0].value
-    });
+    this.initInputApprovalObj();
   }
 
   initInputApprovalObj(){
     this.InputObj = new UcInputRFAObj();
-    this.InputObj.ApvTypecodes = ["PRD_APV_TYPE"];
+    let Attributes = [{}] 
+    let TypeCode = {
+      "TypeCode" : CommonConstant.PRD_HO_APV_TYPE,
+      "Attributes" : Attributes,
+    } 
+    this.InputObj.ApvTypecodes = [TypeCode];
     this.InputObj.EnvUrl = environment.FoundationR3Url;
     this.InputObj.PathUrlGetSchemeBySchemeCode = URLConstant.GetSchemesBySchemeCode;
     this.InputObj.PathUrlGetCategoryByCategoryCode = URLConstant.GetRefSingleCategoryByCategoryCode;
@@ -65,30 +64,29 @@ export class ProductHoReviewComponent implements OnInit {
     this.InputObj.PathUrlCreateJumpRFA = URLConstant.CreateJumpRFA;
     this.InputObj.CategoryCode = CommonConstant.CAT_CODE_PRD_HO_APV;
     this.InputObj.SchemeCode = CommonConstant.SCHM_CODE_APV_HO_ACT_SCHM;
-
-    var data = {
+    let ProductObj = {
       ProdId: this.ProdId
     } 
-    this.http.post(URLConstant.GetProductById, data).subscribe(
+    this.http.post(URLConstant.GetProductById, ProductObj).subscribe(
       (response) => {
         this.InputObj.TrxNo = response["ProdCode"];
         this.IsReady = true;
       });
   }
 
-  SaveForm(event) {
-    var data = {
+  SaveForm() {
+    this.ApprovalCreateOutput = this.createComponent.output(); 
+    let data = {
       ProdHId: this.ProdHId,
       ProdId: this.ProdId,
-      // ApprovedById: this.FormObj.controls.ApprovedById.value,
-      // Notes: this.FormObj.controls.Notes.value, 
       WfTaskListId: this.WfTaskListId,
+      RequestRFAObj: this.ApprovalCreateOutput
     }
-    console.log(data);
-    this.http.post(URLConstant.NewReviewProduct, data).subscribe(
+    this.http.post(URLConstant.ReviewProductNew, data).subscribe(
       (response) => {
         this.toastr.successMessage("Success");
         AdInsHelper.RedirectUrl(this.router,["/Product/HOReview"],{ });
+        this.IsReady = true;
       });
   }
   async ClaimTask(WfTaskListId) {

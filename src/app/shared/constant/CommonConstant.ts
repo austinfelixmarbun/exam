@@ -232,4 +232,8 @@ export class CommonConstant {
     public static CAT_CODE_PRD_HO_DEACT_APV = "PRD_HO_DEACT_APV";
     public static CAT_CODE_PRD_OFR_APV = "PRD_OFR_APV";
     public static CAT_CODE_PRD_OFR_DEACT_APV = "PRD_OFR_DEACT_APV";
+    public static PRD_HO_APV_TYPE = "PROD_HO_APV_TYPE";
+    public static PRD_HO_DEACT_APV_TYPE = "PROD_HO_DEACT_APV_TYPE";
+    public static PRD_OFR_APV_TYPE = "PROD_OFR_APV_TYPE";
+    public static PRD_OFR_DEACT_APV_TYPE = "PROD_OFR_DEACT_APV_TYPE";    
 }

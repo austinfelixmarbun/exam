@@ -1,17 +1,17 @@
 export class UcInputRFAObj {
     ApvTypecodes: any;
-    EnvUrl: any;
-    PathUrlGetSchemeBySchemeCode: any;
-    PathUrlGetCategoryByCategoryCode : any;
-    PathUrlGetAdtQuestion: any;
-    PathUrlGetPossibleMemberAndAttributeExType : any;
-    PathUrlGetApprovalReturnHistory : any;
-    PathUrlCreateNewRFA : any;
-    PathUrlCreateJumpRFA : any;
-    CategoryCode : any;
-    SchemeCode : any;
-    TrxNo : any;
-    
+    EnvUrl: string;
+    PathUrlGetSchemeBySchemeCode: string;
+    PathUrlGetCategoryByCategoryCode : string;
+    PathUrlGetAdtQuestion: string;
+    PathUrlGetPossibleMemberAndAttributeExType : string;
+    PathUrlGetApprovalReturnHistory : string;
+    PathUrlCreateNewRFA : string;
+    PathUrlCreateJumpRFA : string;
+    CategoryCode : string;
+    SchemeCode : string;
+    TrxNo : string;
+    Reason : any;
     constructor() { 
         this.ApvTypecodes = [];
         this.EnvUrl = "";
@@ -25,6 +25,6 @@ export class UcInputRFAObj {
         this.CategoryCode = "";
         this.SchemeCode = "";
         this.TrxNo = "";
-
+        this.Reason =[];
     }
 }  

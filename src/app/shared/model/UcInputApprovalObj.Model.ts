@@ -1,14 +1,14 @@
 export class UcInputApprovalObj {
-    TaskId: any;
-    EnvUrl: any;
-    PathUrlGetLevelVoting: any;
-    PathUrlGetPossibleResult: any;
-    PathUrlSubmitApproval: any;
-    PathUrlGetNextNodeMember: any;
-    PathUrlGetReasonActive:any;
-    PathUrlGetChangeFinalLevel: any;
-    TrxNo: any;
-    UrlBactToPaging:any;
+    TaskId: number;
+    EnvUrl: string;
+    PathUrlGetLevelVoting: string;
+    PathUrlGetPossibleResult: string;
+    PathUrlSubmitApproval: string;
+    PathUrlGetNextNodeMember: string;
+    PathUrlGetReasonActive:string;
+    PathUrlGetChangeFinalLevel: string;
+    TrxNo: string;
+    UrlBactToPaging:string;
     constructor() { 
         this.TaskId = 0;
         this.EnvUrl = "";

@@ -1,4 +1,5 @@
 import { environment } from "environments/environment";
+import { env } from "process";
 
 export class URLConstant {
 
@@ -435,6 +436,7 @@ export class URLConstant {
     public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct"
     public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct"
     public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation"
+    public static RequestDeactivationNew = environment.FoundationR3Url + "/Product/RequestDeactivationNew"
     public static GetListProdBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/Product/GetListProdBranchOfficeMbrByProdHId"
     public static GetListProdHByProdCurrentProdHId = environment.FoundationR3Url + "/Product/GetListProdHByProdCurrentProdHId";
     public static AddProductOfficeMbrBatch = environment.FoundationR3Url + "/Product/AddProductOfficeMbrBatch";
@@ -445,7 +447,7 @@ export class URLConstant {
     public static DownloadProductRule = environment.FoundationR3Url + "/Product/DownloadProductRule";
     public static UpdateProductPostApv = environment.FoundationR3Url + "/Product/UpdateProductPostApv";
     public static ReviewProduct = environment.FoundationR3Url + "/Product/ReviewProduct";
-    public static NewReviewProduct = environment.FoundationR3Url + "/Product/NewReviewProduct";
+    public static ReviewProductNew = environment.FoundationR3Url + "/Product/ReviewProductNew";
     public static GetProductById = environment.FoundationR3Url + "/Product/GetProductById";
     public static GetProductByHId = environment.FoundationR3Url + "/Product/GetProductByHId";
     
@@ -462,10 +464,13 @@ export class URLConstant {
     public static GetListProdOfferingHByProdOfferingCurrentProdHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingHByProdOfferingCurrentProdHId"
     public static GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode"
     public static RequestOfferingDeactivation = environment.FoundationR3Url + "/ProductOffering/RequestProdOfferingDeactivationProdOffering"
+    public static RequestOfferingDeactivationNew = environment.FoundationR3Url + "/ProductOffering/RequestProdOfferingDeactivationNew"
     public static GetListProdOfferingBranchOfficeMbrByProdHIdAndApp = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHIdAndApp"
     public static CopyProductOffering = environment.FoundationR3Url + "/ProductOffering/CopyProductOffering";
     public static UpdateProdOfferingPostApv = environment.FoundationR3Url + "/ProductOffering/UpdateProdOfferingPostApv";
     public static ReviewProdOffering = environment.FoundationR3Url + "/ProductOffering/ReviewProdOffering";
+    public static ReviewProdOfferingNew = environment.FoundationR3Url + "/ProductOffering/ReviewProdOfferingNew";
+    public static GetProdOfferingByProdOfferingId = environment.FoundationR3Url + "/ProductOffering/GetProdOfferingByProdOfferingId"
 
     // PRODUCT COMPONENT
     public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
