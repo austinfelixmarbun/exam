@@ -60,13 +60,6 @@ export class OfficeAreaAddEditComponent implements OnInit {
     }
   }
 
-  TestCookies() {
-    console.log('Shinano');
-    var url = environment.FoundationR3Url + "/Authenticate/TestCookies";
-    this.http.post(url, this.refOfficeAreaObj).subscribe(
-      (response) => { });
-  }
-
   SaveForm() {
     this.refOfficeAreaObj = new RefOfficeAreaObj();
     this.refOfficeAreaObj = this.OfficeAreaForm.value;

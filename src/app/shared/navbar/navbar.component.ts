@@ -55,38 +55,6 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     ngOnInit() {
         this.GetListNotifH();
-        // Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
-        
-        // var _hubConnection = new HubConnectionBuilder()
-        //     .withUrl(URLConstant.WebSocketUrl)
-        //     //.withUrl("Http://localhost:5000/Notificationhub")
-        //     .withAutomaticReconnect()
-        //     .build();
-
-        // _hubConnection.start()
-        //     .then(() => console.log("Connection Started !"))
-        //     .then(() => _hubConnection.invoke("SubscribeNotification", this.userAccess.UserName, this.userAccess.RoleCode))
-        //     .catch((e) => console.log("Exception : " + e));
-
-        // _hubConnection.on("ReceiveNotification", (response) => {
-        //     console.log("Response API : " + response);
-        //     if (response.type == "SUCCESS") {
-        //         this.toastr.successMessageTitle(response.title, response.message);
-        //     }
-        //     else if (response.type == "ERROR") {
-        //         this.toastr.errorMessageTitle(response.title, response.message);
-        //     }
-        //     else if (response.type == "INFO") {
-        //         this.toastr.infoMessageTitle(response.title, response.message);
-        //     }
-
-
-        //     this.GetListNotifH();
-        //     if (response.isNeedLogout == true) {
-        //         AdInsHelper.ForceLogOut(response.timeLogOut, this.toastr);
-        //     }
-        //     //this.notifications.push({ title: response, desc: "User " + response });
-        // });
     }
 
     GetListNotifH() {
@@ -104,16 +72,6 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     ngAfterViewChecked() {
-        // setTimeout(() => {
-        //     var wrapperDiv = document.getElementsByClassName("wrapper")[0];
-        //     var dir = wrapperDiv.getAttribute("dir");           
-        //     if (dir == 'rtl') {
-        //         this.placement = 'bottom-left';
-        //     }
-        //     else if (dir == 'ltr') {
-        //         this.placement = 'bottom-right';
-        //     }
-        // }, 3000);
     }
 
     ClickNotification(item) {
@@ -147,7 +105,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     changeModul(modul: string) {
-        var token = localStorage.getItem(CommonConstant.TOKEN);
+        var token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
         var url = environment.LosURL + URLConstant.LoginURLFrontEnd + "?token=" + token;
         window.open(url, "_blank");
     }
