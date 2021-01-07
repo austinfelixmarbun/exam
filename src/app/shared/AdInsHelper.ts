@@ -70,11 +70,10 @@ export class AdInsHelper {
 
     public static CheckSessionTimeout(cookieService: CookieService) {
         let today = new Date();
-        var businessDtBefore = cookieService.get(CommonConstant.LAST_ACCESS_TIME);
+        var businessDtBefore = this.GetCookie(cookieService, CommonConstant.LAST_ACCESS_TIME,);
         var businessDtNow = formatDate(today, 'yyyy-MM-dd HH:mm:ss', 'en-US');
         if (businessDtBefore == undefined || businessDtBefore == null) {
-            localStorage.setItem("LastAccessTime", businessDtNow);
-            cookieService.put("LastAccessTime", businessDtNow);
+            this.SetCookie(cookieService, CommonConstant.LAST_ACCESS_TIME, businessDtNow);
         }
         else {
             var bsDtBefore = new Date(businessDtBefore);
@@ -84,8 +83,7 @@ export class AdInsHelper {
                 AdInsHelper.ClearAllLog(cookieService);
                 return "1";
             }
-            localStorage.setItem("LastAccessTime", businessDtNow);
-            cookieService.put("LastAccessTime", businessDtNow);
+            this.SetCookie(cookieService, CommonConstant.LAST_ACCESS_TIME, businessDtNow);
         }
         return "0";
 
