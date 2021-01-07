@@ -49,9 +49,6 @@ export class OfficeObj {
     RowVersion: any;
     ParentOfficeCode: any;
     MrCenterGrpTypeCode: any;
-    
-    IsNationalCourt: any;
-    NationalCourtOffice: string;
 
     constructor() { this.RefOfficeId = 0, this.RowVersion = "" }
 }

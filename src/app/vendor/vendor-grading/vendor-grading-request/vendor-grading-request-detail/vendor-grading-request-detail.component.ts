@@ -146,18 +146,18 @@ export class VendorGradingRequestDetailComponent implements OnInit {
       });
   }
 
-  onVendorRatingChange(vendorRating: any): void {
+  async onVendorRatingChange(vendorRating: any){
     if (vendorRating !== undefined && vendorRating !== null && vendorRating !== "")
     {
-      this.LoadGradingRule(vendorRating);
+      await this.LoadGradingRule(vendorRating);
     }else{
       this.gradeCode = "";
     }
   }
 
-  LoadGradingRule(vendorRating: number)
+  async LoadGradingRule(vendorRating: number)
   {
-    this.http.post(URLConstant.GetRuleVendorGrading, { VendorRating:  vendorRating}).subscribe(
+    await this.http.post(URLConstant.GetRuleVendorGrading, { VendorRating:  vendorRating}).subscribe(
       (response) => {
         // this.gradeCode = response["Key"];
         // this.VendorForm.patchValue({

@@ -65,7 +65,7 @@
                     type="number"
                     class="form-control adInsInput width-50-per"
                     formControlName="VendorRating"
-                    (input)="onVendorRatingChange($event.target.value)"
+                    (change)="onVendorRatingChange($event.target.value)"
                   />
                   <!-- <lib-uc-show-errors
                     [control]="VendorForm.controls.VendorRating"
