@@ -232,7 +232,7 @@ export class URLConstant {
     public static GetListActiveRefMaster = environment.FoundationR3Url + "/RefMaster/GetListKeyValueActiveByCode";
     public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByMasterCode";
     public static GetRefMasterTypeOfficeWithoutCG = environment.FoundationR3Url + "/RefMaster/GetListKeyValueOfficeTypeWithoutCg";
-    public static GetListActiveRefMasterWithReserveFieldAll = environment.FoundationR3Url + "/RefMaster/GetListActiveRefMasterWithReserveFieldAll";
+    public static GetListActiveRefMasterWithMappingCodeAll = environment.FoundationR3Url + "/RefMaster/GetListActiveRefMasterWithMappingCodeAll";
     public static GetListActiveRefMasterByRefMasterTypeCode = environment.FoundationR3Url + "/RefMaster/GetListActiveRefMasterByRefMasterTypeCode";
     public static GetRefMasterByRefMasterTypeCodeAndMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByRefMasterTypeCodeAndMasterCode"
     public static GetRefMasterByRefMasterTypeCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByRefMasterTypeCode"
@@ -264,7 +264,7 @@ export class URLConstant {
     public static UpdateFormFeatureAuthForm = "/MenuManagement/UpdateFormFeatureAuthForm";
     public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
     public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
-    public static LoginByRole = "/Authenticate/LoginCookies";
+    public static LoginByRole = "/Authenticate/LoginByRole";
     public static LoginByToken = "/Authenticate/LoginByToken";
     public static UpdateToken = "/Authenticate/UpdateRole";
     public static LoginURLFrontEnd = "pages/login";

@@ -10,6 +10,7 @@ import { formatDate } from '@angular/common';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-product-ho-add',
@@ -38,7 +39,8 @@ export class ProductHOAddComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private route: ActivatedRoute,
-    private toastr: NGXToastrService
+    private toastr: NGXToastrService,
+    private cookieService: CookieService
   ) {
     
     this.route.queryParams.subscribe(params => {
@@ -60,7 +62,7 @@ export class ProductHOAddComponent implements OnInit {
 
   ResultResponse: any;
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDt.setDate(this.businessDt.getDate());
     this.startActiveDt = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -101,7 +103,7 @@ export class ProductHOAddComponent implements OnInit {
   UrlBackEnd: any;
 
   ValidateDate() {
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     let businessDate = new Date(context[CommonConstant.BUSINESS_DT]);
     let startDate = new Date(this.RefProductHOForm.get("StartDt").value);
     let endDate = new Date(this.RefProductHOForm.get("EndDt").value);

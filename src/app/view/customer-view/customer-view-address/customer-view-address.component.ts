@@ -32,7 +32,7 @@ export class CustomerViewAddressComponent implements OnInit {
     DdlAddress: ['']
   });
   viewCustFinData: any;
-  GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+  GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
   GetCustByCustIdUrl = URLConstant.GetCustByCustId;
   CustType: any;
   constructor(
@@ -72,8 +72,8 @@ export class CustomerViewAddressComponent implements OnInit {
         this.CustType = response['MrCustTypeCode'];
         var refMasterObj = new RefMasterObj();
         refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
-        refMasterObj.ReserveField1 = this.CustType;
-        this.http.post(this.GetListActiveRefMasterWithReserveFieldAllUrl, refMasterObj).subscribe(
+        refMasterObj.MappingCode = this.CustType;
+        this.http.post(this.GetListActiveRefMasterWithMappingCodeAllUrl, refMasterObj).subscribe(
           response => {
             if (response[CommonConstant.ReturnObj].length > 0) {
               this.ddlItem = response[CommonConstant.ReturnObj];

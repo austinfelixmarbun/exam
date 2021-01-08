@@ -37,7 +37,7 @@
   ],
 
   "querystring": {
-    "name": "lookupEmp"
+    "name": "lookupEmpLeave"
   },
 
   "bodyList": [

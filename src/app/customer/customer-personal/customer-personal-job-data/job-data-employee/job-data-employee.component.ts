@@ -17,6 +17,8 @@ import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-job-data-employee',
@@ -111,7 +113,7 @@ export class JobDataEmployeeComponent implements OnInit {
   inputPreviousAddressObj: InputAddressObj;
   inputOthBizAddressObj: InputAddressObj;
   
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.getCustById = URLConstant.GetCustByCustId;
     this.getListActiveRefMaster = URLConstant.GetListActiveRefMaster;
     this.addJobData = URLConstant.AddCustPersonalJobData;
@@ -157,7 +159,7 @@ export class JobDataEmployeeComponent implements OnInit {
     this.inputOthBizAddressObj.title = "Other Business Address";
     this.inputOthBizAddressObj.showOwnership = true;
 
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.inputJobAddressObj = new InputFieldObj();

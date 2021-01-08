@@ -21,6 +21,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
   VendorId: number;
   listSelectedId: Array<number> = new Array<number>();
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  tempDataExists = false;
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
@@ -67,6 +68,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
 
   getListTemp(ev) {
     this.listSelectedId = ev.TempListId;
+    this.tempDataExists = this.listSelectedId && this.listSelectedId.length > 0
   }
 
   SaveVendorOfficeMember() {

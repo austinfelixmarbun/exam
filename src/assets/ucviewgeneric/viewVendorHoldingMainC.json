@@ -38,11 +38,6 @@
           },
           {
             "type": "text",
-            "label": "Email:",
-            "property": "Email"
-          },
-          {
-            "type": "text",
             "label": "Mobile Phone 1:",
             "property": "Mp1"
           },

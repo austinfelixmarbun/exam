@@ -31,7 +31,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   IsAffiliateWithMf: string;
   MrCompanyTypeCode: string;
   GetListActiveRefMasterUrl: string;
-  GetListActiveRefMasterWithReserveFieldAllUrl: string;
+  GetListActiveRefMasterWithMappingCodeAllUrl: string;
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
 
@@ -47,7 +47,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
     this.GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
   }
 
   ngOnInit() {

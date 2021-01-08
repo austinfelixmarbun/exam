@@ -15,6 +15,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { VendorService } from '../../vendor.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-vendor-atpm-add-edit',
@@ -41,7 +42,7 @@ export class VendorATPMAddEditComponent implements OnInit {
   isHidden: boolean = true;
   RsvField: string;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private vendorService: VendorService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private vendorService: VendorService, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
       this.VendorId = params['VendorId'];
@@ -85,7 +86,7 @@ export class VendorATPMAddEditComponent implements OnInit {
 
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     if (this.mode == "edit") {
       this.VendorForm.controls.VendorCode.disable();
@@ -146,7 +147,7 @@ export class VendorATPMAddEditComponent implements OnInit {
   setDropdown() {
     var refMasterCategoryObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCategory,
-      ReserveField1: CommonConstant.ATPM
+      MappingCode: CommonConstant.ATPM
     }
     this.vendorService.GetRefMasterListKeyValuePair(refMasterCategoryObj).subscribe(
       (response) => {
@@ -185,9 +186,9 @@ export class VendorATPMAddEditComponent implements OnInit {
           
           var refMasterIdObj = {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-            ReserveField1: this.RsvField,
+            MappingCode: this.RsvField,
           }
-          this.vendorService.GetListActiveRefMasterWithReserveFieldAll(refMasterIdObj).subscribe(
+          this.vendorService.GetListActiveRefMasterWithMappingCodeAll(refMasterIdObj).subscribe(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -377,9 +378,9 @@ export class VendorATPMAddEditComponent implements OnInit {
 
     var refMasterIdObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-      ReserveField1: this.RsvField,
+      MappingCode: this.RsvField,
     }
-    this.vendorService.GetListActiveRefMasterWithReserveFieldAll(refMasterIdObj).subscribe(
+    this.vendorService.GetListActiveRefMasterWithMappingCodeAll(refMasterIdObj).subscribe(
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {

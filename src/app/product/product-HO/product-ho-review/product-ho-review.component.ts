@@ -9,6 +9,8 @@ import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { UcInputRFAObj } from 'app/shared/model/UcInputRFAObj.Model';
 import { UcapprovalcreateComponent } from '@adins/Ucapprovalcreate';
+import { CookieService } from 'ngx-cookie';
+
 @Component({
   selector: 'app-product-ho-review',
   templateUrl: './product-ho-review.component.html',
@@ -25,8 +27,7 @@ export class ProductHoReviewComponent implements OnInit {
   FormObj = this.fb.group({
     Notes: ['', Validators.required]
   });
-  
-  constructor(private toastr: NGXToastrService, private http: HttpClient, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
+  constructor(private toastr: NGXToastrService, private http: HttpClient, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       if (params["ProdId"] != null) {
         this.ProdId = params["ProdId"];
@@ -90,7 +91,7 @@ export class ProductHoReviewComponent implements OnInit {
       });
   }
   async ClaimTask(WfTaskListId) {
-    var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     var wfClaimObj = { pWFTaskListID: WfTaskListId, pUserID: currentUserContext[CommonConstant.USER_NAME], isLoading: false };
     this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(() => { });
   }

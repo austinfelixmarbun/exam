@@ -7,6 +7,7 @@ import { AdInsHelper } from '../AdInsHelper';
 import { URLConstant } from '../constant/URLConstant';
 import { CookieOptions, CookieService } from 'ngx-cookie';
 import { formatDate } from '@angular/common';
+import { CommonConstant } from '../constant/CommonConstant';
 
 @Component({
   selector: 'app-rolepick',
@@ -43,14 +44,9 @@ export class RolepickComponent implements OnInit, AfterViewInit {
       var updateRoleUrl = environment.FoundationR3Url + URLConstant.UpdateToken;
       this.http.post(updateRoleUrl, roleObject, { withCredentials: true}).subscribe(
         (response) => {
-          localStorage.setItem("Token", response["Token"]);
-          localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
-          localStorage.setItem("EnvironmentModule", environment.Module);
-          AdInsHelper.CreateUserAccess(this.cookieService, response);
-
-          const cookieOptions: CookieOptions = {httpOnly: false, secure: true, sameSite: 'lax', expires: response['Exp']};
-          this.cookieService.put('access_token', localStorage['Token'], cookieOptions);
-
+          //Cookie sudah diambil dari BE
+          AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
+          AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
           let currPath = this.router.routerState.snapshot.url;
           this.router.navigateByUrl("/pages/content", { skipLocationChange: true }).then(() => {
             AdInsHelper.RedirectUrl(this.router,[currPath],{});
@@ -63,22 +59,9 @@ export class RolepickComponent implements OnInit, AfterViewInit {
     else {
       this.http.post(roleUrl, roleObject, { withCredentials: true}).subscribe(
         (response) => {
-          localStorage.setItem("Token", response["Token"]);
-          localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
-          localStorage.setItem("EnvironmentModule", environment.Module);
-          AdInsHelper.CreateUserAccess(this.cookieService, response);
-
-          var cookieOptions = <CookieOptions>{httpOnly: false, secure: true, sameSite: 'lax'};
-
-          // const cookieOptions: CookieOptions = {httpOnly: false, secure: true, sameSite: 'lax'};
-          var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
-          this.cookieService.put('access_token', response['Token']);
-          this.cookieService.put("Menu", response["Menu"]);
-          this.cookieService.put("EnvironmentModule", environment.Module);
-          this.cookieService.put('BusinessDateRaw', response["Identity"].BusinessDt);
-          this.cookieService.put("BusinessDate", DateParse);
-          this.cookieService.put("UserAccess", JSON.stringify(response["Identity"]));
-
+          //Cookie sudah diambil dari BE
+          AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
+          AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
           this.router.navigate(["/dashboard/dash-board"]);
           this.dialog.closeAll();
         }
