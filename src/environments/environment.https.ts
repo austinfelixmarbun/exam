@@ -11,5 +11,7 @@ export const environment = {
   FoundationR3Url: 'https://r3app-server.ad-ins.com/FOUNDATION_HTTPS',
   ApprovalURL : 'http://r3app-server.ad-ins.com/APPROVAL',
   FoundationR3Web:'http://r3web-server.ad-ins.com/Foundation',
-  Module:"FOU"
+  Module:"FOU",
+  ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
+  ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
 };
