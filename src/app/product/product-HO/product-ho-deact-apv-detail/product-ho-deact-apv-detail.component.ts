@@ -81,7 +81,6 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
     this.InputApvObj.PathUrlGetNextNodeMember = URLConstant.GetNextNodeMember;
     this.InputApvObj.PathUrlGetReasonActive = URLConstant.GetRefReasonActive;
     this.InputApvObj.PathUrlGetChangeFinalLevel = URLConstant.GetCanChangeMinFinalLevel;
-    this.InputApvObj.UrlBactToPaging = "/Product/HODeactivateApproval";
 
     let ProductObj = {
       ProdHId: this.prodHId
@@ -103,6 +102,9 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
 
   onApprovalSubmited()
   {
+    AdInsHelper.RedirectUrl(this.router,["/Product/HODeactivateApproval"],{ });
+  }
+  onCancelClick() {
     AdInsHelper.RedirectUrl(this.router,["/Product/HODeactivateApproval"],{ });
   }
 }

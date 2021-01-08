@@ -82,8 +82,6 @@ export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit 
     this.InputApvObj.PathUrlGetNextNodeMember = URLConstant.GetNextNodeMember;
     this.InputApvObj.PathUrlGetReasonActive = URLConstant.GetRefReasonActive;
     this.InputApvObj.PathUrlGetChangeFinalLevel = URLConstant.GetCanChangeMinFinalLevel;
-    this.InputApvObj.UrlBactToPaging = "/Product/HODeactivateApproval";
- 
       var prodOfferingObj = {
         ProdOfferingId: this.ProdOfferingId
       } 
@@ -99,11 +97,12 @@ export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit 
       (response) => {
       }
     )
-  }
-
+  } 
 
   onApprovalSubmited(event) {
     AdInsHelper.RedirectUrl(this.router,["/Product/OfferingDeactivateApproval"],{ });
   }
-
+  onCancelClick() {
+    AdInsHelper.RedirectUrl(this.router,["/Product/OfferingDeactivateApproval"],{ });
+  }
 }

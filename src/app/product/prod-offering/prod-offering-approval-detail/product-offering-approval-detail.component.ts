@@ -79,7 +79,6 @@ export class ProductOfferingApprovalDetailComponent implements OnInit {
     this.InputApvObj.PathUrlGetNextNodeMember = URLConstant.GetNextNodeMember;
     this.InputApvObj.PathUrlGetReasonActive = URLConstant.GetRefReasonActive;
     this.InputApvObj.PathUrlGetChangeFinalLevel = URLConstant.GetCanChangeMinFinalLevel;
-    this.InputApvObj.UrlBactToPaging = "/Product/OfferingApproval";
 
     var data = {
       ProdOfferingId: this.prodOfferingHId
@@ -113,5 +112,9 @@ export class ProductOfferingApprovalDetailComponent implements OnInit {
         AdInsHelper.RedirectUrl(this.router,["/Product/OfferingApproval"],{ });
       }
     );
+  }
+  onCancelClick(event)
+  {
+    AdInsHelper.RedirectUrl(this.router,["/Product/OfferingApproval"],{ });
   }
 }
