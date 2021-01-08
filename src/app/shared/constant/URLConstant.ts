@@ -1,5 +1,4 @@
-import { environment } from "environments/environment";
-import { env } from "process";
+import { environment } from "environments/environment"; 
 
 export class URLConstant {
 
