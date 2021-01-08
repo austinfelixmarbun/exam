@@ -10,6 +10,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-contact-person-add-edit',
@@ -49,7 +51,7 @@ export class ContactPersonAddEditComponent implements OnInit {
   result: any;
   zipcodee: any;
 
-  constructor(private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
 
   }
 
@@ -57,7 +59,7 @@ export class ContactPersonAddEditComponent implements OnInit {
     this.mode = this.objInput["mode"];
     this.VendorContactPersonId = this.objInput["VendorContactPersonId"];
 
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
 
     var JobPosition = {

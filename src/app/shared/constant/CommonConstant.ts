@@ -9,12 +9,13 @@ export class CommonConstant {
     public static BUSINESS_DATE_RAW = "BusinessDateRaw";
     public static CURRENT_USER_CONTEXT = "currentUserContext"
     public static PAGE_ACCESS = "PageAccess";
-    public static TOKEN = "Token";
+    public static TOKEN = "access_token";
     public static LOCAL_IP = "LocalIp";
     public static VERSION = "Version";
     public static LAST_ACCESS_TIME = "LastAccessTime";
     public static MENU = "Menu"
     public static ReturnObj = 'ReturnObject';
+    public static ENVIRONMENT_MODULE = 'EnvironmentModule';
 
     //APPROVAL TASK MAPPER - TRX TYPE
     public static ApvTrxTypeProductHO = "PROD_HO_APV";

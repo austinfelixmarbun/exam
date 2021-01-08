@@ -14,6 +14,8 @@ import { CustBankStmntHObj } from 'app/shared/model/CustBankStmntHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-cust-bank-acc-detail-section-findata',
@@ -56,7 +58,8 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    public activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal, 
+    private cookieService: CookieService
   ) {
     moment.locale('en');
     this.monthOfYear = new Array(...moment.months());
@@ -234,7 +237,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
         );
       }
       else if (this.pageType == "editStmnt") {
-        var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+        var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
         var listCustBankStmntD = new Array<CustBankStmntDObj>();
         var totalBalance = 0;

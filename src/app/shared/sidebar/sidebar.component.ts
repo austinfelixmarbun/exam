@@ -9,6 +9,7 @@ import { environment } from 'environments/environment';
 import { CommonConstant } from '../constant/CommonConstant';
 import { URLConstant } from '../constant/URLConstant';
 import { AdInsHelper } from '../AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 declare var $: any;
 
@@ -25,7 +26,7 @@ export class SidebarComponent implements OnInit {
     @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
 
     constructor(private router: Router,
-        private route: ActivatedRoute, public translate: TranslateService, private http: HttpClient) {
+        private route: ActivatedRoute, public translate: TranslateService, private http: HttpClient, private cookieService: CookieService) {
         this.version = localStorage.getItem(CommonConstant.VERSION);
 
     }
@@ -47,8 +48,8 @@ export class SidebarComponent implements OnInit {
         }
         else {
             //Update menu if change of environment
-            let currEnvi = localStorage.getItem('EnvironmentModule');
-            var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+            let currEnvi = AdInsHelper.GetLocalStorage(CommonConstant.ENVIRONMENT_MODULE);
+            var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
             if(currEnvi && currentUserContext && currEnvi != environment.Module)
             {
                 var roleObject = {
@@ -65,14 +66,13 @@ export class SidebarComponent implements OnInit {
                 var updateRoleUrl = environment.FoundationR3Url + URLConstant.UpdateToken;
                 this.http.post(updateRoleUrl, roleObject).subscribe(
                 (response) => {
-                    localStorage.setItem("Token", response["Token"]);
-                    localStorage.setItem("Menu", JSON.stringify(response["Menu"]));
-                    localStorage.setItem("EnvironmentModule", environment.Module); 
-                    this.menuItems = JSON.parse(localStorage.getItem("Menu"));
+                    AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
+                    AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module); 
+                    this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
                 });
             }
             else
-                this.menuItems = JSON.parse(localStorage.getItem(CommonConstant.MENU));
+                this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
         }
     }
     genParam(params: [{ 'Attr': string, 'Value': string }]) {

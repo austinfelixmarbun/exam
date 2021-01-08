@@ -15,6 +15,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { VendorAttrContentObj } from 'app/shared/model/VendorAttrContentObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-vendor-ho-add-edit',
@@ -47,7 +48,7 @@ export class VendorHoAddEditComponent implements OnInit {
   VendorAttrList = new Array<any>();
   vendorAttrRequest = new Array<VendorAttrContentObj>();
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
       this.VendorId = params['VendorId'];
@@ -93,7 +94,7 @@ export class VendorHoAddEditComponent implements OnInit {
 
   ngOnInit() {
     console.log("aaa")
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     this.VendorForm.controls.VendorRating.disable();
     this.VendorForm.controls.MrVendorCategoryCode.disable();
@@ -304,7 +305,7 @@ export class VendorHoAddEditComponent implements OnInit {
   setDropdown() {
     var refMasterCategoryObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCategory,
-      ReserveField1: CommonConstant.HeadOffice
+      MasterCode: CommonConstant.HeadOffice
     }
     this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).subscribe(
       (response) => {
@@ -343,9 +344,9 @@ export class VendorHoAddEditComponent implements OnInit {
 
           var refMasterIdObj = {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-            ReserveField1: this.RsvField,
+            MappingCode: this.RsvField,
           }
-          this.http.post(URLConstant.GetListActiveRefMasterWithReserveFieldAll, refMasterIdObj).subscribe(
+          this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -446,9 +447,9 @@ export class VendorHoAddEditComponent implements OnInit {
 
       var refMasterIdObj = {
         RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-        ReserveField1: this.RsvField,
+        MappingCode: this.RsvField,
       }
-      this.http.post(URLConstant.GetListActiveRefMasterWithReserveFieldAll, refMasterIdObj).subscribe(
+      this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
         (response) => {
           this.itemIdType = response[CommonConstant.ReturnObj];
           if (this.itemIdType.length > 0) {

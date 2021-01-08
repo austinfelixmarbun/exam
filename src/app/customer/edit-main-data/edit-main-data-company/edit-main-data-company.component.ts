@@ -40,7 +40,7 @@ export class EditMainDataCompanyComponent implements OnInit {
   getCustByCustIdUrl: string;
   getListActiveRefMasterUrl: string;
   getCustCompanyByCustIdUrl: string;
-  GetListActiveRefMasterWithReserveFieldAllUrl : string;
+  GetListActiveRefMasterWithMappingCodeAllUrl : string;
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
   UcAddressObj: UcAddressObj;
@@ -51,7 +51,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
     this.editCustUrl = URLConstant.EditCust;
     this.editCustCompanyUrl = URLConstant.EditCustCompany; 
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
