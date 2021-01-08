@@ -66,7 +66,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     this.VendorForm = this.fb.group({
       VendorId: [""],
       VendorCode: [""],
-      VendorRating: [0, Validators.required],
+      VendorRating: ['', [Validators.min(1.00), Validators.max(100.00), Validators.required]],
       ListApprover: ["", Validators.required],
       Reason: ["", Validators.required],
       Notes: ["", Validators.required],
