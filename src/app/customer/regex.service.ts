@@ -14,10 +14,10 @@ export class RegexService {
         let errMessage: string = "";
         switch (pattern) {
           case "^\\d{0,16}$":
-            errMessage = 'Maximum length ID NO 16';
+            errMessage = 'E-KTP no must be numeric and 16 characters';
             break;
           case "^\\d{0,20}$":
-            errMessage = 'Maximum length ID NO 20';
+            errMessage = 'NPWP no must be numeric and 20 characters';
             break;
           default:
             errMessage = 'Not yet setting';
