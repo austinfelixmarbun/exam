@@ -136,11 +136,15 @@
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Rating</label>
-                <div class="col-md-9">
+                <div class="col-md-9" *ngIf="mode=='add'" >
                   <input type="number" class="form-control adInsInput width-50-per" formControlName="VendorRating">
                   <lib-uc-show-errors [control]="VendorForm.controls.VendorRating" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
+                <div class="col-md-9" *ngIf="mode=='edit'" >
+                  <label class="col-md-9" translate>{{VendorForm.controls.VendorRating.value}} Grade : {{gradeCode}}</label>
+                </div>
+
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Establishment Date</label>

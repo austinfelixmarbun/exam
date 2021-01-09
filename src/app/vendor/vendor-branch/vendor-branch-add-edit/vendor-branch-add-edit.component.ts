@@ -63,6 +63,7 @@ export class VendorBranchAddEditComponent implements OnInit {
   isFormReady: boolean = false;
   reqVendorAttrObj: { listVendorAttrContentObj: any[]; };
   ListVendorAttrContent: any;
+  gradeCode: String;
 
   constructor(private regexService: RegexService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -88,7 +89,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     MobilePhnNo1: ['', Validators.pattern("^[0-9]+$")],
     MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
     Email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
-    VendorRating: [{ value: '', disabled: true }],
+    VendorRating: [{ value: '', disabled: false }],
     EstablishmentDt: ['', Validators.required],
     PartnershipDt: ['', Validators.required],
     IsActive: [true],
@@ -289,6 +290,7 @@ export class VendorBranchAddEditComponent implements OnInit {
         this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
         this.bindText();
         this.MrVendorTypeCode = this.result.VendorObj.MrVendorTypeCode;
+        this.LoadGradingRule(this.result.VendorObj.VendorRating)
         this.VendorForm.patchValue({
           MrVendorCategoryCode: this.result.VendorObj.MrVendorCategoryCode,
           VendorCode: this.result.VendorObj.VendorCode,
@@ -893,6 +895,25 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.VendorForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
       this.VendorForm.controls[this.controlNameIdNo].updateValueAndValidity();
     }
+  }
+
+  LoadGradingRule(vendorRating: number)
+  {
+    this.http.post(URLConstant.GetRuleVendorGrading, { VendorRating:  vendorRating}).subscribe(
+      (response) => {
+        // this.gradeCode = response["Key"];
+        // this.VendorForm.patchValue({
+        //   VendorGrade: response["Value"],
+        //   VendorGradeCode : response["Key"]
+        // });
+
+        this.gradeCode = response["VendorGrade"];
+        // this.VendorForm.patchValue({
+        //   VendorGrade: response["Value"],
+        //   VendorGradeCode : response["Key"]
+        // });
+      }
+    );
   }
   //END OF URS-LOS-041
 }
