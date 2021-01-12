@@ -728,6 +728,11 @@ export class URLConstant {
     public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
     public static GetListCustGrpByMemberCustIdForCustGrpTab = environment.FoundationR3Url + "/CustGrp/GetListCustGrpByMemberCustIdForCustGrpTab";
     public static GetCustByCustNo = environment.FoundationR3Url + "/Cust/GetCustByCustNo";
+    public static AddCustAsset = environment.FoundationR3Url + "/CustAsset/AddCustAsset";
+    public static DeleteCustAsset = environment.FoundationR3Url + "/CustAsset/DeleteCustAsset";
+    public static EditCustAsset = environment.FoundationR3Url + "/CustAsset/EditCustAsset";
+    public static GetCustAssetByCustAssetId = environment.FoundationR3Url + "/CustAsset/GetCustAssetByCustAssetId";
+    public static GetListCustAssetByCustId = environment.FoundationR3Url + "/CustAsset/GetListCustAssetByCustId";
 
     // CUSTOMER COMPANY
     public static GetListViewCustCompanyLegalDocByCustCompanyId = environment.FoundationR3Url + "/CustCompanyLegalDoc/GetListViewCustCompanyLegalDocByCustCompanyId";

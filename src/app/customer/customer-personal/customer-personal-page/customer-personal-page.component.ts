@@ -55,8 +55,9 @@ export class CustomerPersonalPageComponent implements OnInit {
     "Group": 5,
     "Job": 6,
     "Financial": 7,
-    "CustAttr": 8,
-    "Other": 9
+    "CustAsset": 8,
+    "CustAttr": 9,
+    "Other": 10
   }
 
   back() {
@@ -107,12 +108,15 @@ export class CustomerPersonalPageComponent implements OnInit {
     if (type == "Financial") {
       this.CustStepIndex = 7;
     }
-    if (type == "CustAttr") {
+    if (type == "CustAsset") {
       this.CustStepIndex = 8;
+    }
+    if (type == "CustAttr") {
+      this.CustStepIndex = 9;
     }
 
     if (type == "Other") {
-      this.CustStepIndex = 9;
+      this.CustStepIndex = 10;
     }
     this.stepper.to(this.CustStepIndex);
   }

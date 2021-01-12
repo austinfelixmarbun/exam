@@ -69,10 +69,18 @@
               </button>
             </div>
             <div class="line"></div>
+            <div class="step" data-target="#CustAsset-tab">
+              <button type="button" class="step-trigger" role="tab" aria-controls="CustAsset-tab"
+                id="CustAsset-tab-trigger" (click)="EnterTab('CustAsset')">
+                <span class="bs-stepper-circle">7</span>
+                <span class="bs-stepper-label">Customer Asset</span>
+              </button>
+            </div>
+            <div class="line"></div>
             <div class="step" data-target="#legal-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="legal-tab" id="legal-tab-trigger"
                 (click)="EnterTab('Legal')">
-                <span class="bs-stepper-circle">7</span>
+                <span class="bs-stepper-circle">8</span>
                 <span class="bs-stepper-label">Legal Document</span>
               </button>
             </div>
@@ -80,7 +88,7 @@
             <div class="step" data-target="#cust-attr-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="cust-attr-tab" id="cust-attr-tab-trigger"
                 (click)="EnterTab('CustAttr')">
-                <span class="bs-stepper-circle">8</span>
+                <span class="bs-stepper-circle">9</span>
                 <span class="bs-stepper-label">Other Info</span>
               </button>
             </div>
@@ -114,12 +122,16 @@
             <app-cust-fin-data-tab *ngIf="CustStepIndex == 6" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'" (outputTab)="getValue($event)">
             </app-cust-fin-data-tab>
           </div>
+          <div id="CustAsset-tab" class="content" role="tabpanel" aria-labelledby="CustAsset-tab-trigger">
+            <app-cust-asset *ngIf="CustStepIndex == 7" [CustId]="IdCust" (ResponseCustAsset)="getValue($event)">
+            </app-cust-asset>
+          </div>
           <div id="legal-tab" class="content" role="tabpanel" aria-labelledby="legal-tab-trigger">
-            <app-cust-legal-doc *ngIf="CustStepIndex == 7" (outputTab)="getValue($event)">
+            <app-cust-legal-doc *ngIf="CustStepIndex == 8" (outputTab)="getValue($event)">
             </app-cust-legal-doc>
           </div>
           <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
-            <app-cust-attr-section *ngIf="CustStepIndex == 8" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'"></app-cust-attr-section>
+            <app-cust-attr-section *ngIf="CustStepIndex == 9" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'"></app-cust-attr-section>
           </div>
         </div>
       </div>

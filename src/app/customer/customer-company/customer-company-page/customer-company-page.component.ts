@@ -96,11 +96,14 @@ export class CustomerCompanyPageComponent implements OnInit {
     if (type == "Financial") {
       this.CustStepIndex = 6;
     }
-    if (type == "Legal") {
+    if (type == "CustAsset") {
       this.CustStepIndex = 7;
     }
-    if (type == "CustAttr") {
+    if (type == "Legal") {
       this.CustStepIndex = 8;
+    }
+    if (type == "CustAttr") {
+      this.CustStepIndex = 9;
     }
 
     this.stepper.to(this.CustStepIndex);

@@ -114,6 +114,9 @@ import { UpdateCustomerContactInfoComponent } from './customer-update-master/cus
 import { UpdateCustomerCompanyFinDataComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-company-fin-data/update-customer-company-fin-data.component';
 import { UpdateCustomerCompanyLegalDocComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-company-legal-doc/update-customer-company-legal-doc.component';
 import { RegexService } from './regex.service';
+import { CustAssetComponent } from './cust-asset/cust-asset.component';
+import { CustAssetDetailComponent } from './cust-asset/cust-asset-detail/cust-asset-detail.component';
+import { UcgridviewModule } from '@adins/ucgridview';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -150,7 +153,8 @@ export const customCurrencyMaskConfig = {
     UcShowErrorsModule,
     MatTabsModule,
     UcuploadModule,
-    NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    UcgridviewModule
   ],
   declarations: [
     CustomerPagingComponent,
@@ -243,9 +247,11 @@ export const customCurrencyMaskConfig = {
     UpdateCustomerMgmntShareholderComponent,
     UpdateCustomerContactInfoComponent,
     UpdateCustomerCompanyFinDataComponent,
-    UpdateCustomerCompanyLegalDocComponent
+    UpdateCustomerCompanyLegalDocComponent,
+    CustAssetComponent,
+    CustAssetDetailComponent
   ],
-  entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
+  entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent, CustAssetDetailComponent]
   ,
   providers: [
     RegexService
