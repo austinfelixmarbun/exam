@@ -20,7 +20,7 @@ export class DmsIframeComponent implements OnInit {
   dmsIv: string;
   @Output() outputTab: EventEmitter<any> = new EventEmitter();
   @Output() outputCancel: EventEmitter<any> = new EventEmitter();
-  
+  prm : any = "";
   noParamGiven: boolean = true;
   constructor() { }
   custNo: string;
@@ -36,9 +36,9 @@ export class DmsIframeComponent implements OnInit {
 
   dmsUrl() {
     let ObjFinalForm = "js=" + JSON.stringify(this.dmsObj) + "&cftsv=" + formatDate(new Date(), 'dd-MM-yyyy HH:mm', 'en-US').toString();
-    let prm = AdInsHelper.Encrypt128CBC(ObjFinalForm, this.dmsKey, this.dmsIv);
-    prm = encodeURIComponent(prm);
-    return this.rootServer + "?app=" + this.appName + "&prm=" + prm;
+    this.prm = AdInsHelper.Encrypt128CBC(ObjFinalForm, this.dmsKey, this.dmsIv);
+    this.prm = encodeURIComponent(this.prm);
+    return this.rootServer + "?app=" + this.appName + "&prm=" + this.prm;
   }
 
   Cancel(){

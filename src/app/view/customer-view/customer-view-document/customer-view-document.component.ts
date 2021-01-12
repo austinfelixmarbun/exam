@@ -8,7 +8,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { DMSObj } from 'app/shared/model/DMS/DMSObj.model';
 import { DMSLabelValueObj } from 'app/shared/model/DMS/DMSLabelValueObj.Model';
-
+import { CookieService } from 'ngx-cookie';
 @Component({
   selector: 'app-customer-view-document',
   templateUrl: './customer-view-document.component.html'
@@ -25,6 +25,7 @@ export class CustomerViewDocumentComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
+    private cookieService: CookieService
   ) { 
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
@@ -34,11 +35,10 @@ export class CustomerViewDocumentComponent implements OnInit {
   }
 
   async ngOnInit() {
-    console.log("babibubebo");
     var custObj = { "CustId": this.CustId };
     await this.http.post(URLConstant.GetCustByCustId, custObj).toPromise().then(
       (response: any) => {
-        let currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
+        let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         this.dmsObj = new DMSObj();
         this.dmsObj.User = currentUserContext.UserName;
         this.dmsObj.Role = currentUserContext.RoleCode;
