@@ -40,7 +40,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   getCustAddrUrl: string;
   editCustAddrUrl: string;
   getListCustAddrUrl: string;
-  getRefMasterWithReserveFieldUrl: string;
+  getListActiveRefMasterWithMappingCodeAllUrl: string;
 
   CustDataCompanyForm = this.fb.group({
     Notes: [''],
@@ -56,7 +56,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   inputAddressObj: InputAddressObj;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
-    this.getRefMasterWithReserveFieldUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.getListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.getListCustAddrUrl = URLConstant.GetListCustAddr;
     this.addCustAddrUrl = URLConstant.AddCustAddr;
     this.editCustAddrUrl = URLConstant.EditCustAddr;
@@ -85,8 +85,8 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
 
     this.addressType = new RefMasterObj();
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
-    this.addressType.ReserveField1 = CommonConstant.CustTypeCompany;
-    this.http.post(this.getRefMasterWithReserveFieldUrl, this.addressType).subscribe(
+    this.addressType.MappingCode = CommonConstant.CustTypeCompany;
+    this.http.post(this.getListActiveRefMasterWithMappingCodeAllUrl, this.addressType).subscribe(
       (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
         let idxCompany = this.listAddressType.findIndex(x => x.Key == CommonConstant.CustAddrTypeCompany);

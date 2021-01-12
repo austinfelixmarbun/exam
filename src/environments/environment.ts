@@ -11,7 +11,9 @@ export const environment = {
   FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
   DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
   //FoundationR3Url: 'https://localhost:5000',
-  Module: "FOU",
-  ApprovalURL: 'http://r3app-server.ad-ins.com/APPROVAL',
-  FoundationR3Web: 'http://r3web-server.ad-ins.com/Foundation'
+  Module:"FOU",
+  ApprovalURL : 'http://r3app-server.ad-ins.com/APPROVAL',
+  FoundationR3Web:'http://r3web-server.ad-ins.com/Foundation',
+  ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
+  ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
 };

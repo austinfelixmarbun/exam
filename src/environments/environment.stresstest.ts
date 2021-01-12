@@ -4,13 +4,15 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: true,
-  navbarColor: 'lime',
-  LosURL: 'http://R3STWEBFE.ad-ins.com/LOS_FE/',
-  DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
-  WebSocketURL: 'http://R3STWEBBE.ad-ins.com/FOUNDATION_BE',
-  FoundationR3Url: 'http://R3STWEBBE.ad-ins.com/FOUNDATION_BE',
-  ApprovalURL: 'http://r3stengine.ad-ins.com/approval',
-  FoundationR3Web: 'http://R3STWEBFE.ad-ins.com/FOUNDATION_FE',
-  Module: "FOU"
-};
+    production: true,
+    navbarColor: 'lime',
+    LosURL : 'http://R3STWEBFE.ad-ins.com/LOS_FE/',
+    WebSocketURL : 'http://R3STWEBBE.ad-ins.com/FOUNDATION_BE',
+    FoundationR3Url: 'http://R3STWEBBE.ad-ins.com/FOUNDATION_BE',
+    ApprovalURL : 'http://r3stengine.ad-ins.com/approval',
+    FoundationR3Web:'http://R3STWEBFE.ad-ins.com/FOUNDATION_FE',
+    Module:"FOU",
+    ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
+    ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
+    DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
+  };

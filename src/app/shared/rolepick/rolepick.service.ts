@@ -9,6 +9,7 @@ import { AdInsHelper } from '../AdInsHelper';
 import { URLConstant } from '../constant/URLConstant';
 import { CommonConstant } from '../constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
+import { formatDate } from '@angular/common';
 
 @Injectable()
 export class RolePickService {
@@ -19,7 +20,7 @@ export class RolePickService {
         if (type == "modal") {
             var loginByRole = environment.FoundationR3Url + URLConstant.LoginByToken;
             var roleObject2 = {
-                RequestDateTime: localStorage.getItem(CommonConstant.BUSINESS_DATE_RAW),
+                RequestDateTime: AdInsHelper.GetCookie(this.cookieService, CommonConstant.BUSINESS_DATE_RAW),
                 Ip: "",
                 RowVersion: ""
             };
@@ -62,11 +63,17 @@ export class RolePickService {
                 };
                 this.http.post(url, roleObject, { withCredentials: true}).subscribe(
                     (response) => {
-                        localStorage.setItem("Menu", JSON.stringify(response["returnObject"]));
-                        this.cookieService.put('access_token', response['Token']);
-                        localStorage.setItem("EnvironmentModule", environment.Module);
-                        localStorage.setItem("Token", response["Token"]);
-                        AdInsHelper.CreateUserAccess(this.cookieService, response);
+                        //Cookie sudah diambil dari BE (Di set manual dulu)
+
+                        var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
+                        AdInsHelper.SetCookie(this.cookieService, "access_token", response['Token']);
+                        AdInsHelper.SetCookie(this.cookieService, "BusinessDateRaw", formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US'));
+                        AdInsHelper.SetCookie(this.cookieService, "BusinessDate", DateParse);
+                        AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
+                        AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
+                        
+                        AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response["returnObject"]));
+                        AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
                         this.router.navigate(['dashboard/dash-board']);
                     }
                 )

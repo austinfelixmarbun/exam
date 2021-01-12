@@ -16,6 +16,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { VendorAttrContentObj } from 'app/shared/model/VendorAttrContentObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-vendor-branch-add-edit',
@@ -62,7 +63,7 @@ export class VendorBranchAddEditComponent implements OnInit {
   reqVendorAttrObj: { listVendorAttrContentObj: any[]; };
   ListVendorAttrContent: any;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       if (params["MrVendorCategoryCode"] != null) {
         this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
@@ -114,7 +115,7 @@ export class VendorBranchAddEditComponent implements OnInit {
   })
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     if (this.mode == "edit") {
       this.VendorForm.controls.VendorCode.disable();
@@ -415,9 +416,9 @@ export class VendorBranchAddEditComponent implements OnInit {
 
           var refMasterIdObj = {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-            ReserveField1: this.RsvField,
+            MappingCode: this.RsvField,
           }
-          this.http.post(URLConstant.GetListActiveRefMasterWithReserveFieldAll, refMasterIdObj).subscribe(
+          this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -544,9 +545,9 @@ export class VendorBranchAddEditComponent implements OnInit {
 
     var refMasterIdObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-      ReserveField1: this.RsvField,
+      MappingCode: this.RsvField,
     }
-    this.http.post(URLConstant.GetListActiveRefMasterWithReserveFieldAll, refMasterIdObj).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {

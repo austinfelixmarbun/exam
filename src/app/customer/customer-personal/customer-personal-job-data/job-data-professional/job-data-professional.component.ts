@@ -15,6 +15,8 @@ import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-job-data-professional',
@@ -86,7 +88,7 @@ export class JobDataProfessionalComponent implements OnInit {
   custOthBizAddrObj: CustAddrObj;
   otherAddressObj: CustAddrObj;
   getOthBizAddr: any;
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -106,7 +108,7 @@ export class JobDataProfessionalComponent implements OnInit {
   }
 
   ngOnInit() { 
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.inputFieldAddressObj = new InputFieldObj();

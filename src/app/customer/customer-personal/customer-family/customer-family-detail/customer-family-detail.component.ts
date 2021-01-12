@@ -21,6 +21,8 @@ import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NullViewportScroller } from '@angular/common/src/viewport_scroller';
+import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-family-detail',
@@ -74,7 +76,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
   IsAffiliateWithMf: string;
   MrMaritalStatCode: string;
   getListActiveRefMasterUrl: string;
-  GetListActiveRefMasterWithReserveFieldAllUrl: string;
+  GetListActiveRefMasterWithMappingCodeAllUrl: string;
   tempMrMaritalStatCode: Array<KeyValueObj> = new Array<KeyValueObj>();
 
   CustomerFamilyForm = this.fb.group({
@@ -100,10 +102,10 @@ export class CustomerFamilyDetailComponent implements OnInit {
     RowVersionCustPersonal: ['']
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.isExistingCust = false;
     this.isEditCustFamily = false;
     this.ResponseSaveFamily = new EventEmitter<any>();
@@ -118,7 +120,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
 
   ngOnInit() {
     console.log("ameng");
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);

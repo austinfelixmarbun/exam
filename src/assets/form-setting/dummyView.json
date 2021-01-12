@@ -86,9 +86,7 @@
         }
       ],
       "querystring": {
-        "select": "SELECT OFFICE_NAME AS OfficeName,IS_ACTIVE AS IsActive",
-        "from": "FROM REF_OFFICE WITH(NOLOCK)",
-        "where": "WHERE REF_OFFICE_ID = {0} OR OFFICE_CODE = N'{1}'"
+        "name": "dummyView"
       }
     }
   ]

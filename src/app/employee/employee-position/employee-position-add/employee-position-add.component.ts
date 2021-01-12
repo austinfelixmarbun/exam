@@ -14,6 +14,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
     selector: 'app-employee-position',
@@ -70,7 +71,7 @@ export class EmployeePositionAddComponent implements OnInit {
 
     RefEmpPositionForm = this.fb.group({});
 
-    constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+    constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
         this.getUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
         this.addUrl = this.foundationUrl + URLConstant.AddEmpPosition;
         this.refOfficeUrl = this.foundationUrl + URLConstant.GetAllRefOffice;
@@ -115,7 +116,7 @@ export class EmployeePositionAddComponent implements OnInit {
         this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupervisor.json";
         this.inputLookupObj.genericJson = "./assets/lookup/lookupSupervisor.json";
 
-        const getuserAccess = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+        const getuserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         this.refOfficeId = getuserAccess.refOfficeId;
         this.refOfficeObj = new RefOfficeObj();
         this.refOfficeObj.refOfficeId = this.refOfficeId

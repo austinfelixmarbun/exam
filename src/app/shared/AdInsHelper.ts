@@ -4,16 +4,19 @@ import { environment } from "environments/environment";
 import { CommonConstant } from "./constant/CommonConstant";
 import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie";
-declare const CryptoJS: any;
+import * as CryptoJS from 'crypto-js';
+
 export class AdInsHelper {
+
     //Function
-    public static InsertLog(url, type, param = "") {
+    public static InsertLog(cookieService: CookieService, url, type, param = "") {
         let today = new Date();
         var dateNow = formatDate(today, 'yyyy-MM-dd hh:mm:ss', 'en-US');
 
         var listPageAccess = [];
         listPageAccess = JSON.parse(localStorage.getItem(CommonConstant.PAGE_ACCESS));
-        var userAcc = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+        var userAccess = this.GetCookie(cookieService, CommonConstant.USER_ACCESS);
+        var userAcc = userAccess ? JSON.parse(userAccess) : null;
         var pageAccess = listPageAccess;
         if (listPageAccess == null) {
             pageAccess = [];
@@ -40,23 +43,24 @@ export class AdInsHelper {
         localStorage.setItem('PageAccess', JSON.stringify(pageAccess));
     }
 
-    public static ForceLogOut(timeLeft, toastr) {
+    public static ForceLogOut(cookieService: CookieService, timeLeft, toastr) {
         let interval = setInterval(() => {
             if (timeLeft > 0) {
                 console.log("Time Left : " + timeLeft)
                 toastr.errorMessage("Automatic Log out at : " + timeLeft);
                 timeLeft--;
             } else {
-                this.ClearAllLog();
+                this.ClearAllLog(cookieService);
                 window.location.reload();
             }
         }, 1000)
     }
 
-    public static ClearAllLog() {
+    public static ClearAllLog(cookieService: CookieService) {
         let version = localStorage.getItem(CommonConstant.VERSION);
         localStorage.clear();
         localStorage.setItem("Version", version);
+        cookieService.removeAll();
     }
 
     public static ClearPageAccessLog(cookieService: CookieService) {
@@ -66,40 +70,27 @@ export class AdInsHelper {
 
     public static CheckSessionTimeout(cookieService: CookieService) {
         let today = new Date();
-        var businessDtBefore = localStorage.getItem(CommonConstant.LAST_ACCESS_TIME);
+        var businessDtBefore = this.GetCookie(cookieService, CommonConstant.LAST_ACCESS_TIME,);
         var businessDtNow = formatDate(today, 'yyyy-MM-dd HH:mm:ss', 'en-US');
         if (businessDtBefore == undefined || businessDtBefore == null) {
-            localStorage.setItem("LastAccessTime", businessDtNow);
-            cookieService.put("LastAccessTime", businessDtNow);
+            this.SetCookie(cookieService, CommonConstant.LAST_ACCESS_TIME, businessDtNow);
         }
         else {
             var bsDtBefore = new Date(businessDtBefore);
             var tempDate = today.getTime() - bsDtBefore.getTime();
             if (tempDate > AdInsConstant.TimeoutSession) {
                 var data = { status: "001", reason: "Session Time Out" };
-                AdInsHelper.ClearAllLog();
+                AdInsHelper.ClearAllLog(cookieService);
                 return "1";
             }
-            localStorage.setItem("LastAccessTime", businessDtNow);
-            cookieService.put("LastAccessTime", businessDtNow);
+            this.SetCookie(cookieService, CommonConstant.LAST_ACCESS_TIME, businessDtNow);
         }
         return "0";
 
     }
 
-    public static CreateUserAccess(cookieService: CookieService, response) {
-        var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
-        localStorage.setItem("BusinessDateRaw", response["Identity"].BusinessDt);
-        localStorage.setItem("BusinessDate", DateParse);
-        localStorage.setItem("UserAccess", JSON.stringify(response["Identity"]));
-
-        cookieService.put("BusinessDateRaw", response["Identity"].BusinessDt);
-        cookieService.put("BusinessDate", DateParse);
-        cookieService.put("UserAccess", JSON.stringify(response["Identity"]));
-    }
-
     public static IsGrantAccess(formPath) {
-        var temp = localStorage.getItem(CommonConstant.MENU);
+        var temp = AdInsHelper.GetLocalStorage(CommonConstant.MENU);
         var objectMenu = [];
         objectMenu = JSON.parse(temp);
         if (objectMenu != null) {
@@ -162,5 +153,49 @@ export class AdInsHelper {
     }
     public static OpenProdOfferingViewByCodeAndVersion(Code, Version) {
         window.open(environment.FoundationR3Web + "/View/Offering?prodOfferingHId=0&prodOfferingCode=" + Code + "&prodOfferingVersion=" + Version, "_blank");
-      }
+    }
+
+    public static SetLocalStorage(key:string, value:string)
+    {
+        return localStorage.setItem(key, this.EncryptString(value, environment.ChipperKeyLocalStorage));
+    }
+
+    public static GetLocalStorage(key:string)
+    {
+        return this.DecryptString(localStorage.getItem(key), environment.ChipperKeyLocalStorage);
+    }
+
+    public static SetCookie(cookieService: CookieService, key:string, value:string)
+    {
+        cookieService.put(key, this.EncryptString(value, environment.ChipperKeyCookie));
+    }
+
+    public static GetCookie(cookieService: CookieService, key:string)
+    {
+        var value = cookieService.get(key);
+        if(value == undefined || value.trim() == '') return null;
+        return this.DecryptString(value, environment.ChipperKeyCookie);
+    }
+
+    private static EncryptString(plaintext: string, chipperKey:string="")
+    {
+        if(chipperKey == undefined || chipperKey.trim() == '') return plaintext;
+        var chipperKeyArr = CryptoJS.enc.Utf8.parse(chipperKey);
+        var iv = CryptoJS.lib.WordArray.create([0x00, 0x00, 0x00, 0x00]);
+        var encrypted = CryptoJS.AES.encrypt(plaintext, chipperKeyArr, { iv: iv});
+        var result = CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
+        return result;
+    }
+
+    private static DecryptString(chipperText: string, chipperKey:string){
+        if(
+            chipperKey == undefined || chipperKey.trim() == '' ||
+            chipperText == undefined || chipperText.trim() == ''
+        ) return chipperText;
+        var chipperKeyArr = CryptoJS.enc.Utf8.parse(chipperKey);
+        var iv = CryptoJS.lib.WordArray.create([0x00, 0x00, 0x00, 0x00]);  
+        var decrypted = CryptoJS.AES.decrypt(chipperText, chipperKeyArr, {iv: iv}); 
+        var plainText =  decrypted.toString(CryptoJS.enc.Utf8);   
+        return plainText;
+    }
 }

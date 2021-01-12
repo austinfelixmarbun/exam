@@ -19,6 +19,7 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-negative-customer-detail',
@@ -93,7 +94,8 @@ export class NegativeCustomerDetailComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder, 
+    private cookieService: CookieService
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
@@ -173,7 +175,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
     var criteriaList;
     var criteriaObj;
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDate = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDate.setDate(this.businessDate.getDate() - 1);
     this.businessDateIdExp = new Date(context[CommonConstant.BUSINESS_DT]);
