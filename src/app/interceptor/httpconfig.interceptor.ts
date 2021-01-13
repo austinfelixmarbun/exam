@@ -56,7 +56,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         //Ini kalau buat Login belom punya Current User Contexts
 
         if (currentUserContext != null) {
-            token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
+            token = localStorage.getItem(CommonConstant.TOKEN);
             myObj = new Object();
             if (request.body != null) {
                 myObj = request.body;
@@ -71,7 +71,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             }
             myObj["Ip"] = localStorage.getItem(CommonConstant.LOCAL_IP);
             myObj["RequestDateTime"] = businessDt;
-            token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN); 
+            token = localStorage.getItem(CommonConstant.TOKEN); 
         }
 
         if (token == null) {
@@ -83,7 +83,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         }
 
         if (!request.headers.has('Content-Type')) {
-            request = request.clone({ headers: request.headers.set('Content-Type', 'application/json'), withCredentials: true});
+            request = request.clone({ headers: request.headers.set('Content-Type', 'application/json')});
         }
         request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
         request = request.clone({ headers: request.headers.set('Authentication', 'my-authentication') });
