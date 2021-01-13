@@ -41,44 +41,31 @@
                 (ngSubmit)="ProdHDeactForm.valid && SaveForm()" #enjiForm="ngForm">
                 <div class="form-body">
                   <div class="form-group row">
-                    <label class="col-md-3  adInsLabel" translate>Reason </label>
-                    <div class="col-md-9">
-                      <select class="form-control adInsInput" formControlName="Reason">
-                        <option *ngFor="let ram of allRefReasonMethod" [ngValue]="ram.Key">
-                          {{ram.Value}}
-                        </option>
-                      </select>
-                      <lib-uc-show-errors [control]="ProdHDeactForm.controls.Reason" [submit]="enjiForm.submitted">
-                      </lib-uc-show-errors>
-                    </div>
-                  </div>
-                  <div class="form-group row">
                     <label class="col-md-3  adInsLabel" translate>Effective Date </label>
-                    <div class="col-md-9">
+                    <div class="col-md-3">
                       <input type="date" class="form-control adInsInput" formControlName="EffectiveDate"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && ProdHDeactForm.controls.EffectiveDate.invalid }">
                       <lib-uc-show-errors [control]="ProdHDeactForm.controls.EffectiveDate"
                         [submit]="enjiForm.submitted"></lib-uc-show-errors>
                     </div>
                   </div>
-                  <div class="form-group row">
-                    <label class="col-md-3  adInsLabel" translate>Notes </label>
-                    <div class="col-md-9">
-                      <textarea type="text" class="form-control adInsInput" formControlName="Notes"
-                        [ngClass]="{ 'is-invalid': enjiForm.submitted && ProdHDeactForm.controls.Notes.invalid }"></textarea>
-                      <lib-uc-show-errors [control]="ProdHDeactForm.controls.Notes" [submit]="enjiForm.submitted">
-                      </lib-uc-show-errors>
+         
+                </div>
+                <br>
+                <lib-ucapprovalcreate [InputObj]="InputObj" *ngIf="IsReady"></lib-ucapprovalcreate>
+                <div class="card">
+                  <div class="card-body">
+                    <div class="px-3"> 
+                        <div class="form-actions right">
+                          <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Product/HODeactivate']" skipLocationChange translate>
+                            <i class="ft-x"></i> Cancel
+                          </button>
+                          <button type="submit" class="btn btn-raised btn-primary" translate>
+                            <i class="far fa-check-square"></i> Save
+                          </button>
+                        </div> 
                     </div>
                   </div>
-                </div>
-                <div class="form-actions right">
-                  <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Product/HODeactivate']" skipLocationChange
-                    translate>
-                    <i class="far fa-window-close"></i> Cancel
-                  </button>
-                  <button type="submit" class="btn btn-raised btn-primary" translate>
-                    <i class="far fa-check-square"></i> Save
-                  </button>
                 </div>
               </form>
             </div>

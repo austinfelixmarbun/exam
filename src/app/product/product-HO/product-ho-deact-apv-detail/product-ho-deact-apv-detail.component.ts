@@ -7,6 +7,10 @@ import { HttpClient } from '@angular/common/http';
 import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { UcInputApprovalObj } from 'app/shared/model/UcInputApprovalObj.Model';
+import { UcInputApprovalHistoryObj } from 'app/shared/model/UcInputApprovalHistoryObj.Model';
+import { UcInputApprovalGeneralInfoObj } from 'app/shared/model/UcInputApprovalGeneralInfoObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-product-ho-deact-apv-detail',
@@ -20,7 +24,11 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
   instanceId: number;
   inputObj: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
-
+  InputApvObj : UcInputApprovalObj;
+  InputApprovalHistoryObj : UcInputApprovalHistoryObj;
+  UcInputApprovalGeneralInfoObj : UcInputApprovalGeneralInfoObj;
+  IsReady: boolean = false;
+  ApvReqId: number;
 
   constructor(private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private http:HttpClient) { 
     this.route.queryParams.subscribe(params => {
@@ -28,6 +36,7 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
         this.prodHId = params["ProdHId"];
         this.taskId = params["TaskId"];
         this.instanceId = params["InstanceId"];
+        this.ApvReqId = params["ApvReqId"];
       }
     });
   }
@@ -48,6 +57,39 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
     ApvHoldObj.TaskId = obj.taskId
 
     this.HoldTask(ApvHoldObj);
+    this. initInputApprovalObj();
+  }
+
+  initInputApprovalObj(){
+
+    this.UcInputApprovalGeneralInfoObj = new UcInputApprovalGeneralInfoObj();
+    this.UcInputApprovalGeneralInfoObj.EnvUrl = environment.FoundationR3Url;
+    this.UcInputApprovalGeneralInfoObj.PathUrl = "/Approval/GetSingleTaskInfo";
+    this.UcInputApprovalGeneralInfoObj.TaskId = this.taskId;
+    
+    this.InputApprovalHistoryObj = new UcInputApprovalHistoryObj();
+    this.InputApprovalHistoryObj.EnvUrl = environment.FoundationR3Url;
+    this.InputApprovalHistoryObj.PathUrl = "/Approval/GetTaskHistory";
+    this.InputApprovalHistoryObj.RequestId = this.ApvReqId;
+
+    this.InputApvObj = new UcInputApprovalObj();
+    this.InputApvObj.TaskId = this.taskId;
+    this.InputApvObj.EnvUrl = environment.FoundationR3Url;
+    this.InputApvObj.PathUrlGetLevelVoting = URLConstant.GetLevelVoting;
+    this.InputApvObj.PathUrlGetPossibleResult = URLConstant.GetPossibleResult;
+    this.InputApvObj.PathUrlSubmitApproval = URLConstant.SubmitApproval;
+    this.InputApvObj.PathUrlGetNextNodeMember = URLConstant.GetNextNodeMember;
+    this.InputApvObj.PathUrlGetReasonActive = URLConstant.GetRefReasonActive;
+    this.InputApvObj.PathUrlGetChangeFinalLevel = URLConstant.GetCanChangeMinFinalLevel;
+
+    let ProductObj = {
+      ProdHId: this.prodHId
+    } 
+    this.http.post(URLConstant.GetProductByHId, ProductObj).subscribe(
+      (response) => {
+        this.InputApvObj.TrxNo = response["ProdCode"];
+        this.IsReady = true;
+      });
   }
 
 
@@ -58,14 +100,8 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
     )
   }
 
-  onAvailableNextTask()
-  {
-    
-  }
-
   onApprovalSubmited()
   {
-    this.toastr.successMessage("Success");
     AdInsHelper.RedirectUrl(this.router,["/Product/HODeactivateApproval"],{ });
   }
   onCancelClick() {

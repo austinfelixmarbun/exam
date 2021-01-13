@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
@@ -11,7 +11,8 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-
+import { UcInputRFAObj } from 'app/shared/model/UcInputRFAObj.Model';
+import { UcapprovalcreateComponent } from '@adins/Ucapprovalcreate';
 
 @Component({
   selector: 'app-product-ho-deactivate-edit',
@@ -33,17 +34,17 @@ export class ProductHODeactivateEditComponent implements OnInit {
   prodOfferVerUrl: string;
   ProdOfferVer: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
-
+  InputObj: UcInputRFAObj;
+  IsReady: boolean;
   ProdHDeactForm = this.fb.group({
-    Reason: ['', [Validators.required, Validators.maxLength(50)]],
-    EffectiveDate: ['', Validators.required],
-    Notes: ['', [Validators.required, Validators.maxLength(4000)]]
+    EffectiveDate: ['', Validators.required]
   });
-
+  @ViewChild(UcapprovalcreateComponent) createComponent;
+  ApprovalCreateOutput: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
-    this.requestDeactURL = URLConstant.RequestDeactivation;
+    this.requestDeactURL = URLConstant.RequestDeactivationNew;
     this.getValueReasonModel = URLConstant.GetListActiveRefReason;
     this.prodOfferVerUrl = URLConstant.GetListProdOfferingVersionByProdId;
 
@@ -57,14 +58,14 @@ export class ProductHODeactivateEditComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductMainInformation.json";
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     var obj = { RefReasonTypeCode: CommonConstant.RefReasonTypeCodeProdDeactivate };
-    this.http.post(this.getValueReasonModel, obj).subscribe(
+    await this.http.post(this.getValueReasonModel, obj).toPromise().then(
       (response) => {
-        this.allRefReasonMethod = response[CommonConstant.ReturnObj];
+        this.allRefReasonMethod = response[CommonConstant.ReturnObj]; 
         if (this.allRefReasonMethod.length > 0) {
           this.ProdHDeactForm.patchValue({ Reason: response[CommonConstant.ReturnObj][0]['Key'] });
         }
@@ -78,16 +79,48 @@ export class ProductHODeactivateEditComponent implements OnInit {
         this.ProdOfferVer = response[CommonConstant.ReturnObj];
       }
     );
+      this.initInputApprovalObj();
+
+  }
+  initInputApprovalObj(){  
+    this.InputObj = new UcInputRFAObj();
+    
+    var Attributes = [{}] 
+    var TypeCode = {
+      "TypeCode" : CommonConstant.PRD_HO_DEACT_APV_TYPE,
+      "Attributes" : Attributes,
+    };
+    this.InputObj.ApvTypecodes = [TypeCode];
+    this.InputObj.EnvUrl = environment.FoundationR3Url;
+    this.InputObj.PathUrlGetSchemeBySchemeCode = URLConstant.GetSchemesBySchemeCode;
+    this.InputObj.PathUrlGetCategoryByCategoryCode = URLConstant.GetRefSingleCategoryByCategoryCode;
+    this.InputObj.PathUrlGetAdtQuestion = URLConstant.GetRefAdtQuestion;
+    this.InputObj.PathUrlGetPossibleMemberAndAttributeExType = URLConstant.GetPossibleMemberAndAttributeExType;
+    this.InputObj.PathUrlGetApprovalReturnHistory = URLConstant.GetApprovalReturnHistory;
+    this.InputObj.PathUrlCreateNewRFA = URLConstant.CreateNewRFA;
+    this.InputObj.PathUrlCreateJumpRFA = URLConstant.CreateJumpRFA;
+    this.InputObj.CategoryCode = CommonConstant.CAT_CODE_PRD_HO_DEACT_APV;
+    this.InputObj.SchemeCode = CommonConstant.SCHM_CODE_APV_HO_DEACT_SCHM;
+    this.InputObj.Reason = this.allRefReasonMethod;
+    let ProductObj = {
+      ProdId: this.prodId
+    } 
+    this.http.post(URLConstant.GetProductById, ProductObj).subscribe(
+      (response) => {
+        this.InputObj.TrxNo = response["ProdCode"];
+        this.IsReady = true;
+      });
   }
 
   SaveForm() {
+    this.ApprovalCreateOutput = this.createComponent.output(); 
     this.prodHDeactivateObj = new ProdHDeactivateObj();
-    this.prodHDeactivateObj = this.ProdHDeactForm.value;
-    //var reason = this.allRefReasonMethod.filter(
-    //  x => x.Key == this.ProdHDeactForm.controls.Reason.value)
-    //this.prodHDeactivateObj.Reason = reason[0].Value;
+    this.prodHDeactivateObj.EffectiveDate = this.ProdHDeactForm.controls.EffectiveDate.value;
+    this.prodHDeactivateObj.Reason = this.ApprovalCreateOutput.ReasonCode;
+    this.prodHDeactivateObj.Notes = this.ApprovalCreateOutput.Notes;
     this.prodHDeactivateObj.ProdHId = this.prodHId;
     this.prodHDeactivateObj.RowVersion = "";
+    this.prodHDeactivateObj.RequestRFAObj = this.ApprovalCreateOutput;
     this.http.post(this.requestDeactURL, this.prodHDeactivateObj).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);

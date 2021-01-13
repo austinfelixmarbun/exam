@@ -7,6 +7,10 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { UcInputApprovalHistoryObj } from 'app/shared/model/UcInputApprovalHistoryObj.Model';
+import { UcInputApprovalObj } from 'app/shared/model/UcInputApprovalObj.Model';
+import { UcInputApprovalGeneralInfoObj } from 'app/shared/model/UcInputApprovalGeneralInfoObj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-product-offering-deact-apv-detail',
@@ -20,15 +24,20 @@ export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit 
   instanceId: number;
   inputObj: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
-
+  InputApvObj : UcInputApprovalObj;
+  InputApprovalHistoryObj : UcInputApprovalHistoryObj;
+  UcInputApprovalGeneralInfoObj : UcInputApprovalGeneralInfoObj;
+  IsReady: boolean = false;
+  ApvReqId: number;
+  ProdOfferingId : number;
   constructor(private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
       if (params["ProdOfferingHId"] != null) {
         this.prodOfferingHId = params["ProdOfferingHId"];
         this.taskId = params["TaskId"];
         this.instanceId = params["InstanceId"];
-
-
+        this.ApvReqId = params["ApvReqId"];
+        this.ProdOfferingId = params["ProdOfferingId"];
       }
     });
   }
@@ -49,6 +58,38 @@ export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit 
     ApvHoldObj.TaskId = obj.taskId
 
     this.HoldTask(ApvHoldObj);
+    this. initInputApprovalObj();
+  }
+
+  initInputApprovalObj(){
+
+    this.UcInputApprovalGeneralInfoObj = new UcInputApprovalGeneralInfoObj();
+    this.UcInputApprovalGeneralInfoObj.EnvUrl = environment.FoundationR3Url;
+    this.UcInputApprovalGeneralInfoObj.PathUrl = "/Approval/GetSingleTaskInfo";
+    this.UcInputApprovalGeneralInfoObj.TaskId = this.taskId;
+    
+    this.InputApprovalHistoryObj = new UcInputApprovalHistoryObj();
+    this.InputApprovalHistoryObj.EnvUrl = environment.FoundationR3Url;
+    this.InputApprovalHistoryObj.PathUrl = "/Approval/GetTaskHistory";
+    this.InputApprovalHistoryObj.RequestId = this.ApvReqId;
+
+    this.InputApvObj = new UcInputApprovalObj();
+    this.InputApvObj.TaskId = this.taskId;
+    this.InputApvObj.EnvUrl = environment.FoundationR3Url;
+    this.InputApvObj.PathUrlGetLevelVoting = URLConstant.GetLevelVoting;
+    this.InputApvObj.PathUrlGetPossibleResult = URLConstant.GetPossibleResult;
+    this.InputApvObj.PathUrlSubmitApproval = URLConstant.SubmitApproval;
+    this.InputApvObj.PathUrlGetNextNodeMember = URLConstant.GetNextNodeMember;
+    this.InputApvObj.PathUrlGetReasonActive = URLConstant.GetRefReasonActive;
+    this.InputApvObj.PathUrlGetChangeFinalLevel = URLConstant.GetCanChangeMinFinalLevel;
+      var prodOfferingObj = {
+        ProdOfferingId: this.ProdOfferingId
+      } 
+      this.http.post(URLConstant.GetProdOfferingByProdOfferingId, prodOfferingObj).subscribe(
+        (response) => {
+          this.InputApvObj.TrxNo = response["ProdOfferingCode"];
+          this.IsReady = true;
+        });
   }
 
   HoldTask(obj) {
@@ -56,14 +97,9 @@ export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit 
       (response) => {
       }
     )
-  }
+  } 
 
-  onAvailableNextTask() {
-
-  }
-
-  onApprovalSubmited() {
-    this.toastr.successMessage("Success");
+  onApprovalSubmited(event) {
     AdInsHelper.RedirectUrl(this.router,["/Product/OfferingDeactivateApproval"],{ });
   }
   onCancelClick() {

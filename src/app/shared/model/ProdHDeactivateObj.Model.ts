@@ -4,5 +4,6 @@ export class ProdHDeactivateObj {
   Reason: any;
   Notes: any;
   RowVersion: any;
+  RequestRFAObj : any;
   constructor() { this.ProdHId = 0; }
 }
