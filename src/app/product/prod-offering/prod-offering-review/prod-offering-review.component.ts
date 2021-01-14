@@ -61,6 +61,9 @@ export class ProdOfferingReviewComponent implements OnInit {
       "TypeCode": CommonConstant.PRD_OFR_APV_TYPE,
       "Attributes": Attributes,
     }
+    var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.InputObj.RequestBy = currentUserContext[CommonConstant.USER_NAME];
+    this.InputObj.OfficeCode = currentUserContext[CommonConstant.OFFICE_CODE];
     this.InputObj.ApvTypecodes = [TypeCode];
     this.InputObj.EnvUrl = environment.FoundationR3Url;
     this.InputObj.PathUrlGetSchemeBySchemeCode = URLConstant.GetSchemesBySchemeCode;
