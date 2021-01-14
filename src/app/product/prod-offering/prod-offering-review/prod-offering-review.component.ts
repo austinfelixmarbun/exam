@@ -17,7 +17,14 @@ import { CookieService } from 'ngx-cookie';
 })
 export class ProdOfferingReviewComponent implements OnInit {
 
-  @ViewChild(UcapprovalcreateComponent) createComponent;
+ 
+  private createComponent: UcapprovalcreateComponent;
+   @ViewChild('ApprovalComponent') set content(content: UcapprovalcreateComponent) {
+    if (content) { 
+      // initially setter gets called with undefined
+      this.createComponent = content;
+    }
+  }
   InputObj: UcInputRFAObj;
   IsReady: Boolean = false;
   ProdOfferingHId: number;

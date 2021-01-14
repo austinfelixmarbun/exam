@@ -1,6 +1,6 @@
 <app-product-offering-view [inputProdOfferingHId]="ProdOfferingHId"></app-product-offering-view>
 <br />
-<lib-ucapprovalcreate [InputObj]="InputObj" *ngIf="IsReady" (result)="SaveForm($event)" (callback) ="tesOutput($event)" ></lib-ucapprovalcreate>
+<lib-ucapprovalcreate [InputObj]="InputObj" *ngIf="IsReady" (result)="SaveForm($event)" (callback) ="tesOutput($event)" #ApprovalComponent></lib-ucapprovalcreate>
 <div class="card">
   <div class="card-body">
     <div class="px-3">

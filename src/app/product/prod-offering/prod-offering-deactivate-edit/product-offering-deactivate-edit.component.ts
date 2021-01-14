@@ -39,7 +39,13 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
   ProdOfferingHDeactForm = this.fb.group({
     EffectiveDate: ['', Validators.required]
   });
-  @ViewChild(UcapprovalcreateComponent) createComponent;
+  private createComponent: UcapprovalcreateComponent;
+  @ViewChild('ApprovalComponent') set content(content: UcapprovalcreateComponent) {
+    if (content) { 
+      // initially setter gets called with undefined
+      this.createComponent = content;
+    }
+  }
   ApprovalCreateOutput: any;
 
 
