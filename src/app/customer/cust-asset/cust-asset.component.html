@@ -48,12 +48,12 @@
           <td style="text-align: center;">{{item.AssetQty}}</td>
           <td style="text-align: right;">{{ item.AssetTotalValue | currency : "USD" : "" }}</td>
           <td>
-            <a (click)="EditAppCustAsset(item.AppCustAssetId)">
+            <a (click)="EditCustAsset(item.CustAssetId)">
               <i class="fas fa-pencil-alt"></i>
             </a>
           </td>
           <td>
-            <a class="danger p-0" (click)="DeleteCustAsset(item.AppCustAssetId)">
+            <a class="danger p-0" (click)="DeleteCustAsset(item.CustAssetId)">
               <i class="ft-trash-2 font-medium-3 mr-2"></i>
             </a>
           </td>
