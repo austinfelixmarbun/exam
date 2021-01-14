@@ -56,7 +56,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         //Ini kalau buat Login belom punya Current User Contexts
 
         if (currentUserContext != null) {
-            token = localStorage.getItem(CommonConstant.TOKEN);
+            token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
             myObj = new Object();
             if (request.body != null) {
                 myObj = request.body;
@@ -71,7 +71,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             }
             myObj["Ip"] = localStorage.getItem(CommonConstant.LOCAL_IP);
             myObj["RequestDateTime"] = businessDt;
-            token = localStorage.getItem(CommonConstant.TOKEN); 
+            token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN); 
         }
 
         if (token == null) {
