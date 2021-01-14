@@ -27,6 +27,8 @@ export class UcInputRFAObj {
         this.CategoryCode = "";
         this.SchemeCode = "";
         this.TrxNo = "";
+        this.RequestBy = "";
+        this.OfficeCode = "";
         this.Reason =[];
     }
 }  
