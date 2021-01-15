@@ -942,6 +942,6 @@ export class URLConstant {
     public static GetNextNodeMember = "/Approval/GetNextNodeMember";
     public static GetRefReasonActive = "/Approval/GetRefReasonActive";
     public static GetCanChangeMinFinalLevel = "/Approval/GetCanChangeMinFinalLevel";
-    public static GetTaskHistory = environment.FoundationR3Url + "/Approval/GetTaskHistory";
+    public static GetTaskHistory = "/Approval/GetTaskHistory";
     
 }
