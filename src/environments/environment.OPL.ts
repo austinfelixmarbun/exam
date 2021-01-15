@@ -8,7 +8,7 @@ export const environment = {
     navbarColor: 'transparent',
     // losUrl: 'http://localhost:5001',
     // FoundationR3Url: 'http://localhost:5000',
-    losURL: 'http://r3impl-appsvr.ad-ins.com/ROS_BE',
+    LosURL: 'http://r3impl-appsvr.ad-ins.com/ROS_BE',
     FoundationR3Url: 'http://r3impl-appsvr.ad-ins.com/FOUNDATION_OPL',
     ApprovalURL: 'http://r3impl-appsvr.ad-ins.com/APPROVAL_OPL',
     FoundationR3Web: 'http://r3impl-websvr.ad-ins.com/Foundation',
