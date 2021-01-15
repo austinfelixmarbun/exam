@@ -11,6 +11,7 @@
     "integration": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=integration_env --base-href /FOUNDATION_INTEGRATION/",
     "stresstest": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=test_env --base-href /FOUNDATION_FE/",
     "https": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=https_env --base-href /FOUNDATION_HTTPS/",
+    "OPL": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=OPL --aot --base-href /Foundation/",
     "test": "ng test",
     "version:patch": "npm version prerelease -m UpVersion && git push origin HEAD:master --follow-tags --force",
     "lint": "ng lint",
