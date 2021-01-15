@@ -72,7 +72,12 @@ const routes: Routes = [
           {
             path: 'CustomerGroup',
             loadChildren: './customer-view-customer-group/customer-view-customer-group.module#CustomerViewGroupModule'
+          },
+          {
+            path: 'HighligtComment',
+            loadChildren : './customer-view-highligt-comment/highligt-comment.module#HighligtCommentModule'
           }
+
         ]
       }
 ];
