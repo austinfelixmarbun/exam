@@ -734,6 +734,7 @@ export class URLConstant {
     public static GetCustAssetByCustAssetId = environment.FoundationR3Url + "/CustAsset/GetCustAssetByCustAssetId";
     public static GetListCustAssetByCustId = environment.FoundationR3Url + "/CustAsset/GetListCustAssetByCustId";
 
+    public static GetCustHighlightCommentByCustId = environment.FoundationR3Url + "/Cust/GetCustHighlightCommentByCustId";
     // CUSTOMER COMPANY
     public static GetListViewCustCompanyLegalDocByCustCompanyId = environment.FoundationR3Url + "/CustCompanyLegalDoc/GetListViewCustCompanyLegalDocByCustCompanyId";
     public static DeleteCustCompanyLegalDoc = environment.FoundationR3Url + "/CustCompanyLegalDoc/DeleteCustCompanyLegalDoc";
