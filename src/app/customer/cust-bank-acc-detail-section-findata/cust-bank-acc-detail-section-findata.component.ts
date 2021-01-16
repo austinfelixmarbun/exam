@@ -49,7 +49,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     BalanceAmt: [0],
     IsDefault: [false],
     IsActive: [false],
-    BegBalanceAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    BegBalanceAmt: ['', [Validators.required]],
     RowVersion: [''],
     CustBankStmnts: this.fb.array([])
   });
@@ -148,15 +148,27 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             this.custBankStmntH.RowVersion = response.CustBankStmntHObj.RowVersion;
 
             for (const item of response.CustBankStmntDObjs) {
+              // var formGroup = this.fb.group({
+              //   CustBankStmntDId: [item.CustBankStmntDId, [Validators.required]],
+              //   CustBankStmntHId: [item.CustBankStmntHId, [Validators.required]],
+              //   Month: [this.monthOfYear.indexOf(item.Month), [Validators.required]],
+              //   Year: [item.Year, [Validators.required, Validators.pattern("^[0-9]+$")]],
+              //   DebitTrxCount: [item.DebitTrxCount],
+              //   DebitAmt: [item.DebitAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
+              //   CreditTrxCount: [item.CreditTrxCount],
+              //   CreditAmt: [item.CreditAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
+              //   BalanceAmt: [parseFloat(item.BalanceAmt)],
+              //   RowVersion: [item.RowVersion]
+              // });
               var formGroup = this.fb.group({
                 CustBankStmntDId: [item.CustBankStmntDId, [Validators.required]],
                 CustBankStmntHId: [item.CustBankStmntHId, [Validators.required]],
                 Month: [this.monthOfYear.indexOf(item.Month), [Validators.required]],
                 Year: [item.Year, [Validators.required, Validators.pattern("^[0-9]+$")]],
-                DebitTrxCount: [item.DebitTrxCount],
-                DebitAmt: [item.DebitAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
-                CreditTrxCount: [item.CreditTrxCount],
-                CreditAmt: [item.CreditAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
+                DebitTrxCount: [item.DebitTrxCount, [Validators.required, Validators.min(0), Validators.max(9999)]],
+                DebitAmt: [item.DebitAmt, [Validators.required]],
+                CreditTrxCount: [item.CreditTrxCount, [Validators.required, Validators.min(0), Validators.max(9999)]],
+                CreditAmt: [item.CreditAmt, [Validators.required]],
                 BalanceAmt: [parseFloat(item.BalanceAmt)],
                 RowVersion: [item.RowVersion]
               });
@@ -180,10 +192,10 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       CustBankStmntHId: [this.custBankStmntH.CustBankStmntHId, [Validators.required]],
       Month: ['', [Validators.required]],
       Year: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-      DebitTrxCount: [''],
-      DebitAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-      CreditTrxCount: [''],
-      CreditAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+      DebitTrxCount: ['', [Validators.required, Validators.min(0), Validators.max(9999)]],
+      DebitAmt: [0, [Validators.required]],
+      CreditTrxCount: ['', [Validators.required, Validators.min(0), Validators.max(9999)]],
+      CreditAmt: [0, [Validators.required]],
       BalanceAmt: [''],
       RowVersion: ['']
     });
@@ -191,6 +203,38 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     this.rowCustBankStmnt++;
 
     this.isAlreadyCalc = false;
+  }
+
+  ChangeTrxCountDebit(i){
+    // var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
+    // var controlDebitAmt = formArray.at(i).get('DebitAmt');
+    // var controlDebitTrxCount = formArray.at(i).value.DebitTrxCount;
+    // if(controlDebitTrxCount != undefined)
+    // {
+    //   if(controlDebitTrxCount > 0){
+    //     controlDebitAmt.setValidators([Validators.required]);
+    //     controlDebitAmt.updateValueAndValidity();
+    //   }else if(controlDebitTrxCount == 0){
+    //     controlDebitAmt.clearValidators();
+    //     controlDebitAmt.updateValueAndValidity();
+    //   }
+    // }
+  }
+
+  ChangeTrxCountCredit(i){
+    // var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
+    // var controlCreditAmt = formArray.at(i).get('CreditAmt');
+    // var controlCreditTrxCount = formArray.at(i).value.CreditTrxCount;
+    // if(controlCreditTrxCount != undefined)
+    // {
+    //   if(controlCreditTrxCount > 0){
+    //     controlCreditAmt.setValidators([Validators.required]);
+    //     controlCreditAmt.updateValueAndValidity();
+    //   }else if(controlCreditTrxCount == 0){
+    //     controlCreditAmt.clearValidators();
+    //     controlCreditAmt.updateValueAndValidity();
+    //   }
+    // }
   }
 
   removeCustBankStmnt(i) {

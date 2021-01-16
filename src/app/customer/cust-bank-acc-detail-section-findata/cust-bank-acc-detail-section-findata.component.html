@@ -137,7 +137,7 @@
                             <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.Year" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                           </td>
                           <td style="text-align: left;">
-                            <input type="" class="form-control adInsInput" formControlName="DebitTrxCount" 
+                            <input type="number" (change)="ChangeTrxCountDebit(i)" (keyup)="ChangeTrxCountDebit(i)"  class="form-control adInsInput" formControlName="DebitTrxCount" 
                               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.DebitTrxCount.invalid }" />
                             <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.DebitTrxCount" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                           </td>
@@ -147,7 +147,7 @@
                             <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.DebitAmt" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                           </td>
                           <td style="text-align: left;">
-                            <input type="text" class="form-control adInsInput" formControlName="CreditTrxCount" 
+                            <input type="number" (change)="ChangeTrxCountCredit(i)" (keyup)="ChangeTrxCountCredit(i)"  class="form-control adInsInput" formControlName="CreditTrxCount" 
                               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.CreditTrxCount.invalid }" />
                             <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.CreditTrxCount" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                           </td>
