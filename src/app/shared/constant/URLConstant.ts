@@ -263,7 +263,7 @@ export class URLConstant {
     public static UpdateFormFeatureAuthForm = "/MenuManagement/UpdateFormFeatureAuthForm";
     public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
     public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
-    public static LoginByRole = "/Authenticate/LoginCookies";
+    public static LoginByRole = "/Authenticate/LoginByRole";
     public static LoginByToken = "/Authenticate/LoginByToken";
     public static UpdateToken = "/Authenticate/UpdateRole";
     public static LoginURLFrontEnd = "pages/login";
@@ -728,7 +728,13 @@ export class URLConstant {
     public static DeleteNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/DeleteNegativeCust";
     public static GetListCustGrpByMemberCustIdForCustGrpTab = environment.FoundationR3Url + "/CustGrp/GetListCustGrpByMemberCustIdForCustGrpTab";
     public static GetCustByCustNo = environment.FoundationR3Url + "/Cust/GetCustByCustNo";
+    public static AddCustAsset = environment.FoundationR3Url + "/CustAsset/AddCustAsset";
+    public static DeleteCustAsset = environment.FoundationR3Url + "/CustAsset/DeleteCustAsset";
+    public static EditCustAsset = environment.FoundationR3Url + "/CustAsset/EditCustAsset";
+    public static GetCustAssetByCustAssetId = environment.FoundationR3Url + "/CustAsset/GetCustAssetByCustAssetId";
+    public static GetListCustAssetByCustId = environment.FoundationR3Url + "/CustAsset/GetListCustAssetByCustId";
 
+    public static GetCustHighlightCommentByCustId = environment.FoundationR3Url + "/Cust/GetCustHighlightCommentByCustId";
     // CUSTOMER COMPANY
     public static GetListViewCustCompanyLegalDocByCustCompanyId = environment.FoundationR3Url + "/CustCompanyLegalDoc/GetListViewCustCompanyLegalDocByCustCompanyId";
     public static DeleteCustCompanyLegalDoc = environment.FoundationR3Url + "/CustCompanyLegalDoc/DeleteCustCompanyLegalDoc";

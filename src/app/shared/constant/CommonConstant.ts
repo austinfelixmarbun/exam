@@ -234,4 +234,6 @@ export class CommonConstant {
     public static CFNA = "CFNA";
     
     //ATTR GROUP
+
+    public static RefMasterTypeCustAsset = "CUST_ASSET_TYPE";
 }
