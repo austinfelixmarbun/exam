@@ -81,7 +81,8 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
     this.InputApvObj.PathUrlGetNextNodeMember = URLConstant.GetNextNodeMember;
     this.InputApvObj.PathUrlGetReasonActive = URLConstant.GetRefReasonActive;
     this.InputApvObj.PathUrlGetChangeFinalLevel = URLConstant.GetCanChangeMinFinalLevel;
-
+    this.InputApvObj.RequestId = this.ApvReqId;
+    this.InputApvObj.PathUrlGetHistory = URLConstant.GetTaskHistory;
     let ProductObj = {
       ProdHId: this.prodHId
     } 
