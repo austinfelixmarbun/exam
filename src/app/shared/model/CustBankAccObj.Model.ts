@@ -11,5 +11,6 @@ export class CustBankAccObj {
     IsDefault: any;
     IsActive: any;
     RowVersion: any;
+    BegBalanceAmt: any;
     constructor(){this.CustBankAccId = 0, this.RowVersion = ""}
 }
