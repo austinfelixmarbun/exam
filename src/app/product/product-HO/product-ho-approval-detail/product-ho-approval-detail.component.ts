@@ -82,7 +82,8 @@ export class ProductHOApprovalDetailComponent implements OnInit {
     this.InputApvObj.PathUrlGetNextNodeMember = URLConstant.GetNextNodeMember;
     this.InputApvObj.PathUrlGetReasonActive = URLConstant.GetRefReasonActive;
     this.InputApvObj.PathUrlGetChangeFinalLevel = URLConstant.GetCanChangeMinFinalLevel;
-
+    this.InputApvObj.RequestId = this.ApvReqId;
+    this.InputApvObj.PathUrlGetHistory = URLConstant.GetTaskHistory;
     var data = {
       ProdHId: this.prodHId
     } 

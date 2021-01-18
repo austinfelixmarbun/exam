@@ -11,6 +11,8 @@ export class UcInputRFAObj {
     CategoryCode : string;
     SchemeCode : string;
     TrxNo : string;
+    OfficeCode: string;
+    RequestedBy: string;
     Reason : any;
     constructor() { 
         this.ApvTypecodes = [];
@@ -25,6 +27,8 @@ export class UcInputRFAObj {
         this.CategoryCode = "";
         this.SchemeCode = "";
         this.TrxNo = "";
+        this.RequestedBy = "";
+        this.OfficeCode = "";
         this.Reason =[];
     }
 }  
