@@ -8,8 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-filing-paging',
-  templateUrl: './filing-paging.component.html',
-  styleUrls: ['./filing-paging.component.scss']
+  templateUrl: './filing-paging.component.html'
 })
 export class FilingPagingComponent implements OnInit {
   Cabinet: CabinetWithListRackObj = new CabinetWithListRackObj();

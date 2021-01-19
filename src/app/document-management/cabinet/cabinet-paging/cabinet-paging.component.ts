@@ -5,8 +5,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 
 @Component({
   selector: 'app-cabinet-paging',
-  templateUrl: './cabinet-paging.component.html',
-  styleUrls: ['./cabinet-paging.component.scss']
+  templateUrl: './cabinet-paging.component.html'
 })
 export class CabinetPagingComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();

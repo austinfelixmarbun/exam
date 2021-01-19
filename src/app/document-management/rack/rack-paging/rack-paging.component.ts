@@ -6,8 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-rack-paging',
-  templateUrl: './rack-paging.component.html',
-  styleUrls: ['./rack-paging.component.scss']
+  templateUrl: './rack-paging.component.html'
 })
 export class RackPagingComponent implements OnInit {
   Cabinet: CabinetWithListRackObj = new CabinetWithListRackObj();

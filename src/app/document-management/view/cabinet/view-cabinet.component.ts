@@ -7,8 +7,7 @@ import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-view-cabinet',
-  templateUrl: './view-cabinet.component.html',
-  styleUrls: ['./view-cabinet.component.scss']
+  templateUrl: './view-cabinet.component.html'
 })
 export class ViewCabinetComponent implements OnInit {
   CabinetCode: string;

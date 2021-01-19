@@ -8,8 +8,7 @@ import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-cabinet-add-edit',
-  templateUrl: './cabinet-add-edit.component.html',
-  styleUrls: ['./cabinet-add-edit.component.scss']
+  templateUrl: './cabinet-add-edit.component.html'
 })
 export class CabinetAddEditComponent implements OnInit {
   title:string = "ADD CABINET";

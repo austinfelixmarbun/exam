@@ -5,8 +5,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-auction-company-paging',
-  templateUrl: './auction-company-paging.component.html',
-  styleUrls: ['./auction-company-paging.component.scss']
+  templateUrl: './auction-company-paging.component.html'
 })
 export class AuctionCompanyPagingComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();

@@ -8,8 +8,7 @@ import { RefCoaObj } from 'app/shared/model/common-setting/RefCoaObj.Model';
 
 @Component({
   selector: 'app-coa-edit-detail',
-  templateUrl: './coa-edit-detail.component.html',
-  styleUrls: ['./coa-edit-detail.component.scss']
+  templateUrl: './coa-edit-detail.component.html'
 })
 export class CoaEditDetailComponent implements OnInit {
   refCoaId: string = ""

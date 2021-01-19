@@ -16,8 +16,7 @@ import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-auction-company-addedit',
-  templateUrl: './auction-company-addedit.component.html',
-  styleUrls: ['./auction-company-addedit.component.scss']
+  templateUrl: './auction-company-addedit.component.html'
 })
 export class AuctionCompanyAddeditComponent implements OnInit {
   inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();

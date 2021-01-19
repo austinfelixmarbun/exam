@@ -5,8 +5,7 @@ import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-coa-scheme-view',
-  templateUrl: './coa-scheme-view.component.html',
-  styleUrls: ['./coa-scheme-view.component.scss']
+  templateUrl: './coa-scheme-view.component.html'
 })
 export class CoaSchemeViewComponent implements OnInit {
   coaSchmId: string = '';

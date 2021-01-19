@@ -8,8 +8,7 @@ import { CoaSchmObj } from 'app/shared/model/common-setting/CoaSchmObj.Model';
 
 @Component({
   selector: 'app-coa-scheme-detail',
-  templateUrl: './coa-scheme-detail.component.html',
-  styleUrls: ['./coa-scheme-detail.component.scss']
+  templateUrl: './coa-scheme-detail.component.html'
 })
 export class CoaSchemeDetailComponent implements OnInit {
   ListCOAScheme: Array<any> = new Array<any>();

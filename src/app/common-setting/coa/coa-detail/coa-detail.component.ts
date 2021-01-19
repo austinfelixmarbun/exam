@@ -7,8 +7,7 @@ import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-coa-detail',
-  templateUrl: './coa-detail.component.html',
-  styleUrls: ['./coa-detail.component.scss']
+  templateUrl: './coa-detail.component.html'
 })
 export class CoaDetailComponent implements OnInit {
   ListCurr: Array<any> = new Array<any>();

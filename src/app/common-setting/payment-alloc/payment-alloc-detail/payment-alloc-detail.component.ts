@@ -8,8 +8,7 @@ import { RefPaymentAllocObj } from 'app/shared/model/common-setting/RefPaymentAl
 
 @Component({
   selector: 'app-payment-alloc-detail',
-  templateUrl: './payment-alloc-detail.component.html',
-  styleUrls: ['./payment-alloc-detail.component.scss']
+  templateUrl: './payment-alloc-detail.component.html'
 })
 export class PaymentAllocDetailComponent implements OnInit {
   mode: string = "add";

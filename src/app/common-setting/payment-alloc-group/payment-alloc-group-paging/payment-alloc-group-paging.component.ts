@@ -5,8 +5,7 @@ import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-payment-alloc-group-paging',
-  templateUrl: './payment-alloc-group-paging.component.html',
-  styleUrls: ['./payment-alloc-group-paging.component.scss']
+  templateUrl: './payment-alloc-group-paging.component.html'
 })
 export class PaymentAllocGroupPagingComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();

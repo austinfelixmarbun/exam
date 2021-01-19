@@ -7,8 +7,7 @@ import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-view-rack',
-  templateUrl: './view-rack.component.html',
-  styleUrls: ['./view-rack.component.scss']
+  templateUrl: './view-rack.component.html'
 })
 export class ViewRackComponent implements OnInit {
   RackCode: string;

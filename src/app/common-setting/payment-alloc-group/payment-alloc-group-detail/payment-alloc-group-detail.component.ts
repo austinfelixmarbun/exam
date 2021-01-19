@@ -11,8 +11,7 @@ import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-payment-alloc-group-detail',
-  templateUrl: './payment-alloc-group-detail.component.html',
-  styleUrls: ['./payment-alloc-group-detail.component.scss']
+  templateUrl: './payment-alloc-group-detail.component.html'
 })
 export class PaymentAllocGroupDetailComponent implements OnInit {
   RefPaymentAllocGrpId: string = ""

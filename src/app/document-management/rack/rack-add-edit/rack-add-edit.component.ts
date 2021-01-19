@@ -9,8 +9,7 @@ import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-rack-add-edit',
-  templateUrl: './rack-add-edit.component.html',
-  styleUrls: ['./rack-add-edit.component.scss']
+  templateUrl: './rack-add-edit.component.html'
 })
 export class RackAddEditComponent implements OnInit {
   RackCode: string;

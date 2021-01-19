@@ -10,8 +10,7 @@ import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-filing-add-edit',
-  templateUrl: './filing-add-edit.component.html',
-  styleUrls: ['./filing-add-edit.component.scss']
+  templateUrl: './filing-add-edit.component.html'
 })
 export class FilingAddEditComponent implements OnInit {
   Cabinet: CabinetWithListRackObj = new CabinetWithListRackObj();

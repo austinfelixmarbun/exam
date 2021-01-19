@@ -5,8 +5,7 @@ import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-coa-paging',
-  templateUrl: './coa-paging.component.html',
-  styleUrls: ['./coa-paging.component.scss']
+  templateUrl: './coa-paging.component.html'
 })
 export class CoaPagingComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();
