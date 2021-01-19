@@ -69,7 +69,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 myObj = request.body;
             }
             myObj["RequestDateTime"] = businessDt;
-            token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
+            token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN); 
         }
 
         if (token == null) {

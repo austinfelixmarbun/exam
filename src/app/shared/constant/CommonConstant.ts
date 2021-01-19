@@ -15,6 +15,7 @@ export class CommonConstant {
     public static MENU = "Menu"
     public static ReturnObj = 'ReturnObject';
     public static ENVIRONMENT_MODULE = 'EnvironmentModule';
+    public static OFFICE_CODE = 'OfficeCode';
 
     //APPROVAL TASK MAPPER - TRX TYPE
     public static ApvTrxTypeProductHO = "PROD_HO_APV";
