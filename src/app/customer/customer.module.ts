@@ -113,6 +113,8 @@ import { UpdateCustomerMgmntShareholderComponent } from './customer-update-maste
 import { UpdateCustomerContactInfoComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-contact-info/update-customer-contact-info.component';
 import { UpdateCustomerCompanyFinDataComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-company-fin-data/update-customer-company-fin-data.component';
 import { UpdateCustomerCompanyLegalDocComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-company-legal-doc/update-customer-company-legal-doc.component';
+import { SharedModule } from 'app/shared/shared.module';
+import { DmsIframeComponent } from 'app/shared/dms-iframe/dms-iframe.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -137,6 +139,7 @@ export const customCurrencyMaskConfig = {
     NgbModule, 
     UcpagingModule,
     SharingComponentModule,
+    SharedModule,
     UCSearchModule,
     UcgridfooterModule,
     UcpagingModule,
