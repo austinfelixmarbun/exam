@@ -25,8 +25,8 @@ export class CustAssetDetailComponent implements OnInit {
     CustId: [0],
     MrCustAssetTypeId: ['', [Validators.required]],
     AssetDescr: [''],
-    AssetValue: [0],
-    AssetQty: [0],
+    AssetValue: [0, [Validators.required, Validators.min(1)]],
+    AssetQty: [0, [Validators.required, Validators.min(1)]],
     AssetTotalValue: [0],
     RowVersion: ['']
   });
