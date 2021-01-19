@@ -6,11 +6,11 @@
 export const environment = {
     production: true,
     navbarColor: 'lime',
-    LosURL : 'http://R3STWEBFE.ad-ins.com/LOS_FE/',
-    WebSocketURL : 'http://R3STWEBBE.ad-ins.com/FOUNDATION_BE',
-    FoundationR3Url: 'http://R3STWEBBE.ad-ins.com/FOUNDATION_BE',
-    ApprovalURL : 'http://r3stengine.ad-ins.com/approval',
-    FoundationR3Web:'http://R3STWEBFE.ad-ins.com/FOUNDATION_FE',
+    LosURL : 'https://R3STWEBFE.ad-ins.com/LOS_FE/',
+    WebSocketURL : 'https://R3STWEBBE.ad-ins.com/FOUNDATION_BE',
+    FoundationR3Url: 'https://R3STWEBBE.ad-ins.com/FOUNDATION_BE',
+    ApprovalURL : 'https://r3stengine.ad-ins.com/approval',
+    FoundationR3Web:'https://R3STWEBFE.ad-ins.com/FOUNDATION_FE',
     Module:"FOU",
     ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
     ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
