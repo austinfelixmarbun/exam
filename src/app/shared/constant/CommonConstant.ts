@@ -10,12 +10,12 @@ export class CommonConstant {
     public static CURRENT_USER_CONTEXT = "currentUserContext"
     public static PAGE_ACCESS = "PageAccess";
     public static TOKEN = "access_token";
-    public static LOCAL_IP = "LocalIp";
     public static VERSION = "Version";
     public static LAST_ACCESS_TIME = "LastAccessTime";
     public static MENU = "Menu"
     public static ReturnObj = 'ReturnObject';
     public static ENVIRONMENT_MODULE = 'EnvironmentModule';
+    public static OFFICE_CODE = 'OfficeCode';
 
     //APPROVAL TASK MAPPER - TRX TYPE
     public static ApvTrxTypeProductHO = "PROD_HO_APV";
@@ -243,4 +243,18 @@ export class CommonConstant {
     public static DmsViewCodeAgr = "ConfinsAgr";
     public static DmsViewCodeMou = "ConfinsMou";
     public static DmsViewCodeLead = "ConfinsLead";
+    
+    //Approval
+    public static SCHM_CODE_APV_HO_ACT_SCHM = "APV_HO_ACT_SCHM";
+    public static SCHM_CODE_APV_HO_DEACT_SCHM = "APV_HO_DEACT_SCHM";
+    public static SCHM_CODE_APV_OFR_ACT_SCHM = "APV_OFR_ACT_SCHM";
+    public static SCHM_CODE_APV_OFR_DEACT_SCHM = "APV_OFR_DEACT_SCHM";
+    public static CAT_CODE_PRD_HO_APV = "PRD_HO_APV";
+    public static CAT_CODE_PRD_HO_DEACT_APV = "PRD_HO_DEACT_APV";
+    public static CAT_CODE_PRD_OFR_APV = "PRD_OFR_APV";
+    public static CAT_CODE_PRD_OFR_DEACT_APV = "PRD_OFR_DEACT_APV";
+    public static PRD_HO_APV_TYPE = "PROD_HO_APV_TYPE";
+    public static PRD_HO_DEACT_APV_TYPE = "PROD_HO_DEACT_APV_TYPE";
+    public static PRD_OFR_APV_TYPE = "PROD_OFR_APV_TYPE";
+    public static PRD_OFR_DEACT_APV_TYPE = "PROD_OFR_DEACT_APV_TYPE";    
 }
