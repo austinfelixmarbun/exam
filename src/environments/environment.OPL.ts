@@ -6,8 +6,6 @@
 export const environment = {
     production: true,
     navbarColor: 'transparent',
-    // losUrl: 'http://localhost:5001',
-    // FoundationR3Url: 'http://localhost:5000',
     LosURL: 'http://r3impl-appsvr.ad-ins.com/ROS_BE',
     FoundationR3Url: 'http://r3impl-appsvr.ad-ins.com/FOUNDATION_OPL',
     ApprovalURL: 'http://r3impl-appsvr.ad-ins.com/APPROVAL_OPL',
@@ -16,7 +14,7 @@ export const environment = {
     WorkflowR3Url: 'http://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL',
     WebSocketURL: 'http://r3impl-appsvr.ad-ins.com/FOUNDATION_R3',
     DashboardURL: 'http://r3impl-appsvr.ad-ins.com/Dashboard',
-    Module:"LOS",
+    Module:"FOU",
     ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
     ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 k
     DMSUrl : "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
