@@ -60,4 +60,12 @@ export class VendorService {
     GetListVendorBankAccByVendorEmpId(Obj: any): Observable<Object> {
         return this.http.post(URLConstant.GetListVendorBankAccByVendorEmpId, Obj);
     }
+
+    GetAuctionCompanyByVendorIdForEdit(Obj: any): Observable<Object> {
+        return this.http.post(URLConstant.GetVendorByIdForEdit, Obj);
+    }
+
+    EditAuctionCompany(Obj: any): Observable<Object> {
+        return this.http.post(URLConstant.EditAuctionCompany, Obj);
+    }
 }
