@@ -297,6 +297,11 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   //START URS-LOS-041
+
+  onOptionsSelected(event){  
+    this.setValidatorPattern();
+  }
+
   controlNameIdNo: any = 'IdNo';
   controlNameIdType: any = 'MrIdTypeCode';
   customPattern: Array<CustomPatternObj>;

@@ -584,6 +584,10 @@ export class VendorBranchAddEditComponent implements OnInit {
     );
   }
 
+  onOptionsSelected(event){  
+    this.setValidatorPattern();
+  }
+
   setLookup() {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
