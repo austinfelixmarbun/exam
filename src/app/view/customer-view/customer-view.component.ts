@@ -106,14 +106,19 @@ export class CustomerViewComponent implements OnInit {
           AdInsHelper.RedirectUrl(this.router,["/View/Customer/PersonalFinancialData"],{ "CustId": this.CustId });
         });
       }
+      // else if (ev == 6) {
+      //   this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+      //     AdInsHelper.RedirectUrl(this.router,["/View/Customer/CoyOther"],{ "CustId": this.CustId });
+      //   });
+      // }
+      // else if (ev == 7) {
+      //   this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+      //     AdInsHelper.RedirectUrl(this.router,["/View/Customer/PersonalAppListing"],{ "CustId": this.CustId });
+      //   });
+      // }
       else if (ev == 6) {
         this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,["/View/Customer/CoyOther"],{ "CustId": this.CustId });
-        });
-      }
-      else if (ev == 7) {
-        this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,["/View/Customer/PersonalAppListing"],{ "CustId": this.CustId });
+          AdInsHelper.RedirectUrl(this.router,["/View/Customer/CustDocument"],{ "CustId": this.CustId });
         });
       }
     }
@@ -153,9 +158,14 @@ export class CustomerViewComponent implements OnInit {
           AdInsHelper.RedirectUrl(this.router,["/View/Customer/CoyLegal"],{ "CustId": this.CustId });
         });
       }
+      // else if (ev == 7) {
+      //   this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+      //     AdInsHelper.RedirectUrl(this.router,["/View/Customer/CoyOther"],{ "CustId": this.CustId });
+      //   });
+      // }
       else if (ev == 7) {
         this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,["/View/Customer/CoyOther"],{ "CustId": this.CustId });
+          AdInsHelper.RedirectUrl(this.router,["/View/Customer/CustDocument"],{ "CustId": this.CustId });
         });
       }
     }

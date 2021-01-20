@@ -39,6 +39,16 @@ import { ScoreCategoryTypeComponent } from './score-category/score-category-type
 import { ScoreCategoryScoringComponent } from './score-category/score-category-scoring/score-category-scoring.component';
 import { ReasonComponent } from './reason/reason-paging/reason.component';
 import { ReasonAddEditComponent } from './reason/reason-add-edit/reason-add-edit.component';
+import { PaymentAllocPagingComponent } from './payment-alloc/payment-alloc-paging/payment-alloc-paging.component';
+import { PaymentAllocDetailComponent } from './payment-alloc/payment-alloc-detail/payment-alloc-detail.component';
+import { PaymentAllocGroupPagingComponent } from './payment-alloc-group/payment-alloc-group-paging/payment-alloc-group-paging.component';
+import { PaymentAllocGroupDetailComponent } from './payment-alloc-group/payment-alloc-group-detail/payment-alloc-group-detail.component';
+import { CoaPagingComponent } from './coa/coa-paging/coa-paging.component';
+import { CoaDetailComponent } from './coa/coa-detail/coa-detail.component';
+import { CoaEditDetailComponent } from './coa/coa-edit-detail/coa-edit-detail.component';
+import { CoaSchemePagingComponent } from './coa-scheme/coa-scheme-paging/coa-scheme-paging.component';
+import { CoaSchemeDetailComponent } from './coa-scheme/coa-scheme-detail/coa-scheme-detail.component';
+import { CoaSchemeViewComponent } from './coa-scheme/coa-scheme-view/coa-scheme-view.component';
 
 const routes: Routes = [
   {
@@ -324,6 +334,85 @@ const routes: Routes = [
           title: 'Reason Paging'
         },
       },
+      
+      // PAYMENT ALLOCATION
+      {
+        path: 'paymentalloc/paging',
+        component: PaymentAllocPagingComponent,
+        data: {
+          title: 'Payment Allocation'
+        },
+      },
+      {
+        path: 'paymentalloc/detail',
+        component: PaymentAllocDetailComponent,
+        data: {
+          title: 'Payment Allocation'
+        },
+      },
+
+      // PAYMENT ALLOCATION GROUP
+      {
+        path: 'paymentallocgrp/paging',
+        component: PaymentAllocGroupPagingComponent,
+        data: {
+          title: 'Payment Allocation Group'
+        },
+      },
+      {
+        path: 'paymentallocgrp/detail',
+        component: PaymentAllocGroupDetailComponent,
+        data: {
+          title: 'Payment Allocation Group'
+        },
+      },
+
+      // COA
+      {
+        path: 'coa/paging',
+        component: CoaPagingComponent,
+        data: {
+          title: 'COA'
+        },
+      },
+      {
+        path: 'coa/detail',
+        component: CoaDetailComponent,
+        data: {
+          title: 'COA'
+        },
+      },
+      {
+        path: 'coa/detail/edit',
+        component: CoaEditDetailComponent,
+        data: {
+          title: 'COA'
+        },
+      },
+      
+      //COA Scheme
+      {
+        path: 'coascheme/paging',
+        component: CoaSchemePagingComponent,
+        data: {
+          title: 'COA Scheme'
+        },
+      },
+      {
+        path: 'coascheme/detail',
+        component: CoaSchemeDetailComponent,
+        data: {
+          title: 'COA Scheme'
+        },
+      },
+      {
+        path: 'coascheme/view',
+        component: CoaSchemeViewComponent,
+        data: {
+          title: 'COA Scheme'
+        },
+      }
+      
     ]
   }
 ];

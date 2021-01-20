@@ -17,13 +17,10 @@ import { VendorGroupmemberComponent } from './vendor-groupmember/vendor-groupmem
 import { ContactPersonAddEditComponent } from './component/contact-person-add-edit/contact-person-add-edit.component';
 import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
 import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registration/vendor-ho-registration.component';
-import { BankInfoComponent } from './component/bank-info/bank-info.component';
 import { ContactPersonListComponent } from './component/contact-person-list/contact-person-list.component';
-import { AddressComponent } from './component/address/address.component';
 import { VendorHoInfoComponent } from './vendor-ho/vendor-ho-info/vendor-ho-info.component';
 import { VendorBranchEmployeePagingComponent } from './vendor-branch/vendor-branch-employee-paging/vendor-branch-employee-paging.component';
 import { VendorBranchEmployeeAddEditComponent } from './vendor-branch/vendor-branch-employee-add-edit/vendor-branch-employee-add-edit.component';
-import { VendorEmployeeComponent } from './component/vendor-employee/vendor-employee.component';
 import { VendorHoldingRegistrationComponent } from './vendor-holding-registration/vendor-holding-registration.component';
 import { VendorBranchRegistrationComponent } from './vendor-branch/vendor-branch-registration/vendor-branch-registration.component';
 import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch-office-member/vendor-branch-office-member.component';
@@ -32,6 +29,8 @@ import { VendorBranchViewComponent } from './vendor-branch/vendor-branch-view/ve
 import { VendorPagingComponent } from './component/vendor/vendor-paging/vendor-paging.component';
 import { VendorATPMAddEditComponent } from './vendor-ATPM/vendor-atpm-add-edit/vendor-atpm-add-edit.component';
 import { VendorATPMRegistrationComponent } from './vendor-ATPM/vendor-atpm-registration/vendor-atpm-registration.component';
+import { AuctionCompanyPagingComponent } from './auction-company/auction-company-paging/auction-company-paging.component';
+import { AuctionCompanyAddeditComponent } from './auction-company/auction-company-addedit/auction-company-addedit.component';
 
 const routes: Routes = [
   {
@@ -248,6 +247,22 @@ const routes: Routes = [
           title: 'Vendor ATPM Registration'
         },
       },
+      
+      // Auction Company
+      {
+        path: 'auctioncompany/paging',
+        component: AuctionCompanyPagingComponent,
+        data: {
+          title: 'Auction Company Paging'
+        },
+      },
+      {
+        path: 'auctioncompany/addedit',
+        component: AuctionCompanyAddeditComponent,
+        data: {
+          title: 'Auction Company Addedit'
+        },
+      }
     ]
 
   }

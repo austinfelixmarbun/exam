@@ -10,7 +10,7 @@ import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model'
 import { WizardComponent } from 'angular-archwizard';
 import { ListRefProductOfferingDetailObj } from 'app/shared/model/ListRefProductOfferingDetailObj.Model';
 import { RefProductOfferingDetailObj } from 'app/shared/model/RefProductOfferingDetailObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';

@@ -61,6 +61,8 @@ import { VendorPagingComponent } from './component/vendor/vendor-paging/vendor-p
 import { VendorATPMAddEditComponent } from './vendor-ATPM/vendor-atpm-add-edit/vendor-atpm-add-edit.component';
 import { VendorATPMRegistrationComponent } from './vendor-ATPM/vendor-atpm-registration/vendor-atpm-registration.component';
 import { NgxCurrencyModule } from 'ngx-currency';
+import { AuctionCompanyPagingComponent } from './auction-company/auction-company-paging/auction-company-paging.component';
+import { AuctionCompanyAddeditComponent } from './auction-company/auction-company-addedit/auction-company-addedit.component';
 
 
 export const customCurrencyMaskConfig = {     
@@ -140,7 +142,9 @@ export const customCurrencyMaskConfig = {
     HoBranchInfoComponent,
     VendorPagingComponent,
     VendorATPMAddEditComponent,
-    VendorATPMRegistrationComponent
+    VendorATPMRegistrationComponent,
+    AuctionCompanyPagingComponent,
+    AuctionCompanyAddeditComponent
   ],
   entryComponents : [UcviewgenericComponent],
   providers: [

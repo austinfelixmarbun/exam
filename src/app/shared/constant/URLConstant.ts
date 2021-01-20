@@ -944,4 +944,33 @@ export class URLConstant {
     public static GetCanChangeMinFinalLevel = "/Approval/GetCanChangeMinFinalLevel";
     public static GetTaskHistory = "/Approval/GetTaskHistory";
     
+    // Payment Allocation
+    public static GetRefPaymentAllocByID = environment.FoundationR3Url + "/RefPaymentAlloc/GetRefPaymentAllocById";
+    public static SubmitRefPaymentAlloc = environment.FoundationR3Url + "/RefPaymentAlloc/SubmitRefPaymentAlloc";
+
+    // REF PAYMENT ALLOC GRP
+    public static GetRefPaymentAllocGrpByRefPaymentAllocGrpIdForUpdate = environment.FoundationR3Url + "/RefPaymentAllocGrp/GetRefPaymentAllocGrpByRefPaymentAllocGrpIdForUpdate";
+    public static AddRefPaymentAllocGrp = environment.FoundationR3Url + "/RefPaymentAllocGrp/AddRefPaymentAllocGrp";
+    public static EditRefPaymentAllocGrp = environment.FoundationR3Url + "/RefPaymentAllocGrp/EditRefPaymentAllocGrp";
+    
+    // COA
+    public static GetRefCoaByRefCoaId = environment.FoundationR3Url + "/Coa/GetRefCoaByRefCoaId";
+    public static SubmitCoa = environment.FoundationR3Url + "/Coa/SubmitCoa";
+
+    // COA Scheme
+    public static GetCoaSchmByCoaSchmId = environment.FoundationR3Url + "/CoaSchm/GetCoaSchmByCoaSchmId";
+    public static SubmitCoaSchm = environment.FoundationR3Url + "/CoaSchm/SubmitCoaSchm";
+
+    // View Cabinet, Rack, FIling
+    public static GetListRackByCabinetCode = environment.FoundationR3Url + "/ViewDocument/GetListRackByCabinetCode";
+    public static GetCabinetByCabinetCode = environment.FoundationR3Url + "/ViewDocument/GetCabinetByCabinetCode";
+
+    public static GetListFilingByRackCode = environment.FoundationR3Url + "/ViewDocument/GetListFilingByRackCode";
+    public static GetRackByRackCode = environment.FoundationR3Url + "/ViewDocument/GetRackByRackCode";
+
+    //Auction Company
+    public static AddAuctionCompany = environment.FoundationR3Url + "/AuctionCompany/AddAuctionCompany";
+    public static EditAuctionCompany = environment.FoundationR3Url + "/AuctionCompany/EditAuctionCompany";
+    public static GetVendorByIdForEdit = environment.FoundationR3Url + "/AuctionCompany/GetVendorByIdForEdit";
+
 }

@@ -6,7 +6,7 @@
 export const environment = {
   production: true,
   navbarColor: 'lightgray',
-  LosURL : 'http://r3web.ad-ins.com/LOS_DEMO/',
+  LosURL: 'http://r3web.ad-ins.com/LOS_DEMO/',
   FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_DEMO',
   WebSocketURL : 'http://r3app-server.ad-ins.com/FOUNDATION_DEMO',
   Module:"FOU",
@@ -14,6 +14,7 @@ export const environment = {
   FoundationR3Web:'http://r3web.ad-ins.com/FOUNDATION_DEMO',
   ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
   ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
+  DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
 };
 
 
