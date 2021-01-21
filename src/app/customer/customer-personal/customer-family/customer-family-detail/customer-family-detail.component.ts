@@ -8,7 +8,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { DatePipe } from '@angular/common';
@@ -23,6 +23,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NullViewportScroller } from '@angular/common/src/viewport_scroller';
 import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 import { RegexService } from 'app/customer/regex.service';
+import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-family-detail',
@@ -76,7 +78,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
   IsAffiliateWithMf: string;
   MrMaritalStatCode: string;
   getListActiveRefMasterUrl: string;
-  GetListActiveRefMasterWithReserveFieldAllUrl: string;
+  GetListActiveRefMasterWithMappingCodeAllUrl: string;
   tempMrMaritalStatCode: Array<KeyValueObj> = new Array<KeyValueObj>();
 
   CustomerFamilyForm = this.fb.group({
@@ -102,10 +104,10 @@ export class CustomerFamilyDetailComponent implements OnInit {
     RowVersionCustPersonal: ['']
   });
 
-  constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
+  constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.isExistingCust = false;
     this.isEditCustFamily = false;
     this.ResponseSaveFamily = new EventEmitter<any>();
@@ -118,9 +120,9 @@ export class CustomerFamilyDetailComponent implements OnInit {
     this.inputAddressObj = new InputAddressObj();
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.customPattern = new Array<CustomPatternObj>();
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);

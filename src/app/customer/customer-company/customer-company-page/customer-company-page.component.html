@@ -85,6 +85,14 @@
               </button>
             </div>
             <div class="line"></div>
+            <div class="step" data-target="#upload-tab">
+              <button type="button" class="step-trigger" role="tab" aria-controls="upload-tab" id="upload-tab-trigger"
+                (click)="EnterTab('UploadData')">
+                <span class="bs-stepper-circle">8</span>
+                <span class="bs-stepper-label">Upload Document</span>
+              </button>
+            </div>
+            <div class="line"></div>
             <div class="step" data-target="#cust-attr-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="cust-attr-tab" id="cust-attr-tab-trigger"
                 (click)="EnterTab('CustAttr')">
@@ -129,6 +137,9 @@
           <div id="legal-tab" class="content" role="tabpanel" aria-labelledby="legal-tab-trigger">
             <app-cust-legal-doc *ngIf="CustStepIndex == 8" (outputTab)="getValue($event)">
             </app-cust-legal-doc>
+          </div>
+          <div id="upload-tab" class="content" role="tabpanel" aria-labelledby="upload-tab-trigger">
+            <app-dms-iframe  *ngIf="CustStepIndex == 8" [dmsObj]="dmsObj" [showButton]="true" (outputTab)="getValue($event)" (outputCancel)="getValue($event)"></app-dms-iframe>
           </div>
           <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
             <app-cust-attr-section *ngIf="CustStepIndex == 9" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'"></app-cust-attr-section>

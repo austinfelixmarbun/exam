@@ -6,7 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { formatDate } from '@angular/common';
@@ -20,6 +20,7 @@ import { VendorAtpmSelectComponent } from 'app/vendor/vendor-ATPM/vendor-atpm-se
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { VendorAtpmMappingObj } from "app/shared/model/VendorAtpmMappingObj.Model";
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-vendor-ho-add-edit',
@@ -54,7 +55,7 @@ export class VendorHoAddEditComponent implements OnInit {
   vendorAttrRequest = new Array<VendorAttrContentObj>();
   vendorAtpmList = new Array();
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private modalService: NgbModal,private spinner: NgxSpinnerService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal,private spinner: NgxSpinnerService) {
     this.route.queryParams.subscribe(params => {
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
       this.VendorId = params['VendorId'];
@@ -100,7 +101,7 @@ export class VendorHoAddEditComponent implements OnInit {
 
   ngOnInit() {
     console.log("aaa")
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     this.VendorForm.controls.VendorRating.disable();
     this.VendorForm.controls.MrVendorCategoryCode.disable();
@@ -323,7 +324,7 @@ export class VendorHoAddEditComponent implements OnInit {
   setDropdown() {
     var refMasterCategoryObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCategory,
-      ReserveField1: CommonConstant.HeadOffice
+      MasterCode: CommonConstant.HeadOffice
     }
     this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).subscribe(
       (response) => {
@@ -362,9 +363,9 @@ export class VendorHoAddEditComponent implements OnInit {
 
           var refMasterIdObj = {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-            ReserveField1: this.RsvField,
+            MappingCode: this.RsvField,
           }
-          this.http.post(URLConstant.GetListActiveRefMasterWithReserveFieldAll, refMasterIdObj).subscribe(
+          this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -465,9 +466,9 @@ export class VendorHoAddEditComponent implements OnInit {
 
       var refMasterIdObj = {
         RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-        ReserveField1: this.RsvField,
+        MappingCode: this.RsvField,
       }
-      this.http.post(URLConstant.GetListActiveRefMasterWithReserveFieldAll, refMasterIdObj).subscribe(
+      this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
         (response) => {
           this.itemIdType = response[CommonConstant.ReturnObj];
           if (this.itemIdType.length > 0) {

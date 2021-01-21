@@ -33,8 +33,8 @@ export class VendorService {
         return this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, Obj);
     }
 
-    GetListActiveRefMasterWithReserveFieldAll(Obj: any): Observable<Object> {
-        return this.http.post(URLConstant.GetListActiveRefMasterWithReserveFieldAll, Obj);
+    GetListActiveRefMasterWithMappingCodeAll(Obj: any): Observable<Object> {
+        return this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, Obj);
     }
 
     GetVendorAndVendorAddrByVendorId(Obj: any): Observable<Object> {
@@ -59,5 +59,13 @@ export class VendorService {
 
     GetListVendorBankAccByVendorEmpId(Obj: any): Observable<Object> {
         return this.http.post(URLConstant.GetListVendorBankAccByVendorEmpId, Obj);
+    }
+
+    GetAuctionCompanyByVendorIdForEdit(Obj: any): Observable<Object> {
+        return this.http.post(URLConstant.GetVendorByIdForEdit, Obj);
+    }
+
+    EditAuctionCompany(Obj: any): Observable<Object> {
+        return this.http.post(URLConstant.EditAuctionCompany, Obj);
     }
 }

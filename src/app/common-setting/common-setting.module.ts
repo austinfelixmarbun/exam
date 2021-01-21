@@ -59,6 +59,17 @@ import { AppSourceAddEditComponent } from './app-source/app-source-add-edit/app-
 import { AppSourcePagingComponent } from './app-source/app-source-paging/app-source-paging.component';
 import { AppSourceOfficeMemberPagingComponent } from './app-source/app-source-office-member/app-source-office-member-paging/app-source-office-member-paging.component';
 import { AppSourceOfficeMemberAddComponent } from './app-source/app-source-office-member/app-source-office-member-add/app-source-office-member-add.component';
+import { PaymentAllocPagingComponent } from './payment-alloc/payment-alloc-paging/payment-alloc-paging.component';
+import { PaymentAllocDetailComponent } from './payment-alloc/payment-alloc-detail/payment-alloc-detail.component';
+import { PaymentAllocGroupPagingComponent } from './payment-alloc-group/payment-alloc-group-paging/payment-alloc-group-paging.component';
+import { PaymentAllocGroupDetailComponent } from './payment-alloc-group/payment-alloc-group-detail/payment-alloc-group-detail.component';
+import { CoaPagingComponent } from './coa/coa-paging/coa-paging.component';
+import { CoaDetailComponent } from './coa/coa-detail/coa-detail.component';
+import { CoaEditDetailComponent } from './coa/coa-edit-detail/coa-edit-detail.component';
+import { CoaSchemePagingComponent } from './coa-scheme/coa-scheme-paging/coa-scheme-paging.component';
+import { CoaSchemeDetailComponent } from './coa-scheme/coa-scheme-detail/coa-scheme-detail.component';
+import { CoaSchemeViewComponent } from './coa-scheme/coa-scheme-view/coa-scheme-view.component';
+
 
 @NgModule({
   imports: [
@@ -124,6 +135,16 @@ import { AppSourceOfficeMemberAddComponent } from './app-source/app-source-offic
     AppSourcePagingComponent,
     AppSourceOfficeMemberPagingComponent,
     AppSourceOfficeMemberAddComponent
+    PaymentAllocPagingComponent,
+    PaymentAllocDetailComponent,
+    PaymentAllocGroupPagingComponent,
+    PaymentAllocGroupDetailComponent,
+    CoaPagingComponent,
+    CoaDetailComponent,
+    CoaEditDetailComponent,
+    CoaSchemePagingComponent,
+    CoaSchemeDetailComponent,
+    CoaSchemeViewComponent
   ],
   providers: [
     NGXToastrService

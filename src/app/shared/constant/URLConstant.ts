@@ -1,4 +1,4 @@
-import { environment } from "environments/environment";
+import { environment } from "environments/environment"; 
 
 export class URLConstant {
 
@@ -231,7 +231,7 @@ export class URLConstant {
     public static GetListActiveRefMaster = environment.FoundationR3Url + "/RefMaster/GetListKeyValueActiveByCode";
     public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByMasterCode";
     public static GetRefMasterTypeOfficeWithoutCG = environment.FoundationR3Url + "/RefMaster/GetListKeyValueOfficeTypeWithoutCg";
-    public static GetListActiveRefMasterWithReserveFieldAll = environment.FoundationR3Url + "/RefMaster/GetListActiveRefMasterWithReserveFieldAll";
+    public static GetListActiveRefMasterWithMappingCodeAll = environment.FoundationR3Url + "/RefMaster/GetListActiveRefMasterWithMappingCodeAll";
     public static GetListActiveRefMasterByRefMasterTypeCode = environment.FoundationR3Url + "/RefMaster/GetListActiveRefMasterByRefMasterTypeCode";
     public static GetRefMasterByRefMasterTypeCodeAndMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByRefMasterTypeCodeAndMasterCode"
     public static GetRefMasterByRefMasterTypeCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByRefMasterTypeCode"
@@ -435,6 +435,7 @@ export class URLConstant {
     public static AddProduct = environment.FoundationR3Url + "/Product/AddProduct"
     public static EditProduct = environment.FoundationR3Url + "/Product/EditProduct"
     public static RequestDeactivation = environment.FoundationR3Url + "/Product/RequestDeactivation"
+    public static RequestDeactivationNew = environment.FoundationR3Url + "/Product/RequestDeactivationNew"
     public static GetListProdBranchOfficeMbrByProdHId = environment.FoundationR3Url + "/Product/GetListProdBranchOfficeMbrByProdHId"
     public static GetListProdHByProdCurrentProdHId = environment.FoundationR3Url + "/Product/GetListProdHByProdCurrentProdHId";
     public static AddProductOfficeMbrBatch = environment.FoundationR3Url + "/Product/AddProductOfficeMbrBatch";
@@ -445,7 +446,9 @@ export class URLConstant {
     public static DownloadProductRule = environment.FoundationR3Url + "/Product/DownloadProductRule";
     public static UpdateProductPostApv = environment.FoundationR3Url + "/Product/UpdateProductPostApv";
     public static ReviewProduct = environment.FoundationR3Url + "/Product/ReviewProduct";
-
+    public static ReviewProductNew = environment.FoundationR3Url + "/Product/ReviewProductNew";
+    public static GetProductById = environment.FoundationR3Url + "/Product/GetProductById";
+    public static GetProductByHId = environment.FoundationR3Url + "/Product/GetProductByHId";
     
     //PRODUCT OFFERING
     public static GetProductOfferingMainInfo = environment.FoundationR3Url + "/ProductOffering/GetProductOfferingMainInfo";
@@ -460,10 +463,13 @@ export class URLConstant {
     public static GetListProdOfferingHByProdOfferingCurrentProdHId = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingHByProdOfferingCurrentProdHId"
     public static GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingDByProdOfferingHIdAndProdCompntGrpCode"
     public static RequestOfferingDeactivation = environment.FoundationR3Url + "/ProductOffering/RequestProdOfferingDeactivationProdOffering"
+    public static RequestOfferingDeactivationNew = environment.FoundationR3Url + "/ProductOffering/RequestProdOfferingDeactivationNew"
     public static GetListProdOfferingBranchOfficeMbrByProdHIdAndApp = environment.FoundationR3Url + "/ProductOffering/GetListProdOfferingBranchOfficeMbrByProdHIdAndApp"
     public static CopyProductOffering = environment.FoundationR3Url + "/ProductOffering/CopyProductOffering";
     public static UpdateProdOfferingPostApv = environment.FoundationR3Url + "/ProductOffering/UpdateProdOfferingPostApv";
     public static ReviewProdOffering = environment.FoundationR3Url + "/ProductOffering/ReviewProdOffering";
+    public static ReviewProdOfferingNew = environment.FoundationR3Url + "/ProductOffering/ReviewProdOfferingNew";
+    public static GetProdOfferingByProdOfferingId = environment.FoundationR3Url + "/ProductOffering/GetProdOfferingByProdOfferingId"
 
     // PRODUCT COMPONENT
     public static GetProductHOComponent = environment.FoundationR3Url + "/ProductComponent/GetProductHOComponent";
@@ -946,5 +952,51 @@ export class URLConstant {
     // List Approver
     public static GetApprovedBy = environment.ApprovalURL + "/api/RFAWeb/GetApprovedBy/";
     public static GetRecommendations = environment.ApprovalURL + "/api/RFAWeb/GetRecommendations/";
+     
+    // New Approval R3
+    public static CreateNewRFA = "/Approval/CreateNewRFA";
+    public static CreateJumpRFA = "/Approval/CreateJumpRFA";
+    public static GetRefSingleCategoryByCategoryCode = "/Approval/GetRefSingleCategoryByCategoryCode";
+    public static GetSchemesBySchemeCode = "/Approval/GetSchemesBySchemeCode";
+    public static GetRefAdtQuestion = "/Approval/GetRefAdtQuestion";
+    public static GetPossibleMemberAndAttributeExType = "/Approval/GetPossibleMemberAndAttributeExType";
+    public static GetApprovalReturnHistory = "/Approval/GetApprovalReturnHistory";
+    public static GetSchemesByCategoryId = "/Approval/GetSchemesByCategoryId";
+    public static SubmitApproval = "/Approval/SubmitApproval";
+    public static GetLevelVoting = "/Approval/GetLevelVoting";
+    public static GetPossibleResult = "/Approval/GetPossibleResult";
+    public static GetNextNodeMember = "/Approval/GetNextNodeMember";
+    public static GetRefReasonActive = "/Approval/GetRefReasonActive";
+    public static GetCanChangeMinFinalLevel = "/Approval/GetCanChangeMinFinalLevel";
+    public static GetTaskHistory = "/Approval/GetTaskHistory";
     
+    // Payment Allocation
+    public static GetRefPaymentAllocByID = environment.FoundationR3Url + "/RefPaymentAlloc/GetRefPaymentAllocById";
+    public static SubmitRefPaymentAlloc = environment.FoundationR3Url + "/RefPaymentAlloc/SubmitRefPaymentAlloc";
+
+    // REF PAYMENT ALLOC GRP
+    public static GetRefPaymentAllocGrpByRefPaymentAllocGrpIdForUpdate = environment.FoundationR3Url + "/RefPaymentAllocGrp/GetRefPaymentAllocGrpByRefPaymentAllocGrpIdForUpdate";
+    public static AddRefPaymentAllocGrp = environment.FoundationR3Url + "/RefPaymentAllocGrp/AddRefPaymentAllocGrp";
+    public static EditRefPaymentAllocGrp = environment.FoundationR3Url + "/RefPaymentAllocGrp/EditRefPaymentAllocGrp";
+    
+    // COA
+    public static GetRefCoaByRefCoaId = environment.FoundationR3Url + "/Coa/GetRefCoaByRefCoaId";
+    public static SubmitCoa = environment.FoundationR3Url + "/Coa/SubmitCoa";
+
+    // COA Scheme
+    public static GetCoaSchmByCoaSchmId = environment.FoundationR3Url + "/CoaSchm/GetCoaSchmByCoaSchmId";
+    public static SubmitCoaSchm = environment.FoundationR3Url + "/CoaSchm/SubmitCoaSchm";
+
+    // View Cabinet, Rack, FIling
+    public static GetListRackByCabinetCode = environment.FoundationR3Url + "/ViewDocument/GetListRackByCabinetCode";
+    public static GetCabinetByCabinetCode = environment.FoundationR3Url + "/ViewDocument/GetCabinetByCabinetCode";
+
+    public static GetListFilingByRackCode = environment.FoundationR3Url + "/ViewDocument/GetListFilingByRackCode";
+    public static GetRackByRackCode = environment.FoundationR3Url + "/ViewDocument/GetRackByRackCode";
+
+    //Auction Company
+    public static AddAuctionCompany = environment.FoundationR3Url + "/AuctionCompany/AddAuctionCompany";
+    public static EditAuctionCompany = environment.FoundationR3Url + "/AuctionCompany/EditAuctionCompany";
+    public static GetVendorByIdForEdit = environment.FoundationR3Url + "/AuctionCompany/GetVendorByIdForEdit";
+
 }

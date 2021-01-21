@@ -1,15 +1,17 @@
 export class CustBankAccObj {
-    CustBankAccId: any;
-    CustId: any;
-    RefBankId: any;
-    BankBranch: any;
-    BankAccNo: any;
-    BankAccName: any;
-    IsBankStmnt: any;
-    BankBranchRegRptCode: any;
-    BalanceAmt: any;
-    IsDefault: any;
-    IsActive: any;
+    CustBankAccId: number;
+    CustId: number;
+    RefBankId: number;
+    BankBranch: string;
+    BankAccNo: string;
+    BankAccName: string;
+    IsBankStmnt: boolean;
+    BankBranchRegRptCode: string;
+    BalanceAmt: number;
+    IsDefault: boolean;
+    IsActive: boolean;
+    StartPeriod: string;
+    EndPeriod: string;
     RowVersion: any;
     BegBalanceAmt: any;
     constructor(){this.CustBankAccId = 0, this.RowVersion = ""}

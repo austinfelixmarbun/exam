@@ -82,6 +82,11 @@
                 id="CustAsset-tab-trigger" (click)="EnterTab('CustAsset')">
                 <span class="bs-stepper-circle">8</span>
                 <span class="bs-stepper-label">Customer Asset</span>
+            <div class="step" data-target="#upload-tab">
+              <button type="button" class="step-trigger" role="tab" aria-controls="upload-tab"
+                id="upload-tab-trigger" (click)="EnterTab('Upload')">
+                <span class="bs-stepper-circle">8</span>
+                <span class="bs-stepper-label">Upload Document</span>
               </button>
             </div>
             <div class="line"></div>
@@ -130,6 +135,11 @@
             </div>
             <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
               <app-cust-attr-section [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" *ngIf="CustStepIndex == 9">
+            <div id="upload-tab" class="content" role="tabpanel" aria-labelledby="upload-tab-trigger">
+              <app-dms-iframe  *ngIf="CustStepIndex == 8" [dmsObj]="dmsObj" [showButton]="true" (outputTab)="getValue($event)" (outputCancel)="getValue($event)"></app-dms-iframe>
+            </div>
+            <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
+              <app-cust-attr-section  [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" *ngIf="CustStepIndex == 10">
               </app-cust-attr-section>
             </div>
           </div>

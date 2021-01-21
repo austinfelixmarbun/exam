@@ -19,6 +19,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { environment } from 'environments/environment';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-edit-main-data-personal',
@@ -61,6 +62,7 @@ export class EditMainDataPersonalComponent implements OnInit {
   getCustPersonalByCustIdUrl: string;
   getCustByCustIdUrl: string;
   GetListActiveRefMasterWithReserveFieldAllUrl: string;
+  GetListActiveRefMasterWithMappingCodeAllUrl  :string;
   tempCustPersonalObj: CustPersonalObj;
   tempCustObj: any;
   CustId: number;
@@ -83,13 +85,13 @@ export class EditMainDataPersonalComponent implements OnInit {
   vendorCustBankObj: any;
   custBankAccObj: CustBankAccObj = new CustBankAccObj();
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService, private cookieService: CookieService) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = URLConstant.GetCustPersonalbyCustId;
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
     this.editCustUrl = URLConstant.EditCust;
-    this.editCustPersonalUrl = URLConstant.EditCustPersonal;
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.editCustPersonalUrl = URLConstant.EditCustPersonal; 
+    this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
@@ -102,8 +104,7 @@ export class EditMainDataPersonalComponent implements OnInit {
 
   async ngOnInit() {
     this.bindLookupSupplier();
-
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);

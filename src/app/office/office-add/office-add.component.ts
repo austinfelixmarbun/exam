@@ -10,7 +10,7 @@ import { OrgMdlObj } from 'app/shared/model/OrgMdlObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';

@@ -2,7 +2,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { environment } from "environments/environment";
-import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
+import { CriteriaObj } from "app/shared/model/CriteriaObj.Model";
 import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
 import { URLConstant } from "app/shared/constant/URLConstant";
 import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";

@@ -1,0 +1,112 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" id="horz-layout-colored-controls" translate>COA Scheme</h4>
+    </div>
+
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal" [formGroup]="CoaSchemeForm" (ngSubmit)="CoaSchemeForm.valid && Submit()"
+          #enjiForm="ngForm">
+          <div class="form-body">
+
+            <lib-ucSubsection [id]="'CoaSchemeInfoId'" [title]="'COA Scheme Information'" [panel]="'CoaSchemeInfo'">
+            </lib-ucSubsection>
+            <div id='CoaSchemeInfo'>
+
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Scheme Code</label>
+                <div class="col-md-3">
+                  <input type="text" class="form-control adInsInput" formControlName="SchemeCode">
+                  <lib-uc-show-errors [control]="CoaSchemeForm.controls.SchemeCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Scheme Name</label>
+                <div class="col-md-3">
+                  <input type="text" class="form-control adInsInput" formControlName="SchemeName">
+                  <lib-uc-show-errors [control]="CoaSchemeForm.controls.SchemeName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3  adins-label" translate>Is Active</label>
+                <div class="col-md-3">
+                  <input type="checkbox" class="border-primary" formControlName="IsActive">
+                </div>
+              </div>
+
+            </div>
+
+            <lib-ucSubsection [id]="'CoaSchemeDetailInfoId'" [title]="'COA Scheme Detail Information'"
+              [panel]="'CoaSchemeDetailInfo'">
+            </lib-ucSubsection>
+            <div id='CoaSchemeDetailInfo'>
+              <!-- 
+              <div class="form-group row">
+                <label class="col-md-3" translate>Copy</label>
+                <div class="col-md-3">
+                  <div class="input-group mb-0">
+                    <select class="form-control">
+                      <option value="">-Select One-</option>
+                      <option *ngFor="let item of ListCopy" [value]="item.Key">
+                        {{item.Value}}
+                      </option>
+                    </select>
+
+                    <div class="input-group-append">
+                      <span class="input-group-btn">
+                        <button class="btn btn-raised btn-primary" type="button" (click)="copy()">
+                          <i class="fa fa-check-square-o"></i>Copy
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-responsive-md text-center table-hover">
+                  <thead>
+                    <tr class="table-header">
+                      <th>
+                        <span class="thead-header" translate>No</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>Payment Allocation Name</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>COA</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of ListCOAScheme; let i = index">
+                      <td class="align-center">{{i+1}}</td>
+                      <td class="text-left">{{item.PaymentAllocName}}</td>
+                      <td class="align-center"><input type="text" [value]="CoaValue" class="form-control"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div> -->
+
+            </div>
+          </div>
+
+          <div class="form-actions right">
+            <button type="button" [routerLink]="['../paging']" class="btn btn-raised btn-warning mr-1" translate>
+              <i class="fa fa-arrow-circle-left"></i> Back
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary" translate>
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

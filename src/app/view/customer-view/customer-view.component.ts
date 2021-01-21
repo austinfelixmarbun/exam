@@ -118,9 +118,14 @@ export class CustomerViewComponent implements OnInit {
       //   });
       // }
 
-        else if (ev == 6) {
+      else if (ev == 7) {
         this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,["/View/Customer/HighligtComment"],{ "CustId": this.CustId });
+          AdInsHelper.RedirectUrl(this.router, ["/View/Customer/HighligtComment"], { "CustId": this.CustId });
+        });
+      }
+      else if (ev == 8) {
+        this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router, ["/View/Customer/CustDocument"], { "CustId": this.CustId });
         });
       }
     }
@@ -168,6 +173,11 @@ export class CustomerViewComponent implements OnInit {
       else if (ev == 7) {
         this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,["/View/Customer/HighligtComment"],{ "CustId": this.CustId });
+        });
+      }
+      else if (ev == 8) {
+        this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router,["/View/Customer/CustDocument"],{ "CustId": this.CustId });
         });
       }
     }

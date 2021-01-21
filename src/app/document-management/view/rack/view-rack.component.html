@@ -1,0 +1,54 @@
+<div class="col-md-12">
+  <div class="card">
+    
+    <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
+
+    <div class="card-body">
+      <div class="px-3">
+        <div class="form-body">
+          <!-- <lib-ucSubsection [id]="'RackDetail'" [title]="'Rack Detail'" [panel]="'RackDetailId'">
+          </lib-ucSubsection>
+          <div id="RackDetailId">
+            <label class="col-md-3">Rack Code</label>
+            <label class="col-md-3">{{responseRack.RackCode}}</label>
+            <label class="col-md-3">Rack Name</label>
+            <label class="col-md-3">{{responseRack.RackName}}</label>
+            <label class="col-md-3">Active</label>
+            <label class="col-md-3" *ngIf="responseRack.IsActive === true">Yes</label>
+            <label class="col-md-3" *ngIf="responseRack.IsActive === false">No</label>
+            <label class="col-md-3">Rack Information</label>
+            <label class="col-md-3">{{responseRack.RackInfo}}</label>
+          </div> -->
+          <lib-ucSubsection [id]="'FilingList'" [title]="'Filing List'" [panel]="'FilingListId'">
+          </lib-ucSubsection>
+          <div id="FilingListId">
+            <table class="table table-responsive-md text-center table-hover">
+              <thead>
+                <tr class="table-header">
+                  <th><span class="thead-header" name='filingCode' translate>FILING CODE</span> </th>
+                  <th><span class="thead-header" name='filingName' translate>FILING NAME</span> </th>
+                  <th><span class="thead-header" name='Active' translate>ACTIVE</span></th>
+                  <th><span class="thead-header" name='filingInfo' translate>FILING INFORMATION</span></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <ng-container *ngFor="let item of responseFiling">
+                  <tr>
+                    <td class="text-center">{{item.FilingCode}}</td>
+                    <td class="text-left">{{item.FilingName}}</td>
+                    <td class="align-center" *ngIf="item.IsActive === true">Yes</td>
+                    <td class="align-center" *ngIf="item.IsActive === false">No</td>
+                    <td class="text-left">{{item.FilingInfo}}</td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

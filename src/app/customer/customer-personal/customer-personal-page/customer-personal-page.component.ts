@@ -8,7 +8,10 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import Stepper from 'bs-stepper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-
+import { DMSObj } from 'app/shared/model/DMS/DMSObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { DMSLabelValueObj } from 'app/shared/model/DMS/DMSLabelValueObj.Model';
+import { CookieService } from 'ngx-cookie';
 @Component({
   selector: 'app-customer-personal-page',
   templateUrl: './customer-personal-page.component.html',
@@ -31,8 +34,9 @@ export class CustomerPersonalPageComponent implements OnInit {
   isFinancial: boolean;
   Page: string;
   From: string;
+  dmsObj: DMSObj;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) { 
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private cookieService: CookieService) { 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -57,7 +61,8 @@ export class CustomerPersonalPageComponent implements OnInit {
     "Financial": 7,
     "CustAsset": 8,
     "CustAttr": 9,
-    "Other": 10
+    "Upload": 10,
+    "Other": 11
   }
 
   back() {
@@ -68,11 +73,25 @@ export class CustomerPersonalPageComponent implements OnInit {
     }
   }
  
-  ngOnInit() {
+  async ngOnInit() {
     var custObj = { CustId: this.IdCust };
-    this.http.post(URLConstant.GetCustPersonalbyCustId, custObj).subscribe(
+    await this.http.post(URLConstant.GetCustPersonalbyCustId, custObj).toPromise().then(
       (response: any) => {
         this.CustPersonalId = response['CustPersonalId'];
+      }
+    );
+
+    await this.http.post(URLConstant.GetCustByCustId, custObj).toPromise().then(
+      (response: any) => {
+        let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+        this.dmsObj = new DMSObj();
+        this.dmsObj.User = currentUserContext.UserName;
+        this.dmsObj.Role = currentUserContext.RoleCode;
+        this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
+        this.dmsObj.MetadataParent = null;
+        this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, response["CustNo"]));
+        this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
+    
       }
     );
 
@@ -114,9 +133,11 @@ export class CustomerPersonalPageComponent implements OnInit {
     if (type == "CustAttr") {
       this.CustStepIndex = 9;
     }
-
-    if (type == "Other") {
+    if (type == "Upload") {
       this.CustStepIndex = 10;
+    }
+    if (type == "Other") {
+      this.CustStepIndex = 11;
     }
     this.stepper.to(this.CustStepIndex);
   }

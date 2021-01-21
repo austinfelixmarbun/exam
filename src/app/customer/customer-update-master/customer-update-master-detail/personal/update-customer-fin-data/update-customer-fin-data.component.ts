@@ -90,12 +90,24 @@ export class UpdateCustomerFinDataComponent implements OnInit {
         for (const item of this.MainCustBankAcc) {
           item["IsMasterData"] = true;
           item["IsMasterStmnt"] = true;
+          item["CustBankStmntList"].sort((a, b) => {
+            if(a["Year"] < b["Year"]) return -1;
+            if(a["Year"] > b["Year"]) return 1;
+            if(a["Month"] < b["Month"]) return -1;
+            if(a["Month"] > b["Month"]) return 1;
+          });
         }
         for (const item of this.AppCustBankAcc) {
           var isMasterData = false;
           var isMasterStmnt = false;
           var isAddedBankAcc = false;
           var isAddedBankStmnt = false;
+          item["CustBankStmntList"].sort((a, b) => {
+            if(a["Year"] < b["Year"]) return -1;
+            if(a["Year"] > b["Year"]) return 1;
+            if(a["Month"] < b["Month"]) return -1;
+            if(a["Month"] > b["Month"]) return 1;
+          });
           for (const main of this.MainCustBankAcc) {
             if(item["RefBankId"] == main["RefBankId"] &&
                 item["BankAccNo"] == main["BankAccNo"] && 
@@ -108,7 +120,8 @@ export class UpdateCustomerFinDataComponent implements OnInit {
                       if(key == "Month"){
                         item["CustBankStmntList"][i][key] = this.MonthNames[item["CustBankStmntList"][i][key]-1];
                         if(!isNaN(main["CustBankStmntList"][i][key]) && !isNaN(parseInt(main["CustBankStmntList"][i][key]))){
-                          main["CustBankStmntList"][i][key] = this.MonthNames[item["CustBankStmntList"][i][key]-1];
+                          var monthIdx = parseInt(main["CustBankStmntList"][i][key]) - 1;
+                          main["CustBankStmntList"][i][key] = this.MonthNames[monthIdx];
                         }
                       }
                       if(item["CustBankStmntList"][i][key] == main["CustBankStmntList"][i][key]){
@@ -216,6 +229,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     this.AppCustBankAcc[idx]["IsAddedBankAcc"] = true;
     this.AppCustBankAcc[idx]["IsAddedBankStmnt"] = true;
     var idxToDelete = 0;
+    var isDelete = false;
     for (var i = 0; i < this.MainCustBankAcc.length; i++) {
       if(this.MainCustBankAcc[i]["RefBankId"] == this.AppCustBankAcc[idx]["RefBankId"] &&
           this.MainCustBankAcc[i]["BankName"] == this.AppCustBankAcc[idx]["BankName"] &&
@@ -224,10 +238,17 @@ export class UpdateCustomerFinDataComponent implements OnInit {
           this.MainCustBankAcc[i]["BankAccName"] == this.AppCustBankAcc[idx]["BankAccName"]){
         this.CustBankAccToDelete.push(this.MainCustBankAcc[i]["CustBankAccId"]);
         idxToDelete = i;
+        isDelete = true;
         break;
       }
     }
-    this.MainCustBankAcc.splice(idxToDelete, 1);
+    if(isDelete){
+      this.MainCustBankAcc.splice(idxToDelete, 1);
+    }
+    else{
+      this.AppCustBankAcc.push(new Object());
+      this.ArrayNum.push(1);
+    }
     var obj = new Object();
     obj["RefBankId"] = this.AppCustBankAcc[idx]["RefBankId"];
     obj["BankName"] = this.AppCustBankAcc[idx]["BankName"];

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -19,6 +19,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   listSelectedId: Array<number> = new Array<number>();
   RefOfficeAreaId: number;
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  tempDataExists = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService,private location: Location,) {
     this.route.queryParams.subscribe(params => {
@@ -60,6 +61,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
 
   getListTemp(ev) {
     this.listSelectedId = ev.TempListId;
+    this.tempDataExists = this.listSelectedId && this.listSelectedId.length > 0
   }
 
   SaveOfficeAreaMember() {

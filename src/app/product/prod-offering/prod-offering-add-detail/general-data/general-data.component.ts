@@ -10,10 +10,11 @@ import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model'
 import { WizardComponent } from 'angular-archwizard';
 import { ListRefProductOfferingDetailObj } from 'app/shared/model/ListRefProductOfferingDetailObj.Model';
 import { RefProductOfferingDetailObj } from 'app/shared/model/RefProductOfferingDetailObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-general-data',
@@ -30,7 +31,8 @@ export class GeneralDataComponent implements OnInit {
     private http: HttpClient,
     private fb: FormBuilder,
     private toastr: NGXToastrService,
-    private wizard: WizardComponent
+    private wizard: WizardComponent, 
+    private cookieService: CookieService
   ) {
     this.route.queryParams.subscribe(params => {
       this.source = params["source"];
@@ -58,7 +60,7 @@ export class GeneralDataComponent implements OnInit {
   }
 
   initLookup() {
-    var user = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var user = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
 
     //if (user.MrOfficeTypeCode == "HO") {
     this.inputLookUpObj = new InputLookupObj();

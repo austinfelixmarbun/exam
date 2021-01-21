@@ -16,6 +16,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 import { RegexService } from 'app/customer/regex.service';
+import { CookieService } from 'ngx-cookie';
+
 @Component({
   selector: 'app-customer-personal-main-info',
   templateUrl: './customer-personal-main-info.component.html',
@@ -52,7 +54,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   IsAffiliateWithMf: string;
   MrMaritalStatCode: string;
   getListActiveRefMasterUrl: string;
-  GetListActiveRefMasterWithReserveFieldAllUrl: string;
+  GetListActiveRefMasterWithMappingCodeAllUrl: string;
   tempMrMaritalStatCode: Array<KeyValueObj> = new Array<KeyValueObj>();
   inputAddressObj: InputAddressObj;
   inputFieldObj: InputFieldObj;
@@ -74,10 +76,10 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     VipNotes: ['', [Validators.required]]
   });
 
-  constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
+  constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.GetListActiveRefMasterWithReserveFieldAllUrl = URLConstant.GetListActiveRefMasterWithReserveFieldAll;
+    this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.inputAddressObj = new InputAddressObj();
     this.inputFieldObj = new InputFieldObj();
   }
@@ -85,7 +87,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   ngOnInit() {
     this.customPattern = new Array<CustomPatternObj>();
     this.VipNotesRequired = true;
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -175,7 +177,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.CustomerPersonalForm.controls.VipNotes.updateValueAndValidity();
   }
   SaveValue() {
-    var UserAccess = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     var MaxDate = formatDate(UserAccess.BusinessDt, 'yyyy-MM-dd', 'en-US');
     var Max17YO = formatDate(UserAccess.BusinessDt, 'yyyy-MM-dd', 'en-US');
     let max17Yodt = new Date(Max17YO);
