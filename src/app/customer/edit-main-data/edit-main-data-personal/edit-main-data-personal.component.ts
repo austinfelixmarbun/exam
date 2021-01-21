@@ -551,11 +551,11 @@ export class EditMainDataPersonalComponent implements OnInit {
           this.custBankAccObj.BankBranch = '';
           this.custBankAccObj.BankAccNo = response.BankAccountNo;
           this.custBankAccObj.BankAccName = response.BankAccountName;
-          this.custBankAccObj.IsBankStmnt = 0;
+          this.custBankAccObj.IsBankStmnt = false;
           this.custBankAccObj.BankBranchRegRptCode = '';
           this.custBankAccObj.BalanceAmt = 0;
-          this.custBankAccObj.IsDefault = 0;
-          this.custBankAccObj.IsActive = 1;
+          this.custBankAccObj.IsDefault = false;
+          this.custBankAccObj.IsActive = true;
 
           this.http.post('VendorBankAcc/GetVendorBankAccByVendorBankAccId', { VendorBankAccId: response.VendorBankAccId }).subscribe(
             (response: any) => {

@@ -134,7 +134,7 @@ import { CoaSchemeViewComponent } from './coa-scheme/coa-scheme-view/coa-scheme-
     AppSourceAddEditComponent,
     AppSourcePagingComponent,
     AppSourceOfficeMemberPagingComponent,
-    AppSourceOfficeMemberAddComponent
+    AppSourceOfficeMemberAddComponent,
     PaymentAllocPagingComponent,
     PaymentAllocDetailComponent,
     PaymentAllocGroupPagingComponent,
