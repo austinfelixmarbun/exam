@@ -117,6 +117,7 @@ export const ROUTES: RouteInfo[] = [
       
         ], Params : [] 
       },
+      { Path: '/Vendor/auctioncompany/paging', Title: 'auction comp', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
     ], Params : [] 
   },
   {
