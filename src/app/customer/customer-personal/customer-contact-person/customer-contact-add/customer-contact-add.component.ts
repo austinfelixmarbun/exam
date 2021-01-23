@@ -4,7 +4,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalContactPerson.Obj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
@@ -18,6 +18,8 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-contact-add',
@@ -104,7 +106,7 @@ export class CustomerContactAddComponent implements OnInit {
   criteriaExistingObj: CriteriaObj;
   inputAddressObj: InputAddressObj;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
     this.GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.addCustPersonalContactPersonUrl = URLConstant.AddNewCustPersonalContactPerson;
@@ -118,7 +120,7 @@ export class CustomerContactAddComponent implements OnInit {
   }
   isAdd: any;
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -611,9 +613,10 @@ export class CustomerContactAddComponent implements OnInit {
     } else {
       this.flag = false;
       var foreign = this.tempNationality.find(x => x["MasterCode"] == event.target.value);
-      this.lookUpObj.nameSelect = foreign.ReserveField2;
-      this.lookUpObj.jsonSelect =  { CountryName: foreign.ReserveField2};
-      this.tempCountryCode = foreign.ReserveField1;
+      var setCountry = foreign.DefaultValue.split(';');
+      this.lookUpObj.nameSelect = setCountry[1] ? setCountry[1] : setCountry[0];
+      this.lookUpObj.jsonSelect =  { CountryName: setCountry[1] ? setCountry[1] : setCountry[0]};
+      this.tempCountryCode = setCountry[0];
       this.lookUpObj.isRequired = true;
     }
   }

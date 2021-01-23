@@ -106,6 +106,10 @@
             {
               "type": "prodOfferingHId",
               "property": "prodOfferingHId"
+            },
+            {
+              "type": "prodOfferingId",
+              "property": "prodOfferingId"
             }
           ]
         }

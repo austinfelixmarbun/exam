@@ -12,6 +12,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-notification-add-edit',
@@ -52,7 +53,7 @@ export class NotificationAddEditComponent implements OnInit {
 
   })
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.getHUrl = this.settingUrl + URLConstant.GetNotificationHByNotificationHId;
     this.addUrl = this.settingUrl + URLConstant.AddNotificationHAndD;
 
@@ -161,7 +162,7 @@ export class NotificationAddEditComponent implements OnInit {
       return false;
     }
     else {
-      var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+      var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
 
       if (this.mode == "add") {
         this.notificationHObj = new NotificationHObj();

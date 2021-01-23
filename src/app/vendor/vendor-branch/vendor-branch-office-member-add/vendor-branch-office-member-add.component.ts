@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -21,6 +21,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
   VendorId: number;
   listSelectedId: Array<number> = new Array<number>();
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  tempDataExists = false;
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
@@ -67,6 +68,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
 
   getListTemp(ev) {
     this.listSelectedId = ev.TempListId;
+    this.tempDataExists = this.listSelectedId && this.listSelectedId.length > 0
   }
 
   SaveVendorOfficeMember() {

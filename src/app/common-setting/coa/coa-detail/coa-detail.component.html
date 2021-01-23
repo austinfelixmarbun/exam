@@ -1,0 +1,127 @@
+<div class="col-md-12">
+  <div class="card">
+
+    <div class="card-header">
+      <h4 class="card-title" id="horz-layout-colored-controls" translate>COA</h4>
+    </div>
+
+    <div class="card-body">
+      <div class="px-3">
+        <form class="form form-horizontal" (ngSubmit)="Submit()" #enjiForm="ngForm">
+          <div class="form-body">
+
+            <lib-ucSubsection [id]="'EntityTypeInfoId'" [title]="'Entity Type Information'" [panel]="'EntityTypeInfo'">
+            </lib-ucSubsection>
+            <div id='EntityTypeInfo'>
+
+              <div class="form-group row">
+                <label class="col-md-3" translate>Entity Type</label>
+                <div class="col-md-3">
+                  <div class="input-group mb-0">
+                    <select class="form-control">
+                      <option value="">-Select One-</option>
+                      <option *ngFor="let item of ListEntityType" [value]="item.Key">
+                        {{item.Value}}
+                      </option>
+                    </select>
+                    
+                    <div class="input-group-append">
+                      <span class="input-group-btn">
+                        <button class="btn btn-raised btn-primary" type="button" (click)="Show()">
+                          <i class="fa fa-check-square-o"></i>Show
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div *ngIf="Shows">
+              <lib-ucSubsection [id]="'CurrInfoId'" [title]="'Currency Information'" [panel]="'CurrInfo'">
+              </lib-ucSubsection>
+              <div id='CurrInfo'>
+
+                <div class="form-group row">
+                  <label class="col-md-3" translate>Currence Code</label>
+                  <div class="col-md-3">
+                    <div class="input-group mb-0">
+                      <select class="form-control" #currselect>
+                        <option disabled>-Select One-</option>
+                        <option *ngFor="let item of ListCurrCode" [value]="item.Key">
+                          {{item.Value}}
+                        </option>
+                      </select>
+
+                      <div class="input-group-append">
+                        <span class="input-group-btn">
+                          <button class="btn btn-raised btn-primary" type="button" (click)="Add(currselect)">
+                            <i class="fa fa-check-square-o"></i>Add
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <lib-ucSubsection [id]="'CoaDetailInfoId'" [title]="'COA Detail Information'" [panel]="'CoaDetailInfo'">
+              </lib-ucSubsection>
+              <div id='CoaDetailInfo'>
+
+                <!-- <div class="table-responsive">
+                  <table class="table table-responsive-md text-center table-hover">
+                    <thead>
+                      <tr class="table-header">
+                        <th>
+                          <span class="thead-header" translate>No</span>
+                        </th>
+                        <th>
+                          <span class="thead-header" translate>Entity Type</span>
+                        </th>
+                        <th>
+                          <span class="thead-header" translate>Payment Allocation Code</span>
+                        </th>
+                        <th>
+                          <span class="thead-header" translate>Entity Code</span>
+                        </th>
+                        <th *ngFor="let item of colHeadTable;">
+                          <span class="thead-header" translate>{{item.newHead}}</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of ListCOA; let i = index">
+                        <td class="align-center">{{i+1}}</td>
+                        <td class="text-left">{{item.EntityType}}</td>
+                        <td class="text-left">{{item.PaymentAllocCode}}</td>
+                        <td class="align-center">{{item.EntityCode}}</td>
+                        <td class="text-center" *ngFor="let currs of ListCurr"><input type="text" class="form-control">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div> -->
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-actions right">
+            <button type="button" [routerLink]="['../paging']" class="btn btn-raised btn-warning mr-1" translate>
+              <i class="fa fa-arrow-circle-left"></i> Back
+            </button>
+            <button type="submit" class="btn btn-raised btn-primary" translate>
+              <i class="far"></i> Submit
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+    
+  </div>
+</div>

@@ -3,7 +3,7 @@
   "subsection": [
     {
       "subSectionId": "MainInformationPId",
-      "subSectionTitle": "Main Info",
+      "subSectionTitle": "Main Branch Info",
       "mainInfoPath": "/Generic/GetDataViewBySQL",
       "mainInfo": [
         {

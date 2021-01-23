@@ -117,6 +117,8 @@ import { RegexService } from './regex.service';
 import { CustAssetComponent } from './cust-asset/cust-asset.component';
 import { CustAssetDetailComponent } from './cust-asset/cust-asset-detail/cust-asset-detail.component';
 import { UcgridviewModule } from '@adins/ucgridview';
+import { SharedModule } from 'app/shared/shared.module';
+import { DmsIframeComponent } from 'app/shared/dms-iframe/dms-iframe.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -141,6 +143,7 @@ export const customCurrencyMaskConfig = {
     NgbModule, 
     UcpagingModule,
     SharingComponentModule,
+    SharedModule,
     UCSearchModule,
     UcgridfooterModule,
     UcpagingModule,

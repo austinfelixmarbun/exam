@@ -1,8 +1,7 @@
-<div>
-  <div class="col-md-6" style="padding: 0; display: inline-block;">
-    <h4>CUSTOMER ASSET</h4>
-  </div>
-  <div class="col-md-6" style="padding: 0; text-align: right; display: inline-block;">
+<lib-ucSubsection [id]="'CustomerAssetId'" [title]="'Customer Asset'" [panel]="'CustomerAssetSection'">
+</lib-ucSubsection>
+<div id="CustomerAssetSection">
+  <div class="col-md-12" style="padding: 0; text-align: right; display: inline-block;">
     <span class="mr-1">
       <button type="button" class="addButton" (click)="AddCustAsset()" translate>
         <i class="ft-plus-circle"></i> Add
@@ -49,12 +48,12 @@
           <td style="text-align: center;">{{item.AssetQty}}</td>
           <td style="text-align: right;">{{ item.AssetTotalValue | currency : "USD" : "" }}</td>
           <td>
-            <a (click)="EditAppCustAsset(item.AppCustAssetId)">
+            <a (click)="EditCustAsset(item.CustAssetId)">
               <i class="fas fa-pencil-alt"></i>
             </a>
           </td>
           <td>
-            <a class="danger p-0" (click)="DeleteCustAsset(item.AppCustAssetId)">
+            <a class="danger p-0" (click)="DeleteCustAsset(item.CustAssetId)">
               <i class="ft-trash-2 font-medium-3 mr-2"></i>
             </a>
           </td>

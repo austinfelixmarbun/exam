@@ -185,8 +185,8 @@ export class BankInfoComponent implements OnInit {
 
   getLookupBankResponse(e) {
     this.BankRegisForm.patchValue({
-      RefBankId: e.refBankId,
-      BankBranchRegCode: e.regRptCode
+      RefBankId: e.RefBankId,
+      BankBranchRegCode: e.RegRptCode
     });
   }
 
@@ -229,9 +229,9 @@ export class BankInfoComponent implements OnInit {
     this.inputLookupBankObj.isRequired = true;
 
     if (this.objEdit != null && this.mode == "edit") {
-      this.inputLookupBankObj.jsonSelect = { bankName: this.objEdit.BankName };
+      this.inputLookupBankObj.jsonSelect = { BankName: this.objEdit.BankName };
     } else {
-      this.inputLookupBankObj.jsonSelect = { bankName: "" };
+      this.inputLookupBankObj.jsonSelect = { BankName: "" };
     }
   }
 }

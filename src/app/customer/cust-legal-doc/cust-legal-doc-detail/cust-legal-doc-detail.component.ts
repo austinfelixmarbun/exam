@@ -7,6 +7,8 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-cust-legal-doc-detail',
@@ -35,11 +37,12 @@ export class CustLegalDocDetailComponent implements OnInit {
   constructor(
     private httpClient: HttpClient,
     private fb: FormBuilder,
-    public activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal, 
+    private cookieService: CookieService
   ) { }
 
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);

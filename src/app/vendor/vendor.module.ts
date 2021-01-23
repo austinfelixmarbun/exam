@@ -68,6 +68,8 @@ import { VendorGradingApprovalPagingComponent } from './vendor-grading/vendor-gr
 import { VendorGradingApprovalDetailComponent } from './vendor-grading/vendor-grading-approval/vendor-grading-approval-detail/vendor-grading-approval-detail.component';
 import { VendorGradingInquiryPagingComponent } from './vendor-grading/vendor-grading-inquiry-paging/vendor-grading-inquiry-paging.component';
 import { UcapprovalModule } from '@adins/ucapproval';
+import { AuctionCompanyPagingComponent } from './auction-company/auction-company-paging/auction-company-paging.component';
+import { AuctionCompanyAddeditComponent } from './auction-company/auction-company-addedit/auction-company-addedit.component';
 
 
 export const customCurrencyMaskConfig = {     
@@ -154,7 +156,9 @@ export const customCurrencyMaskConfig = {
     VendorGradingRequestDetailComponent,
     VendorGradingApprovalPagingComponent,
     VendorGradingApprovalDetailComponent,
-    VendorGradingInquiryPagingComponent
+    VendorGradingInquiryPagingComponent,
+    AuctionCompanyPagingComponent,
+    AuctionCompanyAddeditComponent
   ],
   entryComponents : [UcviewgenericComponent, VendorAtpmSelectComponent],
   providers: [

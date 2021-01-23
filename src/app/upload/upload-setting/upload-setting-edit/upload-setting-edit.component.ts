@@ -12,7 +12,7 @@ import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { UserTitleRoleObj } from 'app/shared/model/UserTitleRoleObj';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 import { NgForm, FormBuilder } from '@angular/forms';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { UploadService } from 'app/shared/upload/upload.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 

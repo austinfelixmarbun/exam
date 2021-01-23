@@ -24,6 +24,8 @@ import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { AdInsHelper } from "app/shared/AdInsHelper";
 import { RegexService } from 'app/customer/regex.service';
 import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
+import { CookieService } from "ngx-cookie";
+
 @Component({
   selector: "app-employee-add",
   templateUrl: "./employee-add.component.html",
@@ -82,7 +84,8 @@ export class EmployeeAddComponent implements OnInit {
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     private spinner: NgxSpinnerService,
-    private http: HttpClient
+    private http: HttpClient, 
+    private cookieService: CookieService
   ) {
     this.route.queryParams.subscribe(params => {
       if (params["RefEmpId"] != null) {
@@ -105,7 +108,7 @@ export class EmployeeAddComponent implements OnInit {
 
   ngOnInit() {
     this.customPattern = new Array<CustomPatternObj>();
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     this.addressObj = new UcAddressObj();
 
@@ -210,8 +213,8 @@ export class EmployeeAddComponent implements OnInit {
 
   getLookupBankResponse(e) {
     this.RefEmpForm.patchValue({
-      RefBankId: e.refBankId,
-      BankBranchRegCode: e.regRptCode
+      RefBankId: e.RefBankId,
+      BankBranchRegCode: e.RegRptCode
     });
   }
 
@@ -297,6 +300,11 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   //START URS-LOS-041
+
+  onOptionsSelected(event){  
+    this.setValidatorPattern();
+  }
+
   controlNameIdNo: any = 'IdNo';
   controlNameIdType: any = 'MrIdTypeCode';
   customPattern: Array<CustomPatternObj>;

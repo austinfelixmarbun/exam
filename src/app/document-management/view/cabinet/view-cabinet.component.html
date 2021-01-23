@@ -1,0 +1,45 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+
+      <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
+      
+      <div class="px-3">
+        <div class="form-body">
+
+          <lib-ucSubsection [id]="'RackList'" [title]="'Rack List'" [panel]="'RackListId'">
+          </lib-ucSubsection>
+          <div id="RackListId">
+            <table class="table table-responsive-md text-center table-hover">
+              <thead>
+                <tr class="table-header">
+                  <th><span class="thead-header" name='rackCode' translate>RACK CODE</span> </th>
+                  <th><span class="thead-header" name='rackName' translate>RACK NAME</span> </th>
+                  <th><span class="thead-header" name='Active' translate>ACTIVE</span></th>
+                  <th><span class="thead-header" name='rackInfo' translate>RACK INFORMATION</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let item of responseRack">
+                  <tr>
+                    <td>
+                      <a [routerLink]="['/DocumentManagementView/ViewRack']" target="_blank" 
+                      [queryParams]="{ RackCode: item.RackCode }">{{item.RackCode}}
+                      </a>
+                    </td>
+                    <td class="text-left">{{item.RackName}}</td>
+                    <td class="align-center" *ngIf="item.IsActive === true">Yes</td>
+                    <td class="align-center" *ngIf="item.IsActive === false">No</td>
+                    <td class="text-left">{{item.RackInfo}}</td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

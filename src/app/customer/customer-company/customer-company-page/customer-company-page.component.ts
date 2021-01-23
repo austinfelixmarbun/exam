@@ -6,6 +6,10 @@ import Stepper from 'bs-stepper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { DMSObj } from 'app/shared/model/DMS/DMSObj.model';
+import { DMSLabelValueObj } from 'app/shared/model/DMS/DMSLabelValueObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-customer-company-page',
@@ -31,8 +35,9 @@ export class CustomerCompanyPageComponent implements OnInit {
 
   Page: string;
   From: string;
+  dmsObj: DMSObj;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,private cookieService: CookieService) {
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -55,7 +60,7 @@ export class CustomerCompanyPageComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.IdCust == null) {
       AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
     }
@@ -66,7 +71,19 @@ export class CustomerCompanyPageComponent implements OnInit {
           this.CustCompanyId = response['CustCompanyId'];
         } 
       );
-
+      await this.http.post(URLConstant.GetCustByCustId, custObj).toPromise().then(
+        (response: any) => {
+          let  currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+          this.dmsObj = new DMSObj();
+          this.dmsObj.User = currentUserContext.UserName;
+          this.dmsObj.Role = currentUserContext.RoleCode;
+          this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
+          this.dmsObj.MetadataParent = null;
+          this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, response["CustNo"]));
+          this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
+      
+        }
+      );
       this.stepper = new Stepper(document.querySelector('#stepper1'), {
         linear: false,
         animation: true
@@ -102,8 +119,11 @@ export class CustomerCompanyPageComponent implements OnInit {
     if (type == "Legal") {
       this.CustStepIndex = 8;
     }
-    if (type == "CustAttr") {
+    if (type == "UploadData") {
       this.CustStepIndex = 9;
+    }
+    if (type == "CustAttr") {
+      this.CustStepIndex = 10;
     }
 
     this.stepper.to(this.CustStepIndex);

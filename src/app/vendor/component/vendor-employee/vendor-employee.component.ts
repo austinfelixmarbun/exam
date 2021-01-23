@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -14,10 +14,15 @@ import { WizardComponent } from 'angular-archwizard';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { RegexService } from 'app/customer/regex.service';
+import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
+import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-vendor-employee',
-  templateUrl: './vendor-employee.component.html'
+  templateUrl: './vendor-employee.component.html',
+  providers: [RegexService]
 })
 export class VendorEmployeeComponent implements OnInit {
   @Input() objInput: any;
@@ -66,7 +71,7 @@ export class VendorEmployeeComponent implements OnInit {
     IsNpwpExist: [false]
   });
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent) {
+  constructor(private regexService: RegexService, private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
         this.mode = params["mode"];
@@ -85,7 +90,9 @@ export class VendorEmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
-    var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    
+    this.customPattern = new Array<CustomPatternObj>();
+    var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(currentUserContext[CommonConstant.BUSINESS_DT]);
 
     if (this.mode == undefined) {
@@ -135,6 +142,8 @@ export class VendorEmployeeComponent implements OnInit {
               MrIdTypeCode: this.IdTypeList[0].Key
             });
           }
+
+          this.getInitPattern();
         }
       }
     );
@@ -294,7 +303,7 @@ export class VendorEmployeeComponent implements OnInit {
   SaveForm() {
     var joinDt = new Date(this.VendorEmpForm.controls.JoinDt.value);
     joinDt.setHours(0, 0, 0, 0);
-    var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     var businessDt = new Date(currentUserContext[CommonConstant.BUSINESS_DT]);
     businessDt.setHours(0, 0, 0, 0);
     if (joinDt > businessDt) {
@@ -366,4 +375,59 @@ export class VendorEmployeeComponent implements OnInit {
         });
     }
   }
+
+  //START URS-LOS-041
+
+  onOptionsSelected(event){  
+    this.setValidatorPattern();
+  }
+
+  controlNameIdNo: any = 'IdNo';
+  controlNameIdType: any = 'MrIdTypeCode';
+  customPattern: Array<CustomPatternObj>;
+  initIdTypeCode: any;
+  resultPattern: any;
+
+  getInitPattern() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if(this.resultPattern != undefined)
+        {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+    
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+            this.customPattern.push(patternObj);
+          }
+          this.setValidatorPattern();
+        }
+      }
+    );
+  }
+
+  setValidatorPattern() {
+    let idTypeValue: string;
+    idTypeValue = this.VendorEmpForm.controls[this.controlNameIdType].value;
+    var pattern: string = '';
+    if (idTypeValue != undefined) {
+      if (this.resultPattern != undefined) {
+        var result = this.resultPattern.find(x => x.Key == idTypeValue)
+        if (result != undefined) {
+          pattern = result.Value;
+        }
+      }
+    }
+    this.setValidator(pattern);
+  }
+
+  setValidator(pattern: string) {
+    if (pattern != undefined) {
+      this.VendorEmpForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.VendorEmpForm.controls[this.controlNameIdNo].updateValueAndValidity();
+    }
+  }
+  //END OF URS-LOS-041
 }

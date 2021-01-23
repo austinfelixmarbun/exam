@@ -13,6 +13,7 @@ import { NgForm } from '@angular/forms';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-office-emp-pos-add',
@@ -62,7 +63,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
   orderByValue: boolean = true;
   arrCrit: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
+  constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.getUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
     this.addUrl = this.foundationUrl + URLConstant.AddEmpPosition;
     this.refOfficeUrl = this.foundationUrl + URLConstant.GetAllRefOffice;
@@ -104,7 +105,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    const getuserAccess = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    const getuserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.refOfficeId = getuserAccess.refOfficeId
     this.refOfficeObj = new RefOfficeObj()
     this.httpClient.post(this.refOfficeUrl, null).subscribe(

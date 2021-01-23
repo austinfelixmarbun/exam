@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AssetMasterObj } from 'app/shared/model/AssetMasterObj.Model';
 import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { ListRequestCriteriaObj } from 'app/shared/model/ListRequestCriteriaObj.Model';
 import { AssetCategoryObj } from 'app/shared/model/AssetCategoryObj.Model';
 import { AssetSchmListObj } from 'app/shared/model/AssetSchmListObj.Model';

@@ -8,7 +8,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { environment } from 'environments/environment';
 import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';

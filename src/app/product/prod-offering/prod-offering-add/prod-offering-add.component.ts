@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { ProdOfferingObj } from 'app/shared/model/ProdOfferingObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcLookupObj } from 'app/shared/model/UcLookupObj.Model';
@@ -14,6 +14,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-prod-offering-add',
@@ -24,7 +25,7 @@ export class ProdOfferingAddComponent implements OnInit {
   businessDt: Date;
   startActiveDt: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       this.ProdOfferingHId = params["ProdOfferingHId"];
       this.mode = params["mode"];
@@ -63,7 +64,7 @@ export class ProdOfferingAddComponent implements OnInit {
     this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
 
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDt.setDate(this.businessDt.getDate());
     this.startActiveDt = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -170,7 +171,7 @@ export class ProdOfferingAddComponent implements OnInit {
   }
 
   ValidateDate() {
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     let businessDate = new Date(context[CommonConstant.BUSINESS_DT]);
     let startDate = new Date(this.ProdOfferingForm.get("StartDt").value);
     let endDate = new Date(this.ProdOfferingForm.get("EndDt").value);

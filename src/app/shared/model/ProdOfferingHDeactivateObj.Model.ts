@@ -4,5 +4,6 @@ export class ProdOfferingHDeactivateObj {
   Reason: any;
   Notes: any;
   RowVersion: any;
+  RequestRFAObj : any;
   constructor() { this.ProdOfferingHId = 0; }
 }

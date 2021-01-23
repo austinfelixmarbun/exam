@@ -1,5 +1,5 @@
 import { BusinessUnitObj } from "app/shared/model/BusinessUnitObj.Model";
-import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
+import { CriteriaObj } from "app/shared/model/CriteriaObj.Model";
 import { OrgMdlStrucObj } from "app/shared/model/OrgMdlStrucObj";
 import { OrgMdlObj } from "app/shared/model/OrgMdlObj.Model";
 import { Component, OnInit } from "@angular/core";

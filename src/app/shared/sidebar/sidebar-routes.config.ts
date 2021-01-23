@@ -35,10 +35,14 @@ export const ROUTES: RouteInfo[] = [
       { Path: '/CommonSetting/Currency/Paging', Title: 'Currency', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/CommonSetting/Profession/Paging', Title: 'Profession', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/CommonSetting/Reason/Paging', Title: 'Reason', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/paymentalloc/paging', Title: 'Payment Allocation', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: '/CommonSetting/paymentallocgrp/paging', Title: 'Payment Allocation Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: '/SystemSetting/Notification', Title: 'Notification', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/SystemSetting/NotificationApproval', Title: 'Notification Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: '/SystemSetting/RefForm/Paging', Title: 'Ref Form', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
-      { Path: '/SystemSetting/Attribute/Paging', Title: 'Attribute Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  }
+      { Path: '/SystemSetting/Attribute/Paging', Title: 'Attribute Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/coascheme/paging', Title: 'COA Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: '/CommonSetting/coa/paging', Title: 'COA', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
     ], Params : [] 
   },
   {
@@ -68,7 +72,8 @@ export const ROUTES: RouteInfo[] = [
           { Path: '/Vendor/Paging', Title: 'Supplier HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_HO }] },
           { Path: '/Vendor/Paging', Title: 'Supplier', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
           { Path: '/Vendor/Paging', Title: 'Supplier Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Scheme" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
-          { Path: '/Vendor/Paging', Title: 'Supplier Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] }
+          { Path: '/Vendor/Paging', Title: 'Supplier Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
+          { Path: '/Vendor/auctioncompany/paging', Title: 'Auction Company', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] }
         ], Params : [] 
       }
       ,{
@@ -211,6 +216,14 @@ export const ROUTES: RouteInfo[] = [
       { Path: '/Customer/UpdateDataCustomer/Paging', Title: 'Update Data Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },      
     ], Params : [] 
   },
+
+  {
+    Path: '', Title: 'Document Management', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+    Submenu: [
+      { Path: '/DocumentManagement/Cabinet/Paging', Title: 'Document Management', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] }
+    ], Params: []
+  },
+  
   {
     Path: '', Title: 'Integration', Icon: 'ft-home', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [

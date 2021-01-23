@@ -3,13 +3,14 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { RefProductHOObj } from 'app/shared/model/RefProductHOObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { formatDate } from '@angular/common';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-product-ho-add',
@@ -38,7 +39,8 @@ export class ProductHOAddComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private route: ActivatedRoute,
-    private toastr: NGXToastrService
+    private toastr: NGXToastrService,
+    private cookieService: CookieService
   ) {
     
     this.route.queryParams.subscribe(params => {
@@ -60,7 +62,7 @@ export class ProductHOAddComponent implements OnInit {
 
   ResultResponse: any;
   ngOnInit() {
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDt.setDate(this.businessDt.getDate());
     this.startActiveDt = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -101,7 +103,7 @@ export class ProductHOAddComponent implements OnInit {
   UrlBackEnd: any;
 
   ValidateDate() {
-    var context = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     let businessDate = new Date(context[CommonConstant.BUSINESS_DT]);
     let startDate = new Date(this.RefProductHOForm.get("StartDt").value);
     let endDate = new Date(this.RefProductHOForm.get("EndDt").value);
