@@ -17,6 +17,7 @@ export const environment = {
   ApprovalR3Url: "http://r3impl-appsvr.ad-ins.com/APPROVAL_DSF",
   ConfinsR2Url: "http://r3impl-appsvr.ad-ins.com/CONFINSR2/api/",
   ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
+  ChipperKeyCookie: "AdInsFOU12345678" // 256 bit atau 16 karakter & harus sama dengan BE
 };
   
   
