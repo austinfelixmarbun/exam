@@ -15,7 +15,8 @@ export const environment = {
   FoundationControlerR3Web: "http://r3impl-appsvr.ad-ins.com/FOUDSF",
   FoundationR3ControllerUrl: "http://r3impl-appsvr.ad-ins.com/FOUDSF",
   ApprovalR3Url: "http://r3impl-appsvr.ad-ins.com/APPROVAL_DSF",
-  ConfinsR2Url: "http://r3impl-appsvr.ad-ins.com/CONFINSR2/api/"
+  ConfinsR2Url: "http://r3impl-appsvr.ad-ins.com/CONFINSR2/api/",
+  ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
 };
   
   
