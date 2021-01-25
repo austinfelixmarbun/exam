@@ -760,12 +760,15 @@ export class URLConstant {
     public static GetCustBankAccByCustBankAccIdWithRefBank = environment.FoundationR3Url + "/CustBankAcc/GetCustBankAccByCustBankAccIdWithRefBank";
     public static AddCustBankAcc = environment.FoundationR3Url + "/CustBankAcc/AddCustBankAcc";
     public static GetCustPersonalFinDataByCustPersonalId = environment.FoundationR3Url + "/CustPersonalFinData/GetCustPersonalFinDataByCustPersonalId";
+    public static GetListCustPersonalFinDataByCustId = environment.FoundationR3Url + "/CustPersonalFinData/GetListCustPersonalFinDataByCustId";
     public static GetCustCompanyFinDataByCustCompanyId = environment.FoundationR3Url + "/CustomerCompanyFinData/GetCustCompanyFinDataByCustCompanyId";
+    public static GetListCustCompanyFinDataByCustId = environment.FoundationR3Url + "/CustomerCompanyFinData/GetListCustCompanyFinDataByCustId";
     public static AddCustCompanyFinData = environment.FoundationR3Url + "/CustomerCompanyFinData/AddCustCompanyFinData";
     public static EditCustCompanyFinData = environment.FoundationR3Url + "/CustomerCompanyFinData/EditCustCompanyFinData";
     public static AddCustPersonalFinData = environment.FoundationR3Url + "/CustPersonalFinData/AddCustPersonalFinData";
     public static EditCustPersonalFinData = environment.FoundationR3Url + "/CustPersonalFinData/EditCustPersonalFinData";
     public static GetCustPersonalFinDataForCustViewByCustId = environment.FoundationR3Url + "/CustPersonalFinData/GetCustPersonalFinDataForCustViewByCustId";
+    public static GetListCustPersonalFinDataForCustViewByCustId = environment.FoundationR3Url + "/CustPersonalFinData/GetListCustPersonalFinDataForCustViewByCustId";
     public static EditCustBankAcc = environment.FoundationR3Url + "/CustBankAcc/EditCustBankAcc";
 
     // CUSTOMER ADDRESS
