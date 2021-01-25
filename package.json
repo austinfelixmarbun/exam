@@ -36,7 +36,7 @@
     "@adins/ucaddress": "^1.0.52",
     "@adins/ucaddtotemp": "^1.0.15",
     "@adins/ucapproval": "^1.0.12",
-    "@adins/ucapproval-history": "^1.0.3",
+    "@adins/ucapproval-history": "^1.0.5",
     "@adins/ucapproval-r3": "^1.0.13",
     "@adins/ucapprovalcreate": "^1.0.25",
     "@adins/ucapprovalgeneralinfo": "^1.0.2",
