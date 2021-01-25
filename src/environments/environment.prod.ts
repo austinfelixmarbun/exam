@@ -16,6 +16,7 @@ export const environment = {
   FoundationR3ControllerUrl: "http://r3impl-appsvr.ad-ins.com/FOUDSF",
   ApprovalR3Url: "http://r3impl-appsvr.ad-ins.com/APPROVAL_DSF",
   ConfinsR2Url: "http://r3impl-appsvr.ad-ins.com/CONFINSR2/api/",
+  DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
   ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
   ChipperKeyCookie: "AdInsFOU12345678" // 256 bit atau 16 karakter & harus sama dengan BE
 };
