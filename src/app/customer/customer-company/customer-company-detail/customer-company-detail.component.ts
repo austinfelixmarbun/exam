@@ -81,6 +81,8 @@ export class CustomerCompanyDetailComponent implements OnInit {
         if (this.tempCustCompanyObj.RefSectorEconomySlikId != null) { 
           this.http.post(URLConstant.GetRefSectorEconomySlikCustomObjectByRefSectorEconomySlikId, {"RefSectorEconomySlikId": this.tempCustCompanyObj.RefSectorEconomySlikId }).subscribe(
             (response) => {
+              this.tempRefSectorEconomySlikId= this.tempCustCompanyObj.RefSectorEconomySlikId;
+              this.tempRefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
               this.tempRefSectorEconomySlik = response; 
               this.lookUpObj.nameSelect = this.tempRefSectorEconomySlik.RefSectorEconomySlikName; 
               this.lookUpObj.jsonSelect = response;
