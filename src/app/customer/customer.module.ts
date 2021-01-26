@@ -119,6 +119,11 @@ import { CustAssetDetailComponent } from './cust-asset/cust-asset-detail/cust-as
 import { UcgridviewModule } from '@adins/ucgridview';
 import { SharedModule } from 'app/shared/shared.module';
 import { DmsIframeComponent } from 'app/shared/dms-iframe/dms-iframe.component';
+import { PopUpViewAsliRIAllDataComponent } from './customer-personal/customer-personal-main-info/pop-up-asli-ri/pop-up-view-asli-ri-all-data/pop-up-view-asli-ri-all-data.component';
+import { PopUpViewAsliRIMotherNameComponent } from './customer-personal/customer-personal-main-info/pop-up-asli-ri/pop-up-view-asli-ri-mother-name-verification/pop-up-view-asli-ri-mother-name-verification.component';
+import { PopUpViewPhoneAgeVerificationComponent } from './customer-personal/customer-personal-main-info/pop-up-asli-ri/pop-up-view-asli-ri-phone-age-verification/pop-up-view-asli-ri-phone-age-verification.component';
+import { PopUpViewRiTaxVerificationComponent } from './customer-personal/customer-personal-main-info/pop-up-asli-ri/pop-up-view-asli-ri-tax-verification/pop-up-view-asli-ri-tax-verification.component';
+import { PopUpViewRiProfesionalVerificationComponent } from './customer-personal/customer-personal-main-info/pop-up-asli-ri/pop-up-view-asli-ri-professional-verification/pop-up-view-asli-ri-professional-verification.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -252,7 +257,12 @@ export const customCurrencyMaskConfig = {
     UpdateCustomerCompanyFinDataComponent,
     UpdateCustomerCompanyLegalDocComponent,
     CustAssetComponent,
-    CustAssetDetailComponent
+    CustAssetDetailComponent,
+    PopUpViewAsliRIAllDataComponent,
+    PopUpViewAsliRIMotherNameComponent,
+    PopUpViewPhoneAgeVerificationComponent,
+    PopUpViewRiProfesionalVerificationComponent,
+    PopUpViewRiTaxVerificationComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent, CustAssetDetailComponent]
   ,

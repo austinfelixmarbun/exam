@@ -31,6 +31,8 @@ export class ExceptionConstant {
     public static NOT_ELIGIBLE_FOR_HOLD = "You are not Eligible to Hold this Task";
     public static NOT_ELIGIBLE_FOR_PROCESS_TASK = "You are not Eligible to Process this Task";
 
+    public static PLEASE_INPUT_FIN_DATA = "Please input at least 1 Financial Data";
+
     public static CALC_FIRST = "Please Click Calculate";
 
 }

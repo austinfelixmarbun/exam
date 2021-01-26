@@ -20,6 +20,7 @@ import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { environment } from 'environments/environment';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
 import { CookieService } from 'ngx-cookie';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-edit-main-data-personal',
@@ -84,8 +85,10 @@ export class EditMainDataPersonalComponent implements OnInit {
   SupplierObj: any;
   vendorCustBankObj: any;
   custBankAccObj: CustBankAccObj = new CustBankAccObj();
+  closeResult;
+  subsectionAsliRi: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService, private cookieService: CookieService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = URLConstant.GetCustPersonalbyCustId;
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
@@ -565,6 +568,39 @@ export class EditMainDataPersonalComponent implements OnInit {
         }
       });
 
+  }
+
+  //VIEW SUBSECTION ASLI RI
+  showAsliRi(){
+    this.subsectionAsliRi = true;
+  }
+  closeAsliRi(){
+    this.subsectionAsliRi = false;
+  }
+  //POP UP
+  openPopUp(content) {
+    this.Open(content);
+  }
+
+  Open(contentCrossApp) {
+    this.modalService.open(contentCrossApp).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+  }
+
+  private getDismissReason(reason): string {
+    if (reason === 1) {
+      return 'by pressing ESC';
+    } else if (reason === 0) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
 

@@ -164,6 +164,216 @@
                 [identifier]="'UcAddress'">
               </lib-ucaddress>
             </div>
+
+            <div *ngIf="!subsectionAsliRi">
+              <lib-ucSubsection [id]="'FraudCheckInfo'" [title]="'Fraud Checking Customer'" [panel]="'dFraudCheckInfo'">
+              </lib-ucSubsection>
+              <div id="dFraudCheckInfo" class="row">
+                <div class="col-md-12">
+                    <label class="col-md-3" translate>Dukcapil</label>
+                    
+                    <span class="col-md-6">
+                      <label translate>Last Check is 99 days ago /                       
+                      </label>   
+                      <button type="button" (click)="openPopUp(popUpDukcapil)" class="btn btn-raised btn-primary" translate> Hit Dukcapil                       
+                      </button> 
+                    </span> 
+                </div>
+                <div class="col-md-12">
+                    <label class="col-md-3" translate>Pefindo</label>
+                            
+                    <span class="col-md-6">
+                      <label translate>Last Check is 63 days ago /                        
+                      </label>                                               
+                      <button type="button" (click)="openPopUp(popUpPefindo)" class="btn btn-raised btn-primary" translate>
+                        Hit Pefindo
+                      </button>   
+                      /
+                      <a (click)="openPopUp(popUpViewPefindo)">View</a> 
+                    </span>    
+                </div>
+                <div class="col-md-12">
+                    <label class="col-md-3" translate>Asli RI</label>
+                       
+                    <span class="col-md-6">
+                      <label translate>Last Check is 35 days ago /</label>                                               
+                      <button type="button" (click)="showAsliRi()" class="btn btn-raised btn-primary"
+                        translate>
+                        Hit Asli RI
+                      </button>   
+                      /     
+                      <a (click)="openPopUp(popUpViewAsliRI)">View</a>
+                    </span>   
+                </div>
+                <div class="col-md-12">
+                    <label class="col-md-3" translate>Trusting Social</label>                                   
+                    <span class="col-md-6">
+                      <label translate>Last Check is 20 days ago /                          
+                      </label>                                               
+                      <button type="button" (click)="openPopUp(popUpTrustingSocial)" class="btn btn-raised btn-primary"
+                        translate>
+                        Hit Trusting Social
+                      </button>   
+                      /
+                      <a (click)="openPopUp(popUpViewTrustingSocial)">View</a> 
+                    </span>  
+                </div>
+                <div class="col-md-12">
+                    <label class="col-md-3" translate>SLIK</label>                            
+                    <label class="col-md-6" translate>Not hit yet /  
+                      <button type="button" (click)="openPopUp(popUpSlik)" class="btn btn-raised btn-primary"
+                      translate>
+                      Hit SLIK
+                    </button>                     
+                    </label>    
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="subsectionAsliRi">
+              <lib-ucSubsection [id]="'AsliRi'" [title]="'ASLI RI'" [panel]="'dAsliRi'">
+              </lib-ucSubsection>
+              <div id="dAsliRi" class="row" class="px-3">
+                <div class="col-md-12">
+                  <div class="form-group row">
+                      <button type="button" class="col-md-3" (click)="openPopUp(popUpHitProfesional)" class="btn btn-raised btn-primary" translate> Hit Profesional                       
+                      </button>                                                
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group row">
+                      <button type="button" class="col-md-3" (click)="openPopUp(popUpHitPhoneAge)" class="btn btn-raised btn-primary" translate> Hit Phone Age                       
+                      </button>                                                
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group row">
+                      <button type="button" class="col-md-3" (click)="openPopUp(popUpHitMotherNameVerif)" class="btn btn-raised btn-primary" translate> Hit Mother Name Verification                       
+                      </button>                                                
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group row">
+                      <button type="button" class="col-md-3" (click)="openPopUp(popUpHitTaxIncome)" class="btn btn-raised btn-primary" translate> Hit Tax Income                       
+                      </button>                                                
+                  </div>
+                </div>
+              </div>
+              <div class="text-right">
+                <button type="button" (click)="closeAsliRi()" class="btn btn-raised btn-warning mr-1" translate>
+                  <i class="fa fa-arrow-circle-left"></i> Back
+                </button>
+              </div>
+            </div>
+
+            <!-- POP UP DUKCAPIL -->
+            <ng-template #popUpDukcapil let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <!-- Panggil selector disini -->
+            </ng-template>
+
+            <!-- POP UP PEFINDO -->
+            <ng-template #popUpPefindo let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <!-- Panggil selector disini -->
+            </ng-template>
+
+            <ng-template #popUpViewPefindo let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <!-- Panggil selector disini -->
+            </ng-template>
+
+            <!-- POP UP ASLI RI -->
+            <ng-template #popUpViewAsliRI let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <app-pop-up-view-asli-ri-all-data></app-pop-up-view-asli-ri-all-data>              
+            </ng-template>
+
+            <!-- POP UP TRUSTING SOCIAL -->
+            <ng-template #popUpTrustingSocial let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <!-- Panggil selector disini -->
+            </ng-template>
+
+            <ng-template #popUpViewTrustingSocial let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <!-- Panggil selector disini -->
+            </ng-template>
+
+            <!-- POP UP SLIK -->
+            <ng-template #popUpSlik let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <!-- Panggil selector disini -->
+            </ng-template>
+
+            <!-- POP UP HIT PROFESIONAL -->
+            <ng-template #popUpHitProfesional let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <app-pop-up-view-asli-ri-professional-verification></app-pop-up-view-asli-ri-professional-verification>
+            </ng-template>
+
+            <!-- POP UP HIT PHONE AGE -->
+            <ng-template #popUpHitPhoneAge let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <app-pop-up-view-asli-ri-phone-age-verification></app-pop-up-view-asli-ri-phone-age-verification>
+            </ng-template>
+
+            <!-- POP UP HIT MOTHER NAME VERIFICATION -->
+            <ng-template #popUpHitMotherNameVerif let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <app-pop-up-view-asli-ri-mother-name-verification></app-pop-up-view-asli-ri-mother-name-verification>
+            </ng-template>
+
+            <!-- POP UP HIT TAX INCOME-->
+            <ng-template #popUpHitTaxIncome let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <app-pop-up-view-asli-ri-tax-verification></app-pop-up-view-asli-ri-tax-verification>
+            </ng-template>
+
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
                 <i class="far fa-window-close"></i> Cancel

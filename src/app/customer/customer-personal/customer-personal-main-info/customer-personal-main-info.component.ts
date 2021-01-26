@@ -17,6 +17,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 import { RegexService } from 'app/customer/regex.service';
 import { CookieService } from 'ngx-cookie';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-customer-personal-main-info',
@@ -58,6 +59,8 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   tempMrMaritalStatCode: Array<KeyValueObj> = new Array<KeyValueObj>();
   inputAddressObj: InputAddressObj;
   inputFieldObj: InputFieldObj;
+  closeResult;
+  subsectionAsliRi: boolean = false;
 
   CustomerPersonalForm = this.fb.group({
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -76,7 +79,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     VipNotes: ['', [Validators.required]]
   });
 
-  constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) {
+  constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
@@ -304,5 +307,38 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     }
   }
   //END OF URS-LOS-041
+
+  //VIEW SUBSECTION ASLI RI
+  showAsliRi(){
+    this.subsectionAsliRi = true;
+  }
+  back(){
+    this.subsectionAsliRi = false;
+  }
+  //POP UP
+  openPopUp(content) {
+    this.Open(content);
+  }
+
+  Open(contentCrossApp) {
+    this.modalService.open(contentCrossApp).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+  }
+
+  private getDismissReason(reason): string {
+    if (reason === 1) {
+      return 'by pressing ESC';
+    } else if (reason === 0) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
 }
 

@@ -19,6 +19,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { RegexService } from 'app/customer/regex.service';
 import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 import { CookieService } from 'ngx-cookie';
+import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
 
 @Component({
   selector: 'app-vendor-branch-add-edit',
@@ -65,6 +66,9 @@ export class VendorBranchAddEditComponent implements OnInit {
   reqVendorAttrObj: { listVendorAttrContentObj: any[]; };
   ListVendorAttrContent: any;
   gradeCode: String;
+
+  BpbkAgingDefaultVal: number;
+  DaysAPDuePaymentAfterGoLiveDefaultVal: number;
 
   constructor(private regexService: RegexService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
@@ -132,6 +136,8 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.bindText()
       this.setDropdown();
       this.setLookup();
+
+      this.settingDefaultValue();
     }
     var reqListVendor = { "VendorId": this.VendorId };
     this.http.post(URLConstant.GetListVendorAttrContentByVendorId, reqListVendor).toPromise().then(
@@ -922,4 +928,36 @@ export class VendorBranchAddEditComponent implements OnInit {
     );
   }
   //END OF URS-LOS-041
+
+  settingDefaultValue(){
+    var generalSettingObj: GeneralSettingObj = new GeneralSettingObj();
+    generalSettingObj.ListGsCode = ["DEFAULT_BPKB_AGING", "DEFAULT_APDUEAFTGLV"];
+    this.http.post(URLConstant.GetListGeneralSettingByListGsCode, generalSettingObj).subscribe(
+      (response) => {
+        var tempResponse = response['ResponseGeneralSettingObj'];
+        let GSBpkpAgingDefaultValue = tempResponse.find(x => x.GsCode == "DEFAULT_BPKB_AGING");
+        let GSDaysAPDuePaymentAfterGoLive = tempResponse.find(x => x.GsCode == "DEFAULT_APDUEAFTGLV");
+        if (GSBpkpAgingDefaultValue != undefined || GSBpkpAgingDefaultValue != null)
+        {
+          if(GSBpkpAgingDefaultValue != "")
+          {
+            this.BpbkAgingDefaultVal = Number(GSBpkpAgingDefaultValue["GsValue"]);
+            this.VendorForm.patchValue({
+              ReservedField5: this.BpbkAgingDefaultVal,
+            });
+          }
+        }
+        if (GSDaysAPDuePaymentAfterGoLive != undefined || GSDaysAPDuePaymentAfterGoLive != null)
+        {
+          if(GSDaysAPDuePaymentAfterGoLive != "")
+          {
+            this.DaysAPDuePaymentAfterGoLiveDefaultVal = Number(GSDaysAPDuePaymentAfterGoLive["GsValue"]);
+            this.VendorForm.patchValue({
+              ReservedField6: this.DaysAPDuePaymentAfterGoLiveDefaultVal,
+            });
+          }
+        }
+      }
+    );
+  }
 }
