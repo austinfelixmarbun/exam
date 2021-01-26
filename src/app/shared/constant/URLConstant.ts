@@ -266,7 +266,7 @@ export class URLConstant {
     public static LoginByRole = "/Authenticate/LoginByRole";
     public static LoginByToken = "/Authenticate/LoginByToken";
     public static UpdateToken = "/Authenticate/UpdateRole";
-    public static LoginURLFrontEnd = "pages/login";
+    public static LoginURLFrontEnd = "/pages/login";
 
     //FORM FEATURE
     public static GetListRefFeature = "/RefFeature/GetListRefFeature";
