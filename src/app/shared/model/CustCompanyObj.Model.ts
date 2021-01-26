@@ -18,4 +18,5 @@ export class CustCompanyObj {
   PhnExt2 : any;
   Email1 : any;
   Email2:any;
+  RefSectorEconomySlikId : number;
   }

@@ -1,13 +1,22 @@
 {
-    "title": "Industry Type",
+    "title": "Industry Type Category",
     "exportExcel": false,
     "component": [
         {
             "type": "textbox",
-            "name": "INDUSTRY_TYPE_CODE",
-            "id": "IndustryTypeCode",
+            "name": "REF_INDUSTRY_TYPE_CATEGORY_CODE",
+            "id": "RefIndustryTypeCategoryCode",
             "value": "",
-            "label": "Industry Type Code",
+            "label": "Industry Type Category Code",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "textbox",
+            "name": "REF_ECONOMIC_SECTOR_NAME",
+            "id": "RefEconomicSectorName",
+            "value": "",
+            "label": "Economic Sector",
             "placeholder": "Placeholder",
             "datatype": "text"
         },
@@ -17,15 +26,6 @@
             "id": "RefIndustryTypeCategoryName",
             "value": "",
             "label": "Industry Type Category Name",
-            "placeholder": "Placeholder",
-            "datatype": "text"
-        },
-        {
-            "type": "textbox",
-            "name": "INDUSTRY_TYPE_NAME",
-            "id": "IndustryTypeName",
-            "value": "",
-            "label": "Industry Type Name",
             "placeholder": "Placeholder",
             "datatype": "text"
         },
@@ -54,26 +54,26 @@
         }
     ],
     "querystring": {
-        "name": "searchIndustryType"
+        "name": "searchIndustryTypeCategory"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "left",
-            "label": "Industry Type Code",
-            "name": "IndustryTypeCode"
-        },
-        {
-            "type": "sort",
-            "position": "left",
-            "label": "Industry Type Name",
-            "name": "IndustryTypeName"
+            "label": "Industry Type Category Code",
+            "name": "IndustryTypeCategoryCode"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Industry Type Category Name",
-            "name": "RefIndustryTypeCategoryName"
+            "name": "IndustryTypeCategoryName"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Economic Sector",
+            "name": "EconomicSectorName"
         },
         {
             "type": "sort",
@@ -91,17 +91,17 @@
         {
             "type": "text",
             "position": "left",
-            "property": "IndustryTypeCode"
-        },
-        {
-            "type": "text",
-            "position": "left",
-            "property": "IndustryTypeName"
+            "property": "RefIndustryTypeCategoryCode"
         },
         {
             "type": "text",
             "position": "left",
             "property": "RefIndustryTypeCategoryName"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "EconomicSectorName"
         },
         {
             "type": "boolean",
@@ -114,11 +114,11 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/CommonSetting/IndustryType/Detail",
+                    "path": "/CommonSetting/IndustryTypeCategory/Detail",
                     "param": [
                         {
-                            "type": "RefIndustryTypeId",
-                            "property": "RefIndustryTypeId"
+                            "type": "IndustryTypeCategoryId",
+                            "property": "RefIndustryTypeCategoryId"
                         },
                         {
                             "type": "mode",

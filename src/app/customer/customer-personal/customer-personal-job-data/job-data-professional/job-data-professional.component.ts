@@ -35,7 +35,8 @@ export class JobDataProfessionalComponent implements OnInit {
   IdCustPersonal: number;
   inputFieldAddressObj: InputFieldObj;
   tempProfession: any;
-  tempRefIndustryType: any;
+  tempRefIndustryTypeId: number =0;
+  tempRefSectorEconomySlikId :number = 0;
   professionLookUpObj: InputLookupObj;
   industryLookUpObj: InputLookupObj;
   custPersonalJobDataObj: CustPersonalJobDataObj;
@@ -55,6 +56,11 @@ export class JobDataProfessionalComponent implements OnInit {
   preJobAddrObj: CustAddrObj;
   getCustomerAddr: any;
   getPreJobAddr: any;
+  tempRefSectorEconomySlik: any;
+  EconomicSectorName : string;
+  IndustryTypeCategoryName : string;
+  IndustryTypeName: string;
+  IsShowData : boolean =false;
   JobDataProForm = this.fb.group({
     JobDataType: [''],
     ProfessionName: [''],
@@ -104,7 +110,12 @@ export class JobDataProfessionalComponent implements OnInit {
   }
 
   getLookUpIndustry(event) {
-    this.tempRefIndustryType = event.RefIndustryTypeId;
+    this.tempRefIndustryTypeId = event.RefIndustryTypeId;
+    this.tempRefSectorEconomySlikId = event.RefSectorEconomySlikId;
+    this.EconomicSectorName =  event.EconomicSectorName;
+    this.IndustryTypeCategoryName = event.RefIndustryTypeCategoryName;
+    this.IndustryTypeName= event.IndustryTypeName;
+    this.IsShowData = true;
   }
 
   ngOnInit() { 
@@ -126,11 +137,11 @@ export class JobDataProfessionalComponent implements OnInit {
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
 
     this.industryLookUpObj = new InputLookupObj();
-    this.industryLookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
+    this.industryLookUpObj.urlJson = "./assets/lookup/lookupRefSectorEconomySlik.json";
     this.industryLookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
     this.industryLookUpObj.urlEnviPaging = environment.FoundationR3Url;
-    this.industryLookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
-    this.industryLookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
+    this.industryLookUpObj.pagingJson = "./assets/lookup/lookupRefSectorEconomySlik.json";
+    this.industryLookUpObj.genericJson = "./assets/lookup/lookupRefSectorEconomySlik.json";
     this.industryLookUpObj.isRequired = true;
 
     this.inputOthBizAddressObj = new InputAddressObj();
@@ -162,6 +173,8 @@ export class JobDataProfessionalComponent implements OnInit {
             PreviIndustryName: this.returnCustJobDataObj.PrevCoyName,
             PreviEmploymentDate: formatDate(this.returnCustJobDataObj.PrevEmploymentDt, 'yyyy-MM-dd', 'en-US'),
           });
+          this.tempRefIndustryTypeId = this.returnCustJobDataObj.RefIndustryTypeId;
+          this.tempRefSectorEconomySlikId = this.returnCustJobDataObj.RefSectorEconomySlikId;
 
           this.refProfessionObj = new RefProfessionObj();
           this.refProfessionObj.RefProfessionId = this.returnCustJobDataObj.RefProfessionId;
@@ -173,16 +186,18 @@ export class JobDataProfessionalComponent implements OnInit {
               this.tempProfession = this.returnRefProfessionObj.RefProfessionId;
             });
 
-          this.refIndustryTypeObj = new RefIndustryTypeObj();
-          this.refIndustryTypeObj.RefIndustryTypeId = this.returnCustJobDataObj.RefIndustryTypeId;
-          this.http.post(URLConstant.GetRefIndustryTypeById, this.refIndustryTypeObj).subscribe(
-            (response) => {
-              this.returnIndustryTypeObj = response;
-
-              this.industryLookUpObj.nameSelect = this.returnIndustryTypeObj.IndustryTypeName;
-              this.industryLookUpObj.jsonSelect = this.returnIndustryTypeObj;
-              this.tempRefIndustryType = this.returnIndustryTypeObj.RefIndustryTypeId;
-            });
+      
+              this.http.post(URLConstant.GetRefSectorEconomySlikCustomObjectByRefSectorEconomySlikId, {"RefSectorEconomySlikId": this.returnCustJobDataObj.RefSectorEconomySlikId }).subscribe(
+                (response) => {
+                  this.tempRefSectorEconomySlik = response; 
+                  this.industryLookUpObj.nameSelect = this.tempRefSectorEconomySlik.RefSectorEconomySlikName; 
+                  this.industryLookUpObj.jsonSelect = response;
+                  this.IndustryTypeCategoryName = this.tempRefSectorEconomySlik.RefIndustryTypeCategoryName;
+                  this.EconomicSectorName =  this.tempRefSectorEconomySlik.EconomicSectorName;
+                  this.IndustryTypeName= this.tempRefSectorEconomySlik.IndustryTypeName;
+                  this.IsShowData = true;
+                });
+          
 
           if (this.returnCustJobDataObj.JobAddrId != null) {
             this.custAddrObj = new CustAddrObj();
@@ -355,7 +370,8 @@ console.log("ameng");
     this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
     this.custPersonalJobDataObj.ProfessionalNo = this.JobDataProForm.controls["ProfessionalNo"].value;
     this.custPersonalJobDataObj.JobTitleName = this.JobDataProForm.controls["JobTitleName"].value;
-    this.custPersonalJobDataObj.RefIndustryTypeId = this.tempRefIndustryType;
+    this.custPersonalJobDataObj.RefIndustryTypeId = this.tempRefIndustryTypeId;
+    this.custPersonalJobDataObj.RefSectorEconomySlikId = this.tempRefSectorEconomySlikId;
     this.custPersonalJobDataObj.EmploymentEstablishmentDt = this.JobDataProForm.controls["EstablishmentDate"].value;
     this.custPersonalJobDataObj.PrevCoyName = this.JobDataProForm.controls["PreviIndustryName"].value;
     this.custPersonalJobDataObj.PrevEmploymentDt = this.JobDataProForm.controls["PreviEmploymentDate"].value;
@@ -425,7 +441,7 @@ console.log("ameng");
       this.setCustJobData();
       this.custPersonalJobDataObj.JobAddrId = this.jobAddrId;
       this.custPersonalJobDataObj.PrevJobAddrId = this.preJobAddrId;
-      this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
+      this.custPersonalJobDataObj.CustPersonalJobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
       this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
       this.othBizAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;

@@ -69,6 +69,8 @@ import { CoaEditDetailComponent } from './coa/coa-edit-detail/coa-edit-detail.co
 import { CoaSchemePagingComponent } from './coa-scheme/coa-scheme-paging/coa-scheme-paging.component';
 import { CoaSchemeDetailComponent } from './coa-scheme/coa-scheme-detail/coa-scheme-detail.component';
 import { CoaSchemeViewComponent } from './coa-scheme/coa-scheme-view/coa-scheme-view.component';
+import { IndustryTypeCategoryPagingComponent } from './industry-type-category/industry-type-category-paging/industry-type-category-paging.component';
+import { IndustryTypeCategoryDetailComponent } from './industry-type-category/industry-type-category-detail/industry-type-category-detail.component';
 
 
 @NgModule({
@@ -144,7 +146,9 @@ import { CoaSchemeViewComponent } from './coa-scheme/coa-scheme-view/coa-scheme-
     CoaEditDetailComponent,
     CoaSchemePagingComponent,
     CoaSchemeDetailComponent,
-    CoaSchemeViewComponent
+    CoaSchemeViewComponent,
+    IndustryTypeCategoryPagingComponent,
+    IndustryTypeCategoryDetailComponent
   ],
   providers: [
     NGXToastrService

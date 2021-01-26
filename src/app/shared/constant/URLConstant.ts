@@ -999,4 +999,11 @@ export class URLConstant {
     public static EditAuctionCompany = environment.FoundationR3Url + "/AuctionCompany/EditAuctionCompany";
     public static GetVendorByIdForEdit = environment.FoundationR3Url + "/AuctionCompany/GetVendorByIdForEdit";
 
+    // Industry Type Category
+    public static AddEditIndustryTypeCategory = environment.FoundationR3Url + "/IndustryTypeCategory/AddEditIndustryTypeCategory";
+    public static GetIndustryTypeCategoryByIndustryTypeCategoryId = environment.FoundationR3Url + "/IndustryTypeCategory/GetIndustryTypeCategoryByIndustryTypeCategoryId";
+
+
+    // Sector Economy Slik
+    public static GetRefSectorEconomySlikCustomObjectByRefSectorEconomySlikId = environment.FoundationR3Url +"/RefSectorEconomySlik/GetRefSectorEconomySlikCustomObjectByRefSectorEconomySlikId"  
 }

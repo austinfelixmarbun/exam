@@ -31,12 +31,32 @@
               </div>
           </div>
           <div class="form-group row">
-              <label class="col-md-2 adInsLabel adins-required-label" translate>Industry Type Name </label>
+              <label class="col-md-2 adInsLabel adins-required-label" translate>Economic Sector Slik</label>
               <div class="col-md-4">
                 <lib-uclookupgeneric [lookupInput]="industryLookUpObj" [parentForm]="JobDataProForm"
                 [enjiForm]="enjiForm" [identifier]="'IndustryTypeCode'" (lookup)=getLookUpIndustry($event)>
                 </lib-uclookupgeneric>
               </div>
+          </div>
+          <div *ngIf ="IsShowData">
+            <div class="form-group row">
+              <label class="col-md-2 adInsLabel" translate>Economic Sector </label>
+              <label class="col-md-4">
+                {{EconomicSectorName}}
+              </label>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 adInsLabel" translate>Industry Type Category </label>
+              <label class="col-md-4">
+                {{IndustryTypeCategoryName}}
+              </label>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 adInsLabel" translate>Industry Type </label>
+              <label class="col-md-4">
+                {{IndustryTypeName}}
+              </label>
+            </div>
           </div>
           <div class="form-group row">
               <label class="col-md-2 adInsLabel adins-required-label" translate>Establishment Date </label>

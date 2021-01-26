@@ -53,6 +53,8 @@ import { CoaEditDetailComponent } from './coa/coa-edit-detail/coa-edit-detail.co
 import { CoaSchemePagingComponent } from './coa-scheme/coa-scheme-paging/coa-scheme-paging.component';
 import { CoaSchemeDetailComponent } from './coa-scheme/coa-scheme-detail/coa-scheme-detail.component';
 import { CoaSchemeViewComponent } from './coa-scheme/coa-scheme-view/coa-scheme-view.component';
+import { IndustryTypeCategoryDetailComponent } from './industry-type-category/industry-type-category-detail/industry-type-category-detail.component';
+import { IndustryTypeCategoryPagingComponent } from './industry-type-category/industry-type-category-paging/industry-type-category-paging.component';
 
 const routes: Routes = [
   {
@@ -443,8 +445,22 @@ const routes: Routes = [
         data: {
           title: 'COA Scheme'
         },
+      },
+
+      {
+        path: 'IndustryTypeCategory/Paging',
+        component: IndustryTypeCategoryPagingComponent,
+        data: {
+          title: 'Industry Type Category'
+        },
+      },
+      {
+        path: 'IndustryTypeCategory/Detail',
+        component: IndustryTypeCategoryDetailComponent,
+        data: {
+          title: 'Industry Type Category'
+        },
       }
-      
     ]
   }
 ];
