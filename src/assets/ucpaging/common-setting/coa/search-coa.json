@@ -1,0 +1,141 @@
+{
+    "title": "COA",
+    "exportExcel": false,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "rc.MR_ENTITY_CODE",
+            "id": "EntityCode",
+            "value": "",
+            "label": "Entity Code",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "textbox",
+            "name": "rm.DESCR",
+            "id": "Descr",
+            "value": "",
+            "label": "Entity Name",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "dropdown",
+            "name": "rc.PAYMENT_ALLOC_CODE",
+            "datatype": "text",
+            "id": "PaymentAllocCode",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": true,
+            "isSelectOne": false,
+            "url": "",
+            "path": "/RefPaymentAlloc/GetListKeyValueActive",
+            "label": "Payment Alloc Code",
+            "items": [],
+            "itemsUrl": []
+        },
+        {
+            "type": "textbox",
+            "name": "rc.CURR_CODE",
+            "id": "CurrCode",
+            "value": "",
+            "label": "Currency Code",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        },
+        {
+            "type": "textbox",
+            "name": "rc.COA",
+            "id": "Coa",
+            "value": "",
+            "label": "COA",
+            "placeholder": "Placeholder",
+            "datatype": "text"
+        }
+    ],
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "ENTITY TYPE",
+            "name": "rm2.DESCR"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "PAYMENT ALLOCATION CODE",
+            "name": "rc.PAYMENT_ALLOC_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "ENTITY CODE",
+            "name": "rc.MR_ENTITY_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "CURRENCY CODE",
+            "name": "rc.CURR_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "COA",
+            "name": "rc.COA"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "ACTION"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "EntityTypeDescr"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "PaymentAllocCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "EntityCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "CurrCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "Coa"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "/CommonSetting/coa/detail/edit",
+                    "param": [
+                        {
+                            "type": "RefCoaId",
+                            "property": "RefCoaId"
+                        }
+                    ],
+                    "icon": "ft-edit-2"
+                }
+            ]
+        }
+    ],
+    "querystring": {
+        "name": "searchCoa"
+    }
+}

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UcpagingModule } from '@adins/ucpaging';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
@@ -68,7 +68,7 @@ export class ProductOfferingApprovalComponent implements OnInit {
       if (String.Format("{0:L}", ev.RowObj.CURRENT_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
         this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_PROCESS_TASK);
       } else {
-        AdInsHelper.RedirectUrl(this.router,["/Product/OfferingApproval/Detail"],{ "ProdOfferingHId": ev.RowObj.ProdOfferingHId, "TaskId" : ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId });
+        AdInsHelper.RedirectUrl(this.router,["/Product/OfferingApproval/Detail"],{ "ProdOfferingHId": ev.RowObj.ProdOfferingHId, "TaskId" : ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId     });
       }
     }
     else if (ev.Key == "HoldTask") {

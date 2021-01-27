@@ -91,4 +91,8 @@ export const Full_ROUTES: Routes = [
     path: 'Integration',
     loadChildren: './integration/integration.module#IntegrationModule'
   },
+  {
+    path: 'DocumentManagement',
+    loadChildren: './document-management/document-management.module#DocumentManagementModule'
+  }
 ];

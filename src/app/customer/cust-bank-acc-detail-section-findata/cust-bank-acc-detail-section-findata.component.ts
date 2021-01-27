@@ -6,16 +6,15 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
-import { CustBankStmntDObj } from 'app/shared/model/CustBankStmntDObj.Model';
-import { CustBankStmntHObj } from 'app/shared/model/CustBankStmntHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CustBankStmntObj } from 'app/shared/model/CustBankStmntObj.Model';
 
 @Component({
   selector: 'app-cust-bank-acc-detail-section-findata',
@@ -36,7 +35,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
   IsActive : boolean;
 
 
-  private custBankStmntH: CustBankStmntHObj;
+  private custBankStmnt: CustBankStmntObj;
 
   CustBankAccForm = this.fb.group({
     CustBankAccId: [0, [Validators.required]],
@@ -65,7 +64,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     this.monthOfYear = new Array(...moment.months());
     this.rowCustBankStmnt = 0;
     this.maxYear = moment().year();
-    this.custBankStmntH = new CustBankStmntHObj();
+    this.custBankStmnt = new CustBankStmntObj();
   }
 
   ngOnInit() {
@@ -116,7 +115,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       var custBankAcc = new CustBankAccObj();
       custBankAcc.CustBankAccId = this.CustBankAccId;
       this.httpClient.post(URLConstant.GetCBAForCustFinDataEditModeByCustBankAccId, custBankAcc).subscribe(
-        (response: any) => {
+        (response: any) => {          
           this.bankName = response.RefBankObj.BankName;
           this.CustBankAccForm.patchValue({
             CustBankAccId: response.CustBankAccObj.CustBankAccId,
@@ -135,21 +134,9 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
           this.CheckDefault();
           if (response.CustBankAccObj.IsBankStmnt) {
             var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
-            this.custBankStmntH = new CustBankStmntHObj();
-            this.custBankStmntH.CustBankStmntHId = response.CustBankStmntHObj.CustBankStmntHId;
-            this.custBankStmntH.CustId = response.CustBankStmntHObj.CustId;
-            this.custBankStmntH.CustBankAccId = response.CustBankStmntHObj.CustBankAccId;
-            this.custBankStmntH.InputDt = response.CustBankStmntHObj.InputDt;
-            this.custBankStmntH.InputBy = response.CustBankStmntHObj.InputBy;
-            this.custBankStmntH.StartPeriod = response.CustBankStmntHObj.StartPeriod;
-            this.custBankStmntH.EndPeriod = response.CustBankStmntHObj.EndPeriod;
-            this.custBankStmntH.BalanceAmt = parseFloat(response.CustBankStmntHObj.BalanceAmt);
-            this.custBankStmntH.RowVersion = response.CustBankStmntHObj.RowVersion;
-
-            for (const item of response.CustBankStmntDObjs) {
+            for (const item of response.CustBankStmntObjs) {
               var formGroup = this.fb.group({
-                CustBankStmntDId: [item.CustBankStmntDId, [Validators.required]],
-                CustBankStmntHId: [item.CustBankStmntHId, [Validators.required]],
+                CustBankStmntId: [item.CustBankStmntId, [Validators.required]],
                 Month: [this.monthOfYear.indexOf(item.Month), [Validators.required]],
                 Year: [item.Year, [Validators.required, Validators.pattern("^[0-9]+$")]],
                 DebitAmt: [item.DebitAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
@@ -173,8 +160,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
 
     var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
     var formGroup = this.fb.group({
-      CustBankStmntDId: [0, [Validators.required]],
-      CustBankStmntHId: [this.custBankStmntH.CustBankStmntHId, [Validators.required]],
+      CustBankStmntId: [this.custBankStmnt.CustBankStmntId, [Validators.required]],
       Month: ['', [Validators.required]],
       Year: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
       DebitAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
@@ -239,7 +225,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       else if (this.pageType == "editStmnt") {
         var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
-        var listCustBankStmntD = new Array<CustBankStmntDObj>();
+        var listCustBankStmnt = new Array<CustBankStmntObj>();
         var totalBalance = 0;
         for (var i = 0; i < formArray.length; i++) {
           const bankStmnt = formArray.at(i).value;
@@ -253,30 +239,22 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
               return false;
             }
           }
-          var custBankStmntD = new CustBankStmntDObj();
-          custBankStmntD.CustBankStmntHId = bankStmnt.CustBankStmntHId;
-          custBankStmntD.RowVersion = bankStmnt.RowVersion;
-          custBankStmntD.Month = this.monthOfYear[bankStmnt.Month];
-          custBankStmntD.Year = bankStmnt.Year;
-          custBankStmntD.DebitAmt = bankStmnt.DebitAmt;
-          custBankStmntD.CreditAmt = bankStmnt.CreditAmt;
-          custBankStmntD.BalanceAmt = parseFloat(bankStmnt.BalanceAmt);
-          listCustBankStmntD.push(custBankStmntD);
+          var custBankStmnt = new CustBankStmntObj();
+          custBankStmnt.CustBankStmntId = bankStmnt.CustBankStmntId;
+          custBankStmnt.RowVersion = bankStmnt.RowVersion;
+          custBankStmnt.Month = this.monthOfYear[bankStmnt.Month];
+          custBankStmnt.Year = bankStmnt.Year;
+          custBankStmnt.DebitAmt = bankStmnt.DebitAmt;
+          custBankStmnt.CreditAmt = bankStmnt.CreditAmt;
+          custBankStmnt.BalanceAmt = parseFloat(bankStmnt.BalanceAmt);
+          listCustBankStmnt.push(custBankStmnt);
           totalBalance += parseFloat(bankStmnt.BalanceAmt);
         }
 
-        var custBankStmntH = new CustBankStmntHObj();
-        custBankStmntH.CustBankStmntHId = this.custBankStmntH.CustBankStmntHId;
-        custBankStmntH.RowVersion = this.custBankStmntH.RowVersion;
-        custBankStmntH.CustId = formData.CustId;
-        custBankStmntH.CustBankAccId = formData.CustBankAccId;
-        custBankStmntH.InputDt = new Date();
-        custBankStmntH.InputBy = currentUserContext.UserName;
-        custBankStmntH.StartPeriod = new Date();
-        custBankStmntH.EndPeriod = new Date();
-        custBankStmntH.BalanceAmt = totalBalance;
+        custBankAccObj.StartPeriod = "";
+        custBankAccObj.EndPeriod = "";
 
-        var reqObj = { "custBankAccObj": custBankAccObj, "custBankStmntH": custBankStmntH, "custBankStmntDObjs": listCustBankStmntD };
+        var reqObj = { "custBankAccObj": custBankAccObj, "custBankStmntObjs": listCustBankStmnt };
         this.httpClient.post(URLConstant.EditCBAForCustFinData, reqObj).subscribe(
           (response) => {
             this.activeModal.close(response);

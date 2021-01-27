@@ -10,12 +10,12 @@ export class CommonConstant {
     public static CURRENT_USER_CONTEXT = "currentUserContext"
     public static PAGE_ACCESS = "PageAccess";
     public static TOKEN = "access_token";
-    public static LOCAL_IP = "LocalIp";
     public static VERSION = "Version";
     public static LAST_ACCESS_TIME = "LastAccessTime";
     public static MENU = "Menu"
     public static ReturnObj = 'ReturnObject';
     public static ENVIRONMENT_MODULE = 'EnvironmentModule';
+    public static OFFICE_CODE = 'OfficeCode';
 
     //APPROVAL TASK MAPPER - TRX TYPE
     public static ApvTrxTypeProductHO = "PROD_HO_APV";
@@ -195,7 +195,7 @@ export class CommonConstant {
     public static AttrGroupCustCompanyFinData = "CUST_COMPANY_FINDATA"
     public static AttrGroupCustPersonalFinData = "CUST_PERSONAL_FINDATA"
     public static AttrGroupCustCompanyOther = "CUST_COMPANY_OTH"
-    public static AttrGroupCustPersonalOther= "CUST_PERSONAL_OTH"
+    public static AttrGroupCustPersonalOther = "CUST_PERSONAL_OTH"
     public static AttrGroupAsset = "ASSET";
 
 
@@ -223,6 +223,38 @@ export class CommonConstant {
     public static CFRFN = "CFRFN";
     public static CFNEWCAR = "CFNEWCAR";
     public static CFNA = "CFNA";
-    
+
     //ATTR GROUP
+
+    //DMS
+    public static DmsKey = "PHL7KV8RR0VG30K4";
+    public static DmsIV = "0G7HFV96AVWXUQ51";
+    public static DmsNoCust = "No Customer";
+    public static DmsNoApp = "No Application";
+    public static DmsNoAgr = "No Agreement";
+    public static DmsMouId = "Mou Id";
+    public static DmsLeadId = "Lead Id";
+    public static DmsOverideSecurity = "OverideSecurity";
+    public static DmsOverideUpload = "Upload";
+    public static DmsOverideView = "View";
+    public static DmsOverideUploadView = "Upload,View";
+    public static DmsViewCodeCust = "ConfinsCust";
+    public static DmsViewCodeApp = "ConfinsApp";
+    public static DmsViewCodeAgr = "ConfinsAgr";
+    public static DmsViewCodeMou = "ConfinsMou";
+    public static DmsViewCodeLead = "ConfinsLead";
+    
+    //Approval
+    public static SCHM_CODE_APV_HO_ACT_SCHM = "APV_HO_ACT_SCHM";
+    public static SCHM_CODE_APV_HO_DEACT_SCHM = "APV_HO_DEACT_SCHM";
+    public static SCHM_CODE_APV_OFR_ACT_SCHM = "APV_OFR_ACT_SCHM";
+    public static SCHM_CODE_APV_OFR_DEACT_SCHM = "APV_OFR_DEACT_SCHM";
+    public static CAT_CODE_PRD_HO_APV = "PRD_HO_APV";
+    public static CAT_CODE_PRD_HO_DEACT_APV = "PRD_HO_DEACT_APV";
+    public static CAT_CODE_PRD_OFR_APV = "PRD_OFR_APV";
+    public static CAT_CODE_PRD_OFR_DEACT_APV = "PRD_OFR_DEACT_APV";
+    public static PRD_HO_APV_TYPE = "PROD_HO_APV_TYPE";
+    public static PRD_HO_DEACT_APV_TYPE = "PROD_HO_DEACT_APV_TYPE";
+    public static PRD_OFR_APV_TYPE = "PROD_OFR_APV_TYPE";
+    public static PRD_OFR_DEACT_APV_TYPE = "PROD_OFR_DEACT_APV_TYPE";    
 }

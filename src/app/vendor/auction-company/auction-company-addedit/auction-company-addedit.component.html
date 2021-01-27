@@ -1,0 +1,336 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+
+        <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="card-title" id="horz-layout-colored-controls" translate>{{title}}</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="px-3">
+          <form class="form form-horizontal" [formGroup]="AuctionCompanyForm" (ngSubmit)="AuctionCompanyForm.valid && SaveForm()"
+            #enjiForm="ngForm">
+
+            <lib-ucSubsection [id]="'MainInfoId'" [title]="'Main Info'" [panel]="'MainInfo'">
+            </lib-ucSubsection>
+            <div class="form-body" id="MainInfo">
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Vendor Category</label>
+                <div class="col-md-3">
+                  <select class="form-control" formControlName="Category">
+                    <option value="">Auction Company</option>
+                  </select>
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.Category" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>                
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Auction Company Code</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="VendorCode">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.VendorCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>                
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Auction Company Name</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="VendorName">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.VendorName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">ID Type</label>
+                <div class="col-md-4">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="MrIdTypeCode"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AuctionCompanyForm.controls.MrIdTypeCode.invalid }">
+                    <option *ngFor="let it of itemIdType" value="{{it.Key}}">
+                      {{it.Value}}</option>
+                  </select>
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Registration Number</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="RegistrationNo"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && AuctionCompanyForm.controls.RegistrationNo.invalid}">
+                    <lib-uc-show-errors [control]="AuctionCompanyForm.controls.RegistrationNo" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Address</label>
+                <div class="col-md-4">
+                  <textarea class="form-control" formControlName="Addr"> </textarea>
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.Addr" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              
+              <div class="form-body">
+                <div class="form-group row">
+                  <label class="col-md-3 adins-required-label">Zip Code</label>
+                  <div class="col-md-3" *ngIf="inputLookupZipcodeObj.isReady">
+                    <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="AuctionCompanyForm"
+                      [enjiForm]="enjiForm" [identifier]="'Zipcode'" (lookup)="getLookupZipcode($event)">
+                    </lib-uclookupgeneric>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Kelurahan</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="Kelurahan">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.Kelurahan" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Kecamatan</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="Kecamatan">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.Kecamatan" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>City</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="City">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.City" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Province</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="Province">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.Province" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Mobile Phone 1</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="Phn1">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.Phn1" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3">Mobile Phone 2</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="Phn2">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Active Status</label>
+                <div class="col-md-9">
+                  <select name="" id="" class="form-control" formControlName="IsActive">
+                    <option value="">Select One</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.IsActive" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+            </div>
+
+            <lib-ucSubsection [id]="'ContactPersonId'" [title]="'Contact Person'" [panel]="'ContactPerson'">
+            </lib-ucSubsection>
+            <div class="form-body" id="ContactPerson">
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Name</label>          
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="Name">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.Name" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Job Position</label>
+                <div class="col-md-4">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="MrJobPositionCode"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AuctionCompanyForm.controls.MrJobPositionCode.invalid }">
+                    <option value="">Select One</option>
+                    <option *ngFor="let it of tempMrJobPositionCode" [value]="it.Key">
+                      {{it.Value}}</option>
+                  </select>
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.MrJobPostitionCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Phone1</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="Phone1">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.Phone1" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3">Phone2</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="Phone2">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Email</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="Email">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.Email" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Address</label>
+                <div class="col-md-4">
+                  <textarea class="form-control" formControlName="AddrContactPerson"> </textarea>
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.AddrContactPerson" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              
+              <div class="form-body">
+                <div class="form-group row">
+                  <label class="col-md-3 adins-required-label">Zip Code</label>
+                  <div class="col-md-3" *ngIf="inputLookupZipcodeContactPersonObj.isReady">
+                    <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeContactPersonObj" [parentForm]="AuctionCompanyForm"
+                      [enjiForm]="enjiForm" [identifier]="'ZipcodeContactPerson'" (lookup)="getLookupZipcodeContactPerson($event)">
+                    </lib-uclookupgeneric>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>City</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="CityContactPerson">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.CityContactPerson" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>Province</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="ProvinceContactPerson">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.ProvinceContactPerson" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Join Date</label>
+                <div class="col-md-4">
+                  <input type="date" class="form-control" formControlName="JoinDate">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.JoinDate" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3">Owner</label>
+                <div class="col-md-9">
+                  <input type="checkbox" formControlName="IsOwner">
+                </div>
+              </div>
+            </div>
+
+            <lib-ucSubsection [id]="'TaxInfo'" [title]="'Tax Info'" [panel]="'TaxInformation'">
+            </lib-ucSubsection>
+            <div id="TaxInformation">
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label" translate>Tax Calculation Method</label>
+                <div class="col-md-9">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AuctionCompanyForm.controls.MrTaxCalcMethodCode.invalid }">
+                    <option value="">Select One</option>
+                    <option *ngFor="let it of itemCalcMethodType" value="{{it.Key}}">
+                      {{it.Value}}</option>
+                  </select>
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.MrTaxCalcMethodCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3  adins-required-label">VAT</label>
+                <div class="col-md-9">
+                  <select class="form-control" formControlName="IsVat">
+                    <option value="">Select One</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3">NPWP Exist</label>
+                <div class="col-md-9">
+                  <input type="checkbox" formControlName="IsNpwpExist" (change)="NpwpCheck()">
+                </div>
+              </div>
+              
+              <div [hidden]="isHidden">
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>Tax Payer Number</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxIdNo" [ngClass]="{ 'is-invalid': enjiForm.submitted && AuctionCompanyForm.controls.TaxIdNo.invalid}">
+                    <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adins-required-label" translate>Tax Payer Name</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxpayerName" [ngClass]="{ 'is-invalid': enjiForm.submitted && AuctionCompanyForm.controls.TaxpayerName.invalid}">
+                    <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxpayerName" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1"
+                [routerLink]="['/Vendor/auctioncompany/paging']" translate>
+                <i class="fa fa-arrow-circle-left"></i> Back
+              </button>
+              <button type="submit" class="btn btn-raised btn-primary">
+                <i class="far"></i> Submit
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

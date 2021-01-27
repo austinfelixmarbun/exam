@@ -7,7 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AssetMasterObj } from 'app/shared/model/AssetMasterObj.Model';
 import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 import { ListRequestCriteriaObj } from 'app/shared/model/ListRequestCriteriaObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AssetSchmListObj } from 'app/shared/model/AssetSchmListObj.Model';
 import { ListAssetSchmDObj } from 'app/shared/model/ListAssetSchmDObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';

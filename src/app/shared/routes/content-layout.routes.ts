@@ -10,5 +10,9 @@ export const CONTENT_ROUTES: Routes = [
     {
         path: 'View',
         loadChildren: './view/view.module#ViewModule'
+    },
+    {
+        path: 'DocumentManagementView',
+        loadChildren: './document-management/document-management.module#DocumentManagementModule'
     }
 ];
