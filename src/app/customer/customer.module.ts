@@ -124,6 +124,25 @@ import { PopUpViewAsliRIMotherNameComponent } from './customer-personal/customer
 import { PopUpViewPhoneAgeVerificationComponent } from './customer-personal/customer-personal-main-info/pop-up-asli-ri/pop-up-view-asli-ri-phone-age-verification/pop-up-view-asli-ri-phone-age-verification.component';
 import { PopUpViewRiTaxVerificationComponent } from './customer-personal/customer-personal-main-info/pop-up-asli-ri/pop-up-view-asli-ri-tax-verification/pop-up-view-asli-ri-tax-verification.component';
 import { PopUpViewRiProfesionalVerificationComponent } from './customer-personal/customer-personal-main-info/pop-up-asli-ri/pop-up-view-asli-ri-professional-verification/pop-up-view-asli-ri-professional-verification.component';
+import { PopUpViewTrustingSocialComponent } from './customer-personal/customer-personal-main-info/pop-up-trusting-social/pop-up-view-trusting-social.component';
+import { CustomerCompanyComponent } from './customer-company/customer-company-main-info/popup-pefindo/customer-company-data/customer-company-data.component';
+import { DashboardComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/dashboard/dashboard.component';
+import { CustomerPersonalDataComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/customer-personal-data/customer-personal-data.component';
+import { MoSummaryComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/mo-summary/mo-summary.component';
+import { SubjectInfoComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/subject-info/subject-info.component';
+import { PefindoScoreComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/pefindo-score/pefindo-score.component';
+import { ContractsComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/contracts/contracts.component';
+import { PefindoAlertComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/pefindo-alert-quest/pefindo-alert-quest.component';
+import { SecuritiesComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/securities/securities.component';
+import { OtherLiabilitiesComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/other-liabilities/other-liabilities.component';
+import { InvolvementsComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/involvements/involvements.component';
+import { RelationsComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/relations/relations.component';
+import { InquiriesComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/inquiries/inquiries.component';
+import { DisputesComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/disputes/disputes.component';
+import { FinancialStatementsComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/financial-statements/financial-statements.component';
+import { AllComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/all/all.component';
+import { PopUpViewDukcapilComponent } from './customer-personal/customer-personal-main-info/pop-up-dukcapil/pop-up-view-dukcapil.component';
+import { PopUpViewSlikComponent } from './customer-personal/customer-personal-main-info/pop-up-slik/pop-up-view-slik.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -262,7 +281,27 @@ export const customCurrencyMaskConfig = {
     PopUpViewAsliRIMotherNameComponent,
     PopUpViewPhoneAgeVerificationComponent,
     PopUpViewRiProfesionalVerificationComponent,
-    PopUpViewRiTaxVerificationComponent
+    PopUpViewRiTaxVerificationComponent,
+    PopUpViewTrustingSocialComponent,
+    CustomerCompanyComponent,
+    CustomerPersonalJobDataComponent,
+    DashboardComponent,
+    CustomerPersonalDataComponent,
+    MoSummaryComponent,
+    SubjectInfoComponent,
+    PefindoScoreComponent,
+    ContractsComponent,
+    PefindoAlertComponent,
+    SecuritiesComponent,
+    OtherLiabilitiesComponent,
+    InvolvementsComponent,
+    RelationsComponent,
+    InquiriesComponent,
+    DisputesComponent,
+    FinancialStatementsComponent,
+    AllComponent,
+    PopUpViewDukcapilComponent,
+    PopUpViewSlikComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent, CustAssetDetailComponent]
   ,

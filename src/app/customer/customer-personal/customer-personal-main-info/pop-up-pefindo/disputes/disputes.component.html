@@ -1,0 +1,41 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+         
+        <div class="px-3" >
+
+        
+          <lib-ucSubsection [id]="'DisputesId'" [title]="'Disputes'"  [panel]="'Disputes'">
+          </lib-ucSubsection>
+          <div id="Disputes">
+            <div class="form-group row">
+              <label class="col-md-3" translate>No. of Inquiries During Last Months</label>             
+            </div>
+            <table class="table table-responsive-md text-center table-hover">
+              <thead>
+                <tr class="table-header">
+                  <th>
+                    <span class="thead-header" translate>Disputes Details</span>
+                  </th>                  
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of ListDisputes">
+                  <td class="text-left">{{item.Active}}</td>
+                  <td class="text-center">{{item.ActiveAmount}}</td>
+                  <td class="text-left">{{item.Closed}}</td>
+                  <td class="text-center">{{item.ClosedAmount}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
