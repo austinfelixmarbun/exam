@@ -1,0 +1,101 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">      
+      <div class="card-body">
+        <div class="px-3">
+          <div class="card-body">
+            <lib-ucSubsection [id]="'CustData'" [title]="'CUSTOMER PERSONAL DATA'" [panel]="'dCustData'">
+            </lib-ucSubsection>
+            <div class="form-body" id="dCustData">
+              <div class="form-group row">
+                <label class="col-md-3" translate>Customer Full Name Name</label>
+                <label class="col-md-3" translate>James Andrew / Valid</label>                
+                <label class="col-md-3" translate>Birth Place</label>
+                <label class="col-md-3" translate>Jakarta</label> 
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3" translate>Birth Date</label>
+                <label class="col-md-3" translate>16-10-1989</label>   
+                <label class="col-md-3" translate>NIK</label>
+                <label class="col-md-3" translate>321299230029291</label>             
+              </div>
+            </div>
+
+            <mat-tab-group mat-stretch-tabs>
+              <mat-tab label="Dashboard">
+                <ng-template matTabContent>
+                  <app-dashboard></app-dashboard>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="MO Summary">
+                <ng-template matTabContent>
+                  <app-mo-summary></app-mo-summary>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Subject Info">
+                <ng-template matTabContent>
+                  <app-subject-info></app-subject-info>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="PEFINDO Score">
+                <ng-template matTabContent>
+                  <app-pefindo-score></app-pefindo-score>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Contracts">
+                <ng-template matTabContent>
+                  <app-contracts></app-contracts>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="PEFINDO Alert Quest">
+                <ng-template matTabContent>
+                  <app-pefindo-alert-quest></app-pefindo-alert-quest>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Securities">
+                <ng-template matTabContent>
+                  <app-securities></app-securities>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Other Liabilities">
+                <ng-template matTabContent>
+                  <app-other-liabilities></app-other-liabilities>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Involvements">
+                <ng-template matTabContent>
+                  <app-involvements></app-involvements>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Relations">
+                <ng-template matTabContent>
+                  <app-relations></app-relations>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Inquiries">
+                <ng-template matTabContent>
+                  <app-inquiries></app-inquiries>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Disputes">
+                <ng-template matTabContent>
+                  <app-disputes></app-disputes>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Financial Statements">
+                <ng-template matTabContent>
+                  <app-financial-statements></app-financial-statements>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="All">
+                <ng-template matTabContent>
+                  <app-all></app-all>
+                </ng-template>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

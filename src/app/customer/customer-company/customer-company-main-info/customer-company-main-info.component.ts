@@ -10,6 +10,7 @@ import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-customer-company-main-info',
@@ -34,6 +35,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   GetListActiveRefMasterWithMappingCodeAllUrl: string;
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
+  closeResult;
 
   CustomerCompanyForm = this.fb.group({
     CustModel: ['', [Validators.required]],
@@ -45,7 +47,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     VipNotes: ['', [Validators.required]]
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private modalService: NgbModal) {
     this.GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
   }
@@ -133,5 +135,31 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       this.VipNotesRequired = true;
     }
     this.CustomerCompanyForm.controls.VipNotes.updateValueAndValidity();
+  }
+
+  //POP UP
+  openPopUp(content) {
+    this.Open(content);
+  }
+
+  Open(contentCrossApp) {
+    this.modalService.open(contentCrossApp).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+  }
+
+  private getDismissReason(reason): string {
+    if (reason === 1) {
+      return 'by pressing ESC';
+    } else if (reason === 0) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }

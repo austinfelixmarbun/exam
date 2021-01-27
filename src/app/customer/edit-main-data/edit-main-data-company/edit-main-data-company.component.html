@@ -83,6 +83,63 @@
             <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerCompanyForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'">
             </lib-ucaddress> 
           </div>
+
+          <lib-ucSubsection [id]="'FraudCheckInfo'" [title]="'Fraud Checking Customer'" [panel]="'dFraudCheckInfo'">
+          </lib-ucSubsection>
+          <div id="dFraudCheckInfo" class="row">
+            <div class="col-md-12">
+                <label class="col-md-3" translate>Pefindo</label>
+                        
+                <span class="col-md-6">
+                  <label translate>Last Check is 63 days ago /                        
+                  </label>                                               
+                  <button type="button" (click)="openPopUp(popUpPefindo)" class="btn btn-raised btn-primary" translate>
+                    Hit Pefindo
+                  </button>   
+                  /
+                  <a (click)="openPopUp(popUpViewPefindo)">View</a> 
+                </span>    
+            </div>
+            <div class="col-md-12">
+                <label class="col-md-3" translate>SLIK</label>                            
+                <label class="col-md-6" translate>Not hit yet /  
+                  <button type="button" (click)="openPopUp(popUpSlik)" class="btn btn-raised btn-primary"
+                  translate>
+                  Hit SLIK
+                </button>                     
+                </label>    
+            </div>
+          </div>
+
+          <!-- POP UP PEFINDO -->
+          <ng-template #popUpPefindo let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <app-customer-company-data></app-customer-company-data>
+          </ng-template>
+
+          <ng-template #popUpViewPefindo let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <app-customer-company-data></app-customer-company-data>
+          </ng-template>
+
+          <!-- POP UP SLIK -->
+          <ng-template #popUpSlik let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <app-pop-up-view-slik></app-pop-up-view-slik>
+          </ng-template>
+          
           <div class="form-actions right">
             <button type="button" class="btn btn-raised btn-warning mr-1" translate (click)="back()">
               <i class="far fa-window-close"></i> Cancel

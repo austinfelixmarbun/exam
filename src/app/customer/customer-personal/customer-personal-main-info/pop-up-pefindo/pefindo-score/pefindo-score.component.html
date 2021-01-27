@@ -1,0 +1,134 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="card-title" id="horz-layout-colored-controls" translate>PEFINDO SCORE (PS)</h4>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+         
+        <div class="px-3" >
+
+          
+          <lib-ucSubsection [id]="'PefindoScoreId'" [title]="' PEFINDO SCORE INFO'"  [panel]="'PefindoScore'">
+          </lib-ucSubsection>
+          <div id="PefindoScore">
+            <div class="form-body" id="PefindoScoresId">
+              <div class="form-group row">
+                <label class="col-md-3" translate>PEFINDO Score</label>
+                <label class="col-md-3 text-right" translate>530</label>  
+                <label class="col-md-3" translate>PEFINDO Grade</label>
+                <label class="col-md-3" translate>E1</label>               
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3" translate>Probability of Default (%)</label>
+                <label class="col-md-3 text-right" translate>50</label>  
+                <label class="col-md-3" translate>Description</label>
+                <label class="col-md-3" translate>Very High Risk</label>               
+              </div>
+            </div>
+          </div>
+
+        
+          <lib-ucSubsection [id]="'ReasonCodeId'" [title]="'Reason Codes'"  [panel]="'ReasonCode'">
+          </lib-ucSubsection>
+          <div id="ReasonCode">
+            <table class="table table-responsive-md text-center table-hover">
+              <thead>
+                <tr class="table-header">
+                  <th>
+                    <span class="thead-header" translate>CODE</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>DESCRIPTION</span>
+                  </th>
+                  
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of ListReasonCode">
+                  <td class="text-center">{{item.Code}}</td>
+                  <td class="text-left">{{item.Descr}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        
+          <lib-ucSubsection [id]="'ScoreHistoryId'" [title]="'Score History'"  [panel]="'ScoreHistory'">
+          </lib-ucSubsection>
+          <div id="ScoreHistory">
+            <table class="table table-responsive-md text-center table-hover">
+              <thead>
+                <tr class="table-header">
+                  <th>
+                    <span class="thead-header" translate>Month/Year</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>11/19</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>12/19</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>01/20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>02/20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>03/20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>04/20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>05/20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>06/20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>07/20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>08/20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>09/20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>10/20</span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of ListScoreHistory">
+                  <td class="text-left">{{item.MonthYear}}</td>
+                  <td class="text-center">{{item.Nov19}}</td>
+                  <td class="text-center">{{item.Dec19}}</td>
+                  <td class="text-center">{{item.Jan20}}</td>
+                  <td class="text-center">{{item.Feb20 }}</td>
+                  <td class="text-center">{{item.Mar20 }}</td>
+                  <td class="text-center">{{item.Apr20 }}</td>
+                  <td class="text-center">{{item.May20 }}</td>
+                  <td class="text-center">{{item.Jun20 }}</td>
+                  <td class="text-center">{{item.Jul20 }}</td>
+                  <td class="text-center">{{item.Aug20  }}</td>
+                  <td class="text-center">{{item.Sep20  }}</td>
+                  <td class="text-center">{{item.Oct20  }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

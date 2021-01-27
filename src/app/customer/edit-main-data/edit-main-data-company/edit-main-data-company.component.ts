@@ -14,6 +14,7 @@ import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-edit-main-data-company',
@@ -44,8 +45,9 @@ export class EditMainDataCompanyComponent implements OnInit {
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
   UcAddressObj: UcAddressObj;
+  closeResult;
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService) {
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService,private modalService: NgbModal) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.getCustCompanyByCustIdUrl = URLConstant.GetCustCompanyByCustId;
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
@@ -242,5 +244,31 @@ export class EditMainDataCompanyComponent implements OnInit {
        
     }
     this.CustomerCompanyForm.controls.VipNotes.updateValueAndValidity();
+  }
+
+  //POP UP
+  openPopUp(content) {
+    this.Open(content);
+  }
+
+  Open(contentCrossApp) {
+    this.modalService.open(contentCrossApp).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+  }
+
+  private getDismissReason(reason): string {
+    if (reason === 1) {
+      return 'by pressing ESC';
+    } else if (reason === 0) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }

@@ -1,0 +1,145 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+         
+        <div class="px-3" >
+
+          
+          <lib-ucSubsection [id]="'PefindoScoreId'" [title]="' PEFINDO SCORE'"  [panel]="'PefindoScore'">
+          </lib-ucSubsection>
+          <div id="PefindoScore">
+            <div class="form-body" id="PefindoScoresId">
+              <div class="form-group row">
+                <span class="fa-stack fa-4x">
+                  <i class="fa fa-circle fa-stack-2x" style="color: red"></i>
+                  <strong class="fa-stack-1x" style="color:white; font-size: 50%;">D2</strong>
+                </span>
+                <span class="fa-stack fa-4x">
+                  <i class="fa fa-circle fa-stack-2x" style="color: red"></i>
+                  <strong class="fa-stack-1x" style="color: white; font-size: 50%;">616</strong>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <lib-ucSubsection [id]="'Inquiries'" [title]="'Inquiries'" [panel]="'dInquiries'">
+          </lib-ucSubsection>
+          <div class="form-body" id="dInquiries">
+            <div class="form-group row">
+              <label class="col-md-3" translate>Number of Inquiries during last 12 months</label>
+              <label class="col-md-3" translate>1</label>  
+              <label class="col-md-3" translate>Inquiring Subscribers during last 12 months</label>
+              <label class="col-md-3" translate>1</label>               
+            </div>
+          </div>
+
+          <lib-ucSubsection [id]="'Contracts'" [title]="'Contracts'" [panel]="'dContracts'">
+          </lib-ucSubsection>
+          <div class="form-body" id="dContracts">
+            <div class="form-group row">
+              <label class="col-md-3" translate>Past Due Amount Sum (Open Contracts)</label>
+              <label class="col-md-3" translate>IDR 34,540.00</label>                
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Worst Current Arrears</label>
+              <label class="col-md-3" translate>0 days</label>                
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Worst Arrears Last 12 Months</label>
+              <label class="col-md-3" translate>0 days</label>                
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Number of Different Creditors</label>
+              <label class="col-md-3 text-right" translate>7</label>                
+            </div>
+          </div>
+        
+          <lib-ucSubsection [id]="'OpenContractId'" [title]="'Open Contracts'"  [panel]="'OpenContract'">
+          </lib-ucSubsection>
+          <div id="OpenContract">
+            <table class="table table-responsive-md text-center table-hover">
+              <thead>
+                <tr class="table-header">
+                  <th>
+                    <span class="thead-header" translate>SECTOR</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>TYPE</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>OPENED UPDATE</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>TOTAL</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>BALANCE</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>PAST DUE</span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of ListOpenContract">
+                  <td class="text-left" *ngIf="item.Sector != 'Sum - Debtor /'">{{item.Sector}}</td>
+                  <td class="text-right" *ngIf="item.Sector == 'Sum - Debtor /'">{{item.Sector}}</td>
+                  <td class="text-left">{{item.Type}}</td>
+                  <td class="text-center">{{item.OpenedUpdated}}</td>
+                  <td class="text-right">{{item.Total}}</td>
+                  <td class="text-right">{{item.Balance}}</td>
+                  <td class="text-right">{{item.PastDue}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        
+          <lib-ucSubsection [id]="'ClosedContractId'" [title]="'Closed Contracts'"  [panel]="'ClosedContract'">
+          </lib-ucSubsection>
+          <div id="ClosedContract">
+            <table class="table table-responsive-md text-center table-hover">
+              <thead>
+                <tr class="table-header">
+                  <th>
+                    <span class="thead-header" translate>SECTOR</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>TYPE</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>CLOSED STATUS</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>TOTAL</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>BALANCE</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>PAST DUE</span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of ListClosedContract">
+                  <td class="text-left" *ngIf="item.Sector != 'Sum - Debtor /'">{{item.Sector}}</td>
+                  <td class="text-right" *ngIf="item.Sector == 'Sum - Debtor /'">{{item.Sector}}</td>
+                  <td class="text-left">{{item.Type}}</td>
+                  <td class="text-center">{{item.ClosedStatus}}</td>
+                  <td class="text-right">{{item.Total}}</td>
+                  <td class="text-right">{{item.Balance}}</td>
+                  <td class="text-right">{{item.PastDue}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

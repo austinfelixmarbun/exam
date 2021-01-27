@@ -1,0 +1,469 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+         
+        <div class="px-3" >
+
+          <lib-ucSubsection [id]="'ContractListId'" [title]="'Contracts List, Role : Main Debtor'"  [panel]="'ContractList'">
+          </lib-ucSubsection>
+          <div id="ContractList">
+            <table class="table table-responsive-md text-center table-hover">
+              <thead>
+                <tr class="table-header">
+                  <th>
+                    <span class="thead-header" translate>SECTOR</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>TYPE</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>OPENED</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>STATUS</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>TOTAL</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>BALANCE</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>PAST DUE</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>ARREARS</span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of ListContractRole">
+                  <td class="text-left" *ngIf="item.Sector != 'SUM'">{{item.Sector}}</td>
+                  <td class="text-left" *ngIf="item.Sector != 'SUM'">{{item.Type}}</td>
+                  <td class="text-center" *ngIf="item.Sector != 'SUM'">{{item.Opened}}</td>
+                  <td class="text-left" *ngIf="item.Sector != 'SUM'">{{item.Status}}</td>
+                  <td class="text-right" *ngIf="item.Sector != 'SUM'">{{item.Total}}</td>
+                  <td class="text-right" *ngIf="item.Sector != 'SUM'">{{item.Balance}}</td>
+                  <td class="text-right" *ngIf="item.Sector != 'SUM'">{{item.PastDue}}</td>
+                  <td class="text-center" *ngIf="item.Sector != 'SUM'">{{item.Arrears}}</td>
+
+                  <td class="text-left" *ngIf="item.Sector == 'SUM'"> <b>{{item.Sector}}</b></td>
+                  <td class="text-left" *ngIf="item.Sector == 'SUM'"> <b>{{item.Type}}</b></td>
+                  <td class="text-center" *ngIf="item.Sector == 'SUM'"> <b>{{item.Opened}}</b></td>
+                  <td class="text-left" *ngIf="item.Sector == 'SUM'"> <b>{{item.Status}}</b></td>
+                  <td class="text-right" *ngIf="item.Sector == 'SUM'"> <b>{{item.Total}}</b></td>
+                  <td class="text-right" *ngIf="item.Sector == 'SUM'"> <b>{{item.Balance}}</b></td>
+                  <td class="text-center" *ngIf="item.Sector == 'SUM'"> <b>{{item.PastDue}}</b></td>                  
+                  <td class="text-center" *ngIf="item.Sector == 'SUM'"> <b>{{item.Arrears}}</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        
+          <lib-ucSubsection [id]="'ContractSummary'" [title]="'Contracts Summary'" [panel]="'dContractSummary'">
+          </lib-ucSubsection>
+          <div class="form-body" id="dContractSummary">
+            <div class="form-group row">
+              <label class="col-md-3" translate><b> SUMMARY OF ALL CONTRACTS </b></label>                            
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Worst Past Due Amount</label>
+              <label class="col-md-3" translate>IDR 9,044,550</label>  
+              <label class="col-md-3" translate>Last Deliquency (90+ days in due)</label>
+              <label class="col-md-3" translate></label>               
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Worst No. of Due Days</label>
+              <label class="col-md-3" translate>161</label>                 
+            </div>
+
+            <br>
+            <div class="form-group row">
+              <label class="col-md-3" translate><b> AS MAIN DEBTOR/CO-DEBTOR - OPEN CONTRACTS </b></label>                            
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Total Amount Sum</label>
+              <label class="col-md-3" translate>IDR 226,691,816</label>  
+              <label class="col-md-3" translate>No. of Open Contracts</label>
+              <label class="col-md-3" translate>7</label>               
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Past Due Amount Sum</label>
+              <label class="col-md-3" translate>IDR 34,540</label> 
+              <label class="col-md-3" translate>No. of Closed Contracts</label>
+              <label class="col-md-3" translate>6</label>                 
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Outstanding Amount Sum</label>
+              <label class="col-md-3" translate>IDR 92,253,599</label>               
+            </div>
+
+            <br>
+            <div class="form-group row">
+              <label class="col-md-3" translate><b> AS GUARANTOR - OPEN CONTRACTS</b></label>                            
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Total Amount Sum</label>
+              <label class="col-md-3" translate>0</label>  
+              <label class="col-md-3" translate>No. of Open Contracts</label>
+              <label class="col-md-3" translate></label>               
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Past Due Amount Sum</label>
+              <label class="col-md-3" translate></label> 
+              <label class="col-md-3" translate>No. of Closed Contracts</label>
+              <label class="col-md-3" translate></label>                 
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Outstanding Amount Sum</label>
+              <label class="col-md-3" translate></label>               
+            </div>
+
+          </div>
+
+          <lib-ucSubsection [id]="'ListSummaryId'" [title]="'Summary Payment Calendar'"  [panel]="'ListSummary'">
+          </lib-ucSubsection>
+          <div id="ListSummary">
+            <table class="table table-responsive-md text-center table-hover">
+              <thead>
+                <tr class="table-header">
+                  <th>
+                    <span class="thead-header" translate>Month/Year</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>Jan-20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>Feb-20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>Mar-20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>Apr-20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>May-20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>Jun-20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>Jul-20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>Aug-20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>Sep-20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>Oct-20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>Nov-20</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>Dec-20</span>
+                  </th>
+
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of ListSummaryPayment">
+                  <td class="text-left">{{item.MonthYear}}</td>
+                  <td *ngIf="item.MonthYear == 'Delinquency Status'" style="font-size: small;" class="text-center">
+                    <img style="
+                      height: 10px;
+                      width: 10px;
+                      background-color: green;
+                      border-radius: 50%;
+                      display: inl;">
+                  </td>
+                  <td *ngIf="item.MonthYear == 'Delinquency Status'" style="font-size: small;" class="text-center">
+                    <img style="
+                      height: 10px;
+                      width: 10px;
+                      background-color: green;
+                      border-radius: 50%;
+                      display: inl;">
+                  </td>
+                  <td *ngIf="item.MonthYear == 'Delinquency Status'" style="font-size: small;" class="text-center">
+                    <img style="
+                      height: 10px;
+                      width: 10px;
+                      background-color: green;
+                      border-radius: 50%;
+                      display: inl;">
+                  </td>
+                  <td *ngIf="item.MonthYear == 'Delinquency Status'" style="font-size: small;" class="text-center">
+                    <img style="
+                      height: 10px;
+                      width: 10px;
+                      background-color: green;
+                      border-radius: 50%;
+                      display: inl;">
+                  </td>
+                  <td *ngIf="item.MonthYear == 'Delinquency Status'" style="font-size: small;" class="text-center">
+                    <img style="
+                      height: 10px;
+                      width: 10px;
+                      background-color: green;
+                      border-radius: 50%;
+                      display: inl;">
+                  </td>
+                  <td *ngIf="item.MonthYear == 'Delinquency Status'" style="font-size: small;" class="text-center">
+                    <img style="
+                      height: 10px;
+                      width: 10px;
+                      background-color: green;
+                      border-radius: 50%;
+                      display: inl;">
+                  </td>
+                  <td *ngIf="item.MonthYear == 'Delinquency Status'" style="font-size: small;" class="text-center">
+                    <img style="
+                      height: 10px;
+                      width: 10px;
+                      background-color: green;
+                      border-radius: 50%;
+                      display: inl;">
+                  </td>
+                  <td *ngIf="item.MonthYear == 'Delinquency Status'" style="font-size: small;" class="text-center">
+                    <img style="
+                      height: 10px;
+                      width: 10px;
+                      background-color: green;
+                      border-radius: 50%;
+                      display: inl;">
+                  </td>
+                  <td *ngIf="item.MonthYear == 'Delinquency Status'" style="font-size: small;" class="text-center">
+                    <img style="
+                      height: 10px;
+                      width: 10px;
+                      background-color: green;
+                      border-radius: 50%;
+                      display: inl;">
+                  </td>
+                  <td *ngIf="item.MonthYear == 'Delinquency Status'" style="font-size: small;" class="text-center">
+                    <img style="
+                      height: 10px;
+                      width: 10px;
+                      background-color: green;
+                      border-radius: 50%;
+                      display: inl;">
+                  </td>
+                  <td *ngIf="item.MonthYear == 'Delinquency Status'" style="font-size: small;" class="text-center">
+                    <img style="
+                      height: 10px;
+                      width: 10px;
+                      background-color: green;
+                      border-radius: 50%;
+                      display: inl;">
+                  </td>
+                  <td *ngIf="item.MonthYear == 'Delinquency Status'" style="font-size: small;" class="text-center">
+                    <img style="
+                      height: 10px;
+                      width: 10px;
+                      background-color: green;
+                      border-radius: 50%;
+                      display: inl;">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <lib-ucSubsection [id]="'SummaryBanking'" [title]="'Summary for Banking'" [panel]="'dSummaryBanking'">
+          </lib-ucSubsection>
+          <div class="form-body" id="dSummaryBanking">
+            <div class="form-group row">
+              <label class="col-md-3" translate><b> AS MAIN DEBTOR/CO-DEBTOR - OPEN CONTRACTS </b></label>                            
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Total Amount Sum</label>
+              <label class="col-md-3" translate>IDR 226,691,816</label>  
+              <label class="col-md-3" translate>No. of Open Contracts</label>
+              <label class="col-md-3" translate>7</label>               
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Past Due Amount Sum</label>
+              <label class="col-md-3" translate>IDR 34,540</label>                 
+              <label class="col-md-3" translate>No. of Closed Contracts</label>
+              <label class="col-md-3" translate>6</label>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Outstanding Amount Sum</label>
+              <label class="col-md-3" translate>IDR 92,253,599</label>       
+            </div>
+
+            <br>
+            <div class="form-group row">
+              <label class="col-md-3" translate><b>AS GUARANTOR - OPEN CONTRACTS </b></label>                            
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Total Amount Sum</label>
+              <label class="col-md-3" translate>0</label>  
+              <label class="col-md-3" translate>No. of Open Contracts</label>
+              <label class="col-md-3" translate></label>               
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Past Due Amount Sum</label>
+              <label class="col-md-3" translate></label>                 
+              <label class="col-md-3" translate>No. of Closed Contracts</label>
+              <label class="col-md-3" translate></label>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Outstanding Amount Sum</label>
+              <label class="col-md-3" translate></label>       
+            </div>            
+          </div>
+
+          <lib-ucSubsection [id]="'SummaryNonBanking'" [title]="'Summary for Non Banking Financial Institutions'" [panel]="'dSummaryNonBanking'">
+          </lib-ucSubsection>
+          <div class="form-body" id="dSummaryNonBanking">
+            <div class="form-group row">
+              <label class="col-md-3" translate><b> AS MAIN DEBTOR/CO-DEBTOR - OPEN CONTRACTS </b></label>                            
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Total Amount Sum</label>
+              <label class="col-md-3" translate>IDR 226,691,816</label>  
+              <label class="col-md-3" translate>No. of Open Contracts</label>
+              <label class="col-md-3" translate>7</label>               
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Past Due Amount Sum</label>
+              <label class="col-md-3" translate>IDR 34,540</label>                 
+              <label class="col-md-3" translate>No. of Closed Contracts</label>
+              <label class="col-md-3" translate>6</label>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Outstanding Amount Sum</label>
+              <label class="col-md-3" translate>IDR 92,253,599</label>       
+            </div>
+
+            <br>
+            <div class="form-group row">
+              <label class="col-md-3" translate><b>AS GUARANTOR - OPEN CONTRACTS </b></label>                            
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Total Amount Sum</label>
+              <label class="col-md-3" translate>0</label>  
+              <label class="col-md-3" translate>No. of Open Contracts</label>
+              <label class="col-md-3" translate></label>               
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Past Due Amount Sum</label>
+              <label class="col-md-3" translate></label>                 
+              <label class="col-md-3" translate>No. of Closed Contracts</label>
+              <label class="col-md-3" translate></label>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Outstanding Amount Sum</label>
+              <label class="col-md-3" translate></label>       
+            </div>            
+          </div>
+
+          <lib-ucSubsection [id]="'SummaryPaenShop'" [title]="'Summary for Pawnshop'" [panel]="'dSummaryPaenShop'">
+          </lib-ucSubsection>
+          <div class="form-body" id="dSummaryPaenShop">
+            <div class="form-group row">
+              <label class="col-md-3" translate><b> AS MAIN DEBTOR/CO-DEBTOR - OPEN CONTRACTS </b></label>                            
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Total Amount Sum</label>
+              <label class="col-md-3" translate>IDR 226,691,816</label>  
+              <label class="col-md-3" translate>No. of Open Contracts</label>
+              <label class="col-md-3" translate>7</label>               
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Past Due Amount Sum</label>
+              <label class="col-md-3" translate>IDR 34,540</label>                 
+              <label class="col-md-3" translate>No. of Closed Contracts</label>
+              <label class="col-md-3" translate>6</label>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Outstanding Amount Sum</label>
+              <label class="col-md-3" translate>IDR 92,253,599</label>       
+            </div>
+
+            <br>
+            <div class="form-group row">
+              <label class="col-md-3" translate><b>AS GUARANTOR - OPEN CONTRACTS </b></label>                            
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Total Amount Sum</label>
+              <label class="col-md-3" translate>0</label>  
+              <label class="col-md-3" translate>No. of Open Contracts</label>
+              <label class="col-md-3" translate></label>               
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Past Due Amount Sum</label>
+              <label class="col-md-3" translate></label>                 
+              <label class="col-md-3" translate>No. of Closed Contracts</label>
+              <label class="col-md-3" translate></label>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>Outstanding Amount Sum</label>
+              <label class="col-md-3" translate></label>       
+            </div>            
+          </div>
+
+          <lib-ucSubsection [id]="'ContractsDetail'" [title]="'Contracts Detail'" [panel]="'dContractsDetail'">
+          </lib-ucSubsection>
+          <div class="form-body" id="dContractsDetail">
+            <div class="form-group row">
+              <label class="col-md-3" translate><b> Open Contracts as Debtor </b></label>                            
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>+OtherWithLoanAgreement</label>              
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>+OtherWithLoanAgreement</label>              
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>+OtherWithLoanAgreement</label>              
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>+OtherWithLoanAgreement</label>              
+            </div>
+
+            <br>
+            <div class="form-group row">
+              <label class="col-md-3" translate><b>Closed Contracts as Debtor </b></label>                            
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>+OtherWithLoanAgreement</label>              
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>+OtherWithLoanAgreement</label>              
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>++CreditCard</label>              
+            </div>
+
+            <br>
+            <div class="form-group row">
+              <label class="col-md-3" translate><b>Open Contracts as Guarantor</b></label>                            
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>No Contracts</label>              
+            </div>
+            
+            <br>
+            <div class="form-group row">
+              <label class="col-md-3" translate><b>Closed Contracts as Guarantor</b></label>                            
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3" translate>No Contracts</label>              
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
