@@ -11,6 +11,22 @@
             </lib-ucSubsection>
             <div class="form-body" id="MainInfoId">
               <div class="form-group row">
+                <label class="col-md-2 adInsLabel" translate>Is Supplier</label>
+                <div class="col-md-4">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsSupplier"
+                    (click)="checkIsSupplier()" />
+                </div>
+              </div>
+              <div class="form-group row" *ngIf="IsSupplier == true">
+                <label class="col-md-2 adinsLabel" for="LinkSupplier" translate>Link Supplier </label>
+                <div class="col-md-4">
+                  <lib-uclookupgeneric *ngIf="inputLookupObj?.isReady" [lookupInput]="inputLookupObj"
+                    [parentForm]='CustomerPersonalForm' [enjiForm]='enjiForm' [identifier]="'lookupSupp'"
+                    #LookupSupplier (lookup)="SetSupplier($event)">
+                  </lib-uclookupgeneric>
+                </div>
+              </div>
+              <div class="form-group row"> 
                 <label class="col-md-2 adins-required-label" translate>Customer Name </label>
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="CustName"

@@ -569,6 +569,13 @@ export class URLConstant {
     public static GetListBranchByVendorId = environment.FoundationR3Url + "/Vendor/GetListBranchByVendorId";
     public static GetListVendorBankAccByVendorEmpId = environment.FoundationR3Url + "/VendorBankAcc/GetListVendorBankAccByVendorEmpId";
     public static GetVendorAddrByVendorAddrId = environment.FoundationR3Url + "/VendorAddr/GetVendorAddrByVendorAddrId";
+    public static GetVendorByVendorCode = environment.FoundationR3Url + "/Vendor/GetVendorByVendorCode";
+
+    // VENDOR ADDR
+    public static GetVendorAddrByVendorCodeAndMrAddrTypeCode = environment.FoundationR3Url + "/VendorAddr/GetVendorAddrByVendorCodeAndMrAddrTypeCode";
+
+    // VENDOR BANK ACC
+    public static GetVendorBankAccDefaultByVendorId = environment.FoundationR3Url + "/VendorBankAcc/GetVendorBankAccDefaultByVendorId";
 
     // VENDOR GRADING
     public static SubmitRequestVendorGrading = environment.FoundationR3Url + "/VendorGrading/SubmitRequestVendorGrading";
