@@ -456,14 +456,14 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.Phn3 = this.OfficeForm.value.UcAddress.Phn2;
     this.officeObj.PhnExt2 = this.OfficeForm.value.UcAddress.PhnExt3;
     this.officeObj.FaxArea = this.OfficeForm.value.UcAddress.FaxArea;
-    this.officeObj.Fax = this.OfficeForm.value.UcAddress.Fax;
-    this.saveRefOfficeX();
+    this.officeObj.Fax = this.OfficeForm.value.UcAddress.Fax;    
 
     if (this.pageType == "add") {
       if (this.officeObj.MrOfficeTypeCode == CommonConstant.CollectionGroup) {
         this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
           (response) => {                                    
-            this.toastr.successMessage(response['message']);            
+            this.toastr.successMessage(response['message']);   
+            this.saveRefOfficeX();         
             AdInsHelper.RedirectUrl(this.router,["/Office/Paging"],{});
           }
         );
@@ -471,7 +471,8 @@ export class OfficeAddComponent implements OnInit {
       else {
         this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
           (response) => {              
-            this.toastr.successMessage(response['message']);            
+            this.toastr.successMessage(response['message']);    
+            this.saveRefOfficeX();        
             AdInsHelper.RedirectUrl(this.router,["/Office/Paging"],{});
           }
         );
@@ -485,6 +486,7 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(this.editUrl, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
+          this.saveRefOfficeX();
           AdInsHelper.RedirectUrl(this.router,["/Office/Paging"],{});
         }
       );
