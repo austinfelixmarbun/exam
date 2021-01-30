@@ -1024,5 +1024,17 @@ export class URLConstant {
     //REF TAX OFFICE X
     public static GetListTaxOfficeName = environment.FoundationR3Url + "/RefTaxOfficeX/GetListTaxOfficeName";
     
-    
+    //#region CUST THIRD PARTY CHECKING
+    public static AddCustFraudTempReg = environment.FoundationR3Url + "/CustThirdPartyChecking/CustThirdPartyChecking";
+    public static GetCustFraudDukcapilReqLogByCustTempNo = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudDukcapilReqLogByCustTempNo";
+    public static GetCustFraudPefindoReqLogByCustTempNo = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudPefindoReqLogByCustTempNo";
+    public static GetCustFraudSLIKRequestByCustTempNo = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudSLIKRequestByCustTempNo";
+    public static GetCustFraudAsliriReqLogByCustTempNoTrxTypeCode = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudAsliriReqLogByCustTempNoTrxTypeCode";
+    public static GetCustFraudTrstsocialReqLogByCustTempNo = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudTrstsocialReqLogByCustTempNo";
+    public static AddCustFraudDukcapilReqLog = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudDukcapilReqLog";
+    public static AddCustFraudPefindoReqLog = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudPefindoReqLog";
+    public static AddCustFraudSLIKRequest = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudSLIKRequest";
+    public static AddCustFraudAsliriReqLog = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudAsliriReqLog";
+    public static AddCustFraudTrstsocialReqLog = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudTrstsocialReqLog";
+    //#endregion
 }

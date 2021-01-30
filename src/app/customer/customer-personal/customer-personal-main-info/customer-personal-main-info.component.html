@@ -157,7 +157,7 @@
               </lib-ucaddress> 
             </div>
 
-            <div *ngIf="!subsectionAsliRi">
+            <div *ngIf="!subsectionAsliRi && IsCustThirdPartyCheck">
               <lib-ucSubsection [id]="'FraudCheckInfo'" [title]="'Fraud Checking Customer'" [panel]="'dFraudCheckInfo'">
               </lib-ucSubsection>
               <div id="dFraudCheckInfo" class="row">
@@ -165,7 +165,9 @@
                     <label class="col-md-3" translate>Dukcapil</label>
                     
                     <span class="col-md-6">
-                      <label translate>Last Check is 99 days ago /                       
+                      <label *ngIf="LastHit.DUKCAPIL" translate>Last Check is {{LastHit.DUKCAPIL > 0 ? LastHit.DUKCAPIL + ' days ago' : 'today'}} /                       
+                      </label>   
+                      <label *ngIf="!LastHit.DUKCAPIL" translate>Not Hit Yet /                       
                       </label>   
                       <button type="button" (click)="openPopUp(popUpDukcapil)" class="btn btn-raised btn-primary" translate> Hit Dukcapil                       
                       </button> 
@@ -175,8 +177,10 @@
                     <label class="col-md-3" translate>Pefindo</label>
                             
                     <span class="col-md-6">
-                      <label translate>Last Check is 63 days ago /                        
-                      </label>                                               
+                      <label *ngIf="LastHit.PEFINDO" translate>Last Check is {{LastHit.PEFINDO > 0 ? LastHit.PEFINDO + ' days ago' : 'today'}} /                        
+                      </label>        
+                      <label *ngIf="!LastHit.PEFINDO" translate>Not Hit Yet /                        
+                      </label>                                         
                       <button type="button" (click)="openPopUp(popUpPefindo)" class="btn btn-raised btn-primary" translate>
                         Hit Pefindo
                       </button>   
@@ -188,7 +192,8 @@
                     <label class="col-md-3" translate>Asli RI</label>
                        
                     <span class="col-md-6">
-                      <label translate>Last Check is 35 days ago /</label>                                               
+                      <label *ngIf="LastHit.ASLIRI" translate>Last Check is {{LastHit.ASLIRI > 0 ? LastHit.ASLIRI + ' days ago' : 'today'}} /</label>                                               
+                      <label *ngIf="!LastHit.ASLIRI" translate>Not Hit Yet /</label>                                               
                       <button type="button" (click)="showAsliRi()" class="btn btn-raised btn-primary"
                         translate>
                         Hit Asli RI
@@ -200,7 +205,9 @@
                 <div class="col-md-12">
                     <label class="col-md-3" translate>Trusting Social</label>                                   
                     <span class="col-md-6">
-                      <label translate>Last Check is 20 days ago /                          
+                      <label *ngIf="LastHit.TRST" translate>Last Check is {{LastHit.TRST > 0 ? LastHit.TRST + ' days ago' : 'today'}} /                          
+                      </label>                  
+                      <label *ngIf="!LastHit.TRST" translate>Not Hit Yet /                          
                       </label>                                               
                       <button type="button" (click)="openPopUp(popUpTrustingSocial)" class="btn btn-raised btn-primary"
                         translate>
@@ -211,18 +218,20 @@
                     </span>  
                 </div>
                 <div class="col-md-12">
-                    <label class="col-md-3" translate>SLIK</label>                            
-                    <label class="col-md-6" translate>Not hit yet /  
-                      <button type="button" (click)="openPopUp(popUpSlik)" class="btn btn-raised btn-primary"
+                    <label class="col-md-3" translate>SLIK</label>  
+                    <label *ngIf="LastHit.SLIK" translate>Last Check is {{LastHit.SLIK > 0 ? LastHit.SLIK + ' days ago' : 'today'}} /                          
+                    </label>                           
+                    <label *ngIf="!LastHit.SLIK" class="col-md-6" translate>Not hit yet /                      
+                    </label>    
+                    <button type="button" (click)="openPopUp(popUpSlik)" class="btn btn-raised btn-primary"
                       translate>
                       Hit SLIK
-                    </button>                     
-                    </label>    
+                    </button> 
                 </div>
               </div>
             </div>
 
-            <div *ngIf="subsectionAsliRi">
+            <div *ngIf="subsectionAsliRi && IsCustThirdPartyCheck">
               <lib-ucSubsection [id]="'AsliRi'" [title]="'ASLI RI'" [panel]="'dAsliRi'">
               </lib-ucSubsection>
               <div id="dAsliRi" class="row" class="px-3">

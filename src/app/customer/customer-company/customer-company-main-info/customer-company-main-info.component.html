@@ -106,7 +106,9 @@
                 <label class="col-md-3" translate>Pefindo</label>
                         
                 <span class="col-md-6">
-                  <label translate>Last Check is 63 days ago /                        
+                  <label *ngIf="LastHit.PEFINDO" translate>Last Check is {{LastHit.PEFINDO > 0 ? LastHit.PEFINDO + ' days ago' : 'today'}} /                        
+                  </label>    
+                  <label *ngIf="!LastHit.PEFINDO" translate>Not Hit Yet /                        
                   </label>                                               
                   <button type="button" (click)="openPopUp(popUpPefindo)" class="btn btn-raised btn-primary" translate>
                     Hit Pefindo
@@ -117,12 +119,14 @@
             </div>
             <div class="col-md-12">
                 <label class="col-md-3" translate>SLIK</label>                            
-                <label class="col-md-6" translate>Not hit yet /  
-                  <button type="button" (click)="openPopUp(popUpSlik)" class="btn btn-raised btn-primary"
+                <label *ngIf="LastHit.SLIK" translate>Last Check is {{LastHit.SLIK > 0 ? LastHit.SLIK + ' days ago' : 'today'}} /                          
+                </label>                           
+                <label *ngIf="!LastHit.SLIK" class="col-md-6" translate>Not hit yet /                      
+                </label>  
+                <button type="button" (click)="openPopUp(popUpSlik)" class="btn btn-raised btn-primary"
                   translate>
                   Hit SLIK
-                </button>                     
-                </label>    
+                </button>    
             </div>
           </div>
 
