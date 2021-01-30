@@ -1025,7 +1025,7 @@ export class URLConstant {
     public static GetListTaxOfficeName = environment.FoundationR3Url + "/RefTaxOfficeX/GetListTaxOfficeName";
     
     //#region CUST THIRD PARTY CHECKING
-    public static AddCustFraudTempReg = environment.FoundationR3Url + "/CustThirdPartyChecking/CustThirdPartyChecking";
+    public static AddCustFraudTempReg = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudTempReg";
     public static GetCustFraudDukcapilReqLogByCustTempNo = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudDukcapilReqLogByCustTempNo";
     public static GetCustFraudPefindoReqLogByCustTempNo = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudPefindoReqLogByCustTempNo";
     public static GetCustFraudSLIKRequestByCustTempNo = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudSLIKRequestByCustTempNo";

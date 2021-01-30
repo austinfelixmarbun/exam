@@ -86,11 +86,11 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   IsCustThirdPartyCheck: boolean = false;
   MaxDaysCustThirdPartyCheck: number = 0;
   LastHit = {
-    DUKCAPIL: null,
-    PEFINDO: null,
-    SLIK: null,
-    ASLIRI: null,
-    TRST: null
+    DUKCAPIL: 'Not Hit Yet',
+    PEFINDO: 'Not Hit Yet',
+    SLIK: 'Not Hit Yet',
+    ASLIRI: 'Not Hit Yet',
+    TRST: 'Not Hit Yet'
   };
 
   CustomerPersonalForm = this.fb.group({
@@ -213,12 +213,12 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
           return forkJoin([addCustTemp, getMaxDays]);
         }
         else{
-          return null;
+          return new Array();
         }
       })
     ).toPromise().then(
       (response) => {
-        if(response){
+        if(response.length > 0){
           this.CustThirdPartyChecking.CustTempNo = response[0]["CustTempNo"];
           this.CustThirdPartyChecking.MrCustTypeCode = response[0]["CustType"];
           this.MaxDaysCustThirdPartyCheck = response[1]["GsValue"];
@@ -607,7 +607,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.subsectionAsliRi = false;
   }
   //POP UP
-  openPopUp(content) {  
+  openPopUp(content, contentString = "") {  
     var url = "";
     var urlAdd = "";
     this.CustThirdPartyChecking.CustName = this.CustomerPersonalForm.controls.CustName.value;
@@ -615,11 +615,11 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.CustThirdPartyChecking.IdNo = this.CustomerPersonalForm.controls.IdNo.value;
     this.CustThirdPartyChecking.BirthDt = this.CustomerPersonalForm.controls.BirthDt.value;
     this.CustThirdPartyChecking.MobilePhnNo = "";
-    this.CustThirdPartyChecking.TaxIdNo = this.CustomerPersonalForm.controls.TaxIdNo;
+    this.CustThirdPartyChecking.TaxIdNo = this.CustomerPersonalForm.controls.TaxIdNo.value;
     this.CustThirdPartyChecking.FamilyCardNo = "";
     if(this.subsectionAsliRi){
       var trxType = "";
-      switch (content) {
+      switch (contentString) {
         case "popUpHitProfesional":
           trxType = "PROFESSIONAL";
           break;
@@ -644,14 +644,14 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         (response) => {
           var currentDate = new Date();
           if(response["TrxNo"]){
-            var lastHitDate = response["StartDt"];
+            var lastHitDate = new Date(response["StartDt"]);
             var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
             if(dateDiff > this.MaxDaysCustThirdPartyCheck){
-              this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
+              this.http.post(URLConstant.AddCustFraudAsliriReqLog, this.CustThirdPartyChecking).toPromise().then(
                 (response) => {
-                  var currentLastHitDate = response["StartDt"];
+                  var currentLastHitDate = new Date(response["StartDt"]);
                   var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
-                  this.LastHit.ASLIRI = currentDateDiff;
+                  this.LastHit.ASLIRI = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                 }
               ).catch(
                 (error) => {
@@ -661,11 +661,11 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
             }
           }
           else{
-            this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
+            this.http.post(URLConstant.AddCustFraudAsliriReqLog, this.CustThirdPartyChecking).toPromise().then(
               (response) => {
-                var currentLastHitDate = response["StartDt"];
+                var currentLastHitDate = new Date(response["StartDt"]);
                 var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
-                this.LastHit.ASLIRI = currentDateDiff;
+                this.LastHit.ASLIRI = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
               }
             ).catch(
               (error) => {
@@ -681,7 +681,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
       );
     }
     else{
-      switch (content) {
+      switch (contentString) {
         case "popUpDukcapil":
           url = URLConstant.GetCustFraudDukcapilReqLogByCustTempNo;
           urlAdd = URLConstant.AddCustFraudDukcapilReqLog;
@@ -709,28 +709,28 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         (response) => {
           var currentDate = new Date();
           if(response["TrxNo"]){
-            var lastHitDate = response["StartDt"];
+            var lastHitDate = new Date(response["StartDt"]);
             var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
             if(dateDiff > this.MaxDaysCustThirdPartyCheck){
               this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
                 (response) => {
-                  var currentLastHitDate = response["StartDt"];
+                  var currentLastHitDate = new Date(response["StartDt"]);
                   var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
-                  switch (content) {
+                  switch (contentString) {
                     case "popUpDukcapil":
-                      this.LastHit.DUKCAPIL = currentDateDiff;
+                      this.LastHit.DUKCAPIL = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                       break;
               
                     case "popUpPefindo":
-                      this.LastHit.PEFINDO = currentDateDiff;
+                      this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                       break;
               
                     case "popUpTrustingSocial":
-                      this.LastHit.TRST = currentDateDiff;
+                      this.LastHit.TRST = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                       break;
               
                     case "popUpSlik":
-                      this.LastHit.SLIK = currentDateDiff;
+                      this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                       break;
                   
                     default:
@@ -747,28 +747,30 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
           else{
             this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
               (response) => {
-                var currentLastHitDate = response["StartDt"];
+                var currentLastHitDate = new Date(response["StartDt"]);
                 var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
-                switch (content) {
+                console.log("currentDateDiff: " + currentDateDiff);
+                switch (contentString) {
                   case "popUpDukcapil":
-                    this.LastHit.DUKCAPIL = currentDateDiff;
+                    this.LastHit.DUKCAPIL = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                     break;
             
                   case "popUpPefindo":
-                    this.LastHit.PEFINDO = currentDateDiff;
+                    this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                     break;
             
                   case "popUpTrustingSocial":
-                    this.LastHit.TRST = currentDateDiff;
+                    this.LastHit.TRST = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                     break;
             
                   case "popUpSlik":
-                    this.LastHit.SLIK = currentDateDiff;
+                    this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                     break;
                 
                   default:
                     break;
                 }
+                console.log("LastHit: " + JSON.stringify(this.LastHit));
               }
             ).catch(
               (error) => {

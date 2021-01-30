@@ -63,8 +63,8 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   IsCustThirdPartyCheck: boolean = false;
   MaxDaysCustThirdPartyCheck: number = 0;
   LastHit = {
-    PEFINDO: null,
-    SLIK: null,
+    PEFINDO: 'Not Hit Yet',
+    SLIK: 'Not Hit Yet',
   };
 
   CustomerCompanyForm = this.fb.group({
@@ -139,12 +139,12 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
           return forkJoin([addCustTemp, getMaxDays]);
         }
         else{
-          return null;
+          return new Array();
         }
       })
     ).toPromise().then(
       (response) => {
-        if(response){
+        if(response.length > 0){
           this.CustThirdPartyChecking.CustTempNo = response[0]["CustTempNo"];
           this.CustThirdPartyChecking.MrCustTypeCode = response[0]["CustType"];
           this.MaxDaysCustThirdPartyCheck = response[1]["GsValue"];
@@ -339,17 +339,16 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   }
 
   //POP UP
-  openPopUp(content) {
-    // bookmark
+  openPopUp(content, contentString = "") {
     var url = "";
     var urlAdd = "";
     this.CustThirdPartyChecking.CustName = this.CustomerCompanyForm.controls.CustName.value;
     this.CustThirdPartyChecking.MrIdTypeCode = CommonConstant.CustTypeCompany;
     this.CustThirdPartyChecking.IdNo = "";
     this.CustThirdPartyChecking.MobilePhnNo = "";
-    this.CustThirdPartyChecking.TaxIdNo = this.CustomerCompanyForm.controls.TaxIdNo;
+    this.CustThirdPartyChecking.TaxIdNo = this.CustomerCompanyForm.controls.TaxIdNo.value;
     this.CustThirdPartyChecking.FamilyCardNo = "";
-    switch (content) {
+    switch (contentString) {
       case "popUpPefindo":
         url = URLConstant.GetCustFraudPefindoReqLogByCustTempNo;
         urlAdd = URLConstant.AddCustFraudPefindoReqLog;
@@ -367,20 +366,20 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       (response) => {
         var currentDate = new Date();
         if(response["TrxNo"]){
-          var lastHitDate = response["StartDt"];
+          var lastHitDate = new Date(response["StartDt"]);
           var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
           if(dateDiff > this.MaxDaysCustThirdPartyCheck){
             this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
               (response) => {
-                var currentLastHitDate = response["StartDt"];
+                var currentLastHitDate = new Date(response["StartDt"]);
                 var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
-                switch (content) {
+                switch (contentString) {
                   case "popUpPefindo":
-                    this.LastHit.PEFINDO = currentDateDiff;
+                    this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                     break;
             
                   case "popUpSlik":
-                    this.LastHit.SLIK = currentDateDiff;
+                    this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                     break;
                 
                   default:
@@ -397,15 +396,15 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
         else{
           this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
             (response) => {
-              var currentLastHitDate = response["StartDt"];
+              var currentLastHitDate = new Date(response["StartDt"]);
               var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
-              switch (content) {
+              switch (contentString) {
                 case "popUpPefindo":
-                  this.LastHit.PEFINDO = currentDateDiff;
+                  this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                   break;
           
                 case "popUpSlik":
-                  this.LastHit.SLIK = currentDateDiff;
+                  this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                   break;
               
                 default:
