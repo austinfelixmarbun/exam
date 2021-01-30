@@ -64,7 +64,7 @@ export class CustGroupTabDetailComponent implements OnInit {
       this.inputLookupCustPersonalObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
       this.inputLookupCustPersonalObj.ddlEnvironments = [
         {
-          name: "A.MR_CUST_TYPE_CODE",
+          name: "C.MR_CUST_TYPE_CODE",
           environment: environment.FoundationR3Url
         }
       ];
@@ -73,7 +73,7 @@ export class CustGroupTabDetailComponent implements OnInit {
         criteriaList = new Array();
         criteriaObj = new CriteriaObj();
         criteriaObj.restriction = AdInsConstant.RestrictionNotIn;
-        criteriaObj.propName = 'A.CUST_ID';
+        criteriaObj.propName = 'C.CUST_ID';
         criteriaObj.listValue = this.ListCustIdToExclude;
         criteriaList.push(criteriaObj);
         this.inputLookupCustPersonalObj.addCritInput = criteriaList;
@@ -87,6 +87,7 @@ export class CustGroupTabDetailComponent implements OnInit {
       // criteriaObj.value = "PERSONAL";
       // criteriaList.push(criteriaObj);
       // this.inputLookupCustPersonalObj.addCritInput = criteriaList;
+      
       // this.inputLookupCustPersonalObj.isRequired = false;
       refMasterRelationship.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustPersonalRelationship;
     }
@@ -99,7 +100,7 @@ export class CustGroupTabDetailComponent implements OnInit {
       this.inputLookupCustCompanyObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
       this.inputLookupCustCompanyObj.ddlEnvironments = [
         {
-          name: "A.MR_CUST_TYPE_CODE",
+          name: "C.MR_CUST_TYPE_CODE",
           environment: environment.FoundationR3Url
         }
       ];
@@ -107,7 +108,7 @@ export class CustGroupTabDetailComponent implements OnInit {
         criteriaList = new Array();
         criteriaObj = new CriteriaObj();
         criteriaObj.restriction = AdInsConstant.RestrictionNotIn;
-        criteriaObj.propName = 'A.CUST_ID';
+        criteriaObj.propName = 'C.CUST_ID';
         criteriaObj.listValue = this.ListCustIdToExclude;
         criteriaList.push(criteriaObj);
         this.inputLookupCustCompanyObj.addCritInput = criteriaList;
