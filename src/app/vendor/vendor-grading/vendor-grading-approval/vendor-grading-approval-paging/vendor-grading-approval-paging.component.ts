@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
@@ -11,6 +12,7 @@ import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { environment } from 'environments/environment';
+import { CookieService } from 'ngx-cookie';
 import { String } from 'typescript-string-operations';
 
 @Component({
@@ -22,11 +24,12 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
 
   inputPagingObj: any;
   arrCrit: any;
-  userContext: CurrentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
+  userContext: any;
 
-  constructor(private toastr: NGXToastrService, private httpClient: HttpClient, private router: Router) { }
+  constructor(private toastr: NGXToastrService, private httpClient: HttpClient, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit() {
+    this.userContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));;
     this.inputPagingObj = new UcpagingModule();
     this.inputPagingObj._url = "./assets/ucpaging/dealer-grading/searchDealerGradingApproval.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
@@ -65,7 +68,7 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
       if (String.Format("{0:L}", ev.RowObj.CURRENT_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
         this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_PROCESS_TASK);
       } else {
-        this.router.navigate(["/Vendor/VendorGrading/Approval/Detail"], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId } });
+        this.router.navigate(["/Vendor/VendorGrading/Approval/Detail"], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "VendorGradingHistNo": ev.RowObj.VendorGradingHistNo ,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId} });
       }
     }
     else if (ev.Key == "HoldTask") {

@@ -260,12 +260,18 @@ export class CommonConstant {
     public static SCHM_CODE_APV_HO_DEACT_SCHM = "APV_HO_DEACT_SCHM";
     public static SCHM_CODE_APV_OFR_ACT_SCHM = "APV_OFR_ACT_SCHM";
     public static SCHM_CODE_APV_OFR_DEACT_SCHM = "APV_OFR_DEACT_SCHM";
+    public static VENDOR_GRD_SUPPL_BRC_SCHM = "VENDOR_GRD_SUPPL_BRC_SCHM"
+    
+
     public static CAT_CODE_PRD_HO_APV = "PRD_HO_APV";
     public static CAT_CODE_PRD_HO_DEACT_APV = "PRD_HO_DEACT_APV";
     public static CAT_CODE_PRD_OFR_APV = "PRD_OFR_APV";
+    public static CAT_CODE_VENDOR_GRADING_APV = "VENDOR_GRADING_APV";
+    
     public static CAT_CODE_PRD_OFR_DEACT_APV = "PRD_OFR_DEACT_APV";
     public static PRD_HO_APV_TYPE = "PROD_HO_APV_TYPE";
     public static PRD_HO_DEACT_APV_TYPE = "PROD_HO_DEACT_APV_TYPE";
     public static PRD_OFR_APV_TYPE = "PROD_OFR_APV_TYPE";
-    public static PRD_OFR_DEACT_APV_TYPE = "PROD_OFR_DEACT_APV_TYPE";    
+    public static PRD_OFR_DEACT_APV_TYPE = "PROD_OFR_DEACT_APV_TYPE";  
+    public static VENDOR_GRD_SUPPL_BRC_APV_TYPE = "VENDOR_GRD_SUPPL_BRC_APV_TYPE";
 }

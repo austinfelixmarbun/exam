@@ -70,7 +70,10 @@ import { VendorGradingInquiryPagingComponent } from './vendor-grading/vendor-gra
 import { UcapprovalModule } from '@adins/ucapproval';
 import { AuctionCompanyPagingComponent } from './auction-company/auction-company-paging/auction-company-paging.component';
 import { AuctionCompanyAddeditComponent } from './auction-company/auction-company-addedit/auction-company-addedit.component';
-
+import { UcapprovalcreateModule } from '@adins/Ucapprovalcreate';
+import { UcapprovalR3Module } from '@adins/ucapproval-r3';
+import { UcapprovalHistoryModule } from "@adins/ucapproval-history";
+import { UcapprovalgeneralinfoModule } from "@adins/ucapprovalgeneralinfo";
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -107,7 +110,11 @@ export const customCurrencyMaskConfig = {
     UcaddressModule,
     UcaddtotempModule,
     UcapprovalModule,
-    NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    UcapprovalcreateModule,
+    UcapprovalR3Module,
+    UcapprovalHistoryModule,
+    UcapprovalgeneralinfoModule 
   ],
   declarations: [
     VendorHoldingPagingComponent,
