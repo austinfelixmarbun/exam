@@ -11,6 +11,22 @@
             </lib-ucSubsection>
             <div class="form-body" id="MainInfoId">
               <div class="form-group row">
+                <label class="col-md-2 adInsLabel" translate>Is Supplier</label>
+                <div class="col-md-4">
+                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsSupplier"
+                    (click)="checkIsSupplier()" />
+                </div>
+              </div>
+              <div class="form-group row" *ngIf="IsSupplier == true">
+                <label class="col-md-2 adinsLabel" for="LinkSupplier" translate>Link Supplier </label>
+                <div class="col-md-4">
+                  <lib-uclookupgeneric *ngIf="inputLookupObj?.isReady" [lookupInput]="inputLookupObj"
+                    [parentForm]='CustomerPersonalForm' [enjiForm]='enjiForm' [identifier]="'lookupSupp'"
+                    #LookupSupplier (lookup)="SetSupplier($event)">
+                  </lib-uclookupgeneric>
+                </div>
+              </div>
+              <div class="form-group row"> 
                 <label class="col-md-2 adins-required-label" translate>Customer Name </label>
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="CustName"
@@ -141,7 +157,7 @@
               </lib-ucaddress> 
             </div>
 
-            <div *ngIf="!subsectionAsliRi">
+            <div *ngIf="!subsectionAsliRi && IsCustThirdPartyCheck">
               <lib-ucSubsection [id]="'FraudCheckInfo'" [title]="'Fraud Checking Customer'" [panel]="'dFraudCheckInfo'">
               </lib-ucSubsection>
               <div id="dFraudCheckInfo" class="row">
@@ -149,9 +165,11 @@
                     <label class="col-md-3" translate>Dukcapil</label>
                     
                     <span class="col-md-6">
-                      <label translate>Last Check is 99 days ago /                       
+                      <label translate>{{LastHit.DUKCAPIL}} /                       
                       </label>   
-                      <button type="button" (click)="openPopUp(popUpDukcapil)" class="btn btn-raised btn-primary" translate> Hit Dukcapil                       
+                      <!-- <label *ngIf="LastHit.DUKCAPIL == '' " translate>Not Hit Yet /                       
+                      </label>    -->
+                      <button type="button" (click)="openPopUp(popUpDukcapil, 'popUpDukcapil')" class="btn btn-raised btn-primary" translate> Hit Dukcapil                       
                       </button> 
                     </span> 
                 </div>
@@ -159,78 +177,85 @@
                     <label class="col-md-3" translate>Pefindo</label>
                             
                     <span class="col-md-6">
-                      <label translate>Last Check is 63 days ago /                        
-                      </label>                                               
-                      <button type="button" (click)="openPopUp(popUpPefindo)" class="btn btn-raised btn-primary" translate>
+                      <label translate>{{LastHit.PEFINDO}} /                        
+                      </label>        
+                      <!-- <label *ngIf="!LastHit.PEFINDO" translate>Not Hit Yet /                        
+                      </label>                                          -->
+                      <button type="button" (click)="openPopUp(popUpPefindo, 'popUpPefindo')" class="btn btn-raised btn-primary" translate>
                         Hit Pefindo
                       </button>   
                       /
-                      <a (click)="openPopUp(popUpViewPefindo)">View</a> 
+                      <a (click)="openPopUp(popUpViewPefindo, 'popUpViewPefindo')">View</a> 
                     </span>    
                 </div>
                 <div class="col-md-12">
                     <label class="col-md-3" translate>Asli RI</label>
                        
                     <span class="col-md-6">
-                      <label translate>Last Check is 35 days ago /</label>                                               
+                      <label translate>{{LastHit.ASLIRI}} /</label>                                               
+                      <!-- <label *ngIf="!LastHit.ASLIRI" translate>Not Hit Yet /</label>                                                -->
                       <button type="button" (click)="showAsliRi()" class="btn btn-raised btn-primary"
                         translate>
                         Hit Asli RI
                       </button>   
                       /     
-                      <a (click)="openPopUp(popUpViewAsliRI)">View</a>
+                      <a (click)="openPopUp(popUpViewAsliRI, 'popUpViewAsliRI')">View</a>
                     </span>   
                 </div>
                 <div class="col-md-12">
                     <label class="col-md-3" translate>Trusting Social</label>                                   
                     <span class="col-md-6">
-                      <label translate>Last Check is 20 days ago /                          
-                      </label>                                               
-                      <button type="button" (click)="openPopUp(popUpTrustingSocial)" class="btn btn-raised btn-primary"
+                      <label translate>{{LastHit.TRST}} /                          
+                      </label>                  
+                      <!-- <label *ngIf="!LastHit.TRST" translate>Not Hit Yet /                          
+                      </label>                                                -->
+                      <button type="button" (click)="openPopUp(popUpTrustingSocial, 'popUpTrustingSocial')" class="btn btn-raised btn-primary"
                         translate>
                         Hit Trusting Social
                       </button>   
                       /
-                      <a (click)="openPopUp(popUpViewTrustingSocial)">View</a> 
+                      <a (click)="openPopUp(popUpViewTrustingSocial, 'popUpViewTrustingSocial')">View</a> 
                     </span>  
                 </div>
                 <div class="col-md-12">
-                    <label class="col-md-3" translate>SLIK</label>                            
-                    <label class="col-md-6" translate>Not hit yet /  
-                      <button type="button" (click)="openPopUp(popUpSlik)" class="btn btn-raised btn-primary"
+                    <label class="col-md-3" translate>SLIK</label>  
+                    <label translate>{{LastHit.SLIK}} /                          
+                    </label>                           
+                    <!-- <label *ngIf="!LastHit.SLIK" translate>Not hit yet /                      
+                    </label>     -->
+                    <button type="button" (click)="openPopUp(popUpSlik, 'popUpSlik')" class="btn btn-raised btn-primary"
                       translate>
                       Hit SLIK
-                    </button>                     
-                    </label>    
+                    </button> 
                 </div>
               </div>
             </div>
 
-            <div *ngIf="subsectionAsliRi">
+            <div *ngIf="subsectionAsliRi && IsCustThirdPartyCheck">
               <lib-ucSubsection [id]="'AsliRi'" [title]="'ASLI RI'" [panel]="'dAsliRi'">
               </lib-ucSubsection>
               <div id="dAsliRi" class="row" class="px-3">
                 <div class="col-md-12">
                   <div class="form-group row">
-                      <button type="button" class="col-md-3" (click)="openPopUp(popUpHitProfesional)" class="btn btn-raised btn-primary" translate> Hit Profesional                       
+                      <button type="button" class="col-md-3" (click)="openPopUp(popUpHitProfesional, 'popUpHitProfesional')" class="btn btn-raised btn-primary" translate> Hit Profesional                       
                       </button>                                                
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group row">
-                      <button type="button" class="col-md-3" (click)="openPopUp(popUpHitPhoneAge)" class="btn btn-raised btn-primary" translate> Hit Phone Age                       
+                      <button type="button" class="col-md-3" (click)="openPopUp(popUpHitPhoneAge, 'popUpHitPhoneAge')" class="btn btn-raised btn-primary" translate> Hit Phone Age                       
                       </button>                                                
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group row">
-                      <button type="button" class="col-md-3" (click)="openPopUp(popUpHitMotherNameVerif)" class="btn btn-raised btn-primary" translate> Hit Mother Name Verification                       
+                      <button type="button" class="col-md-3" (click)="openPopUp(popUpHitMotherNameVerif, 'popUpHitMotherNameVerif')" class="btn btn-raised btn-primary" translate> Hit Mother Name Verification                       
                       </button>                                                
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group row">
-                      <button type="button" class="col-md-3" (click)="openPopUp(popUpHitTaxIncome)" class="btn btn-raised btn-primary" translate> Hit Tax Income                       
+                      <button type="button" class="col-md-3" (click)="openPopUp(popUpHitTaxIncome, 'popUpHitTaxIncome')" class="btn btn-raised btn-primary" translate> Hit Tax Income                       
                       </button>                                                
                   </div>
                 </div>

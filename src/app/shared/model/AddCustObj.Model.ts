@@ -10,4 +10,5 @@ export class AddCustObj {
     CustPersonalObj : CustPersonalObj;
     CustCompanyObj : CustCompanyObj;
     CustAddr: CustAddrObj;
+    CustTempNo: string;
 }

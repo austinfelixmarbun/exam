@@ -68,6 +68,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
   resultPersonalUrl: string;
   addCustPersonalUrl: string;
   urlGetDescByMasterCode: string;
+  CustTempNo: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.IsFromCustFamilyTab = false;
@@ -122,6 +123,9 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       }
       if (params["MrMaritalStatCode"] != null) {
         this.MrMaritalStatCode = params["MrMaritalStatCode"];
+      }
+      if (params["CustTempNo"] != null) {
+        this.CustTempNo = params["CustTempNo"];
       }
     });
   }
@@ -304,6 +308,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       );
     }
     else{
+      this.addCustObj.CustTempNo = this.CustTempNo;
       this.addCustObj.CustObj.CustName = this.CustName;
       this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Personal;
       // this.addCustObj.CustObj.MrCustModelCode = this.CustModel;

@@ -569,6 +569,13 @@ export class URLConstant {
     public static GetListBranchByVendorId = environment.FoundationR3Url + "/Vendor/GetListBranchByVendorId";
     public static GetListVendorBankAccByVendorEmpId = environment.FoundationR3Url + "/VendorBankAcc/GetListVendorBankAccByVendorEmpId";
     public static GetVendorAddrByVendorAddrId = environment.FoundationR3Url + "/VendorAddr/GetVendorAddrByVendorAddrId";
+    public static GetVendorByVendorCode = environment.FoundationR3Url + "/Vendor/GetVendorByVendorCode";
+
+    // VENDOR ADDR
+    public static GetVendorAddrByVendorCodeAndMrAddrTypeCode = environment.FoundationR3Url + "/VendorAddr/GetVendorAddrByVendorCodeAndMrAddrTypeCode";
+
+    // VENDOR BANK ACC
+    public static GetVendorBankAccDefaultByVendorId = environment.FoundationR3Url + "/VendorBankAcc/GetVendorBankAccDefaultByVendorId";
 
     // VENDOR GRADING
     public static SubmitRequestVendorGrading = environment.FoundationR3Url + "/VendorGrading/SubmitRequestVendorGrading";
@@ -1009,4 +1016,25 @@ export class URLConstant {
 
     // Sector Economy Slik
     public static GetRefSectorEconomySlikCustomObjectByRefSectorEconomySlikId = environment.FoundationR3Url +"/RefSectorEconomySlik/GetRefSectorEconomySlikCustomObjectByRefSectorEconomySlikId"  
+
+    //REF OFFICE X 
+    public static GetRefOfficeXByRefOfficeCode = environment.FoundationR3Url + "/RefOfficeX/GetRefOfficeXByRefOfficeCode";
+    public static AddEditRefOfficeX = environment.FoundationR3Url + "/RefOfficeX/AddEditRefOfficeX";    
+    
+    //REF TAX OFFICE X
+    public static GetListTaxOfficeName = environment.FoundationR3Url + "/RefTaxOfficeX/GetListTaxOfficeName";
+    
+    //#region CUST THIRD PARTY CHECKING
+    public static AddCustFraudTempReg = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudTempReg";
+    public static GetCustFraudDukcapilReqLogByCustTempNo = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudDukcapilReqLogByCustTempNo";
+    public static GetCustFraudPefindoReqLogByCustTempNo = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudPefindoReqLogByCustTempNo";
+    public static GetCustFraudSLIKRequestByCustTempNo = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudSLIKRequestByCustTempNo";
+    public static GetCustFraudAsliriReqLogByCustTempNoTrxTypeCode = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudAsliriReqLogByCustTempNoTrxTypeCode";
+    public static GetCustFraudTrstsocialReqLogByCustTempNo = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudTrstsocialReqLogByCustTempNo";
+    public static AddCustFraudDukcapilReqLog = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudDukcapilReqLog";
+    public static AddCustFraudPefindoReqLog = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudPefindoReqLog";
+    public static AddCustFraudSLIKRequest = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudSLIKRequest";
+    public static AddCustFraudAsliriReqLog = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudAsliriReqLog";
+    public static AddCustFraudTrstsocialReqLog = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudTrstsocialReqLog";
+    //#endregion
 }

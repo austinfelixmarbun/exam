@@ -19,7 +19,7 @@
         },
         {
             "type": "dropdown",
-            "name": "A.MR_CUST_TYPE_CODE", 
+            "name": "C.MR_CUST_TYPE_CODE", 
             "id": "CustTypeCodeId",
             "value": "",
             "placeholder": "Placeholder",
@@ -33,6 +33,14 @@
             "criteriaPropValue" : "CUST_TYPE",
             "items": [],
             "itemsUrl": []
+        },
+        {
+            "type": "textbox",
+            "name": "CUST_GROUP_NAME",
+            "id": "CustGroupName",
+            "value": "",
+            "label": "Customer Group Name",
+            "placeholder": "Placeholder"
         }
     ],
     "querystring": {
@@ -52,6 +60,12 @@
             "name": "custName"
         }, 
         {
+            "type": "sort",
+            "position": "left",
+            "label": "Customer Group Name",
+            "name": "CustGroupName"
+        },
+        {
             "type": "label",
             "position": "center",
             "label": "Action"
@@ -67,6 +81,11 @@
             "type": "text",
             "position": "left",
             "property": "custName"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "CustGroupName"
         },
         {
             "type": "action",
