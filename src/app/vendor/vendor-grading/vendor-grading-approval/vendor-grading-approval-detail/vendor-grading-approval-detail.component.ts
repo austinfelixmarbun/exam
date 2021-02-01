@@ -74,7 +74,6 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
 
   onApprovalSubmited(event : any)
   {
-    this.toastr.successMessage("Success");
     this.router.navigate(["/Vendor/VendorGrading/Approval/Paging"]);
   }
   initInputApprovalObj(){

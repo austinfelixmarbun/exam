@@ -13,9 +13,7 @@
 
                 <lib-ucviewgeneric [viewGenericObj]="viewVendorBranchObj" (callback)="GetCallBack($event)">
                 </lib-ucviewgeneric>
-                <br />
-                <!-- <lib-ucapproval [inputObj]="inputObj" [showCancel]="'true'" (onCancel)="onCancelClick()" (nextTask)="onAvailableNextTask($event)" (result)="onApprovalSubmited($event)" ></lib-ucapproval>
-           -->
+                <br/>
                 <lib-ucapprovalgeneralinfo [InputObj]="UcInputApprovalGeneralInfoObj" *ngIf="IsReady">
                 </lib-ucapprovalgeneralinfo>
                 
