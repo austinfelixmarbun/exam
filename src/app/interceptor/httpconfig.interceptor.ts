@@ -130,16 +130,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                             return;
                         }
                     }
-                    else {
-                        //Kalau pake Http Get yang bukan ke Backend sendiri g punya token, jadi g boleh asal di replace
-                        // if (event.body.token == undefined) {
-                        //     localStorage.setItem("Token", localStorage.getItem("Token"));
-                        // }
-                        // else {
-                        //     localStorage.setItem("Token", event.body.token);
-                        // }
-
-                    }
                 }
 
                 return event;

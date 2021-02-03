@@ -26,7 +26,6 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   }
 
   chooseRole(item) {
-    console.log('Shinano');
     var roleUrl = environment.FoundationR3Url + URLConstant.LoginByRole;
     var roleObject = {
       UserName: this.data.user,
