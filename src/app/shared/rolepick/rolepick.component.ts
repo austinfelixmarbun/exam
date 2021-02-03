@@ -36,7 +36,6 @@ export class RolepickComponent implements OnInit, AfterViewInit {
       JobTitleCode: item.JobTitleCode,
       RequestDateTime: item.BusinessDt,
       ModuleCode: environment.Module,
-      Ip: "",
       RowVersion: ""
 
     };
