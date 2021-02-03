@@ -70,7 +70,7 @@ export class AdInsHelper {
 
     public static CheckSessionTimeout(cookieService: CookieService) {
         let today = new Date();
-        var businessDtBefore = this.GetCookie(cookieService, CommonConstant.LAST_ACCESS_TIME,);
+        var businessDtBefore = this.GetCookie(cookieService, CommonConstant.LAST_ACCESS_TIME);
         var businessDtNow = formatDate(today, 'yyyy-MM-dd HH:mm:ss', 'en-US');
         if (businessDtBefore == undefined || businessDtBefore == null) {
             this.SetCookie(cookieService, CommonConstant.LAST_ACCESS_TIME, businessDtNow);
