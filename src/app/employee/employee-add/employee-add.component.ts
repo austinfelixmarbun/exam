@@ -213,8 +213,8 @@ export class EmployeeAddComponent implements OnInit {
 
   getLookupBankResponse(e) {
     this.RefEmpForm.patchValue({
-      RefBankId: e.RefBankId,
-      BankBranchRegCode: e.RegRptCode
+      RefBankId: e.refBankId,
+      BankBranchRegCode: e.regRptCode
     });
   }
 

@@ -30,7 +30,7 @@
         {
             "type": "text",
             "position": "left",
-            "property": "BankName"
+            "property": "bankName"
         },
         {
             "type": "action",
@@ -38,11 +38,11 @@
             "action": [
                 {
                     "type": "select",
-                    "property": "RefBankId"
+                    "property": "refBankId"
                 }
             ]
         }
     ],
-    "propertyId": "RefBankId",
-    "propertyName": "BankName"
+    "propertyId": "refBankId",
+    "propertyName": "bankName"
 }
