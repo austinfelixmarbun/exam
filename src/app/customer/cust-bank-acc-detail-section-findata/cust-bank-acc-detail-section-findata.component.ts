@@ -358,6 +358,11 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
         );
       }
       else if (this.pageType == "editStmnt") {
+        if(this.isAlreadyCalc == false)
+        {
+          this.toastr.warningMessage(ExceptionConstant.CALC_FIRST);
+          return false;
+        }
         var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
         var listCustBankStmnt = new Array<CustBankStmntObj>();
