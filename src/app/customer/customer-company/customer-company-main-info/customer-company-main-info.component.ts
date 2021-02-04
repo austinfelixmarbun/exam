@@ -362,13 +362,40 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       default:
         break;
     }
-    this.http.post(url, this.CustThirdPartyChecking).toPromise().then(
-      (response) => {
-        var currentDate = new Date();
-        if(response["TrxNo"]){
-          var lastHitDate = new Date(response["StartDt"]);
-          var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
-          if(dateDiff > this.MaxDaysCustThirdPartyCheck){
+    if(url != "")
+    {
+      this.http.post(url, this.CustThirdPartyChecking).toPromise().then(
+        (response) => {
+          var currentDate = new Date();
+          if(response["TrxNo"]){
+            var lastHitDate = new Date(response["StartDt"]);
+            var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
+            if(dateDiff > this.MaxDaysCustThirdPartyCheck){
+              this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
+                (response) => {
+                  var currentLastHitDate = new Date(response["StartDt"]);
+                  var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
+                  switch (contentString) {
+                    case "popUpPefindo":
+                      this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                      break;
+              
+                    case "popUpSlik":
+                      this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                      break;
+                  
+                    default:
+                      break;
+                  }
+                }
+              ).catch(
+                (error) => {
+                  console.log(error);
+                }
+              );
+            }
+          }
+          else{
             this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
               (response) => {
                 var currentLastHitDate = new Date(response["StartDt"]);
@@ -393,37 +420,12 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
             );
           }
         }
-        else{
-          this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
-            (response) => {
-              var currentLastHitDate = new Date(response["StartDt"]);
-              var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
-              switch (contentString) {
-                case "popUpPefindo":
-                  this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
-                  break;
-          
-                case "popUpSlik":
-                  this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
-                  break;
-              
-                default:
-                  break;
-              }
-            }
-          ).catch(
-            (error) => {
-              console.log(error);
-            }
-          );
+      ).catch(
+        (error) => {
+          console.log(error);
         }
-      }
-    ).catch(
-      (error) => {
-        console.log(error);
-      }
-    );
-
+      );
+    }
     this.Open(content);
   }
 

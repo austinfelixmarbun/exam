@@ -15,6 +15,9 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { map, mergeMap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
+import { CustThirdPartyCheckingObj } from 'app/shared/model/CustThirdPartyCheckingObj.Model';
 
 @Component({
   selector: 'app-edit-main-data-company',
@@ -46,6 +49,13 @@ export class EditMainDataCompanyComponent implements OnInit {
   inputAddressObj: InputAddressObj;
   UcAddressObj: UcAddressObj;
   closeResult;
+  CustThirdPartyChecking: CustThirdPartyCheckingObj = new CustThirdPartyCheckingObj();
+  IsCustThirdPartyCheck: boolean = false;
+  MaxDaysCustThirdPartyCheck: number = 0;
+  LastHit = {
+    PEFINDO: 'Not Hit Yet',
+    SLIK: 'Not Hit Yet',
+  };
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService,private modalService: NgbModal) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
@@ -159,6 +169,35 @@ export class EditMainDataCompanyComponent implements OnInit {
         });
       }
     );
+
+    this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_IS_CUST_THIRD_PARTY_CHECK }).pipe(
+      map((response) => {
+        return response
+      }),
+      mergeMap((response) => {
+        if(response["GsValue"] == "1"){
+          this.IsCustThirdPartyCheck = true;
+          let addCustTemp = this.http.post(URLConstant.AddCustFraudTempReg, { MrCustTypeCode: CommonConstant.CustTypeCompany });
+          let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
+          return forkJoin([addCustTemp, getMaxDays]);
+        }
+        else{
+          return new Array();
+        }
+      })
+    ).toPromise().then(
+      (response) => {
+        if(response.length > 0){
+          this.CustThirdPartyChecking.CustTempNo = response[0]["CustTempNo"];
+          this.CustThirdPartyChecking.MrCustTypeCode = response[0]["CustType"];
+          this.MaxDaysCustThirdPartyCheck = response[1]["GsValue"];
+        }
+      }
+    ).catch(
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   SaveValue() {
@@ -247,7 +286,93 @@ export class EditMainDataCompanyComponent implements OnInit {
   }
 
   //POP UP
-  openPopUp(content) {
+  openPopUp(content, contentString = "") {
+    var url = "";
+    var urlAdd = "";
+    this.CustThirdPartyChecking.CustName = this.CustomerCompanyForm.controls.CustName.value;
+    this.CustThirdPartyChecking.MrIdTypeCode = CommonConstant.CustTypeCompany;
+    this.CustThirdPartyChecking.IdNo = "";
+    this.CustThirdPartyChecking.MobilePhnNo = "";
+    this.CustThirdPartyChecking.TaxIdNo = this.CustomerCompanyForm.controls.TaxIdNo.value;
+    this.CustThirdPartyChecking.FamilyCardNo = "";
+    switch (contentString) {
+      case "popUpPefindo":
+        url = URLConstant.GetCustFraudPefindoReqLogByCustTempNo;
+        urlAdd = URLConstant.AddCustFraudPefindoReqLog;
+        break;
+
+      case "popUpSlik":
+        url = URLConstant.GetCustFraudSLIKRequestByCustTempNo;
+        urlAdd = URLConstant.AddCustFraudSLIKRequest;
+        break;
+    
+      default:
+        break;
+    }
+    if(url != "")
+    {
+      this.http.post(url, this.CustThirdPartyChecking).toPromise().then(
+        (response) => {
+          var currentDate = new Date();
+          if(response["TrxNo"]){
+            var lastHitDate = new Date(response["StartDt"]);
+            var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
+            if(dateDiff > this.MaxDaysCustThirdPartyCheck){
+              this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
+                (response) => {
+                  var currentLastHitDate = new Date(response["StartDt"]);
+                  var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
+                  switch (contentString) {
+                    case "popUpPefindo":
+                      this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                      break;
+              
+                    case "popUpSlik":
+                      this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                      break;
+                  
+                    default:
+                      break;
+                  }
+                }
+              ).catch(
+                (error) => {
+                  console.log(error);
+                }
+              );
+            }
+          }
+          else{
+            this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
+              (response) => {
+                var currentLastHitDate = new Date(response["StartDt"]);
+                var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
+                switch (contentString) {
+                  case "popUpPefindo":
+                    this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                    break;
+            
+                  case "popUpSlik":
+                    this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                    break;
+                
+                  default:
+                    break;
+                }
+              }
+            ).catch(
+              (error) => {
+                console.log(error);
+              }
+            );
+          }
+        }
+      ).catch(
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
     this.Open(content);
   }
 

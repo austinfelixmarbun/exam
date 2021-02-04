@@ -705,17 +705,53 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         default:
           break;
       }
-      this.http.post(url, this.CustThirdPartyChecking).toPromise().then(
-        (response) => {
-          var currentDate = new Date();
-          if(response["TrxNo"]){
-            var lastHitDate = new Date(response["StartDt"]);
-            var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
-            if(dateDiff > this.MaxDaysCustThirdPartyCheck){
+      if(url != "")
+      {
+        this.http.post(url, this.CustThirdPartyChecking).toPromise().then(
+          (response) => {
+            var currentDate = new Date();
+            if(response["TrxNo"]){
+              var lastHitDate = new Date(response["StartDt"]);
+              var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
+              if(dateDiff > this.MaxDaysCustThirdPartyCheck){
+                this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
+                  (response) => {
+                    var currentLastHitDate = new Date(response["StartDt"]);
+                    var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
+                    switch (contentString) {
+                      case "popUpDukcapil":
+                        this.LastHit.DUKCAPIL = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                        break;
+                
+                      case "popUpPefindo":
+                        this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                        break;
+                
+                      case "popUpTrustingSocial":
+                        this.LastHit.TRST = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                        break;
+                
+                      case "popUpSlik":
+                        this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                        break;
+                    
+                      default:
+                        break;
+                    }
+                  }
+                ).catch(
+                  (error) => {
+                    console.log(error);
+                  }
+                );
+              }
+            }
+            else{
               this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
                 (response) => {
                   var currentLastHitDate = new Date(response["StartDt"]);
                   var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
+                  console.log("currentDateDiff: " + currentDateDiff);
                   switch (contentString) {
                     case "popUpDukcapil":
                       this.LastHit.DUKCAPIL = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
@@ -736,6 +772,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
                     default:
                       break;
                   }
+                  console.log("LastHit: " + JSON.stringify(this.LastHit));
                 }
               ).catch(
                 (error) => {
@@ -744,46 +781,12 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
               );
             }
           }
-          else{
-            this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
-              (response) => {
-                var currentLastHitDate = new Date(response["StartDt"]);
-                var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
-                console.log("currentDateDiff: " + currentDateDiff);
-                switch (contentString) {
-                  case "popUpDukcapil":
-                    this.LastHit.DUKCAPIL = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
-                    break;
-            
-                  case "popUpPefindo":
-                    this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
-                    break;
-            
-                  case "popUpTrustingSocial":
-                    this.LastHit.TRST = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
-                    break;
-            
-                  case "popUpSlik":
-                    this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
-                    break;
-                
-                  default:
-                    break;
-                }
-                console.log("LastHit: " + JSON.stringify(this.LastHit));
-              }
-            ).catch(
-              (error) => {
-                console.log(error);
-              }
-            );
+        ).catch(
+          (error) => {
+            console.log(error);
           }
-        }
-      ).catch(
-        (error) => {
-          console.log(error);
-        }
-      );
+        );
+      }
     }
     
     this.Open(content);
