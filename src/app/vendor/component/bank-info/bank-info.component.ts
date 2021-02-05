@@ -185,7 +185,7 @@ export class BankInfoComponent implements OnInit {
 
   getLookupBankResponse(e) {
     this.BankRegisForm.patchValue({
-      RefBankId: e.RefBankId,
+      RefBankId: e.refBankId,
       BankBranchRegCode: e.RegRptCode
     });
   }

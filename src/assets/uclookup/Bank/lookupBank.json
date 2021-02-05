@@ -4,7 +4,7 @@
         {
             "type": "textbox",
             "name": "bank_Name",
-            "id": "BankName",
+            "id": "bankName",
             "value": "",
             "label": "Bank Name",
             "placeholder": "Placeholder"
@@ -30,7 +30,7 @@
         {
             "type": "text",
             "position": "left",
-            "property": "BankName"
+            "property": "bankName"
         },
         {
             "type": "action",
@@ -43,6 +43,6 @@
             ]
         }
     ],
-    "propertyId": "RefBankId",
-    "propertyName": "BankName"
+    "propertyId": "refBankId",
+    "propertyName": "bankName"
 }
