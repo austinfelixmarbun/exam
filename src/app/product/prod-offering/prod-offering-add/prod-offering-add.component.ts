@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ProdOfferingObj } from 'app/shared/model/ProdOfferingObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcLookupObj } from 'app/shared/model/UcLookupObj.Model';

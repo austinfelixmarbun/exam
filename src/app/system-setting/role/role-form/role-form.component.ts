@@ -5,7 +5,7 @@ import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { HttpClient } from "@angular/common/http";
 import { ExcelService } from "app/shared/excel-service/excel-service";
 import { environment } from "environments/environment";
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AuthFormObj } from "app/shared/model/AuthFormObj.Model";
 import { ListAuthFormObj } from "app/shared/model/ListAuthFormObj.Model";
 import { URLConstant } from "app/shared/constant/URLConstant";

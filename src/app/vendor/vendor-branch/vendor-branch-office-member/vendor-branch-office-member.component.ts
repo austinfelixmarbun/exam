@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { VendorService } from 'app/vendor/vendor.service';
 import { HttpClient } from '@angular/common/http';

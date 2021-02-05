@@ -1,4 +1,4 @@
-import { CriteriaObj } from "../model/CriteriaObj.Model";
+import { CriteriaObj } from "../model/CriteriaObj.model";
 
 export class RequestCriteriaObj{
     includeCount:boolean;
