@@ -133,7 +133,7 @@
           <div class="form-group row adins-required">
             <label class="col-md-2 adInsLabel" for="DateAsOf" translate>Date As Of</label>
             <div class="col-md-6">
-              <input type="date" [max]="BusinessDt" class="form-control adInsInput" formControlName="DateAsOf"
+              <input type="date" [max]="BusinessDt | date: 'yyyy-MM-dd'" class="form-control adInsInput" formControlName="DateAsOf"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustPersonalFinDataForm.controls.DateAsOf.invalid }" />
               <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.DateAsOf"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
@@ -170,7 +170,7 @@
           <div class="form-group row">
             <label class="col-md-2 adInsLabel" for="DateAsOf" translate>Date As Of</label>
             <div class="col-md-6">
-              <input type="date" [max]="BusinessDt" class="form-control adInsInput" formControlName="DateAsOf"
+              <input type="date" [max]="BusinessDt | date: 'yyyy-MM-dd'" class="form-control adInsInput" formControlName="DateAsOf"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.DateAsOf.invalid }" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.DateAsOf" [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
