@@ -574,7 +574,7 @@ export class OfficeAddComponent implements OnInit {
   getListTaxOffice() {
     this.httpClient.post<any>(URLConstant.GetListTaxOfficeName, null).subscribe(
       (response) => {
-        this.listTaxOfficeName = response;
+        this.listTaxOfficeName = response["ReturnObject"];
       });
   }
 

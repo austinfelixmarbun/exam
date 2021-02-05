@@ -234,7 +234,7 @@
             <div class="col-md-4">
               <select class="form-control adInsInput" style="width: 50%" formControlName="TaxOffice">
                 <option value="">Select One</option>
-                <option *ngFor="let item of listTaxOfficeName.ReturnObject" [ngValue]="item.Key">
+                <option *ngFor="let item of listTaxOfficeName" [ngValue]="item.Key">
                   {{item.Value}}
                 </option>
               </select>
