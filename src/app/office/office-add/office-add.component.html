@@ -6,21 +6,25 @@
       </div>
     </div>
   </div>
+
   <div class="card-body">
     <div class="px-3">
       <form class="form form-horizontal" [formGroup]="OfficeForm" (ngSubmit)="OfficeForm.valid && SaveForm()"
         #enjiForm="ngForm">
+
         <lib-ucSubsection [id]="'OfficeDetailId'" [title]="'Office-' + this.pageType" [panel]="'OfficeDetail'">
         </lib-ucSubsection>
         <div id="OfficeDetail">
+
           <div class="form-group row adins-required">
-            <label class="col-md-3  adInsLabel" translate>Office Code </label>
+            <label class="col-md-3 adInsLabel" translate>Office Code </label>
             <div class="col-md-4">
               <input type="text" class="form-control" formControlName="OfficeCode">
               <lib-uc-show-errors [control]="OfficeForm.controls.OfficeCode" [submit]="enjiForm.submitted">
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row adins-required">
             <label class="col-md-3  adInsLabel" translate>Office Name </label>
             <div class="col-md-4">
@@ -29,6 +33,7 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-md-3  adInsLabel" translate>Office Short Name </label>
             <div class="col-md-4">
@@ -37,6 +42,7 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row adins-required">
             <label class="col-md-3  adInsLabel" translate>Office Type </label>
             <div class="col-md-4">
@@ -50,6 +56,7 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
           <ng-container *ngIf="OfficeForm.controls.OfficeType.value == 'CG'">
             <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" translate>Center Group Type </label>
@@ -64,6 +71,7 @@
               </div>
             </div>
           </ng-container>
+
           <div [hidden]="OfficeForm.controls.OfficeType.value == 'HO'">
             <div class="form-group row adins-required">
               <label class="col-md-3  adInsLabel" translate>Office Parent </label>
@@ -74,6 +82,7 @@
               </div>
             </div>
           </div>
+
           <div class="form-group row row adins-required">
             <label class="col-md-3  adInsLabel" translate>Konvensional/Syariah</label>
             <div class="col-md-4">
@@ -86,6 +95,7 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row row adins-required">
             <label class="col-md-3  adInsLabel" translate>Office Class</label>
             <div class="col-md-4">
@@ -98,6 +108,7 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row row adins-required">
             <label class="col-md-3  adInsLabel" translate>Holiday Scheme</label>
             <div class="col-md-4">
@@ -110,6 +121,7 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row row adins-required">
             <label class="col-md-3  adInsLabel" translate>Working Hour Scheme</label>
             <div class="col-md-4">
@@ -122,32 +134,38 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-md-3 adInsLabel">Active Status</label>
             <div class="col-md-4">
               <input type="checkbox" class="border-primary" formControlName="IsActive">
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-md-3 adInsLabel">Office Close </label>
             <div class="col-md-4">
               <input type="checkbox" class="border-primary" formControlName="OfficeClose">
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-md-3 adInsLabel">Allow APP Created </label>
             <div class="col-md-4">
               <input type="checkbox" class="border-primary" formControlName="AllowAppCreated">
             </div>
           </div>
+
         </div>
-        <lib-ucaddress [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'UcAddress'" [UCAddrForm]="OfficeForm"></lib-ucaddress>
+        <lib-ucaddress [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'UcAddress'"
+          [UCAddrForm]="OfficeForm"></lib-ucaddress>
         <!-- <lib-ucaddress [UCAddrForm]="OfficeForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'" [default]="addressObj"
           [inputField]="inputFieldAddr">
         </lib-ucaddress> -->
         <lib-ucSubsection [id]="'ContactInfoId'" [title]="'Contact Information'" [panel]="'ContactInfo'">
         </lib-ucSubsection>
         <div id="ContactInfo">
+
           <div class="form-group row">
             <label class="col-md-3 adins-required-label adInsLabel" translate>Contact Person Name </label>
             <div class="col-md-4">
@@ -157,6 +175,7 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-md-3 adins-required-label adInsLabel" translate>Contact Person Job Title
             </label>
@@ -167,6 +186,7 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row adins-required">
             <label class="col-md-3  adInsLabel" translate>Email 1 </label>
             <div class="col-md-4">
@@ -175,6 +195,7 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-md-3  adInsLabel" translate>Email 2 </label>
             <div class="col-md-4">
@@ -183,6 +204,7 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row adins-required">
             <label class="col-md-3  adInsLabel" translate>Mobile Phone 1 </label>
             <div class="col-md-4">
@@ -191,6 +213,7 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-md-3  adInsLabel" translate>Mobile Phone 2 </label>
             <div class="col-md-4">
@@ -199,37 +222,41 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
         </div>
 
-        <lib-ucSubsection [id]="'subSecTax'" [title]="'Tax'" [panel]="'Tax'">
+        <lib-ucSubsection [id]="'TaxId'" [title]="'Tax'" [panel]="'Tax'">
         </lib-ucSubsection>
         <div id="Tax">
+
           <div class="form-group row">
             <label class="col-md-3 adInsLabel" translate>Tax Office </label>
             <div class="col-md-4">
               <select class="form-control adInsInput" style="width: 50%" formControlName="TaxOffice">
                 <option value="">Select One</option>
-                <option *ngFor="let item of listTaxOfficeName.ReturnObject" [value]="item.Key">
+                <option *ngFor="let item of listTaxOfficeName" [ngValue]="item.Key">
                   {{item.Value}}
                 </option>
               </select>
             </div>
           </div>
+
         </div>
 
-        <lib-ucSubsection [id]="'subSecLawCourt'" [title]="'National Court'" [panel]="'LawCourt'">
+        <lib-ucSubsection [id]="'LawCourtId'" [title]="'National Court'" [panel]="'LawCourt'">
         </lib-ucSubsection>
         <div id="LawCourt">
+
           <div class="form-group row">
             <label class="col-md-3 adInsLabel" translate>National Court Not Based On Branch Office </label>
             <div class="col-md-4">
-                <input type="checkbox" formControlName="IsNationalCourt" [(ngModel)]="cbIsNationalCourt" 
-                (change)="IsNationalCourtChange()" 
-                >
+              <input type="checkbox" formControlName="IsNationalCourt" [(ngModel)]="cbIsNationalCourt"
+                (change)="IsNationalCourtChange()">
               <lib-uc-show-errors [control]="OfficeForm.controls.IsNationalCourt" [submit]="enjiForm.submitted">
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-md-3 adInsLabel" translate>National Court Office
             </label>
@@ -240,10 +267,11 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
         </div>
 
         <div class="form-actions right">
-          <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Office/Paging']" skipLocationChange translate>
+          <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Office/Paging']" translate>
             <i class="far fa-window-close"></i> Cancel
           </button>
           <button type="submit" class="btn btn-raised btn-primary" translate>
@@ -251,6 +279,7 @@
           </button>
         </div>
       </form>
+
     </div>
   </div>
 </div>
