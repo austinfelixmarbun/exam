@@ -1038,5 +1038,6 @@ export class URLConstant {
     public static AddCustFraudSLIKRequest = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudSLIKRequest";
     public static AddCustFraudAsliriReqLog = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudAsliriReqLog";
     public static AddCustFraudTrstsocialReqLog = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudTrstsocialReqLog";
+    public static CheckCustFraudTempRegByCustNo = environment.FoundationR3Url + "/CustThirdPartyChecking/CheckCustFraudTempRegByCustNo"
     //#endregion
 }

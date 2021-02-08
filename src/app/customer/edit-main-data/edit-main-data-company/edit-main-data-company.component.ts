@@ -26,25 +26,25 @@ import { CustThirdPartyCheckingObj } from 'app/shared/model/CustThirdPartyChecki
   providers: [NGXToastrService]
 })
 export class EditMainDataCompanyComponent implements OnInit {
-  
+
   tempCustObj: any;
   tempCustModel: any;
   custCompanyObj: any;
   tempCompanyTypeCode: any;
   tempCustCompanyObj: any;
-
+  tempFraud: any;
   custObj: CustObj
-
+  CustNo:string;
   CustId: number;
-  VipNotesRequired : boolean;
-
+  VipNotesRequired: boolean;
+  CheckCustFraudTempRegByCustNo: string;
   From: string;
   editCustUrl: string;
   editCustCompanyUrl: string;
   getCustByCustIdUrl: string;
   getListActiveRefMasterUrl: string;
   getCustCompanyByCustIdUrl: string;
-  GetListActiveRefMasterWithMappingCodeAllUrl : string;
+  GetListActiveRefMasterWithMappingCodeAllUrl: string;
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
   UcAddressObj: UcAddressObj;
@@ -57,16 +57,20 @@ export class EditMainDataCompanyComponent implements OnInit {
     SLIK: 'Not Hit Yet',
   };
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService,private modalService: NgbModal) {
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService, private modalService: NgbModal) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.getCustCompanyByCustIdUrl = URLConstant.GetCustCompanyByCustId;
+    this.CheckCustFraudTempRegByCustNo = URLConstant.CheckCustFraudTempRegByCustNo;
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
     this.editCustUrl = URLConstant.EditCust;
-    this.editCustCompanyUrl = URLConstant.EditCustCompany; 
+    this.editCustCompanyUrl = URLConstant.EditCustCompany;
     this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
+      }
+      if (params["CustNo"] != null) {
+        this.CustNo = params["CustNo"];
       }
       if (params["From"] != null) {
         this.From = params["From"];
@@ -78,9 +82,9 @@ export class EditMainDataCompanyComponent implements OnInit {
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
     MrCompanyTypeCode: ['', [Validators.required]],
     TaxIdNo: [''],
-    IsVip : [true],
+    IsVip: [true],
     IsAffiliateWithMf: [true],
-    VipNotes : ['']
+    VipNotes: ['']
   });
 
   ngOnInit() {
@@ -111,7 +115,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
         this.tempCompanyTypeCode = response[CommonConstant.ReturnObj];
-        if(this.tempCompanyTypeCode.length > 0){
+        if (this.tempCompanyTypeCode.length > 0) {
           this.CustomerCompanyForm.patchValue({
             MrCompanyTypeCode: this.tempCompanyTypeCode[0].Key
           });
@@ -129,19 +133,19 @@ export class EditMainDataCompanyComponent implements OnInit {
         this.CustomerCompanyForm.patchValue({
           CustName: this.tempCustObj.CustName,
           TaxIdNo: this.tempCustObj.TaxIdNo,
-          CustModel : this.tempCustObj.MrCustModelCode,
-          MrCustModelCode: this.tempCustObj.MrCustModelCode, 
-          IsVip :this.tempCustObj.IsVip,
+          CustModel: this.tempCustObj.MrCustModelCode,
+          MrCustModelCode: this.tempCustObj.MrCustModelCode,
+          IsVip: this.tempCustObj.IsVip,
           IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
-          VipNotes :this.tempCustObj.VipNotes
+          VipNotes: this.tempCustObj.VipNotes
         });
-        if(this.tempCustObj.VipNotes!= null){
+        if (this.tempCustObj.VipNotes != null) {
           this.VipNotesRequired = true;
-        }else{
+        } else {
           this.VipNotesRequired = false;
         }
-        if(this.tempCustObj.IsVip==false){ 
-        this.CustomerCompanyForm.controls.VipNotes.disable();
+        if (this.tempCustObj.IsVip == false) {
+          this.CustomerCompanyForm.controls.VipNotes.disable();
         }
         this.CustomerCompanyForm.controls["TaxIdNo"].disable();
 
@@ -175,19 +179,26 @@ export class EditMainDataCompanyComponent implements OnInit {
         return response
       }),
       mergeMap((response) => {
-        if(response["GsValue"] == "1"){
+        if (response["GsValue"] == "1") {
           this.IsCustThirdPartyCheck = true;
-          let addCustTemp = this.http.post(URLConstant.AddCustFraudTempReg, { MrCustTypeCode: CommonConstant.CustTypeCompany });
-          let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
-          return forkJoin([addCustTemp, getMaxDays]);
+          let temp = this.tempFraud
+          if (temp === null) {
+            let addCustTemp = this.http.post(URLConstant.AddCustFraudTempReg, { MrCustTypeCode: CommonConstant.CustTypeCompany, CustNo: this.CustNo });
+            let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
+            return forkJoin([addCustTemp, getMaxDays]);
+          }
+          else {
+            let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
+            return forkJoin([temp, getMaxDays]);
+          }
         }
-        else{
+        else {
           return new Array();
         }
       })
     ).toPromise().then(
       (response) => {
-        if(response.length > 0){
+        if (response.length > 0) {
           this.CustThirdPartyChecking.CustTempNo = response[0]["CustTempNo"];
           this.CustThirdPartyChecking.MrCustTypeCode = response[0]["CustType"];
           this.MaxDaysCustThirdPartyCheck = response[1]["GsValue"];
@@ -199,7 +210,13 @@ export class EditMainDataCompanyComponent implements OnInit {
       }
     );
   }
-
+  checkCustFraudTemp() {
+    this.http.post<any>(this.CheckCustFraudTempRegByCustNo, { CustNo: this.CustNo }).subscribe(
+      (response) => {
+        this.tempFraud = response["ReturnObject"];
+      }
+    );
+  }
   SaveValue() {
     this.custObj = new CustObj();
     this.custCompanyObj = new CustCompanyObj();
@@ -212,10 +229,10 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.custObj.MrCustModelCode = this.CustomerCompanyForm.controls["CustModel"].value;
     this.custCompanyObj.MrCompanyTypeCode = this.CustomerCompanyForm.controls["MrCompanyTypeCode"].value;
     this.custObj.IsVip = this.CustomerCompanyForm.controls["IsVip"].value;
-    this.custObj.IsAffiliateWithMf = this.CustomerCompanyForm.controls["IsAffiliateWithMf"].value; 
-    if(this.custObj.IsVip==true){
+    this.custObj.IsAffiliateWithMf = this.CustomerCompanyForm.controls["IsAffiliateWithMf"].value;
+    if (this.custObj.IsVip == true) {
       this.custObj.VipNotes = this.CustomerCompanyForm.controls["VipNotes"].value;
-    }else{
+    } else {
       this.custObj.VipNotes = null;
     }
 
@@ -236,16 +253,16 @@ export class EditMainDataCompanyComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response["Message"]);
             if (this.From == "EditMainData") {
-              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerCompany/Page"],{ "IdCust": this.CustId, Page: "Edit", From:'EditMainData' });
+              AdInsHelper.RedirectUrl(this.router, ["/Customer/CustomerCompany/Page"], { "IdCust": this.CustId, Page: "Edit", From: 'EditMainData' });
             }
-            else if(this.From == "CustShareholder"){
-              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerCompany/Page"],{ "IdCust": this.CustId, Page: "Edit", From:'CustShareholder' });
+            else if (this.From == "CustShareholder") {
+              AdInsHelper.RedirectUrl(this.router, ["/Customer/CustomerCompany/Page"], { "IdCust": this.CustId, Page: "Edit", From: 'CustShareholder' });
             }
-            else if(this.From == "CustGuarantor"){
-              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerCompany/Page"],{ "IdCust": this.CustId, Page: "Edit", From:'CustGuarantor' });
+            else if (this.From == "CustGuarantor") {
+              AdInsHelper.RedirectUrl(this.router, ["/Customer/CustomerCompany/Page"], { "IdCust": this.CustId, Page: "Edit", From: 'CustGuarantor' });
             }
             else {
-              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerCompany/Page"],{ "IdCust": this.CustId, From:'CustPaging' });
+              AdInsHelper.RedirectUrl(this.router, ["/Customer/CustomerCompany/Page"], { "IdCust": this.CustId, From: 'CustPaging' });
             }
           }
         );
@@ -255,16 +272,16 @@ export class EditMainDataCompanyComponent implements OnInit {
 
   back() {
     if (this.From == "CustPaging") {
-      AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router, ["/Customer/Paging"], {});
     }
     else if (this.From == "EditMainData") {
-      AdInsHelper.RedirectUrl(this.router,["/Customer/EditMainData/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router, ["/Customer/EditMainData/Paging"], {});
     }
-    else if(this.From == "CustShareholder"){
-      AdInsHelper.RedirectUrl(this.router,["/Customer/CustShareholder/Paging"],{});
+    else if (this.From == "CustShareholder") {
+      AdInsHelper.RedirectUrl(this.router, ["/Customer/CustShareholder/Paging"], {});
     }
-    else if(this.From == "CustGuarantor"){
-      AdInsHelper.RedirectUrl(this.router,["/Customer/CustGuarantor/Paging"],{});
+    else if (this.From == "CustGuarantor") {
+      AdInsHelper.RedirectUrl(this.router, ["/Customer/CustGuarantor/Paging"], {});
     }
   }
   checkState() {
@@ -275,12 +292,12 @@ export class EditMainDataCompanyComponent implements OnInit {
       this.CustomerCompanyForm.controls.VipNotes.disable();
       this.VipNotesRequired = false;
       this.CustomerCompanyForm.controls.IdExpiredDt.clearValidators();
-     
+
     } else {
       this.CustomerCompanyForm.controls.VipNotes.enable();
       this.CustomerCompanyForm.controls.VipNotes.setValidators(Validators.required);
       this.VipNotesRequired = true;
-       
+
     }
     this.CustomerCompanyForm.controls.VipNotes.updateValueAndValidity();
   }
@@ -305,32 +322,31 @@ export class EditMainDataCompanyComponent implements OnInit {
         url = URLConstant.GetCustFraudSLIKRequestByCustTempNo;
         urlAdd = URLConstant.AddCustFraudSLIKRequest;
         break;
-    
+
       default:
         break;
     }
-    if(url != "")
-    {
+    if (url != "") {
       this.http.post(url, this.CustThirdPartyChecking).toPromise().then(
         (response) => {
           var currentDate = new Date();
-          if(response["TrxNo"]){
+          if (response["TrxNo"]) {
             var lastHitDate = new Date(response["StartDt"]);
-            var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
-            if(dateDiff > this.MaxDaysCustThirdPartyCheck){
+            var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+            if (dateDiff > this.MaxDaysCustThirdPartyCheck) {
               this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
                 (response) => {
                   var currentLastHitDate = new Date(response["StartDt"]);
-                  var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
+                  var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
                   switch (contentString) {
                     case "popUpPefindo":
                       this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                       break;
-              
+
                     case "popUpSlik":
                       this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                       break;
-                  
+
                     default:
                       break;
                   }
@@ -342,20 +358,20 @@ export class EditMainDataCompanyComponent implements OnInit {
               );
             }
           }
-          else{
+          else {
             this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
               (response) => {
                 var currentLastHitDate = new Date(response["StartDt"]);
-                var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
+                var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
                 switch (contentString) {
                   case "popUpPefindo":
                     this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                     break;
-            
+
                   case "popUpSlik":
                     this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                     break;
-                
+
                   default:
                     break;
                 }
