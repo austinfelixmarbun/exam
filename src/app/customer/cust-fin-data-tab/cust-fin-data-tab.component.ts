@@ -92,7 +92,7 @@ export class CustFinDataTabComponent implements OnInit {
   currentCustFinDataIndex: number;
   currentModal: any;
 
-  BusinessDt: Date;
+  BusinessDt: string;
 
   constructor(
     private httpClient: HttpClient,
@@ -108,12 +108,7 @@ export class CustFinDataTabComponent implements OnInit {
   }
 
   async ngOnInit() {
-    var currentUserContext = JSON.parse(localStorage.getItem(CommonConstant.USER_ACCESS));
-    if (currentUserContext != null && currentUserContext != undefined)
-    {
-      this.BusinessDt = new Date(currentUserContext[CommonConstant.BUSINESS_DT]);
-      this.BusinessDt.setDate(this.BusinessDt.getDate() - 1);
-    }
+    this.BusinessDt = formatDate(new Date(),'yyyy-MM-dd','en-US');
 
     this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyFinData : CommonConstant.AttrGroupCustPersonalFinData;
     
