@@ -155,6 +155,10 @@ export class AdInsHelper {
         window.open(environment.FoundationR3Web + "/View/Offering?prodOfferingHId=0&prodOfferingCode=" + Code + "&prodOfferingVersion=" + Version, "_blank");
     }
 
+    public static OpenCustExposure(CustId: number) {
+        window.open(environment.FoundationR3Web + "/View/CustExposureView?CustId=" + CustId);
+    }
+
     public static SetLocalStorage(key:string, value:string)
     {
         return localStorage.setItem(key, this.EncryptString(value, environment.ChipperKeyLocalStorage));

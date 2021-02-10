@@ -28,6 +28,10 @@ const routes: Routes = [
         path: 'Survey',
         loadChildren: './survey-order/survey-order-view.module#SurveyOrderViewModule'
       },
+      {
+        path: 'CustExposureView',
+        loadChildren: './cust-exposure-view/cust-exposure-view.module#CustExposureViewModule'
+      },
     ]
   }
 ];
