@@ -241,6 +241,8 @@ export class EmployeeAddComponent implements OnInit {
           });
           
           this.inputLookupBankObj.nameSelect = this.refBankObj.BankName;
+          this.inputLookupBankObj.jsonSelect = { bankName: this.refBankObj.BankName };
+
           this.addressObj.Addr = this.refEmpObj.Addr;
           this.addressObj.AreaCode4 = this.refEmpObj.AreaCode4;
           this.addressObj.AreaCode3 = this.refEmpObj.AreaCode3;
@@ -273,7 +275,7 @@ export class EmployeeAddComponent implements OnInit {
   getLookupBankResponse(e) {
     this.RefEmpForm.patchValue({
       RefBankId: e.refBankId,
-      BankBranchRegCode: e.RegRptCode
+      BankBranchRegCode: e.regRptCode
     });
   }
 
