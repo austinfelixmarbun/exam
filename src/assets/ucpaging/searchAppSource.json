@@ -103,6 +103,18 @@
         "name": "RAS.IS_ACTIVE"
       },
       {
+        "type": "sort",
+        "position": "center",
+        "label": "Period From",
+        "name": "RAS.PERIOD_FROM"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Period To",
+        "name": "RAS.PERIOD_TO"
+      },
+      {
         "type": "label",
         "position": "center",
         "label": "Office Member"
@@ -136,6 +148,16 @@
         "type": "boolean",
         "position": "center",
         "property": "isActive"
+      },
+      {
+        "type": "date",
+        "position": "center",
+        "property": "periodFrom"
+      },
+      {
+        "type": "date",
+        "position": "center",
+        "property": "periodTo"
       },
       {
         "type": "action",
