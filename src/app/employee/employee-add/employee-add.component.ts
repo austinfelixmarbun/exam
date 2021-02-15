@@ -425,7 +425,7 @@ export class EmployeeAddComponent implements OnInit {
 
   setValidator(pattern: string) {
     if (pattern != undefined) {
-      this.RefEmpForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.RefEmpForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
       this.RefEmpForm.controls[this.controlNameIdNo].updateValueAndValidity();
     }
   }

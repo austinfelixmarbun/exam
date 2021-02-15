@@ -558,7 +558,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
 
   setValidator(pattern: string) {
     if (pattern != undefined) {
-      this.CustomerFamilyForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.CustomerFamilyForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
       this.CustomerFamilyForm.controls[this.controlNameIdNo].updateValueAndValidity();
     }
   }

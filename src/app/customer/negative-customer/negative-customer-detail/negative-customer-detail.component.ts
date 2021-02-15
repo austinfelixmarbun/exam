@@ -728,7 +728,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
 
   setValidator(pattern: string) {
     if (pattern != undefined) {
-      this.NegativeCustForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.NegativeCustForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
       this.NegativeCustForm.controls[this.controlNameIdNo].updateValueAndValidity();
     }
   }
