@@ -31,7 +31,7 @@
         },
         {
             "type": "dropdown",
-            "name": "A.IS_ACTIVE",
+            "name": "ITC.IS_ACTIVE",
             "datatype": "text",
             "id": "IsActive",
             "value": "",
