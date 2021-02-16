@@ -118,6 +118,7 @@ export class OfficeAddComponent implements OnInit {
     CntctPersonMobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     CntctPersonMobilePhnNo2: ['', [Validators.pattern('^[0-9]+$')]],
     IsActive: false,
+    IsHaveCashier: false,
     OfficeClose: false,
     AllowAppCreated: false
   })
@@ -280,6 +281,7 @@ export class OfficeAddComponent implements OnInit {
             HolidayScheme: this.resultData.HolidaySchmHId,
             WorkingHourScheme: this.resultData.WorkingHourSchmHId,
             IsActive: this.resultData.IsActive,
+            IsHaveCashier: this.resultData.IsHaveCashier,
             OfficeClose: this.resultData.IsOfficeClose,
             AllowAppCreated: this.resultData.IsAllowAppCreated,
             CntctPersonName: this.resultData.CntctPersonName,
@@ -383,6 +385,7 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.OfficeName = this.OfficeForm.value.OfficeName;
     this.officeObj.MrOfficeClassCode = this.OfficeForm.value.MrOfficeClassCode;
     this.officeObj.IsActive = this.OfficeForm.value.IsActive;
+    this.officeObj.IsHaveCashier = this.OfficeForm.value.IsHaveCashier;
     this.officeObj.IsAllowAppCreated = this.OfficeForm.value.AllowAppCreated;
     this.officeObj.HolidaySchmHId = this.OfficeForm.value.HolidayScheme;
     this.officeObj.WorkingHourSchmHId = this.OfficeForm.value.WorkingHourScheme;
