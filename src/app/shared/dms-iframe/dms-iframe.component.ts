@@ -12,6 +12,7 @@ import { DMSObj } from '../model/DMS/DMSObj.model';
 export class DmsIframeComponent implements OnInit {
   urlLink: string;
   appName: string = "CONFINS";
+  custNo: string;
 
   @Input() showButton: boolean = false;
   @Input() dmsObj: DMSObj;
@@ -22,8 +23,9 @@ export class DmsIframeComponent implements OnInit {
   @Output() outputCancel: EventEmitter<any> = new EventEmitter();
   prm : any = "";
   noParamGiven: boolean = true;
+
   constructor() { }
-  custNo: string;
+  
   ngOnInit() {
     this.rootServer = environment.DMSUrl;
     this.dmsKey = CommonConstant.DmsKey;

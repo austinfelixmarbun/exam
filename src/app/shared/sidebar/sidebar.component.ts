@@ -60,7 +60,6 @@ export class SidebarComponent implements OnInit {
                     JobTitleCode: currentUserContext.JobTitleCode,
                     RequestDateTime: currentUserContext.BusinessDt,
                     ModuleCode: environment.Module,
-                    Ip: "",
                     RowVersion: ""
                 };
                 var updateRoleUrl = environment.FoundationR3Url + URLConstant.UpdateToken;

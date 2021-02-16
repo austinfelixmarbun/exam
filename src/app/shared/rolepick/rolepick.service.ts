@@ -21,7 +21,6 @@ export class RolePickService {
             var loginByRole = environment.FoundationR3Url + URLConstant.LoginByToken;
             var roleObject2 = {
                 RequestDateTime: AdInsHelper.GetCookie(this.cookieService, CommonConstant.BUSINESS_DATE_RAW),
-                Ip: "",
                 RowVersion: ""
             };
 
@@ -57,7 +56,6 @@ export class RolePickService {
                     RoleCode: item.RoleCode,
                     JobTitleCode: item.JobTitleCode,
                     RequestDateTime: item.BusinessDt,
-                    Ip: "",
                     RowVersion: ""
 
                 };

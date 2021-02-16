@@ -125,12 +125,12 @@ export class AuctionCompanyAddeditComponent implements OnInit {
           Kelurahan: this.result.VendorAddrObj.AreaCode2,
           City: this.result.VendorAddrObj.City,
           Province: this.result.VendorAddrObj.Province,
-          Phn1: this.result.VendorAddrObj.Phn1,
-          Phn2: this.result.VendorAddrObj.Phn2,
+          Phn1: this.result.VendorObj.MobilePhnNo1,
+          Phn2: this.result.VendorObj.MobilePhnNo2,
           Name: this.result.VendorContactPersonObj.Name,
           MrJobPositionCode: this.result.VendorContactPersonObj.MrEmployeePosition,
           Phone1: this.result.VendorContactPersonObj.Phone1,
-          Phone2: this.result.VendorContactPersonObj.Name,
+          Phone2: this.result.VendorContactPersonObj.Phone2,
           CityContactPerson: this.result.VendorContactPersonObj.City,
           ProvinceContactPerson: this.result.VendorContactPersonObj.Province,
           AddrContactPerson: this.result.VendorContactPersonObj.Addr,          
@@ -211,6 +211,8 @@ export class AuctionCompanyAddeditComponent implements OnInit {
       this.AuctionCompanyObj.VendorObj.TaxidNo = this.AuctionCompanyForm.controls.TaxIdNo.value;
       this.AuctionCompanyObj.VendorObj.TaxpayerName = this.AuctionCompanyForm.controls.TaxpayerName.value;
       this.AuctionCompanyObj.VendorObj.IsActive = this.AuctionCompanyForm.controls.IsActive.value;
+      this.AuctionCompanyObj.VendorObj.MobilePhnNo1 = this.AuctionCompanyForm.controls.Phn1.value;
+      this.AuctionCompanyObj.VendorObj.MobilePhnNo2 = this.AuctionCompanyForm.controls.Phn2.value;      
 
       //Vendor Addr
       this.AuctionCompanyObj.VendorAddrObj.Addr = this.AuctionCompanyForm.controls.Addr.value;
@@ -218,9 +220,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
       this.AuctionCompanyObj.VendorAddrObj.AreaCode1 = this.AuctionCompanyForm.controls.Kecamatan.value;
       this.AuctionCompanyObj.VendorAddrObj.City = this.AuctionCompanyForm.controls.City.value;
       this.AuctionCompanyObj.VendorAddrObj.Zipcode = this.AuctionCompanyForm.controls["Zipcode"]["controls"].value.value;
-      this.AuctionCompanyObj.VendorAddrObj.Province = this.AuctionCompanyForm.controls.Province.value;
-      this.AuctionCompanyObj.VendorAddrObj.Phn1 = this.AuctionCompanyForm.controls.Phn1.value;
-      this.AuctionCompanyObj.VendorAddrObj.Phn2 = this.AuctionCompanyForm.controls.Phn2.value;      
+      this.AuctionCompanyObj.VendorAddrObj.Province = this.AuctionCompanyForm.controls.Province.value;     
 
       //Vendor Contact Person
       this.AuctionCompanyObj.VendorContactPersonObj.Name = this.AuctionCompanyForm.controls.Name.value;

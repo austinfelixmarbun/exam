@@ -9,6 +9,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { DMSObj } from 'app/shared/model/DMS/DMSObj.model';
 import { DMSLabelValueObj } from 'app/shared/model/DMS/DMSLabelValueObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-customer-company-page',
@@ -36,7 +37,7 @@ export class CustomerCompanyPageComponent implements OnInit {
   From: string;
   dmsObj: DMSObj;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,  private cookieService: CookieService) {
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -64,6 +65,14 @@ export class CustomerCompanyPageComponent implements OnInit {
       AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
     }
     else {
+      this.stepper = new Stepper(document.querySelector('#stepper1'), {
+        linear: false,
+        animation: true
+      });
+      this.EnterTab("Detail");
+      this.CustStepIndex = 1;
+      this.stepper.to(this.CustStepIndex);
+
       var custObj = { CustId: this.IdCust };
       this.http.post(URLConstant.GetCustCompanyByCustId, custObj).subscribe(
         (response: any) => {
@@ -72,7 +81,7 @@ export class CustomerCompanyPageComponent implements OnInit {
       );
       await this.http.post(URLConstant.GetCustByCustId, custObj).toPromise().then(
         (response: any) => {
-          let currentUserContext = JSON.parse(localStorage.getItem("UserAccess"));
+          let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
           this.dmsObj = new DMSObj();
           this.dmsObj.User = currentUserContext.UserName;
           this.dmsObj.Role = currentUserContext.RoleCode;
@@ -83,13 +92,6 @@ export class CustomerCompanyPageComponent implements OnInit {
       
         }
       );
-      this.stepper = new Stepper(document.querySelector('#stepper1'), {
-        linear: false,
-        animation: true
-      })
-      this.EnterTab("Detail");
-      this.CustStepIndex = 1;
-      this.stepper.to(this.CustStepIndex);
     }
   }
 
