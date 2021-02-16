@@ -10,6 +10,8 @@ import { DMSObj } from 'app/shared/model/DMS/DMSObj.model';
 import { DMSLabelValueObj } from 'app/shared/model/DMS/DMSLabelValueObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { PathConstant } from 'app/shared/PathConstant';
 
 @Component({
   selector: 'app-customer-company-page',
@@ -54,15 +56,15 @@ export class CustomerCompanyPageComponent implements OnInit {
   
   back() {
     if (this.From) {
-      AdInsHelper.RedirectUrl(this.router,["/Customer/"+this.From+"/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router, ["/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstant.PAGING], {});
     } else {
-      AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
     }
   }
 
   async ngOnInit() {
     if (this.IdCust == null) {
-      AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
     }
     else {
       this.stepper = new Stepper(document.querySelector('#stepper1'), {

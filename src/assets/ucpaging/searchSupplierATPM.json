@@ -100,7 +100,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Vendor/ATPM/Registration",
+                    "path": "VENDOR_ATPM_REG",
                     "param": [
                         {
                             "type": "VendorId",

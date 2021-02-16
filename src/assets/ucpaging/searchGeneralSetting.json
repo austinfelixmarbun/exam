@@ -117,7 +117,7 @@
               ],
               "result": {
                 "type": "url",
-                "path": "/CommonSetting/GeneralSetting/Detail",
+                "path": "CS_GEN_SETTING_DETAIL",
                 "param": [
                   {
                     "type": "generalSettingId",

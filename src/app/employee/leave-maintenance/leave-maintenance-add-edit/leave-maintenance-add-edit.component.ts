@@ -13,6 +13,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-leave-maintenance-add-edit',
@@ -40,7 +41,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
   });
   businessDt: Date;
 
-
+  readonly CancelLink: string = NavigationConstant.EMP_LEAVE_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.apiUrl = URLConstant.GetRefEmpLeaveMngmntById;
     this.addUrl = URLConstant.AddRefEmpLeaveMngmnt;
@@ -124,7 +125,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         this.http.post(this.addUrl, this.relmObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,["/Employee/Leave/Paging"],{});
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_LEAVE_PAGING],{});
           }
         );
       } else {
@@ -133,7 +134,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         this.http.post(this.editUrl, this.relmObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,["/Employee/Leave/Paging"],{});
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_LEAVE_PAGING],{});
           }
         );
       }

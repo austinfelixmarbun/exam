@@ -10,6 +10,7 @@ import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-asset-document-add-edit',
@@ -41,6 +42,8 @@ export class AssetDocumentAddEditComponent implements OnInit {
   temp: RefAssetDocObj = new RefAssetDocObj();
   isShowCbxBorrow: boolean;
   isShowCbxPledge: boolean;
+  
+  readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
@@ -129,7 +132,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddNewAssetDocList, this.assetDocListObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/Document/Paging"],{ "AssetTypeId": this.assetDocListObj.AssetTypeId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_PAGING],{ "AssetTypeId": this.assetDocListObj.AssetTypeId });
         }
       );
     }
@@ -147,7 +150,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditAssetDocList, this.assetDocListObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/Document/Paging"],{ "AssetTypeId": this.assetDocListObj.AssetTypeId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_PAGING],{ "AssetTypeId": this.assetDocListObj.AssetTypeId });
         }
       );
     }

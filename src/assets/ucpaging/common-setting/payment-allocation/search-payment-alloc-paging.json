@@ -138,7 +138,7 @@
                             "result": {
                                 "type": "url",
                                 "icon": "ft-edit-2",
-                                "path": "/CommonSetting/paymentalloc/detail",
+                                "path": "CS_PAYMENT_ALLOC_DETAIL",
                                 "param": [
                                     {
                                         "type": "RefPaymentAllocId",

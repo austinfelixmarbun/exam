@@ -6,6 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from "app/shared/model/CriteriaObj.Model";
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-scheme-member-paging',
@@ -18,6 +19,8 @@ export class VendorSchemeMemberPagingComponent implements OnInit {
   MrVendorCategoryCode: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
+  readonly AddLink: string = NavigationConstant.VENDOR_SCHM_MBR_ADD;
+  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   constructor(private route: ActivatedRoute){
     this.route.queryParams.subscribe(params => {
       this.VendorSchmId = params["VendorSchmId"];

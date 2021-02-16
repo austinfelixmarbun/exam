@@ -1,15 +1,18 @@
+import { NavigationConstant } from "../NavigationConstant";
 
 export class UcViewGenericObj {
     viewInput: string;
     viewEnvironment: string;
     ddlEnvironments: Array<EnviObj>;
     whereValue: Array<WhereValueObj>;
+    navigationConst: any;
 
     constructor() {
         this.viewInput = "";
         this.viewEnvironment = "";
         this.ddlEnvironments = new Array<EnviObj>();
         this.whereValue = new Array<WhereValueObj>();
+        this.navigationConst = NavigationConstant;
     }
 }
 

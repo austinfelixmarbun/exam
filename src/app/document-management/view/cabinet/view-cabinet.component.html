@@ -23,7 +23,7 @@
                 <ng-container *ngFor="let item of responseRack">
                   <tr>
                     <td>
-                      <a [routerLink]="['/DocumentManagementView/ViewRack']" target="_blank" 
+                      <a [routerLink]="[ViewLink]" target="_blank" 
                       [queryParams]="{ RackCode: item.RackCode }">{{item.RackCode}}
                       </a>
                     </td>

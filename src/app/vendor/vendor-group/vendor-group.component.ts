@@ -9,6 +9,7 @@ import { VendorGroupObj } from 'app/shared/model/VendorGroupObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-group',
@@ -34,7 +35,7 @@ export class VendorGroupComponent implements OnInit {
   resultData: any;
   MrVendorCategoryCode: string;
 
-
+  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
@@ -106,7 +107,7 @@ export class VendorGroupComponent implements OnInit {
       this.httpClient.post(URLConstant.AddVendorGrp, this.vendorGrpObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          AdInsHelper.RedirectUrl(this.router,["/Vendor/Paging"],{ "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode });
         }
       );
     }
@@ -117,7 +118,7 @@ export class VendorGroupComponent implements OnInit {
       this.httpClient.post(URLConstant.EditVendorGrp, this.vendorGrpObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          AdInsHelper.RedirectUrl(this.router,["/Vendor/Paging"],{ "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode });
         }
       );
     }

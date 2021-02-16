@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-role-paging',
@@ -16,7 +17,7 @@ export class RolePagingComponent implements OnInit {
 
   inputPagingObj: any;
 
-
+  readonly AddLink: string = NavigationConstant.SYSTEM_SETTING_ROLE_DETAIL;
   constructor(private router: Router, private toastr: NGXToastrService) {
   }
 

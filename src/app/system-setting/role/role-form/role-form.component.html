@@ -5,7 +5,7 @@
     </lib-ucaddtotemp>
     <div class="card-header">
       <div class="text-right">
-        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/SystemSetting/RoleForm']" [queryParams]="{RefRoleId: this.RefRoleId}" skipLocationChange translate>
+        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" [queryParams]="{RefRoleId: this.RefRoleId}" skipLocationChange translate>
           <i class="far fa-window-close"></i> Cancel
         </button>
         <button type="submit" (click)="SaveListAuthForm()" class="btn btn-raised btn-primary" translate>

@@ -10,6 +10,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-holiday-detail-edit',
@@ -66,12 +67,12 @@ export class HolidayDetailEditComponent implements OnInit {
 
     this.http.post(URLConstant.EditHolidaySchmD, HolidayObj).subscribe(
       (response) => {
-        AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Holiday/Detail/'],{ "HolidaySchmHId": this.HolidaySchmHId })
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
         this.toastr.successMessage(response['message']);
       });
   }
 
   BackNavigate() {
-    AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Holiday/Detail/'],{ "HolidaySchmHId": this.HolidaySchmHId })
+    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
   }
 }

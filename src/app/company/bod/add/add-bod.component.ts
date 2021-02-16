@@ -12,6 +12,7 @@ import { UcInfoComponent } from 'app/shared/UserControl/uc-info/uc-info.componen
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
     selector: 'add-bod',
@@ -44,6 +45,7 @@ export class BodAddComponent implements OnInit {
     idNo: any;
     refCoyId: any;
 
+    readonly CancelLink: string = NavigationConstant.COY_BOD;
     constructor(private router: Router, private toastr: NGXToastrService, private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService) {
         this.route.queryParams.subscribe(params => {
             this.param = params["coyBodId"];
@@ -128,7 +130,7 @@ export class BodAddComponent implements OnInit {
             this.http.post(this.editUrl, coyAdd).subscribe(
                 (response) => {
                     this.toastr.successMessage(response['message']);
-                    AdInsHelper.RedirectUrl(this.router,["/company/bod"],{ "refCoyId": this.refCoyId });
+                    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.COY_BOD],{ "refCoyId": this.refCoyId });
                 });
         }
         else {
@@ -136,7 +138,7 @@ export class BodAddComponent implements OnInit {
             this.http.post(this.editUrl, coyAdd).subscribe(
                 (response) => {
                     this.toastr.successMessage(response['message']);
-                    AdInsHelper.RedirectUrl(this.router,["/company/bod"],{ "refCoyId": this.refCoyId });
+                    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.COY_BOD],{ "refCoyId": this.refCoyId });
                 });
         }
     }

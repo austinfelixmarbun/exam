@@ -12,6 +12,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-attribute-detail',
@@ -240,7 +241,7 @@ export class AttributeDetailComponent implements OnInit {
     this.httpClient.post(url, formValue).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);
-        AdInsHelper.RedirectUrl(this.router,["/SystemSetting/Attribute/Paging"],{ });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ATTR_PAGING],{ });
       },
       (error) => {
         console.log(error);

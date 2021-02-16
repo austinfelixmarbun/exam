@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-currency-add',
@@ -35,6 +36,7 @@ export class CurrencyAddComponent implements OnInit {
   UcNumber2: any;
   UcNumber3: any;
 
+  readonly CancelLink: string = NavigationConstant.CS_CURRENCY_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getUrl = URLConstant.GetRefCurrById;
     this.addUrl = URLConstant.AddRefCurr;
@@ -101,7 +103,7 @@ export class CurrencyAddComponent implements OnInit {
       this.http.post(this.addUrl, this.currObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/CommonSetting/Currency/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_CURRENCY_PAGING],{});
         }
       );
     } else {
@@ -113,7 +115,7 @@ export class CurrencyAddComponent implements OnInit {
       this.http.post(this.editUrl, this.currObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/CommonSetting/Currency/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_CURRENCY_PAGING],{});
         }
       );
     }

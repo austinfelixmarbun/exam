@@ -13,6 +13,7 @@ import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-notification-approval-detail',
@@ -34,6 +35,7 @@ export class NotificationApprovalDetailComponent implements OnInit {
   submitUrl:any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   
+  readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) { 
     this.route.queryParams.subscribe(params => {
       if (params["NotificationHId"] != null) {
@@ -102,7 +104,7 @@ export class NotificationApprovalDetailComponent implements OnInit {
       this.http.post(this.submitUrl, this.notificationHObj).subscribe(
         response => {
           this.toastr.successMessage(resultForMsg + " " + response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/SystemSetting/NotificationApproval"],{ });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV],{ });
         }
       );
   }

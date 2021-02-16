@@ -11,6 +11,7 @@ import { UcInputApprovalHistoryObj } from 'app/shared/model/UcInputApprovalHisto
 import { UcInputApprovalObj } from 'app/shared/model/UcInputApprovalObj.Model';
 import { UcInputApprovalGeneralInfoObj } from 'app/shared/model/UcInputApprovalGeneralInfoObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-product-offering-deact-apv-detail',
@@ -102,9 +103,9 @@ export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit 
   } 
 
   onApprovalSubmited(event) {
-    AdInsHelper.RedirectUrl(this.router,["/Product/OfferingDeactivateApproval"],{ });
+    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_OFFERING_DEACTIVATE_APPRV],{ });
   }
   onCancelClick() {
-    AdInsHelper.RedirectUrl(this.router,["/Product/OfferingDeactivateApproval"],{ });
+    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_OFFERING_DEACTIVATE_APPRV],{ });
   }
 }

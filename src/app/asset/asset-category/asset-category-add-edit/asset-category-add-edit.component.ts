@@ -7,6 +7,7 @@ import { AssetCategoryObj } from 'app/shared/model/AssetCategoryObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-asset-category-add-edit',
@@ -25,6 +26,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
   acObj: AssetCategoryObj;
   assetTypeName: string;
 
+  readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
@@ -71,7 +73,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddNewAssetCategory, this.acObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/Category/Paging"],{ "AssetTypeId": this.acObj.AssetTypeId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_CATEGORY_PAGING],{ "AssetTypeId": this.acObj.AssetTypeId });
         });
     } else {
       this.acObj = this.result;
@@ -82,7 +84,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditAssetCategory, this.acObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/Category/Paging"],{ "AssetTypeId": this.acObj.AssetTypeId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_CATEGORY_PAGING],{ "AssetTypeId": this.acObj.AssetTypeId });
         });
     }
   }

@@ -140,7 +140,7 @@
                                 "type": "link",
                                 "position": "center",
                                 "property": "ShareholderCustNo",
-                                "path": "/View/Customer/PersonalDetail",
+                                "path": "VIEW_CUST_PERSONAL_DETAIL",
                                 "target": "_blank",
                                 "param": [
                                     {
@@ -163,7 +163,7 @@
                                 "type": "link",
                                 "position": "center",
                                 "property": "ShareholderCustNo",
-                                "path": "/View/Customer/CoyDetail",
+                                "path": "VIEW_CUST_COY_DETAIL",
                                 "target": "_blank",
                                 "param": [
                                     {
@@ -212,7 +212,7 @@
                                 "type": "link",
                                 "position": "center",
                                 "property": "CustNo",
-                                "path": "/View/Customer/PersonalDetail",
+                                "path": "VIEW_CUST_PERSONAL_DETAIL",
                                 "target": "_blank",
                                 "param": [
                                     {
@@ -235,7 +235,7 @@
                                 "type": "link",
                                 "position": "center",
                                 "property": "CustNo",
-                                "path": "/View/Customer/CoyDetail",
+                                "path": "VIEW_CUST_COY_DETAIL",
                                 "target": "_blank",
                                 "param": [
                                     {
@@ -277,7 +277,7 @@
                             ],
                             "result": {
                                 "type": "url",
-                                "path": "/Customer/EditMainData/Personal",
+                                "path": "CUST_EDIT_MAIN_DATA_PERSONAL",
                                 "icon": "ft-edit-2",
                                 "param": [
                                     {
@@ -302,7 +302,7 @@
                             ],
                             "result": {
                                 "type": "url",
-                                "path": "/Customer/EditMainData/Company",
+                                "path": "CUST_EDIT_MAIN_DATA_COY",
                                 "icon": "ft-edit-2",
                                 "param": [
                                     {

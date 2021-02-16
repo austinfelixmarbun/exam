@@ -14,6 +14,7 @@ import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-edit-main-data-company',
@@ -195,16 +196,16 @@ export class EditMainDataCompanyComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response["Message"]);
             if (this.From == "EditMainData") {
-              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerCompany/Page"],{ "IdCust": this.CustId, Page: "Edit", From:'EditMainData' });
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_PAGE],{ "IdCust": this.CustId, Page: "Edit", From:'EditMainData' });
             }
             else if(this.From == "CustShareholder"){
-              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerCompany/Page"],{ "IdCust": this.CustId, Page: "Edit", From:'CustShareholder' });
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_PAGE],{ "IdCust": this.CustId, Page: "Edit", From:'CustShareholder' });
             }
             else if(this.From == "CustGuarantor"){
-              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerCompany/Page"],{ "IdCust": this.CustId, Page: "Edit", From:'CustGuarantor' });
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_PAGE],{ "IdCust": this.CustId, Page: "Edit", From:'CustGuarantor' });
             }
             else {
-              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerCompany/Page"],{ "IdCust": this.CustId, From:'CustPaging' });
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_PAGE],{ "IdCust": this.CustId, From:'CustPaging' });
             }
           }
         );
@@ -214,16 +215,16 @@ export class EditMainDataCompanyComponent implements OnInit {
 
   back() {
     if (this.From == "CustPaging") {
-      AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
     }
     else if (this.From == "EditMainData") {
-      AdInsHelper.RedirectUrl(this.router,["/Customer/EditMainData/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING],{});
     }
     else if(this.From == "CustShareholder"){
-      AdInsHelper.RedirectUrl(this.router,["/Customer/CustShareholder/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_SHRHLDR_PAGING],{});
     }
     else if(this.From == "CustGuarantor"){
-      AdInsHelper.RedirectUrl(this.router,["/Customer/CustGuarantor/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_GUARANTOR_PAGING],{});
     }
   }
   checkState() {

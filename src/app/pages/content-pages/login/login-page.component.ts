@@ -10,6 +10,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-login-page',
@@ -40,7 +41,7 @@ export class LoginPageComponent implements OnInit {
     });
 
     if (AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS) != null) {
-      this.router.navigate(['dashboard/dash-board']);
+      this.router.navigate([NavigationConstant.DASHBOARD]);
     }
   }
 
@@ -50,7 +51,7 @@ export class LoginPageComponent implements OnInit {
     if (this.token != null) {
       this.http.post(AdInsConstant.LoginWithToken, {ModuleCode: environment.Module},  {withCredentials: true}).subscribe(
         (response) => {
-          this.router.navigate(['dashboard/dash-board']);
+          this.router.navigate([NavigationConstant.DASHBOARD]);
         }
       );
     }
@@ -79,7 +80,7 @@ export class LoginPageComponent implements OnInit {
             (response) => {
               this.result = response;
               if (this.result.IsNeedUpdatePassword) {
-                this.router.navigate(['/pages/ChangePassword'], { queryParams: { "Username": username } });
+                this.router.navigate([NavigationConstant.PAGES_CHANGE_PASSWORD], { queryParams: { "Username": username } });
               }
               else {
                 this.rolePickService.openDialog(object);
@@ -101,7 +102,7 @@ export class LoginPageComponent implements OnInit {
   }
   // On Forgot password link click
   onForgotPassword() {
-    this.router.navigate(['RequestPassword'], { relativeTo: this.route.parent });
+    this.router.navigate([NavigationConstant.PAGES_REQ_PASSWORD]);
   }
   // On registration link click
   onRegister() {

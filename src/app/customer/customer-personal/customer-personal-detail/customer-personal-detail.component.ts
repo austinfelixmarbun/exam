@@ -12,6 +12,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-customer-personal-detail',
@@ -323,9 +324,9 @@ export class CustomerPersonalDetailComponent implements OnInit {
   }
   back() {
     if (this.Page != null) {
-      AdInsHelper.RedirectUrl(this.router,["/Customer/EditMainData/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING],{});
     } else {
-      AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
     }
   }
 }

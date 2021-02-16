@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 
 @Component({
@@ -12,6 +13,7 @@ export class ReasonComponent implements OnInit {
 
   inputPagingObj: UcPagingObj = new UcPagingObj();
 
+  readonly AddLink: string = NavigationConstant.CS_REASON_DETAIL;
   constructor() { }
 
   ngOnInit() {

@@ -6,6 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { HttpClient } from '@angular/common/http';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-branch-employee-paging',
@@ -18,6 +19,8 @@ export class VendorBranchEmployeePagingComponent implements OnInit {
   arrCrit = new Array();
   MrVendorCategoryCode: string = "";
 
+  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
+  readonly AddLink: string = NavigationConstant.VENDOR_BRANCH_EMP_DETAIL;
   constructor(private route: ActivatedRoute, private http : HttpClient) { 
     this.route.queryParams.subscribe(params => {
       if (params["VendorId"] != null) {

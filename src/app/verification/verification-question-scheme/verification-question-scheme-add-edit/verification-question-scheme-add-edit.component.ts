@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VerfSchemeHObj } from 'app/shared/model/VerfSchemeHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-verification-question-scheme-add-edit',
@@ -25,6 +26,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
   foundationUrl: string = environment.FoundationR3Url;
   verfQuestionScheme: any;
 
+  readonly CancelLink: string = NavigationConstant.VERIF_QA_SCHM_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.VerfSchemeHId = params["VerfSchemeHId"];
@@ -68,7 +70,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditVerfSchemeH, this.verfSchemeHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionScheme/Paging"],{ });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_SCHM_PAGING],{ });
         });
     }
     else {
@@ -76,7 +78,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddVerfSchemeH, this.verfSchemeHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionScheme/Paging"],{ });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_SCHM_PAGING],{ });
         });
     }
   }

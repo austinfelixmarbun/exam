@@ -98,7 +98,7 @@
                                 "type": "link",
                                 "position": "left",
                                 "property": "CustNo",
-                                "path": "/View/Customer/PersonalDetail",
+                                "path": "VIEW_CUST_PERSONAL_DETAIL",
                                 "target": "_blank",
                                 "param": [
                                     {
@@ -121,7 +121,7 @@
                                 "type": "link",
                                 "position": "left",
                                 "property": "CustNo",
-                                "path": "/View/Customer/CoyDetail",
+                                "path": "VIEW_CUST_COY_DETAIL",
                                 "target": "_blank",
                                 "param": [
                                     {
@@ -168,7 +168,7 @@
                             ],
                             "result": {
                                 "type": "url",
-                                "path": "/Customer/CustomerPersonal/Page",
+                                "path": "CUST_PERSONAL_PAGE",
                                 "icon": "ft-edit-2",
                                 "param": [
                                     {
@@ -189,7 +189,7 @@
                             ],
                             "result": {
                                 "type": "url",
-                                "path": "/Customer/CustomerCompany/Page",
+                                "path": "CUST_COY_PAGE",
                                 "icon": "ft-edit-2",
                                 "param": [
                                     {

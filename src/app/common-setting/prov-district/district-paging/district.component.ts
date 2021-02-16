@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 
 
@@ -27,6 +28,8 @@ export class DistrictComponent implements OnInit {
   refProvDistrictObj: RefProvDistrictObj;
   getUrl: any;
   
+  readonly CancelLink: string = NavigationConstant.CS_REF_PROVINCE_PAGING;
+  readonly AddLink: string = NavigationConstant.CS_DISTRICT_DETAIL;
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.getUrl = URLConstant.GetRefProvDistrictById;
     this.route.queryParams.subscribe(params => {

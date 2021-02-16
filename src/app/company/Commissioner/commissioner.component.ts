@@ -12,6 +12,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-commissioner',
@@ -35,6 +36,10 @@ export class CommissionerComponent implements OnInit {
   commissionerObj: CoyCommissionerObj;
   foundationUrl: any = environment.FoundationR3Url;
   refCoyId: any;
+  
+  readonly CancelLink: string = NavigationConstant.COY;
+  readonly AddLink: string = NavigationConstant.COY_COMMISSIONER_ADD;
+  readonly EditLink: string = NavigationConstant.COY_COMMISSIONER_ADD;
   constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       this.refCoyId = params["refCoyId"];

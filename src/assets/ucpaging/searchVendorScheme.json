@@ -105,7 +105,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Vendor/VendorScheme/Member",
+                    "path": "VENDOR_SCHM_MBR",
                     "param": [
                         {
                             "type": "VendorSchmId",
@@ -137,7 +137,7 @@
                         "result" : 
                         {
                           "type": "url",
-                          "path": "/Vendor/VendorScheme/Detail",
+                          "path": "VENDOR_SCHM_DETAIL",
                           "param": [
                             {
                               "type": "VendorSchmId",

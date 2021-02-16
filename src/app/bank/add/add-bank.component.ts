@@ -8,6 +8,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
     selector: 'add-bank',
@@ -29,6 +30,7 @@ export class BankAddComponent implements OnInit {
     bankObj: RefBankObj;
     criteria: CriteriaObj[] = [];
 
+    readonly CancelLink: string = NavigationConstant.CS_BANK_PAGING;
     constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
         this.route.queryParams.subscribe(params => {
             this.refBankId = params["RefBankId"];
@@ -73,7 +75,7 @@ export class BankAddComponent implements OnInit {
 
             this.http.post(URLConstant.EditRefBank, this.bankObj).subscribe(
                 (response) => {
-                    AdInsHelper.RedirectUrl(this.router,["/CommonSetting/Bank/Paging"],{});
+                    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_BANK_PAGING],{});
                     this.toastr.successMessage(response['message']);
                 });
         }
@@ -85,7 +87,7 @@ export class BankAddComponent implements OnInit {
 
             this.http.post(URLConstant.AddRefBankAsync, this.bankObj).subscribe((response) => {
                 this.toastr.successMessage(response['message']);
-                AdInsHelper.RedirectUrl(this.router,["/CommonSetting/Bank/Paging"],{});
+                AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_BANK_PAGING],{});
             });
         }
     }

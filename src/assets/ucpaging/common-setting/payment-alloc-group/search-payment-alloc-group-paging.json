@@ -119,7 +119,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/CommonSetting/paymentallocgrp/detail",
+                    "path": "CS_PAYMENT_ALLOC_GRP_DETAIL",
                     "param": [
                         {
                             "type": "mode",

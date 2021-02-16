@@ -13,6 +13,7 @@ import { environment } from 'environments/environment';
 import { forkJoin } from 'rxjs';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-asset-attribute-detail',
@@ -38,6 +39,7 @@ export class AssetAttributeDetailComponent implements OnInit {
   RowVersion: any;
   @ViewChild('LookupAssetAttr') ucLookupAssetAttr: UclookupgenericComponent;
 
+  readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
@@ -134,7 +136,7 @@ export class AssetAttributeDetailComponent implements OnInit {
       this.http.post(URLConstant.AddAssetAttr, this.assetAttrObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/Attribute/Paging"],{ "AssetTypeId": this.AssetTypeId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ATTR_PAGING],{ "AssetTypeId": this.AssetTypeId });
         });
     }
     else if (this.pageType == "edit") {
@@ -143,7 +145,7 @@ export class AssetAttributeDetailComponent implements OnInit {
       this.http.post(URLConstant.EditAssetAttr, this.assetAttrObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/Attribute/Paging"],{ "AssetTypeId": this.AssetTypeId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ATTR_PAGING],{ "AssetTypeId": this.AssetTypeId });
         });
     }
   }

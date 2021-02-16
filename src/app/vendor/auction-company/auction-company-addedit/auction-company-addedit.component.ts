@@ -13,6 +13,7 @@ import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { VendorService } from 'app/vendor/vendor.service';
 import { formatDate } from '@angular/common';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-auction-company-addedit',
@@ -33,6 +34,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
   itemIdType: any;
   RsvField: string;
 
+  readonly CancelLink: string = NavigationConstant.VENDOR_AUCTION_COY_PAGING;
   constructor(private fb: FormBuilder,
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -241,14 +243,14 @@ export class AuctionCompanyAddeditComponent implements OnInit {
         this.vendorService.EditAuctionCompany(this.AuctionCompanyObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(['/Vendor/auctioncompany/paging']);
+            this.router.navigate([NavigationConstant.VENDOR_AUCTION_COY_PAGING]);
           });
       }
       else{
         this.http.post(URLConstant.AddAuctionCompany , this.AuctionCompanyObj).subscribe(
           (response) => {
             this.toastr.successMessage("Success!");
-            this.router.navigateByUrl("/Vendor/auctioncompany/paging");
+            this.router.navigateByUrl(NavigationConstant.VENDOR_AUCTION_COY_PAGING);
           },
           (error) => {
             console.log(error);

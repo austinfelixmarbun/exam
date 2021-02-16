@@ -160,7 +160,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/SystemSetting/RefForm/RoleMapping",
+                    "path": "SYSTEM_SETTING_REF_FORM_ROLE_MAP",
                     "param": [
                         {
                             "type": "RefFormId",
@@ -176,7 +176,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/SystemSetting/RefForm/Detail",
+                    "path": "SYSTEM_SETTING_REF_FORM_DETAIL",
                     "param": [
                         {
                             "type": "RefFormId",

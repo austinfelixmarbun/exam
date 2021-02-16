@@ -20,6 +20,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-negative-customer-detail',
@@ -624,7 +625,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
         (response) => {
           var responseNegativeCust = response[0];
           this.toastr.successMessage(responseNegativeCust["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Customer/NegativeCustomer/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_NEG_PAGING],{});
         }
       );
     }
@@ -655,7 +656,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
         (response) => {
           var responseNegativeCust = response[0];
           this.toastr.successMessage(responseNegativeCust["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Customer/NegativeCustomer/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_NEG_PAGING],{});
         }
       );
     }

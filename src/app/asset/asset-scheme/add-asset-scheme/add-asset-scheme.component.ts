@@ -13,6 +13,7 @@ import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.mod
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-add-asset-scheme',
@@ -33,6 +34,7 @@ export class AddAssetSchemeComponent implements OnInit {
   listSelectedId: Array<number> = new Array<number>();
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
 
+  readonly CancelLink: string = NavigationConstant.ASSET_SCHM_MBR_DETAIL;
   constructor(
     private http: HttpClient,
     private toastr: NGXToastrService,
@@ -94,7 +96,7 @@ export class AddAssetSchemeComponent implements OnInit {
           });
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
   }
@@ -123,7 +125,7 @@ export class AddAssetSchemeComponent implements OnInit {
     this.http.post(URLConstant.AddRangeAssetSchmD, AssetSchmObj).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
-        AdInsHelper.RedirectUrl(this.router,["/Asset/Scheme/MemberDetail"],{ "AssetSchmHId": this.AssetSchmHId });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_SCHM_MBR_DETAIL],{ "AssetSchmHId": this.AssetSchmHId });
       }
     );
   }

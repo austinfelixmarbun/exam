@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { RefCoaObj } from 'app/shared/model/common-setting/RefCoaObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-coa-edit-detail',
@@ -19,6 +20,7 @@ export class CoaEditDetailComponent implements OnInit {
     }
   );
 
+  readonly CancelLink: string = NavigationConstant.CS_COA_PAGING;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -56,7 +58,7 @@ export class CoaEditDetailComponent implements OnInit {
 
     this.http.post(URLConstant.SubmitCoa, this.refCoaObj).subscribe(
       (response) => {
-        this.router.navigate(['/CommonSetting/coa/paging']);
+        this.router.navigate([NavigationConstant.CS_COA_PAGING]);
         this.toastr.successMessage(response["Message"]);
       },
       (error) => {

@@ -9,6 +9,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-scheme-add-edit',
@@ -29,6 +30,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
   itemCategoryType: any;
   item
     MrVendorCategoryCode: string;
+  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
       this.route.queryParams.subscribe(params => {
           this.VendorSchmId = params["VendorSchmId"];
@@ -95,7 +97,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
           this.http.post(URLConstant.EditVendorSchm, this.vendorSchemeObj).subscribe(
               (response) => {
                   this.toastr.successMessage(response["message"]);
-                  AdInsHelper.RedirectUrl(this.router,["/Vendor/Paging"],{ "Type" : "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
+                  AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "Type" : "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
               });
       }
       else {
@@ -103,7 +105,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
           this.http.post(URLConstant.AddVendorSchm, this.vendorSchemeObj).subscribe(
               (response) => {
                   this.toastr.successMessage(response["message"]);
-                  AdInsHelper.RedirectUrl(this.router,["/Vendor/Paging"],{ "Type" : "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
+                  AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "Type" : "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
               });
       }
   }

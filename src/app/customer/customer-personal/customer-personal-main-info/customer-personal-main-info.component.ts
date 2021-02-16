@@ -15,6 +15,7 @@ import { formatDate } from '@angular/common';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-customer-personal-main-info',
@@ -74,6 +75,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     VipNotes: ['', [Validators.required]]
   });
 
+  readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING2;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
@@ -212,7 +214,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     custAddr["Zipcode"] = formValue["UcAddressZipcode"]["value"];
     custAddr["SubZipcode"] = formValue["UcAddressZipcode"]["value"];
     sessionStorage.setItem("CustAddr", JSON.stringify(custAddr));
-    AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerPersonal/DuplicateCheck"],{ "CustName": this.CustName, "Gender": this.Gender, "MrIdTypeCode": this.MrIdTypeCode, "CustModel": this.CustModel, "BirthPlace": this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo, "IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName, "IsVip": this.IsVip, "IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes, "MrMaritalStatCode": this.MrMaritalStatCode });
+    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_DUP_CHECK],{ "CustName": this.CustName, "Gender": this.Gender, "MrIdTypeCode": this.MrIdTypeCode, "CustModel": this.CustModel, "BirthPlace": this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo, "IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName, "IsVip": this.IsVip, "IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes, "MrMaritalStatCode": this.MrMaritalStatCode });
   }
   onOptionsSelected(event) {
     let noExpDate = [CommonConstant.MrIdTypeCodeEKTP, CommonConstant.MrIdTypeCodeNPWP, CommonConstant.MrIdTypeCodeAKTA];

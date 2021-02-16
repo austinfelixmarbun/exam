@@ -16,6 +16,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { VendorAttrContentObj } from 'app/shared/model/VendorAttrContentObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-ho-add-edit',
@@ -469,9 +470,9 @@ export class VendorHoAddEditComponent implements OnInit {
 
   Back() {
     if (this.mode == "edit") {
-      AdInsHelper.RedirectUrl(this.router,["/Vendor/HO/Registration"],{ "VendorId": this.VendorId, "mode": "edit" });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HO_REG],{ "VendorId": this.VendorId, "mode": "edit" });
     } else {
-      AdInsHelper.RedirectUrl(this.router,["/Vendor/Paging"],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
   }
 
@@ -622,7 +623,7 @@ export class VendorHoAddEditComponent implements OnInit {
         this.http.post(URLConstant.EditVendorHO, this.vendorHoObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,["/Vendor/HO/Registration"],{ "VendorId": this.VendorId, "mode": "edit" });
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HO_REG],{ "VendorId": this.VendorId, "mode": "edit" });
           });
       }
       else {
@@ -631,7 +632,7 @@ export class VendorHoAddEditComponent implements OnInit {
         this.http.post(URLConstant.AddVendorHO, this.vendorHoObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,["/Vendor/HO/Registration"],{ "VendorId": response['VendorObj'].VendorId });
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HO_REG],{ "VendorId": response['VendorObj'].VendorId });
           });
       }
     }

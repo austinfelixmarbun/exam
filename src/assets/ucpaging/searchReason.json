@@ -130,7 +130,7 @@
                 ],
                 "result": {
                   "type": "url",
-                  "path": "/CommonSetting/Reason/Detail",
+                  "path": "CS_REASON_DETAIL",
                   "icon": "ft-edit-2",
                   "param": [
                     {

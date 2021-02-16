@@ -11,6 +11,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-office-zipcode-member-add',
@@ -48,6 +49,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
   listDeletedId: Array<any> = [];
   data = [];
 
+  readonly CancelLink: string = NavigationConstant.CS_OFFICE_ZIPCODE_MBR_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params['refOfficeId'] != null) {
@@ -202,7 +204,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
     this.http.post(this.addUrl, zipCodeMemberList).subscribe(
       (response) => {
           this.toastr.successMessage(response['message']);
-          AdInsHelper.RedirectUrl(this.router,["/commonSetting/officeZipcodeMember/Paging"],{ "refOfficeId": this.refOfficeId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_OFFICE_ZIPCODE_MBR_PAGING],{ "refOfficeId": this.refOfficeId });
       });
 
   }

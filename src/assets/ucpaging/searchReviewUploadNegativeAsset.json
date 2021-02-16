@@ -165,7 +165,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "/Asset/NegativeAsset/ReviewUploadDetail",
+            "path": "ASSET_NEG_RVW_UPLOAD_DETAIL",
             "param": [
               {
                 "type": "UploadId",

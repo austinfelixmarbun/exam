@@ -6,6 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-role-form-paging',
@@ -16,6 +17,8 @@ export class RoleFormPagingComponent implements OnInit {
   inputPagingObj: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
+  readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_ROLE;
+  readonly AddLink: string = NavigationConstant.SYSTEM_SETTING_ROLE_FORM_ADD;
   constructor(private route: ActivatedRoute){
     this.route.queryParams.subscribe(params => {
       this.RefRoleId = params["RefRoleId"];

@@ -11,6 +11,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-product-ho-add',
@@ -164,7 +165,7 @@ export class ProductHOAddComponent implements OnInit {
           this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
             (response) => {
               this.toastr.successMessage(response["message"]);
-              AdInsHelper.RedirectUrl(this.router,["/Product/HOadddetail"],{ "ProdHId": response["DraftProdHId"], "ProdId" : response["ProdId"], "mode": this.mode, source : this.source });
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_ADD_DETAIL],{ "ProdHId": response["DraftProdHId"], "ProdId" : response["ProdId"], "mode": this.mode, source : this.source });
             }
           );
         }
@@ -175,7 +176,7 @@ export class ProductHOAddComponent implements OnInit {
           this.http.post(this.UrlBackEnd, this.ProdHOBj).subscribe(
             (response) => {
               this.toastr.successMessage(response["message"]);
-              AdInsHelper.RedirectUrl(this.router,["/Product/HOadddetail"],{ "ProdHId": response["DraftProdHId"], "ProdId" : response["ProdId"], "mode": this.mode, source : this.source });
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_ADD_DETAIL],{ "ProdHId": response["DraftProdHId"], "ProdId" : response["ProdId"], "mode": this.mode, source : this.source });
             }
           );
         }
@@ -192,11 +193,11 @@ export class ProductHOAddComponent implements OnInit {
   {
     if(this.source == "return")
     {
-      AdInsHelper.RedirectUrl(this.router,["/Product/HOReturnPaging"],{ });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_RTN_PAGING],{ });
     }
     else
     {
-      AdInsHelper.RedirectUrl(this.router,["/Product/HOpaging"],{ });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_PAGING],{ });
     }
   }
 }

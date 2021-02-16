@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginPageComponent } from "app/pages/content-pages/login/login-page.component";
+import { PathConstant } from 'app/shared/PathConstant';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { PagesComponent } from './pages/pages.component';
 import { RequestNewPasswordComponent } from './request-new-password/request-new-password.component';
@@ -11,35 +12,35 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'content',
+        path: PathConstant.CONTENT,
         component: PagesComponent,
         data: {
           title: 'Pages'
         }
       },
       {
-        path: 'login',
+        path: PathConstant.LOGIN,
         component: LoginPageComponent,
         data: {
           title: 'Login Page'
         }
       },
       {
-        path: 'ChangePassword',
+        path: PathConstant.CHANGE_PASSWORD,
         component: ChangePasswordComponent,
         data: {
           title: 'Change Password Page'
         }
       },
       {
-        path: 'RequestPassword',
+        path: PathConstant.REQ_PASSWORD,
         component: RequestNewPasswordComponent,
         data: {
           title: 'Request New Password Page'
         }
       },
       {
-        path: 'ResetPassword/:code',
+        path: PathConstant.RESET_PASSWORD,
         component: ResetPasswordComponent,
         data: {
           title: 'Reset Password Page'

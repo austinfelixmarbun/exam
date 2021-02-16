@@ -9,6 +9,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-change-password',
@@ -59,7 +60,7 @@ export class ChangePasswordComponent implements OnInit {
         (response) => {
           if (response["Message"] == "Success") {
             this.toastr.successMessage(response["message"]);
-            this.router.navigateByUrl('/dashboard/dash-board');
+            this.router.navigateByUrl(NavigationConstant.DASHBOARD);
           }
           else {
             this.toastr.errorMessage("Invalid Password.");

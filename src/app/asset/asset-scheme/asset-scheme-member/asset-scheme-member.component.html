@@ -9,10 +9,10 @@
 </div>
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="button" class="backButton" [routerLink]="['/Asset/Scheme/Paging']" skipLocationChange translate>
+    <button type="button" class="backButton" [routerLink]="[CancelLink]" skipLocationChange translate>
       <i class="fa fa-arrow-left"> </i> Back 
     </button>
-    <button type="button" *ngIf="!AssetSchmHIsSystem" class="addButton" [routerLink]="['/Asset/Scheme/AddMember']" skipLocationChange
+    <button type="button" *ngIf="!AssetSchmHIsSystem" class="addButton" [routerLink]="[AddLink]" skipLocationChange
       [queryParams]="{AssetSchmHId:AssetSchmHId}" translate>
       <i class="ft-plus-circle"></i> Add
     </button>

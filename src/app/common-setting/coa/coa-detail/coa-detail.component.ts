@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 
 @Component({
@@ -17,6 +18,7 @@ export class CoaDetailComponent implements OnInit {
   ListCurrCode: Array<KeyValueObj> = new Array<KeyValueObj>();
   Shows: boolean = false;
 
+  readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
   constructor(
     private router: Router,
     private toastr: NGXToastrService,
@@ -69,7 +71,7 @@ export class CoaDetailComponent implements OnInit {
 
   Submit() {
     this.toastr.successMessage('Success');
-    this.router.navigate(['/setting/coa/paging']);
+    this.router.navigate([NavigationConstant.CS_COA_PAGING]);
   }
 
   Show() {

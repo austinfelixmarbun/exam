@@ -11,7 +11,7 @@
             "property": "Parent",
             "name": "LinkSupplierHolding",
             "target": "_blank",
-            "path": "/View/Vendor/VendorHolding",
+            "path": "VIEW_VENDOR_HOLDING",
             "param": [
               {
                 "type": "VendorId",

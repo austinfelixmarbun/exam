@@ -16,6 +16,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { map, mergeMap } from 'rxjs/operators';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-customer-personal-duplicate-check',
@@ -345,7 +346,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
         (response) => {
           this.resultData = response;
           this.IdCust = this.resultData.CustObj.CustId;
-          AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerPersonal/Page"],{ "IdCust": this.IdCust, "From": 'CustPaging' });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.IdCust, "From": 'CustPaging' });
         }
       );
     }
@@ -440,7 +441,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
               );
             }
             else{
-              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerPersonal/Page"],{ "IdCust": this.addCustObj.CustObj.CustId, "From": 'CustPaging' });
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.addCustObj.CustObj.CustId, "From": 'CustPaging' });
             }
           }
         );
@@ -528,7 +529,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
             }
             else{
               var custId = response['CustId'];
-              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerPersonal/Page"],{ "IdCust": this.IdCust, "From": 'CustPaging' });
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.IdCust, "From": 'CustPaging' });
             }
           }
         );

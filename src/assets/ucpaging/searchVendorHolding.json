@@ -79,7 +79,7 @@
         {
             "type" : "link",
             "property" : "VendorName",
-            "path" : "/View/Vendor/VendorHolding",
+            "path" : "VIEW_VENDOR_HOLDING",
             "target": "_blank",
             "param" :
             [
@@ -100,7 +100,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Vendor/Holding/Registration",
+                    "path": "VENDOR_HOLDING_REG",
                     "param": [
                         {
                             "type": "VendorId",

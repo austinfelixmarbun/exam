@@ -8,6 +8,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { RefReasonObj } from 'app/shared/model/RefReasonObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-reason-add-edit',
@@ -28,6 +29,7 @@ export class ReasonAddEditComponent implements OnInit {
     IsActive: [true]
   });
 
+  readonly CancelLink: string = NavigationConstant.CS_REASON_DETAIL;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
@@ -78,7 +80,7 @@ export class ReasonAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddRefReason, refReasonObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Reason/Paging'],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REASON_PAGING],{});
         }
       );
     } else {
@@ -89,7 +91,7 @@ export class ReasonAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditRefReason, refReasonObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Reason/Paging'],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REASON_PAGING],{});
         }
       );
     }

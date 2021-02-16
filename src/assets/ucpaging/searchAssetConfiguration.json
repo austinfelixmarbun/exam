@@ -106,7 +106,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "/Asset/Category/Paging",
+            "path": "ASSET_CATEGORY_PAGING",
             "param": [
              
               {
@@ -125,7 +125,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "/Asset/Document/Paging",
+            "path": "ASSET_DOC_PAGING",
             "param": [
               {
                 "type": "AssetTypeId",
@@ -141,7 +141,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "/Asset/Accessory/Paging",
+            "path": "ASSET_ACC_PAGING",
             "param": [
               {
                 "type": "AssetTypeId",
@@ -157,7 +157,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "/Asset/Attribute/Paging",
+            "path": "ASSET_ATTR_PAGING",
             "param": [
               {
                 "type": "AssetTypeId",

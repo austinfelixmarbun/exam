@@ -101,7 +101,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "./edit",
+          "path": "BACK_TO_EDIT",
           "param": [
             {
               "type": "prodOfferingHId",

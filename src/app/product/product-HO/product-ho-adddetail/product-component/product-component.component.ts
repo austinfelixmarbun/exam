@@ -9,6 +9,7 @@ import { saveAs } from 'file-saver';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-product-component-HO',
@@ -264,11 +265,11 @@ export class ProductComponentHOComponent implements OnInit {
   {
     if(this.source == "return")
     {
-      AdInsHelper.RedirectUrl(this.router,["/Product/HOReturnPaging"],{ });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_RTN_PAGING],{ });
     }
     else
     {
-      AdInsHelper.RedirectUrl(this.router,["/Product/HOpaging"],{ });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_PAGING],{ });
     }
   }
  }

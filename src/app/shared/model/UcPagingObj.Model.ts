@@ -1,3 +1,4 @@
+import { NavigationConstant } from "../NavigationConstant";
 import { CriteriaObj } from "./CriteriaObj.Model";
 
 export class UcPagingObj {
@@ -13,6 +14,7 @@ export class UcPagingObj {
     isHideSearch: boolean;
     isSearched: boolean;
     delay: number;
+    navigationConst: any;
 
     constructor() {
         this._url = "";
@@ -27,6 +29,7 @@ export class UcPagingObj {
         this.isHideSearch = false;
         this.delay = 0;
         this.isSearched = false;
+        this.navigationConst = NavigationConstant;
     }
 }
 

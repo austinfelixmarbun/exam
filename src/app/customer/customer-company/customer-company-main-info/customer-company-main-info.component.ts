@@ -10,6 +10,7 @@ import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-customer-company-main-info',
@@ -45,6 +46,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     VipNotes: ['', [Validators.required]]
   });
 
+  readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING2;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
     this.GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
@@ -113,7 +115,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     custAddr["SubZipcode"] = formValue["UcAddressZipcode"]["value"];
     sessionStorage.setItem("CustAddr", JSON.stringify(custAddr));
     
-    AdInsHelper.RedirectUrl(this.router,['/Customer/CustomerCompany/DuplicateCheck'],{ "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "TaxIdNo": this.TaxIdNo, "IsAffiliateWithMf": this.IsAffiliateWithMf, "IsVip": this.IsVip, "VipNotes": this.VipNotes });
+    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_DUP_CHECK],{ "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "TaxIdNo": this.TaxIdNo, "IsAffiliateWithMf": this.IsAffiliateWithMf, "IsVip": this.IsVip, "VipNotes": this.VipNotes });
   }
 
   checkState() {

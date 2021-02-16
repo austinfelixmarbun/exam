@@ -10,76 +10,77 @@ import { OfficeGroupMemberAddComponent } from './office-group-member-add/office-
 import { OfficeAreaPagingComponent } from './office-area/office-area-paging/office-area-paging.component';
 import { OfficeAreaMemberPagingComponent } from './office-area/office-area-member/office-area-member-paging/office-area-member-paging.component';
 import { OfficeAreaMemberAddComponent } from './office-area/office-area-member/office-area-member-add/office-area-member-add.component';
+import { PathConstant } from 'app/shared/PathConstant';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'Paging',
+        path: PathConstant.PAGING,
         component: OfficeComponent,
         data: {
           title: 'Office'
         },
       },
       {
-        path: 'Add',
+        path: PathConstant.ADD,
         component: OfficeAddComponent,
         data: {
           title: 'Add Office'
         }
       },
       {
-        path: 'OfficeEmpPos',
+        path: PathConstant.OFFICE_EMP_POS,
         component: OfficeEmpPosComponent,
         data: {
           title: 'Office Employee Position'
         }
       },
       {
-        path: 'OfficeEmpPosAdd',
+        path: PathConstant.OFFICE_EMP_POS_ADD,
         component: OfficeEmpPosAddComponent,
         data: {
           title: 'Office Employee Position Add'
         }
       },
       {
-        path: 'OfficeArea',
+        path: PathConstant.OFFICE_AREA,
         component: OfficeAreaPagingComponent,
         data: {
           title: 'Office Area'
         }
       },
       {
-        path: 'Group/Member',
+        path: PathConstant.OFFICE_GROUP_MEMBER,
         component: OfficeGroupMemberComponent,
         data: {
           title: 'Office Group Member'
         }
       },
       {
-        path: 'Group/Member/Add',
+        path: PathConstant.OFFICE_GROUP_MEMBER_ADD,
         component: OfficeGroupMemberAddComponent,
         data: {
           title: 'Office Group Member Add'
         }
       },
       {
-        path: 'OfficeArea/Detail',
+        path: PathConstant.OFFICE_AREA_DETAIL,
         component: OfficeAreaAddEditComponent,
         data: {
           title: 'Office Area Add Edit'
         }
       },
       {
-        path: 'OfficeArea/Member',
+        path: PathConstant.OFFICE_AREA_MEMBER,
         component: OfficeAreaMemberPagingComponent,
         data: {
           title: 'Office Area Member'
         }
       },
       {
-        path: 'OfficeArea/Member/Add',
+        path: PathConstant.OFFICE_AREA_MEMBER_ADD,
         component: OfficeAreaMemberAddComponent,
         data: {
           title: 'Office Area Member Add'

@@ -11,6 +11,7 @@ import { UcInputApprovalObj } from 'app/shared/model/UcInputApprovalObj.Model';
 import { UcInputApprovalHistoryObj } from 'app/shared/model/UcInputApprovalHistoryObj.Model';
 import { UcInputApprovalGeneralInfoObj } from 'app/shared/model/UcInputApprovalGeneralInfoObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-product-ho-deact-apv-detail',
@@ -103,9 +104,9 @@ export class ProductHODeactivateApprovalDetailComponent implements OnInit {
 
   onApprovalSubmited()
   {
-    AdInsHelper.RedirectUrl(this.router,["/Product/HODeactivateApproval"],{ });
+    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_DEACTIVATE_APPRV],{ });
   }
   onCancelClick() {
-    AdInsHelper.RedirectUrl(this.router,["/Product/HODeactivateApproval"],{ });
+    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_DEACTIVATE_APPRV],{ });
   }
 }

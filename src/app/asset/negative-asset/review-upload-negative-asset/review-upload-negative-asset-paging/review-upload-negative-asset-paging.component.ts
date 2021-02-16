@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-review-upload-negative-asset-paging',
@@ -39,7 +40,7 @@ export class ReviewUploadNegativeAssetPagingComponent implements OnInit {
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,["/Asset/NegativeAsset/ReviewUploadPaging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_NEG_RVW_UPLOAD_PAGING],{});
         });
       }
     );

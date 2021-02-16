@@ -10,6 +10,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { UcInputApprovalObj } from 'app/shared/model/UcInputApprovalObj.Model';
 import { UcInputApprovalHistoryObj } from 'app/shared/model/UcInputApprovalHistoryObj.Model';
 import { UcInputApprovalGeneralInfoObj } from 'app/shared/model/UcInputApprovalGeneralInfoObj.model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-product-ho-approval-detail',
@@ -112,11 +113,11 @@ export class ProductHOApprovalDetailComponent implements OnInit {
     }
     this.http.post(URLConstant.UpdateProductPostApv, data).subscribe(
       () => { 
-        AdInsHelper.RedirectUrl(this.router,["/Product/HOApproval"],{ });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_APPRV],{ });
       }
     );
   }
   onCancelClick() {
-    AdInsHelper.RedirectUrl(this.router,["/Product/HOApproval"],{ });
+    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_APPRV],{ });
   }
 }

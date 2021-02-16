@@ -89,7 +89,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/Asset/Accessory/Detail",
+          "path": "ASSET_ACC_DETAIL",
           "param": [
             {
               "type": "mode",

@@ -9,6 +9,7 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-customer-view-coy-address',
@@ -54,7 +55,7 @@ export class CustomerViewCoyAddressComponent implements OnInit {
         }
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
     this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
@@ -64,7 +65,7 @@ export class CustomerViewCoyAddressComponent implements OnInit {
         }
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
     var refMasterObj = new RefMasterObj();

@@ -11,6 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class MasterAddEditComponent implements OnInit {
     IsSystem: [false]
   });
 
+  readonly CancelLink: string = NavigationConstant.CS_MASTER;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -98,7 +100,7 @@ export class MasterAddEditComponent implements OnInit {
         //SAVE
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Master'],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_MASTER],{});
         },
         (error) => {
           this.toastr.typeErrorCustom(error);
@@ -113,7 +115,7 @@ export class MasterAddEditComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["Message"]);
           //this.location.back();
-          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Master'],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_MASTER],{});
           this.spinner.hide();
         },
         (error) => {

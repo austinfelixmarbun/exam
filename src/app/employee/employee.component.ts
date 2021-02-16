@@ -4,6 +4,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-employee',
@@ -14,6 +15,7 @@ export class EmployeeComponent implements OnInit {
 
   inputPagingObj: UcPagingObj = new UcPagingObj();
 
+  readonly AddLink: string = NavigationConstant.EMP_DETAIL;
   constructor() { }
 
   ngOnInit() {

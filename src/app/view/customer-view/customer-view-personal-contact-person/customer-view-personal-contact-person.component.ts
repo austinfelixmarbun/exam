@@ -7,6 +7,7 @@ import { environment } from 'environments/environment.sit';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-customer-view-personal-contact-person',
@@ -36,7 +37,7 @@ export class CustomerViewPersonalContactPersonComponent implements OnInit {
         this.responseObj = response[CommonConstant.ReturnObj];
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
   }

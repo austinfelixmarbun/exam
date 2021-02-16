@@ -91,7 +91,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/CommonSetting/Currency/add",
+          "path": "CS_CURRENCY_ADD",
           "param": [
             {
               "type": "refCurrId",

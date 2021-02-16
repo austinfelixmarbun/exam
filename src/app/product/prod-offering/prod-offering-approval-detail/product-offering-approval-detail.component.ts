@@ -12,6 +12,7 @@ import { UcInputApprovalObj } from 'app/shared/model/UcInputApprovalObj.Model';
 import { UcInputApprovalGeneralInfoObj } from 'app/shared/model/UcInputApprovalGeneralInfoObj.model';
 
 import { UcapprovalR3Module } from '@adins/ucapproval-r3';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 @Component({
   selector: 'app-product-offering-approval-detail',
   templateUrl: './product-offering-approval-detail.component.html',
@@ -112,12 +113,12 @@ export class ProductOfferingApprovalDetailComponent implements OnInit {
     }
     this.http.post(URLConstant.UpdateProdOfferingPostApv, data).subscribe(
       () => {
-        AdInsHelper.RedirectUrl(this.router,["/Product/OfferingApproval"],{ });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_OFFERING_APPRV],{ });
       }
     );
   }
   onCancelClick(event)
   {
-    AdInsHelper.RedirectUrl(this.router,["/Product/OfferingApproval"],{ });
+    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_OFFERING_APPRV],{ });
   }
 }

@@ -9,6 +9,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-office-area-add-edit',
@@ -25,6 +26,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
   apiUrl: any;
   foundationUrl: string = environment.FoundationR3Url;
 
+  readonly CancelLink: string = NavigationConstant.OFFICE_AREA;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.RefOfficeAreaId = params["RefOfficeAreaId"];
@@ -70,7 +72,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditRefOfficeArea, this.refOfficeAreaObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Office/OfficeArea"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_AREA],{});
         });
     }
     else {
@@ -78,7 +80,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddRefOfficeArea, this.refOfficeAreaObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Office/OfficeArea"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_AREA],{});
         });
     }
   }

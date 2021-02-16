@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
@@ -42,7 +43,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         if (checkSession == "1") {
             // this.errorDialogService.openDialog(AdInsErrorMessage.SessionTimeout);
             this.spinner.hide();
-            AdInsHelper.RedirectUrl(this.router, ["/pages/login"], {});
+            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.PAGES_LOGIN], {});
         }
 
         if (request.url.includes("Add") || request.url.includes("Edit") || request.url.includes("Delete")) {

@@ -1,3 +1,4 @@
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CriteriaObj } from '../CriteriaObj.Model';
 
 export class UcTempPagingObj {
@@ -9,6 +10,7 @@ export class UcTempPagingObj {
     addCritInput: Array<CriteriaObj>;
     ddlEnvironments: Array<EnviObj>;
     whereValue: Array<WhereValueObj>;
+    navigationConst: any;
 
     constructor() {
         this.urlJson = "";
@@ -19,6 +21,7 @@ export class UcTempPagingObj {
         this.addCritInput = new Array<CriteriaObj>();
         this.ddlEnvironments = new Array<EnviObj>();
         this.whereValue = new Array<WhereValueObj>();
+        this.navigationConst = NavigationConstant;
     }
 }
 

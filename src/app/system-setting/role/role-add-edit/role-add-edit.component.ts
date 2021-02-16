@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class RoleAddEditComponent implements OnInit {
     RoleName: ['', [Validators.required, Validators.maxLength(100)]],
     IsActive: [true]
   });
+  readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_ROLE;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -77,7 +79,7 @@ export class RoleAddEditComponent implements OnInit {
       this.httpClient.post(URLConstant.AddRefRole, this.refRoleObj).subscribe(
         response => {
             this.service.successMessage(response["Message"]);
-            AdInsHelper.RedirectUrl(this.router,["/SystemSetting/Role"],{ });
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ROLE],{ });
         }
       );
     } else {
@@ -89,7 +91,7 @@ export class RoleAddEditComponent implements OnInit {
       this.httpClient.post(URLConstant.EditRefRole, this.refRoleObj).subscribe(
         response => {
           this.service.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/SystemSetting/Role"],{ });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ROLE],{ });
         }
       );
     }

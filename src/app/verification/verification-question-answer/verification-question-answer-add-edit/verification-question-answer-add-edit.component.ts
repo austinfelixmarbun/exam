@@ -9,6 +9,7 @@ import { VerfQuestionAnswerObj } from 'app/shared/model/VerfQuestionAnswerObj.Mo
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-verification-question-answer-add-edit',
@@ -26,6 +27,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
   answerTypeCode: string = "DDL";
   isHidden: boolean = true;
 
+  readonly CancelLink: string = NavigationConstant.VERIF_QA_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.VerfQuestionAnswerId = params["VerfQuestionAnswerId"];
@@ -112,7 +114,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditVerfQuestionAnswer, this.verfQuestionAnswerObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionAnswer/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_PAGING],{});
         });
     }
     else {
@@ -120,7 +122,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddVerfQuestionAnswer, this.verfQuestionAnswerObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionAnswer/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_PAGING],{});
         });
     }
   }

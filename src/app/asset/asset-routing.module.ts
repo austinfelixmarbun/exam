@@ -28,226 +28,220 @@ import { ReviewUploadNegativeAssetPagingComponent } from './negative-asset/revie
 import { ReviewUploadNegativeAssetDetailComponent } from './negative-asset/review-upload-negative-asset/review-upload-negative-asset-detail/review-upload-negative-asset-detail.component';
 import { AssetAttributeComponent } from './asset-attribute/asset-attribute.component'; 
 import { AssetAttributeDetailComponent } from './asset-attribute/asset-attribute-detail/asset-attribute-detail.component';
+import { PathConstant } from 'app/shared/PathConstant';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'Type/Paging',
+        path: PathConstant.ASSET_TYPE_PAGING,
         component: AssetTypePagingComponent,
         data: {
           title: 'Asset Type Paging'
         }
       },
       {
-        path: 'Type/Detail',
+        path: PathConstant.ASSET_TYPE_DETAIL,
         component: AssetTypeAddEditComponent,
         data: {
           title: 'Asset Type Add Edit'
         }
       },
       {
-        path: 'Scheme/Paging',
+        path: PathConstant.ASSET_SCHM_PAGING,
         component: AssetSchemePagingComponent,
         data: {
           title: 'Asset Scheme Paging'
         }
       },
       {
-        path: 'Scheme/MemberDetail',
+        path: PathConstant.ASSET_SCHM_MBR_DETAIL,
         component: AssetSchemeMemberComponent,
         data: {
           title: 'Asset Scheme Member Detail'
         }
       },
       {
-        path: 'Scheme/AddMember',
+        path: PathConstant.ASSET_SCHM_ADD_MBR,
         component: AddAssetSchemeComponent,
         data: {
           title: 'Asset Scheme Member Add'
         }
       },
       {
-        path: 'Scheme/InformationDetail',
+        path: PathConstant.ASSET_SCHM_INFO_DETAIL,
         component: AssetSchemeAddEditInformationComponent,
         data: {
           title: 'Asset Scheme Information Add Edit'
         }
       },
       {
-        path: 'Configuration/Paging',
+        path: PathConstant.ASSET_CONFIG_PAGING,
         component: AssetConfigurationPagingComponent,
         data: {
           title: 'Asset Configuration Paging'
         },
       },
       {
-        path: 'Category/Paging',
+        path: PathConstant.ASSET_CATEGORY_PAGING,
         component: AssetCategoryPagingComponent,
         data: {
           title: 'Asset Cateogry Paging'
         },
       },
       {
-        path: 'Accessory/Paging',
-        component: AssetAccessoryPagingComponent,
-        data: {
-          title: 'Asset Accessory Paging'
-        },
-      },
-      {
-        path: 'Document/Paging',
+        path: PathConstant.ASSET_DOC_PAGING,
         component: AssetDocumentPagingComponent,
         data: {
           title: 'Asset Document Paging'
         },
       },
       {
-        path: 'DocumentMaster/Paging',
+        path: PathConstant.ASSET_DOC_MASTER_PAGING,
         component: AssetDocumentMasterPagingComponent,
         data: {
           title: 'Asset Document Paging'
         },
       },
       {
-        path: 'Category/Detail',
+        path: PathConstant.ASSET_CATEGORY_DETAIL,
         component: AssetCategoryAddEditComponent,
         data: {
           title: 'Asset Category Detail'
         },
       },
       {
-        path: 'Accessory/Paging',
+        path: PathConstant.ASSET_CATEGORY_PAGING,
         component: AssetAccessoryPagingComponent,
         data: {
           title: 'Asset Accessory Paging'
         },
       },
       {
-        path: 'Attribute/Paging',
+        path: PathConstant.ASSET_ATTR_PAGING,
         component: AssetAttributeComponent,
         data: {
-          title: 'Asset Accessory Paging'
+          title: 'Asset Attribute Paging'
         },
       },
       {
-        path: 'Attribute/Detail',
+        path: PathConstant.ASSET_ATTR_DETAIL,
         component: AssetAttributeDetailComponent,
         data: {
-          title: 'Asset Accessory Paging'
+          title: 'Asset Attribute Detail'
         },
       },
       {
-        path: 'Accessory/Detail',
+        path: PathConstant.ASSET_ACC_DETAIL,
         component: AssetAccessoryAddEditComponent,
         data: {
           title: 'Asset Accessory Detail'
         },
       },
       {
-        path: 'Document/Paging',
+        path: PathConstant.ASSET_DOC_PAGING,
         component: AssetDocumentPagingComponent,
         data: {
           title: 'Asset Document Paging'
         },
       },
       {
-        path: 'Document/Detail',
+        path: PathConstant.ASSET_DOC_DETAIL,
         component: AssetDocumentAddEditComponent,
         data: {
           title: 'Asset Document Detail'
         },
       },
       {
-        path: 'DocumentMaster/Paging',
+        path: PathConstant.ASSET_DOC_MASTER_PAGING,
         component: AssetDocumentMasterPagingComponent,
         data: {
-          title: 'Asset Document Paging'
+          title: 'Asset Document Master Paging'
         },
       },
       {
-        path: 'DocumentMaster/Detail',
+        path: PathConstant.ASSET_DOC_MASTER_DETAIL,
         component: AssetDocumentMasterAddEditComponent,
         data: {
-          title: 'Asset Document Detail'
+          title: 'Asset Document Master Detail'
         },
       },
       {
-        path: 'NegativeAsset/Paging',
+        path: PathConstant.ASSET_NEG_PAGING,
         component: NegativeAssetComponent,
         data: {
           title: 'Negative Asset'
         },
       },
       {
-        path: 'NegativeAsset/Detail',
+        path: PathConstant.ASSET_NEG_DETAIL,
         component: NegativeAssetDetailComponent,
         data: {
           title: 'Negative Asset'
         },
       },
       {
-        path: 'NegativeAsset/Upload',
+        path: PathConstant.ASSET_NEG_UPLOAD,
         component: NegativeAssetUploadComponent,
         data: {
           title: 'Upload Negative Asset'
         },
       },
       {
-        path: 'NegativeAsset/ReviewUploadPaging',
+        path: PathConstant.ASSET_NEG_RVW_UPLOAD_PAGING,
         component: ReviewUploadNegativeAssetPagingComponent,
         data: {
           title: 'Review Upload Negative Asset Paging'
         },
       },
       {
-        path: 'NegativeAsset/ReviewUploadDetail',
+        path: PathConstant.ASSET_NEG_RVW_UPLOAD_DETAIL,
         component: ReviewUploadNegativeAssetDetailComponent,
         data: {
           title: 'Review Upload Negative Asset Detail'
         },
       },
       {
-        path: 'AssetMaster/Paging',
+        path: PathConstant.ASSET_MASTER_PAGING,
         component: AssetMasterComponent,
         data: {
           title: 'Asset Master'
         },
       },
       {
-        path: 'AssetMaster/Detail',
+        path: PathConstant.ASSET_MASTER_DETAIL,
         component: AssetMasterAddEditParentComponent,
         data: {
           title: 'Asset Master Add Edit Parent'
         },
       },
       {
-        path: 'AssetMaster/Child',
+        path: PathConstant.ASSET_MASTER_CHILD,
         component: AssetMasterAddEditChildComponent,
         data: {
           title: 'Asset Master Add Edit Child'
         },
       },
       {
-        path: 'AssetMaster/Upload',
+        path: PathConstant.ASSET_MASTER_UPLOAD,
         component: UploadAssetMasterComponent,
         data: {
           title: 'Upload Asset Master'
         },
       },
       {
-        path: 'AssetMaster/ReviewUploadPaging',
+        path: PathConstant.ASSET_MASTER_RVW_UPLOAD_PAGING,
         component: ReviewUploadAssetMasterPagingComponent,
         data: {
-          title: 'Upload Asset Master'
+          title: 'Review Upload Asset Master Paging'
         },
       },
       {
-        path: 'AssetMaster/ReviewUploadDetail',
+        path: PathConstant.ASSET_MASTER_RVW_UPLOAD_DETAIL,
         component: ReviewUploadAssetMasterDetailComponent,
         data: {
-          title: 'Upload Asset Master'
+          title: 'Review Upload Asset Master Detail'
         },
       }
     ]

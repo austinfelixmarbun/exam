@@ -91,7 +91,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "/Asset/DocumentMaster/Detail",
+            "path": "ASSET_DOC_MASTER_DETAIL",
             "param": [
              
               {

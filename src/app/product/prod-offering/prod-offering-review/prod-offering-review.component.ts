@@ -10,6 +10,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { UcInputRFAObj } from 'app/shared/model/UcInputRFAObj.Model';
 import { UcapprovalcreateComponent } from '@adins/Ucapprovalcreate';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-prod-offering-review',
@@ -35,6 +36,8 @@ export class ProdOfferingReviewComponent implements OnInit {
     ApprovedById: ['', Validators.required],
     Notes: ['', Validators.required]
   });
+  
+  readonly CancelLink: string = NavigationConstant.PRODUCT_OFFERING_REVIEW;
   constructor(private toastr: NGXToastrService, private http: HttpClient, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       if (params["ProdOfferingHId"] != null) {
@@ -99,7 +102,7 @@ export class ProdOfferingReviewComponent implements OnInit {
     this.http.post(URLConstant.ReviewProdOfferingNew, data).subscribe(
       (response) => {
         this.toastr.successMessage("Success");
-        AdInsHelper.RedirectUrl(this.router, ["/Product/OfferingReview"], {});
+        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.PRODUCT_OFFERING_REVIEW], {});
       });
   }
 

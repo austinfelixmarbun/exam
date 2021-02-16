@@ -6,6 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-office-area-member-paging',
@@ -17,6 +18,9 @@ export class OfficeAreaMemberPagingComponent implements OnInit {
   RefOfficeAreaId: string;
   inputPagingObj: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+
+  readonly CancelLink: string = NavigationConstant.OFFICE_AREA;
+  readonly AddLink: string = NavigationConstant.OFFICE_AREA_MEMBER_ADD;
   constructor(private route: ActivatedRoute){
     this.route.queryParams.subscribe(params => {
       this.RefOfficeAreaId = params["RefOfficeAreaId"];

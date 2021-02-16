@@ -78,7 +78,7 @@
             "position": "center",
             "property": "CabinetCode",
             "target": "_blank",
-            "path": "/DocumentManagementView/ViewCabinet",
+            "path": "DOC_MNGMNT_VIEW_CABINET",
             "param": [
                 {
                     "type": "CabinetCode",
@@ -102,7 +102,7 @@
             "action" : [
                 {
                     "type" : "edit",
-                    "path" : "/DocumentManagement/Rack/Paging",
+                    "path" : "DOC_MNGMNT_RACK_PAGING",
                     "param" : [
                         {
                             "type": "mode",
@@ -123,7 +123,7 @@
             "action" : [
                 {
                     "type" : "edit",
-                    "path" : "/DocumentManagement/Cabinet/AddEdit",
+                    "path" : "DOC_MNGMNT_CABINET_ADD_EDIT",
                     "param" : [
                         {
                             "type" : "CabinetCode",

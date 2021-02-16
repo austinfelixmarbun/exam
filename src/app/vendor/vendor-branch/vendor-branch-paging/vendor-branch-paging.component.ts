@@ -6,6 +6,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-branch-paging',
@@ -16,6 +17,7 @@ export class VendorBranchPagingComponent implements OnInit {
 
   inputPagingObj : any;
 
+  readonly AddLink: string = NavigationConstant.VENDOR_BRANCH_ADD;
   constructor(private route: ActivatedRoute) {
 
   }

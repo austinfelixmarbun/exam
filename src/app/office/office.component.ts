@@ -3,6 +3,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-office',
@@ -13,6 +14,7 @@ export class OfficeComponent implements OnInit {
 
   inputPagingObj: any;
 
+  readonly AddLink: string = NavigationConstant.OFFICE_ADD;
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchOffice.json";

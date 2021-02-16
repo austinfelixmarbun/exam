@@ -6,6 +6,7 @@ import { BodAddComponent } from 'app/company/bod/add/add-bod.component';
 import { CommissionerComponent } from 'app/company/Commissioner/commissioner.component';
 import { CommissionerAddComponent } from 'app/company/Commissioner/add/add-commissioner.component';
 import { EditCompanyComponent } from 'app/company/edit/edit-company.component';
+import { PathConstant } from 'app/shared/PathConstant';
 
 const routes: Routes = [
   {
@@ -19,35 +20,35 @@ const routes: Routes = [
         },
       },
       {
-        path: 'bod',
+        path: PathConstant.COY_BOD,
         component: BODComponent,
         data: {
           title: 'BOD Information'
         }
       },
       {
-        path: 'bod/add',
+        path: PathConstant.COY_BOD_ADD,
         component: BodAddComponent,
         data: {
           title: 'BOD Information'
         }
       },
       {
-        path: 'commissioner',
+        path: PathConstant.COY_COMMISSIONER,
         component: CommissionerComponent,
         data: {
           title: 'Commisioner Information'
         }
       },
       {
-        path: 'commissioner/add',
+        path: PathConstant.COY_COMMISSIONER_ADD,
         component: CommissionerAddComponent,
         data: {
           title: 'Commisioner Information'
         }
       },
       {
-        path: 'edit',
+        path: PathConstant.EDIT,
         component: EditCompanyComponent,
         data: {
           title: 'Edit Company'

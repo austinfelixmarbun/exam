@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-profession-add-edit',
@@ -32,6 +33,7 @@ export class ProfessionAddEditComponent implements OnInit {
     RegRptCode: ['', Validators.maxLength(50)]
   });
 
+  readonly CancelLink: string = NavigationConstant.CS_PROFESSION_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getUrl = URLConstant.GetRefProfessionById;
     this.addUrl = URLConstant.AddRefProfession;
@@ -87,7 +89,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.http.post(this.addUrl, this.refProfessionObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Profession/Paging'],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_PROFESSION_PAGING],{});
         }
       );
     } else {
@@ -99,7 +101,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.http.post(this.editUrl, this.refProfessionObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Profession/Paging'],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_PROFESSION_PAGING],{});
         }
       );
     }

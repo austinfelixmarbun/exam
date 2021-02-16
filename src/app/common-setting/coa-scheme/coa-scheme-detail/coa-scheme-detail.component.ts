@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CoaSchmObj } from 'app/shared/model/common-setting/CoaSchmObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-coa-scheme-detail',
@@ -26,6 +27,7 @@ export class CoaSchemeDetailComponent implements OnInit {
     IsActive: [false]
   });
 
+  readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -106,7 +108,7 @@ export class CoaSchemeDetailComponent implements OnInit {
 
     this.http.post(URLConstant.SubmitCoaSchm, this.coaSchmObj).subscribe(
       (response) => {
-        this.router.navigate(['/CommonSetting/coascheme/paging']);
+        this.router.navigate([NavigationConstant.CS_COA_SCHM_PAGING]);
         this.toastr.successMessage(response["Message"]);
       },
       (error) => {

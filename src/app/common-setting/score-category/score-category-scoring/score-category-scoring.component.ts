@@ -10,6 +10,7 @@ import { ScoreCategorySchmDObj } from 'app/shared/model/ScoreCategory/ScoreCateg
 import { ListScoreCategorySchmDObj } from 'app/shared/model/ScoreCategory/ListScoreCategorySchmDObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-score-category-scoring',
@@ -29,6 +30,7 @@ export class ScoreCategoryScoringComponent implements OnInit {
   maxBottomValue: Array<number> = new Array<number>();
   minTopValue: Array<number> = new Array<number>();
 
+  readonly CancelLink: string = NavigationConstant.CS_SCORE_CATEGORY_PAGING;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -152,7 +154,7 @@ export class ScoreCategoryScoringComponent implements OnInit {
       //SAVE
       (response) => {
         this.toastr.successMessage(response["Message"]);
-        AdInsHelper.RedirectUrl(this.router,['/CommonSetting/ScoreCategory/Paging'],{});
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_SCORE_CATEGORY_PAGING],{});
       },
       (error) => {
         this.toastr.typeErrorCustom(error);

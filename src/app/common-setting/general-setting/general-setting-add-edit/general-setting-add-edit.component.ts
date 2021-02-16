@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-general-setting-add-edit',
@@ -29,6 +30,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
     GsDescr: ['', Validators.maxLength(4000)]
     });
 
+  readonly CancelLink: string = NavigationConstant.CS_GEN_SETTING;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -69,7 +71,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
     this.httpClient.post(URLConstant.EditGeneralSetting, this.gsObj).subscribe(
       response => {
         this.service.successMessage(response["Message"]);
-        AdInsHelper.RedirectUrl(this.router,["/CommonSetting/GeneralSetting"],{});
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_GEN_SETTING],{});
       }
     );
   }
