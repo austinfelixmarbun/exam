@@ -1,60 +1,71 @@
 {
-    "title":"",
-    "subsection": [
-      {
-        "subSectionId": "BranchInformationSuppId",
-        "subSectionTitle": "Supplier Branch Info",
-        "mainInfoPath": "/Generic/GetDataViewBySQL",
-        "mainInfo": [
-          {
-            "type": "link",
-            "label": "Supplier HO :",
-            "property": "SupplierHo",
-            "name": "LinkSupplierHO",
-            "target": "_blank",
-            "path": "/View/VendorHO",
-            "param": [
-              {
-                "type": "VendorId",
-                "property": "VendorParentId"
-              }
-            ]
-          },{},
-          {
-            "type": "text",
-            "label": "Supplier Upping Calcuation Method :",
-            "property": "SuppCalc"
-          },{},
-          {
-            "type": "text",
-            "label": "Supplier Class :",
-            "property": "SupplierClass"
-          },{},
-          {
-            "type": "text",
-            "label": "BPKB Aging :",
-            "property": "BpkbAging"
-          },{},
-          {
-            "type": "text",
-            "label": "Days A/P Payment Due after Go Live :",
-            "property": "DAP"
-          },{},
-          {
-            "type": "text",
-            "label": "Max Refund Type :",
-            "property": "MaxRefundType"
-          },{},
-          {
-            "type": "text",
-            "label": "Max Refund Value :",
-            "property": "MaxRefundValue"
-          }
-        ],
-        "querystring": {
-           "name":"viewVendorBranchInfoSupp"
-          }
+  "title": "",
+  "subsection": [
+    {
+      "subSectionId": "BranchInformationSuppId",
+      "subSectionTitle": "Supplier Branch Info",
+      "mainInfoPath": "/Generic/GetDataViewBySQL",
+      "mainInfo": [
+        {
+          "type": "link",
+          "label": "Supplier HO :",
+          "property": "SupplierHo",
+          "name": "LinkSupplierHO",
+          "target": "_blank",
+          "path": "/View/VendorHO",
+          "param": [
+            {
+              "type": "VendorId",
+              "property": "VendorParentId"
+            }
+          ]
+        },
+        {},
+        {
+          "type": "text",
+          "label": "Supplier Upping Calcuation Method :",
+          "property": "SuppCalc"
+        },
+        {},
+        {
+          "type": "text",
+          "label": "Supplier Class :",
+          "property": "SupplierClass"
+        },
+        {},
+        {
+          "type": "text",
+          "label": "BPKB Aging :",
+          "property": "BpkbAging"
+        },
+        {},
+        {
+          "type": "text",
+          "label": "Days A/P Payment Due after Go Live :",
+          "property": "DAP"
+        },
+        {},
+        {
+          "type": "text",
+          "label": "Max Refund Type :",
+          "property": "MaxRefundType"
+        },
+        {},
+        {
+          "type": "text",
+          "label": "Max Refund Value :",
+          "property": "MaxRefundValue"
+        },
+        {},
+        {
+          "type": "text",
+          "label": "Grade Status :",
+          "property": "Grade"
+        }
+      ],
+      "querystring": {
+        "name": "viewVendorBranchInfoSupp"
       }
-    ]
-  }
-  
+    }
+  ]
+}
