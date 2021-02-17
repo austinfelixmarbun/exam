@@ -264,6 +264,9 @@ export class NavigationConstant {
     //#endregion
     
     //#region Cust
+    public static TEST_1 = "../CustomerPersonal/MainInfo"; //'../CustomerPersonal/MainInfo'
+    public static TEST_2 = "../" + PathConstant.CUST_PERSONAL + '/' + PathConstant.CUST_MAIN_INFO; //'../CustomerPersonal/MainInfo'
+    public static TEST_3 = PathConstant.CombinePath(['..', PathConstant.CUST_PERSONAL_MAIN_INFO]); //'../CustomerPersonal/MainInfo'
     public static CUST_PERSONAL_MAIN_INFO = PathConstant.CombinePath(['..', PathConstant.CUST_PERSONAL_MAIN_INFO]); //'../CustomerPersonal/MainInfo'
     public static CUST_COY_MAIN_INFO = PathConstant.CombinePath(['..', PathConstant.CUST_COY_MAIN_INFO]); //'../CustomerCompany/MainInfo'
     public static CUST_NEG_PAGING = PathConstant.CombinePath([PathConstant.LR_CUST, PathConstant.CUST_NEG_PAGING]); //'/Customer/NegativeCustomer/Paging'

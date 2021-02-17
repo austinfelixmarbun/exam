@@ -37,6 +37,7 @@ export class SidebarComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log("sidebar");
         $.getScript('./assets/js/app-sidebar.js');
         // this.url = "./assets/menu.json";
         // this.getJSON(this.url).subscribe

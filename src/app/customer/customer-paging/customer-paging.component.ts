@@ -15,6 +15,9 @@ export class CustomerPagingComponent implements OnInit {
   inputPagingObj: UcPagingObj;
   readonly AddLinkPersonal: string = NavigationConstant.CUST_PERSONAL_MAIN_INFO;
   readonly AddLinkCoy: string = NavigationConstant.CUST_COY_MAIN_INFO;
+  readonly Test1: string = NavigationConstant.TEST_1;
+  readonly Test2: string = NavigationConstant.TEST_2;
+  readonly Test3: string = NavigationConstant.TEST_3;
   constructor() { }
 
   ngOnInit() {
