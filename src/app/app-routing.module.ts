@@ -13,12 +13,12 @@ import { NavigationConstant } from './shared/NavigationConstant';
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: NavigationConstant.PAGES_LOGIN,
+    redirectTo: '/Pages/Login',
     pathMatch: 'full',
   },
   { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES, canActivate: [AuthGuard] },
   { path: '', component: ContentLayoutComponent, data: { title: 'content Views' }, children: CONTENT_ROUTES },
-  { path: '**', redirectTo: NavigationConstant.PAGES_LOGIN }
+  { path: '**', redirectTo: '/Pages/Login' }
 ];
 
 @NgModule({
