@@ -14,6 +14,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-product-offering-deact-apv',
@@ -75,7 +76,7 @@ export class ProductOfferingDeactivateApprovalComponent implements OnInit {
       if (String.Format("{0:L}", ev.RowObj.CURRENT_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
         this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_PROCESS_TASK);
       } else {
-        AdInsHelper.RedirectUrl(this.router,["/Product/OfferingDeactivateApproval/Detail"],{ "ProdOfferingHId": ev.RowObj.ProdOfferingHId, "ProdOfferingId": ev.RowObj.ProdOfferingId,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId});
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_OFFERING_DEACTIVATE_APPRV_DETAIL],{ "ProdOfferingHId": ev.RowObj.ProdOfferingHId, "ProdOfferingId": ev.RowObj.ProdOfferingId,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId});
       }
     }
     else if (ev.Key == "HoldTask") {

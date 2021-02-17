@@ -106,7 +106,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Vendor/Group/View",
+                    "path": "VENDOR_GRP_VIEW",
                     "param": [
                         {
                             "type": "VendorGrpId",
@@ -126,7 +126,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Vendor/Group/Add",
+                    "path": "VENDOR_GRP_ADD",
                     "param": [
                         {
                             "type": "VendorGrpId",

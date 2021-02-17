@@ -4,6 +4,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-ref-form-paging',
@@ -14,6 +15,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 export class RefFormPagingComponent implements OnInit {
   inputPagingObj: any;
 
+  readonly AddLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_DETAIL;
   constructor() { }
 
 

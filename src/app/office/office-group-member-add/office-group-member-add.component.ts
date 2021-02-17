@@ -10,6 +10,7 @@ import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.mod
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-office-group-member-add',
@@ -22,6 +23,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   CenterGrpId: number;
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
 
+  readonly CancelLink: string = NavigationConstant.OFFICE_GROUP_MEMBER;
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -80,7 +82,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
 
     this.http.post(URLConstant.AddCenterGrpOfficeMember, obj).subscribe(
       (response) => {
-        AdInsHelper.RedirectUrl(this.router,["/Office/Group/Member"],{ "RefOfficeId": this.RefOfficeId, "CenterGrpId": this.CenterGrpId });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_GROUP_MEMBER],{ "RefOfficeId": this.RefOfficeId, "CenterGrpId": this.CenterGrpId });
       });
   }
 }

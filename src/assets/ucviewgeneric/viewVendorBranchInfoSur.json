@@ -12,7 +12,7 @@
             "property": "SurveyorHo",
             "name": "LinkSurveyorHO",
             "target": "_blank",
-            "path": "/View/VendorHO",
+            "path": "VIEW_VENDOR_HO",
             "param": [
               {
                 "type": "VendorId",

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 
 @Component({
@@ -10,6 +11,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 })
 export class VendorGroupPagingComponent implements OnInit {
 
+  readonly AddLink: string = NavigationConstant.VENDOR_GRP_ADD;
   constructor() { }
   inputPagingObj: any;
 

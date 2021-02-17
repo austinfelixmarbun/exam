@@ -16,6 +16,7 @@ import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-negative-asset-detail',
@@ -267,7 +268,7 @@ export class NegativeAssetDetailComponent implements OnInit {
       this.httpClient.post(URLConstant.AddAssetNegative, assetNegativeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/NegativeAsset/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_NEG_PAGING],{});
         }
       );
     }
@@ -275,7 +276,7 @@ export class NegativeAssetDetailComponent implements OnInit {
       this.httpClient.post(URLConstant.EditAssetNegative, assetNegativeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/NegativeAsset/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_NEG_PAGING],{});
         }
       );
     }

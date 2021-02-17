@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-view-cabinet',
@@ -16,6 +17,7 @@ export class ViewCabinetComponent implements OnInit {
 
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
+  readonly ViewLink: string = NavigationConstant.DOC_MNGMNT_VIEW_RACK;
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
@@ -37,7 +39,7 @@ export class ViewCabinetComponent implements OnInit {
         this.responseRack = response['ReturnObject'];
       },
       error => {
-        this.router.navigateByUrl('Error');
+        this.router.navigateByUrl(NavigationConstant.ERROR);
       }
     );
   }

@@ -4,6 +4,7 @@ import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from '../constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from '../NavigationConstant';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class AuthGuard implements CanActivate {
     // }
 
     if (currentUser == null) {
-      this.router.navigate(['pages/login'])
+      this.router.navigate([NavigationConstant.PAGES_LOGIN])
       return false;
     }
     else {

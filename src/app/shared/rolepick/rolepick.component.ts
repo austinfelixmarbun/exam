@@ -8,6 +8,7 @@ import { URLConstant } from '../constant/URLConstant';
 import { CookieOptions, CookieService } from 'ngx-cookie';
 import { formatDate } from '@angular/common';
 import { CommonConstant } from '../constant/CommonConstant';
+import { NavigationConstant } from '../NavigationConstant';
 
 @Component({
   selector: 'app-rolepick',
@@ -54,7 +55,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
           AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
           let currPath = this.router.routerState.snapshot.url;
-          this.router.navigateByUrl("/pages/content", { skipLocationChange: true }).then(() => {
+          this.router.navigateByUrl(NavigationConstant.PAGES_CONTENT, { skipLocationChange: true }).then(() => {
             AdInsHelper.RedirectUrl(this.router,[currPath],{});
             this.dialog.closeAll();
           });
@@ -76,7 +77,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
 
           AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
           AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
-          this.router.navigate(["/dashboard/dash-board"]);
+          this.router.navigate([NavigationConstant.DASHBOARD]);
           this.dialog.closeAll();
         }
       );

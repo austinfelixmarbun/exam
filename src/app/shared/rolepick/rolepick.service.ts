@@ -10,6 +10,7 @@ import { URLConstant } from '../constant/URLConstant';
 import { CommonConstant } from '../constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { formatDate } from '@angular/common';
+import { NavigationConstant } from '../NavigationConstant';
 
 @Injectable()
 export class RolePickService {
@@ -72,7 +73,7 @@ export class RolePickService {
                         
                         AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response["returnObject"]));
                         AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
-                        this.router.navigate(['dashboard/dash-board']);
+                        this.router.navigate([NavigationConstant.DASHBOARD]);
                     }
                 )
             }

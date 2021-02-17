@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-asset-category-paging',
@@ -18,6 +19,8 @@ export class AssetCategoryPagingComponent implements OnInit {
   critObj: CriteriaObj = new CriteriaObj();
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
+  readonly AddLink: string = NavigationConstant.BACK_TO_DETAIL;
+  readonly CancelLink: string = NavigationConstant.ASSET_CONFIG_PAGING;
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {

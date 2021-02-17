@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class VendorGroupViewComponent implements OnInit {
   MrVendorCategoryCode: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
+  readonly AddLink: string = NavigationConstant.VENDOR_GRP_ADD;
+  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, ) {
     this.route.queryParams.subscribe(params => {
       if (params['VendorGrpId'] != null) {

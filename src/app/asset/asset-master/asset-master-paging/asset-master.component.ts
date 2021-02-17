@@ -3,6 +3,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-asset-master',
@@ -12,6 +13,7 @@ export class AssetMasterComponent implements OnInit {
 
   inputPagingObj: UcPagingObj = new UcPagingObj();
 
+  readonly AddLink: string = NavigationConstant.ASSET_MASTER_DETAIL;
   constructor() { }
 
   ngOnInit() {

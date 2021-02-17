@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-branch-registration',
@@ -22,6 +23,8 @@ export class VendorBranchRegistrationComponent implements OnInit {
     });
   }
 
+  readonly EditLink: string = NavigationConstant.VENDOR_BRANCH_ADD;
+  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   ngOnInit() {
     this.VendorId = this.objPassing["VendorId"];
     this.objPassing["Type"]="Vendor";

@@ -172,7 +172,7 @@
                             ],
                             "result" : {
                                 "type": "url",
-                                "path" : "/Office/Group/Member",
+                                "path" : "OFFICE_GROUP_MEMBER",
                                 "icon" : "ft-users",
                                 "param" : [
                                     {
@@ -197,7 +197,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Office/Add",
+                    "path": "OFFICE_ADD",
                     "param": [
                         {
                             "type": "RefOfficeId",

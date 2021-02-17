@@ -9,6 +9,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 
 @Component({
@@ -58,7 +59,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
         }
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
     this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
@@ -68,7 +69,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
         }
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
 

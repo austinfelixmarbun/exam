@@ -5,6 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-customer-view-customer-group',
@@ -35,7 +36,7 @@ export class CustomerViewCustomerGroupComponent implements OnInit {
         this.responseObj = response['ReturnObject'];
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
   }

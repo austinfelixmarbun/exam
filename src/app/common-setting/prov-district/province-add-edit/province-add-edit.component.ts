@@ -8,6 +8,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-province-add-edit',
@@ -29,6 +30,7 @@ export class ProvinceAddEditComponent implements OnInit {
     IsActive: [true]
   });
 
+  readonly CancelLink: string = NavigationConstant.CS_REF_PROVINCE_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     this.getUrl = URLConstant.GetRefProvDistrictById;
     this.addUrl = URLConstant.AddRefProvDistrict;
@@ -74,7 +76,7 @@ export class ProvinceAddEditComponent implements OnInit {
       this.http.post(this.addUrl, this.refProvDistrictObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            AdInsHelper.RedirectUrl(this.router,['/CommonSetting/RefProvince/Paging'],{});     
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REF_PROVINCE_PAGING],{});     
         }
       );
     } else {
@@ -85,7 +87,7 @@ export class ProvinceAddEditComponent implements OnInit {
       this.http.post(this.editUrl, this.refProvDistrictObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/RefProvince/Paging'],{});   
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REF_PROVINCE_PAGING],{});   
         }
       );
     }

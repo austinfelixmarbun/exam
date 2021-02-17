@@ -5,6 +5,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { DecimalPipe } from '@angular/common';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-working-hour-paging',
@@ -14,6 +15,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 export class WorkingHourPagingComponent implements OnInit {
   inputPagingObj: any;
   
+  readonly AddLink: string = NavigationConstant.CS_WORKING_HOUR_ADD;
   constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {

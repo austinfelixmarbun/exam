@@ -5,6 +5,7 @@ import { CabinetObj } from 'app/shared/model/document-management/CabinetObj.Mode
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { environment } from 'environments/environment';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-cabinet-add-edit',
@@ -23,6 +24,7 @@ export class CabinetAddEditComponent implements OnInit {
     IsActive: [true]
   });
 
+  readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
   constructor(private fb: FormBuilder,
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -68,7 +70,7 @@ export class CabinetAddEditComponent implements OnInit {
       this.http.post<CabinetObj>(environment.FoundationR3Url + "/DocManagement/EditCabinet", this.Cabinet).subscribe(
         (response) => {
           this.toastr.successMessage("Success!");
-          this.router.navigateByUrl("/DocumentManagement/Cabinet/Paging");
+          this.router.navigateByUrl(NavigationConstant.DOC_MNGMNT_CABINET_PAGING);
         },
         (error) => {
           console.log(error);
@@ -80,7 +82,7 @@ export class CabinetAddEditComponent implements OnInit {
       this.http.post<CabinetObj>(environment.FoundationR3Url + "/DocManagement/AddCabinet", this.Cabinet).subscribe(
         (response) => {
           this.toastr.successMessage("Success!");
-          this.router.navigateByUrl("/DocumentManagement/Cabinet/Paging");
+          this.router.navigateByUrl(NavigationConstant.DOC_MNGMNT_CABINET_PAGING);
         },
         (error) => {
           console.log(error);

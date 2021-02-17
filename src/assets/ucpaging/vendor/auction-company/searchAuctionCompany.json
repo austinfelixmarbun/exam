@@ -93,7 +93,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Vendor/auctioncompany/addedit",
+                    "path": "VENDOR_AUCTION_COY_ADD_EDIT",
                     "param": [
                     {
                         "type": "VendorId",

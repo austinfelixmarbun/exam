@@ -14,6 +14,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-verification-question-group-member-add',
@@ -29,6 +30,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
+  readonly CancelLink: string = NavigationConstant.VERIF_QA_GRP_MBR_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.VerfQuestionGrpHId = params["VerfQuestionGrpHId"];
@@ -97,7 +99,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
     this.http.post(URLConstant.AddListVerfQuestionGrpD, this.verfQuestionGrpDObj).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
-        AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionGroupMemberPaging"],{ "VerfQuestionGrpHId": this.VerfQuestionGrpHId });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_GRP_MBR_PAGING],{ "VerfQuestionGrpHId": this.VerfQuestionGrpHId });
       }
     );
   }

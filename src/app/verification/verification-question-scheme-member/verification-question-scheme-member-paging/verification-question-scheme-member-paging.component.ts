@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-verification-question-scheme-member-paging',
@@ -23,6 +24,8 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
   listQuestionGroupD: any;
   verfSchemeObj: any;
 
+  readonly AddLink: string = NavigationConstant.VERIF_QA_SCHM_MBR_ADD;
+  readonly CancelLink: string = NavigationConstant.VERIF_QA_SCHM_PAGING;
   constructor(private router: Router, private route: ActivatedRoute,
     private http: HttpClient, public toastr: ToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -51,7 +54,7 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
   }
 
   Edit(item) {
-    AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionSchemeMember/Edit"],{ "VerfSchemeHId": this.VerfSchemeHId, "VerfSchemeDId": item.VerfSchemeDId, "VerfQuestionGrpHId": item.VerfQuestionGrpHId });
+    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_SCHM_MBR_EDIT],{ "VerfSchemeHId": this.VerfSchemeHId, "VerfSchemeDId": item.VerfSchemeDId, "VerfQuestionGrpHId": item.VerfQuestionGrpHId });
   }
 
   DeleteData(VerfSchemeDId) {

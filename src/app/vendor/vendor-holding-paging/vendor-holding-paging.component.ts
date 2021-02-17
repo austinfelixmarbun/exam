@@ -5,6 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-holding-paging',
@@ -14,6 +15,7 @@ export class VendorHoldingPagingComponent implements OnInit {
   inputPagingObj: any;
   arrCrit: any;
 
+  readonly AddLink: string = NavigationConstant.VENDOR_HOLDING_DETAIL;
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {

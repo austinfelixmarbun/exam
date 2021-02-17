@@ -8,6 +8,7 @@ import { NgForm, FormBuilder, Validators } from '@angular/forms';
 import { WorkingHourSchmHObj } from 'app/shared/model/WorkingHourSchmHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-working-hour-h-detail',
@@ -90,6 +91,7 @@ export class WorkingHourHDetailComponent implements OnInit {
     }
   ]
 
+  readonly CancelLink: string = NavigationConstant.CS_WORKING_HOUR;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     
     this.getUrl = URLConstant.GetWorkingHourSchmHById;
@@ -168,7 +170,7 @@ export class WorkingHourHDetailComponent implements OnInit {
       this.http.post(this.addUrl, this.workingHourSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/WorkingHour'],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_WORKING_HOUR],{});
         }
       );
     } else {
@@ -178,7 +180,7 @@ export class WorkingHourHDetailComponent implements OnInit {
       this.http.post(this.editUrl, this.workingHourSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/WorkingHour'],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_WORKING_HOUR],{});
         }
       );
     }

@@ -17,6 +17,7 @@ import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-edit-main-data-personal',
@@ -261,19 +262,19 @@ export class EditMainDataPersonalComponent implements OnInit {
             this.toastr.successMessage(response["Message"]);
             
             if (this.From == "EditMainData") {
-              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerPersonal/Page"],{ "IdCust": this.CustId, Page: 'Edit', From: 'EditMainData' });
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.CustId, Page: 'Edit', From: 'EditMainData' });
             }
             else if(this.From == "CustFamily"){
-              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerPersonal/Page"],{ "IdCust": this.CustId, Page: 'Edit', From: 'CustFamily' });
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.CustId, Page: 'Edit', From: 'CustFamily' });
             }
             else if(this.From == "CustShareholder"){
-              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerPersonal/Page"],{ "IdCust": this.CustId, Page: 'Edit', From: 'CustShareholder' });
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.CustId, Page: 'Edit', From: 'CustShareholder' });
             }
             else if(this.From == "CustGuarantor"){
-              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerPersonal/Page"],{ "IdCust": this.CustId, Page: 'Edit', From: 'CustGuarantor' });
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.CustId, Page: 'Edit', From: 'CustGuarantor' });
             }
             else {
-              AdInsHelper.RedirectUrl(this.router,["/Customer/CustomerPersonal/Page"],{ "IdCust": this.CustId, From: 'CustPaging' });
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.CustId, From: 'CustPaging' });
             } 
           }
         );
@@ -292,19 +293,19 @@ export class EditMainDataPersonalComponent implements OnInit {
   }
   back(){
     if(this.From =="CustPaging"){
-      AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
     }
     else if(this.From == "EditMainData"){
-      AdInsHelper.RedirectUrl(this.router,["/Customer/EditMainData/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING],{});
     }
     else if(this.From == "CustFamily"){
-      AdInsHelper.RedirectUrl(this.router,["/Customer/CustFamily/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_FAMILY_PAGING],{});
     }
     else if(this.From == "CustShareholder"){
-      AdInsHelper.RedirectUrl(this.router,["/Customer/CustShareholder/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_SHRHLDR_PAGING],{});
     }
     else if(this.From == "CustGuarantor"){
-      AdInsHelper.RedirectUrl(this.router,["/Customer/CustGuarantor/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_GUARANTOR_PAGING],{});
     }
 }
 checkState() {

@@ -15,6 +15,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 @Component({
   selector: 'app-employee-position',
   templateUrl: './employee-position.component.html',
@@ -44,6 +45,9 @@ export class EmployeePositionComponent implements OnInit {
   arrCrit: any;
   getEmpUrl:any;
 
+  readonly CancelLink: string = NavigationConstant.EMP_PAGING;
+  readonly AddLink: string = NavigationConstant.EMP_POS_DETAIL;
+  readonly EditLink: string = NavigationConstant.EMP_POS_DETAIL;
   constructor(private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
     this.apiUrl = this.foundationUrl + URLConstant.GetEmpPositionPaging;
     this.deleteUrl = this.foundationUrl + URLConstant.DeleteEmpPosition;

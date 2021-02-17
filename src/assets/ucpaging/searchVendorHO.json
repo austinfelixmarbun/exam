@@ -83,7 +83,7 @@
             "type": "link",
             "property": "VendorName",
             "target": "_blank",
-            "path": "/View/Vendor/VendorHO",
+            "path": "VIEW_VENDOR_HO",
             "param": [
                 {
                     "type": "VendorId",
@@ -107,7 +107,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Vendor/HO/Registration",
+                    "path": "VENDOR_HO_REG",
                     "param": [
                         {
                             "type": "VendorId",

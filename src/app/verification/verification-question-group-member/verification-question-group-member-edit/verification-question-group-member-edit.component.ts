@@ -9,6 +9,7 @@ import { VerfQuestionGrpDObj } from 'app/shared/model/VerfQuestionGrpDObj.Model'
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-verification-question-group-member-edit',
@@ -35,6 +36,7 @@ export class VerificationQuestionGroupMemberEditComponent implements OnInit {
   VerfQuestionText: any;
   VerfAnswer: any;
 
+  readonly CancelLink: string = NavigationConstant.VERIF_QA_GRP_MBR_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.VerfQuestionGrpDId = params["VerfQuestionGrpDId"];
@@ -85,7 +87,7 @@ export class VerificationQuestionGroupMemberEditComponent implements OnInit {
       this.http.post(URLConstant.EditVerfQuestionGrpD, this.verfQuestionGrpDObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionGroupMemberPaging"],{ "VerfQuestionGrpHId": this.VerfQuestionGrpHId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_GRP_MBR_PAGING],{ "VerfQuestionGrpHId": this.VerfQuestionGrpHId });
         });
     
   }

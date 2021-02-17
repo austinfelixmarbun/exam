@@ -31,160 +31,161 @@ import { VendorATPMAddEditComponent } from './vendor-ATPM/vendor-atpm-add-edit/v
 import { VendorATPMRegistrationComponent } from './vendor-ATPM/vendor-atpm-registration/vendor-atpm-registration.component';
 import { AuctionCompanyPagingComponent } from './auction-company/auction-company-paging/auction-company-paging.component';
 import { AuctionCompanyAddeditComponent } from './auction-company/auction-company-addedit/auction-company-addedit.component';
+import { PathConstant } from 'app/shared/PathConstant';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'Branch/Paging',
+        path: PathConstant.VENDOR_BRANCH_PAGING,
         component: VendorBranchPagingComponent,
         data: {
           title: 'Vendor Branch Paging'
         },
       },
       {
-        path: 'Branch/Add',
+        path: PathConstant.VENDOR_BRANCH_ADD,
         component: VendorBranchAddEditComponent,
         data: {
           title: 'Vendor Branch Add'
         },
       },
       {
-        path: 'Branch/Registration',
+        path: PathConstant.VENDOR_BRANCH_REG,
         component: VendorBranchRegistrationComponent,
         data: {
           title: 'Vendor Branch Registration'
         },
       },
       {
-        path: 'Branch/View',
+        path: PathConstant.VENDOR_BRANCH_VIEW,
         component: VendorBranchViewComponent,
         data: {
           title: 'Vendor Branch View'
         },
       },
       {
-        path: 'ContactPerson/Add',
+        path: PathConstant.VENDOR_CONTACT_PERSON_ADD,
         component: ContactPersonAddEditComponent,
         data: {
           title: 'Contact Person Branch Add/Edit'
         },
       },
       {
-        path: 'ContactPerson/Edit',
+        path: PathConstant.VENDOR_CONTACT_PERSON_EDIT,
         component: ContactPersonAddEditComponent,
         data: {
           title: 'Contact Person Add/Edit'
         },
       },
       {
-        path: 'ContactPerson/List',
+        path: PathConstant.VENDOR_CONTACT_PERSON_LIST,
         component: ContactPersonListComponent,
         data: {
           title: 'Contact Person List'
         },
       },
       {
-        path: 'Holding/Paging',
+        path: PathConstant.VENDOR_HOLDING_PAGING,
         component: VendorHoldingPagingComponent,
         data: {
           title: 'Vendor Holding Paging'
         },
       },
       {
-        path: 'Holding/Detail',
+        path: PathConstant.VENDOR_HOLDING_DETAIL,
         component: VendorHoldingAddEditComponent,
         data: {
           title: 'Vendor Holding Add Edit'
         },
       },
       {
-        path: 'Holding/Registration',
+        path: PathConstant.VENDOR_HOLDING_REG,
         component: VendorHoldingRegistrationComponent,
         data: {
           title: 'Vendor Registration'
         },
       },
       {
-        path: 'Group/Add',
+        path: PathConstant.VENDOR_GRP_ADD,
         component: VendorGroupComponent,
         data: {
           title: 'Vendor Group Add'
         },
       },
       {
-        path: 'Group/Paging',
+        path: PathConstant.VENDOR_GRP_PAGING,
         component: VendorGroupPagingComponent,
         data: {
           title: 'Vendor Group Paging'
         },
       },
       {
-        path: 'Group/View',
+        path: PathConstant.VENDOR_GRP_VIEW,
         component: VendorGroupViewComponent,
         data: {
           title: 'Vendor Group View'
         },
       },
       {
-        path: 'GroupMbr/Add',
+        path: PathConstant.VENDOR_GRP_MBR_ADD,
         component: VendorGroupmemberComponent,
         data: {
           title: 'Vendor Group Member View'
         },
       },
       {
-        path: 'VendorScheme/Detail',
+        path: PathConstant.VENDOR_SCHM_DETAIL,
         component: VendorSchemeAddEditComponent,
         data: {
           title: 'Vendor Scheme Detail'
         },
       },
       {
-        path: 'VendorScheme/Paging',
+        path: PathConstant.VENDOR_SCHM_PAGING,
         component: VendorSchemePagingComponent,
         data: {
           title: 'Vendor Scheme Paging'
         },
       },
       {
-        path: 'Paging',
+        path: PathConstant.PAGING,
         component: VendorPagingComponent,
         data: {
           title: 'Vendor Paging'
         },
       },
       {
-        path: 'VendorScheme/Member/Add',
+        path: PathConstant.VENDOR_SCHM_MBR_ADD,
         component: VendorSchemeMemberAddComponent,
         data: {
           title: 'Vendor Scheme Member Add'
         },
       },
       {
-        path: 'VendorScheme/Member',
+        path: PathConstant.VENDOR_SCHM_MBR,
         component: VendorSchemeMemberPagingComponent,
         data: {
           title: 'Vendor Scheme Member'
         },
       },
       {
-        path: 'HO/Detail',
+        path: PathConstant.VENDOR_HO_DETAIL,
         component: VendorHoAddEditComponent,
         data: {
           title: 'Vendor HO Detail'
         },
       },
       {
-        path: 'HO/Paging',
+        path: PathConstant.VENDOR_HO_PAGING,
         component: VendorHoPagingComponent,
         data: {
           title: 'Vendor HO Paging'
         },
       },
       {
-        path: 'Holding/View',
+        path: PathConstant.VENDOR_HOLDING_VIEW,
         component: VendorHoldingViewComponent,
         data: {
           title: 'Vendor Holding View'
@@ -192,56 +193,56 @@ const routes: Routes = [
       },
 
       {
-        path: 'HO/Registration',
+        path: PathConstant.VENDOR_HO_REG,
         component: VendorHoRegistrationComponent,
         data: {
           title: 'Vendor HO Registration'
         },
       },
       {
-        path: 'View/VendorHO',
+        path: PathConstant.VENDOR_VIEW_HO,
         component: VendorHoInfoComponent,
         data: {
           title: 'Vendor HO View'
         },
       },
       {
-        path: 'Branch/Employee/Paging',
+        path: PathConstant.VENDOR_BRANCH_EMP_PAGING,
         component: VendorBranchEmployeePagingComponent,
         data: {
           title: 'Vendor Branch Employee Paging'
         },
       },
       {
-        path: 'Branch/Employee/Detail',
+        path: PathConstant.VENDOR_BRANCH_EMP_DETAIL,
         component: VendorBranchEmployeeAddEditComponent,
         data: {
           title: 'Vendor Branch Employee Detail'
         },
       },
       {
-        path: 'Branch/Member/Paging',
+        path: PathConstant.VENDOR_BRANCH_MBR_PAGING,
         component: VendorBranchOfficeMemberComponent,
         data: {
           title: 'Vendor Branch Member Paging'
         },
       },
       {
-        path: 'Branch/Member/Add',
+        path: PathConstant.VENDOR_BRANCH_MBR_ADD,
         component: VendorBranchOfficeMemberAddComponent,
         data: {
           title: 'Vendor Branch Member Add'
         },
       },
       {
-        path: 'ATPM/Detail',
+        path: PathConstant.VENDOR_ATPM_DETAIL,
         component: VendorATPMAddEditComponent,
         data: {
           title: 'Vendor ATPM Detail'
         },
       },
       {
-        path: 'ATPM/Registration',
+        path: PathConstant.VENDOR_ATPM_REG,
         component: VendorATPMRegistrationComponent,
         data: {
           title: 'Vendor ATPM Registration'
@@ -250,14 +251,14 @@ const routes: Routes = [
       
       // Auction Company
       {
-        path: 'auctioncompany/paging',
+        path: PathConstant.VENDOR_AUCTION_COY_PAGING,
         component: AuctionCompanyPagingComponent,
         data: {
           title: 'Auction Company Paging'
         },
       },
       {
-        path: 'auctioncompany/addedit',
+        path: PathConstant.VENDOR_AUCTION_COY_ADD_EDIT,
         component: AuctionCompanyAddeditComponent,
         data: {
           title: 'Auction Company Addedit'

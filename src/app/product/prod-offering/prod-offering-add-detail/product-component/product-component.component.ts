@@ -8,6 +8,7 @@ import { ListRefProductOfferingDetailObj } from 'app/shared/model/ListRefProduct
 import { RefProductOfferingDetailObj } from 'app/shared/model/RefProductOfferingDetailObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-product-component',
@@ -93,11 +94,11 @@ export class ProductComponentComponent implements OnInit {
   {
     if(this.source == "return")
     {
-      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/Returnpaging"],{ });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PROD_OFFERING_RTN_PAGING],{ });
     }
     else
     {
-      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/Paging"],{ });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PROD_OFFERING_PAGING],{ });
     }
   }
 

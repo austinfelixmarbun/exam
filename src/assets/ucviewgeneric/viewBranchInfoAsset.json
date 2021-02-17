@@ -12,7 +12,7 @@
             "property": "AssetHo",
             "name": "LinkAssetHO",
             "target": "_blank",
-            "path": "/View/VendorHO",
+            "path": "VIEW_VENDOR_HO",
             "param": [
               {
                 "type": "VendorId",

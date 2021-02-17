@@ -8,6 +8,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { HttpClient } from '@angular/common/http';
 import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-asset-scheme-member',
@@ -22,6 +23,8 @@ export class AssetSchemeMemberComponent implements OnInit {
   assetSchmHObj: AssetSchemeHObj;
   AssetSchmHIsSystem: false;
   
+  readonly CancelLink: string = NavigationConstant.ASSET_SCHM_PAGING;
+  readonly AddLink: string = NavigationConstant.ASSET_SCHM_ADD_MBR;
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetSchmHId"] != null) {

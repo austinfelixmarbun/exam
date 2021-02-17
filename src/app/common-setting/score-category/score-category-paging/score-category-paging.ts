@@ -3,6 +3,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-score-category-paging',
@@ -12,6 +13,7 @@ export class ScoreCategoryPagingComponent implements OnInit {
 
   inputPagingObj: UcPagingObj = new UcPagingObj();
 
+  readonly AddLink: string = NavigationConstant.CS_SCORE_CATEGORY_TYPE;
   constructor() { }
 
   ngOnInit() {

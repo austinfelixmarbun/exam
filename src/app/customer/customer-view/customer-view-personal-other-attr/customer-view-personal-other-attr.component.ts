@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-customer-view-personal-other-attr',
@@ -33,7 +34,7 @@ export class CustomerViewPersonalOtherAttrComponent implements OnInit {
         this.responseCustAttr = response[CommonConstant.ReturnObj];
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
   }

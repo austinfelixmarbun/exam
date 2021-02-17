@@ -1,10 +1,10 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/Vendor/HO/Detail']" skipLocationChange
+    <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="[EditLink]" skipLocationChange
       [queryParams]="{VendorId: this.VendorId, mode:'edit'}">
       <i class="ft-plus-circle"></i> Edit Main Info
     </button>
-    <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/Vendor/Paging']" skipLocationChange
+    <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" skipLocationChange
       [queryParams]="{ MrVendorCategoryCode: this.MrVendorCategoryCode  }" translate>
       <i class="fa fa-arrow-left"></i> Back 
     </button>

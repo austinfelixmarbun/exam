@@ -5,6 +5,7 @@ import { DecimalPipe } from '@angular/common';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class ProvinceComponent implements OnInit {
   inputPagingObj: any;
   arrCrit: any;
   
+  readonly AddLink: string = NavigationConstant.CS_REF_PROVINCE_DETAIL;
   constructor() { }
 
   ngOnInit() {

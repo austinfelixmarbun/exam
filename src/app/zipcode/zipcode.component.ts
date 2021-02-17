@@ -3,6 +3,7 @@ import { environment } from 'environments/environment';
 import { DecimalPipe } from '@angular/common';
 import { UcPagingObj } from '../shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-zipcode',
@@ -14,6 +15,7 @@ export class ZipcodeComponent implements OnInit {
 
   inputPagingObj: any;
 
+  readonly AddLink: string = NavigationConstant.CS_ZIPCODE_DETAIL;
   constructor() { }
 
   ngOnInit() {

@@ -96,7 +96,7 @@
             "action" : [
                 {
                     "type" : "edit",
-                    "path" : "/CommonSetting/Holiday/Detail/",
+                    "path" : "CS_HOLIDAY_DETAIL",
                     "param" : [
                         {
                             "type" : "HolidaySchmHId",
@@ -112,7 +112,7 @@
             "action": [
               {
                   "type" : "edit",
-                  "path" : "/CommonSetting/Holiday/edit",
+                  "path" : "CS_HOLIDAY_DETAIL_EDIT",
                   "param": [
                       {
                           "type":"HolidaySchmHId",

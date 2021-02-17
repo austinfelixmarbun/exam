@@ -19,7 +19,7 @@
             <td *ngIf="item.isActive == '1'">Yes</td>
             <td *ngIf="item.isActive == '0'">No</td>
             <td>
-                <a class="success p-0" data-original-title="" title="Upload Setting Edit" [routerLink]="['/upload/UploadSettingEdit']"
+                <a class="success p-0" data-original-title="" title="Upload Setting Edit" [routerLink]="[CancelLink]"
                     [queryParams]="{param:'edit',uploadTypeId:item.uploadTypeId}" skipLocationChange>
                     <i class="ft-edit-2 font-medium-3 mr-2"></i>
                 </a>

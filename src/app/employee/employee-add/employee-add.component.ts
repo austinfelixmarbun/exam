@@ -23,6 +23,7 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { AdInsHelper } from "app/shared/AdInsHelper";
 import { CookieService } from "ngx-cookie";
+import { NavigationConstant } from "app/shared/NavigationConstant";
 
 @Component({
   selector: "app-employee-add",
@@ -74,6 +75,7 @@ export class EmployeeAddComponent implements OnInit {
   addressObj: UcAddressObj;
   inputAddressObj: InputAddressObj;
   
+  readonly CancelLink: string = NavigationConstant.EMP_PAGING;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -275,7 +277,7 @@ export class EmployeeAddComponent implements OnInit {
       this.httpClient.post(URLConstant.AddRefEmp, refEmpData).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Employee/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_PAGING],{});
         }
       );
     }
@@ -285,7 +287,7 @@ export class EmployeeAddComponent implements OnInit {
       this.httpClient.post(URLConstant.EditRefEmp, refEmpData).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Employee/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_PAGING],{});
         }
       );
     }

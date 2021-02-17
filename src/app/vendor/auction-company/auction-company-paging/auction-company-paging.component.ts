@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-auction-company-paging',
@@ -11,6 +12,7 @@ export class AuctionCompanyPagingComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();
   isReady: boolean;
 
+  readonly AddLink: string = NavigationConstant.BACK_TO_ADD_EDIT;
   constructor() { }
 
   ngOnInit() {

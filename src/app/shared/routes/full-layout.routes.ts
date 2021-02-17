@@ -1,98 +1,95 @@
 import { Routes, RouterModule } from '@angular/router';
+import { PathConstant } from '../PathConstant';
 
 //Route for content layout with sidebar, navbar and footer.
 
 export const Full_ROUTES: Routes = [
   {
-    path: 'dashboard',
+    path: PathConstant.LR_DASHBOARD,
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
    {
-    path: 'forms',
+    path: PathConstant.LR_FORMS,
     loadChildren: './forms/forms.module#FormModule'
   },
   {
-    path: 'components',
+    path: PathConstant.LR_COMPNT,
     loadChildren: './components/ui-components.module#UIComponentsModule'
   },
   {
-    path: 'Office',
+    path: PathConstant.LR_OFFICE,
     loadChildren: './office/office.module#OfficeModule'
   },
   {
-    path: 'Employee',
+    path: PathConstant.LR_EMP,
     loadChildren: './employee/employee.module#EmployeeModule'
   },
   {
-    path : 'Organization',
+    path : PathConstant.LR_ORG,
     loadChildren: './organization/organization.module#OrganizationModule'
   },
   {
-    path: 'Customer',
+    path: PathConstant.LR_CUST,
     loadChildren: './customer/customer.module#CustomerModule'
   },
   {
-    path: 'SystemSetting',
+    path: PathConstant.LR_SYSTEM_SETTING,
     loadChildren: './system-setting/system-setting.module#SystemSettingModule'
   },
   {
-    path: 'company',
+    path: PathConstant.LR_COY,
     loadChildren: './company/company.module#CompanyModule'
   },
   {
-    path: 'CommonSetting',
+    path: PathConstant.LR_COMMON_SETTING,
     loadChildren: './common-setting/common-setting.module#CommonSettingModule'
   },
   {
-    path: 'notification',
+    path: PathConstant.LR_NOTIF,
     loadChildren: './notification/notification.module#NotificationModule'
   },
   {
-    path: 'pages',
+    path: PathConstant.LR_PAGES,
     loadChildren: './pages/full-pages/full-pages.module#FullPagesModule'
   },
   {
-    path: 'Upload',
+    path: PathConstant.LR_UPLOAD,
     loadChildren: './upload/upload.module#UploadModule'
   },
   {
-    path: 'product',
-    loadChildren: './product/product.module#ProductModule'
-  },
-  {
-    path: 'Asset',
+    path: PathConstant.LR_ASSET,
     loadChildren: './asset/asset.module#AssetModule'
   }, 
   {
-    path: 'Vendor',
+    path: PathConstant.LR_VENDOR,
     loadChildren: './vendor/vendor.module#VendorModule'
   },
   {
-    path: 'Verification',
+    path: PathConstant.LR_VERIF,
     loadChildren: './verification/verification.module#VerificationModule'
   },
   {
-    path: 'Product',
+    path: PathConstant.LR_PRODUCT,
     loadChildren: './product/product.module#ProductModule'
   },
   {
-    path: 'ApprovalScreen',
+    path: PathConstant.LR_APPRV_SCRN,
     loadChildren: './approval-screen/approval-screen.module#ApprovalScreenModule'
   },
   {
-    path: 'Error',
+    path: PathConstant.LR_ERROR,
     loadChildren: './error-page/error-page.module#ErrorPageModule'
   },
   {
-    path: 'Survey',
+    path: PathConstant.LR_SRVY,
     loadChildren: './survey/survey.module#SurveyModule'
   },
   {
-    path: 'Integration',
+    path: PathConstant.LR_INTEGRATION,
     loadChildren: './integration/integration.module#IntegrationModule'
   },
   {
-    path: 'DocumentManagement',
+    path: PathConstant.LR_DOC_MNGMNT,
     loadChildren: './document-management/document-management.module#DocumentManagementModule'
   }
 ];

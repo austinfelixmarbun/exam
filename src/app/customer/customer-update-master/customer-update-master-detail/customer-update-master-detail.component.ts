@@ -6,6 +6,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 import Stepper from 'bs-stepper';
 import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
@@ -168,7 +169,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
       if(this.MrCustTypeCode == CommonConstant.CustTypePersonal){
         if(this.StepIdx == this.CustPersonalStep["FIN"]){
           // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
-          AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
         }
         else{
           this.StepIdx++;
@@ -178,7 +179,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
       else{
         if(this.StepIdx == this.CustCompanyStep["LEGAL"]){
           // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
-          AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
         }
         else{
           this.StepIdx++;

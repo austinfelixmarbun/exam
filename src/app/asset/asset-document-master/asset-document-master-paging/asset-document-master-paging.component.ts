@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-asset-document-master-paging',
@@ -10,6 +11,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 export class AssetDocumentMasterPagingComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();
   
+  readonly AddLink: string = NavigationConstant.BACK_TO_DETAIL;
   constructor() { }
 
   ngOnInit() {

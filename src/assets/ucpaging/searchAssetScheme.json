@@ -135,7 +135,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/Asset/Scheme/MemberDetail",
+          "path": "ASSET_SCHM_MBR_DETAIL",
           "param": [
             {
               "type": "AssetSchmHId",
@@ -163,7 +163,7 @@
               "result" : 
               {
                 "type": "url",
-                "path": "/Asset/Scheme/InformationDetail",
+                "path": "ASSET_SCHM_INFO_DETAIL",
                 "param": [
                   {
                     "type": "AssetSchmHId",

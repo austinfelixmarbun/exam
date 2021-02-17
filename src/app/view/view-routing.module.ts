@@ -1,35 +1,36 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PathConstant } from 'app/shared/PathConstant';
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'Customer',
+        path: PathConstant.VIEW_CUST,
         loadChildren: './customer-view/customer-view.module#CustomerViewModule'
       },
       {
-        path: 'Offering',
+        path: PathConstant.VIEW_OFFERING,
         loadChildren: './prod-offering-view/prod-offering-view.module#ProdOfferingViewModule'
       },
       {
-        path: 'Vendor',
+        path: PathConstant.VIEW_VENDOR,
         loadChildren: './vendor/vendor-view.module#VendorViewModule'
       },
       {
-        path: 'NegativeCustomer',
+        path: PathConstant.VIEW_NEG_CUST,
         loadChildren: './negative-customer-view/negative-customer-view.module#NegativeCustomerViewModule'
       },
       {
-        path: 'ProductHO',
+        path: PathConstant.VIEW_PRODUCT_HO,
         loadChildren: './product-ho-view/product-ho-view.module#ProductHOViewModule'
       },
       {
-        path: 'Survey',
+        path: PathConstant.VIEW_SRVY,
         loadChildren: './survey-order/survey-order-view.module#SurveyOrderViewModule'
       },
       {
-        path: 'CustExposureView',
+        path: PathConstant.VIEW_CUST_EXPSR,
         loadChildren: './cust-exposure-view/cust-exposure-view.module#CustExposureViewModule'
       },
     ]

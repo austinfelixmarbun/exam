@@ -85,7 +85,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Verification/QuestionAnswer/Edit",
+                    "path": "VERIF_QA_EDIT",
                     "param": [
                         {
                             "type": "VerfQuestionAnswerId",

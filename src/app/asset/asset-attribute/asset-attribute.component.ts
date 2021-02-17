@@ -9,6 +9,7 @@ import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 @Component({
   selector: 'app-asset-attribute',
   templateUrl: './asset-attribute.component.html',
@@ -22,6 +23,8 @@ export class AssetAttributeComponent implements OnInit {
   critObj: CriteriaObj = new CriteriaObj();
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
+  readonly AddLink: string = NavigationConstant.BACK_TO_DETAIL;
+  readonly CancelLink: string = NavigationConstant.ASSET_CONFIG_PAGING;
   constructor(private route: ActivatedRoute, private http:HttpClient, private toastr : NGXToastrService, private router: Router) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
@@ -47,7 +50,7 @@ export class AssetAttributeComponent implements OnInit {
   }
 
   edit(ev) {
-    AdInsHelper.RedirectUrl(this.router,["/Asset/Attribute/Detail"],{ "AssetTypeId": this.AssetTypeId,"AssetAttrId": ev.RowObj.AssetAttrId, mode:"edit" });
+    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ATTR_DETAIL],{ "AssetTypeId": this.AssetTypeId,"AssetAttrId": ev.RowObj.AssetAttrId, mode:"edit" });
   }
 
 }

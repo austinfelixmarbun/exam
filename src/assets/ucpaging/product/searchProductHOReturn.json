@@ -93,7 +93,7 @@
       "type": "link",
       "position": "center",
       "property": "CurrentProdVersion",
-      "path": "/View/ProductHO",
+      "path": "VIEW_PRODUCT_HO",
       "target": "_blank",
       "param": [
         {
@@ -106,7 +106,7 @@
       "type": "link",
       "position": "center",
       "property": "DraftProdVersion",
-      "path": "/View/ProductHO",
+      "path": "VIEW_PRODUCT_HO",
       "target": "_blank",
       "param": [
         {

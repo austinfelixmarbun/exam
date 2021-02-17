@@ -9,6 +9,7 @@ import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-asset-scheme-add-edit-information',
@@ -29,6 +30,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
   ItemAssetType: Array<AssetTypeObj> = new Array<AssetTypeObj>();
   AssetSchmCode: string;
 
+  readonly CancelLink: string = NavigationConstant.ASSET_SCHM_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
@@ -91,7 +93,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       this.http.post(URLConstant.AddAssetSchmH, this.assetSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/Scheme/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_SCHM_PAGING],{});
         }
       );
     }
@@ -102,7 +104,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       this.http.post(URLConstant.EditAssetSchmH, this.assetSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/Scheme/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_SCHM_PAGING],{});
         }
       );
     }

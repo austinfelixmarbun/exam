@@ -5,41 +5,42 @@ import { SurveyOrderTaskComponent } from './survey-order-task/survey-order-task.
 import { SurveyOrderViewComponent } from './survey-order-view/survey-order-view.component';
 import { SurveyTaskViewComponent } from './survey-task-view/survey-task-view.component';
 import { SurveyOrderTaskWfComponent } from './survey-order-task-wf/survey-order-task-wf.component';
+import { PathConstant } from 'app/shared/PathConstant';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'Paging',
+        path: PathConstant.PAGING,
         component: SurveyOrderComponent,
         data: {
           title: 'Survey Order'
         },
       },
       {
-        path: 'Task',
+        path: PathConstant.SRVY_TASK,
         component: SurveyOrderTaskComponent,
         data: {
           title: 'Survey Order Task'
         },
       },
       {
-        path: 'ViewOrderExternal',
+        path: PathConstant.VIEW_ORDER_EXT,
         component: SurveyOrderTaskWfComponent,
         data: {
           title: 'Survey Order Task'
         },
       },
       {
-        path: 'View',
+        path: PathConstant.VIEW,
         component: SurveyOrderViewComponent,
         data: {
           title: 'Survey Order View'
         },
       },
       {
-        path: 'View/Task',
+        path: PathConstant.SRVY_VIEW_TASK,
         component: SurveyTaskViewComponent,
         data: {
           title: 'Survey Task View'

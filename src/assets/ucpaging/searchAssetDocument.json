@@ -221,7 +221,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/Asset/Document/Detail",
+          "path": "ASSET_DOC_DETAIL",
           "param": [
             {
               "type": "mode",

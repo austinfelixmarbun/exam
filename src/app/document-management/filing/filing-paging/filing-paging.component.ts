@@ -5,6 +5,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CabinetWithListRackObj } from 'app/shared/model/document-management/CabinetWithListRackObj.Model';
 import { RackWithListFilingObj } from 'app/shared/model/document-management/RackWithListFilingObj.Model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-filing-paging',
@@ -14,6 +15,9 @@ export class FilingPagingComponent implements OnInit {
   Cabinet: CabinetWithListRackObj = new CabinetWithListRackObj();
   Rack: RackWithListFilingObj = new RackWithListFilingObj();
 
+  readonly CancelLink: string = NavigationConstant.DOC_MNGMNT_RACK_PAGING;
+  readonly AddLink: string = NavigationConstant.DOC_MNGMNT_FILING_ADD_EDIT;
+  readonly EditLink: string = NavigationConstant.BACK_TO_ADD_EDIT;
   constructor(private http: HttpClient, private router: Router, private activeRoute: ActivatedRoute, private toastr: NGXToastrService) { 
     this.activeRoute.queryParams.subscribe(
       params => {
@@ -22,7 +26,7 @@ export class FilingPagingComponent implements OnInit {
           this.Cabinet.CabinetCode = params['CabinetCode']
         }
         else {
-          this.router.navigateByUrl("/DocumentManagement/Rack/Paging")
+          this.router.navigateByUrl(NavigationConstant.DOC_MNGMNT_RACK_PAGING)
         }
       }
     );
@@ -50,6 +54,6 @@ export class FilingPagingComponent implements OnInit {
 
   editRack(index){
     let filingCode = this.Rack.ListFiling[index].FilingCode;
-    this.router.navigate(["/DocumentManagement/Filing/AddEdit"], { queryParams: { FilingCode: filingCode, Mode: 'Edit' } });
+    this.router.navigate([NavigationConstant.DOC_MNGMNT_FILING_ADD_EDIT], { queryParams: { FilingCode: filingCode, Mode: 'Edit' } });
   }
 }

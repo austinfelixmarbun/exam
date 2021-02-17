@@ -6,6 +6,7 @@ import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-ref-form-role-paging',
@@ -17,6 +18,8 @@ export class RefFormRolePagingComponent implements OnInit {
   inputPagingObj: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
+  readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING;
+  readonly AddLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_ROLE_MAP_ADD;
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       this.RefFormId = params["RefFormId"];

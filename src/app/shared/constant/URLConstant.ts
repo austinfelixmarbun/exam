@@ -1,4 +1,5 @@
 import { environment } from "environments/environment"; 
+import { NavigationConstant } from "../NavigationConstant";
 
 export class URLConstant {
 
@@ -266,7 +267,7 @@ export class URLConstant {
     public static LoginByRole = "/Authenticate/LoginByRole";
     public static LoginByToken = "/Authenticate/LoginByToken";
     public static UpdateToken = "/Authenticate/UpdateRole";
-    public static LoginURLFrontEnd = "/pages/login";
+    public static LoginURLFrontEnd = NavigationConstant.PAGES_LOGIN;
 
     //FORM FEATURE
     public static GetListRefFeature = "/RefFeature/GetListRefFeature";

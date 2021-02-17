@@ -10,6 +10,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-branch-office-member-add',
@@ -23,6 +24,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
   tempDataExists = false;
 
+  readonly CancelLink: string = NavigationConstant.VENDOR_BRANCH_MBR_PAGING;
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -84,7 +86,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
 
     this.http.post(URLConstant.AddListVendorOfficeMember, obj).subscribe(
       (response) => {
-        AdInsHelper.RedirectUrl(this.router,["/Vendor/Branch/Member/Paging"],{ "VendorId": this.VendorId });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_MBR_PAGING],{ "VendorId": this.VendorId });
       });
   }
 }

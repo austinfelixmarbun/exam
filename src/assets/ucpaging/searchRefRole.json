@@ -96,7 +96,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/SystemSetting/RoleForm",
+          "path": "SYSTEM_SETTING_ROLE_FORM",
           "param": [
             {
               "type": "RefRoleId",
@@ -112,7 +112,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/SystemSetting/Role/Detail",
+          "path": "SYSTEM_SETTING_ROLE_DETAIL",
           "param": [
             {
               "type": "RefRoleId",

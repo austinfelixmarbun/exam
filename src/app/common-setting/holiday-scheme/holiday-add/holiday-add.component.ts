@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { HolidayObj } from 'app/shared/model/HolidayObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
     selector: 'app-holiday-add',
@@ -31,6 +32,7 @@ export class HolidayAddComponent implements OnInit {
     holidaySchmHId: any;
     criteria: CriteriaObj[] = [];
 
+    readonly CancelLink: string = NavigationConstant.CS_HOLIDAY;
     constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
         this.route.queryParams.subscribe(params => {
             this.HolidaySchmId = params["HolidaySchmHId"];
@@ -72,7 +74,7 @@ export class HolidayAddComponent implements OnInit {
             this.holidayObj.RowVersion = this.result.RowVersion;
             this.http.post(URLConstant.EditHolidaySchmH, this.holidayObj).subscribe(
                 (response) => {
-                    AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Holiday'],{})
+                    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY],{})
                     this.toastr.successMessage(response['message']);
                 });
         }
@@ -83,7 +85,7 @@ export class HolidayAddComponent implements OnInit {
             this.holidayObj.RowVersion = "";
 
             this.http.post(URLConstant.AddHolidaySchmH, this.holidayObj).subscribe((response) => {
-                AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Holiday'],{})
+                AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY],{})
                 this.toastr.successMessage(response['message']);
             });
         }

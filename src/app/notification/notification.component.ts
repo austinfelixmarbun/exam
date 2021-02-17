@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-notification',
@@ -39,7 +40,7 @@ export class NotificationComponent implements OnInit {
       (response) => {
         this.toastr.successMessage(response['message']);
         this.router.navigateByUrl('/office', { skipLocationChange: true }).then(() =>
-          AdInsHelper.RedirectUrl(this.router,["/notification"],{})
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.NOTIF],{})
           );
           
       }

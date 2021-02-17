@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WhereValueObj, UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-product-ho-paging',
@@ -13,6 +14,7 @@ export class ProductHOPagingComponent implements OnInit {
 
   inputPagingObj: any;
 
+  readonly AddLink: string = NavigationConstant.PRODUCT_HO_ADD;
   constructor(private route: ActivatedRoute,
     private router: Router) { }
 
@@ -47,10 +49,10 @@ export class ProductHOPagingComponent implements OnInit {
 
   EditButtonClick(e) {
     if (e.RowObj.DraftProdHId == null) {
-      AdInsHelper.RedirectUrl(this.router,["/Product/HOadd"],{ "ProdHId": e.RowObj.prodHId, "mode": "edit" });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_ADD],{ "ProdHId": e.RowObj.prodHId, "mode": "edit" });
     }
     else {
-      AdInsHelper.RedirectUrl(this.router,["/Product/HOadd"],{ "ProdHId": e.RowObj.DraftProdHId, "mode": "edit" });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_ADD],{ "ProdHId": e.RowObj.DraftProdHId, "mode": "edit" });
     }
   }
 }

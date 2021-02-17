@@ -4,6 +4,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-negative-asset',
@@ -12,6 +13,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 export class NegativeAssetComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();
 
+  readonly AddLink: string = NavigationConstant.ASSET_NEG_DETAIL;
   constructor() { }
 
   ngOnInit() {

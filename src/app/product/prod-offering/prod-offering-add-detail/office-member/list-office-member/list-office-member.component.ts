@@ -9,6 +9,7 @@ import { empty } from 'rxjs';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-list-office-member-offering',
@@ -136,10 +137,10 @@ export class ListOfficeMemberComponentOffering implements OnInit {
 
   BackToPaging() {
     if (this.source == "return") {
-      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/Returnpaging"],{ });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PROD_OFFERING_RTN_PAGING],{ });
     }
     else {
-      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/Paging"],{ });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PROD_OFFERING_PAGING],{ });
     }
   }
 }

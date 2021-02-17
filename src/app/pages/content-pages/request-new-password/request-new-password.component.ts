@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { environment } from 'environments/environment';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 
 
@@ -47,6 +48,6 @@ export class RequestNewPasswordComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['login'], { relativeTo: this.route.parent , skipLocationChange: true});
+    this.router.navigate([NavigationConstant.PAGES_LOGIN], { skipLocationChange: true});
   }
 }

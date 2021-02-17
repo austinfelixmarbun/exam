@@ -5,6 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-ho-paging',
@@ -14,6 +15,7 @@ export class VendorHoPagingComponent implements OnInit {
   inputPagingObj: any;
   arrCrit: any;
 
+  readonly AddLink: string = NavigationConstant.VENDOR_HO_DETAIL;
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorHO.json";

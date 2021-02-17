@@ -14,6 +14,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { map, mergeMap, first } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 ;
 
 @Component({
@@ -50,6 +51,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
     IsActive: [false],
   });
 
+  readonly CancelLink: string = NavigationConstant.ASSET_MASTER_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
@@ -292,7 +294,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         ).subscribe(
           (response) => {
             this.toastr.successMessage(response[response.length - 1]["Message"]);
-            AdInsHelper.RedirectUrl(this.router,["/Asset/AssetMaster/Paging"],{});
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});
           });
   
 
@@ -302,7 +304,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
-            AdInsHelper.RedirectUrl(this.router,["/Asset/AssetMaster/Paging"],{});
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});
   
           }
         );
@@ -365,7 +367,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         forkJoin(observableBatch).subscribe(
           (response) => {
             this.toastr.successMessage(response[response.length - 1]["Message"]);
-            AdInsHelper.RedirectUrl(this.router,["/Asset/AssetMaster/Paging"],{});
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});
           },
           (error) => {
             console.log(error);
@@ -375,7 +377,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
-            AdInsHelper.RedirectUrl(this.router,["/Asset/AssetMaster/Paging"],{});
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});
           }
         );
          

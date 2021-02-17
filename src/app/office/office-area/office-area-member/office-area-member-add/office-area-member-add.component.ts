@@ -10,6 +10,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-office-area-member-add',
@@ -21,6 +22,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
   tempDataExists = false;
 
+  readonly CancelLink: string = NavigationConstant.OFFICE_AREA_MEMBER;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService,private location: Location,) {
     this.route.queryParams.subscribe(params => {
       if (params['RefOfficeAreaId'] != null) {
@@ -77,7 +79,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
     this.http.post(URLConstant.AddRefOfficeAreaMember, RequestItem).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
-        AdInsHelper.RedirectUrl(this.router,["/Office/OfficeArea/Member"],{ "RefOfficeAreaId": this.RefOfficeAreaId });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_AREA_MEMBER],{ "RefOfficeAreaId": this.RefOfficeAreaId });
       });
     
   }

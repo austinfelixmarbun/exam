@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-view-rack',
@@ -37,7 +38,7 @@ export class ViewRackComponent implements OnInit {
         this.responseRack = response;
       },
       error => {
-        this.router.navigateByUrl('Error');
+        this.router.navigateByUrl(NavigationConstant.ERROR);
       }
     );
 
@@ -47,7 +48,7 @@ export class ViewRackComponent implements OnInit {
         this.responseFiling = response['ReturnObject'];
       },
       error => {
-        this.router.navigateByUrl('Error');
+        this.router.navigateByUrl(NavigationConstant.ERROR);
       }
     );
   }

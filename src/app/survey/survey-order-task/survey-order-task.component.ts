@@ -10,6 +10,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-survey-order-task',
@@ -39,6 +40,8 @@ export class SurveyOrderTaskComponent implements OnInit {
   VendorObj: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
+  readonly CancelLink: string = NavigationConstant.SRVY_PAGING;
+  readonly ViewLink: string = NavigationConstant.VIEW_SRVY_TASK;
   constructor(private fb: FormBuilder, private modalService: NgbModal,
     private http: HttpClient, private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -91,7 +94,7 @@ export class SurveyOrderTaskComponent implements OnInit {
     this.http.post(URLConstant.SendSrvyOrder, this.SrvyOrderObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
-        AdInsHelper.RedirectUrl(this.router,["/Survey/Paging"],{ });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SRVY_PAGING],{ });
       }
     );
   }

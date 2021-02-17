@@ -11,6 +11,7 @@ import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-master-type-paging',
@@ -36,6 +37,7 @@ export class MasterTypePagingComponent implements OnInit {
   orderByValue: boolean = true;
   foundationUrl: any = environment.FoundationR3Url;
 
+  readonly EditLink: string = NavigationConstant.SYSTEM_SETTING_ROLE_DETAIL;
   constructor(
     private service: NGXToastrService,
     private https: HttpClient

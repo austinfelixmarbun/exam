@@ -177,7 +177,7 @@
             "type": "link",
             "position": "center",
             "property": "SrvyOrderNo",
-            "path": "/View/Survey/SurveyOrder",
+            "path": "VIEW_SRVY_ORDER",
             "target": "_blank",
             "param": [
                 {
@@ -238,7 +238,7 @@
                             ],
                             "result" : {
                                 "type": "url",
-                                "path" : "/Survey/Task",
+                                "path" : "SRVY_TASK",
                                 "param" : [
                                     {
                                         "type" : "SrvyOrderId",

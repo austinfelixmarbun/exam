@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-customer-view-coy-other',
@@ -32,7 +33,7 @@ export class CustomerViewCoyOtherComponent implements OnInit {
         this.responseCustAttr = response['ReturnObject'];
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
   }

@@ -6,6 +6,7 @@ import { CriteriaObj } from "app/shared/model/CriteriaObj.Model";
 import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
 import { URLConstant } from "app/shared/constant/URLConstant";
 import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
+import { NavigationConstant } from "app/shared/NavigationConstant";
 
 @Component({
   selector: 'app-office-group-member',
@@ -18,6 +19,8 @@ export class OfficeGroupMemberComponent implements OnInit {
   inputPagingObj: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
+  readonly CancelLink: string = NavigationConstant.OFFICE_PAGING;
+  readonly AddLink: string = NavigationConstant.OFFICE_GROUP_MEMBER_ADD;
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       this.RefOfficeId = params["RefOfficeId"];

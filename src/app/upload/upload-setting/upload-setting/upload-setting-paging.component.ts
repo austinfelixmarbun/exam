@@ -10,6 +10,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { Observable } from 'rxjs';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-upload-setting-paging',
@@ -40,6 +41,7 @@ export class UploadSettingPagingComponent implements OnInit {
   verfTrxTypeId: any;
   exportData: any;
 
+  readonly CancelLink: string = NavigationConstant.UPLOAD_SETTING_EDIT;
   constructor(private http: HttpClient,
     private spinner: NgxSpinnerService,
     private toastr: NGXToastrService,

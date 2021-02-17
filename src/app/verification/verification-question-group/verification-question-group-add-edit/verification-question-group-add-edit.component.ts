@@ -8,6 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionGrpHObj } from 'app/shared/model/VerfQuestionGrpHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-verification-question-group-add-edit',
@@ -21,6 +22,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
   isActive: boolean = true;
   foundationUrl: string = environment.FoundationR3Url;
 
+  readonly CancelLink: string = NavigationConstant.VERIF_QA_GRP_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.VerfQuestionGrpHId = params["VerfQuestionGrpHId"];
@@ -63,7 +65,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditVerfQuestionGrpH, this.verfQuestionGrpHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionGroup/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_GRP_PAGING],{});
         });
     }
     else {
@@ -71,7 +73,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddVerfQuestionGrpH, this.verfQuestionGrpHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Verification/QuestionGroup/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_GRP_PAGING],{});
         });
     }
   }

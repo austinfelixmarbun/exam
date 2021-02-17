@@ -11,6 +11,7 @@ import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.c
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
     selector: 'edit-company',
@@ -37,6 +38,7 @@ export class EditCompanyComponent implements OnInit {
     licenseNo: any;
     registrationNo: any;
 
+    readonly CancelLink: string = NavigationConstant.COY;
     constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refCoyId"];
@@ -113,14 +115,14 @@ export class EditCompanyComponent implements OnInit {
             refCoyObj.RowVersion = this.result.RowVersion;
             this.http.post(this.editUrl, refCoyObj).subscribe(
                 (response) => {
-                    AdInsHelper.RedirectUrl(this.router,["/company"],{ });
+                    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.COY],{ });
                 });
         }
         else {
             this.editUrl = this.foundationUrl + URLConstant.AddCoyCommissioner;
             this.http.post(this.editUrl, refCoyObj).subscribe(
                 (response) => {
-                    AdInsHelper.RedirectUrl(this.router,["/company"],{ });
+                    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.COY],{ });
                 });
         }
     }

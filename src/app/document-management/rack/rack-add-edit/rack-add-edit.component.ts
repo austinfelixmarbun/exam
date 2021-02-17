@@ -6,6 +6,7 @@ import { RackObj } from 'app/shared/model/document-management/RackObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { environment } from 'environments/environment';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-rack-add-edit',
@@ -67,7 +68,7 @@ export class RackAddEditComponent implements OnInit {
       }
     }
     else{
-      this.router.navigateByUrl("/DocumentManagement/Cabinet/Paging");
+      this.router.navigateByUrl(NavigationConstant.DOC_MNGMNT_CABINET_PAGING);
     }
   }
 
@@ -83,7 +84,7 @@ export class RackAddEditComponent implements OnInit {
       this.http.post(environment.FoundationR3Url + "/DocManagement/EditRack", this.rack).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");
-          this.router.navigate(["/DocumentManagement/Rack/Paging"], { queryParams: { CabinetCode: this.CabinetCode } });
+          this.router.navigate([NavigationConstant.DOC_MNGMNT_RACK_PAGING], { queryParams: { CabinetCode: this.CabinetCode } });
         },
         (error) => {
           console.log(error);
@@ -95,7 +96,7 @@ export class RackAddEditComponent implements OnInit {
       this.http.post(environment.FoundationR3Url + "/DocManagement/AddRack", this.rack).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");
-          this.router.navigate(["/DocumentManagement/Rack/Paging"], { queryParams: { CabinetCode: this.CabinetCode } });
+          this.router.navigate([NavigationConstant.DOC_MNGMNT_RACK_PAGING], { queryParams: { CabinetCode: this.CabinetCode } });
         },
         (error) => {
           console.log(error);
@@ -105,6 +106,6 @@ export class RackAddEditComponent implements OnInit {
   }
 
   backClick(){
-    this.router.navigate(["/DocumentManagement/Rack/Paging"], { queryParams: { CabinetCode: this.CabinetCode } });
+    this.router.navigate([NavigationConstant.DOC_MNGMNT_RACK_PAGING], { queryParams: { CabinetCode: this.CabinetCode } });
   }
 }
