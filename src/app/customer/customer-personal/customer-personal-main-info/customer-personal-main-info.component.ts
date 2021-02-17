@@ -593,7 +593,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
 
   setValidator(pattern: string) {
     if (pattern != undefined) {
-      this.CustomerPersonalForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.CustomerPersonalForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
       this.CustomerPersonalForm.controls[this.controlNameIdNo].updateValueAndValidity();
     }
   }

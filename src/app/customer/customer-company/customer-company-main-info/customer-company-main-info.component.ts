@@ -164,71 +164,71 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     else {
       this.IsSupplier = false;
       
-      var refMasterTypeCodeCompanyType = {
-        RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
-        RowVersion: ""
-      }
-      this.http.post(URLConstant.GetListActiveRefMaster, refMasterTypeCodeCompanyType).subscribe(
-        (response) => {
-          this.tempCoyType = response[CommonConstant.ReturnObj];
-          if (this.tempCoyType.length > 0) {
-            this.CustomerCompanyForm.patchValue({
-              MrCompanyTypeCode: this.tempCoyType[0].Key
-            });
-          }
-        }
-      );
-      var refMasterObjCustModel = {
-        MrCustTypeCode: CommonConstant.CustTypeCompany
-      }
-      this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
-        (response) => {
-          this.tempCustModel = response["ReturnObject"];
-          this.CustomerCompanyForm.patchValue({
-            CustModel: this.tempCustModel[0].Key
-          });
-        }
-      );
+      // var refMasterTypeCodeCompanyType = {
+      //   RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
+      //   RowVersion: ""
+      // }
+      // this.http.post(URLConstant.GetListActiveRefMaster, refMasterTypeCodeCompanyType).subscribe(
+      //   (response) => {
+      //     this.tempCoyType = response[CommonConstant.ReturnObj];
+      //     if (this.tempCoyType.length > 0) {
+      //       this.CustomerCompanyForm.patchValue({
+      //         MrCompanyTypeCode: this.tempCoyType[0].Key
+      //       });
+      //     }
+      //   }
+      // );
+      // var refMasterObjCustModel = {
+      //   MrCustTypeCode: CommonConstant.CustTypeCompany
+      // }
+      // this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+      //   (response) => {
+      //     this.tempCustModel = response["ReturnObject"];
+      //     this.CustomerCompanyForm.patchValue({
+      //       CustModel: this.tempCustModel[0].Key
+      //     });
+      //   }
+      // );
       
-      this.custCompanyObj = new CustCompanyObj();
-      this.custCompanyObj.CustId = this.CustId;
-      this.http.post(URLConstant.GetCustByCustId, this.custObj).subscribe(
-        (response) => {
-          this.tempCustObj = response;
-          this.CustomerCompanyForm.patchValue({
-            CustName: this.tempCustObj.CustName,
-            CustModel: this.tempCustObj.MrCustModelCode,
-            TaxIdNo: this.tempCustObj.TaxIdNo,
-            IsVip: this.tempCustObj.IsVip,
-            IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
-            VipNotes: this.tempCustObj.VipNotes,
-          });
-          if (this.tempCustObj.VipNotes != null) {
-            this.VipNotesRequired = true;
-          } else {
-            this.VipNotesRequired = false;
-          }
-          if (this.tempCustObj.IsVip == false) {
-            this.CustomerCompanyForm.controls.VipNotes.disable();
-          }
-          this.CustomerCompanyForm.controls["TaxIdNo"].disable();
+      // this.custCompanyObj = new CustCompanyObj();
+      // this.custCompanyObj.CustId = this.CustId;
+      // this.http.post(URLConstant.GetCustByCustId, this.custObj).subscribe(
+      //   (response) => {
+      //     this.tempCustObj = response;
+      //     this.CustomerCompanyForm.patchValue({
+      //       CustName: this.tempCustObj.CustName,
+      //       CustModel: this.tempCustObj.MrCustModelCode,
+      //       TaxIdNo: this.tempCustObj.TaxIdNo,
+      //       IsVip: this.tempCustObj.IsVip,
+      //       IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
+      //       VipNotes: this.tempCustObj.VipNotes,
+      //     });
+      //     if (this.tempCustObj.VipNotes != null) {
+      //       this.VipNotesRequired = true;
+      //     } else {
+      //       this.VipNotesRequired = false;
+      //     }
+      //     if (this.tempCustObj.IsVip == false) {
+      //       this.CustomerCompanyForm.controls.VipNotes.disable();
+      //     }
+      //     this.CustomerCompanyForm.controls["TaxIdNo"].disable();
 
-          this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.tempCustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
-            (response: CustAddrObj) => {
-              this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
-              this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
-              this.UcAddressObj.AreaCode1 = response.AreaCode1;
-              this.UcAddressObj.AreaCode2 = response.AreaCode2;
-              this.UcAddressObj.AreaCode3 = response.AreaCode3;
-              this.UcAddressObj.AreaCode4 = response.AreaCode4;
-              this.UcAddressObj.Addr = response.Addr;
-              this.UcAddressObj.City = response.City;
-              this.inputAddressObj.default = this.UcAddressObj;
-              this.inputAddressObj.inputField = this.inputFieldObj;
-            }
-          );
-        }
-      );
+      //     this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.tempCustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
+      //       (response: CustAddrObj) => {
+      //         this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
+      //         this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
+      //         this.UcAddressObj.AreaCode1 = response.AreaCode1;
+      //         this.UcAddressObj.AreaCode2 = response.AreaCode2;
+      //         this.UcAddressObj.AreaCode3 = response.AreaCode3;
+      //         this.UcAddressObj.AreaCode4 = response.AreaCode4;
+      //         this.UcAddressObj.Addr = response.Addr;
+      //         this.UcAddressObj.City = response.City;
+      //         this.inputAddressObj.default = this.UcAddressObj;
+      //         this.inputAddressObj.inputField = this.inputFieldObj;
+      //       }
+      //     );
+      //   }
+      // );
     }
   }
 
@@ -261,10 +261,10 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
         this.CustomerCompanyForm.patchValue({
           CustName: this.SupplName,
           TaxIdNo: this.SupplierObj.TaxIdNo,
-          CustModel: '',
-          IsVip: '',
-          IsAffiliateWithMf: '',
-          VipNotes: '',
+          // CustModel: '',
+          // IsVip: '',
+          // IsAffiliateWithMf: '',
+          // VipNotes: '',
         });
       });
 

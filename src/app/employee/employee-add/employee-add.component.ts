@@ -107,6 +107,65 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    if(this.pageType == 'edit'){
+      this.RefEmpForm = this.fb.group({
+        RefUserId: [0, [Validators.required]],
+        Username: ['', [Validators.required]],
+        IsLockedOut: [false],
+        LoggedInMethod: ['DB'],
+        RefEmpId: [0, [Validators.required]],
+        EmpNo: ['', [Validators.required]],
+        EmpName: ['', [Validators.required]],
+        JoinDt: ['', [Validators.required]],
+        MrIdTypeCode: ['', [Validators.required]],
+        IdNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        TaxIdNo: [''],
+        IsExt: [false],
+        IsActive: [true],
+        IsLeave: [false],
+        MobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
+        MobilePhnNo2: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
+        Email1: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+        Email2: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+        RowVersion: [''],
+        EmpBankAccId: [0, [Validators.required]],
+        RefBankId: [0, [Validators.required]],
+        BankBranch: ['', [Validators.required]],
+        BankBranchRegCode: [''],
+        BankAccNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        BankAccName: ['', [Validators.required]]
+      });
+    }else{
+      this.RefEmpForm = this.fb.group({
+        RefUserId: [0],
+        Username: ['', [Validators.required]],
+        IsLockedOut: [false],
+        LoggedInMethod: ['DB'],
+        RefEmpId: [0],
+        EmpNo: ['', [Validators.required]],
+        EmpName: ['', [Validators.required]],
+        JoinDt: ['', [Validators.required]],
+        MrIdTypeCode: ['', [Validators.required]],
+        IdNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        TaxIdNo: [''],
+        IsExt: [false],
+        IsActive: [true],
+        IsLeave: [false],
+        MobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
+        MobilePhnNo2: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
+        Email1: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+        Email2: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+        RowVersion: [''],
+        EmpBankAccId: [0],
+        RefBankId: [0, [Validators.required]],
+        BankBranch: ['', [Validators.required]],
+        BankBranchRegCode: [''],
+        BankAccNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        BankAccName: ['', [Validators.required]]
+      });
+    }
+
     this.customPattern = new Array<CustomPatternObj>();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -182,6 +241,8 @@ export class EmployeeAddComponent implements OnInit {
           });
           
           this.inputLookupBankObj.nameSelect = this.refBankObj.BankName;
+          this.inputLookupBankObj.jsonSelect = { bankName: this.refBankObj.BankName };
+
           this.addressObj.Addr = this.refEmpObj.Addr;
           this.addressObj.AreaCode4 = this.refEmpObj.AreaCode4;
           this.addressObj.AreaCode3 = this.refEmpObj.AreaCode3;
@@ -213,8 +274,8 @@ export class EmployeeAddComponent implements OnInit {
 
   getLookupBankResponse(e) {
     this.RefEmpForm.patchValue({
-      RefBankId: e.RefBankId,
-      BankBranchRegCode: e.RegRptCode
+      RefBankId: e.refBankId,
+      BankBranchRegCode: e.regRptCode
     });
   }
 
@@ -364,7 +425,7 @@ export class EmployeeAddComponent implements OnInit {
 
   setValidator(pattern: string) {
     if (pattern != undefined) {
-      this.RefEmpForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.RefEmpForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
       this.RefEmpForm.controls[this.controlNameIdNo].updateValueAndValidity();
     }
   }
