@@ -7,6 +7,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UpdateCustPersonalFinDataObj } from 'app/shared/model/UpdateMasterCust/UpdateCustPersonalFinDataObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -311,7 +312,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
 
   back(){
     // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
-    AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
+    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
   }
 
   SaveValue(){

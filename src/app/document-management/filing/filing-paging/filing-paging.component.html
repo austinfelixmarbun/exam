@@ -5,11 +5,11 @@
         
         <div class="form-actions right">
           <span style="display: block; float:right;">
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/DocumentManagement/Rack/Paging']" 
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" 
             [queryParams]="{CabinetCode: Cabinet.CabinetCode}" translate>
               <i class="fa fa-arrow-circle-left"></i> Back
             </button>
-            <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/DocumentManagement/Filing/AddEdit']" 
+            <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="[AddLink]" 
             [queryParams]="{ Mode: 'Add', CabinetCode: Cabinet.CabinetCode, RackCode: Rack.RackCode}" translate>
               <i class="ft-plus-circle"></i> Add
             </button>
@@ -85,7 +85,7 @@
                   <td class="align-center" *ngIf="item.IsActive === true">Yes</td>
                   <td class="align-center" *ngIf="item.IsActive === false">No</td>
                   <td class="align-center">
-                    <a class="success p-0" [routerLink]="['../AddEdit']" [queryParams]="{ Mode: 'Edit', RackCode: Rack.RackCode, CabinetCode: Cabinet.CabinetCode, FilingCode: item.FilingCode}">
+                    <a class="success p-0" [routerLink]="[EditLink]" [queryParams]="{ Mode: 'Edit', RackCode: Rack.RackCode, CabinetCode: Cabinet.CabinetCode, FilingCode: item.FilingCode}">
                       <i class="ft-edit-2 font-medium-3 mr-2"></i>
                     </a>
                   </td>

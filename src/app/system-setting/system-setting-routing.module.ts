@@ -18,132 +18,133 @@ import { RefFormRolePagingComponent } from './ref-form/ref-form-role-paging/ref-
 import { RoleFormPagingComponent } from './role/role-form-paging/role-form-paging.component';
 import { AttributeComponent } from './attribute/attribute.component';
 import { AttributeDetailComponent } from './attribute/attribute-detail/attribute-detail.component';
+import { PathConstant } from 'app/shared/PathConstant';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'Notification',
+        path: PathConstant.NOTIF,
         component: NotificationPagingComponent,
         data: {
           title: 'Notification Paging'
         }
       },
       {
-        path: 'Notification/Detail',
+        path: PathConstant.NOTIF_DETAIL,
         component: NotificationAddEditComponent,
         data: {
           title: 'Notification Add Edit'
         }
       },
       {
-        path: 'NotificationApproval',
+        path: PathConstant.NOTIF_APPRV,
         component: NotificationApprovalPagingComponent,
         data: {
           title: 'Notification Approval Paging'
         }
       },
       {
-        path: 'NotificationApproval/Detail',
+        path: PathConstant.NOTIF_APPRV_DETAIL,
         component: NotificationApprovalDetailComponent,
         data: {
           title: 'Notification Add Edit'
         }
       },
       {
-        path: 'RefUser',
+        path: PathConstant.REF_USER,
         component: UserPagingComponent,
         data: {
           title: 'User Maintenance Paging'
         },
       },
       {
-        path: 'Role',
+        path: PathConstant.ROLE,
         component: RolePagingComponent,
         data: {
           title: 'User Maintenance Paging'
         },
       },
       {
-        path: 'Role/Detail',
+        path: PathConstant.ROLE_DETAIL,
         component: RoleAddEditComponent,
         data: {
           title: 'User Maintenance Add Edit'
         },
       },
       {
-        path: 'UserRole',
+        path: PathConstant.USER_ROLE,
         component: UserRoleComponent,
         data: {
           title: 'Assign User to Role'
         },
       },
       {
-        path: 'RoleUser',
+        path: PathConstant.ROLE_USER,
         component: RoleUserComponent,
         data: {
           title: 'Assign Role to User'
         },
       },
       {
-        path: 'RoleForm',
+        path: PathConstant.ROLE_FORM,
         component: RoleFormPagingComponent,
         data: {
           title: 'Assign Form to Role Paging'
         },
       },
       {
-        path: 'RoleForm/Add',
+        path: PathConstant.ROLE_FORM_ADD,
         component: RoleFormComponent,
         data: {
           title: 'Assign Form to Role Add'
         },
       },
       {
-        path: 'ChangePassword',
+        path: PathConstant.CHANGE_PASSWORD,
         component: UserChangePasswordComponent,
         data: {
           title: 'Change Password Maintenance'
         },
       },
       {
-        path: 'RefForm/Paging',
+        path: PathConstant.REF_FORM_PAGING,
         component: RefFormPagingComponent,
         data: {
           title: 'Ref Form Paging'
         },
       },
       {
-        path: 'RefForm/Detail',
+        path: PathConstant.REF_FORM_DETAIL,
         component: RefFormDetailComponent,
         data: {
           title: 'Ref Form Detail'
         },
       },
       {
-        path: 'RefForm/RoleMapping',
+        path: PathConstant.REF_FORM_ROLE_MAP,
         component: RefFormRolePagingComponent,
         data: {
           title: 'Ref Form Role Mapping Paging'
         },
       },
       {
-        path: 'RefForm/RoleMapping/Add',
+        path: PathConstant.REF_FORM_ROLE_MAP_ADD,
         component: RefFormRoleMappingComponent,
         data: {
           title: 'Ref Form Role Mapping Add'
         },
       },
       {
-        path: 'Attribute/Paging',
+        path: PathConstant.SYS_ATTR_PAGING,
         component: AttributeComponent,
         data: {
           title: 'Attribute Paging'
         },
       },
       {
-        path: 'Attribute/Detail',
+        path: PathConstant.SYS_ATTR_DETAIL,
         component: AttributeDetailComponent,
         data: {
           title: 'Attribute Detail'

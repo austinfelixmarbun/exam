@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UcPagingObj, WhereValueObj } from '../../../shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-product-return-ho-paging',
@@ -43,11 +44,11 @@ export class ProductReturnHoPagingComponent implements OnInit {
     
     if(e.RowObj.DraftProdHId == null)
     {
-      AdInsHelper.RedirectUrl(this.router,["/Product/HOadd"],{ "ProdHId": e.RowObj.CurrentProdHId, "mode" : "edit", "source" : "return" });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_ADD],{ "ProdHId": e.RowObj.CurrentProdHId, "mode" : "edit", "source" : "return" });
     }
     else
     {
-      AdInsHelper.RedirectUrl(this.router,["/Product/HOadd"],{ "ProdHId": e.RowObj.DraftProdHId, "mode" : "edit", "source" : "return" });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_ADD],{ "ProdHId": e.RowObj.DraftProdHId, "mode" : "edit", "source" : "return" });
     }
   }
 }

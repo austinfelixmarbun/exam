@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
     selector: 'add-app-business-unit',
@@ -27,6 +28,7 @@ export class AddBusinessUnitComponent implements OnInit {
     foundationUrl: string = environment.FoundationR3Url;
     editUrl: any;
 
+    readonly CancelLink: string = NavigationConstant.ORG_BZ_UNIT;
     constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
         this.route.queryParams.subscribe(params => {
             this.RefBizUnitId = params["RefBizUnitId"];
@@ -76,7 +78,7 @@ export class AddBusinessUnitComponent implements OnInit {
             this.http.post(this.editUrl, this.bizUnitObj).subscribe(
                 (response) => {
                     this.toastr.successMessage(response["message"]);
-                    AdInsHelper.RedirectUrl(this.router,["/Organization/BusinessUnit"],{});
+                    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ORG_BZ_UNIT],{});
                 });
         }
         else {
@@ -84,7 +86,7 @@ export class AddBusinessUnitComponent implements OnInit {
             this.http.post(this.editUrl, this.bizUnitObj).subscribe(
                 (response) => {
                     this.toastr.successMessage(response["message"]);
-                    AdInsHelper.RedirectUrl(this.router,["/Organization/BusinessUnit"],{});
+                    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ORG_BZ_UNIT],{});
                 });
         }
     }

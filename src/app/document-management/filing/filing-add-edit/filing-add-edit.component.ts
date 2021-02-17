@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FilingObj } from 'app/shared/model/document-management/FilingObj.Model';
 import { CabinetWithListRackObj } from 'app/shared/model/document-management/CabinetWithListRackObj.Model';
 import { environment } from 'environments/environment';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-filing-add-edit',
@@ -94,7 +95,7 @@ export class FilingAddEditComponent implements OnInit {
       }
     }
     else{
-      this.router.navigateByUrl("/DocumentManagement/Rack/Paging");
+      this.router.navigateByUrl(NavigationConstant.DOC_MNGMNT_RACK_PAGING);
     }
   }
 
@@ -110,7 +111,7 @@ export class FilingAddEditComponent implements OnInit {
       this.http.post(environment.FoundationR3Url + "/DocManagement/EditFiling", this.filing).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");
-          this.router.navigate(["/DocumentManagement/Filing/Paging"], { queryParams: { CabinetCode: this.Cabinet.CabinetCode, RackCode: this.rackWithListFilling.RackCode } });
+          this.router.navigate([NavigationConstant.DOC_MNGMNT_FILING_PAGING], { queryParams: { CabinetCode: this.Cabinet.CabinetCode, RackCode: this.rackWithListFilling.RackCode } });
         },
         (error) => {
           console.log(error);
@@ -122,7 +123,7 @@ export class FilingAddEditComponent implements OnInit {
       this.http.post(environment.FoundationR3Url + "/DocManagement/AddFiling", this.filing).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");
-          this.router.navigate(["/DocumentManagement/Filing/Paging"], { queryParams: { CabinetCode: this.Cabinet.CabinetCode, RackCode: this.rackWithListFilling.RackCode } });
+          this.router.navigate([NavigationConstant.DOC_MNGMNT_FILING_PAGING], { queryParams: { CabinetCode: this.Cabinet.CabinetCode, RackCode: this.rackWithListFilling.RackCode } });
         },
         (error) => {
           console.log(error);
@@ -132,6 +133,6 @@ export class FilingAddEditComponent implements OnInit {
   }
 
   backClick(){
-    this.router.navigate(["/DocumentManagement/Filing/Paging"], { queryParams: { CabinetCode: this.Cabinet.CabinetCode, RackCode: this.rackWithListFilling.RackCode} });
+    this.router.navigate([NavigationConstant.DOC_MNGMNT_FILING_PAGING], { queryParams: { CabinetCode: this.Cabinet.CabinetCode, RackCode: this.rackWithListFilling.RackCode} });
   }
 }

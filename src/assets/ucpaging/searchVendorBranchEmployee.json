@@ -130,7 +130,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/Vendor/Branch/Employee/Detail",
+          "path": "VENDOR_BRANCH_EMP_DETAIL",
           "param": [
             {
               "type": "VendorId",

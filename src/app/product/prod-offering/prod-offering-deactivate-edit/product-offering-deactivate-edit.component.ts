@@ -14,6 +14,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { UcInputRFAObj } from 'app/shared/model/UcInputRFAObj.Model';
 import { UcapprovalcreateComponent } from '@adins/Ucapprovalcreate';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-product-offering-deactivate-edit',
@@ -49,7 +50,7 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
   }
   ApprovalCreateOutput: any;
 
-
+  readonly CancelLink: string = NavigationConstant.PRODUCT_OFFERING_DEACTIVATE;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
 
     this.editUrl = URLConstant.RequestOfferingDeactivationNew;
@@ -137,7 +138,7 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
     this.http.post(this.editUrl, this.prodOfferingHDeactivateObj).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);
-        AdInsHelper.RedirectUrl(this.router, ["/Product/OfferingDeactivate"], {});
+        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.PRODUCT_OFFERING_DEACTIVATE], {});
       }
     );
 

@@ -1,6 +1,6 @@
 <div class="ucSearch-Button-Right">
     <span class="mr-1">
-        <button type="button" class="addButton" style="margin-top:15px;" [routerLink]="['/Employee/EmployeePositionAddEdit']" skipLocationChange
+        <button type="button" class="addButton" style="margin-top:15px;" [routerLink]="[AddLink]" skipLocationChange
         [queryParams]="{refEmpId:refEmpId,empNo:empNo,empName:empName}" translate>
             <i class="ft-plus-circle"></i> Add
         </button>
@@ -59,7 +59,7 @@
         </td>
         <td class="text-left">{{item.roleName}}</td>
         <td>
-          <a class="success p-0" data-original-title="" title="" [routerLink]="['/office/officeEmpPosAdd']" skipLocationChange
+          <a class="success p-0" data-original-title="" title="" [routerLink]="[EditLink]" skipLocationChange
             [queryParams]="{param:'edit',refOfficeId:item.refOfficeId,empPositionId:item.empPositionId,refBizUnitId:item.refBizUnitId,officeCode:item.officeCode,officeName:item.officeName,refEmpId:item.refEmpId,empNo:item.empNo,empName:item.empName}">
             <i class="ft-edit-2 font-medium-3 mr-2"></i>
           </a>

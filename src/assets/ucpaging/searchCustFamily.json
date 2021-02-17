@@ -108,7 +108,7 @@
             "type": "link",
             "position": "left",
             "property": "FamilyCustNo",
-            "path": "/View/Customer/PersonalDetail",
+            "path": "VIEW_CUST_PERSONAL_DETAIL",
             "target": "_blank",
             "param": [
                 {
@@ -136,7 +136,7 @@
             "type": "link",
             "position": "left",
             "property": "CustNo",
-            "path": "/View/Customer/PersonalDetail",
+            "path": "VIEW_CUST_PERSONAL_DETAIL",
             "target": "_blank",
             "param": [
                 {
@@ -161,7 +161,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Customer/EditMainData/Personal",
+                    "path": "CUST_EDIT_MAIN_DATA_PERSONAL",
                     "icon": "ft-edit-2",
                     "param": [
                         {

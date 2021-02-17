@@ -9,6 +9,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UpdateCustEmergencyObj } from 'app/shared/model/UpdateMasterCust/UpdateCustEmergencyObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { forkJoin } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
@@ -247,7 +248,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
 
   back(){
     // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
-    AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
+    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
   }
 
   SaveValue(){

@@ -13,6 +13,7 @@ import { URLConstant } from "app/shared/constant/URLConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { AdInsHelper } from "app/shared/AdInsHelper";
 import { CookieService } from "ngx-cookie";
+import { NavigationConstant } from "app/shared/NavigationConstant";
 
 @Component({
   selector: "app-user-change-password",
@@ -87,9 +88,9 @@ export class UserChangePasswordComponent implements OnInit {
       this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
         response => {
           this.service.typeSave(response["message"]);
-          this.router.navigateByUrl("/systemSetting/refUser", { skipLocationChange: true })
+          this.router.navigateByUrl(NavigationConstant.SYSTEM_SETTING_REF_USER, { skipLocationChange: true })
             .then(() =>
-              AdInsHelper.RedirectUrl(this.router,["/systemSetting/changePassword"],{})
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_CHANGE_PASSWORD],{})
             );
           this.spinner.hide();
         },

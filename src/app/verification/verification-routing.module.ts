@@ -12,6 +12,7 @@ import { VerificationQuestionSchemeMemberAddComponent } from './verification-que
 import { VerificationQuestionSchemeMemberEditComponent } from './verification-question-scheme-member/verification-question-scheme-member-edit/verification-question-scheme-member-edit.component';
 import { VerificationQuestionGroupPagingComponent } from './verification-question-group/verification-question-group-paging/verification-question-group-paging.component';
 import { VerificationQuestionAnswerPagingComponent } from './verification-question-answer/verification-question-answer-paging/verification-question-answer-paging.component';
+import { PathConstant } from 'app/shared/PathConstant';
 
 
 const routes: Routes = [
@@ -19,105 +20,105 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'QuestionAnswer/Paging',
+        path: PathConstant.QA_PAGING,
         component: VerificationQuestionAnswerPagingComponent,
         data: {
           title: 'Verification Question Answer Paging'
         },
       },
       {
-        path: 'QuestionAnswer/Add',
+        path: PathConstant.QA_ADD,
         component: VerificationQuestionAnswerAddEditComponent,
         data: {
           title: 'Verification Question Answer Add'
         },
       },
       {
-        path: 'QuestionAnswer/Edit',
+        path: PathConstant.QA_EDIT,
         component: VerificationQuestionAnswerAddEditComponent,
         data: {
           title: 'Verification Question Answer Edit'
         },
       },
       {
-        path: 'QuestionGroup/Paging',
+        path: PathConstant.QA_GRP_PAGING,
         component: VerificationQuestionGroupPagingComponent,
         data: {
           title: 'Verification Question Group Paging'
         },
       },
       {
-        path: 'QuestionGroup/Add',
+        path: PathConstant.QA_GRP_ADD,
         component: VerificationQuestionGroupAddEditComponent,
         data: {
           title: 'Verification Question Group Edit'
         },
       },
       {
-        path: 'QuestionGroup/Edit',
+        path: PathConstant.QA_GRP_EDIT,
         component: VerificationQuestionGroupAddEditComponent,
         data: {
           title: 'Verification Question Group Edit'
         },
       },
       {
-        path: 'QuestionGroupMemberPaging',
+        path: PathConstant.QA_GRP_MBR_PAGING,
         component: VerificationQuestionGroupMemberPagingComponent,
         data: {
           title: 'Verification Question Group Member Paging'
         },
       },
       {
-        path: 'QuestionGroupMember/Add',
+        path: PathConstant.QA_GRP_MBR_ADD,
         component: VerificationQuestionGroupMemberAddComponent,
         data: {
           title: 'Verification Question Group Member Add'
         },
       },
       {
-        path: 'QuestionGroupMember/Edit',
+        path: PathConstant.QA_GRP_MBR_EDIT,
         component: VerificationQuestionGroupMemberEditComponent,
         data: {
           title: 'Verification Question Group Member Edit'
         },
       },
       {
-        path: 'QuestionScheme/Paging',
+        path: PathConstant.QA_SCHM_PAGING,
         component: VerificationQuestionSchemePagingComponent,
         data: {
           title: 'Verification Question Scheme Paging'
         },
       },
       {
-        path: 'QuestionScheme/Add',
+        path: PathConstant.QA_SCHM_ADD,
         component: VerificationQuestionSchemeAddEditComponent,
         data: {
           title: 'Verification Question Scheme Add'
         },
       },
       {
-        path: 'QuestionScheme/Edit',
+        path: PathConstant.QA_SCHM_EDIT,
         component: VerificationQuestionSchemeAddEditComponent,
         data: {
           title: 'Verification Question Scheme Edit'
         },
       },
       {
-        path: 'QuestionSchemeMemberPaging',
+        path: PathConstant.QA_SCHM_MBR_PAGING,
         component: VerificationQuestionSchemeMemberPagingComponent,
         data: {
           title: 'Verification Question Scheme Member Paging'
         },
       },
       {
-        path: 'QuestionSchemeMember/Add',
+        path: PathConstant.QA_SCHM_MBR_ADD,
         component: VerificationQuestionSchemeMemberAddComponent,
         data: {
           title: 'Verification Question Scheme Member Add'
         },
       },
       {
-        path: 'QuestionSchemeMember/Edit',
+        path: PathConstant.QA_SCHM_MBR_EDIT,
         component: VerificationQuestionSchemeMemberEditComponent,
         data: {
           title: 'Verification Question Scheme Member Edit'

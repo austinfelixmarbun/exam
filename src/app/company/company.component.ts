@@ -7,6 +7,7 @@ import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-company',
@@ -21,6 +22,9 @@ export class CompanyComponent implements OnInit {
   foundationUrl: string = environment.FoundationR3Url;
   resultData: string;
 
+  readonly BodLink: string = NavigationConstant.COY_BOD;
+  readonly CommissionerLink: string = NavigationConstant.COY_COMMISSIONER;
+  readonly EditLink: string = NavigationConstant.COY_EDIT;
   constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService) { }
 
   ngOnInit() {

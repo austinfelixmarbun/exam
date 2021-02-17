@@ -16,6 +16,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 
 @Component({
@@ -125,7 +126,7 @@ export class OfficeAddComponent implements OnInit {
   addressObj: UcAddressObj;
   inputAddressObj: InputAddressObj;
 
-
+  readonly CancelLink: string = NavigationConstant.OFFICE_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.apiUrl = URLConstant.GetRefOfficeByRefOfficeId;
     this.addUrl = URLConstant.AddRefOffice;
@@ -434,7 +435,7 @@ export class OfficeAddComponent implements OnInit {
         this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
           (response) => {
             this.toastr.successMessage(response['message']);
-            AdInsHelper.RedirectUrl(this.router,["/Office/Paging"],{});
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
           }
         );
       }
@@ -442,7 +443,7 @@ export class OfficeAddComponent implements OnInit {
         this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
           (response) => {
             this.toastr.successMessage(response['message']);
-            AdInsHelper.RedirectUrl(this.router,["/Office/Paging"],{});
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
           }
         );
       }
@@ -455,7 +456,7 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(this.editUrl, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          AdInsHelper.RedirectUrl(this.router,["/Office/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
         }
       );
 

@@ -15,6 +15,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
     selector: 'app-employee-position',
@@ -71,6 +72,7 @@ export class EmployeePositionAddComponent implements OnInit {
 
     RefEmpPositionForm = this.fb.group({});
 
+    readonly CancelLink: string = NavigationConstant.EMP_POS;
     constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
         this.getUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
         this.addUrl = this.foundationUrl + URLConstant.AddEmpPosition;
@@ -204,7 +206,7 @@ export class EmployeePositionAddComponent implements OnInit {
                 (response) => {
                     if (response['isError'] != true) {
                         this.toastr.successMessage(response['message']);
-                        AdInsHelper.RedirectUrl(this.router,["/employee/employeePosition"],{ "refEmpId": this.refEmpId });
+                        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_POS],{ "refEmpId": this.refEmpId });
                     }
                 }
             );
@@ -223,7 +225,7 @@ export class EmployeePositionAddComponent implements OnInit {
             this.httpClient.post(this.editUrl, this.empPositionObj).subscribe(
                 (response) => {
                     this.toastr.successMessage(response['message']);
-                    AdInsHelper.RedirectUrl(this.router,["/employee/employeePosition"],{ "refEmpId": this.refEmpId });
+                    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_POS],{ "refEmpId": this.refEmpId });
                 }
             );
         }

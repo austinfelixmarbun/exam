@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-office-area-paging',
@@ -13,6 +14,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 export class OfficeAreaPagingComponent implements OnInit {
   inputPagingObj: any;
 
+  readonly AddLink: string = NavigationConstant.OFFICE_AREA_DETAIL;
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchOfficeArea.json";

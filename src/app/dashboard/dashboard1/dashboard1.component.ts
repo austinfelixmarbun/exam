@@ -26,8 +26,6 @@ export class Dashboard1Component implements OnInit{
     message = "loading...";
     constructor(){}
     ngOnInit() {
-        var getObject = JSON.parse(localStorage.getItem(CommonConstant.CURRENT_USER_CONTEXT));
-        var getAccess = JSON.parse(localStorage.getItem(CommonConstant.PAGE_ACCESS));
     }
     // Line area chart configuration Starts
     lineArea: Chart = {

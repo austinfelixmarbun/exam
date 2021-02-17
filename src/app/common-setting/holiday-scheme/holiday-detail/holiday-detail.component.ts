@@ -13,6 +13,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-holiday-detail',
@@ -32,6 +33,7 @@ export class HolidayDetailComponent implements OnInit {
 
   });
 
+  readonly BackLink: string = NavigationConstant.CS_HOLIDAY;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
       this.HolidaySchmHId = params["HolidaySchmHId"];
@@ -39,7 +41,7 @@ export class HolidayDetailComponent implements OnInit {
   }
 
   AddNavigate() {
-    AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Holiday/Detail/Add'],{ "HolidaySchmHId": this.HolidaySchmHId })
+    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL_ADD],{ "HolidaySchmHId": this.HolidaySchmHId })
   }
 
   ngOnInit() {
@@ -87,7 +89,7 @@ export class HolidayDetailComponent implements OnInit {
 
       this.http.post(URLConstant.CopyHolidaySchmH, this.copyHoliday).subscribe(
         (response) => {
-          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Holiday/Detail/'],{ HolidaySchmHId: this.HolidaySchmHId })
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ HolidaySchmHId: this.HolidaySchmHId })
           this.toastr.successMessage(response['message']);
         },
         (error) => {

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { first } from 'rxjs/operators';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
@@ -37,6 +38,7 @@ export class CoaDetailComponent implements OnInit {
   
   Shows: boolean = false;
 
+  readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -101,7 +103,7 @@ export class CoaDetailComponent implements OnInit {
     );
 
     this.toastr.successMessage('Success');
-    this.router.navigate(['/setting/coa/paging']);
+    this.router.navigate([NavigationConstant.CS_COA_PAGING]);
   }
 
   async Show(ev: HTMLInputElement) {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 
 @Component({
@@ -11,6 +12,7 @@ export class PaymentAllocGroupPagingComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();
   isReady: boolean;
 
+  readonly AddLink: string = NavigationConstant.BACK_TO_DETAIL;
   constructor() { }
 
   ngOnInit() {

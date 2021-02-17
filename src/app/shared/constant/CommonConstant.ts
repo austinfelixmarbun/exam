@@ -9,7 +9,7 @@ export class CommonConstant {
     public static BUSINESS_DATE_RAW = "BusinessDateRaw";
     public static CURRENT_USER_CONTEXT = "currentUserContext"
     public static PAGE_ACCESS = "PageAccess";
-    public static TOKEN = "access_token";
+    public static TOKEN = "XSRF-TOKEN";
     public static VERSION = "Version";
     public static LAST_ACCESS_TIME = "LastAccessTime";
     public static MENU = "Menu"
@@ -264,4 +264,21 @@ export class CommonConstant {
     public static PRD_HO_DEACT_APV_TYPE = "PROD_HO_DEACT_APV_TYPE";
     public static PRD_OFR_APV_TYPE = "PROD_OFR_APV_TYPE";
     public static PRD_OFR_DEACT_APV_TYPE = "PROD_OFR_DEACT_APV_TYPE";    
+
+    // Cust Type  
+    public static WhiteIndicator = "WHITE";
+    public static NoData = "No Data";
+    public static MaritalStatusMarried = "MARRIED";
+    public static ExposureCustTypeCode = "CUST_EXPSR";
+    public static ExposureCustGroupTypeCode = "CUST_GRP_EXPSR";
+    public static ExposureObligorTypeCode = "CUST_OBLGR_EXPSR";
+    public static CaptureStatReq = "REQ";
+    public static CaptureStatScs = "SCS";
+    public static CaptureStatFail = "FAIL";
+
+    // Role Type
+    public static RoleCustData = "CUST";
+    public static RoleFamilyData = "SPOUSE";
+    public static RoleGuarantorData = "GUARANTOR";
+    public static RoleShareholder = "SHAREHOLDER";
 }

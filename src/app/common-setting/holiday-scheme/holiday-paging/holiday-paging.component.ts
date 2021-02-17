@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { environment } from 'environments/environment';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-holiday-paging',
@@ -12,6 +13,7 @@ import { environment } from 'environments/environment';
 export class HolidayPagingComponent implements OnInit {
   
   inputObj: any;
+  readonly AddLink: string = NavigationConstant.CS_HOLIDAY_ADD;
   constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {

@@ -5,10 +5,10 @@
 
         <div class="form-actions right">
           <span style="display: block; float:right;">
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="['/DocumentManagement/Cabinet/Paging']" translate>
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" translate>
               <i class="fa fa-arrow-circle-left"></i> Back
             </button>
-            <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="['/DocumentManagement/Rack/AddEdit']" 
+            <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="[AddLink]" 
             [queryParams]="{ Mode: 'Add', CabinetCode: Cabinet.CabinetCode}" translate>
               <i class="ft-plus-circle"></i> Add
             </button>
@@ -67,7 +67,7 @@
               <tbody>
                 <tr *ngFor="let item of Cabinet.ListRack; let i = index">
                   <td>
-                    <a [routerLink]="['/DocumentManagementView/ViewRack']" target="_blank" 
+                    <a [routerLink]="[ViewLink]" target="_blank" 
                     [queryParams]="{ RackCode: item.RackCode }">{{item.RackCode}}
                     </a>
                   </td>
@@ -76,12 +76,12 @@
                   <td class="align-center" *ngIf="item.IsActive === false">No</td>
                   <td class="align-center">
                     <a class="success p-0">
-                      <i class="ft-edit-2 font-medium-3 mr-2" [routerLink]="['/DocumentManagement/Filing/Paging']"
+                      <i class="ft-edit-2 font-medium-3 mr-2" [routerLink]="[FilingLink]"
                       [queryParams]="{ RackCode: item.RackCode, CabinetCode: Cabinet.CabinetCode}" ></i>
                     </a>
                   </td>
                   <td class="align-center">
-                    <a class="success p-0" [routerLink]="['../AddEdit']" [queryParams]="{ Mode: 'Edit', RackCode: item.RackCode, CabinetCode: Cabinet.CabinetCode}">
+                    <a class="success p-0" [routerLink]="[EditLink]" [queryParams]="{ Mode: 'Edit', RackCode: item.RackCode, CabinetCode: Cabinet.CabinetCode}">
                       <i class="ft-edit-2 font-medium-3 mr-2"></i>
                     </a>
                   </td>

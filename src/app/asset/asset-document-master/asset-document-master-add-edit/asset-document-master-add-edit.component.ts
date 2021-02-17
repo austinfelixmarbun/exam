@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-asset-document-master-add-edit',
@@ -25,6 +26,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
     IsActive: [true]
   });
 
+  readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
@@ -61,7 +63,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddNewRefAssetDocData, this.refAssetObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/DocumentMaster/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_MASTER_PAGING],{});
         }
       );
     }
@@ -74,7 +76,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditRefAssetDocData, this.refAssetObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/DocumentMaster/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_MASTER_PAGING],{});
         });
     }
   }

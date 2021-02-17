@@ -4,6 +4,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { DecimalPipe } from '@angular/common';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-leave-maintenance',
@@ -14,6 +15,7 @@ export class LeaveMaintenanceComponent implements OnInit {
 
   inputPagingObj: any;
 
+  readonly AddLink: string = NavigationConstant.EMP_LEAVE_ADD;
   constructor() { }
 
   ngOnInit() {

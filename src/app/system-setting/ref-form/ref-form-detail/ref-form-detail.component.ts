@@ -12,6 +12,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ParameterObj } from 'app/shared/model/ParameterObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-ref-form-detail',
@@ -30,6 +31,7 @@ export class RefFormDetailComponent implements OnInit {
   checkClass: boolean = false;
   parameterObj : Array<ParameterObj> = new Array<ParameterObj>();
 
+  readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.RefFormId = params['RefFormId'];
@@ -206,14 +208,14 @@ export class RefFormDetailComponent implements OnInit {
       this.http.post(URLConstant.EditRefFormData, this.refFormObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/SystemSetting/RefForm/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING],{});
           
         });
     } else {
       this.http.post(URLConstant.AddRefFormData, this.refFormObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/SystemSetting/RefForm/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING],{});
         });
     }
   }

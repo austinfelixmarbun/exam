@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-scheme-member-add',
@@ -21,6 +22,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
   listSelectedId: Array<number> = new Array<number>();
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
 
+  readonly CancelLink: string = NavigationConstant.VENDOR_SCHM_MBR;
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, public toastr: ToastrService) {
     this.route.queryParams.subscribe(params => {
       this.VendorSchmId = params['VendorSchmId'];
@@ -83,7 +85,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
     this.http.post(URLConstant.AddVendorSchmMember, obj).subscribe(
       (response) => {
         this.toastr.success(response["message"], 'Success!');
-        AdInsHelper.RedirectUrl(this.router,["/Vendor/VendorScheme/Member"],{ "VendorSchmId" : this.VendorSchmId, "MrVendorCategoryCode": this.MrVendorCategoryCode });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_SCHM_MBR],{ "VendorSchmId" : this.VendorSchmId, "MrVendorCategoryCode": this.MrVendorCategoryCode });
       });
   }
 }

@@ -215,7 +215,7 @@
                 "result" : 
                 {
                   "type": "url",
-                  "path": "/Asset/AssetMaster/Child",
+                  "path": "ASSET_MASTER_CHILD",
                   "icon": "ft-edit-2",
                   "param": [
                     {
@@ -251,7 +251,7 @@
                 "result" : 
                 {
                   "type": "url",
-                  "path" : "/Asset/AssetMaster/Detail",
+                  "path" : "ASSET_MASTER_DETAIL",
                   "param" : [
                     {
                       "type": "AssetMasterId",
@@ -279,7 +279,7 @@
               ],
                 "result" : {
                   "type": "url",
-                  "path" : "/Asset/AssetMaster/Child",
+                  "path" : "ASSET_MASTER_CHILD",
                   "param" : [
                     {
                       "type": "AssetMasterId",
@@ -307,7 +307,7 @@
               ],
                 "result" : {
                   "type": "url",
-                  "path" : "/Asset/AssetMaster/Child",
+                  "path" : "ASSET_MASTER_CHILD",
                   "param" : [
                     {
                       "type": "AssetMasterId",
@@ -335,7 +335,7 @@
               ],
                 "result" : {
                   "type": "url",
-                  "path" : "/Asset/AssetMaster/Child",
+                  "path" : "ASSET_MASTER_CHILD",
                   "param" : [
                     {
                       "type": "AssetMasterId",
@@ -363,7 +363,7 @@
               ],
                 "result" : {
                   "type": "url",
-                  "path" : "/Asset/AssetMaster/Child",
+                  "path" : "ASSET_MASTER_CHILD",
                   "param" : [
                     {
                       "type": "AssetMasterId",

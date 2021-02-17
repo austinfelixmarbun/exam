@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { RefPaymentAllocObj } from 'app/shared/model/common-setting/RefPaymentAllocObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-payment-alloc-detail',
@@ -16,6 +17,7 @@ export class PaymentAllocDetailComponent implements OnInit {
   RefPaymentAllocId: number = 0;
   RefPaymentAllocObj: RefPaymentAllocObj = new RefPaymentAllocObj();
 
+  readonly BackLink: string = NavigationConstant.CS_PAYMENT_ALLOC_PAGING;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -70,7 +72,7 @@ export class PaymentAllocDetailComponent implements OnInit {
       this.http.post(URLConstant.SubmitRefPaymentAlloc, this.RefPaymentAllocObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          this.router.navigateByUrl("/CommonSetting/paymentalloc/paging");
+          this.router.navigateByUrl(NavigationConstant.CS_PAYMENT_ALLOC_PAGING);
         },
         error => {
           console.log(error);
@@ -81,7 +83,7 @@ export class PaymentAllocDetailComponent implements OnInit {
       this.http.post(URLConstant.SubmitRefPaymentAlloc, this.RefPaymentAllocObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          this.router.navigateByUrl("/CommonSetting/paymentalloc/paging");
+          this.router.navigateByUrl(NavigationConstant.CS_PAYMENT_ALLOC_PAGING);
         },
         error => {
           console.log(error);

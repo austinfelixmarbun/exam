@@ -64,7 +64,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Verification/QuestionGroupMemberPaging",
+                    "path": "VERIF_QA_GRP_MBR_PAGING",
                     "param": [
                         {
                             "type": "VerfQuestionGrpHId",
@@ -84,7 +84,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Verification/QuestionGroup/Edit",
+                    "path": "VERIF_QA_GRP_EDIT",
                     "param": [
                         {
                             "type": "VerfQuestionGrpHId",

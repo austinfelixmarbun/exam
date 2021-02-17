@@ -5,6 +5,7 @@ import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { VendorService } from '../vendor.service';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-holding-registration',
@@ -22,6 +23,8 @@ export class VendorHoldingRegistrationComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   MrVendorCategoryCode: string = "";
   
+  readonly EditLink: string = NavigationConstant.VENDOR_HOLDING_DETAIL;
+  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   constructor(private route: ActivatedRoute, private http : HttpClient, private vendorService: VendorService) {
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];

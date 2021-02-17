@@ -96,7 +96,7 @@
           "action": [
             {
               "type": "edit",
-              "path": "/CommonSetting/WorkingHour/Detail",
+              "path": "CS_WORKING_HOUR_DETAIL",
               "param": [
                 {
                   "type": "workingHourSchmHId",
@@ -112,7 +112,7 @@
           "action": [
             {
               "type": "edit",
-              "path": "/CommonSetting/WorkingHour/add",
+              "path": "CS_WORKING_HOUR_ADD",
               "param": [
                 {
                   "type": "workingHourSchmHId",

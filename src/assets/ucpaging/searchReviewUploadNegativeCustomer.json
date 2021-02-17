@@ -165,7 +165,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "/Customer/NegativeCustomer/ReviewUploadDetail",
+            "path": "CUST_NEG_RVW_UPLOAD_DETAIL",
             "param": [
               {
                 "type": "UploadId",

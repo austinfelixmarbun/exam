@@ -3,6 +3,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-verification-question-answer-paging',
@@ -12,6 +13,7 @@ export class VerificationQuestionAnswerPagingComponent implements OnInit {
 
   inputPagingObj: any;
 
+  readonly AddLink: string = NavigationConstant.VERIF_QA_ADD;
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/verification/searchVerificationQuestionAnswer.json";

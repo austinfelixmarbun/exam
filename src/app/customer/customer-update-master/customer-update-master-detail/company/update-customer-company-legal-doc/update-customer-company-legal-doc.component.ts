@@ -6,6 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UpdateCustLegalDocObj } from 'app/shared/model/UpdateMasterCust/UpdateCustLegalDocObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-update-customer-company-legal-doc',
@@ -71,7 +72,7 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
 
   back(){
     // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
-    AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
+    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
   }
 
   SaveValue(){

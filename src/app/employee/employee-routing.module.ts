@@ -8,13 +8,14 @@ import { LeaveMaintenanceComponent } from './leave-maintenance/leave-maintenance
 import { LeaveMaintenanceAddEditComponent } from './leave-maintenance/leave-maintenance-add-edit/leave-maintenance-add-edit.component';
 import { EmployeeBusinessunitAddComponent } from './employee-businessunit-add/employee-businessunit-add.component';
 import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-paging/employee-businessunit-paging.component';
+import { PathConstant } from 'app/shared/PathConstant';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: 'Paging',
+        path: PathConstant.PAGING,
         component: EmployeeComponent,
         data: {
           title: 'Employee'
@@ -35,56 +36,56 @@ const routes: Routes = [
       //   }
       // },
       {
-        path: 'Detail',
+        path: PathConstant.DETAIL,
         component: EmployeeAddComponent,
         data: {
           title: 'Employee Detail'
         }
       },
       {
-        path: 'employeePosition',
+        path: PathConstant.EMP_POS,
         component: EmployeePositionComponent,
         data: {
           title: 'Employee Position'
         }
       },
       {
-        path: 'EmployeePosition/Detail',
+        path: PathConstant.EMP_POS_DETAIL,
         component: EmployeePositionAddComponent,
         data: {
           title: 'Employee Position Add Edit'
         }
       },
       {
-        path: 'Leave/Paging',
+        path: PathConstant.LEAVE_PAGING,
         component: LeaveMaintenanceComponent,
         data: {
           title: 'Leave Maintenance'
         }
       },
       {
-        path: 'Leave/Add',
+        path: PathConstant.LEAVE_ADD,
         component: LeaveMaintenanceAddEditComponent,
         data: {
           title: 'Leave Maintenance Add'
         }
       },
       {
-        path: 'Leave/Edit',
+        path: PathConstant.LEAVE_EDIT,
         component: LeaveMaintenanceAddEditComponent,
         data: {
           title: 'Leave Maintenance Edit'
         }
       },
       {
-        path: 'EmployeeBusinessUnit/Add',
+        path: PathConstant.EMP_BZ_UNIT_ADD,
         component: EmployeeBusinessunitAddComponent,
         data: {
           title: 'Employee Business Unit Add'
         }
       },
       {
-        path: 'EmployeeBusinessUnit/Paging',
+        path: PathConstant.EMP_BZ_UNIT_PAGING,
         component: EmployeeBusinessunitPagingComponent,
         data: {
           title: 'Employee Business Unit Paging'

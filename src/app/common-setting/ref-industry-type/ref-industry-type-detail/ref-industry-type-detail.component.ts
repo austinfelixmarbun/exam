@@ -9,6 +9,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { map, mergeMap } from 'rxjs/operators';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-ref-industry-type-detail',
@@ -32,6 +33,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     RowVersion: [""]
   });
 
+  readonly CancelLink: string = NavigationConstant.CS_INDUSTRY_TYPE_PAGING;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -101,7 +103,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
         //SAVE
         (response) => {
           this.service.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/IndustryType/Paging'],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_INDUSTRY_TYPE_PAGING],{});
         },
         (error) => {
           this.service.typeErrorCustom(error);
@@ -114,7 +116,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
       this.httpClient.post(URLConstant.EditRefIndustryType, this.refIndustryType).subscribe(
         (response) => {
           this.service.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/IndustryType/Paging'],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_INDUSTRY_TYPE_PAGING],{});
         },
         (error) => {
           this.service.typeErrorCustom(error);

@@ -8,6 +8,7 @@ import { URLConstant } from '../constant/URLConstant';
 import { CookieOptions, CookieService } from 'ngx-cookie';
 import { formatDate } from '@angular/common';
 import { CommonConstant } from '../constant/CommonConstant';
+import { NavigationConstant } from '../NavigationConstant';
 
 @Component({
   selector: 'app-rolepick',
@@ -26,7 +27,6 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   }
 
   chooseRole(item) {
-    console.log('Shinano');
     var roleUrl = environment.FoundationR3Url + URLConstant.LoginByRole;
     var roleObject = {
       UserName: this.data.user,
@@ -36,7 +36,6 @@ export class RolepickComponent implements OnInit, AfterViewInit {
       JobTitleCode: item.JobTitleCode,
       RequestDateTime: item.BusinessDt,
       ModuleCode: environment.Module,
-      Ip: "",
       RowVersion: ""
 
     };
@@ -47,7 +46,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           //Cookie sudah diambil dari BE (Di set manual dulu)
 
           var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
-          AdInsHelper.SetCookie(this.cookieService, "access_token", response['Token']);
+          AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, response['Token']);
           AdInsHelper.SetCookie(this.cookieService, "BusinessDateRaw", formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US'));
           AdInsHelper.SetCookie(this.cookieService, "BusinessDate", DateParse);
           AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
@@ -56,7 +55,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
           AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
           let currPath = this.router.routerState.snapshot.url;
-          this.router.navigateByUrl("/pages/content", { skipLocationChange: true }).then(() => {
+          this.router.navigateByUrl(NavigationConstant.PAGES_CONTENT, { skipLocationChange: true }).then(() => {
             AdInsHelper.RedirectUrl(this.router,[currPath],{});
             this.dialog.closeAll();
           });
@@ -70,7 +69,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           //Cookie sudah diambil dari BE (Di set manual dulu)
 
           var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
-          AdInsHelper.SetCookie(this.cookieService, "access_token", response['Token']);
+          AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, response['Token']);
           AdInsHelper.SetCookie(this.cookieService, "BusinessDateRaw", formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US'));
           AdInsHelper.SetCookie(this.cookieService, "BusinessDate", DateParse);
           AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
@@ -78,7 +77,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
 
           AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
           AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
-          this.router.navigate(["/dashboard/dash-board"]);
+          this.router.navigate([NavigationConstant.DASHBOARD]);
           this.dialog.closeAll();
         }
       );

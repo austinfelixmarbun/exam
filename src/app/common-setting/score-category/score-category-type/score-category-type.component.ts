@@ -10,6 +10,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-score-category-type',
@@ -32,6 +33,7 @@ export class ScoreCategoryTypeComponent implements OnInit {
     RowVersion: ['']
   });
 
+  readonly CancelLink: string = NavigationConstant.CS_SCORE_CATEGORY_PAGING;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -92,7 +94,7 @@ export class ScoreCategoryTypeComponent implements OnInit {
         //SAVE
         (response) => {
           this.service.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/ScoreCategory/Paging'],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_SCORE_CATEGORY_PAGING],{});
         },
         (error) => {
           this.service.typeErrorCustom(error);
@@ -105,7 +107,7 @@ export class ScoreCategoryTypeComponent implements OnInit {
       this.httpClient.post(URLConstant.EditScoreCategorySchmH, this.scoreCategorySchmHObj).subscribe(
         (response) => {
           this.service.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,['/CommonSetting/ScoreCategory/Paging'],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_SCORE_CATEGORY_PAGING],{});
         },
         (error) => {
           this.service.typeErrorCustom(error);

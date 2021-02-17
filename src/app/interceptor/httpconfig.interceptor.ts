@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
@@ -28,7 +29,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         if (request.method == "POST" && (request.body == null || request.body.isLoading == undefined || request.body.isLoading == true)) {
             this.spinner.show();
         }
-
         if (request.url != "./assets/i18n/en.json") {
             this.count++;
         }
@@ -43,7 +43,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         if (checkSession == "1") {
             // this.errorDialogService.openDialog(AdInsErrorMessage.SessionTimeout);
             this.spinner.hide();
-            AdInsHelper.RedirectUrl(this.router, ["/pages/login"], {});
+            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.PAGES_LOGIN], {});
         }
 
         if (request.url.includes("Add") || request.url.includes("Edit") || request.url.includes("Delete")) {
@@ -69,7 +69,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 myObj = request.body;
             }
             myObj["RequestDateTime"] = businessDt;
-            token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN); 
+            token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
         }
 
         if (token == null) {
@@ -90,6 +90,9 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Methods', 'POST') });
         request = request.clone({ headers: request.headers.set('Access-Control-Allow-Headers', 'Content-Type,Accept,Authorization') });
         request = request.clone({ headers: request.headers.set('X-Content-Type-Options', 'nosniff') });
+        request = request.clone({ headers: request.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0') });
+        request = request.clone({ headers: request.headers.set('Pragma', 'no-cache') });
+        request = request.clone({ headers: request.headers.set('Expires', '0') });
         request = request.clone({ body: myObj });
         AdInsHelper.InsertLog(this.cookieService, request.url, "API", request.body);
         console.log(JSON.stringify(request.body));
@@ -128,16 +131,6 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                             return;
                         }
                     }
-                    else {
-                        //Kalau pake Http Get yang bukan ke Backend sendiri g punya token, jadi g boleh asal di replace
-                        // if (event.body.token == undefined) {
-                        //     localStorage.setItem("Token", localStorage.getItem("Token"));
-                        // }
-                        // else {
-                        //     localStorage.setItem("Token", event.body.token);
-                        // }
-
-                    }
                 }
 
                 return event;
@@ -145,9 +138,9 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             //Ini Error kalau tidak sampai ke Back End
             catchError((error: HttpErrorResponse) => {
                 if (error.error != null) {
-                    if (error.error.errorMessages != null) {
-                        for (var i = 0; i < error.error.errorMessages.length; i++) {
-                            this.toastr.error(error.error.errorMessages[i].message, 'Status: ' + error.status, { "tapToDismiss": true });
+                    if (error.error.ErrorMessages != null) {
+                        for (var i = 0; i < error.error.ErrorMessages.length; i++) {
+                            this.toastr.error(error.error.ErrorMessages[i].Message, 'Status: ' + error.status, { "tapToDismiss": true });
                         }
                     } else {
                         this.toastr.error(error.error.Message, 'Status: ' + error.status, { "tapToDismiss": true });

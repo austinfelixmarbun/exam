@@ -8,16 +8,17 @@ import { Full_ROUTES } from "app/shared/routes/full-layout.routes";
 import { CONTENT_ROUTES } from "app/shared/routes/content-layout.routes";
 
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
+import { NavigationConstant } from './shared/NavigationConstant';
 
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'pages/login',
+    redirectTo: '/Pages/Login',
     pathMatch: 'full',
   },
   { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES, canActivate: [AuthGuard] },
   { path: '', component: ContentLayoutComponent, data: { title: 'content Views' }, children: CONTENT_ROUTES },
-  { path: '**', redirectTo: 'pages/login' }
+  { path: '**', redirectTo: '/Pages/Login' }
 ];
 
 @NgModule({

@@ -12,6 +12,7 @@ import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-review-upload-asset-master-detail',
@@ -24,6 +25,7 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
   taskListId: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
+  readonly CancelLink: string = NavigationConstant.ASSET_MASTER_RVW_UPLOAD_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       if (params["UploadNo"] != null) {
@@ -62,7 +64,7 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
     this.http.post(URLConstant.UploadReview, uploadObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
-        AdInsHelper.RedirectUrl(this.router,["/Asset/AssetMaster/ReviewUploadPaging"],{});
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_RVW_UPLOAD_PAGING],{});
       }
     );
   }

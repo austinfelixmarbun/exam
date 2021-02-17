@@ -10,6 +10,7 @@ import { CoyCommissionerObj } from 'app/shared/model/CoyCommissionerObj.Model';
 import { UcInfoComponent } from 'app/shared/UserControl/uc-info/uc-info.component';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
     selector: 'add-commissioner',
@@ -42,6 +43,7 @@ export class CommissionerAddComponent implements OnInit {
     idNo: any;
     refCoyId: any;
 
+    readonly CancelLink: string = NavigationConstant.COY_COMMISSIONER;
     constructor(private router: Router, private toastr: NGXToastrService, private route: ActivatedRoute, private http: HttpClient) {
         this.route.queryParams.subscribe(params => {
             this.param = params["coyCommissionerId"];
@@ -127,7 +129,7 @@ export class CommissionerAddComponent implements OnInit {
                 this.http.post(this.editUrl, coyCommisionerObj).subscribe(
                     (response) => {
                         this.toastr.successMessage(response['message']);
-                        AdInsHelper.RedirectUrl(this.router,["/company/commissioner"],{ "refCoyId": this.refCoyId });
+                        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.COY_COMMISSIONER],{ "refCoyId": this.refCoyId });
                     });
             }
             else {
@@ -135,7 +137,7 @@ export class CommissionerAddComponent implements OnInit {
                 this.http.post(this.editUrl, coyCommisionerObj).subscribe(
                     (response) => {
                         this.toastr.successMessage(response['message']);
-                        AdInsHelper.RedirectUrl(this.router,["/company/commissioner"],{ "refCoyId": this.refCoyId });
+                        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.COY_COMMISSIONER],{ "refCoyId": this.refCoyId });
                     });
             }
 

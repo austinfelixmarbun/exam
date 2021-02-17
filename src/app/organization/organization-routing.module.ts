@@ -6,6 +6,7 @@ import { AddBusinessUnitComponent } from 'app/organization/business-unit/add-bus
 import { RefJobTitleAddComponent } from 'app/organization/ref-job-title/ref-job-title-add/ref-job-title-add.component';
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
 import { MemberBusinessUnitComponent } from 'app/organization/business-unit/member-business-unit/member-business-unit.component';
+import { PathConstant } from 'app/shared/PathConstant';
 
 
 const routes: Routes = [
@@ -13,42 +14,42 @@ const routes: Routes = [
     path: '',canActivate: [AuthGuard] ,
     children: [
       {
-        path: 'JobTitle',
+        path: PathConstant.JOB_TITLE,
         component: RefJobTitleComponent,
         data: {
           title: 'Job Title'
         },
       },
       {
-        path: 'JobTitle/Detail',
+        path: PathConstant.JOB_TITLE_DETAIL,
         component: RefJobTitleAddComponent,
         data: {
           title: 'Job Title add'
         },
       },
       {
-        path: 'BusinessUnit',
+        path: PathConstant.BZ_UNIT,
         component: BusinessUnitComponent,
         data: {
           title: 'Business Unit'
         },
       },
       {
-        path: 'BusinessUnit/Detail',
+        path: PathConstant.BZ_UNIT_DETAIL,
         component: AddBusinessUnitComponent,
         data: {
           title: 'Add Business Unit'
         },
       },
       {
-        path: 'businessunit/edit',
+        path: PathConstant.BZ_UNIT_EDIT,
         component: AddBusinessUnitComponent,
         data: {
           title: 'Edit Business Unit'
         },
       },
       {
-        path: 'BusinessUnit/member',
+        path: PathConstant.BZ_UNIT_MEMBER,
         component: MemberBusinessUnitComponent,
         data: {
           title: 'Business Unit Member'

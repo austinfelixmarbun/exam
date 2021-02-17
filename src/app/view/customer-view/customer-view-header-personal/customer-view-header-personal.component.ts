@@ -6,6 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-view-header-personal',
@@ -104,5 +105,9 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
           }
         );
       });
+  }
+
+  ClickLinkViewCustExposure() {
+    AdInsHelper.OpenCustExposure(this.IdCust);
   }
 }

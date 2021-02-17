@@ -3,6 +3,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-scheme-paging',
@@ -11,6 +12,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 export class VendorSchemePagingComponent implements OnInit {
   inputPagingObj: any;
 
+  readonly AddLink: string = NavigationConstant.VENDOR_SCHM_DETAIL;
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorScheme.json";

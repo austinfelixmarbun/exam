@@ -13,6 +13,7 @@ import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.mod
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-ref-form-role-mapping',
@@ -28,6 +29,7 @@ export class RefFormRoleMappingComponent implements OnInit {
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
+  readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_ROLE_MAP;
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -94,7 +96,7 @@ export class RefFormRoleMappingComponent implements OnInit {
     this.http.post(URLConstant.AddListAuthForm, this.listAuthFormObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-        AdInsHelper.RedirectUrl(this.router,["/SystemSetting/RefForm/RoleMapping"],{ "RefFormId": this.RefFormId });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_REF_FORM_ROLE_MAP],{ "RefFormId": this.RefFormId });
       });
   }
 }

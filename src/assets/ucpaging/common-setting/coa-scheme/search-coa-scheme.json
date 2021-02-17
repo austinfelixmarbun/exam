@@ -91,7 +91,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/CommonSetting/coascheme/detail",
+                    "path": "CS_COA_SCHM_DETAIL",
                     "param": [
                         {
                             "type": "CoaSchmId",

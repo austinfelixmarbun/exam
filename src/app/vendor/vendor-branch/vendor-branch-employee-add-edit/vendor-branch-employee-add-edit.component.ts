@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-branch-employee-add-edit',
@@ -11,6 +12,7 @@ export class VendorBranchEmployeeAddEditComponent implements OnInit {
   VendorEmpId: number;
   IsReload: boolean;
 
+  readonly CancelLink: string = NavigationConstant.VENDOR_BRANCH_EMP_PAGING;
   constructor(private route: ActivatedRoute) { 
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];

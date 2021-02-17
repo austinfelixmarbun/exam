@@ -14,6 +14,7 @@ import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-office-emp-pos',
@@ -46,6 +47,8 @@ export class OfficeEmpPosComponent implements OnInit {
   empNo: any;
   empName: any;
 
+  readonly AddLink: string = NavigationConstant.OFFICE_EMP_POS_ADD;
+  readonly EditLink: string = NavigationConstant.OFFICE_EMP_POS_ADD;
   constructor(private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
     this.apiUrl = this.foundationUrl + URLConstant.GetEmpPositionPaging;
     this.deleteUrl = this.foundationUrl + URLConstant.DeleteEmpPosition;

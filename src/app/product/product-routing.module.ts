@@ -26,34 +26,35 @@ import { ProductHoReviewComponent } from './product-HO/product-ho-review/product
 import { ProdOfferingReviewPagingComponent } from './prod-offering/prod-offering-review-paging/prod-offering-review-paging.component';
 import { ProdOfferingReviewComponent } from './prod-offering/prod-offering-review/prod-offering-review.component';
 import { ProductHoReviewPagingComponent } from './product-HO/product-ho-review-paging/product-ho-review-paging.component';
+import { PathConstant } from 'app/shared/PathConstant';
 
 const routes: Routes = [
     {
       path: '',
       children: [
         {
-          path: 'ProdOffering/Paging',
+          path: PathConstant.PROD_OFFERING_PAGING,
           component: ProdOfferingPagingComponent,
           data: {
             title: 'Paging'
           },
         },
         {
-          path: 'ProdOffering/Returnpaging',
+          path: PathConstant.PROD_OFFERING_RTN_PAGING,
           component: ProdOfferingReturnPagingComponent,
           data: {
             title: 'Return Paging'
           },
         },
         {
-          path: 'ProdOffering/add',
+          path: PathConstant.PROD_OFFERING_ADD,
           component: ProdOfferingAddComponent,
           data: {
             title: 'Add'
           },
         },
         {
-          path: 'ProdOffering/AddDetail',
+          path: PathConstant.PROD_OFFERING_ADD_DETAIL,
           component: ProdOfferingAddDetailComponent,
           loadChildren: "./prod-offering/prod-offering-add-detail/prod-offering-add-detail.module#ProdOfferingAddDetailModule",
           data: {
@@ -61,28 +62,28 @@ const routes: Routes = [
           },
         },
         {
-          path: 'HOpaging',
+          path: PathConstant.HO_PAGING,
           component: ProductHOPagingComponent,
           data: {
               title: 'Product HO Paging'
           }
       },
       {
-          path: 'HOReturnPaging',
+          path: PathConstant.HO_RTN_PAGING,
           component: ProductReturnHoPagingComponent,
           data: {
               title: 'Product Return HO Paging'
           }
       },
       {
-          path: 'HOadd',
+          path: PathConstant.HO_ADD,
           component: ProductHOAddComponent,
           data: {
               title: 'Product HO Add'
           }
       },
       {
-        path: 'HOadddetail',
+        path: PathConstant.HO_ADD_DETAIL,
         component: ProductHoAdddetailComponent,
         loadChildren: "./product-HO/product-ho-adddetail/product-ho-adddetail.module#ProductHOAddDetailModule",
         data: {
@@ -90,126 +91,126 @@ const routes: Routes = [
         }
       },
       {
-        path: 'HODeactivate',
+        path: PathConstant.HO_DEACTIVATE,
         component: ProductHODeactivatePagingComponent,
         data: {
           title: 'Product HO Deactivate Paging'
         }
       },
       {
-        path: 'HODeactivate/edit',
+        path: PathConstant.HO_DEACTIVATE_EDIT,
         component: ProductHODeactivateEditComponent,
         data: {
           title: 'Product HO Deactivate'
         }
       },
       {
-        path: 'HOView',
+        path: PathConstant.HO_VIEW,
         component: ProductHOViewComponent,
         data: {
           title: 'Product HO View'
         }
       },
       {
-        path: 'OfferingView',
+        path: PathConstant.OFFERING_VIEW,
         component: ProductOfferingViewComponent,
         data: {
           title: 'Product Offering View'
         }
       },
       {
-        path: 'HOApproval',
+        path: PathConstant.HO_APPRV,
         component: ProductHOApprovalComponent,
         data: {
           title: 'Product HO Approval'
         }
       },
       {
-        path: 'HOApproval/Detail',
+        path: PathConstant.HO_APPRV_DETAIL,
         component: ProductHOApprovalDetailComponent,
         data: {
           title: 'Product HO Approval Detail'
         }
       },
       {
-        path: 'OfferingApproval',
+        path: PathConstant.OFFERING_APPRV,
         component: ProductOfferingApprovalComponent,
         data: {
           title: 'Product Offering Approval'
         }
       },
       {
-        path: 'OfferingApproval/Detail',
+        path: PathConstant.OFFERING_APPRV_DETAIL,
         component: ProductOfferingApprovalDetailComponent,
         data: {
           title: 'Product Offering Approval Detail'
         }
       },
       {
-        path: 'HODeactivateApproval',
+        path: PathConstant.HO_DEACTIVATE_APPRV,
         component: ProductHODeactivateApprovalComponent,
         data: {
           title: 'Product HO Deactivate Approval'
         }
       },
       {
-        path: 'HODeactivateApproval/Detail',
+        path: PathConstant.HO_DEACTIVATE_APPRV_DETAIL,
         component: ProductHODeactivateApprovalDetailComponent,
         data: {
           title: 'Product HO Deactivate Approval Detail'
         }
       },
       {
-        path: 'OfferingDeactivate',
+        path: PathConstant.OFFERING_DEACTIVATE,
         component: ProductOfferingDeactivatePagingComponent,
         data: {
           title: 'Product Offering Deactivate Paging'
         }
       },
       {
-        path: 'OfferingDeactivate/edit',
+        path: PathConstant.OFFERING_DEACTIVATE_EDIT,
         component: ProductOfferingDeactivateEditComponent,
         data: {
           title : 'Product Offering Deactivate'
         }
       },
       {
-        path: 'OfferingDeactivateApproval',
+        path: PathConstant.OFFERING_DEACTIVATE_APPRV_DETAIL,
         component: ProductOfferingDeactivateApprovalComponent,
         data: {
           title: 'Product Offering Deactivate Approval'
         }
       },
       {
-        path: 'OfferingDeactivateApproval/Detail',
+        path: PathConstant.OFFERING_DEACTIVATE_APPRV_DETAIL,
         component: ProductOfferingDeactivateApprovalDetailComponent,
         data: {
           title: 'Product Offering Deactivate Approval Detail'
         }
       },
       {
-        path: 'HOReview/Detail',
+        path: PathConstant.HO_REVIEW_DETAIL,
         component: ProductHoReviewComponent,
         data: {
           title: 'Product HO Review'
         }
       },
       {
-        path: 'HOReview',
+        path: PathConstant.HO_REVIEW,
         component: ProductHoReviewPagingComponent,
         data: {
           title: 'Product HO Review Paging'
         }
       },
       {
-        path: 'OfferingReview/Detail',
+        path: PathConstant.OFFERING_REVIEW_DETAIL,
         component: ProdOfferingReviewComponent,
         data: {
           title: 'Product Offering Review'
         }
       },
       {
-        path: 'OfferingReview',
+        path: PathConstant.OFFERING_VIEW,
         component: ProdOfferingReviewPagingComponent,
         data: {
           title: 'Product Offering Review Paging'

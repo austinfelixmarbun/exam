@@ -7,6 +7,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-ref-job-title-add',
@@ -29,7 +30,7 @@ export class RefJobTitleAddComponent implements OnInit {
     Descr: ['', Validators.maxLength(4000)]
   });
 
-
+  readonly CancelLink: string = NavigationConstant.ORG_JOB_TITLE;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.apiUrl = URLConstant.GetRefJobTitleById;
     this.addUrl = URLConstant.AddRefJobTitle;
@@ -72,7 +73,7 @@ export class RefJobTitleAddComponent implements OnInit {
       this.http.post(this.addUrl, this.rjtObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Organization/JobTitle"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ORG_JOB_TITLE],{});
         }
       );
     } else {
@@ -81,7 +82,7 @@ export class RefJobTitleAddComponent implements OnInit {
       this.http.post(this.editUrl, this.rjtObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Organization/JobTitle"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ORG_JOB_TITLE],{});
         }
       );
     }

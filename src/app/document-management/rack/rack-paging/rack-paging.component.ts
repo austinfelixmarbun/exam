@@ -3,6 +3,7 @@ import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { CabinetWithListRackObj } from 'app/shared/model/document-management/CabinetWithListRackObj.Model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-rack-paging',
@@ -11,6 +12,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class RackPagingComponent implements OnInit {
   Cabinet: CabinetWithListRackObj = new CabinetWithListRackObj();
 
+  readonly CancelLink: string = NavigationConstant.DOC_MNGMNT_CABINET_PAGING;
+  readonly AddLink: string = NavigationConstant.DOC_MNGMNT_RACK_ADD_EDIT;
+  readonly ViewLink: string = NavigationConstant.DOC_MNGMNT_VIEW_RACK;
+  readonly FilingLink: string = NavigationConstant.DOC_MNGMNT_FILING_PAGING;
+  readonly EditLink: string = NavigationConstant.BACK_TO_ADD_EDIT;
   constructor(private http: HttpClient,
     private router: Router,
     private activeRoute: ActivatedRoute) { 
@@ -20,7 +26,7 @@ export class RackPagingComponent implements OnInit {
           this.Cabinet.CabinetCode = params['CabinetCode']
         }
         else{
-          this.router.navigateByUrl("/DocumentManagement/Cabinet/Paging")
+          this.router.navigateByUrl(NavigationConstant.DOC_MNGMNT_CABINET_PAGING)
         }
       }
     );
@@ -39,6 +45,6 @@ export class RackPagingComponent implements OnInit {
 
   editRack(index){
     let rackCode = this.Cabinet.ListRack[index].RackCode;
-    this.router.navigate(["/DocumentManagement/Rack/AddEdit"], { queryParams: { RackCode: rackCode, Mode: 'Edit' } });
+    this.router.navigate([NavigationConstant.DOC_MNGMNT_RACK_ADD_EDIT], { queryParams: { RackCode: rackCode, Mode: 'Edit' } });
   }
 }

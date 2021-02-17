@@ -6,6 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-employee-businessunit-paging',
@@ -17,6 +18,8 @@ export class EmployeeBusinessunitPagingComponent implements OnInit {
   inputPagingObj : any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
+  readonly CancelLink: string = NavigationConstant.EMP_PAGING;
+  readonly AddLink: string = NavigationConstant.EMP_BZ_UNIT_ADD;
   constructor(private route: ActivatedRoute) { 
     this.route.queryParams.subscribe(params => {
       this.RefUserId = params["RefUserId"];

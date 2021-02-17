@@ -89,7 +89,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/Asset/Category/Detail",
+          "path": "ASSET_CATEGORY_DETAIL",
           "param": [
             {
               "type": "mode",

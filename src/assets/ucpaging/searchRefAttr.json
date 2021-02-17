@@ -121,7 +121,7 @@
                     ],
                     "result": {
                       "type": "url",
-                      "path": "/SystemSetting/Attribute/Detail",
+                      "path": "SYSTEM_SETTING_ATTR_DETAIL",
                       "param": [
                         {
                           "type": "refAttrId",

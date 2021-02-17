@@ -13,6 +13,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from '../constant/URLConstant';
 import { CommonConstant } from '../constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from '../NavigationConstant';
 
 @Component({
     selector: 'app-navbar',
@@ -38,7 +39,8 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     notifications: object[] = [];
 
-    constructor(public translate: TranslateService,
+    readonly ChangeLink: string = NavigationConstant.PAGES_CHANGE_PASSWORD;
+    constructor(public translate: TranslateService, 
         private router: Router, private cookieService: CookieService,
         private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService) {
         const browserLang: string = translate.getBrowserLang();
@@ -91,7 +93,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         this.http.post(url, "");
         AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();
-        this.router.navigate(['pages/login']);
+        this.router.navigate([NavigationConstant.PAGES_LOGIN]);
     }
 
     ShowRole() {

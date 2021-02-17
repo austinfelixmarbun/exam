@@ -12,6 +12,7 @@ import { DecimalPipe } from "@angular/common";
 import { InputSearchObj } from "app/shared/model/InputSearchObj.Model";
 import { URLConstant } from "app/shared/constant/URLConstant";
 import { AdInsHelper } from "app/shared/AdInsHelper";
+import { NavigationConstant } from "app/shared/NavigationConstant";
 
 @Component({
   selector: "app-user-paging",
@@ -109,7 +110,7 @@ export class UserPagingComponent implements OnInit {
               skipLocationChange: true
             })
             .then(() => 
-            AdInsHelper.RedirectUrl(this.router,["/systemSetting/refUser"],{})
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_REF_USER],{})
             );
         }
       );

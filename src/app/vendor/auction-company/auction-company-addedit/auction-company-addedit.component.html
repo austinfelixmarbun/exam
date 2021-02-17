@@ -48,6 +48,29 @@
               </div>
 
               <div class="form-group row">
+                <label class="col-md-3 adins-required-label">ID Type</label>
+                <div class="col-md-4">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="MrIdTypeCode"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && AuctionCompanyForm.controls.MrIdTypeCode.invalid }">
+                    <option *ngFor="let it of itemIdType" value="{{it.Key}}">
+                      {{it.Value}}</option>
+                  </select>
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adins-required-label">Registration Number</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control adInsInput width-50-per" formControlName="RegistrationNo"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && AuctionCompanyForm.controls.RegistrationNo.invalid}">
+                    <lib-uc-show-errors [control]="AuctionCompanyForm.controls.RegistrationNo" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
                 <label class="col-md-3 adins-required-label">Address</label>
                 <div class="col-md-4">
                   <textarea class="form-control" formControlName="Addr"> </textarea>
@@ -116,8 +139,6 @@
                 <label class="col-md-3">Mobile Phone 2</label>
                 <div class="col-md-4">
                   <input type="text" class="form-control" formControlName="Phn2">
-                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.Phn2" [submit]="enjiForm.submitted">
-                  </lib-uc-show-errors>
                 </div>
               </div>
 
@@ -162,7 +183,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-md-3 adins-required-label">Phone1</label>
+                <label class="col-md-3 adins-required-label">Mobile Phone 1</label>
                 <div class="col-md-4">
                   <input type="text" class="form-control" formControlName="Phone1">
                   <lib-uc-show-errors [control]="AuctionCompanyForm.controls.Phone1" [submit]="enjiForm.submitted">
@@ -171,7 +192,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-md-3">Phone2</label>
+                <label class="col-md-3">Mobile Phone 2</label>
                 <div class="col-md-4">
                   <input type="text" class="form-control" formControlName="Phone2">
                 </div>
@@ -298,7 +319,7 @@
 
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1"
-                [routerLink]="['/Vendor/auctioncompany/paging']" translate>
+                [routerLink]="[CancelLink]" translate>
                 <i class="fa fa-arrow-circle-left"></i> Back
               </button>
               <button type="submit" class="btn btn-raised btn-primary">

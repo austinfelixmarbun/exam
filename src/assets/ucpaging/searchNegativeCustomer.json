@@ -153,7 +153,7 @@
             "type" : "link", 
             "position" : "left", 
             "property" : "custName",
-            "path": "/View/NegativeCustomer",
+            "path": "VIEW_NEG_CUST",
             "target": "_blank",
             "param": [
                 {
@@ -193,7 +193,7 @@
             "action" : [ 
                 {
                     "type" : "edit", 
-                    "path" : "/Customer/NegativeCustomer/Detail", 
+                    "path" : "CUST_NEG_DETAIL", 
                     "param" : [ 
                         {
                             "type" : "negativeCustId", 

@@ -10,6 +10,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-groupmember',
@@ -22,6 +23,7 @@ export class VendorGroupmemberComponent implements OnInit {
   MrVendorCategoryCode: string = '';
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
 
+  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -107,7 +109,7 @@ export class VendorGroupmemberComponent implements OnInit {
 
     this.http.post(URLConstant.AddVendorGrpMbr, obj).subscribe(
       (response) => {
-        AdInsHelper.RedirectUrl(this.router,["/Vendor/Group/View"],{ "VendorGrpId": this.VendorGrpId, "MrVendorCategoryCode": this.MrVendorCategoryCode });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_GRP_VIEW],{ "VendorGrpId": this.VendorGrpId, "MrVendorCategoryCode": this.MrVendorCategoryCode });
       });
   }
 }

@@ -64,7 +64,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Verification/QuestionSchemeMemberPaging",
+                    "path": "VERIF_QA_SCHM_MBR_PAGING",
                     "param": [
                         {
                             "type": "VerfSchemeHId",
@@ -80,7 +80,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Verification/QuestionScheme/Edit",
+                    "path": "VERIF_QA_SCHM_EDIT",
                     "param": [
                         {
                             "type": "VerfSchemeHId",

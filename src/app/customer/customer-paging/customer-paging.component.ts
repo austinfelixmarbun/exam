@@ -4,6 +4,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-customer-paging',
@@ -12,6 +13,8 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 })
 export class CustomerPagingComponent implements OnInit {
   inputPagingObj: UcPagingObj;
+  readonly AddLinkPersonal: string = NavigationConstant.CUST_PERSONAL_MAIN_INFO;
+  readonly AddLinkCoy: string = NavigationConstant.CUST_COY_MAIN_INFO;
   constructor() { }
 
   ngOnInit() {

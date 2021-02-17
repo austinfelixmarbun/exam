@@ -79,20 +79,5 @@ export function createTranslateLoader(http: HttpClient) {
 })
 export class AppModule {
     constructor() {
-
-        // localStorage.setItem("LocalIp", window.location.origin);
-        // console.log(window.location.origin); // 192.168.0.122
-
-        // var url = environment.FoundationR3Url + AdInsConstant.GetBusinessDt;
-        // this.http.post(url, null).subscribe(
-        //     (response) => {
-        //         var datePipe = new DatePipe("en-US");
-        //         var value = datePipe.transform(response["returnObject"], 'yyyy/MM/dd');
-        //         localStorage.setItem("BusinessDate", value);
-        //     },
-        //     (error) => {
-
-        //     }
-        // )
     }
 }

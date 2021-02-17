@@ -5,6 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-prod-offering-paging',
@@ -18,6 +19,7 @@ export class ProdOfferingPagingComponent implements OnInit {
     private router: Router
   ) { }
 
+  readonly AddLink: string = NavigationConstant.PROD_OFFERING_ADD;
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/product/searchProductOffering.json";
@@ -47,11 +49,11 @@ export class ProdOfferingPagingComponent implements OnInit {
   {
     if(e.RowObj.DraftProdOfferingHId == null)
     {
-      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/add"],{ "ProdOfferingHId": e.RowObj.prodOfferingHId, "mode" : "edit" });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PROD_OFFERING_ADD],{ "ProdOfferingHId": e.RowObj.prodOfferingHId, "mode" : "edit" });
     }
     else
     {
-      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/add"],{ "ProdOfferingHId": e.RowObj.DraftProdOfferingHId, "mode" : "edit" });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PROD_OFFERING_ADD],{ "ProdOfferingHId": e.RowObj.DraftProdOfferingHId, "mode" : "edit" });
     }
   }
 

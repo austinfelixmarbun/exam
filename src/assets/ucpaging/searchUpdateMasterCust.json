@@ -99,7 +99,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Customer/UpdateDataCustomer/Detail",
+                    "path": "CUST_UPDATE_DATA_DETAIL",
                     "param": [
                         {
                             "type": "CustDataTrxId",

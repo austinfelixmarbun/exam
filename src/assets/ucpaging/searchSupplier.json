@@ -120,7 +120,7 @@
             "position": "center",
             "property": "BranchName",
             "target": "_blank",
-            "path": "/View/Vendor/VendorBranch",
+            "path": "VIEW_VENDOR_BRANCH",
             "param": [
                 {
                     "type": "VendorId",
@@ -150,7 +150,7 @@
                 {
                     "type": "edit",
                     "icon": "fa fa-sitemap",
-                    "path": "/Vendor/Branch/Member/Paging",
+                    "path": "VENDOR_BRANCH_MBR_PAGING",
                     "param": [
                         {
                             "type": "VendorId",
@@ -183,7 +183,7 @@
                             "result": {
                                 "type": "url",
                                 "icon": "ft-users",
-                                "path": "/Vendor/Branch/Employee/Paging",
+                                "path": "VENDOR_BRANCH_EMP_PAGING",
                                 "param": [
                                     {
                                         "type": "VendorId",
@@ -203,7 +203,7 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Vendor/Branch/Registration",
+                    "path": "VENDOR_BRANCH_REG",
                     "param": [
                         {
                             "type": "VendorId",

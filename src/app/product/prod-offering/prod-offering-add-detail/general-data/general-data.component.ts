@@ -15,6 +15,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-general-data',
@@ -119,7 +120,7 @@ export class GeneralDataComponent implements OnInit {
     this.http.post(this.UrlBackEnd, this.listGeneralDataObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-        AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/Paging"],{ });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PROD_OFFERING_PAGING],{ });
       }
     );
   }
@@ -180,10 +181,10 @@ export class GeneralDataComponent implements OnInit {
 
   BackToPaging() {
     if (this.source == "return") {
-      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/Returnpaging"],{ });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PROD_OFFERING_RTN_PAGING],{ });
     }
     else {
-      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/Paging"],{ });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PROD_OFFERING_PAGING],{ });
     }
   }
 }

@@ -15,6 +15,7 @@ import { NgForm, FormBuilder } from '@angular/forms';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { UploadService } from 'app/shared/upload/upload.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-upload-setting-edit',
@@ -55,6 +56,7 @@ export class UploadSettingEditComponent implements OnInit {
 
   UploadForm = this.fb.group({});
 
+  readonly CancelLink: string = NavigationConstant.UPLOAD_SETTING_PAGING;
   constructor(private spinner: NgxSpinnerService,
     private service: NGXToastrService,
     private httpClient: HttpClient,

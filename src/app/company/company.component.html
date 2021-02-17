@@ -16,18 +16,18 @@
         <td class="text-left">{{item.address}}</td>
         <td>{{item.phone}}</td>
         <td>
-          <a class="success p-0" data-original-title="" title="" [routerLink]="['/company/bod']" [queryParams]="{refCoyId:item.refCoyId}" skipLocationChange>
+          <a class="success p-0" data-original-title="" title="" [routerLink]="[BodLink]" [queryParams]="{refCoyId:item.refCoyId}" skipLocationChange>
             <i class="ft-edit-2 font-medium-3 mr-2"></i>
           </a>
         </td>
         <td>
-          <a class="success p-0" data-original-title="" title="" [routerLink]="['/company/commissioner']" skipLocationChange
+          <a class="success p-0" data-original-title="" title="" [routerLink]="[CommissionerLink]" skipLocationChange
           [queryParams]="{refCoyId:item.refCoyId}">
             <i class="ft-edit-2 font-medium-3 mr-2"></i>
           </a>
         </td>
         <td>
-          <a class="success p-0" data-original-title="" title="" [routerLink]="['/company/edit']" skipLocationChange
+          <a class="success p-0" data-original-title="" title="" [routerLink]="[EditLink]" skipLocationChange
             [queryParams]="{refCoyId:item.refCoyId,mode:'edit'}">
             <i class="ft-edit-2 font-medium-3 mr-2"></i>
           </a>

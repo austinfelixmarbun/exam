@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-review-upload-negative-customer-paging',
@@ -42,7 +43,7 @@ export class ReviewUploadNegativeCustomerPagingComponent implements OnInit {
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,["/Customer/NegativeCustomer/ReviewUploadPaging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING],{});
       }); 
       }
     );

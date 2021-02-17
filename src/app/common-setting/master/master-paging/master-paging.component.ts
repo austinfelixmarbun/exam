@@ -4,6 +4,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-master-paging',
@@ -13,6 +14,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 export class MasterPagingComponent implements OnInit {
   inputPagingObj: any;
 
+  readonly AddLink: string = NavigationConstant.CS_MASTER_DETAIL;
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/search/searchMaster.json";

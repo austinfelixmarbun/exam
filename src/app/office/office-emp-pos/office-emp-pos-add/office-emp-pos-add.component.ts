@@ -14,6 +14,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-office-emp-pos-add',
@@ -63,6 +64,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
   orderByValue: boolean = true;
   arrCrit: any;
 
+  readonly CancelLink: string = NavigationConstant.OFFICE_EMP_POS;
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.getUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
     this.addUrl = this.foundationUrl + URLConstant.AddEmpPosition;
@@ -172,7 +174,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
         (response) => {
           if (response['isError'] != true) {
             this.toastr.successMessage(response['message']);
-            AdInsHelper.RedirectUrl(this.router,["/employee"],{});
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP],{});
           }
         }
       );
@@ -190,7 +192,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
       this.httpClient.post(this.editUrl, this.empPositionObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          AdInsHelper.RedirectUrl(this.router,["/office"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE],{});
         }
       );
 

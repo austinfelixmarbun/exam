@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { VendorService } from 'app/vendor/vendor.service';
 
 @Component({
@@ -15,6 +16,8 @@ export class VendorHoRegistrationComponent implements OnInit {
   VendorContactPersonId:any;
   MrVendorCategoryCode: string = "";
 
+  readonly EditLink: string = NavigationConstant.VENDOR_HO_DETAIL;
+  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   constructor(private route: ActivatedRoute, private vendorService: VendorService) { 
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];

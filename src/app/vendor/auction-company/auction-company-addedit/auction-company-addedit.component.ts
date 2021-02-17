@@ -13,6 +13,7 @@ import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { VendorService } from 'app/vendor/vendor.service';
 import { formatDate } from '@angular/common';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-auction-company-addedit',
@@ -30,7 +31,10 @@ export class AuctionCompanyAddeditComponent implements OnInit {
   itemCalcMethodType: any;
   title: any = "Auction Company - Add";
   result: any;
+  itemIdType: any;
+  RsvField: string;
 
+  readonly CancelLink: string = NavigationConstant.VENDOR_AUCTION_COY_PAGING;
   constructor(private fb: FormBuilder,
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -54,18 +58,20 @@ export class AuctionCompanyAddeditComponent implements OnInit {
     Category : ['', [Validators.required]],
     VendorCode  : ['', [Validators.required]],
     VendorName  :  ['', [Validators.required]],
+    MrIdTypeCode: [''],
+    RegistrationNo: ['', Validators.required],
     Addr  :  ['', [Validators.required]],
     Kelurahan : ['', [Validators.required]],
     Kecamatan : ['', [Validators.required]],
     City : ['', [Validators.required]],
     Province : ['',[Validators.required]],
-    Phn1  :  ['', [Validators.required],Validators.pattern("^[0-9]+$")],    
-    Phn2 : ['', [Validators.required],Validators.pattern("^[0-9]+$")],    
+    Phn1  :  ['', [Validators.required,Validators.pattern("^[0-9]+$")]],    
+    Phn2 : [''],    
     IsActive : ['', [Validators.required]],
     Name  :  ['', [Validators.required]],
     MrJobPositionCode  :  ['', [Validators.required]],
-    Phone1 : ['', [Validators.required],Validators.pattern("^[0-9]+$")],    
-    Phone2 : ['', [Validators.required],Validators.pattern("^[0-9]+$")],    
+    Phone1 : ['', [Validators.required,Validators.pattern("^[0-9]+$")]],    
+    Phone2 : [''],    
     Email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],    
     MrTaxCalcMethodCode : ['', [Validators.required]],
     IsVat : ['', [Validators.required]],
@@ -99,6 +105,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
   }
 
   getData(){
+    console.log('testing');
     this.title = "Auction Company - Edit";
     this.vendorService.GetAuctionCompanyByVendorIdForEdit({ VendorId: this.VendorId }).subscribe(
       (response) => {
@@ -107,6 +114,8 @@ export class AuctionCompanyAddeditComponent implements OnInit {
         this.AuctionCompanyForm.patchValue({
           VendorCode: this.result.VendorObj.VendorCode,
           VendorName: this.result.VendorObj.VendorName,
+          MrIdTypeCode: this.result.VendorObj.MrIdTypeCode,
+          RegistrationNo: this.result.VendorObj.RegistrationNo,
           MrTaxCalcMethodCode: this.result.VendorObj.MrTaxCalcMethodCode,
           IsVat: this.result.VendorObj.IsVat,
           IsNpwpExist: this.result.VendorObj.IsNpwpExist,
@@ -118,12 +127,12 @@ export class AuctionCompanyAddeditComponent implements OnInit {
           Kelurahan: this.result.VendorAddrObj.AreaCode2,
           City: this.result.VendorAddrObj.City,
           Province: this.result.VendorAddrObj.Province,
-          Phn1: this.result.VendorAddrObj.Phn1,
-          Phn2: this.result.VendorAddrObj.Phn2,
+          Phn1: this.result.VendorObj.MobilePhnNo1,
+          Phn2: this.result.VendorObj.MobilePhnNo2,
           Name: this.result.VendorContactPersonObj.Name,
           MrJobPositionCode: this.result.VendorContactPersonObj.MrEmployeePosition,
           Phone1: this.result.VendorContactPersonObj.Phone1,
-          Phone2: this.result.VendorContactPersonObj.Name,
+          Phone2: this.result.VendorContactPersonObj.Phone2,
           CityContactPerson: this.result.VendorContactPersonObj.City,
           ProvinceContactPerson: this.result.VendorContactPersonObj.Province,
           AddrContactPerson: this.result.VendorContactPersonObj.Addr,          
@@ -134,12 +143,6 @@ export class AuctionCompanyAddeditComponent implements OnInit {
         });
         this.NpwpCheck();
         this.setLookup();
-        this.inputLookupZipcodeObj.jsonSelect = { 
-          Zipcode: this.result["VendorAddrObj"].Zipcode 
-        };
-        this.inputLookupZipcodeContactPersonObj.jsonSelect = { 
-          ZipcodeContactPerson: this.result["VendorContactPersonObj"].Zipcode 
-        }
       }
     );
   }
@@ -153,6 +156,25 @@ export class AuctionCompanyAddeditComponent implements OnInit {
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrJobPositionCode = response[CommonConstant.ReturnObj];
+      }
+    );
+
+    this.RsvField = CommonConstant.CustTypeCompany
+
+    var refMasterIdObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
+      MappingCode: this.RsvField,
+    }
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
+      (response) => {
+        this.itemIdType = response[CommonConstant.ReturnObj];
+        if (this.mode != "edit") {
+          if (this.itemIdType.length > 0) {
+            this.AuctionCompanyForm.patchValue({
+              MrIdTypeCode: this.itemIdType[0].Key
+            });
+          }
+        }
       }
     );
 
@@ -180,14 +202,19 @@ export class AuctionCompanyAddeditComponent implements OnInit {
       this.AuctionCompanyObj.VendorContactPersonObj = new VendorContactPersonObj();
 
       //Vendor 
+      this.AuctionCompanyObj.VendorObj.MrVendorTypeCode = 'C';
       this.AuctionCompanyObj.VendorObj.VendorCode = this.AuctionCompanyForm.controls.VendorCode.value;
       this.AuctionCompanyObj.VendorObj.VendorName = this.AuctionCompanyForm.controls.VendorName.value;
+      this.AuctionCompanyObj.VendorObj.RegistrationNo = this.AuctionCompanyForm.controls.RegistrationNo.value;
+      this.AuctionCompanyObj.VendorObj.MrIdTypeCode = this.AuctionCompanyForm.controls.MrIdTypeCode.value;
       this.AuctionCompanyObj.VendorObj.MrTaxCalcMethodCode = this.AuctionCompanyForm.controls.MrTaxCalcMethodCode.value;
       this.AuctionCompanyObj.VendorObj.IsVat = this.AuctionCompanyForm.controls.IsVat.value;
       this.AuctionCompanyObj.VendorObj.IsNpwpExist = this.AuctionCompanyForm.controls.IsNpwpExist.value;
       this.AuctionCompanyObj.VendorObj.TaxidNo = this.AuctionCompanyForm.controls.TaxIdNo.value;
       this.AuctionCompanyObj.VendorObj.TaxpayerName = this.AuctionCompanyForm.controls.TaxpayerName.value;
       this.AuctionCompanyObj.VendorObj.IsActive = this.AuctionCompanyForm.controls.IsActive.value;
+      this.AuctionCompanyObj.VendorObj.MobilePhnNo1 = this.AuctionCompanyForm.controls.Phn1.value;
+      this.AuctionCompanyObj.VendorObj.MobilePhnNo2 = this.AuctionCompanyForm.controls.Phn2.value;      
 
       //Vendor Addr
       this.AuctionCompanyObj.VendorAddrObj.Addr = this.AuctionCompanyForm.controls.Addr.value;
@@ -195,9 +222,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
       this.AuctionCompanyObj.VendorAddrObj.AreaCode1 = this.AuctionCompanyForm.controls.Kecamatan.value;
       this.AuctionCompanyObj.VendorAddrObj.City = this.AuctionCompanyForm.controls.City.value;
       this.AuctionCompanyObj.VendorAddrObj.Zipcode = this.AuctionCompanyForm.controls["Zipcode"]["controls"].value.value;
-      this.AuctionCompanyObj.VendorAddrObj.Province = this.AuctionCompanyForm.controls.Province.value;
-      this.AuctionCompanyObj.VendorAddrObj.Phn1 = this.AuctionCompanyForm.controls.Phn1.value;
-      this.AuctionCompanyObj.VendorAddrObj.Phn2 = this.AuctionCompanyForm.controls.Phn2.value;      
+      this.AuctionCompanyObj.VendorAddrObj.Province = this.AuctionCompanyForm.controls.Province.value;     
 
       //Vendor Contact Person
       this.AuctionCompanyObj.VendorContactPersonObj.Name = this.AuctionCompanyForm.controls.Name.value;
@@ -218,14 +243,14 @@ export class AuctionCompanyAddeditComponent implements OnInit {
         this.vendorService.EditAuctionCompany(this.AuctionCompanyObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            this.router.navigate(['/Vendor/auctioncompany/paging']);
+            this.router.navigate([NavigationConstant.VENDOR_AUCTION_COY_PAGING]);
           });
       }
       else{
         this.http.post(URLConstant.AddAuctionCompany , this.AuctionCompanyObj).subscribe(
           (response) => {
             this.toastr.successMessage("Success!");
-            this.router.navigateByUrl("/Vendor/auctioncompany/paging");
+            this.router.navigateByUrl(NavigationConstant.VENDOR_AUCTION_COY_PAGING);
           },
           (error) => {
             console.log(error);

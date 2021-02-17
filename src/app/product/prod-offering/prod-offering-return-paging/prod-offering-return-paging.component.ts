@@ -6,6 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-prod-offering-return-paging',
@@ -48,11 +49,11 @@ export class ProdOfferingReturnPagingComponent implements OnInit {
   {
     if(e.RowObj.DraftProdOfferingHId == null)
     {
-      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/add"],{ "ProdOfferingHId": e.RowObj.CurrentProdOfferingHId, "mode" : "edit", "source" : "return" });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PROD_OFFERING_ADD],{ "ProdOfferingHId": e.RowObj.CurrentProdOfferingHId, "mode" : "edit", "source" : "return" });
     }
     else
     {
-      AdInsHelper.RedirectUrl(this.router,["/Product/ProdOffering/add"],{ "ProdOfferingHId": e.RowObj.DraftProdOfferingHId, "mode" : "edit", "source" : "return" });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PROD_OFFERING_ADD],{ "ProdOfferingHId": e.RowObj.DraftProdOfferingHId, "mode" : "edit", "source" : "return" });
     }
   }
 }

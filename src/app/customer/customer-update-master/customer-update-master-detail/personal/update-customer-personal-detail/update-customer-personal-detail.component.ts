@@ -10,6 +10,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UpdateCustPersonalDetailObj } from 'app/shared/model/UpdateMasterCust/UpdateCustPersonalDetailObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { forkJoin } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
@@ -254,7 +255,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
 
   back(){
     // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
-    AdInsHelper.RedirectUrl(this.router, ["/Customer/UpdateDataCustomer/Paging"], {});
+    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
   }
 
   VipHandler(){

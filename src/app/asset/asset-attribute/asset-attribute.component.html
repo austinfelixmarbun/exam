@@ -9,10 +9,10 @@
 </div>
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="button" class="backButton" [routerLink]="['../../Configuration/Paging']" skipLocationChange translate>
+    <button type="button" class="backButton" [routerLink]="[CancelLink]" skipLocationChange translate>
       <i class="fa fa-arrow-left"> </i> Back
     </button>
-    <button type="button" class="addButton" [routerLink]="['../Detail']" [queryParams]="{ AssetTypeId: this.AssetTypeId, mode:'add'}" skipLocationChange translate>
+    <button type="button" class="addButton" [routerLink]="[AddLink]" [queryParams]="{ AssetTypeId: this.AssetTypeId, mode:'add'}" skipLocationChange translate>
       <i class="ft-plus-circle"> </i> Add
     </button>
   </span>

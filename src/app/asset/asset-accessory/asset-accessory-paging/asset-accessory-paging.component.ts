@@ -6,6 +6,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-asset-accessory-paging',
@@ -25,6 +26,8 @@ export class AssetAccessoryPagingComponent implements OnInit {
       }
     });
   }
+  readonly AddLink: string = NavigationConstant.BACK_TO_DETAIL;
+  readonly CancelLink: string = NavigationConstant.ASSET_CONFIG_PAGING;
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetAccessory.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;

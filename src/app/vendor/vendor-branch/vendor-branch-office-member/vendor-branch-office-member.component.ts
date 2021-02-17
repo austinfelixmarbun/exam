@@ -7,6 +7,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { VendorService } from 'app/vendor/vendor.service';
 import { HttpClient } from '@angular/common/http';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-branch-office-member',
@@ -18,6 +19,8 @@ export class VendorBranchOfficeMemberComponent implements OnInit {
   objPassing: any = {};
   MrVendorCategoryCode: string = "";
 
+  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
+  readonly AddLink: string = NavigationConstant.VENDOR_BRANCH_MBR_ADD;
   constructor(private route: ActivatedRoute, private http : HttpClient) {
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];

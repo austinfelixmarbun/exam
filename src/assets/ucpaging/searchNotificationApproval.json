@@ -125,7 +125,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "/SystemSetting/NotificationApproval/Detail",
+            "path": "SYSTEM_SETTING_NOTIF_APPRV_DETAIL",
             "param": [
               {
                 "type": "NotificationHId",

@@ -7,6 +7,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-asset-type-add-edit',
@@ -48,6 +49,7 @@ export class AssetTypeAddEditComponent implements OnInit {
   serialNoOptions: Array<number> = [1, 2, 3, 4, 5];
   serialNoShown: Array<boolean> = [false, false, false, false, false];
 
+  readonly CancelLink: string = NavigationConstant.ASSET_TYPE_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
@@ -253,7 +255,7 @@ export class AssetTypeAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddAssetType, this.assetTypeObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/Type/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_TYPE_PAGING],{});
         });
     } else {
       this.assetTypeObj.AssetTypeCode = this.assetTypeCode;
@@ -262,7 +264,7 @@ export class AssetTypeAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditAssetType, this.assetTypeObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/Type/Paging"],{});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_TYPE_PAGING],{});
         });
     }
   }

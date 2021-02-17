@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-asset-accessory-add-edit',
@@ -25,6 +26,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
   acObj: AssetAccessoryObj = new AssetAccessoryObj();
   assetTypeName: string;
 
+  readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
@@ -72,7 +74,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddNewAssetAccesory, this.acObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/Accessory/Paging"],{ "AssetTypeId": this.acObj.AssetTypeId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ACC_PAGING],{ "AssetTypeId": this.acObj.AssetTypeId });
         }
       );
     } else {
@@ -83,7 +85,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditAssetAccessory, this.acObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Asset/Accessory/Paging"],{ "AssetTypeId": this.acObj.AssetTypeId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ACC_PAGING],{ "AssetTypeId": this.acObj.AssetTypeId });
         }
       );
     }

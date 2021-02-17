@@ -13,6 +13,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-notification-add-edit',
@@ -53,6 +54,7 @@ export class NotificationAddEditComponent implements OnInit {
 
   })
 
+  readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_NOTIF;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.getHUrl = this.settingUrl + URLConstant.GetNotificationHByNotificationHId;
     this.addUrl = this.settingUrl + URLConstant.AddNotificationHAndD;
@@ -182,7 +184,7 @@ export class NotificationAddEditComponent implements OnInit {
         this.http.post(this.addUrl, this.notificationHObj).subscribe(
           response => {
             this.toastr.successMessage(response["Message"]);
-            AdInsHelper.RedirectUrl(this.router,["/SystemSetting/Notification"],{ });
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_NOTIF],{ });
 
           }
         );

@@ -254,7 +254,7 @@
             "action" : [ 
                 {
                     "type" : "edit", 
-                    "path" : "/Asset/NegativeAsset/Detail", 
+                    "path" : "ASSET_NEG_DETAIL", 
                     "param" : [ 
                         {
                             "type" : "assetNegativeId", 

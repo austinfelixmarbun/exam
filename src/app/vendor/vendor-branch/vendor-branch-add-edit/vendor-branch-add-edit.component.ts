@@ -17,6 +17,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { VendorAttrContentObj } from 'app/shared/model/VendorAttrContentObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-branch-add-edit',
@@ -750,7 +751,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.http.post(URLConstant.EditVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Vendor/Branch/Registration"],{ "VendorId": this.VendorId, "mode": "edit" });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_REG],{ "VendorId": this.VendorId, "mode": "edit" });
         });
     }
     else {
@@ -760,16 +761,16 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.http.post(URLConstant.AddVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,["/Vendor/Branch/Registration"],{ "VendorId": response['VendorObj'].VendorId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_REG],{ "VendorId": response['VendorObj'].VendorId });
         });
     }
   }
 
   Back() {
     if (this.mode == "edit") {
-      AdInsHelper.RedirectUrl(this.router,["/Vendor/Branch/Registration"],{ "VendorId": this.VendorId });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_REG],{ "VendorId": this.VendorId });
     } else {
-      AdInsHelper.RedirectUrl(this.router,["/Vendor/Paging"],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
   }
   bindText() {

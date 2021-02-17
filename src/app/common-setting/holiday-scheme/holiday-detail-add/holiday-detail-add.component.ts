@@ -10,6 +10,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-holiday-detail-add',
@@ -62,7 +63,7 @@ export class HolidayDetailAddComponent implements OnInit {
       this.holidayDetailObj.Descr = this.HolidayListForm.controls.Descr.value;
 
       this.http.post(URLConstant.AddHolidaySchmD, this.holidayDetailObj).subscribe((response) => {
-        AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Holiday/Detail/'],{ "HolidaySchmHId": this.HolidaySchmHId });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId });
         this.toastr.successMessage(response['message']);
       });
     }
@@ -95,7 +96,7 @@ export class HolidayDetailAddComponent implements OnInit {
         this.holidayDetailByYearObj.DictOfDays.push("Saturday");
       }
       this.http.post(URLConstant.AddHolidaySchmDUntilYear, this.holidayDetailByYearObj).subscribe((response) => {
-        AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Holiday/Detail/'],{ "HolidaySchmHId": this.HolidaySchmHId })
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
         this.toastr.successMessage(response['message']);
       });
     }
@@ -125,6 +126,6 @@ export class HolidayDetailAddComponent implements OnInit {
 
   }
   BackNavigate() {
-    AdInsHelper.RedirectUrl(this.router,['/CommonSetting/Holiday/Detail/'],{ "HolidaySchmHId": this.HolidaySchmHId })
+    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
   }
 }

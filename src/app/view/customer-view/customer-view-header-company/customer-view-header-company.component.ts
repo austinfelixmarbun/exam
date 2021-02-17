@@ -6,6 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-view-header-company',
@@ -87,4 +88,7 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
       });
   }
 
+  ClickLinkViewCustExposure() {
+    AdInsHelper.OpenCustExposure(this.IdCust);
+  }
 }

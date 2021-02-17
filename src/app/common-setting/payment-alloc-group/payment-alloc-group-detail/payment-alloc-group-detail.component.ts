@@ -7,6 +7,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { PaymentAllocGrpObj } from 'app/shared/model/common-setting/PaymentAllocGrpObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 
 @Component({
@@ -24,6 +25,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
   ListPayAllocGrp: Array<KeyValueObj> = new Array<KeyValueObj>();
   PaymentAllocGrpObj: PaymentAllocGrpObj = new PaymentAllocGrpObj()
 
+  readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -108,7 +110,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
       this.http.post(URLConstant.AddRefPaymentAllocGrp, this.PaymentAllocGrpObj).subscribe(
         //SAVE
         (response) => {
-          this.router.navigate(['/CommonSetting/paymentallocgrp/paging']);
+          this.router.navigate([NavigationConstant.CS_PAYMENT_ALLOC_GRP_PAGING]);
           this.toastr.successMessage(response["Message"]);
         },
         (error) => {
@@ -120,7 +122,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
       this.http.post(URLConstant.EditRefPaymentAllocGrp, this.PaymentAllocGrpObj).subscribe(
         //EDIT
         (response) => {
-          this.router.navigate(['/CommonSetting/paymentallocgrp/paging']);
+          this.router.navigate([NavigationConstant.CS_PAYMENT_ALLOC_GRP_PAGING]);
           this.toastr.successMessage(response["Message"]);
         },
         (error) => {

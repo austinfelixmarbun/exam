@@ -113,7 +113,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "/CommonSetting/EconomicSector/Detail",
+          "path": "CS_ECONOMIC_SECTOR_DETAIL",
           "param": [
             {
               "type": "RefEconomicSectorId",

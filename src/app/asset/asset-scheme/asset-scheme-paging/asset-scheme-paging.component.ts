@@ -3,6 +3,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-asset-scheme-paging',
@@ -10,6 +11,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 })
 export class AssetSchemePagingComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();
+  readonly AddLink: string = NavigationConstant.ASSET_SCHM_INFO_DETAIL;
   constructor() { }
 
   ngOnInit() {

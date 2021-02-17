@@ -1,4 +1,5 @@
 import { environment } from "environments/environment"; 
+import { NavigationConstant } from "../NavigationConstant";
 
 export class URLConstant {
 
@@ -267,7 +268,7 @@ export class URLConstant {
     public static LoginByRole = "/Authenticate/LoginByRole";
     public static LoginByToken = "/Authenticate/LoginByToken";
     public static UpdateToken = "/Authenticate/UpdateRole";
-    public static LoginURLFrontEnd = "pages/login";
+    public static LoginURLFrontEnd = NavigationConstant.PAGES_LOGIN;
 
     //FORM FEATURE
     public static GetListRefFeature = "/RefFeature/GetListRefFeature";
@@ -975,5 +976,10 @@ export class URLConstant {
     public static AddAuctionCompany = environment.FoundationR3Url + "/AuctionCompany/AddAuctionCompany";
     public static EditAuctionCompany = environment.FoundationR3Url + "/AuctionCompany/EditAuctionCompany";
     public static GetVendorByIdForEdit = environment.FoundationR3Url + "/AuctionCompany/GetVendorByIdForEdit";
-
+    
+    // Cust Exposure
+    public static GetCustExpsrInfoByCustId = environment.FoundationR3Url + "/CustExpsrInfo/GetCustExpsrInfoByCustId";
+    public static RequestExposureFromR2 = environment.FoundationR3Url + "/CustExpsrInfo/RequestExposureFromR2";
+    public static GetListCustExpsrBucketByCustExpsrDId = environment.FoundationR3Url + "/CustExpsrInfo/GetListCustExpsrBucketByCustExpsrDId";
+    public static GetListCustExpsrAppAgrHistByCustExpsrHId = environment.FoundationR3Url + "/CustExpsrInfo/GetListCustExpsrAppAgrHistByCustExpsrHId";
 }

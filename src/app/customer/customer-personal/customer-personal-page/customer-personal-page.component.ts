@@ -12,6 +12,8 @@ import { DMSObj } from 'app/shared/model/DMS/DMSObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { DMSLabelValueObj } from 'app/shared/model/DMS/DMSLabelValueObj.Model';
 import { CookieService } from 'ngx-cookie';
+import { PathConstant } from 'app/shared/PathConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 @Component({
   selector: 'app-customer-personal-page',
   templateUrl: './customer-personal-page.component.html',
@@ -65,9 +67,9 @@ export class CustomerPersonalPageComponent implements OnInit {
 
   back() {
     if (this.Page != null) {
-      AdInsHelper.RedirectUrl(this.router,["/Customer/"+this.From+"/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router, ["/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstant.PAGING], {});
     } else {
-      AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
     }
   }
  
@@ -153,9 +155,9 @@ export class CustomerPersonalPageComponent implements OnInit {
   
   endStepper(ev:any){
     if (this.From) {
-      AdInsHelper.RedirectUrl(this.router,["/Customer/"+this.From+"/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router, ["/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstant.PAGING], {});
     } else {
-      AdInsHelper.RedirectUrl(this.router,["/Customer/Paging"],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
     }
   }
 }
