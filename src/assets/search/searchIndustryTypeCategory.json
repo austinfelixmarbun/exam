@@ -13,7 +13,7 @@
         },
         {
             "type": "textbox",
-            "name": "REF_ECONOMIC_SECTOR_NAME",
+            "name": "REC.ECONOMIC_SECTOR_NAME",
             "id": "RefEconomicSectorName",
             "value": "",
             "label": "Economic Sector",
