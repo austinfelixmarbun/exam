@@ -9,7 +9,7 @@ export class CommonConstant {
     public static BUSINESS_DATE_RAW = "BusinessDateRaw";
     public static CURRENT_USER_CONTEXT = "currentUserContext"
     public static PAGE_ACCESS = "PageAccess";
-    public static TOKEN = "access_token";
+    public static TOKEN = "XSRF-TOKEN";
     public static VERSION = "Version";
     public static LAST_ACCESS_TIME = "LastAccessTime";
     public static MENU = "Menu"
