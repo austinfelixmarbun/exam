@@ -286,7 +286,7 @@ export class PathConstant {
 
     //#region Product-Module
     public static PROD_OFFERING = "ProdOffering";
-    public static PROD_OFFERING_PAGING = PathConstant.CombinePath([PathConstant.PROD_OFFERING, PathConstant.PAGING]);
+    public static PROD_OFFERING_PAGING = PathConstant.PROD_OFFERING + "/" + PathConstant.PAGING;
     public static PROD_OFFERING_RTN_PAGING = PathConstant.CombinePath([PathConstant.PROD_OFFERING, PathConstant.RTN_PAGING]);
     public static PROD_OFFERING_ADD = PathConstant.CombinePath([PathConstant.PROD_OFFERING, PathConstant.ADD]);
     public static PROD_OFFERING_ADD_DETAIL = PathConstant.CombinePath([PathConstant.PROD_OFFERING, PathConstant.ADD_DETAIL]);
