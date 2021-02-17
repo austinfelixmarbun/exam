@@ -5,8 +5,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { Router } from '@angular/router';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-paging',
@@ -17,10 +15,7 @@ export class CustomerPagingComponent implements OnInit {
   inputPagingObj: UcPagingObj;
   readonly AddLinkPersonal: string = NavigationConstant.CUST_PERSONAL_MAIN_INFO;
   readonly AddLinkCoy: string = NavigationConstant.CUST_COY_MAIN_INFO;
-  readonly Test1: string = NavigationConstant.TEST_1;
-  readonly Test2: string = NavigationConstant.TEST_2;
-  readonly Test3: string = NavigationConstant.TEST_3;
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
@@ -41,22 +36,6 @@ export class CustomerPagingComponent implements OnInit {
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.value = '1';
     this.inputPagingObj.addCritInput.push(critObj);
-  }
-
-  navigate1(){
-    AdInsHelper.RedirectUrl(this.router,[this.Test1],{});
-  }
-  navigate2(){
-    AdInsHelper.RedirectUrl(this.router,[this.Test2],{});
-  }
-  navigate3(){
-    AdInsHelper.RedirectUrl(this.router,[this.Test3],{});
-  }
-  navigate4(){
-    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_MAIN_INFO],{});
-  }
-  navigate5(){
-    AdInsHelper.RedirectUrl(this.router,["../CustomerPersonal/MainInfo"],{});
   }
 
 }
