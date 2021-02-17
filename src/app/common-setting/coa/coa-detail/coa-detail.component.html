@@ -7,7 +7,7 @@
 
     <div class="card-body">
       <div class="px-3">
-        <form class="form form-horizontal" (ngSubmit)="Submit()" #enjiForm="ngForm">
+        <form class="form form-horizontal"  [formGroup]="CoaForm" (ngSubmit)="CoaForm.valid && Submit()" #enjiForm="ngForm">
           <div class="form-body">
 
             <lib-ucSubsection [id]="'EntityTypeInfoId'" [title]="'Entity Type Information'" [panel]="'EntityTypeInfo'">
@@ -18,16 +18,16 @@
                 <label class="col-md-3" translate>Entity Type</label>
                 <div class="col-md-3">
                   <div class="input-group mb-0">
-                    <select class="form-control">
+                    <select class="form-control"  #entityselect>
                       <option value="">-Select One-</option>
-                      <option *ngFor="let item of ListEntityType" [value]="item.Key">
+                      <option *ngFor="let item of entityTypeList" [value]="item.Key">
                         {{item.Value}}
                       </option>
                     </select>
                     
                     <div class="input-group-append">
                       <span class="input-group-btn">
-                        <button class="btn btn-raised btn-primary" type="button" (click)="Show()">
+                        <button class="btn btn-raised btn-primary" type="button" (click)="Show(entityselect)">
                           <i class="fa fa-check-square-o"></i>Show
                         </button>
                       </span>
@@ -71,7 +71,7 @@
               </lib-ucSubsection>
               <div id='CoaDetailInfo'>
 
-                <!-- <div class="table-responsive">
+                <div class="table-responsive" formArrayName = "ListCoa">
                   <table class="table table-responsive-md text-center table-hover">
                     <thead>
                       <tr class="table-header">
@@ -94,16 +94,16 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let item of ListCOA; let i = index">
-                        <td class="align-center">{{i+1}}</td>
-                        <td class="text-left">{{item.EntityType}}</td>
-                        <td class="text-left">{{item.PaymentAllocCode}}</td>
-                        <td class="align-center">{{item.EntityCode}}</td>
-                        <td class="text-center" *ngFor="let currs of ListCurr"><input type="text" class="form-control">
+                        <td class="align-center" [formGroupName]="i">{{i+1}}</td>
+                        <td class="text-left" [formGroupName]="i">{{item.coa[0].EntityType}}</td>
+                        <td class="text-left" [formGroupName]="i">{{item.coa[0].PaymentAllocCode}}</td>
+                        <td class="text-left" [formGroupName]="i">{{item.coa[0].EntityCode}}</td>
+                        <td class="text-center" *ngFor="let currs of ListCurr"  [formGroupName]="i"><input type="text" class="form-control" formControlName="COA">
                         </td>
                       </tr>
                     </tbody>
                   </table>
-                </div> -->
+                </div>
 
               </div>
             </div>

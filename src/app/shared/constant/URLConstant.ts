@@ -37,6 +37,7 @@ export class URLConstant {
     public static DeleteCenterGrpOfficeMember = "/CenterGrpOfficeMbr/DeleteCenterGrpOfficeMember";
     public static GetListActiveRefOffice = "/RefOffice/GetListActiveRefOffice";
     public static GetListRefOfficeByRefOfficeAreaId = environment.FoundationR3Url + "/RefOffice/GetListRefOfficeByRefOfficeAreaId";
+    public static GetListKvpActiveRefOffice = environment.FoundationR3Url + "/RefOffice/GetListKvpActiveRefOffice";
 
     //CENTER GROUP
     public static AddCenterGrp = environment.FoundationR3Url + "/CenterGrp/AddCenterGrp";
@@ -945,7 +946,9 @@ export class URLConstant {
     public static GetTaskHistory = "/Approval/GetTaskHistory";
     
     // Payment Allocation
+    public static GetListKeyValueRefPaymentAllocActive = environment.FoundationR3Url + "/RefPaymentAlloc/GetListKeyValueRefPaymentAllocActive";
     public static GetRefPaymentAllocByID = environment.FoundationR3Url + "/RefPaymentAlloc/GetRefPaymentAllocById";
+    public static GetListKeyValueRefPaymentAllocByPayAllocGrpCode  = environment.FoundationR3Url +  "/RefPaymentAlloc/GetListKeyValueRefPaymentAllocByPayAllocGrpCode";
     public static SubmitRefPaymentAlloc = environment.FoundationR3Url + "/RefPaymentAlloc/SubmitRefPaymentAlloc";
 
     // REF PAYMENT ALLOC GRP

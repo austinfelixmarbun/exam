@@ -30,7 +30,7 @@
             "isFromURL": true,
             "isSelectOne": false,
             "url": "",
-            "path": "/RefPaymentAlloc/GetListKeyValueActive",
+            "path": "/RefPaymentAlloc/GetListKeyValueRefPaymentAllocActive",
             "label": "Payment Alloc Code",
             "items": [],
             "itemsUrl": []
