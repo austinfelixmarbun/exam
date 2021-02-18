@@ -35,7 +35,7 @@
               <div class="col-md-4">
                 <input type="text" class="form-control adInsInput" formControlName="CustName"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.CustName.invalid}">
-                <lib-uc-show-errors [control]="CustomerCompanyForm.controls.Gender" [submit]="enjiForm.submitted">
+                <lib-uc-show-errors [control]="CustomerCompanyForm.controls.CustName" [submit]="enjiForm.submitted">
                 </lib-uc-show-errors>
               </div>
               <label class="col-md-2 adInsLabel" translate>Customer Model </label>
@@ -61,7 +61,7 @@
                   [submit]="enjiForm.submitted">
                 </lib-uc-show-errors>
               </div>
-              <label class="col-md-2 adInsLabel" translate>Tax Id No</label>
+              <label class="col-md-2 adins-required-label" translate>Tax Id No</label>
               <div class="col-md-4">
                 <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerCompanyForm.controls.TaxIdNo.invalid}">
@@ -99,34 +99,36 @@
             </lib-ucaddress> 
           </div>
 
-          <lib-ucSubsection [id]="'FraudCheckInfo'" [title]="'Fraud Checking Customer'" [panel]="'dFraudCheckInfo'">
-          </lib-ucSubsection>
-          <div id="dFraudCheckInfo" class="row">
-            <div class="col-md-12">
-                <label class="col-md-3" translate>Pefindo</label>
-                        
-                <span class="col-md-6">
-                  <label translate>{{LastHit.PEFINDO}} /                        
-                  </label>    
-                  <!-- <label *ngIf="!LastHit.PEFINDO" translate>Not Hit Yet /                        
-                  </label>                                                -->
-                  <button type="button" (click)="openPopUp(popUpPefindo, 'popUpPefindo')" class="btn btn-raised btn-primary" translate>
-                    Hit Pefindo
-                  </button>   
-                  /
-                  <a (click)="openPopUp(popUpViewPefindo, 'popUpViewPefindo')">View</a> 
-                </span>    
-            </div>
-            <div class="col-md-12">
-                <label class="col-md-3" translate>SLIK</label>                            
-                <label translate>{{LastHit.SLIK}} /                          
-                </label>                           
-                <!-- <label *ngIf="!LastHit.SLIK" class="col-md-6" translate>Not hit yet /                      
-                </label>   -->
-                <button type="button" (click)="openPopUp(popUpSlik, 'popUpSlik')" class="btn btn-raised btn-primary"
-                  translate>
-                  Hit SLIK
-                </button>    
+          <div *ngIf="IsCustThirdPartyCheck">
+            <lib-ucSubsection [id]="'FraudCheckInfo'" [title]="'Fraud Checking Customer'" [panel]="'dFraudCheckInfo'">
+            </lib-ucSubsection>
+            <div id="dFraudCheckInfo" class="row">
+              <div class="col-md-12">
+                  <label class="col-md-3" translate>Pefindo</label>
+                          
+                  <span class="col-md-6">
+                    <label translate>{{LastHit.PEFINDO}} /                        
+                    </label>    
+                    <!-- <label *ngIf="!LastHit.PEFINDO" translate>Not Hit Yet /                        
+                    </label>                                                -->
+                    <button type="button" (click)="openPopUp(popUpPefindo, 'popUpPefindo')" class="btn btn-raised btn-primary" translate>
+                      Hit Pefindo
+                    </button>   
+                    /
+                    <a (click)="openPopUp(popUpViewPefindo, 'popUpViewPefindo')">View</a> 
+                  </span>    
+              </div>
+              <div class="col-md-12">
+                  <label class="col-md-3" translate>SLIK</label>                            
+                  <label translate>{{LastHit.SLIK}} /                          
+                  </label>                           
+                  <!-- <label *ngIf="!LastHit.SLIK" class="col-md-6" translate>Not hit yet /                      
+                  </label>   -->
+                  <button type="button" (click)="openPopUp(popUpSlik, 'popUpSlik')" class="btn btn-raised btn-primary"
+                    translate>
+                    Hit SLIK
+                  </button>    
+              </div>
             </div>
           </div>
 

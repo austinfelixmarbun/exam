@@ -1,16 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
+import { FormBuilder, Validators } from '@angular/forms';
 import { CustPersonalFinDataObj } from 'app/shared/model/CustPersonalFinDataObj.Model';
 import { CustCompanyFinDataObj } from 'app/shared/model/CustCompanyFinDataObj.Model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
-import { first, map, mergeMap } from 'rxjs/operators';
-import { forkJoin } from 'rxjs';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
-import { Router, ActivatedRoute } from '@angular/router';
-import { DatePipe, KeyValue } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { DatePipe, formatDate, } from '@angular/common';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -95,15 +92,14 @@ export class CustFinDataTabComponent implements OnInit {
   currentCustFinDataIndex: number;
   currentModal: any;
 
+  BusinessDt: string;
 
   constructor(
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private router: Router,
     private route: ActivatedRoute,
-    private modalService: NgbModal
-  ) {
+    private modalService: NgbModal) {
     this.route.queryParams.subscribe(params => {
       if (params["Page"] != null) {
         this.Page = params["Page"];
@@ -112,6 +108,8 @@ export class CustFinDataTabComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.BusinessDt = formatDate(new Date(),'yyyy-MM-dd','en-US');
+
     this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyFinData : CommonConstant.AttrGroupCustPersonalFinData;
     
     this.initRefMaster();
@@ -174,6 +172,32 @@ export class CustFinDataTabComponent implements OnInit {
     else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
       this.getSingleCustCoyFinData(FinDataIndex);
       this.currentModal = this.modalService.open(this.ModalCoyFinData, {ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false});
+    }
+  }
+
+  async deleteModalCustFinData(FinDataIndex: number)
+  {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
+      if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
+        var CustPersonalFinDataCustomObj = {
+          CustFinDataObj: this.ListCustPersonalFinData[FinDataIndex]
+        }
+        await this.httpClient.post(URLConstant.DeleteCustPersonalFinData, CustPersonalFinDataCustomObj).toPromise().then(
+          (response) => {
+            this.ListCustPersonalFinData.splice(FinDataIndex, 1);
+          }
+        );
+      }
+      else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
+        var CustCoyFinDataCustomObj = {
+          CustFinDataObj: this.ListCustCoyFinData[FinDataIndex]
+        }
+        await this.httpClient.post(URLConstant.DeleteCustCompanyFinData, CustCoyFinDataCustomObj).toPromise().then(
+          (response) => {
+            this.ListCustCoyFinData.splice(FinDataIndex, 1);
+          }
+        );
+      }
     }
   }
 
@@ -420,6 +444,5 @@ export class CustFinDataTabComponent implements OnInit {
         this.outputTab.emit({ stepMode: "next" });
       }
     );
-
   }
 }

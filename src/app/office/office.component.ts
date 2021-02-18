@@ -26,6 +26,6 @@ export class OfficeComponent implements OnInit {
         environment: environment.FoundationR3Url
       }
     ];
-    
+
   }
 }

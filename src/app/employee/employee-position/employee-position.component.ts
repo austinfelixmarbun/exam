@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { formatDate, DecimalPipe } from '@angular/common';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';

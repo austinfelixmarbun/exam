@@ -772,8 +772,10 @@ export class URLConstant {
     public static GetListCustCompanyFinDataByCustId = environment.FoundationR3Url + "/CustomerCompanyFinData/GetListCustCompanyFinDataByCustId";
     public static AddCustCompanyFinData = environment.FoundationR3Url + "/CustomerCompanyFinData/AddCustCompanyFinData";
     public static EditCustCompanyFinData = environment.FoundationR3Url + "/CustomerCompanyFinData/EditCustCompanyFinData";
+    public static DeleteCustCompanyFinData = environment.FoundationR3Url + "/CustomerCompanyFinData/DeleteCustCompanyFinData";
     public static AddCustPersonalFinData = environment.FoundationR3Url + "/CustPersonalFinData/AddCustPersonalFinData";
     public static EditCustPersonalFinData = environment.FoundationR3Url + "/CustPersonalFinData/EditCustPersonalFinData";
+    public static DeleteCustPersonalFinData = environment.FoundationR3Url + "/CustPersonalFinData/DeleteCustPersonalFinData";
     public static GetCustPersonalFinDataForCustViewByCustId = environment.FoundationR3Url + "/CustPersonalFinData/GetCustPersonalFinDataForCustViewByCustId";
     public static GetListCustPersonalFinDataForCustViewByCustId = environment.FoundationR3Url + "/CustPersonalFinData/GetListCustPersonalFinDataForCustViewByCustId";
     public static EditCustBankAcc = environment.FoundationR3Url + "/CustBankAcc/EditCustBankAcc";
@@ -1036,5 +1038,6 @@ export class URLConstant {
     public static AddCustFraudSLIKRequest = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudSLIKRequest";
     public static AddCustFraudAsliriReqLog = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudAsliriReqLog";
     public static AddCustFraudTrstsocialReqLog = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudTrstsocialReqLog";
+    public static CheckCustFraudTempRegByCustNo = environment.FoundationR3Url + "/CustThirdPartyChecking/CheckCustFraudTempRegByCustNo"
     //#endregion
 }

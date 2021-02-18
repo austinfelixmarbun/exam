@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { FormBuilder, Validators } from '@angular/forms';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 

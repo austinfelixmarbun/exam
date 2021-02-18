@@ -13,11 +13,11 @@ export class RegexService {
     getErrMessage(pattern: string): any {
         let errMessage: string = "";
         switch (pattern) {
-          case "^\\d{0,16}$":
-            errMessage = 'E-KTP no must be numeric and 16 characters';
+          case "^[0-9]{16}$":
+            errMessage = 'must be numeric and 16 characters';
             break;
           case "^\\d{0,20}$":
-            errMessage = 'NPWP no must be numeric and 20 characters';
+            errMessage = 'must be numeric and between 20 characters';
             break;
           default:
             errMessage = 'Not yet setting';

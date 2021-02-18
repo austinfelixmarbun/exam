@@ -21,6 +21,9 @@ import { environment } from 'environments/environment';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
 import { CookieService } from 'ngx-cookie';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CustThirdPartyCheckingObj } from 'app/shared/model/CustThirdPartyCheckingObj.Model';
+import { map, mergeMap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-edit-main-data-personal',
@@ -58,7 +61,7 @@ export class EditMainDataPersonalComponent implements OnInit {
   getCustPersonalByCustIdUrl: string;
   getCustByCustIdUrl: string;
   GetListActiveRefMasterWithReserveFieldAllUrl: string;
-  GetListActiveRefMasterWithMappingCodeAllUrl  :string;
+  GetListActiveRefMasterWithMappingCodeAllUrl: string;
   tempCustPersonalObj: CustPersonalObj;
   tempCustObj: any;
   CustId: number;
@@ -76,17 +79,35 @@ export class EditMainDataPersonalComponent implements OnInit {
   custBankAccObj: CustBankAccObj = new CustBankAccObj();
   closeResult;
   subsectionAsliRi: boolean = false;
+  CustThirdPartyChecking: CustThirdPartyCheckingObj = new CustThirdPartyCheckingObj();
+  LastHit = {
+    DUKCAPIL: 'Not Hit Yet',
+    PEFINDO: 'Not Hit Yet',
+    SLIK: 'Not Hit Yet',
+    ASLIRI: 'Not Hit Yet',
+    TRST: 'Not Hit Yet'
+  };
+  MaxDaysCustThirdPartyCheck: number = 0;
+  IsCustThirdPartyCheck: boolean = false;
+  CustNo: string;
+  CheckCustFraudTempRegByCustNo: string;
+  isCheckFraudTempReg: boolean = false;
+  tempFraud: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = URLConstant.GetCustPersonalbyCustId;
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
     this.editCustUrl = URLConstant.EditCust;
-    this.editCustPersonalUrl = URLConstant.EditCustPersonal; 
+    this.editCustPersonalUrl = URLConstant.EditCustPersonal;
     this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
+    this.CheckCustFraudTempRegByCustNo = URLConstant.CheckCustFraudTempRegByCustNo;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
+      }
+      if (params["CustNo"] != null) {
+        this.CustNo = params["CustNo"];
       }
       if (params["From"] != null) {
         this.From = params["From"];
@@ -229,8 +250,56 @@ export class EditMainDataPersonalComponent implements OnInit {
         }
       }
     );
-  }
 
+    this.checkCustFraudTemp();
+
+    this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_IS_CUST_THIRD_PARTY_CHECK }).pipe(
+      map((response) => {
+        return response
+       
+      }),
+      mergeMap((response) => {
+        
+        if (response["GsValue"] == "1") {
+          this.IsCustThirdPartyCheck = true;
+          let temp = this.tempFraud
+          if(temp === null){
+            let addCustTemp = this.http.post(URLConstant.AddCustFraudTempReg, { MrCustTypeCode: CommonConstant.CustTypePersonal, CustNo: this.CustNo });
+            let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
+            return forkJoin([addCustTemp, getMaxDays]);
+          }
+          else{
+            //let addCustTemp = this.http.post(URLConstant.AddCustFraudTempReg, { MrCustTypeCode: CommonConstant.CustTypePersonal, CustNo: this.CustNo });
+            let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
+            return forkJoin([temp, getMaxDays]);
+          }
+          
+        }
+        else {
+          return new Array();
+        }
+      })
+    ).toPromise().then(
+      (response) => {
+        if (response.length > 0) {
+          this.CustThirdPartyChecking.CustTempNo = response[0]["CustTempNo"];
+          this.CustThirdPartyChecking.MrCustTypeCode = response[0]["CustType"];
+          this.MaxDaysCustThirdPartyCheck = response[1]["GsValue"];
+        }
+      }
+    ).catch(
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+  checkCustFraudTemp() {
+    this.http.post<any>(this.CheckCustFraudTempRegByCustNo, { CustNo: this.CustNo }).subscribe(
+      (response) => {
+        this.tempFraud = response["ReturnObject"];
+      }
+    );
+  }
 
   SaveValue() {
     this.custObj = new CustObj();
@@ -339,14 +408,195 @@ export class EditMainDataPersonalComponent implements OnInit {
   }
 
   //VIEW SUBSECTION ASLI RI
-  showAsliRi(){
+  showAsliRi() {
     this.subsectionAsliRi = true;
   }
-  closeAsliRi(){
+  closeAsliRi() {
     this.subsectionAsliRi = false;
   }
   //POP UP
-  openPopUp(content) {
+  openPopUp(content, contentString = "") {
+    var url = "";
+    var urlAdd = "";
+    this.CustThirdPartyChecking.CustName = this.CustomerPersonalForm.controls.CustName.value;
+    this.CustThirdPartyChecking.MrIdTypeCode = this.CustomerPersonalForm.controls.MrIdTypeCode.value;
+    this.CustThirdPartyChecking.IdNo = this.CustomerPersonalForm.controls.IdNo.value;
+    this.CustThirdPartyChecking.BirthDt = this.CustomerPersonalForm.controls.BirthDt.value;
+    this.CustThirdPartyChecking.MobilePhnNo = "";
+    this.CustThirdPartyChecking.TaxIdNo = this.CustomerPersonalForm.controls.TaxIdNo.value;
+    this.CustThirdPartyChecking.FamilyCardNo = "";
+    if (this.subsectionAsliRi) {
+      var trxType = "";
+      switch (contentString) {
+        case "popUpHitProfesional":
+          trxType = "PROFESSIONAL";
+          break;
+
+        case "popUpHitPhoneAge":
+          trxType = "PHONE_AGE";
+          break;
+
+        case "popUpHitMotherNameVerif":
+          trxType = "MOTHER_NAME";
+          break;
+
+        case "popUpHitTaxIncome":
+          trxType = "TAX_INCOME";
+          break;
+
+        default:
+          break;
+      }
+      this.CustThirdPartyChecking.TrxTypeCode = trxType;
+      this.http.post(URLConstant.GetCustFraudAsliriReqLogByCustTempNoTrxTypeCode, this.CustThirdPartyChecking).toPromise().then(
+        (response) => {
+          var currentDate = new Date();
+          if (response["TrxNo"]) {
+            var lastHitDate = new Date(response["StartDt"]);
+            var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+            if (dateDiff > this.MaxDaysCustThirdPartyCheck) {
+              this.http.post(URLConstant.AddCustFraudAsliriReqLog, this.CustThirdPartyChecking).toPromise().then(
+                (response) => {
+                  var currentLastHitDate = new Date(response["StartDt"]);
+                  var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+                  this.LastHit.ASLIRI = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                }
+              ).catch(
+                (error) => {
+                  console.log(error);
+                }
+              );
+            }
+          }
+          else {
+            this.http.post(URLConstant.AddCustFraudAsliriReqLog, this.CustThirdPartyChecking).toPromise().then(
+              (response) => {
+                var currentLastHitDate = new Date(response["StartDt"]);
+                var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+                this.LastHit.ASLIRI = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+              }
+            ).catch(
+              (error) => {
+                console.log(error);
+              }
+            );
+          }
+        }
+      ).catch(
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+    else {
+      switch (contentString) {
+        case "popUpDukcapil":
+          url = URLConstant.GetCustFraudDukcapilReqLogByCustTempNo;
+          urlAdd = URLConstant.AddCustFraudDukcapilReqLog;
+          break;
+
+        case "popUpPefindo":
+          url = URLConstant.GetCustFraudPefindoReqLogByCustTempNo;
+          urlAdd = URLConstant.AddCustFraudPefindoReqLog;
+          break;
+
+        case "popUpTrustingSocial":
+          url = URLConstant.GetCustFraudTrstsocialReqLogByCustTempNo;
+          urlAdd = URLConstant.AddCustFraudTrstsocialReqLog;
+          break;
+
+        case "popUpSlik":
+          url = URLConstant.GetCustFraudSLIKRequestByCustTempNo;
+          urlAdd = URLConstant.AddCustFraudSLIKRequest;
+          break;
+
+        default:
+          break;
+      }
+      if (url != "") {
+        this.http.post(url, this.CustThirdPartyChecking).toPromise().then(
+          (response) => {
+            var currentDate = new Date();
+            if (response["TrxNo"]) {
+              var lastHitDate = new Date(response["StartDt"]);
+              var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+              if (dateDiff > this.MaxDaysCustThirdPartyCheck) {
+                this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
+                  (response) => {
+                    var currentLastHitDate = new Date(response["StartDt"]);
+                    var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+                    switch (contentString) {
+                      case "popUpDukcapil":
+                        this.LastHit.DUKCAPIL = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                        break;
+
+                      case "popUpPefindo":
+                        this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                        break;
+
+                      case "popUpTrustingSocial":
+                        this.LastHit.TRST = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                        break;
+
+                      case "popUpSlik":
+                        this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                        break;
+
+                      default:
+                        break;
+                    }
+                  }
+                ).catch(
+                  (error) => {
+                    console.log(error);
+                  }
+                );
+              }
+            }
+            else {
+              this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
+                (response) => {
+                  var currentLastHitDate = new Date(response["StartDt"]);
+                  var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+                  console.log("currentDateDiff: " + currentDateDiff);
+                  switch (contentString) {
+                    case "popUpDukcapil":
+                      this.LastHit.DUKCAPIL = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                      break;
+
+                    case "popUpPefindo":
+                      this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                      break;
+
+                    case "popUpTrustingSocial":
+                      this.LastHit.TRST = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                      break;
+
+                    case "popUpSlik":
+                      this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                      break;
+
+                    default:
+                      break;
+                  }
+                  console.log("LastHit: " + JSON.stringify(this.LastHit));
+                }
+              ).catch(
+                (error) => {
+                  console.log(error);
+                }
+              );
+            }
+          }
+        ).catch(
+          (error) => {
+            console.log(error);
+          }
+        );
+
+      }
+    }
+
     this.Open(content);
   }
 

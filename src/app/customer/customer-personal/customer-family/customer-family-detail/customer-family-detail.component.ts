@@ -8,7 +8,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { DatePipe } from '@angular/common';
@@ -558,7 +558,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
 
   setValidator(pattern: string) {
     if (pattern != undefined) {
-      this.CustomerFamilyForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.CustomerFamilyForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
       this.CustomerFamilyForm.controls[this.controlNameIdNo].updateValueAndValidity();
     }
   }

@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';

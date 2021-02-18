@@ -132,6 +132,10 @@
                                         "property": "CustId"
                                     },
                                     {
+                                        "type": "CustNo",
+                                        "property" : "CustNo"
+                                    },
+                                    {
                                         "type": "From",
                                         "property": "EditMainData"
                                     }
@@ -155,6 +159,10 @@
                                     {
                                         "type": "CustId",
                                         "property": "CustId"
+                                    },
+                                    {
+                                        "type": "CustNo",
+                                        "property" : "CustNo"
                                     },
                                     {
                                         "type": "From",

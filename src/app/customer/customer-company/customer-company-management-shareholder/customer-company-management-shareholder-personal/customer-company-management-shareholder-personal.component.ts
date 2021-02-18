@@ -402,7 +402,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
 
   setValidator(pattern: string) {
     if (pattern != undefined) {
-      this.ManagementShareholderForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.ManagementShareholderForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
       this.ManagementShareholderForm.controls[this.controlNameIdNo].updateValueAndValidity();
     }
   }

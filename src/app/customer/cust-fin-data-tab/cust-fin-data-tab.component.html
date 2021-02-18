@@ -2,9 +2,9 @@
   <button *ngIf="MrCustTypeCode == 'PERSONAL'" type="button" class="addButton" translate (click)="showModalCustFinData(ListCustPersonalFinData.length)"><i class="ft-plus-circle"></i> Add</button>
   <button *ngIf="MrCustTypeCode == 'COMPANY'" type="button" class="addButton" translate (click)="showModalCustFinData(ListCustCoyFinData.length)"><i class="ft-plus-circle"></i> Add</button>
 </div>
+
 <lib-ucSubsection [id]="'CustFinDataId'" [title]="'Financial Data'" [panel]="'CustFinData'"></lib-ucSubsection>
 <div id="CustFinData">
-
   <div id="ListCustFinData" class="mb-3"> 
     <table class="table table-stripped table-bordered">
       <thead>
@@ -16,11 +16,17 @@
       <tbody>
         <tr *ngFor="let item of ListCustPersonalFinData; let i = index">
           <td class="text-center">{{item.DateAsOf | date: 'dd-MMM-yyyy'}}</td>
-          <td class="text-center"><a href="javascript:;" (click)="showModalCustFinData(i)"><i class="ft-edit-2 font-medium-3 mr-2"></i></a></td>
+          <td class="text-center">
+            <a href="javascript:;" (click)="showModalCustFinData(i)"><i class="ft-edit-2 font-medium-3 mr-1"></i></a>
+            <a href="javascript:;" (click)="deleteModalCustFinData(i)" class="danger p-0"><i class="ft-trash-2 font-medium-3 ml-1"></i></a>
+          </td>
         </tr>
         <tr *ngFor="let item of ListCustCoyFinData; let i = index">
           <td class="text-center">{{item.DateAsOf | date: 'dd-MMM-yyyy'}}</td>
-          <td class="text-center"><a href="javascript:;" (click)="showModalCustFinData(i)"><i class="ft-edit-2 font-medium-3 mr-2"></i></a></td>
+          <td class="text-center">
+            <a href="javascript:;" (click)="showModalCustFinData(i)"><i class="ft-edit-2 font-medium-3 mr-1"></i></a>
+            <a href="javascript:;" (click)="deleteModalCustFinData(i)" class="danger p-0"><i class="ft-trash-2 font-medium-3 ml-1"></i></a>
+          </td>
         </tr>
         <tr *ngIf="(MrCustTypeCode == 'PERSONAL' && ListCustPersonalFinData.length <= 0) || (MrCustTypeCode == 'COMPANY' && ListCustCoyFinData.length <= 0)">
           <td class="text-center" colspan="2" translate>No Data Available</td>
@@ -46,7 +52,7 @@
               <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyIncomeAmt"
                 (ngModelChange)="onChangeCustFinInput()"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustPersonalFinDataForm.controls.MonthlyIncomeAmt.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.MonthlyIncomeAmt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -57,7 +63,7 @@
               <input type="" currencyMask class="form-control adInsInput" formControlName="OtherIncomeAmt"
                 (ngModelChange)="onChangeCustFinInput()"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustPersonalFinDataForm.controls.OtherIncomeAmt.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.OtherIncomeAmt" [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
             </div>
@@ -79,7 +85,7 @@
               <input type="" currencyMask class="form-control adInsInput" formControlName="SpouseMonthlyIncomeAmt"
                 (ngModelChange)="onChangeCustFinInput()"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustPersonalFinDataForm.controls.SpouseMonthlyIncomeAmt.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.SpouseMonthlyIncomeAmt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -96,7 +102,7 @@
               <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyInstallmentAmt"
                 (ngModelChange)="onChangeCustFinInput()"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustPersonalFinDataForm.controls.MonthlyInstallmentAmt.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.MonthlyInstallmentAmt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -107,7 +113,7 @@
               <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyExpenseAmt"
                 (ngModelChange)="onChangeCustFinInput()"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustPersonalFinDataForm.controls.MonthlyExpenseAmt.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.MonthlyExpenseAmt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -124,10 +130,10 @@
               <input type="checkbox" formControlName="IsJoinIncome" (change)="onChangeCustFinInput()"/>
             </div>
           </div>
-          <div class="form-group row adins-required" *ngIf="IsAddFinData">
+          <div class="form-group row adins-required">
             <label class="col-md-2 adInsLabel" for="DateAsOf" translate>Date As Of</label>
             <div class="col-md-6">
-              <input type="date" class="form-control adInsInput" formControlName="DateAsOf"
+              <input type="date" [max]="BusinessDt | date: 'yyyy-MM-dd'" class="form-control adInsInput" formControlName="DateAsOf"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustPersonalFinDataForm.controls.DateAsOf.invalid }" />
               <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.DateAsOf"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
@@ -161,10 +167,10 @@
       <div class="modal-body">
         
         <div class="form-body">
-          <div class="form-group row" *ngIf="IsAddFinData">
+          <div class="form-group row">
             <label class="col-md-2 adInsLabel" for="DateAsOf" translate>Date As Of</label>
             <div class="col-md-6">
-              <input type="date" class="form-control adInsInput" formControlName="DateAsOf"
+              <input type="date" [max]="BusinessDt" class="form-control adInsInput" formControlName="DateAsOf"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.DateAsOf.invalid }" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.DateAsOf" [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
@@ -175,7 +181,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control" formControlName="GrossMonthlyIncomeAmt"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.GrossMonthlyIncomeAmt.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.GrossMonthlyIncomeAmt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -185,7 +191,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="GrossProfitAmt"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.GrossProfitAmt.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.GrossProfitAmt"
                 [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
@@ -310,7 +316,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="Revenue"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.Revenue.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.Revenue" [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
             </div>
@@ -320,7 +326,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="OprCost"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.OprCost.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.OprCost" [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
             </div>
@@ -330,7 +336,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="ProfitBeforeTax"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.ProfitBeforeTax.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.ProfitBeforeTax"
                 [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
@@ -341,7 +347,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="CurrAsset"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.CurrAsset.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.CurrAsset"
                 [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
@@ -352,7 +358,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="NetFixedAsset"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.NetFixedAsset.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.NetFixedAsset"
                 [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
@@ -363,7 +369,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="TotalAsset"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.TotalAsset.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.TotalAsset"
                 [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
@@ -374,7 +380,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="CurrLiablts"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.CurrLiablts.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.CurrLiablts"
                 [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
@@ -385,7 +391,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="LongTemrLiablts"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.LongTemrLiablts.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.LongTemrLiablts"
                 [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
@@ -396,7 +402,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="ShareholderEquity"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.ShareholderEquity.invalid }"
-                [options]="{align: 'right'}" />
+                [options]="{align: 'right', allowNegative: false}" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.ShareholderEquity"
                 [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
@@ -421,24 +427,22 @@
       </div>
     </form>
   </ng-template>
-  
-
-  <form class="form form-horizontal" [formGroup]="CustAttrListForm" #enjiForm="ngForm"
-    (ngSubmit)="enjiForm.form.valid && saveCustAttrContentAndNext()">
- 
-    <app-cust-attr-list [title]="'Customer Financial Attribute'" [CustId]="this.CustId" [enjiForm]="enjiForm"
-      [parentForm]="CustAttrListForm" [identifier]="'AttrList'" [attrGroup]="attrGroup"></app-cust-attr-list>
-
-    <div class="pb-3"></div>
-
-    <app-cust-bank-acc-section-findata [CustId]="this.CustId"></app-cust-bank-acc-section-findata>
-    
-    <div class="form-actions right text-right mt-3">
-      <button type="submit" class="btn btn-raised btn-primary" translate>
-        <i class="far fa-check-square"></i> Save and Continue
-      </button>
-    </div>
-  </form>
-
-
 </div>
+
+<form class="form form-horizontal" [formGroup]="CustAttrListForm" #enjiForm="ngForm"
+  (ngSubmit)="enjiForm.form.valid && saveCustAttrContentAndNext()">
+
+  <app-cust-attr-list [title]="'Customer Financial Attribute'" [CustId]="this.CustId"[enjiForm]="enjiForm"
+    [parentForm]="CustAttrListForm" [identifier]="'AttrList'" [attrGroup]="attrGroup">
+  </app-cust-attr-list>
+
+  <div class="pb-3"></div>
+
+  <app-cust-bank-acc-section-findata [CustId]="this.CustId"></app-cust-bank-acc-section-findata>
+  
+  <div class="form-actions right text-right mt-3">
+    <button type="submit" class="btn btn-raised btn-primary" translate>
+      <i class="far fa-check-square"></i> Save and Continue
+    </button>
+  </div>
+</form>

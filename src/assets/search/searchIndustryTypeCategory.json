@@ -13,7 +13,7 @@
         },
         {
             "type": "textbox",
-            "name": "REF_ECONOMIC_SECTOR_NAME",
+            "name": "REC.ECONOMIC_SECTOR_NAME",
             "id": "RefEconomicSectorName",
             "value": "",
             "label": "Economic Sector",
@@ -31,7 +31,7 @@
         },
         {
             "type": "dropdown",
-            "name": "A.IS_ACTIVE",
+            "name": "ITC.IS_ACTIVE",
             "datatype": "text",
             "id": "IsActive",
             "value": "",

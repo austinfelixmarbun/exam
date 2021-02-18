@@ -6,7 +6,7 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -358,6 +358,11 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
         );
       }
       else if (this.pageType == "editStmnt") {
+        if(this.isAlreadyCalc == false)
+        {
+          this.toastr.warningMessage(ExceptionConstant.CALC_FIRST);
+          return false;
+        }
         var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
         var listCustBankStmnt = new Array<CustBankStmntObj>();

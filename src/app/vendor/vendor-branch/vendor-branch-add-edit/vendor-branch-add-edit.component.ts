@@ -3,7 +3,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { Validators, FormBuilder } from '@angular/forms';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { formatDate } from '@angular/common';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -904,7 +904,7 @@ export class VendorBranchAddEditComponent implements OnInit {
 
   setValidator(pattern: string) {
     if (pattern != undefined) {
-      this.VendorForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.VendorForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
       this.VendorForm.controls[this.controlNameIdNo].updateValueAndValidity();
     }
   }

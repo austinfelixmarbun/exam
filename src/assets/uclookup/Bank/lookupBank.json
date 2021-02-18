@@ -4,7 +4,7 @@
         {
             "type": "textbox",
             "name": "bank_Name",
-            "id": "BankName",
+            "id": "bankName",
             "value": "",
             "label": "Bank Name",
             "placeholder": "Placeholder"

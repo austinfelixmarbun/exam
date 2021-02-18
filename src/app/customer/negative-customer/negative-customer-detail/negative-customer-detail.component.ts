@@ -11,7 +11,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { map, mergeMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NegativeCustObj } from 'app/shared/model/NegativeCustObj.Model';
 import { NegativeCustChangeTrxObj } from 'app/shared/model/NegativeCustChangeTrxObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
@@ -728,7 +728,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
 
   setValidator(pattern: string) {
     if (pattern != undefined) {
-      this.NegativeCustForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.NegativeCustForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
       this.NegativeCustForm.controls[this.controlNameIdNo].updateValueAndValidity();
     }
   }
