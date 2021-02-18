@@ -1,3 +1,4 @@
+import { NavigationConstant } from "../NavigationConstant";
 export class InputGridObj{
     resultData: any;
     searchComp: any;
@@ -6,8 +7,10 @@ export class InputGridObj{
     pageNow: any;
     pageSize: any;
     pagingJson: any;
+    navigationConst: any;
 
     constructor()
     {
+        this.navigationConst = NavigationConstant;
     }
 }
