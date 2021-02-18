@@ -4,6 +4,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { environment } from 'environments/environment';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 
 @Component({
   selector: 'app-holiday-paging',
@@ -17,7 +18,7 @@ export class HolidayPagingComponent implements OnInit {
   constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj();
+    this.inputObj = new UcPagingObj();
     this.inputObj._url = "./assets/ucpaging/searchHoliday.json";
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
