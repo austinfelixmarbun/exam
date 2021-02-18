@@ -93,7 +93,7 @@ export class EditMainDataPersonalComponent implements OnInit {
   CheckCustFraudTempRegByCustNo: string;
   isCheckFraudTempReg: boolean = false;
   tempFraud: any;
-
+  tempCustAddr: any;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = URLConstant.GetCustPersonalbyCustId;
@@ -203,12 +203,13 @@ export class EditMainDataPersonalComponent implements OnInit {
         if (this.tempCustObj.IsVip == false) {
           this.CustomerPersonalForm.controls.VipNotes.disable();
         }
-        this.CustomerPersonalForm.controls["MrIdTypeCode"].disable();
-        this.CustomerPersonalForm.controls["IdNo"].disable();
-        this.CustomerPersonalForm.controls["TaxIdNo"].disable();
+        // this.CustomerPersonalForm.controls["MrIdTypeCode"].disable();
+        // this.CustomerPersonalForm.controls["IdNo"].disable();
+        // this.CustomerPersonalForm.controls["TaxIdNo"].disable();
 
         this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.tempCustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
           (response: CustAddrObj) => {
+            this.tempCustAddr = response;
             this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
             this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
             this.UcAddressObj.AreaCode1 = response.AreaCode1;
@@ -301,7 +302,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     );
   }
 
-  SaveValue() {
+  async SaveValue() {
     this.custObj = new CustObj();
     this.custPersonalObj = new CustPersonalObj();
     this.custObj = this.tempCustObj;
@@ -328,6 +329,7 @@ export class EditMainDataPersonalComponent implements OnInit {
 
     var formValue = this.CustomerPersonalForm.value;
     this.custObj.CustAddr = new CustAddrObj();
+    this.custObj.CustAddr = this.tempCustAddr;
     this.custObj.CustAddr.Addr = formValue["UcAddress"]["Addr"];
     this.custObj.CustAddr.AreaCode1 = formValue["UcAddress"]["AreaCode1"];
     this.custObj.CustAddr.AreaCode2 = formValue["UcAddress"]["AreaCode2"];
@@ -337,12 +339,12 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custObj.CustAddr.Zipcode = formValue["UcAddressZipcode"]["value"];
     this.custObj.CustAddr.SubZipcode = formValue["UcAddressZipcode"]["value"];
     this.custObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
-    this.http.post(this.editCustUrl, this.custObj).subscribe(
+     this.http.post(this.editCustUrl, this.custObj).subscribe(
       (response) => {
-        this.http.post(this.editCustPersonalUrl, this.custPersonalObj).subscribe(
+       this.http.post(this.editCustPersonalUrl, this.custPersonalObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
-
+    
             if (this.From == "EditMainData") {
               AdInsHelper.RedirectUrl(this.router, ["/Customer/CustomerPersonal/Page"], { "IdCust": this.CustId, Page: 'Edit', From: 'EditMainData' });
             }
@@ -362,6 +364,9 @@ export class EditMainDataPersonalComponent implements OnInit {
         );
       }
     );
+    
+
+
   }
   onOptionsSelected(event) {
     if (event.target.value == this.KTP) {
