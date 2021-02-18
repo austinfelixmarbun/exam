@@ -69,10 +69,12 @@ export class SidebarComponent implements OnInit {
                     AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
                     AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module); 
                     this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
+                    console.log(this.menuItems);
                 });
             }
             else
                 this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
+                console.log(this.menuItems);
         }
     }
     genParam(params: [{ 'Attr': string, 'Value': string }]) {

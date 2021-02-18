@@ -12,6 +12,13 @@ const routes: Routes = [
     path: '',
     children: [
       {
+        path: PathConstant.SRVY_VIEW_TASK,
+        component: SurveyTaskViewComponent,
+        data: {
+          title: 'Survey Task View'
+        },
+      },
+      {
         path: PathConstant.PAGING,
         component: SurveyOrderComponent,
         data: {
@@ -37,13 +44,6 @@ const routes: Routes = [
         component: SurveyOrderViewComponent,
         data: {
           title: 'Survey Order View'
-        },
-      },
-      {
-        path: PathConstant.SRVY_VIEW_TASK,
-        component: SurveyTaskViewComponent,
-        data: {
-          title: 'Survey Task View'
         },
       }
     ]
