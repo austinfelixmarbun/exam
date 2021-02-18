@@ -38,7 +38,7 @@
             "action": [
                 {
                     "type": "select",
-                    "property": "refBankId"
+                    "property": "RefBankId"
                 }
             ]
         }
