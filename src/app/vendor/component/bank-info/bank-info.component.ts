@@ -229,9 +229,9 @@ export class BankInfoComponent implements OnInit {
     this.inputLookupBankObj.isRequired = true;
 
     if (this.objEdit != null && this.mode == "edit") {
-      this.inputLookupBankObj.jsonSelect = { bankName: this.objEdit.BankName };
+      this.inputLookupBankObj.jsonSelect = { BankName: this.objEdit.BankName };
     } else {
-      this.inputLookupBankObj.jsonSelect = { bankName: "" };
+      this.inputLookupBankObj.jsonSelect = { BankName: "" };
     }
   }
 }
