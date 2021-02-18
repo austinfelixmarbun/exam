@@ -302,7 +302,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     );
   }
 
-  async SaveValue() {
+  SaveValue() {
     this.custObj = new CustObj();
     this.custPersonalObj = new CustPersonalObj();
     this.custObj = this.tempCustObj;
