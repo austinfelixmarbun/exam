@@ -364,9 +364,6 @@ export class EditMainDataPersonalComponent implements OnInit {
         );
       }
     );
-    
-
-
   }
   onOptionsSelected(event) {
     if (event.target.value == this.KTP) {
