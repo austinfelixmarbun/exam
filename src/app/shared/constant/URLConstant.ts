@@ -754,6 +754,7 @@ export class URLConstant {
     public static EditCustPersonalFinData = environment.FoundationR3Url + "/CustPersonalFinData/EditCustPersonalFinData";
     public static GetCustPersonalFinDataForCustViewByCustId = environment.FoundationR3Url + "/CustPersonalFinData/GetCustPersonalFinDataForCustViewByCustId";
     public static EditCustBankAcc = environment.FoundationR3Url + "/CustBankAcc/EditCustBankAcc";
+    public static DeleteCustBankAccAndStmnt = environment.FoundationR3Url + "/CustBankAcc/DeleteCustBankAccAndStmnt";
 
     // CUSTOMER ADDRESS
     public static GetListCustAddr = environment.FoundationR3Url + "/CustAddr/GetListCustAddr";
