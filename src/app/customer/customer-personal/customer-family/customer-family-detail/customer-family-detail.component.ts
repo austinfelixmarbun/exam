@@ -103,7 +103,9 @@ export class CustomerFamilyDetailComponent implements OnInit {
     RowVersionCust: [''],
     RowVersionCustPersonal: ['']
   });
-
+  addrData:  CustAddrObj;
+  requestCustData: CustObj;
+  requestCustPersonalData: CustPersonalObj;
   constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
@@ -121,6 +123,9 @@ export class CustomerFamilyDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.addrData =  new CustAddrObj();;
+    this.requestCustData = new CustObj();
+    this.requestCustPersonalData = new CustPersonalObj();
     this.customPattern = new Array<CustomPatternObj>();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -134,7 +139,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.default = UcAddressObj;
+    this.inputAddressObj.default = this.UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
 
@@ -226,17 +231,17 @@ export class CustomerFamilyDetailComponent implements OnInit {
             RowVersionCust: custData.RowVersion,
             RowVersionCustPersonal: custPersonalData.RowVersion
           });
-          this.CustomerFamilyForm.controls.Gender.disable();
-          this.CustomerFamilyForm.controls.MrIdTypeCode.disable();
-          this.CustomerFamilyForm.controls.BirthPlace.disable();
-          this.CustomerFamilyForm.controls.BirthDt.disable();
-          this.CustomerFamilyForm.controls.IdNo.disable();
-          this.CustomerFamilyForm.controls.TaxIdNo.disable();
-          this.CustomerFamilyForm.controls.IdExpiredDt.disable();
-          this.CustomerFamilyForm.controls.MrMaritalStatCode.disable();
-          this.CustomerFamilyForm.controls.MotherMaidenName.disable();
-          this.CustomerFamilyForm.controls.MobilePhnNo1.disable();
-          this.CustomerFamilyForm.controls.Email1.disable();
+          // this.CustomerFamilyForm.controls.Gender.disable();
+          // this.CustomerFamilyForm.controls.MrIdTypeCode.disable();
+          // this.CustomerFamilyForm.controls.BirthPlace.disable();
+          // this.CustomerFamilyForm.controls.BirthDt.disable();
+          // this.CustomerFamilyForm.controls.IdNo.disable();
+          // this.CustomerFamilyForm.controls.TaxIdNo.disable();
+          // this.CustomerFamilyForm.controls.IdExpiredDt.disable();
+          // this.CustomerFamilyForm.controls.MrMaritalStatCode.disable();
+          // this.CustomerFamilyForm.controls.MotherMaidenName.disable();
+          // this.CustomerFamilyForm.controls.MobilePhnNo1.disable();
+          // this.CustomerFamilyForm.controls.Email1.disable();
 
           this.inputFieldObj.inputLookupObj.nameSelect = custAddrData.Zipcode;
           this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: custAddrData.Zipcode };
@@ -372,24 +377,53 @@ export class CustomerFamilyDetailComponent implements OnInit {
           value: custAddrData.Zipcode
         });
 
-        this.existingCustomerLookUpObj.isReadonly = true;
-        this.CustomerFamilyForm.controls.Gender.disable();
-        this.CustomerFamilyForm.controls.MrIdTypeCode.disable();
-        this.CustomerFamilyForm.controls.BirthPlace.disable();
-        this.CustomerFamilyForm.controls.BirthDt.disable();
-        this.CustomerFamilyForm.controls.IdNo.disable();
-        this.CustomerFamilyForm.controls.TaxIdNo.disable();
-        this.CustomerFamilyForm.controls.IdExpiredDt.disable();
-        this.CustomerFamilyForm.controls.MrMaritalStatCode.disable();
-        this.CustomerFamilyForm.controls.MotherMaidenName.disable();
-        this.CustomerFamilyForm.controls.MobilePhnNo1.disable();
-        this.CustomerFamilyForm.controls.Email1.disable();
+        // this.existingCustomerLookUpObj.isReadonly = true;
+        // this.CustomerFamilyForm.controls.Gender.disable();
+        // this.CustomerFamilyForm.controls.MrIdTypeCode.disable();
+        // this.CustomerFamilyForm.controls.BirthPlace.disable();
+        // this.CustomerFamilyForm.controls.BirthDt.disable();
+        // this.CustomerFamilyForm.controls.IdNo.disable();
+        // this.CustomerFamilyForm.controls.TaxIdNo.disable();
+        // this.CustomerFamilyForm.controls.IdExpiredDt.disable();
+        // this.CustomerFamilyForm.controls.MrMaritalStatCode.disable();
+        // this.CustomerFamilyForm.controls.MotherMaidenName.disable();
+        // this.CustomerFamilyForm.controls.MobilePhnNo1.disable();
+        // this.CustomerFamilyForm.controls.Email1.disable();
       }
     ).catch(
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  setCustData(){
+    var formValue = this.CustomerFamilyForm.value;
+    this.addrData["Addr"] = formValue["UcAddress"]["Addr"];
+    this.addrData["AreaCode1"] = formValue["UcAddress"]["AreaCode1"];
+    this.addrData["AreaCode2"] = formValue["UcAddress"]["AreaCode2"];
+    this.addrData["AreaCode3"] = formValue["UcAddress"]["AreaCode3"];
+    this.addrData["AreaCode4"] = formValue["UcAddress"]["AreaCode4"];
+    this.addrData["City"] = formValue["UcAddress"]["City"];
+    this.addrData["Zipcode"] = formValue["UcAddressZipcode"]["value"];
+    this.addrData["SubZipcode"] = formValue["UcAddressZipcode"]["value"];
+    this.addrData["MrCustAddrTypeCode"] = CommonConstant.CustAddrTypeLegal;
+  
+    this.requestCustPersonalData.MrGenderCode = this.CustomerFamilyForm.controls["Gender"].value;
+    this.requestCustPersonalData.BirthPlace = this.CustomerFamilyForm.controls["BirthPlace"].value;
+    this.requestCustPersonalData.BirthDt = this.CustomerFamilyForm.controls["BirthDt"].value;
+    this.requestCustPersonalData.MotherMaidenName = this.CustomerFamilyForm.controls["MotherMaidenName"].value;
+    this.requestCustPersonalData.MrMaritalStatCode = this.CustomerFamilyForm.controls["MrMaritalStatCode"].value;
+    this.requestCustPersonalData.MobilePhnNo1 = this.CustomerFamilyForm.controls["MobilePhnNo1"].value;
+    this.requestCustPersonalData.Email1 = this.CustomerFamilyForm.controls["Email1"].value;
+  
+    this.requestCustData.CustName = this.existingCustomerLookUpObj.nameSelect;
+    this.requestCustData.MrIdTypeCode = this.CustomerFamilyForm.controls["MrIdTypeCode"].value;
+    this.requestCustData.IdNo = this.CustomerFamilyForm.controls["IdNo"].value;
+    this.requestCustData.IdExpiredDt = this.CustomerFamilyForm.controls["IdExpiredDt"].value;
+    this.requestCustData.TaxIdNo = this.CustomerFamilyForm.controls["TaxIdNo"].value;
+    this.requestCustData.MrCustTypeCode = CommonConstant.CustTypePersonal;
+  
   }
 
   checkState() {
@@ -412,10 +446,16 @@ export class CustomerFamilyDetailComponent implements OnInit {
   SaveValue() {
     console.log("FormValue: " + JSON.stringify(this.CustomerFamilyForm.value));
     if (this.isEditCustFamily) {
+      this.setCustData();
       var requestEdit = {
+        CustId: this.CustomerFamilyForm.controls["CustId"].value,
+        FamilyId: this.CustomerFamilyForm.controls["FamilyId"].value,
         CustPersonalFamilyId: this.CustomerFamilyForm.controls["CustPersonalFamilyId"].value,
         MrCustRelationship: this.CustomerFamilyForm.controls["MrCustRelationship"].value,
-        RowVersion: this.CustomerFamilyForm.controls["RowVersion"].value
+        RowVersion: this.CustomerFamilyForm.controls["RowVersion"].value,
+        CustObj: this.requestCustData,
+        CustPersonalObj: this.requestCustPersonalData,
+        CustAddr: this.addrData
       };
       this.http.post(URLConstant.EditCustPersonalFamily, requestEdit).toPromise().then(
         (response) => {
@@ -430,10 +470,14 @@ export class CustomerFamilyDetailComponent implements OnInit {
     }
     else {
       if (this.isExistingCust) {
+        this.setCustData();
         var requestExisting = {
           CustId: this.CustomerFamilyForm.controls["CustId"].value,
           FamilyId: this.CustomerFamilyForm.controls["FamilyId"].value,
-          MrCustRelationship: this.CustomerFamilyForm.controls["MrCustRelationship"].value
+          MrCustRelationship: this.CustomerFamilyForm.controls["MrCustRelationship"].value,
+          CustObj: this.requestCustData,
+        CustPersonalObj: this.requestCustPersonalData,
+        CustAddr: this.addrData
         };
         this.http.post(URLConstant.AddCustPersonalFamily, requestExisting).toPromise().then(
           (response) => {
