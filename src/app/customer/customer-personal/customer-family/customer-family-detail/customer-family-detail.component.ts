@@ -90,7 +90,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     MrIdTypeCode: ['', [Validators.required, Validators.maxLength(100)]],
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', [Validators.required]],
-    IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)]],
     TaxIdNo: [''],
     IdExpiredDt: [''],
     MrMaritalStatCode: [''],
@@ -226,6 +226,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
             RowVersionCust: custData.RowVersion,
             RowVersionCustPersonal: custPersonalData.RowVersion
           });
+          this.onChangeIdType();
           this.CustomerFamilyForm.controls.Gender.disable();
           this.CustomerFamilyForm.controls.MrIdTypeCode.disable();
           this.CustomerFamilyForm.controls.BirthPlace.disable();
@@ -283,6 +284,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
         this.CustomerFamilyForm.patchValue({
           MrIdTypeCode: this.tempIdType[0].Key
         });
+        this.onChangeIdType();
         if (this.tempIdType[0].Key == this.KTP) {
           this.tempKTPCheck = true;
 
@@ -360,6 +362,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
           Email1: custPersonalData.Email1
         });
 
+        this.onChangeIdType();
         var addrForm = this.CustomerFamilyForm.get("UcAddress");
         addrForm.patchValue({
           Addr: custAddrData.Addr,
@@ -494,6 +497,19 @@ export class CustomerFamilyDetailComponent implements OnInit {
       this.tempKTPCheck = false;
     }
     this.CustomerFamilyForm.controls.IdExpiredDt.updateValueAndValidity();
+    this.onChangeIdType();
+  }
+
+  onChangeIdType() {
+    let idType: string = this.CustomerFamilyForm.get("MrIdTypeCode").value;
+
+    this.CustomerFamilyForm.get("IdNo").clearValidators();
+    if (idType == CommonConstant.MrIdTypeCodeEKTP) {
+      this.CustomerFamilyForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)]);
+    } else {
+      this.CustomerFamilyForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
+    }
+    this.CustomerFamilyForm.get("IdNo").updateValueAndValidity();
   }
 
   back() {

@@ -123,6 +123,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         this.CustomerPersonalForm.patchValue({
           MrIdTypeCode: this.tempIdType[0].Key
         });
+        this.onChangeIdType();
         if (this.tempIdType[0].Key == this.KTP) {
           this.tempKTPCheck = true;
         
@@ -229,7 +230,19 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
       this.tempKTPCheck = false;
     }
     this.CustomerPersonalForm.controls.IdExpiredDt.updateValueAndValidity();
+    this.onChangeIdType();
   }
+	
+  onChangeIdType() {
+    let idType: string = this.CustomerPersonalForm.get("MrIdTypeCode").value;
 
+    this.CustomerPersonalForm.get("IdNo").clearValidators();
+    if (idType == CommonConstant.MrIdTypeCodeEKTP) {
+      this.CustomerPersonalForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)]);
+    } else {
+      this.CustomerPersonalForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
+    }
+    this.CustomerPersonalForm.get("IdNo").updateValueAndValidity();
+  }
 }
 
