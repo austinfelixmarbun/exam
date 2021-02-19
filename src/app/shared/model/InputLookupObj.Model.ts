@@ -13,10 +13,11 @@ export class InputLookupObj{
     isRequired: boolean
     pagingJson: any
     genericJson: any
-    isReadonly: boolean 
+    isReadonly: boolean
     isReady: boolean
-    ddlEnvironments: any;
-    title: any
+    isDisable: boolean
+    ddlEnvironments: any
+    title: any;
     
     constructor()
     {
@@ -31,5 +32,6 @@ export class InputLookupObj{
         this.isReadonly = true;
         this.isReady = false;
         this.title = "";
+        this.isDisable = false;
     }
 }

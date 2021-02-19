@@ -197,6 +197,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
           var custAddrData = response[2] as CustAddrObj;
           console.log("CustAddrData: " + JSON.stringify(custAddrData));
           this.existingCustomerLookUpObj.nameSelect = custData.CustName;
+          this.disableInput();
           this.CustomerFamilyForm.patchValue({
             CustPersonalFamilyId: this.custPersonalFamilyObj["CustPersonalFamilyId"],
             CustId: this.custPersonalFamilyObj["CustId"],
@@ -311,6 +312,14 @@ export class CustomerFamilyDetailComponent implements OnInit {
           MrCustRelationship: this.CustRelationshipList[0]["Key"]
         });
       });
+  }
+
+  disableInput() {
+    this.existingCustomerLookUpObj.isDisable = true;
+    this.existingCustomerLookUpObj.isReadonly = true;
+    this.inputAddressObj.isReadonly = true;
+    this.inputAddressObj.inputField.inputLookupObj.isReadonly = true;
+    this.inputAddressObj.inputField.inputLookupObj.isDisable = true;
   }
 
   getLookUpCustomer(event) {
