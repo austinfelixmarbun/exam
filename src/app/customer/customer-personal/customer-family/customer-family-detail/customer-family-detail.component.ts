@@ -32,9 +32,9 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 })
 export class CustomerFamilyDetailComponent implements OnInit {
   @Input() listCustIdToExclude: Array<string>;
-  @Input() customerPersonalFamilyId: number;
-  @Input() custIdInput: number;
-  @Output() ResponseSaveFamily: EventEmitter<any>;
+  @Input() customerPersonalFamilyId: number = 0;
+  @Input() custIdInput: number = 0;
+  @Output() ResponseSaveFamily: EventEmitter<any> = new EventEmitter<any>();
   custPersonalFamilyObj: any;
   isExistingCust: boolean;
   isEditCustFamily: boolean;
@@ -103,14 +103,14 @@ export class CustomerFamilyDetailComponent implements OnInit {
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) {
+  }
+
+  initData() {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.isExistingCust = false;
     this.isEditCustFamily = false;
-    this.ResponseSaveFamily = new EventEmitter<any>();
-    this.customerPersonalFamilyId = 0;
-    this.custIdInput = 0;
     this.CustRelationshipList = new Array<Object>();
     this.custDataToCheckDuplicate = new Object();
     this.UcAddressObj = new UcAddressObj();
@@ -119,6 +119,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initData();
     console.log("ameng");
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
