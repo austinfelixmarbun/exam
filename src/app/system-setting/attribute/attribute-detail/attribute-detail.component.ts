@@ -215,7 +215,7 @@ export class AttributeDetailComponent implements OnInit {
   }
 
   Back() {
-    this.location.back();
+    AdInsHelper.RedirectUrl(this.router,["/SystemSetting/Attribute/Paging"],{ });
   }
 
   Save(enjiForm) {

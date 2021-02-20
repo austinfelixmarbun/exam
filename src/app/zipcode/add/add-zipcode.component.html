@@ -12,7 +12,7 @@
         <form class="form form-horizontal" [formGroup]="RefZipCodeForm" (ngSubmit)="RefZipCodeForm.valid && SaveForm()"
           #enjiForm="ngForm">
           <div class="form-body">
-            <lib-ucSubsection [id]="'ZipcodeInfoId'" [title]="'Zipcode Information'+ pageType" [panel]="'ZipcodeInfo'"></lib-ucSubsection>
+            <lib-ucSubsection [id]="'ZipcodeInfoId'" [title]="'Zipcode Information '+ pageType" [panel]="'ZipcodeInfo'"></lib-ucSubsection>
             <div id="ZipcodeInfo">
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel adins-required-label" translate>Kelurahan </label>
