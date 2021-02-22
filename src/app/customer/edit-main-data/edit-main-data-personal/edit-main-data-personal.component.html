@@ -49,7 +49,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-2 adins-required-label" translate>ID TYPE </label>
+                <label class="col-md-2 adins-required-label" translate>ID Type </label>
                 <div class="col-md-4">
                   <select class="form-control adInsInput" (change)="onOptionsSelected($event)" style="width: auto"
                     formControlName="MrIdTypeCode"
@@ -71,14 +71,14 @@
                 </div>
               </div>
               <div class="form-group row  ">
-                <label class="col-md-2 adins-required-label" translate>ID NUMBER </label>
+                <label class="col-md-2 adins-required-label" translate>ID Number</label>
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="IdNo"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.IdNo.invalid}">
                   <lib-uc-show-errors [control]="CustomerPersonalForm.controls.IdNo" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
-                <label class="col-md-2 adInsLabel" translate>TAX ID NO</label>
+                <label class="col-md-2 adInsLabel" translate>Tax ID No</label>
                 <div class="col-md-4">
                   <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerPersonalForm.controls.TaxIdNo.invalid}">
@@ -152,46 +152,54 @@
             <div *ngIf="!subsectionAsliRi && IsCustThirdPartyCheck">
               <lib-ucSubsection [id]="'FraudCheckInfo'" [title]="'Fraud Checking Customer'" [panel]="'dFraudCheckInfo'">
               </lib-ucSubsection>
-              <div id="dFraudCheckInfo" class="row">
-                <div class="col-md-12">
-                    <label class="col-md-3" translate>Dukcapil</label>
+              <div id="dFraudCheckInfo">
+                <div class="row" style="display:flex; align-items: center;">
                     
-                    <span class="col-md-6">
+                  <div class="col-3">
+                    <label translate>Dukcapil</label>
+                  </div>  
+                    <div class="col-9">
                       <label translate>Last Check is 99 days ago /                       
                       </label>   
                       <button type="button" (click)="openPopUp(popUpDukcapil, 'popUpDukcapil')" class="btn btn-raised btn-primary" translate> Hit Dukcapil                       
                       </button> 
-                    </span> 
+                    </div> 
                 </div>
-                <div class="col-md-12">
-                    <label class="col-md-3" translate>Pefindo</label>
+                <div class="row" style="display:flex; align-items: center;">
+                  <div class="col-3">
+                    <label translate>Pefindo</label>
+                  </div>  
                             
-                    <span class="col-md-6">
+                    <div class="col-9">
                       <label translate>Last Check is 63 days ago /                        
                       </label>                                               
                       <button type="button" (click)="openPopUp(popUpPefindo, 'popUpPefindo')" class="btn btn-raised btn-primary" translate>
                         Hit Pefindo
                       </button>   
                       /
-                      <a (click)="openPopUp(popUpViewPefindo, 'popUpViewPefindo')">View</a> 
-                    </span>    
+                      <button type="button" (click)="openPopUp(popUpViewPefindo, 'popUpViewPefindo')" class="btn btn-raised btn-primary" translate>View</button> 
+                    </div>    
                 </div>
-                <div class="col-md-12">
-                    <label class="col-md-3" translate>Asli RI</label>
-                       
-                    <span class="col-md-6">
+                <div class="row" style="display:flex; align-items: center;">
+                  <div class="col-3">
+                    <label  translate>Asli RI</label>
+                  </div>
+                    <div class="col-9">
                       <label translate>Last Check is 35 days ago /</label>                                               
                       <button type="button" (click)="showAsliRi()" class="btn btn-raised btn-primary"
                         translate>
                         Hit Asli RI
                       </button>   
                       /     
-                      <a (click)="openPopUp(popUpViewAsliRI, 'popUpViewAsliRI')">View</a>
-                    </span>   
+                      <button type="button" (click)="openPopUp(popUpViewAsliRI, 'popUpViewAsliRI')" class="btn btn-raised btn-primary"
+                      translate>View</button>
+                    </div>   
                 </div>
-                <div class="col-md-12">
-                    <label class="col-md-3" translate>Trusting Social</label>                                   
-                    <span class="col-md-6">
+                <div class="row" style="display:flex; align-items: center;">
+                    <div class="col-3">
+                      <label  translate>Trusting Social</label>                                   
+                    </div>
+                    <div class="col-9">
                       <label translate>Last Check is 20 days ago /                          
                       </label>                                               
                       <button type="button" (click)="openPopUp(popUpTrustingSocial, 'popUpTrustingSocial')" class="btn btn-raised btn-primary"
@@ -199,17 +207,20 @@
                         Hit Trusting Social
                       </button>   
                       /
-                      <a (click)="openPopUp(popUpViewTrustingSocial, 'popUpViewTrustingSocial')">View</a> 
-                    </span>  
+                      <button type="button" (click)="openPopUp(popUpViewTrustingSocial, 'popUpViewTrustingSocial')" class="btn btn-raised btn-primary">View</button> 
+                    </div>  
                 </div>
-                <div class="col-md-12">
-                    <label class="col-md-3" translate>SLIK</label>                            
-                    <label class="col-md-6" translate>Not hit yet /  
+                <div class="row" style="display:flex; align-items: center;">
+                  <div class="col-3">
+                    <label translate>SLIK</label>                            
+                  </div>
+                  <div class="col-9">
+                    <label translate>Not hit yet /  </label> 
                       <button type="button" (click)="openPopUp(popUpSlik, 'popUpSlik')" class="btn btn-raised btn-primary"
                       translate>
                       Hit SLIK
                     </button>                     
-                    </label>    
+                  </div> 
                 </div>
               </div>
             </div>

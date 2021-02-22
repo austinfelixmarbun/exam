@@ -160,23 +160,26 @@
             <div *ngIf="!subsectionAsliRi && IsCustThirdPartyCheck">
               <lib-ucSubsection [id]="'FraudCheckInfo'" [title]="'Fraud Checking Customer'" [panel]="'dFraudCheckInfo'">
               </lib-ucSubsection>
-              <div id="dFraudCheckInfo" class="row">
-                <div class="col-md-12">
-                    <label class="col-md-3" translate>Dukcapil</label>
-                    
-                    <span class="col-md-6">
+              <div id="dFraudCheckInfo">
+                <div class="row" style="display:flex; align-items: center;">
+                  <div class="col-3">
+                    <label translate>Dukcapil</label>
+                  </div>
+                    <div class="col-9">
                       <label translate>{{LastHit.DUKCAPIL}} /                       
                       </label>   
                       <!-- <label *ngIf="LastHit.DUKCAPIL == '' " translate>Not Hit Yet /                       
                       </label>    -->
                       <button type="button" (click)="openPopUp(popUpDukcapil, 'popUpDukcapil')" class="btn btn-raised btn-primary" translate> Hit Dukcapil                       
                       </button> 
-                    </span> 
+                    </div> 
                 </div>
-                <div class="col-md-12">
-                    <label class="col-md-3" translate>Pefindo</label>
+                <div class="row" style="display:flex; align-items: center;">
+                  <div class="col-3">
+                    <label translate>Pefindo</label>
+                  </div>
                             
-                    <span class="col-md-6">
+                    <div class="col-9">
                       <label translate>{{LastHit.PEFINDO}} /                        
                       </label>        
                       <!-- <label *ngIf="!LastHit.PEFINDO" translate>Not Hit Yet /                        
@@ -185,13 +188,14 @@
                         Hit Pefindo
                       </button>   
                       /
-                      <a (click)="openPopUp(popUpViewPefindo, 'popUpViewPefindo')">View</a> 
-                    </span>    
+                      <button  type="button" (click)="openPopUp(popUpViewPefindo, 'popUpViewPefindo')" class="btn btn-raised btn-primary" translate>View</button> 
+                    </div>    
                 </div>
-                <div class="col-md-12">
-                    <label class="col-md-3" translate>Asli RI</label>
-                       
-                    <span class="col-md-6">
+                <div class="row" style="display:flex; align-items: center;">
+                  <div class="col-3">
+                    <label translate>Asli RI</label>
+                  </div>
+                    <div class="col-9">
                       <label translate>{{LastHit.ASLIRI}} /</label>                                               
                       <!-- <label *ngIf="!LastHit.ASLIRI" translate>Not Hit Yet /</label>                                                -->
                       <button type="button" (click)="showAsliRi()" class="btn btn-raised btn-primary"
@@ -199,12 +203,15 @@
                         Hit Asli RI
                       </button>   
                       /     
-                      <a (click)="openPopUp(popUpViewAsliRI, 'popUpViewAsliRI')">View</a>
-                    </span>   
+                      <button type="button" (click)="openPopUp(popUpViewAsliRI, 'popUpViewAsliRI')" class="btn btn-raised btn-primary"
+                      translate>View</button>
+                    </div>   
                 </div>
-                <div class="col-md-12">
-                    <label class="col-md-3" translate>Trusting Social</label>                                   
-                    <span class="col-md-6">
+                <div class="row" style="display:flex; align-items: center;">
+                  <div class="col-3">
+                    <label translate>Trusting Social</label>
+                  </div>                                   
+                    <div class="col-9">
                       <label translate>{{LastHit.TRST}} /                          
                       </label>                  
                       <!-- <label *ngIf="!LastHit.TRST" translate>Not Hit Yet /                          
@@ -214,11 +221,15 @@
                         Hit Trusting Social
                       </button>   
                       /
-                      <a (click)="openPopUp(popUpViewTrustingSocial, 'popUpViewTrustingSocial')">View</a> 
-                    </span>  
+                      <button type="button" (click)="openPopUp(popUpViewTrustingSocial, 'popUpViewTrustingSocial')" class="btn btn-raised btn-primary"
+                      translate>View</button> 
+                    </div>  
                 </div>
-                <div class="col-md-12">
-                    <label class="col-md-3" translate>SLIK</label>  
+                <div class="row" style="display:flex; align-items: center;">
+                  <div class="col-3">
+                    <label translate>SLIK</label>  
+                  </div>
+                  <div class="col-9">
                     <label translate>{{LastHit.SLIK}} /                          
                     </label>                           
                     <!-- <label *ngIf="!LastHit.SLIK" translate>Not hit yet /                      
@@ -227,6 +238,7 @@
                       translate>
                       Hit SLIK
                     </button> 
+                  </div>
                 </div>
               </div>
             </div>

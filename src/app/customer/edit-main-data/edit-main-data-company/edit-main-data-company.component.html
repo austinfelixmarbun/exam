@@ -87,28 +87,33 @@
           <div *ngIf="IsCustThirdPartyCheck">
             <lib-ucSubsection [id]="'FraudCheckInfo'" [title]="'Fraud Checking Customer'" [panel]="'dFraudCheckInfo'">
             </lib-ucSubsection>
-            <div id="dFraudCheckInfo" class="row">
-              <div class="col-md-12">
-                  <label class="col-md-3" translate>Pefindo</label>
-                          
-                  <span class="col-md-6">
+            <div id="dFraudCheckInfo">
+              <div class="row" style="display:flex; align-items: center;">
+                <div class="col-3">
+                  <label translate>Pefindo</label>
+                </div>  
+                  <div class="col-9">
                     <label translate>Last Check is 63 days ago /                        
                     </label>                                               
                     <button type="button" (click)="openPopUp(popUpPefindo, 'popUpPefindo')" class="btn btn-raised btn-primary" translate>
                       Hit Pefindo
                     </button>   
                     /
-                    <a (click)="openPopUp(popUpViewPefindo, 'popUpViewPefindo')">View</a> 
-                  </span>    
+                    <button type="button" (click)="openPopUp(popUpViewPefindo, 'popUpViewPefindo')" class="btn btn-raised btn-primary" translate>View</button> 
+                  </div>    
               </div>
-              <div class="col-md-12">
-                  <label class="col-md-3" translate>SLIK</label>                            
-                  <label class="col-md-6" translate>Not hit yet /  
+              <div class="row" style="display:flex; align-items: center;">
+                <div class="col-3">
+                  <label  translate>SLIK</label>
+                  </div>    
+                  <div class="col-9">                        
+                  <label translate>Not hit yet / </label>  
                     <button type="button" (click)="openPopUp(popUpSlik, 'popUpSlik')" class="btn btn-raised btn-primary"
                     translate>
                     Hit SLIK
                   </button>                     
-                  </label>    
+                      
+                </div>
               </div>
             </div>
           </div>

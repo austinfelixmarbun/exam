@@ -904,7 +904,7 @@ export class VendorBranchAddEditComponent implements OnInit {
 
   setValidator(pattern: string) {
     if (pattern != undefined) {
-      this.VendorForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.VendorForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
       this.VendorForm.controls[this.controlNameIdNo].updateValueAndValidity();
     }
   }
