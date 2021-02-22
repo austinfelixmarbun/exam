@@ -208,6 +208,9 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       if(this.tempShareholderCustNo!=null){
         this.custCompanyMgmntShrholderObj.ShareholderCustNo = this.tempShareholderCustNo;
       }
+      if(this.custExistingId != 0){
+        this.custCompanyMgmntShrholderObj.ShareholderId = this.custExistingId;
+      }
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
       this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;   
       this.custCompanyMgmntShrholderObj.MrCompanyTypeCode = this.ManagementShareholderForm.controls["MrCompanyTypeCode"].value;  
@@ -237,7 +240,9 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     this.outputValue.emit({mode : 'check'});
   }
 
+  custExistingId: number = 0;
   getLookUpCustomer(event) {
+    this.custExistingId = event.CustId;
     this.ManagementShareholderForm.patchValue({
       MgmntShrholderName: event.CustName,
       MrCustModelCode: event.MrCustModelCode,

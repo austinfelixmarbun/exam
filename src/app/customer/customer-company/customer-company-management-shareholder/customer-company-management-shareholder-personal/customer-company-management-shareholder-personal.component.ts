@@ -311,6 +311,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
   }
 
+  custExistingId: number = 0;
   getLookUpCustomer(event) {
     var datePipe = new DatePipe("en-US");
     this.ManagementShareholderForm.patchValue({
