@@ -60,13 +60,13 @@ export class CustAttrListComponent implements OnInit {
               for (const refAttr of this.RefAttrList) { 
                 this.AttrContent = new AttrContent();
                 let isUpdateValue = false;
-                if(this.ListAttrContent.find(x => x.AttrCode == refAttr.AttrCode) ){
-                  this.AttrContent = this.ListAttrContent.find(x => x.AttrCode == refAttr.AttrCode);
+                if(this.ListAttrContent.find(x => x.RefAttrId  == refAttr.RefAttrId ) ){
+                  this.AttrContent = this.ListAttrContent.find(x => x.RefAttrId  == refAttr.RefAttrId );
                   isUpdateValue = true;
                 }
   
                 var formGroupObject = new Object();
-                formGroupObject["AttrCode"] = [refAttr.AttrCode];
+                formGroupObject["RefAttrId "] = [refAttr.RefAttrId ];
                 formGroupObject["IsMandatory"] = [refAttr.IsMandatory]; 
                 
                 await this.setFormGroupValue(refAttr, formGroupObject, parentFormGroup, isUpdateValue); 
