@@ -75,10 +75,10 @@
                   <td class="text-left">{{temp.Month}}</td>
                   <td class="text-left">{{temp.Year}}</td>
                   <td class="text-center">{{temp.DebitTrxCount}}</td>
-                  <td class="text-left">{{temp.DebitAmt | number}}</td>
+                  <td class="text-left">{{temp.DebitAmt | number:'.2':'en-US'}}</td>
                   <td class="text-center">{{temp.CreditTrxCount}}</td>
-                  <td class="text-left">{{temp.CreditAmt | number}}</td>
-                  <td class="text-left">{{temp.BalanceAmt | number}}</td>
+                  <td class="text-left">{{temp.CreditAmt | number:'.2':'en-US'}}</td>
+                  <td class="text-left">{{temp.BalanceAmt | number:'.2':'en-US'}}</td>
                 </tr>
               </ng-container>
             </tbody>
