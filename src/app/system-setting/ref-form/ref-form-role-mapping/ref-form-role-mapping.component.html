@@ -1,14 +1,18 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]"
-      [queryParams]="{RefFormId: RefFormId}" skipLocationChange translate>
-      <i class="far fa-window-close"></i> Cancel
-    </button>
-    <button type="submit" (click)="SaveListAuthForm()" class="btn btn-raised btn-primary" translate>
-      <i class="far fa-check-square"></i> Save
+    <button type="button" class="backButton" [routerLink]="[CancelLink]"
+    [queryParams]="{RefFormId: RefFormId}" skipLocationChange translate>
+      <i class="fa fa-arrow-left"> </i> Back
     </button>
   </span>
 </div>
 <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
 <lib-ucaddtotemp *ngIf="tempPagingObj.isReady" [tempPagingObj]="tempPagingObj" (callback)="getListTemp($event)">
 </lib-ucaddtotemp>
+<div class="card-header" *ngIf="listSelectedId.length > 0">
+  <div class="text-right">
+    <button type="submit" (click)="SaveListAuthForm()" class="btn btn-raised btn-primary" translate>
+      <i class="far fa-check-square"></i> Save
+    </button>
+  </div>
+</div>
