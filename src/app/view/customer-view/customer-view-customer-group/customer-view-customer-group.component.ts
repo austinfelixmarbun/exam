@@ -13,8 +13,10 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 export class CustomerViewCustomerGroupComponent implements OnInit {
   CustId: number;
   GetListCustGrpForCustViewByCustIdUrl = URLConstant.GetListCustGrpForCustViewByCustId;
+  GetListCustGrpForCustViewByMemberCustIdUrl = URLConstant.GetListCustGrpForCustViewByMemberCustId;
   responseObj: any;
   custViewUrl: string;
+  responseMemberCustGrpObj: any;
 
   constructor(
     private http: HttpClient,
@@ -33,6 +35,14 @@ export class CustomerViewCustomerGroupComponent implements OnInit {
     this.http.post(this.GetListCustGrpForCustViewByCustIdUrl, custObj).subscribe(
       response => {
         this.responseObj = response['ReturnObject'];
+      },
+      error => {
+        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
+      }
+    );
+    this.http.post(this.GetListCustGrpForCustViewByMemberCustIdUrl, custObj).subscribe(
+      response => {
+        this.responseMemberCustGrpObj = response['ReturnObject'];
       },
       error => {
         AdInsHelper.RedirectUrl(this.router,["/Error"],{});
