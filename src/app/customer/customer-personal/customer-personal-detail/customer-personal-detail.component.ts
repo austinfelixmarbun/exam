@@ -283,11 +283,14 @@ export class CustomerPersonalDetailComponent implements OnInit {
     if (this.custPersonalObj.MrNationalityCode == CommonConstant.NationalityCodeLocal) {
       this.custPersonalObj.WnaCountryCode = CommonConstant.WnaCountryCodeIdn;
     }
-    if (this.tempCustPersonalObj.WnaCountryCode != null && this.tempCountryCode == null) {
-      this.custPersonalObj.WnaCountryCode = this.tempCustPersonalObj.WnaCountryCode;
-    } else {
-      this.custPersonalObj.WnaCountryCode = this.tempCountryCode;
+    else{
+      if (this.tempCustPersonalObj.WnaCountryCode != null && this.tempCountryCode == null) {
+        this.custPersonalObj.WnaCountryCode = this.tempCustPersonalObj.WnaCountryCode;
+      } else {
+        this.custPersonalObj.WnaCountryCode = this.tempCountryCode;
+      }
     }
+
     this.custPersonalObj.FamilyCardNo = this.CustomerDetailForm.controls["FamilyCardNo"].value;
     this.custPersonalObj.MrEducationCode = this.CustomerDetailForm.controls["MrEducationCode"].value;
     this.custPersonalObj.MrReligionCode = this.CustomerDetailForm.controls["MrReligionCode"].value;
