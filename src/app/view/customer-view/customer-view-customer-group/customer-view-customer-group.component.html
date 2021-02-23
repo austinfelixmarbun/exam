@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="px-3">
 
-      <lib-ucSubsection [id]="'ShareId'" [title]="'Customer Group'" [panel]="'GrpId'">
+      <lib-ucSubsection [id]="'GrpId'" [title]="'Customer Group'" [panel]="'GrpId'">
       </lib-ucSubsection>
       <div id="GrpId">
       <table class="table table-responsive-md text-center table-hover">
@@ -35,8 +35,8 @@
           </ng-container>
         </tbody>
       </table>
-
-      <lib-ucSubsection [id]="'ShareId'" [title]="'Member Of Customer Group'" [panel]="'MemberId'">
+      </div>
+      <lib-ucSubsection [id]="'MemberId'" [title]="'Member Of Customer Group'" [panel]="'MemberId'">
       </lib-ucSubsection>
       <div id="MemberId">
       <table class="table table-responsive-md text-center table-hover">
@@ -71,5 +71,4 @@
       </table>
       </div>
     </div>
-  </div>
 </div>
