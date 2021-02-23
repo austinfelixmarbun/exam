@@ -9,6 +9,7 @@ import { empty } from 'rxjs';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { ProdOfferingObj } from 'app/shared/model/ProdOfferingObj.Model';
 
 @Component({
   selector: 'app-list-office-member-offering',
@@ -19,6 +20,7 @@ export class ListOfficeMemberComponentOffering implements OnInit {
 
   @ViewChild(UCSearchComponent) UCSearchComponent;
   @Input() ListOfficeMemberObjInput: any;
+  @Input() ProdHId: number;
   @Output() componentIsOn: EventEmitter<any> = new EventEmitter();
   resultData;
   constructor(
@@ -37,6 +39,7 @@ export class ListOfficeMemberComponentOffering implements OnInit {
   apiUrl;
   ProdOfferingHId: number;
   source: string = "";
+  obj: ProdOfferingObj = new ProdOfferingObj();
 
   ngOnInit() {
     this.pageNow = 1;
@@ -75,8 +78,18 @@ export class ListOfficeMemberComponentOffering implements OnInit {
         result: temp
       }
     }
-
-    this.componentIsOn.emit(obj);
+    this.obj.ProdHId = this.ProdHId;
+    this.http.post(URLConstant.GetListProdBranchOfficeMbrByProdHId, this.obj).subscribe(
+      response => {
+        this.toastr.successMessage(response["message"]);
+        if(response["ReturnObject"].length == 0){
+          this.toastr.warningMessage("Product doesn't have any office member, please add product's office member first");
+        }
+        else{
+          this.componentIsOn.emit(obj);
+        }
+      }
+    );
   }
 
   orderByKey;
