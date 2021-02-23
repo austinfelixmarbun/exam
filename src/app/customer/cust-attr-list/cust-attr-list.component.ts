@@ -56,7 +56,7 @@ export class CustAttrListComponent implements OnInit {
           async (response: any) => {
             this.RefAttrList = response[CommonConstant.ReturnObj];
 
-            if(this.RefAttrList != null && this.RefAttrList.length > 0){
+            if(this.RefAttrList != null){
               for (const refAttr of this.RefAttrList) { 
                 this.AttrContent = new AttrContent();
                 let isUpdateValue = false;
