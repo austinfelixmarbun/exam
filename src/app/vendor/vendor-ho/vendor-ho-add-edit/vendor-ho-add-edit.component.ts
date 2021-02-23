@@ -93,6 +93,7 @@ export class VendorHoAddEditComponent implements OnInit {
     VendorAtpmCode: []
   })
 
+  DictDDLVendorAttr: {[id: string]: Array<any>} = {};
   ngOnInit() {
     console.log("aaa")
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -129,6 +130,7 @@ export class VendorHoAddEditComponent implements OnInit {
                 }
                 else if (vendorAttr["VendorAttrType"] == 'L') {
                   var temp = vendorAttr["VendorAttrValue"].split(";");
+                  this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
                   formGroupObject["VendorAttrValue"] = [temp[0]];
                 }
                 else {
@@ -180,6 +182,7 @@ export class VendorHoAddEditComponent implements OnInit {
 
                   if (vendorAttr["VendorAttrType"] == 'L') {
                     var temp = vendorAttr["VendorAttrValue"].split(";");
+                    this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
                     formGroupObject["VendorAttrValue"] = [temp[0]];
                   } else {
                     formGroupObject["VendorAttrValue"] = [''];
@@ -213,6 +216,11 @@ export class VendorHoAddEditComponent implements OnInit {
                   formGroupObject["VendorAttrId"] = [vendorAttr["VendorAttrId"]];
 
                   if (vendorAttr["VendorAttrType"] == 'T') {
+                    formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
+                  }
+                  else if (vendorAttr["VendorAttrType"] == 'L') {
+                    var temp = vendorAttr["VendorAttrValue"].split(";");
+                    this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
                     formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
                   }
                   else if (vendorAttr["VendorAttrType"] == 'RM') {

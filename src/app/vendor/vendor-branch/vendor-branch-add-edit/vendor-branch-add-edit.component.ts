@@ -115,6 +115,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     IsOneAffiliate: [false]
   })
 
+  DictDDLVendorAttr: {[id: string]: Array<any>} = {};
   ngOnInit() {
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -147,6 +148,7 @@ export class VendorBranchAddEditComponent implements OnInit {
                 }
                 else if (vendorAttr["VendorAttrType"] == 'L') {
                   var temp = vendorAttr["VendorAttrValue"].split(";");
+                  this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
                   formGroupObject["VendorAttrValue"] = [temp[0]];
                 }
                 else {
@@ -200,6 +202,7 @@ export class VendorBranchAddEditComponent implements OnInit {
 
                   if (vendorAttr["VendorAttrType"] == 'L') {
                     var temp = vendorAttr["VendorAttrValue"].split(";");
+                    this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
                     formGroupObject["VendorAttrValue"] = [temp[0]];
                   } else {
                     formGroupObject["VendorAttrValue"] = [''];
@@ -260,6 +263,11 @@ export class VendorBranchAddEditComponent implements OnInit {
                       (response) => {
                         tempLookup[vendorAttr["VendorAttrCode"]].jsonSelect = { Descr: response['Descr'] }
                       });
+                    formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
+                  }
+                  else if (vendorAttr["VendorAttrType"] == 'L') {
+                    var temp = vendorAttr["VendorAttrValue"].split(";");
+                    this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
                     formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
                   }
                   else {
