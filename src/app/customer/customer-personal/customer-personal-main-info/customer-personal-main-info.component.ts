@@ -263,9 +263,9 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         (response) => {
           this.tempGender = response[CommonConstant.ReturnObj];
           if (this.tempGender.length > 0) {
-            this.CustomerPersonalForm.patchValue({
-              Gender: this.tempGender[0].Key
-            });
+            // this.CustomerPersonalForm.patchValue({
+            //   Gender: this.tempGender[0].Key
+            // });
           }
         }
       );
@@ -277,14 +277,14 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         (response) => {
           this.tempIdType = response[CommonConstant.ReturnObj];
           if (this.tempIdType.length > 0) {
-            this.CustomerPersonalForm.patchValue({
-              MrIdTypeCode: this.tempIdType[0].Key
-            });
+            // this.CustomerPersonalForm.patchValue({
+            //   MrIdTypeCode: this.tempIdType[0].Key
+            // });
           }
           if (this.tempIdType[0].Key == this.KTP) {
-            this.tempKTPCheck = true;
+            //this.tempKTPCheck = true;
           } else {
-            this.tempKTPCheck = false;
+            //this.tempKTPCheck = false;
           }
         }
       );
@@ -388,6 +388,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupplierPersonal.json";
     this.inputLookupObj.genericJson = "./assets/lookup/lookupSupplierPersonal.json";
     this.inputLookupObj.isReady = true;
+    this.inputLookupObj.isRequired = false;
   }
 
   SetSupplier(e) {
