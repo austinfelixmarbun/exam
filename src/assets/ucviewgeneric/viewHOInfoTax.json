@@ -35,7 +35,7 @@
       },
       {
         "subSectionId": "HOTaxAddressId",
-        "subSectionTitle": "Tax Info",
+        "subSectionTitle": "Tax Address Info",
         "mainInfoPath": "/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
