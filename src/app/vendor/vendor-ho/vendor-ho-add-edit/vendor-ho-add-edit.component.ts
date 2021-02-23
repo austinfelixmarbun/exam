@@ -93,8 +93,39 @@ export class VendorHoAddEditComponent implements OnInit {
     VendorAtpmCode: []
   })
 
+  HoTitle: string = "";
+  SetTitleHoInfo() {
+    switch (this.MrVendorCategoryCode) {
+      case CommonConstant.SUPPLIER_HO:
+        this.HoTitle = "Supplier ";
+        break;
+      case CommonConstant.SUPPLIER_HOLDING:
+        this.HoTitle = "Supplier Holding ";
+        break;
+      case CommonConstant.SUPPLIER_BRANCH:
+        this.HoTitle = "Supplier Branch ";
+        break;
+      case CommonConstant.SURVEYOR_HO:
+        this.HoTitle = "Surveyor HO ";
+        break;
+      case CommonConstant.SURVEYOR_BRANCH:
+        this.HoTitle = "Surveyor Branch ";
+        break;
+      case CommonConstant.ASSET_INSCO_HO:
+        this.HoTitle = "Insurance HO ";
+        break;
+      case CommonConstant.ASSET_INSCO_BRANCH:
+        this.HoTitle = "Insurance Branch ";
+        break;
+      case CommonConstant.LIFE_INSCO_BRANCH:
+        this.HoTitle = "Life Insurance Branch ";
+        break;
+    }
+  }
+
   DictDDLVendorAttr: {[id: string]: Array<any>} = {};
   ngOnInit() {
+    this.SetTitleHoInfo();
     console.log("aaa")
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);

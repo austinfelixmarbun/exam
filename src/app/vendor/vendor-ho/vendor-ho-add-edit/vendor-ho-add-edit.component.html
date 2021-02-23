@@ -187,7 +187,7 @@
               </div>
             </div>
             <div *ngIf="MrVendorCategoryCode=='SUPPLIER_HO'">
-              <lib-ucSubsection [id]="'HOIdOne'" [title]="'HO Info'" [panel]="'HOInformation'">
+              <lib-ucSubsection [id]="'HOIdOne'" [title]="HoTitle + 'HO Info'" [panel]="'HOInformation'">
               </lib-ucSubsection>
               <div id="HOInformation">
                 <div class="form-body" formGroupName="VendorAttrList" *ngIf="isFormReady">
