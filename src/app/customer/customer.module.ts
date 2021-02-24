@@ -213,8 +213,6 @@ export const customCurrencyMaskConfig = {
     CustLegalDocComponent,
     CustLegalDocDetailComponent,
     CustomerViewPersonalContactPersonComponent,
-    CustomerViewPersonalFamilyComponent,
-    CustomerViewPersonalEmergencyContactComponent,
     CustomerViewPersonalFinancialDataComponent,
     CustomerViewPersonalJobDataNonProfComponent,
     CustomerViewPersonalJobDataEmpComponent,
