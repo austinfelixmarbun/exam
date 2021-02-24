@@ -198,6 +198,8 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value;  
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Company;
       this.custCompanyMgmntShrholderObj.MrIndustryTypeCode = this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value; 
+      this.custCompanyMgmntShrholderObj.MrIdTypeCode = RefMasterConstant.Npwp;
+      this.custCompanyMgmntShrholderObj.IdNo = this.ManagementShareholderForm.controls["TaxIdNo"].value;
       this.http.post(this.editManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
@@ -221,7 +223,8 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value;  
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Company;
       this.custCompanyMgmntShrholderObj.MrIndustryTypeCode = this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value; 
-
+      this.custCompanyMgmntShrholderObj.MrIdTypeCode = RefMasterConstant.Npwp;
+      this.custCompanyMgmntShrholderObj.IdNo = this.ManagementShareholderForm.controls["TaxIdNo"].value;
       if(this.isExistingCust){
         this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
           (response) => {
