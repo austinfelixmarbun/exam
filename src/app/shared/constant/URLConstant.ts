@@ -147,6 +147,7 @@ export class URLConstant {
     public static AddRefUserR3 = environment.FoundationR3Url + "/RefUser/AddRefUser";
     public static GetRefUserById = environment.FoundationR3Url + "/RefUser/GetRefUserById";
     public static GetRefUserByUsername = environment.FoundationR3Url + "/RefUser/GetRefUserByUsername";
+    public static GetUserEmpByUsername = environment.FoundationR3Url + "/RefUser/GetUserEmpByUsername";
     public static GetRefUserByRefEmpId = environment.FoundationR3Url + "/RefUser/GetRefUserByRefEmpId";
     public static AddRefUserRole = environment.FoundationR3Url + "/RefUserRole/AddRefUserRole"
     public static EditRefUserRole = environment.FoundationR3Url + "/RefUserRole/EditRefUserRole";
@@ -979,4 +980,9 @@ export class URLConstant {
     public static RequestExposureFromR2 = environment.FoundationR3Url + "/CustExpsrInfo/RequestExposureFromR2";
     public static GetListCustExpsrBucketByCustExpsrDId = environment.FoundationR3Url + "/CustExpsrInfo/GetListCustExpsrBucketByCustExpsrDId";
     public static GetListCustExpsrAppAgrHistByCustExpsrHId = environment.FoundationR3Url + "/CustExpsrInfo/GetListCustExpsrAppAgrHistByCustExpsrHId";
+
+    //OTP
+    public static SendOtp = "http://localhost:5000/Authenticate/SendOtp";
+    public static ConfirmOtp = "http://localhost:5000/Authenticate/ConfirmOtp";
+    public static GetOtpProperties = "http://localhost:5000/Authenticate/GetOtpProperties";
 }
