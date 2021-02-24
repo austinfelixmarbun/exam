@@ -138,15 +138,13 @@
               <app-cust-asset [CustId]="IdCust" (ResponseCustAsset)="getValue($event)" *ngIf="CustStepIndex == 8">
               </app-cust-asset>
             </div>
+            <div id="upload-tab" class="content" role="tabpanel" aria-labelledby="upload-tab-trigger">
+              <app-dms-iframe  *ngIf="CustStepIndex == 9" [dmsObj]="dmsObj" [showButton]="true" (outputTab)="getValue($event)" (outputCancel)="getValue($event)"></app-dms-iframe>
+            </div>
             <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
-              <app-cust-attr-section [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" *ngIf="CustStepIndex == 9">
+              <app-cust-attr-section [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" *ngIf="CustStepIndex == 10">
               </app-cust-attr-section>
               </div>
-            <div id="upload-tab" class="content" role="tabpanel" aria-labelledby="upload-tab-trigger">
-              <app-dms-iframe  *ngIf="CustStepIndex == 10" [dmsObj]="dmsObj" [showButton]="true" (outputTab)="getValue($event)" (outputCancel)="getValue($event)"></app-dms-iframe>
-            </div>
-
-
           </div>
         </div>
       </div>
