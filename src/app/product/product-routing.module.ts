@@ -175,7 +175,7 @@ const routes: Routes = [
         }
       },
       {
-        path: PathConstant.OFFERING_DEACTIVATE_APPRV_DETAIL,
+        path: PathConstant.OFFERING_DEACTIVATE_APPRV,
         component: ProductOfferingDeactivateApprovalComponent,
         data: {
           title: 'Product Offering Deactivate Approval'
@@ -210,7 +210,7 @@ const routes: Routes = [
         }
       },
       {
-        path: PathConstant.OFFERING_VIEW,
+        path: PathConstant.OFFERING_REVIEW,
         component: ProdOfferingReviewPagingComponent,
         data: {
           title: 'Product Offering Review Paging'

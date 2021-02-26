@@ -31,7 +31,7 @@
         {
             "type": "sort",
             "position": "left",
-            "label": "CUST TYPE CODE",
+            "label": "CUSTOMER TYPE CODE",
             "name": "MR_CUST_TYPE_CODE"
         },
         {
@@ -73,13 +73,13 @@
         {
             "type": "sort",
             "position": "left",
-            "label": "NEG CUST TYPE CODE",
+            "label": "NEG CUSTOMER TYPE CODE",
             "name": "MR_NEG_CUST_TYPE_CODE"
         },        
         {
             "type": "sort",
             "position": "left",
-            "label": "NEG CUST SOURCE CODE",
+            "label": "NEG CUSTOMER SOURCE CODE",
             "name": "MR_NEG_CUST_SOURCE_CODE"
         },
         {
@@ -91,7 +91,7 @@
         {
             "type": "sort",
             "position": "left",
-            "label": "NEGATIVE CUST CAUSE",
+            "label": "NEGATIVE CUSTOMER CAUSE",
             "name": "NEG_CUST_CAUSE"
         },
         {
