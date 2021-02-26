@@ -4,7 +4,7 @@
     {
       "subSectionId": "MainInfoId",
       "subSectionTitle": "Main Info",
-      "mainInfoUrl": "Generic/GetDataViewBySQL",
+      "mainInfoPath": "/Generic/GetDataViewBySQL",
       "mainInfo": [
         {
           "type": "text",

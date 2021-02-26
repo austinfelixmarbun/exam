@@ -7,7 +7,7 @@
             "name": "C.CUST_NO",
             "id": "CustNo",
             "value": "",
-            "label": "Guarantor Cust No.",
+            "label": "Guarantor Customer No.",
             "placeholder": "Placeholder"
         },
         {
@@ -168,11 +168,11 @@
                             ],
                             "result": {
                                 "type": "url",
-                                "path": "CUST_PERSONAL_PAGE",
+                                "path": "CUST_EDIT_MAIN_DATA_PERSONAL",
                                 "icon": "ft-edit-2",
                                 "param": [
                                     {
-                                        "type": "IdCust",
+                                        "type": "CustId",
                                         "property": "CustId"
                                     },
                                     {
@@ -193,11 +193,11 @@
                             ],
                             "result": {
                                 "type": "url",
-                                "path": "CUST_COY_PAGE",
+                                "path": "CUST_EDIT_MAIN_DATA_COY",
                                 "icon": "ft-edit-2",
                                 "param": [
                                     {
-                                        "type": "IdCust",
+                                        "type": "CustId",
                                         "property": "CustId"
                                     },
                                     {
