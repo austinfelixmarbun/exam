@@ -133,6 +133,11 @@ export class CustomerViewComponent implements OnInit {
           AdInsHelper.RedirectUrl(this.router, ["/View/Customer/CustDocument"], { "CustId": this.CustId });
         });
       }
+      else if (ev == 9) {
+        this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router, ["/View/Customer/PersonalOther"], { "CustId": this.CustId });
+        });
+      }
     }
     else if (this.custType == CommonConstant.CustomerCompany) {
       if (ev == 0) {
@@ -183,6 +188,11 @@ export class CustomerViewComponent implements OnInit {
       else if (ev == 8) {
         this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,["/View/Customer/CustDocument"],{ "CustId": this.CustId });
+        });
+      }
+      else if (ev == 9) {
+        this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router,["/View/Customer/CoyOther"],{ "CustId": this.CustId });
         });
       }
     }

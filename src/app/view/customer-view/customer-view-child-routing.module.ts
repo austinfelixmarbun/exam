@@ -51,6 +51,11 @@ const routes: Routes = [
         loadChildren: './customer-view-personal-app-listing/customer-view-personal-app-listing.module#CustomerViewPersonalAppListingModule'
 
       },
+      {
+        path: 'PersonalOther',
+        loadChildren: './customer-view-personal-other-attr/customer-view-personal-other-attr.module#CustomerViewPersonalOtherModule'
+
+      },
       ///Cust Type Company
       {
         path: 'CoyDetail',

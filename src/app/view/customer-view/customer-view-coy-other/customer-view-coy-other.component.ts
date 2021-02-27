@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-view-coy-other',
@@ -12,7 +13,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 export class CustomerViewCoyOtherComponent implements OnInit {
   CustId: number;
   GetCustAttrContentForCustViewByCustIdUrl = URLConstant.GetCustAttrContentForCustViewByCustId;
-  responseCustAttr: any;
+  responseCustAttr: Array<any> = new Array();
 
   constructor(
     private http: HttpClient,
@@ -29,7 +30,7 @@ export class CustomerViewCoyOtherComponent implements OnInit {
     var custObj = { "CustId": this.CustId };
     this.http.post(this.GetCustAttrContentForCustViewByCustIdUrl, custObj).subscribe(
       response => {
-        this.responseCustAttr = response['ReturnObject'];
+        this.responseCustAttr = response[CommonConstant.ReturnObj];
       },
       error => {
         AdInsHelper.RedirectUrl(this.router,["/Error"],{});
