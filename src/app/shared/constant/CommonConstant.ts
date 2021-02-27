@@ -73,6 +73,10 @@ export class CommonConstant {
     public static TITLE_AGENCY_COMPANY = "Agency Company";
     public static TITLE_AGENCY_PERSONAL = "Agency Personal";
 
+    // VENDOR TYPE
+    public static VENDOR_TYPE_COMPANY = "C";
+    public static VENDOR_TYPE_PERSONAL = "P";
+
     //VENDOR GRADING PROCESS
     public static VENDOR_GRADING_STATUS_REQ = "REQ";
     public static VENDOR_GRADING_STATUS_RJC = "RJC";

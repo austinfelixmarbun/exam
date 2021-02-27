@@ -107,8 +107,8 @@ export class VendorBranchAddEditComponent implements OnInit {
     ReservedField9: [''], //ASSGMNT_TYPE tele, field
     MrTaxCalcMethodCode: ['', Validators.required],
     IsVat: [true, Validators.required],
-    TaxIdNo: ['', Validators.required],
-    TaxpayerName: ['', Validators.required],
+    TaxIdNo: [''],
+    TaxpayerName: [''],
     MrAddrTypeCode: [''],
     Addr: [''],
     AreaCode2: [{ value: '', disabled: true }], //kelurahan
@@ -122,7 +122,6 @@ export class VendorBranchAddEditComponent implements OnInit {
   })
 
   ngOnInit() {
-    
     this.customPattern = new Array<CustomPatternObj>();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -188,10 +187,7 @@ export class VendorBranchAddEditComponent implements OnInit {
 
               }
               this.ListInputLookUpObj.push(tempLookup);
-              console.log(this.VendorAttrList);
-              console.log(this.VendorForm);
               this.VendorForm.addControl("VendorAttrList", this.fb.group(parentFormGroup));
-              console.log(this.VendorForm);
               this.isFormReady = true;
             }
           );
@@ -290,6 +286,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       }
     );
   }
+
   getData() {
     this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { VendorId: this.VendorId }).subscribe(
       (response) => {
@@ -410,14 +407,14 @@ export class VendorBranchAddEditComponent implements OnInit {
         this.itemType = response[CommonConstant.ReturnObj];
         if (this.itemType.length > 0) {
           if (this.MrVendorCategoryCode == "AGENCY_PERSONAL") {
-            var object = this.itemType.find(x => x.Key == 'P');
+            var object = this.itemType.find(x => x.Key == CommonConstant.VENDOR_TYPE_PERSONAL);
             this.MrVendorTypeCode = object.Key;
             this.RsvField = CommonConstant.CustTypePersonal
             this.VendorForm.patchValue({
               MrVendorTypeCode: object.Key
             });
           } else if (this.MrVendorCategoryCode == "AGENCY_COMPANY") {
-            var object = this.itemType.find(x => x.Key == 'C');
+            var object = this.itemType.find(x => x.Key == CommonConstant.VENDOR_TYPE_COMPANY);
             this.MrVendorTypeCode = object.Key;
             this.RsvField = CommonConstant.CustTypeCompany
             this.VendorForm.patchValue({
@@ -444,7 +441,7 @@ export class VendorBranchAddEditComponent implements OnInit {
                 }
               }
 
-              if(this.itemIdType != undefined)
+              if(this.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_PERSONAL && this.itemIdType != undefined)
               {
                 this.getInitPattern();
               }
@@ -470,7 +467,7 @@ export class VendorBranchAddEditComponent implements OnInit {
           });
         }
 
-        if(this.itemIdType != undefined)
+        if(this.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_PERSONAL && this.itemIdType != undefined)
         {
           this.getInitPattern();
         }
@@ -553,18 +550,20 @@ export class VendorBranchAddEditComponent implements OnInit {
     if (this.VendorForm.controls.MrVendorTypeCode.value != "") {
       this.MrVendorTypeCode = this.VendorForm.controls.MrVendorTypeCode.value;
     }
-    if (this.MrVendorTypeCode == 'C') {
+    if (this.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_COMPANY) {
       this.VendorForm.controls.MrIdTypeCode.clearValidators();
       this.VendorForm.controls.IdNo.clearValidators();
       this.VendorForm.controls.RegistrationNo.setValidators(Validators.required);
       this.VendorForm.controls.LicenseNo.setValidators(Validators.required);
       this.RsvField = CommonConstant.CustTypeCompany
-    } else if (this.MrVendorTypeCode == 'P') {
+    } else if (this.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_PERSONAL) {
       this.VendorForm.controls.RegistrationNo.clearValidators();
       this.VendorForm.controls.LicenseNo.clearValidators();
       this.VendorForm.controls.MrIdTypeCode.setValidators(Validators.required);
       this.VendorForm.controls.IdNo.setValidators(Validators.required);
       this.RsvField = CommonConstant.CustTypePersonal
+
+      this.setValidatorPattern();
     }
     this.updateValueAndValidityForm();
 
@@ -586,13 +585,12 @@ export class VendorBranchAddEditComponent implements OnInit {
             });
           }
         }
-
-        this.setValidatorPattern();
       }
     );
   }
 
-  onOptionsSelected(event){  
+  onOptionsSelected(event){ 
+    if(this.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_PERSONAL)
     this.setValidatorPattern();
   }
 
