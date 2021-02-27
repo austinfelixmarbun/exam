@@ -160,9 +160,6 @@ export class JobDataSmeComponent implements OnInit {
     this.inputAddressObjForOthBiz.title = "Other Business Address";
     this.inputAddressObjForOthBiz.showOwnership = true;
 
- 
-  
-
     this.inputPreviousAddressObj = new InputAddressObj();
     this.inputPreviousAddressObj.showSubsection = false;
     this.inputPreviousAddressObj.isRequired = false;
