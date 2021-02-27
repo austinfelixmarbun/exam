@@ -54,6 +54,9 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
           this.QuestionAnswerForm.patchValue({
             RefVerfAnswerTypeId: VerfAnswerData.RefVerfAnswerTypeId
           });
+          if(this.mode != "edit"){
+            this.AnswerTypeChanged(VerfAnswerData.RefVerfAnswerTypeId);
+          }
         }
 
         if (this.mode == "edit") {

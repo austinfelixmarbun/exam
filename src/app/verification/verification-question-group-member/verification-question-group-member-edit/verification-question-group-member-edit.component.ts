@@ -50,7 +50,7 @@ export class VerificationQuestionGroupMemberEditComponent implements OnInit {
     VerfQuestionGrpHId: [''],
     VerfQuestionAnswerId: [''],
     SeqNo: ['',Validators.required],
-    IsActive: [false],
+    IsActive: [true],
     RowVersion: ['']
   })
 
