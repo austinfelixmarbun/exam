@@ -52,7 +52,7 @@ export class CustGroupTabDetailComponent implements OnInit {
     var criteriaObj;
     var refMasterRelationship = new RefMasterObj();
     this.CustGrpForm.patchValue({
-      CustId: this.CustId
+      MemberCustId: this.CustId
     });
     
     if(this.MrCustTypeCode == CommonConstant.CustTypePersonal){
@@ -137,7 +137,7 @@ export class CustGroupTabDetailComponent implements OnInit {
     this.isCustPicked = true;
     var refMasterRelationship = new RefMasterObj();
     this.CustGrpForm.patchValue({
-      MemberCustId: e.custId,
+      CustId: e.custId,
       CustNo: e.custNo,
       CustName: e.custName
     });
@@ -163,7 +163,7 @@ export class CustGroupTabDetailComponent implements OnInit {
     this.isCustPicked = true;
     var refMasterRelationship = new RefMasterObj();
     this.CustGrpForm.patchValue({
-      MemberCustId: e.custId,
+      CustId: e.custId,
       CustNo: e.custNo,
       CustName: e.custName
     });
