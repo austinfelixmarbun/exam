@@ -122,7 +122,6 @@ export class VendorBranchAddEditComponent implements OnInit {
   })
 
   ngOnInit() {
-    console.log("YEET")
     this.customPattern = new Array<CustomPatternObj>();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -188,10 +187,7 @@ export class VendorBranchAddEditComponent implements OnInit {
 
               }
               this.ListInputLookUpObj.push(tempLookup);
-              console.log(this.VendorAttrList);
-              console.log(this.VendorForm);
               this.VendorForm.addControl("VendorAttrList", this.fb.group(parentFormGroup));
-              console.log(this.VendorForm);
               this.isFormReady = true;
             }
           );
@@ -961,16 +957,5 @@ export class VendorBranchAddEditComponent implements OnInit {
         }
       }
     );
-  }
-
-  CheckForm() {
-    const invalid = [];
-    const controls = this.VendorForm.controls;
-    for (const name in controls) {
-      if (controls[name].invalid) {
-        invalid.push(name);
-      }
-    }
-    console.log(invalid) ;
   }
 }
