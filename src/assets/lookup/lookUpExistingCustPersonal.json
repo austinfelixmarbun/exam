@@ -1,34 +1,34 @@
 {
-    "sectionTitle": "Cust Personal",
+    "sectionTitle": "Customer Personal",
     "component": [
       {
         "type": "textbox",
         "name": "CUST_NO",
         "id": "custNoId",
         "value": "",
-        "label": "Cust No",
-        "placeholder": "Cust No"
+        "label": "Customer No",
+        "placeholder": "Customer No"
       },
       {
         "type": "textbox",
         "name": "CUST_NAME",
         "id": "custNameId",
         "value": "",
-        "label": "Cust Name",
-        "placeholder": "Cust Name"
+        "label": "Customer Name",
+        "placeholder": "Customer Name"
       }
     ],
     "headerList": [
       {
         "type": "sort",
         "position": "center",
-        "label": "Cust No",
+        "label": "Customer No",
         "name": "CUST_NO"
       },
       {
         "type": "sort",
         "position": "center",
-        "label": "Cust Name",
+        "label": "Customer Name",
         "name": "CUST_NAME"
       },
       {
