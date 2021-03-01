@@ -110,9 +110,7 @@ export class CustFinDataTabComponent implements OnInit {
   async ngOnInit() {
     this.BusinessDt = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
 
-    this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyFinData : CommonConstant.AttrGroupCustPersonalFinData;
-
-    this.initRefMaster();
+    this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyFinData : CommonConstant.AttrGroupCustPersonalFinData;;
 
     if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
       await this.getListCustPersonalFinData();
@@ -124,7 +122,10 @@ export class CustFinDataTabComponent implements OnInit {
 
   initRefMaster() {
     this.httpClient.post(URLConstant.GetListActiveRefMaster, { 'RefMasterTypeCode': CommonConstant.RefMasterTypeCodeSourceIncome }).subscribe((response) => {
-      this.sourceOfIncomeList = response;
+      this.sourceOfIncomeList = response[CommonConstant.ReturnObj];
+      this.CustPersonalFinDataForm.patchValue({
+        MrSourceOfIncomeCode: this.sourceOfIncomeList[0].Key
+      })
     })
   }
 
@@ -159,6 +160,7 @@ export class CustFinDataTabComponent implements OnInit {
 
   showModalCustFinData(FinDataIndex: number) {
     this.isCalculated = false;
+    this.initRefMaster();
     if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
       this.getSingleCustPersonalFinData(FinDataIndex);
       this.currentModal = this.modalService.open(this.ModalPersonalFinData, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
