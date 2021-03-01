@@ -198,6 +198,8 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value;  
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Company;
       this.custCompanyMgmntShrholderObj.MrIndustryTypeCode = this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value; 
+      this.custCompanyMgmntShrholderObj.MrIdTypeCode = RefMasterConstant.Npwp;
+      this.custCompanyMgmntShrholderObj.IdNo = this.ManagementShareholderForm.controls["TaxIdNo"].value;
       this.http.post(this.editManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
@@ -207,6 +209,9 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     }else{
       if(this.tempShareholderCustNo!=null){
         this.custCompanyMgmntShrholderObj.ShareholderCustNo = this.tempShareholderCustNo;
+      }
+      if(this.custExistingId != 0){
+        this.custCompanyMgmntShrholderObj.ShareholderId = this.custExistingId;
       }
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
       this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;   
@@ -218,7 +223,8 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value;  
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Company;
       this.custCompanyMgmntShrholderObj.MrIndustryTypeCode = this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value; 
-
+      this.custCompanyMgmntShrholderObj.MrIdTypeCode = RefMasterConstant.Npwp;
+      this.custCompanyMgmntShrholderObj.IdNo = this.ManagementShareholderForm.controls["TaxIdNo"].value;
       if(this.isExistingCust){
         this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
           (response) => {
@@ -237,7 +243,9 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     this.outputValue.emit({mode : 'check'});
   }
 
+  custExistingId: number = 0;
   getLookUpCustomer(event) {
+    this.custExistingId = event.CustId;
     this.ManagementShareholderForm.patchValue({
       MgmntShrholderName: event.CustName,
       MrCustModelCode: event.MrCustModelCode,

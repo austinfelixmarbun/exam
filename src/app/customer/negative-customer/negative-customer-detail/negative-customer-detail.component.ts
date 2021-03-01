@@ -71,7 +71,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     City: ['', [Validators.required]],
     PhnArea1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     Phn1: ['', [Validators.required, Validators.pattern]],
-    PhnExt1: ['', [Validators.required]],
+    PhnExt1: [''],
     PhnArea2: ['', [Validators.pattern("^[0-9]+$")]],
     Phn2: ['', [Validators.pattern("^[0-9]+$")]],
     PhnExt2: ['', [Validators.pattern("^[0-9]+$")]],

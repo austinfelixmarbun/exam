@@ -85,8 +85,8 @@ export class CustFinDataTabComponent implements OnInit {
   });
 
   IsAddFinData: boolean = true;
-  ListCustPersonalFinData : Array<CustPersonalFinDataObj> = [];
-  ListCustCoyFinData : Array<CustCompanyFinDataObj> = [];  
+  ListCustPersonalFinData: Array<CustPersonalFinDataObj> = [];
+  ListCustCoyFinData: Array<CustCompanyFinDataObj> = [];
   custPersonalId: number;
   custCoyId: number;
   currentCustFinDataIndex: number;
@@ -108,10 +108,10 @@ export class CustFinDataTabComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.BusinessDt = formatDate(new Date(),'yyyy-MM-dd','en-US');
+    this.BusinessDt = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
 
     this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyFinData : CommonConstant.AttrGroupCustPersonalFinData;
-    
+
     this.initRefMaster();
 
     if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
@@ -122,61 +122,54 @@ export class CustFinDataTabComponent implements OnInit {
     }
   }
 
-  initRefMaster()
-  {
-    this.httpClient.post(URLConstant.GetListActiveRefMaster, {'RefMasterTypeCode': CommonConstant.RefMasterTypeCodeSourceIncome}).subscribe((response) => {
+  initRefMaster() {
+    this.httpClient.post(URLConstant.GetListActiveRefMaster, { 'RefMasterTypeCode': CommonConstant.RefMasterTypeCodeSourceIncome }).subscribe((response) => {
       this.sourceOfIncomeList = response;
     })
   }
 
-  async getListCustPersonalFinData()
-  {
+  async getListCustPersonalFinData() {
     this.ListCustPersonalFinData = [];
-    if(!this.custPersonalId)
-    {
-      await this.httpClient.post(URLConstant.GetCustPersonalbyCustId, {'CustId': this.CustId}).toPromise().then((response:CustPersonalObj) => {
+    if (!this.custPersonalId) {
+      await this.httpClient.post(URLConstant.GetCustPersonalbyCustId, { 'CustId': this.CustId }).toPromise().then((response: CustPersonalObj) => {
         this.custPersonalId = response.CustPersonalId;
         this.mrMaritalStatCode = (!response || response.MrMaritalStatCode == null) ? CommonConstant.MR_MARITAL_STAT_CODE_SINGLE : response.MrMaritalStatCode;
       })
-    }    
+    }
 
-    await this.httpClient.post(URLConstant.GetListCustPersonalFinDataByCustId,  {'CustId': this.CustId}).toPromise().then((response) => {
+    await this.httpClient.post(URLConstant.GetListCustPersonalFinDataByCustId, { 'CustId': this.CustId }).toPromise().then((response) => {
       this.ListCustPersonalFinData = response['ListCustPersonalFinData'];
     })
-    
+
   }
 
-  async getListCustCoyFinData()
-  {
+  async getListCustCoyFinData() {
     this.ListCustCoyFinData = [];
-    if(!this.custCoyId)
-    {
-      await this.httpClient.post(URLConstant.GetCustCompanyByCustId, {'CustId': this.CustId}).toPromise().then((response:CustCompanyObj) => {
+    if (!this.custCoyId) {
+      await this.httpClient.post(URLConstant.GetCustCompanyByCustId, { 'CustId': this.CustId }).toPromise().then((response: CustCompanyObj) => {
         this.custCoyId = response.CustCompanyId;
       })
-    }    
+    }
 
-    await this.httpClient.post(URLConstant.GetListCustCompanyFinDataByCustId,  {'CustId': this.CustId}).toPromise().then((response) => {
+    await this.httpClient.post(URLConstant.GetListCustCompanyFinDataByCustId, { 'CustId': this.CustId }).toPromise().then((response) => {
       this.ListCustCoyFinData = response['ListCustCompanyFinData'];
     })
-    
+
   }
 
-  showModalCustFinData(FinDataIndex:number)
-  {
+  showModalCustFinData(FinDataIndex: number) {
     this.isCalculated = false;
     if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
       this.getSingleCustPersonalFinData(FinDataIndex);
-      this.currentModal = this.modalService.open(this.ModalPersonalFinData, {ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false});
+      this.currentModal = this.modalService.open(this.ModalPersonalFinData, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
     }
     else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
       this.getSingleCustCoyFinData(FinDataIndex);
-      this.currentModal = this.modalService.open(this.ModalCoyFinData, {ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false});
+      this.currentModal = this.modalService.open(this.ModalCoyFinData, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
     }
   }
 
-  async deleteModalCustFinData(FinDataIndex: number)
-  {
+  async deleteModalCustFinData(FinDataIndex: number) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
         var CustPersonalFinDataCustomObj = {
@@ -201,14 +194,12 @@ export class CustFinDataTabComponent implements OnInit {
     }
   }
 
-  getSingleCustPersonalFinData(currentCustFinDataIndex:number)
-  {
+  getSingleCustPersonalFinData(currentCustFinDataIndex: number) {
     this.IsAddFinData = false;
     this.currentCustFinDataIndex = currentCustFinDataIndex;
-    let custFinData:CustPersonalFinDataObj = this.ListCustPersonalFinData[this.currentCustFinDataIndex];
+    let custFinData: CustPersonalFinDataObj = this.ListCustPersonalFinData[this.currentCustFinDataIndex];
     let datePipe = new DatePipe("en-US");
-    if(!custFinData) 
-    {
+    if (!custFinData) {
       custFinData = new CustPersonalFinDataObj();
       this.IsAddFinData = true;
     }
@@ -230,19 +221,17 @@ export class CustFinDataTabComponent implements OnInit {
       RowVersion: custFinData.RowVersion
     });
 
-    if(this.IsAddFinData) this.CustPersonalFinDataForm.controls['DateAsOf'].setValidators([Validators.required]);
+    if (this.IsAddFinData) this.CustPersonalFinDataForm.controls['DateAsOf'].setValidators([Validators.required]);
     else this.CustPersonalFinDataForm.controls['DateAsOf'].clearValidators();
     this.CustPersonalFinDataForm.controls['DateAsOf'].updateValueAndValidity();
   }
 
-  getSingleCustCoyFinData(currentCustFinDataIndex:number)
-  {
+  getSingleCustCoyFinData(currentCustFinDataIndex: number) {
     this.IsAddFinData = false;
     this.currentCustFinDataIndex = currentCustFinDataIndex;
-    let custFinData:CustCompanyFinDataObj = this.ListCustCoyFinData[this.currentCustFinDataIndex];
+    let custFinData: CustCompanyFinDataObj = this.ListCustCoyFinData[this.currentCustFinDataIndex];
     let datePipe = new DatePipe("en-US");
-    if(!custFinData)  
-    {
+    if (!custFinData) {
       custFinData = new CustCompanyFinDataObj();
       this.IsAddFinData = true;
     }
@@ -276,13 +265,12 @@ export class CustFinDataTabComponent implements OnInit {
       RowVersion: custFinData.RowVersion,
     });
 
-    if(this.IsAddFinData) this.CustCompanyFinDataForm.controls['DateAsOf'].setValidators([Validators.required]);
+    if (this.IsAddFinData) this.CustCompanyFinDataForm.controls['DateAsOf'].setValidators([Validators.required]);
     else this.CustCompanyFinDataForm.controls['DateAsOf'].clearValidators();
     this.CustCompanyFinDataForm.controls['DateAsOf'].updateValueAndValidity();
   }
 
-  onChangeCustFinInput()
-  {
+  onChangeCustFinInput() {
     this.isCalculated = false;
   }
 
@@ -319,17 +307,15 @@ export class CustFinDataTabComponent implements OnInit {
     }
   }
 
-  async saveCustPersonalFinData()
-  {
+  async saveCustPersonalFinData() {
     if (!this.CustPersonalFinDataForm.valid) return;
 
-    if(!this.isCalculated) 
-    {
+    if (!this.isCalculated) {
       this.toastr.warningMessage("Please Calculate First");
       return;
     }
 
-    let custFinData:CustPersonalFinDataObj = {
+    let custFinData: CustPersonalFinDataObj = {
       CustPersonalFinDataId: this.CustPersonalFinDataForm.controls['CustPersonalFinDataId'].value,
       CustPersonalId: this.CustPersonalFinDataForm.controls['CustPersonalId'].value,
       DateAsOf: this.CustPersonalFinDataForm.controls['DateAsOf'].value,
@@ -351,21 +337,20 @@ export class CustFinDataTabComponent implements OnInit {
     var CustFinDataCustomObj = {
       CustFinDataObj: custFinData
     }
-    
+
     await this.httpClient.post(url, CustFinDataCustomObj).toPromise().then(
       (response) => {
-        if(this.currentModal) this.currentModal.close();
+        if (this.currentModal) this.currentModal.close();
       }
     );
 
     await this.getListCustPersonalFinData();
   }
 
-  async saveCustCoyFinData()
-  {
+  async saveCustCoyFinData() {
     if (!this.CustCompanyFinDataForm.valid) return;
 
-    let custFinData:CustCompanyFinDataObj = {
+    let custFinData: CustCompanyFinDataObj = {
       CustCompanyFinDataId: this.CustCompanyFinDataForm.controls['CustCompanyFinDataId'].value,
       CustCompanyId: this.CustCompanyFinDataForm.controls['CustCompanyId'].value,
       GrossMonthlyIncomeAmt: this.CustCompanyFinDataForm.controls['GrossMonthlyIncomeAmt'].value,
@@ -399,10 +384,10 @@ export class CustFinDataTabComponent implements OnInit {
     var CustFinDataCustomObj = {
       CustFinDataObj: custFinData
     }
-    
+
     await this.httpClient.post(url, CustFinDataCustomObj).toPromise().then(
       (response) => {
-        if(this.currentModal) this.currentModal.close();
+        if (this.currentModal) this.currentModal.close();
       }
     );
 
@@ -412,8 +397,7 @@ export class CustFinDataTabComponent implements OnInit {
   saveCustAttrContentAndNext() {
     if (!this.CustAttrListForm.get('AttrList')) return;
 
-    if(!this.ListCustPersonalFinData.length && !this.ListCustCoyFinData.length)
-    {
+    if (!this.ListCustPersonalFinData.length && !this.ListCustCoyFinData.length) {
       this.toastr.warningMessage(ExceptionConstant.PLEASE_INPUT_FIN_DATA);
       return;
     }
@@ -434,15 +418,19 @@ export class CustFinDataTabComponent implements OnInit {
         }
       }
     }
- 
+
     var CustFinDataCustomObj = {
+      CustId: this.CustId,
+      AttrGroup: this.attrGroup,
       CustAttrContentObjs: custAttrRequest,
     }
+
     this.httpClient.post(URLConstant.AddEditListCustAttrContent, CustFinDataCustomObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);
         this.outputTab.emit({ stepMode: "next" });
       }
     );
+
   }
 }

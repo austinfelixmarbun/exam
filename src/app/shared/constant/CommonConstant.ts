@@ -9,7 +9,7 @@ export class CommonConstant {
     public static BUSINESS_DATE_RAW = "BusinessDateRaw";
     public static CURRENT_USER_CONTEXT = "currentUserContext"
     public static PAGE_ACCESS = "PageAccess";
-    public static TOKEN = "access_token";
+    public static TOKEN = "XSRF-TOKEN";
     public static VERSION = "Version";
     public static LAST_ACCESS_TIME = "LastAccessTime";
     public static MENU = "Menu"
@@ -72,6 +72,10 @@ export class CommonConstant {
     public static TITLE_SURVEYOR_BRANCH = "Surveyor Branch";
     public static TITLE_AGENCY_COMPANY = "Agency Company";
     public static TITLE_AGENCY_PERSONAL = "Agency Personal";
+
+    // VENDOR TYPE
+    public static VENDOR_TYPE_COMPANY = "C";
+    public static VENDOR_TYPE_PERSONAL = "P";
 
     //VENDOR GRADING PROCESS
     public static VENDOR_GRADING_STATUS_REQ = "REQ";

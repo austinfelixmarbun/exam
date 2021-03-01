@@ -71,6 +71,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     IsActive: [false],
     IsOwner: [false]
   });
+  tempShareholderCustId: number;
 
   constructor(private regexService: RegexService,  private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
@@ -247,6 +248,9 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       if(this.tempShareholderCustNo!=null){
         this.custCompanyMgmntShrholderObj.ShareholderCustNo = this.tempShareholderCustNo;
       }
+      if(this.tempShareholderCustId!=null){
+        this.custCompanyMgmntShrholderObj.ShareholderId = this.tempShareholderCustId;
+      }
       // this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
       this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;
@@ -307,6 +311,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
   }
 
+  custExistingId: number = 0;
   getLookUpCustomer(event) {
     var datePipe = new DatePipe("en-US");
     this.ManagementShareholderForm.patchValue({
@@ -329,6 +334,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       }
     }
     this.tempShareholderCustNo = event.CustNo;
+    this.tempShareholderCustId = event.CustId;
     
     this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
     this.ManagementShareholderForm.controls.MrCustModelCode.disable();

@@ -8,7 +8,7 @@
               <tr class="table-header">
                   <th class="text-left"><span class="thead-header" name='addrType' translate>Input By</span> </th>
                   <th class="text-left"><span class="thead-header" name='fullAddr' translate>Input Date</span></th>
-                  <th class="text-center"><span class="thead-header" name='phoneNo' translate>Commnet</span></th>
+                  <th class="text-center"><span class="thead-header" name='phoneNo' translate>Comment</span></th>
                   <th class="text-center"><span class="thead-header" name='houseOwnership' translate>View</span></th>
               </tr>
               </thead>
@@ -21,8 +21,9 @@
               <ng-container *ngFor="let item of listCustHighlightCommentObj">
                   <tr>
                   <td class="text-left">{{item.InputBy}}</td>
-                  <td class="text-center">{{item.InputDt }}</td>
-                  <td class="text-center" >{{item.Comment.substring(0, 100)}}</td>
+                  <td class="text-center">{{item.InputDt | date: 'dd-MMM-yyyy'}}</td>
+                  <td class="text-center" *ngIf="item.Comment.length > 100">{{item.Comment.substring(0, 100)}} ...</td>
+                  <td class="text-center" *ngIf="item.Comment.length <= 100">{{item.Comment}}</td>
                   <td class="text-center" >
                     <a class="success p-0" (click)="ViewHiglight(item.CustHighlightCommentId)">
                       <i class="ft-edit-2 font-medium-3 mr-2"></i>
@@ -46,9 +47,9 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-md-3 adInsLabel" for="Notes" translate>Input Dt</label>
+        <label class="col-md-3 adInsLabel" for="Notes" translate>Input Date</label>
         <div class="col-md-4">
-        <label class="col-md-9 adInsLabel" for="Notes" translate>{{InputDt}}</label>
+        <label class="col-md-9 adInsLabel" for="Notes" translate>{{InputDt | date: 'dd-MMM-yyyy'}}</label>
         </div>
       </div>
       <div class="form-group row">

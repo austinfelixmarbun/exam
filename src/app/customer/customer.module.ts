@@ -143,6 +143,8 @@ import { FinancialStatementsComponent } from './customer-personal/customer-perso
 import { AllComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/all/all.component';
 import { PopUpViewDukcapilComponent } from './customer-personal/customer-personal-main-info/pop-up-dukcapil/pop-up-view-dukcapil.component';
 import { PopUpViewSlikComponent } from './customer-personal/customer-personal-main-info/pop-up-slik/pop-up-view-slik.component';
+import { CustomerViewPersonalFamilyComponent } from 'app/view/customer-view/customer-view-personal-family/customer-view-personal-family.component';
+import { CustomerViewPersonalEmergencyContactComponent } from 'app/view/customer-view/customer-view-personal-emergency-contact/customer-view-personal-emergency-contact.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     

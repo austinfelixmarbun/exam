@@ -171,10 +171,12 @@ export class JobDataSmeComponent implements OnInit {
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.inputJobAddressObj = new InputFieldObj();
     this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
+    this.inputJobAddressObj.inputLookupObj.isRequired = false;
+    this.inputAddressObjForOthBiz.inputField = this.inputJobAddressObj;
     this.inputOtherAddressObj = new InputFieldObj();
     this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
     this.inputOtherAddressObj.inputLookupObj.isRequired = false;
-    
+    this.inputPreviousAddressObj.inputField = this.inputOtherAddressObj;
     this.inputPreJobAddressObj =  new InputFieldObj();
     this.inputPreJobAddressObj.inputLookupObj = new InputLookupObj();
     this.inputPreJobAddressObj.inputLookupObj.isRequired = false;

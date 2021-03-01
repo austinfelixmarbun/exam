@@ -23,6 +23,11 @@
           </th>
         </tr>
       </thead>
+      <tbody *ngIf="CustGrpList.length == 0">
+        <tr>
+          <td colspan="100%">No Data Available</td>
+        </tr>
+      </tbody>
       <tbody>
         <tr *ngFor="let item of CustGrpList; let i = index">
           <td style="color: blue; cursor: pointer; text-align: left;"><a

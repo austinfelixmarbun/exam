@@ -76,7 +76,7 @@ import { CustomerViewCoyAddressComponent } from "./customer-view-coy-address/cus
     // CustomerViewPersonalJobDataNonProfComponent,
     // CustomerViewPersonalJobDataEmpComponent,
     // CustomerViewPersonalJobDataSmeComponent,
-    CustomerViewPersonalOtherAttrComponent,
+    // CustomerViewPersonalOtherAttrComponent,
     // CustomerViewPersonalAppListingComponent,
     // CustomerViewCoyManagementComponent,
     // CustomerViewCoyContactComponent,
