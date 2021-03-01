@@ -69,7 +69,7 @@
                     <lib-ucSubsection [id]="'addBankAccountId'" [title]="'Add Bank Account'" [panel]="'addBankAccount'">
                     </lib-ucSubsection>
                     <div id="addBankAccount">
-                      <div class="form-group row" *ngIf="inputLookupBankObj!=undefined">
+                      <div class="form-group row" *ngIf="inputLookupBankObj.isReady">
                         <label class="col-md-2 adins-required-label" for="name" translate>Bank</label>
                         <div class="col-md-4">
                           <lib-uclookupgeneric [lookupInput]="inputLookupBankObj" [parentForm]='BankRegisForm'
