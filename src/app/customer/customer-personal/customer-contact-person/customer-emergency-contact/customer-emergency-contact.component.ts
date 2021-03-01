@@ -673,7 +673,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
   //START URS-LOS-041
   controlNameIdNo: any = 'IdNo';
   controlNameIdType: any = 'MrIdTypeCode';
-  customPattern: Array<CustomPatternObj>;
+  customPattern: Array<CustomPatternObj> = new Array<CustomPatternObj>();
   initIdTypeCode: any;
   resultPattern: any;
 
