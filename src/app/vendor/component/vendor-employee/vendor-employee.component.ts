@@ -62,7 +62,7 @@ export class VendorEmployeeComponent implements OnInit {
     IsActive: [false],
     IsContactPerson: [false],
     IsOwner: [false],
-    TaxIdNo: [''],
+    TaxIdNo: ['', [Validators.pattern("^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\.[0-9]{1}\-[0-9]{3}\.[0-9]{3}$")]],
     TaxpayerName: [''],
     MrTaxCalcMethodCode: [''],
     IsNpwpExist: [false]

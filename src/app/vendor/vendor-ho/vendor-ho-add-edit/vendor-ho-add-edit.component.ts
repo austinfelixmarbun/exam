@@ -78,7 +78,7 @@ export class VendorHoAddEditComponent implements OnInit {
     VendorParentId: [''],
     MrTaxCalcMethodCode: ['', Validators.required],
     IsVat: [true, Validators.required],
-    TaxIdNo: ['', Validators.required],
+    TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\.[0-9]{1}\-[0-9]{3}\.[0-9]{3}$")]],
     TaxpayerName: ['', Validators.required],
     MrAddrTypeCode: [''],
     Addr: [''],
@@ -423,12 +423,12 @@ export class VendorHoAddEditComponent implements OnInit {
     if (this.VendorForm.controls.IsNpwpExist.value == true) {
       this.isHidden = false;
       this.inputLookupZipcodeObj.isRequired = true;
-      this.VendorForm.controls.TaxIdNo.setValidators(Validators.required);
+      this.VendorForm.controls.TaxIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\.[0-9]{1}\-[0-9]{3}\.[0-9]{3}$")]);
       this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
     } else {
       this.inputLookupZipcodeObj.isRequired = false;
       if (!isGetData) this.VendorForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
-      this.VendorForm.controls.TaxIdNo.clearValidators();
+      this.VendorForm.controls.TaxIdNo.setValidators([Validators.pattern("^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\.[0-9]{1}\-[0-9]{3}\.[0-9]{3}$")]);
       this.VendorForm.controls.TaxpayerName.clearValidators();
       this.isHidden = true;
     }

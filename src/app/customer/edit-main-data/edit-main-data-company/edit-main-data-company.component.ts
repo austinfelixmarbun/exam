@@ -66,7 +66,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     CustModel: ['', [Validators.required]],
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
     MrCompanyTypeCode: ['', [Validators.required]],
-    TaxIdNo: [''],
+    TaxIdNo: ['', [Validators.pattern("^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\.[0-9]{1}\-[0-9]{3}\.[0-9]{3}$")]],
     IsVip : [true],
     IsAffiliateWithMf: [true],
     VipNotes : ['']

@@ -76,7 +76,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
     MrTaxCalcMethodCode : ['', [Validators.required]],
     IsVat : ['', [Validators.required]],
     IsNpwpExist : [false],
-    TaxIdNo: ['', Validators.required],
+    TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\.[0-9]{1}\-[0-9]{3}\.[0-9]{3}$")]],
     TaxpayerName: ['', Validators.required],
     AddrContactPerson  :  ['', [Validators.required]],
     CityContactPerson : ['', [Validators.required]],
@@ -299,10 +299,10 @@ export class AuctionCompanyAddeditComponent implements OnInit {
   NpwpCheck(isGetData: boolean = false) {
     if (this.AuctionCompanyForm.controls.IsNpwpExist.value == true) {
       this.isHidden = false;
-      this.AuctionCompanyForm.controls.TaxIdNo.setValidators(Validators.required);
+      this.AuctionCompanyForm.controls.TaxIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\.[0-9]{1}\-[0-9]{3}\.[0-9]{3}$")]);
       this.AuctionCompanyForm.controls.TaxpayerName.setValidators(Validators.required);
     } else {
-      this.AuctionCompanyForm.controls.TaxIdNo.clearValidators();
+      this.AuctionCompanyForm.controls.TaxIdNo.setValidators([Validators.pattern("^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\.[0-9]{1}\-[0-9]{3}\.[0-9]{3}$")]);
       this.AuctionCompanyForm.controls.TaxpayerName.clearValidators();
       this.isHidden = true;
     }

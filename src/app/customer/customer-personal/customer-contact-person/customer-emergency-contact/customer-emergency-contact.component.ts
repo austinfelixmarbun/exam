@@ -93,7 +93,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     MrEducationCode: [''],
     MrMaritalStatCode: [''],
     MrNationalityCode: [''],
-    TaxIdNo: [''],
+    TaxIdNo: ['', [Validators.pattern("^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\.[0-9]{1}\-[0-9]{3}\.[0-9]{3}$")]],
     MrCustRelationshipCode: [''],
     MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     MobilePhnNo2: ['', [Validators.pattern("^[0-9]+$")]],
