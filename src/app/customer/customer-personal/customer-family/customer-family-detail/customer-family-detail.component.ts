@@ -91,7 +91,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', [Validators.required]],
     IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-    TaxIdNo: ['', [Validators.pattern("^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\.[0-9]{1}\-[0-9]{3}\.[0-9]{3}$")]],
+    TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     IdExpiredDt: [''],
     MrMaritalStatCode: [''],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],

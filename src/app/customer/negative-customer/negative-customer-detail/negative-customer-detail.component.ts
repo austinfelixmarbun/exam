@@ -56,7 +56,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     MrIdTypeCode: ['', [Validators.required]],
     IdNo: ['', [Validators.required]],
     IdExpiredDt: [''],
-    TaxIdNo: ['', [Validators.pattern("^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\.[0-9]{1}\-[0-9]{3}\.[0-9]{3}$")]],
+    TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', Validators.required],
     MrGenderCode: [''],
