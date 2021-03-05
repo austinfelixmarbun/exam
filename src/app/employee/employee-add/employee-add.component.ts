@@ -55,7 +55,7 @@ export class EmployeeAddComponent implements OnInit {
     JoinDt: ['', [Validators.required]],
     MrIdTypeCode: ['', [Validators.required]],
     IdNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-    TaxIdNo: [''],
+    TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     IsExt: [false],
     IsActive: [true],
     IsLeave: [false],

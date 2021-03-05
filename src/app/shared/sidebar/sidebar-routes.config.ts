@@ -26,6 +26,7 @@ export const ROUTES: RouteInfo[] = [
       { Path: NavigationConstant.CS_HOLIDAY, Title: 'Holiday Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] , Params : [] },
       { Path: NavigationConstant.CS_WORKING_HOUR, Title: 'Working Hour', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: NavigationConstant.CS_BANK_PAGING, Title: 'Bank', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING, Title: 'Office Bank Account', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: NavigationConstant.CS_REF_PROVINCE_PAGING, Title: 'Province', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: NavigationConstant.CS_ZIPCODE_PAGING, Title: 'Zipcode', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: NavigationConstant.CS_MASTER, Title: 'Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
