@@ -9,6 +9,7 @@ export class PathConstant {
     public static LR_NOTIF = "Notification";
     public static LR_PAGES = "Pages";
     public static LR_OFFICE = "Office";
+    public static LR_OFFICE_BANK_ACC = "OfficeBankAcc";
     public static LR_EMP = "Employee";
     public static LR_ORG = "Organization";
     public static LR_CUST = "Customer";
@@ -147,6 +148,7 @@ export class PathConstant {
     public static CS_BANK = "Bank";
     public static CS_BANK_PAGING = PathConstant.CS_BANK + "/" + PathConstant.PAGING;
     public static CS_BANK_DETAIL = PathConstant.CS_BANK + "/" + PathConstant.DETAIL;
+    public static CS_OFFICE_BANK_ACCOUNT_PAGING = PathConstant.LR_OFFICE_BANK_ACC + "/" + PathConstant.PAGING;
     public static CS_ZIPCODE = "Zipcode";
     public static CS_ZIPCODE_PAGING = PathConstant.CS_ZIPCODE + "/" + PathConstant.PAGING;
     public static CS_ZIPCODE_DETAIL = PathConstant.CS_ZIPCODE + "/" + PathConstant.DETAIL;

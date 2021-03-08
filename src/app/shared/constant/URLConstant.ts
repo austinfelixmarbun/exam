@@ -19,6 +19,8 @@ export class URLConstant {
     public static GetListGeneralSettingByListGsCode = environment.FoundationR3Url + "/GeneralSetting/GetListGeneralSettingByListGsCode";
 
     //REF OFFICE
+    public static GetRefOfficeByOfficeCode = environment.FoundationR3Url + "/RefOffice/GetRefOfficeByOfficeCode";
+    public static GetListKvpActiveRefOfficeForPaging = environment.FoundationR3Url + "/RefOffice/GetListKvpActiveRefOfficeForPaging";
     public static GetRefOfficeObj = "/RefOffice/GetRefOfficeObj";
     public static GetRefOfficeByRefOfficeId = environment.FoundationR3Url + "/RefOffice/GetRefOfficeByRefOfficeId"
     public static GetRefOfficeActiveAndNonVirtualKeyValue = "/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue";
@@ -979,4 +981,15 @@ export class URLConstant {
     public static RequestExposureFromR2 = environment.FoundationR3Url + "/CustExpsrInfo/RequestExposureFromR2";
     public static GetListCustExpsrBucketByCustExpsrDId = environment.FoundationR3Url + "/CustExpsrInfo/GetListCustExpsrBucketByCustExpsrDId";
     public static GetListCustExpsrAppAgrHistByCustExpsrHId = environment.FoundationR3Url + "/CustExpsrInfo/GetListCustExpsrAppAgrHistByCustExpsrHId";
+
+    
+    // OFFICE BANK ACCOUNT
+    public static DeleteOfficeBankAcc = "/OfficeBankAcc/DeleteOfficeBankAcc";
+    public static GetListActiveBankName = environment.FoundationR3Url + "/RefBank/GetListActiveBankName";
+    public static GetListBankAccType = environment.FoundationR3Url + "/OfficeBankAcc/GetListBankAccType";
+    public static GetListActiveCurrName = environment.FoundationR3Url + "/RefCurr/GetListActiveCurrName";
+    public static GetListBankAccPurpose = environment.FoundationR3Url + "/RefMaster/GetListKeyValueActiveByCode";
+    public static GetOfficeBankAccByOfficeBankAccId = environment.FoundationR3Url + "/OfficeBankAcc/GetOfficeBankAccByOfficeBankAccId";
+    public static SubmitOfficeBankAcc = environment.FoundationR3Url + "/OfficeBankAcc/SubmitOfficeBankAcc";
+
 }
