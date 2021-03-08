@@ -58,7 +58,8 @@ export class RolePickService {
                     JobTitleCode: item.JobTitleCode,
                     RequestDateTime: item.BusinessDt,
                     Ip: "",
-                    RowVersion: ""
+                    RowVersion: "",
+                    ModuleCode:environment.Module
 
                 };
                 this.http.post(url, roleObject, { withCredentials: true}).subscribe(
@@ -72,7 +73,7 @@ export class RolePickService {
                         AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
                         AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
                         
-                        AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response["returnObject"]));
+                        AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
                         AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
                         this.router.navigate(['dashboard/dash-board']);
                     }
