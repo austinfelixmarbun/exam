@@ -61,6 +61,11 @@
           </th>
           </tr>
         </thead>
+        <tbody *ngIf = "vendorContactPerson?.length == 0">
+          <tr>
+            <td colspan="100%">No Data Available</td>
+          </tr>
+        </tbody>
         <tbody>
           <tr *ngFor="let item of vendorContactPerson">
             <td class="text-left">{{item.Name}}</td>
@@ -85,6 +90,11 @@
             <th class="text-left">ACTIVE STATUS</th>
           </tr>
         </thead>
+        <tbody *ngIf = "VendorGrp?.length == 0">
+          <tr>
+            <td colspan="100%">No Data Available</td>
+          </tr>
+        </tbody>
         <tbody>
           <tr *ngFor="let item of VendorGrp">
             <td class="text-left">{{item.VendorGrpCode}}</td>
@@ -107,6 +117,11 @@
             <th class="text-left">ACTIVE STATUS</th>
           </tr>
         </thead>
+        <tbody *ngIf = "Vendor?.length == 0">
+          <tr>
+            <td colspan="100%">No Data Available</td>
+          </tr>
+        </tbody>
         <tbody>
           <tr *ngFor="let item of Vendor">
             <td class="text-left">{{item.VendorCode}}</td>

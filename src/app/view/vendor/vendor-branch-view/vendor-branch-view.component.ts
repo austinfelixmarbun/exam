@@ -84,6 +84,7 @@ export class VendorBranchViewComponent implements OnInit {
     }
     this.http.post(URLConstant.GetVendorByVendorId, vendorObj).subscribe(
       response => {
+        console.log(response);
         this.MrVendorTypeObj = response;
         this.MrVendorTypeCode = this.MrVendorTypeObj.MrVendorTypeCode;
         this.MrVendorCategoryCode = this.MrVendorTypeObj.MrVendorCategoryCode;

@@ -69,6 +69,11 @@
             <th class="text-center">DEFAULT</th>
           </tr>
         </thead>
+        <tbody *ngIf = "VendorBankAcc?.length == 0">
+          <tr>
+            <td colspan="100%">No Data Available</td>
+          </tr>
+        </tbody>
         <tbody>
           <tr *ngFor="let item of VendorBankAcc">
             <td class="text-left">{{item.BankName}}</td>
@@ -82,7 +87,7 @@
     </ng-template>
   </mat-tab>
 
-  <mat-tab label="Employee">
+  <mat-tab label="Employee" *ngIf="MrVendorTypeCode == 'C'">
     <ng-template matTabContent>
       <table class="table table-responsive-md text-center table-hover">
         <thead>
@@ -96,6 +101,11 @@
             <th class="text-center">ACTIVE STATUS</th>
           </tr>
         </thead>
+        <tbody *ngIf = "VendorEmp?.length == 0">
+          <tr>
+            <td colspan="100%">No Data Available</td>
+          </tr>
+        </tbody>
         <tbody>
           <tr *ngFor="let item of VendorEmp">
             <td class="text-center">{{item.VendorEmpNo}}</td>
@@ -123,6 +133,11 @@
             <th class="text-center">ACTIVE STATUS</th>
           </tr>
         </thead>
+        <tbody *ngIf = "VendorGrp?.length == 0">
+          <tr>
+            <td colspan="100%">No Data Available</td>
+          </tr>
+        </tbody>
         <tbody>
           <tr *ngFor="let item of VendorGrp">
             <td class="text-center">{{item.VendorGrpCode}}</td>
@@ -145,6 +160,11 @@
             <th class="text-center">ACTIVE STATUS</th>
           </tr>
         </thead>
+        <tbody *ngIf = "VendorOfficeMbr?.length == 0">
+          <tr>
+            <td colspan="100%">No Data Available</td>
+          </tr>
+        </tbody>
         <tbody>
           <tr *ngFor="let item of VendorOfficeMbr">
             <td class="text-center">{{item.OfficeCode}}</td>
