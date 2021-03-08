@@ -78,8 +78,11 @@
               <div class="form-group row">
                 <label class="col-md-3" translate>Icon</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput number" formControlName="Icon"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.Icon.invalid }">
+                  <div style="display: flex; flex-direction: row; justify-content: left; align-items: center;">                    
+                    <input type="text" class="form-control adInsInput number" formControlName="Icon"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.Icon.invalid }">
+                    <label style="margin-left: 10px;" translate>Contoh Icon: <i style="color: blue; font-size: 20px; cursor: pointer;" [ngClass]="[RefForm.controls.Icon.value]"></i></label>
+                  </div>
                   <lib-uc-show-errors [control]="RefForm.controls.Icon" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
