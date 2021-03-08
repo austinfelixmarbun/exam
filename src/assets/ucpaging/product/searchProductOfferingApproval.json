@@ -26,7 +26,7 @@
     {
       "type": "sort",
       "position": "center",
-      "label": "Trx No",
+      "label": "Product Offering Code",
       "name": "TRX_NO"
     },
     {
