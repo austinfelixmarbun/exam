@@ -29,7 +29,7 @@ export class VendorBranchViewComponent implements OnInit {
   vendorHoObj: VendorHoObj;
   MainInfo: any;
   vendorAddrObj: VendorHoObj;
-  MrVendorTypeCode: any;
+  MrVendorTypeCode: string;
 
   VendorGrp: any;
   Vendor: any;
