@@ -491,7 +491,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.custPersonalContactPersonObj["PhnExt2"] = this.CustomerContactForm.value.UcAddress.PhnExt2;
     this.custPersonalContactPersonObj["Phn3"] = this.CustomerContactForm.value.UcAddress.Phn3;
     this.custPersonalContactPersonObj["PhnArea3"] = this.CustomerContactForm.value.UcAddress.PhnArea3;
-    this.custPersonalContactPersonObj["PhnExt3"] = this.CustomerContactForm.value.UcAddress.PhnArea3;
+    this.custPersonalContactPersonObj["PhnExt3"] = this.CustomerContactForm.value.UcAddress.PhnExt3;
     if (this.tempCust != null) {
       this.custPersonalContactPersonObj.ContactPersonCustNo = this.tempCust.CustNo;
     }
