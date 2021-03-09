@@ -15,6 +15,14 @@ const routes: Routes = [
         loadChildren: './customer-view-personal-contact-person/customer-view-personal-contact-person.module#CustomerViewPersonalContactPersonModule'
       },
       {
+        path: 'PersonalFamily',
+        loadChildren: './customer-view-personal-family/customer-view-personal-family.module#CustomerViewPersonalFamilyModule'
+      },
+      {
+        path: 'PersonalEmergencyContact',
+        loadChildren: './customer-view-personal-emergency-contact/customer-view-personal-emergency-contact.module#CustomerViewPersonalEmergencyContactModule'
+      },
+      {
         path: 'PersonalJobData',
         loadChildren: './customer-view-personal-job-data/customer-view-personal-job-data.module#CustomerViewPersonalJobDataModule'
       },
@@ -41,6 +49,11 @@ const routes: Routes = [
       {
         path: 'PersonalAppListing',
         loadChildren: './customer-view-personal-app-listing/customer-view-personal-app-listing.module#CustomerViewPersonalAppListingModule'
+
+      },
+      {
+        path: 'PersonalOther',
+        loadChildren: './customer-view-personal-other-attr/customer-view-personal-other-attr.module#CustomerViewPersonalOtherModule'
 
       },
       ///Cust Type Company

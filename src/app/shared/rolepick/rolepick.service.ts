@@ -58,7 +58,8 @@ export class RolePickService {
                     JobTitleCode: item.JobTitleCode,
                     RequestDateTime: item.BusinessDt,
                     Ip: "",
-                    RowVersion: ""
+                    RowVersion: "",
+                    ModuleCode:environment.Module
 
                 };
                 this.http.post(url, roleObject, { withCredentials: true}).subscribe(
@@ -66,13 +67,13 @@ export class RolePickService {
                         //Cookie sudah diambil dari BE (Di set manual dulu)
 
                         var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
-                        AdInsHelper.SetCookie(this.cookieService, "access_token", response['Token']);
+                        AdInsHelper.SetCookie(this.cookieService, "XSRF-TOKEN", response['Token']);
                         AdInsHelper.SetCookie(this.cookieService, "BusinessDateRaw", formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US'));
                         AdInsHelper.SetCookie(this.cookieService, "BusinessDate", DateParse);
                         AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
                         AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
                         
-                        AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response["returnObject"]));
+                        AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
                         AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
                         this.router.navigate(['dashboard/dash-board']);
                     }

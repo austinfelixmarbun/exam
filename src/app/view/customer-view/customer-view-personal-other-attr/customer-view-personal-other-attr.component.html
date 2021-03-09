@@ -1,14 +1,17 @@
 <lib-ucSubsection [id]="'OthAttr'" [title]="'Other Attribute'" [panel]="'OthAttrId'">
 </lib-ucSubsection>
 <div id="OthAttrId">
-  <table>
+  <table class="table table-responsive-md">
+    <tbody *ngIf="responseCustAttr.length == 0">
+      <tr>
+        <td class="text-left" colspan="100%">No Other Data Available</td>
+      </tr>
+    </tbody>
     <tbody>
-      <ng-container *ngFor="let item of responseCustAttr">
-        <tr>
-          <td class="text-left">{{item.AttrName}}</td>
-          <td class="text-left">{{item.AttrValue}}</td>
-        </tr>
-      </ng-container>
+      <tr *ngFor="let item of responseCustAttr">
+        <td class="text-left">{{item.AttrName}}</td>
+        <td class="text-left">{{item.AttrValue}}</td>
+      </tr>
     </tbody>
   </table>
 </div>

@@ -77,7 +77,7 @@
       "position": "center",
       "property": "VendorName",
       "target": "_blank",
-      "path": "/View/VendorBranch",
+      "path": "/View/Vendor/VendorBranch",
       "param": [
         {
           "type": "VendorId",
@@ -97,7 +97,6 @@
         {
           "type": "edit",
           "path": "/Vendor/VendorGrading/Request/Detail",
-
           "param": [
             {
               "type": "VendorId",

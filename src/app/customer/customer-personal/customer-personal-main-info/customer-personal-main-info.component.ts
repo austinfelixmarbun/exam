@@ -263,9 +263,9 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         (response) => {
           this.tempGender = response[CommonConstant.ReturnObj];
           if (this.tempGender.length > 0) {
-            this.CustomerPersonalForm.patchValue({
-              Gender: this.tempGender[0].Key
-            });
+            // this.CustomerPersonalForm.patchValue({
+            //   Gender: this.tempGender[0].Key
+            // });
           }
         }
       );
@@ -277,14 +277,14 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         (response) => {
           this.tempIdType = response[CommonConstant.ReturnObj];
           if (this.tempIdType.length > 0) {
-            this.CustomerPersonalForm.patchValue({
-              MrIdTypeCode: this.tempIdType[0].Key
-            });
+            // this.CustomerPersonalForm.patchValue({
+            //   MrIdTypeCode: this.tempIdType[0].Key
+            // });
           }
           if (this.tempIdType[0].Key == this.KTP) {
-            this.tempKTPCheck = true;
+            //this.tempKTPCheck = true;
           } else {
-            this.tempKTPCheck = false;
+            //this.tempKTPCheck = false;
           }
         }
       );
@@ -299,83 +299,83 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
           });
         }
       );
-      this.custObj = new CustObj();
-      this.custPersonalObj = new CustPersonalObj();
-      this.custObj.CustId = this.CustId;
-      this.custPersonalObj.CustId = this.CustId;
-      var datePipe = new DatePipe("en-US");
-      this.http.post(this.getCustByCustIdUrl, this.custObj).subscribe(
-        (response) => {
-          this.tempCustObj = response;
-          this.CustomerPersonalForm.patchValue({
-            CustName: this.tempCustObj.CustName,
-            MrCustTypeCode: this.tempCustObj.MrCustTypeCode,
-            CustModel: this.tempCustObj.MrCustModelCode,
-            MrIdTypeCode: this.tempCustObj.MrIdTypeCode,
-            IdNo: this.tempCustObj.IdNo,
-            IdExpiredDt: datePipe.transform(this.tempCustObj.IdExpiredDt, 'yyyy-MM-dd'),
-            TaxIdNo: this.tempCustObj.TaxIdNo,
-            IsVip: this.tempCustObj.IsVip,
-            IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
-            VipNotes: this.tempCustObj.VipNotes,
-          });
-          if (this.tempCustObj.VipNotes != null) {
-            this.VipNotesRequired = true;
-          } else {
-            this.VipNotesRequired = false;
-          }
-          if (this.tempCustObj.IsVip == false) {
-            this.CustomerPersonalForm.controls.VipNotes.disable();
-          }
-          this.CustomerPersonalForm.controls["MrIdTypeCode"].disable();
-          this.CustomerPersonalForm.controls["IdNo"].disable();
-          this.CustomerPersonalForm.controls["TaxIdNo"].disable();
+      // this.custObj = new CustObj();
+      // this.custPersonalObj = new CustPersonalObj();
+      // this.custObj.CustId = this.CustId;
+      // this.custPersonalObj.CustId = this.CustId;
+      // var datePipe = new DatePipe("en-US");
+      // this.http.post(this.getCustByCustIdUrl, this.custObj).subscribe(
+      //   (response) => {
+      //     this.tempCustObj = response;
+      //     this.CustomerPersonalForm.patchValue({
+      //       CustName: this.tempCustObj.CustName,
+      //       MrCustTypeCode: this.tempCustObj.MrCustTypeCode,
+      //       CustModel: this.tempCustObj.MrCustModelCode,
+      //       MrIdTypeCode: this.tempCustObj.MrIdTypeCode,
+      //       IdNo: this.tempCustObj.IdNo,
+      //       IdExpiredDt: datePipe.transform(this.tempCustObj.IdExpiredDt, 'yyyy-MM-dd'),
+      //       TaxIdNo: this.tempCustObj.TaxIdNo,
+      //       IsVip: this.tempCustObj.IsVip,
+      //       IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
+      //       VipNotes: this.tempCustObj.VipNotes,
+      //     });
+      //     if (this.tempCustObj.VipNotes != null) {
+      //       this.VipNotesRequired = true;
+      //     } else {
+      //       this.VipNotesRequired = false;
+      //     }
+      //     if (this.tempCustObj.IsVip == false) {
+      //       this.CustomerPersonalForm.controls.VipNotes.disable();
+      //     }
+      //     this.CustomerPersonalForm.controls["MrIdTypeCode"].disable();
+      //     this.CustomerPersonalForm.controls["IdNo"].disable();
+      //     this.CustomerPersonalForm.controls["TaxIdNo"].disable();
 
-          this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.tempCustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
-            (response: CustAddrObj) => {
-              this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
-              this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
-              this.UcAddressObj.AreaCode1 = response.AreaCode1;
-              this.UcAddressObj.AreaCode2 = response.AreaCode2;
-              this.UcAddressObj.AreaCode3 = response.AreaCode3;
-              this.UcAddressObj.AreaCode4 = response.AreaCode4;
-              this.UcAddressObj.Addr = response.Addr;
-              this.UcAddressObj.City = response.City;
-              this.inputAddressObj.default = this.UcAddressObj;
-              this.inputAddressObj.inputField = this.inputFieldObj;
-            }
-          );
-        }
-      );
+      //     this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.tempCustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
+      //       (response: CustAddrObj) => {
+      //         this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
+      //         this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
+      //         this.UcAddressObj.AreaCode1 = response.AreaCode1;
+      //         this.UcAddressObj.AreaCode2 = response.AreaCode2;
+      //         this.UcAddressObj.AreaCode3 = response.AreaCode3;
+      //         this.UcAddressObj.AreaCode4 = response.AreaCode4;
+      //         this.UcAddressObj.Addr = response.Addr;
+      //         this.UcAddressObj.City = response.City;
+      //         this.inputAddressObj.default = this.UcAddressObj;
+      //         this.inputAddressObj.inputField = this.inputFieldObj;
+      //       }
+      //     );
+      //   }
+      // );
 
-      this.http.post<CustPersonalObj>(this.getCustPersonalByCustIdUrl, this.custPersonalObj).toPromise().then(
-        (response) => {
-          this.tempCustPersonalObj = response;
-          this.CustomerPersonalForm.patchValue({
-            Gender: this.tempCustPersonalObj.MrGenderCode,
-            BirthPlace: this.tempCustPersonalObj.BirthPlace,
-            BirthDt: datePipe.transform(this.tempCustPersonalObj.BirthDt, 'yyyy-MM-dd'),
-            MotherMaidenName: this.tempCustPersonalObj.MotherMaidenName,
-            IsRestInPeace: this.tempCustPersonalObj.IsRestInPeace,
-            MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode,
-          });
-        }
-      );
+      // this.http.post<CustPersonalObj>(this.getCustPersonalByCustIdUrl, this.custPersonalObj).toPromise().then(
+      //   (response) => {
+      //     this.tempCustPersonalObj = response;
+      //     this.CustomerPersonalForm.patchValue({
+      //       Gender: this.tempCustPersonalObj.MrGenderCode,
+      //       BirthPlace: this.tempCustPersonalObj.BirthPlace,
+      //       BirthDt: datePipe.transform(this.tempCustPersonalObj.BirthDt, 'yyyy-MM-dd'),
+      //       MotherMaidenName: this.tempCustPersonalObj.MotherMaidenName,
+      //       IsRestInPeace: this.tempCustPersonalObj.IsRestInPeace,
+      //       MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode,
+      //     });
+      //   }
+      // );
 
-      this.http.post(this.getListActiveRefMasterUrl, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat }).toPromise().then(
-        (response) => {
-          this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
-          if (this.tempCustPersonalObj.MrMaritalStatCode != null) {
-            this.CustomerPersonalForm.patchValue({
-              MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode
-            });
-          } else {
-            this.CustomerPersonalForm.patchValue({
-              MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
-            });
-          }
-        }
-      );
+      // this.http.post(this.getListActiveRefMasterUrl, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat }).toPromise().then(
+      //   (response) => {
+      //     this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
+      //     if (this.tempCustPersonalObj.MrMaritalStatCode != null) {
+      //       this.CustomerPersonalForm.patchValue({
+      //         MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode
+      //       });
+      //     } else {
+      //       this.CustomerPersonalForm.patchValue({
+      //         MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
+      //       });
+      //     }
+      //   }
+      // );
     }
   }
 
@@ -388,6 +388,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupplierPersonal.json";
     this.inputLookupObj.genericJson = "./assets/lookup/lookupSupplierPersonal.json";
     this.inputLookupObj.isReady = true;
+    this.inputLookupObj.isRequired = false;
   }
 
   SetSupplier(e) {
@@ -411,11 +412,11 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
           MrIdTypeCode: this.SupplierObj.MrIdTypeCode,
           IdNo: this.SupplierObj.IdNo,
           TaxIdNo: this.SupplierObj.TaxIdNo,
-          IdExpiredDt: '',
+          // IdExpiredDt: '',
           CustModel: '',
-          IsVip: '',
-          IsAffiliateWithMf: '',
-          VipNotes: '',
+          // IsVip: '',
+          // IsAffiliateWithMf: '',
+          // VipNotes: '',
         });
       });
 

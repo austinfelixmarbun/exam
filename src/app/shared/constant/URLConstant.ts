@@ -837,6 +837,7 @@ export class URLConstant {
 
     // CUST GROUP
     public static GetListCustGrpForCustViewByCustId = environment.FoundationR3Url + "/CustGrp/GetListCustGrpForCustViewByCustId";
+    public static GetListCustGrpForCustViewByMemberCustId = environment.FoundationR3Url + "/CustGrp/GetListCustGrpForCustViewByMemberCustId";
 
     // NEGATIVE CUSTOMER
     public static AddNegativeCustomer = environment.FoundationR3Url + "/NegativeCust/AddNegativeCust";
@@ -981,6 +982,8 @@ export class URLConstant {
     public static GetRefReasonActive = "/Approval/GetRefReasonActive";
     public static GetCanChangeMinFinalLevel = "/Approval/GetCanChangeMinFinalLevel";
     public static GetTaskHistory = "/Approval/GetTaskHistory";
+    public static ReturnLevel = "/Approval/ReturnLevel";
+    public static ContinueToLevel = "/Approval/ContinueToLevel";
     
     // Payment Allocation
     public static GetRefPaymentAllocByID = environment.FoundationR3Url + "/RefPaymentAlloc/GetRefPaymentAllocById";

@@ -36,6 +36,7 @@ export class EditMainDataCompanyComponent implements OnInit {
   custObj: CustObj
   CustNo:string;
   CustId: number;
+  tempCustAddr: any;
   VipNotesRequired: boolean;
   CheckCustFraudTempRegByCustNo: string;
   From: string;
@@ -89,11 +90,12 @@ export class EditMainDataCompanyComponent implements OnInit {
 
   ngOnInit() {
     this.inputFieldObj = new InputFieldObj();
+    this.UcAddressObj = new UcAddressObj();
     this.inputFieldObj.inputLookupObj = new InputLookupObj();
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.default = UcAddressObj;
+    this.inputAddressObj.default = this.UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
 
@@ -161,6 +163,7 @@ export class EditMainDataCompanyComponent implements OnInit {
             this.UcAddressObj.City = response.City;
             this.inputAddressObj.default = this.UcAddressObj;
             this.inputAddressObj.inputField = this.inputFieldObj;
+            this.tempCustAddr = response;
           }
         );
       }
@@ -238,6 +241,7 @@ export class EditMainDataCompanyComponent implements OnInit {
 
     var formValue = this.CustomerCompanyForm.value;
     this.custObj.CustAddr = new CustAddrObj();
+    this.custObj.CustAddr = this.tempCustAddr;
     this.custObj.CustAddr.Addr = formValue["UcAddress"]["Addr"];
     this.custObj.CustAddr.AreaCode1 = formValue["UcAddress"]["AreaCode1"];
     this.custObj.CustAddr.AreaCode2 = formValue["UcAddress"]["AreaCode2"];

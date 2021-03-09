@@ -157,10 +157,10 @@ export class CustAttrSectionComponent implements OnInit {
       this.httpClient.post(URLConstant.AddEditCustOtherInfo, RequestAppCustOtherInfoObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          if (this.From == 'CustPaging') {
-            AdInsHelper.RedirectUrl(this.router,['/Customer/Paging'],{});
+          if (this.From == 'EditMainData') {
+            AdInsHelper.RedirectUrl(this.router, ['/Customer/EditMainData/Paging'], {});
           } else {
-            AdInsHelper.RedirectUrl(this.router,['/Customer/EditMainData/Paging'],{});
+            AdInsHelper.RedirectUrl(this.router, ['/Customer/Paging'], {});
           }
         }); 
     }

@@ -21,10 +21,15 @@ export class AppSourcePagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAppSource.json";
+    this.inputPagingObj.ddlEnvironments = [
+      {
+        name: 'RAS.MR_APP_SRC_TYPE_CODE',
+        environment: environment.FoundationR3Url,
+      }
+    ]
   }
 
-  AddClick()
-  {
-    AdInsHelper.RedirectUrl(this.router,["/CommonSetting/AppSource/Detail"],{ "mode": "Add"})
+  AddClick() {
+    AdInsHelper.RedirectUrl(this.router, ["/CommonSetting/AppSource/Detail"], { "mode": "Add" })
   }
 }
