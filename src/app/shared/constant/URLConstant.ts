@@ -1035,6 +1035,7 @@ export class URLConstant {
     public static GetCustFraudPefindoReqLogByCustTempNo = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudPefindoReqLogByCustTempNo";
     public static GetCustFraudSLIKRequestByCustTempNo = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudSLIKRequestByCustTempNo";
     public static GetCustFraudAsliriReqLogByCustTempNoTrxTypeCode = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudAsliriReqLogByCustTempNoTrxTypeCode";
+    public static GetCustFraudAsliriReqLogByCustTempNo = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudAsliriReqLogByCustTempNo";
     public static GetCustFraudTrstsocialReqLogByCustTempNo = environment.FoundationR3Url + "/CustThirdPartyChecking/GetCustFraudTrstsocialReqLogByCustTempNo";
     public static AddCustFraudDukcapilReqLog = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudDukcapilReqLog";
     public static AddCustFraudPefindoReqLog = environment.FoundationR3Url + "/CustThirdPartyChecking/AddCustFraudPefindoReqLog";

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ApplicationRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -94,7 +94,7 @@ export class EditMainDataPersonalComponent implements OnInit {
   isCheckFraudTempReg: boolean = false;
   tempFraud: any;
   tempCustAddr: any;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal, private ref: ApplicationRef  ) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = URLConstant.GetCustPersonalbyCustId;
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
@@ -180,7 +180,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custObj.CustId = this.CustId;
     this.custPersonalObj.CustId = this.CustId;
     var datePipe = new DatePipe("en-US");
-    this.http.post(this.getCustByCustIdUrl, this.custObj).subscribe(
+    await this.http.post(this.getCustByCustIdUrl, this.custObj).subscribe(
       (response) => {
         this.tempCustObj = response;
         this.CustomerPersonalForm.patchValue({
@@ -252,54 +252,52 @@ export class EditMainDataPersonalComponent implements OnInit {
       }
     );
 
-    this.checkCustFraudTemp();
-
-    this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_IS_CUST_THIRD_PARTY_CHECK }).pipe(
-      map((response) => {
-        return response
-       
-      }),
-      mergeMap((response) => {
-        
-        if (response["GsValue"] == "1") {
-          this.IsCustThirdPartyCheck = true;
-          let temp = this.tempFraud
-          if(temp === null){
-            let addCustTemp = this.http.post(URLConstant.AddCustFraudTempReg, { MrCustTypeCode: CommonConstant.CustTypePersonal, CustNo: this.CustNo });
-            let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
-            return forkJoin([addCustTemp, getMaxDays]);
-          }
-          else{
-            //let addCustTemp = this.http.post(URLConstant.AddCustFraudTempReg, { MrCustTypeCode: CommonConstant.CustTypePersonal, CustNo: this.CustNo });
-            let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
-            return forkJoin([temp, getMaxDays]);
-          }
-          
-        }
-        else {
-          return new Array();
-        }
-      })
-    ).toPromise().then(
-      (response) => {
-        if (response.length > 0) {
-          this.CustThirdPartyChecking.CustTempNo = response[0]["CustTempNo"];
-          this.CustThirdPartyChecking.MrCustTypeCode = response[0]["CustType"];
-          this.MaxDaysCustThirdPartyCheck = response[1]["GsValue"];
-        }
-      }
-    ).catch(
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-  checkCustFraudTemp() {
-    this.http.post<any>(this.CheckCustFraudTempRegByCustNo, { CustNo: this.CustNo }).subscribe(
+    await this.http.post<any>(this.CheckCustFraudTempRegByCustNo, { CustNo: this.CustNo }).subscribe(
       (response) => {
         this.tempFraud = response["ReturnObject"];
+        this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_IS_CUST_THIRD_PARTY_CHECK }).pipe(
+          map((response) => {
+            return response
+           
+          }),
+          mergeMap((response : any) => {
+            
+            if (response["GsValue"] == "1") {
+              this.IsCustThirdPartyCheck = true;
+              let temp = this.tempFraud
+              if(temp === null){
+                let addCustTemp = this.http.post(URLConstant.AddCustFraudTempReg, { MrCustTypeCode: CommonConstant.CustTypePersonal, CustNo: this.CustNo });
+                let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
+                return forkJoin([addCustTemp, getMaxDays]);
+              }
+              else{
+                this.CustThirdPartyChecking.CustTempNo = temp["CustTempNo"];
+                this.CustThirdPartyChecking.MrCustTypeCode = temp["CustType"];
+                let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
+                return forkJoin([getMaxDays]);
+              }
+              
+            }
+            else {
+              return new Array();
+            }
+          })
+        ).subscribe(
+          (response : any) => {
+            if(response.length == 1){
+              this.MaxDaysCustThirdPartyCheck = response[0]["GsValue"];
+            }
+            else if (response.length > 1) {
+              this.CustThirdPartyChecking.CustTempNo = response[0]["CustTempNo"];
+              this.CustThirdPartyChecking.MrCustTypeCode = response[0]["CustType"];
+              this.MaxDaysCustThirdPartyCheck = response[1]["GsValue"];
+            }
+            this.GetFraudLastHit();
+          }
+        );
       }
     );
+
   }
 
   SaveValue() {
@@ -365,6 +363,58 @@ export class EditMainDataPersonalComponent implements OnInit {
       }
     );
   }
+
+  async GetFraudLastHit(){
+    this.CustThirdPartyChecking.CustName = this.CustomerPersonalForm.controls.CustName.value;
+    this.CustThirdPartyChecking.MrIdTypeCode = this.CustomerPersonalForm.controls.MrIdTypeCode.value;
+    this.CustThirdPartyChecking.IdNo = this.CustomerPersonalForm.controls.IdNo.value;
+    this.CustThirdPartyChecking.BirthDt = this.CustomerPersonalForm.controls.BirthDt.value;
+    this.CustThirdPartyChecking.MobilePhnNo = "";
+    this.CustThirdPartyChecking.TaxIdNo = this.CustomerPersonalForm.controls.TaxIdNo.value;
+    this.CustThirdPartyChecking.FamilyCardNo = "";
+
+    let dukcapilUrl = this.http.post(URLConstant.GetCustFraudDukcapilReqLogByCustTempNo, this.CustThirdPartyChecking);
+    let pefindoUrl = this.http.post(URLConstant.GetCustFraudPefindoReqLogByCustTempNo, this.CustThirdPartyChecking);
+    let trustUrl = this.http.post(URLConstant.GetCustFraudTrstsocialReqLogByCustTempNo, this.CustThirdPartyChecking);
+    let slikUrl = this.http.post(URLConstant.GetCustFraudSLIKRequestByCustTempNo, this.CustThirdPartyChecking);
+    let asliriUrl = this.http.post(URLConstant.GetCustFraudAsliriReqLogByCustTempNo, this.CustThirdPartyChecking);
+    var currentDate = new Date();
+    await forkJoin([dukcapilUrl, pefindoUrl, trustUrl, slikUrl, asliriUrl]).toPromise().then(
+      (response)=>{
+        for(let i=0;i<5;i++){
+          var lastHitDate = new Date(response[i]["StartDt"]);
+          var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+                var currentLastHitDate = new Date(response[i]["StartDt"]);
+                var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+          
+                switch (i) {
+                  case 0:
+                    this.LastHit.DUKCAPIL = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                    break;
+        
+                  case 1:
+                    this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                    break;
+        
+                  case 2:
+                    this.LastHit.TRST = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                    break;
+        
+                  case 3:
+                    this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                    break;
+
+                  case 4:
+                    this.LastHit.ASLIRI = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                    break;
+                  default:
+                    break;
+                }
+        }
+        this.ref.tick();
+      });
+}
+
   onOptionsSelected(event) {
     if (event.target.value == this.KTP) {
       this.CustomerPersonalForm.controls.IdExpiredDt.clearValidators();

@@ -159,7 +159,7 @@
                     <label translate>Dukcapil</label>
                   </div>  
                     <div class="col-9">
-                      <label translate>Last Check is 99 days ago /                       
+                      <label translate>{{this.LastHit.DUKCAPIL}} /                      
                       </label>   
                       <button type="button" (click)="openPopUp(popUpDukcapil, 'popUpDukcapil')" class="btn btn-raised btn-primary" translate> Hit Dukcapil                       
                       </button> 
@@ -171,7 +171,7 @@
                   </div>  
                             
                     <div class="col-9">
-                      <label translate>Last Check is 63 days ago /                        
+                      <label translate>{{this.LastHit.PEFINDO}} /               
                       </label>                                               
                       <button type="button" (click)="openPopUp(popUpPefindo, 'popUpPefindo')" class="btn btn-raised btn-primary" translate>
                         Hit Pefindo
@@ -185,7 +185,7 @@
                     <label  translate>Asli RI</label>
                   </div>
                     <div class="col-9">
-                      <label translate>Last Check is 35 days ago /</label>                                               
+                      <label translate>{{this.LastHit.ASLIRI}} /</label>                                               
                       <button type="button" (click)="showAsliRi()" class="btn btn-raised btn-primary"
                         translate>
                         Hit Asli RI
@@ -200,7 +200,7 @@
                       <label  translate>Trusting Social</label>                                   
                     </div>
                     <div class="col-9">
-                      <label translate>Last Check is 20 days ago /                          
+                      <label translate>{{this.LastHit.TRST}} /                   
                       </label>                                               
                       <button type="button" (click)="openPopUp(popUpTrustingSocial, 'popUpTrustingSocial')" class="btn btn-raised btn-primary"
                         translate>
@@ -215,7 +215,7 @@
                     <label translate>SLIK</label>                            
                   </div>
                   <div class="col-9">
-                    <label translate>Not hit yet /  </label> 
+                    <label translate>{{this.LastHit.SLIK}} /</label> 
                       <button type="button" (click)="openPopUp(popUpSlik, 'popUpSlik')" class="btn btn-raised btn-primary"
                       translate>
                       Hit SLIK
