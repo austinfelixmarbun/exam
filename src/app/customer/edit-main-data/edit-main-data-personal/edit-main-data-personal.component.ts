@@ -382,6 +382,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     await forkJoin([dukcapilUrl, pefindoUrl, trustUrl, slikUrl, asliriUrl]).toPromise().then(
       (response)=>{
         for(let i=0;i<5;i++){
+          if(response[i]["StartDt"] != null){
           var lastHitDate = new Date(response[i]["StartDt"]);
           var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate())) / (1000 * 60 * 60 * 24));
                 var currentLastHitDate = new Date(response[i]["StartDt"]);
@@ -410,6 +411,7 @@ export class EditMainDataPersonalComponent implements OnInit {
                   default:
                     break;
                 }
+          }
         }
         this.ref.tick();
       });
@@ -504,20 +506,22 @@ export class EditMainDataPersonalComponent implements OnInit {
         (response) => {
           var currentDate = new Date();
           if (response["TrxNo"]) {
-            var lastHitDate = new Date(response["StartDt"]);
-            var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate())) / (1000 * 60 * 60 * 24));
-            if (dateDiff > this.MaxDaysCustThirdPartyCheck) {
-              this.http.post(URLConstant.AddCustFraudAsliriReqLog, this.CustThirdPartyChecking).toPromise().then(
-                (response) => {
-                  var currentLastHitDate = new Date(response["StartDt"]);
-                  var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
-                  this.LastHit.ASLIRI = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
-                }
-              ).catch(
-                (error) => {
-                  console.log(error);
-                }
-              );
+            if(response["StartDt"] != null){
+              var lastHitDate = new Date(response["StartDt"]);
+              var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+              if (dateDiff > this.MaxDaysCustThirdPartyCheck) {
+                this.http.post(URLConstant.AddCustFraudAsliriReqLog, this.CustThirdPartyChecking).toPromise().then(
+                  (response) => {
+                    var currentLastHitDate = new Date(response["StartDt"]);
+                    var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+                    this.LastHit.ASLIRI = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                  }
+                ).catch(
+                  (error) => {
+                    console.log(error);
+                  }
+                );
+              }
             }
           }
           else {
@@ -570,39 +574,41 @@ export class EditMainDataPersonalComponent implements OnInit {
           (response) => {
             var currentDate = new Date();
             if (response["TrxNo"]) {
-              var lastHitDate = new Date(response["StartDt"]);
-              var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate())) / (1000 * 60 * 60 * 24));
-              if (dateDiff > this.MaxDaysCustThirdPartyCheck) {
-                this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
-                  (response) => {
-                    var currentLastHitDate = new Date(response["StartDt"]);
-                    var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
-                    switch (contentString) {
-                      case "popUpDukcapil":
-                        this.LastHit.DUKCAPIL = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
-                        break;
+              if(response["StartDt"] != null){
+                var lastHitDate = new Date(response["StartDt"]);
+                var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+                if (dateDiff > this.MaxDaysCustThirdPartyCheck) {
+                  this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
+                    (response) => {
+                      var currentLastHitDate = new Date(response["StartDt"]);
+                      var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+                      switch (contentString) {
+                        case "popUpDukcapil":
+                          this.LastHit.DUKCAPIL = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                          break;
 
-                      case "popUpPefindo":
-                        this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
-                        break;
+                        case "popUpPefindo":
+                          this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                          break;
 
-                      case "popUpTrustingSocial":
-                        this.LastHit.TRST = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
-                        break;
+                        case "popUpTrustingSocial":
+                          this.LastHit.TRST = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                          break;
 
-                      case "popUpSlik":
-                        this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
-                        break;
+                        case "popUpSlik":
+                          this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                          break;
 
-                      default:
-                        break;
+                        default:
+                          break;
+                      }
                     }
-                  }
-                ).catch(
-                  (error) => {
-                    console.log(error);
-                  }
-                );
+                  ).catch(
+                    (error) => {
+                      console.log(error);
+                    }
+                  );
+                }
               }
             }
             else {

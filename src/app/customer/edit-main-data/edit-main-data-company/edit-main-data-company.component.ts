@@ -129,7 +129,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.custObj.CustId = this.CustId;
     this.custCompanyObj.CustId = this.CustId;
 
-    this.http.post(this.getCustByCustIdUrl, this.custObj).subscribe(
+    await this.http.post(this.getCustByCustIdUrl, this.custObj).subscribe(
       (response) => {
         this.tempCustObj = response;
         this.CustomerCompanyForm.patchValue({
@@ -223,12 +223,11 @@ export class EditMainDataCompanyComponent implements OnInit {
   }
 
   async GetFraudLastHit(){
-    this.CustThirdPartyChecking.CustName = this.CustomerPersonalForm.controls.CustName.value;
-    this.CustThirdPartyChecking.MrIdTypeCode = this.CustomerPersonalForm.controls.MrIdTypeCode.value;
-    this.CustThirdPartyChecking.IdNo = this.CustomerPersonalForm.controls.IdNo.value;
-    this.CustThirdPartyChecking.BirthDt = this.CustomerPersonalForm.controls.BirthDt.value;
+    this.CustThirdPartyChecking.CustName = this.CustomerCompanyForm.controls.CustName.value;
+    this.CustThirdPartyChecking.MrIdTypeCode = CommonConstant.CustTypeCompany;
+    this.CustThirdPartyChecking.IdNo = "";
     this.CustThirdPartyChecking.MobilePhnNo = "";
-    this.CustThirdPartyChecking.TaxIdNo = this.CustomerPersonalForm.controls.TaxIdNo.value;
+    this.CustThirdPartyChecking.TaxIdNo = this.CustomerCompanyForm.controls.TaxIdNo.value;
     this.CustThirdPartyChecking.FamilyCardNo = "";
 
     let pefindoUrl = this.http.post(URLConstant.GetCustFraudPefindoReqLogByCustTempNo, this.CustThirdPartyChecking);
@@ -237,6 +236,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     await forkJoin([pefindoUrl, slikUrl]).toPromise().then(
       (response)=>{
         for(let i=0;i<2;i++){
+          if(response[i]["StartDt"] != null){
           var lastHitDate = new Date(response[i]["StartDt"]);
           var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate())) / (1000 * 60 * 60 * 24));
                 var currentLastHitDate = new Date(response[i]["StartDt"]);
@@ -254,6 +254,7 @@ export class EditMainDataCompanyComponent implements OnInit {
                   default:
                     break;
                 }
+          }
         }
         this.ref.tick();
       });
@@ -381,6 +382,7 @@ export class EditMainDataCompanyComponent implements OnInit {
         (response) => {
           var currentDate = new Date();
           if (response["TrxNo"]) {
+            if(response["StartDt"] != null){
             var lastHitDate = new Date(response["StartDt"]);
             var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate())) / (1000 * 60 * 60 * 24));
             if (dateDiff > this.MaxDaysCustThirdPartyCheck) {
@@ -407,6 +409,7 @@ export class EditMainDataCompanyComponent implements OnInit {
                 }
               );
             }
+          }
           }
           else {
             this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
