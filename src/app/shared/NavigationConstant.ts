@@ -50,7 +50,7 @@ export class NavigationConstant {
     //#region Common Setting
     public static CS_BANK_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_BANK_PAGING; //'/CommonSetting/Bank/Paging'
     public static CS_BANK_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_BANK_DETAIL; //'/CommonSetting/Bank/Detail'
-    public static CS_OFFICE_BANK_ACCOUNT_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_OFFICE_BANK_ACCOUNT_PAGING; //'/CommonSetting/Bank/Paging'
+    public static CS_OFFICE_BANK_ACCOUNT_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_OFFICE_BANK_ACCOUNT_PAGING; //'/CommonSetting/OfficeBankAcc/Paging'
     public static CS_COA_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_COA_PAGING; //'/CommonSetting/Coa/Paging'
     public static CS_COA_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_COA_DETAIL; //'/CommonSetting/Coa/Detail'
     public static CS_COA_DETAIL_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_COA_DETAIL_EDIT; //'/CommonSetting/Coa/Detail/Edit'

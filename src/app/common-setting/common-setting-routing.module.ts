@@ -340,9 +340,9 @@ const routes: Routes = [
       },
       
       // Office Bank Account
-      { path: 'officebankacc/paging', component: OfficeBankAccountPagingComponent, data: { title: 'OFFICE BANK ACCOUNT' } },
-      { path: 'officebankacc/detail', component: OfficeBankAccountDetailComponent, data: { title: 'OFFICE BANK ACCOUNT' } },
-      { path: 'officebankacc/accdetail', component: OfficeBankAccountAccDetailComponent, data: { title: 'OFFICE BANK ACCOUNT' } },
+      { path: PathConstant.CS_OFFICE_BANK_ACCOUNT_PAGING, component: OfficeBankAccountPagingComponent, data: { title: 'OFFICE BANK ACCOUNT' } },
+      { path: PathConstant.CS_OFFICE_BANK_ACCOUNT_DETAIL, component: OfficeBankAccountDetailComponent, data: { title: 'OFFICE BANK ACCOUNT' } },
+      { path: PathConstant.CS_OFFICE_BANK_ACCOUNT_ACC_DETAIL, component: OfficeBankAccountAccDetailComponent, data: { title: 'OFFICE BANK ACCOUNT' } },
 
       // PAYMENT ALLOCATION
       {

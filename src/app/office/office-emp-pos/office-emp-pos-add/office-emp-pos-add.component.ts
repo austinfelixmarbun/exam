@@ -114,7 +114,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
       (response) => {
         this.allRefOffice = response['returnObject']
       })
-    this.refOfficeObj.refOfficeId = this.refOfficeId
+    this.refOfficeObj.RefOfficeId = this.refOfficeId
     this.httpClient.post(this.supervisorUrl, this.refOfficeObj).subscribe(
       (response) => {
         this.allSupervisor = response['returnObject']

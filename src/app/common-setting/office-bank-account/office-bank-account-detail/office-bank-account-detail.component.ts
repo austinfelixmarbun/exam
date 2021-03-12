@@ -8,6 +8,8 @@ import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { RefCurrObj } from 'app/shared/model/RefCurrObj.Model';
 import { OfficeBankAccObj } from 'app/shared/model/common-setting/OfficeBankAcc.Model';
 import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { PathConstant } from 'app/shared/PathConstant';
 
 @Component({
   selector: 'app-office-bank-account-detail',
@@ -102,7 +104,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
       }
     )
 
-    this.http.post<any>(URLConstant.GetListBankAccType, {}).subscribe(
+    this.http.post<any>(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: "BANK_ACC_TYPE" }).subscribe(
       (response) => {
         this.BankAccTypeList = response.ReturnObject;
       },
@@ -111,7 +113,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
       }
     )
 
-    this.http.post<any>(URLConstant.GetListActiveCurrName, {}).subscribe(
+    this.http.post<any>(URLConstant.GetListKvpActiveRefCurr, {}).subscribe(
       (response) => {
         this.CurrNameList = response.ReturnObject;
       },
@@ -120,7 +122,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
       }
     )
 
-    this.http.post<any>(URLConstant.GetListBankAccPurpose, { RefMasterTypeCode: "BANK_ACC_PURPOSE" }).subscribe(
+    this.http.post<any>(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: "BANK_ACC_PURPOSE" }).subscribe(
       (response) => {
         this.BankAccPurposeList = response.ReturnObject;
       },
@@ -158,16 +160,17 @@ export class OfficeBankAccountDetailComponent implements OnInit {
             BankAccPurpose: this.OfficeBankAccObj.MrBankAccPurposeCode
           })
 
-          this.RefOfficeObj.refOfficeId = response.RefOfficeId;
+          this.RefOfficeObj.RefOfficeId = response.RefOfficeId;
           this.http.post<RefOfficeObj>(URLConstant.GetRefOfficeByRefOfficeId, this.RefOfficeObj).subscribe(
             (response) => {
               this.RefOfficeObj = response;
-              this.RefOfficeId = this.RefOfficeObj.refOfficeId;
+              this.RefOfficeId = this.RefOfficeObj.RefOfficeId;
               this.OfficeBankAccForm.patchValue(
                 {
-                  OfficeName : this.RefOfficeObj.officeName
+                  OfficeName : this.RefOfficeObj.OfficeName
                 }
               );
+              this.OfficeBankAccForm.updateValueAndValidity();
             },
             (error) => {
               console.log(error);
@@ -183,6 +186,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
               this.OfficeBankAccForm.patchValue({
                 CurrName: this.RefCurrObj.RefCurrId
               })
+              this.OfficeBankAccForm.updateValueAndValidity();
             },
             (error) => {
               console.log(error);
@@ -198,6 +202,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
               this.OfficeBankAccForm.patchValue({
                 BankName: this.RefBankObj.RefBankId
               })
+              this.OfficeBankAccForm.updateValueAndValidity();
             },
             (error) => {
               console.log(error);
@@ -251,16 +256,16 @@ export class OfficeBankAccountDetailComponent implements OnInit {
     this.OfficeBankAccObj.RowVersion = "";
 
     if (this.Mode == "Add") {
-      this.RefOfficeObj.officeCode = this.OfficeCode;
+      this.RefOfficeObj.OfficeCode = this.OfficeCode;
       this.http.post<RefOfficeObj>(URLConstant.GetRefOfficeByOfficeCode, this.RefOfficeObj).subscribe(
         (response) => {
-          this.OfficeBankAccObj.RefOfficeId = response.refOfficeId;
+          this.OfficeBankAccObj.RefOfficeId = response.RefOfficeId;
           this.OfficeBankAccObj.IsActive = true;
 
           this.http.post(URLConstant.SubmitOfficeBankAcc, this.OfficeBankAccObj).subscribe(
             (response) => {
               this.toastr.successMessage("Add Success!");
-              this.router.navigateByUrl("/CommonSetting/officebankacc/paging");
+              this.router.navigateByUrl(PathConstant.CS_OFFICE_BANK_ACCOUNT_PAGING);
             },
             error => {
               console.log(error);
@@ -280,7 +285,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
       this.http.post(URLConstant.SubmitOfficeBankAcc, this.OfficeBankAccObj).subscribe(
         (response) => {
           this.toastr.successMessage("Edit Success!");
-          this.router.navigateByUrl("/CommonSetting/officebankacc/paging");
+          this.router.navigateByUrl(NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING);
         },
         error => {
           console.log(error);
