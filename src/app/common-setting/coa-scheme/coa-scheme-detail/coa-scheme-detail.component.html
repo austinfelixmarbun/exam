@@ -88,7 +88,7 @@
                 </div>
               </div>
 
-              <div class="table-responsive" formArrayName = "ListCoa">
+              <div class="table-responsive">
                 <table class="table table-responsive-md text-center table-hover">
                   <thead>
                     <tr class="table-header">
@@ -104,12 +104,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of ListPaymentAlloc; let i = index">
-                      <td class="align-center" [formGroupName]="i">{{i+1}}</td>
-                      <td class="text-left" [formGroupName]="i">{{item.Value}}</td>
-                      <td class="text-center" *ngFor="let currs of ListSelectedCurr" [formGroupName]="i"><input type="text" class="form-control" formControlName="COA"
-                        [ngClass]="{ 'is-invalid': enjiForm.submitted && CoaSchemeForm.controls.ListCoa['controls'][i]['controls'].COA.invalid }"
-                        ></td>
+                    <tr *ngFor="let item of ListPaymentAlloc; let i = index" formArrayName = "ListCoa">
+                      <span  [formGroupName]="i">
+                      <td class="align-center">{{i+1}}</td>
+                      <td class="text-left">{{item.Value}}</td>
+                      <span formArrayName = "DataCOA">
+                        <td class="text-center" *ngFor="let currs of ListSelectedCurr; let x = index" [formGroupName]="x">
+                          <input type="text" class="form-control" formControlName="COA"
+                          [ngClass]="{ 'is-invalid': enjiForm.submitted && CoaSchemeForm.controls.ListCoa['controls'][i]['controls'].DataCOA['controls'][x]['controls'].COA.invalid }"
+                          >
+                        </td>
+                      </span>
+                    </span>
                     </tr>
                   </tbody>
                 </table>
