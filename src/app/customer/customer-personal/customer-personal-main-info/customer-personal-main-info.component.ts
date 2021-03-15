@@ -254,7 +254,8 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     }
     else {
       this.IsSupplier = false;
-
+      this.inputLookupObj.nameSelect = "";
+      this.inputLookupObj.jsonSelect = { Zipcode: "" };
       var refMasterObjGender = {
         RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
         RowVersion: ""
