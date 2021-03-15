@@ -74,7 +74,6 @@ export const ROUTES: RouteInfo[] = [
           { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
           { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Scheme" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
           { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
-          { Path: '/Vendor/auctioncompany/paging', Title: 'Auction Company', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] }
         ], Params : [] 
       },{
         Path: '', Title: 'Asset Insurance', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
@@ -119,7 +118,7 @@ export const ROUTES: RouteInfo[] = [
       
         ], Params : [] 
       },
-      { Path: NavigationConstant.VENDOR_AUCTION_COY_PAGING, Title: 'auction comp', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: NavigationConstant.VENDOR_AUCTION_COY_PAGING, Title: 'Auction Company', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
     ], Params : [] 
   },
   {

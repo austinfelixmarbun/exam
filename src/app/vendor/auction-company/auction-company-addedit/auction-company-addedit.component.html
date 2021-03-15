@@ -283,10 +283,11 @@
                 <label class="col-md-3  adins-required-label">VAT</label>
                 <div class="col-md-9">
                   <select class="form-control" formControlName="IsVat">
-                    <option value="">Select One</option>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                   </select>
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.IsVat" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
 

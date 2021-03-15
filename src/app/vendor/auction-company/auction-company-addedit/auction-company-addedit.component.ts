@@ -74,10 +74,10 @@ export class AuctionCompanyAddeditComponent implements OnInit {
     Phone2 : [''],    
     Email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],    
     MrTaxCalcMethodCode : ['', [Validators.required]],
-    IsVat : ['', [Validators.required]],
+    IsVat: [true, Validators.required],
     IsNpwpExist : [false],
-    TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
-    TaxpayerName: ['', Validators.required],
+    TaxIdNo: [''],
+    TaxpayerName: [''],
     AddrContactPerson  :  ['', [Validators.required]],
     CityContactPerson : ['', [Validators.required]],
     ProvinceContactPerson : ['',[Validators.required]],
@@ -302,7 +302,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
       this.AuctionCompanyForm.controls.TaxIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
       this.AuctionCompanyForm.controls.TaxpayerName.setValidators(Validators.required);
     } else {
-      this.AuctionCompanyForm.controls.TaxIdNo.setValidators([Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
+      this.AuctionCompanyForm.controls.TaxIdNo.clearValidators();
       this.AuctionCompanyForm.controls.TaxpayerName.clearValidators();
       this.isHidden = true;
     }
