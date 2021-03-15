@@ -115,6 +115,7 @@ import { UpdateCustomerCompanyFinDataComponent } from './customer-update-master/
 import { UpdateCustomerCompanyLegalDocComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-company-legal-doc/update-customer-company-legal-doc.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { DmsIframeComponent } from 'app/shared/dms-iframe/dms-iframe.component';
+import { CustBankAccComponent } from './cust-bank-acc/cust-bank-acc.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -245,7 +246,8 @@ export const customCurrencyMaskConfig = {
     UpdateCustomerMgmntShareholderComponent,
     UpdateCustomerContactInfoComponent,
     UpdateCustomerCompanyFinDataComponent,
-    UpdateCustomerCompanyLegalDocComponent
+    UpdateCustomerCompanyLegalDocComponent,
+    CustBankAccComponent
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })
