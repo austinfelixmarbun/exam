@@ -62,7 +62,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     MrGenderCode: ['', [Validators.required]],
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', [Validators.required]],
-    TaxIdNo: [''],
+    TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     MrJobPositionCode: ['',[Validators.required]],
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
     IsSigner: [false],
@@ -240,6 +240,9 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       if(this.tempShareholderCustNo!=null){
         this.custCompanyMgmntShrholderObj.ShareholderCustNo = this.tempShareholderCustNo;
       }
+      if(this.custExistingId != 0){
+        this.custCompanyMgmntShrholderObj.ShareholderId = this.custExistingId;
+      }
       // this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
       this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;
@@ -307,7 +310,9 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
   }
 
+  custExistingId: number = 0;
   getLookUpCustomer(event) {
+    this.custExistingId = event.CustId;
     var datePipe = new DatePipe("en-US");
     this.ManagementShareholderForm.patchValue({
       MgmntShrholderName: event.CustName,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UcpagingModule } from '@adins/ucpaging';
+import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
@@ -30,7 +30,7 @@ export class ProductHODeactivateApprovalComponent implements OnInit {
   constructor(private toastr: NGXToastrService, private httpClient: HttpClient, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit() {
-    this.inputPagingObj = new UcpagingModule();
+    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/product/searchProductHODeactApv.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;

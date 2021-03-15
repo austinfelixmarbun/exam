@@ -1,4 +1,11 @@
 <div class="card">
+  <div class="ucSearch-Button-Right">
+    <span class="mr-1">
+      <button type="button" class="backButton" [routerLink]="[CancelLink]" [queryParams]="{VendorId:VendorId}" skipLocationChange translate>
+        <i class="fa fa-arrow-left"> </i> Back
+      </button>
+    </span>
+  </div>
   <div class="card-header">
     <h4 class="card-title" translate>Branch Office Member</h4>
   </div>
@@ -8,10 +15,6 @@
 
     <div class="card-header">
       <div class="text-right">
-        <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" skipLocationChange
-          [queryParams]="{VendorId:VendorId}" translate>
-          <i class="far fa-window-close"></i> Cancel
-        </button>
         <button type="submit" *ngIf="tempDataExists" (click)="SaveVendorOfficeMember()" class="btn btn-raised btn-primary" translate>
           <i class="far fa-check-square"></i> Save
         </button>

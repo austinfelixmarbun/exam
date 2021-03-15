@@ -46,7 +46,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     MgmntShrholderName: ['', [Validators.maxLength(100) ,Validators.required]],
     MrCustModelCode: [''],
     MrCompanyTypeCode: ['',[Validators.required]],
-    TaxIdNo: ['', [Validators.required]],
+    TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
     MrIndustryTypeCode: [''],
     IsSigner: [false],
@@ -208,6 +208,9 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       if(this.tempShareholderCustNo!=null){
         this.custCompanyMgmntShrholderObj.ShareholderCustNo = this.tempShareholderCustNo;
       }
+      if(this.custExistingId != 0){
+        this.custCompanyMgmntShrholderObj.ShareholderId = this.custExistingId;
+      }
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
       this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;   
       this.custCompanyMgmntShrholderObj.MrCompanyTypeCode = this.ManagementShareholderForm.controls["MrCompanyTypeCode"].value;  
@@ -237,7 +240,9 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     this.outputValue.emit({mode : 'check'});
   }
 
+  custExistingId: number = 0;
   getLookUpCustomer(event) {
+    this.custExistingId = event.CustId;
     this.ManagementShareholderForm.patchValue({
       MgmntShrholderName: event.CustName,
       MrCustModelCode: event.MrCustModelCode,

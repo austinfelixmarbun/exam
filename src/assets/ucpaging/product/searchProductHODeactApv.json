@@ -7,7 +7,7 @@
       "name": "TL.TRX_NO",
       "id": "ProdCodeId",
       "value": "",
-      "label": "Trx No",
+      "label": "Product Code",
       "placeholder": "Placeholder"
     },
     {
@@ -26,7 +26,7 @@
     {
       "type": "sort",
       "position": "center",
-      "label": "Trx No",
+      "label": "Product Code",
       "name": "TRX_NO"
     },
     {

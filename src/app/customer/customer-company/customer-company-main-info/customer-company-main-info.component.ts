@@ -40,7 +40,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     CustModel: ['', [Validators.required]],
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
     MrCompanyTypeCode: ['', [Validators.required]],
-    TaxIdNo: [''],
+    TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     IsVip: [true],
     IsAffiliateWithMf: [true],
     VipNotes: ['', [Validators.required]]

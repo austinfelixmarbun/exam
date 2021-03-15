@@ -101,7 +101,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     ReservedField9: [''], //ASSGMNT_TYPE tele, field
     MrTaxCalcMethodCode: ['', Validators.required],
     IsVat: [true, Validators.required],
-    TaxIdNo: ['', Validators.required],
+    TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     TaxpayerName: ['', Validators.required],
     MrAddrTypeCode: [''],
     Addr: [''],
@@ -115,7 +115,39 @@ export class VendorBranchAddEditComponent implements OnInit {
     IsOneAffiliate: [false]
   })
 
+  HoTitle: string = "";
+  SetTitleHoInfo() {
+    switch (this.MrVendorCategoryCode) {
+      case CommonConstant.SUPPLIER_HO:
+        this.HoTitle = "Supplier ";
+        break;
+      case CommonConstant.SUPPLIER_HOLDING:
+        this.HoTitle = "Supplier Holding ";
+        break;
+      case CommonConstant.SUPPLIER_BRANCH:
+        this.HoTitle = "Supplier Branch ";
+        break;
+      case CommonConstant.SURVEYOR_HO:
+        this.HoTitle = "Surveyor HO ";
+        break;
+      case CommonConstant.SURVEYOR_BRANCH:
+        this.HoTitle = "Surveyor Branch ";
+        break;
+      case CommonConstant.ASSET_INSCO_HO:
+        this.HoTitle = "Insurance HO ";
+        break;
+      case CommonConstant.ASSET_INSCO_BRANCH:
+        this.HoTitle = "Insurance Branch ";
+        break;
+      case CommonConstant.LIFE_INSCO_BRANCH:
+        this.HoTitle = "Life Insurance Branch ";
+        break;
+    }
+  }
+
+  DictDDLVendorAttr: {[id: string]: Array<any>} = {};
   ngOnInit() {
+    this.SetTitleHoInfo();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     if (this.mode == "edit") {
@@ -147,6 +179,7 @@ export class VendorBranchAddEditComponent implements OnInit {
                 }
                 else if (vendorAttr["VendorAttrType"] == 'L') {
                   var temp = vendorAttr["VendorAttrValue"].split(";");
+                  this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
                   formGroupObject["VendorAttrValue"] = [temp[0]];
                 }
                 else {
@@ -200,6 +233,7 @@ export class VendorBranchAddEditComponent implements OnInit {
 
                   if (vendorAttr["VendorAttrType"] == 'L') {
                     var temp = vendorAttr["VendorAttrValue"].split(";");
+                    this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
                     formGroupObject["VendorAttrValue"] = [temp[0]];
                   } else {
                     formGroupObject["VendorAttrValue"] = [''];
@@ -260,6 +294,11 @@ export class VendorBranchAddEditComponent implements OnInit {
                       (response) => {
                         tempLookup[vendorAttr["VendorAttrCode"]].jsonSelect = { Descr: response['Descr'] }
                       });
+                    formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
+                  }
+                  else if (vendorAttr["VendorAttrType"] == 'L') {
+                    var temp = vendorAttr["VendorAttrValue"].split(";");
+                    this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
                     formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
                   }
                   else {
@@ -490,12 +529,12 @@ export class VendorBranchAddEditComponent implements OnInit {
     if (this.VendorForm.controls.IsNpwpExist.value == true) {
       this.isHidden = false;
       this.inputLookupZipcodeObj.isRequired = true;
-      this.VendorForm.controls.TaxIdNo.setValidators(Validators.required);
+      this.VendorForm.controls.TaxIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
       this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
     } else {
       this.inputLookupZipcodeObj.isRequired = false;
       if (!isGetData) this.VendorForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
-      this.VendorForm.controls.TaxIdNo.clearValidators();
+      this.VendorForm.controls.TaxIdNo.setValidators([Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
       this.VendorForm.controls.TaxpayerName.clearValidators();
       this.isHidden = true;
     }
