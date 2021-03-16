@@ -12,6 +12,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -47,6 +48,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     MrCustModelCode: [''],
     MrCompanyTypeCode: ['',[Validators.required]],
     TaxIdNo: ['', [Validators.required]],
+    EstablishmentDt :[''],
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
     MrIndustryTypeCode: [''],
     IsSigner: [false],
@@ -64,6 +66,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   }
 
   ngOnInit() {  
+    var datePipe = new DatePipe("en-US");
     this.inputLookupCustCompanyObj = new InputLookupObj();
     this.inputLookupCustCompanyObj.urlJson = "./assets/lookup/lookUpExistingCustCompany.json";
     this.inputLookupCustCompanyObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -142,6 +145,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
             MrCustModelCode:  this.tempCustCompanyMgmntShrholderObj.MrCustModelCode,
             MrCompanyTypeCode: this.tempCustCompanyMgmntShrholderObj.MrCompanyTypeCode ,
             TaxIdNo:  this.tempCustCompanyMgmntShrholderObj.TaxIdNo,
+            EstablishmentDt:  datePipe.transform(this.tempCustCompanyMgmntShrholderObj.EstablishmentDt, 'yyyy-MM-dd'),
             SharePrcnt: this.tempCustCompanyMgmntShrholderObj.SharePrcnt,
             IsSigner: this.tempCustCompanyMgmntShrholderObj.IsSigner,
             IsActive: this.tempCustCompanyMgmntShrholderObj.IsActive,
@@ -194,6 +198,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
       this.custCompanyMgmntShrholderObj.TaxIdNo = this.ManagementShareholderForm.controls["TaxIdNo"].value;
+      this.custCompanyMgmntShrholderObj.EstablishmentDt = this.ManagementShareholderForm.controls["EstablishmentDt"].value;
       this.custCompanyMgmntShrholderObj.IsActive = this.ManagementShareholderForm.controls["IsActive"].value;  
       this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value;  
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Company;
@@ -219,6 +224,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
       this.custCompanyMgmntShrholderObj.TaxIdNo = this.ManagementShareholderForm.controls["TaxIdNo"].value;
+      this.custCompanyMgmntShrholderObj.EstablishmentDt = this.ManagementShareholderForm.controls["EstablishmentDt"].value;
       this.custCompanyMgmntShrholderObj.IsActive = this.ManagementShareholderForm.controls["IsActive"].value; 
       this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value;  
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Company;
