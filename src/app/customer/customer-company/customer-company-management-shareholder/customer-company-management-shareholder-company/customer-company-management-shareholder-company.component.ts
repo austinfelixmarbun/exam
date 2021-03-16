@@ -13,6 +13,8 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { DatePipe } from '@angular/common';
+import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 
 @Component({
@@ -56,8 +58,10 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     IsOwner: [false]
   });
   datePipe: DatePipe;
+  MaxDate: any;
+  UserAccess: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholderNew;
     this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderIdNew;
@@ -66,7 +70,11 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     this.isExistingCust = false;
   }
 
-  ngOnInit() {  
+  ngOnInit() { 
+    this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.MaxDate = this.UserAccess[CommonConstant.BUSINESS_DT];
+    this.MaxDate = this.UserAccess[CommonConstant.BUSINESS_DT];
+
     this.datePipe = new DatePipe("en-US");
     this.inputLookupCustCompanyObj = new InputLookupObj();
     this.inputLookupCustCompanyObj.urlJson = "./assets/lookup/lookUpExistingCustCompany.json";
