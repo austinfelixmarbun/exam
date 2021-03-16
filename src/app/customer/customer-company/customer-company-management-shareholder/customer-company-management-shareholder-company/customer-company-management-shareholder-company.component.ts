@@ -55,6 +55,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     IsActive: [false],
     IsOwner: [false]
   });
+  datePipe: DatePipe;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
@@ -66,7 +67,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   }
 
   ngOnInit() {  
-    var datePipe = new DatePipe("en-US");
+    this.datePipe = new DatePipe("en-US");
     this.inputLookupCustCompanyObj = new InputLookupObj();
     this.inputLookupCustCompanyObj.urlJson = "./assets/lookup/lookUpExistingCustCompany.json";
     this.inputLookupCustCompanyObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
@@ -145,7 +146,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
             MrCustModelCode:  this.tempCustCompanyMgmntShrholderObj.MrCustModelCode,
             MrCompanyTypeCode: this.tempCustCompanyMgmntShrholderObj.MrCompanyTypeCode ,
             TaxIdNo:  this.tempCustCompanyMgmntShrholderObj.TaxIdNo,
-            EstablishmentDt:  datePipe.transform(this.tempCustCompanyMgmntShrholderObj.EstablishmentDt, 'yyyy-MM-dd'),
+            EstablishmentDt:  this.datePipe.transform(this.tempCustCompanyMgmntShrholderObj.EstablishmentDt, 'yyyy-MM-dd'),
             SharePrcnt: this.tempCustCompanyMgmntShrholderObj.SharePrcnt,
             IsSigner: this.tempCustCompanyMgmntShrholderObj.IsSigner,
             IsActive: this.tempCustCompanyMgmntShrholderObj.IsActive,
@@ -257,6 +258,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       MrCustModelCode: event.MrCustModelCode,
       MrCompanyTypeCode: event.MrCompanyTypeCode,
       TaxIdNo : event.TaxIdNo,
+      EstablishmentDt :  this.datePipe.transform(event.EstablishmentDt, 'yyyy-MM-dd')  
     });
  
     this.tempShareholderCustNo = event.CustNo;
