@@ -114,36 +114,28 @@ export class CommonConstant {
     public static RefMasterTypeCodeOfficeClass = "OFFICE_CLASS";
     public static RefMasterTypeCodeOfficeType = "OFFICE_TYPE";
     public static RefMasterTypeCompanyScale = "COMPANY_SCALE";
-
     public static RefMasterTypeCodeCenterGrpType = "CENTER_GRP_TYPE";
-
     public static RefMasterTypeCodeKonvenSyariah = "KONVEN_SYARIAH";
     public static RefMasterTypeCodeNegAssetSource = "NEG_ASSET_SOURCE";
     public static RefMasterTypeCodeAssetTypeId = "ASSET_TYPE_ID";
-
-
     public static RefMasterTypeCodeNotificationType = "NOTIFICATION_TYPE";
     public static RefMasterTypeCodeNotificationMethod = "NOTIFICATION_METHOD";
     public static RefMasterTypeCodeVendorPosition = "VENDOR_POSITION";
     public static RefMasterTypeCodeTaxCalcMethod = "TAX_CALC_METHOD";
-
-
     public static RefMasterTypeCodeVendorCategory = "VENDOR_CATEGORY";
     public static RefMasterTypeCodeMaxRefundType = "MAX_REFUND_TYPE";
     public static RefMasterTypeCodeAssgmntType = "ASSGMNT_TYPE";
     public static RefMasterTypeCodeSupplierClass = "SUPPLIER_CLASS";
-
-
     public static RefMasterTypeCodeSupplierUpCalcMethod = "SUPPLIER_UP_CALC_METHOD";
     public static RefMasterTypeCodeVendorType = "VENDOR_TYPE";
     public static RefMasterTypeCodeIdTypeVendor = "ID_TYPE_VENDOR";
     public static RefMasterTypeCodeTaskAssignmentType = "TASK_ASSIGNMENT_TYPE";
-
     public static RefMasterTypeCodeScoreTrxType = "SCORE_TRX_TYPE";
     public static RefMasterTypeCodeAttrInputType = "ATTR_INPUT_TYPE";
     public static RefMasterTypeCodeRegularExpression = "REGULAR_EXPRESSION";
     public static RefMasterTypeCodeAttributeGroup = "ATTRIBUTE_GROUP";
     public static RefMasterTypeCodeBuildingOwnership = "BUILDING_OWNERSHIP";
+    public static RefMasterTypeCodeMonth = "MONTH";
 
     public static RefMasterTypeCodeEntityType = "ENTITY_TYPE";
     public static RefMasterTypeCodeEntityTypePayAlloc = "PAY_ALLOC";
@@ -153,6 +145,7 @@ export class CommonConstant {
 
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
+    
     // GENERAL SETTING CODE
     public static GSCodeDefLocalNationality = "DEF_LOCAL_NATIONALITY";
     public static GsCodePasswordRegex = "PASSWORD_REGEX";

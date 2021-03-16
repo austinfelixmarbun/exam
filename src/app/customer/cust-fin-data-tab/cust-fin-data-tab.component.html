@@ -93,7 +93,8 @@
     <app-cust-attr-list [title]="'Customer Financial Attribute'" [CustId]="this.CustId" [enjiForm]="enjiForm"
       [parentForm]="CustPersonalFinDataForm" [identifier]="'AttrList'" [attrGroup]="attrGroup"></app-cust-attr-list>
 
-    <app-cust-bank-acc-section-findata [CustId]="this.CustId"></app-cust-bank-acc-section-findata>
+    <!-- <app-cust-bank-acc-section-findata [CustId]="this.CustId"></app-cust-bank-acc-section-findata> -->
+    <app-cust-bank-acc [CustId]="CustId"></app-cust-bank-acc>
     <br>
     <br>
     <br>

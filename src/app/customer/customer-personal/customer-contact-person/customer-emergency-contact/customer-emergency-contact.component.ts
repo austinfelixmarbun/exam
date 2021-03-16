@@ -207,6 +207,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
           this.CustomerContactForm.patchValue({
             MrIdTypeCode: this.tempIdType[0].Key
           });
+          this.onChangeIdType();
         }
         if (this.tempIdType[0].Key == this.KTP) {
           this.tempKTPCheck = true;
@@ -333,6 +334,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
             // IsEmergencyContact: this.tempCustPersonalContactPerson.IsEmergencyContact,
             MrCustRelationshipCode: this.tempCustPersonalContactPerson.MrCustRelationshipCode,
           });
+          this.onChangeIdType();
           if (this.tempCustPersonalContactPerson.MrJobProfessionCode != null) {
             var ProfessionCodeObj = {
               ProfessionCode: this.tempCustPersonalContactPerson.MrJobProfessionCode,
@@ -437,6 +439,17 @@ export class CustomerEmergencyContactComponent implements OnInit {
         this.inputAddressObj.default = this.UcAddressObj;
         this.inputAddressObj.inputField = this.inputFieldObj;
       });
+  }
+	
+  onChangeIdType() {
+    let idType: string = this.CustomerContactForm.get("MrIdTypeCode").value;
+
+    if (idType == CommonConstant.MrIdTypeCodeEKTP) {
+      this.CustomerContactForm.get("IdNo").setValidators([Validators.minLength(16), Validators.maxLength(16)]);
+    } else {
+      this.CustomerContactForm.get("IdNo").clearValidators();
+    }
+    this.CustomerContactForm.get("IdNo").updateValueAndValidity();
   }
 
   SaveValue() {
@@ -572,6 +585,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
           IdExpiredDt: datePipe.transform(this.tempCust.IdExpiredDt, 'yyyy-MM-dd'),
           TaxIdNo: this.tempCust.TaxIdNo
         });
+        this.onChangeIdType();
       }
     );
     this.custAddrObj = new CustAddrObj();
@@ -623,6 +637,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       this.tempKTPCheck = false;
     }
     this.CustomerContactForm.controls.IdExpiredDt.updateValueAndValidity();
+    this.onChangeIdType();
   }
   onOptionsNationalitySelected(event) {
     if (event.target.value == CommonConstant.NationalityCodeLocal) {

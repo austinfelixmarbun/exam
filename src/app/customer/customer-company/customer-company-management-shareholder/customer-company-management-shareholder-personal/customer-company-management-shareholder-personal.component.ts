@@ -115,7 +115,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
           this.ManagementShareholderForm.patchValue({
             MrIdTypeCode: this.tempIdType[0].Key
           });
-          this.ChangeIdType(this.tempIdType[0].Key);
+          this.ChangeIdType();
         }
       }
     );
@@ -279,10 +279,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
 
   onOptionsSelected(event){  
-    this.ChangeIdType(event.target.value);
+    this.ChangeIdType();
   }
 
-  ChangeIdType(IdType: string) {
+  ChangeIdType() {
+    let IdType: string = this.ManagementShareholderForm.get("MrIdTypeCode").value;
     this.ManagementShareholderForm.controls.IdExpiredDt.patchValue("");
 
     if (IdType == RefMasterConstant.KITAS || IdType == RefMasterConstant.SIM) {
@@ -298,6 +299,13 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }else{
       this.ManagementShareholderForm.controls.IdExpiredDt.enable();
     }
+
+    if(IdType == RefMasterConstant.EKtp){
+      this.ManagementShareholderForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)]);
+    } else {
+      this.ManagementShareholderForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
+    }
+    this.ManagementShareholderForm.get("IdNo").updateValueAndValidity();
 
     this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
   }

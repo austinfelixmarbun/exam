@@ -757,6 +757,7 @@ export class URLConstant {
     public static EditCustPersonalFinData = environment.FoundationR3Url + "/CustPersonalFinData/EditCustPersonalFinData";
     public static GetCustPersonalFinDataForCustViewByCustId = environment.FoundationR3Url + "/CustPersonalFinData/GetCustPersonalFinDataForCustViewByCustId";
     public static EditCustBankAcc = environment.FoundationR3Url + "/CustBankAcc/EditCustBankAcc";
+    public static DeleteCustBankAccAndStmnt = environment.FoundationR3Url + "/CustBankAcc/DeleteCustBankAccAndStmnt";
 
     // CUSTOMER ADDRESS
     public static GetListCustAddr = environment.FoundationR3Url + "/CustAddr/GetListCustAddr";
@@ -947,6 +948,8 @@ export class URLConstant {
     public static GetRefReasonActive = "/Approval/GetRefReasonActive";
     public static GetCanChangeMinFinalLevel = "/Approval/GetCanChangeMinFinalLevel";
     public static GetTaskHistory = "/Approval/GetTaskHistory";
+    public static ReturnLevel = "/Approval/ReturnLevel";
+    public static ContinueToLevel = "/Approval/ContinueToLevel";
     
     // Payment Allocation
     public static GetListKeyValueRefPaymentAllocActive = environment.FoundationR3Url + "/RefPaymentAlloc/GetListKeyValueRefPaymentAllocActive";
