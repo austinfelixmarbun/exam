@@ -19,6 +19,8 @@ export class URLConstant {
     public static GetListGeneralSettingByListGsCode = environment.FoundationR3Url + "/GeneralSetting/GetListGeneralSettingByListGsCode";
 
     //REF OFFICE
+    public static GetRefOfficeByOfficeCode = environment.FoundationR3Url + "/RefOffice/GetRefOfficeByOfficeCode";
+    public static GetListKvpActiveRefOfficeForPaging = environment.FoundationR3Url + "/RefOffice/GetListKvpActiveRefOfficeForPaging";
     public static GetRefOfficeObj = "/RefOffice/GetRefOfficeObj";
     public static GetRefOfficeByRefOfficeId = environment.FoundationR3Url + "/RefOffice/GetRefOfficeByRefOfficeId"
     public static GetRefOfficeActiveAndNonVirtualKeyValue = "/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue";
@@ -755,6 +757,7 @@ export class URLConstant {
     public static EditCustPersonalFinData = environment.FoundationR3Url + "/CustPersonalFinData/EditCustPersonalFinData";
     public static GetCustPersonalFinDataForCustViewByCustId = environment.FoundationR3Url + "/CustPersonalFinData/GetCustPersonalFinDataForCustViewByCustId";
     public static EditCustBankAcc = environment.FoundationR3Url + "/CustBankAcc/EditCustBankAcc";
+    public static DeleteCustBankAccAndStmnt = environment.FoundationR3Url + "/CustBankAcc/DeleteCustBankAccAndStmnt";
 
     // CUSTOMER ADDRESS
     public static GetListCustAddr = environment.FoundationR3Url + "/CustAddr/GetListCustAddr";
@@ -945,6 +948,8 @@ export class URLConstant {
     public static GetRefReasonActive = "/Approval/GetRefReasonActive";
     public static GetCanChangeMinFinalLevel = "/Approval/GetCanChangeMinFinalLevel";
     public static GetTaskHistory = "/Approval/GetTaskHistory";
+    public static ReturnLevel = "/Approval/ReturnLevel";
+    public static ContinueToLevel = "/Approval/ContinueToLevel";
     
     // Payment Allocation
     public static GetRefPaymentAllocByID = environment.FoundationR3Url + "/RefPaymentAlloc/GetRefPaymentAllocById";
@@ -982,7 +987,17 @@ export class URLConstant {
     public static GetListCustExpsrAppAgrHistByCustExpsrHId = environment.FoundationR3Url + "/CustExpsrInfo/GetListCustExpsrAppAgrHistByCustExpsrHId";
 
     //OTP
-    public static SendOtp = "http://localhost:5000/Authenticate/SendOtp";
-    public static ConfirmOtp = "http://localhost:5000/Authenticate/ConfirmOtp";
-    public static GetOtpProperties = "http://localhost:5000/Authenticate/GetOtpProperties";
+    public static SendOtp = environment.FoundationR3Url + "/Authenticate/SendOtp";
+    public static ConfirmOtp = environment.FoundationR3Url + "/Authenticate/ConfirmOtp";
+    public static GetOtpProperties = environment.FoundationR3Url + "/Authenticate/GetOtpProperties";
+    
+    // OFFICE BANK ACCOUNT
+    public static DeleteOfficeBankAcc = "/OfficeBankAcc/DeleteOfficeBankAcc";
+    public static GetListActiveBankName = environment.FoundationR3Url + "/RefBank/GetListActiveBankName";
+    public static GetListBankAccType = environment.FoundationR3Url + "/OfficeBankAcc/GetListBankAccType";
+    public static GetListActiveCurrName = environment.FoundationR3Url + "/RefCurr/GetListActiveCurrName";
+    public static GetListBankAccPurpose = environment.FoundationR3Url + "/RefMaster/GetListKeyValueActiveByCode";
+    public static GetOfficeBankAccByOfficeBankAccId = environment.FoundationR3Url + "/OfficeBankAcc/GetOfficeBankAccByOfficeBankAccId";
+    public static SubmitOfficeBankAcc = environment.FoundationR3Url + "/OfficeBankAcc/SubmitOfficeBankAcc";
+
 }

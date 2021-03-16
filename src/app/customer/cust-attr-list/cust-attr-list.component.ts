@@ -55,22 +55,24 @@ export class CustAttrListComponent implements OnInit {
         this.httpClient.post<Array<RefAttr>>(URLConstant.GetListActiveRefAttrByAttrGroup, custGrp).subscribe(
           async (response: any) => {
             this.RefAttrList = response[CommonConstant.ReturnObj];
-            for (const refAttr of this.RefAttrList) {
-              this.AttrContent = new AttrContent();
-              let isUpdateValue = false;
-              if (this.ListAttrContent.find(x => x.RefAttrId == refAttr.RefAttrId)) {
-                this.AttrContent = this.ListAttrContent.find(x => x.RefAttrId == refAttr.RefAttrId);
-                isUpdateValue = true;
-              } 
-              var formGroupObject = new Object();
-              formGroupObject["RefAttrId"] = [refAttr["RefAttrId"]];
-              formGroupObject["IsMandatory"] = [refAttr.IsMandatory];
-              this.setFormGroupValue(refAttr, formGroupObject, parentFormGroup, isUpdateValue);
-            } 
-            this.ListInputLookUpObj.push(this.tempLookup);
-            this.parentForm.addControl(this.identifier, this.fb.group(parentFormGroup));
-            this.isFormReady = true;
 
+            if(this.RefAttrList != null){
+              for (const refAttr of this.RefAttrList) {
+                this.AttrContent = new AttrContent();
+                let isUpdateValue = false;
+                if (this.ListAttrContent.find(x => x.RefAttrId == refAttr.RefAttrId)) {
+                  this.AttrContent = this.ListAttrContent.find(x => x.RefAttrId == refAttr.RefAttrId);
+                  isUpdateValue = true;
+                } 
+                var formGroupObject = new Object();
+                formGroupObject["RefAttrId"] = [refAttr["RefAttrId"]];
+                formGroupObject["IsMandatory"] = [refAttr.IsMandatory];
+                this.setFormGroupValue(refAttr, formGroupObject, parentFormGroup, isUpdateValue);
+              } 
+              this.ListInputLookUpObj.push(this.tempLookup);
+              this.parentForm.addControl(this.identifier, this.fb.group(parentFormGroup));
+              this.isFormReady = true;
+            }
           });
 
       });

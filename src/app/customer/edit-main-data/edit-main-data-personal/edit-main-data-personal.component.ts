@@ -32,7 +32,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', [Validators.required]],
     IdNo: ['', [Validators.required]],
-    TaxIdNo: [''],
+    TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     IdExpiredDt: [''],
     MrMaritalStatCode: [''],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -124,6 +124,7 @@ export class EditMainDataPersonalComponent implements OnInit {
           this.CustomerPersonalForm.patchValue({
             MrIdTypeCode: this.tempIdType[0].Key
           });
+          this.onChangeIdType();
         }
         if (this.tempIdType[0].Key == this.KTP) {
           this.tempKTPCheck = true;
@@ -163,6 +164,7 @@ export class EditMainDataPersonalComponent implements OnInit {
           IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
           VipNotes: this.tempCustObj.VipNotes,
         });
+        this.onChangeIdType();
         if (this.tempCustObj.VipNotes != null) {
           this.VipNotesRequired = true;
         } else {
@@ -171,9 +173,6 @@ export class EditMainDataPersonalComponent implements OnInit {
         if (this.tempCustObj.IsVip == false) {
           this.CustomerPersonalForm.controls.VipNotes.disable();
         }
-        this.CustomerPersonalForm.controls["MrIdTypeCode"].disable();
-        this.CustomerPersonalForm.controls["IdNo"].disable();
-        this.CustomerPersonalForm.controls["TaxIdNo"].disable();
 
         this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.tempCustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
           (response: CustAddrObj) => {
@@ -290,7 +289,21 @@ export class EditMainDataPersonalComponent implements OnInit {
       this.tempKTPCheck = false;
     }
     this.CustomerPersonalForm.controls.IdExpiredDt.updateValueAndValidity();
+    this.onChangeIdType();
+  }	
+
+  onChangeIdType() {
+    let idType: string = this.CustomerPersonalForm.get("MrIdTypeCode").value;
+
+    this.CustomerPersonalForm.get("IdNo").clearValidators();
+    if (idType == CommonConstant.MrIdTypeCodeEKTP) {
+      this.CustomerPersonalForm.get("IdNo").setValidators([Validators.required, Validators.minLength(16), Validators.maxLength(16)]);
+    } else {
+      this.CustomerPersonalForm.get("IdNo").setValidators([Validators.required]);
+    }
+    this.CustomerPersonalForm.get("IdNo").updateValueAndValidity();
   }
+
   back(){
     if(this.From =="CustPaging"){
       AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});

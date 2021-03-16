@@ -56,7 +56,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     MrIdTypeCode: ['', [Validators.required]],
     IdNo: ['', [Validators.required]],
     IdExpiredDt: [''],
-    TaxIdNo: [''],
+    TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', Validators.required],
     MrGenderCode: [''],
@@ -123,6 +123,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
           this.NegativeCustForm.patchValue({
             MrIdTypeCode: this.refMasterIdType.ReturnObject[0].Key
           });
+          this.onChangeIdType();
         }
         if (response[1][CommonConstant.ReturnObj].length > 0) {
           this.negativeTypeList = response[1];
@@ -304,6 +305,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
             RowVersion: negativeCustData.RowVersion
           });
           if (this.custType == CommonConstant.CustomerPersonal) {
+            this.onChangeIdType();
             if (this.NegativeCustForm.controls.MrIdTypeCode.value == RefMasterConstant.EKtp) {
               this.tempKTPCheck = true;
               this.NegativeCustForm.controls.IdExpiredDt.clearValidators();
@@ -478,6 +480,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
           MrNegCustSourceCode: this.negativeSourceList.ReturnObject[0].Key,
           MrGenderCode: this.TempGender[0].Key 
         }); 
+        this.onChangeIdType();
       });
   }
 
@@ -522,6 +525,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
           Fax: response.Fax,
           MobilePhn: e.mobilePhone
         });
+        this.onChangeIdType();
         this.isFromLookup = true;
         this.inputLookupZipcodeObj.nameSelect = response.Zipcode;
       }
@@ -583,6 +587,19 @@ export class NegativeCustomerDetailComponent implements OnInit {
       this.tempKTPCheck = false;
     }
     this.NegativeCustForm.controls.IdExpiredDt.updateValueAndValidity();
+    this.onChangeIdType();
+  }	
+
+  onChangeIdType() {
+    let idType: string = this.NegativeCustForm.get("MrIdTypeCode").value;
+
+    this.NegativeCustForm.get("IdNo").clearValidators();
+    if (idType == CommonConstant.MrIdTypeCodeEKTP) {
+      this.NegativeCustForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)]);
+    } else {
+      this.NegativeCustForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
+    }
+    this.NegativeCustForm.get("IdNo").updateValueAndValidity();
   }
 
   SaveForm() {

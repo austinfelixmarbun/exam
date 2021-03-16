@@ -50,6 +50,9 @@ import { CoaSchemePagingComponent } from './coa-scheme/coa-scheme-paging/coa-sch
 import { CoaSchemeDetailComponent } from './coa-scheme/coa-scheme-detail/coa-scheme-detail.component';
 import { CoaSchemeViewComponent } from './coa-scheme/coa-scheme-view/coa-scheme-view.component';
 import { PathConstant } from 'app/shared/PathConstant';
+import { OfficeBankAccountAccDetailComponent } from './office-bank-account/office-bank-account-acc-detail/office-bank-account-acc-detail.component';
+import { OfficeBankAccountDetailComponent } from './office-bank-account/office-bank-account-detail/office-bank-account-detail.component';
+import { OfficeBankAccountPagingComponent } from './office-bank-account/office-bank-account-paging/office-bank-account-paging.component';
 
 const routes: Routes = [
   {
@@ -336,6 +339,11 @@ const routes: Routes = [
         },
       },
       
+      // Office Bank Account
+      { path: 'officebankacc/paging', component: OfficeBankAccountPagingComponent, data: { title: 'OFFICE BANK ACCOUNT' } },
+      { path: 'officebankacc/detail', component: OfficeBankAccountDetailComponent, data: { title: 'OFFICE BANK ACCOUNT' } },
+      { path: 'officebankacc/accdetail', component: OfficeBankAccountAccDetailComponent, data: { title: 'OFFICE BANK ACCOUNT' } },
+
       // PAYMENT ALLOCATION
       {
         path: PathConstant.CS_PAYMENT_ALLOC_PAGING,

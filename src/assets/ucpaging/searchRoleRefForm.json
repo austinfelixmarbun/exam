@@ -29,7 +29,7 @@
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "Title",
             "name": "RF.TITLE"
         },
@@ -47,7 +47,7 @@
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "Title"
         },
         {

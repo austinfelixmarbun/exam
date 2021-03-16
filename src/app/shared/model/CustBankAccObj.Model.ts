@@ -2,6 +2,7 @@ export class CustBankAccObj {
     CustBankAccId: number;
     CustId: number;
     RefBankId: number;
+    BankName: string;
     BankBranch: string;
     BankAccNo: string;
     BankAccName: string;
@@ -12,6 +13,11 @@ export class CustBankAccObj {
     IsActive: boolean;
     StartPeriod: string;
     EndPeriod: string;
+    ListBankStmntObj: Array<any>
     RowVersion: any;
-    constructor(){this.CustBankAccId = 0, this.RowVersion = ""}
+
+    constructor(){
+        this.CustBankAccId = 0, 
+        this.RowVersion = ""
+    }
 }

@@ -7,7 +7,7 @@
       "name": "TL.TRX_NO",
       "id": "ProdCodeId",
       "value": "",
-      "label": "Trx No",
+      "label": "Product Offering Code",
       "placeholder": "Placeholder"
     },
     {
@@ -15,7 +15,7 @@
       "name": "P.PROD_OFFERING_NAME",
       "id": "ProdNameId",
       "value": "",
-      "label": "Product Name",
+      "label": "Product Offering Name",
       "placeholder": "Placeholder"
     }
   ],
@@ -26,13 +26,13 @@
     {
       "type": "sort",
       "position": "center",
-      "label": "Trx No",
+      "label": "Product Offering Code",
       "name": "TRX_NO"
     },
     {
       "type": "sort",
       "position": "center",
-      "label": "Product name",
+      "label": "Product Offering name",
       "name": "PROD_NAME"
     },
     {

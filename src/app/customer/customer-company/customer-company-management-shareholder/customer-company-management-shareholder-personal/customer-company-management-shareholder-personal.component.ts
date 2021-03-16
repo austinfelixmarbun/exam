@@ -62,7 +62,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     MrGenderCode: ['', [Validators.required]],
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', [Validators.required]],
-    TaxIdNo: [''],
+    TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     MrJobPositionCode: ['',[Validators.required]],
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
     IsSigner: [false],
@@ -115,7 +115,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
           this.ManagementShareholderForm.patchValue({
             MrIdTypeCode: this.tempIdType[0].Key
           });
-          this.ChangeIdType(this.tempIdType[0].Key);
+          this.ChangeIdType();
         }
       }
     );
@@ -240,6 +240,9 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       if(this.tempShareholderCustNo!=null){
         this.custCompanyMgmntShrholderObj.ShareholderCustNo = this.tempShareholderCustNo;
       }
+      if(this.custExistingId != 0){
+        this.custCompanyMgmntShrholderObj.ShareholderId = this.custExistingId;
+      }
       // this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
       this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;
@@ -276,10 +279,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   }
 
   onOptionsSelected(event){  
-    this.ChangeIdType(event.target.value);
+    this.ChangeIdType();
   }
 
-  ChangeIdType(IdType: string) {
+  ChangeIdType() {
+    let IdType: string = this.ManagementShareholderForm.get("MrIdTypeCode").value;
     this.ManagementShareholderForm.controls.IdExpiredDt.patchValue("");
 
     if (IdType == RefMasterConstant.KITAS || IdType == RefMasterConstant.SIM) {
@@ -296,10 +300,19 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.ManagementShareholderForm.controls.IdExpiredDt.enable();
     }
 
+    if(IdType == RefMasterConstant.EKtp){
+      this.ManagementShareholderForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)]);
+    } else {
+      this.ManagementShareholderForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
+    }
+    this.ManagementShareholderForm.get("IdNo").updateValueAndValidity();
+
     this.ManagementShareholderForm.controls.IdExpiredDt.updateValueAndValidity();
   }
 
+  custExistingId: number = 0;
   getLookUpCustomer(event) {
+    this.custExistingId = event.CustId;
     var datePipe = new DatePipe("en-US");
     this.ManagementShareholderForm.patchValue({
       MgmntShrholderName: event.CustName,

@@ -7,7 +7,7 @@
         "id": "custNoId",
         "value": "",
         "label": "Customer No",
-        "placeholder": "Cust No"
+        "placeholder": "Customer No"
       },
       {
         "type": "textbox",
@@ -15,20 +15,20 @@
         "id": "custNameId",
         "value": "",
         "label": "Customer Name",
-        "placeholder": "Cust Name"
+        "placeholder": "Customer Name"
       }
     ],
     "headerList": [
       {
         "type": "sort",
         "position": "center",
-        "label": "Cust No",
+        "label": "Customer No",
         "name": "CUST_NO"
       },
       {
         "type": "sort",
         "position": "left",
-        "label": "Cust Name",
+        "label": "Customer Name",
         "name": "CUST_NAME"
       },
       {

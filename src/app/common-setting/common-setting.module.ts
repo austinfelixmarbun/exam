@@ -65,7 +65,10 @@ import { CoaEditDetailComponent } from './coa/coa-edit-detail/coa-edit-detail.co
 import { CoaSchemePagingComponent } from './coa-scheme/coa-scheme-paging/coa-scheme-paging.component';
 import { CoaSchemeDetailComponent } from './coa-scheme/coa-scheme-detail/coa-scheme-detail.component';
 import { CoaSchemeViewComponent } from './coa-scheme/coa-scheme-view/coa-scheme-view.component';
-
+import { OfficeBankAccountAccDetailComponent } from './office-bank-account/office-bank-account-acc-detail/office-bank-account-acc-detail.component';
+import { OfficeBankAccountDetailComponent } from './office-bank-account/office-bank-account-detail/office-bank-account-detail.component';
+import { OfficeBankAccountPagingComponent } from './office-bank-account/office-bank-account-paging/office-bank-account-paging.component';
+import { UcaddressModule } from '@adins/ucaddress';
 
 @NgModule({
   imports: [
@@ -85,7 +88,8 @@ import { CoaSchemeViewComponent } from './coa-scheme/coa-scheme-view/coa-scheme-
     UcviewgenericModule,
     UcShowErrorsModule,
     UcSubsectionModule,
-    ColorPickerModule
+    ColorPickerModule,
+    UcaddressModule
   ],
   declarations: [
     MasterPagingComponent,
@@ -136,7 +140,10 @@ import { CoaSchemeViewComponent } from './coa-scheme/coa-scheme-view/coa-scheme-
     CoaEditDetailComponent,
     CoaSchemePagingComponent,
     CoaSchemeDetailComponent,
-    CoaSchemeViewComponent
+    CoaSchemeViewComponent,
+    OfficeBankAccountAccDetailComponent,
+    OfficeBankAccountDetailComponent,
+    OfficeBankAccountPagingComponent
   ],
   providers: [
     NGXToastrService

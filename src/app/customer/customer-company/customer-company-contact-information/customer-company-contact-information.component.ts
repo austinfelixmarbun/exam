@@ -232,6 +232,9 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     let IdTypeCode = this.ContactInformationForm.get("MrIdTypeCode").value;
     if (IdTypeCode == this.IdTypeNpwp) {
       this.ContactInformationForm.get("IdNo").setValidators(Validators.required);
+    } 
+    else if (IdTypeCode == CommonConstant.MrIdTypeCodeEKTP) {
+      this.ContactInformationForm.get("IdNo").setValidators([Validators.minLength(16), Validators.maxLength(16)]);
     } else {
       this.ContactInformationForm.get("IdNo").clearValidators();
     }
