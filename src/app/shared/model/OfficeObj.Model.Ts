@@ -49,6 +49,6 @@ export class OfficeObj {
     RowVersion: any;
     ParentOfficeCode: any;
     MrCenterGrpTypeCode: any;
-
+    IsHaveCashier : boolean;
     constructor() { this.RefOfficeId = 0, this.RowVersion = "" }
 }
