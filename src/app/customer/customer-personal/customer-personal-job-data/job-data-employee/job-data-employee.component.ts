@@ -382,6 +382,7 @@ export class JobDataEmployeeComponent implements OnInit {
               });
             
           this.rowVersion = this.returnCustJobDataObj.RowVersion;
+          this.jobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
           this.typePage = "edit";
         }
       });
@@ -486,9 +487,6 @@ export class JobDataEmployeeComponent implements OnInit {
     this.custPersonalJobDataObj.PrevEmploymentDt = this.JobDataEmpForm.controls["PreviEmploymentDate"].value;
   }
 
-  // back(){
-  //   this.outputTab.emit({ stepMode: "previous"});
-  // }
 
   SaveForm() {
     if (this.typePage == "edit") {
@@ -517,14 +515,10 @@ export class JobDataEmployeeComponent implements OnInit {
       this.reqCustPersonalJobDataObj.OthBizAddr = this.otherAddressObj;
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_EMP;
-
+      
       this.http.post(this.editJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          // this.router.navigate(
-          //   ["/Customer/CustomerPersonal/Address"], 
-          //   { queryParams: { "IdCust": this.IdCust }}
-          //   );
           this.outputTab.emit({ stepMode: "next" });
         }
       );
