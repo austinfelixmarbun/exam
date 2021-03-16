@@ -9,6 +9,7 @@ export class UcDropdownListObj {
     requestObj: Object;
     isObject: boolean;
     customObjName: string;
+    isSelectOutput: boolean;
 
     constructor() {
         this.enviromentUrl = "";
@@ -19,5 +20,6 @@ export class UcDropdownListObj {
         this.requestObj = new Object();
         this.isObject = true;
         this.customObjName = CommonConstant.ReturnObj;
+        this.isSelectOutput = false;
     }
 }

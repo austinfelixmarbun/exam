@@ -19,6 +19,7 @@ import { UcaddressModule } from '@adins/ucaddress';
 import { MatCheckboxModule } from '@angular/material';
 import { UcuploadModule } from '@adins/ucupload';
 import { UcapprovalhistModule } from '@adins/ucapprovalhist';
+import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 
 @NgModule({
     exports: [
@@ -38,8 +39,9 @@ import { UcapprovalhistModule } from '@adins/ucapprovalhist';
         UcapprovebyModule,
         MatCheckboxModule,
         UcuploadModule,
-        UcapprovalhistModule
-      //  UcapprovalModule
+        UcapprovalhistModule,
+        UcdropdownlistModule
+        //UcapprovalModule
     ],
     imports: [
         CommonModule,
@@ -61,7 +63,8 @@ import { UcapprovalhistModule } from '@adins/ucapprovalhist';
         UcgridviewModule,
         UcapprovebyModule,
         MatCheckboxModule,
-        UcuploadModule
+        UcuploadModule,
+        UcdropdownlistModule
     ],
     declarations: [
     ]
