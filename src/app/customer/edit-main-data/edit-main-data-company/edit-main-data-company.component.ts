@@ -91,8 +91,6 @@ export class EditMainDataCompanyComponent implements OnInit {
     }
     this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterObjCustModel).subscribe(
       (response) => {
-        console.log("Ini DDL");
-        console.log(response);
         this.tempCustModel = response["ReturnObject"];
         this.CustomerCompanyForm.patchValue({
           CustModel: this.tempCustModel[0].Key
@@ -120,7 +118,6 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.http.post(this.getCustByCustIdUrl, this.custObj).subscribe(
       (response) => {
         this.tempCustObj = response;
-        console.log(response);
         this.CustomerCompanyForm.patchValue({
           CustName: this.tempCustObj.CustName,
           TaxIdNo: this.tempCustObj.TaxIdNo,
@@ -207,8 +204,6 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.custObj.CustAddr.SubZipcode = formValue["UcAddressZipcode"]["value"];
     this.custObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
 
-    console.log("tes");
-    console.log(this.custObj);
     this.http.post(this.editCustUrl, this.custObj).subscribe(
       (response) => {
         this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
