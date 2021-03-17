@@ -65,10 +65,7 @@ export class EditMainDataPersonalComponent implements OnInit {
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
   UcAddressObj: UcAddressObj = new UcAddressObj();
-  IsGuarantor: boolean;
-  IsFamily: boolean;
-  IsShareholder: boolean;
-  IsCustomer: boolean;
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService, private cookieService: CookieService) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = URLConstant.GetCustPersonalbyCustId;
@@ -165,15 +162,11 @@ export class EditMainDataPersonalComponent implements OnInit {
           IsVip: this.tempCustObj.IsVip,
           IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
           VipNotes: this.tempCustObj.VipNotes,
-          // IsGuarantor: this.tempCustObj.IsGuarantor,
-          // IsCustomer: this.tempCustObj.IsCustomer,
-          // IsShareholder: this.tempCustObj.IsShareholder,
-          // IsFamily: this.tempCustObj.IsFamily
         });
-        this.IsGuarantor = this.tempCustObj.IsGuarantor;
-        this.IsCustomer = this.tempCustObj.IsCustomer;
-        this.IsShareholder = this.tempCustObj.IsShareholder;
-        this.IsFamily = this.tempCustObj.IsFamily;
+        this.custObj.IsGuarantor = this.tempCustObj.IsGuarantor;
+        this.custObj.IsCustomer = this.tempCustObj.IsCustomer;
+        this.custObj.IsShareholder = this.tempCustObj.IsShareholder;
+        this.custObj.IsFamily = this.tempCustObj.IsFamily;
         this.onChangeIdType();
         if (this.tempCustObj.VipNotes != null) {
           this.VipNotesRequired = true;
@@ -244,10 +237,6 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custObj.TaxIdNo = this.CustomerPersonalForm.controls["TaxIdNo"].value;
     this.custObj.IsVip = this.CustomerPersonalForm.controls["IsVip"].value;
     this.custObj.IsAffiliateWithMf = this.CustomerPersonalForm.controls["IsAffiliateWithMf"].value; 
-    this.custObj.IsGuarantor = this.IsGuarantor;
-    this.custObj.IsCustomer = this.IsCustomer; 
-    this.custObj.IsFamily = this.IsFamily; 
-    this.custObj.IsShareholder = this.IsShareholder; 
     if(this.custObj.IsVip==true){
       this.custObj.VipNotes = this.CustomerPersonalForm.controls["VipNotes"].value;
     }else{

@@ -45,10 +45,6 @@ export class EditMainDataCompanyComponent implements OnInit {
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
   UcAddressObj: UcAddressObj = new UcAddressObj();
-  IsGuarantor: boolean;
-  IsFamily: boolean;
-  IsShareholder: boolean;
-  IsCustomer: boolean;
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
@@ -127,10 +123,10 @@ export class EditMainDataCompanyComponent implements OnInit {
           IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
           VipNotes :this.tempCustObj.VipNotes,
         });
-        this.IsGuarantor = this.tempCustObj.IsGuarantor;
-        this.IsFamily = this.tempCustObj.IsFamily;
-        this.IsShareholder = this.tempCustObj.IsShareholder;
-        this.IsCustomer = this.tempCustObj.IsCustomer;
+        this.custObj.IsGuarantor = this.tempCustObj.IsGuarantor;
+        this.custObj.IsFamily = this.tempCustObj.IsFamily;
+        this.custObj.IsShareholder = this.tempCustObj.IsShareholder;
+        this.custObj.IsCustomer = this.tempCustObj.IsCustomer;
         if(this.tempCustObj.VipNotes!= null){
           this.VipNotesRequired = true;
         }else{
@@ -182,10 +178,6 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.custCompanyObj.MrCompanyTypeCode = this.CustomerCompanyForm.controls["MrCompanyTypeCode"].value;
     this.custObj.IsVip = this.CustomerCompanyForm.controls["IsVip"].value;
     this.custObj.IsAffiliateWithMf = this.CustomerCompanyForm.controls["IsAffiliateWithMf"].value; 
-    this.custObj.IsGuarantor = this.IsGuarantor;
-    this.custObj.IsCustomer = this.IsCustomer; 
-    this.custObj.IsFamily = this.IsFamily; 
-    this.custObj.IsShareholder = this.IsShareholder; 
     if(this.custObj.IsVip==true){
       this.custObj.VipNotes = this.CustomerCompanyForm.controls["VipNotes"].value;
     }else{
