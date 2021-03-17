@@ -174,7 +174,8 @@ export class EmployeeAddComponent implements OnInit {
             BankAccNo: this.empBankAccObj.BankAccNo,
             BankAccName: this.empBankAccObj.BankAccName
           });
-          
+          this.inputLookupBankObj.jsonSelect = this.refBankObj;
+          this.inputLookupBankObj.idSelect = this.refBankObj.RefBankId;
           this.inputLookupBankObj.nameSelect = this.refBankObj.BankName;
           this.addressObj.Addr = this.refEmpObj.Addr;
           this.addressObj.AreaCode4 = this.refEmpObj.AreaCode4;
