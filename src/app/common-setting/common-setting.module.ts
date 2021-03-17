@@ -69,6 +69,7 @@ import { OfficeBankAccountAccDetailComponent } from './office-bank-account/offic
 import { OfficeBankAccountDetailComponent } from './office-bank-account/office-bank-account-detail/office-bank-account-detail.component';
 import { OfficeBankAccountPagingComponent } from './office-bank-account/office-bank-account-paging/office-bank-account-paging.component';
 import { UcaddressModule } from '@adins/ucaddress';
+import { AdInsModule } from 'app/components/adins-module/adins.module';
 
 @NgModule({
   imports: [
@@ -89,7 +90,8 @@ import { UcaddressModule } from '@adins/ucaddress';
     UcShowErrorsModule,
     UcSubsectionModule,
     ColorPickerModule,
-    UcaddressModule
+    UcaddressModule,
+    AdInsModule
   ],
   declarations: [
     MasterPagingComponent,

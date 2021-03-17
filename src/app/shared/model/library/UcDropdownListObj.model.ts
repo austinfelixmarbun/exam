@@ -3,6 +3,7 @@ import { CommonConstant } from "app/shared/constant/CommonConstant";
 export class UcDropdownListObj {
     enviromentUrl: string;
     apiPath: string;
+    apiUrl: string;
     ddlType: string;
     customKey: string;
     customValue: string;
@@ -14,6 +15,7 @@ export class UcDropdownListObj {
     constructor() {
         this.enviromentUrl = "";
         this.apiPath = "";
+        this.apiUrl = "";
         this.ddlType = ""; // one | all | none
         this.customKey = "Key";
         this.customValue = "Value";

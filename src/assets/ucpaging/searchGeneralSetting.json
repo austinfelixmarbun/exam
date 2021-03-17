@@ -37,7 +37,7 @@
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": true,
-      "isSelectOne": true,
+      "ddlType": "one",
       "url": "",
       "path": "/RefModule/GetListKeyValueByCode",
       "label": "Module Code",

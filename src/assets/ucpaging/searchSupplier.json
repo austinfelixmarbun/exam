@@ -45,7 +45,7 @@
             "value": "",
             "placeholder": "Placeholder",
             "isFromURL": false,
-            "isSelectOne": false,
+            "ddlType": "all",
             "items": [
                 {
                     "key": "1",
