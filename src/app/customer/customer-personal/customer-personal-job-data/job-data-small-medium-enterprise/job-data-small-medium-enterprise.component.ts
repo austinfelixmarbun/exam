@@ -333,6 +333,7 @@ export class JobDataSmeComponent implements OnInit {
                     this.inputOtherAddressObj.inputLookupObj.isRequired = false;
                     this.inputOtherAddressObj.inputLookupObj.nameSelect = this.getOthBizAddr.Zipcode;
                     this.inputOtherAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.getOthBizAddr.Zipcode};
+                    this.inputOtherAddressObj.inputLookupObj.isReadonly = false;
                     this.inputAddressObjForOthBiz.default = this.otherAddrObj;
                     this.inputAddressObjForOthBiz.inputField = this.inputOtherAddressObj;
                 });
@@ -372,6 +373,7 @@ export class JobDataSmeComponent implements OnInit {
                   this.inputPreJobAddressObj.inputLookupObj.isRequired = false;
                   this.inputPreJobAddressObj.inputLookupObj.nameSelect = this.getPreJobAddr.Zipcode;
                   this.inputPreJobAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getPreJobAddr.Zipcode };
+                  this.inputPreJobAddressObj.inputLookupObj.isReadonly = false;
                   this.inputPreviousAddressObj.default = this.preJobAddrObj;
                   this.inputPreviousAddressObj.inputField = this.inputPreJobAddressObj;
 

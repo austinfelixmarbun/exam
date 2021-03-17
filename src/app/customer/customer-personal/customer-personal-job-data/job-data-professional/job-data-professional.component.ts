@@ -257,6 +257,7 @@ export class JobDataProfessionalComponent implements OnInit {
                 this.inputPreJobAddressObj.inputLookupObj.isRequired = false;
                 this.inputPreJobAddressObj.inputLookupObj.nameSelect = this.getPreJobAddr.Zipcode;
                 this.inputPreJobAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getPreJobAddr.Zipcode };
+                this.inputPreJobAddressObj.inputLookupObj.isReadonly = false;
 
                 this.inputPreviousAddressObj.default = this.preJobAddrObj;
                 this.inputPreviousAddressObj.inputField = this.inputPreJobAddressObj;
@@ -299,6 +300,7 @@ console.log("ameng");
                 this.inputOtherAddressObj.inputLookupObj.isRequired = false;
                 this.inputOtherAddressObj.inputLookupObj.nameSelect = this.getOthBizAddr.Zipcode;
                 this.inputOtherAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getOthBizAddr.Zipcode };
+                this.inputOtherAddressObj.inputLookupObj.isReadonly = false;
                 this.inputOthBizAddressObj.default = this.otherAddrObj;
                 this.inputOthBizAddressObj.inputField = this.inputOtherAddressObj;
               });
