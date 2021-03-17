@@ -17,4 +17,9 @@ export class CustObj{
     RowVersion: any;
     CustAddr: CustAddrObj;
     IsCustomer: boolean;
+    IsFamily: boolean;
+    IsGuarantor: boolean;
+    IsShareholder: boolean;
+
+    constructor(){this.CustAddr = new CustAddrObj()}
 }

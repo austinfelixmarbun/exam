@@ -30,7 +30,7 @@ export class EditMainDataCompanyComponent implements OnInit {
   tempCompanyTypeCode: any;
   tempCustCompanyObj: any;
 
-  custObj: CustObj
+  custObj: CustObj = new CustObj();
 
   CustId: number;
   VipNotesRequired : boolean;
@@ -44,14 +44,18 @@ export class EditMainDataCompanyComponent implements OnInit {
   GetListActiveRefMasterWithMappingCodeAllUrl : string;
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
-  UcAddressObj: UcAddressObj;
+  UcAddressObj: UcAddressObj = new UcAddressObj();
+  IsGuarantor: boolean;
+  IsFamily: boolean;
+  IsShareholder: boolean;
+  IsCustomer: boolean;
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.getCustCompanyByCustIdUrl = URLConstant.GetCustCompanyByCustId;
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
     this.editCustUrl = URLConstant.EditCust;
-    this.editCustCompanyUrl = URLConstant.EditCustCompany; 
+    this.editCustCompanyUrl = URLConstant.EditCustCompany;
     this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
@@ -83,10 +87,12 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.inputAddressObj.showAllPhn = false;
 
     var refMasterObjCustModel = {
-      MrCustTypeCode: CommonConstant.CustTypeCompany
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel, MappingCode: CommonConstant.CustTypeCompany
     }
-    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterObjCustModel).subscribe(
       (response) => {
+        console.log("Ini DDL");
+        console.log(response);
         this.tempCustModel = response["ReturnObject"];
         this.CustomerCompanyForm.patchValue({
           CustModel: this.tempCustModel[0].Key
@@ -107,7 +113,6 @@ export class EditMainDataCompanyComponent implements OnInit {
         }
       }
     );
-    this.custObj = new CustObj();
     this.custCompanyObj = new CustCompanyObj();
     this.custObj.CustId = this.CustId;
     this.custCompanyObj.CustId = this.CustId;
@@ -115,6 +120,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.http.post(this.getCustByCustIdUrl, this.custObj).subscribe(
       (response) => {
         this.tempCustObj = response;
+        console.log(response);
         this.CustomerCompanyForm.patchValue({
           CustName: this.tempCustObj.CustName,
           TaxIdNo: this.tempCustObj.TaxIdNo,
@@ -122,8 +128,12 @@ export class EditMainDataCompanyComponent implements OnInit {
           MrCustModelCode: this.tempCustObj.MrCustModelCode, 
           IsVip :this.tempCustObj.IsVip,
           IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
-          VipNotes :this.tempCustObj.VipNotes
+          VipNotes :this.tempCustObj.VipNotes,
         });
+        this.IsGuarantor = this.tempCustObj.IsGuarantor;
+        this.IsFamily = this.tempCustObj.IsFamily;
+        this.IsShareholder = this.tempCustObj.IsShareholder;
+        this.IsCustomer = this.tempCustObj.IsCustomer;
         if(this.tempCustObj.VipNotes!= null){
           this.VipNotesRequired = true;
         }else{
@@ -132,6 +142,8 @@ export class EditMainDataCompanyComponent implements OnInit {
         if(this.tempCustObj.IsVip==false){ 
         this.CustomerCompanyForm.controls.VipNotes.disable();
         }
+        this.custObj.RowVersion = this.tempCustObj.RowVersion;
+        this.custObj.MrCustTypeCode = this.tempCustObj.MrCustTypeCode;
         this.CustomerCompanyForm.controls["TaxIdNo"].disable();
 
         this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.tempCustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
@@ -146,6 +158,8 @@ export class EditMainDataCompanyComponent implements OnInit {
             this.UcAddressObj.City = response.City;
             this.inputAddressObj.default = this.UcAddressObj;
             this.inputAddressObj.inputField = this.inputFieldObj;
+            this.custObj.CustAddr.CustAddrId = response.CustAddrId;
+            this.custObj.CustAddr.RowVersion = response.RowVersion;
           }
         );
       }
@@ -161,9 +175,7 @@ export class EditMainDataCompanyComponent implements OnInit {
   }
 
   SaveValue() {
-    this.custObj = new CustObj();
     this.custCompanyObj = new CustCompanyObj();
-    this.custObj = this.tempCustObj;
     this.custCompanyObj = this.tempCustCompanyObj;
 
     this.custObj.CustName = this.CustomerCompanyForm.controls["CustName"].value;
@@ -173,6 +185,10 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.custCompanyObj.MrCompanyTypeCode = this.CustomerCompanyForm.controls["MrCompanyTypeCode"].value;
     this.custObj.IsVip = this.CustomerCompanyForm.controls["IsVip"].value;
     this.custObj.IsAffiliateWithMf = this.CustomerCompanyForm.controls["IsAffiliateWithMf"].value; 
+    this.custObj.IsGuarantor = this.IsGuarantor;
+    this.custObj.IsCustomer = this.IsCustomer; 
+    this.custObj.IsFamily = this.IsFamily; 
+    this.custObj.IsShareholder = this.IsShareholder; 
     if(this.custObj.IsVip==true){
       this.custObj.VipNotes = this.CustomerCompanyForm.controls["VipNotes"].value;
     }else{
@@ -180,7 +196,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     }
 
     var formValue = this.CustomerCompanyForm.value;
-    this.custObj.CustAddr = new CustAddrObj();
+    this.custObj.CustAddr.CustId = this.CustId;
     this.custObj.CustAddr.Addr = formValue["UcAddress"]["Addr"];
     this.custObj.CustAddr.AreaCode1 = formValue["UcAddress"]["AreaCode1"];
     this.custObj.CustAddr.AreaCode2 = formValue["UcAddress"]["AreaCode2"];
@@ -190,6 +206,9 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.custObj.CustAddr.Zipcode = formValue["UcAddressZipcode"]["value"];
     this.custObj.CustAddr.SubZipcode = formValue["UcAddressZipcode"]["value"];
     this.custObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
+
+    console.log("tes");
+    console.log(this.custObj);
     this.http.post(this.editCustUrl, this.custObj).subscribe(
       (response) => {
         this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
