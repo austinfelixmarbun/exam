@@ -101,7 +101,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "./edit",
+          "path": "PRODUCT_OFFERING_DEACTIVATE_DETAIL",
           "param": [
             {
               "type": "prodOfferingHId",
