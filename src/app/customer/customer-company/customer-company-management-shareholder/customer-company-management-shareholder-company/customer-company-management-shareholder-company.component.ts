@@ -50,7 +50,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     MrCustModelCode: [''],
     MrCompanyTypeCode: ['',[Validators.required]],
     TaxIdNo: ['', [Validators.required]],
-    EstablishmentDt :[''],
+    EstablishmentDt :['', [Validators.required]],
     SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
     MrIndustryTypeCode: [''],
     IsSigner: [false],
@@ -72,7 +72,6 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
 
   ngOnInit() { 
     this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    this.MaxDate = this.UserAccess[CommonConstant.BUSINESS_DT];
     this.MaxDate = this.UserAccess[CommonConstant.BUSINESS_DT];
 
     this.datePipe = new DatePipe("en-US");
