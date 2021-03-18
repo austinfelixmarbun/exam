@@ -1,6 +1,7 @@
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 
 export class UcDropdownListObj {
+
     enviromentUrl: string;
     apiPath: string;
     apiUrl: string;
@@ -16,7 +17,7 @@ export class UcDropdownListObj {
         this.enviromentUrl = "";
         this.apiPath = "";
         this.apiUrl = "";
-        this.ddlType = ""; // one | all | none
+        this.ddlType = UcDropdownListConstant.DDL_TYPE_ONE; // one | all | none | blank
         this.customKey = "Key";
         this.customValue = "Value";
         this.requestObj = new Object();
@@ -24,4 +25,21 @@ export class UcDropdownListObj {
         this.customObjName = CommonConstant.ReturnObj;
         this.isSelectOutput = false;
     }
+}
+
+export class UcDropdownListCallbackObj {
+    selectedValue: string;
+    selectedObj: Object;
+
+    constructor() {
+        this.selectedValue = "";
+        this.selectedObj = new Object();
+    }
+}
+
+export class UcDropdownListConstant {
+    public static DDL_TYPE_ONE = "one";
+    public static DDL_TYPE_ALL = "all";
+    public static DDL_TYPE_NONE = "none";
+    public static DDL_TYPE_BLANK = "blank";
 }
