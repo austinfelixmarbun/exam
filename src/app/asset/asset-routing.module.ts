@@ -133,6 +133,13 @@ const routes: Routes = [
         },
       },
       {
+        path: PathConstant.ASSET_ACC_PAGING,
+        component: AssetAccessoryPagingComponent,
+        data: {
+          title: 'Asset Accessory Paging'
+        },
+      },
+      {
         path: PathConstant.ASSET_ACC_DETAIL,
         component: AssetAccessoryAddEditComponent,
         data: {
