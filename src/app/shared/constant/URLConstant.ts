@@ -184,6 +184,7 @@ export class URLConstant {
     public static DeleteRefZipcode = "/RefZipcode/DeleteRefZipCode";
     public static GetOfficeZipcodeMemberAddPaging = "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
     public static GetRefZipCodeById = environment.FoundationR3Url + "/RefZipcode/GetRefZipcodeById";
+    public static GetZipcodeDataByZipCode = environment.FoundationR3Url + "/RefZipcode/GetZipcodeDataByZipCode";
 
     //OFFICE ZIPCODE MEMBER
     public static GetOfficeZipCodeMemberPaging = environment.FoundationR3Url + "/OfficeZipcodeMember/GetOfficeZipCodeMemberPaging";
