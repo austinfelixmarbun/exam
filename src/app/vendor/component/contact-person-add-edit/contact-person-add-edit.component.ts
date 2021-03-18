@@ -140,8 +140,6 @@ export class ContactPersonAddEditComponent implements OnInit {
   }
 
   getZipcodeData(ev) {
-    console.log("tetststs");
-    console.log(ev);
     this.ContactPersonForm.patchValue({
       AreaCode1: ev.AreaCode1,
       AreaCode2: ev.AreaCode2,
@@ -172,7 +170,6 @@ export class ContactPersonAddEditComponent implements OnInit {
       this.contactPersonObj.Zipcode = this.zipcode;
       this.contactPersonObj.RowVersion = this.result.RowVersion;
       
-      console.log(this.contactPersonObj)
       this.http.post(URLConstant.EditVendorContactPerson, this.contactPersonObj).subscribe(
         (response) => {
           this.HiddenCheck();
