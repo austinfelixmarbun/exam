@@ -156,6 +156,7 @@ export class NavigationConstant {
     public static VENDOR_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.PAGING; //'/Vendor/Paging'
     public static VENDOR_GRP_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRP_ADD; //'/Vendor/Group/Add'
     public static VENDOR_GRP_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRP_VIEW; //'/Vendor/Group/View'
+    public static VENDOR_GRP_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRP_MBR_ADD; //'/Vendor/GroupMbr/Add
     public static VENDOR_HO_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HO_DETAIL; //'/Vendor/HO/Detail'
     public static VENDOR_HO_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HO_REG; //'/Vendor/HO/Registration'
     public static VENDOR_HOLDING_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HOLDING_DETAIL; //'/Vendor/Holding/Detail'
