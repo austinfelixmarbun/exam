@@ -26,7 +26,7 @@
             "placeholder": "Placeholder",
             "datatype": "text",
             "isFromURL": true,
-            "isSelectOne": false,
+            "ddlType": "all",
             "url": "",
             "path": "/RefMaster/GetListKeyValueActiveByCode",
             "label": "Type",

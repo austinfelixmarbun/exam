@@ -12,13 +12,16 @@
         <form class="form form-horizontal" name="enjiForm" [formGroup]="RefMasterForm" #enjiForm="ngForm" novalidate
           (ngSubmit)="enjiForm.form.valid && Save()">
           <div class="form-body">
-            <lib-ucSubsection [id]="'MasterInfoId'" [title]="'Master Information '+ type" [panel]="'MasterInfo'"></lib-ucSubsection>
+            <lib-ucSubsection [id]="'MasterInfoId'" [title]="'Master Information '+ type" [panel]="'MasterInfo'">
+            </lib-ucSubsection>
             <div id="MasterInfo">
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel adins-required-label" for="refMasterTypeCodeModule">Master
                   Type</label>
                 <div class="col-md-9">
-                  <select id="refMasterTypeCodeModule" formControlName="RefMasterTypeCode" class="form-control"
+                  <lib-ucdropdownlist [dropdownListObj]="dropdownListObj" [parentForm]="RefMasterForm"
+                    [enjiForm]="enjiForm" [identifier]="'RefMasterTypeCode'"></lib-ucdropdownlist>
+                  <!-- <select id="refMasterTypeCodeModule" formControlName="RefMasterTypeCode" class="form-control"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefMasterForm.controls.RefMasterTypeCode.invalid }">
                     <option *ngFor="let item of refMasterTypeObj?.ReturnObject" [value]="item.Key">
                       {{item.Value}}
@@ -26,7 +29,7 @@
                   </select>
                   <lib-uc-show-errors [control]="RefMasterForm.controls.RefMasterTypeCode"
                     [submit]="enjiForm.submitted">
-                  </lib-uc-show-errors>
+                  </lib-uc-show-errors> -->
                 </div>
               </div>
               <div class="form-group row">

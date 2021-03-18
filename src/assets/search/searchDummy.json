@@ -1,34 +1,37 @@
 {
     "title": "Dummy",
-    "exportExcel": true, 
+    "exportExcel": true,
     "component": [
         {
-          "type": "dropdown",
-          "datatype": "text",
-          "name": "RefMasterTypeCode",
+            "type": "dropdown",
+            "datatype": "text",
+            "name": "RefMasterTypeCode",
             "id": "RefMasterTypeCode",
-          "value": "",
-          "placeholder": "Placeholder",
-          "isEvent": true,
-          "isFromURL": true,
-          "isSelectOne" : false,
-          "affectedFilter" : ["masterCode", "is_Internal"],
-          "url": "http://r3app-server/setting/RefMaster/GetRefMasterTypeKeyValue",
-          "label": "Ref Master Type",
-          "items": [],
-          "itemsUrl": []
+            "value": "",
+            "placeholder": "Placeholder",
+            "isEvent": true,
+            "isFromURL": true,
+            "ddlType": "all",
+            "affectedFilter": [
+                "masterCode",
+                "is_Internal"
+            ],
+            "url": "http://r3app-server/setting/RefMaster/GetRefMasterTypeKeyValue",
+            "label": "Ref Master Type",
+            "items": [],
+            "itemsUrl": []
         },
-        {   
+        {
             "type": "dropdown",
             "name": "masterCode",
             "id": "masterCode",
-            "label" : "Ref Master",
+            "label": "Ref Master",
             "value": "",
             "url": "http://r3app-server/setting/RefMaster/GetRefMasterDropDown",
             "placeholder": "Placeholder",
             "isEvent": false,
             "isFromURL": true,
-            "isSelectOne" : false,
+            "ddlType": "all",
             "items": [
                 {
                     "key": "1",
@@ -50,6 +53,6 @@
             "restriction": "lte",
             "placeholder": "Placeholder",
             "datatype": "numeric"
-          }
+        }
     ]
 }

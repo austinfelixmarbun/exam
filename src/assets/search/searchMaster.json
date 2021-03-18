@@ -10,7 +10,7 @@
       "placeholder": "Placeholder",
       "datatype": "text",
       "isFromURL": true,
-      "isSelectOne": true,
+      "ddlType": "one",
       "url": "",
       "path": "/RefMasterType/GetListKeyValueActiveByCode",
       "label": "Master Type",
@@ -43,7 +43,7 @@
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
-      "isSelectOne": false,
+      "ddlType": "all",
       "url": "",
       "label": "Active Status",
       "items": [
@@ -66,7 +66,7 @@
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
-      "isSelectOne": false,
+      "ddlType": "all",
       "url": "",
       "label": "System",
       "items": [
@@ -172,8 +172,8 @@
                     "property": "RefMasterId"
                   },
                   {
-                    "type":"mode",
-                    "property":"edit"
+                    "type": "mode",
+                    "property": "edit"
                   }
                 ]
               }

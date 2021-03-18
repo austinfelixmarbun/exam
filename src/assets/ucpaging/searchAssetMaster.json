@@ -10,7 +10,7 @@
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": true,
-      "isSelectOne": false,
+      "ddlType": "all",
       "url": "",
       "path": "/AssetType/GetListKeyValueActiveByCode",
       "label": "Asset Type Name",
@@ -27,7 +27,7 @@
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": true,
-      "isSelectOne": false,
+      "ddlType": "all",
       "url": "",
       "path": "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj",
       "label": "Asset Category Name",
@@ -69,7 +69,7 @@
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
-      "isSelectOne": false,
+      "ddlType": "all",
       "items": [
           {
               "key": "1",
@@ -90,7 +90,7 @@
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
-      "isSelectOne": false,
+      "ddlType": "all",
       "items": [
           {
               "key": "1",

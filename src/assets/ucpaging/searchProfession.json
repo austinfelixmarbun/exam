@@ -19,7 +19,7 @@
         "value": "",
         "placeholder": "Placeholder",
         "isFromURL": true,
-        "isSelectOne": false,
+        "ddlType": "all",
         "url": "",
         "path": "/RefCustModel/GetListKeyValueByCode",
         "label": "Customer Model Name",

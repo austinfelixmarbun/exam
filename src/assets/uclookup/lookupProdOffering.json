@@ -36,10 +36,9 @@
             "name": "ProdName"
         },
         {
-            "type": "sort",
+            "type": "label",
             "position": "center",
-            "label": "Action",
-            "name": "Action"
+            "label": "Action"
         }
     ],
     "bodyList": [
