@@ -60,7 +60,7 @@ import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { VendorPagingComponent } from './component/vendor/vendor-paging/vendor-paging.component';
 import { VendorATPMAddEditComponent } from './vendor-ATPM/vendor-atpm-add-edit/vendor-atpm-add-edit.component';
 import { VendorATPMRegistrationComponent } from './vendor-ATPM/vendor-atpm-registration/vendor-atpm-registration.component';
-import { NgxCurrencyModule } from 'ngx-currency';
+import { CurrencyMaskInputMode, NgxCurrencyModule } from 'ngx-currency';
 import { VendorAtpmSelectComponent } from './vendor-ATPM/vendor-atpm-select/vendor-atpm-select.component';
 import { VendorGradingRequestPagingComponent } from './vendor-grading/vendor-grading-request/vendor-grading-request-paging/vendor-grading-request-paging.component';
 import { VendorGradingRequestDetailComponent } from './vendor-grading/vendor-grading-request/vendor-grading-request-detail/vendor-grading-request-detail.component';
@@ -84,7 +84,8 @@ export const customCurrencyMaskConfig = {
   prefix: "",     
   suffix: "",     
   thousands: ",",     
-  nullable: false
+  nullable: false,
+  inputMode: CurrencyMaskInputMode.FINANCIAL
 };
 
 @NgModule({

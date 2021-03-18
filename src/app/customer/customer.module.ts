@@ -81,7 +81,7 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { CustomerViewCustomerGroupComponent } from './customer-view/customer-view-customer-group/customer-view-customer-group.component';
 import { CustomerViewAddressComponent } from './customer-view/customer-view-address/customer-view-address.component';
 import { MatTabsModule } from '@angular/material';
-import { NgxCurrencyModule } from "ngx-currency";
+import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
 import { UploadNegativeCustomerComponent } from './negative-customer/upload-negative-customer/upload-negative-customer.component';
 import { ReviewUploadNegativeCustomerDetailComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-detail/review-upload-negative-customer-detail.component';
 import { ReviewUploadNegativeCustomerPagingComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-paging/review-upload-negative-customer-paging.component';
@@ -147,7 +147,7 @@ import { CustomerViewPersonalFamilyComponent } from 'app/view/customer-view/cust
 import { CustomerViewPersonalEmergencyContactComponent } from 'app/view/customer-view/customer-view-personal-emergency-contact/customer-view-personal-emergency-contact.component';
 
 export const customCurrencyMaskConfig = {     
-  align: "left",     
+  align: "right",     
   allowNegative: true,     
   allowZero: true,     
   decimal: ".",     
@@ -155,7 +155,8 @@ export const customCurrencyMaskConfig = {
   prefix: "",     
   suffix: "",     
   thousands: ",",     
-  nullable: false 
+  nullable: false,
+  inputMode: CurrencyMaskInputMode.FINANCIAL
 };
 
  @NgModule({
