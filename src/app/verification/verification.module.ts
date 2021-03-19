@@ -30,6 +30,7 @@ import { VerificationQuestionSchemeMemberEditComponent } from './verification-qu
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
+import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { UcaddtotempModule } from '@adins/ucaddtotemp';
     NgbDropdownModule,
     ArchwizardModule,
     UcShowErrorsModule,
-    UcaddtotempModule
+    UcaddtotempModule,
+    UcdropdownlistModule
   ],
   declarations: [
     VerificationComponent,
