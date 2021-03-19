@@ -294,7 +294,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
         IsOwner: this.CustMgmntShareholderData["IsOwner"],
         MrCustTypeCode: RefMasterConstant.Personal
       };
-      this.http.post(URLConstant.AddCustCompanyMgmntShrholderNew, requestShareholderPersonal).toPromise().then(
+      this.http.post(URLConstant.AddCustCompanyMgmntShrholder, requestShareholderPersonal).toPromise().then(
         (response) => {
           this.ResponseSaveData.emit({mode : 'check'});
         }
@@ -429,8 +429,8 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
               );
             }
             else if(this.IsFromCustMgmntShareholder){
-              
-              this.http.post(URLConstant.AddCustCompanyMgmntShrholderNew, this.CustMgmntShareholderData).toPromise().then(
+              this.CustMgmntShareholderData.ShareholderId = this.addCustObj.CustObj.CustId;
+              this.http.post(URLConstant.AddCustCompanyMgmntShrholder, this.CustMgmntShareholderData).toPromise().then(
                 (responseShareholder) => {
                   this.ResponseSaveData.emit({mode : 'check'});
                 }
@@ -515,8 +515,8 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
               );
             }
             else if(this.IsFromCustMgmntShareholder){
-              
-              this.http.post(URLConstant.AddCustCompanyMgmntShrholderNew, this.CustMgmntShareholderData).toPromise().then(
+              this.CustMgmntShareholderData.ShareholderId = this.RequestNegativeCustObj.CustId;
+              this.http.post(URLConstant.AddCustCompanyMgmntShrholder, this.CustMgmntShareholderData).toPromise().then(
                 (responseShareholder) => {
                   // this.ResponseSaveData.emit(responseFamily);
                   this.ResponseSaveData.emit({mode : 'check'});

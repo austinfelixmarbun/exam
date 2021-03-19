@@ -72,7 +72,7 @@ export class CustomerCompanyManagementShareholderComponent implements OnInit {
     this.http.post(URLConstant.GetCustCompanyByCustId, this.custCompanyObj).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
-        this.http.post(URLConstant.GetListCustCompanyMgmntShrholderNewByCustId, this.tempCustCompanyObj).subscribe(
+        this.http.post(URLConstant.GetListCustCompanyMgmntShrholderByCustId, this.tempCustCompanyObj).subscribe(
           (response) => {
             console.log(response);
             this.tempListCompanyManagementShareholder = response[CommonConstant.ReturnObj];

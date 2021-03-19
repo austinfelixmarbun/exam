@@ -56,9 +56,9 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholderNew;
-    this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderIdNew;
-    this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholderNew; 
+    this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholder;
+    this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
+    this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholder; 
     this.getListKeyValueByMrCustTypeCode = URLConstant.GetListKeyValueByMrCustTypeCode;
     this.isExistingCust = false;
   }
