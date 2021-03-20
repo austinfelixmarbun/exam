@@ -87,7 +87,7 @@ export class ProductHOApprovalComponent implements OnInit {
         this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_TAKE_BACK);
       } else {
         ApvReqObj.TaskId = ev.RowObj.TaskId;
-        ApvReqObj.UsernameMemberId = ev.RowObj.MainUsernameMemberId;
+        // ApvReqObj.UsernameMemberId = ev.RowObj.MainUsernameMemberId;
         this.httpClient.post(AdInsConstant.ApvTakeBackTaskUrl, ApvReqObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
