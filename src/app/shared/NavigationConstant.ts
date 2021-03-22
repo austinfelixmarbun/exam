@@ -62,6 +62,8 @@ export class NavigationConstant {
     public static CS_ECONOMIC_SECTOR_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_ECONOMIC_SECTOR_DETAIL; //'/CommonSetting/EconomicSector/Detail'
     public static CS_GEN_SETTING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING; //'/CommonSetting/GeneralSetting'
     public static CS_GEN_SETTING_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING_DETAIL; //'/CommonSetting/GeneralSetting/Detail'
+    public static CS_GEN_SETTING_ADMIN = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING_ADMIN; //'/CommonSetting/GeneralSetting'
+    public static CS_GEN_SETTING_DETAIL_ADMIN = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING_DETAIL_ADMIN; //'/CommonSetting/GeneralSetting/Detail'
     public static CS_HOLIDAY = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY; //'/CommonSetting/Holiday'
     public static CS_HOLIDAY_ADD = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY_ADD; //'/CommonSetting/Holiday/Add'
     public static CS_HOLIDAY_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY_DETAIL; //'/CommonSetting/Holiday/Detail'
