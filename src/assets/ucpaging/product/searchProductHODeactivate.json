@@ -91,7 +91,7 @@
       "action": [
         {
           "type": "edit",
-          "path": "BACK_TO_EDIT",
+          "path": "PRODUCT_HO_DEACTIVATE_DETAIL",
           "param": [
             {
               "type": "prodHId",

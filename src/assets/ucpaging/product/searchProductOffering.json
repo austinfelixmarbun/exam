@@ -40,7 +40,7 @@
       "value": "Product Offering Status",
       "placeholder": "Placeholder",
       "isFromURL": true,
-      "isSelectOne": false,
+      "ddlType": "all",
       "url": "",
       "path": "/RefMaster/GetListKeyValueActiveByCode",
       "label": "Product Offering Status",

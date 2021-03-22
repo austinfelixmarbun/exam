@@ -21,7 +21,7 @@ export class VendorGroupViewComponent implements OnInit {
   MrVendorCategoryCode: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
-  readonly AddLink: string = NavigationConstant.VENDOR_GRP_ADD;
+  readonly AddLink: string = NavigationConstant.VENDOR_GRP_MBR_ADD;
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, ) {
     this.route.queryParams.subscribe(params => {

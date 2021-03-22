@@ -340,6 +340,7 @@ export class JobDataEmployeeComponent implements OnInit {
                 this.inputOtherAddressObj.inputLookupObj.isRequired = false;
                 this.inputOtherAddressObj.inputLookupObj.nameSelect = this.getOthBizAddr.Zipcode;
                 this.inputOtherAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getOthBizAddr.Zipcode };
+                this.inputOtherAddressObj.inputLookupObj.isReadonly = false;
                 this.inputOthBizAddressObj.default = this.otherAddrObj;
                 this.inputOthBizAddressObj.inputField = this.inputOtherAddressObj;
               });
@@ -376,12 +377,14 @@ export class JobDataEmployeeComponent implements OnInit {
                 this.inputPreJobAddressObj.inputLookupObj.isRequired = false;
                 this.inputPreJobAddressObj.inputLookupObj.nameSelect = this.getPreJobAddr.Zipcode;
                 this.inputPreJobAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getPreJobAddr.Zipcode };
+                this.inputPreJobAddressObj.inputLookupObj.isReadonly = false;
 
                 this.inputPreviousAddressObj.inputField = this.inputPreJobAddressObj; 
                 this.inputPreviousAddressObj.default = this.preJobAddrObj; 
               });
             
           this.rowVersion = this.returnCustJobDataObj.RowVersion;
+          this.jobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
           this.typePage = "edit";
         }
       });
@@ -486,9 +489,6 @@ export class JobDataEmployeeComponent implements OnInit {
     this.custPersonalJobDataObj.PrevEmploymentDt = this.JobDataEmpForm.controls["PreviEmploymentDate"].value;
   }
 
-  // back(){
-  //   this.outputTab.emit({ stepMode: "previous"});
-  // }
 
   SaveForm() {
     if (this.typePage == "edit") {
@@ -517,14 +517,10 @@ export class JobDataEmployeeComponent implements OnInit {
       this.reqCustPersonalJobDataObj.OthBizAddr = this.otherAddressObj;
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_EMP;
-
+      
       this.http.post(this.editJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          // this.router.navigate(
-          //   ["/Customer/CustomerPersonal/Address"], 
-          //   { queryParams: { "IdCust": this.IdCust }}
-          //   );
           this.outputTab.emit({ stepMode: "next" });
         }
       );

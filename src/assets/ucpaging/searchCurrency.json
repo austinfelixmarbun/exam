@@ -25,7 +25,7 @@
       "value": "Active Status",
       "placeholder": "Placeholder",
       "isFromURL": false,
-      "isSelectOne": false,
+      "ddlType": "all",
       "url": "https://api.myjson.com/bins/ld6e8",
       "label": "Active Status",
       "items": [

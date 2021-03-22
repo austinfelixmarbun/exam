@@ -1,9 +1,9 @@
 {
-    "module" : "setting",
-    "tableName" : "REF_BANK",
+    "module": "setting",
+    "tableName": "REF_BANK",
     "component": [
         {
-            "section" : "Atas",
+            "section": "Atas",
             "form": [
                 {
                     "type": "textbox",
@@ -12,8 +12,8 @@
                     "value": "",
                     "label": "Bank Code",
                     "placeholder": "Placeholder",
-                    "isMandatory" : "true",
-                    "pattern" : ""
+                    "isMandatory": "true",
+                    "pattern": ""
                 },
                 {
                     "type": "textbox",
@@ -22,8 +22,8 @@
                     "value": "",
                     "label": "Bank Name",
                     "placeholder": "Placeholder",
-                    "isMandatory" : "true",
-                    "pattern" : ""
+                    "isMandatory": "true",
+                    "pattern": ""
                 },
                 {
                     "type": "textbox",
@@ -32,8 +32,8 @@
                     "value": "",
                     "label": "Reg Rpt Code",
                     "placeholder": "Placeholder",
-                    "isMandatory" : "false",
-                    "pattern" : ""
+                    "isMandatory": "false",
+                    "pattern": ""
                 },
                 {
                     "type": "dropdown",
@@ -43,7 +43,7 @@
                     "value": "",
                     "placeholder": "Placeholder",
                     "isFromURL": false,
-                    "isSelectOne": false,
+                    "ddlType": "all",
                     "items": [
                         {
                             "key": "1",
@@ -55,8 +55,8 @@
                         }
                     ],
                     "itemsUrl": [],
-                    "isMandatory" : "false",
-                    "pattern" : ""
+                    "isMandatory": "false",
+                    "pattern": ""
                 }
             ]
         }

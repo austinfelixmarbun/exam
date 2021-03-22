@@ -24,7 +24,7 @@
       "value": "Product Status",
       "placeholder": "Placeholder",
       "isFromURL": true,
-      "isSelectOne": false,
+      "ddlType": "all",
       "url": "",
       "path": "/RefMaster/GetListKeyValueActiveByCode",
       "label": "Product Status",
