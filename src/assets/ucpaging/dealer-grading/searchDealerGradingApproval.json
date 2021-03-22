@@ -9,6 +9,22 @@
         "value": "",
         "label": "Trx No",
         "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "V.VENDOR_CODE",
+        "id": "VendorCode",
+        "value": "",
+        "label": "Supplier Branch Code",
+        "placeholder": "Placeholder"
+      },
+      {
+        "type": "textbox",
+        "name": "V.VENDOR_NAME",
+        "id": "VendorName",
+        "value": "",
+        "label": "Supplier Branch Name",
+        "placeholder": "Placeholder"
       }
     ],
     "querystring": {
@@ -24,8 +40,14 @@
       {
         "type": "sort",
         "position": "center",
-        "label": "Apv No",
-        "name": "APV_NO"
+        "label": "Supplier Branch Code",
+        "name": "V.VENDOR_CODE"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Supplier Branch Name",
+        "name": "V.VENDOR_NAME"
       },
       {
         "type": "sort",
@@ -76,7 +98,12 @@
       {
         "type": "text",
         "position": "center",
-        "property": "APV_NO"
+        "property": "VendorCode"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "VendorName"
       },
       {
         "type": "text",
