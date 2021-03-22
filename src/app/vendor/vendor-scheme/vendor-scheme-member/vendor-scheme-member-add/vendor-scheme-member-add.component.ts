@@ -55,6 +55,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
           arrMemberList.push(response["ListVendorSchmMbr"][index].VendorId)
           }
         }
+        
 
         if (arrMemberList.length != 0) {
           const addCritListVendorId = new CriteriaObj();
