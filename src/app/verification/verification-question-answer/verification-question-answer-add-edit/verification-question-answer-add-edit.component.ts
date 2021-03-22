@@ -54,6 +54,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     this.dropdownListObj.customKey = "RefVerfAnswerTypeId";
     this.dropdownListObj.customValue = "VerfAnswerTypeDescr";
     this.dropdownListObj.ddlType = "blank";
+    this.dropdownListObj.isSelectOutput = true;
     this.GetListActiveRefAnswerType();
 
     var refAnswerObj = {}
@@ -103,6 +104,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     this.http.post(url, {}).subscribe(
       (response) => {
         this.itemVerfQuestionAnswer = response[CommonConstant.ReturnObj];
+        this.dropdownListObj.isReady = true;
         if (this.itemVerfQuestionAnswer.length > 0) {
           let VerfAnswerData = this.itemVerfQuestionAnswer.find(x => x.VerfAnswerTypeCode == "DDL");
           this.QuestionAnswerForm.patchValue({
@@ -112,6 +114,13 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
         }
       }
     );
+  }
+
+  selectedValueHandler(ev){
+    this.QuestionAnswerForm.patchValue({
+      RefVerfAnswerTypeId: ev.selectedValue
+    });
+    this.AnswerTypeChanged(this.QuestionAnswerForm.controls.RefVerfAnswerTypeId.value);
   }
 
   SaveForm() {
