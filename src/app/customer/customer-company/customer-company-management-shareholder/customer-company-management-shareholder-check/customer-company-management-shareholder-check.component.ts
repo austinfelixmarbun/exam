@@ -37,9 +37,8 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   isOwner: boolean = false;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
     this.getCustCompanyIdUrl = URLConstant.GetCustCompanyByCustId;
-    // this.getListCompanyManagementShareholderByCustCompanyIdUrl = URLConstant.GetListCustCompanyMgmntShrholderByCustCompanyId;
-    this.getListCompanyManagementShareholderByCustCompanyIdUrl = URLConstant.GetListCustCompanyMgmntShrholderNewByCustId;
-    this.DeleteCustCompanyMgmntShrholderUrl = URLConstant.DeleteCustCompanyMgmntShrholderNew;
+    this.getListCompanyManagementShareholderByCustCompanyIdUrl = URLConstant.GetListCustCompanyMgmntShrholderByCustId;
+    this.DeleteCustCompanyMgmntShrholderUrl = URLConstant.DeleteCustCompanyMgmntShrholder;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];

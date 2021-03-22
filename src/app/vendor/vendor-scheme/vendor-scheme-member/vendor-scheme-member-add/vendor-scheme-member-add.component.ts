@@ -50,9 +50,12 @@ export class VendorSchemeMemberAddComponent implements OnInit {
     this.http.post(URLConstant.GetListVendorSchmMemberByVendorSchmId, { VendorSchmId: this.VendorSchmId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
-        for (let index = 0; index < response["ListVendorSchmMbr"].length; index++) {
+        if(response["ListVendorSchmMbr"] != null){
+          for (let index = 0; index < response["ListVendorSchmMbr"].length; index++) {
           arrMemberList.push(response["ListVendorSchmMbr"][index].VendorId)
+          }
         }
+        
 
         if (arrMemberList.length != 0) {
           const addCritListVendorId = new CriteriaObj();

@@ -73,9 +73,9 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholderNew;
+    this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholder;
     this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
-    this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholderNew; 
+    this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholder; 
     this.getListKeyValueByMrCustTypeCode = URLConstant.GetListKeyValueByMrCustTypeCode;
     this.isExistingCust = false;
   }
@@ -152,7 +152,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
       this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId  = this.CustCompanyMgmntShrholderId;
       // this.http.post(this.getCustCompanyMgmntShrholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
-      this.http.post(URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderIdNew, this.custCompanyMgmntShrholderObj).subscribe(
+      this.http.post(URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.tempCustCompanyMgmntShrholderObj = response;
           var datePipe = new DatePipe("en-US");
