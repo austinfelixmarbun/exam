@@ -2,12 +2,22 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
-        <app-main-info-view></app-main-info-view>
-        <div class="px-3 text-right">
-          <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" [queryParams]="{VendorId: this.VendorId}" skipLocationChange translate>
-            <i class="fa fa-arrow-left"></i> Back
-          </button>
-        </div>  
+        <div class="px-3">
+          <div class="addEdit">
+            <div class="form-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title" id="horz-layout-colored-controls" translate> Vendor Employee</h4>
+                </div>
+                <div class="col-md-4" style="text-align-last: right">
+                  <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" [queryParams]="{VendorId: this.VendorId}" skipLocationChange translate>
+                  <i class="fa fa-arrow-left"></i> Back
+                  </button>
+                </div>
+              </div>
+            </div>
+          <app-main-info-view></app-main-info-view>
+          </div>
 
         <aw-wizard #wizard navBarLayout="large-empty-symbols" [awNavigationMode] navigateBackward="allow"
         navigateForward="allow" >
@@ -24,6 +34,7 @@
         <app-bank-info [objInput]="objPassing"> </app-bank-info>
       </aw-wizard-step>
         </aw-wizard>
+        </div>
       </div>
     </div>
   </div>
