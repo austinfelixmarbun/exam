@@ -1,18 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
-import { UCSearchModule } from '@adins/ucsearch';
-import { UcgridfooterModule } from '@adins/ucgridfooter';
-import { UcpagingModule } from '@adins/ucpaging';
-import { UcSubsectionModule } from '@adins/uc-subsection';
 import { VerificationComponent } from './verification.component';
 import { VerificationRoutingModule } from './verification-routing.module';
-import { UcviewgenericModule, UcviewgenericComponent } from '@adins/ucviewgeneric';
-import { UclookupgenericModule } from '@adins/uclookupgeneric';
+import { UcviewgenericComponent } from '@adins/ucviewgeneric';
 import { ArchwizardModule } from 'angular-archwizard';
 import { VerificationQuestionAnswerPagingComponent } from './verification-question-answer/verification-question-answer-paging/verification-question-answer-paging.component';
 import { VerificationQuestionAnswerAddEditComponent } from './verification-question-answer/verification-question-answer-add-edit/verification-question-answer-add-edit.component';
@@ -27,33 +21,20 @@ import { VerificationQuestionSchemeAddEditComponent } from './verification-quest
 import { VerificationQuestionSchemeMemberPagingComponent } from './verification-question-scheme-member/verification-question-scheme-member-paging/verification-question-scheme-member-paging.component';
 import { VerificationQuestionSchemeMemberAddComponent } from './verification-question-scheme-member/verification-question-scheme-member-add/verification-question-scheme-member-add.component';
 import { VerificationQuestionSchemeMemberEditComponent } from './verification-question-scheme-member/verification-question-scheme-member-edit/verification-question-scheme-member-edit.component';
-import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { UcaddtotempModule } from '@adins/ucaddtotemp';
-import { UcdropdownlistModule } from '@adins/ucdropdownlist';
+import { AdInsModule } from 'app/components/adins-module/adins.module';
 
 @NgModule({
   imports: [
     VerificationRoutingModule,
     CommonModule,
-    FormsModule,
     HttpModule,
     NgbModule,
     SharingComponentModule,
-    UCSearchModule,
-    UcgridfooterModule,
-    UcpagingModule,
-    UcSubsectionModule,
-    UclookupgenericModule,
-    ReactiveFormsModule,
     TreeViewModule,
-    UcviewgenericModule,
-    UclookupgenericModule,
     NgbDropdownModule,
     ArchwizardModule,
-    UcShowErrorsModule,
-    UcaddtotempModule,
-    UcdropdownlistModule
+    AdInsModule
   ],
   declarations: [
     VerificationComponent,
