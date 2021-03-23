@@ -52,7 +52,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
     this.viewCustFinData.viewInput =   "./assets/ucviewgeneric/viewCustFinData.json";
     this.viewCustFinData.viewEnvironment = environment.FoundationR3Url;
     var custAddrObj = { "CustId": this.CustId };
-    this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
+    this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, { Id: this.CustId }).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.responseResultCustAddr = response[CommonConstant.ReturnObj];
@@ -62,7 +62,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
-    this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
+    this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, { Id: this.CustId }).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.responseResultCustAddrHist = response[CommonConstant.ReturnObj];

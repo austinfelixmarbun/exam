@@ -204,7 +204,7 @@ export class JobDataSmeComponent implements OnInit {
     
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(this.getCustById, this.objCust).subscribe(
+    this.http.post(this.getCustById, {Id : this.IdCust}).subscribe(
       (response) => {
           this.custObj = response;
       });
@@ -262,7 +262,7 @@ export class JobDataSmeComponent implements OnInit {
             if(this.returnCustJobDataObj.JobAddrId != null) {
               this.custJobAddrObj = new CustAddrObj();
               this.custJobAddrObj.CustAddrId = this.returnCustJobDataObj.JobAddrId;
-              this.http.post(this.getCustAddr, this.custJobAddrObj).subscribe(
+              this.http.post(this.getCustAddr, {Id : this.custJobAddrObj.CustAddrId}).subscribe(
                 (response) => {
                     this.getJobAddr = response;
                     this.JobDataSmeForm.patchValue({
@@ -301,7 +301,7 @@ export class JobDataSmeComponent implements OnInit {
             if(this.returnCustJobDataObj.OthBizAddrId != null) {
               this.custOthBizAddrObj = new CustAddrObj();
               this.custOthBizAddrObj.CustAddrId = this.returnCustJobDataObj.OthBizAddrId;
-              this.http.post(this.getCustAddr, this.custOthBizAddrObj).subscribe(
+              this.http.post(this.getCustAddr, {Id : this.custOthBizAddrObj.CustAddrId}).subscribe(
                 (response) => {
                     this.getOthBizAddr = response;
                     this.JobDataSmeForm.patchValue({
@@ -341,7 +341,7 @@ export class JobDataSmeComponent implements OnInit {
             if (this.returnCustJobDataObj.PrevJobAddrId != null) {
               this.preJobAddrObj = new CustAddrObj();
               this.preJobAddrObj.CustAddrId = this.returnCustJobDataObj.PrevJobAddrId;
-              this.http.post(this.getCustAddr, this.preJobAddrObj).subscribe(
+              this.http.post(this.getCustAddr, {Id : this.preJobAddrObj.CustAddrId}).subscribe(
                 (response) => {
                   this.getPreJobAddr = response;
                   this.JobDataSmeForm.patchValue({

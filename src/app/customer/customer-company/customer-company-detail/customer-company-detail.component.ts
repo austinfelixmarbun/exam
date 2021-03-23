@@ -71,7 +71,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
  
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj.CustId = this.IdCust;
-    this.http.post(this.getCustCompanyByCustIdUrl, this.custCompanyObj).subscribe(
+    this.http.post(this.getCustCompanyByCustIdUrl, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
         this.CustomerDetailForm.patchValue({

@@ -81,7 +81,7 @@ export class CustomerContactCheckComponent implements OnInit {
     // GetCustByCustNo
     var custObj = new CustObj;
     custObj.CustNo = ContactPersonCustNo
-    this.http.post(URLConstant.GetCustByCustNo, custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustNo, {TrxNo : ContactPersonCustNo}).subscribe(
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);

@@ -128,7 +128,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custObj = new CustObj()
     this.custObj.CustId = this.IdCust;
 
-    this.http.post(this.GetCustByCustIdUrl, this.custObj).subscribe(
+    this.http.post(this.GetCustByCustIdUrl, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustObj = response;
       });

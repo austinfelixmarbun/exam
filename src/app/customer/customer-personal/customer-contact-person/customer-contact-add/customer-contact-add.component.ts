@@ -412,7 +412,7 @@ export class CustomerContactAddComponent implements OnInit {
     }
     var custAddrFromObj = new CustAddrObj();
     custAddrFromObj.CustAddrId = this.CustomerContactForm.controls["CopyFromContactPerson"].value;
-    this.http.post<CustAddrObj>(URLConstant.GetCustAddr, custAddrFromObj).subscribe(
+    this.http.post<CustAddrObj>(URLConstant.GetCustAddr, {Id : custAddrFromObj.CustAddrId}).subscribe(
       (response) => {
         var copyCustomerAddrFrom = response;
 
@@ -561,7 +561,7 @@ export class CustomerContactAddComponent implements OnInit {
       }
 
     );
-    this.http.post(URLConstant.GetCustByCustId, this.custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.custObj.CustId}).subscribe(
       (response) => {
         this.tempCust = response;
         this.CustomerContactForm.patchValue({

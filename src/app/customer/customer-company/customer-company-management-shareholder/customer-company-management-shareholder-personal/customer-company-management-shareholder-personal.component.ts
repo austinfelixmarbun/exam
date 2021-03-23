@@ -152,7 +152,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
       this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId  = this.CustCompanyMgmntShrholderId;
       // this.http.post(this.getCustCompanyMgmntShrholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
-      this.http.post(URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, this.custCompanyMgmntShrholderObj).subscribe(
+      this.http.post(URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, {Id : this.CustCompanyMgmntShrholderId}).subscribe(
         (response) => {
           this.tempCustCompanyMgmntShrholderObj = response;
           var datePipe = new DatePipe("en-US");
