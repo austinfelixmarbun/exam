@@ -185,7 +185,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
           return response;
         }),
         mergeMap((response) => {
-          let getCust = this.http.post(URLConstant.GetCustByCustId, { CustId: response["FamilyId"] });
+          let getCust = this.http.post(URLConstant.GetCustByCustId, { Id: response["FamilyId"] });
           let getCustPersonal = this.http.post(URLConstant.GetCustPersonalbyCustId, { CustId: response["FamilyId"] });
           let getCustAddr = this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: response["FamilyId"], MrCustAddrTypeCode: CommonConstant.AddrTypeLegal });
           return forkJoin([getCust, getCustPersonal, getCustAddr]);
@@ -332,7 +332,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
     custObj.CustId = custId;
     custPersonalObj.CustId = custId;
-    let getCust = this.http.post(URLConstant.GetCustByCustId, custObj);
+    let getCust = this.http.post(URLConstant.GetCustByCustId, {Id : custObj.CustId});
     let getCustPersonal = this.http.post(URLConstant.GetCustPersonalbyCustId, custObj);
     let getCustAddr = this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: custId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal });
     forkJoin([getCust, getCustPersonal, getCustAddr]).toPromise().then(

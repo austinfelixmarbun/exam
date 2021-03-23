@@ -148,7 +148,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custObj.CustId = this.CustId;
     this.custPersonalObj.CustId = this.CustId;
     var datePipe = new DatePipe("en-US");
-    this.http.post(this.getCustByCustIdUrl, this.custObj).subscribe(
+    this.http.post(this.getCustByCustIdUrl, {Id : this.CustId}).subscribe(
       (response) => {
         this.tempCustObj = response;
         this.CustomerPersonalForm.patchValue({

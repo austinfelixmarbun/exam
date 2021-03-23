@@ -88,7 +88,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
     
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(this.getCustById, this.objCust).subscribe(
+    this.http.post(this.getCustById, {Id : this.IdCust}).subscribe(
       (response) => {
           this.custObj = response;
       });

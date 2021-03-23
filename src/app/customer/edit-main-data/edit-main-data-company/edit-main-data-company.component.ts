@@ -111,7 +111,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.custObj.CustId = this.CustId;
     this.custCompanyObj.CustId = this.CustId;
 
-    this.http.post(this.getCustByCustIdUrl, this.custObj).subscribe(
+    this.http.post(this.getCustByCustIdUrl, {Id : this.CustId}).subscribe(
       (response) => {
         this.tempCustObj = response;
         this.CustomerCompanyForm.patchValue({
@@ -157,7 +157,7 @@ export class EditMainDataCompanyComponent implements OnInit {
         );
       }
     );
-    this.http.post(this.getCustCompanyByCustIdUrl, this.custCompanyObj).subscribe(
+    this.http.post(this.getCustCompanyByCustIdUrl, {Id : this.CustId}).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
         this.CustomerCompanyForm.patchValue({

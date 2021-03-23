@@ -53,7 +53,7 @@ export class NotificationApprovalDetailComponent implements OnInit {
     this.submitUrl = this.settingUrl + URLConstant.EditNotificationH;
     this.notificationHObj = new NotificationHObj();
     this.notificationHObj.NotificationHId = this.NotificationHId;
-    this.http.post(this.getUrl, this.notificationHObj).subscribe(
+    this.http.post(this.getUrl, {Id: this.NotificationHId}).subscribe(
       response => {
         this.resultData = response;
       }

@@ -126,7 +126,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     if (this.pageType == "edit") {
       this.custAddrObj = new CustAddrObj();
       this.custAddrObj.CustAddrId = this.AddrId;
-      this.http.post(this.getCustAddr, this.custAddrObj).subscribe(
+      this.http.post(this.getCustAddr, {Id : this.custAddrObj.CustAddrId}).subscribe(
         (response) => {
           this.getCustomerAddr = response;
           this.CustDataPersonalForm.patchValue({
@@ -188,7 +188,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     }
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.CustDataPersonalForm.controls["CopyAddrFrom"].value;
-    this.http.post(this.getCustAddr, this.custAddrFromObj).subscribe(
+    this.http.post(this.getCustAddr, {Id : this.custAddrFromObj.CustAddrId}).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
         this.CustDataPersonalForm.patchValue({

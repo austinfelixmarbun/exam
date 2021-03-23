@@ -54,7 +54,7 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
     // GetCustByCustNo
     var custObj = new CustObj;
     custObj.CustNo = ShareholderCustNo
-    this.http.post(URLConstant.GetCustByCustNo, custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustNo, {TrxNo : ShareholderCustNo}).subscribe(
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);
@@ -105,10 +105,10 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   getList() {
     this.custCompanyObj = new CustCompanyObj;
     this.custCompanyObj.CustId = this.IdCust;
-    this.http.post(this.getCustCompanyIdUrl, this.custCompanyObj).subscribe(
+    this.http.post(this.getCustCompanyIdUrl, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
-        this.http.post(this.getListCompanyManagementShareholderByCustCompanyIdUrl, this.tempCustCompanyObj).subscribe(
+        this.http.post(this.getListCompanyManagementShareholderByCustCompanyIdUrl, {Id : this.IdCust}).subscribe(
           (response) => {
             this.tempListCompanyManagementShareholder = response["ReturnObject"]; 
             let temp = this.tempListCompanyManagementShareholder.find(element => element.IsOwner == true);

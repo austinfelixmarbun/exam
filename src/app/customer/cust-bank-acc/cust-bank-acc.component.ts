@@ -70,7 +70,7 @@ export class CustBankAccComponent implements OnInit {
   }
 
   GetCustBankAccList() {
-    this.http.post(URLConstant.GetCBAForCustFinDataByCustId, {CustId : this.CustId}).subscribe(
+    this.http.post(URLConstant.GetCBAForCustFinDataByCustId, {Id : this.CustId}).subscribe(
       (response: any) => {
         this.CustBankAccList = response.ListCBAForCustFinData;
       }

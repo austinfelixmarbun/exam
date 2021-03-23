@@ -1,23 +1,19 @@
-import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { FormBuilder, Validators } from '@angular/forms';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
-  selector: 'app-general-setting-add-edit',
-  templateUrl: './general-setting-add-edit.component.html',
-  providers: [NGXToastrService]
+  selector: 'app-general-setting-admin-detail',
+  templateUrl: './general-setting-admin-detail.component.html',
+  styles: []
 })
-export class GeneralSettingAddEditComponent implements OnInit {
-
+export class GeneralSettingAdminDetailComponent implements OnInit {
   gsObj: GeneralSettingObj;
   type: string = 'add';
   generalSettingId: any;
@@ -30,14 +26,15 @@ export class GeneralSettingAddEditComponent implements OnInit {
     GsDescr: ['', Validators.maxLength(4000)]
     });
 
-  readonly CancelLink: string = NavigationConstant.CS_GEN_SETTING;
+  readonly CancelLink: string = NavigationConstant.CS_GEN_SETTING_ADMIN;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private service: NGXToastrService,
     private fb: FormBuilder
-  ) {
+  ) { 
     this.route.queryParams.subscribe(params => {
       if (params['generalSettingId'] != null) {
         this.generalSettingId = params['generalSettingId'];
@@ -45,11 +42,10 @@ export class GeneralSettingAddEditComponent implements OnInit {
     });
   }
 
-
   ngOnInit() {
     this.gsObj = new GeneralSettingObj();
-    this.gsObj.GeneralSettingId = this.generalSettingId
-    this.httpClient.post(URLConstant.GetGeneralSettingById, {Id: this.generalSettingId}).subscribe(
+    this.gsObj.GeneralSettingId = this.generalSettingId;
+    this.httpClient.post(URLConstant.GetGeneralSettingById, this.gsObj).subscribe(
       (response) => {
         this.resultData = response;
         this.GeneralSettingForm.patchValue({
@@ -71,8 +67,9 @@ export class GeneralSettingAddEditComponent implements OnInit {
     this.httpClient.post(URLConstant.EditGeneralSetting, this.gsObj).subscribe(
       response => {
         this.service.successMessage(response["Message"]);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_GEN_SETTING],{});
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_GEN_SETTING_ADMIN],{});
       }
     );
   }
+
 }

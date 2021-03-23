@@ -64,7 +64,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
       this.AssetSchemeInfoForm.controls["AssetSchmCode"].disable();
 
-      this.http.post(URLConstant.GetAssetSchmHById, this.assetSchmHObj).subscribe(
+      this.http.post(URLConstant.GetAssetSchmHById, {Id: this.AssetSchmHId}).subscribe(
         (response: AssetSchemeHObj) => {
           this.resultData = response;
           this.RowVersion = this.resultData.RowVersion;

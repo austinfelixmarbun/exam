@@ -70,7 +70,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
           this.economicSectorObj.RefEconomicSectorId = this.resultData.RefEconomicSectorId;
           return this.economicSectorObj;
         }),
-        mergeMap((economicSectorObj) => this.httpClient.post(URLConstant.GetRefEconomicSectorById, economicSectorObj))
+        mergeMap((economicSectorObj) => this.httpClient.post(URLConstant.GetRefEconomicSectorById, {Code:economicSectorObj.RefEconomicSectorId }))
       ).subscribe(
         (response2) => {
           this.economicSectorObj = response2;

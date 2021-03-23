@@ -89,7 +89,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     if (this.pageType == "edit") {
       var custBankAcc = new CustBankAccObj();
       custBankAcc.CustBankAccId = this.CustBankAccId;
-      this.httpClient.post(URLConstant.GetCustBankAccByCustBankAccIdWithRefBank, custBankAcc).subscribe(
+      this.httpClient.post(URLConstant.GetCustBankAccByCustBankAccIdWithRefBank, {Id : this.CustBankAccId}).subscribe(
         (response: any) => {
           this.inputLookupBank.nameSelect = response.RefBankObj.BankName;
           this.inputLookupBank.jsonSelect = response.RefBankObj;
@@ -113,8 +113,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     }
     else if (this.pageType == "editStmnt") {
       var custBankAcc = new CustBankAccObj();
-      custBankAcc.CustBankAccId = this.CustBankAccId;
-      this.httpClient.post(URLConstant.GetCBAForCustFinDataEditModeByCustBankAccId, custBankAcc).subscribe(
+      this.httpClient.post(URLConstant.GetCBAForCustFinDataEditModeByCustBankAccId, {Id : this.CustBankAccId}).subscribe(
         (response: any) => {          
           this.bankName = response.RefBankObj.BankName;
           this.CustBankAccForm.patchValue({
