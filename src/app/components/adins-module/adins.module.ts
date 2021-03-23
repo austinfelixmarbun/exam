@@ -20,6 +20,7 @@ import { MatCheckboxModule } from '@angular/material';
 import { UcuploadModule } from '@adins/ucupload';
 import { UcapprovalhistModule } from '@adins/ucapprovalhist';
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
+import { UcaddtotempModule } from '@adins/ucaddtotemp';
 
 @NgModule({
     exports: [
@@ -40,7 +41,8 @@ import { UcdropdownlistModule } from '@adins/ucdropdownlist';
         MatCheckboxModule,
         UcuploadModule,
         UcapprovalhistModule,
-        UcdropdownlistModule
+        UcdropdownlistModule,
+        UcaddtotempModule
         //UcapprovalModule
     ],
     imports: [
@@ -64,7 +66,8 @@ import { UcdropdownlistModule } from '@adins/ucdropdownlist';
         UcapprovebyModule,
         MatCheckboxModule,
         UcuploadModule,
-        UcdropdownlistModule
+        UcdropdownlistModule,
+        UcaddtotempModule
     ],
     declarations: [
     ]
