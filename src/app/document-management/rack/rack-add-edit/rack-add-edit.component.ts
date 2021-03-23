@@ -53,7 +53,7 @@ export class RackAddEditComponent implements OnInit {
         this.title = "EDIT RACK";
         this.RackForm.controls.RackCode.disable();
         this.rack.RackCode = this.RackCode;
-        this.http.post<CabinetWithListRackObj>(environment.FoundationR3Url + "/DocManagement/GetCabinetAndRackByRackCode", this.rack).subscribe(
+        this.http.post<CabinetWithListRackObj>(environment.FoundationR3Url + "/DocManagement/GetCabinetAndRackByRackCode", {Code: this.RackCode}).subscribe(
           (response) => {
             this.cabinetWithRackObj = response;
             this.RackForm.controls['RackCode'].patchValue(response.ListRack[0].RackCode);

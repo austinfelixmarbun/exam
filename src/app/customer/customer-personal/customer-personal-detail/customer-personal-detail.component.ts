@@ -97,7 +97,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     var generalSettingObjDefLocalNationality = {
       GsCode: CommonConstant.GSCodeDefLocalNationality
     }
-    this.http.post(this.GetGeneralSettingByCodeUrl, generalSettingObjDefLocalNationality).subscribe(
+    this.http.post(this.GetGeneralSettingByCodeUrl, {Code: CommonConstant.GSCodeDefLocalNationality}).subscribe(
       (response) => {
         this.Country = response;
         this.lookUpObj = new InputLookupObj();
@@ -118,7 +118,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
         var countryCode = {
           CountryCode: this.Country.GsValue
         };
-        this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+        this.http.post(URLConstant.GetRefCountryByCountryCode, {Code: this.Country.GsValue}).subscribe(
           (response) => {
             this.LocalCountry = response;
           });
@@ -155,7 +155,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
                 var countryCode = {
                   CountryCode: this.tempCustPersonalObj.WnaCountryCode
                 };
-                this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+                this.http.post(URLConstant.GetRefCountryByCountryCode, {Code: this.tempCustPersonalObj.WnaCountryCode}).subscribe(
                   (response) => {
                     this.tempCountry = response;
                     this.lookUpObj.nameSelect = this.tempCountry.CountryName;

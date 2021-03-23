@@ -141,7 +141,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
     } else if (this.Mode === "Edit") {
       this.OfficeBankAccObj.OfficeBankAccId = this.OfficeBankAccId;
 
-      this.http.post<OfficeBankAccObj>(URLConstant.GetOfficeBankAccByOfficeBankAccId, this.OfficeBankAccObj).subscribe(
+      this.http.post<OfficeBankAccObj>(URLConstant.GetOfficeBankAccByOfficeBankAccId, {Id: this.OfficeBankAccId}).subscribe(
         (response) => {
           this.OfficeBankAccObj = response;
           this.BankAccType = this.OfficeBankAccObj.BankAccType;
@@ -175,7 +175,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
           );
 
           this.RefCurrObj.RefCurrId = response.RefCurrId;
-          this.http.post<RefCurrObj>(URLConstant.GetRefCurrById, this.RefCurrObj).subscribe(
+          this.http.post<RefCurrObj>(URLConstant.GetRefCurrById, {Id: response.RefCurrId}).subscribe(
             (response) => {
               this.RefCurrObj = response;
               this.CurrId = this.RefCurrObj.RefCurrId;
@@ -190,7 +190,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
           );
 
           this.RefBankObj.RefBankId = response.RefBankId;
-          this.http.post<RefBankObj>(URLConstant.GetRefBankByRefBankIdAsync, this.RefBankObj).subscribe(
+          this.http.post<RefBankObj>(URLConstant.GetRefBankByRefBankIdAsync, {Id: response.RefBankId}).subscribe(
             (response) => {
               this.RefBankObj = response;
               this.BankId = this.RefBankObj.RefBankId;

@@ -41,7 +41,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
   ngOnInit() {
     if (this.pageType == "edit") {
       this.RefAssetDocForm.controls.AssetDocCode.disable();
-      this.http.post(URLConstant.GetRefAssetDocByRefAssetDocId, { RefAssetDocId: this.RefAssetDocId }).subscribe(
+      this.http.post(URLConstant.GetRefAssetDocByRefAssetDocId, {Id: this.RefAssetDocId }).subscribe(
         (response: RefAssetDocObj) => {
           this.result = response;
           this.RefAssetDocForm.patchValue({

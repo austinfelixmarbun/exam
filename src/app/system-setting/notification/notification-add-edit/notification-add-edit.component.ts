@@ -106,7 +106,7 @@ export class NotificationAddEditComponent implements OnInit {
       this.title = "Notification-Edit";
       this.notificationHObj = new NotificationHObj();
       this.notificationHObj.NotificationHId = this.notificationHId;
-      this.http.post(this.getHUrl, this.notificationHObj).subscribe(
+      this.http.post(this.getHUrl, {Id: this.notificationHId}).subscribe(
         response => {
           this.resultDataH = response;
           this.NotificationForm.patchValue({

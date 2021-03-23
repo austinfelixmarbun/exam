@@ -52,7 +52,7 @@ export class OfficeBankAccountAccDetailComponent implements OnInit {
     this.inputFieldObj.inputLookupObj = new InputLookupObj();
 
     this.OfficeBankAccObj.OfficeBankAccId = this.OfficeBankAccId;
-    this.http.post<OfficeBankAccObj>(URLConstant.GetOfficeBankAccByOfficeBankAccId, this.OfficeBankAccObj).subscribe(
+    this.http.post<OfficeBankAccObj>(URLConstant.GetOfficeBankAccByOfficeBankAccId, {Id: this.OfficeBankAccId}).subscribe(
       (response) => {
         this.OfficeBankAccObj = response;
         this.AccCode = this.OfficeBankAccObj.OfficeBankAccCode;

@@ -80,8 +80,10 @@ export class AssetAttributeDetailComponent implements OnInit {
     this.assetAttrObj.AssetAttrId = this.AssetAttrId;
     this.reqGetListObj = new AssetAttrObj();
     this.reqGetListObj.AssetTypeId = this.AssetTypeId;
-    let getListAssetAttr = this.http.post(URLConstant.GetListAssetAttrByAssetTypeId, this.reqGetListObj);
-    let getAssetAttr = this.http.post(URLConstant.GetAssetAttrByAssetAttrId, this.assetAttrObj);
+    let objList = {Id: this.AssetTypeId}
+    let getListAssetAttr = this.http.post(URLConstant.GetListAssetAttrByAssetTypeId, objList);
+    let obj = {Code: this.assetAttrObj.AssetAttrId}
+    let getAssetAttr = this.http.post(URLConstant.GetAssetAttrByAssetAttrId, obj);
     if (this.pageType == "add") {
       getListAssetAttr.subscribe(
         response => {

@@ -131,7 +131,7 @@
                             "conditions": [
                                 {
                                     "property": "IsSystem",
-                                    "value": "0",
+                                    "value": "1",
                                     "restriction": "NEQ"
                                 }
                             ],
