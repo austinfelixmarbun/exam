@@ -44,7 +44,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.RefEconomicSectorForm.controls["EconomicSectorCode"].disable();
       this.refEconomicSectorObj = new RefEconomicSectorObj();
       this.refEconomicSectorObj.RefEconomicSectorId = this.RefEconomicSectorId;
-      this.http.post(URLConstant.GetRefEconomicSectorById, this.refEconomicSectorObj).subscribe(
+      this.http.post(URLConstant.GetRefEconomicSectorById, {Id: this.RefEconomicSectorId}).subscribe(
         response => {
           this.resultData = response;
           this.RefEconomicSectorForm.patchValue({

@@ -68,7 +68,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
         }
       }
     );
-    this.http.post(URLConstant.GetAssetTypeById, { AssetTypeId: this.AssetTypeId }).subscribe(
+    this.http.post(URLConstant.GetAssetTypeById, {Id: this.AssetTypeId }).subscribe(
       (response) => {
         this.assetTypeName = response['AssetTypeName'];
       }
@@ -92,10 +92,10 @@ export class AssetDocumentAddEditComponent implements OnInit {
     if (this.pageType == "edit") {
       this.getRefAssetDocUrl = URLConstant.GetRefAssetDocByRefAssetDocId;
 
-      this.http.post(URLConstant.GetAssetDocListByAssetDocListId, { AssetDocListId: this.AssetDocListId }).subscribe(
+      this.http.post(URLConstant.GetAssetDocListByAssetDocListId, { Id: this.AssetDocListId }).subscribe(
         (response: AssetDocListObj) => {
           this.result = response;
-          this.http.post(this.getRefAssetDocUrl, { RefAssetDocId: this.result.RefAssetDocId }).subscribe(
+          this.http.post(this.getRefAssetDocUrl, {Id: this.result.RefAssetDocId }).subscribe(
             (response: RefAssetDocObj) => {
               this.temp = response;
               this.assetDocName = this.temp.AssetDocName;

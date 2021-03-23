@@ -67,7 +67,7 @@ export class AddAssetSchemeComponent implements OnInit {
 
     var arr = [0];
     var temp;
-    this.http.post(URLConstant.GetListAssetSchmDByAssetSchmHId, { "AssetSchmHId": this.AssetSchmHId, "RowVersion": "" }).subscribe(
+    this.http.post(URLConstant.GetListAssetSchmDByAssetSchmHId, { Id: this.AssetSchmHId}).subscribe(
       response => {
         temp = response[CommonConstant.ReturnObj];
 
@@ -75,7 +75,7 @@ export class AddAssetSchemeComponent implements OnInit {
           arr.push(temp[i]['AssetMasterId']);
         }
 
-        this.http.post(URLConstant.GetAssetSchmHById, { AssetSchmHId: this.AssetSchmHId, "RowVersion": "" }).subscribe(
+        this.http.post(URLConstant.GetAssetSchmHById, { Id: this.AssetSchmHId}).subscribe(
           (response: AssetSchemeHObj) => {
             this.responseResultData = response;
             this.AssetTypeId = this.responseResultData.AssetTypeId;
