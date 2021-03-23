@@ -82,7 +82,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
         if (this.tempCustCompanyObj.RefIndustryTypeId != null) {
           this.refIndustryTypeObj = new RefIndustryTypeObj();
           this.refIndustryTypeObj.RefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
-          this.http.post(this.getRefIndustryTypeByIndustryTypeIdUrl, this.refIndustryTypeObj).subscribe(
+          this.http.post(this.getRefIndustryTypeByIndustryTypeIdUrl, {Id: this.tempCustCompanyObj.RefIndustryTypeId}).subscribe(
             (response) => {
               this.tempRefIndustryObj = response; 
               this.lookUpObj.nameSelect = this.tempRefIndustryObj.IndustryTypeName; 

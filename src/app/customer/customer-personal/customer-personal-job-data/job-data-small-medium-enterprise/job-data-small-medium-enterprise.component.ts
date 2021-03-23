@@ -236,7 +236,7 @@ export class JobDataSmeComponent implements OnInit {
             {
               this.refProfessionObj = new RefProfessionObj();
             this.refProfessionObj.RefProfessionId = this.returnCustJobDataObj.RefProfessionId;
-            this.http.post(this.getRefProfession, this.refProfessionObj).subscribe(
+            this.http.post(this.getRefProfession, {Id : this.returnCustJobDataObj.RefProfessionId}).subscribe(
               (response) => {
                   this.returnRefProfessionObj = response;
                   this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
@@ -249,7 +249,7 @@ export class JobDataSmeComponent implements OnInit {
             {
               this.refIndustryTypeObj = new RefIndustryTypeObj();
               this.refIndustryTypeObj.RefIndustryTypeId = this.returnCustJobDataObj.RefIndustryTypeId;
-              this.http.post(this.getRefIndustryType, this.refIndustryTypeObj).subscribe(
+              this.http.post(this.getRefIndustryType, {Id: this.returnCustJobDataObj.RefIndustryTypeId}).subscribe(
                 (response) => {
                     this.returnIndustryTypeObj = response;
 

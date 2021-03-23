@@ -64,7 +64,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.RefProfessionForm.controls["ProfessionCode"].disable();
       this.refProfessionObj = new RefProfessionObj();
       this.refProfessionObj.RefProfessionId = this.refProfessionId;
-      this.http.post(this.getUrl, this.refProfessionObj).subscribe(
+      this.http.post(this.getUrl, {Id : this.refProfessionId}).subscribe(
         response => {
           this.resultData = response;
           this.RefProfessionForm.patchValue({

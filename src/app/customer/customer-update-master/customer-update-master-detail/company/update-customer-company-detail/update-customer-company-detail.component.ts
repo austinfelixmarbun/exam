@@ -67,8 +67,8 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
         return response;
       }),
       mergeMap((response) => {
-        let getMasterIndustry = this.http.post(URLConstant.GetRefIndustryTypeById, { RefIndustryTypeId: response["MasterCustCompany"]["RefIndustryTypeId"] });
-        let getAppIndustry = this.http.post(URLConstant.GetRefIndustryTypeById, { RefIndustryTypeId: response["AppCustCompany"]["RefIndustryTypeId"] });
+        let getMasterIndustry = this.http.post(URLConstant.GetRefIndustryTypeById, { Id: response["MasterCustCompany"]["RefIndustryTypeId"] });
+        let getAppIndustry = this.http.post(URLConstant.GetRefIndustryTypeById, { Id: response["AppCustCompany"]["RefIndustryTypeId"] });
         return forkJoin([getMasterIndustry, getAppIndustry]);
       })
     ).toPromise().then(

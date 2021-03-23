@@ -45,7 +45,7 @@ export class PaymentAllocDetailComponent implements OnInit {
     if (this.mode === "edit") {
       this.PaymentAllocForm.controls['PaymentAllocCode'].disable();
       this.RefPaymentAllocObj.RefPaymentAllocId = this.RefPaymentAllocId;
-      this.http.post<RefPaymentAllocObj>(URLConstant.GetRefPaymentAllocByID, this.RefPaymentAllocObj).subscribe(
+      this.http.post<RefPaymentAllocObj>(URLConstant.GetRefPaymentAllocByID, {Id : this.RefPaymentAllocId}).subscribe(
         (response) => {
           this.RefPaymentAllocObj = response;
           this.PaymentAllocForm.patchValue({

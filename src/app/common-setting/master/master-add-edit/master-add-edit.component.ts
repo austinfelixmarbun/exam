@@ -71,7 +71,7 @@ export class MasterAddEditComponent implements OnInit {
     if (this.type == 'edit') {
       this.refMasterObj.RefMasterId = this.RefMasterId;
       var getRefMasterUrl = this.settingUrl + URLConstant.GetRefMasterByRefMasterId;
-      this.httpClient.post(getRefMasterUrl, this.refMasterObj).subscribe(
+      this.httpClient.post(getRefMasterUrl, {Id: this.RefMasterId}).subscribe(
         (response) => {
           this.resultData = response;
           this.RefMasterForm.patchValue({

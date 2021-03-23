@@ -50,7 +50,7 @@ export class RefJobTitleAddComponent implements OnInit {
     if (this.pageType == "edit") {
       this.rjtObj = new RefJobTitleObj();
       this.rjtObj.RefJobTitleId = this.refJobTitleId;
-      this.http.post(this.apiUrl, this.rjtObj).subscribe(
+      this.http.post(this.apiUrl, {Id: this.refJobTitleId}).subscribe(
         response => {
           this.resultData = response;
           this.refJobTitleId = this.resultData.RefJobTitleId;

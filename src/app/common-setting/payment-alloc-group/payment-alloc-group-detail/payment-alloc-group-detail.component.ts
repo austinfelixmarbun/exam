@@ -69,7 +69,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
 
     if (this.mode === 'edit') {
       this.PaymentAllocGrpObj.RefPaymentAllocGrpId = +this.RefPaymentAllocGrpId
-      this.http.post(URLConstant.GetRefPaymentAllocGrpByRefPaymentAllocGrpIdForUpdate, this.PaymentAllocGrpObj).subscribe(
+      this.http.post(URLConstant.GetRefPaymentAllocGrpByRefPaymentAllocGrpIdForUpdate, {Id : +this.RefPaymentAllocGrpId}).subscribe(
         (response) => {
           this.PaymentAllocGrpForm.patchValue({
             MrPayAllocGrpCode: response['MrPayAllocGrpCode'],
@@ -77,8 +77,8 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
             IsActive: response['IsActive']
           });
 
-          var reqPayAllocObj = { RefPaymentAllocId: response['RefPaymentAllocId'] }
-          this.http.post(environment.FoundationR3Url + '/RefPaymentAlloc/GetRefPaymentAllocById', reqPayAllocObj).subscribe(
+          
+          this.http.post(environment.FoundationR3Url + '/RefPaymentAlloc/GetRefPaymentAllocById', {Id : response['RefPaymentAllocId'] }).subscribe(
             (response) => {
               this.inputLookUpPaymentAllocObj.idSelect = response["RefPaymentAllocId"]
               this.inputLookUpPaymentAllocObj.nameSelect = response["PaymentAllocCode"]

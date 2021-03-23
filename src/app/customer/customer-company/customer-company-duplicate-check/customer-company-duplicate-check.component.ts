@@ -128,7 +128,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       MasterCode: this.MrCompanyTypeCode,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObjMrCompanyTypeCode).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, {Code: this.MrCompanyTypeCode}).subscribe(
       (response) => {
         this.tempMrCompanyTypeCode = response;
       }

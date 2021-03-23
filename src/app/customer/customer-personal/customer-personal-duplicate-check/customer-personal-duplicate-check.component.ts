@@ -192,7 +192,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       MasterCode: this.Gender,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObjGender).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, {Code: this.Gender}).subscribe(
       (response) => {
         this.tempGender = response;
       }
@@ -202,7 +202,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       MasterCode: this.MrIdTypeCode,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObjMrIdTypeCode).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, {Code: this.MrIdTypeCode}).subscribe(
       (response) => {
         this.tempMrIdTypeCode = response;
       }

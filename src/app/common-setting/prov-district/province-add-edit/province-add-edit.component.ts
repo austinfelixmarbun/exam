@@ -52,7 +52,7 @@ export class ProvinceAddEditComponent implements OnInit {
       this.ProvinceForm.controls["ProvDistrictCode"].disable();
       this.refProvDistrictObj = new RefProvDistrictObj();
       this.refProvDistrictObj.RefProvDistrictId = this.refProvDistrictId;
-      this.http.post(this.getUrl, this.refProvDistrictObj).subscribe(
+      this.http.post(this.getUrl, {Id : this.refProvDistrictId}).subscribe(
         response => {
           this.resultData = response;
           this.ProvinceForm.patchValue({

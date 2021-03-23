@@ -89,7 +89,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
           var JobTitle = new RefJobTitleObj();
           JobTitle.RefJobTitleId = this.result["RefJobTitleId"];
 
-          this.http.post(URLConstant.GetRefJobTitleById, JobTitle).subscribe(
+          this.http.post(URLConstant.GetRefJobTitleById, {Id: this.result["RefJobTitleId"]}).subscribe(
             (response) => {
               this.inputPagingObjJobTitle.nameSelect = response["JobTitleName"];
             }
