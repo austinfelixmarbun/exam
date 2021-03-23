@@ -130,8 +130,8 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
         return response[0];
       }),
       mergeMap((response) => {
-        let getAppProfession = this.http.post(URLConstant.GetRefProfessionByProfessionCode, { ProfessionCode: response["AppCustEmergency"]["Profession"] });
-        let getMasterProfession = this.http.post(URLConstant.GetRefProfessionByProfessionCode, { ProfessionCode: response["MasterCustEmergency"]["Profession"] });
+        let getAppProfession = this.http.post(URLConstant.GetRefProfessionByProfessionCode, { Code: response["AppCustEmergency"]["Profession"] });
+        let getMasterProfession = this.http.post(URLConstant.GetRefProfessionByProfessionCode, { Code: response["MasterCustEmergency"]["Profession"] });
         return forkJoin([getMasterProfession, getAppProfession]);
       })
     ).toPromise().then(
