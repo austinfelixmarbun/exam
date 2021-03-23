@@ -87,7 +87,7 @@ export class AssetTypeAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: 'MAXASSETTYPELVL' }).subscribe(
+    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: 'MAXASSETTYPELVL' }).subscribe(
       response => {
         this.ItemMaxHierarchyLevelNumber = this.ItemMaxHierarchyLevelNumber.slice(0, parseInt(response['GsValue']));
         this.AssetTypeForm.patchValue({
@@ -99,7 +99,7 @@ export class AssetTypeAddEditComponent implements OnInit {
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.assetTypeId;
           this.AssetTypeForm.controls["AssetTypeCode"].disable();
-          this.http.post(URLConstant.GetAssetTypeById, this.assetTypeObj).subscribe(
+          this.http.post(URLConstant.GetAssetTypeById, {Id: this.assetTypeId}).subscribe(
             (response: AssetTypeObj) => {
               this.resultData = response;
               this.RowVersion = this.resultData.RowVersion;

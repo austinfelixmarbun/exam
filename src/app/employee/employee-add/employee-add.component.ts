@@ -97,7 +97,7 @@ export class EmployeeAddComponent implements OnInit {
 
     this.generalSettingObj = new GeneralSettingObj();
     this.generalSettingObj.GsCode = CommonConstant.GsCodePasswordRegex;
-    httpClient.post(URLConstant.GetGeneralSettingByCode, this.generalSettingObj).subscribe(
+    httpClient.post(URLConstant.GetGeneralSettingByCode, {Code: CommonConstant.GsCodePasswordRegex}).subscribe(
       (response) => {
         this.resultData = response;
         this.passwordPattern = this.resultData.GsValue;

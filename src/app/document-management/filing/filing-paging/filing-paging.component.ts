@@ -42,7 +42,7 @@ export class FilingPagingComponent implements OnInit {
       }
     );
 
-    this.http.post<CabinetWithListRackObj>(environment.FoundationR3Url + "/DocManagement/GetCabinetAndListRackByCabinetCode", this.Cabinet).subscribe(
+    this.http.post<CabinetWithListRackObj>(environment.FoundationR3Url + "/DocManagement/GetCabinetAndListRackByCabinetCode", {Code: this.Cabinet.CabinetCode}).subscribe(
       (response) => {
         this.Cabinet = response;
       },
