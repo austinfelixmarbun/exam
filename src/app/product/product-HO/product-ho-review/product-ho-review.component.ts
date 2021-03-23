@@ -77,10 +77,8 @@ export class ProductHoReviewComponent implements OnInit {
     this.InputObj.PathUrlCreateJumpRFA = URLConstant.CreateJumpRFA;
     this.InputObj.CategoryCode = CommonConstant.CAT_CODE_PRD_HO_APV;
     this.InputObj.SchemeCode = CommonConstant.SCHM_CODE_APV_HO_ACT_SCHM;
-    let ProductObj = {
-      ProdId: this.ProdId
-    }
-    this.http.post(URLConstant.GetProductById, ProductObj).subscribe(
+
+    this.http.post(URLConstant.GetProductById, {Id : this.ProdId}).subscribe(
       (response) => {
         this.InputObj.TrxNo = response["ProdCode"];
         this.IsReady = true;

@@ -134,7 +134,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
       });
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj.CustId = this.IdCust;
-    this.http.post<CustPersonalObj>(this.GetCustPersonalbyCustIdUrl, this.custPersonalObj).subscribe(
+    this.http.post<CustPersonalObj>(this.GetCustPersonalbyCustIdUrl, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustPersonalObj = response;
         var refMasterObjMrNationalityCode = {
@@ -262,7 +262,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
   }
  async SaveValue() {
 
-    await this.http.post<CustPersonalObj>(this.GetCustPersonalbyCustIdUrl, this.custPersonalObj).toPromise().then(
+    await this.http.post<CustPersonalObj>(this.GetCustPersonalbyCustIdUrl, {Id : this.custPersonalObj.CustId}).toPromise().then(
       (response) => {
         this.tempCustPersonalObj = response;
         this.custPersonalObj = new CustPersonalObj();

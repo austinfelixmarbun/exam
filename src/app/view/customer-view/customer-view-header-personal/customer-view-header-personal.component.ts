@@ -93,7 +93,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
 
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustPersonalbyCustId, this.custPersonalObj).subscribe(
+    this.http.post(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustPersonalObj = response;
         var refMasterObjMrGenderCode = {

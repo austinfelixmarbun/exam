@@ -74,8 +74,7 @@ export class CustomerPersonalPageComponent implements OnInit {
   }
  
   async ngOnInit() {
-    var custObj = { CustId: this.IdCust };
-    await this.http.post(URLConstant.GetCustPersonalbyCustId, custObj).toPromise().then(
+    await this.http.post(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).toPromise().then(
       (response: any) => {
         this.CustPersonalId = response['CustPersonalId'];
       }

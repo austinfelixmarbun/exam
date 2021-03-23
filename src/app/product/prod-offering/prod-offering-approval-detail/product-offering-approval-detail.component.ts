@@ -86,10 +86,7 @@ export class ProductOfferingApprovalDetailComponent implements OnInit {
     this.InputApvObj.PathUrlGetHistory = URLConstant.GetTaskHistory;
 
 
-    var data = {
-      ProdOfferingId: this.prodOfferingHId
-    }
-    this.http.post(URLConstant.GetProdOfferingByProdOfferingId, data).subscribe(
+    this.http.post(URLConstant.GetProdOfferingByProdOfferingId, {Id : this.prodOfferingHId}).subscribe(
       (response) => {
         this.InputApvObj.TrxNo = response["ProdOfferingCode"];
         this.IsReady = true;

@@ -310,7 +310,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     if (this.custId > 0) {
       this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
       this.custPersonalContactPersonObj.CustId = this.custId;
-      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustId, this.custPersonalContactPersonObj).subscribe(
+      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustId, {Id : this.custId}).subscribe(
         (response) => {
           var datePipe = new DatePipe("en-US");
           this.tempCustPersonalContactPerson = response;
@@ -538,7 +538,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.custPersonalObj = new CustPersonalObj();
     this.custObj.CustId = this.tempCustId;
     this.custPersonalObj.CustId = this.tempCustId;
-    this.http.post(URLConstant.GetCustPersonalbyCustId, this.custObj).subscribe(
+    this.http.post(URLConstant.GetCustPersonalbyCustId, {Id : this.tempCustId}).subscribe(
       (response) => {
         this.tempCustPersonal = response;
         this.CustomerContactForm.patchValue({

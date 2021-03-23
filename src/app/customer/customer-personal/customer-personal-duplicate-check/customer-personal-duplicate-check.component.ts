@@ -355,7 +355,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
   EditCustPersonal(item) {
     var CustObj = { CustNo: item.CustNo, CustName: this.CustName, IdNo: item.IdNo };
     // this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustObj).subscribe(
-    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustObj).pipe(
+    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, {TrxNo : item.CustNo}).pipe(
       map((response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.CustObj = response['CustObj'];
