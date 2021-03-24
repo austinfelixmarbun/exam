@@ -158,14 +158,13 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.setDropdown();
       this.setLookup();
     }
-    var reqListVendor = { "VendorId": this.VendorId };
-    this.http.post(URLConstant.GetListVendorAttrContentByVendorId, reqListVendor).toPromise().then(
+    
+    this.http.post(URLConstant.GetListVendorAttrContentByVendorId, {Id : this.VendorId}).toPromise().then(
       (response) => {
         this.ListVendorAttrContent = response[CommonConstant.ReturnObj]
         if(this.ListVendorAttrContent != null){
-          if (this.ListVendorAttrContent.length < 1) {
-            var reqObj = { VendorCategoryCode: CommonConstant.SUPPLIER_BRANCH };
-            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, reqObj).subscribe(
+          if (this.ListVendorAttrContent.length < 1) {            
+            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, {Code : CommonConstant.SUPPLIER_BRANCH}).subscribe(
               async (response: any) => {
                 var parentFormGroup = new Object();
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
@@ -217,10 +216,8 @@ export class VendorBranchAddEditComponent implements OnInit {
               }
             );
           }
-          else {
-  
-            var reqObj = { VendorCategoryCode: CommonConstant.SUPPLIER_BRANCH };
-            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, reqObj).subscribe(
+          else {  
+            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, {Code : CommonConstant.SUPPLIER_BRANCH}).subscribe(
               async (response: any) => {
                 var parentFormGroup = new Object();
                 let tempLookup = {};
@@ -320,7 +317,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     );
   }
   getData() {
-    this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { VendorId: this.VendorId }).subscribe(
+    this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).subscribe(
       (response) => {
         this.result = response;
         this.setDropdown();

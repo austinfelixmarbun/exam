@@ -4,16 +4,18 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
-  navbarColor: 'lightgray',
-  LosURL: 'http://r3web-server.ad-ins.com/LOSR3/',
-  WebSocketURL: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
-  FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
-  DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
-  //FoundationR3Url: 'https://localhost:5000',
+  production: true,
+  navbarColor: 'transparent',
+  LosURL: 'http://r3impl-appsvr.ad-ins.com/ROS_BE',
+  FoundationR3Url: 'http://r3impl-appsvr.ad-ins.com/FOUNDATION_OPL',
+  ApprovalURL: 'http://r3impl-appsvr.ad-ins.com/APPROVAL_OPL_BE_R3',
+  FoundationR3Web: 'http://r3impl-websvr.ad-ins.com/Foundation',
+  losR3Web: 'http://r3impl-websvr.ad-ins.com/ROS_FE',
+  WorkflowR3Url: 'http://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL',
+  WebSocketURL: 'http://r3impl-appsvr.ad-ins.com/FOUNDATION_R3',
+  DashboardURL: 'http://r3impl-appsvr.ad-ins.com/Dashboard',
   Module:"FOU",
-  ApprovalURL : 'http://r3app-server.ad-ins.com/APPROVAL',
-  FoundationR3Web:'http://r3web-server.ad-ins.com/Foundation',
   ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
-  ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
-};
+  ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 k
+  DMSUrl : "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
+};  

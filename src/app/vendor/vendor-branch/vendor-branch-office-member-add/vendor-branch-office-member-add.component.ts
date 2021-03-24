@@ -48,7 +48,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
   }
 
   GetListVendorOfficeMbrByVendorId() {
-    this.http.post(URLConstant.GetListVendorOfficeMbrByVendorId, { VendorId: this.VendorId }).subscribe(
+    this.http.post(URLConstant.GetListVendorOfficeMbrByVendorId, { Id: this.VendorId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
         for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {

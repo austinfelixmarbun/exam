@@ -72,7 +72,7 @@ export class VendorGroupComponent implements OnInit {
       this.vendorGrpObj = new VendorGroupObj();
       this.vendorGrpObj.VendorGrpId = this.VendorGrpId;
 
-      this.httpClient.post(URLConstant.GetVendorGrpByVendorGrpId, this.vendorGrpObj).subscribe(
+      this.httpClient.post(URLConstant.GetVendorGrpByVendorGrpId, {Id : this.VendorGrpId}).subscribe(
         (response) => {
           this.resultData = response;
           this.MrVendorCategoryCode = this.resultData.MrVendorCategoryCode;

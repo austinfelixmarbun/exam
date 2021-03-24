@@ -72,7 +72,7 @@ export class VendorGroupmemberComponent implements OnInit {
   }
 
   GetListVendorGrpMbrByVendorGrpId() {
-    this.http.post(URLConstant.GetListVendorGrpMbrByVendorGrpId, { VendorGrpId: this.VendorGrpId }).subscribe(
+    this.http.post(URLConstant.GetListVendorGrpMbrByVendorGrpId, { Id: this.VendorGrpId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
         if(response[CommonConstant.ReturnObj] != null){
