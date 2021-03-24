@@ -85,7 +85,7 @@ export class ContactPersonAddEditComponent implements OnInit {
     if (this.mode == "edit") {
       var contactPerson = new VendorContactPersonObj();
       contactPerson.VendorContactPersonId = this.VendorContactPersonId;
-      await this.http.post(URLConstant.GetVendorContactPersonById, contactPerson).toPromise().then(
+      await this.http.post(URLConstant.GetVendorContactPersonById, {Id : this.VendorContactPersonId}).toPromise().then(
         (response) => {
           this.result = response;
           this.ContactPersonForm.patchValue({

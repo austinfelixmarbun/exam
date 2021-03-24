@@ -23,12 +23,9 @@ export class MainHoInfoComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    var obj={
-      VendorId: this.VendorId
-    }
+  ngOnInit() {   
 
-    this.http.post(URLConstant.GetVendorByVendorId, obj).subscribe(
+    this.http.post(URLConstant.GetVendorByVendorId, {Id : this.VendorId}).subscribe(
       (response) => {
         this.MrVendorTypeCode = response["MrVendorTypeCode"];
       }

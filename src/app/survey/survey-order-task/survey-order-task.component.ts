@@ -64,11 +64,8 @@ export class SurveyOrderTaskComponent implements OnInit {
     }
     this.http.post(URLConstant.GetSrvyOrderBySrvyOrderId, {Id: this.SrvyOrderId}).subscribe(
       response => {
-        this.SrvyOrderObj = response;
-        var VendorObj = {
-          VendorId: this.SrvyOrderObj.VendorId
-        };
-        this.http.post(URLConstant.GetVendorByVendorId, VendorObj).subscribe(
+        this.SrvyOrderObj = response;        
+        this.http.post(URLConstant.GetVendorByVendorId, {Id : this.SrvyOrderObj.VendorId}).subscribe(
           response => {
             this.VendorObj = response;
             this.SurveyTaskForm.patchValue({

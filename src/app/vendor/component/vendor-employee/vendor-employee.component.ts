@@ -157,10 +157,8 @@ export class VendorEmployeeComponent implements OnInit {
       }
     );
 
-    var vendorObj = {
-      VendorId: this.objInput.VendorId
-    }
-    this.http.post(URLConstant.GetVendorByVendorId, vendorObj).subscribe(
+   
+    this.http.post(URLConstant.GetVendorByVendorId, {Id : this.objInput.VendorId}).subscribe(
       (response) => {
         this.result = response;
         this.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
@@ -241,7 +239,7 @@ export class VendorEmployeeComponent implements OnInit {
     var vendorEmpObj = new VendorEmpObj();
     vendorEmpObj.VendorId = null;
     vendorEmpObj.VendorEmpId = this.objInput.VendorEmpId;
-    this.http.post(URLConstant.GetVendorEmpAndVendorTaxAddrByVendorEmpId, vendorEmpObj).subscribe(
+    this.http.post(URLConstant.GetVendorEmpAndVendorTaxAddrByVendorEmpId, {Id : this.objInput.VendorEmpId}).subscribe(
       (response) => {
         this.resultVendorEmpAndAddr = response;
         this.setDropdown();

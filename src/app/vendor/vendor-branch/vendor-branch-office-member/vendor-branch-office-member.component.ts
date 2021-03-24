@@ -44,7 +44,7 @@ export class VendorBranchOfficeMemberComponent implements OnInit {
     critObj.value = this.VendorId;
     this.inputPagingObj.addCritInput.push(critObj);
 
-    this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { VendorId: this.VendorId }).subscribe(
+    this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).subscribe(
       (response) => {
         this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"];
       }

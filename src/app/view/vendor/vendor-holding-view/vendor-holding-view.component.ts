@@ -65,10 +65,8 @@ export class VendorHoldingViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    var vendorObj = {
-      VendorId: this.VendorId
-    }
-    this.http.post(URLConstant.GetVendorByVendorId, vendorObj).subscribe(
+    
+    this.http.post(URLConstant.GetVendorByVendorId, {Id : this.VendorId}).subscribe(
       response => {
         this.MrVendorTypeObj = response;
         this.MrVendorTypeCode = this.MrVendorTypeObj.MrVendorTypeCode;
@@ -102,7 +100,7 @@ export class VendorHoldingViewComponent implements OnInit {
     this.GroupListObj = new VendorGroupObj();
     this.GroupListObj.VendorId = this.VendorId;
 
-    this.http.post(URLConstant.GetListVendorGrpByVendorId, this.GroupListObj).subscribe(
+    this.http.post(URLConstant.GetListVendorGrpByVendorId, {Id : this.VendorId}).subscribe(
       response => {
         this.VendorGrp = response[CommonConstant.ReturnObj]
 
@@ -111,7 +109,7 @@ export class VendorHoldingViewComponent implements OnInit {
     this.HoListObj = new VendorObj();
     this.HoListObj.VendorId = this.VendorId;
 
-    this.http.post(URLConstant.GetListHoByVendorId, this.HoListObj).subscribe(
+    this.http.post(URLConstant.GetListHoByVendorId, {Id : this.VendorId}).subscribe(
       response => {
         this.Vendor = response[CommonConstant.ReturnObj]
 
@@ -147,11 +145,9 @@ export class VendorHoldingViewComponent implements OnInit {
   }
 
   GetListVendorContactPersonByVendorId() {
-    var obj = {
-      VendorId: this.VendorId
-    }
+    
     var getListUrl = URLConstant.GetListVendorContactPersonByVendorId;
-    this.http.post(getListUrl, obj).subscribe(
+    this.http.post(getListUrl, {Id : this.VendorId}).subscribe(
       (response) => {
         this.vendorContactPerson = response[CommonConstant.ReturnObj];
       }

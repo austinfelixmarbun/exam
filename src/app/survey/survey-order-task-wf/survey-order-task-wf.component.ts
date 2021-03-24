@@ -77,10 +77,8 @@ export class SurveyOrderTaskWfComponent implements OnInit {
         this.arrValue.push(this.SrvyOrderId);
         this.viewGenericObj.whereValue = this.arrValue;
         this.isDataAlreadyLoaded = true;
-        var VendorObj = {
-          VendorId: this.SrvyOrderObj.VendorId
-        };
-        this.http.post(URLConstant.GetVendorByVendorId, VendorObj).subscribe(
+        
+        this.http.post(URLConstant.GetVendorByVendorId, {Id : this.SrvyOrderObj.VendorId}).subscribe(
           response => {
             this.VendorObj = response;
             this.SurveyTaskForm.patchValue({

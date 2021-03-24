@@ -155,7 +155,7 @@ export class BankInfoComponent implements OnInit {
   async editBank(id, content) {
     this.mode = "edit";
     this.VendorBankAccId = id;
-    await this.vendorService.GetVendorBankAccByVendorBankAccId({VendorBankAccId: this.VendorBankAccId}).toPromise().then(response => {
+    await this.vendorService.GetVendorBankAccByVendorBankAccId({Id: this.VendorBankAccId}).toPromise().then(response => {
       this.objEdit = response;
       this.BankRegisForm.patchValue({
         AccNumber: response["BankAccountNo"],
@@ -202,7 +202,7 @@ export class BankInfoComponent implements OnInit {
   getListData() {
     if (this.objInput.Type == "Vendor") {
       if (this.objInput.VendorId != undefined && this.objInput.VendorId != null) {
-        this.vendorService.GetListVendorBankAccByVendorId({VendorId: this.objInput.VendorId, VendorEmpId: null}).subscribe(
+        this.vendorService.GetListVendorBankAccByVendorId({Id: this.objInput.VendorId}).subscribe(
           response => {
             this.ListData = response[CommonConstant.ReturnObj];
           }

@@ -78,10 +78,8 @@ export class VendorBranchViewComponent implements OnInit {
     });
   }
   ngOnInit() {
-    var vendorObj = {
-      VendorId: this.VendorId
-    }
-    this.http.post(URLConstant.GetVendorByVendorId, vendorObj).subscribe(
+    
+    this.http.post(URLConstant.GetVendorByVendorId, {Id : this.VendorId}).subscribe(
       response => {
         this.MrVendorTypeObj = response;
         this.MrVendorTypeCode = this.MrVendorTypeObj.MrVendorTypeCode;
@@ -134,27 +132,27 @@ export class VendorBranchViewComponent implements OnInit {
     this.viewVendorBranchAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchAddr.json";
     this.viewVendorBranchAddrObj.viewEnvironment = environment.FoundationR3Url;
 
-    this.http.post(URLConstant.GetListVendorBankAccByVendorId, { VendorId: this.VendorId }).subscribe(
+    this.http.post(URLConstant.GetListVendorBankAccByVendorId, { Id: this.VendorId }).subscribe(
       response => {
         this.VendorBankAcc = response[CommonConstant.ReturnObj]
 
       }
     )
 
-    this.http.post(URLConstant.GetListVendorGrpByVendorId, { VendorId: this.VendorId }).subscribe(
+    this.http.post(URLConstant.GetListVendorGrpByVendorId, { Id: this.VendorId }).subscribe(
       response => {
         this.VendorGrp = response[CommonConstant.ReturnObj]
 
       }
     )
 
-    this.http.post(URLConstant.GetListVendorEmpByVendorId, { VendorId: this.VendorId }).subscribe(
+    this.http.post(URLConstant.GetListVendorEmpByVendorId, { Id: this.VendorId }).subscribe(
       response => {
         this.VendorEmp = response[CommonConstant.ReturnObj]
       }
     )
 
-    this.http.post(URLConstant.GetListVendorOfficeMbrByVendorId, { VendorId: this.VendorId }).subscribe(
+    this.http.post(URLConstant.GetListVendorOfficeMbrByVendorId, { Id: this.VendorId }).subscribe(
       response => {
         this.VendorOfficeMbr = response[CommonConstant.ReturnObj]
       }
