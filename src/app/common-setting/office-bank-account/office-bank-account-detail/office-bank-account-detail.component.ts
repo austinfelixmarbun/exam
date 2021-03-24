@@ -27,6 +27,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
   CurrId: number;
   BankAccPurpose: string;
 
+  readonly CancelLink: string = NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING;
   public OfficeNameList: {
     Key: string,
     Value: string

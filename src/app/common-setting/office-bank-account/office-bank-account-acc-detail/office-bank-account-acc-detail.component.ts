@@ -10,6 +10,7 @@ import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { PathConstant } from 'app/shared/PathConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-office-bank-account-acc-detail',
@@ -23,6 +24,8 @@ export class OfficeBankAccountAccDetailComponent implements OnInit {
   inputAddressObj: InputAddressObj;
   UcAddressObj: UcAddressObj;
   inputFieldObj: InputFieldObj;
+
+  readonly CancelLink: string = NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING;
 
   AccDetailForm = this.fb.group({
     ContactPersonJobTitle: ['', [Validators.required, Validators.maxLength(50)]],
