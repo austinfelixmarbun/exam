@@ -72,7 +72,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
     if (this.pageType == "edit") {
       this.relmObj = new RefEmpLeaveMngmntObj();
       this.relmObj.RefEmpLeaveMngmntId = this.refEmpLeaveMngmntId;
-      this.http.post(this.apiUrl, this.relmObj).subscribe(
+      this.http.post(this.apiUrl, {Id : this.refEmpLeaveMngmntId}).subscribe(
         response => {
           this.resultData = response;
           this.refEmpLeaveMngmntId = this.resultData.RefEmpLeaveMngmntId;
@@ -85,7 +85,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
           });
           this.refEmp = new RefEmpObj();
           this.refEmp.RefEmpId = this.resultData.RefEmpId;
-          this.http.post(this.getRefEmpUrl, this.refEmp).subscribe(
+          this.http.post(this.getRefEmpUrl, {Id : this.resultData.RefEmpId}).subscribe(
             (response) => {
               this.resultEmpData = response;
               this.empName = this.resultEmpData.EmpName;

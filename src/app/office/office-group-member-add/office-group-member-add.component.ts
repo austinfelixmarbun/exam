@@ -45,7 +45,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   }
 
   GetListCenterGrpMemberByRefOfficeId() {
-    this.http.post(URLConstant.GetListCenterGrpMemberByRefOfficeId, { CenterGrpId: this.CenterGrpId, RefOfficeId: this.RefOfficeId }).subscribe(
+    this.http.post(URLConstant.GetListCenterGrpMemberByRefOfficeId, { Id: this.RefOfficeId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
         for (let index = 0; index < response["ListCenterGrpOfficeMbr"].length; index++) {

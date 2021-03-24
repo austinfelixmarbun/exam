@@ -40,15 +40,14 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
   })
 
   ngOnInit() {
-    var verfGroupObj = { VerfQuestionGrpHId: this.VerfQuestionGrpHId }
-    this.http.post(URLConstant.GetQuestionGrpHForUpdateById, verfGroupObj).subscribe(
+    this.http.post(URLConstant.GetQuestionGrpHForUpdateById, {Id : this.VerfQuestionGrpHId}).subscribe(
       (response) => {
         this.verfQuestionGroup = response[CommonConstant.ReturnObj];
           this.VerfQuestionGrpCode = this.verfQuestionGroup.VerfQuestionGrpCode,
           this.VerfQuestionGrpName = this.verfQuestionGroup.VerfQuestionGrpName
       }
     );
-    this.http.post(URLConstant.GetVerfQuestionGrpDByGrpHId, verfGroupObj).subscribe(
+    this.http.post(URLConstant.GetVerfQuestionGrpDByGrpHId, {Id : this.VerfQuestionGrpHId}).subscribe(
       (response) => {
         this.listVerfQuestionGrpD = response[CommonConstant.ReturnObj];
       }

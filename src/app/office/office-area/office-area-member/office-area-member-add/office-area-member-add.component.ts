@@ -41,7 +41,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   }
 
   GetListOfficeAreaMbrByRefOfficeAreaId(){
-    this.http.post(URLConstant.GetListRefOfficeByRefOfficeAreaId, { RefOfficeAreaId: this.RefOfficeAreaId }).subscribe(
+    this.http.post(URLConstant.GetListRefOfficeByRefOfficeAreaId, { Id: this.RefOfficeAreaId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
         for (let index = 0; index < response["RefOfficeObjs"].length; index++) {

@@ -59,7 +59,7 @@ export class UserChangePasswordComponent implements OnInit {
         this.refEmpObj = new RefEmpObj();
         getEmpUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
         // this.refEmpObj.refEmpId = +this.refUserObj.refEmpId;
-        this.httpClient.post(getEmpUrl, this.refEmpObj).subscribe(response => {
+        this.httpClient.post(getEmpUrl, {Id : this.refEmpObj.RefEmpId}).subscribe(response => {
           this.refEmpObj = response["returnObject"];
         });
       }
