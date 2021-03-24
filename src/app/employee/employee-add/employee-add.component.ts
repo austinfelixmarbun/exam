@@ -138,7 +138,7 @@ export class EmployeeAddComponent implements OnInit {
       var empObj = new RefEmpObj();
       empObj.RefEmpId = this.RefEmpId;
 
-      this.http.post(URLConstant.GetEmpForUpdateById, empObj).subscribe(
+      this.http.post(URLConstant.GetEmpForUpdateById, {Id : this.RefEmpId}).subscribe(
         (response) => {
           this.refEmpObj = response['RefEmpObj'];
           this.refUserObj = response['RefUserObj'];
