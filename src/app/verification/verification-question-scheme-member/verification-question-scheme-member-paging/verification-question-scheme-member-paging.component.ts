@@ -34,8 +34,7 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.verfSchemeObj = { VerfSchemeHId: this.VerfSchemeHId }
-    this.http.post(URLConstant.GetVerfSchemeHById, this.verfSchemeObj).subscribe(
+    this.http.post(URLConstant.GetVerfSchemeHById, {Id : this.VerfSchemeHId}).subscribe(
       (response) => {
         this.verfQuestionScheme = response;
         this.VerfSchemeCode = this.verfQuestionScheme.VerfSchemeCode;
@@ -46,7 +45,7 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
   }
 
   GetListVerfSchmD() {
-    this.http.post(URLConstant.GetVerfSchemeDataByVerfSchemeHId, this.verfSchemeObj).subscribe(
+    this.http.post(URLConstant.GetVerfSchemeDataByVerfSchemeHId, {Id : this.VerfSchemeHId}).subscribe(
       (response) => {
         this.listQuestionGroupD = response[CommonConstant.ReturnObj];
       }

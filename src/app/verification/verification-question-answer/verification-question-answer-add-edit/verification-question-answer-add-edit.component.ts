@@ -59,13 +59,12 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
 
     var refAnswerObj = {}
     if (this.mode == "edit") {
-      var verfAnswerObj = { VerfQuestionAnswerId: this.VerfQuestionAnswerId }
-      this.http.post(URLConstant.GetVerfQuestionAnswerForUpdateById, verfAnswerObj).subscribe(
+      this.http.post(URLConstant.GetVerfQuestionAnswerForUpdateById, {Id : this.VerfQuestionAnswerId}).subscribe(
         (response) => {
           this.verfQuestionAnswer = response[CommonConstant.ReturnObj];
 
           refAnswerObj = { RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId }
-          this.http.post(URLConstant.GetRefVerfAnswerTypeById, refAnswerObj).subscribe(
+          this.http.post(URLConstant.GetRefVerfAnswerTypeById, {Id : this.verfQuestionAnswer.RefVerfAnswerTypeId}).subscribe(
             (respond) => {
               this.answerTypeCode = respond["VerfAnswerTypeCode"];
             }

@@ -139,14 +139,13 @@ export class VendorHoAddEditComponent implements OnInit {
       this.setLookup();
       this.checkType();
     }
-    var reqListVendor = { "VendorId": this.VendorId };
-    this.http.post(URLConstant.GetListVendorAttrContentByVendorId, reqListVendor).toPromise().then(
+    
+    this.http.post(URLConstant.GetListVendorAttrContentByVendorId, {Id : this.VendorId}).toPromise().then(
       (response) => {
         this.ListVendorAttrContent = response[CommonConstant.ReturnObj]
         if(this.ListVendorAttrContent != null){
-          if (this.ListVendorAttrContent.length < 1) {
-            var reqObj = { VendorCategoryCode: this.MrVendorCategoryCode };
-            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, reqObj).subscribe(
+          if (this.ListVendorAttrContent.length < 1) {            
+            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, {Code : this.MrVendorCategoryCode}).subscribe(
               async (response: any) => {
                 var parentFormGroup = new Object();
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
@@ -194,9 +193,8 @@ export class VendorHoAddEditComponent implements OnInit {
               }
             );
           }
-          else {
-            var reqVendorObj = { VendorCategoryCode: CommonConstant.SUPPLIER_HO };
-            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, reqVendorObj).subscribe(
+          else {            
+            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, {Code : CommonConstant.SUPPLIER_HO}).subscribe(
               async (response: any) => {
                 var parentFormGroup = new Object();
                 let tempLookup = {};

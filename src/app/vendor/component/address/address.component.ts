@@ -60,10 +60,8 @@ export class AddressComponent implements OnInit {
       this.vendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeLegal;
     }
 
-    var vendorObj = {
-      VendorId: this.objInput.VendorId
-    }
-    this.http.post(URLConstant.GetVendorByVendorId, vendorObj).subscribe(
+    
+    this.http.post(URLConstant.GetVendorByVendorId, {Id : this.objInput.VendorId}).subscribe(
       (response) => {
         this.result = response;
         this.MrVendorClass = this.result.MrVendorClass;

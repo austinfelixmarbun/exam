@@ -62,13 +62,10 @@ export class SurveyOrderTaskComponent implements OnInit {
     var SrvyObj = {
       SrvyOrderId: this.SrvyOrderId
     }
-    this.http.post(URLConstant.GetSrvyOrderBySrvyOrderId, SrvyObj).subscribe(
+    this.http.post(URLConstant.GetSrvyOrderBySrvyOrderId, {Id: this.SrvyOrderId}).subscribe(
       response => {
-        this.SrvyOrderObj = response;
-        var VendorObj = {
-          VendorId: this.SrvyOrderObj.VendorId
-        };
-        this.http.post(URLConstant.GetVendorByVendorId, VendorObj).subscribe(
+        this.SrvyOrderObj = response;        
+        this.http.post(URLConstant.GetVendorByVendorId, {Id : this.SrvyOrderObj.VendorId}).subscribe(
           response => {
             this.VendorObj = response;
             this.SurveyTaskForm.patchValue({
@@ -153,10 +150,7 @@ export class SurveyOrderTaskComponent implements OnInit {
       this.modal.close();
     });
 
-    var TaskObj = {
-      SrvyTaskId: ev
-    }
-    this.http.post<SrvyTaskObj>(URLConstant.GetSrvyTaskBySrvyTaskId, TaskObj).subscribe(
+    this.http.post<SrvyTaskObj>(URLConstant.GetSrvyTaskBySrvyTaskId, {Id : ev}).subscribe(
       response => {
         this.SrvyTaskObj = response;
         this.onChange(this.SrvyTaskObj.MrSrvySubjCode);
@@ -261,11 +255,8 @@ export class SurveyOrderTaskComponent implements OnInit {
   }
 
   generateSurveyTaskList() {
-    var SrvyTaskObj = {
-      SrvyOrderId: this.SrvyOrderId,
-      RowVersion: ""
-    }
-    this.http.post(URLConstant.GetListSrvyTaskBySrvyOrderId, SrvyTaskObj).subscribe(
+    
+    this.http.post(URLConstant.GetListSrvyTaskBySrvyOrderId, {Id : this.SrvyOrderId}).subscribe(
       response => {
         this.SurveyTaskList = response;
       }

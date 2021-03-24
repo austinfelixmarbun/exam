@@ -22,10 +22,8 @@ export class MainInfoViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    var vendorObj = {
-      VendorId: this.VendorId
-    }
-    this.http.post(URLConstant.GetVendorByVendorId, vendorObj).subscribe(
+    
+    this.http.post(URLConstant.GetVendorByVendorId, {Id : this.VendorId}).subscribe(
       (response) => {
         this.MrVendorClass = response["MrVendorClass"];
         this.MrVendorCategoryCode = response["MrVendorCategoryCode"]

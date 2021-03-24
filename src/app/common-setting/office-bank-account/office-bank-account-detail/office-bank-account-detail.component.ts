@@ -249,6 +249,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
     );  
 
     if (this.Mode == "Add") {
+      this.RefOfficeObj.OfficeCode = this.OfficeCode;
       this.http.post<RefOfficeObj>(URLConstant.GetRefOfficeByOfficeCode, {Code : this.OfficeCode}).subscribe(
         (response) => {
           this.OfficeBankAccObj.RefOfficeId = response.RefOfficeId;

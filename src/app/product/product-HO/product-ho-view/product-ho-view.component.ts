@@ -68,7 +68,7 @@ export class ProductHOViewComponent implements OnInit {
     //** Product Version **//
     this.ProdVersionObj = new ProdHVersionObj
     this.ProdVersionObj.ProdHId = this.prodHId;
-    this.http.post(this.ProdVerUrl, this.ProdVersionObj).subscribe(
+    this.http.post(this.ProdVerUrl, {Id : this.prodHId}).subscribe(
       response => {
         this.ProdVersion = response[CommonConstant.ReturnObj];
       }
