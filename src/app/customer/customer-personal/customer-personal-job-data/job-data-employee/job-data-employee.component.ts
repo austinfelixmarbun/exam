@@ -610,7 +610,7 @@ export class JobDataEmployeeComponent implements OnInit {
   getCoy(event: any) {
     this.JobDataEmpForm.patchValue({
       MrWellknownCoyCode: event.MasterCode,
-      CoyName: event.Descr
+      IndustryName: event.Descr
     });
   }
 }

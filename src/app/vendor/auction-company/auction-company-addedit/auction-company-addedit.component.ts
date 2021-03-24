@@ -107,7 +107,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
   getData(){
     console.log('testing');
     this.title = "Auction Company - Edit";
-    this.vendorService.GetAuctionCompanyByVendorIdForEdit({ VendorId: this.VendorId }).subscribe(
+    this.vendorService.GetAuctionCompanyByVendorIdForEdit( this.VendorId ).subscribe(
       (response) => {
         this.result = response;
         this.setDropdown();

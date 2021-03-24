@@ -77,8 +77,8 @@
               <lib-uc-show-errors [control]="JobDataEmpForm.controls.IndustryName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
             </div>
             <div class="col-md-4" *ngIf="IsWellknownCoy">
-              <lib-uclookupgeneric [enjiForm]="enjiForm" [lookupInput]="InputLookupCompanyObj"
-                [parentForm]="JobDataForm" [identifier]="'lookupCompanyData'"
+              <lib-uclookupgeneric [enjiForm]="enjiForm" [lookupInput]="companyLookupObj"
+                [parentForm]="JobDataEmpForm" [identifier]="'CompanyLookupObj'"
                 (lookup)="getCoy($event)" #LookupCompany>
               </lib-uclookupgeneric>
             </div>
@@ -162,11 +162,11 @@
           </div>
         </div>
 
-        <!-- <lib-ucSubsection [id]="'prejobAddrId'" [title]="'Previous Job Address'" [panel]="'prejobAddr'">
+        <lib-ucSubsection [id]="'prejobAddrId'" [title]="'Previous Job Address'" [panel]="'prejobAddr'">
         </lib-ucSubsection>
         <div id="prejobAddr">
           <lib-ucaddress #UcAddrGrp [addressObj]="inputPreviousAddressObj" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [UCAddrForm]="JobDataEmpForm"></lib-ucaddress> 
-          </!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Previous Job Address'" [UCAddrForm]="JobDataEmpForm" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [default]="preJobAddrObj" [inputField]="inputPreJobAddressObj" [showOwnership]="true"></lib-ucaddress> --/>
+          <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Previous Job Address'" [UCAddrForm]="JobDataEmpForm" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [default]="preJobAddrObj" [inputField]="inputPreJobAddressObj" [showOwnership]="true"></lib-ucaddress> -->
           <div class="form-group row">
               <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
               <div class="col-md-4">
@@ -175,7 +175,7 @@
               <lib-uc-show-errors [control]="JobDataEmpForm.controls.NotesPreJob" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
             </div>
-        </div> -->
+        </div>
 
         <!-- <lib-ucSubsection [id]="'jobAddrAttrId'" [title]="'Job Address Attribute'" [panel]="'jobAddrAttribute'">
         </lib-ucSubsection>
@@ -251,12 +251,12 @@
             </div>
         </div>
 
-        <!-- <lib-ucSubsection [id]="'otherAddrId'" [title]="'Other Business Address'" [panel]="'otherBusinessAddr'">
+        <lib-ucSubsection [id]="'otherAddrId'" [title]="'Other Business Address'" [panel]="'otherBusinessAddr'">
         </lib-ucSubsection>
         <div id="otherBusinessAddr">
             <div id="CustMainDataPersonal">
               <lib-ucaddress [addressObj]="inputOthBizAddressObj" [enjiForm]="enjiForm" [identifier]="'otherBusinessAddress'" [UCAddrForm]="JobDataEmpForm"></lib-ucaddress>
-                </!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Other Business Address'" [UCAddrForm]="JobDataEmpForm" [enjiForm]="enjiForm" [identifier]="'otherBusinessAddress'" [default]="otherAddrObj" [inputField]="inputOtherAddressObj" [showOwnership]="true"></lib-ucaddress> --/>
+                <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Other Business Address'" [UCAddrForm]="JobDataEmpForm" [enjiForm]="enjiForm" [identifier]="'otherBusinessAddress'" [default]="otherAddrObj" [inputField]="inputOtherAddressObj" [showOwnership]="true"></lib-ucaddress> -->
             </div>
             <div class="form-group row">
                 <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
@@ -266,7 +266,7 @@
                 <lib-uc-show-errors [control]="JobDataEmpForm.controls.NotesOther" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <!-- <lib-ucSubsection [id]="'otherAddrAttrId'" [title]="'Other Business Address Attribute'" [panel]="'otherAddrAttribute'">
         </lib-ucSubsection>
