@@ -41,8 +41,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
 
   ngOnInit() {
     if (this.mode == "edit") {
-      var verfGroupObj = { VerfQuestionGrpHId: this.VerfQuestionGrpHId }
-      this.http.post<VerfQuestionGrpHObj>(URLConstant.GetQuestionGrpHById, verfGroupObj).subscribe(
+      this.http.post<VerfQuestionGrpHObj>(URLConstant.GetQuestionGrpHById, {Id : this.VerfQuestionGrpHId}).subscribe(
         (response) => {
           this.verfQuestionGrpHObj = response;
           this.QuestionGroupForm.patchValue({

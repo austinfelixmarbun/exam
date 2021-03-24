@@ -48,7 +48,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
       this.refOfficeAreaObj = new RefOfficeAreaObj();
       this.refOfficeAreaObj.RefOfficeAreaId = this.RefOfficeAreaId;
       this.OfficeAreaForm.controls.AreaCode.disable();
-      this.http.post(this.apiUrl, this.refOfficeAreaObj).subscribe(
+      this.http.post(this.apiUrl, {Id : this.RefOfficeAreaId}).subscribe(
         (response) => {
           this.result = response;
           this.OfficeAreaForm.patchValue({

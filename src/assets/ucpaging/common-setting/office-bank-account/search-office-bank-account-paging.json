@@ -13,6 +13,7 @@
             "url": "",
             "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
             "label": "Office Name",
+            "itemsUrl": [],
             "items": []
         },
         {
@@ -27,6 +28,7 @@
             "path": "/RefMaster/GetListKeyValueActiveByCode",
             "label": "Bank Account Type",
             "items": [],
+            "itemsUrl": [],
             "criteriaPropName": "RefMasterTypeCode",
             "criteriaPropValue": "BANK_ACC_TYPE"
         },
@@ -42,6 +44,7 @@
             "path": "/RefMaster/GetListKeyValueActiveByCode",
             "label": "Bank Account Purpose",
             "items": [],
+            "itemsUrl": [],
             "criteriaPropName": "RefMasterTypeCode",
             "criteriaPropValue": "BANK_ACC_PURPOSE"
         },

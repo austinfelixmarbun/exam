@@ -52,7 +52,7 @@ export class AddBusinessUnitComponent implements OnInit {
             this.bizUnitObj = new BusinessUnitObj();
             this.bizUnitObj.RefBizUnitId = this.RefBizUnitId;
             this.BizUnitForm.controls.BizUnitCode.disable();
-            this.http.post(this.apiUrl, this.bizUnitObj).subscribe(
+            this.http.post(this.apiUrl, {Id : this.RefBizUnitId}).subscribe(
                 (response) => {
                     this.result = response;
                     this.BizUnitForm.patchValue({

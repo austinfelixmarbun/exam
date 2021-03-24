@@ -46,8 +46,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
 
   ngOnInit() {
     if (this.mode == "edit") {
-      var verfGroupObj = { VerfSchemeHId: this.VerfSchemeHId }
-      this.http.post(URLConstant.GetVerfSchemeHForUpdateById, verfGroupObj).subscribe(
+      this.http.post(URLConstant.GetVerfSchemeHForUpdateById, {Id : this.VerfSchemeHId}).subscribe(
         (response) => {
           this.verfQuestionScheme = response;
           this.QuestionSchemeForm.patchValue({

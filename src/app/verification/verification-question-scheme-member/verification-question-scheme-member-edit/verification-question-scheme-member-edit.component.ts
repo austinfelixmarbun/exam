@@ -57,8 +57,7 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
   })
 
   ngOnInit() {
-    var verfGroupObj = { VerfSchemeDId: this.VerfSchemeDId }
-    this.http.post(URLConstant.GetQuestionGrpHAndRowVersionVerfSchemeDForUpdateById, verfGroupObj).subscribe(
+    this.http.post(URLConstant.GetQuestionGrpHAndRowVersionVerfSchemeDForUpdateById, {Id : this.VerfSchemeDId}).subscribe(
       (response) => {
         this.verfQuestionGroup = response[CommonConstant.ReturnObj];
         this.QuestionGroupForm.patchValue({

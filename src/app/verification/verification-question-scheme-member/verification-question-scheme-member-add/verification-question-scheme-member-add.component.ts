@@ -48,8 +48,7 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
   }
 
   GetListVerfQuestionGrpHByVerfSchemeDId() {
-    var verfGroupObj = { VerfSchemeHId: this.VerfSchemeHId }
-    this.http.post(URLConstant.GetVerfSchemeDsByVerfSchemeHId, verfGroupObj).subscribe(
+    this.http.post(URLConstant.GetVerfSchemeDsByVerfSchemeHId, {Id : this.VerfSchemeHId}).subscribe(
       (response) => {
         if(response[CommonConstant.ReturnObj] != null){
           var arrMemberList = new Array();

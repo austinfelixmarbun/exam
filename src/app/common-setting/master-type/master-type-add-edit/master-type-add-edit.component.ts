@@ -51,7 +51,7 @@ export class MasterTypeAddEditComponent implements OnInit {
       this.apiUrl = this.foundationUrl + URLConstant.GetRefRoleByRefRoleId;
       this.refRoleObj = new RefRoleObj()
       this.refRoleObj.RefRoleId = +this.refRoleId
-      this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(
+      this.httpClient.post(this.apiUrl, {Id : this.refRoleObj.RefRoleId}).subscribe(
         (response) => {
           this.refRoleObj = response['returnObject'];
           this.roleCodeModel = response['returnObject']['roleCode']

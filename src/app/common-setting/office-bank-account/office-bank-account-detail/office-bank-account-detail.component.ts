@@ -27,6 +27,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
   CurrId: number;
   BankAccPurpose: string;
 
+  readonly CancelLink: string = NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING;
   public OfficeNameList: {
     Key: string,
     Value: string
@@ -161,7 +162,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
           })
 
           this.RefOfficeObj.RefOfficeId = response.RefOfficeId;
-          this.http.post<RefOfficeObj>(URLConstant.GetRefOfficeByRefOfficeId, this.RefOfficeObj).subscribe(
+          this.http.post<RefOfficeObj>(URLConstant.GetRefOfficeByRefOfficeId, {Id : response.RefOfficeId}).subscribe(
             (response) => {
               this.RefOfficeObj = response;
               this.RefOfficeId = this.RefOfficeObj.RefOfficeId;
@@ -257,7 +258,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
 
     if (this.Mode == "Add") {
       this.RefOfficeObj.OfficeCode = this.OfficeCode;
-      this.http.post<RefOfficeObj>(URLConstant.GetRefOfficeByOfficeCode, this.RefOfficeObj).subscribe(
+      this.http.post<RefOfficeObj>(URLConstant.GetRefOfficeByOfficeCode, {Code : this.OfficeCode}).subscribe(
         (response) => {
           this.OfficeBankAccObj.RefOfficeId = response.RefOfficeId;
           this.OfficeBankAccObj.IsActive = true;
