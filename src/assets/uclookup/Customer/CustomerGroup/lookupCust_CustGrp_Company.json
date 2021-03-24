@@ -3,7 +3,7 @@
     "component": [
         {
             "type": "textbox",
-            "name": "CUST_NO",
+            "name": "C.CUST_NO",
             "id": "CustNo",
             "value": "",
             "label": "Customer No",
@@ -11,7 +11,7 @@
         },
         {
             "type": "textbox",
-            "name": "CUST_NAME",
+            "name": "C.CUST_NAME",
             "id": "CustName",
             "value": "",
             "label": "Customer Name",
@@ -36,7 +36,7 @@
         },
         {
             "type": "textbox",
-            "name": "CUST_GROUP_NAME",
+            "name": "CGC.CUST_NAME",
             "id": "CustGroupName",
             "value": "",
             "label": "Customer Group Name",
