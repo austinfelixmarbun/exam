@@ -106,7 +106,7 @@ export class ProductOfferingViewComponent implements OnInit {
     //** Product Offering Version **//
     this.ProdOfferingVersionObj = new ProdOfferingHVersionObj;
     this.ProdOfferingVersionObj.ProdOfferingHId = this.prodOfferingHId;
-    await this.http.post(this.ProdOfferingVerUrl, this.ProdOfferingVersionObj).toPromise().then(
+    await this.http.post(this.ProdOfferingVerUrl, {Id : this.prodOfferingHId}).toPromise().then(
       response => {
         this.ProdOfferingVersion = response[CommonConstant.ReturnObj];
 
@@ -116,7 +116,7 @@ export class ProductOfferingViewComponent implements OnInit {
     //** Office Member **//
     this.ProdOfferingBranchMemObj = new RefProductOfferingBrancMbrObj;
     this.ProdOfferingBranchMemObj.ProdOfferingHId = this.prodOfferingHId;
-    await this.http.post(this.ProdOfferingBranchUrl, this.ProdOfferingBranchMemObj).toPromise().then(
+    await this.http.post(this.ProdOfferingBranchUrl, {Id : this.prodOfferingHId}).toPromise().then(
       response => {
         this.ProdOfferingBranchMbr = response[CommonConstant.ReturnObj];
 

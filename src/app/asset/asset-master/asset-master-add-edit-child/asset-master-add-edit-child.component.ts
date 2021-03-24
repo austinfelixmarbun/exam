@@ -84,7 +84,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
       this.AssetMasterChildForm.controls["AssetName"].disable();
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
-      this.http.post(URLConstant.GetAssetMasterById, this.assetMasterObj).subscribe(
+      this.http.post(URLConstant.GetAssetMasterById, {Id : this.AssetMasterId}).subscribe(
         (response: AssetMasterObj) => {
           this.resultData = response;
           this.AssetMasterChildForm.patchValue({
@@ -103,7 +103,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
 
           this.assetMasterObj = new AssetMasterObj();
           this.assetMasterObj.AssetMasterId = this.resultData.ParentId;
-          this.http.post(URLConstant.GetAssetMasterById, this.assetMasterObj).subscribe(
+          this.http.post(URLConstant.GetAssetMasterById, {Id : this.resultData.ParentId}).subscribe(
             (response: AssetMasterObj) => {
               this.resultParentMaster = response;
               this.AssetMasterChildForm.patchValue({
@@ -119,7 +119,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
 
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
-          this.http.post(URLConstant.GetAssetTypeById, this.assetTypeObj).subscribe(
+          this.http.post(URLConstant.GetAssetTypeById, {Id: this.resultData.AssetTypeId}).subscribe(
             (response: AssetTypeObj) => {
               this.resultAssetType = response;
               this.AssetMasterChildForm.patchValue({
@@ -191,7 +191,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
     if (this.pageType == "add") {
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
-      this.http.post(URLConstant.GetAssetMasterById, this.assetMasterObj).subscribe(
+      this.http.post(URLConstant.GetAssetMasterById, {Id : this.AssetMasterId}).subscribe(
         (response: AssetMasterObj) => {
           this.resultData = response;
           this.AssetMasterChildForm.patchValue({
@@ -206,7 +206,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
 
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
-          this.http.post(URLConstant.GetAssetTypeById, this.assetTypeObj).subscribe(
+          this.http.post(URLConstant.GetAssetTypeById, {Id: this.resultData.AssetTypeId}).subscribe(
             (response: AssetTypeObj) => {
               this.resultAssetType = response;
               this.AssetMasterChildForm.patchValue({

@@ -124,10 +124,10 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     if(this.CustCompanyMgmntShrholderId!=null){
       this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
       this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId  = this.CustCompanyMgmntShrholderId;
-      this.http.post(this.getCustCompanyMgmntShrholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
+      this.http.post(this.getCustCompanyMgmntShrholderUrl, {Id : this.CustCompanyMgmntShrholderId}).subscribe(
         (response) => {
           this.tempCustCompanyMgmntShrholderObj = response;
-          this.http.post(URLConstant.GetRefIndustryTypeByIndustryTypeCode, { IndustryTypeCode: response["MrIndustryTypeCode"] }).subscribe(
+          this.http.post(URLConstant.GetRefIndustryTypeByIndustryTypeCode, { Code: response["MrIndustryTypeCode"] }).subscribe(
             (response) => {
               this.lookUpIndustryTypeObj.nameSelect = response["IndustryTypeName"]; 
               this.lookUpIndustryTypeObj.jsonSelect = response;

@@ -42,7 +42,7 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   ngOnInit() {
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(this.getCustByIdUrl, this.objCust).subscribe(
+    this.http.post(this.getCustByIdUrl, {Id : this.IdCust}).subscribe(
       (response) => {
         this.custObj = response;
       });

@@ -111,7 +111,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     let getNationality = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality });
     let getEducation = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation });
     let getReligion = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion });
-    let getGeneralSettingNationality = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GSCodeDefLocalNationality });
+    let getGeneralSettingNationality = this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeDefLocalNationality });
     forkJoin([getDetail, getMaritalStat, getNationality, getEducation, getReligion, getGeneralSettingNationality]).pipe(
       map((response) => {
         var detailData = response[0];
@@ -145,9 +145,9 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
         return detailData;
       }),
       mergeMap((response) => {
-        let getMasterCountry = this.http.post(URLConstant.GetRefCountryByCountryCode, { CountryCode: response["MasterCustDetail"]["Country"] });
-        let getAppCountry = this.http.post(URLConstant.GetRefCountryByCountryCode, { CountryCode: response["AppCustDetail"]["Country"] });  
-        let getDefaultCountry = this.http.post(URLConstant.GetRefCountryByCountryCode, { CountryCode: response["GsValueCountry"] });  
+        let getMasterCountry = this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: response["MasterCustDetail"]["Country"] });
+        let getAppCountry = this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: response["AppCustDetail"]["Country"] });  
+        let getDefaultCountry = this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: response["GsValueCountry"] });  
         return forkJoin([getMasterCountry, getAppCountry, getDefaultCountry]);
       })
     ).toPromise().then(

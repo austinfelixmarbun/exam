@@ -55,7 +55,7 @@ export class DistrictAddEditComponent implements OnInit {
   ngOnInit() {
     this.refProvDistrictObj = new RefProvDistrictObj();
     this.refProvDistrictObj.RefProvDistrictId = this.parentId;
-    this.http.post(this.getUrl, this.refProvDistrictObj).subscribe(
+    this.http.post(this.getUrl, {Id : this.parentId}).subscribe(
       response => {
         this.resultData = response;
         this.DistrictForm.patchValue({
@@ -67,7 +67,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.DistrictForm.controls["ProvDistrictCode"].disable();
       this.refProvDistrictObj = new RefProvDistrictObj();
       this.refProvDistrictObj.RefProvDistrictId = this.refProvDistrictId;
-      this.http.post(this.getUrl, this.refProvDistrictObj).subscribe(
+      this.http.post(this.getUrl, {Id : this.refProvDistrictId}).subscribe(
         response => {
           this.resultData = response;
           this.DistrictForm.patchValue({

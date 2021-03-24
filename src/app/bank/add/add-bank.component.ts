@@ -51,7 +51,7 @@ export class BankAddComponent implements OnInit {
             var bankObj = new RefBankObj();
             bankObj.RefBankId = this.refBankId;
             
-            this.http.post(URLConstant.GetRefBankByRefBankIdAsync, bankObj).subscribe(
+            this.http.post(URLConstant.GetRefBankByRefBankIdAsync, {Id: this.refBankId}).subscribe(
                 (response) => {
                     this.result = response;
                     this.BankAddForm.patchValue({

@@ -39,7 +39,7 @@ export class CoaEditDetailComponent implements OnInit {
   }
 
   GetInitialData() {
-    this.http.post<RefCoaObj>(URLConstant.GetRefCoaByRefCoaId, { RefCoaId: +this.refCoaId }).subscribe(
+    this.http.post<RefCoaObj>(URLConstant.GetRefCoaByRefCoaId, {Id: this.refCoaId }).subscribe(
       (response) => {
         this.refCoaObj = response
 

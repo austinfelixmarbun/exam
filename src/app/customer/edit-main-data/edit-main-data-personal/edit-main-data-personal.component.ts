@@ -148,7 +148,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custObj.CustId = this.CustId;
     this.custPersonalObj.CustId = this.CustId;
     var datePipe = new DatePipe("en-US");
-    this.http.post(this.getCustByCustIdUrl, this.custObj).subscribe(
+    this.http.post(this.getCustByCustIdUrl, {Id : this.CustId}).subscribe(
       (response) => {
         this.tempCustObj = response;
         this.CustomerPersonalForm.patchValue({
@@ -198,7 +198,7 @@ export class EditMainDataPersonalComponent implements OnInit {
         );
       }
     );
-    await this.http.post<CustPersonalObj>(this.getCustPersonalByCustIdUrl, this.custPersonalObj).toPromise().then(
+    await this.http.post<CustPersonalObj>(this.getCustPersonalByCustIdUrl, {Id : this.custPersonalObj.CustId}).toPromise().then(
       (response) => {
         this.tempCustPersonalObj = response;
         this.CustomerPersonalForm.patchValue({

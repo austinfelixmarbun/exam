@@ -131,7 +131,7 @@ export class WorkingHourDDetailComponent implements OnInit {
     this.workingHourSchmHObj = new WorkingHourSchmHObj();
     this.workingHourSchmHObj.WorkingHourSchmHId = this.workingHourSchmHId;
     this.items = this.WorkingHourSchmDForm.get('items') as FormArray;
-    this.http.post(this.getSchmDUrl, this.workingHourSchmHObj).subscribe(
+    this.http.post(this.getSchmDUrl, {Id : this.workingHourSchmHId}).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.isEdit = true;

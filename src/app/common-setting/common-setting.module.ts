@@ -70,6 +70,8 @@ import { OfficeBankAccountDetailComponent } from './office-bank-account/office-b
 import { OfficeBankAccountPagingComponent } from './office-bank-account/office-bank-account-paging/office-bank-account-paging.component';
 import { UcaddressModule } from '@adins/ucaddress';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
+import { GeneralSettingAdminComponent } from './general-setting-admin/general-setting-admin.component';
+import { GeneralSettingAdminDetailComponent } from './general-setting-admin/general-setting-admin-detail/general-setting-admin-detail.component';
 
 @NgModule({
   imports: [
@@ -145,7 +147,9 @@ import { AdInsModule } from 'app/components/adins-module/adins.module';
     CoaSchemeViewComponent,
     OfficeBankAccountAccDetailComponent,
     OfficeBankAccountDetailComponent,
-    OfficeBankAccountPagingComponent
+    OfficeBankAccountPagingComponent,
+    GeneralSettingAdminComponent,
+    GeneralSettingAdminDetailComponent
   ],
   providers: [
     NGXToastrService

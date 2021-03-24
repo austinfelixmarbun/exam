@@ -115,10 +115,8 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
     this.InputObj.CategoryCode = CommonConstant.CAT_CODE_PRD_OFR_DEACT_APV;
     this.InputObj.SchemeCode = CommonConstant.SCHM_CODE_APV_OFR_DEACT_SCHM;
     this.InputObj.Reason = this.allRefReasonMethod;
-    var data = {
-      ProdOfferingId: this.prodOfferingId
-    }
-    this.http.post(URLConstant.GetProdOfferingByProdOfferingId, data).subscribe(
+
+    this.http.post(URLConstant.GetProdOfferingByProdOfferingId, {Id : this.prodOfferingId}).subscribe(
       (response) => {
         this.InputObj.TrxNo = response["ProdOfferingCode"];
         this.IsReady = true;

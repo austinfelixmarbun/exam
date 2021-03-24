@@ -50,7 +50,7 @@ export class NavigationConstant {
     //#region Common Setting
     public static CS_BANK_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_BANK_PAGING; //'/CommonSetting/Bank/Paging'
     public static CS_BANK_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_BANK_DETAIL; //'/CommonSetting/Bank/Detail'
-    public static CS_OFFICE_BANK_ACCOUNT_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_OFFICE_BANK_ACCOUNT_PAGING; //'/CommonSetting/Bank/Paging'
+    public static CS_OFFICE_BANK_ACCOUNT_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_OFFICE_BANK_ACCOUNT_PAGING; //'/CommonSetting/OfficeBankAcc/Paging'
     public static CS_COA_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_COA_PAGING; //'/CommonSetting/Coa/Paging'
     public static CS_COA_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_COA_DETAIL; //'/CommonSetting/Coa/Detail'
     public static CS_COA_DETAIL_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_COA_DETAIL_EDIT; //'/CommonSetting/Coa/Detail/Edit'
@@ -62,6 +62,8 @@ export class NavigationConstant {
     public static CS_ECONOMIC_SECTOR_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_ECONOMIC_SECTOR_DETAIL; //'/CommonSetting/EconomicSector/Detail'
     public static CS_GEN_SETTING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING; //'/CommonSetting/GeneralSetting'
     public static CS_GEN_SETTING_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING_DETAIL; //'/CommonSetting/GeneralSetting/Detail'
+    public static CS_GEN_SETTING_ADMIN = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING_ADMIN; //'/CommonSetting/GeneralSetting'
+    public static CS_GEN_SETTING_DETAIL_ADMIN = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING_DETAIL_ADMIN; //'/CommonSetting/GeneralSetting/Detail'
     public static CS_HOLIDAY = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY; //'/CommonSetting/Holiday'
     public static CS_HOLIDAY_ADD = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY_ADD; //'/CommonSetting/Holiday/Add'
     public static CS_HOLIDAY_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY_DETAIL; //'/CommonSetting/Holiday/Detail'

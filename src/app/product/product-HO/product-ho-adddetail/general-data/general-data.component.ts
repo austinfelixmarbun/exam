@@ -203,7 +203,7 @@ export class GeneralDataHOComponent implements OnInit {
 
   async PopulateFinMapFromLOB() {
     var url = URLConstant.GetKvpRefFinMapByLobCode;
-    await this.http.post(url, { LobCode: this.LOBSelected, RowVersion: "" }).toPromise().then(
+    await this.http.post(url, { Code: this.LOBSelected }).toPromise().then(
       (response) => {
         this.dictOptions["WAY_OF_FINANCING"] = response["RefWayOfFin"]
         this.dictOptions["PURPOSE_OF_FINANCING"] = response["RefPurposeOfFin"]
@@ -230,7 +230,7 @@ export class GeneralDataHOComponent implements OnInit {
 
   async PopulateInstallmentSchedule() {
     var url = URLConstant.GetListKvpInstSchmByLobCode;
-    await this.http.post(url, { LobCode: this.LOBSelected, RowVersion: "" }).toPromise().then(
+    await this.http.post(url, { Code: this.LOBSelected }).toPromise().then(
       (response) => {
         var result = response[CommonConstant.ReturnObj];
         this.dictMultiOptions["INST_SCHM"] = new Array();

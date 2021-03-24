@@ -66,7 +66,7 @@ export class CustomerContactCheckComponent implements OnInit {
     this.custPersonContactPersonObj = new CustPersonalContactPersonObj();
     this.custPersonContactPersonObj.CustId = this.IdCust;
     // this.http.post(URLConstant.GetListCustPersonalContactPersonByCustId, this.custPersonContactPersonObj).subscribe(
-    this.http.post(URLConstant.GetListCustPersonalEmergencyContactByCustId, this.custPersonContactPersonObj).subscribe(
+    this.http.post(URLConstant.GetListCustPersonalEmergencyContactByCustId, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustomerPersonalContactPerson = response[CommonConstant.ReturnObj];
         for (const item of this.tempCustomerPersonalContactPerson) {
@@ -81,7 +81,7 @@ export class CustomerContactCheckComponent implements OnInit {
     // GetCustByCustNo
     var custObj = new CustObj;
     custObj.CustNo = ContactPersonCustNo
-    this.http.post(URLConstant.GetCustByCustNo, custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustNo, {TrxNo : ContactPersonCustNo}).subscribe(
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);

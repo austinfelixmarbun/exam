@@ -50,7 +50,7 @@ export class ListOfficeMemberComponent implements OnInit {
     }
 
     var url = URLConstant.GetListProdBranchOfficeMbrByProdHId;
-    this.http.post(url, obj).subscribe(
+    this.http.post(url, {Id : this.ListOfficeMemberObjInput["param"]}).subscribe(
       (response) => {
         this.resultData = response[CommonConstant.ReturnObj];
       }

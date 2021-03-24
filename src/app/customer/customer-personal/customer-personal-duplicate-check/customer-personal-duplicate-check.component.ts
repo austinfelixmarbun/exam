@@ -192,7 +192,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       MasterCode: this.Gender,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObjGender).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, {Code: this.Gender}).subscribe(
       (response) => {
         this.tempGender = response;
       }
@@ -202,7 +202,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       MasterCode: this.MrIdTypeCode,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObjMrIdTypeCode).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, {Code: this.MrIdTypeCode}).subscribe(
       (response) => {
         this.tempMrIdTypeCode = response;
       }
@@ -355,7 +355,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
   EditCustPersonal(item) {
     var CustObj = { CustNo: item.CustNo, CustName: this.CustName, IdNo: item.IdNo };
     // this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustObj).subscribe(
-    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustObj).pipe(
+    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, {TrxNo : item.CustNo}).pipe(
       map((response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.CustObj = response['CustObj'];

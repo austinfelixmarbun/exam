@@ -49,7 +49,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
   ngOnInit() {
     this.gsObj = new GeneralSettingObj();
     this.gsObj.GeneralSettingId = this.generalSettingId
-    this.httpClient.post(URLConstant.GetGeneralSettingById, this.gsObj).subscribe(
+    this.httpClient.post(URLConstant.GetGeneralSettingById, {Id: this.generalSettingId}).subscribe(
       (response) => {
         this.resultData = response;
         this.GeneralSettingForm.patchValue({

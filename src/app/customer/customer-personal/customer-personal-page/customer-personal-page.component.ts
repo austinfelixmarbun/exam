@@ -74,14 +74,13 @@ export class CustomerPersonalPageComponent implements OnInit {
   }
  
   async ngOnInit() {
-    var custObj = { CustId: this.IdCust };
-    await this.http.post(URLConstant.GetCustPersonalbyCustId, custObj).toPromise().then(
+    await this.http.post(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).toPromise().then(
       (response: any) => {
         this.CustPersonalId = response['CustPersonalId'];
       }
     );
 
-    await this.http.post(URLConstant.GetCustByCustId, custObj).toPromise().then(
+    await this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).toPromise().then(
       (response: any) => {
         let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         this.dmsObj = new DMSObj();

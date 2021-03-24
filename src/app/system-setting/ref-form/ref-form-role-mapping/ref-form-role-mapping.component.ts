@@ -50,7 +50,7 @@ export class RefFormRoleMappingComponent implements OnInit {
   }
 
   GetListRefFormRoleByRefFormId() {
-    this.http.post(URLConstant.GetListAuthFormByRefFormId, { RefFormId: this.RefFormId }).subscribe(
+    this.http.post(URLConstant.GetListAuthFormByRefFormId, {Id: this.RefFormId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
 

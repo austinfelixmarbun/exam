@@ -255,7 +255,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(this.getCustById, this.custObj).subscribe(
+    this.http.post(this.getCustById, {Id : this.IdCust}).subscribe(
       (response) => {
         this.custObj = response;
       }
@@ -263,7 +263,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
     this.custJobDataObj = new CustPersonalJobDataObj();
     this.custJobDataObj.CustId = this.IdCust;
-    this.http.post(this.getJobDataByCustId, this.custJobDataObj).subscribe(
+    this.http.post(this.getJobDataByCustId, {Id : this.IdCust}).subscribe(
       (response: any) => {
         this.returnCustJobDataObj = response;
 
@@ -294,7 +294,7 @@ export class JobDataEmployeeComponent implements OnInit {
           if (this.returnCustJobDataObj.RefProfessionId != null) {
             this.refProfessionObj = new RefProfessionObj();
             this.refProfessionObj.RefProfessionId = this.returnCustJobDataObj.RefProfessionId;
-            this.http.post(this.getRefProfession, this.refProfessionObj).subscribe(
+            this.http.post(this.getRefProfession, {Id : this.returnCustJobDataObj.RefProfessionId}).subscribe(
               (response) => {
                 this.returnRefProfessionObj = response;
                 this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
@@ -307,7 +307,7 @@ export class JobDataEmployeeComponent implements OnInit {
           if (this.returnCustJobDataObj.RefIndustryTypeId != null) {
             this.refIndustryTypeObj = new RefIndustryTypeObj();
             this.refIndustryTypeObj.RefIndustryTypeId = this.returnCustJobDataObj.RefIndustryTypeId;
-            this.http.post(this.getRefIndustryType, this.refIndustryTypeObj).subscribe(
+            this.http.post(this.getRefIndustryType, {Id: this.returnCustJobDataObj.RefIndustryTypeId}).subscribe(
               (response) => {
                 this.returnIndustryTypeObj = response;
                 this.industryLookUpObj.nameSelect = this.returnIndustryTypeObj.IndustryTypeName;

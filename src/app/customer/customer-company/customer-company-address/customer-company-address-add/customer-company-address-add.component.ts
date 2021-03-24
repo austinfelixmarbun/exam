@@ -110,7 +110,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     if (this.pageType == "edit") {
       this.custAddrObj = new CustAddrObj();
       this.custAddrObj.CustAddrId = this.AddrId;
-      this.http.post(this.getCustAddrUrl, this.custAddrObj).subscribe(
+      this.http.post(this.getCustAddrUrl, {Id : this.AddrId}).subscribe(
         (response) => {
           this.copyCustomerAddr = response;
           this.CustDataCompanyForm.patchValue({

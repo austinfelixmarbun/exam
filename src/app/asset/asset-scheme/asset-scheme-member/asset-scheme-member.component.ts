@@ -53,7 +53,7 @@ export class AssetSchemeMemberComponent implements OnInit {
 
     this.assetSchmHObj = new AssetSchemeHObj();
     this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
-    this.http.post(URLConstant.GetAssetSchmHById, this.assetSchmHObj).subscribe(
+    this.http.post(URLConstant.GetAssetSchmHById, {Id: this.AssetSchmHId}).subscribe(
       (response: AssetSchemeHObj) => {
         this.assetSchmHObj = response;
         this.AssetSchmHIsSystem = response.IsSystem;

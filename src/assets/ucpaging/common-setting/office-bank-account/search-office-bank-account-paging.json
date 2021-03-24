@@ -13,6 +13,7 @@
             "url": "",
             "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
             "label": "Office Name",
+            "itemsUrl": [],
             "items": []
         },
         {
@@ -24,9 +25,12 @@
             "isFromURL": true,
             "ddlType": "all",
             "url": "",
-            "path": "/OfficeBankAcc/GetListBankAccType",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
             "label": "Bank Account Type",
-            "items": []
+            "items": [],
+            "itemsUrl": [],
+            "criteriaPropName": "RefMasterTypeCode",
+            "criteriaPropValue": "BANK_ACC_TYPE"
         },
         {
             "type": "dropdown",
@@ -40,6 +44,7 @@
             "path": "/RefMaster/GetListKeyValueActiveByCode",
             "label": "Bank Account Purpose",
             "items": [],
+            "itemsUrl": [],
             "criteriaPropName": "RefMasterTypeCode",
             "criteriaPropValue": "BANK_ACC_PURPOSE"
         },
@@ -191,7 +196,7 @@
             "action": [
                 {
                     "type" : "edit",
-                    "path" : "/CommonSetting/officebankacc/accdetail",
+                    "path" : "/CommonSetting/OfficeBankAcc/AccDetail",
                     "param" : [
                         {
                             "type" : "OfficeBankAccId",
@@ -208,7 +213,7 @@
             "action": [
                 {
                     "type" : "edit",
-                    "path" : "/CommonSetting/officebankacc/detail",
+                    "path" : "/CommonSetting/OfficeBankAcc/Detail",
                     "param" : [
                         {
                             "type" : "OfficeBankAccId",
@@ -229,8 +234,6 @@
         }
     ],
     "querystring": {
-        "select": "SELECT OBA.OFFICE_BANK_ACC_CODE AS AccCode, OBA.OFFICE_BANK_ACC_NO AS AccNo, OBA.OFFICE_BANK_ACC_NAME AS AccName, CASE WHEN OBA.BANK_ACC_TYPE = 'CASH' THEN 'Cash' WHEN OBA.BANK_ACC_TYPE = 'BANK' THEN 'Bank' END AS BankAccType, OBA.OFFICE_BANK_ACC_BRANCH AS BankBranch, RB.BANK_NAME AS BankName, CASE WHEN OBA.MR_BANK_ACC_PURPOSE_CODE = 'FUND' THEN 'Funding' WHEN OBA.MR_BANK_ACC_PURPOSE_CODE = 'ESCRW' THEN 'Escrow' WHEN OBA.MR_BANK_ACC_PURPOSE_CODE = 'PETTY' THEN 'Petty Cash' WHEN OBA.MR_BANK_ACC_PURPOSE_CODE = 'PDCCLR' THEN 'PDC Clearing' END AS BankAccPurpose, CASE WHEN OBA.IS_ACTIVE = 1 THEN 'Yes' ELSE 'No' END AS IsActive, OBA.OFFICE_BANK_ACC_ID AS OfficeBankAccId",
-        "from": "FROM dbo.OFFICE_BANK_ACC OBA WITH(NOLOCK) JOIN dbo.REF_BANK RB WITH(NOLOCK) ON RB.REF_BANK_ID = OBA.REF_BANK_ID JOIN dbo.REF_OFFICE RO WITH(NOLOCK) ON RO.REF_OFFICE_ID = OBA.REF_OFFICE_ID",
-        "where": "WHERE OBA.IS_ACTIVE = 1"
+        "name" : "searchOfficeBankAcc"
     }
 }

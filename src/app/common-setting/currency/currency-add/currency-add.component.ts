@@ -58,7 +58,7 @@ export class CurrencyAddComponent implements OnInit {
       this.RefCurrForm.controls["CurrCode"].disable();
       this.currObj = new CurrObj();
       this.currObj.RefCurrId = this.refCurrId;
-      this.http.post(this.getUrl, this.currObj).subscribe(
+      this.http.post(this.getUrl, {Id: this.refCurrId}).subscribe(
         response => {
           this.resultData = response;
           this.RefCurrForm.patchValue({

@@ -88,14 +88,14 @@ export class JobDataNonProfessionalComponent implements OnInit {
     
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(this.getCustById, this.objCust).subscribe(
+    this.http.post(this.getCustById, {Id : this.IdCust}).subscribe(
       (response) => {
           this.custObj = response;
       });
 
     this.custJobDataObj = new CustPersonalJobDataObj();
     this.custJobDataObj.CustId = this.IdCust;
-    this.http.post(this.getJobDataByCustId, this.custJobDataObj).subscribe(
+    this.http.post(this.getJobDataByCustId, {Id : this.IdCust}).subscribe(
       (response: any) => {
           this.returnCustJobDataObj = response;
           
@@ -106,7 +106,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
 
             this.refProfessionObj = new RefProfessionObj();
             this.refProfessionObj.RefProfessionId = this.returnCustJobDataObj.RefProfessionId;
-            this.http.post(this.getRefProfession, this.refProfessionObj).subscribe(
+            this.http.post(this.getRefProfession, {Id : this.returnCustJobDataObj.RefProfessionId}).subscribe(
               (response) => {
                   this.returnRefProfessionObj = response;
 

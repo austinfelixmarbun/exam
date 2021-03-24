@@ -71,7 +71,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
  
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj.CustId = this.IdCust;
-    this.http.post(this.getCustCompanyByCustIdUrl, this.custCompanyObj).subscribe(
+    this.http.post(this.getCustCompanyByCustIdUrl, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
         this.CustomerDetailForm.patchValue({
@@ -82,7 +82,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
         if (this.tempCustCompanyObj.RefIndustryTypeId != null) {
           this.refIndustryTypeObj = new RefIndustryTypeObj();
           this.refIndustryTypeObj.RefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
-          this.http.post(this.getRefIndustryTypeByIndustryTypeIdUrl, this.refIndustryTypeObj).subscribe(
+          this.http.post(this.getRefIndustryTypeByIndustryTypeIdUrl, {Id: this.tempCustCompanyObj.RefIndustryTypeId}).subscribe(
             (response) => {
               this.tempRefIndustryObj = response; 
               this.lookUpObj.nameSelect = this.tempRefIndustryObj.IndustryTypeName; 

@@ -1,9 +1,9 @@
 export class RefOfficeObj {
-    refOfficeId: any
-    officeCode: any;
-    listAddOffice: any;
-    listDelOffice: any;
-    officeName : any;
+    RefOfficeId: any
+    OfficeCode: any;
+    ListAddOffice: any;
+    ListDelOffice: any;
+    OfficeName : any;
 
-    constructor() { this.refOfficeId = 0 }
+    constructor() { this.RefOfficeId = 0 }
 }

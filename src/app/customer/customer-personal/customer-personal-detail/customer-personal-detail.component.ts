@@ -97,7 +97,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     var generalSettingObjDefLocalNationality = {
       GsCode: CommonConstant.GSCodeDefLocalNationality
     }
-    this.http.post(this.GetGeneralSettingByCodeUrl, generalSettingObjDefLocalNationality).subscribe(
+    this.http.post(this.GetGeneralSettingByCodeUrl, {Code: CommonConstant.GSCodeDefLocalNationality}).subscribe(
       (response) => {
         this.Country = response;
         this.lookUpObj = new InputLookupObj();
@@ -118,7 +118,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
         var countryCode = {
           CountryCode: this.Country.GsValue
         };
-        this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+        this.http.post(URLConstant.GetRefCountryByCountryCode, {Code: this.Country.GsValue}).subscribe(
           (response) => {
             this.LocalCountry = response;
           });
@@ -128,19 +128,19 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custObj = new CustObj()
     this.custObj.CustId = this.IdCust;
 
-    this.http.post(this.GetCustByCustIdUrl, this.custObj).subscribe(
+    this.http.post(this.GetCustByCustIdUrl, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustObj = response;
       });
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj.CustId = this.IdCust;
-    this.http.post<CustPersonalObj>(this.GetCustPersonalbyCustIdUrl, this.custPersonalObj).subscribe(
+    this.http.post<CustPersonalObj>(this.GetCustPersonalbyCustIdUrl, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustPersonalObj = response;
         var refMasterObjMrNationalityCode = {
           RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality
         }
-        this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, refMasterObjMrNationalityCode).subscribe(
+        this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, {Code : CommonConstant.RefMasterTypeCodeNationality}).subscribe(
           (response) => {
             this.tempNationality = response["RefMasterObjs"];
 
@@ -155,7 +155,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
                 var countryCode = {
                   CountryCode: this.tempCustPersonalObj.WnaCountryCode
                 };
-                this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+                this.http.post(URLConstant.GetRefCountryByCountryCode, {Code: this.tempCustPersonalObj.WnaCountryCode}).subscribe(
                   (response) => {
                     this.tempCountry = response;
                     this.lookUpObj.nameSelect = this.tempCountry.CountryName;
@@ -262,7 +262,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
   }
  async SaveValue() {
 
-    await this.http.post<CustPersonalObj>(this.GetCustPersonalbyCustIdUrl, this.custPersonalObj).toPromise().then(
+    await this.http.post<CustPersonalObj>(this.GetCustPersonalbyCustIdUrl, {Id : this.custPersonalObj.CustId}).toPromise().then(
       (response) => {
         this.tempCustPersonalObj = response;
         this.custPersonalObj = new CustPersonalObj();

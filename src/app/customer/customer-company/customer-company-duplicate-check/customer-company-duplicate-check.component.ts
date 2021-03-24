@@ -128,7 +128,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       MasterCode: this.MrCompanyTypeCode,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, refMasterObjMrCompanyTypeCode).subscribe(
+    this.http.post(this.urlGetDescByMasterCode, {Code: this.MrCompanyTypeCode}).subscribe(
       (response) => {
         this.tempMrCompanyTypeCode = response;
       }
@@ -205,7 +205,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
 
   EditCustCompany(item) {
     var custObj = { CustNo: item.CustNo, CustName: item.CustName, TaxIdNo: item.TaxIdNo };
-    this.http.post(URLConstant.GetCustCompanyForUpdateByCustNo, custObj).pipe(
+    this.http.post(URLConstant.GetCustCompanyForUpdateByCustNo, {TrxNo : item.CustNo}).pipe(
       map((response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.CustObj = response['CustObj'];

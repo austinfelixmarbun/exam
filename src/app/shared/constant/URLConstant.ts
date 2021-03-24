@@ -989,10 +989,9 @@ export class URLConstant {
     
     // OFFICE BANK ACCOUNT
     public static DeleteOfficeBankAcc = "/OfficeBankAcc/DeleteOfficeBankAcc";
-    public static GetListActiveBankName = environment.FoundationR3Url + "/RefBank/GetListActiveBankName";
+    public static GetListActiveBankName = environment.FoundationR3Url + "/RefBank/GetListKeyValueActiveById";
     public static GetListBankAccType = environment.FoundationR3Url + "/OfficeBankAcc/GetListBankAccType";
-    public static GetListActiveCurrName = environment.FoundationR3Url + "/RefCurr/GetListActiveCurrName";
-    public static GetListBankAccPurpose = environment.FoundationR3Url + "/RefMaster/GetListKeyValueActiveByCode";
+    public static GetListKvpActiveRefCurr = environment.FoundationR3Url + "/RefCurr/GetListKvpActiveRefCurr";
     public static GetOfficeBankAccByOfficeBankAccId = environment.FoundationR3Url + "/OfficeBankAcc/GetOfficeBankAccByOfficeBankAccId";
     public static SubmitOfficeBankAcc = environment.FoundationR3Url + "/OfficeBankAcc/SubmitOfficeBankAcc";
 

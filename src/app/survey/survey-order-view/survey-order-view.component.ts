@@ -30,11 +30,8 @@ export class SurveyOrderViewComponent implements OnInit {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyOrder.json";
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
-    var SrvyTaskObj = {
-      SrvyOrderId: this.SrvyOrderId,
-      RowVersion: ""
-    }
-    this.http.post(URLConstant.GetListSrvyTaskBySrvyOrderId, SrvyTaskObj).subscribe(
+    
+    this.http.post(URLConstant.GetListSrvyTaskBySrvyOrderId, {Id : this.SrvyOrderId}).subscribe(
       response => {
         this.TaskList = response[CommonConstant.ReturnObj];
       }

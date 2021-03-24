@@ -67,7 +67,7 @@ export class ZipcodeAddComponent implements OnInit {
     if (this.pageType == "edit") {
       this.rzcObj = new RefZipcodeObj();
       this.rzcObj.RefZipcodeId = this.refZipcodeId;
-      this.http.post(this.apiUrl, this.rzcObj).subscribe(
+      this.http.post(this.apiUrl, {Id : this.refZipcodeId}).subscribe(
         response => {
           this.resultData = response;
           this.refZipcodeId = this.resultData.RefZipcodeId;
@@ -83,7 +83,7 @@ export class ZipcodeAddComponent implements OnInit {
           });
           this.refDistrict = new RefProvDistrictObj();
           this.refDistrict.RefProvDistrictId = this.resultData.RefProvDistrictId;
-          this.http.post(this.getRefDistrictUrl, this.refDistrict).subscribe(
+          this.http.post(this.getRefDistrictUrl, {Id : this.resultData.RefProvDistrictId}).subscribe(
             (response) => {
               this.resultDistrictData = response;
               this.inputDistrictLookupObj.jsonSelect = this.resultDistrictData;

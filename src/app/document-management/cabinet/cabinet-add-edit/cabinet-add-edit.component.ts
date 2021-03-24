@@ -45,7 +45,7 @@ export class CabinetAddEditComponent implements OnInit {
       this.title = "EDIT CABINET"
       this.CabinetForm.controls.CabinetCode.disable();
       this.Cabinet.CabinetCode = this.CabinetCode;
-      this.http.post<CabinetObj>(environment.FoundationR3Url + "/DocManagement/GetCabinetByCode", this.Cabinet).subscribe(
+      this.http.post<CabinetObj>(environment.FoundationR3Url + "/DocManagement/GetCabinetByCode", {Code: this.CabinetCode}).subscribe(
         (response) => {
           this.Cabinet = response;
           this.CabinetForm.controls['CabinetCode'].patchValue(response.CabinetCode);

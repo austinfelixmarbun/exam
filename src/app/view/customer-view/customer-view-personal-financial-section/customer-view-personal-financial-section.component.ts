@@ -28,7 +28,7 @@ export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
   ngOnInit() {
     this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
-    this.http.post(this.GetCustPersonalFinDataForCustViewByCustIdUrl, this.custObj).subscribe(
+    this.http.post(this.GetCustPersonalFinDataForCustViewByCustIdUrl, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustObj = response;
       });
