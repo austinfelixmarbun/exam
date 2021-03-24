@@ -28,7 +28,7 @@ export class CustBankAccSectionFindataComponent implements OnInit {
   ngOnInit() {
     var custBankAccObj = new CustBankAccObj();
     custBankAccObj.CustId = this.CustId;
-    this.httpClient.post(URLConstant.GetCBAForCustFinDataByCustId, custBankAccObj).subscribe(
+    this.httpClient.post(URLConstant.GetCBAForCustFinDataByCustId, {id : this.CustId}).subscribe(
       (response: any) => {
         this.cbaFinDataList = response.ListCBAForCustFinData;
       }
@@ -62,8 +62,7 @@ export class CustBankAccSectionFindataComponent implements OnInit {
       (response) => {
         this.spinner.show();
         var custBankAccObj = new CustBankAccObj();
-        custBankAccObj.CustId = this.CustId;
-        this.httpClient.post(URLConstant.GetCBAForCustFinDataByCustId, custBankAccObj).subscribe(
+        this.httpClient.post(URLConstant.GetCBAForCustFinDataByCustId, {id : this.CustId}).subscribe(
           (response: any) => {
             this.cbaFinDataList = response.ListCBAForCustFinData;
           }

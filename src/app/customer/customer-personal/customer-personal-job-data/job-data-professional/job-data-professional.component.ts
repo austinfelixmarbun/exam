@@ -187,7 +187,7 @@ export class JobDataProfessionalComponent implements OnInit {
           if (this.returnCustJobDataObj.JobAddrId != null) {
             this.custAddrObj = new CustAddrObj();
             this.custAddrObj.CustAddrId = this.returnCustJobDataObj.JobAddrId;
-            this.http.post(URLConstant.GetCustAddr, this.custAddrObj).subscribe(
+            this.http.post(URLConstant.GetCustAddr, {Id : this.custAddrObj.CustAddrId}).subscribe(
               (response) => {
                 this.getCustomerAddr = response;
                 this.JobDataProForm.patchValue({
@@ -225,7 +225,7 @@ export class JobDataProfessionalComponent implements OnInit {
           if (this.returnCustJobDataObj.PrevJobAddrId != null) {
             this.preJobAddrObj = new CustAddrObj();
             this.preJobAddrObj.CustAddrId = this.returnCustJobDataObj.PrevJobAddrId;
-            this.http.post(URLConstant.GetCustAddr, this.preJobAddrObj).subscribe(
+            this.http.post(URLConstant.GetCustAddr, {Id : this.preJobAddrObj.CustAddrId}).subscribe(
               (response) => {
                 this.getPreJobAddr = response;
                 this.JobDataProForm.patchValue({
@@ -257,6 +257,7 @@ export class JobDataProfessionalComponent implements OnInit {
                 this.inputPreJobAddressObj.inputLookupObj.isRequired = false;
                 this.inputPreJobAddressObj.inputLookupObj.nameSelect = this.getPreJobAddr.Zipcode;
                 this.inputPreJobAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getPreJobAddr.Zipcode };
+                this.inputPreJobAddressObj.inputLookupObj.isReadonly = false;
 
                 this.inputPreviousAddressObj.default = this.preJobAddrObj;
                 this.inputPreviousAddressObj.inputField = this.inputPreJobAddressObj;
@@ -267,7 +268,7 @@ console.log("ameng");
           if (this.returnCustJobDataObj.OthBizAddrId != null) {
             this.custOthBizAddrObj = new CustAddrObj();
             this.custOthBizAddrObj.CustAddrId = this.returnCustJobDataObj.OthBizAddrId;
-            this.http.post(URLConstant.GetCustAddr, this.custOthBizAddrObj).subscribe(
+            this.http.post(URLConstant.GetCustAddr, {Id : this.custOthBizAddrObj.CustAddrId}).subscribe(
               (response) => {
                 this.getOthBizAddr = response;
                 this.JobDataProForm.patchValue({
@@ -299,6 +300,7 @@ console.log("ameng");
                 this.inputOtherAddressObj.inputLookupObj.isRequired = false;
                 this.inputOtherAddressObj.inputLookupObj.nameSelect = this.getOthBizAddr.Zipcode;
                 this.inputOtherAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getOthBizAddr.Zipcode };
+                this.inputOtherAddressObj.inputLookupObj.isReadonly = false;
                 this.inputOthBizAddressObj.default = this.otherAddrObj;
                 this.inputOthBizAddressObj.inputField = this.inputOtherAddressObj;
               });

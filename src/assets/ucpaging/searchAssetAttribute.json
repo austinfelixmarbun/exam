@@ -47,7 +47,7 @@
             "value": "Editable After Go Live",
             "placeholder": "Placeholder",
             "isFromURL": false,
-            "isSelectOne": false,
+            "ddlType": "all",
             "url": "https://api.myjson.com/bins/ld6e8",
             "label": "Editable After Go Live",
             "items": [

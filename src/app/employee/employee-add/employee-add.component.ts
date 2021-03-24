@@ -97,7 +97,7 @@ export class EmployeeAddComponent implements OnInit {
 
     this.generalSettingObj = new GeneralSettingObj();
     this.generalSettingObj.GsCode = CommonConstant.GsCodePasswordRegex;
-    httpClient.post(URLConstant.GetGeneralSettingByCode, this.generalSettingObj).subscribe(
+    httpClient.post(URLConstant.GetGeneralSettingByCode, {Code: CommonConstant.GsCodePasswordRegex}).subscribe(
       (response) => {
         this.resultData = response;
         this.passwordPattern = this.resultData.GsValue;
@@ -174,7 +174,8 @@ export class EmployeeAddComponent implements OnInit {
             BankAccNo: this.empBankAccObj.BankAccNo,
             BankAccName: this.empBankAccObj.BankAccName
           });
-          
+          this.inputLookupBankObj.jsonSelect = this.refBankObj;
+          this.inputLookupBankObj.idSelect = this.refBankObj.RefBankId;
           this.inputLookupBankObj.nameSelect = this.refBankObj.BankName;
           this.addressObj.Addr = this.refEmpObj.Addr;
           this.addressObj.AreaCode4 = this.refEmpObj.AreaCode4;
@@ -213,10 +214,6 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   SaveForm() {
-    if (Date.parse(this.RefEmpForm.controls.JoinDt.value) > Date.parse(formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US'))) {
-      this.toastr.warningMessage(ExceptionConstant.JOIN_DATE_MUST_LESS_THAN_ + "Business Date")
-      return;
-    }
     this.spinner.show();
     var refEmpFormData = this.RefEmpForm.value;
 

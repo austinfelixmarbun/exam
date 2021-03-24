@@ -52,7 +52,7 @@ export class HolidayAddComponent implements OnInit {
             this.HolidaySchemeHForm.controls.HolidaySchmCode.disable();
             var holidayObj = new HolidayObj();
             holidayObj.HolidaySchmHId = this.HolidaySchmId;
-            this.http.post(URLConstant.GetHolidaySchmHById, holidayObj).subscribe(
+            this.http.post(URLConstant.GetHolidaySchmHById, {Id: this.HolidaySchmId}).subscribe(
                 (response) => {
                     this.result = response;
                     this.HolidaySchemeHForm.patchValue({

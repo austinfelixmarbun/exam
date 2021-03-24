@@ -56,9 +56,9 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholderNew;
-    this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderIdNew;
-    this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholderNew; 
+    this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholder;
+    this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
+    this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholder; 
     this.getListKeyValueByMrCustTypeCode = URLConstant.GetListKeyValueByMrCustTypeCode;
     this.isExistingCust = false;
   }
@@ -124,7 +124,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     if(this.CustCompanyMgmntShrholderId!=null){
       this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
       this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId  = this.CustCompanyMgmntShrholderId;
-      this.http.post(this.getCustCompanyMgmntShrholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
+      this.http.post(this.getCustCompanyMgmntShrholderUrl, {Id : this.CustCompanyMgmntShrholderId}).subscribe(
         (response) => {
           this.tempCustCompanyMgmntShrholderObj = response;
           this.http.post(URLConstant.GetRefIndustryTypeByIndustryTypeCode, { IndustryTypeCode: response["MrIndustryTypeCode"] }).subscribe(

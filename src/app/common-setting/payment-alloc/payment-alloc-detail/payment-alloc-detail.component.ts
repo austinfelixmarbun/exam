@@ -43,6 +43,7 @@ export class PaymentAllocDetailComponent implements OnInit {
 
   ngOnInit() {
     if (this.mode === "edit") {
+      this.PaymentAllocForm.controls['PaymentAllocCode'].disable();
       this.RefPaymentAllocObj.RefPaymentAllocId = this.RefPaymentAllocId;
       this.http.post<RefPaymentAllocObj>(URLConstant.GetRefPaymentAllocByID, this.RefPaymentAllocObj).subscribe(
         (response) => {
@@ -50,7 +51,7 @@ export class PaymentAllocDetailComponent implements OnInit {
           this.PaymentAllocForm.patchValue({
             PaymentAllocCode: response.PaymentAllocCode,
             PaymentAllocName: response.PaymentAllocName,
-            IsSystem: response.IsSystem,
+            IsSystem: false,
             IsActive: response.IsActive
           })
         },
@@ -59,10 +60,11 @@ export class PaymentAllocDetailComponent implements OnInit {
         }
       );
     }
+    else this.PaymentAllocForm.controls['PaymentAllocCode'].enable();
   }
 
   SaveForm() {
-    this.RefPaymentAllocObj.PaymentAllocCode = this.PaymentAllocForm.value.PaymentAllocCode;
+    this.RefPaymentAllocObj.PaymentAllocCode = this.PaymentAllocForm.controls['PaymentAllocCode'].value;
     this.RefPaymentAllocObj.PaymentAllocName = this.PaymentAllocForm.value.PaymentAllocName;
     this.RefPaymentAllocObj.IsActive = this.PaymentAllocForm.value.IsActive;
     this.RefPaymentAllocObj.IsSystem = this.PaymentAllocForm.value.IsSystem;

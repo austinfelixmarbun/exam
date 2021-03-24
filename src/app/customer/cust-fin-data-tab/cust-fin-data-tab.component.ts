@@ -158,7 +158,7 @@ export class CustFinDataTabComponent implements OnInit {
       var custCompanyData;
       var custCompany = new CustCompanyObj();
       custCompany.CustId = this.CustId;
-      this.httpClient.post(URLConstant.GetCustCompanyByCustId, custCompany).pipe(
+      this.httpClient.post(URLConstant.GetCustCompanyByCustId, {Id : this.CustId}).pipe(
         map((response: CustCompanyObj) => {
           custCompanyData = response;
           return response;

@@ -36,7 +36,7 @@ export class CustomerViewDocumentComponent implements OnInit {
 
   async ngOnInit() {
     var custObj = { "CustId": this.CustId };
-    await this.http.post(URLConstant.GetCustByCustId, custObj).toPromise().then(
+    await this.http.post(URLConstant.GetCustByCustId, {Id : this.CustId}).toPromise().then(
       (response: any) => {
         let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         this.dmsObj = new DMSObj();

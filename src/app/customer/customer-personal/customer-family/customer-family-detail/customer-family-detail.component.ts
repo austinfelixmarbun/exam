@@ -32,9 +32,9 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 })
 export class CustomerFamilyDetailComponent implements OnInit {
   @Input() listCustIdToExclude: Array<string>;
-  @Input() customerPersonalFamilyId: number;
-  @Input() custIdInput: number;
-  @Output() ResponseSaveFamily: EventEmitter<any>;
+  @Input() customerPersonalFamilyId: number = 0;
+  @Input() custIdInput: number = 0;
+  @Output() ResponseSaveFamily: EventEmitter<any> = new EventEmitter<any>();
   custPersonalFamilyObj: any;
   isExistingCust: boolean;
   isEditCustFamily: boolean;
@@ -90,7 +90,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     MrIdTypeCode: ['', [Validators.required, Validators.maxLength(100)]],
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', [Validators.required]],
-    IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)]],
     TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     IdExpiredDt: [''],
     MrMaritalStatCode: [''],
@@ -103,14 +103,14 @@ export class CustomerFamilyDetailComponent implements OnInit {
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) {
+  }
+
+  initData() {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.isExistingCust = false;
     this.isEditCustFamily = false;
-    this.ResponseSaveFamily = new EventEmitter<any>();
-    this.customerPersonalFamilyId = 0;
-    this.custIdInput = 0;
     this.CustRelationshipList = new Array<Object>();
     this.custDataToCheckDuplicate = new Object();
     this.UcAddressObj = new UcAddressObj();
@@ -119,6 +119,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initData();
     console.log("ameng");
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -184,7 +185,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
           return response;
         }),
         mergeMap((response) => {
-          let getCust = this.http.post(URLConstant.GetCustByCustId, { CustId: response["FamilyId"] });
+          let getCust = this.http.post(URLConstant.GetCustByCustId, { Id: response["FamilyId"] });
           let getCustPersonal = this.http.post(URLConstant.GetCustPersonalbyCustId, { CustId: response["FamilyId"] });
           let getCustAddr = this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: response["FamilyId"], MrCustAddrTypeCode: CommonConstant.AddrTypeLegal });
           return forkJoin([getCust, getCustPersonal, getCustAddr]);
@@ -197,6 +198,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
           var custAddrData = response[2] as CustAddrObj;
           console.log("CustAddrData: " + JSON.stringify(custAddrData));
           this.existingCustomerLookUpObj.nameSelect = custData.CustName;
+          this.disableInput();
           this.CustomerFamilyForm.patchValue({
             CustPersonalFamilyId: this.custPersonalFamilyObj["CustPersonalFamilyId"],
             CustId: this.custPersonalFamilyObj["CustId"],
@@ -224,6 +226,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
             RowVersionCust: custData.RowVersion,
             RowVersionCustPersonal: custPersonalData.RowVersion
           });
+          this.onChangeIdType();
           this.CustomerFamilyForm.controls.Gender.disable();
           this.CustomerFamilyForm.controls.MrIdTypeCode.disable();
           this.CustomerFamilyForm.controls.BirthPlace.disable();
@@ -281,6 +284,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
         this.CustomerFamilyForm.patchValue({
           MrIdTypeCode: this.tempIdType[0].Key
         });
+        this.onChangeIdType();
         if (this.tempIdType[0].Key == this.KTP) {
           this.tempKTPCheck = true;
 
@@ -313,6 +317,14 @@ export class CustomerFamilyDetailComponent implements OnInit {
       });
   }
 
+  disableInput() {
+    this.existingCustomerLookUpObj.isDisable = true;
+    this.existingCustomerLookUpObj.isReadonly = true;
+    this.inputAddressObj.isReadonly = true;
+    this.inputAddressObj.inputField.inputLookupObj.isReadonly = true;
+    this.inputAddressObj.inputField.inputLookupObj.isDisable = true;
+  }
+
   getLookUpCustomer(event) {
     var custId = event.CustId;
     var custObj = new CustObj();
@@ -320,7 +332,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
     custObj.CustId = custId;
     custPersonalObj.CustId = custId;
-    let getCust = this.http.post(URLConstant.GetCustByCustId, custObj);
+    let getCust = this.http.post(URLConstant.GetCustByCustId, {Id : custObj.CustId});
     let getCustPersonal = this.http.post(URLConstant.GetCustPersonalbyCustId, custObj);
     let getCustAddr = this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: custId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal });
     forkJoin([getCust, getCustPersonal, getCustAddr]).toPromise().then(
@@ -350,6 +362,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
           Email1: custPersonalData.Email1
         });
 
+        this.onChangeIdType();
         var addrForm = this.CustomerFamilyForm.get("UcAddress");
         addrForm.patchValue({
           Addr: custAddrData.Addr,
@@ -484,6 +497,19 @@ export class CustomerFamilyDetailComponent implements OnInit {
       this.tempKTPCheck = false;
     }
     this.CustomerFamilyForm.controls.IdExpiredDt.updateValueAndValidity();
+    this.onChangeIdType();
+  }
+
+  onChangeIdType() {
+    let idType: string = this.CustomerFamilyForm.get("MrIdTypeCode").value;
+
+    this.CustomerFamilyForm.get("IdNo").clearValidators();
+    if (idType == CommonConstant.MrIdTypeCodeEKTP) {
+      this.CustomerFamilyForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)]);
+    } else {
+      this.CustomerFamilyForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
+    }
+    this.CustomerFamilyForm.get("IdNo").updateValueAndValidity();
   }
 
   back() {

@@ -132,7 +132,7 @@ export class CustomerContactAddComponent implements OnInit {
       GsCode: CommonConstant.GSCodeDefLocalNationality
     }
 
-    this.http.post(this.GetGeneralSettingByCodeUrl, generalSettingObjDefLocalNationality).subscribe(
+    this.http.post(this.GetGeneralSettingByCodeUrl, {Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
       (response) => {
         this.Country = response;
 
@@ -153,7 +153,7 @@ export class CustomerContactAddComponent implements OnInit {
         var countryCode = {
           CountryCode: this.Country.GsValue
         };
-        this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+        this.http.post(URLConstant.GetRefCountryByCountryCode, {Code: this.Country.GsValue}).subscribe(
           (response) => {
             this.LocalCountry = response;
           });
@@ -210,6 +210,7 @@ export class CustomerContactAddComponent implements OnInit {
           this.CustomerContactForm.patchValue({
             MrIdTypeCode: this.tempIdType[0].Key
           });
+          this.onChangeIdType();
         }
         if (this.tempIdType[0].Key == this.KTP) {
           this.tempKTPCheck = true;
@@ -335,6 +336,7 @@ export class CustomerContactAddComponent implements OnInit {
             // IsEmergencyContact: this.tempCustPersonalContactPerson.IsEmergencyContact,
             MrCustRelationshipCode: this.tempCustPersonalContactPerson.MrCustRelationshipCode,
           });
+          this.onChangeIdType();
           if (this.tempCustPersonalContactPerson.MrJobProfessionCode != null) {
             var ProfessionCodeObj = {
               ProfessionCode: this.tempCustPersonalContactPerson.MrJobProfessionCode,
@@ -352,7 +354,7 @@ export class CustomerContactAddComponent implements OnInit {
             var countryCode = {
               CountryCode: this.tempCustPersonalContactPerson.NationalityCountryCode
             };
-            this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+            this.http.post(URLConstant.GetRefCountryByCountryCode, {Code: this.tempCustPersonalContactPerson.NationalityCountryCode}).subscribe(
               (response) => {
 
                 this.tempCountry = response;
@@ -392,6 +394,17 @@ export class CustomerContactAddComponent implements OnInit {
         }
       });
   }
+	
+  onChangeIdType() {
+    let idType: string = this.CustomerContactForm.get("MrIdTypeCode").value;
+
+    if (idType == CommonConstant.MrIdTypeCodeEKTP) {
+      this.CustomerContactForm.get("IdNo").setValidators([Validators.minLength(16), Validators.maxLength(16)]);
+    } else {
+      this.CustomerContactForm.get("IdNo").clearValidators();
+    }
+    this.CustomerContactForm.get("IdNo").updateValueAndValidity();
+  }
 
   copyAddress() {
     if(this.listCustAddr.length<1){
@@ -399,7 +412,7 @@ export class CustomerContactAddComponent implements OnInit {
     }
     var custAddrFromObj = new CustAddrObj();
     custAddrFromObj.CustAddrId = this.CustomerContactForm.controls["CopyFromContactPerson"].value;
-    this.http.post<CustAddrObj>(URLConstant.GetCustAddr, custAddrFromObj).subscribe(
+    this.http.post<CustAddrObj>(URLConstant.GetCustAddr, {Id : custAddrFromObj.CustAddrId}).subscribe(
       (response) => {
         var copyCustomerAddrFrom = response;
 
@@ -530,7 +543,7 @@ export class CustomerContactAddComponent implements OnInit {
           var countryCode = {
             CountryCode: this.tempCustPersonal.WnaCountryCode
           };
-          this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+          this.http.post(URLConstant.GetRefCountryByCountryCode, {Code: this.tempCustPersonal.WnaCountryCode}).subscribe(
             (response) => {
 
               this.tempCountry = response;
@@ -548,7 +561,7 @@ export class CustomerContactAddComponent implements OnInit {
       }
 
     );
-    this.http.post(URLConstant.GetCustByCustId, this.custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.custObj.CustId}).subscribe(
       (response) => {
         this.tempCust = response;
         this.CustomerContactForm.patchValue({
@@ -558,6 +571,7 @@ export class CustomerContactAddComponent implements OnInit {
           IdExpiredDt: datePipe.transform(this.tempCust.IdExpiredDt, 'yyyy-MM-dd'),
           TaxIdNo: this.tempCust.TaxIdNo
         });
+        this.onChangeIdType();
       }
     );
     this.custAddrObj = new CustAddrObj();
@@ -605,6 +619,7 @@ export class CustomerContactAddComponent implements OnInit {
       this.tempKTPCheck = false;
     }
     this.CustomerContactForm.controls.IdExpiredDt.updateValueAndValidity();
+    this.onChangeIdType();
   }
   onOptionsNationalitySelected(event) {
     if (event.target.value == CommonConstant.NationalityCodeLocal) {

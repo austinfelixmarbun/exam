@@ -44,7 +44,7 @@ export class HolidayDetailEditComponent implements OnInit {
     this.title = "Holiday Scheme-Edit";
     var HolidayObj = new HolidayDObj;
     HolidayObj.HolidaySchmDId = this.HolidaySchmDId;
-    this.http.post(URLConstant.GetHolidaySchmDById, HolidayObj).subscribe(
+    this.http.post(URLConstant.GetHolidaySchmDById, {Id: this.HolidaySchmDId}).subscribe(
       (response) => {
         this.result = response;
         this.HolidayListForm.patchValue({

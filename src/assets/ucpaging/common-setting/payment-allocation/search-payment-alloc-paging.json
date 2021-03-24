@@ -27,7 +27,7 @@
             "value": "Active Status",
             "placeholder": "Placeholder",
             "isFromURL": false,
-            "isSelectOne": false,
+            "ddlType": "all",
             "url": "https://api.myjson.com/bins/ld6e8",
             "label": "Is System",
             "items": [
@@ -49,7 +49,7 @@
             "value": "Active Status",
             "placeholder": "Placeholder",
             "isFromURL": false,
-            "isSelectOne": false,
+            "ddlType": "all",
             "url": "https://api.myjson.com/bins/ld6e8",
             "label": "Is Active",
             "items": [
@@ -131,7 +131,7 @@
                             "conditions": [
                                 {
                                     "property": "IsSystem",
-                                    "value": "0",
+                                    "value": "1",
                                     "restriction": "NEQ"
                                 }
                             ],

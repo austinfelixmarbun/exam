@@ -93,7 +93,7 @@ export class AttributeDetailComponent implements OnInit {
 
     
     if (this.pageType == "edit") {
-      let getRefAttr = this.httpClient.post(URLConstant.GetRefAttrById, { RefAttrId: this.refAttrId }).pipe(first());
+      let getRefAttr = this.httpClient.post(URLConstant.GetRefAttrById, {Id: this.refAttrId }).pipe(first());
       forkJoin([getRefAttr, getAttrType, getRefMasterInputType, getRefMasterPatternCode, getRefMasterAttributeGroup]).subscribe(
         (response) => {
           var refAttr = response[0];

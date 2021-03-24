@@ -1,6 +1,6 @@
 {
     "title": "Holiday Detail",
-    "exportExcel": false, 
+    "exportExcel": false,
     "component": [
         {
             "type": "dropdown",
@@ -9,7 +9,7 @@
             "value": "Public Holiday",
             "placeholder": "Placeholder",
             "isFromURL": false,
-            "isSelectOne" : false,
+            "ddlType": "all",
             "url": "https://api.myjson.com/bins/ld6e8",
             "label": "Public Holiday",
             "items": [
@@ -33,24 +33,24 @@
             "placeholder": "Placeholder"
         },
         {
-          "type": "datepicker",
-          "datatype": "date",
-          "name": "holidayDt",
-          "id": "holidayDtGte",
-          "value": "",
-          "restriction": "gte",
-          "label": "Date From",
-          "placeholder": "Placeholder"
+            "type": "datepicker",
+            "datatype": "date",
+            "name": "holidayDt",
+            "id": "holidayDtGte",
+            "value": "",
+            "restriction": "gte",
+            "label": "Date From",
+            "placeholder": "Placeholder"
         },
         {
-          "type": "datepicker",
-          "datatype": "date",
-          "name": "holidayDt",
-          "id": "holidayDtLte",
-          "value": "",
-          "restriction": "lte",
-          "label": "Date To",
-          "placeholder": "Placeholder"
+            "type": "datepicker",
+            "datatype": "date",
+            "name": "holidayDt",
+            "id": "holidayDtLte",
+            "value": "",
+            "restriction": "lte",
+            "label": "Date To",
+            "placeholder": "Placeholder"
         }
     ]
 }

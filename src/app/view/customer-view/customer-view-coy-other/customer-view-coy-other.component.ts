@@ -28,7 +28,7 @@ export class CustomerViewCoyOtherComponent implements OnInit {
       }
     });
     var custObj = { "CustId": this.CustId };
-    this.http.post(this.GetCustAttrContentForCustViewByCustIdUrl, custObj).subscribe(
+    this.http.post(this.GetCustAttrContentForCustViewByCustIdUrl, { Id : this.CustId }).subscribe(
       response => {
         this.responseCustAttr = response['ReturnObject'];
       },

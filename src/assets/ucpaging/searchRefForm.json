@@ -9,7 +9,7 @@
             "placeholder": "Placeholder",
             "datatype": "text",
             "isFromURL": true,
-            "isSelectOne": false,
+            "ddlType": "all",
             "isQueryIn": true,
             "url": "",
             "path": "/RefModule/GetListRefModuleKeyValue",
@@ -41,7 +41,7 @@
             "value": "",
             "placeholder": "Placeholder",
             "isFromURL": false,
-            "isSelectOne": false,
+            "ddlType": "all",
             "items": [
                 {
                     "key": "true",
@@ -62,7 +62,7 @@
             "placeholder": "Placeholder",
             "datatype": "text",
             "isFromURL": true,
-            "isSelectOne": false,
+            "ddlType": "all",
             "url": "",
             "path": "/RefMaster/GetListKeyValueActiveByCode",
             "label": "Class",

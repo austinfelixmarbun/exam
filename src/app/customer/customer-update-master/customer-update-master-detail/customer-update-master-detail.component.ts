@@ -78,7 +78,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
 
   ngOnInit() {
     this.claimTask();
-    this.http.post(URLConstant.GetCustByCustNo, { CustNo: this.CustNo }).toPromise().then(
+    this.http.post(URLConstant.GetCustByCustNo, { TrxNo: this.CustNo }).toPromise().then(
       (response: CustObj) => {
         this.MrCustTypeCode = response.MrCustTypeCode;
         if(response.MrCustTypeCode == CommonConstant.CustTypePersonal){

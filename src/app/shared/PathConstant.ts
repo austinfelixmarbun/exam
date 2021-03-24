@@ -113,6 +113,8 @@ export class PathConstant {
     public static CS_MASTER_DETAIL = PathConstant.CS_MASTER + "/" + PathConstant.DETAIL;
     public static CS_GEN_SETTING = "GeneralSetting";
     public static CS_GEN_SETTING_DETAIL = PathConstant.CS_GEN_SETTING + "/" + PathConstant.DETAIL;
+    public static CS_GEN_SETTING_ADMIN = "GeneralSettingAdmin";
+    public static CS_GEN_SETTING_DETAIL_ADMIN = PathConstant.CS_GEN_SETTING_ADMIN + "/" + PathConstant.DETAIL;
     public static CS_CURRENCY = "Currency";
     public static CS_CURRENCY_PAGING = PathConstant.CS_CURRENCY + "/" + PathConstant.PAGING;
     public static CS_CURRENCY_ADD = PathConstant.CS_CURRENCY + "/" + PathConstant.ADD;

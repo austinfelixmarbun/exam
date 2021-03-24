@@ -147,7 +147,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
 
   SaveValue() {
     if(this.IsFromCustMgmntShareholder){
-      this.http.post(URLConstant.AddCustCompanyMgmntShrholderNew, this.CustMgmntShareholderData).toPromise().then(
+      this.http.post(URLConstant.AddCustCompanyMgmntShrholder, this.CustMgmntShareholderData).toPromise().then(
         (response) => {
           this.ResponseSaveData.emit({mode : 'check'});
         }
@@ -255,7 +255,8 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
         this.http.post(URLConstant.EditDuplicateCust, this.addCustObj).subscribe(
           () => {
             if(this.IsFromCustMgmntShareholder){
-              this.http.post(URLConstant.AddCustCompanyMgmntShrholderNew, this.CustMgmntShareholderData).toPromise().then(
+              this.CustMgmntShareholderData.ShareholderId = this.addCustObj.CustObj.CustId;
+              this.http.post(URLConstant.AddCustCompanyMgmntShrholder, this.CustMgmntShareholderData).toPromise().then(
                 (response) => {
                   this.ResponseSaveData.emit({mode : 'check'});
                 }
@@ -314,7 +315,8 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
         this.http.post(URLConstant.EditDuplicateNegativeCust, this.RequestNegativeCustObj).subscribe(
           (response) => {
             if(this.IsFromCustMgmntShareholder){
-              this.http.post(URLConstant.AddCustCompanyMgmntShrholderNew, this.CustMgmntShareholderData).toPromise().then(
+              this.CustMgmntShareholderData.ShareholderId = this.RequestNegativeCustObj.CustId;
+              this.http.post(URLConstant.AddCustCompanyMgmntShrholder, this.CustMgmntShareholderData).toPromise().then(
                 (response) => {
                   this.ResponseSaveData.emit({mode : 'check'});
                 }

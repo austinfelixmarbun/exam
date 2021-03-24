@@ -53,6 +53,8 @@ import { PathConstant } from 'app/shared/PathConstant';
 import { OfficeBankAccountAccDetailComponent } from './office-bank-account/office-bank-account-acc-detail/office-bank-account-acc-detail.component';
 import { OfficeBankAccountDetailComponent } from './office-bank-account/office-bank-account-detail/office-bank-account-detail.component';
 import { OfficeBankAccountPagingComponent } from './office-bank-account/office-bank-account-paging/office-bank-account-paging.component';
+import { GeneralSettingAdminComponent } from './general-setting-admin/general-setting-admin.component';
+import { GeneralSettingAdminDetailComponent } from './general-setting-admin/general-setting-admin-detail/general-setting-admin-detail.component';
 
 const routes: Routes = [
   {
@@ -98,6 +100,20 @@ const routes: Routes = [
         component: GeneralSettingAddEditComponent,
         data: {
           title: 'General Setting Maintenance Add Edit'
+        },
+      },
+      {
+        path: PathConstant.CS_GEN_SETTING_ADMIN,
+        component: GeneralSettingAdminComponent,
+        data: {
+          title: 'General Setting Admin Paging'
+        },
+      },
+      {
+        path: PathConstant.CS_GEN_SETTING_DETAIL_ADMIN,
+        component: GeneralSettingAdminDetailComponent,
+        data: {
+          title: 'General Setting Admin Add Edit'
         },
       },
       {

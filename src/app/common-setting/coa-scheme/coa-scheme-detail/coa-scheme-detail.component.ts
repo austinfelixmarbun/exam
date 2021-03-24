@@ -81,7 +81,7 @@ export class CoaSchemeDetailComponent implements OnInit {
   }
 
   GetCoaSchmData() {
-    this.http.post<CoaSchmObj>(URLConstant.GetCoaSchmByCoaSchmId, { CoaSchmId: +this.coaSchmId }).subscribe(
+    this.http.post<CoaSchmObj>(URLConstant.GetCoaSchmByCoaSchmId, { Id: this.coaSchmId }).subscribe(
       (response) => {
         this.coaSchmObj = response;
 

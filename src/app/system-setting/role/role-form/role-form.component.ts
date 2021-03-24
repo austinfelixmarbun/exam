@@ -51,7 +51,7 @@ export class RoleFormComponent implements OnInit {
   }
 
   GetListRefFormRoleByRefRoleId() {
-    this.http.post<Array<AuthFormObj>>(URLConstant.GetListAuthFormByRefRoleId, { RefRoleId: this.RefRoleId }).subscribe(
+    this.http.post<Array<AuthFormObj>>(URLConstant.GetListAuthFormByRefRoleId, {Id: this.RefRoleId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
 

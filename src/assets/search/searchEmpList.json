@@ -1,4 +1,3 @@
-
 {
     "title": "Employee Position",
     "component": [
@@ -10,7 +9,7 @@
             "placeholder": "Placeholder",
             "datatype": "numeric",
             "isFromURL": true,
-            "isSelectOne" : false,
+            "ddlType": "all",
             "url": "",
             "path": "/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue",
             "label": "Office Name",

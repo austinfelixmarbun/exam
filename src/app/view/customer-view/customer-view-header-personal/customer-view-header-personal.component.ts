@@ -60,7 +60,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
   ngOnInit() {
     this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustByCustId, this.custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustObj = response;
         var refMasterObjMrCustModelCode = {

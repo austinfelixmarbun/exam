@@ -76,12 +76,12 @@ export class CustomerCompanyPageComponent implements OnInit {
       this.stepper.to(this.CustStepIndex);
 
       var custObj = { CustId: this.IdCust };
-      this.http.post(URLConstant.GetCustCompanyByCustId, custObj).subscribe(
+      this.http.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
         (response: any) => {
           this.CustCompanyId = response['CustCompanyId'];
         } 
       );
-      await this.http.post(URLConstant.GetCustByCustId, custObj).toPromise().then(
+      await this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).toPromise().then(
         (response: any) => {
           let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
           this.dmsObj = new DMSObj();
