@@ -224,7 +224,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
     this.custJobDataObj = new CustPersonalJobDataObj();
     this.custJobDataObj.CustId = this.IdCust;
-    this.http.post(this.getJobDataByCustId, this.custJobDataObj).subscribe(
+    this.http.post(this.getJobDataByCustId, {Id : this.IdCust}).subscribe(
       (response: any) => {
         this.returnCustJobDataObj = response;
 

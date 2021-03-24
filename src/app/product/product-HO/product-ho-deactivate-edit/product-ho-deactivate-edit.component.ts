@@ -114,10 +114,8 @@ export class ProductHODeactivateEditComponent implements OnInit {
     this.InputObj.CategoryCode = CommonConstant.CAT_CODE_PRD_HO_DEACT_APV;
     this.InputObj.SchemeCode = CommonConstant.SCHM_CODE_APV_HO_DEACT_SCHM;
     this.InputObj.Reason = this.allRefReasonMethod;
-    let ProductObj = {
-      ProdId: this.prodId
-    } 
-    this.http.post(URLConstant.GetProductById, ProductObj).subscribe(
+    
+    this.http.post(URLConstant.GetProductById, {Id : this.prodId}).subscribe(
       (response) => {
         this.InputObj.TrxNo = response["ProdCode"];
         this.IsReady = true;

@@ -31,7 +31,7 @@ export class CustomerViewCustomerGroupComponent implements OnInit {
       }
     });
     var custObj = { "CustId": this.CustId };
-    this.http.post(this.GetListCustGrpForCustViewByCustIdUrl, custObj).subscribe(
+    this.http.post(this.GetListCustGrpForCustViewByCustIdUrl, {Id : this.CustId}).subscribe(
       response => {
         this.responseObj = response['ReturnObject'];
       },

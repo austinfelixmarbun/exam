@@ -87,10 +87,8 @@ export class ProductHOApprovalDetailComponent implements OnInit {
     this.InputApvObj.PathUrlContinueToLevel = URLConstant.ContinueToLevel;
     this.InputApvObj.RequestId = this.ApvReqId;
     this.InputApvObj.PathUrlGetHistory = URLConstant.GetTaskHistory;
-    var data = {
-      ProdHId: this.prodHId
-    } 
-    this.http.post(URLConstant.GetProductByHId, data).subscribe(
+
+    this.http.post(URLConstant.GetProductByHId, {Id : this.prodHId}).subscribe(
       (response) => {
         this.InputApvObj.TrxNo = response["ProdCode"];
         this.IsReady = true;

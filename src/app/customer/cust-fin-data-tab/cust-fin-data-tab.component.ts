@@ -107,7 +107,7 @@ export class CustFinDataTabComponent implements OnInit {
       var custPersonalData;
       var custPersonal = new CustPersonalObj();
       custPersonal.CustId = this.CustId;
-      this.httpClient.post(URLConstant.GetCustPersonalbyCustId, custPersonal).pipe(
+      this.httpClient.post(URLConstant.GetCustPersonalbyCustId, {Id : this.CustId}).pipe(
         map((response: CustPersonalObj) => {
           if (!response || response.MrMaritalStatCode == null) {
             this.mrMaritalStatCode = CommonConstant.MR_MARITAL_STAT_CODE_SINGLE;
@@ -121,7 +121,7 @@ export class CustFinDataTabComponent implements OnInit {
         mergeMap((response: CustPersonalObj) => {
           var custPersonalFinData = new CustPersonalFinDataObj();
           custPersonalFinData.CustPersonalId = response.CustPersonalId;
-          let custFinData = this.httpClient.post(URLConstant.GetCustPersonalFinDataByCustPersonalId, custPersonalFinData);
+          let custFinData = this.httpClient.post(URLConstant.GetCustPersonalFinDataByCustPersonalId, {Id : response.CustPersonalId});
           var refMasterSourceIncome = new RefMasterObj();
           refMasterSourceIncome.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeSourceIncome;
           let sourceIncomeList = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterSourceIncome);
@@ -166,7 +166,7 @@ export class CustFinDataTabComponent implements OnInit {
         mergeMap((response: CustCompanyObj) => {
           var custCompanyFinData = new CustCompanyFinDataObj();
           custCompanyFinData.CustCompanyId = response.CustCompanyId;
-          return this.httpClient.post(URLConstant.GetCustCompanyFinDataByCustCompanyId, custCompanyFinData);
+          return this.httpClient.post(URLConstant.GetCustCompanyFinDataByCustCompanyId, {Id : response.CustCompanyId});
         })
       ).subscribe(
         (response: any) => {

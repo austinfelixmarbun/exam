@@ -198,7 +198,7 @@ export class EditMainDataPersonalComponent implements OnInit {
         );
       }
     );
-    await this.http.post<CustPersonalObj>(this.getCustPersonalByCustIdUrl, this.custPersonalObj).toPromise().then(
+    await this.http.post<CustPersonalObj>(this.getCustPersonalByCustIdUrl, {Id : this.custPersonalObj.CustId}).toPromise().then(
       (response) => {
         this.tempCustPersonalObj = response;
         this.CustomerPersonalForm.patchValue({

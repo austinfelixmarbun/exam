@@ -44,7 +44,7 @@ export class SearchOfficeComponentOffering implements OnInit {
       }
     ];
     this.obj.ProdHId = this.ProdHId;
-    this.http.post(URLConstant.GetListProdBranchOfficeMbrByProdHId, this.obj).subscribe(
+    this.http.post(URLConstant.GetListProdBranchOfficeMbrByProdHId, {Id : this.ProdHId}).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);
         for (let i = 0; i < response["ReturnObject"].length; i++) {
