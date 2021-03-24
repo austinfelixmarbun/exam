@@ -66,7 +66,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
         var refMasterObjMrCustModelCode = {
           MasterCode: this.tempCustObj.MrCustModelCode
         }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrCustModelCode).subscribe(
+        this.http.post(this.getRefMasterByMasterCodeUrl, {Code: this.tempCustObj.MrCustModelCode }).subscribe(
           (response) => {
             this.tempMrCustModelCode = response;
           }
@@ -74,7 +74,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
         var refMasterObjMrIdTypeCode = {
           MasterCode: this.tempCustObj.MrIdTypeCode
         }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrIdTypeCode).subscribe(
+        this.http.post(this.getRefMasterByMasterCodeUrl, {Code : this.tempCustObj.MrIdTypeCode}).subscribe(
           (response) => {
             this.tempMrIdTypeCode = response;
           }
@@ -99,7 +99,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
         var refMasterObjMrGenderCode = {
           MasterCode: this.tempCustPersonalObj.MrGenderCode
         }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrGenderCode).subscribe(
+        this.http.post(this.getRefMasterByMasterCodeUrl, {Code: this.tempCustPersonalObj.MrGenderCode}).subscribe(
           (response) => {
             this.tempMrGenderCode = response;
           }

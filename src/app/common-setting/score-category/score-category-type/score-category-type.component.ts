@@ -64,7 +64,7 @@ export class ScoreCategoryTypeComponent implements OnInit {
     if (this.type == 'edit') {
       this.title = "Score Category Type - Edit";
       this.scoreCategorySchmHObj.ScoreCategorySchmHId = this.scoreCategorySchmHId;
-      this.httpClient.post(URLConstant.GetScoreCategorySchmHById, this.scoreCategorySchmHObj).subscribe(
+      this.httpClient.post(URLConstant.GetScoreCategorySchmHById, {Id : this.scoreCategorySchmHId}).subscribe(
         (response) => {
           this.ScoreCategorySchmHForm.patchValue({
             ScoreCategorySchmHCode: response["ScoreCategorySchmHCode"],

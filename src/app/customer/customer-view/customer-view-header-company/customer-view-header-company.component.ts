@@ -78,7 +78,7 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
         var refMasterObjMrCompanyTypeCode = {
           MasterCode: this.tempCustCompanyObj.MrCompanyTypeCode
         }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrCompanyTypeCode).subscribe(
+        this.http.post(this.getRefMasterByMasterCodeUrl, {Code: this.tempCustCompanyObj.MrCompanyTypeCode}).subscribe(
           (response) => {
             this.tempMrCompanyTypeCode = response;
           }

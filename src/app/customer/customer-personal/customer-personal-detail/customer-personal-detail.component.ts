@@ -140,7 +140,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
         var refMasterObjMrNationalityCode = {
           RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality
         }
-        this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, refMasterObjMrNationalityCode).subscribe(
+        this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, {Code : CommonConstant.RefMasterTypeCodeNationality}).subscribe(
           (response) => {
             this.tempNationality = response["RefMasterObjs"];
 

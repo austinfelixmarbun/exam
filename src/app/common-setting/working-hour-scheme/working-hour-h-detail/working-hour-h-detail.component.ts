@@ -116,7 +116,7 @@ export class WorkingHourHDetailComponent implements OnInit {
       this.WorkingHourSchmHForm.controls["WorkingHourSchmCode"].disable();
       this.workingHourSchmHObj = new WorkingHourSchmHObj();
       this.workingHourSchmHObj.WorkingHourSchmHId = this.workingHourSchmHId;
-      this.http.post(this.getUrl, this.workingHourSchmHObj).subscribe(
+      this.http.post(this.getUrl, {Id : this.workingHourSchmHId}).subscribe(
         response => {
           this.resultData = response;
           this.WorkingHourSchmHForm.patchValue({

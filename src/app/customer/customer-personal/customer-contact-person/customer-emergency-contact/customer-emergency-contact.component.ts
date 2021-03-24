@@ -222,7 +222,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     var refMasterObjMrNationalityCode = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality
     }
-    this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, refMasterObjMrNationalityCode).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, {Code : CommonConstant.RefMasterTypeCodeNationality}).subscribe(
       (response) => {
         this.tempNationality = response["RefMasterObjs"];
         this.CustomerContactForm.patchValue({
@@ -336,11 +336,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
           });
           this.onChangeIdType();
           if (this.tempCustPersonalContactPerson.MrJobProfessionCode != null) {
-            var ProfessionCodeObj = {
-              ProfessionCode: this.tempCustPersonalContactPerson.MrJobProfessionCode,
-              RowVersion: ""
-            }
-            this.http.post(URLConstant.GetRefProfessionByProfessionCode, ProfessionCodeObj).subscribe(
+            
+            this.http.post(URLConstant.GetRefProfessionByProfessionCode, {Code : this.tempCustPersonalContactPerson.MrJobProfessionCode}).subscribe(
               (response) => {
                 this.tempProfessionCodeObj = response;
                 this.professionLookUpObj.nameSelect = this.tempProfessionCodeObj.ProfessionName;

@@ -48,7 +48,7 @@ export class ScoreCategoryScoringComponent implements OnInit {
 
   ngOnInit() {   
     this.scoreCategorySchmHObj.ScoreCategorySchmHId = this.scoreCategorySchmHId;
-    this.httpClient.post(URLConstant.GetRefScoreCategoryTypeWithDetailById, this.scoreCategorySchmHObj).subscribe(
+    this.httpClient.post(URLConstant.GetRefScoreCategoryTypeWithDetailById, {Id : this.scoreCategorySchmHId}).subscribe(
       (response) => {
         this.scoreCategorySchmHObj.ScoreCategorySchmHCode = response["ScoreCategorySchmHCode"];
         this.scoreCategorySchmHObj.ScoreCategorySchmHName = response["ScoreCategorySchmHName"];

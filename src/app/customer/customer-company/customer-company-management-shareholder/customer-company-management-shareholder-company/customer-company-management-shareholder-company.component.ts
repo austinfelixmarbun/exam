@@ -127,7 +127,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       this.http.post(this.getCustCompanyMgmntShrholderUrl, {Id : this.CustCompanyMgmntShrholderId}).subscribe(
         (response) => {
           this.tempCustCompanyMgmntShrholderObj = response;
-          this.http.post(URLConstant.GetRefIndustryTypeByIndustryTypeCode, { IndustryTypeCode: response["MrIndustryTypeCode"] }).subscribe(
+          this.http.post(URLConstant.GetRefIndustryTypeByIndustryTypeCode, { Code: response["MrIndustryTypeCode"] }).subscribe(
             (response) => {
               this.lookUpIndustryTypeObj.nameSelect = response["IndustryTypeName"]; 
               this.lookUpIndustryTypeObj.jsonSelect = response;
