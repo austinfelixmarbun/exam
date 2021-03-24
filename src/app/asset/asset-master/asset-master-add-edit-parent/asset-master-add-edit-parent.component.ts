@@ -135,7 +135,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       // this.AssetMasterParentForm.controls["AssetName"].disable();
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
-      this.http.post(URLConstant.GetAssetMasterById, this.assetMasterObj).subscribe(
+      this.http.post(URLConstant.GetAssetMasterById, {Id : this.AssetMasterId}).subscribe(
         (response: AssetMasterObj) => {
           this.resultData = response;
           this.AssetMasterParentForm.patchValue({
