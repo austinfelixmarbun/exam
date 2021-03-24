@@ -9,7 +9,6 @@ import { RefCurrObj } from 'app/shared/model/RefCurrObj.Model';
 import { OfficeBankAccObj } from 'app/shared/model/common-setting/OfficeBankAcc.Model';
 import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { PathConstant } from 'app/shared/PathConstant';
 
 @Component({
   selector: 'app-office-bank-account-detail',
@@ -24,7 +23,6 @@ export class OfficeBankAccountDetailComponent implements OnInit {
   OfficeCode: string;
   BankId: number;
   BankAccType: string;
-  CurrId: number;
   BankAccPurpose: string;
 
   readonly CancelLink: string = NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING;
@@ -67,7 +65,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
     OfficeName: ['', [Validators.required]],
     BankName: ['', [Validators.required]],
     BankAccType: ['', [Validators.required]],
-    CurrName: ['', [Validators.required]],
+    CurrCode: ['', [Validators.required]],
     LegalDoc: [false],
     BankAccPurpose: ['', [Validators.required]],
   });
@@ -158,11 +156,10 @@ export class OfficeBankAccountDetailComponent implements OnInit {
             AccNo: this.OfficeBankAccObj.OfficeBankAccNo,
             BankAccType: this.OfficeBankAccObj.BankAccType,
             LegalDoc: this.OfficeBankAccObj.IsLegalDoc,
-            BankAccPurpose: this.OfficeBankAccObj.MrBankAccPurposeCode
+            BankAccPurpose: this.OfficeBankAccObj.MrBankAccPurposeCode,
           })
 
-          this.RefOfficeObj.RefOfficeId = response.RefOfficeId;
-          this.http.post<RefOfficeObj>(URLConstant.GetRefOfficeByRefOfficeId, this.RefOfficeObj).subscribe(
+          this.http.post<RefOfficeObj>(URLConstant.GetRefOfficeByRefOfficeId, {Id: response.RefOfficeId}).subscribe(
             (response) => {
               this.RefOfficeObj = response;
               this.RefOfficeId = this.RefOfficeObj.RefOfficeId;
@@ -182,10 +179,8 @@ export class OfficeBankAccountDetailComponent implements OnInit {
           this.http.post<RefCurrObj>(URLConstant.GetRefCurrById, {Id: response.RefCurrId}).subscribe(
             (response) => {
               this.RefCurrObj = response;
-              this.CurrId = this.RefCurrObj.RefCurrId;
-
               this.OfficeBankAccForm.patchValue({
-                CurrName: this.RefCurrObj.RefCurrId
+                CurrCode: this.RefCurrObj.CurrCode
               })
               this.OfficeBankAccForm.updateValueAndValidity();
             },
@@ -229,20 +224,11 @@ export class OfficeBankAccountDetailComponent implements OnInit {
     this.BankAccType = ev.target.value;
   }
 
-  onChangedDdlCurrName(ev) {
-    this.CurrId = ev.target.value;
-  }
-
   onChangedDdlBankAccPurpose(ev) {
     this.BankAccPurpose = ev.target.value;
   }
 
-  CbLegalDocChange() {
-
-  }
-
-  SaveForm() {
-    console.log("Test");
+  async SaveForm() {
     this.OfficeBankAccObj.OfficeBankAccCode = this.OfficeBankAccForm.value.AccCode;
     this.OfficeBankAccObj.OfficeBankAccName = this.OfficeBankAccForm.value.AccName;
     this.OfficeBankAccObj.OfficeBankAccBranch = this.OfficeBankAccForm.value.BankBranch;
@@ -251,14 +237,19 @@ export class OfficeBankAccountDetailComponent implements OnInit {
     this.OfficeBankAccObj.OfficeBankAccNo = this.OfficeBankAccForm.value.AccNo;
     this.OfficeBankAccObj.RefBankId = this.BankId;
     this.OfficeBankAccObj.BankAccType = this.BankAccType;
-    this.OfficeBankAccObj.RefCurrId = this.CurrId;
+    this.OfficeBankAccObj.RefCurrId = 0;
     this.OfficeBankAccObj.IsLegalDoc = this.IsCbLegalDocChecked;
     this.OfficeBankAccObj.MrBankAccPurposeCode = this.BankAccPurpose;
     this.OfficeBankAccObj.RowVersion = "";
 
+    await this.http.post<RefOfficeObj>(URLConstant.GetRefCurrByCode, {Code : this.OfficeBankAccForm.controls['CurrCode'].value}).toPromise().then(
+      (response) => {
+        this.OfficeBankAccObj.RefCurrId = response['RefCurrId'];
+      }
+    );  
+
     if (this.Mode == "Add") {
-      this.RefOfficeObj.OfficeCode = this.OfficeCode;
-      this.http.post<RefOfficeObj>(URLConstant.GetRefOfficeByOfficeCode, this.RefOfficeObj).subscribe(
+      this.http.post<RefOfficeObj>(URLConstant.GetRefOfficeByOfficeCode, {Code : this.OfficeCode}).subscribe(
         (response) => {
           this.OfficeBankAccObj.RefOfficeId = response.RefOfficeId;
           this.OfficeBankAccObj.IsActive = true;
@@ -266,7 +257,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
           this.http.post(URLConstant.SubmitOfficeBankAcc, this.OfficeBankAccObj).subscribe(
             (response) => {
               this.toastr.successMessage("Add Success!");
-              this.router.navigateByUrl(PathConstant.CS_OFFICE_BANK_ACCOUNT_PAGING);
+              this.router.navigateByUrl(NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING);
             },
             error => {
               console.log(error);

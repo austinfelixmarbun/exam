@@ -135,15 +135,14 @@
                 <div class="form-group row">
                   <label class="col-md-3 adins-required-label">Currency</label>
                   <div class="col-md-4">
-                    <select class="form-control" style="width: 100%;" formControlName="CurrName"
-                      (change)="onChangedDdlCurrName($event)"
-                      [ngClass]="{ 'border-danger': enjiForm.submitted && OfficeBankAccForm.controls.CurrName.invalid }">
+                    <select class="form-control" style="width: 100%;" formControlName="CurrCode"
+                      [ngClass]="{ 'border-danger': enjiForm.submitted && OfficeBankAccForm.controls.CurrCode.invalid }">
                       <option value="" disabled>--Select--</option>
                       <option *ngFor="let item of CurrNameList" [value]="item.Key">
                         {{item.Value}}
                       </option>
                     </select>
-                    <lib-uc-show-errors [control]="OfficeBankAccForm.controls.CurrName" [submit]="enjiForm.submitted">
+                    <lib-uc-show-errors [control]="OfficeBankAccForm.controls.CurrCode" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>
                 </div>
@@ -153,7 +152,7 @@
                   <div class="col-md-4" style="padding-left: 0px;">
                     <label class="col-md-12">
                       <input class="border-primary" type="checkbox" formControlName="LegalDoc"
-                        [(ngModel)]="IsCbLegalDocChecked" (change)="CbLegalDocChange()">
+                        [(ngModel)]="IsCbLegalDocChecked">
                     </label>
                   </div>
                 </div>

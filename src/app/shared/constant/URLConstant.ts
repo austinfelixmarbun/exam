@@ -315,6 +315,7 @@ export class URLConstant {
     public static AddRefCurr = environment.FoundationR3Url + "/RefCurr/AddRefCurr";
     public static EditRefCurr = environment.FoundationR3Url + "/RefCurr/EditRefCurr";
     public static GetRefCurrById = environment.FoundationR3Url + "/RefCurr/GetRefCurrById";
+    public static GetRefCurrByCode = environment.FoundationR3Url + "/RefCurr/GetRefCurrByCode";
 
     //REF ECONOMIC SECTOR
     public static AddRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/AddRefEconomicSector";

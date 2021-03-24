@@ -9,7 +9,6 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { PathConstant } from 'app/shared/PathConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
@@ -123,7 +122,7 @@ export class OfficeBankAccountAccDetailComponent implements OnInit {
     this.http.post(URLConstant.SubmitOfficeBankAcc, this.OfficeBankAccObj).subscribe(
       (response) => {
         this.toastr.successMessage("Update Account Detail Success!");
-        this.router.navigateByUrl(PathConstant.CS_OFFICE_BANK_ACCOUNT_PAGING);
+        this.router.navigateByUrl(NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING);
       },
       error => {
         console.log(error);
