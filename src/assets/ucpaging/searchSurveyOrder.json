@@ -43,7 +43,7 @@
             "path": "/RefStatus/GetRefStatusByTrxTypeCode",
             "items": [],
             "itemsUrl": [],
-            "criteriaPropName": "TrxTypeCode",
+            "criteriaPropName": "Code",
             "criteriaPropValue": "FOU_SURVEY"
         },
         {
