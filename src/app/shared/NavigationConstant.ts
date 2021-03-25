@@ -68,7 +68,7 @@ export class NavigationConstant {
     public static CS_HOLIDAY_ADD = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY_ADD; //'/CommonSetting/Holiday/Add'
     public static CS_HOLIDAY_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY_DETAIL; //'/CommonSetting/Holiday/Detail'
     public static CS_HOLIDAY_DETAIL_ADD = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY_DETAIL_ADD; //'/CommonSetting/Holiday/Detail/Add'
-    public static CS_HOLIDAY_DETAIL_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY_DETAIL_EDIT; //'/CommonSetting/Holiday/Detail/Edit'
+    public static CS_HOLIDAY_DETAIL_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY_EDIT; //'/CommonSetting/Holiday/Edit'
     public static CS_MASTER = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_MASTER; //'/CommonSetting/Master'
     public static CS_MASTER_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_MASTER_DETAIL; //'/CommonSetting/Master/Detail'
     public static CS_OFFICE_ZIPCODE_MBR = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_OFFICE_ZIPCODE_MBR; //'/CommonSetting/OfficeZipcodeMember'
