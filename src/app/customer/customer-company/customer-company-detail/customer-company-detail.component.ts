@@ -6,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment'; 
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 import { DatePipe } from '@angular/common';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -41,11 +40,15 @@ export class CustomerCompanyDetailComponent implements OnInit {
 
   CustomerDetailForm = this.fb.group({
     NumOfEmp: ['', [Validators.maxLength(100), Validators.required, Validators.pattern("^[0-9]+$")]],
-    EstablishmentDt: ['', [Validators.required]]
+    EstablishmentDt: ['', [Validators.required]],
+    IsSkt: [false]
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
- 
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private toastr: NGXToastrService,
+    private fb: FormBuilder) {
     this.editCustCompanyUrl = URLConstant.EditCustCompany;
     this.getCustCompanyByCustIdUrl = URLConstant.GetCustCompanyByCustId;
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
@@ -59,8 +62,8 @@ export class CustomerCompanyDetailComponent implements OnInit {
       }
     });
   } 
-  ngOnInit() {
 
+  ngOnInit() {
     var datePipe = new DatePipe("en-US");
     this.lookUpObj = new InputLookupObj();
     this.lookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
@@ -77,6 +80,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
         this.CustomerDetailForm.patchValue({
           NumOfEmp: this.tempCustCompanyObj.NumOfEmp,
           EstablishmentDt: datePipe.transform(this.tempCustCompanyObj.EstablishmentDt, 'yyyy-MM-dd'),
+          IsSkt: this.tempCustCompanyObj.IsSkt
         });
         
         if (this.tempCustCompanyObj.RefIndustryTypeId != null) {
@@ -90,36 +94,41 @@ export class CustomerCompanyDetailComponent implements OnInit {
             });
         }
       });
-
   }
+
   SaveValue() { 
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj = this.tempCustCompanyObj;
   
-  
     this.custCompanyObj.NumOfEmp = this.CustomerDetailForm.controls["NumOfEmp"].value;
     this.custCompanyObj.EstablishmentDt = this.CustomerDetailForm.controls["EstablishmentDt"].value;
-    if( this.tempRefIndustryObj != null && this.tempRefIndustryTypeId ==null){
+    this.custCompanyObj.IsSkt = this.CustomerDetailForm.controls["IsSkt"].value;
+
+    if( this.tempRefIndustryObj != null && this.tempRefIndustryTypeId === null) {
       this.custCompanyObj.RefIndustryTypeId = this.custCompanyObj.RefIndustryTypeId;
-    }else{ 
+    }
+    else { 
       this.custCompanyObj.RefIndustryTypeId = this.tempRefIndustryTypeId;
     }
-        this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
-          (response) => { 
-            this.toastr.successMessage(response["Message"]);
-            this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next'});
-          }
-        );  
+
+    this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
+      (response) => { 
+        this.toastr.successMessage(response["Message"]);
+        this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next'});
+      }
+    );  
   }
+
   getLookUp(event) {
     this.tempRefIndustryTypeId = event.RefIndustryTypeId;
   }
+
   back() {
     if (this.Page != null) {
       AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING],{});
-    } else {
+    }
+    else {
       AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
     }
   }
-  }
-
+}

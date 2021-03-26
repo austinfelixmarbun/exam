@@ -1,40 +1,45 @@
 {
-    "title": "",
-    "subsection": [
-      {
-        "subSectionId": "viewCustCoyMainDataMainInfoId1",
-        "subSectionTitle": "Main Info",
-        "mainInfoPath": "/Generic/GetDataViewBySQL",
-        "mainInfo": [
-          {
-            "type": "text",
-            "label": "Industry Type Name",
-            "property": "IndTypeName"
-          },
-          {
-            "type": "date",
-            "label": "Establishment Date",
-            "property": "EstDt"
-          },
-          {
-            "type": "text",
-            "label": "Number Of Employee",
-            "property": "NumOfEmp"
-          },
-          {
-            "type": "text",
-            "label": "Tanda Daftar Perusahaan (TDP)",
-            "property": "RegNo"
-          },
-          {
-            "type": "text",
-            "label": "Surat Izin Usaha Perdagangan (SIUP)",
-            "property": "LisNo"
-          }
-        ],
-        "querystring": {
-        "name": "viewCustCoyMainDataMainInfo"
+  "title": "",
+  "subsection": [
+    {
+      "subSectionId": "viewCustCoyMainDataMainInfoId1",
+      "subSectionTitle": "Main Info",
+      "mainInfoPath": "/Generic/GetDataViewBySQL",
+      "mainInfo": [
+        {
+          "type": "text",
+          "label": "Industry Type Name",
+          "property": "IndTypeName"
+        },
+        {
+          "type": "date",
+          "label": "Establishment Date",
+          "property": "EstDt"
+        },
+        {
+          "type": "text",
+          "label": "Number Of Employee",
+          "property": "NumOfEmp"
+        },
+        {
+          "type": "boolean",
+          "label": "SKT",
+          "property": "IsSkt"
+        },
+        {
+          "type": "text",
+          "label": "Tanda Daftar Perusahaan (TDP)",
+          "property": "RegNo"
+        },
+        {
+          "type": "text",
+          "label": "Surat Izin Usaha Perdagangan (SIUP)",
+          "property": "LisNo"
         }
+      ],
+      "querystring": {
+        "name": "viewCustCoyMainDataMainInfo"
       }
-    ]
-  }
+    }
+  ]
+}
