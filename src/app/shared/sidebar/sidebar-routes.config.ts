@@ -163,7 +163,7 @@ export const ROUTES: RouteInfo[] = [
       { Path: NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING, Title: 'Edit Main Data Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },  
       { Path: NavigationConstant.CUST_FAMILY_PAGING, Title: 'Customer Family', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },  
       { Path: NavigationConstant.CUST_SHRHLDR_PAGING, Title: 'Customer Shareholder', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },  
-      { Path: NavigationConstant.CUST_GUARANTOR_PAGING, Title: 'Customer Guarantor', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },  
+      // { Path: NavigationConstant.CUST_GUARANTOR_PAGING, Title: 'Customer Guarantor', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },  
       { Path: NavigationConstant.CUST_NEG_PAGING, Title: 'Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },   
       { Path: NavigationConstant.CUST_NEG_UPLOAD, Title: 'Upload Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },         
       { Path: NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING, Title: 'Review Upload Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },      
