@@ -25,6 +25,28 @@
       "value": "",
       "label": "Description",
       "placeholder": "Placeholder"
+    },
+    {
+        "type": "dropdown",
+        "name": "A.IS_ACTIVE",
+        "id": "isActive",
+        "value": "Active Status",
+        "placeholder": "Placeholder",
+        "isFromURL": false,
+        "ddlType": "all",
+        "url": "",
+        "label": "Active Status",
+        "items": [
+            {
+                "key": "1",
+                "value": "Yes"
+            },
+            {
+                "key": "0",
+                "value": "No"
+            }
+        ],
+        "itemsUrl": []
     }
 
   ],
@@ -46,6 +68,12 @@
       "position": "left",
       "label": "Description",
       "name": "descr"
+    },
+    {
+      "type": "sort",
+      "position": "center",
+      "label": "Active Status",
+      "name": "A.IS_ACTIVE"
     },
     {
       "type": "label",
@@ -71,6 +99,11 @@
       "type": "text",
       "position": "left",
       "property": "descr"
+    },
+    {
+      "type": "boolean",
+      "position": "center",
+      "property": "isActive"
     },
     {
       "type": "action",
