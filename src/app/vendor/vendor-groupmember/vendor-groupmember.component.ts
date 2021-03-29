@@ -23,7 +23,7 @@ export class VendorGroupmemberComponent implements OnInit {
   MrVendorCategoryCode: string = '';
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
 
-  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
+  readonly CancelLink: string = NavigationConstant.VENDOR_GRP_VIEW;
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
