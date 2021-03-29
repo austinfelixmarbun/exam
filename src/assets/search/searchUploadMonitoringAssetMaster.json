@@ -47,7 +47,7 @@
       "ddlType": "all",
       "url": "http://r3app-server.ad-ins.com/Foundation_R3/RefStatus/GetListKeyValueActiveGrpCodeByCode",
       "label": "Upload Status",
-      "criteriaPropName": "StatusGrpCode",
+      "criteriaPropName": "Code",
       "criteriaPropValue": "UPLOAD_STATUS",
       "items": [],
       "itemsUrl": []
