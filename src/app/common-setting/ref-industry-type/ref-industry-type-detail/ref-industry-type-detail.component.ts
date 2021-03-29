@@ -70,18 +70,20 @@ export class RefIndustryTypeDetailComponent implements OnInit {
           this.economicSectorObj.RefEconomicSectorId = this.resultData.RefEconomicSectorId;
           return this.economicSectorObj;
         }),
-        mergeMap((economicSectorObj) => this.httpClient.post(URLConstant.GetRefEconomicSectorById, {Code:economicSectorObj.RefEconomicSectorId }))
+        mergeMap((economicSectorObj) => this.httpClient.post(URLConstant.GetRefEconomicSectorById, {Id : economicSectorObj.RefEconomicSectorId }))
       ).subscribe(
         (response2) => {
           this.economicSectorObj = response2;
-          this.RefIndustryTypeForm.patchValue({
-            RefIndustryTypeId: this.resultData.RefIndustryTypeId,
-            IndustryTypeCode: this.resultData.IndustryTypeCode,
-            IndustryTypeName: this.resultData.IndustryTypeName,
-            RefEconomicSectorId: this.resultData.RefEconomicSectorId,
-            IsActive: this.resultData.IsActive,
-            RowVersion: this.resultData.RowVersion
-          });
+          setTimeout(() => {
+            this.RefIndustryTypeForm.patchValue({
+              RefIndustryTypeId: this.resultData.RefIndustryTypeId,
+              IndustryTypeCode: this.resultData.IndustryTypeCode,
+              IndustryTypeName: this.resultData.IndustryTypeName,
+              RefEconomicSectorId: this.resultData.RefEconomicSectorId,
+              IsActive: this.resultData.IsActive,
+              RowVersion: this.resultData.RowVersion
+            });
+          })
           this.inputLookupObj.nameSelect = this.economicSectorObj.EconomicSectorName;
         }
       );
