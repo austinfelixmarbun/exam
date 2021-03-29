@@ -175,7 +175,7 @@
                 </div>
               </div>
             </div>
-            <lib-ucSubsection [id]="'HOIdOne'" [title]="HoTitle + 'Info'" [panel]="'HOInformation'">
+            <lib-ucSubsection *ngIf = "MrVendorCategoryCode!='AGENCY_COMPANY' && MrVendorCategoryCode!='AGENCY_PERSONAL'" [id]="'HOIdOne'" [title]="HoTitle + 'Info'" [panel]="'HOInformation'">
             </lib-ucSubsection>
             <div id="HOInformation">
               <div
