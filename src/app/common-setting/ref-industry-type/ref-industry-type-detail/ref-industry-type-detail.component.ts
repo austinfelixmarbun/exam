@@ -70,7 +70,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
           this.economicSectorObj.RefEconomicSectorId = this.resultData.RefEconomicSectorId;
           return this.economicSectorObj;
         }),
-        mergeMap((economicSectorObj) => this.httpClient.post(URLConstant.GetRefEconomicSectorById, {Code:economicSectorObj.RefEconomicSectorId }))
+        mergeMap((economicSectorObj) => this.httpClient.post(URLConstant.GetRefEconomicSectorById, {Id :economicSectorObj.RefEconomicSectorId }))
       ).subscribe(
         (response2) => {
           this.economicSectorObj = response2;
@@ -82,6 +82,8 @@ export class RefIndustryTypeDetailComponent implements OnInit {
             IsActive: this.resultData.IsActive,
             RowVersion: this.resultData.RowVersion
           });
+          this.inputLookupObj.jsonSelect = this.economicSectorObj;
+          this.inputLookupObj.idSelect = this.economicSectorObj.EconomicSectorCode;
           this.inputLookupObj.nameSelect = this.economicSectorObj.EconomicSectorName;
         }
       );
