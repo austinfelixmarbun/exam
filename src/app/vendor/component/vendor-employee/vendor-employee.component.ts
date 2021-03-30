@@ -92,6 +92,7 @@ export class VendorEmployeeComponent implements OnInit {
 
     if (this.mode == undefined) {
       this.mode = this.objInput.mode;
+      this.VendorEmpId = this.objInput.VendorEmpId;
     }
 
     if (this.mode == "edit") {
@@ -275,7 +276,6 @@ export class VendorEmployeeComponent implements OnInit {
           MrTaxCalcMethodCode: this.resultVendorEmpAndAddr.VendorEmpObj.MrTaxCalcMethodCode,
           IsNpwpExist: this.resultVendorEmpAndAddr.VendorEmpObj.IsNpwpExist
         });
-        this.setLookup();
       }
     );
   }
