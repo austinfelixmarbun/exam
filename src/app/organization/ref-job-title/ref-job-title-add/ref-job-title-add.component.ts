@@ -27,7 +27,8 @@ export class RefJobTitleAddComponent implements OnInit {
   RefJobTitleForm = this.fb.group({
     JobTitleCode: ['', [Validators.required, Validators.maxLength(50)]],
     JobTitleName: ['', [Validators.required, Validators.maxLength(100)]],
-    Descr: ['', Validators.maxLength(4000)]
+    Descr: ['', Validators.maxLength(4000)],
+    IsActive: [true]
   });
 
   readonly CancelLink: string = NavigationConstant.ORG_JOB_TITLE;
@@ -57,7 +58,8 @@ export class RefJobTitleAddComponent implements OnInit {
           this.RefJobTitleForm.patchValue({
             JobTitleCode: this.resultData.JobTitleCode,
             JobTitleName: this.resultData.JobTitleName,
-            Descr: this.resultData.Descr
+            Descr: this.resultData.Descr,
+            IsActive: this.resultData.IsActive
           });
 
         }

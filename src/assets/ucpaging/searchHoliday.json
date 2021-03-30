@@ -112,7 +112,7 @@
             "action": [
               {
                   "type" : "edit",
-                  "path" : "CS_HOLIDAY_EDIT",
+                  "path" : "CS_HOLIDAY_DETAIL_EDIT",
                   "param": [
                       {
                           "type":"HolidaySchmHId",
