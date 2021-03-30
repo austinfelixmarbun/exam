@@ -51,8 +51,8 @@ export class CommonConstant {
     public static TRUE_CONDITION = "1";
     public static FALSE_CONDITION = "0";
 
-    // VENDOR CATEGORY
-    public static SUPPLIER_BRANCH = "SUPPLIER_BRANCH";
+    // VENDOR CATEGORY    
+    public static SUPPLIER = "SUPPLIER"
     public static ASSET_INSCO_BRANCH = "ASSET_INSCO_BRANCH";
     public static LIFE_INSCO_BRANCH = "LIFE_INSCO_BRANCH";
     public static SURVEYOR_BRANCH = "SURVEYOR_BRANCH";

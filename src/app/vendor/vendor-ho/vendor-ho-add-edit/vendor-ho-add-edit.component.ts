@@ -102,7 +102,7 @@ export class VendorHoAddEditComponent implements OnInit {
       case CommonConstant.SUPPLIER_HOLDING:
         this.HoTitle = "Supplier Holding ";
         break;
-      case CommonConstant.SUPPLIER_BRANCH:
+      case CommonConstant.SUPPLIER:
         this.HoTitle = "Supplier Branch ";
         break;
       case CommonConstant.SURVEYOR_HO:
