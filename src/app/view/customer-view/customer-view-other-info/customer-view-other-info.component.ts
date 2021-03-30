@@ -9,7 +9,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 @Component({
   selector: 'app-customer-view-other-info',
   templateUrl: './customer-view-other-info.component.html',
-  styleUrls: ['./customer-view-other-info.component.css']
+  styleUrls: []
 })
 export class CustomerViewOtherInfoComponent implements OnInit {
   CustId: number;
