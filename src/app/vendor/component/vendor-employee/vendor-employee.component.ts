@@ -320,6 +320,7 @@ export class VendorEmployeeComponent implements OnInit {
     this.VendorBranchEmpObj.VendorEmpObj.MrTaxCalcMethodCode = this.VendorEmpForm.controls.MrTaxCalcMethodCode.value;
     this.VendorBranchEmpObj.VendorEmpObj.IsNpwpExist = this.VendorEmpForm.controls.IsNpwpExist.value;
     this.VendorBranchEmpObj.VendorEmpObj.SupervisorId = this.VendorBranchEmpObj.VendorEmpObj.SupervisorId;
+    this.VendorBranchEmpObj.VendorEmpObj.IsOwner = this.VendorEmpForm.controls.IsOwner.value;
 
     if (this.VendorEmpForm.controls.IsNpwpExist.value == true) {
       this.VendorBranchEmpObj.VendorEmpObj.TaxIdNo = this.VendorEmpForm.controls.TaxIdNo.value;
