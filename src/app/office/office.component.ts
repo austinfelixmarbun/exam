@@ -12,7 +12,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 export class OfficeComponent implements OnInit {
 
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
   readonly AddLink: string = NavigationConstant.OFFICE_ADD;
   ngOnInit() {
@@ -28,6 +28,7 @@ export class OfficeComponent implements OnInit {
         environment: environment.FoundationR3Url
       }
     ];
-    
+    this.inputPagingObj.isSearched = true;
+    this.inputPagingObj.delay = 200;
   }
 }
