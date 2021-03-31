@@ -76,8 +76,8 @@
                 <span class="bs-stepper-label">Legal Document</span>
               </button>
             </div>
-            <div class="line"></div>
-            <div class="step" data-target="#upload-tab">
+            <div class="line" *ngIf="SysConfigResultObj?.ConfigValue == '1'"></div>
+            <div class="step" data-target="#upload-tab" *ngIf="SysConfigResultObj?.ConfigValue == '1'">
               <button type="button" class="step-trigger" role="tab" aria-controls="upload-tab" id="upload-tab-trigger"
                 (click)="EnterTab('UploadData')">
                 <span class="bs-stepper-circle">8</span>
@@ -88,7 +88,7 @@
             <div class="step" data-target="#cust-attr-tab">
               <button type="button" class="step-trigger" role="tab" aria-controls="cust-attr-tab" id="cust-attr-tab-trigger"
                 (click)="EnterTab('CustAttr')">
-                <span class="bs-stepper-circle">9</span>
+                <span class="bs-stepper-circle">{{SysConfigResultObj?.ConfigValue == '1' ? 9 : 8}}</span>
                 <span class="bs-stepper-label">Other Info</span>
               </button>
             </div>
@@ -127,7 +127,7 @@
             </app-cust-legal-doc>
           </div>
           <div id="upload-tab" class="content" role="tabpanel" aria-labelledby="upload-tab-trigger">
-            <app-dms-iframe  *ngIf="CustStepIndex == 8" [dmsObj]="dmsObj" [showButton]="true" (outputTab)="getValue($event)" (outputCancel)="getValue($event)"></app-dms-iframe>
+            <app-dms-iframe  *ngIf="CustStepIndex == 8 && SysConfigResultObj?.ConfigValue == '1'" [dmsObj]="dmsObj" [showButton]="true" (outputTab)="getValue($event)" (outputCancel)="getValue($event)"></app-dms-iframe>
           </div>
           <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
             <app-cust-attr-section *ngIf="CustStepIndex == 9" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'"></app-cust-attr-section>
