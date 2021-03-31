@@ -78,6 +78,11 @@ const routes: Routes = [
       {
         path: PathConstant.VIEW_CUST_DOC,
         loadChildren: './customer-view-document/customer-view-document.module#CustomerViewDocumentModule'
+      },
+      //Other Info
+      {
+        path: PathConstant.VIEW_CUST_OTH_INFO,
+        loadChildren: './customer-view-other-info/customer-view-other-info.module#CustomerViewOtherInfoModule'
       }
     ]
   }

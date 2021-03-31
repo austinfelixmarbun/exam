@@ -61,6 +61,16 @@ export class CustomerViewComponent implements OnInit {
         this.custType = this.custResultData['MrCustTypeCode'];
       }
     );
+    this.http.post(URLConstant.GetSysConfigResultByCode, { ConfigCode : CommonConstant.MODULE_LOS }).subscribe(
+      (response) => {
+        if(response["ConfigValue"] === "1") {
+          this.IsLos = true;
+        }
+        else {
+          this.IsLos = false;
+        }
+      }
+    );
   }
 
   mencuba(ev) {
@@ -123,10 +133,17 @@ export class CustomerViewComponent implements OnInit {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_DOC],{ "CustId": this.CustId });
         });
       }
-      else if (ev == 7) { // Application List
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          // AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_DOC],{ "CustId": this.CustId });
-        });
+      else if (ev == 7) { // Application List (Jika IsLos true) OR Other Info (Jika IsLos false)
+        if(this.IsLos) { // Application List
+          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+            // AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_DOC],{ "CustId": this.CustId });
+          });
+        }
+        else { // Other Info
+          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
+          });
+        }
       }
       else if (ev == 8) { // Agreement list
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
@@ -135,7 +152,7 @@ export class CustomerViewComponent implements OnInit {
       }
       else if (ev == 9) { // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          // AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_DOC],{ "CustId": this.CustId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
         });
       }
     }
@@ -187,7 +204,7 @@ export class CustomerViewComponent implements OnInit {
       }
       else if (ev == 8) { // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          // AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_DOC],{ "CustId": this.CustId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
         });
       }
     }

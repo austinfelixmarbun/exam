@@ -31,10 +31,10 @@
 							<mat-tab label="Financial Data">
 							</mat-tab>
 
-							<div *ngIf="!IsLos">
+							<!-- <div *ngIf="!IsLos"> -->
 								<mat-tab label="Document">
 								</mat-tab>
-							</div>
+							<!-- </div> -->
 
 							<!-- Kalau ada beli LOS baru dimunculin -->
 							<div *ngIf="IsLos">
@@ -44,8 +44,8 @@
 								</mat-tab>
 							</div>
 
-							<!-- <mat-tab label="Other Info">
-							</mat-tab> -->
+							<mat-tab label="Other Info">
+							</mat-tab>
 						</mat-tab-group>
 					</div>
 					<div *ngIf="custType == 'COMPANY'">
@@ -66,13 +66,13 @@
 							<mat-tab label="Legal Document">
 							</mat-tab>
 
-							<div *ngIf="!IsLos">
+							<!-- <div *ngIf="!IsLos"> -->
 								<mat-tab label="Document">
 								</mat-tab>
-							</div>
+							<!-- </div> -->
 
-							<!-- <mat-tab label="Other Info">
-							</mat-tab> -->
+							<mat-tab label="Other Info">
+							</mat-tab>
 						</mat-tab-group>
 					</div>
 					<router-outlet></router-outlet>
