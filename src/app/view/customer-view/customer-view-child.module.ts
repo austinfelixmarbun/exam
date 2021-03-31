@@ -45,6 +45,7 @@ import { CustomerViewChildRoutingModule } from "./customer-view-child-routing.mo
 import { CustomerViewPersonalAddressComponent } from "./customer-view-personal-address/customer-view-personal-address.component";
 import { CustomerViewPersonalCustomerGroupComponent } from "./customer-view-personal-customer-group/customer-view-personal-customer-group.component";
 import { CustomerViewCoyAddressComponent } from "./customer-view-coy-address/customer-view-coy-address.component";
+import { CustomerViewOtherInfoComponent } from "./customer-view-other-info/customer-view-other-info.component";
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { CustomerViewCoyAddressComponent } from "./customer-view-coy-address/cus
     // CustomerViewPersonalJobDataEmpComponent,
     // CustomerViewPersonalJobDataSmeComponent,
     CustomerViewPersonalOtherAttrComponent,
+    CustomerViewOtherInfoComponent,
     // CustomerViewPersonalAppListingComponent,
     // CustomerViewCoyManagementComponent,
     // CustomerViewCoyContactComponent,

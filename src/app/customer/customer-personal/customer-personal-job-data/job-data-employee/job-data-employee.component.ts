@@ -225,6 +225,7 @@ export class JobDataEmployeeComponent implements OnInit {
     critCoyObj1.value = "1";
     this.ArrAddCritCoy.push(critCoyObj1);
     this.companyLookupObj.addCritInput = this.ArrAddCritCoy;
+    this.companyLookupObj.isReady = true;
 
     this.jobPosition = new RefMasterObj();
     this.jobPosition.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobPosition;
