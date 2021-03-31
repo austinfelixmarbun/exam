@@ -268,4 +268,7 @@ export class CommonConstant {
     public static RoleFamilyData = "SPOUSE";
     public static RoleGuarantorData = "GUARANTOR";
     public static RoleShareholder = "SHAREHOLDER";
+
+    //Sys Config
+    public static ConfigCodeIsUseDms = "IS_USE_DMS";
 }

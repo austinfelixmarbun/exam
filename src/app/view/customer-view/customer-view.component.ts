@@ -7,6 +7,7 @@ import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ResponseSysConfigResultObj } from 'app/shared/model/Response/ResponseSysConfigResultObj.Model';
 
 @Component({
   selector: 'app-customer-view',
@@ -30,6 +31,7 @@ export class CustomerViewComponent implements OnInit {
   viewCustJobDataAddress: string;
 
   IsLos: boolean = false;
+  SysConfigResultObj: ResponseSysConfigResultObj = new ResponseSysConfigResultObj();
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
@@ -40,7 +42,7 @@ export class CustomerViewComponent implements OnInit {
     setTimeout(() => AdInsHelper.RedirectUrl(this.router,[url],{ }));
   }
 
-  ngOnInit() {
+  async ngOnInit() : Promise<void> {
     this.viewCustMainInfoHeaderObj.viewInput = "./assets/ucviewgeneric/viewCustMainInfoHeader.json";
     this.viewCustMainInfoHeaderObj.viewEnvironment = environment.FoundationR3Url;
 
@@ -61,6 +63,11 @@ export class CustomerViewComponent implements OnInit {
         this.custType = this.custResultData['MrCustTypeCode'];
       }
     );
+    //check DMS
+    await this.http.post<ResponseSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms}).toPromise().then(
+      (response) => {
+        this.SysConfigResultObj = response;
+    });
   }
 
   mencuba(ev) {
