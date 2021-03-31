@@ -12,6 +12,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { PathConstant } from 'app/shared/PathConstant';
+import { ResponseSysConfigResultObj } from 'app/shared/model/Response/ResponseSysConfigResultObj.Model';
 
 @Component({
   selector: 'app-customer-company-page',
@@ -38,6 +39,8 @@ export class CustomerCompanyPageComponent implements OnInit {
   Page: string;
   From: string;
   dmsObj: DMSObj;
+  SysConfigResultObj: ResponseSysConfigResultObj = new ResponseSysConfigResultObj()
+
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,  private cookieService: CookieService) {
 
@@ -62,11 +65,37 @@ export class CustomerCompanyPageComponent implements OnInit {
     }
   }
 
-  async ngOnInit() {
+  async ngOnInit() : Promise<void> {
     if (this.IdCust == null) {
       AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
     }
     else {
+      var custObj = { CustId: this.IdCust };
+      this.http.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
+        (response: any) => {
+          this.CustCompanyId = response['CustCompanyId'];
+        } 
+      );
+
+      //check DMS
+      await this.http.post<ResponseSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms}).toPromise().then(
+        (response) => {
+          this.SysConfigResultObj = response;
+      });
+      if(this.SysConfigResultObj.ConfigValue == '1'){
+        await this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).toPromise().then(
+          (response: any) => {
+            let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+            this.dmsObj = new DMSObj();
+            this.dmsObj.User = currentUserContext.UserName;
+            this.dmsObj.Role = currentUserContext.RoleCode;
+            this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
+            this.dmsObj.MetadataParent = null;
+            this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, response["CustNo"]));
+            this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));  
+          }
+        );
+      }
       this.stepper = new Stepper(document.querySelector('#stepper1'), {
         linear: false,
         animation: true
@@ -74,26 +103,6 @@ export class CustomerCompanyPageComponent implements OnInit {
       this.EnterTab("Detail");
       this.CustStepIndex = 1;
       this.stepper.to(this.CustStepIndex);
-
-      var custObj = { CustId: this.IdCust };
-      this.http.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
-        (response: any) => {
-          this.CustCompanyId = response['CustCompanyId'];
-        } 
-      );
-      await this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).toPromise().then(
-        (response: any) => {
-          let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-          this.dmsObj = new DMSObj();
-          this.dmsObj.User = currentUserContext.UserName;
-          this.dmsObj.Role = currentUserContext.RoleCode;
-          this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
-          this.dmsObj.MetadataParent = null;
-          this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, response["CustNo"]));
-          this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
-      
-        }
-      );
     }
   }
 
@@ -134,10 +143,22 @@ export class CustomerCompanyPageComponent implements OnInit {
       if (ev.stepMode == "next"){
         this.stepper.next();
         this.CustStepIndex++;
+
+        //skip dms
+        if(this.CustStepIndex == 8 && this.SysConfigResultObj.ConfigValue != '1'){
+          this.stepper.next();
+          this.CustStepIndex++;
+        }
       }
       else{
         this.stepper.previous();
         this.CustStepIndex--;
+
+        //skip dms
+        if(this.CustStepIndex == 8 && this.SysConfigResultObj.ConfigValue != '1'){
+          this.stepper.previous();
+          this.CustStepIndex--;
+        }
       }
     }
   }

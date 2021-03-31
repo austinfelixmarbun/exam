@@ -31,7 +31,7 @@ export class MainInfoViewComponent implements OnInit {
           this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingMainInfo.json";
         } else if (this.MrVendorClass == CommonConstant.HeadOffice) {
           this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorHOMainInfo.json";
-        } else if (this.MrVendorClass == CommonConstant.Branch && this.MrVendorCategoryCode != CommonConstant.SUPPLIER_BRANCH) {
+        } else if (this.MrVendorClass == CommonConstant.Branch && this.MrVendorCategoryCode != CommonConstant.SUPPLIER) {
           this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchMainInfo.json";
         }else{
           this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSupplierBranchMainInfo.json";

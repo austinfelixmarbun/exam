@@ -14,6 +14,7 @@ import { DMSLabelValueObj } from 'app/shared/model/DMS/DMSLabelValueObj.Model';
 import { CookieService } from 'ngx-cookie';
 import { PathConstant } from 'app/shared/PathConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ResponseSysConfigResultObj } from 'app/shared/model/Response/ResponseSysConfigResultObj.Model';
 @Component({
   selector: 'app-customer-personal-page',
   templateUrl: './customer-personal-page.component.html',
@@ -37,6 +38,7 @@ export class CustomerPersonalPageComponent implements OnInit {
   Page: string;
   From: string;
   dmsObj: DMSObj;
+  SysConfigResultObj: ResponseSysConfigResultObj = new ResponseSysConfigResultObj()
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private cookieService: CookieService) { 
     this.route.queryParams.subscribe(params => {
@@ -73,27 +75,34 @@ export class CustomerPersonalPageComponent implements OnInit {
     }
   }
  
-  async ngOnInit() {
+  async ngOnInit() : Promise<void> {
     await this.http.post(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).toPromise().then(
       (response: any) => {
         this.CustPersonalId = response['CustPersonalId'];
       }
     );
 
-    await this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).toPromise().then(
-      (response: any) => {
-        let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-        this.dmsObj = new DMSObj();
-        this.dmsObj.User = currentUserContext.UserName;
-        this.dmsObj.Role = currentUserContext.RoleCode;
-        this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
-        this.dmsObj.MetadataParent = null;
-        this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, response["CustNo"]));
-        this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
-    
-      }
-    );
+    //check DMS
+    await this.http.post<ResponseSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms}).toPromise().then(
+      (response) => {
+        this.SysConfigResultObj = response;
+    });
 
+    if(this.SysConfigResultObj.ConfigValue == '1'){
+      await this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).toPromise().then(
+        (response: any) => {
+          let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+          this.dmsObj = new DMSObj();
+          this.dmsObj.User = currentUserContext.UserName;
+          this.dmsObj.Role = currentUserContext.RoleCode;
+          this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
+          this.dmsObj.MetadataParent = null;
+          this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, response["CustNo"]));
+          this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));   
+        }
+      );
+    }
+    
     this.stepper = new Stepper(document.querySelector('#stepper1'), {
       linear: false,
       animation: true
@@ -144,10 +153,22 @@ export class CustomerPersonalPageComponent implements OnInit {
       if (ev.stepMode == "next"){
         this.stepper.next();
         this.CustStepIndex++;
+
+        //skip dms
+        if(this.CustStepIndex == 8 && this.SysConfigResultObj.ConfigValue != '1'){
+          this.stepper.next();
+          this.CustStepIndex++;
+        }
       }
       else{
         this.stepper.previous();
         this.CustStepIndex--;
+
+        //skip dms
+        if(this.CustStepIndex == 8 && this.SysConfigResultObj.ConfigValue != '1'){
+          this.stepper.previous();
+          this.CustStepIndex--;
+        }
       }
     }
   }

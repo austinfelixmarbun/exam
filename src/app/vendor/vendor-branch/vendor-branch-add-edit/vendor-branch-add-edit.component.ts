@@ -124,7 +124,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       case CommonConstant.SUPPLIER_HOLDING:
         this.HoTitle = "Supplier Holding ";
         break;
-      case CommonConstant.SUPPLIER_BRANCH:
+      case CommonConstant.SUPPLIER:
         this.HoTitle = "Supplier ";
         break;
       case CommonConstant.SURVEYOR_HO:
@@ -164,7 +164,7 @@ export class VendorBranchAddEditComponent implements OnInit {
         this.ListVendorAttrContent = response[CommonConstant.ReturnObj]
         if(this.ListVendorAttrContent != null){
           if (this.ListVendorAttrContent.length < 1) {            
-            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, {Code : CommonConstant.SUPPLIER_BRANCH}).subscribe(
+            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, {Code : CommonConstant.SUPPLIER}).subscribe(
               async (response: any) => {
                 var parentFormGroup = new Object();
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
@@ -217,7 +217,7 @@ export class VendorBranchAddEditComponent implements OnInit {
             );
           }
           else {  
-            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, {Code : CommonConstant.SUPPLIER_BRANCH}).subscribe(
+            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, {Code : CommonConstant.SUPPLIER}).subscribe(
               async (response: any) => {
                 var parentFormGroup = new Object();
                 let tempLookup = {};
@@ -620,7 +620,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.inputLookupParentObj.isRequired = false;
     this.inputLookupParentObj.addCritInput = new Array();
 
-    if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH) {
+    if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
       var critInput = new CriteriaObj();
       critInput.propName = "MR_VENDOR_CATEGORY_CODE";
       critInput.restriction = AdInsConstant.RestrictionEq;
@@ -729,7 +729,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.IsOneAffiliate = this.VendorForm.controls.IsOneAffiliate.value;
     }
 
-    if (this.vendorBranchObj.VendorObj.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH) {
+    if (this.vendorBranchObj.VendorObj.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
       this.vendorBranchObj.VendorObj.ReservedField3 = this.VendorForm.controls.ReservedField3.value;
       this.vendorBranchObj.VendorObj.ReservedField4 = this.VendorForm.controls.ReservedField4.value;
       this.vendorBranchObj.VendorObj.ReservedField5 = this.VendorForm.controls.ReservedField5.value;
@@ -815,7 +815,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     }
   }
   bindText() {
-    if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH) {
+    if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
       this.Registration = "SUPPLIER REGISTRATION";
       this.Code = "Supplier Code";
       this.Name = "Supplier Name";

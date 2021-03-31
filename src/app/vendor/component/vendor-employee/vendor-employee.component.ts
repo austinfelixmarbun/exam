@@ -92,6 +92,7 @@ export class VendorEmployeeComponent implements OnInit {
 
     if (this.mode == undefined) {
       this.mode = this.objInput.mode;
+      this.VendorEmpId = this.objInput.VendorEmpId;
     }
 
     if (this.mode == "edit") {
@@ -275,7 +276,6 @@ export class VendorEmployeeComponent implements OnInit {
           MrTaxCalcMethodCode: this.resultVendorEmpAndAddr.VendorEmpObj.MrTaxCalcMethodCode,
           IsNpwpExist: this.resultVendorEmpAndAddr.VendorEmpObj.IsNpwpExist
         });
-        this.setLookup();
       }
     );
   }
@@ -320,6 +320,7 @@ export class VendorEmployeeComponent implements OnInit {
     this.VendorBranchEmpObj.VendorEmpObj.MrTaxCalcMethodCode = this.VendorEmpForm.controls.MrTaxCalcMethodCode.value;
     this.VendorBranchEmpObj.VendorEmpObj.IsNpwpExist = this.VendorEmpForm.controls.IsNpwpExist.value;
     this.VendorBranchEmpObj.VendorEmpObj.SupervisorId = this.VendorBranchEmpObj.VendorEmpObj.SupervisorId;
+    this.VendorBranchEmpObj.VendorEmpObj.IsOwner = this.VendorEmpForm.controls.IsOwner.value;
 
     if (this.VendorEmpForm.controls.IsNpwpExist.value == true) {
       this.VendorBranchEmpObj.VendorEmpObj.TaxIdNo = this.VendorEmpForm.controls.TaxIdNo.value;
