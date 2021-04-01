@@ -179,8 +179,8 @@ export class URLConstant {
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
     public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
     public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
-    public static EditRefZipcode = environment.FoundationR3Url + "/RefZipcode/EditRefZipCode";
-    public static AddRefZipcode = environment.FoundationR3Url + "/RefZipcode/AddRefZipCode";
+    public static EditRefZipcode = environment.FoundationR3Url + "/RefZipcode/EditRefZipcode";
+    public static AddRefZipcode = environment.FoundationR3Url + "/RefZipcode/AddRefZipcode";
     public static DeleteRefZipcode = "/RefZipcode/DeleteRefZipCode";
     public static GetOfficeZipcodeMemberAddPaging = "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
     public static GetRefZipCodeById = environment.FoundationR3Url + "/RefZipcode/GetRefZipcodeById";
@@ -189,7 +189,7 @@ export class URLConstant {
     //OFFICE ZIPCODE MEMBER
     public static GetOfficeZipCodeMemberPaging = environment.FoundationR3Url + "/OfficeZipcodeMember/GetOfficeZipCodeMemberPaging";
     public static GetRefOfficeZipcodePaging = environment.FoundationR3Url + "/OfficeZipcodeMember/GetRefOfficeZipcodePaging";
-    public static AddOfficeZipcodeMember = environment.FoundationR3Url + "/OfficeZipcodeMember/AddOfficeZipcodeMember";
+    public static AddOfficeZipcodeMember = environment.FoundationR3Url + "/OfficeZipcodeMember/AddOfficeZipCodeMember";
     public static DeleteOfficeZipcodeMember = environment.FoundationR3Url + "/OfficeZipcodeMember/DeleteOfficeZipcodeMember";
 
     //BUSINESS UNIT
