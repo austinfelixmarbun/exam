@@ -185,6 +185,13 @@ export const ROUTES: RouteInfo[] = [
       { Path: NavigationConstant.INTEGRATION_SEND_DAILY_MASTER, Title: 'Send Daily Master With Range Date', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: CommonConstant.DailyMasterTypeRange }] },
     ], Params: []
   },
+  {
+    Path: '', Title: 'Journal', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [
+      { Path: NavigationConstant.JOURNAL_MEDIA_PAGING, Title: 'Journal Media', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.JOURNAL_RESULT, Title: 'Journal Result', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.FAILED_JOURNAL_RESULT_LIST_PAGING, Title: 'Failed Journal Result List', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+    ], Params: []
+  }
   // {
   //     Path: '', Title: 'LOS', Icon: 'ft-users', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
   //     Submenu: [

@@ -26,6 +26,7 @@ export class PathConstant {
     public static LR_SRVY = "Survey";
     public static LR_INTEGRATION = "Integration";
     public static LR_DOC_MNGMNT = "DocumentManagement";
+    public static LR_JOURNAL = "journal"
     //#endregion
 
     //#region content-routes
@@ -461,5 +462,22 @@ export class PathConstant {
     public static VIEW_CUST_COY_LEGAL = "CoyLegal";
     public static VIEW_CUST_GRP = "CustomerGroup";
     public static VIEW_CUST_DOC = "CustDocument";
+    //#endregion
+
+     //#region JOURNAL
+    public static JOURNAL_MEDIA = "journalmedia"
+    public static JOURNAL_RESULT = "journalresult"
+    public static HEADER = "header"
+    public static FACT = "fact"
+    public static ITEM_VALUE = "itemvalue"
+    public static FAILED_JOURNAL_RESULT_LIST = "failedjournalresultlist"
+
+    public static JOURNAL_MEDIA_PAGING = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.PAGING
+    public static JOURNAL_MEDIA_DETAIL = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.DETAIL
+    public static JOURNAL_MEDIA_HEADER_FACT = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.HEADER + PathConstant.FACT
+    public static JOURNAL_MEDIA_GROUP = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.GROUP
+    public static JOURNAL_MEDIA_GROUP_FACT = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.GROUP + "/" + PathConstant.FACT
+    public static JOURNAL_MEDIA_GROUP_ITEM_VALUE = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.GROUP + '/' + PathConstant.ITEM_VALUE
+    public static FAILED_JOURNAL_RESULT_LIST_PAGING = PathConstant.FAILED_JOURNAL_RESULT_LIST + "/" + PathConstant.PAGING
     //#endregion
 }

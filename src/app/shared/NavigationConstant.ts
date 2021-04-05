@@ -303,4 +303,15 @@ export class NavigationConstant {
     public static DOC_MNGMNT_VIEW_RACK = "/" + PathConstant.LR_DOC_MNGMNT + "/" + PathConstant.VIEW_RACK; //'/DocumentManagement/ViewRack'
     public static DOC_MNGMNT_VIEW_CABINET = "/" + PathConstant.CR_DOC_MNGMNT_VIEW + "/" + PathConstant.VIEW_CABINET; //'//DocumentManagementView/ViewCabinet'
     //#endregion
+
+    //#region JOURNAL
+    public static JOURNAL_MEDIA_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_MEDIA_PAGING;
+    public static JOURNAL_MEDIA_DETAIL = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_MEDIA_DETAIL;
+    public static JOURNAL_MEDIA_HEADER_FACT = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_MEDIA_HEADER_FACT;
+    public static JOURNAL_MEDIA_GROUP = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_MEDIA_GROUP;
+    public static JOURNAL_MEDIA_GROUP_FACT = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_MEDIA_GROUP_FACT;
+    public static JOURNAL_MEDIA_GROUP_ITEM_VALUE = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_MEDIA_GROUP_ITEM_VALUE;
+    public static JOURNAL_RESULT = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_RESULT;
+    public static FAILED_JOURNAL_RESULT_LIST_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.FAILED_JOURNAL_RESULT_LIST_PAGING;
+    //#endregion
 }
