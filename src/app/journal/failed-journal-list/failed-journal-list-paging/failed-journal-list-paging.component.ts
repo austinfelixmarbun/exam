@@ -40,6 +40,11 @@ export class FailedJournalListPagingComponent implements OnInit {
 
   RerunJournal() {
     var req = [];
+    if(this.listTemp.length == 0)
+    {
+      this.toastr.errorMessage("Select at least 1 Journal to Rerun");
+      return
+    }
     for (let i = 0; i < this.listTemp.length; i++) {
       let trxNo = (this.listTemp[i].TxnCode + ';' + this.listTemp[i].JrNo + ';' + this.listTemp[i].TrxNo)
       if (!req.some(x => x == trxNo)) {
