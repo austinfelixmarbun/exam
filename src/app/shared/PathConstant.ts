@@ -27,6 +27,7 @@ export class PathConstant {
     public static LR_INTEGRATION = "Integration";
     public static LR_DOC_MNGMNT = "DocumentManagement";
     public static LR_JOURNAL = "journal"
+    public static LR_FEE = "Fee";
     //#endregion
 
     //#region content-routes

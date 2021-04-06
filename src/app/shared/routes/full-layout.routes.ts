@@ -96,4 +96,8 @@ export const Full_ROUTES: Routes = [
     path: PathConstant.LR_JOURNAL,
     loadChildren: './journal/journal.module#JournalModule'
   },
+  {
+    path: PathConstant.LR_FEE,
+    loadChildren: './fee/fee.module#FeeModule'
+  }
 ];

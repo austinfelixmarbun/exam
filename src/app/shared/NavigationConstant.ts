@@ -269,6 +269,11 @@ export class NavigationConstant {
     public static OFFICE_GROUP_MEMBER = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_GROUP_MEMBER; //'/Office/Group/Member'
     public static OFFICE_GROUP_MEMBER_ADD = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_GROUP_MEMBER_ADD; //'/Office/Group/Member/Add'
     //#endregion
+
+    //#region 
+    public static FEE = "/" + PathConstant.LR_FEE; //'/Fee'
+    public static FEE_PAGING = "/" + PathConstant.LR_FEE + "/" + PathConstant.PAGING; //'/Fee/Paging'
+    public static FEE_ADD = "/" + PathConstant.LR_FEE + "/" + PathConstant.ADD; //'/Fee/Add'
     
     //#region Cust
     public static CUST_PERSONAL_MAIN_INFO = '..' + "/" + PathConstant.CUST_PERSONAL_MAIN_INFO; //'../CustomerPersonal/MainInfo'
