@@ -332,7 +332,6 @@ export class URLConstant {
     //ASSET MASTER
     public static AddAssetMaster = environment.FoundationR3Url + "/AssetMaster/AddAssetMaster";
     public static EditAssetMaster = environment.FoundationR3Url + "/AssetMaster/EditAssetMaster";
-    public static DeleteAssetMaster = "/AssetMaster/DeleteAssetMaster";
     public static GetAssetMasterById = environment.FoundationR3Url + "/AssetMaster/GetAssetMasterById";
     public static GetValueAssetType = environment.FoundationR3Url + "/AssetType/GetListKeyValueActiveById";
     public static GetListAssetCategory = environment.FoundationR3Url + "/AssetCategory/GetListAssetCategoryByIdWithCriteriaObj";
@@ -434,7 +433,7 @@ export class URLConstant {
     public static GetAssetTypeById = environment.FoundationR3Url + "/AssetType/GetAssetTypeById"
     public static GetListAssetType = environment.FoundationR3Url + "/AssetType/GetListAssetType"
     public static GetListActiveAssetType = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType"
-    public static DeleteAssetType = "/AssetType/DeleteAssetType"
+    
 
     // PRODUCT
     public static GetProductMainInfo = environment.FoundationR3Url + "/Product/GetProductMainInfo"
@@ -525,14 +524,13 @@ export class URLConstant {
     public static GetRefAssetDocByAssetDocCode = environment.FoundationR3Url + "/RefAssetDoc/GetRefAssetDocByAssetDocCode"
     public static GetRefAssetDocByRefAssetDocId = environment.FoundationR3Url + "/RefAssetDoc/GetRefAssetDocByRefAssetDocId"
     public static GetListRefAssetDoc = environment.FoundationR3Url + "/RefAssetDoc/GetListRefAssetDoc"
-    public static DeleteRefAssetDocData = "/RefAssetDoc/DeleteRefAssetDoc"
+    
 
     // ASSET SCHEME
     public static GetAssetSchmHById = environment.FoundationR3Url + "/AssetSchmH/GetAssetSchmHById";
     public static AddAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/AddAssetSchmH";
     public static EditAssetSchmH = environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmH";
     public static GetListAssetSchmDByAssetSchmHId = environment.FoundationR3Url + "/AssetSchmD/GetListAssetSchmDByAssetSchmHId"
-    public static EditAssetSchmHAndD = environment.FoundationR3Url + "/AssetSchmH/EditAssetSchmHAndD"
     public static EditListAssetSchmD = environment.FoundationR3Url + "/AssetSchmD/EditListAssetSchmD"
     public static AddListAssetSchmD = environment.FoundationR3Url + "/AssetSchmD/AddListAssetSchmD";
     public static DeleteAssetSchmD = "/AssetSchmD/DeleteAssetSchmD";

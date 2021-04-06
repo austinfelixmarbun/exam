@@ -52,10 +52,11 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       acObj.AssetAccessoryId = this.AssetAccessoryId;
       acObj.AssetTypeId = this.AssetTypeId;
       this.AssetAccessoryForm.controls.AssetAccessoryCode.disable();
-      let obj = {Id: this.acObj.AssetAccessoryId};
+      let obj = {Id: this.AssetAccessoryId};
 
       this.http.post<AssetAccessoryObj>(URLConstant.GetAssetAccessorybyAssetAccessoryId, obj).subscribe(
         (response) => {
+          console.log(response);
           this.result = response;
           this.AssetAccessoryForm.patchValue({
             AssetAccessoryCode: this.result.AssetAccessoryCode,
