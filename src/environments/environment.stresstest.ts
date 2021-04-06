@@ -11,8 +11,10 @@ export const environment = {
     FoundationR3Url: 'https://R3STWEBBE.ad-ins.com/FOUNDATION_BE',
     ApprovalURL : 'https://r3stengine.ad-ins.com/approval',
     FoundationR3Web:'https://R3STWEBFE.ad-ins.com/FOUNDATION_FE',
+    losR3Web: 'http://r3web-server/LOSR3',
+    lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS',
     Module:"FOU",
     ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
     ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
     DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
-  };
+};
