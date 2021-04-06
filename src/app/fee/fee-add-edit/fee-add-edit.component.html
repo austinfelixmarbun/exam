@@ -1,0 +1,61 @@
+<div class="card">
+  <div class="card-header header-title">
+    <div class="row">
+      <div class="col-md-8">
+        <h4 class="form-section card-title" translate>Fee</h4>        
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="px-3">
+      <form class="form form-horizontal" [formGroup]="FeeForm" (ngSubmit)="FeeForm.valid && SaveForm()" #enjiForm="ngForm">
+        <lib-ucSubsection [id]="'FeeDetailId'" [title]="'Fee-' + this.pageType" [panel]="'FeeDetail'">
+        </lib-ucSubsection>
+        <div id="FeeDetail">
+          <div class="form-group row adins-required">
+            <label class="col-md-2  adInsLabel" translate>Fee Code</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control" formControlName="FeeCode">
+              <lib-uc-show-errors [control]="FeeForm.controls.FeeCode" [submit]="enjiForm.submitted">
+              </lib-uc-show-errors>
+            </div>
+          </div>
+          <div class="form-group row adins-required">
+            <label class="col-md-2  adInsLabel" translate>Fee Name</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control" formControlName="FeeName">
+              <lib-uc-show-errors [control]="FeeForm.controls.FeeName" [submit]="enjiForm.submitted">
+              </lib-uc-show-errors>
+            </div>
+          </div>       
+          <div class="form-group row adins-required">
+            <label class="col-md-2 adins-label" translate>Line of Business</label>
+            <div class="col-md-4">
+              <ng-multiselect-dropdown [placeholder]="'Search'" [data]="dropdownList" [(ngModel)]="selectedItems"
+                [settings]="dropdownSettings" [ngModelOptions]="{standalone: true}">
+              </ng-multiselect-dropdown>
+            </div>
+          </div>   
+          <div class="form-group row">
+            <label class="col-md-2 adInsLabel">Active Status</label>
+            <div class="col-md-4">
+              <input type="checkbox" class="border-primary" formControlName="IsActive">
+            </div>
+          </div>
+        </div>
+        <div class="form-actions right">
+          <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" skipLocationChange translate>
+            <i class="far fa-window-close"></i> Cancel
+          </button>          
+          <button type="submit" class="btn btn-raised btn-primary" translate>
+            <i class="far fa-check-square"></i> Save
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

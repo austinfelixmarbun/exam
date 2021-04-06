@@ -179,6 +179,15 @@ export class URLConstant {
     public static GetUserTitleRoleByEmpPositionIdAndRefRoleId = "/UserManagement/GetUserTitleRoleByEmpPositionIdAndRefRoleId";
     public static GetListActiveRefRole = "/RefRole/GetListActiveRefRole"
 
+    //REF FEE
+    public static AddRefFee = environment.FoundationR3Url + "/RefFee/AddRefFee";
+    public static EditRefFee = environment.FoundationR3Url + "/RefFee/EditRefFee";
+    public static GetRefFeeByRefFeeId = environment.FoundationR3Url + "/RefFee/GetRefFeeByRefFeeId";
+
+    //REF LOB
+    public static GetListRefLob = environment.FoundationR3Url + "/RefLob/GetListRefLob";
+    public static GetListLobByRefFeeId = environment.FoundationR3Url + "/RefLob/GetListLobByRefFeeId"
+
     //ZIPCODE
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
     public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
