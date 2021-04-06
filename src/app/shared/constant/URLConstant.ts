@@ -182,7 +182,8 @@ export class URLConstant {
 
     //REF LOB
     public static GetListRefLob = environment.FoundationR3Url + "/RefLob/GetListRefLob";
-    public static GetListLobByRefFeeId = environment.FoundationR3Url + "/RefLob/GetListLobByRefFeeId"
+    public static GetListBizTemplateCodeByRefFeeId = environment.FoundationR3Url + "/RefLob/GetListBizTemplateCodeByRefFeeId"
+    public static GetListBizTmpltCode = environment.FoundationR3Url + "/RefLob/GetListBizTmpltCode"
 
     //ZIPCODE
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
