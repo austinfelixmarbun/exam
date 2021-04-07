@@ -11,6 +11,7 @@ export const environment = {
     ApprovalURL: 'http://r3impl-appsvr.ad-ins.com/APPROVAL_OPL_BE_R3',
     FoundationR3Web: 'http://r3impl-websvr.ad-ins.com/Foundation',
     losR3Web: 'http://r3impl-websvr.ad-ins.com/ROS_FE',
+    lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS',
     WorkflowR3Url: 'http://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL',
     WebSocketURL: 'http://r3impl-appsvr.ad-ins.com/FOUNDATION_R3',
     DashboardURL: 'http://r3impl-appsvr.ad-ins.com/Dashboard',
@@ -18,4 +19,4 @@ export const environment = {
     ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
     ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 k
     DMSUrl : "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
-};  
+};

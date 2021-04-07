@@ -91,5 +91,9 @@ export const Full_ROUTES: Routes = [
   {
     path: PathConstant.LR_DOC_MNGMNT,
     loadChildren: './document-management/document-management.module#DocumentManagementModule'
+  },
+  {
+    path: PathConstant.LR_FEE,
+    loadChildren: './fee/fee.module#FeeModule'
   }
 ];

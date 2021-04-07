@@ -3,9 +3,13 @@ import { NavigationConstant } from "../NavigationConstant";
 
 export class URLConstant {
 
+    // SYS CONFIG RESULT
+    public static GetSysConfigResultByCode = environment.FoundationR3Url + '/SysConfigResult/GetSysConfigResultByCode';
+
     // DOWNLOAD
     public static DownloadTemplate = environment.FoundationR3Url + '/Download/DownloadTemplate';
 
+    // WEB SOCKET
     public static WebSocketUrl = environment.WebSocketURL + "/Notificationhub";
 
     //GENERAL SETTING
@@ -46,7 +50,6 @@ export class URLConstant {
     public static EditCenterGrp = environment.FoundationR3Url + "/CenterGrp/EditCenterGrp";
     public static GetCenterGrpByCode = environment.FoundationR3Url + "/CenterGrp/GetCenterGrpByCode";
     public static GetCenterGrpById = environment.FoundationR3Url + "/CenterGrp/GetCenterGrpById";
-
 
     //REF OFFICE AREA
     public static GetAllListArea = "/RefOfficeArea/GetAllListArea";
@@ -158,6 +161,7 @@ export class URLConstant {
     public static DeleteRefUserRole = "/RefUserRole/DeleteRefUserRole";
     public static GetRefUserByResetCode = environment.FoundationR3Url + "/RefUser/GetRefUserByResetCode";
     public static ResetPasswordByUsername = environment.FoundationR3Url + "/RefUser/ResetPasswordByUsername";
+    
     //REF-ROLE
     public static GetRefRolePaging = "/UserManagement/GetRefRolePaging";
     public static AddRefRole = environment.FoundationR3Url + "/RefRole/AddRefRole";
@@ -174,6 +178,15 @@ export class URLConstant {
     public static AssignRoleToUsers = "/UserManagement/AssignRoleToUsers";
     public static GetUserTitleRoleByEmpPositionIdAndRefRoleId = "/UserManagement/GetUserTitleRoleByEmpPositionIdAndRefRoleId";
     public static GetListActiveRefRole = "/RefRole/GetListActiveRefRole"
+
+    //REF FEE
+    public static AddRefFee = environment.FoundationR3Url + "/RefFee/AddRefFee";
+    public static EditRefFee = environment.FoundationR3Url + "/RefFee/EditRefFee";
+    public static GetRefFeeByRefFeeId = environment.FoundationR3Url + "/RefFee/GetRefFeeByRefFeeId";
+
+    //REF LOB
+    public static GetListRefLob = environment.FoundationR3Url + "/RefLob/GetListRefLob";
+    public static GetListLobByRefFeeId = environment.FoundationR3Url + "/RefLob/GetListLobByRefFeeId"
 
     //ZIPCODE
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
@@ -349,6 +362,7 @@ export class URLConstant {
     public static AddRefAttr = environment.FoundationR3Url + "/RefAttr/AddRefAttr";
     public static EditRefAttr = environment.FoundationR3Url + "/RefAttr/EditRefAttr";
     public static GetListActiveRefAttrByAttrGroup = environment.FoundationR3Url + "/RefAttr/GetListActiveRefAttrByAttrGroup"
+    
     //REF PROFESSION
     public static AddRefProfession = environment.FoundationR3Url + "/RefProfession/AddRefProfession";
     public static EditRefProfession = environment.FoundationR3Url + "/RefProfession/EditRefProfession";
@@ -609,7 +623,7 @@ export class URLConstant {
     public static EditVendorBranchEmp = environment.FoundationR3Url + "/VendorEmp/EditVendorBranchEmp";
     public static GetListVendorEmpByVendorId = environment.FoundationR3Url + "/VendorEmp/GetListVendorEmpByVendorId";
 
-
+    // VENDOR ADDR
     public static GetVendorAddrByVendorEmpId = environment.FoundationR3Url + "/VendorAddr/GetVendorAddrByVendorEmpIdMrAddrType";
 
     // VENDOR SCHEME
@@ -805,6 +819,7 @@ export class URLConstant {
     public static AddEditListCustAttrContent = environment.FoundationR3Url + "/CustAttrContent/AddEditListCustAttrContent";
     public static GetListCustAttrContentByCustIdForCust = environment.FoundationR3Url + "/CustAttrContent/GetListCustAttrContentByCustIdForCust";
     public static GetListCustAttrContentByCustIdAndAttrGroup = environment.FoundationR3Url + "/CustAttrContent/GetListCustAttrContentByCustIdAndAttrGroup"
+    
     //CUST CONTACT PERSON
     public static GetCustCompanyContactPersonForCustViewByCustId = environment.FoundationR3Url + "/CustCompanyContactPerson/GetCustCompanyContactPersonForCustViewByCustId";
     public static GetListCustPersonalContactPersonForCustViewByCustId = environment.FoundationR3Url + "/CustPersonalContactPerson/GetListCustPersonalContactPersonForCustViewByCustId";
@@ -828,7 +843,6 @@ export class URLConstant {
     public static AddEditCustOtherInfo = environment.FoundationR3Url + "/CustOtherInfo/AddEditCustOtherInfo"
     public static GetCustOtherInfoByCustId = environment.FoundationR3Url + "/CustOtherInfo/GetCustOtherInfoByCustId"
 
-    
     //REF BEHAVIOUR
     public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
     public static GetRefBehaviourByBehaviourTypeCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByBehaviourTypeCode";

@@ -10,7 +10,7 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { UcSubsectionModule } from "@adins/uc-subsection";
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UcgridfooterModule } from "@adins/ucgridfooter";
-import { UclookupgenericComponent, UclookupgenericModule } from "@adins/uclookupgeneric";
+import { UclookupgenericModule } from "@adins/uclookupgeneric";
 import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneric";
 import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcapprovalhistModule, UcapprovalhistComponent } from "@adins/ucapprovalhist";
@@ -45,7 +45,6 @@ import { CustomerViewChildRoutingModule } from "./customer-view-child-routing.mo
 import { CustomerViewPersonalAddressComponent } from "./customer-view-personal-address/customer-view-personal-address.component";
 import { CustomerViewPersonalCustomerGroupComponent } from "./customer-view-personal-customer-group/customer-view-personal-customer-group.component";
 import { CustomerViewCoyAddressComponent } from "./customer-view-coy-address/customer-view-coy-address.component";
-import { CustomerViewOtherInfoComponent } from "./customer-view-other-info/customer-view-other-info.component";
 
 
 @NgModule({
@@ -78,7 +77,6 @@ import { CustomerViewOtherInfoComponent } from "./customer-view-other-info/custo
     // CustomerViewPersonalJobDataEmpComponent,
     // CustomerViewPersonalJobDataSmeComponent,
     CustomerViewPersonalOtherAttrComponent,
-    CustomerViewOtherInfoComponent,
     // CustomerViewPersonalAppListingComponent,
     // CustomerViewCoyManagementComponent,
     // CustomerViewCoyContactComponent,
@@ -103,6 +101,5 @@ import { CustomerViewOtherInfoComponent } from "./customer-view-other-info/custo
     UcgridviewComponent,
     UcapprovalhistComponent
   ]
-
 })
 export class CustomerViewChildModule { }

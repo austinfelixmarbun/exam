@@ -26,6 +26,7 @@ export class PathConstant {
     public static LR_SRVY = "Survey";
     public static LR_INTEGRATION = "Integration";
     public static LR_DOC_MNGMNT = "DocumentManagement";
+    public static LR_FEE = "Fee";
     //#endregion
 
     //#region content-routes
@@ -461,5 +462,6 @@ export class PathConstant {
     public static VIEW_CUST_COY_LEGAL = "CoyLegal";
     public static VIEW_CUST_GRP = "CustomerGroup";
     public static VIEW_CUST_DOC = "CustDocument";
+    public static VIEW_CUST_OTH_INFO = "CustOthInfo";
     //#endregion
 }
