@@ -190,10 +190,9 @@ export class BankInfoComponent implements OnInit {
     });
   }
 
-  deleteBank(Id) {
+  deleteBank(vendorBankAccId) {
     if (confirm("Are you sure to delete this record?")) {
-      console.log(Id);
-      this.vendorService.DeleteVendorBankAcc({Id: Id}).subscribe(response => {
+      this.vendorService.DeleteVendorBankAcc({Id: vendorBankAccId}).subscribe(response => {
         this.toastr.successMessage(response["Message"]);
         this.getListData();
       });
@@ -205,9 +204,7 @@ export class BankInfoComponent implements OnInit {
       if (this.objInput.VendorId != undefined && this.objInput.VendorId != null) {
         this.vendorService.GetListVendorBankAccByVendorId({Id: this.objInput.VendorId}).subscribe(
           response => {
-            console.log(response);
             this.ListData = response[CommonConstant.ReturnObj];
-            console.log(this.ListData);
           }
         );
       }

@@ -105,11 +105,10 @@ export class AuctionCompanyAddeditComponent implements OnInit {
   }
 
   getData(){
-    console.log('testing');
     this.title = "Auction Company - Edit";
     this.vendorService.GetAuctionCompanyByVendorIdForEdit({ Id: this.VendorId }).subscribe(
       (response) => {
-        console.log(response);
+        
         this.result = response;
         this.setDropdown();
         this.AuctionCompanyForm.patchValue({
