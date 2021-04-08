@@ -18,6 +18,8 @@ import { VendorAttrContentObj } from 'app/shared/model/VendorAttrContentObj.Mode
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ResponseIdGenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+
 
 @Component({
   selector: 'app-vendor-branch-add-edit',
@@ -789,20 +791,21 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
       this.vendorBranchObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
-      this.http.post(URLConstant.EditVendorBranch, this.vendorBranchObj).subscribe(
+      this.http.post<ResponseIdGenericObj>(URLConstant.EditVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_REG],{ "VendorId": this.VendorId, "mode": "edit" });
+          console.log(response.Id);
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_REG],{ "VendorId": response.Id, "mode": "edit" });
         });
     }
     else {
       this.vendorBranchObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
       this.vendorBranchObj.MrVendorTypeCode = this.MrVendorTypeCode;
 
-      this.http.post(URLConstant.AddVendorBranch, this.vendorBranchObj).subscribe(
+      this.http.post<ResponseIdGenericObj>(URLConstant.AddVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_REG],{ "VendorId": response['VendorObj'].VendorId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_REG],{ "VendorId": response.Id });
         });
     }
   }

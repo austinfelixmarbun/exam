@@ -328,7 +328,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorService.EditVendorHolding(this.vendorHoldingObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HOLDING_REG],{ "VendorId": this.VendorId, "mode": 'edit' });
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HOLDING_REG],{ "VendorId": response['Id'], "mode": 'edit' });
           });
       } else {
         this.vendorHoldingObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
@@ -336,7 +336,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorService.AddVendorHolding(this.vendorHoldingObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HOLDING_REG],{ "VendorId": response['VendorObj'].VendorId });
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HOLDING_REG],{ "VendorId": response['Id'] });
           });
       }
     }

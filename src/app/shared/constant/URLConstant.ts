@@ -560,10 +560,8 @@ export class URLConstant {
     public static GetUploadAssetNegativeByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + "/AssetNegative/GetUploadAssetNegativeByUploadMonitoringNoAndTrxType";
 
     // VENDOR
-    public static DeleteVendor = "/Vendor/DeleteVendor";
     public static AddVendorHO = environment.FoundationR3Url + "/Vendor/AddVendorHO";
     public static EditVendorHO = environment.FoundationR3Url + "/Vendor/EditVendorHO";
-    public static DeleteVendorHO = "/Vendor/DeleteVendorHO";
     public static AddVendorHolding = environment.FoundationR3Url + "/Vendor/AddVendorHolding";
     public static EditVendorHolding = environment.FoundationR3Url + "/Vendor/EditVendorHolding";
     public static AddVendorATPM = environment.FoundationR3Url + "/Vendor/AddVendorATPM";
@@ -596,7 +594,6 @@ export class URLConstant {
     // VENDOR GROUP
     public static AddVendorGrp = environment.FoundationR3Url + "/VendorGrp/AddVendorGrp";
     public static EditVendorGrp = environment.FoundationR3Url + "/VendorGrp/EditVendorGrp";
-    public static DeleteVendorGrp = "/VendorGrp/DeleteVendorGrp";
     public static GetVendorGrpByVendorGrpCode = environment.FoundationR3Url + "/VendorGrp/GetVendorGrpByVendorGrpCode";
     public static GetVendorGrpByVendorGrpId = environment.FoundationR3Url + "/VendorGrp/GetVendorGrpByVendorGrpId";
     public static GetVendorGrpForUpdateByVendorGrpCode = environment.FoundationR3Url + "/VendorGrp/GetVendorGrpForUpdateByVendorGrpCode";
@@ -604,8 +601,6 @@ export class URLConstant {
     public static GetListVendorGrpByVendorId = environment.FoundationR3Url + "/VendorGrp/GetListVendorGrpByVendorId";
 
     // VENDOR GROUP MEMBER 
-    public static AddRangeVendorGrpMbr = environment.FoundationR3Url + "/VendorGrpMbr/AddRangeVendorGrpMbr";
-    public static DeleteRangeVendorGrpMbrByIds = environment.FoundationR3Url + "/VendorGrpMbr/DeleteRangeVendorGrpMbrByIds";
     public static GetListVendorGrpMbrByVendorGrpId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorGrpId";
     public static GetListVendorGrpMbrByVendorId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorId";
     public static AddVendorGrpMbr = environment.FoundationR3Url + "/VendorGrpMbr/AddVendorGrpMbr";
@@ -629,7 +624,6 @@ export class URLConstant {
     // VENDOR SCHEME
     public static AddVendorSchm = environment.FoundationR3Url + "/VendorSchm/AddVendorSchm";
     public static EditVendorSchm = environment.FoundationR3Url + "/VendorSchm/EditVendorSchm";
-    public static DeleteVendorSchm = "/VendorSchm/DeleteVendorSchm";
     public static GetVendorSchmByVendorSchmId = environment.FoundationR3Url + "/VendorSchm/GetVendorSchmByVendorSchmId";
     public static AddVendorSchmMember = environment.FoundationR3Url + "/VendorSchmMbr/AddVendorSchmMember";
     public static DeleteVendorSchmMember = "/VendorSchmMbr/DeleteVendorSchmMember"

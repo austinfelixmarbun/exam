@@ -322,7 +322,7 @@ export class VendorATPMAddEditComponent implements OnInit {
         this.vendorService.EditVendorATPM(this.vendorATPMObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_ATPM_REG],{ "VendorId": this.VendorId, "mode": 'edit' });
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_ATPM_REG],{ "VendorId": response['Id'], "mode": 'edit' });
           });
       } else {
         this.vendorATPMObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
@@ -330,7 +330,7 @@ export class VendorATPMAddEditComponent implements OnInit {
         this.vendorService.AddVendorATPM(this.vendorATPMObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_ATPM_REG],{ "VendorId": response['VendorObj'].VendorId });
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_ATPM_REG],{ "VendorId": response['Id']});
           });
       }
     }
