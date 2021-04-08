@@ -1,4 +1,3 @@
-import { RefLobObj } from "./RefLobObj.Model";
 
 export class RefFeeObj{
     RefFeeId: any;

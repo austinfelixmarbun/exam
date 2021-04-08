@@ -325,6 +325,11 @@ export class PathConstant {
     public static VIEW_ORDER_EXT = "ViewOrderExternal";
     //#endregion
 
+    //#region 
+    public static SURVEYOR = "Surveyor";
+    public static SURVEYOR_PAGING = PathConstant.SURVEYOR + "/" + PathConstant.PAGING
+    public static SURVEYOR_ADD = PathConstant.SURVEYOR + "/" + PathConstant.ADD
+
     //#region System-Setting-Module
     public static NOTIF = "Notification";
     public static NOTIF_DETAIL = PathConstant.NOTIF + "/" + PathConstant.DETAIL;

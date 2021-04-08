@@ -104,7 +104,7 @@ export class FeeAddEditComponent implements OnInit {
   SaveForm() {
     this.refFeeObj = new RefFeeObj();
 
-    console.log(this.FeeForm);
+    
 
     this.refFeeObj.requestRefLobBizTmpltCodes = new Array<string>();
 
@@ -118,7 +118,7 @@ export class FeeAddEditComponent implements OnInit {
       this.refFeeObj.requestRefLobBizTmpltCodes.push(this.selectedItems[index]['BizTemplateCode'])      
     }
 
-    console.log(this.refFeeObj.requestRefLobBizTmpltCodes);  
+     
 
 
     if (this.pageType == "add") {

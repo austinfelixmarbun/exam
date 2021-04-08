@@ -185,6 +185,12 @@ export class URLConstant {
     public static GetListBizTemplateCodeByRefFeeId = environment.FoundationR3Url + "/RefLob/GetListBizTemplateCodeByRefFeeId"
     public static GetListBizTmpltCode = environment.FoundationR3Url + "/RefLob/GetListBizTmpltCode"
 
+    //SURVEYOR
+    public static AddSurveyor = environment.FoundationR3Url + "/Surveyor/AddSurveyor";
+    public static EditSurveyor = environment.FoundationR3Url + "/Surveyor/EditSurveyor";
+    public static GetSurveyorBySurveyorId = environment.FoundationR3Url + "/Surveyor/GetSurveyorBySurveyorId";
+
+
     //ZIPCODE
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
     public static GetRefZipCode = "/RefZipcode/GetRefZipcode";
