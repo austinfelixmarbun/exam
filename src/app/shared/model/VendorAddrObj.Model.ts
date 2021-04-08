@@ -11,10 +11,11 @@ export class VendorAddrObj{
     Province: string;
     Latitude: string;
     Longitude: string;
-    RowVersion: any;
+    RowVersion: string;
     Phn1: string;
     Phn2: string;
     PhnArea1: string;
     PhnArea2: string;
+    
     constructor() { this.VendorAddrId = 0; }
 }

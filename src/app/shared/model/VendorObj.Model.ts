@@ -14,15 +14,16 @@ export class VendorObj{
     VendorRating: any;
     EstablishmentDt: any;
     PartnershipDt: any;
-    IsActive: any;
+    IsActive: boolean;
     VendorParentId : number;
     MrTaxCalcMethodCode: string;
-    IsVat: any;
+    IsVat: boolean;
     TaxpayerNo: string;
     TaxpayerName: string;
     MrVendorClass: string;
-    RowVersion: any;
+    RowVersion: string;
     IsNpwpExist: boolean;
     VendorAtpmCode: string;
+    
     constructor() { this.VendorId = 0; }
 }

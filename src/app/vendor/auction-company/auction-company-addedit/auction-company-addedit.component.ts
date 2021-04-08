@@ -105,10 +105,10 @@ export class AuctionCompanyAddeditComponent implements OnInit {
   }
 
   getData(){
-    console.log('testing');
     this.title = "Auction Company - Edit";
     this.vendorService.GetAuctionCompanyByVendorIdForEdit({ Id: this.VendorId }).subscribe(
       (response) => {
+        
         this.result = response;
         this.setDropdown();
         this.AuctionCompanyForm.patchValue({
@@ -214,7 +214,8 @@ export class AuctionCompanyAddeditComponent implements OnInit {
       this.AuctionCompanyObj.VendorObj.TaxpayerName = this.AuctionCompanyForm.controls.TaxpayerName.value;
       this.AuctionCompanyObj.VendorObj.IsActive = this.AuctionCompanyForm.controls.IsActive.value;
       this.AuctionCompanyObj.VendorObj.MobilePhnNo1 = this.AuctionCompanyForm.controls.Phn1.value;
-      this.AuctionCompanyObj.VendorObj.MobilePhnNo2 = this.AuctionCompanyForm.controls.Phn2.value;      
+      this.AuctionCompanyObj.VendorObj.MobilePhnNo2 = this.AuctionCompanyForm.controls.Phn2.value; 
+      this.AuctionCompanyObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
 
       //Vendor Addr
       this.AuctionCompanyObj.VendorAddrObj.Addr = this.AuctionCompanyForm.controls.Addr.value;
@@ -223,6 +224,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
       this.AuctionCompanyObj.VendorAddrObj.City = this.AuctionCompanyForm.controls.City.value;
       this.AuctionCompanyObj.VendorAddrObj.Zipcode = this.AuctionCompanyForm.controls["Zipcode"]["controls"].value.value;
       this.AuctionCompanyObj.VendorAddrObj.Province = this.AuctionCompanyForm.controls.Province.value;     
+      this.AuctionCompanyObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
       //Vendor Contact Person
       this.AuctionCompanyObj.VendorContactPersonObj.Name = this.AuctionCompanyForm.controls.Name.value;
@@ -236,7 +238,8 @@ export class AuctionCompanyAddeditComponent implements OnInit {
       this.AuctionCompanyObj.VendorContactPersonObj.JoinDate = this.AuctionCompanyForm.controls.JoinDate.value;
       this.AuctionCompanyObj.VendorContactPersonObj.IsOwner = this.AuctionCompanyForm.controls.IsOwner.value;
       this.AuctionCompanyObj.VendorContactPersonObj.Email = this.AuctionCompanyForm.controls.Email.value;
-      
+      this.AuctionCompanyObj.VendorContactPersonObj.RowVersion = this.result.VendorContactPersonObj.RowVersion;
+
       //Submit
       if(this.mode === 'edit'){
         this.AuctionCompanyObj.VendorObj.VendorId = this.VendorId;

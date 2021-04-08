@@ -11,6 +11,8 @@ export const environment = {
   FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
   DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
   // FoundationR3Url: 'https://localhost:5001',
+  losR3Web: 'http://r3web-server/LOSR3',
+  lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS',
   Module:"FOU",
   ApprovalURL : 'http://r3app-server.ad-ins.com/APPROVAL',
   FoundationR3Web:'http://r3web-server.ad-ins.com/Foundation',

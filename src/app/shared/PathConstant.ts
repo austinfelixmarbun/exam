@@ -467,5 +467,6 @@ export class PathConstant {
     public static VIEW_CUST_COY_LEGAL = "CoyLegal";
     public static VIEW_CUST_GRP = "CustomerGroup";
     public static VIEW_CUST_DOC = "CustDocument";
+    public static VIEW_CUST_OTH_INFO = "CustOthInfo";
     //#endregion
 }
