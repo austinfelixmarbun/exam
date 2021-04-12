@@ -22,7 +22,6 @@ export class EmployeeComponent implements OnInit {
     this.inputPagingObj._url = "./assets/search/searchEmployee.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefEmployee;
     this.inputPagingObj.pagingJson = "./assets/search/searchEmployee.json";
   }
 }

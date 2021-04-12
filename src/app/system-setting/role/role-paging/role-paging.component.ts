@@ -26,7 +26,6 @@ export class RolePagingComponent implements OnInit {
     this.inputPagingObj._url = "./assets/ucpaging/searchRefRole.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefRole;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRefRole.json";
   }
 }
