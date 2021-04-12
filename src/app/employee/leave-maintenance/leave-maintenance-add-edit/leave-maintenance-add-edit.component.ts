@@ -25,15 +25,14 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
   refEmpLeaveMngmntId: any;
   relmObj: RefEmpLeaveMngmntObj;
   resultData: any;
-  apiUrl: any;
   addUrl: any;
   editUrl: any;
-  getRefEmpUrl: any;
   inputPagingObj: any;
   inputEmpLookupObj;
   refEmp: RefEmpObj;
   resultEmpData: any;
   empName: any;
+  RefEmpId : number = 0;
 
   RefEmpLeaveMngmntForm = this.fb.group({
     StartDt: ['', Validators.required],
@@ -43,10 +42,6 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.EMP_LEAVE_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
-    this.apiUrl = URLConstant.GetRefEmpLeaveMngmntById;
-    this.addUrl = URLConstant.AddRefEmpLeaveMngmnt;
-    this.editUrl = URLConstant.EditRefEmpLeaveMngmnt;
-    this.getRefEmpUrl = URLConstant.GetRefEmployeeById;
 
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
@@ -72,11 +67,12 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
     if (this.pageType == "edit") {
       this.relmObj = new RefEmpLeaveMngmntObj();
       this.relmObj.RefEmpLeaveMngmntId = this.refEmpLeaveMngmntId;
-      this.http.post(this.apiUrl, {Id : this.refEmpLeaveMngmntId}).subscribe(
+      this.http.post(URLConstant.GetRefEmpLeaveMngmntById, {Id : this.refEmpLeaveMngmntId}).subscribe(
         response => {
           this.resultData = response;
           this.refEmpLeaveMngmntId = this.resultData.RefEmpLeaveMngmntId;
           this.inputEmpLookupObj.idSelect = this.resultData.RefEmpId;
+          this.RefEmpId = this.resultData.RefEmpId;
           this.RefEmpLeaveMngmntForm.patchValue({
             StartDt: formatDate(this.resultData.StartDt, 'yyyy-MM-dd', 'en-US'),
             EndDt: formatDate(this.resultData.EndDt, 'yyyy-MM-dd', 'en-US'),
@@ -85,7 +81,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
           });
           this.refEmp = new RefEmpObj();
           this.refEmp.RefEmpId = this.resultData.RefEmpId;
-          this.http.post(this.getRefEmpUrl, {Id : this.resultData.RefEmpId}).subscribe(
+          this.http.post(URLConstant.GetRefEmployeeById, {Id : this.resultData.RefEmpId}).subscribe(
             (response) => {
               this.resultEmpData = response;
               this.empName = this.resultEmpData.EmpName;
@@ -119,19 +115,21 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
       else {
         this.relmObj.IsPassed = false
       }
-      this.relmObj.RefEmpId = this.inputEmpLookupObj.jsonSelect.refEmpId;
+   
       if (this.pageType == "add") {
-        this.relmObj.RowVersion = "";
-        this.http.post(this.addUrl, this.relmObj).subscribe(
+        this.relmObj.RefEmpId = this.inputEmpLookupObj.jsonSelect.refEmpId;
+        this.http.post(URLConstant.AddRefEmpLeaveMngmnt, this.relmObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_LEAVE_PAGING],{});
           }
         );
       } else {
+        this.relmObj.RefEmpId = this.RefEmpId;
         this.relmObj.RefEmpLeaveMngmntId = this.refEmpLeaveMngmntId;
         this.relmObj.RowVersion = this.resultData.RowVersion;
-        this.http.post(this.editUrl, this.relmObj).subscribe(
+        console.log(this.relmObj);
+        this.http.post(URLConstant.EditRefEmpLeaveMngmnt, this.relmObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_LEAVE_PAGING],{});

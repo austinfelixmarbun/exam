@@ -33,8 +33,7 @@ export class URLConstant {
     public static AddRefOffice = environment.FoundationR3Url + "/RefOffice/AddRefOffice";
     public static AddRefOfficeAreaMember = environment.FoundationR3Url + "/RefOffice/AddRefOfficeAreaMember";
     public static UpdateRefOfficeAreaId = "/RefOffice/UpdateRefOfficeAreaId";
-    public static EditRefOffice = "/RefOffice/EditRefOffice";
-    public static DeleteRefOffice = "/RefOffice/DeleteRefOffice";
+    public static EditRefOffice = environment.FoundationR3Url + "/RefOffice/EditRefOffice";
     public static GetCenterGrpByCenterGrpTypeCode = "/RefOffice/GetCenterGrpByCenterGrpCode";
     public static GetListOfficeCenterGrp = "/RefOffice/GetListOfficeCenterGrp";
     public static AddCenterGroupOfficeMember = "RefOffice/AddCenterGroupOfficeMember";
@@ -46,8 +45,6 @@ export class URLConstant {
     public static GetListRefOfficeByRefOfficeAreaId = environment.FoundationR3Url + "/RefOffice/GetListRefOfficeByRefOfficeAreaId";
 
     //CENTER GROUP
-    public static AddCenterGrp = environment.FoundationR3Url + "/CenterGrp/AddCenterGrp";
-    public static EditCenterGrp = environment.FoundationR3Url + "/CenterGrp/EditCenterGrp";
     public static GetCenterGrpByCode = environment.FoundationR3Url + "/CenterGrp/GetCenterGrpByCode";
     public static GetCenterGrpById = environment.FoundationR3Url + "/CenterGrp/GetCenterGrpById";
 
@@ -58,7 +55,6 @@ export class URLConstant {
     public static GetRefOfficeAreaByRefOfficeAreaId = "/RefOfficeArea/GetRefOfficeAreaByRefOfficeAreaId";
     public static AddRefOfficeArea = environment.FoundationR3Url + "/RefOfficeArea/AddRefOfficeArea";
     public static EditRefOfficeArea = environment.FoundationR3Url + "/RefOfficeArea/EditRefOfficeArea";
-    public static DeleteRefOfficeArea = "/RefOfficeArea/DeleteRefOfficeArea";
     public static CheckDuplAreaCode = "/RefOfficeArea/CheckDuplAreaCode";
 
     //ORGANIZATION
@@ -118,9 +114,6 @@ export class URLConstant {
     public static GetRefEmployeeById = environment.FoundationR3Url + "/RefEmp/GetRefEmpByRefEmpId"
     public static AddRefEmp = environment.FoundationR3Url + "/RefEmp/AddRefEmp";
     public static EditRefEmp = environment.FoundationR3Url + "/RefEmp/EditRefEmp";
-    public static DeleteRefEmployee = "/RefEmp/DeleteRefEmp";
-    public static AddEmpBankAcc = environment.FoundationR3Url + "/EmpBankAcc/AddEmpBankAcc";
-    public static EditEmpBankAcc = environment.FoundationR3Url + "/EmpBankAcc/EditEmpBankAcc";
     public static GetEmpBankAccByRefEmpId = environment.FoundationR3Url + "/EmpBankAcc/GetEmpBankAccByRefEmpId";
     public static AddRefEmpAndEmpBankAcc = "/RefEmp/AddRefEmpAndEmpBankAcc";
     public static EditRefEmpAndEmpBankAcc = "/RefEmp/EditRefEmpAndEmpBankAcc";
@@ -139,17 +132,13 @@ export class URLConstant {
 
     //REF-USER
     public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
-    public static AddRefUser = "/UserManagement/AddRefUser";
-    public static EditRefUser = "/UserManagement/EditRefUser";
     public static EditRefUserForRefEmpR3 = environment.FoundationR3Url + "/RefUser/EditRefUserForRefEmp";
-    // public static EditRefUserForRefEmpR3 = "/RefUser/EditRefUserForRefEmp";
     public static ChangePassword = "/UserManagement/ChangePassword";
     public static GetRefUser = "/UserManagement/GetRefUser";
     public static GetUserByUsername = "/UserManagement/GetUserByUsername";
     public static ValidatePwd = "/UserManagement/ValidatePwd";
     public static GetCountRefUserByRefEmpId = "/UserManagement/GetCountRefUserByRefEmpId";
     public static ResetPassword = "/UserManagement/ResetPassword";
-    public static AddRefUserR3 = environment.FoundationR3Url + "/RefUser/AddRefUser";
     public static GetRefUserById = environment.FoundationR3Url + "/RefUser/GetRefUserById";
     public static GetRefUserByUsername = environment.FoundationR3Url + "/RefUser/GetRefUserByUsername";
     public static GetUserEmpByUsername = environment.FoundationR3Url + "/RefUser/GetUserEmpByUsername";

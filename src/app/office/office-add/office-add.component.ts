@@ -121,7 +121,6 @@ export class OfficeAddComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.apiUrl = URLConstant.GetRefOfficeByRefOfficeId;
     this.addUrl = URLConstant.AddRefOffice;
-    this.editUrl = this.foundationUrl + URLConstant.EditRefOffice;
     this.officeClassUrl = URLConstant.GetRefMasterListKeyValueActiveByCode;
     this.refOrgUrl = this.foundationUrl + URLConstant.GetListAllRefOrg;
     this.orgMdlUrl = this.foundationUrl + URLConstant.GetAllActiveOrgMdlByRefOrgId;
@@ -435,29 +434,19 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.Fax = this.OfficeForm.value.UcAddress.Fax;
 
     if (this.pageType == "add") {
-      if (this.officeObj.MrOfficeTypeCode == CommonConstant.CollectionGroup) {
-        this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response['message']);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
-          }
-        );
-      }
-      else {
-        this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response['message']);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
-          }
-        );
-      }
+      this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response['message']);
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
+        }
+      );
     }
     else {
       this.officeObj.OfficeCode = this.resultData.OfficeCode;
       this.officeObj.MrOfficeTypeCode = this.resultData.MrOfficeTypeCode
       this.officeObj.RefOfficeId = this.resultData.RefOfficeId;
       this.officeObj.RowVersion = this.resultData.RowVersion;
-      this.httpClient.post(this.editUrl, this.officeObj).subscribe(
+      this.httpClient.post(URLConstant.EditRefOffice, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
