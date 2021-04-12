@@ -63,25 +63,27 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     if (this.type == 'edit') {
       this.refIndustryType = new RefIndustryTypeObj();
       this.refIndustryType.RefIndustryTypeId = this.RefIndustryTypeId;
-      this.httpClient.post(URLConstant.GetRefIndustryTypeById, this.refIndustryType).pipe(
+      this.httpClient.post(URLConstant.GetRefIndustryTypeById, {Id: this.RefIndustryTypeId}).pipe(
         map(response => {
           this.resultData = response;
           this.economicSectorObj = new RefIndustryTypeObj();
           this.economicSectorObj.RefEconomicSectorId = this.resultData.RefEconomicSectorId;
           return this.economicSectorObj;
         }),
-        mergeMap((economicSectorObj) => this.httpClient.post(URLConstant.GetRefEconomicSectorById, economicSectorObj))
+        mergeMap((economicSectorObj) => this.httpClient.post(URLConstant.GetRefEconomicSectorById, {Id : economicSectorObj.RefEconomicSectorId }))
       ).subscribe(
         (response2) => {
           this.economicSectorObj = response2;
-          this.RefIndustryTypeForm.patchValue({
-            RefIndustryTypeId: this.resultData.RefIndustryTypeId,
-            IndustryTypeCode: this.resultData.IndustryTypeCode,
-            IndustryTypeName: this.resultData.IndustryTypeName,
-            RefEconomicSectorId: this.resultData.RefEconomicSectorId,
-            IsActive: this.resultData.IsActive,
-            RowVersion: this.resultData.RowVersion
-          });
+          setTimeout(() => {
+            this.RefIndustryTypeForm.patchValue({
+              RefIndustryTypeId: this.resultData.RefIndustryTypeId,
+              IndustryTypeCode: this.resultData.IndustryTypeCode,
+              IndustryTypeName: this.resultData.IndustryTypeName,
+              RefEconomicSectorId: this.resultData.RefEconomicSectorId,
+              IsActive: this.resultData.IsActive,
+              RowVersion: this.resultData.RowVersion
+            });
+          })
           this.inputLookupObj.nameSelect = this.economicSectorObj.EconomicSectorName;
         }
       );

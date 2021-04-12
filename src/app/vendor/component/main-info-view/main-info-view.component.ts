@@ -22,10 +22,8 @@ export class MainInfoViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    var vendorObj = {
-      VendorId: this.VendorId
-    }
-    this.http.post(URLConstant.GetVendorByVendorId, vendorObj).subscribe(
+    
+    this.http.post(URLConstant.GetVendorByVendorId, {Id : this.VendorId}).subscribe(
       (response) => {
         this.MrVendorClass = response["MrVendorClass"];
         this.MrVendorCategoryCode = response["MrVendorCategoryCode"]
@@ -33,7 +31,7 @@ export class MainInfoViewComponent implements OnInit {
           this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingMainInfo.json";
         } else if (this.MrVendorClass == CommonConstant.HeadOffice) {
           this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorHOMainInfo.json";
-        } else if (this.MrVendorClass == CommonConstant.Branch && this.MrVendorCategoryCode != CommonConstant.SUPPLIER_BRANCH) {
+        } else if (this.MrVendorClass == CommonConstant.Branch && this.MrVendorCategoryCode != CommonConstant.SUPPLIER) {
           this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchMainInfo.json";
         }else{
           this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSupplierBranchMainInfo.json";

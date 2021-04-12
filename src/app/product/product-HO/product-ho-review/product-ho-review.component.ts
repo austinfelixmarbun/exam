@@ -20,7 +20,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class ProductHoReviewComponent implements OnInit {
   private createComponent: UcapprovalcreateComponent;
   @ViewChild('ApprovalComponent') set content(content: UcapprovalcreateComponent) {
-    if (content) { 
+    if (content) {
       // initially setter gets called with undefined
       this.createComponent = content;
     }
@@ -30,11 +30,11 @@ export class ProductHoReviewComponent implements OnInit {
   IsReady: Boolean = false;
   ProdId: number;
   WfTaskListId: number;
-  ProdHId: number; 
+  ProdHId: number;
   FormObj = this.fb.group({
     Notes: ['', Validators.required]
   });
-  
+
   readonly CancelLink: string = NavigationConstant.PRODUCT_HO_REVIEW;
   constructor(private toastr: NGXToastrService, private http: HttpClient, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
@@ -51,17 +51,17 @@ export class ProductHoReviewComponent implements OnInit {
 
   }
   apvBaseUrl = environment.ApprovalURL;
-  ngOnInit() {  
+  ngOnInit() {
     this.ClaimTask(this.WfTaskListId);
     this.initInputApprovalObj();
   }
 
-  initInputApprovalObj(){
+  initInputApprovalObj() {
     this.InputObj = new UcInputRFAObj();
-    let Attributes = [{}] 
+    let Attributes = [{}]
     let TypeCode = {
-      "TypeCode" : CommonConstant.PRD_HO_APV_TYPE,
-      "Attributes" : Attributes,
+      "TypeCode": CommonConstant.PRD_HO_APV_TYPE,
+      "Attributes": Attributes,
     }
     var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.InputObj.RequestedBy = currentUserContext[CommonConstant.USER_NAME];
@@ -77,10 +77,8 @@ export class ProductHoReviewComponent implements OnInit {
     this.InputObj.PathUrlCreateJumpRFA = URLConstant.CreateJumpRFA;
     this.InputObj.CategoryCode = CommonConstant.CAT_CODE_PRD_HO_APV;
     this.InputObj.SchemeCode = CommonConstant.SCHM_CODE_APV_HO_ACT_SCHM;
-    let ProductObj = {
-      ProdId: this.ProdId
-    } 
-    this.http.post(URLConstant.GetProductById, ProductObj).subscribe(
+
+    this.http.post(URLConstant.GetProductById, {Id : this.ProdId}).subscribe(
       (response) => {
         this.InputObj.TrxNo = response["ProdCode"];
         this.IsReady = true;
@@ -88,19 +86,21 @@ export class ProductHoReviewComponent implements OnInit {
   }
 
   SaveForm() {
-    this.ApprovalCreateOutput = this.createComponent.output(); 
-    let data = {
-      ProdHId: this.ProdHId,
-      ProdId: this.ProdId,
-      WfTaskListId: this.WfTaskListId,
-      RequestRFAObj: this.ApprovalCreateOutput
+    this.ApprovalCreateOutput = this.createComponent.output();
+    if (this.ApprovalCreateOutput != undefined) {
+      let data = {
+        ProdHId: this.ProdHId,
+        ProdId: this.ProdId,
+        WfTaskListId: this.WfTaskListId,
+        RequestRFAObj: this.ApprovalCreateOutput
+      }
+      this.http.post(URLConstant.ReviewProductNew, data).subscribe(
+        (response) => {
+          this.toastr.successMessage("Success");
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.PRODUCT_HO_REVIEW], {});
+          this.IsReady = true;
+        });
     }
-    this.http.post(URLConstant.ReviewProductNew, data).subscribe(
-      (response) => {
-        this.toastr.successMessage("Success");
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_REVIEW],{ });
-        this.IsReady = true;
-      });
   }
   async ClaimTask(WfTaskListId) {
     var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));

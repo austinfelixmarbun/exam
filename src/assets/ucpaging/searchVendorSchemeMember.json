@@ -24,7 +24,7 @@
             "value": "",
             "placeholder": "Placeholder",
             "isFromURL": false,
-            "isSelectOne": false,
+            "ddlType": "all",
             "items": [
                 {
                     "key": "1",
@@ -74,7 +74,7 @@
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "VendorName"
         },
         {

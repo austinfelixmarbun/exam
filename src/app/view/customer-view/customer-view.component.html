@@ -3,14 +3,12 @@
 		<div class="card-body">
 			<div class="px-3">
 				<div class="form-body">
-
 					<h4 class="form-section card-title" *ngIf="custType == 'PERSONAL'" translate>CUSTOMER PERSONAL</h4>
 					<h4 class="form-section card-title" *ngIf="custType == 'COMPANY'" translate>CUSTOMER COMPANY</h4>
 					<div *ngIf="custType == 'PERSONAL'">
 						<app-customer-view-header-personal></app-customer-view-header-personal>
 						<mat-tab-group (selectedIndexChange)="mencuba($event)">
 							<mat-tab label="Main Data">
-
 							</mat-tab>
 							<mat-tab label="Address">
 							</mat-tab>
@@ -32,11 +30,26 @@
 							</mat-tab>
 							<mat-tab label="Financial Data">
 							</mat-tab>
-							<mat-tab label="Document">
+
+							<!-- <div *ngIf="SysConfigResultObj?.ConfigValue == '1'"> -->
+							<div *ngIf="IsUseDms">
+								<mat-tab label="Document">
+								</mat-tab>
+							</div>
+
+							<div *ngIf="IsLos">
+								<mat-tab label="Application List">
+								</mat-tab>
+							</div>
+
+							<div *ngIf="IsLms">
+								<mat-tab label="Agreement List">
+								</mat-tab>
+							</div>
+
+							<mat-tab label="Other Info">
 							</mat-tab>
 						</mat-tab-group>
-
-
 					</div>
 					<div *ngIf="custType == 'COMPANY'">
 						<app-customer-view-header-company></app-customer-view-header-company>
@@ -55,13 +68,20 @@
 							</mat-tab>
 							<mat-tab label="Legal Document">
 							</mat-tab>
-							<mat-tab label="Document">
+
+							<!-- <div *ngIf="SysConfigResultObj?.ConfigValue == '1'"> -->
+							<div *ngIf="IsUseDms">
+								<mat-tab label="Document">
+								</mat-tab>
+							</div>
+
+							<mat-tab label="Other Info">
 							</mat-tab>
 						</mat-tab-group>
 					</div>
 					<router-outlet></router-outlet>
-
 				</div>
 			</div>
 		</div>
 	</div>
+</div>

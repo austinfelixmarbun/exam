@@ -61,8 +61,8 @@ export class VendorPagingComponent implements OnInit {
       this.inputPagingObj.addCritInput.push(critObj);
     }
     else if (this.Type == "Default") {
-      if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
-        if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH) {
+      if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
+        if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
           this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSupplier.json";
           this.inputPagingObj._url = "./assets/ucpaging/searchSupplier.json";
         } else {
@@ -145,7 +145,7 @@ export class VendorPagingComponent implements OnInit {
   }
 
   navigate() {
-    if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
+    if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
       AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_ADD],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
     else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO) {

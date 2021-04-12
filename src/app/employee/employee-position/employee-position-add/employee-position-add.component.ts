@@ -121,7 +121,7 @@ export class EmployeePositionAddComponent implements OnInit {
         const getuserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         this.refOfficeId = getuserAccess.refOfficeId;
         this.refOfficeObj = new RefOfficeObj();
-        this.refOfficeObj.refOfficeId = this.refOfficeId
+        this.refOfficeObj.RefOfficeId = this.refOfficeId
         this.httpClient.post(this.refOfficeUrl, null).subscribe(
             (response) => {
                 this.allRefOffice = response['returnObject']
@@ -159,7 +159,7 @@ export class EmployeePositionAddComponent implements OnInit {
                     //this.superiorRefEmpId = response['returnObject']['superiorRefEmpId']
 
                     var refEmpObj = { RefEmpId: response['returnObject']['superiorRefEmpId'] };
-                    this.httpClient.post(this.getEmpUrl, refEmpObj).subscribe(
+                    this.httpClient.post(this.getEmpUrl, {Id : refEmpObj}).subscribe(
                         (response) => {
                             this.inputLookupObj.nameSelect = response["returnObject"].empName;
                             this.inputLookupObj.jsonSelect = response["returnObject"];

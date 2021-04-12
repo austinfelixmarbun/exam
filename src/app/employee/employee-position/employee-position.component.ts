@@ -88,8 +88,7 @@ export class EmployeePositionComponent implements OnInit {
     this.arrCrit.push(critObj);
     this.inputObj.arrCritObj = this.arrCrit;
 
-    var refEmpObj = { RefEmpId: this.refEmpId };
-    this.httpClient.post(this.getEmpUrl, refEmpObj).subscribe(
+    this.httpClient.post(this.getEmpUrl, {Id : this.refEmpId}).subscribe(
       (response) => {
         this.empNo = response["returnObject"].empNo;
         this.empName = response["returnObject"].empName;

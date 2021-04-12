@@ -41,7 +41,8 @@ export class AssetAccessoryAddEditComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.http.post(URLConstant.GetAssetTypeById, { AssetTypeId: this.AssetTypeId }).subscribe(
+    
+    this.http.post(URLConstant.GetAssetTypeById, {Id: this.AssetTypeId }).subscribe(
       (response) => {
         this.assetTypeName = response['AssetTypeName'];
       }
@@ -51,8 +52,9 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       acObj.AssetAccessoryId = this.AssetAccessoryId;
       acObj.AssetTypeId = this.AssetTypeId;
       this.AssetAccessoryForm.controls.AssetAccessoryCode.disable();
+      let obj = {Id: this.AssetAccessoryId};
 
-      this.http.post<AssetAccessoryObj>(URLConstant.GetAssetAccessorybyAssetAccessoryId, acObj).subscribe(
+      this.http.post<AssetAccessoryObj>(URLConstant.GetAssetAccessorybyAssetAccessoryId, obj).subscribe(
         (response) => {
           this.result = response;
           this.AssetAccessoryForm.patchValue({

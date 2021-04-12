@@ -1,16 +1,16 @@
 export class VendorContactPersonObj {
     VendorContactPersonId: any;
     VendorId: any;
-    Name: any;
-    MrEmployeePosition: any;
-    Phone1: any;
-    Phone2: any;
-    Email: any;
+    Name: string;
+    MrEmployeePosition: string;
+    Phone1: string;
+    Phone2: string;
+    Email: string;
     JoinDate: any;
-    IsOwner: any;
-    Addr: any;
-    Zipcode: any;
-    SubZipcode: any;
+    IsOwner: boolean;
+    Addr: string;
+    Zipcode: string;
+    SubZipcode: string;
     PhnArea1: any;
     PhnArea2: any;
     PhnExt1: any;
@@ -19,8 +19,8 @@ export class VendorContactPersonObj {
     AreaCode2: any;
     AreaCode3: any;
     AreaCode4: any;
-    City: any;
-    Province: any;
-    RowVersion: any;
+    City: string;
+    Province: string;
+    RowVersion: string;
     constructor() { this.VendorContactPersonId = 0;}
 }

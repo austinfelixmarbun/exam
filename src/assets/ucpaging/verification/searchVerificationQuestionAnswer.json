@@ -27,7 +27,7 @@
             "placeholder": "Placeholder",
             "datatype": "text",
             "isFromURL": true,
-            "isSelectOne": false,
+            "ddlType": "all",
             "url": "",
             "path": "/RefVerfAnswerType/GetListKeyValueActiveByCode",
             "label": "Answer Type",

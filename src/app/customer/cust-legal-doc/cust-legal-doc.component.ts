@@ -44,13 +44,13 @@ export class CustLegalDocComponent implements OnInit {
   ngOnInit() {
 
     var custObj = { CustId: this.IdCust };
-    this.httpClient.post(URLConstant.GetCustCompanyByCustId, custObj).subscribe(
+    this.httpClient.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust}).subscribe(
       (response: any) => {
 
         this.CustCompanyId = response['CustCompanyId'];
         var custCompanyLegalDoc = new CustCompanyLegalDocObj();
         custCompanyLegalDoc.CustCompanyId = this.CustCompanyId;
-        this.httpClient.post(URLConstant.GetListViewCustCompanyLegalDocByCustCompanyId, custCompanyLegalDoc).subscribe(
+        this.httpClient.post(URLConstant.GetListViewCustCompanyLegalDocByCustCompanyId, {Id : this.CustCompanyId}).subscribe(
           (response: any) => {
             this.custLegalDocs = response.ListCustCompanyLegalDoc;
           }
@@ -68,7 +68,7 @@ export class CustLegalDocComponent implements OnInit {
         this.spinner.show();
         var custCompanyLegalDoc = new CustCompanyLegalDocObj();
         custCompanyLegalDoc.CustCompanyId = this.CustCompanyId;
-        this.httpClient.post(URLConstant.GetListViewCustCompanyLegalDocByCustCompanyId, custCompanyLegalDoc).subscribe(
+        this.httpClient.post(URLConstant.GetListViewCustCompanyLegalDocByCustCompanyId, {Id : this.CustCompanyId}).subscribe(
           (response: any) => {
             this.custLegalDocs = response.ListCustCompanyLegalDoc;
           }

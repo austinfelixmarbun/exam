@@ -12,6 +12,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class MasterAddEditComponent implements OnInit {
   type: string = 'add';
   RefMasterId: any;
   resultData: any;
+  dropdownListObj: UcDropdownListObj = new UcDropdownListObj();
 
   RefMasterForm = this.fb.group({
     RefMasterId: [0, [Validators.required]],
@@ -62,11 +64,14 @@ export class MasterAddEditComponent implements OnInit {
 
 
   ngOnInit() {
+    this.dropdownListObj.enviromentUrl = environment.FoundationR3Url;
+    this.dropdownListObj.apiPath = URLConstant.GetListActiveRefMasterType;
+    this.dropdownListObj.requestObj = {};
     this.GetListMasterType();
     if (this.type == 'edit') {
       this.refMasterObj.RefMasterId = this.RefMasterId;
       var getRefMasterUrl = this.settingUrl + URLConstant.GetRefMasterByRefMasterId;
-      this.httpClient.post(getRefMasterUrl, this.refMasterObj).subscribe(
+      this.httpClient.post(getRefMasterUrl, {Id: this.RefMasterId}).subscribe(
         (response) => {
           this.resultData = response;
           this.RefMasterForm.patchValue({
@@ -100,7 +105,7 @@ export class MasterAddEditComponent implements OnInit {
         //SAVE
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_MASTER],{});
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CS_MASTER], {});
         },
         (error) => {
           this.toastr.typeErrorCustom(error);
@@ -115,7 +120,7 @@ export class MasterAddEditComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["Message"]);
           //this.location.back();
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_MASTER],{});
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CS_MASTER], {});
           this.spinner.hide();
         },
         (error) => {

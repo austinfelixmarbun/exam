@@ -14,7 +14,7 @@
         </lib-ucSubsection>
         <div id="OfficeDetail">
           <div class="form-group row adins-required">
-            <label class="col-md-3  adInsLabel" translate>Office Code </label>
+            <label class="col-md-3  adInsLabel" translate>Office Code</label>
             <div class="col-md-4">
               <input type="text" class="form-control" formControlName="OfficeCode">
               <lib-uc-show-errors [control]="OfficeForm.controls.OfficeCode" [submit]="enjiForm.submitted">
@@ -22,7 +22,7 @@
             </div>
           </div>
           <div class="form-group row adins-required">
-            <label class="col-md-3  adInsLabel" translate>Office Name </label>
+            <label class="col-md-3  adInsLabel" translate>Office Name</label>
             <div class="col-md-4">
               <input type="text" class="form-control" formControlName="OfficeName">
               <lib-uc-show-errors [control]="OfficeForm.controls.OfficeName" [submit]="enjiForm.submitted">
@@ -69,7 +69,7 @@
               <label class="col-md-3  adInsLabel" translate>Office Parent </label>
               <div class="col-md-4">
                 <lib-uclookupgeneric [lookupInput]="InputLookupObj" [parentForm]='OfficeForm' [enjiForm]="enjiForm"
-                  [identifier]="'lookupOfficeParent'" (lookup)="getLookUp($event)">
+                  [identifier]="'lookupOfficeParent'" (lookup)="getLookUp($event)" *ngIf="InputLookupObj.isReady">
                 </lib-uclookupgeneric>
               </div>
             </div>
@@ -126,6 +126,12 @@
             <label class="col-md-3 adInsLabel">Active Status</label>
             <div class="col-md-4">
               <input type="checkbox" class="border-primary" formControlName="IsActive">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 adInsLabel">Have Cashier</label>
+            <div class="col-md-4">
+              <input type="checkbox" class="border-primary" formControlName="IsHaveCashier">
             </div>
           </div>
           <div class="form-group row">

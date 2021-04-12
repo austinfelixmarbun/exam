@@ -48,7 +48,7 @@ export class CustExposureViewComponent implements OnInit {
   CustExpsrHObj: CustExpsrHObj = new CustExpsrHObj();
   CustExpsrInfoObj: CustExpsrInfoObj = new CustExpsrInfoObj();
   async GetCustExpsrInfoByCustId() {
-    await this.http.post<CustExpsrInfoObj>(URLConstant.GetCustExpsrInfoByCustId, { CustId: this.CustId }).toPromise().then(
+    await this.http.post<CustExpsrInfoObj>(URLConstant.GetCustExpsrInfoByCustId, { Id: this.CustId }).toPromise().then(
       (response) => {
         console.log(response);
         this.CustExpsrInfoObj = response;

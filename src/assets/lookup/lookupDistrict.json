@@ -23,13 +23,13 @@
       "type": "sort",
       "position": "center",
       "label": "District Name",
-      "name": "provDistrictName"
+      "name": "A.PROV_DISTRICT_NAME"
     },
     {
       "type": "sort",
       "position": "center",
       "label": "District Sandi BI",
-      "name": "districtRegRptCode"
+      "name": "A.DISTRICT_REG_RPT_CODE"
     },
     {
       "type": "label",
@@ -46,12 +46,12 @@
     {
       "type": "text",
       "position": "center",
-      "property": "provDistrictName"
+      "property": "DistrictName"
     },
     {
       "type": "text",
       "position": "center",
-      "property": "districtRegRptCode"
+      "property": "DistrictRegRptCodeId"
     },
     {
       "type": "action",
@@ -59,14 +59,14 @@
       "action": [
         {
           "type": "select",
-          "property": "refProvDistrictId"
+          "property": "RefProvDistrictId"
         }
       ]
     }
   ],
 
-  "propertyId": "refProvDistrictId",
-  "propertyName": "provDistrictName"
+  "propertyId": "RefProvDistrictId",
+  "propertyName": "DistrictName"
 
 
 }

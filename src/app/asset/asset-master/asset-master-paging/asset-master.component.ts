@@ -21,7 +21,6 @@ export class AssetMasterComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetMaster.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetMaster;
     this.inputPagingObj.ddlEnvironments = [
       {
         name: "ATH.ASSET_TYPE_CODE",

@@ -34,7 +34,7 @@ export class OfficeAddComponent implements OnInit {
   mrKonvenSyariah = 'KON';
   isDisabledState: boolean = false;
   isHO: boolean = true;
-  RefOfficeId: any;
+  RefOfficeId: number;
   allOfficeType: any;
   allOfficeClass: any;
   allRefOrg: any;
@@ -63,7 +63,6 @@ export class OfficeAddComponent implements OnInit {
   resultData: any;
   apiUrl: any;
   addUrl: any;
-  editUrl: any;
   officeClassUrl: any;
   refOrgUrl: any;
   getRefOrgUrl: any;
@@ -102,16 +101,6 @@ export class OfficeAddComponent implements OnInit {
     HolidayScheme: ['', Validators.required],
     WorkingHourScheme: ['', Validators.required],
     MrCenterGrpTypeCode: ['', Validators.required],
-    // PhnArea1: ['', [Validators.required, Validators.max(4)]],
-    // Phn1: ['',Validators.required],
-    // PhnExt1: ['',[Validators.required, Validators.max(4)]],
-    // PhnArea2:  ['',Validators.max(4)],
-    // Phn2: [''],
-    // PhnExt2: ['',Validators.max(4)],
-    // PhnArea3: ['',Validators.max(4)],
-    // Phn3:  [''],
-    // PhnExt3:  ['',Validators.max(4)],
-    // Fax:  ['',Validators.max(4)],
     CntctPersonName: ['', Validators.required],
     CntctPersonJobTitle: ['', Validators.required],
     CntctPersonEmail1: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
@@ -119,6 +108,7 @@ export class OfficeAddComponent implements OnInit {
     CntctPersonMobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     CntctPersonMobilePhnNo2: ['', [Validators.pattern('^[0-9]+$')]],
     IsActive: false,
+    IsHaveCashier: false,
     OfficeClose: false,
     AllowAppCreated: false
   })
@@ -130,7 +120,6 @@ export class OfficeAddComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.apiUrl = URLConstant.GetRefOfficeByRefOfficeId;
     this.addUrl = URLConstant.AddRefOffice;
-    this.editUrl = this.foundationUrl + URLConstant.EditRefOffice;
     this.officeClassUrl = URLConstant.GetRefMasterListKeyValueActiveByCode;
     this.refOrgUrl = this.foundationUrl + URLConstant.GetListAllRefOrg;
     this.orgMdlUrl = this.foundationUrl + URLConstant.GetAllActiveOrgMdlByRefOrgId;
@@ -163,6 +152,17 @@ export class OfficeAddComponent implements OnInit {
         environment: environment.FoundationR3Url
       }
     ];
+    this.InputLookupObj.addCritInput = new Array();
+
+    if(this.RefOfficeId != undefined && this.RefOfficeId != 0){
+      var critRefOfficeIdObj = new CriteriaObj();
+      critRefOfficeIdObj.restriction = AdInsConstant.RestrictionNeq;
+      critRefOfficeIdObj.propName = 'A.REF_OFFICE_ID';
+      critRefOfficeIdObj.value = this.RefOfficeId.toString();
+      console.log("testing...");
+      console.log(this.InputLookupObj);
+      this.InputLookupObj.addCritInput.push(critRefOfficeIdObj);
+    }
 
     this.refMasterObj = new RefMasterObj();
     this.refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeOfficeClass;
@@ -190,9 +190,9 @@ export class OfficeAddComponent implements OnInit {
             critObj.listValue.push(element.Key);
           });
 
-          this.arrCrit.push(critObj);
-          this.InputLookupObj.addCritInput = this.arrCrit;
+          this.InputLookupObj.addCritInput.push(critObj);
         }
+        this.InputLookupObj.isReady = true;
 
       });
 
@@ -264,7 +264,7 @@ export class OfficeAddComponent implements OnInit {
       this.officeObj = new OfficeObj();
       this.addressObj = new UcAddressObj();
       this.officeObj.RefOfficeId = this.RefOfficeId;
-      this.httpClient.post(URLConstant.GetRefOfficeByRefOfficeId, this.officeObj).subscribe(
+      this.httpClient.post(URLConstant.GetRefOfficeByRefOfficeId, {Id : this.RefOfficeId}).subscribe(
         (response) => {
           this.resultData = response;
           this.InputLookupObj.jsonSelect = { OfficeCode: this.resultData.ParentOfficeCode, RefOfficeId: this.resultData.ParentId };
@@ -281,6 +281,7 @@ export class OfficeAddComponent implements OnInit {
             HolidayScheme: this.resultData.HolidaySchmHId,
             WorkingHourScheme: this.resultData.WorkingHourSchmHId,
             IsActive: this.resultData.IsActive,
+            IsHaveCashier: this.resultData.IsHaveCashier,
             OfficeClose: this.resultData.IsOfficeClose,
             AllowAppCreated: this.resultData.IsAllowAppCreated,
             CntctPersonName: this.resultData.CntctPersonName,
@@ -384,6 +385,7 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.OfficeName = this.OfficeForm.value.OfficeName;
     this.officeObj.MrOfficeClassCode = this.OfficeForm.value.MrOfficeClassCode;
     this.officeObj.IsActive = this.OfficeForm.value.IsActive;
+    this.officeObj.IsHaveCashier = this.OfficeForm.value.IsHaveCashier;
     this.officeObj.IsAllowAppCreated = this.OfficeForm.value.AllowAppCreated;
     this.officeObj.HolidaySchmHId = this.OfficeForm.value.HolidayScheme;
     this.officeObj.WorkingHourSchmHId = this.OfficeForm.value.WorkingHourScheme;
@@ -431,29 +433,19 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.Fax = this.OfficeForm.value.UcAddress.Fax;
 
     if (this.pageType == "add") {
-      if (this.officeObj.MrOfficeTypeCode == CommonConstant.CollectionGroup) {
-        this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response['message']);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
-          }
-        );
-      }
-      else {
-        this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response['message']);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
-          }
-        );
-      }
+      this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response['message']);
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
+        }
+      );
     }
     else {
       this.officeObj.OfficeCode = this.resultData.OfficeCode;
       this.officeObj.MrOfficeTypeCode = this.resultData.MrOfficeTypeCode
       this.officeObj.RefOfficeId = this.resultData.RefOfficeId;
       this.officeObj.RowVersion = this.resultData.RowVersion;
-      this.httpClient.post(this.editUrl, this.officeObj).subscribe(
+      this.httpClient.post(URLConstant.EditRefOffice, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
@@ -488,13 +480,5 @@ export class OfficeAddComponent implements OnInit {
     this.OfficeForm.patchValue({
       OfficeParent: ev.RefOfficeId
     })
-    // this.CustForm.patchValue({
-    //   AreaCode2: ev.AreaCode2,
-    //   AreaCode1: ev.AreaCode1,
-    //   City: ev.City,
-    //   ZipCode: ev.ZipCode
-    // });
-    // this.InputLookupObj.nameSelect = ev.zipcode;
-    // this.InputLookupObj.idSelect = ev.zipcode;
   }
 }

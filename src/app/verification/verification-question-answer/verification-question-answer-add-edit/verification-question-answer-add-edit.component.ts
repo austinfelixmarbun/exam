@@ -10,6 +10,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 
 @Component({
   selector: 'app-verification-question-answer-add-edit',
@@ -26,6 +27,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
   verfQuestionAnswer: any;
   answerTypeCode: string = "DDL";
   isHidden: boolean = true;
+  dropdownListObj: UcDropdownListObj = new UcDropdownListObj();
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
@@ -47,44 +49,40 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
   })
 
   ngOnInit() {
+    this.dropdownListObj.apiUrl = URLConstant.GetActiveRefVerfAnswerTypes;
+    this.dropdownListObj.requestObj = {};
+    this.dropdownListObj.customKey = "RefVerfAnswerTypeId";
+    this.dropdownListObj.customValue = "VerfAnswerTypeDescr";
+    this.dropdownListObj.ddlType = "blank";
+    this.dropdownListObj.isSelectOutput = true;
+    this.GetListActiveRefAnswerType();
+
     var refAnswerObj = {}
-    this.http.post(URLConstant.GetActiveRefVerfAnswerTypes, refAnswerObj).subscribe(
-      (response) => {
-        this.itemVerfQuestionAnswer = response[CommonConstant.ReturnObj];
-        if (this.itemVerfQuestionAnswer.length > 0) {
-          let VerfAnswerData = this.itemVerfQuestionAnswer.find(x => x.VerfAnswerTypeCode == "DDL");
-          this.QuestionAnswerForm.patchValue({
-            RefVerfAnswerTypeId: VerfAnswerData.RefVerfAnswerTypeId
-          });
-        }
+    if (this.mode == "edit") {
+      this.http.post(URLConstant.GetVerfQuestionAnswerForUpdateById, {Id : this.VerfQuestionAnswerId}).subscribe(
+        (response) => {
+          this.verfQuestionAnswer = response[CommonConstant.ReturnObj];
 
-        if (this.mode == "edit") {
-          var verfAnswerObj = { VerfQuestionAnswerId: this.VerfQuestionAnswerId }
-          this.http.post(URLConstant.GetVerfQuestionAnswerForUpdateById, verfAnswerObj).subscribe(
-            (response) => {
-              this.verfQuestionAnswer = response[CommonConstant.ReturnObj];
-
-              refAnswerObj = { RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId }
-              this.http.post(URLConstant.GetRefVerfAnswerTypeById, refAnswerObj).subscribe(
-                (respond) => {
-                  this.answerTypeCode = respond["VerfAnswerTypeCode"];
-                }
-              )
-
-              this.QuestionAnswerForm.patchValue({
-                VerfQuestionCode: this.verfQuestionAnswer.VerfQuestionCode,
-                VerfQuestionText: this.verfQuestionAnswer.VerfQuestionText,
-                VerfAnswer: this.verfQuestionAnswer.VerfAnswer,
-                RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId,
-                IsActive: this.verfQuestionAnswer.IsActive,
-                RowVersion: this.verfQuestionAnswer.RowVersion
-              });
-
-              this.AnswerTypeChanged(this.verfQuestionAnswer.RefVerfAnswerTypeId);
+          refAnswerObj = { RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId }
+          this.http.post(URLConstant.GetRefVerfAnswerTypeById, {Id : this.verfQuestionAnswer.RefVerfAnswerTypeId}).subscribe(
+            (respond) => {
+              this.answerTypeCode = respond["VerfAnswerTypeCode"];
             }
-          );
+          )
+
+          this.QuestionAnswerForm.patchValue({
+            VerfQuestionCode: this.verfQuestionAnswer.VerfQuestionCode,
+            VerfQuestionText: this.verfQuestionAnswer.VerfQuestionText,
+            VerfAnswer: this.verfQuestionAnswer.VerfAnswer,
+            RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId,
+            IsActive: this.verfQuestionAnswer.IsActive,
+            RowVersion: this.verfQuestionAnswer.RowVersion
+          });
+
+          this.AnswerTypeChanged(this.verfQuestionAnswer.RefVerfAnswerTypeId);
         }
-      })
+      );
+    }
   }
 
   AnswerTypeChanged(RefVerfAnswerTypeId) {
@@ -98,6 +96,30 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
       this.isHidden = false;
     }
     this.QuestionAnswerForm.controls.VerfAnswer.updateValueAndValidity();
+  }
+
+  GetListActiveRefAnswerType() {
+    var url = URLConstant.GetActiveRefVerfAnswerTypes;
+    this.http.post(url, {}).subscribe(
+      (response) => {
+        this.itemVerfQuestionAnswer = response[CommonConstant.ReturnObj];
+        this.dropdownListObj.isReady = true;
+        if (this.itemVerfQuestionAnswer.length > 0) {
+          let VerfAnswerData = this.itemVerfQuestionAnswer.find(x => x.VerfAnswerTypeCode == "DDL");
+          this.QuestionAnswerForm.patchValue({
+            RefVerfAnswerTypeId: VerfAnswerData.RefVerfAnswerTypeId
+          });
+          this.AnswerTypeChanged(this.QuestionAnswerForm.controls.RefVerfAnswerTypeId.value);
+        }
+      }
+    );
+  }
+
+  selectedValueHandler(ev){
+    this.QuestionAnswerForm.patchValue({
+      RefVerfAnswerTypeId: ev.selectedValue
+    });
+    this.AnswerTypeChanged(this.QuestionAnswerForm.controls.RefVerfAnswerTypeId.value);
   }
 
   SaveForm() {

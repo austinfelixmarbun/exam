@@ -41,27 +41,21 @@ export class NegativeCustomerViewComponent implements OnInit {
     var negativeCustObj = new NegativeCustObj();
     negativeCustObj.NegativeCustId = this.negativeCustId;
 
-    this.httpClient.post(URLConstant.GetNegativeCustByNegativeCustId, negativeCustObj).pipe(
+    this.httpClient.post(URLConstant.GetNegativeCustByNegativeCustId, {Id : this.negativeCustId}).pipe(
       map((response) => {
         return response;
       }),
       mergeMap((response: any) => {
         var negativeCustChangeTrxObj = new NegativeCustChangeTrxObj();
         negativeCustChangeTrxObj.NegativeCustId = response.NegativeCustId;
-        const negativeCustChangeTrx = this.httpClient.post(URLConstant.GetListNegativeCustChangeTrxByNegativeCustId, negativeCustChangeTrxObj);
+        const negativeCustChangeTrx = this.httpClient.post(URLConstant.GetListNegativeCustChangeTrxByNegativeCustId, {Id : response.NegativeCustId});
         var tempResponse = [response];
         return forkJoin([tempResponse, negativeCustChangeTrx]);
       }),
-      mergeMap((response: any) => {
-        var refMasterIdTypeObj = new RefMasterObj();
-        refMasterIdTypeObj.MasterCode = response[0].MrIdTypeCode;
-        var refMasterNegativeCustTypeObj = new RefMasterObj();
-        refMasterNegativeCustTypeObj.MasterCode = response[0].MrNegCustTypeCode;
-        var refMasterNegativeSourceObj = new RefMasterObj();
-        refMasterNegativeSourceObj.MasterCode = response[0].MrNegCustSourceCode;
-        let requestIdType = this.httpClient.post(URLConstant.GetRefMasterByMasterCode, refMasterIdTypeObj);
-        let requestNegativeCustType = this.httpClient.post(URLConstant.GetRefMasterByMasterCode, refMasterNegativeCustTypeObj);
-        let requestNegativeSource = this.httpClient.post(URLConstant.GetRefMasterByMasterCode, refMasterNegativeSourceObj);
+      mergeMap((response: any) => {        
+        let requestIdType = this.httpClient.post(URLConstant.GetRefMasterByMasterCode, {Code: response[0].MrIdTypeCode});
+        let requestNegativeCustType = this.httpClient.post(URLConstant.GetRefMasterByMasterCode, {Code: response[0].MrNegCustTypeCode});
+        let requestNegativeSource = this.httpClient.post(URLConstant.GetRefMasterByMasterCode, {Code: response[0].MrNegCustSourceCode});
 
         var tempResponse = [response];
 

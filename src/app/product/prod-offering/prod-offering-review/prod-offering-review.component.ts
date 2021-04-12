@@ -79,10 +79,7 @@ export class ProdOfferingReviewComponent implements OnInit {
     this.InputObj.CategoryCode = CommonConstant.CAT_CODE_PRD_OFR_APV;
     this.InputObj.SchemeCode = CommonConstant.SCHM_CODE_APV_OFR_ACT_SCHM;
 
-    var ProdOfferingObj = {
-      ProdOfferingId: this.ProdOfferingId
-    }
-    this.http.post(URLConstant.GetProdOfferingByProdOfferingId, ProdOfferingObj).subscribe(
+    this.http.post(URLConstant.GetProdOfferingByProdOfferingId, {Id : this.ProdOfferingId}).subscribe(
       (response) => {
         this.InputObj.TrxNo = response["ProdOfferingCode"];
         this.IsReady = true;

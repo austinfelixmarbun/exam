@@ -29,7 +29,7 @@ export class ReasonAddEditComponent implements OnInit {
     IsActive: [true]
   });
 
-  readonly CancelLink: string = NavigationConstant.CS_REASON_DETAIL;
+  readonly CancelLink: string = NavigationConstant.CS_REASON_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
@@ -54,7 +54,7 @@ export class ReasonAddEditComponent implements OnInit {
       this.RefReasonForm.controls["ReasonCode"].disable();
       var refReasonObj = new RefReasonObj();
       refReasonObj.RefReasonId = this.refReasonId;
-      this.http.post<RefReasonObj>(URLConstant.GetRefReasonById, refReasonObj).subscribe(
+      this.http.post<RefReasonObj>(URLConstant.GetRefReasonById, {Id : this.refReasonId}).subscribe(
         response => {
           this.resultData = response;
           this.RefReasonForm.patchValue({

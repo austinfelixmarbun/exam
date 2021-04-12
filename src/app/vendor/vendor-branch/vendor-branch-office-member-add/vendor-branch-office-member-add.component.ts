@@ -48,7 +48,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
   }
 
   GetListVendorOfficeMbrByVendorId() {
-    this.http.post(URLConstant.GetListVendorOfficeMbrByVendorId, { VendorId: this.VendorId }).subscribe(
+    this.http.post(URLConstant.GetListVendorOfficeMbrByVendorId, { Id: this.VendorId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
         for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
@@ -86,6 +86,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
 
     this.http.post(URLConstant.AddListVendorOfficeMember, obj).subscribe(
       (response) => {
+        this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_MBR_PAGING],{ "VendorId": this.VendorId });
       });
   }

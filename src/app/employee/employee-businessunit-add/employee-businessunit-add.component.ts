@@ -69,7 +69,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.title = "Business Unit-Edit";
       this.userRole.RefUserRoleId = this.RefUserRoleId;
 
-      this.http.post(URLConstant.GetRefUserRoleById, this.userRole).subscribe(
+      this.http.post(URLConstant.GetRefUserRoleById, {Id : this.RefUserRoleId}).subscribe(
         (response) => {
           this.result = response;
           this.userRole = this.result;
@@ -80,7 +80,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
 
           BizUnit.RefBizUnitId = this.result["RefBizUnitId"];
 
-          this.http.post(URLConstant.GetRefBizUnit, BizUnit).subscribe(
+          this.http.post(URLConstant.GetRefBizUnit, {Id : BizUnit.RefBizUnitId}).subscribe(
             (response) => {
               this.inputPagingObjBusinessUnit.nameSelect = response["BizUnitName"];
             }
@@ -89,7 +89,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
           var JobTitle = new RefJobTitleObj();
           JobTitle.RefJobTitleId = this.result["RefJobTitleId"];
 
-          this.http.post(URLConstant.GetRefJobTitleById, JobTitle).subscribe(
+          this.http.post(URLConstant.GetRefJobTitleById, {Id: this.result["RefJobTitleId"]}).subscribe(
             (response) => {
               this.inputPagingObjJobTitle.nameSelect = response["JobTitleName"];
             }
@@ -101,7 +101,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
             this.inputPagingObjSupervisor.nameSelect = "";
           }
           else {
-            this.http.post(URLConstant.GetRefUserById, Supervisor).subscribe(
+            this.http.post(URLConstant.GetRefUserById, {Id : Supervisor.RefUserId}).subscribe(
               (response) => {
                 this.inputPagingObjSupervisor.nameSelect = response["Username"];
               }
@@ -109,7 +109,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
           }
           var Office = new OfficeObj();
           Office.RefOfficeId = this.result["RefOfficeId"];
-          this.http.post(URLConstant.GetRefOfficeByRefOfficeId, Office).subscribe(
+          this.http.post(URLConstant.GetRefOfficeByRefOfficeId, {Id : Office.RefOfficeId}).subscribe(
             (response) => {
               this.inputPagingObjOffice.nameSelect = response["OfficeName"];
             }
@@ -117,7 +117,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
 
           var Role = new RefRoleObj();
           Role.RefRoleId = this.result["RefRoleId"];
-          this.http.post(URLConstant.GetRefRoleByRefRoleId, Role).subscribe(
+          this.http.post(URLConstant.GetRefRoleByRefRoleId, {Id : Role.RefRoleId}).subscribe(
             (response) => {
               this.inputPagingObjRole.nameSelect = response["RoleName"];
             }

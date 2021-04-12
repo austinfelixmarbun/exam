@@ -11,18 +11,18 @@
         },
         {
             "type": "dropdown",
-            "name": "A.MR_OFFICE_TYPE_CODE", 
+            "name": "A.MR_OFFICE_TYPE_CODE",
             "id": "MrOfficeTypeId",
             "value": "",
             "placeholder": "Placeholder",
             "datatype": "text",
             "isFromURL": true,
-            "isSelectOne": false,
+            "ddlType": "all",
             "url": "",
             "path": "/RefMaster/GetListKeyValueActiveByCode",
             "label": "Type",
-            "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "OFFICE_TYPE",
+            "criteriaPropName": "RefMasterTypeCode",
+            "criteriaPropValue": "OFFICE_TYPE",
             "items": [],
             "itemsUrl": []
         },
@@ -46,7 +46,6 @@
     "querystring": {
         "name": "lookupOfficeParent"
     },
-
     "headerList": [
         {
             "type": "sort",
@@ -65,7 +64,7 @@
             "position": "center",
             "label": "Office Type",
             "name": " B.DESCR"
-        },        
+        },
         {
             "type": "sort",
             "position": "left",
@@ -93,7 +92,8 @@
             "type": "text",
             "position": "center",
             "property": "Descr"
-        },        {
+        },
+        {
             "type": "text",
             "position": "left",
             "property": "OfficeAddr"
@@ -103,15 +103,12 @@
             "position": "center",
             "action": [
                 {
-                     "type" : "select",
-                     "property" : "RefOfficeId"
-
+                    "type": "select",
+                    "property": "RefOfficeId"
                 }
             ]
         }
     ],
-        "propertyId":"OfficeCode",
-        "propertyName":"OfficeCode" 
-    
-
+    "propertyId": "OfficeCode",
+    "propertyName": "OfficeCode"
 }

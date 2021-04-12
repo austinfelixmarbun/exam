@@ -87,10 +87,8 @@ export class ProductOfferingDeactivateApprovalDetailComponent implements OnInit 
     this.InputApvObj.PathUrlContinueToLevel = URLConstant.ContinueToLevel;
     this.InputApvObj.RequestId = this.ApvReqId;
     this.InputApvObj.PathUrlGetHistory = URLConstant.GetTaskHistory;
-      var prodOfferingObj = {
-        ProdOfferingId: this.ProdOfferingId
-      } 
-      this.http.post(URLConstant.GetProdOfferingByProdOfferingId, prodOfferingObj).subscribe(
+    
+      this.http.post(URLConstant.GetProdOfferingByProdOfferingId, {Id : this.ProdOfferingId}).subscribe(
         (response) => {
           this.InputApvObj.TrxNo = response["ProdOfferingCode"];
           this.IsReady = true;

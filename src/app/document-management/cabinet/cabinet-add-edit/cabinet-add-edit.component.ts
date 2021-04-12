@@ -6,6 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { environment } from 'environments/environment';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-cabinet-add-edit',
@@ -29,6 +32,7 @@ export class CabinetAddEditComponent implements OnInit {
     private router: Router,
     private activeRoute: ActivatedRoute,
     private http: HttpClient,
+    private cookieService: CookieService,
     private toastr: NGXToastrService) {
     this.activeRoute.queryParams.subscribe(
       params => {
@@ -40,12 +44,12 @@ export class CabinetAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem("UserAccess"));
+    this.user = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     if(this.CabinetCode !== undefined){
       this.title = "EDIT CABINET"
       this.CabinetForm.controls.CabinetCode.disable();
       this.Cabinet.CabinetCode = this.CabinetCode;
-      this.http.post<CabinetObj>(environment.FoundationR3Url + "/DocManagement/GetCabinetByCode", this.Cabinet).subscribe(
+      this.http.post<CabinetObj>(environment.FoundationR3Url + "/DocManagement/GetCabinetByCode", {Code: this.CabinetCode}).subscribe(
         (response) => {
           this.Cabinet = response;
           this.CabinetForm.controls['CabinetCode'].patchValue(response.CabinetCode);

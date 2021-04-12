@@ -48,22 +48,24 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
   }
 
   GetListVerfQuestionGrpHByVerfSchemeDId() {
-    var verfGroupObj = { VerfSchemeHId: this.VerfSchemeHId }
-    this.http.post(URLConstant.GetVerfSchemeDsByVerfSchemeHId, verfGroupObj).subscribe(
+    this.http.post(URLConstant.GetVerfSchemeDsByVerfSchemeHId, {Id : this.VerfSchemeHId}).subscribe(
       (response) => {
-        var arrMemberList = new Array();
-        for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
-          arrMemberList.push(response[CommonConstant.ReturnObj][index].VerfQuestionGrpHId)
+        if(response[CommonConstant.ReturnObj] != null){
+          var arrMemberList = new Array();
+          for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
+            arrMemberList.push(response[CommonConstant.ReturnObj][index].VerfQuestionGrpHId)
+          }
+  
+          if (arrMemberList.length != 0) {
+            const addCritListVerfQuestionGrpHId = new CriteriaObj();
+            addCritListVerfQuestionGrpHId.DataType = "numeric";
+            addCritListVerfQuestionGrpHId.propName = "VERF_QUESTION_GRP_H_ID";
+            addCritListVerfQuestionGrpHId.restriction = AdInsConstant.RestrictionNotIn;
+            addCritListVerfQuestionGrpHId.listValue = arrMemberList;
+            this.tempPagingObj.addCritInput.push(addCritListVerfQuestionGrpHId);
+          }
         }
-
-        if (arrMemberList.length != 0) {
-          const addCritListVerfQuestionGrpHId = new CriteriaObj();
-          addCritListVerfQuestionGrpHId.DataType = "numeric";
-          addCritListVerfQuestionGrpHId.propName = "VERF_QUESTION_GRP_H_ID";
-          addCritListVerfQuestionGrpHId.restriction = AdInsConstant.RestrictionNotIn;
-          addCritListVerfQuestionGrpHId.listValue = arrMemberList;
-          this.tempPagingObj.addCritInput.push(addCritListVerfQuestionGrpHId);
-        }
+        
         this.tempPagingObj.isReady = true;
       }
     );

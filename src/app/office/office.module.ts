@@ -24,6 +24,7 @@ import { OfficeAreaMemberPagingComponent } from './office-area/office-area-membe
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
     UclookupgenericModule,
     UcShowErrorsModule,
     UcviewgenericModule,
-    UcaddtotempModule
+    UcaddtotempModule,
+    TranslateModule
   ],
   declarations: [
     OfficeComponent,

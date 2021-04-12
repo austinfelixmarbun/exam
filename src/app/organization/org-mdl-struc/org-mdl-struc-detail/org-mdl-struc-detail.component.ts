@@ -119,7 +119,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
                 var bizUnit: BusinessUnitObj = new BusinessUnitObj();
                 bizUnit.RefBizUnitId = response["returnObject"]["refBizUnitId"];
                 this.httpClient
-                  .post(getBizUnitUrl, bizUnit)
+                  .post(getBizUnitUrl, {Id : bizUnit.RefBizUnitId})
                   .subscribe(response => {
                     this.inputLookupObj.nameSelect = response["returnObject"]["bizUnitName"];
                   });
@@ -133,7 +133,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
             this.foundationUrl + URLConstant.GetRefBizUnit;
           bizUnitObj.RefBizUnitId = this.refBizUnitId;
           this.httpClient
-            .post(getBizUnitUrl, bizUnitObj)
+            .post(getBizUnitUrl, {Id : bizUnitObj.RefBizUnitId})
             .subscribe(response => {
               bizUnitObj = response["returnObject"];
               this.inputLookupObj2.nameSelect = response["returnObject"]['bizUnitName'];

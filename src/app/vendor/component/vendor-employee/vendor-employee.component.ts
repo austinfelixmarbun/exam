@@ -16,6 +16,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { ResponseIdGenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-vendor-employee',
@@ -92,6 +93,7 @@ export class VendorEmployeeComponent implements OnInit {
 
     if (this.mode == undefined) {
       this.mode = this.objInput.mode;
+      this.VendorEmpId = this.objInput.VendorEmpId;
     }
 
     if (this.mode == "edit") {
@@ -157,10 +159,8 @@ export class VendorEmployeeComponent implements OnInit {
       }
     );
 
-    var vendorObj = {
-      VendorId: this.objInput.VendorId
-    }
-    this.http.post(URLConstant.GetVendorByVendorId, vendorObj).subscribe(
+   
+    this.http.post(URLConstant.GetVendorByVendorId, {Id : this.objInput.VendorId}).subscribe(
       (response) => {
         this.result = response;
         this.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
@@ -241,7 +241,7 @@ export class VendorEmployeeComponent implements OnInit {
     var vendorEmpObj = new VendorEmpObj();
     vendorEmpObj.VendorId = null;
     vendorEmpObj.VendorEmpId = this.objInput.VendorEmpId;
-    this.http.post(URLConstant.GetVendorEmpAndVendorTaxAddrByVendorEmpId, vendorEmpObj).subscribe(
+    this.http.post(URLConstant.GetVendorEmpAndVendorTaxAddrByVendorEmpId, {Id : this.objInput.VendorEmpId}).subscribe(
       (response) => {
         this.resultVendorEmpAndAddr = response;
         this.setDropdown();
@@ -277,7 +277,6 @@ export class VendorEmployeeComponent implements OnInit {
           MrTaxCalcMethodCode: this.resultVendorEmpAndAddr.VendorEmpObj.MrTaxCalcMethodCode,
           IsNpwpExist: this.resultVendorEmpAndAddr.VendorEmpObj.IsNpwpExist
         });
-        this.setLookup();
       }
     );
   }
@@ -322,6 +321,7 @@ export class VendorEmployeeComponent implements OnInit {
     this.VendorBranchEmpObj.VendorEmpObj.MrTaxCalcMethodCode = this.VendorEmpForm.controls.MrTaxCalcMethodCode.value;
     this.VendorBranchEmpObj.VendorEmpObj.IsNpwpExist = this.VendorEmpForm.controls.IsNpwpExist.value;
     this.VendorBranchEmpObj.VendorEmpObj.SupervisorId = this.VendorBranchEmpObj.VendorEmpObj.SupervisorId;
+    this.VendorBranchEmpObj.VendorEmpObj.IsOwner = this.VendorEmpForm.controls.IsOwner.value;
 
     if (this.VendorEmpForm.controls.IsNpwpExist.value == true) {
       this.VendorBranchEmpObj.VendorEmpObj.TaxIdNo = this.VendorEmpForm.controls.TaxIdNo.value;
@@ -346,12 +346,12 @@ export class VendorEmployeeComponent implements OnInit {
     }
 
     if (this.mode == "add") {
-      this.http.post(URLConstant.AddVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
+      this.http.post<ResponseIdGenericObj>(URLConstant.AddVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
         (response) => {
           this.mode = "edit";
-          this.objInput.VendorEmpId = response["VendorEmpId"];
-          this.objOutput.emit(response["VendorEmpId"]);
-          this.toastr.successMessage(response["message"]);
+          this.objInput.VendorEmpId = response.Id;
+          this.objOutput.emit(response.Id);
+          this.toastr.successMessage(response["Message"]);
           this.wizard.goToNextStep();
         });
     } else {
@@ -363,7 +363,7 @@ export class VendorEmployeeComponent implements OnInit {
 
       this.http.post(URLConstant.EditVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
         (response) => {
-          this.toastr.successMessage(response["message"]);
+          this.toastr.successMessage(response["Message"]);
           this.wizard.goToNextStep();
         });
     }

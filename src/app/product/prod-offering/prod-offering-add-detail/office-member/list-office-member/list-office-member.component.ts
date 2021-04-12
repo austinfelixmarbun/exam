@@ -44,13 +44,9 @@ export class ListOfficeMemberComponentOffering implements OnInit {
     this.pageSize = 10;
     this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
     this.ProdOfferingHId = this.ListOfficeMemberObjInput["param"];
-    var obj = {
-      ProdOfferingHId: this.ProdOfferingHId,
-      RowVersion: ""
-    }
 
     var url = URLConstant.GetListProdOfferingBranchOfficeMbrByProdHId;
-    this.http.post(url, obj).subscribe(
+    this.http.post(url, {Id : this.ProdOfferingHId}).subscribe(
       (response) => {
         this.resultData = response[CommonConstant.ReturnObj];
 

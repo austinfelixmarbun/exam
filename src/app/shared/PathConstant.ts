@@ -26,6 +26,7 @@ export class PathConstant {
     public static LR_SRVY = "Survey";
     public static LR_INTEGRATION = "Integration";
     public static LR_DOC_MNGMNT = "DocumentManagement";
+    public static LR_FEE = "Fee";
     //#endregion
 
     //#region content-routes
@@ -113,6 +114,8 @@ export class PathConstant {
     public static CS_MASTER_DETAIL = PathConstant.CS_MASTER + "/" + PathConstant.DETAIL;
     public static CS_GEN_SETTING = "GeneralSetting";
     public static CS_GEN_SETTING_DETAIL = PathConstant.CS_GEN_SETTING + "/" + PathConstant.DETAIL;
+    public static CS_GEN_SETTING_ADMIN = "GeneralSettingAdmin";
+    public static CS_GEN_SETTING_DETAIL_ADMIN = PathConstant.CS_GEN_SETTING_ADMIN + "/" + PathConstant.DETAIL;
     public static CS_CURRENCY = "Currency";
     public static CS_CURRENCY_PAGING = PathConstant.CS_CURRENCY + "/" + PathConstant.PAGING;
     public static CS_CURRENCY_ADD = PathConstant.CS_CURRENCY + "/" + PathConstant.ADD;
@@ -149,6 +152,8 @@ export class PathConstant {
     public static CS_BANK_PAGING = PathConstant.CS_BANK + "/" + PathConstant.PAGING;
     public static CS_BANK_DETAIL = PathConstant.CS_BANK + "/" + PathConstant.DETAIL;
     public static CS_OFFICE_BANK_ACCOUNT_PAGING = PathConstant.LR_OFFICE_BANK_ACC + "/" + PathConstant.PAGING;
+    public static CS_OFFICE_BANK_ACCOUNT_DETAIL = PathConstant.LR_OFFICE_BANK_ACC + "/" + PathConstant.DETAIL;
+    public static CS_OFFICE_BANK_ACCOUNT_ACC_DETAIL = PathConstant.LR_OFFICE_BANK_ACC + "/AccDetail";
     public static CS_ZIPCODE = "Zipcode";
     public static CS_ZIPCODE_PAGING = PathConstant.CS_ZIPCODE + "/" + PathConstant.PAGING;
     public static CS_ZIPCODE_DETAIL = PathConstant.CS_ZIPCODE + "/" + PathConstant.DETAIL;
@@ -457,5 +462,6 @@ export class PathConstant {
     public static VIEW_CUST_COY_LEGAL = "CoyLegal";
     public static VIEW_CUST_GRP = "CustomerGroup";
     public static VIEW_CUST_DOC = "CustDocument";
+    public static VIEW_CUST_OTH_INFO = "CustOthInfo";
     //#endregion
 }

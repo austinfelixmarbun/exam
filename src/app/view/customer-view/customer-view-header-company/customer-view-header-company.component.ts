@@ -49,13 +49,13 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
     
     this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustByCustId, this.custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustObj = response;
         var refMasterObjMrCustModelCode = {
           MasterCode: this.tempCustObj.MrCustModelCode
         }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrCustModelCode).subscribe(
+        this.http.post(this.getRefMasterByMasterCodeUrl, {Code: this.tempCustObj.MrCustModelCode}).subscribe(
           (response) => {
             this.tempMrCustModelCode = response;
           }
@@ -74,13 +74,13 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
 
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj.CustId = this.IdCust;
-    this.http.post(this.getCustCompanyUrl, this.custCompanyObj).subscribe(
+    this.http.post(this.getCustCompanyUrl, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
         var refMasterObjMrCompanyTypeCode = {
           MasterCode: this.tempCustCompanyObj.MrCompanyTypeCode
         }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrCompanyTypeCode).subscribe(
+        this.http.post(this.getRefMasterByMasterCodeUrl, {Code: this.tempCustCompanyObj.MrCompanyTypeCode}).subscribe(
           (response) => {
             this.tempMrCompanyTypeCode = response;
           }

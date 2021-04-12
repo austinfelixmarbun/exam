@@ -140,7 +140,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       GsCode: CommonConstant.GSCodeDefLocalNationality
     }
 
-    this.http.post(this.GetGeneralSettingByCodeUrl, generalSettingObjDefLocalNationality).subscribe(
+    this.http.post(this.GetGeneralSettingByCodeUrl, {Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
       (response) => {
         this.Country = response;
         this.criteriaList = new Array();
@@ -154,7 +154,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
         var countryCode = {
           CountryCode: this.Country.GsValue
         };
-        this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+        this.http.post(URLConstant.GetRefCountryByCountryCode, {Code: this.Country.GsValue}).subscribe(
           (response) => {
             this.LocalCountry = response;
           });
@@ -222,7 +222,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     var refMasterObjMrNationalityCode = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality
     }
-    this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, refMasterObjMrNationalityCode).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, {Code : CommonConstant.RefMasterTypeCodeNationality}).subscribe(
       (response) => {
         this.tempNationality = response["RefMasterObjs"];
         this.CustomerContactForm.patchValue({
@@ -310,7 +310,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     if (this.custId > 0) {
       this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
       this.custPersonalContactPersonObj.CustId = this.custId;
-      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustId, this.custPersonalContactPersonObj).subscribe(
+      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustId, {Id : this.custId}).subscribe(
         (response) => {
           var datePipe = new DatePipe("en-US");
           this.tempCustPersonalContactPerson = response;
@@ -336,11 +336,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
           });
           this.onChangeIdType();
           if (this.tempCustPersonalContactPerson.MrJobProfessionCode != null) {
-            var ProfessionCodeObj = {
-              ProfessionCode: this.tempCustPersonalContactPerson.MrJobProfessionCode,
-              RowVersion: ""
-            }
-            this.http.post(URLConstant.GetRefProfessionByProfessionCode, ProfessionCodeObj).subscribe(
+            
+            this.http.post(URLConstant.GetRefProfessionByProfessionCode, {Code : this.tempCustPersonalContactPerson.MrJobProfessionCode}).subscribe(
               (response) => {
                 this.tempProfessionCodeObj = response;
                 this.professionLookUpObj.nameSelect = this.tempProfessionCodeObj.ProfessionName;
@@ -352,7 +349,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
             var countryCode = {
               CountryCode: this.tempCustPersonalContactPerson.NationalityCountryCode
             };
-            this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+            this.http.post(URLConstant.GetRefCountryByCountryCode, {Code: this.tempCustPersonalContactPerson.NationalityCountryCode}).subscribe(
               (response) => {
 
                 this.tempCountry = response;
@@ -409,7 +406,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     }
     var custAddrFromObj = new CustAddrObj();
     custAddrFromObj.CustAddrId = this.CustomerContactForm.controls["CopyFromContactPerson"].value;
-    this.http.post<CustAddrObj>(URLConstant.GetCustAddr, custAddrFromObj).subscribe(
+    this.http.post<CustAddrObj>(URLConstant.GetCustAddr, {Id : custAddrFromObj.CustAddrId}).subscribe(
       (response) => {
         var copyCustomerAddrFrom = response;
 
@@ -538,7 +535,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.custPersonalObj = new CustPersonalObj();
     this.custObj.CustId = this.tempCustId;
     this.custPersonalObj.CustId = this.tempCustId;
-    this.http.post(URLConstant.GetCustPersonalbyCustId, this.custObj).subscribe(
+    this.http.post(URLConstant.GetCustPersonalbyCustId, {Id : this.tempCustId}).subscribe(
       (response) => {
         this.tempCustPersonal = response;
         this.CustomerContactForm.patchValue({
@@ -557,7 +554,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
           var countryCode = {
             CountryCode: this.tempCustPersonal.WnaCountryCode
           };
-          this.http.post(URLConstant.GetRefCountryByCountryCode, countryCode).subscribe(
+          this.http.post(URLConstant.GetRefCountryByCountryCode, {Code: this.tempCustPersonal.WnaCountryCode}).subscribe(
             (response) => {
 
               this.tempCountry = response;
@@ -575,7 +572,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       }
 
     );
-    this.http.post(URLConstant.GetCustByCustId, this.custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.custObj.CustId}).subscribe(
       (response) => {
         this.tempCust = response;
         this.CustomerContactForm.patchValue({

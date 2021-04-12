@@ -10,7 +10,7 @@
             "placeholder": "Placeholder",
             "datatype": "numeric",
             "isFromURL": true,
-            "isSelectOne" : true,
+            "ddlType": "one",
             "url": "",
             "path": "/RefOffice/GetListKvpActiveRefOfficeIdForPaging",
             "itemsUrl": []
@@ -39,11 +39,11 @@
             "label": "Survey Order Status",
             "placeholder": "Placeholder",
             "isFromURL": true,
-            "isSelectOne": false,
+            "ddlType": "all",
             "path": "/RefStatus/GetRefStatusByTrxTypeCode",
             "items": [],
             "itemsUrl": [],
-            "criteriaPropName": "TrxTypeCode",
+            "criteriaPropName": "Code",
             "criteriaPropValue": "FOU_SURVEY"
         },
         {
@@ -54,7 +54,7 @@
             "label": "Survey Type",
             "placeholder": "Placeholder",
             "isFromURL": true,
-            "isSelectOne": false,
+            "ddlType": "all",
             "path": "/RefMaster/GetListKeyValueActiveByCode",
             "items": [],
             "itemsUrl": [],

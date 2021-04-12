@@ -96,7 +96,7 @@ export class RefFormDetailComponent implements OnInit {
       var refFormObj = {
         RefFormId: this.RefFormId
       }
-      this.http.post<RefFormObj>(URLConstant.GetRefFormDataByRefFormId, refFormObj).subscribe(
+      this.http.post<RefFormObj>(URLConstant.GetRefFormDataByRefFormId, {Id: this.RefFormId}).subscribe(
         (response) => {
           this.resultRefForm = response;
           this.refFormObj = response;

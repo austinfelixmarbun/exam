@@ -141,10 +141,10 @@ export class UpdateCustomerJobDataComponent implements OnInit {
         return response[0];
       }),
       mergeMap((response) => {
-        let getAppProfession = this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { RefProfessionId: response["AppCustJobData"]["ProfessionId"] });
-        let getMasterProfession = this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { RefProfessionId: response["MasterCustJobData"]["ProfessionId"] });
-        let getAppIndustry = this.http.post(URLConstant.GetRefIndustryTypeById, { RefIndustryTypeId: response["AppCustJobData"]["IndustryTypeId"] });
-        let getMasterIndustry = this.http.post(URLConstant.GetRefIndustryTypeById, { RefIndustryTypeId: response["MasterCustJobData"]["IndustryTypeId"] });
+        let getAppProfession = this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response["AppCustJobData"]["ProfessionId"] });
+        let getMasterProfession = this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response["MasterCustJobData"]["ProfessionId"] });
+        let getAppIndustry = this.http.post(URLConstant.GetRefIndustryTypeById, { Id: response["AppCustJobData"]["IndustryTypeId"] });
+        let getMasterIndustry = this.http.post(URLConstant.GetRefIndustryTypeById, { Id: response["MasterCustJobData"]["IndustryTypeId"] });
         return forkJoin([getMasterProfession, getMasterIndustry, getAppProfession, getAppIndustry]);
       })
     ).toPromise().then(

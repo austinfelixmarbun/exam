@@ -60,13 +60,13 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
   ngOnInit() {
     this.custObj = new CustObj();
     this.custObj.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustByCustId, this.custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustObj = response;
         var refMasterObjMrCustModelCode = {
           MasterCode: this.tempCustObj.MrCustModelCode
         }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrCustModelCode).subscribe(
+        this.http.post(this.getRefMasterByMasterCodeUrl, {Code: this.tempCustObj.MrCustModelCode }).subscribe(
           (response) => {
             this.tempMrCustModelCode = response;
           }
@@ -74,7 +74,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
         var refMasterObjMrIdTypeCode = {
           MasterCode: this.tempCustObj.MrIdTypeCode
         }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrIdTypeCode).subscribe(
+        this.http.post(this.getRefMasterByMasterCodeUrl, {Code : this.tempCustObj.MrIdTypeCode}).subscribe(
           (response) => {
             this.tempMrIdTypeCode = response;
           }
@@ -93,13 +93,13 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
 
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustPersonalbyCustId, this.custPersonalObj).subscribe(
+    this.http.post(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustPersonalObj = response;
         var refMasterObjMrGenderCode = {
           MasterCode: this.tempCustPersonalObj.MrGenderCode
         }
-        this.http.post(this.getRefMasterByMasterCodeUrl, refMasterObjMrGenderCode).subscribe(
+        this.http.post(this.getRefMasterByMasterCodeUrl, {Code: this.tempCustPersonalObj.MrGenderCode}).subscribe(
           (response) => {
             this.tempMrGenderCode = response;
           }

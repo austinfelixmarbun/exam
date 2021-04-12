@@ -27,7 +27,7 @@ export class HoBranchInfoComponent implements OnInit {
       VendorId : this.VendorId
     }
 
-    this.http.post(URLConstant.GetListBranchByVendorId, obj).subscribe(
+    this.http.post(URLConstant.GetListBranchByVendorId, {Id : this.VendorId}).subscribe(
       (response) => {
         this.ListData = response[CommonConstant.ReturnObj];
       }

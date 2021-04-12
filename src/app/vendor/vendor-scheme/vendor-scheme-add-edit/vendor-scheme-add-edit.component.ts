@@ -67,7 +67,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
           this.vendorSchemeObj.VendorSchmId = this.VendorSchmId;
           this.VendorSchmForm.controls.MrVendorCategoryCode.disable();
           this.VendorSchmForm.controls.VendorSchmCode.disable();
-          this.http.post(URLConstant.GetVendorSchmByVendorSchmId, this.vendorSchemeObj).subscribe(
+          this.http.post(URLConstant.GetVendorSchmByVendorSchmId, {Id : this.VendorSchmId}).subscribe(
               (response) => {
                   this.result = response;
                   this.MrVendorCategoryCode = this.result.MrVendorCategoryCode;

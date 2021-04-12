@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { environment } from 'environments/environment';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { CabinetObj } from 'app/shared/model/document-management/CabinetObj.Model';
 
 @Component({
   selector: 'app-rack-add-edit',
@@ -19,6 +20,7 @@ export class RackAddEditComponent implements OnInit {
   title: string = "ADD RACK";
   rack: RackObj = new RackObj();
   cabinetWithRackObj: CabinetWithListRackObj = new CabinetWithListRackObj();
+  Cabinet: CabinetObj = new CabinetObj();
 
   RackForm = this.fb.group({
     RackCode: ['', [Validators.required, Validators.maxLength(50)]],
@@ -41,19 +43,29 @@ export class RackAddEditComponent implements OnInit {
           this.Mode = params['Mode']
         }
         if(params['CabinetCode'] !== null){
-          this.CabinetCode = params['CabinetCode']
+          this.CabinetCode = params['CabinetCode'];
         }
       }
     );
   }
 
   ngOnInit() {
+    console.log(this.CabinetCode);
+    this.http.post<CabinetObj>(environment.FoundationR3Url + "/DocManagement/GetCabinetByCode", {Code: this.CabinetCode}).subscribe(
+      (response) => {
+        this.Cabinet = response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  
     if(this.Mode !== null || this.Mode !== undefined){
       if(this.Mode === 'Edit'){
         this.title = "EDIT RACK";
         this.RackForm.controls.RackCode.disable();
         this.rack.RackCode = this.RackCode;
-        this.http.post<CabinetWithListRackObj>(environment.FoundationR3Url + "/DocManagement/GetCabinetAndRackByRackCode", this.rack).subscribe(
+        this.http.post<CabinetWithListRackObj>(environment.FoundationR3Url + "/DocManagement/GetCabinetAndRackByRackCode", {Code: this.RackCode}).subscribe(
           (response) => {
             this.cabinetWithRackObj = response;
             this.RackForm.controls['RackCode'].patchValue(response.ListRack[0].RackCode);
@@ -93,6 +105,7 @@ export class RackAddEditComponent implements OnInit {
     }
     else {
       this.rack.CabinetCode = this.CabinetCode;
+      this.rack.CabinetId = this.Cabinet.CabinetId;
       this.http.post(environment.FoundationR3Url + "/DocManagement/AddRack", this.rack).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");

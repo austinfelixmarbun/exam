@@ -56,7 +56,7 @@ export class CustomerViewAddressComponent implements OnInit {
     this.viewCustFinData.viewInput =   "./assets/ucviewgeneric/viewCustFinData.json";
     this.viewCustFinData.viewEnvironment = environment.FoundationR3Url;
     var custAddrObj = { "CustId": this.CustId };
-    this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
+    this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, { Id: this.CustId }).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.responseResultCustAddr = response[CommonConstant.ReturnObj];
@@ -68,7 +68,7 @@ export class CustomerViewAddressComponent implements OnInit {
     );
     var custObj = new CustObj();
     custObj.CustId = this.CustId;
-    this.http.post(this.GetCustByCustIdUrl, custObj).subscribe(
+    this.http.post(this.GetCustByCustIdUrl, {Id : this.CustId}).subscribe(
       response => {
         this.CustType = response['MrCustTypeCode'];
         var refMasterObj = new RefMasterObj();
@@ -85,7 +85,7 @@ export class CustomerViewAddressComponent implements OnInit {
           }
         );
       });
-    this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, custAddrObj).subscribe(
+    this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, { Id: this.CustId }).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.responseResultCustAddrHist = response[CommonConstant.ReturnObj];

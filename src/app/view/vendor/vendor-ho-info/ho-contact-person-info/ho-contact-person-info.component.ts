@@ -29,7 +29,7 @@ export class HoContactPersonInfoComponent implements OnInit {
     this.VendorContactPerson = new VendorContactPersonObj;
     this.VendorContactPerson.VendorId = this.VendorId;
 
-    this.http.post(URLConstant.GetListVendorContactPersonByVendorId, this.VendorContactPerson).subscribe(
+    this.http.post(URLConstant.GetListVendorContactPersonByVendorId, {Id : this.VendorId}).subscribe(
       (response) => {
         this.resultData = response[CommonConstant.ReturnObj];
       }

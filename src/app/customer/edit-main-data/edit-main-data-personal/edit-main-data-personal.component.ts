@@ -55,7 +55,7 @@ export class EditMainDataPersonalComponent implements OnInit {
   tempCustPersonalObj: CustPersonalObj;
   tempCustObj: any;
   CustId: number;
-  custObj: CustObj;
+  custObj: CustObj = new CustObj();
   custPersonalObj: CustPersonalObj;
   tempMrMaritalStatCode: Array<KeyValueObj> = new Array<KeyValueObj>();
   From:string;
@@ -65,7 +65,7 @@ export class EditMainDataPersonalComponent implements OnInit {
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
   UcAddressObj: UcAddressObj = new UcAddressObj();
-  
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService, private cookieService: CookieService) {
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.getCustPersonalByCustIdUrl = URLConstant.GetCustPersonalbyCustId;
@@ -144,12 +144,11 @@ export class EditMainDataPersonalComponent implements OnInit {
         });
       }
     );
-    this.custObj = new CustObj();
     this.custPersonalObj = new CustPersonalObj();
     this.custObj.CustId = this.CustId;
     this.custPersonalObj.CustId = this.CustId;
     var datePipe = new DatePipe("en-US");
-    this.http.post(this.getCustByCustIdUrl, this.custObj).subscribe(
+    this.http.post(this.getCustByCustIdUrl, {Id : this.CustId}).subscribe(
       (response) => {
         this.tempCustObj = response;
         this.CustomerPersonalForm.patchValue({
@@ -164,6 +163,10 @@ export class EditMainDataPersonalComponent implements OnInit {
           IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
           VipNotes: this.tempCustObj.VipNotes,
         });
+        this.custObj.IsGuarantor = this.tempCustObj.IsGuarantor;
+        this.custObj.IsCustomer = this.tempCustObj.IsCustomer;
+        this.custObj.IsShareholder = this.tempCustObj.IsShareholder;
+        this.custObj.IsFamily = this.tempCustObj.IsFamily;
         this.onChangeIdType();
         if (this.tempCustObj.VipNotes != null) {
           this.VipNotesRequired = true;
@@ -173,6 +176,9 @@ export class EditMainDataPersonalComponent implements OnInit {
         if (this.tempCustObj.IsVip == false) {
           this.CustomerPersonalForm.controls.VipNotes.disable();
         }
+        
+        this.custObj.RowVersion = this.tempCustObj.RowVersion;
+        this.custObj.MrCustTypeCode = this.tempCustObj.MrCustTypeCode;
 
         this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.tempCustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
           (response: CustAddrObj) => {
@@ -186,11 +192,13 @@ export class EditMainDataPersonalComponent implements OnInit {
             this.UcAddressObj.City = response.City;
             this.inputAddressObj.default = this.UcAddressObj;
             this.inputAddressObj.inputField = this.inputFieldObj;
+            this.custObj.CustAddr.CustAddrId = response.CustAddrId;
+            this.custObj.CustAddr.RowVersion = response.RowVersion;
           }
         );
       }
     );
-    await this.http.post<CustPersonalObj>(this.getCustPersonalByCustIdUrl, this.custPersonalObj).toPromise().then(
+    await this.http.post<CustPersonalObj>(this.getCustPersonalByCustIdUrl, {Id : this.custPersonalObj.CustId}).toPromise().then(
       (response) => {
         this.tempCustPersonalObj = response;
         this.CustomerPersonalForm.patchValue({
@@ -219,9 +227,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     );
   }
   SaveValue() {
-    this.custObj = new CustObj();
     this.custPersonalObj = new CustPersonalObj();
-    this.custObj = this.tempCustObj;
     this.custPersonalObj = this.tempCustPersonalObj;
     this.custObj.CustName = this.CustomerPersonalForm.controls["CustName"].value;
     this.custObj.MrCustModelCode = this.CustomerPersonalForm.controls["CustModel"].value;
@@ -236,6 +242,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     }else{
       this.custObj.VipNotes = null;
     }
+
     this.custPersonalObj.CustFullName = this.CustomerPersonalForm.controls["CustName"].value;
     this.custPersonalObj.MrGenderCode = this.CustomerPersonalForm.controls["Gender"].value;
     this.custPersonalObj.BirthPlace = this.CustomerPersonalForm.controls["BirthPlace"].value;
@@ -244,7 +251,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custPersonalObj.MrMaritalStatCode = this.CustomerPersonalForm.controls["MrMaritalStatCode"].value;
 
     var formValue = this.CustomerPersonalForm.value;
-    this.custObj.CustAddr = new CustAddrObj();
+    this.custObj.CustAddr.CustId = this.CustId;
     this.custObj.CustAddr.Addr = formValue["UcAddress"]["Addr"];
     this.custObj.CustAddr.AreaCode1 = formValue["UcAddress"]["AreaCode1"];
     this.custObj.CustAddr.AreaCode2 = formValue["UcAddress"]["AreaCode2"];

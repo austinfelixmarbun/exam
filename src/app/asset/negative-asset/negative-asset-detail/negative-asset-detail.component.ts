@@ -117,7 +117,7 @@ export class NegativeAssetDetailComponent implements OnInit {
           }
         }),
         mergeMap(() => {
-          const assetNegativeData = this.httpClient.post(URLConstant.GetAssetNegativeByIdEditPage, negativeAsset);
+          const assetNegativeData = this.httpClient.post(URLConstant.GetAssetNegativeByIdEditPage, {Id: this.assetNegativeId});
           return assetNegativeData;
         })
       ).subscribe(
@@ -187,7 +187,7 @@ export class NegativeAssetDetailComponent implements OnInit {
     this.serial3Mandatory = false;
     this.serial4Mandatory = false;
     this.serial5Mandatory = false;
-    this.httpClient.post(URLConstant.GetAssetTypeById, { AssetTypeId: e.assetTypeId }).subscribe(
+    this.httpClient.post(URLConstant.GetAssetTypeById, { Id: e.assetTypeId }).subscribe(
       (response) => {
         if (response["IsMndtrySerialNo1"] == "1") {
           this.AssetNegativeForm.controls['SerialNo1'].setValidators([Validators.required]);

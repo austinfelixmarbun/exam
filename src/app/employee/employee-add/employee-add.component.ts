@@ -24,6 +24,8 @@ import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { AdInsHelper } from "app/shared/AdInsHelper";
 import { CookieService } from "ngx-cookie";
 import { NavigationConstant } from "app/shared/NavigationConstant";
+import { RefEmployeeObj } from "app/shared/model/RefEmployeeObj";
+import { ReqRefEmployeeObj } from "app/shared/model/Request/UserOrganization/RefEmp/ReqRefEmployee.Model";
 
 @Component({
   selector: "app-employee-add",
@@ -37,7 +39,7 @@ export class EmployeeAddComponent implements OnInit {
   resultData: any;
   generalSettingObj: GeneralSettingObj;
   passwordPattern: string;
-  refEmpObj: RefEmpObj;
+  refEmpObj: RefEmployeeObj;
   refUserObj: RefUserObj;
   empBankAccObj: EmpBankAccObj;
   refBankObj: RefBankObj;
@@ -97,7 +99,7 @@ export class EmployeeAddComponent implements OnInit {
 
     this.generalSettingObj = new GeneralSettingObj();
     this.generalSettingObj.GsCode = CommonConstant.GsCodePasswordRegex;
-    httpClient.post(URLConstant.GetGeneralSettingByCode, this.generalSettingObj).subscribe(
+    httpClient.post(URLConstant.GetGeneralSettingByCode, {Code: CommonConstant.GsCodePasswordRegex}).subscribe(
       (response) => {
         this.resultData = response;
         this.passwordPattern = this.resultData.GsValue;
@@ -138,7 +140,7 @@ export class EmployeeAddComponent implements OnInit {
       var empObj = new RefEmpObj();
       empObj.RefEmpId = this.RefEmpId;
 
-      this.http.post(URLConstant.GetEmpForUpdateById, empObj).subscribe(
+      this.http.post(URLConstant.GetEmpForUpdateById, {Id : this.RefEmpId}).subscribe(
         (response) => {
           this.refEmpObj = response['RefEmpObj'];
           this.refUserObj = response['RefUserObj'];
@@ -174,7 +176,8 @@ export class EmployeeAddComponent implements OnInit {
             BankAccNo: this.empBankAccObj.BankAccNo,
             BankAccName: this.empBankAccObj.BankAccName
           });
-          
+          this.inputLookupBankObj.jsonSelect = this.refBankObj;
+          this.inputLookupBankObj.idSelect = this.refBankObj.RefBankId;
           this.inputLookupBankObj.nameSelect = this.refBankObj.BankName;
           this.addressObj.Addr = this.refEmpObj.Addr;
           this.addressObj.AreaCode4 = this.refEmpObj.AreaCode4;
@@ -213,65 +216,61 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   SaveForm() {
-    if (Date.parse(this.RefEmpForm.controls.JoinDt.value) > Date.parse(formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US'))) {
-      this.toastr.warningMessage(ExceptionConstant.JOIN_DATE_MUST_LESS_THAN_ + "Business Date")
-      return;
-    }
     this.spinner.show();
     var refEmpFormData = this.RefEmpForm.value;
 
-    var refEmpData = new RefEmpObj();
-    refEmpData.RefEmpId = refEmpFormData.RefEmpId;
-    refEmpData.EmpNo = refEmpFormData.EmpNo;
-    refEmpData.EmpName = refEmpFormData.EmpName;
-    refEmpData.JoinDt = refEmpFormData.JoinDt;
-    refEmpData.MrIdTypeCode = refEmpFormData.MrIdTypeCode;
-    refEmpData.IdNo = refEmpFormData.IdNo;
-    refEmpData.TaxIdNo = refEmpFormData.TaxIdNo;
-    refEmpData.IsExt = refEmpFormData.IsExt;
-    refEmpData.IsActive = refEmpFormData.IsActive;
-    refEmpData.IsLeave = refEmpFormData.IsLeave;
-    refEmpData.Addr = refEmpFormData.UcAddress.Addr;
-    refEmpData.Zipcode = refEmpFormData.UcAddressZipcode.value;
-    refEmpData.AreaCode1 = refEmpFormData.UcAddress.AreaCode1;
-    refEmpData.AreaCode2 = refEmpFormData.UcAddress.AreaCode2;
-    refEmpData.AreaCode3 = refEmpFormData.UcAddress.AreaCode3;
-    refEmpData.AreaCode4 = refEmpFormData.UcAddress.AreaCode4;
-    refEmpData.City = refEmpFormData.UcAddress.City;
-    refEmpData.PhnArea1 = refEmpFormData.UcAddress.PhnArea1;
-    refEmpData.Phn1 = refEmpFormData.UcAddress.Phn1;
-    refEmpData.PhnExt1 = refEmpFormData.UcAddress.PhnExt1;
-    refEmpData.PhnArea2 = refEmpFormData.UcAddress.PhnArea2;
-    refEmpData.Phn2 = refEmpFormData.UcAddress.Phn2;
-    refEmpData.PhnExt2 = refEmpFormData.UcAddress.PhnExt2;
-    refEmpData.PhnArea3 = refEmpFormData.UcAddress.PhnArea3;
-    refEmpData.Phn3 = refEmpFormData.UcAddress.Phn3;
-    refEmpData.PhnExt3 = refEmpFormData.UcAddress.PhnExt3;
-    refEmpData.FaxArea = refEmpFormData.UcAddress.FaxArea;
-    refEmpData.Fax = refEmpFormData.UcAddress.Fax;
-    refEmpData.MobilePhnNo1 = refEmpFormData.MobilePhnNo1;
-    refEmpData.MobilePhnNo2 = refEmpFormData.MobilePhnNo2;
-    refEmpData.Email1 = refEmpFormData.Email1;
-    refEmpData.Email2 = refEmpFormData.Email2;
-    refEmpData.RowVersion = refEmpFormData.RowVersion;
+    var refEmpData = new ReqRefEmployeeObj();
+    refEmpData.RefEmployeeObj.RefEmpId = refEmpFormData.RefEmpId;
+    refEmpData.RefEmployeeObj.EmpNo = refEmpFormData.EmpNo;
+    refEmpData.RefEmployeeObj.EmpName = refEmpFormData.EmpName;
+    refEmpData.RefEmployeeObj.JoinDt = refEmpFormData.JoinDt;
+    refEmpData.RefEmployeeObj.MrIdTypeCode = refEmpFormData.MrIdTypeCode;
+    refEmpData.RefEmployeeObj.IdNo = refEmpFormData.IdNo;
+    refEmpData.RefEmployeeObj.TaxIdNo = refEmpFormData.TaxIdNo;
+    refEmpData.RefEmployeeObj.IsExt = refEmpFormData.IsExt;
+    refEmpData.RefEmployeeObj.IsActive = refEmpFormData.IsActive;
+    refEmpData.RefEmployeeObj.IsLeave = refEmpFormData.IsLeave;
+    refEmpData.RefEmployeeObj.Addr = refEmpFormData.UcAddress.Addr;
+    refEmpData.RefEmployeeObj.Zipcode = refEmpFormData.UcAddressZipcode.value;
+    refEmpData.RefEmployeeObj.AreaCode1 = refEmpFormData.UcAddress.AreaCode1;
+    refEmpData.RefEmployeeObj.AreaCode2 = refEmpFormData.UcAddress.AreaCode2;
+    refEmpData.RefEmployeeObj.AreaCode3 = refEmpFormData.UcAddress.AreaCode3;
+    refEmpData.RefEmployeeObj.AreaCode4 = refEmpFormData.UcAddress.AreaCode4;
+    refEmpData.RefEmployeeObj.City = refEmpFormData.UcAddress.City;
+    refEmpData.RefEmployeeObj.PhnArea1 = refEmpFormData.UcAddress.PhnArea1;
+    refEmpData.RefEmployeeObj.Phn1 = refEmpFormData.UcAddress.Phn1;
+    refEmpData.RefEmployeeObj.PhnExt1 = refEmpFormData.UcAddress.PhnExt1;
+    refEmpData.RefEmployeeObj.PhnArea2 = refEmpFormData.UcAddress.PhnArea2;
+    refEmpData.RefEmployeeObj.Phn2 = refEmpFormData.UcAddress.Phn2;
+    refEmpData.RefEmployeeObj.PhnExt2 = refEmpFormData.UcAddress.PhnExt2;
+    refEmpData.RefEmployeeObj.PhnArea3 = refEmpFormData.UcAddress.PhnArea3;
+    refEmpData.RefEmployeeObj.Phn3 = refEmpFormData.UcAddress.Phn3;
+    refEmpData.RefEmployeeObj.PhnExt3 = refEmpFormData.UcAddress.PhnExt3;
+    refEmpData.RefEmployeeObj.FaxArea = refEmpFormData.UcAddress.FaxArea;
+    refEmpData.RefEmployeeObj.Fax = refEmpFormData.UcAddress.Fax;
+    refEmpData.RefEmployeeObj.MobilePhnNo1 = refEmpFormData.MobilePhnNo1;
+    refEmpData.RefEmployeeObj.MobilePhnNo2 = refEmpFormData.MobilePhnNo2;
+    refEmpData.RefEmployeeObj.Email1 = refEmpFormData.Email1;
+    refEmpData.RefEmployeeObj.Email2 = refEmpFormData.Email2;
+    refEmpData.RefEmployeeObj.RowVersion = refEmpFormData.RowVersion;
 
-    refEmpData.RefUser = new RefUserObj();
-    refEmpData.RefUser.RefUserId = refEmpFormData.RefUserId;
-    refEmpData.RefUser.Username = refEmpFormData.Username;
-    refEmpData.RefUser.IsLockedOut = refEmpFormData.IsLockedOut;
-    refEmpData.RefUser.RefEmpId = refEmpFormData.RefEmpId;
-    refEmpData.RefUser.LoggedInMethod = refEmpFormData.LoggedInMethod;
-    refEmpData.RefUser.IsActive = refEmpFormData.IsActive;
-    refEmpData.RefUser.Password = "-";
+    refEmpData.RefUserObj = new RefUserObj();
+    refEmpData.RefUserObj.RefUserId = refEmpFormData.RefUserId;
+    refEmpData.RefUserObj.Username = refEmpFormData.Username;
+    refEmpData.RefUserObj.IsLockedOut = refEmpFormData.IsLockedOut;
+    refEmpData.RefUserObj.RefEmpId = refEmpFormData.RefEmpId;
+    refEmpData.RefUserObj.LoggedInMethod = refEmpFormData.LoggedInMethod;
+    refEmpData.RefUserObj.IsActive = refEmpFormData.IsActive;
+    refEmpData.RefUserObj.Password = "-";
 
-    refEmpData.EmpBankAcc = new EmpBankAccObj();
-    refEmpData.EmpBankAcc.EmpBankAccId = refEmpFormData.EmpBankAccId;
-    refEmpData.EmpBankAcc.RefBankId = refEmpFormData.RefBankId;
-    refEmpData.EmpBankAcc.BankBranch = refEmpFormData.BankBranch;
-    refEmpData.EmpBankAcc.BankBranchRegCode = refEmpFormData.BankBranchRegCode
-    refEmpData.EmpBankAcc.BankAccNo = refEmpFormData.BankAccNo;
-    refEmpData.EmpBankAcc.BankAccName = refEmpFormData.BankAccName;
-    refEmpData.EmpBankAcc.RefEmpId = refEmpFormData.RefEmpId;
+    refEmpData.EmpBankAccObj = new EmpBankAccObj();
+    refEmpData.EmpBankAccObj.EmpBankAccId = refEmpFormData.EmpBankAccId;
+    refEmpData.EmpBankAccObj.RefBankId = refEmpFormData.RefBankId;
+    refEmpData.EmpBankAccObj.BankBranch = refEmpFormData.BankBranch;
+    refEmpData.EmpBankAccObj.BankBranchRegCode = refEmpFormData.BankBranchRegCode
+    refEmpData.EmpBankAccObj.BankAccNo = refEmpFormData.BankAccNo;
+    refEmpData.EmpBankAccObj.BankAccName = refEmpFormData.BankAccName;
+    refEmpData.EmpBankAccObj.RefEmpId = refEmpFormData.RefEmpId;
 
     if (this.pageType == "add") {
       this.httpClient.post(URLConstant.AddRefEmp, refEmpData).subscribe(
@@ -282,8 +281,8 @@ export class EmployeeAddComponent implements OnInit {
       );
     }
     else {
-      refEmpData.EmpBankAcc.RowVersion = this.empBankAccObj.RowVersion;
-      refEmpData.RefUser.RowVersion = this.refUserObj.RowVersion;
+      refEmpData.EmpBankAccObj.RowVersion = this.empBankAccObj.RowVersion;
+      refEmpData.RefUserObj.RowVersion = this.refUserObj.RowVersion;
       this.httpClient.post(URLConstant.EditRefEmp, refEmpData).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);

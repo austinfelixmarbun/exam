@@ -58,7 +58,7 @@ export class CustAttrSectionComponent implements OnInit {
     this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyOther:CommonConstant.AttrGroupCustPersonalOther;
     var custOtherInfo = new CustOtherInfoObj();
     custOtherInfo.CustId = this.CustId;
-    await this.httpClient.post(URLConstant.GetCustOtherInfoByCustId, custOtherInfo).toPromise().then(
+    await this.httpClient.post(URLConstant.GetCustOtherInfoByCustId, {Id : this.CustId}).toPromise().then(
       (response:any) => { 
         this.CustOtherInfo = response;  
       }); 

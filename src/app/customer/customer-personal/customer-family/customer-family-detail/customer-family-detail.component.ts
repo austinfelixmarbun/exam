@@ -179,15 +179,15 @@ export class CustomerFamilyDetailComponent implements OnInit {
     }
 
     if (this.customerPersonalFamilyId && this.customerPersonalFamilyId > 0) {
-      this.http.post(URLConstant.GetCustPersonalFamilyByCustPersonalFamilyId, { CustPersonalFamilyId: this.customerPersonalFamilyId }).pipe(
+      this.http.post(URLConstant.GetCustPersonalFamilyByCustPersonalFamilyId, { Id: this.customerPersonalFamilyId }).pipe(
         map((response) => {
           this.custPersonalFamilyObj = response;
           return response;
         }),
         mergeMap((response) => {
-          let getCust = this.http.post(URLConstant.GetCustByCustId, { CustId: response["FamilyId"] });
-          let getCustPersonal = this.http.post(URLConstant.GetCustPersonalbyCustId, { CustId: response["FamilyId"] });
-          let getCustAddr = this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: response["FamilyId"], MrCustAddrTypeCode: CommonConstant.AddrTypeLegal });
+          let getCust = this.http.post(URLConstant.GetCustByCustId, { Id: response["FamilyId"] });
+          let getCustPersonal = this.http.post(URLConstant.GetCustPersonalbyCustId, { Id: response["FamilyId"] });
+          let getCustAddr = this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { Id: response["FamilyId"], MrCustAddrTypeCode: CommonConstant.AddrTypeLegal });
           return forkJoin([getCust, getCustPersonal, getCustAddr]);
         })
       ).toPromise().then(
@@ -332,8 +332,8 @@ export class CustomerFamilyDetailComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
     custObj.CustId = custId;
     custPersonalObj.CustId = custId;
-    let getCust = this.http.post(URLConstant.GetCustByCustId, custObj);
-    let getCustPersonal = this.http.post(URLConstant.GetCustPersonalbyCustId, custObj);
+    let getCust = this.http.post(URLConstant.GetCustByCustId, {Id : custObj.CustId});
+    let getCustPersonal = this.http.post(URLConstant.GetCustPersonalbyCustId, {Id : custObj.CustId});
     let getCustAddr = this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: custId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal });
     forkJoin([getCust, getCustPersonal, getCustAddr]).toPromise().then(
       (response) => {

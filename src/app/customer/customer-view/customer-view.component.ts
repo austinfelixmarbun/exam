@@ -42,10 +42,7 @@ export class CustomerViewComponent implements OnInit {
         this.CustId = params["CustId"];
       }
     });
-    var custObj = {
-      CustId: this.CustId
-    }
-    this.http.post(this.getCustByCustIdUrl, custObj).subscribe(
+    this.http.post(this.getCustByCustIdUrl, {Id : this.CustId}).subscribe(
       (response) => {
         this.custResultData = response;
         this.custModel = this.custResultData['MrCustModelCode'];

@@ -147,7 +147,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custAddrObj = new CustAddrObj();
 
     var custObj = { CustId: this.IdCust };
-    this.http.post(URLConstant.GetCustCompanyByCustId, custObj).subscribe(
+    this.http.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
       (response: any) => {
         this.custCompanyId = response['CustCompanyId'];
 

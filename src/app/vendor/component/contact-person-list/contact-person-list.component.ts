@@ -38,7 +38,7 @@ export class ContactPersonListComponent implements OnInit {
     this.VendorContactPerson = new VendorContactPersonObj;
     this.VendorContactPerson.VendorId = this.objInput["VendorId"];
 
-    this.http.post(URLConstant.GetListVendorContactPersonByVendorId, this.VendorContactPerson).subscribe(
+    this.http.post(URLConstant.GetListVendorContactPersonByVendorId, {Id : this.objInput["VendorId"]}).subscribe(
       (response) => {
         this.resultData = response[CommonConstant.ReturnObj];
       }
@@ -51,11 +51,10 @@ export class ContactPersonListComponent implements OnInit {
     this.HiddenCheck();
   }
 
-  deleteVendorContactPerson(id) {
+  deleteVendorContactPerson(vendorContactPersonId) {
     if (confirm("Are you sure you want to delete this record ?")) {
-      this.VendorContactPerson = new VendorContactPersonObj;
-      this.VendorContactPerson.VendorContactPersonId = id;
-      this.http.post(URLConstant.DeleteVendorContactPerson, this.VendorContactPerson).subscribe((response) => {
+      
+      this.http.post(URLConstant.DeleteVendorContactPerson, {Id: vendorContactPersonId}).subscribe((response) => {
         this.toastr.successMessage(response['message']);
         this.loadTableListData();
       });

@@ -18,7 +18,7 @@
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
-      "isSelectOne": false,
+      "ddlType": "all",
       "url": "https://api.myjson.com/bins/ld6e8",
       "label": "Job Position",
       "items": [
@@ -65,7 +65,7 @@
       "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
-      "isSelectOne": false,
+      "ddlType": "all",
       "url": "https://api.myjson.com/bins/ld6e8",
       "label": "Status",
       "items": [

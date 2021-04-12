@@ -50,7 +50,7 @@ export class NavigationConstant {
     //#region Common Setting
     public static CS_BANK_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_BANK_PAGING; //'/CommonSetting/Bank/Paging'
     public static CS_BANK_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_BANK_DETAIL; //'/CommonSetting/Bank/Detail'
-    public static CS_OFFICE_BANK_ACCOUNT_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_OFFICE_BANK_ACCOUNT_PAGING; //'/CommonSetting/Bank/Paging'
+    public static CS_OFFICE_BANK_ACCOUNT_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_OFFICE_BANK_ACCOUNT_PAGING; //'/CommonSetting/OfficeBankAcc/Paging'
     public static CS_COA_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_COA_PAGING; //'/CommonSetting/Coa/Paging'
     public static CS_COA_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_COA_DETAIL; //'/CommonSetting/Coa/Detail'
     public static CS_COA_DETAIL_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_COA_DETAIL_EDIT; //'/CommonSetting/Coa/Detail/Edit'
@@ -62,11 +62,14 @@ export class NavigationConstant {
     public static CS_ECONOMIC_SECTOR_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_ECONOMIC_SECTOR_DETAIL; //'/CommonSetting/EconomicSector/Detail'
     public static CS_GEN_SETTING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING; //'/CommonSetting/GeneralSetting'
     public static CS_GEN_SETTING_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING_DETAIL; //'/CommonSetting/GeneralSetting/Detail'
+    public static CS_GEN_SETTING_ADMIN = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING_ADMIN; //'/CommonSetting/GeneralSetting'
+    public static CS_GEN_SETTING_DETAIL_ADMIN = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING_DETAIL_ADMIN; //'/CommonSetting/GeneralSetting/Detail'
     public static CS_HOLIDAY = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY; //'/CommonSetting/Holiday'
     public static CS_HOLIDAY_ADD = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY_ADD; //'/CommonSetting/Holiday/Add'
+    public static CS_HOLIDAY_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY_EDIT; //'/CommonSetting/Holiday/Edit
     public static CS_HOLIDAY_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY_DETAIL; //'/CommonSetting/Holiday/Detail'
     public static CS_HOLIDAY_DETAIL_ADD = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY_DETAIL_ADD; //'/CommonSetting/Holiday/Detail/Add'
-    public static CS_HOLIDAY_DETAIL_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY_DETAIL_EDIT; //'/CommonSetting/Holiday/Detail/Edit'
+    public static CS_HOLIDAY_DETAIL_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_HOLIDAY_EDIT; //'/CommonSetting/Holiday/Edit'
     public static CS_MASTER = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_MASTER; //'/CommonSetting/Master'
     public static CS_MASTER_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_MASTER_DETAIL; //'/CommonSetting/Master/Detail'
     public static CS_OFFICE_ZIPCODE_MBR = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_OFFICE_ZIPCODE_MBR; //'/CommonSetting/OfficeZipcodeMember'
@@ -134,6 +137,7 @@ export class NavigationConstant {
     public static VIEW_CUST_COY_FINANCIAL = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_FINANCIAL; //'/View/Customer/CoyFinancial'
     public static VIEW_CUST_COY_LEGAL = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_LEGAL; //'/View/Customer/CoyLegal'
     public static VIEW_NEG_CUST = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_NEG_CUST; //'/View/NegativeCustomer'
+    public static VIEW_CUST_OTH_INFO = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_OTH_INFO; //'/View/Customer/CustOthInfo'
     public static VIEW_VENDOR = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_VENDOR; //'/View/Vendor'
     public static VIEW_VENDOR_BRANCH = "/" + NavigationConstant.VIEW_VENDOR + "/" + PathConstant.VIEW_VENDOR_BRANCH; //'/View/Vendor/VendorBranch'
     public static VIEW_VENDOR_HO = "/" + NavigationConstant.VIEW_VENDOR + "/" + PathConstant.VIEW_VENDOR_HO; //'/View/Vendor/VendorHO'
@@ -156,6 +160,7 @@ export class NavigationConstant {
     public static VENDOR_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.PAGING; //'/Vendor/Paging'
     public static VENDOR_GRP_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRP_ADD; //'/Vendor/Group/Add'
     public static VENDOR_GRP_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRP_VIEW; //'/Vendor/Group/View'
+    public static VENDOR_GRP_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRP_MBR_ADD; //'/Vendor/GroupMbr/Add
     public static VENDOR_HO_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HO_DETAIL; //'/Vendor/HO/Detail'
     public static VENDOR_HO_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HO_REG; //'/Vendor/HO/Registration'
     public static VENDOR_HOLDING_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HOLDING_DETAIL; //'/Vendor/Holding/Detail'
@@ -177,6 +182,7 @@ export class NavigationConstant {
 
     //#region Product
     public static PRODUCT_OFFERING_DEACTIVATE = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.OFFERING_DEACTIVATE; //'/Product/OfferingDeactivate'
+    public static PRODUCT_OFFERING_DEACTIVATE_DETAIL = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.OFFERING_DEACTIVATE_EDIT; //'/Product/OfferingDeactivate
     public static PRODUCT_OFFERING_REVIEW = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.OFFERING_REVIEW; //'/Product/OfferingReview'
     public static PRODUCT_OFFERING_REVIEW_DETAIL = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.OFFERING_REVIEW_DETAIL; //'/Product/OfferingReview/Detail'
     public static PRODUCT_OFFERING_APPRV = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.OFFERING_APPRV; //'/Product/OfferingApproval'
@@ -185,6 +191,7 @@ export class NavigationConstant {
     public static PRODUCT_OFFERING_DEACTIVATE_APPRV_DETAIL = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.OFFERING_DEACTIVATE_APPRV_DETAIL; //'/Product/OfferingDeactivateApproval/Detail'
     public static PRODUCT_HO_DEACTIVATE = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_DEACTIVATE; //'/Product/HODeactivate'
     public static PRODUCT_HO_DEACTIVATE_APPRV = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_DEACTIVATE_APPRV; //'/Product/HODeactivateApproval'
+    public static PRODUCT_HO_DEACTIVATE_DETAIL= "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_DEACTIVATE_EDIT; //'/Product/HODeactivate/Detail
     public static PRODUCT_HO_DEACTIVATE_APPRV_DETAIL = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_DEACTIVATE_APPRV_DETAIL; //'/Product/HODeactivateApproval/Detail'
     public static PRODUCT_HO_ADD = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_ADD; //'/Product/HOAdd'
     public static PRODUCT_HO_ADD_DETAIL = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_ADD_DETAIL; //'/Product/HOAddDetail'
@@ -263,6 +270,11 @@ export class NavigationConstant {
     public static OFFICE_GROUP_MEMBER = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_GROUP_MEMBER; //'/Office/Group/Member'
     public static OFFICE_GROUP_MEMBER_ADD = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_GROUP_MEMBER_ADD; //'/Office/Group/Member/Add'
     //#endregion
+
+    //#region 
+    public static FEE = "/" + PathConstant.LR_FEE; //'/Fee'
+    public static FEE_PAGING = "/" + PathConstant.LR_FEE + "/" + PathConstant.PAGING; //'/Fee/Paging'
+    public static FEE_ADD = "/" + PathConstant.LR_FEE + "/" + PathConstant.ADD; //'/Fee/Add'
     
     //#region Cust
     public static CUST_PERSONAL_MAIN_INFO = '..' + "/" + PathConstant.CUST_PERSONAL_MAIN_INFO; //'../CustomerPersonal/MainInfo'

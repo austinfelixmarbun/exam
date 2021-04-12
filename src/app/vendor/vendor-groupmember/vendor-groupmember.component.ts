@@ -23,7 +23,7 @@ export class VendorGroupmemberComponent implements OnInit {
   MrVendorCategoryCode: string = '';
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
 
-  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
+  readonly CancelLink: string = NavigationConstant.VENDOR_GRP_VIEW;
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -72,13 +72,14 @@ export class VendorGroupmemberComponent implements OnInit {
   }
 
   GetListVendorGrpMbrByVendorGrpId() {
-    this.http.post(URLConstant.GetListVendorGrpMbrByVendorGrpId, { VendorGrpId: this.VendorGrpId }).subscribe(
+    this.http.post(URLConstant.GetListVendorGrpMbrByVendorGrpId, { Id: this.VendorGrpId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
-        for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
+        if(response[CommonConstant.ReturnObj] != null){
+          for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
           arrMemberList.push(response[CommonConstant.ReturnObj][index].VendorId)
+          }
         }
-
         if (arrMemberList.length != 0) {
           const addCritListVendorGrp = new CriteriaObj();
           addCritListVendorGrp.DataType = 'numeric';
@@ -109,6 +110,7 @@ export class VendorGroupmemberComponent implements OnInit {
 
     this.http.post(URLConstant.AddVendorGrpMbr, obj).subscribe(
       (response) => {
+        this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_GRP_VIEW],{ "VendorGrpId": this.VendorGrpId, "MrVendorCategoryCode": this.MrVendorCategoryCode });
       });
   }

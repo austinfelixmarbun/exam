@@ -9,6 +9,7 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-office-bank-account-acc-detail',
@@ -22,6 +23,8 @@ export class OfficeBankAccountAccDetailComponent implements OnInit {
   inputAddressObj: InputAddressObj;
   UcAddressObj: UcAddressObj;
   inputFieldObj: InputFieldObj;
+
+  readonly CancelLink: string = NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING;
 
   AccDetailForm = this.fb.group({
     ContactPersonJobTitle: ['', [Validators.required, Validators.maxLength(50)]],
@@ -52,7 +55,7 @@ export class OfficeBankAccountAccDetailComponent implements OnInit {
     this.inputFieldObj.inputLookupObj = new InputLookupObj();
 
     this.OfficeBankAccObj.OfficeBankAccId = this.OfficeBankAccId;
-    this.http.post<OfficeBankAccObj>(URLConstant.GetOfficeBankAccByOfficeBankAccId, this.OfficeBankAccObj).subscribe(
+    this.http.post<OfficeBankAccObj>(URLConstant.GetOfficeBankAccByOfficeBankAccId, {Id: this.OfficeBankAccId}).subscribe(
       (response) => {
         this.OfficeBankAccObj = response;
         this.AccCode = this.OfficeBankAccObj.OfficeBankAccCode;
@@ -119,7 +122,7 @@ export class OfficeBankAccountAccDetailComponent implements OnInit {
     this.http.post(URLConstant.SubmitOfficeBankAcc, this.OfficeBankAccObj).subscribe(
       (response) => {
         this.toastr.successMessage("Update Account Detail Success!");
-        this.router.navigateByUrl("/CommonSetting/officebankacc/paging");
+        this.router.navigateByUrl(NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING);
       },
       error => {
         console.log(error);

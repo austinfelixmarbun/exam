@@ -12,7 +12,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 export class OfficeComponent implements OnInit {
 
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
   readonly AddLink: string = NavigationConstant.OFFICE_ADD;
   ngOnInit() {
@@ -21,13 +21,13 @@ export class OfficeComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchOffice.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefOffice;
     this.inputPagingObj.ddlEnvironments = [
       {
         name: "A.MR_OFFICE_TYPE_CODE",
         environment: environment.FoundationR3Url
       }
     ];
-    
+    this.inputPagingObj.isSearched = true;
+    this.inputPagingObj.delay = 200;
   }
 }

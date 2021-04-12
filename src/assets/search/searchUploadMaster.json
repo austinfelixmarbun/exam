@@ -26,13 +26,13 @@
             "value": "",
             "placeholder": "Placeholder",
             "isFromURL": true,
-            "isSelectOne": false,
+            "ddlType": "all",
             "url": "",
             "path": "/RefStatus/GetRefStatusByTrxTypeCode",
             "label": "UPLOAD STATUS",
             "items": [],
             "itemsUrl": [],
-            "criteriaPropName": "TrxTypeCode",
+            "criteriaPropName": "Code",
             "criteriaPropValue": "UPLOAD"
         }
     ],

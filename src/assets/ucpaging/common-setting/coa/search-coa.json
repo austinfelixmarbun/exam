@@ -28,7 +28,7 @@
             "value": "",
             "placeholder": "Placeholder",
             "isFromURL": true,
-            "isSelectOne": false,
+            "ddlType": "all",
             "url": "",
             "path": "/RefPaymentAlloc/GetListKeyValueRefPaymentAllocActive",
             "label": "Payment Alloc Code",

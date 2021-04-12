@@ -14,6 +14,7 @@
               </lib-uclookupgeneric>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-md-2 adInsLabel adins-required-label" translate>Job Position </label>
             <div class="col-md-4">
@@ -26,6 +27,7 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-md-2 adInsLabel adins-required" translate>Job Title Name </label>
             <div class="col-md-4">
@@ -35,15 +37,36 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
+          <div class="form-group row">
+            <label class="col-md-2 adInsLabel" translate>Is Well Known Company </label>
+            <div class="col-md-9">
+              <input class="border-primary" type="checkbox" data-md-icheck
+                formControlName="IsWellknownCoy" (change)="isWellknownCoyChecked($event)"/>
+            </div>
+          </div>
+
           <div class="form-group row">
             <label class="col-md-2 adInsLabel adins-required-label" translate>Nama Perusahaan/Usaha </label>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
               <input type="text" class="form-control adInsInput" formControlName="IndustryName" required
                 [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.IndustryName.invalid }">
               <lib-uc-show-errors [control]="JobDataSmeForm.controls.IndustryName" [submit]="enjiForm.submitted">
               </lib-uc-show-errors>
+            </div> -->
+            <div class="col-md-4" *ngIf="!IsWellknownCoy">
+              <input type="text" class="form-control adInsInput" formControlName="IndustryName" required
+                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataSmeForm.controls.IndustryName.invalid }">
+              <lib-uc-show-errors [control]="JobDataSmeForm.controls.IndustryName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+            </div>
+            <div class="col-md-4" *ngIf="IsWellknownCoy">
+              <lib-uclookupgeneric [enjiForm]="enjiForm" [lookupInput]="companyLookupObj"
+                [parentForm]="JobDataSmeForm" [identifier]="'CompanyLookupObj'"
+                (lookup)="getCoy($event)" #LookupCompany>
+              </lib-uclookupgeneric>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-md-2 adInsLabel adins-required-label" translate>Industry Type Name </label>
             <div class="col-md-4">
@@ -52,6 +75,7 @@
               </lib-uclookupgeneric>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-md-2 adInsLabel adins-required" translate>Company Scale </label>
             <div class="col-md-4">
@@ -64,6 +88,7 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-md-2 adInsLabel adins-required" translate>Number of Employee </label>
             <div class="col-md-4">
@@ -73,6 +98,7 @@
               </lib-uc-show-errors>
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-md-2 adInsLabel adins-required" translate>Employment Establishment Date </label>
             <div class="col-md-4">
@@ -84,6 +110,7 @@
             </div>
           </div>
         </div>
+
         <lib-ucSubsection [id]="'jobAddrId'" [title]="'Job Address'" [panel]="'jobAddr'">
         </lib-ucSubsection>
         <div id="jobAddr">

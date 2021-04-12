@@ -10,7 +10,7 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { UcSubsectionModule } from "@adins/uc-subsection";
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UcgridfooterModule } from "@adins/ucgridfooter";
-import { UclookupgenericComponent, UclookupgenericModule } from "@adins/uclookupgeneric";
+import { UclookupgenericModule } from "@adins/uclookupgeneric";
 import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneric";
 import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcapprovalhistModule, UcapprovalhistComponent } from "@adins/ucapprovalhist";
@@ -101,6 +101,5 @@ import { CustomerViewCoyAddressComponent } from "./customer-view-coy-address/cus
     UcgridviewComponent,
     UcapprovalhistComponent
   ]
-
 })
 export class CustomerViewChildModule { }

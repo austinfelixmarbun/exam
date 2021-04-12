@@ -32,7 +32,7 @@
             "value": "Active Status",
             "placeholder": "Placeholder",
             "isFromURL": false,
-            "isSelectOne" : false,
+            "ddlType": "all",
             "url": "",
             "label": "Active Status",
             "items": [
@@ -48,93 +48,93 @@
             "itemsUrl": []
         }
     ],
-    "querystring": { 
+    "querystring": {
         "name": "searchEmployee"
     },
-    "headerList" : [ 
+    "headerList": [
         {
-            "type" : "sort", 
-            "position" : "left", 
-            "label" : "Username",
-            "name" : "B.USERNAME" 
+            "type": "sort",
+            "position": "left",
+            "label": "Username",
+            "name": "B.USERNAME"
         },
         {
-            "type" : "sort", 
-            "position" : "left", 
-            "label" : "Employee No", 
-            "name" : "A.EMP_NO" 
+            "type": "sort",
+            "position": "left",
+            "label": "Employee No",
+            "name": "A.EMP_NO"
         },
         {
-            "type" : "sort", 
-            "position" : "left", 
-            "label" : "Employee Name", 
-            "name" : "A.EMP_NAME" 
+            "type": "sort",
+            "position": "left",
+            "label": "Employee Name",
+            "name": "A.EMP_NAME"
         },
         {
-            "type" : "sort", 
-            "position" : "center", 
-            "label" : "Active", 
-            "name" : "A.IS_ACTIVE"
+            "type": "sort",
+            "position": "center",
+            "label": "Active",
+            "name": "A.IS_ACTIVE"
         },
         {
-            "type" : "label",
-            "position" : "center",
-            "label" : "Business Unit"
+            "type": "label",
+            "position": "center",
+            "label": "Business Unit"
         },
         {
-            "type" : "label",
-            "position" : "center",
-            "label" : "Action"
+            "type": "label",
+            "position": "center",
+            "label": "Action"
         }
     ],
-    "bodyList" : [
+    "bodyList": [
         {
-            "type" : "text", 
-            "position" : "left", 
-            "property" : "username" 
+            "type": "text",
+            "position": "left",
+            "property": "username"
         },
         {
-            "type" : "text", 
-            "position" : "left", 
-            "property" : "empNo" 
+            "type": "text",
+            "position": "left",
+            "property": "empNo"
         },
         {
-            "type" : "text", 
-            "position" : "left", 
-            "property" : "empName" 
+            "type": "text",
+            "position": "left",
+            "property": "empName"
         },
         {
-            "type" : "boolean", 
-            "position" : "center",
-            "property" : "isActive"
+            "type": "boolean",
+            "position": "center",
+            "property": "isActive"
         },
         {
-            "type" : "action", 
-            "position" : "center",
+            "type": "action",
+            "position": "center",
             "action": [
                 {
                     "type": "edit",
                     "path": "/Employee/EmployeeBusinessUnit/Paging",
                     "param": [
                         {
-                            "type" : "RefUserId",
-                            "property" : "RefUserId"
+                            "type": "RefUserId",
+                            "property": "RefUserId"
                         }
                     ]
                 }
             ]
         },
         {
-            "type" : "action", 
-            "position" : "center",
-            "action" : [ 
+            "type": "action",
+            "position": "center",
+            "action": [
                 {
-                    "type" : "edit", 
-                    "path" : "/Employee/Detail", 
-                    "param" : [ 
+                    "type": "edit",
+                    "path": "/Employee/Detail",
+                    "param": [
                         {
-                            "type" : "RefEmpId", 
-                            "property" : "RefEmpId" 
+                            "type": "RefEmpId",
+                            "property": "RefEmpId"
                         },
                         {
                             "type": "mode",

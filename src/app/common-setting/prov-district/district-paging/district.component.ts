@@ -64,7 +64,7 @@ export class DistrictComponent implements OnInit {
 
     this.refProvDistrictObj = new RefProvDistrictObj();
     this.refProvDistrictObj.RefProvDistrictId = this.parentId;
-    this.http.post(this.getUrl, this.refProvDistrictObj).subscribe(
+    this.http.post(this.getUrl, {Id : this.parentId}).subscribe(
       response => {
         this.resultData = response;
       }

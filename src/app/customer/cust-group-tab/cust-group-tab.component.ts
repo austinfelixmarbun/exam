@@ -39,7 +39,7 @@ export class CustGroupTabComponent implements OnInit {
   ngOnInit() {
     var custGrp = new CustGrpObj();
     custGrp.MemberCustId = this.CustId;
-    this.httpClient.post(URLConstant.GetListCustGrpByMemberCustIdForCustGrpTab, custGrp).subscribe(
+    this.httpClient.post(URLConstant.GetListCustGrpByMemberCustIdForCustGrpTab, {Id : this.CustId}).subscribe(
       (response) => {
         this.CustGrpList = response["CustGrpObjForCustGrpTabs"];
         this.listCustIdToExclude.push(this.CustId);
@@ -55,7 +55,7 @@ export class CustGroupTabComponent implements OnInit {
     // GetCustByCustNo
     var custObj = new CustObj;
     custObj.CustNo = CustNo
-    this.http.post(URLConstant.GetCustByCustNo, custObj).subscribe(
+    this.http.post(URLConstant.GetCustByCustNo, {TrxNo : CustNo}).subscribe(
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);
@@ -73,7 +73,7 @@ export class CustGroupTabComponent implements OnInit {
         this.spinner.show();
         var custGrp = new CustGrpObj();
         custGrp.MemberCustId = this.CustId;
-        this.httpClient.post(URLConstant.GetListCustGrpByMemberCustIdForCustGrpTab, custGrp).subscribe(
+        this.httpClient.post(URLConstant.GetListCustGrpByMemberCustIdForCustGrpTab, {Id : this.CustId}).subscribe(
           (response: any) => {
             this.CustGrpList = response.CustGrpObjForCustGrpTabs;
             this.listCustIdToExclude = new Array<number>();

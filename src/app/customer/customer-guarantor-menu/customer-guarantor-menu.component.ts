@@ -24,7 +24,7 @@ export class CustomerGuarantorMenuComponent implements OnInit {
     this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
     this.inputPagingObj.ddlEnvironments = [
       {
-        name: "CS.MR_CUST_TYPE_CODE",
+        name: "C.MR_CUST_TYPE_CODE",
         environment: environment.FoundationR3Url
       }
     ];

@@ -24,7 +24,7 @@ export class CustomerFamilyPagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post(URLConstant.GetMainCustAndListCustPersonalFamilyByCustId, { CustId: this.CustId }).toPromise().then(
+    this.http.post(URLConstant.GetMainCustAndListCustPersonalFamilyByCustId, { Id: this.CustId }).toPromise().then(
       (response) => {
         this.CustFamilyList = response["CustPersonalFamilyList"];
         for (const item of this.CustFamilyList) {

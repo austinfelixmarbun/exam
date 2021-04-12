@@ -38,8 +38,8 @@ export const ROUTES: RouteInfo[] = [
       { Path: NavigationConstant.CS_REASON_PAGING, Title: 'Reason', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: NavigationConstant.CS_PAYMENT_ALLOC_PAGING, Title: 'Payment Allocation', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.CS_PAYMENT_ALLOC_GRP_PAGING, Title: 'Payment Allocation Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
-      { Path: NavigationConstant.SYSTEM_SETTING_NOTIF, Title: 'Notification', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
-      { Path: NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV, Title: 'Notification Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      // { Path: NavigationConstant.SYSTEM_SETTING_NOTIF, Title: 'Notification', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      // { Path: NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV, Title: 'Notification Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING, Title: 'Ref Form', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: NavigationConstant.SYSTEM_SETTING_ATTR_PAGING, Title: 'Attribute Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: NavigationConstant.CS_COA_SCHM_PAGING, Title: 'COA Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
@@ -62,7 +62,7 @@ export const ROUTES: RouteInfo[] = [
     ], Params : [] 
   },
   {
-    Path: '', Title: 'Vendor', Icon: 'ft-briefcase', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+    Path: '', Title: 'Vendor', Icon: 'ft-users', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
       {
         Path: '', Title: 'Supplier', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
@@ -71,9 +71,9 @@ export const ROUTES: RouteInfo[] = [
           { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier ATPM', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_ATPM }] },
           { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier Holding', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_HOLDING }] },
           { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_HO }] },
-          { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
-          { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Scheme" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
-          { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER_BRANCH }] },
+          { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER }] },
+          { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Scheme" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER }] },
+          { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER }] },
         ], Params : [] 
       },{
         Path: '', Title: 'Asset Insurance', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
@@ -122,7 +122,7 @@ export const ROUTES: RouteInfo[] = [
     ], Params : [] 
   },
   {
-    Path: '', Title: 'Product', Icon: 'ft-package', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+    Path: '', Title: 'Product', Icon: 'ft-briefcase', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
       { Path: NavigationConstant.PRODUCT_HO_PAGING, Title: 'Product HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: NavigationConstant.PRODUCT_HO_REVIEW, Title: 'Product HO Review', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
@@ -163,7 +163,7 @@ export const ROUTES: RouteInfo[] = [
       { Path: NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING, Title: 'Edit Main Data Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },  
       { Path: NavigationConstant.CUST_FAMILY_PAGING, Title: 'Customer Family', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },  
       { Path: NavigationConstant.CUST_SHRHLDR_PAGING, Title: 'Customer Shareholder', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },  
-      { Path: NavigationConstant.CUST_GUARANTOR_PAGING, Title: 'Customer Guarantor', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },  
+      // { Path: NavigationConstant.CUST_GUARANTOR_PAGING, Title: 'Customer Guarantor', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },  
       { Path: NavigationConstant.CUST_NEG_PAGING, Title: 'Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },   
       { Path: NavigationConstant.CUST_NEG_UPLOAD, Title: 'Upload Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },         
       { Path: NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING, Title: 'Review Upload Negative Customer', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },      
@@ -172,7 +172,7 @@ export const ROUTES: RouteInfo[] = [
   },
 
   {
-    Path: '', Title: 'Document Management', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+    Path: '', Title: 'Document Management', Icon: 'ft-package', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
       { Path: NavigationConstant.DOC_MNGMNT_CABINET_PAGING, Title: 'Document Management', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] }
     ], Params: []

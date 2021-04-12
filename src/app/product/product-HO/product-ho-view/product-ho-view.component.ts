@@ -68,7 +68,7 @@ export class ProductHOViewComponent implements OnInit {
     //** Product Version **//
     this.ProdVersionObj = new ProdHVersionObj
     this.ProdVersionObj.ProdHId = this.prodHId;
-    this.http.post(this.ProdVerUrl, this.ProdVersionObj).subscribe(
+    this.http.post(this.ProdVerUrl, {Id : this.prodHId}).subscribe(
       response => {
         this.ProdVersion = response[CommonConstant.ReturnObj];
       }
@@ -77,7 +77,7 @@ export class ProductHOViewComponent implements OnInit {
     //** Office Member **//
     this.ProdBranchMemObj = new RefProductBrancMbrObj
     this.ProdBranchMemObj.ProdHId = this.prodHId;
-    this.http.post(this.ProdBranchUrl, this.ProdBranchMemObj).subscribe(
+    this.http.post(this.ProdBranchUrl, {Id : this.prodHId}).subscribe(
       response => {
         this.ProdBranchMbr = response[CommonConstant.ReturnObj];
       }

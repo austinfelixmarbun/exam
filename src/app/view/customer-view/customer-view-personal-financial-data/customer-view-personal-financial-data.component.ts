@@ -30,7 +30,7 @@ export class CustomerViewPersonalFinancialDataComponent implements OnInit {
     });
     
     var custAddrObj = { "CustId": this.CustId };
-    this.http.post(this.GetCBAForCustFinDataByCustIdUrl, custAddrObj).subscribe(
+    this.http.post(this.GetCBAForCustFinDataByCustIdUrl, { Id : this.CustId }).subscribe(
       response => {
         this.responseCBAObj = response['ListCBAForCustFinData'];
       },

@@ -29,10 +29,10 @@ export class VendorBranchRegistrationComponent implements OnInit {
     this.VendorId = this.objPassing["VendorId"];
     this.objPassing["Type"]="Vendor";
 
-    this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { VendorId: this.VendorId }).subscribe(
+    this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).subscribe(
       (response) => {
         this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"]; 
-        if(this.MrVendorCategoryCode == CommonConstant.SUPPLIER_BRANCH){
+        if(this.MrVendorCategoryCode == CommonConstant.SUPPLIER){
           this.Registration = "Supplier Registration"
         }else{
           this.Registration = "Branch Registration"

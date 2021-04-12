@@ -57,7 +57,7 @@ export class RoleAddEditComponent implements OnInit {
       this.RefRoleForm.controls["RoleCode"].disable();
       this.refRoleObj = new RefRoleObj();
       this.refRoleObj.RefRoleId = this.RefRoleId;
-      this.httpClient.post(URLConstant.GetRefRoleByRefRoleId, this.refRoleObj).subscribe(
+      this.httpClient.post(URLConstant.GetRefRoleByRefRoleId, {Id : this.RefRoleId}).subscribe(
         response => {
           this.resultData = response;
           this.RefRoleForm.patchValue({

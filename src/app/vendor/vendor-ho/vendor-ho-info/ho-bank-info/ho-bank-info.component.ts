@@ -19,12 +19,9 @@ ListData : any = new Array();
     });
   }
 
-  ngOnInit() {
-    var obj = {
-      VendorId : this.VendorId
-    }
+  ngOnInit() {   
 
-    this.http.post(URLConstant.GetListVendorBankAccByVendorId, obj).subscribe(
+    this.http.post(URLConstant.GetListVendorBankAccByVendorId, {Id : this.VendorId}).subscribe(
       (response) => {
         this.ListData = response[CommonConstant.ReturnObj];
       }

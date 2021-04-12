@@ -66,7 +66,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
   onChange() {
     this.assetTypeObj = new AssetTypeObj();
     this.assetTypeObj.AssetTypeId = this.AssetMasterParentForm.controls['AssetTypeId'].value;
-    this.http.post(URLConstant.GetAssetTypeById, this.assetTypeObj).subscribe(
+    this.http.post(URLConstant.GetAssetTypeById, {Id: this.AssetMasterParentForm.controls['AssetTypeId'].value}).subscribe(
       (response: AssetTypeObj) => {
         this.resultAssetType = response;
         if (this.resultAssetType.MaxHierarchyLevel == 1) {
@@ -135,7 +135,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       // this.AssetMasterParentForm.controls["AssetName"].disable();
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
-      this.http.post(URLConstant.GetAssetMasterById, this.assetMasterObj).subscribe(
+      this.http.post(URLConstant.GetAssetMasterById, {Id : this.AssetMasterId}).subscribe(
         (response: AssetMasterObj) => {
           this.resultData = response;
           this.AssetMasterParentForm.patchValue({
@@ -160,7 +160,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
 
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
-          this.http.post(URLConstant.GetAssetTypeById, this.assetTypeObj).subscribe(
+          this.http.post(URLConstant.GetAssetTypeById, {Id: this.resultData.AssetTypeId}).subscribe(
             (response: AssetTypeObj) => {
               this.resultAssetType = response;
 

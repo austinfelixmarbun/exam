@@ -133,7 +133,7 @@ export class RoleUserComponent implements OnInit {
 
     this.refRoleObj = new RefRoleObj();
     this.refRoleObj.RefRoleId = this.refRoleId;
-    this.httpClient.post(urlGetRefRole, this.refRoleObj).subscribe(
+    this.httpClient.post(urlGetRefRole, {Id : this.refRoleId}).subscribe(
       response => {
         this.refRoleObj = response["returnObject"];
         this.spinner.hide();
