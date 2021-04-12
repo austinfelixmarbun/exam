@@ -25,8 +25,6 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
   refEmpLeaveMngmntId: any;
   relmObj: RefEmpLeaveMngmntObj;
   resultData: any;
-  addUrl: any;
-  editUrl: any;
   inputPagingObj: any;
   inputEmpLookupObj;
   refEmp: RefEmpObj;
@@ -128,7 +126,6 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         this.relmObj.RefEmpId = this.RefEmpId;
         this.relmObj.RefEmpLeaveMngmntId = this.refEmpLeaveMngmntId;
         this.relmObj.RowVersion = this.resultData.RowVersion;
-        console.log(this.relmObj);
         this.http.post(URLConstant.EditRefEmpLeaveMngmnt, this.relmObj).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);

@@ -794,7 +794,6 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.http.post<ResponseIdGenericObj>(URLConstant.EditVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          console.log(response.Id);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_REG],{ "VendorId": response.Id, "mode": "edit" });
         });
     }

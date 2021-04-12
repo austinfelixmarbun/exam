@@ -63,7 +63,6 @@ export class OfficeAddComponent implements OnInit {
   resultData: any;
   apiUrl: any;
   addUrl: any;
-  editUrl: any;
   officeClassUrl: any;
   refOrgUrl: any;
   getRefOrgUrl: any;

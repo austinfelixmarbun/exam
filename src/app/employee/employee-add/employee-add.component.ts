@@ -273,8 +273,6 @@ export class EmployeeAddComponent implements OnInit {
     refEmpData.EmpBankAccObj.RefEmpId = refEmpFormData.RefEmpId;
 
     if (this.pageType == "add") {
-      console.log(refEmpData);
-
       this.httpClient.post(URLConstant.AddRefEmp, refEmpData).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);

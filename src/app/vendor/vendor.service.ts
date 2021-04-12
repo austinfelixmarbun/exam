@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { URLConstant } from "app/shared/constant/URLConstant";
-import { ResponseIdGenericObj } from "app/shared/model/Response/Generic/GenericObj.Model";
 
 @Injectable({
     providedIn: 'root'
