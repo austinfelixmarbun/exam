@@ -179,7 +179,7 @@ export class CoaSchemeDetailComponent implements OnInit {
   }
 
   GetListPaymentAlloc(){
-    this.http.post<any>(URLConstant.GetListKeyValueRefPaymentAllocByPayAllocGrpCode, {MrPayAllocGrpCode: this.MrPayAllocGrpCode}).subscribe(
+    this.http.post<any>(URLConstant.GetListKeyValueRefPaymentAllocByPayAllocGrpCode, {Code: this.MrPayAllocGrpCode}).subscribe(
       (response: any) => {
         this.ListPaymentAlloc = response.ReturnObject
 
