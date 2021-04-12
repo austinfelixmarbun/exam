@@ -45,7 +45,7 @@
               [panel]="'CoaSchemeDetailInfo'">
             </lib-ucSubsection>
             <div id='CoaSchemeDetailInfo'>
-              <!-- 
+
               <div class="form-group row">
                 <label class="col-md-3" translate>Copy</label>
                 <div class="col-md-3">
@@ -67,6 +67,26 @@
                   </div>
                 </div>
               </div>
+              <div class="form-group row">
+                <label class="col-md-3" translate>Currence Code</label>
+                <div class="col-md-3">
+                  <div class="input-group mb-0">
+                    <select class="form-control" #currselect>
+                      <option disabled>-Select One-</option>
+                      <option *ngFor="let item of ListCurr" [value]="item.Key">
+                        {{item.Value}}
+                      </option>
+                    </select>
+                    <div class="input-group-append">
+                      <span class="input-group-btn">
+                        <button class="btn btn-raised btn-primary" type="button" (click)="Add(currselect)">
+                          <i class="fa fa-check-square-o"></i> Add
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <div class="table-responsive">
                 <table class="table table-responsive-md text-center table-hover">
@@ -78,21 +98,28 @@
                       <th>
                         <span class="thead-header" translate>Payment Allocation Name</span>
                       </th>
-                      <th>
-                        <span class="thead-header" translate>COA</span>
+                      <th *ngFor="let item of colHeadTable;">
+                        <span class="thead-header" translate>{{item.newHead}}</span>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of ListCOAScheme; let i = index">
+                    <tr *ngFor="let item of ListPaymentAlloc; let i = index" formArrayName = "ListCoa">
+                      <span  [formGroupName]="i">
                       <td class="align-center">{{i+1}}</td>
-                      <td class="text-left">{{item.PaymentAllocName}}</td>
-                      <td class="align-center"><input type="text" [value]="CoaValue" class="form-control"></td>
+                      <td class="text-left">{{item.Value}}</td>
+                      <span formArrayName = "DataCOA">
+                        <td class="text-center" *ngFor="let currs of ListSelectedCurr; let x = index" [formGroupName]="x">
+                          <input type="text" class="form-control" formControlName="COA"
+                          [ngClass]="{ 'is-invalid': enjiForm.submitted && CoaSchemeForm.controls.ListCoa['controls'][i]['controls'].DataCOA['controls'][x]['controls'].COA.invalid }"
+                          >
+                        </td>
+                      </span>
+                    </span>
                     </tr>
                   </tbody>
                 </table>
-              </div> -->
-
+              </div>
             </div>
           </div>
 
