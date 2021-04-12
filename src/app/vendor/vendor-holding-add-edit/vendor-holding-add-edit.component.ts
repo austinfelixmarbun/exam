@@ -17,7 +17,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ResponseIdGenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { GenericObj} from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-vendor-holding-add-edit',
@@ -327,7 +327,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorHoldingObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
         this.vendorService.EditVendorHolding(this.vendorHoldingObj).subscribe(
-          (response : ResponseIdGenericObj) => {
+          (response : GenericObj) => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HOLDING_REG],{ "VendorId": response.Id, "mode": 'edit' });
           });
@@ -335,7 +335,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorHoldingObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
 
         this.vendorService.AddVendorHolding(this.vendorHoldingObj).subscribe(
-          (response: ResponseIdGenericObj) => {
+          (response: GenericObj) => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HOLDING_REG],{ "VendorId": response.Id });
           });
