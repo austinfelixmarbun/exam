@@ -17,6 +17,7 @@ import { VendorService } from '../../vendor.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ResponseIdGenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-vendor-atpm-add-edit',
@@ -320,17 +321,17 @@ export class VendorATPMAddEditComponent implements OnInit {
         this.vendorATPMObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
         this.vendorService.EditVendorATPM(this.vendorATPMObj).subscribe(
-          (response) => {
+          (response : ResponseIdGenericObj) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_ATPM_REG],{ "VendorId": this.VendorId, "mode": 'edit' });
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_ATPM_REG],{ "VendorId": response.Id, "mode": 'edit' });
           });
       } else {
         this.vendorATPMObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
 
         this.vendorService.AddVendorATPM(this.vendorATPMObj).subscribe(
-          (response) => {
+          (response : ResponseIdGenericObj) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_ATPM_REG],{ "VendorId": response['VendorObj'].VendorId });
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_ATPM_REG],{ "VendorId": response.Id});
           });
       }
     }
