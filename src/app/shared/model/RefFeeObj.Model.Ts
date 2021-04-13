@@ -5,7 +5,7 @@ export class RefFeeObj{
     FeeName: any;
     FeeCode: any;
     IsActive: any;
-    requestRefLobObjs: Array<RefLobObj>;
+    requestRefLobBizTmpltCodes: Array<string>;
     RowVersion: any;
     constructor(){this.RefFeeId = 0;}
 }
