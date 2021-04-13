@@ -131,6 +131,7 @@ export class CoaSchemeDetailComponent implements OnInit {
     this.coaSchmObj.SchmCode = this.CoaSchemeForm.controls["SchemeCode"].value;
     this.coaSchmObj.SchmName = this.CoaSchemeForm.controls["SchemeName"].value;
     this.coaSchmObj.IsActive = this.CoaSchemeForm.controls["IsActive"].value;
+    this.coaSchmObj.CoaSchmId = Number(this.coaSchmId);
     console.log("isi coa scheme form sebelum submit")
     console.log(this.CoaSchemeForm.controls["ListCoa"]);
     console.log("test isi get")
@@ -212,19 +213,23 @@ export class CoaSchemeDetailComponent implements OnInit {
   }
 
   GetCoaSchmDetail() {
-    this.http.post<any>(URLConstant.GetListRefCoaByCoaSchmId, { CoaSchmId: +this.coaSchmId }).subscribe(
+    this.http.post<any>(URLConstant.GetListRefCoaByCoaSchmId, { Id: this.coaSchmId }).subscribe(
       (response) => {
         this.ListRefCoaObj = response;
         this.ListGetCoaCurr = this.ListRefCoaObj.map(item => item.CurrCode)
         .filter((value, index, self) => self.indexOf(value) === index);
 
+        console.log("isi coa scheme form Saat Edit")
+        console.log(response);
+
         this.ListCoa = this.CoaSchemeForm.get('ListCoa') as FormArray;
+        this.CountAdd = this.ListGetCoaCurr.length;
         for (let i = 0; i < this.ListGetCoaCurr.length; i++){
           for(let x = 0; x < this.ListPaymentAlloc.length; x++){
-            if(x !== 0){
-            this.ListDataCOA = this.ListCoa.controls[i].get('DataCOA') as FormArray;
+            //if(x != 0){
+            this.ListDataCOA = this.ListCoa.controls[x].get('DataCOA') as FormArray;
             this.ListDataCOA.push(this.createDetailItem());
-            }
+            //}
           }
           this.colHeadTable.push({ newHead: 'COA ' + this.ListGetCoaCurr[i] });
           this.ListSelectedCurr.push({ newCurr: this.ListGetCoaCurr[i] });
