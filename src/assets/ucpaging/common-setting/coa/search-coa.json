@@ -30,7 +30,7 @@
             "isFromURL": true,
             "ddlType": "all",
             "url": "",
-            "path": "/RefPaymentAlloc/GetListKeyValueActive",
+            "path": "/RefPaymentAlloc/GetListKeyValueRefPaymentAllocActive",
             "label": "Payment Alloc Code",
             "items": [],
             "itemsUrl": []

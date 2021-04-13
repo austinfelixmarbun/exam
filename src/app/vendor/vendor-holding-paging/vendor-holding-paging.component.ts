@@ -24,7 +24,6 @@ export class VendorHoldingPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorHolding.json";
-    this.inputPagingObj.deleteUrl = "/Vendor/DeleteVendor";
     this.inputPagingObj.ddlEnvironments = [
       {
         name: "V.MR_VENDOR_CATEGORY_CODE",

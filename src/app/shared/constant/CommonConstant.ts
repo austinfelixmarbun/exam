@@ -144,6 +144,12 @@ export class CommonConstant {
     public static RefMasterTypeCodeBuildingOwnership = "BUILDING_OWNERSHIP";
     public static RefMasterTypeCodeMonth = "MONTH";
 
+    public static RefMasterTypeCodeEntityType = "ENTITY_TYPE";
+    public static RefMasterTypeCodeEntityTypePayAlloc = "PAY_ALLOC";
+    public static RefMasterTypeCodeEntityTypeOffice = "OFFICE";
+    public static RefMasterTypeCodeEntityTypeBankAcc = "BANK_ACC";
+    public static RefMasterTypeCodeEntityTypeSuppl = "PAY_ALLOC_COA_SUPPL";
+
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
     

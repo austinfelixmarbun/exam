@@ -62,7 +62,7 @@ export const ROUTES: RouteInfo[] = [
     ], Params : [] 
   },
   {
-    Path: '', Title: 'Vendor', Icon: 'ft-briefcase', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+    Path: '', Title: 'Vendor', Icon: 'ft-users', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
       {
         Path: '', Title: 'Supplier', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
@@ -122,7 +122,7 @@ export const ROUTES: RouteInfo[] = [
     ], Params : [] 
   },
   {
-    Path: '', Title: 'Product', Icon: 'ft-package', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+    Path: '', Title: 'Product', Icon: 'ft-briefcase', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
       { Path: NavigationConstant.PRODUCT_HO_PAGING, Title: 'Product HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: NavigationConstant.PRODUCT_HO_REVIEW, Title: 'Product HO Review', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
@@ -174,7 +174,7 @@ export const ROUTES: RouteInfo[] = [
   },
 
   {
-    Path: '', Title: 'Document Management', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+    Path: '', Title: 'Document Management', Icon: 'ft-package', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
       { Path: NavigationConstant.DOC_MNGMNT_CABINET_PAGING, Title: 'Document Management', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] }
     ], Params: []

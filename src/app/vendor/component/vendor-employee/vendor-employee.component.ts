@@ -16,6 +16,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { ResponseIdGenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-vendor-employee',
@@ -345,12 +346,12 @@ export class VendorEmployeeComponent implements OnInit {
     }
 
     if (this.mode == "add") {
-      this.http.post(URLConstant.AddVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
+      this.http.post<ResponseIdGenericObj>(URLConstant.AddVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
         (response) => {
           this.mode = "edit";
-          this.objInput.VendorEmpId = response["VendorEmpId"];
-          this.objOutput.emit(response["VendorEmpId"]);
-          this.toastr.successMessage(response["message"]);
+          this.objInput.VendorEmpId = response.Id;
+          this.objOutput.emit(response.Id);
+          this.toastr.successMessage(response["Message"]);
           this.wizard.goToNextStep();
         });
     } else {
@@ -362,7 +363,7 @@ export class VendorEmployeeComponent implements OnInit {
 
       this.http.post(URLConstant.EditVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
         (response) => {
-          this.toastr.successMessage(response["message"]);
+          this.toastr.successMessage(response["Message"]);
           this.wizard.goToNextStep();
         });
     }
