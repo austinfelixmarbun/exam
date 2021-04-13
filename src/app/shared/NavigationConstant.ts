@@ -275,6 +275,12 @@ export class NavigationConstant {
     public static FEE = "/" + PathConstant.LR_FEE; //'/Fee'
     public static FEE_PAGING = "/" + PathConstant.LR_FEE + "/" + PathConstant.PAGING; //'/Fee/Paging'
     public static FEE_ADD = "/" + PathConstant.LR_FEE + "/" + PathConstant.ADD; //'/Fee/Add'
+    //#endregion
+
+    //#region 
+    public static SURVEYOR = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR //'Surveyor'
+    public static SURVEYOR_PAGING = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR + "/" + PathConstant.PAGING   //'/Surveyor/Paging
+    public static SURVEYOR_ADD = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR + "/" + PathConstant.ADD
     
     //#region Cust
     public static CUST_PERSONAL_MAIN_INFO = '..' + "/" + PathConstant.CUST_PERSONAL_MAIN_INFO; //'../CustomerPersonal/MainInfo'

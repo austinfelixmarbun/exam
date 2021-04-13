@@ -16,6 +16,8 @@ import { SurveyOrderViewComponent } from './survey-order-view/survey-order-view.
 import { SurveyTaskViewComponent } from './survey-task-view/survey-task-view.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { SurveyOrderTaskWfComponent } from './survey-order-task-wf/survey-order-task-wf.component';
+import { SurveyorAddComponent } from './surveyor-add/surveyor-add.component';
+import { SurveyorPagingComponent } from './surveyor-paging/surveyor-paging.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { SurveyOrderTaskWfComponent } from './survey-order-task-wf/survey-order-
     SurveyOrderTaskComponent,
     SurveyOrderViewComponent,
     SurveyTaskViewComponent,
-    SurveyOrderTaskWfComponent
+    SurveyOrderTaskWfComponent,
+    SurveyorAddComponent,
+    SurveyorPagingComponent
   ],
   providers: [
     NGXToastrService

@@ -53,7 +53,7 @@ export class FeeAddEditComponent implements OnInit {
   }
 
   setDropDown() {
-    this.httpClient.post<RefLobObj>(URLConstant.GetListRefLob, null).subscribe(
+    this.httpClient.post<RefLobObj>(URLConstant.GetListBizTmpltCode, null).subscribe(
       (response) => {
         console.log(response);
         this.dropdownList = response['ReturnObject']
@@ -63,8 +63,8 @@ export class FeeAddEditComponent implements OnInit {
 
     this.dropdownSettings = {
       singleSelection: false,
-      idField: 'RefLobId',
-      textField: 'LobName',
+      idField: 'BizTemplateCode',
+      textField: 'BizTemplateCode',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 5,
@@ -88,7 +88,7 @@ export class FeeAddEditComponent implements OnInit {
         }
       );
 
-      this.httpClient.post(URLConstant.GetListLobByRefFeeId, {Id: this.refFeeId}).subscribe(
+      this.httpClient.post(URLConstant.GetListBizTemplateCodeByRefFeeId, {Id: this.refFeeId}).subscribe(
         (response) => {
           this.selectedItems = response['ReturnObject'];
           console.log(this.selectedItems);
@@ -99,82 +99,26 @@ export class FeeAddEditComponent implements OnInit {
     }
   }  
 
-  // checkListObj() {
-  //   this.refFeeObj = new RefFeeObj();
-  //   this.refFeeObj.RefFeeId = this.refFeeId;
-  //   this.refFeeObj.ListRefLobObj = new Array<RefLobObj>();
-
-  //   for (let i = 0; i < this.selectedItems.length; i++) {
-  //     this.refLobObj = new RefLobObj();
-  //     this.refLobObj.RefLobId = this.selectedItems[i]['RefLobId'];
-
-  //     for (let i = 0; i < this.dropdownList.length; i++) {
-  //       if(this.dropdownList[i]['RefLobId'] == this.refLobObj.RefLobId){
-  //         this.refLobObj.BlCode = this.dropdownList[i]['BlCode'];
-  //         this.refLobObj.LobCode = this.dropdownList[i]['LobCode'];
-  //         this.refLobObj.LobName = this.dropdownList[i]['LobName'];
-  //         this.refLobObj.RegRptCode = this.dropdownList[i]['RegRptCode'];
-
-  //       }
-        
-  //     }
-
-  //     console.log(this.refLobObj);
-
-  //     this.refFeeObj.ListRefLobObj.push({
-  //       RefLobId: this.refLobObj.RefLobId,        
-  //       LobCode: this.refLobObj.LobCode,
-  //       LobName: this.refLobObj.LobName,
-  //       RegRptCode: this.refLobObj.RegRptCode,
-  //       BlCode: this.refLobObj.BlCode,
-  //     });
-      
-  //   }
-
-  //   console.log(this.refFeeObj);
-
-
-    
-  // }
+  
 
   SaveForm() {
     this.refFeeObj = new RefFeeObj();
 
-    console.log(this.FeeForm);
+    
+
+    this.refFeeObj.requestRefLobBizTmpltCodes = new Array<string>();
 
     this.refFeeObj.FeeCode = this.FeeForm.getRawValue().FeeCode;
     this.refFeeObj.FeeName = this.FeeForm.value.FeeName;
     this.refFeeObj.IsActive = this.FeeForm.value.IsActive;
+
     
-
-    this.refFeeObj.requestRefLobObjs = new Array<RefLobObj>();
-
-    for (let i = 0; i < this.selectedItems.length; i++) {
-      this.refLobObj = new RefLobObj();
-      this.refLobObj.RefLobId = this.selectedItems[i]['RefLobId'];
-
-      for (let i = 0; i < this.dropdownList.length; i++) {
-        if(this.dropdownList[i]['RefLobId'] == this.refLobObj.RefLobId){
-          this.refLobObj.BlCode = this.dropdownList[i]['BlCode'];
-          this.refLobObj.LobCode = this.dropdownList[i]['LobCode'];
-          this.refLobObj.LobName = this.dropdownList[i]['LobName'];
-          this.refLobObj.RegRptCode = this.dropdownList[i]['RegRptCode'];
-          
-        }
-        
-      }
-
-      console.log(this.refLobObj);
-
-      this.refFeeObj.requestRefLobObjs.push({
-        RefLobId: this.refLobObj.RefLobId,        
-        LobCode: this.refLobObj.LobCode,
-        LobName: this.refLobObj.LobName,
-        RegRptCode: this.refLobObj.RegRptCode,
-        BlCode: this.refLobObj.BlCode
-      });
-      
+    
+    for (let index = 0; index < this.selectedItems.length; index++) {
+      this.refFeeObj.requestRefLobBizTmpltCodes.push(this.selectedItems[index]['BizTemplateCode'])      
     }
+
+     
 
 
     if (this.pageType == "add") {

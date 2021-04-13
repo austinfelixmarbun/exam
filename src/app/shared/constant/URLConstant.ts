@@ -43,6 +43,7 @@ export class URLConstant {
     public static DeleteCenterGrpOfficeMember = "/CenterGrpOfficeMbr/DeleteCenterGrpOfficeMember";
     public static GetListActiveRefOffice = "/RefOffice/GetListActiveRefOffice";
     public static GetListRefOfficeByRefOfficeAreaId = environment.FoundationR3Url + "/RefOffice/GetListRefOfficeByRefOfficeAreaId";
+    public static GetListKvpActiveRefOffice = environment.FoundationR3Url + "/RefOffice/GetListKvpActiveRefOffice";
 
     //CENTER GROUP
     public static GetCenterGrpByCode = environment.FoundationR3Url + "/CenterGrp/GetCenterGrpByCode";
@@ -175,7 +176,14 @@ export class URLConstant {
 
     //REF LOB
     public static GetListRefLob = environment.FoundationR3Url + "/RefLob/GetListRefLob";
-    public static GetListLobByRefFeeId = environment.FoundationR3Url + "/RefLob/GetListLobByRefFeeId"
+    public static GetListBizTemplateCodeByRefFeeId = environment.FoundationR3Url + "/RefLob/GetListBizTemplateCodeByRefFeeId"
+    public static GetListBizTmpltCode = environment.FoundationR3Url + "/RefLob/GetListBizTmpltCode"
+
+    //SURVEYOR
+    public static AddSurveyor = environment.FoundationR3Url + "/Surveyor/AddSurveyor";
+    public static EditSurveyor = environment.FoundationR3Url + "/Surveyor/EditSurveyor";
+    public static GetSurveyorBySurveyorId = environment.FoundationR3Url + "/Surveyor/GetSurveyorBySurveyorId";
+
 
     //ZIPCODE
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
@@ -932,7 +940,9 @@ export class URLConstant {
     public static ContinueToLevel = "/Approval/ContinueToLevel";
     
     // Payment Allocation
+    public static GetListKeyValueRefPaymentAllocActive = environment.FoundationR3Url + "/RefPaymentAlloc/GetListKeyValueRefPaymentAllocActive";
     public static GetRefPaymentAllocByID = environment.FoundationR3Url + "/RefPaymentAlloc/GetRefPaymentAllocById";
+    public static GetListKeyValueRefPaymentAllocByPayAllocGrpCode  = environment.FoundationR3Url +  "/RefPaymentAlloc/GetListKeyValueRefPaymentAllocByPayAllocGrpCode";
     public static SubmitRefPaymentAlloc = environment.FoundationR3Url + "/RefPaymentAlloc/SubmitRefPaymentAlloc";
 
     // REF PAYMENT ALLOC GRP
@@ -943,6 +953,7 @@ export class URLConstant {
     // COA
     public static GetRefCoaByRefCoaId = environment.FoundationR3Url + "/Coa/GetRefCoaByRefCoaId";
     public static SubmitCoa = environment.FoundationR3Url + "/Coa/SubmitCoa";
+    public static GetListRefCoaByCoaSchmId = environment.FoundationR3Url + "/Coa/GetListRefCoaByCoaSchmId";
 
     // COA Scheme
     public static GetCoaSchmByCoaSchmId = environment.FoundationR3Url + "/CoaSchm/GetCoaSchmByCoaSchmId";

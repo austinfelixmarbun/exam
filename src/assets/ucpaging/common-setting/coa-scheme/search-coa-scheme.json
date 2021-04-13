@@ -66,11 +66,6 @@
         {
             "type": "label",
             "position": "center",
-            "label": "PRODUCT LISTING"
-        },
-        {
-            "type": "label",
-            "position": "center",
             "label": "ACTION"
         }
     ],
@@ -89,17 +84,6 @@
             "type": "text",
             "position": "center",
             "property": "IsActiveStr"
-        },
-        {
-            "type": "action",
-            "position": "center",
-            "action": [
-                {
-                    "type": "callback",
-                    "key": "view",
-                    "icon": "ft-edit-2"
-                }
-            ]
         },
         {
             "type": "action",
