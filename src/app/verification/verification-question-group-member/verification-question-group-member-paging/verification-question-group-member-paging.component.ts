@@ -47,11 +47,8 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
           this.VerfQuestionGrpName = this.verfQuestionGroup.VerfQuestionGrpName
       }
     );
-    this.http.post(URLConstant.GetVerfQuestionGrpDByGrpHId, {Id : this.VerfQuestionGrpHId}).subscribe(
-      (response) => {
-        this.listVerfQuestionGrpD = response[CommonConstant.ReturnObj];
-      }
-    );
+    
+    this.GetVerfQuestionGrpDByGrpHId();
   }
 
   Edit(item)
@@ -61,13 +58,22 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
 
   Delete(verfQuestionGrpDId){
     if (confirm("Are you sure to delete this record?")) {
-      var verfGroupObj = {VerfQuestionGrpHId: this.VerfQuestionGrpHId, VerfQuestionGrpDId: verfQuestionGrpDId};
-      this.http.post(URLConstant.DeleteVerfQuestionGroupDById, verfGroupObj).subscribe(
+      var verfGroupDIdObj = {Id: verfQuestionGrpDId};
+      this.http.post(URLConstant.DeleteVerfQuestionGroupDById, verfGroupDIdObj).subscribe(
         (response) => {
-          this.listVerfQuestionGrpD = response[CommonConstant.ReturnObj];
+          this.toastr.successMessage(response["message"]);
+          this.GetVerfQuestionGrpDByGrpHId();
         }
       );
     }
   }
 
+
+  GetVerfQuestionGrpDByGrpHId(){
+    this.http.post(URLConstant.GetVerfQuestionGrpDByGrpHId, {Id : this.VerfQuestionGrpHId}).subscribe(
+      (response) => {
+        this.listVerfQuestionGrpD = response[CommonConstant.ReturnObj];
+      }
+    );
+  }
 }

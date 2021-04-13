@@ -322,7 +322,6 @@ export class URLConstant {
     //REF ECONOMIC SECTOR
     public static AddRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/AddRefEconomicSector";
     public static EditRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/EditRefEconomicSector";
-    public static DeleteRefEconomicSector = "/RefEconomicSector/DeleteRefEconomicSector";
     public static GetRefEconomicSectorById = environment.FoundationR3Url + "/RefEconomicSector/GetRefEconomicSectorById";
 
     //REF PROV DISTRICT
@@ -630,8 +629,6 @@ export class URLConstant {
 
     // VERIFICATION
     // REF VERF ANSWER TYPE
-    public static AddRefVerfAnswerType = environment.FoundationR3Url + "/RefVerfAnswerType/AddRefVerfAnswerType";
-    public static EditRefVerfAnswerType = environment.FoundationR3Url + "/RefVerfAnswerType/EditRefVerfAnswerType";
     public static GetActiveRefVerfAnswerTypes = environment.FoundationR3Url + "/RefVerfAnswerType/GetActiveRefVerfAnswerTypes";
     public static GetRefVerfAnswerTypeByCode = environment.FoundationR3Url + "/RefVerfAnswerType/GetRefVerfAnswerTypeByCode";
     public static GetRefVerfAnswerTypeById = environment.FoundationR3Url + "/RefVerfAnswerType/GetRefVerfAnswerTypeById";
@@ -642,14 +639,12 @@ export class URLConstant {
     // VERF QUESTION ANSWER
     public static AddVerfQuestionAnswer = environment.FoundationR3Url + "/VerfQuestionAnswer/AddVerfQuestionAnswer";
     public static EditVerfQuestionAnswer = environment.FoundationR3Url + "/VerfQuestionAnswer/EditVerfQuestionAnswer";
-    public static DeleteVerfQuestionAnswerById = "/VerfQuestionAnswer/DeleteVerfQuestionAnswerById";
     public static GetVerfQuestionAnswerByRefVerfAnswerTypeId = environment.FoundationR3Url + "/VerfQuestionAnswer/GetVerfQuestionAnswerByRefVerfAnswerTypeId";
     public static GetVerfQuestionAnswerForUpdateById = environment.FoundationR3Url + "/VerfQuestionAnswer/GetVerfQuestionAnswerForUpdateById";
 
     // VERF QUESTION GRP H
     public static AddVerfQuestionGrpH = environment.FoundationR3Url + "/VerfQuestionGrpH/AddVerfQuestionGrpH";
     public static EditVerfQuestionGrpH = environment.FoundationR3Url + "/VerfQuestionGrpH/EditVerfQuestionGrpH";
-    public static DeleteVerfQuestionGroupHById = "/VerfQuestionGrpH/DeleteVerfQuestionGroupHById";
     public static GetActiveVerfQuestionGrpHs = environment.FoundationR3Url + "/VerfQuestionGrpH/GetActiveVerfQuestionGrpHs";
     public static GetVerfQuestionGrpHs = environment.FoundationR3Url + "/VerfQuestionGrpH/GetVerfQuestionGrpHs";
     public static GetQuestionGrpHById = environment.FoundationR3Url + "/VerfQuestionGrpH/GetQuestionGrpHById";
@@ -658,7 +653,6 @@ export class URLConstant {
     public static GetQuestionGrpHAndRowVersionVerfSchemeDForUpdateById = environment.FoundationR3Url + "/VerfQuestionGrpH/GetQuestionGrpHAndRowVersionVerfSchemeDForUpdateById"
 
     // VERF QUESTION GRP D
-    public static AddVerfQuestionGrpD = environment.FoundationR3Url + "/VerfQuestionGrpD/AddVerfQuestionGrpD";
     public static AddListVerfQuestionGrpD = environment.FoundationR3Url + "/VerfQuestionGrpD/AddListVerfQuestionGrpD";
     public static DeleteVerfQuestionGroupDById = environment.FoundationR3Url + "/VerfQuestionGrpD/DeleteVerfQuestionGroupDById";
     public static EditVerfQuestionGrpD = environment.FoundationR3Url + "/VerfQuestionGrpD/EditVerfQuestionGrpD";
@@ -668,20 +662,15 @@ export class URLConstant {
     public static GetVerfQuestionGrpDForUpdateById = environment.FoundationR3Url + "/VerfQuestionGrpD/GetVerfQuestionGrpDForUpdateById";
     
     // VERF RESULT
-    public static AddVerfResult = environment.FoundationR3Url + "/VerfResult/AddVerfResult";
-    public static EditVerfResult = environment.FoundationR3Url + "/VerfResult/EditVerfResult";
     public static GetVerfResultsByTrxRefNo = environment.FoundationR3Url + "/VerfResult/GetVerfResultsByTrxRefNo";
     public static GetVerfResultById = environment.FoundationR3Url + "/VerfResult/GetVerfResultById";
     public static GetVerfResultByResultNo = environment.FoundationR3Url + "/VerfResult/GetVerfResultByResultNo";
 
     // VERF RESULT H
-    public static AddVerfResultH = environment.FoundationR3Url + "/VerfResultH/AddVerfResultH";
-    public static EditVerfResultH = environment.FoundationR3Url + "/VerfResultH/EditVerfResultH";
     public static GetVerfResultHsByVerfResultId = environment.FoundationR3Url + "/VerfResultH/GetVerfResultHsByVerfResultId";
     public static GetVerfResultHById = environment.FoundationR3Url + "/VerfResultH/GetVerfResultHById";
 
     // VERF RESULT D
-    public static AddVerfResultD = environment.FoundationR3Url + "/VerfResultD/AddVerfResultD";
     public static EditVerfResultD = environment.FoundationR3Url + "/VerfResultD/EditVerfResultD";
     public static GetVerfResultDsByVerfResultHId = environment.FoundationR3Url + "/VerfResultD/GetVerfResultDsByVerfResultHId";
     public static GetVerfResultDById = environment.FoundationR3Url + "/VerfResultD/GetVerfResultDById";
@@ -696,7 +685,6 @@ export class URLConstant {
     public static GetVerfSchemeHByCode = environment.FoundationR3Url + "/VerfSchemeH/GetVerfSchemeHByCode";
 
     // VERF SCHEME D
-    public static AddVerfSchemeD = environment.FoundationR3Url + "/VerfSchemeD/AddVerfSchemeD";
     public static EditVerfSchemeD = environment.FoundationR3Url + "/VerfSchemeD/EditVerfSchemeD";
     public static GetVerfSchemeHForUpdateById = environment.FoundationR3Url + "/VerfSchemeH/GetVerfSchemeHForUpdateById";
     public static GetVerfSchemeDataByVerfSchemeHId = environment.FoundationR3Url + "/VerfSchemeH/GetVerfSchemeDataByVerfSchemeHId";
@@ -966,6 +954,8 @@ export class URLConstant {
 
     public static GetListFilingByRackCode = environment.FoundationR3Url + "/ViewDocument/GetListFilingByRackCode";
     public static GetRackByRackCode = environment.FoundationR3Url + "/ViewDocument/GetRackByRackCode";
+
+    // public static GetRackByRackCode = environment.FoundationR3Url + "/ViewDocument/GetRackByRackCode";
 
     //Auction Company
     public static AddAuctionCompany = environment.FoundationR3Url + "/AuctionCompany/AddAuctionCompany";

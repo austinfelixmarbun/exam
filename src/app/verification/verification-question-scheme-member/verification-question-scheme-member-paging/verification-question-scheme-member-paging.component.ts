@@ -59,7 +59,7 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
   DeleteData(VerfSchemeDId) {
     if (confirm("Are you sure to delete this record?")) {
       var VerfSchemeDObj = {
-        VerfSchemeDId: VerfSchemeDId
+        Id: VerfSchemeDId
       };
       this.http.post(URLConstant.DeleteVerfSchemeD, VerfSchemeDObj).subscribe(
         (response) => {

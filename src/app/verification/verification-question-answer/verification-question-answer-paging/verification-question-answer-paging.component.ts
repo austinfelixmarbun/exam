@@ -20,7 +20,6 @@ export class VerificationQuestionAnswerPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/verification/searchVerificationQuestionAnswer.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteVerfQuestionAnswerById;
     this.inputPagingObj.ddlEnvironments = [
       {
         name: "VQA.REF_VERF_ANSWER_TYPE_ID",
