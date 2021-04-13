@@ -23,6 +23,6 @@ export class BusinessUnitComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBusinessUnit.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefBizUnit;
+    
   }
 }
