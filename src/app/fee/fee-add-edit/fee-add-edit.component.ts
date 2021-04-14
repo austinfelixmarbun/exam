@@ -49,15 +49,15 @@ export class FeeAddEditComponent implements OnInit {
         this.pageType = "add";
       }
     });
-    console.log(this.refFeeId);
+    
   }
 
   setDropDown() {
     this.httpClient.post<RefLobObj>(URLConstant.GetListBizTmpltCode, null).subscribe(
       (response) => {
-        console.log(response);
+        
         this.dropdownList = response['ReturnObject']
-        console.log(this.dropdownList);
+        
       }
     )
 
@@ -91,8 +91,7 @@ export class FeeAddEditComponent implements OnInit {
       this.httpClient.post(URLConstant.GetListBizTemplateCodeByRefFeeId, {Id: this.refFeeId}).subscribe(
         (response) => {
           this.selectedItems = response['ReturnObject'];
-          console.log(this.selectedItems);
-          console.log("test");
+          
         }
       )
 
@@ -122,7 +121,7 @@ export class FeeAddEditComponent implements OnInit {
 
 
     if (this.pageType == "add") {
-      console.log(this.refFeeObj);
+      
       this.httpClient.post(URLConstant.AddRefFee, this.refFeeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);

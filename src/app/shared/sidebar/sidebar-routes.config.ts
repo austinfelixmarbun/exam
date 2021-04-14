@@ -143,7 +143,8 @@ export const ROUTES: RouteInfo[] = [
     Path: '', Title: 'Survey', Icon: 'ft-clipboard', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
       { Path: NavigationConstant.SRVY_PAGING, Title: 'Survey Order', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
-      { Path: NavigationConstant.SURVEYOR_PAGING, Title: 'Surveyor', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  }
+      { Path: NavigationConstant.SURVEYOR_PAGING, Title: 'Surveyor', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: NavigationConstant.SURVEY_TASK_ASSIGNMENT_PAGING, Title: 'Survey Task Assignment', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  }
       
     ], Params : [] 
   },

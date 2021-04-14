@@ -281,6 +281,12 @@ export class NavigationConstant {
     public static SURVEYOR = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR //'Surveyor'
     public static SURVEYOR_PAGING = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR + "/" + PathConstant.PAGING   //'/Surveyor/Paging
     public static SURVEYOR_ADD = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR + "/" + PathConstant.ADD
+    //#endregion
+
+    //#region 
+    public static SURVEY_TASK_ASSIGNMENT = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR_TASK_ASSIGNMENT;
+    public static SURVEY_TASK_ASSIGNMENT_PAGING = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.PAGING;
+    public static SURVEY_TASK_ASSIGNMENT_DETAIL = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.DETAIL;
     
     //#region Cust
     public static CUST_PERSONAL_MAIN_INFO = '..' + "/" + PathConstant.CUST_PERSONAL_MAIN_INFO; //'../CustomerPersonal/MainInfo'
