@@ -1,39 +1,42 @@
 export class SrvyTaskObj {
-    SrvyTaskId: number;
-    SrvyOrderId: number;
-    SrvyTaskNo: string;
-    SrvyFormSchmId: number;
-    MrSrvySubjCode: string;
-    MrSrvyObjCode: string;
-    MrSrvySubj: string;
-    MrSrvyObj: string;
-    MrSrvyTypeCode: string;
-    MrSrvyStatCode: string;
-    SurveyorCode: string;
-    AssignDt: Date;
-    UpdateDt: Date;
-    Notes: string;
-    ThirdPartyAssignNo: string;
-    VerfResultNo: string;
-    RowVersion: string;
+    SrvyTaskId: any;    
+    SrvyOrderId: any;      
+    SrvyTaskNo: any;  
+    MrSurveyTypeCode: any;     
+    MrSurveyTaskStatCode: any;      
+    MrSrvyObjTypeCode: any;      
+    RefNo: any;     
+    SurveyorId: any;     
+    RetrieveDt: any;     
+    ResultDt: any;       
+    ReviewByRefUserId: any;        
+    ReviewDt: any;        
+    ReviewNotes: any;    
+    IsAddtReq: any;        
+    PrevSurveyTaskNo: any;    
+    Result: any;       
+    CustNo: any;     
+    MrCustModelCode: any;       
+    CustName: any;     
+    CustAddr: any;       
+    CustPhone: any;      
+    Zipcode: any;    
+    AssignDt: any;         
+    SrvyFormSchmId: any;       
+    Notes: any;        
+    RefReasonId: any;       
+    PrevSurveyorId: any;      
+    MobileAssignmentId: any;        
+    Kelurahan: any;       
+    Kecamatan: any;      
+    RT: any;       
+    RW: any;       
+    City: any;        
+    Addr: any; 
+    RowVersion: any;
+
 
     constructor() {
-        this.SrvyTaskId = 0;
-        this.SrvyOrderId = 0;
-        this.SrvyTaskNo = "";
-        this.SrvyFormSchmId = 0
-        this.MrSrvySubjCode = "";
-        this.MrSrvyObjCode = "";
-        this.MrSrvySubj = "";
-        this.MrSrvyObj = "";
-        this.MrSrvyTypeCode = "";
-        this.MrSrvyStatCode = "";
-        this.SurveyorCode = "";
-        this.AssignDt = new Date();
-        this.UpdateDt = new Date();
-        this.Notes = "";
-        this.ThirdPartyAssignNo = "";
-        this.VerfResultNo = "";
-        this.RowVersion = "";
+        
     }
 }  

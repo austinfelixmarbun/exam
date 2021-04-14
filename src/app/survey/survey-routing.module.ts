@@ -6,6 +6,10 @@ import { SurveyOrderViewComponent } from './survey-order-view/survey-order-view.
 import { SurveyTaskViewComponent } from './survey-task-view/survey-task-view.component';
 import { SurveyOrderTaskWfComponent } from './survey-order-task-wf/survey-order-task-wf.component';
 import { PathConstant } from 'app/shared/PathConstant';
+import { SurveyorAddComponent } from './surveyor-add/surveyor-add.component';
+import { SurveyorPagingComponent } from './surveyor-paging/surveyor-paging.component';
+import { SurveyorTaskAssignmentPagingComponent } from './surveyor-task-assignment-paging/surveyor-task-assignment-paging.component';
+import { SurveyTaskAssignmentDetailComponent } from './survey-task-assignment-detail/survey-task-assignment-detail.component';
 
 const routes: Routes = [
   {
@@ -45,7 +49,29 @@ const routes: Routes = [
         data: {
           title: 'Survey Order View'
         },
+      },      
+      {
+        path: PathConstant.SURVEYOR_PAGING,
+        component: SurveyorPagingComponent,
+        data: {
+          title: 'Surveyor Paging'
+        }
+      },      
+      {
+        path: PathConstant.SURVEYOR_TASK_ASSIGNMENT_PAGING,
+        component: SurveyorTaskAssignmentPagingComponent,
+        data: {
+          title: 'Surveyor Task Assignment Paging'
+        }
+      },
+      {
+        path: PathConstant.SURVEYOR_TASK_ASSIGNMENT_DETAIL,
+        component: SurveyTaskAssignmentDetailComponent,
+        data: {
+          title: 'Surveyor Task Assignment Detail'
+        }
       }
+      
     ]
   }
 ];

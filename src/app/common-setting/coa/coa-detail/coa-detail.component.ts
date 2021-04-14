@@ -161,7 +161,7 @@ export class CoaDetailComponent implements OnInit {
 
 
     }else if(this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypeSuppl){
-      await this.http.post<any>(URLConstant.GetListKeyValueRefPaymentAllocByPayAllocGrpCode, {MrPayAllocGrpCode: this.entitySelect}).toPromise().then(
+      await this.http.post<any>(URLConstant.GetListKeyValueRefPaymentAllocByPayAllocGrpCode, {Code: this.entitySelect}).toPromise().then(
         (response: any) => {
           this.ListPaymentAlloc = response.ReturnObject
         },

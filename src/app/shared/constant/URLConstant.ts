@@ -176,7 +176,14 @@ export class URLConstant {
 
     //REF LOB
     public static GetListRefLob = environment.FoundationR3Url + "/RefLob/GetListRefLob";
-    public static GetListLobByRefFeeId = environment.FoundationR3Url + "/RefLob/GetListLobByRefFeeId"
+    public static GetListBizTemplateCodeByRefFeeId = environment.FoundationR3Url + "/RefLob/GetListBizTemplateCodeByRefFeeId"
+    public static GetListBizTmpltCode = environment.FoundationR3Url + "/RefLob/GetListBizTmpltCode"
+
+    //SURVEYOR
+    public static AddSurveyor = environment.FoundationR3Url + "/Surveyor/AddSurveyor";
+    public static EditSurveyor = environment.FoundationR3Url + "/Surveyor/EditSurveyor";
+    public static GetSurveyorBySurveyorId = environment.FoundationR3Url + "/Surveyor/GetSurveyorBySurveyorId";
+
 
     //ZIPCODE
     public static GetRefZipcodePaging = "/RefZipcode/GetRefZipcodePaging";
@@ -849,10 +856,13 @@ export class URLConstant {
 
     // SURVEY TASK
     public static GetListSrvyTaskBySrvyOrderId = environment.FoundationR3Url + "/SrvyTask/GetListSrvyTaskBySrvyOrderId";
+    public static GetListSrvyTaskBySrvyOrderIdForUpdate = environment.FoundationR3Url + "/SrvyTask/GetListSrvyTaskBySrvyOrderIdForUpdate";
     public static AddSrvyTask = environment.FoundationR3Url + "/SrvyTask/AddSrvyTask";
-    public static EditSrvyTask = environment.FoundationR3Url + "/SrvyTask/EditSrvyTask";
+    public static EditSrvyTask = environment.FoundationR3Url + "/SrvyTask/EditSurveyTask";
     public static DeleteSrvyTask = environment.FoundationR3Url + "/SrvyTask/DeleteSrvyTask";
     public static GetSrvyTaskBySrvyTaskId = environment.FoundationR3Url + "/SrvyTask/GetSrvyTaskBySrvyTaskId";
+    public static CancelSurveyTaskBySurveyTaskId = environment.FoundationR3Url + "/SrvyTask/CancelSurveyTaskBySurveyTaskId";
+    public static GetSurveyorNameBySurveyorId = environment.FoundationR3Url + "/SrvyTask/GetSurveyorNameBySurveyorId";
 
     // SURVEY ORDER
     public static GetSrvyOrderBySrvyOrderId = environment.FoundationR3Url + "/SrvyOrder/GetSrvyOrderBySrvyOrderId";
@@ -862,6 +872,8 @@ export class URLConstant {
 
     // SURVEY FORM SCHM
     public static GetListAllSrvyFormSchm = environment.FoundationR3Url + "/SrvyFormSchm/GetListAllSrvyFormSchm";
+    public static GetSrvyFormSchmBySrvyFormSchmId = environment.FoundationR3Url + "/SrvyFormSchm/GetSrvyFormSchmBySrvyFormSchmId";
+    public static GetListKeyValueSrvyFormSchm = environment.FoundationR3Url + "/SrvyFormSchm/GetListKeyValueSrvyFormSchm";
 
     // LOB
     public static GetListKvpInstSchmByLobCode = environment.FoundationR3Url + "/InstSchmMap/GetListKvpInstSchmByLobCode";
