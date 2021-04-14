@@ -82,6 +82,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
 
     this.http.post(URLConstant.AddCenterGrpOfficeMember, obj).subscribe(
       (response) => {
+        this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_GROUP_MEMBER],{ "RefOfficeId": this.RefOfficeId, "CenterGrpId": this.CenterGrpId });
       });
   }

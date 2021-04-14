@@ -10,6 +10,9 @@ import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-change-password',
@@ -27,14 +30,17 @@ export class ChangePasswordComponent implements OnInit {
   username: string;
   private apiUrl: string;
   FoundationR3Url: string;
+  UserAccess: Object;
 
-  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService) {
+  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       this.username = params['Username'];
     });
   }
 
   ngOnInit() {
+    this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.username = this.UserAccess[CommonConstant.USER_NAME];
     this.eventValidatePassword(this.userConfirmNewPasswordRef.nativeElement);
     this.eventValidatePassword(this.userNewPasswordRef.nativeElement);
   }

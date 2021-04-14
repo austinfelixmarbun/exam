@@ -326,6 +326,18 @@ export class PathConstant {
     public static VIEW_ORDER_EXT = "ViewOrderExternal";
     //#endregion
 
+    //#region 
+    public static SURVEYOR = "Surveyor";
+    public static SURVEYOR_PAGING = PathConstant.SURVEYOR + "/" + PathConstant.PAGING
+    public static SURVEYOR_ADD = PathConstant.SURVEYOR + "/" + PathConstant.ADD    
+    //#endregion
+
+    //#region 
+    public static SURVEYOR_TASK_ASSIGNMENT = "SurveyTaskAssignment";
+    public static SURVEYOR_TASK_ASSIGNMENT_PAGING = PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.PAGING;
+    public static SURVEYOR_TASK_ASSIGNMENT_DETAIL = PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.DETAIL;
+    //#endregion
+
     //#region System-Setting-Module
     public static NOTIF = "Notification";
     public static NOTIF_DETAIL = PathConstant.NOTIF + "/" + PathConstant.DETAIL;
@@ -463,6 +475,7 @@ export class PathConstant {
     public static VIEW_CUST_COY_LEGAL = "CoyLegal";
     public static VIEW_CUST_GRP = "CustomerGroup";
     public static VIEW_CUST_DOC = "CustDocument";
+    public static VIEW_CUST_OTH_INFO = "CustOthInfo";
     //#endregion
 
      //#region JOURNAL

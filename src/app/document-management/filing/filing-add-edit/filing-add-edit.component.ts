@@ -8,6 +8,7 @@ import { FilingObj } from 'app/shared/model/document-management/FilingObj.Model'
 import { CabinetWithListRackObj } from 'app/shared/model/document-management/CabinetWithListRackObj.Model';
 import { environment } from 'environments/environment';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { RackObj } from 'app/shared/model/document-management/RackObj.Model';
 
 @Component({
   selector: 'app-filing-add-edit',
@@ -20,11 +21,13 @@ export class FilingAddEditComponent implements OnInit {
   title: string = "ADD FILING";
   filing: FilingObj = new FilingObj();
   rackWithListFilling: RackWithListFilingObj = new RackWithListFilingObj();
+  Rack: RackObj = new RackObj();
+  RackCode: string;
 
   FillingForm = this.fb.group({
     FilingCode: ['', [Validators.required, Validators.maxLength(50)]],
     FilingName: ['', [Validators.required, Validators.maxLength(100)]],
-    FilingInformation: [''],
+    FilingInformation: ['', Validators.maxLength(4000)],
     IsActive: [true]
   });
   
@@ -33,7 +36,8 @@ export class FilingAddEditComponent implements OnInit {
       params => {
         if(params['RackCode'] !== null && params['CabinetCode'] !== null){
           this.rackWithListFilling.RackCode = params['RackCode'],
-          this.Cabinet.CabinetCode = params['CabinetCode']
+          this.Cabinet.CabinetCode = params['CabinetCode'],
+          this.RackCode = params['RackCode']
         }
         if(params['RackCode'] !== null && params['CabinetCode'] !== null && params['FilingCode'] !== null){
           this.rackWithListFilling.RackCode = params['RackCode'],
@@ -57,6 +61,17 @@ export class FilingAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.RackCode);
+    this.http.post<RackObj>(environment.FoundationR3Url + "/DocManagement/GetRackByCode", {Code: this.RackCode}).subscribe(
+      (response) => {
+        console.log(response);
+        this.Rack = response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
     this.http.post<RackWithListFilingObj>(environment.FoundationR3Url + "/DocManagement/GetRackAndListFilingByRackCode", this.rackWithListFilling).subscribe(
       (response) => {
         this.rackWithListFilling = response;
@@ -120,6 +135,8 @@ export class FilingAddEditComponent implements OnInit {
     }
     else {
       this.filing.RackCode = this.rackWithListFilling.RackCode;
+      this.filing.RackId = this.Rack.RackId;
+      console.log(this.filing.RackId);
       this.http.post(environment.FoundationR3Url + "/DocManagement/AddFiling", this.filing).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");

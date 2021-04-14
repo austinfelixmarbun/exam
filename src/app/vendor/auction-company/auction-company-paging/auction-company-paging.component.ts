@@ -20,7 +20,7 @@ export class AuctionCompanyPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/vendor/auction-company/searchAuctionCompany.json";
-    this.inputPagingObj.deleteUrl = "/Vendor/DeleteVendor";
+    
     
     this.isReady = true;
   }

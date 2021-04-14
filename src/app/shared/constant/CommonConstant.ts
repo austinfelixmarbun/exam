@@ -1,6 +1,12 @@
 
 export class CommonConstant {
 
+    // MODULE
+    public static MODULE_LOS = "LOS";
+    public static MODULE_LMS = "LMS";
+    public static MODULE_AMS = "AMS";
+    public static MODULE_CMS = "CMS";
+
     // APPLICATION DATA
     public static USER_ACCESS = "UserAccess";
     public static USER_NAME = "UserName";
@@ -76,6 +82,7 @@ export class CommonConstant {
     // NOTIFICATION METHOD
     public static NotificationMethodIntLink = "INT_LINK";
     public static NotificationMethodExtLink = "EXT_LINK";
+    
     //OFFICE TYPE
     public static HeadOffice = "HO";
     public static CollectionGroup = "CG";
@@ -137,6 +144,12 @@ export class CommonConstant {
     public static RefMasterTypeCodeBuildingOwnership = "BUILDING_OWNERSHIP";
     public static RefMasterTypeCodeMonth = "MONTH";
 
+    public static RefMasterTypeCodeEntityType = "ENTITY_TYPE";
+    public static RefMasterTypeCodeEntityTypePayAlloc = "PAY_ALLOC";
+    public static RefMasterTypeCodeEntityTypeOffice = "OFFICE";
+    public static RefMasterTypeCodeEntityTypeBankAcc = "BANK_ACC";
+    public static RefMasterTypeCodeEntityTypeSuppl = "PAY_ALLOC_COA_SUPPL";
+
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
     
@@ -146,6 +159,7 @@ export class CommonConstant {
 
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
+    
     // CUST TYPE
     public static CustTypePersonal = "PERSONAL";
     public static CustTypeCompany = "COMPANY";
@@ -159,7 +173,6 @@ export class CommonConstant {
     public static CustAddrTypeJob = "JOB";
     public static CustAddrTypeOthBiz = "OTH_BIZ";
     public static CustAddrTypePreJob = "PREV_JOB";
-
 
     // ADDR TYPE 
     public static AddrTypeLegal = "LEGAL";
@@ -191,7 +204,6 @@ export class CommonConstant {
     public static AttrGroupCustCompanyOther = "CUST_COMPANY_OTH"
     public static AttrGroupCustPersonalOther = "CUST_PERSONAL_OTH"
     public static AttrGroupAsset = "ASSET";
-
 
     // Integration
     public static DailyMasterTypeSingle = "Date";

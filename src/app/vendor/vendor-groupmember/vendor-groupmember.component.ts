@@ -110,6 +110,7 @@ export class VendorGroupmemberComponent implements OnInit {
 
     this.http.post(URLConstant.AddVendorGrpMbr, obj).subscribe(
       (response) => {
+        this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_GRP_VIEW],{ "VendorGrpId": this.VendorGrpId, "MrVendorCategoryCode": this.MrVendorCategoryCode });
       });
   }

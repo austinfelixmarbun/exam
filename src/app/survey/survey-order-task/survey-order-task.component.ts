@@ -150,20 +150,20 @@ export class SurveyOrderTaskComponent implements OnInit {
       this.modal.close();
     });
 
-    this.http.post<SrvyTaskObj>(URLConstant.GetSrvyTaskBySrvyTaskId, {Id : ev}).subscribe(
-      response => {
-        this.SrvyTaskObj = response;
-        this.onChange(this.SrvyTaskObj.MrSrvySubjCode);
-        this.SurveyTaskForm.patchValue({
-          SrvyTaskId: this.SrvyTaskObj.SrvyTaskId,
-          SrvyTaskNo: this.SrvyTaskObj.SrvyTaskNo,
-          MrSrvySubjCode: this.SrvyTaskObj.MrSrvySubjCode,
-          MrSrvyObjCode: this.SrvyTaskObj.MrSrvyObjCode,
-          SrvyFormSchmId: this.SrvyTaskObj.SrvyFormSchmId,
-          SurveyorCode: this.SrvyTaskObj.SurveyorCode,
-        });
-      }
-    );
+    // this.http.post<SrvyTaskObj>(URLConstant.GetSrvyTaskBySrvyTaskId, {Id : ev}).subscribe(
+    //   response => {
+    //     this.SrvyTaskObj = response;
+    //     this.onChange(this.SrvyTaskObj.MrSrvySubjCode);
+    //     this.SurveyTaskForm.patchValue({
+    //       SrvyTaskId: this.SrvyTaskObj.SrvyTaskId,
+    //       SrvyTaskNo: this.SrvyTaskObj.SrvyTaskNo,
+    //       MrSrvySubjCode: this.SrvyTaskObj.MrSrvySubjCode,
+    //       MrSrvyObjCode: this.SrvyTaskObj.MrSrvyObjCode,
+    //       SrvyFormSchmId: this.SrvyTaskObj.SrvyFormSchmId,
+    //       SurveyorCode: this.SrvyTaskObj.SurveyorCode,
+    //     });
+    //   }
+    // );
   }
 
   deleteData(ev) {
@@ -180,43 +180,43 @@ export class SurveyOrderTaskComponent implements OnInit {
     }
   }
 
-  SaveForm() {
-    this.SrvyTaskObj.SrvyOrderId = this.SrvyOrderId;
-    this.SrvyTaskObj.MrSrvySubjCode = this.SurveyTaskForm.controls["MrSrvySubjCode"].value;
-    this.SrvyTaskObj.MrSrvyObjCode = this.SurveyTaskForm.controls["MrSrvyObjCode"].value;
-    this.SrvyTaskObj.SrvyFormSchmId = this.SurveyTaskForm.controls["SrvyFormSchmId"].value;
-    this.SrvyTaskObj.SurveyorCode = this.SurveyTaskForm.controls["SurveyorCode"].value;
+  // SaveForm() {
+  //   this.SrvyTaskObj.SrvyOrderId = this.SrvyOrderId;
+  //   this.SrvyTaskObj.MrSrvySubjCode = this.SurveyTaskForm.controls["MrSrvySubjCode"].value;
+  //   this.SrvyTaskObj.MrSrvyObjCode = this.SurveyTaskForm.controls["MrSrvyObjCode"].value;
+  //   this.SrvyTaskObj.SrvyFormSchmId = this.SurveyTaskForm.controls["SrvyFormSchmId"].value;
+  //   this.SrvyTaskObj.SurveyorCode = this.SurveyTaskForm.controls["SurveyorCode"].value;
 
 
-    let srvySubj = this.SrvySubjList.find(x => x.Key == this.SrvyTaskObj.MrSrvySubjCode);
-    this.SrvyTaskObj.MrSrvySubj = srvySubj.Value;
-    let srvyObj = this.SrvyObjList.find(x => x.Key == this.SrvyTaskObj.MrSrvyObjCode);
-    this.SrvyTaskObj.MrSrvyObj = srvyObj.Value;
+  //   let srvySubj = this.SrvySubjList.find(x => x.Key == this.SrvyTaskObj.MrSrvySubjCode);
+  //   this.SrvyTaskObj.MrSrvySubj = srvySubj.Value;
+  //   let srvyObj = this.SrvyObjList.find(x => x.Key == this.SrvyTaskObj.MrSrvyObjCode);
+  //   this.SrvyTaskObj.MrSrvyObj = srvyObj.Value;
 
-    if (this.SurveyTaskForm.controls["SrvyTaskId"].value == "") {
-      this.SrvyTaskObj.SrvyTaskNo = "";
+  //   if (this.SurveyTaskForm.controls["SrvyTaskId"].value == "") {
+  //     this.SrvyTaskObj.SrvyTaskNo = "";
 
-      this.http.post(URLConstant.AddSrvyTask, this.SrvyTaskObj).subscribe(
-        response => {
-          this.toastr.successMessage(response["Message"]);
-          this.generateSurveyTaskList();
-          this.modal.close();
-        }
-      );
-    } else {
-      this.SrvyTaskObj.SrvyTaskId = this.SurveyTaskForm.controls["SrvyTaskId"].value;
-      this.SrvyTaskObj.SrvyTaskNo = this.SurveyTaskForm.controls["SrvyTaskNo"].value;
-      this.SrvyTaskObj.RowVersion = this.SrvyTaskObj.RowVersion;
+  //     this.http.post(URLConstant.AddSrvyTask, this.SrvyTaskObj).subscribe(
+  //       response => {
+  //         this.toastr.successMessage(response["Message"]);
+  //         this.generateSurveyTaskList();
+  //         this.modal.close();
+  //       }
+  //     );
+  //   } else {
+  //     this.SrvyTaskObj.SrvyTaskId = this.SurveyTaskForm.controls["SrvyTaskId"].value;
+  //     this.SrvyTaskObj.SrvyTaskNo = this.SurveyTaskForm.controls["SrvyTaskNo"].value;
+  //     this.SrvyTaskObj.RowVersion = this.SrvyTaskObj.RowVersion;
 
-      this.http.post(URLConstant.EditSrvyTask, this.SrvyTaskObj).subscribe(
-        response => {
-          this.toastr.successMessage(response["Message"]);
-          this.generateSurveyTaskList();
-          this.modal.close();
-        }
-      );
-    }
-  }
+  //     this.http.post(URLConstant.EditSrvyTask, this.SrvyTaskObj).subscribe(
+  //       response => {
+  //         this.toastr.successMessage(response["Message"]);
+  //         this.generateSurveyTaskList();
+  //         this.modal.close();
+  //       }
+  //     );
+  //   }
+  // }
 
   setSrvyObjList(arr = 0) {
     this.SrvyObjList = [];

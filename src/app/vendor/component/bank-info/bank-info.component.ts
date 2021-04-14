@@ -192,7 +192,7 @@ export class BankInfoComponent implements OnInit {
 
   deleteBank(vendorBankAccId) {
     if (confirm("Are you sure to delete this record?")) {
-      this.vendorService.DeleteVendorBankAcc({VendorBankAccId: vendorBankAccId}).subscribe(response => {
+      this.vendorService.DeleteVendorBankAcc({Id: vendorBankAccId}).subscribe(response => {
         this.toastr.successMessage(response["Message"]);
         this.getListData();
       });

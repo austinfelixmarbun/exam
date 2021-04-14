@@ -16,10 +16,17 @@ import { SurveyOrderViewComponent } from './survey-order-view/survey-order-view.
 import { SurveyTaskViewComponent } from './survey-task-view/survey-task-view.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { SurveyOrderTaskWfComponent } from './survey-order-task-wf/survey-order-task-wf.component';
+import { SurveyorTaskAssignmentPagingComponent } from './surveyor-task-assignment-paging/surveyor-task-assignment-paging.component';
+import { SurveyorPagingComponent } from './surveyor-paging/surveyor-paging.component';
+import { SurveyorAddComponent } from './surveyor-add/surveyor-add.component';
+import { UcgridviewModule } from '@adins/ucgridview';
+import { AdInsModule } from 'app/components/adins-module/adins.module';
+import { SurveyTaskAssignmentDetailComponent } from './survey-task-assignment-detail/survey-task-assignment-detail.component';
 
 
 @NgModule({
   imports: [
+    AdInsModule,
     SurveyRoutingModule,
     CommonModule,
     FormsModule,
@@ -31,14 +38,19 @@ import { SurveyOrderTaskWfComponent } from './survey-order-task-wf/survey-order-
     UcaddressModule,
     UclookupgenericModule,
     UcviewgenericModule,
-    UcShowErrorsModule
+    UcShowErrorsModule,
+    UcgridviewModule
   ],
   declarations: [
     SurveyOrderComponent,
     SurveyOrderTaskComponent,
     SurveyOrderViewComponent,
     SurveyTaskViewComponent,
-    SurveyOrderTaskWfComponent
+    SurveyOrderTaskWfComponent,
+    SurveyorAddComponent,
+    SurveyorPagingComponent,
+    SurveyorTaskAssignmentPagingComponent,
+    SurveyTaskAssignmentDetailComponent
   ],
   providers: [
     NGXToastrService

@@ -10,11 +10,12 @@ export const environment = {
     FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_SIT_CY4',
     WebSocketURL : 'http://r3app-server.ad-ins.com/FOUNDATION_SIT_CY4',
     //FoundationR3Url: 'http://localhost:5000',
+    losR3Web: 'http://r3web-server/LOSR3',
+    lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS',
     Module:"FOU",
     ApprovalURL : 'http://r3app-server/APPROVAL_SIT',
     FoundationR3Web:'http://r3web-server.ad-ins.com/FOUNDATION_SIT_CY4',
     ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
     ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
     DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
-  };
-  
+};

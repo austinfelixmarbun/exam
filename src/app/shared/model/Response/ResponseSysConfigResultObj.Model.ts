@@ -11,4 +11,4 @@ export class ResponseSysConfigResultObj {
         this.ConfigValue = "";
         this.RowVersion = "";
     }
-}  
+}    
