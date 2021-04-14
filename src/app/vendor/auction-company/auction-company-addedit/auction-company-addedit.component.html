@@ -78,7 +78,25 @@
                   </lib-uc-show-errors>
                 </div>
               </div>
+
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>RT</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="RT">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.RT" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
               
+              <div class="form-group row">
+                <label class="col-md-3  adInsLabel" translate>RW</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" formControlName="RW">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.RW" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
               <div class="form-body">
                 <div class="form-group row">
                   <label class="col-md-3 adins-required-label">Zip Code</label>
@@ -315,6 +333,82 @@
                     </lib-uc-show-errors>
                   </div>
                 </div>
+
+                <!--ditambah-->
+                <div class="form-group row">
+                  <label class="col-md-3 adins-required-label">Tax Address</label>
+                  <div class="col-md-4">
+                    <textarea class="form-control" formControlName="TaxAddr"> </textarea>
+                    <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxAddr" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Tax RT</label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control" formControlName="TaxRT">
+                    <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxRT" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Tax RW</label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control" formControlName="TaxRW">
+                    <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxRW" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+
+                <div class="form-body">
+                  <div class="form-group row">
+                    <label class="col-md-3 adins-required-label">Tax Zip Code</label>
+                    <div class="col-md-3" *ngIf="inputLookupZipcodeTaxObj.isReady">
+                      <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeTaxObj" [parentForm]="AuctionCompanyForm"
+                        [enjiForm]="enjiForm" [identifier]="'ZipcodeTax'" (lookup)="getLookupTaxZipcode($event)">
+                      </lib-uclookupgeneric>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Tax Kelurahan</label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control" formControlName="TaxKelurahan">
+                    <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxKelurahan" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+  
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Tax Kecamatan</label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control" formControlName="TaxKecamatan">
+                    <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxKecamatan" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+  
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Tax City</label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control" formControlName="TaxCity">
+                    <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxCity" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+  
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Tax Province</label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control" formControlName="TaxProvince">
+                    <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxProvince" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+
               </div>
             </div>
 

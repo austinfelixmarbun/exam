@@ -22,6 +22,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class AuctionCompanyAddeditComponent implements OnInit {
   inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
   inputLookupZipcodeContactPersonObj: InputLookupObj = new InputLookupObj();
+  inputLookupZipcodeTaxObj: InputLookupObj = new InputLookupObj();
   mode: any;
   VendorId: number;
   isHidden: boolean = true;
@@ -61,10 +62,21 @@ export class AuctionCompanyAddeditComponent implements OnInit {
     MrIdTypeCode: [''],
     RegistrationNo: ['', Validators.required],
     Addr  :  ['', [Validators.required]],
+    RT : ['', [Validators.required]],
+    RW : ['', [Validators.required]],
     Kelurahan : ['', [Validators.required]],
     Kecamatan : ['', [Validators.required]],
     City : ['', [Validators.required]],
     Province : ['',[Validators.required]],
+
+    TaxAddr  :  ['', [Validators.required]],
+    TaxRT : ['', [Validators.required]],
+    TaxRW : ['', [Validators.required]],
+    TaxKelurahan : ['', [Validators.required]],
+    TaxKecamatan : ['', [Validators.required]],
+    TaxCity : ['', [Validators.required]],
+    TaxProvince : ['',[Validators.required]],
+
     Phn1  :  ['', [Validators.required,Validators.pattern("^[0-9]+$")]],    
     Phn2 : [''],    
     IsActive : ['', [Validators.required]],
@@ -91,10 +103,36 @@ export class AuctionCompanyAddeditComponent implements OnInit {
     this.AuctionCompanyForm.controls.Kecamatan.disable();
     this.AuctionCompanyForm.controls.Province.disable();
     this.AuctionCompanyForm.controls.City.disable();
-    this.AuctionCompanyForm.controls.City.disable();
     this.AuctionCompanyForm.controls.CityContactPerson.disable();
     this.AuctionCompanyForm.controls.ProvinceContactPerson.disable();
+
+    this.AuctionCompanyForm.controls.TaxKelurahan.disable();
+    this.AuctionCompanyForm.controls.TaxKecamatan.disable();
+    this.AuctionCompanyForm.controls.TaxProvince.disable();
+    this.AuctionCompanyForm.controls.TaxCity.disable();
+
+    this.AuctionCompanyForm.controls.TaxIdNo.clearValidators();
+    this.AuctionCompanyForm.controls.TaxpayerName.clearValidators();
+    this.AuctionCompanyForm.controls.TaxAddr.clearValidators();
+    this.AuctionCompanyForm.controls.TaxRT.clearValidators();
+    this.AuctionCompanyForm.controls.TaxRW.clearValidators();
+    this.AuctionCompanyForm.controls.TaxKelurahan.clearValidators();
+    this.AuctionCompanyForm.controls.TaxKecamatan.clearValidators();
+    this.AuctionCompanyForm.controls.TaxCity.clearValidators();
+    this.AuctionCompanyForm.controls.TaxProvince.clearValidators();
+
+    this.AuctionCompanyForm.controls.TaxIdNo.updateValueAndValidity();
+    this.AuctionCompanyForm.controls.TaxpayerName.updateValueAndValidity();
+    this.AuctionCompanyForm.controls.TaxAddr.updateValueAndValidity();
+    this.AuctionCompanyForm.controls.TaxRT.updateValueAndValidity();
+    this.AuctionCompanyForm.controls.TaxRW.updateValueAndValidity();
+    this.AuctionCompanyForm.controls.TaxKelurahan.updateValueAndValidity();
+    this.AuctionCompanyForm.controls.TaxKecamatan.updateValueAndValidity();
+    this.AuctionCompanyForm.controls.TaxCity.updateValueAndValidity();
+    this.AuctionCompanyForm.controls.TaxProvince.updateValueAndValidity();
+    
     this.setDropdown();
+    
     if (this.mode == "edit") {
       this.AuctionCompanyForm.controls.VendorCode.disable();
       this.getData();
@@ -108,7 +146,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
     this.title = "Auction Company - Edit";
     this.vendorService.GetAuctionCompanyByVendorIdForEdit({ Id: this.VendorId }).subscribe(
       (response) => {
-        
+        console.log(response);
         this.result = response;
         this.setDropdown();
         this.AuctionCompanyForm.patchValue({
@@ -122,11 +160,15 @@ export class AuctionCompanyAddeditComponent implements OnInit {
           IsActive: this.result.VendorObj.IsActive,
           TaxidNo: this.result.VendorObj.TaxidNo,
           TaxpayerName: this.result.VendorObj.TaxpayerName,
-          Addr: this.result.VendorAddrObj.Addr,
-          Kecamatan: this.result.VendorAddrObj.AreaCode1,
-          Kelurahan: this.result.VendorAddrObj.AreaCode2,
-          City: this.result.VendorAddrObj.City,
-          Province: this.result.VendorAddrObj.Province,
+
+          Addr: this.result.VendorAddrLegalObj.Addr,
+          Kecamatan: this.result.VendorAddrLegalObj.AreaCode1,
+          Kelurahan: this.result.VendorAddrLegalObj.AreaCode2,
+          RW: this.result.VendorAddrLegalObj.AreaCode3,
+          RT: this.result.VendorAddrLegalObj.AreaCode4,
+          City: this.result.VendorAddrLegalObj.City,
+          Province: this.result.VendorAddrLegalObj.Province,
+          
           Phn1: this.result.VendorObj.MobilePhnNo1,
           Phn2: this.result.VendorObj.MobilePhnNo2,
           Name: this.result.VendorContactPersonObj.Name,
@@ -141,6 +183,18 @@ export class AuctionCompanyAddeditComponent implements OnInit {
           Email: this.result.VendorContactPersonObj.Email,
           TaxIdNo: this.result.VendorObj.TaxIdNo
         });
+        
+        if(this.AuctionCompanyForm.controls.IsNpwpExist.value == true) {
+          this.AuctionCompanyForm.patchValue({
+            TaxAddr: this.result.VendorAddrTaxObj.Addr,
+            TaxRT: this.result.VendorAddrTaxObj.AreaCode4,
+            TaxRW: this.result.VendorAddrTaxObj.AreaCode3,
+            TaxKecamatan: this.result.VendorAddrTaxObj.AreaCode1,
+            TaxKelurahan: this.result.VendorAddrTaxObj.AreaCode2,
+            TaxCity: this.result.VendorAddrTaxObj.City,
+            TaxProvince: this.result.VendorAddrTaxObj.Province,
+          })
+        } 
         this.NpwpCheck();
         this.setLookup();
       }
@@ -214,17 +268,54 @@ export class AuctionCompanyAddeditComponent implements OnInit {
       this.AuctionCompanyObj.VendorObj.TaxpayerName = this.AuctionCompanyForm.controls.TaxpayerName.value;
       this.AuctionCompanyObj.VendorObj.IsActive = this.AuctionCompanyForm.controls.IsActive.value;
       this.AuctionCompanyObj.VendorObj.MobilePhnNo1 = this.AuctionCompanyForm.controls.Phn1.value;
-      this.AuctionCompanyObj.VendorObj.MobilePhnNo2 = this.AuctionCompanyForm.controls.Phn2.value; 
-      this.AuctionCompanyObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
-
+      this.AuctionCompanyObj.VendorObj.MobilePhnNo2 = this.AuctionCompanyForm.controls.Phn2.value;
+      /*
+      if(this.AuctionCompanyObj.VendorObj.RowVersion != null) { 
+        this.AuctionCompanyObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
+      }
+      //console.log(this.result.VendorAddrObj.RowVersion);
+      */
       //Vendor Addr
+      this.AuctionCompanyObj.VendorAddrObj.MrAddrTypeCode = 'LEGAL',
       this.AuctionCompanyObj.VendorAddrObj.Addr = this.AuctionCompanyForm.controls.Addr.value;
       this.AuctionCompanyObj.VendorAddrObj.AreaCode2 = this.AuctionCompanyForm.controls.Kelurahan.value;
       this.AuctionCompanyObj.VendorAddrObj.AreaCode1 = this.AuctionCompanyForm.controls.Kecamatan.value;
+      this.AuctionCompanyObj.VendorAddrObj.AreaCode4 = this.AuctionCompanyForm.controls.RT.value;
+      this.AuctionCompanyObj.VendorAddrObj.AreaCode3 = this.AuctionCompanyForm.controls.RW.value;
       this.AuctionCompanyObj.VendorAddrObj.City = this.AuctionCompanyForm.controls.City.value;
       this.AuctionCompanyObj.VendorAddrObj.Zipcode = this.AuctionCompanyForm.controls["Zipcode"]["controls"].value.value;
-      this.AuctionCompanyObj.VendorAddrObj.Province = this.AuctionCompanyForm.controls.Province.value;     
-      this.AuctionCompanyObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
+      this.AuctionCompanyObj.VendorAddrObj.Province = this.AuctionCompanyForm.controls.Province.value;
+      /*
+      if(this.AuctionCompanyObj.VendorAddrObj.RowVersion != null) {   
+        this.AuctionCompanyObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
+      }*/
+      //Vendor Tax Addr
+      if(this.AuctionCompanyForm.controls.IsNpwpExist.value === true) {
+        this.AuctionCompanyObj.VendorAddrObj.MrTaxAddrTypeCode = 'TAX',
+        this.AuctionCompanyObj.VendorAddrObj.TaxAddr = this.AuctionCompanyForm.controls.TaxAddr.value;
+        this.AuctionCompanyObj.VendorAddrObj.TaxAreaCode2 = this.AuctionCompanyForm.controls.TaxKelurahan.value;
+        this.AuctionCompanyObj.VendorAddrObj.TaxAreaCode1 = this.AuctionCompanyForm.controls.TaxKecamatan.value;
+        this.AuctionCompanyObj.VendorAddrObj.TaxAreaCode4 = this.AuctionCompanyForm.controls.TaxRT.value;
+        this.AuctionCompanyObj.VendorAddrObj.TaxAreaCode3 = this.AuctionCompanyForm.controls.TaxRW.value;
+        this.AuctionCompanyObj.VendorAddrObj.TaxCity = this.AuctionCompanyForm.controls.TaxCity.value;
+        this.AuctionCompanyObj.VendorAddrObj.TaxZipcode = this.AuctionCompanyForm.controls["ZipcodeTax"]["controls"].value.value;
+        this.AuctionCompanyObj.VendorAddrObj.TaxProvince = this.AuctionCompanyForm.controls.TaxProvince.value;
+        /*
+        if(this.AuctionCompanyObj.VendorAddrObj.RowVersion != null) {
+          this.AuctionCompanyObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.TaxRowVersion;
+        }*/
+      } else {
+        this.AuctionCompanyObj.VendorAddrObj.MrTaxAddrTypeCode = '',
+        this.AuctionCompanyObj.VendorAddrObj.TaxAddr = '';
+        this.AuctionCompanyObj.VendorAddrObj.TaxAreaCode2 = '';
+        this.AuctionCompanyObj.VendorAddrObj.TaxAreaCode1 = '';
+        this.AuctionCompanyObj.VendorAddrObj.TaxAreaCode4 = '';
+        this.AuctionCompanyObj.VendorAddrObj.TaxAreaCode3 = '';
+        this.AuctionCompanyObj.VendorAddrObj.TaxCity = '';
+        this.AuctionCompanyObj.VendorAddrObj.TaxZipcode = '';
+        this.AuctionCompanyObj.VendorAddrObj.TaxProvince = '';
+        //this.AuctionCompanyObj.VendorAddrObj.RowVersion = ''; 
+      }
 
       //Vendor Contact Person
       this.AuctionCompanyObj.VendorContactPersonObj.Name = this.AuctionCompanyForm.controls.Name.value;
@@ -238,10 +329,21 @@ export class AuctionCompanyAddeditComponent implements OnInit {
       this.AuctionCompanyObj.VendorContactPersonObj.JoinDate = this.AuctionCompanyForm.controls.JoinDate.value;
       this.AuctionCompanyObj.VendorContactPersonObj.IsOwner = this.AuctionCompanyForm.controls.IsOwner.value;
       this.AuctionCompanyObj.VendorContactPersonObj.Email = this.AuctionCompanyForm.controls.Email.value;
-      this.AuctionCompanyObj.VendorContactPersonObj.RowVersion = this.result.VendorContactPersonObj.RowVersion;
-
+      /*
+      if(this.AuctionCompanyObj.VendorContactPersonObj.RowVersion != null) {
+        this.AuctionCompanyObj.VendorContactPersonObj.RowVersion = this.result.VendorContactPersonObj.RowVersion;
+      }
+      */
       //Submit
       if(this.mode === 'edit'){
+        /*
+        this.AuctionCompanyObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
+        this.AuctionCompanyObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
+        if(this.AuctionCompanyForm.controls.IsNpwpExist.value === true) {
+          this.AuctionCompanyObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.TaxRowVersion;
+        };
+        this.AuctionCompanyObj.VendorContactPersonObj.RowVersion = this.result.VendorContactPersonObj.RowVersion;
+        */
         this.AuctionCompanyObj.VendorObj.VendorId = this.VendorId;
         this.vendorService.EditAuctionCompany(this.AuctionCompanyObj).subscribe(
           (response) => {
@@ -276,10 +378,23 @@ export class AuctionCompanyAddeditComponent implements OnInit {
     this.inputLookupZipcodeContactPersonObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeContactPersonObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeContactPersonObj.isReady = true;
+
+    this.inputLookupZipcodeTaxObj.isRequired = false;
+    this.inputLookupZipcodeTaxObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeTaxObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
+    this.inputLookupZipcodeTaxObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupZipcodeTaxObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeTaxObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeTaxObj.isReady = true;
     
     if (this.result != null) {
-      this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.result["VendorAddrObj"].Zipcode };
-      this.inputLookupZipcodeContactPersonObj.jsonSelect = { Zipcode: this.result["VendorContactPersonObj"].Zipcode };
+      this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.result.VendorAddrLegalObj.Zipcode };
+      this.inputLookupZipcodeContactPersonObj.jsonSelect = { Zipcode: this.result.VendorContactPersonObj.Zipcode };
+      if(this.AuctionCompanyForm.controls.IsNpwpExist.value == true) {
+        if(this.result.VendorAddrTaxObj.Zipcode != null) {
+          this.inputLookupZipcodeTaxObj.jsonSelect = { Zipcode: this.result.VendorAddrTaxObj.Zipcode };
+        }
+      }
     }
   }
 
@@ -292,6 +407,15 @@ export class AuctionCompanyAddeditComponent implements OnInit {
     });
   }
 
+  getLookupTaxZipcode(event) {
+    this.AuctionCompanyForm.patchValue({
+      TaxCity: event.City,
+      TaxKecamatan: event.AreaCode1,
+      TaxKelurahan: event.AreaCode2,
+      TaxProvince: event.Province
+    });
+  }
+
   getLookupZipcodeContactPerson(event) {
     this.AuctionCompanyForm.patchValue({
       CityContactPerson: event.City,
@@ -300,16 +424,47 @@ export class AuctionCompanyAddeditComponent implements OnInit {
   }
 
   NpwpCheck(isGetData: boolean = false) {
-    if (this.AuctionCompanyForm.controls.IsNpwpExist.value == true) {
-      this.isHidden = false;
-      this.AuctionCompanyForm.controls.TaxIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
-      this.AuctionCompanyForm.controls.TaxpayerName.setValidators(Validators.required);
-    } else {
+
+    if (this.AuctionCompanyForm.controls.IsNpwpExist.value == false) {
+      this.isHidden = true;
+      this.inputLookupZipcodeTaxObj.isReady = false;
+
       this.AuctionCompanyForm.controls.TaxIdNo.clearValidators();
       this.AuctionCompanyForm.controls.TaxpayerName.clearValidators();
-      this.isHidden = true;
+      this.AuctionCompanyForm.controls.TaxAddr.clearValidators();
+      this.AuctionCompanyForm.controls.TaxRT.clearValidators();
+      this.AuctionCompanyForm.controls.TaxRW.clearValidators();
+      this.AuctionCompanyForm.controls.TaxKelurahan.clearValidators();
+      this.AuctionCompanyForm.controls.TaxKecamatan.clearValidators();
+      this.AuctionCompanyForm.controls.TaxCity.clearValidators();
+      this.AuctionCompanyForm.controls.TaxProvince.clearValidators();
+      this.inputLookupZipcodeTaxObj.isRequired = false;
+      this.inputLookupZipcodeTaxObj.isReady = true;
+    } else {
+      this.isHidden = false;
+      this.inputLookupZipcodeTaxObj.isReady = false;
+
+      this.AuctionCompanyForm.controls.TaxIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
+      this.AuctionCompanyForm.controls.TaxpayerName.setValidators(Validators.required);
+      this.AuctionCompanyForm.controls.TaxAddr.setValidators(Validators.required);
+      this.AuctionCompanyForm.controls.TaxRT.setValidators(Validators.required);
+      this.AuctionCompanyForm.controls.TaxRW.setValidators(Validators.required);
+      this.AuctionCompanyForm.controls.TaxKelurahan.setValidators(Validators.required);
+      this.AuctionCompanyForm.controls.TaxKecamatan.setValidators(Validators.required);
+      this.AuctionCompanyForm.controls.TaxCity.setValidators(Validators.required);
+      this.AuctionCompanyForm.controls.TaxProvince.setValidators(Validators.required);
+      this.inputLookupZipcodeTaxObj.isRequired = true;
+      this.inputLookupZipcodeTaxObj.isReady = true;
     }
+    
     this.AuctionCompanyForm.controls.TaxIdNo.updateValueAndValidity();
     this.AuctionCompanyForm.controls.TaxpayerName.updateValueAndValidity();
+    this.AuctionCompanyForm.controls.TaxAddr.updateValueAndValidity();
+    this.AuctionCompanyForm.controls.TaxRT.updateValueAndValidity();
+    this.AuctionCompanyForm.controls.TaxRW.updateValueAndValidity();
+    this.AuctionCompanyForm.controls.TaxKelurahan.updateValueAndValidity();
+    this.AuctionCompanyForm.controls.TaxKecamatan.updateValueAndValidity();
+    this.AuctionCompanyForm.controls.TaxCity.updateValueAndValidity();
+    this.AuctionCompanyForm.controls.TaxProvince.updateValueAndValidity();
   }
 }
