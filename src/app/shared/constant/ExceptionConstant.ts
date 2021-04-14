@@ -32,4 +32,7 @@ export class ExceptionConstant {
     public static NOT_ELIGIBLE_FOR_PROCESS_TASK = "You are not Eligible to Process this Task";
     
     public static CUST_EXPR_REQ = "Customer Exposure Still Request";
+    
+    public static PLEASE_SELECT_ONE = "Please select One";
+    public static ALREADY_EXIST = "Already Exist";
 }

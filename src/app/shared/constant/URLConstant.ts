@@ -958,11 +958,13 @@ export class URLConstant {
     // COA
     public static GetRefCoaByRefCoaId = environment.FoundationR3Url + "/Coa/GetRefCoaByRefCoaId";
     public static SubmitCoa = environment.FoundationR3Url + "/Coa/SubmitCoa";
+    public static SubmitListCoa = environment.FoundationR3Url + "/Coa/SubmitListCoa";
     public static GetListRefCoaByCoaSchmId = environment.FoundationR3Url + "/Coa/GetListRefCoaByCoaSchmId";
 
     // COA Scheme
     public static GetCoaSchmByCoaSchmId = environment.FoundationR3Url + "/CoaSchm/GetCoaSchmByCoaSchmId";
     public static SubmitCoaSchm = environment.FoundationR3Url + "/CoaSchm/SubmitCoaSchm";
+    
 
     // View Cabinet, Rack, FIling
     public static GetListRackByCabinetCode = environment.FoundationR3Url + "/ViewDocument/GetListRackByCabinetCode";
