@@ -89,7 +89,6 @@ export class URLConstant {
     public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
     public static AddRefJobTitle = environment.FoundationR3Url + "/RefJobTitle/AddRefJobTitle";
     public static EditRefJobTitle = environment.FoundationR3Url + "/RefJobTitle/EditRefJobTitle";
-    public static DeleteRefJobTitle = "/RefJobTitle/DeleteRefJobTitle";
     public static GetJobPositionLvl = "/OrganizationDefinition/GetJobPositionLvl";
     public static GetRefJobTitleById = environment.FoundationR3Url + "/RefJobTitle/GetRefJobTitleByRefJobTitleId";
 
@@ -191,7 +190,6 @@ export class URLConstant {
     public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
     public static EditRefZipcode = environment.FoundationR3Url + "/RefZipcode/EditRefZipcode";
     public static AddRefZipcode = environment.FoundationR3Url + "/RefZipcode/AddRefZipcode";
-    public static DeleteRefZipcode = "/RefZipcode/DeleteRefZipCode";
     public static GetOfficeZipcodeMemberAddPaging = "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
     public static GetRefZipCodeById = environment.FoundationR3Url + "/RefZipcode/GetRefZipcodeById";
     public static GetZipcodeDataByZipCode = environment.FoundationR3Url + "/RefZipcode/GetZipcodeDataByZipCode";
@@ -233,16 +231,15 @@ export class URLConstant {
     public static GetRefMaster = "/RefMaster/GetRefMaster";
     public static GetRefMasterListByTypeCode = "/RefMaster/GetRefMasterListByTypeCode";
     public static GetRefMasterListKeyValuePair = "/RefMaster/GetRefMasterListKeyValuePair";
-    public static AddRefMaster = "/RefMaster/AddRefMaster";
-    public static EditRefMaster = "/RefMaster/EditRefMaster";
+    public static AddRefMaster = environment.FoundationR3Url + "/RefMaster/AddRefMaster";
+    public static EditRefMaster = environment.FoundationR3Url + "/RefMaster/EditRefMaster";
     public static GetRefMasterType = "/RefMaster/GetRefMasterType";
     public static GetRefMasterTypeKeyValueUserSetting = "/RefMaster/GetRefMasterTypeKeyValueUserSetting";
-    public static DeleteRefMaster = "/RefMaster/DeleteRefMaster";
     public static GetRefMasterPaging = "/RefMaster/GetRefMasterPaging";
     public static GetRefMasterListDesc = "/RefMaster/GetRefMasterListDesc";
     public static GetRefMasterListKeyValueActiveByCode = environment.FoundationR3Url + "/RefMaster/GetListKeyValueActiveByCode"
     public static GetListActiveRefMasterType = "/RefMasterType/GetListKeyValueActiveByCode";
-    public static GetRefMasterByRefMasterId = "/RefMaster/GetRefMasterByRefMasterId";
+    public static GetRefMasterByRefMasterId = environment.FoundationR3Url + "/RefMaster/GetRefMasterByRefMasterId";
     public static GetListActiveRefMaster = environment.FoundationR3Url + "/RefMaster/GetListKeyValueActiveByCode";
     public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/RefMaster/GetRefMasterByMasterCode";
     public static GetRefMasterTypeOfficeWithoutCG = environment.FoundationR3Url + "/RefMaster/GetListKeyValueOfficeTypeWithoutCg";
@@ -259,7 +256,6 @@ export class URLConstant {
     public static GetRefIndustryTypeById = environment.FoundationR3Url + "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
     public static AddRefIndustryType = environment.FoundationR3Url + "/RefIndustryType/AddRefIndustryType";
     public static EditRefIndustryType = environment.FoundationR3Url + "/RefIndustryType/EditRefIndustryType";
-    public static DeleteRefIndustryType = "/RefIndustryType/DeleteRefIndustryType";
     public static GetRefIndustryTypeByIndustryTypeCode = environment.FoundationR3Url + "/RefIndustryType/GetRefIndustryTypeByIndustryTypeCode";
 
     //REF PROV DISTRICT
@@ -335,7 +331,6 @@ export class URLConstant {
     //REF PROV DISTRICT
     public static AddRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/AddRefProvDistrict";
     public static EditRefProvDistrict = environment.FoundationR3Url + "/RefProvDistrict/EditRefProvDistrict";
-    public static DeleteRefProvDistrict = "/RefProvDistrict/DeleteRefProvDistrict";
     public static GetRefProvDistrictById = environment.FoundationR3Url + "/RefProvDistrict/GetRefProvDistrictByRefProvDistrictId";
 
     //ASSET MASTER

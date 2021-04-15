@@ -21,9 +21,6 @@ export class ProvinceAddEditComponent implements OnInit {
   refProvDistrictId: any;
   refProvDistrictObj: RefProvDistrictObj;
   resultData: any;
-  getUrl: any;
-  addUrl: any;
-  editUrl: any;
   ProvinceForm = this.fb.group({
     ProvDistrictCode: ['', [Validators.required, Validators.maxLength(50)]],
     ProvDistrictName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -32,10 +29,7 @@ export class ProvinceAddEditComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.CS_REF_PROVINCE_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.getUrl = URLConstant.GetRefProvDistrictById;
-    this.addUrl = URLConstant.AddRefProvDistrict;
-    this.editUrl = URLConstant.EditRefProvDistrict;
-
+    
 
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
@@ -52,7 +46,7 @@ export class ProvinceAddEditComponent implements OnInit {
       this.ProvinceForm.controls["ProvDistrictCode"].disable();
       this.refProvDistrictObj = new RefProvDistrictObj();
       this.refProvDistrictObj.RefProvDistrictId = this.refProvDistrictId;
-      this.http.post(this.getUrl, {Id : this.refProvDistrictId}).subscribe(
+      this.http.post(URLConstant.GetRefProvDistrictById, {Id : this.refProvDistrictId}).subscribe(
         response => {
           this.resultData = response;
           this.ProvinceForm.patchValue({
@@ -73,7 +67,7 @@ export class ProvinceAddEditComponent implements OnInit {
       this.refProvDistrictObj.ProvDistrictName = this.ProvinceForm.controls["ProvDistrictName"].value;
       this.refProvDistrictObj.IsActive = this.ProvinceForm.controls["IsActive"].value;
       this.refProvDistrictObj.Type = CommonConstant.RefProvDistrictTypePrv;
-      this.http.post(this.addUrl, this.refProvDistrictObj).subscribe(
+      this.http.post(URLConstant.AddRefProvDistrict, this.refProvDistrictObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REF_PROVINCE_PAGING],{});     
@@ -84,7 +78,7 @@ export class ProvinceAddEditComponent implements OnInit {
       this.refProvDistrictObj.RefProvDistrictId = this.refProvDistrictId;
       this.refProvDistrictObj.ProvDistrictName = this.ProvinceForm.controls["ProvDistrictName"].value;
       this.refProvDistrictObj.IsActive = this.ProvinceForm.controls["IsActive"].value;
-      this.http.post(this.editUrl, this.refProvDistrictObj).subscribe(
+      this.http.post(URLConstant.EditRefProvDistrict, this.refProvDistrictObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REF_PROVINCE_PAGING],{});   

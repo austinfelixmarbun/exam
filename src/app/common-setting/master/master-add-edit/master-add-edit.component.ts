@@ -22,7 +22,7 @@ import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.mo
 })
 export class MasterAddEditComponent implements OnInit {
 
-  settingUrl: string = environment.FoundationR3Url;
+  
   refMasterObj: RefMasterObj = new RefMasterObj();
   refMasterTypeObj: any;
   type: string = 'add';
@@ -70,8 +70,8 @@ export class MasterAddEditComponent implements OnInit {
     this.GetListMasterType();
     if (this.type == 'edit') {
       this.refMasterObj.RefMasterId = this.RefMasterId;
-      var getRefMasterUrl = this.settingUrl + URLConstant.GetRefMasterByRefMasterId;
-      this.httpClient.post(getRefMasterUrl, {Id: this.RefMasterId}).subscribe(
+      
+      this.httpClient.post(URLConstant.GetRefMasterByRefMasterId, {Id: this.RefMasterId}).subscribe(
         (response) => {
           this.resultData = response;
           this.RefMasterForm.patchValue({
@@ -100,8 +100,8 @@ export class MasterAddEditComponent implements OnInit {
 
     //MODE-ADD
     if (this.type != 'edit') {
-      var addRefMasterUrl = this.settingUrl + URLConstant.AddRefMaster;
-      this.httpClient.post(addRefMasterUrl, this.refMasterObj).subscribe(
+
+      this.httpClient.post(URLConstant.AddRefMaster, this.refMasterObj).subscribe(
         //SAVE
         (response) => {
           this.toastr.successMessage(response["Message"]);
@@ -114,9 +114,9 @@ export class MasterAddEditComponent implements OnInit {
     }
     //MODE-EDIT
     else {
-      var addRefMasterUrl = this.settingUrl + URLConstant.EditRefMaster;
+
       //SAVE
-      this.httpClient.post(addRefMasterUrl, this.refMasterObj).subscribe(
+      this.httpClient.post(URLConstant.EditRefMaster, this.refMasterObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           //this.location.back();
@@ -132,7 +132,7 @@ export class MasterAddEditComponent implements OnInit {
   }
 
   GetListMasterType() {
-    var url = this.settingUrl + URLConstant.GetListActiveRefMasterType;
+    let url = environment.FoundationR3Url + URLConstant.GetListActiveRefMasterType;
     this.httpClient.post(url, null).subscribe(
       (response) => {
         this.refMasterTypeObj = response;

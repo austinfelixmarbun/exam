@@ -20,10 +20,6 @@ export class ProfessionAddEditComponent implements OnInit {
   refProfessionId: any;
   refProfessionObj: RefProfessionObj;
   resultData: any;
-  getUrl: any;
-  addUrl: any;
-  editUrl: any;
-  getValueCustModel: any;
   allRefProfessionMethod: any;
   refCustModelCode: any;
   RefProfessionForm = this.fb.group({
@@ -35,11 +31,7 @@ export class ProfessionAddEditComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.CS_PROFESSION_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.getUrl = URLConstant.GetRefProfessionById;
-    this.addUrl = URLConstant.AddRefProfession;
-    this.editUrl = URLConstant.EditRefProfession;
-    this.getValueCustModel = URLConstant.GetValueCustModel;
-
+   
 
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
@@ -52,7 +44,7 @@ export class ProfessionAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post(this.getValueCustModel, null).subscribe(
+    this.http.post(URLConstant.GetValueCustModel, null).subscribe(
       (response) => {
         this.allRefProfessionMethod = response[CommonConstant.ReturnObj];
         if (this.allRefProfessionMethod.length > 0) {
@@ -64,7 +56,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.RefProfessionForm.controls["ProfessionCode"].disable();
       this.refProfessionObj = new RefProfessionObj();
       this.refProfessionObj.RefProfessionId = this.refProfessionId;
-      this.http.post(this.getUrl, {Id : this.refProfessionId}).subscribe(
+      this.http.post(URLConstant.GetRefProfessionById, {Id : this.refProfessionId}).subscribe(
         response => {
           this.resultData = response;
           this.RefProfessionForm.patchValue({
@@ -86,7 +78,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.refProfessionObj.ProfessionName = this.RefProfessionForm.controls["ProfessionName"].value;
       this.refProfessionObj.MrCustModelCode = this.RefProfessionForm.controls["MrCustModelCode"].value;
       this.refProfessionObj.RegRptCode = this.RefProfessionForm.controls["RegRptCode"].value;
-      this.http.post(this.addUrl, this.refProfessionObj).subscribe(
+      this.http.post(URLConstant.AddRefProfession, this.refProfessionObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_PROFESSION_PAGING],{});
@@ -98,7 +90,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.refProfessionObj.ProfessionName = this.RefProfessionForm.controls["ProfessionName"].value;
       this.refProfessionObj.MrCustModelCode = this.RefProfessionForm.controls["MrCustModelCode"].value;
       this.refProfessionObj.RegRptCode = this.RefProfessionForm.controls["RegRptCode"].value;
-      this.http.post(this.editUrl, this.refProfessionObj).subscribe(
+      this.http.post(URLConstant.EditRefProfession, this.refProfessionObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_PROFESSION_PAGING],{});
