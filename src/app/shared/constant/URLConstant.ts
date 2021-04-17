@@ -296,7 +296,6 @@ export class URLConstant {
     public static EditHolidaySchmHOnly = "/Holiday/EditHolidaySchmHOnly";
     public static EditHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/EditHolidaySchmH";
     public static EditHolidaySchmD = environment.FoundationR3Url + "/HolidaySchm/EditHolidaySchmD";
-    public static DeleteHolidaySchmH = "/HolidaySchm/DeleteHolidaySchmH";
     public static DeleteHolidaySchmD = "/HolidaySchm/DeleteHolidaySchmD";
     public static GetHolidayDetailPaging = "/Holiday/GetHolidayDetailPaging";
     public static CopyHolidaySchmH = environment.FoundationR3Url + "/HolidaySchm/CopyHolidaySchmH";
@@ -386,8 +385,6 @@ export class URLConstant {
     public static EditWorkingHourSchmH = environment.FoundationR3Url + "/WorkingHourSchm/EditWorkingHourSchmH";
     public static GetWorkingHourSchmH = "/WorkHour/GetWorkingHourSchmH";
     public static GetWorkingHourSchmD = "/WorkHour/GetWorkingHourSchmD";
-    public static DeleteWorkingHourSchmH = "/WorkHour/DeleteWorkingHourSchmH";
-    public static DeleteWorkingHourSchm = "/WorkingHourSchm/DeleteWorkingHourSchmH";
     public static GetWorkingHourSchmHById = environment.FoundationR3Url + "/WorkingHourSchm/GetWorkingHourSchmHById";
     public static GetListWorkingHourSchmDByWorkingHourHId = environment.FoundationR3Url + "/WorkingHourSchm/GetListWorkingHourSchmDByWorkingHourHId";
 
