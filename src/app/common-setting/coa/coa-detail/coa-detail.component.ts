@@ -254,7 +254,6 @@ export class CoaDetailComponent implements OnInit {
           }
         );
 
-<<<<<<< HEAD
         for (let j = 0; j < this.ListPaymentAlloc.length; j++) {
           var coa = new Array<any>();
           coa = [
@@ -266,15 +265,6 @@ export class CoaDetailComponent implements OnInit {
           ];
           this.ListCOA.push({ coa });
           this.ListCoa().push(this.newCoa());
-=======
-    }else if(this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypeSuppl){
-      await this.http.post<any>(URLConstant.GetListKeyValueRefPaymentAllocByPayAllocGrpCode, {Code: this.entitySelect}).toPromise().then(
-        (response: any) => {
-          this.ListPaymentAlloc = response.ReturnObject
-        },
-        (error) => {
-          console.log(error)
->>>>>>> 7bfdd77da3475791003d281b49a551f942ee4251
         }
 
       } else {
