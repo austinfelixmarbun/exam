@@ -56,7 +56,14 @@ const routes: Routes = [
         data: {
           title: 'Surveyor Paging'
         }
-      },      
+      },   
+      {
+        path: PathConstant.SURVEYOR_ADD,
+        component: SurveyorAddComponent,
+        data: {
+          title: 'Surveyor Add'
+        }
+      },     
       {
         path: PathConstant.SURVEYOR_TASK_ASSIGNMENT_PAGING,
         component: SurveyorTaskAssignmentPagingComponent,
