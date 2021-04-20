@@ -275,6 +275,18 @@ export class NavigationConstant {
     public static FEE = "/" + PathConstant.LR_FEE; //'/Fee'
     public static FEE_PAGING = "/" + PathConstant.LR_FEE + "/" + PathConstant.PAGING; //'/Fee/Paging'
     public static FEE_ADD = "/" + PathConstant.LR_FEE + "/" + PathConstant.ADD; //'/Fee/Add'
+    //#endregion
+
+    //#region 
+    public static SURVEYOR = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR //'Surveyor'
+    public static SURVEYOR_PAGING = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR + "/" + PathConstant.PAGING   //'/Surveyor/Paging
+    public static SURVEYOR_ADD = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR + "/" + PathConstant.ADD
+    //#endregion
+
+    //#region 
+    public static SURVEY_TASK_ASSIGNMENT = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR_TASK_ASSIGNMENT;
+    public static SURVEY_TASK_ASSIGNMENT_PAGING = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.PAGING;
+    public static SURVEY_TASK_ASSIGNMENT_DETAIL = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.DETAIL;
     
     //#region Cust
     public static CUST_PERSONAL_MAIN_INFO = '..' + "/" + PathConstant.CUST_PERSONAL_MAIN_INFO; //'../CustomerPersonal/MainInfo'
@@ -308,5 +320,16 @@ export class NavigationConstant {
     public static DOC_MNGMNT_CABINET_ADD_EDIT = "/" + PathConstant.LR_DOC_MNGMNT + "/" + PathConstant.CABINET_ADD_EDIT; //'/DocumentManagement/Cabinet/AddEdit'
     public static DOC_MNGMNT_VIEW_RACK = "/" + PathConstant.LR_DOC_MNGMNT + "/" + PathConstant.VIEW_RACK; //'/DocumentManagement/ViewRack'
     public static DOC_MNGMNT_VIEW_CABINET = "/" + PathConstant.CR_DOC_MNGMNT_VIEW + "/" + PathConstant.VIEW_CABINET; //'//DocumentManagementView/ViewCabinet'
+    //#endregion
+
+    //#region JOURNAL
+    public static JOURNAL_MEDIA_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_MEDIA_PAGING;
+    public static JOURNAL_MEDIA_DETAIL = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_MEDIA_DETAIL;
+    public static JOURNAL_MEDIA_HEADER_FACT = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_MEDIA_HEADER_FACT;
+    public static JOURNAL_MEDIA_GROUP = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_MEDIA_GROUP;
+    public static JOURNAL_MEDIA_GROUP_FACT = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_MEDIA_GROUP_FACT;
+    public static JOURNAL_MEDIA_GROUP_ITEM_VALUE = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_MEDIA_GROUP_ITEM_VALUE;
+    public static JOURNAL_RESULT = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_RESULT;
+    public static FAILED_JOURNAL_RESULT_LIST_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.FAILED_JOURNAL_RESULT_LIST_PAGING;
     //#endregion
 }

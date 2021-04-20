@@ -36,4 +36,8 @@ export class AdInsConstant {
   public static submitNCProspect = "/api/MobileProspectTask/submitNCProspect";
   public static addCustPersonal = "";
   public static FormDefault = "dashboard/dash-board";
+
+  //#region 
+  public static RefMasterTypeCodeJournalHeaderFactType = "H_FACT_TYPE";
+  //#endregion
 }

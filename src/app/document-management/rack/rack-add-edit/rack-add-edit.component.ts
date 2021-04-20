@@ -25,7 +25,7 @@ export class RackAddEditComponent implements OnInit {
   RackForm = this.fb.group({
     RackCode: ['', [Validators.required, Validators.maxLength(50)]],
     RackName: ['', [Validators.required, Validators.maxLength(100)]],
-    RackInformation: [''],
+    RackInformation: ['', Validators.maxLength(4000)],
     IsActive: [true]
   });
   

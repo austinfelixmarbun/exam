@@ -1,0 +1,77 @@
+{
+    "component": [
+        {
+            "type": "textbox",
+            "name": "RE.EMP_NAME",
+            "id": "EmpNameId",
+            "value": "",
+            "label": "Surveyor Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "RE.EMP_NO",
+            "id": "EmpNoId",
+            "value": "",
+            "label": "Employee No",
+            "placeholder": "Placeholder"
+        }         
+    ],
+    "querystring": {
+        "name": "lookupSurveyorForSurveyTask"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "SURVEYOR NAME",
+            "name": "RE.EMP_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "OFFICE ID",
+            "name": "RO.REF_OFFICE_ID"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "EMPLOYEE NO",
+            "name": "RE.EMP_NO"
+        },        
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Select"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "SurveyorName"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "RefOfficeId"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "EmployeeNo"
+        },        
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "SurveyorName"
+                }
+            ]
+        }
+    ],
+    "propertyId": "RefUserId",
+    "propertyName": "SurveyorName"  
+}

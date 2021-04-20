@@ -26,6 +26,7 @@ export class PathConstant {
     public static LR_SRVY = "Survey";
     public static LR_INTEGRATION = "Integration";
     public static LR_DOC_MNGMNT = "DocumentManagement";
+    public static LR_JOURNAL = "journal"
     public static LR_FEE = "Fee";
     //#endregion
 
@@ -325,6 +326,18 @@ export class PathConstant {
     public static VIEW_ORDER_EXT = "ViewOrderExternal";
     //#endregion
 
+    //#region 
+    public static SURVEYOR = "Surveyor";
+    public static SURVEYOR_PAGING = PathConstant.SURVEYOR + "/" + PathConstant.PAGING
+    public static SURVEYOR_ADD = PathConstant.SURVEYOR + "/" + PathConstant.ADD    
+    //#endregion
+
+    //#region 
+    public static SURVEYOR_TASK_ASSIGNMENT = "SurveyTaskAssignment";
+    public static SURVEYOR_TASK_ASSIGNMENT_PAGING = PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.PAGING;
+    public static SURVEYOR_TASK_ASSIGNMENT_DETAIL = PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.DETAIL;
+    //#endregion
+
     //#region System-Setting-Module
     public static NOTIF = "Notification";
     public static NOTIF_DETAIL = PathConstant.NOTIF + "/" + PathConstant.DETAIL;
@@ -463,5 +476,22 @@ export class PathConstant {
     public static VIEW_CUST_GRP = "CustomerGroup";
     public static VIEW_CUST_DOC = "CustDocument";
     public static VIEW_CUST_OTH_INFO = "CustOthInfo";
+    //#endregion
+
+     //#region JOURNAL
+    public static JOURNAL_MEDIA = "journalmedia"
+    public static JOURNAL_RESULT = "journalresult"
+    public static HEADER = "header"
+    public static FACT = "fact"
+    public static ITEM_VALUE = "itemvalue"
+    public static FAILED_JOURNAL_RESULT_LIST = "failedjournalresultlist"
+
+    public static JOURNAL_MEDIA_PAGING = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.PAGING
+    public static JOURNAL_MEDIA_DETAIL = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.DETAIL
+    public static JOURNAL_MEDIA_HEADER_FACT = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.HEADER + PathConstant.FACT
+    public static JOURNAL_MEDIA_GROUP = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.GROUP
+    public static JOURNAL_MEDIA_GROUP_FACT = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.GROUP + "/" + PathConstant.FACT
+    public static JOURNAL_MEDIA_GROUP_ITEM_VALUE = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.GROUP + '/' + PathConstant.ITEM_VALUE
+    public static FAILED_JOURNAL_RESULT_LIST_PAGING = PathConstant.FAILED_JOURNAL_RESULT_LIST + "/" + PathConstant.PAGING
     //#endregion
 }

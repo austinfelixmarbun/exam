@@ -1,0 +1,66 @@
+{
+    "component": [
+        {
+            "type": "textbox",
+            "name": "RO.OFFICE_CODE",
+            "id": "OfficeCodeId",
+            "value": "",
+            "label": "Office Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "RO.OFFICE_NAME",
+            "id": "OfficeNameId",
+            "value": "",
+            "label": "Office Name",
+            "placeholder": "Placeholder"
+        }         
+    ],
+    "querystring": {
+        "name": "lookupOfficeSrvyGrp"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "OFFICE CODE",
+            "name": "RO.OFFICE_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "OFFICE NAME",
+            "name": "RO.OFFICE_NAME"
+        },        
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Select"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "OfficeCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "OfficeName"
+        },        
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "OfficeCode"
+                }
+            ]
+        }
+    ],
+    "propertyId": "RefOfficeId",
+    "propertyName": "OfficeCode"  
+}

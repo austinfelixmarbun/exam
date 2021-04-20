@@ -60,12 +60,7 @@
             "position": "center",
             "label": "ACTIVE STATUS",
             "name": "IsActive"
-        },
-        {
-            "type": "label",
-            "position": "center",
-            "label": "Member"
-        },
+        },        
         {
             "type": "label",
             "position": "center",
@@ -87,18 +82,7 @@
             "type": "boolean",
             "position": "center",
             "property": "IsActive"
-        },
-        {
-            "type": "action",
-            "position": "center",            
-            "action":[
-                {
-                    "type": "select",
-                    "property": "FeeCode",
-                    "icon": "ft-users"
-                }
-            ]
-        },
+        },        
         {
             "type": "action",
             "position": "center",

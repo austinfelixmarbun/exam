@@ -23,7 +23,7 @@ export class CabinetAddEditComponent implements OnInit {
   CabinetForm = this.fb.group({
     CabinetCode: ['', [Validators.required, Validators.maxLength(50)]],
     CabinetName: ['', [Validators.required, Validators.maxLength(100)]],
-    CabinetInfo: ['', [Validators.required, Validators.maxLength(4000)]],
+    CabinetInfo: ['', Validators.maxLength(4000)],
     IsActive: [true]
   });
 
