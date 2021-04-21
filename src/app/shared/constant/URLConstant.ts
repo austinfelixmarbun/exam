@@ -975,6 +975,7 @@ export class URLConstant {
     // COA Scheme
     public static GetCoaSchmByCoaSchmId = environment.FoundationR3Url + "/CoaSchm/GetCoaSchmByCoaSchmId";
     public static SubmitCoaSchm = environment.FoundationR3Url + "/CoaSchm/SubmitCoaSchm";
+    public static GetListCoaSchm = environment.FoundationR3Url + "/CoaSchm/GetListCoaSchm";
 
     // View Cabinet, Rack, FIling
     public static GetListRackByCabinetCode = environment.FoundationR3Url + "/ViewDocument/GetListRackByCabinetCode";
