@@ -50,7 +50,7 @@
                 <label class="col-md-3" translate>Copy</label>
                 <div class="col-md-3">
                   <div class="input-group mb-0">
-                    <select class="form-control">
+                    <select class="form-control" #coaSchmSelect>
                       <option value="">-Select One-</option>
                       <option *ngFor="let item of ListCopy" [value]="item.Key">
                         {{item.Value}}
@@ -59,7 +59,7 @@
 
                     <div class="input-group-append">
                       <span class="input-group-btn">
-                        <button class="btn btn-raised btn-primary" type="button" (click)="copy()">
+                        <button class="btn btn-raised btn-primary" type="button" (click)="copy(coaSchmSelect)">
                           <i class="fa fa-check-square-o"></i>Copy
                         </button>
                       </span>
@@ -72,7 +72,7 @@
                 <div class="col-md-3">
                   <div class="input-group mb-0">
                     <select class="form-control" #currselect>
-                      <option disabled>-Select One-</option>
+                      <option disabled [value]="null">-Select One-</option>
                       <option *ngFor="let item of ListCurr" [value]="item.Key">
                         {{item.Value}}
                       </option>
@@ -103,7 +103,7 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody *ngIf="this.isTableReady">
                     <tr *ngFor="let item of ListPaymentAlloc; let i = index" formArrayName = "ListCoa">
                       <ng-container  [formGroupName]="i">
                       <td class="align-center">{{i+1}}</td>

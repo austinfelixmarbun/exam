@@ -1,6 +1,6 @@
 {
     "title": "Family",
-    "exportExcel": true,
+    "exportExcel": false,
     "component": [
         {
             "type": "textbox",
