@@ -18,6 +18,8 @@ export class SurveyOrderViewComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   readonly ViewLink: string = NavigationConstant.VIEW_SRVY_TASK;
+  readonly ViewCust: string = NavigationConstant.VIEW_CUST_PERSONAL_DETAIL;
+  
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
       if (params["SrvyOrderId"] != null) {
@@ -31,8 +33,9 @@ export class SurveyOrderViewComponent implements OnInit {
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     
-    this.http.post(URLConstant.GetListSrvyTaskBySrvyOrderId, {Id : this.SrvyOrderId}).subscribe(
+    this.http.post(URLConstant.GetListSrvyTaskBySrvyOrderIdForView, {Id : this.SrvyOrderId}).subscribe(
       response => {
+        console.log(response);
         this.TaskList = response[CommonConstant.ReturnObj];
       }
     );
