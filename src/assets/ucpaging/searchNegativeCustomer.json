@@ -1,5 +1,6 @@
 {
     "title": "Negative Customer",
+    "exportExcel": false,
     "component": [
         {
             "type": "textbox",
