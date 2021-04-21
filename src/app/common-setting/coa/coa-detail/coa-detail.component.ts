@@ -172,16 +172,13 @@ export class CoaDetailComponent implements OnInit {
     }
     this.http.post(URLConstant.SubmitListCoa, RequestListRefCoa).subscribe(
       (response) => {
-        this.router.navigate(['/CommonSetting/coascheme/paging']);
+        this.router.navigate([NavigationConstant.CS_COA_PAGING]);
         this.toastr.successMessage(response["Message"]);
       },
       (error) => {
         this.toastr.typeErrorCustom(error);
       }
     );
-
-    this.toastr.successMessage('Success');
-    this.router.navigate([NavigationConstant.CS_COA_PAGING]);
   }
 
   async Show(ev: HTMLInputElement) {

@@ -7,7 +7,8 @@
 
     <div class="card-body">
       <div class="px-3">
-        <form class="form form-horizontal"  [formGroup]="CoaForm" (ngSubmit)="CoaForm.valid && Submit()" #enjiForm="ngForm">
+        <form class="form form-horizontal" [formGroup]="CoaForm" (ngSubmit)="CoaForm.valid && Submit()"
+          #enjiForm="ngForm">
           <div class="form-body">
 
             <lib-ucSubsection [id]="'EntityTypeInfoId'" [title]="'Entity Type Information'" [panel]="'EntityTypeInfo'">
@@ -18,13 +19,13 @@
                 <label class="col-md-3" translate>Entity Type</label>
                 <div class="col-md-3">
                   <div class="input-group mb-0">
-                    <select class="form-control"  #entityselect>
+                    <select class="form-control" #entityselect>
                       <option value="">-Select One-</option>
                       <option *ngFor="let item of entityTypeList" [value]="item.Key">
                         {{item.Value}}
                       </option>
                     </select>
-                    
+
                     <div class="input-group-append">
                       <span class="input-group-btn">
                         <button class="btn btn-raised btn-primary" type="button" (click)="Show(entityselect)">
@@ -44,7 +45,7 @@
               <div id='CurrInfo'>
 
                 <div class="form-group row">
-                  <label class="col-md-3" translate>Currence Code</label>
+                  <label class="col-md-3" translate>Currency Code</label>
                   <div class="col-md-3">
                     <div class="input-group mb-0">
                       <select class="form-control" #currselect>
@@ -93,32 +94,19 @@
                       </tr>
                     </thead>
                     <tbody>
-                      
-                    <!-- <tr *ngFor="let item of ListPaymentAlloc; let i = index" formArrayName = "ListCoa">
-                      <ng-container  [formGroupName]="i">
-                      <td class="align-center">{{i+1}}</td>
-                      <td class="text-left">{{item.Value}}</td>
-                      <ng-container formArrayName = "DataCOA">
-                        <td class="text-center" *ngFor="let currs of ListSelectedCurr; let x = index" [formGroupName]="x">
-                          <input type="text" class="form-control" formControlName="COA"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && CoaSchemeForm.controls.ListCoa['controls'][i]['controls'].DataCOA['controls'][x]['controls'].COA.invalid }"
-                          >
-                        </td>
-                      </ng-container>
-                    </ng-container>
-                    </tr> -->
-                      <tr *ngFor="let item of ListCOA; let i = index" formArrayName = "ListCoa">
+                      <tr *ngFor="let item of ListCOA; let i = index" formArrayName="ListCoa">
                         <ng-container [formGroupName]="i">
-                        <td class="align-center" >{{i+1}}</td>
-                        <td class="text-left">{{item.coa[0].EntityType}}</td>
-                        <td class="text-left">{{item.coa[0].PaymentAllocCode}}</td>
-                        <td class="text-left">{{item.coa[0].EntityCode}}</td>
-                        <ng-container formArrayName = "DataCOA">
-                        <td class="text-center" *ngFor="let currs of ListCurr; let x = index" [formGroupName]="x">
-                          <input type="text" class="form-control"  formControlName="COA">
-                        </td>
+                          <td class="text-center">{{i+1}}</td>
+                          <td class="text-left">{{item.coa[0].EntityType}}</td>
+                          <td class="text-left">{{item.coa[0].PaymentAllocCode}}</td>
+                          <td class="text-left">{{item.coa[0].EntityCode}}</td>
+                          <ng-container formArrayName="DataCOA">
+                            <td class="text-center" *ngFor="let currs of ListCurr; let x = index" [formGroupName]="x">
+                              <input type="text" class="form-control" formControlName="COA"
+                                [ngClass]="{ 'is-invalid': enjiForm.submitted && CoaForm.controls.ListCoa['controls'][i]['controls'].DataCOA['controls'][x]['controls'].COA.invalid }">
+                            </td>
                           </ng-container>
-                      </ng-container>
+                        </ng-container>
                       </tr>
                     </tbody>
                   </table>
@@ -133,14 +121,12 @@
             <button type="button" [routerLink]="[CancelLink]" class="btn btn-raised btn-warning mr-1" translate>
               <i class="fa fa-arrow-circle-left"></i> Back
             </button>
-            <button type="submit" class="btn btn-raised btn-primary" translate>
-              <i class="far"></i> Submit
-            </button>
+            <button type="submit" class="btn btn-raised btn-primary" translate>Submit</button>
           </div>
 
         </form>
       </div>
     </div>
-    
+
   </div>
 </div>
