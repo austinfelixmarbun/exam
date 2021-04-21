@@ -307,11 +307,10 @@ export class URLConstant {
     public static SendNotificationRemainingPasswordExpirationDaysToUser = environment.FoundationR3Url + "/Notification/SendNotificationRemainingPasswordExpirationDaysToUser";
     public static NotificationPost = "/Message/Post";
     public static NotificationSignalR = "/notification";
-    public static GetNotificationHByNotificationHId = "/NotificationH/GetNotificationHByNotificationHId";
+    public static GetNotificationHByNotificationHId = environment.FoundationR3Url + "/NotificationH/GetNotificationHByNotificationHId";
     public static GetListUsernameAndEmpNameByNotificationHId = "/NotificationD/GetListUsernameAndEmpNameByNotificationHId"
     public static AddNotificationHAndD = "/NotificationH/AddNotificationHAndD"
-    public static EditNotificationH = "/NotificationH/EditNotificationH"
-    public static DeleteNotificationD = "/NotificationD/DeleteNotificationD"
+    public static EditNotificationH = environment.FoundationR3Url + "/NotificationH/EditNotificationH"
     public static UpdateReadNotification = environment.FoundationR3Url + "/NotificationD/UpdateReadNotificationD";
     public static GetListNotificationHByRefUserId = environment.FoundationR3Url + "/NotificationH/GetListNotificationHByRefUserId";
 
@@ -591,7 +590,7 @@ export class URLConstant {
     // VENDOR GROUP MEMBER 
     public static GetListVendorGrpMbrByVendorGrpId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorGrpId";
     public static GetListVendorGrpMbrByVendorId = environment.FoundationR3Url + "/VendorGrpMbr/GetListVendorGrpMbrByVendorId";
-    public static AddVendorGrpMbr = environment.FoundationR3Url + "/VendorGrpMbr/AddVendorGrpMbr";
+    public static AddRangeVendorGrpMbr = environment.FoundationR3Url + "/VendorGrpMbr/AddRangeVendorGrpMbr";
     public static DeleteVendorGrpMemberById = "/VendorGrpMbr/DeleteVendorGrpMbrById"
 
     // VENDOR BRANCH
@@ -876,7 +875,7 @@ export class URLConstant {
     public static GetRefScoreCategoryTypeWithDetailById = environment.FoundationR3Url + "/ScoreCategorySchmH/GetScoreCategorySchmHWithDetailById";
 
     // REF SCORE CATEGORY
-    public static AddRangeAndDeleteScoreCategorySchmD = environment.FoundationR3Url + "/ScoreCategorySchmD/AddRangeAndDeleteScoreCategorySchmD";
+    public static AddRangeScoreCategorySchmD = environment.FoundationR3Url + "/ScoreCategorySchmD/AddRangeScoreCategorySchmD";
 
     // Authentication
     public static RequestNewPassword = environment.FoundationR3Url + "/Authenticate/RequestNewPassword";
@@ -983,6 +982,9 @@ export class URLConstant {
     public static GetListKvpActiveRefCurr = environment.FoundationR3Url + "/RefCurr/GetListKvpActiveRefCurr";
     public static GetOfficeBankAccByOfficeBankAccId = environment.FoundationR3Url + "/OfficeBankAcc/GetOfficeBankAccByOfficeBankAccId";
     public static SubmitOfficeBankAcc = environment.FoundationR3Url + "/OfficeBankAcc/SubmitOfficeBankAcc";
+    public static AddOfficeBankAcc = environment.FoundationR3Url + "/OfficeBankAcc/AddOfficeBankAcc";
+    public static EditOfficeBankAcc = environment.FoundationR3Url + "/OfficeBankAcc/EditOfficeBankAcc";
+    public static EditDetailOfficeBankAcc = environment.FoundationR3Url + "/OfficeBankAcc/EditDetailOfficeBankAcc";
 
     //SYS CONFIG
     public static GetSysConfigPncplResultByCode = environment.FoundationR3Url + "/SysConfigResult/GetSysConfigPncplResultByCode";
