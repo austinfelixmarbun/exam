@@ -29,7 +29,7 @@
                     <div class="input-group-append">
                       <span class="input-group-btn">
                         <button class="btn btn-raised btn-primary" type="button" (click)="Show(entityselect)">
-                          <i class="fa fa-check-square-o"></i>Show
+                          <em class="fa fa-check-square-o"></em>Show
                         </button>
                       </span>
                     </div>
@@ -58,7 +58,7 @@
                       <div class="input-group-append">
                         <span class="input-group-btn">
                           <button class="btn btn-raised btn-primary" type="button" (click)="Add(currselect)">
-                            <i class="fa fa-check-square-o"></i>Add
+                            <em class="fa fa-check-square-o"></em>Add
                           </button>
                         </span>
                       </div>
@@ -74,21 +74,22 @@
 
                 <div class="table-responsive">
                   <table class="table table-responsive-md text-center table-hover">
+                    <caption></caption>
                     <thead>
                       <tr class="table-header">
-                        <th>
+                        <th id="no">
                           <span class="thead-header" translate>No</span>
                         </th>
-                        <th>
+                        <th id="entitytype">
                           <span class="thead-header" translate>Entity Type</span>
                         </th>
-                        <th>
+                        <th id="payalloccode">
                           <span class="thead-header" translate>Payment Allocation Code</span>
                         </th>
-                        <th>
+                        <th id="entitycode">
                           <span class="thead-header" translate>Entity Code</span>
                         </th>
-                        <th *ngFor="let item of colHeadTable;">
+                        <th id="i" *ngFor="let item of colHeadTable; let i = index">
                           <span class="thead-header" translate>{{item.newHead}}</span>
                         </th>
                       </tr>
@@ -102,8 +103,7 @@
                           <td class="text-left">{{item.coa[0].EntityCode}}</td>
                           <ng-container formArrayName="DataCOA">
                             <td class="text-center" *ngFor="let currs of ListCurr; let x = index" [formGroupName]="x">
-                              <input type="text" class="form-control" formControlName="COA"
-                                [ngClass]="{ 'is-invalid': enjiForm.submitted && CoaForm.controls.ListCoa['controls'][i]['controls'].DataCOA['controls'][x]['controls'].COA.invalid }">
+                              <input type="text" class="form-control" formControlName="COA">
                             </td>
                           </ng-container>
                         </ng-container>
@@ -119,7 +119,7 @@
 
           <div class="form-actions right">
             <button type="button" [routerLink]="[CancelLink]" class="btn btn-raised btn-warning mr-1" translate>
-              <i class="fa fa-arrow-circle-left"></i> Back
+              <em class="fa fa-arrow-circle-left"></em> Back
             </button>
             <button type="submit" class="btn btn-raised btn-primary" translate>Submit</button>
           </div>

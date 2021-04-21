@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -10,8 +9,9 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { RefCoaObj } from 'app/shared/model/common-setting/RefCoaObj.Model';
-import { FormBuilder, Validators, FormArray, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-coa-detail',
@@ -33,9 +33,6 @@ export class CoaDetailComponent implements OnInit {
   mode: string = "";
   coaId: string = "";
   CoaForm = this.fb.group({
-    SchemeCode: [''],
-    SchemeName: [''],
-    IsActive: [false],
     ListCoa: this.fb.array([])
   });
   Shows: boolean = false;
@@ -263,8 +260,6 @@ export class CoaDetailComponent implements OnInit {
           this.ListCOA.push({ coa });
           this.ListCoa().push(this.newCoa());
         }
-
-      } else {
 
       }
       this.Shows = true;
