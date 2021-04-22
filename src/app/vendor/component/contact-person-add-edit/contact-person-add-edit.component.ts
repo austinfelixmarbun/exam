@@ -2,7 +2,6 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { formatDate } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -36,11 +35,11 @@ export class ContactPersonAddEditComponent implements OnInit {
     Email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
     JoinDt: ['', Validators.required],
     IsOwner: [false],
-    Addr: ['', Validators.required],
-    AreaCode2: [{ value: '', disabled: true }, Validators.required],
-    AreaCode1: [{ value: '', disabled: true }, Validators.required],
-    City: [{ value: '', disabled: true }, Validators.required],
-    ProvDistrictName: [{ value: '', disabled: true }, Validators.required]
+    Addr: [''],
+    AreaCode2: [{ value: '', disabled: true }],
+    AreaCode1: [{ value: '', disabled: true }],
+    City: [{ value: '', disabled: true }],
+    ProvDistrictName: [{ value: '', disabled: true }]
   })
   inputZipcodeLookupObj: InputLookupObj = new InputLookupObj();
 
@@ -81,6 +80,7 @@ export class ContactPersonAddEditComponent implements OnInit {
     this.inputZipcodeLookupObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputZipcodeLookupObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputZipcodeLookupObj.isReadonly = false;
+    this.inputZipcodeLookupObj.isRequired = false;
 
     if (this.mode == "edit") {
       var contactPerson = new VendorContactPersonObj();
