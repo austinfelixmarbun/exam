@@ -62,7 +62,6 @@ export class ProductHOApprovalComponent implements OnInit {
   }
 
   CallBackHandler(ev) {
-    console.log('richard');
     var ApvReqObj = new ApprovalObj();
   if(ev.Key == "Process"){
       if(ev.RowObj.IsRoleAssignment){
