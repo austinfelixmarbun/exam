@@ -2,7 +2,6 @@ import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { NumberValueAccessor } from '@angular/forms/src/directives';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -13,11 +12,9 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { SrvyTaskObj } from 'app/shared/model/SrvyTaskObj.Model';
-import { UcViewGenericObj, WhereValueObj } from 'app/shared/model/UcViewGenericObj.model';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
-import { zip } from 'rxjs';
 
 @Component({
   selector: 'app-survey-task-assignment-detail',
@@ -75,13 +72,9 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   ngOnInit() {
 
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyOrder.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.getDropdown();
     this.getSurveyTaskListData();
-
-
-
   }
 
   async getSurveyTaskListData() {
@@ -208,8 +201,6 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
     this.refOfficeId = currentUserContext['OfficeId'];
     this.InputLookupSurveyorObj = new InputLookupObj();
     this.InputLookupSurveyorObj.urlJson = "./assets/lookup/lookupSurveyorForSurveyTask.json";
-    this.InputLookupSurveyorObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.InputLookupSurveyorObj.urlEnviPaging = environment.FoundationR3Url;
     this.InputLookupSurveyorObj.pagingJson = "./assets/lookup/lookupSurveyorForSurveyTask.json";
     this.InputLookupSurveyorObj.genericJson = "./assets/lookup/lookupSurveyorForSurveyTask.json";
     this.InputLookupSurveyorObj.isRequired = true;
