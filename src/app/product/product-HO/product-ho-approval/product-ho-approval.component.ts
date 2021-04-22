@@ -43,31 +43,45 @@ export class ProductHOApprovalComponent implements OnInit {
     critObj.value = 'PRD_HO_APV';
     this.arrCrit.push(critObj);
 
-    critObj = new CriteriaObj();
-    critObj.DataType = 'text';
-    critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.propName = 'CURRENT_USER_ID';
-    critObj.value = this.userContext.UserName;
-    this.arrCrit.push(critObj);
+    // critObj = new CriteriaObj();
+    // critObj.DataType = 'text';
+    // critObj.restriction = AdInsConstant.RestrictionEq;
+    // critObj.propName = 'CURRENT_USER_ID';
+    // critObj.value = this.userContext.UserName;
+    // this.arrCrit.push(critObj);
 
 
-    critObj = new CriteriaObj();
-    critObj.DataType = 'text';
-    critObj.restriction = AdInsConstant.RestrictionOr;
-    critObj.propName = 'MAIN_USER_ID';
-    critObj.value = this.userContext.UserName;
-    this.arrCrit.push(critObj);
+    // critObj = new CriteriaObj();
+    // critObj.DataType = 'text';
+    // critObj.restriction = AdInsConstant.RestrictionOr;
+    // critObj.propName = 'MAIN_USER_ID';
+    // critObj.value = this.userContext.UserName;
+    // this.arrCrit.push(critObj);
 
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
 
   CallBackHandler(ev) {
+    console.log('richard');
     var ApvReqObj = new ApprovalObj();
-    if (ev.Key == "Process") {
-      if (String.Format("{0:L}", ev.RowObj.CURRENT_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
-        this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_PROCESS_TASK);
-      } else {
-        AdInsHelper.RedirectUrl(this.router,["/Product/HOApproval/Detail"],{ "ProdHId": ev.RowObj.ProdHId, "TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId  });
+  if(ev.Key == "Process"){
+      if(ev.RowObj.IsRoleAssignment){
+        if(ev.RowObj.RoleAssignmentCode == this.userContext.RoleCode){
+          AdInsHelper.RedirectUrl(this.router,["/Product/HOApproval/Detail"],{ "ProdHId": ev.RowObj.ProdHId, "TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId  });
+        }else{
+          this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_PROCESS_TASK);
+        }
+      }else{
+        if(ev.RowObj.CURRENT_USER_ID == this.userContext.UserName && ev.RowObj.MAIN_USER_ID == this.userContext.UserName)
+        {
+          if (String.Format("{0:L}", ev.RowObj.CURRENT_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
+            this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_PROCESS_TASK);
+          } else {
+            AdInsHelper.RedirectUrl(this.router,["/Product/HOApproval/Detail"],{ "ProdHId": ev.RowObj.ProdHId, "TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId  });
+          }
+        }else{
+          AdInsHelper.RedirectUrl(this.router,["/Product/HOApproval/Detail"],{ "ProdHId": ev.RowObj.ProdHId, "TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId  });
+        }
       }
     }
     else if (ev.Key == "HoldTask") {
