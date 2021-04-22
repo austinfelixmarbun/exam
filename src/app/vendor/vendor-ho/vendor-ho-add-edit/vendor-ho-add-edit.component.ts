@@ -17,7 +17,7 @@ import { VendorAttrContentObj } from 'app/shared/model/VendorAttrContentObj.Mode
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ResponseIdGenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { GenericObj} from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-vendor-ho-add-edit',
@@ -660,7 +660,7 @@ export class VendorHoAddEditComponent implements OnInit {
         this.vendorHoObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
         this.vendorHoObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
-        this.http.post<ResponseIdGenericObj>(URLConstant.EditVendorHO, this.vendorHoObj).subscribe(
+        this.http.post<GenericObj>(URLConstant.EditVendorHO, this.vendorHoObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HO_REG],{ "VendorId": response.Id, "mode": "edit" });
@@ -669,7 +669,7 @@ export class VendorHoAddEditComponent implements OnInit {
       else {
         this.vendorHoObj.VendorObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
 
-        this.http.post<ResponseIdGenericObj>(URLConstant.AddVendorHO, this.vendorHoObj).subscribe(
+        this.http.post<GenericObj>(URLConstant.AddVendorHO, this.vendorHoObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HO_REG],{ "VendorId": response.Id  });

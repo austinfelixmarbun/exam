@@ -108,7 +108,7 @@ export class VendorGroupmemberComponent implements OnInit {
       VendorId: this.listSelectedId
     }
 
-    this.http.post(URLConstant.AddVendorGrpMbr, obj).subscribe(
+    this.http.post(URLConstant.AddRangeVendorGrpMbr, obj).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_GRP_VIEW],{ "VendorGrpId": this.VendorGrpId, "MrVendorCategoryCode": this.MrVendorCategoryCode });

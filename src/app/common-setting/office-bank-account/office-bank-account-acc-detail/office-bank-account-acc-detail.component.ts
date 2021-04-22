@@ -119,7 +119,7 @@ export class OfficeBankAccountAccDetailComponent implements OnInit {
     this.OfficeBankAccObj.BankPhnExt2 = this.AccDetailForm.value.UcAddress.PhnExt2;
     this.OfficeBankAccObj.RowVersion = "";
 
-    this.http.post(URLConstant.SubmitOfficeBankAcc, this.OfficeBankAccObj).subscribe(
+    this.http.post(URLConstant.EditDetailOfficeBankAcc, this.OfficeBankAccObj).subscribe(
       (response) => {
         this.toastr.successMessage("Update Account Detail Success!");
         this.router.navigateByUrl(NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING);

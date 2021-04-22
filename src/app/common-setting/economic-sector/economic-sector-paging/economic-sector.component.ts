@@ -21,6 +21,5 @@ export class EconomicSectorComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchEconomicSector.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefEconomicSector;
   }
 }

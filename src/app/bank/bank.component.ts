@@ -19,7 +19,6 @@ export class BankComponent implements OnInit {
     this.inputPagingObj._url = "./assets/ucpaging/searchBank.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputPagingObj.deleteUrl = "/RefBank/DeleteRefBank";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBank.json";
   }
 

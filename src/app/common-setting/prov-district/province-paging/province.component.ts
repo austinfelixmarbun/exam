@@ -27,7 +27,7 @@ export class ProvinceComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchProvince.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefProvDistrict;
+ 
 
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
