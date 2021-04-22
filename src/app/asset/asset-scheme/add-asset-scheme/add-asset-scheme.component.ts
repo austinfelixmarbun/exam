@@ -57,7 +57,6 @@ export class AddAssetSchemeComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewAssetSchemeMember.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/assetSchmMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;

@@ -18,7 +18,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 @Component({
   selector: 'app-org-mdl-struc-paging',
   templateUrl: './org-mdl-struc-paging.component.html',
-  providers: [NGXToastrService, NGXToastrService, ExcelService, DecimalPipe]
+  providers: [ExcelService, DecimalPipe]
 })
 export class OrgMdlStrucPagingComponent implements OnInit {
 

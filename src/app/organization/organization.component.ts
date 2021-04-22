@@ -15,7 +15,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 @Component({
   selector: 'app-organization',
   templateUrl: './organization.component.html',
-  providers: [NgbPaginationConfig, NGXToastrService, DecimalPipe]
+  providers: [NgbPaginationConfig, DecimalPipe]
 })
 export class OrganizationComponent implements OnInit {
 

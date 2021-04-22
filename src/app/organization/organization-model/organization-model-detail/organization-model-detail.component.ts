@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -15,8 +14,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-organization-model-detail',
-  templateUrl: './organization-model-detail.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './organization-model-detail.component.html'
 })
 export class OrganizationModelDetailComponent implements OnInit {
 

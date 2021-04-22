@@ -24,6 +24,7 @@ import { MemberBusinessUnitComponent } from './business-unit/member-business-uni
 import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @NgModule({
   imports: [
@@ -56,7 +57,9 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
     OrgMdlStrucDetailComponent,
     OrgJobTitlePagingComponent,
     MemberBusinessUnitComponent
-
+  ],
+  providers: [
+    NGXToastrService
   ]
 })
 export class OrganizationModule { }

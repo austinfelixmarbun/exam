@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { environment } from 'environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefZipcodeObj } from 'app/shared/model/RefZipcodeObj.Model';
@@ -59,8 +58,6 @@ export class ZipcodeAddComponent implements OnInit {
   ngOnInit() {
     this.inputDistrictLookupObj = new InputLookupObj();
     this.inputDistrictLookupObj.urlJson = "./assets/lookup/lookupDistrict.json";
-    this.inputDistrictLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputDistrictLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputDistrictLookupObj.pagingJson = "./assets/lookup/lookupDistrict.json";
     this.inputDistrictLookupObj.genericJson = "./assets/lookup/lookupDistrict.json";
 

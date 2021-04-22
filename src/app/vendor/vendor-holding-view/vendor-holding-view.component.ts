@@ -15,8 +15,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-vendor-holding-view',
-  templateUrl: './vendor-holding-view.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './vendor-holding-view.component.html'
 })
 export class VendorHoldingViewComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) UCGridFooter;
@@ -74,19 +73,12 @@ export class VendorHoldingViewComponent implements OnInit {
     )
 
     this.viewVendorHoldingObj.viewInput = "./assets/ucviewgeneric/viewVendorHolding.json";
-    this.viewVendorHoldingObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorHoldingMainPObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingMainP.json";
-    this.viewVendorHoldingMainPObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorHoldingMainCObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingMainC.json";
-    this.viewVendorHoldingMainCObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorHoldingTaxObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingTax.json";
-    this.viewVendorHoldingTaxObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorHoldingTaxAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingTaxAddr.json";
-    this.viewVendorHoldingTaxAddrObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorHoldingAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingAddr.json";
-    this.viewVendorHoldingAddrObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorHoldingLtLgObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingLtLg.json";
-    this.viewVendorHoldingLtLgObj.viewEnvironment = environment.FoundationR3Url;
     
     this.GetListVendorContactPersonByVendorId();
 

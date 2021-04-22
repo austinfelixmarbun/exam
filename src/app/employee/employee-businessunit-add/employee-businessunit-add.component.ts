@@ -20,8 +20,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-employee-businessunit-add',
-  templateUrl: './employee-businessunit-add.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './employee-businessunit-add.component.html'
 })
 export class EmployeeBusinessunitAddComponent implements OnInit {
 
@@ -57,7 +56,6 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewEmployeeBusinessUnitMember.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.initLookUp();
     var critInput = new CriteriaObj();
@@ -130,37 +128,27 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
   initLookUp() {
     this.inputPagingObjBusinessUnit = new InputLookupObj();
     this.inputPagingObjBusinessUnit.urlJson = "./assets/lookup/lookupEmployeeBusinessUnit.json";
-    this.inputPagingObjBusinessUnit.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputPagingObjBusinessUnit.urlEnviPaging = environment.FoundationR3Url;
     this.inputPagingObjBusinessUnit.pagingJson = "./assets/lookup/lookupEmployeeBusinessUnit.json";
     this.inputPagingObjBusinessUnit.genericJson = "./assets/lookup/lookupEmployeeBusinessUnit.json";
 
     this.inputPagingObjJobTitle = new InputLookupObj();
     this.inputPagingObjJobTitle.urlJson = "./assets/lookup/lookupEmployeeJobTitle.json";
-    this.inputPagingObjJobTitle.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputPagingObjJobTitle.urlEnviPaging = environment.FoundationR3Url;
     this.inputPagingObjJobTitle.pagingJson = "./assets/lookup/lookupEmployeeJobTitle.json";
     this.inputPagingObjJobTitle.genericJson = "./assets/lookup/lookupEmployeeJobTitle.json";
 
     this.inputPagingObjSupervisor = new InputLookupObj();
     this.inputPagingObjSupervisor.urlJson = "./assets/lookup/lookupEmployeeSupervisor.json";
-    this.inputPagingObjSupervisor.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputPagingObjSupervisor.urlEnviPaging = environment.FoundationR3Url;
     this.inputPagingObjSupervisor.pagingJson = "./assets/lookup/lookupEmployeeSupervisor.json";
     this.inputPagingObjSupervisor.genericJson = "./assets/lookup/lookupEmployeeSupervisor.json";
     this.inputPagingObjSupervisor.isRequired = false;
 
     this.inputPagingObjOffice = new InputLookupObj();
     this.inputPagingObjOffice.urlJson = "./assets/lookup/lookupEmployeeOffice.json";
-    this.inputPagingObjOffice.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputPagingObjOffice.urlEnviPaging = environment.FoundationR3Url;
     this.inputPagingObjOffice.pagingJson = "./assets/lookup/lookupEmployeeOffice.json";
     this.inputPagingObjOffice.genericJson = "./assets/lookup/lookupEmployeeOffice.json";
 
     this.inputPagingObjRole = new InputLookupObj();
     this.inputPagingObjRole.urlJson = "./assets/lookup/lookupEmployeeRole.json";
-    this.inputPagingObjRole.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputPagingObjRole.urlEnviPaging = environment.FoundationR3Url;
     this.inputPagingObjRole.pagingJson = "./assets/lookup/lookupEmployeeRole.json";
     this.inputPagingObjRole.genericJson = "./assets/lookup/lookupEmployeeRole.json";
 

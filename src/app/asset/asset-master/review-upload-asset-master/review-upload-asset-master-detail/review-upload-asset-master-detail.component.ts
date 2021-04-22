@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { UploadReviewCustomObj } from 'app/shared/model/UploadReviewCustomObj.Model';
@@ -38,13 +37,10 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
   }
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewReviewUploadAssetMaster.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.claimTask();
 
     this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadAssetMasterDetail.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadAssetMasterDetail.json";
     this.inputPagingObj.addCritInput = new Array();
     const addCritAssetMasterId = new CriteriaObj();

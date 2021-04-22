@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { VendorService } from 'app/vendor/vendor.service';
 import { HttpClient } from '@angular/common/http';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -14,7 +12,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   templateUrl: './vendor-branch-office-member.component.html'
 })
 export class VendorBranchOfficeMemberComponent implements OnInit {
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
   VendorId: string;
   objPassing: any = {};
   MrVendorCategoryCode: string = "";
@@ -30,10 +28,7 @@ export class VendorBranchOfficeMemberComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorOfficeMember.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorOfficeMember.json";
     this.inputPagingObj.deleteUrl = "/VendorOfficeMbr/DeleteVendorOfficeMember";
 

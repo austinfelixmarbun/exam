@@ -3,7 +3,6 @@ import { environment } from "environments/environment";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { AdInsConstant } from "app/shared/AdInstConstant";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { HttpClient } from "@angular/common/http";
 import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
@@ -13,8 +12,7 @@ import { AdInsHelper } from "app/shared/AdInsHelper";
 
 @Component({
   selector: "app-org-add-edit",
-  templateUrl: "./org-add-edit.component.html",
-  providers: [NGXToastrService]
+  templateUrl: "./org-add-edit.component.html"
 })
 export class OrgAddEditComponent implements OnInit {
   foundationUrl: string = environment.FoundationR3Url;

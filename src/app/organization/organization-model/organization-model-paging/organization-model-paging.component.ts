@@ -18,7 +18,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 @Component({
   selector: 'app-organization-model-paging',
   templateUrl: './organization-model-paging.component.html',
-  providers: [NGXToastrService, NGXToastrService, ExcelService, DecimalPipe]
+  providers: [ExcelService, DecimalPipe]
 })
 export class OrganizationModelPagingComponent implements OnInit {
 

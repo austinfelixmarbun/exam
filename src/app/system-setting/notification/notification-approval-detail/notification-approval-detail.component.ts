@@ -2,7 +2,6 @@ import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NotificationDObj} from 'app/shared/model/NotificationDObj.Model'
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
@@ -17,8 +16,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-notification-approval-detail',
-  templateUrl: './notification-approval-detail.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './notification-approval-detail.component.html'
 })
 export class NotificationApprovalDetailComponent implements OnInit {
   inputPagingObj:any;
@@ -47,7 +45,6 @@ export class NotificationApprovalDetailComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewNotificationOnApproval.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.getUrl = this.settingUrl + URLConstant.GetNotificationHByNotificationHId;
     this.submitUrl = this.settingUrl + URLConstant.EditNotificationH;

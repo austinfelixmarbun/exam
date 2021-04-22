@@ -18,7 +18,7 @@ import { URLConstant } from "app/shared/constant/URLConstant";
 @Component({
   selector: "app-role-user",
   templateUrl: "./role-user.component.html",
-  providers: [NGXToastrService, ExcelService, DecimalPipe]
+  providers: [ExcelService, DecimalPipe]
 })
 export class RoleUserComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;

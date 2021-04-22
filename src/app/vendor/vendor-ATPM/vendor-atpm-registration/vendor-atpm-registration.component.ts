@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
-import { environment } from 'environments/environment';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -30,7 +29,6 @@ export class VendorATPMRegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorATPM.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.VendorId = this.objPassing["VendorId"];
     this.objPassing["Type"]="Vendor";
