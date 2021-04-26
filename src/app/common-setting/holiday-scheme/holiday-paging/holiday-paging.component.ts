@@ -23,7 +23,6 @@ export class HolidayPagingComponent implements OnInit {
     this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
     this.inputObj.pagingJson = "./assets/ucpaging/searchHoliday.json";
-    this.inputObj.deleteUrl = "/HolidaySchm/DeleteHolidaySchmH";
 
   }
 

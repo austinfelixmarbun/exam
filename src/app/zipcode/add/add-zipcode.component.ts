@@ -21,10 +21,6 @@ export class ZipcodeAddComponent implements OnInit {
   refZipcodeId: number;
   rzcObj: RefZipcodeObj;
   resultData: any;
-  apiUrl: string;
-  addUrl: string;
-  editUrl: string;
-  getRefDistrictUrl: string;
   inputPagingObj: any;
   inputDistrictLookupObj;
   refDistrict: RefProvDistrictObj;
@@ -41,10 +37,6 @@ export class ZipcodeAddComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.CS_ZIPCODE_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.apiUrl = URLConstant.GetRefZipCodeById;
-    this.addUrl = URLConstant.AddRefZipcode;
-    this.editUrl = URLConstant.EditRefZipcode;
-    this.getRefDistrictUrl = URLConstant.GetRefProvDistrictById;
 
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
@@ -67,7 +59,7 @@ export class ZipcodeAddComponent implements OnInit {
     if (this.pageType == "edit") {
       this.rzcObj = new RefZipcodeObj();
       this.rzcObj.RefZipcodeId = this.refZipcodeId;
-      this.http.post(this.apiUrl, {Id : this.refZipcodeId}).subscribe(
+      this.http.post(URLConstant.GetRefZipCodeById, {Id : this.refZipcodeId}).subscribe(
         response => {
           this.resultData = response;
           this.refZipcodeId = this.resultData.RefZipcodeId;
@@ -83,7 +75,7 @@ export class ZipcodeAddComponent implements OnInit {
           });
           this.refDistrict = new RefProvDistrictObj();
           this.refDistrict.RefProvDistrictId = this.resultData.RefProvDistrictId;
-          this.http.post(this.getRefDistrictUrl, {Id : this.resultData.RefProvDistrictId}).subscribe(
+          this.http.post(URLConstant.GetRefProvDistrictById, {Id : this.resultData.RefProvDistrictId}).subscribe(
             (response) => {
               this.resultDistrictData = response;
               this.inputDistrictLookupObj.jsonSelect = this.resultDistrictData;
@@ -102,7 +94,7 @@ export class ZipcodeAddComponent implements OnInit {
     }
     if (this.pageType == "add") {
       this.rzcObj.RowVersion = "";
-      this.http.post(this.addUrl, this.rzcObj).subscribe(
+      this.http.post(URLConstant.AddRefZipcode, this.rzcObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ZIPCODE_PAGING],{});
@@ -111,7 +103,7 @@ export class ZipcodeAddComponent implements OnInit {
     } else {
       this.rzcObj.RefZipcodeId = this.refZipcodeId;
       this.rzcObj.RowVersion = this.resultData.RowVersion;
-      this.http.post(this.editUrl, this.rzcObj).subscribe(
+      this.http.post(URLConstant.EditRefZipcode, this.rzcObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ZIPCODE_PAGING],{});

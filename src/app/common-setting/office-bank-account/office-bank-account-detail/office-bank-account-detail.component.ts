@@ -24,6 +24,8 @@ export class OfficeBankAccountDetailComponent implements OnInit {
   BankId: number;
   BankAccType: string;
   BankAccPurpose: string;
+  OfficeBankCode: string;
+  OfficeBankRowVersion : string;
 
   readonly CancelLink: string = NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING;
   public OfficeNameList: {
@@ -147,6 +149,8 @@ export class OfficeBankAccountDetailComponent implements OnInit {
           this.OfficeBankAccObj = response;
           this.BankAccType = this.OfficeBankAccObj.BankAccType;
           this.BankAccPurpose = this.OfficeBankAccObj.MrBankAccPurposeCode;
+          this.OfficeBankCode = this.OfficeBankAccObj.OfficeBankAccCode;
+          this.OfficeBankRowVersion = this.OfficeBankAccObj.RowVersion;
 
           this.OfficeBankAccForm.patchValue({
             AccCode: this.OfficeBankAccObj.OfficeBankAccCode,
@@ -158,6 +162,8 @@ export class OfficeBankAccountDetailComponent implements OnInit {
             LegalDoc: this.OfficeBankAccObj.IsLegalDoc,
             BankAccPurpose: this.OfficeBankAccObj.MrBankAccPurposeCode,
           })
+
+          this.OfficeBankAccForm.get('AccCode').disable();
 
           this.http.post<RefOfficeObj>(URLConstant.GetRefOfficeByRefOfficeId, {Id: response.RefOfficeId}).subscribe(
             (response) => {
@@ -229,11 +235,16 @@ export class OfficeBankAccountDetailComponent implements OnInit {
   }
 
   async SaveForm() {
-    this.OfficeBankAccObj.OfficeBankAccCode = this.OfficeBankAccForm.value.AccCode;
+    if (this.Mode == "Add") {
+      this.OfficeBankAccObj.OfficeBankAccCode =  this.OfficeBankAccForm.value.AccCode;
+    }
+    else{
+      this.OfficeBankAccObj.OfficeBankAccCode = this.OfficeBankCode;
+    }
+    
     this.OfficeBankAccObj.OfficeBankAccName = this.OfficeBankAccForm.value.AccName;
     this.OfficeBankAccObj.OfficeBankAccBranch = this.OfficeBankAccForm.value.BankBranch;
     this.OfficeBankAccObj.BankBranchRegRptCode = this.OfficeBankAccForm.value.BankBranchBiCode;
-    this.OfficeBankAccObj.OfficeBankAccBranch = this.OfficeBankAccForm.value.BankBranch;
     this.OfficeBankAccObj.OfficeBankAccNo = this.OfficeBankAccForm.value.AccNo;
     this.OfficeBankAccObj.RefBankId = this.BankId;
     this.OfficeBankAccObj.BankAccType = this.BankAccType;
@@ -255,7 +266,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
           this.OfficeBankAccObj.RefOfficeId = response.RefOfficeId;
           this.OfficeBankAccObj.IsActive = true;
 
-          this.http.post(URLConstant.SubmitOfficeBankAcc, this.OfficeBankAccObj).subscribe(
+          this.http.post(URLConstant.AddOfficeBankAcc, this.OfficeBankAccObj).subscribe(
             (response) => {
               this.toastr.successMessage("Add Success!");
               this.router.navigateByUrl(NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING);
@@ -274,8 +285,9 @@ export class OfficeBankAccountDetailComponent implements OnInit {
     } else{
       this.OfficeBankAccObj.OfficeBankAccId = this.OfficeBankAccId;
       this.OfficeBankAccObj.RefOfficeId = this.RefOfficeId;
+      this.OfficeBankAccObj.RowVersion = this.OfficeBankRowVersion;
 
-      this.http.post(URLConstant.SubmitOfficeBankAcc, this.OfficeBankAccObj).subscribe(
+      this.http.post(URLConstant.EditOfficeBankAcc, this.OfficeBankAccObj).subscribe(
         (response) => {
           this.toastr.successMessage("Edit Success!");
           this.router.navigateByUrl(NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING);

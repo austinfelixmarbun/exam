@@ -31,10 +31,7 @@ export class WorkingHourDDetailComponent implements OnInit {
   workingHourSchmDObj: WorkingHourSchmDObj;
   listWorkingHourSchmDObj: ListWorkingHourSchmDObj;
   isEdit: boolean = false;
-  getSchmHUrl: any;
-  getSchmDUrl: any;
-  addUrl: any;
-  editUrl: any;
+  postUrl: any;
   items: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
@@ -112,10 +109,7 @@ export class WorkingHourDDetailComponent implements OnInit {
   readonly CancelLink: string = NavigationConstant.CS_WORKING_HOUR;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
 
-    this.getSchmHUrl = URLConstant.GetWorkingHourSchmHById;
-    this.getSchmDUrl = URLConstant.GetListWorkingHourSchmDByWorkingHourHId;
-    this.addUrl = URLConstant.AddListWorkingHourSchmD;
-    this.editUrl = URLConstant.EditWorkingHourSchmH;
+    this.postUrl = URLConstant.AddListWorkingHourSchmD;
 
     this.route.queryParams.subscribe(params => {
       if (params["workingHourSchmHId"] != null) {
@@ -131,7 +125,7 @@ export class WorkingHourDDetailComponent implements OnInit {
     this.workingHourSchmHObj = new WorkingHourSchmHObj();
     this.workingHourSchmHObj.WorkingHourSchmHId = this.workingHourSchmHId;
     this.items = this.WorkingHourSchmDForm.get('items') as FormArray;
-    this.http.post(this.getSchmDUrl, {Id : this.workingHourSchmHId}).subscribe(
+    this.http.post(URLConstant.GetListWorkingHourSchmDByWorkingHourHId, {Id : this.workingHourSchmHId}).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.isEdit = true;
@@ -211,9 +205,9 @@ export class WorkingHourDDetailComponent implements OnInit {
       this.listWorkingHourSchmDObj.WorkingHourSchmDObj.push(this.workingHourSchmDObj);
     }
     if (this.isEdit) {
-      this.addUrl = URLConstant.EditListWorkingHourSchmD;
+      this.postUrl = URLConstant.EditListWorkingHourSchmD;
     }
-    this.http.post(this.addUrl, this.listWorkingHourSchmDObj).subscribe(
+    this.http.post(this.postUrl, this.listWorkingHourSchmDObj).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_WORKING_HOUR],{});

@@ -81,7 +81,7 @@
             </lib-ucSubsection>
             <div class="form-body" id="ContactPersonAddressInfo">
               <div class="form-group row">
-                <label class="col-md-3 adins-required-label" for="Addr" translate>Address</label>
+                <label class="col-md-3" for="Addr" translate>Address</label>
                 <div class="col-md-4">
                   <textarea id="Addr" class="form-control" formControlName="Addr"></textarea>
                   <lib-uc-show-errors [control]="ContactPersonForm.controls.Addr" [submit]="enjiForm.submitted">
@@ -89,7 +89,7 @@
                 </div>
               </div>
               <div class="form-group row" *ngIf="inputZipcodeLookupObj.isReady">
-                <label class="col-md-3 adins-required-label" for="Zipcode" translate>Zip Code</label>
+                <label class="col-md-3" for="Zipcode" translate>Zip Code</label>
                 <div class="col-md-4">
                   <lib-uclookupgeneric [lookupInput]="inputZipcodeLookupObj" [identifier]="'RefZipcodeId'"
                     [enjiForm]="enjiForm" [parentForm]="ContactPersonForm"

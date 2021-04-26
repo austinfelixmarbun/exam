@@ -20,9 +20,6 @@ export class CurrencyAddComponent implements OnInit {
   refCurrId: any;
   currObj: CurrObj;
   resultData: any;
-  getUrl: any;
-  addUrl: any;
-  editUrl: any;
   RefCurrForm = this.fb.group({
     CurrCode: ['', [Validators.required, Validators.maxLength(5)]],
     CurrName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -38,11 +35,6 @@ export class CurrencyAddComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.CS_CURRENCY_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.getUrl = URLConstant.GetRefCurrById;
-    this.addUrl = URLConstant.AddRefCurr;
-    this.editUrl = URLConstant.EditRefCurr;
-
-
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
         this.pageType = params["param"];
@@ -58,7 +50,7 @@ export class CurrencyAddComponent implements OnInit {
       this.RefCurrForm.controls["CurrCode"].disable();
       this.currObj = new CurrObj();
       this.currObj.RefCurrId = this.refCurrId;
-      this.http.post(this.getUrl, {Id: this.refCurrId}).subscribe(
+      this.http.post(URLConstant.GetRefCurrById, {Id: this.refCurrId}).subscribe(
         response => {
           this.resultData = response;
           this.RefCurrForm.patchValue({
@@ -100,7 +92,7 @@ export class CurrencyAddComponent implements OnInit {
       this.currObj.CurrName = this.RefCurrForm.controls["CurrName"].value;
       this.currObj.RegRptCode = this.RefCurrForm.controls["RegRptCode"].value;
       this.currObj.IsActive = this.RefCurrForm.controls["IsActive"].value;
-      this.http.post(this.addUrl, this.currObj).subscribe(
+      this.http.post(URLConstant.AddRefCurr, this.currObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_CURRENCY_PAGING],{});
@@ -112,7 +104,7 @@ export class CurrencyAddComponent implements OnInit {
       this.currObj.CurrName = this.RefCurrForm.controls["CurrName"].value;
       this.currObj.RegRptCode = this.RefCurrForm.controls["RegRptCode"].value;
       this.currObj.IsActive = this.RefCurrForm.controls["IsActive"].value;
-      this.http.post(this.editUrl, this.currObj).subscribe(
+      this.http.post(URLConstant.EditRefCurr, this.currObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_CURRENCY_PAGING],{});

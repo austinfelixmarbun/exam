@@ -21,7 +21,6 @@ export class ScoreCategoryPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/search/searchScoreCategory.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefIndustryType;
   }
 
 }
