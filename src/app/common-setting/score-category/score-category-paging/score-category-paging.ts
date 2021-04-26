@@ -17,7 +17,6 @@ export class ScoreCategoryPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/search/searchScoreCategory.json";
     this.inputPagingObj.pagingJson = "./assets/search/searchScoreCategory.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefIndustryType;
   }
 
 }

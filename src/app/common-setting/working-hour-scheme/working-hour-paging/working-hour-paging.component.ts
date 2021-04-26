@@ -20,6 +20,5 @@ export class WorkingHourPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchWorkingHourSchm.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchWorkingHourSchm.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteWorkingHourSchm;
   }
 }

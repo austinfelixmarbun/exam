@@ -17,7 +17,6 @@ export class HolidayPagingComponent implements OnInit {
   ngOnInit() {
     this.inputObj._url = "./assets/ucpaging/searchHoliday.json";
     this.inputObj.pagingJson = "./assets/ucpaging/searchHoliday.json";
-    this.inputObj.deleteUrl = "/HolidaySchm/DeleteHolidaySchmH";
 
   }
 

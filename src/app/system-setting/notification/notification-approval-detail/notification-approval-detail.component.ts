@@ -29,8 +29,6 @@ export class NotificationApprovalDetailComponent implements OnInit {
   detailDataForGrid: any;
   deleteUrl: any;
   resultData: any;
-  getUrl:any;
-  submitUrl:any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV;
@@ -46,11 +44,9 @@ export class NotificationApprovalDetailComponent implements OnInit {
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewNotificationOnApproval.json";
 
-    this.getUrl = this.settingUrl + URLConstant.GetNotificationHByNotificationHId;
-    this.submitUrl = this.settingUrl + URLConstant.EditNotificationH;
     this.notificationHObj = new NotificationHObj();
     this.notificationHObj.NotificationHId = this.NotificationHId;
-    this.http.post(this.getUrl, {Id: this.NotificationHId}).subscribe(
+    this.http.post(URLConstant.GetNotificationHByNotificationHId, {Id: this.NotificationHId}).subscribe(
       response => {
         this.resultData = response;
       }
@@ -61,7 +57,6 @@ export class NotificationApprovalDetailComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNotificationDOnApproval.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteNotificationD;
 
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
@@ -98,7 +93,7 @@ export class NotificationApprovalDetailComponent implements OnInit {
     this.notificationHObj.Status = notificationResultStat;
     this.notificationHObj.ApproveBy = currentUserContext.UserName;
     
-      this.http.post(this.submitUrl, this.notificationHObj).subscribe(
+      this.http.post(URLConstant.EditNotificationH, this.notificationHObj).subscribe(
         response => {
           this.toastr.successMessage(resultForMsg + " " + response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV],{ });

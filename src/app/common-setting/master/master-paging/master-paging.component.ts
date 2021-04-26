@@ -15,7 +15,6 @@ export class MasterPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/search/searchMaster.json";
     this.inputPagingObj.pagingJson = "./assets/search/searchMaster.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefMaster;
     this.inputPagingObj.ddlEnvironments = [
       {
         name: "ref_Master_Type_Code",

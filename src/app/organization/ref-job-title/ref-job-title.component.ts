@@ -18,6 +18,5 @@ export class RefJobTitleComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/search/searchJobTitle.json";
     this.inputPagingObj.pagingJson = "./assets/search/searchJobTitle.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefJobTitle;
   }
 }

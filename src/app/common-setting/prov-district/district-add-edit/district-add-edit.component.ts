@@ -21,9 +21,6 @@ export class DistrictAddEditComponent implements OnInit {
   refProvDistrictId: any;
   refProvDistrictObj: RefProvDistrictObj;
   resultData: any;
-  getUrl: any;
-  addUrl: any;
-  editUrl: any;
   parentId: any;
   DistrictForm = this.fb.group({
     ProvinceName: [{disabled: true, value: ''}],
@@ -36,9 +33,7 @@ export class DistrictAddEditComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.CS_DISTRICT_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.getUrl = URLConstant.GetRefProvDistrictById;
-    this.addUrl = URLConstant.AddRefProvDistrict;
-    this.editUrl = URLConstant.EditRefProvDistrict;
+    
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
         this.pageType = params["param"];
@@ -55,7 +50,7 @@ export class DistrictAddEditComponent implements OnInit {
   ngOnInit() {
     this.refProvDistrictObj = new RefProvDistrictObj();
     this.refProvDistrictObj.RefProvDistrictId = this.parentId;
-    this.http.post(this.getUrl, {Id : this.parentId}).subscribe(
+    this.http.post(URLConstant.GetRefProvDistrictById, {Id : this.parentId}).subscribe(
       response => {
         this.resultData = response;
         this.DistrictForm.patchValue({
@@ -67,7 +62,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.DistrictForm.controls["ProvDistrictCode"].disable();
       this.refProvDistrictObj = new RefProvDistrictObj();
       this.refProvDistrictObj.RefProvDistrictId = this.refProvDistrictId;
-      this.http.post(this.getUrl, {Id : this.refProvDistrictId}).subscribe(
+      this.http.post(URLConstant.GetRefProvDistrictById, {Id : this.refProvDistrictId}).subscribe(
         response => {
           this.resultData = response;
           this.DistrictForm.patchValue({
@@ -92,7 +87,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.refProvDistrictObj.PhnArea = this.DistrictForm.controls["PhnArea"].value;
       this.refProvDistrictObj.ParentId = this.parentId;
       this.refProvDistrictObj.Type = CommonConstant.RefProvDistrictTypeDis;
-      this.http.post(this.addUrl, this.refProvDistrictObj).subscribe(
+      this.http.post(URLConstant.AddRefProvDistrict, this.refProvDistrictObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);  
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_DISTRICT_PAGING],{"refProvDistrictId": this.parentId});     
@@ -106,7 +101,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.refProvDistrictObj.IsActive = this.DistrictForm.controls["IsActive"].value;
       this.refProvDistrictObj.PhnArea = this.DistrictForm.controls["PhnArea"].value;
       this.refProvDistrictObj.Type =  CommonConstant.RefProvDistrictTypeDis;
-      this.http.post(this.editUrl, this.refProvDistrictObj).subscribe(
+      this.http.post(URLConstant.EditRefProvDistrict, this.refProvDistrictObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);  
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_DISTRICT_PAGING],{"refProvDistrictId": this.parentId});       

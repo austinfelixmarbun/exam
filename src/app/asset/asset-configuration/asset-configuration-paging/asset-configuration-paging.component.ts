@@ -14,6 +14,5 @@ export class AssetConfigurationPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetConfiguration.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetConfiguration.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefEconomicSector;
   }
 }

@@ -17,6 +17,5 @@ export class EconomicSectorComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchEconomicSector.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchEconomicSector.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefEconomicSector;
   }
 }

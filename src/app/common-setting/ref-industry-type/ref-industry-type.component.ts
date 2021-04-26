@@ -17,7 +17,7 @@ export class RefIndustryTypeComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/search/searchIndustryType.json";
     this.inputPagingObj.pagingJson = "./assets/search/searchIndustryType.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefIndustryType;
+    
   }
 
 }

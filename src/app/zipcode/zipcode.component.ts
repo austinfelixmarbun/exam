@@ -20,6 +20,5 @@ export class ZipcodeComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/search/searchZip.json";
     this.inputPagingObj.pagingJson = "./assets/search/searchZip.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefZipcode;
   }
 }

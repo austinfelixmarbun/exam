@@ -153,7 +153,7 @@ export class NavigationConstant {
 
     //#region SURVEY
     public static SRVY_PAGING = "/" + PathConstant.LR_SRVY + "/" + PathConstant.PAGING; //'/Survey/Paging'
-    public static SRVY_TASK = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_TASK; //'/Survey/Task'
+    public static SRVY_TASK = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_TASK_PAGING; //'/Survey/Task'
     //#endregion
     
     //#region Vendor

@@ -22,7 +22,7 @@ export class ProvinceComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchProvince.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchProvince.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefProvDistrict;
+ 
 
     var critObj = new CriteriaObj();
     critObj.DataType = 'text';

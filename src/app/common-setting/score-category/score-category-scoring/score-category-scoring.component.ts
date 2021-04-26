@@ -150,7 +150,7 @@ export class ScoreCategoryScoringComponent implements OnInit {
       }
     }
 
-    this.httpClient.post(URLConstant.AddRangeAndDeleteScoreCategorySchmD, this.listScoreCategorySchmDObj).subscribe(
+    this.httpClient.post(URLConstant.AddRangeScoreCategorySchmD, this.listScoreCategorySchmDObj).subscribe(
       //SAVE
       (response) => {
         this.toastr.successMessage(response["Message"]);

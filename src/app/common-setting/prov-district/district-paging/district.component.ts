@@ -41,7 +41,7 @@ export class DistrictComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchDistrict.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchDistrict.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefProvDistrict;
+
 
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
