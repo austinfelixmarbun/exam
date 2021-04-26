@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -10,15 +10,13 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UpdateCustEmergencyObj } from 'app/shared/model/UpdateMasterCust/UpdateCustEmergencyObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 import { forkJoin } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-update-customer-emergency-detail',
   templateUrl: './update-customer-emergency-detail.component.html',
-  styles: [],
-  providers: [NGXToastrService]
+  styles: []
 })
 export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   @Input() CustDataTrxId: number;
@@ -81,18 +79,11 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       Profession: ""
     };
 
-    // this.lookupObj["Zipcode"] = new InputLookupObj();
     this.lookupObj["Zipcode"].urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.lookupObj["Zipcode"].urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.lookupObj["Zipcode"].urlEnviPaging = environment.FoundationR3Url;
     this.lookupObj["Zipcode"].pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.lookupObj["Zipcode"].genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    // this.lookupObj["Zipcode"].isRequired = false;
 
-    // this.lookupObj["Profession"] = new InputLookupObj();
     this.lookupObj["Profession"].urlJson = "./assets/lookup/lookupCustomerProfession.json";
-    this.lookupObj["Profession"].urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.lookupObj["Profession"].urlEnviPaging = environment.FoundationR3Url;
     this.lookupObj["Profession"].pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.lookupObj["Profession"].genericJson = "./assets/lookup/lookupCustomerProfession.json";
     this.lookupObj["Profession"].isRequired = false;

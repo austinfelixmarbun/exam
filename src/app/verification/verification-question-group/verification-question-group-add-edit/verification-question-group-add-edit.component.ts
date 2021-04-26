@@ -4,7 +4,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionGrpHObj } from 'app/shared/model/VerfQuestionGrpHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -12,8 +11,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-verification-question-group-add-edit',
-  templateUrl: './verification-question-group-add-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './verification-question-group-add-edit.component.html'
 })
 export class VerificationQuestionGroupAddEditComponent implements OnInit {
   verfQuestionGrpHObj: VerfQuestionGrpHObj = new VerfQuestionGrpHObj();

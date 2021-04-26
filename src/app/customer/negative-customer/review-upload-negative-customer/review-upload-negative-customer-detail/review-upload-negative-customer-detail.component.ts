@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { UploadReviewCustomObj } from 'app/shared/model/UploadReviewCustomObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -17,12 +15,11 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-review-upload-negative-customer-detail',
-  templateUrl: './review-upload-negative-customer-detail.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './review-upload-negative-customer-detail.component.html'
 })
 export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
   uploadNo: string;
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
   arrCrit = new Array();
   taskListId: any;
   UploadReviewUrl: string;
@@ -43,15 +40,11 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
   
   ngOnInit() {    
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewReviewUploadNegativeCust.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.claimTask();
     this.UploadReviewUrl = URLConstant.UploadReview;
     this.CancelUpload = URLConstant.CancelUpload;
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadNegativeCustomerDetail.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadNegativeCustomerDetail.json";
     this.inputPagingObj.addCritInput = new Array();
     const addCritAssetMasterId = new CriteriaObj();

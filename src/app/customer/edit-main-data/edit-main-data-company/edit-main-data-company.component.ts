@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,8 +18,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 @Component({
   selector: 'app-edit-main-data-company',
   templateUrl: './edit-main-data-company.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService]
+  styleUrls: []
 })
 export class EditMainDataCompanyComponent implements OnInit {
   

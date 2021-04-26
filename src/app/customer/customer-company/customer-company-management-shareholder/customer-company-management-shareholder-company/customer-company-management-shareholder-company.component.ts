@@ -6,7 +6,6 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
@@ -17,8 +16,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 @Component({
   selector: 'app-customer-company-management-shareholder-company',
   templateUrl: './customer-company-management-shareholder-company.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService],
+  styleUrls: []
 })
 export class CustomerCompanyManagementShareholderCompanyComponent implements OnInit {
   @Input() custCompanyId: number;
@@ -66,8 +64,6 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   ngOnInit() {  
     this.inputLookupCustCompanyObj = new InputLookupObj();
     this.inputLookupCustCompanyObj.urlJson = "./assets/lookup/lookUpExistingCustCompany.json";
-    this.inputLookupCustCompanyObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupCustCompanyObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupCustCompanyObj.pagingJson = "./assets/lookup/lookUpExistingCustCompany.json";
     this.inputLookupCustCompanyObj.genericJson = "./assets/lookup/lookUpExistingCustCompany.json";
     this.inputLookupCustCompanyObj.isRequired = false;
@@ -89,8 +85,6 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
 
     this.lookUpIndustryTypeObj = new InputLookupObj();
     this.lookUpIndustryTypeObj.urlJson = "./assets/lookup/lookupIndustryType.json";
-    this.lookUpIndustryTypeObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.lookUpIndustryTypeObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookUpIndustryTypeObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpIndustryTypeObj.genericJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpIndustryTypeObj.isRequired = true;

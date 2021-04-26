@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment'; 
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 import { DatePipe } from '@angular/common';
@@ -15,8 +14,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 @Component({
   selector: 'app-customer-company-detail',
   templateUrl: './customer-company-detail.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService],
+  styleUrls: []
 })
 export class CustomerCompanyDetailComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
@@ -67,8 +65,6 @@ export class CustomerCompanyDetailComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
     this.lookUpObj = new InputLookupObj();
     this.lookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
-    this.lookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
  
