@@ -321,7 +321,8 @@ export class PathConstant {
     //#endregion
 
     //#region Survey-Module
-    public static SRVY_TASK = "Task";
+    public static SRVY_TASK = "SurveyTask";
+    public static SRVY_TASK_PAGING = PathConstant.SRVY_TASK + "/" + PathConstant.PAGING;
     public static SRVY_VIEW_TASK = PathConstant.VIEW + "/" + PathConstant.SRVY_TASK;
     public static VIEW_ORDER_EXT = "ViewOrderExternal";
     //#endregion

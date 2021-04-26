@@ -10,6 +10,8 @@ import { SurveyorAddComponent } from './surveyor-add/surveyor-add.component';
 import { SurveyorPagingComponent } from './surveyor-paging/surveyor-paging.component';
 import { SurveyorTaskAssignmentPagingComponent } from './surveyor-task-assignment-paging/surveyor-task-assignment-paging.component';
 import { SurveyTaskAssignmentDetailComponent } from './survey-task-assignment-detail/survey-task-assignment-detail.component';
+import { SurveyTaskComponent } from './survey-task/survey-task.component';
+
 
 const routes: Routes = [
   {
@@ -77,8 +79,14 @@ const routes: Routes = [
         data: {
           title: 'Surveyor Task Assignment Detail'
         }
-      }
-      
+      },
+      {
+        path: PathConstant.SRVY_TASK_PAGING,
+        component: SurveyTaskComponent,
+        data: {
+          title: 'Survey Task Inquiry'
+        }
+      }      
     ]
   }
 ];
