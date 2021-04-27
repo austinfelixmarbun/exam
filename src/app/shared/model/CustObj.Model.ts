@@ -1,20 +1,20 @@
 import { CustAddrObj } from "./CustAddrObj.Model";
 
 export class CustObj{
-    CustId : any;
-    CustNo :any;
-    CustName : any;
-    MrCustTypeCode :any;
-    MrCustModelCode: any;
-    MrIdTypeCode : any;
-    IdNo:any;
-    IdExpiredDt:any;
-    TaxIdNo :any;
-    IsVip : any;
-    IsAffiliateWithMf :any;
-    VipNotes :any;
-    OriginalOfficeCode:any;
-    RowVersion: any;
+    CustId : number;
+    CustNo : string;
+    CustName : string;
+    MrCustTypeCode :string;
+    MrCustModelCode: string;
+    MrIdTypeCode : string;
+    IdNo:string;
+    IdExpiredDt:Date;
+    TaxIdNo :string;
+    IsVip : boolean;
+    IsAffiliateWithMf :boolean;
+    VipNotes :string;
+    OriginalOfficeCode:string;
+    RowVersion: string;
     CustAddr: CustAddrObj;
     IsCustomer: boolean;
     IsFamily: boolean;

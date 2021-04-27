@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
@@ -23,6 +23,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NullViewportScroller } from '@angular/common/src/viewport_scroller';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-family-detail',
@@ -42,8 +43,8 @@ export class CustomerFamilyDetailComponent implements OnInit {
   criteriaExistingList: Array<CriteriaObj>;
   criteriaExistingObj: CriteriaObj;
   custDataToCheckDuplicate: Object;
-  inputAddressObj: InputAddressObj;
-  inputFieldObj: InputFieldObj;
+  inputAddressObj: InputAddressObj = new InputAddressObj();
+  inputFieldObj: InputFieldObj = new InputFieldObj();
   UcAddressObj: UcAddressObj;
   CustRelationshipList: Array<Object>;
 
@@ -79,7 +80,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
   GetListActiveRefMasterWithMappingCodeAllUrl: string;
   tempMrMaritalStatCode: Array<KeyValueObj> = new Array<KeyValueObj>();
 
-  CustomerFamilyForm = this.fb.group({
+  CustomerFamilyForm: FormGroup = this.fb.group({
     CustPersonalFamilyId: [0],
     CustId: [0],
     FamilyId: [0],
@@ -116,6 +117,32 @@ export class CustomerFamilyDetailComponent implements OnInit {
     this.UcAddressObj = new UcAddressObj();
     this.inputFieldObj = new InputFieldObj();
     this.inputAddressObj = new InputAddressObj();
+    this.CustomerFamilyForm = this.resetFormGrp();
+  }
+
+  resetFormGrp(): FormGroup{
+    return this.fb.group({
+      CustPersonalFamilyId: [0],
+      CustId: [0],
+      FamilyId: [0],
+      MrCustRelationship: ['', [Validators.required]],
+      CustNo: [''],
+      // CustName: ['', [Validators.required, Validators.maxLength(100)]],
+      Gender: ['', [Validators.required]],
+      MrIdTypeCode: ['', [Validators.required, Validators.maxLength(100)]],
+      BirthPlace: ['', [Validators.required]],
+      BirthDt: ['', [Validators.required]],
+      IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)]],
+      TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
+      IdExpiredDt: [''],
+      MrMaritalStatCode: [''],
+      MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
+      MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+      Email1: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+      RowVersion: [''],
+      RowVersionCust: [''],
+      RowVersionCustPersonal: ['']
+    });
   }
 
   ngOnInit() {
@@ -185,9 +212,12 @@ export class CustomerFamilyDetailComponent implements OnInit {
           return response;
         }),
         mergeMap((response) => {
-          let getCust = this.http.post(URLConstant.GetCustByCustId, { Id: response["FamilyId"] });
-          let getCustPersonal = this.http.post(URLConstant.GetCustPersonalbyCustId, { Id: response["FamilyId"] });
-          let getCustAddr = this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { Id: response["FamilyId"], MrCustAddrTypeCode: CommonConstant.AddrTypeLegal });
+          let reqObj: GenericObj = new GenericObj();
+          reqObj.Id = response["FamilyId"];
+          reqObj.Code = CommonConstant.CustAddrTypeLegal;
+          let getCust = this.http.post(URLConstant.GetCustByCustId, reqObj);
+          let getCustPersonal = this.http.post(URLConstant.GetCustPersonalbyCustId, reqObj);
+          let getCustAddr = this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj);
           return forkJoin([getCust, getCustPersonal, getCustAddr]);
         })
       ).toPromise().then(
@@ -332,9 +362,13 @@ export class CustomerFamilyDetailComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
     custObj.CustId = custId;
     custPersonalObj.CustId = custId;
-    let getCust = this.http.post(URLConstant.GetCustByCustId, {Id : custObj.CustId});
-    let getCustPersonal = this.http.post(URLConstant.GetCustPersonalbyCustId, {Id : custObj.CustId});
-    let getCustAddr = this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: custId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal });
+
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = custObj.CustId;
+    reqObj.Code = CommonConstant.CustAddrTypeLegal;
+    let getCust = this.http.post(URLConstant.GetCustByCustId, reqObj);
+    let getCustPersonal = this.http.post(URLConstant.GetCustPersonalbyCustId, reqObj);
+    let getCustAddr = this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj);
     forkJoin([getCust, getCustPersonal, getCustAddr]).toPromise().then(
       (response) => {
         this.isExistingCust = true;

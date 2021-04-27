@@ -21,6 +21,7 @@ import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-job-data-employee',
@@ -41,8 +42,6 @@ export class JobDataEmployeeComponent implements OnInit {
   IdCustPersonal: number;
   custObj: any;
   objCust: CustObj;
-  getListActiveRefMaster: string;
-  getCustById: string;
   jobAddressObj: CustAddrObj;
   otherAddressObj: CustAddrObj;
   preJobAddressObj: CustAddrObj;
@@ -63,12 +62,6 @@ export class JobDataEmployeeComponent implements OnInit {
   custPersonalJobDataObj: CustPersonalJobDataObj;
   custJobDataObj: CustPersonalJobDataObj;
   returnCustJobDataObj: any;
-  addJobData: string;
-  editJobData: string;
-  getJobDataByCustId: string;
-  getCustAddr: string;
-  getRefProfession: string;
-  getRefIndustryType: string;
   refProfessionObj: RefProfessionObj;
   returnRefProfessionObj: any;
   reqCustPersonalJobDataObj: RequestCustPersonalJobDataObj;
@@ -125,14 +118,6 @@ export class JobDataEmployeeComponent implements OnInit {
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     private cookieService: CookieService) {
-    this.getCustById = URLConstant.GetCustByCustId;
-    this.getListActiveRefMaster = URLConstant.GetListActiveRefMaster;
-    this.addJobData = URLConstant.AddCustPersonalJobData;
-    this.editJobData = URLConstant.EditCustPersonalJobData;
-    this.getJobDataByCustId = URLConstant.GetCustPersonalJobDataByCustId;
-    this.getCustAddr = URLConstant.GetCustAddrByMrCustAddrType;
-    this.getRefProfession = URLConstant.GetRefProfessionById;
-    this.getRefIndustryType = URLConstant.GetRefIndustryTypeById;
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -229,7 +214,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
     this.jobPosition = new RefMasterObj();
     this.jobPosition.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobPosition;
-    this.http.post(this.getListActiveRefMaster, this.jobPosition).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, this.jobPosition).subscribe(
       (response) => {
         this.listJobPosition = response[CommonConstant.ReturnObj];
         this.JobDataEmpForm.patchValue({ JobPosition: response[CommonConstant.ReturnObj][0]['Key'] });
@@ -238,7 +223,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
     this.jobStatus = new RefMasterObj();
     this.jobStatus.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobStat;
-    this.http.post(this.getListActiveRefMaster, this.jobStatus).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, this.jobStatus).subscribe(
       (response) => {
         this.listJobStatus = response[CommonConstant.ReturnObj];
         this.JobDataEmpForm.patchValue({ JobStatus: response[CommonConstant.ReturnObj][0]['Key'] });
@@ -247,7 +232,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
     this.companyScale = new RefMasterObj();
     this.companyScale.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCoyScale;
-    this.http.post(this.getListActiveRefMaster, this.companyScale).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, this.companyScale).subscribe(
       (response) => {
         this.listCompanyScale = response[CommonConstant.ReturnObj];
         this.JobDataEmpForm.patchValue({ CompanyScale: response[CommonConstant.ReturnObj][0]['Key'] });
@@ -256,7 +241,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(this.getCustById, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
       (response) => {
         this.custObj = response;
       }
@@ -264,7 +249,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
     this.custJobDataObj = new CustPersonalJobDataObj();
     this.custJobDataObj.CustId = this.IdCust;
-    this.http.post(this.getJobDataByCustId, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustPersonalJobDataByCustId, {Id : this.IdCust}).subscribe(
       (response: any) => {
         this.returnCustJobDataObj = response;
 
@@ -295,7 +280,7 @@ export class JobDataEmployeeComponent implements OnInit {
           if (this.returnCustJobDataObj.RefProfessionId != null) {
             this.refProfessionObj = new RefProfessionObj();
             this.refProfessionObj.RefProfessionId = this.returnCustJobDataObj.RefProfessionId;
-            this.http.post(this.getRefProfession, {Id : this.returnCustJobDataObj.RefProfessionId}).subscribe(
+            this.http.post(URLConstant.GetRefProfessionById, {Id : this.returnCustJobDataObj.RefProfessionId}).subscribe(
               (response) => {
                 this.returnRefProfessionObj = response;
                 this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
@@ -308,7 +293,7 @@ export class JobDataEmployeeComponent implements OnInit {
           if (this.returnCustJobDataObj.RefIndustryTypeId != null) {
             this.refIndustryTypeObj = new RefIndustryTypeObj();
             this.refIndustryTypeObj.RefIndustryTypeId = this.returnCustJobDataObj.RefIndustryTypeId;
-            this.http.post(this.getRefIndustryType, {Id: this.returnCustJobDataObj.RefIndustryTypeId}).subscribe(
+            this.http.post(URLConstant.GetRefIndustryTypeById, {Id: this.returnCustJobDataObj.RefIndustryTypeId}).subscribe(
               (response) => {
                 this.returnIndustryTypeObj = response;
                 this.industryLookUpObj.nameSelect = this.returnIndustryTypeObj.IndustryTypeName;
@@ -318,7 +303,10 @@ export class JobDataEmployeeComponent implements OnInit {
             );
           }
 
-          this.http.post(this.getCustAddr, {CustId: this.IdCust, MrCustAddrTypeCode: CommonConstant.CustAddrTypeJob}).subscribe(
+          let reqObj: GenericObj = new GenericObj();
+          reqObj.Id = this.IdCust;
+          reqObj.Code = CommonConstant.CustAddrTypeJob;
+          this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
             (response) => {
               this.getJobAddr = response;
               this.JobDataEmpForm.patchValue({
@@ -354,7 +342,8 @@ export class JobDataEmployeeComponent implements OnInit {
             }
           );
 
-          this.http.post(this.getCustAddr, {CustId: this.IdCust, MrCustAddrTypeCode: CommonConstant.CustAddrTypeOthBiz}).subscribe(
+          reqObj.Code = CommonConstant.CustAddrTypeOthBiz;
+          this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
             (response) => {
               this.getOthBizAddr = response;
               this.JobDataEmpForm.patchValue({
@@ -392,7 +381,8 @@ export class JobDataEmployeeComponent implements OnInit {
             }
           );
 
-          this.http.post(this.getCustAddr, {CustId: this.IdCust, MrCustAddrTypeCode: CommonConstant.CustAddrTypePreJob}).subscribe(
+          reqObj.Code = CommonConstant.CustAddrTypePreJob;
+          this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
             (response) => {
               this.getPreJobAddr = response;
               this.JobDataEmpForm.patchValue({
@@ -568,7 +558,7 @@ export class JobDataEmployeeComponent implements OnInit {
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_EMP;
       
-      this.http.post(this.editJobData, this.reqCustPersonalJobDataObj).subscribe(
+      this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputTab.emit({ stepMode: "next" });
@@ -591,7 +581,7 @@ export class JobDataEmployeeComponent implements OnInit {
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_EMP;
 
-      this.http.post(this.addJobData, this.reqCustPersonalJobDataObj).subscribe(
+      this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(

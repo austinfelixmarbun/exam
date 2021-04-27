@@ -47,12 +47,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
   tempMrMaritalStatCode: any;
 
   Page: String;
-  getListCountryUrl: string;
-  GetCustByCustIdUrl: string;
-  EditCustPersonalUrl: string;
-  GetCustPersonalbyCustIdUrl: string;
-  GetGeneralSettingByCodeUrl: string;
-  getListActiveRefMasterUrl: string;
 
   CustomerDetailForm = this.fb.group({
     CustFullName: ['', [Validators.maxLength(100)]],
@@ -75,14 +69,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
   }); 
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-
-    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.getListCountryUrl = URLConstant.GetListRefCountry;
-    this.GetCustByCustIdUrl = URLConstant.GetCustByCustId;
-    this.EditCustPersonalUrl = URLConstant.EditCustPersonal;
     this.route.queryParams.subscribe(params => {
-      this.GetCustPersonalbyCustIdUrl = URLConstant.GetCustPersonalbyCustId;
-      this.GetGeneralSettingByCodeUrl = URLConstant.GetGeneralSettingByCode;
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }
@@ -97,7 +84,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     var generalSettingObjDefLocalNationality = {
       GsCode: CommonConstant.GSCodeDefLocalNationality
     }
-    this.http.post(this.GetGeneralSettingByCodeUrl, {Code: CommonConstant.GSCodeDefLocalNationality}).subscribe(
+    this.http.post(URLConstant.GetGeneralSettingByCode, {Code: CommonConstant.GSCodeDefLocalNationality}).subscribe(
       (response) => {
         this.Country = response;
         this.lookUpObj = new InputLookupObj();
@@ -128,13 +115,13 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custObj = new CustObj()
     this.custObj.CustId = this.IdCust;
 
-    this.http.post(this.GetCustByCustIdUrl, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustObj = response;
       });
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj.CustId = this.IdCust;
-    this.http.post<CustPersonalObj>(this.GetCustPersonalbyCustIdUrl, {Id : this.IdCust}).subscribe(
+    this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustPersonalObj = response;
         var refMasterObjMrNationalityCode = {
@@ -176,7 +163,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
         var refMasterObjMrSalutationCode = {
           RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSalutation
         }
-        this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrSalutationCode).subscribe(
+        this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrSalutationCode).subscribe(
           (response) => {
             this.tempSalutation = response[CommonConstant.ReturnObj];
 
@@ -194,7 +181,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
         var refMasterObjMrEducationCode = {
           RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation
         }
-        this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrEducationCode).subscribe(
+        this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrEducationCode).subscribe(
           (response) => {
             this.tempEducation = response[CommonConstant.ReturnObj];
             if (this.tempCustPersonalObj.MrEducationCode != null) {
@@ -211,7 +198,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
         var refMasterObjMrReligionCode = {
           RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion
         }
-        this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrReligionCode).subscribe(
+        this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrReligionCode).subscribe(
           (response) => {
             this.tempReligion = response[CommonConstant.ReturnObj];
             if (this.tempCustPersonalObj.MrReligionCode != null) {
@@ -260,15 +247,9 @@ export class CustomerPersonalDetailComponent implements OnInit {
         });
       });
   }
- async SaveValue() {
-
-    await this.http.post<CustPersonalObj>(this.GetCustPersonalbyCustIdUrl, {Id : this.custPersonalObj.CustId}).toPromise().then(
-      (response) => {
-        this.tempCustPersonalObj = response;
-        this.custPersonalObj = new CustPersonalObj();
-        this.custPersonalObj = this.tempCustPersonalObj;
-      });
-
+ async SaveValue() {  
+    this.custPersonalObj = new CustPersonalObj();
+    this.custPersonalObj = this.tempCustPersonalObj;
     this.custPersonalObj.CustFullName = this.tempCustObj.CustName;
     this.custPersonalObj.NickName = this.CustomerDetailForm.controls["NickName"].value;
     this.custPersonalObj.MrSalutationCode = this.CustomerDetailForm.controls["MrSalutationCode"].value;
@@ -297,7 +278,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.MobilePhnNo2 = this.CustomerDetailForm.controls["MobilePhnNo2"].value;
     this.custPersonalObj.Email1 = this.CustomerDetailForm.controls["Email1"].value;
     this.custPersonalObj.Email2 = this.CustomerDetailForm.controls["Email2"].value;
-    this.http.post(this.EditCustPersonalUrl, this.custPersonalObj).subscribe(
+    this.http.post(URLConstant.EditCustPersonal, this.custPersonalObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         // this.wizard.goToNextStep();

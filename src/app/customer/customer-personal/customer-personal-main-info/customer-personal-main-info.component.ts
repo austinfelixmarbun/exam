@@ -52,8 +52,6 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   MotherMaidenName: string;
   IsAffiliateWithMf: string;
   MrMaritalStatCode: string;
-  getListActiveRefMasterUrl: string;
-  GetListActiveRefMasterWithMappingCodeAllUrl: string;
   tempMrMaritalStatCode: Array<KeyValueObj> = new Array<KeyValueObj>();
   inputAddressObj: InputAddressObj;
   inputFieldObj: InputFieldObj;
@@ -78,8 +76,6 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING2;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
-    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.inputAddressObj = new InputAddressObj();
     this.inputFieldObj = new InputFieldObj();
   }
@@ -105,7 +101,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       RowVersion: ""
     }
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObj).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObj).subscribe(
       (response) => {
         this.tempGender = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
@@ -117,7 +113,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
       RowVersion: ""
     }
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         this.tempIdType = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
@@ -146,7 +142,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
       }
     );
 
-    this.http.post(this.getListActiveRefMasterUrl, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat}).toPromise().then(
+    this.http.post(URLConstant.GetListActiveRefMaster, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat}).toPromise().then(
       (response) => {
         this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({

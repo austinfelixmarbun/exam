@@ -9,6 +9,7 @@ import { CustLegalDocDetailComponent } from './cust-legal-doc-detail/cust-legal-
 import { Router, ActivatedRoute } from '@angular/router';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-cust-legal-doc',
@@ -85,12 +86,11 @@ export class CustLegalDocComponent implements OnInit {
     );
   }
 
-  deleteCustLegalDoc(custCompanyLegalDocId, idx) {
-    var confirmation = confirm(ExceptionConstant.DELETE_CONFIRMATION);
-    if (confirmation == true) {
-      var custCompanyLegalDoc = new CustCompanyLegalDocObj();
-      custCompanyLegalDoc.CustCompanyLegalDocId = custCompanyLegalDocId;
-      this.httpClient.post(URLConstant.DeleteCustCompanyLegalDoc, custCompanyLegalDoc).subscribe(
+  deleteCustLegalDoc(custCompanyLegalDocId: number, idx: number) {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
+      let reqObj: GenericObj = new GenericObj();
+      reqObj.Id = custCompanyLegalDocId
+      this.httpClient.post(URLConstant.DeleteCustCompanyLegalDoc, reqObj).subscribe(
         (response: any) => {
           this.custLegalDocs.splice(idx, 1);
           this.toastr.successMessage(response["message"]);

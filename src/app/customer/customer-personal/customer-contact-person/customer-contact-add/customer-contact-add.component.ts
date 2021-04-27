@@ -20,6 +20,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-contact-add',
@@ -568,10 +569,10 @@ export class CustomerContactAddComponent implements OnInit {
         this.onChangeIdType();
       }
     );
-    this.custAddrObj = new CustAddrObj();
-    this.custAddrObj.CustId = this.tempCustId;
-    this.custAddrObj.MrCustAddrTypeCode = RefMasterConstant.LegalAddr;
-    this.http.post(URLConstant.GetCustAddrByMrCustAddrType, this.custAddrObj).subscribe(
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = this.tempCustId;
+    reqObj.Code = CommonConstant.CustAddrTypeLegal;
+    this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response) => {
         this.tempCustAddress = response;
         this.UcAddressObj.AreaCode1 = this.tempCustAddress.AreaCode1;
