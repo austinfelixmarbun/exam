@@ -253,14 +253,11 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custObj.CustAddr.Zipcode = formValue["UcAddressZipcode"]["value"];
     this.custObj.CustAddr.SubZipcode = formValue["UcAddressZipcode"]["value"];
     this.custObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
-    console.log(this.custObj);
-    console.log(this.custPersonalObj);
     var reqEditObj = {
       CustObj: this.custObj,
       CustPersonalObj: this.custPersonalObj,
       CustAddrObj: this.custObj.CustAddr
     };
-    console.log(reqEditObj);
     this.http.post(URLConstant.EditCustPersonalMainData, reqEditObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);

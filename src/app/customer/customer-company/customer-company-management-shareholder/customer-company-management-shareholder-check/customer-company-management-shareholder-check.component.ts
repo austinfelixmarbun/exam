@@ -104,7 +104,6 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
         this.tempCustCompanyObj = response;
         this.http.post(URLConstant.GetListCustCompanyMgmntShrholderByCustId, reqObj).subscribe(
           (response) => {
-            console.log(response);
             this.tempListCompanyManagementShareholder = response["ReturnObject"]; 
             let temp = this.tempListCompanyManagementShareholder.find(element => element.IsOwner == true);
             if( temp !=null ){
