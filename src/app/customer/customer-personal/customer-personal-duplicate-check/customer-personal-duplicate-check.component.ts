@@ -17,6 +17,7 @@ import { map, mergeMap } from 'rxjs/operators';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-personal-duplicate-check',
@@ -65,11 +66,6 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
   IsAffiliateWithMf: string;
   MrMaritalStatCode: string;
 
-  addCustUrl: string;
-  resultPersonalUrl: string;
-  addCustPersonalUrl: string;
-  urlGetDescByMasterCode: string;
-
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
     this.IsFromCustFamilyTab = false;
     this.IsFromCustMgmntShareholder = false;
@@ -77,9 +73,6 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
     this.CustMgmntShareholderData = new CustCompanyMgmntShrholderObj();
     this.ResponseSaveData = new EventEmitter<any>();
 
-    this.addCustUrl = URLConstant.AddNewCust;
-    this.addCustPersonalUrl = URLConstant.AddNewCustPersonal;
-    this.urlGetDescByMasterCode = URLConstant.GetRefMasterByMasterCode;
     this.route.queryParams.subscribe(params => {
 
       if (params["CustName"] != null) {
@@ -192,7 +185,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       MasterCode: this.Gender,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, {Code: this.Gender}).subscribe(
+    this.http.post(URLConstant.GetRefMasterByMasterCode, {Code: this.Gender}).subscribe(
       (response) => {
         this.tempGender = response;
       }
@@ -202,7 +195,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       MasterCode: this.MrIdTypeCode,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, {Code: this.MrIdTypeCode}).subscribe(
+    this.http.post(URLConstant.GetRefMasterByMasterCode, {Code: this.MrIdTypeCode}).subscribe(
       (response) => {
         this.tempMrIdTypeCode = response;
       }
@@ -342,11 +335,9 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       this.addCustObj.CustAddr.Zipcode = custAddr["Zipcode"];
       this.addCustObj.CustAddr.SubZipcode = custAddr["SubZipcode"];
       this.addCustObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
-      this.http.post(this.addCustUrl, this.addCustObj).subscribe(
-        (response) => {
-          this.resultData = response;
-          this.IdCust = this.resultData.CustObj.CustId;
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.IdCust, "From": 'CustPaging' });
+      this.http.post(URLConstant.AddCustPersonalMainData, this.addCustObj).subscribe(
+        (response: GenericObj) => {
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": response.Id, "From": 'CustPaging' });
         }
       );
     }
@@ -363,7 +354,10 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
         return response;
       }),
       mergeMap((response) => {
-        return this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.addCustObj.CustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal });
+        let reqObj: GenericObj = new GenericObj();
+        reqObj.Id = this.addCustObj.CustObj.CustId;
+        reqObj.Code = CommonConstant.CustAddrTypeLegal;
+        return this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj);
       })
     ).subscribe(
       (response) => {

@@ -1,26 +1,31 @@
+import { CustAddrObj } from "./CustAddrObj.Model";
+
 export class CustCompanyContactPersonObj{
-    CustCompanyContactPersonId : any;
-    CustCompanyId : any;
-    ContactPersonName : any;
-    MrGenderCode : any;
-    MrJobPositionCode : any;
-    JobTitleName : any;
-    MobilePhnNo1 : any;
-    MobilePhnNo2 : any;
-    Email1 : any;
-    Email2 : any;
-    PhnArea1 : any;
-    Phn1 : any;
-    PhnExt1 : any;
-    PhnArea2 : any;
-    Phn2 : any;
-    PhnExt2 : any;
+    CustCompanyContactPersonId : number;
+    CustCompanyId : number;
+    ContactPersonName : string;
+    MrGenderCode : string;
+    MrJobPositionCode : string;
+    JobTitleName : string;
+    MobilePhnNo1 : string;
+    MobilePhnNo2 : string;
+    Email1 : string;
+    Email2 : string;
+    PhnArea1 : string;
+    Phn1 : string;
+    PhnExt1 : string;
+    PhnArea2 : string;
+    Phn2 : string;
+    PhnExt2 : string;
     MrIdTypeCode: string;
     IdNo: string;
     IdExpiredDt: Date;
     BirthPlace: string;
     BirthDt: Date;
     MrCustRelationshipCode: string; 
-    RowVersion: any;
-   
+    RowVersion: string;
+    CustAddrObj: CustAddrObj;
+    constructor() {
+        this.CustAddrObj = new CustAddrObj();
+    }
 }

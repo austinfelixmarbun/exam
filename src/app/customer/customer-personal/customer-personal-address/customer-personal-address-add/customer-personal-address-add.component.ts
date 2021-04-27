@@ -30,7 +30,6 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   tempCustObj: any;
   listCustAddr: any;
   listAddressType: any;
-  getListCustAddr: any;
   getCustomerAddr: any;
   copyCustomerAddr: any;
 
@@ -57,16 +56,10 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   GenderDesc: string;
   CustModel: string;
   BirthPlace: string;
-  getCustAddr: string;
-  addCustAddr: string;
-  editCustAddr: string;
   MrIdTypeCode: string;
   CustModelDesc: string;
-  getCustByCustId: string;
   MrIdTypeCodeDesc: string;
   MotherMaidenName: string;
-  getListActiveRefMaster: string;
-  getListActiveRefMasterWithMappingCodeAllUrl: string;
 
   CustDataPersonalForm = this.fb.group({
     Notes: [''],
@@ -82,14 +75,6 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   inputAddressObj: InputAddressObj;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
-    this.getListActiveRefMaster = URLConstant.GetListActiveRefMaster;
-    this.getListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
-    this.getListCustAddr = URLConstant.GetListCustAddr;
-    this.addCustAddr = URLConstant.AddCustAddr;
-    this.editCustAddr = URLConstant.EditCustAddr;
-    this.getCustAddr = URLConstant.GetCustAddr;
-    this.getCustByCustId = URLConstant.GetCustByCustId;
-
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -105,18 +90,18 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.addressType = new RefMasterObj();
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
     this.addressType.MappingCode = CommonConstant.CustTypePersonal;
-    this.http.post(this.getListActiveRefMasterWithMappingCodeAllUrl, this.addressType).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).subscribe(
       (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
-        let idxEmergency = this.listCustAddr.findIndex(x => x.Key == CommonConstant.CustAddrTypeEmergency);
-        if(idxEmergency != -1) this.listCustAddr.splice(idxEmergency, 1)
+        let idxEmergency = this.listAddressType.findIndex(x => x.Key == CommonConstant.CustAddrTypeEmergency);
+        if(idxEmergency != -1) this.listAddressType.splice(idxEmergency, 1)
         this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response[CommonConstant.ReturnObj][0]['Key'] });
       });
 
     this.custAddrObj = new CustAddrObj();
     this.custAddrObj.CustId = this.IdCust;
     this.custAddrObj.MrCustAddrTypeCode = "-";
-    this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
+    this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
       (response) => {
         this.listCustAddr = response[CommonConstant.ReturnObj];
         this.CustDataPersonalForm.patchValue({ CopyAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'] });
@@ -126,7 +111,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     if (this.pageType == "edit") {
       this.custAddrObj = new CustAddrObj();
       this.custAddrObj.CustAddrId = this.AddrId;
-      this.http.post(this.getCustAddr, {Id : this.custAddrObj.CustAddrId}).subscribe(
+      this.http.post(URLConstant.GetCustAddr, {Id : this.custAddrObj.CustAddrId}).subscribe(
         (response) => {
           this.getCustomerAddr = response;
           this.CustDataPersonalForm.patchValue({
@@ -188,7 +173,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     }
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.CustDataPersonalForm.controls["CopyAddrFrom"].value;
-    this.http.post(this.getCustAddr, {Id : this.custAddrFromObj.CustAddrId}).subscribe(
+    this.http.post(URLConstant.GetCustAddr, {Id : this.custAddrFromObj.CustAddrId}).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
         this.CustDataPersonalForm.patchValue({
@@ -258,7 +243,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.setCustAddr();
 
     if (this.pageType == "add") {
-      this.http.post(this.addCustAddr, this.custAddressObj).subscribe(
+      this.http.post(URLConstant.AddCustAddr, this.custAddressObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(
@@ -271,7 +256,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     } else {
       this.custAddressObj.CustAddrId = this.AddrId;
       this.custAddressObj.RowVersion = this.getCustomerAddr.RowVersion;
-      this.http.post(this.editCustAddr, this.custAddressObj).subscribe(
+      this.http.post(URLConstant.EditCustAddr, this.custAddressObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(

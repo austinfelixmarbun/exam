@@ -7,6 +7,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 
 @Component({
@@ -45,11 +46,14 @@ export class CustomerPersonalAddressComponent implements OnInit {
     this.custAddrObj = new CustAddrObj();
     this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeLegal;
     this.custAddrObj.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustAddrByMrCustAddrType, this.custAddrObj).subscribe(
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = this.IdCust;
+    reqObj.Code = CommonConstant.CustAddrTypeLegal;
+    this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response) => {
         this.legalAddr = response;
-        this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeResidence;
-        this.http.post(URLConstant.GetCustAddrByMrCustAddrType, this.custAddrObj).subscribe(
+        reqObj.Code = CommonConstant.CustAddrTypeResidence;
+        this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
           (response) => {
             this.residenceAddr = response;
             if (this.legalAddr.Addr == null || this.residenceAddr.Addr == null) {

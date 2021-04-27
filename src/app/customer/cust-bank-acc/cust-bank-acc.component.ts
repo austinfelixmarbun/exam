@@ -12,6 +12,7 @@ import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-cust-bank-acc',
@@ -98,7 +99,7 @@ export class CustBankAccComponent implements OnInit {
         break;
       case "Delete":
         this.IsDetail = false;
-        this.DeleteBankAcc(BankAccAndStmntObj);
+        this.DeleteBankAcc(BankAccAndStmntObj.CustBankAccId);
         break;
       case "Cancel":
         this.IsDetail = false;
@@ -233,9 +234,11 @@ export class CustBankAccComponent implements OnInit {
     }
   }
 
-  DeleteBankAcc(BankAccAndStmntObj) {
+  DeleteBankAcc(CustBankAccId: number) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
-      this.http.post(URLConstant.DeleteCustBankAccAndStmnt, BankAccAndStmntObj).subscribe(
+      let reqObj: GenericObj = new GenericObj();
+      reqObj.Id = CustBankAccId;
+      this.http.post(URLConstant.DeleteCustBankAccAndStmnt, reqObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.GetCustBankAccList();

@@ -247,61 +247,10 @@ export class CustFinDataTabComponent implements OnInit {
     return value.replace(/,/g, "");
   }
 
-  // back(){
-  //   this.outputTab.emit({ stepMode: "previous"});
-  // }
-
-  // getCustFinData() {
-  //   var response;
-  //   var url;
-
-  //   if (this.MrCustTypeCode == "PERSONAL") {
-  //     var tempResponse = this.CustPersonalFinDataForm.value;
-  //     if(this.MrMaritalStatCode != "MAR"){
-  //       tempResponse.SpouseMonthlyIncomeAmt = 0;
-  //     }
-  //     else{
-  //       if(tempResponse.SpouseMonthlyIncomeAmt = ''){
-  //         tempResponse.SpouseMonthlyIncomeAmt = 0;
-  //       }
-  //     }
-  //     response = tempResponse;
-
-  //     if(response.CustPersonalFinDataId > 0){
-  //       url = AdInsConstant.EditCustPersonalFinData;
-  //     }
-  //     else{
-  //       url = AdInsConstant.AddCustPersonalFinData
-  //     }
-  //   }
-  //   else if (this.MrCustTypeCode == "COMPANY") {
-  //     response = this.CustCompanyFinDataForm.value;
-
-  //     if(response.CustCompanyFinDataId > 0){
-  //       url = AdInsConstant.EditCustCompanyFinData;
-  //     }
-  //     else{
-  //       url = AdInsConstant.AddCustCompanyFinData;
-  //     }
-  //   }
-
-  //   if (this.isCalculated) {
-  //     this.httpClient.post(url, response).subscribe(
-  //       (response) => {
-  //         this.toastr.successMessage(response["Message"]);
-  //         this.outputTab.emit({ stepMode: "next"});
-  //       }
-  //     );
-  //   }
-  //   else {
-  //     this.toastr.errorMessage("Please Calculate First");
-  //   }
-  // }
-
   next() {
     console.log("ameng");
     var response;
-    var url;
+    let url: string = "";
 
     if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
       var tempResponse = this.CustPersonalFinDataForm.value;

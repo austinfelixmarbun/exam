@@ -11,6 +11,7 @@ import { environment } from 'environments/environment';
 import { CustOtherInfoObj } from 'app/shared/model/CustOtherInfoObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-cust-attr-section',
@@ -54,13 +55,15 @@ export class CustAttrSectionComponent implements OnInit {
   inputDebitorBusinessScaleLookupObj: InputLookupObj;
   inputCounterpartCategoryLookupObj: InputLookupObj;
   inputSustaianableFinancialBusinessLookupObj: InputLookupObj;
+
+  isExistData: boolean = false;
   async ngOnInit() { 
     this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyOther:CommonConstant.AttrGroupCustPersonalOther;
-    var custOtherInfo = new CustOtherInfoObj();
-    custOtherInfo.CustId = this.CustId;
-    await this.httpClient.post(URLConstant.GetCustOtherInfoByCustId, {Id : this.CustId}).toPromise().then(
-      (response:any) => { 
-        this.CustOtherInfo = response;  
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = this.CustId;
+    await this.httpClient.post(URLConstant.GetCustOtherInfoByCustId, reqObj).toPromise().then(
+      (response: any) => {
+        this.CustOtherInfo = response;
       }); 
     this.inputDebitorGroupLookupObj = new InputLookupObj();
     this.inputDebitorGroupLookupObj.urlJson = "./assets/lookup/lookupDebitorGroup.json";
@@ -94,6 +97,7 @@ export class CustAttrSectionComponent implements OnInit {
     this.inputSustaianableFinancialBusinessLookupObj.genericJson = "./assets/lookup/lookupSustainableFinancialBusiness.json";
     this.inputSustaianableFinancialBusinessLookupObj.isReady = true;  
       if(this.CustOtherInfo.CustOtherInfoId != 0){
+        this.isExistData = true;
         this.inputDebitorGroupLookupObj.jsonSelect =  {Descr: this.CustOtherInfo.LbppmsDebtGrpDescr};
         this.inputDebitorBusinessScaleLookupObj.jsonSelect = {Descr: this.CustOtherInfo.LbppmsBizSclDescr};
         this.inputCounterpartCategoryLookupObj.jsonSelect = {Descr: this.CustOtherInfo.LbppmsCntrprtDescr};
@@ -135,7 +139,6 @@ export class CustAttrSectionComponent implements OnInit {
   SaveForm(){ 
     var formValue = this.OtherInformationForm['controls']['AttrList'].value;
     var custAttrRequest = new Array<Object>();
-    var url = URLConstant.AddEditListCustAttrContent  
     if(Object.keys(formValue).length > 0 && formValue.constructor === Object){
       for (const key in formValue) {
         if(formValue[key]["AttrValue"]!=null ) { 
@@ -153,9 +156,11 @@ export class CustAttrSectionComponent implements OnInit {
 
       var RequestAppCustOtherInfoObj= {
         CustAttrContentObjs: custAttrRequest,
-        RequestCustOtherInfoObj:custOtherInfo
-      }
-      this.httpClient.post(URLConstant.AddEditCustOtherInfo, RequestAppCustOtherInfoObj).subscribe(
+        RCustOtherInfoObj: custOtherInfo
+      };
+
+      let url: string = this.getUrlSave();
+      this.httpClient.post(url, RequestAppCustOtherInfoObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           if (this.From == 'CustPaging') {
@@ -168,6 +173,13 @@ export class CustAttrSectionComponent implements OnInit {
     else{
       this.toastr.errorMessage("No Attribute To Save");
     }
+  }
+
+  getUrlSave(): string {
+    if (this.isExistData) {
+      return URLConstant.EditCustOtherInfo;
+    }
+    return URLConstant.AddCustOtherInfo;
   }
 
   getLookupDebitorGroup(e){
