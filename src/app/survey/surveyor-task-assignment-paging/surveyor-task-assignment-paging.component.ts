@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -14,21 +15,34 @@ export class SurveyorTaskAssignmentPagingComponent implements OnInit {
   readonly AddLink: string = NavigationConstant.SURVEYOR_PAGING;
 
   inputPagingObj: UcPagingObj;
+
+  AppId: number;
+  AppNo: number;
   
-  constructor() { }
+  constructor(private router: Router,private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj._url = "./assets/ucpaging/searchSurveyorTaskAssignment.json";
+    this.inputPagingObj._url = "./assets/ucpaging/searchSurveyTaskAssignment.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSurveyorTaskAssignment.json"; 
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSurveyTaskAssignment.json"; 
     this.inputPagingObj.ddlEnvironments = [      
       {
         name: "RO.OFFICE_NAME",
         environment: environment.FoundationR3Url
       }
     ];  
+  }
+
+  viewApp(event: any){
+    console.log(event);
+    this.AppNo = event['RowObj'].TransactionRefNo;
+    this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+      window.open(environment.losR3Web + "/View/AppView?AppId=" + this.AppId + "&AppNo=" + this.AppNo, "_blank");
+    });
+
+    this.router.navigateByUrl(NavigationConstant.SURVEY_TASK_ASSIGNMENT_PAGING, {skipLocationChange: true});
   }
 
 }

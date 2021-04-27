@@ -36,7 +36,8 @@
               </tr>
               <tr *ngFor="let item of SurveyTaskForm.controls['ListSurveyTask']['controls'];let i = index">
                 <td [formGroupName]="i" class="text-center">
-                  {{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["SurveyTaskNo"].value}}
+                  <a target="_blank" [routerLink]="[ViewLink]" skipLocationChange
+                    [queryParams]="{ SrvyTaskId: SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']['SurveyTaskId'].value}">{{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["SurveyTaskNo"].value}}</a>
                 </td>
                 <td [formGroupName]="i" class="text-center">
                   {{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["SurveyeeModel"].value}}
@@ -44,8 +45,9 @@
                 <td [formGroupName]="i" class="text-center">
                   {{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["SurveyObject"].value}}
                 </td>
-                <td [formGroupName]="i" class="text-center">
-                  {{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["SurveyeeName"].value}}
+                <td [formGroupName]="i" class="text-center">                  
+                  <a target="_blank" [routerLink]="[ViewCustLink]" skipLocationChange
+                    [queryParams]="{ CustId: SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']['CustId'].value}">{{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["SurveyeeName"].value}}</a>
                 </td>
                 <td [formGroupName]="i" class="text-center">
                   {{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["Address"].value}}
@@ -54,47 +56,51 @@
                   {{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["SurveyTaskStatus"].value}}
                 </td>
                 <td [formGroupName]="i" class="text-center">
-                  <select formControlName="SurveyType" class="form-control"
-                  name="SurveyType">
-                  <option value="">--Select--</option>
-                  <option *ngFor="let surveyType of dropdownSurveyType" [value]="surveyType.Key">{{surveyType.Value}}</option>
-                  </select>                  
+                  <select formControlName="SurveyType" class="form-control" name="SurveyType">
+                    <option value="">--Select--</option>
+                    <option *ngFor="let surveyType of dropdownSurveyType" [value]="surveyType.Key">{{surveyType.Value}}
+                    </option>
+                  </select>
                 </td>
                 <td [formGroupName]="i" class="text-center">
-                  <lib-uclookupgeneric [lookupInput]="surveyorNumber[SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls'].No.value]" [parentForm]='SurveyTaskForm' [enjiForm]='enjiForm'
-                [identifier]="'lookupSurveyorObj' + SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls'].No.value" (lookup)="getLookupSurveyor(i,$event)" #dyna></lib-uclookupgeneric>
+                  <lib-uclookupgeneric
+                    [lookupInput]="surveyorNumber[SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls'].No.value]"
+                    [parentForm]='SurveyTaskForm' [enjiForm]='enjiForm'
+                    [identifier]="'lookupSurveyorObj' + SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls'].No.value"
+                    (lookup)="getLookupSurveyor(i,$event)" #dyna></lib-uclookupgeneric>
                 </td>
                 <td [formGroupName]="i" class="text-center">
-                  <select formControlName="SurveyForm" class="form-control"
-                  name="SurveyForm">
-                  <option value="">--Select--</option>
-                  <option *ngFor="let surveyForm of dropdownSurveyFormSchm" [value]="surveyForm.Key">{{surveyForm.Value}}</option>
-                  </select>                  
+                  <select formControlName="SurveyForm" class="form-control" name="SurveyForm">
+                    <option value="">--Select--</option>
+                    <option *ngFor="let surveyForm of dropdownSurveyFormSchm" [value]="surveyForm.Key">
+                      {{surveyForm.Value}}</option>
+                  </select>
                 </td>
                 <td [formGroupName]="i">
                   <div>
                     <label class="radio-inline">
-                      <input type="radio" value="Yes" formControlName="National" (change)="onNationalSelect(i,$event)">Yes
+                      <input type="radio" value="Yes" formControlName="National"
+                        (change)="onNationalSelect(i,$event)">Yes
                     </label>
                     <label class="radio-inline">
-                      <input type="radio"  value="No" formControlName="National" (change)="onNationalSelect(i,$event)">No
-                    </label>  
+                      <input type="radio" value="No" formControlName="National" (change)="onNationalSelect(i,$event)">No
+                    </label>
                   </div>
-                                             
+
                 </td>
                 <td>
-                  <i *ngIf="SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']['SurveyTaskStatus'].value != 'CANCELLED'" class="fas fa-times fa-lg" (click)="CancelSurveyTask(SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']['SurveyTaskId'].value)"></i>
+                  <i *ngIf="SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']['SurveyTaskStatus'].value != 'CANCELLED'"
+                    class="fas fa-times fa-lg"
+                    (click)="CancelSurveyTask(SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']['SurveyTaskId'].value)"></i>
                 </td>
               </tr>
             </tbody>
           </table>
           <div class="form-actions right">
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" skipLocationChange translate>
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" skipLocationChange
+              translate>
               <i class="far fa-window-close"></i> Cancel
-            </button>  
-            <button type="button" class="btn btn-raised btn-warning mr-1" (click)="checkForm()" skipLocationChange translate>
-              <i class="far fa-window-close"></i> Check Form
-            </button>                     
+            </button>
             <button type="submit" class="btn btn-raised btn-primary" translate>
               <i class="far fa-check-square"></i> Save
             </button>

@@ -459,6 +459,7 @@ export class PathConstant {
     //#endregion
 
     //#region View-Cust-Module
+    public static VIEW_APP = "AppView";
     public static VIEW_CUST_PERSONAL_DETAIL = "PersonalDetail";
     public static VIEW_CUST_PERSONAL_CONTACT_PERSON = "PersonalContactPerson";
     public static VIEW_CUST_PERSONAL_JOB_DATA = "PersonalJobData";
