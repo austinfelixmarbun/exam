@@ -272,7 +272,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
 
   SaveValue(){
     var formValue = this.CustomerDetailForm.getRawValue();
-    this.http.post(URLConstant.EditMasterCustomer, formValue).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustomer, formValue).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

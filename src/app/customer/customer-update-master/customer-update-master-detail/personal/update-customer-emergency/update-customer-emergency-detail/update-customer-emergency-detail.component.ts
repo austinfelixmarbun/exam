@@ -252,7 +252,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   }
 
   SaveValue(){
-    this.http.post(URLConstant.EditMasterCustEmergency, this.CustomerEmergencyForm.value).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustEmergency, this.CustomerEmergencyForm.value).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

@@ -315,7 +315,6 @@ export class CustFinDataTabComponent implements OnInit {
         } else {
           var formValue = this.CustPersonalFinDataForm['controls']['AttrList'].value;
         }
-        var urlAttr = URLConstant.AddEditListCustAttrContent;
         if (Object.keys(formValue).length > 0 && formValue.constructor === Object) {
           for (const key in formValue) {
             if (formValue[key]["AttrValue"] != null) {

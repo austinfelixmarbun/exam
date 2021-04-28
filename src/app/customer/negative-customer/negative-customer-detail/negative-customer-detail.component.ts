@@ -622,9 +622,9 @@ export class NegativeCustomerDetailComponent implements OnInit {
         map((response) => {
           return response;
         }),
-        mergeMap((response: any) => {
+        mergeMap((response: GenericObj) => {
           var negativeCustChangeTrxObj = new NegativeCustChangeTrxObj();
-          negativeCustChangeTrxObj.NegativeCustId = response.NegativeCustId;
+          negativeCustChangeTrxObj.NegativeCustId = response.Id;
           negativeCustChangeTrxObj.TrxNo = "DUMMY_TRX_NO";
           negativeCustChangeTrxObj.MrTrxStatCode = "EXE";
           negativeCustChangeTrxObj.MrNegCustTypeCode = negativeCustFormData.MrCustTypeCode;

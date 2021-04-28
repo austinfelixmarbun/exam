@@ -25,8 +25,6 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
   inputPagingObj: any;
   arrCrit = new Array();
   taskListId: any;
-  UploadReviewUrl: string;
-  CancelUpload: string;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   readonly CancelLink: string = NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING;
@@ -46,8 +44,6 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.claimTask();
-    this.UploadReviewUrl = URLConstant.UploadReview;
-    this.CancelUpload = URLConstant.CancelUpload;
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadNegativeCustomerDetail.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
@@ -68,7 +64,7 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
     uploadObj.MrUploadStatusCode = status;
     uploadObj.TaskListId = this.taskListId;
     uploadObj.UploadMonitoringNo = this.uploadNo;
-    this.http.post(this.UploadReviewUrl, uploadObj).subscribe(
+    this.http.post(URLConstant.UploadReview, uploadObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING],{});

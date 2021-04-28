@@ -357,7 +357,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
   }
 
   SaveValue(){
-    this.http.post(URLConstant.EditMasterCustJobData, this.CustomerJobForm.value).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustJobData, this.CustomerJobForm.value).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

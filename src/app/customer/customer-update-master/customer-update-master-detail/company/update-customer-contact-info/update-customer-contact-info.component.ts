@@ -217,7 +217,7 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
   }
 
   SaveValue(){
-    this.http.post(URLConstant.EditMasterCustCompanyContactInfo, this.CustomerContactInfoForm.value).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustCompanyContactInfo, this.CustomerContactInfoForm.value).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

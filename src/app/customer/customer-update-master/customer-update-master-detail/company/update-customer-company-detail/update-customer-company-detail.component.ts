@@ -128,7 +128,7 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
   }
 
   SaveValue(){
-    this.http.post(URLConstant.EditMasterCustCompanyDetail, this.CustomerDetailForm.value).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustCompanyDetail, this.CustomerDetailForm.value).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }
