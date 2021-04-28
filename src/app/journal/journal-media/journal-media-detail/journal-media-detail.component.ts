@@ -34,7 +34,7 @@ export class JournalMediaDetailComponent implements OnInit {
   ddlSubsystemObj: UcDropdownListObj = new UcDropdownListObj();
   listEntityType = [];
   listHeaderFact = [];
-  readonly CancelLink: string = ""//NavigationConstant.JOURNAL_MEDIA_PAGING;
+  readonly CancelLink: string = NavigationConstant.JOURNAL_MEDIA_PAGING;
 
   constructor(
     private fb: FormBuilder,
