@@ -2,6 +2,7 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
+
         <div class="card-header header-title" style="margin-bottom: 10px;">
           <div class="row">
             <div class="col-md-8">
@@ -11,6 +12,7 @@
             </div>
           </div>
         </div>
+
         <div class="ucSearch-Button-Right" style="margin-top: 20px;">
           <span class="mr-1">
             <button type="button" class="btn btn-raised btn-primary" (click)="ReqExposure()" translate>
@@ -18,16 +20,32 @@
             </button>
           </span>
         </div>
+
         <div class="px-3">
           <lib-ucSubsection [id]="'MainInfoId'" [title]="'Main Information'" [panel]="'MainInfo'">
           </lib-ucSubsection>
           <div class="card-body" id="MainInfo">
             <div class="row">
-              <div class="col-md-6 ">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label class="label-control"> Customer No </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="label-control">
+                      <a (click)="openCustView(CustExpsrInfoObj.CustNo)" style="color: #009DA0;">{{ CustExpsrInfoObj.CustNo }}</a>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
                 <div class="row">
                   <div class="col-md-6">
                     <label class="label-control"> Customer Name </label>
-                    <span id="CustIndicator" style="float: right;">                    
+                    <span id="CustIndicator" style="float: right;">
                       <i [ngClass]="CustExpsrInfoObj.CustIndicator == null ? 'far fa-circle' : CustExpsrInfoObj.CustIndicator != whiteIndicator ? 'fa fa-circle' : 'far fa-circle'"
                       [ngStyle]="{'color': CustExpsrInfoObj.CustIndicator == null ? '' : CustExpsrInfoObj.CustIndicator != whiteIndicator ? CustExpsrInfoObj.CustIndicator : ''}" class="font-medium-3 tooltips">
                         <span class="tooltipstext">
@@ -37,13 +55,13 @@
                       </i>
                     </span>
                   </div>
-                  <div class="col-md-6 ">
+                  <div class="col-md-6">
                     <label class="label-control"> {{CustExpsrInfoObj.CustName}} </label>
                   </div>
                 </div>
               </div>
           
-              <div class="col-md-6 ">
+              <div class="col-md-6">
                 <div class="row">
                   <div class="col-md-6">
                     <label class="label-control"> Relation With Customer </label>
@@ -55,17 +73,20 @@
               </div>
             </div>
           </div>
+
           <mat-tab-group *ngIf="IsReady">
             <mat-tab label="Customer Exposure">
               <ng-template matTabContent>
                 <app-cust-exposure [exposureHObj]="CustExpsrHObj"></app-cust-exposure>
               </ng-template>
             </mat-tab>
+
             <mat-tab label="Customer Group Exposure">
               <ng-template matTabContent>
                 <app-cust-exposure [exposureHObj]="CustExpsrHObj" [exposureType]="ExposureCustGroupTypeCode"></app-cust-exposure>
               </ng-template>
             </mat-tab>
+            
             <mat-tab label="Obligor Exposure">
               <ng-template matTabContent>
                 <app-obligor-exposure [exposureHObj]="CustExpsrHObj"></app-obligor-exposure>
@@ -73,6 +94,7 @@
             </mat-tab>
           </mat-tab-group>
         </div>
+
       </div>
     </div>
   </div>
