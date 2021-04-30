@@ -487,6 +487,8 @@ export class PathConstant {
     public static FACT = "fact"
     public static ITEM_VALUE = "itemvalue"
     public static FAILED_JOURNAL_RESULT_LIST = "failedjournalresultlist"
+    public static JOURNAL_RECONCILE = "journalreconcile"
+
 
     public static JOURNAL_MEDIA_PAGING = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.PAGING
     public static JOURNAL_MEDIA_DETAIL = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.DETAIL
@@ -495,5 +497,7 @@ export class PathConstant {
     public static JOURNAL_MEDIA_GROUP_FACT = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.GROUP + "/" + PathConstant.FACT
     public static JOURNAL_MEDIA_GROUP_ITEM_VALUE = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.GROUP + '/' + PathConstant.ITEM_VALUE
     public static FAILED_JOURNAL_RESULT_LIST_PAGING = PathConstant.FAILED_JOURNAL_RESULT_LIST + "/" + PathConstant.PAGING
+    public static JOURNAL_RECONCILE_PAGING = PathConstant.JOURNAL_RECONCILE + "/" + PathConstant.PAGING
+
     //#endregion
 }

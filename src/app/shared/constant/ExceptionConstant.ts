@@ -35,4 +35,8 @@ export class ExceptionConstant {
     
     public static PLEASE_SELECT_ONE = "Please select One";
     public static ALREADY_EXIST = "Already Exist";
+
+    public static JOURNAL_ALREADY_EXECUTED = "Journal No {0} already executed";
+    public static SELECT_ONE_JOURNAL = "Select at least 1 Journal to Rerun";
+    public static RERUN_JOURNAL_FAILED = "Failed Rerun Journal";
 }

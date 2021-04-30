@@ -1007,4 +1007,7 @@ export class URLConstant {
 
     // GENERIC
     public static GetJournalResultPagingObjectBySQL = "/Generic/GetJournalResultPagingObjectBySQL";
+
+    // JOURNAL
+    public static RerunJournal = "/Journal/RerunJournal";
 }
