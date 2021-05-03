@@ -18,8 +18,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-verification-question-group-member-add',
-  templateUrl: './verification-question-group-member-add.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './verification-question-group-member-add.component.html'
 })
 export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   viewObj: any;
@@ -42,7 +41,6 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVerifQuestGrpMbr.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/verifQuestionGrpMbrTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;

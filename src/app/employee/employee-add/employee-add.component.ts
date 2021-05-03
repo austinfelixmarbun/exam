@@ -1,22 +1,18 @@
 import { Component, OnInit } from "@angular/core";
-import { AdInsConstant } from "app/shared/AdInstConstant";
 import { environment } from "environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
 import { FormBuilder, Validators } from "@angular/forms";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
-import { formatDate, DatePipe } from "@angular/common";
+import { DatePipe } from "@angular/common";
 import { RefBankObj } from "app/shared/model/RefBankObj.Model";
 import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
 import { NgxSpinnerService } from "ngx-spinner";
 import { RefUserObj } from "app/shared/model/RefUserObj.Model";
 import { EmpBankAccObj } from "app/shared/model/EmpBankAccObj.Model";
-import { map, mergeMap } from "rxjs/operators";
 import { GeneralSettingObj } from "app/shared/model/GeneralSettingObj.Model";
-import { forkJoin } from "rxjs";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
-import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
 import { URLConstant } from "app/shared/constant/URLConstant";
 import { UcAddressObj } from "app/shared/model/UcAddressObj.Model";
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
@@ -29,8 +25,7 @@ import { ReqRefEmployeeObj } from "app/shared/model/Request/UserOrganization/Ref
 
 @Component({
   selector: "app-employee-add",
-  templateUrl: "./employee-add.component.html",
-  providers: [NGXToastrService]
+  templateUrl: "./employee-add.component.html"
 })
 export class EmployeeAddComponent implements OnInit {
   pageType: string = "add";
@@ -130,8 +125,6 @@ export class EmployeeAddComponent implements OnInit {
 
     this.inputLookupBankObj = new InputLookupObj();
     this.inputLookupBankObj.urlJson = "./assets/uclookup/Bank/lookupBank.json";
-    this.inputLookupBankObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupBankObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
 

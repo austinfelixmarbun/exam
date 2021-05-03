@@ -3,7 +3,6 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
-import { environment } from 'environments/environment';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
@@ -25,7 +24,6 @@ export class ViewCabinetComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/document-management/view-cabinet-detail.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.route.queryParams.subscribe(params => {
       if (params['CabinetCode'] != null) {

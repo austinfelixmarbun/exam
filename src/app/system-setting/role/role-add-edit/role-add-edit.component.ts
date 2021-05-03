@@ -3,7 +3,6 @@ import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -14,8 +13,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-role-add-edit',
-  templateUrl: './role-add-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './role-add-edit.component.html'
 })
 export class RoleAddEditComponent implements OnInit {
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,12 +14,12 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-edit-main-data-company',
   templateUrl: './edit-main-data-company.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService]
+  styleUrls: []
 })
 export class EditMainDataCompanyComponent implements OnInit {
   
@@ -36,23 +35,11 @@ export class EditMainDataCompanyComponent implements OnInit {
   VipNotesRequired : boolean;
 
   From: string;
-  editCustUrl: string;
-  editCustCompanyUrl: string;
-  getCustByCustIdUrl: string;
-  getListActiveRefMasterUrl: string;
-  getCustCompanyByCustIdUrl: string;
-  GetListActiveRefMasterWithMappingCodeAllUrl : string;
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
   UcAddressObj: UcAddressObj = new UcAddressObj();
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService) {
-    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.getCustCompanyByCustIdUrl = URLConstant.GetCustCompanyByCustId;
-    this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
-    this.editCustUrl = URLConstant.EditCust;
-    this.editCustCompanyUrl = URLConstant.EditCustCompany;
-    this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
@@ -83,9 +70,9 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.inputAddressObj.showAllPhn = false;
 
     var refMasterObjCustModel = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel, MappingCode: CommonConstant.CustTypeCompany
+      MrCustTypeCode: CommonConstant.CustTypeCompany
     }
-    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response["ReturnObject"];
         this.CustomerCompanyForm.patchValue({
@@ -97,7 +84,7 @@ export class EditMainDataCompanyComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
       RowVersion: ""
     }
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
         this.tempCompanyTypeCode = response[CommonConstant.ReturnObj];
         if(this.tempCompanyTypeCode.length > 0){
@@ -111,7 +98,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.custObj.CustId = this.CustId;
     this.custCompanyObj.CustId = this.CustId;
 
-    this.http.post(this.getCustByCustIdUrl, {Id : this.CustId}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.CustId}).subscribe(
       (response) => {
         this.tempCustObj = response;
         this.CustomerCompanyForm.patchValue({
@@ -139,7 +126,10 @@ export class EditMainDataCompanyComponent implements OnInit {
         this.custObj.MrCustTypeCode = this.tempCustObj.MrCustTypeCode;
         this.CustomerCompanyForm.controls["TaxIdNo"].disable();
 
-        this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.tempCustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
+        let reqObj: GenericObj = new GenericObj();
+        reqObj.Id = this.tempCustObj.CustId;
+        reqObj.Code = CommonConstant.CustAddrTypeLegal;
+        this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
           (response: CustAddrObj) => {
             this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
             this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
@@ -157,7 +147,7 @@ export class EditMainDataCompanyComponent implements OnInit {
         );
       }
     );
-    this.http.post(this.getCustCompanyByCustIdUrl, {Id : this.CustId}).subscribe(
+    this.http.post(URLConstant.GetCustCompanyByCustId, {Id : this.CustId}).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
         this.CustomerCompanyForm.patchValue({
@@ -196,25 +186,26 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.custObj.CustAddr.SubZipcode = formValue["UcAddressZipcode"]["value"];
     this.custObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
 
-    this.http.post(this.editCustUrl, this.custObj).subscribe(
+    var reqEditObj = {
+      CustObj: this.custObj,
+      CustCompanyObj: this.custCompanyObj,
+      CustAddrObj: this.custObj.CustAddr
+    };
+    this.http.post(URLConstant.EditCustCompanyMainData, reqEditObj).subscribe(
       (response) => {
-        this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response["Message"]);
-            if (this.From == "EditMainData") {
-              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_PAGE],{ "IdCust": this.CustId, Page: "Edit", From:'EditMainData' });
-            }
-            else if(this.From == "CustShareholder"){
-              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_PAGE],{ "IdCust": this.CustId, Page: "Edit", From:'CustShareholder' });
-            }
-            else if(this.From == "CustGuarantor"){
-              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_PAGE],{ "IdCust": this.CustId, Page: "Edit", From:'CustGuarantor' });
-            }
-            else {
-              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_PAGE],{ "IdCust": this.CustId, From:'CustPaging' });
-            }
-          }
-        );
+        this.toastr.successMessage(response["Message"]);
+        if (this.From == "EditMainData") {
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_PAGE],{ "IdCust": this.CustId, Page: "Edit", From:'EditMainData' });
+        }
+        else if(this.From == "CustShareholder"){
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_PAGE],{ "IdCust": this.CustId, Page: "Edit", From:'CustShareholder' });
+        }
+        else if(this.From == "CustGuarantor"){
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_PAGE],{ "IdCust": this.CustId, Page: "Edit", From:'CustGuarantor' });
+        }
+        else {
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_PAGE],{ "IdCust": this.CustId, From:'CustPaging' });
+        }
       }
     );
   }

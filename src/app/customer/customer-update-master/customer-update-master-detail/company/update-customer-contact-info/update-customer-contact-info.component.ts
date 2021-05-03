@@ -9,14 +9,12 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UpdateCustContactInfoObj } from 'app/shared/model/UpdateMasterCust/UpdateCustContactInfoObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-update-customer-contact-info',
   templateUrl: './update-customer-contact-info.component.html',
-  styles: [],
-  providers: [NGXToastrService]
+  styles: []
 })
 export class UpdateCustomerContactInfoComponent implements OnInit {
   @Input() CustDataTrxId: number;
@@ -65,8 +63,6 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
     this.AppContactInfo = new UpdateCustContactInfoObj();
     this.ZipcodeLookupObj = new InputLookupObj();
     this.ZipcodeLookupObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.ZipcodeLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.ZipcodeLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.ZipcodeLookupObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.ZipcodeLookupObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
   }
@@ -217,7 +213,7 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
   }
 
   SaveValue(){
-    this.http.post(URLConstant.EditMasterCustCompanyContactInfo, this.CustomerContactInfoForm.value).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustCompanyContactInfo, this.CustomerContactInfoForm.value).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

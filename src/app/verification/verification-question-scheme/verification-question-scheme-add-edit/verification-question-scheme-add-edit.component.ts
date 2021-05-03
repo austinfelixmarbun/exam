@@ -11,8 +11,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-verification-question-scheme-add-edit',
-  templateUrl: './verification-question-scheme-add-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './verification-question-scheme-add-edit.component.html'
 })
 export class VerificationQuestionSchemeAddEditComponent implements OnInit {
   verfSchemeHObj: VerfSchemeHObj;

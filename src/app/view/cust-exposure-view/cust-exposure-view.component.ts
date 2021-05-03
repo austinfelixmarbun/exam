@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -13,10 +14,10 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './cust-exposure-view.component.html',
 })
 export class CustExposureViewComponent implements OnInit {
-
   CustId: number = 0;
   IsReady: boolean = false;
   readonly whiteIndicator: string = CommonConstant.WhiteIndicator;
+
   //#region Exposure Type
   readonly ExposureCustTypeCode: string = CommonConstant.ExposureCustTypeCode;
   readonly ExposureCustGroupTypeCode: string = CommonConstant.ExposureCustGroupTypeCode;
@@ -27,11 +28,9 @@ export class CustExposureViewComponent implements OnInit {
   readonly CaptureStatScs: string = CommonConstant.CaptureStatScs;
   readonly CaptureStatFail: string = CommonConstant.CaptureStatFail;
 
-  constructor(
-    private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
     private http: HttpClient,
-    private toastr: ToastrService
-  ) {
+    private toastr: ToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
@@ -50,7 +49,6 @@ export class CustExposureViewComponent implements OnInit {
   async GetCustExpsrInfoByCustId() {
     await this.http.post<CustExpsrInfoObj>(URLConstant.GetCustExpsrInfoByCustId, { Id: this.CustId }).toPromise().then(
       (response) => {
-        console.log(response);
         this.CustExpsrInfoObj = response;
         this.CustExpsrHObj = response.CustExpsrHObj;
       }
@@ -59,11 +57,19 @@ export class CustExposureViewComponent implements OnInit {
   //#endregion
 
   async ReqExposure() {
-    if (this.CustExpsrInfoObj.CaptureStat == this.CaptureStatReq) return this.toastr.warning(ExceptionConstant.CUST_EXPR_REQ);
-    await this.http.post(URLConstant.RequestExposureFromR2, { CustId: this.CustId }).toPromise().then(
-      (response) => {
-      }
+    if (this.CustExpsrInfoObj.CaptureStat == this.CaptureStatReq) {
+      return this.toastr.warning(ExceptionConstant.CUST_EXPR_REQ);
+    }
+    await this.http.post(URLConstant.RequestExposure, { CustId: this.CustId }).toPromise().then(
+      (response) => { }
     );
   }
 
+  openCustView(custNo: string) {
+    this.http.post(URLConstant.GetCustByCustNo, {TrxNo : custNo}).subscribe(
+      (response) => {
+        AdInsHelper.OpenCustomerViewByCustId(response["CustId"]);
+      }
+    );
+  }
 }

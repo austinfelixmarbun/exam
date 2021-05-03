@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute } from '@angular/router';
-import { environment } from 'environments/environment';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -25,8 +24,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 @Component({
   selector: 'app-job-data-sme',
   templateUrl: './job-data-small-medium-enterprise.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService]
+  styleUrls: []
 })
 export class JobDataSmeComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
@@ -40,8 +38,6 @@ export class JobDataSmeComponent implements OnInit {
   IdCustPersonal: number;
   custObj: any;
   objCust : CustObj;
-  getListActiveRefMaster: string;
-  getCustById: string;
   jobAddressObj: CustAddrObj;
   otherAddressObj: CustAddrObj;
   inputJobAddressObj: InputFieldObj;
@@ -67,12 +63,6 @@ export class JobDataSmeComponent implements OnInit {
   getJobAddr: any;
   getPreJobAddr: any;
   otherAddrObj: CustAddrObj;
-  addJobData: string;
-  editJobData: string;
-  getJobDataByCustId: string;
-  getCustAddr: string;
-  getRefProfession: string;
-  getRefIndustryType: string;
   reqCustPersonalJobDataObj: RequestCustPersonalJobDataObj;
   refProfessionObj: RefProfessionObj;
   returnRefProfessionObj: any;
@@ -120,14 +110,6 @@ export class JobDataSmeComponent implements OnInit {
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     private cookieService: CookieService) { 
-    this.getCustById = URLConstant.GetCustByCustId;
-    this.getListActiveRefMaster = URLConstant.GetListActiveRefMaster;
-    this.addJobData = URLConstant.AddCustPersonalJobData;
-    this.editJobData = URLConstant.EditCustPersonalJobData;
-    this.getJobDataByCustId = URLConstant.GetCustPersonalJobDataByCustId;
-    this.getCustAddr = URLConstant.GetCustAddr;
-    this.getRefProfession = URLConstant.GetRefProfessionById;
-    this.getRefIndustryType = URLConstant.GetRefIndustryTypeById;
     this.route.queryParams.subscribe(params => {
         if (params["IdCust"] != null) {
           this.IdCust = params["IdCust"];
@@ -182,23 +164,17 @@ export class JobDataSmeComponent implements OnInit {
     this.professionLookUpObj = new InputLookupObj();
     this.professionLookUpObj.isRequired = true;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
-    this.professionLookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.professionLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
 
     this.industryLookUpObj = new InputLookupObj();
     this.industryLookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
-    this.industryLookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.industryLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.industryLookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.isRequired = true;
 
     this.companyLookupObj = new InputLookupObj();
     this.companyLookupObj.urlJson = "./assets/uclookup/Customer/lookupCompany.json";
-    this.companyLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.companyLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.companyLookupObj.pagingJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.genericJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.isRequired = true;
@@ -222,7 +198,7 @@ export class JobDataSmeComponent implements OnInit {
 
     this.jobPosition = new RefMasterObj();
     this.jobPosition.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobPosition;
-    this.http.post(this.getListActiveRefMaster, this.jobPosition).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, this.jobPosition).subscribe(
       (response) => {
         this.listJobPosition = response[CommonConstant.ReturnObj];
         this.JobDataSmeForm.patchValue({ JobPosition: response[CommonConstant.ReturnObj][0]['Key'] });
@@ -231,7 +207,7 @@ export class JobDataSmeComponent implements OnInit {
 
     this.companyScale = new RefMasterObj();
     this.companyScale.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCoyScale;
-    this.http.post(this.getListActiveRefMaster, this.companyScale).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, this.companyScale).subscribe(
       (response) => {
         this.listCompanyScale = response[CommonConstant.ReturnObj];
         this.JobDataSmeForm.patchValue({ CompanyScale: response[CommonConstant.ReturnObj][0]['Key'] });
@@ -240,7 +216,7 @@ export class JobDataSmeComponent implements OnInit {
     
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(this.getCustById, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
       (response) => {
         this.custObj = response;
       }
@@ -248,7 +224,7 @@ export class JobDataSmeComponent implements OnInit {
 
     this.custJobDataObj = new CustPersonalJobDataObj();
     this.custJobDataObj.CustId = this.IdCust;
-    this.http.post(this.getJobDataByCustId, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustPersonalJobDataByCustId, {Id : this.IdCust}).subscribe(
       (response: any) => {
         this.returnCustJobDataObj = response;
 
@@ -277,7 +253,7 @@ export class JobDataSmeComponent implements OnInit {
           if(this.returnCustJobDataObj.RefProfessionId != null) {
             this.refProfessionObj = new RefProfessionObj();
             this.refProfessionObj.RefProfessionId = this.returnCustJobDataObj.RefProfessionId;
-            this.http.post(this.getRefProfession, {Id : this.returnCustJobDataObj.RefProfessionId}).subscribe(
+            this.http.post(URLConstant.GetRefProfessionById, {Id : this.returnCustJobDataObj.RefProfessionId}).subscribe(
               (response) => {
                 this.returnRefProfessionObj = response;
                 this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
@@ -291,7 +267,7 @@ export class JobDataSmeComponent implements OnInit {
           {
             this.refIndustryTypeObj = new RefIndustryTypeObj();
             this.refIndustryTypeObj.RefIndustryTypeId = this.returnCustJobDataObj.RefIndustryTypeId;
-            this.http.post(this.getRefIndustryType, {Id: this.returnCustJobDataObj.RefIndustryTypeId}).subscribe(
+            this.http.post(URLConstant.GetRefIndustryTypeById, {Id: this.returnCustJobDataObj.RefIndustryTypeId}).subscribe(
               (response) => {
                 this.returnIndustryTypeObj = response;
 
@@ -305,7 +281,7 @@ export class JobDataSmeComponent implements OnInit {
           if(this.returnCustJobDataObj.JobAddrId != null) {
             this.custJobAddrObj = new CustAddrObj();
             this.custJobAddrObj.CustAddrId = this.returnCustJobDataObj.JobAddrId;
-            this.http.post(this.getCustAddr, {Id : this.custJobAddrObj.CustAddrId}).subscribe(
+            this.http.post(URLConstant.GetCustAddr, {Id : this.custJobAddrObj.CustAddrId}).subscribe(
               (response) => {
                 this.getJobAddr = response;
                 this.JobDataSmeForm.patchValue({
@@ -345,7 +321,7 @@ export class JobDataSmeComponent implements OnInit {
           if(this.returnCustJobDataObj.OthBizAddrId != null) {
             this.custOthBizAddrObj = new CustAddrObj();
             this.custOthBizAddrObj.CustAddrId = this.returnCustJobDataObj.OthBizAddrId;
-            this.http.post(this.getCustAddr, {Id : this.custOthBizAddrObj.CustAddrId}).subscribe(
+            this.http.post(URLConstant.GetCustAddr, {Id : this.custOthBizAddrObj.CustAddrId}).subscribe(
               (response) => {
                 this.getOthBizAddr = response;
                 this.JobDataSmeForm.patchValue({
@@ -386,7 +362,7 @@ export class JobDataSmeComponent implements OnInit {
           if (this.returnCustJobDataObj.PrevJobAddrId != null) {
             this.preJobAddrObj = new CustAddrObj();
             this.preJobAddrObj.CustAddrId = this.returnCustJobDataObj.PrevJobAddrId;
-            this.http.post(this.getCustAddr, {Id : this.preJobAddrObj.CustAddrId}).subscribe(
+            this.http.post(URLConstant.GetCustAddr, {Id : this.preJobAddrObj.CustAddrId}).subscribe(
               (response) => {
                 this.getPreJobAddr = response;
                 this.JobDataSmeForm.patchValue({
@@ -563,7 +539,7 @@ export class JobDataSmeComponent implements OnInit {
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_SME;
 
-      this.http.post(this.editJobData, this.reqCustPersonalJobDataObj).subscribe(
+      this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputTab.emit({ stepMode: "next"});
@@ -586,7 +562,7 @@ export class JobDataSmeComponent implements OnInit {
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_SME;
 
-      this.http.post(this.addJobData, this.reqCustPersonalJobDataObj).subscribe(
+      this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputTab.emit({ stepMode: "next"});

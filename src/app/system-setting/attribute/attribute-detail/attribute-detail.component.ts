@@ -10,7 +10,6 @@ import { forkJoin } from 'rxjs';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -69,8 +68,6 @@ export class AttributeDetailComponent implements OnInit {
   ngOnInit() {
     this.inputLookupRefMasterType = new InputLookupObj();
     this.inputLookupRefMasterType.urlJson = "./assets/lookup/lookupRefMasterType.json";
-    this.inputLookupRefMasterType.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupRefMasterType.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupRefMasterType.pagingJson = "./assets/lookup/lookupRefMasterType.json";
     this.inputLookupRefMasterType.genericJson = "./assets/lookup/lookupRefMasterType.json";
     this.inputLookupRefMasterType.isRequired = false;

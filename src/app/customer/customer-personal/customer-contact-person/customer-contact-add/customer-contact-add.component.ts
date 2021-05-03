@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalContactPerson.Obj.Model';
@@ -20,12 +19,12 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-contact-add',
   templateUrl: './customer-contact-add.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService],
+  styleUrls: []
 })
 export class CustomerContactAddComponent implements OnInit {
   @Output() outputTab: EventEmitter<any> = new EventEmitter();
@@ -138,8 +137,6 @@ export class CustomerContactAddComponent implements OnInit {
 
         this.lookUpObj = new InputLookupObj();
         this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
-        this.lookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-        this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
         this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";
         this.criteriaList = new Array();
@@ -161,16 +158,12 @@ export class CustomerContactAddComponent implements OnInit {
     this.professionLookUpObj = new InputLookupObj();
     this.professionLookUpObj.isRequired = false;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
-    this.professionLookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.professionLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
 
     this.existingCustomerLookUpObj = new InputLookupObj();
     this.existingCustomerLookUpObj.isRequired = false;
     this.existingCustomerLookUpObj.urlJson = "./assets/lookup/lookupExistingCustomer.json";
-    this.existingCustomerLookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.existingCustomerLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.existingCustomerLookUpObj.pagingJson = "./assets/lookup/lookupExistingCustomer.json";
     this.existingCustomerLookUpObj.genericJson = "./assets/lookup/lookupExistingCustomer.json";
     if (this.listCustIdToExclude.length > 0) {
@@ -568,10 +561,10 @@ export class CustomerContactAddComponent implements OnInit {
         this.onChangeIdType();
       }
     );
-    this.custAddrObj = new CustAddrObj();
-    this.custAddrObj.CustId = this.tempCustId;
-    this.custAddrObj.MrCustAddrTypeCode = RefMasterConstant.LegalAddr;
-    this.http.post(URLConstant.GetCustAddrByMrCustAddrType, this.custAddrObj).subscribe(
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = this.tempCustId;
+    reqObj.Code = CommonConstant.CustAddrTypeLegal;
+    this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response) => {
         this.tempCustAddress = response;
         this.UcAddressObj.AreaCode1 = this.tempCustAddress.AreaCode1;

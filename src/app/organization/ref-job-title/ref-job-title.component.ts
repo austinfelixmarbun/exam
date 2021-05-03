@@ -1,7 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from 'environments/environment';
-import { RefJobTitleObj } from 'app/shared/model/RefJobTitleObj.Model';
+import { Component, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { UcPagingObj } from '../../shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -14,15 +11,12 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 })
 export class RefJobTitleComponent implements OnInit {
 
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
   constructor() { }
 
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/search/searchJobTitle.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/search/searchJobTitle.json";
   }
 }

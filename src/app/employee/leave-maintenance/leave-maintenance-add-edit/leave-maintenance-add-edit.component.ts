@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { NgForm, Validators, FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RefEmpLeaveMngmntObj } from 'app/shared/model/RefEmpLeaveMngmntObj.Model';
 import { formatDate, DatePipe } from '@angular/common';
-import { environment } from 'environments/environment';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { RefEmpObj } from '../../../shared/model/RefEmpObj.Model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
@@ -17,15 +16,13 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-leave-maintenance-add-edit',
-  templateUrl: './leave-maintenance-add-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './leave-maintenance-add-edit.component.html'
 })
 export class LeaveMaintenanceAddEditComponent implements OnInit {
   pageType: string = "add";
   refEmpLeaveMngmntId: any;
   relmObj: RefEmpLeaveMngmntObj;
   resultData: any;
-  inputPagingObj: any;
   inputEmpLookupObj;
   refEmp: RefEmpObj;
   resultEmpData: any;
@@ -57,8 +54,6 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
 
     this.inputEmpLookupObj = new InputLookupObj();
     this.inputEmpLookupObj.urlJson = "./assets/lookup/lookupEmpLeave.json";
-    this.inputEmpLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputEmpLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputEmpLookupObj.pagingJson = "./assets/lookup/lookupEmpLeave.json";
     this.inputEmpLookupObj.genericJson = "./assets/lookup/lookupEmpLeave.json";
 

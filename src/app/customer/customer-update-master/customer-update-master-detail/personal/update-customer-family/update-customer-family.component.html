@@ -37,6 +37,11 @@
               </th>
             </tr>
           </thead>
+          <tbody *ngIf="ListAppFamily?.length == 0">
+            <tr>
+              <td colspan="100%">No Data Available</td>
+            </tr>
+          </tbody>
           <tbody>
             <tr *ngFor="let item of ListAppFamily; let i = index">
               <td style="text-align: left;">{{item.CustName}}</td>
@@ -77,6 +82,11 @@
               </th>
             </tr>
           </thead>
+          <tbody *ngIf="ListCustFamily?.length == 0">
+            <tr>
+              <td colspan="100%">No Data Available</td>
+            </tr>
+          </tbody>
           <tbody>
             <tr *ngFor="let item of ListCustFamily; let i = index">
               <td style="text-align: left;">{{item.CustName}}</td>

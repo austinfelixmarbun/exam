@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
 import { RefFormObj } from 'app/shared/model/RefFormObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -159,8 +158,6 @@ export class RefFormDetailComponent implements OnInit {
   setLookup() {
     this.inputLookupParentObj = new InputLookupObj();
     this.inputLookupParentObj.urlJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
-    this.inputLookupParentObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
     this.inputLookupParentObj.isRequired = false;

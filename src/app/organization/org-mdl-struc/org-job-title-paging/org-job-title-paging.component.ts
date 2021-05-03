@@ -18,7 +18,7 @@ import { URLConstant } from "app/shared/constant/URLConstant";
 @Component({
   selector: "app-org-job-title-paging",
   templateUrl: "./org-job-title-paging.component.html",
-  providers: [NGXToastrService, NGXToastrService, ExcelService, DecimalPipe]
+  providers: [ExcelService, DecimalPipe]
 })
 export class OrgJobTitlePagingComponent implements OnInit {
   @ViewChild(UCSearchComponent) searchComponent;
@@ -34,7 +34,6 @@ export class OrgJobTitlePagingComponent implements OnInit {
   excelData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: any = environment.FoundationR3Url;
   addCrit: CriteriaObj[];
 
   orgJobTitleObj: OrgJobTitleObj;
@@ -71,7 +70,7 @@ export class OrgJobTitlePagingComponent implements OnInit {
     
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + URLConstant.GetOrgJobTitlePaging;
+    this.apiUrl = environment.FoundationR3Url + URLConstant.GetOrgJobTitlePaging;
     this.initiateForm();
   }
 
@@ -119,7 +118,7 @@ export class OrgJobTitlePagingComponent implements OnInit {
 
   del(id: any) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
-      this.deleteUrl = this.foundationUrl + URLConstant.DeleteOrgJobTitle;
+      this.deleteUrl = environment.FoundationR3Url + URLConstant.DeleteOrgJobTitle;
       this.orgJobTitleObj = new OrgJobTitleObj();
       this.orgJobTitleObj.orgJobTitleId = +id;
 

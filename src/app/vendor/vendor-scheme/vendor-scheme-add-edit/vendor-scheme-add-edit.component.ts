@@ -5,7 +5,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -13,8 +12,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-vendor-scheme-add-edit',
-  templateUrl: './vendor-scheme-add-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './vendor-scheme-add-edit.component.html'
 })
 export class VendorSchemeAddEditComponent implements OnInit {
   vendorSchemeObj: VendorSchemeObj;

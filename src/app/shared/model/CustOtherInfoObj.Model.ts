@@ -2,7 +2,7 @@ export class CustOtherInfoObj{
     CustId : any;
     LbppmsCntrprtId : number;
     LbppmsBizSustainId : number;
-    LbpLbppmsDebtGrpCodepmsCntrprtId : string;
-    LbppmsBizSclCode : string; 
+    LbppmsDebtGrpId : number;
+    LbppmsBizSclId : number; 
     RowVersion: string;
 }

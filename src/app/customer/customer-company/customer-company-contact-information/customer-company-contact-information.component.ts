@@ -8,8 +8,6 @@ import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustCompanyContactPersonObj } from 'app/shared/model/CustCompanyContactPersonObj.model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
@@ -17,12 +15,12 @@ import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
 import { formatDate } from '@angular/common';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-company-contact-information',
   templateUrl: './customer-company-contact-information.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService],
+  styleUrls: []
 })
 export class CustomerCompanyContactInformationComponent implements OnInit {
   @Input() custCompanyId: number;
@@ -47,15 +45,6 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   custCompanyContactPersonObj: CustCompanyContactPersonObj;
 
   IdCust: number;
-  getCustAddrUrl: string;
-  editCustAddrUrl: string;
-  addNewCustAddrUrl: string;
-  getListActiveRefMasterUrl: string;
-  getCustCompanyByCustIdUrl: string;
-  addCustCompanyContactPersonUrl: string;
-  getCustAddrByMrCustAddrTypeUrl: string;
-  editCustCompanyContactPersonByCustCompanyIdUrl: string;
-  getCustCompanyContactPersonByCustCompanyIdUrl: string;
 
   UserAccess: Object;
   MaxDate: Date;
@@ -84,14 +73,6 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
         this.IdCust = params["IdCust"];
       }
     });
-    this.addNewCustAddrUrl = URLConstant.AddCustAddr;
-    this.addCustCompanyContactPersonUrl = URLConstant.AddCustCompanyContactPerson;
-    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.getCustAddrUrl = URLConstant.GetCustAddr;
-    this.getCustCompanyContactPersonByCustCompanyIdUrl = URLConstant.GetCustCompanyContactPersonByCustCompanyId;
-    this.getCustAddrByMrCustAddrTypeUrl = URLConstant.GetCustAddrByMrCustAddrType;
-    this.editCustAddrUrl = URLConstant.EditCustAddr;
-    this.editCustCompanyContactPersonByCustCompanyIdUrl = URLConstant.EditCustCompanyContactPersonByCustCompanyId
   }
 
   ngOnInit() {
@@ -104,7 +85,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition,
       RowVersion: ""
     }
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrJobPositionCode).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrJobPositionCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrJobPositionCode = response[CommonConstant.ReturnObj];
@@ -114,7 +95,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       RowVersion: ""
     }
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrGenderCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrGenderCode = response[CommonConstant.ReturnObj];
@@ -125,7 +106,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
       RowVersion: ""
     }
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrIdTypeCode = response[CommonConstant.ReturnObj];
@@ -136,7 +117,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship,
       RowVersion: ""
     }
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCustRelationshipCode).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCustRelationshipCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrCustRelationshipCode = response[CommonConstant.ReturnObj];
@@ -152,7 +133,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
         this.custCompanyId = response['CustCompanyId'];
 
         this.custCompanyContactPersonObj.CustCompanyId = this.custCompanyId;
-        this.http.post(this.getCustCompanyContactPersonByCustCompanyIdUrl, this.custCompanyContactPersonObj).subscribe(
+        this.http.post(URLConstant.GetCustCompanyContactPersonByCustCompanyId, this.custCompanyContactPersonObj).subscribe(
           (response) => {
             this.tempCustCompanyContactPersonObj = response;
             this.ContactInformationForm.patchValue({
@@ -200,9 +181,10 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       }
     );
 
-    this.custAddrObj.CustId = this.IdCust;
-    this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeCompany;
-    this.http.post(this.getCustAddrByMrCustAddrTypeUrl, this.custAddrObj).subscribe(
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = this.IdCust;
+    reqObj.Code = CommonConstant.CustAddrTypeCompany;
+    this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response) => {
         this.tempCustAddrObj = response;
         this.UcAddressObj.AreaCode1 = this.tempCustAddrObj.AreaCode1;
@@ -299,31 +281,24 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custAddrObj.PhnArea2 = this.ContactInformationForm.value.UcAddress.PhnArea2;
     this.custAddrObj.PhnExt1 = this.ContactInformationForm.value.UcAddress.PhnExt1;
     this.custAddrObj.PhnExt2 = this.ContactInformationForm.value.UcAddress.PhnExt2;
+    this.custCompanyContactPersonObj.CustAddrObj = this.custAddrObj;
 
     if (this.tempCustCompanyContactPersonObj.CustCompanyContactPersonId != 0) {
       this.custAddrObj = this.tempCustAddrObj;
       this.custCompanyContactPersonObj = this.tempCustCompanyContactPersonObj;
       this.custCompanyContactPersonObj.RowVersion = this.tempCustCompanyContactPersonObj.RowVersion;
 
-      this.http.post(this.editCustAddrUrl, this.custAddrObj).subscribe(
+      this.http.post(URLConstant.EditCustCompanyContactPersonByCustCompanyId, this.custCompanyContactPersonObj).subscribe(
         (response) => {
-          this.http.post(this.editCustCompanyContactPersonByCustCompanyIdUrl, this.custCompanyContactPersonObj).subscribe(
-            (response) => {
-              this.toastr.successMessage(response["Message"]);
-              this.outputTab.emit({ stepMode: 'next' });
-            }
-          );
+          this.toastr.successMessage(response["Message"]);
+          this.outputTab.emit({ stepMode: 'next' });
         }
       );
     } else {
-      this.http.post(this.addNewCustAddrUrl, this.custAddrObj).subscribe(
+      this.http.post(URLConstant.AddCustCompanyContactPerson, this.custCompanyContactPersonObj).subscribe(
         (response) => {
-          this.http.post(this.addCustCompanyContactPersonUrl, this.custCompanyContactPersonObj).subscribe(
-            (response) => {
-              this.toastr.successMessage(response["Message"]);
-              this.outputTab.emit({ stepMode: 'next' });
-            }
-          );
+          this.toastr.successMessage(response["Message"]);
+          this.outputTab.emit({ stepMode: 'next' });
         }
       );
     }

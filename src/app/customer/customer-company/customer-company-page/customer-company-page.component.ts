@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import Stepper from 'bs-stepper';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { DMSObj } from 'app/shared/model/DMS/DMSObj.model';
@@ -17,8 +15,7 @@ import { ResponseSysConfigResultObj } from 'app/shared/model/Response/ResponseSy
 @Component({
   selector: 'app-customer-company-page',
   templateUrl: './customer-company-page.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService],
+  styleUrls: []
 })
 export class CustomerCompanyPageComponent implements OnInit {
   private stepper: Stepper;

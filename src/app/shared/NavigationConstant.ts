@@ -337,6 +337,7 @@ export class NavigationConstant {
     public static JOURNAL_MEDIA_GROUP_ITEM_VALUE = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_MEDIA_GROUP_ITEM_VALUE;
     public static JOURNAL_RESULT = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_RESULT;
     public static FAILED_JOURNAL_RESULT_LIST_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.FAILED_JOURNAL_RESULT_LIST_PAGING;
+    public static JOURNAL_RECONCILE_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_RECONCILE_PAGING;
     //#endregion
 
     

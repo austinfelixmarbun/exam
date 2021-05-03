@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe, Location } from '@angular/common';
 import { NegativeCustObj } from 'app/shared/model/NegativeCustObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { map, mergeMap } from 'rxjs/operators';
 import { NegativeCustChangeTrxObj } from 'app/shared/model/NegativeCustChangeTrxObj.Model';
 import { forkJoin } from 'rxjs';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({

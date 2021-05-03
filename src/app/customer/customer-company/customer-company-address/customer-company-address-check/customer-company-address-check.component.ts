@@ -1,9 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms'; 
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { FormBuilder } from '@angular/forms';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model'; 
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -12,8 +11,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 @Component({
   selector: 'app-customer-company-address-check',
   templateUrl: './customer-company-address-check.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService]
+  styleUrls: []
 })
 export class CustomerCompanyAddressCheckComponent implements OnInit {
  
@@ -23,12 +21,8 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   objCust : CustObj;
   custAddrObj: CustAddrObj;
   listCustAddr: any;
-  getCustByIdUrl: string;
-  getListCustAddrUrl: string;
   From : string;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.getCustByIdUrl = URLConstant.GetCustByCustId;
-    this.getListCustAddrUrl = URLConstant.GetListCustAddr;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -42,14 +36,14 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   ngOnInit() {
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(this.getCustByIdUrl, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
       (response) => {
         this.custObj = response;
       });
     this.custAddrObj = new CustAddrObj();
     this.custAddrObj.CustId = this.IdCust;
     this.custAddrObj.MrCustAddrTypeCode = "-";
-    this.http.post(this.getListCustAddrUrl, this.custAddrObj).subscribe(
+    this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
       (response) => {
         this.listCustAddr = response["ReturnObject"];
         let idxCompany = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode == CommonConstant.CustAddrTypeCompany);

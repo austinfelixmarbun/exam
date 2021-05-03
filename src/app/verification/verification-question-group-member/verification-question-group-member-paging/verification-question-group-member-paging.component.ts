@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionGrpHObj } from 'app/shared/model/VerfQuestionGrpHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -13,8 +11,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-verification-question-group-member-paging',
-  templateUrl: './verification-question-group-member-paging.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './verification-question-group-member-paging.component.html'
 })
 export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
   verfQuestionGrpHObj: VerfQuestionGrpHObj;

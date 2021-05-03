@@ -705,7 +705,11 @@ export class URLConstant {
 
     // CUSTOMER
     public static AddNewCust = environment.FoundationR3Url + "/Cust/AddCust";
+    public static AddCustPersonalMainData = environment.FoundationR3Url + "/Cust/AddCustPersonalMainData";
+    public static AddCustCompanyMainData = environment.FoundationR3Url + "/Cust/AddCustCompanyMainData";
     public static EditCust = environment.FoundationR3Url + "/Cust/EditCust";
+    public static EditCustPersonalMainData = environment.FoundationR3Url + "/Cust/EditCustPersonalMainData";
+    public static EditCustCompanyMainData = environment.FoundationR3Url + "/Cust/EditCustCompanyMainData";
     public static EditDuplicateCust = environment.FoundationR3Url + "/Cust/EditDuplicateCust";
     public static EditNegativeDuplicateCust = environment.FoundationR3Url + "/Cust/EditNegativeDuplicateCust";
     public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId";
@@ -779,6 +783,8 @@ export class URLConstant {
     // CUSTOMER COMPANY MANAGEMENT SHAREHOLDER
     public static GetCustCompanyMgmntShrholderForCustViewByCustId = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderForCustViewByCustId";
     public static AddCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholder";
+    public static AddCustCompanyMgmntShrholderPersonal = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderPersonal";
+    public static AddCustCompanyMgmntShrholderCompany = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderCompany";
     public static EditCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholder";
     public static DeleteCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/DeleteCustCompanyMgmntShrholder";
     public static GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId";
@@ -810,8 +816,9 @@ export class URLConstant {
     public static GetNegativeCustByNegativeCustNameAndCustType = environment.FoundationR3Url + "/NegativeCust/GetNegativeCustByNegativeCustNameAndCustType";
 
     // CUSTOMER OTHER INFO
-    public static AddEditCustOtherInfo = environment.FoundationR3Url + "/CustOtherInfo/AddEditCustOtherInfo"
-    public static GetCustOtherInfoByCustId = environment.FoundationR3Url + "/CustOtherInfo/GetCustOtherInfoByCustId"
+    public static AddCustOtherInfo = environment.FoundationR3Url + "/CustOtherInfo/AddCustOtherInfo";
+    public static EditCustOtherInfo = environment.FoundationR3Url + "/CustOtherInfo/EditCustOtherInfo";
+    public static GetCustOtherInfoByCustId = environment.FoundationR3Url + "/CustOtherInfo/GetCustOtherInfoByCustId";
 
     //REF BEHAVIOUR
     public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
@@ -907,17 +914,17 @@ export class URLConstant {
     public static GetContactInfoForUpdateMasterCustCompanyContactInfo = environment.FoundationR3Url + "/UpdateMasterCust/GetContactInfoForUpdateMasterCustCompanyContactInfo";
     public static GetFinDataForUpdateMasterCustCompanyFinData = environment.FoundationR3Url + "/UpdateMasterCust/GetFinDataForUpdateMasterCustCompanyFinData";
     public static GetLegalDocForUpdateMasterCustCompanyLegalDoc = environment.FoundationR3Url + "/UpdateMasterCust/GetLegalDocForUpdateMasterCustCompanyLegalDoc";
-    public static EditMasterCustomer = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustomer";
-    public static EditMasterCustAddr = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustAddr";
-    public static EditMasterCustFamily = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustFamily";
-    public static EditMasterCustEmergency = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustEmergency";
-    public static EditMasterCustJobData = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustJobData";
-    public static EditMasterCustFinData = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustFinData";
-    public static EditMasterCustCompanyDetail = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyDetail";
-    public static EditMasterCustCompanyShareholder = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyShareholder";
-    public static EditMasterCustCompanyLegalDoc = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyLegalDoc";
-    public static EditMasterCustCompanyContactInfo = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyContactInfo";
-    public static EditMasterCustCompanyFinData = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyFinData";
+    public static UpdateMasterCustomer = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustomer";
+    public static UpdateMasterCustAddr = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustAddr";
+    public static UpdateMasterCustFamily = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustFamily";
+    public static UpdateMasterCustEmergency = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustEmergency";
+    public static UpdateMasterCustJobData = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustJobData";
+    public static UpdateMasterCustFinData = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustFinData";
+    public static UpdateMasterCustCompanyDetail = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustCompanyDetail";
+    public static UpdateMasterCustCompanyShareholder = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustCompanyShareholder";
+    public static UpdateMasterCustCompanyLegalDoc = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustCompanyLegalDoc";
+    public static UpdateMasterCustCompanyContactInfo = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustCompanyContactInfo";
+    public static UpdateMasterCustCompanyFinData = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustCompanyFinData";
 
     // New Approval R3
     public static CreateNewRFA = "/Approval/CreateNewRFA";
@@ -977,7 +984,7 @@ export class URLConstant {
     
     // Cust Exposure
     public static GetCustExpsrInfoByCustId = environment.FoundationR3Url + "/CustExpsrInfo/GetCustExpsrInfoByCustId";
-    public static RequestExposureFromR2 = environment.FoundationR3Url + "/CustExpsrInfo/RequestExposureFromR2";
+    public static RequestExposure = environment.FoundationR3Url + "/CustExpsrInfo/RequestExposure";
     public static GetListCustExpsrBucketByCustExpsrDId = environment.FoundationR3Url + "/CustExpsrInfo/GetListCustExpsrBucketByCustExpsrDId";
     public static GetListCustExpsrAppAgrHistByCustExpsrHId = environment.FoundationR3Url + "/CustExpsrInfo/GetListCustExpsrAppAgrHistByCustExpsrHId";
 
@@ -1002,4 +1009,7 @@ export class URLConstant {
 
     // GENERIC
     public static GetJournalResultPagingObjectBySQL = "/Generic/GetJournalResultPagingObjectBySQL";
+
+    // JOURNAL
+    public static RerunJournal = "/Journal/RerunJournal";
 }

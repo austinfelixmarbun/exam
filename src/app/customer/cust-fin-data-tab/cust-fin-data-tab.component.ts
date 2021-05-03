@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { CustPersonalFinDataObj } from 'app/shared/model/CustPersonalFinDataObj.Model';
 import { CustCompanyFinDataObj } from 'app/shared/model/CustCompanyFinDataObj.Model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
-import { first, map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -17,8 +17,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 @Component({
   selector: 'app-cust-fin-data-tab',
   templateUrl: './cust-fin-data-tab.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService]
+  styleUrls: []
 })
 export class CustFinDataTabComponent implements OnInit {
   @Input() MrCustTypeCode: string;
@@ -247,61 +246,10 @@ export class CustFinDataTabComponent implements OnInit {
     return value.replace(/,/g, "");
   }
 
-  // back(){
-  //   this.outputTab.emit({ stepMode: "previous"});
-  // }
-
-  // getCustFinData() {
-  //   var response;
-  //   var url;
-
-  //   if (this.MrCustTypeCode == "PERSONAL") {
-  //     var tempResponse = this.CustPersonalFinDataForm.value;
-  //     if(this.MrMaritalStatCode != "MAR"){
-  //       tempResponse.SpouseMonthlyIncomeAmt = 0;
-  //     }
-  //     else{
-  //       if(tempResponse.SpouseMonthlyIncomeAmt = ''){
-  //         tempResponse.SpouseMonthlyIncomeAmt = 0;
-  //       }
-  //     }
-  //     response = tempResponse;
-
-  //     if(response.CustPersonalFinDataId > 0){
-  //       url = AdInsConstant.EditCustPersonalFinData;
-  //     }
-  //     else{
-  //       url = AdInsConstant.AddCustPersonalFinData
-  //     }
-  //   }
-  //   else if (this.MrCustTypeCode == "COMPANY") {
-  //     response = this.CustCompanyFinDataForm.value;
-
-  //     if(response.CustCompanyFinDataId > 0){
-  //       url = AdInsConstant.EditCustCompanyFinData;
-  //     }
-  //     else{
-  //       url = AdInsConstant.AddCustCompanyFinData;
-  //     }
-  //   }
-
-  //   if (this.isCalculated) {
-  //     this.httpClient.post(url, response).subscribe(
-  //       (response) => {
-  //         this.toastr.successMessage(response["Message"]);
-  //         this.outputTab.emit({ stepMode: "next"});
-  //       }
-  //     );
-  //   }
-  //   else {
-  //     this.toastr.errorMessage("Please Calculate First");
-  //   }
-  // }
-
   next() {
     console.log("ameng");
     var response;
-    var url;
+    let url: string = "";
 
     if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
       var tempResponse = this.CustPersonalFinDataForm.value;
@@ -366,7 +314,6 @@ export class CustFinDataTabComponent implements OnInit {
         } else {
           var formValue = this.CustPersonalFinDataForm['controls']['AttrList'].value;
         }
-        var urlAttr = URLConstant.AddEditListCustAttrContent;
         if (Object.keys(formValue).length > 0 && formValue.constructor === Object) {
           for (const key in formValue) {
             if (formValue[key]["AttrValue"] != null) {

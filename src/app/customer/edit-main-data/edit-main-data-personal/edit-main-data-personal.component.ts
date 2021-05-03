@@ -18,11 +18,11 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-edit-main-data-personal',
-  templateUrl: './edit-main-data-personal.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './edit-main-data-personal.component.html'
 })
 export class EditMainDataPersonalComponent implements OnInit {
   CustomerPersonalForm = this.fb.group({
@@ -42,16 +42,10 @@ export class EditMainDataPersonalComponent implements OnInit {
     VipNotes: ['']
   });
   KTP = RefMasterConstant.EKtp;
-  getListActiveRefMasterUrl: string;
   tempKTPCheck: any;
   tempGender: any;
   tempIdType: any;
   tempCustModel: any;
-  editCustUrl: any;
-  editCustPersonalUrl: string;
-  getCustPersonalByCustIdUrl: string;
-  getCustByCustIdUrl: string;
-  GetListActiveRefMasterWithMappingCodeAllUrl  :string;
   tempCustPersonalObj: CustPersonalObj;
   tempCustObj: any;
   CustId: number;
@@ -67,12 +61,6 @@ export class EditMainDataPersonalComponent implements OnInit {
   UcAddressObj: UcAddressObj = new UcAddressObj();
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService, private cookieService: CookieService) {
-    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.getCustPersonalByCustIdUrl = URLConstant.GetCustPersonalbyCustId;
-    this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
-    this.editCustUrl = URLConstant.EditCust;
-    this.editCustPersonalUrl = URLConstant.EditCustPersonal; 
-    this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
@@ -103,7 +91,7 @@ export class EditMainDataPersonalComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       RowVersion: ""
     }
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObjGender).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjGender).subscribe(
       (response) => {
         this.tempGender = response[CommonConstant.ReturnObj];
         if(this.tempGender.length > 0){
@@ -117,7 +105,7 @@ export class EditMainDataPersonalComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
       RowVersion: ""
     }
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         this.tempIdType = response[CommonConstant.ReturnObj];
         if(this.tempIdType.length > 0){
@@ -148,7 +136,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custObj.CustId = this.CustId;
     this.custPersonalObj.CustId = this.CustId;
     var datePipe = new DatePipe("en-US");
-    this.http.post(this.getCustByCustIdUrl, {Id : this.CustId}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.CustId}).subscribe(
       (response) => {
         this.tempCustObj = response;
         this.CustomerPersonalForm.patchValue({
@@ -180,7 +168,10 @@ export class EditMainDataPersonalComponent implements OnInit {
         this.custObj.RowVersion = this.tempCustObj.RowVersion;
         this.custObj.MrCustTypeCode = this.tempCustObj.MrCustTypeCode;
 
-        this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.tempCustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
+        let reqObj: GenericObj = new GenericObj();
+        reqObj.Id = this.tempCustObj.CustId;
+        reqObj.Code = CommonConstant.CustAddrTypeLegal;
+        this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
           (response: CustAddrObj) => {
             this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
             this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
@@ -198,7 +189,7 @@ export class EditMainDataPersonalComponent implements OnInit {
         );
       }
     );
-    await this.http.post<CustPersonalObj>(this.getCustPersonalByCustIdUrl, {Id : this.custPersonalObj.CustId}).toPromise().then(
+    await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, {Id : this.custPersonalObj.CustId}).toPromise().then(
       (response) => {
         this.tempCustPersonalObj = response;
         this.CustomerPersonalForm.patchValue({
@@ -211,7 +202,7 @@ export class EditMainDataPersonalComponent implements OnInit {
         });
       }
     );
-    await this.http.post(this.getListActiveRefMasterUrl, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat}).toPromise().then(
+    await this.http.post(URLConstant.GetListActiveRefMaster, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat}).toPromise().then(
       (response) => {
         this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
         if (this.tempCustPersonalObj.MrMaritalStatCode != null) {
@@ -261,29 +252,30 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custObj.CustAddr.Zipcode = formValue["UcAddressZipcode"]["value"];
     this.custObj.CustAddr.SubZipcode = formValue["UcAddressZipcode"]["value"];
     this.custObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
-    this.http.post(this.editCustUrl, this.custObj).subscribe(
+    var reqEditObj = {
+      CustObj: this.custObj,
+      CustPersonalObj: this.custPersonalObj,
+      CustAddrObj: this.custObj.CustAddr
+    };
+    this.http.post(URLConstant.EditCustPersonalMainData, reqEditObj).subscribe(
       (response) => {
-        this.http.post(this.editCustPersonalUrl, this.custPersonalObj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response["Message"]);
-            
-            if (this.From == "EditMainData") {
-              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.CustId, Page: 'Edit', From: 'EditMainData' });
-            }
-            else if(this.From == "CustFamily"){
-              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.CustId, Page: 'Edit', From: 'CustFamily' });
-            }
-            else if(this.From == "CustShareholder"){
-              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.CustId, Page: 'Edit', From: 'CustShareholder' });
-            }
-            else if(this.From == "CustGuarantor"){
-              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.CustId, Page: 'Edit', From: 'CustGuarantor' });
-            }
-            else {
-              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.CustId, From: 'CustPaging' });
-            } 
-          }
-        );
+        this.toastr.successMessage(response["Message"]);
+        
+        if (this.From == "EditMainData") {
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.CustId, Page: 'Edit', From: 'EditMainData' });
+        }
+        else if(this.From == "CustFamily"){
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.CustId, Page: 'Edit', From: 'CustFamily' });
+        }
+        else if(this.From == "CustShareholder"){
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.CustId, Page: 'Edit', From: 'CustShareholder' });
+        }
+        else if(this.From == "CustGuarantor"){
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.CustId, Page: 'Edit', From: 'CustGuarantor' });
+        }
+        else {
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.CustId, From: 'CustPaging' });
+        } 
       }
     );
   }

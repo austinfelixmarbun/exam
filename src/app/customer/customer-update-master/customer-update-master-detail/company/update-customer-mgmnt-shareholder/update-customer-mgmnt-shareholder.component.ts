@@ -83,7 +83,7 @@ export class UpdateCustomerMgmntShareholderComponent implements OnInit {
         request.push(item);
       }
     }
-    this.http.post(URLConstant.EditMasterCustCompanyShareholder, { CustId: this.CustId, ShareholderList: request }).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustCompanyShareholder, { CustId: this.CustId, ShareholderList: request }).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

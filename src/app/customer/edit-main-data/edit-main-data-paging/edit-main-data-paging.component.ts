@@ -10,14 +10,11 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
   templateUrl: './edit-main-data-paging.component.html'
 })
 export class EditMainDataPagingComponent implements OnInit {
-  inputPagingObj: UcPagingObj;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
   constructor() { }
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/editMainDataCustomer.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/editMainDataCustomer.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
     this.inputPagingObj.ddlEnvironments = [

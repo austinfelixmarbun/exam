@@ -21,8 +21,7 @@ import { GenericObj} from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-vendor-ho-add-edit',
-  templateUrl: './vendor-ho-add-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './vendor-ho-add-edit.component.html'
 })
 export class VendorHoAddEditComponent implements OnInit {
   itemCategoryType: any;
@@ -514,15 +513,11 @@ export class VendorHoAddEditComponent implements OnInit {
 
   setLookup() {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
 
     this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-    this.inputLookupParentObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupVendorParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupVendorParent.json";
     this.inputLookupParentObj.addCritInput = new Array();
@@ -531,8 +526,6 @@ export class VendorHoAddEditComponent implements OnInit {
       this.inputLookupParentObj.isRequired = false;
     }else{
       this.inputLookupATPMObj.urlJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-      this.inputLookupATPMObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-      this.inputLookupATPMObj.urlEnviPaging = environment.FoundationR3Url;
       this.inputLookupATPMObj.pagingJson = "./assets/uclookup/vendor/lookupVendorParent.json";
       this.inputLookupATPMObj.genericJson = "./assets/uclookup/vendor/lookupVendorParent.json";
       this.inputLookupATPMObj.isRequired = false;

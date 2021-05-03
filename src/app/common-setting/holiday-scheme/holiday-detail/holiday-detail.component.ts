@@ -17,8 +17,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-holiday-detail',
-  templateUrl: './holiday-detail.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './holiday-detail.component.html'
 })
 export class HolidayDetailComponent implements OnInit {
   HolidaySchmHIdCopy: string;
@@ -46,7 +45,6 @@ export class HolidayDetailComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewHolidayDetail.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.inputPagingObjHolidayScheme = new InputLookupObj;
     var critInputNotIn = new CriteriaObj();
