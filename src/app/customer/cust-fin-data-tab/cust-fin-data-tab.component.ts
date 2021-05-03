@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { CustPersonalFinDataObj } from 'app/shared/model/CustPersonalFinDataObj.Model';
 import { CustCompanyFinDataObj } from 'app/shared/model/CustCompanyFinDataObj.Model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
-import { first, map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -17,8 +17,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 @Component({
   selector: 'app-cust-fin-data-tab',
   templateUrl: './cust-fin-data-tab.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService]
+  styleUrls: []
 })
 export class CustFinDataTabComponent implements OnInit {
   @Input() MrCustTypeCode: string;

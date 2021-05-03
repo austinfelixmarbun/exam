@@ -12,26 +12,55 @@
                 <thead>
                   <tr class="table-header">
                     <th>
-                      <span class="thead-header" translate>Survey Task No</span>
+                      <span class="thead-header" translate>SURVEY TASK NO</span>
                     </th>
                     <th>
-                      <span class="thead-header" translate>Surveyee Subject</span>
+                      <span class="thead-header" translate>RESURVEY REF</span>
                     </th>
                     <th>
-                      <span class="thead-header" translate>Surveyee Object</span>
+                      <span class="thead-header" translate>SURVEYEE MODEL</span>
                     </th>
                     <th>
-                      <span class="thead-header" translate>Form Scheme</span>
+                      <span class="thead-header" translate>SURVEYEE OBJECT</span>
                     </th>
                     <th>
-                      <span class="thead-header" translate>Surveyor Name</span>
+                      <span class="thead-header" translate>SURVEYEE NAME</span>
                     </th>
                     <th>
-                      <span class="thead-header" translate>Survey Status</span>
+                      <span class="thead-header" translate>ADDRESS</span>
                     </th>
                     <th>
-                      <span class="thead-header" translate>Last Date Update</span>
+                      <span class="thead-header" translate>SURVEY TYPE</span>
                     </th>
+                    <th>
+                      <span class="thead-header" translate>SURVEYOR NAME</span>
+                    </th>
+                    <th>
+                      <span class="thead-header" translate>SURVEYOR FORM SCHEME</span>
+                    </th>
+                    <th>
+                      <span class="thead-header" translate>SURVEY TASK STATUS</span>
+                    </th>
+                    <th>
+                      <span class="thead-header" translate>REASON DESCRIPTION</span>
+                    </th>
+                    <th>
+                      <span class="thead-header" translate>RESULT DATE</span>
+                    </th>
+                    <th>
+                      <span class="thead-header" translate>VIEW RESULT</span>
+                    </th>
+                    <th>
+                      <span class="thead-header" translate>REVIEW BY</span>
+                    </th>
+                    <th>
+                      <span class="thead-header" translate>RESULT COMMENT</span>
+                    </th>
+                    <th>
+                      <span class="thead-header" translate>RESURVEY</span>
+                    </th>
+
+
                   </tr>
                 </thead>
                 <tbody>
@@ -40,12 +69,24 @@
                       <a target="_blank" [routerLink]="[ViewLink]" skipLocationChange
                         [queryParams]="{ SrvyTaskId: item.SrvyTaskId }">{{item.SrvyTaskNo}}</a>
                     </td>
-                    <td>{{item.MrSrvySubjCode}}</td>
-                    <td>{{item.MrSrvyObjCode}}</td>
+                    <td>{{item.ResurveyRef}}</td>
+                    <td>{{item.SurveyeeModel}}</td>                    
+                    <td>{{item.SurveyeeObject}}</td>
+                    <td>
+                      <a target="_blank" [routerLink]="[ViewCust]" skipLocationChange
+                        [queryParams]="{ CustId: item.CustId }">{{item.CustName}}
+                      </a>                      
+                    </td>
+                    <td>{{item.CustAddr}}</td>
+                    <td>{{item.MrSurveyTypeCode}}</td>
+                    <td>{{item.SurveyorName}}</td>
                     <td>{{item.SrvyFormSchmName}}</td>
-                    <td>{{item.SurveyorCode}}</td>
-                    <td>{{item.MrSrvyStatCode}}</td>
-                    <td>{{item.AssignDt | date: 'dd-MMM-yyyy'}}</td>
+                    <td>{{item.MrSurveyTaskStatCode}}</td>
+                    <td>{{item.ReasonDescr}}</td>
+                    <td>{{item.ResultDt | date: 'dd-MMM-yyyy'}}</td>                    
+                    <td>{{item.ReviewBy}}</td>
+                    <td>{{item.ReviewNotes}}</td>                    
+                    <td>{{item.ResurveyRef != "" ? 'YES' : 'NO'}}</td>
                   </tr>
                 </tbody>
               </table>

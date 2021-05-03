@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 @Component({
   selector: 'app-journal-media-paging',
@@ -21,8 +19,6 @@ export class JournalMediaPagingComponent implements OnInit {
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/journal/paging-journal-media.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/journal/paging-journal-media.json";
     this.inputPagingObj.deleteUrl = "/Journal/DeleteJrMHeader";
   }

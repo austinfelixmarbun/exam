@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -55,8 +54,6 @@ export class RefIndustryTypeDetailComponent implements OnInit {
   ngOnInit() {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
-    this.inputLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
     this.inputLookupObj.genericJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
 

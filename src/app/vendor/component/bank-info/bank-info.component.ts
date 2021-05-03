@@ -2,13 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Validators, FormBuilder, NgForm } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
 import { VendorBankAccObj } from 'app/shared/model/VendorBankAccObj.Model';
-import { HttpClient } from '@angular/common/http';
 import { VendorService } from 'app/vendor/vendor.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
@@ -222,8 +219,6 @@ export class BankInfoComponent implements OnInit {
   setLookup() {
     this.inputLookupBankObj = new InputLookupObj();
     this.inputLookupBankObj.urlJson = "./assets/uclookup/Bank/lookupBank.json";
-    this.inputLookupBankObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupBankObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.isRequired = true;

@@ -14,8 +14,7 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 @Component({
   selector: 'app-customer-company-address-add',
   templateUrl: './customer-company-address-add.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService]
+  styleUrls: []
 })
 export class CustomerCompanyAddressAddComponent implements OnInit {
   @Input() AddrId: number;

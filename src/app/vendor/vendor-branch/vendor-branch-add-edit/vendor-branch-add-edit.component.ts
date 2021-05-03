@@ -10,7 +10,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VendorBranchObj } from 'app/shared/model/VendorBranchObj.Model';
-import { VendorBranchMainObj } from 'app/shared/model/VendorBranchMainObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -18,7 +17,7 @@ import { VendorAttrContentObj } from 'app/shared/model/VendorAttrContentObj.Mode
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ResponseIdGenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { GenericObj} from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 
 @Component({
@@ -609,14 +608,10 @@ export class VendorBranchAddEditComponent implements OnInit {
 
   setLookup() {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
     this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-    this.inputLookupParentObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupVendorParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupVendorParent.json";
     this.inputLookupParentObj.isRequired = false;
@@ -791,7 +786,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
       this.vendorBranchObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
-      this.http.post<ResponseIdGenericObj>(URLConstant.EditVendorBranch, this.vendorBranchObj).subscribe(
+      this.http.post<GenericObj>(URLConstant.EditVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_REG],{ "VendorId": response.Id, "mode": "edit" });
@@ -801,7 +796,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
       this.vendorBranchObj.MrVendorTypeCode = this.MrVendorTypeCode;
 
-      this.http.post<ResponseIdGenericObj>(URLConstant.AddVendorBranch, this.vendorBranchObj).subscribe(
+      this.http.post<GenericObj>(URLConstant.AddVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_REG],{ "VendorId": response.Id });

@@ -1,23 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from 'environments/environment';
 import { VendorService } from '../vendor.service';
 import { formatDate } from '@angular/common';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ResponseIdGenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { GenericObj} from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-vendor-holding-add-edit',
@@ -327,7 +322,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorHoldingObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
         this.vendorService.EditVendorHolding(this.vendorHoldingObj).subscribe(
-          (response : ResponseIdGenericObj) => {
+          (response : GenericObj) => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HOLDING_REG],{ "VendorId": response.Id, "mode": 'edit' });
           });
@@ -335,7 +330,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorHoldingObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
 
         this.vendorService.AddVendorHolding(this.vendorHoldingObj).subscribe(
-          (response: ResponseIdGenericObj) => {
+          (response: GenericObj) => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HOLDING_REG],{ "VendorId": response.Id });
           });
@@ -354,8 +349,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
   setLookup() {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 

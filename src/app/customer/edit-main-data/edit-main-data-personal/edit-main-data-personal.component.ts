@@ -22,8 +22,7 @@ import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-edit-main-data-personal',
-  templateUrl: './edit-main-data-personal.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './edit-main-data-personal.component.html'
 })
 export class EditMainDataPersonalComponent implements OnInit {
   CustomerPersonalForm = this.fb.group({

@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { DecimalPipe } from '@angular/common';
@@ -10,20 +9,16 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 @Component({
   selector: 'app-working-hour-paging',
   templateUrl: './working-hour-paging.component.html',
-  providers: [NGXToastrService, DecimalPipe]
+  providers: [DecimalPipe]
 })
 export class WorkingHourPagingComponent implements OnInit {
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
   
   readonly AddLink: string = NavigationConstant.CS_WORKING_HOUR_ADD;
   constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchWorkingHourSchm.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchWorkingHourSchm.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteWorkingHourSchm;
   }
 }

@@ -10,7 +10,6 @@ import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from 'environments/environment';
 import { DatePipe } from '@angular/common';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { forkJoin } from 'rxjs';
@@ -20,7 +19,6 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NullViewportScroller } from '@angular/common/src/viewport_scroller';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
@@ -28,8 +26,7 @@ import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 @Component({
   selector: 'app-customer-family-detail',
   templateUrl: './customer-family-detail.component.html',
-  styles: [],
-  providers: [NGXToastrService]
+  styles: []
 })
 export class CustomerFamilyDetailComponent implements OnInit {
   @Input() listCustIdToExclude: Array<string>;
@@ -167,8 +164,6 @@ export class CustomerFamilyDetailComponent implements OnInit {
     this.existingCustomerLookUpObj = new InputLookupObj();
     this.existingCustomerLookUpObj.isReadonly = false;
     this.existingCustomerLookUpObj.urlJson = "./assets/lookup/lookupExistingCustomer.json";
-    this.existingCustomerLookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.existingCustomerLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.existingCustomerLookUpObj.pagingJson = "./assets/lookup/lookupExistingCustomer.json";
     this.existingCustomerLookUpObj.genericJson = "./assets/lookup/lookupExistingCustomer.json";
 

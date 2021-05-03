@@ -22,6 +22,7 @@ import { SurveyorAddComponent } from './surveyor-add/surveyor-add.component';
 import { UcgridviewModule } from '@adins/ucgridview';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { SurveyTaskAssignmentDetailComponent } from './survey-task-assignment-detail/survey-task-assignment-detail.component';
+import { SurveyTaskComponent } from './survey-task/survey-task.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { SurveyTaskAssignmentDetailComponent } from './survey-task-assignment-de
     SurveyorAddComponent,
     SurveyorPagingComponent,
     SurveyorTaskAssignmentPagingComponent,
-    SurveyTaskAssignmentDetailComponent
+    SurveyTaskAssignmentDetailComponent,
+    SurveyTaskComponent
   ],
   providers: [
     NGXToastrService

@@ -2,7 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-attribute',
@@ -11,17 +10,13 @@ import { environment } from 'environments/environment';
 export class AttributeComponent implements OnInit {
 
  
-  inputPagingObj: UcPagingObj;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
   readonly AddLink: string = NavigationConstant.SYSTEM_SETTING_ATTR_DETAIL;
-  constructor() { 
-    this.inputPagingObj = new UcPagingObj();
-  }
+  constructor() { }
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchRefAttr.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
     this.inputPagingObj.deleteUrl = "";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRefAttr.json";
   }

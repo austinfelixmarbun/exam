@@ -4,18 +4,15 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { HolidayDObj } from 'app/shared/model/HolidayDObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HolidayDByYearObj } from 'app/shared/model/HolidayDByYearObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
-import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-holiday-detail-add',
-  templateUrl: './holiday-detail-add.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './holiday-detail-add.component.html'
 })
 export class HolidayDetailAddComponent implements OnInit {
 
@@ -50,7 +47,6 @@ export class HolidayDetailAddComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewHolidayDetail.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
   }
   
   SaveForm() {

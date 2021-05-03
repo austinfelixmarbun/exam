@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from 'environments/environment';
 import { DecimalPipe } from '@angular/common';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -19,7 +18,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class DistrictComponent implements OnInit {
 
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
   parentId: any;
   arrCrit: any;
   resultData: any;
@@ -40,12 +39,9 @@ export class DistrictComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchDistrict.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchDistrict.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefProvDistrict;
+
 
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();

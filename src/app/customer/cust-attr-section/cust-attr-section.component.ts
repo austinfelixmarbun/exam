@@ -3,11 +3,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
 import { CustOtherInfoObj } from 'app/shared/model/CustOtherInfoObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -46,10 +45,10 @@ export class CustAttrSectionComponent implements OnInit {
   }
 
   OtherInformationForm = this.fb.group({
-    LbppmsDebtGrpCode: ['', [Validators.required]],
+    LbppmsDebtGrpId: ['', [Validators.required]],
     LbppmsCntrprtId: ['', [Validators.required]],
     LbppmsBizSustainId: ['', [Validators.required]],
-    LbppmsBizSclCode: ['', [Validators.required]]
+    LbppmsBizSclId: ['', [Validators.required]]
   }); 
   inputDebitorGroupLookupObj : InputLookupObj;
   inputDebitorBusinessScaleLookupObj: InputLookupObj;
@@ -67,32 +66,24 @@ export class CustAttrSectionComponent implements OnInit {
       }); 
     this.inputDebitorGroupLookupObj = new InputLookupObj();
     this.inputDebitorGroupLookupObj.urlJson = "./assets/lookup/lookupDebitorGroup.json";
-    this.inputDebitorGroupLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputDebitorGroupLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputDebitorGroupLookupObj.pagingJson = "./assets/lookup/lookupDebitorGroup.json";
     this.inputDebitorGroupLookupObj.genericJson = "./assets/lookup/lookupDebitorGroup.json";
     this.inputDebitorGroupLookupObj.isReady = true;
 
     this.inputDebitorBusinessScaleLookupObj = new InputLookupObj(); 
     this.inputDebitorBusinessScaleLookupObj.urlJson = "./assets/lookup/lookupDebitorBusinessScale.json";
-    this.inputDebitorBusinessScaleLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputDebitorBusinessScaleLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputDebitorBusinessScaleLookupObj.pagingJson = "./assets/lookup/lookupDebitorBusinessScale.json";
     this.inputDebitorBusinessScaleLookupObj.genericJson = "./assets/lookup/lookupDebitorBusinessScale.json";
     this.inputDebitorBusinessScaleLookupObj.isReady = true;
     
     this.inputCounterpartCategoryLookupObj = new InputLookupObj(); 
     this.inputCounterpartCategoryLookupObj.urlJson = "./assets/lookup/lookupCounterpartCategory.json";
-    this.inputCounterpartCategoryLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputCounterpartCategoryLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputCounterpartCategoryLookupObj.pagingJson = "./assets/lookup/lookupCounterpartCategory.json";
     this.inputCounterpartCategoryLookupObj.genericJson = "./assets/lookup/lookupCounterpartCategory.json";
     this.inputCounterpartCategoryLookupObj.isReady = true;
 
     this.inputSustaianableFinancialBusinessLookupObj = new InputLookupObj();
     this.inputSustaianableFinancialBusinessLookupObj.urlJson = "./assets/lookup/lookupSustainableFinancialBusiness.json";
-    this.inputSustaianableFinancialBusinessLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputSustaianableFinancialBusinessLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputSustaianableFinancialBusinessLookupObj.pagingJson = "./assets/lookup/lookupSustainableFinancialBusiness.json";
     this.inputSustaianableFinancialBusinessLookupObj.genericJson = "./assets/lookup/lookupSustainableFinancialBusiness.json";
     this.inputSustaianableFinancialBusinessLookupObj.isReady = true;  
@@ -104,10 +95,10 @@ export class CustAttrSectionComponent implements OnInit {
         this.inputSustaianableFinancialBusinessLookupObj.jsonSelect = {Descr: this.CustOtherInfo.LbppmsBizSustainDescr};
 
         this.OtherInformationForm.patchValue({
-          LbppmsDebtGrpCode:   this.CustOtherInfo.LbppmsDebtGrpCode,
+          LbppmsDebtGrpId:   this.CustOtherInfo.LbppmsDebtGrpId,
           LbppmsCntrprtId: this.CustOtherInfo.LbppmsCntrprtId,
           LbppmsBizSustainId: this.CustOtherInfo.LbppmsBizSustainId,
-          LbppmsBizSclCode: this.CustOtherInfo.LbppmsBizSclCode
+          LbppmsBizSclId: this.CustOtherInfo.LbppmsBizSclId
         });
       }
       this.isLookupReady = true;
@@ -184,13 +175,13 @@ export class CustAttrSectionComponent implements OnInit {
 
   getLookupDebitorGroup(e){
     this.OtherInformationForm.patchValue({
-      LbppmsDebtGrpCode: e.LbppmsDebtGrpCode
+      LbppmsDebtGrpId: e.LbppmsDebtGrpId
     }); 
   }
 
   getLookupDebitorBusinessScale(e){
     this.OtherInformationForm.patchValue({
-      LbppmsBizSclCode: e.LbppmsBizSclCode
+      LbppmsBizSclId: e.LbppmsBizSclId
     }); 
   }
   getLookupCounterpartCategory(e){

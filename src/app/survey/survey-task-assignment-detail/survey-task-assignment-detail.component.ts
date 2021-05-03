@@ -2,7 +2,6 @@ import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { NumberValueAccessor } from '@angular/forms/src/directives';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -13,11 +12,9 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { SrvyTaskObj } from 'app/shared/model/SrvyTaskObj.Model';
-import { UcViewGenericObj, WhereValueObj } from 'app/shared/model/UcViewGenericObj.model';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
-import { zip } from 'rxjs';
 
 @Component({
   selector: 'app-survey-task-assignment-detail',
@@ -29,6 +26,8 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   @ViewChildren('dyna') UclookupgenericComponents: QueryList<UclookupgenericComponent>;
 
   readonly CancelLink: string = NavigationConstant.SURVEY_TASK_ASSIGNMENT_PAGING;
+  readonly ViewLink: string = NavigationConstant.VIEW_SRVY_TASK;
+  readonly ViewCustLink: string = NavigationConstant.VIEW_CUST;
 
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   lookupSurveyorObj: InputLookupObj = new InputLookupObj();
@@ -75,20 +74,16 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   ngOnInit() {
 
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyOrder.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.getDropdown();
     this.getSurveyTaskListData();
-
-
-
   }
 
   async getSurveyTaskListData() {
 
     await this.httpClient.post(URLConstant.GetListSrvyTaskBySrvyOrderIdForUpdate, { Id: this.surveyOrderId }).toPromise().then(
       (response) => {
-
+        console.log(response);
         if (response['ReturnObject'].length > 0) {
           this.SurveyTaskForm.controls['ListSurveyTask'] = this.fb.array([]);
           for (let i = 0; i < response['ReturnObject'].length; i++) {
@@ -109,7 +104,8 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
                   RefNo: response['ReturnObject'][i].RefNo,
                   Zipcode: response['ReturnObject'][i].Zipcode,
                   CustNo: response['ReturnObject'][i].CustNo,
-                  SurveyorName: response['ReturnObject'][i].SurveyorName
+                  SurveyorName: response['ReturnObject'][i].SurveyorName,
+                  CustId: response['ReturnObject'][i].CustId
 
                 }
 
@@ -147,6 +143,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
 
   onNationalSelect(i, event) {
     let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    
     let refOfficeId = currentUserContext['OfficeId'];
     console.log(currentUserContext);
     this.SurveyTaskForm.controls.ListSurveyTask['controls'][i].patchValue({
@@ -208,8 +205,6 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
     this.refOfficeId = currentUserContext['OfficeId'];
     this.InputLookupSurveyorObj = new InputLookupObj();
     this.InputLookupSurveyorObj.urlJson = "./assets/lookup/lookupSurveyorForSurveyTask.json";
-    this.InputLookupSurveyorObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.InputLookupSurveyorObj.urlEnviPaging = environment.FoundationR3Url;
     this.InputLookupSurveyorObj.pagingJson = "./assets/lookup/lookupSurveyorForSurveyTask.json";
     this.InputLookupSurveyorObj.genericJson = "./assets/lookup/lookupSurveyorForSurveyTask.json";
     this.InputLookupSurveyorObj.isRequired = true;
@@ -253,7 +248,8 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
       RefNo: [surveyTaskObj.RefNo],
       Zipcode: [surveyTaskObj.Zipcode],
       CustNo: [surveyTaskObj.CustNo],
-      SurveyorName: [surveyTaskObj.SurveyorName]
+      SurveyorName: [surveyTaskObj.SurveyorName],
+      CustId: [surveyTaskObj.CustId]
 
     })
   }

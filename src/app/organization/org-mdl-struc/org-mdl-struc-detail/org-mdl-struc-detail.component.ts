@@ -17,8 +17,7 @@ import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Component({
   selector: "app-org-mdl-struc-detail",
-  templateUrl: "./org-mdl-struc-detail.component.html",
-  providers: [NGXToastrService]
+  templateUrl: "./org-mdl-struc-detail.component.html"
 })
 export class OrgMdlStrucDetailComponent implements OnInit {
   inputLookupObj: any;

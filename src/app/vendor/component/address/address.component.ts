@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from 'environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -72,8 +70,6 @@ export class AddressComponent implements OnInit {
 
   setLookup() {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 

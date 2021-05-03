@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -10,14 +9,11 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class VerificationQuestionSchemePagingComponent implements OnInit {
 
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
   readonly AddLink: string = NavigationConstant.VERIF_QA_SCHM_ADD;
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/verification/searchVerificationQuestionScheme.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/verification/searchVerificationQuestionScheme.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteVerfSchemeHById;
   }

@@ -1,19 +1,55 @@
 {
-    "title": "Survey Order",
+    "title": "Survey Order Inquiry",
     "component": [
         {
             "type": "dropdown",
-            "name": "RE.REF_OFFICE_ID",
+            "name": "RO.OFFICE_NAME",
             "id": "OfficeNameId",
             "value": "",
-            "label": "Office Name",
-            "placeholder": "Placeholder",
-            "datatype": "numeric",
+            "placeholder": "",
             "isFromURL": true,
-            "ddlType": "one",
+            "ddlType": "all",
             "url": "",
-            "path": "/RefOffice/GetListKvpActiveRefOfficeIdForPaging",
+            "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
+            "label": "Office Name",
+            "items": [],
             "itemsUrl": []
+        },
+        {
+            "type": "dropdown",
+            "name": "RM.MASTER_CODE",
+            "id": "MasterCodeId",
+            "value": "",
+            "placeholder": "",
+            "isFromURL": true,
+            "ddlType": "all",
+            "url": "",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Survey Initial",
+            "items": [],
+            "itemsUrl": [],
+            "criteriaPropName": "RefMasterTypeCode",
+            "criteriaPropValue": "SURVEY_INITIAL"
+        },
+        {
+            "type": "datepicker",
+            "datatype": "date",
+            "name": "SO.REQ_DT",
+            "id": "reqDtGte",
+            "value": "",
+            "restriction": "Gte",
+            "label": "Request Date >=",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "datepicker",
+            "datatype": "date",
+            "name": "SO.REQ_DT",
+            "id": "reqDtLte",
+            "value": "",
+            "restriction": "Lte",
+            "label": "Request Date <=",
+            "placeholder": "Placeholder"
         },
         {
             "type": "textbox",
@@ -25,18 +61,26 @@
         },
         {
             "type": "textbox",
-            "name": "SO.SRVY_ORDER_NO",
-            "id": "SrvyOrderNoId",
+            "name": "SO.CUST_NAME",
+            "id": "CustNameId",
             "value": "",
-            "label": "Survey Order No",
+            "label": "Customer Name",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "RUReq.USERNAME",
+            "id": "RequestById",
+            "value": "",
+            "label": "RequestBy",
             "placeholder": "Placeholder"
         },
         {
             "type": "dropdown",
-            "name": "SO.MR_SRVY_STAT_CODE",
-            "id": "MrSrvyStatCodeId",
+            "name": "RS.REF_STATUS_CODE",
+            "id": "RefStatusCodeId",
             "value": "",
-            "label": "Survey Order Status",
+            "label": "Status",
             "placeholder": "Placeholder",
             "isFromURL": true,
             "ddlType": "all",
@@ -44,58 +88,7 @@
             "items": [],
             "itemsUrl": [],
             "criteriaPropName": "Code",
-            "criteriaPropValue": "FOU_SURVEY"
-        },
-        {
-            "type": "dropdown",
-            "name": "SO.MR_SRVY_SOURCE_CODE",
-            "id": "MrSrvySourceCodeId",
-            "value": "",
-            "label": "Survey Type",
-            "placeholder": "Placeholder",
-            "isFromURL": true,
-            "ddlType": "all",
-            "path": "/RefMaster/GetListKeyValueActiveByCode",
-            "items": [],
-            "itemsUrl": [],
-            "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "SRVY_SOURCE_CODE"
-        },
-        {
-            "type": "textbox",
-            "name": "SO.REQ_BY_USER",
-            "id": "ReqByUserId",
-            "value": "",
-            "label": "Request By",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "datepicker",
-            "datatype": "date",
-            "name": "SO.REQ_DT",
-            "id": "ReqDtGT",
-            "value": "",
-            "label": "Request Date >=",
-            "restriction": "gte",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "datepicker",
-            "datatype": "date",
-            "name": "SO.REQ_DT",
-            "id": "ReqDtLT",
-            "value": "",
-            "label": "Request Date <=",
-            "restriction": "lte",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "textbox",
-            "name": "SO.NOTES",
-            "id": "NotesId",
-            "value": "",
-            "label": "Notes",
-            "placeholder": "Placeholder"
+            "criteriaPropValue": "FOU_SURVEY_ORDER"
         }
     ],
     "querystring": {
@@ -104,92 +97,92 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "left",
+            "position": "Center",
             "label": "Office Name",
-            "name": "RE.OFFICE_NAME"
+            "name": "RO.OFFICE_NAME"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "Survey Order No",
-            "name": "SO.SRVY_ORDER_NO"
-        },
-        {
-            "type": "sort",
-            "position": "left",
-            "label": "Survey Type",
-            "name": "SO.MR_SRVY_SOURCE_CODE"
+            "label": "Survey Initial",
+            "name": "RM.MASTER_CODE"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "Transaction Number",
+            "label": "Transaction Reference No",
             "name": "SO.TRX_REF_NO"
         },
         {
             "type": "sort",
-            "position": "left",
-            "label": "Notes",
-            "name": "SO.NOTES"
+            "position": "center",
+            "label": "Customer Name",
+            "name": "SO.CUST_NAME"
         },
         {
             "type": "sort",
-            "position": "left",
+            "position": "center",
             "label": "Request Date",
             "name": "SO.REQ_DT"
         },
         {
             "type": "sort",
-            "position": "left",
+            "position": "center",
             "label": "Request By",
-            "name": "SO.REQ_BY_USER"
+            "name": "RUReq.USERNAME"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Assignment Date",
+            "name": "SO.ASSIGN_DT"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Assign By",
+            "name": "RUAssign.USERNAME"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Result Submitted",
+            "name": "ResultSubmitted"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Submit Date",
+            "name": "SO.SUBMIT_DT "
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Submit By",
+            "name": "RUSub.USERNAME"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "Status",
-            "name": "SO.MR_SRVY_STAT_CODE"
+            "name": "RS.REF_STATUS_CODE"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "# of Survey Task",
-            "name": "TaskTotal"
-        },
-        {
-            "type": "label",
-            "position": "center",
-            "label": "Task"
-        },
-        {
-            "type": "label",
-            "position": "center",
-            "label": "Send"
+            "label": "View Detail"
         }
     ],
     "bodyList": [
         {
             "type": "text",
-            "position": "left",
+            "position": "center",
             "property": "OfficeName"
         },
         {
-            "type": "link",
-            "position": "center",
-            "property": "SrvyOrderNo",
-            "path": "VIEW_SRVY_ORDER",
-            "target": "_blank",
-            "param": [
-                {
-                    "type": "SrvyOrderId",
-                    "property": "SrvyOrderId"
-                }
-            ]
-        },
-        {
             "type": "text",
-            "position": "left",
-            "property": "MrSrvySourceCode"
+            "position": "center",
+            "property": "SurveyInitial"
         },
         {
             "type": "text",
@@ -197,79 +190,71 @@
             "property": "TrxRefNo"
         },
         {
-            "type": "text",
-            "position": "left",
-            "property": "Notes"
-        },
-        {
-            "type": "date",
-            "position": "left",
-            "property": "ReqDt"
-        },
-        {
-            "type": "text",
-            "position": "left",
-            "property": "ReqByUser"
-        },
-        {
-            "type": "text",
-            "position": "left",
-            "property": "MrSrvyStatCode"
-        },
-        {
-            "type": "text",
+            "type": "link",
             "position": "center",
-            "property": "TaskTotal"
-        },
-        {
-            "type": "action",
-            "position": "center",
-            "action": [
+            "property": "CustName",
+            "path": "VIEW_CUST_PERSONAL_DETAIL",
+            "target": "_blank",
+            "param": [
                 {
-                    "type": "switch",
-                    "case": [
-                        {
-                            "conditions": [
-                                {
-                                    "property": "MrSrvyStatCode",
-                                    "value": "NEW",
-                                    "restriction": "EQ"
-                                }
-                            ],
-                            "result" : {
-                                "type": "url",
-                                "path" : "SRVY_TASK",
-                                "param" : [
-                                    {
-                                        "type" : "SrvyOrderId",
-                                        "property" : "SrvyOrderId"
-                                    }
-                                ]
-                            }
-                        }
-                    ]
+                    "type": "CustId",
+                    "property": "CustId"
                 }
             ]
         },
         {
+            "type": "text",
+            "position": "center",
+            "property": "RequestDate"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "RequestBy"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "AssignDate"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "AssignBy"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "ResultSubmitted"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "SubmitDate"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "SubmitBy"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "Status"
+        },
+        {
             "type": "action",
             "position": "center",
             "action": [
                 {
-                    "type": "switch",
-                    "case": [
+                    "type": "edit",
+                    "position": "center",                    
+                    "path": "VIEW_SRVY_ORDER",
+                    "target": "_blank",
+                    "param": [
                         {
-                            "conditions": [
-                                {
-                                    "property": "MrSrvyStatCode",
-                                    "value": "NEW",
-                                    "restriction": "EQ"
-                                }
-                            ],
-                            "result" : {
-                                "type": "callback",
-                                "property" : "SrvyOrderId"
-                            }
+                            "type": "SrvyOrderId",
+                            "property": "SrvyOrderId"
                         }
                     ]
                 }

@@ -16,6 +16,7 @@ import { JournalGroupFactComponent } from './journal-media/journal-group-fact/jo
 import { JournalResultComponent } from './journal-result/journal-result.component';
 import { FailedJournalListPagingComponent } from './failed-journal-list/failed-journal-list-paging/failed-journal-list-paging.component';
 import { JournalGroupComponent } from './journal-media/journal-group/journal-group.component';
+import { JournalReconcilePagingComponent } from "./journal-reconcile/journal-reconcile-paging/journal-reconcile-paging.component";
 
 @NgModule({
     imports: [
@@ -45,7 +46,9 @@ import { JournalGroupComponent } from './journal-media/journal-group/journal-gro
         
     FailedJournalListPagingComponent,
         
-    JournalGroupComponent],
+    JournalGroupComponent,
+
+    JournalReconcilePagingComponent],
     providers: [
         NGXToastrService,
     ]

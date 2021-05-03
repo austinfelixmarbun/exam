@@ -1,10 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
 import { CustCompanyLegalDocObj } from 'app/shared/model/CustCompanyLegalDocObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustLegalDocDetailComponent } from './cust-legal-doc-detail/cust-legal-doc-detail.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
@@ -14,8 +13,7 @@ import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 @Component({
   selector: 'app-cust-legal-doc',
   templateUrl: './cust-legal-doc.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService]
+  styleUrls: []
 })
 export class CustLegalDocComponent implements OnInit {
   CustCompanyId: number;

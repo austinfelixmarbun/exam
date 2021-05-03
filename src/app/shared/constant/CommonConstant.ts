@@ -283,4 +283,6 @@ export class CommonConstant {
 
     //Sys Config
     public static ConfigCodeIsUseDms = "IS_USE_DMS";
+
+    public static JOURNAL_STAT_EXE_DESCR = "EXECUTED";
 }

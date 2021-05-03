@@ -1,10 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { formatDate } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.Model';
@@ -16,8 +13,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 @Component({
   selector: 'app-contact-person-add-edit',
   templateUrl: './contact-person-add-edit.component.html',
-  styleUrls: ['./contact-person-add-edit.component.scss'],
-  providers: [NGXToastrService]
+  styleUrls: ['./contact-person-add-edit.component.scss']
 })
 export class ContactPersonAddEditComponent implements OnInit {
   @Input() objInput: any;
@@ -36,11 +32,11 @@ export class ContactPersonAddEditComponent implements OnInit {
     Email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
     JoinDt: ['', Validators.required],
     IsOwner: [false],
-    Addr: ['', Validators.required],
-    AreaCode2: [{ value: '', disabled: true }, Validators.required],
-    AreaCode1: [{ value: '', disabled: true }, Validators.required],
-    City: [{ value: '', disabled: true }, Validators.required],
-    ProvDistrictName: [{ value: '', disabled: true }, Validators.required]
+    Addr: [''],
+    AreaCode2: [{ value: '', disabled: true }],
+    AreaCode1: [{ value: '', disabled: true }],
+    City: [{ value: '', disabled: true }],
+    ProvDistrictName: [{ value: '', disabled: true }]
   })
   inputZipcodeLookupObj: InputLookupObj = new InputLookupObj();
 
@@ -76,11 +72,10 @@ export class ContactPersonAddEditComponent implements OnInit {
     )
 
     this.inputZipcodeLookupObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputZipcodeLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputZipcodeLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputZipcodeLookupObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputZipcodeLookupObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputZipcodeLookupObj.isReadonly = false;
+    this.inputZipcodeLookupObj.isRequired = false;
 
     if (this.mode == "edit") {
       var contactPerson = new VendorContactPersonObj();

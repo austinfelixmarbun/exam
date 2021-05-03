@@ -25,7 +25,6 @@ export class ProdOfferingReturnPagingComponent implements OnInit {
     this.inputPagingObj._url = "./assets/ucpaging/product/searchProductOfferingReturn.json";
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputPagingObj.deleteUrl = "/RefBank/DeleteRefBank";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/product/searchProductOfferingReturn.json";
     this.inputPagingObj.ddlEnvironments = [
       {

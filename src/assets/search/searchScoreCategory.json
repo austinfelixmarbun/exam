@@ -4,8 +4,8 @@
     "component": [
         {
             "type": "textbox",
-            "name": "SCORE_CATEGORY_SCHM_H_CODE",
-            "id": "ScoreCategorySchmHCode",
+            "name": "SCSH.SCORE_CATEGORY_SCHM_H_CODE",
+            "id": "ScoreCategorySchmHCodeId",
             "value": "",
             "label": "Score Category Code",
             "placeholder": "Placeholder",
@@ -13,8 +13,8 @@
         },
         {
             "type": "textbox",
-            "name": "SCORE_CATEGORY_SCHM_H_NAME",
-            "id": "ScoreCategorySchmHName",
+            "name": "SCSH.SCORE_CATEGORY_SCHM_H_NAME",
+            "id": "ScoreCategorySchmHNameId",
             "value": "",
             "label": "Score Category Name",
             "placeholder": "Placeholder",
@@ -22,9 +22,9 @@
         },
         {
             "type": "dropdown",
-            "name": "IS_ACTIVE",
+            "name": "SCSH.IS_ACTIVE",
             "datatype": "text",
-            "id": "IsActive",
+            "id": "IsActiveId",
             "value": "",
             "placeholder": "Placeholder",
             "isFromURL": false,

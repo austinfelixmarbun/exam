@@ -77,7 +77,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     ClickNotification(item) {
-        this.http.post(URLConstant.UpdateReadNotification, { NotificationDId: item.NotificationDId }).subscribe(
+        this.http.post(URLConstant.UpdateReadNotification, { Id: item.NotificationDId }).subscribe(
             (response) => {
             });
         if (item.MrNotificationMethodCode == CommonConstant.NotificationMethodExtLink) {

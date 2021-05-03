@@ -52,8 +52,6 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
     // LookUp Payment Alloc
     this.inputLookUpPaymentAllocObj = new InputLookupObj();
     this.inputLookUpPaymentAllocObj.urlJson = "./assets/uclookup/payment-alloc/lookup-payment-alloc.json";
-    this.inputLookUpPaymentAllocObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookUpPaymentAllocObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookUpPaymentAllocObj.pagingJson = "./assets/uclookup/payment-alloc/lookup-payment-alloc.json";
     this.inputLookUpPaymentAllocObj.genericJson = "./assets/uclookup/payment-alloc/lookup-payment-alloc.json";
     this.inputLookUpPaymentAllocObj.isRequired = true

@@ -16,7 +16,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { ResponseIdGenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { GenericObj} from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-vendor-employee',
@@ -170,15 +170,11 @@ export class VendorEmployeeComponent implements OnInit {
 
   setLookup() {
     this.inputLookupInternalEmpObj.urlJson = "./assets/uclookup/vendor/lookupRefEmp.json";
-    this.inputLookupInternalEmpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupInternalEmpObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupInternalEmpObj.pagingJson = "./assets/uclookup/vendor/lookupRefEmp.json";
     this.inputLookupInternalEmpObj.genericJson = "./assets/uclookup/vendor/lookupRefEmp.json";
     this.inputLookupInternalEmpObj.isRequired = false;
 
     this.inputLookupSpvObj.urlJson = "./assets/uclookup/vendor/lookupVendorEmp.json";
-    this.inputLookupSpvObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupSpvObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupSpvObj.pagingJson = "./assets/uclookup/vendor/lookupVendorEmp.json";
     this.inputLookupSpvObj.genericJson = "./assets/uclookup/vendor/lookupVendorEmp.json";
     this.inputLookupSpvObj.isRequired = false;
@@ -198,8 +194,6 @@ export class VendorEmployeeComponent implements OnInit {
       this.inputLookupSpvObj.addCritInput.push(critObj);
     }
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
@@ -346,7 +340,7 @@ export class VendorEmployeeComponent implements OnInit {
     }
 
     if (this.mode == "add") {
-      this.http.post<ResponseIdGenericObj>(URLConstant.AddVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
+      this.http.post<GenericObj>(URLConstant.AddVendorBranchEmp, this.VendorBranchEmpObj).subscribe(
         (response) => {
           this.mode = "edit";
           this.objInput.VendorEmpId = response.Id;

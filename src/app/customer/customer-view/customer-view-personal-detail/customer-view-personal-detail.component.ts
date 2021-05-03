@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
-import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-customer-view-personal-detail',
@@ -14,8 +13,6 @@ export class CustomerViewPersonalDetailComponent implements OnInit {
 
   ngOnInit() {
     this.viewCustMainDataMainInfo.viewInput =  "./assets/ucviewgeneric/viewCustMainDataMainInfo.json";
-    this.viewCustMainDataMainInfo.viewEnvironment = environment.FoundationR3Url;
     this.viewCustMainDataContactInformation.viewInput  = "./assets/ucviewgeneric/viewCustMainDataContactInformation.json";
-    this.viewCustMainDataContactInformation.viewEnvironment = environment.FoundationR3Url;
   }
 }

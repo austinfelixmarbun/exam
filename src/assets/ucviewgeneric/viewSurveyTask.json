@@ -8,56 +8,110 @@
       "mainInfo": [
         {
           "type": "text",
+          "label": "Office Name",
+          "property": "OfficeName"
+        },
+        {
+          "type": "text",
           "label": "Survey Task No",
           "property": "SrvyTaskNo"
         },
         {
           "type": "text",
-          "label": "Form Scheme",
-          "property": "SrvyFormSchmName"
+          "label": "Survey Initial",
+          "property": "SurveyInitial"
         },
         {
-          "type": "concat",
-          "label": "Survey Subject",
-          "propertyList": [
-            {
-              "property": "MrSrvySubjCode",
-              "prefix": "",
-              "suffix": " - "
-            },
-            {
-              "property": "MrSrvySubj",
-              "prefix": "",
-              "suffix": ""
-            }
-          ]
+          "type": "text",
+          "label": "Reference No",
+          "property": "ReferenceNo"
         },
         {
-          "type": "concat",
-          "label": "Survey Object",
-          "propertyList": [
-            {
-              "property": "MrSrvyObjCode",
-              "prefix": "",
-              "suffix": " - "
-            },
-            {
-              "property": "MrSrvyObj",
-              "prefix": "",
-              "suffix": ""
-            }
-          ]
+          "type": "text",
+          "label": "Resurvey Ref",
+          "property": "ResurveyRef"
+        },
+        {
+          "type": "text",
+          "label": "Surveyee Model",
+          "property": "SurveyeeModel"
+        },
+        {
+          "type": "text",
+          "label": "Surveyee Object",
+          "property": "SurveyeeObj"
+        },
+        {
+          "type": "text",
+          "label": "Surveyee Name",
+          "property": "CustName"
+        },
+        {
+          "type": "text",
+          "label": "Address",
+          "property": "CustAddr"
+        },
+        {
+          "type": "text",
+          "label": "Survey Type",
+          "property": "SrvyTypeCode"
         },
         {
           "type": "text",
           "label": "Surveyor Name",
-          "property": "SurveyorCode"
+          "property": "SurveyorName"
         },
         {
           "type": "text",
-          "label": "Survey Status",
-          "property": "MrSrvyStatCode"
+          "label": "Status",
+          "property": "Status"
+        },
+        {
+          "type": "text",
+          "label": "Request Date",
+          "property": "ReqDate"
+        },
+        {
+          "type": "text",
+          "label": "Request By",
+          "property": "RequestBy"
+        },
+        {
+          "type": "text",
+          "label": "Assignment Date",
+          "property": "AssignDate"
+        },
+        {
+          "type": "text",
+          "label": "Assign By",
+          "property": "AssignBy"
+        },
+        {
+          "type": "text",
+          "label": "Result Date",
+          "property": "ResultDate"
+        },
+        {
+          "type": "text",
+          "label": "Submitted By",
+          "property": "SubmittedBy"
+        },
+        {
+          "type": "text",
+          "label": "Review Date",
+          "property": "ReviewDate"
+        },
+        {
+          "type": "text",
+          "label": "Reviewed By",
+          "property": "ReviewedBy"
+        },
+        {
+          "type": "text",
+          "label": "Notes",
+          "property": "Notes"
         }
+        
       ],
       "querystring": {
         "name": "viewSurveyTask"

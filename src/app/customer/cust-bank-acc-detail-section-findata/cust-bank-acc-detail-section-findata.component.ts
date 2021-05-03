@@ -5,7 +5,6 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
@@ -18,8 +17,7 @@ import { CustBankStmntObj } from 'app/shared/model/CustBankStmntObj.Model';
 
 @Component({
   selector: 'app-cust-bank-acc-detail-section-findata',
-  templateUrl: './cust-bank-acc-detail-section-findata.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './cust-bank-acc-detail-section-findata.component.html'
 })
 export class CustBankAccDetailSectionFindataComponent implements OnInit {
   @Input() CustId: number;
@@ -70,8 +68,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
   ngOnInit() {
     this.inputLookupBank = new InputLookupObj();
     this.inputLookupBank.urlJson = "./assets/uclookup/Customer/lookupBank_CustBankAcc_CustFinData.json";
-    this.inputLookupBank.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupBank.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupBank.pagingJson = "./assets/uclookup/Customer/lookupBank_CustBankAcc_CustFinData.json";
     this.inputLookupBank.genericJson = "./assets/uclookup/Customer/lookupBank_CustBankAcc_CustFinData.json";
     var criteriaList = new Array();

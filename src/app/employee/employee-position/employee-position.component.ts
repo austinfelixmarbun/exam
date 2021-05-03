@@ -1,15 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { NgForm } from '@angular/forms';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { formatDate, DecimalPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
@@ -19,7 +18,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 @Component({
   selector: 'app-employee-position',
   templateUrl: './employee-position.component.html',
-  providers: [NGXToastrService, DecimalPipe]
+  providers: [DecimalPipe]
 })
 export class EmployeePositionComponent implements OnInit {
 

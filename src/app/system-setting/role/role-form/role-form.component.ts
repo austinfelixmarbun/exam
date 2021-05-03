@@ -19,7 +19,7 @@ import { NavigationConstant } from "app/shared/NavigationConstant";
 @Component({
   selector: 'app-role-form',
   templateUrl: './role-form.component.html',
-  providers: [NGXToastrService, ExcelService]
+  providers: [ExcelService]
 })
 export class RoleFormComponent implements OnInit {
   RefRoleId: number;
@@ -40,7 +40,6 @@ export class RoleFormComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewRefRole.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/roleRefFormTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;

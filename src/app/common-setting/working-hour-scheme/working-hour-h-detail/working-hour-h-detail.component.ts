@@ -22,9 +22,6 @@ export class WorkingHourHDetailComponent implements OnInit {
   workingHourSchmHId: any;
   workingHourSchmHObj: WorkingHourSchmHObj;
   resultData: any;
-  getUrl: any;
-  addUrl: any;
-  editUrl: any;
 
   WorkingHourSchmHForm = this.fb.group({
     WorkingHourSchmCode: ['', [Validators.required, Validators.maxLength(50)]],
@@ -94,10 +91,7 @@ export class WorkingHourHDetailComponent implements OnInit {
   readonly CancelLink: string = NavigationConstant.CS_WORKING_HOUR;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
     
-    this.getUrl = URLConstant.GetWorkingHourSchmHById;
     // this.api2Url = this.foundationUrl + URLConstant.GetWorkingHourSchmD;
-    this.addUrl = URLConstant.AddWorkingHourSchmH;
-    this.editUrl = URLConstant.EditWorkingHourSchmH;
     
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
@@ -116,7 +110,7 @@ export class WorkingHourHDetailComponent implements OnInit {
       this.WorkingHourSchmHForm.controls["WorkingHourSchmCode"].disable();
       this.workingHourSchmHObj = new WorkingHourSchmHObj();
       this.workingHourSchmHObj.WorkingHourSchmHId = this.workingHourSchmHId;
-      this.http.post(this.getUrl, {Id : this.workingHourSchmHId}).subscribe(
+      this.http.post(URLConstant.GetWorkingHourSchmHById, {Id : this.workingHourSchmHId}).subscribe(
         response => {
           this.resultData = response;
           this.WorkingHourSchmHForm.patchValue({
@@ -167,7 +161,7 @@ export class WorkingHourHDetailComponent implements OnInit {
       this.workingHourSchmHObj.WorkingHourSchmCode = this.WorkingHourSchmHForm.controls["WorkingHourSchmCode"].value;
       this.workingHourSchmHObj.WorkingHourSchmName = this.WorkingHourSchmHForm.controls["WorkingHourSchmName"].value;
       this.workingHourSchmHObj.IsActive = this.WorkingHourSchmHForm.controls["IsActive"].value;
-      this.http.post(this.addUrl, this.workingHourSchmHObj).subscribe(
+      this.http.post(URLConstant.AddWorkingHourSchmH, this.workingHourSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_WORKING_HOUR],{});
@@ -177,7 +171,7 @@ export class WorkingHourHDetailComponent implements OnInit {
       this.workingHourSchmHObj = this.resultData;
       this.workingHourSchmHObj.WorkingHourSchmName = this.WorkingHourSchmHForm.controls["WorkingHourSchmName"].value;
       this.workingHourSchmHObj.IsActive = this.WorkingHourSchmHForm.controls["IsActive"].value;
-      this.http.post(this.editUrl, this.workingHourSchmHObj).subscribe(
+      this.http.post(URLConstant.EditWorkingHourSchmH, this.workingHourSchmHObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_WORKING_HOUR],{});

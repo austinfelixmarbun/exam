@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionGrpHObj } from 'app/shared/model/VerfQuestionGrpHObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -13,8 +11,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-verification-question-group-member-paging',
-  templateUrl: './verification-question-group-member-paging.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './verification-question-group-member-paging.component.html'
 })
 export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
   verfQuestionGrpHObj: VerfQuestionGrpHObj;
@@ -47,11 +44,8 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
           this.VerfQuestionGrpName = this.verfQuestionGroup.VerfQuestionGrpName
       }
     );
-    this.http.post(URLConstant.GetVerfQuestionGrpDByGrpHId, {Id : this.VerfQuestionGrpHId}).subscribe(
-      (response) => {
-        this.listVerfQuestionGrpD = response[CommonConstant.ReturnObj];
-      }
-    );
+    
+    this.GetVerfQuestionGrpDByGrpHId();
   }
 
   Edit(item)
@@ -61,13 +55,22 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
 
   Delete(verfQuestionGrpDId){
     if (confirm("Are you sure to delete this record?")) {
-      var verfGroupObj = {VerfQuestionGrpHId: this.VerfQuestionGrpHId, VerfQuestionGrpDId: verfQuestionGrpDId};
-      this.http.post(URLConstant.DeleteVerfQuestionGroupDById, verfGroupObj).subscribe(
+      var verfGroupDIdObj = {Id: verfQuestionGrpDId};
+      this.http.post(URLConstant.DeleteVerfQuestionGroupDById, verfGroupDIdObj).subscribe(
         (response) => {
-          this.listVerfQuestionGrpD = response[CommonConstant.ReturnObj];
+          this.toastr.successMessage(response["message"]);
+          this.GetVerfQuestionGrpDByGrpHId();
         }
       );
     }
   }
 
+
+  GetVerfQuestionGrpDByGrpHId(){
+    this.http.post(URLConstant.GetVerfQuestionGrpDByGrpHId, {Id : this.VerfQuestionGrpHId}).subscribe(
+      (response) => {
+        this.listVerfQuestionGrpD = response[CommonConstant.ReturnObj];
+      }
+    );
+  }
 }
