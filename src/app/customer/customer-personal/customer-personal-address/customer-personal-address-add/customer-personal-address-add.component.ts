@@ -12,8 +12,8 @@ import { AddrObj } from 'app/shared/model/AddrObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { GenericByIdObj } from 'app/shared/model/Generic/GenericByIdObj.model';
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-personal-address-add',
@@ -37,7 +37,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   custObj: CustObj;
   addressObj: AddrObj;
   addressType: RefMasterObj;
-  custAddrObj: GenericByIdObj;
+  custAddrObj: GenericObj;
   custAddressObj: CustAddrObj;
 
   custAddrFromObj: CustAddrObj;
@@ -97,7 +97,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
         this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response[CommonConstant.ReturnObj][0]['Key'] });
       });
 
-    this.custAddrObj = new GenericByIdObj();
+    this.custAddrObj = new GenericObj();
     this.custAddrObj.Id = this.IdCust;
     this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
       (response : ResGetListCustAddrObj) => {
@@ -107,7 +107,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
 
     if (this.pageType == "edit") {
-      this.custAddrObj = new GenericByIdObj();
+      this.custAddrObj = new GenericObj();
       this.custAddrObj.Id = this.AddrId;
       this.http.post(URLConstant.GetCustAddr, this.custAddrObj).subscribe(
         (response) => {

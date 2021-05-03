@@ -16,7 +16,7 @@ import { formatDate } from '@angular/common';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
-import { GenericByIdObj } from 'app/shared/model/Generic/GenericByIdObj.model';
+
 
 @Component({
   selector: 'app-customer-company-contact-information',
@@ -44,7 +44,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   UcAddressObj: UcAddressObj;
   inputFieldObj: InputFieldObj;
   custCompanyContactPersonObj: CustCompanyContactPersonObj;
-  CustCompanyId: GenericByIdObj;
+  CustCompanyId: GenericObj;
 
   IdCust: number;
 
@@ -126,7 +126,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       }
     );
 
-    this.CustCompanyId = new GenericByIdObj();
+    this.CustCompanyId = new GenericObj();
     this.custAddrObj = new CustAddrObj();
 
     var custObj = { CustId: this.IdCust };

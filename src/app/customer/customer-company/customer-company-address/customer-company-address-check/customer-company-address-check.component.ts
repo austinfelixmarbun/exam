@@ -7,8 +7,8 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model'; 
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { GenericByIdObj } from 'app/shared/model/Generic/GenericByIdObj.model';
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-company-address-check',
@@ -21,7 +21,7 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   IdCust: number;     
   custObj: any;
   objCust : CustObj;
-  custAddrObj: GenericByIdObj;
+  custAddrObj: GenericObj;
   listCustAddr: Array<ResListCustAddrObj>;
   From : string;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -42,7 +42,7 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
       (response) => {
         this.custObj = response;
       });
-    this.custAddrObj = new GenericByIdObj();
+    this.custAddrObj = new GenericObj();
     this.custAddrObj.Id = this.IdCust;
     this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
       (response : ResGetListCustAddrObj) => {

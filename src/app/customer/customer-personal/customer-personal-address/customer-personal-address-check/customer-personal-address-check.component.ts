@@ -8,8 +8,8 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { GenericByIdObj } from 'app/shared/model/Generic/GenericByIdObj.model';
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-personal-address-check',
@@ -24,7 +24,7 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   listCustAddr: Array<ResListCustAddrObj>;
 
   objCust: CustObj;
-  custAddrObj: GenericByIdObj;
+  custAddrObj: GenericObj;
 
   BirthDt: Date;
   IdExpiredDt: Date;
@@ -72,7 +72,7 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
           this.custObj = response;
       });
 
-      this.custAddrObj = new GenericByIdObj();
+      this.custAddrObj = new GenericObj();
       this.custAddrObj.Id = this.IdCust;
       this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
         (response : ResGetListCustAddrObj) => {

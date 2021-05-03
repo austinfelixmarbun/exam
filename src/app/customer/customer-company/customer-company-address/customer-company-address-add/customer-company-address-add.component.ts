@@ -10,8 +10,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { GenericByIdObj } from 'app/shared/model/Generic/GenericByIdObj.model';
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-company-address-add',
@@ -29,7 +29,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   copyCustomerAddrFrom: any;
 
   addressObj: CustAddrObj;
-  custAddrObj: GenericByIdObj;
+  custAddrObj: GenericObj;
   addressType: RefMasterObj;
   custAddressObj: CustAddrObj;
   inputFieldAddressObj: InputFieldObj;
@@ -86,7 +86,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
         })
       });
 
-    this.custAddrObj = new GenericByIdObj();
+    this.custAddrObj = new GenericObj();
     this.custAddrObj.Id = this.IdCust;
     this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
       (response : ResGetListCustAddrObj) => {
@@ -97,7 +97,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
       });
 
     if (this.pageType == "edit") {
-      this.custAddrObj = new GenericByIdObj();
+      this.custAddrObj = new GenericObj();
       this.custAddrObj.Id = this.AddrId;
       this.http.post(URLConstant.GetCustAddr, this.custAddrObj).subscribe(
         (response) => {

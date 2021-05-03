@@ -20,7 +20,6 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
-import { GenericByIdObj } from 'app/shared/model/Generic/GenericByIdObj.model';
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
 
 @Component({
@@ -372,7 +371,7 @@ export class CustomerContactAddComponent implements OnInit {
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn= false;
 
-    var tempCustAddrObj = new GenericByIdObj();
+    var tempCustAddrObj = new GenericObj();
     tempCustAddrObj.Id = this.IdCust;
     this.http.post(URLConstant.GetListCustAddr, tempCustAddrObj).subscribe(
       (response : ResGetListCustAddrObj) => {
