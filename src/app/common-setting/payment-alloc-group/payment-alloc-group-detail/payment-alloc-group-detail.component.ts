@@ -6,7 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { PaymentAllocGrpObj } from 'app/shared/model/common-setting/PaymentAllocGrpObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 
