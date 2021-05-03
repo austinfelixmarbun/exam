@@ -16,6 +16,7 @@ import { formatDate } from '@angular/common';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { GenericByIdObj } from 'app/shared/model/Generic/GenericByIdObj.model';
 
 @Component({
   selector: 'app-customer-company-contact-information',
@@ -43,6 +44,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   UcAddressObj: UcAddressObj;
   inputFieldObj: InputFieldObj;
   custCompanyContactPersonObj: CustCompanyContactPersonObj;
+  CustCompanyId: GenericByIdObj;
 
   IdCust: number;
 
@@ -124,7 +126,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       }
     );
 
-    this.custCompanyContactPersonObj = new CustCompanyContactPersonObj();
+    this.CustCompanyId = new GenericByIdObj();
     this.custAddrObj = new CustAddrObj();
 
     var custObj = { CustId: this.IdCust };
@@ -132,8 +134,8 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       (response: any) => {
         this.custCompanyId = response['CustCompanyId'];
 
-        this.custCompanyContactPersonObj.CustCompanyId = this.custCompanyId;
-        this.http.post(URLConstant.GetCustCompanyContactPersonByCustCompanyId, this.custCompanyContactPersonObj).subscribe(
+        this.CustCompanyId.Id = this.custCompanyId;
+        this.http.post(URLConstant.GetCustCompanyContactPersonByCustCompanyId, this.CustCompanyId).subscribe(
           (response) => {
             this.tempCustCompanyContactPersonObj = response;
             this.ContactInformationForm.patchValue({
