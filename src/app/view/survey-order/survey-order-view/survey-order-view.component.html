@@ -5,92 +5,98 @@
         <form class="form form-horizontal">
           <div class="form-body">
             <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"></lib-ucviewgeneric>
-            <lib-ucSubsection [id]="'SurveyTaskListId'" [title]="'Survey Task'" [panel]="'SurveyTaskList'">
-            </lib-ucSubsection>
-            <div class="form-body" id="SurveyTaskList">
-              <table class="table table-responsive-md text-center table-hover">
-                <thead>
-                  <tr class="table-header">
-                    <th>
-                      <span class="thead-header" translate>SURVEY TASK NO</span>
-                    </th>
-                    <th>
-                      <span class="thead-header" translate>RESURVEY REF</span>
-                    </th>
-                    <th>
-                      <span class="thead-header" translate>SURVEYEE MODEL</span>
-                    </th>
-                    <th>
-                      <span class="thead-header" translate>SURVEYEE OBJECT</span>
-                    </th>
-                    <th>
-                      <span class="thead-header" translate>SURVEYEE NAME</span>
-                    </th>
-                    <th>
-                      <span class="thead-header" translate>ADDRESS</span>
-                    </th>
-                    <th>
-                      <span class="thead-header" translate>SURVEY TYPE</span>
-                    </th>
-                    <th>
-                      <span class="thead-header" translate>SURVEYOR NAME</span>
-                    </th>
-                    <th>
-                      <span class="thead-header" translate>SURVEYOR FORM SCHEME</span>
-                    </th>
-                    <th>
-                      <span class="thead-header" translate>SURVEY TASK STATUS</span>
-                    </th>
-                    <th>
-                      <span class="thead-header" translate>REASON DESCRIPTION</span>
-                    </th>
-                    <th>
-                      <span class="thead-header" translate>RESULT DATE</span>
-                    </th>
-                    <th>
-                      <span class="thead-header" translate>VIEW RESULT</span>
-                    </th>
-                    <th>
-                      <span class="thead-header" translate>REVIEW BY</span>
-                    </th>
-                    <th>
-                      <span class="thead-header" translate>RESULT COMMENT</span>
-                    </th>
-                    <th>
-                      <span class="thead-header" translate>RESURVEY</span>
-                    </th>
-
-
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of TaskList">
-                    <td>
-                      <a target="_blank" [routerLink]="[ViewLink]" skipLocationChange
-                        [queryParams]="{ SrvyTaskId: item.SrvyTaskId }">{{item.SrvyTaskNo}}</a>
-                    </td>
-                    <td>{{item.ResurveyRef}}</td>
-                    <td>{{item.SurveyeeModel}}</td>                    
-                    <td>{{item.SurveyeeObject}}</td>
-                    <td>
-                      <a target="_blank" [routerLink]="[ViewCust]" skipLocationChange
-                        [queryParams]="{ CustId: item.CustId }">{{item.CustName}}
-                      </a>                      
-                    </td>
-                    <td>{{item.CustAddr}}</td>
-                    <td>{{item.MrSurveyTypeCode}}</td>
-                    <td>{{item.SurveyorName}}</td>
-                    <td>{{item.SrvyFormSchmName}}</td>
-                    <td>{{item.MrSurveyTaskStatCode}}</td>
-                    <td>{{item.ReasonDescr}}</td>
-                    <td>{{item.ResultDt | date: 'dd-MMM-yyyy'}}</td>                    
-                    <td>{{item.ReviewBy}}</td>
-                    <td>{{item.ReviewNotes}}</td>                    
-                    <td>{{item.ResurveyRef != "" ? 'YES' : 'NO'}}</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="px-3">
+              <lib-ucSubsection [id]="'SurveyTaskListId'" [title]="'Survey Task'" [panel]="'SurveyTaskList'">
+              </lib-ucSubsection>
+              <div class="form-body" id="SurveyTaskList">
+                <table class="table table-responsive-md text-center table-hover">
+                  <thead>
+                    <tr class="table-header">
+                      <th>
+                        <span class="thead-header" translate>SURVEY TASK NO</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>RESURVEY REF</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>SURVEYEE MODEL</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>SURVEYEE OBJECT</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>SURVEYEE NAME</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>ADDRESS</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>SURVEY TYPE</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>SURVEYOR NAME</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>SURVEYOR FORM SCHEME</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>SURVEY TASK STATUS</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>REASON DESCRIPTION</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>RESULT DATE</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>VIEW RESULT</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>REVIEW BY</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>RESULT COMMENT</span>
+                      </th>
+                      <th>
+                        <span class="thead-header" translate>RESURVEY</span>
+                      </th>
+  
+  
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of TaskList">
+                      <td>
+                        <a target="_blank" [routerLink]="[ViewLink]" skipLocationChange
+                          [queryParams]="{ SrvyTaskId: item.SrvyTaskId }">{{item.SrvyTaskNo}}</a>
+                      </td>
+                      <td>{{item.ResurveyRef}}</td>
+                      <td>{{item.SurveyeeModel}}</td>                    
+                      <td>{{item.SurveyeeObject}}</td>
+                      <td>
+                        <a target="_blank" [routerLink]="[ViewCust]" skipLocationChange
+                          [queryParams]="{ CustId: item.CustId }">{{item.CustName}}
+                        </a>                      
+                      </td>
+                      <td>{{item.CustAddr}}</td>
+                      <td>{{item.MrSurveyTypeCode}}</td>
+                      <td>{{item.SurveyorName}}</td>
+                      <td>{{item.SrvyFormSchmName}}</td>
+                      <td>{{item.MrSurveyTaskStatCode}}</td>
+                      <td>{{item.ReasonDescr}}</td>
+                      <td>{{item.ResultDt | date: 'dd-MMM-yyyy'}}</td>
+                      <td><a target="_blank" [routerLink]="[ViewLink]" skipLocationChange
+                        [queryParams]="{ SrvyTaskId: item.SrvyTaskId }"><i class="fas fa-pencil-alt"></i>
+                      </a></td>                    
+                      <td>{{item.ReviewBy}}</td>
+                      <td>{{item.ReviewNotes}}</td>                    
+                      <td>{{item.ResurveyRef != "" ? 'YES' : 'NO'}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
+            
           </div>
         </form>
       </div>

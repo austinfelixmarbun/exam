@@ -11,6 +11,8 @@ import { SurveyorPagingComponent } from './surveyor-paging/surveyor-paging.compo
 import { SurveyorTaskAssignmentPagingComponent } from './surveyor-task-assignment-paging/surveyor-task-assignment-paging.component';
 import { SurveyTaskAssignmentDetailComponent } from './survey-task-assignment-detail/survey-task-assignment-detail.component';
 import { SurveyTaskComponent } from './survey-task/survey-task.component';
+import { SurveyResultReviewPagingComponent } from './survey-result-review-paging/survey-result-review-paging.component';
+import { SurveyResultReviewDetailComponent } from './survey-result-review-detail/survey-result-review-detail.component';
 
 
 const routes: Routes = [
@@ -85,6 +87,20 @@ const routes: Routes = [
         component: SurveyTaskComponent,
         data: {
           title: 'Survey Task Inquiry'
+        }
+      },
+      {
+        path: PathConstant.SRVY_RESULT_REVIEW_PAGING,
+        component: SurveyResultReviewPagingComponent,
+        data:{
+          title: 'Survey Result Review'
+        }
+      },
+      {
+        path: PathConstant.SRVY_RESULT_REVIEW_DETAIL,
+        component: SurveyResultReviewDetailComponent,
+        data:{
+          title: 'Survey Result Review Detail'
         }
       }      
     ]

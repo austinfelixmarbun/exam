@@ -843,6 +843,8 @@ export class URLConstant {
     public static CancelSurveyTaskBySurveyTaskId = environment.FoundationR3Url + "/SrvyTask/CancelSurveyTaskBySurveyTaskId";
     public static GetSurveyorNameBySurveyorId = environment.FoundationR3Url + "/SrvyTask/GetSurveyorNameBySurveyorId";
     public static GetListSrvyTaskBySrvyOrderIdForView = environment.FoundationR3Url + "/SrvyTask/GetListSrvyTaskBySrvyOrderIdForView";
+    public static GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview = environment.FoundationR3Url + "/SrvyTask/GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview";
+    public static ReviewSurveyResult = environment.FoundationR3Url + "/SrvyTask/ReviewSurveyResult";
 
     // SURVEY ORDER
     public static GetSrvyOrderBySrvyOrderId = environment.FoundationR3Url + "/SrvyOrder/GetSrvyOrderBySrvyOrderId";
