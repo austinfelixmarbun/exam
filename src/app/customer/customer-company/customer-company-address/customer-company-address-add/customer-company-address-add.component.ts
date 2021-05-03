@@ -35,11 +35,6 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
 
   IdCust: number;
   pageType: string;
-  addCustAddrUrl: string;
-  getCustAddrUrl: string;
-  editCustAddrUrl: string;
-  getListCustAddrUrl: string;
-  getListActiveRefMasterWithMappingCodeAllUrl: string;
 
   CustDataCompanyForm = this.fb.group({
     Notes: [''],
@@ -55,12 +50,6 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   inputAddressObj: InputAddressObj;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
-    this.getListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
-    this.getListCustAddrUrl = URLConstant.GetListCustAddr;
-    this.addCustAddrUrl = URLConstant.AddCustAddr;
-    this.editCustAddrUrl = URLConstant.EditCustAddr;
-    this.getCustAddrUrl = URLConstant.GetCustAddr;
-
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -85,7 +74,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.addressType = new RefMasterObj();
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
     this.addressType.MappingCode = CommonConstant.CustTypeCompany;
-    this.http.post(this.getListActiveRefMasterWithMappingCodeAllUrl, this.addressType).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).subscribe(
       (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
         let idxCompany = this.listAddressType.findIndex(x => x.Key == CommonConstant.CustAddrTypeCompany);
@@ -98,7 +87,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.custAddrObj = new CustAddrObj();
     this.custAddrObj.CustId = this.IdCust;
     this.custAddrObj.MrCustAddrTypeCode = "-";
-    this.http.post(this.getListCustAddrUrl, this.custAddrObj).subscribe(
+    this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
       (response) => {
         this.listCustAddr = response[CommonConstant.ReturnObj];
         if (this.listCustAddr.length > 0) {
@@ -109,7 +98,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     if (this.pageType == "edit") {
       this.custAddrObj = new CustAddrObj();
       this.custAddrObj.CustAddrId = this.AddrId;
-      this.http.post(this.getCustAddrUrl, {Id : this.AddrId}).subscribe(
+      this.http.post(URLConstant.GetCustAddr, {Id : this.AddrId}).subscribe(
         (response) => {
           this.copyCustomerAddr = response;
           this.CustDataCompanyForm.patchValue({
@@ -159,7 +148,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     }
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.CustDataCompanyForm.controls["CopyAddrFrom"].value;
-    this.http.post(this.getCustAddrUrl, this.custAddrFromObj).subscribe(
+    this.http.post(URLConstant.GetCustAddr, this.custAddrFromObj).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
         this.CustDataCompanyForm.patchValue({
@@ -225,7 +214,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.custAddressObj = new CustAddrObj();
     this.setCustAddr();
     if (this.pageType == "add") {
-      this.http.post(this.addCustAddrUrl, this.custAddressObj).subscribe(
+      this.http.post(URLConstant.AddCustAddr, this.custAddressObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputValue.emit({ mode: 'check' });
@@ -234,7 +223,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     } else {
       this.custAddressObj.CustAddrId = this.AddrId;
       this.custAddressObj.RowVersion = this.copyCustomerAddr.RowVersion;
-      this.http.post(this.editCustAddrUrl, this.custAddressObj).subscribe(
+      this.http.post(URLConstant.EditCustAddr, this.custAddressObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputValue.emit({ mode: 'check' });

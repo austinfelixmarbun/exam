@@ -25,7 +25,7 @@
         <th style="text-align: left;"><span class="thead-header" name='notes' translate>NOTES
           </span>
         </th>
-        <th style="text-align: left;"><span class="thead-header" translate>EDIT
+        <th style="text-align: center;"><span class="thead-header" translate>EDIT
           </span>
         </th>
       </tr>
@@ -39,7 +39,7 @@
         <td style="text-align: left;">{{item.PhnArea1}}-{{item.Phn1}}-{{item.PhnExt1}}</td>
         <td style="text-align: left;">{{item.PhnArea2}}-{{item.Phn2}}-{{item.PhnExt2}}</td>
         <td style="text-align: left;">{{item.Notes}}</td>
-        <td style="text-align: left;">
+        <td style="text-align: center;">
           <span [hidden]="item.MrCustAddrTypeCode == 'LEGAL' && From == 'CustPaging'" (click)="editItem(item)"
             class="material-icons">edit</span>
         </td>

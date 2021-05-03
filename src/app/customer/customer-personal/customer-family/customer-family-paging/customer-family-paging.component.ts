@@ -4,6 +4,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-family-paging',
@@ -55,7 +56,9 @@ export class CustomerFamilyPagingComponent implements OnInit {
   deleteFamilyHandler(custPersonalFamilyId, idx){
     var confirmDelete = confirm(ExceptionConstant.DELETE_CONFIRMATION);
     if(confirmDelete){
-      this.http.post(URLConstant.DeleteCustPersonalFamily, { CustPersonalFamilyId: custPersonalFamilyId }).toPromise().then(
+      let reqObj: GenericObj = new GenericObj();
+      reqObj.Id = custPersonalFamilyId;
+      this.http.post(URLConstant.DeleteCustPersonalFamily, reqObj).toPromise().then(
         (response) => {
           this.CustFamilyList.splice(idx, 1);
           this.CustToExclude = new Array<number>();

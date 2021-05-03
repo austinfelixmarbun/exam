@@ -21,12 +21,8 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   IdCust: number;
 
   CustModel: string;
-  getCustById: string;
-  getListActiveRefMaster: string;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.getCustById = URLConstant.GetCustByCustId;
-    this.getListActiveRefMaster = URLConstant.GetListActiveRefMaster;
     this.tempCustModel = new Array<Object>();
 
     this.route.queryParams.subscribe(params => {
@@ -39,7 +35,7 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   ngOnInit() {
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(this.getCustById, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
       (response) => {
         this.custObj = response;
         this.CustModel = this.custObj.MrCustModelCode;

@@ -193,6 +193,7 @@ export const ROUTES: RouteInfo[] = [
       { Path: NavigationConstant.JOURNAL_MEDIA_PAGING, Title: 'Journal Media', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.JOURNAL_RESULT, Title: 'Journal Result', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.FAILED_JOURNAL_RESULT_LIST_PAGING, Title: 'Failed Journal Result List', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.JOURNAL_RECONCILE_PAGING, Title: 'Journal Reconcile', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] }
     ], Params: []
   }
   // {

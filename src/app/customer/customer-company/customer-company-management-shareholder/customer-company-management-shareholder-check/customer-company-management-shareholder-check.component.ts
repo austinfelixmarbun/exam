@@ -9,6 +9,7 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-check',
@@ -27,15 +28,9 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   custCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
 
   IdCust: number;
-  getCustCompanyIdUrl: string;
-  DeleteCustCompanyMgmntShrholderUrl: string;
-  getListCompanyManagementShareholderByCustCompanyIdUrl: string;
   resCustObj: any;
   isOwner: boolean = false;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
-    this.getCustCompanyIdUrl = URLConstant.GetCustCompanyByCustId;
-    this.getListCompanyManagementShareholderByCustCompanyIdUrl = URLConstant.GetListCustCompanyMgmntShrholderByCustId;
-    this.DeleteCustCompanyMgmntShrholderUrl = URLConstant.DeleteCustCompanyMgmntShrholder;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -77,12 +72,11 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
     }
   }
 
-  deleteItem(CustCompanyMgmntShrholderId: any) {
+  deleteItem(CustCompanyMgmntShrholderId: number) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
-      this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
-      this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId = CustCompanyMgmntShrholderId;
-
-      this.http.post(this.DeleteCustCompanyMgmntShrholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
+      let reqObj: GenericObj = new GenericObj();
+      reqObj.Id = CustCompanyMgmntShrholderId;
+      this.http.post(URLConstant.DeleteCustCompanyMgmntShrholder, reqObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.getList();
@@ -100,12 +94,12 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   }
 
   getList() {
-    this.custCompanyObj = new CustCompanyObj;
-    this.custCompanyObj.CustId = this.IdCust;
-    this.http.post(this.getCustCompanyIdUrl, {Id : this.IdCust}).subscribe(
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = this.IdCust;
+    this.http.post(URLConstant.GetCustCompanyByCustId, reqObj).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
-        this.http.post(this.getListCompanyManagementShareholderByCustCompanyIdUrl, {Id : this.IdCust}).subscribe(
+        this.http.post(URLConstant.GetListCustCompanyMgmntShrholderByCustId, reqObj).subscribe(
           (response) => {
             this.tempListCompanyManagementShareholder = response["ReturnObject"]; 
             let temp = this.tempListCompanyManagementShareholder.find(element => element.IsOwner == true);

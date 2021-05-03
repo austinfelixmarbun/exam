@@ -24,7 +24,7 @@ export class JournalResultComponent implements OnInit {
 
 
     this.http.post<any>(environment.FoundationR3Url + '/Journal/GetJournalResultByJrMsgHId', {
-      JrMsgHId: this.JrMsgHId
+      Id: this.JrMsgHId
     }).subscribe(res => {
       this.JrMsgH = res.JrMsgH[0]
       this.JrResult = res.JrResult

@@ -31,11 +31,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
   tempRefIndustryTypeId: number;
 
   Page: String;
-  editCustCompanyUrl: string;
-  getCustByCustIdUrl: string;
-  getCustCompanyByCustIdUrl: string;
-  getRefIndustryTypeByIndustryTypeIdUrl: string;
-
+  
   CustomerDetailForm = this.fb.group({
     NumOfEmp: ['', [Validators.maxLength(100), Validators.required, Validators.pattern("^[0-9]+$")]],
     EstablishmentDt: ['', [Validators.required]],
@@ -47,10 +43,6 @@ export class CustomerCompanyDetailComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder) {
-    this.editCustCompanyUrl = URLConstant.EditCustCompany;
-    this.getCustCompanyByCustIdUrl = URLConstant.GetCustCompanyByCustId;
-    this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
-    this.getRefIndustryTypeByIndustryTypeIdUrl = URLConstant.GetRefIndustryTypeById;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -70,7 +62,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
  
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj.CustId = this.IdCust;
-    this.http.post(this.getCustCompanyByCustIdUrl, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustCompanyByCustId, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
         this.CustomerDetailForm.patchValue({
@@ -82,7 +74,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
         if (this.tempCustCompanyObj.RefIndustryTypeId != null) {
           this.refIndustryTypeObj = new RefIndustryTypeObj();
           this.refIndustryTypeObj.RefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
-          this.http.post(this.getRefIndustryTypeByIndustryTypeIdUrl, {Id: this.tempCustCompanyObj.RefIndustryTypeId}).subscribe(
+          this.http.post(URLConstant.GetRefIndustryTypeById, {Id: this.tempCustCompanyObj.RefIndustryTypeId}).subscribe(
             (response) => {
               this.tempRefIndustryObj = response; 
               this.lookUpObj.nameSelect = this.tempRefIndustryObj.IndustryTypeName; 
@@ -107,7 +99,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
       this.custCompanyObj.RefIndustryTypeId = this.tempRefIndustryTypeId;
     }
 
-    this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
+    this.http.post(URLConstant.EditCustCompany, this.custCompanyObj).subscribe(
       (response) => { 
         this.toastr.successMessage(response["Message"]);
         this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next'});

@@ -16,6 +16,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-company-duplicate-check',
@@ -54,11 +55,9 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
   DuplicateStatus: string;
   MrCompanyTypeCode: string;
   IsAffiliateWithMf: string;
-  urlGetDescByMasterCode: string;
-
+  
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
     this.ResponseSaveData = new EventEmitter<any>();
-    this.urlGetDescByMasterCode = URLConstant.GetRefMasterByMasterCode;
     
     this.route.queryParams.subscribe(params => {
       if (params["CustModel"] != null) {
@@ -128,7 +127,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       MasterCode: this.MrCompanyTypeCode,
       RowVersion: ""
     }
-    this.http.post(this.urlGetDescByMasterCode, {Code: this.MrCompanyTypeCode}).subscribe(
+    this.http.post(URLConstant.GetRefMasterByMasterCode, {Code: this.MrCompanyTypeCode}).subscribe(
       (response) => {
         this.tempMrCompanyTypeCode = response;
       }
@@ -193,11 +192,9 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       this.addCustObj.CustAddr.SubZipcode = custAddr["SubZipcode"];
       this.addCustObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
 
-      this.http.post(URLConstant.AddNewCust, this.addCustObj).subscribe(
-        (response) => {
-          this.resultData = response;
-          this.CustId = this.resultData.CustObj.CustId;
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_PAGE],{ "IdCust": this.CustId, "From": 'CustPaging' });
+      this.http.post(URLConstant.AddCustCompanyMainData, this.addCustObj).subscribe(
+        (response: GenericObj) => {
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_PAGE],{ "IdCust": response.Id, "From": 'CustPaging' });
         }
       );
     }
@@ -213,7 +210,10 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
         return response;
       }),
       mergeMap((response) => {
-        return this.http.post(URLConstant.GetCustAddrByMrCustAddrType, { CustId: this.addCustObj.CustObj.CustId, MrCustAddrTypeCode: CommonConstant.AddrTypeLegal });
+        let reqObj: GenericObj = new GenericObj();
+        reqObj.Id = this.addCustObj.CustObj.CustId;
+        reqObj.Code = CommonConstant.CustAddrTypeLegal;
+        return this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj);
       })
     ).subscribe(
       (response) => {

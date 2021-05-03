@@ -705,7 +705,11 @@ export class URLConstant {
 
     // CUSTOMER
     public static AddNewCust = environment.FoundationR3Url + "/Cust/AddCust";
+    public static AddCustPersonalMainData = environment.FoundationR3Url + "/Cust/AddCustPersonalMainData";
+    public static AddCustCompanyMainData = environment.FoundationR3Url + "/Cust/AddCustCompanyMainData";
     public static EditCust = environment.FoundationR3Url + "/Cust/EditCust";
+    public static EditCustPersonalMainData = environment.FoundationR3Url + "/Cust/EditCustPersonalMainData";
+    public static EditCustCompanyMainData = environment.FoundationR3Url + "/Cust/EditCustCompanyMainData";
     public static EditDuplicateCust = environment.FoundationR3Url + "/Cust/EditDuplicateCust";
     public static EditNegativeDuplicateCust = environment.FoundationR3Url + "/Cust/EditNegativeDuplicateCust";
     public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId";
@@ -779,6 +783,8 @@ export class URLConstant {
     // CUSTOMER COMPANY MANAGEMENT SHAREHOLDER
     public static GetCustCompanyMgmntShrholderForCustViewByCustId = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderForCustViewByCustId";
     public static AddCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholder";
+    public static AddCustCompanyMgmntShrholderPersonal = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderPersonal";
+    public static AddCustCompanyMgmntShrholderCompany = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderCompany";
     public static EditCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholder";
     public static DeleteCustCompanyMgmntShrholder = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/DeleteCustCompanyMgmntShrholder";
     public static GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId = environment.FoundationR3Url + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId";
@@ -810,8 +816,9 @@ export class URLConstant {
     public static GetNegativeCustByNegativeCustNameAndCustType = environment.FoundationR3Url + "/NegativeCust/GetNegativeCustByNegativeCustNameAndCustType";
 
     // CUSTOMER OTHER INFO
-    public static AddEditCustOtherInfo = environment.FoundationR3Url + "/CustOtherInfo/AddEditCustOtherInfo"
-    public static GetCustOtherInfoByCustId = environment.FoundationR3Url + "/CustOtherInfo/GetCustOtherInfoByCustId"
+    public static AddCustOtherInfo = environment.FoundationR3Url + "/CustOtherInfo/AddCustOtherInfo";
+    public static EditCustOtherInfo = environment.FoundationR3Url + "/CustOtherInfo/EditCustOtherInfo";
+    public static GetCustOtherInfoByCustId = environment.FoundationR3Url + "/CustOtherInfo/GetCustOtherInfoByCustId";
 
     //REF BEHAVIOUR
     public static GetRefBehaviourByRefBehaviourCode = environment.FoundationR3Url + "/RefBehaviour/GetRefBehaviourByRefBehaviourCode";
@@ -975,7 +982,7 @@ export class URLConstant {
     
     // Cust Exposure
     public static GetCustExpsrInfoByCustId = environment.FoundationR3Url + "/CustExpsrInfo/GetCustExpsrInfoByCustId";
-    public static RequestExposureFromR2 = environment.FoundationR3Url + "/CustExpsrInfo/RequestExposureFromR2";
+    public static RequestExposure = environment.FoundationR3Url + "/CustExpsrInfo/RequestExposure";
     public static GetListCustExpsrBucketByCustExpsrDId = environment.FoundationR3Url + "/CustExpsrInfo/GetListCustExpsrBucketByCustExpsrDId";
     public static GetListCustExpsrAppAgrHistByCustExpsrHId = environment.FoundationR3Url + "/CustExpsrInfo/GetListCustExpsrAppAgrHistByCustExpsrHId";
 
@@ -1000,4 +1007,7 @@ export class URLConstant {
 
     // GENERIC
     public static GetJournalResultPagingObjectBySQL = "/Generic/GetJournalResultPagingObjectBySQL";
+
+    // JOURNAL
+    public static RerunJournal = "/Journal/RerunJournal";
 }

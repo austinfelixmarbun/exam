@@ -1,5 +1,5 @@
 {
-    "title": "FAILED JOURNAL RESULT LIST",
+    "title": "JOURNAL RECONCILE",
     "exportExcel": false,
     "keyProperty": "JrMsgHId",
     "keyPropCriteria": "JMH.JR_MSG_H_ID",
@@ -100,6 +100,22 @@
                 {
                     "key": "NBL",
                     "value": "NOT BALANCE"
+                },
+                {
+                    "key": "EXE",
+                    "value": "EXECUTED"
+                },
+                {
+                    "key": "REQ",
+                    "value": "REQUESTED"
+                },
+                {
+                    "key": "FIX",
+                    "value": "FIXED"
+                },
+                {
+                    "key": "CAN",
+                    "value": "CANCELLED"
                 }
             ],
             "itemsUrl": []
@@ -216,6 +232,6 @@
         }
     ],
     "querystring": {
-        "name": "searchFailedJournalResultPaging"
+        "name": "searchJournalReconcilePaging"
     }
 }

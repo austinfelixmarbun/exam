@@ -1,3 +1,4 @@
+import { environment } from "environments/environment";
 import { PathConstant } from "./PathConstant";
 
 export class NavigationConstant {
@@ -118,9 +119,10 @@ export class NavigationConstant {
     //#endregion
 
     //#region View
+    public static VIEW_APP = "/" + PathConstant.VIEW + "/" + PathConstant.VIEW_APP; 
     public static VIEW_SRVY_TASK = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_SRVY + "/" + PathConstant.VIEW_SRVY_TASK; //'/View/Survey/SurveyTask'
     public static VIEW_SRVY_ORDER = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_SRVY + "/" + PathConstant.VIEW_SRVY_ORDER; //'/View/Survey/SurveyOrder'
-    public static VIEW_CUST = PathConstant.CR_VIEW + "/" + PathConstant.VIEW_CUST; //'View/Customer'
+    public static VIEW_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_CUST; //'View/Customer'
     public static VIEW_CUST_ADDR = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_ADDR; //'/View/Customer/Address'
     public static VIEW_CUST_GRP = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_GRP; //'/View/Customer/CustomerGroup'
     public static VIEW_CUST_PERSONAL_DETAIL = "/" + NavigationConstant.VIEW_CUST + "/" +PathConstant.VIEW_CUST_PERSONAL_DETAIL; //'/View/Customer/PersonalDetail'
@@ -331,5 +333,8 @@ export class NavigationConstant {
     public static JOURNAL_MEDIA_GROUP_ITEM_VALUE = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_MEDIA_GROUP_ITEM_VALUE;
     public static JOURNAL_RESULT = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_RESULT;
     public static FAILED_JOURNAL_RESULT_LIST_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.FAILED_JOURNAL_RESULT_LIST_PAGING;
+    public static JOURNAL_RECONCILE_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_RECONCILE_PAGING;
     //#endregion
+
+    
 }

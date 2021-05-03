@@ -20,6 +20,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-negative-customer-detail',
@@ -480,10 +481,11 @@ export class NegativeCustomerDetailComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
     var expiredDt = datePipe.transform(e.idExpiredDate, 'yyyy-MM-dd');
     var birthDt = datePipe.transform(e.birthDate, 'yyyy-MM-dd');
-    var custAddr = new CustAddrObj();
-    custAddr.CustId = e.custId;
-    custAddr.MrCustAddrTypeCode = CommonConstant.CustAddrTypeLegal;
-    this.httpClient.post(URLConstant.GetCustAddrByMrCustAddrType, custAddr).subscribe(
+    
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = e.custId;
+    reqObj.Code = CommonConstant.CustAddrTypeLegal;
+    this.httpClient.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response: any) => {
         this.NegativeCustForm.patchValue({
           CustId: e.custId,
@@ -525,10 +527,10 @@ export class NegativeCustomerDetailComponent implements OnInit {
   }
 
   getLookupCustCompanyResponse(e) {
-    var custAddr = new CustAddrObj();
-    custAddr.CustId = e.custId;
-    custAddr.MrCustAddrTypeCode = CommonConstant.CustAddrTypeLegal;
-    this.httpClient.post(URLConstant.GetCustAddrByMrCustAddrType, custAddr).subscribe(
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = e.custId;
+    reqObj.Code = CommonConstant.CustAddrTypeLegal;
+    this.httpClient.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response: any) => {
         this.NegativeCustForm.patchValue({
           CustId: e.custId,

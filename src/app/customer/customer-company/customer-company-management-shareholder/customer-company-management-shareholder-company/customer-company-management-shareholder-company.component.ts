@@ -21,31 +21,26 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 export class CustomerCompanyManagementShareholderCompanyComponent implements OnInit {
   @Input() custCompanyId: number;
   @Input() CustCompanyMgmntShrholderId: number;
-  @Input() TotalShare : number;
-  @Output () outputValue : EventEmitter<object> = new EventEmitter();
+  @Input() TotalShare: number;
+  @Output() outputValue: EventEmitter<object> = new EventEmitter();
   lookUpIndustryTypeObj: InputLookupObj;
   isExistingCust: boolean;
 
-  inputLookupCustCompanyObj : InputLookupObj;
+  inputLookupCustCompanyObj: InputLookupObj;
   custCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
 
   tempMrCustModelCode: any;
   tempMrCompanyTypeCode: any;
-  tempCustCompanyMgmntShrholderObj : any;
+  tempCustCompanyMgmntShrholderObj: any;
 
-  tempShareholderCustNo : string;
-  getListActiveRefMasterUrl: string;
-  addManagementShareholderUrl: string;
-  editManagementShareholderUrl: string;
-  getCustCompanyMgmntShrholderUrl: string;
-  getListKeyValueByMrCustTypeCode: string;
+  tempShareholderCustNo: string;
 
   ManagementShareholderForm = this.fb.group({
-    MgmntShrholderName: ['', [Validators.maxLength(100) ,Validators.required]],
+    MgmntShrholderName: ['', [Validators.maxLength(100), Validators.required]],
     MrCustModelCode: [''],
-    MrCompanyTypeCode: ['',[Validators.required]],
+    MrCompanyTypeCode: ['', [Validators.required]],
     TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
-    SharePrcnt: ['1',[ Validators.min(1),Validators.max(100)]],
+    SharePrcnt: ['1', [Validators.min(1), Validators.max(100)]],
     MrIndustryTypeCode: [''],
     IsSigner: [false],
     IsActive: [false],
@@ -53,15 +48,10 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.addManagementShareholderUrl = URLConstant.AddCustCompanyMgmntShrholder;
-    this.getCustCompanyMgmntShrholderUrl = URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
-    this.editManagementShareholderUrl = URLConstant.EditCustCompanyMgmntShrholder; 
-    this.getListKeyValueByMrCustTypeCode = URLConstant.GetListKeyValueByMrCustTypeCode;
     this.isExistingCust = false;
   }
 
-  ngOnInit() {  
+  ngOnInit() {
     this.inputLookupCustCompanyObj = new InputLookupObj();
     this.inputLookupCustCompanyObj.urlJson = "./assets/lookup/lookUpExistingCustCompany.json";
     this.inputLookupCustCompanyObj.pagingJson = "./assets/lookup/lookUpExistingCustCompany.json";
@@ -73,7 +63,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     addCrit.DataType = "numeric";
     addCrit.propName = "c.CUST_ID";
     addCrit.restriction = AdInsConstant.RestrictionNeq;
-    addCrit.value = this.custCompanyId.toString();    
+    addCrit.value = this.custCompanyId.toString();
     arrCrit.push(addCrit);
 
     this.inputLookupCustCompanyObj.addCritInput = arrCrit;
@@ -89,7 +79,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     this.lookUpIndustryTypeObj.genericJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpIndustryTypeObj.isRequired = true;
 
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.tempMrCompanyTypeCode = response[CommonConstant.ReturnObj];
@@ -99,11 +89,11 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
         }
       }
     );
-    
+
     var refMasterObjCustModel = {
       MrCustTypeCode: CommonConstant.CustTypeCompany
     }
-    this.http.post(this.getListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempMrCustModelCode = response;
         if (response[CommonConstant.ReturnObj].length > 0) {
@@ -111,50 +101,50 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
           this.ManagementShareholderForm.patchValue({
             MrCustModelCode: this.tempMrCustModelCode[0].Key
           });
+        }
       }
-    }
     );
 
-    if(this.CustCompanyMgmntShrholderId!=null){
+    if (this.CustCompanyMgmntShrholderId != null) {
       this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
-      this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId  = this.CustCompanyMgmntShrholderId;
-      this.http.post(this.getCustCompanyMgmntShrholderUrl, {Id : this.CustCompanyMgmntShrholderId}).subscribe(
+      this.custCompanyMgmntShrholderObj.CustCompanyMgmntShrholderId = this.CustCompanyMgmntShrholderId;
+      this.http.post(URLConstant.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, { Id: this.CustCompanyMgmntShrholderId }).subscribe(
         (response) => {
           this.tempCustCompanyMgmntShrholderObj = response;
           this.http.post(URLConstant.GetRefIndustryTypeByIndustryTypeCode, { Code: response["MrIndustryTypeCode"] }).subscribe(
             (response) => {
-              this.lookUpIndustryTypeObj.nameSelect = response["IndustryTypeName"]; 
+              this.lookUpIndustryTypeObj.nameSelect = response["IndustryTypeName"];
               this.lookUpIndustryTypeObj.jsonSelect = response;
             },
             (error) => {
               console.log(error);
             }
           );
-          
-          this.ManagementShareholderForm.patchValue({ 
+
+          this.ManagementShareholderForm.patchValue({
             MgmntShrholderName: this.tempCustCompanyMgmntShrholderObj.MgmntShrholderName,
-            MrCustModelCode:  this.tempCustCompanyMgmntShrholderObj.MrCustModelCode,
-            MrCompanyTypeCode: this.tempCustCompanyMgmntShrholderObj.MrCompanyTypeCode ,
-            TaxIdNo:  this.tempCustCompanyMgmntShrholderObj.TaxIdNo,
+            MrCustModelCode: this.tempCustCompanyMgmntShrholderObj.MrCustModelCode,
+            MrCompanyTypeCode: this.tempCustCompanyMgmntShrholderObj.MrCompanyTypeCode,
+            TaxIdNo: this.tempCustCompanyMgmntShrholderObj.TaxIdNo,
             SharePrcnt: this.tempCustCompanyMgmntShrholderObj.SharePrcnt,
             IsSigner: this.tempCustCompanyMgmntShrholderObj.IsSigner,
             IsActive: this.tempCustCompanyMgmntShrholderObj.IsActive,
             IsOwner: this.tempCustCompanyMgmntShrholderObj.IsOwner,
             MrIndustryTypeCode: this.tempCustCompanyMgmntShrholderObj.MrIndustryTypeCode
           });
-          if(this.tempCustCompanyMgmntShrholderObj.ShareholderCustNo!=null){ 
+          if (this.tempCustCompanyMgmntShrholderObj.ShareholderCustNo != null) {
             this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
-            this.ManagementShareholderForm.controls.MrCustModelCode.disable();  
-            this.ManagementShareholderForm.controls.MrCompanyTypeCode.disable(); 
-            this.ManagementShareholderForm.controls.TaxIdNo.disable(); ;
+            this.ManagementShareholderForm.controls.MrCustModelCode.disable();
+            this.ManagementShareholderForm.controls.MrCompanyTypeCode.disable();
+            this.ManagementShareholderForm.controls.TaxIdNo.disable();;
           }
           this.TotalShare = this.TotalShare - parseFloat(this.tempCustCompanyMgmntShrholderObj.SharePrcnt);
         }
       );
-    } 
+    }
   }
 
-  getLookUpIndustry(e){
+  getLookUpIndustry(e) {
     this.ManagementShareholderForm.patchValue({
       MrIndustryTypeCode: e.IndustryTypeCode
     });
@@ -165,13 +155,13 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   SaveValue() {
     this.TotalShareCurrent = this.TotalShare + parseFloat(this.ManagementShareholderForm.controls["SharePrcnt"].value);
 
-    if(this.TotalShareCurrent > 100){
+    if (this.TotalShareCurrent > 100) {
       this.LeftShare = 100 - this.TotalShare;
-      this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_LEFT +this.LeftShare+"%");
+      this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_LEFT + this.LeftShare + "%");
       return;
     }
 
-    if(!this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value){
+    if (!this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value) {
       this.toastr.warningMessage("Industry Type Is Required");
       return false;
     }
@@ -180,58 +170,58 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
     // this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
     this.custCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
     this.custCompanyMgmntShrholderObj.CustId = this.custCompanyId;
-    if(this.CustCompanyMgmntShrholderId!=null){ 
+    if (this.CustCompanyMgmntShrholderId != null) {
       this.custCompanyMgmntShrholderObj = this.tempCustCompanyMgmntShrholderObj;
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
-      this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;   
-      this.custCompanyMgmntShrholderObj.MrCompanyTypeCode = this.ManagementShareholderForm.controls["MrCompanyTypeCode"].value;  
+      this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;
+      this.custCompanyMgmntShrholderObj.MrCompanyTypeCode = this.ManagementShareholderForm.controls["MrCompanyTypeCode"].value;
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
       this.custCompanyMgmntShrholderObj.TaxIdNo = this.ManagementShareholderForm.controls["TaxIdNo"].value;
-      this.custCompanyMgmntShrholderObj.IsActive = this.ManagementShareholderForm.controls["IsActive"].value;  
-      this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value;  
+      this.custCompanyMgmntShrholderObj.IsActive = this.ManagementShareholderForm.controls["IsActive"].value;
+      this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value;
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Company;
-      this.custCompanyMgmntShrholderObj.MrIndustryTypeCode = this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value; 
-      this.http.post(this.editManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
+      this.custCompanyMgmntShrholderObj.MrIndustryTypeCode = this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value;
+      this.http.post(URLConstant.EditCustCompanyMgmntShrholder, this.custCompanyMgmntShrholderObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.outputValue.emit({mode : 'check'});
+          this.outputValue.emit({ mode: 'check' });
         }
       );
-    }else{
-      if(this.tempShareholderCustNo!=null){
+    } else {
+      if (this.tempShareholderCustNo != null) {
         this.custCompanyMgmntShrholderObj.ShareholderCustNo = this.tempShareholderCustNo;
       }
-      if(this.custExistingId != 0){
+      if (this.custExistingId != 0) {
         this.custCompanyMgmntShrholderObj.ShareholderId = this.custExistingId;
       }
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
-      this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;   
-      this.custCompanyMgmntShrholderObj.MrCompanyTypeCode = this.ManagementShareholderForm.controls["MrCompanyTypeCode"].value;  
+      this.custCompanyMgmntShrholderObj.MrCustModelCode = this.ManagementShareholderForm.controls["MrCustModelCode"].value;
+      this.custCompanyMgmntShrholderObj.MrCompanyTypeCode = this.ManagementShareholderForm.controls["MrCompanyTypeCode"].value;
       this.custCompanyMgmntShrholderObj.SharePrcnt = this.ManagementShareholderForm.controls["SharePrcnt"].value;
       this.custCompanyMgmntShrholderObj.IsSigner = this.ManagementShareholderForm.controls["IsSigner"].value;
       this.custCompanyMgmntShrholderObj.TaxIdNo = this.ManagementShareholderForm.controls["TaxIdNo"].value;
-      this.custCompanyMgmntShrholderObj.IsActive = this.ManagementShareholderForm.controls["IsActive"].value; 
-      this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value;  
+      this.custCompanyMgmntShrholderObj.IsActive = this.ManagementShareholderForm.controls["IsActive"].value;
+      this.custCompanyMgmntShrholderObj.IsOwner = this.ManagementShareholderForm.controls["IsOwner"].value;
       this.custCompanyMgmntShrholderObj.MrCustTypeCode = RefMasterConstant.Company;
-      this.custCompanyMgmntShrholderObj.MrIndustryTypeCode = this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value; 
+      this.custCompanyMgmntShrholderObj.MrIndustryTypeCode = this.ManagementShareholderForm.controls["MrIndustryTypeCode"].value;
 
-      if(this.isExistingCust){
-        this.http.post(this.addManagementShareholderUrl, this.custCompanyMgmntShrholderObj).subscribe(
+      if (this.isExistingCust) {
+        this.http.post(URLConstant.AddCustCompanyMgmntShrholderCompany, this.custCompanyMgmntShrholderObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
-            this.outputValue.emit({mode : 'check'});
+            this.outputValue.emit({ mode: 'check' });
           }
         );
       }
-      else{
-        this.outputValue.emit({mode : 'duplicateCompany', ShareholderData: this.custCompanyMgmntShrholderObj});
+      else {
+        this.outputValue.emit({ mode: 'duplicateCompany', ShareholderData: this.custCompanyMgmntShrholderObj });
       }
     }
   }
 
-  back(){
-    this.outputValue.emit({mode : 'check'});
+  back() {
+    this.outputValue.emit({ mode: 'check' });
   }
 
   custExistingId: number = 0;
@@ -241,14 +231,14 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       MgmntShrholderName: event.CustName,
       MrCustModelCode: event.MrCustModelCode,
       MrCompanyTypeCode: event.MrCompanyTypeCode,
-      TaxIdNo : event.TaxIdNo,
+      TaxIdNo: event.TaxIdNo,
     });
- 
+
     this.tempShareholderCustNo = event.CustNo;
     this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
-    this.ManagementShareholderForm.controls.MrCustModelCode.disable();  
-    this.ManagementShareholderForm.controls.MrCompanyTypeCode.disable(); 
-    this.ManagementShareholderForm.controls.TaxIdNo.disable(); 
+    this.ManagementShareholderForm.controls.MrCustModelCode.disable();
+    this.ManagementShareholderForm.controls.MrCompanyTypeCode.disable();
+    this.ManagementShareholderForm.controls.TaxIdNo.disable();
     this.isExistingCust = true;
   }
 }

@@ -31,8 +31,6 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   MrIdTypeCode: string;
   IsAffiliateWithMf: string;
   MrCompanyTypeCode: string;
-  GetListActiveRefMasterUrl: string;
-  GetListActiveRefMasterWithMappingCodeAllUrl: string;
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
 
@@ -48,8 +46,6 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING2;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
-    this.GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
   }
 
   ngOnInit() {
@@ -80,7 +76,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
       RowVersion: ""
     }
-    this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrCompanyTypeCode).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
         this.tempCompanyTypeCode = response[CommonConstant.ReturnObj];
         if (this.tempCompanyTypeCode.length > 0) {
