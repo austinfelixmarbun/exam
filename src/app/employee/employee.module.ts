@@ -14,6 +14,7 @@ import { LeaveMaintenanceAddEditComponent } from './leave-maintenance/leave-main
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { EmployeeBusinessunitAddComponent } from './employee-businessunit-add/employee-businessunit-add.component';
 import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-paging/employee-businessunit-paging.component';
+import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 
 @NgModule({
   imports: [
@@ -37,6 +38,8 @@ import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-pag
     EmployeeBusinessunitAddComponent,
     EmployeeBusinessunitPagingComponent
   ],
-
+  providers: [
+    NGXToastrService
+  ]
 })
 export class EmployeeModule { }

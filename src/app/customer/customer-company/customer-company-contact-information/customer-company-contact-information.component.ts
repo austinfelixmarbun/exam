@@ -8,8 +8,6 @@ import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustCompanyContactPersonObj } from 'app/shared/model/CustCompanyContactPersonObj.model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
@@ -22,8 +20,7 @@ import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 @Component({
   selector: 'app-customer-company-contact-information',
   templateUrl: './customer-company-contact-information.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService],
+  styleUrls: []
 })
 export class CustomerCompanyContactInformationComponent implements OnInit {
   @Input() custCompanyId: number;

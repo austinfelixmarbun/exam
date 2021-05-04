@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angu
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
@@ -13,8 +12,7 @@ import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 @Component({
   selector: 'app-customer-personal-address',
   templateUrl: './customer-personal-address.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService]
+  styleUrls: []
 })
 export class CustomerPersonalAddressComponent implements OnInit {
 

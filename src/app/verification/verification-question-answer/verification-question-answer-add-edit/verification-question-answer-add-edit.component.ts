@@ -4,7 +4,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionAnswerObj } from 'app/shared/model/VerfQuestionAnswerObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -14,8 +13,7 @@ import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.mo
 
 @Component({
   selector: 'app-verification-question-answer-add-edit',
-  templateUrl: './verification-question-answer-add-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './verification-question-answer-add-edit.component.html'
 })
 export class VerificationQuestionAnswerAddEditComponent implements OnInit {
   verfQuestionAnswerObj: VerfQuestionAnswerObj;

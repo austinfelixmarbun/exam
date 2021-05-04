@@ -1,9 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms'; 
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { FormBuilder } from '@angular/forms';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model'; 
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -12,8 +11,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 @Component({
   selector: 'app-customer-company-address-check',
   templateUrl: './customer-company-address-check.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService]
+  styleUrls: []
 })
 export class CustomerCompanyAddressCheckComponent implements OnInit {
  

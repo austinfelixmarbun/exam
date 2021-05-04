@@ -255,7 +255,7 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
     formValue["CustBankAccList"] = requestBankAcc;
     formValue["IsCopyAll"] = this.IsCopyAll;
     formValue["CustBankAccIdToDelete"] = this.CustBankAccToDelete;
-    this.http.post(URLConstant.EditMasterCustCompanyFinData, formValue).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustCompanyFinData, formValue).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

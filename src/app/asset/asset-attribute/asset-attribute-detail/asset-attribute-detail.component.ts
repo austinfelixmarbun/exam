@@ -1,7 +1,7 @@
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -9,7 +9,6 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AssetAttrObj } from 'app/shared/model/AssetAttrObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
 import { forkJoin } from 'rxjs';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -56,8 +55,6 @@ export class AssetAttributeDetailComponent implements OnInit {
 
   ngOnInit() {
     this.inputLookupObj.urlJson = "./assets/uclookup/AssetAttribute/lookupAssetAttribute.json";
-    this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/uclookup/AssetAttribute/lookupAssetAttribute.json";
     this.inputLookupObj.genericJson = "./assets/uclookup/AssetAttribute/lookupAssetAttribute.json";
     this.inputLookupObj.isRequired = true;

@@ -10,8 +10,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-cust-bank-acc-section-findata',
-  templateUrl: './cust-bank-acc-section-findata.component.html',
-  providers: [NGXToastrService] 
+  templateUrl: './cust-bank-acc-section-findata.component.html'
 })
 export class CustBankAccSectionFindataComponent implements OnInit {
   @Input() CustId: number;

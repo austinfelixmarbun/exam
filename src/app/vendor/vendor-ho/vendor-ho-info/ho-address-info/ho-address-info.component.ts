@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
-import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-ho-address-info',
@@ -14,7 +13,6 @@ export class HoAddressInfoComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewHOInfoLegalAddr.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
   }
 
 }

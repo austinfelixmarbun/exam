@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefJobTitleObj } from 'app/shared/model/RefJobTitleObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -11,8 +10,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-ref-job-title-add',
-  templateUrl: './ref-job-title-add.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './ref-job-title-add.component.html'
 })
 export class RefJobTitleAddComponent implements OnInit {
 

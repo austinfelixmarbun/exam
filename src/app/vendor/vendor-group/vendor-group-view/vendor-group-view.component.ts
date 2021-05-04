@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VendorGroupObj } from 'app/shared/model/VendorGroupObj.Model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,7 +16,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class VendorGroupViewComponent implements OnInit {
   VendorGrpId: any;
   vendorGrpObj: VendorGroupObj;
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
   MrVendorCategoryCode: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
@@ -37,16 +36,10 @@ export class VendorGroupViewComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorGrp.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
     
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchVendor.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendor.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteVendorGrpMemberById;
-    this.inputPagingObj.addCritInput = new Array();
-
 
     var critInput = new CriteriaObj();
     critInput.propName = "C.VENDOR_GRP_ID";
@@ -59,7 +52,6 @@ export class VendorGroupViewComponent implements OnInit {
     critInput.restriction = AdInsConstant.RestrictionEq;
     critInput.value = this.MrVendorCategoryCode;
     this.inputPagingObj.addCritInput.push(critInput);
-
 
   }
 }

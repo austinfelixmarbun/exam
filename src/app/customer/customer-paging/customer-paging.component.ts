@@ -12,16 +12,13 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   styleUrls: []
 })
 export class CustomerPagingComponent implements OnInit {
-  inputPagingObj: UcPagingObj;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
   readonly AddLinkPersonal: string = NavigationConstant.CUST_PERSONAL_MAIN_INFO;
   readonly AddLinkCoy: string = NavigationConstant.CUST_COY_MAIN_INFO;
   constructor() { }
 
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchCustomer.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCustomer.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
     this.inputPagingObj.ddlEnvironments = [

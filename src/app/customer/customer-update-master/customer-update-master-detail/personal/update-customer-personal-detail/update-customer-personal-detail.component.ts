@@ -18,8 +18,7 @@ import { map, mergeMap } from 'rxjs/operators';
 @Component({
   selector: 'app-update-customer-personal-detail',
   templateUrl: './update-customer-personal-detail.component.html',
-  styles: [],
-  providers: [NGXToastrService]
+  styles: []
 })
 export class UpdateCustomerPersonalDetailComponent implements OnInit {
   @Input() CustDataTrxId: number;
@@ -82,8 +81,6 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
 
     this.CustGrpLookupObj = new InputLookupObj();
     this.CustGrpLookupObj.urlJson = "./assets/uclookup/Customer/CustomerGroup/lookupCustGrp_UpdateMasterCust.json";
-    this.CustGrpLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.CustGrpLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.CustGrpLookupObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCustGrp_UpdateMasterCust.json";
     this.CustGrpLookupObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCustGrp_UpdateMasterCust.json";
     this.CustGrpLookupObj.ddlEnvironments = [
@@ -97,8 +94,6 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
 
     this.lookUpObj = new InputLookupObj();
     this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
-    this.lookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";
     this.lookUpObj.isReady = false;
@@ -272,7 +267,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
 
   SaveValue(){
     var formValue = this.CustomerDetailForm.getRawValue();
-    this.http.post(URLConstant.EditMasterCustomer, formValue).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustomer, formValue).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

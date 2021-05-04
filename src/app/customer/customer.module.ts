@@ -116,6 +116,7 @@ import { UpdateCustomerCompanyLegalDocComponent } from './customer-update-master
 import { SharedModule } from 'app/shared/shared.module';
 import { DmsIframeComponent } from 'app/shared/dms-iframe/dms-iframe.component';
 import { CustBankAccComponent } from './cust-bank-acc/cust-bank-acc.component';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -248,6 +249,9 @@ export const customCurrencyMaskConfig = {
     UpdateCustomerCompanyFinDataComponent,
     UpdateCustomerCompanyLegalDocComponent,
     CustBankAccComponent
+  ],
+  providers: [
+    NGXToastrService
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
 })

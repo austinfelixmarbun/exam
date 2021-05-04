@@ -850,6 +850,8 @@ export class URLConstant {
     public static CancelSurveyTaskBySurveyTaskId = environment.FoundationR3Url + "/SrvyTask/CancelSurveyTaskBySurveyTaskId";
     public static GetSurveyorNameBySurveyorId = environment.FoundationR3Url + "/SrvyTask/GetSurveyorNameBySurveyorId";
     public static GetListSrvyTaskBySrvyOrderIdForView = environment.FoundationR3Url + "/SrvyTask/GetListSrvyTaskBySrvyOrderIdForView";
+    public static GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview = environment.FoundationR3Url + "/SrvyTask/GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview";
+    public static ReviewSurveyResult = environment.FoundationR3Url + "/SrvyTask/ReviewSurveyResult";
 
     // SURVEY ORDER
     public static GetSrvyOrderBySrvyOrderId = environment.FoundationR3Url + "/SrvyOrder/GetSrvyOrderBySrvyOrderId";
@@ -912,17 +914,17 @@ export class URLConstant {
     public static GetContactInfoForUpdateMasterCustCompanyContactInfo = environment.FoundationR3Url + "/UpdateMasterCust/GetContactInfoForUpdateMasterCustCompanyContactInfo";
     public static GetFinDataForUpdateMasterCustCompanyFinData = environment.FoundationR3Url + "/UpdateMasterCust/GetFinDataForUpdateMasterCustCompanyFinData";
     public static GetLegalDocForUpdateMasterCustCompanyLegalDoc = environment.FoundationR3Url + "/UpdateMasterCust/GetLegalDocForUpdateMasterCustCompanyLegalDoc";
-    public static EditMasterCustomer = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustomer";
-    public static EditMasterCustAddr = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustAddr";
-    public static EditMasterCustFamily = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustFamily";
-    public static EditMasterCustEmergency = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustEmergency";
-    public static EditMasterCustJobData = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustJobData";
-    public static EditMasterCustFinData = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustFinData";
-    public static EditMasterCustCompanyDetail = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyDetail";
-    public static EditMasterCustCompanyShareholder = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyShareholder";
-    public static EditMasterCustCompanyLegalDoc = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyLegalDoc";
-    public static EditMasterCustCompanyContactInfo = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyContactInfo";
-    public static EditMasterCustCompanyFinData = environment.FoundationR3Url + "/UpdateMasterCust/EditMasterCustCompanyFinData";
+    public static UpdateMasterCustomer = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustomer";
+    public static UpdateMasterCustAddr = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustAddr";
+    public static UpdateMasterCustFamily = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustFamily";
+    public static UpdateMasterCustEmergency = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustEmergency";
+    public static UpdateMasterCustJobData = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustJobData";
+    public static UpdateMasterCustFinData = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustFinData";
+    public static UpdateMasterCustCompanyDetail = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustCompanyDetail";
+    public static UpdateMasterCustCompanyShareholder = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustCompanyShareholder";
+    public static UpdateMasterCustCompanyLegalDoc = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustCompanyLegalDoc";
+    public static UpdateMasterCustCompanyContactInfo = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustCompanyContactInfo";
+    public static UpdateMasterCustCompanyFinData = environment.FoundationR3Url + "/UpdateMasterCust/UpdateMasterCustCompanyFinData";
 
     // New Approval R3
     public static CreateNewRFA = "/Approval/CreateNewRFA";

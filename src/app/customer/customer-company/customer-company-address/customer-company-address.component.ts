@@ -3,7 +3,6 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -12,8 +11,7 @@ import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 @Component({
   selector: 'app-customer-company-address',
   templateUrl: './customer-company-address.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService]
+  styleUrls: []
 })
 
 export class CustomerCompanyAddressComponent implements OnInit {

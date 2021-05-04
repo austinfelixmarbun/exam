@@ -5,7 +5,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
-import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -17,8 +16,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 @Component({
   selector: 'app-customer-personal-detail',
   templateUrl: './customer-personal-detail.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService],
+  styleUrls: []
 
 })
 export class CustomerPersonalDetailComponent implements OnInit {
@@ -89,8 +87,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
         this.Country = response;
         this.lookUpObj = new InputLookupObj();
         this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
-        this.lookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-        this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
         this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";
         this.criteriaList = new Array();

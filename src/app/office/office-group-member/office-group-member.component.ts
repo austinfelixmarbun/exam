@@ -1,7 +1,6 @@
 import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
-import { environment } from "environments/environment";
 import { CriteriaObj } from "app/shared/model/CriteriaObj.Model";
 import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
 import { URLConstant } from "app/shared/constant/URLConstant";
@@ -16,7 +15,7 @@ export class OfficeGroupMemberComponent implements OnInit {
 
   RefOfficeId: string;
   CenterGrpId: string;
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   readonly CancelLink: string = NavigationConstant.OFFICE_PAGING;
@@ -30,14 +29,9 @@ export class OfficeGroupMemberComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewOfficeCenterGrpMbr.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchCenterGrpMbr.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCenterGrpMbr.json";
-    this.inputPagingObj.addCritInput = new Array();
     this.inputPagingObj.deleteUrl = URLConstant.DeleteCenterGrpOfficeMember;
 
     var critInput = new CriteriaObj();

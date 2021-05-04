@@ -14,8 +14,7 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 @Component({
   selector: 'app-customer-company-address-add',
   templateUrl: './customer-company-address-add.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService]
+  styleUrls: []
 })
 export class CustomerCompanyAddressAddComponent implements OnInit {
   @Input() AddrId: number;
@@ -50,7 +49,10 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   });
   inputAddressObj: InputAddressObj;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
+  constructor(private route: ActivatedRoute,
+    private http: HttpClient,
+    private fb: FormBuilder,
+    private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -75,6 +77,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.addressType = new RefMasterObj();
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
     this.addressType.MappingCode = CommonConstant.CustTypeCompany;
+
     this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).subscribe(
       (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
@@ -83,7 +86,8 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
         this.CustDataCompanyForm.patchValue({
           MrCustAddrTypeCode: this.listAddressType[0].Key
         })
-      });
+      }
+    );
 
     this.custAddrObj = new CustAddrObj();
     this.custAddrObj.CustId = this.IdCust;
@@ -94,7 +98,8 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
         if (this.listCustAddr.length > 0) {
           this.CustDataCompanyForm.patchValue({ CopyAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'] });
         }
-      });
+      }
+    );
 
     if (this.pageType == "edit") {
       this.custAddrObj = new CustAddrObj();
@@ -134,19 +139,22 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
           this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.copyCustomerAddr.Zipcode };
           this.inputAddressObj.default = this.addressObj;
           this.inputAddressObj.inputField = this.inputFieldAddressObj;
-
-        });
+        }
+      );
     }
+
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
     this.inputAddressObj.showOwnership = true;
+    this.inputAddressObj.requiredPhn1 = true;
   }
 
   copyAddress() {
-    if(this.listCustAddr.length<1){
-      return
+    if(this.listCustAddr.length < 1) {
+      return;
     }
+
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.CustDataCompanyForm.controls["CopyAddrFrom"].value;
     this.http.post(URLConstant.GetCustAddr, this.custAddrFromObj).subscribe(
@@ -182,7 +190,8 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
         this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.copyCustomerAddrFrom.Zipcode };
         this.inputAddressObj.default = this.addressObj;
         this.inputAddressObj.inputField = this.inputFieldAddressObj;
-      });
+      }
+    );
   }
 
   setCustAddr() {
@@ -221,7 +230,8 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
           this.outputValue.emit({ mode: 'check' });
         }
       );
-    } else {
+    }
+    else {
       this.custAddressObj.CustAddrId = this.AddrId;
       this.custAddressObj.RowVersion = this.copyCustomerAddr.RowVersion;
       this.http.post(URLConstant.EditCustAddr, this.custAddressObj).subscribe(
@@ -232,6 +242,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
       );
     }
   }
+
   back() {
     this.outputValue.emit({ mode: 'check' });
   }

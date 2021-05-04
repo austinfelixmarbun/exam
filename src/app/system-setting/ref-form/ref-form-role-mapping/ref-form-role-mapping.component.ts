@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthFormObj } from 'app/shared/model/AuthFormObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -17,8 +17,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-ref-form-role-mapping',
-  templateUrl: './ref-form-role-mapping.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './ref-form-role-mapping.component.html'
 })
 
 export class RefFormRoleMappingComponent implements OnInit {
@@ -39,7 +38,6 @@ export class RefFormRoleMappingComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewRefForm.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/refFormRoleTempPaging.json";
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
