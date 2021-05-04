@@ -82,8 +82,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   async getSurveyTaskListData() {
 
     await this.httpClient.post(URLConstant.GetListSrvyTaskBySrvyOrderIdForUpdate, { Id: this.surveyOrderId }).toPromise().then(
-      (response) => {
-        console.log(response);
+      (response) => {        
         if (response['ReturnObject'].length > 0) {
           this.SurveyTaskForm.controls['ListSurveyTask'] = this.fb.array([]);
           for (let i = 0; i < response['ReturnObject'].length; i++) {

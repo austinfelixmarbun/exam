@@ -1,5 +1,5 @@
 {
-    "title": "Survey Order Inquiry",
+    "title": "Survey Result Review",
     "component": [
         {
             "type": "dropdown",
@@ -77,22 +77,29 @@
         },
         {
             "type": "dropdown",
-            "name": "RS.REF_STATUS_CODE",
-            "id": "RefStatusCodeId",
+            "name": "CASE WHEN SO.TASK_TOTAL != SO.COMPLETED_TASK THEN 'Incomplete' ELSE 'Complete' END",
+            "id": "ResultSubmittedId",
+            "label": "Result Submitted",
             "value": "",
-            "label": "Status",
             "placeholder": "Placeholder",
-            "isFromURL": true,
+            "isFromURL": false,
             "ddlType": "all",
-            "path": "/RefStatus/GetRefStatusByTrxTypeCode",
-            "items": [],
-            "itemsUrl": [],
-            "criteriaPropName": "Code",
-            "criteriaPropValue": "FOU_SURVEY_ORDER"
+            "items": [
+                {
+                    "key": "Complete",
+                    "value": "Complete"
+                },
+                {
+                    "key": "Incomplete",
+                    "value": "Incomplete"
+                }
+            ],
+            "itemsUrl": []
         }
+        
     ],
     "querystring": {
-        "name": "searchSurveyOrder"
+        "name": "searchSurveyResultReview"
     },
     "headerList": [
         {
@@ -148,29 +155,11 @@
             "position": "center",
             "label": "Result Submitted",
             "name": "ResultSubmitted"
-        },
+        },        
         {
             "type": "sort",
             "position": "center",
-            "label": "Submit Date",
-            "name": "SO.SUBMIT_DT "
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "Submit By",
-            "name": "RUSub.USERNAME"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "Status",
-            "name": "RS.DESCR"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "View Detail"
+            "label": "Action"
         }
     ],
     "bodyList": [
@@ -185,10 +174,9 @@
             "property": "SurveyInitial"
         },
         {
-            "type": "text",
-            "position": "center",
-            "property": "TrxRefNo"
-        },
+            "type": "callback",
+            "property":"TrxRefNo"
+        },         
         {
             "type": "link",
             "position": "center",
@@ -226,22 +214,7 @@
             "type": "text",
             "position": "center",
             "property": "ResultSubmitted"
-        },
-        {
-            "type": "text",
-            "position": "center",
-            "property": "SubmitDate"
-        },
-        {
-            "type": "text",
-            "position": "center",
-            "property": "SubmitBy"
-        },
-        {
-            "type": "text",
-            "position": "center",
-            "property": "Status"
-        },
+        },        
         {
             "type": "action",
             "position": "center",
@@ -249,7 +222,7 @@
                 {
                     "type": "edit",
                     "position": "center",                    
-                    "path": "VIEW_SRVY_ORDER",
+                    "path": "SURVEY_RESULT_REVIEW_DETAIL",
                     "target": "_blank",
                     "param": [
                         {

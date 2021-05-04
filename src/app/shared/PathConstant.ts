@@ -322,9 +322,12 @@ export class PathConstant {
 
     //#region Survey-Module
     public static SRVY_TASK = "SurveyTask";
+    public static SRVY_RESULT_REVIEW = "SurveyResultReview";
     public static SRVY_TASK_PAGING = PathConstant.SRVY_TASK + "/" + PathConstant.PAGING;
     public static SRVY_VIEW_TASK = PathConstant.VIEW + "/" + PathConstant.SRVY_TASK;
     public static VIEW_ORDER_EXT = "ViewOrderExternal";
+    public static SRVY_RESULT_REVIEW_PAGING = PathConstant.SRVY_RESULT_REVIEW + "/" + PathConstant.PAGING;
+    public static SRVY_RESULT_REVIEW_DETAIL = PathConstant.SRVY_RESULT_REVIEW + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region 
