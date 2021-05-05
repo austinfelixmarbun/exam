@@ -9,6 +9,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-contact-person-add-edit',
@@ -117,8 +118,10 @@ export class ContactPersonAddEditComponent implements OnInit {
     })
   }
 
-  getZipcode(ev){
-    this.http.post(URLConstant.GetZipcodeDataByZipCode, {Zipcode: ev}).toPromise().then(
+  getZipcode(ev : string){
+    let ReqByCodeObj = new GenericObj();
+    ReqByCodeObj.Code = ev;
+    this.http.post(URLConstant.GetZipcodeDataByZipCode, ReqByCodeObj).toPromise().then(
       (response)=>{
           this.ContactPersonForm.patchValue({
             AreaCode1: response["AreaCode1"],
