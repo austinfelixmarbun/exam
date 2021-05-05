@@ -201,10 +201,9 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       }
     );
 
-    var refMasterObjCustModel = {
-      CustModelCode: this.CustModel,
-      RowVersion: ""
-    }
+    var refMasterObjCustModel = new GenericObj();
+    refMasterObjCustModel.Code= this.CustModel;
+    
     this.http.post(URLConstant.GetRefCustModelByCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;

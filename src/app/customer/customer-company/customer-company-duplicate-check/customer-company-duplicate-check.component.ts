@@ -114,9 +114,8 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       }
     );
 
-    var refMasterObjCustModel = {
-      CustModelCode: this.CustModel
-    }
+    var refMasterObjCustModel = new GenericObj();
+    refMasterObjCustModel.Code = this.CustModel;
     this.http.post(URLConstant.GetRefCustModelByCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
