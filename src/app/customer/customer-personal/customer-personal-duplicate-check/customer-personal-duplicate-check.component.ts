@@ -17,7 +17,7 @@ import { map, mergeMap } from 'rxjs/operators';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-personal-duplicate-check',

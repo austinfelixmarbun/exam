@@ -9,7 +9,7 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-check',
