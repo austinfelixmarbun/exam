@@ -27,10 +27,10 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.PAGING,
+        path: PathConstant.SRVY_ORDER_PAGING,
         component: SurveyOrderComponent,
         data: {
-          title: 'Survey Order'
+          title: 'Survey Order Inquiry'
         },
       },
       {
