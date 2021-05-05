@@ -10,6 +10,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-customer-company-address-add',
@@ -29,7 +30,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
 
   addressObj: CustAddrObj;
   custAddrObj: CustAddrObj;
-  addressType: RefMasterObj;
+  addressType: ReqRefMasterByTypeCodeAndMappingCodeObj;
   custAddressObj: CustAddrObj;
   inputFieldAddressObj: InputFieldObj;
   custAddrFromObj: CustAddrObj;
@@ -72,7 +73,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
 
-    this.addressType = new RefMasterObj();
+    this.addressType = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
     this.addressType.MappingCode = CommonConstant.CustTypeCompany;
     this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).subscribe(

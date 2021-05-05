@@ -14,6 +14,7 @@ import { AddrObj } from 'app/shared/model/AddrObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-customer-personal-address-add',
@@ -37,7 +38,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
   custObj: CustObj;
   addressObj: AddrObj;
-  addressType: RefMasterObj;
+  addressType: ReqRefMasterByTypeCodeAndMappingCodeObj;
   custAddrObj: CustAddrObj;
   custAddressObj: CustAddrObj;
 
@@ -87,7 +88,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
 
-    this.addressType = new RefMasterObj();
+    this.addressType = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
     this.addressType.MappingCode = CommonConstant.CustTypePersonal;
     this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).subscribe(

@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-view-cabinet',
@@ -12,8 +13,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class ViewCabinetComponent implements OnInit {
   CabinetCode: string;
-  responseRack: any;
-  GetListRackByCabinetCode = URLConstant.GetListRackByCabinetCode;
+  responseRack: Array<any> = new Array();
 
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
@@ -33,8 +33,9 @@ export class ViewCabinetComponent implements OnInit {
       }
     });
 
-    var rackObj = { "CabinetCode": this.CabinetCode };
-    this.http.post(this.GetListRackByCabinetCode, rackObj).subscribe(
+    var rackObj: GenericObj = new GenericObj();
+    rackObj.Code = this.CabinetCode;
+    this.http.post(URLConstant.GetListRackByCabinetCode, rackObj).subscribe(
       response => {
         this.responseRack = response['ReturnObject'];
       },

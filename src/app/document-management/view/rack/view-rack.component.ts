@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { environment } from 'environments/environment';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-view-rack',
@@ -12,10 +13,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class ViewRackComponent implements OnInit {
   RackCode: string;
-  responseFiling: any;
-  responseRack: any;
-  GetListFilingByRackCode = URLConstant.GetListFilingByRackCode;
-  GetRackByRackCode = URLConstant.GetRackByRackCode;
+  responseFiling: Array<any> = new Array();
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(
@@ -32,18 +30,10 @@ export class ViewRackComponent implements OnInit {
 
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/document-management/viewRack.json";
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
-    var rackObj = { "RackCode": this.RackCode };
-    this.http.post(this.GetRackByRackCode, rackObj).subscribe(
-      response => {
-        this.responseRack = response;
-      },
-      error => {
-        this.router.navigateByUrl(NavigationConstant.ERROR);
-      }
-    );
 
-    var filingObj = { "RackCode": this.RackCode };
-    this.http.post(this.GetListFilingByRackCode, filingObj).subscribe(
+    var filingObj: GenericObj = new GenericObj();
+    filingObj.Code = this.RackCode;
+    this.http.post(URLConstant.GetListFilingByRackCode, filingObj).subscribe(
       response => {
         this.responseFiling = response['ReturnObject'];
       },

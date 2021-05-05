@@ -6,6 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UpdateCustPersonalFinDataObj } from 'app/shared/model/UpdateMasterCust/UpdateCustPersonalFinDataObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { forkJoin } from 'rxjs';
@@ -68,7 +69,8 @@ export class UpdateCustomerFinDataComponent implements OnInit {
       TaskListId: this.WfTaskListId
     });
     let getDetail = this.http.post(URLConstant.GetCustFinDataForUpdateMasterCustFinData, { CustDataTrxId: this.CustDataTrxId });
-    let getSourceIncome = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSourceIncome });
+    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSourceIncome, MappingCode: "" };
+    let getSourceIncome = this.http.post(URLConstant.GetListActiveRefMaster, tempReq);
     forkJoin([getDetail, getSourceIncome]).toPromise().then(
       (response) => {
         this.AppCustFinData = response[0]["AppCustFinData"];

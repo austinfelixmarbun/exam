@@ -11,6 +11,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { first } from 'rxjs/operators';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-cust-group-tab-detail',
@@ -50,7 +51,7 @@ export class CustGroupTabDetailComponent implements OnInit {
   ngOnInit() {
     var criteriaList;
     var criteriaObj;
-    var refMasterRelationship = new RefMasterObj();
+    var refMasterRelationship: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.CustGrpForm.patchValue({
       MemberCustId: this.CustId
     });
@@ -134,7 +135,7 @@ export class CustGroupTabDetailComponent implements OnInit {
 
   getLookupCustPersonalResponse(e){
     this.isCustPicked = true;
-    var refMasterRelationship = new RefMasterObj();
+    var refMasterRelationship: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.CustGrpForm.patchValue({
       CustId: e.custId,
       CustNo: e.custNo,
@@ -160,7 +161,7 @@ export class CustGroupTabDetailComponent implements OnInit {
 
   getLookupCustCompanyResponse(e){
     this.isCustPicked = true;
-    var refMasterRelationship = new RefMasterObj();
+    var refMasterRelationship: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.CustGrpForm.patchValue({
       CustId: e.custId,
       CustNo: e.custNo,

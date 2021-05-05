@@ -14,6 +14,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { VendorService } from 'app/vendor/vendor.service';
 import { formatDate } from '@angular/common';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-auction-company-addedit',
@@ -27,7 +28,6 @@ export class AuctionCompanyAddeditComponent implements OnInit {
   VendorId: number;
   isHidden: boolean = true;
   AuctionCompanyObj: any;
-  getListActiveRefMasterUrl: string;
   tempMrJobPositionCode: any;
   itemCalcMethodType: any;
   title: any = "Auction Company - Add";
@@ -52,7 +52,6 @@ export class AuctionCompanyAddeditComponent implements OnInit {
         }
       }
     );
-    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
   }
 
   AuctionCompanyForm = this.fb.group({
@@ -202,11 +201,11 @@ export class AuctionCompanyAddeditComponent implements OnInit {
   }
 
   setDropdown(){
-    var refMasterObjMrJobPositionCode = {
+    var refMasterObjMrJobPositionCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition,
-      RowVersion: ""
+      MappingCode: ""
     }
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrJobPositionCode).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrJobPositionCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrJobPositionCode = response[CommonConstant.ReturnObj];
@@ -215,7 +214,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
 
     this.RsvField = CommonConstant.CustTypeCompany
 
-    var refMasterIdObj = {
+    var refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
       MappingCode: this.RsvField,
     }

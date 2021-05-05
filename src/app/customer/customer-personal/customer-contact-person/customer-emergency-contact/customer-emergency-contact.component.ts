@@ -21,6 +21,7 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-customer-emergency-contact',
@@ -76,10 +77,6 @@ export class CustomerEmergencyContactComponent implements OnInit {
 
   KTP: string;
   tempCountryCode: string;
-  GetListActiveRefMasterUrl: string;
-  GetGeneralSettingByCodeUrl: string;
-  addCustPersonalContactPersonUrl: string;
-  editCustPersonalContactPersonUrl: string;
 
   CustomerContactForm = this.fb.group({
     ContactPersonName: ['', [Validators.maxLength(100), Validators.required]],
@@ -109,10 +106,6 @@ export class CustomerEmergencyContactComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
-    this.GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.addCustPersonalContactPersonUrl = URLConstant.AddNewCustPersonalContactPerson;
-    this.editCustPersonalContactPersonUrl = URLConstant.EditCustPersonalContactPerson;
-    this.GetGeneralSettingByCodeUrl = URLConstant.GetGeneralSettingByCode;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -141,7 +134,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       GsCode: CommonConstant.GSCodeDefLocalNationality
     }
 
-    this.http.post(this.GetGeneralSettingByCodeUrl, {Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
+    this.http.post(URLConstant.GetGeneralSettingByCode, {Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
       (response) => {
         this.Country = response;
         this.criteriaList = new Array();
@@ -198,10 +191,11 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.inputFieldObj = new InputFieldObj();
     this.inputFieldObj.inputLookupObj = new InputLookupObj();
 
-    var refMasterObjMrIdTypeCode = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType
-    }
-    this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
+    var refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
+      MappingCode: ""
+    };
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         this.tempIdType = response[CommonConstant.ReturnObj];
         if (this.tempIdType.length > 0) {
@@ -232,10 +226,11 @@ export class CustomerEmergencyContactComponent implements OnInit {
         this.lookUpObj.isRequired = false;
         this.flag = true;
       });
-    var refMasterObjMrMaritalStatCode = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat
-    }
-    this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrMaritalStatCode).subscribe(
+    var refMasterObjMrMaritalStatCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat,
+      MappingCode: ""
+    };
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrMaritalStatCode).subscribe(
       (response) => {
         this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
         if (this.tempMrMaritalStatCode.length > 0) {
@@ -245,10 +240,11 @@ export class CustomerEmergencyContactComponent implements OnInit {
         }
       });
 
-    var refMasterObjMrEducationCode = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation
-    }
-    this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrEducationCode).subscribe(
+    var refMasterObjMrEducationCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation,
+      MappingCode: ""
+    };
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrEducationCode).subscribe(
       (response) => {
         this.tempMrEducationCode = response[CommonConstant.ReturnObj];
         if (this.tempMrEducationCode.length > 0) {
@@ -257,10 +253,11 @@ export class CustomerEmergencyContactComponent implements OnInit {
           });
         }
       });
-    var refMasterObjMrReligionCode = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion
-    }
-    this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrReligionCode).subscribe(
+    var refMasterObjMrReligionCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion,
+      MappingCode: ""
+    };
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrReligionCode).subscribe(
       (response) => {
         this.tempMrReligionCode = response[CommonConstant.ReturnObj];
         if (this.tempMrReligionCode.length > 0) {
@@ -270,10 +267,11 @@ export class CustomerEmergencyContactComponent implements OnInit {
         }
       });
 
-    var refMasterObjMrCustRelationshipCode = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship
-    }
-    this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrCustRelationshipCode).subscribe(
+    var refMasterObjMrCustRelationshipCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship,
+      MappingCode: ""
+    };
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCustRelationshipCode).subscribe(
       (response) => {
         this.tempMrCustRelationshipCode = response[CommonConstant.ReturnObj];
         if (this.tempMrCustRelationshipCode.length > 0) {
@@ -292,11 +290,11 @@ export class CustomerEmergencyContactComponent implements OnInit {
 
       });
 
-    var refMasterObjMrGenderCode = {
+    var refMasterObjMrGenderCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
-      RowVersion: ""
-    }
-    this.http.post(this.GetListActiveRefMasterUrl, refMasterObjMrGenderCode).subscribe(
+      MappingCode: ""
+    };
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrGenderCode).subscribe(
       (response) => {
         this.tempMrGenderCode = response[CommonConstant.ReturnObj];
         if (this.tempMrGenderCode.length > 0) {

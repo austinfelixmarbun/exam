@@ -19,6 +19,11 @@
                   <th><span class="thead-header" name='rackInfo' translate>RACK INFORMATION</span></th>
                 </tr>
               </thead>
+              <tbody *ngIf="responseRack?.length == 0">
+                <tr>
+                  <td colspan="100%">No Data Available</td>
+                </tr>
+              </tbody>
               <tbody>
                 <ng-container *ngFor="let item of responseRack">
                   <tr>

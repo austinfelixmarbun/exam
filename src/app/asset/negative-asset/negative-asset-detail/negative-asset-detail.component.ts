@@ -17,6 +17,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-negative-asset-detail',
@@ -105,7 +106,7 @@ export class NegativeAssetDetailComponent implements OnInit {
     if (this.pageType == "edit") {
       var negativeAsset = new AssetNegativeObj();
       negativeAsset.AssetNegativeId = this.assetNegativeId;
-      var refMasterObj = new RefMasterObj();
+      let refMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
       refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegAssetSource;
       this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterObj).pipe(
         map((response) => {
@@ -169,7 +170,9 @@ export class NegativeAssetDetailComponent implements OnInit {
       );
     }
     else {
-      this.httpClient.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNegAssetSource }).subscribe(
+      let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
+      tempReq.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegAssetSource;
+      this.httpClient.post(URLConstant.GetListActiveRefMaster, tempReq).subscribe(
         (response) => {
           this.negativeAssetSourceList = [...response[CommonConstant.ReturnObj]];
           if (this.negativeAssetSourceList.length > 0) {

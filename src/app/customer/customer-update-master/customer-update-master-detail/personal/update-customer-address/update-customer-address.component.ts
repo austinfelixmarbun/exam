@@ -7,6 +7,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UpdateCustAddrObj } from 'app/shared/model/UpdateMasterCust/UpdateCustAddrObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
@@ -49,7 +50,8 @@ export class UpdateCustomerAddressComponent implements OnInit {
   }
 
   ngOnInit() {
-    let getOwnershipList = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeBuildingOwnership });
+    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeBuildingOwnership, MappingCode: "" };
+    let getOwnershipList = this.http.post(URLConstant.GetListActiveRefMaster, tempReq);
     let getDetail = this.http.post(URLConstant.GetCustAddrDataForUpdateMasterCustAddr, { CustDataTrxId: this.CustDataTrxId });
     forkJoin([getDetail, getOwnershipList]).toPromise().then(
       (response) => {
