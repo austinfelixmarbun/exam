@@ -17,6 +17,7 @@ import { map, mergeMap } from 'rxjs/operators';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqByCustNoObj } from 'app/shared/model/Request/ReqByCustNoObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
@@ -201,10 +202,9 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       }
     );
 
-    var refMasterObjCustModel = {
-      CustModelCode: this.CustModel,
-      RowVersion: ""
-    }
+    var refMasterObjCustModel = new GenericObj();
+    refMasterObjCustModel.Code= this.CustModel;
+    
     this.http.post(URLConstant.GetRefCustModelByCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
@@ -344,9 +344,10 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
   }
 
   EditCustPersonal(item) {
-    var CustObj = { CustNo: item.CustNo, CustName: this.CustName, IdNo: item.IdNo };
+    let CustNoObj = new ReqByCustNoObj();
+    CustNoObj.CustNo = item.CustNo;
     // this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustObj).subscribe(
-    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, {TrxNo : item.CustNo}).pipe(
+    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustNoObj).pipe(
       map((response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.CustObj = response['CustObj'];

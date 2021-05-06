@@ -975,6 +975,11 @@ export class URLConstant {
     public static GetListFilingByRackCode = environment.FoundationR3Url + "/ViewDocument/GetListFilingByRackCode";
     public static GetRackByRackCode = environment.FoundationR3Url + "/ViewDocument/GetRackByRackCode";
 
+    public static GetRackAndListFilingByRackCode = environment.FoundationR3Url + "/DocManagement/GetRackAndListFilingByRackCode";
+    public static GetRackAndListFilingByFilingCode = environment.FoundationR3Url + "/DocManagement/GetRackAndListFilingByFilingCode";
+    public static GetCabinetAndListRackByCabinetCode = environment.FoundationR3Url + "/DocManagement/GetCabinetAndListRackByCabinetCode";
+    public static GetRackByCode = environment.FoundationR3Url + "/DocManagement/GetRackByCode";
+
     //Auction Company
     public static AddAuctionCompany = environment.FoundationR3Url + "/AuctionCompany/AddAuctionCompany";
     public static EditAuctionCompany = environment.FoundationR3Url + "/AuctionCompany/EditAuctionCompany";

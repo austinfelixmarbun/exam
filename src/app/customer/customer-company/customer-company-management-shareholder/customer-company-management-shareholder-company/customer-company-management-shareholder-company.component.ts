@@ -12,6 +12,9 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { ResListKeyValueObj } from 'app/shared/model/Response/Generic/ResListKeyValueObj.model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 
 
 @Component({
@@ -30,7 +33,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   inputLookupCustCompanyObj: InputLookupObj;
   custCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
 
-  tempMrCustModelCode: any;
+  tempMrCustModelCode: Array<KeyValueObj> = new Array<KeyValueObj>();
   tempMrCompanyTypeCode: any;
   tempCustCompanyMgmntShrholderObj: any;
 
@@ -91,12 +94,12 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       }
     );
 
-    var refMasterObjCustModel = {
-      MrCustTypeCode: CommonConstant.CustTypeCompany
-    }
+    var refMasterObjCustModel = new GenericObj();
+    refMasterObjCustModel.Code =  CommonConstant.CustTypeCompany;
+    
     this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
-      (response) => {
-        this.tempMrCustModelCode = response;
+      (response : ResListKeyValueObj) => {
+        this.tempMrCustModelCode = response[CommonConstant.ReturnObj];
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.tempMrCustModelCode = response[CommonConstant.ReturnObj];
           this.ManagementShareholderForm.patchValue({

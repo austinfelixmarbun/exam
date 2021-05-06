@@ -9,7 +9,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
@@ -19,6 +19,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { ResListKeyValueObj } from 'app/shared/model/Response/Generic/ResListKeyValueObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
@@ -46,7 +47,7 @@ export class EditMainDataPersonalComponent implements OnInit {
   tempKTPCheck: any;
   tempGender: any;
   tempIdType: any;
-  tempCustModel: any;
+  tempCustModel: Array<KeyValueObj> = new Array<KeyValueObj>();
   tempCustPersonalObj: CustPersonalObj;
   tempCustObj: any;
   CustId: number;
@@ -122,12 +123,12 @@ export class EditMainDataPersonalComponent implements OnInit {
         }
       }
     );
-    var refMasterObjCustModel = {
-      MrCustTypeCode: CommonConstant.CustTypePersonal
-    }
+    var refMasterObjCustModel = new GenericObj();
+    refMasterObjCustModel.Code =  CommonConstant.CustTypePersonal;
+    
     this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
-      (response) => {
-        this.tempCustModel = response["ReturnObject"];
+      (response : ResListKeyValueObj) => {
+        this.tempCustModel = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
           CustModel: this.tempCustModel[0].Key
         });

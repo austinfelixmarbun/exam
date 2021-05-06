@@ -16,6 +16,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqByCustNoObj } from 'app/shared/model/Request/ReqByCustNoObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
@@ -114,9 +115,8 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       }
     );
 
-    var refMasterObjCustModel = {
-      CustModelCode: this.CustModel
-    }
+    var refMasterObjCustModel = new GenericObj();
+    refMasterObjCustModel.Code = this.CustModel;
     this.http.post(URLConstant.GetRefCustModelByCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
@@ -201,8 +201,9 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
   }
 
   EditCustCompany(item) {
-    var custObj = { CustNo: item.CustNo, CustName: item.CustName, TaxIdNo: item.TaxIdNo };
-    this.http.post(URLConstant.GetCustCompanyForUpdateByCustNo, {TrxNo : item.CustNo}).pipe(
+    let CustNoObj = new ReqByCustNoObj();
+    CustNoObj.CustNo = item.CustNo;
+    this.http.post(URLConstant.GetCustCompanyForUpdateByCustNo, CustNoObj).pipe(
       map((response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.CustObj = response['CustObj'];

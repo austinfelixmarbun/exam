@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -17,6 +17,8 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { ResListKeyValueObj } from 'app/shared/model/Response/Generic/ResListKeyValueObj.model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-personal-main-info',
@@ -28,7 +30,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   Gender: any;
   tempGender: any;
   tempIdType: any;
-  tempCustModel: any;
+  tempCustModel: Array<KeyValueObj> = new Array<KeyValueObj>();
 
   custPersonalObj: CustPersonalObj;
 
@@ -131,12 +133,12 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         }
       }
     );
-   var refMasterObjCustModel = {
-      MrCustTypeCode: CommonConstant.CustTypePersonal
-    }
+    var refMasterObjCustModel = new GenericObj();
+    refMasterObjCustModel.Code =  CommonConstant.CustTypePersonal;
+    
     this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
-      (response) => {
-        this.tempCustModel = response["ReturnObject"];
+      (response : ResListKeyValueObj) => {
+        this.tempCustModel = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
           CustModel: this.tempCustModel[0].Key
         });
