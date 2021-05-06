@@ -11,7 +11,7 @@ import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
-import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-cust-bank-acc',
