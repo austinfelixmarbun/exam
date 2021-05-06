@@ -18,6 +18,7 @@ import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntS
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { ReqByCustNoObj } from 'app/shared/model/Request/ReqByCustNoObj.model';
 
 @Component({
   selector: 'app-customer-personal-duplicate-check',
@@ -343,9 +344,10 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
   }
 
   EditCustPersonal(item) {
-    var CustObj = { CustNo: item.CustNo, CustName: this.CustName, IdNo: item.IdNo };
+    let CustNoObj = new ReqByCustNoObj();
+    CustNoObj.CustNo = item.CustNo;
     // this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustObj).subscribe(
-    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, {TrxNo : item.CustNo}).pipe(
+    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustNoObj).pipe(
       map((response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.CustObj = response['CustObj'];
