@@ -108,16 +108,16 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
 
   ngOnInit() {
     let getDetail = this.http.post(URLConstant.GetCustDataForUpdateMasterCustDetail, { CustDataTrxId: this.CustDataTrxId });
-    let tempReqMarStat: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat, MappingCode: "" };
+    let tempReqMarStat: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat, MappingCode: null };
     let getMaritalStat = this.http.post(URLConstant.GetListActiveRefMaster, tempReqMarStat);
     
-    let tempReqNationality: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality, MappingCode: "" };
+    let tempReqNationality: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality, MappingCode: null };
     let getNationality = this.http.post(URLConstant.GetListActiveRefMaster, tempReqNationality);
 
-    let tempReqEducation: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation, MappingCode: "" };
+    let tempReqEducation: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation, MappingCode: null };
     let getEducation = this.http.post(URLConstant.GetListActiveRefMaster, tempReqEducation);
 
-    let tempReqReligion: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion, MappingCode: "" };
+    let tempReqReligion: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion, MappingCode: null };
     let getReligion = this.http.post(URLConstant.GetListActiveRefMaster, tempReqReligion);
     let getGeneralSettingNationality = this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeDefLocalNationality });
     forkJoin([getDetail, getMaritalStat, getNationality, getEducation, getReligion, getGeneralSettingNationality]).pipe(

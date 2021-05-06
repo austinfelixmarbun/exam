@@ -64,7 +64,7 @@ export class ContactPersonAddEditComponent implements OnInit {
 
     var JobPosition: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition,
-      MappingCode: ""
+      MappingCode: null
     };
     this.http.post(URLConstant.GetListActiveRefMaster, JobPosition).subscribe(
       (response) => {

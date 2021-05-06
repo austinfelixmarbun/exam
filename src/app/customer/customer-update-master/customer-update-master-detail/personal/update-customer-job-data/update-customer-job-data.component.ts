@@ -109,16 +109,16 @@ export class UpdateCustomerJobDataComponent implements OnInit {
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
     let getDetail = this.http.post(URLConstant.GetCustJobDataForUpdateMasterCustJobData, { CustDataTrxId: this.CustDataTrxId });
-    let tempReqCustModel: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel, MappingCode: "" };
+    let tempReqCustModel: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel, MappingCode: null };
     let getCustModel = this.http.post(URLConstant.GetListActiveRefMaster, tempReqCustModel);
     
-    let tempReqJobPos: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition, MappingCode: "" };
+    let tempReqJobPos: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition, MappingCode: null };
     let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, tempReqJobPos);
 
-    let tempReqJobStat: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobStat, MappingCode: "" };
+    let tempReqJobStat: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobStat, MappingCode: null };
     let getJobStatus = this.http.post(URLConstant.GetListActiveRefMaster, tempReqJobStat);
 
-    let tempReqCompanyScale: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCoyScale, MappingCode: "" };
+    let tempReqCompanyScale: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCoyScale, MappingCode: null };
     let getCompanyScale = this.http.post(URLConstant.GetListActiveRefMaster, tempReqCompanyScale);
     forkJoin([getDetail, getCustModel, getJobPosition, getJobStatus, getCompanyScale]).pipe(
       map((response) => {

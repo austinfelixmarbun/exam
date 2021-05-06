@@ -50,7 +50,7 @@ export class UpdateCustomerAddressComponent implements OnInit {
   }
 
   ngOnInit() {
-    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeBuildingOwnership, MappingCode: "" };
+    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeBuildingOwnership, MappingCode: null };
     let getOwnershipList = this.http.post(URLConstant.GetListActiveRefMaster, tempReq);
     let getDetail = this.http.post(URLConstant.GetCustAddrDataForUpdateMasterCustAddr, { CustDataTrxId: this.CustDataTrxId });
     forkJoin([getDetail, getOwnershipList]).toPromise().then(

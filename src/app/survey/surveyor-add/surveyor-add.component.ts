@@ -82,7 +82,7 @@ export class SurveyorAddComponent implements OnInit {
   }
 
   setDropDown(){
-    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: "SURVEYOR_TYPE", MappingCode: "" };
+    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: "SURVEYOR_TYPE", MappingCode: null };
     this.httpClient.post(URLConstant.GetListActiveRefMaster, tempReq).subscribe(
       (response) => {
         this.dropdownSurveyType = response['ReturnObject'];

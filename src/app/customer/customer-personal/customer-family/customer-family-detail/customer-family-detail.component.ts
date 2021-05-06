@@ -291,7 +291,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
 
     var refMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
-      MappingCode: ""
+      MappingCode: null
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObj).subscribe(
       (response) => {
@@ -303,7 +303,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     );
     var refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
-      MappingCode: ""
+      MappingCode: null
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
@@ -325,7 +325,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
 
     var refMasterObjMrMaritalStatCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat,
-      MappingCode: ""
+      MappingCode: null
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrMaritalStatCode).toPromise().then(
       (response) => {
@@ -338,7 +338,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
 
     var refMasterObjMrCustRelationshipCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship,
-      MappingCode: ""
+      MappingCode: null
     };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCustRelationshipCode).subscribe(
       (response) => {

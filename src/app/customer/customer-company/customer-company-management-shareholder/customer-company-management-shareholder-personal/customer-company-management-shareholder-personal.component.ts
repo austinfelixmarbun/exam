@@ -83,7 +83,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.inputLookupCustPersonalObj.isRequired = false;
     var refMasterObjMrGenderCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
-      MappingCode: ""
+      MappingCode: null
     };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrGenderCode).subscribe(
       (response) => {
@@ -98,7 +98,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
 
     var refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
-      MappingCode: ""
+      MappingCode: null
     };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
@@ -114,7 +114,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
 
     var refMasterObjMrJobPositionCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition,
-      MappingCode: ""
+      MappingCode: null
     };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrJobPositionCode).subscribe(
       (response) => {

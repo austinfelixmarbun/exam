@@ -73,7 +73,7 @@ export class NotificationAddEditComponent implements OnInit {
   ngOnInit() {
     var refMasterNotifTypeObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNotificationType,
-      MappingCode: ""
+      MappingCode: null
     };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterNotifTypeObj).subscribe(
       (response) => {
@@ -88,7 +88,7 @@ export class NotificationAddEditComponent implements OnInit {
 
     var refMasterNotifMethodObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNotificationMethod,
-      MappingCode: ""
+      MappingCode: null
     };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterNotifMethodObj).subscribe(
       (response) => {

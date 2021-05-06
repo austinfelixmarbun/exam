@@ -75,7 +75,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
 
     var refMasterObjMrCompanyTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
-      MappingCode: ""
+      MappingCode: null
     }
 
     this.lookUpIndustryTypeObj = new InputLookupObj();

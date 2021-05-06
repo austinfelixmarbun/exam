@@ -102,11 +102,11 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
     let getDetail = this.http.post(URLConstant.GetCustEmergencyDataForUpdateMasterCustEmergency, { CustDataTrxId: this.CustDataTrxId });
-    let tempReqCustRelation: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustPersonalRelationship, MappingCode: "" };
+    let tempReqCustRelation: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustPersonalRelationship, MappingCode: null };
     let getCustRelationship = this.http.post(URLConstant.GetListActiveRefMaster, tempReqCustRelation);
-    let tempReqIdType: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType, MappingCode: "" };
+    let tempReqIdType: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType, MappingCode: null };
     let getIdType = this.http.post(URLConstant.GetListActiveRefMaster, tempReqIdType);
-    let tempReqGender: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender, MappingCode: "" };
+    let tempReqGender: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender, MappingCode: null };
     let getGender = this.http.post(URLConstant.GetListActiveRefMaster, tempReqGender);
     forkJoin([getDetail, getCustRelationship, getIdType, getGender]).pipe(
       map((response) => {

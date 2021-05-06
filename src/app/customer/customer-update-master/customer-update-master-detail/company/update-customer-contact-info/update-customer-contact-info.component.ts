@@ -73,8 +73,8 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    let tempReqJob: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition, MappingCode: "" };
-    let tempReqGender: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender, MappingCode: "" };
+    let tempReqJob: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition, MappingCode: null };
+    let tempReqGender: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender, MappingCode: null };
     let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, tempReqJob);
     let getGender = this.http.post(URLConstant.GetListActiveRefMaster, tempReqGender);
     let getDetail = this.http.post(URLConstant.GetContactInfoForUpdateMasterCustCompanyContactInfo, { CustDataTrxId: this.CustDataTrxId });

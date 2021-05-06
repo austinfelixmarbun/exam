@@ -196,7 +196,7 @@ export class CustomerContactAddComponent implements OnInit {
 
     var refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
-      MappingCode: ""
+      MappingCode: null
     };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
@@ -228,7 +228,7 @@ export class CustomerContactAddComponent implements OnInit {
       });
     var refMasterObjMrMaritalStatCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat,
-      MappingCode: ""
+      MappingCode: null
     };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrMaritalStatCode).subscribe(
       (response) => {
@@ -242,7 +242,7 @@ export class CustomerContactAddComponent implements OnInit {
 
     var refMasterObjMrEducationCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation,
-      MappingCode: ""
+      MappingCode: null
     };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrEducationCode).subscribe(
       (response) => {
@@ -255,7 +255,7 @@ export class CustomerContactAddComponent implements OnInit {
       });
     var refMasterObjMrReligionCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion,
-      MappingCode: ""
+      MappingCode: null
     };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrReligionCode).subscribe(
       (response) => {
@@ -269,7 +269,7 @@ export class CustomerContactAddComponent implements OnInit {
 
     var refMasterObjMrCustRelationshipCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship,
-      MappingCode: ""
+      MappingCode: null
     };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCustRelationshipCode).subscribe(
       (response) => {
@@ -292,7 +292,7 @@ export class CustomerContactAddComponent implements OnInit {
 
     var refMasterObjMrGenderCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
-      MappingCode: ""
+      MappingCode: null
     };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrGenderCode).subscribe(
       (response) => {

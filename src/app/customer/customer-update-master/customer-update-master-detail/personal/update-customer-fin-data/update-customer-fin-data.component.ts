@@ -69,7 +69,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
       TaskListId: this.WfTaskListId
     });
     let getDetail = this.http.post(URLConstant.GetCustFinDataForUpdateMasterCustFinData, { CustDataTrxId: this.CustDataTrxId });
-    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSourceIncome, MappingCode: "" };
+    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSourceIncome, MappingCode: null };
     let getSourceIncome = this.http.post(URLConstant.GetListActiveRefMaster, tempReq);
     forkJoin([getDetail, getSourceIncome]).toPromise().then(
       (response) => {
