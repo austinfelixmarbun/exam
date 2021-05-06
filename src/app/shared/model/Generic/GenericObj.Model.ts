@@ -7,6 +7,7 @@ export class GenericObj{
     constructor(){
         this.Id = 0;
         this.Code = "";
+        this.TrxNo = "";
         this.RowVersion = "";
     }
 }
