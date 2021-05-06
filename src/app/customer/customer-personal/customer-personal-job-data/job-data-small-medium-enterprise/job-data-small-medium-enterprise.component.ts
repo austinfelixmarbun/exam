@@ -20,6 +20,7 @@ import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
  
 @Component({
   selector: 'app-job-data-sme',
@@ -43,9 +44,9 @@ export class JobDataSmeComponent implements OnInit {
   inputJobAddressObj: InputFieldObj;
   inputOtherAddressObj: InputFieldObj;
   inputPreJobAddressObj: InputFieldObj;
-  jobPosition: RefMasterObj;
+  jobPosition: ReqRefMasterByTypeCodeAndMappingCodeObj;
   listJobPosition: any;
-  companyScale: RefMasterObj;
+  companyScale: ReqRefMasterByTypeCodeAndMappingCodeObj;
   listCompanyScale: any;
   tempProfession: any;
   tempRefIndustryType: any;
@@ -196,7 +197,7 @@ export class JobDataSmeComponent implements OnInit {
     this.companyLookupObj.addCritInput = this.ArrAddCritCoy;
     this.companyLookupObj.isReady = true;
 
-    this.jobPosition = new RefMasterObj();
+    this.jobPosition = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.jobPosition.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobPosition;
     this.http.post(URLConstant.GetListActiveRefMaster, this.jobPosition).subscribe(
       (response) => {
@@ -205,7 +206,7 @@ export class JobDataSmeComponent implements OnInit {
       }
     );
 
-    this.companyScale = new RefMasterObj();
+    this.companyScale = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.companyScale.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCoyScale;
     this.http.post(URLConstant.GetListActiveRefMaster, this.companyScale).subscribe(
       (response) => {

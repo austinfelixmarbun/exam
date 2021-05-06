@@ -9,6 +9,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UpdateCustPersonalDetailObj } from 'app/shared/model/UpdateMasterCust/UpdateCustPersonalDetailObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
@@ -102,10 +103,17 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
 
   ngOnInit() {
     let getDetail = this.http.post(URLConstant.GetCustDataForUpdateMasterCustDetail, { CustDataTrxId: this.CustDataTrxId });
-    let getMaritalStat = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat });
-    let getNationality = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality });
-    let getEducation = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation });
-    let getReligion = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion });
+    let tempReqMarStat: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat, MappingCode: null };
+    let getMaritalStat = this.http.post(URLConstant.GetListActiveRefMaster, tempReqMarStat);
+    
+    let tempReqNationality: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality, MappingCode: null };
+    let getNationality = this.http.post(URLConstant.GetListActiveRefMaster, tempReqNationality);
+
+    let tempReqEducation: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation, MappingCode: null };
+    let getEducation = this.http.post(URLConstant.GetListActiveRefMaster, tempReqEducation);
+
+    let tempReqReligion: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion, MappingCode: null };
+    let getReligion = this.http.post(URLConstant.GetListActiveRefMaster, tempReqReligion);
     let getGeneralSettingNationality = this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeDefLocalNationality });
     forkJoin([getDetail, getMaritalStat, getNationality, getEducation, getReligion, getGeneralSettingNationality]).pipe(
       map((response) => {

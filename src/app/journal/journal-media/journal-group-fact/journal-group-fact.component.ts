@@ -8,7 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 
 @Component({

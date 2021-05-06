@@ -12,6 +12,7 @@ import { VendorService } from '../../vendor.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericObj} from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
@@ -172,15 +173,15 @@ export class VendorATPMAddEditComponent implements OnInit {
             } else {
               this.RsvField = CommonConstant.CustTypePersonal
             }
-          }else{
+          } else {
             if (this.VendorForm.controls.MrVendorTypeCode.value == "C") {
               this.RsvField = CommonConstant.CustTypeCompany
             } else {
               this.RsvField = CommonConstant.CustTypePersonal
             }
           }
-          
-          var refMasterIdObj = {
+
+          let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
             MappingCode: this.RsvField,
           }
@@ -315,17 +316,17 @@ export class VendorATPMAddEditComponent implements OnInit {
         this.vendorATPMObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
         this.vendorService.EditVendorATPM(this.vendorATPMObj).subscribe(
-          (response : GenericObj) => {
+          (response: GenericObj) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_ATPM_REG],{ "VendorId": response.Id, "mode": 'edit' });
+            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_ATPM_REG], { "VendorId": response.Id, "mode": 'edit' });
           });
       } else {
         this.vendorATPMObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
 
         this.vendorService.AddVendorATPM(this.vendorATPMObj).subscribe(
-          (response : GenericObj) => {
+          (response: GenericObj) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_ATPM_REG],{ "VendorId": response.Id});
+            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_ATPM_REG], { "VendorId": response.Id });
           });
       }
     }
@@ -333,9 +334,9 @@ export class VendorATPMAddEditComponent implements OnInit {
 
   Back() {
     if (this.mode == "edit") {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_ATPM_REG],{ "VendorId": this.VendorId, "mode": 'edit' });
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_ATPM_REG], { "VendorId": this.VendorId, "mode": 'edit' });
     } else {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
 
   }
@@ -370,7 +371,7 @@ export class VendorATPMAddEditComponent implements OnInit {
       this.updateValueAndValidityForm();
     }
 
-    var refMasterIdObj = {
+    let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
       MappingCode: this.RsvField,
     }
@@ -378,11 +379,11 @@ export class VendorATPMAddEditComponent implements OnInit {
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {
-          if(this.mode!="edit"){
+          if (this.mode != "edit") {
             this.VendorForm.patchValue({
               MrIdTypeCode: this.itemIdType[0].Key
             });
-          }else{
+          } else {
             this.VendorForm.patchValue({
               MrIdTypeCode: this.result.VendorObj.MrIdTypeCode
             });

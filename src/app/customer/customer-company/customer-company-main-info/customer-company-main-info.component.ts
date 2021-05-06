@@ -11,6 +11,10 @@ import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { ResListKeyValueObj } from 'app/shared/model/Response/Generic/ResListKeyValueObj.model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-company-main-info',
@@ -18,7 +22,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class CustomerCompanyMainInfoComponent implements OnInit {
 
-  tempCustModel: any;
+  tempCustModel: Array<KeyValueObj> = new Array<KeyValueObj>();
   tempCompanyTypeCode: any;
 
   IsVip: boolean;
@@ -60,21 +64,21 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
 
-    var refMasterObjCustModel = {
-      MrCustTypeCode: CommonConstant.CustTypeCompany
-    }
+    var refMasterObjCustModel = new GenericObj();
+    refMasterObjCustModel.Code =  CommonConstant.CustTypeCompany;
+    
     this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
-      (response) => {
-        this.tempCustModel = response["ReturnObject"];
+      (response : ResListKeyValueObj) => {
+        this.tempCustModel = response[CommonConstant.ReturnObj];
         this.CustomerCompanyForm.patchValue({
           CustModel: this.tempCustModel[0].Key
         });
       }
     );
 
-    var refMasterObjMrCompanyTypeCode = {
+    var refMasterObjMrCompanyTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
-      RowVersion: ""
+      MappingCode: null
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {

@@ -17,6 +17,8 @@ import { VendorAttrContentObj } from 'app/shared/model/VendorAttrContentObj.Mode
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericObj} from 'app/shared/model/Generic/GenericObj.Model';
 
 
@@ -146,7 +148,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     }
   }
 
-  DictDDLVendorAttr: {[id: string]: Array<any>} = {};
+  DictDDLVendorAttr: { [id: string]: Array<any> } = {};
   ngOnInit() {
     this.SetTitleHoInfo();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -159,17 +161,17 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.setDropdown();
       this.setLookup();
     }
-    
-    this.http.post(URLConstant.GetListVendorAttrContentByVendorId, {Id : this.VendorId}).toPromise().then(
+
+    this.http.post(URLConstant.GetListVendorAttrContentByVendorId, { Id: this.VendorId }).toPromise().then(
       (response) => {
         this.ListVendorAttrContent = response[CommonConstant.ReturnObj]
-        if(this.ListVendorAttrContent != null){
-          if (this.ListVendorAttrContent.length < 1) {            
-            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, {Code : CommonConstant.SUPPLIER}).subscribe(
+        if (this.ListVendorAttrContent != null) {
+          if (this.ListVendorAttrContent.length < 1) {
+            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, { Code: CommonConstant.SUPPLIER }).subscribe(
               async (response: any) => {
                 var parentFormGroup = new Object();
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
-  
+
                 let tempLookup = {};
                 for (const vendorAttr of this.VendorAttrList) {
                   var formGroupObject = new Object();
@@ -187,7 +189,7 @@ export class VendorBranchAddEditComponent implements OnInit {
                     formGroupObject["VendorAttrValue"] = [''];
                   }
                   parentFormGroup[vendorAttr["VendorAttrCode"]] = this.fb.group(formGroupObject);
-  
+
                   if (vendorAttr["VendorAttrType"] == 'RM') {
                     tempLookup[vendorAttr["VendorAttrCode"]] = new InputLookupObj();
                     tempLookup[vendorAttr["VendorAttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -206,7 +208,7 @@ export class VendorBranchAddEditComponent implements OnInit {
                     arrAddCrit.push(critAssetObj);
                     tempLookup[vendorAttr["VendorAttrCode"]].addCritInput = arrAddCrit;
                   }
-  
+
                 }
                 this.ListInputLookUpObj.push(tempLookup);
                 console.log(this.VendorAttrList);
@@ -217,8 +219,8 @@ export class VendorBranchAddEditComponent implements OnInit {
               }
             );
           }
-          else {  
-            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, {Code : CommonConstant.SUPPLIER}).subscribe(
+          else {
+            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, { Code: CommonConstant.SUPPLIER }).subscribe(
               async (response: any) => {
                 var parentFormGroup = new Object();
                 let tempLookup = {};
@@ -229,7 +231,7 @@ export class VendorBranchAddEditComponent implements OnInit {
                     var formGroupObject = new Object();
                     formGroupObject["VendorAttrContentId"] = [0];
                     formGroupObject["VendorAttrId"] = [vendorAttr["VendorAttrId"]];
-  
+
                     if (vendorAttr["VendorAttrType"] == 'L') {
                       var temp = vendorAttr["VendorAttrValue"].split(";");
                       this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
@@ -238,7 +240,7 @@ export class VendorBranchAddEditComponent implements OnInit {
                       formGroupObject["VendorAttrValue"] = [''];
                     }
                     parentFormGroup[vendorAttr["VendorAttrCode"]] = this.fb.group(formGroupObject);
-  
+
                     if (vendorAttr["VendorAttrType"] == 'RM') {
                       tempLookup[vendorAttr["VendorAttrCode"]] = new InputLookupObj();
                       tempLookup[vendorAttr["VendorAttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -249,7 +251,7 @@ export class VendorBranchAddEditComponent implements OnInit {
                       tempLookup[vendorAttr["VendorAttrCode"]].title = vendorAttr.AttrName;
                       tempLookup[vendorAttr["VendorAttrCode"]].isRequired = false;
                       tempLookup[vendorAttr["VendorAttrCode"]].jsonSelect = vendorAttr["VendorAttrCode"];
-  
+
                       var arrAddCrit = new Array();
                       var critAssetObj = new CriteriaObj();
                       critAssetObj.DataType = 'text';
@@ -264,7 +266,7 @@ export class VendorBranchAddEditComponent implements OnInit {
                     var formGroupObject = new Object();
                     formGroupObject["VendorAttrContentId"] = [0];
                     formGroupObject["VendorAttrId"] = [vendorAttr["VendorAttrId"]];
-  
+
                     if (vendorAttr["VendorAttrType"] == 'T') {
                       formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
                     }
@@ -285,7 +287,7 @@ export class VendorBranchAddEditComponent implements OnInit {
                       critAssetObj.value = vendorAttr.VendorAttrValue;
                       arrAddCrit.push(critAssetObj);
                       tempLookup[vendorAttr["VendorAttrCode"]].addCritInput = arrAddCrit;
-                      var refMaster = {
+                      let refMaster: ReqRefMasterByTypeCodeAndMasterCodeObj = {
                         RefMasterTypeCode: vendorAttr.VendorAttrValue,
                         MasterCode: item["AttrContent"]
                       };
@@ -306,14 +308,14 @@ export class VendorBranchAddEditComponent implements OnInit {
                     parentFormGroup[vendorAttr["VendorAttrCode"]] = this.fb.group(formGroupObject);
                   }
                 }
-  
+
                 this.ListInputLookUpObj.push(tempLookup);
                 this.VendorForm.addControl("VendorAttrList", this.fb.group(parentFormGroup));
                 this.isFormReady = true;
               });
           }
         }
-        
+
       }
     );
   }
@@ -455,7 +457,7 @@ export class VendorBranchAddEditComponent implements OnInit {
             });
           }
 
-          var refMasterIdObj = {
+          let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
             MappingCode: this.RsvField,
           }
@@ -584,7 +586,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     }
     this.updateValueAndValidityForm();
 
-    var refMasterIdObj = {
+    let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
       MappingCode: this.RsvField,
     }
@@ -757,7 +759,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorAddrObj.Province = this.result.VendorAddrObj.Province;
     }
 
-    if (this.VendorForm['controls']['VendorAttrList'] != undefined){
+    if (this.VendorForm['controls']['VendorAttrList'] != undefined) {
       var formValue = this.VendorForm['controls']['VendorAttrList'].value;
 
       if (Object.keys(formValue).length > 0 && formValue.constructor === Object) {
@@ -789,7 +791,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.http.post<GenericObj>(URLConstant.EditVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_REG],{ "VendorId": response.Id, "mode": "edit" });
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_BRANCH_REG], { "VendorId": response.Id, "mode": "edit" });
         });
     }
     else {
@@ -799,16 +801,16 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.http.post<GenericObj>(URLConstant.AddVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_REG],{ "VendorId": response.Id });
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_BRANCH_REG], { "VendorId": response.Id });
         });
     }
   }
 
   Back() {
     if (this.mode == "edit") {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_REG],{ "VendorId": this.VendorId });
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_BRANCH_REG], { "VendorId": this.VendorId });
     } else {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
   }
   bindText() {

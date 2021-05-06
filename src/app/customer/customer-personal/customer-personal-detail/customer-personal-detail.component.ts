@@ -12,6 +12,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-customer-personal-detail',
@@ -156,9 +157,10 @@ export class CustomerPersonalDetailComponent implements OnInit {
           }
         );
 
-        var refMasterObjMrSalutationCode = {
-          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSalutation
-        }
+        var refMasterObjMrSalutationCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSalutation,
+          MappingCode: null
+        };
         this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrSalutationCode).subscribe(
           (response) => {
             this.tempSalutation = response[CommonConstant.ReturnObj];
@@ -174,9 +176,10 @@ export class CustomerPersonalDetailComponent implements OnInit {
             }
           }
         );
-        var refMasterObjMrEducationCode = {
-          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation
-        }
+        var refMasterObjMrEducationCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation,
+          MappingCode: null
+        };
         this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrEducationCode).subscribe(
           (response) => {
             this.tempEducation = response[CommonConstant.ReturnObj];
@@ -191,9 +194,10 @@ export class CustomerPersonalDetailComponent implements OnInit {
             }
           }
         );
-        var refMasterObjMrReligionCode = {
-          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion
-        }
+        var refMasterObjMrReligionCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion,
+          MappingCode: null
+        };
         this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrReligionCode).subscribe(
           (response) => {
             this.tempReligion = response[CommonConstant.ReturnObj];
