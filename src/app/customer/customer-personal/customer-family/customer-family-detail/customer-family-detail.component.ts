@@ -21,6 +21,7 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
@@ -73,8 +74,6 @@ export class CustomerFamilyDetailComponent implements OnInit {
   MotherMaidenName: string;
   IsAffiliateWithMf: string;
   MrMaritalStatCode: string;
-  getListActiveRefMasterUrl: string;
-  GetListActiveRefMasterWithMappingCodeAllUrl: string;
   tempMrMaritalStatCode: Array<KeyValueObj> = new Array<KeyValueObj>();
 
   CustomerFamilyForm: FormGroup = this.fb.group({
@@ -105,8 +104,6 @@ export class CustomerFamilyDetailComponent implements OnInit {
 
   initData() {
     this.KTP = RefMasterConstant.EKtp;
-    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.isExistingCust = false;
     this.isEditCustFamily = false;
     this.CustRelationshipList = new Array<Object>();
@@ -287,11 +284,11 @@ export class CustomerFamilyDetailComponent implements OnInit {
       });
     }
 
-    var refMasterObj = {
+    var refMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
-      RowVersion: ""
+      MappingCode: null
     }
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObj).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObj).subscribe(
       (response) => {
         this.tempGender = response[CommonConstant.ReturnObj];
         this.CustomerFamilyForm.patchValue({
@@ -299,11 +296,11 @@ export class CustomerFamilyDetailComponent implements OnInit {
         });
       }
     );
-    var refMasterObjMrIdTypeCode = {
+    var refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
-      RowVersion: ""
+      MappingCode: null
     }
-    this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrIdTypeCode).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         this.tempIdType = response[CommonConstant.ReturnObj];
         this.CustomerFamilyForm.patchValue({
@@ -321,7 +318,11 @@ export class CustomerFamilyDetailComponent implements OnInit {
       }
     );
 
-    this.http.post(this.getListActiveRefMasterUrl, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat }).toPromise().then(
+    var refMasterObjMrMaritalStatCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat,
+      MappingCode: null
+    }
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrMaritalStatCode).toPromise().then(
       (response) => {
         this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
         this.CustomerFamilyForm.patchValue({
@@ -330,9 +331,10 @@ export class CustomerFamilyDetailComponent implements OnInit {
       }
     );
 
-    var refMasterObjMrCustRelationshipCode = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship
-    }
+    var refMasterObjMrCustRelationshipCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship,
+      MappingCode: null
+    };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCustRelationshipCode).subscribe(
       (response) => {
         this.CustRelationshipList = response[CommonConstant.ReturnObj];

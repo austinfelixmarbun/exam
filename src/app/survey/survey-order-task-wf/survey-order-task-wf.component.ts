@@ -88,7 +88,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
           SrvyOrderId: this.SrvyOrderId
         }
 
-        this.http.post(URLConstant.GetListAllSrvyFormSchm, GetListSrvey).subscribe(
+        this.http.post(URLConstant.GetListAllSrvyFormSchm, {}).subscribe(
           response => {
             this.FormSchmList = response[CommonConstant.ReturnObj];
             this.SurveyTaskForm.patchValue({

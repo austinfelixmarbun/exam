@@ -15,6 +15,7 @@ import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { formatDate } from '@angular/common';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 
@@ -83,9 +84,9 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.UcAddressObj = new UcAddressObj();
     this.inputFieldObj = new InputFieldObj();
     this.inputFieldObj.inputLookupObj = new InputLookupObj();
-    var refMasterObjMrJobPositionCode = {
+    var refMasterObjMrJobPositionCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition,
-      RowVersion: ""
+      MappingCode: null
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrJobPositionCode).subscribe(
       (response) => {
@@ -93,9 +94,9 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
           this.tempMrJobPositionCode = response[CommonConstant.ReturnObj];
       }
     );
-    var refMasterObjMrGenderCode = {
+    var refMasterObjMrGenderCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
-      RowVersion: ""
+      MappingCode: null
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrGenderCode).subscribe(
       (response) => {
@@ -104,9 +105,9 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       }
     );
 
-    var refMasterObjMrIdTypeCode = {
+    var refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
-      RowVersion: ""
+      MappingCode: null
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
@@ -115,9 +116,9 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       }
     );
 
-    var refMasterObjMrCustRelationshipCode = {
+    var refMasterObjMrCustRelationshipCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship,
-      RowVersion: ""
+      MappingCode: null
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCustRelationshipCode).subscribe(
       (response) => {

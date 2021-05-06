@@ -13,6 +13,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { WhereValueObj } from '@adins/ucsearch/lib/model/InputSearchObj.Model';
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-surveyor-add',
@@ -81,8 +82,8 @@ export class SurveyorAddComponent implements OnInit {
   }
 
   setDropDown(){
-    
-    this.httpClient.post(URLConstant.GetListActiveRefMaster,{RefMasterTypeCode: "SURVEYOR_TYPE"}).subscribe(
+    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: "SURVEYOR_TYPE", MappingCode: null };
+    this.httpClient.post(URLConstant.GetListActiveRefMaster, tempReq).subscribe(
       (response) => {
         this.dropdownSurveyType = response['ReturnObject'];
         

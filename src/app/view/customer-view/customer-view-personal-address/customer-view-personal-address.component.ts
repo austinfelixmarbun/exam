@@ -10,6 +10,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 
 @Component({
@@ -17,9 +18,6 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   templateUrl: './customer-view-personal-address.component.html'
 })
 export class CustomerViewPersonalAddressComponent implements OnInit {
-  GetListCustAddrByCustIdForCustomerPersonalViewUrl = URLConstant.GetListCustAddrByCustIdForCustomerPersonalView;
-  GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = URLConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
-  GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
   arrCrit: any;
   inputObj: any;
   CustId: number;
@@ -51,8 +49,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
     });
     this.viewCustFinData.viewInput =   "./assets/ucviewgeneric/viewCustFinData.json";
     this.viewCustFinData.viewEnvironment = environment.FoundationR3Url;
-    var custAddrObj = { "CustId": this.CustId };
-    this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, { Id: this.CustId }).subscribe(
+    this.http.post(URLConstant.GetListCustAddrByCustIdForCustomerPersonalView, { Id: this.CustId }).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.responseResultCustAddr = response[CommonConstant.ReturnObj];
@@ -62,7 +59,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
-    this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, { Id: this.CustId }).subscribe(
+    this.http.post(URLConstant.GetListCustAddrHistByCustIdForCustomerPersonalView, { Id: this.CustId }).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.responseResultCustAddrHist = response[CommonConstant.ReturnObj];
@@ -73,9 +70,9 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
       }
     );
 
-    var refMasterObj = new RefMasterObj();
+    let refMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeAddrType;
-    this.http.post(this.GetListActiveRefMasterUrl, refMasterObj).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObj).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.ddlItem = response[CommonConstant.ReturnObj];

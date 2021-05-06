@@ -11,9 +11,10 @@ import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
-import { ResListKeyValueObj } from 'app/shared/model/Response/Generic/ResListKeyValueObj.model';
-import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
 
 @Component({
   selector: 'app-customer-company-main-info',
@@ -67,7 +68,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     refMasterObjCustModel.Code =  CommonConstant.CustTypeCompany;
     
     this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
-      (response : ResListKeyValueObj) => {
+      (response : GenericKeyValueListObj) => {
         this.tempCustModel = response[CommonConstant.ReturnObj];
         this.CustomerCompanyForm.patchValue({
           CustModel: this.tempCustModel[0].Key
@@ -75,9 +76,9 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       }
     );
 
-    var refMasterObjMrCompanyTypeCode = {
+    var refMasterObjMrCompanyTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
-      RowVersion: ""
+      MappingCode: null
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {

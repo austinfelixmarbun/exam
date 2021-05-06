@@ -11,9 +11,10 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
-import { ResListKeyValueObj } from 'app/shared/model/Response/Generic/ResListKeyValueObj.model';
-import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-personal',
@@ -78,10 +79,10 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.inputLookupCustPersonalObj.pagingJson = "./assets/lookup/lookUpExistingCustPersonal.json";
     this.inputLookupCustPersonalObj.genericJson = "./assets/lookup/lookUpExistingCustPersonal.json";
     this.inputLookupCustPersonalObj.isRequired = false;
-    var refMasterObjMrGenderCode = {
+    var refMasterObjMrGenderCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
-      RowVersion: ""
-    }
+      MappingCode: null
+    };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrGenderCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
@@ -93,9 +94,10 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       }
     );
 
-    var refMasterObjMrIdTypeCode = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType
-    }
+    var refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
+      MappingCode: null
+    };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
@@ -108,10 +110,10 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       }
     );
 
-    var refMasterObjMrJobPositionCode = {
+    var refMasterObjMrJobPositionCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition,
-      RowVersion: ""
-    }
+      MappingCode: null
+    };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrJobPositionCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
@@ -126,7 +128,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     refMasterObjCustModel.Code =  CommonConstant.CustTypePersonal;
     
     this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
-      (response : ResListKeyValueObj) => {
+      (response : GenericKeyValueListObj) => {
         this.tempMrCustModelCode = response[CommonConstant.ReturnObj];
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.tempMrCustModelCode = response[CommonConstant.ReturnObj];

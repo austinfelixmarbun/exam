@@ -15,6 +15,7 @@ import { UcInputRFAObj } from 'app/shared/model/UcInputRFAObj.Model';
 import { UcapprovalcreateComponent } from '@adins/Ucapprovalcreate';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqGetByTypeCodeObj } from 'app/shared/model/RefReason/ReqGetByTypeCodeObj.Model';
 
 @Component({
   selector: 'app-product-ho-deactivate-edit',
@@ -28,12 +29,9 @@ export class ProductHODeactivateEditComponent implements OnInit {
   prodHDeactivateObj: ProdHDeactivateObj;
   resultData: any;
   apiUrl: string;
-  requestDeactURL: string;
   ProdOfferingObj: any;
   arrCrit: any;
-  getValueReasonModel: any;
   allRefReasonMethod: any;
-  prodOfferVerUrl: string;
   ProdOfferVer: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   InputObj: UcInputRFAObj;
@@ -52,11 +50,6 @@ export class ProductHODeactivateEditComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.PRODUCT_HO_DEACTIVATE;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
-
-    this.requestDeactURL = URLConstant.RequestDeactivationNew;
-    this.getValueReasonModel = URLConstant.GetListActiveRefReason;
-    this.prodOfferVerUrl = URLConstant.GetListProdOfferingVersionByProdId;
-
     this.route.queryParams.subscribe(params => {
       if (params["prodHId"] != null) {
         this.prodHId = params["prodHId"];
@@ -71,8 +64,8 @@ export class ProductHODeactivateEditComponent implements OnInit {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductMainInformation.json";
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
-    var obj = { RefReasonTypeCode: CommonConstant.RefReasonTypeCodeProdDeactivate };
-    await this.http.post(this.getValueReasonModel, obj).toPromise().then(
+    var obj: ReqGetByTypeCodeObj = { RefReasonTypeCode: CommonConstant.RefReasonTypeCodeProdDeactivate };
+    await this.http.post(URLConstant.GetListActiveRefReason, obj).toPromise().then(
       (response) => {
         this.allRefReasonMethod = response[CommonConstant.ReturnObj]; 
         if (this.allRefReasonMethod.length > 0) {
@@ -83,7 +76,7 @@ export class ProductHODeactivateEditComponent implements OnInit {
     this.ProdOfferingObj = new ProdOfferingVersionObj
     this.ProdOfferingObj.ProdId = this.prodId;
     this.ProdOfferingObj.ProdOfferingStat = 'ACT';
-    this.http.post(this.prodOfferVerUrl, this.ProdOfferingObj).subscribe(
+    this.http.post(URLConstant.GetListProdOfferingVersionByProdId, this.ProdOfferingObj).subscribe(
       response => {
         this.ProdOfferVer = response[CommonConstant.ReturnObj];
       }
@@ -131,7 +124,7 @@ export class ProductHODeactivateEditComponent implements OnInit {
     this.prodHDeactivateObj.ProdHId = this.prodHId;
     this.prodHDeactivateObj.RowVersion = "";
     this.prodHDeactivateObj.RequestRFAObj = this.ApprovalCreateOutput;
-    this.http.post(this.requestDeactURL, this.prodHDeactivateObj).subscribe(
+    this.http.post(URLConstant.RequestDeactivationNew, this.prodHDeactivateObj).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PRODUCT_HO_DEACTIVATE],{ });

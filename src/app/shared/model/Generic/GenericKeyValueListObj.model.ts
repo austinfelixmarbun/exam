@@ -1,9 +1,9 @@
-import { KeyValueObj } from "../../KeyValueObj.Model";
+import { KeyValueObj } from "../KeyValue/KeyValueObj.Model";
 
-export class ResListKeyValueObj{
+export class GenericKeyValueListObj {
     ReturnObject : Array<KeyValueObj>;
     
     constructor(){
         this.ReturnObject = new Array<KeyValueObj>();
     }
-}
+}  

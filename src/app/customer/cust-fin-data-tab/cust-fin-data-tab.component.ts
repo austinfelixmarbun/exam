@@ -13,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-cust-fin-data-tab',
@@ -121,7 +122,7 @@ export class CustFinDataTabComponent implements OnInit {
           var custPersonalFinData = new CustPersonalFinDataObj();
           custPersonalFinData.CustPersonalId = response.CustPersonalId;
           let custFinData = this.httpClient.post(URLConstant.GetCustPersonalFinDataByCustPersonalId, {Id : response.CustPersonalId});
-          var refMasterSourceIncome = new RefMasterObj();
+          let refMasterSourceIncome: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
           refMasterSourceIncome.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeSourceIncome;
           let sourceIncomeList = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterSourceIncome);
           return forkJoin([custFinData, sourceIncomeList]);

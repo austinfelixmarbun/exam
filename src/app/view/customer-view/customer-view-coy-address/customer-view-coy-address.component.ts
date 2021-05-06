@@ -10,6 +10,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-customer-view-coy-address',
@@ -24,10 +25,6 @@ export class CustomerViewCoyAddressComponent implements OnInit {
   responseResultCustAddr: any;
   responseResultCustAddrHist: any;
   selectedOption: any;
-
-  GetListCustAddrByCustIdForCustomerPersonalViewUrl = URLConstant.GetListCustAddrByCustIdForCustomerPersonalView;
-  GetListCustAddrHistByCustIdForCustomerPersonalViewUrl = URLConstant.GetListCustAddrHistByCustIdForCustomerPersonalView;
-  GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
 
   CustForm = this.fb.group({
     DdlAddress: ['']
@@ -47,8 +44,7 @@ export class CustomerViewCoyAddressComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-    var custAddrObj = { "CustId": this.CustId };
-    this.http.post(this.GetListCustAddrByCustIdForCustomerPersonalViewUrl, { Id: this.CustId }).subscribe(
+    this.http.post(URLConstant.GetListCustAddrByCustIdForCustomerPersonalView, { Id: this.CustId }).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.responseResultCustAddr = response[CommonConstant.ReturnObj];
@@ -58,7 +54,7 @@ export class CustomerViewCoyAddressComponent implements OnInit {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
-    this.http.post(this.GetListCustAddrHistByCustIdForCustomerPersonalViewUrl, { Id: this.CustId }).subscribe(
+    this.http.post(URLConstant.GetListCustAddrHistByCustIdForCustomerPersonalView, { Id: this.CustId }).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.responseResultCustAddrHist = response[CommonConstant.ReturnObj];
@@ -68,9 +64,9 @@ export class CustomerViewCoyAddressComponent implements OnInit {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
-    var refMasterObj = new RefMasterObj();
+    var refMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     refMasterObj.RefMasterTypeCode = RefMasterConstant.AddrType;
-    this.http.post(this.GetListActiveRefMasterUrl, refMasterObj).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObj).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.ddlItem = response[CommonConstant.ReturnObj];
