@@ -18,6 +18,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ResListKeyValueObj } from 'app/shared/model/Response/Generic/ResListKeyValueObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
@@ -45,7 +46,7 @@ export class EditMainDataPersonalComponent implements OnInit {
   tempKTPCheck: any;
   tempGender: any;
   tempIdType: any;
-  tempCustModel: any;
+  tempCustModel: Array<KeyValueObj> = new Array<KeyValueObj>();
   tempCustPersonalObj: CustPersonalObj;
   tempCustObj: any;
   CustId: number;
@@ -121,12 +122,12 @@ export class EditMainDataPersonalComponent implements OnInit {
         }
       }
     );
-    var refMasterObjCustModel = {
-      MrCustTypeCode: CommonConstant.CustTypePersonal
-    }
+    var refMasterObjCustModel = new GenericObj();
+    refMasterObjCustModel.Code =  CommonConstant.CustTypePersonal;
+    
     this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
-      (response) => {
-        this.tempCustModel = response["ReturnObject"];
+      (response : ResListKeyValueObj) => {
+        this.tempCustModel = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
           CustModel: this.tempCustModel[0].Key
         });

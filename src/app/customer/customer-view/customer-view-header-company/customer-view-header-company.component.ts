@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-view-header-company',
@@ -50,9 +51,9 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
     this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
       (response) => {
         this.tempCustObj = response;
-        var refMasterObjMrCustModelCode = {
-          CustModelCode: this.tempCustObj.MrCustModelCode
-        }
+        var refMasterObjMrCustModelCode = new GenericObj();
+        refMasterObjMrCustModelCode.Code= this.tempCustObj.MrCustModelCode
+        
         this.http.post(URLConstant.GetRefCustModelByCode, refMasterObjMrCustModelCode).subscribe(
           (response) => {
             this.tempMrCustModelCode = response;

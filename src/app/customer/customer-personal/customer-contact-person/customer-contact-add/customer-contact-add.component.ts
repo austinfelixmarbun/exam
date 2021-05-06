@@ -19,6 +19,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
@@ -60,7 +61,7 @@ export class CustomerContactAddComponent implements OnInit {
   custPersonalObj: CustPersonalObj;
   criteriaList: Array<CriteriaObj>;
   custPersonalContactPersonObj: CustPersonalContactPersonObj;
-  listCustAddr: Array<CustAddrObj>
+  listCustAddr: Array<ResListCustAddrObj>;
 
   IdCust: number;
   tempCustId: number;
@@ -370,11 +371,10 @@ export class CustomerContactAddComponent implements OnInit {
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn= false;
 
-    var tempCustAddrObj = new CustAddrObj();
-    tempCustAddrObj.CustId = this.IdCust;
-    tempCustAddrObj.MrCustAddrTypeCode = "-";
+    var tempCustAddrObj = new GenericObj();
+    tempCustAddrObj.Id = this.IdCust;
     this.http.post(URLConstant.GetListCustAddr, tempCustAddrObj).subscribe(
-      (response) => {
+      (response : ResGetListCustAddrObj) => {
         this.listCustAddr = response[CommonConstant.ReturnObj];
         if (this.listCustAddr.length > 0) {
           this.CustomerContactForm.patchValue({ CopyFromContactPerson: response[CommonConstant.ReturnObj][0]['CustAddrId'] });

@@ -16,6 +16,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { ResListKeyValueObj } from 'app/shared/model/Response/Generic/ResListKeyValueObj.model';
 
 @Component({
   selector: 'app-customer-personal-main-info',
@@ -27,7 +29,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   Gender: any;
   tempGender: any;
   tempIdType: any;
-  tempCustModel: any;
+  tempCustModel: Array<KeyValueObj> = new Array<KeyValueObj>();
 
   custPersonalObj: CustPersonalObj;
 
@@ -130,12 +132,12 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         }
       }
     );
-   var refMasterObjCustModel = {
-      MrCustTypeCode: CommonConstant.CustTypePersonal
-    }
+    var refMasterObjCustModel = new GenericObj();
+    refMasterObjCustModel.Code =  CommonConstant.CustTypePersonal;
+    
     this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
-      (response) => {
-        this.tempCustModel = response["ReturnObject"];
+      (response : ResListKeyValueObj) => {
+        this.tempCustModel = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
           CustModel: this.tempCustModel[0].Key
         });
