@@ -7,6 +7,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CustExpsrHObj } from 'app/shared/model/CreditReview/CustExpsrHObj.Model';
 import { CustExpsrInfoObj } from 'app/shared/model/CreditReview/CustExpsrInfoObj.Model';
+import { ReqByCustNoObj } from 'app/shared/model/Request/ReqByCustNoObj.model';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -16,6 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CustExposureViewComponent implements OnInit {
   CustId: number = 0;
   IsReady: boolean = false;
+  CustNoObj: ReqByCustNoObj = new ReqByCustNoObj();
   readonly whiteIndicator: string = CommonConstant.WhiteIndicator;
 
   //#region Exposure Type
@@ -66,6 +68,7 @@ export class CustExposureViewComponent implements OnInit {
   }
 
   openCustView(custNo: string) {
+    this.CustNoObj.CustNo = custNo;
     this.http.post(URLConstant.GetCustByCustNo, {TrxNo : custNo}).subscribe(
       (response) => {
         AdInsHelper.OpenCustomerViewByCustId(response["CustId"]);
