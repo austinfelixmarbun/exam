@@ -6,7 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { RefReasonObj } from 'app/shared/model/RefReasonObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 

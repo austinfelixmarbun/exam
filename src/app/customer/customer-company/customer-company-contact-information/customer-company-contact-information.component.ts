@@ -11,7 +11,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { formatDate } from '@angular/common';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
