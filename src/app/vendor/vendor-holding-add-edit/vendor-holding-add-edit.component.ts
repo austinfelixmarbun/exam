@@ -12,7 +12,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { GenericObj} from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { GenericObj} from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-vendor-holding-add-edit',

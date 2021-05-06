@@ -8,7 +8,7 @@ import { CustLegalDocDetailComponent } from './cust-legal-doc-detail/cust-legal-
 import { Router, ActivatedRoute } from '@angular/router';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-cust-legal-doc',
