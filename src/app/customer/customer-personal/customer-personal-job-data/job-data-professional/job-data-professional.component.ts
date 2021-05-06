@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from 'environments/environment';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
@@ -21,8 +20,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 @Component({
   selector: 'app-job-data-professional',
   templateUrl: './job-data-professional.component.html',
-  styleUrls: [],
-  providers: [NGXToastrService]
+  styleUrls: []
 })
 export class JobDataProfessionalComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
@@ -120,15 +118,11 @@ export class JobDataProfessionalComponent implements OnInit {
     this.professionLookUpObj = new InputLookupObj();
     this.professionLookUpObj.isRequired = true;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
-    this.professionLookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.professionLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
 
     this.industryLookUpObj = new InputLookupObj();
     this.industryLookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
-    this.industryLookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.industryLookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.industryLookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.isRequired = true;

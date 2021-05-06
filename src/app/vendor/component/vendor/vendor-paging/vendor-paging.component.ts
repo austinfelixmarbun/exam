@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UcPagingObj, WhereValueObj } from 'app/shared/model/UcPagingObj.Model';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -16,7 +14,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   templateUrl: './vendor-paging.component.html'
 })
 export class VendorPagingComponent implements OnInit {
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
   MrVendorCategoryCode: string;
   Type: string = "Default";
   mode: string;
@@ -34,16 +32,9 @@ export class VendorPagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
-
-
-
     if (this.Type == "Scheme") {
       this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorScheme.json";
       this.inputPagingObj._url = "./assets/ucpaging/searchVendorScheme.json";
-      this.inputPagingObj.addCritInput = new Array();
       var critObj = new CriteriaObj();
       critObj.propName = "VS.MR_VENDOR_CATEGORY_CODE";
       critObj.restriction = AdInsConstant.RestrictionEq;
@@ -53,7 +44,6 @@ export class VendorPagingComponent implements OnInit {
     else if (this.Type == "Group") {
       this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorGroup.json";
       this.inputPagingObj._url = "./assets/ucpaging/searchVendorGroup.json";
-      this.inputPagingObj.addCritInput = new Array();
       var critObj = new CriteriaObj();
       critObj.propName = "VG.MR_VENDOR_CATEGORY_CODE";
       critObj.restriction = AdInsConstant.RestrictionEq;

@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NgForm, FormBuilder } from '@angular/forms';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -19,8 +18,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
     selector: 'app-employee-position',
-    templateUrl: './employee-position-add.component.html',
-    providers: [NGXToastrService]
+    templateUrl: './employee-position-add.component.html'
 })
 export class EmployeePositionAddComponent implements OnInit {
 
@@ -113,8 +111,6 @@ export class EmployeePositionAddComponent implements OnInit {
 
         this.inputLookupObj = new InputLookupObj();
         this.inputLookupObj.urlJson = "./assets/lookup/lookupSupervisor.json";
-        this.inputLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-        this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
         this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupervisor.json";
         this.inputLookupObj.genericJson = "./assets/lookup/lookupSupervisor.json";
 

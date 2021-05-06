@@ -10,7 +10,6 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UpdateCustCompanyDetailObj } from 'app/shared/model/UpdateMasterCust/UpdateCustCompanyDetailObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 import { forkJoin } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
@@ -18,8 +17,7 @@ import { map, mergeMap } from 'rxjs/operators';
 @Component({
   selector: 'app-update-customer-company-detail',
   templateUrl: './update-customer-company-detail.component.html',
-  styles: [],
-  providers: [NGXToastrService]
+  styles: []
 })
 export class UpdateCustomerCompanyDetailComponent implements OnInit {
   @Input() CustDataTrxId: number;
@@ -48,8 +46,6 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
     this.ResponseTab = new EventEmitter<any>();
     this.IndustryLookupObj = new InputLookupObj();
     this.IndustryLookupObj.urlJson = "./assets/lookup/lookupIndustryType.json";
-    this.IndustryLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.IndustryLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.IndustryLookupObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.IndustryLookupObj.genericJson = "./assets/lookup/lookupIndustryType.json";
   }
@@ -128,7 +124,7 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
   }
 
   SaveValue(){
-    this.http.post(URLConstant.EditMasterCustCompanyDetail, this.CustomerDetailForm.value).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustCompanyDetail, this.CustomerDetailForm.value).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

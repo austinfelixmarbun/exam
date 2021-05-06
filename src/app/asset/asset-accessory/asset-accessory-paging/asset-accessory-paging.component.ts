@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
-import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -30,13 +29,10 @@ export class AssetAccessoryPagingComponent implements OnInit {
   readonly CancelLink: string = NavigationConstant.ASSET_CONFIG_PAGING;
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetAccessory.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetAccessory.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
     
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewAssetType.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.critObj.restriction = AdInsConstant.RestrictionLike;
     this.critObj.propName = 'ASSET_TYPE_ID';

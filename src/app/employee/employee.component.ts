@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-employee',
-  templateUrl: './employee.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './employee.component.html'
 })
 export class EmployeeComponent implements OnInit {
 
@@ -20,8 +15,6 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/search/searchEmployee.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = "/Generic/GetPagingObjectBySQL";
     this.inputPagingObj.pagingJson = "./assets/search/searchEmployee.json";
   }
 }

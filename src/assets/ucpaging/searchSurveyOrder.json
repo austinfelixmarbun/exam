@@ -105,7 +105,7 @@
             "type": "sort",
             "position": "center",
             "label": "Survey Initial",
-            "name": "RM.MASTER_CODE"
+            "name": "RM.DESCR"
         },
         {
             "type": "sort",
@@ -165,7 +165,7 @@
             "type": "sort",
             "position": "center",
             "label": "Status",
-            "name": "RS.REF_STATUS_CODE"
+            "name": "RS.DESCR"
         },
         {
             "type": "sort",

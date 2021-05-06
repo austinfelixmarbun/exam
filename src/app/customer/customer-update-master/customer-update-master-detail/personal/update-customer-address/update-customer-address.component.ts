@@ -16,8 +16,7 @@ import { BehaviorSubject, forkJoin, Subject } from 'rxjs';
 @Component({
   selector: 'app-update-customer-address',
   templateUrl: './update-customer-address.component.html',
-  styles: [],
-  providers: [NGXToastrService]
+  styles: []
 })
 export class UpdateCustomerAddressComponent implements OnInit {
   @Input() CustDataTrxId: number;
@@ -41,8 +40,6 @@ export class UpdateCustomerAddressComponent implements OnInit {
     this.ZipcodeLookupList = new Array<InputLookupObj>();
     this.ZipcodeLookupObj = new InputLookupObj();
     this.ZipcodeLookupObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.ZipcodeLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.ZipcodeLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.ZipcodeLookupObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.ZipcodeLookupObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.ZipcodeLookupObj.isReady = false;
@@ -299,12 +296,13 @@ export class UpdateCustomerAddressComponent implements OnInit {
       var masterData = new UpdateCustAddrObj();
       var currFormGroup = item.get("MasterAddr") as FormGroup;
       masterData = {...currFormGroup.getRawValue()};
+      masterData.CustId = this.CustId;
       if(!masterData.CustAddrId || masterData.CustAddrId <= 0){
         masterData.MrCustAddrTypeCode = item.get("AddrType").value;
       }
       requestList.push(masterData);
     }
-    this.http.post(URLConstant.EditMasterCustAddr, { CustAddrList: requestList, CustId: this.CustId }).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustAddr, { CustAddrList: requestList, CustId: this.CustId }).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

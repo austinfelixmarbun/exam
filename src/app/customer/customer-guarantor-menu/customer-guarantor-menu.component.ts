@@ -11,15 +11,12 @@ import { environment } from 'environments/environment';
   styles: []
 })
 export class CustomerGuarantorMenuComponent implements OnInit {
-  inputPagingObj: UcPagingObj;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
   constructor() { }
 
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchCustGuarantor.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCustGuarantor.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
     this.inputPagingObj.ddlEnvironments = [

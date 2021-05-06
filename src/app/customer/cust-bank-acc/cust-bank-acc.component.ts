@@ -8,11 +8,10 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CustBankStmntObj } from 'app/shared/model/CustBankStmntObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
-import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
-import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-cust-bank-acc',
@@ -58,10 +57,7 @@ export class CustBankAccComponent implements OnInit {
       }
     );
 
-    this.InputLookupBankObj = new InputLookupObj();
     this.InputLookupBankObj.urlJson = "./assets/uclookup/Customer/lookupBank_CustBankAcc_CustFinData.json";
-    this.InputLookupBankObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.InputLookupBankObj.urlEnviPaging = environment.FoundationR3Url;
     this.InputLookupBankObj.pagingJson = "./assets/uclookup/Customer/lookupBank_CustBankAcc_CustFinData.json";
     this.InputLookupBankObj.genericJson = "./assets/uclookup/Customer/lookupBank_CustBankAcc_CustFinData.json";
     this.InputLookupBankObj.isReady = true;

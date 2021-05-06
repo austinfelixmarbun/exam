@@ -1,9 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
 import { formatDate } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.Model';
@@ -16,8 +14,7 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMas
 @Component({
   selector: 'app-contact-person-add-edit',
   templateUrl: './contact-person-add-edit.component.html',
-  styleUrls: ['./contact-person-add-edit.component.scss'],
-  providers: [NGXToastrService]
+  styleUrls: ['./contact-person-add-edit.component.scss']
 })
 export class ContactPersonAddEditComponent implements OnInit {
   @Input() objInput: any;
@@ -76,8 +73,6 @@ export class ContactPersonAddEditComponent implements OnInit {
     )
 
     this.inputZipcodeLookupObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputZipcodeLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputZipcodeLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputZipcodeLookupObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputZipcodeLookupObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputZipcodeLookupObj.isReadonly = false;

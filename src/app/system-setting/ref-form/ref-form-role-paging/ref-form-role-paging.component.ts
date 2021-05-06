@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
@@ -15,7 +14,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class RefFormRolePagingComponent implements OnInit {
   RefFormId: string;
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING;
@@ -28,14 +27,10 @@ export class RefFormRolePagingComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewRefFormRole.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchRefFormRole.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRefFormRole.json";
-    this.inputPagingObj.addCritInput = new Array();
     this.inputPagingObj.deleteUrl = URLConstant.DeleteAuthForm;
 
     var critInput = new CriteriaObj();

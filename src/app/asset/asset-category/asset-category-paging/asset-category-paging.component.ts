@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
@@ -31,11 +30,8 @@ export class AssetCategoryPagingComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewAssetType.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetCategory.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetCategory.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetCategory;
 

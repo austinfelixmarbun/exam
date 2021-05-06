@@ -156,6 +156,7 @@ export class NavigationConstant {
     //#region SURVEY
     public static SRVY_PAGING = "/" + PathConstant.LR_SRVY + "/" + PathConstant.PAGING; //'/Survey/Paging'
     public static SRVY_TASK = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_TASK_PAGING; //'/Survey/Task'
+    public static SRVY_ORDER = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_ORDER_PAGING;
     //#endregion
     
     //#region Vendor
@@ -285,10 +286,14 @@ export class NavigationConstant {
     public static SURVEYOR_ADD = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR + "/" + PathConstant.ADD
     //#endregion
 
-    //#region 
+    //#region Survey
     public static SURVEY_TASK_ASSIGNMENT = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR_TASK_ASSIGNMENT;
     public static SURVEY_TASK_ASSIGNMENT_PAGING = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.PAGING;
     public static SURVEY_TASK_ASSIGNMENT_DETAIL = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.DETAIL;
+    public static SURVEY_RESULT_REVIEW_PAGING = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_RESULT_REVIEW + "/" + PathConstant.PAGING;
+    public static SURVEY_RESULT_REVIEW_DETAIL = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_RESULT_REVIEW + "/" + PathConstant.DETAIL;
+
+    //#endregion
     
     //#region Cust
     public static CUST_PERSONAL_MAIN_INFO = '..' + "/" + PathConstant.CUST_PERSONAL_MAIN_INFO; //'../CustomerPersonal/MainInfo'

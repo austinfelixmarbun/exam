@@ -15,8 +15,6 @@ export class OfficeBankAccountPagingComponent implements OnInit {
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/common-setting/office-bank-account/search-office-bank-account-paging.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/common-setting/office-bank-account/search-office-bank-account-paging.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteOfficeBankAcc;
     this.inputPagingObj.ddlEnvironments = [

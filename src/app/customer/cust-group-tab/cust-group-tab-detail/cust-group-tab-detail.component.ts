@@ -6,7 +6,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment'; 
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { first } from 'rxjs/operators';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -15,8 +15,7 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMas
 
 @Component({
   selector: 'app-cust-group-tab-detail',
-  templateUrl: './cust-group-tab-detail.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './cust-group-tab-detail.component.html'
 })
 export class CustGroupTabDetailComponent implements OnInit {
   @Input() MrCustTypeCode: string;
@@ -59,8 +58,6 @@ export class CustGroupTabDetailComponent implements OnInit {
     if(this.MrCustTypeCode == CommonConstant.CustTypePersonal){
       this.inputLookupCustPersonalObj = new InputLookupObj();
       this.inputLookupCustPersonalObj.urlJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
-      this.inputLookupCustPersonalObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-      this.inputLookupCustPersonalObj.urlEnviPaging = environment.FoundationR3Url;
       this.inputLookupCustPersonalObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
       this.inputLookupCustPersonalObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
       this.inputLookupCustPersonalObj.ddlEnvironments = [
@@ -81,21 +78,11 @@ export class CustGroupTabDetailComponent implements OnInit {
         this.inputLookupCustPersonalObj.isRequired = true;
       }
 
-      // criteriaList = new Array();
-      // criteriaObj = new CriteriaObj();
-      // criteriaObj.restriction = AdInsConstant.RestrictionEq;
-      // criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
-      // criteriaObj.value = "PERSONAL";
-      // criteriaList.push(criteriaObj);
-      // this.inputLookupCustPersonalObj.addCritInput = criteriaList;
-      // this.inputLookupCustPersonalObj.isRequired = false;
       refMasterRelationship.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustPersonalRelationship;
     }
     else if(this.MrCustTypeCode == CommonConstant.CustTypeCompany){
       this.inputLookupCustCompanyObj = new InputLookupObj();
       this.inputLookupCustCompanyObj.urlJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
-      this.inputLookupCustCompanyObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-      this.inputLookupCustCompanyObj.urlEnviPaging = environment.FoundationR3Url;
       this.inputLookupCustCompanyObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
       this.inputLookupCustCompanyObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
       this.inputLookupCustCompanyObj.ddlEnvironments = [
@@ -115,14 +102,6 @@ export class CustGroupTabDetailComponent implements OnInit {
         this.inputLookupCustCompanyObj.isRequired = true;
       }
 
-      // criteriaList = new Array();
-      // criteriaObj = new CriteriaObj();
-      // criteriaObj.restriction = AdInsConstant.RestrictionEq;
-      // criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
-      // criteriaObj.value = "COMPANY";
-      // criteriaList.push(criteriaObj);
-      // this.inputLookupCustCompanyObj.addCritInput = criteriaList;
-      // this.inputLookupCustCompanyObj.isRequired = false;
       refMasterRelationship.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustCompanyRelationship;
     }
 

@@ -4,7 +4,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfSchemeDObj } from 'app/shared/model/VerfSchemeDObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -13,8 +12,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-verification-question-scheme-member-edit',
-  templateUrl: './verification-question-scheme-member-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './verification-question-scheme-member-edit.component.html'
 })
 export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
   verfSchemeDObj: VerfSchemeDObj;

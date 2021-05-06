@@ -157,22 +157,16 @@ export class SurveyorAddComponent implements OnInit {
   ngOnInit() {
     this.setDropDown();
     this.lookupUsernameObj.urlJson = "./assets/lookup/lookupUsername.json";
-    this.lookupUsernameObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.lookupUsernameObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookupUsernameObj.pagingJson = "./assets/lookup/lookupUsername.json";
     this.lookupUsernameObj.genericJson = "./assets/lookup/lookupUsername.json";
     this.lookupUsernameObj.isRequired = true;
 
     this.lookupSurveyorGrpObj.urlJson = "./assets/lookup/lookupOfficeSrvyGrp.json";
-    this.lookupSurveyorGrpObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.lookupSurveyorGrpObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookupSurveyorGrpObj.pagingJson = "./assets/lookup/lookupOfficeSrvyGrp.json";
     this.lookupSurveyorGrpObj.genericJson = "./assets/lookup/lookupOfficeSrvyGrp.json";
     this.lookupSurveyorGrpObj.isRequired = true;
 
     this.lookupVendorObj.urlJson = "./assets/uclookup/vendor/lookupVendor.json";
-    this.lookupVendorObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.lookupVendorObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookupVendorObj.pagingJson = "./assets/uclookup/vendor/lookupVendor.json";
     this.lookupVendorObj.genericJson = "./assets/uclookup/vendor/lookupVendor.json";
     this.lookupVendorObj.isRequired = true;

@@ -4,7 +4,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionGrpDObj } from 'app/shared/model/VerfQuestionGrpDObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -13,8 +12,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-verification-question-group-member-edit',
-  templateUrl: './verification-question-group-member-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './verification-question-group-member-edit.component.html'
 })
 export class VerificationQuestionGroupMemberEditComponent implements OnInit {
   verfQuestionGrpDObj: VerfQuestionGrpDObj;

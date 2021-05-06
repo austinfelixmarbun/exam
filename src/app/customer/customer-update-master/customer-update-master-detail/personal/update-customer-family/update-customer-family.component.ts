@@ -81,7 +81,7 @@ export class UpdateCustomerFamilyComponent implements OnInit {
         request.push(item);
       }
     }
-    this.http.post(URLConstant.EditMasterCustFamily, { CustFamilyList: request }).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustFamily, { CustFamilyList: request }).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

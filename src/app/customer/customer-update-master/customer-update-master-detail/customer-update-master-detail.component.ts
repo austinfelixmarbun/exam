@@ -19,7 +19,7 @@ import { CookieService } from 'ngx-cookie';
 export class CustomerUpdateMasterDetailComponent implements OnInit {
   private CompanyWizard: Stepper;
   private PersonalWizard: Stepper;
-  ViewGenericObj: UcViewGenericObj;
+  ViewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   CustDataTrxId: number;
   CustNo: string;
   StepIdx: number;
@@ -65,9 +65,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     this.StepIdx = 1;
     this.PersonalConstant = CommonConstant.CustTypePersonal;
     this.CompanyConstant = CommonConstant.CustTypeCompany;
-    this.ViewGenericObj = new UcViewGenericObj();
     this.ViewGenericObj.viewInput = "./assets/ucviewgeneric/viewUpdateMasterCust.json";
-    this.ViewGenericObj.viewEnvironment = environment.FoundationR3Url;
     this.ViewGenericObj.ddlEnvironments = [
       {
         name: "AppNo",

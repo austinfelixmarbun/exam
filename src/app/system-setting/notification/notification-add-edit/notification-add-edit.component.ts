@@ -3,10 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { NotificationHObj } from 'app/shared/model/NotificationHObj.Model';
-import { NotificationDObj } from 'app/shared/model/NotificationDObj.Model';
 import { formatDate } from '@angular/common';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -18,8 +16,7 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMas
 
 @Component({
   selector: 'app-notification-add-edit',
-  templateUrl: './notification-add-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './notification-add-edit.component.html'
 })
 export class NotificationAddEditComponent implements OnInit {
   settingUrl: string = environment.FoundationR3Url;

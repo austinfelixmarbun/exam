@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
-import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-coa-scheme-view',
@@ -22,7 +21,6 @@ export class CoaSchemeViewComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/common-setting/view-coa-scheme-information.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     // this.ListProd = [{
     //   ProdCode: "ProdCode1",

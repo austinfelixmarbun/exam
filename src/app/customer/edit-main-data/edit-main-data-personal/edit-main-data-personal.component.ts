@@ -18,13 +18,12 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-edit-main-data-personal',
-  templateUrl: './edit-main-data-personal.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './edit-main-data-personal.component.html'
 })
 export class EditMainDataPersonalComponent implements OnInit {
   CustomerPersonalForm = this.fb.group({

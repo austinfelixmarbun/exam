@@ -14,8 +14,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-holiday-detail-edit',
-  templateUrl: './holiday-detail-edit.component.html',
-  providers: [NGXToastrService]
+  templateUrl: './holiday-detail-edit.component.html'
 })
 export class HolidayDetailEditComponent implements OnInit {
 
@@ -39,7 +38,6 @@ export class HolidayDetailEditComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewHolidayDetail.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.title = "Holiday Scheme-Edit";
     var HolidayObj = new HolidayDObj;

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -342,23 +341,17 @@ export class AuctionCompanyAddeditComponent implements OnInit {
 
   setLookup(){
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputLookupZipcodeObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.isReady = true;
 
     this.inputLookupZipcodeContactPersonObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeContactPersonObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputLookupZipcodeContactPersonObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupZipcodeContactPersonObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeContactPersonObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeContactPersonObj.isReady = true;
 
     this.inputLookupZipcodeTaxObj.isRequired = false;
     this.inputLookupZipcodeTaxObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    this.inputLookupZipcodeTaxObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputLookupZipcodeTaxObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupZipcodeTaxObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeTaxObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeTaxObj.isReady = true;
