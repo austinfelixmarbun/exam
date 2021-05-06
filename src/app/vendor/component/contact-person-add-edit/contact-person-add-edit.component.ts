@@ -118,8 +118,8 @@ export class ContactPersonAddEditComponent implements OnInit {
     })
   }
 
-  getZipcode(ev){
-    this.http.post(URLConstant.GetZipcodeDataByZipCode, {Zipcode: ev}).toPromise().then(
+  getZipcode(ev : string){
+    this.http.post(URLConstant.GetZipcodeDataByZipCode, {Zipcode : ev}).toPromise().then(
       (response)=>{
           this.ContactPersonForm.patchValue({
             AreaCode1: response["AreaCode1"],

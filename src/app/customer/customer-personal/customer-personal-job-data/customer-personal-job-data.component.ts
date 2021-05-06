@@ -6,9 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
-import { ResListKeyValueObj } from 'app/shared/model/Response/Generic/ResListKeyValueObj.model';
-import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 
 @Component({
   selector: 'app-customer-personal-job-data',
@@ -47,7 +47,7 @@ export class CustomerPersonalJobDataComponent implements OnInit {
         refMasterObjCustModel.Code =  CommonConstant.CustTypePersonal;
 
         this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
-          (response : ResListKeyValueObj) => {
+          (response : GenericKeyValueListObj) => {
             this.tempCustModel = response[CommonConstant.ReturnObj];
             if(!this.CustModel){
               this.CustModel = this.tempCustModel[0]["Key"];
