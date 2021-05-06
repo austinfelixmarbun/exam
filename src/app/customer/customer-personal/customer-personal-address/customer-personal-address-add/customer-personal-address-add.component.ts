@@ -27,7 +27,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
   resultData: any;
   tempCustObj: any;
-  listCustAddr: Array<ResListCustAddrObj>;
+  listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
   listAddressType: any;
   getCustomerAddr: any;
   copyCustomerAddr: any;
@@ -37,7 +37,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   custObj: CustObj;
   addressObj: AddrObj;
   addressType: RefMasterObj;
-  custAddrObj: GenericObj;
+  custAddrObj: GenericObj = new GenericObj();
   custAddressObj: CustAddrObj;
 
   custAddrFromObj: CustAddrObj;
@@ -97,7 +97,6 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
         this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response[CommonConstant.ReturnObj][0]['Key'] });
       });
 
-    this.custAddrObj = new GenericObj();
     this.custAddrObj.Id = this.IdCust;
     this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
       (response : ResGetListCustAddrObj) => {

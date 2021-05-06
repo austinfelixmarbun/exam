@@ -21,8 +21,8 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   IdCust: number;     
   custObj: any;
   objCust : CustObj;
-  custAddrObj: GenericObj;
-  listCustAddr: Array<ResListCustAddrObj>;
+  custAddrObj: GenericObj = new GenericObj();
+  listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
   From : string;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
@@ -42,7 +42,7 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
       (response) => {
         this.custObj = response;
       });
-    this.custAddrObj = new GenericObj();
+
     this.custAddrObj.Id = this.IdCust;
     this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
       (response : ResGetListCustAddrObj) => {

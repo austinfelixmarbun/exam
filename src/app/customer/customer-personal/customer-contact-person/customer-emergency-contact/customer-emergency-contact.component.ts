@@ -42,6 +42,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
   tempNationality: any;
   tempCustAddress: any;
   tempCustPersonal: any;
+  tempCustAddrObj: GenericObj = new GenericObj();
   tempMrGenderCode: any;
   tempMrReligionCode: any;
   tempMrEducationCode: any;
@@ -62,7 +63,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
   custPersonalObj: CustPersonalObj;
   criteriaList: Array<CriteriaObj>;
   custPersonalContactPersonObj: CustPersonalContactPersonObj;
-  listCustAddr: Array<ResListCustAddrObj>;
+  listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
 
   IdCust: number;
   tempCustId: number;
@@ -382,9 +383,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.inputAddressObj.showAllPhn= true;
     this.inputAddressObj.showFax= false;
 
-    var tempCustAddrObj = new GenericObj();
-    tempCustAddrObj.Id = this.IdCust;
-    this.http.post(URLConstant.GetListCustAddr, tempCustAddrObj).subscribe(
+    this.tempCustAddrObj.Id = this.IdCust;
+    this.http.post(URLConstant.GetListCustAddr, this.tempCustAddrObj).subscribe(
       (response : ResGetListCustAddrObj) => {
         this.listCustAddr = response[CommonConstant.ReturnObj];
         if (this.listCustAddr.length > 0) {
