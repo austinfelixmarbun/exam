@@ -15,7 +15,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { map, mergeMap, first } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { GenericKeyValueListObj } from 'app/shared/model/Response/Generic/GenericKeyValueListObj.model';
+import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { ListAssetSchemeHObj, ResGetListAssetSchemeHObj } from 'app/shared/model/Response/AssetMaster/ResGetListAssetSchemeHObj.model';
 ;

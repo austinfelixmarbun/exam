@@ -10,7 +10,7 @@ import { environment } from 'environments/environment';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { RackObj } from 'app/shared/model/document-management/RackObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-filing-add-edit',
