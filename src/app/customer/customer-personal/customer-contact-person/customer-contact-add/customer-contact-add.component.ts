@@ -125,7 +125,7 @@ export class CustomerContactAddComponent implements OnInit {
       GsCode: CommonConstant.GSCodeDefLocalNationality
     }
 
-    this.http.post(URLConstant.GetGeneralSettingByCode, {Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
+    this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
       (response) => {
         this.Country = response;
 
