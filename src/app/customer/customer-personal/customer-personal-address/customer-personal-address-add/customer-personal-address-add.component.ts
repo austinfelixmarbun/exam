@@ -17,7 +17,7 @@ import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Resp
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
-  selector: ' ',
+  selector: 'app-customer-personal-address-add',
   templateUrl: './customer-personal-address-add.component.html',
   styleUrls: []
 })
