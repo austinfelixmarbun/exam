@@ -7,7 +7,8 @@ import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ResponseSysConfigResultObj } from 'app/shared/model/Response/ResponseSysConfigResultObj.Model';
+import { ResSysConfigResultObj } from 'app/shared/model/Response/ResSysConfigResultObj,model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-view',
@@ -32,7 +33,7 @@ export class CustomerViewComponent implements OnInit {
   IsLms: boolean = false;
   IsUseDms: boolean = false;
 
-  SysConfigResultObj: ResponseSysConfigResultObj = new ResponseSysConfigResultObj();
+  SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj();
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
@@ -67,7 +68,9 @@ export class CustomerViewComponent implements OnInit {
       }
     );
 
-    await this.http.post<ResponseSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, { ConfigCode : CommonConstant.MODULE_LOS }).toPromise().then(
+    let reqGetSysConfigResultLOSObj = new GenericObj();
+    reqGetSysConfigResultLOSObj.Code  = CommonConstant.MODULE_LOS;
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, reqGetSysConfigResultLOSObj).toPromise().then(
       (response) => {
         if(response.ConfigValue === "1") {
           this.IsLos = true;
@@ -78,7 +81,9 @@ export class CustomerViewComponent implements OnInit {
       }
     );
 
-    await this.http.post<ResponseSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, { ConfigCode : CommonConstant.MODULE_LMS }).toPromise().then(
+    let reqGetSysConfigResultLMSObj = new GenericObj();
+    reqGetSysConfigResultLMSObj.Code  = CommonConstant.MODULE_LMS;
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, reqGetSysConfigResultLMSObj).toPromise().then(
       (response) => {
         if(response.ConfigValue === "1") {
           this.IsLms = true;
@@ -90,7 +95,7 @@ export class CustomerViewComponent implements OnInit {
     );
 
     //check DMS
-    await this.http.post<ResponseSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms }).toPromise().then(
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms }).toPromise().then(
       (response) => {
         this.SysConfigResultObj = response;
         if(response.ConfigValue === "1") {

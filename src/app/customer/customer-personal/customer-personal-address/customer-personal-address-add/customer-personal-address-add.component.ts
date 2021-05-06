@@ -14,10 +14,10 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
-import { GenericObj } from 'app/shared/model/Response/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
-  selector: 'app-customer-personal-address-add',
+  selector: ' ',
   templateUrl: './customer-personal-address-add.component.html',
   styleUrls: []
 })
@@ -37,13 +37,8 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
   custObj: CustObj;
   addressObj: AddrObj;
-<<<<<<< HEAD
-  addressType: ReqRefMasterByTypeCodeAndMappingCodeObj;
-  custAddrObj: CustAddrObj;
-=======
-  addressType: RefMasterObj;
+  addressType: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
   custAddrObj: GenericObj;
->>>>>>> bb147e36127f51a42cdda91204fb801d6bc22032
   custAddressObj: CustAddrObj;
 
   custAddrFromObj: CustAddrObj;
@@ -92,7 +87,6 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
 
-    this.addressType = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
     this.addressType.MappingCode = CommonConstant.CustTypePersonal;
     this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).subscribe(
