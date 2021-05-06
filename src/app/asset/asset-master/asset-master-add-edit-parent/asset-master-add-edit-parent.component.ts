@@ -109,11 +109,9 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         this.reqGetListAssetSchmHObj = new ReqGetListAssetSchmHObj();
         this.reqGetListAssetSchmHObj.AssetMasterId = this.AssetMasterId;
         this.reqGetListAssetSchmHObj.AssetTypeId = this.AssetMasterParentForm.controls['AssetTypeId'].value;
-        console.log(this.reqGetListAssetSchmHObj);
         this.http.post<ResGetListAssetSchemeHObj>(URLConstant.GetListAssetSchmH, this.reqGetListAssetSchmHObj).subscribe(
           (response) => {
             this.listAssetScheme = response[CommonConstant.ReturnObj];
-            console.log(this.listAssetScheme);
             for (let i = 0; i < this.listAssetScheme.length; i++) {
               if (this.listAssetScheme[i].AssetSchmHIdFromD != null) {
                 this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);

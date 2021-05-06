@@ -255,8 +255,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 this.http.post<ResGetAssetMasterAttrContentByIdObj>(URLConstant.GetAssetMasterAttrContentForAssetMaster, GetAssetMasterAttrContentById).pipe(first()).subscribe(
                   (response) => {
                     this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
-                    console.log("asodifjosadfj");
-                    console.log(this.listAssetMasterAttrContent);
                     var formGroupObject = new Object();
                     for (const masterAttr of this.listAssetMasterAttrContent) {
                       formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AttrAssetAttrIdContent"], [Validators.required]];
@@ -276,7 +274,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           this.http.post<ResGetListAssetSchemeHObj>(URLConstant.GetListAssetSchmH, this.reqGetListAssetSchmHObj).subscribe(
             response => {
               this.listAssetScheme = response[CommonConstant.ReturnObj];
-              console.log(this.listAssetScheme);
               for (let i = 0; i < this.listAssetScheme.length; i++) {
                 if (this.listAssetScheme[i].AssetSchmHIdFromD != null) {
                   this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
