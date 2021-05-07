@@ -6,6 +6,8 @@ import { CabinetWithListRackObj } from 'app/shared/model/document-management/Cab
 import { RackWithListFilingObj } from 'app/shared/model/document-management/RackWithListFilingObj.Model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-filing-paging',
@@ -14,6 +16,8 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class FilingPagingComponent implements OnInit {
   Cabinet: CabinetWithListRackObj = new CabinetWithListRackObj();
   Rack: RackWithListFilingObj = new RackWithListFilingObj();
+  GetRackAndListFilingByRackCode: GenericObj = new GenericObj();
+  GetCabinetAndListRackByCabinetCode: GenericObj = new GenericObj();
 
   readonly CancelLink: string = NavigationConstant.DOC_MNGMNT_RACK_PAGING;
   readonly AddLink: string = NavigationConstant.DOC_MNGMNT_FILING_ADD_EDIT;
@@ -33,7 +37,8 @@ export class FilingPagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post<RackWithListFilingObj>(environment.FoundationR3Url + "/DocManagement/GetRackAndListFilingByRackCode", this.Rack).subscribe(
+    this.GetRackAndListFilingByRackCode.Code = this.Rack.RackCode;
+    this.http.post<RackWithListFilingObj>(URLConstant.GetRackAndListFilingByRackCode, this.GetRackAndListFilingByRackCode).subscribe(
       (response) => {
         this.Rack = response;
       },
@@ -42,7 +47,8 @@ export class FilingPagingComponent implements OnInit {
       }
     );
 
-    this.http.post<CabinetWithListRackObj>(environment.FoundationR3Url + "/DocManagement/GetCabinetAndListRackByCabinetCode", {Code: this.Cabinet.CabinetCode}).subscribe(
+    this.GetCabinetAndListRackByCabinetCode.Code = this.Cabinet.CabinetCode;
+    this.http.post<CabinetWithListRackObj>(URLConstant.GetCabinetAndListRackByCabinetCode, this.GetCabinetAndListRackByCabinetCode).subscribe(
       (response) => {
         this.Cabinet = response;
       },

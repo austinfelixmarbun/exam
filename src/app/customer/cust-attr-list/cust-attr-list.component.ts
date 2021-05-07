@@ -10,6 +10,8 @@ import { AttrContent } from 'app/shared/model/AttrContent.model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { RefAttr } from 'app/shared/model/RefAttr.Model';
+import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
+import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/Request/RefAttr/ReqRefAttrByAttrGroupObj.model';
 import { environment } from 'environments/environment';
 
 @Component({
@@ -44,9 +46,8 @@ export class CustAttrListComponent implements OnInit {
   isFormReady: boolean = false;
   AttrContent: AttrContent;
   async ngOnInit() {
-    let custGrp = {
-      AttrGroup: this.attrGroup
-    };
+    let custGrp: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
+    custGrp.AttrGroup = this.attrGroup;
     await this.httpClient.post<Array<AttrContent>>(URLConstant.GetListCustAttrContentByCustIdAndAttrGroup, { CustId: this.CustId, AttrGroup: this.attrGroup }).toPromise().then(
       (response) => {
         this.ListAttrContent = response[CommonConstant.ReturnObj]
@@ -140,7 +141,7 @@ export class CustAttrListComponent implements OnInit {
       }
       if (isUpdateValue == false) {
         if (refAttr["DefaultValue"] != null) {
-          let refMaster = {
+          let refMaster: ReqRefMasterByTypeCodeAndMasterCodeObj = {
             RefMasterTypeCode: refAttr.AttrValue,
             MasterCode: refAttr.DefaultValue
           };

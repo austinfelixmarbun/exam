@@ -7,6 +7,8 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model'; 
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-company-address-check',
@@ -19,8 +21,8 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   IdCust: number;     
   custObj: any;
   objCust : CustObj;
-  custAddrObj: CustAddrObj;
-  listCustAddr: any;
+  custAddrObj: GenericObj;
+  listCustAddr: Array<ResListCustAddrObj>;
   From : string;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
@@ -40,11 +42,10 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
       (response) => {
         this.custObj = response;
       });
-    this.custAddrObj = new CustAddrObj();
-    this.custAddrObj.CustId = this.IdCust;
-    this.custAddrObj.MrCustAddrTypeCode = "-";
+    this.custAddrObj = new GenericObj();
+    this.custAddrObj.Id = this.IdCust;
     this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
-      (response) => {
+      (response : ResGetListCustAddrObj) => {
         this.listCustAddr = response["ReturnObject"];
         let idxCompany = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode == CommonConstant.CustAddrTypeCompany);
         if(idxCompany != -1) this.listCustAddr.splice(idxCompany, 1)

@@ -8,6 +8,8 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-personal-address-check',
@@ -19,10 +21,10 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
 
   custObj: any;
   resultData: any;
-  listCustAddr: any;
+  listCustAddr: Array<ResListCustAddrObj>;
 
   objCust: CustObj;
-  custAddrObj: CustAddrObj;
+  custAddrObj: GenericObj;
 
   BirthDt: Date;
   IdExpiredDt: Date;
@@ -70,11 +72,10 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
           this.custObj = response;
       });
 
-      this.custAddrObj = new CustAddrObj();
-      this.custAddrObj.CustId = this.IdCust;
-      this.custAddrObj.MrCustAddrTypeCode = "-";
+      this.custAddrObj = new GenericObj();
+      this.custAddrObj.Id = this.IdCust;
       this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
-        (response) => {
+        (response : ResGetListCustAddrObj) => {
             this.listCustAddr = response[CommonConstant.ReturnObj];
             let idxEmergency = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode == CommonConstant.CustAddrTypeEmergency);
             if(idxEmergency != -1) this.listCustAddr.splice(idxEmergency, 1)

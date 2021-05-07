@@ -12,9 +12,12 @@ import { AddrObj } from 'app/shared/model/AddrObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
-  selector: 'app-customer-personal-address-add',
+  selector: ' ',
   templateUrl: './customer-personal-address-add.component.html',
   styleUrls: []
 })
@@ -25,7 +28,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
   resultData: any;
   tempCustObj: any;
-  listCustAddr: any;
+  listCustAddr: Array<ResListCustAddrObj>;
   listAddressType: any;
   getCustomerAddr: any;
   copyCustomerAddr: any;
@@ -34,8 +37,8 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
   custObj: CustObj;
   addressObj: AddrObj;
-  addressType: RefMasterObj;
-  custAddrObj: CustAddrObj;
+  addressType: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
+  custAddrObj: GenericObj;
   custAddressObj: CustAddrObj;
 
   custAddrFromObj: CustAddrObj;
@@ -84,7 +87,6 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
 
-    this.addressType = new RefMasterObj();
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
     this.addressType.MappingCode = CommonConstant.CustTypePersonal;
     this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).subscribe(
@@ -95,20 +97,19 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
         this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response[CommonConstant.ReturnObj][0]['Key'] });
       });
 
-    this.custAddrObj = new CustAddrObj();
-    this.custAddrObj.CustId = this.IdCust;
-    this.custAddrObj.MrCustAddrTypeCode = "-";
+    this.custAddrObj = new GenericObj();
+    this.custAddrObj.Id = this.IdCust;
     this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
-      (response) => {
+      (response : ResGetListCustAddrObj) => {
         this.listCustAddr = response[CommonConstant.ReturnObj];
         this.CustDataPersonalForm.patchValue({ CopyAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'] });
       });
 
 
     if (this.pageType == "edit") {
-      this.custAddrObj = new CustAddrObj();
-      this.custAddrObj.CustAddrId = this.AddrId;
-      this.http.post(URLConstant.GetCustAddr, {Id : this.custAddrObj.CustAddrId}).subscribe(
+      this.custAddrObj = new GenericObj();
+      this.custAddrObj.Id = this.AddrId;
+      this.http.post(URLConstant.GetCustAddr, this.custAddrObj).subscribe(
         (response) => {
           this.getCustomerAddr = response;
           this.CustDataPersonalForm.patchValue({

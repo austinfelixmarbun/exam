@@ -20,6 +20,7 @@ import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
@@ -46,11 +47,11 @@ export class JobDataEmployeeComponent implements OnInit {
   inputJobAddressObj: InputFieldObj;
   inputOtherAddressObj: InputFieldObj;
   inputPreJobAddressObj: InputFieldObj;
-  jobStatus: RefMasterObj;
+  jobStatus: ReqRefMasterByTypeCodeAndMappingCodeObj;
   listJobStatus: any;
-  jobPosition: RefMasterObj;
+  jobPosition: ReqRefMasterByTypeCodeAndMappingCodeObj;
   listJobPosition: any;
-  companyScale: RefMasterObj;
+  companyScale: ReqRefMasterByTypeCodeAndMappingCodeObj;
   listCompanyScale: any;
   tempProfession: any;
   tempRefIndustryType: any;
@@ -204,7 +205,7 @@ export class JobDataEmployeeComponent implements OnInit {
     this.companyLookupObj.addCritInput = this.ArrAddCritCoy;
     this.companyLookupObj.isReady = true;
 
-    this.jobPosition = new RefMasterObj();
+    this.jobPosition = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.jobPosition.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobPosition;
     this.http.post(URLConstant.GetListActiveRefMaster, this.jobPosition).subscribe(
       (response) => {
@@ -213,7 +214,7 @@ export class JobDataEmployeeComponent implements OnInit {
       }
     );
 
-    this.jobStatus = new RefMasterObj();
+    this.jobStatus = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.jobStatus.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobStat;
     this.http.post(URLConstant.GetListActiveRefMaster, this.jobStatus).subscribe(
       (response) => {
@@ -222,7 +223,7 @@ export class JobDataEmployeeComponent implements OnInit {
       }
     );
 
-    this.companyScale = new RefMasterObj();
+    this.companyScale = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.companyScale.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCoyScale;
     this.http.post(URLConstant.GetListActiveRefMaster, this.companyScale).subscribe(
       (response) => {

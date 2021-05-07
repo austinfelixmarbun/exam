@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { first } from 'rxjs/operators';
@@ -12,6 +12,7 @@ import { RefCoaObj } from 'app/shared/model/common-setting/RefCoaObj.Model';
 import { FormBuilder, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { Router } from '@angular/router';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-coa-detail',
@@ -45,12 +46,11 @@ export class CoaDetailComponent implements OnInit {
     private http: HttpClient) {
   }
 
-  ngOnInit() {
-    var refMasterEntityType = new RefMasterObj();
-
-    refMasterEntityType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeEntityType;
+  ngOnInit() {    
     this.GetDdlCurr();
-
+    
+    let refMasterEntityType: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
+    refMasterEntityType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeEntityType;
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterEntityType).pipe(first()).subscribe(
       (response) => {
         this.entityTypeList = response["ReturnObject"];

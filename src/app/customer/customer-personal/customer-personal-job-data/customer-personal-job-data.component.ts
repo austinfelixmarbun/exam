@@ -6,6 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 
 @Component({
   selector: 'app-customer-personal-job-data',
@@ -14,7 +17,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 })
 export class CustomerPersonalJobDataComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
-  tempCustModel: Array<Object>;
+  tempCustModel: Array<KeyValueObj> = new Array<KeyValueObj>();
 
   custObj: any;
   objCust: CustObj;
@@ -23,7 +26,7 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   CustModel: string;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.tempCustModel = new Array<Object>();
+    this.tempCustModel = new Array<KeyValueObj>();
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -40,12 +43,12 @@ export class CustomerPersonalJobDataComponent implements OnInit {
         this.custObj = response;
         this.CustModel = this.custObj.MrCustModelCode;
 
-        var refMasterObjCustModel = {
-          MrCustTypeCode: CommonConstant.CustTypePersonal
-        }
+        var refMasterObjCustModel = new GenericObj();
+        refMasterObjCustModel.Code =  CommonConstant.CustTypePersonal;
+
         this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
-          (response) => {
-            this.tempCustModel = response["ReturnObject"];
+          (response : GenericKeyValueListObj) => {
+            this.tempCustModel = response[CommonConstant.ReturnObj];
             if(!this.CustModel){
               this.CustModel = this.tempCustModel[0]["Key"];
             }

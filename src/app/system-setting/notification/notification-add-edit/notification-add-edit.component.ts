@@ -12,6 +12,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-notification-add-edit',
@@ -67,10 +68,10 @@ export class NotificationAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    var refMasterNotifTypeObj = {
+    var refMasterNotifTypeObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNotificationType,
-      RowVersion: ""
-    }
+      MappingCode: null
+    };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterNotifTypeObj).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
@@ -82,10 +83,10 @@ export class NotificationAddEditComponent implements OnInit {
       }
     );
 
-    var refMasterNotifMethodObj = {
+    var refMasterNotifMethodObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNotificationMethod,
-      RowVersion: ""
-    }
+      MappingCode: null
+    };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterNotifMethodObj).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {

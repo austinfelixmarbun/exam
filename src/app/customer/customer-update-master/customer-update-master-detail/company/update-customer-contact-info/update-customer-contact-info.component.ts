@@ -7,6 +7,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UpdateCustContactInfoObj } from 'app/shared/model/UpdateMasterCust/UpdateCustContactInfoObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { forkJoin } from 'rxjs';
@@ -68,8 +69,10 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition });
-    let getGender = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender });
+    let tempReqJob: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition, MappingCode: null };
+    let tempReqGender: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender, MappingCode: null };
+    let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, tempReqJob);
+    let getGender = this.http.post(URLConstant.GetListActiveRefMaster, tempReqGender);
     let getDetail = this.http.post(URLConstant.GetContactInfoForUpdateMasterCustCompanyContactInfo, { CustDataTrxId: this.CustDataTrxId });
     forkJoin([getDetail, getJobPosition, getGender]).toPromise().then(
       (response) => {

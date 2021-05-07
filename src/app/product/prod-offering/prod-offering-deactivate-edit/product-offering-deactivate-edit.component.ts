@@ -15,6 +15,7 @@ import { UcInputRFAObj } from 'app/shared/model/UcInputRFAObj.Model';
 import { UcapprovalcreateComponent } from '@adins/Ucapprovalcreate';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqGetByTypeCodeObj } from 'app/shared/model/RefReason/ReqGetByTypeCodeObj.Model';
 
 @Component({
   selector: 'app-product-offering-deactivate-edit',
@@ -26,14 +27,10 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
   prodOfferingHId: any;
   prodOfferingHDeactivateObj: any;
   resultData: any;
-  apiUrl: any;
-  editUrl: any;
   arrCrit: any;
-  getValueReasonModel: any;
   allRefReasonMethod: any;
   ProdOfferingBranchMemObj: any;
   OfficeList: any;
-  ProdOfferingBranchUrl: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   prodOfferingId: number;
   InputObj: UcInputRFAObj;
@@ -52,11 +49,6 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.PRODUCT_OFFERING_DEACTIVATE;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
-
-    this.editUrl = URLConstant.RequestOfferingDeactivationNew;
-    this.getValueReasonModel = URLConstant.GetListActiveRefReason;
-    this.ProdOfferingBranchUrl = URLConstant.GetListProdOfferingBranchOfficeMbrByProdHIdAndApp;
-
     this.route.queryParams.subscribe(params => {
       if (params["prodOfferingHId"] != null) {
         this.prodOfferingHId = params["prodOfferingHId"];
@@ -71,8 +63,8 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewProductOfferingMainInformation.json";
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
-    var obj = { RefReasonTypeCode: CommonConstant.RefReasonTypeCodeProdDeactivate };
-    await this.http.post(this.getValueReasonModel, obj).toPromise().then(
+    var obj: ReqGetByTypeCodeObj = { RefReasonTypeCode: CommonConstant.RefReasonTypeCodeProdDeactivate };
+    await this.http.post(URLConstant.GetListActiveRefReason, obj).toPromise().then(
       (response) => {
         if (response['ReturnObject'].length > 0) {
           this.allRefReasonMethod = response['ReturnObject'];
@@ -82,7 +74,7 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
 
     this.ProdOfferingBranchMemObj = new RefProductOfferingBrancMbrObj
     this.ProdOfferingBranchMemObj.ProdOfferingHId = this.prodOfferingHId;
-    this.http.post(this.ProdOfferingBranchUrl, this.ProdOfferingBranchMemObj).subscribe(
+    this.http.post(URLConstant.GetListProdOfferingBranchOfficeMbrByProdHIdAndApp, this.ProdOfferingBranchMemObj).subscribe(
       response => {
         if (response['ReturnObject'].length > 0) {
           this.OfficeList = response['ReturnObject'];
@@ -133,7 +125,7 @@ export class ProductOfferingDeactivateEditComponent implements OnInit {
     this.prodOfferingHDeactivateObj.ProdOfferingHId = this.prodOfferingHId;
     this.prodOfferingHDeactivateObj.RowVersion = "";
     this.prodOfferingHDeactivateObj.RequestRFAObj = this.ApprovalCreateOutput;
-    this.http.post(this.editUrl, this.prodOfferingHDeactivateObj).subscribe(
+    this.http.post(URLConstant.RequestOfferingDeactivationNew, this.prodOfferingHDeactivateObj).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);
         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.PRODUCT_OFFERING_DEACTIVATE], {});

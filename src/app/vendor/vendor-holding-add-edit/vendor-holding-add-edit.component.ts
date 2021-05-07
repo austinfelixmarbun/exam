@@ -12,6 +12,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericObj} from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
@@ -177,7 +178,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
             } else {
               this.RsvField = CommonConstant.CustTypePersonal
             }
-          }else{
+          } else {
             if (this.VendorForm.controls.MrVendorTypeCode.value == "C") {
               this.RsvField = CommonConstant.CustTypeCompany
             } else {
@@ -185,7 +186,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
             }
           }
 
-          var refMasterIdObj = {
+          let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
             MappingCode: this.RsvField,
           }
@@ -322,9 +323,9 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorHoldingObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
         this.vendorService.EditVendorHolding(this.vendorHoldingObj).subscribe(
-          (response : GenericObj) => {
+          (response: GenericObj) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HOLDING_REG],{ "VendorId": response.Id, "mode": 'edit' });
+            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HOLDING_REG], { "VendorId": response.Id, "mode": 'edit' });
           });
       } else {
         this.vendorHoldingObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
@@ -332,7 +333,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorService.AddVendorHolding(this.vendorHoldingObj).subscribe(
           (response: GenericObj) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HOLDING_REG],{ "VendorId": response.Id });
+            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HOLDING_REG], { "VendorId": response.Id });
           });
       }
     }
@@ -340,9 +341,9 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
   Back() {
     if (this.mode == "edit") {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_HOLDING_REG],{ "VendorId": this.VendorId, "mode": 'edit' });
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HOLDING_REG], { "VendorId": this.VendorId, "mode": 'edit' });
     } else {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "MrVendorCategoryCode": this.MrVendorCategoryCode });
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
 
   }
@@ -380,7 +381,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.updateValueAndValidityForm();
     }
 
-    var refMasterIdObj = {
+    let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
       MappingCode: this.RsvField,
     }
@@ -388,11 +389,11 @@ export class VendorHoldingAddEditComponent implements OnInit {
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {
-          if(this.mode!="edit"){
+          if (this.mode != "edit") {
             this.VendorForm.patchValue({
               MrIdTypeCode: this.itemIdType[0].Key
             });
-          }else{
+          } else {
             this.VendorForm.patchValue({
               MrIdTypeCode: this.result.VendorObj.MrIdTypeCode
             });

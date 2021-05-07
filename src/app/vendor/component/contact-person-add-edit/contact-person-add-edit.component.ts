@@ -9,6 +9,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-contact-person-add-edit',
@@ -58,10 +59,10 @@ export class ContactPersonAddEditComponent implements OnInit {
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
 
-    var JobPosition = {
+    var JobPosition: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition,
-      RowVersion: ""
-    }
+      MappingCode: null
+    };
     this.http.post(URLConstant.GetListActiveRefMaster, JobPosition).subscribe(
       (response) => {
         this.itemJobPosition = response[CommonConstant.ReturnObj];
@@ -117,8 +118,8 @@ export class ContactPersonAddEditComponent implements OnInit {
     })
   }
 
-  getZipcode(ev){
-    this.http.post(URLConstant.GetZipcodeDataByZipCode, {Zipcode: ev}).toPromise().then(
+  getZipcode(ev : string){
+    this.http.post(URLConstant.GetZipcodeDataByZipCode, {Zipcode : ev}).toPromise().then(
       (response)=>{
           this.ContactPersonForm.patchValue({
             AreaCode1: response["AreaCode1"],

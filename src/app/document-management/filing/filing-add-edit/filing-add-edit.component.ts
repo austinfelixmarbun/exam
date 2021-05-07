@@ -9,6 +9,8 @@ import { CabinetWithListRackObj } from 'app/shared/model/document-management/Cab
 import { environment } from 'environments/environment';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { RackObj } from 'app/shared/model/document-management/RackObj.Model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-filing-add-edit',
@@ -61,10 +63,10 @@ export class FilingAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.RackCode);
-    this.http.post<RackObj>(environment.FoundationR3Url + "/DocManagement/GetRackByCode", {Code: this.RackCode}).subscribe(
+    let GetRackByCode: GenericObj = new GenericObj();
+    GetRackByCode.Code = this.RackCode;
+    this.http.post<RackObj>(URLConstant.GetRackByCode, GetRackByCode).subscribe(
       (response) => {
-        console.log(response);
         this.Rack = response;
       },
       (error) => {
@@ -72,7 +74,9 @@ export class FilingAddEditComponent implements OnInit {
       }
     );
 
-    this.http.post<RackWithListFilingObj>(environment.FoundationR3Url + "/DocManagement/GetRackAndListFilingByRackCode", this.rackWithListFilling).subscribe(
+    let GetRackAndListFilingByRackCode: GenericObj = new GenericObj();
+    GetRackAndListFilingByRackCode.Code = this.RackCode;
+    this.http.post<RackWithListFilingObj>(URLConstant.GetRackAndListFilingByRackCode, GetRackAndListFilingByRackCode).subscribe(
       (response) => {
         this.rackWithListFilling = response;
       },
@@ -81,7 +85,9 @@ export class FilingAddEditComponent implements OnInit {
       }
     );
 
-    this.http.post<CabinetWithListRackObj>(environment.FoundationR3Url + "/DocManagement/GetCabinetAndListRackByCabinetCode", {Code: this.Cabinet.CabinetCode}).subscribe(
+    let GetCabinetAndListRackByCabinetCode: GenericObj = new GenericObj();
+    GetCabinetAndListRackByCabinetCode.Code = this.Cabinet.CabinetCode;
+    this.http.post<CabinetWithListRackObj>(URLConstant.GetCabinetAndListRackByCabinetCode, GetCabinetAndListRackByCabinetCode).subscribe(
       (response) => {
         this.Cabinet = response;
       },
@@ -95,7 +101,9 @@ export class FilingAddEditComponent implements OnInit {
         this.title = "EDIT FILING";
         this.FillingForm.controls.FilingCode.disable();
         this.filing.FilingCode = this.FilingCode;
-        this.http.post<RackWithListFilingObj>(environment.FoundationR3Url + "/DocManagement/GetRackAndListFilingByFilingCode", this.filing).subscribe(
+        let GetRackAndListFilingByFilingCode: GenericObj = new GenericObj();
+        GetRackAndListFilingByFilingCode.Code = this.FilingCode;
+        this.http.post<RackWithListFilingObj>(URLConstant.GetRackAndListFilingByFilingCode, GetRackAndListFilingByFilingCode).subscribe(
           (response) => {
             this.rackWithListFilling = response;
             this.FillingForm.controls['FilingCode'].patchValue(response.ListFiling[0].FilingCode);
