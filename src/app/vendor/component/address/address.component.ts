@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { WizardComponent } from 'angular-archwizard';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-address',
@@ -16,6 +17,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 export class AddressComponent implements OnInit {
   inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
   vendorAddrObj: VendorAddrObj = new VendorAddrObj();
+  ReqVendorAddrObj : GenericObj = new GenericObj();
   mode: string = "add";
   @Input() objInput: any;
   result: any;
@@ -48,14 +50,14 @@ export class AddressComponent implements OnInit {
 
     if (this.objInput.Type == "Vendor") {
       this.getUrl = URLConstant.GetVendorAddrByVendorId;
-      this.vendorAddrObj.VendorId = this.objInput.VendorId;
-      this.vendorAddrObj.VendorEmpId = null;
-      this.vendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeLegal;
+      this.ReqVendorAddrObj.Id = this.objInput.VendorId;
+      this.ReqVendorAddrObj.Code = CommonConstant.AddrTypeLegal;
+      console.log(this.ReqVendorAddrObj.Id);
     } else if (this.objInput.Type == "VendorEmployee") {
       this.getUrl = URLConstant.GetVendorAddrByVendorEmpId;
-      this.vendorAddrObj.VendorId = null;
-      this.vendorAddrObj.VendorEmpId = this.objInput.VendorEmpId;
-      this.vendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeLegal;
+      this.ReqVendorAddrObj.Id = this.objInput.VendorEmpId;
+      this.ReqVendorAddrObj.Code = CommonConstant.AddrTypeLegal;
+      console.log(this.ReqVendorAddrObj.Id);
     }
 
     
@@ -135,8 +137,9 @@ export class AddressComponent implements OnInit {
   }
 
   refreshVendorAddress() {
-    this.http.post<VendorAddrObj>(this.getUrl, this.vendorAddrObj).subscribe(
+    this.http.post<VendorAddrObj>(this.getUrl, this.ReqVendorAddrObj).subscribe(
       (response) => {
+        console.log(response);
         this.vendorAddrObj = response;
         this.AddressForm.patchValue({
           MrAddrTypeCode: this.vendorAddrObj.MrAddrTypeCode,

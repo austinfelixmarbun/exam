@@ -293,7 +293,9 @@ export class VendorHoAddEditComponent implements OnInit {
   }
 
   getData() {
-    this.http.post(URLConstant.GetVendorAndVendorAddr, { VendorId: this.VendorId }).subscribe(
+    let ReqGetVendorAndVendorAddr : GenericObj = new GenericObj();
+    ReqGetVendorAndVendorAddr.Id = this.VendorId;
+    this.http.post(URLConstant.GetVendorAndVendorAddr, ReqGetVendorAndVendorAddr).subscribe(
       (response) => {
         this.result = response;
         this.setDropdown();
