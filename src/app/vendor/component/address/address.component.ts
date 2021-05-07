@@ -139,7 +139,6 @@ export class AddressComponent implements OnInit {
   refreshVendorAddress() {
     this.http.post<VendorAddrObj>(this.getUrl, this.ReqVendorAddrObj).subscribe(
       (response) => {
-        console.log(response);
         this.vendorAddrObj = response;
         this.AddressForm.patchValue({
           MrAddrTypeCode: this.vendorAddrObj.MrAddrTypeCode,
