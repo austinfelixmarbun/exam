@@ -97,6 +97,8 @@ export class SidebarComponent implements OnInit {
         //problem : ketika di 'click' halaman memasuki halaman /dashboard/dash-board terlebih dahulu
         this.router.navigateByUrl(NavigationConstant.DASHBOARD, { skipLocationChange: true }).then(() => {
         AdInsHelper.RedirectUrl(this.router,[ev.Path],this.genParam(ev.Params));
+        this.router.navigateByUrl("/dashboard/dash-board", { skipLocationChange: true }).then(() => {
+        AdInsHelper.RedirectUrl(this.router,[ev.Path], this.genParam(ev.Params) );
         });
     }
 

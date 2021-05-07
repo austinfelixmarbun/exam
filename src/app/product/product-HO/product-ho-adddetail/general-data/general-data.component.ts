@@ -9,7 +9,7 @@ import { environment } from 'environments/environment';
 import { RefProductDetailObj } from 'app/shared/model/RefProductDetailObj.Model';
 import { WizardComponent } from 'angular-archwizard';
 import { ListRefProductDetailObj } from 'app/shared/model/ListRefProductDetailObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';

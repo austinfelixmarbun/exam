@@ -2,7 +2,7 @@ export class RefIndustryTypeObj {
     RefIndustryTypeId: any;
     IndustryTypeCode: any;
     IndustryTypeName: any;
-    RefEconomicSectorId: any;
+    RefIndustryTypeCategoryId: any;
     LbppCode: any;
     IsActive: any;
     RowVersion: any;

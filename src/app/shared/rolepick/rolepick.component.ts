@@ -47,6 +47,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
 
           var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
           AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, response['Token']);
+          AdInsHelper.SetCookie(this.cookieService, "XSRF-TOKEN", response['Token']);
           AdInsHelper.SetCookie(this.cookieService, "BusinessDateRaw", formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US'));
           AdInsHelper.SetCookie(this.cookieService, "BusinessDate", DateParse);
           AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
@@ -70,6 +71,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
 
           var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
           AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, response['Token']);
+          AdInsHelper.SetCookie(this.cookieService, "XSRF-TOKEN", response['Token']);
           AdInsHelper.SetCookie(this.cookieService, "BusinessDateRaw", formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US'));
           AdInsHelper.SetCookie(this.cookieService, "BusinessDate", DateParse);
           AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));

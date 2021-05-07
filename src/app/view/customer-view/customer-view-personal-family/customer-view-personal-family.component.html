@@ -1,0 +1,21 @@
+<lib-ucSubsection [id]="'CustFamId'" [title]="'Family'" [panel]="'CustFamId'">
+</lib-ucSubsection>
+<div id="CustFamId">
+<table class="table table-responsive-md text-center table-hover">
+  <thead>
+    <tr class="table-header">
+      <th class="text-center"><span class="thead-header" name='CustNo' translate>CUSTOMER NO.</span></th>
+      <th class="text-left"><span class="thead-header" name='Name' translate>NAME</span></th>
+      <th class="text-left"><span class="thead-header" name='CustomerRelationship' translate>CUSTOMER RELATIONSHIP</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of CustFamilyList; let i = index">
+      <td class="text-center" style="color: blue; cursor: pointer; text-align: center;"><a
+          (click)="openView(item.FamilyId)">{{item.CustNo}}</a></td>
+      <td class="text-left">{{item.CustName}}</td>
+      <td class="text-left">{{item.MrCustRelationshipDesc}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

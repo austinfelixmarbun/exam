@@ -17,7 +17,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class RefIndustryTypeDetailComponent implements OnInit {
   refIndustryType: RefIndustryTypeObj;
-  economicSectorObj: any;
+  industryTypeCategoryObj: any;
   type: String = 'add';
   RefIndustryTypeId: Number;
   resultData: any;
@@ -27,7 +27,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     RefIndustryTypeId: [0, [Validators.required]],
     IndustryTypeCode: ['', [Validators.required]],
     IndustryTypeName: ['', [Validators.required]],
-    RefEconomicSectorId: ['', [Validators.required]],
+    RefIndustryTypeCategoryId: ['', [Validators.required]],
     IsActive: [true],
     RowVersion: [""]
   });
@@ -38,7 +38,8 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private service: NGXToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private http: HttpClient
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
@@ -51,11 +52,16 @@ export class RefIndustryTypeDetailComponent implements OnInit {
   }
 
 
-  ngOnInit() {
+  async ngOnInit() {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
     this.inputLookupObj.pagingJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
     this.inputLookupObj.genericJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
+    this.inputLookupObj.urlJson = "./assets/lookup/lookupIndustryTypeCategory.json";
+    this.inputLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
+    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupObj.pagingJson = "./assets/lookup/lookupIndustryTypeCategory.json";
+    this.inputLookupObj.genericJson = "./assets/clookup/lookupIndustryTypeCategory.json";
 
     if (this.type == 'edit') {
       this.refIndustryType = new RefIndustryTypeObj();
@@ -84,12 +90,36 @@ export class RefIndustryTypeDetailComponent implements OnInit {
           this.inputLookupObj.nameSelect = this.economicSectorObj.EconomicSectorName;
         }
       );
+
+      await this.http.post(URLConstant.GetRefIndustryTypeById, this.refIndustryType).toPromise().then(
+        response => {
+          this.resultData = response;
+          this.industryTypeCategoryObj = this.resultData;
+          this.RefIndustryTypeForm.patchValue({
+            RefIndustryTypeId: this.resultData.RefIndustryTypeId,
+            IndustryTypeCode: this.resultData.IndustryTypeCode,
+            IndustryTypeName: this.resultData.IndustryTypeName,
+            RefIndustryTypeCategoryId: this.resultData.RefIndustryTypeCategoryId,
+            IsActive: this.resultData.IsActive,
+            RowVersion: this.resultData.RowVersion
+          });
+        });
+
+        await this.http.post(URLConstant.GetIndustryTypeCategoryByIndustryTypeCategoryId, this.industryTypeCategoryObj).toPromise().then(
+          response => {
+            this.industryTypeCategoryObj = response;
+           
+          this.inputLookupObj.nameSelect = this.industryTypeCategoryObj.RefIndustryTypeCategoryName;
+           
+          }); 
+    }else{
+      this.checkIsAutoFormNoFromSetting('IT');
     }
   }
 
   getLookupResponse(e) {
     this.RefIndustryTypeForm.patchValue({
-      RefEconomicSectorId: e.RefEconomicSectorId,
+      RefIndustryTypeCategoryId: e.RefIndustryTypeCategoryId,
     });
   }
 
@@ -123,4 +153,28 @@ export class RefIndustryTypeDetailComponent implements OnInit {
       );
     }
   }
+
+  //check is automatic/not form no 4
+  isAuto: boolean = false;
+  checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
+    var generalSettingObj = {
+      GsCode: "MASTER_AUTO_GNRT_CODE"
+    }
+    var result: any;
+    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+      (response) => {
+        result = response;
+
+        if (result.GsValue != undefined && result.GsValue != "") {
+          if (result.GsValue.split(';').find(x => x == msAutoGenCode)) {
+            this.isAuto = true;
+            this.RefIndustryTypeForm.patchValue({
+              IndustryTypeCode: '-'
+            });
+          }
+        }
+      });
+  }
+  //check is automatic/not form no 4
+
 }

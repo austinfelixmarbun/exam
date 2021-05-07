@@ -54,10 +54,10 @@ import { ProductHoReviewComponent } from './product-HO/product-ho-review/product
 import { ProdOfferingReviewComponent } from './prod-offering/prod-offering-review/prod-offering-review.component';
 import { ProdOfferingReviewPagingComponent } from './prod-offering/prod-offering-review-paging/prod-offering-review-paging.component';
 import { ProductHoReviewPagingComponent } from './product-HO/product-ho-review-paging/product-ho-review-paging.component';
-  import { UcapprovalcreateModule } from '@adins/Ucapprovalcreate';
-  import { UcapprovalR3Module } from '@adins/ucapproval-r3';
-  import { UcapprovalHistoryModule } from "@adins/ucapproval-history";
-  import { UcapprovalgeneralinfoModule } from "@adins/ucapprovalgeneralinfo";
+import { UcapprovalcreateModule } from '@adins/Ucapprovalcreate';
+import { UcapprovalR3Module } from '@adins/ucapproval-r3';
+import { UcapprovalHistoryModule } from "@adins/ucapproval-history";
+import { UcapprovalgeneralinfoModule } from "@adins/ucapprovalgeneralinfo";
    
 @NgModule({
   imports: [

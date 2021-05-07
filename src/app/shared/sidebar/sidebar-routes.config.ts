@@ -44,6 +44,29 @@ export const ROUTES: RouteInfo[] = [
       { Path: NavigationConstant.SYSTEM_SETTING_ATTR_PAGING, Title: 'Attribute Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
       { Path: NavigationConstant.CS_COA_SCHM_PAGING, Title: 'COA Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.CS_COA_PAGING, Title: 'COA', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: "/CommonSetting/AppSource/Paging", Title: "Application Source", Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: '/CommonSetting/GeneralSetting', Title: 'General Setting', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] , Params : [] },
+      { Path: '/CommonSetting/Holiday', Title: 'Holiday Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [] , Params : [] },
+      { Path: '/CommonSetting/WorkingHour', Title: 'Working Hour', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/Bank/Paging', Title: 'Bank', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/RefProvince/Paging', Title: 'Province', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/Zipcode/Paging', Title: 'Zipcode', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/Master', Title: 'Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/RefStatus/Paging', Title: 'Status', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/IndustryType/Paging', Title: 'Industry Type', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/IndustryTypeCategory/Paging', Title: 'Industry Type Category', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/EconomicSector/Paging', Title: 'Economic Sector', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/Currency/Paging', Title: 'Currency', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/Profession/Paging', Title: 'Profession', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/Reason/Paging', Title: 'Reason', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/paymentalloc/paging', Title: 'Payment Allocation', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: '/CommonSetting/paymentallocgrp/paging', Title: 'Payment Allocation Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: '/SystemSetting/Notification', Title: 'Notification', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/SystemSetting/NotificationApproval', Title: 'Notification Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/SystemSetting/RefForm/Paging', Title: 'Ref Form', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/SystemSetting/Attribute/Paging', Title: 'Attribute Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params : []  },
+      { Path: '/CommonSetting/coascheme/paging', Title: 'COA Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: '/CommonSetting/coa/paging', Title: 'COA', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
     ], Params : [] 
   },
   {
@@ -75,7 +98,54 @@ export const ROUTES: RouteInfo[] = [
           { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Scheme" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER }] },
           { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER }] },
         ], Params : [] 
-      },{
+      }
+      ,{
+        Path: "",
+        Title: "Grading",
+        Icon: "",
+        Class: "has-sub",
+        Badge: "",
+        BadgeClass: "",
+        IsExternalLink: false,
+        Submenu: [
+          {
+            Path: "/Vendor/VendorGrading/Request/Paging",
+            Title: "Vendor Grading Request",
+            Icon: "",
+            Class: "",
+            Badge: "",
+            BadgeClass: "",
+            IsExternalLink: false,
+            Submenu: [],
+            Params: [],
+          }
+          ,
+          {
+            Path: "/Vendor/VendorGrading/Approval/Paging",
+            Title: "Vendor Grading Approval",
+            Icon: "",
+            Class: "",
+            Badge: "",
+            BadgeClass: "",
+            IsExternalLink: false,
+            Submenu: [],
+            Params: [],
+          },
+          {
+            Path: "/Vendor/VendorGrading/Inquiry",
+            Title: "Vendor Grading Inquiry",
+            Icon: "",
+            Class: "",
+            Badge: "",
+            BadgeClass: "",
+            IsExternalLink: false,
+            Submenu: [],
+            Params: [],
+          }
+        ],
+        Params: [],
+      }
+      ,{
         Path: '', Title: 'Asset Insurance', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
         Submenu: [
           

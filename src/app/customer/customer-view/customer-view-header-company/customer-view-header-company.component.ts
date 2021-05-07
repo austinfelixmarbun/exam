@@ -40,7 +40,7 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
       else if (params["CustId"] != null) {
         this.IdCust = params["CustId"];
       }
-      this.custUrl = environment.FoundationR3Web + '/View/Customer/PersonalDetail?CustId=' + this.IdCust;
+      this.custUrl = environment.FoundationR3Web + '/View/Customer/CoyDetail?CustId=' + this.IdCust;
     });
   }
   ngOnInit() {

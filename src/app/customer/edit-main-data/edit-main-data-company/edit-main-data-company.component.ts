@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ApplicationRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CustObj } from 'app/shared/model/CustObj.Model';
@@ -15,6 +15,10 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { map, mergeMap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
+import { CustThirdPartyCheckingObj } from 'app/shared/model/CustThirdPartyCheckingObj.Model';
 
 @Component({
   selector: 'app-edit-main-data-company',
@@ -22,7 +26,7 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
   styleUrls: []
 })
 export class EditMainDataCompanyComponent implements OnInit {
-  
+
   tempCustObj: any;
   tempCustModel: any;
   custCompanyObj: any;
@@ -31,18 +35,51 @@ export class EditMainDataCompanyComponent implements OnInit {
 
   custObj: CustObj = new CustObj();
 
+  tempFraud: any;
+  custObj: CustObj
+  CustNo:string;
   CustId: number;
-  VipNotesRequired : boolean;
-
+  tempCustAddr: any;
+  VipNotesRequired: boolean;
+  CheckCustFraudTempRegByCustNo: string;
   From: string;
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
   UcAddressObj: UcAddressObj = new UcAddressObj();
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService) {
+  editCustUrl: string;
+  editCustCompanyUrl: string;
+  getCustByCustIdUrl: string;
+  getListActiveRefMasterUrl: string;
+  getCustCompanyByCustIdUrl: string;
+  GetListActiveRefMasterWithMappingCodeAllUrl: string;
+  inputFieldObj: InputFieldObj;
+  inputAddressObj: InputAddressObj;
+  UcAddressObj: UcAddressObj;
+  closeResult;
+  CustThirdPartyChecking: CustThirdPartyCheckingObj = new CustThirdPartyCheckingObj();
+  IsCustThirdPartyCheck: boolean = false;
+  MaxDaysCustThirdPartyCheck: number = 0;
+  LastHit = {
+    PEFINDO: 'Not Hit Yet',
+    SLIK: 'Not Hit Yet',
+  };
+
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService, private modalService: NgbModal, private ref: ApplicationRef) {
+    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
+    this.getCustCompanyByCustIdUrl = URLConstant.GetCustCompanyByCustId;
+    this.CheckCustFraudTempRegByCustNo = URLConstant.CheckCustFraudTempRegByCustNo;
+    this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
+    this.editCustUrl = URLConstant.EditCust;
+    this.editCustCompanyUrl = URLConstant.EditCustCompany;
+    this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
+      }
+      if (params["CustNo"] != null) {
+        this.CustNo = params["CustNo"];
       }
       if (params["From"] != null) {
         this.From = params["From"];
@@ -55,17 +92,20 @@ export class EditMainDataCompanyComponent implements OnInit {
     MrCompanyTypeCode: ['', [Validators.required]],
     TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     IsVip : [true],
+    TaxIdNo: [''],
+    IsVip: [true],
     IsAffiliateWithMf: [true],
-    VipNotes : ['']
+    VipNotes: ['']
   });
 
-  ngOnInit() {
+  async ngOnInit() {
     this.inputFieldObj = new InputFieldObj();
+    this.UcAddressObj = new UcAddressObj();
     this.inputFieldObj.inputLookupObj = new InputLookupObj();
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.default = UcAddressObj;
+    this.inputAddressObj.default = this.UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
 
@@ -87,7 +127,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
         this.tempCompanyTypeCode = response[CommonConstant.ReturnObj];
-        if(this.tempCompanyTypeCode.length > 0){
+        if (this.tempCompanyTypeCode.length > 0) {
           this.CustomerCompanyForm.patchValue({
             MrCompanyTypeCode: this.tempCompanyTypeCode[0].Key
           });
@@ -99,14 +139,15 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.custCompanyObj.CustId = this.CustId;
 
     this.http.post(URLConstant.GetCustByCustId, {Id : this.CustId}).subscribe(
+    await this.http.post(this.getCustByCustIdUrl, this.custObj).subscribe(
       (response) => {
         this.tempCustObj = response;
         this.CustomerCompanyForm.patchValue({
           CustName: this.tempCustObj.CustName,
           TaxIdNo: this.tempCustObj.TaxIdNo,
-          CustModel : this.tempCustObj.MrCustModelCode,
-          MrCustModelCode: this.tempCustObj.MrCustModelCode, 
-          IsVip :this.tempCustObj.IsVip,
+          CustModel: this.tempCustObj.MrCustModelCode,
+          MrCustModelCode: this.tempCustObj.MrCustModelCode,
+          IsVip: this.tempCustObj.IsVip,
           IsAffiliateWithMf: this.tempCustObj.IsAffiliateWithMf,
           VipNotes :this.tempCustObj.VipNotes,
         });
@@ -115,12 +156,15 @@ export class EditMainDataCompanyComponent implements OnInit {
         this.custObj.IsShareholder = this.tempCustObj.IsShareholder;
         this.custObj.IsCustomer = this.tempCustObj.IsCustomer;
         if(this.tempCustObj.VipNotes!= null){
+          VipNotes: this.tempCustObj.VipNotes
+        });
+        if (this.tempCustObj.VipNotes != null) {
           this.VipNotesRequired = true;
-        }else{
+        } else {
           this.VipNotesRequired = false;
         }
-        if(this.tempCustObj.IsVip==false){ 
-        this.CustomerCompanyForm.controls.VipNotes.disable();
+        if (this.tempCustObj.IsVip == false) {
+          this.CustomerCompanyForm.controls.VipNotes.disable();
         }
         this.custObj.RowVersion = this.tempCustObj.RowVersion;
         this.custObj.MrCustTypeCode = this.tempCustObj.MrCustTypeCode;
@@ -143,6 +187,7 @@ export class EditMainDataCompanyComponent implements OnInit {
             this.inputAddressObj.inputField = this.inputFieldObj;
             this.custObj.CustAddr.CustAddrId = response.CustAddrId;
             this.custObj.CustAddr.RowVersion = response.RowVersion;
+            this.tempCustAddr = response;
           }
         );
       }
@@ -155,8 +200,97 @@ export class EditMainDataCompanyComponent implements OnInit {
         });
       }
     );
+
+    await this.http.post<any>(this.CheckCustFraudTempRegByCustNo, { CustNo: this.CustNo }).subscribe(
+      (response) => {
+        this.tempFraud = response["ReturnObject"];
+        this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_IS_CUST_THIRD_PARTY_CHECK }).pipe(
+          map((response) => {
+            return response
+          }),
+          mergeMap((response) => {
+            if (response["GsValue"] == "1") {
+              this.IsCustThirdPartyCheck = true;
+              let temp = this.tempFraud
+              if (temp === null) {
+                let addCustTemp = this.http.post(URLConstant.AddCustFraudTempReg, { MrCustTypeCode: CommonConstant.CustTypeCompany, CustNo: this.CustNo });
+                let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
+                return forkJoin([addCustTemp, getMaxDays]);
+              }
+              else {
+                let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
+                this.CustThirdPartyChecking.CustTempNo = temp["CustTempNo"];
+                this.CustThirdPartyChecking.MrCustTypeCode = temp["CustType"];
+                return forkJoin([getMaxDays]);
+              }
+            }
+            else {
+              return new Array();
+            }
+          })
+        ).subscribe(
+          (response) => {
+            if(response.length == 1){
+              this.MaxDaysCustThirdPartyCheck = response[0]["GsValue"];
+            }
+            else if (response.length > 1) {
+              this.CustThirdPartyChecking.CustTempNo = response[0]["CustTempNo"];
+              this.CustThirdPartyChecking.MrCustTypeCode = response[0]["CustType"];
+              this.MaxDaysCustThirdPartyCheck = response[1]["GsValue"];
+            }
+            this.GetFraudLastHit();
+          }
+        );
+      }
+    );
+    
   }
 
+  async GetFraudLastHit(){
+    this.CustThirdPartyChecking.CustName = this.CustomerCompanyForm.controls.CustName.value;
+    this.CustThirdPartyChecking.MrIdTypeCode = CommonConstant.CustTypeCompany;
+    this.CustThirdPartyChecking.IdNo = "";
+    this.CustThirdPartyChecking.MobilePhnNo = "";
+    this.CustThirdPartyChecking.TaxIdNo = this.CustomerCompanyForm.controls.TaxIdNo.value;
+    this.CustThirdPartyChecking.FamilyCardNo = "";
+
+    let pefindoUrl = this.http.post(URLConstant.GetCustFraudPefindoReqLogByCustTempNo, this.CustThirdPartyChecking);
+    let slikUrl = this.http.post(URLConstant.GetCustFraudSLIKRequestByCustTempNo, this.CustThirdPartyChecking);
+    var currentDate = new Date();
+    await forkJoin([pefindoUrl, slikUrl]).toPromise().then(
+      (response)=>{
+        for(let i=0;i<2;i++){
+          if(response[i]["StartDt"] != null){
+          var lastHitDate = new Date(response[i]["StartDt"]);
+          var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+                var currentLastHitDate = new Date(response[i]["StartDt"]);
+                var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+          
+                switch (i) {
+                  case 0:
+                    this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                    break;
+        
+                  case 1:
+                    this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                    break;
+
+                  default:
+                    break;
+                }
+          }
+        }
+        this.ref.tick();
+      });
+}
+
+  // checkCustFraudTemp() {
+  //   this.http.post<any>(this.CheckCustFraudTempRegByCustNo, { CustNo: this.CustNo }).subscribe(
+  //     (response) => {
+  //       this.tempFraud = response["ReturnObject"];
+  //     }
+  //   );
+  // }
   SaveValue() {
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj = this.tempCustCompanyObj;
@@ -167,15 +301,17 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.custObj.MrCustModelCode = this.CustomerCompanyForm.controls["CustModel"].value;
     this.custCompanyObj.MrCompanyTypeCode = this.CustomerCompanyForm.controls["MrCompanyTypeCode"].value;
     this.custObj.IsVip = this.CustomerCompanyForm.controls["IsVip"].value;
-    this.custObj.IsAffiliateWithMf = this.CustomerCompanyForm.controls["IsAffiliateWithMf"].value; 
-    if(this.custObj.IsVip==true){
+    this.custObj.IsAffiliateWithMf = this.CustomerCompanyForm.controls["IsAffiliateWithMf"].value;
+    if (this.custObj.IsVip == true) {
       this.custObj.VipNotes = this.CustomerCompanyForm.controls["VipNotes"].value;
-    }else{
+    } else {
       this.custObj.VipNotes = null;
     }
 
     var formValue = this.CustomerCompanyForm.value;
     this.custObj.CustAddr.CustId = this.CustId;
+    this.custObj.CustAddr = new CustAddrObj();
+    this.custObj.CustAddr = this.tempCustAddr;
     this.custObj.CustAddr.Addr = formValue["UcAddress"]["Addr"];
     this.custObj.CustAddr.AreaCode1 = formValue["UcAddress"]["AreaCode1"];
     this.custObj.CustAddr.AreaCode2 = formValue["UcAddress"]["AreaCode2"];
@@ -206,6 +342,23 @@ export class EditMainDataCompanyComponent implements OnInit {
         else {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_PAGE],{ "IdCust": this.CustId, From:'CustPaging' });
         }
+        this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
+          (response) => {
+            this.toastr.successMessage(response["Message"]);
+            if (this.From == "EditMainData") {
+              AdInsHelper.RedirectUrl(this.router, ["/Customer/CustomerCompany/Page"], { "IdCust": this.CustId, Page: "Edit", From: 'EditMainData' });
+            }
+            else if (this.From == "CustShareholder") {
+              AdInsHelper.RedirectUrl(this.router, ["/Customer/CustomerCompany/Page"], { "IdCust": this.CustId, Page: "Edit", From: 'CustShareholder' });
+            }
+            else if (this.From == "CustGuarantor") {
+              AdInsHelper.RedirectUrl(this.router, ["/Customer/CustomerCompany/Page"], { "IdCust": this.CustId, Page: "Edit", From: 'CustGuarantor' });
+            }
+            else {
+              AdInsHelper.RedirectUrl(this.router, ["/Customer/CustomerCompany/Page"], { "IdCust": this.CustId, From: 'CustPaging' });
+            }
+          }
+        );
       }
     );
   }
@@ -222,6 +375,16 @@ export class EditMainDataCompanyComponent implements OnInit {
     }
     else if(this.From == "CustGuarantor"){
       AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_GUARANTOR_PAGING],{});
+      AdInsHelper.RedirectUrl(this.router, ["/Customer/Paging"], {});
+    }
+    else if (this.From == "EditMainData") {
+      AdInsHelper.RedirectUrl(this.router, ["/Customer/EditMainData/Paging"], {});
+    }
+    else if (this.From == "CustShareholder") {
+      AdInsHelper.RedirectUrl(this.router, ["/Customer/CustShareholder/Paging"], {});
+    }
+    else if (this.From == "CustGuarantor") {
+      AdInsHelper.RedirectUrl(this.router, ["/Customer/CustGuarantor/Paging"], {});
     }
   }
   checkState() {
@@ -232,13 +395,126 @@ export class EditMainDataCompanyComponent implements OnInit {
       this.CustomerCompanyForm.controls.VipNotes.disable();
       this.VipNotesRequired = false;
       this.CustomerCompanyForm.controls.IdExpiredDt.clearValidators();
-     
+
     } else {
       this.CustomerCompanyForm.controls.VipNotes.enable();
       this.CustomerCompanyForm.controls.VipNotes.setValidators(Validators.required);
       this.VipNotesRequired = true;
-       
+
     }
     this.CustomerCompanyForm.controls.VipNotes.updateValueAndValidity();
+  }
+
+  //POP UP
+  openPopUp(content, contentString = "") {
+    var url = "";
+    var urlAdd = "";
+    this.CustThirdPartyChecking.CustName = this.CustomerCompanyForm.controls.CustName.value;
+    this.CustThirdPartyChecking.MrIdTypeCode = CommonConstant.CustTypeCompany;
+    this.CustThirdPartyChecking.IdNo = "";
+    this.CustThirdPartyChecking.MobilePhnNo = "";
+    this.CustThirdPartyChecking.TaxIdNo = this.CustomerCompanyForm.controls.TaxIdNo.value;
+    this.CustThirdPartyChecking.FamilyCardNo = "";
+    switch (contentString) {
+      case "popUpPefindo":
+        url = URLConstant.GetCustFraudPefindoReqLogByCustTempNo;
+        urlAdd = URLConstant.AddCustFraudPefindoReqLog;
+        break;
+
+      case "popUpSlik":
+        url = URLConstant.GetCustFraudSLIKRequestByCustTempNo;
+        urlAdd = URLConstant.AddCustFraudSLIKRequest;
+        break;
+
+      default:
+        break;
+    }
+    if (url != "") {
+      this.http.post(url, this.CustThirdPartyChecking).toPromise().then(
+        (response) => {
+          var currentDate = new Date();
+          if (response["TrxNo"]) {
+            if(response["StartDt"] != null){
+            var lastHitDate = new Date(response["StartDt"]);
+            var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+            if (dateDiff > this.MaxDaysCustThirdPartyCheck) {
+              this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
+                (response) => {
+                  var currentLastHitDate = new Date(response["StartDt"]);
+                  var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+                  switch (contentString) {
+                    case "popUpPefindo":
+                      this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                      break;
+
+                    case "popUpSlik":
+                      this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                      break;
+
+                    default:
+                      break;
+                  }
+                }
+              ).catch(
+                (error) => {
+                  console.log(error);
+                }
+              );
+            }
+          }
+          }
+          else {
+            this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
+              (response) => {
+                var currentLastHitDate = new Date(response["StartDt"]);
+                var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+                switch (contentString) {
+                  case "popUpPefindo":
+                    this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                    break;
+
+                  case "popUpSlik":
+                    this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
+                    break;
+
+                  default:
+                    break;
+                }
+              }
+            ).catch(
+              (error) => {
+                console.log(error);
+              }
+            );
+          }
+        }
+      ).catch(
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+    this.Open(content);
+  }
+
+  Open(contentCrossApp) {
+    this.modalService.open(contentCrossApp).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+  }
+
+  private getDismissReason(reason): string {
+    if (reason === 1) {
+      return 'by pressing ESC';
+    } else if (reason === 0) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }

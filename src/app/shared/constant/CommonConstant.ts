@@ -79,6 +79,17 @@ export class CommonConstant {
     public static TITLE_AGENCY_COMPANY = "Agency Company";
     public static TITLE_AGENCY_PERSONAL = "Agency Personal";
 
+    // VENDOR TYPE
+    public static VENDOR_TYPE_COMPANY = "C";
+    public static VENDOR_TYPE_PERSONAL = "P";
+
+    //VENDOR GRADING PROCESS
+    public static VENDOR_GRADING_STATUS_REQ = "REQ";
+    public static VENDOR_GRADING_STATUS_RJC = "RJC";
+    public static VENDOR_GRADING_STATUS_APV = "APV";
+    public static VENDOR_GRADING_STATUS_EXE = "EXE";
+    public static VENDOR_GRADING_APV = "VENDOR_GRADING_APV";
+
     // NOTIFICATION METHOD
     public static NotificationMethodIntLink = "INT_LINK";
     public static NotificationMethodExtLink = "EXT_LINK";
@@ -150,6 +161,9 @@ export class CommonConstant {
     public static RefMasterTypeCodeEntityTypeBankAcc = "BANK_ACC";
     public static RefMasterTypeCodeEntityTypeSuppl = "PAY_ALLOC_COA_SUPPL";
 
+
+    public static RefMasterTypeCodeAppSrcType = "APP_SRC_TYPE";
+    
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
     
@@ -232,6 +246,7 @@ export class CommonConstant {
 
     //ATTR GROUP
 
+    public static RefMasterTypeCustAsset = "CUST_ASSET_TYPE";
     //DMS
     public static DmsKey = "PHL7KV8RR0VG30K4";
     public static DmsIV = "0G7HFV96AVWXUQ51";
@@ -255,9 +270,14 @@ export class CommonConstant {
     public static SCHM_CODE_APV_HO_DEACT_SCHM = "APV_HO_DEACT_SCHM";
     public static SCHM_CODE_APV_OFR_ACT_SCHM = "APV_OFR_ACT_SCHM";
     public static SCHM_CODE_APV_OFR_DEACT_SCHM = "APV_OFR_DEACT_SCHM";
+    public static VENDOR_GRD_SUPPL_BRC_SCHM = "VENDOR_GRD_SUPPL_BRC_SCHM"
+    
+
     public static CAT_CODE_PRD_HO_APV = "PRD_HO_APV";
     public static CAT_CODE_PRD_HO_DEACT_APV = "PRD_HO_DEACT_APV";
     public static CAT_CODE_PRD_OFR_APV = "PRD_OFR_APV";
+    public static CAT_CODE_VENDOR_GRADING_APV = "VENDOR_GRADING_APV";
+    
     public static CAT_CODE_PRD_OFR_DEACT_APV = "PRD_OFR_DEACT_APV";
     public static PRD_HO_APV_TYPE = "PROD_HO_APV_TYPE";
     public static PRD_HO_DEACT_APV_TYPE = "PROD_HO_DEACT_APV_TYPE";
@@ -285,4 +305,8 @@ export class CommonConstant {
     public static ConfigCodeIsUseDms = "IS_USE_DMS";
 
     public static JOURNAL_STAT_EXE_DESCR = "EXECUTED";
+    public static PRD_OFR_DEACT_APV_TYPE = "PROD_OFR_DEACT_APV_TYPE";  
+    public static VENDOR_GRD_SUPPL_BRC_APV_TYPE = "VENDOR_GRD_SUPPL_BRC_APV_TYPE"; 
+    public static GS_IS_CUST_THIRD_PARTY_CHECK = "IS_CUST_THIRD_PARTY_CHECK";
+    public static GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK = "MAX_DAYS_CUST_THIRD_PARTY_CHECK";
 }

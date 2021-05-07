@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { environment } from 'environments/environment';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-customer-view-coy-financial',
@@ -14,20 +12,19 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class CustomerViewCoyFinancialComponent implements OnInit {
   CustId: number;
+  TitleSuffix:string = '';
+  IsShowDetail:boolean = false;
   GetCBAForCustFinDataByCustIdUrl = URLConstant.GetCBAForCustFinDataByCustId;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  ListCustCoyFinData: Array<object> = [];
+  CustCoyFinData: object;
   responseCBAObj: any;
+  currentCustFinDataIndex: number;
 
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router, ) {
-  }
-
-  ngOnInit() {
-    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewCustCoyFinData.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
-    
+    private router: Router) 
+  {
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
         this.CustId = params['CustId'];
@@ -35,6 +32,12 @@ export class CustomerViewCoyFinancialComponent implements OnInit {
     });
     var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetCBAForCustFinDataByCustIdUrl, { Id: this.CustId }).subscribe(
+  }
+
+  ngOnInit() {    
+    this.getListCustCoyFinData();
+    
+    this.http.post(this.GetCBAForCustFinDataByCustIdUrl, { "CustId": this.CustId }).subscribe(
       response => {
         this.responseCBAObj = response['ListCBAForCustFinData'];
       },
@@ -42,5 +45,28 @@ export class CustomerViewCoyFinancialComponent implements OnInit {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
+  }
+
+  async getListCustCoyFinData()
+  {
+    this.ListCustCoyFinData = [];
+    await this.http.post(URLConstant.GetListCustCompanyFinDataByCustId,  {'CustId': this.CustId}).toPromise().then((response) => {
+      this.ListCustCoyFinData = response['ListCustCompanyFinData'];
+    })
+  }
+
+  showDetailCustFinData(index:number){
+    let datePipe = new DatePipe("en-US");
+    this.currentCustFinDataIndex = index;
+    this.CustCoyFinData = this.ListCustCoyFinData[this.currentCustFinDataIndex];
+    this.TitleSuffix = 'Date as of '+datePipe.transform(this.CustCoyFinData['DateAsOf'], 'dd-MMM-yyyy')
+    this.IsShowDetail = true;
+  }
+  
+  hideDetail()
+  {
+    this.TitleSuffix = '';
+    this.IsShowDetail = false;
+    this.CustCoyFinData = {};
   }
 }

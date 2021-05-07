@@ -2,6 +2,7 @@ import { environment } from "environments/environment";
 import { URLConstant } from "../constant/URLConstant";
 import { NavigationConstant } from "../NavigationConstant";
 import { CriteriaObj } from "./CriteriaObj.Model";
+import { CriteriaObj } from "./CriteriaObj.model";
 
 export class UcPagingObj {
     _url: string;

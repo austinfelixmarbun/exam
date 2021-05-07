@@ -24,5 +24,6 @@ export class OfficeComponent implements OnInit {
     ];
     this.inputPagingObj.isSearched = true;
     this.inputPagingObj.delay = 200;
+
   }
 }

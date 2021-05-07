@@ -40,6 +40,7 @@ export class CustomerCompanyPageComponent implements OnInit {
 
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,  private cookieService: CookieService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,private cookieService: CookieService) {
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -93,6 +94,19 @@ export class CustomerCompanyPageComponent implements OnInit {
           }
         );
       }
+      await this.http.post(URLConstant.GetCustByCustId, custObj).toPromise().then(
+        (response: any) => {
+          let  currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+          this.dmsObj = new DMSObj();
+          this.dmsObj.User = currentUserContext.UserName;
+          this.dmsObj.Role = currentUserContext.RoleCode;
+          this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
+          this.dmsObj.MetadataParent = null;
+          this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, response["CustNo"]));
+          this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
+      
+        }
+      );
       this.stepper = new Stepper(document.querySelector('#stepper1'), {
         linear: false,
         animation: true
@@ -122,14 +136,17 @@ export class CustomerCompanyPageComponent implements OnInit {
     if (type == "Financial") {
       this.CustStepIndex = 6;
     }
-    if (type == "Legal") {
+    if (type == "CustAsset") {
       this.CustStepIndex = 7;
     }
-    if (type == "UploadData") {
+    if (type == "Legal") {
       this.CustStepIndex = 8;
     }
-    if (type == "CustAttr") {
+    if (type == "UploadData") {
       this.CustStepIndex = 9;
+    }
+    if (type == "CustAttr") {
+      this.CustStepIndex = 10;
     }
 
     this.stepper.to(this.CustStepIndex);

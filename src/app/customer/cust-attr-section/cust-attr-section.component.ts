@@ -158,6 +158,10 @@ export class CustAttrSectionComponent implements OnInit {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
           } else {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING],{});
+          if (this.From == 'EditMainData') {
+            AdInsHelper.RedirectUrl(this.router, ['/Customer/EditMainData/Paging'], {});
+          } else {
+            AdInsHelper.RedirectUrl(this.router, ['/Customer/Paging'], {});
           }
         }); 
     }

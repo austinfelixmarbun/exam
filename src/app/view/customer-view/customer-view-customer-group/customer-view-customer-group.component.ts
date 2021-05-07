@@ -14,8 +14,10 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class CustomerViewCustomerGroupComponent implements OnInit {
   CustId: number;
   GetListCustGrpForCustViewByCustIdUrl = URLConstant.GetListCustGrpForCustViewByCustId;
+  GetListCustGrpForCustViewByMemberCustIdUrl = URLConstant.GetListCustGrpForCustViewByMemberCustId;
   responseObj: any;
   custViewUrl: string;
+  responseMemberCustGrpObj: any;
 
   constructor(
     private http: HttpClient,
@@ -37,6 +39,14 @@ export class CustomerViewCustomerGroupComponent implements OnInit {
       },
       error => {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+      }
+    );
+    this.http.post(this.GetListCustGrpForCustViewByMemberCustIdUrl, custObj).subscribe(
+      response => {
+        this.responseMemberCustGrpObj = response['ReturnObject'];
+      },
+      error => {
+        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
       }
     );
   }

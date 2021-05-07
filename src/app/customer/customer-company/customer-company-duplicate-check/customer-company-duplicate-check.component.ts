@@ -56,6 +56,9 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
   MrCompanyTypeCode: string;
   IsAffiliateWithMf: string;
   
+  urlGetDescByMasterCode: string;
+  CustTempNo: string;
+
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
     this.ResponseSaveData = new EventEmitter<any>();
     
@@ -80,6 +83,9 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       }
       if (params["VipNotes"] != null) {
         this.VipNotes = params["VipNotes"];
+      }
+      if (params["CustTempNo"] != null) {
+        this.CustTempNo = params["CustTempNo"];
       }
     });     
   }
@@ -158,6 +164,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
     }
     else{
       this.addCustObj = new AddCustObj();
+      this.addCustObj.CustTempNo = this.CustTempNo;
       this.addCustObj.CustObj = new CustObj();
       this.addCustObj.CustCompanyObj = new CustCompanyObj();
       this.addCustObj.CustAddr = new CustAddrObj();

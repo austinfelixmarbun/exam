@@ -20,4 +20,6 @@ export class CustBankAccObj {
         this.CustBankAccId = 0, 
         this.RowVersion = ""
     }
+    BegBalanceAmt: any;
+    constructor(){this.CustBankAccId = 0, this.RowVersion = ""}
 }

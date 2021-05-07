@@ -1,0 +1,66 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+         
+        <div class="px-3" >
+        
+          <lib-ucSubsection [id]="'summaryId'" [title]="'MO Summary'"  [panel]="'summary'">
+          </lib-ucSubsection>
+          <div id="summary">
+            <table class="table table-responsive-md text-center table-hover">
+              <thead>
+                <tr class="table-header">
+                  <th>
+                    <span class="thead-header" translate>NO</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>SUMMARY</span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of ListSummary; let i = index">
+                  <td>{{ (1 + i) }}</td>
+                  <td class="text-left">{{item.Descr}}</td>
+                  <td class="text-right">{{item.Amount}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table class="table table-responsive-md text-center table-hover">
+              <thead>
+                <tr class="table-header">
+                  <th>
+                    <span class="thead-header" translate>CREDIT FACILITY</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>LATEST REPORTED STATUS</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>CONDITION</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>CAUSE OF DEFAULT</span>
+                  </th>                  
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of ListCredit">
+                  <td class="text-left">{{item.CreditFacility}}</td>
+                  <td class="text-left">{{item.LatestReportStat}}</td>
+                  <td class="text-left">{{item.Condition}}</td>
+                  <td class="text-left">{{item.CauseOfFault}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>        
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -18,7 +18,7 @@ export class BankInfoComponent implements OnInit {
   @Input() objInput: any;
   modal: any;
   closeResult: any;
-  inputLookupBankObj: InputLookupObj;
+  inputLookupBankObj: InputLookupObj = new InputLookupObj();
   mode: string = "add";
   VendorBankAcc: VendorBankAccObj = new VendorBankAccObj();
   VendorBankAccId: number;
@@ -116,6 +116,7 @@ export class BankInfoComponent implements OnInit {
             Notes:""
           });
           this.inputLookupBankObj.jsonSelect = { bankName: "" };
+          this.inputLookupBankObj.nameSelect = { bankName: "" };
           this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
           this.BankRegisForm.controls.AccName.updateValueAndValidity();
           this.BankRegisForm.controls.BankBranch.updateValueAndValidity();
@@ -140,6 +141,7 @@ export class BankInfoComponent implements OnInit {
             Notes:""
           });
           this.inputLookupBankObj.jsonSelect = { bankName: "" };
+          this.inputLookupBankObj.nameSelect = { bankName: "" };
           this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
           this.BankRegisForm.controls.AccName.updateValueAndValidity();
           this.BankRegisForm.controls.BankBranch.updateValueAndValidity();
@@ -182,7 +184,7 @@ export class BankInfoComponent implements OnInit {
 
   getLookupBankResponse(e) {
     this.BankRegisForm.patchValue({
-      RefBankId: e.RefBankId,
+      RefBankId: e.refBankId,
       BankBranchRegCode: e.RegRptCode
     });
   }
@@ -217,16 +219,19 @@ export class BankInfoComponent implements OnInit {
   }
 
   setLookup() {
-    this.inputLookupBankObj = new InputLookupObj();
+    this.inputLookupBankObj.isReady = false;
     this.inputLookupBankObj.urlJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.isRequired = true;
 
     if (this.objEdit != null && this.mode == "edit") {
-      this.inputLookupBankObj.jsonSelect = { BankName: this.objEdit.BankName };
+      this.inputLookupBankObj.jsonSelect = { bankName: this.objEdit.BankName };
+      this.inputLookupBankObj.nameSelect = { bankName: this.objEdit.BankName };
     } else {
-      this.inputLookupBankObj.jsonSelect = { BankName: "" };
+      this.inputLookupBankObj.jsonSelect = { bankName: "" };
+      this.inputLookupBankObj.nameSelect = { bankName: "" };
     }
+    this.inputLookupBankObj.isReady = true;
   }
 }

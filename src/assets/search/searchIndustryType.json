@@ -13,10 +13,10 @@
         },
         {
             "type": "textbox",
-            "name": "ECONOMIC_SECTOR_NAME",
-            "id": "EconomicSectorName",
+            "name": "REF_INDUSTRY_TYPE_CATEGORY_NAME",
+            "id": "RefIndustryTypeCategoryName",
             "value": "",
-            "label": "Economic Sector Name",
+            "label": "Industry Type Category Name",
             "placeholder": "Placeholder",
             "datatype": "text"
         },
@@ -72,8 +72,8 @@
         {
             "type": "sort",
             "position": "left",
-            "label": "Economic Sector Name",
-            "name": "EconomicSectorName"
+            "label": "Industry Type Category Name",
+            "name": "RefIndustryTypeCategoryName"
         },
         {
             "type": "sort",
@@ -101,7 +101,7 @@
         {
             "type": "text",
             "position": "left",
-            "property": "EconomicSectorName"
+            "property": "RefIndustryTypeCategoryName"
         },
         {
             "type": "boolean",

@@ -79,6 +79,10 @@ export class VendorSchemeAddEditComponent implements OnInit {
                   });
               }
           );
+      }else{
+        if(this.MrVendorCategoryCode == 'SUPPLIER_BRANCH'){
+          this.checkIsAutoFormNoFromSetting('SS');
+        }
       }
   }
 
@@ -107,4 +111,27 @@ export class VendorSchemeAddEditComponent implements OnInit {
               });
       }
   }
+
+  //check is automatic/not form no 4
+  isAuto: boolean = false;
+  checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
+    var generalSettingObj = {
+      GsCode: "MASTER_AUTO_GNRT_CODE"
+    }
+    var result: any;
+    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+      (response) => {
+        result = response;
+
+        if (result.GsValue != undefined && result.GsValue != "") {
+          if (result.GsValue.split(';').find(x => x == msAutoGenCode)) {
+            this.isAuto = true;
+            this.VendorSchmForm.patchValue({
+              VendorSchmCode: '-'
+            });
+          }
+        }
+      });
+  }
+  //check is automatic/not form no 4
 }

@@ -81,7 +81,7 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { CustomerViewCustomerGroupComponent } from './customer-view/customer-view-customer-group/customer-view-customer-group.component';
 import { CustomerViewAddressComponent } from './customer-view/customer-view-address/customer-view-address.component';
 import { MatTabsModule } from '@angular/material';
-import { NgxCurrencyModule } from "ngx-currency";
+import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
 import { UploadNegativeCustomerComponent } from './negative-customer/upload-negative-customer/upload-negative-customer.component';
 import { ReviewUploadNegativeCustomerDetailComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-detail/review-upload-negative-customer-detail.component';
 import { ReviewUploadNegativeCustomerPagingComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-paging/review-upload-negative-customer-paging.component';
@@ -113,13 +113,43 @@ import { UpdateCustomerMgmntShareholderComponent } from './customer-update-maste
 import { UpdateCustomerContactInfoComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-contact-info/update-customer-contact-info.component';
 import { UpdateCustomerCompanyFinDataComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-company-fin-data/update-customer-company-fin-data.component';
 import { UpdateCustomerCompanyLegalDocComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-company-legal-doc/update-customer-company-legal-doc.component';
+import { RegexService } from './regex.service';
+import { CustAssetComponent } from './cust-asset/cust-asset.component';
+import { CustAssetDetailComponent } from './cust-asset/cust-asset-detail/cust-asset-detail.component';
+import { UcgridviewModule } from '@adins/ucgridview';
 import { SharedModule } from 'app/shared/shared.module';
 import { DmsIframeComponent } from 'app/shared/dms-iframe/dms-iframe.component';
 import { CustBankAccComponent } from './cust-bank-acc/cust-bank-acc.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { PopUpViewAsliRIAllDataComponent } from './customer-personal/customer-personal-main-info/pop-up-asli-ri/pop-up-view-asli-ri-all-data/pop-up-view-asli-ri-all-data.component';
+import { PopUpViewAsliRIMotherNameComponent } from './customer-personal/customer-personal-main-info/pop-up-asli-ri/pop-up-view-asli-ri-mother-name-verification/pop-up-view-asli-ri-mother-name-verification.component';
+import { PopUpViewPhoneAgeVerificationComponent } from './customer-personal/customer-personal-main-info/pop-up-asli-ri/pop-up-view-asli-ri-phone-age-verification/pop-up-view-asli-ri-phone-age-verification.component';
+import { PopUpViewRiTaxVerificationComponent } from './customer-personal/customer-personal-main-info/pop-up-asli-ri/pop-up-view-asli-ri-tax-verification/pop-up-view-asli-ri-tax-verification.component';
+import { PopUpViewRiProfesionalVerificationComponent } from './customer-personal/customer-personal-main-info/pop-up-asli-ri/pop-up-view-asli-ri-professional-verification/pop-up-view-asli-ri-professional-verification.component';
+import { PopUpViewTrustingSocialComponent } from './customer-personal/customer-personal-main-info/pop-up-trusting-social/pop-up-view-trusting-social.component';
+import { CustomerCompanyComponent } from './customer-company/customer-company-main-info/popup-pefindo/customer-company-data/customer-company-data.component';
+import { DashboardComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/dashboard/dashboard.component';
+import { CustomerPersonalDataComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/customer-personal-data/customer-personal-data.component';
+import { MoSummaryComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/mo-summary/mo-summary.component';
+import { SubjectInfoComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/subject-info/subject-info.component';
+import { PefindoScoreComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/pefindo-score/pefindo-score.component';
+import { ContractsComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/contracts/contracts.component';
+import { PefindoAlertComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/pefindo-alert-quest/pefindo-alert-quest.component';
+import { SecuritiesComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/securities/securities.component';
+import { OtherLiabilitiesComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/other-liabilities/other-liabilities.component';
+import { InvolvementsComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/involvements/involvements.component';
+import { RelationsComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/relations/relations.component';
+import { InquiriesComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/inquiries/inquiries.component';
+import { DisputesComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/disputes/disputes.component';
+import { FinancialStatementsComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/financial-statements/financial-statements.component';
+import { AllComponent } from './customer-personal/customer-personal-main-info/pop-up-pefindo/all/all.component';
+import { PopUpViewDukcapilComponent } from './customer-personal/customer-personal-main-info/pop-up-dukcapil/pop-up-view-dukcapil.component';
+import { PopUpViewSlikComponent } from './customer-personal/customer-personal-main-info/pop-up-slik/pop-up-view-slik.component';
+import { CustomerViewPersonalFamilyComponent } from 'app/view/customer-view/customer-view-personal-family/customer-view-personal-family.component';
+import { CustomerViewPersonalEmergencyContactComponent } from 'app/view/customer-view/customer-view-personal-emergency-contact/customer-view-personal-emergency-contact.component';
 
 export const customCurrencyMaskConfig = {     
-  align: "left",     
+  align: "right",     
   allowNegative: true,     
   allowZero: true,     
   decimal: ".",     
@@ -127,7 +157,8 @@ export const customCurrencyMaskConfig = {
   prefix: "",     
   suffix: "",     
   thousands: ",",     
-  nullable: false 
+  nullable: false,
+  inputMode: CurrencyMaskInputMode.FINANCIAL
 };
 
  @NgModule({
@@ -154,7 +185,8 @@ export const customCurrencyMaskConfig = {
     UcShowErrorsModule,
     MatTabsModule,
     UcuploadModule,
-    NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    UcgridviewModule
   ],
   declarations: [
     CustomerPagingComponent,
@@ -252,8 +284,39 @@ export const customCurrencyMaskConfig = {
   ],
   providers: [
     NGXToastrService
+    CustAssetComponent,
+    CustAssetDetailComponent,
+    PopUpViewAsliRIAllDataComponent,
+    PopUpViewAsliRIMotherNameComponent,
+    PopUpViewPhoneAgeVerificationComponent,
+    PopUpViewRiProfesionalVerificationComponent,
+    PopUpViewRiTaxVerificationComponent,
+    PopUpViewTrustingSocialComponent,
+    CustomerCompanyComponent,
+    CustomerPersonalJobDataComponent,
+    DashboardComponent,
+    CustomerPersonalDataComponent,
+    MoSummaryComponent,
+    SubjectInfoComponent,
+    PefindoScoreComponent,
+    ContractsComponent,
+    PefindoAlertComponent,
+    SecuritiesComponent,
+    OtherLiabilitiesComponent,
+    InvolvementsComponent,
+    RelationsComponent,
+    InquiriesComponent,
+    DisputesComponent,
+    FinancialStatementsComponent,
+    AllComponent,
+    PopUpViewDukcapilComponent,
+    PopUpViewSlikComponent
   ],
-  entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
+  entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent, CustAssetDetailComponent]
+  ,
+  providers: [
+    RegexService
+  ]
 })
 export class CustomerModule {
   constructor() {

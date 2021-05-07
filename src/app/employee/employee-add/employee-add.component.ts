@@ -18,6 +18,8 @@ import { UcAddressObj } from "app/shared/model/UcAddressObj.Model";
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { AdInsHelper } from "app/shared/AdInsHelper";
+import { RegexService } from 'app/customer/regex.service';
+import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 import { CookieService } from "ngx-cookie";
 import { NavigationConstant } from "app/shared/NavigationConstant";
 import { RefEmployeeObj } from "app/shared/model/RefEmployeeObj";
@@ -26,6 +28,8 @@ import { ReqRefEmployeeObj } from "app/shared/model/Request/UserOrganization/Ref
 @Component({
   selector: "app-employee-add",
   templateUrl: "./employee-add.component.html"
+  templateUrl: "./employee-add.component.html",
+  providers: [NGXToastrService, RegexService]
 })
 export class EmployeeAddComponent implements OnInit {
   pageType: string = "add";
@@ -74,6 +78,7 @@ export class EmployeeAddComponent implements OnInit {
   
   readonly CancelLink: string = NavigationConstant.EMP_PAGING;
   constructor(
+    private regexService: RegexService, 
     private router: Router,
     private route: ActivatedRoute,
     private httpClient: HttpClient,
@@ -103,6 +108,66 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    if(this.pageType == 'edit'){
+      this.RefEmpForm = this.fb.group({
+        RefUserId: [0, [Validators.required]],
+        Username: ['', [Validators.required]],
+        IsLockedOut: [false],
+        LoggedInMethod: ['DB'],
+        RefEmpId: [0, [Validators.required]],
+        EmpNo: ['', [Validators.required]],
+        EmpName: ['', [Validators.required]],
+        JoinDt: ['', [Validators.required]],
+        MrIdTypeCode: ['', [Validators.required]],
+        IdNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        TaxIdNo: [''],
+        IsExt: [false],
+        IsActive: [true],
+        IsLeave: [false],
+        MobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
+        MobilePhnNo2: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
+        Email1: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+        Email2: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+        RowVersion: [''],
+        EmpBankAccId: [0, [Validators.required]],
+        RefBankId: [0, [Validators.required]],
+        BankBranch: ['', [Validators.required]],
+        BankBranchRegCode: [''],
+        BankAccNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        BankAccName: ['', [Validators.required]]
+      });
+    }else{
+      this.RefEmpForm = this.fb.group({
+        RefUserId: [0],
+        Username: ['', [Validators.required]],
+        IsLockedOut: [false],
+        LoggedInMethod: ['DB'],
+        RefEmpId: [0],
+        EmpNo: ['', [Validators.required]],
+        EmpName: ['', [Validators.required]],
+        JoinDt: ['', [Validators.required]],
+        MrIdTypeCode: ['', [Validators.required]],
+        IdNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        TaxIdNo: [''],
+        IsExt: [false],
+        IsActive: [true],
+        IsLeave: [false],
+        MobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
+        MobilePhnNo2: ['', [Validators.pattern('^[0-9]+$'), Validators.maxLength(15)]],
+        Email1: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+        Email2: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+        RowVersion: [''],
+        EmpBankAccId: [0],
+        RefBankId: [0, [Validators.required]],
+        BankBranch: ['', [Validators.required]],
+        BankBranchRegCode: [''],
+        BankAccNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        BankAccName: ['', [Validators.required]]
+      });
+    }
+
+    this.customPattern = new Array<CustomPatternObj>();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     this.addressObj = new UcAddressObj();
@@ -118,6 +183,10 @@ export class EmployeeAddComponent implements OnInit {
             this.RefEmpForm.patchValue({
               MrIdTypeCode: this.IdTypeList[0].Key
             });
+          }
+          if(this.IdTypeList != undefined)
+          {
+            this.getInitPattern();
           }
         }
       }
@@ -172,6 +241,8 @@ export class EmployeeAddComponent implements OnInit {
           this.inputLookupBankObj.jsonSelect = this.refBankObj;
           this.inputLookupBankObj.idSelect = this.refBankObj.RefBankId;
           this.inputLookupBankObj.nameSelect = this.refBankObj.BankName;
+          this.inputLookupBankObj.jsonSelect = { bankName: this.refBankObj.BankName };
+
           this.addressObj.Addr = this.refEmpObj.Addr;
           this.addressObj.AreaCode4 = this.refEmpObj.AreaCode4;
           this.addressObj.AreaCode3 = this.refEmpObj.AreaCode3;
@@ -203,8 +274,8 @@ export class EmployeeAddComponent implements OnInit {
 
   getLookupBankResponse(e) {
     this.RefEmpForm.patchValue({
-      RefBankId: e.RefBankId,
-      BankBranchRegCode: e.RegRptCode
+      RefBankId: e.refBankId,
+      BankBranchRegCode: e.regRptCode
     });
   }
 
@@ -284,4 +355,75 @@ export class EmployeeAddComponent implements OnInit {
       );
     }
   }
+
+  //START URS-LOS-041
+
+  onOptionsSelected(event){  
+    this.setValidatorPattern();
+  }
+
+  controlNameIdNo: any = 'IdNo';
+  controlNameIdType: any = 'MrIdTypeCode';
+  customPattern: Array<CustomPatternObj>;
+  initIdTypeCode: any;
+  resultPattern: any;
+
+  getInitPattern() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if(this.resultPattern != undefined)
+        {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+    
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+            this.customPattern.push(patternObj);
+          }
+          this.setValidatorPattern();
+        }
+      }
+    );
+  }
+  // setValidatorPattern(){
+  //   let idTypeValue: string;
+
+  //   idTypeValue = this.RefEmpForm.controls[this.controlNameIdType].value;
+
+  //   if (this.resultPattern != undefined) {
+  //     var result = this.resultPattern.find(x => x.Key == idTypeValue)
+
+  //     if (result != undefined) {
+  //       var pattern = result.Value;
+  //       if (pattern != undefined) {
+  //         this.setValidator(pattern);
+  //       }
+  //     }
+  //   }
+  // }
+
+  setValidatorPattern() {
+    let idTypeValue: string;
+    idTypeValue = this.RefEmpForm.controls[this.controlNameIdType].value;
+    var pattern: string = '';
+    if (idTypeValue != undefined) {
+      if (this.resultPattern != undefined) {
+        var result = this.resultPattern.find(x => x.Key == idTypeValue)
+        if (result != undefined) {
+          pattern = result.Value;
+        }
+      }
+    }
+    this.setValidator(pattern);
+  }
+
+  setValidator(pattern: string) {
+    if (pattern != undefined) {
+      this.RefEmpForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
+      this.RefEmpForm.controls[this.controlNameIdNo].updateValueAndValidity();
+    }
+  }
+  //END OF URS-LOS-041
 }

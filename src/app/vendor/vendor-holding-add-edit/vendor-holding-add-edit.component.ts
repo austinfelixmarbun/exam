@@ -9,6 +9,7 @@ import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -39,7 +40,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
   isHidden: boolean = true;
   RsvField: string;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private vendorService: VendorService, private cookieService: CookieService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private vendorService: VendorService, private cookieService: CookieService, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
       this.VendorId = params['VendorId'];
@@ -90,6 +91,9 @@ export class VendorHoldingAddEditComponent implements OnInit {
       this.VendorForm.controls.VendorCode.disable();
       this.getData();
     } else {
+      if(this.MrVendorCategoryCode == 'SUPPLIER_HOLDING'){
+        this.checkIsAutoFormNoFromSetting('SH');
+      }
       this.setDropdown();
       this.setLookup();
       this.checkType();
@@ -401,4 +405,27 @@ export class VendorHoldingAddEditComponent implements OnInit {
       }
     );
   }
+
+  //check is automatic/not form no 4
+  isAuto: boolean = false;
+  checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
+    var generalSettingObj = {
+      GsCode: "MASTER_AUTO_GNRT_CODE"
+    }
+    var result: any;
+    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+      (response) => {
+        result = response;
+
+        if (result.GsValue != undefined && result.GsValue != "") {
+          if (result.GsValue.split(';').find(x => x == msAutoGenCode)) {
+            this.isAuto = true;
+            this.VendorForm.patchValue({
+              VendorCode: '-'
+            });
+          }
+        }
+      });
+  }
+  //check is automatic/not form no 4
 }

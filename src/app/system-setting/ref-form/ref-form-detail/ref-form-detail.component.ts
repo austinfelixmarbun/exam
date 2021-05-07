@@ -6,7 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { RefFormObj } from 'app/shared/model/RefFormObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ParameterObj } from 'app/shared/model/ParameterObj.Model';
@@ -56,6 +56,7 @@ export class RefFormDetailComponent implements OnInit {
     ParameterAttribute : ['']
   });
   ngOnInit() {
+    this.checkIsAutoFormNoFromSetting("FR");
     
     var refMasterModuleObj = {
     }
@@ -216,4 +217,28 @@ export class RefFormDetailComponent implements OnInit {
         });
     }
   }
+
+  //check is automatic/not form no 4
+  isAuto: boolean = false;
+  checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
+    var generalSettingObj = {
+      GsCode: "MASTER_AUTO_GNRT_CODE"
+    }
+    var result: any;
+    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+      (response) => {
+        result = response;
+
+        if (result.GsValue != undefined && result.GsValue != "") {
+          if (result.GsValue.split(';').find(x => x == msAutoGenCode)) {
+            this.isAuto = true;
+            this.RefForm.patchValue({
+              FormCode: '-'
+            });
+          }
+        }
+      });
+  }
+  //check is automatic/not form no 4
+
 }

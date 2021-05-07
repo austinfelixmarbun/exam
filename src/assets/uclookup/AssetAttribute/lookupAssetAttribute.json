@@ -6,8 +6,8 @@
         "name": "A.ATTR_CODE",
         "id": "AttrCode",
         "value": "",
-        "label": "Asset Attr Code",
-        "placeholder": "Asset Attr Code"
+        "label": "Asset Attribute Code",
+        "placeholder": "Asset Attribute Code"
       },
       {
         "type": "textbox",

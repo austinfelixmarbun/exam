@@ -3,7 +3,9 @@ export class CustBankStmntDObj {
     CustBankStmntHId: any;
     Month: any;
     Year: any;
+    DebitTrxCount: any;
     DebitAmt: any;
+    CreditTrxCount: any;
     CreditAmt: any;
     BalanceAmt: any;
     RowVersion: any;

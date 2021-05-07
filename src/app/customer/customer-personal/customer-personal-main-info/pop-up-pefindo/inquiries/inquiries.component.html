@@ -1,0 +1,82 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+         
+        <div class="px-3" >
+
+        
+          <lib-ucSubsection [id]="'InquiriesId'" [title]="'Inquiries'"  [panel]="'Inquiries'">
+          </lib-ucSubsection>
+          <div id="Inquiries">
+            <div class="form-group row">
+              <label class="col-md-3" translate>No. of Inquiries During Last Months</label>             
+            </div>
+            <table class="table table-responsive-md text-center table-hover">
+              <thead>
+                <tr class="table-header">
+                  <th>
+                    <span class="thead-header" translate>1 Month</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>3 Month</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>6 Month</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>12 Month</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>24 Month</span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of ListMonth">
+                  <td class="text-center">{{item.Month1}}</td>
+                  <td class="text-center">{{item.Month3}}</td>
+                  <td class="text-center">{{item.Month6}}</td>
+                  <td class="text-center">{{item.Month12}}</td>
+                  <td class="text-center">{{item.Month24}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        
+
+          <lib-ucSubsection [id]="'LastinquiriesId'" [title]="'Last 15 Inquiries'"  [panel]="'Lastinquiries'">
+          </lib-ucSubsection>
+          <div id="Lastinquiries">
+            <table class="table table-responsive-md text-center table-hover">
+              <thead>
+                <tr class="table-header">
+                  <th>
+                    <span class="thead-header" translate>INQUIRY DATE</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>PURPOSE</span>
+                  </th>
+                  <th>
+                    <span class="thead-header" translate>SECTOR</span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of ListLastInquiries">
+                  <td class="text-center">{{item.InquiryDate}}</td>
+                  <td class="text-left">{{item.Purpose}}</td>
+                  <td class="text-left">{{item.Sector}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,6 +9,8 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { RegexService } from 'app/customer/regex.service';
+import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 
@@ -16,6 +18,8 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
   selector: 'app-customer-company-management-shareholder-personal',
   templateUrl: './customer-company-management-shareholder-personal.component.html',
   styleUrls: []
+  styleUrls: [],
+  providers: [NGXToastrService, RegexService],
 })
 export class CustomerCompanyManagementShareholderPersonalComponent implements OnInit {
   @Input() custCompanyId: number;
@@ -61,13 +65,15 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     IsActive: [false],
     IsOwner: [false]
   });
+  tempShareholderCustId: number;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
+  constructor(private regexService: RegexService,  private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
     this.isExistingCust = false;
   }
 
   ngOnInit() {
+    this.customPattern = new Array<CustomPatternObj>();
     this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.MaxDate = this.UserAccess[CommonConstant.BUSINESS_DT];
     this.inputLookupCustPersonalObj = new InputLookupObj();
@@ -101,6 +107,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
             MrIdTypeCode: this.tempIdType[0].Key
           });
           this.ChangeIdType();
+          this.ChangeIdType(this.tempIdType[0].Key);
+          if(this.tempIdType != undefined)
+          {
+            this.getInitPattern();
+          }
         }
       }
     );
@@ -227,6 +238,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       }
       if (this.custExistingId != 0) {
         this.custCompanyMgmntShrholderObj.ShareholderId = this.custExistingId;
+      if(this.tempShareholderCustId!=null){
+        this.custCompanyMgmntShrholderObj.ShareholderId = this.tempShareholderCustId;
       }
       // this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
       this.custCompanyMgmntShrholderObj.MgmntShrholderName = this.ManagementShareholderForm.controls["MgmntShrholderName"].value;
@@ -265,6 +278,9 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
 
   onOptionsSelected(event) {
     this.ChangeIdType();
+  onOptionsSelected(event){  
+    this.ChangeIdType(event.target.value);
+    this.setValidatorPattern();
   }
 
   ChangeIdType() {
@@ -320,6 +336,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     }
     this.tempShareholderCustNo = event.CustNo;
 
+    this.tempShareholderCustId = event.CustId;
+    
     this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
     this.ManagementShareholderForm.controls.MrCustModelCode.disable();
     this.ManagementShareholderForm.controls.MrIdTypeCode.disable();
@@ -331,4 +349,70 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.ManagementShareholderForm.controls.TaxIdNo.disable();
     this.isExistingCust = true;
   }
+
+  //START URS-LOS-041
+  controlNameIdNo: any = 'IdNo';
+  controlNameIdType: any = 'MrIdTypeCode';
+  customPattern: Array<CustomPatternObj>;
+  initIdTypeCode: any;
+  resultPattern: any;
+
+  getInitPattern() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if(this.resultPattern != undefined)
+        {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+    
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+            this.customPattern.push(patternObj);
+          }
+          this.setValidatorPattern();
+        }
+      }
+    );
+  }
+  // setValidatorPattern(){
+  //   let idTypeValue: string;
+
+  //   idTypeValue = this.ManagementShareholderForm.controls[this.controlNameIdType].value;
+
+  //   if (this.resultPattern != undefined) {
+  //     var result = this.resultPattern.find(x => x.Key == idTypeValue)
+
+  //     if (result != undefined) {
+  //       var pattern = result.Value;
+  //       if (pattern != undefined) {
+  //         this.setValidator(pattern);
+  //       }
+  //     }
+  //   }
+  // }
+
+  setValidatorPattern() {
+    let idTypeValue: string;
+    idTypeValue = this.ManagementShareholderForm.controls[this.controlNameIdType].value;
+    var pattern: string = '';
+    if (idTypeValue != undefined) {
+      if (this.resultPattern != undefined) {
+        var result = this.resultPattern.find(x => x.Key == idTypeValue)
+        if (result != undefined) {
+          pattern = result.Value;
+        }
+      }
+    }
+    this.setValidator(pattern);
+  }
+
+  setValidator(pattern: string) {
+    if (pattern != undefined) {
+      this.ManagementShareholderForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
+      this.ManagementShareholderForm.controls[this.controlNameIdNo].updateValueAndValidity();
+    }
+  }
+  //END OF URS-LOS-041
 }

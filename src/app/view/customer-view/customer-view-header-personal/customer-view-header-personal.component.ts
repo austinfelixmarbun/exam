@@ -7,6 +7,7 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-view-header-personal',
@@ -97,9 +98,11 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
       (response) => {
         this.tempCustPersonalObj = response;
         var refMasterObjMrGenderCode = {
-          MasterCode: this.tempCustPersonalObj.MrGenderCode
+          MasterCode: this.tempCustPersonalObj.MrGenderCode,
+          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender
         }
         this.http.post(this.getRefMasterByMasterCodeUrl, {Code: this.tempCustPersonalObj.MrGenderCode}).subscribe(
+        this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMasterObjMrGenderCode).subscribe(
           (response) => {
             this.tempMrGenderCode = response;
           }

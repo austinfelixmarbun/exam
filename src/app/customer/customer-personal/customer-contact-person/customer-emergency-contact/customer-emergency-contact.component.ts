@@ -4,6 +4,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { environment } from 'environments/environment';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalContactPerson.Obj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
@@ -17,6 +19,8 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { RegexService } from 'app/customer/regex.service';
+import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
@@ -25,6 +29,8 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
   selector: 'app-customer-emergency-contact',
   templateUrl: './customer-emergency-contact.component.html',
   styles: []
+  styles: [],
+  providers: [NGXToastrService, RegexService],
 })
 export class CustomerEmergencyContactComponent implements OnInit {
   @Output() outputTab: EventEmitter<any> = new EventEmitter();
@@ -68,7 +74,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
 
   flag: boolean;
   tempKTPCheck: boolean;
-  tempMobilePhone1 : boolean;
+  tempMobilePhone1: boolean;
   businessDtMin: Date;
   businessDtMax: Date;
 
@@ -88,12 +94,15 @@ export class CustomerEmergencyContactComponent implements OnInit {
     BirthPlace: [''],
     BirthDt: ['', Validators.required],
     MrGenderCode: ['', Validators.required],
-    MrReligionCode: [''],
+    MrReligionCode: ['',Validators.required],
     MrEducationCode: [''],
     MrMaritalStatCode: [''],
     MrNationalityCode: [''],
     TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     MrCustRelationshipCode: [''],
+    MrNationalityCode: ['',Validators.required],
+    TaxIdNo: [''],
+    MrCustRelationshipCode: ['',Validators.required],
     MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     MobilePhnNo2: ['', [Validators.pattern("^[0-9]+$")]],
     Email: ['', [Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
@@ -102,10 +111,10 @@ export class CustomerEmergencyContactComponent implements OnInit {
   });
   criteriaExistingList: any[];
   criteriaExistingObj: CriteriaObj;
-  criteriaCurrentCust : CriteriaObj;
+  criteriaCurrentCust: CriteriaObj;
   inputAddressObj: InputAddressObj;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
+  constructor(private regexService: RegexService, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
     this.GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.addCustPersonalContactPersonUrl = URLConstant.AddNewCustPersonalContactPerson;
@@ -209,6 +218,10 @@ export class CustomerEmergencyContactComponent implements OnInit {
           this.CustomerContactForm.controls.IdExpiredDt.setValidators(Validators.required);
           this.CustomerContactForm.controls.IdExpiredDt.updateValueAndValidity();
         }
+
+        if (this.tempIdType != undefined) {
+          this.getInitPattern();
+        }
       }
     );
 
@@ -277,7 +290,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
           this.CustomerContactForm.controls.MobilePhnNo1.setValidators(Validators.required);
           this.tempMobilePhone1 = true;
         } else {
-            this.tempMobilePhone1 = false;
+          this.tempMobilePhone1 = false;
           this.CustomerContactForm.controls.MobilePhnNo1.clearValidators();
         }
         this.CustomerContactForm.controls.MobilePhnNo1.updateValueAndValidity();
@@ -304,7 +317,10 @@ export class CustomerEmergencyContactComponent implements OnInit {
       this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
       this.custPersonalContactPersonObj.CustId = this.custId;
       this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustId, {Id : this.custId}).subscribe(
+      this.getInitPattern();
+      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustId, this.custPersonalContactPersonObj).subscribe(
         (response) => {
+
           var datePipe = new DatePipe("en-US");
           this.tempCustPersonalContactPerson = response;
           console.log("tempCustPersonalContactPerson: " + JSON.stringify(this.tempCustPersonalContactPerson));
@@ -328,6 +344,27 @@ export class CustomerEmergencyContactComponent implements OnInit {
             MrCustRelationshipCode: this.tempCustPersonalContactPerson.MrCustRelationshipCode,
           });
           this.onChangeIdType();
+          if (response != null || response != undefined) {
+            this.CustomerContactForm.patchValue({
+              ContactPersonName: this.tempCustPersonalContactPerson.ContactPersonName,
+              MrIdTypeCode: this.tempCustPersonalContactPerson.MrIdTypeCode,
+              IdNo: this.tempCustPersonalContactPerson.IdNo,
+              IdExpiredDt: datePipe.transform(this.tempCustPersonalContactPerson.IdExpiredDt, 'yyyy-MM-dd'),
+              TaxIdNo: this.tempCustPersonalContactPerson.TaxIdNo,
+              MotherMaidenName: this.tempCustPersonalContactPerson.MotherMaidenName,
+              MrNationalityCode: this.tempCustPersonalContactPerson.MrNationalityCode,
+              MrReligionCode: this.tempCustPersonalContactPerson.MrReligionCode,
+              BirthPlace: this.tempCustPersonalContactPerson.BirthPlace,
+              BirthDt: datePipe.transform(this.tempCustPersonalContactPerson.BirthDt, 'yyyy-MM-dd'),
+              MrMaritalStatCode: this.tempCustPersonalContactPerson.MrMaritalStatCode,
+              MobilePhnNo1: this.tempCustPersonalContactPerson.MobilePhnNo1,
+              MobilePhnNo2: this.tempCustPersonalContactPerson.MobilePhnNo2,
+              Email: this.tempCustPersonalContactPerson.Email,
+              // IsFamily: this.tempCustPersonalContactPerson.IsFamily,
+              // IsEmergencyContact: this.tempCustPersonalContactPerson.IsEmergencyContact,
+              MrCustRelationshipCode: this.tempCustPersonalContactPerson.MrCustRelationshipCode,
+            });
+          }
           if (this.tempCustPersonalContactPerson.MrJobProfessionCode != null) {
             
             this.http.post(URLConstant.GetRefProfessionByProfessionCode, {Code : this.tempCustPersonalContactPerson.MrJobProfessionCode}).subscribe(
@@ -352,6 +389,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
           } else {
             this.flag = true;
           }
+
           this.inputFieldObj.inputLookupObj.nameSelect = this.tempCustPersonalContactPerson.Zipcode;
           this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustPersonalContactPerson.Zipcode };
           this.UcAddressObj.AreaCode1 = this.tempCustPersonalContactPerson.AreaCode1;
@@ -371,15 +409,17 @@ export class CustomerEmergencyContactComponent implements OnInit {
           this.UcAddressObj.City = this.tempCustPersonalContactPerson.City;
           this.inputAddressObj.default = this.UcAddressObj;
           this.inputAddressObj.inputField = this.inputFieldObj;
+          this.setValidatorPattern();
         });
+
     }
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
     this.inputAddressObj.default = UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
-    this.inputAddressObj.showAllPhn= true;
-    this.inputAddressObj.showFax= false;
+    this.inputAddressObj.showAllPhn = true;
+    this.inputAddressObj.showFax = false;
 
     var tempCustAddrObj = new CustAddrObj();
     tempCustAddrObj.CustId = this.IdCust;
@@ -394,7 +434,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
   }
 
   copyAddress() {
-    if(this.listCustAddr.length<1){
+    if (this.listCustAddr.length < 1) {
       return
     }
     var custAddrFromObj = new CustAddrObj();
@@ -481,7 +521,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.custPersonalContactPersonObj["PhnExt2"] = this.CustomerContactForm.value.UcAddress.PhnExt2;
     this.custPersonalContactPersonObj["Phn3"] = this.CustomerContactForm.value.UcAddress.Phn3;
     this.custPersonalContactPersonObj["PhnArea3"] = this.CustomerContactForm.value.UcAddress.PhnArea3;
-    this.custPersonalContactPersonObj["PhnExt3"] = this.CustomerContactForm.value.UcAddress.PhnArea3;
+    this.custPersonalContactPersonObj["PhnExt3"] = this.CustomerContactForm.value.UcAddress.PhnExt3;
     if (this.tempCust != null) {
       this.custPersonalContactPersonObj.ContactPersonCustNo = this.tempCust.CustNo;
     }
@@ -504,7 +544,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
           // this.wizard.goToNextStep();
           this.isAdd = false;
           // this.outputTab.emit({ isAdd: this.isAdd });
-          this.outputTab.emit({ stepMode: "next"});
+          this.outputTab.emit({ stepMode: "next" });
         }
       );
     } else {
@@ -619,7 +659,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     if (noExpDate.includes(event.target.value)) {
       this.CustomerContactForm.controls.IdExpiredDt.clearValidators();
       this.CustomerContactForm.patchValue({
-        IdExpiredDt : ''
+        IdExpiredDt: ''
       })
       this.tempKTPCheck = true;
     } else {
@@ -628,6 +668,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
     }
     this.CustomerContactForm.controls.IdExpiredDt.updateValueAndValidity();
     this.onChangeIdType();
+
+    this.setValidatorPattern();
   }
   onOptionsNationalitySelected(event) {
     if (event.target.value == CommonConstant.NationalityCodeLocal) {
@@ -638,7 +680,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       var foreign = this.tempNationality.find(x => x["MasterCode"] == event.target.value);
       var setCountry = foreign.DefaultValue.split(';');
       this.lookUpObj.nameSelect = setCountry[1] ? setCountry[1] : setCountry[0];
-      this.lookUpObj.jsonSelect =  { CountryName: setCountry[1] ? setCountry[1] : setCountry[0]};
+      this.lookUpObj.jsonSelect = { CountryName: setCountry[1] ? setCountry[1] : setCountry[0] };
       this.tempCountryCode = setCountry[0];
       this.lookUpObj.isRequired = true;
     }
@@ -658,4 +700,70 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.isAdd = false;
     this.outputTab.emit({ isAdd: this.isAdd });
   }
+
+
+  //START URS-LOS-041
+  controlNameIdNo: any = 'IdNo';
+  controlNameIdType: any = 'MrIdTypeCode';
+  customPattern: Array<CustomPatternObj> = new Array<CustomPatternObj>();
+  initIdTypeCode: any;
+  resultPattern: any;
+
+  getInitPattern() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if (this.resultPattern != undefined) {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+            this.customPattern.push(patternObj);
+          }
+          this.setValidatorPattern();
+        }
+      }
+    );
+  }
+  // setValidatorPattern(){
+  //   let idTypeValue: string;
+
+  //   idTypeValue = this.CustomerContactForm.controls[this.controlNameIdType].value;
+
+  //   if (this.resultPattern != undefined) {
+  //     var result = this.resultPattern.find(x => x.Key == idTypeValue)
+
+  //     if (result != undefined) {
+  //       var pattern = result.Value;
+  //       if (pattern != undefined) {
+  //         this.setValidator(pattern);
+  //       }
+  //     }
+  //   }
+  // }
+
+  setValidatorPattern() {
+    let idTypeValue: string;
+    idTypeValue = this.CustomerContactForm.controls[this.controlNameIdType].value;
+    var pattern: string = '';
+    if (idTypeValue != undefined) {
+      if (this.resultPattern != undefined) {
+        var result = this.resultPattern.find(x => x.Key == idTypeValue)
+        if (result != undefined) {
+          pattern = result.Value;
+        }
+      }
+    }
+    this.setValidator(pattern);
+  }
+
+  setValidator(pattern: string) {
+    if (pattern != undefined) {
+      this.CustomerContactForm.controls[this.controlNameIdNo].setValidators(Validators.pattern(pattern));
+      this.CustomerContactForm.controls[this.controlNameIdNo].updateValueAndValidity();
+    }
+  }
+  //END OF URS-LOS-041
 }

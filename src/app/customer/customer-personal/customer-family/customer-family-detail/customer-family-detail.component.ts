@@ -8,7 +8,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { DatePipe } from '@angular/common';
 import { CustObj } from 'app/shared/model/CustObj.Model';
@@ -19,6 +19,9 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NullViewportScroller } from '@angular/common/src/viewport_scroller';
+import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
+import { RegexService } from 'app/customer/regex.service';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
@@ -27,6 +30,8 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
   selector: 'app-customer-family-detail',
   templateUrl: './customer-family-detail.component.html',
   styles: []
+  styles: [],
+  providers: [NGXToastrService, RegexService]
 })
 export class CustomerFamilyDetailComponent implements OnInit {
   @Input() listCustIdToExclude: Array<string>;
@@ -104,6 +109,10 @@ export class CustomerFamilyDetailComponent implements OnInit {
   }
 
   initData() {
+  addrData:  CustAddrObj;
+  requestCustData: CustObj;
+  requestCustPersonalData: CustPersonalObj;
+  constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
     this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
@@ -145,6 +154,10 @@ export class CustomerFamilyDetailComponent implements OnInit {
   ngOnInit() {
     this.initData();
     console.log("ameng");
+    this.addrData =  new CustAddrObj();;
+    this.requestCustData = new CustObj();
+    this.requestCustPersonalData = new CustPersonalObj();
+    this.customPattern = new Array<CustomPatternObj>();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -157,7 +170,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.default = UcAddressObj;
+    this.inputAddressObj.default = this.UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
 
@@ -263,6 +276,17 @@ export class CustomerFamilyDetailComponent implements OnInit {
           this.CustomerFamilyForm.controls.MotherMaidenName.disable();
           this.CustomerFamilyForm.controls.MobilePhnNo1.disable();
           this.CustomerFamilyForm.controls.Email1.disable();
+          // this.CustomerFamilyForm.controls.Gender.disable();
+          // this.CustomerFamilyForm.controls.MrIdTypeCode.disable();
+          // this.CustomerFamilyForm.controls.BirthPlace.disable();
+          // this.CustomerFamilyForm.controls.BirthDt.disable();
+          // this.CustomerFamilyForm.controls.IdNo.disable();
+          // this.CustomerFamilyForm.controls.TaxIdNo.disable();
+          // this.CustomerFamilyForm.controls.IdExpiredDt.disable();
+          // this.CustomerFamilyForm.controls.MrMaritalStatCode.disable();
+          // this.CustomerFamilyForm.controls.MotherMaidenName.disable();
+          // this.CustomerFamilyForm.controls.MobilePhnNo1.disable();
+          // this.CustomerFamilyForm.controls.Email1.disable();
 
           this.inputFieldObj.inputLookupObj.nameSelect = custAddrData.Zipcode;
           this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: custAddrData.Zipcode };
@@ -317,6 +341,11 @@ export class CustomerFamilyDetailComponent implements OnInit {
           this.tempKTPCheck = false;
           this.CustomerFamilyForm.controls.IdExpiredDt.setValidators(Validators.required);
           this.CustomerFamilyForm.controls.IdExpiredDt.updateValueAndValidity();
+        }
+
+        if(this.tempIdType != undefined)
+        {
+          this.getInitPattern();
         }
       }
     );
@@ -407,24 +436,53 @@ export class CustomerFamilyDetailComponent implements OnInit {
           value: custAddrData.Zipcode
         });
 
-        this.existingCustomerLookUpObj.isReadonly = true;
-        this.CustomerFamilyForm.controls.Gender.disable();
-        this.CustomerFamilyForm.controls.MrIdTypeCode.disable();
-        this.CustomerFamilyForm.controls.BirthPlace.disable();
-        this.CustomerFamilyForm.controls.BirthDt.disable();
-        this.CustomerFamilyForm.controls.IdNo.disable();
-        this.CustomerFamilyForm.controls.TaxIdNo.disable();
-        this.CustomerFamilyForm.controls.IdExpiredDt.disable();
-        this.CustomerFamilyForm.controls.MrMaritalStatCode.disable();
-        this.CustomerFamilyForm.controls.MotherMaidenName.disable();
-        this.CustomerFamilyForm.controls.MobilePhnNo1.disable();
-        this.CustomerFamilyForm.controls.Email1.disable();
+        // this.existingCustomerLookUpObj.isReadonly = true;
+        // this.CustomerFamilyForm.controls.Gender.disable();
+        // this.CustomerFamilyForm.controls.MrIdTypeCode.disable();
+        // this.CustomerFamilyForm.controls.BirthPlace.disable();
+        // this.CustomerFamilyForm.controls.BirthDt.disable();
+        // this.CustomerFamilyForm.controls.IdNo.disable();
+        // this.CustomerFamilyForm.controls.TaxIdNo.disable();
+        // this.CustomerFamilyForm.controls.IdExpiredDt.disable();
+        // this.CustomerFamilyForm.controls.MrMaritalStatCode.disable();
+        // this.CustomerFamilyForm.controls.MotherMaidenName.disable();
+        // this.CustomerFamilyForm.controls.MobilePhnNo1.disable();
+        // this.CustomerFamilyForm.controls.Email1.disable();
       }
     ).catch(
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  setCustData(){
+    var formValue = this.CustomerFamilyForm.value;
+    this.addrData["Addr"] = formValue["UcAddress"]["Addr"];
+    this.addrData["AreaCode1"] = formValue["UcAddress"]["AreaCode1"];
+    this.addrData["AreaCode2"] = formValue["UcAddress"]["AreaCode2"];
+    this.addrData["AreaCode3"] = formValue["UcAddress"]["AreaCode3"];
+    this.addrData["AreaCode4"] = formValue["UcAddress"]["AreaCode4"];
+    this.addrData["City"] = formValue["UcAddress"]["City"];
+    this.addrData["Zipcode"] = formValue["UcAddressZipcode"]["value"];
+    this.addrData["SubZipcode"] = formValue["UcAddressZipcode"]["value"];
+    this.addrData["MrCustAddrTypeCode"] = CommonConstant.CustAddrTypeLegal;
+  
+    this.requestCustPersonalData.MrGenderCode = this.CustomerFamilyForm.controls["Gender"].value;
+    this.requestCustPersonalData.BirthPlace = this.CustomerFamilyForm.controls["BirthPlace"].value;
+    this.requestCustPersonalData.BirthDt = this.CustomerFamilyForm.controls["BirthDt"].value;
+    this.requestCustPersonalData.MotherMaidenName = this.CustomerFamilyForm.controls["MotherMaidenName"].value;
+    this.requestCustPersonalData.MrMaritalStatCode = this.CustomerFamilyForm.controls["MrMaritalStatCode"].value;
+    this.requestCustPersonalData.MobilePhnNo1 = this.CustomerFamilyForm.controls["MobilePhnNo1"].value;
+    this.requestCustPersonalData.Email1 = this.CustomerFamilyForm.controls["Email1"].value;
+  
+    this.requestCustData.CustName = this.existingCustomerLookUpObj.nameSelect;
+    this.requestCustData.MrIdTypeCode = this.CustomerFamilyForm.controls["MrIdTypeCode"].value;
+    this.requestCustData.IdNo = this.CustomerFamilyForm.controls["IdNo"].value;
+    this.requestCustData.IdExpiredDt = this.CustomerFamilyForm.controls["IdExpiredDt"].value;
+    this.requestCustData.TaxIdNo = this.CustomerFamilyForm.controls["TaxIdNo"].value;
+    this.requestCustData.MrCustTypeCode = CommonConstant.CustTypePersonal;
+  
   }
 
   checkState() {
@@ -447,10 +505,16 @@ export class CustomerFamilyDetailComponent implements OnInit {
   SaveValue() {
     console.log("FormValue: " + JSON.stringify(this.CustomerFamilyForm.value));
     if (this.isEditCustFamily) {
+      this.setCustData();
       var requestEdit = {
+        CustId: this.CustomerFamilyForm.controls["CustId"].value,
+        FamilyId: this.CustomerFamilyForm.controls["FamilyId"].value,
         CustPersonalFamilyId: this.CustomerFamilyForm.controls["CustPersonalFamilyId"].value,
         MrCustRelationship: this.CustomerFamilyForm.controls["MrCustRelationship"].value,
-        RowVersion: this.CustomerFamilyForm.controls["RowVersion"].value
+        RowVersion: this.CustomerFamilyForm.controls["RowVersion"].value,
+        CustObj: this.requestCustData,
+        CustPersonalObj: this.requestCustPersonalData,
+        CustAddr: this.addrData
       };
       this.http.post(URLConstant.EditCustPersonalFamily, requestEdit).toPromise().then(
         (response) => {
@@ -465,10 +529,14 @@ export class CustomerFamilyDetailComponent implements OnInit {
     }
     else {
       if (this.isExistingCust) {
+        this.setCustData();
         var requestExisting = {
           CustId: this.CustomerFamilyForm.controls["CustId"].value,
           FamilyId: this.CustomerFamilyForm.controls["FamilyId"].value,
-          MrCustRelationship: this.CustomerFamilyForm.controls["MrCustRelationship"].value
+          MrCustRelationship: this.CustomerFamilyForm.controls["MrCustRelationship"].value,
+          CustObj: this.requestCustData,
+        CustPersonalObj: this.requestCustPersonalData,
+        CustAddr: this.addrData
         };
         this.http.post(URLConstant.AddCustPersonalFamily, requestExisting).toPromise().then(
           (response) => {
@@ -539,9 +607,76 @@ export class CustomerFamilyDetailComponent implements OnInit {
       this.CustomerFamilyForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
     }
     this.CustomerFamilyForm.get("IdNo").updateValueAndValidity();
+    this.setValidatorPattern();
   }
 
   back() {
     this.ResponseSaveFamily.emit({ StatusCode: 200 });
   }
+
+  //START URS-LOS-041
+  controlNameIdNo: any = 'IdNo';
+  controlNameIdType: any = 'MrIdTypeCode';
+  customPattern: Array<CustomPatternObj>;
+  initIdTypeCode: any;
+  resultPattern: any;
+
+  getInitPattern() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if(this.resultPattern != undefined)
+        {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+    
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+            this.customPattern.push(patternObj);
+          }
+          this.setValidatorPattern();
+        }
+      }
+    );
+  }
+  // setValidatorPattern(){
+  //   let idTypeValue: string;
+
+  //   idTypeValue = this.CustomerFamilyForm.controls[this.controlNameIdType].value;
+
+  //   if (this.resultPattern != undefined) {
+  //     var result = this.resultPattern.find(x => x.Key == idTypeValue)
+
+  //     if (result != undefined) {
+  //       var pattern = result.Value;
+  //       if (pattern != undefined) {
+  //         this.setValidator(pattern);
+  //       }
+  //     }
+  //   }
+  // }
+
+  setValidatorPattern() {
+    let idTypeValue: string;
+    idTypeValue = this.CustomerFamilyForm.controls[this.controlNameIdType].value;
+    var pattern: string = '';
+    if (idTypeValue != undefined) {
+      if (this.resultPattern != undefined) {
+        var result = this.resultPattern.find(x => x.Key == idTypeValue)
+        if (result != undefined) {
+          pattern = result.Value;
+        }
+      }
+    }
+    this.setValidator(pattern);
+  }
+
+  setValidator(pattern: string) {
+    if (pattern != undefined) {
+      this.CustomerFamilyForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
+      this.CustomerFamilyForm.controls[this.controlNameIdNo].updateValueAndValidity();
+    }
+  }
+  //END OF URS-LOS-041
 }

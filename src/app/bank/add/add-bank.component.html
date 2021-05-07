@@ -15,7 +15,7 @@
             (ngSubmit)="BankAddForm.valid && SaveForm()">
             <lib-ucSubsection [id]="'BankInformationId'" [title]="title" [panel]="'BankInformation'"></lib-ucSubsection>
             <div class="form-body" id="BankInformation">
-              <div class="form-group row adins-required">
+              <div *ngIf="!isAuto" class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="bankCode" translate>Bank Code </label>
                 <div class="col-md-9">
                   <input type="text" id="bankCode" class="form-control adInsInput width-25-per"
@@ -42,6 +42,17 @@
                   </lib-uc-show-errors>
                 </div>
               </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel" for="RtgsCode" translate>RTGS Code </label>
+                <div class="col-md-9">
+                  <input type="text" id="RtgsCode" class="form-control adInsInput width-25-per"
+                    formControlName="RtgsCode">
+                  <lib-uc-show-errors [control]="BankAddForm.controls.RtgsCode" [submit]="BankAddReqForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
               <div class="form-group row">
                 <label class="col-md-3 adInsLabel" translate>Active Status </label>
                 <div class="col-md-9">

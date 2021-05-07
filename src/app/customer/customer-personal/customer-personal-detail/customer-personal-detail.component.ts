@@ -6,6 +6,8 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { environment } from 'environments/environment';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -261,11 +263,14 @@ export class CustomerPersonalDetailComponent implements OnInit {
     if (this.custPersonalObj.MrNationalityCode == CommonConstant.NationalityCodeLocal) {
       this.custPersonalObj.WnaCountryCode = CommonConstant.WnaCountryCodeIdn;
     }
-    if (this.tempCustPersonalObj.WnaCountryCode != null && this.tempCountryCode == null) {
-      this.custPersonalObj.WnaCountryCode = this.tempCustPersonalObj.WnaCountryCode;
-    } else {
-      this.custPersonalObj.WnaCountryCode = this.tempCountryCode;
+    else{
+      if (this.tempCustPersonalObj.WnaCountryCode != null && this.tempCountryCode == null) {
+        this.custPersonalObj.WnaCountryCode = this.tempCustPersonalObj.WnaCountryCode;
+      } else {
+        this.custPersonalObj.WnaCountryCode = this.tempCountryCode;
+      }
     }
+
     this.custPersonalObj.FamilyCardNo = this.CustomerDetailForm.controls["FamilyCardNo"].value;
     this.custPersonalObj.MrEducationCode = this.CustomerDetailForm.controls["MrEducationCode"].value;
     this.custPersonalObj.MrReligionCode = this.CustomerDetailForm.controls["MrReligionCode"].value;

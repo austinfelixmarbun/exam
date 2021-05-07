@@ -17,6 +17,15 @@ const routes: Routes = [
       },
       {
         path: PathConstant.VIEW_CUST_PERSONAL_JOB_DATA,
+        path: 'PersonalFamily',
+        loadChildren: './customer-view-personal-family/customer-view-personal-family.module#CustomerViewPersonalFamilyModule'
+      },
+      {
+        path: 'PersonalEmergencyContact',
+        loadChildren: './customer-view-personal-emergency-contact/customer-view-personal-emergency-contact.module#CustomerViewPersonalEmergencyContactModule'
+      },
+      {
+        path: 'PersonalJobData',
         loadChildren: './customer-view-personal-job-data/customer-view-personal-job-data.module#CustomerViewPersonalJobDataModule'
       },
       {
@@ -44,6 +53,46 @@ const routes: Routes = [
         loadChildren: './customer-view-personal-app-listing/customer-view-personal-app-listing.module#CustomerViewPersonalAppListingModule'
 
       },
+      {
+        path: 'PersonalOther',
+        loadChildren: './customer-view-personal-other-attr/customer-view-personal-other-attr.module#CustomerViewPersonalOtherModule'
+
+      },
+      ///Cust Type Company
+      {
+        path: 'CoyDetail',
+        loadChildren: './customer-view-coy-detail/customer-view-coy-detail.module#CustomerViewCoyDetailModule'
+      },
+      {
+        path: 'Address',
+        loadChildren: './customer-view-address/customer-view-address.module#CustomerViewAddressModule'
+      },
+      {
+        path: 'CoyManagement',
+        loadChildren: './customer-view-coy-management/customer-view-coy-management.module#CustomerViewCoyManagementModule'
+      },
+      {
+        path: 'CoyContact',
+        loadChildren: './customer-view-coy-contact/customer-view-coy-contact.module#CustomerViewCoyContactModule'
+      },
+      {
+        path: 'CoyFinancial',
+        loadChildren: './customer-view-coy-financial/customer-view-coy-financial.module#CustomerViewCoyFinancialModule'
+      },
+      {
+        path: 'CoyLegal',
+        loadChildren: './customer-view-coy-legal/customer-view-coy-legal.module#CustomerViewCoyLegalModule'
+      },
+      //CustGroup
+      {
+        path: 'CustomerGroup',
+        loadChildren: './customer-view-customer-group/customer-view-customer-group.module#CustomerViewGroupModule'
+      },
+      {
+        path: 'HighligtComment',
+        loadChildren: './customer-view-highligt-comment/highligt-comment.module#HighligtCommentModule'
+      },
+
       ///Cust Type Company
       {
         path: PathConstant.VIEW_CUST_COY_DETAIL,

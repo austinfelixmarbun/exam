@@ -104,6 +104,7 @@ export class CustomerViewComponent implements OnInit {
   }
 
   mencuba(ev) {
+    console.log(ev);
     if (this.custType == CommonConstant.CustomerPersonal) {
       if (ev == 0) { // Main Data
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
@@ -126,6 +127,22 @@ export class CustomerViewComponent implements OnInit {
         });
       }
       else if (ev == 4) { // Job Data
+      else if (ev == 2) {
+        this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router,["/View/Customer/PersonalFamily"],{ "CustId": this.CustId });
+        });
+      }
+      else if (ev == 3) {
+        this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router,["/View/Customer/PersonalEmergencyContact"],{ "CustId": this.CustId });
+        });
+      }
+      else if (ev == 4) {
+        this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router,["/View/Customer/CustomerGroup"],{ "CustId": this.CustId });
+        });
+      }
+      else if (ev == 5) {
         if (this.custModel == "PROF")
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_JOB_DATA],{ "CustId": this.CustId });
@@ -146,6 +163,9 @@ export class CustomerViewComponent implements OnInit {
       else if (ev == 5) { // Financial Data
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_FINANCIAL_DATA],{ "CustId": this.CustId });
+      else if (ev == 6) {
+        this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router,["/View/Customer/PersonalFinancialData"],{ "CustId": this.CustId });
         });
       }
       // else if (ev == 6) {
@@ -246,6 +266,20 @@ export class CustomerViewComponent implements OnInit {
       else if (ev == 9) { // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
+
+      else if (ev == 7) {
+        this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router, ["/View/Customer/HighligtComment"], { "CustId": this.CustId });
+        });
+      }
+      else if (ev == 8) {
+        this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router, ["/View/Customer/CustDocument"], { "CustId": this.CustId });
+        });
+      }
+      else if (ev == 9) {
+        this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router, ["/View/Customer/PersonalOther"], { "CustId": this.CustId });
         });
       }
     }
@@ -305,6 +339,18 @@ export class CustomerViewComponent implements OnInit {
       else if (ev == 8) { // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
+        this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router,["/View/Customer/HighligtComment"],{ "CustId": this.CustId });
+        });
+      }
+      else if (ev == 8) {
+        this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router,["/View/Customer/CustDocument"],{ "CustId": this.CustId });
+        });
+      }
+      else if (ev == 9) {
+        this.router.navigateByUrl("/View/Customer", { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router,["/View/Customer/CoyOther"],{ "CustId": this.CustId });
         });
       }
     }

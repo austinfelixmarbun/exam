@@ -54,6 +54,19 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     this.dropdownListObj.ddlType = "blank";
     this.dropdownListObj.isSelectOutput = true;
     this.GetListActiveRefAnswerType();
+    var refAnswerObj = {}
+    this.http.post(URLConstant.GetActiveRefVerfAnswerTypes, refAnswerObj).subscribe(
+      (response) => {
+        this.itemVerfQuestionAnswer = response[CommonConstant.ReturnObj];
+        if (this.itemVerfQuestionAnswer.length > 0) {
+          let VerfAnswerData = this.itemVerfQuestionAnswer.find(x => x.VerfAnswerTypeCode == "DDL");
+          this.QuestionAnswerForm.patchValue({
+            RefVerfAnswerTypeId: VerfAnswerData.RefVerfAnswerTypeId
+          });
+          if(this.mode != "edit"){
+            this.AnswerTypeChanged(VerfAnswerData.RefVerfAnswerTypeId);
+          }
+        }
 
     var refAnswerObj = {}
     if (this.mode == "edit") {
