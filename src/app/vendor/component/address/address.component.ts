@@ -52,12 +52,10 @@ export class AddressComponent implements OnInit {
       this.getUrl = URLConstant.GetVendorAddrByVendorId;
       this.ReqVendorAddrObj.Id = this.objInput.VendorId;
       this.ReqVendorAddrObj.Code = CommonConstant.AddrTypeLegal;
-      console.log(this.ReqVendorAddrObj.Id);
     } else if (this.objInput.Type == "VendorEmployee") {
       this.getUrl = URLConstant.GetVendorAddrByVendorEmpId;
       this.ReqVendorAddrObj.Id = this.objInput.VendorEmpId;
       this.ReqVendorAddrObj.Code = CommonConstant.AddrTypeLegal;
-      console.log(this.ReqVendorAddrObj.Id);
     }
 
     
