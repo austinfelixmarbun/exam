@@ -114,7 +114,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
 
     let tempReqReligion: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion, MappingCode: null };
     let getReligion = this.http.post(URLConstant.GetListActiveRefMaster, tempReqReligion);
-    let getGeneralSettingNationality = this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeDefLocalNationality });
+    let getGeneralSettingNationality = this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality });
     forkJoin([getDetail, getMaritalStat, getNationality, getEducation, getReligion, getGeneralSettingNationality]).pipe(
       map((response) => {
         var detailData = response[0];
