@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UpdateMasterCustJobDataObj } from 'app/shared/model/UpdateMasterCust/UpdateMasterCustJobDataObj.Model';
@@ -23,6 +24,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
   AppJobData: UpdateMasterCustJobDataObj;
+  ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   CustModelList: Array<any>;
   JobPositionList: Array<any>;
   JobStatusList: Array<any>;
@@ -100,7 +102,8 @@ export class UpdateCustomerJobDataComponent implements OnInit {
 
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
-    let getDetail = this.http.post(URLConstant.GetCustJobDataForUpdateMasterCustJobData, { CustDataTrxId: this.CustDataTrxId });
+    this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
+    let getDetail = this.http.post(URLConstant.GetCustJobDataForUpdateMasterCustJobData, this.ReqCustDataTrxIdObj);
     let tempReqCustModel: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel, MappingCode: null };
     let getCustModel = this.http.post(URLConstant.GetListActiveRefMaster, tempReqCustModel);
     
