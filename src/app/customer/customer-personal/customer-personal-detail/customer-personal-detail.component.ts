@@ -83,7 +83,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     var generalSettingObjDefLocalNationality = {
       GsCode: CommonConstant.GSCodeDefLocalNationality
     }
-    this.http.post(URLConstant.GetGeneralSettingByCode, {Code: CommonConstant.GSCodeDefLocalNationality}).subscribe(
+    this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeDefLocalNationality}).subscribe(
       (response) => {
         this.Country = response;
         this.lookUpObj = new InputLookupObj();

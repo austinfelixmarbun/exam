@@ -31,7 +31,6 @@ export class EmployeeAddComponent implements OnInit {
   pageType: string = "add";
   RefEmpId: number;
   inputLookupBankObj: InputLookupObj;
-  resultData: any;
   generalSettingObj: GeneralSettingObj;
   passwordPattern: string;
   refEmpObj: RefEmployeeObj;
@@ -94,10 +93,9 @@ export class EmployeeAddComponent implements OnInit {
 
     this.generalSettingObj = new GeneralSettingObj();
     this.generalSettingObj.GsCode = CommonConstant.GsCodePasswordRegex;
-    httpClient.post(URLConstant.GetGeneralSettingByCode, {Code: CommonConstant.GsCodePasswordRegex}).subscribe(
-      (response) => {
-        this.resultData = response;
-        this.passwordPattern = this.resultData.GsValue;
+    httpClient.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GsCodePasswordRegex}).subscribe(
+      (response: {GsValue}) => {
+        this.passwordPattern = response.GsValue;
       }
     );
   }
