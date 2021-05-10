@@ -87,7 +87,7 @@ export class AssetTypeAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: 'MAXASSETTYPELVL' }).subscribe(
+    this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: 'MAXASSETTYPELVL' }).subscribe(
       response => {
         this.ItemMaxHierarchyLevelNumber = this.ItemMaxHierarchyLevelNumber.slice(0, parseInt(response['GsValue']));
         this.AssetTypeForm.patchValue({

@@ -21,12 +21,8 @@ export class CustomerViewComponent implements OnInit {
   
 
   custType: string;
-  viewCustJobData: string;
-  getCustByCustIdUrl: string;
-  viewCustJobDataAddress: string;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private location: Location) { 
-    this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
     this.location.replaceState(environment.FoundationR3Web + "/View/Customer/");
   }
 
@@ -39,7 +35,7 @@ export class CustomerViewComponent implements OnInit {
         this.CustId = params["CustId"];
       }
     });
-    this.http.post(this.getCustByCustIdUrl, {Id : this.CustId}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.CustId}).subscribe(
       (response) => {
         this.custResultData = response;
         this.custModel = this.custResultData['MrCustModelCode'];

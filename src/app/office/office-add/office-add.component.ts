@@ -17,6 +17,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 
 @Component({
@@ -78,7 +79,6 @@ export class OfficeAddComponent implements OnInit {
   officeClose: boolean = true;
   officeObj: OfficeObj;
   refMasterObj: RefMasterObj;
-  lookUpRefMasterOfficeObj: RefMasterObj;
   refMasterOfficeType: RefMasterObj;
   refMasterCgType: RefMasterObj;
   orgMdlObj: OrgMdlObj
@@ -173,10 +173,9 @@ export class OfficeAddComponent implements OnInit {
     this.refMasterKonsyaType = new RefMasterObj();
     this.refMasterKonsyaType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeKonvenSyariah;
 
-    this.lookUpRefMasterOfficeObj = new RefMasterObj();
-    this.lookUpRefMasterOfficeObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeOfficeType;
-
-    this.httpClient.post(URLConstant.GetRefMasterTypeOfficeWithoutCG, this.lookUpRefMasterOfficeObj).subscribe(
+    let tempReq: GenericObj = new GenericObj();
+    tempReq.Code = CommonConstant.RefMasterTypeCodeOfficeType;
+    this.httpClient.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, tempReq).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.lookupOfficeType = response[CommonConstant.ReturnObj];

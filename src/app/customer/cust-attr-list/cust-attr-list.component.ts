@@ -9,6 +9,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AttrContent } from 'app/shared/model/AttrContent.model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { RefAttr } from 'app/shared/model/RefAttr.Model';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
 import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/Request/RefAttr/ReqRefAttrByAttrGroupObj.model';
@@ -145,9 +146,9 @@ export class CustAttrListComponent implements OnInit {
             RefMasterTypeCode: refAttr.AttrValue,
             MasterCode: refAttr.DefaultValue
           };
-          this.httpClient.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).subscribe(
-            (response) => {
-              this.tempLookup[refAttr["AttrCode"]].jsonSelect = { Descr: response['Descr'] }
+          this.httpClient.post(URLConstant.GetKvpRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).subscribe(
+            (response: KeyValueObj) => {
+              this.tempLookup[refAttr["AttrCode"]].jsonSelect = { Descr: response.Value };
             });
         }
       } else {

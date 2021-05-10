@@ -19,12 +19,12 @@
                 "property": "VendorParentId"
               }
             ]
-          },{},
+          },
           {
             "type": "text",
             "label": "Assignment Type:",
             "property": "Atype"
-          },{},
+          },
           {
             "type": "text",
             "label": "Maximum Task Load",
