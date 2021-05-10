@@ -14,7 +14,7 @@
             <br>
             <div class="px-3">
                 <form class="form form-horizontal" [formGroup]="UploadJournalFileForm"
-                    (ngSubmit)="UploadJournalFileForm.valid && SaveForm()" #enjiForm="ngForm">
+                    (ngSubmit)="UploadJournalFileForm.valid && uploadFiles()" #enjiForm="ngForm">
                     <div class="form-body">
                         <div class="form-group row">
                             <label class="col-md-3 adInsLabel" translate>File Code</label>
@@ -89,7 +89,7 @@
                             <label class="col-md-3  adins-required-label" translate>Start Date</label>
                             <div class="col-md-9">
                                 <input type="date" id="Date" class="form-control adInsInput width-25-per" formControlName="Date">
-                                <lib-uc-show-errors [control]="UploadJournalFileForm.controls.Date" [submit]="UploadJournalFileForm.submitted">
+                                <lib-uc-show-errors [control]="UploadJournalFileForm.controls.Date" [submit]="enjiForm.submitted">
                                 </lib-uc-show-errors>
                             </div>
                         </div>
