@@ -10,6 +10,9 @@ import { JournalMediaDetailComponent } from "./journal-media/journal-media-detai
 import { JournalMediaPagingComponent } from "./journal-media/journal-media-paging/journal-media-paging.component";
 import { JournalReconcilePagingComponent } from "./journal-reconcile/journal-reconcile-paging/journal-reconcile-paging.component";
 import { JournalResultComponent } from "./journal-result/journal-result.component";
+import { UploadJournalPagingComponent } from './upload-journal/upload-journal-paging.component';
+import {UploadJournalDetailComponent} from './upload-journal/upload-journal-detail.component';
+
 const routes: Routes = [
     { path: PathConstant.JOURNAL_MEDIA_PAGING, component: JournalMediaPagingComponent },
     { path: PathConstant.JOURNAL_MEDIA_DETAIL, component: JournalMediaDetailComponent },
@@ -19,7 +22,9 @@ const routes: Routes = [
     { path: PathConstant.JOURNAL_MEDIA_GROUP_ITEM_VALUE, component: JournalItemValueComponent },
     { path: PathConstant.FAILED_JOURNAL_RESULT_LIST_PAGING, component: FailedJournalListPagingComponent },
     { path: PathConstant.JOURNAL_RESULT, component: JournalResultComponent },
-    { path: PathConstant.JOURNAL_RECONCILE_PAGING, component: JournalReconcilePagingComponent }
+    { path: PathConstant.JOURNAL_RECONCILE_PAGING, component: JournalReconcilePagingComponent },
+    { path: PathConstant.UPLOAD_JOURNAL_FILE_PAGING, component: UploadJournalPagingComponent },
+    { path: PathConstant.UPLOAD_JOURNAL_FILE_DETAIL, component: UploadJournalDetailComponent }
 ];
 @NgModule({
     imports: [RouterModule.forChild(routes)],

@@ -339,6 +339,8 @@ export class NavigationConstant {
     public static JOURNAL_RESULT = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_RESULT;
     public static FAILED_JOURNAL_RESULT_LIST_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.FAILED_JOURNAL_RESULT_LIST_PAGING;
     public static JOURNAL_RECONCILE_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_RECONCILE_PAGING;
+    public static UPLOAD_JOURNAL_FILE_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.UPLOAD_JOURNAL_FILE_PAGING;
+    public static UPLOAD_JOURNAL_FILE_DETAIL = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.UPLOAD_JOURNAL_FILE_DETAIL;
     //#endregion
 
     
