@@ -17,7 +17,8 @@ import { JournalResultComponent } from './journal-result/journal-result.componen
 import { FailedJournalListPagingComponent } from './failed-journal-list/failed-journal-list-paging/failed-journal-list-paging.component';
 import { JournalGroupComponent } from './journal-media/journal-group/journal-group.component';
 import { JournalReconcilePagingComponent } from "./journal-reconcile/journal-reconcile-paging/journal-reconcile-paging.component";
-
+import { UploadJournalPagingComponent } from './upload-journal/upload-journal-paging.component';
+import {UploadJournalDetailComponent} from './upload-journal/upload-journal-detail.component';
 @NgModule({
     imports: [
         JournalRoutingModule,
@@ -33,20 +34,15 @@ import { JournalReconcilePagingComponent } from "./journal-reconcile/journal-rec
     declarations: [
         
     JournalMediaPagingComponent,
-        
     JournalMediaDetailComponent,
-        
     JournalItemValueComponent,
-        
     JournalHeaderFactComponent,
-        
     JournalGroupFactComponent,
-        
     JournalResultComponent,
-        
     FailedJournalListPagingComponent,
-        
     JournalGroupComponent,
+    UploadJournalPagingComponent,
+    UploadJournalDetailComponent,
 
     JournalReconcilePagingComponent],
     providers: [

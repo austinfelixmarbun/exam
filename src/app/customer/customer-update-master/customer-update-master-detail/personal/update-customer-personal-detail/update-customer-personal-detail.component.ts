@@ -8,6 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UpdateCustPersonalDetailObj } from 'app/shared/model/UpdateMasterCust/UpdateCustPersonalDetailObj.Model';
@@ -38,6 +39,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
   appNationalityDescr: string;
   appEducationDescr: string;
   appReligionDescr: string;
+  ReqCustDataTrxIdObj: GenericObj = new GenericObj();
 
   CustomerDetailForm = this.fb.group({
     CustId: [0],
@@ -102,7 +104,8 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    let getDetail = this.http.post(URLConstant.GetCustDataForUpdateMasterCustDetail, { CustDataTrxId: this.CustDataTrxId });
+    this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
+    let getDetail = this.http.post(URLConstant.GetCustDataForUpdateMasterCustDetail, this.ReqCustDataTrxIdObj);
     let tempReqMarStat: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat, MappingCode: null };
     let getMaritalStat = this.http.post(URLConstant.GetListActiveRefMaster, tempReqMarStat);
     
@@ -114,7 +117,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
 
     let tempReqReligion: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion, MappingCode: null };
     let getReligion = this.http.post(URLConstant.GetListActiveRefMaster, tempReqReligion);
-    let getGeneralSettingNationality = this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeDefLocalNationality });
+    let getGeneralSettingNationality = this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality });
     forkJoin([getDetail, getMaritalStat, getNationality, getEducation, getReligion, getGeneralSettingNationality]).pipe(
       map((response) => {
         var detailData = response[0];

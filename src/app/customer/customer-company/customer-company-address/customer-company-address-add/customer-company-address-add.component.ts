@@ -24,13 +24,13 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   @Input() mode: string;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
 
-  listCustAddr: Array<ResListCustAddrObj>;
+  listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
   listAddressType: any;
   copyCustomerAddr: any;
   copyCustomerAddrFrom: any;
 
   addressObj: CustAddrObj;
-  custAddrObj: GenericObj;
+  custAddrObj: GenericObj = new GenericObj();
   addressType: ReqRefMasterByTypeCodeAndMappingCodeObj;
   custAddressObj: CustAddrObj;
   inputFieldAddressObj: InputFieldObj;
@@ -92,7 +92,6 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
       }
     );
 
-    this.custAddrObj = new GenericObj();
     this.custAddrObj.Id = this.IdCust;
     this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
       (response : ResGetListCustAddrObj) => {

@@ -7,6 +7,7 @@ import { VendorService } from 'app/vendor/vendor.service';
 import { ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-bank-info',
@@ -207,7 +208,9 @@ export class BankInfoComponent implements OnInit {
       }
     } else if (this.objInput.Type == "VendorEmployee") {
       if (this.objInput.VendorEmpId != undefined && this.objInput.VendorEmpId != null) {
-        this.vendorService.GetListVendorBankAccByVendorEmpId({VendorId: null, VendorEmpId: this.objInput.VendorEmpId}).subscribe(
+        let ReqGetListVendorBankAccByVendorEmpId : GenericObj = new GenericObj();
+        ReqGetListVendorBankAccByVendorEmpId.Id = this.objInput.VendorEmpId;
+        this.vendorService.GetListVendorBankAccByVendorEmpId(ReqGetListVendorBankAccByVendorEmpId).subscribe(
           response => {
             this.ListData = response[CommonConstant.ReturnObj];
           }

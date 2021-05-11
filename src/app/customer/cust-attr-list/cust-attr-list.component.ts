@@ -9,8 +9,10 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AttrContent } from 'app/shared/model/AttrContent.model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { RefAttr } from 'app/shared/model/RefAttr.Model';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
+import { ReqCustAttrContentByCustIdAndAttrGroupObj } from 'app/shared/model/Request/CustAttrContent/ReqCustAttrContentByCustIdAndAttrGroupObj.model';
 import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/Request/RefAttr/ReqRefAttrByAttrGroupObj.model';
 import { environment } from 'environments/environment';
 
@@ -42,13 +44,17 @@ export class CustAttrListComponent implements OnInit {
   ListAttrContent: any;
   tempLookup = {};
   RefAttrList:  Array<RefAttr> = new Array<RefAttr>();
+  ReqByIdAndAttrObj: ReqCustAttrContentByCustIdAndAttrGroupObj = new ReqCustAttrContentByCustIdAndAttrGroupObj();
   ListInputLookUpObj = new Array();
   isFormReady: boolean = false;
   AttrContent: AttrContent;
   async ngOnInit() {
     let custGrp: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
     custGrp.AttrGroup = this.attrGroup;
-    await this.httpClient.post<Array<AttrContent>>(URLConstant.GetListCustAttrContentByCustIdAndAttrGroup, { CustId: this.CustId, AttrGroup: this.attrGroup }).toPromise().then(
+
+    this.ReqByIdAndAttrObj.CustId = this.CustId;
+    this.ReqByIdAndAttrObj.AttrGroup = this.attrGroup;
+    await this.httpClient.post<Array<AttrContent>>(URLConstant.GetListCustAttrContentByCustIdAndAttrGroup, this.ReqByIdAndAttrObj).toPromise().then(
       (response) => {
         this.ListAttrContent = response[CommonConstant.ReturnObj]
         let parentFormGroup = new Object();
@@ -145,9 +151,9 @@ export class CustAttrListComponent implements OnInit {
             RefMasterTypeCode: refAttr.AttrValue,
             MasterCode: refAttr.DefaultValue
           };
-          this.httpClient.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).subscribe(
-            (response) => {
-              this.tempLookup[refAttr["AttrCode"]].jsonSelect = { Descr: response['Descr'] }
+          this.httpClient.post(URLConstant.GetKvpRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).subscribe(
+            (response: KeyValueObj) => {
+              this.tempLookup[refAttr["AttrCode"]].jsonSelect = { Descr: response.Value };
             });
         }
       } else {

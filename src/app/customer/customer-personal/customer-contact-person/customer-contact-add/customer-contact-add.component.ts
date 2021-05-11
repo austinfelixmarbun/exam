@@ -40,6 +40,7 @@ export class CustomerContactAddComponent implements OnInit {
   LocalCountry: any;
   tempProfession: any;
   tempNationality: any;
+  tempCustAddrObj: GenericObj = new GenericObj();
   tempCustAddress: any;
   tempCustPersonal: any;
   tempMrGenderCode: any;
@@ -62,7 +63,7 @@ export class CustomerContactAddComponent implements OnInit {
   custPersonalObj: CustPersonalObj;
   criteriaList: Array<CriteriaObj>;
   custPersonalContactPersonObj: CustPersonalContactPersonObj;
-  listCustAddr: Array<ResListCustAddrObj>;
+  listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
 
   IdCust: number;
   tempCustId: number;
@@ -125,7 +126,7 @@ export class CustomerContactAddComponent implements OnInit {
       GsCode: CommonConstant.GSCodeDefLocalNationality
     }
 
-    this.http.post(URLConstant.GetGeneralSettingByCode, {Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
+    this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
       (response) => {
         this.Country = response;
 
@@ -369,9 +370,8 @@ export class CustomerContactAddComponent implements OnInit {
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn= false;
 
-    var tempCustAddrObj = new GenericObj();
-    tempCustAddrObj.Id = this.IdCust;
-    this.http.post(URLConstant.GetListCustAddr, tempCustAddrObj).subscribe(
+    this.tempCustAddrObj.Id = this.IdCust;
+    this.http.post(URLConstant.GetListCustAddr, this.tempCustAddrObj).subscribe(
       (response : ResGetListCustAddrObj) => {
         this.listCustAddr = response[CommonConstant.ReturnObj];
         if (this.listCustAddr.length > 0) {
