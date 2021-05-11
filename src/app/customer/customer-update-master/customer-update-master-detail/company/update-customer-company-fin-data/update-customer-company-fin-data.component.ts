@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { UpdateCustCompanyFinDataObj } from 'app/shared/model/UpdateMasterCust/UpdateCustCompanyFinDataObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -19,6 +20,7 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
   AppCompanyFinData: UpdateCustCompanyFinDataObj;
+  ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   MainCustBankAcc: Array<any>;
   AppCustBankAcc: Array<any>;
   ArrayNum: Array<number>;
@@ -75,7 +77,8 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
 
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
-    this.http.post(URLConstant.GetFinDataForUpdateMasterCustCompanyFinData, { CustDataTrxId: this.CustDataTrxId }).toPromise().then(
+    this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
+    this.http.post(URLConstant.GetFinDataForUpdateMasterCustCompanyFinData, this.ReqCustDataTrxIdObj).toPromise().then(
       (response) => {
         response["AppCompanyFinData"]["DateAsOf"] = datePipe.transform(response["AppCompanyFinData"]["DateAsOf"], "yyyy-MM-dd");
         response["MasterCompanyFinData"]["DateAsOf"] = datePipe.transform(response["MasterCompanyFinData"]["DateAsOf"], "yyyy-MM-dd");

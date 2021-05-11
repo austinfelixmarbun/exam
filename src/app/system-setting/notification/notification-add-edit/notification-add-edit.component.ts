@@ -133,8 +133,7 @@ export class NotificationAddEditComponent implements OnInit {
       }
     );
 
-    var urlRole = this.settingUrl + URLConstant.GetListActiveRefRole;
-    this.http.post(urlRole, null).subscribe(
+    this.http.post(this.settingUrl + URLConstant.GetListActiveRefRole, null).subscribe(
       (response) => {
         this.refRoleObj = response[CommonConstant.ReturnObj];
         for (let i = 0; i < this.refRoleObj.length; i++) {
