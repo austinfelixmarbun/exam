@@ -15,9 +15,9 @@ export class ResGeneralSettingObj {
 }
 
 export class ResListGeneralSettingObj {
-    ResListGeneralSettingObj: Array<ResGeneralSettingObj>;
+    ResGetListGeneralSettingObj: Array<ResGeneralSettingObj>;
 
     constructor() {
-        this.ResListGeneralSettingObj = new Array<ResGeneralSettingObj>();
+        this.ResGetListGeneralSettingObj = new Array<ResGeneralSettingObj>();
     }
 }
