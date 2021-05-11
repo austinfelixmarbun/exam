@@ -18,6 +18,8 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqByCustNoObj } from 'app/shared/model/Request/ReqByCustNoObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { ReqGetNegativeCustByNegativeCustNameAndCustTypeObj } from 'app/shared/model/Request/NegativeCust/ReqGetNegativeCustObj.model';
+import { ResNegativeCustObj } from 'app/shared/model/Response/NegativeCust/ResNegativeCustObj.model';
 
 @Component({
   selector: 'app-customer-company-duplicate-check',
@@ -39,7 +41,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
 
   addCustObj: AddCustObj;
   DuplicateCustObj: DuplicateCustObj;
-  RequestNegativeCustObj: RequestNegativeCustObj = new RequestNegativeCustObj();
+  RequestNegativeCustObj: ResNegativeCustObj = new ResNegativeCustObj();
 
   CustId: number;
 
@@ -277,8 +279,11 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
   }
 
   EditNegativeCustCompany(item) {
-    var NegativeCustObj = { CustNo: item.CustNo, CustName: item.CustName, MrCustTypeCode: item.MrCustTypeCode, TaxIdNo: item.TaxIdNo };
-    this.http.post<RequestNegativeCustObj>(URLConstant.GetNegativeCustByNegativeCustNameAndCustType, NegativeCustObj).subscribe(
+    let NegativeCustObj: ReqGetNegativeCustByNegativeCustNameAndCustTypeObj = new ReqGetNegativeCustByNegativeCustNameAndCustTypeObj();
+    NegativeCustObj.CustName = item.CustName;
+    NegativeCustObj.MrCustTypeCode = item.MrCustTypeCode;
+    NegativeCustObj.TaxIdNo = item.TaxIdNo;
+    this.http.post<ResNegativeCustObj>(URLConstant.GetNegativeCustByNegativeCustNameAndCustType, NegativeCustObj).subscribe(
       (response) => {
         this.RequestNegativeCustObj = response;
         if(this.IsFromCustMgmntShareholder){

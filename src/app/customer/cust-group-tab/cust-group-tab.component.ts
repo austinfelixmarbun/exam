@@ -10,6 +10,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { ReqByCustNoObj } from 'app/shared/model/Request/ReqByCustNoObj.model';
 
 @Component({
   selector: 'app-cust-group-tab',
@@ -22,6 +23,7 @@ export class CustGroupTabComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
   CustGrpList: Array<CustGrpObj> = new Array();
   resCustObj: any;
+  CustNoObj: ReqByCustNoObj = new ReqByCustNoObj();
   listCustIdToExclude: Array<number>;
 
   constructor(
@@ -51,9 +53,8 @@ export class CustGroupTabComponent implements OnInit {
   openView(CustNo)
   {
     // GetCustByCustNo
-    var custObj = new CustObj;
-    custObj.CustNo = CustNo
-    this.http.post(URLConstant.GetCustByCustNo, {TrxNo : CustNo}).subscribe(
+    this.CustNoObj.CustNo = CustNo
+    this.http.post(URLConstant.GetCustByCustNo, this.CustNoObj).subscribe(
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);

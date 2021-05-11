@@ -19,6 +19,8 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqByCustNoObj } from 'app/shared/model/Request/ReqByCustNoObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { ReqGetNegativeCustByNegativeCustNameAndCustTypeObj } from 'app/shared/model/Request/NegativeCust/ReqGetNegativeCustObj.model';
+import { ResNegativeCustObj } from 'app/shared/model/Response/NegativeCust/ResNegativeCustObj.model';
 
 @Component({
   selector: 'app-customer-personal-duplicate-check',
@@ -48,7 +50,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
   addCustObj: AddCustObj;
   custPersonalObj: CustPersonalObj;
   DuplicateCustObj: DuplicateCustObj;
-  RequestNegativeCustObj: RequestNegativeCustObj = new RequestNegativeCustObj();
+  RequestNegativeCustObj: ResNegativeCustObj = new ResNegativeCustObj();
 
   IdNo: string;
   IsVip: string;
@@ -445,8 +447,11 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
   }
 
   EditNegativeCustPersonal(item) {
-    var NegativeCustObj = { CustNo: item.CustNo, CustName: item.CustName, MrCustTypeCode: item.MrCustTypeCode, IdNo: item.IdNo };
-    this.http.post<RequestNegativeCustObj>(URLConstant.GetNegativeCustByNegativeCustNameAndCustType, NegativeCustObj).subscribe(
+    let NegativeCustObj: ReqGetNegativeCustByNegativeCustNameAndCustTypeObj = new ReqGetNegativeCustByNegativeCustNameAndCustTypeObj();
+    NegativeCustObj.CustName = item.CustName;
+    NegativeCustObj.MrCustTypeCode = item.MrCustTypeCode;
+    NegativeCustObj.IdNo = item.IdNo;
+    this.http.post<ResNegativeCustObj>(URLConstant.GetNegativeCustByNegativeCustNameAndCustType, NegativeCustObj).subscribe(
       (response) => {
         this.RequestNegativeCustObj = response;
 
