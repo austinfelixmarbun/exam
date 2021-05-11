@@ -44,12 +44,8 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   MrIdTypeCodeDesc: string;
   MotherMaidenName: string;
 
-  getCustById: string;
-  deleteCustAddr: string;
   From : string;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.getCustById = URLConstant.GetCustByCustId;
-    this.deleteCustAddr = URLConstant.DeleteCustAddr;
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -65,7 +61,7 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
     
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(this.getCustById, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
       (response) => {
           this.custObj = response;
       });

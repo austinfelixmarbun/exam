@@ -19,8 +19,6 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
 
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
   IdCust: number;
-  custObj: any;
-  objCust: CustObj;
   custAddrObj: GenericObj = new GenericObj();
   listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
   From: string;
@@ -36,13 +34,6 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.objCust = new CustObj();
-    this.objCust.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
-      (response) => {
-        this.custObj = response;
-      });
-
     this.custAddrObj.Id = this.IdCust;
     this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
       (response: ResGetListCustAddrObj) => {
