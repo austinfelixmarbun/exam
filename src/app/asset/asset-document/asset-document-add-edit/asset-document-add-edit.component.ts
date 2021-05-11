@@ -80,8 +80,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
     ReqGetListGSByListGsCode.Codes = ["IS_SHOW_CBX_BORROW", "IS_SHOW_CBX_PLEDGE"];
     this.http.post<ResListGeneralSettingObj>(URLConstant.GetListGeneralSettingByListGsCode, ReqGetListGSByListGsCode).subscribe(
       (response) => {
-        var tempResponse: Array<ResGeneralSettingObj> = new Array<ResGeneralSettingObj>();
-        tempResponse = response['ResGetListGeneralSettingObj'];
+        let tempResponse: Array<ResGeneralSettingObj> = response['ResGetListGeneralSettingObj'];
         let GSIsShowCbxBorrow = tempResponse.find(x => x.GsCode == "IS_SHOW_CBX_BORROW");
         let GSIsShowCbxPledge = tempResponse.find(x => x.GsCode == "IS_SHOW_CBX_PLEDGE");
         

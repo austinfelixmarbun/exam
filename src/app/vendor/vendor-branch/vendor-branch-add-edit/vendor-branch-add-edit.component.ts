@@ -20,6 +20,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericObj} from 'app/shared/model/Generic/GenericObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 
 
 @Component({
@@ -291,9 +292,9 @@ export class VendorBranchAddEditComponent implements OnInit {
                         RefMasterTypeCode: vendorAttr.VendorAttrValue,
                         MasterCode: item["AttrContent"]
                       };
-                      await this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).toPromise().then(
-                        (response) => {
-                          tempLookup[vendorAttr["VendorAttrCode"]].jsonSelect = { Descr: response['Descr'] }
+                      await this.http.post(URLConstant.GetKvpRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).toPromise().then(
+                        (response: KeyValueObj) => {
+                          tempLookup[vendorAttr["VendorAttrCode"]].jsonSelect = { Descr: response.Value }
                         });
                       formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
                     }
