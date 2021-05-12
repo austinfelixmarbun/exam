@@ -31,9 +31,9 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 export class JobDataEmployeeComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
 
-  jobAddrId: any;
-  othBizAddrId: any;
-  preJobAddrId: any;
+  jobAddrId: number;
+  othBizAddrId: number;
+  preJobAddrId: number;
   jobDataId: any;
   rowVersion: any;
   typePage: string;
@@ -413,7 +413,16 @@ export class JobDataEmployeeComponent implements OnInit {
               this.inputPreviousAddressObj.default = this.preJobAddrObj; 
             }
           );
-            
+          
+          if(this.returnCustJobDataObj.JobAddrId !=0 && this.returnCustJobDataObj.JobAddrId != null){
+            this.jobAddrId = this.returnCustJobDataObj.JobAddrId;
+          }
+          if(this.returnCustJobDataObj.OthBizAddrId !=0 && this.returnCustJobDataObj.OthBizAddrId != null){
+            this.othBizAddrId = this.returnCustJobDataObj.OthBizAddrId;
+          }
+          if(this.returnCustJobDataObj.PrevJobAddrId !=0 && this.returnCustJobDataObj.PrevJobAddrId != null){
+            this.preJobAddrId = this.returnCustJobDataObj.PrevJobAddrId;
+          }
           this.rowVersion = this.returnCustJobDataObj.RowVersion;
           this.jobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
           this.typePage = "edit";

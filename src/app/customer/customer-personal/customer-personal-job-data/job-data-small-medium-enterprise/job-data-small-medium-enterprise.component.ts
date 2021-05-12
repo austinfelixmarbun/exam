@@ -29,10 +29,10 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMas
 })
 export class JobDataSmeComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
-  othBizAddrId: any;
-  jobAddrId: any;
+  othBizAddrId: number;
+  jobAddrId: number;
   jobDataId: any;
-  preJobAddrId: any;
+  preJobAddrId: number;
   rowVersion: any;
   typePage: string;
   IdCust: number;
@@ -401,6 +401,17 @@ export class JobDataSmeComponent implements OnInit {
               }
             );
           }
+
+          if(this.returnCustJobDataObj.JobAddrId !=0 && this.returnCustJobDataObj.JobAddrId != null){
+            this.jobAddrId = this.returnCustJobDataObj.JobAddrId;
+          }
+          if(this.returnCustJobDataObj.OthBizAddrId !=0 && this.returnCustJobDataObj.OthBizAddrId != null){
+            this.othBizAddrId = this.returnCustJobDataObj.OthBizAddrId;
+          }
+          if(this.returnCustJobDataObj.PrevJobAddrId !=0 && this.returnCustJobDataObj.PrevJobAddrId != null){
+            this.preJobAddrId = this.returnCustJobDataObj.PrevJobAddrId;
+          }
+
           this.preJobAddrId = this.returnCustJobDataObj.PrevJobAddrId;
           this.othBizAddrId = this.returnCustJobDataObj.OthBizAddrId;
           this.jobAddrId = this.returnCustJobDataObj.JobAddrId;
