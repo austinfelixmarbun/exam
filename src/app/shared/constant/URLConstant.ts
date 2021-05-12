@@ -800,6 +800,7 @@ export class URLConstant {
 
     // CUST FIN DATA ATTR CONTENT
     public static GetListCustFinDataAttrContentByCustIdAndListAttrGroup = environment.FoundationR3Url + "/CustFinDataAttrContent/GetListCustFinDataAttrContentByCustIdAndListAttrGroup"
+    public static GetCustFinDataAttrContentForCustViewByCustId = environment.FoundationR3Url + "/CustFinDataAttrContent/GetCustFinDataAttrContentForCustViewByCustId"
     
     //CUST CONTACT PERSON
     public static GetCustCompanyContactPersonForCustViewByCustId = environment.FoundationR3Url + "/CustCompanyContactPerson/GetCustCompanyContactPersonForCustViewByCustId";
