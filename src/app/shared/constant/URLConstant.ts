@@ -352,6 +352,7 @@ export class URLConstant {
     public static AddRefAttr = environment.FoundationR3Url + "/RefAttr/AddRefAttr";
     public static EditRefAttr = environment.FoundationR3Url + "/RefAttr/EditRefAttr";
     public static GetListActiveRefAttrByAttrGroup = environment.FoundationR3Url + "/RefAttr/GetListActiveRefAttrByAttrGroup"
+    public static GetListActiveRefAttrByListAttrGroup = environment.FoundationR3Url + "/RefAttr/GetListActiveRefAttrByListAttrGroup"
     
     //REF PROFESSION
     public static AddRefProfession = environment.FoundationR3Url + "/RefProfession/AddRefProfession";
@@ -796,6 +797,9 @@ export class URLConstant {
     public static AddEditListCustAttrContent = environment.FoundationR3Url + "/CustAttrContent/AddEditListCustAttrContent";
     public static GetListCustAttrContentByCustIdForCust = environment.FoundationR3Url + "/CustAttrContent/GetListCustAttrContentByCustIdForCust";
     public static GetListCustAttrContentByCustIdAndAttrGroup = environment.FoundationR3Url + "/CustAttrContent/GetListCustAttrContentByCustIdAndAttrGroup"
+
+    // CUST FIN DATA ATTR CONTENT
+    public static GetListCustFinDataAttrContentByCustIdAndListAttrGroup = environment.FoundationR3Url + "/CustFinDataAttrContent/GetListCustFinDataAttrContentByCustIdAndListAttrGroup"
     
     //CUST CONTACT PERSON
     public static GetCustCompanyContactPersonForCustViewByCustId = environment.FoundationR3Url + "/CustCompanyContactPerson/GetCustCompanyContactPersonForCustViewByCustId";

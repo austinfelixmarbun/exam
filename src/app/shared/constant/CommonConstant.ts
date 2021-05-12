@@ -204,6 +204,12 @@ export class CommonConstant {
     public static AttrGroupCustCompanyOther = "CUST_COMPANY_OTH"
     public static AttrGroupCustPersonalOther = "CUST_PERSONAL_OTH"
     public static AttrGroupAsset = "ASSET";
+    public static AttrGroupCustPersonalFinDataIncome = "CUST_PERSONAL_FINDATA_INCOME"
+    public static AttrGroupCustPersonalFinDataExpense = "CUST_PERSONAL_FINDATA_EXPENSE"
+    public static AttrGroupCustPersonalFinDataOther = "CUST_PERSONAL_FINDATA_OTHER"
+    public static AttrGroupCustCompanyFinDataIncome = "CUST_COMPANY_FINDATA_INCOME"
+    public static AttrGroupCustCompanyFinDataExpense = "CUST_COMPANY_FINDATA_EXPENSE"
+    public static AttrGroupCustCompanyFinDataOther = "CUST_COMPANY_FINDATA_OTHER"
 
     // Integration
     public static DailyMasterTypeSingle = "Date";
