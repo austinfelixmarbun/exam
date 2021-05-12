@@ -1020,4 +1020,5 @@ export class URLConstant {
 
     // JOURNAL
     public static RerunJournal = "/Journal/RerunJournal";
+    public static DownloadJournalFile = environment.FoundationR3Url +"/Journal/DownloadJournalFile";
 }

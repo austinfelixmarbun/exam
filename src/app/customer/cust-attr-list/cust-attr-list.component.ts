@@ -11,6 +11,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { RefAttr } from 'app/shared/model/RefAttr.Model';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
+import { ReqCustAttrContentByCustIdAndAttrGroupObj } from 'app/shared/model/Request/CustAttrContent/ReqCustAttrContentByCustIdAndAttrGroupObj.model';
 import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/Request/RefAttr/ReqRefAttrByAttrGroupObj.model';
 import { environment } from 'environments/environment';
 
@@ -33,6 +34,7 @@ export class CustAttrListComponent implements OnInit {
   ListAttrContent: Array<any> = new Array<any>();
   tempLookup = {};
   RefAttrList:  Array<RefAttr> = new Array<RefAttr>();
+  ReqByIdAndAttrObj: ReqCustAttrContentByCustIdAndAttrGroupObj = new ReqCustAttrContentByCustIdAndAttrGroupObj();
   ListInputLookUpObj = new Array();
   isFormReady: boolean = false;
   AttrContent: AttrContent;
@@ -52,7 +54,10 @@ export class CustAttrListComponent implements OnInit {
     if(this.attrGroup !== undefined) {
       let custGrp: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
       custGrp.AttrGroup = this.attrGroup;
-      await this.httpClient.post<Array<AttrContent>>(URLConstant.GetListCustAttrContentByCustIdAndAttrGroup, { CustId: this.CustId, AttrGroup: this.attrGroup }).toPromise().then(
+
+      this.ReqByIdAndAttrObj.CustId = this.CustId;
+      this.ReqByIdAndAttrObj.AttrGroup = this.attrGroup;
+      await this.httpClient.post<Array<AttrContent>>(URLConstant.GetListCustAttrContentByCustIdAndAttrGroup, this.ReqByIdAndAttrObj).toPromise().then(
         (response) => {
           this.ListAttrContent = response[CommonConstant.ReturnObj];
           let parentFormGroup = new Object();

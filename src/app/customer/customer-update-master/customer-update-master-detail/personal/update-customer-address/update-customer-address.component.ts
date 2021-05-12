@@ -6,6 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UpdateCustAddrObj } from 'app/shared/model/UpdateMasterCust/UpdateCustAddrObj.Model';
@@ -25,6 +26,7 @@ export class UpdateCustomerAddressComponent implements OnInit {
   ZipcodeLookupObj: InputLookupObj;
   OwnershipList: Array<any>;
   ZipcodeLookupList: Array<InputLookupObj>;
+  ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   CustomerAddressForm = this.fb.group({
     AddressList: this.fb.array([])
   });
@@ -49,7 +51,8 @@ export class UpdateCustomerAddressComponent implements OnInit {
   ngOnInit() {
     let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeBuildingOwnership, MappingCode: null };
     let getOwnershipList = this.http.post(URLConstant.GetListActiveRefMaster, tempReq);
-    let getDetail = this.http.post(URLConstant.GetCustAddrDataForUpdateMasterCustAddr, { CustDataTrxId: this.CustDataTrxId });
+    this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
+    let getDetail = this.http.post(URLConstant.GetCustAddrDataForUpdateMasterCustAddr, this.ReqCustDataTrxIdObj);
     forkJoin([getDetail, getOwnershipList]).toPromise().then(
       (response) => {
         var responseAddr = response[0]["CustAddObjList"] as Array<any>;

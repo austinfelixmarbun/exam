@@ -21,10 +21,10 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
 
   custObj: any;
   resultData: any;
-  listCustAddr: Array<ResListCustAddrObj>;
+  listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
 
   objCust: CustObj;
-  custAddrObj: GenericObj;
+  custAddrObj: GenericObj = new GenericObj();
 
   BirthDt: Date;
   IdExpiredDt: Date;
@@ -44,14 +44,8 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   MrIdTypeCodeDesc: string;
   MotherMaidenName: string;
 
-  getCustById: string;
-  deleteCustAddr: string;
-  getListCustAddr: string;
   From : string;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.getCustById = URLConstant.GetCustByCustId;
-    this.getListCustAddr = URLConstant.GetListCustAddr;
-    this.deleteCustAddr = URLConstant.DeleteCustAddr;
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -67,14 +61,13 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
     
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(this.getCustById, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
       (response) => {
           this.custObj = response;
       });
 
-      this.custAddrObj = new GenericObj();
       this.custAddrObj.Id = this.IdCust;
-      this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
+      this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
         (response : ResGetListCustAddrObj) => {
             this.listCustAddr = response[CommonConstant.ReturnObj];
             let idxEmergency = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode == CommonConstant.CustAddrTypeEmergency);

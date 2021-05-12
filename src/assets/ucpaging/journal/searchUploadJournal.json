@@ -49,9 +49,10 @@
             "property": "FileCode"
         },
         {
-            "type": "text",
-            "position": "left",
-            "property": "FileName"
+            "type": "callback",
+            "position": "center",
+            "property": "FileName",
+            "key": "Download"
         },
         {
             "type": "action",

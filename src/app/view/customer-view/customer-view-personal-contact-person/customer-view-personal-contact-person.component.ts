@@ -8,6 +8,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqByCustNoObj } from 'app/shared/model/Request/ReqByCustNoObj.model';
 
 @Component({
   selector: 'app-customer-view-personal-contact-person',
@@ -16,6 +17,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class CustomerViewPersonalContactPersonComponent implements OnInit {
   CustId: number;
   GetListCustPersonalContactPersonForCustViewByCustIdUrl = URLConstant.GetListCustPersonalContactPersonForCustViewByCustId;
+  CustNoObj: ReqByCustNoObj = new ReqByCustNoObj();
   responseObj: any;
   resCustObj: any;
 
@@ -45,9 +47,8 @@ export class CustomerViewPersonalContactPersonComponent implements OnInit {
   openView(ContactPersonCustNo)
   {
     // GetCustByCustNo
-    var custObj = new CustObj;
-    custObj.CustNo = ContactPersonCustNo
-    this.http.post(URLConstant.GetCustByCustNo, {TrxNo : ContactPersonCustNo}).subscribe(
+    this.CustNoObj.CustNo = ContactPersonCustNo
+    this.http.post(URLConstant.GetCustByCustNo, this.CustNoObj).subscribe(
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);

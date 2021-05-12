@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UpdateCustCompanyDetailObj } from 'app/shared/model/UpdateMasterCust/UpdateCustCompanyDetailObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -23,6 +24,7 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
   AppCustCompanyDetail: UpdateCustCompanyDetailObj;
+  ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   AppIndustryName: string;
   IndustryLookupObj: InputLookupObj;
   businessDtMax: Date;
@@ -54,7 +56,8 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
-    this.http.post(URLConstant.GetCustCompanyDataForUpdateMasterCustCompany, { CustDataTrxId: this.CustDataTrxId }).pipe(
+    this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
+    this.http.post(URLConstant.GetCustCompanyDataForUpdateMasterCustCompany, this.ReqCustDataTrxIdObj).pipe(
       map((response) => {
         response["AppCustCompany"]["EstablishmentDt"] = datePipe.transform(response["AppCustCompany"]["EstablishmentDt"], "yyyy-MM-dd");
         response["MasterCustCompany"]["EstablishmentDt"] = datePipe.transform(response["MasterCustCompany"]["EstablishmentDt"], "yyyy-MM-dd");
