@@ -9,11 +9,14 @@
         <div id="FinAttrInfoId" class="form-body">
           <div class="form-group row" *ngFor="let item of responseCustAttr">
             <label class="col-md-4 adInsLabel" translate>{{item.AttrName}}</label>
-            <label class="col-md-4 adInsLabel" *ngIf="item.AttrGroup === 'CUST_PERSONAL_FINDATA_OTHER'">
+            <label class="col-md-4 adInsLabel" *ngIf="item.AttrInputType !== 'N' && item.AttrInputType !== 'P'">
               {{item.AttrValue}}
             </label>
-            <label class="col-md-4 adInsLabel" *ngIf="item.AttrGroup !== 'CUST_PERSONAL_FINDATA_OTHER'">
-              {{item.AttrValue | number}}
+            <label class="col-md-4 adInsLabel" *ngIf="item.AttrInputType === 'N'">
+              {{item.AttrValue | number:'.2':'en-US'}}
+            </label>
+            <label class="col-md-4 adInsLabel" *ngIf="item.AttrInputType === 'P'">
+              {{item.AttrValue | number:'.6':'en-US'}}
             </label>
           </div>
         </div>
