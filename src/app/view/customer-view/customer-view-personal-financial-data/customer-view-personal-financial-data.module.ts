@@ -12,7 +12,6 @@ import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneric";
 import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
-import { UcapprovalhistModule, UcapprovalhistComponent } from "@adins/ucapprovalhist";
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewPersonalFinancialDataComponent } from "./customer-view-personal-financial-data.component";
 import { CustomerViewPersonalFinancialDataRoutingModule } from "./customer-view-personal-financial-data-routing.module";
@@ -37,7 +36,6 @@ import { CustomerViewPersonalFinancialSectionComponent } from "../customer-view-
     ReactiveFormsModule,
     UcSubsectionModule,
     SharingComponentModule,
-    UcapprovalhistModule,
     UcShowErrorsModule,
   ],
   declarations: [
@@ -48,8 +46,7 @@ import { CustomerViewPersonalFinancialSectionComponent } from "../customer-view-
   ],
   entryComponents: [
     UcviewgenericComponent,
-    UcgridviewComponent,
-    UcapprovalhistComponent
+    UcgridviewComponent
   ]
 
 })

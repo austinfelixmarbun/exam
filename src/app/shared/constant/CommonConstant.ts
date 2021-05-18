@@ -23,25 +23,6 @@ export class CommonConstant {
     public static ENVIRONMENT_MODULE = 'EnvironmentModule';
     public static OFFICE_CODE = 'OfficeCode';
 
-    //APPROVAL TASK MAPPER - TRX TYPE
-    public static ApvTrxTypeProductHO = "PROD_HO_APV";
-    public static ApvTrxTypeProductHODeact = "PROD_HO_DEACT_APV";
-    public static ApvTrxTypeProductOffering = "PROD_OFF_APV";
-    public static ApvTrxTypeProductOfferingDeact = "PROD_OFF_DEACT_APV";
-
-    //Behaviour Type
-    public static BehaviourTypeLock = "LOCK";
-    public static BehaviourTypeMin = "MIN";
-    public static BehaviourTypeMax = "MAX";
-    public static BehaviourTypeDefault = "DEFAULT";
-
-    // ProductDeact
-    public static PROD_REASON_DEACT = "PROD_DEACT"
-
-    //Product Status
-    public static ProdStatApproval = "APVL";
-    public static ProdStatReqDeact = "REQD";
-
     // Customer Type
     public static CustomerPersonal = "PERSONAL";
     public static CustomerCompany = "COMPANY";
@@ -50,8 +31,6 @@ export class CommonConstant {
     public static MR_MARITAL_STAT_CODE_SINGLE = "SINGLE";
     public static MR_CUST_TYPE_CODE_PERSONAL = "PERSONAL";
     public static MR_CUST_TYPE_CODE_COMPANY = "COMPANY";
-
-    public static RefReasonTypeCodeProdDeactivate = "PROD_DEACT";
 
     // BOOLEAN CONDITION
     public static TRUE_CONDITION = "1";
@@ -223,10 +202,6 @@ export class CommonConstant {
     public static CUST_MODEL_SMEBU = "SMEBU";
     public static CUST_MODEL_NONPROF = "NONPROF";
 
-    // REF PROD COMPNT
-    public static RefProdCompntLob = "LOB";
-    public static RefProdCompntGrpGen = "GEN";
-
     // LOB
     public static FL4W = "FL4W";
     public static CF4W = "CF4W";
@@ -255,20 +230,6 @@ export class CommonConstant {
     public static DmsViewCodeAgr = "ConfinsAgr";
     public static DmsViewCodeMou = "ConfinsMou";
     public static DmsViewCodeLead = "ConfinsLead";
-    
-    //Approval
-    public static SCHM_CODE_APV_HO_ACT_SCHM = "APV_HO_ACT_SCHM";
-    public static SCHM_CODE_APV_HO_DEACT_SCHM = "APV_HO_DEACT_SCHM";
-    public static SCHM_CODE_APV_OFR_ACT_SCHM = "APV_OFR_ACT_SCHM";
-    public static SCHM_CODE_APV_OFR_DEACT_SCHM = "APV_OFR_DEACT_SCHM";
-    public static CAT_CODE_PRD_HO_APV = "PRD_HO_APV";
-    public static CAT_CODE_PRD_HO_DEACT_APV = "PRD_HO_DEACT_APV";
-    public static CAT_CODE_PRD_OFR_APV = "PRD_OFR_APV";
-    public static CAT_CODE_PRD_OFR_DEACT_APV = "PRD_OFR_DEACT_APV";
-    public static PRD_HO_APV_TYPE = "PROD_HO_APV_TYPE";
-    public static PRD_HO_DEACT_APV_TYPE = "PROD_HO_DEACT_APV_TYPE";
-    public static PRD_OFR_APV_TYPE = "PROD_OFR_APV_TYPE";
-    public static PRD_OFR_DEACT_APV_TYPE = "PROD_OFR_DEACT_APV_TYPE";    
 
     // Cust Type  
     public static WhiteIndicator = "WHITE";
