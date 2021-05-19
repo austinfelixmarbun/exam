@@ -112,7 +112,7 @@ export class OfficeAddComponent implements OnInit {
     OfficeClose: false,
     AllowAppCreated: false
   })
-  InputLookupObj: any;
+  InputLookupObj: InputLookupObj = new InputLookupObj();
   addressObj: UcAddressObj;
   inputAddressObj: InputAddressObj;
 
@@ -141,10 +141,7 @@ export class OfficeAddComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.InputLookupObj = new InputLookupObj();
     this.InputLookupObj.urlJson = "./assets/lookup/lookupOfficeParent.json";
-    this.InputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.InputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.InputLookupObj.isRequired = true;
     this.InputLookupObj.ddlEnvironments = [
       {
@@ -159,8 +156,6 @@ export class OfficeAddComponent implements OnInit {
       critRefOfficeIdObj.restriction = AdInsConstant.RestrictionNeq;
       critRefOfficeIdObj.propName = 'A.REF_OFFICE_ID';
       critRefOfficeIdObj.value = this.RefOfficeId.toString();
-      console.log("testing...");
-      console.log(this.InputLookupObj);
       this.InputLookupObj.addCritInput.push(critRefOfficeIdObj);
     }
 
@@ -177,16 +172,15 @@ export class OfficeAddComponent implements OnInit {
     tempReq.Code = CommonConstant.RefMasterTypeCodeOfficeType;
     this.httpClient.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, tempReq).subscribe(
       (response) => {
-        if (response[CommonConstant.ReturnObj].length > 0) {
-          this.lookupOfficeType = response[CommonConstant.ReturnObj];
-
+        if (response['RefMasterObjs'].length > 0) {
+          this.lookupOfficeType = response['RefMasterObjs'];
           this.arrCrit = new Array();
           var critObj = new CriteriaObj();
           critObj.restriction = AdInsConstant.RestrictionIn;
           critObj.propName = 'MR_OFFICE_TYPE_CODE';
           critObj.listValue = new Array();
           this.lookupOfficeType.forEach(element => {
-            critObj.listValue.push(element.Key);
+            critObj.listValue.push(element.MasterCode);
           });
 
           this.InputLookupObj.addCritInput.push(critObj);
