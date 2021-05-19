@@ -58,6 +58,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   tempMrMaritalStatCode: Array<KeyValueObj> = new Array<KeyValueObj>();
   inputAddressObj: InputAddressObj;
   inputFieldObj: InputFieldObj;
+  custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
 
   CustomerPersonalForm = this.fb.group({
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -133,10 +134,11 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         }
       }
     );
-    var refMasterObjCustModel = new GenericObj();
-    refMasterObjCustModel.Code =  CommonConstant.CustTypePersonal;
     
-    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+    this.custModelReqObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
+    this.custModelReqObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
+    this.custModelReqObj.MappingCode = CommonConstant.CustTypePersonal;
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.custModelReqObj).subscribe(
       (response : GenericKeyValueListObj) => {
         this.tempCustModel = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
