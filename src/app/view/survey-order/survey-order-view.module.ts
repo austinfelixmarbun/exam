@@ -13,8 +13,6 @@ import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { UclookupgenericComponent, UclookupgenericModule } from "@adins/uclookupgeneric";
 import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneric";
 import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
-import { UcapprovalhistModule, UcapprovalhistComponent } from "@adins/ucapprovalhist";
-
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { SurveyOrderViewComponent } from "./survey-order-view/survey-order-view.component";
 import { SurveyTaskViewComponent } from "./survey-task-view/survey-task-view.component";
@@ -38,12 +36,10 @@ import { SurveyOrderViewRoutingModule } from "./survey-order-routing.module";
     ReactiveFormsModule,
     UcSubsectionModule,
     SharingComponentModule,
-    UcapprovalhistModule,
     UcShowErrorsModule,
     
   ],
   declarations: [
-    // Survey Order
     SurveyOrderViewComponent,
     SurveyTaskViewComponent
 
@@ -51,8 +47,7 @@ import { SurveyOrderViewRoutingModule } from "./survey-order-routing.module";
   entryComponents: [
     UclookupgenericComponent,
     UcviewgenericComponent,
-    UcgridviewComponent,
-    UcapprovalhistComponent
+    UcgridviewComponent
   ]
 
 })

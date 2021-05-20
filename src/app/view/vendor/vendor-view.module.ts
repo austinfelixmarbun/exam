@@ -13,8 +13,6 @@ import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { UclookupgenericComponent, UclookupgenericModule } from "@adins/uclookupgeneric";
 import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneric";
 import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
-import { UcapprovalhistModule, UcapprovalhistComponent } from "@adins/ucapprovalhist";
-
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { VendorViewRoutingModule } from "./vendor-view-routing.module";
 import { VendorBranchViewComponent } from "./vendor-branch-view/vendor-branch-view.component";
@@ -49,16 +47,12 @@ import { MainInfoViewComponent } from "./vendor-ho-info/main-info-view/main-info
     ReactiveFormsModule,
     UcSubsectionModule,
     SharingComponentModule,
-    UcapprovalhistModule,
     UcShowErrorsModule,
     
   ],
   declarations: [
-     ///vendor branch view
      VendorBranchViewComponent,
-     ///vendor holding view
      VendorHoldingViewComponent,
-     ///vendor ho
      VendorHoInfoComponent,
      HoAddressInfoComponent,
      HoBankInfoComponent,
@@ -74,7 +68,6 @@ import { MainInfoViewComponent } from "./vendor-ho-info/main-info-view/main-info
     UclookupgenericComponent,
     UcviewgenericComponent,
     UcgridviewComponent,
-    UcapprovalhistComponent
   ]
 
 })
