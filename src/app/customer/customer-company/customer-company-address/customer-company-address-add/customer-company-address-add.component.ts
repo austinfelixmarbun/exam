@@ -34,7 +34,6 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   addressType: ReqRefMasterByTypeCodeAndMappingCodeObj;
   custAddressObj: CustAddrObj;
   inputFieldAddressObj: InputFieldObj;
-  custAddrFromObj: CustAddrObj;
 
   IdCust: number;
   pageType: string;
@@ -60,15 +59,6 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }
-      // if (params["IdCustPersonal"] != null) {
-      //   this.IdCustPersonal = params["IdCustPersonal"];
-      // }
-      // if (params["mode"] != null) {
-      //   this.pageType = params["mode"];
-      // }
-      // if (params["AddrId"] != null) {
-      //   this.AddrId = params["AddrId"];
-      // }
     });
   }
 
@@ -156,9 +146,9 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
       return;
     }
 
-    this.custAddrFromObj = new CustAddrObj();
-    this.custAddrFromObj.CustAddrId = this.CustDataCompanyForm.controls["CopyAddrFrom"].value;
-    this.http.post(URLConstant.GetCustAddr, this.custAddrFromObj).subscribe(
+    let CustAddrIdObj = new GenericObj();
+    CustAddrIdObj.Id = this.CustDataCompanyForm.controls["CopyAddrFrom"].value;
+    this.http.post(URLConstant.GetCustAddr, CustAddrIdObj).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
         this.CustDataCompanyForm.patchValue({
