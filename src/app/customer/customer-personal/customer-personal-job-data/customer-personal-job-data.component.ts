@@ -9,6 +9,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-customer-personal-job-data',
@@ -22,8 +23,8 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   custObj: any;
   objCust: CustObj;
   IdCust: number;
-
   CustModel: string;
+  custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.tempCustModel = new Array<KeyValueObj>();
@@ -43,10 +44,10 @@ export class CustomerPersonalJobDataComponent implements OnInit {
         this.custObj = response;
         this.CustModel = this.custObj.MrCustModelCode;
 
-        var refMasterObjCustModel = new GenericObj();
-        refMasterObjCustModel.Code =  CommonConstant.CustTypePersonal;
-
-        this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+        this.custModelReqObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
+        this.custModelReqObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
+        this.custModelReqObj.MappingCode = CommonConstant.CustTypePersonal;
+        this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.custModelReqObj).subscribe(
           (response : GenericKeyValueListObj) => {
             this.tempCustModel = response[CommonConstant.ReturnObj];
             if(!this.CustModel){

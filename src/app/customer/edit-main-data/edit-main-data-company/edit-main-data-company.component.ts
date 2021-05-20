@@ -41,6 +41,7 @@ export class EditMainDataCompanyComponent implements OnInit {
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
   UcAddressObj: UcAddressObj = new UcAddressObj();
+  custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private http: HttpClient, private router: Router, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -72,10 +73,10 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
 
-    var refMasterObjCustModel = new GenericObj();
-    refMasterObjCustModel.Code =  CommonConstant.CustTypeCompany;
-    
-    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+    this.custModelReqObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
+    this.custModelReqObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
+    this.custModelReqObj.MappingCode = CommonConstant.CustTypeCompany;
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.custModelReqObj).subscribe(
       (response : GenericKeyValueListObj) => {
         this.tempCustModel = response[CommonConstant.ReturnObj];
         this.CustomerCompanyForm.patchValue({

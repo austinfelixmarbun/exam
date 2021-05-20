@@ -359,7 +359,6 @@ export class URLConstant {
     public static EditRefProfession = environment.FoundationR3Url + "/RefProfession/EditRefProfession";
     public static DeleteRefProfession = "/RefProfession/DeleteRefProfession";
     public static GetRefProfessionById = environment.FoundationR3Url + "/RefProfession/GetRefProfessionByRefProfessionId";
-    public static GetValueCustModel = environment.FoundationR3Url + "/RefCustModel/GetListKeyValueByCode";
     public static GetRefProfessionByProfessionCode = environment.FoundationR3Url + "/RefProfession/GetRefProfessionByProfessionCode"
     public static GetRefProfessionByRefProfessionId = environment.FoundationR3Url + "/RefProfession/GetRefProfessionByRefProfessionId";
 
@@ -842,10 +841,6 @@ export class URLConstant {
 
     // Authentication
     public static RequestNewPassword = environment.FoundationR3Url + "/Authenticate/RequestNewPassword";
-
-    //REF CUST MODEL
-    public static GetListKeyValueByMrCustTypeCode = environment.FoundationR3Url + "/RefCustModel/GetListKeyValueByMrCustTypeCode";
-    public static GetRefCustModelByCode = environment.FoundationR3Url + "/RefCustModel/GetRefCustModelByCode";
 
     // INTEGRATION
     public static SendMasterDailyToRabbitMq = environment.FoundationR3Url + "/Integration/SendMasterDailyToRabbitMq";

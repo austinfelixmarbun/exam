@@ -34,8 +34,8 @@
                     <label class="col-md-3  adInsLabel adins-required adins-required-label" translate>Customer Model Name </label>
                     <div class="col-md-9">
                       <select class="form-control adInsInput" formControlName="MrCustModelCode">
-                        <option *ngFor="let ram of allRefProfessionMethod" [ngValue]="ram.Key">
-                          {{ram.Value}}
+                        <option *ngFor="let ram of allRefProfessionMethod" [ngValue]="ram.MasterCode">
+                          {{ram.Descr}}
                         </option>
                       </select>
                       <lib-uc-show-errors [control]="RefProfessionForm.controls.MrCustModelCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
