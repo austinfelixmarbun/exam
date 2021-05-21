@@ -32,6 +32,7 @@ export class VendorPagingComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("INIII");
     if (this.Type == "Scheme") {
       this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorScheme.json";
       this.inputPagingObj._url = "./assets/ucpaging/searchVendorScheme.json";
@@ -91,16 +92,23 @@ export class VendorPagingComponent implements OnInit {
       this.inputPagingObj.addCritInput.push(critObj);
     }
     else if (this.Type == "Default") {
+      console.log("INIII");
       if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
         if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
           this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSupplier.json";
           this.inputPagingObj._url = "./assets/ucpaging/searchSupplier.json";
-        } else {
+        } 
+        else if(this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
+          this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranchWithoutEmployee.json";
+          this.inputPagingObj._url = "./assets/ucpaging/searchBranchWithoutEmployee.json";
+        }
+        else{
           this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranch.json";
           this.inputPagingObj._url = "./assets/ucpaging/searchBranch.json";
         } 
         this.inputPagingObj.title = typeof(CommonConstant["TITLE_"+this.MrVendorCategoryCode]) != 'undefined' ? CommonConstant["TITLE_"+this.MrVendorCategoryCode] : this.MrVendorCategoryCode.replace(/_/g,' ');
         this.inputPagingObj.addCritInput = new Array();
+        this.inputPagingObj
         var critObj = new CriteriaObj();
         critObj.propName = "vdr.MR_VENDOR_CATEGORY_CODE";
         critObj.restriction = AdInsConstant.RestrictionEq;
