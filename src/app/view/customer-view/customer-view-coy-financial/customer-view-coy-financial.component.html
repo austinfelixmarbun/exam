@@ -2,6 +2,26 @@
 <div class="card">
   <div class="card-body">
     <div class="px-3">
+      
+      <div *ngIf="IsAttrExist">
+        <lib-ucSubsection [id]="'FinAttrInfo'" [title]="'Financial Attribute Information'" [panel]="'FinAttrInfoId'">
+        </lib-ucSubsection>
+        <div id="FinAttrInfoId" class="form-body">
+          <div class="form-group row" *ngFor="let item of responseCustAttr">
+            <label class="col-md-4 adInsLabel" translate>{{item.AttrName}}</label>
+            <label class="col-md-4 adInsLabel" *ngIf="item.AttrInputType !== 'N' && item.AttrInputType !== 'P'">
+              {{item.AttrValue}}
+            </label>
+            <label class="col-md-4 adInsLabel" *ngIf="item.AttrInputType === 'N'">
+              {{item.AttrValue | number:'.2':'en-US'}}
+            </label>
+            <label class="col-md-4 adInsLabel" *ngIf="item.AttrInputType === 'P'">
+              {{item.AttrValue | number:'.6':'en-US'}}
+            </label>
+          </div>
+        </div>
+      </div>
+
       <lib-ucSubsection [id]="'BankId'" [title]="'Customer Bank Account'" [panel]="'CustBankAccId'">
       </lib-ucSubsection>
       <div id="CustBankAccId">

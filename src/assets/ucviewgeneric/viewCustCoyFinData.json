@@ -3,7 +3,7 @@
     "subsection": [
       {
         "subSectionId": "FinDataId",
-        "subSectionTitle": "Financial Data",
+        "subSectionTitle": "Financial Information",
         "mainInfoPath": "/Generic/GetDataViewBySQL",
         "mainInfo": [
           {

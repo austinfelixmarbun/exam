@@ -13,8 +13,6 @@ import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { UclookupgenericComponent, UclookupgenericModule } from "@adins/uclookupgeneric";
 import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneric";
 import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
-import { UcapprovalhistModule, UcapprovalhistComponent } from "@adins/ucapprovalhist";
-
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { NegativeCustomerViewComponent } from "./negative-customer-view.component";
 import { NegativeCustomerViewRoutingModule } from "./negative-customer-view-routing.module";
@@ -37,20 +35,17 @@ import { NegativeCustomerViewRoutingModule } from "./negative-customer-view-rout
     ReactiveFormsModule,
     UcSubsectionModule,
     SharingComponentModule,
-    UcapprovalhistModule,
     UcShowErrorsModule,
     
   ],
   declarations: [
-    ///Negative Customer
     NegativeCustomerViewComponent
 
   ],
   entryComponents: [
     UclookupgenericComponent,
     UcviewgenericComponent,
-    UcgridviewComponent,
-    UcapprovalhistComponent
+    UcgridviewComponent
   ]
 
 })

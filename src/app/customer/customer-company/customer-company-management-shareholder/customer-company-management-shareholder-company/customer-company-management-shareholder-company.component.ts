@@ -36,8 +36,8 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   tempMrCustModelCode: Array<KeyValueObj> = new Array<KeyValueObj>();
   tempMrCompanyTypeCode: any;
   tempCustCompanyMgmntShrholderObj: any;
-
   tempShareholderCustNo: string;
+  custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
 
   ManagementShareholderForm = this.fb.group({
     MgmntShrholderName: ['', [Validators.maxLength(100), Validators.required]],
@@ -94,10 +94,10 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       }
     );
 
-    var refMasterObjCustModel = new GenericObj();
-    refMasterObjCustModel.Code =  CommonConstant.CustTypeCompany;
-    
-    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+    this.custModelReqObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
+    this.custModelReqObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
+    this.custModelReqObj.MappingCode = CommonConstant.CustTypeCompany;
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.custModelReqObj).subscribe(
       (response : GenericKeyValueListObj) => {
         this.tempMrCustModelCode = response[CommonConstant.ReturnObj];
         if (response[CommonConstant.ReturnObj].length > 0) {

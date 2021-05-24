@@ -18,6 +18,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { ReqGetNegativeCustByNegativeCustNameAndCustTypeObj } from 'app/shared/model/Request/NegativeCust/ReqGetNegativeCustObj.model';
 import { ResNegativeCustObj } from 'app/shared/model/Response/NegativeCust/ResNegativeCustObj.model';
+import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
 
 @Component({
   selector: 'app-customer-personal-duplicate-check',
@@ -201,10 +202,10 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       }
     );
 
-    var refMasterObjCustModel = new GenericObj();
-    refMasterObjCustModel.Code= this.CustModel;
-    
-    this.http.post(URLConstant.GetRefCustModelByCode, refMasterObjCustModel).subscribe(
+    var refMasterObjCustModel = new ReqRefMasterByTypeCodeAndMasterCodeObj();
+    refMasterObjCustModel.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
+    refMasterObjCustModel.MasterCode = this.CustModel;
+    this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
       }

@@ -37,6 +37,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   MrCompanyTypeCode: string;
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
+  custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
 
   CustomerCompanyForm = this.fb.group({
     CustModel: ['', [Validators.required]],
@@ -64,10 +65,10 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
 
-    var refMasterObjCustModel = new GenericObj();
-    refMasterObjCustModel.Code =  CommonConstant.CustTypeCompany;
-    
-    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+    this.custModelReqObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
+    this.custModelReqObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
+    this.custModelReqObj.MappingCode = CommonConstant.CustTypeCompany;
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.custModelReqObj).subscribe(
       (response : GenericKeyValueListObj) => {
         this.tempCustModel = response[CommonConstant.ReturnObj];
         this.CustomerCompanyForm.patchValue({

@@ -18,7 +18,6 @@ import { ViewgenericComponent } from './UserControl/viewgeneric/viewgeneric.comp
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcpagingModule } from '@adins/ucpaging';
-import { UcProdOfferingCompComponent } from './UserControl/uc-prod-offering-compnt/uc-prod-offering-comp.component';
 import { ThingsToDoComponent } from './things-to-do/things-to-do.component';
 import { UcthingstodoModule } from '@adins/ucthingstodo';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
@@ -36,7 +35,6 @@ import { UcaddtotempModule } from '@adins/ucaddtotemp';
         LookupgenericComponent,
         ViewgenericComponent,
         LookupgenericComponent,
-        UcProdOfferingCompComponent,
         ThingsToDoComponent,
         UcthingstodoModule,
         UcaddtotempModule
@@ -68,7 +66,6 @@ import { UcaddtotempModule } from '@adins/ucaddtotemp';
         LookupgenericComponent,
         ViewgenericComponent,
         LookupgenericComponent,
-        UcProdOfferingCompComponent,
         ThingsToDoComponent,
     ]
 })

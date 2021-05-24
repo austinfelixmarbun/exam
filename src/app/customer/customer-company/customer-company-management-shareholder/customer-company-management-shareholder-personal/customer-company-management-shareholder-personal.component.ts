@@ -44,6 +44,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
 
   MaxDate: Date;
   UserAccess: Object;
+  custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
 
 
   ManagementShareholderForm = this.fb.group({
@@ -124,10 +125,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
         }
       }
     );
-    var refMasterObjCustModel = new GenericObj();
-    refMasterObjCustModel.Code =  CommonConstant.CustTypePersonal;
     
-    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+    this.custModelReqObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
+    this.custModelReqObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
+    this.custModelReqObj.MappingCode = CommonConstant.CustTypePersonal;
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.custModelReqObj).subscribe(
       (response : GenericKeyValueListObj) => {
         this.tempMrCustModelCode = response[CommonConstant.ReturnObj];
         if (response[CommonConstant.ReturnObj].length > 0) {

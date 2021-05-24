@@ -8,6 +8,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-profession-add-edit',
@@ -22,6 +23,7 @@ export class ProfessionAddEditComponent implements OnInit {
   resultData: any;
   allRefProfessionMethod: any;
   refCustModelCode: any;
+  custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
   RefProfessionForm = this.fb.group({
     ProfessionCode: ['', [Validators.required, Validators.maxLength(50)]],
     ProfessionName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -44,11 +46,11 @@ export class ProfessionAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post(URLConstant.GetValueCustModel, null).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, { Code: CommonConstant.RefMasterTypeCodeCustModel }).subscribe(
       (response) => {
-        this.allRefProfessionMethod = response[CommonConstant.ReturnObj];
+        this.allRefProfessionMethod = response["RefMasterObjs"];
         if (this.allRefProfessionMethod.length > 0) {
-          this.RefProfessionForm.patchValue({ MrCustModelCode: response[CommonConstant.ReturnObj][0]['Key'] });
+          this.RefProfessionForm.patchValue({ MrCustModelCode: this.allRefProfessionMethod[0].MasterCode });
         }
       });
 
