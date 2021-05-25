@@ -27,7 +27,6 @@ import { ReqRefEmployeeObj } from "app/shared/model/Request/UserOrganization/Ref
 
 @Component({
   selector: "app-employee-add",
-  templateUrl: "./employee-add.component.html"
   templateUrl: "./employee-add.component.html",
   providers: [NGXToastrService, RegexService]
 })
@@ -387,22 +386,6 @@ export class EmployeeAddComponent implements OnInit {
       }
     );
   }
-  // setValidatorPattern(){
-  //   let idTypeValue: string;
-
-  //   idTypeValue = this.RefEmpForm.controls[this.controlNameIdType].value;
-
-  //   if (this.resultPattern != undefined) {
-  //     var result = this.resultPattern.find(x => x.Key == idTypeValue)
-
-  //     if (result != undefined) {
-  //       var pattern = result.Value;
-  //       if (pattern != undefined) {
-  //         this.setValidator(pattern);
-  //       }
-  //     }
-  //   }
-  // }
 
   setValidatorPattern() {
     let idTypeValue: string;

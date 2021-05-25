@@ -14,6 +14,7 @@ import { DatePipe, formatDate} from '@angular/common';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-cust-fin-data-tab',
@@ -58,15 +59,15 @@ export class CustFinDataTabComponent implements OnInit {
     CustCompanyId: [0, [Validators.required]],
     GrossMonthlyIncomeAmt: [''],
     GrossProfitAmt: [''],
-    ReturnOfInvestmentPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    ReturnOfEquityPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    ReturnOfAssetPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    ProfitMarginPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    CurrentRatioPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    DebtEquityRatioPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    InvTurnOverPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    ArTurnOverPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    GrowthPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
+    ReturnOfInvestmentPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    ReturnOfEquityPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    ReturnOfAssetPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    ProfitMarginPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    CurrentRatioPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    DebtEquityRatioPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    InvTurnOverPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    ArTurnOverPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    GrowthPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
     WorkingCapitalAmt: [''],
     OthMonthlyInstAmt: [''],
     DateAsOf: [''],
@@ -118,6 +119,7 @@ export class CustFinDataTabComponent implements OnInit {
   }
 
   async ngOnInit() {
+
     this.BusinessDt = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
     this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyFinData : CommonConstant.AttrGroupCustPersonalFinData;
 
@@ -127,7 +129,7 @@ export class CustFinDataTabComponent implements OnInit {
       var custPersonalData;
       var custPersonal = new CustPersonalObj();
       custPersonal.CustId = this.CustId;
-      this.httpClient.post(URLConstant.GetCustPersonalbyCustId, {Id : this.CustId}).pipe(
+      this.httpClient.post(URLConstant.GetCustPersonalbyCustId, { Id: this.CustId }).pipe(
         map((response: CustPersonalObj) => {
           if (!response || response.MrMaritalStatCode == null) {
             this.mrMaritalStatCode = CommonConstant.MR_MARITAL_STAT_CODE_SINGLE;
@@ -141,7 +143,7 @@ export class CustFinDataTabComponent implements OnInit {
         mergeMap((response: CustPersonalObj) => {
           var custPersonalFinData = new CustPersonalFinDataObj();
           custPersonalFinData.CustPersonalId = response.CustPersonalId;
-          let custFinData = this.httpClient.post(URLConstant.GetCustPersonalFinDataByCustPersonalId, {Id : response.CustPersonalId});
+          let custFinData = this.httpClient.post(URLConstant.GetCustPersonalFinDataByCustPersonalId, { Id: response.CustPersonalId });
           var refMasterSourceIncome = new RefMasterObj();
           refMasterSourceIncome.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeSourceIncome;
           let sourceIncomeList = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterSourceIncome);
@@ -226,9 +228,10 @@ export class CustFinDataTabComponent implements OnInit {
 
       //  this.bindFinancialAttribute();
 
-
     }
   }
+
+  // Data DSF =================================
 
   initRefMaster() {
     this.httpClient.post(URLConstant.GetListActiveRefMaster, { 'RefMasterTypeCode': CommonConstant.RefMasterTypeCodeSourceIncome }).subscribe((response) => {
@@ -247,12 +250,11 @@ export class CustFinDataTabComponent implements OnInit {
         this.mrMaritalStatCode = (!response || response.MrMaritalStatCode == null) ? CommonConstant.MR_MARITAL_STAT_CODE_SINGLE : response.MrMaritalStatCode;
       })
     }
-
     await this.httpClient.post(URLConstant.GetListCustPersonalFinDataByCustId, { 'CustId': this.CustId }).toPromise().then((response) => {
       this.ListCustPersonalFinData = response['ListCustPersonalFinData'];
     })
-
   }
+
 
   async getListCustCoyFinData() {
     this.ListCustCoyFinData = [];
@@ -265,7 +267,6 @@ export class CustFinDataTabComponent implements OnInit {
     await this.httpClient.post(URLConstant.GetListCustCompanyFinDataByCustId, { 'CustId': this.CustId }).toPromise().then((response) => {
       this.ListCustCoyFinData = response['ListCustCompanyFinData'];
     })
-
   }
 
   showModalCustFinData(FinDataIndex: number) {
@@ -553,4 +554,6 @@ export class CustFinDataTabComponent implements OnInit {
       }
     );
   }
+
+  // END Data DSF =================================
 }

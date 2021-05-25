@@ -280,10 +280,11 @@ export const customCurrencyMaskConfig = {
     UpdateCustomerContactInfoComponent,
     UpdateCustomerCompanyFinDataComponent,
     UpdateCustomerCompanyLegalDocComponent,
-    CustBankAccComponent
+    CustBankAccComponent,
+    CustAssetComponent
   ],
   providers: [
-    NGXToastrService
+    NGXToastrService, 
     CustAssetComponent,
     CustAssetDetailComponent,
     PopUpViewAsliRIAllDataComponent,
@@ -310,13 +311,10 @@ export const customCurrencyMaskConfig = {
     FinancialStatementsComponent,
     AllComponent,
     PopUpViewDukcapilComponent,
-    PopUpViewSlikComponent
+    PopUpViewSlikComponent,
+    RegexService
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent, CustAssetDetailComponent]
-  ,
-  providers: [
-    RegexService
-  ]
 })
 export class CustomerModule {
   constructor() {

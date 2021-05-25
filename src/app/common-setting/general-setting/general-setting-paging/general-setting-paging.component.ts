@@ -3,13 +3,13 @@ import { Component, OnInit } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
 import { CriteriaObj } from "app/shared/model/CriteriaObj.Model";
-import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Component({
   selector: "app-general-setting-paging",
   templateUrl: "./general-setting-paging.component.html"
 })
+
 export class GeneralSettingPagingComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();
   arrCrit: any;
@@ -31,7 +31,6 @@ export class GeneralSettingPagingComponent implements OnInit {
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.propName = 'IS_UPDATEABLE';
     critObj.value = '1';
-    //this.arrCrit.push(critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
 }

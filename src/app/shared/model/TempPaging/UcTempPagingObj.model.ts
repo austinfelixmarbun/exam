@@ -1,6 +1,5 @@
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CriteriaObj } from '../CriteriaObj.Model';
-import { CriteriaObj } from '../CriteriaObj.model';
 
 export class UcTempPagingObj {
     urlJson: string;

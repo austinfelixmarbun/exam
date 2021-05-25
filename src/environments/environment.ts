@@ -6,21 +6,15 @@
 export const environment = {
   production: false,
   navbarColor: 'lightgray',
-  LosURL: 'http://r3web-server.ad-ins.com/LOSR3/',
-  WebSocketURL: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
-  FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
+  LosURL: 'http://r3impl-websvr.ad-ins.com/LOSDSF/',
+  FoundationR3Url: 'http://r3impl-appsvr.ad-ins.com/FOUDSF',
+  WebSocketURL: 'http://r3impl-appsvr.ad-ins.com/FOUDSF',
   DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
-  //FoundationR3Url: 'https://localhost:5001',
   losR3Web: 'http://r3web-server/LOSR3',
   lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS',
-  LosURL : 'http://r3impl-websvr.ad-ins.com/LOSDSF/',
-  WebSocketURL : 'http://r3impl-appsvr.ad-ins.com/FOUDSF',
-  // FoundationR3Url: 'http://r3impl-appsvr.ad-ins.com/FOUDSF',
-  FoundationR3Url: 'http://localhost:5000',
-  Module:"FOU",
-  ApprovalURL : 'http://r3impl-appsvr.ad-ins.com/APPROVAL_DSF',
-  FoundationR3Web:'http:/r3impl-websvr.ad-ins.com/FOUDSF',
-  DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
+  Module: "FOU",
+  ApprovalURL: 'http://r3impl-appsvr.ad-ins.com/APPROVAL_DSF',
+  FoundationR3Web: 'http:/r3impl-websvr.ad-ins.com/FOUDSF',
   ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
   ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
 

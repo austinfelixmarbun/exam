@@ -94,8 +94,8 @@
             </div>
             <div class="line"></div>
             <div class="step" data-target="#cust-attr-tab">
-              <button type="button" class="step-trigger" role="tab" aria-controls="cust-attr-tab" id="cust-attr-tab-trigger"
-                (click)="EnterTab('CustAttr')">
+              <button type="button" class="step-trigger" role="tab" aria-controls="cust-attr-tab"
+                id="cust-attr-tab-trigger" (click)="EnterTab('CustAttr')">
                 <span class="bs-stepper-circle">{{SysConfigResultObj?.ConfigValue == '1' ? 9 : 8}}</span>
                 <span class="bs-stepper-circle">10</span>
                 <span class="bs-stepper-label">Other Info</span>
@@ -119,7 +119,8 @@
             </app-customer-company-management-shareholder>
           </div>
           <div id="group-tab" class="content" role="tabpanel" aria-labelledby="group-tab-trigger">
-            <app-cust-group-tab *ngIf="CustStepIndex == 4" [MrCustTypeCode]="'COMPANY'" [CustId]="IdCust" (outputTab)="getValue($event)">
+            <app-cust-group-tab *ngIf="CustStepIndex == 4" [MrCustTypeCode]="'COMPANY'" [CustId]="IdCust"
+              (outputTab)="getValue($event)">
             </app-cust-group-tab>
           </div>
           <div id="contact-tab" class="content" role="tabpanel" aria-labelledby="contact-tab-trigger">
@@ -128,7 +129,8 @@
             </app-customer-company-contact-information>
           </div>
           <div id="financial-tab" class="content" role="tabpanel" aria-labelledby="financial-tab-trigger">
-            <app-cust-fin-data-tab *ngIf="CustStepIndex == 6" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'" (outputTab)="getValue($event)">
+            <app-cust-fin-data-tab *ngIf="CustStepIndex == 6" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'"
+              (outputTab)="getValue($event)">
             </app-cust-fin-data-tab>
           </div>
           <div id="CustAsset-tab" class="content" role="tabpanel" aria-labelledby="CustAsset-tab-trigger">
@@ -140,11 +142,14 @@
             </app-cust-legal-doc>
           </div>
           <div id="upload-tab" class="content" role="tabpanel" aria-labelledby="upload-tab-trigger">
-            <app-dms-iframe  *ngIf="CustStepIndex == 8 && SysConfigResultObj?.ConfigValue == '1'" [dmsObj]="dmsObj" [showButton]="true" (outputTab)="getValue($event)" (outputCancel)="getValue($event)"></app-dms-iframe>
-            <app-dms-iframe  *ngIf="CustStepIndex == 9" [dmsObj]="dmsObj" [showButton]="true" (outputTab)="getValue($event)" (outputCancel)="getValue($event)"></app-dms-iframe>
+            <app-dms-iframe *ngIf="CustStepIndex == 9 && SysConfigResultObj?.ConfigValue == '1'" [dmsObj]="dmsObj"
+              [showButton]="true" (outputTab)="getValue($event)" (outputCancel)="getValue($event)"></app-dms-iframe>
+            <!-- <app-dms-iframe *ngIf="CustStepIndex == 9" [dmsObj]="dmsObj" [showButton]="true"
+              (outputTab)="getValue($event)" (outputCancel)="getValue($event)"></app-dms-iframe> -->
           </div>
           <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
-            <app-cust-attr-section *ngIf="CustStepIndex == 10" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'"></app-cust-attr-section>
+            <app-cust-attr-section *ngIf="CustStepIndex == 10" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'">
+            </app-cust-attr-section>
           </div>
         </div>
       </div>
