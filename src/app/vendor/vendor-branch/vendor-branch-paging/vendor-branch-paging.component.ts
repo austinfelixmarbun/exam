@@ -5,7 +5,6 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({

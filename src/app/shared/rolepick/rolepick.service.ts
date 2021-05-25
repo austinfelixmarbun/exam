@@ -57,9 +57,8 @@ export class RolePickService {
                     RoleCode: item.RoleCode,
                     JobTitleCode: item.JobTitleCode,
                     RequestDateTime: item.BusinessDt,
-                    RowVersion: ""
-                    Ip: "",
                     RowVersion: "",
+                    Ip: "",
                     ModuleCode:environment.Module
 
                 };
