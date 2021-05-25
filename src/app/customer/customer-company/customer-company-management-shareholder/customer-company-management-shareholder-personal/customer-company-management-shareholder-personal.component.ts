@@ -17,7 +17,6 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 @Component({
   selector: 'app-customer-company-management-shareholder-personal',
   templateUrl: './customer-company-management-shareholder-personal.component.html',
-  styleUrls: []
   styleUrls: [],
   providers: [NGXToastrService, RegexService],
 })
@@ -67,7 +66,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   });
   tempShareholderCustId: number;
 
-  constructor(private regexService: RegexService,  private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
+  constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
     this.isExistingCust = false;
   }
@@ -107,9 +106,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
             MrIdTypeCode: this.tempIdType[0].Key
           });
           this.ChangeIdType();
-          this.ChangeIdType(this.tempIdType[0].Key);
-          if(this.tempIdType != undefined)
-          {
+          // this.ChangeIdType(this.tempIdType[0].Key);
+          if (this.tempIdType != undefined) {
             this.getInitPattern();
           }
         }
@@ -238,7 +236,8 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       }
       if (this.custExistingId != 0) {
         this.custCompanyMgmntShrholderObj.ShareholderId = this.custExistingId;
-      if(this.tempShareholderCustId!=null){
+      }
+      if (this.tempShareholderCustId != null) {
         this.custCompanyMgmntShrholderObj.ShareholderId = this.tempShareholderCustId;
       }
       // this.custCompanyMgmntShrholderObj.CustCompanyId = this.custCompanyId;
@@ -278,8 +277,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
 
   onOptionsSelected(event) {
     this.ChangeIdType();
-  onOptionsSelected(event){  
-    this.ChangeIdType(event.target.value);
+    //this.ChangeIdType(event.target.value);
     this.setValidatorPattern();
   }
 
@@ -337,7 +335,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.tempShareholderCustNo = event.CustNo;
 
     this.tempShareholderCustId = event.CustId;
-    
+
     this.ManagementShareholderForm.controls.MgmntShrholderName.disable();
     this.ManagementShareholderForm.controls.MrCustModelCode.disable();
     this.ManagementShareholderForm.controls.MrIdTypeCode.disable();
@@ -361,12 +359,11 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
     this.regexService.getListPattern().subscribe(
       response => {
         this.resultPattern = response[CommonConstant.ReturnObj];
-        if(this.resultPattern != undefined)
-        {
+        if (this.resultPattern != undefined) {
           for (let i = 0; i < this.resultPattern.length; i++) {
             let patternObj: CustomPatternObj = new CustomPatternObj();
             let pattern: string = this.resultPattern[i].Value;
-    
+
             patternObj.pattern = pattern;
             patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
             this.customPattern.push(patternObj);
