@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -8,21 +8,19 @@ import { CustCompanyFinDataObj } from 'app/shared/model/CustCompanyFinDataObj.Mo
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { map, mergeMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
-import { CustPersonalFinDataObj } from 'app/shared/model/CustPersonalFinDataObj.Model';
-import { CustCompanyFinDataObj } from 'app/shared/model/CustCompanyFinDataObj.Model';
-import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
-import { ActivatedRoute } from '@angular/router';
-import { DatePipe, formatDate, } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
+import { DatePipe, formatDate} from '@angular/common';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-cust-fin-data-tab',
   templateUrl: './cust-fin-data-tab.component.html',
-  styleUrls: []
+  styleUrls: [],
+  providers: [NGXToastrService]
 })
 export class CustFinDataTabComponent implements OnInit {
   @Input() MrCustTypeCode: string;
@@ -61,15 +59,15 @@ export class CustFinDataTabComponent implements OnInit {
     CustCompanyId: [0, [Validators.required]],
     GrossMonthlyIncomeAmt: [''],
     GrossProfitAmt: [''],
-    ReturnOfInvestmentPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    ReturnOfEquityPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    ReturnOfAssetPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    ProfitMarginPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    CurrentRatioPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    DebtEquityRatioPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    InvTurnOverPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    ArTurnOverPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
-    GrowthPrcnt: [0, [Validators.pattern('^[0-9]+$')]],
+    ReturnOfInvestmentPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    ReturnOfEquityPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    ReturnOfAssetPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    ProfitMarginPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    CurrentRatioPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    DebtEquityRatioPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    InvTurnOverPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    ArTurnOverPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    GrowthPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
     WorkingCapitalAmt: [''],
     OthMonthlyInstAmt: [''],
     DateAsOf: [''],
@@ -103,8 +101,16 @@ export class CustFinDataTabComponent implements OnInit {
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
+    private router: Router,
     private route: ActivatedRoute,
-    private modalService: NgbModal) {
+    private modalService: NgbModal
+  ) {
+    if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
+      this.isCalculated = false;
+    }
+    else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
+      this.isCalculated = true;
+    }
     this.route.queryParams.subscribe(params => {
       if (params["Page"] != null) {
         this.Page = params["Page"];
@@ -113,15 +119,17 @@ export class CustFinDataTabComponent implements OnInit {
   }
 
   async ngOnInit() {
+
     this.BusinessDt = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
+    this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyFinData : CommonConstant.AttrGroupCustPersonalFinData;
 
-    this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyFinData : CommonConstant.AttrGroupCustPersonalFinData;;
-
+    var datePipe = new DatePipe("en-US");
     if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
+      await this.getListCustPersonalFinData();
       var custPersonalData;
       var custPersonal = new CustPersonalObj();
       custPersonal.CustId = this.CustId;
-      this.httpClient.post(URLConstant.GetCustPersonalbyCustId, {Id : this.CustId}).pipe(
+      this.httpClient.post(URLConstant.GetCustPersonalbyCustId, { Id: this.CustId }).pipe(
         map((response: CustPersonalObj) => {
           if (!response || response.MrMaritalStatCode == null) {
             this.mrMaritalStatCode = CommonConstant.MR_MARITAL_STAT_CODE_SINGLE;
@@ -135,7 +143,7 @@ export class CustFinDataTabComponent implements OnInit {
         mergeMap((response: CustPersonalObj) => {
           var custPersonalFinData = new CustPersonalFinDataObj();
           custPersonalFinData.CustPersonalId = response.CustPersonalId;
-          let custFinData = this.httpClient.post(URLConstant.GetCustPersonalFinDataByCustPersonalId, {Id : response.CustPersonalId});
+          let custFinData = this.httpClient.post(URLConstant.GetCustPersonalFinDataByCustPersonalId, { Id: response.CustPersonalId });
           var refMasterSourceIncome = new RefMasterObj();
           refMasterSourceIncome.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeSourceIncome;
           let sourceIncomeList = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterSourceIncome);
@@ -164,59 +172,12 @@ export class CustFinDataTabComponent implements OnInit {
           this.sourceOfIncomeList = sourceIncome;
         }
       );
-      await this.getListCustPersonalFinData();
+
+      // this.bindFinancialAttribute();
+
     }
     else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
       await this.getListCustCoyFinData();
-    }
-  }
-
-  initRefMaster() {
-    this.httpClient.post(URLConstant.GetListActiveRefMaster, { 'RefMasterTypeCode': CommonConstant.RefMasterTypeCodeSourceIncome }).subscribe((response) => {
-      this.sourceOfIncomeList = response[CommonConstant.ReturnObj];
-      this.CustPersonalFinDataForm.patchValue({
-        MrSourceOfIncomeCode: this.sourceOfIncomeList[0].Key
-      })
-    })
-  }
-
-  async getListCustPersonalFinData() {
-    this.ListCustPersonalFinData = [];
-    if (!this.custPersonalId) {
-      await this.httpClient.post(URLConstant.GetCustPersonalbyCustId, { 'CustId': this.CustId }).toPromise().then((response: CustPersonalObj) => {
-        this.custPersonalId = response.CustPersonalId;
-        this.mrMaritalStatCode = (!response || response.MrMaritalStatCode == null) ? CommonConstant.MR_MARITAL_STAT_CODE_SINGLE : response.MrMaritalStatCode;
-      })
-    }
-
-    await this.httpClient.post(URLConstant.GetListCustPersonalFinDataByCustId, { 'CustId': this.CustId }).toPromise().then((response) => {
-      this.ListCustPersonalFinData = response['ListCustPersonalFinData'];
-    })
-
-  }
-
-  async getListCustCoyFinData() {
-    this.ListCustCoyFinData = [];
-    if (!this.custCoyId) {
-      await this.httpClient.post(URLConstant.GetCustCompanyByCustId, { 'CustId': this.CustId }).toPromise().then((response: CustCompanyObj) => {
-        this.custCoyId = response.CustCompanyId;
-      })
-    }
-
-    await this.httpClient.post(URLConstant.GetListCustCompanyFinDataByCustId, { 'CustId': this.CustId }).toPromise().then((response) => {
-      this.ListCustCoyFinData = response['ListCustCompanyFinData'];
-    })
-
-  }
-
-  showModalCustFinData(FinDataIndex: number) {
-    this.isCalculated = false;
-    this.initRefMaster();
-    if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
-      this.getSingleCustPersonalFinData(FinDataIndex);
-      this.currentModal = this.modalService.open(this.ModalPersonalFinData, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
-    }
-    else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
       var custCompanyData;
       var custCompany = new CustCompanyObj();
       custCompany.CustId = this.CustId;
@@ -262,6 +223,60 @@ export class CustFinDataTabComponent implements OnInit {
             CurrRatio: response.CurrRatio,
             RowVersion: response.RowVersion,
           });
+        }
+      );
+
+      //  this.bindFinancialAttribute();
+
+    }
+  }
+
+  // Data DSF =================================
+
+  initRefMaster() {
+    this.httpClient.post(URLConstant.GetListActiveRefMaster, { 'RefMasterTypeCode': CommonConstant.RefMasterTypeCodeSourceIncome }).subscribe((response) => {
+      this.sourceOfIncomeList = response[CommonConstant.ReturnObj];
+      this.CustPersonalFinDataForm.patchValue({
+        MrSourceOfIncomeCode: this.sourceOfIncomeList[0].Key
+      })
+    })
+  }
+
+  async getListCustPersonalFinData() {
+    this.ListCustPersonalFinData = [];
+    if (!this.custPersonalId) {
+      await this.httpClient.post(URLConstant.GetCustPersonalbyCustId, { 'CustId': this.CustId }).toPromise().then((response: CustPersonalObj) => {
+        this.custPersonalId = response.CustPersonalId;
+        this.mrMaritalStatCode = (!response || response.MrMaritalStatCode == null) ? CommonConstant.MR_MARITAL_STAT_CODE_SINGLE : response.MrMaritalStatCode;
+      })
+    }
+    await this.httpClient.post(URLConstant.GetListCustPersonalFinDataByCustId, { 'CustId': this.CustId }).toPromise().then((response) => {
+      this.ListCustPersonalFinData = response['ListCustPersonalFinData'];
+    })
+  }
+
+
+  async getListCustCoyFinData() {
+    this.ListCustCoyFinData = [];
+    if (!this.custCoyId) {
+      await this.httpClient.post(URLConstant.GetCustCompanyByCustId, { 'CustId': this.CustId }).toPromise().then((response: CustCompanyObj) => {
+        this.custCoyId = response.CustCompanyId;
+      })
+    }
+
+    await this.httpClient.post(URLConstant.GetListCustCompanyFinDataByCustId, { 'CustId': this.CustId }).toPromise().then((response) => {
+      this.ListCustCoyFinData = response['ListCustCompanyFinData'];
+    })
+  }
+
+  showModalCustFinData(FinDataIndex: number) {
+    this.isCalculated = false;
+    this.initRefMaster();
+    if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
+      this.getSingleCustPersonalFinData(FinDataIndex);
+      this.currentModal = this.modalService.open(this.ModalPersonalFinData, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
+    }
+    else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
       this.getSingleCustCoyFinData(FinDataIndex);
       this.currentModal = this.modalService.open(this.ModalCoyFinData, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
     }
@@ -377,18 +392,19 @@ export class CustFinDataTabComponent implements OnInit {
       this.CustPersonalFinDataForm.get(key).markAsTouched();
     });
     if (this.CustPersonalFinDataForm.valid) {
-      var monthlyIncomeAmt = parseInt(this.CustPersonalFinDataForm.controls['MonthlyIncomeAmt'].value);
-      var spouseMonthlyIncomeAmt = parseInt(this.CustPersonalFinDataForm.controls['SpouseMonthlyIncomeAmt'].value);
+      var formData = this.CustPersonalFinDataForm.value;
+      var monthlyIncomeAmt = formData.MonthlyIncomeAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.MonthlyIncomeAmt.toString()));
+      var spouseMonthlyIncomeAmt = formData.SpouseMonthlyIncomeAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.SpouseMonthlyIncomeAmt.toString()));
       var totalIncomeAmt = 0;
       var nettIncomeAmt = 0;
-      var nettProfitMonthlyAmt = parseInt(this.CustPersonalFinDataForm.controls['NettProfitMonthlyAmt'].value);
-      var otherIncomeAmt = parseInt(this.CustPersonalFinDataForm.controls['OtherIncomeAmt'].value);
-      var monthlyExpenseAmt = parseInt(this.CustPersonalFinDataForm.controls['MonthlyExpenseAmt'].value);
-      var monthlyInstallmentAmt = parseInt(this.CustPersonalFinDataForm.controls['MonthlyInstallmentAmt'].value);
-      var otherMonthlyInstAmt = parseInt(this.CustPersonalFinDataForm.controls['OtherMonthlyInstAmt'].value);
+      var nettProfitMonthlyAmt = formData.NettProfitMonthlyAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.NettProfitMonthlyAmt.toString()));
+      var otherIncomeAmt = formData.OtherIncomeAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.OtherIncomeAmt.toString()));
+      var monthlyExpenseAmt = formData.MonthlyExpenseAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.MonthlyExpenseAmt.toString()));
+      var monthlyInstallmentAmt = formData.MonthlyInstallmentAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.MonthlyInstallmentAmt.toString()));
+      var otherMonthlyInstAmt = formData.OtherMonthlyInstAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.OtherMonthlyInstAmt.toString()));
       var totalAmt = 0;
 
-      if (this.CustPersonalFinDataForm.controls['IsJoinIncome'].value) {
+      if (formData.IsJoinIncome) {
         totalAmt = monthlyIncomeAmt + spouseMonthlyIncomeAmt + totalIncomeAmt + nettIncomeAmt + nettProfitMonthlyAmt + otherIncomeAmt;
       }
       else {
@@ -397,14 +413,22 @@ export class CustFinDataTabComponent implements OnInit {
       var netIncomeAmt = totalAmt - (monthlyExpenseAmt + monthlyInstallmentAmt + otherMonthlyInstAmt);
 
       this.CustPersonalFinDataForm.patchValue({
-        TotalIncomeAmt: totalAmt,
-        NettIncomeAmt: netIncomeAmt
+        TotalIncomeAmt: this.currencyFormatter(totalAmt.toString()),
+        NettIncomeAmt: this.currencyFormatter(netIncomeAmt.toString())
       });
       this.isCalculated = true;
       this.spouseMonthlyIncomeAmt = this.CustPersonalFinDataForm.controls["SpouseMonthlyIncomeAmt"].value;
     }
   }
 
+  currencyFormatter(value: string) {
+    return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  currencyToNumber(value: string) {
+    return value.replace(/,/g, "");
+  }
+  
   async saveCustPersonalFinData() {
     if (!this.CustPersonalFinDataForm.valid) return;
 
@@ -413,10 +437,6 @@ export class CustFinDataTabComponent implements OnInit {
       return;
     }
 
-  next() {
-    console.log("ameng");
-    var response;
-    let url: string = "";
     let custFinData: CustPersonalFinDataObj = {
       CustPersonalFinDataId: this.CustPersonalFinDataForm.controls['CustPersonalFinDataId'].value,
       CustPersonalId: this.CustPersonalFinDataForm.controls['CustPersonalId'].value,
@@ -491,24 +511,6 @@ export class CustFinDataTabComponent implements OnInit {
       (response) => {
         if (this.currentModal) this.currentModal.close();
       }
-      if (this.CustPersonalFinDataForm.get('AttrList') != undefined || this.CustCompanyFinDataForm.get('AttrList') != undefined) {
-        if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
-          var formValue = this.CustCompanyFinDataForm['controls']['AttrList'].value;
-        } else {
-          var formValue = this.CustPersonalFinDataForm['controls']['AttrList'].value;
-        }
-        if (Object.keys(formValue).length > 0 && formValue.constructor === Object) {
-          for (const key in formValue) {
-            if (formValue[key]["AttrValue"] != null) {
-              var custAttr = {
-                CustId: this.CustId,
-                RefAttrId: formValue[key]["RefAttrId"],
-                AttrValue: formValue[key]["AttrValue"],
-                AttrGroup: this.attrGroup
-              };
-              custAttrRequest.push(custAttr);
-            }
-          }
     );
 
     await this.getListCustCoyFinData();
@@ -551,6 +553,7 @@ export class CustFinDataTabComponent implements OnInit {
         this.outputTab.emit({ stepMode: "next" });
       }
     );
-
   }
+
+  // END Data DSF =================================
 }

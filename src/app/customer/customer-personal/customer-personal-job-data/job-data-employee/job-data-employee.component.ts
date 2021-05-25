@@ -21,6 +21,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-job-data-employee',

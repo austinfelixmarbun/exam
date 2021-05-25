@@ -303,9 +303,7 @@ export class CommonConstant {
 
     //Sys Config
     public static ConfigCodeIsUseDms = "IS_USE_DMS";
-
     public static JOURNAL_STAT_EXE_DESCR = "EXECUTED";
-    public static PRD_OFR_DEACT_APV_TYPE = "PROD_OFR_DEACT_APV_TYPE";  
     public static VENDOR_GRD_SUPPL_BRC_APV_TYPE = "VENDOR_GRD_SUPPL_BRC_APV_TYPE"; 
     public static GS_IS_CUST_THIRD_PARTY_CHECK = "IS_CUST_THIRD_PARTY_CHECK";
     public static GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK = "MAX_DAYS_CUST_THIRD_PARTY_CHECK";

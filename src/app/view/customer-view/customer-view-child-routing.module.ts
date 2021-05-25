@@ -16,7 +16,6 @@ const routes: Routes = [
         loadChildren: './customer-view-personal-contact-person/customer-view-personal-contact-person.module#CustomerViewPersonalContactPersonModule'
       },
       {
-        path: PathConstant.VIEW_CUST_PERSONAL_JOB_DATA,
         path: 'PersonalFamily',
         loadChildren: './customer-view-personal-family/customer-view-personal-family.module#CustomerViewPersonalFamilyModule'
       },
@@ -25,7 +24,7 @@ const routes: Routes = [
         loadChildren: './customer-view-personal-emergency-contact/customer-view-personal-emergency-contact.module#CustomerViewPersonalEmergencyContactModule'
       },
       {
-        path: 'PersonalJobData',
+        path: PathConstant.VIEW_CUST_PERSONAL_JOB_DATA,
         loadChildren: './customer-view-personal-job-data/customer-view-personal-job-data.module#CustomerViewPersonalJobDataModule'
       },
       {

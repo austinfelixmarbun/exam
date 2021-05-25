@@ -15,11 +15,10 @@ export class CustBankAccObj {
     EndPeriod: string;
     ListBankStmntObj: Array<any>
     RowVersion: any;
+    BegBalanceAmt: any;
 
     constructor(){
         this.CustBankAccId = 0, 
         this.RowVersion = ""
     }
-    BegBalanceAmt: any;
-    constructor(){this.CustBankAccId = 0, this.RowVersion = ""}
 }

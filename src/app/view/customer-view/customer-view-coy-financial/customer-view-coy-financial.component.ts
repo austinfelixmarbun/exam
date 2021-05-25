@@ -30,14 +30,13 @@ export class CustomerViewCoyFinancialComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-    var custAddrObj = { "CustId": this.CustId };
-    this.http.post(this.GetCBAForCustFinDataByCustIdUrl, { Id: this.CustId }).subscribe(
   }
 
   ngOnInit() {    
     this.getListCustCoyFinData();
     
-    this.http.post(this.GetCBAForCustFinDataByCustIdUrl, { "CustId": this.CustId }).subscribe(
+    var custAddrObj = { "CustId": this.CustId };
+    this.http.post(this.GetCBAForCustFinDataByCustIdUrl, { Id: this.CustId }).subscribe(
       response => {
         this.responseCBAObj = response['ListCBAForCustFinData'];
       },

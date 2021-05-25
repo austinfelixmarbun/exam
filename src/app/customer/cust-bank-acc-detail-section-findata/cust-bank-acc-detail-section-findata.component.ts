@@ -192,10 +192,10 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
                 Month: [this.monthOfYear.indexOf(item.Month), [Validators.required]],
                 Year: [item.Year, [Validators.required, Validators.pattern("^[0-9]+$")]],
                 DebitTrxCount: [(item.DebitTrxCount == undefined ? 0 : item.DebitTrxCount), [Validators.required, Validators.min(0), Validators.max(9999)]],
-                DebitAmt: [item.DebitAmt, [Validators.required]],
                 CreditTrxCount: [(item.CreditTrxCount == undefined ? 0 : item.CreditTrxCount), [Validators.required, Validators.min(0), Validators.max(9999)]],
-                CreditAmt: [item.CreditAmt, [Validators.required]],
-                BalanceAmt: [parseFloat(item.BalanceAmt)],
+                DebitAmt: [item.DebitAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
+                CreditAmt: [item.CreditAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
+                BalanceAmt: [parseFloat(item.BalanceAmt), [Validators.required, Validators.pattern("^[0-9]+$")]],
                 RowVersion: [item.RowVersion]
               });
               formArray.push(formGroup);
@@ -218,10 +218,10 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       Month: ['', [Validators.required]],
       Year: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
       DebitTrxCount: [0, [Validators.required, Validators.min(0), Validators.max(9999)]],
-      DebitAmt: [0, [Validators.required]],
       CreditTrxCount: [0, [Validators.required, Validators.min(0), Validators.max(9999)]],
-      CreditAmt: [0, [Validators.required]],
-      BalanceAmt: [''],
+      DebitAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+      CreditAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+      BalanceAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
       RowVersion: ['']
     });
     formArray.push(formGroup);
