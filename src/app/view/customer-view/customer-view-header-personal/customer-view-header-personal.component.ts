@@ -101,7 +101,6 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
           MasterCode: this.tempCustPersonalObj.MrGenderCode,
           RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender
         }
-        this.http.post(this.getRefMasterByMasterCodeUrl, {Code: this.tempCustPersonalObj.MrGenderCode}).subscribe(
         this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMasterObjMrGenderCode).subscribe(
           (response) => {
             this.tempMrGenderCode = response;
