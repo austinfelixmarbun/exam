@@ -168,16 +168,6 @@ export class CustomerViewComponent implements OnInit {
           AdInsHelper.RedirectUrl(this.router,["/View/Customer/PersonalFinancialData"],{ "CustId": this.CustId });
         });
       }
-      // else if (ev == 6) {
-      //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-      //     AdInsHelper.RedirectUrl(this.router,["/View/Customer/CoyOther"],{ "CustId": this.CustId });
-      //   });
-      // }
-      // else if (ev == 7) {
-      //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-      //     AdInsHelper.RedirectUrl(this.router,["/View/Customer/PersonalAppListing"],{ "CustId": this.CustId });
-      //   });
-      // }
       else if (ev == 6) {
         if(this.IsUseDms) { // Document
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
@@ -319,11 +309,6 @@ export class CustomerViewComponent implements OnInit {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_COY_LEGAL],{ "CustId": this.CustId });
         });
       }
-      // else if (ev == 7) {
-      //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-      //     AdInsHelper.RedirectUrl(this.router,["/View/Customer/CoyOther"],{ "CustId": this.CustId });
-      //   });
-      // }
       else if (ev == 7) {
         if(this.IsUseDms) { // Document
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
