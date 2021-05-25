@@ -25,8 +25,8 @@ export class CustAttrSectionComponent implements OnInit {
   pageType: string;
   isLookupReady: boolean;
   attrGroup: string;
-  From : string;
-  CustOtherInfo : any;
+  From: string;
+  CustOtherInfo: any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -34,13 +34,13 @@ export class CustAttrSectionComponent implements OnInit {
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder
-  ) { 
+  ) {
     this.pageType = "add";
     this.isLookupReady = false;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.From = params["From"];
-      } 
+      }
     });
   }
 
@@ -49,34 +49,34 @@ export class CustAttrSectionComponent implements OnInit {
     LbppmsCntrprtId: ['', [Validators.required]],
     LbppmsBizSustainId: ['', [Validators.required]],
     LbppmsBizSclId: ['', [Validators.required]]
-  }); 
-  inputDebitorGroupLookupObj : InputLookupObj;
+  });
+  inputDebitorGroupLookupObj: InputLookupObj;
   inputDebitorBusinessScaleLookupObj: InputLookupObj;
   inputCounterpartCategoryLookupObj: InputLookupObj;
   inputSustaianableFinancialBusinessLookupObj: InputLookupObj;
 
   isExistData: boolean = false;
-  async ngOnInit() { 
-    this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyOther:CommonConstant.AttrGroupCustPersonalOther;
+  async ngOnInit() {
+    this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyOther : CommonConstant.AttrGroupCustPersonalOther;
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = this.CustId;
     await this.httpClient.post(URLConstant.GetCustOtherInfoByCustId, reqObj).toPromise().then(
       (response: any) => {
         this.CustOtherInfo = response;
-      }); 
+      });
     this.inputDebitorGroupLookupObj = new InputLookupObj();
     this.inputDebitorGroupLookupObj.urlJson = "./assets/lookup/lookupDebitorGroup.json";
     this.inputDebitorGroupLookupObj.pagingJson = "./assets/lookup/lookupDebitorGroup.json";
     this.inputDebitorGroupLookupObj.genericJson = "./assets/lookup/lookupDebitorGroup.json";
     this.inputDebitorGroupLookupObj.isReady = true;
 
-    this.inputDebitorBusinessScaleLookupObj = new InputLookupObj(); 
+    this.inputDebitorBusinessScaleLookupObj = new InputLookupObj();
     this.inputDebitorBusinessScaleLookupObj.urlJson = "./assets/lookup/lookupDebitorBusinessScale.json";
     this.inputDebitorBusinessScaleLookupObj.pagingJson = "./assets/lookup/lookupDebitorBusinessScale.json";
     this.inputDebitorBusinessScaleLookupObj.genericJson = "./assets/lookup/lookupDebitorBusinessScale.json";
     this.inputDebitorBusinessScaleLookupObj.isReady = true;
-    
-    this.inputCounterpartCategoryLookupObj = new InputLookupObj(); 
+
+    this.inputCounterpartCategoryLookupObj = new InputLookupObj();
     this.inputCounterpartCategoryLookupObj.urlJson = "./assets/lookup/lookupCounterpartCategory.json";
     this.inputCounterpartCategoryLookupObj.pagingJson = "./assets/lookup/lookupCounterpartCategory.json";
     this.inputCounterpartCategoryLookupObj.genericJson = "./assets/lookup/lookupCounterpartCategory.json";
@@ -86,22 +86,22 @@ export class CustAttrSectionComponent implements OnInit {
     this.inputSustaianableFinancialBusinessLookupObj.urlJson = "./assets/lookup/lookupSustainableFinancialBusiness.json";
     this.inputSustaianableFinancialBusinessLookupObj.pagingJson = "./assets/lookup/lookupSustainableFinancialBusiness.json";
     this.inputSustaianableFinancialBusinessLookupObj.genericJson = "./assets/lookup/lookupSustainableFinancialBusiness.json";
-    this.inputSustaianableFinancialBusinessLookupObj.isReady = true;  
-      if(this.CustOtherInfo.CustOtherInfoId != 0){
-        this.isExistData = true;
-        this.inputDebitorGroupLookupObj.jsonSelect =  {Descr: this.CustOtherInfo.LbppmsDebtGrpDescr};
-        this.inputDebitorBusinessScaleLookupObj.jsonSelect = {Descr: this.CustOtherInfo.LbppmsBizSclDescr};
-        this.inputCounterpartCategoryLookupObj.jsonSelect = {Descr: this.CustOtherInfo.LbppmsCntrprtDescr};
-        this.inputSustaianableFinancialBusinessLookupObj.jsonSelect = {Descr: this.CustOtherInfo.LbppmsBizSustainDescr};
+    this.inputSustaianableFinancialBusinessLookupObj.isReady = true;
+    if (this.CustOtherInfo.CustOtherInfoId != 0) {
+      this.isExistData = true;
+      this.inputDebitorGroupLookupObj.jsonSelect = { Descr: this.CustOtherInfo.LbppmsDebtGrpDescr };
+      this.inputDebitorBusinessScaleLookupObj.jsonSelect = { Descr: this.CustOtherInfo.LbppmsBizSclDescr };
+      this.inputCounterpartCategoryLookupObj.jsonSelect = { Descr: this.CustOtherInfo.LbppmsCntrprtDescr };
+      this.inputSustaianableFinancialBusinessLookupObj.jsonSelect = { Descr: this.CustOtherInfo.LbppmsBizSustainDescr };
 
-        this.OtherInformationForm.patchValue({
-          LbppmsDebtGrpId:   this.CustOtherInfo.LbppmsDebtGrpId,
-          LbppmsCntrprtId: this.CustOtherInfo.LbppmsCntrprtId,
-          LbppmsBizSustainId: this.CustOtherInfo.LbppmsBizSustainId,
-          LbppmsBizSclId: this.CustOtherInfo.LbppmsBizSclId
-        });
-      }
-      this.isLookupReady = true;
+      this.OtherInformationForm.patchValue({
+        LbppmsDebtGrpId: this.CustOtherInfo.LbppmsDebtGrpId,
+        LbppmsCntrprtId: this.CustOtherInfo.LbppmsCntrprtId,
+        LbppmsBizSustainId: this.CustOtherInfo.LbppmsBizSustainId,
+        LbppmsBizSclId: this.CustOtherInfo.LbppmsBizSclId
+      });
+    }
+    this.isLookupReady = true;
     // this.httpClient.post(URLConstant.GetListCustAttrContentByCustIdForCust, { CustId: this.CustId }).pipe(first()).subscribe(
     //   (response) => {
     //     var parentFormGroup = new Object();
@@ -127,25 +127,26 @@ export class CustAttrSectionComponent implements OnInit {
     // );
   }
 
-  SaveForm(){ 
+  SaveForm() {
     var formValue = this.OtherInformationForm['controls']['AttrList'].value;
     var custAttrRequest = new Array<Object>();
-    if(Object.keys(formValue).length > 0 && formValue.constructor === Object){
+    if (Object.keys(formValue).length > 0 && formValue.constructor === Object) {
       for (const key in formValue) {
-        if(formValue[key]["AttrValue"]!=null ) { 
-        var custAttr = { 
-          CustId: this.CustId,
-          RefAttrId: formValue[key]["RefAttrId"],
-          AttrValue: formValue[key]["AttrValue"],
-          AttrGroup: this.attrGroup
-        };
-        custAttrRequest.push(custAttr);}
-      }  
+        if (formValue[key]["AttrValue"] != null) {
+          var custAttr = {
+            CustId: this.CustId,
+            RefAttrId: formValue[key]["RefAttrId"],
+            AttrValue: formValue[key]["AttrValue"],
+            AttrGroup: this.attrGroup
+          };
+          custAttrRequest.push(custAttr);
+        }
+      }
       var custOtherInfo = new CustOtherInfoObj();
       custOtherInfo = this.OtherInformationForm.value;
       custOtherInfo.CustId = this.CustId;
 
-      var RequestAppCustOtherInfoObj= {
+      var RequestAppCustOtherInfoObj = {
         CustAttrContentObjs: custAttrRequest,
         RCustOtherInfoObj: custOtherInfo
       };
@@ -155,17 +156,14 @@ export class CustAttrSectionComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["Message"]);
           if (this.From == 'CustPaging') {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
+            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
           } else {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING],{});
-          if (this.From == 'EditMainData') {
-            AdInsHelper.RedirectUrl(this.router, ['/Customer/EditMainData/Paging'], {});
-          } else {
-            AdInsHelper.RedirectUrl(this.router, ['/Customer/Paging'], {});
+            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
+
           }
-        }); 
+        });
     }
-    else{
+    else {
       this.toastr.errorMessage("No Attribute To Save");
     }
   }
@@ -177,27 +175,27 @@ export class CustAttrSectionComponent implements OnInit {
     return URLConstant.AddCustOtherInfo;
   }
 
-  getLookupDebitorGroup(e){
+  getLookupDebitorGroup(e) {
     this.OtherInformationForm.patchValue({
       LbppmsDebtGrpId: e.LbppmsDebtGrpId
-    }); 
+    });
   }
 
-  getLookupDebitorBusinessScale(e){
+  getLookupDebitorBusinessScale(e) {
     this.OtherInformationForm.patchValue({
       LbppmsBizSclId: e.LbppmsBizSclId
-    }); 
+    });
   }
-  getLookupCounterpartCategory(e){
+  getLookupCounterpartCategory(e) {
     this.OtherInformationForm.patchValue({
       LbppmsCntrprtId: e.LbppmsCntrprtId
-    });  
+    });
 
   }
-  getLookupSustainableFinancialBusiness(e){
+  getLookupSustainableFinancialBusiness(e) {
     this.OtherInformationForm.patchValue({
       LbppmsBizSustainId: e.LbppmsBizSustainId
-    }); 
+    });
   }
 
 }

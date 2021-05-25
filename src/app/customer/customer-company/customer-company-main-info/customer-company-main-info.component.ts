@@ -44,12 +44,12 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
   closeResult;
-  
+
   IsSupplier: boolean = false;
   tempCustObj: any;
   CustId: number;
   custObj: CustObj;
-  tempCoyType :any;
+  tempCoyType: any;
   custCompanyObj: CustCompanyObj;
   tempCustCompanyObj: CustCompanyObj;
   inputLookupObj: InputLookupObj;
@@ -71,11 +71,9 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
     MrCompanyTypeCode: ['', [Validators.required]],
     TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
-    TaxIdNo: ['', [Validators.required]],
     IsVip: [true],
     IsAffiliateWithMf: [true],
     VipNotes: ['', [Validators.required]],
-    
     IsSupplier: [false],
     SupplCode: [''],
     SupplName: [''],
@@ -83,10 +81,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING2;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private modalService: NgbModal, private toastr: NGXToastrService) {
-    this.GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
-    this.GetListActiveRefMasterWithMappingCodeAllUrl = URLConstant.GetListActiveRefMasterWithMappingCodeAll;
   }
 
   ngOnInit() {
@@ -134,19 +129,19 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
         return response
       }),
       mergeMap((response) => {
-        if(response["GsValue"] == "1"){
+        if (response["GsValue"] == "1") {
           this.IsCustThirdPartyCheck = true;
           let addCustTemp = this.http.post(URLConstant.AddCustFraudTempReg, { MrCustTypeCode: CommonConstant.CustTypeCompany });
           let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
           return forkJoin([addCustTemp, getMaxDays]);
         }
-        else{
+        else {
           return new Array();
         }
       })
     ).toPromise().then(
       (response) => {
-        if(response.length > 0){
+        if (response.length > 0) {
           this.CustThirdPartyChecking.CustTempNo = response[0]["CustTempNo"];
           this.CustThirdPartyChecking.MrCustTypeCode = response[0]["CustType"];
           this.MaxDaysCustThirdPartyCheck = response[1]["GsValue"];
@@ -165,7 +160,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     }
     else {
       this.IsSupplier = false;
-      
+
       // var refMasterTypeCodeCompanyType = {
       //   RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
       //   RowVersion: ""
@@ -191,7 +186,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       //     });
       //   }
       // );
-      
+
       // this.custCompanyObj = new CustCompanyObj();
       // this.custCompanyObj.CustId = this.CustId;
       // this.http.post(URLConstant.GetCustByCustId, this.custObj).subscribe(
@@ -251,7 +246,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       SupplName: e.VendorName,
       SupplId: e.VendorId
     });
-    
+
     this.SupplCode = e.VendorCode;
     this.SupplName = e.VendorName;
     this.SupplId = e.VendorId;
@@ -287,9 +282,9 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   }
 
   SaveValue() {
-    if(this.IsCustThirdPartyCheck){
+    if (this.IsCustThirdPartyCheck) {
       for (const key in this.LastHit) {
-        if(!this.LastHit[key]){
+        if (!this.LastHit[key]) {
           this.toastr.errorMessage("Please Hit All Third Party Checking");
           return false;
         }
@@ -317,9 +312,8 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     custAddr["Zipcode"] = formValue["UcAddressZipcode"]["value"];
     custAddr["SubZipcode"] = formValue["UcAddressZipcode"]["value"];
     sessionStorage.setItem("CustAddr", JSON.stringify(custAddr));
-    
-    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_COY_DUP_CHECK],{ "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "TaxIdNo": this.TaxIdNo, "IsAffiliateWithMf": this.IsAffiliateWithMf, "IsVip": this.IsVip, "VipNotes": this.VipNotes });
-    AdInsHelper.RedirectUrl(this.router,['/Customer/CustomerCompany/DuplicateCheck'],{ "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "TaxIdNo": this.TaxIdNo, "IsAffiliateWithMf": this.IsAffiliateWithMf, "IsVip": this.IsVip, "VipNotes": this.VipNotes, "CustTempNo": this.CustThirdPartyChecking.CustTempNo });
+
+    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_COY_DUP_CHECK], { "CustModel": this.CustModel, "CustName": this.CustName, "MrCompanyTypeCode": this.MrCompanyTypeCode, "MrIdTypeCode": this.MrIdTypeCode, "TaxIdNo": this.TaxIdNo, "IsAffiliateWithMf": this.IsAffiliateWithMf, "IsVip": this.IsVip, "VipNotes": this.VipNotes, "CustTempNo": this.CustThirdPartyChecking.CustTempNo });
   }
 
   checkState() {
@@ -361,32 +355,31 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
         url = URLConstant.GetCustFraudSLIKRequestByCustTempNo;
         urlAdd = URLConstant.AddCustFraudSLIKRequest;
         break;
-    
+
       default:
         break;
     }
-    if(url != "")
-    {
+    if (url != "") {
       this.http.post(url, this.CustThirdPartyChecking).toPromise().then(
         (response) => {
           var currentDate = new Date();
-          if(response["TrxNo"]){
+          if (response["TrxNo"]) {
             var lastHitDate = new Date(response["StartDt"]);
-            var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
-            if(dateDiff > this.MaxDaysCustThirdPartyCheck){
+            var dateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(lastHitDate.getFullYear(), lastHitDate.getMonth(), lastHitDate.getDate())) / (1000 * 60 * 60 * 24));
+            if (dateDiff > this.MaxDaysCustThirdPartyCheck) {
               this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
                 (response) => {
                   var currentLastHitDate = new Date(response["StartDt"]);
-                  var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
+                  var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
                   switch (contentString) {
                     case "popUpPefindo":
                       this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                       break;
-              
+
                     case "popUpSlik":
                       this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                       break;
-                  
+
                     default:
                       break;
                   }
@@ -398,20 +391,20 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
               );
             }
           }
-          else{
+          else {
             this.http.post(urlAdd, this.CustThirdPartyChecking).toPromise().then(
               (response) => {
                 var currentLastHitDate = new Date(response["StartDt"]);
-                var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate()) ) /(1000 * 60 * 60 * 24));
+                var currentDateDiff = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(currentLastHitDate.getFullYear(), currentLastHitDate.getMonth(), currentLastHitDate.getDate())) / (1000 * 60 * 60 * 24));
                 switch (contentString) {
                   case "popUpPefindo":
                     this.LastHit.PEFINDO = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                     break;
-            
+
                   case "popUpSlik":
                     this.LastHit.SLIK = currentDateDiff > 0 ? "Last Check is " + currentDateDiff + " days ago" : "Last Check is today";
                     break;
-                
+
                   default:
                     break;
                 }

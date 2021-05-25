@@ -160,7 +160,7 @@ import { IndustryTypeCategoryDetailComponent } from './industry-type-category/in
     OfficeBankAccountDetailComponent,
     OfficeBankAccountPagingComponent,
     GeneralSettingAdminComponent,
-    GeneralSettingAdminDetailComponent
+    GeneralSettingAdminDetailComponent,
     IndustryTypeCategoryPagingComponent,
     IndustryTypeCategoryDetailComponent
   ],

@@ -22,7 +22,6 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 @Component({
   selector: 'app-customer-company-contact-information',
   templateUrl: './customer-company-contact-information.component.html',
-  styleUrls: []
   styleUrls: [],
   providers: [NGXToastrService, RegexService],
 })
@@ -115,11 +114,10 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrIdTypeCode = response[CommonConstant.ReturnObj];
-          
-          if(this.tempMrIdTypeCode != undefined)
-          {
-            this.getInitPattern();
-          }
+
+        if (this.tempMrIdTypeCode != undefined) {
+          this.getInitPattern();
+        }
       }
     );
 
@@ -216,17 +214,17 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
         this.inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrObj.Zipcode;
         this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrObj.Zipcode };
       });
-      this.inputAddressObj = new InputAddressObj();
-      this.inputAddressObj.default = this.UcAddressObj;
-      this.inputAddressObj.inputField = this.inputFieldObj;
-      this.inputAddressObj.showPhn3 = false;
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.default = this.UcAddressObj;
+    this.inputAddressObj.inputField = this.inputFieldObj;
+    this.inputAddressObj.showPhn3 = false;
   }
 
   ChangeIdType(FirstInit: boolean = false) {
     let IdTypeCode = this.ContactInformationForm.get("MrIdTypeCode").value;
     if (IdTypeCode == this.IdTypeNpwp) {
       this.ContactInformationForm.get("IdNo").setValidators(Validators.required);
-    } 
+    }
     else if (IdTypeCode == CommonConstant.MrIdTypeCodeEKTP) {
       this.ContactInformationForm.get("IdNo").setValidators([Validators.minLength(16), Validators.maxLength(16)]);
     } else {
@@ -241,8 +239,8 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       this.ContactInformationForm.get("IdExpiredDt").clearValidators();
       this.isIdExpiredDtRequired = false;
     }
-    
-    if(!FirstInit) this.ContactInformationForm.controls.IdExpiredDt.patchValue("");
+
+    if (!FirstInit) this.ContactInformationForm.controls.IdExpiredDt.patchValue("");
     this.ContactInformationForm.get("IdExpiredDt").updateValueAndValidity();
 
     this.setValidatorPattern();
@@ -274,7 +272,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custCompanyContactPersonObj.IdExpiredDt = this.ContactInformationForm.controls["IdExpiredDt"].value;
     this.custCompanyContactPersonObj.BirthPlace = this.ContactInformationForm.controls["BirthPlace"].value;
     this.custCompanyContactPersonObj.BirthDt = this.ContactInformationForm.controls["BirthDt"].value;
-    this.custCompanyContactPersonObj.MrCustRelationshipCode = this.ContactInformationForm.controls["MrCustRelationshipCode"].value; 
+    this.custCompanyContactPersonObj.MrCustRelationshipCode = this.ContactInformationForm.controls["MrCustRelationshipCode"].value;
 
     this.custAddrObj.CustId = this.IdCust;
     this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeCompany;
@@ -329,12 +327,11 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.regexService.getListPattern().subscribe(
       response => {
         this.resultPattern = response[CommonConstant.ReturnObj];
-        if(this.resultPattern != undefined)
-        {
+        if (this.resultPattern != undefined) {
           for (let i = 0; i < this.resultPattern.length; i++) {
             let patternObj: CustomPatternObj = new CustomPatternObj();
             let pattern: string = this.resultPattern[i].Value;
-    
+
             patternObj.pattern = pattern;
             patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
             this.customPattern.push(patternObj);
