@@ -256,6 +256,7 @@ export class URLConstant {
     public static GetRefIndustryTypeById = environment.FoundationR3Url + "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
     public static AddRefIndustryType = environment.FoundationR3Url + "/RefIndustryType/AddRefIndustryType";
     public static EditRefIndustryType = environment.FoundationR3Url + "/RefIndustryType/EditRefIndustryType";
+    public static DeleteRefIndustryType = "/RefIndustryType/DeleteRefIndustryType";
     public static GetRefIndustryTypeByIndustryTypeCode = environment.FoundationR3Url + "/RefIndustryType/GetRefIndustryTypeByIndustryTypeCode";
 
     //REF PROV DISTRICT

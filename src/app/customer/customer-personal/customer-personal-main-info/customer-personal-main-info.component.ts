@@ -62,6 +62,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   MotherMaidenName: string;
   IsAffiliateWithMf: string;
   MrMaritalStatCode: string;
+  getListActiveRefMasterUrl: string;
   tempMrMaritalStatCode: Array<KeyValueObj> = new Array<KeyValueObj>();
   inputAddressObj: InputAddressObj;
   inputFieldObj: InputFieldObj;
@@ -115,9 +116,9 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING2;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) {
   constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal) {
     this.KTP = RefMasterConstant.EKtp;
+    this.getListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.inputAddressObj = new InputAddressObj();
     this.inputFieldObj = new InputFieldObj();
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;

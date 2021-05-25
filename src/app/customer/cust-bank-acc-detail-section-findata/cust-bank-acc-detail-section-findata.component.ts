@@ -7,7 +7,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { environment } from 'environments/environment';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -115,9 +114,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     }
     else if (this.pageType == "editStmnt") {
       var custBankAcc = new CustBankAccObj();
-      this.httpClient.post(URLConstant.GetCBAForCustFinDataEditModeByCustBankAccId, {Id : this.CustBankAccId}).subscribe(
       custBankAcc.CustBankAccId = this.CustBankAccId;
-
       this.CustBankAccForm.controls['BegBalanceAmt'].setValidators([Validators.required]);
 
       this.httpClient.post(URLConstant.GetCBAForCustFinDataEditModeByCustBankAccId, custBankAcc).subscribe(

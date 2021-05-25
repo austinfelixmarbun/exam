@@ -14,6 +14,8 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { GenericObj} from 'app/shared/model/Generic/GenericObj.Model';
+import { HttpClient } from '@angular/common/http';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-vendor-holding-add-edit',

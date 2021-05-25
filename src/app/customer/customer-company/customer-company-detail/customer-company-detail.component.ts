@@ -10,6 +10,7 @@ import { DatePipe } from '@angular/common';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-customer-company-detail',
@@ -22,15 +23,13 @@ export class CustomerCompanyDetailComponent implements OnInit {
 
   tempCustObj: any;
   tempCustCompanyObj: any;
-  //tempRefIndustryObj: any;
-  tempRefSectorEconomySlik: any;
+  tempRefIndustryObj: any;
 
   custCompanyObj: CustCompanyObj;
   refIndustryTypeObj: RefIndustryTypeObj;
 
   IdCust: number;
   tempRefIndustryTypeId: number = 0;
-  tempRefSectorEconomySlikId: number = 0;
   Page: String;
 
   CustomerDetailForm = this.fb.group({
@@ -60,11 +59,6 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.lookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
-    this.lookUpObj.urlJson = "./assets/lookup/lookupRefSectorEconomySlik.json";
-    this.lookUpObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
-    this.lookUpObj.pagingJson = "./assets/lookup/lookupRefSectorEconomySlik.json";
-    this.lookUpObj.genericJson = "./assets/lookup/lookupRefSectorEconomySlik.json";
 
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj.CustId = this.IdCust;
@@ -81,13 +75,10 @@ export class CustomerCompanyDetailComponent implements OnInit {
           this.refIndustryTypeObj = new RefIndustryTypeObj();
           this.refIndustryTypeObj.RefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
           this.http.post(URLConstant.GetRefIndustryTypeById, { Id: this.tempCustCompanyObj.RefIndustryTypeId }).subscribe(
-        if (this.tempCustCompanyObj.RefSectorEconomySlikId != null) {
-            this.http.post(URLConstant.GetRefSectorEconomySlikCustomObjectByRefSectorEconomySlikId, { "RefSectorEconomySlikId": this.tempCustCompanyObj.RefSectorEconomySlikId }).subscribe(
               (response) => {
-                this.tempRefSectorEconomySlikId = this.tempCustCompanyObj.RefSectorEconomySlikId;
+                this.tempRefIndustryObj = response; 
                 this.tempRefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
-                this.tempRefSectorEconomySlik = response;
-                this.lookUpObj.nameSelect = this.tempRefSectorEconomySlik.RefSectorEconomySlikName;
+                this.lookUpObj.nameSelect = this.tempRefIndustryObj.IndustryTypeName; 
                 this.lookUpObj.jsonSelect = response;
               });
           }
@@ -115,24 +106,10 @@ export class CustomerCompanyDetailComponent implements OnInit {
         this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next' });
       }
     );
-
-    if (this.tempRefIndustryTypeId != 0 || this.tempRefIndustryTypeId != undefined)
-      this.custCompanyObj.RefIndustryTypeId = this.tempRefIndustryTypeId;
-
-    if (this.tempRefSectorEconomySlikId != 0 || this.tempRefSectorEconomySlikId != undefined)
-      this.custCompanyObj.RefSectorEconomySlikId = this.tempRefSectorEconomySlikId;
-
-    this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
-      (response) => {
-        this.toastr.successMessage(response["Message"]);
-        this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next' });
-      }
-    );
   }
 
   getLookUp(event) {
     this.tempRefIndustryTypeId = event.RefIndustryTypeId;
-    this.tempRefSectorEconomySlikId = event.RefSectorEconomySlikId;
   }
 
   back() {
