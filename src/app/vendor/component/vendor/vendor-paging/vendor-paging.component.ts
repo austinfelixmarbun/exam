@@ -32,9 +32,30 @@ export class VendorPagingComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("INIII");
     if (this.Type == "Scheme") {
       this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorScheme.json";
       this.inputPagingObj._url = "./assets/ucpaging/searchVendorScheme.json";
+
+      if(this.MrVendorCategoryCode == CommonConstant.SUPPLIER){
+        this.inputPagingObj.title = "Supplier Scheme";
+      }
+      if(this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH){
+        this.inputPagingObj.title = "Insurance Branch Scheme";
+      }
+      if(this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH){
+        this.inputPagingObj.title = "Life Insurance Scheme";
+      }
+      if(this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH){
+        this.inputPagingObj.title = "Surveyor Branch Scheme";
+      }
+      if(this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL){
+        this.inputPagingObj.title = "Agency Personal Scheme";
+      }
+      if(this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY){
+        this.inputPagingObj.title = "Agency Company Scheme";
+      }
+
       var critObj = new CriteriaObj();
       critObj.propName = "VS.MR_VENDOR_CATEGORY_CODE";
       critObj.restriction = AdInsConstant.RestrictionEq;
@@ -44,6 +65,26 @@ export class VendorPagingComponent implements OnInit {
     else if (this.Type == "Group") {
       this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorGroup.json";
       this.inputPagingObj._url = "./assets/ucpaging/searchVendorGroup.json";
+
+      if(this.MrVendorCategoryCode == CommonConstant.SUPPLIER){
+        this.inputPagingObj.title = "Supplier Group";
+      }
+      if(this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH){
+        this.inputPagingObj.title = "Insurance Branch Group";
+      }
+      if(this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH){
+        this.inputPagingObj.title = "Life Insurance Group";
+      }
+      if(this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH){
+        this.inputPagingObj.title = "Surveyor Branch Group";
+      }
+      if(this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL){
+        this.inputPagingObj.title = "Agency Personal Group";
+      }
+      if(this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY){
+        this.inputPagingObj.title = "Agency Company Group";
+      }
+
       var critObj = new CriteriaObj();
       critObj.propName = "VG.MR_VENDOR_CATEGORY_CODE";
       critObj.restriction = AdInsConstant.RestrictionEq;
@@ -51,16 +92,23 @@ export class VendorPagingComponent implements OnInit {
       this.inputPagingObj.addCritInput.push(critObj);
     }
     else if (this.Type == "Default") {
+      console.log("INIII");
       if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
         if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
           this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSupplier.json";
           this.inputPagingObj._url = "./assets/ucpaging/searchSupplier.json";
-        } else {
+        } 
+        else if(this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
+          this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranchWithoutEmployee.json";
+          this.inputPagingObj._url = "./assets/ucpaging/searchBranchWithoutEmployee.json";
+        }
+        else{
           this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranch.json";
           this.inputPagingObj._url = "./assets/ucpaging/searchBranch.json";
         } 
         this.inputPagingObj.title = typeof(CommonConstant["TITLE_"+this.MrVendorCategoryCode]) != 'undefined' ? CommonConstant["TITLE_"+this.MrVendorCategoryCode] : this.MrVendorCategoryCode.replace(/_/g,' ');
         this.inputPagingObj.addCritInput = new Array();
+        this.inputPagingObj
         var critObj = new CriteriaObj();
         critObj.propName = "vdr.MR_VENDOR_CATEGORY_CODE";
         critObj.restriction = AdInsConstant.RestrictionEq;
@@ -78,6 +126,20 @@ export class VendorPagingComponent implements OnInit {
 
         this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorHO.json";
         this.inputPagingObj._url = "./assets/ucpaging/searchVendorHO.json";
+
+        if(this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO){
+          this.inputPagingObj.title = "Insurance HO";
+        }
+        if(this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_HO){
+          this.inputPagingObj.title = "Life Insurance HO";
+        }
+        if(this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO){
+          this.inputPagingObj.title = "Supplier HO";
+        }
+        if(this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO){
+          this.inputPagingObj.title = "Surveyor HO";
+        }
+
         this.inputPagingObj.addCritInput = new Array();
         var critObj = new CriteriaObj();
         critObj.propName = "V.MR_VENDOR_CATEGORY_CODE";
@@ -100,6 +162,7 @@ export class VendorPagingComponent implements OnInit {
 
         this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorHolding.json";
         this.inputPagingObj._url = "./assets/ucpaging/searchVendorHolding.json";
+        this.inputPagingObj.title = "Supplier Holding";
         this.inputPagingObj.addCritInput = new Array();
         var critObj = new CriteriaObj();
         critObj.propName = "V.MR_VENDOR_CATEGORY_CODE";
@@ -117,6 +180,7 @@ export class VendorPagingComponent implements OnInit {
         
         this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSupplierATPM.json";
         this.inputPagingObj._url = "./assets/ucpaging/searchSupplierATPM.json";
+        this.inputPagingObj.title = "Supplier ATPM";
         this.inputPagingObj.addCritInput = new Array();
         var critObj = new CriteriaObj();
         critObj.propName = "V.MR_VENDOR_CATEGORY_CODE";
