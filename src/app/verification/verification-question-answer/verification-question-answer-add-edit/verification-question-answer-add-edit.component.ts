@@ -54,45 +54,31 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     this.dropdownListObj.ddlType = "blank";
     this.dropdownListObj.isSelectOutput = true;
     this.GetListActiveRefAnswerType();
-    var refAnswerObj = {}
-    this.http.post(URLConstant.GetActiveRefVerfAnswerTypes, refAnswerObj).subscribe(
-      (response) => {
-        this.itemVerfQuestionAnswer = response[CommonConstant.ReturnObj];
-        if (this.itemVerfQuestionAnswer.length > 0) {
-          let VerfAnswerData = this.itemVerfQuestionAnswer.find(x => x.VerfAnswerTypeCode == "DDL");
-          this.QuestionAnswerForm.patchValue({
-            RefVerfAnswerTypeId: VerfAnswerData.RefVerfAnswerTypeId
-          });
-          if(this.mode != "edit"){
-            this.AnswerTypeChanged(VerfAnswerData.RefVerfAnswerTypeId);
-          }
-        }
-
+    
     var refAnswerObj = {}
     if (this.mode == "edit") {
       this.http.post(URLConstant.GetVerfQuestionAnswerForUpdateById, {Id : this.VerfQuestionAnswerId}).subscribe(
-        (response) => {
-          this.verfQuestionAnswer = response[CommonConstant.ReturnObj];
+      (response) => {
+        this.verfQuestionAnswer = response[CommonConstant.ReturnObj];
 
-          refAnswerObj = { RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId }
-          this.http.post(URLConstant.GetRefVerfAnswerTypeById, {Id : this.verfQuestionAnswer.RefVerfAnswerTypeId}).subscribe(
-            (respond) => {
-              this.answerTypeCode = respond["VerfAnswerTypeCode"];
-            }
-          )
+        refAnswerObj = { RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId }
+        this.http.post(URLConstant.GetRefVerfAnswerTypeById, {Id : this.verfQuestionAnswer.RefVerfAnswerTypeId}).subscribe(
+          (respond) => {
+            this.answerTypeCode = respond["VerfAnswerTypeCode"];
+          }
+        )
 
-          this.QuestionAnswerForm.patchValue({
-            VerfQuestionCode: this.verfQuestionAnswer.VerfQuestionCode,
-            VerfQuestionText: this.verfQuestionAnswer.VerfQuestionText,
-            VerfAnswer: this.verfQuestionAnswer.VerfAnswer,
-            RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId,
-            IsActive: this.verfQuestionAnswer.IsActive,
-            RowVersion: this.verfQuestionAnswer.RowVersion
-          });
+        this.QuestionAnswerForm.patchValue({
+          VerfQuestionCode: this.verfQuestionAnswer.VerfQuestionCode,
+          VerfQuestionText: this.verfQuestionAnswer.VerfQuestionText,
+          VerfAnswer: this.verfQuestionAnswer.VerfAnswer,
+          RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId,
+          IsActive: this.verfQuestionAnswer.IsActive,
+          RowVersion: this.verfQuestionAnswer.RowVersion
+        });
 
-          this.AnswerTypeChanged(this.verfQuestionAnswer.RefVerfAnswerTypeId);
-        }
-      );
+        this.AnswerTypeChanged(this.verfQuestionAnswer.RefVerfAnswerTypeId);
+      });
     }
   }
 

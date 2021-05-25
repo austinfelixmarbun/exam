@@ -31,7 +31,7 @@ export class OfficeAddComponent implements OnInit {
   // @ViewChild(UcContactInfoComponent) ucContact;
   // @ViewChild('ParentId') test: ElementRef;
   inputFieldAddr: InputFieldObj = new InputFieldObj();
-  pageType: string = "";
+  pageType: string = "add";
   mrKonvenSyariah = 'KON';
   isDisabledState: boolean = false;
   isHO: boolean = true;
@@ -143,10 +143,10 @@ export class OfficeAddComponent implements OnInit {
     this.officeTypeUrl = URLConstant.GetRefMasterListKeyValueActiveByCode
 
     this.route.queryParams.subscribe(params => {
-      if (params['mode'] !== null) {
+      if (params['mode'] != null) {
         this.pageType = params['mode'];
       }
-      if (params['RefOfficeId'] !== null) {
+      if (params['RefOfficeId'] != null) {
         this.RefOfficeId = params['RefOfficeId'];
       }
     });
@@ -272,7 +272,7 @@ export class OfficeAddComponent implements OnInit {
 
 
     }
-    else if (this.pageType === "edit") {
+    else if (this.pageType == "edit") {
       this.OfficeForm.controls["OfficeCode"].disable();
       this.OfficeForm.controls["OfficeType"].disable();
       this.OfficeForm.controls["MrCenterGrpTypeCode"].disable();
@@ -280,8 +280,6 @@ export class OfficeAddComponent implements OnInit {
       this.addressObj = new UcAddressObj();
       this.officeObj.RefOfficeId = this.RefOfficeId;
       this.httpClient.post(URLConstant.GetRefOfficeByRefOfficeId, {Id : this.RefOfficeId}).subscribe(
-
-      this.httpClient.post(URLConstant.GetRefOfficeByRefOfficeId, this.officeObj).subscribe(
         (response) => {
           this.resultData = response;
           this.getRefOfficeXByOfficeCode(this.resultData.OfficeCode);
@@ -468,28 +466,10 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
+          this.saveRefOfficeX();
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
         }
       );
-    if (this.pageType === "add") {
-      if (this.officeObj.MrOfficeTypeCode == CommonConstant.CollectionGroup) {
-        this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response['message']);
-            this.saveRefOfficeX();
-            AdInsHelper.RedirectUrl(this.router, ["/Office/Paging"], {});
-          }
-        );
-      }
-      else {
-        this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response['message']);
-            this.saveRefOfficeX();
-            AdInsHelper.RedirectUrl(this.router, ["/Office/Paging"], {});
-          }
-        );
-      }
     }
     else {
       this.officeObj.OfficeCode = this.resultData.OfficeCode;
@@ -499,9 +479,8 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(URLConstant.EditRefOffice, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
           this.saveRefOfficeX();
-          AdInsHelper.RedirectUrl(this.router, ["/Office/Paging"], {});
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
         }
       );
 

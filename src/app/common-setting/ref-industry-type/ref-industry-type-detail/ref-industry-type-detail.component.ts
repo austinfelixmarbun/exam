@@ -54,44 +54,14 @@ export class RefIndustryTypeDetailComponent implements OnInit {
 
   async ngOnInit() {
     this.inputLookupObj = new InputLookupObj();
-    this.inputLookupObj.urlJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
-    this.inputLookupObj.pagingJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
-    this.inputLookupObj.genericJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
     this.inputLookupObj.urlJson = "./assets/lookup/lookupIndustryTypeCategory.json";
-    this.inputLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/lookup/lookupIndustryTypeCategory.json";
-    this.inputLookupObj.genericJson = "./assets/clookup/lookupIndustryTypeCategory.json";
+    this.inputLookupObj.genericJson = "./assets/lookup/lookupIndustryTypeCategory.json";
 
     if (this.type == 'edit') {
       this.refIndustryType = new RefIndustryTypeObj();
       this.refIndustryType.RefIndustryTypeId = this.RefIndustryTypeId;
-      this.httpClient.post(URLConstant.GetRefIndustryTypeById, {Id: this.RefIndustryTypeId}).pipe(
-        map(response => {
-          this.resultData = response;
-          this.economicSectorObj = new RefIndustryTypeObj();
-          this.economicSectorObj.RefEconomicSectorId = this.resultData.RefEconomicSectorId;
-          return this.economicSectorObj;
-        }),
-        mergeMap((economicSectorObj) => this.httpClient.post(URLConstant.GetRefEconomicSectorById, {Id : economicSectorObj.RefEconomicSectorId }))
-      ).subscribe(
-        (response2) => {
-          this.economicSectorObj = response2;
-          setTimeout(() => {
-            this.RefIndustryTypeForm.patchValue({
-              RefIndustryTypeId: this.resultData.RefIndustryTypeId,
-              IndustryTypeCode: this.resultData.IndustryTypeCode,
-              IndustryTypeName: this.resultData.IndustryTypeName,
-              RefEconomicSectorId: this.resultData.RefEconomicSectorId,
-              IsActive: this.resultData.IsActive,
-              RowVersion: this.resultData.RowVersion
-            });
-          })
-          this.inputLookupObj.nameSelect = this.economicSectorObj.EconomicSectorName;
-        }
-      );
-
-      await this.http.post(URLConstant.GetRefIndustryTypeById, this.refIndustryType).toPromise().then(
+      await this.http.post(URLConstant.GetRefIndustryTypeById, {Id: this.RefIndustryTypeId}).toPromise().then(
         response => {
           this.resultData = response;
           this.industryTypeCategoryObj = this.resultData;

@@ -1051,7 +1051,7 @@ export class URLConstant {
 
     // JOURNAL
     public static RerunJournal = "/Journal/RerunJournal";
-}
+
     // Industry Type Category
     public static AddEditIndustryTypeCategory = environment.FoundationR3Url + "/IndustryTypeCategory/AddEditIndustryTypeCategory";
     public static GetIndustryTypeCategoryByIndustryTypeCategoryId = environment.FoundationR3Url + "/IndustryTypeCategory/GetIndustryTypeCategoryByIndustryTypeCategoryId";

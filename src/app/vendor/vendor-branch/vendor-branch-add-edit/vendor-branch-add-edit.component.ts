@@ -111,8 +111,6 @@ export class VendorBranchAddEditComponent implements OnInit {
     IsVat: [true, Validators.required],
     TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     TaxpayerName: ['', Validators.required],
-    TaxIdNo: [''],
-    TaxpayerName: [''],
     MrAddrTypeCode: [''],
     Addr: [''],
     AreaCode2: [{ value: '', disabled: true }], //kelurahan
@@ -164,8 +162,9 @@ export class VendorBranchAddEditComponent implements OnInit {
     if (this.mode == "edit") {
       this.VendorForm.controls.VendorCode.disable();
       this.getData();
-    } else {
-      if(this.MrVendorCategoryCode == "SUPPLIER_BRANCH"){
+    } 
+    else {
+      if(this.MrVendorCategoryCode == "SUPPLIER"){
         this.checkIsAutoFormNoFromSetting("SB");
       }
       this.bindText()
@@ -178,7 +177,8 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.http.post(URLConstant.GetListVendorAttrContentByVendorId, {Id : this.VendorId}).toPromise().then(
       (response) => {
         this.ListVendorAttrContent = response[CommonConstant.ReturnObj]
-        if(this.ListVendorAttrContent != null){
+        if(this.ListVendorAttrContent != null)
+        {
           if (this.ListVendorAttrContent.length < 1) {            
             this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, {Code : CommonConstant.SUPPLIER}).subscribe(
               async (response: any) => {
@@ -186,68 +186,8 @@ export class VendorBranchAddEditComponent implements OnInit {
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
   
                 let tempLookup = {};
-                for (const vendorAttr of this.VendorAttrList) {
-        if (this.ListVendorAttrContent.length < 1) {
-          var reqObj = { VendorCategoryCode: CommonConstant.SUPPLIER_BRANCH };
-          this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, reqObj).subscribe(
-            async (response: any) => {
-              var parentFormGroup = new Object();
-              this.VendorAttrList = response[CommonConstant.ReturnObj];
-
-              let tempLookup = {};
-              for (const vendorAttr of this.VendorAttrList) {
-                var formGroupObject = new Object();
-                formGroupObject["VendorAttrContentId"] = [0];
-                formGroupObject["VendorAttrId"] = [vendorAttr["VendorAttrId"]];
-                if (vendorAttr["VendorAttrType"] == 'T') {
-                  formGroupObject["VendorAttrValue"] = [''];
-                }
-                else if (vendorAttr["VendorAttrType"] == 'L') {
-                  var temp = vendorAttr["VendorAttrValue"].split(";");
-                  formGroupObject["VendorAttrValue"] = [temp[0]];
-                }
-                else {
-                  formGroupObject["VendorAttrValue"] = [''];
-                }
-                parentFormGroup[vendorAttr["VendorAttrCode"]] = this.fb.group(formGroupObject);
-
-                if (vendorAttr["VendorAttrType"] == 'RM') {
-                  tempLookup[vendorAttr["VendorAttrCode"]] = new InputLookupObj();
-                  tempLookup[vendorAttr["VendorAttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                  tempLookup[vendorAttr["VendorAttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-                  tempLookup[vendorAttr["VendorAttrCode"]].urlEnviPaging = environment.FoundationR3Url;
-                  tempLookup[vendorAttr["VendorAttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                  tempLookup[vendorAttr["VendorAttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                  tempLookup[vendorAttr["VendorAttrCode"]].title = vendorAttr.VendorAttrName;
-                  tempLookup[vendorAttr["VendorAttrCode"]].isRequired = false;
-                  var arrAddCrit = new Array();
-                  var critAssetObj = new CriteriaObj();
-                  critAssetObj.DataType = 'text';
-                  critAssetObj.restriction = AdInsConstant.RestrictionEq;
-                  critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
-                  critAssetObj.value = vendorAttr.VendorAttrValue;
-                  arrAddCrit.push(critAssetObj);
-                  tempLookup[vendorAttr["VendorAttrCode"]].addCritInput = arrAddCrit;
-                }
-
-              }
-              this.ListInputLookUpObj.push(tempLookup);
-              this.VendorForm.addControl("VendorAttrList", this.fb.group(parentFormGroup));
-              this.isFormReady = true;
-            }
-          );
-        }
-        else {
-
-          var reqObj = { VendorCategoryCode: CommonConstant.SUPPLIER_BRANCH };
-          this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, reqObj).subscribe(
-            async (response: any) => {
-              var parentFormGroup = new Object();
-              let tempLookup = {};
-              this.VendorAttrList = response[CommonConstant.ReturnObj];
-              for (const vendorAttr of this.VendorAttrList) {
-                var item = this.ListVendorAttrContent.find(x => x.VendorAttrId == vendorAttr.VendorAttrId);
-                if (item == undefined) {
+                for (const vendorAttr of this.VendorAttrList) 
+                {
                   var formGroupObject = new Object();
                   formGroupObject["VendorAttrContentId"] = [0];
                   formGroupObject["VendorAttrId"] = [vendorAttr["VendorAttrId"]];
@@ -256,14 +196,13 @@ export class VendorBranchAddEditComponent implements OnInit {
                   }
                   else if (vendorAttr["VendorAttrType"] == 'L') {
                     var temp = vendorAttr["VendorAttrValue"].split(";");
-                    this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
                     formGroupObject["VendorAttrValue"] = [temp[0]];
                   }
                   else {
                     formGroupObject["VendorAttrValue"] = [''];
                   }
                   parentFormGroup[vendorAttr["VendorAttrCode"]] = this.fb.group(formGroupObject);
-  
+
                   if (vendorAttr["VendorAttrType"] == 'RM') {
                     tempLookup[vendorAttr["VendorAttrCode"]] = new InputLookupObj();
                     tempLookup[vendorAttr["VendorAttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -282,111 +221,107 @@ export class VendorBranchAddEditComponent implements OnInit {
                     arrAddCrit.push(critAssetObj);
                     tempLookup[vendorAttr["VendorAttrCode"]].addCritInput = arrAddCrit;
                   }
-  
                 }
                 this.ListInputLookUpObj.push(tempLookup);
-                console.log(this.VendorAttrList);
-                console.log(this.VendorForm);
                 this.VendorForm.addControl("VendorAttrList", this.fb.group(parentFormGroup));
-                console.log(this.VendorForm);
                 this.isFormReady = true;
               }
             );
-          }
-          else {  
-            this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, {Code : CommonConstant.SUPPLIER}).subscribe(
-              async (response: any) => {
-                var parentFormGroup = new Object();
-                let tempLookup = {};
-                this.VendorAttrList = response[CommonConstant.ReturnObj];
-                for (const vendorAttr of this.VendorAttrList) {
-                  var item = this.ListVendorAttrContent.find(x => x.VendorAttrId == vendorAttr.VendorAttrId);
-                  if (item == undefined) {
-                    var formGroupObject = new Object();
-                    formGroupObject["VendorAttrContentId"] = [0];
-                    formGroupObject["VendorAttrId"] = [vendorAttr["VendorAttrId"]];
-  
-                    if (vendorAttr["VendorAttrType"] == 'L') {
-                      var temp = vendorAttr["VendorAttrValue"].split(";");
-                      this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
-                      formGroupObject["VendorAttrValue"] = [temp[0]];
-                    } else {
-                      formGroupObject["VendorAttrValue"] = [''];
-                    }
-                    parentFormGroup[vendorAttr["VendorAttrCode"]] = this.fb.group(formGroupObject);
-  
-                    if (vendorAttr["VendorAttrType"] == 'RM') {
-                      tempLookup[vendorAttr["VendorAttrCode"]] = new InputLookupObj();
-                      tempLookup[vendorAttr["VendorAttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                      tempLookup[vendorAttr["VendorAttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-                      tempLookup[vendorAttr["VendorAttrCode"]].urlEnviPaging = environment.FoundationR3Url;
-                      tempLookup[vendorAttr["VendorAttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                      tempLookup[vendorAttr["VendorAttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                      tempLookup[vendorAttr["VendorAttrCode"]].title = vendorAttr.AttrName;
-                      tempLookup[vendorAttr["VendorAttrCode"]].isRequired = false;
-                      tempLookup[vendorAttr["VendorAttrCode"]].jsonSelect = vendorAttr["VendorAttrCode"];
-  
-                      var arrAddCrit = new Array();
-                      var critAssetObj = new CriteriaObj();
-                      critAssetObj.DataType = 'text';
-                      critAssetObj.restriction = AdInsConstant.RestrictionEq;
-                      critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
-                      critAssetObj.value = vendorAttr.VendorAttrValue;
-                      arrAddCrit.push(critAssetObj);
-                      tempLookup[vendorAttr["VendorAttrCode"]].addCritInput = arrAddCrit;
-                    }
+        }
+        else {  
+          this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, {Code : CommonConstant.SUPPLIER}).subscribe(
+            async (response: any) => {
+              var parentFormGroup = new Object();
+              let tempLookup = {};
+              this.VendorAttrList = response[CommonConstant.ReturnObj];
+              for (const vendorAttr of this.VendorAttrList) {
+                var item = this.ListVendorAttrContent.find(x => x.VendorAttrId == vendorAttr.VendorAttrId);
+                if (item == undefined) {
+                  var formGroupObject = new Object();
+                  formGroupObject["VendorAttrContentId"] = [0];
+                  formGroupObject["VendorAttrId"] = [vendorAttr["VendorAttrId"]];
+
+                  if (vendorAttr["VendorAttrType"] == 'L') {
+                    var temp = vendorAttr["VendorAttrValue"].split(";");
+                    this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
+                    formGroupObject["VendorAttrValue"] = [temp[0]];
+                  } else {
+                    formGroupObject["VendorAttrValue"] = [''];
                   }
-                  else {
-                    var formGroupObject = new Object();
-                    formGroupObject["VendorAttrContentId"] = [0];
-                    formGroupObject["VendorAttrId"] = [vendorAttr["VendorAttrId"]];
-  
-                    if (vendorAttr["VendorAttrType"] == 'T') {
-                      formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
-                    }
-                    else if (vendorAttr["VendorAttrType"] == 'RM') {
-                      tempLookup[vendorAttr["VendorAttrCode"]] = new InputLookupObj();
-                      tempLookup[vendorAttr["VendorAttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                      tempLookup[vendorAttr["VendorAttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-                      tempLookup[vendorAttr["VendorAttrCode"]].urlEnviPaging = environment.FoundationR3Url;
-                      tempLookup[vendorAttr["VendorAttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                      tempLookup[vendorAttr["VendorAttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                      tempLookup[vendorAttr["VendorAttrCode"]].title = vendorAttr.AttrName;
-                      tempLookup[vendorAttr["VendorAttrCode"]].isRequired = false;
-                      var arrAddCrit = new Array();
-                      var critAssetObj = new CriteriaObj();
-                      critAssetObj.DataType = 'text';
-                      critAssetObj.restriction = AdInsConstant.RestrictionEq;
-                      critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
-                      critAssetObj.value = vendorAttr.VendorAttrValue;
-                      arrAddCrit.push(critAssetObj);
-                      tempLookup[vendorAttr["VendorAttrCode"]].addCritInput = arrAddCrit;
-                      var refMaster = {
-                        RefMasterTypeCode: vendorAttr.VendorAttrValue,
-                        MasterCode: item["AttrContent"]
-                      };
-                      await this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).toPromise().then(
-                        (response) => {
-                          tempLookup[vendorAttr["VendorAttrCode"]].jsonSelect = { Descr: response['Descr'] }
-                        });
-                      formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
-                    }
-                    else if (vendorAttr["VendorAttrType"] == 'L') {
-                      var temp = vendorAttr["VendorAttrValue"].split(";");
-                      this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
-                      formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
-                    }
-                    else {
-                      formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
-                    }
-                    parentFormGroup[vendorAttr["VendorAttrCode"]] = this.fb.group(formGroupObject);
+                  parentFormGroup[vendorAttr["VendorAttrCode"]] = this.fb.group(formGroupObject);
+
+                  if (vendorAttr["VendorAttrType"] == 'RM') {
+                    tempLookup[vendorAttr["VendorAttrCode"]] = new InputLookupObj();
+                    tempLookup[vendorAttr["VendorAttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+                    tempLookup[vendorAttr["VendorAttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
+                    tempLookup[vendorAttr["VendorAttrCode"]].urlEnviPaging = environment.FoundationR3Url;
+                    tempLookup[vendorAttr["VendorAttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+                    tempLookup[vendorAttr["VendorAttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+                    tempLookup[vendorAttr["VendorAttrCode"]].title = vendorAttr.AttrName;
+                    tempLookup[vendorAttr["VendorAttrCode"]].isRequired = false;
+                    tempLookup[vendorAttr["VendorAttrCode"]].jsonSelect = vendorAttr["VendorAttrCode"];
+
+                    var arrAddCrit = new Array();
+                    var critAssetObj = new CriteriaObj();
+                    critAssetObj.DataType = 'text';
+                    critAssetObj.restriction = AdInsConstant.RestrictionEq;
+                    critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
+                    critAssetObj.value = vendorAttr.VendorAttrValue;
+                    arrAddCrit.push(critAssetObj);
+                    tempLookup[vendorAttr["VendorAttrCode"]].addCritInput = arrAddCrit;
                   }
                 }
-  
-                this.ListInputLookUpObj.push(tempLookup);
-                this.VendorForm.addControl("VendorAttrList", this.fb.group(parentFormGroup));
-                this.isFormReady = true;
-              });
+                else {
+                  var formGroupObject = new Object();
+                  formGroupObject["VendorAttrContentId"] = [0];
+                  formGroupObject["VendorAttrId"] = [vendorAttr["VendorAttrId"]];
+
+                  if (vendorAttr["VendorAttrType"] == 'T') {
+                    formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
+                  }
+                  else if (vendorAttr["VendorAttrType"] == 'RM') {
+                    tempLookup[vendorAttr["VendorAttrCode"]] = new InputLookupObj();
+                    tempLookup[vendorAttr["VendorAttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+                    tempLookup[vendorAttr["VendorAttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
+                    tempLookup[vendorAttr["VendorAttrCode"]].urlEnviPaging = environment.FoundationR3Url;
+                    tempLookup[vendorAttr["VendorAttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+                    tempLookup[vendorAttr["VendorAttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
+                    tempLookup[vendorAttr["VendorAttrCode"]].title = vendorAttr.AttrName;
+                    tempLookup[vendorAttr["VendorAttrCode"]].isRequired = false;
+                    var arrAddCrit = new Array();
+                    var critAssetObj = new CriteriaObj();
+                    critAssetObj.DataType = 'text';
+                    critAssetObj.restriction = AdInsConstant.RestrictionEq;
+                    critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
+                    critAssetObj.value = vendorAttr.VendorAttrValue;
+                    arrAddCrit.push(critAssetObj);
+                    tempLookup[vendorAttr["VendorAttrCode"]].addCritInput = arrAddCrit;
+                    var refMaster = {
+                      RefMasterTypeCode: vendorAttr.VendorAttrValue,
+                      MasterCode: item["AttrContent"]
+                    };
+                    await this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).toPromise().then(
+                      (response) => {
+                        tempLookup[vendorAttr["VendorAttrCode"]].jsonSelect = { Descr: response['Descr'] }
+                      });
+                    formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
+                  }
+                  else if (vendorAttr["VendorAttrType"] == 'L') {
+                    var temp = vendorAttr["VendorAttrValue"].split(";");
+                    this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
+                    formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
+                  }
+                  else {
+                    formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
+                  }
+                  parentFormGroup[vendorAttr["VendorAttrCode"]] = this.fb.group(formGroupObject);
+                }
+              }
+
+              this.ListInputLookUpObj.push(tempLookup);
+              this.VendorForm.addControl("VendorAttrList", this.fb.group(parentFormGroup));
+              this.isFormReady = true;
+            });
           }
         }
         

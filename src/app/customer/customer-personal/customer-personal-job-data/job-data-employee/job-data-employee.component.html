@@ -86,9 +86,6 @@
 
           <div class="form-group row adins-required">
             <label class="col-md-2 adInsLabel adins-required-label" translate>Industry Type Name </label>
-        </div>
-        <div class="form-group row adins-required">
-            <label class="col-md-2 adInsLabel adins-required-label" translate>Economic Sector Slik</label>
             <div class="col-md-4">
               <lib-uclookupgeneric [lookupInput]="industryLookUpObj" [parentForm]="JobDataEmpForm"
                 [enjiForm]="enjiForm" [identifier]="'IndustryTypeCode'" (lookup)=getLookUpIndustry($event)>
@@ -96,9 +93,6 @@
             </div>
           </div>
 
-          <div class="form-group row">
-            <label class="col-md-2 adInsLabel adins-required-label" translate>Company Scale </label>
-        </div>
         <div *ngIf ="IsShowData">
           <div class="form-group row">
             <label class="col-md-2 adInsLabel" translate>Economic Sector </label>
@@ -119,6 +113,7 @@
             </label>
           </div>
         </div>
+
         <div class="form-group row">
             <label class="col-md-2 adInsLabel adins-required" translate>Company Scale </label>
             <div class="col-md-4">
@@ -129,7 +124,7 @@
               </select>
               <lib-uc-show-errors [control]="JobDataEmpForm.controls.CompanyScale" [submit]="enjiForm.submitted"></lib-uc-show-errors>
             </div>
-          </div>
+        </div>
 
           <div class="form-group row adins-required">
             <label class="col-md-2 adInsLabel adins-required-label" translate>Employment Establishment Date </label>
