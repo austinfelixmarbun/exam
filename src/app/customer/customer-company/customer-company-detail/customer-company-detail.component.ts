@@ -18,20 +18,21 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class CustomerCompanyDetailComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
-  lookUpObj: InputLookupObj; 
+  lookUpObj: InputLookupObj;
 
   tempCustObj: any;
   tempCustCompanyObj: any;
+  //tempRefIndustryObj: any;
   tempRefSectorEconomySlik: any;
 
   custCompanyObj: CustCompanyObj;
   refIndustryTypeObj: RefIndustryTypeObj;
 
   IdCust: number;
-  tempRefIndustryTypeId: number =0;
-  tempRefSectorEconomySlikId :number = 0;
+  tempRefIndustryTypeId: number = 0;
+  tempRefSectorEconomySlikId: number = 0;
   Page: String;
-  
+
   CustomerDetailForm = this.fb.group({
     NumOfEmp: ['', [Validators.maxLength(100), Validators.required, Validators.pattern("^[0-9]+$")]],
     EstablishmentDt: ['', [Validators.required]],
@@ -51,7 +52,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
         this.Page = params["Page"];
       }
     });
-  } 
+  }
 
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
@@ -64,10 +65,10 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.lookUpObj.urlEnviPaging = environment.FoundationR3Url;
     this.lookUpObj.pagingJson = "./assets/lookup/lookupRefSectorEconomySlik.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupRefSectorEconomySlik.json";
- 
+
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustCompanyByCustId, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
         this.CustomerDetailForm.patchValue({
@@ -75,58 +76,58 @@ export class CustomerCompanyDetailComponent implements OnInit {
           EstablishmentDt: datePipe.transform(this.tempCustCompanyObj.EstablishmentDt, 'yyyy-MM-dd'),
           IsSkt: this.tempCustCompanyObj.IsSkt
         });
-        
+
         if (this.tempCustCompanyObj.RefIndustryTypeId != null) {
           this.refIndustryTypeObj = new RefIndustryTypeObj();
           this.refIndustryTypeObj.RefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
-          this.http.post(URLConstant.GetRefIndustryTypeById, {Id: this.tempCustCompanyObj.RefIndustryTypeId}).subscribe(
-        if (this.tempCustCompanyObj.RefSectorEconomySlikId != null) { 
-          this.http.post(URLConstant.GetRefSectorEconomySlikCustomObjectByRefSectorEconomySlikId, {"RefSectorEconomySlikId": this.tempCustCompanyObj.RefSectorEconomySlikId }).subscribe(
-            (response) => {
-              this.tempRefSectorEconomySlikId= this.tempCustCompanyObj.RefSectorEconomySlikId;
-              this.tempRefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
-              this.tempRefSectorEconomySlik = response; 
-              this.lookUpObj.nameSelect = this.tempRefSectorEconomySlik.RefSectorEconomySlikName; 
-              this.lookUpObj.jsonSelect = response;
-            });
-        }
-      });
+          this.http.post(URLConstant.GetRefIndustryTypeById, { Id: this.tempCustCompanyObj.RefIndustryTypeId }).subscribe(
+        if (this.tempCustCompanyObj.RefSectorEconomySlikId != null) {
+            this.http.post(URLConstant.GetRefSectorEconomySlikCustomObjectByRefSectorEconomySlikId, { "RefSectorEconomySlikId": this.tempCustCompanyObj.RefSectorEconomySlikId }).subscribe(
+              (response) => {
+                this.tempRefSectorEconomySlikId = this.tempCustCompanyObj.RefSectorEconomySlikId;
+                this.tempRefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
+                this.tempRefSectorEconomySlik = response;
+                this.lookUpObj.nameSelect = this.tempRefSectorEconomySlik.RefSectorEconomySlikName;
+                this.lookUpObj.jsonSelect = response;
+              });
+          }
+        });
   }
 
-  SaveValue() { 
+  SaveValue() {
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj = this.tempCustCompanyObj;
-  
+
     this.custCompanyObj.NumOfEmp = this.CustomerDetailForm.controls["NumOfEmp"].value;
     this.custCompanyObj.EstablishmentDt = this.CustomerDetailForm.controls["EstablishmentDt"].value;
     this.custCompanyObj.IsSkt = this.CustomerDetailForm.controls["IsSkt"].value;
 
-    if( this.tempRefIndustryObj != null && this.tempRefIndustryTypeId === null) {
+    if (this.tempRefIndustryObj != null && this.tempRefIndustryTypeId === null) {
       this.custCompanyObj.RefIndustryTypeId = this.custCompanyObj.RefIndustryTypeId;
     }
-    else { 
+    else {
       this.custCompanyObj.RefIndustryTypeId = this.tempRefIndustryTypeId;
     }
 
     this.http.post(URLConstant.EditCustCompany, this.custCompanyObj).subscribe(
-      (response) => { 
+      (response) => {
         this.toastr.successMessage(response["Message"]);
-        this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next'});
+        this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next' });
       }
-    );  
-    
-    if(this.tempRefIndustryTypeId !=0 || this.tempRefIndustryTypeId != undefined)
-    this.custCompanyObj.RefIndustryTypeId = this.tempRefIndustryTypeId;
+    );
 
-    if(this.tempRefSectorEconomySlikId !=0 || this.tempRefSectorEconomySlikId != undefined)
-    this.custCompanyObj.RefSectorEconomySlikId = this.tempRefSectorEconomySlikId; 
-    
-        this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
-          (response) => { 
-            this.toastr.successMessage(response["Message"]);
-            this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next'});
-          }
-        );  
+    if (this.tempRefIndustryTypeId != 0 || this.tempRefIndustryTypeId != undefined)
+      this.custCompanyObj.RefIndustryTypeId = this.tempRefIndustryTypeId;
+
+    if (this.tempRefSectorEconomySlikId != 0 || this.tempRefSectorEconomySlikId != undefined)
+      this.custCompanyObj.RefSectorEconomySlikId = this.tempRefSectorEconomySlikId;
+
+    this.http.post(this.editCustCompanyUrl, this.custCompanyObj).subscribe(
+      (response) => {
+        this.toastr.successMessage(response["Message"]);
+        this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next' });
+      }
+    );
   }
 
   getLookUp(event) {
@@ -136,10 +137,10 @@ export class CustomerCompanyDetailComponent implements OnInit {
 
   back() {
     if (this.Page != null) {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING],{});
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
     }
     else {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
     }
   }
 }

@@ -13,7 +13,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NegativeCustObj } from 'app/shared/model/NegativeCustObj.Model';
 import { NegativeCustChangeTrxObj } from 'app/shared/model/NegativeCustChangeTrxObj.Model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { CustAddrObj } from 'app/shared/model/CustAddrObj.model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -27,7 +27,6 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 @Component({
   selector: 'app-negative-customer-detail',
   templateUrl: './negative-customer-detail.component.html',
-  styleUrls: []
   styleUrls: [],
   providers: [NGXToastrService, RegexService]
 })
@@ -49,7 +48,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
   businessDateIdExp: any;
   tempKTPCheck: boolean;
   TempCustType: any;
-  TempGender : any;
+  TempGender: any;
   NegativeCustForm = this.fb.group({
     NegativeCustId: [0, [Validators.required]],
     CustId: [0],
@@ -73,7 +72,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     City: ['', [Validators.required]],
     PhnArea1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     Phn1: ['', [Validators.required, Validators.pattern]],
-    PhnExt1: [''],
+    PhnExt1: ['', [Validators.pattern("^[0-9]+$")]],
     PhnArea2: ['', [Validators.pattern("^[0-9]+$")]],
     Phn2: ['', [Validators.pattern("^[0-9]+$")]],
     PhnExt2: ['', [Validators.pattern("^[0-9]+$")]],
@@ -99,7 +98,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private cookieService: CookieService
   ) {
     this.route.queryParams.subscribe(params => {
@@ -231,7 +230,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
         this.TempCustType = response[CommonConstant.ReturnObj];
       });
 
-  
+
     this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterTypeCodeGender).subscribe(
       (response) => {
         this.TempGender = response[CommonConstant.ReturnObj];
@@ -245,14 +244,14 @@ export class NegativeCustomerDetailComponent implements OnInit {
     if (this.pageType == "edit") {
       var negativeCustObj = new NegativeCustObj();
       negativeCustObj.NegativeCustId = this.negativeCustId;
-      this.httpClient.post(URLConstant.GetNegativeCustByNegativeCustId, {Id : this.negativeCustId}).pipe(
+      this.httpClient.post(URLConstant.GetNegativeCustByNegativeCustId, { Id: this.negativeCustId }).pipe(
         map((response) => {
           return response;
         }),
         mergeMap((response: any) => {
           var negativeCustChangeTrxObj = new NegativeCustChangeTrxObj();
           negativeCustChangeTrxObj.NegativeCustId = response.NegativeCustId;
-          const negativeCustChangeTrx = this.httpClient.post(URLConstant.GetListNegativeCustChangeTrxByNegativeCustId, {Id : response.NegativeCustId});
+          const negativeCustChangeTrx = this.httpClient.post(URLConstant.GetListNegativeCustChangeTrxByNegativeCustId, { Id: response.NegativeCustId });
           var tempResponse = [response];
           return forkJoin([tempResponse, negativeCustChangeTrx]);
         })
@@ -478,8 +477,8 @@ export class NegativeCustomerDetailComponent implements OnInit {
           MrIdTypeCode: this.refMasterIdType.ReturnObject[0].Key,
           MrNegCustTypeCode: this.negativeTypeList.ReturnObject[0].Key,
           MrNegCustSourceCode: this.negativeSourceList.ReturnObject[0].Key,
-          MrGenderCode: this.TempGender[0].Key 
-        }); 
+          MrGenderCode: this.TempGender[0].Key
+        });
         this.onChangeIdType();
       });
   }
@@ -488,7 +487,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
     var expiredDt = datePipe.transform(e.idExpiredDate, 'yyyy-MM-dd');
     var birthDt = datePipe.transform(e.birthDate, 'yyyy-MM-dd');
-    
+
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = e.custId;
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
@@ -589,7 +588,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     }
     this.NegativeCustForm.controls.IdExpiredDt.updateValueAndValidity();
     this.onChangeIdType();
-  }	
+  }
 
   onChangeIdType() {
     let idType: string = this.NegativeCustForm.get("MrIdTypeCode").value;
@@ -645,7 +644,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
         (response) => {
           var responseNegativeCust = response[0];
           this.toastr.successMessage(responseNegativeCust["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_NEG_PAGING],{});
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_NEG_PAGING], {});
         }
       );
     }
@@ -676,7 +675,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
         (response) => {
           var responseNegativeCust = response[0];
           this.toastr.successMessage(responseNegativeCust["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_NEG_PAGING],{});
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_NEG_PAGING], {});
         }
       );
     }
@@ -693,12 +692,11 @@ export class NegativeCustomerDetailComponent implements OnInit {
     this.regexService.getListPattern().subscribe(
       response => {
         this.resultPattern = response[CommonConstant.ReturnObj];
-        if(this.resultPattern != undefined)
-        {
+        if (this.resultPattern != undefined) {
           for (let i = 0; i < this.resultPattern.length; i++) {
             let patternObj: CustomPatternObj = new CustomPatternObj();
             let pattern: string = this.resultPattern[i].Value;
-    
+
             patternObj.pattern = pattern;
             patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
             this.customPattern.push(patternObj);
