@@ -224,6 +224,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       (response) => {
         if(this.IsFromCustMgmntShareholder){
           this.addCustObj.CustObj.MrCustModelCode = this.CustMgmntShareholderData.MrCustModelCode;
+          this.addCustObj.CustObj.IsShareholder = true;
           this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.CustMgmntShareholderData.MrCompanyTypeCode;
         }else{
           this.addCustObj.CustAddr = response as CustAddrObj;
