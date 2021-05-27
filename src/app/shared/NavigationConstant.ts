@@ -90,6 +90,8 @@ export class NavigationConstant {
     public static CS_REASON_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REASON_DETAIL; //'/CommonSetting/Reason/Detail'
     public static CS_INDUSTRY_TYPE_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_INDUSTRY_TYPE_PAGING; //'/CommonSetting/IndustryType/Paging'
     public static CS_INDUSTRY_TYPE_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_INDUSTRY_TYPE_DETAIL; //'/CommonSetting/IndustryType/Detail'
+    public static CS_INDUSTRY_TYPE_CAT_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_INDUSTRY_TYPE_CAT_PAGING; //'/CommonSetting/IndustryTypeCategory/Paging'
+    public static CS_INDUSTRY_TYPE_CAT_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_INDUSTRY_TYPE_CAT_DETAIL; //'/CommonSetting/IndustryTypeCategory/Paging'
     public static CS_SCORE_CATEGORY_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SCORE_CATEGORY_PAGING; //'/CommonSetting/ScoreCategory/Paging'
     public static CS_SCORE_CATEGORY_TYPE = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SCORE_CATEGORY_TYPE; //'/CommonSetting/ScoreCategory/Type'
     public static CS_WORKING_HOUR = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_WORKING_HOUR; //'/CommonSetting/WorkingHour'

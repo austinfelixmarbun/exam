@@ -473,14 +473,14 @@ const routes: Routes = [
       },
 
       {
-        path: 'IndustryTypeCategory/Paging',
+        path: PathConstant.CS_INDUSTRY_TYPE_CAT_PAGING,
         component: IndustryTypeCategoryPagingComponent,
         data: {
           title: 'Industry Type Category'
         },
       },
       {
-        path: 'IndustryTypeCategory/Detail',
+        path: PathConstant.CS_INDUSTRY_TYPE_CAT_DETAIL,
         component: IndustryTypeCategoryDetailComponent,
         data: {
           title: 'Industry Type Category'

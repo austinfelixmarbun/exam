@@ -149,6 +149,9 @@ export class PathConstant {
     public static CS_INDUSTRY_TYPE = "IndustryType";
     public static CS_INDUSTRY_TYPE_PAGING = PathConstant.CS_INDUSTRY_TYPE + "/" + PathConstant.PAGING;
     public static CS_INDUSTRY_TYPE_DETAIL = PathConstant.CS_INDUSTRY_TYPE + "/" + PathConstant.DETAIL;
+    public static CS_INDUSTRY_TYPE_CAT = "IndustryTypeCategory";
+    public static CS_INDUSTRY_TYPE_CAT_PAGING = PathConstant.CS_INDUSTRY_TYPE_CAT + "/" + PathConstant.PAGING;
+    public static CS_INDUSTRY_TYPE_CAT_DETAIL = PathConstant.CS_INDUSTRY_TYPE_CAT + "/" + PathConstant.DETAIL;
     public static CS_BANK = "Bank";
     public static CS_BANK_PAGING = PathConstant.CS_BANK + "/" + PathConstant.PAGING;
     public static CS_BANK_DETAIL = PathConstant.CS_BANK + "/" + PathConstant.DETAIL;
