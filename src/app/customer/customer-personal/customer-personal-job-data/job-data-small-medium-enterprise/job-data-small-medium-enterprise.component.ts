@@ -433,8 +433,6 @@ export class JobDataSmeComponent implements OnInit {
   }
 
   setJobAddr() {
-    console.log("INIII");
-    console.log(this.JobDataSmeForm);
     this.jobAddressObj.CustId = this.IdCust;
     this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
     this.jobAddressObj.Addr = this.JobDataSmeForm.controls["jobAddress"]["controls"].Addr.value; 
