@@ -29,7 +29,8 @@
             "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
             "label": "Surveyor Group Name",
             "items": [],
-            "itemsUrl": []            
+            "itemsUrl": [],
+            "environment": "FOU"        
         }, 
         {
             "type": "dropdown",
@@ -45,7 +46,8 @@
             "items": [],
             "itemsUrl": [],
             "criteriaPropName": "RefMasterTypeCode",
-            "criteriaPropValue": "SURVEYOR_TYPE"
+            "criteriaPropValue": "SURVEYOR_TYPE",
+            "environment":"FOU"
         },    
         {
             "type": "dropdown",
