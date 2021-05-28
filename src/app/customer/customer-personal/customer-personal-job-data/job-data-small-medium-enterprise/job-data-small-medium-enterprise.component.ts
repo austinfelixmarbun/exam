@@ -319,6 +319,10 @@ export class JobDataSmeComponent implements OnInit {
             );
           }
 
+          if(this.returnCustJobDataObj.OthBizAddrId == null){
+            this.returnCustJobDataObj.OthBizAddrId = 0;
+          }
+
           if(this.returnCustJobDataObj.OthBizAddrId != null) {
             this.custOthBizAddrObj = new CustAddrObj();
             this.custOthBizAddrObj.CustAddrId = this.returnCustJobDataObj.OthBizAddrId;
@@ -360,6 +364,11 @@ export class JobDataSmeComponent implements OnInit {
               }
             );
           }
+
+          if(this.returnCustJobDataObj.PrevJobAddrId == null){
+            this.returnCustJobDataObj.PrevJobAddrId = 0;
+          }
+
           if (this.returnCustJobDataObj.PrevJobAddrId != null) {
             this.preJobAddrObj = new CustAddrObj();
             this.preJobAddrObj.CustAddrId = this.returnCustJobDataObj.PrevJobAddrId;
@@ -424,6 +433,8 @@ export class JobDataSmeComponent implements OnInit {
   }
 
   setJobAddr() {
+    console.log("INIII");
+    console.log(this.JobDataSmeForm);
     this.jobAddressObj.CustId = this.IdCust;
     this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
     this.jobAddressObj.Addr = this.JobDataSmeForm.controls["jobAddress"]["controls"].Addr.value; 
@@ -500,7 +511,7 @@ export class JobDataSmeComponent implements OnInit {
     this.preJobAddressObj.CustId = this.IdCust;
     this.preJobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypePreJob;
     this.preJobAddressObj.Addr = this.JobDataSmeForm.controls["prejobAddress"]["controls"].Addr.value;
-    this.preJobAddressObj.FullAddr = this.JobDataSmeForm.controls["prejobAddress"]["controls"].Addr.value + " RT: " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode3.value + " " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode1.value + " " + this.JobDataSmeForm.controls["jobAddressZipcode"]["controls"].value.value;
+    this.preJobAddressObj.FullAddr = this.JobDataSmeForm.controls["prejobAddress"]["controls"].Addr.value + " RT: " + this.JobDataSmeForm.controls["prejobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataSmeForm.controls["prejobAddress"]["controls"].AreaCode3.value + " " + this.JobDataSmeForm.controls["prejobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataSmeForm.controls["prejobAddress"]["controls"].AreaCode1.value + " " + this.JobDataSmeForm.controls["prejobAddressZipcode"]["controls"].value.value;
     this.preJobAddressObj.AreaCode3 = this.JobDataSmeForm.controls["prejobAddress"]["controls"].AreaCode3.value;
     this.preJobAddressObj.AreaCode4 = this.JobDataSmeForm.controls["prejobAddress"]["controls"].AreaCode4.value;
     this.preJobAddressObj.Zipcode = this.JobDataSmeForm.controls["prejobAddressZipcode"]["controls"].value.value;

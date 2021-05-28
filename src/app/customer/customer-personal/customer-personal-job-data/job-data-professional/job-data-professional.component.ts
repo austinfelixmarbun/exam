@@ -378,7 +378,7 @@ export class JobDataProfessionalComponent implements OnInit {
     this.preJobAddressObj.CustId = this.IdCust;
     this.preJobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypePreJob;
     this.preJobAddressObj.Addr = this.JobDataProForm.controls["prejobAddress"]["controls"].Addr.value;
-    this.preJobAddressObj.FullAddr = this.JobDataProForm.controls["prejobAddress"]["controls"].Addr.value + " RT: " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode3.value + " " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode1.value + " " + this.JobDataProForm.controls["jobAddressZipcode"]["controls"].value.value;
+    this.preJobAddressObj.FullAddr = this.JobDataProForm.controls["prejobAddress"]["controls"].Addr.value + " RT: " + this.JobDataProForm.controls["prejobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataProForm.controls["prejobAddress"]["controls"].AreaCode3.value + " " + this.JobDataProForm.controls["prejobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataProForm.controls["prejobAddress"]["controls"].AreaCode1.value + " " + this.JobDataProForm.controls["prejobAddressZipcode"]["controls"].value.value;
     this.preJobAddressObj.AreaCode3 = this.JobDataProForm.controls["prejobAddress"]["controls"].AreaCode3.value;
     this.preJobAddressObj.AreaCode4 = this.JobDataProForm.controls["prejobAddress"]["controls"].AreaCode4.value;
     this.preJobAddressObj.Zipcode = this.JobDataProForm.controls["prejobAddressZipcode"]["controls"].value.value;
