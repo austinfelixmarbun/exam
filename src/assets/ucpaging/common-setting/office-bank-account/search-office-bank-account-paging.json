@@ -14,7 +14,8 @@
             "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
             "label": "Office Name",
             "itemsUrl": [],
-            "items": []
+            "items": [],
+            "environment": "FOU"
         },
         {
             "type": "dropdown",
@@ -30,7 +31,8 @@
             "items": [],
             "itemsUrl": [],
             "criteriaPropName": "RefMasterTypeCode",
-            "criteriaPropValue": "BANK_ACC_TYPE"
+            "criteriaPropValue": "BANK_ACC_TYPE",
+            "environment": "FOU"
         },
         {
             "type": "dropdown",
@@ -46,7 +48,8 @@
             "items": [],
             "itemsUrl": [],
             "criteriaPropName": "RefMasterTypeCode",
-            "criteriaPropValue": "BANK_ACC_PURPOSE"
+            "criteriaPropValue": "BANK_ACC_PURPOSE",
+            "environment": "FOU"
         },
         {
             "type": "textbox",
