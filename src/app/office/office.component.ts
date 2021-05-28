@@ -16,12 +16,6 @@ export class OfficeComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchOffice.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchOffice.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "A.MR_OFFICE_TYPE_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
     this.inputPagingObj.isSearched = true;
     this.inputPagingObj.delay = 200;
   }
