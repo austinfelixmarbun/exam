@@ -120,7 +120,6 @@ export class WorkingHourDDetailComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewWorkingHourScheme.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.workingHourSchmHObj = new WorkingHourSchmHObj();
     this.workingHourSchmHObj.WorkingHourSchmHId = this.workingHourSchmHId;

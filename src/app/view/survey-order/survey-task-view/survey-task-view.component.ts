@@ -22,7 +22,6 @@ export class SurveyTaskViewComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyTask.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
   }
 
 }

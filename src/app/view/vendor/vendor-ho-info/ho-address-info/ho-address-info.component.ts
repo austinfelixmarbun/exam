@@ -14,7 +14,6 @@ export class HoAddressInfoComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewHOInfoLegalAddr.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
   }
 
 }

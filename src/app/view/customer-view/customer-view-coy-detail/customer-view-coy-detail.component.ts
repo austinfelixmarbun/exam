@@ -13,7 +13,6 @@ export class CustomerViewCoyDetailComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewCustCoyMainDataMainInfo.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
   }
 
 }
