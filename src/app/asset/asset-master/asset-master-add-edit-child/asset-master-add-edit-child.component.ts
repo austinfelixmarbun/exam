@@ -377,7 +377,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
             return response;
           }),
           mergeMap((response) => {
-            this.listAssetSchmDObj.AssetMasterId = response["AssetMasterId"];
+            this.listAssetSchmDObj.AssetMasterId = response["Id"];
             let observableBatch = [];
             if (assetMasterAttrValues.length > 0) {
               let addAssetMasterAttr = this.http.post(URLConstant.AddAssetMasterAttrContent, { AssetMasterAttrContentObjs: assetMasterAttrValues });
