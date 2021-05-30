@@ -95,12 +95,12 @@
                         </div>
 
                         <div class="form-actions button-right">
-
-                            <button class="btn btn-raised btn-primary mr-2" type="submit" (click)="uploadFiles()"
-                                [disabled]=!uploadBtn>{{replaceTexts?.uploadBtn}}</button>
                             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" translate>
-                                    <i class="fa fa-arrow-circle-left"></i> Cancel
+                                <i class="fa fa-arrow-circle-left"></i> Cancel
                             </button>
+                            <button class="btn btn-raised btn-primary" type="submit" (click)="uploadFiles()"
+                                [disabled]=!uploadBtn>{{replaceTexts?.uploadBtn}}</button>
+                            
                         </div>
                     </div>
                     <br>
@@ -188,16 +188,15 @@
                                             </div>
                                         </div>
                                         <div class="form-actions button-right" *ngIf="ListSuccessResultInfo.length > 0">
-                                            <button type="submit" class="btn btn-raised btn-primary mr-1"
-                                                (click)="approve()" translate>
-                                                <i class="ft-check"></i> Approve
-                                            </button>
                                             <button type="button" class="btn btn-raised btn-warning mr-1"
                                                 (click)="cancel()" translate>
                                                 <i class="fa fa-arrow-circle-left"></i> Cancel
                                             </button>
+                                            <button type="submit" class="btn btn-raised btn-primary mr-1"
+                                                (click)="approve()" translate>
+                                                <i class="ft-check"></i> Approve
+                                            </button>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

@@ -156,6 +156,9 @@ export class UploadJournalDetailComponent implements OnInit {
       this.UploadJournalFileForm.patchValue({
         Date: formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US')
       })
+      this.UploadJournalFileForm.controls["Date"].disable();
+    }else{
+      this.UploadJournalFileForm.controls["Date"].enable();
     }
     console.log(this.UploadJournalFileForm)
   }
