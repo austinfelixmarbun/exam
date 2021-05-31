@@ -12,10 +12,13 @@
                 </div>
             </div>
             <br>
+            
             <div class="px-3">
                 <form class="form form-horizontal" [formGroup]="UploadJournalFileForm"
                     (ngSubmit)="UploadJournalFileForm.valid && uploadFiles()" #enjiForm="ngForm">
-                    <div class="form-body">
+                    <lib-ucSubsection [id]="'UploadJournalId'" [title]="'Upload Journal Files'" [panel]="'UploadJournal'">
+                    </lib-ucSubsection>
+                    <div  id='UploadJournal'  class="form-body">
                         <div class="form-group row">
                             <label class="col-md-3 adInsLabel" translate>File Code</label>
                             <div class="col-md-9">
