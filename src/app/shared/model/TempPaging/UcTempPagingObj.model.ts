@@ -1,4 +1,5 @@
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { environment } from 'environments/environment';
 import { CriteriaObj } from '../CriteriaObj.Model';
 
 export class UcTempPagingObj {
@@ -11,6 +12,7 @@ export class UcTempPagingObj {
     ddlEnvironments: Array<EnviObj>;
     whereValue: Array<WhereValueObj>;
     navigationConst: any;
+    listEnvironments: Array<EnvisObj>;
 
     constructor() {
         this.urlJson = "";
@@ -20,6 +22,9 @@ export class UcTempPagingObj {
         this.isReady = false;
         this.addCritInput = new Array<CriteriaObj>();
         this.ddlEnvironments = new Array<EnviObj>();
+        this.listEnvironments = new Array<EnvisObj>();
+        this.listEnvironments.push({ environment: "FOU", url: environment.FoundationR3Url });
+        this.listEnvironments.push({ environment: "FOU_WEB", url: environment.FoundationR3Web });
         this.whereValue = new Array<WhereValueObj>();
         this.navigationConst = NavigationConstant;
     }
@@ -41,5 +46,15 @@ export class WhereValueObj {
 
     constructor() {
         this.property = "";
+    }
+}
+
+export class EnvisObj {
+    environment: string;
+    url: string;
+
+    constructor() {
+        this.environment = "";
+        this.url = "";
     }
 }

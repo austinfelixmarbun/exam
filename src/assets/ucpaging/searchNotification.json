@@ -17,7 +17,8 @@
         "criteriaPropName" : "RefMasterTypeCode",
         "criteriaPropValue" : "NOTIFICATION_TYPE",
         "items": [],
-        "itemsUrl": []
+        "itemsUrl": [],
+        "environment": "FOU"
       },
       {
         "type": "textbox",
@@ -50,7 +51,8 @@
         "criteriaPropName" : "StatusGrpCode",
         "criteriaPropValue" : "NOTIFICATION_STAT",
         "items": [],
-        "itemsUrl": []
+        "itemsUrl": [],
+        "environment":"FOU"
       }
     ],
     "headerList": [

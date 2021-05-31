@@ -68,12 +68,6 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     this.PersonalConstant = CommonConstant.CustTypePersonal;
     this.CompanyConstant = CommonConstant.CustTypeCompany;
     this.ViewGenericObj.viewInput = "./assets/ucviewgeneric/viewUpdateMasterCust.json";
-    this.ViewGenericObj.ddlEnvironments = [
-      {
-        name: "AppNo",
-        environment: environment.FoundationR3Web
-      }
-    ];
   }
 
   ngOnInit() {
