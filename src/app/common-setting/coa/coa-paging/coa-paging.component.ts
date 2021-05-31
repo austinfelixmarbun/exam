@@ -21,7 +21,11 @@ export class CoaPagingComponent implements OnInit {
       {
         name: "rc.PAYMENT_ALLOC_CODE",
         environment: environment.FoundationR3Url 
-      }
+      },
+      {
+        name: "RC.MR_ENTITY_TYPE",
+        environment: environment.FoundationR3Url 
+      },
     ];
     this.isReady = true;
   }
