@@ -61,7 +61,7 @@ export class CoaSchemeDetailComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.colHeadTable = [];
     this.GetDdlCurr();
     this.getListCopy();
@@ -70,12 +70,14 @@ export class CoaSchemeDetailComponent implements OnInit {
       this.CoaSchemeForm.controls["SchemeCode"].disable();
       this.GetCoaSchmData();
       this.GetListPaymentAlloc();
-      this.GetCoaSchmDetail(this.coaSchmId);
+      await this.GetCoaSchmDetail(this.coaSchmId);
     } else {
       this.GetListPaymentAlloc();
       this.isTableReady = true;
+      this.ListCoa = this.CoaSchemeForm.get('ListCoa') as FormArray;
     }
-    this.ListCoa = this.CoaSchemeForm.get('ListCoa') as FormArray;
+    
+    console.log(this.CoaSchemeForm)
 
   }
   getListCopy() {
@@ -91,7 +93,6 @@ export class CoaSchemeDetailComponent implements OnInit {
   }
 
   Add(ev) {
-    console.log(ev.value + "INI ISI CURR")
     if (ev.value == "null" || ev.value == "" || ev.value == null || ev.value == undefined) {
       this.cekHead = true;
       this.toastr.errorMessage("Can not add Currency Code, Please select currency first!");
@@ -107,8 +108,6 @@ export class CoaSchemeDetailComponent implements OnInit {
       else { this.cekHead = false; }
     }
 
-    console.log("masuk add")
-
     if (!this.cekHead) {
       this.colHeadTable.push({ newHead: 'COA ' + ev.value });
       this.ListSelectedCurr.push({ newCurr: ev.value });
@@ -120,8 +119,6 @@ export class CoaSchemeDetailComponent implements OnInit {
           this.ListDataCOA = this.ListCoa.controls[i].get('DataCOA') as FormArray;
           this.ListDataCOA.push(this.createDetailItem());
         }
-        console.log("Isi list COA saat Add")
-        console.log(this.ListCoa)
       }
 
     }
@@ -158,18 +155,11 @@ export class CoaSchemeDetailComponent implements OnInit {
   }
 
   Submit() {
-    console.log(this.CoaSchemeForm);
     this.coaSchmObj.SchmCode = this.CoaSchemeForm.controls["SchemeCode"].value;
     this.coaSchmObj.SchmName = this.CoaSchemeForm.controls["SchemeName"].value;
     this.coaSchmObj.IsActive = this.CoaSchemeForm.controls["IsActive"].value;
     this.coaSchmObj.CoaSchmId = Number(this.coaSchmId);
-    console.log("isi coa scheme form sebelum submit")
-    console.log(this.CoaSchemeForm.controls["ListCoa"]);
-    console.log("test isi get")
-    console.log(this.CoaSchemeForm.get("ListCoa").get("0").get("DataCOA").value[0].COA)
-    console.log(this.CoaSchemeForm.get("ListCoa").get("0").get("DataCOA").value[1].COA)
-    console.log(this.CoaSchemeForm.get("ListCoa").get("1").get("DataCOA").value[0].COA)
-    console.log(this.CoaSchemeForm.get("ListCoa").get("1").get("DataCOA").value[1].COA)
+
     this.ListRefCoaObj = new Array<RefCoaObj>();
     for (let i = 0; i < this.ListSelectedCurr.length; i++) {
       for (let j = 0; j < this.ListPaymentAlloc.length; j++) {
@@ -184,8 +174,6 @@ export class CoaSchemeDetailComponent implements OnInit {
       }
     }
     this.coaSchmObj.ListRefCoa = this.ListRefCoaObj;
-
-    console.log(this.coaSchmObj);
 
     this.http.post(URLConstant.SubmitCoaSchm, this.coaSchmObj).subscribe(
       (response) => {
@@ -243,15 +231,12 @@ export class CoaSchemeDetailComponent implements OnInit {
     );
   }
 
-  GetCoaSchmDetail(Id: string) {
-    this.http.post<any>(URLConstant.GetListRefCoaByCoaSchmId, { Id: Id }).subscribe(
+  async GetCoaSchmDetail(Id: string) {
+    await this.http.post<any>(URLConstant.GetListRefCoaByCoaSchmId, { Id: Id }).toPromise().then(
       (response) => {
         this.ListRefCoaObj = response;
         this.ListGetCoaCurr = this.ListRefCoaObj.map(item => item.CurrCode)
           .filter((value, index, self) => self.indexOf(value) === index);
-
-        console.log("isi coa scheme form Saat Edit")
-        console.log(response);
 
         this.ListCoa = this.CoaSchemeForm.get('ListCoa') as FormArray;
         this.CountAdd = this.ListGetCoaCurr.length;
@@ -275,20 +260,13 @@ export class CoaSchemeDetailComponent implements OnInit {
                   this.ListDataCOA.controls[x].patchValue({
                     COA: this.ListRefCoaObj[i].Coa
                   });
-                  console.log("isi List Coa yg ke " + j)
-                  console.log(this.CoaSchemeForm.controls["ListCoa"])
-
                 }
               }
             }
           }
         }
         this.isTableReady = true;
-        console.log("List Curr");
-        console.log(this.ListRefCoaObj);
-        console.log(this.ListPaymentAlloc);
-        console.log(this.ListSelectedCurr);
-        console.log(this.CoaSchemeForm);
+        console.log("udah ready nih")
       },
       (error) => {
         this.toastr.typeErrorCustom(error);
