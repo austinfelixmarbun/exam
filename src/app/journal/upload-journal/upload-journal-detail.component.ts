@@ -11,7 +11,6 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CookieService } from 'ngx-cookie';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { FormBuilder, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common';
 @Component({
@@ -61,7 +60,7 @@ export class UploadJournalDetailComponent implements OnInit {
   isUpload: boolean = false;
   JrSourceFileId: number = 0;
   FileCode: string;
-  businessDt: Date;
+  businessDt: string;
   readonly CancelLink: string = NavigationConstant.UPLOAD_JOURNAL_FILE_PAGING;
 
   UploadJournalFileForm = this.fb.group({
@@ -90,7 +89,13 @@ export class UploadJournalDetailComponent implements OnInit {
     );
 
     this.userAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    this.businessDt = new Date(this.userAccess[CommonConstant.BUSINESS_DT]);
+    
+    this.http.post(URLConstant.GetJrSourceFileByJrSourceFileId, { Id: this.JrSourceFileId }).subscribe(
+         (response: any) => {
+          this.businessDt = formatDate(response['StartDate'], 'yyyy-MM-dd', 'en-US')
+         }
+       );
+    //this.businessDt = new Date(this.userAccess[CommonConstant.BUSINESS_DT]);
     
     this.uploadObj = {
       title: 'Journal - Upload Files', // Title Paging dan Upload Page

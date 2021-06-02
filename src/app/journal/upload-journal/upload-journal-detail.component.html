@@ -91,7 +91,7 @@
                         <div class="form-group row">
                             <label class="col-md-3  adins-required-label" translate>Start Date</label>
                             <div class="col-md-9">
-                                <input type="date" id="Date" class="form-control adInsInput width-25-per" formControlName="Date">
+                                <input type="date" id="Date" class="form-control adInsInput width-25-per" formControlName="Date" [min]="this.businessDt">
                                 <lib-uc-show-errors [control]="UploadJournalFileForm.controls.Date" [submit]="enjiForm.submitted">
                                 </lib-uc-show-errors>
                             </div>
