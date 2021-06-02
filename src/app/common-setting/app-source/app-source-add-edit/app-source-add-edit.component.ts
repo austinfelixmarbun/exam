@@ -63,7 +63,7 @@ export class AppSourceAddEditComponent implements OnInit {
       this.AppSourceForm.controls["AppSrcCode"].disable();
       this.rasObj = new RefAppSrcObj();
       this.rasObj.RefAppSrcId = this.RefAppSrcId;
-      this.http.post(URLConstant.GetRefAppSrcByRefAppSrcId, this.rasObj).subscribe(
+      this.http.post(URLConstant.GetRefAppSrcByRefAppSrcId, { Id: this.RefAppSrcId }).subscribe(
         response => {
           this.resultData = response;
           this.AppSourceForm.patchValue({
