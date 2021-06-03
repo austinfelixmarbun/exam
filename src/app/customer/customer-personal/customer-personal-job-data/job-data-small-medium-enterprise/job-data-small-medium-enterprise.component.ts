@@ -521,10 +521,10 @@ export class JobDataSmeComponent implements OnInit {
       this.setCustJobData();
       this.setJobAddr();
       this.setOthBizAddr();
-      this.custPersonalJobDataObj.OthBizAddrId = this.othBizAddrId
-      this.custPersonalJobDataObj.JobAddrId = this.jobAddrId;
+      this.custPersonalJobDataObj.OthBizAddrId = this.othBizAddrId == null ? 0 : this.returnCustJobDataObj.othBizAddrId;
+      this.custPersonalJobDataObj.JobAddrId = this.jobAddrId == null ? 0 : this.returnCustJobDataObj.jobAddrId;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
-      this.custPersonalJobDataObj.PrevJobAddrId = this.preJobAddrId;
+      this.custPersonalJobDataObj.PrevJobAddrId = this.preJobAddrId == null ? 0 : this.returnCustJobDataObj.preJobAddrId;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
       this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
       this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;

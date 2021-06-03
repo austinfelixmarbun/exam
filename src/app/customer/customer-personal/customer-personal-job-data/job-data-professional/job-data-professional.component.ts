@@ -419,8 +419,8 @@ export class JobDataProfessionalComponent implements OnInit {
       this.jobAddressObj = new CustAddrObj;
       this.othBizAddrObj = new CustAddrObj;
       this.setCustJobData();
-      this.custPersonalJobDataObj.JobAddrId = this.jobAddrId;
-      this.custPersonalJobDataObj.PrevJobAddrId = this.preJobAddrId;
+      this.custPersonalJobDataObj.JobAddrId = this.jobAddrId == null ? 0 : this.jobAddrId;
+      this.custPersonalJobDataObj.PrevJobAddrId = this.preJobAddrId == null ? 0 : this.preJobAddrId;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
       this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;

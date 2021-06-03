@@ -536,10 +536,10 @@ export class JobDataEmployeeComponent implements OnInit {
       this.setCustJobData();
       this.setJobAddr();
       this.setOthBizAddr();
-      this.custPersonalJobDataObj.OthBizAddrId = this.returnCustJobDataObj.OthBizAddrId;
-      this.custPersonalJobDataObj.JobAddrId = this.returnCustJobDataObj.JobAddrId;
+      this.custPersonalJobDataObj.OthBizAddrId = this.returnCustJobDataObj.OthBizAddrId == null ? 0 : this.returnCustJobDataObj.OthBizAddrId;
+      this.custPersonalJobDataObj.JobAddrId = this.returnCustJobDataObj.JobAddrId == null ? 0 : this.returnCustJobDataObj.JobAddrId;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
-      this.custPersonalJobDataObj.PrevJobAddrId = this.returnCustJobDataObj.PrevJobAddrId;
+      this.custPersonalJobDataObj.PrevJobAddrId = this.returnCustJobDataObj.PrevJobAddrId == null ? 0 : this.returnCustJobDataObj.PrevJobAddrId;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
       this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob; 
       this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
