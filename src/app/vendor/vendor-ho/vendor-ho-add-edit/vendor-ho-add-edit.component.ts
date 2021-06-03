@@ -511,7 +511,7 @@ export class VendorHoAddEditComponent implements OnInit {
 
   Back() {
     if (this.mode == "edit") {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HO_REG], { "VendorId": this.VendorId, "mode": "edit" });
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HO_REG], { "VendorId": this.VendorId, "mode": "edit", "MrVendorCategoryCode": this.MrVendorCategoryCode });
     } else {
       AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
@@ -662,7 +662,7 @@ export class VendorHoAddEditComponent implements OnInit {
         this.http.post<GenericObj>(URLConstant.EditVendorHO, this.vendorHoObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HO_REG], { "VendorId": response.Id, "mode": "edit" });
+            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HO_REG], { "VendorId": response.Id, "mode": "edit", "MrVendorCategoryCode": this.MrVendorCategoryCode });
           });
       }
       else {
@@ -671,7 +671,7 @@ export class VendorHoAddEditComponent implements OnInit {
         this.http.post<GenericObj>(URLConstant.AddVendorHO, this.vendorHoObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HO_REG], { "VendorId": response.Id });
+            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HO_REG], { "VendorId": response.Id, "MrVendorCategoryCode": this.MrVendorCategoryCode });
           });
       }
     }

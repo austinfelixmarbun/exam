@@ -116,6 +116,10 @@
                         {
                             "type": "mode",
                             "property": "edit"
+                        },
+                        {
+                            "type": "MrVendorCategoryCode",
+                            "property": "MrVendorCategoryCode"
                         }
                     ]
                 }
