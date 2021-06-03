@@ -35,8 +35,6 @@ export class JobDataNonProfessionalComponent implements OnInit {
   custPersonalJobDataObj: CustPersonalJobDataObj;
   custJobDataObj: CustPersonalJobDataObj;
   returnCustJobDataObj: any;
-  jobAddrObj: CustAddrObj;
-  othBizAddrObj: any;
   reqCustPersonalJobDataObj: RequestCustPersonalJobDataObj;
   refProfessionObj: RefProfessionObj;
   returnRefProfessionObj: any;
@@ -122,8 +120,6 @@ export class JobDataNonProfessionalComponent implements OnInit {
     if(this.typePage == "edit"){
       this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
       this.custPersonalJobDataObj = new CustPersonalJobDataObj;
-      this.jobAddrObj = new CustAddrObj;
-      this.othBizAddrObj = new CustAddrObj;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
       this.jobAddrObj.CustId = this.IdCust;
       this.othBizAddrObj.CustId = this.IdCust;
@@ -134,11 +130,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
       this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
       this.custPersonalJobDataObj.JobTitleName = this.JobDataNonProForm.controls["JobTitleName"].value;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
-      this.jobAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
-      this.othBizAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
-      this.reqCustPersonalJobDataObj.JobAddr = this.jobAddrObj;
-      this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_NONPROF;
 
       this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
@@ -154,16 +146,10 @@ export class JobDataNonProfessionalComponent implements OnInit {
     } else {
       this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
       this.custPersonalJobDataObj = new CustPersonalJobDataObj;
-      this.jobAddrObj = new CustAddrObj;
-      this.othBizAddrObj = new CustAddrObj;
       this.custPersonalJobDataObj.CustId = this.IdCust;
       this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
       this.custPersonalJobDataObj.JobTitleName = this.JobDataNonProForm.controls["JobTitleName"].value;
-      this.jobAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
-      this.othBizAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
-      this.reqCustPersonalJobDataObj.JobAddr = this.jobAddrObj;
-      this.reqCustPersonalJobDataObj.OthBizAddr = this.othBizAddrObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_NONPROF;
 
       this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(

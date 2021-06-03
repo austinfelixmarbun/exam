@@ -97,7 +97,9 @@ export class VendorATPMAddEditComponent implements OnInit {
   }
 
   getData() {
-    this.vendorService.GetVendorAndVendorAddrByVendorId({ VendorId: this.VendorId }).subscribe(
+    let GetVendorId: GenericObj = new GenericObj();
+    GetVendorId.Id = this.VendorId;
+    this.vendorService.GetVendorAndVendorAddrByVendorId(GetVendorId).subscribe(
       (response) => {
         this.result = response;
         this.setDropdown();

@@ -370,3 +370,7 @@ form.form-horizontal .form-group .label-control {
     visibility: visible;
     opacity: 1;
 }
+
+.was-validated input[type=date].form-control:invalid, input[type=date].form-control.is-invalid {
+    background-position: right calc(0.02rem) center;
+}

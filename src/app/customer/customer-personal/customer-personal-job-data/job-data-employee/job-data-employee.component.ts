@@ -307,6 +307,7 @@ export class JobDataEmployeeComponent implements OnInit {
               });
 
               this.addressObj = new CustAddrObj();
+              this.addressObj.CustAddrId = this.getJobAddr.CustAddrId;
               this.addressObj.Addr = this.getJobAddr.Addr;
               this.addressObj.AreaCode3 = this.getJobAddr.AreaCode3;
               this.addressObj.AreaCode4 = this.getJobAddr.AreaCode4;
@@ -325,6 +326,7 @@ export class JobDataEmployeeComponent implements OnInit {
               this.addressObj.FaxArea = this.getJobAddr.FaxArea;
               this.addressObj.Fax = this.getJobAddr.Fax;
               this.addressObj.MrHouseOwnershipCode = this.getJobAddr.MrBuildingOwnershipCode;
+              this.addressObj.RowVersion = this.getJobAddr.RowVersion;
 
               this.inputJobAddressObj = new InputFieldObj();
               this.inputJobAddressObj.inputLookupObj = new InputLookupObj();              
@@ -432,6 +434,7 @@ export class JobDataEmployeeComponent implements OnInit {
   }
 
   setJobAddr() {
+    this.jobAddressObj.CustAddrId = this.getJobAddr.CustAddrId;
     this.jobAddressObj.CustId = this.IdCust;
     this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
     this.jobAddressObj.Addr = this.JobDataEmpForm.controls["jobAddress"]["controls"].Addr.value;
@@ -455,6 +458,7 @@ export class JobDataEmployeeComponent implements OnInit {
     this.jobAddressObj.Fax = this.JobDataEmpForm.controls["jobAddress"]["controls"].Fax.value;
     this.jobAddressObj.MrBuildingOwnershipCode = this.JobDataEmpForm.controls["jobAddress"]["controls"].MrHouseOwnershipCode.value;
     this.jobAddressObj.Notes = this.JobDataEmpForm.controls["NotesJob"].value;
+    this.jobAddressObj.RowVersion = this.getJobAddr.RowVersion;
   }
 
   setPreJobAddr() {
@@ -541,10 +545,10 @@ export class JobDataEmployeeComponent implements OnInit {
       this.setCustJobData();
       this.setJobAddr();
       this.setOthBizAddr();
-      this.custPersonalJobDataObj.OthBizAddrId = this.othBizAddrId
-      this.custPersonalJobDataObj.JobAddrId = this.jobAddrId;
-      this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
-      this.custPersonalJobDataObj.PrevJobAddrId = this.preJobAddrId;
+      this.custPersonalJobDataObj.OthBizAddrId = this.returnCustJobDataObj.OthBizAddrId;
+      this.custPersonalJobDataObj.JobAddrId = this.returnCustJobDataObj.JobAddrId;
+      this.custPersonalJobDataObj.CustPersonalJobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
+      this.custPersonalJobDataObj.PrevJobAddrId = this.returnCustJobDataObj.PrevJobAddrId;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
       this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob; 
       this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
