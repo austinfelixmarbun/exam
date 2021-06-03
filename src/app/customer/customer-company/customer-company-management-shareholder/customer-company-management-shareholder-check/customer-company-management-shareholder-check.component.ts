@@ -5,12 +5,10 @@ import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
-import { CustObj } from 'app/shared/model/CustObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { ReqByCustNoObj } from 'app/shared/model/Request/ReqByCustNoObj.model';
 
 @Component({
   selector: 'app-customer-company-management-shareholder-check',
@@ -22,7 +20,7 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   @Output() IsOwner: EventEmitter<object> = new EventEmitter();
   @Input() TotalShare: number;
 
-  CustNoObj: ReqByCustNoObj = new ReqByCustNoObj();
+  CustNoObj: GenericObj = new GenericObj();
   tempCustCompanyObj: any;
   tempListCompanyManagementShareholder: any;
 

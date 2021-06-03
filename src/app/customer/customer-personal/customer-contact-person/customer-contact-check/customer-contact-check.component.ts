@@ -4,12 +4,11 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder } from '@angular/forms';
 import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalContactPerson.Obj.Model';
 import { ActivatedRoute } from '@angular/router';
-import { CustObj } from 'app/shared/model/CustObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ReqByCustNoObj } from 'app/shared/model/Request/ReqByCustNoObj.model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-contact-check',
@@ -24,7 +23,7 @@ export class CustomerContactCheckComponent implements OnInit {
   IdCust: number;
   tempCustomerPersonalContactPerson: any;
   custPersonContactPersonObj: CustPersonalContactPersonObj;
-  CustNoObj: ReqByCustNoObj = new ReqByCustNoObj();
+  CustNoObj: GenericObj = new GenericObj();
   resCustObj: any;
   listCustIdToExclude: Array<string>;
 

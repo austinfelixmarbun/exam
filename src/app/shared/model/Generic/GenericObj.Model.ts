@@ -2,6 +2,7 @@ export class GenericObj{
     Id: number;
     Code: string;
     TrxNo: string;
+    CustNo: string;
     RowVersion: string;
 
     constructor(){
@@ -9,5 +10,6 @@ export class GenericObj{
         this.Code = "";
         this.TrxNo = "";
         this.RowVersion = "";
+        this.CustNo = "";
     }
 }
