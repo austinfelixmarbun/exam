@@ -24,7 +24,8 @@
             "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
             "label": "Office Code",
             "items": [],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "environment": "FOU"
         },
         {
             "type": "textbox",

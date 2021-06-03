@@ -16,7 +16,8 @@
             "path":"/AssetType/GetListKeyValueActiveByCode",
             "itemsUrl" : [],
             "isEvent" : true,
-            "affectedFilter" : ["AC.ASSET_CATEGORY_CODE"]
+            "affectedFilter" : ["AC.ASSET_CATEGORY_CODE"],
+            "environment": "FOU"
         },
         {
             "type": "textbox",
@@ -38,7 +39,8 @@
             "isFromURL" : true, 
             "url" : "", 
             "path":"/AssetCategory/GetListAssetCategoryByCodeWithCriteriaObj",
-            "itemsUrl" : []
+            "itemsUrl" : [],
+            "environment":"FOU"
         },
         {
             "type": "textbox",
@@ -94,7 +96,8 @@
             "path": "/RefMaster/GetListKeyValueActiveByCode",
             "itemsUrl" : [], 
             "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "NEG_ASSET_SOURCE"
+            "criteriaPropValue" : "NEG_ASSET_SOURCE",
+            "environment":"FOU"
         },
         {
             "type": "textbox",

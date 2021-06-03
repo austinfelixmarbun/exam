@@ -18,16 +18,5 @@ export class NegativeCustomerComponent implements OnInit {
     this.inputPagingObj._url = "./assets/ucpaging/searchNegativeCustomer.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteNegativeCustomer;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNegativeCustomer.json";
-
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "A.MR_CUST_TYPE_CODE",
-        environment: environment.FoundationR3Url
-      },
-      {
-        name: "A.MR_NEG_CUST_TYPE_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
   }
 }

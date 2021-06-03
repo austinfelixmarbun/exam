@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
-import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -18,20 +17,6 @@ export class NegativeAssetComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchNegativeAsset.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNegativeAsset.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "A.MR_NEG_ASSET_SOURCE_CODE",
-        environment: environment.FoundationR3Url
-      },
-      {
-        name: "ATH.ASSET_TYPE_CODE",
-        environment: environment.FoundationR3Url
-      },
-      {
-        name: "AC.ASSET_CATEGORY_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
 
     var criteriaList = new Array();
     var criteriaObj = new CriteriaObj();

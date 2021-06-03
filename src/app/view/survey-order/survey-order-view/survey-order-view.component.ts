@@ -30,8 +30,6 @@ export class SurveyOrderViewComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyOrder.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
-
     
     this.http.post(URLConstant.GetListSrvyTaskBySrvyOrderIdForView, {Id : this.SrvyOrderId}).subscribe(
       response => {

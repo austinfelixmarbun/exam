@@ -33,7 +33,6 @@ export class MainInfoViewComponent implements OnInit {
         } else if (this.MrVendorClass == CommonConstant.Branch) {
           this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchMainInfo.json";
         }
-        this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
       }
     );
   }

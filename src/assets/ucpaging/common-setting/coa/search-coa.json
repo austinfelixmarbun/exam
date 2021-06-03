@@ -16,6 +16,7 @@
             "label": "Entity Type",
             "items": [],
             "itemsUrl": [],
+            "environment": "FOU",
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "ENTITY_TYPE"
         },
@@ -41,7 +42,8 @@
             "path": "/RefPaymentAlloc/GetListKeyValueRefPaymentAllocActive",
             "label": "Payment Alloc Code",
             "items": [],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "environment": "FOU"
         },
         {
             "type": "textbox",

@@ -36,7 +36,6 @@ export class MainInfoViewComponent implements OnInit {
         }else{
           this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSupplierBranchMainInfo.json";
         }
-        this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
       }
     );
   }

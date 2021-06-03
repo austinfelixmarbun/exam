@@ -46,13 +46,6 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
     this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/verifQuestionGrpMbrTempPaging.json";
-    this.tempPagingObj.ddlEnvironments =
-      [
-        {
-          name: "VQA.REF_VERF_ANSWER_TYPE_ID",
-          environment: environment.FoundationR3Url
-        }
-      ];
 
     this.GetListVerfQuestionGrpDByVerfQuestionGrpHId();
   }

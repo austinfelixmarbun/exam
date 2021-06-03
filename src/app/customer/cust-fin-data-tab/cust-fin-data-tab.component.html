@@ -358,8 +358,9 @@
       <div class="form-group row">
         <label class="col-md-2 adInsLabel" for="CurrRatio" translate>Current Ratio</label>
         <div class="col-md-6">
-          <input type="text" class="form-control adInsInput" formControlName="CurrRatio"
-            [ngClass]="{ 'is-invalid': enjiFormCompany.submitted && CustCompanyFinDataForm.controls.CurrRatio.invalid }" />
+          <input type="" currencyMask class="form-control adInsInput" formControlName="CurrRatio"
+            [ngClass]="{ 'is-invalid': enjiFormCompany.submitted && CustCompanyFinDataForm.controls.CurrRatio.invalid }" 
+            [options]="{align: 'right'}" />
           <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.CurrRatio"
             [submit]="enjiFormCompany.submitted">
           </lib-uc-show-errors>

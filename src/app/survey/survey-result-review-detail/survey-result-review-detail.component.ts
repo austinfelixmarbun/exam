@@ -43,7 +43,6 @@ export class SurveyResultReviewDetailComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyOrder.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.getSurveyTaskListData();
   }

@@ -26,7 +26,8 @@
         "criteriaPropName" : "RefMasterTypeCode",
         "criteriaPropValue" : "CUST_MODEL",
         "items": [],
-        "itemsUrl": []
+        "itemsUrl": [],
+        "environment": "FOU"
       },
       {
         "type": "textbox",

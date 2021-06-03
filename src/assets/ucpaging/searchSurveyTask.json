@@ -13,7 +13,8 @@
             "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
             "label": "Office Name",
             "items": [],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "environment": "FOU"
         },
         {
             "type": "dropdown",
@@ -29,7 +30,8 @@
             "items": [],
             "itemsUrl": [],
             "criteriaPropName": "RefMasterTypeCode",
-            "criteriaPropValue": "SURVEY_INITIAL"
+            "criteriaPropValue": "SURVEY_INITIAL",
+            "environment": "FOU"
         },
         {
             "type": "datepicker",
@@ -113,7 +115,8 @@
             "items": [],
             "itemsUrl": [],
             "criteriaPropName": "Code",
-            "criteriaPropValue": "FOU_SURVEY_TASK"
+            "criteriaPropValue": "FOU_SURVEY_TASK",
+            "environment":"FOU"
         },
         {
             "type": "dropdown",
@@ -129,7 +132,8 @@
             "items": [],
             "itemsUrl": [],
             "criteriaPropName": "RefMasterTypeCode",
-            "criteriaPropValue": "SURVEY_OBJECT"
+            "criteriaPropValue": "SURVEY_OBJECT",
+            "environment":"FOU"
         },
         {
             "type": "textbox",

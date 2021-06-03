@@ -18,12 +18,6 @@ export class VendorHoldingPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorHolding.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorHolding.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "V.MR_VENDOR_CATEGORY_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
 
     var WVendorClassObj = new WhereValueObj();
     WVendorClassObj.property = "VendorClass";

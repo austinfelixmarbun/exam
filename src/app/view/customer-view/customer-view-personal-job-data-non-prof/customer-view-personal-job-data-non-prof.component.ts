@@ -12,6 +12,5 @@ export class CustomerViewPersonalJobDataNonProfComponent implements OnInit {
   constructor() { }
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewCustJobDataNonProf.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
   }
 }

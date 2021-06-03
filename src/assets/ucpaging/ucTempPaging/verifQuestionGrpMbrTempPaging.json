@@ -33,7 +33,8 @@
             "path": "/RefVerfAnswerType/GetListKeyValueActiveByCode",
             "label": "Answer Type",
             "items": [],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "environment": "FOU"
           }
     ],
     "querystring": {
