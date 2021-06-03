@@ -614,13 +614,13 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
-    this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-    this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-    this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupVendorParent.json";
     this.inputLookupParentObj.isRequired = false;
     this.inputLookupParentObj.addCritInput = new Array();
 
     if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
+      this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupSupplierHO.json";
+      this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupSupplierHO.json";
+      this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupSupplierHO.json";
       var critInput = new CriteriaObj();
       critInput.propName = "MR_VENDOR_CATEGORY_CODE";
       critInput.restriction = AdInsConstant.RestrictionEq;
@@ -636,6 +636,9 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.UpdateValueAndValidity();
     }
     if (this.MrVendorCategoryCode == "SURVEYOR_BRANCH") {
+      this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupSurveyorHO.json";
+      this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupSurveyorHO.json";
+      this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupSurveyorHO.json";
       var critObjSurveyor = new CriteriaObj();
       critObjSurveyor.propName = 'MR_VENDOR_CATEGORY_CODE';
       critObjSurveyor.restriction = AdInsConstant.RestrictionEq;
@@ -645,6 +648,9 @@ export class VendorBranchAddEditComponent implements OnInit {
 
     }
     if (this.MrVendorCategoryCode == "ASSET_INSCO_BRANCH") {
+      this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupAssetInsHO.json";
+      this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupAssetInsHO.json";
+      this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupAssetInsHO.json";
       var critObjAssetInsurance = new CriteriaObj();
       critObjAssetInsurance.propName = 'MR_VENDOR_CATEGORY_CODE';
       critObjAssetInsurance.restriction = AdInsConstant.RestrictionEq;
@@ -654,6 +660,9 @@ export class VendorBranchAddEditComponent implements OnInit {
 
     }
     if (this.MrVendorCategoryCode == "LIFE_INSCO_BRANCH") {
+      this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupLifeInsHO.json";
+      this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupLifeInsHO.json";
+      this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupLifeInsHO.json";
       var critObjLifeInsurance = new CriteriaObj();
       critObjLifeInsurance.propName = 'MR_VENDOR_CATEGORY_CODE';
       critObjLifeInsurance.restriction = AdInsConstant.RestrictionEq;
