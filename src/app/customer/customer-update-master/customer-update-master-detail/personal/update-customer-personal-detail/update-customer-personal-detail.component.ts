@@ -62,15 +62,15 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     RowVersionCust: [''],
     RowVersionCustPersonal: [''],
     RowVersionCustGrp: ['']
-  }); 
+  });
 
   constructor(
-    private http: HttpClient, 
-    private toastr: NGXToastrService, 
+    private http: HttpClient,
+    private toastr: NGXToastrService,
     private fb: FormBuilder,
     private router: Router
-  ) { 
-    this.AppCustPersonalDetail = new UpdateCustPersonalDetailObj();  
+  ) {
+    this.AppCustPersonalDetail = new UpdateCustPersonalDetailObj();
     this.MrMaritalStatCodeList = new Array<any>();
     this.MrNationalityCodeList = new Array<any>();
     this.MrEducationCodeList = new Array<any>();
@@ -101,7 +101,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    let getDetail = this.http.post(URLConstant.GetCustDataForUpdateMasterCustDetail, { CustDataTrxId: this.CustDataTrxId });
+    let getDetail = this.http.post(URLConstant.GetCustDataForUpdateMasterCustDetail, { Id: this.CustDataTrxId });
     let getMaritalStat = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat });
     let getNationality = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality });
     let getEducation = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation });
@@ -110,12 +110,12 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     forkJoin([getDetail, getMaritalStat, getNationality, getEducation, getReligion, getGeneralSettingNationality]).pipe(
       map((response) => {
         var detailData = response[0];
-        this.AppCustPersonalDetail = {...detailData["AppCustDetail"]};
+        this.AppCustPersonalDetail = { ...detailData["AppCustDetail"] };
         this.MrMaritalStatCodeList = response[1][CommonConstant.ReturnObj];
         this.MrNationalityCodeList = response[2][CommonConstant.ReturnObj];
         this.MrEducationCodeList = response[3][CommonConstant.ReturnObj];
         this.MrReligionCodeList = response[4][CommonConstant.ReturnObj];
-        this.CustomerDetailForm.patchValue({...detailData["MasterCustDetail"]});
+        this.CustomerDetailForm.patchValue({ ...detailData["MasterCustDetail"] });
 
         var country = response[5];
         var criteriaList = new Array();
@@ -141,8 +141,8 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
       }),
       mergeMap((response) => {
         let getMasterCountry = this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: response["MasterCustDetail"]["Country"] });
-        let getAppCountry = this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: response["AppCustDetail"]["Country"] });  
-        let getDefaultCountry = this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: response["GsValueCountry"] });  
+        let getAppCountry = this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: response["AppCustDetail"]["Country"] });
+        let getDefaultCountry = this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: response["GsValueCountry"] });
         return forkJoin([getMasterCountry, getAppCountry, getDefaultCountry]);
       })
     ).toPromise().then(
@@ -165,39 +165,39 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     );
   }
 
-  getCountryData(e){
+  getCountryData(e) {
     this.CustomerDetailForm.patchValue({
       Country: e.CountryCode
     });
   }
 
-  NationalityHandler(){
+  NationalityHandler() {
     var nationality = this.CustomerDetailForm.controls["MrNationalityCode"].value;
-    if(nationality == CommonConstant.NationalityCodeLocal){
+    if (nationality == CommonConstant.NationalityCodeLocal) {
       this.lookUpObj.isRequired = false;
     }
-    else{
+    else {
       this.lookUpObj.isRequired = true;
     }
   }
 
-  getParentCust(e){
+  getParentCust(e) {
     this.CustomerDetailForm.patchValue({
       CustomerGroupParentCustId: e.custId,
       CustomerGroupParentCustName: e.custName
     });
   }
 
-  CopyAllHandler(){
+  CopyAllHandler() {
     var obj = new Object();
     for (const key in this.AppCustPersonalDetail) {
-      if(key == "CustId" || key == "CustPersonalId" || key == "CountryName" || key == "CustomerGroupParentCustName" || key == "RowVersionCust" || 
-          key == "RowVersionCustPersonal" || key == "RowVersionCustGrp"){
+      if (key == "CustId" || key == "CustPersonalId" || key == "CountryName" || key == "CustomerGroupParentCustName" || key == "RowVersionCust" ||
+        key == "RowVersionCustPersonal" || key == "RowVersionCustGrp") {
         continue;
       }
-      else{
+      else {
         // if(this.AppCustPersonalDetail[key]){
-          obj[key] = this.AppCustPersonalDetail[key];
+        obj[key] = this.AppCustPersonalDetail[key];
         // }
       }
     }
@@ -215,12 +215,12 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     });
   }
 
-  CopyHandler(formControlName){
+  CopyHandler(formControlName) {
     var obj = new Object();
     obj[formControlName] = this.AppCustPersonalDetail[formControlName];
     this.CustomerDetailForm.patchValue(obj);
 
-    if(formControlName == "MrNationalityCode"){
+    if (formControlName == "MrNationalityCode") {
       this.CustomerDetailForm.patchValue({
         Country: this.AppCustPersonalDetail.Country
       });
@@ -230,12 +230,12 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
       this.lookUpObj.nameSelect = this.AppCustPersonalDetail["CountryName"];
       this.lookUpObj.jsonSelect = { CountryName: this.AppCustPersonalDetail["CountryName"] };
     }
-    else if(formControlName == "IsVip"){
+    else if (formControlName == "IsVip") {
       this.VipHandler();
     }
   }
 
-  CopyCustGrpHandler(){
+  CopyCustGrpHandler() {
     this.CustomerDetailForm.patchValue({
       CustomerGroupParentCustId: this.AppCustPersonalDetail["CustomerGroupParentCustId"],
       CustomerGroupParentCustName: this.AppCustPersonalDetail["CustomerGroupParentCustName"]
@@ -248,16 +248,16 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     });
   }
 
-  back(){
+  back() {
     // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
     AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
   }
 
-  VipHandler(){
-    if(this.CustomerDetailForm.controls["IsVip"].value){
+  VipHandler() {
+    if (this.CustomerDetailForm.controls["IsVip"].value) {
       this.CustomerDetailForm.controls["VipNotes"].enable();
     }
-    else{
+    else {
       this.CustomerDetailForm.controls["VipNotes"].disable();
       this.CustomerDetailForm.patchValue({
         VipNotes: ""
@@ -265,7 +265,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     }
   }
 
-  SaveValue(){
+  SaveValue() {
     var formValue = this.CustomerDetailForm.getRawValue();
     this.http.post(URLConstant.UpdateMasterCustomer, formValue).toPromise().then(
       (response) => {

@@ -101,10 +101,11 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       }
     );
 
-    var refMasterObjCustModel = {
-      MrCustTypeCode: CommonConstant.CustTypeCompany
+    let refMasterObjCustModel = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      MappingCode: CommonConstant.CustTypeCompany
     }
-    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempMrCustModelCode = response;
         if (response[CommonConstant.ReturnObj].length > 0) {

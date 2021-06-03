@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
@@ -11,8 +12,8 @@ export class CustomerViewPersonalFamilyComponent implements OnInit {
   CustFamilyList: Object[];
   CustId: number;
 
-  constructor(private http: HttpClient,     private route: ActivatedRoute) { 
-    
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+
   }
 
   ngOnInit() {
@@ -22,7 +23,7 @@ export class CustomerViewPersonalFamilyComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-    this.http.post(URLConstant.GetMainCustAndListCustPersonalFamilyByCustId, { CustId: this.CustId }).toPromise().then(
+    this.http.post(URLConstant.GetMainCustAndListCustPersonalFamilyByCustId, { Id: this.CustId }).toPromise().then(
       (response) => {
         this.CustFamilyList = response["CustPersonalFamilyList"];
       }
@@ -31,6 +32,10 @@ export class CustomerViewPersonalFamilyComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  openView(FamilyId) {
+    AdInsHelper.OpenCustomerViewByCustId(FamilyId);
   }
 
 }

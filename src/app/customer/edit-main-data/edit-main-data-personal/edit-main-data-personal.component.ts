@@ -167,10 +167,11 @@ export class EditMainDataPersonalComponent implements OnInit {
         }
       }
     );
-    var refMasterObjCustModel = {
-      MrCustTypeCode: CommonConstant.CustTypePersonal
+    let refMasterObjCustModel = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      MappingCode: CommonConstant.CustTypePersonal
     }
-    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
@@ -269,7 +270,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     await this.http.post<any>(this.CheckCustFraudTempRegByCustNo, { CustNo: this.CustNo }).subscribe(
       (response) => {
         this.tempFraud = response["ReturnObject"];
-        this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_IS_CUST_THIRD_PARTY_CHECK }).pipe(
+        this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GS_IS_CUST_THIRD_PARTY_CHECK }).pipe(
           map((response) => {
             return response
 
@@ -281,13 +282,13 @@ export class EditMainDataPersonalComponent implements OnInit {
               let temp = this.tempFraud
               if (temp === null) {
                 let addCustTemp = this.http.post(URLConstant.AddCustFraudTempReg, { MrCustTypeCode: CommonConstant.CustTypePersonal, CustNo: this.CustNo });
-                let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
+                let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
                 return forkJoin([addCustTemp, getMaxDays]);
               }
               else {
                 this.CustThirdPartyChecking.CustTempNo = temp["CustTempNo"];
                 this.CustThirdPartyChecking.MrCustTypeCode = temp["CustType"];
-                let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
+                let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
                 return forkJoin([getMaxDays]);
               }
 

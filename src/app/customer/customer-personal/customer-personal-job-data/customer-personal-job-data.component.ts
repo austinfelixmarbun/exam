@@ -35,18 +35,19 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   ngOnInit() {
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         this.custObj = response;
         this.CustModel = this.custObj.MrCustModelCode;
 
-        var refMasterObjCustModel = {
-          MrCustTypeCode: CommonConstant.CustTypePersonal
+        let refMasterObjCustModel = {
+          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+          MappingCode: CommonConstant.CustTypePersonal
         }
-        this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+        this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObjCustModel).subscribe(
           (response) => {
             this.tempCustModel = response["ReturnObject"];
-            if(!this.CustModel){
+            if (!this.CustModel) {
               this.CustModel = this.tempCustModel[0]["Key"];
             }
           }
@@ -55,8 +56,7 @@ export class CustomerPersonalJobDataComponent implements OnInit {
     );
   }
 
-  getValue(ev)
-  {
+  getValue(ev) {
     this.outputTab.emit({ stepMode: ev.stepMode })
   }
 }

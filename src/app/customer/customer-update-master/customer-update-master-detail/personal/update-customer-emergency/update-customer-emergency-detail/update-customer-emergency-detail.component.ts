@@ -57,8 +57,8 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   });
 
   constructor(
-    private http: HttpClient, 
-    private toastr: NGXToastrService, 
+    private http: HttpClient,
+    private toastr: NGXToastrService,
     private fb: FormBuilder,
     private router: Router
   ) {
@@ -91,7 +91,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
 
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
-    let getDetail = this.http.post(URLConstant.GetCustEmergencyDataForUpdateMasterCustEmergency, { CustDataTrxId: this.CustDataTrxId });
+    let getDetail = this.http.post(URLConstant.GetCustEmergencyDataForUpdateMasterCustEmergency, { Id: this.CustDataTrxId });
     let getCustRelationship = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustPersonalRelationship });
     let getIdType = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType });
     let getGender = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender });
@@ -101,21 +101,21 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
         this.CustRelationList = response[1][CommonConstant.ReturnObj];
         this.IdTypeList = response[2][CommonConstant.ReturnObj];
         this.GenderList = response[3][CommonConstant.ReturnObj];
-        if(response[0]["MasterCustEmergency"]["BirthDate"]){
+        if (response[0]["MasterCustEmergency"]["BirthDate"]) {
           response[0]["MasterCustEmergency"]["BirthDate"] = datePipe.transform(response[0]["MasterCustEmergency"]["BirthDate"], 'yyyy-MM-dd');
         }
-        if(this.AppEmergencyData["BirthDate"]){
+        if (this.AppEmergencyData["BirthDate"]) {
           this.AppEmergencyData["BirthDate"] = datePipe.transform(this.AppEmergencyData["BirthDate"], 'yyyy-MM-dd');
         }
-        this.CustomerEmergencyForm.patchValue({...response[0]["MasterCustEmergency"]});
+        this.CustomerEmergencyForm.patchValue({ ...response[0]["MasterCustEmergency"] });
         this.DisplayName["Zipcode"] = this.AppEmergencyData["Zipcode"];
-        if(response[0]["MasterCustEmergency"]["Address"] != response[0]["AppCustEmergency"]["Address"] ||
-              response[0]["MasterCustEmergency"]["AreaCode1"] != response[0]["AppCustEmergency"]["AreaCode1"] ||
-              response[0]["MasterCustEmergency"]["AreaCode2"] != response[0]["AppCustEmergency"]["AreaCode2"] ||
-              response[0]["MasterCustEmergency"]["AreaCode3"] != response[0]["AppCustEmergency"]["AreaCode3"] ||
-              response[0]["MasterCustEmergency"]["AreaCode4"] != response[0]["AppCustEmergency"]["AreaCode4"] ||
-              response[0]["MasterCustEmergency"]["Zipcode"] != response[0]["AppCustEmergency"]["Zipcode"] ||
-              response[0]["MasterCustEmergency"]["City"] != response[0]["AppCustEmergency"]["City"]){
+        if (response[0]["MasterCustEmergency"]["Address"] != response[0]["AppCustEmergency"]["Address"] ||
+          response[0]["MasterCustEmergency"]["AreaCode1"] != response[0]["AppCustEmergency"]["AreaCode1"] ||
+          response[0]["MasterCustEmergency"]["AreaCode2"] != response[0]["AppCustEmergency"]["AreaCode2"] ||
+          response[0]["MasterCustEmergency"]["AreaCode3"] != response[0]["AppCustEmergency"]["AreaCode3"] ||
+          response[0]["MasterCustEmergency"]["AreaCode4"] != response[0]["AppCustEmergency"]["AreaCode4"] ||
+          response[0]["MasterCustEmergency"]["Zipcode"] != response[0]["AppCustEmergency"]["Zipcode"] ||
+          response[0]["MasterCustEmergency"]["City"] != response[0]["AppCustEmergency"]["City"]) {
           this.IsAddressDifferent = true;
         }
         return response[0];
@@ -146,8 +146,8 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     );
   }
 
-  CopyHandler(formControlName, lookupName){
-    if(formControlName == "Address"){
+  CopyHandler(formControlName, lookupName) {
+    if (formControlName == "Address") {
       this.CustomerEmergencyForm.patchValue({
         Address: this.AppEmergencyData["Address"],
         Zipcode: this.AppEmergencyData["Zipcode"],
@@ -162,12 +162,12 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       });
       this.IsAddressDifferent = false;
     }
-    else{
+    else {
       var obj = new Object();
       obj[formControlName] = this.AppEmergencyData[formControlName];
       this.CustomerEmergencyForm.patchValue(obj);
 
-      if(lookupName){
+      if (lookupName) {
         this.lookupObj[lookupName]["isReady"] = false;
         this.lookupObj[lookupName]["nameSelect"] = this.DisplayName[formControlName];
         this.lookupObj[lookupName]["isReady"] = true;
@@ -178,15 +178,15 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     }
   }
 
-  CopyAllHandler(){
+  CopyAllHandler() {
     var obj = new Object();
     for (const key in this.AppEmergencyData) {
-      if(key == "CustEmergencyId" || key == "CustId" || key == "RowVersion"){
+      if (key == "CustEmergencyId" || key == "CustId" || key == "RowVersion") {
         continue;
       }
-      else{
+      else {
         // if(this.AppEmergencyData[key]){
-          obj[key] = this.AppEmergencyData[key];
+        obj[key] = this.AppEmergencyData[key];
         // }
       }
     }
@@ -206,29 +206,29 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     this.IsAddressDifferent = false;
   }
 
-  AddressCopyButtonHandler(){
+  AddressCopyButtonHandler() {
     var masterCustForm = this.CustomerEmergencyForm.value;
-    if(masterCustForm["Address"] != this.AppEmergencyData["Address"] ||
-        masterCustForm["AreaCode1"] != this.AppEmergencyData["AreaCode1"] ||
-        masterCustForm["AreaCode2"] != this.AppEmergencyData["AreaCode2"] ||
-        masterCustForm["AreaCode3"] != this.AppEmergencyData["AreaCode3"] ||
-        masterCustForm["AreaCode4"] != this.AppEmergencyData["AreaCode4"] ||
-        masterCustForm["Zipcode"] != this.AppEmergencyData["Zipcode"] ||
-        masterCustForm["City"] != this.AppEmergencyData["City"]){
+    if (masterCustForm["Address"] != this.AppEmergencyData["Address"] ||
+      masterCustForm["AreaCode1"] != this.AppEmergencyData["AreaCode1"] ||
+      masterCustForm["AreaCode2"] != this.AppEmergencyData["AreaCode2"] ||
+      masterCustForm["AreaCode3"] != this.AppEmergencyData["AreaCode3"] ||
+      masterCustForm["AreaCode4"] != this.AppEmergencyData["AreaCode4"] ||
+      masterCustForm["Zipcode"] != this.AppEmergencyData["Zipcode"] ||
+      masterCustForm["City"] != this.AppEmergencyData["City"]) {
       this.IsAddressDifferent = true;
     }
-    else{
+    else {
       this.IsAddressDifferent = false;
     }
   }
 
-  getProfessionData(e){
+  getProfessionData(e) {
     this.CustomerEmergencyForm.patchValue({
       Profession: e.ProfessionCode
     });
   }
 
-  getZipcodeData(e){
+  getZipcodeData(e) {
     this.CustomerEmergencyForm.patchValue({
       Zipcode: e.Zipcode,
       AreaCode1: e.AreaCode1,
@@ -237,12 +237,12 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     });
   }
 
-  back(){
+  back() {
     // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
     AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
   }
 
-  SaveValue(){
+  SaveValue() {
     this.http.post(URLConstant.UpdateMasterCustEmergency, this.CustomerEmergencyForm.value).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);

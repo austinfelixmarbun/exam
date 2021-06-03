@@ -132,7 +132,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
   ngOnInit() {
     console.log("ameng");
     this.DuplicateCustObj = new DuplicateCustObj();
-    if(this.IsFromCustFamilyTab){
+    if (this.IsFromCustFamilyTab) {
       this.DuplicateCustObj.CustName = this.CustFamilyTabData["CustName"];
       this.DuplicateCustObj.MrCustTypeCode = RefMasterConstant.Personal;
       this.DuplicateCustObj.IdNo = this.CustFamilyTabData["IdNo"];
@@ -146,7 +146,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       this.IsAffiliateWithMf = "false";
       this.IsVip = "false";
     }
-    else if(this.IsFromCustMgmntShareholder){
+    else if (this.IsFromCustMgmntShareholder) {
       this.DuplicateCustObj.CustName = this.CustMgmntShareholderData["MgmntShrholderName"];
       this.DuplicateCustObj.MrCustTypeCode = RefMasterConstant.Personal;
       this.DuplicateCustObj.IdNo = this.CustMgmntShareholderData["IdNo"];
@@ -161,7 +161,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       this.IsAffiliateWithMf = "false";
       this.IsVip = "false";
     }
-    else{
+    else {
       this.DuplicateCustObj.CustName = this.CustName;
       this.DuplicateCustObj.MrCustTypeCode = RefMasterConstant.Personal;
       this.DuplicateCustObj.IdNo = this.IdNo;
@@ -178,7 +178,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
         }
         else
           this.SaveValue();
-    });
+      });
     if (this.IsAffiliateWithMf === "true") {
       this.StatusAffiliate = "Yes";
     } else {
@@ -194,7 +194,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       MasterCode: this.Gender,
       RowVersion: ""
     }
-    this.http.post(URLConstant.GetRefMasterByMasterCode, {Code: this.Gender}).subscribe(
+    this.http.post(URLConstant.GetRefMasterByMasterCode, { Code: this.Gender }).subscribe(
       (response) => {
         this.tempGender = response;
       }
@@ -204,17 +204,17 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       MasterCode: this.MrIdTypeCode,
       RowVersion: ""
     }
-    this.http.post(URLConstant.GetRefMasterByMasterCode, {Code: this.MrIdTypeCode}).subscribe(
+    this.http.post(URLConstant.GetRefMasterByMasterCode, { Code: this.MrIdTypeCode }).subscribe(
       (response) => {
         this.tempMrIdTypeCode = response;
       }
     );
 
-    var refMasterObjCustModel = {
-      CustModelCode: this.CustModel,
-      RowVersion: ""
+    let refMasterObjCustModel = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      MasterCode: this.CustModel
     }
-    this.http.post(URLConstant.GetRefCustModelByCode, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
       }
@@ -228,7 +228,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
     this.addCustObj.CustAddr = new CustAddrObj();
     var custAddrObj = new CustAddrObj();
 
-    if(this.IsFromCustFamilyTab){
+    if (this.IsFromCustFamilyTab) {
       this.addCustObj.CustObj.CustName = this.CustFamilyTabData["CustName"];
       this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Personal;
       this.addCustObj.CustObj.MrIdTypeCode = this.CustFamilyTabData["MrIdTypeCode"];
@@ -277,7 +277,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
         }
       );
     }
-    else if(this.IsFromCustMgmntShareholder){
+    else if (this.IsFromCustMgmntShareholder) {
       var requestShareholderPersonal = {
         CustId: this.CustMgmntShareholderData["CustId"],
         MgmntShrholderName: this.CustMgmntShareholderData["MgmntShrholderName"],
@@ -298,7 +298,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       };
       this.http.post(URLConstant.AddCustCompanyMgmntShrholder, requestShareholderPersonal).toPromise().then(
         (response) => {
-          this.ResponseSaveData.emit({mode : 'check'});
+          this.ResponseSaveData.emit({ mode: 'check' });
         }
       ).catch(
         (error) => {
@@ -306,7 +306,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
         }
       );
     }
-    else{
+    else {
       this.addCustObj.CustTempNo = this.CustTempNo;
       this.addCustObj.CustObj.CustName = this.CustName;
       this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Personal;
@@ -347,7 +347,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       this.addCustObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
       this.http.post(URLConstant.AddCustPersonalMainData, this.addCustObj).subscribe(
         (response: GenericObj) => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": response.Id, "From": 'CustPaging' });
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response.Id, "From": 'CustPaging' });
         }
       );
     }
@@ -356,7 +356,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
   EditCustPersonal(item) {
     var CustObj = { CustNo: item.CustNo, CustName: this.CustName, IdNo: item.IdNo };
     // this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustObj).subscribe(
-    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, {TrxNo : item.CustNo}).pipe(
+    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, { TrxNo: item.CustNo }).pipe(
       map((response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.CustObj = response['CustObj'];
@@ -371,13 +371,13 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       })
     ).subscribe(
       (response) => {
-        if(this.IsFromCustMgmntShareholder){
+        if (this.IsFromCustMgmntShareholder) {
           this.addCustObj.CustObj.MrCustModelCode = this.CustMgmntShareholderData.MrCustModelCode;
           this.addCustObj.CustObj.MrIdTypeCode = this.CustMgmntShareholderData.MrIdTypeCode;
           this.addCustObj.CustObj.IdExpiredDt = this.CustMgmntShareholderData.IdExpiredDt;
           this.addCustObj.CustPersonalObj.MrGenderCode = this.CustMgmntShareholderData.MrGenderCode;
           this.addCustObj.CustPersonalObj.BirthPlace = this.CustMgmntShareholderData.BirthPlace;
-        }else{
+        } else {
           this.addCustObj.CustAddr = response as CustAddrObj;
           this.addCustObj.CustObj.CustName = item.CustName;
           this.addCustObj.CustObj.MrCustTypeCode = RefMasterConstant.Personal;
@@ -403,7 +403,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
           this.addCustObj.CustPersonalObj.BirthDt = item.BirthDt;
           this.addCustObj.CustPersonalObj.MotherMaidenName = item.MotherMaidenName;
           this.addCustObj.CustPersonalObj.IsRestInPeace = false;
-  
+
           // var custAddr = JSON.parse(sessionStorage.getItem("CustAddr"));
           // this.addCustObj.CustAddr.Addr = custAddr["Addr"];
           // this.addCustObj.CustAddr.AreaCode1 = custAddr["AreaCode1"];
@@ -413,10 +413,10 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
           // this.addCustObj.CustAddr.City = custAddr["City"];
           // this.addCustObj.CustAddr.Zipcode = custAddr["Zipcode"];
           // this.addCustObj.CustAddr.SubZipcode = custAddr["SubZipcode"];
-        }      
+        }
         this.http.post(URLConstant.EditDuplicateCust, this.addCustObj).subscribe(
           (response) => {
-            if(this.IsFromCustFamilyTab){
+            if (this.IsFromCustFamilyTab) {
               var requestFamily = {
                 CustId: this.CustFamilyTabData["CustId"],
                 FamilyId: this.addCustObj.CustObj.CustId,
@@ -432,11 +432,11 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
                 }
               );
             }
-            else if(this.IsFromCustMgmntShareholder){
+            else if (this.IsFromCustMgmntShareholder) {
               this.CustMgmntShareholderData.ShareholderId = this.addCustObj.CustObj.CustId;
               this.http.post(URLConstant.AddCustCompanyMgmntShrholder, this.CustMgmntShareholderData).toPromise().then(
                 (responseShareholder) => {
-                  this.ResponseSaveData.emit({mode : 'check'});
+                  this.ResponseSaveData.emit({ mode: 'check' });
                 }
               ).catch(
                 (error) => {
@@ -444,8 +444,8 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
                 }
               );
             }
-            else{
-              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.addCustObj.CustObj.CustId, "From": 'CustPaging' });
+            else {
+              AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": this.addCustObj.CustObj.CustId, "From": 'CustPaging' });
             }
           }
         );
@@ -459,13 +459,13 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       (response) => {
         this.RequestNegativeCustObj = response;
 
-        if(this.IsFromCustMgmntShareholder){
+        if (this.IsFromCustMgmntShareholder) {
           this.RequestNegativeCustObj.MrCustModelCode = this.CustMgmntShareholderData.MrCustModelCode;
           this.RequestNegativeCustObj.MrIdTypeCode = this.CustMgmntShareholderData.MrIdTypeCode;
           this.RequestNegativeCustObj.IdExpiredDt = this.CustMgmntShareholderData.IdExpiredDt;
           this.RequestNegativeCustObj.MrGenderCode = this.CustMgmntShareholderData.MrGenderCode;
           this.RequestNegativeCustObj.BirthPlace = this.CustMgmntShareholderData.BirthPlace;
-        }else{
+        } else {
           this.RequestNegativeCustObj.CustName = item.CustName;
           this.RequestNegativeCustObj.MrCustTypeCode = RefMasterConstant.Personal;
           this.RequestNegativeCustObj.MrCustModelCode = this.CustModel;
@@ -499,10 +499,10 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
           this.RequestNegativeCustObj.AreaCode4 = custAddr["AreaCode4"];
           this.RequestNegativeCustObj.City = custAddr["City"];
           this.RequestNegativeCustObj.Zipcode = custAddr["Zipcode"];
-      }
+        }
         this.http.post(URLConstant.EditDuplicateNegativeCust, this.RequestNegativeCustObj).subscribe(
           (response) => {
-            if(this.IsFromCustFamilyTab){
+            if (this.IsFromCustFamilyTab) {
               var requestFamily = {
                 CustId: this.CustFamilyTabData["CustId"],
                 FamilyId: this.RequestNegativeCustObj.CustId,
@@ -518,12 +518,12 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
                 }
               );
             }
-            else if(this.IsFromCustMgmntShareholder){
+            else if (this.IsFromCustMgmntShareholder) {
               this.CustMgmntShareholderData.ShareholderId = this.RequestNegativeCustObj.CustId;
               this.http.post(URLConstant.AddCustCompanyMgmntShrholder, this.CustMgmntShareholderData).toPromise().then(
                 (responseShareholder) => {
                   // this.ResponseSaveData.emit(responseFamily);
-                  this.ResponseSaveData.emit({mode : 'check'});
+                  this.ResponseSaveData.emit({ mode: 'check' });
                 }
               ).catch(
                 (error) => {
@@ -531,9 +531,9 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
                 }
               );
             }
-            else{
+            else {
               var custId = response['CustId'];
-              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_PAGE],{ "IdCust": this.IdCust, "From": 'CustPaging' });
+              AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": this.IdCust, "From": 'CustPaging' });
             }
           }
         );

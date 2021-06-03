@@ -181,10 +181,11 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
       }
     );
 
-    var refMasterObjCustModel = {
-      MrCustTypeCode: CommonConstant.CustTypePersonal
+    let refMasterObjCustModel = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      MappingCode: CommonConstant.CustTypePersonal
     }
-    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response["ReturnObject"];
         this.CustomerPersonalForm.patchValue({
@@ -193,7 +194,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
       }
     );
 
-    this.http.post(URLConstant.GetListActiveRefMaster, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat}).toPromise().then(
+    this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat }).toPromise().then(
       (response) => {
         this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
@@ -202,24 +203,24 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
       }
     );
 
-    this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_IS_CUST_THIRD_PARTY_CHECK }).pipe(
+    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GS_IS_CUST_THIRD_PARTY_CHECK }).pipe(
       map((response) => {
         return response
       }),
       mergeMap((response) => {
-        if(response["GsValue"] == "1"){
+        if (response["GsValue"] == "1") {
           this.IsCustThirdPartyCheck = true;
           let addCustTemp = this.http.post(URLConstant.AddCustFraudTempReg, { MrCustTypeCode: CommonConstant.CustTypePersonal });
-          let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
+          let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
           return forkJoin([addCustTemp, getMaxDays]);
         }
-        else{
+        else {
           return new Array();
         }
       })
     ).toPromise().then(
       (response) => {
-        if(response.length > 0){
+        if (response.length > 0) {
           this.CustThirdPartyChecking.CustTempNo = response[0]["CustTempNo"];
           this.CustThirdPartyChecking.MrCustTypeCode = response[0]["CustType"];
           this.MaxDaysCustThirdPartyCheck = response[1]["GsValue"];
@@ -290,10 +291,11 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
           }
         }
       );
-      var refMasterObjCustModel = {
-        MrCustTypeCode: CommonConstant.CustTypePersonal
+      let refMasterObjCustModel = {
+        RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+        MappingCode: CommonConstant.CustTypePersonal
       }
-      this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+      this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObjCustModel).subscribe(
         (response) => {
           this.tempCustModel = response["ReturnObject"];
           this.CustomerPersonalForm.patchValue({
@@ -455,9 +457,9 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
             (response: any) => {
               this.custBankAccObj.BankBranch = response.BankBranch;
               if (this.custBankAccObj.BankBranch == null) {
-                  this.custBankAccObj.BankBranch = '-';
+                this.custBankAccObj.BankBranch = '-';
               }
-              console.log("branch"+this.custBankAccObj.BankBranch);
+              console.log("branch" + this.custBankAccObj.BankBranch);
             });
         }
       });
@@ -465,9 +467,9 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   }
 
   SaveValue() {
-    if(this.IsCustThirdPartyCheck){
+    if (this.IsCustThirdPartyCheck) {
       for (const key in this.LastHit) {
-        if(!this.LastHit[key]){
+        if (!this.LastHit[key]) {
           this.toastr.errorMessage("Please Hit All Third Party Checking");
           return false;
         }
@@ -516,7 +518,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     custAddr["Zipcode"] = formValue["UcAddressZipcode"]["value"];
     custAddr["SubZipcode"] = formValue["UcAddressZipcode"]["value"];
     sessionStorage.setItem("CustAddr", JSON.stringify(custAddr));
-    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PERSONAL_DUP_CHECK],{ "CustName": this.CustName, "Gender": this.Gender, "MrIdTypeCode": this.MrIdTypeCode, "CustModel": this.CustModel, "BirthPlace": this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo, "IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName, "IsVip": this.IsVip, "IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes, "MrMaritalStatCode": this.MrMaritalStatCode, "CustTempNo": this.CustThirdPartyChecking.CustTempNo });
+    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_DUP_CHECK], { "CustName": this.CustName, "Gender": this.Gender, "MrIdTypeCode": this.MrIdTypeCode, "CustModel": this.CustModel, "BirthPlace": this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo, "IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName, "IsVip": this.IsVip, "IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes, "MrMaritalStatCode": this.MrMaritalStatCode, "CustTempNo": this.CustThirdPartyChecking.CustTempNo });
   }
 
   onOptionsSelected(event) {
@@ -534,7 +536,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.CustomerPersonalForm.controls.IdExpiredDt.updateValueAndValidity();
     this.onChangeIdType();
   }
-	
+
   onChangeIdType() {
     let idType: string = this.CustomerPersonalForm.get("MrIdTypeCode").value;
 

@@ -13,8 +13,6 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class CustomerViewCustomerGroupComponent implements OnInit {
   CustId: number;
-  GetListCustGrpForCustViewByCustIdUrl = URLConstant.GetListCustGrpForCustViewByCustId;
-  GetListCustGrpForCustViewByMemberCustIdUrl = URLConstant.GetListCustGrpForCustViewByMemberCustId;
   responseObj: any;
   custViewUrl: string;
   responseMemberCustGrpObj: any;
@@ -26,27 +24,27 @@ export class CustomerViewCustomerGroupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.custViewUrl = environment.FoundationR3Web +  "/View/Customer/PersonalDetail?CustId=";
+    this.custViewUrl = environment.FoundationR3Web + "/View/Customer/PersonalDetail?CustId=";
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
         this.CustId = params['CustId'];
       }
     });
-    var custObj = { "CustId": this.CustId };
-    this.http.post(this.GetListCustGrpForCustViewByCustIdUrl, {Id : this.CustId}).subscribe(
+    let custObj = { "Id": this.CustId };
+    this.http.post(URLConstant.GetListCustGrpForCustViewByCustId, custObj).subscribe(
       response => {
         this.responseObj = response['ReturnObject'];
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.ERROR], {});
       }
     );
-    this.http.post(this.GetListCustGrpForCustViewByMemberCustIdUrl, custObj).subscribe(
+    this.http.post(URLConstant.GetListCustGrpForCustViewByMemberCustId, custObj).subscribe(
       response => {
         this.responseMemberCustGrpObj = response['ReturnObject'];
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,["/Error"],{});
+        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.ERROR], {});
       }
     );
   }

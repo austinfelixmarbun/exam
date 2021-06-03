@@ -32,22 +32,21 @@ export class CustomerViewPersonalContactPersonComponent implements OnInit {
       }
     });
     var custAddrObj = { "CustId": this.CustId };
-    this.http.post(this.GetListCustPersonalContactPersonForCustViewByCustIdUrl, {Id : this.CustId}).subscribe(
+    this.http.post(this.GetListCustPersonalContactPersonForCustViewByCustIdUrl, { Id: this.CustId }).subscribe(
       response => {
         this.responseObj = response[CommonConstant.ReturnObj];
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.ERROR], {});
       }
     );
   }
 
-  openView(ContactPersonCustNo)
-  {
+  openView(ContactPersonCustNo) {
     // GetCustByCustNo
     var custObj = new CustObj;
     custObj.CustNo = ContactPersonCustNo
-    this.http.post(URLConstant.GetCustByCustNo, {TrxNo : ContactPersonCustNo}).subscribe(
+    this.http.post(URLConstant.GetCustByCustNo, { CustNo: ContactPersonCustNo }).subscribe(
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);

@@ -75,7 +75,6 @@ export class CustomerContactAddComponent implements OnInit {
   KTP: string;
   tempCountryCode: string;
   GetListActiveRefMasterUrl: string;
-  GetGeneralSettingByCodeUrl: string;
   addCustPersonalContactPersonUrl: string;
   editCustPersonalContactPersonUrl: string;
 
@@ -111,7 +110,6 @@ export class CustomerContactAddComponent implements OnInit {
     this.GetListActiveRefMasterUrl = URLConstant.GetListActiveRefMaster;
     this.addCustPersonalContactPersonUrl = URLConstant.AddNewCustPersonalContactPerson;
     this.editCustPersonalContactPersonUrl = URLConstant.EditCustPersonalContactPerson;
-    this.GetGeneralSettingByCodeUrl = URLConstant.GetGeneralSettingByCode;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -132,7 +130,7 @@ export class CustomerContactAddComponent implements OnInit {
       GsCode: CommonConstant.GSCodeDefLocalNationality
     }
 
-    this.http.post(this.GetGeneralSettingByCodeUrl, { Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
+    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
       (response) => {
         this.Country = response;
 

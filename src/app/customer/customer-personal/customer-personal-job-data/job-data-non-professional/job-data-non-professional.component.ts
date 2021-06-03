@@ -23,10 +23,10 @@ export class JobDataNonProfessionalComponent implements OnInit {
   jobDataId: any;
   typePage: string;
   rowVersion: string
-  IdCust : number;
-  IdCustPersonal : number;
-  custObj : any;
-  objCust : CustObj;
+  IdCust: number;
+  IdCustPersonal: number;
+  custObj: any;
+  objCust: CustObj;
   tempProfession: any;
   professionLookUpObj: InputLookupObj;
   custPersonalJobDataObj: CustPersonalJobDataObj;
@@ -43,14 +43,14 @@ export class JobDataNonProfessionalComponent implements OnInit {
     JobTitleName: ['']
   });
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
-        if (params["IdCust"] != null) {
-            this.IdCust = params["IdCust"];
-        }
-        if (params["IdCustPersonal"] != null) {
-            this.IdCustPersonal = params["IdCustPersonal"];
-        }
+      if (params["IdCust"] != null) {
+        this.IdCust = params["IdCust"];
+      }
+      if (params["IdCustPersonal"] != null) {
+        this.IdCustPersonal = params["IdCustPersonal"];
+      }
     });
   }
 
@@ -64,41 +64,41 @@ export class JobDataNonProfessionalComponent implements OnInit {
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
-    
+
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
       (response) => {
-          this.custObj = response;
+        this.custObj = response;
       });
 
     this.custJobDataObj = new CustPersonalJobDataObj();
     this.custJobDataObj.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustPersonalJobDataByCustId, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).subscribe(
       (response: any) => {
-          this.returnCustJobDataObj = response;
-          
-          if(this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
-            this.JobDataNonProForm.patchValue({ 
-              JobTitleName: this.returnCustJobDataObj.JobTitleName,
+        this.returnCustJobDataObj = response;
+
+        if (this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
+          this.JobDataNonProForm.patchValue({
+            JobTitleName: this.returnCustJobDataObj.JobTitleName,
+          });
+
+          this.refProfessionObj = new RefProfessionObj();
+          this.refProfessionObj.RefProfessionId = this.returnCustJobDataObj.RefProfessionId;
+          this.http.post(URLConstant.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).subscribe(
+            (response) => {
+              this.returnRefProfessionObj = response;
+
+              this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
+              this.professionLookUpObj.jsonSelect = this.returnRefProfessionObj;
+              this.tempProfession = this.returnRefProfessionObj.RefProfessionId;
             });
 
-            this.refProfessionObj = new RefProfessionObj();
-            this.refProfessionObj.RefProfessionId = this.returnCustJobDataObj.RefProfessionId;
-            this.http.post(URLConstant.GetRefProfessionById, {Id : this.returnCustJobDataObj.RefProfessionId}).subscribe(
-              (response) => {
-                  this.returnRefProfessionObj = response;
 
-                  this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
-                  this.professionLookUpObj.jsonSelect = this.returnRefProfessionObj;
-                  this.tempProfession = this.returnRefProfessionObj.RefProfessionId;
-              });
-
-
-            this.jobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
-            this.rowVersion = this.returnCustJobDataObj.RowVersion;
-            this.typePage = "edit";
-          }
+          this.jobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
+          this.rowVersion = this.returnCustJobDataObj.RowVersion;
+          this.typePage = "edit";
+        }
       });
   }
 
@@ -106,8 +106,8 @@ export class JobDataNonProfessionalComponent implements OnInit {
   //   this.outputTab.emit({ stepMode: "previous"});
   // }
 
-  SaveForm(){
-    if(this.typePage == "edit"){
+  SaveForm() {
+    if (this.typePage == "edit") {
       this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
       this.custPersonalJobDataObj = new CustPersonalJobDataObj;
       this.jobAddrObj = new CustAddrObj;
@@ -131,7 +131,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          this.outputTab.emit({ stepMode: "next"});
+          this.outputTab.emit({ stepMode: "next" });
         }
       );
     } else {
@@ -156,7 +156,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          this.outputTab.emit({ stepMode: "next"});
+          this.outputTab.emit({ stepMode: "next" });
         }
       );
     }

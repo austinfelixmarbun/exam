@@ -98,9 +98,10 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     this.inputAddressObj.showAllPhn = false;
 
     var refMasterObjCustModel = {
-      MrCustTypeCode: CommonConstant.CustTypeCompany
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      MappingCode: CommonConstant.CustTypeCompany
     }
-    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response["ReturnObject"];
         this.CustomerCompanyForm.patchValue({
@@ -124,7 +125,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       }
     );
 
-    this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_IS_CUST_THIRD_PARTY_CHECK }).pipe(
+    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GS_IS_CUST_THIRD_PARTY_CHECK }).pipe(
       map((response) => {
         return response
       }),
@@ -132,7 +133,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
         if (response["GsValue"] == "1") {
           this.IsCustThirdPartyCheck = true;
           let addCustTemp = this.http.post(URLConstant.AddCustFraudTempReg, { MrCustTypeCode: CommonConstant.CustTypeCompany });
-          let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { GsCode: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
+          let getMaxDays = this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK });
           return forkJoin([addCustTemp, getMaxDays]);
         }
         else {
@@ -175,10 +176,11 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       //     }
       //   }
       // );
-      // var refMasterObjCustModel = {
-      //   MrCustTypeCode: CommonConstant.CustTypeCompany
+      // let refMasterObjCustModel = {
+      // RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      //   MappingCode: CommonConstant.CustTypeCompany
       // }
-      // this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+      // this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObjCustModel).subscribe(
       //   (response) => {
       //     this.tempCustModel = response["ReturnObject"];
       //     this.CustomerCompanyForm.patchValue({

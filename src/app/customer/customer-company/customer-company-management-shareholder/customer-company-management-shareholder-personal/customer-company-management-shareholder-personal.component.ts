@@ -129,9 +129,10 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
       }
     );
     var refMasterObjCustModel = {
-      MrCustTypeCode: CommonConstant.CustTypePersonal
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
+      MappingCode: CommonConstant.CustTypePersonal
     }
-    this.http.post(URLConstant.GetListKeyValueByMrCustTypeCode, refMasterObjCustModel).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempMrCustModelCode = response;
         if (response[CommonConstant.ReturnObj].length > 0) {

@@ -65,8 +65,8 @@ export class UpdateCustomerJobDataComponent implements OnInit {
   });
 
   constructor(
-    private http: HttpClient, 
-    private toastr: NGXToastrService, 
+    private http: HttpClient,
+    private toastr: NGXToastrService,
     private fb: FormBuilder,
     private router: Router
   ) {
@@ -99,7 +99,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
 
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
-    let getDetail = this.http.post(URLConstant.GetCustJobDataForUpdateMasterCustJobData, { CustDataTrxId: this.CustDataTrxId });
+    let getDetail = this.http.post(URLConstant.GetCustJobDataForUpdateMasterCustJobData, { Id: this.CustDataTrxId });
     let getCustModel = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel });
     let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition });
     let getJobStatus = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobStat });
@@ -111,23 +111,23 @@ export class UpdateCustomerJobDataComponent implements OnInit {
         this.JobPositionList = response[2][CommonConstant.ReturnObj];
         this.JobStatusList = response[3][CommonConstant.ReturnObj];
         this.CompanyScaleList = response[4][CommonConstant.ReturnObj];
-        if(response[0]["MasterCustJobData"]["EstablishmentDate"]){
+        if (response[0]["MasterCustJobData"]["EstablishmentDate"]) {
           response[0]["MasterCustJobData"]["EstablishmentDate"] = datePipe.transform(response[0]["MasterCustJobData"]["EstablishmentDate"], "yyyy-MM-dd");
         }
-        if(this.AppJobData["EstablishmentDate"]){
+        if (this.AppJobData["EstablishmentDate"]) {
           this.AppJobData["EstablishmentDate"] = datePipe.transform(this.AppJobData["EstablishmentDate"], "yyyy-MM-dd");
         }
-        this.CustomerJobForm.patchValue({...response[0]["MasterCustJobData"]});
+        this.CustomerJobForm.patchValue({ ...response[0]["MasterCustJobData"] });
         this.lookupZipcodeObj.nameSelect = response[0]["MasterCustJobData"]["Zipcode"];
         this.lookupZipcodeObj.jsonSelect = { Zipcode: response[0]["MasterCustJobData"]["Zipcode"] };
 
-        if(response[0]["MasterCustJobData"]["Address"] != this.AppJobData["Address"] ||
-            response[0]["MasterCustJobData"]["AreaCode1"] != this.AppJobData["AreaCode1"] ||
-            response[0]["MasterCustJobData"]["AreaCode2"] != this.AppJobData["AreaCode2"] ||
-            response[0]["MasterCustJobData"]["AreaCode3"] != this.AppJobData["AreaCode3"] ||
-            response[0]["MasterCustJobData"]["AreaCode4"] != this.AppJobData["AreaCode4"] ||
-            response[0]["MasterCustJobData"]["Zipcode"] != this.AppJobData["Zipcode"] ||
-            response[0]["MasterCustJobData"]["City"] != this.AppJobData["City"]){
+        if (response[0]["MasterCustJobData"]["Address"] != this.AppJobData["Address"] ||
+          response[0]["MasterCustJobData"]["AreaCode1"] != this.AppJobData["AreaCode1"] ||
+          response[0]["MasterCustJobData"]["AreaCode2"] != this.AppJobData["AreaCode2"] ||
+          response[0]["MasterCustJobData"]["AreaCode3"] != this.AppJobData["AreaCode3"] ||
+          response[0]["MasterCustJobData"]["AreaCode4"] != this.AppJobData["AreaCode4"] ||
+          response[0]["MasterCustJobData"]["Zipcode"] != this.AppJobData["Zipcode"] ||
+          response[0]["MasterCustJobData"]["City"] != this.AppJobData["City"]) {
           this.IsAddrDifferent = true;
         }
         return response[0];
@@ -160,19 +160,19 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     );
   }
 
-  getProfessionData(e){
+  getProfessionData(e) {
     this.CustomerJobForm.patchValue({
       ProfessionId: e.RefProfessionId
     });
   }
 
-  getIndustryType(e){
+  getIndustryType(e) {
     this.CustomerJobForm.patchValue({
       IndustryTypeId: e.RefIndustryTypeId
     });
   }
 
-  getZipcodeData(e){
+  getZipcodeData(e) {
     this.CustomerJobForm.patchValue({
       Zipcode: e.Zipcode,
       AreaCode1: e.AreaCode1,
@@ -181,47 +181,47 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     });
   }
 
-  CopyAllHandler(){
+  CopyAllHandler() {
     var obj = new Object();
     for (const key in this.AppJobData) {
-      if(key == "CustJobDataId" || key == "CustId" || key == "RowVersionCustJobData" || key == "RowVersionJobAddr" ||
-          key == "RowVersionCust" || key == "ProfessionName" || key == "IndustryTypeName"){
+      if (key == "CustJobDataId" || key == "CustId" || key == "RowVersionCustJobData" || key == "RowVersionJobAddr" ||
+        key == "RowVersionCust" || key == "ProfessionName" || key == "IndustryTypeName") {
         continue;
       }
-      else{
-        if(key == "CompanyScale"){
-          if(this.AppJobData[key]){
+      else {
+        if (key == "CompanyScale") {
+          if (this.AppJobData[key]) {
             obj[key] = this.AppJobData[key];
           }
-          else{
+          else {
             obj[key] = this.CompanyScaleList[0].Key;
           }
         }
-        else if(key == "CustModel"){
-          if(this.AppJobData[key]){
+        else if (key == "CustModel") {
+          if (this.AppJobData[key]) {
             obj[key] = this.AppJobData[key];
           }
-          else{
+          else {
             obj[key] = this.CustModelList[0].Key;
           }
         }
-        else if(key == "JobPosition"){
-          if(this.AppJobData[key]){
+        else if (key == "JobPosition") {
+          if (this.AppJobData[key]) {
             obj[key] = this.AppJobData[key];
           }
-          else{
+          else {
             obj[key] = this.JobPositionList[0].Key;
           }
         }
-        else if(key == "JobStatus"){
-          if(this.AppJobData[key]){
+        else if (key == "JobStatus") {
+          if (this.AppJobData[key]) {
             obj[key] = this.AppJobData[key];
           }
-          else{
+          else {
             obj[key] = this.JobStatusList[0].Key;
           }
         }
-        else{
+        else {
           obj[key] = this.AppJobData[key];
         }
       }
@@ -239,8 +239,8 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     this.IsAddrDifferent = false;
   }
 
-  CopyHandler(formControlName){
-    if(formControlName == "Address"){
+  CopyHandler(formControlName) {
+    if (formControlName == "Address") {
       this.CustomerJobForm.patchValue({
         Address: this.AppJobData.Address,
         Zipcode: this.AppJobData.Zipcode,
@@ -258,65 +258,65 @@ export class UpdateCustomerJobDataComponent implements OnInit {
       });
       this.IsAddrDifferent = false;
     }
-    else if(formControlName == "CompanyScale"){
-      if(this.AppJobData[formControlName]){
+    else if (formControlName == "CompanyScale") {
+      if (this.AppJobData[formControlName]) {
         this.CustomerJobForm.patchValue({
           CompanyScale: this.AppJobData["CompanyScale"]
         });
       }
-      else{
+      else {
         this.CustomerJobForm.patchValue({
           CompanyScale: this.CompanyScaleList[0].Key
         });
       }
     }
-    else if(formControlName == "CustModel"){
-      if(this.AppJobData[formControlName]){
+    else if (formControlName == "CustModel") {
+      if (this.AppJobData[formControlName]) {
         this.CustomerJobForm.patchValue({
           CustModel: this.AppJobData["CustModel"]
         });
       }
-      else{
+      else {
         this.CustomerJobForm.patchValue({
           CustModel: this.CustModelList[0].Key
         });
       }
     }
-    else if(formControlName == "JobPosition"){
-      if(this.AppJobData[formControlName]){
+    else if (formControlName == "JobPosition") {
+      if (this.AppJobData[formControlName]) {
         this.CustomerJobForm.patchValue({
           JobPosition: this.AppJobData["JobPosition"]
         });
       }
-      else{
+      else {
         this.CustomerJobForm.patchValue({
           JobPosition: this.JobPositionList[0].Key
         });
       }
     }
-    else if(formControlName == "JobStatus"){
-      if(this.AppJobData[formControlName]){
+    else if (formControlName == "JobStatus") {
+      if (this.AppJobData[formControlName]) {
         this.CustomerJobForm.patchValue({
           JobStatus: this.AppJobData["JobStatus"]
         });
       }
-      else{
+      else {
         this.CustomerJobForm.patchValue({
           JobStatus: this.JobStatusList[0].Key
         });
       }
     }
-    else{
+    else {
       var obj = new Object();
       obj[formControlName] = this.AppJobData[formControlName];
       this.CustomerJobForm.patchValue(obj);
-      
-      if(formControlName == "IndustryTypeId"){
+
+      if (formControlName == "IndustryTypeId") {
         this.CustomerJobForm.get("IndustryTypeLookup").patchValue({
           value: this.AppJobData.IndustryTypeName
         });
       }
-      else if(formControlName == "ProfessionId"){
+      else if (formControlName == "ProfessionId") {
         this.CustomerJobForm.get("ProfessionId").patchValue({
           value: this.AppJobData.ProfessionName
         });
@@ -324,31 +324,31 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     }
   }
 
-  AddressCopyButtonHandler(){
+  AddressCopyButtonHandler() {
     var masterCustForm = this.CustomerJobForm.value;
-    if(masterCustForm["Address"] != this.AppJobData["Address"] ||
-        masterCustForm["AreaCode1"] != this.AppJobData["AreaCode1"] ||
-        masterCustForm["AreaCode2"] != this.AppJobData["AreaCode2"] ||
-        masterCustForm["AreaCode3"] != this.AppJobData["AreaCode3"] ||
-        masterCustForm["AreaCode4"] != this.AppJobData["AreaCode4"] ||
-        masterCustForm["Zipcode"] != this.AppJobData["Zipcode"] ||
-        masterCustForm["City"] != this.AppJobData["City"] ||
-        masterCustForm["Phn1"] != this.AppJobData["Phn1"] ||
-        masterCustForm["Phn2"] != this.AppJobData["Phn2"] ||
-        masterCustForm["Fax"] != this.AppJobData["Fax"]){
+    if (masterCustForm["Address"] != this.AppJobData["Address"] ||
+      masterCustForm["AreaCode1"] != this.AppJobData["AreaCode1"] ||
+      masterCustForm["AreaCode2"] != this.AppJobData["AreaCode2"] ||
+      masterCustForm["AreaCode3"] != this.AppJobData["AreaCode3"] ||
+      masterCustForm["AreaCode4"] != this.AppJobData["AreaCode4"] ||
+      masterCustForm["Zipcode"] != this.AppJobData["Zipcode"] ||
+      masterCustForm["City"] != this.AppJobData["City"] ||
+      masterCustForm["Phn1"] != this.AppJobData["Phn1"] ||
+      masterCustForm["Phn2"] != this.AppJobData["Phn2"] ||
+      masterCustForm["Fax"] != this.AppJobData["Fax"]) {
       this.IsAddrDifferent = true;
     }
-    else{
+    else {
       this.IsAddrDifferent = false;
     }
   }
 
-  back(){
+  back() {
     // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
     AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
   }
 
-  SaveValue(){
+  SaveValue() {
     this.http.post(URLConstant.UpdateMasterCustJobData, this.CustomerJobForm.value).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
