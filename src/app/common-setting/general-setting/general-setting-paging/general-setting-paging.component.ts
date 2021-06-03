@@ -1,4 +1,3 @@
-import { environment } from "environments/environment";
 import { Component, OnInit } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
@@ -17,12 +16,6 @@ export class GeneralSettingPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchGeneralSetting.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchGeneralSetting.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "MODULE_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
 
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();

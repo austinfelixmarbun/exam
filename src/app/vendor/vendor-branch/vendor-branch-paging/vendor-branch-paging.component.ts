@@ -22,12 +22,6 @@ export class VendorBranchPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchBranch.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranch.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "vdr.MR_VENDOR_CATEGORY_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
     
     var critObj = new CriteriaObj();
     critObj.propName = "vdr.MR_VENDOR_CLASS";

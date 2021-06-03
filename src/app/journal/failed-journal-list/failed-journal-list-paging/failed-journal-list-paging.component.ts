@@ -29,12 +29,6 @@ export class FailedJournalListPagingComponent implements OnInit {
     this.ucTempPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.ucTempPagingObj.apiQryPaging = URLConstant.GetJournalResultPagingObjectBySQL;
     this.ucTempPagingObj.pagingJson = "./assets/ucpaging/journal/paging-failed-journal-result-list.json";
-    this.ucTempPagingObj.ddlEnvironments = [
-      {
-        name: "JMH.Office_Code",
-        environment: environment.FoundationR3Url
-      }
-    ];
   }
 
   CallBack(ev: any) {

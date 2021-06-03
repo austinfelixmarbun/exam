@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
@@ -24,12 +23,6 @@ export class SurveyorTaskAssignmentPagingComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchSurveyTaskAssignment.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSurveyTaskAssignment.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "RO.OFFICE_NAME",
-        environment: environment.FoundationR3Url
-      }
-    ];
   }
 
   viewApp(event: any) {

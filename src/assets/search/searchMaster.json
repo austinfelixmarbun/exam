@@ -15,7 +15,8 @@
       "path": "/RefMasterType/GetListKeyValueActiveByCode",
       "label": "Master Type",
       "items": [],
-      "itemsUrl": []
+      "itemsUrl": [],
+      "environment": "FOU"
     },
     {
       "type": "textbox",

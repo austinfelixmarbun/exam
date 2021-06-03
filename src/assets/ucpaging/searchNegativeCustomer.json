@@ -32,7 +32,8 @@
             "path": "/RefMaster/GetListKeyValueActiveByCode",
             "itemsUrl" : [], 
             "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "CUST_TYPE"
+            "criteriaPropValue" : "CUST_TYPE",
+            "environment": "FOU"
         },
         {
             "type": "dropdown",
@@ -78,7 +79,8 @@
             "path": "/RefMaster/GetListKeyValueActiveByCode",
             "itemsUrl" : [], 
             "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "NEG_CUST_TYPE"
+            "criteriaPropValue" : "NEG_CUST_TYPE",
+            "environment": "FOU"
         }
     ],
     "querystring": { 

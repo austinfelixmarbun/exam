@@ -24,7 +24,8 @@
         "path": "/RefReasonType/GetListKeyValueByCode",
         "label": "Reason Type Name",
         "items": [],
-        "itemsUrl": []
+        "itemsUrl": [],
+        "environment": "FOU"
       },
       {
         "type": "textbox",

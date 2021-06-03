@@ -70,7 +70,8 @@
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "OFFICE_TYPE",
             "items": [],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "environment": "FOU"
           }
     ],
     "querystring": {

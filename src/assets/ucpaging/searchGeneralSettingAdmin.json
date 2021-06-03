@@ -42,7 +42,8 @@
         "path": "/RefModule/GetListKeyValueByCode",
         "label": "Module Code",
         "items": [],
-        "itemsUrl": []
+        "itemsUrl": [],
+        "environment": "FOU"
       }
     ],
     "headerList": [

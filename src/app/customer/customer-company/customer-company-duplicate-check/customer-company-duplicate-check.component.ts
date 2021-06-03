@@ -1,14 +1,11 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AddCustObj } from 'app/shared/model/AddCustObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { DuplicateCustObj } from 'app/shared/model/DuplicateCust.Model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
-import { RequestNegativeCustObj } from 'app/shared/model/RequestNegativeCustObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { map, mergeMap } from 'rxjs/operators';
@@ -16,7 +13,6 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ReqByCustNoObj } from 'app/shared/model/Request/ReqByCustNoObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { ReqGetNegativeCustByNegativeCustNameAndCustTypeObj } from 'app/shared/model/Request/NegativeCust/ReqGetNegativeCustObj.model';
 import { ResNegativeCustObj } from 'app/shared/model/Response/NegativeCust/ResNegativeCustObj.model';
@@ -205,7 +201,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
   }
 
   EditCustCompany(item) {
-    let CustNoObj = new ReqByCustNoObj();
+    let CustNoObj = new GenericObj();
     CustNoObj.CustNo = item.CustNo;
     this.http.post(URLConstant.GetCustCompanyForUpdateByCustNo, CustNoObj).pipe(
       map((response) => {
@@ -224,6 +220,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       (response) => {
         if(this.IsFromCustMgmntShareholder){
           this.addCustObj.CustObj.MrCustModelCode = this.CustMgmntShareholderData.MrCustModelCode;
+          this.addCustObj.CustObj.IsShareholder = true;
           this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.CustMgmntShareholderData.MrCompanyTypeCode;
         }else{
           this.addCustObj.CustAddr = response as CustAddrObj;
