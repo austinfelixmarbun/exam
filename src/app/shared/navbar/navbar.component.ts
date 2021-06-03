@@ -40,7 +40,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     notifications: object[] = [];
 
     readonly ChangeLink: string = NavigationConstant.PAGES_CHANGE_PASSWORD;
-    constructor(public translate: TranslateService, 
+    constructor(public translate: TranslateService,
         private router: Router, private cookieService: CookieService,
         private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService) {
         const browserLang: string = translate.getBrowserLang();
@@ -108,7 +108,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     changeModul(modul: string) {
         var token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
-        var url = environment.losUrl + URLConstant.LoginURLFrontEnd + "?token=" + token;
+        var url = environment.LosURL + URLConstant.LoginURLFrontEnd + "?token=" + token;
         window.open(url, "_blank");
     }
 
