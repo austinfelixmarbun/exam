@@ -16,6 +16,7 @@
             "label": "Entity Type",
             "items": [],
             "itemsUrl": [],
+            "environment": "FOU",
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "ENTITY_TYPE"
         },
