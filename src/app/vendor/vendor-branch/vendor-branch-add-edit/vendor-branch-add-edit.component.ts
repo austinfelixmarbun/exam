@@ -105,7 +105,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     ReservedField3: [''],//Supplier calc up method
     ReservedField4: [''], //Supplier Class
     ReservedField5: [''], //BPKBAging
-    // ReservedField6: [''], //DaysPAfterGolive
+    ReservedField6: [''], //DaysPAfterGolive
     ReservedField9: [''], //ASSGMNT_TYPE tele, field
     MrTaxCalcMethodCode: ['', Validators.required],
     IsVat: [true, Validators.required],
@@ -196,6 +196,7 @@ export class VendorBranchAddEditComponent implements OnInit {
                   }
                   else if (vendorAttr["VendorAttrType"] == 'L') {
                     var temp = vendorAttr["VendorAttrValue"].split(";");
+                    this.DictDDLVendorAttr[vendorAttr["VendorAttrCode"]] = temp;
                     formGroupObject["VendorAttrValue"] = [temp[0]];
                   }
                   else {
@@ -823,8 +824,6 @@ export class VendorBranchAddEditComponent implements OnInit {
         });
     }
     else {
-      this.vendorBranchObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
-      this.vendorBranchObj.MrVendorTypeCode = this.MrVendorTypeCode;
 
       this.http.post<GenericObj>(URLConstant.AddVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
@@ -968,11 +967,11 @@ export class VendorBranchAddEditComponent implements OnInit {
   //END OF URS-LOS-041
 
   settingDefaultValue(){
-    var generalSettingObj: GeneralSettingObj = new GeneralSettingObj();
-    generalSettingObj.ListGsCode = ["DEFAULT_BPKB_AGING", "DEFAULT_APDUEAFTGLV"];
+    var generalSettingObj: GenericObj = new GenericObj();
+    generalSettingObj.Codes = ["DEFAULT_BPKB_AGING", "DEFAULT_APDUEAFTGLV"];
     this.http.post(URLConstant.GetListGeneralSettingByListGsCode, generalSettingObj).subscribe(
       (response) => {
-        var tempResponse = response['ResponseGeneralSettingObj'];
+        var tempResponse = response['ResGetListGeneralSettingObj'];
         let GSBpkpAgingDefaultValue = tempResponse.find(x => x.GsCode == "DEFAULT_BPKB_AGING");
         let GSDaysAPDuePaymentAfterGoLive = tempResponse.find(x => x.GsCode == "DEFAULT_APDUEAFTGLV");
         if (GSBpkpAgingDefaultValue != undefined || GSBpkpAgingDefaultValue != null)

@@ -303,7 +303,7 @@ export class VendorHoAddEditComponent implements OnInit {
   }
 
   getData() {
-    this.http.post(URLConstant.GetVendorAndVendorAddr, { VendorId: this.VendorId }).subscribe(
+    this.http.post(URLConstant.GetVendorAndVendorAddr, { Id: this.VendorId }).subscribe(
       (response) => {
         this.result = response;
         this.setDropdown();
@@ -349,7 +349,7 @@ export class VendorHoAddEditComponent implements OnInit {
       }
     );
 
-    this.http.post(URLConstant.GetListVendorAtpmMappingByVendorId, { VendorId: this.VendorId }).subscribe(
+    this.http.post(URLConstant.GetListVendorAtpmMappingByVendorId, { Id: this.VendorId }).subscribe(
       (response) => {
         this.resultAtpmMapping = response;
 

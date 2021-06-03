@@ -186,6 +186,7 @@ export class NavigationConstant {
     public static VENDOR_SCHM_MBR = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_SCHM_MBR; //'/Vendor/VendorScheme/Member'
     public static VENDOR_SCHM_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_SCHM_MBR_ADD; //'/Vendor/VendorScheme/Member/Add'
     public static VENDOR_SCHM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_SCHM_DETAIL; //'/Vendor/VendorScheme/Detail'
+    public static VENDOR_GRD_REQ_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRADING_REQUEST_PAGING; //'/Vendor/VendorGrading/Request/Paging'
     //#endregion
 
     //#region Product

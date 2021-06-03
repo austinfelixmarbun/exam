@@ -24,8 +24,6 @@ export class VendorGradingInquiryPagingComponent implements OnInit {
 
   ngOnInit(): void {
     this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
 
     this.inputPagingObj.pagingJson =
       "./assets/ucpaging/dealer-grading/searchDealerGradingInquiry.json";

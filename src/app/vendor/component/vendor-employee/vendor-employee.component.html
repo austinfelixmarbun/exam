@@ -177,7 +177,7 @@
             <div [hidden]="isHidden">
               <div class="form-body">
                 <div class="form-group row">
-                  <label class="col-md-3" translate>Tax Number </label>
+                  <label class="col-md-3 adins-required-label" translate>Tax Number </label>
                   <div class="col-md-9">
                     <input type="text" class="form-control" formControlName="TaxIdNo"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorEmpForm.controls.TaxIdNo.invalid }">
@@ -186,7 +186,7 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3" translate>Tax Payer Name </label>
+                  <label class="col-md-3 adins-required-label" translate>Tax Payer Name </label>
                   <div class="col-md-9">
                     <input type="text" class="form-control" formControlName="TaxpayerName"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorEmpForm.controls.TaxpayerName.invalid }">

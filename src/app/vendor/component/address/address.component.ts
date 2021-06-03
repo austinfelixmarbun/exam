@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { WizardComponent } from 'angular-archwizard';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-address',
@@ -23,6 +24,7 @@ export class AddressComponent implements OnInit {
   MrVendorClass: string;
   resultAddr: any;
   getUrl: string;
+  ReqGetVendor : GenericObj = new GenericObj();
 
   constructor(private fb: FormBuilder, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) {
   }
@@ -48,14 +50,16 @@ export class AddressComponent implements OnInit {
 
     if (this.objInput.Type == "Vendor") {
       this.getUrl = URLConstant.GetVendorAddrByVendorId;
-      this.vendorAddrObj.VendorId = this.objInput.VendorId;
-      this.vendorAddrObj.VendorEmpId = null;
-      this.vendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeLegal;
+      this.ReqGetVendor.Id = this.objInput.VendorId;
+      this.ReqGetVendor.Code = CommonConstant.AddrTypeLegal;
+      // this.vendorAddrObj.VendorId = this.objInput.VendorId;
+      // this.vendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeLegal;
     } else if (this.objInput.Type == "VendorEmployee") {
       this.getUrl = URLConstant.GetVendorAddrByVendorEmpId;
-      this.vendorAddrObj.VendorId = null;
-      this.vendorAddrObj.VendorEmpId = this.objInput.VendorEmpId;
-      this.vendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeLegal;
+      this.ReqGetVendor.Id = this.objInput.VendorEmpId;
+      this.ReqGetVendor.Code = CommonConstant.AddrTypeLegal;
+      // this.vendorAddrObj.VendorEmpId = this.objInput.VendorEmpId;
+      // this.vendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeLegal;
     }
 
     
@@ -135,7 +139,7 @@ export class AddressComponent implements OnInit {
   }
 
   refreshVendorAddress() {
-    this.http.post<VendorAddrObj>(this.getUrl, this.vendorAddrObj).subscribe(
+    this.http.post<VendorAddrObj>(this.getUrl, this.ReqGetVendor).subscribe(
       (response) => {
         this.vendorAddrObj = response;
         this.AddressForm.patchValue({

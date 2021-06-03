@@ -420,6 +420,9 @@ export class PathConstant {
     public static VENDOR_AUCTION_COY = "AuctionCompany";
     public static VENDOR_AUCTION_COY_PAGING = PathConstant.VENDOR_AUCTION_COY + "/" + PathConstant.PAGING;
     public static VENDOR_AUCTION_COY_ADD_EDIT = PathConstant.VENDOR_AUCTION_COY + "/" + PathConstant.ADD_EDIT;
+    public static VENDOR_GRADING = "VendorGrading";
+    public static REQUEST = "Request";
+    public static VENDOR_GRADING_REQUEST_PAGING = PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstant.PAGING;;
     //#endregion
     
     //#region Verif-Module

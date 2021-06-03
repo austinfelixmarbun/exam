@@ -15,6 +15,7 @@ import { UcapprovalcreateComponent } from '@adins/Ucapprovalcreate';
 import { UcInputRFAObj } from "app/shared/model/UcInputRFAObj.Model";
 import { CookieService } from "ngx-cookie";
 import { AdInsHelper } from "app/shared/AdInsHelper";
+import { NavigationConstant } from "app/shared/NavigationConstant";
 @Component({
   selector: "app-vendor-grading-request-detail",
   templateUrl: "./vendor-grading-request-detail.component.html",
@@ -119,11 +120,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     if(this.mode == "edit"){vendorId = this.VendorId}
     else {vendorId = ReqValue.VendorId}
 
-    this.http
-      .post(URLConstant.GetVendorByVendorId, {
-        VendorId: vendorId
-      })
-      .subscribe((response) => {
+    this.http.post(URLConstant.GetVendorByVendorId, { Id: vendorId }).subscribe((response) => {
         this.result = response;
         this.ParentId = this.result.VendorParentId;
         this.oldVendorRating = this.result.VendorRating;
@@ -143,13 +140,10 @@ export class VendorGradingRequestDetailComponent implements OnInit {
   getOldVendorGrade(){
     var ReqValue = this.VendorForm.value;
     let vendorId: number;
-    if(this.mode == "edit"){vendorId = this.VendorId}
-    else {vendorId = ReqValue.VendorId}
-    this.http
-      .post(URLConstant.GetVendorGrade, {
-        VendorId: vendorId
-      })
-      .subscribe((response) => {
+    // if(this.mode == "edit"){vendorId = this.VendorId}
+    // else {vendorId = ReqValue.VendorId}
+    this.http.post(URLConstant.GetVendorGrade, { Id: this.VendorId }).subscribe((response) => {
+      console.log(response);
         this.result = response;
         this.oldGradeCode = response["VendorGrade"];
         this.gradeCode = response["VendorGrade"];
@@ -244,7 +238,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     this.http.post(URLConstant.SubmitRequestVendorGrading, submitVendorGradingReqObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-        this.router.navigate(["/Vendor/VendorGrading/Request/Paging"]);
+        this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_PAGING]);
       })
     }
   }

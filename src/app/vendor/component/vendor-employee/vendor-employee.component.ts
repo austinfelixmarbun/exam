@@ -90,8 +90,7 @@ export class VendorEmployeeComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    
+  async ngOnInit() {
     this.customPattern = new Array<CustomPatternObj>();
     var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(currentUserContext[CommonConstant.BUSINESS_DT]);
@@ -104,8 +103,8 @@ export class VendorEmployeeComponent implements OnInit {
     if (this.mode == "edit") {
       this.VendorEmpForm.controls["VendorEmpCode"].disable();
       this.VendorEmpForm.controls["VendorEmpName"].disable();
+      await this.getData();
       this.setLookup();
-      this.getData();
     } else {
       this.mode = "add";
       this.setDropdown();
@@ -203,7 +202,7 @@ export class VendorEmployeeComponent implements OnInit {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-
+    console.log(this.resultVendorEmpAndAddr);
     if (this.resultVendorEmpAndAddr != null) {
       this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.resultVendorEmpAndAddr["VendorAddrObj"].Zipcode };
       this.inputLookupSpvObj.jsonSelect = { VendorEmpName: this.resultVendorEmpAndAddr["VendorEmpObj"].SupervisorName };
@@ -238,13 +237,14 @@ export class VendorEmployeeComponent implements OnInit {
     this.inputLookupZipcodeObj.jsonSelect = { Zipcode: ev.Zipcode };
   }
 
-  getData() {
+  async getData() {
     var vendorEmpObj = new VendorEmpObj();
     vendorEmpObj.VendorId = null;
     vendorEmpObj.VendorEmpId = this.objInput.VendorEmpId;
-    this.http.post(URLConstant.GetVendorEmpAndVendorTaxAddrByVendorEmpId, {Id : this.objInput.VendorEmpId}).subscribe(
+    await this.http.post(URLConstant.GetVendorEmpAndVendorTaxAddrByVendorEmpId, {Id : this.objInput.VendorEmpId}).toPromise().then(
       (response) => {
         this.resultVendorEmpAndAddr = response;
+        console.log(this.resultVendorEmpAndAddr);
         this.setDropdown();
         this.inputLookupInternalEmpObj.isReady = true;
         this.inputLookupSpvObj.isReady = true;

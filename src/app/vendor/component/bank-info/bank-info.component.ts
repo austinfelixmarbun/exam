@@ -184,7 +184,7 @@ export class BankInfoComponent implements OnInit {
 
   getLookupBankResponse(e) {
     this.BankRegisForm.patchValue({
-      RefBankId: e.refBankId,
+      RefBankId: e.RefBankId,
       BankBranchRegCode: e.RegRptCode
     });
   }
@@ -209,7 +209,7 @@ export class BankInfoComponent implements OnInit {
       }
     } else if (this.objInput.Type == "VendorEmployee") {
       if (this.objInput.VendorEmpId != undefined && this.objInput.VendorEmpId != null) {
-        this.vendorService.GetListVendorBankAccByVendorEmpId({VendorId: null, VendorEmpId: this.objInput.VendorEmpId}).subscribe(
+        this.vendorService.GetListVendorBankAccByVendorEmpId({Id: this.objInput.VendorEmpId}).subscribe(
           response => {
             this.ListData = response[CommonConstant.ReturnObj];
           }
@@ -226,11 +226,11 @@ export class BankInfoComponent implements OnInit {
     this.inputLookupBankObj.isRequired = true;
 
     if (this.objEdit != null && this.mode == "edit") {
-      this.inputLookupBankObj.jsonSelect = { bankName: this.objEdit.BankName };
-      this.inputLookupBankObj.nameSelect = { bankName: this.objEdit.BankName };
+      this.inputLookupBankObj.jsonSelect = { BankName: this.objEdit.BankName };
+      this.inputLookupBankObj.nameSelect = { BankName: this.objEdit.BankName };
     } else {
-      this.inputLookupBankObj.jsonSelect = { bankName: "" };
-      this.inputLookupBankObj.nameSelect = { bankName: "" };
+      this.inputLookupBankObj.jsonSelect = { BankName: "" };
+      this.inputLookupBankObj.nameSelect = { BankName: "" };
     }
     this.inputLookupBankObj.isReady = true;
   }
