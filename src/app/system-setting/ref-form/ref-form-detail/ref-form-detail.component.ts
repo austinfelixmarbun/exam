@@ -12,6 +12,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ParameterObj } from 'app/shared/model/ParameterObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 
 @Component({
   selector: 'app-ref-form-detail',
@@ -29,6 +30,8 @@ export class RefFormDetailComponent implements OnInit {
   RefFormId: number;
   checkClass: boolean = false;
   parameterObj : Array<ParameterObj> = new Array<ParameterObj>();
+  ddlTemplateIcon: UcDropdownListObj = new UcDropdownListObj();
+  // IsTextMode: boolean = false;
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService) {
@@ -55,12 +58,12 @@ export class RefFormDetailComponent implements OnInit {
     ParameterValue : [''],
     ParameterAttribute : ['']
   });
-  ngOnInit() {
-    
-    var refMasterModuleObj = {
-    }
+  ngOnInit() { 
+    this.ddlTemplateIcon.apiUrl = URLConstant.GetTemplateIcon;
+    this.ddlTemplateIcon.requestObj = {};
+    this.ddlTemplateIcon.ddlType = UcDropdownListConstant.DDL_TYPE_BLANK;
 
-    this.http.post(URLConstant.GetListRefModuleKeyValue, refMasterModuleObj).subscribe(
+    this.http.post(URLConstant.GetListRefModuleKeyValue, {}).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.itemModuleType = response[CommonConstant.ReturnObj];
@@ -125,6 +128,10 @@ export class RefFormDetailComponent implements OnInit {
       this.setLookup();
     }
   }
+
+  // changeTextMode(ev: MatSlideToggleChange) {
+  //   this.IsTextMode = ev.checked;
+  // }
 
   AddParam(){
     if( this.ParamForm.controls.ParameterAttribute.value == "" || this.ParamForm.controls.ParameterValue.value == ""){
