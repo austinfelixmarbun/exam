@@ -38,7 +38,6 @@ export class EditMainDataPersonalComponent implements OnInit {
     IdExpiredDt: [''],
     MrMaritalStatCode: [''],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
-    CustModel: ['', [Validators.required]],
     IsVip: [true],
     IsAffiliateWithMf: [true],
     VipNotes: ['']
@@ -47,7 +46,6 @@ export class EditMainDataPersonalComponent implements OnInit {
   tempKTPCheck: any;
   tempGender: any;
   tempIdType: any;
-  tempCustModel: Array<KeyValueObj> = new Array<KeyValueObj>();
   tempCustPersonalObj: CustPersonalObj;
   tempCustObj: any;
   CustId: number;
@@ -61,7 +59,6 @@ export class EditMainDataPersonalComponent implements OnInit {
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
   UcAddressObj: UcAddressObj = new UcAddressObj();
-  custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,private toastr: NGXToastrService, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
@@ -124,18 +121,7 @@ export class EditMainDataPersonalComponent implements OnInit {
         }
       }
     );
-    
-    this.custModelReqObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
-    this.custModelReqObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
-    this.custModelReqObj.MappingCode = CommonConstant.CustTypePersonal;
-    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.custModelReqObj).subscribe(
-      (response : GenericKeyValueListObj) => {
-        this.tempCustModel = response[CommonConstant.ReturnObj];
-        this.CustomerPersonalForm.patchValue({
-          CustModel: this.tempCustModel[0].Key
-        });
-      }
-    );
+
     this.custPersonalObj = new CustPersonalObj();
     this.custObj.CustId = this.CustId;
     this.custPersonalObj.CustId = this.CustId;
@@ -146,7 +132,6 @@ export class EditMainDataPersonalComponent implements OnInit {
         this.CustomerPersonalForm.patchValue({
           CustName: this.tempCustObj.CustName,
           MrCustTypeCode: this.tempCustObj.MrCustTypeCode,
-          CustModel: this.tempCustObj.MrCustModelCode,
           MrIdTypeCode: this.tempCustObj.MrIdTypeCode,
           IdNo: this.tempCustObj.IdNo,
           IdExpiredDt: datePipe.transform(this.tempCustObj.IdExpiredDt, 'yyyy-MM-dd'),
@@ -227,7 +212,6 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj = this.tempCustPersonalObj;
     this.custObj.CustName = this.CustomerPersonalForm.controls["CustName"].value;
-    this.custObj.MrCustModelCode = this.CustomerPersonalForm.controls["CustModel"].value;
     this.custObj.MrIdTypeCode = this.CustomerPersonalForm.controls["MrIdTypeCode"].value;
     this.custObj.IdNo = this.CustomerPersonalForm.controls["IdNo"].value;
     this.custObj.IdExpiredDt = this.CustomerPersonalForm.controls["IdExpiredDt"].value;;
