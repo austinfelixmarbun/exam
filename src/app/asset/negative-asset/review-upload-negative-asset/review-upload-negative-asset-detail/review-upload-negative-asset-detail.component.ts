@@ -40,7 +40,7 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewReviewUploadAssetMaster.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewReviewUploadNegativeAssetMaster.json"; 
     
     this.claimTask();
     this.UploadReviewUrl = URLConstant.UploadReview;
