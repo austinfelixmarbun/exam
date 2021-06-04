@@ -34,6 +34,27 @@
             "items": [],
             "itemsUrl": [],
             "environment": "FOU"
+        },
+        {
+            "type": "dropdown",
+            "name": "VQA.IS_ACTIVE",
+            "id": "activeStatusId",
+            "label": "Active Status",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "ddlType": "all",
+            "items": [
+                {
+                    "key": "1",
+                    "value": "Yes"
+                },
+                {
+                    "key": "0",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
         }
     ],
     "querystring": {
@@ -59,6 +80,12 @@
             "name": "VerfAnswerTypeDescr"
         },
         {
+            "type": "sort",
+            "position": "center",
+            "label": "Active Status",
+            "name": "IsActive"
+        },
+        {
             "type": "label",
             "position": "center",
             "label": "Action"
@@ -79,6 +106,11 @@
             "type": "text",
             "position": "left",
             "property": "VerfAnswerTypeDescr"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
         },
         {
             "type": "action",
