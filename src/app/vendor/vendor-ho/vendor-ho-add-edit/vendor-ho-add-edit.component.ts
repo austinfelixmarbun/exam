@@ -523,17 +523,17 @@ export class VendorHoAddEditComponent implements OnInit {
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
 
-    this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-    this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-    this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupVendorParent.json";
+    this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupSupplierHolding.json";
+    this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupSupplierHolding.json";
+    this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupSupplierHolding.json";
     this.inputLookupParentObj.addCritInput = new Array();
 
     if (this.MrVendorCategoryCode != this.MrVendorCategoryCode) {
       this.inputLookupParentObj.isRequired = false;
     } else {
-      this.inputLookupATPMObj.urlJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-      this.inputLookupATPMObj.pagingJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-      this.inputLookupATPMObj.genericJson = "./assets/uclookup/vendor/lookupVendorParent.json";
+      this.inputLookupATPMObj.urlJson = "./assets/uclookup/vendor/lookupSupplierATPM.json";
+      this.inputLookupATPMObj.pagingJson = "./assets/uclookup/vendor/lookupSupplierATPM.json";
+      this.inputLookupATPMObj.genericJson = "./assets/uclookup/vendor/lookupSupplierATPM.json";
       this.inputLookupATPMObj.isRequired = false;
       this.inputLookupATPMObj.addCritInput = new Array();
 
