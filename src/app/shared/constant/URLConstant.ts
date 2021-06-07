@@ -819,6 +819,7 @@ export class URLConstant {
     public static EditRefFormData = environment.FoundationR3Url + "/RefForm/EditRefForm";
     public static AddRefFormData = environment.FoundationR3Url + "/RefForm/AddRefForm";
     public static GetRefFormDataByRefFormId = environment.FoundationR3Url + "/RefForm/GetRefFormByRefFormId"
+    public static GetTemplateIcon = environment.FoundationR3Url + "/RefForm/GetTemplateIcon";
     public static DeleteRefFormData = "/RefForm/DeleteRefForm";
 
     // AUTH FORM
