@@ -16,7 +16,8 @@ export class InputLookupObj{
     isReadonly: boolean
     isReady: boolean
     isDisable: boolean
-    ddlEnvironments: any
+    ddlEnvironments: Array<EnviObj>;
+    listEnvironments: Array<EnvisObj>;
     title: any;
     
     constructor()
@@ -28,10 +29,33 @@ export class InputLookupObj{
         this.idSelect = "";
         this.nameSelect = "";
         this.addCritInput = null;
+        this.ddlEnvironments = new Array<EnviObj>();
+        this.listEnvironments = new Array<EnvisObj>();
+        this.listEnvironments.push({ environment: "FOU", url: environment.FoundationR3Url });
+        this.listEnvironments.push({ environment: "FOU_WEB", url: environment.FoundationR3Web });
         this.isRequired = true;
         this.isReadonly = true;
         this.isReady = false;
         this.title = "";
         this.isDisable = false;
+    }
+}
+
+export class EnviObj {
+    name: string;
+    environment: string;
+
+    constructor() {
+        this.name = "";
+        this.environment = "";
+    }
+}
+export class EnvisObj {
+    environment: string;
+    url: string;
+
+    constructor() {
+        this.environment = "";
+        this.url = "";
     }
 }

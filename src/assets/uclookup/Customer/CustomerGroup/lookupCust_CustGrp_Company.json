@@ -32,7 +32,8 @@
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "CUST_TYPE",
             "items": [],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "environment": "FOU"
         }
     ],
     "querystring": {

@@ -143,12 +143,6 @@ export class OfficeAddComponent implements OnInit {
   ngOnInit() {
     this.InputLookupObj.urlJson = "./assets/lookup/lookupOfficeParent.json";
     this.InputLookupObj.isRequired = true;
-    this.InputLookupObj.ddlEnvironments = [
-      {
-        name: "A.MR_OFFICE_TYPE_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
     this.InputLookupObj.addCritInput = new Array();
 
     if(this.RefOfficeId != undefined && this.RefOfficeId != 0){

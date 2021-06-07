@@ -77,12 +77,6 @@ export class NegativeAssetDetailComponent implements OnInit {
     this.inputLookupObj.urlJson = "./assets/uclookup/NegativeAsset/lookupAssetMaster_NegAst.json";
     this.inputLookupObj.pagingJson = "./assets/uclookup/NegativeAsset/lookupAssetMaster_NegAst.json";
     this.inputLookupObj.genericJson = "./assets/uclookup/NegativeAsset/lookupAssetMaster_NegAst.json";
-    this.inputLookupObj.ddlEnvironments = [
-      {
-        name: "asset_Type_Name",
-        environment: environment.FoundationR3Url
-      }
-    ];
 
     this.criteriaList = new Array();
     this.criteriaObj = new CriteriaObj();

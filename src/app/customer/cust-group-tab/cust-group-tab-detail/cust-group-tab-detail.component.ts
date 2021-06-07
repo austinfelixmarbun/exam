@@ -60,12 +60,6 @@ export class CustGroupTabDetailComponent implements OnInit {
       this.inputLookupCustPersonalObj.urlJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
       this.inputLookupCustPersonalObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
       this.inputLookupCustPersonalObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
-      this.inputLookupCustPersonalObj.ddlEnvironments = [
-        {
-          name: "A.MR_CUST_TYPE_CODE",
-          environment: environment.FoundationR3Url
-        }
-      ];
 
       if(this.ListCustIdToExclude && this.ListCustIdToExclude.length > 0){
         criteriaList = new Array();
@@ -85,12 +79,7 @@ export class CustGroupTabDetailComponent implements OnInit {
       this.inputLookupCustCompanyObj.urlJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
       this.inputLookupCustCompanyObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
       this.inputLookupCustCompanyObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
-      this.inputLookupCustCompanyObj.ddlEnvironments = [
-        {
-          name: "A.MR_CUST_TYPE_CODE",
-          environment: environment.FoundationR3Url
-        }
-      ];
+
       if(this.ListCustIdToExclude && this.ListCustIdToExclude.length > 0){
         criteriaList = new Array();
         criteriaObj = new CriteriaObj();
