@@ -48,13 +48,13 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "Holding Code",
             "name": "V.VENDOR_CODE"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "Holding Name",
             "name": "V.VENDOR_NAME"
         },
@@ -73,11 +73,12 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "VendorCode"
         },
         {
             "type" : "link",
+            "position": "left",
             "property" : "VendorName",
             "path" : "VIEW_VENDOR_HOLDING",
             "target": "_blank",

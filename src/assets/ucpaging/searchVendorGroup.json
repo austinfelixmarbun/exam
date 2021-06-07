@@ -46,13 +46,13 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "GROUP CODE",
             "name": "VG.VENDOR_GRP_CODE"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "GROUP NAME",
             "name": "VG.VENDOR_GRP_NAME"
         },
@@ -82,12 +82,12 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "VendorGrpCode"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "VendorGrpName"
         },
         {

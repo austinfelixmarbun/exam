@@ -23,7 +23,7 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "CODE",
             "name": "MASTER_CODE"
         },
@@ -42,7 +42,7 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "MasterCode"
         },
         {
