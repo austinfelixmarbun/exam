@@ -9,7 +9,7 @@ export const environment = {
   LosURL: 'http://r3web-server.ad-ins.com/LOSR3/',
   WebSocketURL: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
   FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
-  DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
+  DMSUrl: "http://sky.ad-ins.com/LiteDMS_POC/Integration/ViewDoc.aspx",
   // FoundationR3Url: 'http://localhost:5000',
   losR3Web: 'http://r3web-server/LOSR3',
   lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS',
