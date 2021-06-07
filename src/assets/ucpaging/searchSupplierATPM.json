@@ -48,13 +48,13 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "ATPM Code",
             "name": "V.VENDOR_CODE"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "ATPM Name",
             "name": "V.VENDOR_NAME"
         },
@@ -73,11 +73,12 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "VendorCode"
         },
         {
             "type" : "text",
+            "position": "left",
             "property" : "VendorName",
             "path" : "/Vendor/ATPM/View",
             "target": "_blank",

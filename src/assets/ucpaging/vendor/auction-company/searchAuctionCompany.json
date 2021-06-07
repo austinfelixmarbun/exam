@@ -46,7 +46,7 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "Auction Company Code",
             "name": "VendorCode"
         },
@@ -74,7 +74,7 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "VendorCode"
         },
         {

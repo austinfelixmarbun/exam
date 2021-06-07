@@ -45,19 +45,19 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "HEAD OFFICE CODE",
             "name": "VendorCode"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "HEAD OFFICE NAME",
             "name": "VendorName"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "HEAD OFFICE ADDRESS",
             "name": "VendorAddr"
         },
@@ -76,11 +76,12 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "VendorCode"
         },
         {
             "type": "link",
+            "position": "left",
             "property": "VendorName",
             "target": "_blank",
             "path": "VIEW_VENDOR_HO",
@@ -93,7 +94,7 @@
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "VendorAddr"
         },
         {

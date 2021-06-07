@@ -45,7 +45,7 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "Scheme Code",
             "name": "VS.VENDOR_SCHM_CODE"
         },
@@ -81,7 +81,7 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "VendorSchmCode"
         },
         {

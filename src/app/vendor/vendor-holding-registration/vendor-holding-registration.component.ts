@@ -35,7 +35,7 @@ export class VendorHoldingRegistrationComponent implements OnInit {
     this.VendorId = this.objPassing["VendorId"];
     this.objPassing["Type"]="Vendor";
 
-    this.vendorService.GetVendorAndVendorAddrByVendorId({ VendorId: this.VendorId }).subscribe(
+    this.vendorService.GetVendorAndVendorAddrByVendorId({ Id: this.VendorId }).subscribe(
       (response) => {
         this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"];
       }

@@ -65,19 +65,19 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "AGENCY CODE",
             "name": "vdr.VENDOR_CODE"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "AGENCY NAME",
             "name": "vdr.VENDOR_NAME"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "AGENCY ADDRESS",
             "name": "ADDR"
         },
@@ -107,12 +107,12 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "BranchCode"
         },
         {
             "type": "link",
-            "position": "center",
+            "position": "left",
             "property": "BranchName",
             "target": "_blank",
             "path": "VIEW_VENDOR_BRANCH",
@@ -125,7 +125,7 @@
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "BranchAddress"
         },
         {
