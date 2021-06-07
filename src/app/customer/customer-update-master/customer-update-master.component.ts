@@ -15,6 +15,5 @@ export class CustomerUpdateMasterComponent implements OnInit {
     this.inputPagingObj._url = "./assets/ucpaging/searchUpdateMasterCust.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchUpdateMasterCust.json";
     this.inputPagingObj.deleteUrl = "";
-    this.inputPagingObj.ddlEnvironments = [];
   }
 }

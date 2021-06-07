@@ -17,13 +17,6 @@ export class VendorGroupPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorGroup.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorGroup.json";
-
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "VG.MR_VENDOR_CATEGORY_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
   }
 
 }

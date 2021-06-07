@@ -16,7 +16,6 @@ export class CustomerFamilyMenuComponent implements OnInit {
     this.inputPagingObj._url = "./assets/ucpaging/searchCustFamily.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCustFamily.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
-    this.inputPagingObj.ddlEnvironments = [];
   }
 
 }

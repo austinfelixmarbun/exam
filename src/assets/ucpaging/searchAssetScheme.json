@@ -33,7 +33,8 @@
       "path": "/AssetType/GetListKeyValueActiveById",
       "label": "Asset Type Name",
       "items": [],
-      "itemsUrl": []
+      "itemsUrl": [],
+      "environment": "FOU"
     },
     {
       "type": "dropdown",

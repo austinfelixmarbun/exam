@@ -69,16 +69,13 @@ export class CoaSchemeDetailComponent implements OnInit {
     if (this.mode === "Edit") {
       this.CoaSchemeForm.controls["SchemeCode"].disable();
       this.GetCoaSchmData();
-      this.GetListPaymentAlloc();
+      await this.GetListPaymentAlloc();
       await this.GetCoaSchmDetail(this.coaSchmId);
     } else {
       this.GetListPaymentAlloc();
       this.isTableReady = true;
       this.ListCoa = this.CoaSchemeForm.get('ListCoa') as FormArray;
     }
-    
-    console.log(this.CoaSchemeForm)
-
   }
   getListCopy() {
     this.http.post<any>(URLConstant.GetListCoaSchm, {}).subscribe
@@ -198,8 +195,8 @@ export class CoaSchemeDetailComponent implements OnInit {
       )
   }
 
-  GetListPaymentAlloc() {
-    this.http.post<any>(URLConstant.GetListKeyValueRefPaymentAllocByPayAllocGrpCode, { Code: this.MrPayAllocGrpCode }).subscribe(
+  async GetListPaymentAlloc() {
+    await this.http.post<any>(URLConstant.GetListKeyValueRefPaymentAllocByPayAllocGrpCode, { Code: this.MrPayAllocGrpCode }).toPromise().then(
       (response: any) => {
         this.ListPaymentAlloc = response.ReturnObject
 
@@ -266,7 +263,6 @@ export class CoaSchemeDetailComponent implements OnInit {
           }
         }
         this.isTableReady = true;
-        console.log("udah ready nih")
       },
       (error) => {
         this.toastr.typeErrorCustom(error);

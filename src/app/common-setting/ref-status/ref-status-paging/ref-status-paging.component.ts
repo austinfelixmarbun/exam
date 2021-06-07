@@ -1,4 +1,3 @@
-import { environment } from "environments/environment";
 import { Component, OnInit } from "@angular/core";
 import { DecimalPipe } from "@angular/common";
 import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
@@ -16,15 +15,5 @@ export class RefStatusPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchRefStatus.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRefStatus.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "A.MODULE_CODE",
-        environment: environment.FoundationR3Url
-      },
-      {
-        name: "A.REF_TRX_TYPE_ID",
-        environment: environment.FoundationR3Url
-      }
-    ];
   }
 }

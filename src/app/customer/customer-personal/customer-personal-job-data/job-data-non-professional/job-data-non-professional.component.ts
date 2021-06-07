@@ -92,7 +92,6 @@ export class JobDataNonProfessionalComponent implements OnInit {
                   this.tempProfession = this.returnRefProfessionObj.RefProfessionId;
               });
 
-
             this.jobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
             this.rowVersion = this.returnCustJobDataObj.RowVersion;
             this.typePage = "edit";

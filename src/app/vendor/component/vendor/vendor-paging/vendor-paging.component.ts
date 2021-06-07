@@ -97,8 +97,12 @@ export class VendorPagingComponent implements OnInit {
           this.inputPagingObj._url = "./assets/ucpaging/searchSupplier.json";
         }
         else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
-          this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranchWithoutEmployee.json";
-          this.inputPagingObj._url = "./assets/ucpaging/searchBranchWithoutEmployee.json";
+          this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAgencyPersonal.json";
+          this.inputPagingObj._url = "./assets/ucpaging/searchAgencyPersonal.json";
+        }
+        else if(this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY){
+          this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAgencyCompany.json";
+          this.inputPagingObj._url = "./assets/ucpaging/searchAgencyCompany.json";
         }
         else {
           this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranch.json";

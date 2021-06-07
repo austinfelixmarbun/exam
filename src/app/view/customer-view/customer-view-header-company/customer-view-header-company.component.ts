@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustObj } from 'app/shared/model/CustObj.Model';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
-import { environment } from 'environments/environment';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
@@ -17,7 +11,7 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
   IdCust: number; 
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { 
+  constructor(private route: ActivatedRoute) { 
     this.route.queryParams.subscribe(params => {
 
       if (params["IdCust"] != null) {

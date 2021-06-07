@@ -29,7 +29,6 @@ export class ViewRackComponent implements OnInit {
     });
 
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/document-management/viewRack.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     var filingObj: GenericObj = new GenericObj();
     filingObj.Code = this.RackCode;

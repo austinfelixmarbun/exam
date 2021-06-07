@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -18,11 +17,5 @@ export class ReasonComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchReason.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReason.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "REF_REASON_TYPE_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
   }
 }

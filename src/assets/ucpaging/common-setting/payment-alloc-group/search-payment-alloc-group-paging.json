@@ -17,7 +17,8 @@
             "items": [],
             "itemsUrl": [],
             "criteriaPropName": "RefMasterTypeCode",
-            "criteriaPropValue": "PAY_ALLOC_GRP_CODE"
+            "criteriaPropValue": "PAY_ALLOC_GRP_CODE",
+            "environment": "FOU"
         },
         {
             "type": "textbox",

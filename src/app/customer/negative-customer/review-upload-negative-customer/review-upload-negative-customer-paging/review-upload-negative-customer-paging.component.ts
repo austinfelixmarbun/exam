@@ -22,12 +22,6 @@ export class ReviewUploadNegativeCustomerPagingComponent implements OnInit {
     this.CancelUpload = URLConstant.CancelUpload;
     this.inputPagingObj._url = "./assets/ucpaging/searchReviewUploadNegativeCustomer.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadNegativeCustomer.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "UMH.OFFICE_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
   }
   cancel(ev) {
     var wfObj = new WorkflowApiObj();

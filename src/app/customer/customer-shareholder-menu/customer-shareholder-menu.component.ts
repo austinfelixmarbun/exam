@@ -17,12 +17,6 @@ export class CustomerShareholderMenuComponent implements OnInit {
     this.inputPagingObj._url = "./assets/ucpaging/searchCustShareholder.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCustShareholder.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "CS.MR_CUST_TYPE_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
   }
 
 }

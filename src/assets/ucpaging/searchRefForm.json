@@ -15,7 +15,8 @@
             "path": "/RefModule/GetListRefModuleKeyValue",
             "label": "Module",
             "items": [],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "environment": "FOU"
         },
         {
             "type": "textbox",
@@ -69,7 +70,8 @@
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "FORM_CLASS",
             "items": [],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "environment": "FOU"
         }
     ],
     "querystring": {

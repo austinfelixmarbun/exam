@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -20,16 +19,6 @@ export class RefFormPagingComponent implements OnInit {
     this.inputPagingObj._url = "./assets/ucpaging/searchRefForm.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRefForm.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteRefFormData;
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "RF.CLASS",
-        environment: environment.FoundationR3Url
-      },
-      {
-        name: "RF.REF_MODULE_ID",
-        environment: environment.FoundationR3Url
-      }
-    ];
     
   }
 }

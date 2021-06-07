@@ -31,9 +31,9 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 export class JobDataEmployeeComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
 
-  jobAddrId: any;
-  othBizAddrId: any;
-  preJobAddrId: any;
+  jobAddrId: number;
+  othBizAddrId: number;
+  preJobAddrId: number;
   jobDataId: any;
   rowVersion: any;
   typePage: string;
@@ -415,7 +415,16 @@ export class JobDataEmployeeComponent implements OnInit {
               this.inputPreviousAddressObj.default = this.preJobAddrObj; 
             }
           );
-            
+          
+          if(this.returnCustJobDataObj.JobAddrId !=0 && this.returnCustJobDataObj.JobAddrId != null){
+            this.jobAddrId = this.returnCustJobDataObj.JobAddrId;
+          }
+          if(this.returnCustJobDataObj.OthBizAddrId !=0 && this.returnCustJobDataObj.OthBizAddrId != null){
+            this.othBizAddrId = this.returnCustJobDataObj.OthBizAddrId;
+          }
+          if(this.returnCustJobDataObj.PrevJobAddrId !=0 && this.returnCustJobDataObj.PrevJobAddrId != null){
+            this.preJobAddrId = this.returnCustJobDataObj.PrevJobAddrId;
+          }
           this.rowVersion = this.returnCustJobDataObj.RowVersion;
           this.jobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
           this.typePage = "edit";
@@ -456,7 +465,7 @@ export class JobDataEmployeeComponent implements OnInit {
     this.preJobAddressObj.CustId = this.IdCust;
     this.preJobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypePreJob;
     this.preJobAddressObj.Addr = this.JobDataEmpForm.controls["prejobAddress"]["controls"].Addr.value;
-    this.preJobAddressObj.FullAddr = this.JobDataEmpForm.controls["prejobAddress"]["controls"].Addr.value + " RT: " + this.JobDataEmpForm.controls["jobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataEmpForm.controls["jobAddress"]["controls"].AreaCode3.value + " " + this.JobDataEmpForm.controls["jobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataEmpForm.controls["jobAddress"]["controls"].AreaCode1.value + " " + this.JobDataEmpForm.controls["jobAddressZipcode"]["controls"].value.value;
+    this.preJobAddressObj.FullAddr = this.JobDataEmpForm.controls["prejobAddress"]["controls"].Addr.value + " RT: " + this.JobDataEmpForm.controls["prejobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataEmpForm.controls["prejobAddress"]["controls"].AreaCode3.value + " " + this.JobDataEmpForm.controls["prejobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataEmpForm.controls["prejobAddress"]["controls"].AreaCode1.value + " " + this.JobDataEmpForm.controls["prejobAddressZipcode"]["controls"].value.value;
     this.preJobAddressObj.AreaCode3 = this.JobDataEmpForm.controls["prejobAddress"]["controls"].AreaCode3.value;
     this.preJobAddressObj.AreaCode4 = this.JobDataEmpForm.controls["prejobAddress"]["controls"].AreaCode4.value;
     this.preJobAddressObj.Zipcode = this.JobDataEmpForm.controls["prejobAddressZipcode"]["controls"].value.value;
@@ -536,10 +545,10 @@ export class JobDataEmployeeComponent implements OnInit {
       this.setCustJobData();
       this.setJobAddr();
       this.setOthBizAddr();
-      this.custPersonalJobDataObj.OthBizAddrId = this.returnCustJobDataObj.OthBizAddrId;
-      this.custPersonalJobDataObj.JobAddrId = this.returnCustJobDataObj.JobAddrId;
+      this.custPersonalJobDataObj.OthBizAddrId = this.returnCustJobDataObj.OthBizAddrId == null ? 0 : this.returnCustJobDataObj.OthBizAddrId;
+      this.custPersonalJobDataObj.JobAddrId = this.returnCustJobDataObj.JobAddrId == null ? 0 : this.returnCustJobDataObj.JobAddrId;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
-      this.custPersonalJobDataObj.PrevJobAddrId = this.returnCustJobDataObj.PrevJobAddrId;
+      this.custPersonalJobDataObj.PrevJobAddrId = this.returnCustJobDataObj.PrevJobAddrId == null ? 0 : this.returnCustJobDataObj.PrevJobAddrId;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
       this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob; 
       this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
