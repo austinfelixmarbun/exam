@@ -116,6 +116,7 @@ export class NavigationConstant {
     public static SYSTEM_SETTING_REF_FORM_ROLE_MAP_ADD = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.REF_FORM_ROLE_MAP_ADD; //'/SystemSetting/RefForm/RoleMapping/Add'
     public static SYSTEM_SETTING_CHANGE_PASSWORD = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.CHANGE_PASSWORD; //'/SystemSetting/ChangePassword'
     public static SYSTEM_SETTING_REF_USER = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.REF_USER; //'/SystemSetting/RefUser'
+    public static SYSTEM_SETTING_ATTR_MSTR_PAGING = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.SYS_ATTR_PAGING; //'/SystemSetting/Attribute/Paging'
     //#endregion
 
     //#region View
