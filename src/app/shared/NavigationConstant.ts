@@ -132,6 +132,7 @@ export class NavigationConstant {
     public static VIEW_CUST_PERSONAL_JOB_DATA_EMP = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_JOB_DATA_EMP; //'/View/Customer/PersonalJobDataEmp'
     public static VIEW_CUST_PERSONAL_JOB_DATA_SME = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_JOB_DATA_SME; //'/View/Customer/PersonalJobDataSme'
     public static VIEW_CUST_PERSONAL_FINANCIAL_DATA = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_FINANCIAL_DATA; //'/View/Customer/PersonalFinancialData'
+    public static VIEW_CUST_PERSONAL_FAMILY = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_FAMILY; //'/View/Customer/PersonalFamily'
     public static VIEW_CUST_DOC = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_DOC; //'/View/Customer/CustDocument'
     public static VIEW_CUST_COY_DETAIL = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_DETAIL; //'/View/Customer/CoyDetail'
     public static VIEW_CUST_COY_MNGMNT = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_MNGMNT; //'/View/Customer/CoyManagement'
