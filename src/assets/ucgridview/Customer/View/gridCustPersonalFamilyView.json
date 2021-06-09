@@ -21,9 +21,61 @@
     ],
     "bodyList": [
         {
-            "type": "text",
+            "type": "action",
             "position": "center",
-            "property": "CustNo"
+            "action": [
+                {
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrCustRelationshipDesc",
+                                    "value": "Self Customer",
+                                    "restriction": "NEQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "link",
+                                "position": "center",
+                                "property": "CustNo",
+                                "path": "VIEW_CUST_PERSONAL_DETAIL",
+                                "target": "_blank",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "FamilyId"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        },
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrCustRelationshipDesc",
+                                    "value": "Self Customer",
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "link",
+                                "position": "center",
+                                "property": "CustNo",
+                                "path": "VIEW_CUST_PERSONAL_DETAIL",
+                                "target": "_blank",
+                                "param": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "CustId"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        }
+                    ]
+                }
+            ]
         },
         {
             "type": "text",
