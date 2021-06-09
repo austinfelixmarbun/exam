@@ -61,7 +61,7 @@ export class RefFormDetailComponent implements OnInit {
   ngOnInit() { 
     this.ddlTemplateIcon.apiUrl = URLConstant.GetTemplateIcon;
     this.ddlTemplateIcon.requestObj = {};
-    this.ddlTemplateIcon.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
+    this.ddlTemplateIcon.ddlType = UcDropdownListConstant.DDL_TYPE_NONE;
 
     this.http.post(URLConstant.GetListRefModuleKeyValue, {}).subscribe(
       (response) => {
