@@ -434,7 +434,10 @@ export class JobDataEmployeeComponent implements OnInit {
   }
 
   setJobAddr() {
-    this.jobAddressObj.CustAddrId = this.getJobAddr.CustAddrId;
+    if(this.typePage == "edit"){
+      this.jobAddressObj.CustAddrId = this.getJobAddr.CustAddrId;
+      this.jobAddressObj.RowVersion = this.getJobAddr.RowVersion;
+    }
     this.jobAddressObj.CustId = this.IdCust;
     this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
     this.jobAddressObj.Addr = this.JobDataEmpForm.controls["jobAddress"]["controls"].Addr.value;
@@ -458,7 +461,6 @@ export class JobDataEmployeeComponent implements OnInit {
     this.jobAddressObj.Fax = this.JobDataEmpForm.controls["jobAddress"]["controls"].Fax.value;
     this.jobAddressObj.MrBuildingOwnershipCode = this.JobDataEmpForm.controls["jobAddress"]["controls"].MrHouseOwnershipCode.value;
     this.jobAddressObj.Notes = this.JobDataEmpForm.controls["NotesJob"].value;
-    this.jobAddressObj.RowVersion = this.getJobAddr.RowVersion;
   }
 
   setPreJobAddr() {

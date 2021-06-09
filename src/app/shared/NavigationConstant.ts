@@ -116,6 +116,7 @@ export class NavigationConstant {
     public static SYSTEM_SETTING_REF_FORM_ROLE_MAP_ADD = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.REF_FORM_ROLE_MAP_ADD; //'/SystemSetting/RefForm/RoleMapping/Add'
     public static SYSTEM_SETTING_CHANGE_PASSWORD = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.CHANGE_PASSWORD; //'/SystemSetting/ChangePassword'
     public static SYSTEM_SETTING_REF_USER = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.REF_USER; //'/SystemSetting/RefUser'
+    public static SYSTEM_SETTING_ATTR_MSTR_PAGING = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.SYS_ATTR_PAGING; //'/SystemSetting/Attribute/Paging'
     //#endregion
 
     //#region View
@@ -132,6 +133,7 @@ export class NavigationConstant {
     public static VIEW_CUST_PERSONAL_JOB_DATA_EMP = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_JOB_DATA_EMP; //'/View/Customer/PersonalJobDataEmp'
     public static VIEW_CUST_PERSONAL_JOB_DATA_SME = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_JOB_DATA_SME; //'/View/Customer/PersonalJobDataSme'
     public static VIEW_CUST_PERSONAL_FINANCIAL_DATA = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_FINANCIAL_DATA; //'/View/Customer/PersonalFinancialData'
+    public static VIEW_CUST_PERSONAL_FAMILY = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_FAMILY; //'/View/Customer/PersonalFamily'
     public static VIEW_CUST_DOC = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_DOC; //'/View/Customer/CustDocument'
     public static VIEW_CUST_COY_DETAIL = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_DETAIL; //'/View/Customer/CoyDetail'
     public static VIEW_CUST_COY_MNGMNT = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_MNGMNT; //'/View/Customer/CoyManagement'
