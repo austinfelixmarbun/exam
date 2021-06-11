@@ -146,7 +146,7 @@ export class EditMainDataCompanyComponent implements OnInit {
             this.inputAddressObj.default = this.UcAddressObj;
             this.inputAddressObj.inputField = this.inputFieldObj;
             this.custObj.CustAddr.CustAddrId = response.CustAddrId;
-            this.custObj.CustAddr.RowVersion = response.RowVersion;
+            this.custObj.CustAddr.RowVersion = response.RowVersion != null ? response.RowVersion : "";
           }
         );
       }
