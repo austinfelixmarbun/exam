@@ -22,6 +22,7 @@ import { ResGetAssetMasterAttrContentByIdObj } from 'app/shared/model/Response/A
 import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { ListAssetSchemeHObj, ResGetListAssetSchemeHObj } from 'app/shared/model/Response/AssetMaster/ResGetListAssetSchemeHObj.model';
+import { AssetMasterAttrObj } from 'app/shared/model/AssetMasterAttr/AssetMasterAttrObj.model';
 
 @Component({
   selector: 'app-asset-master-add-edit-child',
@@ -162,7 +163,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 });
 
               if (this.isFinal) {
-                this.http.post(URLConstant.GetAssetMasterAttrContentForAssetMasterByAttrTypeCode, { AssetMasterId: this.AssetMasterId,  AttrTypeCode: CommonConstant.AttrTypeCodeMaster}).pipe(first()).subscribe(
+                this.http.post(URLConstant.GetAssetMasterAttrContentForAssetMaster, { Id: this.AssetMasterId }).pipe(first()).subscribe(
                   (response) => {
                     this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
                     var formGroupObject = new Object();
@@ -320,12 +321,12 @@ export class AssetMasterAddEditChildComponent implements OnInit {
 
   SaveForm() {
     var formValue = this.AssetMasterChildForm.value;
-    var assetMasterAttrValues = new Array<Object>();
+    var assetMasterAttrValues = new Array<AssetMasterAttrObj>();
 
     if (this.AssetMasterChildForm.contains("AssetMasterAttrContent")) {
       if (Object.keys(formValue["AssetMasterAttrContent"]).length > 0 && formValue["AssetMasterAttrContent"].constructor === Object) {
         for (const key in formValue["AssetMasterAttrContent"]) {
-          var assetMasterAttr = {
+          var assetMasterAttr: AssetMasterAttrObj = {
             AssetMasterId: this.AssetMasterId,
             AssetAttrId: key,
             AttrContent: formValue["AssetMasterAttrContent"][key]
@@ -380,6 +381,9 @@ export class AssetMasterAddEditChildComponent implements OnInit {
             this.listAssetSchmDObj.AssetMasterId = response["Id"];
             let observableBatch = [];
             if (assetMasterAttrValues.length > 0) {
+              assetMasterAttrValues.forEach(x => {
+                x.AssetMasterId = this.listAssetSchmDObj.AssetMasterId;
+              })
               let addAssetMasterAttr = this.http.post(URLConstant.AddAssetMasterAttrContent, { AssetMasterAttrContentObjs: assetMasterAttrValues });
               observableBatch.push(addAssetMasterAttr);
             }
