@@ -74,13 +74,11 @@ export class AssetDocumentAddEditComponent implements OnInit {
       }
     );
 
-    var generalSettingObj: GeneralSettingObj = new GeneralSettingObj();
-    generalSettingObj.ListGsCode = ["IS_SHOW_CBX_BORROW", "IS_SHOW_CBX_PLEDGE"];
-    this.http.post(URLConstant.GetListGeneralSettingByListGsCode, generalSettingObj).subscribe(
+    this.http.post(URLConstant.GetListGeneralSettingByListGsCode, {Codes: [CommonConstant.GSCodeIsShowCbxBorrow, CommonConstant.GSCodeIsShowCbxPledge]}).subscribe(
       (response) => {
         var tempResponse = response['ResponseGeneralSettingObj'];
-        let GSIsShowCbxBorrow = tempResponse.find(x => x.GsCode == "IS_SHOW_CBX_BORROW");
-        let GSIsShowCbxPledge = tempResponse.find(x => x.GsCode == "IS_SHOW_CBX_PLEDGE");
+        let GSIsShowCbxBorrow = tempResponse.find(x => x.GsCode == CommonConstant.GSCodeIsShowCbxBorrow);
+        let GSIsShowCbxPledge = tempResponse.find(x => x.GsCode == CommonConstant.GSCodeIsShowCbxPledge);
 
         if (GSIsShowCbxBorrow != undefined || GSIsShowCbxBorrow != null)
           this.isShowCbxBorrow = GSIsShowCbxBorrow["GsValue"];

@@ -170,7 +170,8 @@ export class CommonConstant {
     // GENERAL SETTING CODE
     public static GSCodeDefLocalNationality = "DEF_LOCAL_NATIONALITY";
     public static GsCodePasswordRegex = "PASSWORD_REGEX";
-
+    public static GSCodeIsShowCbxBorrow = "IS_SHOW_CBX_BORROW"; 
+    public static GSCodeIsShowCbxPledge = "IS_SHOW_CBX_PLEDGE";
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
     
