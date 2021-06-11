@@ -111,6 +111,7 @@ export class URLConstant {
     public static GetBankByBankCode = "/RefBank/GetBankByBankCode";
 
     //REF-EMP
+    public static GetEmpNameByRefUserId = environment.FoundationR3Url + "/RefEmp/GetEmpNameByRefUserId";
     public static GetListEmployee = "/RefEmp/GetRefEmpPaging";
     public static GetRefEmployeeById = environment.FoundationR3Url + "/RefEmp/GetRefEmpByRefEmpId"
     public static AddRefEmp = environment.FoundationR3Url + "/RefEmp/AddRefEmp";

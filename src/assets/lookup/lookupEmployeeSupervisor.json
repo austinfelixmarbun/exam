@@ -82,6 +82,6 @@
             ]
         }
     ],
-    "propertyId": "Username",
-    "propertyName": "Username"
+    "propertyId": "EmployeeName",
+    "propertyName": "EmployeeName"
 }
