@@ -807,7 +807,7 @@ export class URLConstant {
 
     // SURVEY ORDER
     public static GetSrvyOrderBySrvyOrderId = environment.FoundationR3Url + "/SrvyOrder/GetSrvyOrderBySrvyOrderId";
-    public static GetSrvyOrderByTrxRefNoAndSrvySourceCode = environment.FoundationR3Url + "/SrvyOrder/GetSrvyOrderByTrxRefNoAndSrvySourceCode";
+    public static GetSrvyOrderByTrxRefNo = environment.FoundationR3Url + "/SrvyOrder/GetSrvyOrderByTrxRefNo";
     public static GetListSryvObject = environment.FoundationR3Url + "/SrvyOrder/GetListSryvObject";
     public static SendSrvyOrder = environment.FoundationR3Url + "/SrvyOrder/SendSrvyOrder";
 

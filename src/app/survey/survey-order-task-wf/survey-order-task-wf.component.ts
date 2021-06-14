@@ -64,10 +64,9 @@ export class SurveyOrderTaskWfComponent implements OnInit {
     this.SrvyTaskObj = new SrvyTaskObj();
 
     var SrvyObj = {
-      TrxRefNo: this.TrxNo,
-      MrSrvySourceCode: this.TrxType
+      TrxNo: this.TrxNo
     }
-    this.http.post(URLConstant.GetSrvyOrderByTrxRefNoAndSrvySourceCode, SrvyObj).subscribe(
+    this.http.post(URLConstant.GetSrvyOrderByTrxRefNo, SrvyObj).subscribe(
       response => {
         this.SrvyOrderObj = response;
         this.SrvyOrderId = this.SrvyOrderObj["SrvyOrderId"];
