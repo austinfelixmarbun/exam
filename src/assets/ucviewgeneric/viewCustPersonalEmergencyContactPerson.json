@@ -138,25 +138,9 @@
                     "property": "Zipcode"
                 },
                 {
-                    "type": "concat",
+                    "type": "text",
                     "label": "Phone No (Fix Line) 1",
-                    "propertyList": [
-                        {
-                            "property": "PhoneArea1",
-                            "prefix": "",
-                            "suffix": " - "
-                        },
-                        {
-                            "property": "Phone1",
-                            "prefix": "",
-                            "suffix": " - "
-                        },
-                        {
-                            "property": "PhoneExt1",
-                            "prefix": "",
-                            "suffix": ""
-                        }
-                    ]
+                    "property": "PhoneNoFixLine1"
                 },
                 {
                     "type": "text",
@@ -164,25 +148,9 @@
                     "property": "Kelurahan"
                 },
                 {
-                    "type": "concat",
+                    "type": "text",
                     "label": "Phone No (Fix Line) 2",
-                    "propertyList": [
-                        {
-                            "property": "PhoneArea2",
-                            "prefix": "",
-                            "suffix": " - "
-                        },
-                        {
-                            "property": "Phone2",
-                            "prefix": "",
-                            "suffix": " - "
-                        },
-                        {
-                            "property": "PhoneExt2",
-                            "prefix": "",
-                            "suffix": ""
-                        }
-                    ]
+                    "property":"PhoneNoFixLine2"
                 },
                 {
                     "type": "text",
@@ -190,25 +158,9 @@
                     "property": "Kecamatan"
                 },
                 {
-                    "type": "concat",
+                    "type": "text",
                     "label": "Phone No (Fix Line) 3",
-                    "propertyList": [
-                        {
-                            "property": "PhoneArea3",
-                            "prefix": "",
-                            "suffix": " - "
-                        },
-                        {
-                            "property": "Phone3",
-                            "prefix": "",
-                            "suffix": " - "
-                        },
-                        {
-                            "property": "PhoneExt3",
-                            "prefix": "",
-                            "suffix": ""
-                        }
-                    ]
+                    "property": "PhoneNoFixLine3"
                 },
                 {
                     "type": "text",
