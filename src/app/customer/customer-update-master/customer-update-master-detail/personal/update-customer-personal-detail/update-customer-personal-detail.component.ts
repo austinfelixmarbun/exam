@@ -86,12 +86,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     this.CustGrpLookupObj.urlJson = "./assets/uclookup/Customer/CustomerGroup/lookupCustGrp_UpdateMasterCust.json";
     this.CustGrpLookupObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCustGrp_UpdateMasterCust.json";
     this.CustGrpLookupObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCustGrp_UpdateMasterCust.json";
-    this.CustGrpLookupObj.ddlEnvironments = [
-      {
-        name: "A.MR_CUST_TYPE_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
+
     this.CustGrpLookupObj.isReady = false;
     this.CustGrpLookupObj.isRequired = false;
 

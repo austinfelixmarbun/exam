@@ -89,49 +89,19 @@ export class VendorBranchViewComponent implements OnInit {
     )
 
     this.viewVendorBranchObj.viewInput = "./assets/ucviewgeneric/viewVendorBranch.json";
-    this.viewVendorBranchObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorBranchMainPObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchMainP.json";
-    this.viewVendorBranchMainPObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorBranchMainCObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchMainC.json";
-    this.viewVendorBranchMainCObj.viewEnvironment = environment.FoundationR3Url;
     this.viewBranchInfoSuppObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchInfoSupp.json";
-    this.viewBranchInfoSuppObj.viewEnvironment = environment.FoundationR3Url;
-    this.viewBranchInfoSuppObj.ddlEnvironments = [
-      {
-        name: "LinkSupplierHO",
-        environment: environment.FoundationR3Web
-      },
-    ];
+
     this.viewBranchInfoSurObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchInfoSur.json";
-    this.viewBranchInfoSurObj.viewEnvironment = environment.FoundationR3Url;
-    this.viewBranchInfoSurObj.ddlEnvironments = [
-      {
-        name: "LinkSurveyorHO",
-        environment: environment.FoundationR3Web
-      },
-    ];
+
     this.viewBranchInfoAssetObj.viewInput = "./assets/ucviewgeneric/viewBranchInfoAsset.json";
-    this.viewBranchInfoAssetObj.viewEnvironment = environment.FoundationR3Url;
-    this.viewBranchInfoAssetObj.ddlEnvironments = [
-      {
-        name: "LinkAssetHO",
-        environment: environment.FoundationR3Web
-      },
-    ];
+
     this.viewBranchInfoLifeObj.viewInput = "./assets/ucviewgeneric/viewBranchInfoLife.json";
-    this.viewBranchInfoLifeObj.viewEnvironment = environment.FoundationR3Url;
-    this.viewBranchInfoLifeObj.ddlEnvironments = [
-      {
-        name: "LinkLifeHO",
-        environment: environment.FoundationR3Web
-      },
-    ];
+
     this.viewVendorBranchTaxObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchTax.json";
-    this.viewVendorBranchTaxObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorBranchTaxAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchTaxAddr.json";
-    this.viewVendorBranchTaxAddrObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorBranchAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchAddr.json";
-    this.viewVendorBranchAddrObj.viewEnvironment = environment.FoundationR3Url;
 
     this.http.post(URLConstant.GetListVendorBankAccByVendorId, { Id: this.VendorId }).subscribe(
       response => {
