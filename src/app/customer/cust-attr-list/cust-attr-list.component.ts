@@ -149,7 +149,12 @@ export class CustAttrListComponent implements OnInit {
       }
       else if (refAttr.AttrInputType == 'L') {
         let temp = refAttr.AttrValue.split(";");
+        if(refAttr.IsMandatory == false){
         formGroupObject["AttrValue"] = [temp[0]];
+        }
+        else{
+          formGroupObject["AttrValue"] = [""];
+        }
       }
       else if (refAttr.AttrInputType == 'P' || refAttr.AttrInputType == 'N') {
         formGroupObject["AttrValue"] = [0];
@@ -175,7 +180,7 @@ export class CustAttrListComponent implements OnInit {
       }
     }
     if (refAttr["IsMandatory"] == true && refAttr["AttrInputType"] != 'T') {
-      formGroupObject["AttrValue"].push(Validators.required)
+      formGroupObject["AttrValue"].push(Validators.required);
     }
     parentFormGroup[refAttr.AttrCode] = this.fb.group(formGroupObject);
     if (refAttr["AttrInputType"] == 'RM') {
