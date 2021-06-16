@@ -20,11 +20,11 @@
         },
         {
             "type": "textbox",
-            "name": "RF.PATH",
-            "id": "PathId",
+            "name": "RFF.TITLE",
+            "id": "ParentId",
             "value": "",
-            "label": "Path",
-            "placeholder": "Path"
+            "label": "Parent",
+            "placeholder": "Parent"
         },
         {
             "type": "textbox",
@@ -33,6 +33,32 @@
             "value": "",
             "label": "Title",
             "placeholder": "Title"
+        },
+        {
+            "type": "textbox",
+            "name": "RF.PATH",
+            "id": "PathId",
+            "value": "",
+            "label": "Path",
+            "placeholder": "Path"
+        },
+        {
+            "type": "dropdown",
+            "name": "RF.CLASS", 
+            "id": "ClassId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "ddlType": "all",
+            "url": "",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Class",
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "FORM_CLASS",
+            "items": [],
+            "itemsUrl": [],
+            "environment": "FOU"
         },
         {
             "type": "dropdown",
@@ -54,24 +80,6 @@
                 }
             ],
             "itemsUrl": []
-        },
-        {
-            "type": "dropdown",
-            "name": "RF.CLASS", 
-            "id": "ClassId",
-            "value": "",
-            "placeholder": "Placeholder",
-            "datatype": "text",
-            "isFromURL": true,
-            "ddlType": "all",
-            "url": "",
-            "path": "/RefMaster/GetListKeyValueActiveByCode",
-            "label": "Class",
-            "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "FORM_CLASS",
-            "items": [],
-            "itemsUrl": [],
-            "environment": "FOU"
         }
     ],
     "querystring": {
@@ -83,6 +91,12 @@
             "position": "center",
             "label": "Module",
             "name": "RM.MODULE_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Parent",
+            "name": "RFF.TITLE"
         },
         {
             "type": "sort",
@@ -101,6 +115,12 @@
             "position": "center",
             "label": "Order No",
             "name": "RF.ORDER_NO"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Hierarchy No",
+            "name": "RF.HIERARCHY_NO"
         },
         {
             "type": "sort",
@@ -134,6 +154,11 @@
         {
             "type": "text",
             "position": "center",
+            "property": "Parent"
+        },
+        {
+            "type": "text",
+            "position": "center",
             "property": "Title"
         },
         {
@@ -145,6 +170,11 @@
             "type": "text",
             "position": "center",
             "property": "OrderNo"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "HierarchyNo"
         },
         {
             "type": "text",

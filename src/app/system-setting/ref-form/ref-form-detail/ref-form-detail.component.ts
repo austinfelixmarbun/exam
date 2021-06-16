@@ -49,7 +49,7 @@ export class RefFormDetailComponent implements OnInit {
     Path: ['', Validators.required],
     Icon: [''],
     OrderNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-    HierarchyNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+    HierarchyNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.max(3)]],
     IsHidden: false,
     IsExternalLink: false,
     RowVersion: ['']
