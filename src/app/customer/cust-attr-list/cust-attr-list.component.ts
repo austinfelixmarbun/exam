@@ -235,7 +235,12 @@ export class CustAttrListComponent implements OnInit {
       }
       else if (refAttr.AttrInputType == 'L') {
         let temp = refAttr.AttrValue.split(";");
-        formGroupObject["AttrValue"] = [temp[0]];
+        if(refAttr.IsMandatory == false){
+          formGroupObject["AttrValue"] = [temp[0]];
+        }
+        else{
+            formGroupObject["AttrValue"] = [""];
+        }
       }
       else if (refAttr.AttrInputType == 'P' || refAttr.AttrInputType == 'N') {
         formGroupObject["AttrValue"] = [0];
