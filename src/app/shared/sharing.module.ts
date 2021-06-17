@@ -1,7 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
-import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
 import { UCSearchModule } from '@adins/ucsearch';
@@ -16,7 +15,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
   exports: [
     CommonModule,
     NgbModule,
-    TranslateModule,
     UCSearchModule,
     UcgridfooterModule,
     UcSubsectionModule,
@@ -34,7 +32,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     RouterModule,
     UCSearchModule,
     UcgridfooterModule,
-    TranslateModule,
     UcSubsectionModule,
     NgMultiSelectDropDownModule,
   ],

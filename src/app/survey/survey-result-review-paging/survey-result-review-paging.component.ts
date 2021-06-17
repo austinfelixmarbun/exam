@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -28,9 +29,9 @@ export class SurveyResultReviewPagingComponent implements OnInit {
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSurveyResultReview.json";
   }
 
-  viewApp(event: any){
+  viewApp(event: any){    
     console.log(event);
-    this.AppNo = event['RowObj'].TransactionRefNo;
+    this.AppNo = event['RowObj']['TrxRefNo'];
     this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
       window.open(environment.losR3Web + "/View/AppView?AppId=" + this.AppId + "&AppNo=" + this.AppNo, "_blank");
     });

@@ -5,6 +5,7 @@ import { CommonConstant } from "./constant/CommonConstant";
 import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie";
 import * as CryptoJS from 'crypto-js';
+import { NavigationConstant } from "./NavigationConstant";
 
 export class AdInsHelper {
 
@@ -159,6 +160,13 @@ export class AdInsHelper {
         window.open(environment.FoundationR3Web + "/View/CustExposureView?CustId=" + CustId);
     }
 
+    public static OpenSurveyOrderViewBySrvyOrderId(SrvyOrderId: number){
+        window.open(environment.FoundationR3Web + NavigationConstant.VIEW_SRVY_ORDER + "?SrvyOrderId=" + SrvyOrderId, '_blank');
+    }
+
+    public static OpenSurveyTaskViewBySrvyTaskId(SrvyTaskId: number){
+        window.open(environment.FoundationR3Web + NavigationConstant.VIEW_SRVY_TASK + "?SrvyTaskId=" + SrvyTaskId, "_blank");
+    }
     public static SetLocalStorage(key:string, value:string)
     {
         return localStorage.setItem(key, this.EncryptString(value, environment.ChipperKeyLocalStorage));

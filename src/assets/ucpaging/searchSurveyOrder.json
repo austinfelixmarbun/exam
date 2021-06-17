@@ -3,9 +3,9 @@
     "component": [
         {
             "type": "dropdown",
-            "name": "RO.OFFICE_NAME",
+            "name": "RO.OFFICE_CODE",
             "id": "OfficeNameId",
-            "value": "",
+            "value": "Office Name",
             "placeholder": "",
             "isFromURL": true,
             "ddlType": "all",
@@ -250,16 +250,9 @@
             "position": "center",
             "action": [
                 {
-                    "type": "edit",
+                    "type": "callback",
                     "position": "center",                    
-                    "path": "VIEW_SRVY_ORDER",
-                    "target": "_blank",
-                    "param": [
-                        {
-                            "type": "SrvyOrderId",
-                            "property": "SrvyOrderId"
-                        }
-                    ]
+                    "property": "SrvyOrderId"
                 }
             ]
         }

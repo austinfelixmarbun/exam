@@ -117,6 +117,9 @@ import { SharedModule } from 'app/shared/shared.module';
 import { DmsIframeComponent } from 'app/shared/dms-iframe/dms-iframe.component';
 import { CustBankAccComponent } from './cust-bank-acc/cust-bank-acc.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { createTranslateLoader } from 'app/app.module';
+import { HttpClient } from '@angular/common/http';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -154,7 +157,8 @@ export const customCurrencyMaskConfig = {
     UcShowErrorsModule,
     MatTabsModule,
     UcuploadModule,
-    NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    
   ],
   declarations: [
     CustomerPagingComponent,

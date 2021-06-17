@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { environment } from 'environments/environment';
@@ -11,6 +12,7 @@ import { environment } from 'environments/environment';
 export class SurveyTaskComponent implements OnInit {
 
   inputPagingObj: UcPagingObj = new UcPagingObj();
+  srvyTaskId: number;
 
   constructor() { }
 
@@ -19,6 +21,13 @@ export class SurveyTaskComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSurveyTask.json";
+    
+  }
+
+  getCallback(event){
+    this.srvyTaskId = event['RowObj']['SrvyTaskId'];
+    AdInsHelper.OpenSurveyTaskViewBySrvyTaskId(this.srvyTaskId);
+    
   }
 
 }

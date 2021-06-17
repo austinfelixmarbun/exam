@@ -252,4 +252,7 @@ export class CommonConstant {
     public static ConfigCodeIsUseDms = "IS_USE_DMS";
 
     public static JOURNAL_STAT_EXE_DESCR = "EXECUTED";
+
+    //Surveyor
+    public static EXTERNAL_SURVEYOR = "EXTERNAL_SURVEYOR";
 }

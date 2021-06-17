@@ -10,6 +10,9 @@ import { ViewRoutingModule } from "./view-routing.module";
 import { UcgridviewComponent } from "@adins/ucgridview";
 import { UcviewgenericModule } from "@adins/ucviewgeneric";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { createTranslateLoader } from "app/app.module";
+import { HttpClient } from "@angular/common/http";
 
 @NgModule({
   imports: [
@@ -24,6 +27,14 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     SharingComponentModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+  }),
+    
   ],
   declarations: [
   ],
