@@ -22,6 +22,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-job-data-employee',
@@ -76,6 +77,10 @@ export class JobDataEmployeeComponent implements OnInit {
   preJobAddrObj: CustAddrObj;
   IsWellknownCoy: boolean = false;
   ArrAddCritCoy: Array<CriteriaObj> = new Array<CriteriaObj>();
+  EconomicSectorName : string;
+  IndustryTypeCategoryName : string;
+  IndustryTypeName: string;
+  IsShowData : boolean =false;
   JobDataEmpForm = this.fb.group({
     JobDataType: [''],
     ProfessionName: [''],
@@ -134,6 +139,10 @@ export class JobDataEmployeeComponent implements OnInit {
 
   getLookUpIndustry(event) {
     this.tempRefIndustryType = event.RefIndustryTypeId;
+    this.IndustryTypeCategoryName = event.RefIndustryTypeCategoryName;
+    this.EconomicSectorName =  event.EconomicSectorName;
+    this.IndustryTypeName= event.IndustryTypeName;
+    this.IsShowData = true;
   }
 
   ngOnInit() {
@@ -544,7 +553,7 @@ export class JobDataEmployeeComponent implements OnInit {
       this.custPersonalJobDataObj = new CustPersonalJobDataObj();
       this.jobAddressObj = new CustAddrObj;
       this.otherAddressObj = new CustAddrObj;
-      this.setCustJobData();
+      this.setCustJobData();  
       this.setJobAddr();
       this.setOthBizAddr();
       this.custPersonalJobDataObj.OthBizAddrId = this.returnCustJobDataObj.OthBizAddrId == null ? 0 : this.returnCustJobDataObj.OthBizAddrId;

@@ -24,10 +24,10 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 })
 export class JobDataProfessionalComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
-  jobDataId: any;
+  jobDataId: number;
   jobAddrId: number;
   preJobAddrId: number;
-  othBizAddrId:number;
+  othBizAddrId: number;
   rowVersion: any;
   typePage: string;
   IdCust: number;
@@ -54,6 +54,11 @@ export class JobDataProfessionalComponent implements OnInit {
   preJobAddrObj: CustAddrObj;
   getCustomerAddr: any;
   getPreJobAddr: any;
+
+  EconomicSectorName: string;
+  IndustryTypeCategoryName: string;
+  IndustryTypeName: string;
+  IsShowData: boolean = false;
   JobDataProForm = this.fb.group({
     JobDataType: [''],
     ProfessionName: [''],
@@ -104,6 +109,10 @@ export class JobDataProfessionalComponent implements OnInit {
 
   getLookUpIndustry(event) {
     this.tempRefIndustryType = event.RefIndustryTypeId;
+    this.EconomicSectorName = event.EconomicSectorName;
+    this.IndustryTypeCategoryName = event.RefIndustryTypeCategoryName;
+    this.IndustryTypeName = event.IndustryTypeName;
+    this.IsShowData = true;
   }
 
   ngOnInit() {
@@ -178,6 +187,7 @@ export class JobDataProfessionalComponent implements OnInit {
                 this.tempRefIndustryType = this.returnIndustryTypeObj.RefIndustryTypeId;
               });
           }
+
 
           if (this.returnCustJobDataObj.JobAddrId != null) {
             this.custAddrObj = new CustAddrObj();
@@ -311,6 +321,7 @@ export class JobDataProfessionalComponent implements OnInit {
 
           this.preJobAddrId = this.returnCustJobDataObj.PrevJobAddrId;
           this.jobAddrId = this.returnCustJobDataObj.JobAddrId;
+          this.othBizAddrId = this.returnCustJobDataObj.OthBizAddrId;
           this.jobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
           this.rowVersion = this.returnCustJobDataObj.RowVersion;
           this.typePage = "edit";

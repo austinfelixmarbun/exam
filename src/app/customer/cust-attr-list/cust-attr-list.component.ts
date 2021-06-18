@@ -6,7 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AttrContent } from 'app/shared/model/AttrContent.model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { RefAttr } from 'app/shared/model/RefAttr.Model';

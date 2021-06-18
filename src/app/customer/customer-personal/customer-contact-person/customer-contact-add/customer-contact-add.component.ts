@@ -3,7 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { environment } from 'environments/environment';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalContactPerson.Obj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
@@ -70,7 +71,7 @@ export class CustomerContactAddComponent implements OnInit {
 
   flag: boolean;
   tempKTPCheck: boolean;
-  tempMobilePhone1 : boolean;
+  tempMobilePhone1: boolean;
   businessDtMin: Date;
   businessDtMax: Date;
 
@@ -145,7 +146,7 @@ export class CustomerContactAddComponent implements OnInit {
         var countryCode = {
           CountryCode: this.Country.GsValue
         };
-        this.http.post(URLConstant.GetRefCountryByCountryCode, {Code: this.Country.GsValue}).subscribe(
+        this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: this.Country.GsValue }).subscribe(
           (response) => {
             this.LocalCountry = response;
           });
@@ -210,8 +211,8 @@ export class CustomerContactAddComponent implements OnInit {
         }
       }
     );
-    
-    this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, {Code : CommonConstant.RefMasterTypeCodeNationality}).subscribe(
+
+    this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, { Code: CommonConstant.RefMasterTypeCodeNationality }).subscribe(
       (response) => {
         this.tempNationality = response["RefMasterObjs"];
         this.CustomerContactForm.patchValue({
@@ -277,7 +278,7 @@ export class CustomerContactAddComponent implements OnInit {
           this.CustomerContactForm.controls.MobilePhnNo1.setValidators(Validators.required);
           this.tempMobilePhone1 = true;
         } else {
-            this.tempMobilePhone1 = false;
+          this.tempMobilePhone1 = false;
           this.CustomerContactForm.controls.MobilePhnNo1.clearValidators();
         }
         this.CustomerContactForm.controls.MobilePhnNo1.updateValueAndValidity();
@@ -303,7 +304,7 @@ export class CustomerContactAddComponent implements OnInit {
       this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.custPersonalContactPersonId;
       // this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalContactPersonByCustPersonalContactPersonId, this.custPersonalContactPersonObj).subscribe(
-      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustId, {Id : this.custPersonalContactPersonId}).subscribe(
+      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustId, { Id: this.custPersonalContactPersonId }).subscribe(
         (response) => {
           var datePipe = new DatePipe("en-US");
           this.tempCustPersonalContactPerson = response;
@@ -328,8 +329,8 @@ export class CustomerContactAddComponent implements OnInit {
           });
           this.onChangeIdType();
           if (this.tempCustPersonalContactPerson.MrJobProfessionCode != null) {
-            
-            this.http.post(URLConstant.GetRefProfessionByProfessionCode, {Code : this.tempCustPersonalContactPerson.MrJobProfessionCode }).subscribe(
+
+            this.http.post(URLConstant.GetRefProfessionByProfessionCode, { Code: this.tempCustPersonalContactPerson.MrJobProfessionCode }).subscribe(
               (response) => {
                 this.tempProfessionCodeObj = response;
                 this.professionLookUpObj.nameSelect = this.tempProfessionCodeObj.ProfessionName;
@@ -341,7 +342,7 @@ export class CustomerContactAddComponent implements OnInit {
             var countryCode = {
               CountryCode: this.tempCustPersonalContactPerson.NationalityCountryCode
             };
-            this.http.post(URLConstant.GetRefCountryByCountryCode, {Code: this.tempCustPersonalContactPerson.NationalityCountryCode}).subscribe(
+            this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: this.tempCustPersonalContactPerson.NationalityCountryCode }).subscribe(
               (response) => {
 
                 this.tempCountry = response;
@@ -368,7 +369,7 @@ export class CustomerContactAddComponent implements OnInit {
     this.inputAddressObj.title = "Customer Address";
     this.inputAddressObj.default = UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
-    this.inputAddressObj.showAllPhn= false;
+    this.inputAddressObj.showAllPhn = false;
 
     this.tempCustAddrObj.Id = this.IdCust;
     this.http.post(URLConstant.GetListCustAddr, this.tempCustAddrObj).subscribe(
@@ -379,7 +380,7 @@ export class CustomerContactAddComponent implements OnInit {
         }
       });
   }
-	
+
   onChangeIdType() {
     let idType: string = this.CustomerContactForm.get("MrIdTypeCode").value;
 
@@ -392,12 +393,12 @@ export class CustomerContactAddComponent implements OnInit {
   }
 
   copyAddress() {
-    if(this.listCustAddr.length<1){
+    if (this.listCustAddr.length < 1) {
       return
     }
     var custAddrFromObj = new CustAddrObj();
     custAddrFromObj.CustAddrId = this.CustomerContactForm.controls["CopyFromContactPerson"].value;
-    this.http.post<CustAddrObj>(URLConstant.GetCustAddr, {Id : custAddrFromObj.CustAddrId}).subscribe(
+    this.http.post<CustAddrObj>(URLConstant.GetCustAddr, { Id: custAddrFromObj.CustAddrId }).subscribe(
       (response) => {
         var copyCustomerAddrFrom = response;
 
@@ -509,7 +510,7 @@ export class CustomerContactAddComponent implements OnInit {
     this.custPersonalObj = new CustPersonalObj();
     this.custObj.CustId = this.tempCustId;
     this.custPersonalObj.CustId = this.tempCustId;
-    this.http.post(URLConstant.GetCustPersonalbyCustId, {Id : this.tempCustId}).subscribe(
+    this.http.post(URLConstant.GetCustPersonalbyCustId, { Id: this.tempCustId }).subscribe(
       (response) => {
         this.tempCustPersonal = response;
         this.CustomerContactForm.patchValue({
@@ -528,7 +529,7 @@ export class CustomerContactAddComponent implements OnInit {
           var countryCode = {
             CountryCode: this.tempCustPersonal.WnaCountryCode
           };
-          this.http.post(URLConstant.GetRefCountryByCountryCode, {Code: this.tempCustPersonal.WnaCountryCode}).subscribe(
+          this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: this.tempCustPersonal.WnaCountryCode }).subscribe(
             (response) => {
 
               this.tempCountry = response;
@@ -546,7 +547,7 @@ export class CustomerContactAddComponent implements OnInit {
       }
 
     );
-    this.http.post(URLConstant.GetCustByCustId, {Id : this.custObj.CustId}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, { Id: this.custObj.CustId }).subscribe(
       (response) => {
         this.tempCust = response;
         this.CustomerContactForm.patchValue({
@@ -615,7 +616,7 @@ export class CustomerContactAddComponent implements OnInit {
       var foreign = this.tempNationality.find(x => x["MasterCode"] == event.target.value);
       var setCountry = foreign.DefaultValue.split(';');
       this.lookUpObj.nameSelect = setCountry[1] ? setCountry[1] : setCountry[0];
-      this.lookUpObj.jsonSelect =  { CountryName: setCountry[1] ? setCountry[1] : setCountry[0]};
+      this.lookUpObj.jsonSelect = { CountryName: setCountry[1] ? setCountry[1] : setCountry[0] };
       this.tempCountryCode = setCountry[0];
       this.lookUpObj.isRequired = true;
     }

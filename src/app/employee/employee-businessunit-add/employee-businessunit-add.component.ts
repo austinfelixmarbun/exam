@@ -3,7 +3,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefUserRole } from 'app/shared/model/RefUserRoleObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';

@@ -1,5 +1,5 @@
 import { OrgMdlStrucObj } from 'app/shared/model/OrgMdlStrucObj';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { ExcelService } from 'app/shared/excel-service/excel-service';
 import { environment } from 'environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';

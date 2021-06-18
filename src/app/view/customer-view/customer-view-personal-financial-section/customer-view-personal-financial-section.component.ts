@@ -12,13 +12,11 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
   templateUrl: './customer-view-personal-financial-section.component.html'
 })
 export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
-  GetCustPersonalFinDataForCustViewByCustIdUrl = URLConstant.GetCustPersonalFinDataForCustViewByCustId;
-  custObj: CustObj;
   tempCustObj: any;
   CustId: number;
   responseCustAttr: any;
   IsAttrExist: boolean;
-  
+  custObj: CustObj = new CustObj();
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router) {
@@ -35,7 +33,7 @@ export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
   ngOnInit() {
     this.custObj = new CustObj();
     this.custObj.CustId = this.CustId;
-    this.http.post(this.GetCustPersonalFinDataForCustViewByCustIdUrl, {Id : this.CustId }).subscribe(
+    this.http.post(URLConstant.GetListCustPersonalFinDataForCustViewByCustId, {Id : this.CustId }).subscribe(
       (response) => {
         this.tempCustObj = response;
       }

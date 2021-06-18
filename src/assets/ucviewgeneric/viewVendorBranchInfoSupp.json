@@ -50,12 +50,16 @@
             "type": "text",
             "label": "Max Refund Value :",
             "property": "MaxRefundValue"
+          },{},
+          {
+            "type": "text",
+            "label": "Grade Status :",
+            "property": "Grade"
           }
         ],
         "querystring": {
            "name":"viewVendorBranchInfoSupp"
           }
-      }
+        }
     ]
-  }
-  
+}

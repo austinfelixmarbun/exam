@@ -25,6 +25,7 @@ export class AddressComponent implements OnInit {
   MrVendorClass: string;
   resultAddr: any;
   getUrl: string;
+  ReqGetVendor : GenericObj = new GenericObj();
 
   constructor(private fb: FormBuilder, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) {
   }

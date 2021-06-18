@@ -9,13 +9,15 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { map, mergeMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NegativeCustObj } from 'app/shared/model/NegativeCustObj.Model';
 import { NegativeCustChangeTrxObj } from 'app/shared/model/NegativeCustChangeTrxObj.Model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { RegexService } from 'app/customer/regex.service';
+import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
@@ -24,7 +26,8 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 @Component({
   selector: 'app-negative-customer-detail',
   templateUrl: './negative-customer-detail.component.html',
-  styleUrls: []
+  styleUrls: [],
+  providers: [NGXToastrService, RegexService]
 })
 export class NegativeCustomerDetailComponent implements OnInit {
   pageType: string = "add";
@@ -44,7 +47,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
   businessDateIdExp: any;
   tempKTPCheck: boolean;
   TempCustType: any;
-  TempGender : any;
+  TempGender: any;
   NegativeCustForm = this.fb.group({
     NegativeCustId: [0, [Validators.required]],
     CustId: [0],
@@ -68,7 +71,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     City: ['', [Validators.required]],
     PhnArea1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     Phn1: ['', [Validators.required, Validators.pattern]],
-    PhnExt1: ['', [Validators.required]],
+    PhnExt1: ['', [Validators.pattern("^[0-9]+$")]],
     PhnArea2: ['', [Validators.pattern("^[0-9]+$")]],
     Phn2: ['', [Validators.pattern("^[0-9]+$")]],
     PhnExt2: ['', [Validators.pattern("^[0-9]+$")]],
@@ -87,13 +90,14 @@ export class NegativeCustomerDetailComponent implements OnInit {
   });
 
   constructor(
+    private regexService: RegexService,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
     private spinner: NgxSpinnerService,
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private cookieService: CookieService
   ) {
     this.route.queryParams.subscribe(params => {
@@ -122,6 +126,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
             MrIdTypeCode: this.refMasterIdType.ReturnObject[0].Key
           });
           this.onChangeIdType();
+          this.getInitPattern();
         }
         if (response[1][CommonConstant.ReturnObj].length > 0) {
           this.negativeTypeList = response[1];
@@ -172,6 +177,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.customPattern = new Array<CustomPatternObj>();
     var datePipe = new DatePipe("en-US");
     var criteriaList;
     var criteriaObj;
@@ -223,7 +229,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
         this.TempCustType = response[CommonConstant.ReturnObj];
       });
 
-  
+
     this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterTypeCodeGender).subscribe(
       (response) => {
         this.TempGender = response[CommonConstant.ReturnObj];
@@ -237,14 +243,14 @@ export class NegativeCustomerDetailComponent implements OnInit {
     if (this.pageType == "edit") {
       var negativeCustObj = new NegativeCustObj();
       negativeCustObj.NegativeCustId = this.negativeCustId;
-      this.httpClient.post(URLConstant.GetNegativeCustByNegativeCustId, {Id : this.negativeCustId}).pipe(
+      this.httpClient.post(URLConstant.GetNegativeCustByNegativeCustId, { Id: this.negativeCustId }).pipe(
         map((response) => {
           return response;
         }),
         mergeMap((response: any) => {
           var negativeCustChangeTrxObj = new NegativeCustChangeTrxObj();
           negativeCustChangeTrxObj.NegativeCustId = response.NegativeCustId;
-          const negativeCustChangeTrx = this.httpClient.post(URLConstant.GetListNegativeCustChangeTrxByNegativeCustId, {Id : response.NegativeCustId});
+          const negativeCustChangeTrx = this.httpClient.post(URLConstant.GetListNegativeCustChangeTrxByNegativeCustId, { Id: response.NegativeCustId });
           var tempResponse = [response];
           return forkJoin([tempResponse, negativeCustChangeTrx]);
         })
@@ -470,8 +476,8 @@ export class NegativeCustomerDetailComponent implements OnInit {
           MrIdTypeCode: this.refMasterIdType.ReturnObject[0].Key,
           MrNegCustTypeCode: this.negativeTypeList.ReturnObject[0].Key,
           MrNegCustSourceCode: this.negativeSourceList.ReturnObject[0].Key,
-          MrGenderCode: this.TempGender[0].Key 
-        }); 
+          MrGenderCode: this.TempGender[0].Key
+        });
         this.onChangeIdType();
       });
   }
@@ -480,7 +486,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
     var expiredDt = datePipe.transform(e.idExpiredDate, 'yyyy-MM-dd');
     var birthDt = datePipe.transform(e.birthDate, 'yyyy-MM-dd');
-    
+
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = e.custId;
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
@@ -581,7 +587,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     }
     this.NegativeCustForm.controls.IdExpiredDt.updateValueAndValidity();
     this.onChangeIdType();
-  }	
+  }
 
   onChangeIdType() {
     let idType: string = this.NegativeCustForm.get("MrIdTypeCode").value;
@@ -593,6 +599,8 @@ export class NegativeCustomerDetailComponent implements OnInit {
       this.NegativeCustForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
     }
     this.NegativeCustForm.get("IdNo").updateValueAndValidity();
+
+    this.setValidatorPattern();
   }
 
   SaveForm() {
@@ -635,7 +643,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
         (response) => {
           var responseNegativeCust = response[0];
           this.toastr.successMessage(responseNegativeCust["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_NEG_PAGING],{});
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_NEG_PAGING], {});
         }
       );
     }
@@ -666,9 +674,74 @@ export class NegativeCustomerDetailComponent implements OnInit {
         (response) => {
           var responseNegativeCust = response[0];
           this.toastr.successMessage(responseNegativeCust["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_NEG_PAGING],{});
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_NEG_PAGING], {});
         }
       );
     }
   }
+
+  //START URS-LOS-041
+  controlNameIdNo: any = 'IdNo';
+  controlNameIdType: any = 'MrIdTypeCode';
+  customPattern: Array<CustomPatternObj>;
+  initIdTypeCode: any;
+  resultPattern: any;
+
+  getInitPattern() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if (this.resultPattern != undefined) {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+            this.customPattern.push(patternObj);
+          }
+          this.setValidatorPattern();
+        }
+      }
+    );
+  }
+  // setValidatorPattern(){
+  //   let idTypeValue: string;
+
+  //   idTypeValue = this.ContactInformationForm.controls[this.controlNameIdType].value;
+
+  //   if (this.resultPattern != undefined) {
+  //     var result = this.resultPattern.find(x => x.Key == idTypeValue)
+
+  //     if (result != undefined) {
+  //       var pattern = result.Value;
+  //       if (pattern != undefined) {
+  //         this.setValidator(pattern);
+  //       }
+  //     }
+  //   }
+  // }
+
+  setValidatorPattern() {
+    let idTypeValue: string;
+    idTypeValue = this.NegativeCustForm.controls[this.controlNameIdType].value;
+    var pattern: string = '';
+    if (idTypeValue != undefined) {
+      if (this.resultPattern != undefined) {
+        var result = this.resultPattern.find(x => x.Key == idTypeValue)
+        if (result != undefined) {
+          pattern = result.Value;
+        }
+      }
+    }
+    this.setValidator(pattern);
+  }
+
+  setValidator(pattern: string) {
+    if (pattern != undefined) {
+      this.NegativeCustForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
+      this.NegativeCustForm.controls[this.controlNameIdNo].updateValueAndValidity();
+    }
+  }
+  //END OF URS-LOS-041
 }

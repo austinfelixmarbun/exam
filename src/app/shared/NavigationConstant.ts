@@ -90,6 +90,8 @@ export class NavigationConstant {
     public static CS_REASON_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REASON_DETAIL; //'/CommonSetting/Reason/Detail'
     public static CS_INDUSTRY_TYPE_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_INDUSTRY_TYPE_PAGING; //'/CommonSetting/IndustryType/Paging'
     public static CS_INDUSTRY_TYPE_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_INDUSTRY_TYPE_DETAIL; //'/CommonSetting/IndustryType/Detail'
+    public static CS_INDUSTRY_TYPE_CAT_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_INDUSTRY_TYPE_CAT_PAGING; //'/CommonSetting/IndustryTypeCategory/Paging'
+    public static CS_INDUSTRY_TYPE_CAT_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_INDUSTRY_TYPE_CAT_DETAIL; //'/CommonSetting/IndustryTypeCategory/Paging'
     public static CS_SCORE_CATEGORY_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SCORE_CATEGORY_PAGING; //'/CommonSetting/ScoreCategory/Paging'
     public static CS_SCORE_CATEGORY_TYPE = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SCORE_CATEGORY_TYPE; //'/CommonSetting/ScoreCategory/Type'
     public static CS_WORKING_HOUR = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_WORKING_HOUR; //'/CommonSetting/WorkingHour'
@@ -135,6 +137,7 @@ export class NavigationConstant {
     public static VIEW_CUST_PERSONAL_FINANCIAL_DATA = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_FINANCIAL_DATA; //'/View/Customer/PersonalFinancialData'
     public static VIEW_CUST_PERSONAL_FAMILY = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_FAMILY; //'/View/Customer/PersonalFamily'
     public static VIEW_CUST_DOC = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_DOC; //'/View/Customer/CustDocument'
+    public static VIEW_CUST_HIGHLIGHT_COMMENT = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_HIGHLIGHT_COMMENT; //'/View/Customer/HighligtComment'
     public static VIEW_CUST_COY_DETAIL = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_DETAIL; //'/View/Customer/CoyDetail'
     public static VIEW_CUST_COY_MNGMNT = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_MNGMNT; //'/View/Customer/CoyManagement'
     public static VIEW_CUST_COY_CONTACT = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_CONTACT; //'/View/Customer/CoyContact'
@@ -181,6 +184,7 @@ export class NavigationConstant {
     public static VENDOR_SCHM_MBR = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_SCHM_MBR; //'/Vendor/VendorScheme/Member'
     public static VENDOR_SCHM_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_SCHM_MBR_ADD; //'/Vendor/VendorScheme/Member/Add'
     public static VENDOR_SCHM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_SCHM_DETAIL; //'/Vendor/VendorScheme/Detail'
+    public static VENDOR_GRD_REQ_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRADING_REQUEST_PAGING; //'/Vendor/VendorGrading/Request/Paging'
     //#endregion
     
     //#region Organization

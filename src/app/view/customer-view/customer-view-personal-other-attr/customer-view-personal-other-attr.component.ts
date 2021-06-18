@@ -13,7 +13,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class CustomerViewPersonalOtherAttrComponent implements OnInit {
   CustId: number;
   GetCustAttrContentForCustViewByCustIdUrl = URLConstant.GetCustAttrContentForCustViewByCustId;
-  responseCustAttr: any;
+  responseCustAttr: Array<any> = new Array();
 
   constructor(
     private http: HttpClient,

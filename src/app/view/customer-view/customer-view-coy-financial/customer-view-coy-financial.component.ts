@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { environment } from 'environments/environment';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -14,8 +12,11 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 })
 export class CustomerViewCoyFinancialComponent implements OnInit {
   CustId: number;
+  TitleSuffix:string = '';
+  IsShowDetail:boolean = false;
   GetCBAForCustFinDataByCustIdUrl = URLConstant.GetCBAForCustFinDataByCustId;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  ListCustCoyFinData: Array<object> = [];
+  CustCoyFinData: object;
   responseCBAObj: any;
   responseCustAttr: any;
   IsAttrExist: boolean;
@@ -25,14 +26,12 @@ export class CustomerViewCoyFinancialComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewCustCoyFinData.json";
     
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
         this.CustId = params['CustId'];
       }
     });
-
     var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetCBAForCustFinDataByCustIdUrl, { Id: this.CustId }).subscribe(
       (response) => {

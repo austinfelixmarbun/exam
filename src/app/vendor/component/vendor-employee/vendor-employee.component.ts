@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -14,13 +14,16 @@ import { WizardComponent } from 'angular-archwizard';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { RegexService } from 'app/customer/regex.service';
+import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GenericObj} from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-vendor-employee',
-  templateUrl: './vendor-employee.component.html'
+  templateUrl: './vendor-employee.component.html',
+  providers: [RegexService]
 })
 export class VendorEmployeeComponent implements OnInit {
   @Input() objInput: any;
@@ -69,7 +72,7 @@ export class VendorEmployeeComponent implements OnInit {
     IsNpwpExist: [false]
   });
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent, private cookieService: CookieService) {
+  constructor(private regexService: RegexService, private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
         this.mode = params["mode"];
@@ -87,7 +90,8 @@ export class VendorEmployeeComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.customPattern = new Array<CustomPatternObj>();
     var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(currentUserContext[CommonConstant.BUSINESS_DT]);
 
@@ -99,8 +103,8 @@ export class VendorEmployeeComponent implements OnInit {
     if (this.mode == "edit") {
       this.VendorEmpForm.controls["VendorEmpCode"].disable();
       this.VendorEmpForm.controls["VendorEmpName"].disable();
+      await this.getData();
       this.setLookup();
-      this.getData();
     } else {
       this.mode = "add";
       this.setDropdown();
@@ -139,6 +143,8 @@ export class VendorEmployeeComponent implements OnInit {
               MrIdTypeCode: this.IdTypeList[0].Key
             });
           }
+
+          this.getInitPattern();
         }
       }
     );
@@ -196,7 +202,7 @@ export class VendorEmployeeComponent implements OnInit {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-
+    console.log(this.resultVendorEmpAndAddr);
     if (this.resultVendorEmpAndAddr != null) {
       this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.resultVendorEmpAndAddr["VendorAddrObj"].Zipcode };
       this.inputLookupSpvObj.jsonSelect = { VendorEmpName: this.resultVendorEmpAndAddr["VendorEmpObj"].SupervisorName };
@@ -231,13 +237,14 @@ export class VendorEmployeeComponent implements OnInit {
     this.inputLookupZipcodeObj.jsonSelect = { Zipcode: ev.Zipcode };
   }
 
-  getData() {
+  async getData() {
     var vendorEmpObj = new VendorEmpObj();
     vendorEmpObj.VendorId = null;
     vendorEmpObj.VendorEmpId = this.objInput.VendorEmpId;
-    this.http.post(URLConstant.GetVendorEmpAndVendorTaxAddrByVendorEmpId, {Id : this.objInput.VendorEmpId}).subscribe(
+    await this.http.post(URLConstant.GetVendorEmpAndVendorTaxAddrByVendorEmpId, {Id : this.objInput.VendorEmpId}).toPromise().then(
       (response) => {
         this.resultVendorEmpAndAddr = response;
+        console.log(this.resultVendorEmpAndAddr);
         this.setDropdown();
         this.inputLookupInternalEmpObj.isReady = true;
         this.inputLookupSpvObj.isReady = true;
@@ -362,4 +369,59 @@ export class VendorEmployeeComponent implements OnInit {
         });
     }
   }
+
+  //START URS-LOS-041
+
+  onOptionsSelected(event){  
+    this.setValidatorPattern();
+  }
+
+  controlNameIdNo: any = 'IdNo';
+  controlNameIdType: any = 'MrIdTypeCode';
+  customPattern: Array<CustomPatternObj>;
+  initIdTypeCode: any;
+  resultPattern: any;
+
+  getInitPattern() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if(this.resultPattern != undefined)
+        {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+    
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+            this.customPattern.push(patternObj);
+          }
+          this.setValidatorPattern();
+        }
+      }
+    );
+  }
+
+  setValidatorPattern() {
+    let idTypeValue: string;
+    idTypeValue = this.VendorEmpForm.controls[this.controlNameIdType].value;
+    var pattern: string = '';
+    if (idTypeValue != undefined) {
+      if (this.resultPattern != undefined) {
+        var result = this.resultPattern.find(x => x.Key == idTypeValue)
+        if (result != undefined) {
+          pattern = result.Value;
+        }
+      }
+    }
+    this.setValidator(pattern);
+  }
+
+  setValidator(pattern: string) {
+    if (pattern != undefined) {
+      this.VendorEmpForm.controls[this.controlNameIdNo].setValidators([Validators.required,Validators.pattern(pattern)]);
+      this.VendorEmpForm.controls[this.controlNameIdNo].updateValueAndValidity();
+    }
+  }
+  //END OF URS-LOS-041
 }

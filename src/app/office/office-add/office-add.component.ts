@@ -17,6 +17,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { RefOfficeXObj } from 'app/shared/model/RefOfficeX.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 
@@ -89,6 +90,9 @@ export class OfficeAddComponent implements OnInit {
   officeTypeUrl: any;
   officeparentId: any;
 
+  resultDataLawCourt: any;
+
+  cbIsNationalCourt: boolean;
 
   OfficeForm = this.fb.group({
     OfficeCode: ['', Validators.required],
@@ -110,13 +114,19 @@ export class OfficeAddComponent implements OnInit {
     IsActive: false,
     IsHaveCashier: false,
     OfficeClose: false,
-    AllowAppCreated: false
+    AllowAppCreated: false,
+    IsNationalCourt: false,
+    NationalCourtOffice: [''],
+    TaxOffice: ['']
   })
   InputLookupObj: InputLookupObj = new InputLookupObj();
   addressObj: UcAddressObj;
   inputAddressObj: InputAddressObj;
 
   readonly CancelLink: string = NavigationConstant.OFFICE_PAGING;
+  responseRefOfficeX: any;
+  officeXObj: RefOfficeXObj;
+
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.apiUrl = URLConstant.GetRefOfficeByRefOfficeId;
     this.addUrl = URLConstant.AddRefOffice;
@@ -254,6 +264,7 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(URLConstant.GetRefOfficeByRefOfficeId, {Id : this.RefOfficeId}).subscribe(
         (response) => {
           this.resultData = response;
+          
           this.InputLookupObj.jsonSelect = { OfficeCode: this.resultData.ParentOfficeCode, RefOfficeId: this.resultData.ParentId };
           this.InputLookupObj.nameSelect = this.resultData["ParentOfficeCode"];
           this.InputLookupObj.jsonSelect = { OfficeCode: this.resultData["ParentOfficeCode"] };
@@ -277,6 +288,9 @@ export class OfficeAddComponent implements OnInit {
             CntctPersonEmail2: this.resultData.CntctPersonEmail2,
             CntctPersonMobilePhnNo1: this.resultData.CntctPersonMobilePhnNo1,
             CntctPersonMobilePhnNo2: this.resultData.CntctPersonMobilePhnNo2,
+            // TaxOffice: this.resultData.RefTaxOfficeXId,
+            // IsNationalCourt: this.resultData.IsNationalCourt,
+            // NationalCourtOffice: this.resultData.NationalCourtOffice
           })
           this.checkType();
           this.addressObj.Addr = this.resultData.OfficeAddr;
@@ -357,6 +371,17 @@ export class OfficeAddComponent implements OnInit {
               }
             })
 
+          this.cbIsNationalCourt = this.resultData.IsNationalCourt;
+
+          if (this.cbIsNationalCourt == true) {
+            this.OfficeForm.controls.NationalCourtOffice.enable()
+            this.OfficeForm.controls.NationalCourtOffice.clearValidators();
+            this.OfficeForm.controls.NationalCourtOffice.setValidators([Validators.required]);
+          } else {
+            this.OfficeForm.controls.NationalCourtOffice.disable()
+            this.OfficeForm.controls.NationalCourtOffice.clearValidators();
+          }
+          this.OfficeForm.controls.NationalCourtOffice.updateValueAndValidity();
         })
     }
     this.inputAddressObj = new InputAddressObj();
@@ -423,6 +448,7 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
+          
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
         }
       );
@@ -435,6 +461,7 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(URLConstant.EditRefOffice, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
+          
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
         }
       );
@@ -468,4 +495,19 @@ export class OfficeAddComponent implements OnInit {
       OfficeParent: ev.RefOfficeId
     })
   }
+
+  IsNationalCourtChange() {
+    if (this.cbIsNationalCourt === true) {
+      this.OfficeForm.controls.NationalCourtOffice.enable()
+      this.OfficeForm.controls.NationalCourtOffice.clearValidators();
+      this.OfficeForm.controls.NationalCourtOffice.setValidators([Validators.required]);
+    } else {
+      this.OfficeForm.controls.NationalCourtOffice.setValue("");
+      this.OfficeForm.controls.NationalCourtOffice.disable()
+      this.OfficeForm.controls.NationalCourtOffice.clearValidators();
+    }
+    this.OfficeForm.controls.NationalCourtOffice.updateValueAndValidity();
+  }
+
+
 }

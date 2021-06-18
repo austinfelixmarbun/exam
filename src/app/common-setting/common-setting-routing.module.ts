@@ -39,6 +39,10 @@ import { ScoreCategoryTypeComponent } from './score-category/score-category-type
 import { ScoreCategoryScoringComponent } from './score-category/score-category-scoring/score-category-scoring.component';
 import { ReasonComponent } from './reason/reason-paging/reason.component';
 import { ReasonAddEditComponent } from './reason/reason-add-edit/reason-add-edit.component';
+import { AppSourcePagingComponent } from './app-source/app-source-paging/app-source-paging.component';
+import { AppSourceAddEditComponent } from './app-source/app-source-add-edit/app-source-add-edit.component';
+import { AppSourceOfficeMemberPagingComponent } from './app-source/app-source-office-member/app-source-office-member-paging/app-source-office-member-paging.component';
+import { AppSourceOfficeMemberAddComponent } from './app-source/app-source-office-member/app-source-office-member-add/app-source-office-member-add.component';
 import { PaymentAllocPagingComponent } from './payment-alloc/payment-alloc-paging/payment-alloc-paging.component';
 import { PaymentAllocDetailComponent } from './payment-alloc/payment-alloc-detail/payment-alloc-detail.component';
 import { PaymentAllocGroupPagingComponent } from './payment-alloc-group/payment-alloc-group-paging/payment-alloc-group-paging.component';
@@ -55,6 +59,8 @@ import { OfficeBankAccountDetailComponent } from './office-bank-account/office-b
 import { OfficeBankAccountPagingComponent } from './office-bank-account/office-bank-account-paging/office-bank-account-paging.component';
 import { GeneralSettingAdminComponent } from './general-setting-admin/general-setting-admin.component';
 import { GeneralSettingAdminDetailComponent } from './general-setting-admin/general-setting-admin-detail/general-setting-admin-detail.component';
+import { IndustryTypeCategoryDetailComponent } from './industry-type-category/industry-type-category-detail/industry-type-category-detail.component';
+import { IndustryTypeCategoryPagingComponent } from './industry-type-category/industry-type-category-paging/industry-type-category-paging.component';
 
 const routes: Routes = [
   {
@@ -354,6 +360,34 @@ const routes: Routes = [
           title: 'Reason Paging'
         },
       },
+      {
+        path: 'AppSource/Paging',
+        component: AppSourcePagingComponent,
+        data: {
+          title: 'Application Source Paging'
+        },
+      },
+      {
+        path: 'AppSource/Detail',
+        component: AppSourceAddEditComponent,
+        data: {
+          title: 'Application Source Add Edit'
+        },
+      },
+      {
+        path: 'AppSource/OfficeMember/Paging',
+        component: AppSourceOfficeMemberPagingComponent,
+        data: {
+          title: 'Application Source Office Member Paging'
+        },
+      },
+      {
+        path: 'AppSource/OfficeMember/Add',
+        component: AppSourceOfficeMemberAddComponent,
+        data: {
+          title: 'Application Source Office Member Add'
+        },
+      },
       
       // Office Bank Account
       { path: PathConstant.CS_OFFICE_BANK_ACCOUNT_PAGING, component: OfficeBankAccountPagingComponent, data: { title: 'OFFICE BANK ACCOUNT' } },
@@ -436,8 +470,22 @@ const routes: Routes = [
         data: {
           title: 'COA Scheme'
         },
+      },
+
+      {
+        path: PathConstant.CS_INDUSTRY_TYPE_CAT_PAGING,
+        component: IndustryTypeCategoryPagingComponent,
+        data: {
+          title: 'Industry Type Category'
+        },
+      },
+      {
+        path: PathConstant.CS_INDUSTRY_TYPE_CAT_DETAIL,
+        component: IndustryTypeCategoryDetailComponent,
+        data: {
+          title: 'Industry Type Category'
+        },
       }
-      
     ]
   }
 ];

@@ -13,7 +13,7 @@
           (ngSubmit)="enjiForm.form.valid && Save()">
           <lib-ucSubsection [id]="'IndustryTypeInfoId'" [title]="'Industry Type ' + type" [panel]="'IndustryTypeInfo'"></lib-ucSubsection>
           <div id="IndustryTypeInfo">
-            <div class="form-group row">
+            <div *ngIf="!isAuto" class="form-group row">
               <label class="col-md-3 adins-required-label" for="IndustryTypeCode">Industry Type Code</label>
               <div class="col-md-4">
                 <input type="text" class="form-control" formControlName="IndustryTypeCode" 
@@ -31,7 +31,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 adins-required-label" for="RefEconomicSectorId" translate>Economic Sector Code </label>
+              <label class="col-md-3 adins-required-label" for="RefEconomicSectorId" translate>Industry Type Category Code</label>
               <div class="col-md-4">
                 <lib-uclookupgeneric [lookupInput]="inputLookupObj" [parentForm]='RefIndustryTypeForm' [enjiForm]='enjiForm' [identifier]="'EconomicSectorCode'"
                   (lookup)="getLookupResponse($event)"></lib-uclookupgeneric>
@@ -46,7 +46,7 @@
           </div>
           <div class="form-actions right">
             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" skipLocationChange
-                translate>
+            translate>
                 <i class="far fa-window-close"></i> Cancel
               </button>
             <button type="submit" class="btn btn-raised btn-primary">

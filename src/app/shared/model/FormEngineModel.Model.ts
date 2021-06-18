@@ -1,4 +1,4 @@
-import { CriteriaObj } from "./CriteriaObj.Model";
+import { CriteriaObj } from "./CriteriaObj.model";
 
 export class FormEngineModel{
     Module:string;

@@ -13,6 +13,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { GenericListByCodeObj } from 'app/shared/model/Generic/GenericListByCodeObj.model';
 import { ResGeneralSettingObj, ResListGeneralSettingObj } from 'app/shared/model/Response/GeneralSetting/ResGeneralSettingObj.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-asset-document-add-edit',
@@ -77,7 +78,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
     );
 
     let ReqGetListGSByListGsCode: GenericListByCodeObj = new GenericListByCodeObj();
-    ReqGetListGSByListGsCode.Codes = ["IS_SHOW_CBX_BORROW", "IS_SHOW_CBX_PLEDGE"];
+    ReqGetListGSByListGsCode.Codes = [CommonConstant.GSCodeIsShowCbxBorrow, CommonConstant.GSCodeIsShowCbxPledge];
     this.http.post<ResListGeneralSettingObj>(URLConstant.GetListGeneralSettingByListGsCode, ReqGetListGSByListGsCode).subscribe(
       (response) => {
         let tempResponse: Array<ResGeneralSettingObj> = response.ResGetListGeneralSettingObj;

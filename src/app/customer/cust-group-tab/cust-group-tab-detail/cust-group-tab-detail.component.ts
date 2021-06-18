@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment'; 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -65,13 +65,22 @@ export class CustGroupTabDetailComponent implements OnInit {
         criteriaList = new Array();
         criteriaObj = new CriteriaObj();
         criteriaObj.restriction = AdInsConstant.RestrictionNotIn;
-        criteriaObj.propName = 'A.CUST_ID';
+        criteriaObj.propName = 'C.CUST_ID';
         criteriaObj.listValue = this.ListCustIdToExclude;
         criteriaList.push(criteriaObj);
         this.inputLookupCustPersonalObj.addCritInput = criteriaList;
         this.inputLookupCustPersonalObj.isRequired = true;
       }
 
+      // criteriaList = new Array();
+      // criteriaObj = new CriteriaObj();
+      // criteriaObj.restriction = AdInsConstant.RestrictionEq;
+      // criteriaObj.propName = 'A.MR_CUST_TYPE_CODE';
+      // criteriaObj.value = "PERSONAL";
+      // criteriaList.push(criteriaObj);
+      // this.inputLookupCustPersonalObj.addCritInput = criteriaList;
+      
+      // this.inputLookupCustPersonalObj.isRequired = false;
       refMasterRelationship.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustPersonalRelationship;
     }
     else if(this.MrCustTypeCode == CommonConstant.CustTypeCompany){
@@ -79,12 +88,11 @@ export class CustGroupTabDetailComponent implements OnInit {
       this.inputLookupCustCompanyObj.urlJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
       this.inputLookupCustCompanyObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
       this.inputLookupCustCompanyObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
-
       if(this.ListCustIdToExclude && this.ListCustIdToExclude.length > 0){
         criteriaList = new Array();
         criteriaObj = new CriteriaObj();
         criteriaObj.restriction = AdInsConstant.RestrictionNotIn;
-        criteriaObj.propName = 'A.CUST_ID';
+        criteriaObj.propName = 'C.CUST_ID';
         criteriaObj.listValue = this.ListCustIdToExclude;
         criteriaList.push(criteriaObj);
         this.inputLookupCustCompanyObj.addCritInput = criteriaList;

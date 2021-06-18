@@ -40,7 +40,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     notifications: object[] = [];
 
     readonly ChangeLink: string = NavigationConstant.PAGES_CHANGE_PASSWORD;
-    constructor(public translate: TranslateService, 
+    constructor(public translate: TranslateService,
         private router: Router, private cookieService: CookieService,
         private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService) {
         const browserLang: string = translate.getBrowserLang();

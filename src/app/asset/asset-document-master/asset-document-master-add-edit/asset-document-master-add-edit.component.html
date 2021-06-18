@@ -15,7 +15,7 @@
             <lib-ucSubsection [id]="'AssetDocMasterInfoId'" [title]="'Asset Document Master Information '+ pageType"
               [panel]="'AssetDocMasterInfo'"></lib-ucSubsection>
             <div id="AssetDocMasterInfo">
-              <div class="form-group row adins-required">
+              <div *ngIf="!isAuto" class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" translate>Asset Document Code </label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="AssetDocCode"

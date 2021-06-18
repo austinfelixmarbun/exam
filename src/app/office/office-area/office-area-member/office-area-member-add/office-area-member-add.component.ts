@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';

@@ -27,4 +27,14 @@ export class ExceptionConstant {
     public static JOURNAL_ALREADY_EXECUTED = "Journal No {0} already executed";
     public static SELECT_ONE_JOURNAL = "Select at least 1 Journal to Rerun";
     public static RERUN_JOURNAL_FAILED = "Failed Rerun Journal";
+
+    public static PLEASE_INPUT_FIN_DATA = "Please input at least 1 Financial Data";
+
+    public static CALC_FIRST = "Please Click Calculate";
+
+    public static ERROR_NO_CALLBACK_SETTING = "System Error - No Callback Handler for {0} Callback Trigger";
+    public static NOT_ELIGIBLE_FOR_TAKE_BACK = "You are not Eligible to Take Back this Task";
+    public static NOT_ELIGIBLE_FOR_HOLD = "You are not Eligible to Hold this Task";
+    public static NOT_ELIGIBLE_FOR_PROCESS_TASK = "You are not Eligible to Process this Task";
+
 }

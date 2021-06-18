@@ -22,10 +22,10 @@ export class UpdateCustomerFamilyComponent implements OnInit {
   ReqCustDataTrxIdObj: GenericObj = new GenericObj();
 
   constructor(
-    private http: HttpClient, 
-    private toastr: NGXToastrService, 
+    private http: HttpClient,
+    private toastr: NGXToastrService,
     private router: Router
-  ) { 
+  ) {
     this.ResponseTab = new EventEmitter<any>();
     this.ListAppFamily = new Array<UpdateCustFamilyObj>();
     this.ListCustFamily = new Array<UpdateCustFamilyObj>();
@@ -40,7 +40,7 @@ export class UpdateCustomerFamilyComponent implements OnInit {
         for (const item of this.ListAppFamily) {
           var isExist = false;
           for (const family of this.ListCustFamily) {
-            if(item["CustName"] == family["CustName"]){
+            if (item["CustName"] == family["CustName"]) {
               isExist = true;
               break;
             }
@@ -60,27 +60,27 @@ export class UpdateCustomerFamilyComponent implements OnInit {
     )
   }
 
-  addFamilyHandler(idx){
+  addFamilyHandler(idx) {
     this.ListCustFamily.push(this.ListAppFamily[idx]);
     this.ListAppFamily.splice(idx, 1);
     // this.ListCustFamily.sort((a, b) => (a["CustName"] > b["CustName"]) ? 1 : -1);
   }
 
-  cancelFamilyHandler(idx){
+  cancelFamilyHandler(idx) {
     this.ListAppFamily.push(this.ListCustFamily[idx]);
     this.ListCustFamily.splice(idx, 1);
     // this.ListAppFamily.sort((a, b) => (a["CustName"] > b["CustName"]) ? 1 : -1);
   }
 
-  back(){
+  back() {
     // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
     AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
   }
 
-  SaveValue(){
+  SaveValue() {
     var request = new Array<Object>();
     for (const item of this.ListCustFamily) {
-      if(!item["IsMasterData"]){
+      if (!item["IsMasterData"]) {
         request.push(item);
       }
     }

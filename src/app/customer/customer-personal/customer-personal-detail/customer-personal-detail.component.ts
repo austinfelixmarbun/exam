@@ -5,6 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
+import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -29,10 +30,10 @@ export class CustomerPersonalDetailComponent implements OnInit {
   criteriaObj: CriteriaObj;
   lookUpObj: InputLookupObj;
   criteriaList: Array<CriteriaObj>;
-  
+
   custObj: CustObj;
   custPersonalObj: CustPersonalObj;
-  
+
   Country: any;
   tempCustObj: any;
   tempCountry: any;
@@ -65,7 +66,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
     Email1: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
     Email2: ['', Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]
-  }); 
+  });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
@@ -102,7 +103,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
         var countryCode = {
           CountryCode: this.Country.GsValue
         };
-        this.http.post(URLConstant.GetRefCountryByCountryCode, {Code: this.Country.GsValue}).subscribe(
+        this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: this.Country.GsValue }).subscribe(
           (response) => {
             this.LocalCountry = response;
           });
@@ -112,19 +113,19 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custObj = new CustObj()
     this.custObj.CustId = this.IdCust;
 
-    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         this.tempCustObj = response;
       });
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj.CustId = this.IdCust;
-    this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).subscribe(
+    this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         this.tempCustPersonalObj = response;
         var refMasterObjMrNationalityCode = {
           RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality
         }
-        this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, {Code : CommonConstant.RefMasterTypeCodeNationality}).subscribe(
+        this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, { Code: CommonConstant.RefMasterTypeCodeNationality }).subscribe(
           (response) => {
             this.tempNationality = response["RefMasterObjs"];
 
@@ -139,7 +140,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
                 var countryCode = {
                   CountryCode: this.tempCustPersonalObj.WnaCountryCode
                 };
-                this.http.post(URLConstant.GetRefCountryByCountryCode, {Code: this.tempCustPersonalObj.WnaCountryCode}).subscribe(
+                this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: this.tempCustPersonalObj.WnaCountryCode }).subscribe(
                   (response) => {
                     this.tempCountry = response;
                     this.lookUpObj.nameSelect = this.tempCountry.CountryName;
@@ -247,7 +248,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
         });
       });
   }
- async SaveValue() {  
+  async SaveValue() {
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj = this.tempCustPersonalObj;
     this.custPersonalObj.CustFullName = this.tempCustObj.CustName;
@@ -265,11 +266,14 @@ export class CustomerPersonalDetailComponent implements OnInit {
     if (this.custPersonalObj.MrNationalityCode == CommonConstant.NationalityCodeLocal) {
       this.custPersonalObj.WnaCountryCode = CommonConstant.WnaCountryCodeIdn;
     }
-    if (this.tempCustPersonalObj.WnaCountryCode != null && this.tempCountryCode == null) {
-      this.custPersonalObj.WnaCountryCode = this.tempCustPersonalObj.WnaCountryCode;
-    } else {
-      this.custPersonalObj.WnaCountryCode = this.tempCountryCode;
+    else {
+      if (this.tempCustPersonalObj.WnaCountryCode != null && this.tempCountryCode == null) {
+        this.custPersonalObj.WnaCountryCode = this.tempCustPersonalObj.WnaCountryCode;
+      } else {
+        this.custPersonalObj.WnaCountryCode = this.tempCountryCode;
+      }
     }
+
     this.custPersonalObj.FamilyCardNo = this.CustomerDetailForm.controls["FamilyCardNo"].value;
     this.custPersonalObj.MrEducationCode = this.CustomerDetailForm.controls["MrEducationCode"].value;
     this.custPersonalObj.MrReligionCode = this.CustomerDetailForm.controls["MrReligionCode"].value;
@@ -295,7 +299,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
       var foreign = this.tempNationality.find(x => x["MasterCode"] == event.target.value);
       var setCountry = foreign.DefaultValue.split(';');
       this.lookUpObj.nameSelect = setCountry[1] ? setCountry[1] : setCountry[0];
-      this.lookUpObj.jsonSelect =  { CountryName: setCountry[1] ? setCountry[1] : setCountry[0]};
+      this.lookUpObj.jsonSelect = { CountryName: setCountry[1] ? setCountry[1] : setCountry[0] };
       this.tempCountryCode = setCountry[0];
       this.lookUpObj.isRequired = true;
     }
@@ -305,9 +309,9 @@ export class CustomerPersonalDetailComponent implements OnInit {
   }
   back() {
     if (this.Page != null) {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING],{});
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
     } else {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
     }
   }
 }

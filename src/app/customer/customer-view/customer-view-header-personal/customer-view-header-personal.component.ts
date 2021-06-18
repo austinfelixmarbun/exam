@@ -12,3 +12,5 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewCustPersonalHeader.json";
   }
 }
+
+

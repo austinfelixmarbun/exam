@@ -1,7 +1,9 @@
 export class GenericObj{
     Id: number;
     Code: string;
+    Codes: string[];
     TrxNo: string;
+    EmpNo: string;
     CustNo: string;
     RowVersion: string;
 
@@ -10,6 +12,8 @@ export class GenericObj{
         this.Code = "";
         this.TrxNo = "";
         this.RowVersion = "";
+        this.Codes = new Array();
+        this.EmpNo = "";
         this.CustNo = "";
     }
 }
