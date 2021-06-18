@@ -943,4 +943,7 @@ export class URLConstant {
     public static RerunJournal = "/Journal/RerunJournal";
     public static DownloadJournalFile = environment.FoundationR3Url +"/Journal/DownloadJournalFile";
     public static GetJrSourceFileByJrSourceFileId = environment.FoundationR3Url + "/Journal/GetJrSourceFileByJrSourceFileId";
+
+    // LICENSE
+    public static UploadLicense = environment.FoundationR3Url + "/License/UploadLicense";
 }

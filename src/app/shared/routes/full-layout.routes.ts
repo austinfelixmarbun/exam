@@ -95,5 +95,9 @@ export const Full_ROUTES: Routes = [
   {
     path: PathConstant.LR_FEE,
     loadChildren: './fee/fee.module#FeeModule'
+  },
+  {
+    path: PathConstant.LR_LICENSE,
+    loadChildren: './license/license.module#LicenseModule'
   }
 ];

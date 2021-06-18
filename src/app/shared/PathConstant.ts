@@ -27,6 +27,7 @@ export class PathConstant {
     public static LR_DOC_MNGMNT = "DocumentManagement";
     public static LR_JOURNAL = "journal"
     public static LR_FEE = "Fee";
+    public static LR_LICENSE = "License";
     //#endregion
 
     //#region content-routes
@@ -476,4 +477,9 @@ export class PathConstant {
     public static UPLOAD_JOURNAL_FILE_DETAIL = PathConstant.UPLOAD_JOURNAL + "/" + PathConstant.DETAIL
 
     //#endregion
+
+    //#region License
+    public static LICENSE_MASTER = "License";
+    public static UPLOAD_LICENSE = PathConstant.LICENSE_MASTER + "/" + PathConstant.UPLOAD;
+    //#endRegion
 }

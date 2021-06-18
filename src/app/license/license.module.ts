@@ -1,0 +1,25 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { LicenseRoutingModule } from './license-routing.module';
+import { LicenseComponent } from './license.component';
+import { AdInsModule } from 'app/components/adins-module/adins.module';
+import { UcSubsectionModule } from '@adins/uc-subsection';
+import { UploadLicenseComponent } from './upload-license/upload-license.component';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { UcShowErrorsModule } from '@adins/uc-show-errors';
+
+@NgModule({
+  declarations: [LicenseComponent, UploadLicenseComponent],
+  imports: [
+    CommonModule,
+    LicenseRoutingModule,
+    AdInsModule,
+    UcSubsectionModule,
+    UcShowErrorsModule
+  ],
+  providers: [
+    NGXToastrService
+  ]
+})
+export class LicenseModule { }

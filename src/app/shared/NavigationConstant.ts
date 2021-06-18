@@ -316,5 +316,8 @@ export class NavigationConstant {
     public static UPLOAD_JOURNAL_FILE_DETAIL = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.UPLOAD_JOURNAL_FILE_DETAIL;
     //#endregion
 
-    
+    //#region License
+    public static LICENSE_PAGING = "/" + PathConstant.LR_LICENSE + "/" + PathConstant.PAGING;
+    public static UPLOAD_LICENSE = "/"+ PathConstant.LR_LICENSE + "/" + PathConstant.UPLOAD_LICENSE;
+    //#endregion
 }
