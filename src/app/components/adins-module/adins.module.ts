@@ -12,13 +12,10 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { UclookupgenericModule } from '@adins/uclookupgeneric';
 import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
-import { UcapprovalModule } from '@adins/ucapproval';
 import { UcgridviewModule } from '@adins/ucgridview';
-import { UcapprovebyModule } from '@adins/ucapproveby';
 import { UcaddressModule } from '@adins/ucaddress';
 import { MatCheckboxModule } from '@angular/material';
 import { UcuploadModule } from '@adins/ucupload';
-import { UcapprovalhistModule } from '@adins/ucapprovalhist';
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
 
@@ -34,16 +31,12 @@ import { UcaddtotempModule } from '@adins/ucaddtotemp';
         UclookupgenericModule,
         UcviewgenericModule,
         UcShowErrorsModule,
-        UcapprovalModule,
         UcaddressModule,
         UcgridviewModule,
-        UcapprovebyModule,
         MatCheckboxModule,
         UcuploadModule,
-        UcapprovalhistModule,
         UcdropdownlistModule,
         UcaddtotempModule
-        //UcapprovalModule
     ],
     imports: [
         CommonModule,
@@ -59,11 +52,8 @@ import { UcaddtotempModule } from '@adins/ucaddtotemp';
         UclookupgenericModule,
         UcviewgenericModule,
         UcShowErrorsModule,
-        UcapprovalModule,
         UcaddressModule,
-        UcapprovalhistModule,
         UcgridviewModule,
-        UcapprovebyModule,
         MatCheckboxModule,
         UcuploadModule,
         UcdropdownlistModule,

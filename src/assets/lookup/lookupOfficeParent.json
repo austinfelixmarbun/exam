@@ -24,7 +24,8 @@
             "criteriaPropName": "RefMasterTypeCode",
             "criteriaPropValue": "OFFICE_TYPE",
             "items": [],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "environment": "FOU"
         },
         {
             "type": "textbox",

@@ -80,7 +80,7 @@
               </div>
             </div>
 
-            <lib-ucapprovalcreate [InputObj]="InputObj" *ngIf="IsReady" #ApprovalComponent></lib-ucapprovalcreate>
+            <lib-ucapprovalcreate [InputObj]="InputObj" [parentForm]="VendorForm" *ngIf="IsReady" #ApprovalComponent></lib-ucapprovalcreate>
 
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1"

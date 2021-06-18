@@ -9,7 +9,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
@@ -21,6 +21,8 @@ import { environment } from 'environments/environment';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 // import { CustThirdPartyCheckingObj } from 'app/shared/model/CustThirdPartyCheckingObj.Model';
@@ -40,7 +42,8 @@ export class EditMainDataPersonalComponent implements OnInit {
     IdNo: ['', [Validators.required]],
     TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     IdExpiredDt: [''],
-    CustModel: ['', [Validators.required]],
+    MrMaritalStatCode: [''],
+    MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     IsVip: [true],
     IsAffiliateWithMf: [true],
     VipNotes: [''],
@@ -48,8 +51,6 @@ export class EditMainDataPersonalComponent implements OnInit {
     Gender: ['', [Validators.required]],
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', [Validators.required]],
-    MrMaritalStatCode: [''],
-    MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]]
   });
   KTP = RefMasterConstant.EKtp;
   tempKTPCheck: any;
@@ -130,10 +131,10 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.inputAddressObj.default = UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
-
-    var refMasterObjGender = {
+  
+    var refMasterObjGender: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
-      RowVersion: ""
+      MappingCode: null
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjGender).subscribe(
       (response) => {
@@ -145,9 +146,9 @@ export class EditMainDataPersonalComponent implements OnInit {
         }
       }
     );
-    var refMasterObjMrIdTypeCode = {
+    var refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
-      RowVersion: ""
+      MappingCode: null
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
@@ -165,18 +166,6 @@ export class EditMainDataPersonalComponent implements OnInit {
         }
       }
     );
-    let refMasterObjCustModel = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
-      MappingCode: CommonConstant.CustTypePersonal
-    }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObjCustModel).subscribe(
-      (response) => {
-        this.tempCustModel = response["ReturnObject"];
-        this.CustomerPersonalForm.patchValue({
-          CustModel: this.tempCustModel[0].Key
-        });
-      }
-    );
     this.custPersonalObj = new CustPersonalObj();
     this.custObj.CustId = this.CustId;
     this.custPersonalObj.CustId = this.CustId;
@@ -187,7 +176,6 @@ export class EditMainDataPersonalComponent implements OnInit {
         this.CustomerPersonalForm.patchValue({
           CustName: this.tempCustObj.CustName,
           MrCustTypeCode: this.tempCustObj.MrCustTypeCode,
-          CustModel: this.tempCustObj.MrCustModelCode,
           MrIdTypeCode: this.tempCustObj.MrIdTypeCode,
           IdNo: this.tempCustObj.IdNo,
           IdExpiredDt: datePipe.transform(this.tempCustObj.IdExpiredDt, 'yyyy-MM-dd'),
@@ -233,7 +221,7 @@ export class EditMainDataPersonalComponent implements OnInit {
             this.inputAddressObj.default = this.UcAddressObj;
             this.inputAddressObj.inputField = this.inputFieldObj;
             this.custObj.CustAddr.CustAddrId = response.CustAddrId;
-            this.custObj.CustAddr.RowVersion = response.RowVersion;
+            this.custObj.CustAddr.RowVersion = response.RowVersion != null ? response.RowVersion : "";
           }
         );
       }
@@ -251,7 +239,9 @@ export class EditMainDataPersonalComponent implements OnInit {
         });
       }
     );
-    await this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat }).toPromise().then(
+
+    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat, MappingCode: null };
+    await this.http.post(URLConstant.GetListActiveRefMaster, tempReq).toPromise().then(
       (response) => {
         this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
         if (this.tempCustPersonalObj.MrMaritalStatCode != null) {
@@ -317,7 +307,6 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj = this.tempCustPersonalObj;
     this.custObj.CustName = this.CustomerPersonalForm.controls["CustName"].value;
-    this.custObj.MrCustModelCode = this.CustomerPersonalForm.controls["CustModel"].value;
     this.custObj.MrIdTypeCode = this.CustomerPersonalForm.controls["MrIdTypeCode"].value;
     this.custObj.IdNo = this.CustomerPersonalForm.controls["IdNo"].value;
     this.custObj.IdExpiredDt = this.CustomerPersonalForm.controls["IdExpiredDt"].value;;

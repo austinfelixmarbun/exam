@@ -6,15 +6,18 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AssetMasterObj } from 'app/shared/model/AssetMasterObj.Model';
 import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
-import { ListRequestCriteriaObj } from 'app/shared/model/ListRequestCriteriaObj.model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { AssetSchmListObj } from 'app/shared/model/AssetSchmListObj.Model';
+import { ListRequestCriteriaObj } from 'app/shared/model/ListRequestCriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { AssetSchmListObj, ReqGetListAssetSchmHObj } from 'app/shared/model/AssetSchmListObj.Model';
 import { ListAssetSchmDObj } from 'app/shared/model/ListAssetSchmDObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { map, mergeMap, first } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { ListAssetSchemeHObj, ResGetListAssetSchemeHObj } from 'app/shared/model/Response/AssetMaster/ResGetListAssetSchemeHObj.model';
 ;
 
 @Component({
@@ -31,11 +34,12 @@ export class AssetMasterAddEditParentComponent implements OnInit {
   resultData: AssetMasterObj;
   allAssetMasterMethod: any;
   listRequest: ListRequestCriteriaObj;
-  resultAssetCategory: any;
+  resultAssetCategory: Array<KeyValueObj>;;
   assetSchmListDObj: AssetSchmListObj;
+  reqGetListAssetSchmHObj: ReqGetListAssetSchmHObj = new ReqGetListAssetSchmHObj()
   listAssetSchmDObj: ListAssetSchmDObj;
   listSelectedId: Array<number> = new Array<number>();
-  listAssetScheme: Array<AssetSchmListObj> = new Array<AssetSchmListObj>();
+  listAssetScheme: Array<ListAssetSchemeHObj> = new Array<ListAssetSchemeHObj>();
   checkboxAll: boolean = false;
   isFinal: boolean;
   AssetMasterParentForm = this.fb.group({
@@ -92,7 +96,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         this.listRequest = new ListRequestCriteriaObj();
         this.listRequest.criteria = new Array();
         this.listRequest.criteria.push(critObj);
-        this.http.post(URLConstant.GetListAssetCategory, this.listRequest).subscribe(
+        this.http.post<GenericKeyValueListObj>(URLConstant.GetListAssetCategory, this.listRequest).subscribe(
           (response) => {
             this.resultAssetCategory = response[CommonConstant.ReturnObj];
             if (this.resultAssetCategory.length == 0) {
@@ -102,10 +106,10 @@ export class AssetMasterAddEditParentComponent implements OnInit {
             }
           });
 
-        this.assetSchmListDObj = new AssetSchmListObj();
-        this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
-        this.assetSchmListDObj.AssetTypeId = this.AssetMasterParentForm.controls['AssetTypeId'].value;
-        this.http.post(URLConstant.GetListAssetSchmH, this.assetSchmListDObj).subscribe(
+        this.reqGetListAssetSchmHObj = new ReqGetListAssetSchmHObj();
+        this.reqGetListAssetSchmHObj.AssetMasterId = this.AssetMasterId;
+        this.reqGetListAssetSchmHObj.AssetTypeId = this.AssetMasterParentForm.controls['AssetTypeId'].value;
+        this.http.post<ResGetListAssetSchemeHObj>(URLConstant.GetListAssetSchmH, this.reqGetListAssetSchmHObj).subscribe(
           (response) => {
             this.listAssetScheme = response[CommonConstant.ReturnObj];
             for (let i = 0; i < this.listAssetScheme.length; i++) {
@@ -173,7 +177,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
               this.listRequest = new ListRequestCriteriaObj();
               this.listRequest.criteria = new Array();
               this.listRequest.criteria.push(critObj);
-              this.http.post(URLConstant.GetListAssetCategory, this.listRequest).subscribe(
+              this.http.post<GenericKeyValueListObj>(URLConstant.GetListAssetCategory, this.listRequest).subscribe(
                 (response) => {
                   this.resultAssetCategory = response[CommonConstant.ReturnObj];
                   if (this.resultAssetCategory.length == 0) {
@@ -184,10 +188,10 @@ export class AssetMasterAddEditParentComponent implements OnInit {
                 });
             });
 
-          this.assetSchmListDObj = new AssetSchmListObj();
-          this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
-          this.assetSchmListDObj.AssetTypeId = this.resultData.AssetTypeId;
-          this.http.post(URLConstant.GetListAssetSchmH, this.assetSchmListDObj).subscribe(
+          this.reqGetListAssetSchmHObj = new ReqGetListAssetSchmHObj();
+          this.reqGetListAssetSchmHObj.AssetMasterId = this.AssetMasterId;
+          this.reqGetListAssetSchmHObj.AssetTypeId = this.resultData.AssetTypeId;
+          this.http.post<ResGetListAssetSchemeHObj>(URLConstant.GetListAssetSchmH, this.reqGetListAssetSchmHObj).subscribe(
             (response) => {
               this.listAssetScheme = response[CommonConstant.ReturnObj];
               for (let i = 0; i < this.listAssetScheme.length; i++) {
@@ -199,10 +203,10 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         }
       );
     }else{ 
-          this.assetSchmListDObj = new AssetSchmListObj();
-          this.assetSchmListDObj.AssetMasterId = this.AssetMasterId;
-          this.assetSchmListDObj.AssetTypeId = this.allAssetMasterMethod[0]['Key'];
-          this.http.post(URLConstant.GetListAssetSchmH, this.assetSchmListDObj).subscribe(
+          this.reqGetListAssetSchmHObj = new ReqGetListAssetSchmHObj();
+          this.reqGetListAssetSchmHObj.AssetMasterId = this.AssetMasterId;
+          this.reqGetListAssetSchmHObj.AssetTypeId = this.allAssetMasterMethod[0]['Key'];
+          this.http.post<ResGetListAssetSchemeHObj>(URLConstant.GetListAssetSchmH, this.reqGetListAssetSchmHObj).subscribe(
             (response) => {
               this.listAssetScheme = response[CommonConstant.ReturnObj];
               for (let i = 0; i < this.listAssetScheme.length; i++) {

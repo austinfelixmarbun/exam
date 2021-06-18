@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild  } from '@ang
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { CustPersonalFinDataObj } from 'app/shared/model/CustPersonalFinDataObj.Model';
 import { CustCompanyFinDataObj } from 'app/shared/model/CustCompanyFinDataObj.Model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
@@ -15,6 +14,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-cust-fin-data-tab',
@@ -30,12 +30,18 @@ export class CustFinDataTabComponent implements OnInit {
   @ViewChild('ModalCoyFinData') ModalCoyFinData;
 
   sourceOfIncomeList: any;
-  isCalculated: boolean;
+  isCalculated: boolean = true;
   spouseMonthlyIncomeAmt: number;
   mrMaritalStatCode: string;
   maritalConstant: string = CommonConstant.MR_MARITAL_STAT_CODE_MARRIED;
   Page: string;
   attrGroup: string;
+  attrGroups: Array<string> = new Array<string>();
+  IncomeList: Array<{Index: number, Amount: number}> = new Array<{Index: number, Amount: number}>();
+  TotalIncomeListAmt: number = 0;
+  ExpenseList: Array<{Index: number, Amount: number}> = new Array<{Index: number, Amount: number}>();
+  TotalExpenseListAmt: number = 0;
+
   CustPersonalFinDataForm = this.fb.group({
     CustPersonalFinDataId: [0, [Validators.required]],
     CustPersonalId: [0, [Validators.required]],
@@ -143,8 +149,8 @@ export class CustFinDataTabComponent implements OnInit {
         mergeMap((response: CustPersonalObj) => {
           var custPersonalFinData = new CustPersonalFinDataObj();
           custPersonalFinData.CustPersonalId = response.CustPersonalId;
-          let custFinData = this.httpClient.post(URLConstant.GetCustPersonalFinDataByCustPersonalId, { Id: response.CustPersonalId });
-          var refMasterSourceIncome = new RefMasterObj();
+          let custFinData = this.httpClient.post(URLConstant.GetCustPersonalFinDataByCustPersonalId, {Id : response.CustPersonalId});
+          let refMasterSourceIncome: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
           refMasterSourceIncome.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeSourceIncome;
           let sourceIncomeList = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterSourceIncome);
           return forkJoin([custFinData, sourceIncomeList]);
@@ -172,9 +178,7 @@ export class CustFinDataTabComponent implements OnInit {
           this.sourceOfIncomeList = sourceIncome;
         }
       );
-
       // this.bindFinancialAttribute();
-
     }
     else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
       await this.getListCustCoyFinData();
@@ -193,7 +197,7 @@ export class CustFinDataTabComponent implements OnInit {
         })
       ).subscribe(
         (response: any) => {
-          this.isCalculated = true;
+          // this.isCalculated = true;
           this.CustCompanyFinDataForm.patchValue({
             CustCompanyFinDataId: response.CustCompanyFinDataId,
             CustCompanyId: custCompanyData.CustCompanyId,
@@ -225,9 +229,7 @@ export class CustFinDataTabComponent implements OnInit {
           });
         }
       );
-
       //  this.bindFinancialAttribute();
-
     }
   }
 
@@ -404,21 +406,47 @@ export class CustFinDataTabComponent implements OnInit {
       var otherMonthlyInstAmt = formData.OtherMonthlyInstAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.OtherMonthlyInstAmt.toString()));
       var totalAmt = 0;
 
-      if (formData.IsJoinIncome) {
-        totalAmt = monthlyIncomeAmt + spouseMonthlyIncomeAmt + totalIncomeAmt + nettIncomeAmt + nettProfitMonthlyAmt + otherIncomeAmt;
-      }
-      else {
-        totalAmt = monthlyIncomeAmt + totalIncomeAmt + nettIncomeAmt + nettProfitMonthlyAmt + otherIncomeAmt;
-      }
-      var netIncomeAmt = totalAmt - (monthlyExpenseAmt + monthlyInstallmentAmt + otherMonthlyInstAmt);
+  //     if (formData.IsJoinIncome) {
+  //       totalAmt = monthlyIncomeAmt + spouseMonthlyIncomeAmt + totalIncomeAmt + nettIncomeAmt + nettProfitMonthlyAmt + otherIncomeAmt;
+  //     }
+  //     else {
+  //       totalAmt = monthlyIncomeAmt + totalIncomeAmt + nettIncomeAmt + nettProfitMonthlyAmt + otherIncomeAmt;
+  //     }
+  //     var netIncomeAmt = totalAmt - (monthlyExpenseAmt + monthlyInstallmentAmt + otherMonthlyInstAmt);
 
-      this.CustPersonalFinDataForm.patchValue({
-        TotalIncomeAmt: this.currencyFormatter(totalAmt.toString()),
-        NettIncomeAmt: this.currencyFormatter(netIncomeAmt.toString())
-      });
-      this.isCalculated = true;
-      this.spouseMonthlyIncomeAmt = this.CustPersonalFinDataForm.controls["SpouseMonthlyIncomeAmt"].value;
+  //     this.CustPersonalFinDataForm.patchValue({
+  //       TotalIncomeAmt: this.currencyFormatter(totalAmt.toString()),
+  //       NettIncomeAmt: this.currencyFormatter(netIncomeAmt.toString())
+  //     });
+  //     this.isCalculated = true;
+  //     this.spouseMonthlyIncomeAmt = this.CustPersonalFinDataForm.controls["SpouseMonthlyIncomeAmt"].value;
+  }
+  }
+    
+  calculateFinData() {
+    var formData = this.CustPersonalFinDataForm.value;
+    var monthlyIncomeAmt = formData.MonthlyIncomeAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.MonthlyIncomeAmt.toString()));
+    var spouseMonthlyIncomeAmt = formData.SpouseMonthlyIncomeAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.SpouseMonthlyIncomeAmt.toString()));
+    var otherIncomeAmt = formData.OtherIncomeAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.OtherIncomeAmt.toString()));
+    var monthlyExpenseAmt = formData.MonthlyExpenseAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.MonthlyExpenseAmt.toString()));
+    var monthlyInstallmentAmt = formData.MonthlyInstallmentAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.MonthlyInstallmentAmt.toString()));
+    var otherMonthlyInstAmt = formData.OtherMonthlyInstAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.OtherMonthlyInstAmt.toString()));
+    var totalIncomeAmt = formData.TotalIncomeAmt;
+    var nettIncomeAmt = formData.NettIncomeAmt;
+
+    if (formData.IsJoinIncome) {
+      totalIncomeAmt = monthlyIncomeAmt + spouseMonthlyIncomeAmt + otherIncomeAmt + this.TotalIncomeListAmt;
     }
+    else {
+      totalIncomeAmt = monthlyIncomeAmt + otherIncomeAmt + this.TotalIncomeListAmt;
+    }
+
+    nettIncomeAmt = totalIncomeAmt - (monthlyExpenseAmt + monthlyInstallmentAmt + otherMonthlyInstAmt + this.TotalExpenseListAmt);
+
+    this.CustPersonalFinDataForm.patchValue({
+      TotalIncomeAmt: this.currencyFormatter(totalIncomeAmt.toString()),
+      NettIncomeAmt: this.currencyFormatter(nettIncomeAmt.toString())
+    });
   }
 
   currencyFormatter(value: string) {

@@ -13,6 +13,7 @@
             "name": "LinkLifeHO",
             "target": "_blank",
             "path": "VIEW_VENDOR_HO",
+            "environment": "FOU_WEB",
             "param": [
               {
                 "type": "VendorId",

@@ -177,16 +177,16 @@ export class JobDataProfessionalComponent implements OnInit {
               this.tempProfession = this.returnRefProfessionObj.RefProfessionId;
             });
 
-          this.refIndustryTypeObj = new RefIndustryTypeObj();
-          this.refIndustryTypeObj.RefIndustryTypeId = this.returnCustJobDataObj.RefIndustryTypeId;
-          this.http.post(URLConstant.GetRefIndustryTypeById, { Id: this.returnCustJobDataObj.RefIndustryTypeId }).subscribe(
-            (response) => {
-              this.returnIndustryTypeObj = response;
+          if (this.returnCustJobDataObj.RefIndustryTypeId != null) {
+            this.http.post(URLConstant.GetRefIndustryTypeById, { Id: this.returnCustJobDataObj.RefIndustryTypeId }).subscribe(
+              (response) => {
+                this.returnIndustryTypeObj = response;
 
-              this.industryLookUpObj.nameSelect = this.returnIndustryTypeObj.IndustryTypeName;
-              this.industryLookUpObj.jsonSelect = this.returnIndustryTypeObj;
-              this.tempRefIndustryType = this.returnIndustryTypeObj.RefIndustryTypeId;
-            });
+                this.industryLookUpObj.nameSelect = this.returnIndustryTypeObj.IndustryTypeName;
+                this.industryLookUpObj.jsonSelect = this.returnIndustryTypeObj;
+                this.tempRefIndustryType = this.returnIndustryTypeObj.RefIndustryTypeId;
+              });
+          }
 
 
           if (this.returnCustJobDataObj.JobAddrId != null) {
@@ -269,7 +269,6 @@ export class JobDataProfessionalComponent implements OnInit {
 
               });
           }
-          console.log("ameng");
           if (this.returnCustJobDataObj.OthBizAddrId != null) {
             this.custOthBizAddrObj = new CustAddrObj();
             this.custOthBizAddrObj.CustAddrId = this.returnCustJobDataObj.OthBizAddrId;
@@ -309,6 +308,15 @@ export class JobDataProfessionalComponent implements OnInit {
                 this.inputOthBizAddressObj.default = this.otherAddrObj;
                 this.inputOthBizAddressObj.inputField = this.inputOtherAddressObj;
               });
+          }
+          if(this.returnCustJobDataObj.JobAddrId !=0 && this.returnCustJobDataObj.JobAddrId != null){
+            this.jobAddrId = this.returnCustJobDataObj.JobAddrId;
+          }
+          if(this.returnCustJobDataObj.OthBizAddrId !=0 && this.returnCustJobDataObj.OthBizAddrId != null){
+            this.othBizAddrId = this.returnCustJobDataObj.OthBizAddrId;
+          }
+          if(this.returnCustJobDataObj.PrevJobAddrId !=0 && this.returnCustJobDataObj.PrevJobAddrId != null){
+            this.preJobAddrId = this.returnCustJobDataObj.PrevJobAddrId;
           }
 
           this.preJobAddrId = this.returnCustJobDataObj.PrevJobAddrId;
@@ -378,7 +386,7 @@ export class JobDataProfessionalComponent implements OnInit {
     this.preJobAddressObj.CustId = this.IdCust;
     this.preJobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypePreJob;
     this.preJobAddressObj.Addr = this.JobDataProForm.controls["prejobAddress"]["controls"].Addr.value;
-    this.preJobAddressObj.FullAddr = this.JobDataProForm.controls["prejobAddress"]["controls"].Addr.value + " RT: " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode3.value + " " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataProForm.controls["jobAddress"]["controls"].AreaCode1.value + " " + this.JobDataProForm.controls["jobAddressZipcode"]["controls"].value.value;
+    this.preJobAddressObj.FullAddr = this.JobDataProForm.controls["prejobAddress"]["controls"].Addr.value + " RT: " + this.JobDataProForm.controls["prejobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataProForm.controls["prejobAddress"]["controls"].AreaCode3.value + " " + this.JobDataProForm.controls["prejobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataProForm.controls["prejobAddress"]["controls"].AreaCode1.value + " " + this.JobDataProForm.controls["prejobAddressZipcode"]["controls"].value.value;
     this.preJobAddressObj.AreaCode3 = this.JobDataProForm.controls["prejobAddress"]["controls"].AreaCode3.value;
     this.preJobAddressObj.AreaCode4 = this.JobDataProForm.controls["prejobAddress"]["controls"].AreaCode4.value;
     this.preJobAddressObj.Zipcode = this.JobDataProForm.controls["prejobAddressZipcode"]["controls"].value.value;
@@ -431,9 +439,9 @@ export class JobDataProfessionalComponent implements OnInit {
       this.jobAddressObj = new CustAddrObj;
       this.othBizAddrObj = new CustAddrObj;
       this.setCustJobData();
-      this.custPersonalJobDataObj.JobAddrId = this.jobAddrId;
-      this.custPersonalJobDataObj.PrevJobAddrId = this.preJobAddrId;
-      this.custPersonalJobDataObj.OthBizAddrId = this.othBizAddrId;
+      this.custPersonalJobDataObj.JobAddrId = this.jobAddrId == null ? 0 : this.jobAddrId;
+      this.custPersonalJobDataObj.PrevJobAddrId = this.preJobAddrId == null ? 0 : this.preJobAddrId;
+      this.custPersonalJobDataObj.OthBizAddrId = this.othBizAddrId == null ? 0 : this.othBizAddrId;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
       this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;

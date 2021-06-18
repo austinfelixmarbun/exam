@@ -12,7 +12,6 @@ import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneric";
 import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
-import { UcapprovalhistModule, UcapprovalhistComponent } from "@adins/ucapprovalhist";
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewOtherInfoComponent } from "./customer-view-other-info.component";
 import { CustomerViewOtherInfoRoutingModule } from "./customer-view-other-info-routing.module";
@@ -35,7 +34,6 @@ import { SharedModule } from "app/shared/shared.module";
     ReactiveFormsModule,
     UcSubsectionModule,
     SharingComponentModule,
-    UcapprovalhistModule,
     UcShowErrorsModule,
     SharedModule
   ],
@@ -44,8 +42,7 @@ import { SharedModule } from "app/shared/shared.module";
   ],
   entryComponents: [
     UcviewgenericComponent,
-    UcgridviewComponent,
-    UcapprovalhistComponent
+    UcgridviewComponent
   ]
 })
 export class CustomerViewOtherInfoModule { }

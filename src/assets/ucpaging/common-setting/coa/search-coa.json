@@ -3,20 +3,29 @@
     "exportExcel": false,
     "component": [
         {
+            "type": "dropdown",
+            "name": "RC.MR_ENTITY_TYPE",
+            "datatype": "text",
+            "id": "Descr",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": true,
+            "ddlType": "all",
+            "url": "",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Entity Type",
+            "items": [],
+            "itemsUrl": [],
+            "environment": "FOU",
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "ENTITY_TYPE"
+        },
+        {
             "type": "textbox",
             "name": "rc.MR_ENTITY_CODE",
             "id": "EntityCode",
             "value": "",
             "label": "Entity Code",
-            "placeholder": "Placeholder",
-            "datatype": "text"
-        },
-        {
-            "type": "textbox",
-            "name": "rm.DESCR",
-            "id": "Descr",
-            "value": "",
-            "label": "Entity Name",
             "placeholder": "Placeholder",
             "datatype": "text"
         },
@@ -33,7 +42,8 @@
             "path": "/RefPaymentAlloc/GetListKeyValueRefPaymentAllocActive",
             "label": "Payment Alloc Code",
             "items": [],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "environment": "FOU"
         },
         {
             "type": "textbox",

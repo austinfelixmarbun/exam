@@ -44,13 +44,13 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "Branch Code",
             "name": "VendorCode"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "Branch Name",
             "name": "VendorName"
         },
@@ -69,7 +69,7 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "VendorCode"
         },
         {

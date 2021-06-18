@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -22,16 +21,6 @@ export class NotificationApprovalPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchNotificationApproval.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNotificationApproval.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "NH.MR_NOTIFICATION_TYPE_CODE",
-        environment: environment.FoundationR3Url
-      },
-      {
-        name: "NH.STATUS",
-        environment: environment.FoundationR3Url
-      }
-    ];
 
     var critObj = new CriteriaObj();
     critObj.DataType = 'text';

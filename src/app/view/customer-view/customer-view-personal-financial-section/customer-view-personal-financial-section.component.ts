@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { CustObj } from 'app/shared/model/CustObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { DatePipe } from '@angular/common';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-customer-view-personal-financial-section',
@@ -10,49 +13,41 @@ import { DatePipe } from '@angular/common';
 })
 export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
   tempCustObj: any;
-  IdCust: number;
-
-  TitleSuffix:string = '';
-  IsShowDetail:boolean = false;
-  ListCustPersonalFinData : Array<object> = [];
-  custPersonalId: number;
-  currentCustFinDataIndex: number;
-  
-
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  CustId: number;
+  responseCustAttr: any;
+  IsAttrExist: boolean;
+  custObj: CustObj = new CustObj();
+  constructor(private route: ActivatedRoute,
+    private http: HttpClient,
+    private router: Router) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+        this.CustId = params["IdCust"];
       }
       else if (params["CustId"] != null) {
-        this.IdCust = params["CustId"];
+        this.CustId = params["CustId"];
       }
     });
   }
-  
-  async ngOnInit() {
-    await this.getListCustFinData();
-  }
 
-  async getListCustFinData(){
-    this.ListCustPersonalFinData = [];
-    await this.http.post(URLConstant.GetListCustPersonalFinDataForCustViewByCustId, {'CustId': this.IdCust}).toPromise().then((response) => {
-      this.ListCustPersonalFinData = response['ListCustPersonalFinDataForCustView'];
-    })
-  }
+  ngOnInit() {
+    this.custObj = new CustObj();
+    this.custObj.CustId = this.CustId;
+    this.http.post(URLConstant.GetListCustPersonalFinDataForCustViewByCustId, {Id : this.CustId }).subscribe(
+      (response) => {
+        this.tempCustObj = response;
+      }
+    );
 
-  showDetailCustFinData(index:number){
-    let datePipe = new DatePipe("en-US");
-    this.currentCustFinDataIndex = index;
-    this.tempCustObj = this.ListCustPersonalFinData[this.currentCustFinDataIndex];
-    this.TitleSuffix = 'Date as of '+datePipe.transform(this.tempCustObj['DateAsOf'], 'dd-MMM-yyyy')
-    this.IsShowDetail = true;
-  }
-  
-  hideDetail()
-  {
-    this.TitleSuffix = '';
-    this.IsShowDetail = false;
-    this.tempCustObj = null;
+    this.http.post(URLConstant.GetCustFinDataAttrContentForCustViewByCustId, { Id : this.CustId }).subscribe(
+      (response) => {
+        this.responseCustAttr = response[CommonConstant.ReturnObj];
+        console.log(this.responseCustAttr);
+        this.IsAttrExist = true;
+      },
+      (error) => {
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+      }
+    );
   }
 }

@@ -14,12 +14,6 @@ export class VendorSchemePagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorScheme.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorScheme.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "vs.MR_VENDOR_CATEGORY_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
   }
 
 }

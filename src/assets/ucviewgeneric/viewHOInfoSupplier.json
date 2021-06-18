@@ -10,6 +10,7 @@
             "label": "Supplier Holding:",
             "property": "Parent",
             "name": "LinkSupplierHolding",
+            "environment": "FOU_WEB",
             "target": "_blank",
             "path": "VIEW_VENDOR_HOLDING",
             "param": [

@@ -18,12 +18,7 @@ export class VendorHoPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorHO.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorHO.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "V.MR_VENDOR_CATEGORY_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
+
     var WVAddrTypeObj = new WhereValueObj();
     WVAddrTypeObj.property = "AddrType";
     WVAddrTypeObj.value = CommonConstant.AddrTypeTax;

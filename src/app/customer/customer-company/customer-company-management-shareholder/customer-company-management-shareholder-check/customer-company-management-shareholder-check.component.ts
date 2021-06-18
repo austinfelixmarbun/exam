@@ -5,7 +5,6 @@ import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
-import { CustObj } from 'app/shared/model/CustObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -21,6 +20,7 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
   @Output() IsOwner: EventEmitter<object> = new EventEmitter();
   @Input() TotalShare: number;
 
+  CustNoObj: GenericObj = new GenericObj();
   tempCustCompanyObj: any;
   tempListCompanyManagementShareholder: any;
 
@@ -44,9 +44,8 @@ export class CustomerCompanyManagementShareholderCheckComponent implements OnIni
 
   openView(ShareholderCustNo) {
     // GetCustByCustNo
-    var custObj = new CustObj;
-    custObj.CustNo = ShareholderCustNo
-    this.http.post(URLConstant.GetCustByCustNo, {TrxNo : ShareholderCustNo}).subscribe(
+    this.CustNoObj.CustNo = ShareholderCustNo
+    this.http.post(URLConstant.GetCustByCustNo, this.CustNoObj).subscribe(
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);

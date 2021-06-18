@@ -10,7 +10,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { PathConstant } from 'app/shared/PathConstant';
-import { ResponseSysConfigResultObj } from 'app/shared/model/Response/ResponseSysConfigResultObj.Model';
+import { ResSysConfigResultObj } from 'app/shared/model/Response/ResSysConfigResultObj,model';
 
 @Component({
   selector: 'app-customer-company-page',
@@ -36,7 +36,7 @@ export class CustomerCompanyPageComponent implements OnInit {
   Page: string;
   From: string;
   dmsObj: DMSObj;
-  SysConfigResultObj: ResponseSysConfigResultObj = new ResponseSysConfigResultObj()
+  SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()
 
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService) {
@@ -75,7 +75,7 @@ export class CustomerCompanyPageComponent implements OnInit {
       );
 
       //check DMS
-      await this.http.post<ResponseSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms }).toPromise().then(
+      await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms}).toPromise().then(
         (response) => {
           this.SysConfigResultObj = response;
         });

@@ -26,17 +26,6 @@ export class SurveyResultReviewPagingComponent implements OnInit {
     this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
     this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSurveyResultReview.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "RM.MASTER_CODE",
-        environment: environment.FoundationR3Url
-      },
-      {
-        name: "RO.OFFICE_NAME",
-        environment: environment.FoundationR3Url
-      }
-      
-    ];
   }
 
   viewApp(event: any){

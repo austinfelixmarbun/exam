@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Location, DatePipe } from '@angular/common';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { map, mergeMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
@@ -13,7 +12,6 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NegativeCustObj } from 'app/shared/model/NegativeCustObj.Model';
 import { NegativeCustChangeTrxObj } from 'app/shared/model/NegativeCustChangeTrxObj.Model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -22,6 +20,7 @@ import { RegexService } from 'app/customer/regex.service';
 import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
@@ -110,11 +109,11 @@ export class NegativeCustomerDetailComponent implements OnInit {
       }
     });
 
-    var refMasterIdTypeObj = new RefMasterObj();
+    var refMasterIdTypeObj: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     refMasterIdTypeObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdType;
-    var refMasterNegativeCustTypeObj = new RefMasterObj();
+    var refMasterNegativeCustTypeObj: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     refMasterNegativeCustTypeObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegCustType;
-    var refMasterNegativeSourceObj = new RefMasterObj();
+    var refMasterNegativeSourceObj: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     refMasterNegativeSourceObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegCustSource;
     let requestIdType = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterIdTypeObj);
     let requestNegativeCustType = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterNegativeCustTypeObj);
@@ -455,11 +454,11 @@ export class NegativeCustomerDetailComponent implements OnInit {
     this.custType = e.target.value;
 
     this.NegativeCustForm.reset();
-    var refMasterIdTypeObj = new RefMasterObj();
+    var refMasterIdTypeObj: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     refMasterIdTypeObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdType;
-    var refMasterNegativeCustTypeObj = new RefMasterObj();
+    var refMasterNegativeCustTypeObj: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     refMasterNegativeCustTypeObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegCustType;
-    var refMasterNegativeSourceObj = new RefMasterObj();
+    var refMasterNegativeSourceObj: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     refMasterNegativeSourceObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegCustSource;
     let requestIdType = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterIdTypeObj);
     let requestNegativeCustType = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterNegativeCustTypeObj);

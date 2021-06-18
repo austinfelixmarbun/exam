@@ -15,11 +15,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { environment } from 'environments/environment';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 // import { CustThirdPartyCheckingObj } from 'app/shared/model/CustThirdPartyCheckingObj.Model';
-import { map, mergeMap } from 'rxjs/operators';
-import { forkJoin } from 'rxjs';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
 
 @Component({
   selector: 'app-customer-company-main-info',
@@ -28,7 +28,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 })
 export class CustomerCompanyMainInfoComponent implements OnInit {
 
-  tempCustModel: any;
+  tempCustModel: Array<KeyValueObj> = new Array<KeyValueObj>();
   tempCompanyTypeCode: any;
 
   IsVip: boolean;
@@ -65,12 +65,13 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     PEFINDO: 'Not Hit Yet',
     SLIK: 'Not Hit Yet',
   };
+  custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
 
   CustomerCompanyForm = this.fb.group({
     CustModel: ['', [Validators.required]],
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
     MrCompanyTypeCode: ['', [Validators.required]],
-    TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
+    TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     IsVip: [true],
     IsAffiliateWithMf: [true],
     VipNotes: ['', [Validators.required]],
@@ -97,22 +98,21 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
 
-    var refMasterObjCustModel = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
-      MappingCode: CommonConstant.CustTypeCompany
-    }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObjCustModel).subscribe(
-      (response) => {
-        this.tempCustModel = response["ReturnObject"];
+    this.custModelReqObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
+    this.custModelReqObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
+    this.custModelReqObj.MappingCode = CommonConstant.CustTypeCompany;
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.custModelReqObj).subscribe(
+      (response : GenericKeyValueListObj) => {
+        this.tempCustModel = response[CommonConstant.ReturnObj];
         this.CustomerCompanyForm.patchValue({
           CustModel: this.tempCustModel[0].Key
         });
       }
     );
 
-    var refMasterObjMrCompanyTypeCode = {
+    var refMasterObjMrCompanyTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
-      RowVersion: ""
+      MappingCode: null
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {

@@ -1,7 +1,4 @@
-<div class="pull-right">
-  <button *ngIf="IsShowDetail" type="button" class="backButton" translate (click)="hideDetail()"><i class="fa fa-arrow-left"></i> Back</button>
-</div>
-<lib-ucSubsection [id]="'MainInfo'" [title]="'Financial Data '+TitleSuffix" [panel]="'FinId'">
+<lib-ucSubsection [id]="'MainInfo'" [title]="'Financial Information'" [panel]="'FinId'">
 </lib-ucSubsection>
 <form class="form form-horizontal" id="FinId">
 
@@ -84,3 +81,22 @@
     </div>
   </div>
 </form>
+
+<div *ngIf="IsAttrExist">
+  <lib-ucSubsection [id]="'FinAttrInfo'" [title]="'Financial Attribute Information'" [panel]="'FinAttrInfoId'">
+  </lib-ucSubsection>
+  <div id="FinAttrInfoId" class="form-body">
+    <div class="form-group row" *ngFor="let item of responseCustAttr">
+      <label class="col-md-4 adInsLabel" translate>{{item.AttrName}}</label>
+      <label class="col-md-4 adInsLabel" *ngIf="item.AttrInputType !== 'N' && item.AttrInputType !== 'P'">
+        {{item.AttrValue}}
+      </label>
+      <label class="col-md-4 adInsLabel" *ngIf="item.AttrInputType === 'N'">
+        {{item.AttrValue | number:'.2':'en-US'}}
+      </label>
+      <label class="col-md-4 adInsLabel" *ngIf="item.AttrInputType === 'P'">
+        {{item.AttrValue | number:'.6':'en-US'}}
+      </label>
+    </div>
+  </div>
+</div>

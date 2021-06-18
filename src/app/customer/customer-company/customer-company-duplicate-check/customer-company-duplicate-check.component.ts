@@ -1,14 +1,11 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AddCustObj } from 'app/shared/model/AddCustObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { DuplicateCustObj } from 'app/shared/model/DuplicateCust.Model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
-import { RequestNegativeCustObj } from 'app/shared/model/RequestNegativeCustObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { map, mergeMap } from 'rxjs/operators';
@@ -17,6 +14,9 @@ import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntS
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { ReqGetNegativeCustByNegativeCustNameAndCustTypeObj } from 'app/shared/model/Request/NegativeCust/ReqGetNegativeCustObj.model';
+import { ResNegativeCustObj } from 'app/shared/model/Response/NegativeCust/ResNegativeCustObj.model';
+import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
 
 @Component({
   selector: 'app-customer-company-duplicate-check',
@@ -38,7 +38,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
 
   addCustObj: AddCustObj;
   DuplicateCustObj: DuplicateCustObj;
-  RequestNegativeCustObj: RequestNegativeCustObj = new RequestNegativeCustObj();
+  RequestNegativeCustObj: ResNegativeCustObj = new ResNegativeCustObj();
 
   CustId: number;
 
@@ -120,10 +120,9 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       }
     );
 
-    let refMasterObjCustModel = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
-      MasterCode: this.CustModel
-    }
+    var refMasterObjCustModel = new ReqRefMasterByTypeCodeAndMasterCodeObj();
+    refMasterObjCustModel.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
+    refMasterObjCustModel.MasterCode = this.CustModel;
     this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
@@ -209,8 +208,9 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
   }
 
   EditCustCompany(item) {
-    var custObj = { CustNo: item.CustNo, CustName: item.CustName, TaxIdNo: item.TaxIdNo };
-    this.http.post(URLConstant.GetCustCompanyForUpdateByCustNo, { TrxNo: item.CustNo }).pipe(
+    let CustNoObj = new GenericObj();
+    CustNoObj.CustNo = item.CustNo;
+    this.http.post(URLConstant.GetCustCompanyForUpdateByCustNo, CustNoObj).pipe(
       map((response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.CustObj = response['CustObj'];
@@ -227,6 +227,7 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
       (response) => {
         if (this.IsFromCustMgmntShareholder) {
           this.addCustObj.CustObj.MrCustModelCode = this.CustMgmntShareholderData.MrCustModelCode;
+          this.addCustObj.CustObj.IsShareholder = true;
           this.addCustObj.CustCompanyObj.MrCompanyTypeCode = this.CustMgmntShareholderData.MrCompanyTypeCode;
         } else {
           this.addCustObj.CustAddr = response as CustAddrObj;
@@ -284,8 +285,11 @@ export class CustomerCompanyDuplicateCheckComponent implements OnInit, OnDestroy
   }
 
   EditNegativeCustCompany(item) {
-    var NegativeCustObj = { CustNo: item.CustNo, CustName: item.CustName, MrCustTypeCode: item.MrCustTypeCode, TaxIdNo: item.TaxIdNo };
-    this.http.post<RequestNegativeCustObj>(URLConstant.GetNegativeCustByNegativeCustNameAndCustType, NegativeCustObj).subscribe(
+    let NegativeCustObj: ReqGetNegativeCustByNegativeCustNameAndCustTypeObj = new ReqGetNegativeCustByNegativeCustNameAndCustTypeObj();
+    NegativeCustObj.CustName = item.CustName;
+    NegativeCustObj.MrCustTypeCode = item.MrCustTypeCode;
+    NegativeCustObj.TaxIdNo = item.TaxIdNo;
+    this.http.post<ResNegativeCustObj>(URLConstant.GetNegativeCustByNegativeCustNameAndCustType, NegativeCustObj).subscribe(
       (response) => {
         this.RequestNegativeCustObj = response;
         if (this.IsFromCustMgmntShareholder) {

@@ -23,7 +23,8 @@
         "path": "/RefTrxType/GetListKeyValueActiveById",
         "label": "Transaction Type",
         "items": [],
-        "itemsUrl": []
+        "itemsUrl": [],
+        "environment": "FOU"
       },
       {
         "type": "textbox",
@@ -46,7 +47,8 @@
         "path": "/RefModule/GetListKeyValueByCode",
         "label": "Module Code",
         "items": [],
-        "itemsUrl": []
+        "itemsUrl": [],
+        "environment": "FOU"
       },
       {
         "type": "dropdown",

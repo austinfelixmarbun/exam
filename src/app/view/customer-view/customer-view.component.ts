@@ -8,7 +8,8 @@ import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ResponseSysConfigResultObj } from 'app/shared/model/Response/ResponseSysConfigResultObj.Model';
+import { ResSysConfigResultObj } from 'app/shared/model/Response/ResSysConfigResultObj,model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-view',
@@ -33,7 +34,7 @@ export class CustomerViewComponent implements OnInit {
   IsLms: boolean = false;
   IsUseDms: boolean = false;
 
-  SysConfigResultObj: ResponseSysConfigResultObj = new ResponseSysConfigResultObj();
+  SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj();
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
@@ -68,7 +69,9 @@ export class CustomerViewComponent implements OnInit {
       }
     );
 
-    await this.http.post<ResponseSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, { ConfigCode : CommonConstant.MODULE_LOS }).toPromise().then(
+    let reqGetSysConfigResultLOSObj = new GenericObj();
+    reqGetSysConfigResultLOSObj.Code  = CommonConstant.MODULE_LOS;
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, reqGetSysConfigResultLOSObj).toPromise().then(
       (response) => {
         if(response.ConfigValue === "1") {
           this.IsLos = true;
@@ -79,7 +82,9 @@ export class CustomerViewComponent implements OnInit {
       }
     );
 
-    await this.http.post<ResponseSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, { ConfigCode : CommonConstant.MODULE_LMS }).toPromise().then(
+    let reqGetSysConfigResultLMSObj = new GenericObj();
+    reqGetSysConfigResultLMSObj.Code  = CommonConstant.MODULE_LMS;
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, reqGetSysConfigResultLMSObj).toPromise().then(
       (response) => {
         if(response.ConfigValue === "1") {
           this.IsLms = true;
@@ -91,7 +96,7 @@ export class CustomerViewComponent implements OnInit {
     );
 
     //check DMS
-    await this.http.post<ResponseSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms }).toPromise().then(
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms }).toPromise().then(
       (response) => {
         this.SysConfigResultObj = response;
         if(response.ConfigValue === "1") {
@@ -116,27 +121,22 @@ export class CustomerViewComponent implements OnInit {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_ADDR],{ "CustId": this.CustId });
         });
       }
-      else if (ev == 2) { // Contact Person
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_CONTACT_PERSON],{ "CustId": this.CustId });
-        });
-      }
-      else if (ev == 3) { // Family
+      else if (ev == 2) { // Family
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_FAMILY],{ "CustId": this.CustId });
         });
       }
-      else if (ev == 4) { // Emergency Contact
+      else if (ev == 3) { // Contact Person
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_EMERGENCY_CONTACT],{ "CustId": this.CustId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_CONTACT_PERSON],{ "CustId": this.CustId });
         });
       }
-      else if (ev == 5) { // Customer Group
+      else if (ev == 4) { // Customer Group
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_GRP],{ "CustId": this.CustId });
         });
       }
-      else if (ev == 6) { // Job Data
+      else if (ev == 5) { // Job Data
         if (this.custModel == "PROF")
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_JOB_DATA],{ "CustId": this.CustId });
@@ -154,7 +154,7 @@ export class CustomerViewComponent implements OnInit {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_JOB_DATA_SME],{ "CustId": this.CustId });
           });
       }
-      else if (ev == 7) { // Financial Data
+      else if (ev == 6) { // Financial Data
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_FINANCIAL_DATA],{ "CustId": this.CustId });
         });
@@ -174,7 +174,7 @@ export class CustomerViewComponent implements OnInit {
       //     AdInsHelper.RedirectUrl(this.router,["/View/Customer/PersonalAppListing"],{ "CustId": this.CustId });
       //   });
       // }
-      else if (ev == 9) {
+      else if (ev == 7) {
         if(this.IsUseDms) { // Document
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_DOC],{ "CustId": this.CustId });
@@ -198,7 +198,7 @@ export class CustomerViewComponent implements OnInit {
           }
         }
       }
-      else if (ev == 10) {
+      else if (ev == 8) {
         if(this.IsUseDms) {
           if(this.IsLos) { // Application List
             this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
@@ -231,7 +231,7 @@ export class CustomerViewComponent implements OnInit {
           }
         }
       }
-      else if (ev == 11) {
+      else if (ev == 9) {
         if(this.IsUseDms) {
           if(this.IsLos) {
             if(this.IsLms) { // Agreement List
@@ -259,7 +259,7 @@ export class CustomerViewComponent implements OnInit {
           }
         }
       }
-      else if (ev == 12) { // Other Info
+      else if (ev == 10) { // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
         });

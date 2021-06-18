@@ -32,15 +32,8 @@
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "CUST_TYPE",
             "items": [],
-            "itemsUrl": []
-        },
-        {
-            "type": "textbox",
-            "name": "CGC.CUST_NAME",
-            "id": "CustGroupName",
-            "value": "",
-            "label": "Customer Group Name",
-            "placeholder": "Placeholder"
+            "itemsUrl": [],
+            "environment": "FOU"
         }
     ],
     "querystring": {

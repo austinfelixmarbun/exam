@@ -5,6 +5,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import Stepper from 'bs-stepper';
@@ -20,6 +21,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   private CompanyWizard: Stepper;
   private PersonalWizard: Stepper;
   ViewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  CustNoObj: GenericObj = new GenericObj();
   CustDataTrxId: number;
   CustNo: string;
   StepIdx: number;
@@ -66,17 +68,12 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     this.PersonalConstant = CommonConstant.CustTypePersonal;
     this.CompanyConstant = CommonConstant.CustTypeCompany;
     this.ViewGenericObj.viewInput = "./assets/ucviewgeneric/viewUpdateMasterCust.json";
-    this.ViewGenericObj.ddlEnvironments = [
-      {
-        name: "AppNo",
-        environment: environment.FoundationR3Web
-      }
-    ];
   }
 
   ngOnInit() {
     this.claimTask();
-    this.http.post(URLConstant.GetCustByCustNo, { CustNo: this.CustNo }).toPromise().then(
+    this.CustNoObj.CustNo = this.CustNo;
+    this.http.post(URLConstant.GetCustByCustNo, this.CustNoObj).toPromise().then(
       (response: CustObj) => {
         this.MrCustTypeCode = response.MrCustTypeCode;
         if (response.MrCustTypeCode == CommonConstant.CustTypePersonal) {

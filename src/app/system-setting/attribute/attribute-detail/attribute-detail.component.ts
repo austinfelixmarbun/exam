@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Location, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -45,7 +45,6 @@ export class AttributeDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location,
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
@@ -213,7 +212,7 @@ export class AttributeDetailComponent implements OnInit {
   }
 
   Back() {
-    AdInsHelper.RedirectUrl(this.router,["/SystemSetting/Attribute/Paging"],{ });
+    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ATTR_MSTR_PAGING],{});
   }
 
   Save(enjiForm) {

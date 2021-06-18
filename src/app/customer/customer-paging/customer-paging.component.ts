@@ -21,12 +21,7 @@ export class CustomerPagingComponent implements OnInit {
     this.inputPagingObj._url = "./assets/ucpaging/searchCustomer.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCustomer.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "C.MR_CUST_TYPE_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
+
     this.inputPagingObj.addCritInput = [];
     var critObj = new CriteriaObj();
     critObj.propName = "C.IS_CUSTOMER";

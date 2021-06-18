@@ -17,7 +17,6 @@ export class PathConstant {
     public static LR_COY = "company";
     public static LR_COMMON_SETTING = "CommonSetting";
     public static LR_UPLOAD = "Upload";
-    public static LR_PRODUCT = "Product";
     public static LR_ASSET = "Asset";
     public static LR_VENDOR = "Vendor";
     public static LR_VERIF = "Verification";
@@ -293,36 +292,6 @@ export class PathConstant {
     public static BZ_UNIT_MEMBER = PathConstant.BZ_UNIT + "/" + PathConstant.MEMBER;
     //#endregion
 
-    //#region Product-Module
-    public static PROD_OFFERING = "ProdOffering";
-    public static PROD_OFFERING_PAGING = PathConstant.PROD_OFFERING + "/" + PathConstant.PAGING;
-    public static PROD_OFFERING_RTN_PAGING = PathConstant.PROD_OFFERING + "/" + PathConstant.RTN_PAGING;
-    public static PROD_OFFERING_ADD = PathConstant.PROD_OFFERING + "/" + PathConstant.ADD;
-    public static PROD_OFFERING_ADD_DETAIL = PathConstant.PROD_OFFERING + "/" + PathConstant.ADD_DETAIL;
-    public static HO_PAGING = "HOPaging";
-    public static HO_RTN_PAGING = "HOReturnPaging";
-    public static HO_ADD = "HOAdd";
-    public static HO_ADD_DETAIL = "HOAddDetail";
-    public static HO_DEACTIVATE = "HODeactivate";
-    public static HO_DEACTIVATE_EDIT = PathConstant.HO_DEACTIVATE + "/" + PathConstant.EDIT;
-    public static HO_VIEW = "HOView";
-    public static OFFERING_VIEW = "OfferingView";
-    public static HO_APPRV = "HOApproval";
-    public static HO_APPRV_DETAIL = PathConstant.HO_APPRV + "/" + PathConstant.DETAIL;
-    public static OFFERING_APPRV = "OfferingApproval";
-    public static OFFERING_APPRV_DETAIL = PathConstant.OFFERING_APPRV + "/" + PathConstant.DETAIL;
-    public static HO_DEACTIVATE_APPRV = "HODeactivateApproval";
-    public static HO_DEACTIVATE_APPRV_DETAIL = PathConstant.HO_DEACTIVATE_APPRV + "/" + PathConstant.DETAIL;
-    public static OFFERING_DEACTIVATE = "OfferingDeactivate";
-    public static OFFERING_DEACTIVATE_EDIT = PathConstant.HO_DEACTIVATE_APPRV + "/" + PathConstant.EDIT;
-    public static OFFERING_DEACTIVATE_APPRV = "OfferingDeactivateApproval";
-    public static OFFERING_DEACTIVATE_APPRV_DETAIL = PathConstant.OFFERING_DEACTIVATE_APPRV + "/" + PathConstant.DETAIL;
-    public static HO_REVIEW = "HOReview";
-    public static HO_REVIEW_DETAIL = PathConstant.HO_REVIEW + "/" + PathConstant.DETAIL;
-    public static OFFERING_REVIEW = "OfferingReview";
-    public static OFFERING_REVIEW_DETAIL = PathConstant.OFFERING_REVIEW + "/" + PathConstant.DETAIL;
-    //#endregion
-
     //#region Survey-Module
     public static SRVY_TASK = "SurveyTask";
     public static SRVY_ORDER = "SurveyOrder";
@@ -450,10 +419,8 @@ export class PathConstant {
 
     //#region View-Module
     public static VIEW_CUST = "Customer";
-    public static VIEW_OFFERING = "Offering";
     public static VIEW_VENDOR = "Vendor";
     public static VIEW_NEG_CUST = "NegativeCustomer";
-    public static VIEW_PRODUCT_HO = "ProductHO";
     public static VIEW_SRVY = "Survey";
     public static VIEW_CUST_EXPSR = "CustExposureView";
     //#endregion
@@ -479,7 +446,6 @@ export class PathConstant {
     public static VIEW_CUST_PERSONAL_JOB_DATA_SME = "PersonalJobDataSme";
     public static VIEW_CUST_PERSONAL_FINANCIAL_DATA = "PersonalFinancialData";
     public static VIEW_CUST_PERSONAL_FAMILY = "PersonalFamily";
-    public static VIEW_CUST_PERSONAL_EMERGENCY_CONTACT = "PersonalEmergencyContact";
     public static VIEW_CUST_COY_OTHER = "CoyOther";
     public static VIEW_CUST_PERSONAL_APP_LISTING = "PersonalAppListing";
     public static VIEW_CUST_COY_DETAIL = "CoyDetail";
@@ -495,13 +461,14 @@ export class PathConstant {
     //#endregion
 
      //#region JOURNAL
-    public static JOURNAL_MEDIA = "journalmedia"
-    public static JOURNAL_RESULT = "journalresult"
-    public static HEADER = "header"
-    public static FACT = "fact"
-    public static ITEM_VALUE = "itemvalue"
-    public static FAILED_JOURNAL_RESULT_LIST = "failedjournalresultlist"
-    public static JOURNAL_RECONCILE = "journalreconcile"
+    public static JOURNAL_MEDIA = "journalmedia";
+    public static JOURNAL_RESULT = "journalresult";
+    public static HEADER = "header";
+    public static FACT = "fact";
+    public static ITEM_VALUE = "itemvalue";
+    public static FAILED_JOURNAL_RESULT_LIST = "failedjournalresultlist";
+    public static JOURNAL_RECONCILE = "journalreconcile";
+    public static UPLOAD_JOURNAL = "uploadjournal";
 
 
     public static JOURNAL_MEDIA_PAGING = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.PAGING
@@ -512,6 +479,8 @@ export class PathConstant {
     public static JOURNAL_MEDIA_GROUP_ITEM_VALUE = PathConstant.JOURNAL_MEDIA + "/" + PathConstant.GROUP + '/' + PathConstant.ITEM_VALUE
     public static FAILED_JOURNAL_RESULT_LIST_PAGING = PathConstant.FAILED_JOURNAL_RESULT_LIST + "/" + PathConstant.PAGING
     public static JOURNAL_RECONCILE_PAGING = PathConstant.JOURNAL_RECONCILE + "/" + PathConstant.PAGING
+    public static UPLOAD_JOURNAL_FILE_PAGING = PathConstant.UPLOAD_JOURNAL + "/" + PathConstant.PAGING
+    public static UPLOAD_JOURNAL_FILE_DETAIL = PathConstant.UPLOAD_JOURNAL + "/" + PathConstant.DETAIL
 
     //#endregion
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
-import { environment } from 'environments/environment';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
@@ -15,11 +14,5 @@ export class AssetSchemePagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetScheme.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetScheme.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "ATH.ASSET_TYPE_ID",
-        environment: environment.FoundationR3Url
-      }
-    ];
   }
 }

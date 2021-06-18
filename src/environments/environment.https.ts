@@ -8,7 +8,7 @@ export const environment = {
   navbarColor: 'lightgray',
   LosURL: 'http://r3web-server.ad-ins.com/LOSR3/',
   WebSocketURL: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
-  DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
+  DMSUrl: "http://sky.ad-ins.com/LiteDMS_POC/Integration/ViewDoc.aspx",
   FoundationR3Url: 'https://r3app-server.ad-ins.com/FOUNDATION_HTTPS',
   ApprovalURL : 'http://r3app-server.ad-ins.com/APPROVAL',
   FoundationR3Web:'http://r3web-server.ad-ins.com/Foundation',

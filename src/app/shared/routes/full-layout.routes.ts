@@ -69,10 +69,6 @@ export const Full_ROUTES: Routes = [
     loadChildren: './verification/verification.module#VerificationModule'
   },
   {
-    path: PathConstant.LR_PRODUCT,
-    loadChildren: './product/product.module#ProductModule'
-  },
-  {
     path: PathConstant.LR_APPRV_SCRN,
     loadChildren: './approval-screen/approval-screen.module#ApprovalScreenModule'
   },

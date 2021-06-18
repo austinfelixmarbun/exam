@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { VendorService } from 'app/vendor/vendor.service';
 
@@ -15,12 +16,13 @@ export class VendorHoRegistrationComponent implements OnInit {
   mode: string;
   VendorContactPersonId:any;
   MrVendorCategoryCode: string = "";
+  MrVendorCategoryCodeParam: string = "";
 
   readonly EditLink: string = NavigationConstant.VENDOR_HO_DETAIL;
-  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
-  constructor(private route: ActivatedRoute, private vendorService: VendorService) { 
+  constructor(private route: ActivatedRoute, private router: Router, private vendorService: VendorService) { 
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
+      this.MrVendorCategoryCodeParam = params['MrVendorCategoryCode'];
     });
   }
 
@@ -43,5 +45,9 @@ export class VendorHoRegistrationComponent implements OnInit {
     this.objPassingCP.VendorContactPersonId = this.VendorContactPersonId;
     this.objPassingCP.mode = this.mode;
     this.objPassingCP.VendorId = this.VendorId;
+  }
+
+  Back() {
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": this.MrVendorCategoryCodeParam });
   }
 }

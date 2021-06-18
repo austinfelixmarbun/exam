@@ -6,6 +6,10 @@ import { ActivatedRoute } from '@angular/router';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-customer-personal-job-data',
@@ -14,16 +18,16 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 })
 export class CustomerPersonalJobDataComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
-  tempCustModel: Array<Object>;
+  tempCustModel: Array<KeyValueObj> = new Array<KeyValueObj>();
 
   custObj: any;
   objCust: CustObj;
   IdCust: number;
-
   CustModel: string;
+  custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.tempCustModel = new Array<Object>();
+    this.tempCustModel = new Array<KeyValueObj>();
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -40,14 +44,13 @@ export class CustomerPersonalJobDataComponent implements OnInit {
         this.custObj = response;
         this.CustModel = this.custObj.MrCustModelCode;
 
-        let refMasterObjCustModel = {
-          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
-          MappingCode: CommonConstant.CustTypePersonal
-        }
-        this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObjCustModel).subscribe(
-          (response) => {
-            this.tempCustModel = response["ReturnObject"];
-            if (!this.CustModel) {
+        this.custModelReqObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
+        this.custModelReqObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
+        this.custModelReqObj.MappingCode = CommonConstant.CustTypePersonal;
+        this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.custModelReqObj).subscribe(
+          (response : GenericKeyValueListObj) => {
+            this.tempCustModel = response[CommonConstant.ReturnObj];
+            if(!this.CustModel){
               this.CustModel = this.tempCustModel[0]["Key"];
             }
           }

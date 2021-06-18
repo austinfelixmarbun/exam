@@ -8,6 +8,8 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-personal-address-check',
@@ -19,10 +21,10 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
 
   custObj: any;
   resultData: any;
-  listCustAddr: any;
+  listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
 
   objCust: CustObj;
-  custAddrObj: CustAddrObj;
+  custAddrObj: GenericObj = new GenericObj();
 
   BirthDt: Date;
   IdExpiredDt: Date;
@@ -42,14 +44,8 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   MrIdTypeCodeDesc: string;
   MotherMaidenName: string;
 
-  getCustById: string;
-  deleteCustAddr: string;
-  getListCustAddr: string;
   From : string;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
-    this.getCustById = URLConstant.GetCustByCustId;
-    this.getListCustAddr = URLConstant.GetListCustAddr;
-    this.deleteCustAddr = URLConstant.DeleteCustAddr;
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -65,16 +61,14 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
     
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(this.getCustById, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
       (response) => {
           this.custObj = response;
       });
 
-      this.custAddrObj = new CustAddrObj();
-      this.custAddrObj.CustId = this.IdCust;
-      this.custAddrObj.MrCustAddrTypeCode = "-";
-      this.http.post(this.getListCustAddr, this.custAddrObj).subscribe(
-        (response) => {
+      this.custAddrObj.Id = this.IdCust;
+      this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
+        (response : ResGetListCustAddrObj) => {
             this.listCustAddr = response[CommonConstant.ReturnObj];
             let idxEmergency = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode == CommonConstant.CustAddrTypeEmergency);
             if(idxEmergency != -1) this.listCustAddr.splice(idxEmergency, 1)

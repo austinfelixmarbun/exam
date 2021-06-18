@@ -18,6 +18,7 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { RefOfficeXObj } from 'app/shared/model/RefOfficeX.model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 
 @Component({
@@ -79,7 +80,6 @@ export class OfficeAddComponent implements OnInit {
   officeClose: boolean = true;
   officeObj: OfficeObj;
   refMasterObj: RefMasterObj;
-  lookUpRefMasterOfficeObj: RefMasterObj;
   refMasterOfficeType: RefMasterObj;
   refMasterCgType: RefMasterObj;
   orgMdlObj: OrgMdlObj
@@ -119,13 +119,12 @@ export class OfficeAddComponent implements OnInit {
     NationalCourtOffice: [''],
     TaxOffice: ['']
   })
-  InputLookupObj: any;
+  InputLookupObj: InputLookupObj = new InputLookupObj();
   addressObj: UcAddressObj;
   inputAddressObj: InputAddressObj;
 
   readonly CancelLink: string = NavigationConstant.OFFICE_PAGING;
   responseRefOfficeX: any;
-  listTaxOfficeName: any;
   officeXObj: RefOfficeXObj;
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -152,21 +151,8 @@ export class OfficeAddComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.cbIsNationalCourt = false;
-    this.IsNationalCourtChange();
-    this.getListTaxOffice();
-
-    this.InputLookupObj = new InputLookupObj();
     this.InputLookupObj.urlJson = "./assets/lookup/lookupOfficeParent.json";
-    this.InputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.InputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.InputLookupObj.isRequired = true;
-    this.InputLookupObj.ddlEnvironments = [
-      {
-        name: "A.MR_OFFICE_TYPE_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
     this.InputLookupObj.addCritInput = new Array();
 
     if(this.RefOfficeId != undefined && this.RefOfficeId != 0){
@@ -174,8 +160,6 @@ export class OfficeAddComponent implements OnInit {
       critRefOfficeIdObj.restriction = AdInsConstant.RestrictionNeq;
       critRefOfficeIdObj.propName = 'A.REF_OFFICE_ID';
       critRefOfficeIdObj.value = this.RefOfficeId.toString();
-      console.log("testing...");
-      console.log(this.InputLookupObj);
       this.InputLookupObj.addCritInput.push(critRefOfficeIdObj);
     }
 
@@ -188,21 +172,19 @@ export class OfficeAddComponent implements OnInit {
     this.refMasterKonsyaType = new RefMasterObj();
     this.refMasterKonsyaType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeKonvenSyariah;
 
-    this.lookUpRefMasterOfficeObj = new RefMasterObj();
-    this.lookUpRefMasterOfficeObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeOfficeType;
-
-    this.httpClient.post(URLConstant.GetRefMasterTypeOfficeWithoutCG, this.lookUpRefMasterOfficeObj).subscribe(
+    let tempReq: GenericObj = new GenericObj();
+    tempReq.Code = CommonConstant.RefMasterTypeCodeOfficeType;
+    this.httpClient.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, tempReq).subscribe(
       (response) => {
-        if (response[CommonConstant.ReturnObj].length > 0) {
-          this.lookupOfficeType = response[CommonConstant.ReturnObj];
-
+        if (response['RefMasterObjs'].length > 0) {
+          this.lookupOfficeType = response['RefMasterObjs'];
           this.arrCrit = new Array();
           var critObj = new CriteriaObj();
           critObj.restriction = AdInsConstant.RestrictionIn;
           critObj.propName = 'MR_OFFICE_TYPE_CODE';
           critObj.listValue = new Array();
           this.lookupOfficeType.forEach(element => {
-            critObj.listValue.push(element.Key);
+            critObj.listValue.push(element.MasterCode);
           });
 
           this.InputLookupObj.addCritInput.push(critObj);
@@ -282,7 +264,7 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(URLConstant.GetRefOfficeByRefOfficeId, {Id : this.RefOfficeId}).subscribe(
         (response) => {
           this.resultData = response;
-          this.getRefOfficeXByOfficeCode(this.resultData.OfficeCode);
+          
           this.InputLookupObj.jsonSelect = { OfficeCode: this.resultData.ParentOfficeCode, RefOfficeId: this.resultData.ParentId };
           this.InputLookupObj.nameSelect = this.resultData["ParentOfficeCode"];
           this.InputLookupObj.jsonSelect = { OfficeCode: this.resultData["ParentOfficeCode"] };
@@ -466,7 +448,7 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          this.saveRefOfficeX();
+          
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
         }
       );
@@ -479,7 +461,7 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(URLConstant.EditRefOffice, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          this.saveRefOfficeX();
+          
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
         }
       );
@@ -527,52 +509,5 @@ export class OfficeAddComponent implements OnInit {
     this.OfficeForm.controls.NationalCourtOffice.updateValueAndValidity();
   }
 
-  getRefOfficeXByOfficeCode(RefOfficeCode: string) {
-    var obj = {
-      RefOfficeCode: RefOfficeCode
-    };
-    this.httpClient.post<any>(URLConstant.GetRefOfficeXByRefOfficeCode, obj).subscribe(
-      (response) => {
-        this.responseRefOfficeX = response
-        if (this.responseRefOfficeX.RefOfficeXId !== 0) {
-          this.OfficeForm.patchValue({
-            IsNationalCourt: this.responseRefOfficeX.IsNationalCourt,
-            NationalCourtOffice: this.responseRefOfficeX.NationalCourtOffice
-          });
 
-          if (this.responseRefOfficeX.RefTaxOfficeXId !== null) {
-            this.OfficeForm.patchValue({
-              TaxOffice: this.responseRefOfficeX.RefTaxOfficeXId
-            });
-          }
-        }
-        else {
-          this.OfficeForm.patchValue({
-            IsNationalCourt: false,
-            NationalCourtOffice: '',
-            TaxOffice: ''
-          });
-        }
-      });
-  }
-
-  getListTaxOffice() {
-    this.httpClient.post<any>(URLConstant.GetListTaxOfficeName, null).subscribe(
-      (response) => {
-        this.listTaxOfficeName = response["ReturnObject"];
-      });
-  }
-
-  saveRefOfficeX() {
-    this.officeXObj = new RefOfficeXObj();
-
-    this.officeXObj.IsNationalCourt = this.OfficeForm.controls["IsNationalCourt"].value;
-    this.officeXObj.RefOfficeCode = this.OfficeForm.controls["OfficeCode"].value;
-    this.officeXObj.RefTaxOfficeXId = this.OfficeForm.controls["TaxOffice"].value;
-    this.officeXObj.NationalCourtOffice = this.OfficeForm.controls["NationalCourtOffice"].value;
-    this.httpClient.post<RefOfficeXObj>(URLConstant.AddEditRefOfficeX, this.officeXObj).subscribe(
-      (response) => {
-        response
-      });
-  }
 }

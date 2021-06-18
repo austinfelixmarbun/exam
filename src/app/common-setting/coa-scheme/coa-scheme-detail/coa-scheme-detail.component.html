@@ -105,10 +105,10 @@
                   </thead>
                   <tbody *ngIf="this.isTableReady">
                     <tr *ngFor="let item of ListPaymentAlloc; let i = index" formArrayName = "ListCoa">
-                      <ng-container  [formGroupName]="i">
+                      <ng-container  [formGroupName]="i" *ngIf="this.isTableReady">
                       <td class="align-center">{{i+1}}</td>
                       <td class="text-left">{{item.Value}}</td>
-                      <ng-container formArrayName = "DataCOA">
+                      <ng-container formArrayName = "DataCOA" *ngIf="this.isTableReady">
                         <td class="text-center" *ngFor="let currs of ListSelectedCurr; let x = index" [formGroupName]="x">
                           <input type="text" class="form-control" formControlName="COA"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && CoaSchemeForm.controls.ListCoa['controls'][i]['controls'].DataCOA['controls'][x]['controls'].COA.invalid }"

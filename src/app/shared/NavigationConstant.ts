@@ -118,6 +118,7 @@ export class NavigationConstant {
     public static SYSTEM_SETTING_REF_FORM_ROLE_MAP_ADD = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.REF_FORM_ROLE_MAP_ADD; //'/SystemSetting/RefForm/RoleMapping/Add'
     public static SYSTEM_SETTING_CHANGE_PASSWORD = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.CHANGE_PASSWORD; //'/SystemSetting/ChangePassword'
     public static SYSTEM_SETTING_REF_USER = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.REF_USER; //'/SystemSetting/RefUser'
+    public static SYSTEM_SETTING_ATTR_MSTR_PAGING = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.SYS_ATTR_PAGING; //'/SystemSetting/Attribute/Paging'
     //#endregion
 
     //#region View
@@ -135,7 +136,6 @@ export class NavigationConstant {
     public static VIEW_CUST_PERSONAL_JOB_DATA_SME = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_JOB_DATA_SME; //'/View/Customer/PersonalJobDataSme'
     public static VIEW_CUST_PERSONAL_FINANCIAL_DATA = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_FINANCIAL_DATA; //'/View/Customer/PersonalFinancialData'
     public static VIEW_CUST_PERSONAL_FAMILY = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_FAMILY; //'/View/Customer/PersonalFamily'
-    public static VIEW_CUST_PERSONAL_EMERGENCY_CONTACT = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_EMERGENCY_CONTACT; //'/View/Customer/PersonalEmergencyContact'
     public static VIEW_CUST_DOC = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_DOC; //'/View/Customer/CustDocument'
     public static VIEW_CUST_HIGHLIGHT_COMMENT = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_HIGHLIGHT_COMMENT; //'/View/Customer/HighligtComment'
     public static VIEW_CUST_COY_DETAIL = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_DETAIL; //'/View/Customer/CoyDetail'
@@ -149,8 +149,6 @@ export class NavigationConstant {
     public static VIEW_VENDOR_BRANCH = "/" + NavigationConstant.VIEW_VENDOR + "/" + PathConstant.VIEW_VENDOR_BRANCH; //'/View/Vendor/VendorBranch'
     public static VIEW_VENDOR_HO = "/" + NavigationConstant.VIEW_VENDOR + "/" + PathConstant.VIEW_VENDOR_HO; //'/View/Vendor/VendorHO'
     public static VIEW_VENDOR_HOLDING = "/" + NavigationConstant.VIEW_VENDOR + "/" + PathConstant.VIEW_VENDOR_HOLDING; //'/View/Vendor/VendorHolding'
-    public static VIEW_PRODUCT_HO = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PRODUCT_HO; //'/View/ProductHO'
-    public static VIEW_OFFERING = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_OFFERING; //'/View/Offering'
     //#endregion
 
     //#region Upload
@@ -187,33 +185,6 @@ export class NavigationConstant {
     public static VENDOR_SCHM_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_SCHM_MBR_ADD; //'/Vendor/VendorScheme/Member/Add'
     public static VENDOR_SCHM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_SCHM_DETAIL; //'/Vendor/VendorScheme/Detail'
     public static VENDOR_GRD_REQ_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRADING_REQUEST_PAGING; //'/Vendor/VendorGrading/Request/Paging'
-    //#endregion
-
-    //#region Product
-    public static PRODUCT_OFFERING_DEACTIVATE = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.OFFERING_DEACTIVATE; //'/Product/OfferingDeactivate'
-    public static PRODUCT_OFFERING_DEACTIVATE_DETAIL = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.OFFERING_DEACTIVATE_EDIT; //'/Product/OfferingDeactivate
-    public static PRODUCT_OFFERING_REVIEW = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.OFFERING_REVIEW; //'/Product/OfferingReview'
-    public static PRODUCT_OFFERING_REVIEW_DETAIL = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.OFFERING_REVIEW_DETAIL; //'/Product/OfferingReview/Detail'
-    public static PRODUCT_OFFERING_APPRV = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.OFFERING_APPRV; //'/Product/OfferingApproval'
-    public static PRODUCT_OFFERING_APPRV_DETAIL = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.OFFERING_APPRV_DETAIL; //'/Product/OfferingApproval/Detail'
-    public static PRODUCT_OFFERING_DEACTIVATE_APPRV = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.OFFERING_DEACTIVATE_APPRV; //'/Product/OfferingDeactivateApproval'
-    public static PRODUCT_OFFERING_DEACTIVATE_APPRV_DETAIL = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.OFFERING_DEACTIVATE_APPRV_DETAIL; //'/Product/OfferingDeactivateApproval/Detail'
-    public static PRODUCT_HO_DEACTIVATE = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_DEACTIVATE; //'/Product/HODeactivate'
-    public static PRODUCT_HO_DEACTIVATE_APPRV = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_DEACTIVATE_APPRV; //'/Product/HODeactivateApproval'
-    public static PRODUCT_HO_DEACTIVATE_DETAIL= "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_DEACTIVATE_EDIT; //'/Product/HODeactivate/Detail
-    public static PRODUCT_HO_DEACTIVATE_APPRV_DETAIL = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_DEACTIVATE_APPRV_DETAIL; //'/Product/HODeactivateApproval/Detail'
-    public static PRODUCT_HO_ADD = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_ADD; //'/Product/HOAdd'
-    public static PRODUCT_HO_ADD_DETAIL = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_ADD_DETAIL; //'/Product/HOAddDetail'
-    public static PRODUCT_HO_RTN_PAGING = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_RTN_PAGING; //'/Product/HOReturnPaging'
-    public static PRODUCT_HO_PAGING = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_PAGING; //'/Product/HOPaging'
-    public static PRODUCT_HO_APPRV = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_APPRV; //'/Product/HOApproval'
-    public static PRODUCT_HO_APPRV_DETAIL = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_APPRV_DETAIL; //'/Product/HOApproval/Detail'
-    public static PRODUCT_HO_REVIEW = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_REVIEW; //'/Product/HOReview'
-    public static PRODUCT_HO_REVIEW_DETAIL = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.HO_REVIEW_DETAIL; //'/Product/HOReview/Detail'
-    public static PROD_OFFERING_PAGING = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.PROD_OFFERING_PAGING; //'/Product/ProdOffering/Paging'
-    public static PROD_OFFERING_ADD = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.PROD_OFFERING_ADD; //'/Product/ProdOffering/add'
-    public static PROD_OFFERING_ADD_DETAIL = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.PROD_OFFERING_ADD_DETAIL; //'/Product/ProdOffering/AddDetail'
-    public static PROD_OFFERING_RTN_PAGING = "/" + PathConstant.LR_PRODUCT + "/" + PathConstant.PROD_OFFERING_RTN_PAGING; //'/Product/ProdOffering/ReturnPaging'
     //#endregion
     
     //#region Organization
@@ -345,6 +316,8 @@ export class NavigationConstant {
     public static JOURNAL_RESULT = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_RESULT;
     public static FAILED_JOURNAL_RESULT_LIST_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.FAILED_JOURNAL_RESULT_LIST_PAGING;
     public static JOURNAL_RECONCILE_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_RECONCILE_PAGING;
+    public static UPLOAD_JOURNAL_FILE_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.UPLOAD_JOURNAL_FILE_PAGING;
+    public static UPLOAD_JOURNAL_FILE_DETAIL = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.UPLOAD_JOURNAL_FILE_DETAIL;
     //#endregion
 
     

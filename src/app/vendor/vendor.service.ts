@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { URLConstant } from "app/shared/constant/URLConstant";
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from "app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model";
 
 @Injectable({
     providedIn: 'root'
@@ -33,7 +34,7 @@ export class VendorService {
         return this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, Obj);
     }
 
-    GetListActiveRefMasterWithMappingCodeAll(Obj: any): Observable<Object> {
+    GetListActiveRefMasterWithMappingCodeAll(Obj: ReqRefMasterByTypeCodeAndMappingCodeObj): Observable<Object> {
         return this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, Obj);
     }
 

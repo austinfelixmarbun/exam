@@ -37,7 +37,8 @@
             "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
             "label": "Office Name",
             "items": [],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "environment": "FOU"
         },
         {
             "type": "textbox",
@@ -83,7 +84,8 @@
             "criteriaPropName" : "RefJobTitleId",
             "criteriaPropValue" : "JOB_TITLE_CODE",
             "items": [],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "environment": "FOU"
         }
     ],
     "querystring": {

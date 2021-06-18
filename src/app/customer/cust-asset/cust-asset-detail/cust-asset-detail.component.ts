@@ -5,8 +5,8 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 
 @Component({
   selector: 'app-cust-asset-detail',

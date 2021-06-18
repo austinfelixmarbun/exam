@@ -6,16 +6,16 @@
 export const environment = {
     production: true,
     navbarColor: 'lightgray',
-    LosURL : 'http://r3impl-appsvr.ad-ins.com/LOSDSFSITMERGE',
-    FoundationR3Url: 'http://r3impl-appsvr.ad-ins.com/FOUDSFSITMERGE',
-    WebSocketURL : 'http://r3impl-appsvr.ad-ins.com/FOUDSFSITMERGE',
+    LosURL : 'http://r3web-server.ad-ins.com/LOS_SIT_CY5/',
+    FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_SIT_CY5',
+    WebSocketURL : 'http://r3app-server.ad-ins.com/FOUNDATION_SIT_CY5',
     //FoundationR3Url: 'http://localhost:5000',
     losR3Web: 'http://r3impl-websvr.ad-ins.com/LOSDSF_SIT',
     lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS',
     Module:"FOU",
-    ApprovalURL : 'http://r3impl-appsvr.ad-ins.com/APPROVAL_DSF_SIT',
-    FoundationR3Web:'http://r3impl-websvr.ad-ins.com/FOUDSF_SIT',
+    ApprovalURL : 'http://r3app-server/APPROVAL_SIT',
+    FoundationR3Web:'http://r3web-server.ad-ins.com/FOUNDATION_SIT_CY5',
     ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
     ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
-    DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
+    DMSUrl: "http://sky.ad-ins.com/LiteDMS_POC/Integration/ViewDoc.aspx",
 };

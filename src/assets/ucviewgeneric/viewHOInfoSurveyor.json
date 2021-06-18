@@ -11,9 +11,6 @@
             "property": "AssignmentType"
           },
           {
-
-          },
-          {
             "type": "text",
             "label": "Maximum Task Load",
             "property": "MaxTaskLoad"

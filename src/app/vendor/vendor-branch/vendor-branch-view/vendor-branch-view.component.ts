@@ -91,33 +91,13 @@ export class VendorBranchViewComponent implements OnInit {
     this.viewVendorBranchMainPObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchMainP.json";
     this.viewVendorBranchMainCObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchMainC.json";
     this.viewBranchInfoSuppObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchInfoSupp.json";
-    this.viewBranchInfoSuppObj.ddlEnvironments = [
-      {
-        name: "LinkSupplierHO",
-        environment: environment.FoundationR3Web
-      },
-    ];
+
     this.viewBranchInfoSurObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchInfoSur.json";
-    this.viewBranchInfoSurObj.ddlEnvironments = [
-      {
-        name: "LinkSurveyorHO",
-        environment: environment.FoundationR3Web
-      },
-    ];
+
     this.viewBranchInfoAssetObj.viewInput = "./assets/ucviewgeneric/viewBranchInfoAsset.json";
-    this.viewBranchInfoAssetObj.ddlEnvironments = [
-      {
-        name: "LinkAssetHO",
-        environment: environment.FoundationR3Web
-      },
-    ];
+
     this.viewBranchInfoLifeObj.viewInput = "./assets/ucviewgeneric/viewBranchInfoLife.json";
-    this.viewBranchInfoLifeObj.ddlEnvironments = [
-      {
-        name: "LinkLifeHO",
-        environment: environment.FoundationR3Web
-      },
-    ];
+
     this.viewVendorBranchTaxObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchTax.json";
     this.viewVendorBranchTaxAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchTaxAddr.json";
     this.viewVendorBranchAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchAddr.json";

@@ -52,19 +52,19 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "Office Code",
             "name": "RO.OFFICE_CODE"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "Office Name",
             "name": "RO.OFFICE_NAME"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "Office Address",
             "name": "RO.OFFICE_ADDR"
         },
@@ -83,17 +83,17 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "OfficeCode"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "OfficeName"
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "OfficeAddr"
         },
         {

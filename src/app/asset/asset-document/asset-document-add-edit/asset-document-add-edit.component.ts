@@ -11,6 +11,9 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { GenericListByCodeObj } from 'app/shared/model/Generic/GenericListByCodeObj.model';
+import { ResGeneralSettingObj, ResListGeneralSettingObj } from 'app/shared/model/Response/GeneralSetting/ResGeneralSettingObj.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-asset-document-add-edit',
@@ -74,12 +77,14 @@ export class AssetDocumentAddEditComponent implements OnInit {
       }
     );
 
-    this.http.post(URLConstant.GetListGeneralSettingByListGsCode, {Codes: [CommonConstant.GSCodeIsShowCbxBorrow, CommonConstant.GSCodeIsShowCbxPledge]}).subscribe(
+    let ReqGetListGSByListGsCode: GenericListByCodeObj = new GenericListByCodeObj();
+    ReqGetListGSByListGsCode.Codes = [CommonConstant.GSCodeIsShowCbxBorrow, CommonConstant.GSCodeIsShowCbxPledge];
+    this.http.post<ResListGeneralSettingObj>(URLConstant.GetListGeneralSettingByListGsCode, ReqGetListGSByListGsCode).subscribe(
       (response) => {
-        var tempResponse = response['ResponseGeneralSettingObj'];
-        let GSIsShowCbxBorrow = tempResponse.find(x => x.GsCode == CommonConstant.GSCodeIsShowCbxBorrow);
-        let GSIsShowCbxPledge = tempResponse.find(x => x.GsCode == CommonConstant.GSCodeIsShowCbxPledge);
-
+        let tempResponse: Array<ResGeneralSettingObj> = response.ResGetListGeneralSettingObj;
+        let GSIsShowCbxBorrow = tempResponse.find(x => x.GsCode == "IS_SHOW_CBX_BORROW");
+        let GSIsShowCbxPledge = tempResponse.find(x => x.GsCode == "IS_SHOW_CBX_PLEDGE");
+        
         if (GSIsShowCbxBorrow != undefined || GSIsShowCbxBorrow != null)
           this.isShowCbxBorrow = GSIsShowCbxBorrow["GsValue"];
         if (GSIsShowCbxPledge != undefined || GSIsShowCbxPledge != null)

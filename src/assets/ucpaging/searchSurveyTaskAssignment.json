@@ -13,7 +13,8 @@
             "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
             "label": "Surveyor Group Name",
             "items": [],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "environment": "FOU"
         },
         {
             "type": "textbox",

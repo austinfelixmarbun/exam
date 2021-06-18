@@ -10,6 +10,9 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-company-address-add',
@@ -21,17 +24,16 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   @Input() mode: string;
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
 
-  listCustAddr: any;
+  listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
   listAddressType: any;
   copyCustomerAddr: any;
   copyCustomerAddrFrom: any;
 
   addressObj: CustAddrObj;
-  custAddrObj: CustAddrObj;
-  addressType: RefMasterObj;
+  custAddrObj: GenericObj = new GenericObj();
+  addressType: ReqRefMasterByTypeCodeAndMappingCodeObj;
   custAddressObj: CustAddrObj;
   inputFieldAddressObj: InputFieldObj;
-  custAddrFromObj: CustAddrObj;
 
   IdCust: number;
   pageType: string;
@@ -57,15 +59,6 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }
-      // if (params["IdCustPersonal"] != null) {
-      //   this.IdCustPersonal = params["IdCustPersonal"];
-      // }
-      // if (params["mode"] != null) {
-      //   this.pageType = params["mode"];
-      // }
-      // if (params["AddrId"] != null) {
-      //   this.AddrId = params["AddrId"];
-      // }
     });
   }
 
@@ -74,7 +67,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
 
-    this.addressType = new RefMasterObj();
+    this.addressType = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
     this.addressType.MappingCode = CommonConstant.CustTypeCompany;
 
@@ -89,11 +82,9 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
       }
     );
 
-    this.custAddrObj = new CustAddrObj();
-    this.custAddrObj.CustId = this.IdCust;
-    this.custAddrObj.MrCustAddrTypeCode = "-";
+    this.custAddrObj.Id = this.IdCust;
     this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
-      (response) => {
+      (response : ResGetListCustAddrObj) => {
         this.listCustAddr = response[CommonConstant.ReturnObj];
         if (this.listCustAddr.length > 0) {
           this.CustDataCompanyForm.patchValue({ CopyAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'] });
@@ -102,9 +93,9 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     );
 
     if (this.pageType == "edit") {
-      this.custAddrObj = new CustAddrObj();
-      this.custAddrObj.CustAddrId = this.AddrId;
-      this.http.post(URLConstant.GetCustAddr, {Id : this.AddrId}).subscribe(
+      this.custAddrObj = new GenericObj();
+      this.custAddrObj.Id = this.AddrId;
+      this.http.post(URLConstant.GetCustAddr, this.custAddrObj).subscribe(
         (response) => {
           this.copyCustomerAddr = response;
           this.CustDataCompanyForm.patchValue({
@@ -155,9 +146,9 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
       return;
     }
 
-    this.custAddrFromObj = new CustAddrObj();
-    this.custAddrFromObj.CustAddrId = this.CustDataCompanyForm.controls["CopyAddrFrom"].value;
-    this.http.post(URLConstant.GetCustAddr, this.custAddrFromObj).subscribe(
+    let CustAddrIdObj = new GenericObj();
+    CustAddrIdObj.Id = this.CustDataCompanyForm.controls["CopyAddrFrom"].value;
+    this.http.post(URLConstant.GetCustAddr, CustAddrIdObj).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
         this.CustDataCompanyForm.patchValue({

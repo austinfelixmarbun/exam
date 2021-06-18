@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
-import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcpagingComponent } from '@adins/ucpaging';
@@ -22,19 +21,5 @@ export class SurveyOrderComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchSurveyOrder.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSurveyOrder.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "RM.MASTER_CODE",
-        environment: environment.FoundationR3Url
-      },
-      {
-        name: "RO.OFFICE_NAME",
-        environment: environment.FoundationR3Url
-      },
-      {
-        name: "RS.REF_STATUS_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
   }
 }

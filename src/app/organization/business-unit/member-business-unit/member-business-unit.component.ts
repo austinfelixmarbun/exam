@@ -28,16 +28,6 @@ export class MemberBusinessUnitComponent implements OnInit {
 
     this.inputPagingObj._url = "./assets/ucpaging/searchBusinessUnitMember.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBusinessUnitMember.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "RJT.JOB_TITLE_CODE",
-        environment: environment.FoundationR3Url
-      },
-      {
-        name: "RO.OFFICE_CODE",
-        environment: environment.FoundationR3Url
-      }
-    ];
 
     var critInput = new CriteriaObj();
     critInput.propName = "RUR.REF_BIZ_UNIT_ID";

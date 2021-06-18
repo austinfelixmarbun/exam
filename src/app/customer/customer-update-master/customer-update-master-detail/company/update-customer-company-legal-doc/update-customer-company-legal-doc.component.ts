@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { UpdateCustLegalDocObj } from 'app/shared/model/UpdateMasterCust/UpdateCustLegalDocObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -20,6 +21,7 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
   @Output() ResponseTab: EventEmitter<any>;
   AppLegalDoc: Array<UpdateCustLegalDocObj>;
   MasterLegalDoc: Array<UpdateCustLegalDocObj>;
+  ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   CustCompanyId: number;
 
   constructor(
@@ -34,7 +36,8 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post(URLConstant.GetLegalDocForUpdateMasterCustCompanyLegalDoc, { CustDataTrxId: this.CustDataTrxId}).toPromise().then(
+    this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
+    this.http.post(URLConstant.GetLegalDocForUpdateMasterCustCompanyLegalDoc, this.ReqCustDataTrxIdObj).toPromise().then(
       (response) => {
         this.AppLegalDoc = response["AppLegalDocList"];
         this.MasterLegalDoc = response["MasterLegalDocList"];

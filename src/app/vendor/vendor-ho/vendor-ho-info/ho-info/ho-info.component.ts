@@ -31,12 +31,7 @@ export class HoInfoComponent implements OnInit {
     )
 
     this.viewSupplierObj.viewInput = "./assets/ucviewgeneric/viewHOInfoSupplier.json"; 
-    this.viewSupplierObj.ddlEnvironments = [
-      {
-        name: "LinkSupplierHolding",
-        environment: environment.FoundationR3Web
-      },
-    ];
+
     this.viewSurveyorObj.viewInput = "./assets/ucviewgeneric/viewHOInfoSurveyor.json";
   }
 }

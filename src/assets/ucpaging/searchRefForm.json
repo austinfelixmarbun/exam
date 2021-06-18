@@ -1,5 +1,5 @@
 {
-    "title": "Ref Form",
+    "title": "Form",
     "component": [
         {
             "type": "dropdown",
@@ -15,7 +15,24 @@
             "path": "/RefModule/GetListRefModuleKeyValue",
             "label": "Module",
             "items": [],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "environment": "FOU"
+        },
+        {
+            "type": "textbox",
+            "name": "RFF.TITLE",
+            "id": "ParentId",
+            "value": "",
+            "label": "Parent",
+            "placeholder": "Parent"
+        },
+        {
+            "type": "textbox",
+            "name": "RF.TITLE",
+            "id": "TitleId",
+            "value": "",
+            "label": "Title",
+            "placeholder": "Title"
         },
         {
             "type": "textbox",
@@ -26,12 +43,22 @@
             "placeholder": "Path"
         },
         {
-            "type": "textbox",
-            "name": "RF.TITLE",
-            "id": "TitleId",
+            "type": "dropdown",
+            "name": "RF.CLASS", 
+            "id": "ClassId",
             "value": "",
-            "label": "Title",
-            "placeholder": "Title"
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "ddlType": "all",
+            "url": "",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Class",
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "FORM_CLASS",
+            "items": [],
+            "itemsUrl": [],
+            "environment": "FOU"
         },
         {
             "type": "dropdown",
@@ -53,23 +80,6 @@
                 }
             ],
             "itemsUrl": []
-        },
-        {
-            "type": "dropdown",
-            "name": "RF.CLASS", 
-            "id": "ClassId",
-            "value": "",
-            "placeholder": "Placeholder",
-            "datatype": "text",
-            "isFromURL": true,
-            "ddlType": "all",
-            "url": "",
-            "path": "/RefMaster/GetListKeyValueActiveByCode",
-            "label": "Class",
-            "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "FORM_CLASS",
-            "items": [],
-            "itemsUrl": []
         }
     ],
     "querystring": {
@@ -81,6 +91,12 @@
             "position": "center",
             "label": "Module",
             "name": "RM.MODULE_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Parent",
+            "name": "RFF.TITLE"
         },
         {
             "type": "sort",
@@ -99,6 +115,12 @@
             "position": "center",
             "label": "Order No",
             "name": "RF.ORDER_NO"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Hierarchy No",
+            "name": "RF.HIERARCHY_NO"
         },
         {
             "type": "sort",
@@ -132,6 +154,11 @@
         {
             "type": "text",
             "position": "center",
+            "property": "Parent"
+        },
+        {
+            "type": "text",
+            "position": "center",
             "property": "Title"
         },
         {
@@ -143,6 +170,11 @@
             "type": "text",
             "position": "center",
             "property": "OrderNo"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "HierarchyNo"
         },
         {
             "type": "text",

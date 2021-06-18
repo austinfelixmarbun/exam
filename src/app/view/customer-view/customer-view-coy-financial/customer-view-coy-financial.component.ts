@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { DatePipe } from '@angular/common';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-view-coy-financial',
@@ -18,54 +18,38 @@ export class CustomerViewCoyFinancialComponent implements OnInit {
   ListCustCoyFinData: Array<object> = [];
   CustCoyFinData: object;
   responseCBAObj: any;
-  currentCustFinDataIndex: number;
+  responseCustAttr: any;
+  IsAttrExist: boolean;
 
-  constructor(
-    private http: HttpClient,
+  constructor(private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router) 
-  {
+    private router: Router) { }
+
+  ngOnInit() {
+    
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
         this.CustId = params['CustId'];
       }
     });
-  }
-
-  ngOnInit() {    
-    this.getListCustCoyFinData();
-    
     var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetCBAForCustFinDataByCustIdUrl, { Id: this.CustId }).subscribe(
-      response => {
+      (response) => {
         this.responseCBAObj = response['ListCBAForCustFinData'];
       },
-      error => {
+      (error) => {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
-  }
 
-  async getListCustCoyFinData()
-  {
-    this.ListCustCoyFinData = [];
-    await this.http.post(URLConstant.GetListCustCompanyFinDataByCustId,  {'CustId': this.CustId}).toPromise().then((response) => {
-      this.ListCustCoyFinData = response['ListCustCompanyFinData'];
-    })
-  }
-
-  showDetailCustFinData(index:number){
-    let datePipe = new DatePipe("en-US");
-    this.currentCustFinDataIndex = index;
-    this.CustCoyFinData = this.ListCustCoyFinData[this.currentCustFinDataIndex];
-    this.TitleSuffix = 'Date as of '+datePipe.transform(this.CustCoyFinData['DateAsOf'], 'dd-MMM-yyyy')
-    this.IsShowDetail = true;
-  }
-  
-  hideDetail()
-  {
-    this.TitleSuffix = '';
-    this.IsShowDetail = false;
-    this.CustCoyFinData = {};
+    this.http.post(URLConstant.GetCustFinDataAttrContentForCustViewByCustId, { Id : this.CustId }).subscribe(
+      (response) => {
+        this.responseCustAttr = response[CommonConstant.ReturnObj];
+        this.IsAttrExist = true;
+      },
+      (error) => {
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+      }
+    );
   }
 }

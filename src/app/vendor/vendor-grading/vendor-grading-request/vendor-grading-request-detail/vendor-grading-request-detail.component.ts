@@ -11,7 +11,7 @@ import { first } from "rxjs/operators";
 import { RFAInfoObj } from 'app/shared/model/Approval/RFAInfoObj.Model'
 import { VendorObj } from "app/shared/model/VendorObj.Model";
 import { VendorGradingHistObj } from "app/shared/model/VendorGradingHistObj.model";
-import { UcapprovalcreateComponent } from '@adins/Ucapprovalcreate';
+import { UcapprovalcreateComponent } from '@adins/ucapprovalcreate';
 import { UcInputRFAObj } from "app/shared/model/UcInputRFAObj.Model";
 import { CookieService } from "ngx-cookie";
 import { AdInsHelper } from "app/shared/AdInsHelper";
@@ -53,8 +53,8 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     }
   }
   ApprovalCreateOutput: any;
-  InputObj: UcInputRFAObj;
-  IsReady: Boolean = false;
+  InputObj: UcInputRFAObj= new UcInputRFAObj(this.cookieService);
+  IsReady: boolean = false;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -226,13 +226,11 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     this.vendorGradingHistObj.NewGrade = this.gradeCode;
 
     const reason = this.listReason.filter(reason => reason.Value == ReqValue.Reason);
- 
-    this.ApprovalCreateOutput = this.createComponent.output();  
-    if(this.ApprovalCreateOutput!=undefined){
+    let rfaInfo = {RFAInfo: this.VendorForm.controls.RFAInfo.value};
       var submitVendorGradingReqObj = {
         VendorGrading: this.vendorGradingHistObj,
         OfficeCode: this.currentUserContext[CommonConstant.OFFICE_CODE], 
-        RequestRFAObj:this.ApprovalCreateOutput
+        RequestRFAObj: rfaInfo
        
       }
     this.http.post(URLConstant.SubmitRequestVendorGrading, submitVendorGradingReqObj).subscribe(
@@ -240,7 +238,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
         this.toastr.successMessage(response["message"]);
         this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_PAGING]);
       })
-    }
+    
   }
 
   getLookupParent(event) {
@@ -253,7 +251,6 @@ export class VendorGradingRequestDetailComponent implements OnInit {
   }
   
   initInputApprovalObj(){
-    this.InputObj = new UcInputRFAObj();
     let Attributes = [{}] 
     let TypeCode = {
       "TypeCode" : CommonConstant.VENDOR_GRD_SUPPL_BRC_APV_TYPE,
@@ -276,5 +273,6 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     this.InputObj.Reason = this.listReason;
     this.InputObj.TrxNo = " ";
     this.IsReady = true;
+    console.log(this.listReason);
   }
 }

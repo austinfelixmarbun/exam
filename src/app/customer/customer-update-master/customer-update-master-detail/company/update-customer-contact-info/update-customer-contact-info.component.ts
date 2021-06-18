@@ -6,7 +6,9 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UpdateCustContactInfoObj } from 'app/shared/model/UpdateMasterCust/UpdateCustContactInfoObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { forkJoin } from 'rxjs';
@@ -20,6 +22,7 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
   AppContactInfo: UpdateCustContactInfoObj;
+  ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   ZipcodeLookupObj: InputLookupObj;
   JobPositionList: Array<any>;
   GenderList: Array<any>;
@@ -68,9 +71,12 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition });
-    let getGender = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender });
-    let getDetail = this.http.post(URLConstant.GetContactInfoForUpdateMasterCustCompanyContactInfo, { CustDataTrxId: this.CustDataTrxId });
+    let tempReqJob: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition, MappingCode: null };
+    let tempReqGender: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender, MappingCode: null };
+    let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, tempReqJob);
+    let getGender = this.http.post(URLConstant.GetListActiveRefMaster, tempReqGender);
+    this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
+    let getDetail = this.http.post(URLConstant.GetContactInfoForUpdateMasterCustCompanyContactInfo, this.ReqCustDataTrxIdObj);
     forkJoin([getDetail, getJobPosition, getGender]).toPromise().then(
       (response) => {
         this.AppContactInfo = response[0]["AppContactInfo"];

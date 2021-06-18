@@ -35,6 +35,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcaddtotempModule } from '@adins/ucaddtotemp'; 
 import { AttributeComponent } from './attribute/attribute.component';
 import { AttributeDetailComponent } from './attribute/attribute-detail/attribute-detail.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 
 
 @NgModule({
@@ -56,7 +58,9 @@ import { AttributeDetailComponent } from './attribute/attribute-detail/attribute
     UcgridviewModule,
     UclookupgenericModule,
     UcShowErrorsModule,
-    UcaddtotempModule
+    UcaddtotempModule,
+    MatSlideToggleModule,
+    UcdropdownlistModule
   ],
   declarations: [
     UserPagingComponent,

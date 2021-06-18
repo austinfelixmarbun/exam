@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { environment } from 'environments/environment';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
@@ -21,16 +20,6 @@ export class NotificationPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchNotification.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNotification.json";
-    this.inputPagingObj.ddlEnvironments = [
-      {
-        name: "NH.MR_NOTIFICATION_TYPE_CODE",
-        environment: environment.FoundationR3Url
-      },
-      {
-        name: "NH.STATUS",
-        environment: environment.FoundationR3Url
-      }
-    ];
   }
 
 }

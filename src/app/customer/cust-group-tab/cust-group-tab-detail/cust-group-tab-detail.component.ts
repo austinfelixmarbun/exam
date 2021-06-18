@@ -11,6 +11,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { first } from 'rxjs/operators';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-cust-group-tab-detail',
@@ -49,7 +50,7 @@ export class CustGroupTabDetailComponent implements OnInit {
   ngOnInit() {
     var criteriaList;
     var criteriaObj;
-    var refMasterRelationship = new RefMasterObj();
+    var refMasterRelationship: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.CustGrpForm.patchValue({
       MemberCustId: this.CustId
     });
@@ -59,12 +60,6 @@ export class CustGroupTabDetailComponent implements OnInit {
       this.inputLookupCustPersonalObj.urlJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
       this.inputLookupCustPersonalObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
       this.inputLookupCustPersonalObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Personal.json";
-      this.inputLookupCustPersonalObj.ddlEnvironments = [
-        {
-          name: "C.MR_CUST_TYPE_CODE",
-          environment: environment.FoundationR3Url
-        }
-      ];
 
       if(this.ListCustIdToExclude && this.ListCustIdToExclude.length > 0){
         criteriaList = new Array();
@@ -93,12 +88,6 @@ export class CustGroupTabDetailComponent implements OnInit {
       this.inputLookupCustCompanyObj.urlJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
       this.inputLookupCustCompanyObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
       this.inputLookupCustCompanyObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCust_CustGrp_Company.json";
-      this.inputLookupCustCompanyObj.ddlEnvironments = [
-        {
-          name: "C.MR_CUST_TYPE_CODE",
-          environment: environment.FoundationR3Url
-        }
-      ];
       if(this.ListCustIdToExclude && this.ListCustIdToExclude.length > 0){
         criteriaList = new Array();
         criteriaObj = new CriteriaObj();
@@ -122,7 +111,7 @@ export class CustGroupTabDetailComponent implements OnInit {
 
   getLookupCustPersonalResponse(e){
     this.isCustPicked = true;
-    var refMasterRelationship = new RefMasterObj();
+    var refMasterRelationship: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.CustGrpForm.patchValue({
       CustId: e.custId,
       CustNo: e.custNo,
@@ -148,7 +137,7 @@ export class CustGroupTabDetailComponent implements OnInit {
 
   getLookupCustCompanyResponse(e){
     this.isCustPicked = true;
-    var refMasterRelationship = new RefMasterObj();
+    var refMasterRelationship: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.CustGrpForm.patchValue({
       CustId: e.custId,
       CustNo: e.custNo,

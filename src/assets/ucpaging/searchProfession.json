@@ -21,10 +21,13 @@
         "isFromURL": true,
         "ddlType": "all",
         "url": "",
-        "path": "/RefCustModel/GetListKeyValueByCode",
+        "path": "/RefMaster/GetListKeyValueActiveByCode",
         "label": "Customer Model Name",
+        "criteriaPropName" : "RefMasterTypeCode",
+        "criteriaPropValue" : "CUST_MODEL",
         "items": [],
-        "itemsUrl": []
+        "itemsUrl": [],
+        "environment": "FOU"
       },
       {
         "type": "textbox",

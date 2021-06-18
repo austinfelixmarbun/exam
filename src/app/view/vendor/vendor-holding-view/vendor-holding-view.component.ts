@@ -12,6 +12,7 @@ import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-vendor-holding-view',
@@ -108,8 +109,9 @@ export class VendorHoldingViewComponent implements OnInit {
     )
     this.HoListObj = new VendorObj();
     this.HoListObj.VendorId = this.VendorId;
-
-    this.http.post(URLConstant.GetListHoByVendorId, {Id : this.VendorId}).subscribe(
+    let ReqGetListHO : GenericObj = new GenericObj();
+    ReqGetListHO.Id = this.VendorId;
+    this.http.post(URLConstant.GetListHoByVendorId, ReqGetListHO).subscribe(
       response => {
         this.Vendor = response[CommonConstant.ReturnObj]
 

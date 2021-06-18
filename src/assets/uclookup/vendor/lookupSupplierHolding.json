@@ -1,0 +1,72 @@
+{
+    "component": [
+        {
+            "type": "textbox",
+            "name": "VENDOR_CODE",
+            "id": "VendorCodeId",
+            "value": "",
+            "label": "SUPPLIER HOLDING CODE",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "VENDOR_NAME",
+            "id": "VendorNameId",
+            "value": "",
+            "label": "SUPPLIER HOLDING NAME",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "name": "lookupVendorParent"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "SUPPLIER HOLDING CODE",
+            "name": "VENDOR_CODE "
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "SUPPLIER HOLDING NAME",
+            "name": "VENDOR_NAME"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "VendorCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "VendorName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "path": "Vendor/HO/Detail",
+                    "param": [
+                        {
+                            "type": "VendorId",
+                            "property": "VendorId"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "propertyId": "VendorId",
+    "propertyName": "VendorName"  
+}

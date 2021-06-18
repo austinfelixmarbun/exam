@@ -29,7 +29,8 @@
         "path": "/AssetType/GetListKeyValueActiveByCode",
         "isFromURL" : true, 
         "url" : "", 
-        "itemsUrl" : []
+        "itemsUrl" : [],
+        "environment": "FOU"
       }
     ],
     "querystring": {

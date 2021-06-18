@@ -10,7 +10,11 @@ import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { DatePipe } from '@angular/common';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -32,11 +36,11 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   inputLookupCustCompanyObj: InputLookupObj;
   custCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
 
-  tempMrCustModelCode: any;
+  tempMrCustModelCode: Array<KeyValueObj> = new Array<KeyValueObj>();
   tempMrCompanyTypeCode: any;
   tempCustCompanyMgmntShrholderObj: any;
-
   tempShareholderCustNo: string;
+  custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
 
   ManagementShareholderForm = this.fb.group({
     MgmntShrholderName: ['', [Validators.maxLength(100), Validators.required]],
@@ -79,9 +83,9 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
 
     this.inputLookupCustCompanyObj.addCritInput = arrCrit;
 
-    var refMasterObjMrCompanyTypeCode = {
+    var refMasterObjMrCompanyTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
-      RowVersion: ""
+      MappingCode: null
     }
 
     this.lookUpIndustryTypeObj = new InputLookupObj();
@@ -101,13 +105,12 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
       }
     );
 
-    let refMasterObjCustModel = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
-      MappingCode: CommonConstant.CustTypeCompany
-    }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObjCustModel).subscribe(
-      (response) => {
-        this.tempMrCustModelCode = response;
+    this.custModelReqObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
+    this.custModelReqObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
+    this.custModelReqObj.MappingCode = CommonConstant.CustTypeCompany;
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.custModelReqObj).subscribe(
+      (response : GenericKeyValueListObj) => {
+        this.tempMrCustModelCode = response[CommonConstant.ReturnObj];
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.tempMrCustModelCode = response[CommonConstant.ReturnObj];
           this.ManagementShareholderForm.patchValue({

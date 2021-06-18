@@ -99,9 +99,9 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
             this.inputPagingObjSupervisor.nameSelect = "";
           }
           else {
-            this.http.post(URLConstant.GetRefUserById, {Id : Supervisor.RefUserId}).subscribe(
+            this.http.post(URLConstant.GetEmpNameByRefUserId, {Id : Supervisor.RefUserId}).subscribe(
               (response) => {
-                this.inputPagingObjSupervisor.nameSelect = response["Username"];
+                this.inputPagingObjSupervisor.nameSelect = response["EmpName"];
               }
             )
           }

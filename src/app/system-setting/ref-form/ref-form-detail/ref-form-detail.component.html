@@ -5,7 +5,7 @@
         <div class="card-header header-title">
           <div class="row">
             <div class="col-md-8">
-              <h4 class="card-title" id="horz-layout-colored-controls" translate> Ref Form </h4>
+              <h4 class="card-title" id="horz-layout-colored-controls" translate> Form </h4>
             </div>
           </div>
         </div>
@@ -79,8 +79,14 @@
                 <label class="col-md-3" translate>Icon</label>
                 <div class="col-md-9">
                   <div style="display: flex; flex-direction: row; justify-content: left; align-items: center;">                    
-                    <input type="text" class="form-control adInsInput number" formControlName="Icon"
-                      [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.Icon.invalid }">
+                    <!-- <input *ngIf="IsTextMode" type="text" class="form-control adInsInput number" formControlName="Icon"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.Icon.invalid }">                      
+                      
+                      <mat-slide-toggle style="float: right;" [(checked)]="IsTextMode" (change)="changeTextMode($event)"> Text Mode 
+                      </mat-slide-toggle> -->
+                      
+                    <lib-ucdropdownlist [dropdownListObj]="ddlTemplateIcon" [parentForm]="RefForm"
+                    [enjiForm]="enjiForm" [identifier]="'Icon'"></lib-ucdropdownlist>
                     <label style="margin-left: 10px;" translate>Contoh Icon: <i style="color: blue; font-size: 20px; cursor: pointer;" [ngClass]="[RefForm.controls.Icon.value]"></i></label>
                   </div>
                   <lib-uc-show-errors [control]="RefForm.controls.Icon" [submit]="enjiForm.submitted">

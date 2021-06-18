@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-payment-alloc-group-paging',
@@ -17,10 +16,6 @@ export class PaymentAllocGroupPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/common-setting/payment-alloc-group/search-payment-alloc-group-paging.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/common-setting/payment-alloc-group/search-payment-alloc-group-paging.json";
-    this.inputPagingObj.ddlEnvironments = [{
-      name: "RPAG.MR_PAY_ALLOC_GRP_CODE",
-      environment: environment.FoundationR3Url
-    }];
     this.isReady = true;
   }
 }

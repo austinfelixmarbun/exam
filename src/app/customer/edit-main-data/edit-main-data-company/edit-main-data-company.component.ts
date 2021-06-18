@@ -14,11 +14,12 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { map, mergeMap } from 'rxjs/operators';
-import { forkJoin } from 'rxjs';
-import { CustThirdPartyCheckingObj } from 'app/shared/model/CustThirdPartyCheckingObj.Model';
+//import { CustThirdPartyCheckingObj } from 'app/shared/model/CustThirdPartyCheckingObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 
 @Component({
   selector: 'app-edit-main-data-company',
@@ -28,7 +29,7 @@ import { CustThirdPartyCheckingObj } from 'app/shared/model/CustThirdPartyChecki
 export class EditMainDataCompanyComponent implements OnInit {
 
   tempCustObj: any;
-  tempCustModel: any;
+  tempCustModel: Array<KeyValueObj> = new Array<KeyValueObj>();
   custCompanyObj: any;
   tempCompanyTypeCode: any;
   tempCustCompanyObj: any;
@@ -44,6 +45,7 @@ export class EditMainDataCompanyComponent implements OnInit {
   inputFieldObj: InputFieldObj;
   inputAddressObj: InputAddressObj;
   UcAddressObj: UcAddressObj = new UcAddressObj();
+  custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
 
   editCustUrl: string;
   editCustCompanyUrl: string;
@@ -53,7 +55,7 @@ export class EditMainDataCompanyComponent implements OnInit {
   GetListActiveRefMasterWithMappingCodeAllUrl: string;
 
   closeResult;
-  CustThirdPartyChecking: CustThirdPartyCheckingObj = new CustThirdPartyCheckingObj();
+  // CustThirdPartyChecking: CustThirdPartyCheckingObj = new CustThirdPartyCheckingObj();
   IsCustThirdPartyCheck: boolean = false;
   MaxDaysCustThirdPartyCheck: number = 0;
   LastHit = {
@@ -84,8 +86,8 @@ export class EditMainDataCompanyComponent implements OnInit {
     CustModel: ['', [Validators.required]],
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
     MrCompanyTypeCode: ['', [Validators.required]],
-    TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
-    IsVip: [true],
+    TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
+    IsVip : [true],
     IsAffiliateWithMf: [true],
     VipNotes: ['']
   });
@@ -101,21 +103,20 @@ export class EditMainDataCompanyComponent implements OnInit {
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
 
-    var refMasterObjCustModel = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
-      MappingCode: CommonConstant.CustTypeCompany
-    }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObjCustModel).subscribe(
-      (response) => {
-        this.tempCustModel = response["ReturnObject"];
+    this.custModelReqObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
+    this.custModelReqObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
+    this.custModelReqObj.MappingCode = CommonConstant.CustTypeCompany;
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.custModelReqObj).subscribe(
+      (response : GenericKeyValueListObj) => {
+        this.tempCustModel = response[CommonConstant.ReturnObj];
         this.CustomerCompanyForm.patchValue({
           CustModel: this.tempCustModel[0].Key
         });
       }
     );
-    var refMasterObjMrCompanyTypeCode = {
+    var refMasterObjMrCompanyTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCompanyType,
-      RowVersion: ""
+      MappingCode: null
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCompanyTypeCode).subscribe(
       (response) => {
@@ -158,7 +159,10 @@ export class EditMainDataCompanyComponent implements OnInit {
         }
         this.custObj.RowVersion = this.tempCustObj.RowVersion;
         this.custObj.MrCustTypeCode = this.tempCustObj.MrCustTypeCode;
-        this.CustomerCompanyForm.controls["TaxIdNo"].disable();
+        
+        if(this.tempCustObj.TaxIdNo != ""){
+          this.CustomerCompanyForm.controls["TaxIdNo"].disable();
+        }
 
         let reqObj: GenericObj = new GenericObj();
         reqObj.Id = this.tempCustObj.CustId;
@@ -176,8 +180,7 @@ export class EditMainDataCompanyComponent implements OnInit {
             this.inputAddressObj.default = this.UcAddressObj;
             this.inputAddressObj.inputField = this.inputFieldObj;
             this.custObj.CustAddr.CustAddrId = response.CustAddrId;
-            this.custObj.CustAddr.RowVersion = response.RowVersion;
-            this.tempCustAddr = response;
+            this.custObj.CustAddr.RowVersion = response.RowVersion != null ? response.RowVersion : "";
           }
         );
       }

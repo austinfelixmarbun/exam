@@ -16,7 +16,8 @@
         "label": "Office Name",
         "isQueryIn": true,
         "items": [],
-        "itemsUrl": []
+        "itemsUrl": [],
+        "environment": "FOU"
       },
       {
         "type": "textbox",
@@ -137,7 +138,7 @@
       {
         "type": "text",
         "position": "center",
-        "property": "UploadNo"
+        "property": "TransactionNo"
       },
       {
         "type": "text",
@@ -173,7 +174,7 @@
               },
               {
                 "type": "UploadNo",
-                "property": "UploadNo"
+                "property": "TransactionNo"
               },
               {
                 "type": "TaskListId",

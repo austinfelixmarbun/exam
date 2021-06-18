@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { UpdateCustCompanyShareholderObj } from 'app/shared/model/UpdateMasterCust/UpdateCustCompanyShareholderObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -17,6 +18,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class UpdateCustomerMgmntShareholderComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
+  ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   AppShareholder: Array<UpdateCustCompanyShareholderObj>;
   MasterShareholder: Array<UpdateCustCompanyShareholderObj>;
   CustId: number;
@@ -33,7 +35,8 @@ export class UpdateCustomerMgmntShareholderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post(URLConstant.GetShareholderForUpdateMasterCustCompanyShareholder, { CustDataTrxId: this.CustDataTrxId }).toPromise().then(
+    this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
+    this.http.post(URLConstant.GetShareholderForUpdateMasterCustCompanyShareholder, this.ReqCustDataTrxIdObj).toPromise().then(
       (response) => {
         console.log("Response Shareholder: " + JSON.stringify(response));
         this.MasterShareholder = response["MasterCustShareholder"];

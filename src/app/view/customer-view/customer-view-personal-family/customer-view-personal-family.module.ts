@@ -12,18 +12,16 @@ import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneric";
 import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
-import { UcapprovalhistModule, UcapprovalhistComponent } from "@adins/ucapprovalhist";
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewPersonalFamilyComponent } from "./customer-view-personal-family.component";
 import { CustomerViewPersonalFamilyRoutingModule } from "./customer-view-personal-family-routing.module";
-
-
 
 @NgModule({
   imports: [
     CustomerViewPersonalFamilyRoutingModule,
     CommonModule,
     FormsModule,
+    HttpModule,
     UCSearchModule,
     UcgridfooterModule,
     UcpagingModule,
@@ -35,18 +33,14 @@ import { CustomerViewPersonalFamilyRoutingModule } from "./customer-view-persona
     ReactiveFormsModule,
     UcSubsectionModule,
     SharingComponentModule,
-    UcapprovalhistModule,
     UcShowErrorsModule,
   ],
   declarations: [
-    ///customer
     CustomerViewPersonalFamilyComponent
-
   ],
   entryComponents: [
     UcviewgenericComponent,
-    UcgridviewComponent,
-    UcapprovalhistComponent
+    UcgridviewComponent
   ]
 
 })

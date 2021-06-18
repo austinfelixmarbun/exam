@@ -7,7 +7,9 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UpdateMasterCustJobDataObj } from 'app/shared/model/UpdateMasterCust/UpdateMasterCustJobDataObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { forkJoin } from 'rxjs';
@@ -22,6 +24,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
   AppJobData: UpdateMasterCustJobDataObj;
+  ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   CustModelList: Array<any>;
   JobPositionList: Array<any>;
   JobStatusList: Array<any>;
@@ -99,11 +102,19 @@ export class UpdateCustomerJobDataComponent implements OnInit {
 
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
-    let getDetail = this.http.post(URLConstant.GetCustJobDataForUpdateMasterCustJobData, { Id: this.CustDataTrxId });
-    let getCustModel = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel });
-    let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition });
-    let getJobStatus = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobStat });
-    let getCompanyScale = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCoyScale });
+    this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
+    let getDetail = this.http.post(URLConstant.GetCustJobDataForUpdateMasterCustJobData, this.ReqCustDataTrxIdObj);
+    let tempReqCustModel: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel, MappingCode: null };
+    let getCustModel = this.http.post(URLConstant.GetListActiveRefMaster, tempReqCustModel);
+    
+    let tempReqJobPos: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition, MappingCode: null };
+    let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, tempReqJobPos);
+
+    let tempReqJobStat: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobStat, MappingCode: null };
+    let getJobStatus = this.http.post(URLConstant.GetListActiveRefMaster, tempReqJobStat);
+
+    let tempReqCompanyScale: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCoyScale, MappingCode: null };
+    let getCompanyScale = this.http.post(URLConstant.GetListActiveRefMaster, tempReqCompanyScale);
     forkJoin([getDetail, getCustModel, getJobPosition, getJobStatus, getCompanyScale]).pipe(
       map((response) => {
         this.AppJobData = response[0]["AppCustJobData"];

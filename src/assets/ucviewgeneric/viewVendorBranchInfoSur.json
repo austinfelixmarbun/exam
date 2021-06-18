@@ -13,18 +13,19 @@
             "name": "LinkSurveyorHO",
             "target": "_blank",
             "path": "VIEW_VENDOR_HO",
+            "environment": "FOU_WEB",
             "param": [
               {
                 "type": "VendorId",
                 "property": "VendorParentId"
               }
             ]
-          },{},
+          },
           {
             "type": "text",
             "label": "Assignment Type:",
             "property": "Atype"
-          },{},
+          },
           {
             "type": "text",
             "label": "Maximum Task Load",

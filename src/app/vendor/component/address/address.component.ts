@@ -17,6 +17,7 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 export class AddressComponent implements OnInit {
   inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
   vendorAddrObj: VendorAddrObj = new VendorAddrObj();
+  ReqVendorAddrObj : GenericObj = new GenericObj();
   mode: string = "add";
   @Input() objInput: any;
   result: any;
@@ -50,16 +51,12 @@ export class AddressComponent implements OnInit {
 
     if (this.objInput.Type == "Vendor") {
       this.getUrl = URLConstant.GetVendorAddrByVendorId;
-      this.ReqGetVendor.Id = this.objInput.VendorId;
-      this.ReqGetVendor.Code = CommonConstant.AddrTypeLegal;
-      // this.vendorAddrObj.VendorId = this.objInput.VendorId;
-      // this.vendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeLegal;
+      this.ReqVendorAddrObj.Id = this.objInput.VendorId;
+      this.ReqVendorAddrObj.Code = CommonConstant.AddrTypeLegal;
     } else if (this.objInput.Type == "VendorEmployee") {
       this.getUrl = URLConstant.GetVendorAddrByVendorEmpId;
-      this.ReqGetVendor.Id = this.objInput.VendorEmpId;
-      this.ReqGetVendor.Code = CommonConstant.AddrTypeLegal;
-      // this.vendorAddrObj.VendorEmpId = this.objInput.VendorEmpId;
-      // this.vendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeLegal;
+      this.ReqVendorAddrObj.Id = this.objInput.VendorEmpId;
+      this.ReqVendorAddrObj.Code = CommonConstant.AddrTypeLegal;
     }
 
     
@@ -139,7 +136,7 @@ export class AddressComponent implements OnInit {
   }
 
   refreshVendorAddress() {
-    this.http.post<VendorAddrObj>(this.getUrl, this.ReqGetVendor).subscribe(
+    this.http.post<VendorAddrObj>(this.getUrl, this.ReqVendorAddrObj).subscribe(
       (response) => {
         this.vendorAddrObj = response;
         this.AddressForm.patchValue({

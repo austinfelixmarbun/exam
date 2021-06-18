@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { UpdateCustFamilyObj } from 'app/shared/model/UpdateMasterCust/UpdateCustFamilyObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -18,6 +19,7 @@ export class UpdateCustomerFamilyComponent implements OnInit {
   @Output() ResponseTab: EventEmitter<any>;
   ListAppFamily: Array<UpdateCustFamilyObj>;
   ListCustFamily: Array<UpdateCustFamilyObj>;
+  ReqCustDataTrxIdObj: GenericObj = new GenericObj();
 
   constructor(
     private http: HttpClient,
@@ -30,7 +32,8 @@ export class UpdateCustomerFamilyComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post(URLConstant.GetCustFamilyDataForUpdateMasterCustFamily, { Id: this.CustDataTrxId }).toPromise().then(
+    this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
+    this.http.post(URLConstant.GetCustFamilyDataForUpdateMasterCustFamily, this.ReqCustDataTrxIdObj).toPromise().then(
       (response) => {
         this.ListCustFamily = response["MasterCustFamilyList"];
         this.ListAppFamily = response["AppFamilyList"];

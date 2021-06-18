@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { KeyValueObj } from 'app/shared/model/KeyValueObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -20,12 +20,12 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustObj } from 'app/shared/model/CustObj.Model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { environment } from 'environments/environment';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
 // import { CustThirdPartyCheckingObj } from 'app/shared/model/CustThirdPartyCheckingObj.Model';
-import { map, mergeMap } from 'rxjs/operators';
-import { forkJoin } from 'rxjs';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
+
 
 @Component({
   selector: 'app-customer-personal-main-info',
@@ -37,7 +37,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   Gender: any;
   tempGender: any;
   tempIdType: any;
-  tempCustModel: any;
+  tempCustModel: Array<KeyValueObj> = new Array<KeyValueObj>();
 
   custPersonalObj: CustPersonalObj;
 
@@ -92,6 +92,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     ASLIRI: 'Not Hit Yet',
     TRST: 'Not Hit Yet'
   };
+  custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
 
   CustomerPersonalForm = this.fb.group({
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -144,9 +145,9 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
 
-    var refMasterObj = {
+    var refMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
-      RowVersion: ""
+      MappingCode: null
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObj).subscribe(
       (response) => {
@@ -156,9 +157,9 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         });
       }
     );
-    var refMasterObjMrIdTypeCode = {
+    var refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
-      RowVersion: ""
+      MappingCode: null
     }
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
@@ -180,21 +181,21 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
         }
       }
     );
-
-    let refMasterObjCustModel = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
-      MappingCode: CommonConstant.CustTypePersonal
-    }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObjCustModel).subscribe(
-      (response) => {
-        this.tempCustModel = response["ReturnObject"];
+    
+    this.custModelReqObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
+    this.custModelReqObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
+    this.custModelReqObj.MappingCode = CommonConstant.CustTypePersonal;
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.custModelReqObj).subscribe(
+      (response : GenericKeyValueListObj) => {
+        this.tempCustModel = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({
           CustModel: this.tempCustModel[0].Key
         });
       }
     );
 
-    this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat }).toPromise().then(
+    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat, MappingCode: null };
+    this.http.post(URLConstant.GetListActiveRefMaster, tempReq).toPromise().then(
       (response) => {
         this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
         this.CustomerPersonalForm.patchValue({

@@ -2,14 +2,12 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } 
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { AddCustObj } from 'app/shared/model/AddCustObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { DuplicateCustObj } from 'app/shared/model/DuplicateCust.Model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
-import { RequestNegativeCustObj } from 'app/shared/model/RequestNegativeCustObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
@@ -18,6 +16,9 @@ import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntS
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { ReqGetNegativeCustByNegativeCustNameAndCustTypeObj } from 'app/shared/model/Request/NegativeCust/ReqGetNegativeCustObj.model';
+import { ResNegativeCustObj } from 'app/shared/model/Response/NegativeCust/ResNegativeCustObj.model';
+import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
 
 @Component({
   selector: 'app-customer-personal-duplicate-check',
@@ -47,7 +48,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
   addCustObj: AddCustObj;
   custPersonalObj: CustPersonalObj;
   DuplicateCustObj: DuplicateCustObj;
-  RequestNegativeCustObj: RequestNegativeCustObj = new RequestNegativeCustObj();
+  RequestNegativeCustObj: ResNegativeCustObj = new ResNegativeCustObj();
 
   IdNo: string;
   IsVip: string;
@@ -210,10 +211,9 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
       }
     );
 
-    let refMasterObjCustModel = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel,
-      MasterCode: this.CustModel
-    }
+    var refMasterObjCustModel = new ReqRefMasterByTypeCodeAndMasterCodeObj();
+    refMasterObjCustModel.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
+    refMasterObjCustModel.MasterCode = this.CustModel;
     this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMasterObjCustModel).subscribe(
       (response) => {
         this.tempCustModel = response;
@@ -354,9 +354,10 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
   }
 
   EditCustPersonal(item) {
-    var CustObj = { CustNo: item.CustNo, CustName: this.CustName, IdNo: item.IdNo };
+    let CustNoObj = new GenericObj();
+    CustNoObj.CustNo = item.CustNo;
     // this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustObj).subscribe(
-    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, { TrxNo: item.CustNo }).pipe(
+    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustNoObj).pipe(
       map((response) => {
         this.addCustObj = new AddCustObj();
         this.addCustObj.CustObj = response['CustObj'];
@@ -375,6 +376,7 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
           this.addCustObj.CustObj.MrCustModelCode = this.CustMgmntShareholderData.MrCustModelCode;
           this.addCustObj.CustObj.MrIdTypeCode = this.CustMgmntShareholderData.MrIdTypeCode;
           this.addCustObj.CustObj.IdExpiredDt = this.CustMgmntShareholderData.IdExpiredDt;
+          this.addCustObj.CustObj.IsShareholder = true;
           this.addCustObj.CustPersonalObj.MrGenderCode = this.CustMgmntShareholderData.MrGenderCode;
           this.addCustObj.CustPersonalObj.BirthPlace = this.CustMgmntShareholderData.BirthPlace;
         } else {
@@ -454,8 +456,11 @@ export class CustomerPersonalDuplicateCheckComponent implements OnInit, OnDestro
   }
 
   EditNegativeCustPersonal(item) {
-    var NegativeCustObj = { CustNo: item.CustNo, CustName: item.CustName, MrCustTypeCode: item.MrCustTypeCode, IdNo: item.IdNo };
-    this.http.post<RequestNegativeCustObj>(URLConstant.GetNegativeCustByNegativeCustNameAndCustType, NegativeCustObj).subscribe(
+    let NegativeCustObj: ReqGetNegativeCustByNegativeCustNameAndCustTypeObj = new ReqGetNegativeCustByNegativeCustNameAndCustTypeObj();
+    NegativeCustObj.CustName = item.CustName;
+    NegativeCustObj.MrCustTypeCode = item.MrCustTypeCode;
+    NegativeCustObj.IdNo = item.IdNo;
+    this.http.post<ResNegativeCustObj>(URLConstant.GetNegativeCustByNegativeCustNameAndCustType, NegativeCustObj).subscribe(
       (response) => {
         this.RequestNegativeCustObj = response;
 

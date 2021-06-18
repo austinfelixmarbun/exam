@@ -7,7 +7,9 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UpdateCustEmergencyObj } from 'app/shared/model/UpdateMasterCust/UpdateCustEmergencyObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { forkJoin } from 'rxjs';
@@ -27,6 +29,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   GenderList: Array<any>;
   lookupObj: Record<string, any>;
   DisplayName: Record<string, any>;
+  ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   IsAddressDifferent: boolean;
   appCustRelationship: string;
   appIdType: string;
@@ -91,10 +94,14 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
 
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
-    let getDetail = this.http.post(URLConstant.GetCustEmergencyDataForUpdateMasterCustEmergency, { Id: this.CustDataTrxId });
-    let getCustRelationship = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustPersonalRelationship });
-    let getIdType = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType });
-    let getGender = this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender });
+    this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
+    let getDetail = this.http.post(URLConstant.GetCustEmergencyDataForUpdateMasterCustEmergency, this.ReqCustDataTrxIdObj);
+    let tempReqCustRelation: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustPersonalRelationship, MappingCode: null };
+    let getCustRelationship = this.http.post(URLConstant.GetListActiveRefMaster, tempReqCustRelation);
+    let tempReqIdType: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType, MappingCode: null };
+    let getIdType = this.http.post(URLConstant.GetListActiveRefMaster, tempReqIdType);
+    let tempReqGender: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender, MappingCode: null };
+    let getGender = this.http.post(URLConstant.GetListActiveRefMaster, tempReqGender);
     forkJoin([getDetail, getCustRelationship, getIdType, getGender]).pipe(
       map((response) => {
         this.AppEmergencyData = response[0]["AppCustEmergency"];

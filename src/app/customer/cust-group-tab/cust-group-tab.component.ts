@@ -5,7 +5,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustGroupTabDetailComponent } from './cust-group-tab-detail/cust-group-tab-detail.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { CustObj } from 'app/shared/model/CustObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -22,6 +21,7 @@ export class CustGroupTabComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
   CustGrpList: Array<CustGrpObj> = new Array();
   resCustObj: any;
+  CustNoObj: GenericObj = new GenericObj();
   listCustIdToExclude: Array<number>;
 
   constructor(
@@ -51,9 +51,8 @@ export class CustGroupTabComponent implements OnInit {
   openView(CustNo)
   {
     // GetCustByCustNo
-    var custObj = new CustObj;
-    custObj.CustNo = CustNo
-    this.http.post(URLConstant.GetCustByCustNo, {TrxNo : CustNo}).subscribe(
+    this.CustNoObj.CustNo = CustNo
+    this.http.post(URLConstant.GetCustByCustNo, this.CustNoObj).subscribe(
       response => {
         this.resCustObj = response;
         AdInsHelper.OpenCustomerViewByCustId(this.resCustObj.CustId);

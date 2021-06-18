@@ -34,10 +34,10 @@
         },
         {
             "type": "textbox",
-            "name": "ussr.USERNAME",
+            "name": "re.EMP_NAME",
             "id": "UsernameId",
             "value": "",
-            "label": "Supervisor",
+            "label": "Supervisors",
             "placeholder": "Placeholder"
         },
         {
@@ -82,7 +82,7 @@
             "type": "sort",
             "position": "left",
             "label": "SUPERVISOR",
-            "name": "ussr.USERNAME"
+            "name": "re.EMP_NAME"
         },
         {
             "type": "sort",

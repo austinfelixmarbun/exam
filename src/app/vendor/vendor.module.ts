@@ -70,7 +70,7 @@ import { VendorGradingInquiryPagingComponent } from './vendor-grading/vendor-gra
 import { UcapprovalModule } from '@adins/ucapproval';
 import { AuctionCompanyPagingComponent } from './auction-company/auction-company-paging/auction-company-paging.component';
 import { AuctionCompanyAddeditComponent } from './auction-company/auction-company-addedit/auction-company-addedit.component';
-import { UcapprovalcreateModule } from '@adins/Ucapprovalcreate';
+import { UcapprovalcreateModule } from '@adins/ucapprovalcreate';
 import { UcapprovalR3Module } from '@adins/ucapproval-r3';
 import { UcapprovalHistoryModule } from "@adins/ucapproval-history";
 import { UcapprovalgeneralinfoModule } from "@adins/ucapprovalgeneralinfo";
