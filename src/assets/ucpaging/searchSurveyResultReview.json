@@ -3,9 +3,9 @@
     "component": [
         {
             "type": "dropdown",
-            "name": "RO.OFFICE_NAME",
+            "name": "RO.OFFICE_CODE",
             "id": "OfficeNameId",
-            "value": "",
+            "value": "Office Name",
             "placeholder": "",
             "isFromURL": true,
             "ddlType": "all",

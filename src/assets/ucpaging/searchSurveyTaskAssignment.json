@@ -3,18 +3,19 @@
     "component": [
         {
             "type": "dropdown",
-            "name": "RO.OFFICE_NAME",
+            "name": "RO.OFFICE_CODE",
             "id": "OfficeNameId",
-            "value": "",
-            "placeholder": "",
+            "value": "Surveyor Group Name",
+            "placeholder": "Placeholder",
             "isFromURL": true,
             "ddlType": "all",
+            "isQueryIn" : true,
             "url": "",
-            "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
+            "environment": "FOU",
+            "path":"/RefOffice/GetListKvpActiveRefOfficeForPaging",
             "label": "Surveyor Group Name",
             "items": [],
-            "itemsUrl": [],
-            "environment": "FOU"
+            "itemsUrl": []
         },
         {
             "type": "textbox",
@@ -76,7 +77,7 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Office Name",
+            "label": "Surveyor Group Name",
             "name": "OfficeName"
         },
         {

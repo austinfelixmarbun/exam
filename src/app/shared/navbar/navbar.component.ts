@@ -103,6 +103,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
 
     ChangeLanguage(language: string) {
+        localStorage.setItem('lang',language);
         this.translate.use(language);
     }
 

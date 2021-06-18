@@ -13,25 +13,13 @@
           },
           {
             "type": "text",
-            "label": ""
-          },
-          {
-            "type": "text",
             "label": "Office Name",
             "property": "OfficeName"
           },
           {
             "type": "text",
-            "label": ""
-          },
-          {
-            "type": "text",
             "label": "File Name",
             "property": "FileName"
-          },
-          {
-            "type": "text",
-            "label": ""
           },
           {
             "type": "date",
@@ -40,16 +28,8 @@
           },
           {
             "type": "text",
-            "label": ""
-          },
-          {
-            "type": "text",
             "label": "Total Record",
             "property": "TotalRecord"
-          },
-          {
-            "type": "text",
-            "label": ""
           },
           {
             "type": "text",

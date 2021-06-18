@@ -17,6 +17,9 @@ import { CustExposureViewRoutingModule } from "./cust-exposure-view-routing.modu
 import { CustExposureViewComponent } from "./cust-exposure-view.component";
 import { ObligorExposureComponent } from './obligor-exposure/obligor-exposure.component';
 import { CustExposureComponent } from './cust-exposure/cust-exposure.component';
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { createTranslateLoader } from "app/app.module";
+import { HttpClient } from "@angular/common/http";
 
 @NgModule({
     imports: [
@@ -35,7 +38,16 @@ import { CustExposureComponent } from './cust-exposure/cust-exposure.component';
         ArchwizardModule,
         ReactiveFormsModule,
         UcSubsectionModule,
-        SharingComponentModule
+        SharingComponentModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient]
+            }
+        }),
+
+        
     ],
     declarations: [
         CustExposureViewComponent,

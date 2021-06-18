@@ -18,6 +18,9 @@ import { CustomerViewComponent } from "./customer-view.component";
 import { CustomerViewHeaderPersonalComponent } from "./customer-view-header-personal/customer-view-header-personal.component";
 import { CustomerViewHeaderCompanyComponent } from "./customer-view-header-company/customer-view-header-company.component";
 import { CustomerViewRoutingModule } from "./customer-view-routing.module";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { createTranslateLoader } from "app/app.module";
+import { HttpClient } from "@angular/common/http";
 
 
 @NgModule({
@@ -39,6 +42,15 @@ import { CustomerViewRoutingModule } from "./customer-view-routing.module";
     UcSubsectionModule,
     SharingComponentModule,
     UcShowErrorsModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+  }),
+    
+    
   ],
   declarations: [
    CustomerViewComponent,

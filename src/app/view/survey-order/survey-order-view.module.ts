@@ -17,6 +17,9 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { SurveyOrderViewComponent } from "./survey-order-view/survey-order-view.component";
 import { SurveyTaskViewComponent } from "./survey-task-view/survey-task-view.component";
 import { SurveyOrderViewRoutingModule } from "./survey-order-routing.module";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { createTranslateLoader } from "app/app.module";
+import { HttpClient } from "@angular/common/http";
 
 @NgModule({
   imports: [
@@ -37,6 +40,14 @@ import { SurveyOrderViewRoutingModule } from "./survey-order-routing.module";
     UcSubsectionModule,
     SharingComponentModule,
     UcShowErrorsModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+  }),
+    
     
   ],
   declarations: [

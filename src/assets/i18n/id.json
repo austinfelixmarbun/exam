@@ -1,7 +1,11 @@
 {
 
   "_comment":"BAGIAN A",
+  "Customer No":"Nomor Customer",
+  "Customer Name":"Nama Customer",
+  "CUSTOMER NO": "Nomor Customer",
   "Action":"Aksi",
+  "Gender":"Jenis Kelamin",
   "Address":"Alamat",
   "Active Status":"Status Aktif",
   "Description":"Deskripsi",

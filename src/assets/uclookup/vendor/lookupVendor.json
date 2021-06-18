@@ -63,5 +63,5 @@
         }
     ],
     "propertyId": "VendorId",
-    "propertyName": "ReferantorCode"  
+    "propertyName": "VendorName"  
 }

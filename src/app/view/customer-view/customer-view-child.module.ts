@@ -23,6 +23,9 @@ import { CustomerViewChildRoutingModule } from "./customer-view-child-routing.mo
 import { CustomerViewPersonalAddressComponent } from "./customer-view-personal-address/customer-view-personal-address.component";
 import { CustomerViewPersonalCustomerGroupComponent } from "./customer-view-personal-customer-group/customer-view-personal-customer-group.component";
 import { CustomerViewCoyAddressComponent } from "./customer-view-coy-address/customer-view-coy-address.component";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { createTranslateLoader } from "app/app.module";
+import { HttpClient } from "@angular/common/http";
 
 
 @NgModule({
@@ -44,10 +47,16 @@ import { CustomerViewCoyAddressComponent } from "./customer-view-coy-address/cus
     UcSubsectionModule,
     SharingComponentModule,
     UcShowErrorsModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+  }),
     
   ],
   declarations: [
-    CustomerViewPersonalOtherAttrComponent,
     CustomerViewCoyAppListingComponent,
     CustomerViewCoyExposureComponent,
     CustomerViewCoyCustScoreComponent,
