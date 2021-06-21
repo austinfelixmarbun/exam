@@ -247,7 +247,7 @@ export class CustFinDataTabComponent implements OnInit {
   async getListCustPersonalFinData() {
     this.ListCustPersonalFinData = [];
     if (!this.custPersonalId) {
-      await this.httpClient.post(URLConstant.GetCustPersonalbyCustId, { 'CustId': this.CustId }).toPromise().then((response: CustPersonalObj) => {
+      await this.httpClient.post(URLConstant.GetCustPersonalbyCustId, { Id: this.CustId }).toPromise().then((response: CustPersonalObj) => {
         this.custPersonalId = response.CustPersonalId;
         this.mrMaritalStatCode = (!response || response.MrMaritalStatCode == null) ? CommonConstant.MR_MARITAL_STAT_CODE_SINGLE : response.MrMaritalStatCode;
       })
@@ -261,7 +261,7 @@ export class CustFinDataTabComponent implements OnInit {
   async getListCustCoyFinData() {
     this.ListCustCoyFinData = [];
     if (!this.custCoyId) {
-      await this.httpClient.post(URLConstant.GetCustCompanyByCustId, { 'CustId': this.CustId }).toPromise().then((response: CustCompanyObj) => {
+      await this.httpClient.post(URLConstant.GetCustCompanyByCustId, { Id: this.CustId }).toPromise().then((response: CustCompanyObj) => {
         this.custCoyId = response.CustCompanyId;
       })
     }
@@ -406,21 +406,21 @@ export class CustFinDataTabComponent implements OnInit {
       var otherMonthlyInstAmt = formData.OtherMonthlyInstAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.OtherMonthlyInstAmt.toString()));
       var totalAmt = 0;
 
-  //     if (formData.IsJoinIncome) {
-  //       totalAmt = monthlyIncomeAmt + spouseMonthlyIncomeAmt + totalIncomeAmt + nettIncomeAmt + nettProfitMonthlyAmt + otherIncomeAmt;
-  //     }
-  //     else {
-  //       totalAmt = monthlyIncomeAmt + totalIncomeAmt + nettIncomeAmt + nettProfitMonthlyAmt + otherIncomeAmt;
-  //     }
-  //     var netIncomeAmt = totalAmt - (monthlyExpenseAmt + monthlyInstallmentAmt + otherMonthlyInstAmt);
-
-  //     this.CustPersonalFinDataForm.patchValue({
-  //       TotalIncomeAmt: this.currencyFormatter(totalAmt.toString()),
-  //       NettIncomeAmt: this.currencyFormatter(netIncomeAmt.toString())
-  //     });
-  //     this.isCalculated = true;
-  //     this.spouseMonthlyIncomeAmt = this.CustPersonalFinDataForm.controls["SpouseMonthlyIncomeAmt"].value;
-  }
+      if (formData.IsJoinIncome) {
+        totalAmt = monthlyIncomeAmt + spouseMonthlyIncomeAmt + totalIncomeAmt + nettIncomeAmt + nettProfitMonthlyAmt + otherIncomeAmt;
+      }
+      else {
+        totalAmt = monthlyIncomeAmt + totalIncomeAmt + nettIncomeAmt + nettProfitMonthlyAmt + otherIncomeAmt;
+      }
+      var netIncomeAmt = totalAmt - (monthlyExpenseAmt + monthlyInstallmentAmt + otherMonthlyInstAmt);
+      
+      this.CustPersonalFinDataForm.patchValue({
+        TotalIncomeAmt: totalAmt,
+        NettIncomeAmt: netIncomeAmt
+      });
+      this.isCalculated = true;
+      this.spouseMonthlyIncomeAmt = this.CustPersonalFinDataForm.controls["SpouseMonthlyIncomeAmt"].value;
+    }
   }
     
   calculateFinData() {
@@ -444,8 +444,8 @@ export class CustFinDataTabComponent implements OnInit {
     nettIncomeAmt = totalIncomeAmt - (monthlyExpenseAmt + monthlyInstallmentAmt + otherMonthlyInstAmt + this.TotalExpenseListAmt);
 
     this.CustPersonalFinDataForm.patchValue({
-      TotalIncomeAmt: this.currencyFormatter(totalIncomeAmt.toString()),
-      NettIncomeAmt: this.currencyFormatter(nettIncomeAmt.toString())
+      TotalIncomeAmt: totalIncomeAmt,
+      NettIncomeAmt: nettIncomeAmt
     });
   }
 
