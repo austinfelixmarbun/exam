@@ -26,6 +26,7 @@ import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMast
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericObj} from 'app/shared/model/Generic/GenericObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { GenericListObj } from 'app/shared/model/Generic/GenericListObj.Model';
 
 @Component({
   selector: 'app-vendor-ho-add-edit',
@@ -40,7 +41,7 @@ export class VendorHoAddEditComponent implements OnInit {
 
   businessDt: Date;
   result: any;
-  resultAtpmMapping: any;
+  resultAtpmMapping: Array<VendorAtpmMappingObj> = new Array();
   check: any;
   inputLookupParentObj: InputLookupObj = new InputLookupObj();
   inputLookupATPMObj: InputLookupObj = new InputLookupObj();
@@ -356,8 +357,8 @@ export class VendorHoAddEditComponent implements OnInit {
     );
 
     this.http.post(URLConstant.GetListVendorAtpmMappingByVendorId, { Id: this.VendorId }).subscribe(
-      (response) => {
-        this.resultAtpmMapping = response;
+      (response: GenericListObj) => {
+        this.resultAtpmMapping = response.ReturnObject;
 
         this.vendorAtpmList = this.resultAtpmMapping;
       });

@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericListObj } from 'app/shared/model/Generic/GenericListObj.Model';
+import { VendorAtpmMappingObj } from 'app/shared/model/VendorAtpmMappingObj.Model';
 
 @Component({
     selector: 'app-ho-atpm-info',
@@ -9,13 +12,13 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 export class HoAtpmInfoComponent implements OnInit {
 
     @Input() VendorId: number = 0;
-    vendorAtpmList: any = new Array();
+    vendorAtpmList: Array<VendorAtpmMappingObj> = new Array();
     constructor(private http: HttpClient) {
     }
     ngOnInit() {
         this.http.post(URLConstant.GetListVendorAtpmMappingByVendorId, { Id: this.VendorId }).subscribe(
-            (response) => {
-                this.vendorAtpmList = response;
+            (response: GenericListObj) => {
+                this.vendorAtpmList = response.ReturnObject;
             });
     }
 
