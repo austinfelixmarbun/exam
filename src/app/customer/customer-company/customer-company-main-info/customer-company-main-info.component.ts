@@ -20,6 +20,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
+import { truncate } from 'fs';
 
 @Component({
   selector: 'app-customer-company-main-info',
@@ -81,7 +82,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     SupplId: ['']
   });
 
-  readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING2;
+  readonly CancelLink: string = NavigationConstant.CUST_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private modalService: NgbModal, private toastr: NGXToastrService) {
   }
 
@@ -156,10 +157,13 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   }
 
   checkIsSupplier() {
+    this.inputLookupObj.isReady = false;
     if (this.CustomerCompanyForm.controls.IsSupplier.value === false) {
+      this.inputLookupObj.isRequired = true;
       this.IsSupplier = true;
     }
     else {
+      this.inputLookupObj.isRequired = false;
       this.IsSupplier = false;
 
       // var refMasterTypeCodeCompanyType = {
@@ -229,6 +233,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       //   }
       // );
     }
+    this.inputLookupObj.isReady = true;
   }
 
   bindLookupSupplier() {
