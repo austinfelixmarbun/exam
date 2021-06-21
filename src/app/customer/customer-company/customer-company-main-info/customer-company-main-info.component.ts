@@ -20,7 +20,6 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
-import { truncate } from 'fs';
 
 @Component({
   selector: 'app-customer-company-main-info',
