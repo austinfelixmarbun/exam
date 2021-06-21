@@ -113,11 +113,16 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       );
     }
     else if (this.pageType == "editStmnt") {
-      var custBankAcc = new CustBankAccObj();
-      custBankAcc.CustBankAccId = this.CustBankAccId;
+      // var custBankAcc = new CustBankAccObj();
+      // custBankAcc.CustBankAccId = this.CustBankAccId;
+
+      var ReqCustBankAcc = {
+        Id : this.CustBankAccId
+      }
+
       this.CustBankAccForm.controls['BegBalanceAmt'].setValidators([Validators.required]);
 
-      this.httpClient.post(URLConstant.GetCBAForCustFinDataEditModeByCustBankAccId, custBankAcc).subscribe(
+      this.httpClient.post(URLConstant.GetCBAForCustFinDataEditModeByCustBankAccId, ReqCustBankAcc).subscribe(
         (response: any) => {          
           this.bankName = response.RefBankObj.BankName;
           this.CustBankAccForm.patchValue({
@@ -190,9 +195,9 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
                 Year: [item.Year, [Validators.required, Validators.pattern("^[0-9]+$")]],
                 DebitTrxCount: [(item.DebitTrxCount == undefined ? 0 : item.DebitTrxCount), [Validators.required, Validators.min(0), Validators.max(9999)]],
                 CreditTrxCount: [(item.CreditTrxCount == undefined ? 0 : item.CreditTrxCount), [Validators.required, Validators.min(0), Validators.max(9999)]],
-                DebitAmt: [item.DebitAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
-                CreditAmt: [item.CreditAmt, [Validators.required, Validators.pattern("^[0-9]+$")]],
-                BalanceAmt: [parseFloat(item.BalanceAmt), [Validators.required, Validators.pattern("^[0-9]+$")]],
+                DebitAmt: [item.DebitAmt, [Validators.required]],
+                CreditAmt: [item.CreditAmt, [Validators.required]],
+                BalanceAmt: [parseFloat(item.BalanceAmt)],
                 RowVersion: [item.RowVersion]
               });
               formArray.push(formGroup);
@@ -216,9 +221,9 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       Year: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
       DebitTrxCount: [0, [Validators.required, Validators.min(0), Validators.max(9999)]],
       CreditTrxCount: [0, [Validators.required, Validators.min(0), Validators.max(9999)]],
-      DebitAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-      CreditAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-      BalanceAmt: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+      DebitAmt: [0, [Validators.required]],
+      CreditAmt: [0, [Validators.required]],
+      BalanceAmt: [''],
       RowVersion: ['']
     });
     formArray.push(formGroup);
