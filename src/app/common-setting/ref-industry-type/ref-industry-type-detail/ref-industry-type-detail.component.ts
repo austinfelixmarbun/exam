@@ -94,11 +94,19 @@ export class RefIndustryTypeDetailComponent implements OnInit {
   }
 
   Save() {
-    this.refIndustryType = this.RefIndustryTypeForm.value;
+    var refIndustryTypeObj = new RefIndustryTypeObj();
+    refIndustryTypeObj.IndustryTypeCode = this.RefIndustryTypeForm.controls["IndustryTypeCode"].value;
+    refIndustryTypeObj.IndustryTypeName = this.RefIndustryTypeForm.controls["IndustryTypeName"].value;
+    refIndustryTypeObj.RefIndustryTypeCategoryId = this.RefIndustryTypeForm.controls["RefIndustryTypeCategoryId"].value;
+    if(this.type == 'edit') {
+      refIndustryTypeObj.RefIndustryTypeId = this.RefIndustryTypeForm.controls["RefIndustryTypeId"].value;
+      refIndustryTypeObj.RowVersion = this.RefIndustryTypeForm.controls["RowVersion"].value;
+    }
+
 
     //MODE-ADD
     if (this.type != 'edit') {
-      this.httpClient.post(URLConstant.AddRefIndustryType, this.refIndustryType).subscribe(
+      this.httpClient.post(URLConstant.AddRefIndustryType, refIndustryTypeObj).subscribe(
         //SAVE
         (response) => {
           this.service.successMessage(response["Message"]);
@@ -112,7 +120,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     //MODE-EDIT
     else {
       //SAVE
-      this.httpClient.post(URLConstant.EditRefIndustryType, this.refIndustryType).subscribe(
+      this.httpClient.post(URLConstant.EditRefIndustryType, refIndustryTypeObj).subscribe(
         (response) => {
           this.service.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_INDUSTRY_TYPE_PAGING],{});
@@ -128,7 +136,8 @@ export class RefIndustryTypeDetailComponent implements OnInit {
   isAuto: boolean = false;
   checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
     var generalSettingObj = {
-      GsCode: "MASTER_AUTO_GNRT_CODE"
+      rowVersion: "",
+      code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
     this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
