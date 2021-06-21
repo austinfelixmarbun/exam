@@ -159,7 +159,7 @@ export class CustomerViewComponent implements OnInit {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_FINANCIAL_DATA],{ "CustId": this.CustId });
         });
       }
-      else if (ev == 8) { // Highlight Comment
+      else if (ev == 7) { // Highlight Comment
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VIEW_CUST_HIGHLIGHT_COMMENT], { "CustId": this.CustId });
         });
@@ -174,7 +174,7 @@ export class CustomerViewComponent implements OnInit {
       //     AdInsHelper.RedirectUrl(this.router,["/View/Customer/PersonalAppListing"],{ "CustId": this.CustId });
       //   });
       // }
-      else if (ev == 7) {
+      else if (ev == 8) {
         if(this.IsUseDms) { // Document
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_DOC],{ "CustId": this.CustId });
@@ -198,7 +198,7 @@ export class CustomerViewComponent implements OnInit {
           }
         }
       }
-      else if (ev == 8) {
+      else if (ev == 9) {
         if(this.IsUseDms) {
           if(this.IsLos) { // Application List
             this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
@@ -231,7 +231,7 @@ export class CustomerViewComponent implements OnInit {
           }
         }
       }
-      else if (ev == 9) {
+      else if (ev == 10) {
         if(this.IsUseDms) {
           if(this.IsLos) {
             if(this.IsLms) { // Agreement List
@@ -259,7 +259,7 @@ export class CustomerViewComponent implements OnInit {
           }
         }
       }
-      else if (ev == 10) { // Other Info
+      else if (ev == 11) { // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
         });
