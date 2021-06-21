@@ -81,7 +81,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     SupplId: ['']
   });
 
-  readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING2;
+  readonly CancelLink: string = NavigationConstant.CUST_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private modalService: NgbModal, private toastr: NGXToastrService) {
   }
 
@@ -156,10 +156,13 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
   }
 
   checkIsSupplier() {
+    this.inputLookupObj.isReady = false;
     if (this.CustomerCompanyForm.controls.IsSupplier.value === false) {
+      this.inputLookupObj.isRequired = true;
       this.IsSupplier = true;
     }
     else {
+      this.inputLookupObj.isRequired = false;
       this.IsSupplier = false;
 
       // var refMasterTypeCodeCompanyType = {
@@ -229,6 +232,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       //   }
       // );
     }
+    this.inputLookupObj.isReady = true;
   }
 
   bindLookupSupplier() {
