@@ -9,18 +9,18 @@ export const environment = {
   //losUrl: 'http://localhost:5001',
   //FoundationR3Url: 'http://localhost:5000',
   LosURL: 'http://r3app-server.ad-ins.com/LOS',
-  FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_DEV',
+  FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
   DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
   AMSUrl: "http://r3app-server.ad-ins.com/AMS_DEMO", //OPL dah ada
   LMSUrl: "http://r3app-server.ad-ins.com/LMS_DEMO", //OPL dah ada
   lmsWeb: "http://r3impl-websvr.ad-ins.com/LMS", //sementara ku tak tau
-  //ApprovalURL: 'http://r3app-server.ad-ins.com/FOUNDATION_DEV/Approval',
+  //ApprovalURL: 'http://r3app-server.ad-ins.com/FOUNDATION_R3/Approval',
   ApprovalURL: 'http://r3impl-appsvr.ad-ins.com/APPROVAL_DSF_R3_SIT',
   FoundationR3Web: 'http://r3web-server.ad-ins.com/Foundation',
   // FoundationR3Url: 'http://localhost:5000',
   losR3Web: 'http://r3web-server/LOSR3',
   WorkflowR3Url: 'http://R3App-Server.ad-ins.com/WORKFLOW_R3',
-  WebSocketURL: 'http://r3app-server.ad-ins.com/FOUNDATION_DEV',
+  WebSocketURL: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
   DashboardURL: 'http://r3app-server.ad-ins.com/Dashboard',
   dmsURL: 'http://kfx-svr/LITEDMS_OPL/LiteDMS/pageconfins.aspx',
   WFThingsToDoUrl: 'http://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL/',
