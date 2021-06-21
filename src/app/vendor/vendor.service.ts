@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { URLConstant } from "app/shared/constant/URLConstant";
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from "app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model";
+import { GenericByIdObj } from "app/shared/model/Generic/GenericByIdObj.model";
 
 @Injectable({
     providedIn: 'root'
@@ -38,7 +39,7 @@ export class VendorService {
         return this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, Obj);
     }
 
-    GetVendorAndVendorAddrByVendorId(Obj: any): Observable<Object> {
+    GetVendorAndVendorAddrByVendorId(Obj: GenericByIdObj): Observable<Object> {
         return this.http.post(URLConstant.GetVendorAndVendorAddr, Obj);
     }
 
