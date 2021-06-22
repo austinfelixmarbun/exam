@@ -203,7 +203,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="ReturnOfInvestmentPrcnt"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.ReturnOfInvestmentPrcnt.invalid }"
-                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, precision: 6, nullable: false }" />
+                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, max: 100, precision: 0, nullable: false }" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.ReturnOfInvestmentPrcnt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -213,7 +213,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="ReturnOfEquityPrcnt"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.ReturnOfEquityPrcnt.invalid }"
-                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, precision: 6, nullable: false }" />
+                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, max: 100, precision: 0, nullable: false }" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.ReturnOfEquityPrcnt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -223,7 +223,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="ReturnOfAssetPrcnt"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.ReturnOfAssetPrcnt.invalid }"
-                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, precision: 6, nullable: false }" />
+                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, max: 100, precision: 0, nullable: false }" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.ReturnOfAssetPrcnt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -233,7 +233,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="ProfitMarginPrcnt"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.ProfitMarginPrcnt.invalid }"
-                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, precision: 6, nullable: false }" />
+                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, max: 100, precision: 0, nullable: false }" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.ProfitMarginPrcnt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -243,7 +243,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="CurrentRatioPrcnt"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.CurrentRatioPrcnt.invalid }"
-                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, precision: 6, nullable: false }" />
+                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, max: 100, precision: 0, nullable: false }" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.CurrentRatioPrcnt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -253,7 +253,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="DebtEquityRatioPrcnt"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.DebtEquityRatioPrcnt.invalid }"
-                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, precision: 6, nullable: false }" />
+                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, max: 100, precision: 0, nullable: false }" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.DebtEquityRatioPrcnt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -263,7 +263,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="InvTurnOverPrcnt"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.InvTurnOverPrcnt.invalid }"
-                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, precision: 6, nullable: false }" />
+                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, max: 100, precision: 0, nullable: false }" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.InvTurnOverPrcnt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -274,7 +274,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="ArTurnOverPrcnt"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.ArTurnOverPrcnt.invalid }"
-                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, precision: 6, nullable: false }" />
+                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, max: 100, precision: 0, nullable: false }" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.ArTurnOverPrcnt"
                 [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
@@ -285,7 +285,7 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="GrowthPrcnt"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.GrowthPrcnt.invalid }"
-                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, precision: 6, nullable: false }" />
+                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, max: 100, precision: 0, nullable: false }" />
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.GrowthPrcnt"
                 [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
@@ -295,8 +295,7 @@
             <label class="col-md-2 adInsLabel" for="WorkingCapitalAmt" translate>Working Capital Amount</label>
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="WorkingCapitalAmt"
-                [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.WorkingCapitalAmt.invalid }"
-                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, precision: 6, nullable: false }" />
+                [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.WorkingCapitalAmt.invalid }"/>
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.WorkingCapitalAmt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -305,8 +304,7 @@
             <label class="col-md-2 adInsLabel" for="OthMonthlyInstAmt" translate>Other Monthly Installment Amount</label>
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="OthMonthlyInstAmt"
-                [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.OthMonthlyInstAmt.invalid }"
-                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, precision: 6, nullable: false }" />
+                [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.OthMonthlyInstAmt.invalid }"/>
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.OthMonthlyInstAmt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -411,8 +409,9 @@
           <div class="form-group row">
             <label class="col-md-2 adInsLabel" for="CurrRatio" translate>Current Ratio</label>
             <div class="col-md-6">
-              <input type="text" class="form-control adInsInput" formControlName="CurrRatio"
-                [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.CurrRatio.invalid }" />
+              <input type="" currencyMask class="form-control adInsInput" formControlName="CurrRatio"
+                [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.CurrRatio.invalid }" 
+                [options]="{ thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, precision: 0, nullable: false }"/>
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.CurrRatio"
                 [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>

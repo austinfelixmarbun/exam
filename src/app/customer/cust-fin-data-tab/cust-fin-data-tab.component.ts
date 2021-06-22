@@ -65,15 +65,15 @@ export class CustFinDataTabComponent implements OnInit {
     CustCompanyId: [0, [Validators.required]],
     GrossMonthlyIncomeAmt: [''],
     GrossProfitAmt: [''],
-    ReturnOfInvestmentPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
-    ReturnOfEquityPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
-    ReturnOfAssetPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
-    ProfitMarginPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
-    CurrentRatioPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
-    DebtEquityRatioPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
-    InvTurnOverPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
-    ArTurnOverPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
-    GrowthPrcnt: ['', [Validators.pattern('^[0-9]+$')]],
+    ReturnOfInvestmentPrcnt: ['', [Validators.pattern('^[0-9]+([,.][0-9]+)?$'), Validators.max(100)]],
+    ReturnOfEquityPrcnt: ['', [Validators.pattern('^[0-9]+([,.][0-9]+)?$'), Validators.max(100)]],
+    ReturnOfAssetPrcnt: ['', [Validators.pattern('^[0-9]+([,.][0-9]+)?$'), Validators.max(100)]],
+    ProfitMarginPrcnt: ['', [Validators.pattern('^[0-9]+([,.][0-9]+)?$'), Validators.max(100)]],
+    CurrentRatioPrcnt: ['', [Validators.pattern('^[0-9]+([,.][0-9]+)?$'), Validators.max(100)]],
+    DebtEquityRatioPrcnt: ['', [Validators.pattern('^[0-9]+([,.][0-9]+)?$'), Validators.max(100)]],
+    InvTurnOverPrcnt: ['', [Validators.pattern('^[0-9]+([,.][0-9]+)?$'), Validators.max(100)]],
+    ArTurnOverPrcnt: ['', [Validators.pattern('^[0-9]+([,.][0-9]+)?$'), Validators.max(100)]],
+    GrowthPrcnt: ['', [Validators.pattern('^[0-9]+([,.][0-9]+)?$'), Validators.max(100)]],
     WorkingCapitalAmt: [''],
     OthMonthlyInstAmt: [''],
     DateAsOf: [''],
@@ -266,7 +266,7 @@ export class CustFinDataTabComponent implements OnInit {
       })
     }
 
-    await this.httpClient.post(URLConstant.GetListCustCompanyFinDataByCustId, { 'CustId': this.CustId }).toPromise().then((response) => {
+    await this.httpClient.post(URLConstant.GetListCustCompanyFinDataByCustId, { Id: this.CustId }).toPromise().then((response) => {
       this.ListCustCoyFinData = response['ListCustCompanyFinData'];
     })
   }
@@ -287,9 +287,7 @@ export class CustFinDataTabComponent implements OnInit {
   async deleteModalCustFinData(FinDataIndex: number) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
-        var CustPersonalFinDataCustomObj = {
-          CustFinDataObj: this.ListCustPersonalFinData[FinDataIndex]
-        }
+        var CustPersonalFinDataCustomObj = { Id: this.ListCustPersonalFinData[FinDataIndex].CustPersonalFinDataId };
         await this.httpClient.post(URLConstant.DeleteCustPersonalFinData, CustPersonalFinDataCustomObj).toPromise().then(
           (response) => {
             this.ListCustPersonalFinData.splice(FinDataIndex, 1);
@@ -297,9 +295,7 @@ export class CustFinDataTabComponent implements OnInit {
         );
       }
       else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
-        var CustCoyFinDataCustomObj = {
-          CustFinDataObj: this.ListCustCoyFinData[FinDataIndex]
-        }
+        var CustCoyFinDataCustomObj = { Id: this.ListCustCoyFinData[FinDataIndex].CustCompanyFinDataId };
         await this.httpClient.post(URLConstant.DeleteCustCompanyFinData, CustCoyFinDataCustomObj).toPromise().then(
           (response) => {
             this.ListCustCoyFinData.splice(FinDataIndex, 1);
