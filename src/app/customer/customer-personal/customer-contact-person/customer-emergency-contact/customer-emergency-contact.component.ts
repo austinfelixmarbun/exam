@@ -668,13 +668,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     }
     this.CustomerContactForm.controls.MobilePhnNo1.updateValueAndValidity();
   }
-
-  back() {
-    this.isAdd = false;
-    this.outputTab.emit({ isAdd: this.isAdd });
-  }
-
-
+  
   //START URS-LOS-041
   controlNameIdNo: any = 'IdNo';
   controlNameIdType: any = 'MrIdTypeCode';

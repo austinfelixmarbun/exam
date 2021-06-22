@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 import { UcInputApprovalGeneralInfoObj } from 'app/shared/model/UcInputApprovalGeneralInfoObj.model';
@@ -39,13 +38,23 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
 
     this.route.queryParams.subscribe(params => {
  
-      if (params["VendorGradingHistId"] != null) {
+      if(params["VendorGradingHistId"] != null) {
         this.VendorGradingHistId = params["VendorGradingHistId"];
-        this.taskId = params["TaskId"];
-        this.instanceId = params["InstanceId"];
-        this.ApvReqId = params["ApvReqId"];
         this.VendorGradingHistNo = params["VendorGradingHistNo"];
       }
+
+      if(params["TaskId"] != null){
+        this.taskId = params["TaskId"];
+      }
+
+      if(params["InstanceId"] != null){
+        this.instanceId = params["InstanceId"];
+      }
+
+      if(params["ApvReqId"] != null){
+        this.ApvReqId = params["ApvReqId"];
+      }
+
     });
   }
 
@@ -61,7 +70,7 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
   }
 
   HoldTask(obj : any){
-    this.http.post(AdInsConstant.ApvHoldTaskUrl, obj).subscribe(
+    this.http.post(URLConstant.ApvHoldTaskUrl, obj).subscribe(
       (response)=>{
       }
     )
@@ -74,8 +83,17 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
 
   onApprovalSubmited(event : any)
   {
-    this.router.navigate(["/Vendor/VendorGrading/Approval/Paging"]);
+    let obj = {
+      Tasks: event.Tasks
+    }
+    this.http.post(environment.FoundationR3Url + URLConstant.SubmitApproval, obj).subscribe(
+      (response)=>{
+        this.toastr.successMessage(response["Message"]);
+        this.router.navigate(["/Vendor/VendorGrading/Approval/Paging"]);
+      }
+    );
   }
+
   initInputApprovalObj(){
 
     this.UcInputApprovalGeneralInfoObj = new UcInputApprovalGeneralInfoObj();

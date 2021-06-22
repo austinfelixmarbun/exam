@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,6 +13,7 @@ import { ParameterObj } from 'app/shared/model/ParameterObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 
 @Component({
   selector: 'app-ref-form-detail',
@@ -33,11 +34,17 @@ export class RefFormDetailComponent implements OnInit {
   ddlTemplateIcon: UcDropdownListObj = new UcDropdownListObj();
   // IsTextMode: boolean = false;
 
+  private ucLookupParentForm: UclookupgenericComponent;
+  @ViewChild('LookupExistingParent') set content(content: UclookupgenericComponent) {
+    if (content) { // initially setter gets called with undefined
+      this.ucLookupParentForm = content;
+    }
+  }
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
-      this.RefFormId = params['RefFormId'];
-      this.mode = params['mode'];
+      if (params['RefFormId'] != null) this.RefFormId = params['RefFormId'];
+      if (params['mode'] != null) this.mode = params['mode'];
     });
   }
 
@@ -49,7 +56,7 @@ export class RefFormDetailComponent implements OnInit {
     Path: ['', Validators.required],
     Icon: [''],
     OrderNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-    HierarchyNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.max(3)]],
+    HierarchyNo: [1, [Validators.required, Validators.pattern("^[0-9]+$"), Validators.max(3)]],
     IsHidden: false,
     IsExternalLink: false,
     RowVersion: ['']
@@ -58,12 +65,12 @@ export class RefFormDetailComponent implements OnInit {
     ParameterValue : [''],
     ParameterAttribute : ['']
   });
-  ngOnInit() { 
+  async ngOnInit() { 
     this.ddlTemplateIcon.apiUrl = URLConstant.GetTemplateIcon;
     this.ddlTemplateIcon.requestObj = {};
     this.ddlTemplateIcon.ddlType = UcDropdownListConstant.DDL_TYPE_NONE;
 
-    this.http.post(URLConstant.GetListRefModuleKeyValue, {}).subscribe(
+    await this.http.post(URLConstant.GetListRefModuleKeyValue, {}).toPromise().then(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.itemModuleType = response[CommonConstant.ReturnObj];
@@ -76,11 +83,8 @@ export class RefFormDetailComponent implements OnInit {
       }
     );
 
-    var refMasterClassObj = {
-      RefMasterTypeCode: "FORM_CLASS",
-    }
 
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterClassObj).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: "FORM_CLASS" }).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.itemClassType = response[CommonConstant.ReturnObj];
@@ -121,6 +125,7 @@ export class RefFormDetailComponent implements OnInit {
           this.RefForm.controls.FormCode.disable();
           this.setLookup();
           this.CheckClass();
+          this.setClassCheck();
         }
       );
     } else {
@@ -162,20 +167,41 @@ export class RefFormDetailComponent implements OnInit {
     this.RefForm.controls.Path.updateValueAndValidity();
   }
 
-  setLookup() {
+  setLookup() {    
     this.inputLookupParentObj = new InputLookupObj();
     this.inputLookupParentObj.urlJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
     this.inputLookupParentObj.genericJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
-    this.inputLookupParentObj.isRequired = false;
+    this.inputLookupParentObj.isRequired = false;    
     this.inputLookupParentObj.addCritInput = new Array();
 
     var critInput = new CriteriaObj();
-    critInput.propName = "CLASS";
+    critInput.propName = "RF.CLASS";
     critInput.restriction = AdInsConstant.RestrictionEq;
     critInput.value = "has-sub";
     this.inputLookupParentObj.addCritInput.push(critInput);
 
+    critInput = new CriteriaObj();
+    critInput.propName = "RF.HIERARCHY_NO";
+    critInput.restriction = AdInsConstant.RestrictionIn;
+    critInput.listValue = [1, 2];
+    this.inputLookupParentObj.addCritInput.push(critInput);
+
+    console.log(this.RefForm.get("RefModuleId").value);
+    critInput = new CriteriaObj();
+    critInput.propName = "RF.REF_MODULE_ID";
+    critInput.restriction = AdInsConstant.RestrictionEq;
+    critInput.value = this.RefForm.get("RefModuleId").value;
+    this.inputLookupParentObj.addCritInput.push(critInput);
+
+    this.inputLookupParentObj.jsonSelect = { Title: "" };
+    this.refFormObj.ParentId = null;
+    this.refFormObj.HierarchyNo = 1;
+    this.RefForm.patchValue({
+      HierarchyNo: 1
+    });
+    this.setClassCheck();
+    
     if (this.resultRefForm != null) {
       this.inputLookupParentObj.jsonSelect = { Title: this.resultRefForm.ParentTitle }
     }
@@ -183,6 +209,23 @@ export class RefFormDetailComponent implements OnInit {
 
   getLookupParent(ev) {
     this.refFormObj.ParentId = ev.RefFormId;
+    this.refFormObj.HierarchyNo = ev.HierarchyNo + 1;
+    this.RefForm.patchValue({
+      HierarchyNo: ev.HierarchyNo + 1
+    });
+
+    this.setClassCheck();
+  }
+
+  setClassCheck(){
+    if(this.refFormObj.HierarchyNo == 3){
+      this.RefForm.patchValue({
+        Class: "no-sub"
+      });
+      this.RefForm.get("Class").disable();
+    }else{
+      this.RefForm.get("Class").enable();
+    }
   }
 
   DeleteParam(i){
@@ -228,7 +271,8 @@ export class RefFormDetailComponent implements OnInit {
   isAuto: boolean = false;
   checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
     var generalSettingObj = {
-      GsCode: "MASTER_AUTO_GNRT_CODE"
+      rowVersion: "",
+      code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
     this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
