@@ -438,6 +438,10 @@ export class URLConstant {
     public static GetListAssetType = environment.FoundationR3Url + "/AssetType/GetListAssetType"
     public static GetListActiveAssetType = environment.FoundationR3Url + "/AssetType/GetListActiveAssetType"
 
+    // LIST APPROVER
+    public static ApvHoldTaskUrl = environment.FoundationR3Url + "/Approval/Hold";
+    public static ApvTakeBackTaskUrl = environment.FoundationR3Url + "/Approval/TakeBack";
+
     //REF REASON
     public static GetValueReasonModel = environment.FoundationR3Url + "/RefReason/GetListKeyValueByCode";
     public static GetListActiveRefReason = environment.FoundationR3Url + "/RefReason/GetListActiveRefReason";

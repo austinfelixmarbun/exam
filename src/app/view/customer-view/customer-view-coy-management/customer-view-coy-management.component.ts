@@ -20,6 +20,7 @@ export class CustomerViewCoyManagementComponent implements OnInit {
   responseObj: any;
   GetCustCompanyMgmntShrholderForCustViewByCustIdUrl: string;
   custUrl: string;
+  custCompanyUrl: string;
 
   constructor(
     private http: HttpClient,
@@ -31,6 +32,7 @@ export class CustomerViewCoyManagementComponent implements OnInit {
 
   ngOnInit() {
     this.custUrl = environment.FoundationR3Web + '/View/Customer/PersonalDetail?CustId=';
+    this.custCompanyUrl = environment.FoundationR3Web + '/View/Customer/CoyDetail?CustId=';
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
         this.CustId = params['CustId'];
