@@ -198,9 +198,6 @@ export class CustFinDataTabComponent implements OnInit {
       ).subscribe(
         (response: any) => {
           // this.isCalculated = true;
-          console.log(custCompanyData);
-          console.log(response);
-          console.log(this.CustCompanyFinDataForm);
           this.CustCompanyFinDataForm.patchValue({
             CustCompanyFinDataId: response.CustCompanyFinDataId,
             CustCompanyId: custCompanyData.CustCompanyId,
@@ -499,7 +496,6 @@ export class CustFinDataTabComponent implements OnInit {
   async saveCustCoyFinData() {
     if (!this.CustCompanyFinDataForm.valid) return;
 
-    console.log(this.CustCompanyFinDataForm);
     let custFinData: CustCompanyFinDataObj = {
       CustCompanyFinDataId: this.CustCompanyFinDataForm.controls['CustCompanyFinDataId'].value,
       CustCompanyId: this.CustCompanyFinDataForm.controls['CustCompanyId'].value,
