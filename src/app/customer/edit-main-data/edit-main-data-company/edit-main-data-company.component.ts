@@ -38,8 +38,7 @@ export class EditMainDataCompanyComponent implements OnInit {
 
   tempFraud: any;
   CustNo: string;
-  CustId: number;
-  tempCustAddr: any;
+  CustId: number = 0;
   VipNotesRequired: boolean;
   From: string;
   inputFieldObj: InputFieldObj;
@@ -302,7 +301,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     }
 
     var formValue = this.CustomerCompanyForm.value;
-    this.custObj.CustAddr = this.tempCustAddr;
+    this.custObj.CustAddr = new CustAddrObj();
     this.custObj.CustAddr.CustId = this.CustId;
     this.custObj.CustAddr.Addr = formValue["UcAddress"]["Addr"];
     this.custObj.CustAddr.AreaCode1 = formValue["UcAddress"]["AreaCode1"];
