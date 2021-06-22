@@ -99,7 +99,8 @@ export class AssetAccessoryAddEditComponent implements OnInit {
   isAuto: boolean = false;
   checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
     var generalSettingObj = {
-      GsCode: "MASTER_AUTO_GNRT_CODE"
+      rowVersion: "",
+      code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
     this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(

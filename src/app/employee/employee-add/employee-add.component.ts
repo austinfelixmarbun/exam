@@ -238,7 +238,7 @@ export class EmployeeAddComponent implements OnInit {
           this.inputLookupBankObj.jsonSelect = this.refBankObj;
           this.inputLookupBankObj.idSelect = this.refBankObj.RefBankId;
           this.inputLookupBankObj.nameSelect = this.refBankObj.BankName;
-          this.inputLookupBankObj.jsonSelect = { bankName: this.refBankObj.BankName };
+          this.inputLookupBankObj.jsonSelect = { BankName: this.refBankObj.BankName };
 
           this.addressObj.Addr = this.refEmpObj.Addr;
           this.addressObj.AreaCode4 = this.refEmpObj.AreaCode4;
@@ -271,8 +271,8 @@ export class EmployeeAddComponent implements OnInit {
 
   getLookupBankResponse(e) {
     this.RefEmpForm.patchValue({
-      RefBankId: e.refBankId,
-      BankBranchRegCode: e.regRptCode
+      RefBankId: e.RefBankId,
+      BankBranchRegCode: e.RegRptCode
     });
   }
 
@@ -352,7 +352,6 @@ export class EmployeeAddComponent implements OnInit {
       );
     }
   }
-
   //START URS-LOS-041
 
   onOptionsSelected(event){  
