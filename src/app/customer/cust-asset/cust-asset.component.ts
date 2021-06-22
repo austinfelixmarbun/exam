@@ -47,7 +47,7 @@ export class CustAssetComponent implements OnInit {
 
   GetCustAssetData(){
     this.spinner.show();
-    this.http.post(URLConstant.GetListCustAssetByCustId, { CustId: this.CustId }).toPromise().then(
+    this.http.post(URLConstant.GetListCustAssetByCustId, { Id: this.CustId }).toPromise().then(
       (response) => {
         this.inputGridObj.resultData = {
           Data: []
