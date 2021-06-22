@@ -295,8 +295,7 @@
             <label class="col-md-2 adInsLabel" for="WorkingCapitalAmt" translate>Working Capital Amount</label>
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="WorkingCapitalAmt"
-                [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.WorkingCapitalAmt.invalid }"
-                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, max: 100, precision: 0, nullable: false }" />
+                [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.WorkingCapitalAmt.invalid }"/>
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.WorkingCapitalAmt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -305,8 +304,7 @@
             <label class="col-md-2 adInsLabel" for="OthMonthlyInstAmt" translate>Other Monthly Installment Amount</label>
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="OthMonthlyInstAmt"
-                [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.OthMonthlyInstAmt.invalid }"
-                [options]="{suffix: '%', thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, max: 100, precision: 0, nullable: false }" />
+                [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.OthMonthlyInstAmt.invalid }"/>
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.OthMonthlyInstAmt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
