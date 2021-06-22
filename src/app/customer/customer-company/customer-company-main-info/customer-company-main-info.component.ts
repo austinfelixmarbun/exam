@@ -20,6 +20,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-company-main-info',
@@ -27,7 +28,7 @@ import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValue
   providers: [NGXToastrService]
 })
 export class CustomerCompanyMainInfoComponent implements OnInit {
-
+  ReqByCodeObj: GenericObj = new GenericObj();
   tempCustModel: Array<KeyValueObj> = new Array<KeyValueObj>();
   tempCompanyTypeCode: any;
 
@@ -257,7 +258,9 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     this.SupplName = e.VendorName;
     this.SupplId = e.VendorId;
 
-    this.http.post(URLConstant.GetVendorByVendorCode, { VendorCode: e.VendorCode }).subscribe(
+    this.ReqByCodeObj.Code = e.VendorCode;
+
+    this.http.post(URLConstant.GetVendorByVendorCode, this.ReqByCodeObj).subscribe(
       (response) => {
         this.SupplierObj = response;
 
