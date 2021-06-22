@@ -1,7 +1,7 @@
 import { ParameterObj } from "./ParameterObj.Model";
 
 export class RefFormObj {
-    RefFormId: any;
+    RefFormId: number;
     FormCode: string;
     Title: string;
     Path: string;
@@ -11,13 +11,15 @@ export class RefFormObj {
     FormConfiguration: string;
     ParentId: number;
     OrderNo: number;
-    HierarchyNo: any;
-    IsHidden: any;
+    HierarchyNo: number;
+    IsHidden: boolean;
     IsExternalLink: boolean;
-    Params : any;
-    RefModuleId: any;
+    IsHaveChild: boolean;
+    Params : string;
+    ParentTitle : string;
+    RefModuleId: number;
     ParameterList : Array<ParameterObj>;
-    RowVersion: any;
+    RowVersion: string;
     
     constructor() { this.RefFormId = 0 }
 }

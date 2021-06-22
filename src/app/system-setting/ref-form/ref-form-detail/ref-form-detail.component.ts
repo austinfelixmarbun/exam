@@ -14,6 +14,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 
 @Component({
   selector: 'app-ref-form-detail',
@@ -22,12 +23,12 @@ import { UclookupgenericComponent } from '@adins/uclookupgeneric';
   providers: [NGXToastrService]
 })
 export class RefFormDetailComponent implements OnInit {
-  itemModuleType: any;
-  itemClassType: any;
+  itemModuleType: Array<KeyValueObj> = new Array();
+  itemClassType: Array<KeyValueObj> = new Array();
   inputLookupParentObj: any;
   mode: string = "add";
   refFormObj: RefFormObj = new RefFormObj;
-  resultRefForm: any;
+  resultRefForm: RefFormObj;
   RefFormId: number;
   checkClass: boolean = false;
   parameterObj : Array<ParameterObj> = new Array<ParameterObj>();
@@ -84,7 +85,7 @@ export class RefFormDetailComponent implements OnInit {
     );
 
 
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: "FORM_CLASS" }).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeFormClass }).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.itemClassType = response[CommonConstant.ReturnObj];
@@ -151,7 +152,7 @@ export class RefFormDetailComponent implements OnInit {
     
   }
 
-  CheckClass() {
+  CheckClass(isNew: boolean = false) {
     if (this.RefForm.controls.Class.value == "has-sub") {
       this.RefForm.patchValue({
         Path: ""
@@ -160,6 +161,13 @@ export class RefFormDetailComponent implements OnInit {
       this.RefForm.controls.Path.disable();
       this.checkClass = false;
     } else {
+      if (isNew && this.resultRefForm.IsHaveChild) {
+        this.RefForm.patchValue({
+          Class: "has-sub"
+        });
+        this.toastr.warningMessage("This form have lower hierarchy in this form.");
+        return;
+      }
       this.RefForm.controls.Path.setValidators(Validators.required);
       this.RefForm.controls.Path.enable();
       this.checkClass = true;

@@ -133,6 +133,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeAttributeGroup = "ATTRIBUTE_GROUP";
     public static RefMasterTypeCodeBuildingOwnership = "BUILDING_OWNERSHIP";
     public static RefMasterTypeCodeMonth = "MONTH";
+    public static RefMasterTypeCodeFormClass = "FORM_CLASS";
 
     public static RefMasterTypeCodeEntityType = "ENTITY_TYPE";
     public static RefMasterTypeCodeEntityTypePayAlloc = "PAY_ALLOC";
