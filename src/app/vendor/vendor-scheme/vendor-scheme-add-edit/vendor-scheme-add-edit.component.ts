@@ -80,7 +80,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
               }
           );
       }else{
-        if(this.MrVendorCategoryCode == 'SUPPLIER_BRANCH'){
+        if(this.MrVendorCategoryCode == CommonConstant.SUPPLIER){
           this.checkIsAutoFormNoFromSetting('SS');
         }
       }
