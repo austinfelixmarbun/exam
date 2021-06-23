@@ -73,7 +73,7 @@ export class CustAssetComponent implements OnInit {
     }
   }
 
-  OpenModalHandler(custAssetId){
+  OpenModalHandler(custAssetId: number) {
     // const modal = this.modalService.open(CustAssetDetailComponent, {size: 'lg', windowClass: 'modal-sm'});
     const modal = this.modalService.open(CustAssetDetailComponent);
     modal.componentInstance.CustAssetId = custAssetId;
@@ -93,7 +93,7 @@ export class CustAssetComponent implements OnInit {
     this.OpenModalHandler(0);
   }
 
-  EditCustAsset(custAssetId){
+  EditCustAsset(custAssetId: number){
     this.OpenModalHandler(custAssetId);
   }
 
