@@ -53,7 +53,7 @@ export class CustAssetDetailComponent implements OnInit {
     );
     if(this.CustAssetId && this.CustAssetId > 0){
       this.Mode = "EDIT"
-      this.httpClient.post(URLConstant.GetCustAssetByCustAssetId, { CustAssetId: this.CustAssetId }).toPromise().then(
+      this.httpClient.post(URLConstant.GetCustAssetByCustAssetId, { Id: this.CustAssetId }).toPromise().then(
         (response) => {
           this.CustAssetForm.patchValue({
             CustAssetId: response["CustAssetId"],

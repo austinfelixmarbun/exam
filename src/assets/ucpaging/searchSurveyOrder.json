@@ -206,7 +206,7 @@
             ]
         },
         {
-            "type": "text",
+            "type": "date",
             "position": "center",
             "property": "RequestDate"
         },
@@ -216,7 +216,7 @@
             "property": "RequestBy"
         },
         {
-            "type": "text",
+            "type": "date",
             "position": "center",
             "property": "AssignDate"
         },
@@ -231,7 +231,7 @@
             "property": "ResultSubmitted"
         },
         {
-            "type": "text",
+            "type": "date",
             "position": "center",
             "property": "SubmitDate"
         },

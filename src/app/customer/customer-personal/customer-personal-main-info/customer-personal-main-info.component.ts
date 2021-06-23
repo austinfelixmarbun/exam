@@ -408,9 +408,13 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.SupplName = e.VendorName;
     this.SupplId = e.VendorId;
 
-    this.http.post(URLConstant.GetVendorByVendorCode, { VendorCode: this.SupplCode }).subscribe(
+    this.http.post(URLConstant.GetVendorByVendorCode, { Code: this.SupplCode }).subscribe(
       (response) => {
         this.SupplierObj = response;
+
+        if(this.SupplierObj.MrIdTypeCode){
+          this.setOptionsSelected(this.SupplierObj.MrIdTypeCode)
+        }
 
         this.CustomerPersonalForm.patchValue({
           CustName: this.SupplName,
@@ -542,6 +546,22 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   onOptionsSelected(event) {
     let noExpDate = [CommonConstant.MrIdTypeCodeEKTP, CommonConstant.MrIdTypeCodeNPWP, CommonConstant.MrIdTypeCodeAKTA];
     if (noExpDate.includes(event.target.value)) {
+      this.CustomerPersonalForm.controls.IdExpiredDt.clearValidators();
+      this.CustomerPersonalForm.patchValue({
+        IdExpiredDt: ''
+      })
+      this.tempKTPCheck = true;
+    } else {
+      this.CustomerPersonalForm.controls.IdExpiredDt.setValidators(Validators.required);
+      this.tempKTPCheck = false;
+    }
+    this.CustomerPersonalForm.controls.IdExpiredDt.updateValueAndValidity();
+    this.onChangeIdType();
+  }
+
+  setOptionsSelected(val : any) {
+    let noExpDate = [CommonConstant.MrIdTypeCodeEKTP, CommonConstant.MrIdTypeCodeNPWP, CommonConstant.MrIdTypeCodeAKTA];
+    if (noExpDate.includes(val)) {
       this.CustomerPersonalForm.controls.IdExpiredDt.clearValidators();
       this.CustomerPersonalForm.patchValue({
         IdExpiredDt: ''
