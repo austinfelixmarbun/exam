@@ -30,7 +30,7 @@ export class RefFormDetailComponent implements OnInit {
   refFormObj: RefFormObj = new RefFormObj;
   RefFormId: number;
   checkClass: boolean = false;
-  parameterObj : Array<ParameterObj> = new Array<ParameterObj>();
+  parameterObj: Array<ParameterObj> = new Array<ParameterObj>();
   ddlTemplateIcon: UcDropdownListObj = new UcDropdownListObj();
   // IsTextMode: boolean = false;
 
@@ -62,10 +62,10 @@ export class RefFormDetailComponent implements OnInit {
     RowVersion: ['']
   });
   ParamForm = this.fb.group({
-    ParameterValue : [''],
-    ParameterAttribute : ['']
+    ParameterValue: [''],
+    ParameterAttribute: ['']
   });
-  async ngOnInit() { 
+  async ngOnInit() {
     this.ddlTemplateIcon.apiUrl = URLConstant.GetTemplateIcon;
     this.ddlTemplateIcon.requestObj = {};
     this.ddlTemplateIcon.ddlType = UcDropdownListConstant.DDL_TYPE_NONE;
@@ -99,7 +99,7 @@ export class RefFormDetailComponent implements OnInit {
     );
 
     if (this.mode == "edit") {
-      this.http.post<RefFormObj>(URLConstant.GetRefFormDataByRefFormId, {Id: this.RefFormId}).subscribe(
+      this.http.post<RefFormObj>(URLConstant.GetRefFormDataByRefFormId, { Id: this.RefFormId }).subscribe(
         (response) => {
           this.refFormObj = response;
           this.refFormObj.RefFormId = this.RefFormId;
@@ -134,8 +134,8 @@ export class RefFormDetailComponent implements OnInit {
   //   this.IsTextMode = ev.checked;
   // }
 
-  AddParam(){
-    if( this.ParamForm.controls.ParameterAttribute.value == "" || this.ParamForm.controls.ParameterValue.value == ""){
+  AddParam() {
+    if (this.ParamForm.controls.ParameterAttribute.value == "" || this.ParamForm.controls.ParameterValue.value == "") {
       this.toastr.errorMessage("Parameter Attribute and Parameter Value cannot be empty.")
       return;
     }
@@ -144,7 +144,7 @@ export class RefFormDetailComponent implements OnInit {
     paramObj.Value = this.ParamForm.controls.ParameterValue.value;
     this.parameterObj.push(paramObj);
     this.ParamForm.reset();
-    
+
   }
 
   CheckClass() {
@@ -152,7 +152,7 @@ export class RefFormDetailComponent implements OnInit {
       this.RefForm.patchValue({
         Path: ""
       });
-      if (this.refFormObj.IsHaveChild) this.RefForm.get("Class").disable();
+      if (this.refFormObj.IsHaveChild) this.RefForm.controls.Class.disable();
       this.RefForm.controls.Path.clearValidators();
       this.RefForm.controls.Path.disable();
       this.checkClass = false;
@@ -161,7 +161,7 @@ export class RefFormDetailComponent implements OnInit {
         this.RefForm.patchValue({
           Class: "has-sub"
         });
-        this.RefForm.get("Class").disable();
+        this.RefForm.controls.Class.disable();
         this.toastr.warningMessage("This form have lower hierarchy in this form.");
         return;
       }
@@ -170,15 +170,28 @@ export class RefFormDetailComponent implements OnInit {
       this.checkClass = true;
     }
     this.RefForm.controls.Path.updateValueAndValidity();
+    this.RefForm.controls.Class.updateValueAndValidity();
   }
 
-  setLookup(isNew: boolean = true) {    
+  setLookup(isNew: boolean = true) {
+    let tempHierachyNo = 1;
+    let tempListHierachyNo = [1, 2];
     if (isNew) {
       this.inputLookupParentObj = new InputLookupObj();
       this.inputLookupParentObj.urlJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
       this.inputLookupParentObj.pagingJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
       this.inputLookupParentObj.genericJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
-      this.inputLookupParentObj.isRequired = false;    
+      this.inputLookupParentObj.isRequired = false;
+    }
+    if (this.refFormObj.IsHaveChild) {
+      this.inputLookupParentObj.isRequired = true;
+      tempHierachyNo = this.refFormObj.HierarchyNo;
+      if (tempHierachyNo == 1) {
+        this.inputLookupParentObj.isRequired = false;
+        this.inputLookupParentObj.isDisable = true;
+      } else if (tempHierachyNo == 2) {
+        tempListHierachyNo = [1];
+      }
     }
     this.inputLookupParentObj.addCritInput = new Array();
 
@@ -191,25 +204,29 @@ export class RefFormDetailComponent implements OnInit {
     critInput = new CriteriaObj();
     critInput.propName = "RF.HIERARCHY_NO";
     critInput.restriction = AdInsConstant.RestrictionIn;
-    critInput.listValue = [1, 2];
+    critInput.listValue = tempListHierachyNo;
     this.inputLookupParentObj.addCritInput.push(critInput);
 
-    console.log(this.RefForm.get("RefModuleId").value);
     critInput = new CriteriaObj();
     critInput.propName = "RF.REF_MODULE_ID";
     critInput.restriction = AdInsConstant.RestrictionEq;
     critInput.value = this.RefForm.get("RefModuleId").value;
     this.inputLookupParentObj.addCritInput.push(critInput);
 
-    this.inputLookupParentObj.jsonSelect = { Title: "" };
-    this.refFormObj.ParentId = null;
-    this.refFormObj.HierarchyNo = 1;
-    this.RefForm.patchValue({
-      HierarchyNo: 1
-    });
     this.setClassCheck();
-    if(!isNew) this.ucLookupParentForm.setAddCritInput();
-    
+    if (!isNew) {
+      this.inputLookupParentObj.nameSelect = "";
+      this.inputLookupParentObj.jsonSelect = { Title: "" };
+      this.refFormObj.ParentId = null;
+      this.refFormObj.HierarchyNo = tempHierachyNo;
+      this.RefForm.patchValue({
+        HierarchyNo: tempHierachyNo
+      });
+      this.ucLookupParentForm.setAddCritInput();
+      // this.ucLookupParentForm.initiateForm();
+    }
+    this.inputLookupParentObj.isReady = true;
+
     if (this.refFormObj.ParentTitle != "") {
       this.inputLookupParentObj.jsonSelect = { Title: this.refFormObj.ParentTitle }
     }
@@ -225,22 +242,25 @@ export class RefFormDetailComponent implements OnInit {
     this.setClassCheck();
   }
 
-  setClassCheck(){
-    if(this.refFormObj.HierarchyNo == 3){
+  setClassCheck() {
+    if (this.refFormObj.HierarchyNo == 3) {
       this.RefForm.patchValue({
         Class: "no-sub"
       });
       this.RefForm.get("Class").disable();
       this.RefForm.get("Path").setValidators(Validators.required);
       this.RefForm.get("Path").enable();
+      this.RefForm.get("Path").updateValueAndValidity();
       this.checkClass = true;
-    }else{
-      this.RefForm.get("Class").enable();
+    } else {
+      if (this.refFormObj.IsHaveChild) this.RefForm.get("Class").disable();
+      else this.RefForm.get("Class").enable();
     }
+    this.RefForm.get("Class").updateValueAndValidity();
   }
 
-  DeleteParam(i){
-    this.parameterObj.splice(i,1)
+  DeleteParam(i: number) {
+    this.parameterObj.splice(i, 1)
   }
 
   SaveForm() {
@@ -254,7 +274,7 @@ export class RefFormDetailComponent implements OnInit {
     this.refFormObj.IsHidden = this.RefForm.controls.IsHidden.value;
     this.refFormObj.IsExternalLink = this.RefForm.controls.IsExternalLink.value;
     this.refFormObj.ParameterList = this.parameterObj;
-    
+
     if (this.refFormObj.Class == "has-sub") {
       this.refFormObj.Path = "";
     } else if (this.refFormObj.Class == "no-sub") {
@@ -266,14 +286,14 @@ export class RefFormDetailComponent implements OnInit {
       this.http.post(URLConstant.EditRefFormData, this.refFormObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING],{});
-          
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING], {});
+
         });
     } else {
       this.http.post(URLConstant.AddRefFormData, this.refFormObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING],{});
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING], {});
         });
     }
   }
