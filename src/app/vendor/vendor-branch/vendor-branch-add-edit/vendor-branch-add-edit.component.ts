@@ -204,6 +204,11 @@ export class VendorBranchAddEditComponent implements OnInit {
                   else {
                     formGroupObject["VendorAttrValue"] = [''];
                   }
+
+                  if(vendorAttr["VendorAttrCode"] == "AP_DUE_AFTER_GLV"){
+                    formGroupObject["VendorAttrValue"] = this.DaysAPDuePaymentAfterGoLiveDefaultVal;
+                  }
+                  
                   parentFormGroup[vendorAttr["VendorAttrCode"]] = this.fb.group(formGroupObject);
 
                   if (vendorAttr["VendorAttrType"] == 'RM') {
@@ -1002,9 +1007,9 @@ export class VendorBranchAddEditComponent implements OnInit {
           if(GSDaysAPDuePaymentAfterGoLive != "")
           {
             this.DaysAPDuePaymentAfterGoLiveDefaultVal = Number(GSDaysAPDuePaymentAfterGoLive["GsValue"]);
-            this.VendorForm.patchValue({
-              ReservedField6: this.DaysAPDuePaymentAfterGoLiveDefaultVal,
-            });
+            // this.VendorForm.patchValue({
+            //   ReservedField6: this.DaysAPDuePaymentAfterGoLiveDefaultVal,
+            // });
           }
         }
       }
