@@ -21,7 +21,7 @@
                   (click)="checkIsSupplier()" />
               </div>
             </div>
-            <div class="form-group row" *ngIf="IsSupplier == true">
+            <div class="form-group row" [hidden]="!IsSupplier">
               <label class="col-md-2 adinsLabel" for="LinkSupplier" translate>Link Supplier </label>
               <div class="col-md-4">
                 <lib-uclookupgeneric *ngIf="inputLookupObj?.isReady" [lookupInput]="inputLookupObj"

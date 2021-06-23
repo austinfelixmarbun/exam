@@ -61,13 +61,13 @@
             "type": "sort",
             "position": "left",
             "label": "Industry Type Category Code",
-            "name": "IndustryTypeCategoryCode"
+            "name": "RefIndustryTypeCategoryCode"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Industry Type Category Name",
-            "name": "IndustryTypeCategoryName"
+            "name": "RefIndustryTypeCategoryName"
         },
         {
             "type": "sort",
