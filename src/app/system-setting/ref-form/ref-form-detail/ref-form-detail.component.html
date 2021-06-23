@@ -18,7 +18,7 @@
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Module</label>
                 <div class="col-md-9">
-                  <select class="form-control adInsInput" style="width: auto" formControlName="RefModuleId" (change)="setLookup()"
+                  <select class="form-control adInsInput" style="width: auto" formControlName="RefModuleId" (change)="setLookup(false)"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.RefModuleId.invalid }">
                     <option *ngFor="let it of itemModuleType" value="{{it.Key}}">
                       {{it.Value}}</option>
@@ -30,7 +30,7 @@
               <div class="form-group row">
                 <label class="col-md-3" translate>Class</label>
                 <div class="col-md-9">
-                  <select class="form-control adInsInput" style="width: auto" (click)="CheckClass(true)"
+                  <select class="form-control adInsInput" style="width: auto" (click)="CheckClass()"
                     formControlName="Class"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.Class.invalid }">
                     <option *ngFor="let it of itemClassType" value="{{it.Key}}">

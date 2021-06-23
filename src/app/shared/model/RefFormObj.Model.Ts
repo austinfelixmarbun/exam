@@ -21,5 +21,9 @@ export class RefFormObj {
     ParameterList : Array<ParameterObj>;
     RowVersion: string;
     
-    constructor() { this.RefFormId = 0 }
+    constructor() { 
+        this.RefFormId = 0;
+        this.IsHaveChild = false;
+        this.ParentTitle = "";
+    }
 }
