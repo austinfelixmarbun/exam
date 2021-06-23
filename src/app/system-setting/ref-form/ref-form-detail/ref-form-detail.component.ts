@@ -66,6 +66,7 @@ export class RefFormDetailComponent implements OnInit {
     ParameterAttribute : ['']
   });
   async ngOnInit() { 
+    this.checkIsAutoFormNoFromSetting("FR");
     this.ddlTemplateIcon.apiUrl = URLConstant.GetTemplateIcon;
     this.ddlTemplateIcon.requestObj = {};
     this.ddlTemplateIcon.ddlType = UcDropdownListConstant.DDL_TYPE_NONE;
