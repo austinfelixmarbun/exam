@@ -368,6 +368,7 @@ export class VendorBranchAddEditComponent implements OnInit {
           ReservedField3: this.result.VendorObj.ReservedField3,
           ReservedField4: this.result.VendorObj.ReservedField4,
           ReservedField5: this.result.VendorObj.ReservedField5,
+          ReservedField6: this.result.VendorObj.ReservedField6,
           ReservedField9: this.result.VendorObj.ReservedField9,
           MrTaxCalcMethodCode: this.result.VendorObj.MrTaxCalcMethodCode,
           IsVat: this.result.VendorObj.IsVat,
@@ -767,6 +768,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.ReservedField3 = "";
       this.vendorBranchObj.VendorObj.ReservedField4 = "";
       this.vendorBranchObj.VendorObj.ReservedField5 = "";
+      this.vendorBranchObj.VendorObj.ReservedField6 = "";
       this.vendorBranchObj.VendorObj.ReservedField9 = "";
       this.vendorBranchObj.VendorObj.MrTaxCalcMethodCode = this.VendorForm.controls.MrTaxCalcMethodCode.value;
       this.vendorBranchObj.VendorObj.IsVat = this.VendorForm.controls.IsVat.value;
@@ -778,6 +780,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.ReservedField3 = this.VendorForm.controls.ReservedField3.value;
       this.vendorBranchObj.VendorObj.ReservedField4 = this.VendorForm.controls.ReservedField4.value;
       this.vendorBranchObj.VendorObj.ReservedField5 = this.VendorForm.controls.ReservedField5.value;
+      this.vendorBranchObj.VendorObj.ReservedField6 = this.VendorForm.controls.VendorAttrList['controls'].AP_DUE_AFTER_GLV.controls.VendorAttrValue.value;
     }
     if (this.vendorBranchObj.VendorObj.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH) {
       this.vendorBranchObj.VendorObj.ReservedField2 = this.VendorForm.controls.ReservedField2.value;
@@ -1007,6 +1010,9 @@ export class VendorBranchAddEditComponent implements OnInit {
           if(GSDaysAPDuePaymentAfterGoLive != "")
           {
             this.DaysAPDuePaymentAfterGoLiveDefaultVal = Number(GSDaysAPDuePaymentAfterGoLive["GsValue"]);
+            this.VendorForm.patchValue({
+              ReserveField6: this.DaysAPDuePaymentAfterGoLiveDefaultVal
+            });
           }
         }
       }
