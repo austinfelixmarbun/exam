@@ -331,12 +331,12 @@
             "property": "ReasonDescr"
         },
         {
-            "type": "text",
+            "type": "date",
             "position": "center",
             "property": "ReqDate"
         },
         {
-            "type": "text",
+            "type": "date",
             "position": "center",
             "property": "ResultDate"
         },

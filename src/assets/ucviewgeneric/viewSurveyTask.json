@@ -67,7 +67,7 @@
           "property": "Status"
         },
         {
-          "type": "text",
+          "type": "date",
           "label": "Request Date",
           "property": "ReqDate"
         },
@@ -77,7 +77,7 @@
           "property": "RequestBy"
         },
         {
-          "type": "text",
+          "type": "date",
           "label": "Assignment Date",
           "property": "AssignDate"
         },
@@ -87,7 +87,7 @@
           "property": "AssignBy"
         },
         {
-          "type": "text",
+          "type": "date",
           "label": "Result Date",
           "property": "ResultDate"
         },
@@ -97,7 +97,7 @@
           "property": "SubmittedBy"
         },
         {
-          "type": "text",
+          "type": "date",
           "label": "Review Date",
           "property": "ReviewDate"
         },

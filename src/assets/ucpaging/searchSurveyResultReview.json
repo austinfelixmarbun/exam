@@ -193,7 +193,7 @@
             ]
         },
         {
-            "type": "text",
+            "type": "date",
             "position": "center",
             "property": "RequestDate"
         },
@@ -203,7 +203,7 @@
             "property": "RequestBy"
         },
         {
-            "type": "text",
+            "type": "date",
             "position": "center",
             "property": "AssignDate"
         },
