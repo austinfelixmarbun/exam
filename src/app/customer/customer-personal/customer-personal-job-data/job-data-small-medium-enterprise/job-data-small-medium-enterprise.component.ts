@@ -74,7 +74,6 @@ export class JobDataSmeComponent implements OnInit {
   ArrAddCritCoy: Array<CriteriaObj> = new Array<CriteriaObj>();
   EconomicSectorName : string;
   IndustryTypeCategoryName : string;
-  IndustryTypeName: string;
   IsShowData : boolean =false;
   JobDataSmeForm = this.fb.group({
     JobDataType: [''],
@@ -82,7 +81,6 @@ export class JobDataSmeComponent implements OnInit {
     JobPosition: [''],
     JobTitleName: [''],
     IndustryName: [''],
-    IndustryTypeName: [''],
     CompanyScale: [''],
     NumberEmployee: [''],
     EmpEstablishmentDate: [''],
@@ -133,7 +131,6 @@ export class JobDataSmeComponent implements OnInit {
     this.tempRefIndustryType = event.RefIndustryTypeId;
     this.IndustryTypeCategoryName = event.RefIndustryTypeCategoryName;
     this.EconomicSectorName =  event.EconomicSectorName;
-    this.IndustryTypeName= event.IndustryTypeName;
     this.IsShowData = true;
   }
 
@@ -553,10 +550,10 @@ export class JobDataSmeComponent implements OnInit {
       this.setCustJobData();
       this.setJobAddr();
       this.setOthBizAddr();
-      this.custPersonalJobDataObj.OthBizAddrId = this.othBizAddrId == null ? 0 : this.returnCustJobDataObj.othBizAddrId;
-      this.custPersonalJobDataObj.JobAddrId = this.jobAddrId == null ? 0 : this.returnCustJobDataObj.jobAddrId;
+      this.custPersonalJobDataObj.OthBizAddrId = this.othBizAddrId == null ? 0 : this.othBizAddrId;
+      this.custPersonalJobDataObj.JobAddrId = this.jobAddrId == null ? 0 : this.jobAddrId;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
-      this.custPersonalJobDataObj.PrevJobAddrId = this.preJobAddrId == null ? 0 : this.returnCustJobDataObj.preJobAddrId;
+      this.custPersonalJobDataObj.PrevJobAddrId = this.preJobAddrId == null ? 0 : this.preJobAddrId;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
       this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
       this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
