@@ -15,7 +15,8 @@
             </ng-container>
 
             <ng-container *ngIf="MrVendorCategoryCode =='SUPPLIER'">
-              <lib-ucviewgeneric [viewGenericObj]="viewBranchInfoSuppObj"></lib-ucviewgeneric>
+              <lib-ucviewgeneric [viewGenericObj]="viewBranchInfoSuppObj">
+              </lib-ucviewgeneric>
               <div class="card">
                 <div class="card-body">
                   <div class="px-3">
@@ -26,7 +27,7 @@
                             <label class="adins-label">{{attr.VendorAttrName}}</label>
                           </div>
                           <div class="col-md-6">
-                            <label class="adins-label">{{ListVendorAttrContent[i].AttrContent}}</label>
+                            <label class="adins-label">{{ ListVendorAttrContent[i].AttrContent == '' ? '-' : ListVendorAttrContent[i].AttrContent }}</label>
                           </div>
                         </div>
                       </div>
