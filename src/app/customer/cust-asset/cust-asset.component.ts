@@ -100,7 +100,7 @@ export class CustAssetComponent implements OnInit {
   DeleteCustAsset(custAssetId){
     var confirmation = confirm("Are you sure to delete this data ?");
     if(confirmation){
-      this.http.post(URLConstant.DeleteCustAsset, { CustAssetId: custAssetId }).toPromise().then(
+      this.http.post(URLConstant.DeleteCustAsset, { Id: custAssetId }).toPromise().then(
         (response) => {
           if(response["StatusCode"] == 200){
             this.toastr.successMessage(response["Message"]);
