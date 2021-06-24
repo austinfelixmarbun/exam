@@ -57,14 +57,12 @@ export class JobDataProfessionalComponent implements OnInit {
 
   EconomicSectorName: string;
   IndustryTypeCategoryName: string;
-  IndustryTypeName: string;
   IsShowData: boolean = false;
   JobDataProForm = this.fb.group({
     JobDataType: [''],
     ProfessionName: [''],
     ProfessionalNo: [''],
     JobTitleName: [''],
-    IndustryTypeName: [''],
     EstablishmentDate: ['', Validators.required],
     Notes: [''],
     LuasBangunan: [''],
@@ -111,7 +109,6 @@ export class JobDataProfessionalComponent implements OnInit {
     this.tempRefIndustryType = event.RefIndustryTypeId;
     this.EconomicSectorName = event.EconomicSectorName;
     this.IndustryTypeCategoryName = event.RefIndustryTypeCategoryName;
-    this.IndustryTypeName = event.IndustryTypeName;
     this.IsShowData = true;
   }
 
