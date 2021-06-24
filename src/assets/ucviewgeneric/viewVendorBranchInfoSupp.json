@@ -38,11 +38,6 @@
           },
           {
             "type": "text",
-            "label": "Days A/P Payment Due after Go Live :",
-            "property": "DAP"
-          },
-          {
-            "type": "text",
             "label": "Max Refund Type :",
             "property": "MaxRefundType"
           },
@@ -50,7 +45,7 @@
             "type": "text",
             "label": "Max Refund Value :",
             "property": "MaxRefundValue"
-          },{},
+          },
           {
             "type": "text",
             "label": "Grade Status :",
