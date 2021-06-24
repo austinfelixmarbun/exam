@@ -68,6 +68,7 @@ export class VendorBranchViewComponent implements OnInit {
   VendorOfficeMbr: any;
   ListVendorAttrContent: any;
   VendorAttrList: any;
+  IsReady: boolean = false;
 
 
 
@@ -138,6 +139,14 @@ export class VendorBranchViewComponent implements OnInit {
           this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, { Code: CommonConstant.SUPPLIER }).subscribe( 
             (res) => {
               this.VendorAttrList = res[CommonConstant.ReturnObj];
+              this.ListVendorAttrContent.sort((x, y) => x.VendorAttrId - y.VendorAttrId);
+              this.VendorAttrList.sort((x, y) => x.VendorAttrId - y.VendorAttrId);
+              this.VendorAttrList.forEach((x, index) => {
+                if(!this.ListVendorAttrContent.find(({VendorAttrId}) => VendorAttrId == x.VendorAttrId)){
+                  this.ListVendorAttrContent.splice(index,0,{'AttrContent':''});
+                }
+              });
+              this.IsReady = true;
             });
         }
       }
