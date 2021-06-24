@@ -66,6 +66,8 @@ export class VendorBranchViewComponent implements OnInit {
   VendorEmp: any;
   VendorOfficeMbrListObj: VendorOfficeMbrObj;
   VendorOfficeMbr: any;
+  ListVendorAttrContent: any;
+  VendorAttrList: any;
 
 
 
@@ -126,6 +128,18 @@ export class VendorBranchViewComponent implements OnInit {
     this.http.post(URLConstant.GetListVendorOfficeMbrByVendorId, { Id: this.VendorId }).subscribe(
       response => {
         this.VendorOfficeMbr = response[CommonConstant.ReturnObj]
+      }
+    )
+
+    this.http.post(URLConstant.GetListVendorAttrContentByVendorId, { Id: this.VendorId }).subscribe(
+      (response) => {
+        this.ListVendorAttrContent = response[CommonConstant.ReturnObj];
+        if (this.ListVendorAttrContent != null) {
+          this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, { Code: CommonConstant.SUPPLIER }).subscribe( 
+            (res) => {
+              this.VendorAttrList = res[CommonConstant.ReturnObj];
+            });
+        }
       }
     )
   }
