@@ -13,11 +13,18 @@ export class CustomerViewPersonalJobDataEmpComponent implements OnInit {
   viewCustJobDataOthBizAdress : UcViewGenericObj = new UcViewGenericObj();
   viewCustJobDataAddressEmp : UcViewGenericObj = new UcViewGenericObj();
 
+  viewCustPreviousJobDataEmp : UcViewGenericObj = new UcViewGenericObj();
+  viewCustPreviousJobAddressEmp : UcViewGenericObj = new UcViewGenericObj();
+
   constructor() { }
   ngOnInit() {
     this.viewCustJobDataAddressEmp.viewInput =  "./assets/ucviewgeneric/viewCustJobDataAddressEmp.json";
     this.viewCustJobDataEmp.viewInput =  "./assets/ucviewgeneric/viewCustJobDataEmp.json";
     this.viewCustJobDataEmpOthBiz.viewInput =  "./assets/ucviewgeneric/viewCustJobDataEmpOthBiz.json";
     this.viewCustJobDataOthBizAdress.viewInput =  "./assets/ucviewgeneric/viewCustJobDataOthBizAdress.json";
+  
+    this.viewCustPreviousJobDataEmp.viewInput =  "./assets/ucviewgeneric/viewCustPreviousJobDataEmp.json";
+    this.viewCustPreviousJobAddressEmp.viewInput =  "./assets/ucviewgeneric/viewCustPreviousJobAddressEmp.json";
+  
   }
 }
