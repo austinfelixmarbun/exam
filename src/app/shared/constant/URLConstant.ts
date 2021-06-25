@@ -1026,6 +1026,7 @@ export class URLConstant {
 
         // CUST FIN DATA ATTR CONTENT
     public static GetListCustFinDataAttrContentByCustIdAndListAttrGroup = environment.FoundationR3Url + "/CustFinDataAttrContent/GetListCustFinDataAttrContentByCustIdAndListAttrGroup";
+    public static AddCustFinDataAttrContent = environment.FoundationR3Url + "/CustFinDataAttrContent/AddCustFinDataAttrContent";
     public static GetCustFinDataAttrContentForCustViewByCustId = environment.FoundationR3Url + "/CustFinDataAttrContent/GetCustFinDataAttrContentForCustViewByCustId";
     public static DownloadJournalFile = environment.FoundationR3Url +"/Journal/DownloadJournalFile";
     public static GetJrSourceFileByJrSourceFileId = environment.FoundationR3Url + "/Journal/GetJrSourceFileByJrSourceFileId";
