@@ -1,8 +1,12 @@
-<lib-ucSubsection [id]="'MainInfo'" [title]="'Financial Information'" [panel]="'FinId'">
+<div class="pull-right">
+  <button *ngIf="IsShowDetail" type="button" class="backButton" translate (click)="hideDetail()"><i class="fa fa-arrow-left"></i> Back</button>
+</div>
+
+<lib-ucSubsection [id]="'MainInfo'" [title]="'Financial Information '+TitleSuffix" [panel]="'FinId'">
 </lib-ucSubsection>
 <form class="form form-horizontal" id="FinId">
 
-  <!-- <div id="ListCustFinData" class="mb-3" *ngIf="!IsShowDetail"> 
+  <div id="ListCustFinData" class="mb-3" *ngIf="!IsShowDetail"> 
     <table class="table table-stripped table-bordered">
       <thead>
         <tr class="table-header">
@@ -20,9 +24,9 @@
         </tr>
       </tbody>
     </table>  
-  </div>  -->
+  </div> 
 
-  <div class="form-body mb-3">
+  <div class="form-body mb-3" *ngIf="IsShowDetail">
     <div class="form-group row ">
       <label class="col-md-4 adInsLabel" translate>Monthly Income Amount</label>
       <div class="col-md-4">
