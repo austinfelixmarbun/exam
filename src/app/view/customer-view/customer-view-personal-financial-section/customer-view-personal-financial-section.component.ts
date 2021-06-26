@@ -6,14 +6,21 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-customer-view-personal-financial-section',
   templateUrl: './customer-view-personal-financial-section.component.html'
 })
 export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
-  tempCustObj: Array<any> = new Array<any>();
+  tempCustObj: any;
   CustId: number;
+
+  TitleSuffix:string = '';
+  IsShowDetail:boolean = false;
+  currentCustFinDataIndex: number;
+  ListCustPersonalFinData : Array<object> = [];
+
   responseCustAttr: any;
   IsAttrExist: boolean;
   custObj: CustObj = new CustObj();
@@ -44,7 +51,9 @@ export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
       (response) => {
         this.responseCustAttr = response[CommonConstant.ReturnObj];
         console.log(this.responseCustAttr);
-        this.IsAttrExist = true;
+        if (this.responseCustAttr[0] != null){
+          this.IsAttrExist = true;
+        }
       },
       (error) => {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
@@ -53,4 +62,20 @@ export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
 
     console.log(this.responseCustAttr)
   }
+
+  showDetailCustFinData(index:number){
+    let datePipe = new DatePipe("en-US");
+    this.currentCustFinDataIndex = index;
+    this.tempCustObj = this.ListCustPersonalFinData[this.currentCustFinDataIndex];
+    this.TitleSuffix = 'Date as of '+datePipe.transform(this.tempCustObj['DateAsOf'], 'dd-MMM-yyyy')
+    this.IsShowDetail = true;
+  }
+  
+  hideDetail()
+  {
+    this.TitleSuffix = '';
+    this.IsShowDetail = false;
+    this.tempCustObj = null;
+  }
+
 }

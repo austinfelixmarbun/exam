@@ -131,6 +131,12 @@ export class CustFinDataTabComponent implements OnInit {
 
     var datePipe = new DatePipe("en-US");
     if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
+      this.attrGroups = [
+        CommonConstant.AttrGroupCustPersonalFinData,
+        CommonConstant.AttrGroupCustPersonalFinDataIncome,
+        CommonConstant.AttrGroupCustPersonalFinDataExpense,
+        CommonConstant.AttrGroupCustPersonalFinDataOther
+      ];
       await this.getListCustPersonalFinData();
       var custPersonalData;
       var custPersonal = new CustPersonalObj();
@@ -181,6 +187,12 @@ export class CustFinDataTabComponent implements OnInit {
       // this.bindFinancialAttribute();
     }
     else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
+      this.attrGroups = [
+        CommonConstant.AttrGroupCustCompanyFinData,
+        CommonConstant.AttrGroupCustCompanyFinDataIncome,
+        CommonConstant.AttrGroupCustCompanyFinDataExpense,
+        CommonConstant.AttrGroupCustCompanyFinDataOther
+      ];
       await this.getListCustCoyFinData();
       var custCompanyData;
       var custCompany = new CustCompanyObj();
@@ -558,7 +570,7 @@ export class CustFinDataTabComponent implements OnInit {
             CustId: this.CustId,
             RefAttrId: formValue[key]["RefAttrId"],
             AttrValue: formValue[key]["AttrValue"],
-            AttrGroup: this.attrGroup
+            AttrGroup: formValue[key]["AttrGroup"]
           };
           custAttrRequest.push(custAttr);
         }
@@ -566,12 +578,11 @@ export class CustFinDataTabComponent implements OnInit {
     }
 
     var CustFinDataCustomObj = {
-      CustId: this.CustId,
-      AttrGroup: this.attrGroup,
+      AttrGroups: this.attrGroups,
       CustAttrContentObjs: custAttrRequest,
     }
 
-    this.httpClient.post(URLConstant.AddEditListCustAttrContent, CustFinDataCustomObj).subscribe(
+    this.httpClient.post(URLConstant.AddCustFinDataAttrContent, CustFinDataCustomObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);
         this.outputTab.emit({ stepMode: "next" });
