@@ -445,6 +445,7 @@ export class PathConstant {
     public static VIEW_CUST_PERSONAL_JOB_DATA_EMP = "PersonalJobDataEmp";
     public static VIEW_CUST_PERSONAL_JOB_DATA_SME = "PersonalJobDataSme";
     public static VIEW_CUST_PERSONAL_FINANCIAL_DATA = "PersonalFinancialData";
+    public static VIEW_CUST_ASSET = "CustomerAsset";
     public static VIEW_CUST_PERSONAL_FAMILY = "PersonalFamily";
     public static VIEW_CUST_COY_OTHER = "CoyOther";
     public static VIEW_CUST_PERSONAL_APP_LISTING = "PersonalAppListing";

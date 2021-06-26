@@ -44,6 +44,10 @@ const routes: Routes = [
         loadChildren: './customer-view-personal-financial-data/customer-view-personal-financial-data.module#CustomerViewPersonalFinancialDataModule'
       },
       {
+        path: PathConstant.VIEW_CUST_ASSET,
+        loadChildren: './customer-view-customer-asset/customer-view-customer-asset.module#CustomerViewCustomerAssetModule'
+      },
+      {
         path: PathConstant.VIEW_CUST_PERSONAL_FAMILY,
         loadChildren: './customer-view-personal-family/customer-view-personal-family.module#CustomerViewPersonalFamilyModule'
 
