@@ -124,6 +124,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { createTranslateLoader } from 'app/app.module';
 import { HttpClient } from '@angular/common/http';
+import { CustomerViewCustomerAssetComponent } from './customer-view/customer-view-customer-asset/customer-view-customer-asset.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -258,7 +259,8 @@ export const customCurrencyMaskConfig = {
     UpdateCustomerCompanyFinDataComponent,
     UpdateCustomerCompanyLegalDocComponent,
     CustBankAccComponent,
-    CustAssetComponent
+    CustAssetComponent,
+    CustomerViewCustomerAssetComponent
   ],
   providers: [
     NGXToastrService, 

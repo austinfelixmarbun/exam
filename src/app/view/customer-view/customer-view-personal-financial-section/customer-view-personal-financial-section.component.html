@@ -30,57 +30,57 @@
     <div class="form-group row ">
       <label class="col-md-4 adInsLabel" translate>Monthly Income Amount</label>
       <div class="col-md-4">
-        <label>{{this.tempCustObj?.MonthlyIncomeAmt | number}}</label>
+        <label>{{this.tempCustObj[0]?.MonthlyIncomeAmt | number}}</label>
       </div>
     </div>
     <div class="form-group row ">
       <label class="col-md-4 adInsLabel" translate>Other Income Amount</label>
       <div class="col-md-4">
-        <label>{{this.tempCustObj?.OtherIncomeAmt | number}}</label>
+        <label>{{this.tempCustObj[0]?.OtherIncomeAmt | number}}</label>
       </div>
     </div>
     <div class="form-group row">
       <label class="col-md-4 adInsLabel" translate>Source Of Other Income</label>
       <div class="col-md-4">
-        <label *ngIf="this.tempCustObj?.SourceOfOtherIncome != null">{{this.tempCustObj?.SourceOfOtherIncome}}</label>
-        <label *ngIf="this.tempCustObj?.SourceOfOtherIncome == null"> - </label>
+        <label *ngIf="this.tempCustObj[0]?.SourceOfOtherIncome != null">{{this.tempCustObj[0]?.SourceOfOtherIncome}}</label>
+        <label *ngIf="this.tempCustObj[0]?.SourceOfOtherIncome == null"> - </label>
       </div>
     </div>
-    <div class="form-group row" *ngIf="this.tempCustObj?.MaritalStat == 'MARRIED'">
+    <div class="form-group row" *ngIf="this.tempCustObj[0]?.MaritalStat == 'MARRIED'">
       <label class="col-md-4 adInsLabel" translate>Spouse Monthly Income Amount</label>
       <div class="col-md-4">
-        <label>{{this.tempCustObj?.SpouseMonthlyIncomeAmt | number}} </label>
+        <label>{{this.tempCustObj[0]?.SpouseMonthlyIncomeAmt | number}} </label>
       </div>
     </div>
     <div class="form-group row ">
       <label class="col-md-4 adInsLabel" translate>Total Income Amount</label>
       <div class="col-md-4">
-        <label>{{this.tempCustObj?.TotalIncomeAmt | number}} </label>
+        <label>{{this.tempCustObj[0]?.TotalIncomeAmt | number}} </label>
       </div>
     </div>
     <div class="form-group row ">
       <label class="col-md-4 adInsLabel" translate>Monthly Installment Amount</label>
       <div class="col-md-4">
-        <label>{{this.tempCustObj?.MonthlyInstallmentAmt | number}} </label>
+        <label>{{this.tempCustObj[0]?.MonthlyInstallmentAmt | number}} </label>
       </div>
     </div>
     <div class="form-group row">
       <label class="col-md-4  adInsLabel" translate>Monthly Expense Amount</label>
       <div class="col-md-4">
-        <label>{{this.tempCustObj?.MonthlyExpenseAmt | number}} </label>
+        <label>{{this.tempCustObj[0]?.MonthlyExpenseAmt | number}} </label>
       </div>
     </div>
     <div class="form-group row ">
       <label class="col-md-4 adInsLabel" translate>Net Income Amount</label>
       <div class="col-md-4">
-        <label>{{this.tempCustObj?.NettIncomeAmt | number}} </label>
+        <label>{{this.tempCustObj[0]?.NettIncomeAmt | number}} </label>
       </div>
     </div>
-    <div *ngIf="this.tempCustObj?.MaritalStat == 'MARRIED'" class="form-group row ">
+    <div *ngIf="this.tempCustObj[0]?.MaritalStat == 'MARRIED'" class="form-group row ">
       <label class="col-md-4 adInsLabel" translate>Join Income</label>
       <div class="col-md-4">
-        <label *ngIf="this.tempCustObj?.IsJoinInc == true">Yes</label>
-        <label *ngIf="this.tempCustObj?.IsJoinInc == false">No</label>
+        <label *ngIf="this.tempCustObj[0]?.IsJoinInc == true">Yes</label>
+        <label *ngIf="this.tempCustObj[0]?.IsJoinInc == false">No</label>
       </div>
     </div>
   </div>

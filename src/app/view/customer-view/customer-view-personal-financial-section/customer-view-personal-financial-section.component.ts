@@ -37,17 +37,17 @@ export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.custObj = new CustObj();
     this.custObj.CustId = this.CustId;
-    this.ListCustPersonalFinData = [];
-    this.http.post(URLConstant.GetListCustPersonalFinDataForCustViewByCustId, {custId : this.CustId }).subscribe(
+    await this.http.post(URLConstant.GetListCustPersonalFinDataForCustViewByCustId, {custId : this.CustId }).toPromise().then(
       (response) => {
-        this.ListCustPersonalFinData = response['ListCustPersonalFinDataForCustView'];
+        console.log(response)
+        this.tempCustObj = response["ListCustPersonalFinDataForCustView"];
       }
     );
 
-    this.http.post(URLConstant.GetCustFinDataAttrContentForCustViewByCustId, { Id : this.CustId }).subscribe(
+    await this.http.post(URLConstant.GetCustFinDataAttrContentForCustViewByCustId, { Id : this.CustId }).toPromise().then(
       (response) => {
         this.responseCustAttr = response[CommonConstant.ReturnObj];
         console.log(this.responseCustAttr);
@@ -59,6 +59,8 @@ export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
       }
     );
+
+    console.log(this.responseCustAttr)
   }
 
   showDetailCustFinData(index:number){
