@@ -17,12 +17,15 @@
     <div class="px-3">
       <lib-ucSubsection [id]="'LicenseInformasiId'" [title]="'License Informasi'" [panel]="'LicenseInformasi'">
       </lib-ucSubsection>
-      <div id="LicenseInformasi">
+      <div *ngIf="LicenseData" id="LicenseInformasi">
         <div class="form-group row">
-          <label class="col-md-3  adInsLabel" translate>Company/Business Name</label>          
+          <label class="col-md-3  adInsLabel" translate>Company/Business Name</label>
+          <label *ngIf="LicenseData.CompanyName !== ''" class="col-md-9  adInsLabel" translate>{{LicenseData.CompanyName}}</label>
+          <label *ngIf="LicenseData.CompanyName == ''" class="col-md-9  adInsLabel" translate>-</label>          
         </div>
         <div class="form-group row">
-          <label class="col-md-3  adInsLabel" translate>Upload Date</label>          
+          <label class="col-md-3  adInsLabel" translate>Upload Date</label>
+          <label class="col-md-9  adInsLabel" translate>{{LicenseData.UploadDate | date:'dd/MM/yyyy h:mm:ss a'}}</label>           
         </div>
       </div>
 
@@ -33,24 +36,30 @@
           <thead>
             <tr class="table-header">
               <th class="text-left"><span translate class="thead-header" name='No'>No</span></th>
+              <th class="text-left"><span translate class="thead-header" name='LicenseType'>System Name</span></th>
               <th class="text-left"><span translate class="thead-header" name='LicenseType'>License Type</span></th>
-              <th class="text-left"><span translate class="thead-header" name='Status'>Status</span></th>                                
+              <th class="text-center"><span translate class="thead-header" name='Status'>Status</span></th>                                
             </tr>
           </thead>    
-          <tbody >
+          <tbody *ngIf = "!Licenses || Licenses?.length == 0">
             <tr>
               <td colspan="100%">No Data Available</td>
             </tr>
           </tbody>        
-          <tbody *ngIf="LicenseData?.length != 0">
-            <tr *ngFor="let item of LicenseData" [ngClass]="{'text-break': !IsOverflow}">
-              <td class="text-center">
-                {{no}}
+          <tbody *ngIf="Licenses?.length != 0">
+            <tr *ngFor="let item of Licenses" [ngClass]="{'text-break': !IsOverflow}">
+              <td class="text-left">
+                {{item.No}}
+              </td>
+              <td class="text-left">
+                {{item.SystemName}}
+              </td>
+              <td class="text-left">
+                <a class="primary" title="" [routerLink]="[DetailLink]" [queryParams]="{systemName:item.SystemName,licenseType:item.LicenseType,status:item.Status,modules:item.Modules}" skipLocationChange translate>
+                  {{item.LicenseType}}
+                </a>
               </td>
               <td class="text-center">
-                {{item.Type}}
-                </td>
-              <td class="text-left">
                 {{item.Status}}
               </td>              
             </tr>

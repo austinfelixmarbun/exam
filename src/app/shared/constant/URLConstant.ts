@@ -946,4 +946,6 @@ export class URLConstant {
 
     // LICENSE
     public static UploadLicense = environment.FoundationR3Url + "/License/UploadLicense";
+    public static GetLicenses = environment.FoundationR3Url + "/License/GetLicenses";
+    public static RetrieveLicenseDetail = environment.FoundationR3Url + "/License/RetrieveLicenseDetail";
 }

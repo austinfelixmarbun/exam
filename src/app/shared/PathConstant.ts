@@ -479,7 +479,8 @@ export class PathConstant {
     //#endregion
 
     //#region License
-    public static LICENSE_MASTER = "License";
+    public static LICENSE_MASTER = "LicenseManager";
     public static UPLOAD_LICENSE = PathConstant.LICENSE_MASTER + "/" + PathConstant.UPLOAD;
+    public static DETAIL_LICENSE = PathConstant.LICENSE_MASTER + "/" + PathConstant.DETAIL;
     //#endRegion
 }

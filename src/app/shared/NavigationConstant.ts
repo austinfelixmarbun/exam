@@ -319,5 +319,6 @@ export class NavigationConstant {
     //#region License
     public static LICENSE_PAGING = "/" + PathConstant.LR_LICENSE + "/" + PathConstant.PAGING;
     public static UPLOAD_LICENSE = "/"+ PathConstant.LR_LICENSE + "/" + PathConstant.UPLOAD_LICENSE;
+    public static DETAIL_LICENSE = "/"+ PathConstant.LR_LICENSE + "/" + PathConstant.DETAIL_LICENSE;
     //#endregion
 }

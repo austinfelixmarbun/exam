@@ -6,6 +6,8 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { CookieService } from 'ngx-cookie';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-upload-license',
@@ -29,7 +31,8 @@ export class UploadLicenseComponent implements OnInit {
     private fb: FormBuilder, 
     private httpClient: HttpClient,
     private router: Router,
-    private toastr: NGXToastrService
+    private toastr: NGXToastrService,
+    private cookieService: CookieService
     ) { }
 
   ngOnInit() {
@@ -40,7 +43,7 @@ export class UploadLicenseComponent implements OnInit {
     this.fileLicense = file[0];
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
-      console.log(fileReader.result);
+      
       this.LicenseForm.controls['LicenseFile'].setValue(fileReader.result);
     }
     fileReader.readAsText(this.fileLicense);
@@ -54,7 +57,7 @@ export class UploadLicenseComponent implements OnInit {
     this.fileLicenseState = file[0];
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
-      console.log(fileReader.result);
+      
       this.LicenseForm.controls['LicenseStateFile'].setValue(fileReader.result);
     }
     fileReader.readAsText(this.fileLicenseState);
@@ -66,13 +69,15 @@ export class UploadLicenseComponent implements OnInit {
   uploadDocument() {
     
     console.log("upload",this.LicenseForm);
+    var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    var LicenseObj = { LicenseFileContent : this.LicenseForm.controls['LicenseFile'].value, LicenseStateFileContent :this.LicenseForm.controls['LicenseStateFile'].value, Username : currentUserContext[CommonConstant.USER_NAME] };
     
-    // this.httpClient.post(URLConstant.UploadLicense, this.LicenseForm.value).subscribe(
-    //   (response) => {
-    //     this.toastr.successMessage(response['message']);
-    //     AdInsHelper.RedirectUrl(this.router,[NavigationConstant.LICENSE_PAGING],{});
-    //   }
-    // );
+    this.httpClient.post(URLConstant.UploadLicense, LicenseObj).subscribe(
+      (response) => {
+        this.toastr.successMessage(response['message']);
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.LICENSE_PAGING],{});
+      }
+    );
     
 }
 

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LicenseComponent } from './license.component';
 import { PathConstant } from 'app/shared/PathConstant';
 import { UploadLicenseComponent } from './upload-license/upload-license.component';
+import { DetailLicenseComponent } from './detail-license/detail-license.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,13 @@ const routes: Routes = [
         component: UploadLicenseComponent,
         data: {
           title: 'Upload License'
+        }
+      },
+      {
+        path: PathConstant.DETAIL_LICENSE,
+        component: DetailLicenseComponent,
+        data: {
+          title: 'Detail License'
         }
       }
     ]

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-license',
@@ -9,10 +14,24 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class LicenseComponent implements OnInit {
 
   LicenseData : any;
+  Licenses : any;
   readonly AddLink: string = NavigationConstant.UPLOAD_LICENSE;
-  constructor() { }
+  readonly DetailLink: string = NavigationConstant.DETAIL_LICENSE;
+  constructor(private toastr: NGXToastrService, private httpClient: HttpClient, private router: Router) { }
 
   ngOnInit() {
+
+    var LicenseObj = { SystemName : "", LicenseType :"", Module:""};
+
+    this.httpClient.post(URLConstant.GetLicenses, LicenseObj).subscribe(
+      (response) => {
+        this.LicenseData = response;
+        this.Licenses = this.LicenseData.Licenses;
+        console.log(this.LicenseData);
+        console.log("license", this.Licenses);
+        this.toastr.successMessage(response['message']);
+      }
+    );
   }
 
 }

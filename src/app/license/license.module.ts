@@ -8,9 +8,10 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { UploadLicenseComponent } from './upload-license/upload-license.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
+import { DetailLicenseComponent } from './detail-license/detail-license.component';
 
 @NgModule({
-  declarations: [LicenseComponent, UploadLicenseComponent],
+  declarations: [LicenseComponent, UploadLicenseComponent, DetailLicenseComponent],
   imports: [
     CommonModule,
     LicenseRoutingModule,
