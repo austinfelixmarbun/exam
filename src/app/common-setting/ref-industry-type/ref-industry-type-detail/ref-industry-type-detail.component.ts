@@ -17,7 +17,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class RefIndustryTypeDetailComponent implements OnInit {
   refIndustryType: RefIndustryTypeObj;
-  economicSectorObj: any;
+  industryTypeCategoryObj: any;
   type: String = 'add';
   RefIndustryTypeId: Number;
   resultData: any;
@@ -27,7 +27,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     RefIndustryTypeId: [0, [Validators.required]],
     IndustryTypeCode: ['', [Validators.required]],
     IndustryTypeName: ['', [Validators.required]],
-    RefEconomicSectorId: ['', [Validators.required]],
+    RefIndustryTypeCategoryId: ['', [Validators.required]],
     IsActive: [true],
     RowVersion: [""]
   });
@@ -38,7 +38,8 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private service: NGXToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private http: HttpClient
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
@@ -51,54 +52,61 @@ export class RefIndustryTypeDetailComponent implements OnInit {
   }
 
 
-  ngOnInit() {
+  async ngOnInit() {
     this.inputLookupObj = new InputLookupObj();
-    this.inputLookupObj.urlJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
-    this.inputLookupObj.pagingJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
-    this.inputLookupObj.genericJson = "./assets/uclookup/EconomicSector/lookupEconomicSector.json";
+    this.inputLookupObj.urlJson = "./assets/lookup/lookupIndustryTypeCategory.json";
+    this.inputLookupObj.pagingJson = "./assets/lookup/lookupIndustryTypeCategory.json";
+    this.inputLookupObj.genericJson = "./assets/lookup/lookupIndustryTypeCategory.json";
 
     if (this.type == 'edit') {
       this.refIndustryType = new RefIndustryTypeObj();
       this.refIndustryType.RefIndustryTypeId = this.RefIndustryTypeId;
-      this.httpClient.post(URLConstant.GetRefIndustryTypeById, {Id: this.RefIndustryTypeId}).pipe(
-        map(response => {
+      await this.http.post(URLConstant.GetRefIndustryTypeById, {Id: this.RefIndustryTypeId}).toPromise().then(
+        response => {
           this.resultData = response;
-          this.economicSectorObj = new RefIndustryTypeObj();
-          this.economicSectorObj.RefEconomicSectorId = this.resultData.RefEconomicSectorId;
-          return this.economicSectorObj;
-        }),
-        mergeMap((economicSectorObj) => this.httpClient.post(URLConstant.GetRefEconomicSectorById, {Id : economicSectorObj.RefEconomicSectorId }))
-      ).subscribe(
-        (response2) => {
-          this.economicSectorObj = response2;
-          setTimeout(() => {
-            this.RefIndustryTypeForm.patchValue({
-              RefIndustryTypeId: this.resultData.RefIndustryTypeId,
-              IndustryTypeCode: this.resultData.IndustryTypeCode,
-              IndustryTypeName: this.resultData.IndustryTypeName,
-              RefEconomicSectorId: this.resultData.RefEconomicSectorId,
-              IsActive: this.resultData.IsActive,
-              RowVersion: this.resultData.RowVersion
-            });
-          })
-          this.inputLookupObj.nameSelect = this.economicSectorObj.EconomicSectorName;
-        }
-      );
+          this.industryTypeCategoryObj = this.resultData;
+          this.RefIndustryTypeForm.patchValue({
+            RefIndustryTypeId: this.resultData.RefIndustryTypeId,
+            IndustryTypeCode: this.resultData.IndustryTypeCode,
+            IndustryTypeName: this.resultData.IndustryTypeName,
+            RefIndustryTypeCategoryId: this.resultData.RefIndustryTypeCategoryId,
+            IsActive: this.resultData.IsActive,
+            RowVersion: this.resultData.RowVersion
+          });
+        });
+
+        await this.http.post(URLConstant.GetIndustryTypeCategoryByIndustryTypeCategoryId, this.industryTypeCategoryObj).toPromise().then(
+          response => {
+            this.industryTypeCategoryObj = response;
+           
+          this.inputLookupObj.nameSelect = this.industryTypeCategoryObj.RefIndustryTypeCategoryName;
+           
+          }); 
+    }else{
+      this.checkIsAutoFormNoFromSetting('IT');
     }
   }
 
   getLookupResponse(e) {
     this.RefIndustryTypeForm.patchValue({
-      RefEconomicSectorId: e.RefEconomicSectorId,
+      RefIndustryTypeCategoryId: e.RefIndustryTypeCategoryId,
     });
   }
 
   Save() {
-    this.refIndustryType = this.RefIndustryTypeForm.value;
+    var refIndustryTypeObj = new RefIndustryTypeObj();
+    refIndustryTypeObj.IndustryTypeCode = this.RefIndustryTypeForm.controls["IndustryTypeCode"].value;
+    refIndustryTypeObj.IndustryTypeName = this.RefIndustryTypeForm.controls["IndustryTypeName"].value;
+    refIndustryTypeObj.RefIndustryTypeCategoryId = this.RefIndustryTypeForm.controls["RefIndustryTypeCategoryId"].value;
+    if(this.type == 'edit') {
+      refIndustryTypeObj.RefIndustryTypeId = this.RefIndustryTypeForm.controls["RefIndustryTypeId"].value;
+      refIndustryTypeObj.RowVersion = this.RefIndustryTypeForm.controls["RowVersion"].value;
+    }
+
 
     //MODE-ADD
     if (this.type != 'edit') {
-      this.httpClient.post(URLConstant.AddRefIndustryType, this.refIndustryType).subscribe(
+      this.httpClient.post(URLConstant.AddRefIndustryType, refIndustryTypeObj).subscribe(
         //SAVE
         (response) => {
           this.service.successMessage(response["Message"]);
@@ -112,7 +120,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     //MODE-EDIT
     else {
       //SAVE
-      this.httpClient.post(URLConstant.EditRefIndustryType, this.refIndustryType).subscribe(
+      this.httpClient.post(URLConstant.EditRefIndustryType, refIndustryTypeObj).subscribe(
         (response) => {
           this.service.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_INDUSTRY_TYPE_PAGING],{});
@@ -123,4 +131,29 @@ export class RefIndustryTypeDetailComponent implements OnInit {
       );
     }
   }
+
+  //check is automatic/not form no 4
+  isAuto: boolean = false;
+  checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
+    var generalSettingObj = {
+      rowVersion: "",
+      code: "MASTER_AUTO_GNRT_CODE"
+    }
+    var result: any;
+    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+      (response) => {
+        result = response;
+
+        if (result.GsValue != undefined && result.GsValue != "") {
+          if (result.GsValue.split(';').find(x => x == msAutoGenCode)) {
+            this.isAuto = true;
+            this.RefIndustryTypeForm.patchValue({
+              IndustryTypeCode: '-'
+            });
+          }
+        }
+      });
+  }
+  //check is automatic/not form no 4
+
 }

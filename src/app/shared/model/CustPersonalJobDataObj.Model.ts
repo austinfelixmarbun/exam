@@ -28,4 +28,5 @@ export class CustPersonalJobDataObj {
   OthBizAddrId : any;
   MrCustModelCode: any;
   RowVersion:any;
+  RefSectorEconomySlikId: number;
 }

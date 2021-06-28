@@ -4,6 +4,7 @@ import { DecimalPipe } from '@angular/common';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';

@@ -19,4 +19,6 @@ export class CustCompanyObj {
   Email1: any;
   Email2: any;
   IsSkt: any;
+  RefSectorEconomySlikId : number;
 }
+  

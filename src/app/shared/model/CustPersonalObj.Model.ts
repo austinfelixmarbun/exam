@@ -16,8 +16,10 @@ export class CustPersonalObj {
   MrMaritalStatCode: any;
   MobilePhnNo1: any;
   MobilePhnNo2: any;
+  MobilePhnNo3: any;
   Email1 : any;
   Email2: any;
+  Email3: any;
   FamilyCardNo: any;
   NoOfDependents: any;
   NoOfResidence: any;

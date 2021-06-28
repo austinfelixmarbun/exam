@@ -6,7 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { formatDate } from '@angular/common';
@@ -15,12 +15,18 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { VendorAttrContentObj } from 'app/shared/model/VendorAttrContentObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { VendorAtpmSelectComponent } from 'app/vendor/vendor-ATPM/vendor-atpm-select/vendor-atpm-select.component';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { VendorAtpmMappingObj } from "app/shared/model/VendorAtpmMappingObj.Model";
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericObj} from 'app/shared/model/Generic/GenericObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { GenericListObj } from 'app/shared/model/Generic/GenericListObj.Model';
 
 @Component({
   selector: 'app-vendor-ho-add-edit',
@@ -35,6 +41,7 @@ export class VendorHoAddEditComponent implements OnInit {
 
   businessDt: Date;
   result: any;
+  resultAtpmMapping: Array<VendorAtpmMappingObj> = new Array();
   check: any;
   inputLookupParentObj: InputLookupObj = new InputLookupObj();
   inputLookupATPMObj: InputLookupObj = new InputLookupObj();
@@ -51,8 +58,9 @@ export class VendorHoAddEditComponent implements OnInit {
   ListVendorAttrContent = new Array<any>();
   VendorAttrList = new Array<any>();
   vendorAttrRequest = new Array<VendorAttrContentObj>();
+  vendorAtpmList = new Array();
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal,private spinner: NgxSpinnerService) {
     this.route.queryParams.subscribe(params => {
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
       this.VendorId = params['VendorId'];
@@ -138,6 +146,9 @@ export class VendorHoAddEditComponent implements OnInit {
       this.VendorForm.controls.VendorCode.disable();
       this.getData();
     } else {
+      if(this.MrVendorCategoryCode == "SUPPLIER_HO"){
+        this.checkIsAutoFormNoFromSetting("SU");
+      }
       this.setDropdown();
       this.setLookup();
       this.checkType();
@@ -338,10 +349,19 @@ export class VendorHoAddEditComponent implements OnInit {
           IsOneAffiliate: this.result.VendorObj.IsOneAffiliate,
         });
 
+        
+
         this.setLookup();
         this.checkType();
       }
     );
+
+    this.http.post(URLConstant.GetListVendorAtpmMappingByVendorId, { Id: this.VendorId }).subscribe(
+      (response: GenericListObj) => {
+        this.resultAtpmMapping = response.ReturnObject;
+
+        this.vendorAtpmList = this.resultAtpmMapping;
+      });
   }
 
   setDropdown() {
@@ -578,6 +598,50 @@ export class VendorHoAddEditComponent implements OnInit {
     this.NpwpCheck(true);
   }
 
+  AddAtpmClick()
+  {
+    const modalAddAtpm = this.modalService.open(VendorAtpmSelectComponent);
+
+    if(this.vendorAtpmList.length > 0)
+      modalAddAtpm.componentInstance.listExistingAtpmCode = this.vendorAtpmList.map(a => a.VendorAtpmCode);
+
+    modalAddAtpm.result.then(
+      (response) => {
+        this.spinner.show();
+        
+        this.spinner.hide();
+        this.toastr.successMessage(response["message"]);
+      }
+    ).catch(
+      (error) => {
+        if(error != 0){
+          console.log(error);
+        }
+      }
+    );
+
+    modalAddAtpm.componentInstance.emitData.subscribe(($e) => {
+      var obj = 
+      {
+        VendorAtpmId: $e.VendorId,
+        VendorAtpmCode: $e.VendorCode,
+        VendorAtpmName: $e.VendorName,
+        VendorAtpmLegalAddr: $e.LegalAddr
+      };
+
+      this.vendorAtpmList.push(obj);
+    })
+  }
+
+  deleteAtpm(item)
+  {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION))
+    {
+      let index = this.vendorAtpmList.map(function(e) { return e.VendorAtpmCode; }).indexOf(item.VendorAtpmCode);
+      this.vendorAtpmList.splice(index,1);
+    }
+  }
+
   SaveForm() {
     if (Date.parse(this.VendorForm.controls.EstablishmentDt.value) > Date.parse(formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US'))) {
       this.toastr.warningMessage("Establishment Date Must Be Lesser Than Business Date");
@@ -651,6 +715,19 @@ export class VendorHoAddEditComponent implements OnInit {
         }
       }
 
+      if(this.vendorAtpmList.length > 0)
+      {
+        this.vendorHoObj.VendorAtpmMappingObjs = new Array<VendorAtpmMappingObj>();
+
+        for (let i = 0; i < this.vendorAtpmList.length; i++) {
+
+          var vendorAtpmMappingObj = new VendorAtpmMappingObj();
+          vendorAtpmMappingObj.VendorAtpmId = this.vendorAtpmList[i].VendorAtpmId;
+
+          this.vendorHoObj.VendorAtpmMappingObjs.push(vendorAtpmMappingObj);
+        }
+      }
+
       if (this.mode == "edit") {
         this.vendorHoObj.VendorObj.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
         this.vendorHoObj.VendorObj.VendorCode = this.result.VendorObj.VendorCode;
@@ -682,4 +759,28 @@ export class VendorHoAddEditComponent implements OnInit {
       VendorAttrValue: e.MasterCode
     });
   }
+
+  //check is automatic/not form no 4
+  isAuto: boolean = false;
+  checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
+    var generalSettingObj = {
+      rowVersion: "",
+      code: "MASTER_AUTO_GNRT_CODE"
+    }
+    var result: any;
+    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+      (response) => {
+        result = response;
+
+        if (result.GsValue != undefined && result.GsValue != "") {
+          if (result.GsValue.split(';').find(x => x == msAutoGenCode)) {
+            this.isAuto = true;
+            this.VendorForm.patchValue({
+              VendorCode: '-'
+            });
+          }
+        }
+      });
+  }
+  //check is automatic/not form no 4
 }

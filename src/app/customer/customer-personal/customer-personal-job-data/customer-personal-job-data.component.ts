@@ -39,7 +39,7 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   ngOnInit() {
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         this.custObj = response;
         this.CustModel = this.custObj.MrCustModelCode;
@@ -59,8 +59,7 @@ export class CustomerPersonalJobDataComponent implements OnInit {
     );
   }
 
-  getValue(ev)
-  {
+  getValue(ev) {
     this.outputTab.emit({ stepMode: ev.stepMode })
   }
 }

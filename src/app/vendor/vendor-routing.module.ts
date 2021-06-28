@@ -33,6 +33,12 @@ import { AuctionCompanyPagingComponent } from './auction-company/auction-company
 import { AuctionCompanyAddeditComponent } from './auction-company/auction-company-addedit/auction-company-addedit.component';
 import { PathConstant } from 'app/shared/PathConstant';
 
+import { VendorGradingRequestPagingComponent } from "./vendor-grading/vendor-grading-request/vendor-grading-request-paging/vendor-grading-request-paging.component";
+import { VendorGradingRequestDetailComponent } from "./vendor-grading/vendor-grading-request/vendor-grading-request-detail/vendor-grading-request-detail.component";
+import { VendorGradingApprovalPagingComponent } from "./vendor-grading/vendor-grading-approval/vendor-grading-approval-paging/vendor-grading-approval-paging.component";
+import { VendorGradingApprovalDetailComponent } from "./vendor-grading/vendor-grading-approval/vendor-grading-approval-detail/vendor-grading-approval-detail.component";
+import { VendorGradingInquiryPagingComponent } from "./vendor-grading/vendor-grading-inquiry-paging/vendor-grading-inquiry-paging.component";
+
 const routes: Routes = [
   {
     path: '',
@@ -248,8 +254,41 @@ const routes: Routes = [
           title: 'Vendor ATPM Registration'
         },
       },
-      
-      // Auction Company
+      {
+        path: "VendorGrading/Request/Paging",
+        component: VendorGradingRequestPagingComponent,
+        data: {
+          title: "Vendor Grading Request Paging",
+        },
+      },
+      {
+        path: "VendorGrading/Request/Detail",
+        component: VendorGradingRequestDetailComponent,
+        data: {
+          title: "Vendor Grading Request Detail",
+        },
+      },
+      {
+        path: "VendorGrading/Approval/Paging",
+        component: VendorGradingApprovalPagingComponent,
+        data: {
+          title: "Vendor Grading Approval Paging",
+        },
+      },
+      {
+        path: "VendorGrading/Approval/Detail",
+        component: VendorGradingApprovalDetailComponent,
+        data: {
+          title: "Vendor Grading Approval Detail",
+        },
+      },
+      {
+        path: "VendorGrading/Inquiry",
+        component: VendorGradingInquiryPagingComponent,
+        data: {
+          title: "Vendor Grading Inquiry", 
+        }
+      },
       {
         path: PathConstant.VENDOR_AUCTION_COY_PAGING,
         component: AuctionCompanyPagingComponent,

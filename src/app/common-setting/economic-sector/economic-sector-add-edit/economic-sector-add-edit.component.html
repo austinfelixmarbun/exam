@@ -15,7 +15,7 @@
             <lib-ucSubsection [id]="'EconomicSectorId'" [title]="title" [panel]="'EconomicSector'">
             </lib-ucSubsection>
             <div id="EconomicSector">
-              <div class="form-group row">
+              <div *ngIf="!isAuto" class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Economic Sector Code</label>
                 <div class="col-md-4">
                   <input type="text" class="form-control" formControlName="EconomicSectorCode"

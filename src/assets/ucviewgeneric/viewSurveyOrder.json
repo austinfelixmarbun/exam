@@ -17,7 +17,7 @@
           "property": "SurveyInitial"
         },
         {
-          "type": "text",
+          "type": "date",
           "label": "Request Date",
           "property": "RequestDate"
         },        

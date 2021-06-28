@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { FormBuilder, Validators } from '@angular/forms';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -20,6 +20,7 @@ export class BankAddComponent implements OnInit {
         BankCode : ['',Validators.required],
         BankName : ['', Validators.required],
         RegRptCode : ['',Validators.required],
+        RtgsCode :[''],
         IsActive : [false]
     });
 
@@ -58,10 +59,13 @@ export class BankAddComponent implements OnInit {
                         BankCode : this.result.BankCode,
                         BankName : this.result.BankName,
                         RegRptCode : this.result.RegRptCode,
+                        RtgsCode: this.result.RtgsCode,
                         IsActive : this.result.IsActive
                     })
                 }
             );
+        }else{
+            this.checkIsAutoFormNoFromSetting('BN')
         }
     }
 
@@ -91,4 +95,27 @@ export class BankAddComponent implements OnInit {
             });
         }
     }
+    //check is automatic/not form no 4
+    isAuto: boolean = false;
+    checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
+      var generalSettingObj = {
+        rowVersion: "",
+      code: "MASTER_AUTO_GNRT_CODE"
+      }
+      var result: any;
+      this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+        (response) => {
+          result = response;
+
+          if (result.GsValue != undefined && result.GsValue != "") {
+            if (result.GsValue.split(';').find(x => x == msAutoGenCode)) {
+              this.isAuto = true;
+              this.BankAddForm.patchValue({
+                BankCode: '-'
+              });
+            }
+          }
+        });
+    }
+    //check is automatic/not form no 4
 }

@@ -13,7 +13,7 @@ import { environment } from "environments/environment";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from "app/shared/model/InputSearchObj.Model";
-import { CriteriaObj } from "app/shared/model/CriteriaObj.Model";
+import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { URLConstant } from "app/shared/constant/URLConstant";
 @Component({
   selector: "app-role-user",

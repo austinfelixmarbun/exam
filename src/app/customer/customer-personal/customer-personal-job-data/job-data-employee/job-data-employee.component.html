@@ -93,8 +93,29 @@
             </div>
           </div>
 
+        <div *ngIf ="IsShowData">
           <div class="form-group row">
-            <label class="col-md-2 adInsLabel adins-required-label" translate>Company Scale </label>
+            <label class="col-md-2 adInsLabel" translate>Economic Sector </label>
+            <label class="col-md-4">
+              {{EconomicSectorName}}
+            </label>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 adInsLabel" translate>Industry Type Category </label>
+            <label class="col-md-4">
+              {{IndustryTypeCategoryName}}
+            </label>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 adInsLabel" translate>Industry Type </label>
+            <label class="col-md-4">
+              {{IndustryTypeName}}
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-md-2 adInsLabel adins-required" translate>Company Scale </label>
             <div class="col-md-4">
               <select class="form-control adInsInput" formControlName="CompanyScale" required>
                 <option *ngFor="let ram of listCompanyScale" [value]="ram.Key">
@@ -103,7 +124,7 @@
               </select>
               <lib-uc-show-errors [control]="JobDataEmpForm.controls.CompanyScale" [submit]="enjiForm.submitted"></lib-uc-show-errors>
             </div>
-          </div>
+        </div>
 
           <div class="form-group row adins-required">
             <label class="col-md-2 adInsLabel adins-required-label" translate>Employment Establishment Date </label>

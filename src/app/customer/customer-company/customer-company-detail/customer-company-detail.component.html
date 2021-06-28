@@ -5,7 +5,7 @@
       <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
       </lib-ucSubsection>
       <div id="MainInfoId">
-        <div class="form-group row">
+        <div class="form-group row  ">
           <label class="col-md-2 adins-required-label" translate>Industry Type Name </label>
           <div class="col-md-4">
             <lib-uclookupgeneric [lookupInput]="lookUpObj" [parentForm]="CustomerDetailForm" [enjiForm]="enjiForm"
@@ -20,8 +20,6 @@
             </lib-uc-show-errors>
           </div>
         </div>
-        <div class="form-group row adins">
-        </div>
         <div class="form-group row">
           <label class="col-md-2 adins-required-label" translate>Establishment Date</label>
           <div class="col-md-4">
@@ -30,7 +28,7 @@
             <lib-uc-show-errors [control]="CustomerDetailForm.controls.EstablishmentDt" [submit]="enjiForm.submitted">
             </lib-uc-show-errors>
           </div>
-          <label class="col-md-2 adins-required-label" translate>SKT</label>
+          <label class="col-md-2" translate>SKT</label>
           <div class="col-md-4">
             <input type="checkbox" data-md-icheck formControlName="IsSkt">
           </div>

@@ -39,7 +39,7 @@ export class CustomerCompanyPageComponent implements OnInit {
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,  private cookieService: CookieService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService) {
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -53,34 +53,34 @@ export class CustomerCompanyPageComponent implements OnInit {
       }
     });
   }
-  
+
   back() {
     if (this.From) {
       AdInsHelper.RedirectUrl(this.router, ["/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstant.PAGING], {});
     } else {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
     }
   }
 
-  async ngOnInit() : Promise<void> {
+  async ngOnInit(): Promise<void> {
     if (this.IdCust == null) {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
     }
     else {
       var custObj = { CustId: this.IdCust };
       this.http.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
         (response: any) => {
           this.CustCompanyId = response['CustCompanyId'];
-        } 
+        }
       );
 
       //check DMS
       await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms}).toPromise().then(
         (response) => {
           this.SysConfigResultObj = response;
-      });
-      if(this.SysConfigResultObj.ConfigValue == '1'){
-        await this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).toPromise().then(
+        });
+      if (this.SysConfigResultObj.ConfigValue == '1') {
+        await this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).toPromise().then(
           (response: any) => {
             let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
             this.dmsObj = new DMSObj();
@@ -89,10 +89,11 @@ export class CustomerCompanyPageComponent implements OnInit {
             this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
             this.dmsObj.MetadataParent = null;
             this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, response["CustNo"]));
-            this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));  
+            this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
           }
         );
       }
+
       this.stepper = new Stepper(document.querySelector('#stepper1'), {
         linear: false,
         animation: true
@@ -122,37 +123,40 @@ export class CustomerCompanyPageComponent implements OnInit {
     if (type == "Financial") {
       this.CustStepIndex = 6;
     }
-    if (type == "Legal") {
+    if (type == "CustAsset") {
       this.CustStepIndex = 7;
     }
-    if (type == "UploadData") {
+    if (type == "Legal") {
       this.CustStepIndex = 8;
     }
-    if (type == "CustAttr") {
+    if (type == "UploadData") {
       this.CustStepIndex = 9;
+    }
+    if (type == "CustAttr") {
+      this.CustStepIndex = 10;
     }
 
     this.stepper.to(this.CustStepIndex);
   }
-  
+
   getValue(ev: any) {
     if (ev.stepMode != undefined) {
-      if (ev.stepMode == "next"){
+      if (ev.stepMode == "next") {
         this.stepper.next();
         this.CustStepIndex++;
 
         //skip dms
-        if(this.CustStepIndex == 8 && this.SysConfigResultObj.ConfigValue != '1'){
+        if (this.CustStepIndex == 8 && this.SysConfigResultObj.ConfigValue != '1') {
           this.stepper.next();
           this.CustStepIndex++;
         }
       }
-      else{
+      else {
         this.stepper.previous();
         this.CustStepIndex--;
 
         //skip dms
-        if(this.CustStepIndex == 8 && this.SysConfigResultObj.ConfigValue != '1'){
+        if (this.CustStepIndex == 8 && this.SysConfigResultObj.ConfigValue != '1') {
           this.stepper.previous();
           this.CustStepIndex--;
         }

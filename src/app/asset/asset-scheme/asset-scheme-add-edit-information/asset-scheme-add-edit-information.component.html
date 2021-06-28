@@ -15,7 +15,7 @@
             <lib-ucSubsection [id]="'AssetSchmInfoId'" [title]="'Asset Scheme Information '+ pageType"
               [panel]="'AssetSchmInfo'"></lib-ucSubsection>
             <div id="AssetSchmInfo">
-              <div class="form-group row adins-required">
+              <div *ngIf="!isAuto" class="form-group row adins-required">
                 <label class="col-md-4 adInsLabel" translate>Asset Scheme Code </label>
                 <div class="col-md-7">
                   <input type="text" class="form-control adInsInput" formControlName="AssetSchmCode"

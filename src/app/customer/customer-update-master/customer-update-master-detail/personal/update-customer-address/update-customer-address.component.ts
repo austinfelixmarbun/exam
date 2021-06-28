@@ -32,11 +32,11 @@ export class UpdateCustomerAddressComponent implements OnInit {
   });
 
   constructor(
-    private http: HttpClient, 
-    private toastr: NGXToastrService, 
+    private http: HttpClient,
+    private toastr: NGXToastrService,
     private fb: FormBuilder,
     private router: Router
-  ) { 
+  ) {
     this.ResponseTab = new EventEmitter<any>();
     this.OwnershipList = new Array<any>();
     this.ZipcodeLookupList = new Array<InputLookupObj>();
@@ -61,24 +61,24 @@ export class UpdateCustomerAddressComponent implements OnInit {
         var formArray = this.CustomerAddressForm.get("AddressList") as FormArray;
         for (const key in responseAddr) {
           var isAddrDifferent = false;
-          if(responseAddr[key]["MasterCustAddr"]["Addr"] != responseAddr[key]["AppCustAddr"]["Addr"] ||
-              responseAddr[key]["MasterCustAddr"]["AreaCode1"] != responseAddr[key]["AppCustAddr"]["AreaCode1"] ||
-              responseAddr[key]["MasterCustAddr"]["AreaCode2"] != responseAddr[key]["AppCustAddr"]["AreaCode2"] ||
-              responseAddr[key]["MasterCustAddr"]["AreaCode3"] != responseAddr[key]["AppCustAddr"]["AreaCode3"] ||
-              responseAddr[key]["MasterCustAddr"]["AreaCode4"] != responseAddr[key]["AppCustAddr"]["AreaCode4"] ||
-              responseAddr[key]["MasterCustAddr"]["Zipcode"] != responseAddr[key]["AppCustAddr"]["Zipcode"] ||
-              responseAddr[key]["MasterCustAddr"]["City"] != responseAddr[key]["AppCustAddr"]["City"] ||
-              responseAddr[key]["MasterCustAddr"]["PhnArea1"] != responseAddr[key]["AppCustAddr"]["PhnArea1"] ||
-              responseAddr[key]["MasterCustAddr"]["Phn1"] != responseAddr[key]["AppCustAddr"]["Phn1"] || 
-              responseAddr[key]["MasterCustAddr"]["PhnExt1"] != responseAddr[key]["AppCustAddr"]["PhnExt1"] ||
-              responseAddr[key]["MasterCustAddr"]["PhnArea2"] != responseAddr[key]["AppCustAddr"]["PhnArea2"] ||
-              responseAddr[key]["MasterCustAddr"]["Phn2"] != responseAddr[key]["AppCustAddr"]["Phn2"] ||
-              responseAddr[key]["MasterCustAddr"]["PhnExt2"] != responseAddr[key]["AppCustAddr"]["PhnExt2"] ||
-              responseAddr[key]["MasterCustAddr"]["PhnArea3"] != responseAddr[key]["AppCustAddr"]["PhnArea3"] ||
-              responseAddr[key]["MasterCustAddr"]["Phn3"] != responseAddr[key]["AppCustAddr"]["Phn3"] ||
-              responseAddr[key]["MasterCustAddr"]["PhnExt3"] != responseAddr[key]["AppCustAddr"]["PhnExt3"] ||
-              responseAddr[key]["MasterCustAddr"]["Fax"] != responseAddr[key]["AppCustAddr"]["Fax"] ||
-              responseAddr[key]["MasterCustAddr"]["FaxArea"] != responseAddr[key]["AppCustAddr"]["FaxArea"]){
+          if (responseAddr[key]["MasterCustAddr"]["Addr"] != responseAddr[key]["AppCustAddr"]["Addr"] ||
+            responseAddr[key]["MasterCustAddr"]["AreaCode1"] != responseAddr[key]["AppCustAddr"]["AreaCode1"] ||
+            responseAddr[key]["MasterCustAddr"]["AreaCode2"] != responseAddr[key]["AppCustAddr"]["AreaCode2"] ||
+            responseAddr[key]["MasterCustAddr"]["AreaCode3"] != responseAddr[key]["AppCustAddr"]["AreaCode3"] ||
+            responseAddr[key]["MasterCustAddr"]["AreaCode4"] != responseAddr[key]["AppCustAddr"]["AreaCode4"] ||
+            responseAddr[key]["MasterCustAddr"]["Zipcode"] != responseAddr[key]["AppCustAddr"]["Zipcode"] ||
+            responseAddr[key]["MasterCustAddr"]["City"] != responseAddr[key]["AppCustAddr"]["City"] ||
+            responseAddr[key]["MasterCustAddr"]["PhnArea1"] != responseAddr[key]["AppCustAddr"]["PhnArea1"] ||
+            responseAddr[key]["MasterCustAddr"]["Phn1"] != responseAddr[key]["AppCustAddr"]["Phn1"] ||
+            responseAddr[key]["MasterCustAddr"]["PhnExt1"] != responseAddr[key]["AppCustAddr"]["PhnExt1"] ||
+            responseAddr[key]["MasterCustAddr"]["PhnArea2"] != responseAddr[key]["AppCustAddr"]["PhnArea2"] ||
+            responseAddr[key]["MasterCustAddr"]["Phn2"] != responseAddr[key]["AppCustAddr"]["Phn2"] ||
+            responseAddr[key]["MasterCustAddr"]["PhnExt2"] != responseAddr[key]["AppCustAddr"]["PhnExt2"] ||
+            responseAddr[key]["MasterCustAddr"]["PhnArea3"] != responseAddr[key]["AppCustAddr"]["PhnArea3"] ||
+            responseAddr[key]["MasterCustAddr"]["Phn3"] != responseAddr[key]["AppCustAddr"]["Phn3"] ||
+            responseAddr[key]["MasterCustAddr"]["PhnExt3"] != responseAddr[key]["AppCustAddr"]["PhnExt3"] ||
+            responseAddr[key]["MasterCustAddr"]["Fax"] != responseAddr[key]["AppCustAddr"]["Fax"] ||
+            responseAddr[key]["MasterCustAddr"]["FaxArea"] != responseAddr[key]["AppCustAddr"]["FaxArea"]) {
             isAddrDifferent = true;
           }
           var formGroup = this.fb.group({
@@ -140,7 +140,7 @@ export class UpdateCustomerAddressComponent implements OnInit {
           });
           formArray.push(formGroup);
 
-          var zipcodeObj = {...this.ZipcodeLookupObj};
+          var zipcodeObj = { ...this.ZipcodeLookupObj };
           zipcodeObj.nameSelect = responseAddr[key]["MasterCustAddr"]["Zipcode"];
           zipcodeObj.jsonSelect = { Zipcode: responseAddr[key]["MasterCustAddr"]["Zipcode"] };
           zipcodeObj.isReady = true;
@@ -154,11 +154,11 @@ export class UpdateCustomerAddressComponent implements OnInit {
     );
   }
 
-  get AddressFormList(){
+  get AddressFormList() {
     return this.CustomerAddressForm.get("AddressList") as FormArray;
   }
 
-  CopyAllHandler(){
+  CopyAllHandler() {
     var formArray = this.CustomerAddressForm.get("AddressList") as FormArray;
     var idx = 0;
     for (const item of formArray.controls) {
@@ -166,20 +166,20 @@ export class UpdateCustomerAddressComponent implements OnInit {
       var formGroup = item.get("MasterAddr") as FormGroup;
       var obj = new Object();
       for (const key in appData) {
-        if(key == "MrBuildingOwnershipCode"){
-          if(appData[key]){
+        if (key == "MrBuildingOwnershipCode") {
+          if (appData[key]) {
             obj[key] = appData[key];
           }
-          else{
+          else {
             obj[key] = this.OwnershipList[0].Key;
           }
         }
-        else{
+        else {
           obj[key] = appData[key];
         }
       }
       formGroup.patchValue(obj);
-      this.CustomerAddressForm.get("ZipcodeLookup_"+idx).patchValue({
+      this.CustomerAddressForm.get("ZipcodeLookup_" + idx).patchValue({
         value: appData["Zipcode"]
       });
       item.patchValue({
@@ -189,14 +189,14 @@ export class UpdateCustomerAddressComponent implements OnInit {
     }
   }
 
-  CopyHandler(formControlName, idx){
+  CopyHandler(formControlName, idx) {
     var formArray = this.CustomerAddressForm.get("AddressList") as FormArray;
     var formGroup = formArray.controls[idx] as FormGroup;
     var appData = formGroup.get("AppAddr").value;
     var masterData = formGroup.get("MasterAddr") as FormGroup;
     var obj = new Object();
 
-    if(formControlName == "Addr"){
+    if (formControlName == "Addr") {
       masterData.patchValue({
         Addr: appData["Addr"],
         Zipcode: appData["Zipcode"],
@@ -217,56 +217,56 @@ export class UpdateCustomerAddressComponent implements OnInit {
         FaxArea: appData["FaxArea"],
         Fax: appData["Fax"]
       });
-      this.CustomerAddressForm.get("ZipcodeLookup_"+idx).patchValue({
+      this.CustomerAddressForm.get("ZipcodeLookup_" + idx).patchValue({
         value: appData["Zipcode"]
       });
       formGroup.patchValue({
         IsAddrDifferent: false
       });
     }
-    else if(formControlName == "MrBuildingOwnershipCode"){
-      if(appData["MrBuildingOwnershipCode"]){
+    else if (formControlName == "MrBuildingOwnershipCode") {
+      if (appData["MrBuildingOwnershipCode"]) {
         masterData.patchValue({
           MrBuildingOwnershipCode: appData["MrBuildingOwnershipCode"]
         });
       }
-      else{
+      else {
         masterData.patchValue({
           MrBuildingOwnershipCode: this.OwnershipList[0].Key
         });
       }
     }
-    else{
+    else {
       obj[formControlName] = appData[formControlName];
       masterData.patchValue(obj);
     }
   }
 
-  AddressCopyButtonHandler(idx){
+  AddressCopyButtonHandler(idx) {
     var formArray = this.CustomerAddressForm.get("AddressList") as FormArray;
     var formGroup = formArray.controls[idx] as FormGroup;
     var masterCustAddr = formGroup.get("MasterAddr").value;
     var appAddr = formGroup.get("AppAddr").value;
     var isAddrDifferent = false;
 
-    if(masterCustAddr["Addr"] != appAddr["Addr"] ||
-        masterCustAddr["AreaCode1"] != appAddr["AreaCode1"] ||
-        masterCustAddr["AreaCode2"] != appAddr["AreaCode2"] ||
-        masterCustAddr["AreaCode3"] != appAddr["AreaCode3"] ||
-        masterCustAddr["AreaCode4"] != appAddr["AreaCode4"] ||
-        masterCustAddr["Zipcode"] != appAddr["Zipcode"] ||
-        masterCustAddr["City"] != appAddr["City"] ||
-        masterCustAddr["PhnArea1"] != appAddr["PhnArea1"] ||
-        masterCustAddr["Phn1"] != appAddr["Phn1"] || 
-        masterCustAddr["PhnExt1"] != appAddr["PhnExt1"] ||
-        masterCustAddr["PhnArea2"] != appAddr["PhnArea2"] ||
-        masterCustAddr["Phn2"] != appAddr["Phn2"] ||
-        masterCustAddr["PhnExt2"] != appAddr["PhnExt2"] ||
-        masterCustAddr["PhnArea3"] != appAddr["PhnArea3"] ||
-        masterCustAddr["Phn3"] != appAddr["Phn3"] ||
-        masterCustAddr["PhnExt3"] != appAddr["PhnExt3"] ||
-        masterCustAddr["Fax"] != appAddr["Fax"] ||
-        masterCustAddr["FaxArea"] != appAddr["FaxArea"]){
+    if (masterCustAddr["Addr"] != appAddr["Addr"] ||
+      masterCustAddr["AreaCode1"] != appAddr["AreaCode1"] ||
+      masterCustAddr["AreaCode2"] != appAddr["AreaCode2"] ||
+      masterCustAddr["AreaCode3"] != appAddr["AreaCode3"] ||
+      masterCustAddr["AreaCode4"] != appAddr["AreaCode4"] ||
+      masterCustAddr["Zipcode"] != appAddr["Zipcode"] ||
+      masterCustAddr["City"] != appAddr["City"] ||
+      masterCustAddr["PhnArea1"] != appAddr["PhnArea1"] ||
+      masterCustAddr["Phn1"] != appAddr["Phn1"] ||
+      masterCustAddr["PhnExt1"] != appAddr["PhnExt1"] ||
+      masterCustAddr["PhnArea2"] != appAddr["PhnArea2"] ||
+      masterCustAddr["Phn2"] != appAddr["Phn2"] ||
+      masterCustAddr["PhnExt2"] != appAddr["PhnExt2"] ||
+      masterCustAddr["PhnArea3"] != appAddr["PhnArea3"] ||
+      masterCustAddr["Phn3"] != appAddr["Phn3"] ||
+      masterCustAddr["PhnExt3"] != appAddr["PhnExt3"] ||
+      masterCustAddr["Fax"] != appAddr["Fax"] ||
+      masterCustAddr["FaxArea"] != appAddr["FaxArea"]) {
       isAddrDifferent = true;
     }
     formGroup.patchValue({
@@ -274,7 +274,7 @@ export class UpdateCustomerAddressComponent implements OnInit {
     });
   }
 
-  getZipcode(e, idx){
+  getZipcode(e, idx) {
     var formArray = this.CustomerAddressForm.get("AddressList") as FormArray;
     var formGroup = formArray.controls[idx] as FormGroup;
     var masterData = formGroup.get("MasterAddr") as FormGroup;
@@ -287,20 +287,20 @@ export class UpdateCustomerAddressComponent implements OnInit {
     this.AddressCopyButtonHandler(idx);
   }
 
-  back(){
+  back() {
     // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
     AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
   }
 
-  SaveValue(){
+  SaveValue() {
     var formArray = this.CustomerAddressForm.get("AddressList") as FormArray;
     var requestList = new Array<UpdateCustAddrObj>();
     for (const item of formArray.controls) {
       var masterData = new UpdateCustAddrObj();
       var currFormGroup = item.get("MasterAddr") as FormGroup;
-      masterData = {...currFormGroup.getRawValue()};
+      masterData = { ...currFormGroup.getRawValue() };
       masterData.CustId = this.CustId;
-      if(!masterData.CustAddrId || masterData.CustAddrId <= 0){
+      if (!masterData.CustAddrId || masterData.CustAddrId <= 0) {
         masterData.MrCustAddrTypeCode = item.get("AddrType").value;
       }
       requestList.push(masterData);

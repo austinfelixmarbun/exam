@@ -28,6 +28,11 @@
 									<app-customer-view-customer-group></app-customer-view-customer-group>
 								</ng-template>
 							</mat-tab>
+							<mat-tab label="Highlight Comment">
+								<ng-template matTabContent>
+									<app-customer-view-customer-group></app-customer-view-customer-group>
+								</ng-template>
+							</mat-tab>
 							<mat-tab label="Job Data">
 								<ng-template matTabContent>
 									<app-customer-view-personal-job-data *ngIf="custModel == 'PROF'">
@@ -44,6 +49,12 @@
 								<ng-template matTabContent>
 									<app-customer-view-personal-financial-data>
 									</app-customer-view-personal-financial-data>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Customer Asset">
+								<ng-template matTabContent>
+									<app-customer-view-customer-asset>
+									</app-customer-view-customer-asset>
 								</ng-template>
 							</mat-tab>
 							<!-- <mat-tab label="Other Attribute">
@@ -94,6 +105,12 @@
 							<mat-tab label="Financial Data">
 								<ng-template matTabContent>
 									<app-customer-view-coy-financial></app-customer-view-coy-financial>
+								</ng-template>
+							</mat-tab>
+							<mat-tab label="Customer Asset">
+								<ng-template matTabContent>
+									<app-customer-view-customer-asset>
+									</app-customer-view-customer-asset>
 								</ng-template>
 							</mat-tab>
 							<mat-tab label="Legal Document">

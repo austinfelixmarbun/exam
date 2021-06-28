@@ -81,7 +81,7 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { CustomerViewCustomerGroupComponent } from './customer-view/customer-view-customer-group/customer-view-customer-group.component';
 import { CustomerViewAddressComponent } from './customer-view/customer-view-address/customer-view-address.component';
 import { MatTabsModule } from '@angular/material';
-import { NgxCurrencyModule } from "ngx-currency";
+import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
 import { UploadNegativeCustomerComponent } from './negative-customer/upload-negative-customer/upload-negative-customer.component';
 import { ReviewUploadNegativeCustomerDetailComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-detail/review-upload-negative-customer-detail.component';
 import { ReviewUploadNegativeCustomerPagingComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-paging/review-upload-negative-customer-paging.component';
@@ -113,6 +113,10 @@ import { UpdateCustomerMgmntShareholderComponent } from './customer-update-maste
 import { UpdateCustomerContactInfoComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-contact-info/update-customer-contact-info.component';
 import { UpdateCustomerCompanyFinDataComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-company-fin-data/update-customer-company-fin-data.component';
 import { UpdateCustomerCompanyLegalDocComponent } from './customer-update-master/customer-update-master-detail/company/update-customer-company-legal-doc/update-customer-company-legal-doc.component';
+import { RegexService } from './regex.service';
+import { CustAssetComponent } from './cust-asset/cust-asset.component';
+import { CustAssetDetailComponent } from './cust-asset/cust-asset-detail/cust-asset-detail.component';
+import { UcgridviewModule } from '@adins/ucgridview';
 import { SharedModule } from 'app/shared/shared.module';
 import { DmsIframeComponent } from 'app/shared/dms-iframe/dms-iframe.component';
 import { CustBankAccComponent } from './cust-bank-acc/cust-bank-acc.component';
@@ -120,9 +124,10 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { createTranslateLoader } from 'app/app.module';
 import { HttpClient } from '@angular/common/http';
+import { CustomerViewCustomerAssetComponent } from './customer-view/customer-view-customer-asset/customer-view-customer-asset.component';
 
 export const customCurrencyMaskConfig = {     
-  align: "left",     
+  align: "right",     
   allowNegative: true,     
   allowZero: true,     
   decimal: ".",     
@@ -130,7 +135,8 @@ export const customCurrencyMaskConfig = {
   prefix: "",     
   suffix: "",     
   thousands: ",",     
-  nullable: false 
+  nullable: false,
+  inputMode: CurrencyMaskInputMode.NATURAL
 };
 
  @NgModule({
@@ -161,7 +167,7 @@ export const customCurrencyMaskConfig = {
     
   ],
   declarations: [
-    CustomerPagingComponent,
+    CustomerPagingComponent, CustAssetDetailComponent,
     CustomerPersonalMainInfoComponent, CustomerPersonalDuplicateCheckComponent, CustomerCompanyDuplicateCheckComponent, CustomerCompanyMainInfoComponent, CustomerPersonalPageComponent, CustomerPersonalDetailComponent,
     NegativeCustomerComponent,
     NegativeCustomerDetailComponent,
@@ -252,12 +258,18 @@ export const customCurrencyMaskConfig = {
     UpdateCustomerContactInfoComponent,
     UpdateCustomerCompanyFinDataComponent,
     UpdateCustomerCompanyLegalDocComponent,
-    CustBankAccComponent
+    CustBankAccComponent,
+    CustAssetComponent,
+    CustomerViewCustomerAssetComponent
   ],
   providers: [
-    NGXToastrService
+    NGXToastrService, 
+    CustAssetComponent,
+    CustAssetDetailComponent,
+    CustomerPersonalJobDataComponent,
+    RegexService
   ],
-  entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent]
+  entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent, CustAssetDetailComponent]
 })
 export class CustomerModule {
   constructor() {

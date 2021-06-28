@@ -57,7 +57,6 @@ import { HttpClient } from "@angular/common/http";
     
   ],
   declarations: [
-    CustomerViewPersonalOtherAttrComponent,
     CustomerViewCoyAppListingComponent,
     CustomerViewCoyExposureComponent,
     CustomerViewCoyCustScoreComponent,

@@ -55,6 +55,10 @@ import { ScoreCategoryTypeComponent } from './score-category/score-category-type
 import { ScoreCategoryScoringComponent } from './score-category/score-category-scoring/score-category-scoring.component';
 import { ReasonComponent } from './reason/reason-paging/reason.component';
 import { ReasonAddEditComponent } from './reason/reason-add-edit/reason-add-edit.component';
+import { AppSourceAddEditComponent } from './app-source/app-source-add-edit/app-source-add-edit.component';
+import { AppSourcePagingComponent } from './app-source/app-source-paging/app-source-paging.component';
+import { AppSourceOfficeMemberPagingComponent } from './app-source/app-source-office-member/app-source-office-member-paging/app-source-office-member-paging.component';
+import { AppSourceOfficeMemberAddComponent } from './app-source/app-source-office-member/app-source-office-member-add/app-source-office-member-add.component';
 import { PaymentAllocPagingComponent } from './payment-alloc/payment-alloc-paging/payment-alloc-paging.component';
 import { PaymentAllocDetailComponent } from './payment-alloc/payment-alloc-detail/payment-alloc-detail.component';
 import { PaymentAllocGroupPagingComponent } from './payment-alloc-group/payment-alloc-group-paging/payment-alloc-group-paging.component';
@@ -72,6 +76,9 @@ import { UcaddressModule } from '@adins/ucaddress';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { GeneralSettingAdminComponent } from './general-setting-admin/general-setting-admin.component';
 import { GeneralSettingAdminDetailComponent } from './general-setting-admin/general-setting-admin-detail/general-setting-admin-detail.component';
+import { IndustryTypeCategoryPagingComponent } from './industry-type-category/industry-type-category-paging/industry-type-category-paging.component';
+import { IndustryTypeCategoryDetailComponent } from './industry-type-category/industry-type-category-detail/industry-type-category-detail.component';
+
 
 @NgModule({
   imports: [
@@ -135,6 +142,10 @@ import { GeneralSettingAdminDetailComponent } from './general-setting-admin/gene
     ScoreCategoryScoringComponent,
     ReasonComponent,
     ReasonAddEditComponent,
+    AppSourceAddEditComponent,
+    AppSourcePagingComponent,
+    AppSourceOfficeMemberPagingComponent,
+    AppSourceOfficeMemberAddComponent,
     PaymentAllocPagingComponent,
     PaymentAllocDetailComponent,
     PaymentAllocGroupPagingComponent,
@@ -149,7 +160,9 @@ import { GeneralSettingAdminDetailComponent } from './general-setting-admin/gene
     OfficeBankAccountDetailComponent,
     OfficeBankAccountPagingComponent,
     GeneralSettingAdminComponent,
-    GeneralSettingAdminDetailComponent
+    GeneralSettingAdminDetailComponent,
+    IndustryTypeCategoryPagingComponent,
+    IndustryTypeCategoryDetailComponent
   ],
   providers: [
     NGXToastrService

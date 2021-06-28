@@ -18,7 +18,7 @@
             "type": "sort",
             "position": "left",
             "label": "Bank Name",
-            "name": "BankName"
+            "name": "BANK_NAME"
         },
         {
             "type": "label",
@@ -43,6 +43,6 @@
             ]
         }
     ],
-    "propertyId": "RefBankId",
+    "propertyId": "BankName",
     "propertyName": "BankName"
 }

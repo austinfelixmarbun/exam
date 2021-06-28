@@ -149,6 +149,9 @@ export class PathConstant {
     public static CS_INDUSTRY_TYPE = "IndustryType";
     public static CS_INDUSTRY_TYPE_PAGING = PathConstant.CS_INDUSTRY_TYPE + "/" + PathConstant.PAGING;
     public static CS_INDUSTRY_TYPE_DETAIL = PathConstant.CS_INDUSTRY_TYPE + "/" + PathConstant.DETAIL;
+    public static CS_INDUSTRY_TYPE_CAT = "IndustryTypeCategory";
+    public static CS_INDUSTRY_TYPE_CAT_PAGING = PathConstant.CS_INDUSTRY_TYPE_CAT + "/" + PathConstant.PAGING;
+    public static CS_INDUSTRY_TYPE_CAT_DETAIL = PathConstant.CS_INDUSTRY_TYPE_CAT + "/" + PathConstant.DETAIL;
     public static CS_BANK = "Bank";
     public static CS_BANK_PAGING = PathConstant.CS_BANK + "/" + PathConstant.PAGING;
     public static CS_BANK_DETAIL = PathConstant.CS_BANK + "/" + PathConstant.DETAIL;
@@ -387,6 +390,9 @@ export class PathConstant {
     public static VENDOR_AUCTION_COY = "AuctionCompany";
     public static VENDOR_AUCTION_COY_PAGING = PathConstant.VENDOR_AUCTION_COY + "/" + PathConstant.PAGING;
     public static VENDOR_AUCTION_COY_ADD_EDIT = PathConstant.VENDOR_AUCTION_COY + "/" + PathConstant.ADD_EDIT;
+    public static VENDOR_GRADING = "VendorGrading";
+    public static REQUEST = "Request";
+    public static VENDOR_GRADING_REQUEST_PAGING = PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstant.PAGING;;
     //#endregion
     
     //#region Verif-Module
@@ -440,6 +446,7 @@ export class PathConstant {
     public static VIEW_CUST_PERSONAL_JOB_DATA_EMP = "PersonalJobDataEmp";
     public static VIEW_CUST_PERSONAL_JOB_DATA_SME = "PersonalJobDataSme";
     public static VIEW_CUST_PERSONAL_FINANCIAL_DATA = "PersonalFinancialData";
+    public static VIEW_CUST_ASSET = "CustomerAsset";
     public static VIEW_CUST_PERSONAL_FAMILY = "PersonalFamily";
     public static VIEW_CUST_COY_OTHER = "CoyOther";
     public static VIEW_CUST_PERSONAL_APP_LISTING = "PersonalAppListing";
@@ -452,6 +459,7 @@ export class PathConstant {
     public static VIEW_CUST_GRP = "CustomerGroup";
     public static VIEW_CUST_DOC = "CustDocument";
     public static VIEW_CUST_OTH_INFO = "CustOthInfo";
+    public static VIEW_CUST_HIGHLIGHT_COMMENT = "HighligtComment";
     //#endregion
 
      //#region JOURNAL

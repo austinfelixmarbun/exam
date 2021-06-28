@@ -14,6 +14,22 @@
           <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
           </lib-ucSubsection>
           <div class="form-body" id="MainInfoId">
+            <div class="form-group row">
+              <label class="col-md-2 adInsLabel" translate>Is Supplier</label>
+              <div class="col-md-4">
+                <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsSupplier"
+                  (click)="checkIsSupplier()" />
+              </div>
+            </div>
+            <div class="form-group row" [hidden]="!IsSupplier">
+              <label class="col-md-2 adinsLabel" for="LinkSupplier" translate>Link Supplier </label>
+              <div class="col-md-4">
+                <lib-uclookupgeneric *ngIf="inputLookupObj?.isReady" [lookupInput]="inputLookupObj"
+                  [parentForm]='CustomerCompanyForm' [enjiForm]='enjiForm' [identifier]="'lookupSupp'"
+                  #LookupSupplier (lookup)="SetSupplier($event)">
+                </lib-uclookupgeneric>
+              </div>
+            </div>
             <div class="form-group row adins-required">
               <label class="col-md-2  adInsLabel" translate>Customer Name </label>
               <div class="col-md-4">
@@ -82,6 +98,7 @@
             <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerCompanyForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'">
             </lib-ucaddress> 
           </div>
+
           <div class="form-actions right">
             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" skipLocationChange translate>
               <i class="far fa-window-close"></i> Cancel

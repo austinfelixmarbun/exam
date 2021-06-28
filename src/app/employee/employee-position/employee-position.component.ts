@@ -9,6 +9,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { DecimalPipe } from '@angular/common';
+import { formatDate } from '@angular/common';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';

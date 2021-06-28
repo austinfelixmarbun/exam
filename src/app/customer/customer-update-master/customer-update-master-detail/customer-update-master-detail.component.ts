@@ -52,7 +52,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private cookieService: CookieService
-  ) { 
+  ) {
     this.route.queryParams.subscribe(params => {
       if (params["CustDataTrxId"] != null) {
         this.CustDataTrxId = params["CustDataTrxId"];
@@ -76,7 +76,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     this.http.post(URLConstant.GetCustByCustNo, this.CustNoObj).toPromise().then(
       (response: CustObj) => {
         this.MrCustTypeCode = response.MrCustTypeCode;
-        if(response.MrCustTypeCode == CommonConstant.CustTypePersonal){
+        if (response.MrCustTypeCode == CommonConstant.CustTypePersonal) {
           this.PersonalWizard = new Stepper(document.querySelector('#PersonalWizard'), {
             linear: false,
             animation: true
@@ -84,7 +84,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
           document.getElementById('PersonalWizard').style.display = 'block';
           document.getElementById('CompanyWizard').style.display = 'none';
         }
-        else{
+        else {
           this.CompanyWizard = new Stepper(document.querySelector('#CompanyWizard'), {
             linear: false,
             animation: true
@@ -108,8 +108,8 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
       });
   }
 
-  EnterTab(step){
-    if(this.MrCustTypeCode == CommonConstant.CustTypePersonal){
+  EnterTab(step) {
+    if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
       switch (step) {
         case "CUST":
           this.StepIdx = this.CustPersonalStep["CUST"];
@@ -133,7 +133,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
           break;
       }
     }
-    else{
+    else {
       switch (step) {
         case "CUST":
           this.StepIdx = this.CustCompanyStep["CUST"];
@@ -159,32 +159,30 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     }
   }
 
-  StepperHandler(e){
-    if(e.StatusCode == 200){
-      if(this.MrCustTypeCode == CommonConstant.CustTypePersonal){
-        if(this.StepIdx == this.CustPersonalStep["FIN"]){
-          // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
-        }
-        else{
-          this.StepIdx++;
-          this.PersonalWizard.next();
-        }
+  StepperHandler(e) {
+    if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
+      if (this.StepIdx == this.CustPersonalStep["FIN"]) {
+        // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
       }
-      else{
-        if(this.StepIdx == this.CustCompanyStep["LEGAL"]){
-          // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
-        }
-        else{
-          this.StepIdx++;
-          this.CompanyWizard.next();
-        }
+      else {
+        this.StepIdx++;
+        this.PersonalWizard.next();
+      }
+    }
+    else {
+      if (this.StepIdx == this.CustCompanyStep["LEGAL"]) {
+        // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
+        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
+      }
+      else {
+        this.StepIdx++;
+        this.CompanyWizard.next();
       }
     }
   }
 
-  GetCallback(e){
+  GetCallback(e) {
     AdInsHelper.OpenProdOfferingViewByCodeAndVersion(e.ViewObj.ProdOfferingCode, e.ViewObj.ProdOfferingVersion);
   }
 }

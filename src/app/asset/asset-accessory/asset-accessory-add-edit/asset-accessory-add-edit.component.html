@@ -20,7 +20,7 @@
                   <label class="adInsLabel" translate>{{this.assetTypeName}}</label>
                 </div>
               </div>
-              <div class="form-group row">
+              <div *ngIf="!isAuto" class="form-group row">
                 <label class="col-md-3 adInsLabel adins-required-label" translate>Asset Accessory Code</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="AssetAccessoryCode"

@@ -51,8 +51,7 @@ export class SidebarComponent implements OnInit {
             //Update menu if change of environment
             let currEnvi = AdInsHelper.GetLocalStorage(CommonConstant.ENVIRONMENT_MODULE);
             var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-            if(currEnvi && currentUserContext && currEnvi != environment.Module)
-            {
+            if (currEnvi && currentUserContext && currEnvi != environment.Module) {
                 var roleObject = {
                     UserName: currentUserContext.UserName,
                     Password: null,
@@ -65,21 +64,21 @@ export class SidebarComponent implements OnInit {
                 };
                 var updateRoleUrl = environment.FoundationR3Url + URLConstant.UpdateToken;
                 this.http.post(updateRoleUrl, roleObject).subscribe(
-                (response) => {
-                    AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
-                    AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module); 
-                    this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
-                    console.log(this.menuItems);
-                });
+                    (response) => {
+                        AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
+                        AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
+                        this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
+                        console.log(this.menuItems);
+                    });
             }
             else
                 this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
-                console.log(this.menuItems);
+            console.log(this.menuItems);
         }
     }
     genParam(params: [{ 'Attr': string, 'Value': string }]) {
         var arrList = {};
-        if(params != undefined){
+        if (params != undefined) {
             for (var i = 0; i < params.length; i++) {
                 arrList[params[i].Attr] = params[i].Value;
             }
@@ -95,8 +94,8 @@ export class SidebarComponent implements OnInit {
     navigateSkipLocationChange(ev) {
         //sementara Sementara begini dulu, belum ketemu solusi lain
         //problem : ketika di 'click' halaman memasuki halaman /dashboard/dash-board terlebih dahulu
-        this.router.navigateByUrl(NavigationConstant.DASHBOARD, { skipLocationChange: true }).then(() => {
-        AdInsHelper.RedirectUrl(this.router,[ev.Path],this.genParam(ev.Params));
+        this.router.navigateByUrl("/dashboard/dash-board", { skipLocationChange: true }).then(() => {
+            AdInsHelper.RedirectUrl(this.router, [ev.Path], this.genParam(ev.Params));
         });
     }
 

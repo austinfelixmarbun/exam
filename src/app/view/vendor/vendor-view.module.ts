@@ -27,6 +27,7 @@ import { HoInfoComponent } from "./vendor-ho-info/ho-info/ho-info.component";
 import { HoTaxInfoComponent } from "./vendor-ho-info/ho-tax-info/ho-tax-info.component";
 import { MainHoInfoComponent } from "./vendor-ho-info/main-ho-info/main-ho-info.component";
 import { MainInfoViewComponent } from "./vendor-ho-info/main-info-view/main-info-view.component";
+import { HoAtpmInfoComponent } from "./vendor-ho-info/ho-atpm-info/ho-atpm-info.component";
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { MainInfoViewComponent } from "./vendor-ho-info/main-info-view/main-info
      HoTaxInfoComponent,
      MainHoInfoComponent,
      MainInfoViewComponent,
+     HoAtpmInfoComponent,
   ],
   entryComponents: [
     UclookupgenericComponent,

@@ -18,5 +18,6 @@ export class OfficeComponent implements OnInit {
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchOffice.json";
     this.inputPagingObj.isSearched = true;
     this.inputPagingObj.delay = 200;
+
   }
 }

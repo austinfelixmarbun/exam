@@ -19,7 +19,7 @@ export class VendorHoInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.vendorService.GetVendorAndVendorAddrByVendorId({ VendorId: this.VendorId }).subscribe(
+    this.vendorService.GetVendorAndVendorAddrByVendorId({ Id: this.VendorId }).subscribe(
       (response) => {
         this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"];
       }

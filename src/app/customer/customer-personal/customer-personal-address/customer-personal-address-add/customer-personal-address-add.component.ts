@@ -93,7 +93,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
       (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
         let idxEmergency = this.listAddressType.findIndex(x => x.Key == CommonConstant.CustAddrTypeEmergency);
-        if(idxEmergency != -1) this.listAddressType.splice(idxEmergency, 1)
+        if (idxEmergency != -1) this.listAddressType.splice(idxEmergency, 1)
         this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response[CommonConstant.ReturnObj][0]['Key'] });
       });
 
@@ -165,12 +165,12 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
   copyAddress() {
 
-    if(this.listCustAddr.length<1){
+    if (this.listCustAddr.length < 1) {
       return
     }
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.CustDataPersonalForm.controls["CopyAddrFrom"].value;
-    this.http.post(URLConstant.GetCustAddr, {Id : this.custAddrFromObj.CustAddrId}).subscribe(
+    this.http.post(URLConstant.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
         this.CustDataPersonalForm.patchValue({

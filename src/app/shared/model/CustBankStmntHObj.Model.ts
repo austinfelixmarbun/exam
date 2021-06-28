@@ -7,6 +7,7 @@ export class CustBankStmntHObj {
     StartPeriod: any;
     EndPeriod: any;
     BalanceAmt: any;
+    BegBalanceAmt: any;
     RowVersion: any;
     constructor(){this.CustBankStmntHId = 0, this.RowVersion = ""}
 }
