@@ -163,6 +163,8 @@ export class EditMainDataCompanyComponent implements OnInit {
           this.CustomerCompanyForm.controls["TaxIdNo"].disable();
         }
 
+        
+        this.custObj.CustAddr = new CustAddrObj();
         let reqObj: GenericObj = new GenericObj();
         reqObj.Id = this.tempCustObj.CustId;
         reqObj.Code = CommonConstant.CustAddrTypeLegal;
@@ -301,7 +303,6 @@ export class EditMainDataCompanyComponent implements OnInit {
     }
 
     var formValue = this.CustomerCompanyForm.value;
-    this.custObj.CustAddr = new CustAddrObj();
     this.custObj.CustAddr.CustId = this.CustId;
     this.custObj.CustAddr.Addr = formValue["UcAddress"]["Addr"];
     this.custObj.CustAddr.AreaCode1 = formValue["UcAddress"]["AreaCode1"];
