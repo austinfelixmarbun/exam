@@ -26,6 +26,7 @@ import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericListObj } from 'app/shared/model/Generic/GenericListObj.Model';
 
 @Component({
   selector: 'app-customer-family-detail',
@@ -48,7 +49,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
   inputAddressObj: InputAddressObj = new InputAddressObj();
   inputFieldObj: InputFieldObj = new InputFieldObj();
   UcAddressObj: UcAddressObj;
-  CustRelationshipList: Array<Object>;
+  CustRelationshipList: Array<KeyValueObj>;
 
   Gender: any;
   tempGender: any;
@@ -113,7 +114,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     this.KTP = RefMasterConstant.EKtp;
     this.isExistingCust = false;
     this.isEditCustFamily = false;
-    this.CustRelationshipList = new Array<Object>();
+    this.CustRelationshipList = new Array();
     this.custDataToCheckDuplicate = new Object();
     this.UcAddressObj = new UcAddressObj();
     this.inputFieldObj = new InputFieldObj();
@@ -348,14 +349,14 @@ export class CustomerFamilyDetailComponent implements OnInit {
     );
 
     var refMasterObjMrCustRelationshipCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship,
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustPersonalRelationship,
       MappingCode: null
     };
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCustRelationshipCode).subscribe(
-      (response) => {
-        this.CustRelationshipList = response[CommonConstant.ReturnObj];
+      (response: GenericListObj) => {
+        this.CustRelationshipList = response.ReturnObject;
         this.CustomerFamilyForm.patchValue({
-          MrCustRelationship: this.CustRelationshipList[0]["Key"]
+          MrCustRelationship: this.CustRelationshipList[0].Key
         });
       });
   }
