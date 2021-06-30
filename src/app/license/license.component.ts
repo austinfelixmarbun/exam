@@ -15,6 +15,7 @@ export class LicenseComponent implements OnInit {
 
   LicenseData : any;
   Licenses : any;
+  IsOverflow: boolean = false;
   readonly AddLink: string = NavigationConstant.UPLOAD_LICENSE;
   readonly DetailLink: string = NavigationConstant.DETAIL_LICENSE;
   constructor(private toastr: NGXToastrService, private httpClient: HttpClient, private router: Router) { }
