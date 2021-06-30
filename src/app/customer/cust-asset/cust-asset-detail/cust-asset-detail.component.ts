@@ -7,6 +7,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { CustAssetObj } from 'app/shared/model/CustAssetObj.Model';
 
 @Component({
   selector: 'app-cust-asset-detail',
@@ -23,7 +24,7 @@ export class CustAssetDetailComponent implements OnInit {
   CustAssetForm = this.fb.group({
     CustAssetId: [0],
     CustId: [0],
-    MrCustAssetTypeId: ['', [Validators.required]],
+    MrCustAssetTypeCode: ['', [Validators.required]],
     AssetDescr: [''],
     AssetValue: [0, [Validators.required, Validators.min(1)]],
     AssetQty: [0, [Validators.required, Validators.min(1)]],
@@ -53,17 +54,17 @@ export class CustAssetDetailComponent implements OnInit {
     );
     if(this.CustAssetId && this.CustAssetId > 0){
       this.Mode = "EDIT"
-      this.httpClient.post(URLConstant.GetCustAssetByCustAssetId, { Id: this.CustAssetId }).toPromise().then(
+      this.httpClient.post<CustAssetObj>(URLConstant.GetCustAssetByCustAssetId, { Id: this.CustAssetId }).toPromise().then(
         (response) => {
           this.CustAssetForm.patchValue({
-            CustAssetId: response["CustAssetId"],
-            CustId: response["CustId"],
-            MrCustAssetTypeId: response["MrCustAssetTypeId"],
-            AssetDescr: response["AssetDescr"],
-            AssetValue: response["AssetValue"],
-            AssetQty: response["AssetQty"],
-            AssetTotalValue: response["AssetTotalValue"],
-            RowVersion: response["RowVersion"]
+            CustAssetId: response.CustAssetId,
+            CustId: this.CustId,
+            MrCustAssetTypeCode: response.MrCustAssetTypeCode,
+            AssetDescr: response.AssetDescr,
+            AssetValue: response.AssetValue,
+            AssetQty: response.AssetQty,
+            AssetTotalValue: response.AssetTotalValue,
+            RowVersion: response.RowVersion
           });
         }
       ).catch(
