@@ -123,7 +123,8 @@ export class VendorBranchAddEditComponent implements OnInit {
     RowVersionVendor: [''],
     RowVersionVendorAddr: [''],
     IsNpwpExist: [false],
-    IsOneAffiliate: [false]
+    IsOneAffiliate: [false],
+    VendorRatingAlias: ['']
   })
 
   HoTitle: string = "";
@@ -346,7 +347,6 @@ export class VendorBranchAddEditComponent implements OnInit {
         this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
         this.bindText();
         this.MrVendorTypeCode = this.result.VendorObj.MrVendorTypeCode;
-        this.LoadGradingRule(this.result.VendorObj.VendorRating)
         this.VendorForm.patchValue({
           MrVendorCategoryCode: this.result.VendorObj.MrVendorCategoryCode,
           VendorCode: this.result.VendorObj.VendorCode,
@@ -360,6 +360,7 @@ export class VendorBranchAddEditComponent implements OnInit {
           MobilePhnNo2: this.result.VendorObj.MobilePhnNo2,
           Email: this.result.VendorObj.Email,
           VendorRating: this.result.VendorObj.VendorRating,
+          VendorRatingAlias: this.result.VendorObj.VendorRatingAlias,
           EstablishmentDt: formatDate(this.result.VendorObj['EstablishmentDt'], 'yyyy-MM-dd', 'en-US'),
           PartnershipDt: formatDate(this.result.VendorObj['PartnershipDt'], 'yyyy-MM-dd', 'en-US'),
           IsActive: this.result.VendorObj.IsActive,
@@ -493,10 +494,6 @@ export class VendorBranchAddEditComponent implements OnInit {
                 }
               }
 
-              if(this.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_PERSONAL && this.itemIdType != undefined)
-              {
-                this.getInitPattern();
-              }
             }
           );
         }
@@ -519,10 +516,6 @@ export class VendorBranchAddEditComponent implements OnInit {
           });
         }
 
-        if(this.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_PERSONAL && this.itemIdType != undefined)
-        {
-          this.getInitPattern();
-        }
       }
     );
 
@@ -557,6 +550,8 @@ export class VendorBranchAddEditComponent implements OnInit {
         }
       }
     );
+
+    this.getInitPattern();
   }
 
   NpwpCheck(isGetData: boolean = false) {
@@ -598,32 +593,25 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.VendorForm.controls.LicenseNo.updateValueAndValidity();
   }
 
-  checkType() {
+  async checkType() {
     if (this.VendorForm.controls.MrVendorTypeCode.value != "") {
       this.MrVendorTypeCode = this.VendorForm.controls.MrVendorTypeCode.value;
     }
     if (this.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_COMPANY) {
-      this.VendorForm.controls.MrIdTypeCode.clearValidators();
-      this.VendorForm.controls.IdNo.clearValidators();
-      this.VendorForm.controls.RegistrationNo.setValidators(Validators.required);
-      this.VendorForm.controls.LicenseNo.setValidators(Validators.required);
+
       this.RsvField = CommonConstant.CustTypeCompany
+
     } else if (this.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_PERSONAL) {
-      this.VendorForm.controls.RegistrationNo.clearValidators();
-      this.VendorForm.controls.LicenseNo.clearValidators();
-      this.VendorForm.controls.MrIdTypeCode.setValidators(Validators.required);
-      this.VendorForm.controls.IdNo.setValidators(Validators.required);
+
       this.RsvField = CommonConstant.CustTypePersonal
 
-      this.setValidatorPattern();
     }
-    this.updateValueAndValidityForm();
 
     let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
       MappingCode: this.RsvField,
     }
-    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
+    await this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).toPromise().then(
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {
@@ -639,6 +627,7 @@ export class VendorBranchAddEditComponent implements OnInit {
         }
       }
     );
+    this.setValidatorPattern();
   }
 
   onOptionsSelected(event){ 
@@ -760,6 +749,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.MobilePhnNo2 = this.VendorForm.controls.MobilePhnNo2.value;
       this.vendorBranchObj.VendorObj.Email = this.VendorForm.controls.Email.value;
       this.vendorBranchObj.VendorObj.VendorRating = this.VendorForm.controls.VendorRating.value;
+      this.vendorBranchObj.VendorObj.VendorRatingAlias = this.VendorForm.controls.VendorRatingAlias.value;
       this.vendorBranchObj.VendorObj.EstablishmentDt = this.VendorForm.controls.EstablishmentDt.value;
       this.vendorBranchObj.VendorObj.PartnershipDt = this.VendorForm.controls.PartnershipDt.value;
       this.vendorBranchObj.VendorObj.IsActive = this.VendorForm.controls.IsActive.value;
@@ -907,7 +897,7 @@ export class VendorBranchAddEditComponent implements OnInit {
   controlNameIdType: any = 'MrIdTypeCode';
   customPattern: Array<CustomPatternObj>;
   initIdTypeCode: any;
-  resultPattern: any;
+  resultPattern: Array<KeyValueObj>;
 
   getInitPattern() {
     this.regexService.getListPattern().subscribe(
@@ -947,7 +937,7 @@ export class VendorBranchAddEditComponent implements OnInit {
 
   setValidatorPattern() {
     let idTypeValue: string;
-    idTypeValue = this.VendorForm.controls[this.controlNameIdType].value;
+    idTypeValue = this.VendorForm.controls.MrIdTypeCode.value;
     var pattern: string = '';
     if (idTypeValue != undefined) {
       if (this.resultPattern != undefined) {
@@ -961,30 +951,44 @@ export class VendorBranchAddEditComponent implements OnInit {
   }
 
   setValidator(pattern: string) {
-    if (pattern != undefined) {
-      this.VendorForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
-      this.VendorForm.controls[this.controlNameIdNo].updateValueAndValidity();
-    }
-  }
-
-  LoadGradingRule(vendorRating: number)
-  {
-    this.http.post(URLConstant.GetRuleVendorGrading, { VendorRating:  vendorRating}).subscribe(
-      (response) => {
-        // this.gradeCode = response["Key"];
-        // this.VendorForm.patchValue({
-        //   VendorGrade: response["Value"],
-        //   VendorGradeCode : response["Key"]
-        // });
-
-        this.gradeCode = response["VendorGrade"];
-        // this.VendorForm.patchValue({
-        //   VendorGrade: response["Value"],
-        //   VendorGradeCode : response["Key"]
-        // });
+    if (this.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_COMPANY) {
+        this.VendorForm.controls.MrIdTypeCode.clearValidators();
+        this.VendorForm.controls.IdNo.clearValidators();
+        this.VendorForm.controls.RegistrationNo.setValidators(Validators.required);
+        this.VendorForm.controls.LicenseNo.setValidators(Validators.required);
+    } else {
+      if (pattern != undefined) {
+        if (pattern != "") {
+          this.VendorForm.controls.IdNo.setValidators([Validators.required, Validators.pattern(pattern)]);
+        } else {
+          this.VendorForm.controls.IdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
+        }
+        this.VendorForm.controls.RegistrationNo.clearValidators();
+        this.VendorForm.controls.LicenseNo.clearValidators();
+        this.VendorForm.controls.MrIdTypeCode.setValidators(Validators.required);
       }
-    );
+    }
+    this.updateValueAndValidityForm();
   }
+
+  // LoadGradingRule(vendorRating: number)
+  // {
+  //   this.http.post(URLConstant.GetRuleVendorGrading, { VendorRating:  vendorRating}).subscribe(
+  //     (response) => {
+  //       // this.gradeCode = response["Key"];
+  //       // this.VendorForm.patchValue({
+  //       //   VendorGrade: response["Value"],
+  //       //   VendorGradeCode : response["Key"]
+  //       // });
+
+  //       this.gradeCode = response["VendorGrade"];
+  //       // this.VendorForm.patchValue({
+  //       //   VendorGrade: response["Value"],
+  //       //   VendorGradeCode : response["Key"]
+  //       // });
+  //     }
+  //   );
+  // }
   //END OF URS-LOS-041
 
   settingDefaultValue(){
