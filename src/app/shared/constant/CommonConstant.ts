@@ -46,6 +46,7 @@ export class CommonConstant {
     public static ASSET_INSCO_HO = "ASSET_INSCO_HO";
     public static LIFE_INSCO_HO = "LIFE_INSCO_HO";
     public static SUPPLIER_HO = "SUPPLIER_HO";
+    public static SUPPLIER_BRANCH = "SUPPLIER_BRANCH";
     public static SURVEYOR_HO = "SURVEYOR_HO";
     public static SUPPLIER_HOLDING = "SUPPLIER_HOLDING";
     public static SUPPLIER_ATPM = "SUPPLIER_ATPM";
@@ -137,9 +138,9 @@ export class CommonConstant {
 
     public static RefMasterTypeCodeEntityType = "ENTITY_TYPE";
     public static RefMasterTypeCodeEntityTypePayAlloc = "PAY_ALLOC";
-    public static RefMasterTypeCodeEntityTypeOffice = "OFFICE";
+    public static RefMasterTypeCodeEntityTypeInsuranceCompany = "INSCOY";
     public static RefMasterTypeCodeEntityTypeBankAcc = "BANK_ACC";
-    public static RefMasterTypeCodeEntityTypeSuppl = "PAY_ALLOC_COA_SUPPL";
+    public static RefMasterTypeCodeEntityTypeSuppl = "SUPPL";
 
 
     public static RefMasterTypeCodeAppSrcType = "APP_SRC_TYPE";

@@ -5,7 +5,6 @@ import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { first } from 'rxjs/operators';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { RefCoaObj } from 'app/shared/model/common-setting/RefCoaObj.Model';
@@ -13,11 +12,14 @@ import { FormBuilder, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { Router } from '@angular/router';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-coa-detail',
   templateUrl: './coa-detail.component.html'
 })
+
 export class CoaDetailComponent implements OnInit {
   ListCurr: Array<any> = new Array<any>();
   colHeadTable: Array<any> = new Array<any>();
@@ -46,9 +48,9 @@ export class CoaDetailComponent implements OnInit {
     private http: HttpClient) {
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.GetDdlCurr();
-    
+
     let refMasterEntityType: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     refMasterEntityType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeEntityType;
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterEntityType).pipe(first()).subscribe(
@@ -179,7 +181,6 @@ export class CoaDetailComponent implements OnInit {
   }
 
   async Show(ev: HTMLInputElement) {
-
     this.entitySelect = ev.value;
     if (ev.value == "") {
       this.toastr.warningMessage(ExceptionConstant.PLEASE_SELECT_ONE);
@@ -190,7 +191,6 @@ export class CoaDetailComponent implements OnInit {
         comp => comp.Key == this.entitySelect);
 
       if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypePayAlloc) {
-
         await this.http.post<any>(URLConstant.GetListKeyValueRefPaymentAllocActive, {}).toPromise().then(
           (response: any) => {
             this.ListPaymentAlloc = response.ReturnObject
@@ -199,23 +199,10 @@ export class CoaDetailComponent implements OnInit {
             console.log(error)
           }
         );
-
-        for (let j = 0; j < this.ListPaymentAlloc.length; j++) {
-          var coa = new Array<any>();
-          coa = [
-            {
-              EntityType: this.entityTypeSelect[0].Value,
-              PaymentAllocCode: this.ListPaymentAlloc[j].Key,
-              EntityCode: this.ListPaymentAlloc[j].Key,
-            }
-          ];
-          this.ListCOA.push({ coa });
-          this.ListCoa().push(this.newCoa());
-        }
-
-      } else if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypeOffice) {
-
-        await this.http.post<any>(URLConstant.GetListKvpActiveRefOffice, {}).toPromise().then(
+        this.AddToCoa()
+      }
+      else if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypeBankAcc) {
+        await this.http.post<any>(URLConstant.GetListKeyValueActiveOfficeBankAcc, {}).toPromise().then(
           (response: any) => {
             this.ListPaymentAlloc = response.ReturnObject
           },
@@ -223,23 +210,10 @@ export class CoaDetailComponent implements OnInit {
             console.log(error)
           }
         );
-
-        for (let j = 0; j < this.ListPaymentAlloc.length; j++) {
-          var coa = new Array<any>();
-          coa = [
-            {
-              EntityType: this.entityTypeSelect[0].Value,
-              PaymentAllocCode: "RK",
-              EntityCode: this.ListPaymentAlloc[j].Key,
-            }
-          ];
-          this.ListCOA.push({ coa });
-          this.ListCoa().push(this.newCoa());
-        }
-
-
-      } else if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypeSuppl) {
-        await this.http.post<any>(URLConstant.GetListKeyValueRefPaymentAllocByPayAllocGrpCode, { Code: this.entitySelect }).toPromise().then(
+        this.AddToCoa()
+      }
+      else if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypeSuppl) {
+        await this.http.post<any>(URLConstant.GetListKvpVendorObjByCategoryCode, { Code: CommonConstant.SUPPLIER }).toPromise().then(
           (response: any) => {
             this.ListPaymentAlloc = response.ReturnObject
           },
@@ -247,22 +221,37 @@ export class CoaDetailComponent implements OnInit {
             console.log(error)
           }
         );
+        this.AddToCoa()
+      }
+      else if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypeInsuranceCompany) {
+        await this.http.post<any>(URLConstant.GetListKvpVendorObjByCategoryCode, { Code: CommonConstant.ASSET_INSCO_BRANCH }).toPromise().then(
+          (response: any) => {
+            this.ListPaymentAlloc = response.ReturnObject
+            console.log(this.ListPaymentAlloc)
+          },
+          (error) => {
+            console.log(error)
+          }
+        );
 
-        for (let j = 0; j < this.ListPaymentAlloc.length; j++) {
-          var coa = new Array<any>();
-          coa = [
-            {
-              EntityType: this.entityTypeSelect[0].Value,
-              PaymentAllocCode: this.ListPaymentAlloc[j].Key,
-              EntityCode: this.ListPaymentAlloc[j].Key,
-            }
-          ];
-          this.ListCOA.push({ coa });
-          this.ListCoa().push(this.newCoa());
-        }
-
+        this.AddToCoa()
       }
       this.Shows = true;
+    }
+  }
+
+  AddToCoa() {
+    for (let j = 0; j < this.ListPaymentAlloc.length; j++) {
+      var coa = new Array<any>();
+      coa = [
+        {
+          EntityType: this.entityTypeSelect[0].Value,
+          PaymentAllocCode: this.ListPaymentAlloc[j].Key,
+          EntityCode: this.ListPaymentAlloc[j].Key,
+        }
+      ];
+      this.ListCOA.push({ coa });
+      this.ListCoa().push(this.newCoa());
     }
   }
 }

@@ -323,6 +323,7 @@ export class URLConstant {
     public static EditRefCurr = environment.FoundationR3Url + "/RefCurr/EditRefCurr";
     public static GetRefCurrById = environment.FoundationR3Url + "/RefCurr/GetRefCurrById";
     public static GetRefCurrByCode = environment.FoundationR3Url + "/RefCurr/GetRefCurrByCode";
+    public static GetListKvpActiveRefCurr = environment.FoundationR3Url + "/RefCurr/GetListKvpActiveRefCurr";
 
     //REF ECONOMIC SECTOR
     public static AddRefEconomicSector = environment.FoundationR3Url + "/RefEconomicSector/AddRefEconomicSector";
@@ -530,6 +531,8 @@ export class URLConstant {
     public static GetListVendorBankAccByVendorEmpId = environment.FoundationR3Url + "/VendorBankAcc/GetListVendorBankAccByVendorEmpId";
     public static GetVendorAddrByVendorAddrId = environment.FoundationR3Url + "/VendorAddr/GetVendorAddrByVendorAddrId";
     public static GetVendorByVendorCode = environment.FoundationR3Url + "/Vendor/GetVendorByVendorCode";
+    public static GetListKeyValueActiveByCategoryCodeAndOfficeCode = environment.FoundationR3Url + "/Vendor/GetListKeyValueActiveByCategoryCodeAndOfficeCode";
+    public static GetListKvpVendorObjByCategoryCode = environment.FoundationR3Url + "/Vendor/GetListKvpVendorObjByCategoryCode";
 
     // VENDOR ADDR
     public static GetVendorAddrByVendorCodeAndMrAddrTypeCode = environment.FoundationR3Url + "/VendorAddr/GetVendorAddrByVendorCodeAndMrAddrTypeCode";
@@ -985,7 +988,7 @@ export class URLConstant {
     public static DeleteOfficeBankAcc = "/OfficeBankAcc/DeleteOfficeBankAcc";
     public static GetListActiveBankName = environment.FoundationR3Url + "/RefBank/GetListKeyValueActiveById";
     public static GetListBankAccType = environment.FoundationR3Url + "/OfficeBankAcc/GetListBankAccType";
-    public static GetListKvpActiveRefCurr = environment.FoundationR3Url + "/RefCurr/GetListKvpActiveRefCurr";
+    public static GetListKeyValueActiveOfficeBankAcc = environment.FoundationR3Url + "/OfficeBankAcc/GetListKeyValueActiveOfficeBankAcc";
     public static GetOfficeBankAccByOfficeBankAccId = environment.FoundationR3Url + "/OfficeBankAcc/GetOfficeBankAccByOfficeBankAccId";
     public static SubmitOfficeBankAcc = environment.FoundationR3Url + "/OfficeBankAcc/SubmitOfficeBankAcc";
     public static AddOfficeBankAcc = environment.FoundationR3Url + "/OfficeBankAcc/AddOfficeBankAcc";
