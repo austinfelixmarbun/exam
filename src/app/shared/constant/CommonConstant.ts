@@ -46,7 +46,6 @@ export class CommonConstant {
     public static ASSET_INSCO_HO = "ASSET_INSCO_HO";
     public static LIFE_INSCO_HO = "LIFE_INSCO_HO";
     public static SUPPLIER_HO = "SUPPLIER_HO";
-    public static SUPPLIER_BRANCH = "SUPPLIER_BRANCH";
     public static SURVEYOR_HO = "SURVEYOR_HO";
     public static SUPPLIER_HOLDING = "SUPPLIER_HOLDING";
     public static SUPPLIER_ATPM = "SUPPLIER_ATPM";
@@ -75,6 +74,7 @@ export class CommonConstant {
     public static NotificationMethodExtLink = "EXT_LINK";
     
     //OFFICE TYPE
+    public static OFFICE = 'OFFICE';
     public static HeadOffice = "HO";
     public static CollectionGroup = "CG";
     public static ATPM = "ATPM";
