@@ -74,7 +74,6 @@ export class CommonConstant {
     public static NotificationMethodExtLink = "EXT_LINK";
     
     //OFFICE TYPE
-    public static OFFICE = 'OFFICE';
     public static HeadOffice = "HO";
     public static CollectionGroup = "CG";
     public static ATPM = "ATPM";
@@ -141,7 +140,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeEntityTypeInsuranceCompany = "INSCOY";
     public static RefMasterTypeCodeEntityTypeBankAcc = "BANK_ACC";
     public static RefMasterTypeCodeEntityTypeSuppl = "SUPPL";
-
+    public static RefMasterTypeCodeEntityTypeOffice = 'OFFICE';
 
     public static RefMasterTypeCodeAppSrcType = "APP_SRC_TYPE";
     

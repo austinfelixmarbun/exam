@@ -236,6 +236,18 @@ export class CoaDetailComponent implements OnInit {
 
         this.AddToCoa()
       }
+      else if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypeOffice) {
+        await this.http.post<any>(URLConstant.GetListKvpActiveRefOffice, {}).toPromise().then(
+          (response: any) => {
+            this.ListPaymentAlloc = response.ReturnObject
+          },
+          (error) => {
+            console.log(error)
+          }
+        );
+
+        this.AddToCoa()
+      }
       this.Shows = true;
     }
   }
