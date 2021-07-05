@@ -158,21 +158,21 @@ export class VendorBranchAddEditComponent implements OnInit {
   }
 
   DictDDLVendorAttr: { [id: string]: Array<any> } = {};
-  ngOnInit() {
+  async ngOnInit() {
     this.SetTitleHoInfo();
     this.customPattern = new Array<CustomPatternObj>();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     if (this.mode == "edit") {
       this.VendorForm.controls.VendorCode.disable();
-      this.getData();
+      await this.getData();
     } 
     else {
       if(this.MrVendorCategoryCode == "SUPPLIER"){
         this.checkIsAutoFormNoFromSetting("SB");
       }
       this.bindText()
-      this.setDropdown();
+      await this.setDropdown();
       this.setLookup();
 
       this.settingDefaultValue();
@@ -339,14 +339,14 @@ export class VendorBranchAddEditComponent implements OnInit {
     );
   }
 
-  getData() {
-    this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).subscribe(
-      (response) => {
+  async getData() {
+    await this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).toPromise().then(
+      async (response) => {
         this.result = response;
-        this.setDropdown();
-        this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
-        this.bindText();
         this.MrVendorTypeCode = this.result.VendorObj.MrVendorTypeCode;
+        this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
+        await this.setDropdown();
+        this.bindText();
         this.VendorForm.patchValue({
           MrVendorCategoryCode: this.result.VendorObj.MrVendorCategoryCode,
           VendorCode: this.result.VendorObj.VendorCode,
@@ -391,11 +391,11 @@ export class VendorBranchAddEditComponent implements OnInit {
     );
   }
 
-  setDropdown() {
+  async setDropdown() {
     var refMasterCategoryObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCategory
     }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).subscribe(
+    await this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).toPromise().then(
       (response) => {
         this.itemCategoryType = response[CommonConstant.ReturnObj];
         if (this.itemCategoryType.length > 0) {
@@ -413,7 +413,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     var refAssignmentType = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeAssgmntType
     }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refAssignmentType).subscribe(
+    await this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refAssignmentType).toPromise().then(
       (response) => {
         this.itemAssignmentTypeTele = response[CommonConstant.ReturnObj];
         if (this.itemAssignmentTypeTele.length > 0) {
@@ -427,7 +427,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     var refMrSupplierClass = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSupplierClass
     }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMrSupplierClass).subscribe(
+    await this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMrSupplierClass).toPromise().then(
       (response) => {
         this.itemSupplierClass = response[CommonConstant.ReturnObj];
         if (this.itemSupplierClass.length > 0) {
@@ -441,7 +441,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     var refMRSupplierUpCalcMethod = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSupplierUpCalcMethod,
     }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMRSupplierUpCalcMethod).subscribe(
+    await this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMRSupplierUpCalcMethod).toPromise().then(
       (response) => {
         this.itemTypeUpCalcMethod = response[CommonConstant.ReturnObj];
         if (this.itemTypeUpCalcMethod.length > 0) {
@@ -455,8 +455,8 @@ export class VendorBranchAddEditComponent implements OnInit {
     var refMasterTypeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorType,
     }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).subscribe(
-      (response) => {
+    await this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).toPromise().then(
+      async (response) => {
         this.itemType = response[CommonConstant.ReturnObj];
         if (this.itemType.length > 0) {
           if (this.MrVendorCategoryCode == "AGENCY_PERSONAL") {
@@ -483,7 +483,7 @@ export class VendorBranchAddEditComponent implements OnInit {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
             MappingCode: this.RsvField,
           }
-          this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
+          await this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).toPromise().then(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -500,24 +500,11 @@ export class VendorBranchAddEditComponent implements OnInit {
         if (this.MrVendorCategoryCode == "AGENCY_PERSONAL" || this.MrVendorCategoryCode == "AGENCY_COMPANY") {
           this.VendorForm.controls.MrVendorTypeCode.disable();
         }
-        this.checkType();
+        await this.checkType();
       }
     );
 
-    var refMasterIdObj = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-    }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterIdObj).subscribe(
-      (response) => {
-        this.itemIdType = response[CommonConstant.ReturnObj];
-        if (this.itemIdType.lenth > 0) {
-          this.VendorForm.patchValue({
-            MrIdTypeCode: this.itemIdType[0].Key
-          });
-        }
 
-      }
-    );
 
     if (this.MrVendorCategoryCode == "SURVEYOR_HO" || this.MrVendorCategoryCode == "ASSET_INSCO_HO") {
       var refMasterAssignmentObj = {
@@ -593,7 +580,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.VendorForm.controls.LicenseNo.updateValueAndValidity();
   }
 
-  async checkType() {
+  async checkType(isInit: boolean = false) {
     if (this.VendorForm.controls.MrVendorTypeCode.value != "") {
       this.MrVendorTypeCode = this.VendorForm.controls.MrVendorTypeCode.value;
     }
@@ -615,7 +602,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {
-          if (this.mode != "edit") {
+          if (isInit || this.mode != "edit") {
             this.VendorForm.patchValue({
               MrIdTypeCode: this.itemIdType[0].Key
             });
@@ -741,10 +728,17 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.VendorCode = this.VendorForm.controls.VendorCode.value;
       this.vendorBranchObj.VendorObj.VendorName = this.VendorForm.controls.VendorName.value;
       this.vendorBranchObj.VendorObj.MrVendorTypeCode = this.VendorForm.controls.MrVendorTypeCode.value;
-      this.vendorBranchObj.VendorObj.RegistrationNo = this.VendorForm.controls.RegistrationNo.value;
-      this.vendorBranchObj.VendorObj.LicenseNo = this.VendorForm.controls.LicenseNo.value;
+      if(this.vendorBranchObj.VendorObj.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_PERSONAL){
+        this.vendorBranchObj.VendorObj.IdNo = this.VendorForm.controls.IdNo.value;
+        this.vendorBranchObj.VendorObj.RegistrationNo = "";
+        this.vendorBranchObj.VendorObj.LicenseNo = "";
+      }
+      else{
+        this.vendorBranchObj.VendorObj.IdNo = "";
+        this.vendorBranchObj.VendorObj.RegistrationNo = this.VendorForm.controls.RegistrationNo.value;
+        this.vendorBranchObj.VendorObj.LicenseNo = this.VendorForm.controls.LicenseNo.value;
+      }
       this.vendorBranchObj.VendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value;
-      this.vendorBranchObj.VendorObj.IdNo = this.VendorForm.controls.IdNo.value;
       this.vendorBranchObj.VendorObj.MobilePhnNo1 = this.VendorForm.controls.MobilePhnNo1.value;
       this.vendorBranchObj.VendorObj.MobilePhnNo2 = this.VendorForm.controls.MobilePhnNo2.value;
       this.vendorBranchObj.VendorObj.Email = this.VendorForm.controls.Email.value;
