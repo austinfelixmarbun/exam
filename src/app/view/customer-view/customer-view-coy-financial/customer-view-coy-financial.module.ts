@@ -15,6 +15,7 @@ import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewCoyFinancialComponent } from "./customer-view-coy-financial.component";
 import { CustomerViewCoyFinancialRoutingModule } from "./customer-view-coy-financial-routing.module";
+import { CustomerViewCoyFinancialSectionComponent } from "../customer-view-coy-financial-section/customer-view-coy-financial-section.component";
 
 
 
@@ -38,8 +39,8 @@ import { CustomerViewCoyFinancialRoutingModule } from "./customer-view-coy-finan
     UcShowErrorsModule,
   ],
   declarations: [
-    CustomerViewCoyFinancialComponent
-
+    CustomerViewCoyFinancialComponent,
+    CustomerViewCoyFinancialSectionComponent
   ],
   entryComponents: [
     UcviewgenericComponent,
