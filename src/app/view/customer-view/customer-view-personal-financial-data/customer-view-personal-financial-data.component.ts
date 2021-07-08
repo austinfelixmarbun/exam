@@ -22,15 +22,14 @@ export class CustomerViewPersonalFinancialDataComponent implements OnInit {
     private router: Router,
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
         this.CustId = params['CustId'];
       }
     });
     
-    var custAddrObj = { "CustId": this.CustId };
-    this.http.post(this.GetCBAForCustFinDataByCustIdUrl, { Id : this.CustId }).subscribe(
+    await this.http.post(this.GetCBAForCustFinDataByCustIdUrl, { Id : this.CustId }).toPromise().then(
       response => {
         this.responseCBAObj = response['ListCBAForCustFinData'];
       },

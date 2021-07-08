@@ -43,7 +43,7 @@ export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
     await this.http.post(URLConstant.GetListCustPersonalFinDataForCustViewByCustId, {custId : this.CustId }).toPromise().then(
       (response) => {
         console.log(response)
-        this.tempCustObj = response["ListCustPersonalFinDataForCustView"];
+        this.ListCustPersonalFinData = response["ListCustPersonalFinDataForCustView"];
       }
     );
 
