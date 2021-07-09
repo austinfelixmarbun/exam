@@ -15,7 +15,9 @@ export class ExceptionConstant {
     public static TOTAL_SHARE_MUST_100 = "Total Share % must be 100%";
     public static MUST_HAVE_PARENT = "Must Have Parent";
     public static PLEASE_COMPLETE_RESIDENCE_ADDRESS = "Please complete Residence Address First";
+    public static PLEASE_COMPLETE_BIZ_ADDRESS = "Please complete Business Address First";
     public static PLEASE_COMPLETE_LEGAL_AND_RESIDENCE_ADDRESS = "Please complete Legal and Residence Address First";
+    public static PLEASE_COMPLETE_LEGAL_AND_BIZ_ADDRESS = "Please Complete Legal and Business Address First";
     public static ADD_MIN_1_DATA = "Please select at least one Office";
     public static Add_Min_1_Owner = "Please Input at least 1 Owner";
     public static JOIN_DATE_MUST_LESS_THAN_ = "Join Date Must Be Lesser Than ";
