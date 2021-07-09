@@ -245,6 +245,7 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupplierCoy.json";
     this.inputLookupObj.genericJson = "./assets/lookup/lookupSupplierCoy.json";
     this.inputLookupObj.isReady = true;
+    this.inputLookupObj.isRequired = false;
   }
 
   SetSupplier(e) {
@@ -341,12 +342,9 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
       this.CustomerCompanyForm.patchValue({
         VipNotes: null
       });
+      this.CustomerCompanyForm.controls.VipNotes.clearValidators();
       this.CustomerCompanyForm.controls.VipNotes.disable();
       this.VipNotesRequired = false;
-      this.CustomerCompanyForm.controls.IdExpiredDt.clearValidators();
-
-
-
     } else {
       this.CustomerCompanyForm.controls.VipNotes.enable();
       this.CustomerCompanyForm.controls.VipNotes.setValidators(Validators.required);
