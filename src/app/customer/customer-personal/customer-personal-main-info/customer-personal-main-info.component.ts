@@ -106,9 +106,9 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     MrMaritalStatCode: [''],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     CustModel: [''],
-    IsVip: [true],
-    IsAffiliateWithMf: [true],
-    VipNotes: ['', [Validators.required]],
+    IsVip: [false],
+    IsAffiliateWithMf: [false],
+    VipNotes: [''],
 
     IsSupplier: [false],
     SupplCode: [''],
@@ -129,7 +129,8 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   ngOnInit() {
     this.bindLookupSupplier();
     this.customPattern = new Array<CustomPatternObj>();
-    this.VipNotesRequired = true;
+    this.VipNotesRequired = false;
+    this.CustomerPersonalForm.controls.VipNotes.disable();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);

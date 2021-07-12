@@ -73,9 +73,9 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     CustName: ['', [Validators.required, Validators.maxLength(100)]],
     MrCompanyTypeCode: ['', [Validators.required]],
     TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
-    IsVip: [true],
-    IsAffiliateWithMf: [true],
-    VipNotes: ['', [Validators.required]],
+    IsVip: [false],
+    IsAffiliateWithMf: [false],
+    VipNotes: [''],
     IsSupplier: [false],
     SupplCode: [''],
     SupplName: [''],
@@ -88,7 +88,8 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
 
   ngOnInit() {
     this.bindLookupSupplier();
-    this.VipNotesRequired = true;
+    this.VipNotesRequired = false;
+    this.CustomerCompanyForm.controls.VipNotes.disable();
 
     this.inputFieldObj = new InputFieldObj();
     this.inputFieldObj.inputLookupObj = new InputLookupObj();
