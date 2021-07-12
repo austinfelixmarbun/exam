@@ -12,13 +12,14 @@
                 </div>
             </div>
             <br>
-            
+
             <div class="px-3">
                 <form class="form form-horizontal" [formGroup]="UploadJournalFileForm"
                     (ngSubmit)="UploadJournalFileForm.valid && uploadFiles()" #enjiForm="ngForm">
-                    <lib-ucSubsection [id]="'UploadJournalId'" [title]="'Upload Journal Files'" [panel]="'UploadJournal'">
+                    <lib-ucSubsection [id]="'UploadJournalId'" [title]="'Upload Journal Files'"
+                        [panel]="'UploadJournal'">
                     </lib-ucSubsection>
-                    <div  id='UploadJournal'  class="form-body">
+                    <div id='UploadJournal' class="form-body">
                         <div class="form-group row">
                             <label class="col-md-3 adInsLabel" translate>File Code</label>
                             <div class="col-md-9">
@@ -55,7 +56,7 @@
                                             [ngStyle]="{'width':percentComplete+'%'}">{{percentComplete}}%</span>
                                     </div>
                                     <a class="col-xs-1" role="button" (click)="removeFile(i,'sf')"
-                                        *ngIf="uploadClick"><i class="fa fa-times"></i></a>
+                                        *ngIf="uploadClick"><em class="fa fa-times"></em></a>
                                 </div>
                                 <!--Invalid file list-->
                                 <div style="padding-left: 15px" class="row text-danger afu-invalid-file"
@@ -64,7 +65,7 @@
                                     <p class="col-xs-3 padMarg sizeC"><strong>({{na['fileSize']}})</strong></p>
                                     <p class="col-xs-3 ">{{na['errorMsg']}}</p>
                                     <a class="col-xs-1 delFileIcon" role="button" (click)="removeFile(j,'na')"
-                                        *ngIf="uploadClick">&nbsp;<i class="fa fa-times"></i></a>
+                                        *ngIf="uploadClick">&nbsp;<em class="fa fa-times"></em></a>
                                 </div>
                             </div>
 
@@ -85,25 +86,28 @@
                         <div class="form-group row">
                             <label class="col-md-3 adInsLabel" translate>Effect Immediately</label>
                             <div class="col-md-9">
-                                <input type="checkbox" formControlName="IsImmediately" (change)="isEffectImmediately($event.target.checked)" id="IsImmediately">
+                                <input type="checkbox" formControlName="IsImmediately"
+                                    (change)="isEffectImmediately($event.target.checked)" id="IsImmediately">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3  adins-required-label" translate>Start Date</label>
                             <div class="col-md-9">
-                                <input type="date" id="Date" class="form-control adInsInput width-25-per" formControlName="Date" [min]="this.businessDt">
-                                <lib-uc-show-errors [control]="UploadJournalFileForm.controls.Date" [submit]="enjiForm.submitted">
+                                <input type="date" id="Date" class="form-control adInsInput width-25-per"
+                                    formControlName="Date" [min]="this.businessDt">
+                                <lib-uc-show-errors [control]="UploadJournalFileForm.controls.Date"
+                                    [submit]="enjiForm.submitted">
                                 </lib-uc-show-errors>
                             </div>
                         </div>
 
                         <div class="form-actions button-right">
-                            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" translate>
-                                <i class="fa fa-arrow-circle-left"></i> Cancel
+                            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]"
+                                translate>
+                                <em class="fa fa-arrow-circle-left"></em> Cancel
                             </button>
                             <button class="btn btn-raised btn-primary" type="submit" (click)="uploadFiles()"
                                 [disabled]=!uploadBtn>{{replaceTexts?.uploadBtn}}</button>
-                            
                         </div>
                     </div>
                     <br>
@@ -119,31 +123,31 @@
                                             </lib-ucSubsection>
                                             <div class="form-body table-responsive" id="SuccessResultInfo">
                                                 <table class="table table-responsive-md text-center table-hover">
+                                                    <caption></caption>
                                                     <thead>
                                                         <tr class="table-header">
-                                                            <th>
+                                                            <th id="temppaychannelrcvno">
                                                                 <span class="thead-header" translate>Temp Pay Channel
-                                                                    Recevie
-                                                                    No</span>
+                                                                    Receive No</span>
                                                             </th>
-                                                            <th>
+                                                            <th id="virtualaccno">
                                                                 <span class="thead-header" translate>Virtual Acc
                                                                     No</span>
                                                             </th>
-                                                            <th>
+                                                            <th id="billgrpno">
                                                                 <span class="thead-header" translate>Billing Group
                                                                     No</span>
                                                             </th>
-                                                            <th>
+                                                            <th id="trxno">
                                                                 <span class="thead-header" translate>Trx No</span>
                                                             </th>
-                                                            <th>
+                                                            <th id="rcvdt">
                                                                 <span class="thead-header" translate>Receive Date</span>
                                                             </th>
-                                                            <th>
+                                                            <th id="valuedt">
                                                                 <span class="thead-header" translate>Value Date</span>
                                                             </th>
-                                                            <th>
+                                                            <th id="rcvamt">
                                                                 <span class="thead-header" translate>Receive
                                                                     Amount</span>
                                                             </th>
@@ -173,9 +177,10 @@
                                             </lib-ucSubsection>
                                             <div class="form-body" id="FailedResultInfo">
                                                 <table class="table table-responsive-md text-center table-hover">
+                                                    <caption></caption>
                                                     <thead>
                                                         <tr class="table-header">
-                                                            <th>
+                                                            <th id="virtualaccno">
                                                                 <span class="thead-header" translate>Virtual Acc
                                                                     No</span>
                                                             </th>
@@ -193,11 +198,11 @@
                                         <div class="form-actions button-right" *ngIf="ListSuccessResultInfo.length > 0">
                                             <button type="button" class="btn btn-raised btn-warning mr-1"
                                                 (click)="cancel()" translate>
-                                                <i class="fa fa-arrow-circle-left"></i> Cancel
+                                                <em class="fa fa-arrow-circle-left"></em> Cancel
                                             </button>
                                             <button type="submit" class="btn btn-raised btn-primary mr-1"
                                                 (click)="approve()" translate>
-                                                <i class="ft-check"></i> Approve
+                                                <em class="ft-check"></em> Approve
                                             </button>
                                         </div>
                                     </div>
