@@ -36,5 +36,7 @@ export class ExceptionConstant {
     public static NOT_ELIGIBLE_FOR_TAKE_BACK = "You are not Eligible to Take Back this Task";
     public static NOT_ELIGIBLE_FOR_HOLD = "You are not Eligible to Hold this Task";
     public static NOT_ELIGIBLE_FOR_PROCESS_TASK = "You are not Eligible to Process this Task";
+    public static MUST_INPUT_SPOUSE_DATA = "Please Input Spouse Data in Family!";
+    public static MUST_CHOOSE_SPOUSE_DATA = "Please Choose at least One Spouse Data!";
 
 }
