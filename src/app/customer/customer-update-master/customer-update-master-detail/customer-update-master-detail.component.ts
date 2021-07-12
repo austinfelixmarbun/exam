@@ -29,6 +29,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   CompanyConstant: string;
   PersonalConstant: string;
   WfTaskListId: number;
+  SubjectType: string;
 
   CustPersonalStep = {
     "CUST": 1,
@@ -62,6 +63,9 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
       }
       if (params["WfTaskListId"] != null) {
         this.WfTaskListId = params["WfTaskListId"];
+      }
+      if (params["SubjectTypeDescr"] != null) {
+        this.SubjectType = params["SubjectTypeDescr"];
       }
     });
     this.StepIdx = 1;

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -21,6 +22,7 @@ import { BehaviorSubject, forkJoin, Subject } from 'rxjs';
 })
 export class UpdateCustomerAddressComponent implements OnInit {
   @Input() CustDataTrxId: number;
+  @Input() SubjectType: string;
   @Output() ResponseTab: EventEmitter<any>;
   CustId: number;
   ZipcodeLookupObj: InputLookupObj;
@@ -290,6 +292,27 @@ export class UpdateCustomerAddressComponent implements OnInit {
   back() {
     // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
     AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
+  }
+
+  checkForm(){
+    if(this.SubjectType == "Customer"){
+      var formArray = this.CustomerAddressForm.get("AddressList") as FormArray;
+      for (const item of formArray.controls) {
+        var masterData = new UpdateCustAddrObj();
+        var currFormGroup = item.get("MasterAddr") as FormGroup;
+        masterData = { ...currFormGroup.getRawValue() };
+
+        let warnigMsg: string = ExceptionConstant.PLEASE_FILL_RESIDENCE_ADDRESS;
+        if(masterData.MrCustAddrTypeCode == CommonConstant.CustAddrTypeBiz){
+          warnigMsg = ExceptionConstant.PLEASE_FILL_BIZ_ADDRESS
+        }
+
+        if((masterData.MrCustAddrTypeCode == CommonConstant.CustAddrTypeBiz || masterData.MrCustAddrTypeCode == CommonConstant.CustAddrTypeResidence) && !currFormGroup.valid){
+          this.toastr.warningMessage(warnigMsg);
+          break;
+        }
+      }
+    }
   }
 
   SaveValue() {

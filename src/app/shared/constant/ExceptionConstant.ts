@@ -39,4 +39,7 @@ export class ExceptionConstant {
     public static NOT_ELIGIBLE_FOR_HOLD = "You are not Eligible to Hold this Task";
     public static NOT_ELIGIBLE_FOR_PROCESS_TASK = "You are not Eligible to Process this Task";
 
+    public static PLEASE_FILL_BIZ_ADDRESS = "Please Copy / Fill Business Address First";
+    public static PLEASE_FILL_RESIDENCE_ADDRESS = "Please Copy / Fill Residence Address First";
+
 }
