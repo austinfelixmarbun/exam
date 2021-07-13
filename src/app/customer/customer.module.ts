@@ -125,6 +125,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { createTranslateLoader } from 'app/app.module';
 import { HttpClient } from '@angular/common/http';
 import { CustomerViewCustomerAssetComponent } from './customer-view/customer-view-customer-asset/customer-view-customer-asset.component';
+import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -164,7 +165,7 @@ export const customCurrencyMaskConfig = {
     MatTabsModule,
     UcuploadModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
-    
+    UcdropdownlistModule
   ],
   declarations: [
     CustomerPagingComponent, CustAssetDetailComponent,
