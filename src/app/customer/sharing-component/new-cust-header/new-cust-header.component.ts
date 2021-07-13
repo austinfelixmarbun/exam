@@ -13,12 +13,24 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMas
   templateUrl: './new-cust-header.component.html',
 })
 export class NewCustHeaderComponent implements OnInit {
+  //#region Readonly
+  readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
+  readonly CustDataModeFamily: string = CommonConstant.CustMainDataModeFamily;
+  readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
+
+  readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
+  readonly CustTypeCoy: string = CommonConstant.CustomerCompany;
+
+  readonly CustPageTypeHeader = CommonConstant.CustPageTypeHeader;
+  readonly CustPageTypeDupCheck = CommonConstant.CustPageTypeDupCheck;
+  readonly CustPageTypePaging = CommonConstant.CustPageTypePaging;
+  readonly MasterCustType = CommonConstant.RefMasterTypeCodeCustType;
+  //#endregion
 
   CustType: string = CommonConstant.CustomerPersonal;
   PageType: string = CommonConstant.CustPageTypeHeader;
   CustDataMode: string = CommonConstant.CustMainDataModeCust;
   CustId: number = 0;
-  readonly MasterCustType = CommonConstant.RefMasterTypeCodeCustType;
 
   constructor(
     private http: HttpClient, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService) {
@@ -31,19 +43,6 @@ export class NewCustHeaderComponent implements OnInit {
       }
     });
   }
-
-  //#region Readonly
-  readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
-  readonly CustDataModeFamily: string = CommonConstant.CustMainDataModeFamily;
-  readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
-
-  readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
-  readonly CustTypeCoy: string = CommonConstant.CustomerCompany;
-
-  readonly CustPageTypeHeader = CommonConstant.CustPageTypeHeader;
-  readonly CustPageTypeDupCheck = CommonConstant.CustPageTypeDupCheck;
-  readonly CustPageTypePaging = CommonConstant.CustPageTypePaging;
-  //#endregion
 
   async ngOnInit() {
     await this.GetListActiveRefMaster(this.MasterCustType);
