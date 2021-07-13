@@ -228,6 +228,7 @@ export class PathConstant {
     public static CUST_NEG_RVW_UPLOAD_DETAIL = PathConstant.CUST_NEG + "/" + PathConstant.RVW_UPLOAD_DETAIL;
     public static CUST_VIEW = "CustomerView";
     public static CUST_VIEW_PAGE = PathConstant.CUST_VIEW + "/" + PathConstant.CUST_PAGE;
+    public static NEW_CUST = "NewCustomer";
     //#endregion
     
     //#region COY

@@ -23,6 +23,16 @@ export class CommonConstant {
     public static ENVIRONMENT_MODULE = 'EnvironmentModule';
     public static OFFICE_CODE = 'OfficeCode';
 
+    //CUST MAIN DATA MODE
+    public static CustMainDataModeCust = "CUST";
+    public static CustMainDataModeFamily = "FAMILY";
+    public static CustMainDataModeMgmntShrholder = "SHAREHOLDER";
+    
+    //CUST MAIN Page Type
+    public static CustPageTypeHeader = "HEADER";
+    public static CustPageTypeDupCheck = "DUP_CHECK";
+    public static CustPageTypePaging = "PAGING";
+
     // Customer Type
     public static CustomerPersonal = "PERSONAL";
     public static CustomerCompany = "COMPANY";
