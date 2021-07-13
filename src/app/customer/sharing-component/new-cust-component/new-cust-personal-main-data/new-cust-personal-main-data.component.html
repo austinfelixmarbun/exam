@@ -61,15 +61,7 @@
 
                   <div class="form-group row">
                     <label class="col-md-4 adins-required-label" translate>ID Type </label>
-                    <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeIdType]?.isReady">
-                      <!-- <select class="form-control adInsInput" (change)="onOptionsSelected()" style="width: auto" formControlName="MrIdTypeCode"
-                        [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MrIdTypeCode.invalid }">
-                        <option *ngFor="let it of DictListRefMaster[RefMasterTypeCodeIdType] " [value]="it.Key" >
-                          {{it.Value}}</option>
-                      </select>
-                      <lib-uc-show-errors [control]="CustomerForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
-                      </lib-uc-show-errors> -->
-                      
+                    <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeIdType]?.isReady">                      
                       <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeIdType]"
                       [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrIdTypeCode'"
                       (callback)="onOptionsSelected()"></lib-ucdropdownlist>
@@ -135,7 +127,7 @@
 
                   <div class="form-group row">
                     <label class="col-md-4 adins-required-label" translate>Birth Date</label>
-                    <div class="col-md-8">
+                    <div class="col-md-8" *ngIf="businessDtMin != null">
                       <input type="date" class="form-control adInsInput" formControlName="BirthDt" 
                       [max]="businessDtMin | date: 'yyyy-MM-dd'"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.BirthDt.invalid}">
@@ -165,7 +157,7 @@
                   </div>
 
                   <div class="form-group row">
-                    <label class="col-md-4 adInsLabel" translate>Marital Status</label>
+                    <label class="col-md-4 adins-required-label" translate>Marital Status</label>
                     <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeMaritalStat]?.isReady">                      
                       <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeMaritalStat]"
                       [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrMaritalStatCode'"></lib-ucdropdownlist>

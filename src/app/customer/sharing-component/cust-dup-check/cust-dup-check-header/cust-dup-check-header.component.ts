@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { DuplicateCustObj } from 'app/shared/model/DuplicateCust.Model';
@@ -17,6 +17,7 @@ export class CustDupCheckHeaderComponent implements OnInit {
   @Input() CustCoyObj: any;
   @Input() CustType: string = CommonConstant.CustomerPersonal;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust;
+  @Output() outputCancel: EventEmitter<string> = new EventEmitter();
   
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
   readonly CustTypeCoy: string = CommonConstant.CustomerCompany;
@@ -67,6 +68,14 @@ export class CustDupCheckHeaderComponent implements OnInit {
   }
 
   EditNegativeCust(item: NegCustDuplicateObj){
+    
+  }
+
+  Back(){
+    this.outputCancel.emit();
+  }
+
+  SaveForm(){
     
   }
 }

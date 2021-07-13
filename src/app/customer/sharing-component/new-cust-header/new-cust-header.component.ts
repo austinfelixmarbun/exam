@@ -18,6 +18,7 @@ export class NewCustHeaderComponent implements OnInit {
   PageType: string = CommonConstant.CustPageTypeHeader;
   CustDataMode: string = CommonConstant.CustMainDataModeCust;
   CustId: number = 0;
+  IsDupCheck: boolean = false;
   readonly MasterCustType = CommonConstant.RefMasterTypeCodeCustType;
 
   constructor(
@@ -66,6 +67,10 @@ export class NewCustHeaderComponent implements OnInit {
 
   }
 
+  CancelDupCheck(){
+    this.PageType = this.CustPageTypeHeader;
+  }
+
   DupCheckPersonalObj: ReqPersonalObj = new ReqPersonalObj();
   ClickSavePersonal(ev: ReqPersonalObj) {
     console.log(ev);
@@ -78,6 +83,7 @@ export class NewCustHeaderComponent implements OnInit {
       );
       return;
     }
+    this.IsDupCheck = true;
     this.DupCheckPersonalObj = ev;
     this.PageType = this.CustPageTypeDupCheck;
   }

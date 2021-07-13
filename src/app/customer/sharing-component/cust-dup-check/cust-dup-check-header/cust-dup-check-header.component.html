@@ -5,14 +5,27 @@
         <div class="addEdit">
           <form class="form form-horizontal">
             <div class="form-body">
-              <h4 class="form-section card-title" translate>Customer {{CustType}}
+              <h4 class="form-section card-title" translate>Customer Duplicate Checking Match {{CustType}}
               </h4>
             </div>
           </form>
+          <div class="form-body">
+            <div class="ucSearch-Button-Right">
+              <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Back()" translate>
+                <i class="fa fa-arrow-left"></i> Back
+              </button>
+              <button type="button" class="btn btn-raised btn-primary" (click)="SaveForm()" translate>
+                <i class="far fa-check-square"></i> New Customer
+              </button>
+            </div>
+          </div>  
           <app-cust-dup-check-personal *ngIf="CustType == CustTypePersonal" [CustObj]="CustPersonalObj"></app-cust-dup-check-personal>
           <app-cust-dup-check-company *ngIf="CustType == CustTypeCoy"></app-cust-dup-check-company>
         </div>
-        <div class="px-3 table-responsive">
+        <!-- Match / Similar Data -->
+        <lib-ucSubsection [id]="'MatchSimilarDataId'" [title]="'Match / Similar Data'" [panel]="'MatchSimilarData'">
+        </lib-ucSubsection>
+        <div class="px-3 table-responsive" id="MatchSimilarData">
           <table class="table table-responsive-md text-center table-hover">
             <thead>
               <tr class="table-header">
@@ -26,7 +39,7 @@
                 </th>
                 <th *ngIf="CustType == CustTypePersonal"><span style="float: left; text-align: left; width: 100px;" class="thead-header" name='IdNo' translate>ID NO.</span>
                 </th>
-                <th *ngIf="CustType == CustTypePersonal"><span style="float: left;" class="thead-header" name='TaxIdNo' translate>TAX ID NO</span>
+                <th *ngIf="CustType == CustTypePersonal"><span style="float: left; text-align: left; width: 100px;" class="thead-header" name='TaxIdNo' translate>TAX ID NO</span>
                 </th>
                 <th *ngIf="CustType == CustTypePersonal"><span style="float: left; text-align: left; width: 100px;" class="thead-header" name='BirthDt' translate>BIRTH DATE</span>
                 </th>
@@ -42,6 +55,11 @@
                 </th>
               </tr>
             </thead>
+            <tbody *ngIf = "ResultDuplicate?.length == 0">
+              <tr>
+                <td colspan="100%">No Data Available</td>
+              </tr>
+            </tbody>
             <tbody>
               <ng-container *ngFor="let item of ResultDuplicate; let i = index">
                 <tr>
@@ -66,15 +84,10 @@
             </tbody>
           </table>
         </div>
-        <!-- Negative Customer Match / Similar Data -->
-        <form class="form form-horizontal" style="margin-top: 10px;">
-          <div class="form-body">
-            <h4 class="form-section card-title" translate>
-              Negative Customer Match / Similar Data
-            </h4>
-          </div>
-        </form>
-        <div class="px-3 table-responsive">
+        
+        <lib-ucSubsection [id]="'NegMatchSimilarDataId'" [title]="'Negative Customer Match / Similar Data'" [panel]="'NegMatchSimilarData'">
+        </lib-ucSubsection>
+        <div class="px-3 table-responsive" id="NegMatchSimilarData">
           <table class="table table-responsive-md text-center table-hover">
             <thead>
               <tr class="table-header">
@@ -102,11 +115,16 @@
                 </th>
                 <th><span class="thead-header" name='Status' translate>STATUS</span>
                 </th>
-                <th><span style="float: left;" class="thead-header" name='DuplicateItem' translate>DUPLICATE ITEM</span>
+                <th><span style="float: left; text-align: left; width: 220px;" class="thead-header" name='DuplicateItem' translate>DUPLICATE ITEM</span>
                 </th>
                 <th><span class="thead-header" name='Select' translate>SELECT</span>
               </tr>
             </thead>
+            <tbody *ngIf = "ResultDuplicateNegative?.length == 0">
+              <tr>
+                <td colspan="100%">No Data Available</td>
+              </tr>
+            </tbody>
             <tbody>
               <tr *ngFor="let item of ResultDuplicateNegative; let i = index">
                 <td>{{i+1}}</td>
