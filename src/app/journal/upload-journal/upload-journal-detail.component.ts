@@ -38,6 +38,7 @@ export class UploadJournalDetailComponent implements OnInit {
   uploadMsg = false;
   afterUpload = false;
   uploadClick = true;
+  cancelBtn = true
   uploadMsgText: string;
   uploadMsgClass: string;
   isDownloadTmplt: boolean;
@@ -322,15 +323,14 @@ export class UploadJournalDetailComponent implements OnInit {
             this.afterUpload = true;
             this.uploadMsgText = this.replaceTexts.afterUploadMsg_error + response.Message;
             this.uploadMsgClass = 'text-danger lead';
-            console.log("status 999: " + xhr.responseText)
           }
         }
-        console.log("status else: " + xhr.responseText)
         this.ApiResponse.emit(xhr);
       }
     };
 
     xhr.upload.onprogress = evnt => {
+      this.cancelBtn = false;
       this.uploadBtn = false; // button should be disabled by process uploading
       if (evnt.lengthComputable) {
         this.percentComplete = Math.round((evnt.loaded / evnt.total) * 100);
@@ -376,19 +376,21 @@ export class UploadJournalDetailComponent implements OnInit {
       // console.log(evnt);
       this.progressBarShow = false;
       this.uploadBtn = false;
+      this.cancelBtn = true;
       this.uploadMsg = true;
       this.afterUpload = true;
       if (!isError) {
         this.uploadMsgText = this.replaceTexts.afterUploadMsg_success;
         this.uploadMsgClass = 'text-success lead';
-        console.log(this.uploadMsgText + " " + this.selectedFiles.length + " file");
+        // console.log(this.uploadMsgText + " " + this.selectedFiles.length + " file");
       }
 
+      console.log(xhr.responseText)
       if (xhr.responseText.indexOf("Error:") >= 0) {
         var errMessage = JSON.parse(xhr.responseText)
         this.toastr.errorMessage(errMessage)
       }
-      else if (xhr.responseText === "Success") {
+      else if (xhr.responseText.indexOf("Success") >= 0) {
         this.toastr.successMessage('File was uploaded successfully');
         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.UPLOAD_JOURNAL_FILE_PAGING], {})
       }
