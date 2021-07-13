@@ -2,88 +2,95 @@
 </lib-ucSubsection>
 <form class="form form-horizontal" #enjiForm="ngForm" id="MainInfoId">
   <div class="form-body">
-    <div class="form-group row ">
-      <label class="col-md-2 adInsLabel" translate>Customer Name </label>
-      <div class="col-md-4">
-        <label>{{CustObj.CustObj.CustName}}</label>
-      </div>
-      <label class="col-md-2  adInsLabel" translate>Gender </label>
-      <div class="col-md-4">
-        <label>{{DictRefMaster[RefMasterTypeCodeGender][CustObj.CustPersonalObj.MrGenderCode]}}</label>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-md-2 adInsLabel" translate>Customer Model </label>
-      <div class="col-md-4">
-        <!-- <label>{{this.tempCustModel?.Descr}}</label> -->
-      </div>
-      <label class="col-md-2 adInsLabel" translate>Birth Place</label>
-      <div class="col-md-4">
-        <label>{{CustObj.CustPersonalObj.BirthPlace}}</label>
+    <div class="row">
+      <div class="col-md-6">
+
+        <div class="form-group row">
+          <label class="col-md-4 adInsLabel" translate>Customer Name </label>
+          <div class="col-md-8">
+            <label>{{CustObj.CustObj.CustName}}</label>
+          </div>
+        </div>
+
+        <div class="form-group row ">
+          <label class="col-md-4 adInsLabel" translate>ID Type </label>
+          <div class="col-md-8">
+            <label>{{DictRefMaster[RefMasterTypeCodeIdType][CustObj.CustObj.MrIdTypeCode]}}</label>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-4 adInsLabel" translate>ID Number </label>
+          <div class="col-md-8">
+            <label>{{CustObj.CustObj.IdNo}}</label>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-4 adInsLabel" translate>ID Expired Date</label>
+          <div class="col-md-8">
+            <label *ngIf="CustObj.CustObj.IdExpiredDt">{{CustObj.CustObj.IdExpiredDt | date: 'yyyy-MM-dd'}}</label>
+            <label *ngIf="!CustObj.CustObj.IdExpiredDt">-</label>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-4 adInsLabel" translate>Affiliation with Multifinance</label>
+          <div class="col-md-8">
+            <label *ngIf="CustObj.CustObj.IsAffiliateWithMf">Yes</label>
+            <label *ngIf="!CustObj.CustObj.IsAffiliateWithMf">No</label>
+          </div>
+        </div>
+
+        <div class="form-group row ">
+          <label class="col-md-4 adInsLabel" translate>VIP</label>
+          <div class="col-md-8">
+            <label *ngIf="CustObj.CustObj.IsVip">Yes</label>
+            <label *ngIf="!CustObj.CustObj.IsVip">No</label>
+          </div>
+        </div>
       </div>
 
-    </div>
-    <div class="form-group row ">
-      <label class="col-md-2 adInsLabel" translate>ID Type </label>
-      <div class="col-md-4">
-        <label>{{DictRefMaster[RefMasterTypeCodeIdType][CustObj.CustObj.MrIdTypeCode]}}</label>
-      </div>
+      <div class="col-md-6">
 
-      <label class="col-md-2 adInsLabel" translate>Birth Date</label>
-      <div class="col-md-4">
-        <label>{{CustObj.CustPersonalObj.BirthDt | date: 'yyyy-MM-dd'}}</label>
-      </div>
+        <div class="form-group row">
+          <label class="col-md-4 adInsLabel" translate>Gender </label>
+          <div class="col-md-8">
+            <label>{{DictRefMaster[RefMasterTypeCodeGender][CustObj.CustPersonalObj.MrGenderCode]}}</label>
+          </div>
+        </div>
 
-    </div>
-    <div class="form-group row "><label class="col-md-2 adInsLabel" translate>ID Number </label>
-      <div class="col-md-4">
-        <label>{{CustObj.CustObj.IdNo}}</label>
-      </div>
-      <label class="col-md-2 adInsLabel" translate>Tax Id No</label>
-      <div class="col-md-4">
-        <label>{{CustObj.CustObj.TaxIdNo}}</label>
-      </div>
-    </div>
-    <div class="form-group row ">
-      <label class="col-md-2 adInsLabel" translate>ID Expired Date</label>
-      <div class="col-md-4">
-        <label>{{CustObj.CustObj.IdExpiredDt | date: 'yyyy-MM-dd'}}</label>
-      </div>
-      <label class="col-md-2 adInsLabel" translate>Mother Maiden Name</label>
-      <div class="col-md-4">
-        <label>{{CustObj.CustPersonalObj.MotherMaidenName}}</label>
-      </div>
-    </div>
-    <div class="form-group row ">
-      <label class="col-md-2 adInsLabel" translate>Affiliation with Multifinance</label>
-      <div class="col-md-4">
-        <label>{{CustObj.CustObj.IsAffiliateWithMf}}</label>
-      </div>
-    </div>
-    <div class="form-group row ">
-      <label class="col-md-2 adInsLabel" translate>VIP</label>
-      <div class="col-md-4">
-        <label>{{CustObj.CustObj.IsVip}}</label>
-      </div>
-      <label class="col-md-2 adInsLabel" translate>VIP Notes</label>
-      <div class="col-md-4">
-        <label>{{CustObj.CustObj.VipNotes}}</label>
+        <div class="form-group row">
+          <label class="col-md-4 adInsLabel" translate>Birth Place</label>
+          <div class="col-md-8">
+            <label>{{CustObj.CustPersonalObj.BirthPlace}}</label>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-4 adInsLabel" translate>Birth Date</label>
+          <div class="col-md-8">
+            <label>{{CustObj.CustPersonalObj.BirthDt | date: 'yyyy-MM-dd'}}</label>
+          </div>
+        </div>
+
+        <div class="form-group row ">
+          <label class="col-md-4 adInsLabel" translate>Tax Id No</label>
+          <div class="col-md-8">
+            <label *ngIf="CustObj.CustObj.TaxIdNo">{{CustObj.CustObj.TaxIdNo}}</label>
+            <label *ngIf="!CustObj.CustObj.TaxIdNo"> - </label>
+          </div>
+        </div>
+
+        <div class="form-group row ">
+          <label class="col-md-4 adInsLabel" translate>VIP Notes</label>
+          <div class="col-md-8">
+            <label *ngIf="CustObj.CustObj.VipNotes">{{CustObj.CustObj.VipNotes}}</label>
+            <label *ngIf="!CustObj.CustObj.VipNotes">-</label>
+          </div>
+        </div>
+
       </div>
     </div>
-  </div>
-  <!-- Match / Similar Data -->
-  <form class="form form-horizontal">
-    <div class="form-body">
-      <h4 class="form-section card-title" translate>
-        Match / Similar Data
-      </h4>
-    </div>
-  </form>
-  <div class="d-flex justify-content-end ">
-    <span class="mr-1 d-flex align-content-center ">
-      <button type="button" *ngIf="DuplicateStatus != 'LOCK'" class="addButton" translate (click)=SaveValue()>
-        New
-      </button>
-    </span>
   </div>
 </form>

@@ -1,4 +1,4 @@
-<div class="card-body" *ngIf="PageType == CustPageTypeHeader">
+<div class="card-body" [hidden]="PageType != CustPageTypeHeader">
   <div class="form-group row" *ngIf="CustDataMode != CustDataModeFamily">
     <label class="col-md-2" translate>{{subjectTitle}} Type</label>
     <div class="col-md-10">
@@ -10,9 +10,9 @@
       </mat-radio-group>
     </div>
   </div>
-  <app-new-cust-personal-main-data *ngIf="CustType == CustTypePersonal" [CustId]="CustId" [CustDataMode]="CustDataMode" (outputCancel)="ClickCancel()" (outputAfterSave)="ClickSavePersonal($event)"></app-new-cust-personal-main-data>
-  <app-new-cust-company-main-data *ngIf="CustType == CustTypeCoy" [CustId]="CustId" [CustDataMode]="CustDataMode" (outputCancel)="ClickCancel()" (outputAfterSave)="ClickSaveCoy($event)"></app-new-cust-company-main-data>
+  <app-new-cust-personal-main-data [hidden]="CustType != CustTypePersonal" [CustId]="CustId" [CustDataMode]="CustDataMode" (outputCancel)="ClickCancel()" (outputAfterSave)="ClickSavePersonal($event)"></app-new-cust-personal-main-data>
+  <app-new-cust-company-main-data [hidden]="CustType != CustTypeCoy" [CustId]="CustId" [CustDataMode]="CustDataMode" (outputCancel)="ClickCancel()" (outputAfterSave)="ClickSaveCoy($event)"></app-new-cust-company-main-data>
 </div>
 <div class="card-body" *ngIf="PageType == CustPageTypeDupCheck">
-  <app-cust-dup-check-header [CustPersonalObj]="DupCheckPersonalObj" [CustCoyObj]="DupCheckCoyObj" [CustType]="CustType" [CustDataMode]="CustDataMode"></app-cust-dup-check-header>
+  <app-cust-dup-check-header [CustPersonalObj]="DupCheckPersonalObj" [CustCoyObj]="DupCheckCoyObj" [CustType]="CustType" [CustDataMode]="CustDataMode" (outputCancel)="CancelDupCheck()"></app-cust-dup-check-header>
 </div>

@@ -31,6 +31,7 @@ export class NewCustHeaderComponent implements OnInit {
   PageType: string = CommonConstant.CustPageTypeHeader;
   CustDataMode: string = CommonConstant.CustMainDataModeCust;
   CustId: number = 0;
+  IsDupCheck: boolean = false;
 
   constructor(
     private http: HttpClient, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService) {
@@ -65,6 +66,10 @@ export class NewCustHeaderComponent implements OnInit {
 
   }
 
+  CancelDupCheck(){
+    this.PageType = this.CustPageTypeHeader;
+  }
+
   DupCheckPersonalObj: ReqPersonalObj = new ReqPersonalObj();
   ClickSavePersonal(ev: ReqPersonalObj) {
     console.log(ev);
@@ -77,6 +82,7 @@ export class NewCustHeaderComponent implements OnInit {
       );
       return;
     }
+    this.IsDupCheck = true;
     this.DupCheckPersonalObj = ev;
     this.PageType = this.CustPageTypeDupCheck;
   }

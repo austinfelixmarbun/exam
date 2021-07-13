@@ -75,15 +75,13 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   //#region Set Data
-  businessDtMin: Date;
-  businessDtMax: Date;
+  businessDtMin: Date = null;
   InitData() {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
-    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
-    this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
-    this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
+    this.businessDtMin.setFullYear(this.businessDtMin.getFullYear() - 17);
 
+    console.log(this.businessDtMin);
     this.inputAddressObj = NewCustSetData.BindSetLegalAddr();
   }
 
@@ -165,7 +163,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
       TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
       IdExpiredDt: [''],
-      MrMaritalStatCode: [''],
+      MrMaritalStatCode: ['', Validators.required],
       MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
       CustModel: [''],
       IsVip: [false],
@@ -428,12 +426,12 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     }
 
     let custPersonalObj: CustPersonalObj = this.tempCustPersonalObj;
-    custPersonalObj.CustFullName = tempForm["CustName"].value;
-    custPersonalObj.MrGenderCode = tempForm["Gender"].value;
-    custPersonalObj.BirthPlace = tempForm["BirthPlace"].value;
-    custPersonalObj.BirthDt = tempForm["BirthDt"].value;
-    custPersonalObj.MotherMaidenName = tempForm["MotherMaidenName"].value;
-    custPersonalObj.MrMaritalStatCode = tempForm["MrMaritalStatCode"].value;
+    custPersonalObj.CustFullName = tempForm["CustName"];
+    custPersonalObj.MrGenderCode = tempForm["Gender"];
+    custPersonalObj.BirthPlace = tempForm["BirthPlace"];
+    custPersonalObj.BirthDt = tempForm["BirthDt"];
+    custPersonalObj.MotherMaidenName = tempForm["MotherMaidenName"];
+    custPersonalObj.MrMaritalStatCode = tempForm["MrMaritalStatCode"];
 
     this.custObjToSave.CustAddr = this.tempCustAddr;
     this.custObjToSave.CustAddr.CustId = this.CustId;
