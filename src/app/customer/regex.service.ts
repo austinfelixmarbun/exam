@@ -10,7 +10,7 @@ import { CommonConstant } from "app/shared/constant/CommonConstant";
 export class RegexService {
     constructor(private http: HttpClient) { }
 
-    getErrMessage(pattern: string): any {
+    getErrMessage(pattern: string): string {
         let errMessage: string = "";
         switch (pattern) {
           case "^[0-9]{16}$":

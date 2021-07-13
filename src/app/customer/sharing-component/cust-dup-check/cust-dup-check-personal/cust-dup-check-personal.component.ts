@@ -15,7 +15,7 @@ export class CustDupCheckPersonalComponent implements OnInit {
 
   @Input() CustObj: ReqPersonalObj;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust;
-  
+
   readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
   readonly CustDataModeFamily: string = CommonConstant.CustMainDataModeFamily;
   readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
@@ -24,12 +24,11 @@ export class CustDupCheckPersonalComponent implements OnInit {
   readonly RefMasterTypeCodeIdType: string = CommonConstant.RefMasterTypeCodeIdType;
   readonly RefMasterTypeCodeGender: string = CommonConstant.RefMasterTypeCodeGender;
   readonly RefMasterTypeCodeMaritalStat: string = CommonConstant.RefMasterTypeCodeMaritalStat;
+
   ngOnInit() {
-    
     this.initRefMaster(this.RefMasterTypeCodeIdType);
     this.initRefMaster(this.RefMasterTypeCodeGender);
     this.initRefMaster(this.RefMasterTypeCodeMaritalStat);
-    console.log(this.DictRefMaster);
   }
 
   DictRefMaster: { [id: string]: { [code: string]: string } } = {};
@@ -40,9 +39,7 @@ export class CustDupCheckPersonalComponent implements OnInit {
     }
     this.DictRefMaster[refMasterTypeCode] = {};
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
-      (response: GenericKeyValueListObj)=>{
-        console.log(response);
-
+      (response: GenericKeyValueListObj) => {
         for (let index = 0; index < response.ReturnObject.length; index++) {
           const element = response.ReturnObject[index];
           this.DictRefMaster[refMasterTypeCode][element.Key] = element.Value;

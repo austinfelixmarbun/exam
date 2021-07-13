@@ -17,6 +17,7 @@ export class NewCustHeaderComponent implements OnInit {
   CustType: string = CommonConstant.CustomerPersonal;
   PageType: string = CommonConstant.CustPageTypeHeader;
   CustDataMode: string = CommonConstant.CustMainDataModeCust;
+  subjectTitle: string = "Customer";
   CustId: number = 0;
   IsDupCheck: boolean = false;
   readonly MasterCustType = CommonConstant.RefMasterTypeCodeCustType;
@@ -63,7 +64,7 @@ export class NewCustHeaderComponent implements OnInit {
     console.log(this.CustType);
   }
 
-  ClickCancel() {
+  Cancel() {
 
   }
 
@@ -78,7 +79,6 @@ export class NewCustHeaderComponent implements OnInit {
       this.http.post(URLConstant.EditCustPersonalMainData, ev).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.ClickCancel();
         }
       );
       return;

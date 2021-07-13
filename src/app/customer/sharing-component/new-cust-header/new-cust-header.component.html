@@ -1,18 +1,22 @@
-<div class="card-body" [hidden]="PageType != CustPageTypeHeader">
-  <div class="form-group row" *ngIf="CustDataMode != CustDataModeFamily">
-    <label class="col-md-2" translate>{{subjectTitle}} Type</label>
-    <div class="col-md-10">
-      <mat-radio-group [(ngModel)]="CustType" (change)="ChangeType()">
-        <mat-radio-button class="custom-control custom-radio display-inline-block"
-          *ngFor="let item of DictRefMaster[MasterCustType]" [value]="item.Key">
-          {{item.Value}}
-        </mat-radio-button>
-      </mat-radio-group>
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body" [hidden]="PageType != CustPageTypeHeader">
+      <div class="px-3 form-group row" *ngIf="CustDataMode != CustDataModeFamily">
+        <label class="col-md-2" translate>{{subjectTitle}} Type</label>
+        <div class="col-md-10">
+          <mat-radio-group [(ngModel)]="CustType" (change)="ChangeType()">
+            <mat-radio-button class="custom-control custom-radio display-inline-block"
+              *ngFor="let item of DictRefMaster[MasterCustType]" [value]="item.Key">
+              {{item.Value}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <app-new-cust-personal-main-data [hidden]="CustType != CustTypePersonal" [CustId]="CustId" [CustDataMode]="CustDataMode" (outputCancel)="Cancel()" (outputAfterSave)="ClickSavePersonal($event)"></app-new-cust-personal-main-data>
+      <app-new-cust-company-main-data [hidden]="CustType != CustTypeCoy" [CustId]="CustId" [CustDataMode]="CustDataMode" (outputCancel)="Cancel()" (outputAfterSave)="ClickSaveCoy($event)"></app-new-cust-company-main-data>
+    </div>
+    <div class="card-body" *ngIf="PageType == CustPageTypeDupCheck">
+      <app-cust-dup-check-header [CustPersonalObj]="DupCheckPersonalObj" [CustCoyObj]="DupCheckCoyObj" [CustType]="CustType" [CustDataMode]="CustDataMode" (outputCancel)="CancelDupCheck()"></app-cust-dup-check-header>
     </div>
   </div>
-  <app-new-cust-personal-main-data [hidden]="CustType != CustTypePersonal" [CustId]="CustId" [CustDataMode]="CustDataMode" (outputCancel)="ClickCancel()" (outputAfterSave)="ClickSavePersonal($event)"></app-new-cust-personal-main-data>
-  <app-new-cust-company-main-data [hidden]="CustType != CustTypeCoy" [CustId]="CustId" [CustDataMode]="CustDataMode" (outputCancel)="ClickCancel()" (outputAfterSave)="ClickSaveCoy($event)"></app-new-cust-company-main-data>
-</div>
-<div class="card-body" *ngIf="PageType == CustPageTypeDupCheck">
-  <app-cust-dup-check-header [CustPersonalObj]="DupCheckPersonalObj" [CustCoyObj]="DupCheckCoyObj" [CustType]="CustType" [CustDataMode]="CustDataMode" (outputCancel)="CancelDupCheck()"></app-cust-dup-check-header>
 </div>
