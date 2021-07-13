@@ -29,6 +29,7 @@ import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
+import { NewCustSetData } from '../NewCustSetData.Service';
 
 @Component({
   selector: 'app-new-cust-personal-main-data',
@@ -82,6 +83,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
+
+    this.inputAddressObj = NewCustSetData.BindSetLegalAddr();
   }
 
   CustNameLabel: string = "Customer";
@@ -128,40 +131,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   existingCustomerLookUpObj: InputLookupObj = new InputLookupObj();
   BindLookupExistingCust(){
     if(this.CustDataMode == this.CustDataModeMain) return;
-    this.existingCustomerLookUpObj = new InputLookupObj();
-    this.existingCustomerLookUpObj.isReadonly = false;
-    this.existingCustomerLookUpObj.urlJson = "./assets/lookup/lookupExistingCustomer.json";
-    this.existingCustomerLookUpObj.pagingJson = "./assets/lookup/lookupExistingCustomer.json";
-    this.existingCustomerLookUpObj.genericJson = "./assets/lookup/lookupExistingCustomer.json";
-
-    var criteriaListCust = new Array();
-    if (this.listCustIdToExclude.length > 0) {
-
-      var criteriaCustObj = new CriteriaObj();
-      criteriaCustObj.DataType = "text";
-      criteriaCustObj.restriction = AdInsConstant.RestrictionNotIn;
-      criteriaCustObj.propName = 'CUST_NO';
-      criteriaCustObj.listValue = this.listCustIdToExclude;
-      criteriaListCust.push(criteriaCustObj);
-    }
-    if (this.CustId != 0 || this.CustId == null) {
-      var criteriaCustObj = new CriteriaObj();
-      criteriaCustObj.DataType = "text";
-      criteriaCustObj.restriction = AdInsConstant.RestrictionNeq;
-      criteriaCustObj.propName = 'CUST_ID';
-      criteriaCustObj.value = this.CustId.toString();
-      criteriaListCust.push(criteriaCustObj);
-    }
-
-    var criteriaCustObj = new CriteriaObj();
-    criteriaCustObj.DataType = "text";
-    criteriaCustObj.restriction = AdInsConstant.RestrictionEq;
-    criteriaCustObj.propName = 'MR_CUST_TYPE_CODE';
-    criteriaCustObj.value = CommonConstant.CustomerPersonal;
-    criteriaListCust.push(criteriaCustObj);
-
-    this.existingCustomerLookUpObj.addCritInput = criteriaListCust;
-    if(this.CustId == 0) this.existingCustomerLookUpObj.isReady = true;
+    this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.CustId, this.listCustIdToExclude, CommonConstant.CustomerPersonal);
   }
   //#endregion
 
