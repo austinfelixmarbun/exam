@@ -21,7 +21,8 @@ export class CustomerCompanyAddressComponent implements OnInit {
   AddrId: number;
   custAddrObj: CustAddrObj;
   IdCust: number;
-  legalAddr: any;
+  legalAddr: CustAddrObj;
+  bizAddr: CustAddrObj;
   constructor(private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -46,14 +47,27 @@ export class CustomerCompanyAddressComponent implements OnInit {
     reqObj.Id = this.IdCust;
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
     this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
-      (response) => {
-        this.legalAddr = response; 
-        if (this.legalAddr.Addr == null) {
-          this.toastr.warningMessage(ExceptionConstant.PLEASE_COMPLETE_LEGAL_ADDRESS);
-        }
-        else {
-          this.outputTab.emit({ stepMode: "next" });
-        }
+      (response: CustAddrObj) => {
+        this.legalAddr = response;
+        reqObj.Code = CommonConstant.CustAddrTypeBiz;
+        this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+          (response: CustAddrObj) => {
+            this.bizAddr = response;
+            if (this.legalAddr.Addr == null || this.bizAddr.Addr == null) {
+              let warningMsg: string = ExceptionConstant.PLEASE_COMPLETE_LEGAL_AND_BIZ_ADDRESS;
+              if(this.legalAddr.Addr != null && this.bizAddr.Addr == null){
+                warningMsg = ExceptionConstant.PLEASE_COMPLETE_BIZ_ADDRESS;
+              }
+              if(this.legalAddr == null && this.bizAddr.Addr != null){
+                warningMsg = ExceptionConstant.PLEASE_COMPLETE_LEGAL_ADDRESS;
+              }
+              this.toastr.warningMessage(warningMsg);
+            }
+            else {
+              this.outputTab.emit({ stepMode: "next" });
+            }
+          }
+        )
       }); 
   }
   // back() {
