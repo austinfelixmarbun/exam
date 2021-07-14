@@ -49,9 +49,14 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   inputFieldObj: InputFieldObj = new InputFieldObj();
   inputLookupObj: InputLookupObj = new InputLookupObj();
 
-  constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal) {
+  constructor(private regexService: RegexService,
+    private router: Router, private route: ActivatedRoute,
+    private http: HttpClient, private fb: FormBuilder,
+    private toastr: NGXToastrService, private cookieService: CookieService,
+    private modalService: NgbModal) {
   }
 
+  //#region Readonly
   readonly RefMasterTypeCodeIdType: string = CommonConstant.RefMasterTypeCodeIdType;
   readonly RefMasterTypeCodeGender: string = CommonConstant.RefMasterTypeCodeGender;
   readonly RefMasterTypeCodeMaritalStat: string = CommonConstant.RefMasterTypeCodeMaritalStat;
@@ -59,6 +64,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
   readonly CustDataModeFamily: string = CommonConstant.CustMainDataModeFamily;
   readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
+  //#endregion
+
   async ngOnInit() {
     this.InitData();
     this.InitCustMainDataMode();
@@ -125,10 +132,10 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.inputLookupObj.isReady = true;
     this.inputLookupObj.isRequired = false;
   }
-  
+
   existingCustomerLookUpObj: InputLookupObj = new InputLookupObj();
-  BindLookupExistingCust(){
-    if(this.CustDataMode == this.CustDataModeMain) return;
+  BindLookupExistingCust() {
+    if (this.CustDataMode == this.CustDataModeMain) return;
     this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.CustId, this.listCustIdToExclude, CommonConstant.CustomerPersonal);
   }
   //#endregion
@@ -194,11 +201,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     );
   }
 
-  customPattern: Array<CustomPatternObj>;
+  customPattern: Array<CustomPatternObj> = new Array<CustomPatternObj>();
   getInitPattern() {
     this.customPattern = new Array<CustomPatternObj>();
     this.regexService.getListPattern().subscribe(
-      response => {
+      (response) => {
         this.resultPattern = response[CommonConstant.ReturnObj];
         if (this.resultPattern != undefined) {
           for (let i = 0; i < this.resultPattern.length; i++) {
@@ -214,6 +221,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       }
     );
   }
+
 
   //#region GetExisting / mode edit
   async GetExistingData() {
@@ -449,7 +457,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       CustPersonalObj: custPersonalObj,
       CustAddrObj: this.custObjToSave.CustAddr
     };
-    
+
     this.outputAfterSave.emit(reqEditObj);
   }
   //#endregion
