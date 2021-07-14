@@ -19,6 +19,9 @@ export class RegexService {
           case "^[0-9]{15}$":
             errMessage = 'must be numeric and 15 characters';
             break;
+          case "^\\d{0,20}$":
+            errMessage = 'must be numeric and between 20 characters';
+            break;
           default:
             errMessage = 'Not yet setting';
             break;

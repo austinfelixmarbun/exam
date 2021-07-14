@@ -166,7 +166,7 @@ export const customCurrencyMaskConfig = {
     UcuploadModule,
     UcdropdownlistModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
-    
+    UcdropdownlistModule
   ],
   declarations: [
     CustomerPagingComponent, CustAssetDetailComponent,

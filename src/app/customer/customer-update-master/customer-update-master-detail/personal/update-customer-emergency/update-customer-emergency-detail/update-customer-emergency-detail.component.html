@@ -11,7 +11,7 @@
     <div class="col-md-4">Master Customer Data</div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adInsLabel adins-required-label" translate>Name</label>
+    <label class="col-md-2 adInsLabel adins-required-label" translate>Contact Person Name</label>
     <div class="col-md-4">
       <label>{{AppEmergencyData.CustName}}</label>
     </div>
@@ -26,7 +26,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adInsLabel adins-required-label" translate>Customer Relationship</label>
+    <label class="col-md-2 adins-label" translate>Customer Relationship</label>
     <div class="col-md-4">
       <label>{{appCustRelationship}}</label>
     </div>
@@ -34,16 +34,14 @@
       <button *ngIf="CustomerEmergencyForm.controls.CustRelation.value != AppEmergencyData.CustRelation" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('CustRelation', '')">Copy</button>
     </div>
     <div class="col-md-4">
-      <select class="form-control adInsInput" formControlName="CustRelation"
-        [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerEmergencyForm.controls.CustRelation.invalid}">
-        <option *ngFor="let item of CustRelationList" [value]="item.Key">{{item.Value}}</option>
-      </select>
+      <lib-ucdropdownlist [dropdownListObj]="ddlMrCustRelationshipCode" [parentForm]="CustomerEmergencyForm" [enjiForm]="enjiForm"
+            [identifier]="'CustRelation'"></lib-ucdropdownlist>	
       <lib-uc-show-errors [control]="CustomerEmergencyForm.controls.CustRelation" [submit]="enjiForm.submitted">
       </lib-uc-show-errors>
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adins-required-label" translate>ID Type</label>
+    <label class="col-md-2 adins-label" translate>ID Type</label>
     <div class="col-md-4">
       <label>{{appIdType}}</label>
     </div>
@@ -51,16 +49,14 @@
       <button *ngIf="CustomerEmergencyForm.controls.IdType.value != AppEmergencyData.IdType" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IdType', '')">Copy</button>
     </div>
     <div class="col-md-4">
-      <select class="form-control adInsInput" formControlName="IdType"
-        [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerEmergencyForm.controls.IdType.invalid}">
-        <option *ngFor="let item of IdTypeList" [value]="item.Key">{{item.Value}}</option>
-      </select>
+      <lib-ucdropdownlist [dropdownListObj]="ddlIdType" [parentForm]="CustomerEmergencyForm" [enjiForm]="enjiForm"
+            [identifier]="'IdType'" (callback)="setValidatorPattern()"></lib-ucdropdownlist>	
       <lib-uc-show-errors [control]="CustomerEmergencyForm.controls.IdType" [submit]="enjiForm.submitted">
       </lib-uc-show-errors>
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adins-required-label" translate>ID No</label>
+    <label class="col-md-2 adins-label" translate>ID No</label>
     <div class="col-md-4">
       {{AppEmergencyData.IdNo}}
     </div>
@@ -70,12 +66,12 @@
     <div class="col-md-4">
       <input type="text" class="form-control adInsInput" formControlName="IdNo"
         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerEmergencyForm.controls.IdNo.invalid}">
-      <lib-uc-show-errors [control]="CustomerEmergencyForm.controls.IdNo" [submit]="enjiForm.submitted">
+      <lib-uc-show-errors [customPattern]="customPattern" [control]="CustomerEmergencyForm.controls.IdNo" [submit]="enjiForm.submitted">
       </lib-uc-show-errors>
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adins-required-label" translate>Birth Place</label>
+    <label class="col-md-2 adins-label" translate>Birth Place</label>
     <div class="col-md-4">
       {{AppEmergencyData.BirthPlace}}
     </div>
@@ -90,7 +86,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adins-required-label" translate>Birth Date</label>
+    <label class="col-md-2 adins-label" translate>Birth Date</label>
     <div class="col-md-4">
       {{AppEmergencyData.BirthDate}}
     </div>
@@ -99,13 +95,13 @@
     </div>
     <div class="col-md-4">
       <input type="date" class="form-control adInsInput" formControlName="BirthDate"
-        [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerEmergencyForm.controls.BirthDate.invalid}">
+      [max]="businessDtMin | date: 'yyyy-MM-dd'" [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerEmergencyForm.controls.BirthDate.invalid}">
       <lib-uc-show-errors [control]="CustomerEmergencyForm.controls.BirthDate" [submit]="enjiForm.submitted">
       </lib-uc-show-errors>
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adInsLabel adins-required-label" translate>Gender</label>
+    <label class="col-md-2 adInsLabel adins-label" translate>Gender</label>
     <div class="col-md-4">
       <label>{{appGender}}</label>
     </div>
@@ -113,26 +109,10 @@
       <button *ngIf="CustomerEmergencyForm.controls.Gender.value != AppEmergencyData.Gender" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Gender', '')">Copy</button>
     </div>
     <div class="col-md-4">
-      <select class="form-control adInsInput" formControlName="Gender"
-        [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerEmergencyForm.controls.Gender.invalid}">
-        <option *ngFor="let item of GenderList" [value]="item.Key">{{item.Value}}</option>
-      </select>
+      <lib-ucdropdownlist [dropdownListObj]="ddlGender" [parentForm]="CustomerEmergencyForm" [enjiForm]="enjiForm"
+            [identifier]="'Gender'"></lib-ucdropdownlist>
       <lib-uc-show-errors [control]="CustomerEmergencyForm.controls.Gender" [submit]="enjiForm.submitted">
       </lib-uc-show-errors>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-md-2 adInsLabel" translate>Profession</label>
-    <div class="col-md-4">
-      <label>{{AppEmergencyData.Profession}}</label>
-    </div>
-    <div class="col-md-2">
-      <button *ngIf="CustomerEmergencyForm.controls.Profession.value != AppEmergencyData.Profession" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Profession', 'Profession')">Copy</button>
-    </div>
-    <div class="col-md-4">
-      <lib-uclookupgeneric [lookupInput]="lookupObj['Profession']" [parentForm]="CustomerEmergencyForm" [enjiForm]="enjiForm"
-          [identifier]="'ProfessionLookup'" (lookup)="getProfessionData($event)">
-      </lib-uclookupgeneric>
     </div>
   </div>
   <div class="form-group row">
@@ -151,7 +131,7 @@
     </div>
   </div>
   <div class="form-group row"> 
-    <label class="col-md-2" translate>Mobile Phone 1</label>
+    <label class="col-md-2 adins-required-label" translate>Mobile Phone 1</label>
     <div class="col-md-4">
       <label>{{AppEmergencyData.MobilePhn1}}</label>
     </div>
@@ -181,7 +161,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adInsLabel adins-required-label" translate>Legal Address</label>
+    <label class="col-md-2 adInsLabel adins-label" translate>Legal Address</label>
     <div class="col-md-4">
       <label>{{AppEmergencyData.Address}}</label>
     </div>
@@ -196,7 +176,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adInsLabel adins-required-label" translate>RT / RW</label>
+    <label class="col-md-2 adInsLabel" translate>RT / RW</label>
     <div class="col-md-4">
       <label>{{AppEmergencyData.AreaCode4}} / {{AppEmergencyData.AreaCode3}}</label>
     </div>
@@ -216,7 +196,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adInsLabel adins-required-label" translate>Zipcode</label>
+    <label class="col-md-2 adInsLabel" translate>Zipcode</label>
     <div class="col-md-4">
       <label>{{AppEmergencyData.Zipcode}}</label>
     </div>
@@ -229,7 +209,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adInsLabel adins-required-label" translate>Kelurahan</label>
+    <label class="col-md-2 adInsLabel" translate>Kelurahan</label>
     <div class="col-md-4">
       <label>{{AppEmergencyData.AreaCode2}}</label>
     </div>
@@ -243,7 +223,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adInsLabel adins-required-label" translate>Kecamatan</label>
+    <label class="col-md-2 adInsLabel" translate>Kecamatan</label>
     <div class="col-md-4">
       <label>{{AppEmergencyData.AreaCode1}}</label>
     </div>
@@ -257,7 +237,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adInsLabel adins-required-label" translate>City</label>
+    <label class="col-md-2 adInsLabel" translate>City</label>
     <div class="col-md-4">
       <label>{{AppEmergencyData.City}}</label>
     </div>

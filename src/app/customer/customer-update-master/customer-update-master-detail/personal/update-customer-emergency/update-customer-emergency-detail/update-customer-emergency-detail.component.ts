@@ -4,14 +4,20 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { RegexService } from 'app/customer/regex.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UpdateCustEmergencyObj } from 'app/shared/model/UpdateMasterCust/UpdateCustEmergencyObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { environment } from 'environments/environment';
+import { CookieService } from 'ngx-cookie';
 import { forkJoin } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
@@ -24,38 +30,45 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
   AppEmergencyData: UpdateCustEmergencyObj;
-  CustRelationList: Array<any>;
-  IdTypeList: Array<any>;
-  GenderList: Array<any>;
+  MasterCustEmergencyData: UpdateCustEmergencyObj;
   lookupObj: Record<string, any>;
   DisplayName: Record<string, any>;
   ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   IsAddressDifferent: boolean;
+  resultPattern: any;
   appCustRelationship: string;
   appIdType: string;
   appGender: string;
+  MaxDate: Date;
+  businessDtMin: Date;
+  ddlMrCustRelationshipCode: UcDropdownListObj = new UcDropdownListObj();
+  ddlIdType: UcDropdownListObj = new UcDropdownListObj();
+  ddlGender: UcDropdownListObj = new UcDropdownListObj();
+  customPattern: Array<CustomPatternObj> = new Array<CustomPatternObj>();
+  GenderList: Array<any> = new Array<any>();
+  CustRelationList: Array<any> = new Array<any>();
+  IdTypeList: Array<any> = new Array<any>();
 
   CustomerEmergencyForm = this.fb.group({
     CustEmergencyId: [0],
     CustId: [0],
     CustName: ['', [Validators.required]],
-    CustRelation: ['', [Validators.required]],
+    CustRelation: [''],
     IdType: [''],
     IdNo: [''],
-    BirthPlace: ['', [Validators.required]],
-    BirthDate: ['', [Validators.required]],
-    Gender: ['', [Validators.required]],
-    Profession: [''],
+    BirthPlace: [''],
+    BirthDate: [''],
+    Gender: [''],
     Email: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
     MobilePhn1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     MobilePhn2: ['', [Validators.pattern("^[0-9]+$")]],
-    Address: ['', [Validators.required]],
-    Zipcode: ['', [Validators.required]],
-    AreaCode1: ['', [Validators.required]],
-    AreaCode2: ['', [Validators.required]],
-    AreaCode3: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-    AreaCode4: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-    City: ['', [Validators.required]],
+    Address: [''],
+    Zipcode: [''],
+    AreaCode1: [''],
+    AreaCode2: [''],
+    AreaCode3: ['', [Validators.pattern("^[0-9]+$")]],
+    AreaCode4: ['', [Validators.pattern("^[0-9]+$")]],
+    City: [''],
     RowVersion: ['']
   });
 
@@ -63,36 +76,33 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService,
+    private regexService: RegexService
   ) {
     this.IsAddressDifferent = false;
     this.ResponseTab = new EventEmitter<any>();
-    this.CustRelationList = new Array<Object>();
-    this.IdTypeList = new Array<any>();
-    this.GenderList = new Array<any>();
     this.AppEmergencyData = new UpdateCustEmergencyObj();
-    // this.DisplayName = new Object();
-    // this.lookupObj = new Object();
     this.lookupObj = {
-      Zipcode: new InputLookupObj(),
-      Profession: new InputLookupObj()
+      Zipcode: new InputLookupObj()
     };
     this.DisplayName = {
-      Zipcode: "",
-      Profession: ""
+      Zipcode: ""
     };
 
     this.lookupObj["Zipcode"].urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.lookupObj["Zipcode"].pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.lookupObj["Zipcode"].genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-
-    this.lookupObj["Profession"].urlJson = "./assets/lookup/lookupCustomerProfession.json";
-    this.lookupObj["Profession"].pagingJson = "./assets/lookup/lookupCustomerProfession.json";
-    this.lookupObj["Profession"].genericJson = "./assets/lookup/lookupCustomerProfession.json";
-    this.lookupObj["Profession"].isRequired = false;
   }
 
   ngOnInit() {
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.MaxDate = new Date(context[CommonConstant.BUSINESS_DT]);
+    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
+    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
+
+    this.initDropdownListObj();
+    this.getInitPattern();
     var datePipe = new DatePipe("en-US");
     this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
     let getDetail = this.http.post(URLConstant.GetCustEmergencyDataForUpdateMasterCustEmergency, this.ReqCustDataTrxIdObj);
@@ -105,6 +115,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     forkJoin([getDetail, getCustRelationship, getIdType, getGender]).pipe(
       map((response) => {
         this.AppEmergencyData = response[0]["AppCustEmergency"];
+        this.MasterCustEmergencyData = response[0]["MasterCustEmergency"];
         this.CustRelationList = response[1][CommonConstant.ReturnObj];
         this.IdTypeList = response[2][CommonConstant.ReturnObj];
         this.GenderList = response[3][CommonConstant.ReturnObj];
@@ -114,7 +125,27 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
         if (this.AppEmergencyData["BirthDate"]) {
           this.AppEmergencyData["BirthDate"] = datePipe.transform(this.AppEmergencyData["BirthDate"], 'yyyy-MM-dd');
         }
-        this.CustomerEmergencyForm.patchValue({ ...response[0]["MasterCustEmergency"] });
+        this.CustomerEmergencyForm.patchValue({
+          CustId: this.MasterCustEmergencyData.CustId,
+          CustName: this.MasterCustEmergencyData.CustName,
+          CustRelation: this.MasterCustEmergencyData.CustRelation,
+          IdType: this.MasterCustEmergencyData.IdType,
+          IdNo: this.MasterCustEmergencyData.IdNo,
+          BirthPlace: this.MasterCustEmergencyData.BirthPlace,
+          BirthDate: this.MasterCustEmergencyData.BirthDate,
+          Gender: this.MasterCustEmergencyData.Gender,
+          Email: this.MasterCustEmergencyData.Email,
+          MobilePhn1: this.MasterCustEmergencyData.MobilePhn1,
+          MobilePhn2: this.MasterCustEmergencyData.MobilePhn2,
+          Address: this.MasterCustEmergencyData.Address,
+          AreaCode4: this.MasterCustEmergencyData.AreaCode4,
+          AreaCode3: this.MasterCustEmergencyData.AreaCode3,
+          AreaCode2: this.MasterCustEmergencyData.AreaCode2,
+          AreaCode1: this.MasterCustEmergencyData.AreaCode1,
+          City: this.MasterCustEmergencyData.City,
+          Zipcode: this.MasterCustEmergencyData.Zipcode,
+          RowVersion: this.MasterCustEmergencyData.RowVersion
+        });
         this.DisplayName["Zipcode"] = this.AppEmergencyData["Zipcode"];
         if (response[0]["MasterCustEmergency"]["Address"] != response[0]["AppCustEmergency"]["Address"] ||
           response[0]["MasterCustEmergency"]["AreaCode1"] != response[0]["AppCustEmergency"]["AreaCode1"] ||
@@ -126,25 +157,17 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
           this.IsAddressDifferent = true;
         }
         return response[0];
-      }),
-      mergeMap((response) => {
-        let getAppProfession = this.http.post(URLConstant.GetRefProfessionByProfessionCode, { Code: response["AppCustEmergency"]["Profession"] });
-        let getMasterProfession = this.http.post(URLConstant.GetRefProfessionByProfessionCode, { Code: response["MasterCustEmergency"]["Profession"] });
-        return forkJoin([getMasterProfession, getAppProfession]);
       })
     ).toPromise().then(
       (response) => {
-        this.lookupObj["Profession"]["nameSelect"] = response[0]["ProfessionName"];
         this.lookupObj["Zipcode"]["nameSelect"] = this.CustomerEmergencyForm.controls["Zipcode"].value;
-        this.lookupObj["Profession"]["jsonSelect"] = { Zipcode: this.CustomerEmergencyForm.controls["Zipcode"].value };
-        this.lookupObj["Zipcode"]["jsonSelect"] = { ProfessionName: response[0]["ProfessionName"] };
-        this.lookupObj["Profession"]["isReady"] = true;
+        this.lookupObj["Zipcode"]["jsonSelect"] = { Zipcode: this.CustomerEmergencyForm.controls["Zipcode"].value };
         this.lookupObj["Zipcode"]["isReady"] = true;
-        this.DisplayName["Profession"] = response[1]["ProfessionName"];
 
         this.appCustRelationship = this.CustRelationList.find(x => x.Key == this.AppEmergencyData.CustRelation).Value;
         this.appIdType = this.IdTypeList.find(x => x.Key == this.AppEmergencyData.IdType).Value;
         this.appGender = this.GenderList.find(x => x.Key == this.AppEmergencyData.Gender).Value;
+        this.setValidatorPattern();
       }
     ).catch(
       (error) => {
@@ -174,6 +197,10 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       obj[formControlName] = this.AppEmergencyData[formControlName];
       this.CustomerEmergencyForm.patchValue(obj);
 
+      if(formControlName == 'IdType' || formControlName == 'IdNo'){
+        this.setValidatorPattern();
+      }
+
       if (lookupName) {
         this.lookupObj[lookupName]["isReady"] = false;
         this.lookupObj[lookupName]["nameSelect"] = this.DisplayName[formControlName];
@@ -201,12 +228,6 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     this.lookupObj["Zipcode"]["isReady"] = false;
     this.lookupObj["Zipcode"]["nameSelect"] = this.DisplayName["Zipcode"];
     this.lookupObj["Zipcode"]["isReady"] = true;
-    this.lookupObj["Profession"]["isReady"] = false;
-    this.lookupObj["Profession"]["nameSelect"] = this.DisplayName["Profession"];
-    this.lookupObj["Profession"]["isReady"] = true;
-    this.CustomerEmergencyForm.get("ProfessionLookup").patchValue({
-      value: this.DisplayName["Profession"]
-    });
     this.CustomerEmergencyForm.get("ZipcodeLookup").patchValue({
       value: this.DisplayName["Zipcode"]
     });
@@ -229,11 +250,6 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     }
   }
 
-  getProfessionData(e) {
-    this.CustomerEmergencyForm.patchValue({
-      Profession: e.ProfessionCode
-    });
-  }
 
   getZipcodeData(e) {
     this.CustomerEmergencyForm.patchValue({
@@ -250,6 +266,9 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   }
 
   SaveValue() {
+    if(this.checkEmergencyContact() == false){
+      return;
+    }
     this.http.post(URLConstant.UpdateMasterCustEmergency, this.CustomerEmergencyForm.value).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
@@ -259,5 +278,107 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  checkEmergencyContact(){
+    var flag: boolean = true;
+
+    let max17Yodt = new Date(this.MaxDate);
+    let d1 = new Date(this.CustomerEmergencyForm.controls["BirthDate"].value);
+    let d2 = new Date(this.MaxDate);
+    max17Yodt.setFullYear(d2.getFullYear() - 17);
+
+    if (d1 > max17Yodt) {
+      this.toastr.warningMessage(ExceptionConstant.CUSTOMER_AGE_MUST_17_YEARS_OLD);
+      flag = false;
+    }
+
+    if(d1 > d2){
+      this.toastr.warningMessage(ExceptionConstant.BIRTH_DATE_CANNOT_MORE_THAN_BUSINESS_DATE);
+      flag = false;
+    }
+
+    return flag;
+  }
+
+  initDropdownListObj(){
+
+    var refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustPersonalRelationship,
+      MappingCode: null
+    };
+    this.ddlMrCustRelationshipCode = new UcDropdownListObj;
+    this.ddlMrCustRelationshipCode.enviromentUrl = environment.FoundationR3Url;
+    this.ddlMrCustRelationshipCode.apiPath = "/RefMaster/GetListKeyValueActiveByCode";
+    this.ddlMrCustRelationshipCode.ddlType = "one";
+    this.ddlMrCustRelationshipCode.requestObj = refMasterObjMrIdTypeCode;
+    this.ddlMrCustRelationshipCode.isObject = true;
+    this.ddlMrCustRelationshipCode.customObjName = "ReturnObject";
+
+    var refMasterObjIdType: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
+      MappingCode: null
+    };
+    this.ddlIdType = new UcDropdownListObj;
+    this.ddlIdType.enviromentUrl = environment.FoundationR3Url;
+    this.ddlIdType.apiPath = "/RefMaster/GetListKeyValueActiveByCode";
+    this.ddlIdType.ddlType = "one";
+    this.ddlIdType.requestObj = refMasterObjIdType;
+    this.ddlIdType.isObject = true;
+    this.ddlIdType.customObjName = "ReturnObject";
+    this.ddlIdType.isSelectOutput = true;
+
+    var refMasterObjGender: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
+      MappingCode: null
+    };
+    this.ddlGender = new UcDropdownListObj();
+    this.ddlGender.enviromentUrl = environment.FoundationR3Url;
+    this.ddlGender.apiPath = "/RefMaster/GetListKeyValueActiveByCode";
+    this.ddlGender.ddlType = "one";
+    this.ddlGender.requestObj = refMasterObjGender;
+    this.ddlGender.isObject = true;
+    this.ddlGender.customObjName = "ReturnObject";
+  }
+
+  getInitPattern() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if (this.resultPattern != undefined) {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+            this.customPattern.push(patternObj);
+          }
+          this.setValidatorPattern();
+        }
+      }
+    );
+  }
+
+  setValidatorPattern() {
+    let idTypeValue: string;
+    idTypeValue = this.CustomerEmergencyForm.controls["IdType"].value;
+    var pattern: string = '';
+    if (idTypeValue != undefined) {
+      if (this.resultPattern != undefined) {
+        var result = this.resultPattern.find(x => x.Key == idTypeValue)
+        if (result != undefined) {
+          pattern = result.Value;
+        }
+      }
+    }
+    this.setValidator(pattern);
+  }
+
+  setValidator(pattern: string) {
+    if (pattern != undefined) {
+      this.CustomerEmergencyForm.controls["IdNo"].setValidators(Validators.pattern(pattern));
+      this.CustomerEmergencyForm.controls["IdNo"].updateValueAndValidity();
+    }
   }
 }
