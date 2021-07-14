@@ -43,14 +43,10 @@ export class CustomerEmergencyContactComponent implements OnInit {
   Country: any;
   tempCust: any;
   tempIdType: any;
-  tempCountry: any;
-  tempProfession: any;
-  tempNationality: any;
   tempCustAddress: any;
   tempCustPersonal: any;
   tempCustAddrObj: GenericObj = new GenericObj();
   tempMrGenderCode: any;
-  tempProfessionCodeObj: any;
   tempMrCustRelationshipCode: any;
   tempCustPersonalContactPerson: CustPersonalContactPersonObj;
 
@@ -72,7 +68,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
 
   IdCust: number;
   tempCustId: number;
-  MaxDate: Date;
+  BusinessDt: Date;
   flag: boolean;
   tempKTPCheck: boolean;
   tempMobilePhone1: boolean;
@@ -80,7 +76,6 @@ export class CustomerEmergencyContactComponent implements OnInit {
   businessDtMax: Date;
 
   KTP: string;
-  tempCountryCode: string;
 
   CustomerContactForm = this.fb.group({
     MrIdTypeCode: [''],
@@ -117,7 +112,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
-    this.MaxDate = new Date(context[CommonConstant.BUSINESS_DT]);
+    this.BusinessDt = new Date(context[CommonConstant.BUSINESS_DT]);
 
     this.lookUpObj = new InputLookupObj();
     this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
@@ -485,36 +480,36 @@ export class CustomerEmergencyContactComponent implements OnInit {
   //END OF URS-LOS-041
   
   checkEmergencyCustContactPerson(){
-    var flag: boolean = true;
+    var isValid: boolean = true;
 
-    let max17Yodt = new Date(this.MaxDate);
-    let d1 = new Date(this.CustomerContactForm.controls["BirthDt"].value);
-    let d2 = new Date(this.MaxDate);
-    let d3 = new Date(this.CustomerContactForm.controls["IdExpiredDt"].value);
-    max17Yodt.setFullYear(d2.getFullYear() - 17);
+    let max17Yodt = new Date(this.BusinessDt);
+    let birthDt = new Date(this.CustomerContactForm.controls["BirthDt"].value);
+    let tempBusinessDt = new Date(this.BusinessDt);
+    let idExpiredDt = new Date(this.CustomerContactForm.controls["IdExpiredDt"].value);
+    max17Yodt.setFullYear(tempBusinessDt.getFullYear() - 17);
 
-    if (d1 > max17Yodt) {
+    if (birthDt > max17Yodt) {
       this.toastr.warningMessage(ExceptionConstant.CUSTOMER_AGE_MUST_17_YEARS_OLD);
-      flag = false;
+      isValid = false;
     }
 
-    if(d1 > d2){
+    if(birthDt > tempBusinessDt){
       this.toastr.warningMessage(ExceptionConstant.BIRTH_DATE_CANNOT_MORE_THAN_BUSINESS_DATE);
-      flag = false;
+      isValid = false;
     }
 
-    if(d2 > d3 || d2.getDate() === d3.getDate()){
+    if(tempBusinessDt > idExpiredDt || tempBusinessDt.getDate() === idExpiredDt.getDate()){
       let checkIdType = this.CustomerContactForm.controls["MrIdTypeCode"].value;
       if(checkIdType == CommonConstant.MrIdTypeCodeEKTP || checkIdType == CommonConstant.MrIdTypeCodeNPWP || checkIdType == CommonConstant.MrIdTypeCodeAKTA){
-        flag = true;
+        isValid = true;
       }
       else{
         this.toastr.warningMessage(ExceptionConstant.ID_EXPIRED_DATE_CANNOT_LESS_THAN + 'Equal Business Date');
-        flag = false;
+        isValid = false;
       }
     }
 
-    return flag;
+    return isValid;
   }
   
   initDropdownListObj(){
