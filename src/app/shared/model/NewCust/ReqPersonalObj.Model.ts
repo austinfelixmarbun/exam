@@ -5,7 +5,7 @@ import { CustPersonalObj } from "../CustPersonalObj.Model";
 export class ReqPersonalObj {
     CustObj: CustObj;
     CustPersonalObj: CustPersonalObj;
-    CustAddrObj: CustAddrObj;
+    CustAddr: CustAddrObj;
     
     constructor() {
 

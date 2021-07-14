@@ -360,7 +360,7 @@ export class EditMainDataPersonalComponent implements OnInit {
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": this.CustId, Page: 'Edit', From: 'CustGuarantor' });
         }
         else {
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": this.CustId, From: 'CustPaging' });
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": this.CustId });
         }
       }
     );

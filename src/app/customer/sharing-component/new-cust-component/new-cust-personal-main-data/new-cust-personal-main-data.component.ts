@@ -77,18 +77,19 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
     this.initDdlRefMaster(this.RefMasterTypeCodeGender);
     this.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat);
-    console.log(this.DictUcDDLObj);
     await this.GetExistingData();
   }
 
   //#region Set Data
-  businessDtMin: Date = null;
+  businessDtMin: Date;
+  businessDtMax: Date;
   InitData() {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setFullYear(this.businessDtMin.getFullYear() - 17);
+    this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
+    this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
 
-    console.log(this.businessDtMin);
     this.inputAddressObj = NewCustSetData.BindSetLegalAddr();
   }
 
@@ -187,20 +188,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   //#endregion
 
   //#region Get Data
-  DictListRefMaster: { [id: string]: Array<KeyValueObj> } = {};
-  GetListRefMaster(refMasterTypeCode: string, mappingCode: string = null) {
-    let refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: refMasterTypeCode,
-      MappingCode: mappingCode
-    }
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
-      (response) => {
-        this.DictListRefMaster[refMasterTypeCode] = response[CommonConstant.ReturnObj];
-        if (this.RefMasterTypeCodeIdType == refMasterTypeCode) this.onChangeIdType();
-      }
-    );
-  }
-
   customPattern: Array<CustomPatternObj> = new Array<CustomPatternObj>();
   getInitPattern() {
     this.customPattern = new Array<CustomPatternObj>();
@@ -219,7 +206,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           this.setValidatorPattern();
         }
       }
-    );
+    ).unsubscribe();
   }
 
 
@@ -455,7 +442,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     var reqEditObj: ReqPersonalObj = {
       CustObj: this.custObjToSave,
       CustPersonalObj: custPersonalObj,
-      CustAddrObj: this.custObjToSave.CustAddr
+      CustAddr: this.custObjToSave.CustAddr
     };
 
     this.outputAfterSave.emit(reqEditObj);

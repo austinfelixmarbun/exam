@@ -3,7 +3,6 @@
     <div class="card-body">
       <div class="px-3">
         <div class="addEdit">
-          <h4 class="form-section card-title" translate> Customer Personal </h4>
           <form class="form form-horizontal" [formGroup]="CustomerForm" (ngSubmit)="CustomerForm.valid && SaveForm()"
             #enjiForm="ngForm">
             <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
@@ -78,7 +77,8 @@
                   </div>
 
                   <div class="form-group row">
-                    <label class="col-md-4 adInsLabel" [ngClass]="{'adins-required-label' : !IsKTPCheck}" translate>ID Expired Date</label>
+                    <label class="col-md-4 adInsLabel" [ngClass]="{'adins-required-label' : !IsKTPCheck}" translate>ID
+                      Expired Date</label>
                     <div class="col-md-8">
                       <input *ngIf="noExpDate.includes(CustomerForm.controls.MrIdTypeCode.value)" readonly type="date"
                         class="form-control" id="idExpDt" formControlName="IdExpiredDt">
@@ -128,7 +128,7 @@
 
                   <div class="form-group row">
                     <label class="col-md-4 adins-required-label" translate>Birth Date</label>
-                    <div class="col-md-8" *ngIf="businessDtMin != null">
+                    <div class="col-md-8">
                       <input type="date" class="form-control adInsInput" formControlName="BirthDt"
                         [max]="businessDtMin | date: 'yyyy-MM-dd'"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.BirthDt.invalid}">
