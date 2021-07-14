@@ -30,7 +30,7 @@
                   RELATIONSHIP
                 </span>
               </th>
-              <th style="text-align: left;">
+              <th style="text-align: center;">
                 <span class="thead-header" name='AppAction' translate>
                   COPY
                 </span>
@@ -47,7 +47,7 @@
               <td style="text-align: left;">{{item.CustName}}</td>
               <td style="text-align: left;">{{item.CustIdType}} / {{item.CustIdNo}}</td>
               <td style="text-align: left;">{{item.CustRelationship}}</td>
-              <td style="text-align: center; padding-left: 0;">
+              <td style="text-align: center;">
                 <a (click)="addFamilyHandler(i)" *ngIf="!item.IsMasterData">
                   Copy
                 </a>
@@ -75,7 +75,7 @@
                   RELATIONSHIP
                 </span>
               </th>
-              <th style="text-align: left;">
+              <th style="text-align: center;">
                 <span class="thead-header" name='CustAction' translate>
                   UNDO
                 </span>
@@ -92,7 +92,7 @@
               <td style="text-align: left;">{{item.CustName}}</td>
               <td style="text-align: left;">{{item.CustIdType}} / {{item.CustIdNo}}</td>
               <td style="text-align: left;">{{item.CustRelationship}}</td>
-              <td style="text-align: center; padding-left: 0;">
+              <td style="text-align: center;">
                 <a (click)="cancelFamilyHandler(i)" *ngIf="!item.IsMasterData">
                   Undo
                 </a>

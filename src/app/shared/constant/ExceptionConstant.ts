@@ -39,5 +39,7 @@ export class ExceptionConstant {
     public static CUSTOMER_AGE_MUST_17_YEARS_OLD = "Customer age must be at least 17 year old";
     public static BIRTH_DATE_CANNOT_MORE_THAN_BUSINESS_DATE = "Birth Date can not be more than Business Date";
     public static ID_EXPIRED_DATE_CANNOT_LESS_THAN = "Id Expired Date can not be less than ";
+    public static MUST_INPUT_SPOUSE_DATA = "Please Input Spouse Data in Family!";
+    public static MUST_CHOOSE_SPOUSE_DATA = "Please Choose at least One Spouse Data!";
 
 }

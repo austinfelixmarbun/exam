@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { UpdateCustFamilyObj } from 'app/shared/model/UpdateMasterCust/UpdateCustFamilyObj.Model';
@@ -16,6 +17,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class UpdateCustomerFamilyComponent implements OnInit {
   @Input() CustDataTrxId: number;
+  @Input() isMarried: boolean = false;
   @Output() ResponseTab: EventEmitter<any>;
   ListAppFamily: Array<UpdateCustFamilyObj>;
   ListCustFamily: Array<UpdateCustFamilyObj>;
@@ -79,6 +81,12 @@ export class UpdateCustomerFamilyComponent implements OnInit {
 
   SaveValue() {
     var request = new Array<Object>();
+    if(this.isMarried){
+      if( this.ListAppFamily.length != 0 && this.ListAppFamily.find(x => x.MrCustRelationship == 'SPOUSE') != null && (this.ListCustFamily.length == 0 || this.ListCustFamily.find(x => x.MrCustRelationship == 'SPOUSE') == null)){
+        this.toastr.warningMessage(ExceptionConstant.MUST_CHOOSE_SPOUSE_DATA);
+        return;
+      }
+    }
     for (const item of this.ListCustFamily) {
       if (!item["IsMasterData"]) {
         request.push(item);
