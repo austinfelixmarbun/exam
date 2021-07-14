@@ -161,7 +161,6 @@ export const customCurrencyMaskConfig = {
     MatTabsModule,
     UcuploadModule,
     NewCustomerSharingModule,
-    UcdropdownlistModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     UcdropdownlistModule
   ],

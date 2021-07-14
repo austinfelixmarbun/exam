@@ -154,8 +154,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
   //#endregion
 
-  // sepertinnya ga kepake, atau ubah nama method ny
-  ClearCustForm(CustObj = null) {
+  ClearCustForm() {
     this.CustomerForm = this.fb.group({
       CustName: ['', [Validators.required, Validators.maxLength(100)]],
       MrGenderCode: ['', [Validators.required]],
@@ -176,7 +175,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       SupplName: [''],
       SupplId: ['']
     });
-    this.checkStateIsVip();
   }
   //#endregion
 
@@ -435,7 +433,23 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     reqSubmitObj.CustObj.CustAddr.SubZipcode = tempForm["UcAddressZipcode"]["value"];
     reqSubmitObj.CustObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
 
+    reqSubmitObj= this.SetCustomerDataMode(reqSubmitObj);
     this.outputAfterSave.emit(reqSubmitObj);
+  }
+
+  private SetCustomerDataMode(reqSubmitObj: ReqPersonalObj) {
+    switch (this.CustDataMode) {
+      case this.CustDataModeMain:
+        reqSubmitObj.CustObj.IsCustomer = true;
+        break;
+      case this.CustDataModeFamily:
+        reqSubmitObj.CustObj.IsFamily = true;
+        break;
+      case this.CustDataModeShareholder:
+        reqSubmitObj.CustObj.IsShareholder = true;
+        break;
+    }
+    return reqSubmitObj;
   }
   //#endregion
 }
