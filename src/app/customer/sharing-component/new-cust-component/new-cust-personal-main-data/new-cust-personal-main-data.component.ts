@@ -154,7 +154,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
   //#endregion
 
-  ClearCustForm(CustObj = null) {
+  ClearCustForm() {
     this.CustomerForm = this.fb.group({
       CustName: ['', [Validators.required, Validators.maxLength(100)]],
       Gender: ['', [Validators.required]],
@@ -176,7 +176,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       SupplName: [''],
       SupplId: ['']
     });
-    this.checkStateIsVip();
   }
   //#endregion
 
@@ -411,7 +410,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     } else {
       this.custObjToSave.VipNotes = null;
     }
-
+    this.SetCustomerDataMode();
     let custPersonalObj: CustPersonalObj = this.tempCustPersonalObj;
     custPersonalObj.CustFullName = tempForm["CustName"];
     custPersonalObj.MrGenderCode = tempForm["Gender"];
@@ -438,6 +437,20 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     };
     
     this.outputAfterSave.emit(reqEditObj);
+  }
+
+  private SetCustomerDataMode() {
+    switch (this.CustDataMode) {
+      case this.CustDataModeMain:
+        this.custObjToSave.IsCustomer = true;
+        break;
+      case this.CustDataModeFamily:
+        this.custObjToSave.IsFamily = true;
+        break;
+      case this.CustDataModeShareholder:
+        this.custObjToSave.IsShareholder = true;
+        break;
+    }
   }
   //#endregion
 }

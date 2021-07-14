@@ -23,6 +23,10 @@ export class CustObj {
 
     constructor() {
         this.CustAddr = new CustAddrObj();
+        this.IsCustomer = false;
+        this.IsFamily = false;
+        this.IsGuarantor = false;
+        this.IsShareholder = false;
         this.RowVersion = "";
     }
 }

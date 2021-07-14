@@ -6,16 +6,16 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AddCustObj } from 'app/shared/model/AddCustObj.Model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
 import { DuplicateCustObj } from 'app/shared/model/DuplicateCust.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { CustCompanyMgmntShrholderObj } from 'app/shared/model/NewCust/CustCompanyMgmntShrholderObj.Model';
 import { CustDuplicateObj } from 'app/shared/model/NewCust/CustDuplicateObj.Model';
+import { CustPersonalFamilyObj } from 'app/shared/model/NewCust/CustPersonalFamilyObj.Model';
 import { NegCustDuplicateObj } from 'app/shared/model/NewCust/NegCustDuplicateObj.Model';
-import { ReqPersonalObj } from 'app/shared/model/NewCust/ReqPersonalObj.Model';
+import { ReqDupPersonalObj, ReqNegDupPersonalObj, ReqPersonalObj } from 'app/shared/model/NewCust/ReqPersonalObj.Model';
 import { ReqGetNegativeCustByNegativeCustNameAndCustTypeObj } from 'app/shared/model/Request/NegativeCust/ReqGetNegativeCustObj.model';
 import { ResNegativeCustObj } from 'app/shared/model/Response/NegativeCust/ResNegativeCustObj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cust-dup-check-header',
@@ -25,9 +25,11 @@ export class CustDupCheckHeaderComponent implements OnInit {
 
   @Input() CustPersonalObj: ReqPersonalObj;
   @Input() CustCoyObj: any;
+  @Input() CustPersonalFamilyData: CustPersonalFamilyObj;
   @Input() CustMgmntShareholderData: CustCompanyMgmntShrholderObj;
   @Input() CustType: string = CommonConstant.CustomerPersonal;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust;
+  @Output() outputSave: EventEmitter<string> = new EventEmitter();
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
 
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
@@ -86,83 +88,27 @@ export class CustDupCheckHeaderComponent implements OnInit {
   }
 
   EditCustPersonal(item: CustDuplicateObj) {
-    let CustNoObj = new GenericObj();
-    CustNoObj.CustNo = item.CustNo;
-    let addCustObj = new AddCustObj();
-    // this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustObj).subscribe(
-    this.http.post(URLConstant.GetCustPersonalForUpdateByCustNo, CustNoObj).pipe(
-      map((response) => {
-        addCustObj.CustObj = response['CustObj'];
-        addCustObj.CustPersonalObj = response['CustPersonalObj'];
-        return response;
-      }),
-      mergeMap((response) => {
-        let reqObj: GenericObj = new GenericObj();
-        reqObj.Id = addCustObj.CustObj.CustId;
-        reqObj.Code = CommonConstant.CustAddrTypeLegal;
-        return this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj);
-      })
-    ).subscribe(
-      (response) => {
-        if (this.CustDataMode == this.CustDataModeShareholder) {
-          addCustObj.CustObj.IsShareholder = true;
-        }
-        addCustObj.CustAddr = response as CustAddrObj;
-        addCustObj.CustObj.CustName = item.CustName;
-        addCustObj.CustObj.MrCustTypeCode = this.CustTypePersonal;
-        addCustObj.CustObj.MrIdTypeCode = this.CustPersonalObj.CustObj.MrIdTypeCode;
-        addCustObj.CustObj.IdNo = item.IdNo;
-        addCustObj.CustObj.IdExpiredDt = this.CustPersonalObj.CustObj.IdExpiredDt;
-        addCustObj.CustObj.TaxIdNo = item.TaxIdNo;
-        addCustObj.CustObj.IsVip = this.CustPersonalObj.CustObj.IsVip;
-        addCustObj.CustObj.IsAffiliateWithMf = this.CustPersonalObj.CustObj.IsAffiliateWithMf;
-        addCustObj.CustObj.VipNotes = this.CustPersonalObj.CustObj.VipNotes;
-        addCustObj.CustPersonalObj.CustFullName = item.CustName;
-        addCustObj.CustPersonalObj.MrGenderCode = this.CustPersonalObj.CustPersonalObj.MrGenderCode;
-        addCustObj.CustPersonalObj.BirthPlace = this.CustPersonalObj.CustPersonalObj.BirthPlace;
-        addCustObj.CustPersonalObj.BirthDt = item.BirthDt;
-        addCustObj.CustPersonalObj.MotherMaidenName = item.MotherMaidenName;
-        addCustObj.CustPersonalObj.IsRestInPeace = false;
+    let reqEditDupCheck: ReqDupPersonalObj = new ReqDupPersonalObj();
+    reqEditDupCheck.CustNo = item.CustNo;
+    reqEditDupCheck.IsCustomer = this.CustPersonalObj.CustObj.IsCustomer;
+    reqEditDupCheck.IsFamily = this.CustPersonalObj.CustObj.IsFamily;
+    reqEditDupCheck.IsShareholder = this.CustPersonalObj.CustObj.IsShareholder;
 
-        this.http.post(URLConstant.EditDuplicateCust, addCustObj).subscribe(
-          (response) => {
-            if (this.CustDataMode == this.CustDataModeFamily) {
-              // var requestFamily = {
-              //   CustId: this.CustFamilyTabData["CustId"],
-              //   FamilyId: addCustObj.CustObj.CustId,
-              //   MrCustRelationship: this.CustFamilyTabData["MrCustRelationship"]
-              // }
-              /// nggk bunyi kalau req ny cuman 3 itu tapi save ny kayak 1 customer semua di save ulang.
-              // this.http.post(URLConstant.AddCustPersonalFamily, requestFamily).toPromise().then(
-              //   (responseFamily) => {
-              //     this.ResponseSaveData.emit(responseFamily);
-              //   }
-              // ).catch(
-              //   (error) => {
-              //     console.log(error);
-              //   }
-              // );
-            }
-            else if (this.CustDataMode == this.CustDataModeShareholder) {
-              this.CustMgmntShareholderData.ShareholderId = addCustObj.CustObj.CustId;
-              this.http.post(URLConstant.AddCustCompanyMgmntShrholder, this.CustMgmntShareholderData).toPromise().then(
-                (responseShareholder) => {
-                  // this.ResponseSaveData.emit({ mode: 'check' });
-                }
-              ).catch(
-                (error) => {
-                  console.log(error);
-                }
-              );
-            }
-            else {
-              AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": addCustObj.CustObj.CustId });
-            }
-          }
-        );
+    if (this.CustDataMode == this.CustDataModeFamily) {
+      reqEditDupCheck.CustPersonalFamilyObj = this.CustPersonalFamilyData;
+    }
+    if (this.CustDataMode == this.CustDataModeShareholder) {
+      reqEditDupCheck.CustCompanyMgmntShrholderObj = this.CustMgmntShareholderData;
+    }
+    this.http.post(URLConstant.EditDuplicateCustPersonal, reqEditDupCheck).subscribe(
+      (response: GenericObj) => {
+        if (this.CustDataMode == this.CustDataModeMain) {
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response.Id });
+          return;
+        }
+        this.outputSave.emit("");
       }
     );
-
   }
 
   EditCustCoy() {
@@ -178,79 +124,36 @@ export class CustDupCheckHeaderComponent implements OnInit {
   }
 
   EditNegativeCustPersonal(item: NegCustDuplicateObj) {
-    let NegativeCustObj: ReqGetNegativeCustByNegativeCustNameAndCustTypeObj = new ReqGetNegativeCustByNegativeCustNameAndCustTypeObj();
+    let NegativeCustObj: ReqNegDupPersonalObj = new ReqNegDupPersonalObj();
     NegativeCustObj.CustName = item.CustName;
     NegativeCustObj.MrCustTypeCode = this.CustTypePersonal;
     NegativeCustObj.IdNo = item.IdNo;
-    this.http.post<ResNegativeCustObj>(URLConstant.GetNegativeCustByNegativeCustNameAndCustType, NegativeCustObj).subscribe(
+    this.http.post<GenericObj>(URLConstant.EditDuplicateNegativeCust, NegativeCustObj).subscribe(
       (response) => {
-        let RequestNegativeCustObj = response;
-
-        RequestNegativeCustObj.CustName = item.CustName;
-        RequestNegativeCustObj.MrCustTypeCode = this.CustTypePersonal;
-        RequestNegativeCustObj.MrIdTypeCode = item.MrIdType;
-        RequestNegativeCustObj.IdNo = item.IdNo;
-        RequestNegativeCustObj.IdExpiredDt = this.CustPersonalObj.CustObj.IdExpiredDt;
-        RequestNegativeCustObj.TaxIdNo = item.TaxIdNo;
-        RequestNegativeCustObj.IsVip = this.CustPersonalObj.CustObj.IsVip;
-        RequestNegativeCustObj.IsAffiliateWithMf = this.CustPersonalObj.CustObj.IsAffiliateWithMf;
-        RequestNegativeCustObj.VipNotes = this.CustPersonalObj.CustObj.VipNotes
-        RequestNegativeCustObj.CustFullName = item.CustName;
-        RequestNegativeCustObj.MrGenderCode = this.CustPersonalObj.CustPersonalObj.MrGenderCode;
-        RequestNegativeCustObj.BirthPlace = this.CustPersonalObj.CustPersonalObj.BirthPlace;
-        RequestNegativeCustObj.BirthDt = item.BirthDt;
-        RequestNegativeCustObj.MotherMaidenName = item.MotherMaidenName;
-        RequestNegativeCustObj.IsRestInPeace = false;
-
-        RequestNegativeCustObj.LegalAddr = this.CustPersonalObj.CustAddr.Addr;
-        RequestNegativeCustObj.AreaCode1 = this.CustPersonalObj.CustAddr.AreaCode1;
-        RequestNegativeCustObj.AreaCode2 = this.CustPersonalObj.CustAddr.AreaCode2;
-        RequestNegativeCustObj.AreaCode3 = this.CustPersonalObj.CustAddr.AreaCode3;
-        RequestNegativeCustObj.AreaCode4 = this.CustPersonalObj.CustAddr.AreaCode4;
-        RequestNegativeCustObj.City = this.CustPersonalObj.CustAddr.City;
-        RequestNegativeCustObj.Zipcode = this.CustPersonalObj.CustAddr.Zipcode;
-
-        this.http.post(URLConstant.EditDuplicateNegativeCust, RequestNegativeCustObj).subscribe(
-          (response) => {
-            if (this.CustDataMode == this.CustDataModeFamily) {
-              var requestFamily = {
-                // CustId: this.CustFamilyTabData["CustId"],
-                FamilyId: RequestNegativeCustObj.CustId,
-                // MrCustRelationship: this.CustFamilyTabData["MrCustRelationship"]
-              }
-              this.http.post(URLConstant.AddCustPersonalFamily, requestFamily).toPromise().then(
-                (responseFamily) => {
-                  // this.ResponseSaveData.emit(responseFamily);
-                }
-              ).catch(
-                (error) => {
-                  console.log(error);
-                }
-              );
-            }
-            else if (this.CustDataMode == this.CustDataModeShareholder) {
-              this.CustMgmntShareholderData.ShareholderId = RequestNegativeCustObj.CustId;
-              this.http.post(URLConstant.AddCustCompanyMgmntShrholder, this.CustMgmntShareholderData).toPromise().then(
-                (responseShareholder) => {
-                  // this.ResponseSaveData.emit({ mode: 'check' });
-                }
-              ).catch(
-                (error) => {
-                  console.log(error);
-                }
-              );
-            }
-            else {
-              AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response['CustId'], "From": 'CustPaging' });
-            }
-          }
-        );
+        if (this.CustDataMode == this.CustDataModeMain) {
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response.Id });
+          return;
+        }
+        this.outputSave.emit("");
       }
     );
   }
 
   EditNegativeCustCoy(item: NegCustDuplicateObj) {
-
+    let NegativeCustObj: ReqNegDupPersonalObj = new ReqNegDupPersonalObj();
+    NegativeCustObj.CustName = item.CustName;
+    NegativeCustObj.MrCustTypeCode = this.CustTypeCoy;
+    NegativeCustObj.IdNo = item.IdNo;
+    NegativeCustObj.MrCompanyTypeCode = "";
+    this.http.post<GenericObj>(URLConstant.EditDuplicateNegativeCust, NegativeCustObj).subscribe(
+      (response) => {
+        if (this.CustDataMode == this.CustDataModeMain) {
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response.Id });
+          return;
+        }
+        this.outputSave.emit("");
+      }
+    );
   }
 
   Back() {
