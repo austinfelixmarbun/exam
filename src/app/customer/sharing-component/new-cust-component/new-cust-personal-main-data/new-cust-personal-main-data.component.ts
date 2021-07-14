@@ -119,8 +119,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.isReady = false;
     this.inputLookupObj.urlJson = "./assets/lookup/lookupSupplierPersonal.json";
-    this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupplierPersonal.json";
     this.inputLookupObj.genericJson = "./assets/lookup/lookupSupplierPersonal.json";
     this.inputLookupObj.isReady = true;
@@ -167,9 +165,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       MrMaritalStatCode: ['', Validators.required],
       MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
       CustModel: [''],
-      IsVip: [false],
       IsAffiliateWithMf: [false],
-      VipNotes: ['', [Validators.required]],
       IsSupplier: [false],
       SupplCode: [''],
       SupplName: [''],
@@ -210,7 +206,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   async GetCustData() {
-    var datePipe = new DatePipe("en-US");
+    let datePipe = new DatePipe("en-US");
     await this.http.post(URLConstant.GetCustByCustId, { Id: this.CustId }).toPromise().then(
       (response: CustObj) => {
         this.custObj = response;
@@ -221,14 +217,12 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           IdNo: this.custObj.IdNo,
           IdExpiredDt: datePipe.transform(this.custObj.IdExpiredDt, 'yyyy-MM-dd'),
           TaxIdNo: this.custObj.TaxIdNo,
-          IsVip: this.custObj.IsVip,
           IsAffiliateWithMf: this.custObj.IsAffiliateWithMf,
           VipNotes: this.custObj.VipNotes,
         });
         this.existingCustomerLookUpObj.nameSelect = response.CustName;
         this.existingCustomerLookUpObj.isReady = true;
         this.onChangeIdType();
-        this.checkStateIsVip();
       }
     );
   }
@@ -252,17 +246,13 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         tempUcAddObj.City = response.City;
         this.inputAddressObj.default = tempUcAddObj;
         this.inputAddressObj.inputField = this.inputFieldObj;
-
-        //sepertinya ga perlu, karna uda d tampung di atas ke tempCusAddr
-        this.custObj.CustAddr.CustAddrId = response.CustAddrId;
-        this.custObj.CustAddr.RowVersion = response.RowVersion != null ? response.RowVersion : "";
       }
     );
   }
 
   tempCustPersonalObj: CustPersonalObj = new CustPersonalObj();
   async GetCustPersonalData() {
-    var datePipe = new DatePipe("en-US");
+    let datePipe = new DatePipe("en-US");
     await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: this.CustId }).toPromise().then(
       (response) => {
         this.tempCustPersonalObj = response;
@@ -338,22 +328,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     }
   }
 
-  checkStateIsVip() {
-    let tempVipNotes = this.CustomerForm.get("VipNotes");
-    let tempIsVip = this.CustomerForm.get("IsVip");
-    if (!tempIsVip.value) {
-      this.CustomerForm.patchValue({
-        VipNotes: null
-      });
-      tempVipNotes.disable();
-
-    } else {
-      tempVipNotes.enable();
-      tempVipNotes.setValidators(Validators.required);
-    }
-    tempVipNotes.updateValueAndValidity();
-  }
-
   SetSupplier(e: VendorObj) {
     this.CustomerForm.patchValue({
       SupplCode: e.VendorCode,
@@ -368,8 +342,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           MrIdTypeCode: response.MrIdTypeCode,
           IdNo: response.IdNo,
           TaxIdNo: response.TaxIdNo,
-          // klo ga ada, hapus aja
-          CustModel: '',
         });
 
         if (response.MrIdTypeCode) {
@@ -396,24 +368,23 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   //#endregion
 
   //#region Save
+  Cancel() {
+    this.outputCancel.emit();
+  }
+
   SaveForm() {
     let tempForm = this.CustomerForm.getRawValue();
-    var reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
+    let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
     reqSubmitObj.CustObj = this.custObj;
     reqSubmitObj.CustObj.CustName = tempForm["CustName"];
     reqSubmitObj.CustObj.MrIdTypeCode = tempForm["MrIdTypeCode"];
     reqSubmitObj.CustObj.IdNo = tempForm["IdNo"];
     reqSubmitObj.CustObj.IdExpiredDt = tempForm["IdExpiredDt"];
     reqSubmitObj.CustObj.TaxIdNo = tempForm["TaxIdNo"];
-    reqSubmitObj.CustObj.IsVip = tempForm["IsVip"];
     reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustomerPersonal;
     reqSubmitObj.CustObj.IsAffiliateWithMf = tempForm["IsAffiliateWithMf"];
-    if (reqSubmitObj.CustObj.IsVip == true) {
-      reqSubmitObj.CustObj.VipNotes = tempForm["VipNotes"];
-    } else {
-      reqSubmitObj.CustObj.VipNotes = null;
-    }
 
+    reqSubmitObj.CustPersonalObj = this.tempCustPersonalObj;
     reqSubmitObj.CustPersonalObj.CustFullName = tempForm["CustName"];
     reqSubmitObj.CustPersonalObj.MrGenderCode = tempForm["MrGenderCode"];
     reqSubmitObj.CustPersonalObj.BirthPlace = tempForm["BirthPlace"];
@@ -421,19 +392,19 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     reqSubmitObj.CustPersonalObj.MotherMaidenName = tempForm["MotherMaidenName"];
     reqSubmitObj.CustPersonalObj.MrMaritalStatCode = tempForm["MrMaritalStatCode"];
 
-    reqSubmitObj.CustObj.CustAddr = this.tempCustAddr;
-    reqSubmitObj.CustObj.CustAddr.CustId = this.CustId;
-    reqSubmitObj.CustObj.CustAddr.Addr = tempForm["UcAddress"]["Addr"];
-    reqSubmitObj.CustObj.CustAddr.AreaCode1 = tempForm["UcAddress"]["AreaCode1"];
-    reqSubmitObj.CustObj.CustAddr.AreaCode2 = tempForm["UcAddress"]["AreaCode2"];
-    reqSubmitObj.CustObj.CustAddr.AreaCode3 = tempForm["UcAddress"]["AreaCode3"];
-    reqSubmitObj.CustObj.CustAddr.AreaCode4 = tempForm["UcAddress"]["AreaCode4"];
-    reqSubmitObj.CustObj.CustAddr.City = tempForm["UcAddress"]["City"];
-    reqSubmitObj.CustObj.CustAddr.Zipcode = tempForm["UcAddressZipcode"]["value"];
-    reqSubmitObj.CustObj.CustAddr.SubZipcode = tempForm["UcAddressZipcode"]["value"];
-    reqSubmitObj.CustObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
+    reqSubmitObj.CustAddr = this.tempCustAddr;
+    reqSubmitObj.CustAddr.CustId = this.CustId;
+    reqSubmitObj.CustAddr.Addr = tempForm["UcAddress"]["Addr"];
+    reqSubmitObj.CustAddr.AreaCode1 = tempForm["UcAddress"]["AreaCode1"];
+    reqSubmitObj.CustAddr.AreaCode2 = tempForm["UcAddress"]["AreaCode2"];
+    reqSubmitObj.CustAddr.AreaCode3 = tempForm["UcAddress"]["AreaCode3"];
+    reqSubmitObj.CustAddr.AreaCode4 = tempForm["UcAddress"]["AreaCode4"];
+    reqSubmitObj.CustAddr.City = tempForm["UcAddress"]["City"];
+    reqSubmitObj.CustAddr.Zipcode = tempForm["UcAddressZipcode"]["value"];
+    reqSubmitObj.CustAddr.SubZipcode = tempForm["UcAddressZipcode"]["value"];
+    reqSubmitObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
 
-    reqSubmitObj= this.SetCustomerDataMode(reqSubmitObj);
+    reqSubmitObj = this.SetCustomerDataMode(reqSubmitObj);
     this.outputAfterSave.emit(reqSubmitObj);
   }
 

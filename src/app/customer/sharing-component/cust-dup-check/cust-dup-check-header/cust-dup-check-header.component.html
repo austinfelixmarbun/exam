@@ -20,7 +20,7 @@
             </div>
           </div>  
           <app-cust-dup-check-personal *ngIf="CustType == CustTypePersonal" [CustObj]="CustPersonalObj"></app-cust-dup-check-personal>
-          <app-cust-dup-check-company *ngIf="CustType == CustTypeCoy"></app-cust-dup-check-company>
+          <app-cust-dup-check-company *ngIf="CustType == CustTypeCoy" [CustObj]="CustCoyObj"></app-cust-dup-check-company>
         </div>
         <!-- Match / Similar Data -->
         <lib-ucSubsection [id]="'MatchSimilarDataId'" [title]="'Match / Similar Data'" [panel]="'MatchSimilarData'">

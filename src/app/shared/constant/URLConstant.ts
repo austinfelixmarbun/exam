@@ -686,7 +686,7 @@ export class URLConstant {
     public static EditCustPersonalMainData = environment.FoundationR3Url + "/Cust/EditCustPersonalMainData";
     public static EditCustCompanyMainData = environment.FoundationR3Url + "/Cust/EditCustCompanyMainData";
     public static EditDuplicateCust = environment.FoundationR3Url + "/Cust/EditDuplicateCust";
-    public static EditDuplicateCustPersonal = environment.FoundationR3Url + "/Cust/EditDuplicateCustPersonal";
+    public static NewEditDuplicateCust = environment.FoundationR3Url + "/Cust/NewEditDuplicateCust";
     public static EditNegativeDuplicateCust = environment.FoundationR3Url + "/Cust/EditNegativeDuplicateCust";
     public static GetCustByCustId = environment.FoundationR3Url + "/Cust/GetCustByCustId";
     public static GetCustPersonalForUpdateByCustNo = environment.FoundationR3Url + "/Cust/GetCustPersonalForUpdateByCustNo";

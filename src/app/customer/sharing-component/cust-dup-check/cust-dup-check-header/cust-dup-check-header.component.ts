@@ -4,17 +4,16 @@ import { Router } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { AddCustObj } from 'app/shared/model/AddCustObj.Model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { DuplicateCustObj } from 'app/shared/model/DuplicateCust.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/NewCust/CustCompanyMgmntShrholderObj.Model';
 import { CustDuplicateObj } from 'app/shared/model/NewCust/CustDuplicateObj.Model';
 import { CustPersonalFamilyObj } from 'app/shared/model/NewCust/CustPersonalFamilyObj.Model';
 import { NegCustDuplicateObj } from 'app/shared/model/NewCust/NegCustDuplicateObj.Model';
-import { ReqDupPersonalObj, ReqNegDupPersonalObj, ReqPersonalObj } from 'app/shared/model/NewCust/ReqPersonalObj.Model';
-import { ReqGetNegativeCustByNegativeCustNameAndCustTypeObj } from 'app/shared/model/Request/NegativeCust/ReqGetNegativeCustObj.model';
-import { ResNegativeCustObj } from 'app/shared/model/Response/NegativeCust/ResNegativeCustObj.model';
+import { ReqCoyObj } from 'app/shared/model/NewCust/ReqCoyObj.Model';
+import { ReqDupObj } from 'app/shared/model/NewCust/ReqDupObj.Model';
+import { ReqNegDupObj } from 'app/shared/model/NewCust/ReqNegDupObj.Model';
+import { ReqPersonalObj } from 'app/shared/model/NewCust/ReqPersonalObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
@@ -24,7 +23,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class CustDupCheckHeaderComponent implements OnInit {
 
   @Input() CustPersonalObj: ReqPersonalObj;
-  @Input() CustCoyObj: any;
+  @Input() CustCoyObj: ReqCoyObj;
   @Input() CustPersonalFamilyData: CustPersonalFamilyObj;
   @Input() CustMgmntShareholderData: CustCompanyMgmntShrholderObj;
   @Input() CustType: string = CommonConstant.CustomerPersonal;
@@ -48,10 +47,10 @@ export class CustDupCheckHeaderComponent implements OnInit {
   ResultDuplicate: Array<CustDuplicateObj> = new Array();
   ResultDuplicateNegative: Array<NegCustDuplicateObj> = new Array();
   GetDuplicateCust() {
-    var DuplicateCustObj = this.SetDuplicateCustObj();
+    let DuplicateCustObj = this.SetDuplicateCustObj();
     this.http.post(URLConstant.GetCustomerAndNegativeCustDuplicateCheck, DuplicateCustObj).subscribe(
       (response) => {
-        var DuplicateStatus = response["Status"];
+        let DuplicateStatus = response["Status"];
         if (DuplicateStatus != null && DuplicateStatus != undefined) {
           this.ResultDuplicate = response[CommonConstant.ReturnObj]["CustDuplicate"];
           this.ResultDuplicateNegative = response[CommonConstant.ReturnObj]["NegativeCustDuplicate"];
@@ -62,7 +61,7 @@ export class CustDupCheckHeaderComponent implements OnInit {
   }
 
   SetDuplicateCustObj(): DuplicateCustObj {
-    var duplicateCustObj = new DuplicateCustObj();
+    let duplicateCustObj = new DuplicateCustObj();
     if (this.CustType == this.CustTypePersonal) {
       duplicateCustObj.CustName = this.CustPersonalObj.CustObj.CustName;
       duplicateCustObj.MrCustTypeCode = this.CustTypePersonal;
@@ -73,9 +72,9 @@ export class CustDupCheckHeaderComponent implements OnInit {
       return duplicateCustObj;
     }
 
-    duplicateCustObj.CustName = this.CustCoyObj.CustName;
+    duplicateCustObj.CustName = this.CustCoyObj.CustObj.CustName;
     duplicateCustObj.MrCustTypeCode = this.CustTypeCoy;
-    duplicateCustObj.TaxIdNo = this.CustCoyObj.TaxIdNo;
+    duplicateCustObj.TaxIdNo = this.CustCoyObj.CustObj.TaxIdNo;
     return duplicateCustObj;
   }
 
@@ -84,11 +83,11 @@ export class CustDupCheckHeaderComponent implements OnInit {
       this.EditCustPersonal(item);
       return;
     }
-    this.EditCustCoy();
+    this.EditCustCoy(item);
   }
 
   EditCustPersonal(item: CustDuplicateObj) {
-    let reqEditDupCheck: ReqDupPersonalObj = new ReqDupPersonalObj();
+    let reqEditDupCheck: ReqDupObj = new ReqDupObj();
     reqEditDupCheck.CustNo = item.CustNo;
     reqEditDupCheck.IsCustomer = this.CustPersonalObj.CustObj.IsCustomer;
     reqEditDupCheck.IsFamily = this.CustPersonalObj.CustObj.IsFamily;
@@ -100,7 +99,7 @@ export class CustDupCheckHeaderComponent implements OnInit {
     if (this.CustDataMode == this.CustDataModeShareholder) {
       reqEditDupCheck.CustCompanyMgmntShrholderObj = this.CustMgmntShareholderData;
     }
-    this.http.post(URLConstant.EditDuplicateCustPersonal, reqEditDupCheck).subscribe(
+    this.http.post(URLConstant.NewEditDuplicateCust, reqEditDupCheck).subscribe(
       (response: GenericObj) => {
         if (this.CustDataMode == this.CustDataModeMain) {
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response.Id });
@@ -111,8 +110,28 @@ export class CustDupCheckHeaderComponent implements OnInit {
     );
   }
 
-  EditCustCoy() {
+  EditCustCoy(item: CustDuplicateObj) {
+    let reqEditDupCheck: ReqDupObj = new ReqDupObj();
+    reqEditDupCheck.CustNo = item.CustNo;
+    reqEditDupCheck.IsCustomer = this.CustPersonalObj.CustObj.IsCustomer;
+    reqEditDupCheck.IsFamily = this.CustPersonalObj.CustObj.IsFamily;
+    reqEditDupCheck.IsShareholder = this.CustPersonalObj.CustObj.IsShareholder;
 
+    if (this.CustDataMode == this.CustDataModeFamily) {
+      reqEditDupCheck.CustPersonalFamilyObj = this.CustPersonalFamilyData;
+    }
+    if (this.CustDataMode == this.CustDataModeShareholder) {
+      reqEditDupCheck.CustCompanyMgmntShrholderObj = this.CustMgmntShareholderData;
+    }
+    this.http.post(URLConstant.NewEditDuplicateCust, reqEditDupCheck).subscribe(
+      (response: GenericObj) => {
+        if (this.CustDataMode == this.CustDataModeMain) {
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response.Id });
+          return;
+        }
+        this.outputSave.emit("");
+      }
+    );
   }
 
   EditNegativeCust(item: NegCustDuplicateObj) {
@@ -124,10 +143,20 @@ export class CustDupCheckHeaderComponent implements OnInit {
   }
 
   EditNegativeCustPersonal(item: NegCustDuplicateObj) {
-    let NegativeCustObj: ReqNegDupPersonalObj = new ReqNegDupPersonalObj();
+    let NegativeCustObj: ReqNegDupObj = new ReqNegDupObj();
     NegativeCustObj.CustName = item.CustName;
     NegativeCustObj.MrCustTypeCode = this.CustTypePersonal;
     NegativeCustObj.IdNo = item.IdNo;
+    NegativeCustObj.IsCustomer = this.CustPersonalObj.CustObj.IsCustomer;
+    NegativeCustObj.IsFamily = this.CustPersonalObj.CustObj.IsFamily;
+    NegativeCustObj.IsShareholder = this.CustPersonalObj.CustObj.IsShareholder;
+
+    if (this.CustDataMode == this.CustDataModeFamily) {
+      NegativeCustObj.CustPersonalFamilyObj = this.CustPersonalFamilyData;
+    }
+    if (this.CustDataMode == this.CustDataModeShareholder) {
+      NegativeCustObj.CustCompanyMgmntShrholderObj = this.CustMgmntShareholderData;
+    }
     this.http.post<GenericObj>(URLConstant.EditDuplicateNegativeCust, NegativeCustObj).subscribe(
       (response) => {
         if (this.CustDataMode == this.CustDataModeMain) {
@@ -140,11 +169,21 @@ export class CustDupCheckHeaderComponent implements OnInit {
   }
 
   EditNegativeCustCoy(item: NegCustDuplicateObj) {
-    let NegativeCustObj: ReqNegDupPersonalObj = new ReqNegDupPersonalObj();
+    let NegativeCustObj: ReqNegDupObj = new ReqNegDupObj();
     NegativeCustObj.CustName = item.CustName;
     NegativeCustObj.MrCustTypeCode = this.CustTypeCoy;
     NegativeCustObj.IdNo = item.IdNo;
-    NegativeCustObj.MrCompanyTypeCode = "";
+    NegativeCustObj.MrCompanyTypeCode = this.CustCoyObj.CustCompanyObj.MrCompanyTypeCode;
+    NegativeCustObj.IsCustomer = this.CustCoyObj.CustObj.IsCustomer;
+    NegativeCustObj.IsFamily = this.CustCoyObj.CustObj.IsFamily;
+    NegativeCustObj.IsShareholder = this.CustCoyObj.CustObj.IsShareholder;
+
+    if (this.CustDataMode == this.CustDataModeFamily) {
+      NegativeCustObj.CustPersonalFamilyObj = this.CustPersonalFamilyData;
+    }
+    if (this.CustDataMode == this.CustDataModeShareholder) {
+      NegativeCustObj.CustCompanyMgmntShrholderObj = this.CustMgmntShareholderData;
+    }
     this.http.post<GenericObj>(URLConstant.EditDuplicateNegativeCust, NegativeCustObj).subscribe(
       (response) => {
         if (this.CustDataMode == this.CustDataModeMain) {
@@ -169,19 +208,45 @@ export class CustDupCheckHeaderComponent implements OnInit {
   }
 
   SaveCoyData() {
-
-  }
-
-  SavePersonalData() {
-    let urlAdd: string = this.SetUrlAdd();
-    this.http.post(urlAdd, this.CustPersonalObj).subscribe(
+    let urlAdd: string = this.SetUrlAddCoy();
+    this.http.post(urlAdd, this.CustCoyObj).subscribe(
       (response: GenericObj) => {
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response.Id });
+        if (this.CustDataMode == this.CustDataModeMain) {
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_COY_PAGE], { "IdCust": response.Id });
+          return;
+        }
+        this.outputSave.emit("");
       }
     );
   }
 
-  SetUrlAdd(): string {
+  SavePersonalData() {
+    let urlAdd: string = this.SetUrlAddPersonal();
+    this.http.post(urlAdd, this.CustPersonalObj).subscribe(
+      (response: GenericObj) => {
+        if (this.CustDataMode == this.CustDataModeMain) {
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response.Id });
+          return;
+        }
+        this.outputSave.emit("");
+      }
+    );
+  }
+
+  SetUrlAddCoy(): string {
+    let urlAdd: string = "";
+    switch (this.CustDataMode) {
+      case this.CustDataModeMain:
+        urlAdd = URLConstant.AddCustCompanyMainData;
+        break;
+      case this.CustDataModeShareholder:
+        urlAdd = URLConstant.AddCustCompanyMgmntShrholder;
+        break;
+    }
+    return urlAdd;
+  }
+
+  SetUrlAddPersonal(): string {
     let urlAdd: string = "";
     switch (this.CustDataMode) {
       case this.CustDataModeMain:

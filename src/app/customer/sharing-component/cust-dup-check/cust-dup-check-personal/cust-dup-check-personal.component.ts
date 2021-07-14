@@ -36,7 +36,7 @@ export class CustDupCheckPersonalComponent implements OnInit {
     let refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: refMasterTypeCode,
       MappingCode: mappingCode
-    }
+    };
     this.DictRefMaster[refMasterTypeCode] = {};
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
       (response: GenericKeyValueListObj) => {

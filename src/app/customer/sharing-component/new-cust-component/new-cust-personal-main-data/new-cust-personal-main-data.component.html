@@ -5,9 +5,9 @@
         <div class="addEdit">
           <form class="form form-horizontal" [formGroup]="CustomerForm" (ngSubmit)="CustomerForm.valid && SaveForm()"
             #enjiForm="ngForm">
-            <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
+            <lib-ucSubsection [id]="'MainInfoPersId'" [title]="'Main Info'" [panel]="'MainInfoPers'">
             </lib-ucSubsection>
-            <div class="form-body" id="MainInfoId">
+            <div class="form-body" id="MainInfoPers">
               <div class="form-group row" *ngIf="CustDataMode == CustDataModeMain && CustId == 0">
                 <div class="col-md-6">
                   <div class="form-group row">
@@ -90,22 +90,6 @@
                       </lib-uc-show-errors>
                     </div>
                   </div>
-
-                  <!-- <div class="form-group row">
-                    <label class="col-md-6 adInsLabel" translate>Affiliation with Multifinance</label>
-                    <div class="col-md-6">
-                      <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
-                    </div>
-                  </div>
-
-                  <div class="form-group row">
-                    <label class="col-md-6 adInsLabel" translate>VIP</label>
-                    <div class="col-md-6">
-                      <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsVip"
-                        (change)="checkStateIsVip()" />
-                    </div>  
-                  </div> -->
-
                 </div>
 
                 <div class="col-md-6">
@@ -167,37 +151,12 @@
                     </div>
                   </div>
 
-                  <!-- <div class="form-group row">      
-                    <label class="col-md-6 adInsLabel" translate [ngClass]="{'adins-required-label' : CustomerForm.controls.IsVip.value}">VIP Notes</label>
-                    <div class="col-md-6">
-                        <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes"  
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.VipNotes.invalid }"></textarea>
-                        <lib-uc-show-errors [control]="CustomerForm.controls.VipNotes" [submit]="enjiForm.submitted">
-                      </lib-uc-show-errors>
-                    </div>
-                  </div> -->
                 </div>
               </div>
               <div class="form-group row" *ngIf="CustDataMode == CustDataModeMain">
                 <label class="col-md-2 adInsLabel" translate>Affiliation with Multifinance</label>
                 <div class="col-md-4">
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
-                </div>
-              </div>
-              <div class="form-group row" *ngIf="CustDataMode == CustDataModeMain">
-                <label class="col-md-2 adInsLabel" translate>VIP</label>
-                <div class="col-md-4">
-                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsVip"
-                    (change)="checkStateIsVip()" />
-                </div>
-                <label class="col-md-2 adInsLabel"
-                  [ngClass]="{'adins-required-label' : CustomerForm.controls.IsVip.value}" translate>VIP Notes</label>
-                <div class="col-md-4">
-                  <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes" required
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.VipNotes.invalid }"></textarea>
-
-                  <lib-uc-show-errors [control]="CustomerForm.controls.VipNotes" [submit]="enjiForm.submitted">
-                  </lib-uc-show-errors>
                 </div>
               </div>
             </div>
@@ -210,8 +169,7 @@
             </div>
 
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]"
-                skipLocationChange translate>
+              <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Cancel()" translate>
                 <i class="far fa-window-close"></i> Cancel
               </button>
               <button type="submit" class="btn btn-raised btn-primary" translate>
