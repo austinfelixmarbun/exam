@@ -152,6 +152,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
     this.inputAddressObj.showOwnership = true;
+    this.inputAddressObj.requiredOwnership = true;
   }
 
   checkCustAddrType() {

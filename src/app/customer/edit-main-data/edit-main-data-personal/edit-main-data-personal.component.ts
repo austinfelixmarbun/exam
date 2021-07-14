@@ -327,7 +327,6 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custPersonalObj.MrMaritalStatCode = this.CustomerPersonalForm.controls["MrMaritalStatCode"].value;
 
     var formValue = this.CustomerPersonalForm.value;
-    this.custObj.CustAddr = this.tempCustAddr;
     this.custObj.CustAddr.CustId = this.CustId;
     this.custObj.CustAddr.Addr = formValue["UcAddress"]["Addr"];
     this.custObj.CustAddr.AreaCode1 = formValue["UcAddress"]["AreaCode1"];

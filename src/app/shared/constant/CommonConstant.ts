@@ -178,6 +178,7 @@ export class CommonConstant {
     public static CustAddrTypeJob = "JOB";
     public static CustAddrTypeOthBiz = "OTH_BIZ";
     public static CustAddrTypePreJob = "PREV_JOB";
+    public static CustAddrTypeBiz = "BIZ";
 
     // ADDR TYPE 
     public static AddrTypeLegal = "LEGAL";
@@ -197,6 +198,12 @@ export class CommonConstant {
 
     //Attribute Type Code
     public static AttrTypeCodeMaster = "MASTER";
+
+    //Martial Status
+    public static MasteCodeMartialStatsMarried = "MARRIED";
+
+    //Relationship Code
+    public static MasteCodeRelationshipSpouse = "SPOUSE";
 
     // ID TYPE
     public static MrIdTypeCodeEKTP = "EKTP";
