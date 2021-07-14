@@ -5,6 +5,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -30,6 +31,8 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   PersonalConstant: string;
   WfTaskListId: number;
   SubjectType: string;
+  IdCust: number = 0;
+  isMarried: boolean = false;
 
   CustPersonalStep = {
     "CUST": 1,
@@ -74,12 +77,13 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     this.ViewGenericObj.viewInput = "./assets/ucviewgeneric/viewUpdateMasterCust.json";
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.claimTask();
     this.CustNoObj.CustNo = this.CustNo;
-    this.http.post(URLConstant.GetCustByCustNo, this.CustNoObj).toPromise().then(
+    await this.http.post(URLConstant.GetCustByCustNo, this.CustNoObj).toPromise().then(
       (response: CustObj) => {
         this.MrCustTypeCode = response.MrCustTypeCode;
+        this.IdCust = response.CustId;
         if (response.MrCustTypeCode == CommonConstant.CustTypePersonal) {
           this.PersonalWizard = new Stepper(document.querySelector('#PersonalWizard'), {
             linear: false,
@@ -102,6 +106,14 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
         console.log(error);
       }
     )
+
+    await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).toPromise().then(
+      (response) => {
+        if(this.isMarried == response.MrMaritalStatCode != undefined && response.MrMaritalStatCode == CommonConstant.MasteCodeMartialStatsMarried){
+          this.isMarried = true;
+        }
+      }
+    );
   }
 
   claimTask() {

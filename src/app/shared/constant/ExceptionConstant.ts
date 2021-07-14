@@ -38,6 +38,11 @@ export class ExceptionConstant {
     public static NOT_ELIGIBLE_FOR_TAKE_BACK = "You are not Eligible to Take Back this Task";
     public static NOT_ELIGIBLE_FOR_HOLD = "You are not Eligible to Hold this Task";
     public static NOT_ELIGIBLE_FOR_PROCESS_TASK = "You are not Eligible to Process this Task";
+    public static CUSTOMER_AGE_MUST_17_YEARS_OLD = "Customer age must be at least 17 year old";
+    public static BIRTH_DATE_CANNOT_MORE_THAN_BUSINESS_DATE = "Birth Date can not be more than Business Date";
+    public static ID_EXPIRED_DATE_CANNOT_LESS_THAN = "Id Expired Date can not be less than ";
+    public static MUST_INPUT_SPOUSE_DATA = "Please Input Spouse Data in Family!";
+    public static MUST_CHOOSE_SPOUSE_DATA = "Please Choose at least One Spouse Data!";
 
     public static PLEASE_FILL_BIZ_ADDRESS = "Please Copy / Fill Business Address First";
     public static PLEASE_FILL_RESIDENCE_ADDRESS = "Please Copy / Fill Residence Address First";

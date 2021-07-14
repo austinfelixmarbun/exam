@@ -73,7 +73,7 @@
               <app-update-customer-address *ngIf="StepIdx == 2 && MrCustTypeCode == PersonalConstant" [CustDataTrxId]="CustDataTrxId" [SubjectType]="SubjectType" (ResponseTab)="StepperHandler($event)"></app-update-customer-address>
             </div>
             <div id="family-tab" class="content" role="tabpanel" aria-labelledby="family-tab-trigger">
-              <app-update-customer-family *ngIf="StepIdx == 3 && MrCustTypeCode == PersonalConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-family>
+              <app-update-customer-family *ngIf="StepIdx == 3 && MrCustTypeCode == PersonalConstant" [CustDataTrxId]="CustDataTrxId" [isMarried]="isMarried" (ResponseTab)="StepperHandler($event)"></app-update-customer-family>
             </div>
             <div id="emergency-tab" class="content" role="tabpanel" aria-labelledby="emergency-tab-trigger">
               <app-update-customer-emergency-detail *ngIf="StepIdx == 4 && MrCustTypeCode == PersonalConstant" [CustDataTrxId]="CustDataTrxId" (ResponseTab)="StepperHandler($event)"></app-update-customer-emergency-detail>

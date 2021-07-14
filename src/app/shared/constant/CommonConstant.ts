@@ -189,6 +189,12 @@ export class CommonConstant {
     //Attribute Type Code
     public static AttrTypeCodeMaster = "MASTER";
 
+    //Martial Status
+    public static MasteCodeMartialStatsMarried = "MARRIED";
+
+    //Relationship Code
+    public static MasteCodeRelationshipSpouse = "SPOUSE";
+
     // ID TYPE
     public static MrIdTypeCodeEKTP = "EKTP";
     public static MrIdTypeCodeSIM = "SIM";
