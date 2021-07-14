@@ -2,15 +2,10 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RegexService } from 'app/customer/regex.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
@@ -43,17 +38,15 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   @Output() outputAfterSave: EventEmitter<ReqPersonalObj> = new EventEmitter();
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
 
-  custObjToSave: CustObj = new CustObj();
+  custObj: CustObj = new CustObj();
   CustomerForm: FormGroup = this.fb.group({});
   inputAddressObj: InputAddressObj = new InputAddressObj();
   inputFieldObj: InputFieldObj = new InputFieldObj();
   inputLookupObj: InputLookupObj = new InputLookupObj();
 
   constructor(private regexService: RegexService,
-    private router: Router, private route: ActivatedRoute,
     private http: HttpClient, private fb: FormBuilder,
-    private toastr: NGXToastrService, private cookieService: CookieService,
-    private modalService: NgbModal) {
+    private cookieService: CookieService) {
   }
 
   //#region Readonly
@@ -161,10 +154,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
   //#endregion
 
+  // sepertinnya ga kepake, atau ubah nama method ny
   ClearCustForm(CustObj = null) {
     this.CustomerForm = this.fb.group({
       CustName: ['', [Validators.required, Validators.maxLength(100)]],
-      Gender: ['', [Validators.required]],
+      MrGenderCode: ['', [Validators.required]],
       MrIdTypeCode: ['', [Validators.required, Validators.maxLength(100)]],
       BirthPlace: ['', [Validators.required]],
       BirthDt: ['', [Validators.required]],
@@ -177,7 +171,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       IsVip: [false],
       IsAffiliateWithMf: [false],
       VipNotes: ['', [Validators.required]],
-
       IsSupplier: [false],
       SupplCode: [''],
       SupplName: [''],
@@ -206,7 +199,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           this.setValidatorPattern();
         }
       }
-    ).unsubscribe();
+    )
   }
 
 
@@ -222,17 +215,17 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     var datePipe = new DatePipe("en-US");
     await this.http.post(URLConstant.GetCustByCustId, { Id: this.CustId }).toPromise().then(
       (response: CustObj) => {
-        this.custObjToSave = response;
+        this.custObj = response;
         this.CustomerForm.patchValue({
-          CustName: this.custObjToSave.CustName,
-          MrCustTypeCode: this.custObjToSave.MrCustTypeCode,
-          MrIdTypeCode: this.custObjToSave.MrIdTypeCode,
-          IdNo: this.custObjToSave.IdNo,
-          IdExpiredDt: datePipe.transform(this.custObjToSave.IdExpiredDt, 'yyyy-MM-dd'),
-          TaxIdNo: this.custObjToSave.TaxIdNo,
-          IsVip: this.custObjToSave.IsVip,
-          IsAffiliateWithMf: this.custObjToSave.IsAffiliateWithMf,
-          VipNotes: this.custObjToSave.VipNotes,
+          CustName: this.custObj.CustName,
+          MrCustTypeCode: this.custObj.MrCustTypeCode,
+          MrIdTypeCode: this.custObj.MrIdTypeCode,
+          IdNo: this.custObj.IdNo,
+          IdExpiredDt: datePipe.transform(this.custObj.IdExpiredDt, 'yyyy-MM-dd'),
+          TaxIdNo: this.custObj.TaxIdNo,
+          IsVip: this.custObj.IsVip,
+          IsAffiliateWithMf: this.custObj.IsAffiliateWithMf,
+          VipNotes: this.custObj.VipNotes,
         });
         this.existingCustomerLookUpObj.nameSelect = response.CustName;
         this.existingCustomerLookUpObj.isReady = true;
@@ -252,8 +245,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         this.tempCustAddr = response;
         this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
         this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
-        this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
-        this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
         let tempUcAddObj: UcAddressObj = new UcAddressObj();
         tempUcAddObj.AreaCode1 = response.AreaCode1;
         tempUcAddObj.AreaCode2 = response.AreaCode2;
@@ -263,8 +254,10 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         tempUcAddObj.City = response.City;
         this.inputAddressObj.default = tempUcAddObj;
         this.inputAddressObj.inputField = this.inputFieldObj;
-        this.custObjToSave.CustAddr.CustAddrId = response.CustAddrId;
-        this.custObjToSave.CustAddr.RowVersion = response.RowVersion != null ? response.RowVersion : "";
+
+        //sepertinya ga perlu, karna uda d tampung di atas ke tempCusAddr
+        this.custObj.CustAddr.CustAddrId = response.CustAddrId;
+        this.custObj.CustAddr.RowVersion = response.RowVersion != null ? response.RowVersion : "";
       }
     );
   }
@@ -276,7 +269,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       (response) => {
         this.tempCustPersonalObj = response;
         this.CustomerForm.patchValue({
-          Gender: response.MrGenderCode,
+          MrGenderCode: response.MrGenderCode,
           BirthPlace: response.BirthPlace,
           BirthDt: datePipe.transform(response.BirthDt, 'yyyy-MM-dd'),
           MotherMaidenName: response.MotherMaidenName,
@@ -377,6 +370,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           MrIdTypeCode: response.MrIdTypeCode,
           IdNo: response.IdNo,
           TaxIdNo: response.TaxIdNo,
+          // klo ga ada, hapus aja
           CustModel: '',
         });
 
@@ -406,46 +400,42 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   //#region Save
   SaveForm() {
     let tempForm = this.CustomerForm.getRawValue();
-    this.custObjToSave.CustName = tempForm["CustName"];
-    this.custObjToSave.MrIdTypeCode = tempForm["MrIdTypeCode"];
-    this.custObjToSave.IdNo = tempForm["IdNo"];
-    this.custObjToSave.IdExpiredDt = tempForm["IdExpiredDt"];
-    this.custObjToSave.TaxIdNo = tempForm["TaxIdNo"];
-    this.custObjToSave.IsVip = tempForm["IsVip"];
-    this.custObjToSave.MrCustTypeCode = CommonConstant.CustomerPersonal;
-    this.custObjToSave.IsAffiliateWithMf = tempForm["IsAffiliateWithMf"];
-    if (this.custObjToSave.IsVip == true) {
-      this.custObjToSave.VipNotes = tempForm["VipNotes"];
+    var reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
+    reqSubmitObj.CustObj = this.custObj;
+    reqSubmitObj.CustObj.CustName = tempForm["CustName"];
+    reqSubmitObj.CustObj.MrIdTypeCode = tempForm["MrIdTypeCode"];
+    reqSubmitObj.CustObj.IdNo = tempForm["IdNo"];
+    reqSubmitObj.CustObj.IdExpiredDt = tempForm["IdExpiredDt"];
+    reqSubmitObj.CustObj.TaxIdNo = tempForm["TaxIdNo"];
+    reqSubmitObj.CustObj.IsVip = tempForm["IsVip"];
+    reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustomerPersonal;
+    reqSubmitObj.CustObj.IsAffiliateWithMf = tempForm["IsAffiliateWithMf"];
+    if (reqSubmitObj.CustObj.IsVip == true) {
+      reqSubmitObj.CustObj.VipNotes = tempForm["VipNotes"];
     } else {
-      this.custObjToSave.VipNotes = null;
+      reqSubmitObj.CustObj.VipNotes = null;
     }
 
-    let custPersonalObj: CustPersonalObj = this.tempCustPersonalObj;
-    custPersonalObj.CustFullName = tempForm["CustName"];
-    custPersonalObj.MrGenderCode = tempForm["Gender"];
-    custPersonalObj.BirthPlace = tempForm["BirthPlace"];
-    custPersonalObj.BirthDt = tempForm["BirthDt"];
-    custPersonalObj.MotherMaidenName = tempForm["MotherMaidenName"];
-    custPersonalObj.MrMaritalStatCode = tempForm["MrMaritalStatCode"];
+    reqSubmitObj.CustPersonalObj.CustFullName = tempForm["CustName"];
+    reqSubmitObj.CustPersonalObj.MrGenderCode = tempForm["MrGenderCode"];
+    reqSubmitObj.CustPersonalObj.BirthPlace = tempForm["BirthPlace"];
+    reqSubmitObj.CustPersonalObj.BirthDt = tempForm["BirthDt"];
+    reqSubmitObj.CustPersonalObj.MotherMaidenName = tempForm["MotherMaidenName"];
+    reqSubmitObj.CustPersonalObj.MrMaritalStatCode = tempForm["MrMaritalStatCode"];
 
-    this.custObjToSave.CustAddr = this.tempCustAddr;
-    this.custObjToSave.CustAddr.CustId = this.CustId;
-    this.custObjToSave.CustAddr.Addr = tempForm["UcAddress"]["Addr"];
-    this.custObjToSave.CustAddr.AreaCode1 = tempForm["UcAddress"]["AreaCode1"];
-    this.custObjToSave.CustAddr.AreaCode2 = tempForm["UcAddress"]["AreaCode2"];
-    this.custObjToSave.CustAddr.AreaCode3 = tempForm["UcAddress"]["AreaCode3"];
-    this.custObjToSave.CustAddr.AreaCode4 = tempForm["UcAddress"]["AreaCode4"];
-    this.custObjToSave.CustAddr.City = tempForm["UcAddress"]["City"];
-    this.custObjToSave.CustAddr.Zipcode = tempForm["UcAddressZipcode"]["value"];
-    this.custObjToSave.CustAddr.SubZipcode = tempForm["UcAddressZipcode"]["value"];
-    this.custObjToSave.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
-    var reqEditObj: ReqPersonalObj = {
-      CustObj: this.custObjToSave,
-      CustPersonalObj: custPersonalObj,
-      CustAddr: this.custObjToSave.CustAddr
-    };
+    reqSubmitObj.CustObj.CustAddr = this.tempCustAddr;
+    reqSubmitObj.CustObj.CustAddr.CustId = this.CustId;
+    reqSubmitObj.CustObj.CustAddr.Addr = tempForm["UcAddress"]["Addr"];
+    reqSubmitObj.CustObj.CustAddr.AreaCode1 = tempForm["UcAddress"]["AreaCode1"];
+    reqSubmitObj.CustObj.CustAddr.AreaCode2 = tempForm["UcAddress"]["AreaCode2"];
+    reqSubmitObj.CustObj.CustAddr.AreaCode3 = tempForm["UcAddress"]["AreaCode3"];
+    reqSubmitObj.CustObj.CustAddr.AreaCode4 = tempForm["UcAddress"]["AreaCode4"];
+    reqSubmitObj.CustObj.CustAddr.City = tempForm["UcAddress"]["City"];
+    reqSubmitObj.CustObj.CustAddr.Zipcode = tempForm["UcAddressZipcode"]["value"];
+    reqSubmitObj.CustObj.CustAddr.SubZipcode = tempForm["UcAddressZipcode"]["value"];
+    reqSubmitObj.CustObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
 
-    this.outputAfterSave.emit(reqEditObj);
+    this.outputAfterSave.emit(reqSubmitObj);
   }
   //#endregion
 }
