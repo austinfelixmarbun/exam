@@ -10,7 +10,6 @@ import {
 
 import { Observable, throwError } from 'rxjs';
 import { map, catchError, finalize } from 'rxjs/operators';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { formatDate } from '@angular/common';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
@@ -19,15 +18,16 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
     count = 0;
-    constructor(public errorDialogService: ErrorDialogService, private spinner: NgxSpinnerService, private router: Router, public toastr: ToastrService, private cookieService: CookieService) { }
+    constructor(public errorDialogService: ErrorDialogService, private router: Router, public toastr: ToastrService, private cookieService: CookieService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log(request);
         if (request.method == "POST" && (request.body == null || request.body.isLoading == undefined || request.body.isLoading == true)) {
-            this.spinner.show();
+            // this.spinner.show();
         }
         if (request.url != "./assets/i18n/en.json") {
             this.count++;
@@ -42,7 +42,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         var checkSession = AdInsHelper.CheckSessionTimeout(this.cookieService);
         if (checkSession == "1") {
             // this.errorDialogService.openDialog(AdInsErrorMessage.SessionTimeout);
-            this.spinner.hide();
+            // this.spinner.hide();
             AdInsHelper.RedirectUrl(this.router, [NavigationConstant.PAGES_LOGIN], {});
         }
 
@@ -93,20 +93,26 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         request = request.clone({ headers: request.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0') });
         request = request.clone({ headers: request.headers.set('Pragma', 'no-cache') });
         request = request.clone({ headers: request.headers.set('Expires', '0') });
+
+        let newUrl: string;
+        let vers: string;
+        let apiVers = request.url.match(CommonConstant.regexAPI);
+
+        if (apiVers != undefined) {
+            //temporary logic if BE no versioning & camunda
+            if (environment["isCore"] == undefined || !environment["isCore"]) {
+                newUrl = request.url;
+                newUrl = newUrl.replace(apiVers[0], "");
+                request = request.clone({ url: newUrl});
+            }
+            vers = apiVers[0].substring(2);
+            request = request.clone({ headers: request.headers.set('X-Version', vers) });
+        }
+
         request = request.clone({ body: myObj });
         AdInsHelper.InsertLog(this.cookieService, request.url, "API", request.body);
         console.log(JSON.stringify(request.body));
-        // if (request.url.includes("Add") || request.url.includes("Edit") || request.url.includes("Delete")) {
-        //     var q = "AddQueue";
-        //     var url = request.url;
-        //     var n = url.lastIndexOf("/");
-        //     var envi = url.substring(0,n+1);
-        //     var newUrl = envi.concat(q);
-
-        //     var req = request.clone({url: newUrl});
-        // } else {
-        //     var req = request;
-        // }
+        
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
@@ -161,7 +167,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                     AdInsHelper.ClearPageAccessLog(this.cookieService);
                 }
                 if (this.count == 0) {
-                    this.spinner.hide();
+                    // this.spinner.hide();
                 }
             })
         );

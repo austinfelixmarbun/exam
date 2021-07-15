@@ -68,7 +68,7 @@ export class MasterTypeAddEditComponent implements OnInit {
   }
 
   Save(RoleAddEditForm: NgForm): void {
-    this.spinner.show();
+    // this.spinner.show();
     var getRoleUrl = this.foundationUrl + URLConstant.GetRefRole;
     var getRoleUrlGateway = 'http://01-05-0064-0618/FOUNDATION_R3/RefRole/GetRefRole'
     var roleObj: RefRoleObj;
@@ -100,12 +100,12 @@ export class MasterTypeAddEditComponent implements OnInit {
               (response) => {
                 this.service.typeSave(ExceptionConstant.SAVE_SUCCESSED);
                 this.location.back();
-                this.spinner.hide();
+                // this.spinner.hide();
 
               },
               (error) => {
                 this.service.typeErrorCustom(error);
-                this.spinner.hide();
+                // this.spinner.hide();
               }
             );
           }
@@ -131,12 +131,12 @@ export class MasterTypeAddEditComponent implements OnInit {
         (response) => {
           this.service.typeSave(ExceptionConstant.EDIT_SUCCESSED);
           this.location.back();
-          this.spinner.hide();
+          // this.spinner.hide();
 
         },
         (error) => {
           this.service.typeErrorCustom(error);
-          this.spinner.hide();
+          // this.spinner.hide();
         }
       );
 
