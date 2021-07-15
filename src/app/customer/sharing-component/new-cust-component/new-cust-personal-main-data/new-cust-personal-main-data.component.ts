@@ -22,7 +22,6 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMas
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
-import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 import { NewCustSetData } from '../NewCustSetData.Service';
 
@@ -218,7 +217,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           IdExpiredDt: datePipe.transform(this.custObj.IdExpiredDt, 'yyyy-MM-dd'),
           TaxIdNo: this.custObj.TaxIdNo,
           IsAffiliateWithMf: this.custObj.IsAffiliateWithMf,
-          VipNotes: this.custObj.VipNotes,
         });
         this.existingCustomerLookUpObj.nameSelect = response.CustName;
         this.existingCustomerLookUpObj.isReady = true;
@@ -344,6 +342,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           TaxIdNo: response.TaxIdNo,
         });
 
+        // ini kondisi apaan?
         if (response.MrIdTypeCode) {
           this.onOptionsSelected()
         }

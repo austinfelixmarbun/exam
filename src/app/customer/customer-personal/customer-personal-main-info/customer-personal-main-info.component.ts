@@ -11,7 +11,7 @@ import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { DatePipe, formatDate } from '@angular/common';
+import { formatDate } from '@angular/common';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
@@ -22,15 +22,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { environment } from 'environments/environment';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
-// import { CustThirdPartyCheckingObj } from 'app/shared/model/CustThirdPartyCheckingObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
-
 
 @Component({
   selector: 'app-customer-personal-main-info',
   templateUrl: './customer-personal-main-info.component.html',
-  providers: [NGXToastrService, RegexService]
+  providers: [RegexService]
 })
 export class CustomerPersonalMainInfoComponent implements OnInit {
 

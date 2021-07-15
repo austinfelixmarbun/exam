@@ -47,7 +47,7 @@ export class NewCustHeaderComponent implements OnInit {
         this.CustType = params["CustType"];
       }
       if (params["From"] != null) {
-        this.CustType = params["From"];
+        this.From = params["From"];
       }
     });
   }
@@ -95,7 +95,6 @@ export class NewCustHeaderComponent implements OnInit {
 
   DupCheckPersonalObj: ReqPersonalObj = new ReqPersonalObj();
   ClickSavePersonal(ev: ReqPersonalObj) {
-    console.log(ev);
     if (this.CustId != 0) {
       this.http.post(URLConstant.EditCustPersonalMainData, ev).subscribe(
         (response) => {
@@ -110,7 +109,6 @@ export class NewCustHeaderComponent implements OnInit {
 
   DupCheckCoyObj: ReqCoyObj = new ReqCoyObj();
   ClickSaveCoy(ev: ReqCoyObj) {
-    console.log(ev);
     if (this.CustId != 0) {
       this.http.post(URLConstant.EditCustCompanyMainData, ev).subscribe(
         (response) => {

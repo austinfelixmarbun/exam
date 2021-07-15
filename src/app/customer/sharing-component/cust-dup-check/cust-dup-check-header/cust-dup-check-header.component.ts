@@ -89,6 +89,7 @@ export class CustDupCheckHeaderComponent implements OnInit {
   EditCustPersonal(item: CustDuplicateObj) {
     let reqEditDupCheck: ReqDupObj = new ReqDupObj();
     reqEditDupCheck.CustNo = item.CustNo;
+    // salah logic save is is ny
     reqEditDupCheck.IsCustomer = this.CustPersonalObj.CustObj.IsCustomer;
     reqEditDupCheck.IsFamily = this.CustPersonalObj.CustObj.IsFamily;
     reqEditDupCheck.IsShareholder = this.CustPersonalObj.CustObj.IsShareholder;
@@ -132,7 +133,7 @@ export class CustDupCheckHeaderComponent implements OnInit {
         this.outputSave.emit("");
       }
     );
-  }
+  } 
 
   EditNegativeCust(item: NegCustDuplicateObj) {
     if (this.CustType == this.CustTypePersonal) {
