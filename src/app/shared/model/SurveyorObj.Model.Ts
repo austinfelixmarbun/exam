@@ -1,8 +1,7 @@
-
 export class SurveyorObj{
     SurveyorId: any;
     SurveyorNo: any;
-    RefOfficeId: any;
+    CenterGrpId: any;
     RefUserId: any;
     VendorId: any;
     MrSurveyorTypeCode: any;
