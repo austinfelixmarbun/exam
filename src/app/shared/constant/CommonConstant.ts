@@ -1,6 +1,9 @@
 
 export class CommonConstant {
 
+    // REGEX API
+    public static regexAPI = "\\/[v,V][1-9]\\d*(\\.[1-9]\\d*)*";
+
     // MODULE
     public static MODULE_LOS = "LOS";
     public static MODULE_LMS = "LMS";

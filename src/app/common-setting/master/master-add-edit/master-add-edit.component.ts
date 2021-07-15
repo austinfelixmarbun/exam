@@ -95,7 +95,7 @@ export class MasterAddEditComponent implements OnInit {
   }
 
   Save() {
-    this.spinner.show();
+    // this.spinner.show();
     this.refMasterObj = this.RefMasterForm.value;
 
     //MODE-ADD
@@ -121,11 +121,11 @@ export class MasterAddEditComponent implements OnInit {
           this.toastr.successMessage(response["Message"]);
           //this.location.back();
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CS_MASTER], {});
-          this.spinner.hide();
+          // this.spinner.hide();
         },
         (error) => {
           this.toastr.typeErrorCustom(error);
-          this.spinner.hide();
+          // this.spinner.hide();
         }
       );
     }
