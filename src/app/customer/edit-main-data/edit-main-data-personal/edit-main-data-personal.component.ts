@@ -340,7 +340,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     var reqEditObj = {
       CustObj: this.custObj,
       CustPersonalObj: this.custPersonalObj,
-      CustAddrObj: this.custObj.CustAddr
+      CustAddr: this.custObj.CustAddr
     };
     this.http.post(URLConstant.EditCustPersonalMainData, reqEditObj).subscribe(
       (response) => {
