@@ -14,7 +14,7 @@ export class UcViewGenericObj {
         this.viewEnvironment = environment.FoundationR3Url + '/v1';
         this.ddlEnvironments = new Array<EnviObj>();
         this.listEnvironments = new Array<EnvisObj>();
-        this.listEnvironments.push({ environment: "FOU", url: environment.FoundationR3Url });
+        this.listEnvironments.push({ environment: "FOU", url: environment.FoundationR3Url + '/v1' });
         this.listEnvironments.push({ environment: "FOU_WEB", url: environment.FoundationR3Web });
         this.whereValue = new Array<WhereValueObj>();
         this.navigationConst = NavigationConstant;
