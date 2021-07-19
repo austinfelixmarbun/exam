@@ -11,6 +11,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
+import { CustObj } from 'app/shared/model/CustObj.Model';
 
 @Component({
   selector: 'app-customer-company-detail',
@@ -35,7 +36,9 @@ export class CustomerCompanyDetailComponent implements OnInit {
   CustomerDetailForm = this.fb.group({
     NumOfEmp: ['', [Validators.maxLength(100), Validators.required, Validators.pattern("^[0-9]+$")]],
     EstablishmentDt: ['', [Validators.required]],
-    IsSkt: [false]
+    IsSkt: [false],
+    IsVip: [false],
+    VipNotes: ['']
   });
 
   constructor(private router: Router,
@@ -60,8 +63,16 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.lookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
 
-    this.custCompanyObj = new CustCompanyObj();
-    this.custCompanyObj.CustId = this.IdCust;
+    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
+      (response: CustObj) => {
+        console.log(response);
+        this.CustomerDetailForm.patchValue({
+          IsVip: response.IsVip,
+          VipNotes: response.VipNotes
+        });
+        this.checkState();
+      }
+    );
     this.http.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
@@ -92,6 +103,8 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.custCompanyObj.NumOfEmp = this.CustomerDetailForm.controls["NumOfEmp"].value;
     this.custCompanyObj.EstablishmentDt = this.CustomerDetailForm.controls["EstablishmentDt"].value;
     this.custCompanyObj.IsSkt = this.CustomerDetailForm.controls["IsSkt"].value;
+    this.custCompanyObj.IsVip = this.CustomerDetailForm.controls["IsVip"].value;
+    this.custCompanyObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
 
     if (this.tempRefIndustryObj != null && this.tempRefIndustryTypeId === null) {
       this.custCompanyObj.RefIndustryTypeId = this.custCompanyObj.RefIndustryTypeId;
@@ -110,6 +123,22 @@ export class CustomerCompanyDetailComponent implements OnInit {
 
   getLookUp(event) {
     this.tempRefIndustryTypeId = event.RefIndustryTypeId;
+  }
+
+  checkState() {
+    if (!this.CustomerDetailForm.controls.IsVip.value) {
+      this.CustomerDetailForm.patchValue({
+        VipNotes: null
+      });
+      this.CustomerDetailForm.controls.VipNotes.disable();
+      this.CustomerDetailForm.controls.VipNotes.clearAsyncValidators();
+
+    } else {
+      this.CustomerDetailForm.controls.VipNotes.enable();
+      this.CustomerDetailForm.controls.VipNotes.setValidators(Validators.required);
+
+    }
+    this.CustomerDetailForm.controls.VipNotes.updateValueAndValidity();
   }
 
   back() {
