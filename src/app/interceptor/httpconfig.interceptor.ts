@@ -19,15 +19,16 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
     count = 0;
-    constructor(public errorDialogService: ErrorDialogService, private router: Router, public toastr: ToastrService, private cookieService: CookieService) { }
+    constructor(public errorDialogService: ErrorDialogService, private spinner: NgxSpinnerService, private router: Router, public toastr: ToastrService, private cookieService: CookieService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log(request);
         if (request.method == "POST" && (request.body == null || request.body.isLoading == undefined || request.body.isLoading == true)) {
-            // this.spinner.show();
+            this.spinner.show();
         }
         if (request.url != "./assets/i18n/en.json") {
             this.count++;
@@ -42,7 +43,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         var checkSession = AdInsHelper.CheckSessionTimeout(this.cookieService);
         if (checkSession == "1") {
             // this.errorDialogService.openDialog(AdInsErrorMessage.SessionTimeout);
-            // this.spinner.hide();
+            this.spinner.hide();
             AdInsHelper.RedirectUrl(this.router, [NavigationConstant.PAGES_LOGIN], {});
         }
 
@@ -167,7 +168,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                     AdInsHelper.ClearPageAccessLog(this.cookieService);
                 }
                 if (this.count == 0) {
-                    // this.spinner.hide();
+                    this.spinner.hide();
                 }
             })
         );
