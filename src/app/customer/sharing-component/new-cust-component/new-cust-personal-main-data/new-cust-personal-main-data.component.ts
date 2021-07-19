@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegexService } from 'app/customer/regex.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -9,6 +9,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
@@ -17,13 +18,18 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
+import { CustAttrContentObj } from 'app/shared/model/NewCust/CustAttrContentObj.Model';
+import { CustCompanyMgmntShrholderObj } from 'app/shared/model/NewCust/CustCompanyMgmntShrholderObj.Model';
 import { ReqPersonalObj } from 'app/shared/model/NewCust/ReqPersonalObj.Model';
+import { ShareholderFormExistingObj } from 'app/shared/model/NewCust/Shareholder/ShareholderFormExistingObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
+import { CustAttrFormComponent } from '../component/cust-attr-form/cust-attr-form.component';
+import { ShareholderFormComponent } from '../component/shareholder-form/shareholder-form.component';
 import { NewCustSetData } from '../NewCustSetData.Service';
 
 @Component({
@@ -32,8 +38,12 @@ import { NewCustSetData } from '../NewCustSetData.Service';
 })
 export class NewCustPersonalMainDataComponent implements OnInit {
 
+  @ViewChild('ShareholderForm') shareholderForm: ShareholderFormComponent;
+  @ViewChild('CustAttrForm') custAttrForm: CustAttrFormComponent;
   @Input() listCustIdToExclude: Array<string> = new Array();
   @Input() CustId: number = 0; // if 0 mode Add else mode Edit.
+  @Input() CustCompanyMgmntShrholderId: number = 0;
+  @Input() ParentCustId: number = 0;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust; // Cust Mode
   @Output() outputAfterSave: EventEmitter<ReqPersonalObj> = new EventEmitter();
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
@@ -41,7 +51,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   custObj: CustObj = new CustObj();
   CustomerForm: FormGroup = this.fb.group({});
   inputAddressObj: InputAddressObj = new InputAddressObj();
-  inputFieldObj: InputFieldObj = new InputFieldObj();
   inputLookupObj: InputLookupObj = new InputLookupObj();
 
   constructor(private regexService: RegexService,
@@ -54,15 +63,20 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   readonly RefMasterTypeCodeGender: string = CommonConstant.RefMasterTypeCodeGender;
   readonly RefMasterTypeCodeMaritalStat: string = CommonConstant.RefMasterTypeCodeMaritalStat;
 
+  readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
+  readonly AttrGroupCustPersonalOther: string = CommonConstant.AttrGroupCustPersonalOther;
+  readonly listAttrCodes: Array<string> = [CommonConstant.AttrCodeDeptAml, CommonConstant.AttrCodeAuthAml];
+
   readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
   readonly CustDataModeFamily: string = CommonConstant.CustMainDataModeFamily;
   readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
   //#endregion
 
   async ngOnInit() {
+    console.log(this.CustDataMode);
+    console.log(this.CustNameLabel);
     this.InitData();
     this.InitCustMainDataMode();
-    this.BindSetLegalAddr();
     this.BindLookupSupplier();
     this.BindLookupExistingCust();
     this.ClearCustForm();
@@ -71,6 +85,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.initDdlRefMaster(this.RefMasterTypeCodeGender);
     this.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat);
     await this.GetExistingData();
+    this.GetCustAddrToCopy();
+    console.log(this.CustomerForm);
   }
 
   //#region Set Data
@@ -101,18 +117,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       default:
     }
   }
-  //#region UcAddress
-  BindSetLegalAddr() {
-    this.inputFieldObj = new InputFieldObj();
-    this.inputFieldObj.inputLookupObj = new InputLookupObj();
-    this.inputAddressObj = new InputAddressObj();
-    this.inputAddressObj.showSubsection = false;
-    this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.default = new UcAddressObj();
-    this.inputAddressObj.inputField = this.inputFieldObj;
-    this.inputAddressObj.showAllPhn = false;
-  }
-  //#endregion
 
   //#region UcLookup
   BindLookupSupplier() {
@@ -136,12 +140,12 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false) {
     let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
-    let refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+    let ReqRefMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: refMasterTypeCode,
       MappingCode: mappingCode
     }
     tempDdlObj.apiUrl = URLConstant.GetListActiveRefMaster;
-    tempDdlObj.requestObj = refMasterObjMrIdTypeCode;
+    tempDdlObj.requestObj = ReqRefMasterObj;
     tempDdlObj.customObjName = CommonConstant.ReturnObj;
     tempDdlObj.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
     tempDdlObj.isSelectOutput = isSelectOutput;
@@ -164,13 +168,16 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       IdExpiredDt: [''],
       MrMaritalStatCode: ['', Validators.required],
       MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
-      CustModel: [''],
       IsAffiliateWithMf: [false],
       IsSupplier: [false],
       SupplCode: [''],
       SupplName: [''],
       SupplId: ['']
     });
+
+    if (this.CustDataMode != this.CustDataModeMain) {
+      this.CustomerForm.get("CustName").disable();
+    }
   }
   //#endregion
 
@@ -203,12 +210,14 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     await this.GetCustData();
     this.GetCustAddr();
     await this.GetCustPersonalData();
+    this.IsLockEdit();
   }
 
-  async GetCustData() {
+  async GetCustData(custId: number = this.CustId) {
     let datePipe = new DatePipe("en-US");
-    await this.http.post(URLConstant.GetCustByCustId, { Id: this.CustId }).toPromise().then(
+    await this.http.post(URLConstant.GetCustByCustId, { Id: custId }).toPromise().then(
       (response: CustObj) => {
+        console.log(response);
         this.custObj = response;
         this.CustomerForm.patchValue({
           CustName: this.custObj.CustName,
@@ -220,7 +229,13 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           IsAffiliateWithMf: this.custObj.IsAffiliateWithMf,
           VipNotes: this.custObj.VipNotes,
         });
+        if (this.CustDataMode != this.CustDataModeMain) {
+          this.CustomerForm.patchValue({
+            MrCustModelCode: response.MrCustModelCode
+          });
+        }
         this.existingCustomerLookUpObj.nameSelect = response.CustName;
+        this.existingCustomerLookUpObj.jsonSelect = { CustName: response.CustName };
         this.existingCustomerLookUpObj.isReady = true;
         this.onChangeIdType();
       }
@@ -228,15 +243,17 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   tempCustAddr: CustAddrObj = new CustAddrObj();
-  async GetCustAddr() {
+  async GetCustAddr(custId: number = this.CustId) {
     let reqObj: GenericObj = new GenericObj();
-    reqObj.Id = this.CustId;
+    reqObj.Id = custId;
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
     await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response: CustAddrObj) => {
         this.tempCustAddr = response;
-        this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
-        this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
+        let inputFieldObj = new InputFieldObj();
+        inputFieldObj.inputLookupObj = new InputLookupObj();
+        inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
+        inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
         let tempUcAddObj: UcAddressObj = new UcAddressObj();
         tempUcAddObj.AreaCode1 = response.AreaCode1;
         tempUcAddObj.AreaCode2 = response.AreaCode2;
@@ -245,16 +262,31 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         tempUcAddObj.Addr = response.Addr;
         tempUcAddObj.City = response.City;
         this.inputAddressObj.default = tempUcAddObj;
-        this.inputAddressObj.inputField = this.inputFieldObj;
+        this.inputAddressObj.inputField = inputFieldObj;
+      }
+    );
+  }
+
+  tempCustAddrToCopy: CustAddrObj = new CustAddrObj();
+  async GetCustAddrToCopy() {
+    if (this.CustDataMode == this.CustDataModeMain) return;
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = this.ParentCustId;
+    reqObj.Code = CommonConstant.CustAddrTypeLegal;
+    await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+      (response: CustAddrObj) => {
+        console.log(response);
+        this.tempCustAddrToCopy = response;
       }
     );
   }
 
   tempCustPersonalObj: CustPersonalObj = new CustPersonalObj();
-  async GetCustPersonalData() {
+  async GetCustPersonalData(custId: number = this.CustId) {
     let datePipe = new DatePipe("en-US");
-    await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: this.CustId }).toPromise().then(
+    await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: custId }).toPromise().then(
       (response) => {
+        console.log(response);
         this.tempCustPersonalObj = response;
         this.CustomerForm.patchValue({
           MrGenderCode: response.MrGenderCode,
@@ -264,6 +296,12 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           IsRestInPeace: response.IsRestInPeace,
           MrMaritalStatCode: response.MrMaritalStatCode,
         });
+        if (this.CustDataMode != this.CustDataModeMain) {
+          this.CustomerForm.patchValue({
+            MobilePhnNo1: response.MobilePhnNo1,
+            Email1: response.Email1
+          });
+        }
       }
     );
   }
@@ -351,8 +389,10 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
     this.http.post(URLConstant.GetVendorAddrByVendorCodeAndMrAddrTypeCode, { VendorCode: e.VendorCode, MrAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
       (response: VendorAddrObj) => {
-        this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
-        this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
+        let inputFieldObj = new InputFieldObj();
+        inputFieldObj.inputLookupObj = new InputLookupObj();
+        inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
+        inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
         let tempUcAddObj: UcAddressObj = new UcAddressObj();
         tempUcAddObj.AreaCode1 = response.AreaCode1;
         tempUcAddObj.AreaCode2 = response.AreaCode2;
@@ -361,9 +401,57 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         tempUcAddObj.Addr = response.Addr;
         tempUcAddObj.City = response.City;
         this.inputAddressObj.default = tempUcAddObj;
-        this.inputAddressObj.inputField = this.inputFieldObj;
+        this.inputAddressObj.inputField = inputFieldObj;
       }
     );
+  }
+
+  ExistingShareholderObj: ShareholderFormExistingObj = new ShareholderFormExistingObj();
+  GetExistingShareholder(ev: ShareholderFormExistingObj) {
+    console.log(ev);
+    this.ExistingShareholderObj = ev;
+  }
+
+  CopyLegalAddr() {
+    let inputFieldObj = new InputFieldObj();
+    inputFieldObj.inputLookupObj = new InputLookupObj();
+    inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrToCopy.Zipcode;
+    inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrToCopy.Zipcode };
+    let tempUcAddObj: UcAddressObj = new UcAddressObj();
+    tempUcAddObj.AreaCode1 = this.tempCustAddrToCopy.AreaCode1;
+    tempUcAddObj.AreaCode2 = this.tempCustAddrToCopy.AreaCode2;
+    tempUcAddObj.AreaCode3 = this.tempCustAddrToCopy.AreaCode3;
+    tempUcAddObj.AreaCode4 = this.tempCustAddrToCopy.AreaCode4;
+    tempUcAddObj.Addr = this.tempCustAddrToCopy.Addr;
+    tempUcAddObj.City = this.tempCustAddrToCopy.City;
+    this.inputAddressObj.default = tempUcAddObj;
+    this.inputAddressObj.inputField = inputFieldObj;
+  }
+
+  async getLookUpCustomer(ev: {CustId: number, CustCompanyMgmntShrholderId: number }){
+    console.log(ev);
+    await this.GetCustData(ev.CustId);
+    this.GetCustAddr(ev.CustId);
+    await this.GetCustPersonalData(ev.CustId);
+    if(ev.CustCompanyMgmntShrholderId) this.shareholderForm.GetExistingShareholder(ev.CustCompanyMgmntShrholderId);
+    this.shareholderForm.GetExistingJobData(ev.CustId);
+    this.custAttrForm.GetQuestion(ev.CustId);
+
+    this.IsLockEdit();
+  }
+
+  IsLockEdit(){
+    this.existingCustomerLookUpObj.isReadonly = true;
+    
+    this.CustomerForm.get("MrGenderCode").disable();
+    this.CustomerForm.get("MrIdTypeCode").disable();
+    this.CustomerForm.get("BirthPlace").disable();
+    this.CustomerForm.get("BirthDt").disable();
+    this.CustomerForm.get("IdNo").disable();
+    this.CustomerForm.get("TaxIdNo").disable();
+    this.CustomerForm.get("IdExpiredDt").disable();
+    this.CustomerForm.get("MrMaritalStatCode").disable();
+    this.CustomerForm.get("MotherMaidenName").disable();
   }
   //#endregion
 
@@ -373,7 +461,9 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   SaveForm() {
+    console.log(this.CustomerForm);
     let tempForm = this.CustomerForm.getRawValue();
+    console.log(tempForm);
     let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
     reqSubmitObj.CustObj = this.custObj;
     reqSubmitObj.CustObj.CustName = tempForm["CustName"];
@@ -404,7 +494,19 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     reqSubmitObj.CustAddr.SubZipcode = tempForm["UcAddressZipcode"]["value"];
     reqSubmitObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
 
+    if (this.CustDataMode != this.CustDataModeMain) {
+      reqSubmitObj.CustObj.CustName = tempForm["ExistingCustName"].value;
+      reqSubmitObj.CustPersonalObj.CustFullName = tempForm["ExistingCustName"].value;
+      reqSubmitObj.CustPersonalObj.Email1 = tempForm["Email1"];
+      reqSubmitObj.CustPersonalObj.MobilePhnNo1 = tempForm["MobilePhnNo1"];
+      reqSubmitObj.CustObj.MrCustModelCode = tempForm["MrCustModelCode"];
+      reqSubmitObj.CustPersonalJobObj = this.SetCustPersonalJobData();
+      reqSubmitObj.CustAttrContentObjs = this.SetCustAttrContent();
+    }
+    if (this.CustDataMode == this.CustDataModeShareholder) reqSubmitObj.CustCompanyMgmntShrholderObj = this.SetCustMgmntShareholder()
+
     reqSubmitObj = this.SetCustomerDataMode(reqSubmitObj);
+    console.log(reqSubmitObj);
     this.outputAfterSave.emit(reqSubmitObj);
   }
 
@@ -421,6 +523,50 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         break;
     }
     return reqSubmitObj;
+  }
+
+  SetCustMgmntShareholder(): CustCompanyMgmntShrholderObj {
+    let tempForm = this.CustomerForm.getRawValue();
+    let tempReqObj: CustCompanyMgmntShrholderObj = this.ExistingShareholderObj.CustCompanyMgmntShrholder;
+    tempReqObj.CustId = this.ParentCustId;
+    tempReqObj.ShareholderId = this.CustId;
+
+    tempReqObj.SharePrcnt = tempForm["SharePrcnt"];
+    tempReqObj.MrPositionSlikCode = tempForm["MrPositionSlikCode"];
+    tempReqObj.IsActive = tempForm["IsActive"];
+    tempReqObj.IsOwner = tempForm["IsOwner"];
+    tempReqObj.IsSigner = tempForm["IsSigner"];
+    tempReqObj.EstablishmentDt = tempForm["EstablishmentDt"];
+
+    return tempReqObj
+  }
+
+  SetCustPersonalJobData(): CustPersonalJobDataObj {
+    let tempForm = this.CustomerForm.getRawValue();
+    let tempReqObj: CustPersonalJobDataObj = this.ExistingShareholderObj.CustPersonalJob;
+    tempReqObj.CustId = this.CustId;
+
+    tempReqObj.RefProfessionId = tempForm["RefProfessionId"] != 0 ? tempForm["RefProfessionId"] : null;
+    tempReqObj.MrJobPositionCode = tempForm["MrJobPositionCode"];
+    if (!tempReqObj.RefProfessionId && !tempReqObj.MrJobPositionCode) tempReqObj = null;
+    return tempReqObj
+  }
+
+  identifierCustAttr: string = "CustAttrForm";
+  SetCustAttrContent(): Array<CustAttrContentObj> {
+    let tempAttr: Array<CustAttrContentObj> = new Array();
+    let tempFormArray = this.CustomerForm.get(this.identifierCustAttr) as FormArray;
+    console.log(tempFormArray);
+    for (let index = 0; index < tempFormArray.length; index++) {
+      const element = tempFormArray.get(index.toString()).value;
+      console.log(element);
+      let tempAttrToPush: CustAttrContentObj = new CustAttrContentObj();
+      tempAttrToPush.RefAttrId = element["RefAttrId"];
+      tempAttrToPush.CustId = element["CustId"];
+      tempAttrToPush.AttrValue = element["AttrValue"];
+      tempAttr.push(tempAttrToPush);
+    }
+    return tempAttr;
   }
   //#endregion
 }

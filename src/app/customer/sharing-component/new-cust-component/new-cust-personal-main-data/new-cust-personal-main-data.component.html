@@ -5,7 +5,7 @@
         <div class="addEdit">
           <form class="form form-horizontal" [formGroup]="CustomerForm" (ngSubmit)="CustomerForm.valid && SaveForm()"
             #enjiForm="ngForm">
-            <lib-ucSubsection [id]="'MainInfoPersId'" [title]="'Main Info'" [panel]="'MainInfoPers'">
+            <lib-ucSubsection [id]="'MainInfoPersId'" [title]="CustDataMode + ' Main Info'" [panel]="'MainInfoPers'">
             </lib-ucSubsection>
             <div class="form-body" id="MainInfoPers">
               <div class="form-group row" *ngIf="CustDataMode == CustDataModeMain && CustId == 0">
@@ -35,7 +35,7 @@
                     <label class="col-md-4 adins-required-label" translate>{{CustNameLabel}} Name </label>
                     <div class="col-md-8" *ngIf="CustDataMode != CustDataModeMain && existingCustomerLookUpObj.isReady">
                       <lib-uclookupgeneric [lookupInput]="existingCustomerLookUpObj" [parentForm]="CustomerForm"
-                        [enjiForm]="enjiForm" [identifier]="'CustName'" (lookup)=getLookUpCustomer($event)>
+                        [enjiForm]="enjiForm" [identifier]="'ExistingCustName'" (lookup)=getLookUpCustomer($event)>
                       </lib-uclookupgeneric>
                     </div>
                     <div class="col-md-8" *ngIf="CustDataMode == CustDataModeMain">
@@ -97,14 +97,6 @@
                   <div class="form-group row">
                     <label class="col-md-4 adins-required-label" translate>Gender </label>
                     <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeGender]?.isReady">
-                      <!-- <select class="form-control adInsInput" style="width: auto" formControlName="MrGenderCode"
-                        [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MrGenderCode.invalid }">
-                        <option *ngFor="let it of tempGender" [value]="it.Key">
-                          {{it.Value}}</option>
-                        </select>
-                        <lib-uc-show-errors [control]="CustomerForm.controls.MrGenderCode" [submit]="enjiForm.submitted">
-                        </lib-uc-show-errors> -->
-
                       <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeGender]"
                         [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrGenderCode'"></lib-ucdropdownlist>
                     </div>
@@ -159,10 +151,20 @@
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
                 </div>
               </div>
+              <app-shareholder-form *ngIf="CustDataMode == CustDataModeShareholder" [parentForm]="CustomerForm" [enjiForm]="enjiForm" [CustId]="CustId" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId" [CustType]="CustTypePersonal" outputExisting=GetExistingShareholder($event) #ShareholderForm></app-shareholder-form>
+              <app-cust-attr-form *ngIf="CustDataMode != CustDataModeMain" [Label]="CustDataMode" [CustId]="CustId" [AttrGroup]="AttrGroupCustPersonalOther" [AttrCodes]="listAttrCodes" [parentForm]="CustomerForm" [enjiForm]="enjiForm" #CustAttrForm></app-cust-attr-form>
             </div>
             <lib-ucSubsection [id]="'LegalAddr'" [title]="'Legal Address'" [panel]="'LegalAddrSection'">
             </lib-ucSubsection>
             <div class="form-body" id="LegalAddrSection">
+              <div class="form-group row" *ngIf="CustDataMode != CustDataModeMain">
+                <label class="col-md-2 adInsLabel" translate>Copy Address From Legal Customer</label>
+                <div class="col-md-4">
+                  <button type="button" class="btn btn-raised btn-primary" (click)="CopyLegalAddr()" translate>
+                    <i class="far"></i> Copy
+                  </button>
+                </div>
+              </div>
               <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerForm" [enjiForm]="enjiForm"
                 [identifier]="'UcAddress'">
               </lib-ucaddress>

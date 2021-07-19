@@ -4,7 +4,7 @@
       <div class="px-3">
         <form class="form form-horizontal" [formGroup]="CustomerForm"
           (ngSubmit)="CustomerForm.valid && SaveForm() " #enjiForm="ngForm">
-          <lib-ucSubsection [id]="'MainInfoCoyId'" [title]="'Main Info'" [panel]="'MainInfoCoy'">
+          <lib-ucSubsection [id]="'MainInfoCoyId'" [title]="CustDataMode + ' Main Info'" [panel]="'MainInfoCoy'">
           </lib-ucSubsection>
           <div class="form-body" id="MainInfoCoy">
             <div class="form-group row" *ngIf="CustDataMode == CustDataModeMain && CustId == 0">
@@ -35,7 +35,7 @@
                   <label class="col-md-4 adInsLabel" translate>{{CustNameLabel}} Name </label>
                   <div class="col-md-8" *ngIf="CustDataMode != CustDataModeMain && existingCustomerLookUpObj.isReady">
                     <lib-uclookupgeneric [lookupInput]="existingCustomerLookUpObj" [parentForm]="CustomerForm"
-                      [enjiForm]="enjiForm" [identifier]="'CustName'" (lookup)=getLookUpCustomer($event)>
+                      [enjiForm]="enjiForm" [identifier]="'ExistingCustName'" (lookup)=getLookUpCustomer($event)>
                     </lib-uclookupgeneric>
                   </div>
                   <div class="col-md-8" *ngIf="CustDataMode == CustDataModeMain">

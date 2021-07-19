@@ -1,21 +1,20 @@
+import { CustPersonalJobDataObj } from "../CustPersonalJobDataObj.Model";
+import { CustAttrContentObj } from "./CustAttrContentObj.Model";
 import { CustCompanyMgmntShrholderObj } from "./CustCompanyMgmntShrholderObj.Model";
 import { CustPersonalFamilyObj } from "./CustPersonalFamilyObj.Model";
 
 export class ReqNegDupObj {
-    CustName: string;
-    MrCustTypeCode: string;
-    IdNo: string;
-    IsCustomer: boolean;
-    IsFamily: boolean;
-    IsShareholder: boolean;
+    NegativeCustId: number;
+    CustDataMode: string;
     MrCompanyTypeCode: string;
     CustPersonalFamilyObj: CustPersonalFamilyObj;
     CustCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
-    
+    CustPersonalJobObj: CustPersonalJobDataObj;
+    CustAttrContentObjs: Array<CustAttrContentObj>;
+
     constructor() {
-        this.CustName = "";
-        this.MrCustTypeCode = "";
-        this.IdNo = "";
+        this.NegativeCustId = 0;
+        this.CustDataMode = "";
         this.MrCompanyTypeCode = "";
         this.CustPersonalFamilyObj = null;
         this.CustCompanyMgmntShrholderObj = null;

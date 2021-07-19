@@ -16,6 +16,12 @@ import { NewCustHeaderComponent } from './new-cust-header/new-cust-header.compon
 import { CustDupCheckPersonalComponent } from './cust-dup-check/cust-dup-check-personal/cust-dup-check-personal.component';
 import { CustDupCheckCompanyComponent } from './cust-dup-check/cust-dup-check-company/cust-dup-check-company.component';
 import { CustDupCheckHeaderComponent } from './cust-dup-check/cust-dup-check-header/cust-dup-check-header.component';
+import { ShareholderListingComponent } from './shareholder-listing/shareholder-listing.component';
+import { FamilyListingComponent } from './family-listing/family-listing.component';
+import { NewCustPublicComponent } from './new-cust-component/new-cust-public/new-cust-public.component';
+import { ShareholderFormComponent } from './new-cust-component/component/shareholder-form/shareholder-form.component';
+import { CustAttrFormComponent } from './new-cust-component/component/cust-attr-form/cust-attr-form.component';
+
 export const customCurrencyMaskConfig = {
     align: "right",
     allowNegative: true,
@@ -37,6 +43,11 @@ export const customCurrencyMaskConfig = {
         CustDupCheckPersonalComponent,
         CustDupCheckCompanyComponent,
         CustDupCheckHeaderComponent,
+        FamilyListingComponent,
+        ShareholderListingComponent,
+        NewCustPublicComponent,
+        ShareholderFormComponent,
+        CustAttrFormComponent,
     ],
     imports: [
         CommonModule,
@@ -58,6 +69,11 @@ export const customCurrencyMaskConfig = {
         CustDupCheckPersonalComponent,
         CustDupCheckCompanyComponent,
         CustDupCheckHeaderComponent,
+        FamilyListingComponent,
+        ShareholderListingComponent,
+        NewCustPublicComponent,
+        ShareholderFormComponent,
+        CustAttrFormComponent,
     ],
 
     providers: [

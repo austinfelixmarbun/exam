@@ -32,6 +32,8 @@ export class NewCustCompanyMainDataComponent implements OnInit {
 
   @Input() listCustIdToExclude: Array<string> = new Array();
   @Input() CustId: number = 0; // if 0 mode Add else mode Edit.
+  @Input() CustCompanyMgmntShrholderId: number = 0;
+  @Input() ParentCustId: number = 0;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust; // Cust Mode
   @Output() outputAfterSave: EventEmitter<ReqCoyObj> = new EventEmitter();
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();

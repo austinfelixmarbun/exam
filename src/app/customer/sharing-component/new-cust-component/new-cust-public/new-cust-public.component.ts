@@ -1,0 +1,198 @@
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { ShareholderPublicObj } from 'app/shared/model/NewCust/Shareholder/ShareholderPublicObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
+import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
+import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
+import { NewCustSetData } from '../NewCustSetData.Service';
+
+@Component({
+  selector: 'app-new-cust-public',
+  templateUrl: './new-cust-public.component.html',
+})
+export class NewCustPublicComponent implements OnInit {
+
+  @Input() CustId: number = 0;
+  @Input() CustCompanyMgmntShrholderId: number = 0;
+  @Output() outputCancel: EventEmitter<string> = new EventEmitter();
+
+  CustomerForm: FormGroup = this.fb.group({});
+  inputAddressObj: InputAddressObj = new InputAddressObj();
+  constructor(private http: HttpClient, private fb: FormBuilder,) { }
+
+  readonly RefMasterTypeCodePublicType: string = CommonConstant.RefMasterTypeCodePublicType;
+  readonly RefMasterTypeCodePositionSlik: string = CommonConstant.RefMasterTypeCodePositionSlik;
+
+  IsReady: boolean = false;
+  async ngOnInit() {
+    console.log(this.CustId);
+    this.InitData();
+    this.initDdlRefMaster(this.RefMasterTypeCodePublicType, null, true);
+    await this.GetExisting();
+    this.IsReady = true;
+  }
+
+  positionSlikLookUpObj: InputLookupObj = new InputLookupObj();
+  ClearForm(item: ShareholderPublicObj = null) {
+    this.CustomerForm = this.fb.group({
+      MrPositionSlikCode: [item == null ? '' : item.MrPositionSlikCode, Validators.required],
+      MrPublicTypeCode: [item == null ? '' : item.MrPublicTypeCode, Validators.required],
+      PublicName: [item == null ? '' : item.PublicName, Validators.required],
+      PublicIdentityNo: [item == null ? '' : item.PublicIdentityNo, Validators.required],
+      SharePrcnt: [item == null ? 0 : item.SharePrcnt, [Validators.required, Validators.min(0), Validators.max(100)]],
+      IsActive: [item == null ? false : item.IsActive, Validators.required],
+    });
+
+    if (item != null) {
+      //#region patch address
+      let inputFieldObj = new InputFieldObj();
+      inputFieldObj.inputLookupObj = new InputLookupObj();
+      inputFieldObj.inputLookupObj.nameSelect = item.PublicZipcode;
+      inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: item.PublicZipcode };
+      let tempUcAddObj: UcAddressObj = new UcAddressObj();
+      tempUcAddObj.AreaCode1 = item.PublicAreaCode1;
+      tempUcAddObj.AreaCode2 = item.PublicAreaCode2;
+      tempUcAddObj.AreaCode3 = item.PublicAreaCode3;
+      tempUcAddObj.AreaCode4 = item.PublicAreaCode4;
+      tempUcAddObj.Addr = item.PublicAddr;
+      tempUcAddObj.City = item.PublicCity;
+      this.inputAddressObj.default = tempUcAddObj;
+      this.inputAddressObj.inputField = inputFieldObj;
+      //#endregion
+
+      //#region patch positionSlik    
+      let reqMasterObj: ReqRefMasterByTypeCodeAndMasterCodeObj = {
+        MasterCode: item.MrPositionSlikCode,
+        RefMasterTypeCode: this.RefMasterTypeCodePositionSlik
+      };
+      this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).subscribe(
+        (response: RefMasterObj) => {
+          this.positionSlikLookUpObj.nameSelect = response.Descr;
+          this.positionSlikLookUpObj.jsonSelect = { Jabatan: response.Descr };
+          this.positionSlikLookUpObj.isReady = true;
+        }
+      )
+      //#endregion
+
+      this.disableOrEnableForm();
+    }
+  }
+
+  InitData() {
+    this.ClearForm();
+    this.inputAddressObj = NewCustSetData.BindSetLegalAddr();
+    this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();
+  }
+
+  //#region UcDDL
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
+  initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false) {
+    let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
+    let ReqRefMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+      RefMasterTypeCode: refMasterTypeCode,
+      MappingCode: mappingCode
+    }
+    tempDdlObj.apiUrl = URLConstant.GetListActiveRefMasterDetail;
+    tempDdlObj.requestObj = ReqRefMasterObj;
+    tempDdlObj.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
+    tempDdlObj.isSelectOutput = isSelectOutput;
+    tempDdlObj.isReady = true;
+    tempDdlObj.customKey = "MasterCode";
+    tempDdlObj.customValue = "Descr";
+    this.DictUcDDLObj[refMasterTypeCode] = tempDdlObj;
+  }
+  //#endregion
+
+  tempExisting: ShareholderPublicObj = new ShareholderPublicObj();
+  async GetExisting() {
+    if (this.CustCompanyMgmntShrholderId == 0) return;
+    await this.http.post(URLConstant.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, { Id: this.CustCompanyMgmntShrholderId }).toPromise().then(
+      (response: ShareholderPublicObj) => {
+        console.log(response);
+        this.tempExisting = response;
+        this.ClearForm(response);
+      }
+    )
+  }
+
+  SaveForm() {
+    let tempForm = this.CustomerForm.getRawValue();
+    let reqSubmitObj: ShareholderPublicObj = this.tempExisting;
+
+    reqSubmitObj.CustId = this.CustId;
+    reqSubmitObj.PublicName = tempForm["PublicName"];
+    reqSubmitObj.MrPositionSlikCode = tempForm["MrPositionSlikCode"];
+    reqSubmitObj.MrPublicTypeCode = tempForm["MrPublicTypeCode"];
+    reqSubmitObj.PublicIdentityNo = tempForm["PublicIdentityNo"];
+    reqSubmitObj.SharePrcnt = tempForm["SharePrcnt"];
+    reqSubmitObj.IsActive = tempForm["IsActive"];
+
+    reqSubmitObj.PublicAddr = tempForm["UcAddress"]["Addr"];
+    reqSubmitObj.PublicAreaCode1 = tempForm["UcAddress"]["AreaCode1"];
+    reqSubmitObj.PublicAreaCode2 = tempForm["UcAddress"]["AreaCode2"];
+    reqSubmitObj.PublicAreaCode3 = tempForm["UcAddress"]["AreaCode3"];
+    reqSubmitObj.PublicAreaCode4 = tempForm["UcAddress"]["AreaCode4"];
+    reqSubmitObj.PublicCity = tempForm["UcAddress"]["City"];
+    reqSubmitObj.PublicZipcode = tempForm["UcAddressZipcode"]["value"];
+    console.log(reqSubmitObj);
+
+    this.http.post(this.SetUrlApi(), reqSubmitObj).subscribe(
+      (response) => {
+        this.Cancel();
+      }
+    )
+  }
+
+  SetUrlApi(): string {
+    let urlApi: string = URLConstant.AddCustCompanyMgmntShrholderPublic;
+    if (this.CustCompanyMgmntShrholderId != 0) urlApi = URLConstant.EditCustCompanyMgmntShrholderPublic;
+    return urlApi;
+  }
+
+  //#region Change
+  Cancel() {
+    this.outputCancel.emit();
+  }
+
+  getLookUpSlik(ev: { Code: string, Jabatan: string }) {
+    console.log(ev);
+    let tempMrPositionSlikCode = this.CustomerForm.get("MrPositionSlikCode");
+    tempMrPositionSlikCode.patchValue(ev.Code);
+  }
+
+  onOptionsSelected(ev: { selectedIndex: number, selectedObj: RefMasterObj, selectedValue: string }) {
+    let tempPublicName = this.CustomerForm.get("PublicName");
+    let tempPublicIdentityNo = this.CustomerForm.get("PublicIdentityNo");
+    if (ev.selectedValue == "CMTY" || ev.selectedValue == "PRI") {
+      tempPublicName.patchValue(ev.selectedObj.Descr);
+      tempPublicIdentityNo.patchValue(ev.selectedObj.ReserveField1);
+      this.disableOrEnableForm();
+      return;
+    }
+    tempPublicIdentityNo.patchValue("");
+    tempPublicName.patchValue("");
+    this.disableOrEnableForm();
+  }
+
+  disableOrEnableForm() {
+    let tempMrPublicTypeCode = this.CustomerForm.get("MrPublicTypeCode");
+    let tempPublicName = this.CustomerForm.get("PublicName");
+    let tempPublicIdentityNo = this.CustomerForm.get("PublicIdentityNo");
+    if (tempMrPublicTypeCode.value == "CMTY" || tempMrPublicTypeCode.value == "PRI") {
+      tempPublicName.disable();
+      tempPublicIdentityNo.disable();
+      return;
+    }
+    tempPublicIdentityNo.enable();
+    tempPublicName.enable();
+  }
+  //#endregion
+}

@@ -8,9 +8,9 @@ import { UcAddressObj } from "app/shared/model/UcAddressObj.Model";
 export class NewCustSetData {
     
   public static BindSetLegalAddr(): InputAddressObj {
-    var inputFieldObj = new InputFieldObj();
+    let inputFieldObj = new InputFieldObj();
     inputFieldObj.inputLookupObj = new InputLookupObj();
-    var inputAddressObj = new InputAddressObj();
+    let inputAddressObj = new InputAddressObj();
     inputAddressObj.showSubsection = false;
     inputAddressObj.title = "Customer Address";
     inputAddressObj.default = new UcAddressObj();
@@ -18,6 +18,15 @@ export class NewCustSetData {
     inputAddressObj.showAllPhn = false;
 
     return inputAddressObj;
+  }
+
+  public static BindLookupPositionSlik(): InputLookupObj{    
+    let inputLookupObjName = new InputLookupObj();
+    inputLookupObjName.urlJson = "./assets/uclookup/Customer/lookupPositionSlik.json";
+    inputLookupObjName.pagingJson = "./assets/uclookup/Customer/lookupPositionSlik.json";
+    inputLookupObjName.genericJson = "./assets/uclookup/Customer/lookupPositionSlik.json";
+    inputLookupObjName.isRequired = false;
+    return inputLookupObjName;
   }
 
   public static BindLookupExistingCust(CustId: number, listCustIdToExclude: Array<string>, MrCustTypeCode: string): InputLookupObj{

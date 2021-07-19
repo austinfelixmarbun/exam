@@ -130,7 +130,7 @@
                 <td>{{i+1}}</td>
                 <td>{{item.CustNo}}</td>
                 <td class="text-left">{{item.CustName}}</td>
-                <td *ngIf="CustType == CustTypePersonal" align="left">{{item.MrIdType}}</td>
+                <td *ngIf="CustType == CustTypePersonal" align="left">{{item.MrIdTypeCode}}</td>
                 <td *ngIf="CustType == CustTypePersonal" class="text-left">{{item.IdNo}}</td>
                 <td *ngIf="CustType == CustTypePersonal" class="text-left">{{item.TaxIdNo}}</td>
                 <td *ngIf="CustType == CustTypePersonal">{{item.BirthDt | date: 'yyyy-MM-dd'}}</td>
