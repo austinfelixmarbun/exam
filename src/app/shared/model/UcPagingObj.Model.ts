@@ -23,7 +23,7 @@ export class UcPagingObj {
     constructor() {
         this._url = "";
         this.title = "";
-        this.enviromentUrl = environment.FoundationR3Url;
+        this.enviromentUrl = environment.FoundationR3Url + '/v1';
         this.apiQryPaging = URLConstant.GetPagingObjectBySQL;
         this.deleteUrl = "";
         this.pagingJson = "";
