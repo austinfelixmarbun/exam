@@ -1,12 +1,13 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RegexService } from 'app/customer/regex.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
@@ -16,12 +17,15 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { CustCompanyMgmntShrholderObj } from 'app/shared/model/NewCust/CustCompanyMgmntShrholderObj.Model';
 import { ReqCoyObj } from 'app/shared/model/NewCust/ReqCoyObj.Model';
+import { ShareholderFormExistingObj } from 'app/shared/model/NewCust/Shareholder/ShareholderFormExistingObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { CookieService } from 'ngx-cookie';
+import { ShareholderFormComponent } from '../component/shareholder-form/shareholder-form.component';
 import { NewCustSetData } from '../NewCustSetData.Service';
 
 @Component({
@@ -30,14 +34,16 @@ import { NewCustSetData } from '../NewCustSetData.Service';
 })
 export class NewCustCompanyMainDataComponent implements OnInit {
 
+  @ViewChild('ShareholderForm') shareholderForm: ShareholderFormComponent;
   @Input() listCustIdToExclude: Array<string> = new Array();
   @Input() CustId: number = 0; // if 0 mode Add else mode Edit.
   @Input() CustCompanyMgmntShrholderId: number = 0;
   @Input() ParentCustId: number = 0;
+  @Input() tempTotalSharePrct: number = 0;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust; // Cust Mode
   @Output() outputAfterSave: EventEmitter<ReqCoyObj> = new EventEmitter();
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
-  
+
   CustomerForm: FormGroup = this.fb.group({});
   inputAddressObj: InputAddressObj = new InputAddressObj();
   inputFieldObj: InputFieldObj = new InputFieldObj();
@@ -45,11 +51,13 @@ export class NewCustCompanyMainDataComponent implements OnInit {
 
   custObj: CustObj = new CustObj();
 
-  constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) { }
 
   //#region Readonly
   readonly RefMasterTypeCodeCompanyType: string = CommonConstant.RefMasterTypeCodeCompanyType;
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
+
+  readonly CustTypeCoy: string = CommonConstant.CustomerCompany;
 
   readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
   readonly CustDataModeFamily: string = CommonConstant.CustMainDataModeFamily;
@@ -58,12 +66,14 @@ export class NewCustCompanyMainDataComponent implements OnInit {
 
   async ngOnInit() {
     this.ClearCustForm();
+    this.BindLookupExistingCust();
     this.InitCustMainDataMode();
     this.BindSetLegalAddr();
     this.BindLookupSupplier();
     this.initDdlRefMaster(this.RefMasterTypeCodeCompanyType);
     this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
     await this.GetExistingData();
+    this.GetCustAddrToCopy();
   }
   //#region Set Data
   //#region UcAddress
@@ -90,7 +100,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     this.inputLookupObj.isRequired = false;
   }
   //#endregion
-  
+
   CustNameLabel: string = "Customer";
   InitCustMainDataMode() {
     switch (this.CustDataMode) {
@@ -112,7 +122,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     if (this.CustDataMode == this.CustDataModeMain) return;
     this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.CustId, this.listCustIdToExclude, CommonConstant.CustomerCompany);
   }
-  
+
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, apiUrl: string = URLConstant.GetListActiveRefMaster, isSelectOutput: boolean = false) {
     let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
@@ -146,7 +156,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   //#endregion
 
   //#region Change
-  
+
   SetSupplier(e: VendorObj) {
     this.CustomerForm.patchValue({
       SupplCode: e.VendorCode,
@@ -180,21 +190,73 @@ export class NewCustCompanyMainDataComponent implements OnInit {
       }
     );
   }
+
+  ExistingShareholderObj: ShareholderFormExistingObj = new ShareholderFormExistingObj();
+  GetExistingShareholder(ev: ShareholderFormExistingObj) {
+    this.ExistingShareholderObj = ev;
+  }
+
+  async getLookUpCustomer(ev: { CustId: number, CustCompanyMgmntShrholderId: number }) {
+    await this.GetCustData(ev.CustId);
+    this.GetCustAddr(ev.CustId);
+    await this.GetCustCompanyData(ev.CustId);
+    if (ev.CustCompanyMgmntShrholderId) this.shareholderForm.GetExistingShareholder(ev.CustCompanyMgmntShrholderId);
+
+    this.IsLockEdit();
+  }
+
+  IsLockEdit() {
+    this.existingCustomerLookUpObj.isReadonly = true;
+
+    this.CustomerForm.get("CustModel").disable();
+    this.CustomerForm.get("MrCompanyTypeCode").disable();
+    this.CustomerForm.get("TaxIdNo").disable();
+  }
+
+  CopyLegalAddr() {
+    let inputFieldObj = new InputFieldObj();
+    inputFieldObj.inputLookupObj = new InputLookupObj();
+    inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrToCopy.Zipcode;
+    inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrToCopy.Zipcode };
+    let tempUcAddObj: UcAddressObj = new UcAddressObj();
+    tempUcAddObj.AreaCode1 = this.tempCustAddrToCopy.AreaCode1;
+    tempUcAddObj.AreaCode2 = this.tempCustAddrToCopy.AreaCode2;
+    tempUcAddObj.AreaCode3 = this.tempCustAddrToCopy.AreaCode3;
+    tempUcAddObj.AreaCode4 = this.tempCustAddrToCopy.AreaCode4;
+    tempUcAddObj.Addr = this.tempCustAddrToCopy.Addr;
+    tempUcAddObj.City = this.tempCustAddrToCopy.City;
+    this.inputAddressObj.default = tempUcAddObj;
+    this.inputAddressObj.inputField = inputFieldObj;
+  }
   //#endregion
 
   //#region Get
-  
+
+  tempCustAddrToCopy: CustAddrObj = new CustAddrObj();
+  async GetCustAddrToCopy() {
+    if (this.CustDataMode == this.CustDataModeMain) return;
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = this.ParentCustId;
+    reqObj.Code = CommonConstant.CustAddrTypeLegal;
+    await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+      (response: CustAddrObj) => {
+        this.tempCustAddrToCopy = response;
+      }
+    );
+  }
+
   //#region GetExisting / mode edit
   async GetExistingData() {
     if (this.CustId == 0) return;
     await this.GetCustData();
     this.GetCustAddr();
     this.GetCustCompanyData();
+
+    this.IsLockEdit();
   }
 
-  async GetCustData() {
-    let datePipe = new DatePipe("en-US");
-    await this.http.post(URLConstant.GetCustByCustId, { Id: this.CustId }).toPromise().then(
+  async GetCustData(custId: number = this.CustId) {
+    await this.http.post(URLConstant.GetCustByCustId, { Id: custId }).toPromise().then(
       (response: CustObj) => {
         this.custObj = response;
         this.CustomerForm.patchValue({
@@ -205,15 +267,16 @@ export class NewCustCompanyMainDataComponent implements OnInit {
           MrCustModelCode: this.custObj.MrCustModelCode,
         });
         this.existingCustomerLookUpObj.nameSelect = response.CustName;
+        this.existingCustomerLookUpObj.jsonSelect = { CustName: response.CustName };
         this.existingCustomerLookUpObj.isReady = true;
       }
     );
   }
 
   tempCustAddr: CustAddrObj = new CustAddrObj();
-  async GetCustAddr() {
+  async GetCustAddr(custId: number = this.CustId) {
     let reqObj: GenericObj = new GenericObj();
-    reqObj.Id = this.CustId;
+    reqObj.Id = custId;
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
     await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response: CustAddrObj) => {
@@ -234,8 +297,8 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   }
 
   tempCustCompanyObj: CustCompanyObj = new CustCompanyObj();
-  GetCustCompanyData(){    
-    this.http.post(URLConstant.GetCustCompanyByCustId, { Id: this.CustId }).subscribe(
+  GetCustCompanyData(custId: number = this.CustId) {
+    this.http.post(URLConstant.GetCustCompanyByCustId, { Id: custId }).subscribe(
       (response: CustCompanyObj) => {
         this.tempCustCompanyObj = response;
         this.CustomerForm.patchValue({
@@ -251,7 +314,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     this.outputCancel.emit();
   }
 
-  SaveForm(){
+  SaveForm() {
     let tempForm = this.CustomerForm.getRawValue();
     let reqSubmitObj: ReqCoyObj = new ReqCoyObj();
 
@@ -278,6 +341,18 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     reqSubmitObj.CustAddr.SubZipcode = tempForm["UcAddressZipcode"]["value"];
     reqSubmitObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
 
+    if (this.CustDataMode == this.CustDataModeShareholder) {
+      reqSubmitObj.CustCompanyMgmntShrholderObj = this.SetCustMgmntShareholder();
+
+      if (reqSubmitObj.CustCompanyMgmntShrholderObj.IsActive) {
+        let tempTotalSharePrctTobeAdd = this.tempTotalSharePrct + reqSubmitObj.CustCompanyMgmntShrholderObj.SharePrcnt;
+        if (tempTotalSharePrctTobeAdd > 100) {
+          this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_CAN_NOT_100);
+          return;
+        }
+      }
+    }
+
     reqSubmitObj = this.SetCustomerDataMode(reqSubmitObj);
     this.outputAfterSave.emit(reqSubmitObj);
   }
@@ -294,5 +369,19 @@ export class NewCustCompanyMainDataComponent implements OnInit {
         break;
     }
     return reqSubmitObj;
+  }
+
+  SetCustMgmntShareholder(): CustCompanyMgmntShrholderObj {
+    let tempForm = this.CustomerForm.getRawValue();
+    let tempReqObj: CustCompanyMgmntShrholderObj = this.ExistingShareholderObj.CustCompanyMgmntShrholder;
+    tempReqObj.CustId = this.ParentCustId;
+    tempReqObj.ShareholderId = this.CustId;
+
+    tempReqObj.SharePrcnt = tempForm["SharePrcnt"];
+    tempReqObj.MrPositionSlikCode = tempForm["MrPositionSlikCode"];
+    tempReqObj.IsActive = tempForm["IsActive"];
+    tempReqObj.IsOwner = tempForm["IsOwner"];
+
+    return tempReqObj
   }
 }

@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
@@ -22,18 +24,18 @@ export class NewCustPublicComponent implements OnInit {
 
   @Input() CustId: number = 0;
   @Input() CustCompanyMgmntShrholderId: number = 0;
+  @Input() tempTotalSharePrct: number = 0;
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
 
   CustomerForm: FormGroup = this.fb.group({});
   inputAddressObj: InputAddressObj = new InputAddressObj();
-  constructor(private http: HttpClient, private fb: FormBuilder,) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService,) { }
 
   readonly RefMasterTypeCodePublicType: string = CommonConstant.RefMasterTypeCodePublicType;
   readonly RefMasterTypeCodePositionSlik: string = CommonConstant.RefMasterTypeCodePositionSlik;
 
   IsReady: boolean = false;
   async ngOnInit() {
-    console.log(this.CustId);
     this.InitData();
     this.initDdlRefMaster(this.RefMasterTypeCodePublicType, null, true);
     await this.GetExisting();
@@ -116,7 +118,6 @@ export class NewCustPublicComponent implements OnInit {
     if (this.CustCompanyMgmntShrholderId == 0) return;
     await this.http.post(URLConstant.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, { Id: this.CustCompanyMgmntShrholderId }).toPromise().then(
       (response: ShareholderPublicObj) => {
-        console.log(response);
         this.tempExisting = response;
         this.ClearForm(response);
       }
@@ -135,6 +136,13 @@ export class NewCustPublicComponent implements OnInit {
     reqSubmitObj.SharePrcnt = tempForm["SharePrcnt"];
     reqSubmitObj.IsActive = tempForm["IsActive"];
 
+    if (reqSubmitObj.IsActive) {
+      let tempTotalSharePrctTobeAdd = this.tempTotalSharePrct + reqSubmitObj.SharePrcnt;
+      if (tempTotalSharePrctTobeAdd > 100) {
+        this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_CAN_NOT_100);
+        return;
+      }
+    }
     reqSubmitObj.PublicAddr = tempForm["UcAddress"]["Addr"];
     reqSubmitObj.PublicAreaCode1 = tempForm["UcAddress"]["AreaCode1"];
     reqSubmitObj.PublicAreaCode2 = tempForm["UcAddress"]["AreaCode2"];
@@ -142,7 +150,6 @@ export class NewCustPublicComponent implements OnInit {
     reqSubmitObj.PublicAreaCode4 = tempForm["UcAddress"]["AreaCode4"];
     reqSubmitObj.PublicCity = tempForm["UcAddress"]["City"];
     reqSubmitObj.PublicZipcode = tempForm["UcAddressZipcode"]["value"];
-    console.log(reqSubmitObj);
 
     this.http.post(this.SetUrlApi(), reqSubmitObj).subscribe(
       (response) => {
@@ -163,7 +170,6 @@ export class NewCustPublicComponent implements OnInit {
   }
 
   getLookUpSlik(ev: { Code: string, Jabatan: string }) {
-    console.log(ev);
     let tempMrPositionSlikCode = this.CustomerForm.get("MrPositionSlikCode");
     tempMrPositionSlikCode.patchValue(ev.Code);
   }

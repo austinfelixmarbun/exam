@@ -47,6 +47,7 @@ export class NewCustHeaderComponent implements OnInit {
   @Input() CustId: number = 0;
   @Input() CustCompanyMgmntShrholderId: number = 0;
   @Input() ParentCustId: number = 0;
+  @Input() tempTotalSharePrct: number = 0;
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
 
   constructor(
@@ -70,7 +71,7 @@ export class NewCustHeaderComponent implements OnInit {
   }
 
   refMasterCustTypeUsed: string = "";
-  SetCustTypeUsed(){
+  SetCustTypeUsed() {
     this.refMasterCustTypeUsed = this.CustDataMode == this.CustDataModeShareholder ? this.MasterShareholderCustType : this.MasterCustType;
   }
 
@@ -223,10 +224,10 @@ export class NewCustHeaderComponent implements OnInit {
     let urlAdd: string = "";
     switch (this.CustDataMode) {
       case this.CustDataModeMain:
-        urlAdd = URLConstant.EditCustCompanyMainData;
+        urlAdd = URLConstant.AddCustCompanyMainData;
         break;
       case this.CustDataModeShareholder:
-        // urlAdd = URLConstant.SaveCustCompanyShareholderMainData;
+        urlAdd = URLConstant.SaveCustCompanyShareholderMainData;
         break;
     }
     return urlAdd;
@@ -235,10 +236,10 @@ export class NewCustHeaderComponent implements OnInit {
     let urlAdd: string = "";
     switch (this.CustDataMode) {
       case this.CustDataModeMain:
-        urlAdd = URLConstant.EditCustPersonalMainData;
+        urlAdd = URLConstant.EditCustCompanyMainData;
         break;
       case this.CustDataModeShareholder:
-        urlAdd = URLConstant.SaveCustPersonalShareholderMainData;
+        urlAdd = URLConstant.SaveCustCompanyShareholderMainData;
         break;
     }
     return urlAdd;
@@ -317,7 +318,7 @@ export class NewCustHeaderComponent implements OnInit {
     reqEditDupCheck.CustDataMode = this.CustDataMode;
 
     if (this.CustDataMode == this.CustDataModeShareholder) {
-      reqEditDupCheck.CustCompanyMgmntShrholderObj = this.DupCheckCoyObj.CustMgmntShareholder;
+      reqEditDupCheck.CustCompanyMgmntShrholderObj = this.DupCheckCoyObj.CustCompanyMgmntShrholderObj;
     }
     this.http.post(URLConstant.NewEditDuplicateCust, reqEditDupCheck).subscribe(
       (response: GenericObj) => {
@@ -369,7 +370,7 @@ export class NewCustHeaderComponent implements OnInit {
     NegativeCustObj.MrCompanyTypeCode = this.DupCheckCoyObj.CustCompanyObj.MrCompanyTypeCode;
 
     if (this.CustDataMode == this.CustDataModeShareholder) {
-      NegativeCustObj.CustCompanyMgmntShrholderObj = this.DupCheckCoyObj.CustMgmntShareholder;
+      NegativeCustObj.CustCompanyMgmntShrholderObj = this.DupCheckCoyObj.CustCompanyMgmntShrholderObj;
     }
     this.http.post<GenericObj>(URLConstant.EditDuplicateNegativeCust, NegativeCustObj).subscribe(
       (response) => {
@@ -383,9 +384,9 @@ export class NewCustHeaderComponent implements OnInit {
   }
 
   //#endregion
-  
+
   SaveAfterDupcek(ev: DupCheckOutputSaveObj) {
-    switch(ev.Key){
+    switch (ev.Key) {
       case DupCheckOutputSaveObj.KeyEditSave:
         this.SaveForm();
         break;

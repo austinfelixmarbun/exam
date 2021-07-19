@@ -12,7 +12,13 @@
     </div>
   </form>
   <lib-ucgridview [gridInput]="inputGridObj" (callback)="event($event)"></lib-ucgridview>
+ 
+  <div class="form-actions right" style="text-align: right;">
+      <button type="submit" class="btn btn-raised btn-primary" (click)="next()" translate>
+        <i class="far fa-check-square"></i> Save and Continue
+      </button>
+    </div>
 </div>
-<app-new-cust-header *ngIf="PageType == CustPageTypeHeader" [CustId]="selectedCustId" [CustType]="CustType" [ParentCustId]="CustId" [CustCompanyMgmntShrholderId]="selectedCustCompanyMgmntShrholderId" [CustDataMode]="CustDataModeShareholder" (outputCancel)="ReloadPaging()"></app-new-cust-header>
+<app-new-cust-header *ngIf="PageType == CustPageTypeHeader" [CustId]="selectedCustId" [CustType]="CustType" [ParentCustId]="CustId" [CustCompanyMgmntShrholderId]="selectedCustCompanyMgmntShrholderId" [CustDataMode]="CustDataModeShareholder" [tempTotalSharePrct]="tempTotalSharePrct" (outputCancel)="ReloadPaging()"></app-new-cust-header>
 
  

@@ -46,7 +46,7 @@
                   </div>
                 </div>
 
-                <div class="form-group row ">
+                <div class="form-group row">
                   <label class="col-md-4 adins-required-label" translate>Company Type</label>
                   <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeCompanyType]?.isReady">
                     <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCompanyType]"
@@ -54,7 +54,7 @@
                   </div>
                 </div>
 
-                <div class="form-group row ">
+                <div class="form-group row" *ngIf="CustDataMode == CustDataModeMain">
                   <label class="col-md-4 adInsLabel" translate>Affiliation with Multifinance</label>
                   <div class="col-md-8">
                     <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
@@ -84,10 +84,19 @@
 
               </div>
             </div>
+            <app-shareholder-form *ngIf="CustDataMode == CustDataModeShareholder" [parentForm]="CustomerForm" [enjiForm]="enjiForm" [CustId]="CustId" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId" [CustType]="CustTypeCoy" (outputExisting)=GetExistingShareholder($event) #ShareholderForm></app-shareholder-form>
           </div>
           <lib-ucSubsection [id]="'LegalAddr'" [title]="'Legal Address'" [panel]="'LegalAddrSection'">
           </lib-ucSubsection>
           <div class="form-body" id="LegalAddrSection">
+            <div class="form-group row" *ngIf="CustDataMode != CustDataModeMain">
+              <label class="col-md-2 adInsLabel" translate>Copy Address From Legal Customer</label>
+              <div class="col-md-4">
+                <button type="button" class="btn btn-raised btn-primary" (click)="CopyLegalAddr()" translate>
+                  <i class="far"></i> Copy
+                </button>
+              </div>
+            </div>
             <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'">
             </lib-ucaddress> 
           </div>

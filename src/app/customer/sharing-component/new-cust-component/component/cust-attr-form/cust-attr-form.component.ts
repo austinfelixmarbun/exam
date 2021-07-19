@@ -31,8 +31,6 @@ export class CustAttrFormComponent implements OnInit {
   ngOnInit() {
     this.parentForm.addControl(this.identifier, this.fb.array([]));
     this.GetQuestion();
-    console.log(this.parentForm);
-    console.log(this.parentForm.get(this.identifier));
   }
 
   GetQuestion(custId: number = this.CustId) {
@@ -46,9 +44,7 @@ export class CustAttrFormComponent implements OnInit {
     if (this.AttrCodes.length > 0) urlApi = URLConstant.GetListCustAttrContentByCustIdAndAttrGroupAndListAttrCodes;
     this.http.post(urlApi, tempReq).subscribe(
       (response: GenericListObj) => {
-        console.log(response);
         let tempList: Array<AttrContent> = response.ReturnObject;
-        console.log(tempList);
         let tempFormArray: FormArray = this.parentForm.get("CustAttrForm") as FormArray;
         while (tempFormArray.length > 0) {
           tempFormArray.removeAt(0);
@@ -57,7 +53,6 @@ export class CustAttrFormComponent implements OnInit {
           const element = tempList[index];
           tempFormArray.push(this.SetFormGroup(element));
         }
-        console.log(tempFormArray);
       }
     )
   }
@@ -124,11 +119,6 @@ export class CustAttrFormComponent implements OnInit {
   }
 
   getLookUp(e: RefMasterObj, idx: number) {
-    // this.parentForm['controls'][this.identifier]["controls"][AttrCode].patchValue({
-    //   AttrValue: e.MasterCode
-    // });
-    console.log(e);
-    console.log(idx);
     let tempArray = this.parentForm.get(this.identifier) as FormArray;
     let tempFb = tempArray.get(idx.toString()) as FormGroup;
     tempFb.get("AttrValue").patchValue(e.MasterCode);

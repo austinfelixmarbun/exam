@@ -151,7 +151,7 @@
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
                 </div>
               </div>
-              <app-shareholder-form *ngIf="CustDataMode == CustDataModeShareholder" [parentForm]="CustomerForm" [enjiForm]="enjiForm" [CustId]="CustId" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId" [CustType]="CustTypePersonal" outputExisting=GetExistingShareholder($event) #ShareholderForm></app-shareholder-form>
+              <app-shareholder-form *ngIf="CustDataMode == CustDataModeShareholder" [parentForm]="CustomerForm" [enjiForm]="enjiForm" [CustId]="CustId" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId" [CustType]="CustTypePersonal" (outputExisting)=GetExistingShareholder($event) #ShareholderForm></app-shareholder-form>
               <app-cust-attr-form *ngIf="CustDataMode != CustDataModeMain" [Label]="CustDataMode" [CustId]="CustId" [AttrGroup]="AttrGroupCustPersonalOther" [AttrCodes]="listAttrCodes" [parentForm]="CustomerForm" [enjiForm]="enjiForm" #CustAttrForm></app-cust-attr-form>
             </div>
             <lib-ucSubsection [id]="'LegalAddr'" [title]="'Legal Address'" [panel]="'LegalAddrSection'">

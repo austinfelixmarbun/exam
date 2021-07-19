@@ -58,9 +58,9 @@ export class ShareholderFormComponent implements OnInit {
     this.parentForm.get("SharePrcnt").setValidators([Validators.min(0), Validators.max(100)]);
     this.parentForm.get("SharePrcnt").updateValueAndValidity();
     this.parentForm.addControl("IsActive", this.fb.control(false));
+    this.parentForm.addControl("IsOwner", this.fb.control(false));
     if (this.CustType == this.CustTypePersonal) {
       this.parentForm.addControl("MrJobPositionCode", this.fb.control(''));
-      this.parentForm.addControl("IsOwner", this.fb.control(false));
       this.parentForm.addControl("IsSigner", this.fb.control(false));
       this.parentForm.addControl("EstablishmentDt", this.fb.control(''));
       this.parentForm.addControl("RefProfessionId", this.fb.control(0));
@@ -109,17 +109,16 @@ export class ShareholderFormComponent implements OnInit {
     if (custCompanyMgmntShrholderId == 0) return;
     await this.http.post(URLConstant.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, { Id: custCompanyMgmntShrholderId }).toPromise().then(
       (response: CustCompanyMgmntShrholderObj) => {
-        console.log(response);
         this.parentForm.patchValue({
           MrPositionSlikCode: response.MrPositionSlikCode,
           SharePrcnt: response.SharePrcnt,
           IsActive: response.IsActive,
+          IsOwner: response.IsOwner,
         });
         this.PatchValueSlik(response.MrPositionSlikCode);
         if (this.CustType == this.CustTypePersonal) {
           let datePipe = new DatePipe("en-US");
           this.parentForm.patchValue({
-            IsOwner: response.IsOwner,
             IsSigner: response.IsSigner,
             EstablishmentDt: datePipe.transform(response.EstablishmentDt, 'yyyy-MM-dd'),
           });
@@ -129,12 +128,11 @@ export class ShareholderFormComponent implements OnInit {
     )
   }
 
-  async GetExistingJobData(custId: number=this.CustId) {
+  async GetExistingJobData(custId: number = this.CustId) {
     if (this.CustType != this.CustTypePersonal || custId == 0) return;
     await this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: custId }).toPromise().then(
       async (response: CustPersonalJobDataObj) => {
-        console.log(response);
-        if(!response.CustId) return;
+        if (!response.CustId) return;
         this.tempExisting.CustPersonalJob = response;
         this.parentForm.patchValue({
           MrJobPositionCode: response.MrJobPositionCode,
@@ -155,7 +153,6 @@ export class ShareholderFormComponent implements OnInit {
       MasterCode: MrPositionSlikCode,
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodePositionSlik
     };
-    console.log(MrPositionSlikCode);
     this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).subscribe(
       (response: RefMasterObj) => {
         this.positionSlikLookUpObj.nameSelect = response.Descr;
@@ -166,14 +163,11 @@ export class ShareholderFormComponent implements OnInit {
   }
 
   getLookUpSlik(ev: { Code: string, Jabatan: string }) {
-    // this.tempProfession = event.ProfessionCode;
-    console.log(ev);
     let tempMrPositionSlikCode = this.parentForm.get("MrPositionSlikCode");
     tempMrPositionSlikCode.patchValue(ev.Code);
   }
+
   getLookUpProfession(event) {
-    // this.tempProfession = event.ProfessionCode;
-    console.log(event);
     this.parentForm.patchValue({
       RefProfessionId: event.RefProfessionId,
     })

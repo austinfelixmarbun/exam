@@ -2,9 +2,11 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RegexService } from 'app/customer/regex.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
@@ -43,6 +45,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   @Input() CustId: number = 0; // if 0 mode Add else mode Edit.
   @Input() CustCompanyMgmntShrholderId: number = 0;
   @Input() ParentCustId: number = 0;
+  @Input() tempTotalSharePrct: number = 0;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust; // Cust Mode
   @Output() outputAfterSave: EventEmitter<ReqPersonalObj> = new EventEmitter();
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
@@ -52,7 +55,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   inputAddressObj: InputAddressObj = new InputAddressObj();
   inputLookupObj: InputLookupObj = new InputLookupObj();
 
-  constructor(private regexService: RegexService,
+  constructor(private regexService: RegexService, private toastr: NGXToastrService,
     private http: HttpClient, private fb: FormBuilder,
     private cookieService: CookieService) {
   }
@@ -72,8 +75,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   //#endregion
 
   async ngOnInit() {
-    console.log(this.CustDataMode);
-    console.log(this.CustNameLabel);
     this.InitData();
     this.InitCustMainDataMode();
     this.BindLookupSupplier();
@@ -85,7 +86,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat);
     await this.GetExistingData();
     this.GetCustAddrToCopy();
-    console.log(this.CustomerForm);
   }
 
   //#region Set Data
@@ -216,7 +216,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     let datePipe = new DatePipe("en-US");
     await this.http.post(URLConstant.GetCustByCustId, { Id: custId }).toPromise().then(
       (response: CustObj) => {
-        console.log(response);
         this.custObj = response;
         this.CustomerForm.patchValue({
           CustName: this.custObj.CustName,
@@ -273,7 +272,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
     await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response: CustAddrObj) => {
-        console.log(response);
         this.tempCustAddrToCopy = response;
       }
     );
@@ -284,7 +282,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     let datePipe = new DatePipe("en-US");
     await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: custId }).toPromise().then(
       (response) => {
-        console.log(response);
         this.tempCustPersonalObj = response;
         this.CustomerForm.patchValue({
           MrGenderCode: response.MrGenderCode,
@@ -407,7 +404,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   ExistingShareholderObj: ShareholderFormExistingObj = new ShareholderFormExistingObj();
   GetExistingShareholder(ev: ShareholderFormExistingObj) {
-    console.log(ev);
     this.ExistingShareholderObj = ev;
   }
 
@@ -427,21 +423,20 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.inputAddressObj.inputField = inputFieldObj;
   }
 
-  async getLookUpCustomer(ev: {CustId: number, CustCompanyMgmntShrholderId: number }){
-    console.log(ev);
+  async getLookUpCustomer(ev: { CustId: number, CustCompanyMgmntShrholderId: number }) {
     await this.GetCustData(ev.CustId);
     this.GetCustAddr(ev.CustId);
     await this.GetCustPersonalData(ev.CustId);
-    if(ev.CustCompanyMgmntShrholderId) this.shareholderForm.GetExistingShareholder(ev.CustCompanyMgmntShrholderId);
+    if (ev.CustCompanyMgmntShrholderId) this.shareholderForm.GetExistingShareholder(ev.CustCompanyMgmntShrholderId);
     this.shareholderForm.GetExistingJobData(ev.CustId);
     this.custAttrForm.GetQuestion(ev.CustId);
 
     this.IsLockEdit();
   }
 
-  IsLockEdit(){
+  IsLockEdit() {
     this.existingCustomerLookUpObj.isReadonly = true;
-    
+
     this.CustomerForm.get("MrGenderCode").disable();
     this.CustomerForm.get("MrIdTypeCode").disable();
     this.CustomerForm.get("BirthPlace").disable();
@@ -460,9 +455,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   SaveForm() {
-    console.log(this.CustomerForm);
     let tempForm = this.CustomerForm.getRawValue();
-    console.log(tempForm);
     let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
     reqSubmitObj.CustObj = this.custObj;
     reqSubmitObj.CustObj.CustName = tempForm["CustName"];
@@ -502,10 +495,19 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       reqSubmitObj.CustPersonalJobObj = this.SetCustPersonalJobData();
       reqSubmitObj.CustAttrContentObjs = this.SetCustAttrContent();
     }
-    if (this.CustDataMode == this.CustDataModeShareholder) reqSubmitObj.CustCompanyMgmntShrholderObj = this.SetCustMgmntShareholder()
+    if (this.CustDataMode == this.CustDataModeShareholder) {
+      reqSubmitObj.CustCompanyMgmntShrholderObj = this.SetCustMgmntShareholder();
+
+      if (reqSubmitObj.CustCompanyMgmntShrholderObj.IsActive) {
+        let tempTotalSharePrctTobeAdd = this.tempTotalSharePrct + reqSubmitObj.CustCompanyMgmntShrholderObj.SharePrcnt;
+        if (tempTotalSharePrctTobeAdd > 100) {
+          this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_CAN_NOT_100);
+          return;
+        }
+      }
+    }
 
     reqSubmitObj = this.SetCustomerDataMode(reqSubmitObj);
-    console.log(reqSubmitObj);
     this.outputAfterSave.emit(reqSubmitObj);
   }
 
@@ -555,10 +557,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   SetCustAttrContent(): Array<CustAttrContentObj> {
     let tempAttr: Array<CustAttrContentObj> = new Array();
     let tempFormArray = this.CustomerForm.get(this.identifierCustAttr) as FormArray;
-    console.log(tempFormArray);
     for (let index = 0; index < tempFormArray.length; index++) {
       const element = tempFormArray.get(index.toString()).value;
-      console.log(element);
       let tempAttrToPush: CustAttrContentObj = new CustAttrContentObj();
       tempAttrToPush.RefAttrId = element["RefAttrId"];
       tempAttrToPush.CustId = element["CustId"];

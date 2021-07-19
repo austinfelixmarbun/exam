@@ -7,5 +7,5 @@ export class ReqCoyObj{
     CustObj : CustObj;
     CustCompanyObj : CustCompanyObj;
     CustAddr: CustAddrObj;
-    CustMgmntShareholder: CustCompanyMgmntShrholderObj;
+    CustCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
 }
