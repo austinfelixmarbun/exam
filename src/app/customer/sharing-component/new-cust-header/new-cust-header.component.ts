@@ -59,7 +59,7 @@ export class NewCustHeaderComponent implements OnInit {
         this.CustType = params["CustType"];
       }
       if (params["From"] != null) {
-        this.CustType = params["From"];
+        this.From = params["From"];
       }
     });
   }

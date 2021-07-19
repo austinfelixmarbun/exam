@@ -118,7 +118,6 @@ import { CustAssetComponent } from './cust-asset/cust-asset.component';
 import { CustAssetDetailComponent } from './cust-asset/cust-asset-detail/cust-asset-detail.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { CustBankAccComponent } from './cust-bank-acc/cust-bank-acc.component';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CustomerViewCustomerAssetComponent } from './customer-view/customer-view-customer-asset/customer-view-customer-asset.component';
 import { NewCustomerSharingModule } from './sharing-component/new-cust-sharing.model';
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
@@ -261,7 +260,6 @@ export const customCurrencyMaskConfig = {
     CustomerViewCustomerAssetComponent
   ],
   providers: [
-    NGXToastrService, 
     CustAssetComponent,
     CustAssetDetailComponent,
     CustomerPersonalJobDataComponent,

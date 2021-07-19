@@ -29,6 +29,7 @@ import { GrowlModule } from 'primeng/primeng';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CookieModule } from 'ngx-cookie';
 import { StorageService } from './shared/services/StorageService';
+import { NGXToastrService } from './components/extra/toastr/toastr.service';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -74,6 +75,7 @@ export function createTranslateLoader(http: HttpClient) {
         ErrorDialogService,
         RolePickService,
         StorageService,
+        NGXToastrService,
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
     bootstrap: [AppComponent],
