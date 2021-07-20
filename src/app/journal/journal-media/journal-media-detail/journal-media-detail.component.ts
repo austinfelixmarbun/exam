@@ -4,9 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 
@@ -75,7 +73,7 @@ export class JournalMediaDetailComponent implements OnInit {
     }
 
     if (this.mode == 'edit' && this.JrMHeaderId != null) {
-      this.http.post<any>(environment.FoundationR3Url + '/Journal/SaveJrMEntity', { ...request, JrMHeaderId: this.JrMHeaderId }).subscribe(
+      this.http.post<any>(URLConstant.SaveJrMEntity, { ...request, JrMHeaderId: this.JrMHeaderId }).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})
@@ -85,7 +83,7 @@ export class JournalMediaDetailComponent implements OnInit {
         }
       )
     } else {
-      this.http.post<any>(environment.FoundationR3Url + '/Journal/AddJrMHeader', request).subscribe(
+      this.http.post<any>(URLConstant.AddJrMHeader, request).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})
@@ -100,7 +98,7 @@ export class JournalMediaDetailComponent implements OnInit {
 
   getData() {
     if (this.mode == 'edit' && this.JrMHeaderId != null) {
-      this.http.post<any>(environment.FoundationR3Url + '/Journal/GetJrMHeaderAndJrMHeaderFactAndJrMEntityByJrMHeaderId', { JrMHeaderId: this.JrMHeaderId }).subscribe(
+      this.http.post<any>(URLConstant.GetJrMHeaderAndJrMHeaderFactAndJrMEntityByJrMHeaderId, { JrMHeaderId: this.JrMHeaderId }).subscribe(
         response => {
           this.JrMediaForm.patchValue({
             Subsystem: response.SubSystem,
