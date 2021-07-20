@@ -27,7 +27,7 @@ export class AdInsConstant {
   public static showData = "10,50,100";
   public static TimeoutSession = 6000000;
   public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
-  public static Login = "/Authenticate/Login";
+  public static Login = '/v1' + "/Authenticate/Login";
   public static LoginWithToken = environment.FoundationR3Url+"/Authenticate/LoginWithToken";
   public static LoginToken = "/UserManagement/HTML6Login";
   public static Logout = "/UserManagement/LogOut"

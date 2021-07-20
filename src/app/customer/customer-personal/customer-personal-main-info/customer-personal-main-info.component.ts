@@ -101,7 +101,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     IdExpiredDt: [''],
-    MrMaritalStatCode: [''],
+    MrMaritalStatCode: ['', [Validators.required]],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     CustModel: [''],
     IsVip: [false],
@@ -151,9 +151,6 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObj).subscribe(
       (response) => {
         this.tempGender = response[CommonConstant.ReturnObj];
-        this.CustomerPersonalForm.patchValue({
-          Gender: this.tempGender[0].Key
-        });
       }
     );
     var refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
@@ -197,9 +194,6 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.http.post(URLConstant.GetListActiveRefMaster, tempReq).toPromise().then(
       (response) => {
         this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
-        this.CustomerPersonalForm.patchValue({
-          MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
-        });
       }
     );
 

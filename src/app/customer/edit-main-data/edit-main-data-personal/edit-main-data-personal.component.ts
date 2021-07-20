@@ -42,7 +42,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     IdNo: ['', [Validators.required]],
     TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     IdExpiredDt: [''],
-    MrMaritalStatCode: [''],
+    MrMaritalStatCode: ['', [Validators.required]],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     IsVip: [true],
     IsAffiliateWithMf: [true],
@@ -139,11 +139,6 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjGender).subscribe(
       (response) => {
         this.tempGender = response[CommonConstant.ReturnObj];
-        if (this.tempGender.length > 0) {
-          this.CustomerPersonalForm.patchValue({
-            Gender: this.tempGender[0].Key
-          });
-        }
       }
     );
     var refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
@@ -247,10 +242,6 @@ export class EditMainDataPersonalComponent implements OnInit {
         if (this.tempCustPersonalObj.MrMaritalStatCode != null) {
           this.CustomerPersonalForm.patchValue({
             MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode
-          });
-        } else {
-          this.CustomerPersonalForm.patchValue({
-            MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
           });
         }
       }
