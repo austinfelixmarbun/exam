@@ -933,10 +933,10 @@ export class URLConstant {
     public static EditRefPaymentAllocGrp = environment.FoundationR3Url + "/v1" + "/RefPaymentAllocGrp/EditRefPaymentAllocGrp";
 
     // COA
-    public static GetRefCoaByRefCoaId = environment.FoundationR3Url + "/Coa/GetRefCoaByRefCoaId";
-    public static SubmitCoa = environment.FoundationR3Url + "/Coa/SubmitCoa";
-    public static SubmitListCoa = environment.FoundationR3Url + "/Coa/SubmitListCoa";
-    public static GetListRefCoaByCoaSchmId = environment.FoundationR3Url + "/Coa/GetListRefCoaByCoaSchmId";
+    public static GetRefCoaByRefCoaId = environment.FoundationR3Url + "/v1"+ "/Coa/GetRefCoaByRefCoaId";
+    public static SubmitCoa = environment.FoundationR3Url +"/v1"+  "/Coa/SubmitCoa";
+    public static SubmitListCoa = environment.FoundationR3Url +"/v1"+  "/Coa/SubmitListCoa";
+    public static GetListRefCoaByCoaSchmId = environment.FoundationR3Url + "/v1"+ "/Coa/GetListRefCoaByCoaSchmId";
 
     // COA Scheme
     public static GetCoaSchmByCoaSchmId = environment.FoundationR3Url + "/v1" + "/CoaSchm/GetCoaSchmByCoaSchmId";
