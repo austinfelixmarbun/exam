@@ -34,6 +34,6 @@ export class AdInsConstant {
   public static LoginByRole = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByRole";
   public static LoginByToken = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByToken";
   public static UpdateToken = environment.FoundationR3Url + "/v1" + "/Authenticate/UpdateRole";
-  public static GetThingsToDoByRole = environment.FoundationR3Url + "/v1" + "/GetThingsToDoByRole";
+  public static GetThingsToDoByRole = environment.FoundationR3Url + "/v1" + "/ThingsToDo/GetThingsToDoByRole";
 
 }
