@@ -19,7 +19,7 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/NewCust/CustCompanyMgmntShrholderObj.Model';
 import { ReqCoyObj } from 'app/shared/model/NewCust/ReqCoyObj.Model';
-import { ShareholderFormExistingObj } from 'app/shared/model/NewCust/Shareholder/ShareholderFormExistingObj.Model';
+import { CustFormExistingObj } from 'app/shared/model/NewCust/Shareholder/ShareholderFormExistingObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
@@ -35,7 +35,7 @@ import { NewCustSetData } from '../NewCustSetData.Service';
 export class NewCustCompanyMainDataComponent implements OnInit {
 
   @ViewChild('ShareholderForm') shareholderForm: ShareholderFormComponent;
-  @Input() listCustIdToExclude: Array<string> = new Array();
+  @Input() listCustNoToExclude: Array<string> = new Array();
   @Input() CustId: number = 0; // if 0 mode Add else mode Edit.
   @Input() CustCompanyMgmntShrholderId: number = 0;
   @Input() ParentCustId: number = 0;
@@ -74,6 +74,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
     await this.GetExistingData();
     this.GetCustAddrToCopy();
+    this.existingCustomerLookUpObj.isReady = true;
   }
   //#region Set Data
   //#region UcAddress
@@ -120,7 +121,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   existingCustomerLookUpObj: InputLookupObj = new InputLookupObj();
   BindLookupExistingCust() {
     if (this.CustDataMode == this.CustDataModeMain) return;
-    this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.CustId, this.listCustIdToExclude, CommonConstant.CustomerCompany);
+    this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerCompany);
   }
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
@@ -191,8 +192,8 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     );
   }
 
-  ExistingShareholderObj: ShareholderFormExistingObj = new ShareholderFormExistingObj();
-  GetExistingShareholder(ev: ShareholderFormExistingObj) {
+  ExistingShareholderObj: CustFormExistingObj = new CustFormExistingObj();
+  GetExistingShareholder(ev: CustFormExistingObj) {
     this.ExistingShareholderObj = ev;
   }
 
@@ -207,6 +208,9 @@ export class NewCustCompanyMainDataComponent implements OnInit {
 
   IsLockEdit() {
     this.existingCustomerLookUpObj.isReadonly = true;
+    this.inputAddressObj.isReadonly = true;
+    this.inputAddressObj.inputField.inputLookupObj.isReadonly = true;
+    this.inputAddressObj.inputField.inputLookupObj.isDisable = true;
 
     this.CustomerForm.get("CustModel").disable();
     this.CustomerForm.get("MrCompanyTypeCode").disable();
@@ -246,6 +250,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   }
 
   //#region GetExisting / mode edit
+  IsLockCopyAddrBtn: boolean = false;
   async GetExistingData() {
     if (this.CustId == 0) return;
     await this.GetCustData();
@@ -253,6 +258,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     this.GetCustCompanyData();
 
     this.IsLockEdit();
+    this.IsLockCopyAddrBtn = true;
   }
 
   async GetCustData(custId: number = this.CustId) {

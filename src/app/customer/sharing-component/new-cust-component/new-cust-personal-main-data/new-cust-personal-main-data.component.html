@@ -29,13 +29,20 @@
                   </div>
                 </div>
               </div>
+              <div class="form-group row" *ngIf="CustDataMode == CustDataModeFamily">
+                <label class="col-md-2 adins-required-label" translate>Customer Relationship </label>
+                <div class="col-md-4" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustPersonalRelationship]?.isReady">
+                  <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustPersonalRelationship]" [parentForm]="CustomerForm" [enjiForm]="enjiForm"
+                    [identifier]="'MrCustRelationship'" [genericList]="MrCustRelationshipCodeObj" (callback)="RelationshipChange($event.selectedValue)"></lib-ucdropdownlist>
+                </div>
+              </div>
               <div class="form-group row">
                 <div class="col-md-6">
                   <div class="form-group row">
                     <label class="col-md-4 adins-required-label" translate>{{CustNameLabel}} Name </label>
                     <div class="col-md-8" *ngIf="CustDataMode != CustDataModeMain && existingCustomerLookUpObj.isReady">
                       <lib-uclookupgeneric [lookupInput]="existingCustomerLookUpObj" [parentForm]="CustomerForm"
-                        [enjiForm]="enjiForm" [identifier]="'ExistingCustName'" (lookup)=getLookUpCustomer($event)>
+                        [enjiForm]="enjiForm" [identifier]="'ExistingCustName'" (lookup)=getLookUpCustomer($event) #LookupExistingCust>
                       </lib-uclookupgeneric>
                     </div>
                     <div class="col-md-8" *ngIf="CustDataMode == CustDataModeMain">
@@ -151,13 +158,14 @@
                   <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
                 </div>
               </div>
-              <app-shareholder-form *ngIf="CustDataMode == CustDataModeShareholder" [parentForm]="CustomerForm" [enjiForm]="enjiForm" [CustId]="CustId" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId" [CustType]="CustTypePersonal" (outputExisting)=GetExistingShareholder($event) #ShareholderForm></app-shareholder-form>
+              <app-shareholder-form *ngIf="CustDataMode == CustDataModeShareholder" [parentForm]="CustomerForm" [enjiForm]="enjiForm" [CustId]="CustId" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId" [CustType]="CustTypePersonal" (outputExisting)=GetExistingFormObj($event) (outputChange)="outputChangeReceived($event)" #ShareholderForm></app-shareholder-form>
+              <app-family-form *ngIf="CustDataMode == CustDataModeFamily" [parentForm]="CustomerForm" [enjiForm]="enjiForm" [CustId]="CustId" (outputExisting)=GetExistingFormObj($event) (outputChange)="outputChangeReceived($event)" #FamilyForm></app-family-form>
               <app-cust-attr-form *ngIf="CustDataMode != CustDataModeMain" [Label]="CustDataMode" [CustId]="CustId" [AttrGroup]="AttrGroupCustPersonalOther" [AttrCodes]="listAttrCodes" [parentForm]="CustomerForm" [enjiForm]="enjiForm" #CustAttrForm></app-cust-attr-form>
             </div>
             <lib-ucSubsection [id]="'LegalAddr'" [title]="'Legal Address'" [panel]="'LegalAddrSection'">
             </lib-ucSubsection>
             <div class="form-body" id="LegalAddrSection">
-              <div class="form-group row" *ngIf="CustDataMode != CustDataModeMain">
+              <div class="form-group row" *ngIf="!IsLockCopyAddrBtn && CustDataMode != CustDataModeMain">
                 <label class="col-md-2 adInsLabel" translate>Copy Address From Legal Customer</label>
                 <div class="col-md-4">
                   <button type="button" class="btn btn-raised btn-primary" (click)="CopyLegalAddr()" translate>

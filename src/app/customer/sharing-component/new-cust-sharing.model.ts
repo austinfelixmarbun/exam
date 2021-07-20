@@ -21,6 +21,7 @@ import { FamilyListingComponent } from './family-listing/family-listing.componen
 import { NewCustPublicComponent } from './new-cust-component/new-cust-public/new-cust-public.component';
 import { ShareholderFormComponent } from './new-cust-component/component/shareholder-form/shareholder-form.component';
 import { CustAttrFormComponent } from './new-cust-component/component/cust-attr-form/cust-attr-form.component';
+import { FamilyFormComponent } from './new-cust-component/component/family-form/family-form.component';
 
 export const customCurrencyMaskConfig = {
     align: "right",
@@ -48,6 +49,7 @@ export const customCurrencyMaskConfig = {
         NewCustPublicComponent,
         ShareholderFormComponent,
         CustAttrFormComponent,
+        FamilyFormComponent,
     ],
     imports: [
         CommonModule,
@@ -74,6 +76,7 @@ export const customCurrencyMaskConfig = {
         NewCustPublicComponent,
         ShareholderFormComponent,
         CustAttrFormComponent,
+        FamilyFormComponent,
     ],
 
     providers: [

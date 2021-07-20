@@ -15,9 +15,10 @@
 
     <div class="form-group row" *ngIf="CustType == CustTypePersonal">
       <label class="col-md-4 adInsLabel" translate>Job Position </label>
-      <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeJobPosition]?.isReady">
-        <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeJobPosition]"
-          [parentForm]="parentForm" [enjiForm]="enjiForm" [identifier]="'MrJobPositionCode'"></lib-ucdropdownlist>
+      <div class="col-md-8" *ngIf="jobPositionLookupObj?.isReady">
+        <lib-uclookupgeneric [lookupInput]="jobPositionLookupObj" [parentForm]="parentForm"
+          [enjiForm]="enjiForm" [identifier]="'JobPosition'" (lookup)=getLookUpJobPosition($event)>
+        </lib-uclookupgeneric>
       </div>
     </div>
 
@@ -74,11 +75,11 @@
       <label class="col-md-4 adInsLabel" translate>Customer Model </label>
       <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustModel]?.isReady">
         <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustModel]"
-          [parentForm]="parentForm" [enjiForm]="enjiForm" [identifier]="'MrCustModelCode'"></lib-ucdropdownlist>
+          [parentForm]="parentForm" [enjiForm]="enjiForm" [identifier]="'MrCustModelCode'" (callback)="changeCustModel()"></lib-ucdropdownlist>
       </div>
     </div>
 
-    <div class="form-group row" *ngIf="CustType == CustTypePersonal">
+    <div class="form-group row" *ngIf="CustType == CustTypePersonal" [hidden]="parentForm.controls.MrCustModelCode.value == ''">
       <label class="col-md-4 adInsLabel" translate> Profession Name </label>
       <div class="col-md-8">
         <lib-uclookupgeneric [lookupInput]="professionLookUpObj" [parentForm]="parentForm"

@@ -10,7 +10,7 @@ import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/NewCust/CustCompanyMgmntShrholderObj.Model';
-import { ShareholderFormExistingObj } from 'app/shared/model/NewCust/Shareholder/ShareholderFormExistingObj.Model';
+import { CustFormExistingObj as CustFormExistingObj } from 'app/shared/model/NewCust/Shareholder/ShareholderFormExistingObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
@@ -30,23 +30,25 @@ export class ShareholderFormComponent implements OnInit {
   @Input() CustType: string;
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
-  @Output() outputExisting: EventEmitter<ShareholderFormExistingObj> = new EventEmitter();
+  @Output() outputExisting: EventEmitter<CustFormExistingObj> = new EventEmitter();
+  @Output() outputChange: EventEmitter<string> = new EventEmitter();
 
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
   readonly CustTypeCoy: string = CommonConstant.CustomerCompany;
 
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
-  readonly RefMasterTypeCodeJobPosition: string = CommonConstant.RefMasterTypeCodeJobPosition;
 
   constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
 
-  tempExisting: ShareholderFormExistingObj = new ShareholderFormExistingObj();
+  tempExisting: CustFormExistingObj = new CustFormExistingObj();
   async ngOnInit() {
     this.InitData();
-    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel);
-    this.initDdlRefMaster(this.RefMasterTypeCodeJobPosition);
+    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, null, true);
     await this.GetExistingShareholder();
     await this.GetExistingJobData();
+    this.jobPositionLookupObj.isReady = true;
+    this.positionSlikLookUpObj.isReady = true;
+    this.professionLookUpObj.isReady = true;
     this.outputExisting.emit(this.tempExisting);
   }
 
@@ -75,6 +77,7 @@ export class ShareholderFormComponent implements OnInit {
     }
     this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();
     this.BindLookupProfession();
+    this.BindLookupJobPosition();
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -96,6 +99,15 @@ export class ShareholderFormComponent implements OnInit {
     this.DictUcDDLObj[refMasterTypeCode] = tempDdlObj;
   }
 
+  jobPositionLookupObj: InputLookupObj = new InputLookupObj();
+  BindLookupJobPosition() {
+    this.jobPositionLookupObj = new InputLookupObj();
+    this.jobPositionLookupObj.isRequired = false;
+    this.jobPositionLookupObj.urlJson = "./assets/uclookup/Customer/lookupJobPosition.json";
+    this.jobPositionLookupObj.pagingJson = "./assets/uclookup/Customer/lookupJobPosition.json";
+    this.jobPositionLookupObj.genericJson = "./assets/uclookup/Customer/lookupJobPosition.json";
+  }
+
   professionLookUpObj: InputLookupObj = new InputLookupObj();
   BindLookupProfession() {
     this.professionLookUpObj = new InputLookupObj();
@@ -108,14 +120,16 @@ export class ShareholderFormComponent implements OnInit {
   async GetExistingShareholder(custCompanyMgmntShrholderId: number = this.CustCompanyMgmntShrholderId) {
     if (custCompanyMgmntShrholderId == 0) return;
     await this.http.post(URLConstant.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, { Id: custCompanyMgmntShrholderId }).toPromise().then(
-      (response: CustCompanyMgmntShrholderObj) => {
+      async (response: CustCompanyMgmntShrholderObj) => {
         this.parentForm.patchValue({
           MrPositionSlikCode: response.MrPositionSlikCode,
           SharePrcnt: response.SharePrcnt,
           IsActive: response.IsActive,
           IsOwner: response.IsOwner,
         });
-        this.PatchValueSlik(response.MrPositionSlikCode);
+        let tempDesc: string = await this.PatchValueDesc(response.MrPositionSlikCode, CommonConstant.RefMasterTypeCodePositionSlik);
+        this.positionSlikLookUpObj.nameSelect = tempDesc;
+        this.positionSlikLookUpObj.jsonSelect = { Jabatan: tempDesc };
         if (this.CustType == this.CustTypePersonal) {
           let datePipe = new DatePipe("en-US");
           this.parentForm.patchValue({
@@ -138,6 +152,9 @@ export class ShareholderFormComponent implements OnInit {
           MrJobPositionCode: response.MrJobPositionCode,
           RefProfessionId: response.RefProfessionId,
         });
+        let tempDesc: string = await this.PatchValueDesc(response.MrJobPositionCode, CommonConstant.RefMasterTypeCodeJobPosition);
+        this.jobPositionLookupObj.nameSelect = tempDesc;
+        this.jobPositionLookupObj.jsonSelect = { JobDesc: tempDesc };
         if (!response.RefProfessionId) return;
         await this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
           (response: RefProfessionObj) => {
@@ -148,18 +165,18 @@ export class ShareholderFormComponent implements OnInit {
     )
   }
 
-  PatchValueSlik(MrPositionSlikCode: string) {
+  async PatchValueDesc(MasterCode: string, refMasterTypeCode: string) {
     let reqMasterObj: ReqRefMasterByTypeCodeAndMasterCodeObj = {
-      MasterCode: MrPositionSlikCode,
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodePositionSlik
+      MasterCode: MasterCode,
+      RefMasterTypeCode: refMasterTypeCode
     };
-    this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).subscribe(
+    let tempDesc: string = "";
+    await this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).toPromise().then(
       (response: RefMasterObj) => {
-        this.positionSlikLookUpObj.nameSelect = response.Descr;
-        this.positionSlikLookUpObj.jsonSelect = { Jabatan: response.Descr };
-        this.positionSlikLookUpObj.isReady = true;
+        tempDesc = response.Descr;
       }
-    )
+    );
+    return tempDesc;
   }
 
   getLookUpSlik(ev: { Code: string, Jabatan: string }) {
@@ -170,6 +187,27 @@ export class ShareholderFormComponent implements OnInit {
   getLookUpProfession(event) {
     this.parentForm.patchValue({
       RefProfessionId: event.RefProfessionId,
-    })
+    });
+    this.outputChange.emit(CommonConstant.CUST_CHANGE_PROFESSION);
+  }
+
+  changeCustModel() {
+    this.ResetLookupProfession();
+    this.outputChange.emit(CommonConstant.CUST_CHANGE_PROFESSION);
+  }
+  
+  getLookUpJobPosition(ev) {
+    console.log(ev);
+    this.parentForm.patchValue({
+      MrJobPositionCode: ev.JobCode,
+    });
+  }
+  
+  ResetLookupProfession(valueCode: string = null, valueDesc: string = ""){
+    this.parentForm.patchValue({
+      RefProfessionId: valueCode,
+    });
+    this.professionLookUpObj.nameSelect = valueDesc;
+    this.professionLookUpObj.jsonSelect = { JobDesc: valueDesc };
   }
 }

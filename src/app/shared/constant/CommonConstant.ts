@@ -175,6 +175,10 @@ export class CommonConstant {
     // CUST TYPE
     public static CustTypePersonal = "PERSONAL";
     public static CustTypeCompany = "COMPANY";
+    
+    // CUST GENDER
+    public static GENDER_MALE = "MALE";
+    public static GENDER_FEMALE = "FEMALE";
 
     // CUST ADDR TYPE 
     public static CustAddrTypeLegal = "LEGAL";
@@ -254,6 +258,9 @@ export class CommonConstant {
     //ATTR CODE
     public static AttrCodeDeptAml = "DEPT_AML";
     public static AttrCodeAuthAml = "AUTH_AML";
+
+    //outputChange
+    public static CUST_CHANGE_PROFESSION = "PROFESSION";
     
     //ATTR Input Type
     public static AttrInputTypeDate = "D";

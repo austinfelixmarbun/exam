@@ -702,6 +702,7 @@ export class URLConstant {
 
     public static SaveCustPersonalShareholderMainData = environment.FoundationR3Url  + '/v1' + "/Cust/SaveCustPersonalShareholderMainData";
     public static SaveCustCompanyShareholderMainData = environment.FoundationR3Url  + '/v1' + "/Cust/SaveCustCompanyShareholderMainData";
+    public static SaveCustPersonalFamilyMainData = environment.FoundationR3Url  + '/v1' + "/Cust/SaveCustPersonalFamilyMainData";
     public static NewEditDuplicateCust = environment.FoundationR3Url  + '/v1' + "/Cust/NewEditDuplicateCust";
 
     public static GetCustHighlightCommentByCustId = environment.FoundationR3Url + '/v1' + "/Cust/GetCustHighlightCommentByCustId";
@@ -783,6 +784,7 @@ export class URLConstant {
     public static GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId";
     public static AddCustCompanyMgmntShrholderPublic = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderPublic";
     public static EditCustCompanyMgmntShrholderPublic = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholderPublic";
+    public static GetListManagementShareholderForListPagingByCustId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/GetListManagementShareholderForListPagingByCustId";
 
     // CUST ATTR CONTENT
     public static GetCustAttrContentForCustViewByCustId = environment.FoundationR3Url + '/v1' + "/CustAttrContent/GetCustAttrContentForCustViewByCustId";

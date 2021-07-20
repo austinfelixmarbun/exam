@@ -112,8 +112,9 @@
               </app-customer-personal-address>
             </div>
             <div id="family-tab" class="content" role="tabpanel" aria-labelledby="family-tab-trigger">
-              <app-customer-family [CustId]="IdCust" [isMarried]="isMarried" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 3">
-              </app-customer-family>
+              <!-- <app-customer-family [CustId]="IdCust" [isMarried]="isMarried" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 3">
+              </app-customer-family> -->
+              <app-family-listing [CustId]="IdCust" [isMarried]="isMarried" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 3"></app-family-listing>
             </div>
             <div id="contact-tab" class="content" role="tabpanel" aria-labelledby="contact-tab-trigger">
               <!-- <app-customer-contact-person (outputTab)="getValue($event)" *ngIf="CustStepIndex == 4">

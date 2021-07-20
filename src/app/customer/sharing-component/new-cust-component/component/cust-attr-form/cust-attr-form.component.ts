@@ -52,7 +52,9 @@ export class CustAttrFormComponent implements OnInit {
         for (let index = 0; index < tempList.length; index++) {
           const element = tempList[index];
           tempFormArray.push(this.SetFormGroup(element));
+          this.dictAttrCodeIdxAt[element.AttrCode] = index;
         }
+        console.log(this.dictAttrCodeIdxAt);
       }
     )
   }
@@ -64,6 +66,7 @@ export class CustAttrFormComponent implements OnInit {
   readonly AttrInputTypeText: string = CommonConstant.AttrInputTypeText;
   readonly AttrInputTypeTextArea: string = CommonConstant.AttrInputTypeTextArea;
   readonly AttrInputTypeRefMaster: string = CommonConstant.AttrInputTypeRefMaster;
+  dictAttrCodeIdxAt: { [Id: string]: number } = {};
   SetFormGroup(QA: AttrContent): FormGroup {
     let tempFormGroup: FormGroup = this.fb.group({
       RefAttrId: QA.RefAttrId,
@@ -77,6 +80,7 @@ export class CustAttrFormComponent implements OnInit {
       RowVersion: QA.RowVersion,
     });
 
+    // comment sementara di buat cuman khusus input text/simple2 + refMaster, list belom.
     switch (QA.AttrInputType) {
       case this.AttrInputTypeRefMaster:
         this.SetRefMasterInputType(QA.AttrCode, QA.AttrName, QA.IsMandatory, QA.Descr, QA.MasterCode);
@@ -115,6 +119,7 @@ export class CustAttrFormComponent implements OnInit {
     arrAddCrit.push(critAssetObj);
     this.dictRefMasterLookup[attrCode].addCritInput = arrAddCrit;
 
+    this.dictRefMasterLookup[attrCode].nameSelect = Descr;
     this.dictRefMasterLookup[attrCode].jsonSelect = { Descr: Descr };
   }
 
@@ -122,5 +127,15 @@ export class CustAttrFormComponent implements OnInit {
     let tempArray = this.parentForm.get(this.identifier) as FormArray;
     let tempFb = tempArray.get(idx.toString()) as FormGroup;
     tempFb.get("AttrValue").patchValue(e.MasterCode);
+  }
+
+  ResetValueFromAttrCode(attrCode: string, value: string = "") {
+    let tempArray = this.parentForm.get(this.identifier) as FormArray;
+    let tempFb = tempArray.get(this.dictAttrCodeIdxAt[attrCode].toString()) as FormGroup;
+    tempFb.get("AttrValue").patchValue(value);
+    if (tempFb.get("AttrInputType").value == this.AttrInputTypeRefMaster) {
+      this.dictRefMasterLookup[attrCode].nameSelect = value;
+      this.dictRefMasterLookup[attrCode].jsonSelect = { Descr: value };
+    }
   }
 }

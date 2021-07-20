@@ -46,8 +46,11 @@ export class NewCustHeaderComponent implements OnInit {
   From: string = "";
   @Input() CustId: number = 0;
   @Input() CustCompanyMgmntShrholderId: number = 0;
+  @Input() CustPersonalFamilyId: number = 0;
   @Input() ParentCustId: number = 0;
   @Input() tempTotalSharePrct: number = 0;
+  @Input() isMarried: boolean = false;
+  @Input() listCustNoToExclude: Array<string> = new Array();
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
 
   constructor(
@@ -252,7 +255,7 @@ export class NewCustHeaderComponent implements OnInit {
         urlAdd = URLConstant.AddCustPersonalMainData;
         break;
       case this.CustDataModeFamily:
-        urlAdd = URLConstant.AddCustPersonalFamily;
+        urlAdd = URLConstant.SaveCustPersonalFamilyMainData;
         break;
       case this.CustDataModeShareholder:
         urlAdd = URLConstant.SaveCustPersonalShareholderMainData;
@@ -268,7 +271,7 @@ export class NewCustHeaderComponent implements OnInit {
         urlAdd = URLConstant.EditCustPersonalMainData;
         break;
       case this.CustDataModeFamily:
-        urlAdd = URLConstant.AddCustPersonalFamily;
+        urlAdd = URLConstant.SaveCustPersonalFamilyMainData;
         break;
       case this.CustDataModeShareholder:
         urlAdd = URLConstant.SaveCustPersonalShareholderMainData;

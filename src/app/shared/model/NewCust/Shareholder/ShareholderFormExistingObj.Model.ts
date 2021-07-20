@@ -1,7 +1,7 @@
 import { CustPersonalJobDataObj } from "../../CustPersonalJobDataObj.Model";
 import { CustCompanyMgmntShrholderObj } from "../CustCompanyMgmntShrholderObj.Model";
 
-export class ShareholderFormExistingObj {
+export class CustFormExistingObj {
     CustCompanyMgmntShrholder: CustCompanyMgmntShrholderObj;
     CustPersonalJob: CustPersonalJobDataObj;
 

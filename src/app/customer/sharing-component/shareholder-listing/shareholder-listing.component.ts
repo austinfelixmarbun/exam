@@ -36,12 +36,14 @@ export class ShareholderListingComponent implements OnInit {
   tempShareholderListingObj: Array<ShareholderListingObj> = new Array();
   tempTotalSharePrct: number = 0;
   tempIsOwner: boolean = false;
+  listCustNoToExclude: Array<string> = new Array();
   GetListPaging() {
     this.http.post(URLConstant.GetListManagementShareholderForListPagingByCustId, { Id: this.CustId }).subscribe(
       (response: GenericListObj) => {
         this.tempShareholderListingObj = response.ReturnObject;
         let tempTotalSharePrct: number = 0;
         let tempIsOwner: boolean = false;
+        this.listCustNoToExclude = new Array();
         for (let index = 0; index < this.tempShareholderListingObj.length; index++) {
           const element = this.tempShareholderListingObj[index];
           if (element.IsActive) {
@@ -49,6 +51,9 @@ export class ShareholderListingComponent implements OnInit {
           }
           if (element.IsOwner) {
             tempIsOwner = true;
+          }
+          if (element.CustNo) {
+            this.listCustNoToExclude.push(element.CustNo);
           }
         }
         this.tempTotalSharePrct = tempTotalSharePrct;
@@ -83,9 +88,6 @@ export class ShareholderListingComponent implements OnInit {
   event(ev: { Key: string, RowObj: ShareholderListingObj }) {
     this.selectedCustCompanyMgmntShrholderId = ev.RowObj.CustCompanyMgmntShrholderId;
     this.selectedCustId = ev.RowObj.ShareholderId;
-    if (ev.RowObj.ShareholderType == this.CustTypePublic) {
-    } else {
-    }
     this.CustType = ev.RowObj.ShareholderType;
     this.tempTotalSharePrct -= ev.RowObj.SharePrcnt;
     this.addCustShareHolder(false);

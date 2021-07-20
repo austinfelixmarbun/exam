@@ -19,6 +19,6 @@
       </button>
     </div>
 </div>
-<app-new-cust-header *ngIf="PageType == CustPageTypeHeader" [CustId]="selectedCustId" [CustType]="CustType" [ParentCustId]="CustId" [CustCompanyMgmntShrholderId]="selectedCustCompanyMgmntShrholderId" [CustDataMode]="CustDataModeShareholder" [tempTotalSharePrct]="tempTotalSharePrct" (outputCancel)="ReloadPaging()"></app-new-cust-header>
+<app-new-cust-header *ngIf="PageType == CustPageTypeHeader" [CustId]="selectedCustId" [CustType]="CustType" [ParentCustId]="CustId" [CustCompanyMgmntShrholderId]="selectedCustCompanyMgmntShrholderId" [listCustNoToExclude]="listCustNoToExclude" [CustDataMode]="CustDataModeShareholder" [tempTotalSharePrct]="tempTotalSharePrct" (outputCancel)="ReloadPaging()"></app-new-cust-header>
 
  

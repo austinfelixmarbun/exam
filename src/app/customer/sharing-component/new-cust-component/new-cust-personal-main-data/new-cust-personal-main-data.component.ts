@@ -1,3 +1,4 @@
+import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
@@ -22,14 +23,16 @@ import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/libr
 import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 import { CustAttrContentObj } from 'app/shared/model/NewCust/CustAttrContentObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/NewCust/CustCompanyMgmntShrholderObj.Model';
+import { CustPersonalFamilyObj } from 'app/shared/model/NewCust/CustPersonalFamilyObj.Model';
 import { ReqPersonalObj } from 'app/shared/model/NewCust/ReqPersonalObj.Model';
-import { ShareholderFormExistingObj } from 'app/shared/model/NewCust/Shareholder/ShareholderFormExistingObj.Model';
+import { CustFormExistingObj } from 'app/shared/model/NewCust/Shareholder/ShareholderFormExistingObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { CookieService } from 'ngx-cookie';
 import { CustAttrFormComponent } from '../component/cust-attr-form/cust-attr-form.component';
+import { FamilyFormComponent } from '../component/family-form/family-form.component';
 import { ShareholderFormComponent } from '../component/shareholder-form/shareholder-form.component';
 import { NewCustSetData } from '../NewCustSetData.Service';
 
@@ -40,12 +43,21 @@ import { NewCustSetData } from '../NewCustSetData.Service';
 export class NewCustPersonalMainDataComponent implements OnInit {
 
   @ViewChild('ShareholderForm') shareholderForm: ShareholderFormComponent;
+  @ViewChild('FamilyForm') familyForm: FamilyFormComponent;
   @ViewChild('CustAttrForm') custAttrForm: CustAttrFormComponent;
-  @Input() listCustIdToExclude: Array<string> = new Array();
+  private ucLookupExistingCust: UclookupgenericComponent;
+  @ViewChild('LookupExistingCust') set content(content: UclookupgenericComponent) {
+    if (content) { // initially setter gets called with undefined
+      this.ucLookupExistingCust = content;
+    }
+  }
+  @Input() listCustNoToExclude: Array<string> = new Array();
   @Input() CustId: number = 0; // if 0 mode Add else mode Edit.
   @Input() CustCompanyMgmntShrholderId: number = 0;
+  @Input() CustPersonalFamilyId: number = 0;
   @Input() ParentCustId: number = 0;
   @Input() tempTotalSharePrct: number = 0;
+  @Input() isMarried: boolean = false;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust; // Cust Mode
   @Output() outputAfterSave: EventEmitter<ReqPersonalObj> = new EventEmitter();
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
@@ -79,6 +91,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.InitCustMainDataMode();
     this.BindLookupSupplier();
     this.BindLookupExistingCust();
+    this.GetCustRelationship();
     this.ClearCustForm();
     this.getInitPattern();
     this.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
@@ -86,6 +99,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat);
     await this.GetExistingData();
     this.GetCustAddrToCopy();
+    this.existingCustomerLookUpObj.isReady = true;
   }
 
   //#region Set Data
@@ -131,7 +145,9 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   existingCustomerLookUpObj: InputLookupObj = new InputLookupObj();
   BindLookupExistingCust() {
     if (this.CustDataMode == this.CustDataModeMain) return;
-    this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.CustId, this.listCustIdToExclude, CommonConstant.CustomerPersonal);
+    console.log("bind lookup existing name");
+    this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal);
+    console.log(this.existingCustomerLookUpObj);
   }
   //#endregion
 
@@ -151,7 +167,28 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     tempDdlObj.isReady = true;
     this.DictUcDDLObj[refMasterTypeCode] = tempDdlObj;
 
-    if (this.RefMasterTypeCodeIdType == refMasterTypeCode) this.onChangeIdType();
+    if (this.RefMasterTypeCodeIdType == refMasterTypeCode) this.onOptionsSelected();
+  }
+
+  MrCustRelationshipCodeObj: Array<KeyValueObj> = new Array<KeyValueObj>();
+  readonly RefMasterTypeCodeCustPersonalRelationship: string = CommonConstant.RefMasterTypeCodeCustPersonalRelationship;
+  async GetCustRelationship() {
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustPersonalRelationship] = new UcDropdownListObj();
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustPersonalRelationship].isSelectOutput = true;
+    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
+    tempReq.RefMasterTypeCode = this.RefMasterTypeCodeCustPersonalRelationship;
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, tempReq).subscribe(
+      async (response) => {
+        this.MrCustRelationshipCodeObj = response[CommonConstant.ReturnObj];
+        if (!this.isMarried) await this.removeSpouse();
+        this.DictUcDDLObj[this.RefMasterTypeCodeCustPersonalRelationship].isReady = true;
+      }
+    );
+  }
+
+  removeSpouse() {
+    let idxSpouse = this.MrCustRelationshipCodeObj.findIndex(x => x.Key == CommonConstant.MasteCodeRelationshipSpouse);
+    this.MrCustRelationshipCodeObj.splice(idxSpouse, 1)
   }
   //#endregion
 
@@ -171,11 +208,16 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       IsSupplier: [false],
       SupplCode: [''],
       SupplName: [''],
-      SupplId: ['']
+      SupplId: [''],
+      MrCustRelationship: ['']
     });
 
     if (this.CustDataMode != this.CustDataModeMain) {
       this.CustomerForm.get("CustName").disable();
+    }
+    if (this.CustDataMode == this.CustDataModeFamily) {
+      this.CustomerForm.get("MrCustRelationship").setValidators(Validators.required);
+      this.CustomerForm.get("MrCustRelationship").updateValueAndValidity();
     }
   }
   //#endregion
@@ -204,12 +246,15 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
 
   //#region GetExisting / mode edit
+  IsLockCopyAddrBtn: boolean = false;
   async GetExistingData() {
     if (this.CustId == 0) return;
     await this.GetCustData();
     this.GetCustAddr();
     await this.GetCustPersonalData();
+    this.GetMrRelationship();
     this.IsLockEdit();
+    this.IsLockCopyAddrBtn = true;
   }
 
   async GetCustData(custId: number = this.CustId) {
@@ -228,13 +273,13 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         });
         if (this.CustDataMode != this.CustDataModeMain) {
           this.CustomerForm.patchValue({
-            MrCustModelCode: response.MrCustModelCode
+            MrCustModelCode: response.MrCustModelCode ? response.MrCustModelCode : "",
           });
         }
         this.existingCustomerLookUpObj.nameSelect = response.CustName;
         this.existingCustomerLookUpObj.jsonSelect = { CustName: response.CustName };
         this.existingCustomerLookUpObj.isReady = true;
-        this.onChangeIdType();
+        this.onOptionsSelected();
       }
     );
   }
@@ -282,6 +327,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     let datePipe = new DatePipe("en-US");
     await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: custId }).toPromise().then(
       (response) => {
+        console.log(response);
         this.tempCustPersonalObj = response;
         this.CustomerForm.patchValue({
           MrGenderCode: response.MrGenderCode,
@@ -296,7 +342,22 @@ export class NewCustPersonalMainDataComponent implements OnInit {
             MobilePhnNo1: response.MobilePhnNo1,
             Email1: response.Email1
           });
+          if (this.CustDataMode == this.CustDataModeFamily) this.familyForm.PatchExistingPersonalData(response);
         }
+      }
+    );
+  }
+
+  tempCustPersonalFamilyObj: CustPersonalFamilyObj = new CustPersonalFamilyObj();
+  GetMrRelationship(custPersonalFamilyId: number = this.CustPersonalFamilyId) {
+    if (this.CustDataMode != this.CustDataModeFamily) return;
+    this.http.post(URLConstant.GetCustPersonalFamilyByCustPersonalFamilyId, { Id: custPersonalFamilyId }).subscribe(
+      (response: CustPersonalFamilyObj) => {
+        console.log(response);
+        this.tempCustPersonalFamilyObj = response;
+        this.CustomerForm.patchValue({
+          MrCustRelationship: response.MrCustRelationship,
+        });
       }
     );
   }
@@ -402,9 +463,9 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     );
   }
 
-  ExistingShareholderObj: ShareholderFormExistingObj = new ShareholderFormExistingObj();
-  GetExistingShareholder(ev: ShareholderFormExistingObj) {
-    this.ExistingShareholderObj = ev;
+  ExistingFormObj: CustFormExistingObj = new CustFormExistingObj();
+  GetExistingFormObj(ev: CustFormExistingObj) {
+    this.ExistingFormObj = ev;
   }
 
   CopyLegalAddr() {
@@ -427,8 +488,13 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     await this.GetCustData(ev.CustId);
     this.GetCustAddr(ev.CustId);
     await this.GetCustPersonalData(ev.CustId);
-    if (ev.CustCompanyMgmntShrholderId) this.shareholderForm.GetExistingShareholder(ev.CustCompanyMgmntShrholderId);
-    this.shareholderForm.GetExistingJobData(ev.CustId);
+    if (this.CustDataMode == this.CustDataModeShareholder) {
+      if (ev.CustCompanyMgmntShrholderId) this.shareholderForm.GetExistingShareholder(ev.CustCompanyMgmntShrholderId);
+      this.shareholderForm.GetExistingJobData(ev.CustId);
+    }
+    if (this.CustDataMode == this.CustDataModeFamily) {
+      this.familyForm.GetExistingJobData(ev.CustId);
+    }
     this.custAttrForm.GetQuestion(ev.CustId);
 
     this.IsLockEdit();
@@ -436,6 +502,9 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   IsLockEdit() {
     this.existingCustomerLookUpObj.isReadonly = true;
+    this.inputAddressObj.isReadonly = true;
+    this.inputAddressObj.inputField.inputLookupObj.isReadonly = true;
+    this.inputAddressObj.inputField.inputLookupObj.isDisable = true;
 
     this.CustomerForm.get("MrGenderCode").disable();
     this.CustomerForm.get("MrIdTypeCode").disable();
@@ -447,6 +516,34 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.CustomerForm.get("MrMaritalStatCode").disable();
     this.CustomerForm.get("MotherMaidenName").disable();
   }
+
+  RelationshipChange(ev: string) {
+    console.log(ev);
+    let tempMaritalStat = this.CustomerForm.get("MrMaritalStatCode");
+    if (ev == CommonConstant.MasteCodeRelationshipSpouse) {
+      this.existingCustomerLookUpObj.addCritInput = NewCustSetData.ResetCriteriaExisting(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal, true);
+      tempMaritalStat.patchValue(CommonConstant.MR_MARITAL_STAT_CODE_MARRIED);
+      tempMaritalStat.disable();
+    } else {
+      this.existingCustomerLookUpObj.addCritInput = NewCustSetData.ResetCriteriaExisting(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal);
+      tempMaritalStat.enable();
+    }
+    this.ucLookupExistingCust.setAddCritInput();
+  }
+
+  outputChangeReceived(ev: string) {
+    console.log(ev);
+    switch (ev) {
+      case CommonConstant.CUST_CHANGE_PROFESSION:
+        this.ChangeProffession();
+        break;
+    }
+  }
+
+  ChangeProffession() {
+    this.custAttrForm.ResetValueFromAttrCode(CommonConstant.AttrCodeDeptAml);
+  }
+
   //#endregion
 
   //#region Save
@@ -473,6 +570,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     reqSubmitObj.CustPersonalObj.BirthDt = tempForm["BirthDt"];
     reqSubmitObj.CustPersonalObj.MotherMaidenName = tempForm["MotherMaidenName"];
     reqSubmitObj.CustPersonalObj.MrMaritalStatCode = tempForm["MrMaritalStatCode"];
+    if (this.CustDataMode == this.CustDataModeFamily) {
+      reqSubmitObj.CustPersonalObj.MrNationalityCode = tempForm["MrNationalityCode"];
+      reqSubmitObj.CustPersonalObj.WnaCountryCode = tempForm["WnaCountryCode"];
+      reqSubmitObj.CustPersonalFamilyObj = this.SetCustPersonalFamilyData();
+    }
 
     reqSubmitObj.CustAddr = this.tempCustAddr;
     reqSubmitObj.CustAddr.CustId = this.CustId;
@@ -528,7 +630,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   SetCustMgmntShareholder(): CustCompanyMgmntShrholderObj {
     let tempForm = this.CustomerForm.getRawValue();
-    let tempReqObj: CustCompanyMgmntShrholderObj = this.ExistingShareholderObj.CustCompanyMgmntShrholder;
+    let tempReqObj: CustCompanyMgmntShrholderObj = this.ExistingFormObj.CustCompanyMgmntShrholder;
     tempReqObj.CustId = this.ParentCustId;
     tempReqObj.ShareholderId = this.CustId;
 
@@ -544,7 +646,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   SetCustPersonalJobData(): CustPersonalJobDataObj {
     let tempForm = this.CustomerForm.getRawValue();
-    let tempReqObj: CustPersonalJobDataObj = this.ExistingShareholderObj.CustPersonalJob;
+    let tempReqObj: CustPersonalJobDataObj = this.ExistingFormObj.CustPersonalJob;
     tempReqObj.CustId = this.CustId;
 
     tempReqObj.RefProfessionId = tempForm["RefProfessionId"] != 0 ? tempForm["RefProfessionId"] : null;
@@ -566,6 +668,16 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       tempAttr.push(tempAttrToPush);
     }
     return tempAttr;
+  }
+
+  SetCustPersonalFamilyData(): CustPersonalFamilyObj {
+    let tempFamilyData: CustPersonalFamilyObj = this.tempCustPersonalFamilyObj;
+
+    tempFamilyData.CustId = this.ParentCustId;
+    tempFamilyData.FamilyId = this.CustId;
+    tempFamilyData.MrCustRelationship = this.CustomerForm.get("MrCustRelationship").value;
+
+    return tempFamilyData;
   }
   //#endregion
 }
