@@ -32,9 +32,6 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
   pageNow: any;
   totalData: any;
   pageSize: any;
-  apiUrl: any;
-  officeUrl: any;
-  addUrl: any;
   arrCrit: any;
 
   foundationUrl: string = environment.FoundationR3Url;
@@ -66,9 +63,6 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.settingUrl + URLConstant.GetOfficeZipcodeMemberAddPaging;
-    this.officeUrl = this.foundationUrl + URLConstant.GetRefOfficeObj;
-    this.addUrl = this.foundationUrl + URLConstant.AddOfficeZipcodeMember;
 
     this.arrCrit = new Array();
 
@@ -77,7 +71,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
 
   initiateForm() {
     var officeId = { refOfficeId: this.refOfficeId };
-    this.http.post(this.officeUrl, officeId).subscribe(
+    this.http.post(URLConstant.GetRefOfficeObj, officeId).subscribe(
       (response) => {
         this.officeCode = response['returnObject']['officeCode'];
         this.officeName = response['returnObject']['officeName'];
@@ -111,7 +105,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
+    this.searchComponent.search(URLConstant.GetOfficeZipcodeMemberAddPaging, this.pageNow, this.pageSize, order);
   }
 
   searchPagination(event: number) {
@@ -123,7 +117,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order);
+    this.searchComponent.search(URLConstant.GetOfficeZipcodeMemberAddPaging, this.pageNow, this.pageSize, order);
   }
 
   Checked(refZipcodeId: any, isChecked: any): void {
@@ -156,7 +150,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
           value: this.orderByValue
         };
       }
-      this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
+      this.searchComponent.search(URLConstant.GetOfficeZipcodeMemberAddPaging, this.pageNow, this.pageSize, order, this.arrAddCrit);
 
       this.listSelectedId = [];
     } else {
@@ -186,7 +180,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
         value: this.orderByValue
       };
     }
-    this.searchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order, this.arrAddCrit);
+    this.searchComponent.search(URLConstant.GetOfficeZipcodeMemberAddPaging, this.pageNow, this.pageSize, order, this.arrAddCrit);
   }
   
   saveZipMember() {
@@ -201,7 +195,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
     }
     var zipCodeMemberList = { listOfOfficeZipcodeMember: listObj };
 
-    this.http.post(this.addUrl, zipCodeMemberList).subscribe(
+    this.http.post(URLConstant.AddOfficeZipcodeMember, zipCodeMemberList).subscribe(
       (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_OFFICE_ZIPCODE_MBR_PAGING],{ "refOfficeId": this.refOfficeId });

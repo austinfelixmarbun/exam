@@ -13,10 +13,8 @@ export class URLConstant {
     public static WebSocketUrl = environment.WebSocketURL + "/Notificationhub";
 
     //GENERAL SETTING
-    public static GetBusinessDt = "/GeneralSetting/GetBusinessDate";
     public static AddGeneralSetting = environment.FoundationR3Url + '/v1' + "/GeneralSetting/AddGeneralSetting";
     public static EditGeneralSetting = environment.FoundationR3Url + '/v1' + "/GeneralSetting/EditGeneralSetting";
-    public static GetGeneralSettingPaging = "/GeneralSetting/GetGeneralSettingPaging";
     public static GetGeneralSettingById = environment.FoundationR3Url + '/v1' + "/GeneralSetting/GetGeneralSettingById";
     public static GetGeneralSettingValue = "/GeneralSetting/GetGeneralSettingValue";
     public static GetGeneralSettingByCode = environment.FoundationR3Url + '/v1' + "/GeneralSetting/GetGeneralSettingByCode";
@@ -26,11 +24,10 @@ export class URLConstant {
     //REF OFFICE
     public static GetRefOfficeByOfficeCode = environment.FoundationR3Url + '/v1' + "/RefOffice/GetRefOfficeByOfficeCode";
     public static GetListKvpActiveRefOfficeForPaging = environment.FoundationR3Url + '/v1' + "/RefOffice/GetListKvpActiveRefOfficeForPaging";
-    public static GetRefOfficeObj = "/RefOffice/GetRefOfficeObj";
+    public static GetRefOfficeObj = environment.FoundationR3Url + '/v1' + "/RefOffice/GetRefOfficeObj";
     public static GetRefOfficeByRefOfficeId = environment.FoundationR3Url + '/v1' + "/RefOffice/GetRefOfficeByRefOfficeId"
     public static GetRefOfficeActiveAndNonVirtualKeyValue = "/RefOffice/GetRefOfficeActiveAndNonVirtualKeyValue";
-    public static GetAllRefOffice = "/RefOffice/GetAllRefOffice";
-    public static GetListUpperHierarchyRefOfficeByRefOrgId = "/RefOffice/GetListUpperHierarchyRefOfficeByRefOrgId";
+    public static GetAllRefOffice = environment.FoundationR3Url + '/v1' + "/RefOffice/GetAllRefOffice";
     public static AddRefOffice = environment.FoundationR3Url + '/v1' + "/RefOffice/AddRefOffice";
     public static AddRefOfficeAreaMember = environment.FoundationR3Url + '/v1' + "/RefOffice/AddRefOfficeAreaMember";
     public static UpdateRefOfficeAreaId = "/RefOffice/UpdateRefOfficeAreaId";
@@ -60,31 +57,31 @@ export class URLConstant {
     public static CheckDuplAreaCode = "/RefOfficeArea/CheckDuplAreaCode";
 
     //ORGANIZATION
-    public static GetRefOrg = "/OrganizationDefinition/GetRefOrg";
-    public static EditRefOrgWithOldParentId = "/OrganizationDefinition/EditRefOrgWithOldParentId";
-    public static EditRefOrg = "/OrganizationDefinition/EditRefOrg";
-    public static DeleteRefOrg = "/OrganizationDefinition/DeleteRefOrg";
-    public static GetListAllRefOrg = "/OrganizationDefinition/GetListAllRefOrg";
-    public static AddRefOrg = "/OrganizationDefinition/AddRefOrg";
-    public static GetRefOrgPaging = "/OrganizationDefinition/GetRefOrgPaging";
-    public static GetAllRefBizUnit = "/OrganizationDefinition/GetAllRefBizUnit";
-    public static GetOrgJobTitleByMdlStruc = "/OrganizationDefinition/GetOrgJobTitleByMdlStruc";
-    public static GetRefBizUnitByOffice = "/OrganizationDefinition/GetRefBizUnitByOffice";
-    public static GetAllOrgMdl = "/OrganizationDefinition/GetAllOrgMdl";
-    public static GetAllActiveOrgMdlByRefOrgId = "/OrganizationDefinition/GetAllActiveOrgMdlByRefOrgId";
-    public static GetOrgMdlPaging = "/OrganizationDefinition/GetOrgMdlPaging";
-    public static DeleteOrgMdl = "/OrganizationDefinition/DeleteOrgMdl";
-    public static EditOrgMdl = "/OrganizationDefinition/EditOrgMdl";
-    public static AddOrgMdl = "/OrganizationDefinition/AddOrgMdl";
-    public static GetOrgMdl = "/OrganizationDefinition/GetOrgMdl";
-    public static GetOrgMdlByOrgMdlId = "/OrganizationDefinition/GetOrgMdlByOrgMdlId";
-    public static GetAllRefBizUnitKeyValuePair = "/OrganizationDefinition/GetAllRefBizUnitKeyValuePair";
-    public static DeleteOrgMdlStruc = "/OrganizationDefinition/DeleteOrgMdlStruc";
-    public static AddOrgMdlStruc = "/OrganizationDefinition/AddOrgMdlStruc";
-    public static EditOrgMdlStruc = "/OrganizationDefinition/EditOrgMdlStruc";
-    public static GetOrgMdlStruc = "/OrganizationDefinition/GetOrgMdlStruc";
-    public static GetOrgMdlStrucPaging = "/OrganizationDefinition/GetOrgMdlStrucPaging";
-    public static GetOrgMdlStrucById = "/OrganizationDefinition/GetOrgMdlStrucById";
+    public static GetRefOrg = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetRefOrg";
+    public static EditRefOrgWithOldParentId = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/EditRefOrgWithOldParentId";
+    public static EditRefOrg = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/EditRefOrg";
+    public static DeleteRefOrg = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/DeleteRefOrg";
+    public static GetListAllRefOrg = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetListAllRefOrg";
+    public static AddRefOrg = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/AddRefOrg";
+    public static GetRefOrgPaging = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetRefOrgPaging";
+    public static GetAllRefBizUnit = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetAllRefBizUnit";
+    public static GetOrgJobTitleByMdlStruc = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetOrgJobTitleByMdlStruc";
+    public static GetRefBizUnitByOffice = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetRefBizUnitByOffice";
+    public static GetAllOrgMdl = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetAllOrgMdl";
+    public static GetAllActiveOrgMdlByRefOrgId = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetAllActiveOrgMdlByRefOrgId";
+    public static GetOrgMdlPaging = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetOrgMdlPaging";
+    public static DeleteOrgMdl = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/DeleteOrgMdl";
+    public static EditOrgMdl = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/EditOrgMdl";
+    public static AddOrgMdl = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/AddOrgMdl";
+    public static GetOrgMdl = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetOrgMdl";
+    public static GetOrgMdlByOrgMdlId = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetOrgMdlByOrgMdlId";
+    public static GetAllRefBizUnitKeyValuePair = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetAllRefBizUnitKeyValuePair";
+    public static DeleteOrgMdlStruc = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/DeleteOrgMdlStruc";
+    public static AddOrgMdlStruc = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/AddOrgMdlStruc";
+    public static EditOrgMdlStruc = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/EditOrgMdlStruc";
+    public static GetOrgMdlStruc = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetOrgMdlStruc";
+    public static GetOrgMdlStrucPaging = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetOrgMdlStrucPaging";
+    public static GetOrgMdlStrucById = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetOrgMdlStrucById";
 
     //REF-JOB-TITLE
     public static GetRefJobTitle = "/OrganizationDefinition/GetRefJobTitlePaging";
@@ -125,17 +122,17 @@ export class URLConstant {
     public static GetEmpForUpdateById = environment.FoundationR3Url + '/v1' + "/RefEmp/GetRefEmpForUpdateByRefEmpId"
 
     //EMP_POSITION
-    public static GetEmpPositionPaging = "/EmpPosition/GetEmpPositionPaging";
-    public static GetEmpByEmpPositionId = "/EmpPosition/GetEmpByEmpPositionId";
-    public static AddEmpPosition = "/EmpPosition/AddEmpPosition";
-    public static EditEmpPosition = "/EmpPosition/EditEmpPosition";
-    public static DeleteEmpPosition = "/EmpPosition/DeleteEmpPosition";
-    public static GetListUserEmployee = "/EmpPosition/GetListUserEmployee";
+    public static GetEmpPositionPaging = environment.FoundationR3Url + '/v1' + "/EmpPosition/GetEmpPositionPaging";
+    public static GetEmpByEmpPositionId = environment.FoundationR3Url + '/v1' + "/EmpPosition/GetEmpByEmpPositionId";
+    public static AddEmpPosition = environment.FoundationR3Url + '/v1' + "/EmpPosition/AddEmpPosition";
+    public static EditEmpPosition = environment.FoundationR3Url + '/v1' + "/EmpPosition/EditEmpPosition";
+    public static DeleteEmpPosition = environment.FoundationR3Url + '/v1' + "/EmpPosition/DeleteEmpPosition";
+    public static GetListUserEmployee = environment.FoundationR3Url + '/v1' + "/EmpPosition/GetListUserEmployee";
 
     //REF-USER
-    public static GetRefUserPaging = "/UserManagement/GetRefUserPaging";
+    public static GetRefUserPaging = environment.FoundationR3Url + '/v1' + "/UserManagement/GetRefUserPaging";
     public static EditRefUserForRefEmpR3 = environment.FoundationR3Url + '/v1' + "/RefUser/EditRefUserForRefEmp";
-    public static ChangePassword = "/UserManagement/ChangePassword";
+    public static ChangePassword = environment.FoundationR3Url + '/v1' + "/UserManagement/ChangePassword";
     public static GetRefUser = "/UserManagement/GetRefUser";
     public static GetUserByUsername = "/UserManagement/GetUserByUsername";
     public static ValidatePwd = "/UserManagement/ValidatePwd";
@@ -192,7 +189,7 @@ export class URLConstant {
     public static GetRefProvDistrictObj = "/RefProvDistrict/GetRefProvDistrict";
     public static EditRefZipcode = environment.FoundationR3Url + '/v1' + "/RefZipcode/EditRefZipcode";
     public static AddRefZipcode = environment.FoundationR3Url + '/v1' + "/RefZipcode/AddRefZipcode";
-    public static GetOfficeZipcodeMemberAddPaging = "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
+    public static GetOfficeZipcodeMemberAddPaging = environment.FoundationR3Url + '/v1' + "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
     public static GetRefZipCodeById = environment.FoundationR3Url + '/v1' + "/RefZipcode/GetRefZipcodeById";
     public static GetZipcodeDataByZipCode = environment.FoundationR3Url + '/v1' + "/RefZipcode/GetZipcodeDataByZipCode";
 
@@ -277,9 +274,9 @@ export class URLConstant {
     public static UpdateFormFeatureAuthForm = "/MenuManagement/UpdateFormFeatureAuthForm";
     public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
     public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
-    public static LoginByRole = '/v1' +"/Authenticate/LoginByRole";
-    public static LoginByToken = "/Authenticate/LoginByToken";
-    public static UpdateToken = "/Authenticate/UpdateRole";
+    public static LoginByRole = environment.FoundationR3Url + '/v1' + "/Authenticate/LoginByRole";
+    public static LoginByToken = environment.FoundationR3Url + '/v1' + "/Authenticate/LoginByToken";
+    public static UpdateToken = environment.FoundationR3Url + '/v1' + "/Authenticate/UpdateRole";
     public static LoginURLFrontEnd = NavigationConstant.PAGES_LOGIN;
 
     //FORM FEATURE
@@ -356,7 +353,7 @@ export class URLConstant {
     public static EditRefAttr = environment.FoundationR3Url + '/v1' + "/RefAttr/EditRefAttr";
     public static GetListActiveRefAttrByAttrGroup = environment.FoundationR3Url + '/v1' + "/RefAttr/GetListActiveRefAttrByAttrGroup"
     public static GetListActiveRefAttrByListAttrGroup = environment.FoundationR3Url + '/v1' + "/RefAttr/GetListActiveRefAttrByListAttrGroup"
-    
+
     //REF PROFESSION
     public static AddRefProfession = environment.FoundationR3Url + '/v1' + "/RefProfession/AddRefProfession";
     public static EditRefProfession = environment.FoundationR3Url + '/v1' + "/RefProfession/EditRefProfession";
@@ -1027,11 +1024,11 @@ export class URLConstant {
     // public static CheckCustFraudTempRegByCustNo = environment.FoundationR3Url + '/v1' + "/CustThirdPartyChecking/CheckCustFraudTempRegByCustNo"
     //#endregion
 
-        // CUST FIN DATA ATTR CONTENT
+    // CUST FIN DATA ATTR CONTENT
     public static GetListCustFinDataAttrContentByCustIdAndListAttrGroup = environment.FoundationR3Url + '/v1' + "/CustFinDataAttrContent/GetListCustFinDataAttrContentByCustIdAndListAttrGroup";
     public static AddCustFinDataAttrContent = environment.FoundationR3Url + '/v1' + "/CustFinDataAttrContent/AddCustFinDataAttrContent";
     public static GetCustFinDataAttrContentForCustViewByCustId = environment.FoundationR3Url + '/v1' + "/CustFinDataAttrContent/GetCustFinDataAttrContentForCustViewByCustId";
-    public static DownloadJournalFile = environment.FoundationR3Url +"/Journal/DownloadJournalFile";
+    public static DownloadJournalFile = environment.FoundationR3Url + "/Journal/DownloadJournalFile";
     public static GetJrSourceFileByJrSourceFileId = environment.FoundationR3Url + "/Journal/GetJrSourceFileByJrSourceFileId";
 
     // LICENSE

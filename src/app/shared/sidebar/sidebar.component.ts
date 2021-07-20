@@ -62,8 +62,7 @@ export class SidebarComponent implements OnInit {
                     ModuleCode: environment.Module,
                     RowVersion: ""
                 };
-                var updateRoleUrl = environment.FoundationR3Url + URLConstant.UpdateToken;
-                this.http.post(updateRoleUrl, roleObject).subscribe(
+                this.http.post(URLConstant.UpdateToken, roleObject).subscribe(
                     (response) => {
                         AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
                         AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
