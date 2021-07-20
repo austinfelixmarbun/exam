@@ -277,7 +277,7 @@ export class URLConstant {
     public static UpdateFormFeatureAuthForm = "/MenuManagement/UpdateFormFeatureAuthForm";
     public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
     public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
-    public static LoginByRole = "/Authenticate/LoginByRole";
+    public static LoginByRole = '/v1' +"/Authenticate/LoginByRole";
     public static LoginByToken = "/Authenticate/LoginByToken";
     public static UpdateToken = "/Authenticate/UpdateRole";
     public static LoginURLFrontEnd = NavigationConstant.PAGES_LOGIN;
