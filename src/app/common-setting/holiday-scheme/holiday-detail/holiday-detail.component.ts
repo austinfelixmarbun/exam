@@ -56,8 +56,6 @@ export class HolidayDetailComponent implements OnInit {
     this.inputPagingObjHolidayScheme.addCritInput = new Array();
     this.inputPagingObjHolidayScheme.addCritInput.push(critInputNotIn);
     this.inputPagingObjHolidayScheme.urlJson = "./assets/lookup/lookupHolidayScheme.json";
-    this.inputPagingObjHolidayScheme.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputPagingObjHolidayScheme.urlEnviPaging = environment.FoundationR3Url;
     this.inputPagingObjHolidayScheme.pagingJson = "./assets/lookup/lookupHolidayScheme.json";
     this.inputPagingObjHolidayScheme.genericJson = "./assets/lookup/lookupHolidayScheme.json";
     this.inputPagingObjHolidayScheme.isRequired = false;

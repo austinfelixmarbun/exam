@@ -2,9 +2,9 @@ import { URLConstant } from "../constant/URLConstant"
 import { environment } from "environments/environment"
 
 export class InputLookupObj{
-    urlJson: any
-    urlQryPaging: any
-    urlEnviPaging: any
+    urlJson: string;
+    urlQryPaging: string;
+    urlEnviPaging: string;
     _url: any
     nameSelect: any
     idSelect: any

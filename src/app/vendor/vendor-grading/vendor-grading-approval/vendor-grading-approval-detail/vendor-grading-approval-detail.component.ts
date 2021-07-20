@@ -60,8 +60,7 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
 
   ngOnInit() {
     this.viewVendorBranchObj.viewInput = "./assets/ucviewgeneric/viewVendorGradingMainInformation.json";
-    this.viewVendorBranchObj.viewEnvironment = environment.FoundationR3Url;
-
+    
     var ApvHoldObj = new ApprovalObj()
     ApvHoldObj.TaskId = this.taskId
 
@@ -97,26 +96,16 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
   initInputApprovalObj(){
 
     this.UcInputApprovalGeneralInfoObj = new UcInputApprovalGeneralInfoObj();
-    this.UcInputApprovalGeneralInfoObj.EnvUrl = environment.FoundationR3Url;
     this.UcInputApprovalGeneralInfoObj.PathUrl = "/Approval/GetSingleTaskInfo";
     this.UcInputApprovalGeneralInfoObj.TaskId = this.taskId;
     
     this.InputApprovalHistoryObj = new UcInputApprovalHistoryObj();
-    this.InputApprovalHistoryObj.EnvUrl = environment.FoundationR3Url;
     this.InputApprovalHistoryObj.PathUrl = "/Approval/GetTaskHistory";
     this.InputApprovalHistoryObj.RequestId = this.ApvReqId;
 
     this.InputApvObj = new UcInputApprovalObj();
     this.InputApvObj.TaskId = this.taskId;
-    this.InputApvObj.EnvUrl = environment.FoundationR3Url;
-    this.InputApvObj.PathUrlGetLevelVoting = URLConstant.GetLevelVoting;
-    this.InputApvObj.PathUrlGetPossibleResult = URLConstant.GetPossibleResult;
-    this.InputApvObj.PathUrlSubmitApproval = URLConstant.SubmitApproval;
-    this.InputApvObj.PathUrlGetNextNodeMember = URLConstant.GetNextNodeMember;
-    this.InputApvObj.PathUrlGetReasonActive = URLConstant.GetRefReasonActive;
-    this.InputApvObj.PathUrlGetChangeFinalLevel = URLConstant.GetCanChangeMinFinalLevel;
     this.InputApvObj.RequestId = this.ApvReqId;
-    this.InputApvObj.PathUrlGetHistory = URLConstant.GetTaskHistory;
     this.InputApvObj.TrxNo = this.VendorGradingHistNo;
     this.IsReady = true; 
   }

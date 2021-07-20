@@ -47,10 +47,8 @@ export class CustomerViewComponent implements OnInit {
 
   async ngOnInit() : Promise<void> {
     this.viewCustMainInfoHeaderObj.viewInput = "./assets/ucviewgeneric/viewCustMainInfoHeader.json";
-    this.viewCustMainInfoHeaderObj.viewEnvironment = environment.FoundationR3Url;
 
     this.viewCustCoyMainInfoHeader.viewInput = "./assets/ucviewgeneric/viewCustCoyMainInfoHeader.json";
-    this.viewCustCoyMainInfoHeader.viewEnvironment = environment.FoundationR3Url;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];

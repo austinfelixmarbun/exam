@@ -24,9 +24,7 @@ export class LoginPageComponent implements OnInit {
   @ViewChild('pass') userPassRef: ElementRef;
   @ViewChild('otp') otpInputRef: ElementRef;
   @ViewChild('f') loginForm: NgForm;
-  private apiUrl: string;
   IsNeedUpdate: boolean;
-  FoundationR3Url: string;
   token: string;
   version: string;
   result: any;
@@ -61,8 +59,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.FoundationR3Url = environment.FoundationR3Url;
-
     if (this.token != null) {
       this.http.post(AdInsConstant.LoginWithToken, {ModuleCode: environment.Module},  {withCredentials: true}).subscribe(
         (response) => {
@@ -83,10 +79,9 @@ export class LoginPageComponent implements OnInit {
     event.preventDefault();
     const username = this.userInputRef.nativeElement.value;
     const password = this.userPassRef.nativeElement.value;
-    this.apiUrl = this.FoundationR3Url + AdInsConstant.Login;
     var requestObj = { "Username": username, "Password": password };
     //this.rolePickService.openDialog(data.returnObject);
-    this.http.post(this.apiUrl, requestObj).subscribe(
+    this.http.post(AdInsConstant.Login, requestObj).subscribe(
       (response) => {
         if (response["StatusCode"] == CommonConstant.STATUS_CODE_USER_LOCKED) {
           this.mode = "locked";

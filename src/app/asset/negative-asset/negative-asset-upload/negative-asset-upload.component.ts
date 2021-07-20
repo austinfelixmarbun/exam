@@ -24,17 +24,17 @@ export class NegativeAssetUploadComponent implements OnInit {
       FileErrorName: "Upload_Negative_Asset_ErrorDownload", // Nama Excel Download Error File
       // SheetName: 'TemplateGan',
 
-      environmentUrl: environment.FoundationR3Url,
+      environmentUrl: environment.FoundationR3Url + "/v1",
       apiQryPaging: URLConstant.GetPagingObjectBySQL,
       pagingJson: "./assets/ucpaging/searchNegativeAssetMonitoring.json",
       ddlEnvironments: [
         {
           name: "UMH.UPLOAD_STATUS",
-          environment: environment.FoundationR3Url
+          environment: environment.FoundationR3Url + "/v1"
         },
         {
           name: "UMH.OFFICE_CODE",
-          environment: environment.FoundationR3Url
+          environment: environment.FoundationR3Url + "/v1"
         }
       ],
       url: URLConstant.UploadFile

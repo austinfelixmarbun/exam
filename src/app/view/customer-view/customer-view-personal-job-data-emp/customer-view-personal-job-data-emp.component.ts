@@ -20,13 +20,9 @@ export class CustomerViewPersonalJobDataEmpComponent implements OnInit {
   constructor() { }
   ngOnInit() {
     this.viewCustJobDataAddressEmp.viewInput =  "./assets/ucviewgeneric/viewCustJobDataAddressEmp.json";
-    this.viewCustJobDataAddressEmp.viewEnvironment = environment.FoundationR3Url;
     this.viewCustJobDataEmp.viewInput =  "./assets/ucviewgeneric/viewCustJobDataEmp.json";
-    this.viewCustJobDataEmp.viewEnvironment = environment.FoundationR3Url;
     this.viewCustJobDataEmpOthBiz.viewInput =  "./assets/ucviewgeneric/viewCustJobDataEmpOthBiz.json";
-    this.viewCustJobDataEmpOthBiz.viewEnvironment = environment.FoundationR3Url;
     this.viewCustJobDataOthBizAdress.viewInput =  "./assets/ucviewgeneric/viewCustJobDataOthBizAdress.json";
-    this.viewCustJobDataOthBizAdress.viewEnvironment = environment.FoundationR3Url;
 
     this.viewCustPreviousJobDataEmp.viewInput =  "./assets/ucviewgeneric/viewCustPreviousJobDataEmp.json";
     this.viewCustPreviousJobAddressEmp.viewInput =  "./assets/ucviewgeneric/viewCustPreviousJobAddressEmp.json";

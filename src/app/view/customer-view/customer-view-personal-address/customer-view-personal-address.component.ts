@@ -48,7 +48,6 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
       }
     });
     this.viewCustFinData.viewInput =   "./assets/ucviewgeneric/viewCustFinData.json";
-    this.viewCustFinData.viewEnvironment = environment.FoundationR3Url;
     this.http.post(URLConstant.GetListCustAddrByCustIdForCustomerPersonalView, { Id: this.CustId }).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {

@@ -33,7 +33,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
   rfaInfoObj: RFAInfoObj = new RFAInfoObj();
   vendorObj: VendorObj = new VendorObj();
   vendorGradingHistObj: VendorGradingHistObj = new VendorGradingHistObj();
-  ReqByUserId : String;
+  ReqByUserId: String;
   OfficeCode: String;
   VendorForm: FormGroup;
   selected: String;
@@ -46,13 +46,13 @@ export class VendorGradingRequestDetailComponent implements OnInit {
   oldVendorRating: number;
   private createComponent: UcapprovalcreateComponent;
   @ViewChild('ApprovalComponent') set content(content: UcapprovalcreateComponent) {
-    if (content) { 
+    if (content) {
       // initially setter gets called with undefined
       this.createComponent = content;
     }
   }
   ApprovalCreateOutput: any;
-  InputObj: UcInputRFAObj= new UcInputRFAObj(this.cookieService);
+  InputObj: UcInputRFAObj = new UcInputRFAObj(this.cookieService);
   IsReady: boolean = false;
   constructor(
     private fb: FormBuilder,
@@ -71,20 +71,20 @@ export class VendorGradingRequestDetailComponent implements OnInit {
       }
     });
   }
-  currentUserContext : any;
-  async ngOnInit()   {
+  currentUserContext: any;
+  async ngOnInit() {
     this.currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    if (this.mode == "edit"){this.title = "Detail Supplier Branch Grading Request"}
-    else {this.title = "Add Supplier Branch Grading Request"}
+    if (this.mode == "edit") { this.title = "Detail Supplier Branch Grading Request" }
+    else { this.title = "Add Supplier Branch Grading Request" }
 
     this.VendorForm = this.fb.group({
       VendorId: [""],
       VendorCode: [""],
       VendorRating: ['', [Validators.min(1.00), Validators.max(100.00), Validators.required]],
-  
+
       ApvRecommendation: this.fb.array([]),
     });
-  
+
     if (this.mode == "edit") {
       this.getData();
       // var apvObj = { SchemeCode: "VENDOR_GRD_SUPPL_BRC" };
@@ -98,15 +98,15 @@ export class VendorGradingRequestDetailComponent implements OnInit {
       //     });
       //   });
 
-        await this.http.post(URLConstant.GetListActiveRefReason, { RefReasonTypeCode: CommonConstant.VENDOR_GRADING_APV }).toPromise().then(
-          (response) => {
-            this.listReason = response[CommonConstant.ReturnObj];
-            this.VendorForm.patchValue({
-              Reason: this.listReason[0].Key
-            });
-            this.selected = this.listReason[0].Key;
-          }
-        );
+      await this.http.post(URLConstant.GetListActiveRefReason, { RefReasonTypeCode: CommonConstant.VENDOR_GRADING_APV }).toPromise().then(
+        (response) => {
+          this.listReason = response[CommonConstant.ReturnObj];
+          this.VendorForm.patchValue({
+            Reason: this.listReason[0].Key
+          });
+          this.selected = this.listReason[0].Key;
+        }
+      );
     } else {
       this.inputLookupParentObj.isRequired = true;
       this.setLookup();
@@ -116,51 +116,48 @@ export class VendorGradingRequestDetailComponent implements OnInit {
   getData() {
     var ReqValue = this.VendorForm.value;
     let vendorId: number;
-    if(this.mode == "edit"){vendorId = this.VendorId}
-    else {vendorId = ReqValue.VendorId}
+    if (this.mode == "edit") { vendorId = this.VendorId }
+    else { vendorId = ReqValue.VendorId }
 
     this.http.post(URLConstant.GetVendorByVendorId, { Id: vendorId }).subscribe((response) => {
-        this.result = response;
-        this.ParentId = this.result.VendorParentId;
-        this.oldVendorRating = this.result.VendorRating;
-        this.vendorCode = this.result.VendorCode;
-        this.vendorName = this.result.VendorName;
-        this.VendorForm.patchValue({
-          VendorId: this.result.VendorId,
-          VendorRating: this.result.VendorRating
-        });
-        if(this.mode == "edit")
-        {
-          this.setLookup();
-        }
+      this.result = response;
+      this.ParentId = this.result.VendorParentId;
+      this.oldVendorRating = this.result.VendorRating;
+      this.vendorCode = this.result.VendorCode;
+      this.vendorName = this.result.VendorName;
+      this.VendorForm.patchValue({
+        VendorId: this.result.VendorId,
+        VendorRating: this.result.VendorRating
       });
+      if (this.mode == "edit") {
+        this.setLookup();
+      }
+    });
   }
 
-  getOldVendorGrade(){
+  getOldVendorGrade() {
     var ReqValue = this.VendorForm.value;
     let vendorId: number;
     // if(this.mode == "edit"){vendorId = this.VendorId}
     // else {vendorId = ReqValue.VendorId}
     this.http.post(URLConstant.GetVendorGrade, { Id: this.VendorId }).subscribe((response) => {
       console.log(response);
-        this.result = response;
-        this.oldGradeCode = response["VendorGrade"];
-        this.gradeCode = response["VendorGrade"];
-      });
+      this.result = response;
+      this.oldGradeCode = response["VendorGrade"];
+      this.gradeCode = response["VendorGrade"];
+    });
   }
 
-  async onVendorRatingChange(vendorRating: any){
-    if (vendorRating !== undefined && vendorRating !== null && vendorRating !== "")
-    {
+  async onVendorRatingChange(vendorRating: any) {
+    if (vendorRating !== undefined && vendorRating !== null && vendorRating !== "") {
       await this.LoadGradingRule(vendorRating);
-    }else{
+    } else {
       this.gradeCode = "";
     }
   }
 
-  async LoadGradingRule(vendorRating: number)
-  {
-    await this.http.post(URLConstant.GetRuleVendorGrading, { VendorRating:  vendorRating}).subscribe(
+  async LoadGradingRule(vendorRating: number) {
+    await this.http.post(URLConstant.GetRuleVendorGrading, { VendorRating: vendorRating }).subscribe(
       (response) => {
 
         this.gradeCode = response["VendorGrade"];
@@ -169,16 +166,11 @@ export class VendorGradingRequestDetailComponent implements OnInit {
   }
 
   setLookup() {
-    this.inputLookupParentObj.urlJson =
-      "./assets/uclookup/vendor/lookupVendorParent.json";
-    this.inputLookupParentObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-    this.inputLookupParentObj.urlEnviPaging = environment.FoundationR3Url;
-    this.inputLookupParentObj.pagingJson =
-      "./assets/uclookup/vendor/lookupVendorParent.json";
-    this.inputLookupParentObj.genericJson =
-      "./assets/uclookup/vendor/lookupVendorParent.json";
-    if(this.mode == "edit"){this.inputLookupParentObj.isRequired = false;}else {this.inputLookupParentObj.isRequired = true;}
-    
+    this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupVendorParent.json";
+    this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupVendorParent.json";
+    this.inputLookupParentObj.genericJson = "./assets/uclookup/vendor/lookupVendorParent.json";
+    if (this.mode == "edit") { this.inputLookupParentObj.isRequired = false; } else { this.inputLookupParentObj.isRequired = true; }
+
     this.inputLookupParentObj.addCritInput = new Array();
 
     if (this.mode == "edit") {
@@ -192,7 +184,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     this.inputLookupParentObj.isReady = true;
   }
   selectOption(id: String) {
-   
+
   }
 
   SaveForm() {
@@ -202,7 +194,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     this.rfaInfoObj.ApprovedById = ReqValue.ListApprover;
     this.rfaInfoObj.Reason = ReqValue.Reason;
     this.rfaInfoObj.Notes = ReqValue.Notes;
-    
+
     this.vendorGradingHistObj.ReqByRefUserId = this.ReqByUserId;
     this.vendorGradingHistObj.ReqDt = context[CommonConstant.BUSINESS_DT]
     this.vendorGradingHistObj.Status = CommonConstant.VENDOR_GRADING_STATUS_REQ;
@@ -212,19 +204,19 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     this.vendorGradingHistObj.NewGrade = this.gradeCode;
 
     const reason = this.listReason.filter(reason => reason.Value == ReqValue.Reason);
-    let rfaInfo = {RFAInfo: this.VendorForm.controls.RFAInfo.value};
-      var submitVendorGradingReqObj = {
-        VendorGrading: this.vendorGradingHistObj,
-        OfficeCode: this.currentUserContext[CommonConstant.OFFICE_CODE], 
-        RequestRFAObj: rfaInfo
-       
-      }
+    let rfaInfo = { RFAInfo: this.VendorForm.controls.RFAInfo.value };
+    var submitVendorGradingReqObj = {
+      VendorGrading: this.vendorGradingHistObj,
+      OfficeCode: this.currentUserContext[CommonConstant.OFFICE_CODE],
+      RequestRFAObj: rfaInfo
+
+    }
     this.http.post(URLConstant.SubmitRequestVendorGrading, submitVendorGradingReqObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_PAGING]);
       })
-    
+
   }
 
   getLookupParent(event) {
@@ -235,14 +227,14 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     this.getData();
     this.getOldVendorGrade();
   }
-  
-  initInputApprovalObj(){
-    let Attributes = [{}] 
+
+  initInputApprovalObj() {
+    let Attributes = [{}]
     let TypeCode = {
-      "TypeCode" : CommonConstant.VENDOR_GRD_SUPPL_BRC_APV_TYPE,
-      "Attributes" : Attributes,
+      "TypeCode": CommonConstant.VENDOR_GRD_SUPPL_BRC_APV_TYPE,
+      "Attributes": Attributes,
     }
-     
+
     this.InputObj.ApvTypecodes = [TypeCode];
     this.InputObj.CategoryCode = CommonConstant.VENDOR_GRADING_APV;
     this.InputObj.SchemeCode = CommonConstant.VENDOR_GRD_SUPPL_BRC_SCHM;

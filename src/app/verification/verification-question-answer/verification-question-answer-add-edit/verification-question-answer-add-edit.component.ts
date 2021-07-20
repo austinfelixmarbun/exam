@@ -20,7 +20,6 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
   VerfQuestionAnswerId: number;
   mode: string = "add";
   isActive: boolean = true;
-  foundationUrl: string = environment.FoundationR3Url;
   itemVerfQuestionAnswer: any;
   verfQuestionAnswer: any;
   answerTypeCode: string = "DDL";

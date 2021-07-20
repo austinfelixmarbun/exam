@@ -26,7 +26,6 @@ export class AppSourceOfficeMemberPagingComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewAppSource.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
 
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchAppSourceOfficeMember.json";

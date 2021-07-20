@@ -131,8 +131,7 @@ export class MasterAddEditComponent implements OnInit {
   }
 
   GetListMasterType() {
-    let url = environment.FoundationR3Url + URLConstant.GetListActiveRefMasterType;
-    this.httpClient.post(url, null).subscribe(
+    this.httpClient.post(URLConstant.GetListActiveRefMasterType, null).subscribe(
       (response) => {
         this.refMasterTypeObj = response;
       }

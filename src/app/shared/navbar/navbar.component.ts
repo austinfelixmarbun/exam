@@ -89,8 +89,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     logout() {
-        var url = environment.FoundationR3Url + AdInsConstant.Logout;
-        this.http.post(url, "");
+        this.http.post(AdInsConstant.Logout, "");
         AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();
         this.router.navigate([NavigationConstant.PAGES_LOGIN]);

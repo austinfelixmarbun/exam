@@ -20,9 +20,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
   result: any;
   title: string;
   mode: string = "add";
-  apiUrl: any;
   isActive: boolean = true;
-  foundationUrl: string = environment.FoundationR3Url;
   verfQuestionScheme: any;
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_SCHM_PAGING;
