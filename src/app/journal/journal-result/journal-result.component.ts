@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { environment } from 'environments/environment';
-
+import { URLConstant } from 'app/shared/constant/URLConstant';
 @Component({
   selector: 'app-journal-result',
   templateUrl: './journal-result.component.html',
@@ -23,7 +22,7 @@ export class JournalResultComponent implements OnInit {
     })
 
 
-    this.http.post<any>(environment.FoundationR3Url + '/Journal/GetJournalResultByJrMsgHId', {
+    this.http.post<any>(URLConstant.GetJournalResultByJrMsgHId, {
       Id: this.JrMsgHId
     }).subscribe(res => {
       this.JrMsgH = res.JrMsgH[0]
