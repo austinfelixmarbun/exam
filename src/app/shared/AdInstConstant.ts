@@ -28,18 +28,8 @@ export class AdInsConstant {
   public static TimeoutSession = 6000000;
   public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
   public static Login = environment.FoundationR3Url + '/v1' + "/Authenticate/Login";
-  public static LoginWithToken = environment.FoundationR3Url+"/Authenticate/LoginWithToken";
-  public static LoginToken = "/UserManagement/HTML6Login";
-  public static Logout = environment.FoundationR3Url + "/v1" +"/UserManagement/LogOut"
-  public static GetListOffice = "/RefOffice/GetRefOfficePaging";
-  public static GetProvince = "/los/v1/get_provinsi";
-  public static GetCityByProvince = "/los/v1/get_kota";
-  public static getProspectByProspectNo = "/api/MobileProspectTask/GetProspectByProspectNo";
-  public static submitNCProspect = "/api/MobileProspectTask/submitNCProspect";
-  public static addCustPersonal = "";
+  public static LoginWithToken = environment.FoundationR3Url + '/v1' + "/Authenticate/LoginWithToken";
+  public static Logout = environment.FoundationR3Url + "/v1" + "/UserManagement/LogOut"
   public static FormDefault = "dashboard/dash-board";
 
-  //#region 
-  public static RefMasterTypeCodeJournalHeaderFactType = "H_FACT_TYPE";
-  //#endregion
 }

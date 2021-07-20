@@ -52,10 +52,6 @@ export class MasterTypePagingComponent implements OnInit {
     this.pageSize = this.show[0];
     this.apiUrl = this.foundationUrl + URLConstant.GetRefRolePaging;
     this.initiateForm()
-    // this.adInsService.postData(this.foundationUrl + AdInsConstant.GetListOffice, null)
-    //   .subscribe(data => {
-    //   }
-    //   )
   }
 
   getResult(event) {

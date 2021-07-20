@@ -5,6 +5,8 @@ import { NavigationConstant } from "../NavigationConstant";
 // kecuali: API" yang di pakai di UC". contoh: GetPagingObjectBySQL, DeleteFromPaging, Approval CreateNewRFA
 
 export class URLConstant {
+    // FRAMEWORK
+    public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL" // UCPaging
 
     // SYS CONFIG RESULT
     public static GetSysConfigResultByCode = environment.FoundationR3Url + '/v1' + '/SysConfigResult/GetSysConfigResultByCode';
@@ -417,7 +419,6 @@ export class URLConstant {
     public static GetListUploadSettingDByUploadSettingHId = '/UploadSetting/GetListUploadSettingDByUploadSettingHId';
 
     // GENERIC
-    public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL" // uc
 
     // ASSET TYPE
     public static AddAssetType = environment.FoundationR3Url + '/v1' + "/AssetType/AddAssetType"

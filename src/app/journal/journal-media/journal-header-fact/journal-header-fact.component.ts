@@ -4,12 +4,12 @@ import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-journal-header-fact',
@@ -57,7 +57,7 @@ export class JournalHeaderFactComponent implements OnInit {
       }
     );
     this.http.post<any>(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, {
-      code: AdInsConstant.RefMasterTypeCodeJournalHeaderFactType
+      code: CommonConstant.RefMasterTypeCodeJournalHeaderFactType
     }).subscribe(
       (response) => {
         this.ddlFactTypeObj = new UcDropdownListObj;
