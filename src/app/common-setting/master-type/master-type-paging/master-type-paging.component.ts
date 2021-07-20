@@ -12,6 +12,7 @@ import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 
 @Component({
   selector: 'app-master-type-paging',
@@ -22,7 +23,7 @@ export class MasterTypePagingComponent implements OnInit {
 
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  inputObj: any;
+  inputObj: UcPagingObj = new UcPagingObj();
   resultData: any;
   pageNow: any;
   totalData: any;
@@ -44,10 +45,7 @@ export class MasterTypePagingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchRefMasterType.json";
-    this.inputObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputObj.apiQryPaging = URLConstant.GetRefRolePaging;
     
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;

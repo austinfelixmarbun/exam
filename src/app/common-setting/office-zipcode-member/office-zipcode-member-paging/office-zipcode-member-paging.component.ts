@@ -52,7 +52,6 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeZipcodeMember.json";
-    this.inputObj.enviromentUrl = this.foundationUrl;
     this.inputObj.apiQryPaging = URLConstant.GetRefOfficeZipcodePaging;
 
     this.pageNow = 1;

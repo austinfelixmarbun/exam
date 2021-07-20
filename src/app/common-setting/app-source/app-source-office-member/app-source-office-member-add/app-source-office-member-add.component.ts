@@ -35,8 +35,6 @@ export class AppSourceOfficeMemberAddComponent implements OnInit {
     this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
     
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/refAppSrcOfficeMbrTempPaging.json";
-    this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/refAppSrcOfficeMbrTempPaging.json";
 
     this.GetListRefAppSrcOfficeMbrByRefAppSrcId();

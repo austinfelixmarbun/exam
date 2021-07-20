@@ -64,7 +64,6 @@ export class MasterAddEditComponent implements OnInit {
 
 
   ngOnInit() {
-    this.dropdownListObj.enviromentUrl = environment.FoundationR3Url;
     this.dropdownListObj.apiPath = URLConstant.GetListActiveRefMasterType;
     this.dropdownListObj.requestObj = {};
     this.GetListMasterType();

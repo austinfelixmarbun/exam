@@ -32,8 +32,6 @@ export class VendorSchemeMemberAddComponent implements OnInit {
 
   ngOnInit() {
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/dummyTempPaging.json";
-    this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/dummyTempPaging.json";
 
     const addCritTypeCode = new CriteriaObj();

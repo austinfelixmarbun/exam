@@ -72,7 +72,6 @@ export class RoleUserComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchUser.json";
-    this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = URLConstant.GetListUserEmployee;
     
     this.initiateForm();

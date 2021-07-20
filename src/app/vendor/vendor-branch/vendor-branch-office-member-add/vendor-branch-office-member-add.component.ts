@@ -34,8 +34,6 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
 
   ngOnInit() {
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/vendorBranchMemberTempPaging.json";
-    this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/vendorBranchMemberTempPaging.json";
 
     var addCritIsActive = new CriteriaObj();

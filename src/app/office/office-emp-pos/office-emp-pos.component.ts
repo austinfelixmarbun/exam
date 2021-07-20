@@ -69,7 +69,6 @@ export class OfficeEmpPosComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchEmpList.json";
-    this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = URLConstant.GetEmpPositionPaging;
     this.inputObj.ddlEnvironments = [
       {

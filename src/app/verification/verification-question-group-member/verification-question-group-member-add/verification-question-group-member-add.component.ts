@@ -41,10 +41,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewVerifQuestGrpMbr.json";
-
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/verifQuestionGrpMbrTempPaging.json";
-    this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/verifQuestionGrpMbrTempPaging.json";
 
     this.GetListVerfQuestionGrpDByVerfQuestionGrpHId();
