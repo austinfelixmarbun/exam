@@ -1,6 +1,9 @@
 import { environment } from "environments/environment";
 import { NavigationConstant } from "../NavigationConstant";
 
+// URL" API di concat dengan environment url + version + api path
+// kecuali: API" yang di pakai di UC". contoh: GetPagingObjectBySQL, DeleteFromPaging, Approval CreateNewRFA
+
 export class URLConstant {
 
     // SYS CONFIG RESULT
@@ -16,7 +19,7 @@ export class URLConstant {
     public static AddGeneralSetting = environment.FoundationR3Url + '/v1' + "/GeneralSetting/AddGeneralSetting";
     public static EditGeneralSetting = environment.FoundationR3Url + '/v1' + "/GeneralSetting/EditGeneralSetting";
     public static GetGeneralSettingById = environment.FoundationR3Url + '/v1' + "/GeneralSetting/GetGeneralSettingById";
-    public static GetGeneralSettingValue = '/v1'+ "/GeneralSetting/GetGeneralSettingValue";
+    public static GetGeneralSettingValue = '/v1' + "/GeneralSetting/GetGeneralSettingValue";
     public static GetGeneralSettingByCode = environment.FoundationR3Url + '/v1' + "/GeneralSetting/GetGeneralSettingByCode";
     public static GetGeneralSettingValueByCode = environment.FoundationR3Url + '/v1' + "/GeneralSetting/GetGeneralSettingValueByCode";
     public static GetListGeneralSettingByListGsCode = environment.FoundationR3Url + '/v1' + "/GeneralSetting/GetListGeneralSettingByListGsCode";
@@ -30,16 +33,16 @@ export class URLConstant {
     public static GetAllRefOffice = environment.FoundationR3Url + '/v1' + "/RefOffice/GetAllRefOffice";
     public static AddRefOffice = environment.FoundationR3Url + '/v1' + "/RefOffice/AddRefOffice";
     public static AddRefOfficeAreaMember = environment.FoundationR3Url + '/v1' + "/RefOffice/AddRefOfficeAreaMember";
-    public static UpdateRefOfficeAreaId = '/v1'+ "/RefOffice/UpdateRefOfficeAreaId";
+    public static UpdateRefOfficeAreaId = '/v1' + "/RefOffice/UpdateRefOfficeAreaId";
     public static EditRefOffice = environment.FoundationR3Url + '/v1' + "/RefOffice/EditRefOffice";
-    public static GetCenterGrpByCenterGrpTypeCode = '/v1'+ "/RefOffice/GetCenterGrpByCenterGrpCode";
-    public static GetListOfficeCenterGrp = '/v1'+ "/RefOffice/GetListOfficeCenterGrp";
-    public static AddCenterGroupOfficeMember = '/v1'+ "RefOffice/AddCenterGroupOfficeMember";
+    public static GetCenterGrpByCenterGrpTypeCode = '/v1' + "/RefOffice/GetCenterGrpByCenterGrpCode";
+    public static GetListOfficeCenterGrp = '/v1' + "/RefOffice/GetListOfficeCenterGrp";
+    public static AddCenterGroupOfficeMember = '/v1' + "RefOffice/AddCenterGroupOfficeMember";
     public static AddCenterGrpOfficeMember = environment.FoundationR3Url + '/v1' + "/CenterGrpOfficeMbr/AddCenterGrpOfficeMember";
     public static GetListCenterGrpMemberByRefOfficeId = environment.FoundationR3Url + '/v1' + "/CenterGrpOfficeMbr/GetListCenterGrpMemberByRefOfficeId"
-    public static DeleteCenterGroupOfficeMember = '/v1'+ "/RefOffice/DeleteCenterGroupOfficeMember";
-    public static DeleteCenterGrpOfficeMember = '/v1'+ "/CenterGrpOfficeMbr/DeleteCenterGrpOfficeMember";
-    public static GetListActiveRefOffice = '/v1'+ "/RefOffice/GetListActiveRefOffice";
+    public static DeleteCenterGroupOfficeMember = '/v1' + "/RefOffice/DeleteCenterGroupOfficeMember";
+    public static DeleteCenterGrpOfficeMember = '/v1' + "/CenterGrpOfficeMbr/DeleteCenterGrpOfficeMember";
+    public static GetListActiveRefOffice = '/v1' + "/RefOffice/GetListActiveRefOffice";
     public static GetListRefOfficeByRefOfficeAreaId = environment.FoundationR3Url + '/v1' + "/RefOffice/GetListRefOfficeByRefOfficeAreaId";
     public static GetListKvpActiveRefOffice = environment.FoundationR3Url + '/v1' + "/RefOffice/GetListKvpActiveRefOffice";
 
@@ -48,13 +51,13 @@ export class URLConstant {
     public static GetCenterGrpById = environment.FoundationR3Url + '/v1' + "/CenterGrp/GetCenterGrpById";
 
     //REF OFFICE AREA
-    public static GetAllListArea = '/v1'+ "/RefOfficeArea/GetAllListArea";
-    public static GetRefOfficeAreaPaging = '/v1'+ "/RefOfficeArea/GetRefOfficeAreaPaging";
-    public static GetRefArea = '/v1'+ "/RefOfficeArea/GetRefArea";
-    public static GetRefOfficeAreaByRefOfficeAreaId = '/v1'+ "/RefOfficeArea/GetRefOfficeAreaByRefOfficeAreaId";
+    public static GetAllListArea = environment.FoundationR3Url + '/v1' + "/RefOfficeArea/GetAllListArea";
+    public static GetRefOfficeAreaPaging = environment.FoundationR3Url + '/v1' + "/RefOfficeArea/GetRefOfficeAreaPaging";
+    public static GetRefArea = environment.FoundationR3Url + '/v1' + "/RefOfficeArea/GetRefArea";
+    public static GetRefOfficeAreaByRefOfficeAreaId = environment.FoundationR3Url + '/v1' + "/RefOfficeArea/GetRefOfficeAreaByRefOfficeAreaId";
     public static AddRefOfficeArea = environment.FoundationR3Url + '/v1' + "/RefOfficeArea/AddRefOfficeArea";
     public static EditRefOfficeArea = environment.FoundationR3Url + '/v1' + "/RefOfficeArea/EditRefOfficeArea";
-    public static CheckDuplAreaCode = '/v1'+ "/RefOfficeArea/CheckDuplAreaCode";
+    public static CheckDuplAreaCode = environment.FoundationR3Url + '/v1' + "/RefOfficeArea/CheckDuplAreaCode";
 
     //ORGANIZATION
     public static GetRefOrg = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetRefOrg";
@@ -84,41 +87,41 @@ export class URLConstant {
     public static GetOrgMdlStrucById = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetOrgMdlStrucById";
 
     //REF-JOB-TITLE
-    public static GetRefJobTitle = '/v1'+ "/OrganizationDefinition/GetRefJobTitlePaging";
+    public static GetRefJobTitle = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetRefJobTitlePaging";
     public static AddRefJobTitle = environment.FoundationR3Url + '/v1' + "/RefJobTitle/AddRefJobTitle";
     public static EditRefJobTitle = environment.FoundationR3Url + '/v1' + "/RefJobTitle/EditRefJobTitle";
-    public static GetJobPositionLvl = '/v1'+ "/OrganizationDefinition/GetJobPositionLvl";
+    public static GetJobPositionLvl = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetJobPositionLvl";
     public static GetRefJobTitleById = environment.FoundationR3Url + '/v1' + "/RefJobTitle/GetRefJobTitleByRefJobTitleId";
 
     //ORG JOB TITLE
-    public static GetOrgJobTitlePaging = '/v1'+ "/OrganizationDefinition/GetOrgJobTitlePaging";
-    public static AddOrgJobTitle = '/v1'+ "/OrganizationDefinition/AddOrgJobTitle";
-    public static EditOrgJobTitle = '/v1'+ "/OrganizationDefinition/EditOrgJobTitle";
-    public static DeleteOrgJobTitle = '/v1'+ "/OrganizationDefinition/DeleteOrgJobTitle";
-    public static GetOrgJobTitleByOrgJobTitleId = '/v1'+ "/OrganizationDefinition/GetOrgJobTitleByOrgJobTitleId";
+    public static GetOrgJobTitlePaging = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetOrgJobTitlePaging";
+    public static AddOrgJobTitle = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/AddOrgJobTitle";
+    public static EditOrgJobTitle = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/EditOrgJobTitle";
+    public static DeleteOrgJobTitle = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/DeleteOrgJobTitle";
+    public static GetOrgJobTitleByOrgJobTitleId = environment.FoundationR3Url + '/v1' + "/OrganizationDefinition/GetOrgJobTitleByOrgJobTitleId";
 
     //REF-BANK
-    public static GetBankPaging = '/v1'+ "/RefBank/GetRefBankPaging";
-    public static GetBank = '/v1'+ "/RefBank/GetBank";
+    public static GetBankPaging = environment.FoundationR3Url + '/v1' + "/RefBank/GetRefBankPaging";
+    public static GetBank = environment.FoundationR3Url + '/v1' + "/RefBank/GetBank";
     public static GetRefBankByRefBankIdAsync = environment.FoundationR3Url + '/v1' + "/RefBank/GetRefBankByRefBankIdAsync";
     public static EditRefBank = environment.FoundationR3Url + '/v1' + "/RefBank/EditRefBank";
-    public static AddRefBank = '/v1'+ "/RefBank/AddRefBank";
+    public static AddRefBank = environment.FoundationR3Url + '/v1' + "/RefBank/AddRefBank";
     public static AddRefBankAsync = environment.FoundationR3Url + '/v1' + "/RefBank/AddRefBankAsync";
-    public static DeleteRefBank = '/v1'+ "/RefBank/DeleteRefBank";
-    public static GetBankByBankCode = '/v1'+ "/RefBank/GetBankByBankCode";
+    public static DeleteRefBank = environment.FoundationR3Url + '/v1' + "/RefBank/DeleteRefBank";
+    public static GetBankByBankCode = environment.FoundationR3Url + '/v1' + "/RefBank/GetBankByBankCode";
 
     //REF-EMP
     public static GetEmpNameByRefUserId = environment.FoundationR3Url + '/v1' + "/RefEmp/GetEmpNameByRefUserId";
-    public static GetListEmployee = '/v1'+ "/RefEmp/GetRefEmpPaging";
+    public static GetListEmployee = environment.FoundationR3Url + '/v1' + "/RefEmp/GetRefEmpPaging";
     public static GetRefEmployeeById = environment.FoundationR3Url + '/v1' + "/RefEmp/GetRefEmpByRefEmpId"
     public static AddRefEmp = environment.FoundationR3Url + '/v1' + "/RefEmp/AddRefEmp";
     public static EditRefEmp = environment.FoundationR3Url + '/v1' + "/RefEmp/EditRefEmp";
     public static GetEmpBankAccByRefEmpId = environment.FoundationR3Url + '/v1' + "/EmpBankAcc/GetEmpBankAccByRefEmpId";
-    public static AddRefEmpAndEmpBankAcc = '/v1'+ "/RefEmp/AddRefEmpAndEmpBankAcc";
-    public static EditRefEmpAndEmpBankAcc = '/v1'+ "/RefEmp/EditRefEmpAndEmpBankAcc";
-    public static DeleteRefEmpAndEmpBankAcc = '/v1'+ "/RefEmp/DeleteRefEmpAndEmpBankAcc";
-    public static GetListEmployeebyRefEmpId = '/v1'+ "/EmpPosition/GetListEmployeebyRefEmpId";
-    public static GetEmpListByOfficeIdAndIsActive = '/v1'+ "/RefEmp/GetEmpListByOfficeIdAndIsActive";
+    public static AddRefEmpAndEmpBankAcc = environment.FoundationR3Url + '/v1' + "/RefEmp/AddRefEmpAndEmpBankAcc";
+    public static EditRefEmpAndEmpBankAcc = environment.FoundationR3Url + '/v1' + "/RefEmp/EditRefEmpAndEmpBankAcc";
+    public static DeleteRefEmpAndEmpBankAcc = environment.FoundationR3Url + '/v1' + "/RefEmp/DeleteRefEmpAndEmpBankAcc";
+    public static GetListEmployeebyRefEmpId = environment.FoundationR3Url + '/v1' + "/EmpPosition/GetListEmployeebyRefEmpId";
+    public static GetEmpListByOfficeIdAndIsActive = environment.FoundationR3Url + '/v1' + "/RefEmp/GetEmpListByOfficeIdAndIsActive";
     public static GetEmpForUpdateById = environment.FoundationR3Url + '/v1' + "/RefEmp/GetRefEmpForUpdateByRefEmpId"
 
     //EMP_POSITION
@@ -133,11 +136,11 @@ export class URLConstant {
     public static GetRefUserPaging = environment.FoundationR3Url + '/v1' + "/UserManagement/GetRefUserPaging";
     public static EditRefUserForRefEmpR3 = environment.FoundationR3Url + '/v1' + "/RefUser/EditRefUserForRefEmp";
     public static ChangePassword = environment.FoundationR3Url + '/v1' + "/UserManagement/ChangePassword";
-    public static GetRefUser = "/UserManagement/GetRefUser";
-    public static GetUserByUsername = "/UserManagement/GetUserByUsername";
-    public static ValidatePwd = "/UserManagement/ValidatePwd";
-    public static GetCountRefUserByRefEmpId = "/UserManagement/GetCountRefUserByRefEmpId";
-    public static ResetPassword = "/UserManagement/ResetPassword";
+    public static GetRefUser = environment.FoundationR3Url + '/v1' + "/UserManagement/GetRefUser";
+    public static GetUserByUsername = environment.FoundationR3Url + '/v1' + "/UserManagement/GetUserByUsername";
+    public static ValidatePwd = environment.FoundationR3Url + '/v1' + "/UserManagement/ValidatePwd";
+    public static GetCountRefUserByRefEmpId = environment.FoundationR3Url + '/v1' + "/UserManagement/GetCountRefUserByRefEmpId";
+    public static ResetPassword = environment.FoundationR3Url + '/v1' + "/UserManagement/ResetPassword";
     public static GetRefUserById = environment.FoundationR3Url + '/v1' + "/RefUser/GetRefUserById";
     public static GetRefUserByUsername = environment.FoundationR3Url + '/v1' + "/RefUser/GetRefUserByUsername";
     public static GetUserEmpByUsername = environment.FoundationR3Url + '/v1' + "/RefUser/GetUserEmpByUsername";
@@ -146,26 +149,26 @@ export class URLConstant {
     public static EditRefUserRole = environment.FoundationR3Url + '/v1' + "/RefUserRole/EditRefUserRole";
     public static GetRefUserRoleById = environment.FoundationR3Url + '/v1' + "/RefUserRole/GetRefUserRoleById";
     public static ChangePasswordRefUserByUsername = environment.FoundationR3Url + '/v1' + "/RefUser/ChangePasswordRefUserByUsername";
-    public static DeleteRefUserRole = '/v1'+ "/RefUserRole/DeleteRefUserRole";
+    public static DeleteRefUserRole = environment.FoundationR3Url + '/v1' + "/RefUserRole/DeleteRefUserRole";
     public static GetRefUserByResetCode = environment.FoundationR3Url + '/v1' + "/RefUser/GetRefUserByResetCode";
     public static ResetPasswordByUsername = environment.FoundationR3Url + '/v1' + "/RefUser/ResetPasswordByUsername";
 
     //REF-ROLE
-    public static GetRefRolePaging = '/v1'+ "/UserManagement/GetRefRolePaging";
+    public static GetRefRolePaging = environment.FoundationR3Url + '/v1' + "/UserManagement/GetRefRolePaging";
     public static AddRefRole = environment.FoundationR3Url + '/v1' + "/RefRole/AddRefRole";
     public static EditRefRole = environment.FoundationR3Url + '/v1' + "/RefRole/EditRefRole";
-    public static DeleteRefRole = '/v1'+ "/RefRole/DeleteRefRole";
+    public static DeleteRefRole = environment.FoundationR3Url + '/v1' + "/RefRole/DeleteRefRole";
     public static GetRefRoleByRefRoleId = environment.FoundationR3Url + '/v1' + "/RefRole/GetRefRoleById";
     public static GetRefRoleByCode = environment.FoundationR3Url + '/v1' + "/RefRole/GetRefRoleByCode";
-    public static GetActiveRefRoleByRefRoleId = '/v1'+ "/RefRole/GetActiveRefRoleByRefRoleId";
-    public static GetRefRole = '/v1'+ "/RefRole/GetRefRole";
-    public static GetListDataCurrentUser = '/v1'+ "/UserManagement/GetListDataCurrentUser";
-    public static GetRefRoleByEmpPositionId = '/v1'+ "/RefRole/GetRefRoleByEmpPositionId";
-    public static EditUserTitleRole = '/v1'+ "/UserManagement/EditUserTitleRole";
-    public static AddUserTitleRole = '/v1'+ "/UserManagement/AddUserTitleRole";
-    public static AssignRoleToUsers = '/v1'+ "/UserManagement/AssignRoleToUsers";
-    public static GetUserTitleRoleByEmpPositionIdAndRefRoleId = '/v1'+ "/UserManagement/GetUserTitleRoleByEmpPositionIdAndRefRoleId";
-    public static GetListActiveRefRole = '/v1'+ "/RefRole/GetListActiveRefRole"
+    public static GetActiveRefRoleByRefRoleId = '/v1' + "/RefRole/GetActiveRefRoleByRefRoleId";
+    public static GetRefRole = environment.FoundationR3Url + '/v1' + "/RefRole/GetRefRole";
+    public static GetListDataCurrentUser = '/v1' + "/UserManagement/GetListDataCurrentUser";
+    public static GetRefRoleByEmpPositionId = '/v1' + "/RefRole/GetRefRoleByEmpPositionId";
+    public static EditUserTitleRole = environment.FoundationR3Url + '/v1' + "/UserManagement/EditUserTitleRole";
+    public static AddUserTitleRole = environment.FoundationR3Url + '/v1' + "/UserManagement/AddUserTitleRole";
+    public static AssignRoleToUsers = environment.FoundationR3Url + '/v1' + "/UserManagement/AssignRoleToUsers";
+    public static GetUserTitleRoleByEmpPositionIdAndRefRoleId = '/v1' + "/UserManagement/GetUserTitleRoleByEmpPositionIdAndRefRoleId";
+    public static GetListActiveRefRole = environment.FoundationR3Url + '/v1' + "/RefRole/GetListActiveRefRole"
 
     //REF FEE
     public static AddRefFee = environment.FoundationR3Url + '/v1' + "/RefFee/AddRefFee";
@@ -184,9 +187,9 @@ export class URLConstant {
 
 
     //ZIPCODE
-    public static GetRefZipcodePaging = '/v1'+ "/RefZipcode/GetRefZipcodePaging";
-    public static GetRefZipCode = '/v1'+ "/RefZipcode/GetRefZipcode";
-    public static GetRefProvDistrictObj = '/v1'+ "/RefProvDistrict/GetRefProvDistrict";
+    public static GetRefZipcodePaging = environment.FoundationR3Url + '/v1' + "/RefZipcode/GetRefZipcodePaging";
+    public static GetRefZipCode = environment.FoundationR3Url + '/v1' + "/RefZipcode/GetRefZipcode";
+    public static GetRefProvDistrictObj = environment.FoundationR3Url + '/v1' + "/RefProvDistrict/GetRefProvDistrict";
     public static EditRefZipcode = environment.FoundationR3Url + '/v1' + "/RefZipcode/EditRefZipcode";
     public static AddRefZipcode = environment.FoundationR3Url + '/v1' + "/RefZipcode/AddRefZipcode";
     public static GetOfficeZipcodeMemberAddPaging = environment.FoundationR3Url + '/v1' + "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
@@ -204,7 +207,7 @@ export class URLConstant {
     public static GetRefBizUnit = environment.FoundationR3Url + '/v1' + "/RefBizUnit/GetRefBizUnitByRefBizUnitId";
     public static AddRefBizUnit = environment.FoundationR3Url + '/v1' + "/RefBizUnit/AddRefBizUnit";
     public static EditRefBizUnit = environment.FoundationR3Url + '/v1' + "/RefBizUnit/EditRefBizUnit";
-    public static DeleteRefBizUnit = '/v1'+ "/RefBizUnit/DeleteRefBizUnit";
+    public static DeleteRefBizUnit = environment.FoundationR3Url + '/v1' + "/RefBizUnit/DeleteRefBizUnit";
 
     //REF COY
     public static GetRefCoyPaging = environment.FoundationR3Url + '/v1' + "/RefCoy/GetRefCoyPaging";
@@ -222,22 +225,22 @@ export class URLConstant {
     public static GetCoyCommissioner = environment.FoundationR3Url + '/v1' + "/CoyCommissioner/GetCoyCommissioner";
 
     //REF TAX OFFICE
-    public static GetAllActiveRefTaxOffice = '/v1'+ "/RefTaxOffice/GetAllActiveRefTaxOffice";
+    public static GetAllActiveRefTaxOffice = environment.FoundationR3Url + '/v1' + "/RefTaxOffice/GetAllActiveRefTaxOffice";
 
     //REF MASTER
-    public static GetRefMasterList = '/v1'+ "/RefMaster/GetRefMasterList";
-    public static GetRefMastersByCriteria = '/v1'+ "/RefMaster/GetRefMastersByCriteria";
-    public static GetRefMaster = '/v1'+ "/RefMaster/GetRefMaster";
-    public static GetRefMasterListByTypeCode = '/v1'+ "/RefMaster/GetRefMasterListByTypeCode";
-    public static GetRefMasterListKeyValuePair = '/v1'+ "/RefMaster/GetRefMasterListKeyValuePair";
+    public static GetRefMasterList = environment.FoundationR3Url + '/v1' + "/RefMaster/GetRefMasterList";
+    public static GetRefMastersByCriteria = environment.FoundationR3Url + '/v1' + "/RefMaster/GetRefMastersByCriteria";
+    public static GetRefMaster = environment.FoundationR3Url + '/v1' + "/RefMaster/GetRefMaster";
+    public static GetRefMasterListByTypeCode = environment.FoundationR3Url + '/v1' + "/RefMaster/GetRefMasterListByTypeCode";
+    public static GetRefMasterListKeyValuePair = environment.FoundationR3Url + '/v1' + "/RefMaster/GetRefMasterListKeyValuePair";
     public static AddRefMaster = environment.FoundationR3Url + '/v1' + "/RefMaster/AddRefMaster";
     public static EditRefMaster = environment.FoundationR3Url + '/v1' + "/RefMaster/EditRefMaster";
-    public static GetRefMasterType = '/v1'+ "/RefMaster/GetRefMasterType";
-    public static GetRefMasterTypeKeyValueUserSetting = '/v1'+ "/RefMaster/GetRefMasterTypeKeyValueUserSetting";
-    public static GetRefMasterPaging = '/v1'+ "/RefMaster/GetRefMasterPaging";
-    public static GetRefMasterListDesc = '/v1'+ "/RefMaster/GetRefMasterListDesc";
+    public static GetRefMasterType = environment.FoundationR3Url + '/v1' + "/RefMaster/GetRefMasterType";
+    public static GetRefMasterTypeKeyValueUserSetting = '/v1' + "/RefMaster/GetRefMasterTypeKeyValueUserSetting";
+    public static GetRefMasterPaging = environment.FoundationR3Url + '/v1' + "/RefMaster/GetRefMasterPaging";
+    public static GetRefMasterListDesc = environment.FoundationR3Url + '/v1' + "/RefMaster/GetRefMasterListDesc";
     public static GetRefMasterListKeyValueActiveByCode = environment.FoundationR3Url + '/v1' + "/RefMaster/GetListKeyValueActiveByCode"
-    public static GetListActiveRefMasterType = '/v1'+ "/RefMasterType/GetListKeyValueActiveByCode";
+    public static GetListActiveRefMasterType = environment.FoundationR3Url + '/v1' + "/RefMasterType/GetListKeyValueActiveByCode";
     public static GetRefMasterByRefMasterId = environment.FoundationR3Url + '/v1' + "/RefMaster/GetRefMasterByRefMasterId";
     public static GetListActiveRefMaster = environment.FoundationR3Url + '/v1' + "/RefMaster/GetListKeyValueActiveByCode";
     public static GetRefMasterByMasterCode = environment.FoundationR3Url + '/v1' + "/RefMaster/GetRefMasterByMasterCode";
@@ -246,7 +249,7 @@ export class URLConstant {
     public static GetRefMasterByRefMasterTypeCodeAndMasterCode = environment.FoundationR3Url + '/v1' + "/RefMaster/GetRefMasterByRefMasterTypeCodeAndMasterCode";
     public static GetKvpRefMasterByRefMasterTypeCodeAndMasterCode = environment.FoundationR3Url + '/v1' + "/RefMaster/GetKvpRefMasterByRefMasterTypeCodeAndMasterCode";
     public static GetRefMasterByRefMasterTypeCode = environment.FoundationR3Url + '/v1' + "/RefMaster/GetRefMasterByRefMasterTypeCode";
-    public static GetListActiveRefMasterDDL = '/v1' + "/RefMaster/GetListKeyValueActiveByCode";
+    public static GetListActiveRefMasterDDL = environment.FoundationR3Url + '/v1' + "/RefMaster/GetListKeyValueActiveByCode";
 
     //REF COUNTRY
     public static GetListRefCountry = environment.FoundationR3Url + '/v1' + "/RefCountry/GetListRefCountry";
@@ -256,67 +259,62 @@ export class URLConstant {
     public static GetRefIndustryTypeById = environment.FoundationR3Url + '/v1' + "/RefIndustryType/GetRefIndustryTypeByRefIndustryTypeId";
     public static AddRefIndustryType = environment.FoundationR3Url + '/v1' + "/RefIndustryType/AddRefIndustryType";
     public static EditRefIndustryType = environment.FoundationR3Url + '/v1' + "/RefIndustryType/EditRefIndustryType";
-    public static DeleteRefIndustryType = '/v1'+ "/RefIndustryType/DeleteRefIndustryType";
+    public static DeleteRefIndustryType = environment.FoundationR3Url + '/v1' + "/RefIndustryType/DeleteRefIndustryType";
     public static GetRefIndustryTypeByIndustryTypeCode = environment.FoundationR3Url + '/v1' + "/RefIndustryType/GetRefIndustryTypeByIndustryTypeCode";
 
     //REF PROV DISTRICT
-    public static GetRefProvDistrictPaging = '/v1'+ "/RefProvDistrict/GetRefProvDistrictPaging";
+    public static GetRefProvDistrictPaging = environment.FoundationR3Url + '/v1' + "/RefProvDistrict/GetRefProvDistrictPaging";
 
     //MENU
-    public static GetRefFormPaging = "/MenuManagement/GetRefFormPaging";
-    public static GetAllActiveRefFormByRefRoleId = "/MenuManagement/GetAllActiveRefFormByRefRoleId";
-    public static GetRefFormByRefFormId = "/MenuManagement/GetRefFormByRefFormId";
-    public static EditRefForm = "/MenuManagement/EditRefForm";
-    public static AddRefForm = "/MenuManagement/AddRefForm";
-    public static DeleteRefForm = "/MenuManagement/DeleteRefForm";
-    public static AssignRoleToForms = "/MenuManagement/AssignRoleToForms";
-    public static GetAllAuthFormsByRefRoleId = "/MenuManagement/GetAllAuthFormsByRefRoleId";
-    public static GetAuthByRefFormIdAndRefRoleId = "/MenuManagement/GetAuthByRefFormIdAndRefRoleId";
-    public static UpdateFormFeatureAuthForm = "/MenuManagement/UpdateFormFeatureAuthForm";
-    public static GetAllActiveRefFormAndPathExist = "/MenuManagement/GetAllActiveRefFormAndPathExist";
-    public static GetAllActiveRefForm = "/MenuManagement/GetAllActiveRefForm";
+    public static GetRefFormPaging = environment.FoundationR3Url + '/v1' + "/MenuManagement/GetRefFormPaging";
+    public static GetAllActiveRefFormByRefRoleId = environment.FoundationR3Url + '/v1' + "/MenuManagement/GetAllActiveRefFormByRefRoleId";
+    public static GetRefFormByRefFormId = environment.FoundationR3Url + '/v1' + "/MenuManagement/GetRefFormByRefFormId";
+    public static EditRefForm = environment.FoundationR3Url + '/v1' + "/MenuManagement/EditRefForm";
+    public static AddRefForm = environment.FoundationR3Url + '/v1' + "/MenuManagement/AddRefForm";
+    public static DeleteRefForm = environment.FoundationR3Url + '/v1' + "/MenuManagement/DeleteRefForm";
+    public static AssignRoleToForms = environment.FoundationR3Url + '/v1' + "/MenuManagement/AssignRoleToForms";
+    public static GetAllAuthFormsByRefRoleId = environment.FoundationR3Url + '/v1' + "/MenuManagement/GetAllAuthFormsByRefRoleId";
+    public static GetAuthByRefFormIdAndRefRoleId = environment.FoundationR3Url + '/v1' + "/MenuManagement/GetAuthByRefFormIdAndRefRoleId";
+    public static UpdateFormFeatureAuthForm = environment.FoundationR3Url + '/v1' + "/MenuManagement/UpdateFormFeatureAuthForm";
+    public static GetAllActiveRefFormAndPathExist = environment.FoundationR3Url + '/v1' + "/MenuManagement/GetAllActiveRefFormAndPathExist";
+    public static GetAllActiveRefForm = environment.FoundationR3Url + '/v1' + "/MenuManagement/GetAllActiveRefForm";
     public static LoginByRole = environment.FoundationR3Url + '/v1' + "/Authenticate/LoginByRole";
     public static LoginByToken = environment.FoundationR3Url + '/v1' + "/Authenticate/LoginByToken";
     public static UpdateToken = environment.FoundationR3Url + '/v1' + "/Authenticate/UpdateRole";
     public static LoginURLFrontEnd = NavigationConstant.PAGES_LOGIN;
 
     //FORM FEATURE
-    public static GetListRefFeature = '/v1'+ "/RefFeature/GetListRefFeature";
-    public static GetRefFeatureByComponent = '/v1'+ "/RefFeature/GetRefFeatureByComponent";
+    public static GetListRefFeature = environment.FoundationR3Url + '/v1' + "/RefFeature/GetListRefFeature";
+    public static GetRefFeatureByComponent = environment.FoundationR3Url + '/v1' + "/RefFeature/GetRefFeatureByComponent";
 
     //HOLIDAY
-    public static GetAllActiveHolidaySchmH = '/v1'+ "/Holiday/GetAllActiveHolidaySchmH";
+    public static GetAllActiveHolidaySchmH = environment.FoundationR3Url + '/v1' + "/Holiday/GetAllActiveHolidaySchmH";
     public static GetListActiveHolidaySchemeH = environment.FoundationR3Url + '/v1' + "/HolidaySchm/GetListActiveHolidaySchemeH"
-    public static GetHolidayPaging = '/v1'+ "/Holiday/GetHolidayPaging";
+    public static GetHolidayPaging = environment.FoundationR3Url + '/v1' + "/Holiday/GetHolidayPaging";
     public static AddHolidaySchmH = environment.FoundationR3Url + '/v1' + "/HolidaySchm/AddHolidaySchmH";
     public static AddHolidaySchmD = environment.FoundationR3Url + '/v1' + "/HolidaySchm/AddHolidaySchmD";
     public static AddHolidaySchmDUntilYear = environment.FoundationR3Url + '/v1' + "/HolidaySchm/AddHolidaySchmDUntilYear";
-    public static GetHolidaySchmH = '/v1'+ "/Holiday/GetHolidaySchmH";
+    public static GetHolidaySchmH = environment.FoundationR3Url + '/v1' + "/Holiday/GetHolidaySchmH";
     public static GetHolidaySchmHById = environment.FoundationR3Url + '/v1' + "/HolidaySchm/GetHolidaySchmHById";
     public static GetHolidaySchmDById = environment.FoundationR3Url + '/v1' + "/HolidaySchm/GetHolidaySchmDById";
-    public static EditHolidaySchmHOnly = '/v1'+ "/Holiday/EditHolidaySchmHOnly";
+    public static EditHolidaySchmHOnly = environment.FoundationR3Url + '/v1' + "/Holiday/EditHolidaySchmHOnly";
     public static EditHolidaySchmH = environment.FoundationR3Url + '/v1' + "/HolidaySchm/EditHolidaySchmH";
     public static EditHolidaySchmD = environment.FoundationR3Url + '/v1' + "/HolidaySchm/EditHolidaySchmD";
-    public static DeleteHolidaySchmD = '/v1'+ "/HolidaySchm/DeleteHolidaySchmD";
-    public static GetHolidayDetailPaging = '/v1'+ "/Holiday/GetHolidayDetailPaging";
+    public static DeleteHolidaySchmD = environment.FoundationR3Url + '/v1' + "/HolidaySchm/DeleteHolidaySchmD";
+    public static GetHolidayDetailPaging = environment.FoundationR3Url + '/v1' + "/Holiday/GetHolidayDetailPaging";
     public static CopyHolidaySchmH = environment.FoundationR3Url + '/v1' + "/HolidaySchm/CopyHolidaySchmH";
-
-    //USER SESSION LOG
-    public static SelectRole = '/v1'+ "/UserSessionLog/SelectRole";
 
     //NOTIFICATION
     public static SendNotificationRemainingPasswordExpirationDaysToUser = environment.FoundationR3Url + '/v1' + "/Notification/SendNotificationRemainingPasswordExpirationDaysToUser";
-    public static NotificationPost = '/v1'+ "/Message/Post";
-    public static NotificationSignalR = '/v1'+ "/notification";
     public static GetNotificationHByNotificationHId = environment.FoundationR3Url + '/v1' + "/NotificationH/GetNotificationHByNotificationHId";
-    public static GetListUsernameAndEmpNameByNotificationHId = '/v1'+ "/NotificationD/GetListUsernameAndEmpNameByNotificationHId"
-    public static AddNotificationHAndD = '/v1'+ "/NotificationH/AddNotificationHAndD"
+    public static GetListUsernameAndEmpNameByNotificationHId = environment.FoundationR3Url + '/v1' + "/NotificationD/GetListUsernameAndEmpNameByNotificationHId"
+    public static AddNotificationHAndD = environment.FoundationR3Url + '/v1' + "/NotificationH/AddNotificationHAndD"
     public static EditNotificationH = environment.FoundationR3Url + '/v1' + "/NotificationH/EditNotificationH"
     public static UpdateReadNotification = environment.FoundationR3Url + '/v1' + "/NotificationD/UpdateReadNotificationD";
     public static GetListNotificationHByRefUserId = environment.FoundationR3Url + '/v1' + "/NotificationH/GetListNotificationHByRefUserId";
 
     //REF CURR
-    public static GetRefCurrPaging = '/v1'+ "/RefCurr/GetRefCurrPaging";
+    public static GetRefCurrPaging = environment.FoundationR3Url + '/v1' + "/RefCurr/GetRefCurrPaging";
     public static AddRefCurr = environment.FoundationR3Url + '/v1' + "/RefCurr/AddRefCurr";
     public static EditRefCurr = environment.FoundationR3Url + '/v1' + "/RefCurr/EditRefCurr";
     public static GetRefCurrById = environment.FoundationR3Url + '/v1' + "/RefCurr/GetRefCurrById";
@@ -358,7 +356,7 @@ export class URLConstant {
     //REF PROFESSION
     public static AddRefProfession = environment.FoundationR3Url + '/v1' + "/RefProfession/AddRefProfession";
     public static EditRefProfession = environment.FoundationR3Url + '/v1' + "/RefProfession/EditRefProfession";
-    public static DeleteRefProfession = '/v1'+ "/RefProfession/DeleteRefProfession";
+    public static DeleteRefProfession = '/v1' + "/RefProfession/DeleteRefProfession";
     public static GetRefProfessionById = environment.FoundationR3Url + '/v1' + "/RefProfession/GetRefProfessionByRefProfessionId";
     public static GetRefProfessionByProfessionCode = environment.FoundationR3Url + '/v1' + "/RefProfession/GetRefProfessionByProfessionCode"
     public static GetRefProfessionByRefProfessionId = environment.FoundationR3Url + '/v1' + "/RefProfession/GetRefProfessionByRefProfessionId";
@@ -372,20 +370,20 @@ export class URLConstant {
     public static GetValueReasonType = environment.FoundationR3Url + '/v1' + "/RefReasonType/GetListKeyValueByCode";
 
     //GENERIC
-    public static GetObjectBySQL = '/v1'+ "/Generic/GetObjectBySQL";
-    public static AddObjectBySQL = '/v1'+ "/Generic/AddObjectBySQL";
-    public static UpdateObjectBySQL = '/v1'+ "/Generic/UpdateObjectBySQL";
-    public static DeleteObjectBySQL = '/v1'+ "/Generic/DeleteObjectBySQL";
+    public static GetObjectBySQL = environment.FoundationR3Url + '/v1' + "/Generic/GetObjectBySQL";
+    public static AddObjectBySQL = environment.FoundationR3Url + '/v1' + "/Generic/AddObjectBySQL";
+    public static UpdateObjectBySQL = environment.FoundationR3Url + '/v1' + "/Generic/UpdateObjectBySQL";
+    public static DeleteObjectBySQL = environment.FoundationR3Url + '/v1' + "/Generic/DeleteObjectBySQL";
 
     //WORKHOUR
     public static GetListActiveWorkingSchmH = environment.FoundationR3Url + '/v1' + "/WorkingHourSchm/GetListActiveWorkingSchmH";
-    public static GetWorkHourSchmHPaging = '/v1'+ "/WorkHour/GetWorkHourSchmHPaging";
+    public static GetWorkHourSchmHPaging = environment.FoundationR3Url + '/v1' + "/WorkHour/GetWorkHourSchmHPaging";
     public static AddWorkingHourSchmH = environment.FoundationR3Url + '/v1' + "/WorkingHourSchm/AddWorkingHourSchmH";
     public static AddListWorkingHourSchmD = environment.FoundationR3Url + '/v1' + "/WorkingHourSchm/AddListWorkingHourSchmD";
     public static EditListWorkingHourSchmD = environment.FoundationR3Url + '/v1' + "/WorkingHourSchm/EditListWorkingHourSchmD";
     public static EditWorkingHourSchmH = environment.FoundationR3Url + '/v1' + "/WorkingHourSchm/EditWorkingHourSchmH";
-    public static GetWorkingHourSchmH = '/v1'+ "/WorkHour/GetWorkingHourSchmH";
-    public static GetWorkingHourSchmD = '/v1'+ "/WorkHour/GetWorkingHourSchmD";
+    public static GetWorkingHourSchmH = environment.FoundationR3Url + '/v1' + "/WorkHour/GetWorkingHourSchmH";
+    public static GetWorkingHourSchmD = environment.FoundationR3Url + '/v1' + "/WorkHour/GetWorkingHourSchmD";
     public static GetWorkingHourSchmHById = environment.FoundationR3Url + '/v1' + "/WorkingHourSchm/GetWorkingHourSchmHById";
     public static GetListWorkingHourSchmDByWorkingHourHId = environment.FoundationR3Url + '/v1' + "/WorkingHourSchm/GetListWorkingHourSchmDByWorkingHourHId";
 
@@ -398,8 +396,8 @@ export class URLConstant {
     public static GetListKeyValueRefModuleById = environment.FoundationR3Url + '/v1' + "/RefModule/GetListKeyValueRefModuleById";
 
     //REF EMP LEAVE MANAGEMENT
-    public static GetRefEmpLeaveMngmntPaging = '/v1'+ "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
-    public static DeleteRefEmpLeaveMngmnt = '/v1'+ "/RefEmpLeaveMngmnt/DeleteRefEmpLeaveMngmnt";
+    public static GetRefEmpLeaveMngmntPaging = environment.FoundationR3Url + '/v1' + "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
+    public static DeleteRefEmpLeaveMngmnt = environment.FoundationR3Url + '/v1' + "/RefEmpLeaveMngmnt/DeleteRefEmpLeaveMngmnt";
     public static GetRefEmpLeaveMngmntById = environment.FoundationR3Url + '/v1' + "/RefEmpLeaveMngmnt/GetRefEmpLeaveByRefEmpLeaveId";
     public static EditRefEmpLeaveMngmnt = environment.FoundationR3Url + '/v1' + "/RefEmpLeaveMngmnt/EditRefEmpLeaveMngmnt";
     public static AddRefEmpLeaveMngmnt = environment.FoundationR3Url + '/v1' + "/RefEmpLeaveMngmnt/AddRefEmpLeaveMngmnt";
@@ -411,23 +409,22 @@ export class URLConstant {
     public static UploadFile = environment.FoundationR3Url + '/v1' + "/Upload/UploadFile";
 
     //UPLOAD MONITORING FOUNDATION
-    public static GetUploadMonitoringPaging = '/v1'+ "/UploadMonitoring/GetUploadMonitoringPaging";
+    public static GetUploadMonitoringPaging = environment.FoundationR3Url + '/v1' + "/UploadMonitoring/GetUploadMonitoringPaging";
 
     //UPLOAD TYPE
-    public static GetUploadTypeByUploadTypeId = '/v1'+ "/UploadType/GetUploadTypeByUploadTypeId";
-    public static GetUploadTypePaging = '/v1'+ "/UploadType/GetUploadTypePaging";
+    public static GetUploadTypeByUploadTypeId = environment.FoundationR3Url + '/v1' + "/UploadType/GetUploadTypeByUploadTypeId";
+    public static GetUploadTypePaging = environment.FoundationR3Url + '/v1' + "/UploadType/GetUploadTypePaging";
 
     //UPLOAD SETTING
-    public static GetUploadSettingHIdByUploadTypeId = '/v1'+ "/UploadSetting/GetUploadSettingHIdByUploadTypeId";
-    public static GetListUploadSettingDIdByUploadSettingHId = '/v1'+ "/UploadSetting/GetListUploadSettingDIdByUploadSettingHId";
-    public static GetListUploadSettingDIdByUploadTypeId = '/v1'+ "/UploadSetting/GetListUploadSettingDIdByUploadTypeId";
-    public static AssignRoleToUploadSetting = '/v1'+ "/UploadSetting/AssignRoleToUploadSetting";
-    public static GetListRefRoleByUploadTypeId = '/v1'+ "/UploadSetting/GetListRefRoleByUploadTypeId";
+    public static GetUploadSettingHIdByUploadTypeId = environment.FoundationR3Url + '/v1' + "/UploadSetting/GetUploadSettingHIdByUploadTypeId";
+    public static GetListUploadSettingDIdByUploadSettingHId = environment.FoundationR3Url + '/v1' + "/UploadSetting/GetListUploadSettingDIdByUploadSettingHId";
+    public static GetListUploadSettingDIdByUploadTypeId = environment.FoundationR3Url + '/v1' + "/UploadSetting/GetListUploadSettingDIdByUploadTypeId";
+    public static AssignRoleToUploadSetting = environment.FoundationR3Url + '/v1' + "/UploadSetting/AssignRoleToUploadSetting";
+    public static GetListRefRoleByUploadTypeId = environment.FoundationR3Url + '/v1' + "/UploadSetting/GetListRefRoleByUploadTypeId";
     public static GetListUploadSettingDByUploadSettingHId = '/UploadSetting/GetListUploadSettingDByUploadSettingHId';
 
     // GENERIC
-    public static GetPagingObjectBySQL = '/v1'+ "/Generic/GetPagingObjectBySQL"
-    public static GetUrlPagingObjectBySQL = environment.FoundationR3Url + '/v1' + "/Generic/GetPagingObjectBySQL"
+    public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL" // uc
 
     // ASSET TYPE
     public static AddAssetType = environment.FoundationR3Url + '/v1' + "/AssetType/AddAssetType"
@@ -450,14 +447,14 @@ export class URLConstant {
     public static GetAssetAccessorybyAssetAccesoryCode = environment.FoundationR3Url + '/v1' + "/AssetAccessory/GetAssetAccessoryByCode"
     public static GetAssetAccessorybyAssetAccessoryId = environment.FoundationR3Url + '/v1' + "/AssetAccessory/GetAssetAccessoryById"
     public static GetlistAssetAccessorybyAssetTypeId = environment.FoundationR3Url + '/v1' + "/AssetAccessory/GetListAssetAccessoryByAssetTypeId"
-    public static DeleteAssetAccessory = '/v1'+ "/AssetAccessory/DeleteAssetAccessory"
+    public static DeleteAssetAccessory = '/v1' + "/AssetAccessory/DeleteAssetAccessory"
 
     //asset attr
     public static AddAssetAttr = environment.FoundationR3Url + '/v1' + "/AssetAttr/AddAssetAttr";
     public static EditAssetAttr = environment.FoundationR3Url + '/v1' + "/AssetAttr/EditAssetAttr";
     public static GetListAssetAttrByAssetTypeId = environment.FoundationR3Url + '/v1' + "/AssetAttr/GetListAssetAttrByAssetTypeId";
     public static GetAssetAttrByAssetAttrId = environment.FoundationR3Url + '/v1' + "/AssetAttr/GetAssetAttrByAssetAttrId";
-    public static DeleteAssetAttr = '/v1'+ "/AssetAttr/DeleteAssetAttr";
+    public static DeleteAssetAttr = '/v1' + "/AssetAttr/DeleteAssetAttr";
 
     //asset category
     public static AddNewAssetCategory = environment.FoundationR3Url + '/v1' + "/AssetCategory/AddAssetCategory"
@@ -465,7 +462,7 @@ export class URLConstant {
     public static GetAssetCategoryByAssetCategoryCode = environment.FoundationR3Url + '/v1' + "/AssetCategory/GetAssetCategoryByCode"
     public static GetAssetCategorybyAssetCategoryId = environment.FoundationR3Url + '/v1' + "/AssetCategory/GetAssetCategoryById"
     public static GetlistAssetCategorybyAssetTypeId = environment.FoundationR3Url + '/v1' + "/AssetCategory/GetListAssetCategoryByAssetTypeId"//
-    public static DeleteAssetCategory = '/v1'+ "/AssetCategory/DeleteAssetCategory"
+    public static DeleteAssetCategory = '/v1' + "/AssetCategory/DeleteAssetCategory"
     public static GetActiveAssetCategoryValue = environment.FoundationR3Url + '/v1' + "/AssetCategory/GetListActiveAssetCategoryValue"
 
     // ASSET DOC LIST
@@ -473,7 +470,7 @@ export class URLConstant {
     public static EditAssetDocList = environment.FoundationR3Url + '/v1' + "/AssetDocList/EditAssetDocList"
     public static GetAssetDocListByAssetDocListId = environment.FoundationR3Url + '/v1' + "/AssetDocList/GetAssetDocListById"
     public static GetlistAssetDocListByAssetTypeId = environment.FoundationR3Url + '/v1' + "/AssetDocList/GetListAssetDocListByAssetTypeId"
-    public static DeleteAssetDocList = '/v1'+ "/AssetDocList/DeleteAssetDocList"
+    public static DeleteAssetDocList = '/v1' + "/AssetDocList/DeleteAssetDocList"
 
     // ASSET REF DOC
     public static AddNewRefAssetDocData = environment.FoundationR3Url + '/v1' + "/RefAssetDoc/AddRefAssetDoc"
@@ -490,7 +487,7 @@ export class URLConstant {
     public static GetListAssetSchmDByAssetSchmHId = environment.FoundationR3Url + '/v1' + "/AssetSchmD/GetListAssetSchmDByAssetSchmHId"
     public static EditListAssetSchmD = environment.FoundationR3Url + '/v1' + "/AssetSchmD/EditListAssetSchmD"
     public static AddListAssetSchmD = environment.FoundationR3Url + '/v1' + "/AssetSchmD/AddListAssetSchmD";
-    public static DeleteAssetSchmD = '/v1'+ "/AssetSchmD/DeleteAssetSchmD";
+    public static DeleteAssetSchmD = '/v1' + "/AssetSchmD/DeleteAssetSchmD";
     public static AddRangeAssetSchmD = environment.FoundationR3Url + '/v1' + "/AssetSchmD/AddRangeAssetSchmD";
 
     // ASSET TYPE
@@ -561,7 +558,7 @@ export class URLConstant {
     public static GetListVendorGrpMbrByVendorGrpId = environment.FoundationR3Url + '/v1' + "/VendorGrpMbr/GetListVendorGrpMbrByVendorGrpId";
     public static GetListVendorGrpMbrByVendorId = environment.FoundationR3Url + '/v1' + "/VendorGrpMbr/GetListVendorGrpMbrByVendorId";
     public static AddRangeVendorGrpMbr = environment.FoundationR3Url + '/v1' + "/VendorGrpMbr/AddRangeVendorGrpMbr";
-    public static DeleteVendorGrpMemberById = '/v1'+ "/VendorGrpMbr/DeleteVendorGrpMbrById"
+    public static DeleteVendorGrpMemberById = '/v1' + "/VendorGrpMbr/DeleteVendorGrpMbrById"
 
     // VENDOR BRANCH
     public static AddVendorBranch = environment.FoundationR3Url + '/v1' + "/Vendor/AddVendorBranch"
@@ -583,7 +580,7 @@ export class URLConstant {
     public static EditVendorSchm = environment.FoundationR3Url + '/v1' + "/VendorSchm/EditVendorSchm";
     public static GetVendorSchmByVendorSchmId = environment.FoundationR3Url + '/v1' + "/VendorSchm/GetVendorSchmByVendorSchmId";
     public static AddVendorSchmMember = environment.FoundationR3Url + '/v1' + "/VendorSchmMbr/AddVendorSchmMember";
-    public static DeleteVendorSchmMember = '/v1'+ "/VendorSchmMbr/DeleteVendorSchmMember"
+    public static DeleteVendorSchmMember = '/v1' + "/VendorSchmMbr/DeleteVendorSchmMember"
     public static GetListVendorSchmMemberByVendorSchmId = environment.FoundationR3Url + '/v1' + "/VendorSchmMbr/GetListVendorSchmMemberByVendorSchmId"
 
     // VENDOR ATTR
@@ -850,12 +847,12 @@ export class URLConstant {
     public static AddRefFormData = environment.FoundationR3Url + '/v1' + "/RefForm/AddRefForm";
     public static GetRefFormDataByRefFormId = environment.FoundationR3Url + '/v1' + "/RefForm/GetRefFormByRefFormId"
     public static GetTemplateIcon = environment.FoundationR3Url + '/v1' + "/RefForm/GetTemplateIcon";
-    public static DeleteRefFormData = '/v1'+ "/RefForm/DeleteRefForm";
+    public static DeleteRefFormData = '/v1' + "/RefForm/DeleteRefForm";
 
     // AUTH FORM
     public static AddListAuthForm = environment.FoundationR3Url + '/v1' + "/AuthForm/AddListAuthForm";
     public static GetListAuthFormByRefFormId = environment.FoundationR3Url + '/v1' + "/AuthForm/GetListAuthFormByRefFormId";
-    public static DeleteAuthForm = '/v1'+ "/AuthForm/DeleteAuthForm";
+    public static DeleteAuthForm = '/v1' + "/AuthForm/DeleteAuthForm";
     public static GetListAuthFormByRefRoleId = environment.FoundationR3Url + '/v1' + "/AuthForm/GetListAuthFormByRefRoleId";
 
     // Workflow Engine
@@ -903,7 +900,7 @@ export class URLConstant {
     //Application Source
     public static AddRefAppSrc = environment.FoundationR3Url + '/v1' + "/RefAppSrc/AddRefAppSrc";
     public static AddRefAppSrcOfficeMbr = environment.FoundationR3Url + '/v1' + "/RefAppSrc/AddRefAppSrcOfficeMbr";
-    public static DeleteRefAppSrcOfficeMbr = '/v1'+ "/RefAppSrc/DeleteRefAppSrcOfficeMbr";
+    public static DeleteRefAppSrcOfficeMbr = '/v1' + "/RefAppSrc/DeleteRefAppSrcOfficeMbr";
     public static EditRefAppSrc = environment.FoundationR3Url + '/v1' + "/RefAppSrc/EditRefAppSrc";
     public static GetRefAppSrcByRefAppSrcId = environment.FoundationR3Url + '/v1' + "/RefAppSrc/GetRefAppSrcByRefAppSrcId";
     public static GetListRefAppSrcOfficeMbrByRefAppSrcId = environment.FoundationR3Url + '/v1' + "/RefAppSrc/GetListRefAppSrcOfficeMbrByRefAppSrcId"
@@ -913,23 +910,23 @@ export class URLConstant {
     public static GetRecommendations = environment.ApprovalURL + "/api/RFAWeb/GetRecommendations/";
 
     // New Approval R3
-    public static CreateNewRFA = '/v1'+ "/Approval/CreateNewRFA";
-    public static CreateJumpRFA = '/v1'+ "/Approval/CreateJumpRFA";
-    public static GetRefSingleCategoryByCategoryCode = '/v1'+ "/Approval/GetRefSingleCategoryByCategoryCode";
-    public static GetSchemesBySchemeCode = '/v1'+ "/Approval/GetSchemesBySchemeCode";
-    public static GetRefAdtQuestion = '/v1'+ "/Approval/GetRefAdtQuestion";
-    public static GetPossibleMemberAndAttributeExType = '/v1'+ "/Approval/GetPossibleMemberAndAttributeExType";
-    public static GetApprovalReturnHistory = '/v1'+ "/Approval/GetApprovalReturnHistory";
-    public static GetSchemesByCategoryId = '/v1'+ "/Approval/GetSchemesByCategoryId";
-    public static SubmitApproval = '/v1'+ "/Approval/SubmitApproval";
-    public static GetLevelVoting = '/v1'+ "/Approval/GetLevelVoting";
-    public static GetPossibleResult = '/v1'+ "/Approval/GetPossibleResult";
-    public static GetNextNodeMember = '/v1'+ "/Approval/GetNextNodeMember";
-    public static GetRefReasonActive = '/v1'+ "/Approval/GetRefReasonActive";
-    public static GetCanChangeMinFinalLevel = '/v1'+ "/Approval/GetCanChangeMinFinalLevel";
-    public static GetTaskHistory = '/v1'+ "/Approval/GetTaskHistory";
-    public static ReturnLevel = '/v1'+ "/Approval/ReturnLevel";
-    public static ContinueToLevel = '/v1'+ "/Approval/ContinueToLevel";
+    public static CreateNewRFA = "/Approval/CreateNewRFA";
+    public static CreateJumpRFA = "/Approval/CreateJumpRFA";
+    public static GetRefSingleCategoryByCategoryCode = "/Approval/GetRefSingleCategoryByCategoryCode";
+    public static GetSchemesBySchemeCode = "/Approval/GetSchemesBySchemeCode";
+    public static GetRefAdtQuestion = "/Approval/GetRefAdtQuestion";
+    public static GetPossibleMemberAndAttributeExType = "/Approval/GetPossibleMemberAndAttributeExType";
+    public static GetApprovalReturnHistory = "/Approval/GetApprovalReturnHistory";
+    public static GetSchemesByCategoryId = "/Approval/GetSchemesByCategoryId";
+    public static SubmitApproval = "/Approval/SubmitApproval";
+    public static GetLevelVoting = "/Approval/GetLevelVoting";
+    public static GetPossibleResult = "/Approval/GetPossibleResult";
+    public static GetNextNodeMember = "/Approval/GetNextNodeMember";
+    public static GetRefReasonActive = "/Approval/GetRefReasonActive";
+    public static GetCanChangeMinFinalLevel = "/Approval/GetCanChangeMinFinalLevel";
+    public static GetTaskHistory = "/Approval/GetTaskHistory";
+    public static ReturnLevel = "/Approval/ReturnLevel";
+    public static ContinueToLevel = "/Approval/ContinueToLevel";
 
     // Payment Allocation
     public static GetListKeyValueRefPaymentAllocActive = environment.FoundationR3Url + '/v1' + "/RefPaymentAlloc/GetListKeyValueRefPaymentAllocActive";
@@ -983,7 +980,7 @@ export class URLConstant {
     public static GetOtpProperties = environment.FoundationR3Url + '/v1' + "/Authenticate/GetOtpProperties";
 
     // OFFICE BANK ACCOUNT
-    public static DeleteOfficeBankAcc = '/v1'+ "/OfficeBankAcc/DeleteOfficeBankAcc";
+    public static DeleteOfficeBankAcc = '/v1' + "/OfficeBankAcc/DeleteOfficeBankAcc";
     public static GetListActiveBankName = environment.FoundationR3Url + '/v1' + "/RefBank/GetListKeyValueActiveById";
     public static GetListBankAccType = environment.FoundationR3Url + '/v1' + "/OfficeBankAcc/GetListBankAccType";
     public static GetListKeyValueActiveOfficeBankAcc = environment.FoundationR3Url + '/v1' + "/OfficeBankAcc/GetListKeyValueActiveOfficeBankAcc";
@@ -997,10 +994,10 @@ export class URLConstant {
     public static GetSysConfigPncplResultByCode = environment.FoundationR3Url + '/v1' + "/SysConfigResult/GetSysConfigPncplResultByCode";
 
     // GENERIC
-    public static GetJournalResultPagingObjectBySQL = '/v1'+ "/Generic/GetJournalResultPagingObjectBySQL";
+    public static GetJournalResultPagingObjectBySQL = environment.FoundationR3Url + '/v1' + "/Generic/GetJournalResultPagingObjectBySQL";
 
     // JOURNAL
-    public static RerunJournal = '/v1'+ "/Journal/RerunJournal";
+    public static RerunJournal = "/Journal/RerunJournal";
 
     // Industry Type Category
     public static AddEditIndustryTypeCategory = environment.FoundationR3Url + '/v1' + "/IndustryTypeCategory/AddEditIndustryTypeCategory";
@@ -1008,22 +1005,6 @@ export class URLConstant {
 
     // Sector Economy Slik
     public static GetRefSectorEconomySlikCustomObjectByRefSectorEconomySlikId = environment.FoundationR3Url + '/v1' + "/RefSectorEconomySlik/GetRefSectorEconomySlikCustomObjectByRefSectorEconomySlikId"
-
-    //#region CUST THIRD PARTY CHECKING
-    // public static AddCustFraudTempReg = environment.FoundationR3Url + '/v1' + "/CustThirdPartyChecking/AddCustFraudTempReg";
-    // public static GetCustFraudDukcapilReqLogByCustTempNo = environment.FoundationR3Url + '/v1' + "/CustThirdPartyChecking/GetCustFraudDukcapilReqLogByCustTempNo";
-    // public static GetCustFraudPefindoReqLogByCustTempNo = environment.FoundationR3Url + '/v1' + "/CustThirdPartyChecking/GetCustFraudPefindoReqLogByCustTempNo";
-    // public static GetCustFraudSLIKRequestByCustTempNo = environment.FoundationR3Url + '/v1' + "/CustThirdPartyChecking/GetCustFraudSLIKRequestByCustTempNo";
-    // public static GetCustFraudAsliriReqLogByCustTempNoTrxTypeCode = environment.FoundationR3Url + '/v1' + "/CustThirdPartyChecking/GetCustFraudAsliriReqLogByCustTempNoTrxTypeCode";
-    // public static GetCustFraudAsliriReqLogByCustTempNo = environment.FoundationR3Url + '/v1' + "/CustThirdPartyChecking/GetCustFraudAsliriReqLogByCustTempNo";
-    // public static GetCustFraudTrstsocialReqLogByCustTempNo = environment.FoundationR3Url + '/v1' + "/CustThirdPartyChecking/GetCustFraudTrstsocialReqLogByCustTempNo";
-    // public static AddCustFraudDukcapilReqLog = environment.FoundationR3Url + '/v1' + "/CustThirdPartyChecking/AddCustFraudDukcapilReqLog";
-    // public static AddCustFraudPefindoReqLog = environment.FoundationR3Url + '/v1' + "/CustThirdPartyChecking/AddCustFraudPefindoReqLog";
-    // public static AddCustFraudSLIKRequest = environment.FoundationR3Url + '/v1' + "/CustThirdPartyChecking/AddCustFraudSLIKRequest";
-    // public static AddCustFraudAsliriReqLog = environment.FoundationR3Url + '/v1' + "/CustThirdPartyChecking/AddCustFraudAsliriReqLog";
-    // public static AddCustFraudTrstsocialReqLog = environment.FoundationR3Url + '/v1' + "/CustThirdPartyChecking/AddCustFraudTrstsocialReqLog";
-    // public static CheckCustFraudTempRegByCustNo = environment.FoundationR3Url + '/v1' + "/CustThirdPartyChecking/CheckCustFraudTempRegByCustNo"
-    //#endregion
 
     // CUST FIN DATA ATTR CONTENT
     public static GetListCustFinDataAttrContentByCustIdAndListAttrGroup = environment.FoundationR3Url + '/v1' + "/CustFinDataAttrContent/GetListCustFinDataAttrContentByCustIdAndListAttrGroup";

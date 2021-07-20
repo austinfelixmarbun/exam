@@ -7,7 +7,6 @@ import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { URLConstant } from "app/shared/constant/URLConstant";
 import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
 import { environment } from "environments/environment";
-import { first } from "rxjs/operators";
 import { RFAInfoObj } from 'app/shared/model/Approval/RFAInfoObj.Model'
 import { VendorObj } from "app/shared/model/VendorObj.Model";
 import { VendorGradingHistObj } from "app/shared/model/VendorGradingHistObj.model";
@@ -163,17 +162,8 @@ export class VendorGradingRequestDetailComponent implements OnInit {
   {
     await this.http.post(URLConstant.GetRuleVendorGrading, { VendorRating:  vendorRating}).subscribe(
       (response) => {
-        // this.gradeCode = response["Key"];
-        // this.VendorForm.patchValue({
-        //   VendorGrade: response["Value"],
-        //   VendorGradeCode : response["Key"]
-        // });
 
         this.gradeCode = response["VendorGrade"];
-        // this.VendorForm.patchValue({
-        //   VendorGrade: response["Value"],
-        //   VendorGradeCode : response["Key"]
-        // });
       }
     );
   }
@@ -217,12 +207,8 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     this.vendorGradingHistObj.ReqDt = context[CommonConstant.BUSINESS_DT]
     this.vendorGradingHistObj.Status = CommonConstant.VENDOR_GRADING_STATUS_REQ;
     this.vendorGradingHistObj.VendorId = ReqValue.VendorId;
-    // this.vendorGradingHistObj.VendorParentId = this.ParentId;
-    // this.vendorGradingHistObj.PrevRating = this.oldVendorRating;
     this.vendorGradingHistObj.NewRating = ReqValue.VendorRating;
     this.vendorGradingHistObj.Notes = ReqValue.Notes;
-    // this.vendorGradingHistObj.VendorCode = ReqValue.VendorCode;
-    // this.vendorGradingHistObj.PrevGrade = this.oldGradeCode;
     this.vendorGradingHistObj.NewGrade = this.gradeCode;
 
     const reason = this.listReason.filter(reason => reason.Value == ReqValue.Reason);
@@ -257,17 +243,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
       "Attributes" : Attributes,
     }
      
-    this.InputObj.RequestedBy = this.currentUserContext[CommonConstant.USER_NAME];
-    this.InputObj.OfficeCode = this.currentUserContext[CommonConstant.OFFICE_CODE];
     this.InputObj.ApvTypecodes = [TypeCode];
-    this.InputObj.EnvUrl = environment.FoundationR3Url;
-    this.InputObj.PathUrlGetSchemeBySchemeCode = URLConstant.GetSchemesBySchemeCode;
-    this.InputObj.PathUrlGetCategoryByCategoryCode = URLConstant.GetRefSingleCategoryByCategoryCode;
-    this.InputObj.PathUrlGetAdtQuestion = URLConstant.GetRefAdtQuestion;
-    this.InputObj.PathUrlGetPossibleMemberAndAttributeExType = URLConstant.GetPossibleMemberAndAttributeExType;
-    this.InputObj.PathUrlGetApprovalReturnHistory = URLConstant.GetApprovalReturnHistory;
-    this.InputObj.PathUrlCreateNewRFA = URLConstant.CreateNewRFA;
-    this.InputObj.PathUrlCreateJumpRFA = URLConstant.CreateJumpRFA;
     this.InputObj.CategoryCode = CommonConstant.VENDOR_GRADING_APV;
     this.InputObj.SchemeCode = CommonConstant.VENDOR_GRD_SUPPL_BRC_SCHM;
     this.InputObj.Reason = this.listReason;
