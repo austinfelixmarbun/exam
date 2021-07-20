@@ -34,7 +34,7 @@ export class URLConstant {
     public static GetAllRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/GetAllRefOffice";
     public static AddRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/AddRefOffice";
     public static AddRefOfficeAreaMember = environment.FoundationR3Url + "/v1" + "/RefOffice/AddRefOfficeAreaMember";
-    public static UpdateRefOfficeAreaId = "/v1" + "/RefOffice/UpdateRefOfficeAreaId";
+    public static UpdateRefOfficeAreaId = "/RefOffice/UpdateRefOfficeAreaId";
     public static EditRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/EditRefOffice";
     public static GetCenterGrpByCenterGrpTypeCode = "/v1" + "/RefOffice/GetCenterGrpByCenterGrpCode";
     public static GetListOfficeCenterGrp = "/v1" + "/RefOffice/GetListOfficeCenterGrp";
@@ -281,7 +281,6 @@ export class URLConstant {
     public static LoginByRole = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByRole";
     public static LoginByToken = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByToken";
     public static UpdateToken = environment.FoundationR3Url + "/v1" + "/Authenticate/UpdateRole";
-    public static LoginURLFrontEnd = NavigationConstant.PAGES_LOGIN;
 
     //FORM FEATURE
     public static GetListRefFeature = environment.FoundationR3Url + "/v1" + "/RefFeature/GetListRefFeature";

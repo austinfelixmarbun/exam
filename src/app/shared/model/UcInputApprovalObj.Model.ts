@@ -17,7 +17,7 @@ export class UcInputApprovalObj {
     TrxNo: string;
     constructor() { 
         this.TaskId = 0;
-        this.EnvUrl = environment.FoundationR3Url = "/v1";
+        this.EnvUrl = environment.FoundationR3Url + "/v1";
         this.PathUrlGetLevelVoting = URLConstant.GetLevelVoting;
         this.PathUrlGetPossibleResult = URLConstant.GetPossibleResult;
         this.PathUrlSubmitApproval = URLConstant.SubmitApproval;

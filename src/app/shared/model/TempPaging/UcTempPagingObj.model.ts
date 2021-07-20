@@ -17,7 +17,7 @@ export class UcTempPagingObj {
 
     constructor() {
         this.urlJson = "";
-        this.enviromentUrl = environment.FoundationR3Url = "/v1";
+        this.enviromentUrl = environment.FoundationR3Url + "/v1";
         this.apiQryPaging = URLConstant.GetPagingObjectBySQL;
         this.pagingJson = "";
         this.isReady = false;

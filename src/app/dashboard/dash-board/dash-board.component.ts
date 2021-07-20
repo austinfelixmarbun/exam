@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ContextMenuComponent } from '@progress/kendo-angular-menu';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 
 @Component({
@@ -13,7 +14,7 @@ export class DashBoardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.Item = {Url : environment.FoundationR3Url + "/v1" + "/ThingsToDo/GetThingsToDoByRole", Module : "FOU"};
+    this.Item = {Url : AdInsConstant.GetThingsToDoByRole, Module : "FOU"};
   }
   
   showMessage(message: any) {
