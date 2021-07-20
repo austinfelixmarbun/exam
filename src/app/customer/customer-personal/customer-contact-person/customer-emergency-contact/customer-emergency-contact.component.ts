@@ -133,13 +133,13 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.criteriaExistingList = new Array();
     this.criteriaCurrentCust = new CriteriaObj();
     this.criteriaCurrentCust.restriction = AdInsConstant.RestrictionNeq;
-    this.criteriaCurrentCust.propName = 'CUST_ID';
+    this.criteriaCurrentCust.propName = 'C.CUST_ID';
     this.criteriaCurrentCust.value = this.custId.toString();
     this.criteriaExistingList.push(this.criteriaCurrentCust);
 
     this.criteriaExistingObj = new CriteriaObj();
     this.criteriaExistingObj.restriction = AdInsConstant.RestrictionEq;
-    this.criteriaExistingObj.propName = 'MR_CUST_TYPE_CODE';
+    this.criteriaExistingObj.propName = 'C.MR_CUST_TYPE_CODE';
     this.criteriaExistingObj.value = CommonConstant.CustomerPersonal;
     this.criteriaExistingList.push(this.criteriaExistingObj);
     if (this.existingCustomerLookUpObj.addCritInput) {
@@ -520,7 +520,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     };
     this.ddlIdType = new UcDropdownListObj;
     this.ddlIdType.enviromentUrl = environment.FoundationR3Url;
-    this.ddlIdType.apiPath = "/RefMaster/GetListKeyValueActiveByCode";
+    this.ddlIdType.apiPath = URLConstant.GetListActiveRefMasterDDL;
     this.ddlIdType.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
     this.ddlIdType.requestObj = refMasterObjMrIdTypeCode;
     this.ddlIdType.isObject = true;
@@ -533,7 +533,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     };
     this.ddlMrCustRelationshipCode = new UcDropdownListObj;
     this.ddlMrCustRelationshipCode.enviromentUrl = environment.FoundationR3Url;
-    this.ddlMrCustRelationshipCode.apiPath = "/RefMaster/GetListKeyValueActiveByCode";
+    this.ddlMrCustRelationshipCode.apiPath = URLConstant.GetListActiveRefMasterDDL;
     this.ddlMrCustRelationshipCode.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
     this.ddlMrCustRelationshipCode.requestObj = refMasterObjMrCustRelationshipCode;
     this.ddlMrCustRelationshipCode.isObject = true;
@@ -545,7 +545,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     };
     this.ddlMrGenderCode = new UcDropdownListObj;
     this.ddlMrGenderCode.enviromentUrl = environment.FoundationR3Url;
-    this.ddlMrGenderCode.apiPath = "/RefMaster/GetListKeyValueActiveByCode";
+    this.ddlMrGenderCode.apiPath = URLConstant.GetListActiveRefMasterDDL;
     this.ddlMrGenderCode.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
     this.ddlMrGenderCode.requestObj = refMasterObjMrGenderCode;
     this.ddlMrGenderCode.isObject = true;
