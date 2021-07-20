@@ -6,11 +6,11 @@ import { environment } from 'environments/environment';
 import { Router } from '@angular/router';
 import { CurrentUserContextService } from 'app/shared/CurrentUserContext/current-user-context.service';
 import { AdInsHelper } from '../AdInsHelper';
-import { URLConstant } from '../constant/URLConstant';
 import { CommonConstant } from '../constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { formatDate } from '@angular/common';
 import { NavigationConstant } from '../NavigationConstant';
+import { AdInsConstant } from '../AdInstConstant';
 
 @Injectable()
 export class RolePickService {
@@ -24,7 +24,7 @@ export class RolePickService {
                 RowVersion: ""
             };
 
-            this.http.post(URLConstant.LoginByToken, roleObject2).subscribe(
+            this.http.post(AdInsConstant.LoginByToken, roleObject2).subscribe(
                 (response) => {
                     const object = {
                         response: response[CommonConstant.ReturnObj]
@@ -60,7 +60,7 @@ export class RolePickService {
                     ModuleCode:environment.Module
 
                 };
-                this.http.post(URLConstant.LoginByRole, roleObject, { withCredentials: true}).subscribe(
+                this.http.post(AdInsConstant.LoginByRole, roleObject, { withCredentials: true}).subscribe(
                     (response) => {
                         //Cookie sudah diambil dari BE (Di set manual dulu)
 
