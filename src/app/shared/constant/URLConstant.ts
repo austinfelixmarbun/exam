@@ -1,8 +1,7 @@
 import { environment } from "environments/environment";
-import { NavigationConstant } from "../NavigationConstant";
 
 // URL" API di concat dengan environment url + version + api path
-// kecuali: API" yang di pakai di UC". contoh: GetPagingObjectBySQL, DeleteFromPaging, Approval CreateNewRFA
+// KECUALI: API" yang di pakai di UC". contoh: GetPagingObjectBySQL, DeleteFromPaging, Approval CreateNewRFA
 
 export class URLConstant {
     // FRAMEWORK
