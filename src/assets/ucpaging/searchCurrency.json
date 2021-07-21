@@ -5,7 +5,7 @@
     {
       "type": "textbox",
       "name": "curr_Code",
-      "id": "currCode",
+      "id": "CurrCode",
       "value": "",
       "label": "Currency Code",
       "placeholder": "Placeholder"
@@ -13,7 +13,7 @@
     {
       "type": "textbox",
       "name": "curr_Name",
-      "id": "currName",
+      "id": "CurrName",
       "value": "",
       "label": "Currency",
       "placeholder": "Placeholder"
@@ -21,7 +21,7 @@
     {
       "type": "dropdown",
       "name": "is_Active",
-      "id": "isActive",
+      "id": "IsActive",
       "value": "Active Status",
       "placeholder": "Placeholder",
       "isFromURL": false,
@@ -46,19 +46,24 @@
       "type": "sort",
       "position": "left",
       "label": "Currency Code",
-      "name": "currCode"
+      "name": "A.CURR_CODE"
     },
     {
       "type": "sort",
       "position": "left",
       "label": "Currency",
-      "name": "currName"
+      "name": "A.CURR_NAME"
     },
     {
       "type": "sort",
       "position": "center",
       "label": "Active Status",
-      "name": "isActive"
+      "name": "A.IS_ACTIVE"
+    },
+    {
+      "type": "label",
+      "position": "center",
+      "label": "Exchange Rate"
     },
     {
       "type": "label",
@@ -73,17 +78,48 @@
     {
       "type": "text",
       "position": "left",
-      "property": "currCode"
+      "property": "CurrCode"
     },
     {
       "type": "text",
       "position": "left",
-      "property": "currName"
+      "property": "CurrName"
     },
     {
       "type": "boolean",
       "position": "center",
-      "property": "isActive"
+      "property": "IsActive"
+    },
+    {
+      "type" : "action", 
+      "position" : "center",
+      "action" : [ 
+          {
+              "type" : "switch",
+              "case" : [
+                  {
+                      "conditions" : [
+                          {
+                              "property" : "IsActive",
+                              "value" : "1",
+                              "restriction" : "EQ"
+                          }
+                      ],
+                      "result" : {
+                          "type": "url",
+                          "path" : "CS_EXCHANGE_RATE_PAGING",
+                          "param" : [
+                              {
+                                  "type" : "RefCurrId",
+                                  "property" : "RefCurrId"
+                              }
+                          ]
+                      },
+                      "isHide" : false
+                  }
+              ]
+          }
+      ]
     },
     {
       "type": "action",
@@ -94,8 +130,8 @@
           "path": "CS_CURRENCY_ADD",
           "param": [
             {
-              "type": "refCurrId",
-              "property": "refCurrId"
+              "type": "RefCurrId",
+              "property": "RefCurrId"
             },
             {
               "type": "param",
