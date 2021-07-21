@@ -59,6 +59,8 @@ export class NavigationConstant {
     public static CS_COA_SCHM_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_COA_SCHM_DETAIL; //'/CommonSetting/CoaScheme/Detail'
     public static CS_CURRENCY_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_CURRENCY_PAGING; //'/CommonSetting/Currency/Paging'
     public static CS_CURRENCY_ADD = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_CURRENCY_ADD; //'/CommonSetting/Currency/Add'
+    public static CS_EXCHANGE_RATE_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_EXCHANGE_RATE_PAGING; //'CommonSetting/ExchangeRate/Paging'
+    public static CS_EXCHANGE_RATE_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_EXCHANGE_RATE_DETAIL; //'CommonSetting/ExchangeRate/Detai'
     public static CS_ECONOMIC_SECTOR_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_ECONOMIC_SECTOR_PAGING; //'/CommonSetting/EconomicSector/Paging'
     public static CS_ECONOMIC_SECTOR_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_ECONOMIC_SECTOR_DETAIL; //'/CommonSetting/EconomicSector/Detail'
     public static CS_GEN_SETTING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING; //'/CommonSetting/GeneralSetting'

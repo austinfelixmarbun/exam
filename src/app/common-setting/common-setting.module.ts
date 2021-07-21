@@ -78,6 +78,8 @@ import { GeneralSettingAdminComponent } from './general-setting-admin/general-se
 import { GeneralSettingAdminDetailComponent } from './general-setting-admin/general-setting-admin-detail/general-setting-admin-detail.component';
 import { IndustryTypeCategoryPagingComponent } from './industry-type-category/industry-type-category-paging/industry-type-category-paging.component';
 import { IndustryTypeCategoryDetailComponent } from './industry-type-category/industry-type-category-detail/industry-type-category-detail.component';
+import { ExchangeRateDetailComponent } from './exchange-rate/exchange-rate-detail/exchange-rate-detail.component';
+import { ExchangeRatePagingComponent } from './exchange-rate/exchange-rate-paging/exchange-rate-paging.component';
 
 
 @NgModule({
@@ -162,7 +164,9 @@ import { IndustryTypeCategoryDetailComponent } from './industry-type-category/in
     GeneralSettingAdminComponent,
     GeneralSettingAdminDetailComponent,
     IndustryTypeCategoryPagingComponent,
-    IndustryTypeCategoryDetailComponent
+    IndustryTypeCategoryDetailComponent,
+    ExchangeRateDetailComponent,
+    ExchangeRatePagingComponent
   ],
   providers: [
     NGXToastrService
