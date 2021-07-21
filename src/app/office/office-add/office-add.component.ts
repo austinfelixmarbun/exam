@@ -17,7 +17,6 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { RefOfficeXObj } from 'app/shared/model/RefOfficeX.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 
@@ -111,7 +110,6 @@ export class OfficeAddComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.OFFICE_PAGING;
   responseRefOfficeX: any;
-  officeXObj: RefOfficeXObj;
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
