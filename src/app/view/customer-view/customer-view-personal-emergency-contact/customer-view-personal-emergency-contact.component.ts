@@ -16,7 +16,6 @@ export class CustomerViewPersonalEmergencyContactComponent implements OnInit {
 
   ngOnInit() {   
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewCustEmergency.json";
-    this.viewGenericObj.viewEnvironment = environment.FoundationR3Url;
   }
 
 }

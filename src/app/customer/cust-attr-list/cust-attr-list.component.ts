@@ -186,8 +186,6 @@ export class CustAttrListComponent implements OnInit {
     if (refAttr["AttrInputType"] == 'RM') {
       this.tempLookup[refAttr["AttrCode"]] = new InputLookupObj();
       this.tempLookup[refAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-      this.tempLookup[refAttr["AttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-      this.tempLookup[refAttr["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
       this.tempLookup[refAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].title = refAttr.AttrName;
@@ -273,8 +271,6 @@ export class CustAttrListComponent implements OnInit {
     if (refAttr["AttrInputType"] == 'RM') {
       this.tempLookup[refAttr["AttrCode"]] = new InputLookupObj();
       this.tempLookup[refAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-      this.tempLookup[refAttr["AttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-      this.tempLookup[refAttr["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
       this.tempLookup[refAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].title = refAttr.AttrName;

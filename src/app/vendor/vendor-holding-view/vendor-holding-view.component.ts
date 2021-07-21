@@ -2,13 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
 import { VendorGroupObj } from 'app/shared/model/VendorGroupObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
-import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -41,21 +39,12 @@ export class VendorHoldingViewComponent implements OnInit {
   HoListObj: VendorObj;
   Vendor: any;
   vendorContactPerson: Object;
-  pageNow: any;
-  pageSize: any;
-  totalData: any;
-  apiUrl: any;
-  resultData: any;
-  orderByValue: any;
-  orderByKey: any;
   tempData: any[];
   tempListId: any[];
   listSelectedId: any[];
   MrVendorTypeObj: any;
 
-
-
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private route: ActivatedRoute, private http: HttpClient) {
 
     this.route.queryParams.subscribe(params => {
       if (params["VendorId"] != null) {
@@ -87,10 +76,6 @@ export class VendorHoldingViewComponent implements OnInit {
     this.listSelectedId = new Array();
     this.tempListId = new Array();
     this.tempData = new Array();
-    this.pageNow = 1;
-    this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
-
     this.GroupListObj = new VendorGroupObj();
     this.GroupListObj.VendorId = this.VendorId;
 
@@ -110,33 +95,6 @@ export class VendorHoldingViewComponent implements OnInit {
 
       }
     )
-  }
-
-  searchPagination(event: number) {
-    this.pageNow = event;
-    let order = null;
-    if (this.orderByKey != null) {
-      order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      }
-    }
-    this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-  }
-
-  getResult(event) {
-    this.resultData = event.response;
-    this.totalData = event.response.Count;
-    this.UCGridFooter.pageNow = event.pageNow;
-    this.UCGridFooter.totalData = this.totalData;
-    this.UCGridFooter.resultData = this.resultData;
-  }
-
-  onSelect(event) {
-    this.pageNow = event.pageNow;
-    this.pageSize = event.pageSize;
-    this.totalData = event.Count;
-    this.searchPagination(this.pageNow);
   }
 
   GetListVendorContactPersonByVendorId() {

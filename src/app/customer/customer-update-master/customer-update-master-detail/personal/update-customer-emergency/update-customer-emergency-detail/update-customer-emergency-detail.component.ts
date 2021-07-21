@@ -308,7 +308,6 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       MappingCode: null
     };
     this.ddlMrCustRelationshipCode = new UcDropdownListObj;
-    this.ddlMrCustRelationshipCode.enviromentUrl = environment.FoundationR3Url;
     this.ddlMrCustRelationshipCode.apiPath = "/RefMaster/GetListKeyValueActiveByCode";
     this.ddlMrCustRelationshipCode.ddlType = "one";
     this.ddlMrCustRelationshipCode.requestObj = refMasterObjMrIdTypeCode;
@@ -320,7 +319,6 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       MappingCode: null
     };
     this.ddlIdType = new UcDropdownListObj;
-    this.ddlIdType.enviromentUrl = environment.FoundationR3Url;
     this.ddlIdType.apiPath = "/RefMaster/GetListKeyValueActiveByCode";
     this.ddlIdType.ddlType = "one";
     this.ddlIdType.requestObj = refMasterObjIdType;
@@ -333,7 +331,6 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       MappingCode: null
     };
     this.ddlGender = new UcDropdownListObj();
-    this.ddlGender.enviromentUrl = environment.FoundationR3Url;
     this.ddlGender.apiPath = "/RefMaster/GetListKeyValueActiveByCode";
     this.ddlGender.ddlType = "one";
     this.ddlGender.requestObj = refMasterObjGender;

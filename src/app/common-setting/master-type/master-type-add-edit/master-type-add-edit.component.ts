@@ -18,8 +18,6 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 })
 export class MasterTypeAddEditComponent implements OnInit {
 
-  foundationUrl: any = environment.FoundationR3Url;
-  apiUrl: any;
   parents: any;
   refRoleObj: RefRoleObj;
   type: any = 'Add';
@@ -48,10 +46,9 @@ export class MasterTypeAddEditComponent implements OnInit {
 
   ngOnInit() {
     if (this.type == 'edit') {
-      this.apiUrl = this.foundationUrl + URLConstant.GetRefRoleByRefRoleId;
       this.refRoleObj = new RefRoleObj()
       this.refRoleObj.RefRoleId = +this.refRoleId
-      this.httpClient.post(this.apiUrl, {Id : this.refRoleObj.RefRoleId}).subscribe(
+      this.httpClient.post(URLConstant.GetRefRoleByRefRoleId, {Id : this.refRoleObj.RefRoleId}).subscribe(
         (response) => {
           this.refRoleObj = response['returnObject'];
           this.roleCodeModel = response['returnObject']['roleCode']
@@ -69,34 +66,27 @@ export class MasterTypeAddEditComponent implements OnInit {
 
   Save(RoleAddEditForm: NgForm): void {
     this.spinner.show();
-    var getRoleUrl = this.foundationUrl + URLConstant.GetRefRole;
-    var getRoleUrlGateway = 'http://01-05-0064-0618/FOUNDATION_R3/RefRole/GetRefRole'
     var roleObj: RefRoleObj;
     roleObj = new RefRoleObj()
     roleObj.RoleCode = RoleAddEditForm.value.roleCodeModel;
 
-
-
     //MODE-ADD
     if (this.type != 'edit') {
-
       //CHECK-DUPLICATE-CODE
-      this.httpClient.post(getRoleUrl, roleObj).subscribe(
+      this.httpClient.post(URLConstant.GetRefRole, roleObj).subscribe(
         (response) => {
           roleObj = response['returnObject'];
           if (roleObj != null) {
             this.service.typeErrorCustom(ExceptionConstant.CODE_HAS_BEEN_USED);
           }
           else {
-            this.apiUrl = this.foundationUrl + URLConstant.AddRefRole;
-
             this.refRoleObj = new RefRoleObj();
             this.refRoleObj.RoleCode = RoleAddEditForm.value.roleCodeModel;
             this.refRoleObj.RoleName = RoleAddEditForm.value.roleNameModel;
             this.refRoleObj.IsActive = RoleAddEditForm.value.isActive;
 
             //SAVE
-            this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(
+            this.httpClient.post(URLConstant.AddRefRole, this.refRoleObj).subscribe(
               (response) => {
                 this.service.typeSave(ExceptionConstant.SAVE_SUCCESSED);
                 this.location.back();
@@ -119,15 +109,13 @@ export class MasterTypeAddEditComponent implements OnInit {
     }
     //MODE-EDIT
     else {
-      this.apiUrl = this.foundationUrl + URLConstant.EditRefRole;
-
       this.refRoleObj.RefRoleId = this.refRoleId;
       this.refRoleObj.RoleCode = RoleAddEditForm.value.roleCodeModel;
       this.refRoleObj.RoleName = RoleAddEditForm.value.roleNameModel;
       this.refRoleObj.IsActive = RoleAddEditForm.value.isActive;
 
       //SAVE
-      this.httpClient.post(this.apiUrl, this.refRoleObj).subscribe(
+      this.httpClient.post(URLConstant.EditRefRole, this.refRoleObj).subscribe(
         (response) => {
           this.service.typeSave(ExceptionConstant.EDIT_SUCCESSED);
           this.location.back();

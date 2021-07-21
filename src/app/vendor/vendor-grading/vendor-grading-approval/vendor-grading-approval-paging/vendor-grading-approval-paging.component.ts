@@ -7,11 +7,9 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
-import { environment } from 'environments/environment';
+import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { CookieService } from 'ngx-cookie';
 import { String } from 'typescript-string-operations';
 
@@ -22,7 +20,7 @@ import { String } from 'typescript-string-operations';
 })
 export class VendorGradingApprovalPagingComponent implements OnInit {
 
-  inputPagingObj: any;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
   arrCrit: any;
   userContext: any;
 
@@ -30,10 +28,7 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
 
   ngOnInit() {
     this.userContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));;
-    this.inputPagingObj = new UcpagingModule();
     this.inputPagingObj._url = "./assets/ucpaging/dealer-grading/searchDealerGradingApproval.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/dealer-grading/searchDealerGradingApproval.json";
 
     this.arrCrit = new Array();

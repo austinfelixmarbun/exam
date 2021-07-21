@@ -241,8 +241,6 @@ export class CustomerCompanyMainInfoComponent implements OnInit {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.isReady = false;
     this.inputLookupObj.urlJson = "./assets/lookup/lookupSupplierCoy.json";
-    this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupplierCoy.json";
     this.inputLookupObj.genericJson = "./assets/lookup/lookupSupplierCoy.json";
     this.inputLookupObj.isReady = true;

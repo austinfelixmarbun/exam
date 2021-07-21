@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsService } from 'app/shared/services/adIns.service';
 import { FormBuilder } from '@angular/forms';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-customer-view-personal-address',
@@ -27,14 +25,13 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
   CustForm = this.fb.group({
     DdlAddress: ['']
   });
-  
-  viewCustFinData: any;
+
+  viewCustFinData: UcViewGenericObj = new UcViewGenericObj();
 
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private adInsService: AdInsService,
     private fb: FormBuilder
   ) {
   }
@@ -45,8 +42,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-    this.viewCustFinData.viewInput =   "./assets/ucviewgeneric/viewCustFinData.json";
-    this.viewCustFinData.viewEnvironment = environment.FoundationR3Url;
+    this.viewCustFinData.viewInput = "./assets/ucviewgeneric/viewCustFinData.json";
     this.http.post(URLConstant.GetListCustAddrByCustIdForCustomerPersonalView, { Id: this.CustId }).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
@@ -54,7 +50,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
         }
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.ERROR], {});
       }
     );
     this.http.post(URLConstant.GetListCustAddrHistByCustIdForCustomerPersonalView, { Id: this.CustId }).subscribe(
@@ -64,7 +60,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
         }
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.ERROR], {});
       }
     );
 

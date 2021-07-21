@@ -47,7 +47,6 @@ export class BODComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchBod.json";
-    this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = URLConstant.GetCoyBodPaging;
 
     this.pageNow = 1;

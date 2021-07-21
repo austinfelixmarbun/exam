@@ -38,10 +38,7 @@ export class RefFormRoleMappingComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewRefForm.json";
-
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/refFormRoleTempPaging.json";
-    this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/refFormRoleTempPaging.json";
 
     this.GetListRefFormRoleByRefFormId();

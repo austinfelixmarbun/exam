@@ -76,7 +76,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
           });
 
           
-          this.http.post(environment.FoundationR3Url + '/RefPaymentAlloc/GetRefPaymentAllocById', {Id : response['RefPaymentAllocId'] }).subscribe(
+          this.http.post(URLConstant.GetRefPaymentAllocByID, {Id : response['RefPaymentAllocId'] }).subscribe(
             (response) => {
               this.inputLookUpPaymentAllocObj.idSelect = response["RefPaymentAllocId"]
               this.inputLookUpPaymentAllocObj.nameSelect = response["PaymentAllocCode"]
