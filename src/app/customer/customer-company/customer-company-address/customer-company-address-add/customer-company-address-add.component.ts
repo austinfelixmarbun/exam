@@ -39,7 +39,9 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   pageType: string;
 
   listAddrRequiredOwnership: Array<string> = [
-    'BIZ','COMPANY','LEGAL'
+    CommonConstant.CustAddrTypeBiz,
+    CommonConstant.CustAddrTypeCompany,
+    CommonConstant.CustAddrTypeLegal
   ]
 
   CustDataCompanyForm = this.fb.group({

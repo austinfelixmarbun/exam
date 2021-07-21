@@ -62,7 +62,9 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   MotherMaidenName: string;
 
   listAddrRequiredOwnership: Array<string> = [
-    'LEGAL','RESIDENCE','OTHERBIZ'
+    CommonConstant.CustAddrTypeLegal,
+    CommonConstant.CustAddrTypeResidence,
+    CommonConstant.CustAddrTypeOthBiz
   ]
 
   CustDataPersonalForm = this.fb.group({
