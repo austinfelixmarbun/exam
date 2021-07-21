@@ -1,8 +1,7 @@
 import { environment } from "environments/environment";
-import { NavigationConstant } from "../NavigationConstant";
 
 // URL" API di concat dengan environment url + version + api path
-// kecuali: API" yang di pakai di UC". contoh: GetPagingObjectBySQL, DeleteFromPaging, Approval CreateNewRFA
+// KECUALI: API" yang di pakai di UC". contoh: GetPagingObjectBySQL, DeleteFromPaging, Approval CreateNewRFA
 
 export class URLConstant {
     // FRAMEWORK
@@ -34,7 +33,7 @@ export class URLConstant {
     public static GetAllRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/GetAllRefOffice";
     public static AddRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/AddRefOffice";
     public static AddRefOfficeAreaMember = environment.FoundationR3Url + "/v1" + "/RefOffice/AddRefOfficeAreaMember";
-    public static UpdateRefOfficeAreaId = "/v1" + "/RefOffice/UpdateRefOfficeAreaId";
+    public static UpdateRefOfficeAreaId = "/RefOffice/UpdateRefOfficeAreaId";
     public static EditRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/EditRefOffice";
     public static GetCenterGrpByCenterGrpTypeCode = "/v1" + "/RefOffice/GetCenterGrpByCenterGrpCode";
     public static GetListOfficeCenterGrp = "/v1" + "/RefOffice/GetListOfficeCenterGrp";
@@ -281,7 +280,6 @@ export class URLConstant {
     public static LoginByRole = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByRole";
     public static LoginByToken = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByToken";
     public static UpdateToken = environment.FoundationR3Url + "/v1" + "/Authenticate/UpdateRole";
-    public static LoginURLFrontEnd = NavigationConstant.PAGES_LOGIN;
 
     //FORM FEATURE
     public static GetListRefFeature = environment.FoundationR3Url + "/v1" + "/RefFeature/GetListRefFeature";
@@ -939,10 +937,10 @@ export class URLConstant {
     public static EditRefPaymentAllocGrp = environment.FoundationR3Url + "/v1" + "/RefPaymentAllocGrp/EditRefPaymentAllocGrp";
 
     // COA
-    public static GetRefCoaByRefCoaId = environment.FoundationR3Url + "/v1" + "/Coa/GetRefCoaByRefCoaId";
-    public static SubmitCoa = environment.FoundationR3Url + "/v1" + "/Coa/SubmitCoa";
-    public static SubmitListCoa = environment.FoundationR3Url + "/v1" + "/Coa/SubmitListCoa";
-    public static GetListRefCoaByCoaSchmId = environment.FoundationR3Url + "/v1" + "/Coa/GetListRefCoaByCoaSchmId";
+    public static GetRefCoaByRefCoaId = environment.FoundationR3Url + "/v1"+ "/Coa/GetRefCoaByRefCoaId";
+    public static SubmitCoa = environment.FoundationR3Url +"/v1"+  "/Coa/SubmitCoa";
+    public static SubmitListCoa = environment.FoundationR3Url +"/v1"+  "/Coa/SubmitListCoa";
+    public static GetListRefCoaByCoaSchmId = environment.FoundationR3Url + "/v1"+ "/Coa/GetListRefCoaByCoaSchmId";
 
     // COA Scheme
     public static GetCoaSchmByCoaSchmId = environment.FoundationR3Url + "/v1" + "/CoaSchm/GetCoaSchmByCoaSchmId";
@@ -1004,7 +1002,21 @@ export class URLConstant {
     public static GetJournalResultPagingObjectBySQL = environment.FoundationR3Url + "/v1" + "/Generic/GetJournalResultPagingObjectBySQL";
 
     // JOURNAL
-    public static RerunJournal = "/Journal/RerunJournal";
+    public static RerunJournal = "/v1" + "/Journal/RerunJournal";
+    public static DownloadJournalFile = environment.FoundationR3Url + "/v1" + "/Journal/DownloadJournalFile";
+    public static GetJrSourceFileByJrSourceFileId = environment.FoundationR3Url + "/v1"+ "/Journal/GetJrSourceFileByJrSourceFileId";
+    public static GetJrMHeaderAndJrMGroupByJrMHeaderId = environment.FoundationR3Url + "/v1" +"/Journal/GetJrMHeaderAndJrMGroupByJrMHeaderId";
+    public static SaveJrMGroup = environment.FoundationR3Url +"/v1" + "/Journal/SaveJrMGroup";
+    public static GetJrMGroupAndJrMGroupDFactByJrMGroupId = environment.FoundationR3Url + "/v1" + "/Journal/GetJrMGroupAndJrMGroupDFactByJrMGroupId";
+    public static SaveJrMGroupDFact = environment.FoundationR3Url +"/v1"+"/Journal/SaveJrMGroupDFact";
+    public static GetJrMHeaderAndJrMHeaderFactAndJrMEntityByJrMHeaderId = environment.FoundationR3Url +"/v1" +"/Journal/GetJrMHeaderAndJrMHeaderFactAndJrMEntityByJrMHeaderId";
+    public static SaveJrMHeaderFact = environment.FoundationR3Url +"/v1"+"/Journal/SaveJrMHeaderFact";
+    public static GetJrMGroupAndJrMItemValueByJrMGroupId = environment.FoundationR3Url +"/v1" +"/Journal/GetJrMGroupAndJrMItemValueByJrMGroupId"
+    public static SaveJrMItemValue = environment.FoundationR3Url +"/v1" +"/Journal/SaveJrMItemValue";
+    public static SaveJrMEntity = environment.FoundationR3Url +"/v1"+"/Journal/SaveJrMEntity";
+    public static AddJrMHeader = environment.FoundationR3Url +"/v1"+"/Journal/AddJrMHeader";
+    public static GetJournalResultByJrMsgHId = environment.FoundationR3Url +"/v1"+"/Journal/GetJournalResultByJrMsgHId";
+    public static UploadJournalFile = environment.FoundationR3Url +"/v1" +"/Journal/UploadJournalFile";
 
     // Industry Type Category
     public static AddEditIndustryTypeCategory = environment.FoundationR3Url + "/v1" + "/IndustryTypeCategory/AddEditIndustryTypeCategory";
@@ -1017,8 +1029,7 @@ export class URLConstant {
     public static GetListCustFinDataAttrContentByCustIdAndListAttrGroup = environment.FoundationR3Url + "/v1" + "/CustFinDataAttrContent/GetListCustFinDataAttrContentByCustIdAndListAttrGroup";
     public static AddCustFinDataAttrContent = environment.FoundationR3Url + "/v1" + "/CustFinDataAttrContent/AddCustFinDataAttrContent";
     public static GetCustFinDataAttrContentForCustViewByCustId = environment.FoundationR3Url + "/v1" + "/CustFinDataAttrContent/GetCustFinDataAttrContentForCustViewByCustId";
-    public static DownloadJournalFile = environment.FoundationR3Url + "/Journal/DownloadJournalFile";
-    public static GetJrSourceFileByJrSourceFileId = environment.FoundationR3Url + "/Journal/GetJrSourceFileByJrSourceFileId";
+
 
     // LICENSE
     public static UploadLicense = environment.FoundationR3Url + "/v1" + "/License/UploadLicense";

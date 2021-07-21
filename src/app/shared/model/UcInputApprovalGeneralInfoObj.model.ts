@@ -6,7 +6,7 @@ export class UcInputApprovalGeneralInfoObj {
     PathUrl: string;
     constructor() { 
         this.TaskId = 0;
-        this.EnvUrl = environment.FoundationR3Url = "/v1";
+        this.EnvUrl = environment.FoundationR3Url + "/v1";
         this.PathUrl = "";
     }
 }  

@@ -19,10 +19,10 @@ export class AdInsConstant {
   public static RestrictionGTE = "GTE";
   public static RestrictionLTE = "LTE";
 
-  public static ApvHoldTaskUrl = environment.ApprovalURL + "/ApprovalInstance/HoldUnholdTask";
-  public static ApvTakeBackTaskUrl = environment.ApprovalURL + "/ApprovalInstance/TakeBackTask";
-  // public static ApvHoldTaskUrl = environment.FoundationR3Url + "/Approval/Hold";
-  // public static ApvTakeBackTaskUrl = environment.FoundationR3Url + "/Approval/TakeBack";
+  // public static ApvHoldTaskUrl = environment.ApprovalURL + "/ApprovalInstance/HoldUnholdTask";
+  // public static ApvTakeBackTaskUrl = environment.ApprovalURL + "/ApprovalInstance/TakeBackTask";
+  public static ApvHoldTaskUrl = environment.FoundationR3Url + "/Approval/Hold";
+  public static ApvTakeBackTaskUrl = environment.FoundationR3Url + "/Approval/TakeBack";
 
   public static showData = "10,50,100";
   public static TimeoutSession = 6000000;
@@ -32,4 +32,9 @@ export class AdInsConstant {
   public static Logout = environment.FoundationR3Url + "/v1" + "/UserManagement/LogOut"
   public static FormDefault = "dashboard/dash-board";
   public static JoinTypeInner = "INNER";
+  public static LoginByRole = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByRole";
+  public static LoginByToken = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByToken";
+  public static UpdateToken = environment.FoundationR3Url + "/v1" + "/Authenticate/UpdateRole";
+  public static GetThingsToDoByRole = environment.FoundationR3Url + "/v1" + "/ThingsToDo/GetThingsToDoByRole";
+
 }

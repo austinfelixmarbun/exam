@@ -111,7 +111,7 @@ export class UploadJournalDetailComponent implements OnInit {
       environmentUrl: environment.FoundationR3Url,
       apiQryPaging: "/Generic/GetPagingObjectBySQL",
       // pagingJson: "./assets/ucpaging/accmnt/billing/general/upload-billing-vat-no/search-upload-billing-vat-no.json",
-      url: environment.FoundationR3Url + "/Journal/UploadJournalFile",
+      url: URLConstant.UploadJournalFile,
       isDownloadTmplt: false,
       ddlEnvironments: []
     }

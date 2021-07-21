@@ -128,7 +128,7 @@ export class JournalHeaderFactComponent implements OnInit {
 
   getData() {
     if (this.JrMHeaderId != null) {
-      this.http.post<any>(environment.FoundationR3Url + '/Journal/GetJrMHeaderAndJrMHeaderFactAndJrMEntityByJrMHeaderId', { JrMHeaderId: this.JrMHeaderId }).subscribe(
+      this.http.post<any>(URLConstant.GetJrMHeaderAndJrMHeaderFactAndJrMEntityByJrMHeaderId, { JrMHeaderId: this.JrMHeaderId }).subscribe(
         response => {
           this.SubsystemDesc = response.SubSystem
           this.TransactionTypeCode = response.TrxTypeCode
@@ -171,7 +171,7 @@ console.log(this.ddlFactTypeGenericList);
     }
 
     if (this.JrMHeaderId != null) {
-      this.http.post<any>(environment.FoundationR3Url + '/Journal/SaveJrMHeaderFact', request).subscribe(
+      this.http.post<any>(URLConstant.SaveJrMHeaderFact, request).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})

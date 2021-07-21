@@ -6,7 +6,7 @@ export class UcInputApprovalHistoryObj {
     PathUrl: string;
     constructor() { 
         this.RequestId = 0;
-        this.EnvUrl = environment.FoundationR3Url = "/v1";
+        this.EnvUrl = environment.FoundationR3Url + "/v1";
         this.PathUrl = "";
     }
 }  

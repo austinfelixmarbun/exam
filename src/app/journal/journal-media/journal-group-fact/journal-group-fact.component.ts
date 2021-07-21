@@ -127,7 +127,7 @@ export class JournalGroupFactComponent implements OnInit {
 
   getData() {
     if (this.JrMGroupId != null) {
-      this.http.post<any>(environment.FoundationR3Url + '/Journal/GetJrMGroupAndJrMGroupDFactByJrMGroupId', { JrMGroupId: this.JrMGroupId }).subscribe(
+      this.http.post<any>(URLConstant.GetJrMGroupAndJrMGroupDFactByJrMGroupId, { JrMGroupId: this.JrMGroupId }).subscribe(
         response => {
           this.JrMHeaderId = response.JrMHeaderId
           this.SubsystemDesc = response.SubSystem
@@ -168,7 +168,7 @@ export class JournalGroupFactComponent implements OnInit {
     }
 
     if (this.JrMGroupId != null) {
-      this.http.post<any>(environment.FoundationR3Url + '/Journal/SaveJrMGroupDFact', request).subscribe(
+      this.http.post<any>(URLConstant.SaveJrMGroupDFact, request).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_GROUP], { JrMHeaderId: this.JrMHeaderId })
