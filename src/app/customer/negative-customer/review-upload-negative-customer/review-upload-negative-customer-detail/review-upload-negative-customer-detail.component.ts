@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { UploadReviewCustomObj } from 'app/shared/model/UploadReviewCustomObj.Model';
+import { UploadReviewCustomObj, UploadReviewCustomV2Obj } from 'app/shared/model/UploadReviewCustomObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
@@ -12,6 +12,8 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { environment } from 'environments/environment';
+import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 
 @Component({
   selector: 'app-review-upload-negative-customer-detail',
@@ -23,6 +25,7 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
   arrCrit = new Array();
   taskListId: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  currentUserContext: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
 
   readonly CancelLink: string = NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
@@ -52,23 +55,51 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
     this.inputPagingObj.addCritInput.push(addCritAssetMasterId);
   }
 
-  uploadReview(status) {
-    var uploadObj = new UploadReviewCustomObj();
-    uploadObj.MrUploadStatusCode = status;
-    uploadObj.TaskListId = this.taskListId;
-    uploadObj.UploadMonitoringNo = this.uploadNo;
-    this.http.post(URLConstant.UploadReview, uploadObj).subscribe(
-      response => {
-        this.toastr.successMessage(response["Message"]);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING],{});
-      }
-    );
+  uploadReview(status: string) {
+    if(environment.isCore){
+      var uploadV2Obj = new UploadReviewCustomV2Obj();
+      uploadV2Obj.TaskListId = this.taskListId;
+      uploadV2Obj.MrUploadStatusCode = status;
+      uploadV2Obj.UploadMonitoringNo = this.uploadNo;
+      uploadV2Obj.ListValue = { "Status": status };
+      uploadV2Obj.ProcessKey = CommonConstant.WorkflowUploadNegativeCustomer;
+      uploadV2Obj.OfficeCode = this.currentUserContext[CommonConstant.OFFICE_CODE],
+      uploadV2Obj.TaskDefinitionKey = CommonConstant.WfUploadNegativeCustomerReview,
+      uploadV2Obj.RoleCode = this.currentUserContext[CommonConstant.ROLE_CODE],
+
+      this.http.post(URLConstant.UploadReviewV2, uploadV2Obj).subscribe(
+        response => {
+          this.toastr.successMessage(response["Message"]);
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING],{});
+        }
+      );
+    }
+    else{
+      var uploadObj = new UploadReviewCustomObj();
+      uploadObj.MrUploadStatusCode = status;
+      uploadObj.TaskListId = this.taskListId;
+      uploadObj.UploadMonitoringNo = this.uploadNo;
+      this.http.post(URLConstant.UploadReview, uploadObj).subscribe(
+        response => {
+          this.toastr.successMessage(response["Message"]);
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING],{});
+        }
+      );
+    }
   }
+
   claimTask() {
-    var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    var wfClaimObj = { pWFTaskListID: this.taskListId, pUserID: currentUserContext[CommonConstant.USER_NAME] };
-    this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(
-      (response) => {
+    if(environment.isCore){
+      var newWfClaimObj = { TaskId: this.taskListId, UserId: this.currentUserContext[CommonConstant.USER_NAME] };
+      this.http.post(URLConstant.ClaimTaskV2, newWfClaimObj).subscribe(
+        (response) => {
       });
+    }
+    else{
+      var wfClaimObj = { pWFTaskListID: this.taskListId, pUserID: this.currentUserContext[CommonConstant.USER_NAME] };
+      this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(
+        (response) => {
+      });
+    }
   }
 }

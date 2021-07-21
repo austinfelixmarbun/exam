@@ -25,6 +25,7 @@ export class CommonConstant {
     public static ReturnObj = 'ReturnObject';
     public static ENVIRONMENT_MODULE = 'EnvironmentModule';
     public static OFFICE_CODE = 'OfficeCode';
+    public static ROLE_CODE = 'RoleCode';
 
     // Customer Type
     public static CustomerPersonal = "PERSONAL";
@@ -305,4 +306,11 @@ export class CommonConstant {
 
     // JOURNAL
     public static RefMasterTypeCodeJournalHeaderFactType = "H_FACT_TYPE";
+
+    // JOIN TYPE
+    public static JOIN_TYPE_INNER = "Inner";
+
+    //WORKFLOW
+    public static WorkflowUploadNegativeCustomer = "WF_UPL_NEG_CUST";
+    public static WfUploadNegativeCustomerReview = "UPLOAD_NEG_CUST_REVIEW"
 }
