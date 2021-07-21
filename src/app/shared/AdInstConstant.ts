@@ -31,5 +31,5 @@ export class AdInsConstant {
   public static LoginWithToken = environment.FoundationR3Url + '/v1' + "/Authenticate/LoginWithToken";
   public static Logout = environment.FoundationR3Url + "/v1" + "/UserManagement/LogOut"
   public static FormDefault = "dashboard/dash-board";
-
+  public static JoinTypeInner = "INNER";
 }
