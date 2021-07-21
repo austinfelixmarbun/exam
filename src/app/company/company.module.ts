@@ -13,9 +13,11 @@ import { EditCompanyComponent } from 'app/company/edit/edit-company.component';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
+import { AdInsModule } from 'app/components/adins-module/adins.module';
 
 @NgModule({
   imports: [
+    AdInsModule,
     CompanyRoutingComponent,
     CommonModule,
     FormsModule,

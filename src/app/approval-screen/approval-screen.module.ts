@@ -16,11 +16,13 @@ import { UcApprovalrecommendationComponent } from './uc-approvalrecommendation/u
 import { UcApprovalsummaryComponent } from './uc-approvalsummary/uc-approvalsummary.component'
 import { UcApprovalComponent } from './uc-approval/uc-approval.component';
 import { UcSubsectionModule } from '@adins/uc-subsection';
+import { AdInsModule } from 'app/components/adins-module/adins.module';
 
 @NgModule({
   declarations: [ApprovalScreenComponent,UcProdCompComponent, TestComponent, LookupTestComponent, 
     UcApprovebyComponent, UcApprovalhistComponent, UcApprovalrecommendationComponent, UcApprovalsummaryComponent,UcApprovalComponent],
   imports: [
+    AdInsModule,
     CommonModule,
     ApprovalScreenRoutingModule,
     ReactiveFormsModule,
