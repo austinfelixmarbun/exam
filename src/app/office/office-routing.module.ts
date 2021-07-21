@@ -11,6 +11,8 @@ import { OfficeAreaPagingComponent } from './office-area/office-area-paging/offi
 import { OfficeAreaMemberPagingComponent } from './office-area/office-area-member/office-area-member-paging/office-area-member-paging.component';
 import { OfficeAreaMemberAddComponent } from './office-area/office-area-member/office-area-member-add/office-area-member-add.component';
 import { PathConstant } from 'app/shared/PathConstant';
+import { PathConstantX } from 'app/impl/shared/PathConstantX';
+import { OfficeAddXComponent } from 'app/impl/office/office-add-x/office-add-x.component';
 
 const routes: Routes = [
   {
@@ -24,8 +26,8 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.ADD,
-        component: OfficeAddComponent,
+        path: PathConstantX.ADD,
+        component: OfficeAddXComponent,
         data: {
           title: 'Add Office'
         }

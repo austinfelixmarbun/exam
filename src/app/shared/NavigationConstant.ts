@@ -1,3 +1,4 @@
+import { PathConstantX } from "app/impl/shared/PathConstantX";
 import { environment } from "environments/environment";
 import { PathConstant } from "./PathConstant";
 
@@ -241,7 +242,7 @@ export class NavigationConstant {
     //#region Office
     public static OFFICE = "/" + PathConstant.LR_OFFICE; //'/Office'
     public static OFFICE_PAGING = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.PAGING; //'/Office/Paging'
-    public static OFFICE_ADD = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.ADD; //'/Office/Add'
+    public static OFFICE_ADD = "/" + PathConstant.LR_OFFICE + "/" + PathConstantX.ADD; //'/Office/AddX'
     public static OFFICE_AREA = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_AREA; //'/Office/OfficeArea'
     public static OFFICE_AREA_DETAIL = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_AREA_DETAIL; //'/Office/OfficeArea/Detail'
     public static OFFICE_AREA_MEMBER = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_AREA_MEMBER; //'/Office/OfficeArea/Member'

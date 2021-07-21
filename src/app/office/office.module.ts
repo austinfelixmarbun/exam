@@ -25,6 +25,7 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { OfficeAddXComponent } from 'app/impl/office/office-add-x/office-add-x.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { TranslateModule } from '@ngx-translate/core';
     OfficeGroupMemberComponent,
     OfficeGroupMemberAddComponent,
     OfficeAreaMemberPagingComponent,
-    OfficeAreaMemberAddComponent
+    OfficeAreaMemberAddComponent,
+    OfficeAddXComponent
   ],
   providers: [
     NGXToastrService
