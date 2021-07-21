@@ -153,6 +153,9 @@ export class NewCustCompanyMainDataComponent implements OnInit {
       SupplName: [''],
       SupplId: ['']
     });
+    if (this.CustDataMode != this.CustDataModeMain) {
+      this.CustomerForm.get("CustName").disable();
+    }
   }
   //#endregion
 
@@ -348,6 +351,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     reqSubmitObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
 
     if (this.CustDataMode == this.CustDataModeShareholder) {
+      reqSubmitObj.CustObj.CustName = tempForm["ExistingCustName"].value;
       reqSubmitObj.CustCompanyMgmntShrholderObj = this.SetCustMgmntShareholder();
 
       if (reqSubmitObj.CustCompanyMgmntShrholderObj.IsActive) {
@@ -389,5 +393,17 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     tempReqObj.IsOwner = tempForm["IsOwner"];
 
     return tempReqObj
+  }
+  
+  getFormValidationErrors() {
+    const invalid = [];
+    const controls = this.CustomerForm.controls;
+    for (const name in controls) {
+      if (controls[name].invalid) {
+        invalid.push(name);
+        console.log(name);
+      }
+    }
+    console.log(invalid);
   }
 }
