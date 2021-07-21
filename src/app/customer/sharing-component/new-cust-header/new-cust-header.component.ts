@@ -122,7 +122,6 @@ export class NewCustHeaderComponent implements OnInit {
   //#region Save
   DupCheckPersonalObj: ReqPersonalObj = new ReqPersonalObj();
   ClickSavePersonal(ev: ReqPersonalObj) {
-    console.log(ev);
     if (ev.CustObj.CustId != 0) {
       this.http.post(this.SetUrlEditPersonal(), ev).subscribe(
         (response) => {
@@ -138,7 +137,6 @@ export class NewCustHeaderComponent implements OnInit {
 
   DupCheckCoyObj: ReqCoyObj = new ReqCoyObj();
   ClickSaveCoy(ev: ReqCoyObj) {
-    console.log(ev);
     if (ev.CustObj.CustId != 0) {
       this.http.post(this.SetUrlAddCoy(), ev).subscribe(
         (response) => {
@@ -161,7 +159,7 @@ export class NewCustHeaderComponent implements OnInit {
       (response) => {
         this.DuplicateStatus = response["Status"];
         if (this.DuplicateStatus != null && this.DuplicateStatus != undefined) {
-          console.log(response);
+          // console.log(response);
           this.ResultDuplicate = response[CommonConstant.ReturnObj]["CustDuplicate"] ? response[CommonConstant.ReturnObj]["CustDuplicate"] : new Array();
           this.ResultDuplicateNegative = response[CommonConstant.ReturnObj]["NegativeCustDuplicate"] ? response[CommonConstant.ReturnObj]["NegativeCustDuplicate"] : new Array();
           this.PageType = this.CustPageTypeDupCheck;
@@ -296,14 +294,13 @@ export class NewCustHeaderComponent implements OnInit {
     reqEditDupCheck.CustDataMode = this.CustDataMode;
 
     if (this.CustDataMode == this.CustDataModeFamily) {
-      // reqEditDupCheck.CustPersonalFamilyObj = this.CustPersonalFamilyData;
-      reqEditDupCheck.CustPersonalJobObj = this.DupCheckPersonalObj.CustPersonalJobObj;
+      reqEditDupCheck.CustPersonalFamilyObj = this.DupCheckPersonalObj.CustPersonalFamilyObj;
     }
     if (this.CustDataMode == this.CustDataModeShareholder) {
       reqEditDupCheck.CustCompanyMgmntShrholderObj = this.DupCheckPersonalObj.CustCompanyMgmntShrholderObj;
-      reqEditDupCheck.CustPersonalJobObj = this.DupCheckPersonalObj.CustPersonalJobObj;
-      reqEditDupCheck.CustAttrContentObjs = this.DupCheckPersonalObj.CustAttrContentObjs;
     }
+    reqEditDupCheck.CustPersonalJobObj = this.DupCheckPersonalObj.CustPersonalJobObj;
+    reqEditDupCheck.CustAttrContentObjs = this.DupCheckPersonalObj.CustAttrContentObjs;
     this.http.post(URLConstant.NewEditDuplicateCust, reqEditDupCheck).subscribe(
       (response: GenericObj) => {
         if (this.CustDataMode == this.CustDataModeMain) {
@@ -348,13 +345,13 @@ export class NewCustHeaderComponent implements OnInit {
     NegativeCustObj.CustDataMode = this.CustDataMode;
 
     if (this.CustDataMode == this.CustDataModeFamily) {
-      // NegativeCustObj.CustPersonalFamilyObj = this.CustPersonalFamilyData;
+      NegativeCustObj.CustPersonalFamilyObj = this.DupCheckPersonalObj.CustPersonalFamilyObj;
     }
     if (this.CustDataMode == this.CustDataModeShareholder) {
       NegativeCustObj.CustCompanyMgmntShrholderObj = this.DupCheckPersonalObj.CustCompanyMgmntShrholderObj;
-      NegativeCustObj.CustPersonalJobObj = this.DupCheckPersonalObj.CustPersonalJobObj;
-      NegativeCustObj.CustAttrContentObjs = this.DupCheckPersonalObj.CustAttrContentObjs;
     }
+    NegativeCustObj.CustPersonalJobObj = this.DupCheckPersonalObj.CustPersonalJobObj;
+    NegativeCustObj.CustAttrContentObjs = this.DupCheckPersonalObj.CustAttrContentObjs;
     this.http.post<GenericObj>(URLConstant.EditDuplicateNegativeCust, NegativeCustObj).subscribe(
       (response) => {
         if (this.CustDataMode == this.CustDataModeMain) {

@@ -145,9 +145,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   existingCustomerLookUpObj: InputLookupObj = new InputLookupObj();
   BindLookupExistingCust() {
     if (this.CustDataMode == this.CustDataModeMain) return;
-    console.log("bind lookup existing name");
     this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal);
-    console.log(this.existingCustomerLookUpObj);
   }
   //#endregion
 
@@ -327,7 +325,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     let datePipe = new DatePipe("en-US");
     await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: custId }).toPromise().then(
       (response) => {
-        console.log(response);
         this.tempCustPersonalObj = response;
         this.CustomerForm.patchValue({
           MrGenderCode: response.MrGenderCode,
@@ -353,7 +350,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     if (this.CustDataMode != this.CustDataModeFamily) return;
     this.http.post(URLConstant.GetCustPersonalFamilyByCustPersonalFamilyId, { Id: custPersonalFamilyId }).subscribe(
       (response: CustPersonalFamilyObj) => {
-        console.log(response);
         this.tempCustPersonalFamilyObj = response;
         this.CustomerForm.patchValue({
           MrCustRelationship: response.MrCustRelationship,
@@ -518,7 +514,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   RelationshipChange(ev: string) {
-    console.log(ev);
     let tempMaritalStat = this.CustomerForm.get("MrMaritalStatCode");
     if (ev == CommonConstant.MasteCodeRelationshipSpouse) {
       this.existingCustomerLookUpObj.addCritInput = NewCustSetData.ResetCriteriaExisting(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal, true);
@@ -532,7 +527,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   outputChangeReceived(ev: string) {
-    console.log(ev);
     switch (ev) {
       case CommonConstant.CUST_CHANGE_PROFESSION:
         this.ChangeProffession();

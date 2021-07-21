@@ -98,10 +98,10 @@ export class FamilyFormComponent implements OnInit {
   BindLookupCountry() {
     this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
       (response: GeneralSettingObj) => {
-        console.log(response);
         this.lookUpObjCountry.urlJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObjCountry.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObjCountry.genericJson = "./assets/lookup/lookupCustomerCountry.json";
+        this.lookUpObjCountry.isRequired = false;
 
         this.CountryCode = response.GsValue;
         let criteriaList = new Array();
@@ -112,7 +112,6 @@ export class FamilyFormComponent implements OnInit {
         criteriaList.push(criteriaObj);
         this.lookUpObjCountry.addCritInput = criteriaList;
         this.lookUpObjCountry.isReady = true;
-        console.log(this.lookUpObjCountry);
 
         this.GetRefCountry(response.GsValue, true);
       }
@@ -167,7 +166,6 @@ export class FamilyFormComponent implements OnInit {
     await this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: custId }).toPromise().then(
       async (response: CustPersonalJobDataObj) => {
         if (!response.CustId) return;
-        console.log(response);
         this.tempExisting.CustPersonalJob = response;
         this.parentForm.patchValue({
           EmploymentEstablishmentDt: response.EmploymentEstablishmentDt,
@@ -223,7 +221,6 @@ export class FamilyFormComponent implements OnInit {
   }
 
   getLookUpJobPosition(ev) {
-    console.log(ev);
     this.parentForm.patchValue({
       MrJobPositionCode: ev.JobCode,
     });
@@ -238,7 +235,6 @@ export class FamilyFormComponent implements OnInit {
   }
 
   getLookUpCountry(ev) {
-    console.log(ev);
     this.parentForm.patchValue({
       WnaCountryCode: ev.CountryCode,
     });
@@ -246,7 +242,6 @@ export class FamilyFormComponent implements OnInit {
 
   IsLocal: boolean = true;
   onOptionsSelected(event: { selectedIndex: number, selectedObj: KeyValueObj, selectedValue: string }) {
-    console.log(event);
     if (event.selectedValue == CommonConstant.NationalityCodeLocal) {
       this.IsLocal = true;
       this.lookUpObjCountry.isRequired = false;

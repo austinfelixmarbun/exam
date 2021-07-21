@@ -22,11 +22,13 @@ export class CustObj {
     IsShareholder: boolean;
 
     constructor() {
+        this.CustId = 0;
         this.CustAddr = new CustAddrObj();
         this.IsCustomer = false;
         this.IsFamily = false;
         this.IsGuarantor = false;
         this.IsShareholder = false;
+        this.CustNo = "";
         this.RowVersion = "";
     }
 }

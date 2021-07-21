@@ -35,7 +35,6 @@ export class FamilyListingComponent implements OnInit {
   GetListPaging(){    
     this.http.post(URLConstant.GetMainCustAndListCustPersonalFamilyByCustId, { Id: this.CustId }).toPromise().then(
       (response) => {
-        console.log(response);
         this.tempFamilyListingObj = response["CustPersonalFamilyList"];
         for (const item of this.tempFamilyListingObj) {
           if(item["FamilyId"] && item["FamilyId"] > 0){
@@ -71,7 +70,6 @@ export class FamilyListingComponent implements OnInit {
 
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
   event(ev: { Key: string, RowObj: FamilyListingObj }) {
-    console.log(ev);
     this.selectedCustId = ev.RowObj.FamilyId;
     this.selectedCustPersonalFamilyId = ev.RowObj.CustPersonalFamilyId;
     this.addCustFamily(false);

@@ -54,7 +54,6 @@ export class CustAttrFormComponent implements OnInit {
           tempFormArray.push(this.SetFormGroup(element));
           this.dictAttrCodeIdxAt[element.AttrCode] = index;
         }
-        console.log(this.dictAttrCodeIdxAt);
       }
     )
   }

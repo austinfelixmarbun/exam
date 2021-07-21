@@ -250,6 +250,8 @@ export class URLConstant {
     public static GetRefMasterByRefMasterTypeCode = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterByRefMasterTypeCode";
     public static GetListActiveRefMasterDDL = environment.FoundationR3Url + "/v1" + "/RefMaster/GetListKeyValueActiveByCode";
 
+    public static GetListActiveRefMasterDetail = environment.FoundationR3Url + '/v1' + "/RefMaster/GetListActiveRefMaster";
+    
     //REF COUNTRY
     public static GetListRefCountry = environment.FoundationR3Url + "/v1" + "/RefCountry/GetListRefCountry";
     public static GetRefCountryByCountryCode = environment.FoundationR3Url + "/v1" + "/RefCountry/GetRefCountryByCountryCode";

@@ -197,7 +197,6 @@ export class ShareholderFormComponent implements OnInit {
   }
   
   getLookUpJobPosition(ev) {
-    console.log(ev);
     this.parentForm.patchValue({
       MrJobPositionCode: ev.JobCode,
     });
