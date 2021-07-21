@@ -706,8 +706,6 @@ export class VendorBranchAddEditComponent implements OnInit {
   }
 
   SaveForm() {
-    console.log('ASDASDASDASDASDASDASD')
-    console.log(this.VendorForm.controls)
     if (Date.parse(this.VendorForm.controls.EstablishmentDt.value) > Date.parse(formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US'))) {
       this.toastr.warningMessage("Establishment Date Must Be Lesser Than Business Date");
     }
