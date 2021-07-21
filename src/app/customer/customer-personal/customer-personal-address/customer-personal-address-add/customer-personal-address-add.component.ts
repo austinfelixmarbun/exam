@@ -61,6 +61,10 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   MrIdTypeCodeDesc: string;
   MotherMaidenName: string;
 
+  listAddrRequiredOwnership: Array<string> = [
+    'LEGAL','RESIDENCE','OTHERBIZ'
+  ]
+
   CustDataPersonalForm = this.fb.group({
     Notes: [''],
     LuasBangunan: [''],
@@ -146,13 +150,22 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           if (this.getCustomerAddr.MrCustAddrTypeCode == 'RESIDENCE' || this.getCustomerAddr.MrCustAddrTypeCode == 'LEGAL') {
             this.inputAddressObj.showStayLength = true;
           }
+          this.setOwnership(this.CustDataPersonalForm.controls.MrCustAddrTypeCode.value);
         });
     }
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
     this.inputAddressObj.showOwnership = true;
-    this.inputAddressObj.requiredOwnership = true;
+    this.setOwnership(this.CustDataPersonalForm.controls.MrCustAddrTypeCode.value);
+  }
+
+  setOwnership(MrCustAddrTypeCode: string) {
+    if(this.listAddrRequiredOwnership.find(addrType => addrType == MrCustAddrTypeCode)){
+      this.inputAddressObj.requiredOwnership = true;
+      return
+    }
+    this.inputAddressObj.requiredOwnership = false;
   }
 
   checkCustAddrType() {
@@ -165,6 +178,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
       this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.clearValidators(); //solusi sementara sampai perbaikan pada lib-ucaddress
     }
     this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.updateValueAndValidity(); //solusi sementara sampai perbaikan pada lib-ucaddress
+    this.setOwnership(this.CustDataPersonalForm.controls.MrCustAddrTypeCode.value);
   }
 
   copyAddress() {
