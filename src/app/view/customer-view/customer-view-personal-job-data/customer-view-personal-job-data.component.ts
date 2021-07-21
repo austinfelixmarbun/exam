@@ -17,8 +17,6 @@ export class CustomerViewPersonalJobDataComponent implements OnInit {
   constructor() { }
   ngOnInit() {
     this.viewCustJobData.viewInput =  "./assets/ucviewgeneric/viewCustJobData.json";
-    this.viewCustJobData.viewEnvironment = environment.FoundationR3Url;
     this.viewCustJobDataAddress.viewInput = "./assets/ucviewgeneric/viewCustJobDataAddress.json";
-    this.viewCustJobDataAddress.viewEnvironment = environment.FoundationR3Url;
   }
 }

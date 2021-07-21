@@ -6,6 +6,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+
 @Component({
   selector: 'app-journal-group',
   templateUrl: './journal-group.component.html',
@@ -87,7 +89,7 @@ export class JournalGroupComponent implements OnInit {
 
   getData() {
     if (this.JrMHeaderId != null) {
-      this.http.post<any>(environment.FoundationR3Url + '/Journal/GetJrMHeaderAndJrMGroupByJrMHeaderId', { JrMHeaderId: this.JrMHeaderId }).subscribe(
+      this.http.post<any>(URLConstant.GetJrMHeaderAndJrMGroupByJrMHeaderId, { JrMHeaderId: this.JrMHeaderId }).subscribe(
         response => {
           this.SubsystemDesc = response.SubSystem
           this.TransactionTypeCode = response.TrxTypeCode
@@ -121,7 +123,7 @@ export class JournalGroupComponent implements OnInit {
     }
 
     if (this.JrMHeaderId != null) {
-      this.http.post<any>(environment.FoundationR3Url + '/Journal/SaveJrMGroup', request).subscribe(
+      this.http.post<any>(URLConstant.SaveJrMGroup, request).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})

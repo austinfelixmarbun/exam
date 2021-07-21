@@ -1,3 +1,4 @@
+import { environment } from "environments/environment";
 import { CriteriaObj } from "./CriteriaObj.model";
 
 export class InputSearchObj {
@@ -11,7 +12,7 @@ export class InputSearchObj {
 
     constructor() {
         this._url = "";
-        this.enviromentUrl = "";
+        this.enviromentUrl = environment.FoundationR3Url + "/v1";
         this.apiQryPaging = "";
         this.arrCritObj = null;
         this.addCritInput = new Array<CriteriaObj>();

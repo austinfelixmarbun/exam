@@ -1,28 +1,24 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 import { SurveyorObj } from 'app/shared/model/SurveyorObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { WhereValueObj } from '@adins/ucsearch/lib/model/InputSearchObj.Model';
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-surveyor-add',
-  templateUrl: './surveyor-add.component.html',
-  styleUrls: ['./surveyor-add.component.css']
+  templateUrl: './surveyor-add.component.html'
 })
 export class SurveyorAddComponent implements OnInit {
-
   private uclookupUsername: UclookupgenericComponent;
   @ViewChild('lookupUsername') set content(content: UclookupgenericComponent) {
     if (content) {
@@ -50,7 +46,7 @@ export class SurveyorAddComponent implements OnInit {
   isExternal: boolean = false;
 
   SurveyorForm = this.fb.group({
-    SurveyorType: ['', Validators.required],
+    SurveyorType: ['INTERNAL_SURVEYOR', Validators.required],
     UserId: ['', Validators.required],
     SurveyorGroupId: ['', Validators.required],
     VendorGroupId: [''],
@@ -58,27 +54,24 @@ export class SurveyorAddComponent implements OnInit {
     Workload: ['', Validators.required],
     CurrWorkloadAmt: ['', Validators.required],
     IsActive: [false]
-
   })
 
-
-  constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private httpClient: HttpClient,
+    private toastr: NGXToastrService,
+    private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
       if (params['SurveyorId'] != null) {
         this.isEdit = true;
         this.pageType = "edit";
         this.surveyorId = params['SurveyorId'];
-
-      } else {
+      }
+      else {
         this.isEdit = false;
         this.pageType = "add";
       }
     });
-
-
-
-
   }
 
   setDropDown() {
@@ -86,12 +79,9 @@ export class SurveyorAddComponent implements OnInit {
     this.httpClient.post(URLConstant.GetListActiveRefMaster, tempReq).subscribe(
       (response) => {
         this.dropdownSurveyType = response['ReturnObject'];
-
       }
     )
   }
-
-
 
   onSurveyorTypeSelect(event) {
     this.SurveyorForm.patchValue({
@@ -107,10 +97,9 @@ export class SurveyorAddComponent implements OnInit {
       critObj.restriction = AdInsConstant.RestrictionEq;
       critObj.value = '1';
       this.lookupUsernameObj.addCritInput.push(critObj);
-
       this.uclookupUsername.setAddCritInput();
-
-    } else {
+    }
+    else {
       this.isExternal = false;
       this.lookupUsernameObj.addCritInput = new Array();
 
@@ -121,27 +110,23 @@ export class SurveyorAddComponent implements OnInit {
       this.lookupUsernameObj.addCritInput.push(critObj);
 
       this.uclookupUsername.setAddCritInput();
-
     }
   }
 
   getLookupUsername(event) {
-
     this.SurveyorForm.patchValue({
       UserId: event.UserId
     });
     this.lookupUsernameObj.nameSelect = event.Username;
     this.userId = event.UserId;
-
   }
 
   getLookupSurveyorGroup(event) {
     this.SurveyorForm.patchValue({
-      SurveyorGroupId: event.RefOfficeId
+      SurveyorGroupId: event.CenterGrpId
     });
-    this.lookupSurveyorGrpObj.nameSelect = event.OfficeCode;
-    this.officeId = event.RefOfficeId;
-
+    this.lookupSurveyorGrpObj.nameSelect = event.CenterGrpName;
+    this.officeId = event.CenterGrpId;
   }
 
   getLookupVendorGroup(event) {
@@ -149,10 +134,7 @@ export class SurveyorAddComponent implements OnInit {
       VendorGroupId: event.VendorId
     });
     this.lookupVendorObj.nameSelect = event.RefrantorCode;
-
   }
-
-
 
   ngOnInit() {
     this.setDropDown();
@@ -171,7 +153,6 @@ export class SurveyorAddComponent implements OnInit {
     this.lookupVendorObj.genericJson = "./assets/uclookup/vendor/lookupVendor.json";
     this.lookupVendorObj.isRequired = true;
 
-
     if (this.pageType == "edit") {
       this.surveyorObj = new SurveyorObj();
       this.SurveyorForm.controls['SurveyorType'].disable();
@@ -182,7 +163,7 @@ export class SurveyorAddComponent implements OnInit {
           this.SurveyorForm.patchValue({
             SurveyorType: this.surveyorObj.MrSurveyorTypeCode,
             UserId: this.surveyorObj.RefUserId,
-            SurveyorGroupId: this.surveyorObj.RefOfficeId,
+            SurveyorGroupId: this.surveyorObj.CenterGrpId,
             VendorGroupId: this.surveyorObj.VendorId,
             SurveyorNo: this.surveyorObj.SurveyorNo,
             Workload: this.surveyorObj.WorkloadAmt,
@@ -190,13 +171,10 @@ export class SurveyorAddComponent implements OnInit {
             IsActive: this.surveyorObj.IsActive
           });
 
-          console.log(this.surveyorObj);
-          this.httpClient.post(URLConstant.GetRefOfficeByRefOfficeId, { Id: this.surveyorObj.RefOfficeId }).subscribe(
+          this.httpClient.post(URLConstant.GetCenterGrpById, { Id: this.surveyorObj.CenterGrpId }).subscribe(
             (response) => {
-              console.log(response);
-              this.lookupSurveyorGrpObj.nameSelect = response['OfficeCode'];
+              this.lookupSurveyorGrpObj.nameSelect = response['CenterGrpName'];
               this.lookupSurveyorGrpObj.jsonSelect = response;
-
             }
           )
 
@@ -204,7 +182,6 @@ export class SurveyorAddComponent implements OnInit {
             this.isExternal = true;
             this.httpClient.post(URLConstant.GetVendorByVendorId, { Id: this.surveyorObj.VendorId }).subscribe(
               (response) => {
-                console.log(response);
                 this.lookupVendorObj.nameSelect = response['VendorName'];
                 this.lookupVendorObj.jsonSelect = response['VendorId'];
               }
@@ -218,20 +195,15 @@ export class SurveyorAddComponent implements OnInit {
             }
           )
         }
-
       )
     }
-
-
   }
-
 
   SaveForm() {
     this.surveyorObj = new SurveyorObj();
-
     this.surveyorObj.MrSurveyorTypeCode = this.SurveyorForm.getRawValue().SurveyorType;
     this.surveyorObj.RefUserId = this.SurveyorForm.value.UserId;
-    this.surveyorObj.RefOfficeId = this.SurveyorForm.value.SurveyorGroupId;
+    this.surveyorObj.CenterGrpId = this.SurveyorForm.value.SurveyorGroupId;
     this.surveyorObj.VendorId = this.SurveyorForm.value.VendorGroupId;
     this.surveyorObj.SurveyorNo = this.SurveyorForm.getRawValue().SurveyorNo;
     this.surveyorObj.WorkloadAmt = this.SurveyorForm.value.Workload;
@@ -245,7 +217,8 @@ export class SurveyorAddComponent implements OnInit {
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEYOR_PAGING], {});
         }
       )
-    } else {
+    }
+    else {
       this.surveyorObj.SurveyorId = this.surveyorId;
       this.surveyorObj.RowVersion = '';
       this.httpClient.post(URLConstant.EditSurveyor, this.surveyorObj).subscribe(
@@ -255,12 +228,5 @@ export class SurveyorAddComponent implements OnInit {
         }
       )
     }
-
-
-
-
-
-
   }
-
 }

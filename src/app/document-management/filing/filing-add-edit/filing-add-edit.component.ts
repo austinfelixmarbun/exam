@@ -131,7 +131,7 @@ export class FilingAddEditComponent implements OnInit {
     if(this.Mode === 'Edit'){
       this.filing.RackId = this.rackWithListFilling.RackId;
       this.filing.CurrentFilingCode = this.FilingCode;
-      this.http.post(environment.FoundationR3Url + "/DocManagement/EditFiling", this.filing).subscribe(
+      this.http.post(URLConstant.EditFiling, this.filing).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");
           this.router.navigate([NavigationConstant.DOC_MNGMNT_FILING_PAGING], { queryParams: { CabinetCode: this.Cabinet.CabinetCode, RackCode: this.rackWithListFilling.RackCode } });
@@ -145,7 +145,7 @@ export class FilingAddEditComponent implements OnInit {
       this.filing.RackCode = this.rackWithListFilling.RackCode;
       this.filing.RackId = this.Rack.RackId;
       console.log(this.filing.RackId);
-      this.http.post(environment.FoundationR3Url + "/DocManagement/AddFiling", this.filing).subscribe(
+      this.http.post(URLConstant.AddFiling, this.filing).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");
           this.router.navigate([NavigationConstant.DOC_MNGMNT_FILING_PAGING], { queryParams: { CabinetCode: this.Cabinet.CabinetCode, RackCode: this.rackWithListFilling.RackCode } });

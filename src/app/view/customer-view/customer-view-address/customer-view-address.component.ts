@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsService } from 'app/shared/services/adIns.service';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { FormBuilder } from '@angular/forms';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
@@ -30,13 +26,11 @@ export class CustomerViewAddressComponent implements OnInit {
   CustForm = this.fb.group({
     DdlAddress: ['']
   });
-  viewCustFinData: any;
   CustType: any;
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private adInsService: AdInsService,
     private fb: FormBuilder
   ) {
   }
@@ -47,9 +41,6 @@ export class CustomerViewAddressComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-    // this.viewCustFinData.viewInput =   "./assets/ucviewgeneric/viewCustFinData.json";
-    // this.viewCustFinData.viewEnvironment = environment.FoundationR3Url;
-    var custAddrObj = { "CustId": this.CustId };
     this.http.post(URLConstant.GetListCustAddrByCustIdForCustomerPersonalView, { Id: this.CustId }).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {

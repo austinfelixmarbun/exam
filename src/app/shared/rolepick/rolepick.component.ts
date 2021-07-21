@@ -9,6 +9,7 @@ import { CookieOptions, CookieService } from 'ngx-cookie';
 import { formatDate } from '@angular/common';
 import { CommonConstant } from '../constant/CommonConstant';
 import { NavigationConstant } from '../NavigationConstant';
+import { AdInsConstant } from '../AdInstConstant';
 
 @Component({
   selector: 'app-rolepick',
@@ -27,7 +28,6 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   }
 
   chooseRole(item) {
-    var roleUrl = environment.FoundationR3Url + URLConstant.LoginByRole;
     var roleObject = {
       UserName: this.data.user,
       Password: this.data.pwd,
@@ -40,8 +40,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
 
     };
     if (this.data.pwd == null) {
-      var updateRoleUrl = environment.FoundationR3Url + URLConstant.UpdateToken;
-      this.http.post(updateRoleUrl, roleObject, { withCredentials: true}).subscribe(
+      this.http.post(AdInsConstant.UpdateToken, roleObject, { withCredentials: true}).subscribe(
         (response) => {
           //Cookie sudah diambil dari BE (Di set manual dulu)
 
@@ -62,7 +61,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
 
     }
     else {
-      this.http.post(roleUrl, roleObject, { withCredentials: true}).subscribe(
+      this.http.post(AdInsConstant.LoginByRole, roleObject, { withCredentials: true}).subscribe(
         (response) => {
           //Cookie sudah diambil dari BE (Di set manual dulu)
 

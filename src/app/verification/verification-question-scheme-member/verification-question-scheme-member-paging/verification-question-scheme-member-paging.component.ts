@@ -19,7 +19,6 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
   VerfSchemeCode: string;
   VerfSchemeName: string;
   isActive: boolean = true;
-  foundationUrl: string = environment.FoundationR3Url;
   verfQuestionScheme: any;
   listQuestionGroupD: any;
   verfSchemeObj: any;

@@ -2,18 +2,18 @@
     "component": [
         {
             "type": "textbox",
-            "name": "RO.OFFICE_CODE",
-            "id": "OfficeCodeId",
+            "name": "CG.CENTER_GRP_CODE",
+            "id": "CenterGrpCodeId",
             "value": "",
-            "label": "Office Code",
+            "label": "Center Group Code",
             "placeholder": "Placeholder"
         },
         {
             "type": "textbox",
-            "name": "RO.OFFICE_NAME",
-            "id": "OfficeNameId",
+            "name": "CG.CENTER_GRP_NAME",
+            "id": "CenterGrpNameId",
             "value": "",
-            "label": "Office Name",
+            "label": "Center Group Name",
             "placeholder": "Placeholder"
         }         
     ],
@@ -24,14 +24,14 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "OFFICE CODE",
-            "name": "RO.OFFICE_CODE"
+            "label": "Center Group Code",
+            "name": "CG.CENTER_GRP_CODE"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "OFFICE NAME",
-            "name": "RO.OFFICE_NAME"
+            "label": "Center Group Name",
+            "name": "CG.CENTER_GRP_NAME"
         },        
         {
             "type": "label",
@@ -43,12 +43,12 @@
         {
             "type": "text",
             "position": "center",
-            "property": "OfficeCode"
+            "property": "CenterGrpCode"
         },
         {
             "type": "text",
-            "position": "center",
-            "property": "OfficeName"
+            "position": "left",
+            "property": "CenterGrpName"
         },        
         {
             "type": "action",
@@ -56,11 +56,11 @@
             "action": [
                 {
                     "type": "select",
-                    "property": "OfficeCode"
+                    "property": "CenterGrpCode"
                 }
             ]
         }
     ],
-    "propertyId": "RefOfficeId",
-    "propertyName": "OfficeCode"  
+    "propertyId": "CenterGrpId",
+    "propertyName": "CenterGrpName"
 }

@@ -20,8 +20,8 @@ export class CustomerPersonalAddressComponent implements OnInit {
   mode: string;
   AddrId: number;
   IdCust: number;
-  legalAddr: any;
-  residenceAddr: any;
+  legalAddr: CustAddrObj;
+  residenceAddr: CustAddrObj;
   custAddrObj: CustAddrObj;
   constructor(private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
@@ -48,21 +48,21 @@ export class CustomerPersonalAddressComponent implements OnInit {
     reqObj.Id = this.IdCust;
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
     this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
-      (response) => {
+      (response: CustAddrObj) => {
         this.legalAddr = response;
         reqObj.Code = CommonConstant.CustAddrTypeResidence;
         this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
-          (response) => {
+          (response: CustAddrObj) => {
             this.residenceAddr = response;
             if (this.legalAddr.Addr == null || this.residenceAddr.Addr == null) {
+              let warningMsg: string = ExceptionConstant.PLEASE_COMPLETE_LEGAL_AND_RESIDENCE_ADDRESS;
               if (this.legalAddr.Addr != null && this.residenceAddr.Addr == null) {
-                this.toastr.warningMessage(ExceptionConstant.PLEASE_COMPLETE_RESIDENCE_ADDRESS);
-              } else if (this.legalAddr.Addr == null && this.residenceAddr.Addr != null) {
-                this.toastr.warningMessage(ExceptionConstant.PLEASE_COMPLETE_LEGAL_ADDRESS);
-              } else {
-                this.toastr.warningMessage(ExceptionConstant.PLEASE_COMPLETE_LEGAL_AND_RESIDENCE_ADDRESS);
+                warningMsg = ExceptionConstant.PLEASE_COMPLETE_RESIDENCE_ADDRESS;
               }
-
+              if (this.legalAddr.Addr == null && this.residenceAddr.Addr != null) {
+                warningMsg = ExceptionConstant.PLEASE_COMPLETE_LEGAL_ADDRESS;
+              }
+              this.toastr.warningMessage(warningMsg);
             }
             if (this.legalAddr.Addr != null && this.residenceAddr.Addr != null) {
               this.outputTab.emit({ stepMode: "next" });

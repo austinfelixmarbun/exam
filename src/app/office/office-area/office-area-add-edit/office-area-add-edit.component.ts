@@ -23,7 +23,6 @@ export class OfficeAreaAddEditComponent implements OnInit {
   result: any;
   title: string = "Area-Add"
   mode: string = "add";
-  apiUrl: any;
   foundationUrl: string = environment.FoundationR3Url;
 
   readonly CancelLink: string = NavigationConstant.OFFICE_AREA;
@@ -44,11 +43,10 @@ export class OfficeAreaAddEditComponent implements OnInit {
   ngOnInit() {
     if (this.mode == "edit") {
       this.title = "Area-Edit";
-      this.apiUrl = this.foundationUrl + URLConstant.GetRefOfficeAreaByRefOfficeAreaId;
       this.refOfficeAreaObj = new RefOfficeAreaObj();
       this.refOfficeAreaObj.RefOfficeAreaId = this.RefOfficeAreaId;
       this.OfficeAreaForm.controls.AreaCode.disable();
-      this.http.post(this.apiUrl, {Id : this.RefOfficeAreaId}).subscribe(
+      this.http.post(URLConstant.GetRefOfficeAreaByRefOfficeAreaId, {Id : this.RefOfficeAreaId}).subscribe(
         (response) => {
           this.result = response;
           this.OfficeAreaForm.patchValue({

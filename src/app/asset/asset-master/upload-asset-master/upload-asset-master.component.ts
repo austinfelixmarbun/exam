@@ -22,18 +22,18 @@ export class UploadAssetMasterComponent implements OnInit {
       TemplateName: 'Upload_Asset_Master_Template', // Nama Excel Template File
       FileErrorName: "Upload_Asset_Master_ErrorDownload", // Nama Excel Download Error File
 
-      environmentUrl: environment.FoundationR3Url,
+      environmentUrl: environment.FoundationR3Url + "/v1",
       apiQryPaging: URLConstant.GetPagingObjectBySQL,
       pagingJson: "./assets/ucpaging/searchAssetMasterMonitoring.json",
       url: URLConstant.UploadFile,
       ddlEnvironments: [
         {
           name: "UMH.OFFICE_CODE",
-          environment: environment.FoundationR3Url
+          environment: environment.FoundationR3Url + "/v1"
         },
         {
           name: "UMH.UPLOAD_STATUS",
-          environment: environment.FoundationR3Url
+          environment: environment.FoundationR3Url + "/v1"
         }
       ]
     }

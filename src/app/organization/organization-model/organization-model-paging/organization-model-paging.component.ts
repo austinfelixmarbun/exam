@@ -53,7 +53,6 @@ export class OrganizationModelPagingComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOrgModel.json";
-    this.inputObj.enviromentUrl = environment.FoundationR3Url;
     this.inputObj.apiQryPaging = URLConstant.GetOrgMdlPaging;
     
     this.show = AdInsConstant.showData.split(',');

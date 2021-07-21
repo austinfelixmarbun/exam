@@ -89,8 +89,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     logout() {
-        var url = environment.FoundationR3Url + AdInsConstant.Logout;
-        this.http.post(url, "");
+        this.http.post(AdInsConstant.Logout, "");
         AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();
         this.router.navigate([NavigationConstant.PAGES_LOGIN]);
@@ -109,7 +108,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     changeModul(modul: string) {
         var token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
-        var url = environment.LosURL + URLConstant.LoginURLFrontEnd + "?token=" + token;
+        var url = environment.LosURL + NavigationConstant.PAGES_LOGIN + "?token=" + token;
         window.open(url, "_blank");
     }
 

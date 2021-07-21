@@ -103,12 +103,12 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     IdExpiredDt: [''],
-    MrMaritalStatCode: [''],
+    MrMaritalStatCode: ['', [Validators.required]],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     CustModel: [''],
-    IsVip: [true],
-    IsAffiliateWithMf: [true],
-    VipNotes: ['', [Validators.required]],
+    IsVip: [false],
+    IsAffiliateWithMf: [false],
+    VipNotes: [''],
 
     IsSupplier: [false],
     SupplCode: [''],
@@ -129,7 +129,8 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
   ngOnInit() {
     this.bindLookupSupplier();
     this.customPattern = new Array<CustomPatternObj>();
-    this.VipNotesRequired = true;
+    this.VipNotesRequired = false;
+    this.CustomerPersonalForm.controls.VipNotes.disable();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -152,9 +153,6 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObj).subscribe(
       (response) => {
         this.tempGender = response[CommonConstant.ReturnObj];
-        this.CustomerPersonalForm.patchValue({
-          Gender: this.tempGender[0].Key
-        });
       }
     );
     var refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
@@ -198,9 +196,6 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.http.post(URLConstant.GetListActiveRefMaster, tempReq).toPromise().then(
       (response) => {
         this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
-        this.CustomerPersonalForm.patchValue({
-          MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
-        });
       }
     );
 
@@ -388,8 +383,6 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
     this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.isReady = false;
     this.inputLookupObj.urlJson = "./assets/lookup/lookupSupplierPersonal.json";
-    this.inputLookupObj.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupplierPersonal.json";
     this.inputLookupObj.genericJson = "./assets/lookup/lookupSupplierPersonal.json";
     this.inputLookupObj.isReady = true;
