@@ -248,7 +248,7 @@ export class URLConstant {
     public static GetRefMasterByRefMasterTypeCodeAndMasterCode = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterByRefMasterTypeCodeAndMasterCode";
     public static GetKvpRefMasterByRefMasterTypeCodeAndMasterCode = environment.FoundationR3Url + "/v1" + "/RefMaster/GetKvpRefMasterByRefMasterTypeCodeAndMasterCode";
     public static GetRefMasterByRefMasterTypeCode = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterByRefMasterTypeCode";
-    public static GetListActiveRefMasterDDL = environment.FoundationR3Url + "/v1" + "/RefMaster/GetListKeyValueActiveByCode";
+    public static GetListActiveRefMasterDDL = "/RefMaster/GetListKeyValueActiveByCode";
 
     //REF COUNTRY
     public static GetListRefCountry = environment.FoundationR3Url + "/v1" + "/RefCountry/GetListRefCountry";
@@ -805,7 +805,7 @@ export class URLConstant {
     public static GetCustPersonalEmergencyContactByCustId = environment.FoundationR3Url + "/v1" + "/CustPersonalContactPerson/GetCustPersonalEmergencyContactByCustId";
     public static AddCustPersonalFamily = environment.FoundationR3Url + "/v1" + "/CustPersonalFamily/AddCustPersonalFamily";
     public static EditCustPersonalFamily = environment.FoundationR3Url + "/v1" + "/CustPersonalFamily/EditCustPersonalFamily";
-    public static DeleteCustPersonalFamily = "/CustPersonalFamily/DeleteCustPersonalFamily";
+    public static DeleteCustPersonalFamily = environment.FoundationR3Url + "/v1" + "/CustPersonalFamily/DeleteCustPersonalFamily";
     public static GetCustPersonalFamilyByCustPersonalFamilyId = environment.FoundationR3Url + "/v1" + "/CustPersonalFamily/GetCustPersonalFamilyByCustPersonalFamilyId";
     public static GetMainCustAndListCustPersonalFamilyByCustId = environment.FoundationR3Url + "/v1" + "/CustPersonalFamily/GetMainCustAndListCustPersonalFamilyByCustId";
     public static GetListCustPersonalEmergencyContactByCustId = environment.FoundationR3Url + "/v1" + "/CustPersonalContactPerson/GetListCustPersonalEmergencyContactByCustId";
