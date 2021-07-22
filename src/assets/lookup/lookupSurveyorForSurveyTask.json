@@ -15,7 +15,7 @@
             "value": "",
             "label": "Employee No",
             "placeholder": "Placeholder"
-        }         
+        }
     ],
     "querystring": {
         "name": "lookupSurveyorForSurveyTask"
@@ -30,15 +30,9 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "OFFICE ID",
-            "name": "RO.REF_OFFICE_ID"
-        },
-        {
-            "type": "sort",
-            "position": "center",
             "label": "EMPLOYEE NO",
             "name": "RE.EMP_NO"
-        },        
+        },
         {
             "type": "label",
             "position": "center",
@@ -54,13 +48,8 @@
         {
             "type": "text",
             "position": "center",
-            "property": "RefOfficeId"
-        },
-        {
-            "type": "text",
-            "position": "center",
             "property": "EmployeeNo"
-        },        
+        },
         {
             "type": "action",
             "position": "center",
