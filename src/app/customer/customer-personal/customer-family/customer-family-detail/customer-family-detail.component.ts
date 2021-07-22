@@ -197,7 +197,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
       var criteriaCustObj = new CriteriaObj();
       criteriaCustObj.DataType = "text";
       criteriaCustObj.restriction = AdInsConstant.RestrictionNotIn;
-      criteriaCustObj.propName = 'CUST_NO';
+      criteriaCustObj.propName = 'C.CUST_NO';
       criteriaCustObj.listValue = this.listCustIdToExclude;
       criteriaListCust.push(criteriaCustObj);
     }
@@ -205,7 +205,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
       var criteriaCustObj = new CriteriaObj();
       criteriaCustObj.DataType = "text";
       criteriaCustObj.restriction = AdInsConstant.RestrictionNeq;
-      criteriaCustObj.propName = 'CUST_ID';
+      criteriaCustObj.propName = 'C.CUST_ID';
       criteriaCustObj.value = this.custIdInput.toString();
       criteriaListCust.push(criteriaCustObj);
     }
@@ -214,7 +214,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     this.criteriaExistingList = new Array();
     this.criteriaExistingObj = new CriteriaObj();
     this.criteriaExistingObj.restriction = AdInsConstant.RestrictionEq;
-    this.criteriaExistingObj.propName = 'MR_CUST_TYPE_CODE';
+    this.criteriaExistingObj.propName = 'C.MR_CUST_TYPE_CODE';
     this.criteriaExistingObj.value = CommonConstant.CustomerPersonal;
     this.criteriaExistingList.push(this.criteriaExistingObj);
     if (this.existingCustomerLookUpObj.addCritInput) {
