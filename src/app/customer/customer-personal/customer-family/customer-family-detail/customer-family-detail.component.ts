@@ -112,7 +112,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     MrMaritalStatCode: ['', [Validators.required]],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-    Email1: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    Email1: ['', [Validators.pattern(CommonConstant.regexEmail)]],
     RowVersion: [''],
     RowVersionCust: [''],
     RowVersionCustPersonal: ['']
@@ -153,7 +153,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
       MrMaritalStatCode: ['',[Validators.required]],
       MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
       MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-      Email1: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+      Email1: ['', [Validators.pattern(CommonConstant.regexEmail)]],
       RowVersion: [''],
       RowVersionCust: [''],
       RowVersionCustPersonal: ['']
@@ -197,7 +197,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
       var criteriaCustObj = new CriteriaObj();
       criteriaCustObj.DataType = "text";
       criteriaCustObj.restriction = AdInsConstant.RestrictionNotIn;
-      criteriaCustObj.propName = 'CUST_NO';
+      criteriaCustObj.propName = 'C.CUST_NO';
       criteriaCustObj.listValue = this.listCustIdToExclude;
       criteriaListCust.push(criteriaCustObj);
     }
@@ -205,7 +205,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
       var criteriaCustObj = new CriteriaObj();
       criteriaCustObj.DataType = "text";
       criteriaCustObj.restriction = AdInsConstant.RestrictionNeq;
-      criteriaCustObj.propName = 'CUST_ID';
+      criteriaCustObj.propName = 'C.CUST_ID';
       criteriaCustObj.value = this.custIdInput.toString();
       criteriaListCust.push(criteriaCustObj);
     }
@@ -214,7 +214,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     this.criteriaExistingList = new Array();
     this.criteriaExistingObj = new CriteriaObj();
     this.criteriaExistingObj.restriction = AdInsConstant.RestrictionEq;
-    this.criteriaExistingObj.propName = 'MR_CUST_TYPE_CODE';
+    this.criteriaExistingObj.propName = 'C.MR_CUST_TYPE_CODE';
     this.criteriaExistingObj.value = CommonConstant.CustomerPersonal;
     this.criteriaExistingList.push(this.criteriaExistingObj);
     if (this.existingCustomerLookUpObj.addCritInput) {
@@ -248,6 +248,18 @@ export class CustomerFamilyDetailComponent implements OnInit {
           console.log("CustAddrData: " + JSON.stringify(custAddrData));
           this.existingCustomerLookUpObj.nameSelect = custData.CustName;
           this.disableInput();
+          
+          this.inputFieldObj.inputLookupObj.nameSelect = custAddrData.Zipcode;
+          this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: custAddrData.Zipcode };
+          this.UcAddressObj.AreaCode1 = custAddrData.AreaCode1;
+          this.UcAddressObj.AreaCode2 = custAddrData.AreaCode2;
+          this.UcAddressObj.AreaCode3 = custAddrData.AreaCode3;
+          this.UcAddressObj.AreaCode4 = custAddrData.AreaCode4;
+          this.UcAddressObj.Addr = custAddrData.Addr;
+          this.UcAddressObj.City = custAddrData.City;
+          this.inputAddressObj.default = this.UcAddressObj;
+          this.inputAddressObj.inputField = this.inputFieldObj;
+
           this.CustomerFamilyForm.patchValue({
             CustPersonalFamilyId: this.custPersonalFamilyObj["CustPersonalFamilyId"],
             CustId: this.custPersonalFamilyObj["CustId"],
@@ -288,18 +300,6 @@ export class CustomerFamilyDetailComponent implements OnInit {
           // this.CustomerFamilyForm.controls.MotherMaidenName.disable();
           // this.CustomerFamilyForm.controls.MobilePhnNo1.disable();
           // this.CustomerFamilyForm.controls.Email1.disable();
-
-
-          this.inputFieldObj.inputLookupObj.nameSelect = custAddrData.Zipcode;
-          this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: custAddrData.Zipcode };
-          this.UcAddressObj.AreaCode1 = custAddrData.AreaCode1;
-          this.UcAddressObj.AreaCode2 = custAddrData.AreaCode2;
-          this.UcAddressObj.AreaCode3 = custAddrData.AreaCode3;
-          this.UcAddressObj.AreaCode4 = custAddrData.AreaCode4;
-          this.UcAddressObj.Addr = custAddrData.Addr;
-          this.UcAddressObj.City = custAddrData.City;
-          this.inputAddressObj.default = this.UcAddressObj;
-          this.inputAddressObj.inputField = this.inputFieldObj;
         }
       ).catch(
         (error) => {
