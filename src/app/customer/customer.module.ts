@@ -121,6 +121,7 @@ import { CustBankAccComponent } from './cust-bank-acc/cust-bank-acc.component';
 import { CustomerViewCustomerAssetComponent } from './customer-view/customer-view-customer-asset/customer-view-customer-asset.component';
 import { NewCustomerSharingModule } from './sharing-component/new-cust-sharing.model';
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
+import { AdInsModule } from 'app/components/adins-module/adins.module';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -138,6 +139,7 @@ export const customCurrencyMaskConfig = {
  @NgModule({
   exports: [],
   imports: [
+    AdInsModule,
     CustomerRoutingModule,
     CommonModule,
     ReactiveFormsModule,

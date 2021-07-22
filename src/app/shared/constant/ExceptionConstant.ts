@@ -47,5 +47,5 @@ export class ExceptionConstant {
 
     public static PLEASE_FILL_BIZ_ADDRESS = "Please Copy / Fill Business Address First";
     public static PLEASE_FILL_RESIDENCE_ADDRESS = "Please Copy / Fill Residence Address First";
-
+    public static CURR_DT_VALIDATION = "Currency Date can not > Business Date or < Max Back Date"
 }

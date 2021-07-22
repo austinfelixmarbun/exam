@@ -320,6 +320,7 @@ export class URLConstant {
     public static GetRefCurrById = environment.FoundationR3Url + "/v1" + "/RefCurr/GetRefCurrById";
     public static GetRefCurrByCode = environment.FoundationR3Url + "/v1" + "/RefCurr/GetRefCurrByCode";
     public static GetListKvpActiveRefCurr = environment.FoundationR3Url + "/v1" + "/RefCurr/GetListKvpActiveRefCurr";
+    public static AddExchangeRate = environment.FoundationR3Url + "/v1" + "/RefCurr/AddExchangeRate";
 
     //REF ECONOMIC SECTOR
     public static AddRefEconomicSector = environment.FoundationR3Url + "/v1" + "/RefEconomicSector/AddRefEconomicSector";

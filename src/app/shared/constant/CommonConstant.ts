@@ -187,7 +187,7 @@ export class CommonConstant {
     public static CustAddrTypeResidence = "RESIDENCE";
     public static CustAddrTypeEmergency = "EMERGENCY";
     public static CustAddrTypeJob = "JOB";
-    public static CustAddrTypeOthBiz = "OTH_BIZ";
+    public static CustAddrTypeOthBiz = "OTHERBIZ";
     public static CustAddrTypePreJob = "PREV_JOB";
     public static CustAddrTypeBiz = "BIZ";
 

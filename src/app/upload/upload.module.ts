@@ -17,8 +17,10 @@ import { UcviewgenericModule } from "@adins/ucviewgeneric";
 import { UcuploadModule } from '@adins/ucupload';
 import { UploadNegativeAssetComponent } from './upload-negative-asset/upload-negative-asset.component';
 import { UclookupgenericModule } from "@adins/uclookupgeneric";
+import { AdInsModule } from "app/components/adins-module/adins.module";
 @NgModule({
     imports: [
+        AdInsModule,
         CommonModule,
         FormsModule,
         HttpModule,
