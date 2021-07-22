@@ -112,7 +112,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     MrMaritalStatCode: ['', [Validators.required]],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-    Email1: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    Email1: ['', [Validators.pattern(CommonConstant.regexEmail)]],
     RowVersion: [''],
     RowVersionCust: [''],
     RowVersionCustPersonal: ['']
@@ -153,7 +153,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
       MrMaritalStatCode: ['',[Validators.required]],
       MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
       MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-      Email1: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+      Email1: ['', [Validators.pattern(CommonConstant.regexEmail)]],
       RowVersion: [''],
       RowVersionCust: [''],
       RowVersionCustPersonal: ['']
