@@ -74,6 +74,7 @@ import { UcapprovalcreateModule } from '@adins/ucapprovalcreate';
 import { UcapprovalR3Module } from '@adins/ucapproval-r3';
 import { UcapprovalHistoryModule } from "@adins/ucapproval-history";
 import { UcapprovalgeneralinfoModule } from "@adins/ucapprovalgeneralinfo";
+import { AdInsModule } from 'app/components/adins-module/adins.module';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -85,11 +86,12 @@ export const customCurrencyMaskConfig = {
   suffix: "",     
   thousands: ",",     
   nullable: false,
-  inputMode: CurrencyMaskInputMode.FINANCIAL
+  inputMode: CurrencyMaskInputMode.NATURAL
 };
 
 @NgModule({
   imports: [
+    AdInsModule,
     VendorRoutingModule,
     CommonModule,
     FormsModule,
