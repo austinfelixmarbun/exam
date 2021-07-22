@@ -248,6 +248,18 @@ export class CustomerFamilyDetailComponent implements OnInit {
           console.log("CustAddrData: " + JSON.stringify(custAddrData));
           this.existingCustomerLookUpObj.nameSelect = custData.CustName;
           this.disableInput();
+          
+          this.inputFieldObj.inputLookupObj.nameSelect = custAddrData.Zipcode;
+          this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: custAddrData.Zipcode };
+          this.UcAddressObj.AreaCode1 = custAddrData.AreaCode1;
+          this.UcAddressObj.AreaCode2 = custAddrData.AreaCode2;
+          this.UcAddressObj.AreaCode3 = custAddrData.AreaCode3;
+          this.UcAddressObj.AreaCode4 = custAddrData.AreaCode4;
+          this.UcAddressObj.Addr = custAddrData.Addr;
+          this.UcAddressObj.City = custAddrData.City;
+          this.inputAddressObj.default = this.UcAddressObj;
+          this.inputAddressObj.inputField = this.inputFieldObj;
+
           this.CustomerFamilyForm.patchValue({
             CustPersonalFamilyId: this.custPersonalFamilyObj["CustPersonalFamilyId"],
             CustId: this.custPersonalFamilyObj["CustId"],
@@ -288,18 +300,6 @@ export class CustomerFamilyDetailComponent implements OnInit {
           // this.CustomerFamilyForm.controls.MotherMaidenName.disable();
           // this.CustomerFamilyForm.controls.MobilePhnNo1.disable();
           // this.CustomerFamilyForm.controls.Email1.disable();
-
-
-          this.inputFieldObj.inputLookupObj.nameSelect = custAddrData.Zipcode;
-          this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: custAddrData.Zipcode };
-          this.UcAddressObj.AreaCode1 = custAddrData.AreaCode1;
-          this.UcAddressObj.AreaCode2 = custAddrData.AreaCode2;
-          this.UcAddressObj.AreaCode3 = custAddrData.AreaCode3;
-          this.UcAddressObj.AreaCode4 = custAddrData.AreaCode4;
-          this.UcAddressObj.Addr = custAddrData.Addr;
-          this.UcAddressObj.City = custAddrData.City;
-          this.inputAddressObj.default = this.UcAddressObj;
-          this.inputAddressObj.inputField = this.inputFieldObj;
         }
       ).catch(
         (error) => {
