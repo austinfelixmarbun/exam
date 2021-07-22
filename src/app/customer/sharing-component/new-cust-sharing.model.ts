@@ -22,6 +22,8 @@ import { NewCustPublicComponent } from './new-cust-component/new-cust-public/new
 import { ShareholderFormComponent } from './new-cust-component/component/shareholder-form/shareholder-form.component';
 import { CustAttrFormComponent } from './new-cust-component/component/cust-attr-form/cust-attr-form.component';
 import { FamilyFormComponent } from './new-cust-component/component/family-form/family-form.component';
+import { CustPersonalJobDataComponent } from './cust-personal-job-data/cust-personal-job-data.component';
+import { JobAddrSectionComponent } from './cust-personal-job-data/job-addr-section/job-addr-section.component';
 
 export const customCurrencyMaskConfig = {
     align: "right",
@@ -50,6 +52,8 @@ export const customCurrencyMaskConfig = {
         ShareholderFormComponent,
         CustAttrFormComponent,
         FamilyFormComponent,
+        CustPersonalJobDataComponent,
+        JobAddrSectionComponent
     ],
     imports: [
         CommonModule,
@@ -77,6 +81,8 @@ export const customCurrencyMaskConfig = {
         ShareholderFormComponent,
         CustAttrFormComponent,
         FamilyFormComponent,
+        CustPersonalJobDataComponent,
+        JobAddrSectionComponent,
     ],
 
     providers: [

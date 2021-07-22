@@ -127,7 +127,8 @@
               </app-cust-group-tab>
             </div>
             <div id="job-data-tab" class="content" role="tabpanel" aria-labelledby="job-data-tab-trigger">
-              <app-customer-personal-job-data (outputTab)="getValue($event)" *ngIf="CustStepIndex == 6"> </app-customer-personal-job-data>
+              <!-- <app-customer-personal-job-data (outputTab)="getValue($event)" *ngIf="CustStepIndex == 6"> </app-customer-personal-job-data> -->
+              <app-cust-personal-job-data [CustId]="IdCust" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 6"></app-cust-personal-job-data>
             </div>
             <div id="financial-tab" class="content" role="tabpanel" aria-labelledby="financial-tab-trigger">
               <app-cust-fin-data-tab [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 7">

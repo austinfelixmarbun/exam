@@ -1,0 +1,134 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-body">
+        <form class="form form-horizontal" [formGroup]="CustomerJobForm"
+          (ngSubmit)="CustomerJobForm.valid && SaveForm() " #enjiForm="ngForm">          
+          <div class="form-group row">
+            <label class="col-md-2 adInsLabel" translate>Customer Model</label>
+            <div class="col-md-4">
+              <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustModel]"
+                [parentForm]="CustomerJobForm" [enjiForm]="enjiForm" [identifier]="'MrCustModelCode'" (callback)="changeCustModel()"></lib-ucdropdownlist>
+            </div>
+          </div>
+          <lib-ucSubsection [id]="'JobDataInfoId'" [title]="'Job Data'" [panel]="'JobDataInfo'">
+          </lib-ucSubsection>
+          <div class="form-body" id="JobDataInfo">            
+            <div class="form-group row">
+              <div class="col-md-6">
+                
+                <div class="form-group row">
+                  <label class="col-md-4 adins-required-label" translate> Profession Name </label>
+                  <div class="col-md-8">
+                    <lib-uclookupgeneric [lookupInput]="professionLookUpObj" [parentForm]="CustomerJobForm"
+                      [enjiForm]="enjiForm" [identifier]="'JobProfession'" (lookup)=getLookUpProfession($event)>
+                    </lib-uclookupgeneric>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-4 adInsLabel" translate>Is Wellknown Company</label>
+                  <div class="col-md-8">
+                    <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsWellknownCoy" />
+                  </div>
+                </div>
+
+                <div class="form-group row adins-required">
+                  <label class="col-md-4 adInsLabel" translate>Company Name </label>
+                  <div class="col-md-8" *ngIf="CustomerJobForm.controls.IsWellknownCoy.value && companyLookupObj.isReady">
+                    <lib-uclookupgeneric [lookupInput]="companyLookupObj" [parentForm]="CustomerJobForm"
+                      [enjiForm]="enjiForm" [identifier]="'CompanyName'" (lookup)=getLookUpCompanyName($event)>
+                    </lib-uclookupgeneric>
+                  </div>
+                  <div class="col-md-8" *ngIf="!CustomerJobForm.controls.IsWellknownCoy.value">
+                    <input class="form-control adInsInput" formControlName="MrWellknownCoyCode"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerJobForm.controls.MrWellknownCoyCode.invalid}">
+                    <lib-uc-show-errors [control]="CustomerJobForm.controls.MrWellknownCoyCode" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-4 adins-required-label" translate>Job Position </label>
+                  <div class="col-md-8" *ngIf="jobPositionLookupObj?.isReady">
+                    <lib-uclookupgeneric [lookupInput]="jobPositionLookupObj" [parentForm]="CustomerJobForm"
+                      [enjiForm]="enjiForm" [identifier]="'JobPosition'" (lookup)=getLookUpJobPosition($event)>
+                    </lib-uclookupgeneric>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-4 adInsLabel" translate>Job Title Name</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control adInsInput" formControlName="JobTitleName"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerJobForm.controls.JobTitleName.invalid}">
+                    <lib-uc-show-errors [control]="CustomerJobForm.controls.JobTitleName" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-4 adInsLabel" translate>Job Status </label>
+                  <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeJobStat]?.isReady">
+                    <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeJobStat]"
+                      [parentForm]="CustomerJobForm" [enjiForm]="enjiForm" [identifier]="'MrJobStatCode'" (callback)="changeCustModel()"></lib-ucdropdownlist>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-md-6">
+
+                <div class="form-group row">
+                  <label class="col-md-4 adins-required-label" translate> Industry Type </label>
+                  <div class="col-md-8">
+                    <lib-uclookupgeneric [lookupInput]="industryLookUpObj" [parentForm]="CustomerJobForm"
+                      [enjiForm]="enjiForm" [identifier]="'IndustryType'" (lookup)=getLookUpIndustryType($event)>
+                    </lib-uclookupgeneric>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-4 adInsLabel" translate>Is Internal Employee</label>
+                  <div class="col-md-8">
+                    <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsMfEmp" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-4 adInsLabel" translate>Employee Establishment Date</label>
+                  <div class="col-md-8">
+                    <input type="date" class="form-control adInsInput" formControlName="EmploymentEstablishmentDt"
+                      [max]="businessDtMin | date: 'yyyy-MM-dd'"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerJobForm.controls.EmploymentEstablishmentDt.invalid}">
+                    <lib-uc-show-errors [control]="CustomerJobForm.controls.EmploymentEstablishmentDt" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-md-4 adInsLabel" translate>Establishment Date</label>
+                  <div class="col-md-8">
+                    <input type="date" class="form-control adInsInput" formControlName="EstablishmentDt"
+                      [max]="businessDtMin | date: 'yyyy-MM-dd'"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerJobForm.controls.EstablishmentDt.invalid}">
+                    <lib-uc-show-errors [control]="CustomerJobForm.controls.EstablishmentDt" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          <div class="form-actions right">
+            <!-- <button type="button" class="btn btn-raised btn-warning mr-1"  (click)="getFormValidationErrors()" translate>
+              <i class="far fa-window-close"></i> test
+            </button> -->
+            <button type="submit" class="btn btn-raised btn-primary" translate>
+              <i class="far fa-check-square"></i> Save
+            </button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
