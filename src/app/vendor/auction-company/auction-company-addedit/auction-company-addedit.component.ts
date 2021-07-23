@@ -82,7 +82,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
     MrJobPositionCode  :  ['', [Validators.required]],
     Phone1 : ['', [Validators.required,Validators.pattern("^[0-9]+$")]],    
     Phone2 : [''],    
-    Email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],    
+    Email: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]],    
     MrTaxCalcMethodCode : ['', [Validators.required]],
     IsVat: [true, Validators.required],
     IsNpwpExist : [false],

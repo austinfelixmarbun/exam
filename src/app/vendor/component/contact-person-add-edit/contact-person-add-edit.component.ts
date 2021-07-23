@@ -30,7 +30,7 @@ export class ContactPersonAddEditComponent implements OnInit {
     JobPosition: ['', Validators.required],
     Phn1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     Phn2: ['', Validators.pattern("^[0-9]+$")],
-    Email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    Email: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]],
     JoinDt: ['', Validators.required],
     IsOwner: [false],
     Addr: [''],

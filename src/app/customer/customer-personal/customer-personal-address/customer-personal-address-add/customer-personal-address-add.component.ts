@@ -4,7 +4,7 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -60,6 +60,12 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   CustModelDesc: string;
   MrIdTypeCodeDesc: string;
   MotherMaidenName: string;
+
+  listAddrRequiredOwnership: Array<string> = [
+    CommonConstant.CustAddrTypeLegal,
+    CommonConstant.CustAddrTypeResidence,
+    CommonConstant.CustAddrTypeOthBiz
+  ]
 
   CustDataPersonalForm = this.fb.group({
     Notes: [''],
@@ -146,22 +152,35 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           if (this.getCustomerAddr.MrCustAddrTypeCode == 'RESIDENCE' || this.getCustomerAddr.MrCustAddrTypeCode == 'LEGAL') {
             this.inputAddressObj.showStayLength = true;
           }
+          this.setOwnership(this.CustDataPersonalForm.controls.MrCustAddrTypeCode.value);
         });
     }
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
     this.inputAddressObj.showOwnership = true;
-    this.inputAddressObj.requiredOwnership = true;
+    this.setOwnership(this.CustDataPersonalForm.controls.MrCustAddrTypeCode.value);
+  }
+
+  setOwnership(MrCustAddrTypeCode: string) {
+    if(this.listAddrRequiredOwnership.find(addrType => addrType == MrCustAddrTypeCode)){
+      this.inputAddressObj.requiredOwnership = true;
+      return
+    }
+    this.inputAddressObj.requiredOwnership = false;
   }
 
   checkCustAddrType() {
     if (this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value == 'RESIDENCE' || this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value == 'LEGAL') {
       this.inputAddressObj.showStayLength = true;
+      this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.setValidators([Validators.required]); //solusi sementara sampai perbaikan pada lib-ucaddress
     }
     else {
       this.inputAddressObj.showStayLength = false;
+      this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.clearValidators(); //solusi sementara sampai perbaikan pada lib-ucaddress
     }
+    this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.updateValueAndValidity(); //solusi sementara sampai perbaikan pada lib-ucaddress
+    this.setOwnership(this.CustDataPersonalForm.controls.MrCustAddrTypeCode.value);
   }
 
   copyAddress() {

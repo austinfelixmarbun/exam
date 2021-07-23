@@ -33,6 +33,7 @@ import { ReviewUploadNegativeAssetDetailComponent } from './negative-asset/revie
 import { UcaddtotempModule } from "@adins/ucaddtotemp";
 import { AssetAttributeComponent } from './asset-attribute/asset-attribute.component';
 import { AssetAttributeDetailComponent } from './asset-attribute/asset-attribute-detail/asset-attribute-detail.component';
+import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -43,7 +44,8 @@ export const customCurrencyMaskConfig = {
   prefix: "",     
   suffix: "",     
   thousands: ",",     
-  nullable: false 
+  nullable: false,
+  inputMode: CurrencyMaskInputMode.NATURAL
 };
 
 @NgModule({
@@ -52,7 +54,8 @@ export const customCurrencyMaskConfig = {
     AssetRoutingComponent,
     AdInsModule,
     SharingComponentModule,
-    UcaddtotempModule
+    UcaddtotempModule,    
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
   ],
   declarations: [
     AssetTypePagingComponent,

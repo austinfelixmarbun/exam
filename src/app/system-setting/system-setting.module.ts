@@ -37,10 +37,12 @@ import { AttributeComponent } from './attribute/attribute.component';
 import { AttributeDetailComponent } from './attribute/attribute-detail/attribute-detail.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
+import { AdInsModule } from 'app/components/adins-module/adins.module';
 
 
 @NgModule({
   imports: [
+    AdInsModule,
     SystemSettingRoutingModule,
     CommonModule,
     FormsModule,

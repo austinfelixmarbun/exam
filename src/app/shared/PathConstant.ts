@@ -120,6 +120,9 @@ export class PathConstant {
     public static CS_CURRENCY = "Currency";
     public static CS_CURRENCY_PAGING = PathConstant.CS_CURRENCY + "/" + PathConstant.PAGING;
     public static CS_CURRENCY_ADD = PathConstant.CS_CURRENCY + "/" + PathConstant.ADD;
+    public static CS_EXCHANGE_RATE = "ExchangeRate";
+    public static CS_EXCHANGE_RATE_PAGING = PathConstant.CS_EXCHANGE_RATE + "/" + PathConstant.PAGING;
+    public static CS_EXCHANGE_RATE_DETAIL = PathConstant.CS_EXCHANGE_RATE + "/" + PathConstant.DETAIL;
     public static CS_WORKING_HOUR = "WorkingHour";
     public static CS_WORKING_HOUR_ADD = PathConstant.CS_WORKING_HOUR + "/" + PathConstant.ADD;
     public static CS_WORKING_HOUR_DETAIL = PathConstant.CS_WORKING_HOUR + "/" + PathConstant.DETAIL;

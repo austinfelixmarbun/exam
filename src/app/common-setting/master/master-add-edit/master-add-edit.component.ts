@@ -2,9 +2,7 @@
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { NgForm, Validators, FormBuilder } from '@angular/forms';
-import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { Validators, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -21,8 +19,6 @@ import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.mo
   providers: [NGXToastrService]
 })
 export class MasterAddEditComponent implements OnInit {
-
-  
   refMasterObj: RefMasterObj = new RefMasterObj();
   refMasterTypeObj: any;
   type: string = 'add';
@@ -43,15 +39,13 @@ export class MasterAddEditComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.CS_MASTER;
-  constructor(
-    private router: Router,
+  constructor(private router: Router,
     private route: ActivatedRoute,
     private location: Location,
     private spinner: NgxSpinnerService,
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder
-  ) {
+    private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
         this.type = params['mode'];
@@ -62,9 +56,8 @@ export class MasterAddEditComponent implements OnInit {
     });
   }
 
-
   ngOnInit() {
-    this.dropdownListObj.apiPath = URLConstant.GetListActiveRefMasterType;
+    this.dropdownListObj.apiPath = URLConstant.GetListActiveRefMasterTypeForDdl;
     this.dropdownListObj.requestObj = {};
     this.GetListMasterType();
     if (this.type == 'edit') {
