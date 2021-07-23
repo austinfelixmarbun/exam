@@ -3,7 +3,7 @@
   "component": [
     {
       "type": "textbox",
-      "name": "A.PROV_DISTRICT_NAME",
+      "name": "PROV_DISTRICT_NAME",
       "id": "provDistrictNameId",
       "value": "",
       "label": "District Name",
@@ -11,7 +11,7 @@
     },
     {
       "type": "textbox",
-      "name": "A.DISTRICT_REG_RPT_CODE",
+      "name": "DISTRICT_REG_RPT_CODE",
       "id": "districtRegRptCodeId",
       "value": "",
       "label": "District Sandi BI",
@@ -23,13 +23,13 @@
       "type": "sort",
       "position": "center",
       "label": "District Name",
-      "name": "A.PROV_DISTRICT_NAME"
+      "name": "PROV_DISTRICT_NAME"
     },
     {
       "type": "sort",
       "position": "center",
       "label": "District Sandi BI",
-      "name": "A.DISTRICT_REG_RPT_CODE"
+      "name": "DISTRICT_REG_RPT_CODE"
     },
     {
       "type": "label",
