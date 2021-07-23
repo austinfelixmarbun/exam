@@ -23,6 +23,7 @@ export class FilingAddEditComponent implements OnInit {
   title: string = "ADD FILING";
   filing: FilingObj = new FilingObj();
   rackWithListFilling: RackWithListFilingObj = new RackWithListFilingObj();
+  readonly ViewLink: string = NavigationConstant.DOC_MNGMNT_VIEW_CABINET;
   Rack: RackObj = new RackObj();
   RackCode: string;
 
