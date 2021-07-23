@@ -616,7 +616,7 @@ export class URLConstant {
 
     // VERF QUESTION GRP D
     public static AddListVerfQuestionGrpD = environment.FoundationR3Url + "/v1" + "/VerfQuestionGrpD/AddListVerfQuestionGrpD";
-    public static DeleteVerfQuestionGroupDById = "/VerfQuestionGrpD/DeleteVerfQuestionGroupDById";
+    public static DeleteVerfQuestionGroupDById = environment.FoundationR3Url + "/v1" + "/VerfQuestionGrpD/DeleteVerfQuestionGroupDById";
     public static EditVerfQuestionGrpD = environment.FoundationR3Url + "/v1" + "/VerfQuestionGrpD/EditVerfQuestionGrpD";
     public static GetActiveVerfQuestionGrpDsByGrpHId = environment.FoundationR3Url + "/v1" + "/VerfQuestionGrpD/GetActiveVerfQuestionGrpDsByGrpHId";
     public static GetVerfQuestionGrpDById = environment.FoundationR3Url + "/v1" + "/VerfQuestionGrpD/GetVerfQuestionGrpDById";
