@@ -890,9 +890,11 @@ export class URLConstant {
     public static UpdateMasterCustEmergency = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustEmergency";
     public static UpdateMasterCustJobData = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustJobData";
     public static UpdateMasterCustFinData = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustFinData";
+    public static UpdateMasterCustFinDataV2 = environment.FoundationR3Url + "/v2" + "/UpdateMasterCust/UpdateMasterCustFinData";
     public static UpdateMasterCustCompanyDetail = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustCompanyDetail";
     public static UpdateMasterCustCompanyShareholder = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustCompanyShareholder";
     public static UpdateMasterCustCompanyLegalDoc = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustCompanyLegalDoc";
+    public static UpdateMasterCustCompanyLegalDocv2 = environment.FoundationR3Url + "/v2" + "/UpdateMasterCust/UpdateMasterCustCompanyLegalDoc";
     public static UpdateMasterCustCompanyContactInfo = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustCompanyContactInfo";
     public static UpdateMasterCustCompanyFinData = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustCompanyFinData";
 
