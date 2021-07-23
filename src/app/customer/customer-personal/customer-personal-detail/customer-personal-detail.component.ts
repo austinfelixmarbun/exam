@@ -65,7 +65,9 @@ export class CustomerPersonalDetailComponent implements OnInit {
     MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
     Email1: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]],
-    Email2: ['', Validators.pattern(CommonConstant.regexEmail)]
+    Email2: ['', Validators.pattern(CommonConstant.regexEmail)],
+    IsVip: [false],
+    VipNotes: ['']
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
