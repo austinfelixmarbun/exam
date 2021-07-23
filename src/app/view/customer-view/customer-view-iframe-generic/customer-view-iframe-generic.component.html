@@ -1,0 +1,9 @@
+<div class="px-3" *ngIf="IsReady">
+	<lib-ucSubsection [id]="'App List'" [title]="Title" [panel]="'AppListId'">
+	</lib-ucSubsection>
+	<div id="AppListId">
+		<div class="col-md-12">
+			<iframe [src]="urlLink | safe" style="width: inherit; height: 570px;" title="Customer Application List"></iframe>
+		</div>
+	</div>
+</div>
