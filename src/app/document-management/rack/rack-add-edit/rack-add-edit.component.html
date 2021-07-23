@@ -17,7 +17,9 @@
           <div id="dCabRackInfo">
             <div class="form-group row">
               <label class="col-md-3">Cabinet Code</label>
-              <a class="col-md-3">{{CabinetCode}}</a>
+              <a [routerLink]="[ViewLink]" target="_blank" class="col-md-3"
+              [queryParams]="{ CabinetCode: Cabinet.CabinetCode }">{{Cabinet.CabinetCode}}
+              </a>
             </div>
 
             <div class="form-group row">

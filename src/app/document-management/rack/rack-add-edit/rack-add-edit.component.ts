@@ -21,6 +21,7 @@ export class RackAddEditComponent implements OnInit {
   title: string = "ADD RACK";
   rack: RackObj = new RackObj();
   cabinetWithRackObj: CabinetWithListRackObj = new CabinetWithListRackObj();
+  readonly ViewLink: string = NavigationConstant.DOC_MNGMNT_VIEW_CABINET;
   Cabinet: CabinetObj = new CabinetObj();
 
   RackForm = this.fb.group({
