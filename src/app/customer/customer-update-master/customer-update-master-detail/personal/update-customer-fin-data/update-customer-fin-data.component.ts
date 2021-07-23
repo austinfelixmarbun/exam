@@ -10,6 +10,7 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UpdateCustPersonalFinDataObj } from 'app/shared/model/UpdateMasterCust/UpdateCustPersonalFinDataObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { environment } from 'environments/environment';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -20,7 +21,7 @@ import { forkJoin } from 'rxjs';
 })
 export class UpdateCustomerFinDataComponent implements OnInit {
   @Input() CustDataTrxId: number;
-  @Input() WfTaskListId: number;
+  @Input() WfTaskListId: any;
   @Output() ResponseTab: EventEmitter<any>;
   SourceIncomeList: Array<any>;
   AppCustFinData: UpdateCustPersonalFinDataObj;
@@ -334,7 +335,10 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     formValue["CustBankAccList"] = requestBankAcc;
     formValue["IsCopyAll"] = this.IsCopyAll;
     formValue["CustBankAccIdToDelete"] = this.CustBankAccToDelete;
-    this.http.post(URLConstant.UpdateMasterCustFinData, formValue).toPromise().then(
+
+    let UpdateMasterCustFinDataUrl = URLConstant.UpdateMasterCustFinData;
+    if(environment.isCore) UpdateMasterCustFinDataUrl = URLConstant.UpdateMasterCustFinDataV2;
+    this.http.post(UpdateMasterCustFinDataUrl, formValue).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }
