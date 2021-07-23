@@ -690,7 +690,7 @@ export class URLConstant {
     public static GetCustHighlightCommentByCustId = environment.FoundationR3Url + "/v1" + "/Cust/GetCustHighlightCommentByCustId";
     // CUSTOMER COMPANY
     public static GetListViewCustCompanyLegalDocByCustCompanyId = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/GetListViewCustCompanyLegalDocByCustCompanyId";
-    public static DeleteCustCompanyLegalDoc = "/CustCompanyLegalDoc/DeleteCustCompanyLegalDoc";
+    public static DeleteCustCompanyLegalDoc = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/DeleteCustCompanyLegalDoc";
     public static AddCustCompanyLegalDoc = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/AddCustCompanyLegalDoc";
 
     // CUSTOMER GROUP
