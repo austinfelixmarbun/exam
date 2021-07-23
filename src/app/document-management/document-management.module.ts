@@ -17,9 +17,11 @@ import { RackPagingComponent } from './rack/rack-paging/rack-paging.component';
 import { RackAddEditComponent } from './rack/rack-add-edit/rack-add-edit.component';
 import { ViewCabinetComponent } from './view/cabinet/view-cabinet.component';
 import { ViewRackComponent } from './view/rack/view-rack.component';
+import { AdInsModule } from "app/components/adins-module/adins.module";
 
 @NgModule({
     imports:[
+        AdInsModule,
         DocumentManagementRoutingModule,
         CommonModule,
         SharingModule,

@@ -1,8 +1,9 @@
 
 export class CommonConstant {
 
-    // REGEX API
+    // REGEX
     public static regexAPI = "\\/[v,V][1-9]\\d*(\\.[1-9]\\d*)*";
+    public static regexEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
 
     // MODULE
     public static MODULE_LOS = "LOS";
@@ -170,7 +171,7 @@ export class CommonConstant {
     public static CustAddrTypeResidence = "RESIDENCE";
     public static CustAddrTypeEmergency = "EMERGENCY";
     public static CustAddrTypeJob = "JOB";
-    public static CustAddrTypeOthBiz = "OTH_BIZ";
+    public static CustAddrTypeOthBiz = "OTHERBIZ";
     public static CustAddrTypePreJob = "PREV_JOB";
     public static CustAddrTypeBiz = "BIZ";
 
@@ -313,4 +314,6 @@ export class CommonConstant {
     //WORKFLOW
     public static WorkflowUploadNegativeCustomer = "WF_UPL_NEG_CUST";
     public static WfUploadNegativeCustomerReview = "UPLOAD_NEG_CUST_REVIEW"
+    public static WorkflowUploadAssetMaster = "WF_UPL_ASM";
+    public static WfUploadAssetMasterReview = "UPLOAD_ASM_REVIEW"
 }

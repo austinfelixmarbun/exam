@@ -106,7 +106,7 @@
                 </div>
                 <label class="col-md-2" translate>Email</label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control adins-required" formControlName="Email1"
+                  <input type="text" [IsUpperCase]="false" class="form-control adins-required" formControlName="Email1"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerFamilyForm.controls.Email1.invalid}">
                   <lib-uc-show-errors [control]="CustomerFamilyForm.controls.Email1" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>

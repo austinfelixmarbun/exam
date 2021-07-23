@@ -17,7 +17,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class CurrencyAddComponent implements OnInit {
 
   pageType: string = "add";
-  refCurrId: any;
+  refCurrId: number = 0;
   currObj: CurrObj;
   resultData: any;
   RefCurrForm = this.fb.group({
@@ -39,8 +39,8 @@ export class CurrencyAddComponent implements OnInit {
       if (params["param"] != null) {
         this.pageType = params["param"];
       }
-      if (params["refCurrId"] != null) {
-        this.refCurrId = params["refCurrId"];
+      if (params["RefCurrId"] != null) {
+        this.refCurrId = params["RefCurrId"];
       }
     });
   }

@@ -59,7 +59,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     BirthPlace: [''],
     BirthDate: [''],
     Gender: [''],
-    Email: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    Email: ['', [Validators.pattern(CommonConstant.regexEmail)]],
     MobilePhn1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     MobilePhn2: ['', [Validators.pattern("^[0-9]+$")]],
     Address: [''],

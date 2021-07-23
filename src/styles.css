@@ -54,6 +54,30 @@
     cursor: pointer;
 }
 
+tbody tr td {
+    text-transform: uppercase;
+}
+
+select {
+    text-transform: uppercase !important;
+}
+
+div {
+    text-transform: uppercase !important;    
+}
+
+a {
+    text-transform: uppercase !important;
+}
+
+span {
+    text-transform: uppercase !important;
+}
+
+button {
+    text-transform: uppercase !important;
+}
+
 .form-section {
     line-height: 2rem !important;
     margin-bottom: 7px !important;
@@ -318,7 +342,7 @@ form .form-section {
 }
 
 label {
-    text-transform: none !important;
+    text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
     font-size: 1rem !important;
 }

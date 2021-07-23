@@ -240,6 +240,7 @@ export class URLConstant {
     public static GetRefMasterListDesc = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterListDesc";
     public static GetRefMasterListKeyValueActiveByCode = environment.FoundationR3Url + "/v1" + "/RefMaster/GetListKeyValueActiveByCode";
     public static GetListActiveRefMasterType = environment.FoundationR3Url + "/v1" + "/RefMasterType/GetListKeyValueActiveByCode";
+    public static GetListActiveRefMasterTypeForDdl = "/RefMasterType/GetListKeyValueActiveByCode";
     public static GetRefMasterByRefMasterId = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterByRefMasterId";
     public static GetListActiveRefMaster = environment.FoundationR3Url + "/v1" + "/RefMaster/GetListKeyValueActiveByCode";
     public static GetRefMasterByMasterCode = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterByMasterCode";
@@ -248,7 +249,7 @@ export class URLConstant {
     public static GetRefMasterByRefMasterTypeCodeAndMasterCode = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterByRefMasterTypeCodeAndMasterCode";
     public static GetKvpRefMasterByRefMasterTypeCodeAndMasterCode = environment.FoundationR3Url + "/v1" + "/RefMaster/GetKvpRefMasterByRefMasterTypeCodeAndMasterCode";
     public static GetRefMasterByRefMasterTypeCode = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterByRefMasterTypeCode";
-    public static GetListActiveRefMasterDDL = environment.FoundationR3Url + "/v1" + "/RefMaster/GetListKeyValueActiveByCode";
+    public static GetListActiveRefMasterDDL = "/RefMaster/GetListKeyValueActiveByCode";
 
     //REF COUNTRY
     public static GetListRefCountry = environment.FoundationR3Url + "/v1" + "/RefCountry/GetListRefCountry";
@@ -318,6 +319,7 @@ export class URLConstant {
     public static GetRefCurrById = environment.FoundationR3Url + "/v1" + "/RefCurr/GetRefCurrById";
     public static GetRefCurrByCode = environment.FoundationR3Url + "/v1" + "/RefCurr/GetRefCurrByCode";
     public static GetListKvpActiveRefCurr = environment.FoundationR3Url + "/v1" + "/RefCurr/GetListKvpActiveRefCurr";
+    public static AddExchangeRate = environment.FoundationR3Url + "/v1" + "/RefCurr/AddExchangeRate";
 
     //REF ECONOMIC SECTOR
     public static AddRefEconomicSector = environment.FoundationR3Url + "/v1" + "/RefEconomicSector/AddRefEconomicSector";
@@ -807,7 +809,7 @@ export class URLConstant {
     public static GetCustPersonalEmergencyContactByCustId = environment.FoundationR3Url + "/v1" + "/CustPersonalContactPerson/GetCustPersonalEmergencyContactByCustId";
     public static AddCustPersonalFamily = environment.FoundationR3Url + "/v1" + "/CustPersonalFamily/AddCustPersonalFamily";
     public static EditCustPersonalFamily = environment.FoundationR3Url + "/v1" + "/CustPersonalFamily/EditCustPersonalFamily";
-    public static DeleteCustPersonalFamily = "/CustPersonalFamily/DeleteCustPersonalFamily";
+    public static DeleteCustPersonalFamily = environment.FoundationR3Url + "/v1" + "/CustPersonalFamily/DeleteCustPersonalFamily";
     public static GetCustPersonalFamilyByCustPersonalFamilyId = environment.FoundationR3Url + "/v1" + "/CustPersonalFamily/GetCustPersonalFamilyByCustPersonalFamilyId";
     public static GetMainCustAndListCustPersonalFamilyByCustId = environment.FoundationR3Url + "/v1" + "/CustPersonalFamily/GetMainCustAndListCustPersonalFamilyByCustId";
     public static GetListCustPersonalEmergencyContactByCustId = environment.FoundationR3Url + "/v1" + "/CustPersonalContactPerson/GetListCustPersonalEmergencyContactByCustId";
