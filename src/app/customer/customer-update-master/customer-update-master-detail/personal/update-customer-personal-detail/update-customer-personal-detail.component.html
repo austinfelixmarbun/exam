@@ -261,7 +261,7 @@
           <button *ngIf="CustomerDetailForm.controls.Email1.value != AppCustPersonalDetail.Email1" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Email1')">Copy</button>
         </div>
         <div class="col-md-4">
-          <input type="text" [IsUpperCase]="false" class="form-control adins-required" formControlName="Email1"
+          <input type="text" class="form-control adins-required" formControlName="Email1"
             [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.Email1.invalid}">
           <lib-uc-show-errors [control]="CustomerDetailForm.controls.Email1" [submit]="enjiForm.submitted">
           </lib-uc-show-errors>
@@ -276,7 +276,7 @@
           <button *ngIf="CustomerDetailForm.controls.Email2.value != AppCustPersonalDetail.Email2" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('Email2')">Copy</button>
         </div>
         <div class="col-md-4">
-          <input type="text" [IsUpperCase]="false" class="form-control adInsInput" formControlName="Email2"
+          <input type="text" class="form-control adInsInput" formControlName="Email2"
             [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.Email2.invalid}">
           <lib-uc-show-errors [control]="CustomerDetailForm.controls.Email2" [submit]="enjiForm.submitted">
           </lib-uc-show-errors>
