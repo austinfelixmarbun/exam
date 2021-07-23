@@ -7,7 +7,7 @@
             "name": "v.VENDOR_CODE",
             "id": "Auction Company Code",
             "value": "",
-            "label": "Vendor Code",
+            "label": "Auction Company Code",
             "placeholder": "Placeholder",
             "datatype": "text"
         },
@@ -46,13 +46,13 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "left",
+            "position": "center",
             "label": "Auction Company Code",
             "name": "VendorCode"
         },
         {
             "type": "sort",
-            "position": "left",
+            "position": "center",
             "label": "Auction Company Name",
             "name": "VendorName"
         },
@@ -74,7 +74,7 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "left",
+            "position": "center",
             "property": "VendorCode"
         },
         {

@@ -398,9 +398,12 @@ export class URLConstant {
 
     //UPLOAD
     public static UploadReview = environment.FoundationR3Url + "/v1" + "/Upload/UploadReview";
+    public static UploadReviewV2 = environment.FoundationR3Url + "/v2" + "/Upload/UploadReview";
     public static UpdateUploadMonitoringHStatActivity = environment.FoundationR3Url + "/v1" + "/Upload/UpdateUploadMonitoringHStatActivity";
     public static CancelUpload = environment.FoundationR3Url + "/v1" + "/Upload/CancelUpload";
+    public static CancelUploadV2 = environment.FoundationR3Url + "/v2" + "/Upload/CancelUpload";
     public static UploadFile = environment.FoundationR3Url + "/v1" + "/Upload/UploadFile";
+    public static UploadFileV2 = environment.FoundationR3Url + "/v2" + "/Upload/UploadFile";
 
     //UPLOAD MONITORING FOUNDATION
     public static GetUploadMonitoringPaging = environment.FoundationR3Url + "/v1" + "/UploadMonitoring/GetUploadMonitoringPaging";
@@ -850,6 +853,9 @@ export class URLConstant {
 
     // Workflow Engine
     public static ClaimTask = environment.FoundationR3Url + "/v1" + "/Workflow/ClaimTask";
+    public static ClaimTaskV2 = environment.FoundationR3Url + "/v2" + "/Workflow/ClaimTask";
+    public static GetAllTaskWorkflow = environment.FoundationR3Url + "/v2" + "/Workflow/GetAllTaskWorkflow";
+    public static GetSingleTaskWorkflow = environment.FoundationR3Url + "/v2" + "/Workflow/GetSingleTask";
 
     //SCORE CATEGORY SCHM H
     public static GetScoreCategorySchmHById = environment.FoundationR3Url + "/v1" + "/ScoreCategorySchmH/GetScoreCategorySchmHById";
@@ -884,9 +890,11 @@ export class URLConstant {
     public static UpdateMasterCustEmergency = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustEmergency";
     public static UpdateMasterCustJobData = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustJobData";
     public static UpdateMasterCustFinData = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustFinData";
+    public static UpdateMasterCustFinDataV2 = environment.FoundationR3Url + "/v2" + "/UpdateMasterCust/UpdateMasterCustFinData";
     public static UpdateMasterCustCompanyDetail = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustCompanyDetail";
     public static UpdateMasterCustCompanyShareholder = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustCompanyShareholder";
     public static UpdateMasterCustCompanyLegalDoc = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustCompanyLegalDoc";
+    public static UpdateMasterCustCompanyLegalDocv2 = environment.FoundationR3Url + "/v2" + "/UpdateMasterCust/UpdateMasterCustCompanyLegalDoc";
     public static UpdateMasterCustCompanyContactInfo = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustCompanyContactInfo";
     public static UpdateMasterCustCompanyFinData = environment.FoundationR3Url + "/v1" + "/UpdateMasterCust/UpdateMasterCustCompanyFinData";
 
