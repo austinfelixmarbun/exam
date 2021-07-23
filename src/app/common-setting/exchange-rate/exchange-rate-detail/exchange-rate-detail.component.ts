@@ -64,6 +64,13 @@ export class ExchangeRateDetailComponent implements OnInit {
       this.SetDtReady = true;
   }
 
+  setDateWithoutTimezone(inputDate) {
+    var date = new Date(inputDate);
+    date.setHours(0, 0, 0, 0);
+    var userTimezoneOffset = date.getTimezoneOffset() * 60000;
+    return new Date(date.getTime() - userTimezoneOffset);
+  }
+
   SaveForm() {
     let d1 = new Date(this.ExchangeRateForm.controls.CurrDt.value);
 
@@ -76,7 +83,7 @@ export class ExchangeRateDetailComponent implements OnInit {
       this.reqExchangeRateObj.CurrDt = this.ExchangeRateForm.controls["CurrDt"].value;
       this.reqExchangeRateObj.ExchangeRateAmt = this.ExchangeRateForm.controls["ExchangeRateAmt"].value;
       this.reqExchangeRateObj.ValueDt = this.ExchangeRateForm.controls["CurrDt"].value;
-      this.reqExchangeRateObj.PostingDt = this.BusinessDt;
+      this.reqExchangeRateObj.PostingDt = this.setDateWithoutTimezone(this.BusinessDt);
       this.http.post(URLConstant.AddExchangeRate, this.reqExchangeRateObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
