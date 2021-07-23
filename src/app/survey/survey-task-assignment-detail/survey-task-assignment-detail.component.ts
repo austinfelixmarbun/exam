@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -22,7 +21,6 @@ import { CookieService } from 'ngx-cookie';
   
 })
 export class SurveyTaskAssignmentDetailComponent implements OnInit {
-
   @ViewChildren('dyna') UclookupgenericComponents: QueryList<UclookupgenericComponent>;
 
   readonly CancelLink: string = NavigationConstant.SURVEY_TASK_ASSIGNMENT_PAGING;
@@ -39,7 +37,6 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   reqListSrvyTaskObj: Array<SrvyTaskObj>;
   refOfficeId: any;
 
-
   //Dropdowns
   dropdownSurveyType: any;
   dropdownSurveyFormSchm: any;
@@ -54,7 +51,6 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['SurveyOrderId'] != null) {
         this.surveyOrderId = params['SurveyOrderId'];
-
       }
     });
   }
@@ -64,17 +60,13 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   });
 
   getLookupSurveyor(i, event) {
-
     this.SurveyTaskForm.controls["ListSurveyTask"]["controls"][i].patchValue({
       Surveyor: event.SurveyorId
     })
-
   }
 
   ngOnInit() {
-
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyOrder.json";
-
     this.getDropdown();
     this.getSurveyTaskListData();
   }
@@ -105,17 +97,12 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
                   CustNo: response['ReturnObject'][i].CustNo,
                   SurveyorName: response['ReturnObject'][i].SurveyorName,
                   CustId: response['ReturnObject'][i].CustId
-
                 }
 
                 this.addSurveyTaskToList(surveyTask);
               }
             )
-
-
-
           }
-
         }
       }
     )
@@ -125,26 +112,20 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
     this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: "SURVEY_TYPE" }).subscribe(
       (response) => {
         this.dropdownSurveyType = response['ReturnObject'];
-
       }
     );
 
     this.httpClient.post(URLConstant.GetListKeyValueSrvyFormSchm, null).subscribe(
       (response) => {
         this.dropdownSurveyFormSchm = response['ReturnObject'];
-
       }
     )
-
   }
-
-
 
   onNationalSelect(i, event) {
     let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     
     let refOfficeId = currentUserContext['OfficeId'];
-    console.log(currentUserContext);
     this.SurveyTaskForm.controls.ListSurveyTask['controls'][i].patchValue({
       National: event['target'].value
     })
@@ -163,27 +144,20 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
       temp[i].lookupInput.addCritInput = assetCrit;
       temp[i].setAddCritInput();
       
-    }else{     
+    }
+    else {     
       var assetCrit = new Array();
       temp[i].lookupInput.addCritInput = assetCrit;
       temp[i].setAddCritInput();
-      console.log(this.InputLookupSurveyorObj);
     }
 
     temp[i].lookupInput['isRequired'] = !temp[i].lookupInput['isRequired'];
     temp[i].initiateForm();
-
-  }
-
-  checkForm() {
-    console.log(this.SurveyTaskForm.controls['ListSurveyTask']['controls']);
-    console.log(this.SurveyTaskForm);
   }
 
   addSurveyTaskToList(x) {
     var surveyTaskObj = this.SurveyTaskForm.controls["ListSurveyTask"] as FormArray;
     var length = this.SurveyTaskForm.controls["ListSurveyTask"]["controls"].length;
-    console.log(this.SurveyTaskForm.controls["ListSurveyTask"]["controls"].length);
     var max = 0;
     if (length > 0) {
       max = this.SurveyTaskForm["controls"]["ListSurveyTask"]["controls"][length - 1]["controls"]["No"].value;
@@ -195,7 +169,6 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
       this.InputLookupSurveyorObjs.push(InputLookupSurveyorObj);
 
       this.surveyorNumber[max + 1] = InputLookupSurveyorObj;
-
     }
   }
 
@@ -208,27 +181,11 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
     this.InputLookupSurveyorObj.genericJson = "./assets/lookup/lookupSurveyorForSurveyTask.json";
     this.InputLookupSurveyorObj.isRequired = true;
 
-    var assetCrit = new Array();
-    var critAssetObj = new CriteriaObj();
-    critAssetObj.DataType = 'number';
-    critAssetObj.restriction = AdInsConstant.RestrictionEq;
-    critAssetObj.propName = 'RO.REF_OFFICE_ID';
-    critAssetObj.value = this.refOfficeId;
-    assetCrit.push(critAssetObj);
-    this.InputLookupSurveyorObj.addCritInput = null;
-
     this.InputLookupSurveyorObj.nameSelect = x.SurveyorName;
     this.InputLookupSurveyorObj.jsonSelect = x;
-    
-
-
-    console.log(this.InputLookupSurveyorObj);
 
     return this.InputLookupSurveyorObj;
-
   }
-
-
 
   addGroupAsset(surveyTaskObj, i) {
     return this.fb.group({
@@ -249,8 +206,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
       CustNo: [surveyTaskObj.CustNo],
       SurveyorName: [surveyTaskObj.SurveyorName],
       CustId: [surveyTaskObj.CustId]
-
-    })
+    });
   }
 
   CancelSurveyTask(surveyTaskId) {
@@ -263,7 +219,6 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   }
 
   SaveForm() {
-
     this.reqListSrvyTaskObj = new Array<SrvyTaskObj>();
 
     for (let i = 0; i < this.SurveyTaskForm.controls['ListSurveyTask']['controls'].length; i++) {
@@ -284,11 +239,6 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
       this.srvyTaskObj.CustNo = this.SurveyTaskForm.controls['ListSurveyTask']['controls'][i].value.CustNo;
 
       this.reqListSrvyTaskObj.push(this.srvyTaskObj);
-
-
-
-
-
     }
 
     this.httpClient.post(URLConstant.EditSrvyTask, { reqListSrvyTaskObjs: this.reqListSrvyTaskObj }).subscribe(
@@ -298,5 +248,4 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
       }
     )
   }
-
 }

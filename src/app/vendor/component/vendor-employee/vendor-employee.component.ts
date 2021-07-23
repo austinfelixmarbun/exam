@@ -55,7 +55,7 @@ export class VendorEmployeeComponent implements OnInit {
     BirthDate: [''],
     MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     MobilePhnNo2: ['', [Validators.pattern("^[0-9]+$")]],
-    Email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    Email: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]],
     JoinDt: ['', [Validators.required]],
     VendorEmpRating: ['0'],
     Addr: [''],
