@@ -29,10 +29,9 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
   taskListId: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   currentUserContext: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-  private claimTaskService: ClaimTaskService;
   
   readonly CancelLink: string = NavigationConstant.ASSET_NEG_RVW_UPLOAD_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private claimTaskService: ClaimTaskService) {
     this.route.queryParams.subscribe(params => {
       if (params["UploadNo"] != null) {
         this.uploadNo = params["UploadNo"];

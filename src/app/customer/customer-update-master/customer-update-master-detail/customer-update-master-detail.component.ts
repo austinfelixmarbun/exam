@@ -36,7 +36,6 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   IdCust: number = 0;
   isMarried: boolean = false;
   currentUserContext : CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-  private claimTaskService: ClaimTaskService;
 
   CustPersonalStep = {
     "CUST": 1,
@@ -59,7 +58,8 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private claimTaskService: ClaimTaskService
   ) {
     this.route.queryParams.subscribe(params => {
       if (params["CustDataTrxId"] != null) {
