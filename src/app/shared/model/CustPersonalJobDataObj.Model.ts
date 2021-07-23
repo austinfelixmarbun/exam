@@ -29,4 +29,37 @@ export class CustPersonalJobDataObj {
   MrCustModelCode: string;
   RowVersion: string;
   RefSectorEconomySlikId: number;
+
+  constructor() {
+    this.CustPersonalJobDataId = 0;
+    this.CustId = 0;
+    this.RefProfessionId = 0;
+    this.CoyName = "";
+    this.MrJobPositionCode = "";
+    this.RefIndustryTypeId = 0;
+    this.MrJobStatCode = "";
+    this.ProfessionalNo = "";
+    this.JobTitleName = "";
+    this.EmploymentEstablishmentDt = null;
+    this.IsMfEmp = false;
+    this.IsWellknownCoy = false;
+    this.MrWellknownCoyCode = "";
+    this.MrCoyScaleCode = "";
+    this.NoOfEmploy = 0;
+    this.MrInvestmentTypeCode = "";
+    this.JobAddrId = 0;
+    this.PrevCoyName = "";
+    this.PrevEmploymentDt = null;
+    this.PrevJobAddrId = 0;
+    this.EmpNo = "";
+    this.OthBizName = "";
+    this.OthBizType = "";
+    this.OthBizIndustryTypeCode = "";
+    this.OthBizJobPosition = "";
+    this.OthBizEstablishmentDt = null;
+    this.OthBizAddrId = 0;
+    this.MrCustModelCode = "";
+    this.RowVersion = "";
+    this.RefSectorEconomySlikId = 0;
+  }
 }

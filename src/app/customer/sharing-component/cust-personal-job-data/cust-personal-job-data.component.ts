@@ -1,12 +1,15 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
+import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -16,6 +19,7 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMas
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
+import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
 import { CookieService } from 'ngx-cookie';
 import { JobAddrSectionComponent } from './job-addr-section/job-addr-section.component';
 
@@ -29,6 +33,7 @@ export class CustPersonalJobDataComponent implements OnInit {
   @Input() CustId: number = 0;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
   CustomerJobForm: FormGroup = this.fb.group({});
+  DictCustAddr: { [Id: string]: CustAddrObj } = {};
 
   readonly RefMasterTypeCodeJobPosition: string = CommonConstant.RefMasterTypeCodeJobPosition;
   readonly RefMasterTypeCodeJobStat: string = CommonConstant.RefMasterTypeCodeJobStat;
@@ -36,13 +41,16 @@ export class CustPersonalJobDataComponent implements OnInit {
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel; //mapping code CommonConstant.CustTypePersonal
   readonly RefMasterTypeCodeInvestmentType: string = CommonConstant.RefMasterTypeCodeInvestmentType;
 
+  readonly CustAddrTypeJob: string = CommonConstant.CustAddrTypeJob;
+  readonly CustAddrTypeOthBiz: string = CommonConstant.CustAddrTypeOthBiz;
+  readonly CustAddrTypePreJob: string = CommonConstant.CustAddrTypePreJob;
 
   readonly CUST_MODEL_EMP: string = CommonConstant.CUST_MODEL_EMP;
   readonly CUST_MODEL_PROF: string = CommonConstant.CUST_MODEL_PROF;
   readonly CUST_MODEL_SME: string = CommonConstant.CUST_MODEL_SME;
   readonly CUST_MODEL_NONPROF: string = CommonConstant.CUST_MODEL_NONPROF;
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) { }
 
   async ngOnInit() {
     this.InitData();
@@ -185,20 +193,21 @@ export class CustPersonalJobDataComponent implements OnInit {
     await this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: this.CustId }).toPromise().then(
       async (response: CustPersonalJobDataObj) => {
         console.log(response);
-        this.tempCustPersonalJobDataObj = response;
-
         if (response.CustPersonalJobDataId != 0) {
+          this.tempCustPersonalJobDataObj = response;
+          let datePipe = new DatePipe("en-US");
           this.CustomerJobForm.patchValue({
-            IsWellknownCoy: response.IsWellknownCoy == null ? false: response.IsWellknownCoy,
-            IsMfEmp: response.IsMfEmp == null ? false: response.IsMfEmp,
+            IsWellknownCoy: response.IsWellknownCoy == null ? false : response.IsWellknownCoy,
+            IsMfEmp: response.IsMfEmp == null ? false : response.IsMfEmp,
             ProfessionalNo: response.ProfessionalNo,
             JobTitleName: response.JobTitleName,
             MrJobStatCode: response.MrJobStatCode,
             MrCoyScaleCode: response.MrCoyScaleCode,
             MrJobPositionCode: response.MrJobPositionCode,
             NoOfEmploy: response.NoOfEmploy,
-            EmploymentEstablishmentDt: response.EmploymentEstablishmentDt,
+            EmploymentEstablishmentDt: datePipe.transform(response.EmploymentEstablishmentDt, 'yyyy-MM-dd'),
             MrWellknownCoyCode: response.MrWellknownCoyCode,
+            CoyName: response.CoyName,
           });
           this.companyLookupObj.nameSelect = this.tempCustPersonalJobDataObj.CoyName;
           this.companyLookupObj.jsonSelect = { Descr: this.tempCustPersonalJobDataObj.CoyName };
@@ -277,7 +286,6 @@ export class CustPersonalJobDataComponent implements OnInit {
         this.requiredInNonProf(tempForm);
         break;
     }
-    tempForm.get("MrWellknownCoyCode").updateValueAndValidity();
     tempForm.get("RefIndustryTypeId").updateValueAndValidity();
     tempForm.get("EmploymentEstablishmentDt").updateValueAndValidity();
     tempForm.get("MrCoyScaleCode").updateValueAndValidity();
@@ -287,15 +295,26 @@ export class CustPersonalJobDataComponent implements OnInit {
   //#region change validator
   CheckRequiredCompanyName() {
     let tempCustModel: string = this.CustomerJobForm.get("MrCustModelCode").value;
+    let tempMrWellknownCoyCode = this.CustomerJobForm.get("MrWellknownCoyCode");
+    let tempCoyName = this.CustomerJobForm.get("CoyName");
     let tempIsWellknownCoy: boolean = this.CustomerJobForm.get("IsWellknownCoy").value;
 
     if (tempIsWellknownCoy) {
       if (tempCustModel == this.CUST_MODEL_EMP || tempCustModel == this.CUST_MODEL_SME) {
         this.companyLookupObj.isRequired = true;
+        tempMrWellknownCoyCode.setValidators(Validators.required);
+        tempCoyName.setValidators(Validators.required);
+        tempMrWellknownCoyCode.updateValueAndValidity();
+        tempCoyName.updateValueAndValidity();
         return;
       }
     }
+    tempMrWellknownCoyCode.patchValue("");
+    tempMrWellknownCoyCode.clearValidators();
+    tempCoyName.clearValidators();
     this.companyLookupObj.isRequired = false;
+    tempMrWellknownCoyCode.updateValueAndValidity();
+    tempCoyName.updateValueAndValidity();
   }
 
   ClearValidatorAllForm(tempForm: FormGroup) {
@@ -322,7 +341,6 @@ export class CustPersonalJobDataComponent implements OnInit {
   }
 
   requiredInEmp(tempForm: FormGroup) {
-    tempForm.get("MrWellknownCoyCode").setValidators(Validators.required);
     tempForm.get("EmploymentEstablishmentDt").setValidators(Validators.required);
     tempForm.get("MrCoyScaleCode").setValidators(Validators.required);
     this.dictIsShow["MrWellknownCoyCode"] = true;
@@ -335,7 +353,6 @@ export class CustPersonalJobDataComponent implements OnInit {
     this.dictIsShow["MrJobStatCode"] = true;
   }
   requiredInSme(tempForm: FormGroup) {
-    tempForm.get("MrWellknownCoyCode").setValidators(Validators.required);
     tempForm.get("MrCoyScaleCode").setValidators(Validators.required);
     tempForm.get("MrInvestmentTypeCode").setValidators(Validators.required);
     this.dictIsShow["MrWellknownCoyCode"] = true;
@@ -380,14 +397,107 @@ export class CustPersonalJobDataComponent implements OnInit {
 
     this.CustomerJobForm.patchValue({
       MrWellknownCoyCode: ev.MasterCode,
+      CoyName: ev.Descr,
     });
   }
   //#endregion
 
   SaveForm() {
+    console.log(this.CustomerJobForm);
+    let tempCustModel: string = this.CustomerJobForm.get("MrCustModelCode").value;
+    let reqObjSave: RequestCustPersonalJobDataObj = new RequestCustPersonalJobDataObj();
+    reqObjSave.CustPersonalJobData = this.SetReqObjPersonalJobSave(tempCustModel);
+
+    if (tempCustModel != this.CUST_MODEL_NONPROF) {
+      reqObjSave.JobAddr = this.SetAddrObj(this.CustAddrTypeJob);
+      reqObjSave.OthBizAddr = this.SetAddrObj(this.CustAddrTypeOthBiz);
+      reqObjSave.PreJobAddr = this.SetAddrObj(this.CustAddrTypePreJob);
+    }
+    console.log(reqObjSave);
+    let urlSave: string = URLConstant.AddCustPersonalJobData;
+    if (this.tempCustPersonalJobDataObj.CustPersonalJobDataId != 0) urlSave = URLConstant.EditCustPersonalJobData;
+    this.http.post(urlSave, reqObjSave).subscribe(
+      (response) => {
+        this.toastr.successMessage(response["message"]);
+        this.outputTab.emit({ stepMode: "next" });
+      }
+    );
+  }
+
+  SetReqObjPersonalJobSave(CustModel: string): CustPersonalJobDataObj {
     let tempForm = this.CustomerJobForm.getRawValue();
     console.log(tempForm);
-    // this.outputTab.emit({ stepMode: 'next' });
+    let tempPersonalJob: CustPersonalJobDataObj = new CustPersonalJobDataObj();
+    tempPersonalJob.CustPersonalJobDataId = this.tempCustPersonalJobDataObj.CustPersonalJobDataId;
+    tempPersonalJob.RowVersion = this.tempCustPersonalJobDataObj.RowVersion;
+    tempPersonalJob.CustId = this.CustId;
+    tempPersonalJob.RefProfessionId = tempForm["RefProfessionId"];
+    if (CustModel != this.CUST_MODEL_NONPROF) {
+      tempPersonalJob.RefIndustryTypeId = tempForm["RefIndustryTypeId"];
+      tempPersonalJob.JobTitleName = tempForm["JobTitleName"];
+      tempPersonalJob.PrevCoyName = tempForm["PrevCoyName"];
+      tempPersonalJob.PrevEmploymentDt = tempForm["PrevEmploymentDt"];
+      tempPersonalJob.OthBizName = tempForm["OthBizName"];
+      tempPersonalJob.OthBizIndustryTypeCode = tempForm["OthBizIndustryTypeCode"];
+      tempPersonalJob.OthBizEstablishmentDt = tempForm["OthBizEstablishmentDt"];
+      tempPersonalJob.OthBizType = tempForm["OthBizType"];
+      tempPersonalJob.OthBizJobPosition = tempForm["OthBizJobPosition"];
+
+      if (CustModel == this.CUST_MODEL_PROF) {
+        tempPersonalJob.ProfessionalNo = tempForm["ProfessionalNo"];
+      } else {
+        tempPersonalJob.IsWellknownCoy = tempForm["IsWellknownCoy"];
+        tempPersonalJob.MrWellknownCoyCode = tempForm["MrWellknownCoyCode"];
+        tempPersonalJob.CoyName = tempForm["CoyName"];
+        tempPersonalJob.MrJobPositionCode = tempForm["MrJobPositionCode"];
+        tempPersonalJob.MrCoyScaleCode = tempForm["MrCoyScaleCode"];
+        tempPersonalJob.NoOfEmploy = tempForm["NoOfEmploy"];
+
+        if (CustModel == this.CUST_MODEL_SME) {
+          tempPersonalJob.MrInvestmentTypeCode = tempForm["MrInvestmentTypeCode"];
+        }
+        if (CustModel == this.CUST_MODEL_EMP) {
+          tempPersonalJob.EmploymentEstablishmentDt = tempForm["EmploymentEstablishmentDt"];
+          tempPersonalJob.MrJobStatCode = tempForm["MrJobStatCode"];
+          tempPersonalJob.IsMfEmp = tempForm["IsMfEmp"];
+        }
+      }
+    }
+    return tempPersonalJob;
+  }
+
+  SetAddrObj(addrTypeCode: string): CustAddrObj {
+    let tempAddrObj: CustAddrObj = new CustAddrObj();
+    let tempJobForm = this.CustomerJobForm.get(addrTypeCode + 'UcAddress') as FormGroup;
+    let tempJobZipCodeForm = this.CustomerJobForm.get(addrTypeCode + 'UcAddressZipcode') as FormGroup;
+    let tempJobValue = tempJobForm.getRawValue();
+    let tempJobZipCodeValue = tempJobZipCodeForm.getRawValue();
+    tempAddrObj.CustAddrId = this.DictCustAddr[addrTypeCode].CustAddrId;
+    tempAddrObj.CustId = this.CustId;
+    tempAddrObj.RowVersion = this.DictCustAddr[addrTypeCode].RowVersion;
+    tempAddrObj.MrCustAddrTypeCode = addrTypeCode;
+    tempAddrObj.Addr = tempJobValue.Addr;
+    tempAddrObj.FullAddr = tempJobValue.Addr + " RT: " + tempJobValue.AreaCode4 + " RW: " + tempJobValue.AreaCode3 + " " + tempJobValue.AreaCode2 + ", " + tempJobValue.AreaCode1 + " " + tempJobZipCodeValue.value;
+    tempAddrObj.AreaCode3 = tempJobValue.AreaCode3;
+    tempAddrObj.AreaCode4 = tempJobValue.AreaCode4;
+    tempAddrObj.Zipcode = tempJobZipCodeValue.value;
+    tempAddrObj.AreaCode1 = tempJobValue.AreaCode1;
+    tempAddrObj.AreaCode2 = tempJobValue.AreaCode2;
+    tempAddrObj.City = tempJobValue.City;
+    tempAddrObj.PhnArea1 = tempJobValue.PhnArea1;
+    tempAddrObj.Phn1 = tempJobValue.Phn1;
+    tempAddrObj.PhnExt1 = tempJobValue.PhnExt1;
+    tempAddrObj.PhnArea2 = tempJobValue.PhnArea2;
+    tempAddrObj.Phn2 = tempJobValue.Phn2;
+    tempAddrObj.PhnExt2 = tempJobValue.PhnExt2;
+    tempAddrObj.PhnArea3 = tempJobValue.PhnArea3;
+    tempAddrObj.Phn3 = tempJobValue.Phn3;
+    tempAddrObj.PhnExt3 = tempJobValue.PhnExt3;
+    tempAddrObj.FaxArea = tempJobValue.FaxArea;
+    tempAddrObj.Fax = tempJobValue.Fax;
+    tempAddrObj.MrBuildingOwnershipCode = tempJobValue.MrHouseOwnershipCode;
+    
+    return tempAddrObj
   }
 
   getFormValidationErrors() {

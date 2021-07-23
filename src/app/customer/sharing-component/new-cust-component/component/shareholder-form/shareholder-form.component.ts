@@ -72,7 +72,7 @@ export class ShareholderFormComponent implements OnInit {
       this.parentForm.get("MobilePhnNo1").setValidators([Validators.pattern("^[0-9]+$")]);
       this.parentForm.get("MobilePhnNo1").updateValueAndValidity();
       this.parentForm.addControl("Email1", this.fb.control(''));
-      this.parentForm.get("Email1").setValidators([Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]);
+      this.parentForm.get("Email1").setValidators([Validators.pattern(CommonConstant.regexEmail)]);
       this.parentForm.get("Email1").updateValueAndValidity();
     }
     this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();

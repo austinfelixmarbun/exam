@@ -1,11 +1,17 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
+import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CookieService } from 'ngx-cookie';
 
 @Component({
@@ -16,23 +22,26 @@ import { CookieService } from 'ngx-cookie';
 export class JobAddrSectionComponent implements OnInit {
 
   @Input() CustPersonalJobDataObj: CustPersonalJobDataObj = new CustPersonalJobDataObj();
+  @Input() CustId: number = 0;
+  @Input() DictCustAddr: { [Id: string]: CustAddrObj } = {};
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
-  
+
   readonly CustAddrTypeJob: string = CommonConstant.CustAddrTypeJob;
   readonly CustAddrTypeOthBiz: string = CommonConstant.CustAddrTypeOthBiz;
   readonly CustAddrTypePreJob: string = CommonConstant.CustAddrTypePreJob;
-  
+
   constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
 
   ngOnInit() {
+    this.AddControlFormJobAddr();
     this.BindJobAdd(this.JobAddr);
     this.BindJobAdd(this.PrevJobAddr);
     this.BindJobAdd(this.OthBizAddr);
   }
 
   businessDtMin: Date;
-  AddControlFormJobAddr(){
+  AddControlFormJobAddr() {
     this.parentForm.addControl("JobAddrId", this.fb.control(''));
     this.parentForm.addControl("PrevCoyName", this.fb.control(''));
     this.parentForm.addControl("PrevEmploymentDt", this.fb.control(''));
@@ -43,7 +52,7 @@ export class JobAddrSectionComponent implements OnInit {
     this.parentForm.addControl("OthBizJobPosition", this.fb.control(''));
     this.parentForm.addControl("OthBizEstablishmentDt", this.fb.control(''));
     this.parentForm.addControl("OthBizAddrId", this.fb.control(''));
-    
+
     // JobAddrId: [0],
     // PrevCoyName: [''],
     // PrevEmploymentDt: [''],
@@ -57,33 +66,79 @@ export class JobAddrSectionComponent implements OnInit {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
+
+    if (this.CustPersonalJobDataObj.CustPersonalJobDataId != 0) {
+      let datePipe = new DatePipe("en-US");
+      this.parentForm.patchValue({
+        PrevCoyName: this.CustPersonalJobDataObj.PrevCoyName,
+        PrevEmploymentDt: datePipe.transform(this.CustPersonalJobDataObj.PrevEmploymentDt, 'yyyy-MM-dd'),
+        OthBizName: this.CustPersonalJobDataObj.OthBizName,
+        OthBizType: this.CustPersonalJobDataObj.OthBizType,
+        OthBizIndustryTypeCode: this.CustPersonalJobDataObj.OthBizIndustryTypeCode,
+        OthBizJobPosition: this.CustPersonalJobDataObj.OthBizJobPosition,
+        OthBizEstablishmentDt: datePipe.transform(this.CustPersonalJobDataObj.OthBizEstablishmentDt, 'yyyy-MM-dd'),
+      })
+    }
+
+    this.GetExistingAddr(this.JobAddr);
+    this.GetExistingAddr(this.PrevJobAddr);
+    this.GetExistingAddr(this.OthBizAddr);
   }
 
-  dictJobAddr: {[Id: string]: InputAddressObj} ={};
+  dictJobAddr: { [Id: string]: InputAddressObj } = {};
   readonly JobAddr: string = CommonConstant.CustAddrTypeJob;
   readonly PrevJobAddr: string = CommonConstant.CustAddrTypePreJob;
   readonly OthBizAddr: string = CommonConstant.CustAddrTypeOthBiz;
-  BindJobAdd(addrType: string){    
+  BindJobAdd(addrType: string) {
     this.dictJobAddr[addrType] = new InputAddressObj();
+    let inputAddressObj = new InputFieldObj();
+    inputAddressObj.inputLookupObj = new InputLookupObj();
     let title: string = "";
-    switch(addrType){
+    switch (addrType) {
       case this.JobAddr:
         title = "Job Address";
         break;
       case this.OthBizAddr:
         title = "Other Business Address";
-        this.dictJobAddr[addrType].isRequired=false;
+        this.dictJobAddr[addrType].isRequired = false;
+        inputAddressObj.inputLookupObj.isRequired = false;
         break;
       case this.PrevJobAddr:
         title = "Previous Job Address";
-        this.dictJobAddr[addrType].isRequired=false;
+        this.dictJobAddr[addrType].isRequired = false;
+        inputAddressObj.inputLookupObj.isRequired = false;
         break;
     }
+    this.dictJobAddr[addrType].inputField = inputAddressObj;
     this.dictJobAddr[addrType].showSubsection = false;
     this.dictJobAddr[addrType].title = title;
   }
 
-  TurnValidator(){
+  GetExistingAddr(addrTypeCode: string) {
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = this.CustId;
+    reqObj.Code = addrTypeCode;
+    this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+      (response: CustAddrObj) => {
+        console.log(response);
+        this.DictCustAddr[addrTypeCode] = new CustAddrObj();
+        if (response || response.CustAddrId != 0) {
+          this.DictCustAddr[addrTypeCode] = response;
+
+          let inputAddressObj = new InputFieldObj();
+          inputAddressObj.inputLookupObj = new InputLookupObj();
+          if (addrTypeCode == this.OthBizAddr || addrTypeCode == this.PrevJobAddr) inputAddressObj.inputLookupObj.isRequired = false;
+          inputAddressObj.inputLookupObj.nameSelect = response.Zipcode;
+          inputAddressObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
+          this.dictJobAddr[addrTypeCode].inputField = inputAddressObj;
+          this.dictJobAddr[addrTypeCode].default = response;
+          return;
+        }
+      }
+    );
+  }
+
+  TurnValidator() {
     let tempCustModel: string = this.parentForm.get("MrCustModelCode").value;
     switch (tempCustModel) {
       case CommonConstant.CUST_MODEL_NONPROF:
