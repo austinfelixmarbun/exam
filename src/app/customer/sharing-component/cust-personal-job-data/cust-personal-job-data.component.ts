@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -17,6 +17,7 @@ import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMast
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { CookieService } from 'ngx-cookie';
+import { JobAddrSectionComponent } from './job-addr-section/job-addr-section.component';
 
 @Component({
   selector: 'app-cust-personal-job-data',
@@ -24,6 +25,7 @@ import { CookieService } from 'ngx-cookie';
 })
 export class CustPersonalJobDataComponent implements OnInit {
 
+  @ViewChild('JobAddrForm') jobAddrForm: JobAddrSectionComponent;
   @Input() CustId: number = 0;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
   CustomerJobForm: FormGroup = this.fb.group({});
@@ -32,7 +34,7 @@ export class CustPersonalJobDataComponent implements OnInit {
   readonly RefMasterTypeCodeJobStat: string = CommonConstant.RefMasterTypeCodeJobStat;
   readonly RefMasterTypeCodeCoyScale: string = CommonConstant.RefMasterTypeCodeCoyScale;
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel; //mapping code CommonConstant.CustTypePersonal
-  // readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
+  readonly RefMasterTypeCodeInvestmentType: string = CommonConstant.RefMasterTypeCodeInvestmentType;
 
 
   readonly CUST_MODEL_EMP: string = CommonConstant.CUST_MODEL_EMP;
@@ -62,12 +64,13 @@ export class CustPersonalJobDataComponent implements OnInit {
     this.initDdlRefMaster(this.RefMasterTypeCodeJobPosition);
     this.initDdlRefMaster(this.RefMasterTypeCodeJobStat);
     this.initDdlRefMaster(this.RefMasterTypeCodeCoyScale);
+    this.initDdlRefMaster(this.RefMasterTypeCodeInvestmentType);
     this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel].ddlType = UcDropdownListConstant.DDL_TYPE_BLANK;
 
     console.log(this.DictUcDDLObj);
     this.ResetForm();
-    
+
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -90,17 +93,7 @@ export class CustPersonalJobDataComponent implements OnInit {
       MrCoyScaleCode: [''],
       NoOfEmploy: [''],
       MrInvestmentTypeCode: [''],
-      JobAddrId: [0],
-      PrevCoyName: [''],
-      PrevEmploymentDt: [''],
-      PrevJobAddrId: [0],
       EmpNo: [''],
-      OthBizName: [''],
-      OthBizType: [''],
-      OthBizIndustryTypeCode: [''],
-      OthBizJobPosition: [''],
-      OthBizEstablishmentDt: [''],
-      OthBizAddrId: [0],
       RowVersion: [''],
       RefSectorEconomySlikId: [0],
     });
@@ -186,6 +179,7 @@ export class CustPersonalJobDataComponent implements OnInit {
         this.CustomerJobForm.patchValue({
           MrCustModelCode: response.MrCustModelCode,
         });
+        this.changeCustModel();
       }
     )
     await this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: this.CustId }).toPromise().then(
@@ -194,11 +188,26 @@ export class CustPersonalJobDataComponent implements OnInit {
         this.tempCustPersonalJobDataObj = response;
 
         if (response.CustPersonalJobDataId != 0) {
+          this.CustomerJobForm.patchValue({
+            IsWellknownCoy: response.IsWellknownCoy == null ? false: response.IsWellknownCoy,
+            IsMfEmp: response.IsMfEmp == null ? false: response.IsMfEmp,
+            ProfessionalNo: response.ProfessionalNo,
+            JobTitleName: response.JobTitleName,
+            MrJobStatCode: response.MrJobStatCode,
+            MrCoyScaleCode: response.MrCoyScaleCode,
+            MrJobPositionCode: response.MrJobPositionCode,
+            NoOfEmploy: response.NoOfEmploy,
+            EmploymentEstablishmentDt: response.EmploymentEstablishmentDt,
+            MrWellknownCoyCode: response.MrWellknownCoyCode,
+          });
           this.companyLookupObj.nameSelect = this.tempCustPersonalJobDataObj.CoyName;
           this.companyLookupObj.jsonSelect = { Descr: this.tempCustPersonalJobDataObj.CoyName };
 
-          if (this.tempCustPersonalJobDataObj.RefProfessionId != null) {
+          if (response.RefProfessionId != null) {
             if (!response.RefProfessionId) return;
+            this.CustomerJobForm.patchValue({
+              RefProfessionId: response.RefProfessionId,
+            });
             this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
               (response: RefProfessionObj) => {
                 this.professionLookUpObj.nameSelect = response.ProfessionName;
@@ -206,8 +215,12 @@ export class CustPersonalJobDataComponent implements OnInit {
               });
           }
 
-          if (this.tempCustPersonalJobDataObj.RefIndustryTypeId != null) {
-            this.http.post(URLConstant.GetRefIndustryTypeById, { Id: this.tempCustPersonalJobDataObj.RefIndustryTypeId }).subscribe(
+          if (response.RefIndustryTypeId != null) {
+            if (!response.RefIndustryTypeId) return;
+            this.CustomerJobForm.patchValue({
+              RefIndustryTypeId: response.RefIndustryTypeId,
+            });
+            this.http.post(URLConstant.GetRefIndustryTypeById, { Id: response.RefIndustryTypeId }).subscribe(
               (response: RefIndustryTypeObj) => {
                 this.industryLookUpObj.nameSelect = response.IndustryTypeName;
                 this.industryLookUpObj.jsonSelect = response;
@@ -215,6 +228,9 @@ export class CustPersonalJobDataComponent implements OnInit {
             );
           }
 
+          this.CustomerJobForm.patchValue({
+            MrJobPositionCode: response.MrJobPositionCode,
+          });
           let tempDesc: string = await this.PatchValueDesc(response.MrJobPositionCode, CommonConstant.RefMasterTypeCodeJobPosition);
           this.jobPositionLookupObj.nameSelect = tempDesc;
           this.jobPositionLookupObj.jsonSelect = { JobDesc: tempDesc };
@@ -238,10 +254,107 @@ export class CustPersonalJobDataComponent implements OnInit {
   }
 
   //#region Change
+  dictIsShow: { [Id: string]: boolean } = {};
   changeCustModel() {
     let tempCustModel: string = this.CustomerJobForm.get("MrCustModelCode").value;
     console.log(tempCustModel);
+
+    let tempForm: FormGroup = this.CustomerJobForm as FormGroup;
+    this.ClearValidatorAllForm(tempForm);
+    switch (tempCustModel) {
+      case this.CUST_MODEL_EMP:
+        this.requiredInEmp(tempForm);
+        this.CheckRequiredCompanyName();
+        break;
+      case this.CUST_MODEL_SME:
+        this.requiredInSme(tempForm);
+        this.CheckRequiredCompanyName();
+        break;
+      case this.CUST_MODEL_PROF:
+        this.requiredInProf();
+        break;
+      case this.CUST_MODEL_NONPROF:
+        this.requiredInNonProf(tempForm);
+        break;
+    }
+    tempForm.get("MrWellknownCoyCode").updateValueAndValidity();
+    tempForm.get("RefIndustryTypeId").updateValueAndValidity();
+    tempForm.get("EmploymentEstablishmentDt").updateValueAndValidity();
+    tempForm.get("MrCoyScaleCode").updateValueAndValidity();
+    tempForm.get("MrInvestmentTypeCode").updateValueAndValidity();
   }
+
+  //#region change validator
+  CheckRequiredCompanyName() {
+    let tempCustModel: string = this.CustomerJobForm.get("MrCustModelCode").value;
+    let tempIsWellknownCoy: boolean = this.CustomerJobForm.get("IsWellknownCoy").value;
+
+    if (tempIsWellknownCoy) {
+      if (tempCustModel == this.CUST_MODEL_EMP || tempCustModel == this.CUST_MODEL_SME) {
+        this.companyLookupObj.isRequired = true;
+        return;
+      }
+    }
+    this.companyLookupObj.isRequired = false;
+  }
+
+  ClearValidatorAllForm(tempForm: FormGroup) {
+    this.dictIsShow["RefIndustryTypeId"] = true;
+    this.dictIsShow["JobTitleName"] = true;
+    this.dictIsShow["IsShowJobAddr"] = true;
+
+    this.dictIsShow["MrJobStatCode"] = false;
+    this.dictIsShow["IsWellknownCoy"] = false;
+    this.dictIsShow["MrJobPositionCode"] = false;
+    this.dictIsShow["IsMfEmp"] = false;
+    this.dictIsShow["NoOfEmploy"] = false;
+    this.dictIsShow["MrWellknownCoyCode"] = false;
+    this.dictIsShow["EmploymentEstablishmentDt"] = false;
+    this.dictIsShow["MrCoyScaleCode"] = false;
+    this.dictIsShow["MrInvestmentTypeCode"] = false;
+    this.dictIsShow["ProfessionalNo"] = false;
+
+    tempForm.get("MrWellknownCoyCode").clearValidators();
+    tempForm.get("EmploymentEstablishmentDt").clearValidators();
+    tempForm.get("MrCoyScaleCode").clearValidators();
+    tempForm.get("MrInvestmentTypeCode").clearValidators();
+    tempForm.get("RefIndustryTypeId").setValidators(Validators.required);
+  }
+
+  requiredInEmp(tempForm: FormGroup) {
+    tempForm.get("MrWellknownCoyCode").setValidators(Validators.required);
+    tempForm.get("EmploymentEstablishmentDt").setValidators(Validators.required);
+    tempForm.get("MrCoyScaleCode").setValidators(Validators.required);
+    this.dictIsShow["MrWellknownCoyCode"] = true;
+    this.dictIsShow["MrCoyScaleCode"] = true;
+    this.dictIsShow["EmploymentEstablishmentDt"] = true;
+    this.dictIsShow["NoOfEmploy"] = true;
+    this.dictIsShow["IsMfEmp"] = true;
+    this.dictIsShow["MrJobPositionCode"] = true;
+    this.dictIsShow["IsWellknownCoy"] = true;
+    this.dictIsShow["MrJobStatCode"] = true;
+  }
+  requiredInSme(tempForm: FormGroup) {
+    tempForm.get("MrWellknownCoyCode").setValidators(Validators.required);
+    tempForm.get("MrCoyScaleCode").setValidators(Validators.required);
+    tempForm.get("MrInvestmentTypeCode").setValidators(Validators.required);
+    this.dictIsShow["MrWellknownCoyCode"] = true;
+    this.dictIsShow["MrCoyScaleCode"] = true;
+    this.dictIsShow["MrInvestmentTypeCode"] = true;
+    this.dictIsShow["NoOfEmploy"] = true;
+    this.dictIsShow["MrJobPositionCode"] = true;
+    this.dictIsShow["IsWellknownCoy"] = true;
+  }
+  requiredInProf() {
+    this.dictIsShow["ProfessionalNo"] = true;
+  }
+  requiredInNonProf(tempForm: FormGroup) {
+    tempForm.get("RefIndustryTypeId").clearValidators();
+    this.dictIsShow["RefIndustryTypeId"] = false;
+    this.dictIsShow["JobTitleName"] = false;
+    this.dictIsShow["IsShowJobAddr"] = false;
+  }
+  //#endregion
 
   getLookUpProfession(event) {
     this.CustomerJobForm.patchValue({
@@ -262,9 +375,12 @@ export class CustPersonalJobDataComponent implements OnInit {
     });
   }
 
-  getLookUpCompanyName(ev) {
+  getLookUpCompanyName(ev: RefMasterObj) {
     console.log(ev);
 
+    this.CustomerJobForm.patchValue({
+      MrWellknownCoyCode: ev.MasterCode,
+    });
   }
   //#endregion
 

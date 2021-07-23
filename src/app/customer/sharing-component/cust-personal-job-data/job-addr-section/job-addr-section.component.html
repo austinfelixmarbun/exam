@@ -1,3 +1,25 @@
-<p>
-  job-addr-section works!
-</p>
+<lib-ucSubsection [id]="JobAddr + 'SectionId'" [title]="dictJobAddr[JobAddr].title" [panel]="JobAddr + 'Section'">
+</lib-ucSubsection>
+<div class="form-body" [id]="JobAddr + 'Section'">
+  <lib-ucaddress [addressObj]="dictJobAddr[JobAddr]" [UCAddrForm]="parentForm" [enjiForm]="enjiForm"
+    [identifier]="JobAddr+'UcAddress'">
+  </lib-ucaddress>
+</div>
+
+<lib-ucSubsection [id]="OthBizAddr + 'SectionId'" [title]="dictJobAddr[OthBizAddr].title"
+  [panel]="OthBizAddr + 'Section'">
+</lib-ucSubsection>
+<div class="form-body" [id]="OthBizAddr + 'Section'">
+  <lib-ucaddress [addressObj]="dictJobAddr[OthBizAddr]" [UCAddrForm]="parentForm" [enjiForm]="enjiForm"
+    [identifier]="OthBizAddr+'UcAddress'">
+  </lib-ucaddress>
+</div>
+
+<lib-ucSubsection [id]="PrevJobAddr + 'SectionId'" [title]="dictJobAddr[PrevJobAddr].title"
+  [panel]="PrevJobAddr + 'Section'">
+</lib-ucSubsection>
+<div class="form-body" [id]="PrevJobAddr + 'Section'">
+  <lib-ucaddress [addressObj]="dictJobAddr[PrevJobAddr]" [UCAddrForm]="parentForm" [enjiForm]="enjiForm"
+    [identifier]="PrevJobAddr+'UcAddress'">
+  </lib-ucaddress>
+</div>
