@@ -651,7 +651,7 @@ export class URLConstant {
     public static GetVerfSchemeHForUpdateById = environment.FoundationR3Url + "/v1" + "/VerfSchemeH/GetVerfSchemeHForUpdateById";
     public static GetVerfSchemeDataByVerfSchemeHId = environment.FoundationR3Url + "/v1" + "/VerfSchemeH/GetVerfSchemeDataByVerfSchemeHId";
     public static AddListVerfSchemeD = environment.FoundationR3Url + "/v1" + "/VerfSchemeD/AddListVerfSchemeD";
-    public static DeleteVerfSchemeD = "/VerfSchemeD/DeleteVerfSchemeD";
+    public static DeleteVerfSchemeD = environment.FoundationR3Url + "/v1" + "/VerfSchemeD/DeleteVerfSchemeD";
     public static GetVerfSchemeDsByVerfSchemeHId = environment.FoundationR3Url + "/v1" + "/VerfSchemeD/GetVerfSchemeDsByVerfSchemeHId";
     public static GetVerfSchemeDById = environment.FoundationR3Url + "/v1" + "/VerfSchemeD/GetVerfSchemeDById";
 
