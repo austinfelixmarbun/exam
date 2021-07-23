@@ -1,9 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-job-addr-section',
@@ -20,7 +23,7 @@ export class JobAddrSectionComponent implements OnInit {
   readonly CustAddrTypeOthBiz: string = CommonConstant.CustAddrTypeOthBiz;
   readonly CustAddrTypePreJob: string = CommonConstant.CustAddrTypePreJob;
   
-  constructor(private http: HttpClient, private fb: FormBuilder) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
 
   ngOnInit() {
     this.BindJobAdd(this.JobAddr);
@@ -28,6 +31,7 @@ export class JobAddrSectionComponent implements OnInit {
     this.BindJobAdd(this.OthBizAddr);
   }
 
+  businessDtMin: Date;
   AddControlFormJobAddr(){
     this.parentForm.addControl("JobAddrId", this.fb.control(''));
     this.parentForm.addControl("PrevCoyName", this.fb.control(''));
@@ -50,6 +54,9 @@ export class JobAddrSectionComponent implements OnInit {
     // OthBizJobPosition: [''],
     // OthBizEstablishmentDt: [''],
     // OthBizAddrId: [0],
+    let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
+    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
   }
 
   dictJobAddr: {[Id: string]: InputAddressObj} ={};
