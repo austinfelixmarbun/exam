@@ -2,8 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { ClaimTaskService } from 'app/shared/claimTask.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
@@ -29,10 +31,12 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   MrCustTypeCode: string;
   CompanyConstant: string;
   PersonalConstant: string;
-  WfTaskListId: number;
+  WfTaskListId: any;
   SubjectType: string;
   IdCust: number = 0;
   isMarried: boolean = false;
+  currentUserContext : CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+  private claimTaskService: ClaimTaskService;
 
   CustPersonalStep = {
     "CUST": 1,
@@ -79,6 +83,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
 
   async ngOnInit() {
     this.claimTask();
+
     this.CustNoObj.CustNo = this.CustNo;
     await this.http.post(URLConstant.GetCustByCustNo, this.CustNoObj).toPromise().then(
       (response: CustObj) => {
@@ -117,11 +122,11 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   }
 
   claimTask() {
-    var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    var wfClaimObj = { pWFTaskListID: this.WfTaskListId, pUserID: currentUserContext[CommonConstant.USER_NAME] };
-    this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(
-      (response) => {
-      });
+    if(environment.isCore){
+      this.claimTaskService.ClaimTaskV2(this.WfTaskListId);
+    }else{
+      this.claimTaskService.ClaimTask(this.WfTaskListId);
+    }
   }
 
   EnterTab(step) {

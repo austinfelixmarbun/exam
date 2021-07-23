@@ -14,6 +14,7 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
+import { ClaimTaskService } from 'app/shared/claimTask.service';
 
 @Component({
   selector: 'app-review-upload-asset-master-detail',
@@ -26,7 +27,8 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
   taskListId: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   currentUserContext: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-  
+  private claimTaskService: ClaimTaskService;
+
   readonly CancelLink: string = NavigationConstant.ASSET_MASTER_RVW_UPLOAD_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
@@ -85,16 +87,10 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
 
   claimTask() {
     if(environment.isCore){
-      var newWfClaimObj = { TaskId: this.taskListId, UserId: this.currentUserContext[CommonConstant.USER_NAME] };
-      this.http.post(URLConstant.ClaimTaskV2, newWfClaimObj).subscribe(
-        (response) => {
-        });
+      this.claimTaskService.ClaimTaskV2(this.taskListId);
     }
     else{
-      var wfClaimObj = { pWFTaskListID: this.taskListId, pUserID: this.currentUserContext[CommonConstant.USER_NAME] };
-      this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(
-        (response) => {
-        });
+      this.claimTaskService.ClaimTask(this.taskListId);
     }
   }
   
