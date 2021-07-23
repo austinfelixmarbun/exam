@@ -336,8 +336,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     formValue["IsCopyAll"] = this.IsCopyAll;
     formValue["CustBankAccIdToDelete"] = this.CustBankAccToDelete;
 
-    let UpdateMasterCustFinDataUrl = URLConstant.UpdateMasterCustFinData;
-    if(environment.isCore) UpdateMasterCustFinDataUrl = URLConstant.UpdateMasterCustFinDataV2;
+    let UpdateMasterCustFinDataUrl = environment.isCore ? URLConstant.UpdateMasterCustFinDataV2 : URLConstant.UpdateMasterCustFinData;
     this.http.post(UpdateMasterCustFinDataUrl, formValue).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);

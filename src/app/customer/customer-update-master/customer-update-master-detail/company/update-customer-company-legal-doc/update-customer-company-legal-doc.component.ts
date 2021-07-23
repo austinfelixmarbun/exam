@@ -87,8 +87,7 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
       }
     }
 
-    let UpdateMasterCustCompanyLegalDocUrl = URLConstant.UpdateMasterCustCompanyLegalDoc;
-    if(environment.isCore) UpdateMasterCustCompanyLegalDocUrl = URLConstant.UpdateMasterCustCompanyLegalDocv2;
+    let UpdateMasterCustCompanyLegalDocUrl = environment.isCore ? URLConstant.UpdateMasterCustCompanyLegalDocv2 : URLConstant.UpdateMasterCustCompanyLegalDoc;
     this.http.post(UpdateMasterCustCompanyLegalDocUrl, { CustCompanyId: this.CustCompanyId, TaskListId: this.WfTaskListId, LegalDocList: request }).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
