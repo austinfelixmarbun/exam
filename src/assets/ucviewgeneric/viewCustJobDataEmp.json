@@ -22,9 +22,9 @@
             "property": "JobPosition"
           },
           {
-            "type": "text",
-            "label": "Job Title Name",
-            "property": "JobTitleName"
+            "type": "boolean",
+            "label": "Wellknown Company",
+            "property": "IsWellKnownCoy"
           },
           {
             "type": "text",
@@ -35,6 +35,11 @@
             "type": "text",
             "label": "Nama Perusahaan / Usaha",
             "property": "CoyName"
+          },
+          {
+            "type": "text",
+            "label": "Job Title Name",
+            "property": "JobTitleName"
           },
           {
             "type": "boolean",
