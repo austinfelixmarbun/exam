@@ -13,9 +13,6 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
-import { WorkflowApiV2Obj } from 'app/shared/model/WorkflowApiObj.Model';
-import { CompleteTaskModelObj } from 'app/shared/model/V2/CompleteTaskModelObj.model';
-import { RequestTaskModelObj } from 'app/shared/model/V2/RequestTaskModelObj.model';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 
 @Component({
@@ -64,11 +61,6 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
       uploadV2Obj.TaskListId = this.taskListId;
       uploadV2Obj.MrUploadStatusCode = status;
       uploadV2Obj.UploadMonitoringNo = this.uploadNo;
-      uploadV2Obj.ListValue = { "Status": status };
-      uploadV2Obj.ProcessKey = CommonConstant.WorkflowUploadAssetMaster;
-     uploadV2Obj.OfficeCode = this.currentUserContext[CommonConstant.OFFICE_CODE],
-     uploadV2Obj.TaskDefinitionKey = CommonConstant.WfUploadAssetMasterReview,
-     uploadV2Obj.RoleCode = this.currentUserContext[CommonConstant.ROLE_CODE],
 
       this.http.post(URLConstant.UploadReviewV2, uploadV2Obj).subscribe(
         response => {
