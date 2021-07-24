@@ -42,7 +42,7 @@ export class UpdateCustomerFamilyComponent implements OnInit {
         for (const item of this.ListAppFamily) {
           var isExist = false;
           for (const family of this.ListCustFamily) {
-            if (item["CustName"] == family["CustName"]) {
+            if (item["CustName"] == family["CustName"] && item["CustRelationship"] == family["CustRelationship"]) {
               isExist = true;
               break;
             }
