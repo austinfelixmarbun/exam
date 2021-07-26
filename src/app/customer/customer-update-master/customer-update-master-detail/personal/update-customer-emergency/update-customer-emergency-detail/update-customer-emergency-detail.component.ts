@@ -156,6 +156,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
           response[0]["MasterCustEmergency"]["City"] != response[0]["AppCustEmergency"]["City"]) {
           this.IsAddressDifferent = true;
         }
+        this.setValidatorPattern();
         return response[0];
       })
     ).toPromise().then(
@@ -167,7 +168,6 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
         this.appCustRelationship = this.CustRelationList.find(x => x.Key == this.AppEmergencyData.CustRelation).Value;
         this.appIdType = this.IdTypeList.find(x => x.Key == this.AppEmergencyData.IdType).Value;
         this.appGender = this.GenderList.find(x => x.Key == this.AppEmergencyData.Gender).Value;
-        this.setValidatorPattern();
       }
     ).catch(
       (error) => {
