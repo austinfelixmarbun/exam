@@ -956,11 +956,11 @@ export class URLConstant {
     public static GetListRackByCabinetCode = environment.FoundationR3Url + "/v1" + "/ViewDocument/GetListRackByCabinetCode";
     public static GetCabinetByCabinetCode = environment.FoundationR3Url + "/v1" + "/ViewDocument/GetCabinetByCabinetCode";
 
-    public static GetListFilingByRackCode = environment.FoundationR3Url + "/v1" + "/ViewDocument/GetListFilingByRackCode";
+    public static GetListFilingByRackCodeAndCabinetCode = environment.FoundationR3Url + "/v1" + "/ViewDocument/GetListFilingByRackCodeAndCabinetCode";
     public static GetRackByRackCode = environment.FoundationR3Url + "/v1" + "/ViewDocument/GetRackByRackCode";
 
-    public static GetRackAndListFilingByRackCode = environment.FoundationR3Url + "/v1" + "/DocManagement/GetRackAndListFilingByRackCode";
-    public static GetRackAndListFilingByFilingCode = environment.FoundationR3Url + "/v1" + "/DocManagement/GetRackAndListFilingByFilingCode";
+    public static GetRackAndListFilingByRackCodeAndCabinetCode = environment.FoundationR3Url + "/v1" + "/DocManagement/GetRackAndListFilingByRackCodeAndCabinetCode";
+    public static GetRackAndListFilingByFilingCodeAndRackId = environment.FoundationR3Url + "/v1" + "/DocManagement/GetRackAndListFilingByFilingCodeAndRackId";
     public static GetCabinetAndListRackByCabinetCode = environment.FoundationR3Url + "/v1" + "/DocManagement/GetCabinetAndListRackByCabinetCode";
     public static GetRackByCode = environment.FoundationR3Url + "/v1" + "/DocManagement/GetRackByCode";
     public static GetCabinetByCode = environment.FoundationR3Url + "/v1" + "/DocManagement/GetCabinetByCode";
@@ -970,7 +970,7 @@ export class URLConstant {
     public static EditFiling = environment.FoundationR3Url + "/v1" + "/DocManagement/EditFiling";
     public static AddRack = environment.FoundationR3Url + "/v1" + "/DocManagement/AddRack";
     public static EditRack = environment.FoundationR3Url + "/v1" + "/DocManagement/EditRack";
-    public static GetCabinetAndRackByRackCode = environment.FoundationR3Url + "/v1" + "/DocManagement/GetCabinetAndRackByRackCode";
+    public static GetCabinetAndRackByRackCodeAndCabinetId = environment.FoundationR3Url + "/v1" + "/DocManagement/GetCabinetAndRackByRackCodeAndCabinetId";
 
     //Auction Company
     public static AddAuctionCompany = environment.FoundationR3Url + "/v1" + "/AuctionCompany/AddAuctionCompany";

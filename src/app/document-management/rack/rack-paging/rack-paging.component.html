@@ -68,7 +68,7 @@
                 <tr *ngFor="let item of Cabinet.ListRack; let i = index">
                   <td>
                     <a [routerLink]="[ViewLink]" target="_blank" 
-                    [queryParams]="{ RackCode: item.RackCode }">{{item.RackCode}}
+                    [queryParams]="{ RackCode: item.RackCode, CabinetCode: Cabinet.CabinetCode}">{{item.RackCode}}
                     </a>
                   </td>
                   <td class="align-center">{{item.RackName}}</td>
