@@ -722,7 +722,7 @@ export class URLConstant {
     public static GetCustPersonalFinDataForCustViewByCustId = environment.FoundationR3Url + "/v1" + "/CustPersonalFinData/GetCustPersonalFinDataForCustViewByCustId";
     public static GetListCustPersonalFinDataForCustViewByCustId = environment.FoundationR3Url + "/v1" + "/CustPersonalFinData/GetListCustPersonalFinDataForCustViewByCustId";
     public static EditCustBankAcc = environment.FoundationR3Url + "/v1" + "/CustBankAcc/EditCustBankAcc";
-    public static DeleteCustBankAccAndStmnt = "/CustBankAcc/DeleteCustBankAccAndStmnt";
+    public static DeleteCustBankAccAndStmnt = environment.FoundationR3Url + "/v1" + "/CustBankAcc/DeleteCustBankAccAndStmnt";
 
     // CUSTOMER ADDRESS
     public static GetListCustAddr = environment.FoundationR3Url + "/v1" + "/CustAddr/GetListCustAddr";
@@ -763,7 +763,7 @@ export class URLConstant {
     public static AddCustCompanyMgmntShrholderPersonal = environment.FoundationR3Url + "/v1" + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderPersonal";
     public static AddCustCompanyMgmntShrholderCompany = environment.FoundationR3Url + "/v1" + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderCompany";
     public static EditCustCompanyMgmntShrholder = environment.FoundationR3Url + "/v1" + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholder";
-    public static DeleteCustCompanyMgmntShrholder = "/CustCompanyMgmntShrholder/DeleteCustCompanyMgmntShrholder";
+    public static DeleteCustCompanyMgmntShrholder = environment.FoundationR3Url + "/v1" + "/CustCompanyMgmntShrholder/DeleteCustCompanyMgmntShrholder";
     public static GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId = environment.FoundationR3Url + "/v1" + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId";
     public static GetListCustCompanyMgmntShrholderByCustId = environment.FoundationR3Url + "/v1" + "/CustCompanyMgmntShrholder/GetListCustCompanyMgmntShrholderByCustId";
 
