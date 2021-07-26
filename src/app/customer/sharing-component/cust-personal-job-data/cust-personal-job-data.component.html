@@ -21,7 +21,7 @@
                 <label class="col-md-4 adins-required-label" translate> Profession Name </label>
                 <div class="col-md-8">
                   <lib-uclookupgeneric [lookupInput]="professionLookUpObj" [parentForm]="CustomerJobForm"
-                    [enjiForm]="enjiForm" [identifier]="'JobProfession'" (lookup)=getLookUpProfession($event)>
+                    [enjiForm]="enjiForm" [identifier]="'JobProfession'" (lookup)=getLookUpProfession($event) #LookupProfession>
                   </lib-uclookupgeneric>
                 </div>
               </div>
@@ -83,8 +83,8 @@
                 <label class="col-md-4 adInsLabel" translate>Job Status </label>
                 <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeJobStat]?.isReady">
                   <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeJobStat]"
-                    [parentForm]="CustomerJobForm" [enjiForm]="enjiForm" [identifier]="'MrJobStatCode'"
-                    (callback)="changeCustModel()"></lib-ucdropdownlist>
+                    [parentForm]="CustomerJobForm" [enjiForm]="enjiForm" [identifier]="'MrJobStatCode'">
+                  </lib-ucdropdownlist>
                 </div>
               </div>
 

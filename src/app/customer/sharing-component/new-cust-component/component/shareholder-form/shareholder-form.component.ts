@@ -1,10 +1,13 @@
+import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -38,6 +41,12 @@ export class ShareholderFormComponent implements OnInit {
 
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
 
+  private ucLookupProfession: UclookupgenericComponent;
+  @ViewChild('LookupProfession') set content(content: UclookupgenericComponent) {
+    if (content) { // initially setter gets called with undefined
+      this.ucLookupProfession = content;
+    }
+  }
   constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
 
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
@@ -208,5 +217,23 @@ export class ShareholderFormComponent implements OnInit {
     });
     this.professionLookUpObj.nameSelect = valueDesc;
     this.professionLookUpObj.jsonSelect = { JobDesc: valueDesc };
+    this.PatchCriteriaLookupProfession();
+  }
+  
+  PatchCriteriaLookupProfession() {
+    let tempCustModel: string = this.parentForm.get("MrCustModelCode").value;
+
+    if (tempCustModel != "") {
+      let listCriteriaObj: Array<CriteriaObj> = new Array();
+      let criteriaCustObj = new CriteriaObj();
+      criteriaCustObj.DataType = "text";
+      criteriaCustObj.restriction = AdInsConstant.RestrictionEq;
+      criteriaCustObj.propName = 'MR_CUST_MODEL_CODE';
+      criteriaCustObj.value = tempCustModel;
+      listCriteriaObj.push(criteriaCustObj);
+
+      this.professionLookUpObj.addCritInput = listCriteriaObj;
+      this.ucLookupProfession.setAddCritInput();
+    }
   }
 }

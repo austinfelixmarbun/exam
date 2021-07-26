@@ -273,6 +273,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           this.CustomerForm.patchValue({
             MrCustModelCode: response.MrCustModelCode ? response.MrCustModelCode : "",
           });
+          if(this.CustDataMode == this.CustDataModeFamily) this.familyForm.PatchCriteriaLookupProfession();
+          if(this.CustDataMode == this.CustDataModeShareholder) this.shareholderForm.PatchCriteriaLookupProfession();
         }
         this.existingCustomerLookUpObj.nameSelect = response.CustName;
         this.existingCustomerLookUpObj.jsonSelect = { CustName: response.CustName };

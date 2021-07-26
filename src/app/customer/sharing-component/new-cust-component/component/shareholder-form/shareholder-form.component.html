@@ -83,7 +83,7 @@
       <label class="col-md-4 adInsLabel" translate> Profession Name </label>
       <div class="col-md-8">
         <lib-uclookupgeneric [lookupInput]="professionLookUpObj" [parentForm]="parentForm"
-          [enjiForm]="enjiForm" [identifier]="'JobProfession'" (lookup)=getLookUpProfession($event)>
+          [enjiForm]="enjiForm" [identifier]="'JobProfession'" (lookup)=getLookUpProfession($event) #LookupProfession>
         </lib-uclookupgeneric>
       </div>
     </div>

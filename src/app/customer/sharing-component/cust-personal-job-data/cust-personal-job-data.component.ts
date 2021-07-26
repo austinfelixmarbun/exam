@@ -1,3 +1,4 @@
+import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
@@ -50,11 +51,18 @@ export class CustPersonalJobDataComponent implements OnInit {
   readonly CUST_MODEL_SME: string = CommonConstant.CUST_MODEL_SME;
   readonly CUST_MODEL_NONPROF: string = CommonConstant.CUST_MODEL_NONPROF;
 
+  private ucLookupProfession: UclookupgenericComponent;
+  @ViewChild('LookupProfession') set content(content: UclookupgenericComponent) {
+    if (content) { // initially setter gets called with undefined
+      this.ucLookupProfession = content;
+    }
+  }
   constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) { }
 
   async ngOnInit() {
     this.InitData();
     await this.GetExisting();
+    // this.PatchCriteriaLookupProfession();
     this.professionLookUpObj.isReady = true;
     this.companyLookupObj.isReady = true;
     this.industryLookUpObj.isReady = false;
@@ -76,7 +84,6 @@ export class CustPersonalJobDataComponent implements OnInit {
     this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel].ddlType = UcDropdownListConstant.DDL_TYPE_BLANK;
 
-    console.log(this.DictUcDDLObj);
     this.ResetForm();
 
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -183,7 +190,6 @@ export class CustPersonalJobDataComponent implements OnInit {
   async GetExisting() {
     this.http.post(URLConstant.GetCustByCustId, { Id: this.CustId }).subscribe(
       async (response: CustObj) => {
-        console.log(response);
         this.CustomerJobForm.patchValue({
           MrCustModelCode: response.MrCustModelCode,
         });
@@ -192,7 +198,6 @@ export class CustPersonalJobDataComponent implements OnInit {
     )
     await this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: this.CustId }).toPromise().then(
       async (response: CustPersonalJobDataObj) => {
-        console.log(response);
         if (response.CustPersonalJobDataId != 0) {
           this.tempCustPersonalJobDataObj = response;
           let datePipe = new DatePipe("en-US");
@@ -266,7 +271,6 @@ export class CustPersonalJobDataComponent implements OnInit {
   dictIsShow: { [Id: string]: boolean } = {};
   changeCustModel() {
     let tempCustModel: string = this.CustomerJobForm.get("MrCustModelCode").value;
-    console.log(tempCustModel);
 
     let tempForm: FormGroup = this.CustomerJobForm as FormGroup;
     this.ClearValidatorAllForm(tempForm);
@@ -290,6 +294,8 @@ export class CustPersonalJobDataComponent implements OnInit {
     tempForm.get("EmploymentEstablishmentDt").updateValueAndValidity();
     tempForm.get("MrCoyScaleCode").updateValueAndValidity();
     tempForm.get("MrInvestmentTypeCode").updateValueAndValidity();
+
+    this.PatchCriteriaLookupProfession();
   }
 
   //#region change validator
@@ -373,6 +379,23 @@ export class CustPersonalJobDataComponent implements OnInit {
   }
   //#endregion
 
+  PatchCriteriaLookupProfession() {
+    let tempCustModel: string = this.CustomerJobForm.get("MrCustModelCode").value;
+
+    if (tempCustModel != "") {
+      let listCriteriaObj: Array<CriteriaObj> = new Array();
+      let criteriaCustObj = new CriteriaObj();
+      criteriaCustObj.DataType = "text";
+      criteriaCustObj.restriction = AdInsConstant.RestrictionEq;
+      criteriaCustObj.propName = 'MR_CUST_MODEL_CODE';
+      criteriaCustObj.value = tempCustModel;
+      listCriteriaObj.push(criteriaCustObj);
+
+      this.professionLookUpObj.addCritInput = listCriteriaObj;
+      this.ucLookupProfession.setAddCritInput();
+    }
+  }
+
   getLookUpProfession(event) {
     this.CustomerJobForm.patchValue({
       RefProfessionId: event.RefProfessionId,
@@ -380,7 +403,6 @@ export class CustPersonalJobDataComponent implements OnInit {
   }
 
   getLookUpIndustryType(event) {
-    console.log(event);
     this.CustomerJobForm.patchValue({
       RefIndustryTypeId: event.RefIndustryTypeId,
     });
@@ -393,8 +415,6 @@ export class CustPersonalJobDataComponent implements OnInit {
   }
 
   getLookUpCompanyName(ev: RefMasterObj) {
-    console.log(ev);
-
     this.CustomerJobForm.patchValue({
       MrWellknownCoyCode: ev.MasterCode,
       CoyName: ev.Descr,
@@ -403,7 +423,7 @@ export class CustPersonalJobDataComponent implements OnInit {
   //#endregion
 
   SaveForm() {
-    console.log(this.CustomerJobForm);
+    // console.log(this.CustomerJobForm);
     let tempCustModel: string = this.CustomerJobForm.get("MrCustModelCode").value;
     let reqObjSave: RequestCustPersonalJobDataObj = new RequestCustPersonalJobDataObj();
     reqObjSave.CustPersonalJobData = this.SetReqObjPersonalJobSave(tempCustModel);
@@ -413,7 +433,7 @@ export class CustPersonalJobDataComponent implements OnInit {
       reqObjSave.OthBizAddr = this.SetAddrObj(this.CustAddrTypeOthBiz);
       reqObjSave.PreJobAddr = this.SetAddrObj(this.CustAddrTypePreJob);
     }
-    console.log(reqObjSave);
+    // console.log(reqObjSave);
     let urlSave: string = URLConstant.AddCustPersonalJobData;
     if (this.tempCustPersonalJobDataObj.CustPersonalJobDataId != 0) urlSave = URLConstant.EditCustPersonalJobData;
     this.http.post(urlSave, reqObjSave).subscribe(
@@ -426,7 +446,6 @@ export class CustPersonalJobDataComponent implements OnInit {
 
   SetReqObjPersonalJobSave(CustModel: string): CustPersonalJobDataObj {
     let tempForm = this.CustomerJobForm.getRawValue();
-    console.log(tempForm);
     let tempPersonalJob: CustPersonalJobDataObj = new CustPersonalJobDataObj();
     tempPersonalJob.CustPersonalJobDataId = this.tempCustPersonalJobDataObj.CustPersonalJobDataId;
     tempPersonalJob.RowVersion = this.tempCustPersonalJobDataObj.RowVersion;

@@ -1,5 +1,6 @@
+import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -36,12 +37,18 @@ export class FamilyFormComponent implements OnInit {
 
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
   readonly RefMasterTypeCodeNationality: string = CommonConstant.RefMasterTypeCodeNationality;
+  private ucLookupProfession: UclookupgenericComponent;
+  @ViewChild('LookupProfession') set content(content: UclookupgenericComponent) {
+    if (content) { // initially setter gets called with undefined
+      this.ucLookupProfession = content;
+    }
+  }
   constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
 
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   async ngOnInit() {
     this.InitData();
-    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, null, true);
+    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     this.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
     await this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;
@@ -226,12 +233,30 @@ export class FamilyFormComponent implements OnInit {
     });
   }
 
-  ResetLookupProfession(valueCode: string = null, valueDesc: string = ""){
+  ResetLookupProfession(valueCode: string = null, valueDesc: string = "") {
     this.parentForm.patchValue({
       RefProfessionId: valueCode,
     });
     this.professionLookUpObj.nameSelect = valueDesc;
     this.professionLookUpObj.jsonSelect = { JobDesc: valueDesc };
+    this.PatchCriteriaLookupProfession();
+  }
+
+  PatchCriteriaLookupProfession() {
+    let tempCustModel: string = this.parentForm.get("MrCustModelCode").value;
+
+    if (tempCustModel != "") {
+      let listCriteriaObj: Array<CriteriaObj> = new Array();
+      let criteriaCustObj = new CriteriaObj();
+      criteriaCustObj.DataType = "text";
+      criteriaCustObj.restriction = AdInsConstant.RestrictionEq;
+      criteriaCustObj.propName = 'MR_CUST_MODEL_CODE';
+      criteriaCustObj.value = tempCustModel;
+      listCriteriaObj.push(criteriaCustObj);
+
+      this.professionLookUpObj.addCritInput = listCriteriaObj;
+      this.ucLookupProfession.setAddCritInput();
+    }
   }
 
   getLookUpCountry(ev) {
