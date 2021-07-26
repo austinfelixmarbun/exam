@@ -52,7 +52,7 @@
                 <div class="col-md-4">
                   <select class="form-control adInsInput" style="width: auto" formControlName="MrIdTypeCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AuctionCompanyForm.controls.MrIdTypeCode.invalid }">
-                    <option *ngFor="let it of itemIdType" value="{{it.Key}}">
+                    <option *ngFor="let it of itemIdType" [value]="it.Key">
                       {{it.Value}}</option>
                   </select>
                   <lib-uc-show-errors [control]="AuctionCompanyForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
@@ -157,6 +157,8 @@
                 <label class="col-md-3">Mobile Phone 2</label>
                 <div class="col-md-4">
                   <input type="text" class="form-control" formControlName="Phn2">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.Phn2" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
 
@@ -213,6 +215,8 @@
                 <label class="col-md-3">Mobile Phone 2</label>
                 <div class="col-md-4">
                   <input type="text" class="form-control" formControlName="Phone2">
+                  <lib-uc-show-errors [control]="AuctionCompanyForm.controls.Phone2" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
 
@@ -284,11 +288,10 @@
             </lib-ucSubsection>
             <div id="TaxInformation">
               <div class="form-group row">
-                <label class="col-md-3  adins-required-label" translate>Tax Calculation Method</label>
+                <label class="col-md-3 adins-required-label" translate>Tax Calculation Method</label>
                 <div class="col-md-9">
                   <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AuctionCompanyForm.controls.MrTaxCalcMethodCode.invalid }">
-                    <option value="">Select One</option>
                     <option *ngFor="let it of itemCalcMethodType" value="{{it.Key}}">
                       {{it.Value}}</option>
                   </select>
@@ -301,6 +304,7 @@
                 <label class="col-md-3  adins-required-label">VAT</label>
                 <div class="col-md-9">
                   <select class="form-control" formControlName="IsVat">
+                    <option value="">Select One</option>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                   </select>
@@ -345,7 +349,7 @@
                 </div>
                 
                 <div class="form-group row">
-                  <label class="col-md-3  adInsLabel" translate>Tax RT</label>
+                  <label class="col-md-3 adins-required-label" translate>Tax RT</label>
                   <div class="col-md-4">
                     <input type="text" class="form-control" formControlName="TaxRT">
                     <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxRT" [submit]="enjiForm.submitted">
@@ -354,7 +358,7 @@
                 </div>
 
                 <div class="form-group row">
-                  <label class="col-md-3  adInsLabel" translate>Tax RW</label>
+                  <label class="col-md-3 adins-required-label" translate>Tax RW</label>
                   <div class="col-md-4">
                     <input type="text" class="form-control" formControlName="TaxRW">
                     <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxRW" [submit]="enjiForm.submitted">
@@ -374,7 +378,7 @@
                 </div>
   
                 <div class="form-group row">
-                  <label class="col-md-3  adInsLabel" translate>Tax Kelurahan</label>
+                  <label class="col-md-3 adInsLabel" translate>Tax Kelurahan</label>
                   <div class="col-md-4">
                     <input type="text" class="form-control" formControlName="TaxKelurahan">
                     <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxKelurahan" [submit]="enjiForm.submitted">
@@ -383,7 +387,7 @@
                 </div>
   
                 <div class="form-group row">
-                  <label class="col-md-3  adInsLabel" translate>Tax Kecamatan</label>
+                  <label class="col-md-3 adInsLabel" translate>Tax Kecamatan</label>
                   <div class="col-md-4">
                     <input type="text" class="form-control" formControlName="TaxKecamatan">
                     <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxKecamatan" [submit]="enjiForm.submitted">
@@ -392,7 +396,7 @@
                 </div>
   
                 <div class="form-group row">
-                  <label class="col-md-3  adInsLabel" translate>Tax City</label>
+                  <label class="col-md-3 adInsLabel" translate>Tax City</label>
                   <div class="col-md-4">
                     <input type="text" class="form-control" formControlName="TaxCity">
                     <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxCity" [submit]="enjiForm.submitted">
@@ -401,7 +405,7 @@
                 </div>
   
                 <div class="form-group row">
-                  <label class="col-md-3  adInsLabel" translate>Tax Province</label>
+                  <label class="col-md-3 adInsLabel" translate>Tax Province</label>
                   <div class="col-md-4">
                     <input type="text" class="form-control" formControlName="TaxProvince">
                     <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxProvince" [submit]="enjiForm.submitted">

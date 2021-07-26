@@ -1,5 +1,5 @@
 {
-    "title": "REVIEW UPLOAD NEGATIVE ASSET",
+    "title": "REVIEW UPLOAD ASSET MASTER",
     "exportExcel": false,
     "component": [
       {
@@ -38,50 +38,23 @@
         "datatype": "text"
       },
       {
-        "type": "dropdown",
-        "name": "VWF.CLAIM_STAT",
-        "id": "ActiveStatusId",
-        "label": "Task Claim Status",
-        "value": "",
-        "placeholder": "Placeholder",
-        "isFromURL": false,
-        "ddlType": "all",
-        "items": [
-          {
-            "key": "CLAIMED",
-            "value": "CLAIMED"
-          },
-          {
-            "key": "UNCLAIMED",
-            "value": "UNCLAIMED"
-          }
-        ],
-        "itemsUrl": []
-      },
-      {
         "type": "textbox",
-        "name": "VWF.USERNAME",
-        "id": "ClaimById",
+        "name": "Assignee",
+        "id": "AssigneeId",
         "value": "",
         "label": "Claim By",
         "placeholder": "Placeholder"
       }
     ],
     "querystring": {
-      "name": "searchReviewUploadNegativeAsset"
+      "name": "searchReviewUploadAssetMasterV2"
     },
     "headerList": [
       {
         "type": "sort",
         "position": "center",
-        "label": "SLA",
-        "name": "SlaColor"
-      },
-      {
-        "type": "sort",
-        "position": "center",
         "label": "CLAIM BY",
-        "name": "VWF.USERNAME"
+        "name": "Assignee"
       },
       {
         "type": "sort",
@@ -126,14 +99,9 @@
     ],
     "bodyList": [
       {
-        "type": "sla",
-        "position": "center",
-        "property": "SlaColor"
-      },
-      {
         "type": "text",
         "position": "center",
-        "property": "ClaimBy"
+        "property": "Assignee"
       },
       {
         "type": "text",
@@ -166,7 +134,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "ASSET_NEG_RVW_UPLOAD_DETAIL",
+            "path": "ASSET_MASTER_RVW_UPLOAD_DETAIL",
             "param": [
               {
                 "type": "UploadId",
@@ -178,7 +146,7 @@
               },
               {
                 "type": "TaskListId",
-                "property": "TaskListId"
+                "property": "Id"
               }
             ]
           }
