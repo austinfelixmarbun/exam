@@ -26,8 +26,9 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel adins-required" translate>Exchange Rate</label>
                 <div class="col-md-9">
-                  <input type="number" class="form-control adInsInput name" formControlName="ExchangeRateAmt"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && ExchangeRateForm.controls.ExchangeRateAmt.invalid }">
+                  <input type="" currencyMask class="form-control adInsInput code" formControlName="ExchangeRateAmt"
+                  [ngClass]="{ 'is-invalid': ExchangeRateForm.submitted && ExchangeRateForm.controls.ExchangeRateAmt.invalid }"
+                  [options]="{align: 'right', allowNegative: false}" />
                   <lib-uc-show-errors [control]="ExchangeRateForm.controls.ExchangeRateAmt" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
