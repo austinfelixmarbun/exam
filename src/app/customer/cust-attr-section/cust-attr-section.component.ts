@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -27,14 +26,12 @@ export class CustAttrSectionComponent implements OnInit {
   attrGroup: string;
   From: string;
   CustOtherInfo: any;
-  constructor(
-    private router: Router,
+
+  constructor(private router: Router,
     private route: ActivatedRoute,
-    private location: Location,
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder
-  ) {
+    private fb: FormBuilder) {
     this.pageType = "add";
     this.isLookupReady = false;
     this.route.queryParams.subscribe(params => {
@@ -155,11 +152,11 @@ export class CustAttrSectionComponent implements OnInit {
       this.httpClient.post(url, RequestAppCustOtherInfoObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          if (this.From == 'CustPaging') {
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
-          } else {
+          if (this.From === "EditMainData") {
             AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
-
+          }
+          else {
+            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
           }
         });
     }
@@ -186,16 +183,16 @@ export class CustAttrSectionComponent implements OnInit {
       LbppmsBizSclId: e.LbppmsBizSclId
     });
   }
+
   getLookupCounterpartCategory(e) {
     this.OtherInformationForm.patchValue({
       LbppmsCntrprtId: e.LbppmsCntrprtId
     });
-
   }
+
   getLookupSustainableFinancialBusiness(e) {
     this.OtherInformationForm.patchValue({
       LbppmsBizSustainId: e.LbppmsBizSustainId
     });
   }
-
 }
