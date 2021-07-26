@@ -24,7 +24,12 @@
           <tbody>
             <ng-container *ngFor="let item of responseObj">
               <tr>
-                <td class="text-left">{{item.NegCustTypeCodeDesc}}</td>
+                <!-- <td class="text-left">{{item.NegCustTypeCodeDesc}}</td> -->
+                <td class="text-left">
+                  <span [ngStyle]="{'color': item.NegCustTypeCodeDesc === '-' || item.NegCustTypeCodeDesc === 'GOOD' ? 'green' : item.NegCustTypeCodeDesc === 'WARNING' ? 'yellow' : 'red'}">
+                    <i class="font-medium-3 fa fa-circle"></i>
+                  </span>
+                </td>
                 <td class="text-left" *ngIf="item.Type == 'Personal'"><a href="{{custUrl + item.CustId}}" target="_blank">{{item.ShrholderName}}</a></td>
                 <td class="text-left" *ngIf="item.Type == 'Company'"><a href="{{custCompanyUrl + item.CustId}}" target="_blank">{{item.ShrholderName}}</a></td>
                 <td class="text-left">{{item.Type}}</td>
