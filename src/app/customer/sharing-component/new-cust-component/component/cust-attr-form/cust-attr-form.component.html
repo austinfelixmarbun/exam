@@ -28,7 +28,7 @@
             formControlName="AttrValue"
             [ngClass]="{ 'is-invalid': enjiForm.submitted && item.controls.AttrValue.invalid}">
           
-          <lib-uclookupgeneric [lookupInput]="dictRefMasterLookup[item.controls.AttrCode.value]" [parentForm]="parentForm"
+          <lib-uclookupgeneric *ngSwitchCase="AttrInputTypeRefMaster" [lookupInput]="dictRefMasterLookup[item.controls.AttrCode.value]" [parentForm]="parentForm"
             [enjiForm]="enjiForm" [identifier]="'lookup'+ item.controls.AttrCode.value" (lookup)="getLookUp($event, idx)">
           </lib-uclookupgeneric>
 

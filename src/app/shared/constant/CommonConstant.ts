@@ -270,6 +270,7 @@ export class CommonConstant {
     public static AttrInputTypeNum = "N";
     public static AttrInputTypeNumPerc = "P";
     public static AttrInputTypeList = "L";
+    public static AttrInputTypeSearchList = "SL";
     public static AttrInputTypeText = "T";
     public static AttrInputTypeTextArea = "TA";
     public static AttrInputTypeRefMaster = "RM";
