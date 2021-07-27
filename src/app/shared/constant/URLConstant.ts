@@ -516,7 +516,7 @@ export class URLConstant {
     public static GetVendorContactPersonById = environment.FoundationR3Url + "/v1" + "/VendorContactPerson/GetVendorContactPersonById";
     public static AddVendorContactPerson = environment.FoundationR3Url + "/v1" + "/VendorContactPerson/AddVendorContactPerson";
     public static EditVendorContactPerson = environment.FoundationR3Url + "/v1" + "/VendorContactPerson/EditVendorContactPerson";
-    public static DeleteVendorContactPerson = "/VendorContactPerson/DeleteVendorContactPerson";
+    public static DeleteVendorContactPerson = environment.FoundationR3Url + "/v1" + "/VendorContactPerson/DeleteVendorContactPerson";
     public static GetListVendorContactPersonByVendorId = environment.FoundationR3Url + "/v1" + "/VendorContactPerson/GetListVendorContactPersonByVendorId"
     public static GetListBranchByVendorId = environment.FoundationR3Url + "/v1" + "/Vendor/GetListBranchByVendorId";
     public static GetListVendorBankAccByVendorEmpId = environment.FoundationR3Url + "/v1" + "/VendorBankAcc/GetListVendorBankAccByVendorEmpId";
