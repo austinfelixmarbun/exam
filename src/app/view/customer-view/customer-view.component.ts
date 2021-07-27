@@ -69,7 +69,7 @@ export class CustomerViewComponent implements OnInit {
 
     let reqGetSysConfigResultLOSObj = new GenericObj();
     reqGetSysConfigResultLOSObj.Code  = CommonConstant.MODULE_LOS;
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, reqGetSysConfigResultLOSObj).toPromise().then(
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, {ConfigCode : reqGetSysConfigResultLOSObj.Code}).toPromise().then(
       (response) => {
         if(response.ConfigValue === "1") {
           this.IsLos = true;
@@ -82,7 +82,7 @@ export class CustomerViewComponent implements OnInit {
 
     let reqGetSysConfigResultLMSObj = new GenericObj();
     reqGetSysConfigResultLMSObj.Code  = CommonConstant.MODULE_LMS;
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, reqGetSysConfigResultLMSObj).toPromise().then(
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, {ConfigCode : reqGetSysConfigResultLMSObj.Code}).toPromise().then(
       (response) => {
         if(response.ConfigValue === "1") {
           this.IsLms = true;

@@ -88,8 +88,7 @@
             <lib-uclookupgeneric [lookupInput]="ListInputLookUpObj[0][attr['AttrCode']]" [parentForm]="parentForm"
               [enjiForm]="enjiForm" [identifier]="'lookup'+ attr.AttrCode" (lookup)=getLookUp($event,attr.AttrCode)>
             </lib-uclookupgeneric>
-            <lib-uc-show-errors [control]="parentForm.controls[identifier]['controls'][attr['AttrCode']].controls.AttrValue"
-              [submit]="enjiForm.submitted"></lib-uc-show-errors>
+            
           </div>
         </div>
       </div>

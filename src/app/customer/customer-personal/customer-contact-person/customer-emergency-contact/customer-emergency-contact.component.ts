@@ -161,7 +161,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
       this.custPersonalContactPersonObj.CustId = this.custId;
       this.getInitPattern();
-      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustId, { Id: this.custId }).subscribe(
+      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustId, { Id: this.custId }).toPromise().then(
         (response) => {
           var datePipe = new DatePipe("en-US");
           this.tempCustPersonalContactPerson = response;
@@ -179,12 +179,15 @@ export class CustomerEmergencyContactComponent implements OnInit {
               // IsFamily: this.tempCustPersonalContactPerson.IsFamily,
               // IsEmergencyContact: this.tempCustPersonalContactPerson.IsEmergencyContact,
               MrCustRelationshipCode: this.tempCustPersonalContactPerson.MrCustRelationshipCode,
-              MrGenderCode: this.tempCustPersonalContactPerson.MrGenderCode
+              MrGenderCode: this.tempCustPersonalContactPerson.MrGenderCode,
+              ContactPersonCustNo: this.tempCustPersonalContactPerson.ContactPersonCustNo 
             });
           }
           this.existingCustomerLookUpObj.jsonSelect = { CustName: this.tempCustPersonalContactPerson.ContactPersonName };
           this.existingCustomerLookUpObj.isReady = true;
-
+          if(this.tempCustPersonalContactPerson.ContactPersonCustNo != null && this.tempCustPersonalContactPerson.ContactPersonCustNo != ""){
+            this.setDisableForm(this.tempCustPersonalContactPerson.MobilePhnNo1);
+          }
 
           this.inputFieldObj.inputLookupObj.nameSelect = this.tempCustPersonalContactPerson.Zipcode;
           this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustPersonalContactPerson.Zipcode };
@@ -302,6 +305,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.custPersonalContactPersonObj["Phn3"] = this.CustomerContactForm.value.UcAddress.Phn3;
     this.custPersonalContactPersonObj["PhnArea3"] = this.CustomerContactForm.value.UcAddress.PhnArea3;
     this.custPersonalContactPersonObj["PhnExt3"] = this.CustomerContactForm.value.UcAddress.PhnExt3;
+    this.custPersonalContactPersonObj.ContactPersonCustNo = this.CustomerContactForm.controls["ContactPersonCustNo"].value;
     if (this.tempCust != null) {
       this.custPersonalContactPersonObj.ContactPersonCustNo = this.tempCust.CustNo;
     }
@@ -353,14 +357,9 @@ export class CustomerEmergencyContactComponent implements OnInit {
           Email: this.tempCustPersonal.Email1,
           MrGenderCode: this.tempCustPersonal.MrGenderCode
         });
-
-        if (this.tempCustPersonal.MobilePhnNo1 != null) {
-          this.CustomerContactForm.controls.MobilePhnNo1.disable();
-          this.CustomerContactForm.controls.MobilePhnNo2.disable();
-          this.CustomerContactForm.controls.Email.disable();
-        }
+        this.setDisableForm(this.tempCustPersonal.MobilePhnNo1);
       }
-
+      
     );
     this.http.post(URLConstant.GetCustByCustId, { Id: this.custObj.CustId }).subscribe(
       (response) => {
@@ -368,7 +367,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
         this.CustomerContactForm.patchValue({
           MrIdTypeCode: this.tempCust.MrIdTypeCode,
           IdNo: this.tempCust.IdNo,
-          IdExpiredDt: datePipe.transform(this.tempCust.IdExpiredDt, 'yyyy-MM-dd'),
+          IdExpiredDt: this.tempCust.IdExpiredDt != null? datePipe.transform(this.tempCust.IdExpiredDt, 'yyyy-MM-dd') : "",
         });
         this.setValidatorPattern();
       }
@@ -389,12 +388,6 @@ export class CustomerEmergencyContactComponent implements OnInit {
         this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddress.Zipcode };
       }
     );
-    this.CustomerContactForm.controls.MrIdTypeCode.disable();
-    this.CustomerContactForm.controls.IdExpiredDt.disable();
-    this.CustomerContactForm.controls.IdNo.disable();
-    this.CustomerContactForm.controls.BirthPlace.disable();
-    this.CustomerContactForm.controls.BirthDt.disable();
-    this.CustomerContactForm.controls.MrGenderCode.disable();
   }
 
   onOptionIdTypeSelected(event : UcDropdownListCallbackObj) {
@@ -547,5 +540,68 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.ddlMrGenderCode.requestObj = refMasterObjMrGenderCode;
     this.ddlMrGenderCode.isObject = true;
     this.ddlMrGenderCode.customObjName = "ReturnObject";
+  }
+
+  setDisableForm(MobilePhone1 : string){
+
+    if(MobilePhone1 != null && MobilePhone1 != ""){
+      this.CustomerContactForm.controls.MobilePhnNo1.disable();
+      this.CustomerContactForm.controls.MobilePhnNo2.disable();
+      this.CustomerContactForm.controls.Email.disable();
+    }
+    this.CustomerContactForm.controls.MrIdTypeCode.disable();
+    this.CustomerContactForm.controls.IdExpiredDt.disable();
+    this.CustomerContactForm.controls.IdNo.disable();
+    this.CustomerContactForm.controls.BirthPlace.disable();
+    this.CustomerContactForm.controls.BirthDt.disable();
+    this.CustomerContactForm.controls.MrGenderCode.disable();
+  }
+
+  onTypeName(ev : string){
+    if(ev != ""){
+      if(this.tempCustPersonalContactPerson.ContactPersonName != ev){
+        this.CustomerContactForm.controls.MobilePhnNo1.enable();
+        this.CustomerContactForm.controls.MobilePhnNo2.enable();
+        this.CustomerContactForm.controls.Email.enable();
+        this.CustomerContactForm.controls.MrIdTypeCode.enable();
+        this.CustomerContactForm.controls.IdExpiredDt.enable();
+        this.CustomerContactForm.controls.IdNo.enable();
+        this.CustomerContactForm.controls.BirthPlace.enable();
+        this.CustomerContactForm.controls.BirthDt.enable();
+        this.CustomerContactForm.controls.MrGenderCode.enable();
+
+        this.CustomerContactForm.patchValue({
+          MrIdTypeCode: "",
+          IdNo: "",
+          IdExpiredDt: "",
+          BirthPlace: "",
+          BirthDt: "",
+          MobilePhnNo1: "",
+          MobilePhnNo2: "",
+          Email: "",
+          MrCustRelationshipCode: "",
+          MrGenderCode: "",
+          ContactPersonCustNo: "" 
+        });
+
+        ;
+
+        this.inputFieldObj = new InputFieldObj();
+        this.inputFieldObj.inputLookupObj = new InputLookupObj();
+        this.inputFieldObj.inputLookupObj.isRequired = false;
+        this.inputFieldObj.inputLookupObj.isReadonly = false;
+
+        this.inputAddressObj = new InputAddressObj();
+        this.inputAddressObj.showSubsection = false;
+        this.inputAddressObj.title = "Customer Address";
+        this.inputAddressObj.default = UcAddressObj;
+        this.inputAddressObj.inputField = this.inputFieldObj;
+        this.inputAddressObj.showAllPhn = true;
+        this.inputAddressObj.showFax = false;
+        this.inputAddressObj.isRequired = false;
+      }
+    }
+    
+    
   }
 }

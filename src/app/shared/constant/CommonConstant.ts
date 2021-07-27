@@ -347,9 +347,11 @@ export class CommonConstant {
 
     //WORKFLOW
     public static WorkflowUploadNegativeAsset = "WF_UPL_NAS";
-    public static WfUploadNegativeAssetReview = "UPLOAD_NAS_REVIEW"
+    public static WfUploadNegativeAssetReview = "UPLOAD_NAS_REVIEW";
     public static WorkflowUploadNegativeCustomer = "WF_UPL_NEG_CUST";
-    public static WfUploadNegativeCustomerReview = "UPLOAD_NEG_CUST_REVIEW"
+    public static WfUploadNegativeCustomerReview = "UPLOAD_NEG_CUST_REVIEW";
     public static WorkflowUploadAssetMaster = "WF_UPL_ASM";
-    public static WfUploadAssetMasterReview = "UPLOAD_ASM_REVIEW"
+    public static WfUploadAssetMasterReview = "UPLOAD_ASM_REVIEW";
+    public static WF_CODE_UPD_CUST_MANUAL = "WF_UPD_CUST_MANUAL";
+    public static ACT_CODE_UPD_CUST_DATA = "UPD_CUST_DATA";
 }

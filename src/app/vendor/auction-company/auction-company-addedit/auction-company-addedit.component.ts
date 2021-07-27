@@ -60,28 +60,28 @@ export class AuctionCompanyAddeditComponent implements OnInit {
     MrIdTypeCode: [''],
     RegistrationNo: ['', Validators.required],
     Addr  :  ['', [Validators.required]],
-    RT : ['', [Validators.required]],
-    RW : ['', [Validators.required]],
+    RT : ['', [Validators.required, Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(1), Validators.maxLength(3)]],
+    RW : ['', [Validators.required, Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(1), Validators.maxLength(3)]],
     Kelurahan : ['', [Validators.required]],
     Kecamatan : ['', [Validators.required]],
     City : ['', [Validators.required]],
     Province : ['',[Validators.required]],
 
     TaxAddr  :  ['', [Validators.required]],
-    TaxRT : ['', [Validators.required]],
-    TaxRW : ['', [Validators.required]],
+    TaxRT : ['', [Validators.required, Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(1), Validators.maxLength(3)]],
+    TaxRW : ['', [Validators.required, Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(1), Validators.maxLength(3)]],
     TaxKelurahan : ['', [Validators.required]],
     TaxKecamatan : ['', [Validators.required]],
     TaxCity : ['', [Validators.required]],
     TaxProvince : ['',[Validators.required]],
 
     Phn1  :  ['', [Validators.required,Validators.pattern("^[0-9]+$")]],    
-    Phn2 : [''],    
+    Phn2 : ['', Validators.pattern("^[0-9]+$")],    
     IsActive : ['', [Validators.required]],
     Name  :  ['', [Validators.required]],
     MrJobPositionCode  :  ['', [Validators.required]],
     Phone1 : ['', [Validators.required,Validators.pattern("^[0-9]+$")]],    
-    Phone2 : [''],    
+    Phone2 : ['', Validators.pattern("^[0-9]+$")],    
     Email: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]],    
     MrTaxCalcMethodCode : ['', [Validators.required]],
     IsVat: [true, Validators.required],
@@ -416,8 +416,8 @@ export class AuctionCompanyAddeditComponent implements OnInit {
       this.AuctionCompanyForm.controls.TaxIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
       this.AuctionCompanyForm.controls.TaxpayerName.setValidators(Validators.required);
       this.AuctionCompanyForm.controls.TaxAddr.setValidators(Validators.required);
-      this.AuctionCompanyForm.controls.TaxRT.setValidators(Validators.required);
-      this.AuctionCompanyForm.controls.TaxRW.setValidators(Validators.required);
+      this.AuctionCompanyForm.controls.TaxRT.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(1), Validators.maxLength(3)]);
+      this.AuctionCompanyForm.controls.TaxRW.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(1), Validators.maxLength(3)]);
       this.AuctionCompanyForm.controls.TaxKelurahan.setValidators(Validators.required);
       this.AuctionCompanyForm.controls.TaxKecamatan.setValidators(Validators.required);
       this.AuctionCompanyForm.controls.TaxCity.setValidators(Validators.required);

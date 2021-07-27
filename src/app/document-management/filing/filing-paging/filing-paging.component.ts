@@ -16,7 +16,6 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 export class FilingPagingComponent implements OnInit {
   Cabinet: CabinetWithListRackObj = new CabinetWithListRackObj();
   Rack: RackWithListFilingObj = new RackWithListFilingObj();
-  GetRackAndListFilingByRackCode: GenericObj = new GenericObj();
   GetCabinetAndListRackByCabinetCode: GenericObj = new GenericObj();
 
   readonly CancelLink: string = NavigationConstant.DOC_MNGMNT_RACK_PAGING;
@@ -37,20 +36,19 @@ export class FilingPagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.GetRackAndListFilingByRackCode.Code = this.Rack.RackCode;
-    this.http.post<RackWithListFilingObj>(URLConstant.GetRackAndListFilingByRackCode, this.GetRackAndListFilingByRackCode).subscribe(
-      (response) => {
-        this.Rack = response;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-
     this.GetCabinetAndListRackByCabinetCode.Code = this.Cabinet.CabinetCode;
     this.http.post<CabinetWithListRackObj>(URLConstant.GetCabinetAndListRackByCabinetCode, this.GetCabinetAndListRackByCabinetCode).subscribe(
       (response) => {
         this.Cabinet = response;
+        this.http.post<RackWithListFilingObj>(URLConstant.GetRackAndListFilingByRackCodeAndCabinetCode, {RackCode: this.Rack.RackCode, CabinetCode: this.Cabinet.CabinetCode}).subscribe(
+          (response) => {
+            this.Rack = response;
+    
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
       },
       (error) => {
         console.log(error);
