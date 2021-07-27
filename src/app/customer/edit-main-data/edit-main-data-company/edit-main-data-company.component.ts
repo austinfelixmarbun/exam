@@ -159,11 +159,6 @@ export class EditMainDataCompanyComponent implements OnInit {
         this.custObj.RowVersion = this.tempCustObj.RowVersion;
         this.custObj.MrCustTypeCode = this.tempCustObj.MrCustTypeCode;
         
-        if(this.tempCustObj.TaxIdNo != ""){
-          this.CustomerCompanyForm.controls["TaxIdNo"].disable();
-        }
-
-        
         this.custObj.CustAddr = new CustAddrObj();
         let reqObj: GenericObj = new GenericObj();
         reqObj.Id = this.tempCustObj.CustId;
