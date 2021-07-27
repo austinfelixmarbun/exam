@@ -25,16 +25,6 @@
           "type": "boolean",
           "label": "SKT",
           "property": "IsSkt"
-        },
-        {
-          "type": "text",
-          "label": "Tanda Daftar Perusahaan (TDP)",
-          "property": "RegNo"
-        },
-        {
-          "type": "text",
-          "label": "Surat Izin Usaha Perdagangan (SIUP)",
-          "property": "LisNo"
         }
       ],
       "querystring": {

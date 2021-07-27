@@ -18,6 +18,7 @@ export class RackAddEditComponent implements OnInit {
   RackCode: string;
   Mode: string;
   CabinetCode: string;
+  CabinetId: number;
   title: string = "ADD RACK";
   rack: RackObj = new RackObj();
   cabinetWithRackObj: CabinetWithListRackObj = new CabinetWithListRackObj();
@@ -56,34 +57,31 @@ export class RackAddEditComponent implements OnInit {
     this.http.post<CabinetObj>(URLConstant.GetCabinetByCode, {Code: this.CabinetCode}).subscribe(
       (response) => {
         this.Cabinet = response;
+        this.CabinetId = this.Cabinet.CabinetId;
+        console.log(this.CabinetId);
+        if((this.Mode !== null || this.Mode !== undefined) && this.CabinetId != null && this.Mode === 'Edit'){
+          this.title = "EDIT RACK";
+          this.RackForm.controls.RackCode.disable();
+          this.rack.RackCode = this.RackCode;
+          console.log(this.CabinetId);
+          this.http.post<CabinetWithListRackObj>(URLConstant.GetCabinetAndRackByRackCodeAndCabinetId, {RackCode: this.RackCode, CabinetId: this.CabinetId}).subscribe(
+            (response) => {
+              this.cabinetWithRackObj = response;
+              this.RackForm.controls['RackCode'].patchValue(response.ListRack[0].RackCode);
+              this.RackForm.controls['RackName'].patchValue(response.ListRack[0].RackName);
+              this.RackForm.controls['RackInformation'].patchValue(response.ListRack[0].RackInfo);
+              this.RackForm.controls['IsActive'].patchValue(response.ListRack[0].IsActive);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        }
       },
       (error) => {
         console.log(error);
       }
     );
-  
-    if(this.Mode !== null || this.Mode !== undefined){
-      if(this.Mode === 'Edit'){
-        this.title = "EDIT RACK";
-        this.RackForm.controls.RackCode.disable();
-        this.rack.RackCode = this.RackCode;
-        this.http.post<CabinetWithListRackObj>(URLConstant.GetCabinetAndRackByRackCode, {Code: this.RackCode}).subscribe(
-          (response) => {
-            this.cabinetWithRackObj = response;
-            this.RackForm.controls['RackCode'].patchValue(response.ListRack[0].RackCode);
-            this.RackForm.controls['RackName'].patchValue(response.ListRack[0].RackName);
-            this.RackForm.controls['RackInformation'].patchValue(response.ListRack[0].RackInfo);
-            this.RackForm.controls['IsActive'].patchValue(response.ListRack[0].IsActive);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-      }
-    }
-    else{
-      this.router.navigateByUrl(NavigationConstant.DOC_MNGMNT_CABINET_PAGING);
-    }
   }
 
   SaveForm(){

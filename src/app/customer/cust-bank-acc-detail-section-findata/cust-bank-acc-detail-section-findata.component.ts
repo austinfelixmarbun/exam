@@ -6,16 +6,13 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CustBankStmntObj } from 'app/shared/model/CustBankStmntObj.Model';
-import { CustBankStmntHObj } from 'app/shared/model/CustBankStmntHObj.Model';
 
 @Component({
   selector: 'app-cust-bank-acc-detail-section-findata',
@@ -36,7 +33,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
   begBalance: number;
   isAlreadyCalc: boolean = false;
 
-  private custBankStmntH: CustBankStmntHObj;
   private custBankStmnt: CustBankStmntObj;//yang dipakai tanpa H&D
 
   CustBankAccForm = this.fb.group({
@@ -56,13 +52,11 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     CustBankStmnts: this.fb.array([])
   });
 
-  constructor(
-    private httpClient: HttpClient,
+  constructor(private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     public activeModal: NgbActiveModal, 
-    private cookieService: CookieService
-  ) {
+    private cookieService: CookieService) {
     moment.locale('en');
     this.monthOfYear = new Array(...moment.months());
     this.rowCustBankStmnt = 0;
@@ -236,28 +230,28 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
     var controlDebitAmt = formArray.at(i).get('DebitAmt');
     var controlDebitTrxCount = formArray.at(i).value.DebitTrxCount;
-    if(controlDebitTrxCount != undefined)
-    {
-      if(controlDebitTrxCount > 0){
+    if(controlDebitTrxCount != undefined) {
+      if(controlDebitTrxCount > 0) {
         controlDebitAmt.setValidators([Validators.required, Validators.min(0.01)]);
         controlDebitAmt.updateValueAndValidity();
-      }else if(controlDebitTrxCount == 0){
+      }
+      else if(controlDebitTrxCount == 0) {
         controlDebitAmt.clearValidators();
         controlDebitAmt.updateValueAndValidity();
       }
     }
   }
 
-  ChangeTrxCountCredit(i){
+  ChangeTrxCountCredit(i) {
     var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
     var controlCreditAmt = formArray.at(i).get('CreditAmt');
     var controlCreditTrxCount = formArray.at(i).value.CreditTrxCount;
-    if(controlCreditTrxCount != undefined)
-    {
-      if(controlCreditTrxCount > 0){
+    if(controlCreditTrxCount != undefined) {
+      if(controlCreditTrxCount > 0) {
         controlCreditAmt.setValidators([Validators.required, Validators.min(0.01)]);
         controlCreditAmt.updateValueAndValidity();
-      }else if(controlCreditTrxCount == 0){
+      }
+      else if(controlCreditTrxCount == 0) {
         controlCreditAmt.clearValidators();
         controlCreditAmt.updateValueAndValidity();
       }
@@ -275,21 +269,17 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
 
   getLookupRefBankResponse(e) {
     this.CustBankAccForm.patchValue({
-      RefBankId: e.refBankId,
-      BankBranchRegRptCode: e.regRptCode
+      RefBankId: e.RefBankId,
+      BankBranchRegRptCode: e.RegRptCode
     });
   }
 
-  calculate()
-  {
+  calculate() {
     this.begBalance = this.CustBankAccForm.controls['BegBalanceAmt'].value;
-
     var startBegBalance = this.begBalance;
-
     var arrayControl = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
 
-    for (let i = 0;i < arrayControl.length;i++) 
-    {
+    for (let i = 0; i < arrayControl.length; i++) {
       const bankStmntD = arrayControl.at(i).value;
 
       bankStmntD.BalanceAmt = startBegBalance - bankStmntD.DebitAmt + bankStmntD.CreditAmt;
@@ -299,30 +289,22 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     this.isAlreadyCalc = true;
   }
 
-  onBegBalanceAmtChange(e)
-  {
+  onBegBalanceAmtChange(e) {
     this.isAlreadyCalc = false;
   }
-  onDebitAmtChange(e)
-  {
-    this.isAlreadyCalc = false;
-  }
-
-  onCreditAmtChange(e)
-  {
+  onDebitAmtChange(e) {
     this.isAlreadyCalc = false;
   }
 
-  onMonthChange()
-  {
+  onCreditAmtChange(e) {
+    this.isAlreadyCalc = false;
+  }
+
+  onMonthChange() {
     this.isAlreadyCalc = false;
   }
 
   Save(enjiForm) {
-
-    
-
-    
     var formData = this.CustBankAccForm.value;
     var custBankAccObj = new CustBankAccObj();
     custBankAccObj.CustBankAccId = formData.CustBankAccId;
@@ -339,7 +321,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     custBankAccObj.IsActive = this.IsActive;
     custBankAccObj.BegBalanceAmt = formData.BegBalanceAmt;
 
-
     if (this.pageType == "add") {
       this.httpClient.post(URLConstant.AddCustBankAcc, custBankAccObj).subscribe(
         (response) => {
@@ -348,8 +329,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       );
     }
     else {
-      var url;
-
       if (this.pageType == "edit") {
         var custBankData = this.CustBankAccForm.value;
         this.httpClient.post(URLConstant.EditCustBankAcc, custBankData).subscribe(
@@ -364,7 +343,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
           this.toastr.warningMessage(ExceptionConstant.CALC_FIRST);
           return false;
         }
-        var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
         var listCustBankStmnt = new Array<CustBankStmntObj>();
         var totalBalance = 0;
@@ -412,15 +390,16 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       }
     }
   }
-  CheckDefault(){
-    if(this.CustBankAccForm.controls.IsDefault.value){
+
+  CheckDefault() {
+    if(this.CustBankAccForm.controls.IsDefault.value) {
       this.CustBankAccForm.patchValue({
         IsActive : true
       });
       this.IsActive = true;
       this.CustBankAccForm.controls.IsActive.disable();
     }
-    else{
+    else {
       this.IsActive = false;
       this.CustBankAccForm.controls.IsActive.enable();
     }

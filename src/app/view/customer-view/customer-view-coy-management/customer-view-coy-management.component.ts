@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -13,20 +12,16 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   templateUrl: './customer-view-coy-management.component.html'
 })
 
-
 export class CustomerViewCoyManagementComponent implements OnInit {
-
   CustId: number;
   responseObj: any;
   GetCustCompanyMgmntShrholderForCustViewByCustIdUrl: string;
   custUrl: string;
   custCompanyUrl: string;
 
-  constructor(
-    private http: HttpClient,
+  constructor(private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router,
-  ) { 
+    private router: Router) { 
     this.GetCustCompanyMgmntShrholderForCustViewByCustIdUrl = URLConstant.GetCustCompanyMgmntShrholderForCustViewByCustId
   }
 
@@ -38,7 +33,6 @@ export class CustomerViewCoyManagementComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-    var custObj = { "CustId": this.CustId };
     this.http.post(this.GetCustCompanyMgmntShrholderForCustViewByCustIdUrl, {Id : this.CustId}).subscribe(
       response => {
         this.responseObj = response[CommonConstant.ReturnObj];
