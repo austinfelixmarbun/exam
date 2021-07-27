@@ -107,7 +107,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     ReservedField2: [''], //Maximum Task load
     ReservedField3: [''],//Supplier calc up method
     ReservedField4: [''], //Supplier Class
-    ReservedField5: ['', [Validators.required]], //BPKBAging
+    ReservedField5: [''], //BPKBAging
     ReservedField6: [''], //DaysPAfterGolive
     ReservedField9: [''], //ASSGMNT_TYPE tele, field
     MrTaxCalcMethodCode: ['', Validators.required],
@@ -638,7 +638,7 @@ export class VendorBranchAddEditComponent implements OnInit {
 
       this.VendorForm.controls.ReservedField3.setValidators(Validators.required);
       this.VendorForm.controls.ReservedField4.setValidators(Validators.required);
-
+      this.VendorForm.controls.ReservedField5.setValidators(Validators.required);
       this.UpdateValueAndValidity();
     }
     if (this.MrVendorCategoryCode == "SURVEYOR_BRANCH") {
