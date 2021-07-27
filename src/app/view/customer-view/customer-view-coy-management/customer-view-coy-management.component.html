@@ -24,6 +24,7 @@
           <tbody>
             <ng-container *ngFor="let item of responseObj">
               <tr>
+                <!-- NOTES: JANGAN DIUBAH KE CORE -->
                 <!-- <td class="text-left">{{item.NegCustTypeCodeDesc}}</td> -->
                 <td class="text-left">
                   <span [ngStyle]="{'color': item.NegCustTypeCodeDesc === '-' || item.NegCustTypeCodeDesc === 'GOOD' ? 'green' : item.NegCustTypeCodeDesc === 'WARNING' ? 'yellow' : 'red'}">

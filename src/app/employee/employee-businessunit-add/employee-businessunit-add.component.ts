@@ -12,7 +12,6 @@ import { RefJobTitleObj } from 'app/shared/model/RefJobTitleObj.Model';
 import { RefUserObj } from 'app/shared/model/RefUserObj.Model';
 import { OfficeObj } from 'app/shared/model/OfficeObj.model';
 import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
-import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -46,7 +45,9 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   
   readonly CancelLink: string = NavigationConstant.EMP_BZ_UNIT_PAGING;
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
+  constructor(private route: ActivatedRoute,
+    private router: Router, private http: HttpClient,
+    private fb: FormBuilder, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       this.RefUserId = params["RefUserId"];
       this.RefUserRoleId = params["RefUserRoleId"];
@@ -56,12 +57,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewEmployeeBusinessUnitMember.json";
-
     this.initLookUp();
-    var critInput = new CriteriaObj();
-    critInput.propName = "usr.REF_USER_ID";
-    critInput.restriction = AdInsConstant.RestrictionEq;
-    critInput.value = this.RefUserId;
 
     if (this.mode == "edit") {
       this.title = "Business Unit-Edit";
@@ -141,6 +137,12 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
     this.inputPagingObjSupervisor.pagingJson = "./assets/lookup/lookupEmployeeSupervisor.json";
     this.inputPagingObjSupervisor.genericJson = "./assets/lookup/lookupEmployeeSupervisor.json";
     this.inputPagingObjSupervisor.isRequired = false;
+    this.inputPagingObjSupervisor.addCritInput = [];
+    var critObj = new CriteriaObj();
+    critObj.propName = "REF_USER_ID";
+    critObj.restriction = AdInsConstant.RestrictionNeq;
+    critObj.value = this.RefUserId;
+    this.inputPagingObjSupervisor.addCritInput.push(critObj);
 
     this.inputPagingObjOffice = new InputLookupObj();
     this.inputPagingObjOffice.urlJson = "./assets/lookup/lookupEmployeeOffice.json";
