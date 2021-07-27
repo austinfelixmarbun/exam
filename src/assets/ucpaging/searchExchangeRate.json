@@ -75,7 +75,7 @@
         "type": "currency",
         "name": "ER.EXCHANGE_RATE_AMT",
         "id": "ExchangeRateAmtId",
-        "value": 100,
+        "value": 999999999999,
         "label": "Exchange Rate <=",
         "restriction": "lte",
         "datatype": "numeric",
@@ -85,25 +85,25 @@
     "headerList": [
       {
         "type": "sort",
-        "position": "left",
+        "position": "center",
         "label": "Posting Date",
         "name": "ER.POSTING_DT"
       },
       {
         "type": "sort",
-        "position": "left",
+        "position": "center",
         "label": "Value Date",
         "name": "ER.VALUE_DT"
       },
       {
         "type": "sort",
-        "position": "left",
+        "position": "center",
         "label": "Currency Date",
         "name": "ER.CURR_DT"
       },
       {
         "type": "sort",
-        "position": "left",
+        "position": "right",
         "label": "Exchange Rate",
         "name": "ER.EXCHANGE_RATE_AMT"
       }
@@ -114,25 +114,25 @@
     "bodyList": [
       {
         "type": "date",
-        "position": "left",
+        "position": "center",
         "property": "PostingDt",
         "dateFormat": "d-MMM-y h:mm a"
       },
       {
         "type": "date",
-        "position": "left",
+        "position": "center",
         "property": "ValueDt",
         "dateFormat": "d-MMM-y h:mm a"
       },
       {
         "type": "date",
-        "position": "left",
+        "position": "center",
         "property": "CurrDt",
         "dateFormat": "d-MMM-y h:mm a"
       },
       {
         "type": "decimal",
-        "position": "left",
+        "position": "right",
         "property": "ExchangeRateAmt"
       }
     ]

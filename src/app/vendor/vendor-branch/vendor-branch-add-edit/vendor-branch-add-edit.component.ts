@@ -170,6 +170,8 @@ export class VendorBranchAddEditComponent implements OnInit {
     else {
       if (this.MrVendorCategoryCode == "SUPPLIER") {
         this.checkIsAutoFormNoFromSetting("SB");
+        this.VendorForm.controls.ReservedField5.setValidators([Validators.required]);
+        this.VendorForm.controls.ReservedField5.updateValueAndValidity();
       }
       this.bindText()
       await this.setDropdown();
