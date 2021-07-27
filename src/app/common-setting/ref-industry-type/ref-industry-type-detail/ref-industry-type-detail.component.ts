@@ -98,9 +98,11 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     refIndustryTypeObj.IndustryTypeCode = this.RefIndustryTypeForm.controls["IndustryTypeCode"].value;
     refIndustryTypeObj.IndustryTypeName = this.RefIndustryTypeForm.controls["IndustryTypeName"].value;
     refIndustryTypeObj.RefIndustryTypeCategoryId = this.RefIndustryTypeForm.controls["RefIndustryTypeCategoryId"].value;
+    refIndustryTypeObj.IsActive = this.RefIndustryTypeForm.controls["IsActive"].value;
     if(this.type == 'edit') {
       refIndustryTypeObj.RefIndustryTypeId = this.RefIndustryTypeForm.controls["RefIndustryTypeId"].value;
       refIndustryTypeObj.RowVersion = this.RefIndustryTypeForm.controls["RowVersion"].value;
+      refIndustryTypeObj.IsActive = this.RefIndustryTypeForm.controls["IsActive"].value;
     }
 
 
