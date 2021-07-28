@@ -294,27 +294,6 @@ export class UpdateCustomerAddressComponent implements OnInit {
     AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
   }
 
-  checkForm(){
-    if(this.SubjectType == "Customer"){
-      var formArray = this.CustomerAddressForm.get("AddressList") as FormArray;
-      for (const item of formArray.controls) {
-        var masterData = new UpdateCustAddrObj();
-        var currFormGroup = item.get("MasterAddr") as FormGroup;
-        masterData = { ...currFormGroup.getRawValue() };
-
-        let warnigMsg: string = ExceptionConstant.PLEASE_FILL_RESIDENCE_ADDRESS;
-        if(masterData.MrCustAddrTypeCode == CommonConstant.CustAddrTypeBiz){
-          warnigMsg = ExceptionConstant.PLEASE_FILL_BIZ_ADDRESS
-        }
-
-        if((masterData.MrCustAddrTypeCode == CommonConstant.CustAddrTypeBiz || masterData.MrCustAddrTypeCode == CommonConstant.CustAddrTypeResidence) && !currFormGroup.valid){
-          this.toastr.warningMessage(warnigMsg);
-          break;
-        }
-      }
-    }
-  }
-
   SaveValue() {
     var formArray = this.CustomerAddressForm.get("AddressList") as FormArray;
     var requestList = new Array<UpdateCustAddrObj>();
