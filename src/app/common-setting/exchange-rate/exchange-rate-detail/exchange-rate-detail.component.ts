@@ -72,9 +72,10 @@ export class ExchangeRateDetailComponent implements OnInit {
   }
 
   SaveForm() {
-    let d1 = new Date(this.ExchangeRateForm.controls.CurrDt.value);
-
-    if(d1 > this.BusinessDt || d1 < this.MaxBackDt){
+    let d1 = this.setDateWithoutTimezone(this.ExchangeRateForm.controls.CurrDt.value);
+    var validateDt = this.setDateWithoutTimezone(this.BusinessDt);
+        
+    if(d1 > validateDt || d1 < this.MaxBackDt){
       this.toastr.warningMessage(ExceptionConstant.CURR_DT_VALIDATION);
       return;
     }
