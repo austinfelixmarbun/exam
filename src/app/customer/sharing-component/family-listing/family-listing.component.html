@@ -1,0 +1,24 @@
+<div *ngIf="PageType == CustPageTypePaging">
+  <form class="form form-horizontal">
+    <span class="mr-1 pull-right">
+      <button type="button" class="addButton" (click)="addCustFamily()" translate>
+        <i class="ft-plus-circle"></i> Add
+      </button>
+    </span>
+    <div class="form-body">
+      <h4 class="form-section card-title" translate>
+        Family Listing
+      </h4>
+    </div>
+  </form>
+  <lib-ucgridview [gridInput]="inputGridObj" (callback)="event($event)"></lib-ucgridview>
+ 
+  <div class="form-actions right" style="text-align: right;">
+      <button type="submit" class="btn btn-raised btn-primary" (click)="next()" translate>
+        <i class="far fa-check-square"></i> Save and Continue
+      </button>
+    </div>
+</div>
+<app-new-cust-header *ngIf="PageType == CustPageTypeHeader" [CustId]="selectedCustId" [CustType]="CustTypePersonal" [ParentCustId]="CustId" [CustDataMode]="CustDataModeFamily" (outputCancel)="ReloadPaging()" [isMarried]="isMarried" [CustPersonalFamilyId]="selectedCustPersonalFamilyId"></app-new-cust-header>
+
+ 

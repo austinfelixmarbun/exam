@@ -65,7 +65,9 @@ export class CustomerPersonalDetailComponent implements OnInit {
     MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
     Email1: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]],
-    Email2: ['', Validators.pattern(CommonConstant.regexEmail)]
+    Email2: ['', Validators.pattern(CommonConstant.regexEmail)],
+    IsVip: [false],
+    VipNotes: ['']
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -114,8 +116,13 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custObj.CustId = this.IdCust;
 
     this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
-      (response) => {
+      (response: CustObj) => {
         this.tempCustObj = response;
+        this.CustomerDetailForm.patchValue({
+          IsVip: response.IsVip,
+          VipNotes: response.VipNotes
+        });
+        this.checkState();
       });
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj.CustId = this.IdCust;
@@ -248,6 +255,23 @@ export class CustomerPersonalDetailComponent implements OnInit {
         });
       });
   }
+  
+  checkState() {
+    if (!this.CustomerDetailForm.controls.IsVip.value) {
+      this.CustomerDetailForm.patchValue({
+        VipNotes: null
+      });
+      this.CustomerDetailForm.controls.VipNotes.disable();
+      this.CustomerDetailForm.controls.VipNotes.clearAsyncValidators();
+
+    } else {
+      this.CustomerDetailForm.controls.VipNotes.enable();
+      this.CustomerDetailForm.controls.VipNotes.setValidators(Validators.required);
+
+    }
+    this.CustomerDetailForm.controls.VipNotes.updateValueAndValidity();
+  }
+
   async SaveValue() {
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj = this.tempCustPersonalObj;
@@ -282,6 +306,8 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.MobilePhnNo2 = this.CustomerDetailForm.controls["MobilePhnNo2"].value;
     this.custPersonalObj.Email1 = this.CustomerDetailForm.controls["Email1"].value;
     this.custPersonalObj.Email2 = this.CustomerDetailForm.controls["Email2"].value;
+    this.custPersonalObj.IsVip = this.CustomerDetailForm.controls["IsVip"].value;
+    this.custPersonalObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
     this.http.post(URLConstant.EditCustPersonal, this.custPersonalObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);

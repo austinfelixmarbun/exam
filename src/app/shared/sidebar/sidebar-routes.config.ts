@@ -5,6 +5,7 @@ import { NavigationConstant } from '../NavigationConstant';
 //Sidebar menu Routes and data
 export const ROUTES: RouteInfo[] = [
 
+  { Path: "Customer/NewCustomer", Title: 'New Customer Test', Icon: 'ft-user', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
   { Path: NavigationConstant.DASHBOARD, Title: 'Menu', Icon: 'ft-home', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
   {
     Path: '', Title: 'Organization', Icon: 'ft-bar-chart-2', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,

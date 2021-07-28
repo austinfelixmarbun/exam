@@ -33,6 +33,22 @@
             <input type="checkbox" data-md-icheck formControlName="IsSkt">
           </div>
         </div>
+        <div class="form-group row">
+          <label class="col-md-2 adInsLabel" translate>VIP</label>
+          <div class="col-md-4">
+            <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsVip"
+              (change)="checkState()" />
+          </div>
+          <label class="col-md-2 adInsLabel" [ngClass]="{'adins-required-label' : CustomerDetailForm.controls.IsVip.value}"
+            translate>VIP Notes</label>
+          <div class="col-md-4">
+            <textarea class="form-control adInsInput width-75-per" formControlName="VipNotes"
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.VipNotes.invalid }"></textarea>
+
+            <lib-uc-show-errors [control]="CustomerDetailForm.controls.VipNotes" [submit]="enjiForm.submitted">
+            </lib-uc-show-errors>
+          </div>
+        </div>
       </div>
     </div>
     <div class="form-actions right">

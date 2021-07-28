@@ -1,0 +1,88 @@
+<div class="form-group row">
+
+  <div class="col-md-6">
+
+    <div class="form-group row">
+      <label class="col-md-4 adins-required-label" translate>Mobile Phone </label>
+      <div class="col-md-8">
+        <input type="text" class="form-control adInsInput" formControlName="MobilePhnNo1"
+          [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.MobilePhnNo1.invalid}">
+        <lib-uc-show-errors [control]="parentForm.controls.MobilePhnNo1"
+          [submit]="enjiForm.submitted">
+        </lib-uc-show-errors>
+      </div>
+    </div>
+
+    <div class="form-group row">      
+      <label class="col-md-4 adInsLabel" translate>Nationality</label>
+      <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeNationality]?.isReady">
+        <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeNationality]"
+          [parentForm]="parentForm" [enjiForm]="enjiForm" [identifier]="'MrNationalityCode'" (callback)="onOptionsSelected($event)"></lib-ucdropdownlist>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-md-4 adInsLabel" translate>Country </label>
+      <div class="col-md-8" [hidden]="!IsLocal" translate>{{CountryName}} </div>
+      <div class="col-md-8" *ngIf="lookUpObjCountry?.isReady" [hidden]="IsLocal">
+        <lib-uclookupgeneric [lookupInput]="lookUpObjCountry" [parentForm]="parentForm"
+          [enjiForm]="enjiForm" [identifier]="'Country'" (lookup)=getLookUpCountry($event)>
+        </lib-uclookupgeneric>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-md-4 adInsLabel" translate>Job Position </label>
+      <div class="col-md-8" *ngIf="jobPositionLookupObj?.isReady">
+        <lib-uclookupgeneric [lookupInput]="jobPositionLookupObj" [parentForm]="parentForm"
+          [enjiForm]="enjiForm" [identifier]="'JobPosition'" (lookup)=getLookUpJobPosition($event)>
+        </lib-uclookupgeneric>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+
+    <div class="form-group row">
+      <label class="col-md-4 adins-required-label" translate>Email </label>
+      <div class="col-md-8">
+        <input type="text" class="form-control adInsInput" formControlName="Email1"
+          [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.Email1.invalid}">
+        <lib-uc-show-errors [control]="parentForm.controls.Email1"
+          [submit]="enjiForm.submitted">
+        </lib-uc-show-errors>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-md-4 adInsLabel" translate>Customer Model </label>
+      <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustModel]?.isReady">
+        <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustModel]"
+          [parentForm]="parentForm" [enjiForm]="enjiForm" [identifier]="'MrCustModelCode'" (callback)="changeCustModel()"></lib-ucdropdownlist>
+      </div>
+    </div>
+
+    <div class="form-group row" [hidden]="parentForm.controls.MrCustModelCode.value == ''">
+      <label class="col-md-4 adInsLabel" translate> Profession Name </label>
+      <div class="col-md-8">
+        <lib-uclookupgeneric [lookupInput]="professionLookUpObj" [parentForm]="parentForm"
+          [enjiForm]="enjiForm" [identifier]="'JobProfession'" (lookup)=getLookUpProfession($event) #LookupProfession>
+        </lib-uclookupgeneric>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-md-4 adInsLabel" translate>Employee Establishment Date</label>
+      <div class="col-md-8">
+        <input type="date" class="form-control adInsInput" formControlName="EmploymentEstablishmentDt"
+          [max]="businessDtMin | date: 'yyyy-MM-dd'"
+          [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.EmploymentEstablishmentDt.invalid}">
+        <lib-uc-show-errors [control]="parentForm.controls.EmploymentEstablishmentDt" [submit]="enjiForm.submitted">
+        </lib-uc-show-errors>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -28,9 +28,20 @@ export class CommonConstant {
     public static OFFICE_CODE = 'OfficeCode';
     public static ROLE_CODE = 'RoleCode';
 
+    //CUST MAIN DATA MODE
+    public static CustMainDataModeCust = "CUST";
+    public static CustMainDataModeFamily = "FAMILY";
+    public static CustMainDataModeMgmntShrholder = "SHAREHOLDER";
+    
+    //CUST MAIN Page Type
+    public static CustPageTypeHeader = "HEADER";
+    public static CustPageTypeDupCheck = "DUP_CHECK";
+    public static CustPageTypePaging = "PAGING";
+
     // Customer Type
     public static CustomerPersonal = "PERSONAL";
     public static CustomerCompany = "COMPANY";
+    public static CustomerPublic = "PUBLIC";
 
     public static MR_MARITAL_STAT_CODE_MARRIED = "MARRIED";
     public static MR_MARITAL_STAT_CODE_SINGLE = "SINGLE";
@@ -95,12 +106,14 @@ export class CommonConstant {
     public static RefMasterTypeCodeCustPersonalRelationship = "CUST_PERSONAL_RELATIONSHIP";
     public static RefMasterTypeCodeCustRelationship = "CUST_RELATIONSHIP";
     public static RefMasterTypeCodeCustType = "CUST_TYPE";
+    public static RefMasterTypeCodeShareholderCustType = "SHR_TYPE";
     public static RefMasterTypeCodeLegalDocType = "LEGAL_DOC_TYPE";
     public static RefMasterTypeCodeCustAddrType = "CUST_ADDR_TYPE";
     public static RefMasterTypeCodeAddrType = "ADDR_TYPE";
     public static RefMasterTypeCodeJobPosition = "JOB_POSITION";
     public static RefMasterTypeCodeGender = "GENDER";
     public static RefMasterTypeCodeCustModel = "CUST_MODEL"
+    public static RefMasterTypeCodeInvestmentType = "INVESTMENT_TYPE"
     public static RefMasterTypeCodeCompanyType = "COMPANY_TYPE";
     public static RefMasterTypeCodeIdType = "ID_TYPE";
     public static RefMasterTypeCodeNationality = "NATIONALITY";
@@ -147,6 +160,8 @@ export class CommonConstant {
     public static RefMasterTypeCodeEntityTypeSuppl = "SUPPL";
     public static RefMasterTypeCodeEntityTypeOffice = 'OFFICE';
 
+    public static RefMasterTypeCodePublicType = "PUBLIC_TYPE";
+    public static RefMasterTypeCodePositionSlik = "POSITION_SLIK";
     public static RefMasterTypeCodeAppSrcType = "APP_SRC_TYPE";
 
     // NATIONALITY CODE
@@ -163,6 +178,10 @@ export class CommonConstant {
     // CUST TYPE
     public static CustTypePersonal = "PERSONAL";
     public static CustTypeCompany = "COMPANY";
+    
+    // CUST GENDER
+    public static GENDER_MALE = "MALE";
+    public static GENDER_FEMALE = "FEMALE";
 
     // CUST ADDR TYPE 
     public static CustAddrTypeLegal = "LEGAL";
@@ -171,7 +190,7 @@ export class CommonConstant {
     public static CustAddrTypeResidence = "RESIDENCE";
     public static CustAddrTypeEmergency = "EMERGENCY";
     public static CustAddrTypeJob = "JOB";
-    public static CustAddrTypeOthBiz = "OTHERBIZ";
+    public static CustAddrTypeOthBiz = "OTH_BIZ";
     public static CustAddrTypePreJob = "PREV_JOB";
     public static CustAddrTypeBiz = "BIZ";
 
@@ -239,7 +258,22 @@ export class CommonConstant {
     public static CFNEWCAR = "CFNEWCAR";
     public static CFNA = "CFNA";
 
-    //ATTR GROUP
+    //ATTR CODE
+    public static AttrCodeDeptAml = "DEPT_AML";
+    public static AttrCodeAuthAml = "AUTH_AML";
+
+    //outputChange
+    public static CUST_CHANGE_PROFESSION = "PROFESSION";
+    
+    //ATTR Input Type
+    public static AttrInputTypeDate = "D";
+    public static AttrInputTypeNum = "N";
+    public static AttrInputTypeNumPerc = "P";
+    public static AttrInputTypeList = "L";
+    public static AttrInputTypeSearchList = "SL";
+    public static AttrInputTypeText = "T";
+    public static AttrInputTypeTextArea = "TA";
+    public static AttrInputTypeRefMaster = "RM";
 
     public static RefMasterTypeCustAsset = "CUST_ASSET_TYPE";
     //DMS

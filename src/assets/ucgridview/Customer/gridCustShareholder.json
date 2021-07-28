@@ -1,0 +1,109 @@
+{
+    "isSeq": true,
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Customer No",
+            "name": "CustNo"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Shareholder Name",
+            "name": "ShareholderName"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Type",
+            "name": "ShareholderTypeDesc"
+        },
+        {
+            "type": "sort",
+            "position": "right",
+            "label": "Share",
+            "name": "SharePrcnt"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Is Signer",
+            "name": "IsSigner"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Is Owner",
+            "name": "IsOwner"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Is Active",
+            "name": "IsActive"
+        },
+        {
+          "type": "sort",
+          "position": "center",
+          "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "CustNo"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "ShareholderName"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "ShareholderTypeDesc"
+        },
+        {
+            "type": "decimal",
+            "position": "right",
+            "property": "SharePrcnt"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsSigner"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsOwner"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+              {
+                "type": "callback",
+                "key": "edit",
+                "property": [
+                    {
+                        "type": "CustId",
+                        "property": "ShareholderId"
+                    },
+                    {
+                        "type": "CustCompanyMgmntShrholderId",
+                        "property": "CustCompanyMgmntShrholderId"
+                    }
+                ]
+              }
+            ]
+        }
+    ]
+}

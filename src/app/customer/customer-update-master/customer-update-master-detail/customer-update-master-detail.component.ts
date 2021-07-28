@@ -114,7 +114,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
 
     await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).toPromise().then(
       (response) => {
-        if(this.isMarried == response.MrMaritalStatCode != undefined && response.MrMaritalStatCode == CommonConstant.MasteCodeMartialStatsMarried){
+        if(response.MrMaritalStatCode == CommonConstant.MasteCodeMartialStatsMarried){
           this.isMarried = true;
         }
       }

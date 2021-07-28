@@ -251,6 +251,8 @@ export class URLConstant {
     public static GetRefMasterByRefMasterTypeCode = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterByRefMasterTypeCode";
     public static GetListActiveRefMasterDDL = "/RefMaster/GetListKeyValueActiveByCode";
 
+    public static GetListActiveRefMasterDetail = environment.FoundationR3Url + '/v1' + "/RefMaster/GetListActiveRefMaster";
+    
     //REF COUNTRY
     public static GetListRefCountry = environment.FoundationR3Url + "/v1" + "/RefCountry/GetListRefCountry";
     public static GetRefCountryByCountryCode = environment.FoundationR3Url + "/v1" + "/RefCountry/GetRefCountryByCountryCode";
@@ -690,6 +692,11 @@ export class URLConstant {
     public static GetCustAssetByCustAssetId = environment.FoundationR3Url + "/v1" + "/CustAsset/GetCustAssetByCustAssetId";
     public static GetListCustAssetByCustId = environment.FoundationR3Url + "/v1" + "/CustAsset/GetListCustAssetByCustId";
 
+    public static SaveCustPersonalShareholderMainData = environment.FoundationR3Url  + '/v1' + "/Cust/SaveCustPersonalShareholderMainData";
+    public static SaveCustCompanyShareholderMainData = environment.FoundationR3Url  + '/v1' + "/Cust/SaveCustCompanyShareholderMainData";
+    public static SaveCustPersonalFamilyMainData = environment.FoundationR3Url  + '/v1' + "/Cust/SaveCustPersonalFamilyMainData";
+    public static NewEditDuplicateCust = environment.FoundationR3Url  + '/v1' + "/Cust/NewEditDuplicateCust";
+    
     public static GetCustHighlightCommentByCustId = environment.FoundationR3Url + "/v1" + "/Cust/GetCustHighlightCommentByCustId";
     // CUSTOMER COMPANY
     public static GetListViewCustCompanyLegalDocByCustCompanyId = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/GetListViewCustCompanyLegalDocByCustCompanyId";
@@ -758,20 +765,25 @@ export class URLConstant {
     public static EditCustCompanyContactPersonByCustCompanyId = environment.FoundationR3Url + "/v1" + "/CustCompanyContactPerson/EditCustCompanyContactPersonByCustCompanyId"
 
     // CUSTOMER COMPANY MANAGEMENT SHAREHOLDER
-    public static GetCustCompanyMgmntShrholderForCustViewByCustId = environment.FoundationR3Url + "/v1" + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderForCustViewByCustId";
-    public static AddCustCompanyMgmntShrholder = environment.FoundationR3Url + "/v1" + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholder";
-    public static AddCustCompanyMgmntShrholderPersonal = environment.FoundationR3Url + "/v1" + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderPersonal";
-    public static AddCustCompanyMgmntShrholderCompany = environment.FoundationR3Url + "/v1" + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderCompany";
-    public static EditCustCompanyMgmntShrholder = environment.FoundationR3Url + "/v1" + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholder";
-    public static DeleteCustCompanyMgmntShrholder = environment.FoundationR3Url + "/v1" + "/CustCompanyMgmntShrholder/DeleteCustCompanyMgmntShrholder";
-    public static GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId = environment.FoundationR3Url + "/v1" + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId";
-    public static GetListCustCompanyMgmntShrholderByCustId = environment.FoundationR3Url + "/v1" + "/CustCompanyMgmntShrholder/GetListCustCompanyMgmntShrholderByCustId";
+    public static GetCustCompanyMgmntShrholderForCustViewByCustId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderForCustViewByCustId";
+    public static AddCustCompanyMgmntShrholder = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholder";
+    public static AddCustCompanyMgmntShrholderPersonal = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderPersonal";
+    public static AddCustCompanyMgmntShrholderCompany = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderCompany";
+    public static EditCustCompanyMgmntShrholder = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholder";
+    public static DeleteCustCompanyMgmntShrholder = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/DeleteCustCompanyMgmntShrholder";
+    public static GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId";
+    public static GetListCustCompanyMgmntShrholderByCustId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/GetListCustCompanyMgmntShrholderByCustId";
+    public static GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId";
+    public static AddCustCompanyMgmntShrholderPublic = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderPublic";
+    public static EditCustCompanyMgmntShrholderPublic = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholderPublic";
+    public static GetListManagementShareholderForListPagingByCustId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/GetListManagementShareholderForListPagingByCustId";
 
     // CUST ATTR CONTENT
-    public static GetCustAttrContentForCustViewByCustId = environment.FoundationR3Url + "/v1" + "/CustAttrContent/GetCustAttrContentForCustViewByCustId";
-    public static AddEditListCustAttrContent = environment.FoundationR3Url + "/v1" + "/CustAttrContent/AddEditListCustAttrContent";
-    public static GetListCustAttrContentByCustIdForCust = environment.FoundationR3Url + "/v1" + "/CustAttrContent/GetListCustAttrContentByCustIdForCust";
-    public static GetListCustAttrContentByCustIdAndAttrGroup = environment.FoundationR3Url + "/v1" + "/CustAttrContent/GetListCustAttrContentByCustIdAndAttrGroup"
+    public static GetCustAttrContentForCustViewByCustId = environment.FoundationR3Url + '/v1' + "/CustAttrContent/GetCustAttrContentForCustViewByCustId";
+    public static AddEditListCustAttrContent = environment.FoundationR3Url + '/v1' + "/CustAttrContent/AddEditListCustAttrContent";
+    public static GetListCustAttrContentByCustIdForCust = environment.FoundationR3Url + '/v1' + "/CustAttrContent/GetListCustAttrContentByCustIdForCust";
+    public static GetListCustAttrContentByCustIdAndAttrGroup = environment.FoundationR3Url + '/v1' + "/CustAttrContent/GetListCustAttrContentByCustIdAndAttrGroup";
+    public static GetListCustAttrContentByCustIdAndAttrGroupAndListAttrCodes = environment.FoundationR3Url + '/v1' + "/CustAttrContent/GetListCustAttrContentByCustIdAndAttrGroupAndListAttrCodes";
 
     //CUST CONTACT PERSON
     public static GetCustCompanyContactPersonForCustViewByCustId = environment.FoundationR3Url + "/v1" + "/CustCompanyContactPerson/GetCustCompanyContactPersonForCustViewByCustId";

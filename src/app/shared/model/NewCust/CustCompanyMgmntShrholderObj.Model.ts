@@ -1,0 +1,24 @@
+export class CustCompanyMgmntShrholderObj {
+    CustId: number;
+    ShareholderId: number;
+    MrJobPositionCode: string;
+    MrPositionSlikCode: string;
+    MrShrholderTypeCode: string;
+    IsActive: boolean;
+    IsOwner: boolean;
+    IsSigner: boolean;
+    SharePrcnt: number;
+    EstablishmentDt: Date;
+
+    constructor() {
+        this.CustId = 0;
+        this.ShareholderId = 0;
+        this.IsActive = false;
+        this.IsOwner = false;
+        this.IsSigner = false;
+        this.SharePrcnt = 0;
+        this.MrJobPositionCode = "";
+        this.MrPositionSlikCode = "";
+        this.MrShrholderTypeCode = "";
+    }
+}
