@@ -528,15 +528,17 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.ucLookupExistingCust.setAddCritInput();
   }
 
-  outputChangeReceived(ev: string) {
-    switch (ev) {
+  outputChangeReceived(ev: {Key: string, Code: string}) {
+    switch (ev.Key) {
       case CommonConstant.CUST_CHANGE_PROFESSION:
-        this.ChangeProffession();
+        this.ChangeProffession(ev.Code);
         break;
     }
   }
 
-  ChangeProffession() {
+  //profession
+  ChangeProffession(code: string) {
+    this.custAttrForm.SetSearchListInputType(CommonConstant.AttrCodeDeptAml, code);
     this.custAttrForm.ResetValueFromAttrCode(CommonConstant.AttrCodeDeptAml);
   }
 
