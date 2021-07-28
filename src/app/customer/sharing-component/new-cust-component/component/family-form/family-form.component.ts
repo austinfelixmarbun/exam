@@ -33,7 +33,7 @@ export class FamilyFormComponent implements OnInit {
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
   @Output() outputExisting: EventEmitter<CustFormExistingObj> = new EventEmitter();
-  @Output() outputChange: EventEmitter<string> = new EventEmitter();
+  @Output() outputChange: EventEmitter<{Key: string, Code: string}> = new EventEmitter();
 
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
   readonly RefMasterTypeCodeNationality: string = CommonConstant.RefMasterTypeCodeNationality;
@@ -186,6 +186,7 @@ export class FamilyFormComponent implements OnInit {
         if (!response.RefProfessionId) return;
         await this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
           (response: RefProfessionObj) => {
+            this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: response.ProfessionCode});
             this.professionLookUpObj.nameSelect = response.ProfessionName;
             this.professionLookUpObj.jsonSelect = response;
           });
@@ -215,16 +216,16 @@ export class FamilyFormComponent implements OnInit {
     return tempDesc;
   }
 
-  getLookUpProfession(event) {
+  getLookUpProfession(event: RefProfessionObj) {
     this.parentForm.patchValue({
       RefProfessionId: event.RefProfessionId,
     });
-    this.outputChange.emit(CommonConstant.CUST_CHANGE_PROFESSION);
+    this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: event.ProfessionCode});
   }
 
   changeCustModel() {
     this.ResetLookupProfession();
-    this.outputChange.emit(CommonConstant.CUST_CHANGE_PROFESSION);
+    this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: ""});
   }
 
   getLookUpJobPosition(ev) {

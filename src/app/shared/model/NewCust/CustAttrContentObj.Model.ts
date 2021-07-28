@@ -2,6 +2,7 @@ export class CustAttrContentObj {
     CustId: number;
     RefAttrId: number;
     AttrValue: string;
+    AttrGroup: string;
 
     constructor() {
         this.CustId = 0;
