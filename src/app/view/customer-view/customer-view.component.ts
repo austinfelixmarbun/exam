@@ -11,6 +11,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ResSysConfigResultObj } from 'app/shared/model/Response/ResSysConfigResultObj,model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { ResCustListIframeView } from 'app/shared/model/Response/CustListIframeView/ResCustListIframeViewObj.model';
 
 @Component({
   selector: 'app-customer-view',
@@ -36,7 +37,7 @@ export class CustomerViewComponent implements OnInit {
   IsUseDms: boolean = false;
 
   IsIframe: boolean = false;
-  listIframe: Array<KeyValueObj> = new Array<KeyValueObj>();
+  listIframe: Array<ResCustListIframeView> = new Array<ResCustListIframeView>();
 
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj();
 
