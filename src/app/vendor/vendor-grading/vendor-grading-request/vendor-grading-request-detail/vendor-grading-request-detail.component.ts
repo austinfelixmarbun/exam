@@ -211,7 +211,9 @@ export class VendorGradingRequestDetailComponent implements OnInit {
       RequestRFAObj: rfaInfo
 
     }
-    this.http.post(URLConstant.SubmitRequestVendorGrading, submitVendorGradingReqObj).subscribe(
+    let SubmitRequestVendorGradingUrl = URLConstant.SubmitRequestVendorGrading;
+    if(environment.isCore) SubmitRequestVendorGradingUrl = URLConstant.SubmitRequestVendorGradingV2;
+    this.http.post(SubmitRequestVendorGradingUrl, submitVendorGradingReqObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_PAGING]);
@@ -229,10 +231,9 @@ export class VendorGradingRequestDetailComponent implements OnInit {
   }
 
   initInputApprovalObj() {
-    let Attributes = [{}]
     let TypeCode = {
       "TypeCode": CommonConstant.VENDOR_GRD_SUPPL_BRC_APV_TYPE,
-      "Attributes": Attributes,
+      "Attributes": [{}],
     }
 
     this.InputObj.ApvTypecodes = [TypeCode];
@@ -241,6 +242,5 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     this.InputObj.Reason = this.listReason;
     this.InputObj.TrxNo = " ";
     this.IsReady = true;
-    console.log(this.listReason);
   }
 }

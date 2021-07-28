@@ -533,6 +533,7 @@ export class URLConstant {
 
     // VENDOR GRADING
     public static SubmitRequestVendorGrading = environment.FoundationR3Url + "/v1" + "/VendorGrading/SubmitRequestVendorGrading";
+    public static SubmitRequestVendorGradingV2 = environment.FoundationR3Url + "/v2" + "/VendorGrading/SubmitRequestVendorGrading";
     public static GetRuleVendorGrading = environment.FoundationR3Url + "/v1" + "/VendorGrading/GetRuleVendorGrading";
     public static GetVendorGrade = environment.FoundationR3Url + "/v1" + "/VendorGrading/GetVendorGrade";
 
@@ -919,7 +920,7 @@ export class URLConstant {
     public static GetPossibleMemberAndAttributeExType = "/Approval/GetPossibleMemberAndAttributeExType";
     public static GetApprovalReturnHistory = "/Approval/GetApprovalReturnHistory";
     public static GetSchemesByCategoryId = "/Approval/GetSchemesByCategoryId";
-    public static SubmitApproval = "/Approval/SubmitApproval";
+    public static SubmitApproval = "/v1" + "/Approval/SubmitApproval";
     public static GetLevelVoting = "/Approval/GetLevelVoting";
     public static GetPossibleResult = "/Approval/GetPossibleResult";
     public static GetNextNodeMember = "/Approval/GetNextNodeMember";

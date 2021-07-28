@@ -61,7 +61,7 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
   ngOnInit() {
     this.viewVendorBranchObj.viewInput = "./assets/ucviewgeneric/viewVendorGradingMainInformation.json";
     
-    var ApvHoldObj = new ApprovalObj()
+    var ApvHoldObj = new ApprovalObj();
     ApvHoldObj.TaskId = this.taskId
 
     this.HoldTask(ApvHoldObj);
