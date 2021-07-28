@@ -29,7 +29,7 @@
         <th style="text-align: left;"><span class="thead-header" name='notes' translate>NOTES
           </span>
         </th>
-        <th style="text-align: center;"><span class="thead-header" translate>ACTION
+        <th style="text-align: center;"><span class="thead-header" translate>EDIT
           </span>
         </th>
       </tr>
@@ -45,8 +45,8 @@
         <td style="text-align: left;">{{item.Notes}}</td>
 
         <td style="text-align: center;">
-          <a [hidden]="item.MrCustAddrTypeCode == 'Legal'" (click)="editItem(item)">
-            <i class="fa fa-pen"></i>
+          <a [hidden]="item.MrCustAddrTypeCode == 'Legal'" (click)="editItem(item)" style="cursor: pointer">
+            <i class="fa fa-edit"></i>
           </a>
         </td>
       </tr>

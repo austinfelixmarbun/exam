@@ -6,16 +6,13 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CustBankStmntObj } from 'app/shared/model/CustBankStmntObj.Model';
-import { CustBankStmntHObj } from 'app/shared/model/CustBankStmntHObj.Model';
 
 @Component({
   selector: 'app-cust-bank-acc-detail-section-findata',
@@ -36,7 +33,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
   begBalance: number;
   isAlreadyCalc: boolean = false;
 
-  private custBankStmntH: CustBankStmntHObj;
   private custBankStmnt: CustBankStmntObj;//yang dipakai tanpa H&D
 
   CustBankAccForm = this.fb.group({
@@ -56,13 +52,11 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     CustBankStmnts: this.fb.array([])
   });
 
-  constructor(
-    private httpClient: HttpClient,
+  constructor(private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    public activeModal: NgbActiveModal,
-    private cookieService: CookieService
-  ) {
+    public activeModal: NgbActiveModal, 
+    private cookieService: CookieService) {
     moment.locale('en');
     this.monthOfYear = new Array(...moment.months());
     this.rowCustBankStmnt = 0;
@@ -273,8 +267,8 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
 
   getLookupRefBankResponse(e) {
     this.CustBankAccForm.patchValue({
-      RefBankId: e.refBankId,
-      BankBranchRegRptCode: e.regRptCode
+      RefBankId: e.RefBankId,
+      BankBranchRegRptCode: e.RegRptCode
     });
   }
 
@@ -282,7 +276,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     this.begBalance = this.CustBankAccForm.controls['BegBalanceAmt'].value;
 
     let startBegBalance = this.begBalance;
-
     let arrayControl = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
 
     for (let i = 0; i < arrayControl.length; i++) {
@@ -327,7 +320,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     custBankAccObj.IsActive = this.IsActive;
     custBankAccObj.BegBalanceAmt = formData.BegBalanceAmt;
 
-
     if (this.pageType == "add") {
       this.httpClient.post(URLConstant.AddCustBankAcc, custBankAccObj).subscribe(
         (response) => {
@@ -336,8 +328,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       );
     }
     else {
-      let url;
-
       if (this.pageType == "edit") {
         let custBankData = this.CustBankAccForm.getRawValue();
         this.httpClient.post(URLConstant.EditCustBankAcc, custBankData).subscribe(
@@ -351,7 +341,6 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
           this.toastr.warningMessage(ExceptionConstant.CALC_FIRST);
           return false;
         }
-        let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         let formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
         let listCustBankStmnt = new Array<CustBankStmntObj>();
         let totalBalance = 0;
@@ -399,6 +388,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       }
     }
   }
+  
   CheckDefault() {
     if (this.CustBankAccForm.controls.IsDefault.value) {
       this.CustBankAccForm.patchValue({

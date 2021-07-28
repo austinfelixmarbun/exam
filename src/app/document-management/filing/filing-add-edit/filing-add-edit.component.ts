@@ -19,10 +19,12 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 export class FilingAddEditComponent implements OnInit {
   Cabinet: CabinetWithListRackObj = new CabinetWithListRackObj();
   FilingCode: string;
+  RackId: number;
   Mode: string;
   title: string = "ADD FILING";
   filing: FilingObj = new FilingObj();
   rackWithListFilling: RackWithListFilingObj = new RackWithListFilingObj();
+  readonly ViewLink: string = NavigationConstant.DOC_MNGMNT_VIEW_CABINET;
   Rack: RackObj = new RackObj();
   RackCode: string;
 
@@ -63,22 +65,43 @@ export class FilingAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    let GetRackByCode: GenericObj = new GenericObj();
-    GetRackByCode.Code = this.RackCode;
-    this.http.post<RackObj>(URLConstant.GetRackByCode, GetRackByCode).subscribe(
+    console.log(this.rackWithListFilling.RackCode);
+    console.log(this.RackCode);
+    console.log(this.Cabinet.CabinetCode);
+    this.http.post<RackObj>(URLConstant.GetRackByCode, {RackCode: this.RackCode, CabinetCode: this.Cabinet.CabinetCode}).subscribe(
       (response) => {
         this.Rack = response;
+        this.RackId = this.Rack.RackId;
+        console.log(this.RackId);
+        if((this.Mode !== null || this.Mode !== undefined) && this.RackId != null && this.Mode === 'Edit'){
+          this.title = "EDIT FILING";
+          this.FillingForm.controls.FilingCode.disable();
+          this.filing.FilingCode = this.FilingCode;
+          console.log(this.RackId);
+          this.http.post<any>(URLConstant.GetRackAndListFilingByFilingCodeAndRackId, {FilingCode: this.FilingCode, RackId: this.RackId}).subscribe(
+            (response) => {
+              this.rackWithListFilling = response;
+              console.log(this.rackWithListFilling);
+              this.FillingForm.controls['FilingCode'].patchValue(response.ListFiling[0].FilingCode);
+              this.FillingForm.controls['FilingName'].patchValue(response.ListFiling[0].FilingName);
+              this.FillingForm.controls['FilingInformation'].patchValue(response.ListFiling[0].FilingInfo);
+              this.FillingForm.controls['IsActive'].patchValue(response.ListFiling[0].IsActive);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        }
       },
       (error) => {
         console.log(error);
       }
     );
 
-    let GetRackAndListFilingByRackCode: GenericObj = new GenericObj();
-    GetRackAndListFilingByRackCode.Code = this.RackCode;
-    this.http.post<RackWithListFilingObj>(URLConstant.GetRackAndListFilingByRackCode, GetRackAndListFilingByRackCode).subscribe(
+    this.http.post<RackWithListFilingObj>(URLConstant.GetRackAndListFilingByRackCodeAndCabinetCode, {RackCode: this.RackCode, CabinetCode: this.Cabinet.CabinetCode}).subscribe(
       (response) => {
         this.rackWithListFilling = response;
+        console.log(this.rackWithListFilling);
       },
       (error) => {
         console.log(error);
@@ -95,34 +118,10 @@ export class FilingAddEditComponent implements OnInit {
         console.log(error);
       }
     );
-
-    if(this.Mode !== null || this.Mode !== undefined){
-      if(this.Mode === 'Edit'){
-        this.title = "EDIT FILING";
-        this.FillingForm.controls.FilingCode.disable();
-        this.filing.FilingCode = this.FilingCode;
-        let GetRackAndListFilingByFilingCode: GenericObj = new GenericObj();
-        GetRackAndListFilingByFilingCode.Code = this.FilingCode;
-        this.http.post<RackWithListFilingObj>(URLConstant.GetRackAndListFilingByFilingCode, GetRackAndListFilingByFilingCode).subscribe(
-          (response) => {
-            this.rackWithListFilling = response;
-            this.FillingForm.controls['FilingCode'].patchValue(response.ListFiling[0].FilingCode);
-            this.FillingForm.controls['FilingName'].patchValue(response.ListFiling[0].FilingName);
-            this.FillingForm.controls['FilingInformation'].patchValue(response.ListFiling[0].FilingInfo);
-            this.FillingForm.controls['IsActive'].patchValue(response.ListFiling[0].IsActive);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-      }
-    }
-    else{
-      this.router.navigateByUrl(NavigationConstant.DOC_MNGMNT_RACK_PAGING);
-    }
   }
 
   SaveForm(){
+    console.log(this.Cabinet.CabinetCode);
     this.filing.FilingCode = this.FillingForm.controls['FilingCode'].value;
     this.filing.FilingName = this.FillingForm.controls['FilingName'].value;
     this.filing.FilingInfo = this.FillingForm.controls['FilingInformation'].value;
@@ -144,7 +143,7 @@ export class FilingAddEditComponent implements OnInit {
     else {
       this.filing.RackCode = this.rackWithListFilling.RackCode;
       this.filing.RackId = this.Rack.RackId;
-      console.log(this.filing.RackId);
+      console.log(this.filing);
       this.http.post(URLConstant.AddFiling, this.filing).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");

@@ -31,9 +31,11 @@ export class AdInsConstant {
   public static LoginWithToken = environment.FoundationR3Url + '/v1' + "/Authenticate/LoginWithToken";
   public static Logout = environment.FoundationR3Url + "/v1" + "/UserManagement/LogOut"
   public static FormDefault = "dashboard/dash-board";
+  public static JoinTypeInner = "INNER";
   public static LoginByRole = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByRole";
   public static LoginByToken = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByToken";
   public static UpdateToken = environment.FoundationR3Url + "/v1" + "/Authenticate/UpdateRole";
   public static GetThingsToDoByRole = environment.FoundationR3Url + "/v1" + "/ThingsToDo/GetThingsToDoByRole";
-
+  public static GetDashboardAccessToken = environment.FoundationR3Url + "/v2" + "/Dashboard/GetDashboardAccessToken";
+  
 }
