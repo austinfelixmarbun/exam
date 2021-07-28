@@ -3,6 +3,7 @@ import { PathConstant } from "./PathConstant";
 
 export class NavigationConstant {
     
+    public static DASHEMPTY = "/" + PathConstant.LR_DASHBOARD + "/" + PathConstant.DASHEMPTY; //'/Dashboard/Dash-Empty'
     public static DASHBOARD = "/" + PathConstant.LR_DASHBOARD + "/" + PathConstant.DASHBOARD; //'/Dashboard/Dash-Board'
     public static BACK_TO_PAGING = '..' + "/" + PathConstant.PAGING; //'../Paging'
     public static BACK_TO_PAGING2 = '..' + "/" + '..' + "/" + PathConstant.PAGING; //'../../Paging'
