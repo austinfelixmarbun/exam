@@ -21,6 +21,8 @@ import { CustomerViewRoutingModule } from "./customer-view-routing.module";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { createTranslateLoader } from "app/app.module";
 import { HttpClient } from "@angular/common/http";
+import { CustomerViewIframeGenericComponent } from "./customer-view-iframe-generic/customer-view-iframe-generic.component";
+import { SharedModule } from "app/shared/shared.module";
 
 
 @NgModule({
@@ -42,6 +44,7 @@ import { HttpClient } from "@angular/common/http";
     UcSubsectionModule,
     SharingComponentModule,
     UcShowErrorsModule,
+    SharedModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,
@@ -55,8 +58,8 @@ import { HttpClient } from "@angular/common/http";
   declarations: [
    CustomerViewComponent,
    CustomerViewHeaderPersonalComponent,
-   CustomerViewHeaderCompanyComponent
-
+   CustomerViewHeaderCompanyComponent,
+   CustomerViewIframeGenericComponent
   ],
   entryComponents: [
     UclookupgenericComponent,
