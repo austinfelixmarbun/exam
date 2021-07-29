@@ -13,6 +13,7 @@ import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { ContextMenuModule } from '@progress/kendo-angular-menu';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { SharedModule } from 'app/shared/shared.module';
+import { DashEmptyComponent } from './dash-empty/dash-empty.component';
 
 @NgModule({
     imports: [
@@ -30,7 +31,8 @@ import { SharedModule } from 'app/shared/shared.module';
     declarations: [
         Dashboard1Component,
         Dashboard2Component,
-        DashBoardComponent
+        DashBoardComponent,
+        DashEmptyComponent
     ],
     providers: [],
 })

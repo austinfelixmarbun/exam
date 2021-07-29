@@ -41,6 +41,13 @@
 								<mat-tab label="Agreement List">
 								</mat-tab>
 							</div>
+							
+							<div *ngIf="IsIframe">
+								<mat-tab *ngFor="let iframe of listIframe" [label]="iframe.Title">
+									<app-customer-view-iframe-generic [prm]="custResultData" [iframeObj]="iframe">
+									</app-customer-view-iframe-generic>
+								</mat-tab>
+							</div>
 
 							<mat-tab label="Other Info">
 							</mat-tab>
@@ -72,6 +79,14 @@
 								<mat-tab label="Document">
 								</mat-tab>
 							</div>
+
+							<div *ngIf="IsIframe">
+								<mat-tab *ngFor="let iframe of listIframe" [label]="iframe.Title">
+									<app-customer-view-iframe-generic [prm]="custResultData" [iframeObj]="iframe">
+									</app-customer-view-iframe-generic>
+								</mat-tab>
+							</div>
+							
 							<mat-tab label="Other Info">
 							</mat-tab>
 						</mat-tab-group>

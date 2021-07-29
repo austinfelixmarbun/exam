@@ -16,9 +16,6 @@ export class CustDupCheckPersonalComponent implements OnInit {
   @Input() CustObj: ReqPersonalObj;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust;
 
-  readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
-  readonly CustDataModeFamily: string = CommonConstant.CustMainDataModeFamily;
-  readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
   constructor(private http: HttpClient) { }
 
   readonly RefMasterTypeCodeIdType: string = CommonConstant.RefMasterTypeCodeIdType;

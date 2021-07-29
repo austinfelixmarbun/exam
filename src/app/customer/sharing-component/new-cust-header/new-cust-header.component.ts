@@ -87,6 +87,7 @@ export class NewCustHeaderComponent implements OnInit {
       });
   }
 
+  // ga kepake
   ChangeType() {
     console.log(this.CustType);
   }
@@ -159,7 +160,6 @@ export class NewCustHeaderComponent implements OnInit {
       (response) => {
         this.DuplicateStatus = response["Status"];
         if (this.DuplicateStatus != null && this.DuplicateStatus != undefined) {
-          // console.log(response);
           this.ResultDuplicate = response[CommonConstant.ReturnObj]["CustDuplicate"] ? response[CommonConstant.ReturnObj]["CustDuplicate"] : new Array();
           this.ResultDuplicateNegative = response[CommonConstant.ReturnObj]["NegativeCustDuplicate"] ? response[CommonConstant.ReturnObj]["NegativeCustDuplicate"] : new Array();
           this.PageType = this.CustPageTypeDupCheck;
@@ -323,7 +323,7 @@ export class NewCustHeaderComponent implements OnInit {
     this.http.post(URLConstant.NewEditDuplicateCust, reqEditDupCheck).subscribe(
       (response: GenericObj) => {
         if (this.CustDataMode == this.CustDataModeMain) {
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response.Id });
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_COY_PAGE], { "IdCust": response.Id });
           return;
         }
         this.outputCancel.emit("");

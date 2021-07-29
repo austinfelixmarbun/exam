@@ -59,7 +59,7 @@ export class CustDupCheckHeaderComponent implements OnInit {
 
   EditNegativeCust(item: NegCustDuplicateObj) {
     let tempObj: DupCheckOutputSaveObj = new DupCheckOutputSaveObj();
-    tempObj.Key = DupCheckOutputSaveObj.KeyEditSaveDup;
+    tempObj.Key = DupCheckOutputSaveObj.KeyEditSaveDupNeg;
     tempObj.DuplicateNegativeObj = item;
     this.outputSave.emit(tempObj);
   }
