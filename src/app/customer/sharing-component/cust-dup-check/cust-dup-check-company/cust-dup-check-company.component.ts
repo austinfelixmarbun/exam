@@ -15,9 +15,6 @@ export class CustDupCheckCompanyComponent implements OnInit {
   @Input() CustObj: ReqCoyObj;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust;
   
-  readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
-  readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
-
   readonly RefMasterTypeCodeCompanyType: string = CommonConstant.RefMasterTypeCodeCompanyType;
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
   constructor(private http: HttpClient) { }

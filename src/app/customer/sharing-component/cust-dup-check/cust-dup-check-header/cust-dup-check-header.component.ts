@@ -27,14 +27,6 @@ export class CustDupCheckHeaderComponent implements OnInit {
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
   readonly CustTypeCoy: string = CommonConstant.CustomerCompany;
 
-  readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
-  readonly CustDataModeFamily: string = CommonConstant.CustMainDataModeFamily;
-  readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
-
-  readonly KeyEditSave: string = DupCheckOutputSaveObj.KeyEditSave;
-  readonly KeyEditSaveDup: string = DupCheckOutputSaveObj.KeyEditSaveDup;
-  readonly KeyEditSaveDupNeg: string = DupCheckOutputSaveObj.KeyEditSaveDupNeg;
-
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {

@@ -32,7 +32,6 @@ export class NewCustPublicComponent implements OnInit {
   constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService,) { }
 
   readonly RefMasterTypeCodePublicType: string = CommonConstant.RefMasterTypeCodePublicType;
-  readonly RefMasterTypeCodePositionSlik: string = CommonConstant.RefMasterTypeCodePositionSlik;
 
   IsReady: boolean = false;
   async ngOnInit() {
@@ -73,7 +72,7 @@ export class NewCustPublicComponent implements OnInit {
       //#region patch positionSlik    
       let reqMasterObj: ReqRefMasterByTypeCodeAndMasterCodeObj = {
         MasterCode: item.MrPositionSlikCode,
-        RefMasterTypeCode: this.RefMasterTypeCodePositionSlik
+        RefMasterTypeCode: CommonConstant.RefMasterTypeCodePositionSlik
       };
       this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).subscribe(
         (response: RefMasterObj) => {

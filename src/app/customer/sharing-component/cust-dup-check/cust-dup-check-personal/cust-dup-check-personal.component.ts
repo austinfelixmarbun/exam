@@ -20,12 +20,10 @@ export class CustDupCheckPersonalComponent implements OnInit {
 
   readonly RefMasterTypeCodeIdType: string = CommonConstant.RefMasterTypeCodeIdType;
   readonly RefMasterTypeCodeGender: string = CommonConstant.RefMasterTypeCodeGender;
-  readonly RefMasterTypeCodeMaritalStat: string = CommonConstant.RefMasterTypeCodeMaritalStat;
 
   ngOnInit() {
     this.initRefMaster(this.RefMasterTypeCodeIdType);
     this.initRefMaster(this.RefMasterTypeCodeGender);
-    this.initRefMaster(this.RefMasterTypeCodeMaritalStat);
   }
 
   DictRefMaster: { [id: string]: { [code: string]: string } } = {};

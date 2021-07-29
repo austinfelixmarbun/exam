@@ -1,15 +1,18 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-body" [hidden]="PageType != CustPageTypeHeader">
-      <div class="px-3 form-group row" *ngIf="CustDataMode != CustDataModeFamily">
-        <label class="col-md-2" translate>{{subjectTitle}} Type</label>
-        <div class="col-md-10">
-          <mat-radio-group [(ngModel)]="CustType" (change)="ChangeType()" [disabled]="CustId!=0">
-            <mat-radio-button class="custom-control custom-radio display-inline-block"
-              *ngFor="let item of DictRefMaster[refMasterCustTypeUsed]" [value]="item.Key">
-              {{item.Value}}
-            </mat-radio-button>
-          </mat-radio-group>
+      <div class="col-md-12">
+        <div class="px-3 form-group row" *ngIf="CustDataMode != CustDataModeFamily">
+          <h4 class="col-md-12 form-section card-title" style="font-size: 1rem;" translate>{{TitleLabel}}</h4>
+          <label class="col-md-2" translate>{{subjectTitle}} Type</label>
+          <div class="col-md-10">
+            <mat-radio-group [(ngModel)]="CustType" (change)="ChangeType()" [disabled]="CustId!=0">
+              <mat-radio-button class="custom-control custom-radio display-inline-block"
+                *ngFor="let item of listCustType" [value]="item.Key">
+                {{item.Value}}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
         </div>
       </div>
       <app-new-cust-personal-main-data *ngIf="CustType == CustTypePersonal" [hidden]="PageType != CustPageTypeHeader" [CustId]="CustId" [ParentCustId]="ParentCustId" [listCustNoToExclude]="listCustNoToExclude" [tempTotalSharePrct]="tempTotalSharePrct" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId" [CustDataMode]="CustDataMode" (outputCancel)="Cancel()" (outputAfterSave)="ClickSavePersonal($event)" [isMarried]="isMarried" [CustPersonalFamilyId]="CustPersonalFamilyId"></app-new-cust-personal-main-data>

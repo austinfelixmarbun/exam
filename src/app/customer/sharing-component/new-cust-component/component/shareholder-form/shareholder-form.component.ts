@@ -37,7 +37,6 @@ export class ShareholderFormComponent implements OnInit {
   @Output() outputChange: EventEmitter<{Key: string, Code: string}> = new EventEmitter();
 
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
-  readonly CustTypeCoy: string = CommonConstant.CustomerCompany;
 
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
 

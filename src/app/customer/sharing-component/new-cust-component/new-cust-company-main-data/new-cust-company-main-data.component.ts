@@ -60,7 +60,6 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   readonly CustTypeCoy: string = CommonConstant.CustomerCompany;
 
   readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
-  readonly CustDataModeFamily: string = CommonConstant.CustMainDataModeFamily;
   readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
   //#endregion
 
@@ -107,9 +106,6 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     switch (this.CustDataMode) {
       case this.CustDataModeMain:
         this.CustNameLabel = "Customer";
-        break;
-      case this.CustDataModeFamily:
-        this.CustNameLabel = "Family";
         break;
       case this.CustDataModeShareholder:
         this.CustNameLabel = "Share Legal";
@@ -367,9 +363,6 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     switch (this.CustDataMode) {
       case this.CustDataModeMain:
         reqSubmitObj.CustObj.IsCustomer = true;
-        break;
-      case this.CustDataModeFamily:
-        reqSubmitObj.CustObj.IsFamily = true;
         break;
       case this.CustDataModeShareholder:
         reqSubmitObj.CustObj.IsShareholder = true;

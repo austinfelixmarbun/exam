@@ -24,9 +24,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class NewCustHeaderComponent implements OnInit {
   //#region Readonly
-  readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
   readonly CustDataModeFamily: string = CommonConstant.CustMainDataModeFamily;
-  readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
 
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
   readonly CustTypeCoy: string = CommonConstant.CustomerCompany;
@@ -34,9 +32,6 @@ export class NewCustHeaderComponent implements OnInit {
 
   readonly CustPageTypeHeader = CommonConstant.CustPageTypeHeader;
   readonly CustPageTypeDupCheck = CommonConstant.CustPageTypeDupCheck;
-  readonly CustPageTypePaging = CommonConstant.CustPageTypePaging;
-  readonly MasterCustType = CommonConstant.RefMasterTypeCodeCustType;
-  readonly MasterShareholderCustType = CommonConstant.RefMasterTypeCodeShareholderCustType;
   //#endregion
 
   @Input() CustType: string = CommonConstant.CustomerPersonal;
@@ -69,21 +64,38 @@ export class NewCustHeaderComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.SetCustTypeUsed();
-    await this.GetListActiveRefMaster(this.refMasterCustTypeUsed);
+    this.SetTitleLabel();
+    await this.GetListCustType();
   }
 
-  refMasterCustTypeUsed: string = "";
-  SetCustTypeUsed() {
-    this.refMasterCustTypeUsed = this.CustDataMode == this.CustDataModeShareholder ? this.MasterShareholderCustType : this.MasterCustType;
+  TitleLabel: string = "";
+  SetTitleLabel() {
+    let mode: string = CommonConstant.MODE_ADD;
+    if (this.CustId != 0) mode = CommonConstant.MODE_EDIT;
+
+    let custLabel: string = "";
+    switch (this.CustDataMode) {
+      case CommonConstant.CustMainDataModeCust:
+        custLabel = "Customer";
+        break;
+      case this.CustDataModeFamily:
+        custLabel = "Family";
+        break;
+      case CommonConstant.CustMainDataModeMgmntShrholder:
+        custLabel = "Share Legal";
+        break;
+    }
+
+    this.TitleLabel = mode + " " + custLabel;
   }
 
-  DictRefMaster: { [id: string]: Array<KeyValueObj> } = {};
-  async GetListActiveRefMaster(RefMasterTypeCode: string) {
-    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: RefMasterTypeCode, MappingCode: null };
+  listCustType: Array<KeyValueObj> = new Array();
+  async GetListCustType() {
+    let tempCode = this.CustDataMode == CommonConstant.CustMainDataModeMgmntShrholder ? CommonConstant.RefMasterTypeCodeShareholderCustType : CommonConstant.RefMasterTypeCodeCustType;
+    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: tempCode, MappingCode: null };
     await this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, tempReq).toPromise().then(
       (response) => {
-        this.DictRefMaster[RefMasterTypeCode] = response[CommonConstant.ReturnObj];
+        this.listCustType = response[CommonConstant.ReturnObj];
       });
   }
 
@@ -93,7 +105,7 @@ export class NewCustHeaderComponent implements OnInit {
   }
 
   Cancel() {
-    if (this.CustDataMode != this.CustDataModeMain) {
+    if (this.CustDataMode != CommonConstant.CustMainDataModeCust) {
       this.outputCancel.emit();
       return;
     }
@@ -199,7 +211,7 @@ export class NewCustHeaderComponent implements OnInit {
     let urlAdd: string = this.SetUrlAddCoy();
     this.http.post(urlAdd, this.DupCheckCoyObj).subscribe(
       (response: GenericObj) => {
-        if (this.CustDataMode == this.CustDataModeMain) {
+        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_COY_PAGE], { IdCust: response.Id });
           return;
         }
@@ -212,7 +224,7 @@ export class NewCustHeaderComponent implements OnInit {
     let urlAdd: string = this.SetUrlAddPersonal();
     this.http.post(urlAdd, this.DupCheckPersonalObj).subscribe(
       (response: GenericObj) => {
-        if (this.CustDataMode == this.CustDataModeMain) {
+        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { IdCust: response.Id });
           return;
         }
@@ -224,10 +236,10 @@ export class NewCustHeaderComponent implements OnInit {
   SetUrlAddCoy(): string {
     let urlAdd: string = "";
     switch (this.CustDataMode) {
-      case this.CustDataModeMain:
+      case CommonConstant.CustMainDataModeCust:
         urlAdd = URLConstant.AddCustCompanyMainData;
         break;
-      case this.CustDataModeShareholder:
+      case CommonConstant.CustMainDataModeMgmntShrholder:
         urlAdd = URLConstant.SaveCustCompanyShareholderMainData;
         break;
     }
@@ -236,10 +248,10 @@ export class NewCustHeaderComponent implements OnInit {
   SetUrlEditCoy(): string {
     let urlAdd: string = "";
     switch (this.CustDataMode) {
-      case this.CustDataModeMain:
+      case CommonConstant.CustMainDataModeCust:
         urlAdd = URLConstant.EditCustCompanyMainData;
         break;
-      case this.CustDataModeShareholder:
+      case CommonConstant.CustMainDataModeMgmntShrholder:
         urlAdd = URLConstant.SaveCustCompanyShareholderMainData;
         break;
     }
@@ -249,13 +261,13 @@ export class NewCustHeaderComponent implements OnInit {
   SetUrlAddPersonal(): string {
     let urlAdd: string = "";
     switch (this.CustDataMode) {
-      case this.CustDataModeMain:
+      case CommonConstant.CustMainDataModeCust:
         urlAdd = URLConstant.AddCustPersonalMainData;
         break;
       case this.CustDataModeFamily:
         urlAdd = URLConstant.SaveCustPersonalFamilyMainData;
         break;
-      case this.CustDataModeShareholder:
+      case CommonConstant.CustMainDataModeMgmntShrholder:
         urlAdd = URLConstant.SaveCustPersonalShareholderMainData;
         break;
     }
@@ -265,13 +277,13 @@ export class NewCustHeaderComponent implements OnInit {
   SetUrlEditPersonal(): string {
     let urlAdd: string = "";
     switch (this.CustDataMode) {
-      case this.CustDataModeMain:
+      case CommonConstant.CustMainDataModeCust:
         urlAdd = URLConstant.EditCustPersonalMainData;
         break;
       case this.CustDataModeFamily:
         urlAdd = URLConstant.SaveCustPersonalFamilyMainData;
         break;
-      case this.CustDataModeShareholder:
+      case CommonConstant.CustMainDataModeMgmntShrholder:
         urlAdd = URLConstant.SaveCustPersonalShareholderMainData;
         break;
     }
@@ -296,14 +308,14 @@ export class NewCustHeaderComponent implements OnInit {
     if (this.CustDataMode == this.CustDataModeFamily) {
       reqEditDupCheck.CustPersonalFamilyObj = this.DupCheckPersonalObj.CustPersonalFamilyObj;
     }
-    if (this.CustDataMode == this.CustDataModeShareholder) {
+    if (this.CustDataMode == CommonConstant.CustMainDataModeMgmntShrholder) {
       reqEditDupCheck.CustCompanyMgmntShrholderObj = this.DupCheckPersonalObj.CustCompanyMgmntShrholderObj;
     }
     reqEditDupCheck.CustPersonalJobObj = this.DupCheckPersonalObj.CustPersonalJobObj;
     reqEditDupCheck.CustAttrContentObjs = this.DupCheckPersonalObj.CustAttrContentObjs;
     this.http.post(URLConstant.NewEditDuplicateCust, reqEditDupCheck).subscribe(
       (response: GenericObj) => {
-        if (this.CustDataMode == this.CustDataModeMain) {
+        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response.Id });
           return;
         }
@@ -317,12 +329,12 @@ export class NewCustHeaderComponent implements OnInit {
     reqEditDupCheck.CustNo = item.CustNo;
     reqEditDupCheck.CustDataMode = this.CustDataMode;
 
-    if (this.CustDataMode == this.CustDataModeShareholder) {
+    if (this.CustDataMode == CommonConstant.CustMainDataModeMgmntShrholder) {
       reqEditDupCheck.CustCompanyMgmntShrholderObj = this.DupCheckCoyObj.CustCompanyMgmntShrholderObj;
     }
     this.http.post(URLConstant.NewEditDuplicateCust, reqEditDupCheck).subscribe(
       (response: GenericObj) => {
-        if (this.CustDataMode == this.CustDataModeMain) {
+        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_COY_PAGE], { "IdCust": response.Id });
           return;
         }
@@ -347,14 +359,14 @@ export class NewCustHeaderComponent implements OnInit {
     if (this.CustDataMode == this.CustDataModeFamily) {
       NegativeCustObj.CustPersonalFamilyObj = this.DupCheckPersonalObj.CustPersonalFamilyObj;
     }
-    if (this.CustDataMode == this.CustDataModeShareholder) {
+    if (this.CustDataMode == CommonConstant.CustMainDataModeMgmntShrholder) {
       NegativeCustObj.CustCompanyMgmntShrholderObj = this.DupCheckPersonalObj.CustCompanyMgmntShrholderObj;
     }
     NegativeCustObj.CustPersonalJobObj = this.DupCheckPersonalObj.CustPersonalJobObj;
     NegativeCustObj.CustAttrContentObjs = this.DupCheckPersonalObj.CustAttrContentObjs;
     this.http.post<GenericObj>(URLConstant.EditDuplicateNegativeCust, NegativeCustObj).subscribe(
       (response) => {
-        if (this.CustDataMode == this.CustDataModeMain) {
+        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response.Id });
           return;
         }
@@ -369,12 +381,12 @@ export class NewCustHeaderComponent implements OnInit {
     NegativeCustObj.CustDataMode = this.CustDataMode;
     NegativeCustObj.MrCompanyTypeCode = this.DupCheckCoyObj.CustCompanyObj.MrCompanyTypeCode;
 
-    if (this.CustDataMode == this.CustDataModeShareholder) {
+    if (this.CustDataMode == CommonConstant.CustMainDataModeMgmntShrholder) {
       NegativeCustObj.CustCompanyMgmntShrholderObj = this.DupCheckCoyObj.CustCompanyMgmntShrholderObj;
     }
     this.http.post<GenericObj>(URLConstant.EditDuplicateNegativeCust, NegativeCustObj).subscribe(
       (response) => {
-        if (this.CustDataMode == this.CustDataModeMain) {
+        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response.Id });
           return;
         }
