@@ -6,6 +6,7 @@ import { environment } from "environments/environment";
 export class URLConstant {
     // FRAMEWORK
     public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL" // UCPaging
+    public static GetJournalResultPagingObjectBySQL = "/Generic/GetJournalResultPagingObjectBySQL";
 
     // SYS CONFIG RESULT
     public static GetSysConfigResultByCode = environment.FoundationR3Url + "/v1" + "/SysConfigResult/GetSysConfigResultByCode";
@@ -1014,9 +1015,6 @@ export class URLConstant {
 
     //SYS CONFIG
     public static GetSysConfigPncplResultByCode = environment.FoundationR3Url + "/v1" + "/SysConfigResult/GetSysConfigPncplResultByCode";
-
-    // GENERIC
-    public static GetJournalResultPagingObjectBySQL = environment.FoundationR3Url + "/v1" + "/Generic/GetJournalResultPagingObjectBySQL";
 
     // JOURNAL
     public static RerunJournal = "/v1" + "/Journal/RerunJournal";
