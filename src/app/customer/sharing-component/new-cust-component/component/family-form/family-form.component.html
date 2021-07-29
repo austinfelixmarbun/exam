@@ -2,17 +2,6 @@
 
   <div class="col-md-6">
 
-    <div class="form-group row">
-      <label class="col-md-4 adins-required-label" translate>Mobile Phone </label>
-      <div class="col-md-8">
-        <input type="text" class="form-control adInsInput" formControlName="MobilePhnNo1"
-          [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.MobilePhnNo1.invalid}">
-        <lib-uc-show-errors [control]="parentForm.controls.MobilePhnNo1"
-          [submit]="enjiForm.submitted">
-        </lib-uc-show-errors>
-      </div>
-    </div>
-
     <div class="form-group row">      
       <label class="col-md-4 adInsLabel" translate>Nationality</label>
       <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeNationality]?.isReady">
@@ -43,17 +32,6 @@
   </div>
 
   <div class="col-md-6">
-
-    <div class="form-group row">
-      <label class="col-md-4 adins-required-label" translate>Email </label>
-      <div class="col-md-8">
-        <input type="text" class="form-control adInsInput" formControlName="Email1"
-          [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.Email1.invalid}">
-        <lib-uc-show-errors [control]="parentForm.controls.Email1"
-          [submit]="enjiForm.submitted">
-        </lib-uc-show-errors>
-      </div>
-    </div>
 
     <div class="form-group row">
       <label class="col-md-4 adInsLabel" translate>Customer Model </label>

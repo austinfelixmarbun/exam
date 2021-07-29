@@ -66,12 +66,6 @@ export class FamilyFormComponent implements OnInit {
     this.parentForm.addControl("RefProfessionId", this.fb.control(0));
     this.parentForm.addControl("MrJobProfessionCode", this.fb.control(''));
     this.parentForm.addControl("MrCustModelCode", this.fb.control(''));
-    this.parentForm.addControl("MobilePhnNo1", this.fb.control(''));
-    this.parentForm.get("MobilePhnNo1").setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
-    this.parentForm.get("MobilePhnNo1").updateValueAndValidity();
-    this.parentForm.addControl("Email1", this.fb.control(''));
-    this.parentForm.get("Email1").setValidators([Validators.required, Validators.pattern(CommonConstant.regexEmail)]);
-    this.parentForm.get("Email1").updateValueAndValidity();
 
     this.BindLookupProfession();
     this.BindLookupJobPosition();

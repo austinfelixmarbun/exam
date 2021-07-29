@@ -146,7 +146,6 @@ export class NewCustCompanyMainDataComponent implements OnInit {
       CustName: ['', [Validators.required]],
       MrCompanyTypeCode: ['', [Validators.required]],
       TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
-      IsAffiliateWithMf: [false],
 
       IsSupplier: [false],
       SupplCode: [''],
@@ -272,7 +271,6 @@ export class NewCustCompanyMainDataComponent implements OnInit {
           CustName: this.custObj.CustName,
           MrCustTypeCode: this.custObj.MrCustTypeCode,
           TaxIdNo: this.custObj.TaxIdNo,
-          IsAffiliateWithMf: this.custObj.IsAffiliateWithMf,
           MrCustModelCode: this.custObj.MrCustModelCode,
         });
         this.existingCustomerLookUpObj.nameSelect = response.CustName;
@@ -333,7 +331,6 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     reqSubmitObj.CustObj.IdNo = tempForm["TaxIdNo"];
     reqSubmitObj.CustObj.MrCustModelCode = tempForm["CustModel"];
     reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustTypeCompany;
-    reqSubmitObj.CustObj.IsAffiliateWithMf = tempForm["IsAffiliateWithMf"];
 
     reqSubmitObj.CustCompanyObj = this.tempCustCompanyObj;
     reqSubmitObj.CustCompanyObj.MrCompanyTypeCode = tempForm["MrCompanyTypeCode"];

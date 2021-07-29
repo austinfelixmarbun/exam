@@ -97,6 +97,18 @@
                       </lib-uc-show-errors>
                     </div>
                   </div>
+
+                  <div class="form-group row">
+                    <label class="col-md-4 adins-required-label" translate>Mobile Phone </label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control adInsInput" formControlName="MobilePhnNo1"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MobilePhnNo1.invalid}">
+                      <lib-uc-show-errors [control]="CustomerForm.controls.MobilePhnNo1"
+                        [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
+                    </div>
+                  </div>
+
                 </div>
 
                 <div class="col-md-6">
@@ -150,12 +162,17 @@
                     </div>
                   </div>
 
-                </div>
-              </div>
-              <div class="form-group row" *ngIf="CustDataMode == CustDataModeMain">
-                <label class="col-md-2 adInsLabel" translate>Affiliation with Multifinance</label>
-                <div class="col-md-4">
-                  <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsAffiliateWithMf" />
+                  <div class="form-group row">
+                    <label class="col-md-4 adins-required-label" translate>Email </label>
+                    <div class="col-md-8">
+                      <input type="text" class="form-control adInsInput" formControlName="Email1"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.Email1.invalid}">
+                      <lib-uc-show-errors [control]="CustomerForm.controls.Email1"
+                        [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
+                    </div>
+                  </div>
+
                 </div>
               </div>
               <app-shareholder-form *ngIf="CustDataMode == CustDataModeShareholder" [parentForm]="CustomerForm" [enjiForm]="enjiForm" [CustId]="CustId" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId" [CustType]="CustTypePersonal" (outputExisting)=GetExistingFormObj($event) (outputChange)="outputChangeReceived($event)" #ShareholderForm></app-shareholder-form>

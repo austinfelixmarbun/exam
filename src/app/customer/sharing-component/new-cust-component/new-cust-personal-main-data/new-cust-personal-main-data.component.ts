@@ -202,12 +202,13 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       IdExpiredDt: [''],
       MrMaritalStatCode: ['', Validators.required],
       MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
-      IsAffiliateWithMf: [false],
       IsSupplier: [false],
       SupplCode: [''],
       SupplName: [''],
       SupplId: [''],
-      MrCustRelationship: ['']
+      MrCustRelationship: [''],
+      MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
+      Email1: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]]
     });
 
     if (this.CustDataMode != this.CustDataModeMain) {
@@ -267,7 +268,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           IdNo: this.custObj.IdNo,
           IdExpiredDt: datePipe.transform(this.custObj.IdExpiredDt, 'yyyy-MM-dd'),
           TaxIdNo: this.custObj.TaxIdNo,
-          IsAffiliateWithMf: this.custObj.IsAffiliateWithMf,
         });
         if (this.CustDataMode != this.CustDataModeMain) {
           this.CustomerForm.patchValue({
@@ -335,14 +335,10 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           MotherMaidenName: response.MotherMaidenName,
           IsRestInPeace: response.IsRestInPeace,
           MrMaritalStatCode: response.MrMaritalStatCode,
+          MobilePhnNo1: response.MobilePhnNo1,
+          Email1: response.Email1
         });
-        if (this.CustDataMode != this.CustDataModeMain) {
-          this.CustomerForm.patchValue({
-            MobilePhnNo1: response.MobilePhnNo1,
-            Email1: response.Email1
-          });
-          if (this.CustDataMode == this.CustDataModeFamily) this.familyForm.PatchExistingPersonalData(response);
-        }
+        if (this.CustDataMode == this.CustDataModeFamily) this.familyForm.PatchExistingPersonalData(response);
       }
     );
   }
@@ -559,7 +555,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     reqSubmitObj.CustObj.IdExpiredDt = tempForm["IdExpiredDt"];
     reqSubmitObj.CustObj.TaxIdNo = tempForm["TaxIdNo"];
     reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustomerPersonal;
-    reqSubmitObj.CustObj.IsAffiliateWithMf = tempForm["IsAffiliateWithMf"];
 
     reqSubmitObj.CustPersonalObj = this.tempCustPersonalObj;
     reqSubmitObj.CustPersonalObj.CustFullName = tempForm["CustName"];
@@ -568,6 +563,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     reqSubmitObj.CustPersonalObj.BirthDt = tempForm["BirthDt"];
     reqSubmitObj.CustPersonalObj.MotherMaidenName = tempForm["MotherMaidenName"];
     reqSubmitObj.CustPersonalObj.MrMaritalStatCode = tempForm["MrMaritalStatCode"];
+    reqSubmitObj.CustPersonalObj.Email1 = tempForm["Email1"];
+    reqSubmitObj.CustPersonalObj.MobilePhnNo1 = tempForm["MobilePhnNo1"];
     if (this.CustDataMode == this.CustDataModeFamily) {
       reqSubmitObj.CustPersonalObj.MrNationalityCode = tempForm["MrNationalityCode"];
       reqSubmitObj.CustPersonalObj.WnaCountryCode = tempForm["WnaCountryCode"];
@@ -589,8 +586,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     if (this.CustDataMode != this.CustDataModeMain) {
       reqSubmitObj.CustObj.CustName = tempForm["ExistingCustName"].value;
       reqSubmitObj.CustPersonalObj.CustFullName = tempForm["ExistingCustName"].value;
-      reqSubmitObj.CustPersonalObj.Email1 = tempForm["Email1"];
-      reqSubmitObj.CustPersonalObj.MobilePhnNo1 = tempForm["MobilePhnNo1"];
       reqSubmitObj.CustObj.MrCustModelCode = tempForm["MrCustModelCode"];
       reqSubmitObj.CustPersonalJobObj = this.SetCustPersonalJobData();
       reqSubmitObj.CustAttrContentObjs = this.SetCustAttrContent();
