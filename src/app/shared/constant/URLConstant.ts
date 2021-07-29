@@ -1052,5 +1052,8 @@ export class URLConstant {
     public static UploadLicense = environment.FoundationR3Url + "/v1" + "/License/UploadLicense";
     public static GetLicenses = environment.FoundationR3Url + "/v1" + "/License/GetLicenses";
     public static RetrieveLicenseDetail = environment.FoundationR3Url + "/v1" + "/License/RetrieveLicenseDetail";
+
+    // LIST IFRAME VIEW
+    public static GetCustListIframeView = environment.FoundationR3Url + "/v1" + "/Cust/GetCustListIframeView";
 }
 

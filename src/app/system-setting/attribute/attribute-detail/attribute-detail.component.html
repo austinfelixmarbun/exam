@@ -2,14 +2,18 @@
   <div class="card">
     <div class="card-body">
       <div class="px-3">
-        <div class="row" style="border-bottom: 1px solid black; margin-bottom: 15px;">
-          <div class="col-md-8" style="padding-left: 0px;">
-            <h4 class="form-section card-title" translate><i class="ft-file-text"></i>Attribute Master Detail</h4>
+        <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="card-title" id="horz-layout-colored-controls" translate> Attribute Master - Detail </h4>
+            </div>
           </div>
         </div>
-        <form class="form form-horizontal" [formGroup]="RefAttrForm" #enjiForm="ngForm" novalidate
-          (ngSubmit)="enjiForm.form.valid && Save(enjiForm)">
-          <div class="form-body">
+        <form class="form form-horizontal" [formGroup]="RefAttrForm" #enjiForm="ngForm"
+          (ngSubmit)="RefAttrForm.valid && Save()">
+          <lib-ucSubsection [id]="'RefAttrDetailId'" [title]="'Detail'" [panel]="'DetailForm'">
+          </lib-ucSubsection>
+          <div class="form-body" id="DetailForm">
             <div id="RefAttrSection">
               <div *ngIf="!isAuto" class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="AttrCode" translate>Attribute Code</label>
@@ -31,10 +35,28 @@
                 </div>
               </div>
               <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel" for="AttrGroup" translate>Attribute Group</label>
+                <div class="col-md-9">
+                  <!-- <input type="text" class="form-control adInsInput" formControlName="AttrGroup"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrGroup.invalid }" /> -->
+                    <select formControlName="AttrGroup" class="form-control"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrGroup.invalid }">
+                    <option value="">-Select One-</option>
+                    <option *ngFor="let inputType of attributeGroupList" [value]="inputType.Key">
+                      {{inputType.Value}}
+                    </option>
+                  </select>
+ 
+                  <lib-uc-show-errors [control]="RefAttrForm.controls.AttrGroup" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              <div class="form-group row adins-required">
                 <label class="col-md-3 adInsLabel" for="AttrTypeCode" translate>Attribute Type Code</label>
                 <div class="col-md-9">
                   <select formControlName="AttrTypeCode" class="form-control"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrTypeCode.invalid }">
+                    <option value="">-Select One-</option>
                     <option *ngFor="let typeCode of attrTypeCodeList" [value]="typeCode.AttrTypeCode">
                       {{typeCode.AttrTypeName}}
                     </option>
@@ -48,6 +70,7 @@
                 <div class="col-md-9">
                   <select formControlName="AttrInputType" class="form-control" (change)="AttrInputTypeHandler()"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrInputType.invalid }">
+                    <option value="">-Select One-</option>
                     <option *ngFor="let inputType of attrInputTypeList" [value]="inputType.Key">
                       {{inputType.Value}}
                     </option>
@@ -56,7 +79,7 @@
                   </lib-uc-show-errors>
                 </div>
               </div>
-              <div class="form-group row">
+              <div *ngIf="RefAttrForm.value.AttrInputType != AttrInputTypeDate" class="form-group row">
                 <label class="col-md-3 adInsLabel" for="DefaultValue" translate>Default Value</label>
                 <div class="col-md-9">
                   <input type="text" class="form-control adInsInput" formControlName="DefaultValue"
@@ -80,6 +103,7 @@
                   <div class="col-md-9">
                     <select formControlName="PatternCode" class="form-control" (change)="patternCodeChange($event)"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.PatternCode.invalid }">
+                      <option value="">-Select One-</option>
                       <option *ngFor="let inputType of patternCodeList" [value]="inputType.Key">
                         {{inputType.Key}}
                       </option>
@@ -92,24 +116,8 @@
                   <label class="col-md-3 adInsLabel " for="PatternValue" translate>Pattern Value</label>
                   <div class="col-md-9">
                     <label class="adInsLabel form-control"
-                      style="height: 2.5rem; border:none ">{{RefAttrForm.controls.PatternValue.value}}</label>
+                      style="height: 2.5rem; border:none; text-transform: none !important ">{{RefAttrForm.controls.PatternValue.value}}</label>
                   </div>
-                </div>
-              </div>
-              <div class="form-group row adins-required">
-                <label class="col-md-3 adInsLabel" for="AttrGroup" translate>Attribute Group</label>
-                <div class="col-md-9">
-                  <!-- <input type="text" class="form-control adInsInput" formControlName="AttrGroup"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrGroup.invalid }" /> -->
-                    <select formControlName="AttrGroup" class="form-control"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrGroup.invalid }">
-                    <option *ngFor="let inputType of attributeGroupList" [value]="inputType.Key">
-                      {{inputType.Value}}
-                    </option>
-                  </select>
- 
-                  <lib-uc-show-errors [control]="RefAttrForm.controls.AttrGroup" [submit]="enjiForm.submitted">
-                  </lib-uc-show-errors>
                 </div>
               </div>
 
@@ -150,19 +158,17 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 adInsLabel" for="isActive">Active Status</label>
-                <div class="col-md-9">
-                  <input type="checkbox" formControlName="IsActive">
-                </div>
-              </div>
-
-              <div class="form-group row">
                 <label class="col-md-3 adInsLabel" for="isActive">Mandatory</label>
                 <div class="col-md-9">
                   <input type="checkbox" formControlName="IsMandatory">
                 </div>
               </div>
- 
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel" for="isActive">Active Status</label>
+                <div class="col-md-9">
+                  <input type="checkbox" formControlName="IsActive">
+                </div>
+              </div>
             </div>
           </div>
           <div class="form-actions right">
