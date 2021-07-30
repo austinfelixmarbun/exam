@@ -51,7 +51,7 @@ export class ShareholderFormComponent implements OnInit {
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   async ngOnInit() {
     this.InitData();
-    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, null, true);
+    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
     await this.GetExistingShareholder();
     await this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;

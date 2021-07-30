@@ -1,4 +1,4 @@
-<lib-ucSubsection [id]="'DupPersMainInfoId'" [title]="'Main Info'" [panel]="'DupPersMainInfo'">
+<lib-ucSubsection [id]="'DupPersMainInfoId'" [title]="CustNameLabel + ' Main Information'" [panel]="'DupPersMainInfo'">
 </lib-ucSubsection>
 <form class="form form-horizontal" #enjiForm="ngForm" id="DupPersMainInfo">
   <div class="form-body">
@@ -9,6 +9,13 @@
           <label class="col-md-4 adInsLabel" translate>Customer Name </label>
           <div class="col-md-8">
             <label>{{CustObj.CustObj.CustName}}</label>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-4 adInsLabel" translate>Birth Place</label>
+          <div class="col-md-8">
+            <label>{{CustObj.CustPersonalObj.BirthPlace}}</label>
           </div>
         </div>
 
@@ -35,10 +42,9 @@
         </div>
 
         <div class="form-group row">
-          <label class="col-md-4 adInsLabel" translate>Affiliation with Multifinance</label>
+          <label class="col-md-4 adInsLabel" translate>Mobile Phone </label>
           <div class="col-md-8">
-            <label *ngIf="CustObj.CustObj.IsAffiliateWithMf">Yes</label>
-            <label *ngIf="!CustObj.CustObj.IsAffiliateWithMf">No</label>
+            <label>{{CustObj.CustPersonalObj.MobilePhnNo1}}</label>
           </div>
         </div>
       </div>
@@ -53,24 +59,38 @@
         </div>
 
         <div class="form-group row">
-          <label class="col-md-4 adInsLabel" translate>Birth Place</label>
-          <div class="col-md-8">
-            <label>{{CustObj.CustPersonalObj.BirthPlace}}</label>
-          </div>
-        </div>
-
-        <div class="form-group row">
           <label class="col-md-4 adInsLabel" translate>Birth Date</label>
           <div class="col-md-8">
             <label>{{CustObj.CustPersonalObj.BirthDt | date: 'yyyy-MM-dd'}}</label>
           </div>
         </div>
 
-        <div class="form-group row ">
+        <div class="form-group row">
           <label class="col-md-4 adInsLabel" translate>Tax Id No</label>
           <div class="col-md-8">
             <label *ngIf="CustObj.CustObj.TaxIdNo">{{CustObj.CustObj.TaxIdNo}}</label>
             <label *ngIf="!CustObj.CustObj.TaxIdNo"> - </label>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-4 adInsLabel" translate>Mother Maiden Name </label>
+          <div class="col-md-8">
+            <label>{{CustObj.CustPersonalObj.MotherMaidenName}}</label>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-4 adInsLabel" translate>Marital Status </label>
+          <div class="col-md-8">
+            <label>{{DictRefMaster[RefMasterTypeCodeMaritalStat][CustObj.CustPersonalObj.MrMaritalStatCode]}}</label>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-4 adInsLabel" translate>Email </label>
+          <div class="col-md-8">
+            <label>{{CustObj.CustPersonalObj.Email1}}</label>
           </div>
         </div>
 

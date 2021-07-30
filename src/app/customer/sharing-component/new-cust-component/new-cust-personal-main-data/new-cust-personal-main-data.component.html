@@ -5,7 +5,7 @@
         <div class="addEdit">
           <form class="form form-horizontal" [formGroup]="CustomerForm" (ngSubmit)="CustomerForm.valid && SaveForm()"
             #enjiForm="ngForm">
-            <lib-ucSubsection [id]="'MainInfoPersId'" [title]="CustDataMode + ' Main Info'" [panel]="'MainInfoPers'">
+            <lib-ucSubsection [id]="'MainInfoPersId'" [title]="CustNameLabel + ' Main Information'" [panel]="'MainInfoPers'">
             </lib-ucSubsection>
             <div class="form-body" id="MainInfoPers">
               <div class="form-group row" *ngIf="CustDataMode == CustDataModeMain && CustId == 0">
@@ -30,7 +30,7 @@
                 </div>
               </div>
               <div class="form-group row" *ngIf="CustDataMode == CustDataModeFamily">
-                <label class="col-md-2 adins-required-label" translate>Customer Relationship </label>
+                <label class="col-md-2 adins-required-label" translate>Family Relationship </label>
                 <div class="col-md-4" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustPersonalRelationship]?.isReady">
                   <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustPersonalRelationship]" [parentForm]="CustomerForm" [enjiForm]="enjiForm"
                     [identifier]="'MrCustRelationship'" [genericList]="MrCustRelationshipCodeObj" (callback)="RelationshipChange($event.selectedValue)"></lib-ucdropdownlist>

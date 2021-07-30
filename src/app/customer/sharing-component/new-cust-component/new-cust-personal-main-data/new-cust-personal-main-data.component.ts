@@ -146,6 +146,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   BindLookupExistingCust() {
     if (this.CustDataMode == this.CustDataModeMain) return;
     this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal);
+    if (this.CustId != 0) this.existingCustomerLookUpObj.isDisable = true;
   }
   //#endregion
 
@@ -273,8 +274,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           this.CustomerForm.patchValue({
             MrCustModelCode: response.MrCustModelCode ? response.MrCustModelCode : "",
           });
-          if(this.CustDataMode == this.CustDataModeFamily) this.familyForm.PatchCriteriaLookupProfession();
-          if(this.CustDataMode == this.CustDataModeShareholder) this.shareholderForm.PatchCriteriaLookupProfession();
+          if (this.CustDataMode == this.CustDataModeFamily) this.familyForm.PatchCriteriaLookupProfession();
+          if (this.CustDataMode == this.CustDataModeShareholder) this.shareholderForm.PatchCriteriaLookupProfession();
         }
         this.existingCustomerLookUpObj.nameSelect = response.CustName;
         this.existingCustomerLookUpObj.jsonSelect = { CustName: response.CustName };
@@ -442,6 +443,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       (response: VendorAddrObj) => {
         let inputFieldObj = new InputFieldObj();
         inputFieldObj.inputLookupObj = new InputLookupObj();
+        inputFieldObj.inputLookupObj.isReadonly = false;
         inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
         inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
         let tempUcAddObj: UcAddressObj = new UcAddressObj();
@@ -513,18 +515,23 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   RelationshipChange(ev: string) {
     let tempMaritalStat = this.CustomerForm.get("MrMaritalStatCode");
+    let isMarried: boolean = false;
     if (ev == CommonConstant.MasteCodeRelationshipSpouse) {
-      this.existingCustomerLookUpObj.addCritInput = NewCustSetData.ResetCriteriaExisting(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal, true);
+      isMarried = true;
       tempMaritalStat.patchValue(CommonConstant.MR_MARITAL_STAT_CODE_MARRIED);
-      tempMaritalStat.disable();
+      if (this.CustId == 0) tempMaritalStat.disable();
     } else {
-      this.existingCustomerLookUpObj.addCritInput = NewCustSetData.ResetCriteriaExisting(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal);
-      tempMaritalStat.enable();
+      if (this.CustId == 0) {
+        tempMaritalStat.enable();
+      } else {
+        tempMaritalStat.patchValue(this.tempCustPersonalObj.MrMaritalStatCode);
+      }
     }
+    this.existingCustomerLookUpObj.addCritInput = NewCustSetData.ResetCriteriaExisting(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal, isMarried);
     this.ucLookupExistingCust.setAddCritInput();
   }
 
-  outputChangeReceived(ev: {Key: string, Code: string}) {
+  outputChangeReceived(ev: { Key: string, Code: string }) {
     switch (ev.Key) {
       case CommonConstant.CUST_CHANGE_PROFESSION:
         this.ChangeProffession(ev.Code);
@@ -644,6 +651,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
     tempReqObj.RefProfessionId = tempForm["RefProfessionId"] != 0 ? tempForm["RefProfessionId"] : null;
     tempReqObj.MrJobPositionCode = tempForm["MrJobPositionCode"];
+    if(this.CustDataMode == this.CustDataModeFamily) tempReqObj.EmploymentEstablishmentDt = tempForm["EmploymentEstablishmentDt"];
     if (!tempReqObj.RefProfessionId && !tempReqObj.MrJobPositionCode) tempReqObj = null;
     return tempReqObj
   }

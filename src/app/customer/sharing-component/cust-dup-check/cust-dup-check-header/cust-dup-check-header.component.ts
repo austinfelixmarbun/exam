@@ -30,6 +30,13 @@ export class CustDupCheckHeaderComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
+    this.CheckDuplicateStatus();
+  }
+
+  IsLock: boolean = false;
+  CheckDuplicateStatus() {
+    let tempStatus: string = this.DuplicateStatus.toLowerCase();
+    if (tempStatus == "lock") this.IsLock = true;
   }
 
   Back() {

@@ -70,13 +70,10 @@ export class NewCustHeaderComponent implements OnInit {
 
   TitleLabel: string = "";
   SetTitleLabel() {
-    let mode: string = CommonConstant.MODE_ADD;
-    if (this.CustId != 0) mode = CommonConstant.MODE_EDIT;
-
     let custLabel: string = "";
     switch (this.CustDataMode) {
       case CommonConstant.CustMainDataModeCust:
-        custLabel = "Customer";
+        custLabel = "Main Data";
         break;
       case this.CustDataModeFamily:
         custLabel = "Family";
@@ -86,7 +83,7 @@ export class NewCustHeaderComponent implements OnInit {
         break;
     }
 
-    this.TitleLabel = mode + " " + custLabel;
+    this.TitleLabel = "Customer " + custLabel + " Registration";
   }
 
   listCustType: Array<KeyValueObj> = new Array();

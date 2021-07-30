@@ -118,6 +118,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   BindLookupExistingCust() {
     if (this.CustDataMode == this.CustDataModeMain) return;
     this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerCompany);
+    if (this.CustId != 0) this.existingCustomerLookUpObj.isDisable = true;
   }
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
