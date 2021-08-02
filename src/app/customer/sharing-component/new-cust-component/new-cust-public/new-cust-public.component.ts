@@ -5,6 +5,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -37,6 +39,7 @@ export class NewCustPublicComponent implements OnInit {
   async ngOnInit() {
     this.InitData();
     this.initDdlRefMaster(this.RefMasterTypeCodePublicType, null, true);
+    this.GetCustAddrToCopy();
     await this.GetExisting();
     this.IsReady = true;
   }
@@ -112,6 +115,7 @@ export class NewCustPublicComponent implements OnInit {
   }
   //#endregion
 
+  IsLockCopyAddrBtn: boolean = false;
   tempExisting: ShareholderPublicObj = new ShareholderPublicObj();
   async GetExisting() {
     if (this.CustCompanyMgmntShrholderId == 0) return;
@@ -119,8 +123,21 @@ export class NewCustPublicComponent implements OnInit {
       (response: ShareholderPublicObj) => {
         this.tempExisting = response;
         this.ClearForm(response);
+        this.IsLockCopyAddrBtn = true;
       }
     )
+  }
+  
+  tempCustAddrToCopy: CustAddrObj = new CustAddrObj();
+  async GetCustAddrToCopy() {
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = this.CustId;
+    reqObj.Code = CommonConstant.CustAddrTypeLegal;
+    await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+      (response: CustAddrObj) => {
+        this.tempCustAddrToCopy = response;
+      }
+    );
   }
 
   SaveForm() {
@@ -198,6 +215,23 @@ export class NewCustPublicComponent implements OnInit {
     }
     tempPublicIdentityNo.enable();
     tempPublicName.enable();
+  }
+
+  CopyLegalAddr() {
+    let inputFieldObj = new InputFieldObj();
+    inputFieldObj.inputLookupObj = new InputLookupObj();
+    inputFieldObj.inputLookupObj.isReadonly = false;
+    inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrToCopy.Zipcode;
+    inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrToCopy.Zipcode };
+    let tempUcAddObj: UcAddressObj = new UcAddressObj();
+    tempUcAddObj.AreaCode1 = this.tempCustAddrToCopy.AreaCode1;
+    tempUcAddObj.AreaCode2 = this.tempCustAddrToCopy.AreaCode2;
+    tempUcAddObj.AreaCode3 = this.tempCustAddrToCopy.AreaCode3;
+    tempUcAddObj.AreaCode4 = this.tempCustAddrToCopy.AreaCode4;
+    tempUcAddObj.Addr = this.tempCustAddrToCopy.Addr;
+    tempUcAddObj.City = this.tempCustAddrToCopy.City;
+    this.inputAddressObj.default = tempUcAddObj;
+    this.inputAddressObj.inputField = inputFieldObj;
   }
   //#endregion
 }

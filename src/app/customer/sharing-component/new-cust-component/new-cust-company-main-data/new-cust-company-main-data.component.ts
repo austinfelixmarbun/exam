@@ -219,6 +219,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   CopyLegalAddr() {
     let inputFieldObj = new InputFieldObj();
     inputFieldObj.inputLookupObj = new InputLookupObj();
+    inputFieldObj.inputLookupObj.isReadonly = false;
     inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrToCopy.Zipcode;
     inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrToCopy.Zipcode };
     let tempUcAddObj: UcAddressObj = new UcAddressObj();
