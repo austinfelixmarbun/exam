@@ -47,7 +47,7 @@ export class NewCustPublicComponent implements OnInit {
   positionSlikLookUpObj: InputLookupObj = new InputLookupObj();
   ClearForm(item: ShareholderPublicObj = null) {
     this.CustomerForm = this.fb.group({
-      MrPositionSlikCode: [item == null ? '' : item.MrPositionSlikCode, Validators.required],
+      MrPositionSlikCode: [item == null ? '' : item.MrPositionSlikCode],
       MrPublicTypeCode: [item == null ? '' : item.MrPublicTypeCode, Validators.required],
       PublicName: [item == null ? '' : item.PublicName, Validators.required],
       PublicIdentityNo: [item == null ? '' : item.PublicIdentityNo, Validators.required],
@@ -70,6 +70,9 @@ export class NewCustPublicComponent implements OnInit {
       tempUcAddObj.City = item.PublicCity;
       this.inputAddressObj.default = tempUcAddObj;
       this.inputAddressObj.inputField = inputFieldObj;
+      this.inputAddressObj.isReadonly = true;
+      this.inputAddressObj.inputField.inputLookupObj.isReadonly = true;
+      this.inputAddressObj.inputField.inputLookupObj.isDisable = true;
       //#endregion
 
       //#region patch positionSlik    
