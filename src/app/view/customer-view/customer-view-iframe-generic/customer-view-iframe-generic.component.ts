@@ -7,7 +7,7 @@ import { ResCustListIframeViewObj } from 'app/shared/model/Response/CustListIfra
 })
 export class CustomerViewIframeGenericComponent implements OnInit {
   @Input() inputObj: any;
-  @Input() iframeObj: ResCustListIframeViewObj;
+  @Input() iframeObj: ResCustListIframeViewObj = new ResCustListIframeViewObj;
 
   rootServer: string;
   IsReady: boolean = false;
