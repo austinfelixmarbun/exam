@@ -264,12 +264,13 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   async GetCustData(custId: number = this.CustId) {
     await this.http.post(URLConstant.GetCustByCustId, { Id: custId }).toPromise().then(
       (response: CustObj) => {
+        console.log(response);
         this.custObj = response;
         this.CustomerForm.patchValue({
           CustName: this.custObj.CustName,
           MrCustTypeCode: this.custObj.MrCustTypeCode,
           TaxIdNo: this.custObj.TaxIdNo,
-          MrCustModelCode: this.custObj.MrCustModelCode,
+          CustModel: this.custObj.MrCustModelCode,
         });
         this.existingCustomerLookUpObj.nameSelect = response.CustName;
         this.existingCustomerLookUpObj.jsonSelect = { CustName: response.CustName };
