@@ -78,6 +78,14 @@
             <lib-ucSubsection [id]="'LegalAddr'" [title]="'Legal Address'" [panel]="'LegalAddrSection'">
             </lib-ucSubsection>
             <div class="form-body" id="LegalAddrSection">
+              <div class="form-group row" *ngIf="!IsLockCopyAddrBtn">
+                <label class="col-md-2 adInsLabel" translate>Copy Address From Legal Customer</label>
+                <div class="col-md-4">
+                  <button type="button" class="btn btn-raised btn-primary" (click)="CopyLegalAddr()" translate>
+                    <i class="far"></i> Copy
+                  </button>
+                </div>
+              </div>
               <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerForm" [enjiForm]="enjiForm"
                 [identifier]="'UcAddress'">
               </lib-ucaddress>

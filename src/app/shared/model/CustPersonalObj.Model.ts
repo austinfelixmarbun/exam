@@ -27,5 +27,6 @@ export class CustPersonalObj {
   MrSalutationCode: string;
   IsVip: boolean;
   VipNotes: string;
+  IsAffiliateWithMf: boolean;
   RowVersion: string;
 }

@@ -38,7 +38,8 @@ export class CustomerCompanyDetailComponent implements OnInit {
     EstablishmentDt: ['', [Validators.required]],
     IsSkt: [false],
     IsVip: [false],
-    VipNotes: ['']
+    VipNotes: [''],
+    IsAffiliateWithMf: [false],
   });
 
   constructor(private router: Router,
@@ -68,7 +69,8 @@ export class CustomerCompanyDetailComponent implements OnInit {
         console.log(response);
         this.CustomerDetailForm.patchValue({
           IsVip: response.IsVip,
-          VipNotes: response.VipNotes
+          VipNotes: response.VipNotes,
+          IsAffiliateWithMf: response.IsAffiliateWithMf,
         });
         this.checkState();
       }
@@ -105,6 +107,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.custCompanyObj.IsSkt = this.CustomerDetailForm.controls["IsSkt"].value;
     this.custCompanyObj.IsVip = this.CustomerDetailForm.controls["IsVip"].value;
     this.custCompanyObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
+    this.custCompanyObj.IsAffiliateWithMf = this.CustomerDetailForm.controls["IsAffiliateWithMf"].value;
 
     if (this.tempRefIndustryObj != null && this.tempRefIndustryTypeId === null) {
       this.custCompanyObj.RefIndustryTypeId = this.custCompanyObj.RefIndustryTypeId;

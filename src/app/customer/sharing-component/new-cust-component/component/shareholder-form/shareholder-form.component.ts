@@ -37,7 +37,6 @@ export class ShareholderFormComponent implements OnInit {
   @Output() outputChange: EventEmitter<{Key: string, Code: string}> = new EventEmitter();
 
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
-  readonly CustTypeCoy: string = CommonConstant.CustomerCompany;
 
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
 
@@ -52,7 +51,7 @@ export class ShareholderFormComponent implements OnInit {
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   async ngOnInit() {
     this.InitData();
-    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, null, true);
+    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
     await this.GetExistingShareholder();
     await this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;
@@ -77,12 +76,6 @@ export class ShareholderFormComponent implements OnInit {
       this.parentForm.addControl("RefProfessionId", this.fb.control(0));
       this.parentForm.addControl("MrJobProfessionCode", this.fb.control(''));
       this.parentForm.addControl("MrCustModelCode", this.fb.control(''));
-      this.parentForm.addControl("MobilePhnNo1", this.fb.control(''));
-      this.parentForm.get("MobilePhnNo1").setValidators([Validators.pattern("^[0-9]+$")]);
-      this.parentForm.get("MobilePhnNo1").updateValueAndValidity();
-      this.parentForm.addControl("Email1", this.fb.control(''));
-      this.parentForm.get("Email1").setValidators([Validators.pattern(CommonConstant.regexEmail)]);
-      this.parentForm.get("Email1").updateValueAndValidity();
     }
     this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();
     this.BindLookupProfession();

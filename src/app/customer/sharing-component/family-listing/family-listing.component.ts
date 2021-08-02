@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputGridObj } from 'app/shared/model/InputGridObj.Model';
 import { FamilyListingObj } from 'app/shared/model/NewCust/Family/FamilyListingObj.Model';
@@ -22,24 +23,27 @@ export class FamilyListingComponent implements OnInit {
 
   readonly CustPageTypeHeader = CommonConstant.CustPageTypeHeader;
   readonly CustPageTypePaging = CommonConstant.CustPageTypePaging;
-  
+
   constructor(private http: HttpClient, private toastr: NGXToastrService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.BindGridViewObj();
-    this.GetListPaging();
+    await this.GetListPaging();
   }
 
   tempFamilyListingObj: Array<FamilyListingObj> = new Array();
   listCustNoToExclude: Array<string> = new Array();
-  GetListPaging(){    
-    this.http.post(URLConstant.GetMainCustAndListCustPersonalFamilyByCustId, { Id: this.CustId }).toPromise().then(
+  IsSpouseInputed: boolean = false;
+  async GetListPaging() {
+    this.IsSpouseInputed = false;
+    await this.http.post(URLConstant.GetMainCustAndListCustPersonalFamilyByCustId, { Id: this.CustId }).toPromise().then(
       (response) => {
         this.tempFamilyListingObj = response["CustPersonalFamilyList"];
         for (const item of this.tempFamilyListingObj) {
-          if(item["FamilyId"] && item["FamilyId"] > 0){
+          if (item["FamilyId"] && item["FamilyId"] > 0) {
             this.listCustNoToExclude.push(item["CustNo"]);
           }
+          if (item["MrCustRelationship"] == CommonConstant.MasteCodeRelationshipSpouse && item["MrMaritalStatCode"] == CommonConstant.MaritalStatusMarried) this.IsSpouseInputed = true;
         }
         this.inputGridObj.resultData["Data"] = new Array();
         this.inputGridObj.resultData.Data = this.tempFamilyListingObj;
@@ -79,9 +83,12 @@ export class FamilyListingComponent implements OnInit {
     this.GetListPaging();
     this.PageType = this.CustPageTypePaging;
   }
-  
-  next() {
 
+  next() {
+    if (this.isMarried && !this.IsSpouseInputed) {
+      this.toastr.warningMessage(ExceptionConstant.MUST_INPUT_SPOUSE_DATA)
+      return;
+    }
     this.outputTab.emit({ stepMode: 'next' });
   }
 }

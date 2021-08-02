@@ -1,4 +1,5 @@
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
@@ -60,18 +61,12 @@ export class FamilyFormComponent implements OnInit {
   businessDtMin: Date;
   InitData() {
     this.parentForm.addControl("EmploymentEstablishmentDt", this.fb.control(''));
-    this.parentForm.addControl("MrNationalityCode", this.fb.control(''));
+    this.parentForm.addControl("MrNationalityCode", this.fb.control(CommonConstant.NationalityCodeLocal));
     this.parentForm.addControl("WnaCountryCode", this.fb.control(''));
     this.parentForm.addControl("MrJobPositionCode", this.fb.control(''));
     this.parentForm.addControl("RefProfessionId", this.fb.control(0));
     this.parentForm.addControl("MrJobProfessionCode", this.fb.control(''));
     this.parentForm.addControl("MrCustModelCode", this.fb.control(''));
-    this.parentForm.addControl("MobilePhnNo1", this.fb.control(''));
-    this.parentForm.get("MobilePhnNo1").setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
-    this.parentForm.get("MobilePhnNo1").updateValueAndValidity();
-    this.parentForm.addControl("Email1", this.fb.control(''));
-    this.parentForm.get("Email1").setValidators([Validators.required, Validators.pattern(CommonConstant.regexEmail)]);
-    this.parentForm.get("Email1").updateValueAndValidity();
 
     this.BindLookupProfession();
     this.BindLookupJobPosition();
@@ -174,8 +169,9 @@ export class FamilyFormComponent implements OnInit {
       async (response: CustPersonalJobDataObj) => {
         if (!response.CustId) return;
         this.tempExisting.CustPersonalJob = response;
+        let datePipe = new DatePipe("en-US");
         this.parentForm.patchValue({
-          EmploymentEstablishmentDt: response.EmploymentEstablishmentDt,
+          EmploymentEstablishmentDt: datePipe.transform(response.EmploymentEstablishmentDt, 'yyyy-MM-dd'),
           MrJobPositionCode: response.MrJobPositionCode,
           RefProfessionId: response.RefProfessionId,
         });
