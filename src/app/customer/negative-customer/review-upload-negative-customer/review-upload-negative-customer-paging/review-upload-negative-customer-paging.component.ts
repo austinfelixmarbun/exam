@@ -32,10 +32,11 @@ export class ReviewUploadNegativeCustomerPagingComponent implements OnInit {
 
       this.inputPagingObj.isJoinExAPI = true;
 
-      this.requestTaskModel.ProcessKey = CommonConstant.WorkflowUploadNegativeCustomer,
-      this.requestTaskModel.OfficeCode = UserAccess[CommonConstant.OFFICE_CODE],
-      this.requestTaskModel.TaskDefinitionKey = CommonConstant.WfUploadNegativeCustomerReview,
-      this.requestTaskModel.RoleCode = UserAccess[CommonConstant.ROLE_CODE],
+      this.requestTaskModel.ProcessKey = CommonConstant.WorkflowUploadNegativeCustomer;
+      this.requestTaskModel.OfficeCode = UserAccess[CommonConstant.OFFICE_CODE];
+      this.requestTaskModel.TaskDefinitionKey = CommonConstant.WfUploadNegativeCustomerReview;
+      this.requestTaskModel.RoleCode = UserAccess[CommonConstant.ROLE_CODE];
+      this.requestTaskModel.OfficeRoleCodes = [CommonConstant.SuperUser];
       
       this.IntegrationObj.baseUrl = URLConstant.GetAllTaskWorkflow;
       this.IntegrationObj.requestObj = this.requestTaskModel;

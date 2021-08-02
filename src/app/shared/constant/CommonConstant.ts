@@ -95,6 +95,7 @@ export class CommonConstant {
 
     //OFFICE TYPE
     public static HeadOffice = "HO";
+    public static SuperUser = "SUPUSR";
     public static CollectionGroup = "CG";
     public static ATPM = "ATPM";
     public static Holding = "HOLDING";
