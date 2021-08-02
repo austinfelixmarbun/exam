@@ -1,20 +1,23 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
+      <div class="card-header header-title">
+        <div class="row">
+          <div class="col-md-8">
+            <h4 class="card-title" id="horz-layout-colored-controls" translate>Customer Duplicate Checking Match {{CustType}} </h4>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>  
       <div class="px-3">
         <div class="addEdit">
-          <form class="form form-horizontal">
-            <div class="form-body">
-              <h4 class="form-section card-title" translate>Customer Duplicate Checking Match {{CustType}}
-              </h4>
-            </div>
-          </form>
           <div class="form-body">
             <div class="ucSearch-Button-Right">
               <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Back()" translate>
                 <i class="fa fa-arrow-left"></i> Back
               </button>
-              <button type="button" class="btn btn-raised btn-primary" (click)="SaveForm()" translate>
+              <button [hidden]="IsLock" type="button" class="btn btn-raised btn-primary" (click)="SaveForm()" translate>
                 <i class="far fa-check-square"></i> New Customer
               </button>
             </div>
@@ -64,7 +67,7 @@
               <ng-container *ngFor="let item of ResultDuplicate; let i = index">
                 <tr>
                   <td>{{i+1}}</td>
-                  <td>{{item.CustNo}}</td>
+                  <td align="left">{{item.CustNo}}</td>
                   <td align="left">{{item.CustName}}</td>
                   <td *ngIf="CustType == CustTypePersonal" align="left">{{item.MrIdType}}</td>
                   <td *ngIf="CustType == CustTypePersonal" align="left">{{item.IdNo}}</td>
@@ -128,7 +131,7 @@
             <tbody>
               <tr *ngFor="let item of ResultDuplicateNegative; let i = index">
                 <td>{{i+1}}</td>
-                <td>{{item.CustNo}}</td>
+                <td class="text-left">{{item.CustNo}}</td>
                 <td class="text-left">{{item.CustName}}</td>
                 <td *ngIf="CustType == CustTypePersonal" align="left">{{item.MrIdTypeCode}}</td>
                 <td *ngIf="CustType == CustTypePersonal" class="text-left">{{item.IdNo}}</td>

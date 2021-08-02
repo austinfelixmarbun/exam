@@ -23,9 +23,26 @@ export class CustDupCheckPersonalComponent implements OnInit {
   readonly RefMasterTypeCodeMaritalStat: string = CommonConstant.RefMasterTypeCodeMaritalStat;
 
   ngOnInit() {
+    this.InitCustMainDataMode();
     this.initRefMaster(this.RefMasterTypeCodeIdType);
     this.initRefMaster(this.RefMasterTypeCodeGender);
     this.initRefMaster(this.RefMasterTypeCodeMaritalStat);
+  }
+
+  CustNameLabel: string = "Customer";
+  InitCustMainDataMode() {
+    switch (this.CustDataMode) {
+      case CommonConstant.CustMainDataModeCust:
+        this.CustNameLabel = "Customer";
+        break;
+      case CommonConstant.CustMainDataModeFamily:
+        this.CustNameLabel = "Family";
+        break;
+      case CommonConstant.CustMainDataModeMgmntShrholder:
+        this.CustNameLabel = "Share Legal";
+        break;
+      default:
+    }
   }
 
   DictRefMaster: { [id: string]: { [code: string]: string } } = {};

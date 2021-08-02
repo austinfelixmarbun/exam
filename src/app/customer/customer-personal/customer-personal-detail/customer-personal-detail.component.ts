@@ -67,7 +67,8 @@ export class CustomerPersonalDetailComponent implements OnInit {
     Email1: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]],
     Email2: ['', Validators.pattern(CommonConstant.regexEmail)],
     IsVip: [false],
-    VipNotes: ['']
+    VipNotes: [''],
+    IsAffiliateWithMf: [false],
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -120,7 +121,8 @@ export class CustomerPersonalDetailComponent implements OnInit {
         this.tempCustObj = response;
         this.CustomerDetailForm.patchValue({
           IsVip: response.IsVip,
-          VipNotes: response.VipNotes
+          VipNotes: response.VipNotes,
+          IsAffiliateWithMf: response.IsAffiliateWithMf,
         });
         this.checkState();
       });
@@ -308,6 +310,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.Email2 = this.CustomerDetailForm.controls["Email2"].value;
     this.custPersonalObj.IsVip = this.CustomerDetailForm.controls["IsVip"].value;
     this.custPersonalObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
+    this.custPersonalObj.IsAffiliateWithMf = this.CustomerDetailForm.controls["IsAffiliateWithMf"].value;
     this.http.post(URLConstant.EditCustPersonal, this.custPersonalObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);

@@ -75,15 +75,12 @@ export class ShareholderListingComponent implements OnInit {
   addCustShareHolder(isAdd: boolean = true) {
     this.PageType = this.CustPageTypeHeader;
     if (isAdd) {
-      this.CustType = this.CustTypePersonal;
+      this.CustType = CommonConstant.CustomerPersonal;
       this.selectedCustId = 0;
       this.selectedCustCompanyMgmntShrholderId = 0;
     }
   }
 
-  readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
-  readonly CustTypeCoy: string = CommonConstant.CustomerCompany;
-  readonly CustTypePublic: string = CommonConstant.CustomerPublic;
   CustType: string = "";
   event(ev: { Key: string, RowObj: ShareholderListingObj }) {
     this.selectedCustCompanyMgmntShrholderId = ev.RowObj.CustCompanyMgmntShrholderId;
