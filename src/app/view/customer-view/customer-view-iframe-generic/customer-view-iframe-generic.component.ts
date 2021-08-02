@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
+import { ResCustListIframeViewObj } from 'app/shared/model/Response/CustListIframeView/ResCustListIframeViewObj.model';
 
 @Component({
   selector: 'app-customer-view-iframe-generic',
@@ -7,7 +7,7 @@ import { environment } from 'environments/environment';
 })
 export class CustomerViewIframeGenericComponent implements OnInit {
   @Input() inputObj: any;
-  @Input() iframeObj: any;
+  @Input() iframeObj: ResCustListIframeViewObj;
 
   rootServer: string;
   IsReady: boolean = false;
