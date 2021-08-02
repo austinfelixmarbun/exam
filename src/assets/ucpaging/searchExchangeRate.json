@@ -116,7 +116,7 @@
         "type": "date",
         "position": "center",
         "property": "PostingDt",
-        "dateFormat": "d-MMM-y h:mm a"
+        "dateFormat": "d-MMM-y"
       },
       {
         "type": "date",
