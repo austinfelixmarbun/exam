@@ -11,7 +11,7 @@ export const environment = {
     //FoundationR3Url: 'https://localhost:5001',
     WebSocketURL : 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
     Module:"FOU",
-    losR3Web: 'http://r3web-server/LOSR3',
+    losR3Web: 'http://r3web-server.ad-ins.com/LOSR3',
     lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS',
     ApprovalURL : 'http://r3app-server/APPROVAL',
     FoundationR3Web:'http://r3web-server.ad-ins.com/Foundation',
