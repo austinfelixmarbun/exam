@@ -1,13 +1,13 @@
 import { KeyValueObj } from "../../KeyValue/KeyValueObj.Model";
 
-export class ResCustListIframeView {
+export class ResCustListIframeViewObj {
     Title: string;
     Url: string;
-    Param: Array<KeyValueObj>;
+    Params: Array<KeyValueObj>;
 
     constructor() {
         this.Title =  '';
         this.Url =  '';
-        this.Param = new Array<KeyValueObj>();
+        this.Params = new Array<KeyValueObj>();
     }
 }
