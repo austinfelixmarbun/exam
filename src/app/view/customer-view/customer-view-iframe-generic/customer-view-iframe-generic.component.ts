@@ -6,7 +6,7 @@ import { environment } from 'environments/environment';
   templateUrl: './customer-view-iframe-generic.component.html'
 })
 export class CustomerViewIframeGenericComponent implements OnInit {
-  @Input() prm: string;
+  @Input() inputObj: any;
   @Input() iframeObj: any;
 
   rootServer: string;
@@ -18,8 +18,8 @@ export class CustomerViewIframeGenericComponent implements OnInit {
   ngOnInit() {
     let queryParam: string = '';
     queryParam = this.genQueryParam();
-    this.rootServer = environment.losR3Web;
-    this.urlLink = this.rootServer + this.iframeObj.Url + queryParam;
+    // this.rootServer = environment.losR3Web;
+    this.urlLink = this.iframeObj.Url + queryParam;
     this.IsReady = true;
 
   }
@@ -27,9 +27,9 @@ export class CustomerViewIframeGenericComponent implements OnInit {
   genQueryParam() {
     let arrList = {};
 
-    for(let i = 0; i < this.iframeObj.Param.length; i++){
-      if(this.prm[this.iframeObj.Param[i].Value] != null && this.prm[this.iframeObj.Param[i].Value] != undefined) {
-        arrList[this.iframeObj.Param[i].Key] = this.prm[this.iframeObj.Param[i].Value];
+    for(let i = 0; i < this.iframeObj.Params.length; i++){
+      if(this.inputObj[this.iframeObj.Params[i].Value] != null && this.inputObj[this.iframeObj.Params[i].Value] != undefined) {
+        arrList[this.iframeObj.Params[i].Key] = this.inputObj[this.iframeObj.Params[i].Value];
       }
     }
     let queryParam: string = '?' + Object.keys(arrList).map(key => `${key}=${arrList[key]}`).join('&');
