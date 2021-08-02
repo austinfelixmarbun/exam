@@ -38,6 +38,7 @@ export class ReviewUploadNegativeAssetPagingComponent implements OnInit {
       this.requestTaskModel.OfficeCode = UserAccess[CommonConstant.OFFICE_CODE],
       this.requestTaskModel.TaskDefinitionKey = CommonConstant.WfUploadNegativeAssetReview,
       this.requestTaskModel.RoleCode = UserAccess[CommonConstant.ROLE_CODE],
+      this.requestTaskModel.OfficeRoleCodes = [CommonConstant.SuperUser]
       
       this.IntegrationObj.baseUrl = URLConstant.GetAllTaskWorkflow;
       this.IntegrationObj.requestObj = this.requestTaskModel;
