@@ -96,6 +96,8 @@ export class NewCustPublicComponent implements OnInit {
   InitData() {
     this.ClearForm();
     this.inputAddressObj = NewCustSetData.BindSetLegalAddr();
+    this.inputAddressObj.showOwnership = false;
+    this.inputAddressObj.requiredOwnership = false;
     this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();
   }
 
