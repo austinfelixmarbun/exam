@@ -201,19 +201,19 @@ export class CustomerViewComponent implements OnInit {
           return;
         }
 
-        if(this.IsLos) { // Application List
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            window.open(environment.losR3Web + "/View/AppList?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
-          });
-          return;
-        }
+        // if(this.IsLos) { // Application List
+        //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+        //     window.open(environment.losR3Web + "/View/AppList?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
+        //   });
+        //   return;
+        // }
 
-        if(this.IsLms) { // Agreement list
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
-          });
-          return;
-        }
+        // if(this.IsLms) { // Agreement list
+        //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+        //     window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
+        //   });
+        //   return;
+        // }
 
         if(this.IsIframe) { // Iframe View
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
@@ -226,19 +226,19 @@ export class CustomerViewComponent implements OnInit {
         });
       }
       else if (ev == 10) {
-        if(this.IsLos) { // Application List
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            window.open(environment.losR3Web + "/View/AppList?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
-          });
-          return;
-        }
+        // if(this.IsLos) { // Application List
+        //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+        //     window.open(environment.losR3Web + "/View/AppList?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
+        //   });
+        //   return;
+        // }
 
-        if(this.IsLms) { // Agreement list
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
-          });
-          return;
-        }
+        // if(this.IsLms) { // Agreement list
+        //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+        //     window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
+        //   });
+        //   return;
+        // }
 
         if(this.IsIframe) { // Iframe View
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
@@ -251,12 +251,12 @@ export class CustomerViewComponent implements OnInit {
         });
       }
       else if (ev == 11) {
-        if(this.IsLms) { // Agreement List
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
-          });
-          return;
-        }
+        // if(this.IsLms) { // Agreement List
+        //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+        //     window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
+        //   });
+        //   return;
+        // }
 
         if(this.IsIframe) { // Iframe View
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
@@ -269,7 +269,7 @@ export class CustomerViewComponent implements OnInit {
         });
       }
       else if (ev == 12) {
-        if(this.IsIframe && (this.IsLos || this.IsLms)) { // Iframe View
+        if(this.IsIframe && this.IsLms) { // Iframe View
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
           return;
         }

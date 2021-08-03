@@ -253,7 +253,10 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.GetCustAddr();
     await this.GetCustPersonalData();
     this.GetMrRelationship();
-    this.IsLockEdit();
+
+    if (this.CustDataMode != CommonConstant.CustMainDataModeCust) {
+      this.IsLockEdit();
+    }
     this.IsLockCopyAddrBtn = true;
   }
 
@@ -304,8 +307,13 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         tempUcAddObj.AreaCode4 = response.AreaCode4;
         tempUcAddObj.Addr = response.Addr;
         tempUcAddObj.City = response.City;
+        tempUcAddObj.MrHouseOwnershipCode = response.MrBuildingOwnershipCode;
         this.inputAddressObj.default = tempUcAddObj;
         this.inputAddressObj.inputField = inputFieldObj;
+
+        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
+          this.inputAddressObj.inputField.inputLookupObj.isReadonly = false;
+        }
       }
     );
   }
@@ -477,6 +485,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     tempUcAddObj.AreaCode4 = this.tempCustAddrToCopy.AreaCode4;
     tempUcAddObj.Addr = this.tempCustAddrToCopy.Addr;
     tempUcAddObj.City = this.tempCustAddrToCopy.City;
+    tempUcAddObj.MrHouseOwnershipCode = this.tempCustAddrToCopy.MrBuildingOwnershipCode;
     this.inputAddressObj.default = tempUcAddObj;
     this.inputAddressObj.inputField = inputFieldObj;
   }
@@ -503,6 +512,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.inputAddressObj.inputField.inputLookupObj.isReadonly = true;
     this.inputAddressObj.inputField.inputLookupObj.isDisable = true;
 
+    this.CustomerForm.get("CustName").disable();
     this.CustomerForm.get("MrGenderCode").disable();
     this.CustomerForm.get("MrIdTypeCode").disable();
     this.CustomerForm.get("BirthPlace").disable();
@@ -512,6 +522,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.CustomerForm.get("IdExpiredDt").disable();
     this.CustomerForm.get("MrMaritalStatCode").disable();
     this.CustomerForm.get("MotherMaidenName").disable();
+    this.CustomerForm.get("MobilePhnNo1").disable();
+    this.CustomerForm.get("Email1").disable();
   }
 
   RelationshipChange(ev: string) {
@@ -587,6 +599,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     reqSubmitObj.CustAddr.AreaCode3 = tempForm["UcAddress"]["AreaCode3"];
     reqSubmitObj.CustAddr.AreaCode4 = tempForm["UcAddress"]["AreaCode4"];
     reqSubmitObj.CustAddr.City = tempForm["UcAddress"]["City"];
+    reqSubmitObj.CustAddr.MrBuildingOwnershipCode = tempForm["UcAddress"]["MrHouseOwnershipCode"];
     reqSubmitObj.CustAddr.Zipcode = tempForm["UcAddressZipcode"]["value"];
     reqSubmitObj.CustAddr.SubZipcode = tempForm["UcAddressZipcode"]["value"];
     reqSubmitObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
@@ -652,7 +665,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
     tempReqObj.RefProfessionId = tempForm["RefProfessionId"] != 0 ? tempForm["RefProfessionId"] : null;
     tempReqObj.MrJobPositionCode = tempForm["MrJobPositionCode"];
-    if(this.CustDataMode == this.CustDataModeFamily) tempReqObj.EmploymentEstablishmentDt = tempForm["EmploymentEstablishmentDt"];
+    if (this.CustDataMode == this.CustDataModeFamily) tempReqObj.EmploymentEstablishmentDt = tempForm["EmploymentEstablishmentDt"];
     if (!tempReqObj.RefProfessionId && !tempReqObj.MrJobPositionCode) tempReqObj = null;
     return tempReqObj
   }
