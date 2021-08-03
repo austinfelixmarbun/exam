@@ -1,11 +1,7 @@
-import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { RegexService } from 'app/customer/regex.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -24,7 +20,6 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMas
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
-import { CookieService } from 'ngx-cookie';
 import { ShareholderFormComponent } from '../component/shareholder-form/shareholder-form.component';
 import { NewCustSetData } from '../NewCustSetData.Service';
 
@@ -385,17 +380,5 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     tempReqObj.IsOwner = tempForm["IsOwner"];
 
     return tempReqObj
-  }
-  
-  getFormValidationErrors() {
-    const invalid = [];
-    const controls = this.CustomerForm.controls;
-    for (const name in controls) {
-      if (controls[name].invalid) {
-        invalid.push(name);
-        console.log(name);
-      }
-    }
-    console.log(invalid);
   }
 }
