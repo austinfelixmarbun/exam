@@ -21,6 +21,7 @@ export class ExceptionConstant {
     public static PLEASE_COMPLETE_LEGAL_AND_BIZ_ADDRESS = "Please Complete Legal and Business Address First";
     public static ADD_MIN_1_DATA = "Please select at least one Office";
     public static Add_Min_1_Owner = "Please Input at least 1 Owner";
+    public static Add_Min_1_Signer = "Please Input at least 1 Signer";
     public static JOIN_DATE_MUST_LESS_THAN_ = "Join Date Must Be Lesser Than ";
     public static START_DATE_MUST_EQUAL_OR_MORE_THAN = "Start Date must be equal or more than ";
     public static END_DATE_MUST_EQUAL_OR_MORE_THAN = "End Date must be equal or more than";

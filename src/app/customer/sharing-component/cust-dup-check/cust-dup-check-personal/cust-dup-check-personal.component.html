@@ -40,8 +40,7 @@
               <div class="form-group row">
                 <label class="col-md-4 adInsLabel" translate>ID Expired Date</label>
                 <div class="col-md-8">
-                  <label *ngIf="CustObj.CustObj.IdExpiredDt">{{CustObj.CustObj.IdExpiredDt | date:
-                    'yyyy-MM-dd'}}</label>
+                  <label *ngIf="CustObj.CustObj.IdExpiredDt">{{CustObj.CustObj.IdExpiredDt | date: 'dd-MMM-yyyy'}}</label>
                   <label *ngIf="!CustObj.CustObj.IdExpiredDt">-</label>
                 </div>
               </div>
@@ -66,7 +65,7 @@
               <div class="form-group row">
                 <label class="col-md-4 adInsLabel" translate>Birth Date</label>
                 <div class="col-md-8">
-                  <label>{{CustObj.CustPersonalObj.BirthDt | date: 'yyyy-MM-dd'}}</label>
+                  <label>{{CustObj.CustPersonalObj.BirthDt | date: 'dd-MMM-yyyy'}}</label>
                 </div>
               </div>
 

@@ -38,7 +38,6 @@ export class ShareholderFormComponent implements OnInit {
 
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
 
-  readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
 
   private ucLookupProfession: UclookupgenericComponent;
   @ViewChild('LookupProfession') set content(content: UclookupgenericComponent) {
@@ -51,7 +50,6 @@ export class ShareholderFormComponent implements OnInit {
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   async ngOnInit() {
     this.InitData();
-    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
     await this.GetExistingShareholder();
     await this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;
@@ -75,7 +73,6 @@ export class ShareholderFormComponent implements OnInit {
       this.parentForm.addControl("EstablishmentDt", this.fb.control(''));
       this.parentForm.addControl("RefProfessionId", this.fb.control(0));
       this.parentForm.addControl("MrJobProfessionCode", this.fb.control(''));
-      this.parentForm.addControl("MrCustModelCode", this.fb.control(''));
     }
     this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();
     this.BindLookupProfession();
@@ -192,11 +189,6 @@ export class ShareholderFormComponent implements OnInit {
       RefProfessionId: event.RefProfessionId,
     });
     this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: event.ProfessionCode});
-  }
-
-  changeCustModel() {
-    this.ResetLookupProfession();
-    this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: ""});
   }
   
   getLookUpJobPosition(ev) {

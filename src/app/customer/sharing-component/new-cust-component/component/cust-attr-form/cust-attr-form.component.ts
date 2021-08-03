@@ -179,6 +179,7 @@ export class CustAttrFormComponent implements OnInit {
               this.selectedMultiDDLItems[attrCode] = new Array();
               this.selectedMultiDDLItems[attrCode].push({ item_id: element.Key, item_text: element.Value });
               this.onMultiDDLChangeEvent(attrCode, this.dictAttrCodeIdxAt[attrCode]);
+              this.tempExistingValueSelected[attrCode] = "";
             }
             this.dictMultiOptions[attrCode].push({ item_id: element.Key, item_text: element.Value });
           }
