@@ -8,13 +8,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AddrObj } from 'app/shared/model/AddrObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 
 @Component({
   selector: 'app-customer-personal-address-add',
@@ -36,7 +36,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   inputFieldAddressObj: InputFieldObj;
 
   custObj: CustObj;
-  addressObj: AddrObj;
+  addressObj: UcAddressObj;
   custAddrObj: GenericObj = new GenericObj();
   addressType: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
   custAddressObj: CustAddrObj;

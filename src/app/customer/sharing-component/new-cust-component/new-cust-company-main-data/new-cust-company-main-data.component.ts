@@ -134,7 +134,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
 
   ClearCustForm() {
     this.CustomerForm = this.fb.group({
-      CustModel: ['', [Validators.required]],
+      MrCustModelCode: ['', [Validators.required]],
       CustName: ['', [Validators.required]],
       MrCompanyTypeCode: ['', [Validators.required]],
       TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
@@ -206,7 +206,8 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     this.inputAddressObj.inputField.inputLookupObj.isReadonly = true;
     this.inputAddressObj.inputField.inputLookupObj.isDisable = true;
 
-    this.CustomerForm.get("CustModel").disable();
+    this.CustomerForm.get("CustName").disable();
+    this.CustomerForm.get("MrCustModelCode").disable();
     this.CustomerForm.get("MrCompanyTypeCode").disable();
     this.CustomerForm.get("TaxIdNo").disable();
   }
@@ -224,6 +225,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     tempUcAddObj.AreaCode4 = this.tempCustAddrToCopy.AreaCode4;
     tempUcAddObj.Addr = this.tempCustAddrToCopy.Addr;
     tempUcAddObj.City = this.tempCustAddrToCopy.City;
+    tempUcAddObj.MrHouseOwnershipCode = this.tempCustAddrToCopy.MrBuildingOwnershipCode;
     this.inputAddressObj.default = tempUcAddObj;
     this.inputAddressObj.inputField = inputFieldObj;
   }
@@ -252,7 +254,9 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     this.GetCustAddr();
     this.GetCustCompanyData();
 
-    this.IsLockEdit();
+    if (this.CustDataMode != CommonConstant.CustMainDataModeCust) {
+      this.IsLockEdit();
+    }
     this.IsLockCopyAddrBtn = true;
   }
 
@@ -290,8 +294,13 @@ export class NewCustCompanyMainDataComponent implements OnInit {
         tempUcAddObj.AreaCode4 = response.AreaCode4;
         tempUcAddObj.Addr = response.Addr;
         tempUcAddObj.City = response.City;
+        tempUcAddObj.MrHouseOwnershipCode = response.MrBuildingOwnershipCode;
         this.inputAddressObj.default = tempUcAddObj;
         this.inputAddressObj.inputField = this.inputFieldObj;
+
+        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
+          this.inputAddressObj.inputField.inputLookupObj.isReadonly = false;
+        }
       }
     );
   }
@@ -322,7 +331,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     reqSubmitObj.CustObj.CustName = tempForm["CustName"];
     reqSubmitObj.CustObj.TaxIdNo = tempForm["TaxIdNo"];
     reqSubmitObj.CustObj.IdNo = tempForm["TaxIdNo"];
-    reqSubmitObj.CustObj.MrCustModelCode = tempForm["CustModel"];
+    reqSubmitObj.CustObj.MrCustModelCode = tempForm["MrCustModelCode"];
     reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustTypeCompany;
 
     reqSubmitObj.CustCompanyObj = this.tempCustCompanyObj;
@@ -336,6 +345,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     reqSubmitObj.CustAddr.AreaCode3 = tempForm["UcAddress"]["AreaCode3"];
     reqSubmitObj.CustAddr.AreaCode4 = tempForm["UcAddress"]["AreaCode4"];
     reqSubmitObj.CustAddr.City = tempForm["UcAddress"]["City"];
+    reqSubmitObj.CustAddr.MrBuildingOwnershipCode = tempForm["UcAddress"]["MrHouseOwnershipCode"];
     reqSubmitObj.CustAddr.Zipcode = tempForm["UcAddressZipcode"]["value"];
     reqSubmitObj.CustAddr.SubZipcode = tempForm["UcAddressZipcode"]["value"];
     reqSubmitObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
