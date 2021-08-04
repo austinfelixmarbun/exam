@@ -58,32 +58,20 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
   //#endregion
 
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     this.ClearCustForm();
     this.BindLookupExistingCust();
     this.InitCustMainDataMode();
-    this.BindSetLegalAddr();
+    this.inputAddressObj = NewCustSetData.BindSetLegalAddr();
     this.BindLookupSupplier();
-    this.initDdlRefMaster(this.RefMasterTypeCodeCompanyType);
-    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCompanyType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCompanyType);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
     await this.GetExistingData();
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
   }
   //#region Set Data
-  //#region UcAddress
-  BindSetLegalAddr() {
-    this.inputFieldObj = new InputFieldObj();
-    this.inputFieldObj.inputLookupObj = new InputLookupObj();
-    this.inputAddressObj = new InputAddressObj();
-    this.inputAddressObj.showSubsection = false;
-    this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.default = new UcAddressObj();
-    this.inputAddressObj.inputField = this.inputFieldObj;
-    this.inputAddressObj.showAllPhn = false;
-  }
-  //#endregion
-
   //#region UcLookup
   BindLookupSupplier() {
     this.inputLookupObj = new InputLookupObj();
@@ -114,22 +102,6 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     if (this.CustDataMode == this.CustDataModeMain) return;
     this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerCompany);
     if (this.CustId != 0) this.existingCustomerLookUpObj.isDisable = true;
-  }
-
-  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
-  initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, apiUrl: string = URLConstant.GetListActiveRefMaster, isSelectOutput: boolean = false) {
-    let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
-    let refMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: refMasterTypeCode,
-      MappingCode: mappingCode
-    };
-    tempDdlObj.apiUrl = apiUrl;
-    tempDdlObj.requestObj = refMasterObj;
-    tempDdlObj.customObjName = CommonConstant.ReturnObj;
-    tempDdlObj.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
-    tempDdlObj.isSelectOutput = isSelectOutput;
-    tempDdlObj.isReady = true;
-    this.DictUcDDLObj[refMasterTypeCode] = tempDdlObj;
   }
 
   ClearCustForm() {

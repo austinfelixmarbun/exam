@@ -49,10 +49,11 @@ export class ShareholderFormComponent implements OnInit {
   constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
 
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     this.InitData();
     await this.GetExistingShareholder();
-    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
     await this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;
     this.positionSlikLookUpObj.isReady = true;
@@ -64,10 +65,12 @@ export class ShareholderFormComponent implements OnInit {
   businessDtMin: Date;
   InitData() {
     this.parentForm.addControl("MrPositionSlikCode", this.fb.control(''));
+    this.parentForm.get("MrPositionSlikCode").setValidators([Validators.required]);
+    this.parentForm.get("MrPositionSlikCode").updateValueAndValidity();
     this.parentForm.addControl("SharePrcnt", this.fb.control(0));
     this.parentForm.get("SharePrcnt").setValidators([Validators.min(0), Validators.max(100)]);
     this.parentForm.get("SharePrcnt").updateValueAndValidity();
-    this.parentForm.addControl("IsActive", this.fb.control(false));
+    this.parentForm.addControl("IsActive", this.fb.control(true));
     this.parentForm.addControl("IsOwner", this.fb.control(false));
     if (this.CustType == this.CustTypePersonal) {
       this.parentForm.addControl("MrJobPositionCode", this.fb.control(''));
@@ -82,22 +85,6 @@ export class ShareholderFormComponent implements OnInit {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
-  }
-
-  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
-  initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false) {
-    let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
-    let ReqRefMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: refMasterTypeCode,
-      MappingCode: mappingCode
-    }
-    tempDdlObj.apiUrl = URLConstant.GetListActiveRefMaster;
-    tempDdlObj.requestObj = ReqRefMasterObj;
-    tempDdlObj.customObjName = CommonConstant.ReturnObj;
-    tempDdlObj.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
-    tempDdlObj.isSelectOutput = isSelectOutput;
-    tempDdlObj.isReady = true;
-    this.DictUcDDLObj[refMasterTypeCode] = tempDdlObj;
   }
 
   jobPositionLookupObj: InputLookupObj = new InputLookupObj();
