@@ -53,5 +53,6 @@ export class ExceptionConstant {
     public static DUPL_ATTR_VALUE = "Duplicate Attribute Value";
     public static ISSUE_DT_MUST_LESS_EQ_THAN_BD = "Issue Date must be <= Business Date";
     public static EXP_DT_MUST_HIGHER_THAN_BD = "Expired Date must be > Business Date";
+    public static DUPLICATE_LEGAL_DOC = "Document with Legal Document Type {0} and Document No {1} already exists";
 
 }
