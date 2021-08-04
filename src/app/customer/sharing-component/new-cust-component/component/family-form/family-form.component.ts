@@ -36,6 +36,7 @@ export class FamilyFormComponent implements OnInit {
   @Output() outputExisting: EventEmitter<CustFormExistingObj> = new EventEmitter();
   @Output() outputChange: EventEmitter<{Key: string, Code: string}> = new EventEmitter();
 
+  readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
   readonly RefMasterTypeCodeNationality: string = CommonConstant.RefMasterTypeCodeNationality;
   private ucLookupProfession: UclookupgenericComponent;
   @ViewChild('LookupProfession') set content(content: UclookupgenericComponent) {
@@ -48,6 +49,7 @@ export class FamilyFormComponent implements OnInit {
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   async ngOnInit() {
     this.InitData();
+    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     this.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
     await this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;
@@ -254,6 +256,11 @@ export class FamilyFormComponent implements OnInit {
     });
   }
 
+  changeCustModel() {
+    this.ResetLookupProfession();
+    this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: ""});
+  }
+  
   IsLocal: boolean = true;
   onOptionsSelected(event: { selectedIndex: number, selectedObj: KeyValueObj, selectedValue: string }) {
     if (event.selectedValue == CommonConstant.NationalityCodeLocal) {

@@ -37,7 +37,8 @@ export class ShareholderFormComponent implements OnInit {
   @Output() outputChange: EventEmitter<{Key: string, Code: string}> = new EventEmitter();
 
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
-
+  
+  readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
 
   private ucLookupProfession: UclookupgenericComponent;
   @ViewChild('LookupProfession') set content(content: UclookupgenericComponent) {
@@ -51,6 +52,7 @@ export class ShareholderFormComponent implements OnInit {
   async ngOnInit() {
     this.InitData();
     await this.GetExistingShareholder();
+    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
     await this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;
     this.positionSlikLookUpObj.isReady = true;
@@ -195,6 +197,11 @@ export class ShareholderFormComponent implements OnInit {
     this.parentForm.patchValue({
       MrJobPositionCode: ev.JobCode,
     });
+  }
+  
+  changeCustModel() {
+    this.ResetLookupProfession();
+    this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: ""});
   }
   
   ResetLookupProfession(valueCode: string = null, valueDesc: string = ""){
