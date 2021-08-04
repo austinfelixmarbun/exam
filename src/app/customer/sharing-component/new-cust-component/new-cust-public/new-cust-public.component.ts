@@ -70,9 +70,6 @@ export class NewCustPublicComponent implements OnInit {
       tempUcAddObj.City = item.PublicCity;
       this.inputAddressObj.default = tempUcAddObj;
       this.inputAddressObj.inputField = inputFieldObj;
-      this.inputAddressObj.isReadonly = true;
-      this.inputAddressObj.inputField.inputLookupObj.isReadonly = true;
-      this.inputAddressObj.inputField.inputLookupObj.isDisable = true;
       //#endregion
 
       //#region patch positionSlik    
@@ -96,6 +93,8 @@ export class NewCustPublicComponent implements OnInit {
   InitData() {
     this.ClearForm();
     this.inputAddressObj = NewCustSetData.BindSetLegalAddr();
+    this.inputAddressObj.showOwnership = false;
+    this.inputAddressObj.requiredOwnership = false;
     this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();
   }
 

@@ -36,7 +36,6 @@ export class FamilyFormComponent implements OnInit {
   @Output() outputExisting: EventEmitter<CustFormExistingObj> = new EventEmitter();
   @Output() outputChange: EventEmitter<{Key: string, Code: string}> = new EventEmitter();
 
-  readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
   readonly RefMasterTypeCodeNationality: string = CommonConstant.RefMasterTypeCodeNationality;
   private ucLookupProfession: UclookupgenericComponent;
   @ViewChild('LookupProfession') set content(content: UclookupgenericComponent) {
@@ -49,7 +48,6 @@ export class FamilyFormComponent implements OnInit {
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   async ngOnInit() {
     this.InitData();
-    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     this.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
     await this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;
@@ -66,7 +64,6 @@ export class FamilyFormComponent implements OnInit {
     this.parentForm.addControl("MrJobPositionCode", this.fb.control(''));
     this.parentForm.addControl("RefProfessionId", this.fb.control(0));
     this.parentForm.addControl("MrJobProfessionCode", this.fb.control(''));
-    this.parentForm.addControl("MrCustModelCode", this.fb.control(''));
 
     this.BindLookupProfession();
     this.BindLookupJobPosition();
@@ -217,11 +214,6 @@ export class FamilyFormComponent implements OnInit {
       RefProfessionId: event.RefProfessionId,
     });
     this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: event.ProfessionCode});
-  }
-
-  changeCustModel() {
-    this.ResetLookupProfession();
-    this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: ""});
   }
 
   getLookUpJobPosition(ev) {

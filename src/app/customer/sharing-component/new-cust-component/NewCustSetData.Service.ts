@@ -4,7 +4,6 @@ import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { InputAddressObj } from "app/shared/model/InputAddressObj.Model";
 import { InputFieldObj } from "app/shared/model/InputFieldObj.Model";
 import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
-import { UcAddressObj } from "app/shared/model/UcAddressObj.Model";
 
 export class NewCustSetData {
 
@@ -14,9 +13,10 @@ export class NewCustSetData {
     let inputAddressObj = new InputAddressObj();
     inputAddressObj.showSubsection = false;
     inputAddressObj.title = "Customer Address";
-    inputAddressObj.default = new UcAddressObj();
     inputAddressObj.inputField = inputFieldObj;
     inputAddressObj.showAllPhn = false;
+    inputAddressObj.showOwnership = true;
+    inputAddressObj.requiredOwnership = true;
 
     return inputAddressObj;
   }
