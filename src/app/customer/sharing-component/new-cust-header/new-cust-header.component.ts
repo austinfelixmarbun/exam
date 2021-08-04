@@ -162,8 +162,9 @@ export class NewCustHeaderComponent implements OnInit {
 
   redirectSaveEditMainData(custId: number) {
     if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
-      if (this.CustType == CommonConstant.CustTypePersonal) AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": custId });
-      if (this.CustType == CommonConstant.CustTypeCompany) AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_COY_PAGE], { "IdCust": custId });
+      let param = { "IdCust": custId, Page: 'Edit', From: this.From };
+      if (this.CustType == CommonConstant.CustTypePersonal) AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], param);
+      if (this.CustType == CommonConstant.CustTypeCompany) AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_COY_PAGE], param);
       return;
     }
     this.Cancel();
