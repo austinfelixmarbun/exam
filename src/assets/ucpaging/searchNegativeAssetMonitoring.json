@@ -102,7 +102,7 @@
             "type": "sort",
             "position": "left",
             "label": "ERROR MESSAGE",
-            "name": "UAN.ERROR_MESSAGE"
+            "name": "UMH.ERROR_MESSAGE"
         },
         {
             "type": "label",
