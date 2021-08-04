@@ -16,13 +16,13 @@
         {
             "type": "sort",
             "position": "left",
-            "label": "Type",
+            "label": "Share Type",
             "name": "ShareholderTypeDesc"
         },
         {
             "type": "sort",
             "position": "right",
-            "label": "Share",
+            "label": "Share(%)",
             "name": "SharePrcnt"
         },
         {
