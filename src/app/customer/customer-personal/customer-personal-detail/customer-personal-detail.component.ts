@@ -62,10 +62,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
     MrEducationCode: ['',],
     MrReligionCode: ['',],
     IsRestInPeace: [false],
-    MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-    MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
-    Email1: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]],
-    Email2: ['', Validators.pattern(CommonConstant.regexEmail)],
     IsVip: [false],
     VipNotes: [''],
     IsAffiliateWithMf: [false],
@@ -250,10 +246,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
           NoOfResidence: this.tempCustPersonalObj.NoOfResidence,
           FamilyCardNo: this.tempCustPersonalObj.FamilyCardNo,
           IsRestInPeace: this.tempCustPersonalObj.IsRestInPeace,
-          MobilePhnNo1: this.tempCustPersonalObj.MobilePhnNo1,
-          MobilePhnNo2: this.tempCustPersonalObj.MobilePhnNo2,
-          Email1: this.tempCustPersonalObj.Email1,
-          Email2: this.tempCustPersonalObj.Email2
         });
       });
   }
@@ -304,10 +296,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.MrEducationCode = this.CustomerDetailForm.controls["MrEducationCode"].value;
     this.custPersonalObj.MrReligionCode = this.CustomerDetailForm.controls["MrReligionCode"].value;
     this.custPersonalObj.IsRestInPeace = this.CustomerDetailForm.controls["IsRestInPeace"].value;
-    this.custPersonalObj.MobilePhnNo1 = this.CustomerDetailForm.controls["MobilePhnNo1"].value;
-    this.custPersonalObj.MobilePhnNo2 = this.CustomerDetailForm.controls["MobilePhnNo2"].value;
-    this.custPersonalObj.Email1 = this.CustomerDetailForm.controls["Email1"].value;
-    this.custPersonalObj.Email2 = this.CustomerDetailForm.controls["Email2"].value;
     this.custPersonalObj.IsVip = this.CustomerDetailForm.controls["IsVip"].value;
     this.custPersonalObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
     this.custPersonalObj.IsAffiliateWithMf = this.CustomerDetailForm.controls["IsAffiliateWithMf"].value;

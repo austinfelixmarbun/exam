@@ -312,7 +312,7 @@ export class EditMainDataCompanyComponent implements OnInit {
     var reqEditObj = {
       CustObj: this.custObj,
       CustCompanyObj: this.custCompanyObj,
-      CustAddrObj: this.custObj.CustAddr
+      CustAddr: this.custObj.CustAddr
     };
     this.http.post(URLConstant.EditCustCompanyMainData, reqEditObj).subscribe(
       (response) => {

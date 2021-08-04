@@ -70,9 +70,6 @@ export class NewCustPublicComponent implements OnInit {
       tempUcAddObj.City = item.PublicCity;
       this.inputAddressObj.default = tempUcAddObj;
       this.inputAddressObj.inputField = inputFieldObj;
-      this.inputAddressObj.isReadonly = true;
-      this.inputAddressObj.inputField.inputLookupObj.isReadonly = true;
-      this.inputAddressObj.inputField.inputLookupObj.isDisable = true;
       //#endregion
 
       //#region patch positionSlik    

@@ -134,7 +134,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
 
   ClearCustForm() {
     this.CustomerForm = this.fb.group({
-      MrCustModelCode: ['', [Validators.required]],
+      MrCustModelCode: [''],
       CustName: ['', [Validators.required]],
       MrCompanyTypeCode: ['', [Validators.required]],
       TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
@@ -210,6 +210,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     this.CustomerForm.get("MrCustModelCode").disable();
     this.CustomerForm.get("MrCompanyTypeCode").disable();
     this.CustomerForm.get("TaxIdNo").disable();
+    this.IsLockCopyAddrBtn = true;
   }
 
   CopyLegalAddr() {

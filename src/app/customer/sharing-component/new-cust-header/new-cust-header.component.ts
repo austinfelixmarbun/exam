@@ -148,7 +148,7 @@ export class NewCustHeaderComponent implements OnInit {
   DupCheckCoyObj: ReqCoyObj = new ReqCoyObj();
   ClickSaveCoy(ev: ReqCoyObj) {
     if (ev.CustObj.CustId != 0) {
-      this.http.post(this.SetUrlAddCoy(), ev).subscribe(
+      this.http.post(this.SetUrlEditCoy(), ev).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.Cancel()

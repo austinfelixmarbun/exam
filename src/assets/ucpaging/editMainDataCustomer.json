@@ -125,7 +125,7 @@
                             ],
                             "result": {
                                 "type": "url",
-                                "path": "CUST_EDIT_MAIN_DATA_PERSONAL",
+                                "path": "CUST_NEW_FORM",
                                 "icon": "ft-edit-2",
                                 "param": [
                                     {
@@ -133,8 +133,8 @@
                                         "property": "CustId"
                                     },
                                     {
-                                        "type": "CustNo",
-                                        "property" : "CustNo"
+                                        "type": "CustType",
+                                        "property" : "MrCustTypeCode"
                                     },
                                     {
                                         "type": "From",
@@ -154,7 +154,7 @@
                             ],
                             "result": {
                                 "type": "url",
-                                "path": "CUST_EDIT_MAIN_DATA_COY",
+                                "path": "CUST_NEW_FORM",
                                 "icon": "ft-edit-2",
                                 "param": [
                                     {
@@ -162,8 +162,8 @@
                                         "property": "CustId"
                                     },
                                     {
-                                        "type": "CustNo",
-                                        "property" : "CustNo"
+                                        "type": "CustType",
+                                        "property" : "MrCustTypeCode"
                                     },
                                     {
                                         "type": "From",

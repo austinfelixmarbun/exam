@@ -76,6 +76,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   readonly RefMasterTypeCodeIdType: string = CommonConstant.RefMasterTypeCodeIdType;
   readonly RefMasterTypeCodeGender: string = CommonConstant.RefMasterTypeCodeGender;
   readonly RefMasterTypeCodeMaritalStat: string = CommonConstant.RefMasterTypeCodeMaritalStat;
+  readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
 
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
   readonly AttrGroupCustPersonalOther: string = CommonConstant.AttrGroupCustPersonalOther;
@@ -97,6 +98,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
     this.initDdlRefMaster(this.RefMasterTypeCodeGender);
     this.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat);
+    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     await this.GetExistingData();
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
@@ -208,6 +210,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       SupplName: [''],
       SupplId: [''],
       MrCustRelationship: [''],
+      MrCustModelCode: [''],
       MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
       Email1: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]]
     });
@@ -272,11 +275,9 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           IdNo: this.custObj.IdNo,
           IdExpiredDt: datePipe.transform(this.custObj.IdExpiredDt, 'yyyy-MM-dd'),
           TaxIdNo: this.custObj.TaxIdNo,
+          MrCustModelCode: response.MrCustModelCode ? response.MrCustModelCode : "",
         });
         if (this.CustDataMode != this.CustDataModeMain) {
-          this.CustomerForm.patchValue({
-            MrCustModelCode: response.MrCustModelCode ? response.MrCustModelCode : "",
-          });
           if (this.CustDataMode == this.CustDataModeFamily) this.familyForm.PatchCriteriaLookupProfession();
           if (this.CustDataMode == this.CustDataModeShareholder) this.shareholderForm.PatchCriteriaLookupProfession();
         }
@@ -524,6 +525,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.CustomerForm.get("MotherMaidenName").disable();
     this.CustomerForm.get("MobilePhnNo1").disable();
     this.CustomerForm.get("Email1").disable();
+    this.IsLockCopyAddrBtn = true;
   }
 
   RelationshipChange(ev: string) {
@@ -552,6 +554,16 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     }
   }
 
+  changeCustModel() {
+    if (this.CustDataMode == this.CustDataModeShareholder) {
+      this.shareholderForm.ResetLookupProfession();
+    }
+    if (this.CustDataMode == this.CustDataModeFamily) {
+      this.familyForm.ResetLookupProfession();
+    }
+    this.ChangeProffession("");
+  }
+
   //profession
   ChangeProffession(code: string) {
     this.custAttrForm.SetSearchListInputType(CommonConstant.AttrCodeDeptAml, code);
@@ -575,6 +587,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     reqSubmitObj.CustObj.IdExpiredDt = tempForm["IdExpiredDt"];
     reqSubmitObj.CustObj.TaxIdNo = tempForm["TaxIdNo"];
     reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustomerPersonal;
+    reqSubmitObj.CustObj.MrCustModelCode = tempForm["MrCustModelCode"];
 
     reqSubmitObj.CustPersonalObj = this.tempCustPersonalObj;
     reqSubmitObj.CustPersonalObj.CustFullName = tempForm["CustName"];
@@ -607,7 +620,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     if (this.CustDataMode != this.CustDataModeMain) {
       reqSubmitObj.CustObj.CustName = tempForm["ExistingCustName"].value;
       reqSubmitObj.CustPersonalObj.CustFullName = tempForm["ExistingCustName"].value;
-      reqSubmitObj.CustObj.MrCustModelCode = tempForm["MrCustModelCode"];
       reqSubmitObj.CustPersonalJobObj = this.SetCustPersonalJobData();
       reqSubmitObj.CustAttrContentObjs = this.SetCustAttrContent();
     }
