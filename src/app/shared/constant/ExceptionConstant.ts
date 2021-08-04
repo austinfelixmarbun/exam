@@ -13,7 +13,7 @@ export class ExceptionConstant {
     public static WORKING_HOUR_CHECKING = 'Working Hour {0} {1} {2} Working Hour {3} {4}';
     public static TOTAL_SHARE_LEFT = "Total Share left is ";
     public static TOTAL_SHARE_MUST_100 = "Total Share % must be 100%";
-    public static TOTAL_SHARE_CAN_NOT_100 = "Total Share % can not more than 100%";
+    public static TOTAL_SHARE_CAN_NOT_100 = "Total Share can not more than 100%";
     public static MUST_HAVE_PARENT = "Must Have Parent";
     public static PLEASE_COMPLETE_RESIDENCE_ADDRESS = "Please complete Residence Address First";
     public static PLEASE_COMPLETE_BIZ_ADDRESS = "Please complete Business Address First";
