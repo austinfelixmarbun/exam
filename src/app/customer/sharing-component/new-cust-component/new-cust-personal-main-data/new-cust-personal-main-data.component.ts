@@ -615,6 +615,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         let tempTotalSharePrctTobeAdd = this.tempTotalSharePrct + reqSubmitObj.CustCompanyMgmntShrholderObj.SharePrcnt;
         if (tempTotalSharePrctTobeAdd > 100) {
           this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_CAN_NOT_100);
+          this.toastr.warningMessage("Total Share now is " + this.tempTotalSharePrct + "%");
           return;
         }
       }

@@ -66,9 +66,14 @@
             "property": "ShareholderTypeDesc"
         },
         {
-            "type": "decimal",
+            "type": "concat",
             "position": "right",
-            "property": "SharePrcnt"
+            "propertyList": [
+                {
+                    "property": "SharePrcnt",
+                    "suffix": "%"
+                }
+            ]
         },
         {
             "type": "boolean",
