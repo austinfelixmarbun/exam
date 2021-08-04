@@ -87,6 +87,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
   //#endregion
 
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     this.InitData();
     this.InitCustMainDataMode();
@@ -95,10 +96,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.GetCustRelationship();
     this.ClearCustForm();
     this.getInitPattern();
-    this.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
-    this.initDdlRefMaster(this.RefMasterTypeCodeGender);
-    this.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat);
-    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeIdType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
+    this.onOptionsSelected();
+    this.DictUcDDLObj[this.RefMasterTypeCodeGender] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeGender);
+    this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     await this.GetExistingData();
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
@@ -153,24 +155,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   //#endregion
 
   //#region UcDDL
-  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
-  initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false) {
-    let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
-    let ReqRefMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: refMasterTypeCode,
-      MappingCode: mappingCode
-    }
-    tempDdlObj.apiUrl = URLConstant.GetListActiveRefMaster;
-    tempDdlObj.requestObj = ReqRefMasterObj;
-    tempDdlObj.customObjName = CommonConstant.ReturnObj;
-    tempDdlObj.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
-    tempDdlObj.isSelectOutput = isSelectOutput;
-    tempDdlObj.isReady = true;
-    this.DictUcDDLObj[refMasterTypeCode] = tempDdlObj;
-
-    if (this.RefMasterTypeCodeIdType == refMasterTypeCode) this.onOptionsSelected();
-  }
-
   MrCustRelationshipCodeObj: Array<KeyValueObj> = new Array<KeyValueObj>();
   readonly RefMasterTypeCodeCustPersonalRelationship: string = CommonConstant.RefMasterTypeCodeCustPersonalRelationship;
   async GetCustRelationship() {

@@ -22,6 +22,7 @@ import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMast
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { CookieService } from 'ngx-cookie';
+import { NewCustSetData } from '../../NewCustSetData.Service';
 
 @Component({
   selector: 'app-family-form',
@@ -47,10 +48,11 @@ export class FamilyFormComponent implements OnInit {
   constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
 
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     this.InitData();
-    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
-    this.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeNationality] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
     await this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;
     this.lookUpObjCountry.isReady = true;
@@ -144,22 +146,6 @@ export class FamilyFormComponent implements OnInit {
         this.ListNationality = response["RefMasterObjs"];
       }
     );
-  }
-
-  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
-  initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false) {
-    let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
-    let ReqRefMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: refMasterTypeCode,
-      MappingCode: mappingCode
-    };
-    tempDdlObj.apiUrl = URLConstant.GetListActiveRefMaster;
-    tempDdlObj.requestObj = ReqRefMasterObj;
-    tempDdlObj.customObjName = CommonConstant.ReturnObj;
-    tempDdlObj.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
-    tempDdlObj.isSelectOutput = isSelectOutput;
-    tempDdlObj.isReady = true;
-    this.DictUcDDLObj[refMasterTypeCode] = tempDdlObj;
   }
 
   async GetExistingJobData(custId: number = this.CustId) {

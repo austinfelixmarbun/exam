@@ -36,9 +36,10 @@ export class NewCustPublicComponent implements OnInit {
   readonly RefMasterTypeCodePublicType: string = CommonConstant.RefMasterTypeCodePublicType;
 
   IsReady: boolean = false;
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     this.InitData();
-    this.initDdlRefMaster(this.RefMasterTypeCodePublicType, null, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodePublicType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodePublicType, null, true, URLConstant.GetListActiveRefMasterDetail);
     this.GetCustAddrToCopy();
     await this.GetExisting();
     this.IsReady = true;
@@ -98,25 +99,6 @@ export class NewCustPublicComponent implements OnInit {
     this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();
   }
 
-  //#region UcDDL
-  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
-  initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false) {
-    let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
-    let ReqRefMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: refMasterTypeCode,
-      MappingCode: mappingCode
-    }
-    tempDdlObj.apiUrl = URLConstant.GetListActiveRefMasterDetail;
-    tempDdlObj.requestObj = ReqRefMasterObj;
-    tempDdlObj.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
-    tempDdlObj.isSelectOutput = isSelectOutput;
-    tempDdlObj.isReady = true;
-    tempDdlObj.customKey = "MasterCode";
-    tempDdlObj.customValue = "Descr";
-    this.DictUcDDLObj[refMasterTypeCode] = tempDdlObj;
-  }
-  //#endregion
-
   IsLockCopyAddrBtn: boolean = false;
   tempExisting: ShareholderPublicObj = new ShareholderPublicObj();
   async GetExisting() {
@@ -129,7 +111,7 @@ export class NewCustPublicComponent implements OnInit {
       }
     )
   }
-  
+
   tempCustAddrToCopy: CustAddrObj = new CustAddrObj();
   async GetCustAddrToCopy() {
     let reqObj: GenericObj = new GenericObj();
