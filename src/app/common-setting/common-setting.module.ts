@@ -78,6 +78,8 @@ import { GeneralSettingAdminComponent } from './general-setting-admin/general-se
 import { GeneralSettingAdminDetailComponent } from './general-setting-admin/general-setting-admin-detail/general-setting-admin-detail.component';
 import { IndustryTypeCategoryPagingComponent } from './industry-type-category/industry-type-category-paging/industry-type-category-paging.component';
 import { IndustryTypeCategoryDetailComponent } from './industry-type-category/industry-type-category-detail/industry-type-category-detail.component';
+import { EconomicSectorSlikPagingXComponent } from 'app/impl/common-setting/economic-sector-slik-x/economic-sector-slik-paging-x/economic-sector-slik-paging-x.component';
+import { EconomicSectorSlikAddEditXComponent } from 'app/impl/common-setting/economic-sector-slik-x/economic-sector-slik-add-edit-x/economic-sector-slik-add-edit-x.component';
 
 
 @NgModule({
@@ -162,7 +164,9 @@ import { IndustryTypeCategoryDetailComponent } from './industry-type-category/in
     GeneralSettingAdminComponent,
     GeneralSettingAdminDetailComponent,
     IndustryTypeCategoryPagingComponent,
-    IndustryTypeCategoryDetailComponent
+    IndustryTypeCategoryDetailComponent,
+    EconomicSectorSlikPagingXComponent,
+    EconomicSectorSlikAddEditXComponent
   ],
   providers: [
     NGXToastrService

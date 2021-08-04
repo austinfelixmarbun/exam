@@ -61,6 +61,9 @@ import { GeneralSettingAdminComponent } from './general-setting-admin/general-se
 import { GeneralSettingAdminDetailComponent } from './general-setting-admin/general-setting-admin-detail/general-setting-admin-detail.component';
 import { IndustryTypeCategoryDetailComponent } from './industry-type-category/industry-type-category-detail/industry-type-category-detail.component';
 import { IndustryTypeCategoryPagingComponent } from './industry-type-category/industry-type-category-paging/industry-type-category-paging.component';
+import { PathConstantX } from 'app/impl/shared/PathConstantX';
+import { EconomicSectorSlikPagingXComponent } from 'app/impl/common-setting/economic-sector-slik-x/economic-sector-slik-paging-x/economic-sector-slik-paging-x.component';
+import { EconomicSectorSlikAddEditXComponent } from 'app/impl/common-setting/economic-sector-slik-x/economic-sector-slik-add-edit-x/economic-sector-slik-add-edit-x.component';
 
 const routes: Routes = [
   {
@@ -484,6 +487,21 @@ const routes: Routes = [
         component: IndustryTypeCategoryDetailComponent,
         data: {
           title: 'Industry Type Category'
+        },
+      },
+      {
+        path: PathConstantX.CS_ECONOMIC_SECTOR_SLIK_PAGING,
+        component: EconomicSectorSlikPagingXComponent,
+        data: {
+          title: 'Economic Sector SLIK Paging'
+        },
+      },
+      
+      {
+        path: PathConstantX.CS_ECONOMIC_SECTOR_SLIK_DETAIL,
+        component: EconomicSectorSlikAddEditXComponent,
+        data: {
+          title: 'Economic Sector SLIK Add Edit'
         },
       }
     ]

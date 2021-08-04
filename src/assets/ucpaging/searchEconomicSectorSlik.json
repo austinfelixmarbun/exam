@@ -1,0 +1,132 @@
+{
+    "title": "Economic Sector SLIK",
+    "exportExcel": false,
+    "component": [
+      {
+        "type": "textbox",
+        "name": "RSES.REF_SECTOR_ECONOMY_SLIK_CODE",
+        "id": "refSectorEconomySlikCodeId",
+        "value": "",
+        "label": "Sector Economy SLIK Code",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      },
+      {
+        "type": "textbox",
+        "name": "RIT.INDUSTRY_TYPE_NAME",
+        "id": "industryTypeNameId",
+        "value": "",
+        "label": "Industry Type",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      },
+      {
+        "type": "textbox",
+        "name": "RSES.REF_SECTOR_ECONOMY_SLIK_NAME",
+        "id": "refSectorEconomySlikNameId",
+        "value": "",
+        "label": "Sector Economy SLIK Name",
+        "placeholder": "Placeholder",
+        "datatype": "text"
+      },
+      {
+        "type": "dropdown",
+        "name": "RSES.IS_ACTIVE",
+        "id": "IsActive",
+        "value": "Active Status",
+        "placeholder": "Placeholder",
+        "isFromURL": false,
+        "ddlType": "all",
+        "url": "https://api.myjson.com/bins/ld6e8",
+        "label": "Active Status",
+        "items": [
+          {
+            "key": "1",
+            "value": "Yes"
+          },
+          {
+            "key": "0",
+            "value": "No"
+          }
+        ],
+        "itemsUrl": []
+      }
+    ],
+    "headerList": [
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Sector Economy SLIK Code",
+        "name": "RSES.REF_SECTOR_ECONOMY_SLIK_CODE"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Sector Economy SLIK Name",
+        "name": "RSES.REF_SECTOR_ECONOMY_SLIK_NAME"
+      },
+      {
+        "type": "sort",
+        "position": "left",
+        "label": "Industry Type",
+        "name": "RIT.INDUSTRY_TYPE_NAME"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "Active Status",
+        "name": "RSES.IS_ACTIVE"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Action"
+      }
+    ],
+    "querystring": {
+      "name": "searchEconomicSectorSlik"
+    },
+    "bodyList": [
+      {
+        "type": "text",
+        "position": "left",
+        "property": "RefSectorEconomySlikCode"
+      },
+      {
+        "type": "text",
+        "position": "left",
+        "property": "RefSectorEconomySlikName"
+      },
+      {
+        "type": "text",
+        "position": "left",
+        "property": "IndustryTypeName"
+      },
+      {
+        "type": "boolean",
+        "position": "center",
+        "property": "IsActive"
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "edit",
+            "path": "CS_ECONOMIC_SECTOR_SLIK_DETAIL",
+            "param": [
+              {
+                "type": "RefSectorEconomySlikId",
+                "property": "RefSectorEconomySlikXId"
+              },
+              {
+                "type": "mode",
+                "property": "edit"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  

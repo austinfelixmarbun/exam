@@ -8,4 +8,9 @@ export class URLConstantX{
     //REF TAX OFFICE X
     public static GetListTaxOfficeName = environment.FoundationR3Url + "/RefTaxOfficeX/GetListTaxOfficeName";
     
+    //REF SECTOR ECONOMY SLIK
+    public static AddRefSectorEconomySlikX = environment.FoundationR3Url + "/v1/RefSectorEconomySlikX/AddRefSectorEconomySlikX";
+    public static EditRefSectorEconomySlikX = environment.FoundationR3Url + "/v1/RefSectorEconomySlikX/EditRefSectorEconomySlikX";
+    public static GetRefSectorEconomySlikXById = environment.FoundationR3Url + "/v1/RefSectorEconomySlikX/GetRefSectorEconomySlikXById";
+
 }
