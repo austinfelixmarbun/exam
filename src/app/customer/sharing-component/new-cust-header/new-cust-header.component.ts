@@ -73,17 +73,17 @@ export class NewCustHeaderComponent implements OnInit {
     let custLabel: string = "";
     switch (this.CustDataMode) {
       case CommonConstant.CustMainDataModeCust:
-        custLabel = "Main Data";
+        custLabel = "Customer";
         break;
       case this.CustDataModeFamily:
         custLabel = "Family";
         break;
       case CommonConstant.CustMainDataModeMgmntShrholder:
-        custLabel = "Share Legal";
+        custLabel = "Shareholder";
         break;
     }
 
-    this.TitleLabel = "Customer " + custLabel + " Registration";
+    this.TitleLabel = custLabel + " Main Data Registration";
   }
 
   listCustType: Array<KeyValueObj> = new Array();
@@ -160,9 +160,10 @@ export class NewCustHeaderComponent implements OnInit {
     this.GetDuplicateCust();
   }
 
-  redirectSaveEditMainData(custId: number){
+  redirectSaveEditMainData(custId: number) {
     if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": custId });
+      if (this.CustType == CommonConstant.CustTypePersonal) AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": custId });
+      if (this.CustType == CommonConstant.CustTypeCompany) AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_COY_PAGE], { "IdCust": custId });
       return;
     }
     this.Cancel();
@@ -216,11 +217,7 @@ export class NewCustHeaderComponent implements OnInit {
     let urlAdd: string = this.SetUrlAddCoy();
     this.http.post(urlAdd, this.DupCheckCoyObj).subscribe(
       (response: GenericObj) => {
-        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_COY_PAGE], { IdCust: response.Id });
-          return;
-        }
-        this.outputCancel.emit("");
+        this.redirectSaveEditMainData(response.Id);
       }
     );
   }
@@ -229,11 +226,7 @@ export class NewCustHeaderComponent implements OnInit {
     let urlAdd: string = this.SetUrlAddPersonal();
     this.http.post(urlAdd, this.DupCheckPersonalObj).subscribe(
       (response: GenericObj) => {
-        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { IdCust: response.Id });
-          return;
-        }
-        this.outputCancel.emit("");
+        this.redirectSaveEditMainData(response.Id);
       }
     );
   }
@@ -320,11 +313,7 @@ export class NewCustHeaderComponent implements OnInit {
     reqEditDupCheck.CustAttrContentObjs = this.DupCheckPersonalObj.CustAttrContentObjs;
     this.http.post(URLConstant.NewEditDuplicateCust, reqEditDupCheck).subscribe(
       (response: GenericObj) => {
-        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response.Id });
-          return;
-        }
-        this.outputCancel.emit("");
+        this.redirectSaveEditMainData(response.Id);
       }
     );
   }
@@ -339,11 +328,7 @@ export class NewCustHeaderComponent implements OnInit {
     }
     this.http.post(URLConstant.NewEditDuplicateCust, reqEditDupCheck).subscribe(
       (response: GenericObj) => {
-        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_COY_PAGE], { "IdCust": response.Id });
-          return;
-        }
-        this.outputCancel.emit("");
+        this.redirectSaveEditMainData(response.Id);
       }
     );
   }
@@ -371,11 +356,7 @@ export class NewCustHeaderComponent implements OnInit {
     NegativeCustObj.CustAttrContentObjs = this.DupCheckPersonalObj.CustAttrContentObjs;
     this.http.post<GenericObj>(URLConstant.EditDuplicateNegativeCust, NegativeCustObj).subscribe(
       (response) => {
-        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response.Id });
-          return;
-        }
-        this.outputCancel.emit("");
+        this.redirectSaveEditMainData(response.Id);
       }
     );
   }
@@ -391,11 +372,7 @@ export class NewCustHeaderComponent implements OnInit {
     }
     this.http.post<GenericObj>(URLConstant.EditDuplicateNegativeCust, NegativeCustObj).subscribe(
       (response) => {
-        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": response.Id });
-          return;
-        }
-        this.outputCancel.emit("");
+        this.redirectSaveEditMainData(response.Id);
       }
     );
   }

@@ -29,7 +29,6 @@ export class NewCustSetData {
     inputLookupObjName.urlJson = "./assets/uclookup/Customer/lookupPositionSlik.json";
     inputLookupObjName.pagingJson = "./assets/uclookup/Customer/lookupPositionSlik.json";
     inputLookupObjName.genericJson = "./assets/uclookup/Customer/lookupPositionSlik.json";
-    inputLookupObjName.isRequired = false;
     return inputLookupObjName;
   }
 

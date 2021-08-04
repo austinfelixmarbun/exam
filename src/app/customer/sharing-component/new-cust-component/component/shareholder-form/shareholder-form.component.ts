@@ -65,10 +65,12 @@ export class ShareholderFormComponent implements OnInit {
   businessDtMin: Date;
   InitData() {
     this.parentForm.addControl("MrPositionSlikCode", this.fb.control(''));
+    this.parentForm.get("MrPositionSlikCode").setValidators([Validators.required]);
+    this.parentForm.get("MrPositionSlikCode").updateValueAndValidity();
     this.parentForm.addControl("SharePrcnt", this.fb.control(0));
     this.parentForm.get("SharePrcnt").setValidators([Validators.min(0), Validators.max(100)]);
     this.parentForm.get("SharePrcnt").updateValueAndValidity();
-    this.parentForm.addControl("IsActive", this.fb.control(false));
+    this.parentForm.addControl("IsActive", this.fb.control(true));
     this.parentForm.addControl("IsOwner", this.fb.control(false));
     if (this.CustType == this.CustTypePersonal) {
       this.parentForm.addControl("MrJobPositionCode", this.fb.control(''));
