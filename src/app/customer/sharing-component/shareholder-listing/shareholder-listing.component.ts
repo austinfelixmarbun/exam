@@ -111,7 +111,7 @@ export class ShareholderListingComponent implements OnInit {
       return;
     }
     if (!this.tempIsSigner) {
-      this.toastr.warningMessage(ExceptionConstant.Add_Min_1_Signer);
+      this.toastr.warningMessage(ExceptionConstant.Add_Min_1_Active_Signer);
       return;
     }
     if (this.tempTotalSharePrct != 100) {

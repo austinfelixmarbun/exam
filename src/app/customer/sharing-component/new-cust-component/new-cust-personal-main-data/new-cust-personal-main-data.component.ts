@@ -566,6 +566,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   //profession
   ChangeProffession(code: string) {
+    if (this.CustDataMode == this.CustDataModeMain) return;
     this.custAttrForm.SetSearchListInputType(CommonConstant.AttrCodeDeptAml, code);
     this.custAttrForm.ResetValueFromAttrCode(CommonConstant.AttrCodeDeptAml);
   }

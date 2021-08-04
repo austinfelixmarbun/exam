@@ -33,6 +33,14 @@
 
   <div class="col-md-6">
 
+    <div class="form-group row">
+      <label class="col-md-4 adInsLabel" translate>Customer Model </label>
+      <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustModel]?.isReady">
+        <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustModel]"
+          [parentForm]="parentForm" [enjiForm]="enjiForm" [identifier]="'MrCustModelCode'" (callback)="changeCustModel()"></lib-ucdropdownlist>
+      </div>
+    </div>
+
     <div class="form-group row" [hidden]="parentForm.controls.MrCustModelCode.value == ''">
       <label class="col-md-4 adInsLabel" translate> Profession Name </label>
       <div class="col-md-8">
