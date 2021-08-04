@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CookieService } from 'ngx-cookie';
@@ -11,6 +10,9 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMas
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { DatePipe } from '@angular/common';
+import { CustCompanyLegalDocObj } from 'app/shared/model/CustCompanyLegalDocObj.Model';
+import { String } from 'typescript-string-operations';
+
 
 @Component({
   selector: 'app-cust-legal-doc-detail',
@@ -18,6 +20,7 @@ import { DatePipe } from '@angular/common';
 })
 export class CustLegalDocDetailComponent implements OnInit {
   @Input() CustCompanyId: number;
+  @Input() CustLegalDocs: Array<CustCompanyLegalDocObj>;
   legalDocTypeList: any;
   businessDtMin: Date;
   businessDtMax: Date;
@@ -71,7 +74,9 @@ export class CustLegalDocDetailComponent implements OnInit {
     let expDt = new Date(custCompanyLegalDocData.DocExpiredDt);
     let expDtValidate = datePipe.transform(expDt, "yyyy-MM-dd");
     let businessDtValidate = datePipe.transform(this.businessDtMin, "yyyy-MM-dd");
-
+    let existCustLegalDoc = this.CustLegalDocs.find(x => x.MrLegalDocTypeCode == this.CustCompanyLegalDocForm.value.MrLegalDocTypeCode
+                                                && x.DocNo == this.CustCompanyLegalDocForm.value.DocNo);
+    
     if(expDtValidate <= businessDtValidate){
       this.toastr.warningMessage(ExceptionConstant.EXP_DT_MUST_HIGHER_THAN_BD);
       return;
@@ -79,6 +84,12 @@ export class CustLegalDocDetailComponent implements OnInit {
 
     if(docDtValidate > businessDtValidate){
       this.toastr.warningMessage(ExceptionConstant.ISSUE_DT_MUST_LESS_EQ_THAN_BD);
+      return;
+    }
+
+    if(existCustLegalDoc != null){
+      var errorOutput = this.legalDocTypeList.ReturnObject.find(x => x.Key == this.CustCompanyLegalDocForm.value.MrLegalDocTypeCode);
+      this.toastr.warningMessage(String.Format(ExceptionConstant.DUPLICATE_LEGAL_DOC, errorOutput.Value, this.CustCompanyLegalDocForm.value.DocNo));
       return;
     }
 
