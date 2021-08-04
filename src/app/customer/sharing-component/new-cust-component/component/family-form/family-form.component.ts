@@ -50,7 +50,7 @@ export class FamilyFormComponent implements OnInit {
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
-    this.InitData();
+    await this.InitData();
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     this.DictUcDDLObj[this.RefMasterTypeCodeNationality] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
     await this.GetExistingJobData();
@@ -61,7 +61,7 @@ export class FamilyFormComponent implements OnInit {
   }
 
   businessDtMin: Date;
-  InitData() {
+  async InitData() {
     this.parentForm.addControl("EmploymentEstablishmentDt", this.fb.control(''));
     this.parentForm.addControl("MrNationalityCode", this.fb.control(CommonConstant.NationalityCodeLocal));
     this.parentForm.addControl("WnaCountryCode", this.fb.control(''));
@@ -71,7 +71,7 @@ export class FamilyFormComponent implements OnInit {
 
     this.BindLookupProfession();
     this.BindLookupJobPosition();
-    this.BindLookupCountry();
+    await this.BindLookupCountry();
     this.GetListRefCountry();
 
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -98,9 +98,10 @@ export class FamilyFormComponent implements OnInit {
   }
 
   lookUpObjCountry: InputLookupObj = new InputLookupObj();
-  BindLookupCountry() {
-    this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
+  async BindLookupCountry() {
+    await this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality }).toPromise().then(
       (response: GeneralSettingObj) => {
+        this.lookUpObjCountry = new InputLookupObj();
         this.lookUpObjCountry.urlJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObjCountry.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObjCountry.genericJson = "./assets/lookup/lookupCustomerCountry.json";
@@ -114,7 +115,6 @@ export class FamilyFormComponent implements OnInit {
         criteriaObj.value = response.GsValue;
         criteriaList.push(criteriaObj);
         this.lookUpObjCountry.addCritInput = criteriaList;
-        this.lookUpObjCountry.isReady = true;
 
         this.GetRefCountry(response.GsValue, true);
       }
