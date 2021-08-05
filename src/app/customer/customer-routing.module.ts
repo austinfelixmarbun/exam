@@ -30,6 +30,7 @@ import { CustomerGuarantorMenuComponent } from './customer-guarantor-menu/custom
 import { CustomerUpdateMasterComponent } from './customer-update-master/customer-update-master.component';
 import { CustomerUpdateMasterDetailComponent } from './customer-update-master/customer-update-master-detail/customer-update-master-detail.component';
 import { PathConstant } from 'app/shared/PathConstant';
+import { NewCustHeaderComponent } from './sharing-component/new-cust-header/new-cust-header.component';
 
 const routes: Routes = [
   {
@@ -229,6 +230,13 @@ const routes: Routes = [
         component: CustomerUpdateMasterDetailComponent,
         data: {
           title: 'Update Data Customer Detail'
+        }
+      },
+      {
+        path: PathConstant.NEW_CUST,
+        component: NewCustHeaderComponent,
+        data: {
+          title: 'New Cust'
         }
       }
     ]

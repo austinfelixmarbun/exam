@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
-import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -13,7 +12,9 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 
 @Component({
   selector: 'app-customer-personal-detail',
@@ -37,10 +38,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
   Country: any;
   tempCustObj: any;
   tempCountry: any;
-  tempReligion: any;
   LocalCountry: any;
-  tempEducation: any;
-  tempSalutation: any;
   tempCountryCode: any;
   tempNationality: any;
   tempCustPersonalObj: CustPersonalObj;
@@ -51,21 +49,19 @@ export class CustomerPersonalDetailComponent implements OnInit {
   CustomerDetailForm = this.fb.group({
     CustFullName: ['', [Validators.maxLength(100)]],
     NickName: ['', [Validators.maxLength(100)]],
-    MrSalutationCode: [''],
-    MrMaritalStatCode: [''],
+    MrSalutationCode: ['', [Validators.required]],
     CustPrefixName: [''],
     CustSuffixName: [''],
     NoOfDependents: ['', [Validators.pattern("^[0-9]+$")]],
-    MrNationalityCode: [''],
+    MrNationalityCode: ['', [Validators.required]],
     NoOfResidence: ['', Validators.pattern("^[0-9]+$")],
     FamilyCardNo: ['', Validators.pattern("^[0-9]+$")],
-    MrEducationCode: ['',],
-    MrReligionCode: ['',],
+    MrEducationCode: ['', [Validators.required]],
+    MrReligionCode: ['', [Validators.required]],
     IsRestInPeace: [false],
-    MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-    MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
-    Email1: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]],
-    Email2: ['', Validators.pattern(CommonConstant.regexEmail)]
+    IsVip: [false],
+    VipNotes: [''],
+    IsAffiliateWithMf: [false],
   });
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -80,10 +76,13 @@ export class CustomerPersonalDetailComponent implements OnInit {
 
   }
 
+  readonly RefMasterTypeCodeSalutation: string = CommonConstant.RefMasterTypeCodeSalutation;
+  readonly RefMasterTypeCodeEducation: string = CommonConstant.RefMasterTypeCodeEducation;
+  readonly RefMasterTypeCodeReligion: string = CommonConstant.RefMasterTypeCodeReligion;
+  readonly RefMasterTypeCodeNationality: string = CommonConstant.RefMasterTypeCodeNationality;
+
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   ngOnInit() {
-    var generalSettingObjDefLocalNationality = {
-      GsCode: CommonConstant.GSCodeDefLocalNationality
-    }
     this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeDefLocalNationality}).subscribe(
       (response) => {
         this.Country = response;
@@ -99,10 +98,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
         this.criteriaList.push(this.criteriaObj);
         this.lookUpObj.addCritInput = this.criteriaList;
 
-
-        var countryCode = {
-          CountryCode: this.Country.GsValue
-        };
         this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: this.Country.GsValue }).subscribe(
           (response) => {
             this.LocalCountry = response;
@@ -114,17 +109,20 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custObj.CustId = this.IdCust;
 
     this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
-      (response) => {
+      (response: CustObj) => {
         this.tempCustObj = response;
+        this.CustomerDetailForm.patchValue({
+          IsVip: response.IsVip,
+          VipNotes: response.VipNotes,
+          IsAffiliateWithMf: response.IsAffiliateWithMf,
+        });
+        this.checkState();
       });
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj.CustId = this.IdCust;
     this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         this.tempCustPersonalObj = response;
-        var refMasterObjMrNationalityCode = {
-          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality
-        }
         this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, { Code: CommonConstant.RefMasterTypeCodeNationality }).subscribe(
           (response) => {
             this.tempNationality = response["RefMasterObjs"];
@@ -137,9 +135,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
                 this.flag = true;
                 this.lookUpObj.isRequired = false;
               } else {
-                var countryCode = {
-                  CountryCode: this.tempCustPersonalObj.WnaCountryCode
-                };
                 this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: this.tempCustPersonalObj.WnaCountryCode }).subscribe(
                   (response) => {
                     this.tempCountry = response;
@@ -158,96 +153,43 @@ export class CustomerPersonalDetailComponent implements OnInit {
           }
         );
 
-        var refMasterObjMrSalutationCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSalutation,
-          MappingCode: null
-        };
-        this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrSalutationCode).subscribe(
-          (response) => {
-            this.tempSalutation = response[CommonConstant.ReturnObj];
-
-            if (this.tempCustPersonalObj.MrSalutationCode != null) {
-              this.CustomerDetailForm.patchValue({
-                MrSalutationCode: this.tempCustPersonalObj.MrSalutationCode
-              });
-            } else {
-              this.CustomerDetailForm.patchValue({
-                MrSalutationCode: response[CommonConstant.ReturnObj][0]['Key']
-              });
-            }
-          }
-        );
-        var refMasterObjMrEducationCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation,
-          MappingCode: null
-        };
-        this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrEducationCode).subscribe(
-          (response) => {
-            this.tempEducation = response[CommonConstant.ReturnObj];
-            if (this.tempCustPersonalObj.MrEducationCode != null) {
-              this.CustomerDetailForm.patchValue({
-                MrEducationCode: this.tempCustPersonalObj.MrEducationCode
-              });
-            } else {
-              this.CustomerDetailForm.patchValue({
-                MrEducationCode: response[CommonConstant.ReturnObj][0]['Key']
-              });
-            }
-          }
-        );
-        var refMasterObjMrReligionCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion,
-          MappingCode: null
-        };
-        this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrReligionCode).subscribe(
-          (response) => {
-            this.tempReligion = response[CommonConstant.ReturnObj];
-            if (this.tempCustPersonalObj.MrReligionCode != null) {
-              this.CustomerDetailForm.patchValue({
-                MrReligionCode: this.tempCustPersonalObj.MrReligionCode
-              });
-            } else {
-              this.CustomerDetailForm.patchValue({
-                MrReligionCode: response[CommonConstant.ReturnObj][0]['Key']
-              });
-            }
-          }
-        );
-        // var refMasterObjMrMaritalStatCode = {
-        //   RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat
-        // }
-        // this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrMaritalStatCode).subscribe(
-        //   (response) => {
-        //     this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
-        //     if (this.tempCustPersonalObj.MrMaritalStatCode != null) {
-        //       this.CustomerDetailForm.patchValue({
-        //         MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode
-        //       });
-        //     } else {
-        //       this.CustomerDetailForm.patchValue({
-        //         MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
-        //       });
-        //     }
-        //   }
-        // );
-
+        this.DictUcDDLObj[this.RefMasterTypeCodeSalutation] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeSalutation);
+        this.DictUcDDLObj[this.RefMasterTypeCodeEducation] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeEducation);
+        this.DictUcDDLObj[this.RefMasterTypeCodeReligion] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeReligion);
+        this.DictUcDDLObj[this.RefMasterTypeCodeNationality] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
 
         this.CustomerDetailForm.patchValue({
           NickName: this.tempCustPersonalObj.NickName,
           MrNationalityCode: this.tempCustPersonalObj.MrNationalityCode,
+          MrEducationCode: this.tempCustPersonalObj.MrEducationCode,
+          MrReligionCode: this.tempCustPersonalObj.MrReligionCode,
+          MrSalutationCode: this.tempCustPersonalObj.MrSalutationCode,
           CustSuffixName: this.tempCustPersonalObj.CustSuffixName,
           CustPrefixName: this.tempCustPersonalObj.CustPrefixName,
           NoOfDependents: this.tempCustPersonalObj.NoOfDependents,
           NoOfResidence: this.tempCustPersonalObj.NoOfResidence,
           FamilyCardNo: this.tempCustPersonalObj.FamilyCardNo,
           IsRestInPeace: this.tempCustPersonalObj.IsRestInPeace,
-          MobilePhnNo1: this.tempCustPersonalObj.MobilePhnNo1,
-          MobilePhnNo2: this.tempCustPersonalObj.MobilePhnNo2,
-          Email1: this.tempCustPersonalObj.Email1,
-          Email2: this.tempCustPersonalObj.Email2
         });
       });
   }
+  
+  checkState() {
+    if (!this.CustomerDetailForm.controls.IsVip.value) {
+      this.CustomerDetailForm.patchValue({
+        VipNotes: null
+      });
+      this.CustomerDetailForm.controls.VipNotes.disable();
+      this.CustomerDetailForm.controls.VipNotes.clearAsyncValidators();
+
+    } else {
+      this.CustomerDetailForm.controls.VipNotes.enable();
+      this.CustomerDetailForm.controls.VipNotes.setValidators(Validators.required);
+
+    }
+    this.CustomerDetailForm.controls.VipNotes.updateValueAndValidity();
+  }
+
   async SaveValue() {
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj = this.tempCustPersonalObj;
@@ -278,10 +220,9 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.MrEducationCode = this.CustomerDetailForm.controls["MrEducationCode"].value;
     this.custPersonalObj.MrReligionCode = this.CustomerDetailForm.controls["MrReligionCode"].value;
     this.custPersonalObj.IsRestInPeace = this.CustomerDetailForm.controls["IsRestInPeace"].value;
-    this.custPersonalObj.MobilePhnNo1 = this.CustomerDetailForm.controls["MobilePhnNo1"].value;
-    this.custPersonalObj.MobilePhnNo2 = this.CustomerDetailForm.controls["MobilePhnNo2"].value;
-    this.custPersonalObj.Email1 = this.CustomerDetailForm.controls["Email1"].value;
-    this.custPersonalObj.Email2 = this.CustomerDetailForm.controls["Email2"].value;
+    this.custPersonalObj.IsVip = this.CustomerDetailForm.controls["IsVip"].value;
+    this.custPersonalObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
+    this.custPersonalObj.IsAffiliateWithMf = this.CustomerDetailForm.controls["IsAffiliateWithMf"].value;
     this.http.post(URLConstant.EditCustPersonal, this.custPersonalObj).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
@@ -290,13 +231,13 @@ export class CustomerPersonalDetailComponent implements OnInit {
       }
     );
   }
-  onOptionsSelected(event) {
-    if (event.target.value == CommonConstant.NationalityCodeLocal) {
+  onOptionsSelected(event: { selectedIndex: number, selectedObj: KeyValueObj, selectedValue: string }) {
+    if (event.selectedValue == CommonConstant.NationalityCodeLocal) {
       this.flag = true;
       this.lookUpObj.isRequired = false;
     } else {
       this.flag = false;
-      var foreign = this.tempNationality.find(x => x["MasterCode"] == event.target.value);
+      var foreign = this.tempNationality.find(x => x["MasterCode"] == event.selectedValue);
       var setCountry = foreign.DefaultValue.split(';');
       this.lookUpObj.nameSelect = setCountry[1] ? setCountry[1] : setCountry[0];
       this.lookUpObj.jsonSelect = { CountryName: setCountry[1] ? setCountry[1] : setCountry[0] };

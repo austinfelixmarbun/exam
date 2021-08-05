@@ -24,6 +24,7 @@ export class VendorObj{
     RowVersion: string;
     IsNpwpExist: boolean;
     VendorAtpmCode: string;
+    TaxIdNo: string;
     
     constructor() { this.VendorId = 0; }
 }

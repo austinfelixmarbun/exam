@@ -24,7 +24,7 @@
           {
             "type": "boolean",
             "label": "Wellknown Company",
-            "property": "IsWellKnownCoy"
+            "property": "IsWellknownCoy"
           },
           {
             "type": "text",

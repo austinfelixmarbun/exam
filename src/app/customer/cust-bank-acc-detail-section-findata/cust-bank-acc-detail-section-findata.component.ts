@@ -29,7 +29,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
   inputLookupBank: InputLookupObj;
   maxYear: number;
   bankName: string;
-  IsActive : boolean;
+  IsActive: boolean;
   begBalance: number;
   isAlreadyCalc: boolean = false;
 
@@ -69,8 +69,8 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     this.inputLookupBank.urlJson = "./assets/uclookup/Customer/lookupBank_CustBankAcc_CustFinData.json";
     this.inputLookupBank.pagingJson = "./assets/uclookup/Customer/lookupBank_CustBankAcc_CustFinData.json";
     this.inputLookupBank.genericJson = "./assets/uclookup/Customer/lookupBank_CustBankAcc_CustFinData.json";
-    var criteriaList = new Array();
-    var criteriaObj = new CriteriaObj();
+    let criteriaList = new Array();
+    let criteriaObj = new CriteriaObj();
     criteriaObj.restriction = AdInsConstant.RestrictionEq;
     criteriaObj.propName = 'IS_ACTIVE';
     criteriaObj.value = CommonConstant.TRUE_CONDITION;
@@ -82,9 +82,9 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     });
 
     if (this.pageType == "edit") {
-      var custBankAcc = new CustBankAccObj();
+      let custBankAcc = new CustBankAccObj();
       custBankAcc.CustBankAccId = this.CustBankAccId;
-      this.httpClient.post(URLConstant.GetCustBankAccByCustBankAccIdWithRefBank, {Id : this.CustBankAccId}).subscribe(
+      this.httpClient.post(URLConstant.GetCustBankAccByCustBankAccIdWithRefBank, { Id: this.CustBankAccId }).subscribe(
         (response: any) => {
           this.inputLookupBank.nameSelect = response.RefBankObj.BankName;
           this.inputLookupBank.jsonSelect = response.RefBankObj;
@@ -107,17 +107,17 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       );
     }
     else if (this.pageType == "editStmnt") {
-      // var custBankAcc = new CustBankAccObj();
+      // let custBankAcc = new CustBankAccObj();
       // custBankAcc.CustBankAccId = this.CustBankAccId;
 
-      var ReqCustBankAcc = {
-        Id : this.CustBankAccId
+      let ReqCustBankAcc = {
+        Id: this.CustBankAccId
       }
 
       this.CustBankAccForm.controls['BegBalanceAmt'].setValidators([Validators.required]);
 
       this.httpClient.post(URLConstant.GetCBAForCustFinDataEditModeByCustBankAccId, ReqCustBankAcc).subscribe(
-        (response: any) => {          
+        (response: any) => {
           this.bankName = response.RefBankObj.BankName;
           this.CustBankAccForm.patchValue({
             CustBankAccId: response.CustBankAccObj.CustBankAccId,
@@ -140,27 +140,27 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             //   if(response.CustBankStmntObjs.length > 0)
             //   {  
             //     //get min year
-            //     var listyear = response.CustBankStmntObjs.map(function(a){
+            //     let listyear = response.CustBankStmntObjs.map(function(a){
             //       return a.Year;
             //     });
-            //     var minyear = listyear.reduce(function (a, b) { return a < b ? a : b; }); 
+            //     let minyear = listyear.reduce(function (a, b) { return a < b ? a : b; }); 
             //     //get min month in year
 
-            //     var listmonth = response.CustBankStmntObjs.filter(x => x.Year == minyear).map(function(a){
+            //     let listmonth = response.CustBankStmntObjs.filter(x => x.Year == minyear).map(function(a){
             //       return a.Month;
             //     });
-            //     var listmonthidx: Array<number> = new Array();
+            //     let listmonthidx: Array<number> = new Array();
 
             //     listmonth.forEach(element => {
             //       listmonthidx.push(this.monthOfYear.indexOf(element));
             //     });
 
-            //     var minmonthidx = listmonthidx.reduce(function (a, b) { return a < b ? a : b; });
-              
+            //     let minmonthidx = listmonthidx.reduce(function (a, b) { return a < b ? a : b; });
+
             //     if(minmonthidx != undefined)
             //     {
-            //       var minmonth = this.monthOfYear[minmonthidx];
-            //       var minObj = response.CustBankStmntObjs.filter(function(a){
+            //       let minmonth = this.monthOfYear[minmonthidx];
+            //       let minObj = response.CustBankStmntObjs.filter(function(a){
             //         return a.Year == minyear && a.Month == minmonth;
             //       });
 
@@ -181,9 +181,9 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             });
 
             //tidak dipakai
-            var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
+            let formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
             for (const item of response.CustBankStmntObjs) {
-              var formGroup = this.fb.group({
+              let formGroup = this.fb.group({
                 CustBankStmntId: [item.CustBankStmntId, [Validators.required]],
                 Month: [this.monthOfYear.indexOf(item.Month), [Validators.required]],
                 Year: [item.Year, [Validators.required, Validators.pattern("^[0-9]+$")]],
@@ -208,8 +208,8 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       return false;
     }
 
-    var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
-    var formGroup = this.fb.group({
+    let formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
+    let formGroup = this.fb.group({
       CustBankStmntId: [this.custBankStmnt.CustBankStmntId, [Validators.required]],
       Month: ['', [Validators.required]],
       Year: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
@@ -226,16 +226,15 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     this.isAlreadyCalc = false;
   }
 
-  ChangeTrxCountDebit(i){
-    var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
-    var controlDebitAmt = formArray.at(i).get('DebitAmt');
-    var controlDebitTrxCount = formArray.at(i).value.DebitTrxCount;
-    if(controlDebitTrxCount != undefined) {
-      if(controlDebitTrxCount > 0) {
+  ChangeTrxCountDebit(i) {
+    let formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
+    let controlDebitAmt = formArray.at(i).get('DebitAmt');
+    let controlDebitTrxCount = formArray.at(i).value.DebitTrxCount;
+    if (controlDebitTrxCount != undefined) {
+      if (controlDebitTrxCount > 0) {
         controlDebitAmt.setValidators([Validators.required, Validators.min(0.01)]);
         controlDebitAmt.updateValueAndValidity();
-      }
-      else if(controlDebitTrxCount == 0) {
+      } else if (controlDebitTrxCount == 0) {
         controlDebitAmt.clearValidators();
         controlDebitAmt.updateValueAndValidity();
       }
@@ -243,15 +242,14 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
   }
 
   ChangeTrxCountCredit(i) {
-    var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
-    var controlCreditAmt = formArray.at(i).get('CreditAmt');
-    var controlCreditTrxCount = formArray.at(i).value.CreditTrxCount;
-    if(controlCreditTrxCount != undefined) {
-      if(controlCreditTrxCount > 0) {
+    let formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
+    let controlCreditAmt = formArray.at(i).get('CreditAmt');
+    let controlCreditTrxCount = formArray.at(i).value.CreditTrxCount;
+    if (controlCreditTrxCount != undefined) {
+      if (controlCreditTrxCount > 0) {
         controlCreditAmt.setValidators([Validators.required, Validators.min(0.01)]);
         controlCreditAmt.updateValueAndValidity();
-      }
-      else if(controlCreditTrxCount == 0) {
+      } else if (controlCreditTrxCount == 0) {
         controlCreditAmt.clearValidators();
         controlCreditAmt.updateValueAndValidity();
       }
@@ -259,9 +257,9 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
   }
 
   removeCustBankStmnt(i) {
-    var confirmation = confirm(ExceptionConstant.DELETE_CONFIRMATION);
-    if(confirmation == true){
-      var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
+    let confirmation = confirm(ExceptionConstant.DELETE_CONFIRMATION);
+    if (confirmation == true) {
+      let formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
       formArray.removeAt(i);
       this.rowCustBankStmnt--;
     }
@@ -276,8 +274,9 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
 
   calculate() {
     this.begBalance = this.CustBankAccForm.controls['BegBalanceAmt'].value;
-    var startBegBalance = this.begBalance;
-    var arrayControl = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
+
+    let startBegBalance = this.begBalance;
+    let arrayControl = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
 
     for (let i = 0; i < arrayControl.length; i++) {
       const bankStmntD = arrayControl.at(i).value;
@@ -305,8 +304,8 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
   }
 
   Save(enjiForm) {
-    var formData = this.CustBankAccForm.value;
-    var custBankAccObj = new CustBankAccObj();
+    let formData = this.CustBankAccForm.getRawValue();
+    let custBankAccObj = new CustBankAccObj();
     custBankAccObj.CustBankAccId = formData.CustBankAccId;
     custBankAccObj.CustId = formData.CustId;
     custBankAccObj.RefBankId = formData.RefBankId;
@@ -330,7 +329,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     }
     else {
       if (this.pageType == "edit") {
-        var custBankData = this.CustBankAccForm.value;
+        let custBankData = this.CustBankAccForm.getRawValue();
         this.httpClient.post(URLConstant.EditCustBankAcc, custBankData).subscribe(
           (response) => {
             this.activeModal.close(response);
@@ -338,40 +337,39 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
         );
       }
       else if (this.pageType == "editStmnt") {
-        if(this.isAlreadyCalc == false)
-        {
+        if (this.isAlreadyCalc == false) {
           this.toastr.warningMessage(ExceptionConstant.CALC_FIRST);
           return false;
         }
-        var formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
-        var listCustBankStmnt = new Array<CustBankStmntObj>();
-        var totalBalance = 0;
+        let formArray = this.CustBankAccForm.get('CustBankStmnts') as FormArray;
+        let listCustBankStmnt = new Array<CustBankStmntObj>();
+        let totalBalance = 0;
 
-        if(formArray.length == 0){
+        if (formArray.length == 0) {
           this.toastr.warningMessage("Please input at least one bank account statement");
           return false;
         }
 
-        for (var i = 0; i < formArray.length; i++) {
+        for (let i = 0; i < formArray.length; i++) {
           const bankStmnt = formArray.at(i).value;
-          for (var j = 0; j < formArray.length; j++) {
+          for (let j = 0; j < formArray.length; j++) {
             if (i == j) {
               continue;
             }
             const bankStmntCompare = formArray.at(j).value;
-            if(bankStmnt.Month == bankStmntCompare.Month && bankStmnt.Year == bankStmntCompare.Year){
+            if (bankStmnt.Month == bankStmntCompare.Month && bankStmnt.Year == bankStmntCompare.Year) {
               this.toastr.warningMessage(ExceptionConstant.STATEMENT_WITH_SAME_MONTH_AND_YEAR);
               return false;
             }
           }
-          var custBankStmnt = new CustBankStmntObj();
+          let custBankStmnt = new CustBankStmntObj();
           custBankStmnt.CustBankStmntId = bankStmnt.CustBankStmntId;
           custBankStmnt.RowVersion = bankStmnt.RowVersion;
           custBankStmnt.Month = this.monthOfYear[bankStmnt.Month];
           custBankStmnt.Year = bankStmnt.Year;
-          custBankStmnt.DebitTrxCount = bankStmnt.DebitTrxCount == "" ? null :bankStmnt.DebitTrxCount;
+          custBankStmnt.DebitTrxCount = bankStmnt.DebitTrxCount == "" ? null : bankStmnt.DebitTrxCount;
           custBankStmnt.DebitAmt = bankStmnt.DebitAmt;
-          custBankStmnt.CreditTrxCount = bankStmnt.CreditTrxCount == "" ? null :bankStmnt.CreditTrxCount;
+          custBankStmnt.CreditTrxCount = bankStmnt.CreditTrxCount == "" ? null : bankStmnt.CreditTrxCount;
           custBankStmnt.CreditAmt = bankStmnt.CreditAmt;
           custBankStmnt.BalanceAmt = parseFloat(bankStmnt.BalanceAmt);
           listCustBankStmnt.push(custBankStmnt);
@@ -381,7 +379,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
         custBankAccObj.StartPeriod = "";
         custBankAccObj.EndPeriod = "";
 
-        var reqObj = { "custBankAccObj": custBankAccObj, "custBankStmntObjs": listCustBankStmnt };
+        let reqObj = { "custBankAccObj": custBankAccObj, "custBankStmntObjs": listCustBankStmnt };
         this.httpClient.post(URLConstant.EditCBAForCustFinData, reqObj).subscribe(
           (response) => {
             this.activeModal.close(response);
@@ -390,11 +388,11 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
       }
     }
   }
-
+  
   CheckDefault() {
-    if(this.CustBankAccForm.controls.IsDefault.value) {
+    if (this.CustBankAccForm.controls.IsDefault.value) {
       this.CustBankAccForm.patchValue({
-        IsActive : true
+        IsActive: true
       });
       this.IsActive = true;
       this.CustBankAccForm.controls.IsActive.disable();
