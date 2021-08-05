@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
-import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -13,7 +12,8 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 @Component({
   selector: 'app-customer-personal-detail',
@@ -51,16 +51,16 @@ export class CustomerPersonalDetailComponent implements OnInit {
   CustomerDetailForm = this.fb.group({
     CustFullName: ['', [Validators.maxLength(100)]],
     NickName: ['', [Validators.maxLength(100)]],
-    MrSalutationCode: [''],
-    MrMaritalStatCode: [''],
+    MrSalutationCode: ['', [Validators.required]],
+    MrMaritalStatCode: ['', [Validators.required]],
     CustPrefixName: [''],
     CustSuffixName: [''],
     NoOfDependents: ['', [Validators.pattern("^[0-9]+$")]],
-    MrNationalityCode: [''],
+    MrNationalityCode: ['', [Validators.required]],
     NoOfResidence: ['', Validators.pattern("^[0-9]+$")],
     FamilyCardNo: ['', Validators.pattern("^[0-9]+$")],
-    MrEducationCode: ['',],
-    MrReligionCode: ['',],
+    MrEducationCode: ['', [Validators.required]],
+    MrReligionCode: ['', [Validators.required]],
     IsRestInPeace: [false],
     IsVip: [false],
     VipNotes: [''],
@@ -79,10 +79,13 @@ export class CustomerPersonalDetailComponent implements OnInit {
 
   }
 
+  readonly RefMasterTypeCodeSalutation: string = CommonConstant.RefMasterTypeCodeSalutation;
+  readonly RefMasterTypeCodeEducation: string = CommonConstant.RefMasterTypeCodeEducation;
+  readonly RefMasterTypeCodeReligion: string = CommonConstant.RefMasterTypeCodeReligion;
+  readonly RefMasterTypeCodeNationality: string = CommonConstant.RefMasterTypeCodeNationality;
+
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   ngOnInit() {
-    var generalSettingObjDefLocalNationality = {
-      GsCode: CommonConstant.GSCodeDefLocalNationality
-    }
     this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeDefLocalNationality}).subscribe(
       (response) => {
         this.Country = response;
@@ -98,10 +101,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
         this.criteriaList.push(this.criteriaObj);
         this.lookUpObj.addCritInput = this.criteriaList;
 
-
-        var countryCode = {
-          CountryCode: this.Country.GsValue
-        };
         this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: this.Country.GsValue }).subscribe(
           (response) => {
             this.LocalCountry = response;
@@ -127,9 +126,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         this.tempCustPersonalObj = response;
-        var refMasterObjMrNationalityCode = {
-          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality
-        }
         this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, { Code: CommonConstant.RefMasterTypeCodeNationality }).subscribe(
           (response) => {
             this.tempNationality = response["RefMasterObjs"];
@@ -163,83 +159,17 @@ export class CustomerPersonalDetailComponent implements OnInit {
           }
         );
 
-        var refMasterObjMrSalutationCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSalutation,
-          MappingCode: null
-        };
-        this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrSalutationCode).subscribe(
-          (response) => {
-            this.tempSalutation = response[CommonConstant.ReturnObj];
-
-            if (this.tempCustPersonalObj.MrSalutationCode != null) {
-              this.CustomerDetailForm.patchValue({
-                MrSalutationCode: this.tempCustPersonalObj.MrSalutationCode
-              });
-            } else {
-              this.CustomerDetailForm.patchValue({
-                MrSalutationCode: response[CommonConstant.ReturnObj][0]['Key']
-              });
-            }
-          }
-        );
-        var refMasterObjMrEducationCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation,
-          MappingCode: null
-        };
-        this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrEducationCode).subscribe(
-          (response) => {
-            this.tempEducation = response[CommonConstant.ReturnObj];
-            if (this.tempCustPersonalObj.MrEducationCode != null) {
-              this.CustomerDetailForm.patchValue({
-                MrEducationCode: this.tempCustPersonalObj.MrEducationCode
-              });
-            } else {
-              this.CustomerDetailForm.patchValue({
-                MrEducationCode: response[CommonConstant.ReturnObj][0]['Key']
-              });
-            }
-          }
-        );
-        var refMasterObjMrReligionCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion,
-          MappingCode: null
-        };
-        this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrReligionCode).subscribe(
-          (response) => {
-            this.tempReligion = response[CommonConstant.ReturnObj];
-            if (this.tempCustPersonalObj.MrReligionCode != null) {
-              this.CustomerDetailForm.patchValue({
-                MrReligionCode: this.tempCustPersonalObj.MrReligionCode
-              });
-            } else {
-              this.CustomerDetailForm.patchValue({
-                MrReligionCode: response[CommonConstant.ReturnObj][0]['Key']
-              });
-            }
-          }
-        );
-        // var refMasterObjMrMaritalStatCode = {
-        //   RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat
-        // }
-        // this.http.post(this.getListActiveRefMasterUrl, refMasterObjMrMaritalStatCode).subscribe(
-        //   (response) => {
-        //     this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
-        //     if (this.tempCustPersonalObj.MrMaritalStatCode != null) {
-        //       this.CustomerDetailForm.patchValue({
-        //         MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode
-        //       });
-        //     } else {
-        //       this.CustomerDetailForm.patchValue({
-        //         MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
-        //       });
-        //     }
-        //   }
-        // );
-
+        this.DictUcDDLObj[this.RefMasterTypeCodeSalutation] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeSalutation);
+        this.DictUcDDLObj[this.RefMasterTypeCodeEducation] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeEducation);
+        this.DictUcDDLObj[this.RefMasterTypeCodeReligion] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeReligion);
+        this.DictUcDDLObj[this.RefMasterTypeCodeNationality] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
 
         this.CustomerDetailForm.patchValue({
           NickName: this.tempCustPersonalObj.NickName,
           MrNationalityCode: this.tempCustPersonalObj.MrNationalityCode,
+          MrEducationCode: this.tempCustPersonalObj.MrEducationCode,
+          MrReligionCode: this.tempCustPersonalObj.MrReligionCode,
+          MrSalutationCode: this.tempCustPersonalObj.MrSalutationCode,
           CustSuffixName: this.tempCustPersonalObj.CustSuffixName,
           CustPrefixName: this.tempCustPersonalObj.CustPrefixName,
           NoOfDependents: this.tempCustPersonalObj.NoOfDependents,
