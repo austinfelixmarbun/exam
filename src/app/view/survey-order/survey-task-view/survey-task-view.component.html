@@ -1,10 +1,28 @@
-<div class="col-md-12">
+<div *ngIf="isReady"class="col-md-12">
   <div class="card">
     <div class="card-body">
       <div class="px-3">
         <form class="form form-horizontal">
           <div class="form-body">
             <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"></lib-ucviewgeneric>
+          </div>
+          <div class="form-body">
+            <lib-ucviewgeneric [viewGenericObj]="viewGenericSbjctObj"></lib-ucviewgeneric>
+          </div>
+          <div class="form-body">
+            <div class="row text-left">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="px-3">
+                      <lib-ucSubsection [id]="'MobileId'" [title]="'Survey Result'" [panel]="'ResultMobile'">
+                      </lib-ucSubsection>
+                      <div id="ResultMobile" [innerHTML]="htmlCode"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>
