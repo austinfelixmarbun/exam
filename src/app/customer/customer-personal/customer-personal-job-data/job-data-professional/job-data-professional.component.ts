@@ -16,6 +16,8 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-job-data-professional',
@@ -127,6 +129,15 @@ export class JobDataProfessionalComponent implements OnInit {
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
+    let listCriteriaObj: Array<CriteriaObj> = new Array();
+    let criteriaCustObj = new CriteriaObj();
+    criteriaCustObj.DataType = "text";
+    criteriaCustObj.restriction = AdInsConstant.RestrictionEq;
+    criteriaCustObj.propName = 'MR_CUST_MODEL_CODE';
+    criteriaCustObj.value = CommonConstant.CUST_MODEL_PROF;
+    listCriteriaObj.push(criteriaCustObj);
+    this.professionLookUpObj.addCritInput = listCriteriaObj;
+
 
     this.industryLookUpObj = new InputLookupObj();
     this.industryLookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";

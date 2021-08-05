@@ -11,6 +11,8 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-job-data-non-professional',
@@ -62,6 +64,16 @@ export class JobDataNonProfessionalComponent implements OnInit {
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
+    
+    let listCriteriaObj: Array<CriteriaObj> = new Array();
+    let criteriaCustObj = new CriteriaObj();
+    criteriaCustObj.DataType = "text";
+    criteriaCustObj.restriction = AdInsConstant.RestrictionEq;
+    criteriaCustObj.propName = 'MR_CUST_MODEL_CODE';
+    criteriaCustObj.value = CommonConstant.CUST_MODEL_NONPROF;
+    listCriteriaObj.push(criteriaCustObj);
+    this.professionLookUpObj.addCritInput = listCriteriaObj;
+
 
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
