@@ -209,10 +209,9 @@ export class VendorGradingRequestDetailComponent implements OnInit {
       VendorGrading: this.vendorGradingHistObj,
       OfficeCode: this.currentUserContext[CommonConstant.OFFICE_CODE],
       RequestRFAObj: rfaInfo
-
     }
-    let SubmitRequestVendorGradingUrl = URLConstant.SubmitRequestVendorGrading;
-    if(environment.isCore) SubmitRequestVendorGradingUrl = URLConstant.SubmitRequestVendorGradingV2;
+    
+    let SubmitRequestVendorGradingUrl = environment.isCore ? URLConstant.SubmitRequestVendorGradingV2 : URLConstant.SubmitRequestVendorGrading;
     this.http.post(SubmitRequestVendorGradingUrl, submitVendorGradingReqObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
