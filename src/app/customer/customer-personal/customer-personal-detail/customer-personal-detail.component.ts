@@ -14,6 +14,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 
 @Component({
   selector: 'app-customer-personal-detail',
@@ -37,10 +38,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
   Country: any;
   tempCustObj: any;
   tempCountry: any;
-  tempReligion: any;
   LocalCountry: any;
-  tempEducation: any;
-  tempSalutation: any;
   tempCountryCode: any;
   tempNationality: any;
   tempCustPersonalObj: CustPersonalObj;
@@ -52,7 +50,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
     CustFullName: ['', [Validators.maxLength(100)]],
     NickName: ['', [Validators.maxLength(100)]],
     MrSalutationCode: ['', [Validators.required]],
-    MrMaritalStatCode: ['', [Validators.required]],
     CustPrefixName: [''],
     CustSuffixName: [''],
     NoOfDependents: ['', [Validators.pattern("^[0-9]+$")]],
@@ -138,9 +135,6 @@ export class CustomerPersonalDetailComponent implements OnInit {
                 this.flag = true;
                 this.lookUpObj.isRequired = false;
               } else {
-                var countryCode = {
-                  CountryCode: this.tempCustPersonalObj.WnaCountryCode
-                };
                 this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: this.tempCustPersonalObj.WnaCountryCode }).subscribe(
                   (response) => {
                     this.tempCountry = response;
@@ -237,13 +231,13 @@ export class CustomerPersonalDetailComponent implements OnInit {
       }
     );
   }
-  onOptionsSelected(event) {
-    if (event.target.value == CommonConstant.NationalityCodeLocal) {
+  onOptionsSelected(event: { selectedIndex: number, selectedObj: KeyValueObj, selectedValue: string }) {
+    if (event.selectedValue == CommonConstant.NationalityCodeLocal) {
       this.flag = true;
       this.lookUpObj.isRequired = false;
     } else {
       this.flag = false;
-      var foreign = this.tempNationality.find(x => x["MasterCode"] == event.target.value);
+      var foreign = this.tempNationality.find(x => x["MasterCode"] == event.selectedValue);
       var setCountry = foreign.DefaultValue.split(';');
       this.lookUpObj.nameSelect = setCountry[1] ? setCountry[1] : setCountry[0];
       this.lookUpObj.jsonSelect = { CountryName: setCountry[1] ? setCountry[1] : setCountry[0] };
