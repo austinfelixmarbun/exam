@@ -20,12 +20,14 @@ export class CustDupCheckPersonalComponent implements OnInit {
   readonly RefMasterTypeCodeIdType: string = CommonConstant.RefMasterTypeCodeIdType;
   readonly RefMasterTypeCodeGender: string = CommonConstant.RefMasterTypeCodeGender;
   readonly RefMasterTypeCodeMaritalStat: string = CommonConstant.RefMasterTypeCodeMaritalStat;
+  readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
 
   ngOnInit() {
     this.InitCustMainDataMode();
     this.initRefMaster(this.RefMasterTypeCodeIdType);
     this.initRefMaster(this.RefMasterTypeCodeGender);
     this.initRefMaster(this.RefMasterTypeCodeMaritalStat);
+    this.initRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal);
   }
 
   CustNameLabel: string = "Customer";

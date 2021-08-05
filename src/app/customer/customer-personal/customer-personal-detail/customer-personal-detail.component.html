@@ -85,15 +85,9 @@
 
             <div class="form-group row adins-required">
               <label class="col-md-4 adInsLabel" translate>Salutation</label>
-              <div class="col-md-8">
-                <select class="form-control adInsInput" style="width: auto" formControlName="MrSalutationCode"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.MrSalutationCode.invalid }">
-                  <option *ngFor="let it of tempSalutation" [value]="it.Key">
-                    {{it.Value}}</option>
-                </select>
-                <lib-uc-show-errors [control]="CustomerDetailForm.controls.MrSalutationCode"
-                  [submit]="enjiForm.submitted">
-                </lib-uc-show-errors>
+              <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeSalutation]?.isReady">
+                <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeSalutation]"
+                  [parentForm]="CustomerDetailForm" [enjiForm]="enjiForm" [identifier]="'MrSalutationCode'"></lib-ucdropdownlist>
               </div>
             </div>
 
@@ -121,16 +115,9 @@
 
             <div class="form-group row">
               <label class="col-md-4 adins-required-label" translate>Nationality</label>
-              <div class="col-md-8">
-                <select (change)="onOptionsSelected($event)" class="form-control adInsInput" style="width: auto"
-                  formControlName="MrNationalityCode"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.MrNationalityCode.invalid }">
-                  <option *ngFor="let it of tempNationality" [value]="it.MasterCode">
-                    {{it.Descr}}</option>
-                </select>
-                <lib-uc-show-errors [control]="CustomerDetailForm.controls.MrNationalityCode"
-                  [submit]="enjiForm.submitted">
-                </lib-uc-show-errors>
+              <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeNationality]?.isReady">
+                <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeNationality]"
+                  [parentForm]="CustomerDetailForm" [enjiForm]="enjiForm" [identifier]="'MrNationalityCode'" (callback)="onOptionsSelected($event)"></lib-ucdropdownlist>
               </div>
             </div>
 
@@ -150,27 +137,17 @@
 
             <div class="form-group row">
               <label class="col-md-4 adins-required-label" translate>Education</label>
-              <div class="col-md-8">
-                <select class="form-control adInsInput" style="width: auto" formControlName="MrEducationCode"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.MrEducationCode.invalid }">
-                  <option *ngFor="let it of tempEducation" [value]="it.Key">
-                    {{it.Value}}</option>
-                </select>
-                <lib-uc-show-errors [control]="CustomerDetailForm.controls.MrEducationCode" [submit]="enjiForm.submitted">
-                </lib-uc-show-errors>
+              <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeEducation]?.isReady">
+                <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeEducation]"
+                  [parentForm]="CustomerDetailForm" [enjiForm]="enjiForm" [identifier]="'MrEducationCode'"></lib-ucdropdownlist>
               </div>
             </div>
 
             <div class="form-group row">
               <label class="col-md-4 adins-required-label" translate>Religion</label>
-              <div class="col-md-8">
-                <select class="form-control adInsInput" style="width: auto" formControlName="MrReligionCode"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.MrReligionCode.invalid }">
-                  <option *ngFor="let it of tempReligion" [value]="it.Key">
-                    {{it.Value}}</option>
-                </select>
-                <lib-uc-show-errors [control]="CustomerDetailForm.controls.MrReligionCode" [submit]="enjiForm.submitted">
-                </lib-uc-show-errors>
+              <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeReligion]?.isReady">
+                <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeReligion]"
+                  [parentForm]="CustomerDetailForm" [enjiForm]="enjiForm" [identifier]="'MrReligionCode'"></lib-ucdropdownlist>
               </div>
             </div>
 

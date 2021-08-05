@@ -8,18 +8,14 @@
               <h4 class="card-title" id="horz-layout-colored-controls" translate>Customer Duplicate Checking Match
                 {{CustType}} </h4>
             </div>
-          </div>
-        </div>
-        <br>
-        <br>
-        <div class="form-body">
-          <div class="ucSearch-Button-Right">
-            <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Back()" translate>
-              <i class="fa fa-arrow-left"></i> Back
-            </button>
-            <button [hidden]="IsLock" type="button" class="btn btn-raised btn-primary" (click)="SaveForm()" translate>
-              <i class="far fa-check-square"></i> New Customer
-            </button>
+            <div class="col-md-4" style="text-align-last: right">
+              <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Back()" translate>
+                <i class="fa fa-arrow-left"></i> Back
+              </button>
+              <button [hidden]="IsLock" type="button" class="btn btn-raised btn-primary" (click)="SaveForm()" translate>
+                <i class="far fa-check-square"></i> New Customer
+              </button>
+            </div>
           </div>
         </div>
         <app-cust-dup-check-personal *ngIf="CustType == CustTypePersonal" [CustObj]="CustPersonalObj">
