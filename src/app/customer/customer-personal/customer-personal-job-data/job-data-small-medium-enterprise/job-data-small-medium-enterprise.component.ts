@@ -21,6 +21,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
  
 @Component({
   selector: 'app-job-data-sme',
@@ -69,6 +70,7 @@ export class JobDataSmeComponent implements OnInit {
   returnRefProfessionObj: any;
   refIndustryTypeObj: RefIndustryTypeObj;
   returnIndustryTypeObj: any;
+  InvestmentTypeObj: Array<KeyValueObj> = new Array<KeyValueObj>();
   preJobAddrObj: CustAddrObj;
   IsWellknownCoy: boolean = false;
   ArrAddCritCoy: Array<CriteriaObj> = new Array<CriteriaObj>();
@@ -101,7 +103,8 @@ export class JobDataSmeComponent implements OnInit {
     PreviEmploymentDate: [''],
     NotesPreJob: [''],
     IsWellknownCoy: [false],
-    MrWellknownCoyCode: ['']
+    MrWellknownCoyCode: [''],
+    MrInvestmentTypeCode: [''],
   });
   businessDtMin: Date;
   inputAddressObjForJobAddr: any;
@@ -230,6 +233,12 @@ export class JobDataSmeComponent implements OnInit {
         this.JobDataSmeForm.patchValue({ CompanyScale: response[CommonConstant.ReturnObj][0]['Key'] });
       }
     );
+
+    this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeInvestmentType }).subscribe(
+      (response) => {
+        this.InvestmentTypeObj = response[CommonConstant.ReturnObj];
+      }
+    );
     
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
@@ -261,7 +270,8 @@ export class JobDataSmeComponent implements OnInit {
             PreviIndustryName: this.returnCustJobDataObj.PrevCoyName,
             PreviEmploymentDate: formatDate(this.returnCustJobDataObj.PrevEmploymentDt, 'yyyy-MM-dd', 'en-US'),
             IsWellknownCoy: this.returnCustJobDataObj.IsWellknownCoy,
-            MrWellknownCoyCode: this.returnCustJobDataObj.MrWellknownCoyCode
+            MrWellknownCoyCode: this.returnCustJobDataObj.MrWellknownCoyCode,
+            MrInvestmentTypeCode: this.returnCustJobDataObj.MrInvestmentTypeCode,
           });
           this.IsWellknownCoy = this.returnCustJobDataObj.IsWellknownCoy;
           this.companyLookupObj.nameSelect = this.returnCustJobDataObj.CoyName;
@@ -521,6 +531,7 @@ export class JobDataSmeComponent implements OnInit {
     this.custPersonalJobDataObj.PrevEmploymentDt = this.JobDataSmeForm.controls["PreviEmploymentDate"].value;
     this.custPersonalJobDataObj.IsWellknownCoy = this.JobDataSmeForm.controls["IsWellknownCoy"].value;
     this.custPersonalJobDataObj.MrWellknownCoyCode = this.JobDataSmeForm.controls["MrWellknownCoyCode"].value;
+    this.custPersonalJobDataObj.MrInvestmentTypeCode = this.JobDataSmeForm.controls["MrInvestmentTypeCode"].value;
   }
 
   setPreJobAddr() {
