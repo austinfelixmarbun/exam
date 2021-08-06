@@ -13,16 +13,10 @@
                   <thead>
                     <tr class="table-header">
                       <th>
+                        <span class="thead-header" translate>NO</span>
+                      </th>
+                      <th>
                         <span class="thead-header" translate>SURVEY TASK NO</span>
-                      </th>
-                      <th>
-                        <span class="thead-header" translate>RESURVEY REF</span>
-                      </th>
-                      <th>
-                        <span class="thead-header" translate>SURVEYEE MODEL</span>
-                      </th>
-                      <th>
-                        <span class="thead-header" translate>SURVEYEE OBJECT</span>
                       </th>
                       <th>
                         <span class="thead-header" translate>SURVEYEE NAME</span>
@@ -37,60 +31,34 @@
                         <span class="thead-header" translate>SURVEYOR NAME</span>
                       </th>
                       <th>
-                        <span class="thead-header" translate>SURVEYOR FORM SCHEME</span>
-                      </th>
-                      <th>
                         <span class="thead-header" translate>SURVEY TASK STATUS</span>
-                      </th>
-                      <th>
-                        <span class="thead-header" translate>REASON DESCRIPTION</span>
                       </th>
                       <th>
                         <span class="thead-header" translate>RESULT DATE</span>
                       </th>
                       <th>
-                        <span class="thead-header" translate>VIEW RESULT</span>
-                      </th>
-                      <th>
                         <span class="thead-header" translate>REVIEW BY</span>
                       </th>
                       <th>
-                        <span class="thead-header" translate>RESULT COMMENT</span>
+                        <span class="thead-header" translate>REVIEW NOTES</span>
                       </th>
-                      <th>
-                        <span class="thead-header" translate>RESURVEY</span>
-                      </th>
-  
-  
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of TaskList">
+                    <tr *ngFor="let item of TaskList; let i = index">
+                      <td>{{i+1}}</td>
                       <td>
                         <a target="_blank" [routerLink]="[ViewLink]" skipLocationChange
                           [queryParams]="{ SrvyTaskId: item.SrvyTaskId }">{{item.SrvyTaskNo}}</a>
                       </td>
-                      <td>{{item.ResurveyRef}}</td>
-                      <td>{{item.SurveyeeModel}}</td>                    
-                      <td>{{item.SurveyeeObject}}</td>
-                      <td>
-                        <a target="_blank" [routerLink]="[ViewCust]" skipLocationChange
-                          [queryParams]="{ CustId: item.CustId }">{{item.CustName}}
-                        </a>                      
-                      </td>
+                      <td>{{item.CustName}}</td>
                       <td>{{item.CustAddr}}</td>
                       <td>{{item.MrSurveyTypeCode}}</td>
                       <td>{{item.SurveyorName}}</td>
-                      <td>{{item.SrvyFormSchmName}}</td>
                       <td>{{item.MrSurveyTaskStatCode}}</td>
-                      <td>{{item.ReasonDescr}}</td>
                       <td>{{item.ResultDt | date: 'dd-MMM-yyyy'}}</td>
-                      <td><a target="_blank" [routerLink]="[ViewLink]" skipLocationChange
-                        [queryParams]="{ SrvyTaskId: item.SrvyTaskId }"><i class="fas fa-pencil-alt"></i>
-                      </a></td>                    
                       <td>{{item.ReviewBy}}</td>
-                      <td>{{item.ReviewNotes}}</td>                    
-                      <td>{{item.ResurveyRef != "" ? 'YES' : 'NO'}}</td>
+                      <td>{{item.ReviewNotes}}</td>  
                     </tr>
                   </tbody>
                 </table>

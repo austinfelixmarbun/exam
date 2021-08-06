@@ -833,6 +833,7 @@ export class URLConstant {
     public static GetListSrvyTaskBySrvyOrderIdForUpdate = environment.FoundationR3Url + "/v1" + "/SrvyTask/GetListSrvyTaskBySrvyOrderIdForUpdate";
     public static AddSrvyTask = environment.FoundationR3Url + "/v1" + "/SrvyTask/AddSrvyTask";
     public static EditSrvyTask = environment.FoundationR3Url + "/v1" + "/SrvyTask/EditSurveyTask";
+    public static EditSrvyTaskAndSendToMobile = environment.FoundationR3Url + "/v1" + "/SrvyTask/EditSurveyTaskAndSendToMobile";
     public static DeleteSrvyTask = "/SrvyTask/DeleteSrvyTask";
     public static GetSrvyTaskBySrvyTaskId = environment.FoundationR3Url + "/v1" + "/SrvyTask/GetSrvyTaskBySrvyTaskId";
     public static CancelSurveyTaskBySurveyTaskId = environment.FoundationR3Url + "/v1" + "/SrvyTask/CancelSurveyTaskBySurveyTaskId";
@@ -840,6 +841,7 @@ export class URLConstant {
     public static GetListSrvyTaskBySrvyOrderIdForView = environment.FoundationR3Url + "/v1" + "/SrvyTask/GetListSrvyTaskBySrvyOrderIdForView";
     public static GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview = environment.FoundationR3Url + "/v1" + "/SrvyTask/GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview";
     public static ReviewSurveyResult = environment.FoundationR3Url + "/v1" + "/SrvyTask/ReviewSurveyResult";
+    public static GetHtmlCodeFromMobile = environment.FoundationR3Url + "/v1" + "/SrvyTask/GetHtmlCodeFromMobile";
 
     // SURVEY ORDER
     public static GetSrvyOrderBySrvyOrderId = environment.FoundationR3Url + "/v1" + "/SrvyOrder/GetSrvyOrderBySrvyOrderId";
