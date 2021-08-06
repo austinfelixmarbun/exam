@@ -32,9 +32,13 @@
                   </div>
 
                   <div class="form-group row">
-                    <label class="col-md-4 adInsLabel" translate>Is Active</label>
+                    <label class="col-md-4 adInsLabel" translate> Share(%) </label>
                     <div class="col-md-8">
-                      <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsActive" />
+                      <input type="" currencyMask min="0" max="100" class="form-control" formControlName="SharePrcnt"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.SharePrcnt.invalid}"
+                        [options]="{  suffix: '%',thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, precision: 6, nullable: false}">
+                      <lib-uc-show-errors [control]="CustomerForm.controls.SharePrcnt" [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
                     </div>
                   </div>
 
@@ -62,13 +66,9 @@
                   </div>
 
                   <div class="form-group row">
-                    <label class="col-md-4 adInsLabel" translate> Share(%) </label>
+                    <label class="col-md-4 adInsLabel" translate>Is Active</label>
                     <div class="col-md-8">
-                      <input type="" currencyMask min="0" max="100" class="form-control" formControlName="SharePrcnt"
-                        [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.SharePrcnt.invalid}"
-                        [options]="{  suffix: '%',thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, precision: 6, nullable: false}">
-                      <lib-uc-show-errors [control]="CustomerForm.controls.SharePrcnt" [submit]="enjiForm.submitted">
-                      </lib-uc-show-errors>
+                      <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsActive" />
                     </div>
                   </div>
 
@@ -78,6 +78,14 @@
             <lib-ucSubsection [id]="'LegalAddr'" [title]="'Legal Address'" [panel]="'LegalAddrSection'">
             </lib-ucSubsection>
             <div class="form-body" id="LegalAddrSection">
+              <div class="form-group row" *ngIf="!IsLockCopyAddrBtn">
+                <label class="col-md-2 adInsLabel" translate>Copy Address From Legal Customer</label>
+                <div class="col-md-4">
+                  <button type="button" class="btn btn-raised btn-primary" (click)="CopyLegalAddr()" translate>
+                    <i class="far"></i> Copy
+                  </button>
+                </div>
+              </div>
               <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerForm" [enjiForm]="enjiForm"
                 [identifier]="'UcAddress'">
               </lib-ucaddress>

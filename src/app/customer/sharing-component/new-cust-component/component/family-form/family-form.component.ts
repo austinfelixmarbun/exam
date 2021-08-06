@@ -1,4 +1,5 @@
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
@@ -21,6 +22,7 @@ import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMast
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { CookieService } from 'ngx-cookie';
+import { NewCustSetData } from '../../NewCustSetData.Service';
 
 @Component({
   selector: 'app-family-form',
@@ -46,10 +48,11 @@ export class FamilyFormComponent implements OnInit {
   constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
 
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
-    this.InitData();
-    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
-    this.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
+    await this.InitData();
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeNationality] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
     await this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;
     this.lookUpObjCountry.isReady = true;
@@ -58,24 +61,17 @@ export class FamilyFormComponent implements OnInit {
   }
 
   businessDtMin: Date;
-  InitData() {
+  async InitData() {
     this.parentForm.addControl("EmploymentEstablishmentDt", this.fb.control(''));
-    this.parentForm.addControl("MrNationalityCode", this.fb.control(''));
+    this.parentForm.addControl("MrNationalityCode", this.fb.control(CommonConstant.NationalityCodeLocal));
     this.parentForm.addControl("WnaCountryCode", this.fb.control(''));
     this.parentForm.addControl("MrJobPositionCode", this.fb.control(''));
     this.parentForm.addControl("RefProfessionId", this.fb.control(0));
     this.parentForm.addControl("MrJobProfessionCode", this.fb.control(''));
-    this.parentForm.addControl("MrCustModelCode", this.fb.control(''));
-    this.parentForm.addControl("MobilePhnNo1", this.fb.control(''));
-    this.parentForm.get("MobilePhnNo1").setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
-    this.parentForm.get("MobilePhnNo1").updateValueAndValidity();
-    this.parentForm.addControl("Email1", this.fb.control(''));
-    this.parentForm.get("Email1").setValidators([Validators.required, Validators.pattern(CommonConstant.regexEmail)]);
-    this.parentForm.get("Email1").updateValueAndValidity();
 
     this.BindLookupProfession();
     this.BindLookupJobPosition();
-    this.BindLookupCountry();
+    await this.BindLookupCountry();
     this.GetListRefCountry();
 
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -102,9 +98,10 @@ export class FamilyFormComponent implements OnInit {
   }
 
   lookUpObjCountry: InputLookupObj = new InputLookupObj();
-  BindLookupCountry() {
-    this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
+  async BindLookupCountry() {
+    await this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality }).toPromise().then(
       (response: GeneralSettingObj) => {
+        this.lookUpObjCountry = new InputLookupObj();
         this.lookUpObjCountry.urlJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObjCountry.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObjCountry.genericJson = "./assets/lookup/lookupCustomerCountry.json";
@@ -118,7 +115,6 @@ export class FamilyFormComponent implements OnInit {
         criteriaObj.value = response.GsValue;
         criteriaList.push(criteriaObj);
         this.lookUpObjCountry.addCritInput = criteriaList;
-        this.lookUpObjCountry.isReady = true;
 
         this.GetRefCountry(response.GsValue, true);
       }
@@ -152,30 +148,15 @@ export class FamilyFormComponent implements OnInit {
     );
   }
 
-  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
-  initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false) {
-    let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
-    let ReqRefMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: refMasterTypeCode,
-      MappingCode: mappingCode
-    };
-    tempDdlObj.apiUrl = URLConstant.GetListActiveRefMaster;
-    tempDdlObj.requestObj = ReqRefMasterObj;
-    tempDdlObj.customObjName = CommonConstant.ReturnObj;
-    tempDdlObj.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
-    tempDdlObj.isSelectOutput = isSelectOutput;
-    tempDdlObj.isReady = true;
-    this.DictUcDDLObj[refMasterTypeCode] = tempDdlObj;
-  }
-
   async GetExistingJobData(custId: number = this.CustId) {
     if (custId == 0) return;
     await this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: custId }).toPromise().then(
       async (response: CustPersonalJobDataObj) => {
         if (!response.CustId) return;
         this.tempExisting.CustPersonalJob = response;
+        let datePipe = new DatePipe("en-US");
         this.parentForm.patchValue({
-          EmploymentEstablishmentDt: response.EmploymentEstablishmentDt,
+          EmploymentEstablishmentDt: datePipe.transform(response.EmploymentEstablishmentDt, 'yyyy-MM-dd'),
           MrJobPositionCode: response.MrJobPositionCode,
           RefProfessionId: response.RefProfessionId,
         });
@@ -223,11 +204,6 @@ export class FamilyFormComponent implements OnInit {
     this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: event.ProfessionCode});
   }
 
-  changeCustModel() {
-    this.ResetLookupProfession();
-    this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: ""});
-  }
-
   getLookUpJobPosition(ev) {
     this.parentForm.patchValue({
       MrJobPositionCode: ev.JobCode,
@@ -266,6 +242,11 @@ export class FamilyFormComponent implements OnInit {
     });
   }
 
+  changeCustModel() {
+    this.ResetLookupProfession();
+    this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: ""});
+  }
+  
   IsLocal: boolean = true;
   onOptionsSelected(event: { selectedIndex: number, selectedObj: KeyValueObj, selectedValue: string }) {
     if (event.selectedValue == CommonConstant.NationalityCodeLocal) {

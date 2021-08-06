@@ -36,6 +36,7 @@ export class ShareholderListingComponent implements OnInit {
   tempShareholderListingObj: Array<ShareholderListingObj> = new Array();
   tempTotalSharePrct: number = 0;
   tempIsOwner: boolean = false;
+  tempIsSigner: boolean = false;
   listCustNoToExclude: Array<string> = new Array();
   GetListPaging() {
     this.http.post(URLConstant.GetListManagementShareholderForListPagingByCustId, { Id: this.CustId }).subscribe(
@@ -43,6 +44,7 @@ export class ShareholderListingComponent implements OnInit {
         this.tempShareholderListingObj = response.ReturnObject;
         let tempTotalSharePrct: number = 0;
         let tempIsOwner: boolean = false;
+        let tempIsSigner: boolean = false;
         this.listCustNoToExclude = new Array();
         for (let index = 0; index < this.tempShareholderListingObj.length; index++) {
           const element = this.tempShareholderListingObj[index];
@@ -52,12 +54,16 @@ export class ShareholderListingComponent implements OnInit {
           if (element.IsOwner) {
             tempIsOwner = true;
           }
+          if (element.IsActive && element.IsSigner) {
+            tempIsSigner = true;
+          }
           if (element.CustNo) {
             this.listCustNoToExclude.push(element.CustNo);
           }
         }
         this.tempTotalSharePrct = tempTotalSharePrct;
         this.tempIsOwner = tempIsOwner;
+        this.tempIsSigner = tempIsSigner;
         this.inputGridObj.resultData["Data"] = new Array();
         this.inputGridObj.resultData.Data = this.tempShareholderListingObj;
       }
@@ -75,15 +81,12 @@ export class ShareholderListingComponent implements OnInit {
   addCustShareHolder(isAdd: boolean = true) {
     this.PageType = this.CustPageTypeHeader;
     if (isAdd) {
-      this.CustType = this.CustTypePersonal;
+      this.CustType = CommonConstant.CustomerPersonal;
       this.selectedCustId = 0;
       this.selectedCustCompanyMgmntShrholderId = 0;
     }
   }
 
-  readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
-  readonly CustTypeCoy: string = CommonConstant.CustomerCompany;
-  readonly CustTypePublic: string = CommonConstant.CustomerPublic;
   CustType: string = "";
   event(ev: { Key: string, RowObj: ShareholderListingObj }) {
     this.selectedCustCompanyMgmntShrholderId = ev.RowObj.CustCompanyMgmntShrholderId;
@@ -105,6 +108,10 @@ export class ShareholderListingComponent implements OnInit {
     }
     if (!this.tempIsOwner) {
       this.toastr.warningMessage(ExceptionConstant.Add_Min_1_Owner);
+      return;
+    }
+    if (!this.tempIsSigner) {
+      this.toastr.warningMessage(ExceptionConstant.Add_Min_1_Active_Signer);
       return;
     }
     if (this.tempTotalSharePrct != 100) {

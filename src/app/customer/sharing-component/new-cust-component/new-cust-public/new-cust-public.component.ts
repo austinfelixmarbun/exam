@@ -5,6 +5,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -32,12 +34,13 @@ export class NewCustPublicComponent implements OnInit {
   constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService,) { }
 
   readonly RefMasterTypeCodePublicType: string = CommonConstant.RefMasterTypeCodePublicType;
-  readonly RefMasterTypeCodePositionSlik: string = CommonConstant.RefMasterTypeCodePositionSlik;
 
   IsReady: boolean = false;
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     this.InitData();
-    this.initDdlRefMaster(this.RefMasterTypeCodePublicType, null, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodePublicType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodePublicType, null, true, URLConstant.GetListActiveRefMasterDetail);
+    this.GetCustAddrToCopy();
     await this.GetExisting();
     this.IsReady = true;
   }
@@ -50,7 +53,7 @@ export class NewCustPublicComponent implements OnInit {
       PublicName: [item == null ? '' : item.PublicName, Validators.required],
       PublicIdentityNo: [item == null ? '' : item.PublicIdentityNo, Validators.required],
       SharePrcnt: [item == null ? 0 : item.SharePrcnt, [Validators.required, Validators.min(0), Validators.max(100)]],
-      IsActive: [item == null ? false : item.IsActive, Validators.required],
+      IsActive: [item == null ? true : item.IsActive, Validators.required],
     });
 
     if (item != null) {
@@ -73,7 +76,7 @@ export class NewCustPublicComponent implements OnInit {
       //#region patch positionSlik    
       let reqMasterObj: ReqRefMasterByTypeCodeAndMasterCodeObj = {
         MasterCode: item.MrPositionSlikCode,
-        RefMasterTypeCode: this.RefMasterTypeCodePositionSlik
+        RefMasterTypeCode: CommonConstant.RefMasterTypeCodePositionSlik
       };
       this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).subscribe(
         (response: RefMasterObj) => {
@@ -91,28 +94,12 @@ export class NewCustPublicComponent implements OnInit {
   InitData() {
     this.ClearForm();
     this.inputAddressObj = NewCustSetData.BindSetLegalAddr();
+    this.inputAddressObj.showOwnership = false;
+    this.inputAddressObj.requiredOwnership = false;
     this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();
   }
 
-  //#region UcDDL
-  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
-  initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false) {
-    let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
-    let ReqRefMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: refMasterTypeCode,
-      MappingCode: mappingCode
-    }
-    tempDdlObj.apiUrl = URLConstant.GetListActiveRefMasterDetail;
-    tempDdlObj.requestObj = ReqRefMasterObj;
-    tempDdlObj.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
-    tempDdlObj.isSelectOutput = isSelectOutput;
-    tempDdlObj.isReady = true;
-    tempDdlObj.customKey = "MasterCode";
-    tempDdlObj.customValue = "Descr";
-    this.DictUcDDLObj[refMasterTypeCode] = tempDdlObj;
-  }
-  //#endregion
-
+  IsLockCopyAddrBtn: boolean = false;
   tempExisting: ShareholderPublicObj = new ShareholderPublicObj();
   async GetExisting() {
     if (this.CustCompanyMgmntShrholderId == 0) return;
@@ -120,8 +107,21 @@ export class NewCustPublicComponent implements OnInit {
       (response: ShareholderPublicObj) => {
         this.tempExisting = response;
         this.ClearForm(response);
+        this.IsLockCopyAddrBtn = true;
       }
     )
+  }
+
+  tempCustAddrToCopy: CustAddrObj = new CustAddrObj();
+  async GetCustAddrToCopy() {
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = this.CustId;
+    reqObj.Code = CommonConstant.CustAddrTypeLegal;
+    await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+      (response: CustAddrObj) => {
+        this.tempCustAddrToCopy = response;
+      }
+    );
   }
 
   SaveForm() {
@@ -140,6 +140,7 @@ export class NewCustPublicComponent implements OnInit {
       let tempTotalSharePrctTobeAdd = this.tempTotalSharePrct + reqSubmitObj.SharePrcnt;
       if (tempTotalSharePrctTobeAdd > 100) {
         this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_CAN_NOT_100);
+        this.toastr.warningMessage("Total Share now is " + this.tempTotalSharePrct + "%");
         return;
       }
     }
@@ -199,6 +200,23 @@ export class NewCustPublicComponent implements OnInit {
     }
     tempPublicIdentityNo.enable();
     tempPublicName.enable();
+  }
+
+  CopyLegalAddr() {
+    let inputFieldObj = new InputFieldObj();
+    inputFieldObj.inputLookupObj = new InputLookupObj();
+    inputFieldObj.inputLookupObj.isReadonly = false;
+    inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrToCopy.Zipcode;
+    inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrToCopy.Zipcode };
+    let tempUcAddObj: UcAddressObj = new UcAddressObj();
+    tempUcAddObj.AreaCode1 = this.tempCustAddrToCopy.AreaCode1;
+    tempUcAddObj.AreaCode2 = this.tempCustAddrToCopy.AreaCode2;
+    tempUcAddObj.AreaCode3 = this.tempCustAddrToCopy.AreaCode3;
+    tempUcAddObj.AreaCode4 = this.tempCustAddrToCopy.AreaCode4;
+    tempUcAddObj.Addr = this.tempCustAddrToCopy.Addr;
+    tempUcAddObj.City = this.tempCustAddrToCopy.City;
+    this.inputAddressObj.default = tempUcAddObj;
+    this.inputAddressObj.inputField = inputFieldObj;
   }
   //#endregion
 }

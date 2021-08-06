@@ -13,7 +13,7 @@ export class ExceptionConstant {
     public static WORKING_HOUR_CHECKING = 'Working Hour {0} {1} {2} Working Hour {3} {4}';
     public static TOTAL_SHARE_LEFT = "Total Share left is ";
     public static TOTAL_SHARE_MUST_100 = "Total Share % must be 100%";
-    public static TOTAL_SHARE_CAN_NOT_100 = "Total Share % can not more than 100%";
+    public static TOTAL_SHARE_CAN_NOT_100 = "Total Share can not more than 100%";
     public static MUST_HAVE_PARENT = "Must Have Parent";
     public static PLEASE_COMPLETE_RESIDENCE_ADDRESS = "Please complete Residence Address First";
     public static PLEASE_COMPLETE_BIZ_ADDRESS = "Please complete Business Address First";
@@ -21,6 +21,7 @@ export class ExceptionConstant {
     public static PLEASE_COMPLETE_LEGAL_AND_BIZ_ADDRESS = "Please Complete Legal and Business Address First";
     public static ADD_MIN_1_DATA = "Please select at least one Office";
     public static Add_Min_1_Owner = "Please Input at least 1 Owner";
+    public static Add_Min_1_Active_Signer = "Please Input at least 1 Active Signer";
     public static JOIN_DATE_MUST_LESS_THAN_ = "Join Date Must Be Lesser Than ";
     public static START_DATE_MUST_EQUAL_OR_MORE_THAN = "Start Date must be equal or more than ";
     public static END_DATE_MUST_EQUAL_OR_MORE_THAN = "End Date must be equal or more than";
@@ -50,5 +51,8 @@ export class ExceptionConstant {
     public static CURR_DT_VALIDATION = "Currency Date can not > Business Date or < Max Back Date";
     public static MIN_1_ATTR_VALUE = "Minimal 1 Attribute Value";
     public static DUPL_ATTR_VALUE = "Duplicate Attribute Value";
+    public static ISSUE_DT_MUST_LESS_EQ_THAN_BD = "Issue Date must be <= Business Date";
+    public static EXP_DT_MUST_HIGHER_THAN_BD = "Expired Date must be > Business Date";
+    public static DUPLICATE_LEGAL_DOC = "Document with Legal Document Type {0} and Document No {1} already exists";
 
 }

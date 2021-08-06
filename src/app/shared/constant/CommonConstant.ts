@@ -11,6 +11,10 @@ export class CommonConstant {
     public static MODULE_AMS = "AMS";
     public static MODULE_CMS = "CMS";
 
+    // MODE
+    public static MODE_ADD = "ADD";
+    public static MODE_EDIT = "EDIT";
+
     // APPLICATION DATA
     public static USER_ACCESS = "UserAccess";
     public static USER_NAME = "UserName";
@@ -24,6 +28,7 @@ export class CommonConstant {
     public static LAST_ACCESS_TIME = "LastAccessTime";
     public static MENU = "Menu"
     public static ReturnObj = 'ReturnObject';
+    public static Status = 'Status';
     public static ENVIRONMENT_MODULE = 'EnvironmentModule';
     public static OFFICE_CODE = 'OfficeCode';
     public static ROLE_CODE = 'RoleCode';

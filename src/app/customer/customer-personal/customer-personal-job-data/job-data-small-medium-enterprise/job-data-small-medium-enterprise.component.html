@@ -123,6 +123,18 @@
                 [submit]="enjiForm.submitted"></lib-uc-show-errors>
             </div>
           </div>
+
+          <div class="form-group row">
+            <label class="col-md-2" translate>Investment Type</label>
+            <div class="col-md-4">
+              <select class="form-control" formControlName="MrInvestmentTypeCode">
+                <option value="">--Select One--</option>
+                <option *ngFor="let item of InvestmentTypeObj" [value]="item.Key">
+                  {{item.Value}}
+                </option>
+              </select>
+            </div>
+          </div>
         </div>
 
         <lib-ucSubsection [id]="'jobAddrId'" [title]="'Job Address'" [panel]="'jobAddr'">

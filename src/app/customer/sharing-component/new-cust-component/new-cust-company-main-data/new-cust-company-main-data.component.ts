@@ -1,11 +1,7 @@
-import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { RegexService } from 'app/customer/regex.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -24,7 +20,6 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMas
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
-import { CookieService } from 'ngx-cookie';
 import { ShareholderFormComponent } from '../component/shareholder-form/shareholder-form.component';
 import { NewCustSetData } from '../NewCustSetData.Service';
 
@@ -60,36 +55,23 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   readonly CustTypeCoy: string = CommonConstant.CustomerCompany;
 
   readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
-  readonly CustDataModeFamily: string = CommonConstant.CustMainDataModeFamily;
   readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
   //#endregion
 
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     this.ClearCustForm();
     this.BindLookupExistingCust();
     this.InitCustMainDataMode();
-    this.BindSetLegalAddr();
+    this.inputAddressObj = NewCustSetData.BindSetLegalAddr();
     this.BindLookupSupplier();
-    this.initDdlRefMaster(this.RefMasterTypeCodeCompanyType);
-    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCompanyType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCompanyType);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
     await this.GetExistingData();
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
   }
   //#region Set Data
-  //#region UcAddress
-  BindSetLegalAddr() {
-    this.inputFieldObj = new InputFieldObj();
-    this.inputFieldObj.inputLookupObj = new InputLookupObj();
-    this.inputAddressObj = new InputAddressObj();
-    this.inputAddressObj.showSubsection = false;
-    this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.default = new UcAddressObj();
-    this.inputAddressObj.inputField = this.inputFieldObj;
-    this.inputAddressObj.showAllPhn = false;
-  }
-  //#endregion
-
   //#region UcLookup
   BindLookupSupplier() {
     this.inputLookupObj = new InputLookupObj();
@@ -108,9 +90,6 @@ export class NewCustCompanyMainDataComponent implements OnInit {
       case this.CustDataModeMain:
         this.CustNameLabel = "Customer";
         break;
-      case this.CustDataModeFamily:
-        this.CustNameLabel = "Family";
-        break;
       case this.CustDataModeShareholder:
         this.CustNameLabel = "Share Legal";
         break;
@@ -122,31 +101,15 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   BindLookupExistingCust() {
     if (this.CustDataMode == this.CustDataModeMain) return;
     this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerCompany);
-  }
-
-  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
-  initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, apiUrl: string = URLConstant.GetListActiveRefMaster, isSelectOutput: boolean = false) {
-    let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
-    let refMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: refMasterTypeCode,
-      MappingCode: mappingCode
-    };
-    tempDdlObj.apiUrl = apiUrl;
-    tempDdlObj.requestObj = refMasterObj;
-    tempDdlObj.customObjName = CommonConstant.ReturnObj;
-    tempDdlObj.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
-    tempDdlObj.isSelectOutput = isSelectOutput;
-    tempDdlObj.isReady = true;
-    this.DictUcDDLObj[refMasterTypeCode] = tempDdlObj;
+    if (this.CustId != 0) this.existingCustomerLookUpObj.isDisable = true;
   }
 
   ClearCustForm() {
     this.CustomerForm = this.fb.group({
-      CustModel: ['', [Validators.required]],
+      MrCustModelCode: [''],
       CustName: ['', [Validators.required]],
       MrCompanyTypeCode: ['', [Validators.required]],
       TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
-      IsAffiliateWithMf: [false],
 
       IsSupplier: [false],
       SupplCode: [''],
@@ -215,14 +178,17 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     this.inputAddressObj.inputField.inputLookupObj.isReadonly = true;
     this.inputAddressObj.inputField.inputLookupObj.isDisable = true;
 
-    this.CustomerForm.get("CustModel").disable();
+    this.CustomerForm.get("CustName").disable();
+    this.CustomerForm.get("MrCustModelCode").disable();
     this.CustomerForm.get("MrCompanyTypeCode").disable();
     this.CustomerForm.get("TaxIdNo").disable();
+    this.IsLockCopyAddrBtn = true;
   }
 
   CopyLegalAddr() {
     let inputFieldObj = new InputFieldObj();
     inputFieldObj.inputLookupObj = new InputLookupObj();
+    inputFieldObj.inputLookupObj.isReadonly = false;
     inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrToCopy.Zipcode;
     inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrToCopy.Zipcode };
     let tempUcAddObj: UcAddressObj = new UcAddressObj();
@@ -232,6 +198,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     tempUcAddObj.AreaCode4 = this.tempCustAddrToCopy.AreaCode4;
     tempUcAddObj.Addr = this.tempCustAddrToCopy.Addr;
     tempUcAddObj.City = this.tempCustAddrToCopy.City;
+    tempUcAddObj.MrHouseOwnershipCode = this.tempCustAddrToCopy.MrBuildingOwnershipCode;
     this.inputAddressObj.default = tempUcAddObj;
     this.inputAddressObj.inputField = inputFieldObj;
   }
@@ -260,7 +227,9 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     this.GetCustAddr();
     this.GetCustCompanyData();
 
-    this.IsLockEdit();
+    if (this.CustDataMode != CommonConstant.CustMainDataModeCust) {
+      this.IsLockEdit();
+    }
     this.IsLockCopyAddrBtn = true;
   }
 
@@ -272,7 +241,6 @@ export class NewCustCompanyMainDataComponent implements OnInit {
           CustName: this.custObj.CustName,
           MrCustTypeCode: this.custObj.MrCustTypeCode,
           TaxIdNo: this.custObj.TaxIdNo,
-          IsAffiliateWithMf: this.custObj.IsAffiliateWithMf,
           MrCustModelCode: this.custObj.MrCustModelCode,
         });
         this.existingCustomerLookUpObj.nameSelect = response.CustName;
@@ -299,8 +267,13 @@ export class NewCustCompanyMainDataComponent implements OnInit {
         tempUcAddObj.AreaCode4 = response.AreaCode4;
         tempUcAddObj.Addr = response.Addr;
         tempUcAddObj.City = response.City;
+        tempUcAddObj.MrHouseOwnershipCode = response.MrBuildingOwnershipCode;
         this.inputAddressObj.default = tempUcAddObj;
         this.inputAddressObj.inputField = this.inputFieldObj;
+
+        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
+          this.inputAddressObj.inputField.inputLookupObj.isReadonly = false;
+        }
       }
     );
   }
@@ -331,9 +304,8 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     reqSubmitObj.CustObj.CustName = tempForm["CustName"];
     reqSubmitObj.CustObj.TaxIdNo = tempForm["TaxIdNo"];
     reqSubmitObj.CustObj.IdNo = tempForm["TaxIdNo"];
-    reqSubmitObj.CustObj.MrCustModelCode = tempForm["CustModel"];
+    reqSubmitObj.CustObj.MrCustModelCode = tempForm["MrCustModelCode"];
     reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustTypeCompany;
-    reqSubmitObj.CustObj.IsAffiliateWithMf = tempForm["IsAffiliateWithMf"];
 
     reqSubmitObj.CustCompanyObj = this.tempCustCompanyObj;
     reqSubmitObj.CustCompanyObj.MrCompanyTypeCode = tempForm["MrCompanyTypeCode"];
@@ -346,6 +318,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     reqSubmitObj.CustAddr.AreaCode3 = tempForm["UcAddress"]["AreaCode3"];
     reqSubmitObj.CustAddr.AreaCode4 = tempForm["UcAddress"]["AreaCode4"];
     reqSubmitObj.CustAddr.City = tempForm["UcAddress"]["City"];
+    reqSubmitObj.CustAddr.MrBuildingOwnershipCode = tempForm["UcAddress"]["MrHouseOwnershipCode"];
     reqSubmitObj.CustAddr.Zipcode = tempForm["UcAddressZipcode"]["value"];
     reqSubmitObj.CustAddr.SubZipcode = tempForm["UcAddressZipcode"]["value"];
     reqSubmitObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
@@ -358,6 +331,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
         let tempTotalSharePrctTobeAdd = this.tempTotalSharePrct + reqSubmitObj.CustCompanyMgmntShrholderObj.SharePrcnt;
         if (tempTotalSharePrctTobeAdd > 100) {
           this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_CAN_NOT_100);
+          this.toastr.warningMessage("Total Share now is " + this.tempTotalSharePrct + "%");
           return;
         }
       }
@@ -370,9 +344,6 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     switch (this.CustDataMode) {
       case this.CustDataModeMain:
         reqSubmitObj.CustObj.IsCustomer = true;
-        break;
-      case this.CustDataModeFamily:
-        reqSubmitObj.CustObj.IsFamily = true;
         break;
       case this.CustDataModeShareholder:
         reqSubmitObj.CustObj.IsShareholder = true;
@@ -393,17 +364,5 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     tempReqObj.IsOwner = tempForm["IsOwner"];
 
     return tempReqObj
-  }
-  
-  getFormValidationErrors() {
-    const invalid = [];
-    const controls = this.CustomerForm.controls;
-    for (const name in controls) {
-      if (controls[name].invalid) {
-        invalid.push(name);
-        console.log(name);
-      }
-    }
-    console.log(invalid);
   }
 }

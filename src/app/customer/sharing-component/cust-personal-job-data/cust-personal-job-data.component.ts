@@ -22,6 +22,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
 import { CookieService } from 'ngx-cookie';
+import { NewCustSetData } from '../new-cust-component/NewCustSetData.Service';
 import { JobAddrSectionComponent } from './job-addr-section/job-addr-section.component';
 
 @Component({
@@ -36,20 +37,10 @@ export class CustPersonalJobDataComponent implements OnInit {
   CustomerJobForm: FormGroup = this.fb.group({});
   DictCustAddr: { [Id: string]: CustAddrObj } = {};
 
-  readonly RefMasterTypeCodeJobPosition: string = CommonConstant.RefMasterTypeCodeJobPosition;
   readonly RefMasterTypeCodeJobStat: string = CommonConstant.RefMasterTypeCodeJobStat;
   readonly RefMasterTypeCodeCoyScale: string = CommonConstant.RefMasterTypeCodeCoyScale;
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel; //mapping code CommonConstant.CustTypePersonal
   readonly RefMasterTypeCodeInvestmentType: string = CommonConstant.RefMasterTypeCodeInvestmentType;
-
-  readonly CustAddrTypeJob: string = CommonConstant.CustAddrTypeJob;
-  readonly CustAddrTypeOthBiz: string = CommonConstant.CustAddrTypeOthBiz;
-  readonly CustAddrTypePreJob: string = CommonConstant.CustAddrTypePreJob;
-
-  readonly CUST_MODEL_EMP: string = CommonConstant.CUST_MODEL_EMP;
-  readonly CUST_MODEL_PROF: string = CommonConstant.CUST_MODEL_PROF;
-  readonly CUST_MODEL_SME: string = CommonConstant.CUST_MODEL_SME;
-  readonly CUST_MODEL_NONPROF: string = CommonConstant.CUST_MODEL_NONPROF;
 
   private ucLookupProfession: UclookupgenericComponent;
   @ViewChild('LookupProfession') set content(content: UclookupgenericComponent) {
@@ -71,17 +62,17 @@ export class CustPersonalJobDataComponent implements OnInit {
 
   //#region Get
   businessDtMin: Date;
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   InitData() {
     this.BindLookupProfession();
     this.BindLookupCompany();
     this.BindLookupIndustry();
     this.BindLookupJobPosition();
 
-    this.initDdlRefMaster(this.RefMasterTypeCodeJobPosition);
-    this.initDdlRefMaster(this.RefMasterTypeCodeJobStat);
-    this.initDdlRefMaster(this.RefMasterTypeCodeCoyScale);
-    this.initDdlRefMaster(this.RefMasterTypeCodeInvestmentType);
-    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeJobStat] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeJobStat);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCoyScale] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCoyScale);
+    this.DictUcDDLObj[this.RefMasterTypeCodeInvestmentType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeInvestmentType);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel].ddlType = UcDropdownListConstant.DDL_TYPE_BLANK;
 
     this.ResetForm();
@@ -168,22 +159,6 @@ export class CustPersonalJobDataComponent implements OnInit {
     this.jobPositionLookupObj.genericJson = "./assets/uclookup/Customer/lookupJobPosition.json";
   }
   //#endregion
-
-  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
-  initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false) {
-    let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
-    let refMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: refMasterTypeCode,
-      MappingCode: mappingCode
-    };
-    tempDdlObj.apiUrl = URLConstant.GetListActiveRefMaster;
-    tempDdlObj.requestObj = refMasterObj;
-    tempDdlObj.customObjName = CommonConstant.ReturnObj;
-    tempDdlObj.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
-    tempDdlObj.isSelectOutput = isSelectOutput;
-    tempDdlObj.isReady = true;
-    this.DictUcDDLObj[refMasterTypeCode] = tempDdlObj;
-  }
   //#endregion
 
   tempCustPersonalJobDataObj: CustPersonalJobDataObj = new CustPersonalJobDataObj();
@@ -275,18 +250,18 @@ export class CustPersonalJobDataComponent implements OnInit {
     let tempForm: FormGroup = this.CustomerJobForm as FormGroup;
     this.ClearValidatorAllForm(tempForm);
     switch (tempCustModel) {
-      case this.CUST_MODEL_EMP:
+      case CommonConstant.CUST_MODEL_EMP:
         this.requiredInEmp(tempForm);
         this.CheckRequiredCompanyName();
         break;
-      case this.CUST_MODEL_SME:
+      case CommonConstant.CUST_MODEL_SME:
         this.requiredInSme(tempForm);
         this.CheckRequiredCompanyName();
         break;
-      case this.CUST_MODEL_PROF:
+      case CommonConstant.CUST_MODEL_PROF:
         this.requiredInProf();
         break;
-      case this.CUST_MODEL_NONPROF:
+      case CommonConstant.CUST_MODEL_NONPROF:
         this.requiredInNonProf(tempForm);
         break;
     }
@@ -306,7 +281,7 @@ export class CustPersonalJobDataComponent implements OnInit {
     let tempIsWellknownCoy: boolean = this.CustomerJobForm.get("IsWellknownCoy").value;
 
     if (tempIsWellknownCoy) {
-      if (tempCustModel == this.CUST_MODEL_EMP || tempCustModel == this.CUST_MODEL_SME) {
+      if (tempCustModel == CommonConstant.CUST_MODEL_EMP || tempCustModel == CommonConstant.CUST_MODEL_SME) {
         this.companyLookupObj.isRequired = true;
         tempMrWellknownCoyCode.setValidators(Validators.required);
         tempCoyName.setValidators(Validators.required);
@@ -428,10 +403,10 @@ export class CustPersonalJobDataComponent implements OnInit {
     let reqObjSave: RequestCustPersonalJobDataObj = new RequestCustPersonalJobDataObj();
     reqObjSave.CustPersonalJobData = this.SetReqObjPersonalJobSave(tempCustModel);
 
-    if (tempCustModel != this.CUST_MODEL_NONPROF) {
-      reqObjSave.JobAddr = this.SetAddrObj(this.CustAddrTypeJob);
-      reqObjSave.OthBizAddr = this.SetAddrObj(this.CustAddrTypeOthBiz);
-      reqObjSave.PreJobAddr = this.SetAddrObj(this.CustAddrTypePreJob);
+    if (tempCustModel != CommonConstant.CUST_MODEL_NONPROF) {
+      reqObjSave.JobAddr = this.SetAddrObj(CommonConstant.CustAddrTypeJob);
+      reqObjSave.OthBizAddr = this.SetAddrObj(CommonConstant.CustAddrTypeOthBiz);
+      reqObjSave.PreJobAddr = this.SetAddrObj(CommonConstant.CustAddrTypePreJob);
     }
     // console.log(reqObjSave);
     let urlSave: string = URLConstant.AddCustPersonalJobData;
@@ -451,7 +426,7 @@ export class CustPersonalJobDataComponent implements OnInit {
     tempPersonalJob.RowVersion = this.tempCustPersonalJobDataObj.RowVersion;
     tempPersonalJob.CustId = this.CustId;
     tempPersonalJob.RefProfessionId = tempForm["RefProfessionId"];
-    if (CustModel != this.CUST_MODEL_NONPROF) {
+    if (CustModel != CommonConstant.CUST_MODEL_NONPROF) {
       tempPersonalJob.RefIndustryTypeId = tempForm["RefIndustryTypeId"];
       tempPersonalJob.JobTitleName = tempForm["JobTitleName"];
       tempPersonalJob.PrevCoyName = tempForm["PrevCoyName"];
@@ -462,7 +437,7 @@ export class CustPersonalJobDataComponent implements OnInit {
       tempPersonalJob.OthBizType = tempForm["OthBizType"];
       tempPersonalJob.OthBizJobPosition = tempForm["OthBizJobPosition"];
 
-      if (CustModel == this.CUST_MODEL_PROF) {
+      if (CustModel == CommonConstant.CUST_MODEL_PROF) {
         tempPersonalJob.ProfessionalNo = tempForm["ProfessionalNo"];
       } else {
         tempPersonalJob.IsWellknownCoy = tempForm["IsWellknownCoy"];
@@ -472,10 +447,10 @@ export class CustPersonalJobDataComponent implements OnInit {
         tempPersonalJob.MrCoyScaleCode = tempForm["MrCoyScaleCode"];
         tempPersonalJob.NoOfEmploy = tempForm["NoOfEmploy"];
 
-        if (CustModel == this.CUST_MODEL_SME) {
+        if (CustModel == CommonConstant.CUST_MODEL_SME) {
           tempPersonalJob.MrInvestmentTypeCode = tempForm["MrInvestmentTypeCode"];
         }
-        if (CustModel == this.CUST_MODEL_EMP) {
+        if (CustModel == CommonConstant.CUST_MODEL_EMP) {
           tempPersonalJob.EmploymentEstablishmentDt = tempForm["EmploymentEstablishmentDt"];
           tempPersonalJob.MrJobStatCode = tempForm["MrJobStatCode"];
           tempPersonalJob.IsMfEmp = tempForm["IsMfEmp"];

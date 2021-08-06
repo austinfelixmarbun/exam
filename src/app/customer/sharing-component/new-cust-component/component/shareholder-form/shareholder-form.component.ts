@@ -37,8 +37,7 @@ export class ShareholderFormComponent implements OnInit {
   @Output() outputChange: EventEmitter<{Key: string, Code: string}> = new EventEmitter();
 
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
-  readonly CustTypeCoy: string = CommonConstant.CustomerCompany;
-
+  
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
 
   private ucLookupProfession: UclookupgenericComponent;
@@ -50,10 +49,11 @@ export class ShareholderFormComponent implements OnInit {
   constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
 
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     this.InitData();
-    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, null, true);
     await this.GetExistingShareholder();
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
     await this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;
     this.positionSlikLookUpObj.isReady = true;
@@ -65,10 +65,12 @@ export class ShareholderFormComponent implements OnInit {
   businessDtMin: Date;
   InitData() {
     this.parentForm.addControl("MrPositionSlikCode", this.fb.control(''));
+    this.parentForm.get("MrPositionSlikCode").setValidators([Validators.required]);
+    this.parentForm.get("MrPositionSlikCode").updateValueAndValidity();
     this.parentForm.addControl("SharePrcnt", this.fb.control(0));
     this.parentForm.get("SharePrcnt").setValidators([Validators.min(0), Validators.max(100)]);
     this.parentForm.get("SharePrcnt").updateValueAndValidity();
-    this.parentForm.addControl("IsActive", this.fb.control(false));
+    this.parentForm.addControl("IsActive", this.fb.control(true));
     this.parentForm.addControl("IsOwner", this.fb.control(false));
     if (this.CustType == this.CustTypePersonal) {
       this.parentForm.addControl("MrJobPositionCode", this.fb.control(''));
@@ -76,13 +78,6 @@ export class ShareholderFormComponent implements OnInit {
       this.parentForm.addControl("EstablishmentDt", this.fb.control(''));
       this.parentForm.addControl("RefProfessionId", this.fb.control(0));
       this.parentForm.addControl("MrJobProfessionCode", this.fb.control(''));
-      this.parentForm.addControl("MrCustModelCode", this.fb.control(''));
-      this.parentForm.addControl("MobilePhnNo1", this.fb.control(''));
-      this.parentForm.get("MobilePhnNo1").setValidators([Validators.pattern("^[0-9]+$")]);
-      this.parentForm.get("MobilePhnNo1").updateValueAndValidity();
-      this.parentForm.addControl("Email1", this.fb.control(''));
-      this.parentForm.get("Email1").setValidators([Validators.pattern(CommonConstant.regexEmail)]);
-      this.parentForm.get("Email1").updateValueAndValidity();
     }
     this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();
     this.BindLookupProfession();
@@ -90,22 +85,6 @@ export class ShareholderFormComponent implements OnInit {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
-  }
-
-  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
-  initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false) {
-    let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
-    let ReqRefMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: refMasterTypeCode,
-      MappingCode: mappingCode
-    }
-    tempDdlObj.apiUrl = URLConstant.GetListActiveRefMaster;
-    tempDdlObj.requestObj = ReqRefMasterObj;
-    tempDdlObj.customObjName = CommonConstant.ReturnObj;
-    tempDdlObj.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
-    tempDdlObj.isSelectOutput = isSelectOutput;
-    tempDdlObj.isReady = true;
-    this.DictUcDDLObj[refMasterTypeCode] = tempDdlObj;
   }
 
   jobPositionLookupObj: InputLookupObj = new InputLookupObj();
@@ -200,16 +179,16 @@ export class ShareholderFormComponent implements OnInit {
     });
     this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: event.ProfessionCode});
   }
-
-  changeCustModel() {
-    this.ResetLookupProfession();
-    this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: ""});
-  }
   
   getLookUpJobPosition(ev) {
     this.parentForm.patchValue({
       MrJobPositionCode: ev.JobCode,
     });
+  }
+  
+  changeCustModel() {
+    this.ResetLookupProfession();
+    this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: ""});
   }
   
   ResetLookupProfession(valueCode: string = null, valueDesc: string = ""){

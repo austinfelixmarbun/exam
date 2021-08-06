@@ -122,6 +122,7 @@ import { CustomerViewCustomerAssetComponent } from './customer-view/customer-vie
 import { NewCustomerSharingModule } from './sharing-component/new-cust-sharing.model';
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -161,6 +162,7 @@ export const customCurrencyMaskConfig = {
     UcShowErrorsModule,
     MatTabsModule,
     UcuploadModule,
+    NgMultiSelectDropDownModule,
     NewCustomerSharingModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     UcdropdownlistModule

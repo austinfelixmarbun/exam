@@ -27,10 +27,6 @@ export class JobAddrSectionComponent implements OnInit {
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
 
-  readonly CustAddrTypeJob: string = CommonConstant.CustAddrTypeJob;
-  readonly CustAddrTypeOthBiz: string = CommonConstant.CustAddrTypeOthBiz;
-  readonly CustAddrTypePreJob: string = CommonConstant.CustAddrTypePreJob;
-
   constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
 
   ngOnInit() {
