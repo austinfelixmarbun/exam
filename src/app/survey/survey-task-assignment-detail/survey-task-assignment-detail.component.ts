@@ -10,6 +10,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { ReqSrvyTaskAndSendToMobileObj } from 'app/shared/model/Request/ReqSrvyTaskAndSendToMobileObj.Model';
 import { SrvyTaskObj } from 'app/shared/model/SrvyTaskObj.Model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -27,6 +28,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   readonly ViewLink: string = NavigationConstant.VIEW_SRVY_TASK;
   readonly ViewCustLink: string = NavigationConstant.VIEW_CUST;
 
+  reqSrvyTaskAndSendToMobile: ReqSrvyTaskAndSendToMobileObj = new ReqSrvyTaskAndSendToMobileObj();
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   lookupSurveyorObj: InputLookupObj = new InputLookupObj();
   surveyOrderId: number;
@@ -36,6 +38,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   srvyTaskObj: SrvyTaskObj;
   reqListSrvyTaskObj: Array<SrvyTaskObj>;
   refOfficeId: any;
+  username: string;
 
   //Dropdowns
   dropdownSurveyType: any;
@@ -240,8 +243,11 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
 
       this.reqListSrvyTaskObj.push(this.srvyTaskObj);
     }
+    const getuserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.reqSrvyTaskAndSendToMobile.Username = getuserAccess.UserName;
+    this.reqSrvyTaskAndSendToMobile.ReqListSrvyTaskObjs = this.reqListSrvyTaskObj;
 
-    this.httpClient.post(URLConstant.EditSrvyTask, { reqListSrvyTaskObjs: this.reqListSrvyTaskObj }).subscribe(
+    this.httpClient.post(URLConstant.EditSrvyTaskAndSendToMobile, this.reqSrvyTaskAndSendToMobile).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEY_TASK_ASSIGNMENT_PAGING], {});
