@@ -12,6 +12,7 @@ import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 import { String } from 'typescript-string-operations';
 
@@ -32,6 +33,11 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
     this.inputPagingObj._url = "./assets/ucpaging/dealer-grading/searchDealerGradingApproval.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/dealer-grading/searchDealerGradingApproval.json";
 
+    if(environment.isCore){
+      this.inputPagingObj._url = "./assets/ucpaging/dealer-grading/V2/searchDealerGradingApprovalV2.json";
+      this.inputPagingObj.pagingJson = "./assets/ucpaging/dealer-grading/V2/searchDealerGradingApprovalV2.json";
+    }
+    
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
     critObj.DataType = 'text';
