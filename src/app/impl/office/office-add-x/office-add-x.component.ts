@@ -21,7 +21,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { OfficeObjX } from 'app/impl/shared/model/OfficeObjX.model';
 
 @Component({
   selector: 'app-office-add-x',
@@ -77,7 +76,7 @@ export class OfficeAddXComponent implements OnInit {
   isActive: boolean = true;
   isAllowAppCreated: boolean = true;
   officeClose: boolean = true;
-  officeObj: OfficeObjX;
+  officeObj: OfficeObj;
   refMasterObj: RefMasterObj;
   refMasterOfficeType: RefMasterObj;
   refMasterCgType: RefMasterObj;
@@ -264,7 +263,7 @@ export class OfficeAddXComponent implements OnInit {
       this.OfficeForm.controls["OfficeCode"].disable();
       this.OfficeForm.controls["OfficeType"].disable();
       this.OfficeForm.controls["MrCenterGrpTypeCode"].disable();
-      this.officeObj = new OfficeObjX();
+      this.officeObj = new OfficeObj();
       this.addressObj = new UcAddressObj();
       this.officeObj.RefOfficeId = this.RefOfficeId;
       this.httpClient.post(URLConstant.GetRefOfficeByRefOfficeId, {Id : this.RefOfficeId}).subscribe(
@@ -436,7 +435,7 @@ export class OfficeAddXComponent implements OnInit {
   }
 
   SaveForm(): void {
-    this.officeObj = new OfficeObjX();
+    this.officeObj = new OfficeObj();
     this.officeObj.RowVersion = "";
 
     this.officeObj.OfficeCode = this.OfficeForm.value.OfficeCode;
@@ -499,9 +498,13 @@ export class OfficeAddXComponent implements OnInit {
     this.officeXObj.RefTaxOfficeXId = this.OfficeForm.controls["TaxOffice"].value;
     this.officeXObj.NationalCourtOffice = this.OfficeForm.controls["NationalCourtOffice"].value;
 
-    this.officeObj.RefOfficeObjX = this.officeXObj;
+
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstantX.AddRefOfficeX, this.officeObj).subscribe(
+      var obj = {
+        RefOfficeObj: this.officeObj,
+        RefOfficeObjX: this.officeXObj
+      }
+      this.httpClient.post(URLConstantX.AddRefOfficeX, obj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
@@ -513,8 +516,11 @@ export class OfficeAddXComponent implements OnInit {
       this.officeObj.MrOfficeTypeCode = this.resultData.MrOfficeTypeCode
       this.officeObj.RefOfficeId = this.resultData.RefOfficeId;
       this.officeObj.RowVersion = this.resultData.RowVersion;
-
-      this.httpClient.post(URLConstantX.EditRefOfficeX, this.officeObj).subscribe(
+      var obj = {
+        RefOfficeObj: this.officeObj,
+        RefOfficeObjX: this.officeXObj
+      }
+      this.httpClient.post(URLConstantX.EditRefOfficeX, obj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
