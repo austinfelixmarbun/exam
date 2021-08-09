@@ -533,7 +533,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   outputChangeReceived(ev: { Key: string, Code: string }) {
     switch (ev.Key) {
       case CommonConstant.CUST_CHANGE_PROFESSION:
-        this.ChangeProffession(ev.Code);
+        this.ChangeProfession(ev.Code);
         break;
     }
   }
@@ -545,11 +545,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     if (this.CustDataMode == this.CustDataModeFamily) {
       this.familyForm.ResetLookupProfession();
     }
-    this.ChangeProffession("");
+    this.ChangeProfession("");
   }
 
   //profession
-  ChangeProffession(code: string) {
+  ChangeProfession(code: string) {
     if (this.CustDataMode == this.CustDataModeMain) return;
     this.custAttrForm.SetSearchListInputType(CommonConstant.AttrCodeDeptAml, code);
     this.custAttrForm.ResetValueFromAttrCode(CommonConstant.AttrCodeDeptAml);

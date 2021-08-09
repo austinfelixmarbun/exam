@@ -41,7 +41,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
   LocalCountry: any;
   tempCountryCode: any;
   tempNationality: any;
-  tempCustPersonalObj: CustPersonalObj;
+  tempCustPersonalObj: CustPersonalObj = new CustPersonalObj();
   tempMrMaritalStatCode: any;
 
   Page: String;
