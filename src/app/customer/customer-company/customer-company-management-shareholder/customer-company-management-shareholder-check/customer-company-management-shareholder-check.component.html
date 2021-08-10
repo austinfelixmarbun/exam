@@ -36,8 +36,14 @@
   </tbody>
   <tbody>
     <tr *ngFor="let item of tempListCompanyManagementShareholder">
-      <td class="text-left">{{item.MrNegCustTypeCode}}</td>
-      <td class="text-left" *ngIf="item.ShareholderCustNo != null" style="color: blue; cursor: pointer; text-align: left;"><a (click)="openView(item.ShareholderCustNo)">{{item.MgmntShrholderName}}</a></td>
+      <!-- NOTES: JANGAN DIUBAH KE CORE -->
+      <!-- <td class="text-left">{{item.MrNegCustTypeCode}}</td> -->
+      <td class="text-left">
+        <span [ngStyle]="{'color': item.MrNegCustTypeCode === null || item.MrNegCustTypeCode === 'GOOD' ? 'green' : item.MrNegCustTypeCode === 'WARNING' ? 'yellow' : 'red'}">
+          <i class="font-medium-3 fa fa-circle"></i>
+        </span>
+      </td>
+      <td class="text-left" *ngIf="item.ShareholderCustNo != null"><a (click)="openView(item.ShareholderCustNo)">{{item.MgmntShrholderName}}</a></td>
       <td class="text-left" *ngIf="item.ShareholderCustNo == null">{{item.MgmntShrholderName}}</td>
       <td class="text-left">{{item.MrCustTypeCode}}</td>
       <td class="text-left">{{item.MrCustModelCode}}</td>

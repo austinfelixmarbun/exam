@@ -15,6 +15,7 @@ import { CookieService } from 'ngx-cookie';
 import { PathConstant } from 'app/shared/PathConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ResSysConfigResultObj } from 'app/shared/model/Response/ResSysConfigResultObj,model';
+import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 @Component({
   selector: 'app-customer-personal-page',
   templateUrl: './customer-personal-page.component.html',
@@ -27,7 +28,7 @@ export class CustomerPersonalPageComponent implements OnInit {
   IdCust: number;
   CustPersonalId: number;
   CustStepIndex: number;
-
+  isMarried: boolean = false;
   isJob: boolean;
   isGroup: boolean;
   isOther: boolean;
@@ -100,6 +101,14 @@ export class CustomerPersonalPageComponent implements OnInit {
           this.dmsObj.MetadataParent = null;
           this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, response["CustNo"]));
           this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));   
+        }
+      );
+
+      await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).toPromise().then(
+        (response) => {
+          if(response.MrMaritalStatCode == CommonConstant.MasteCodeMartialStatsMarried){
+            this.isMarried = true;
+          }
         }
       );
     }

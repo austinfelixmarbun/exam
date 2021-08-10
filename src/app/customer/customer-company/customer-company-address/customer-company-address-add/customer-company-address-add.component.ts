@@ -38,6 +38,12 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   IdCust: number;
   pageType: string;
 
+  listAddrRequiredOwnership: Array<string> = [
+    CommonConstant.CustAddrTypeBiz,
+    CommonConstant.CustAddrTypeCompany,
+    CommonConstant.CustAddrTypeLegal
+  ]
+
   CustDataCompanyForm = this.fb.group({
     Notes: [''],
     LuasBangunan: [''],
@@ -79,6 +85,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
         this.CustDataCompanyForm.patchValue({
           MrCustAddrTypeCode: this.listAddressType[0].Key
         })
+        this.setOwnership(this.CustDataCompanyForm.controls.MrCustAddrTypeCode.value);
       }
     );
 
@@ -130,6 +137,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
           this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.copyCustomerAddr.Zipcode };
           this.inputAddressObj.default = this.addressObj;
           this.inputAddressObj.inputField = this.inputFieldAddressObj;
+          this.setOwnership(this.CustDataCompanyForm.controls.MrCustAddrTypeCode.value);
         }
       );
     }
@@ -139,6 +147,18 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.inputAddressObj.title = "Customer Address";
     this.inputAddressObj.showOwnership = true;
     this.inputAddressObj.requiredPhn1 = true;
+  }
+
+  checkCustAddrType() {
+    this.setOwnership(this.CustDataCompanyForm.controls.MrCustAddrTypeCode.value);
+  }
+
+  setOwnership(MrCustAddrTypeCode: string) {
+    if(this.listAddrRequiredOwnership.find(addrType => addrType == MrCustAddrTypeCode)){
+      this.inputAddressObj.requiredOwnership = true;
+      return
+    }
+    this.inputAddressObj.requiredOwnership = false;
   }
 
   copyAddress() {

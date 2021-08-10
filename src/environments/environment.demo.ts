@@ -9,7 +9,7 @@ export const environment = {
   LosURL: 'http://r3web.ad-ins.com/LOS_DEMO/',
   FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_DEMO',
   WebSocketURL : 'http://r3app-server.ad-ins.com/FOUNDATION_DEMO',
-  losR3Web: 'http://r3web-server/LOSR3',
+  losR3Web: 'http://r3web-server.ad-ins.com/LOS_DEMO',
   lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS',
   Module:"FOU",
   ApprovalURL : 'http://r3app-server.ad-ins.com/APPROVAL_DEMO',

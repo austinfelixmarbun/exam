@@ -38,8 +38,6 @@ export class VendorGroupmemberComponent implements OnInit {
 
   ngOnInit() {
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/vendorGrpMbrTempPaging.json";
-    this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/vendorGrpMbrTempPaging.json";
 
     var crit1Obj = new CriteriaObj();

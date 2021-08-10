@@ -14,6 +14,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 
 @Component({
   selector: 'app-holiday-detail',
@@ -23,7 +24,7 @@ export class HolidayDetailComponent implements OnInit {
   HolidaySchmHIdCopy: string;
   HolidaySchmHId: string;
   inputPagingObjHolidayScheme: InputLookupObj;
-  inputPagingObjHolidayDetail: any;
+  inputPagingObjHolidayDetail: UcPagingObj = new UcPagingObj();
   copyHoliday: any;
   title: string = "Copy Holiday Scheme";
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
@@ -55,15 +56,10 @@ export class HolidayDetailComponent implements OnInit {
     this.inputPagingObjHolidayScheme.addCritInput = new Array();
     this.inputPagingObjHolidayScheme.addCritInput.push(critInputNotIn);
     this.inputPagingObjHolidayScheme.urlJson = "./assets/lookup/lookupHolidayScheme.json";
-    this.inputPagingObjHolidayScheme.urlQryPaging = "/Generic/GetPagingObjectBySQL";
-    this.inputPagingObjHolidayScheme.urlEnviPaging = environment.FoundationR3Url;
     this.inputPagingObjHolidayScheme.pagingJson = "./assets/lookup/lookupHolidayScheme.json";
     this.inputPagingObjHolidayScheme.genericJson = "./assets/lookup/lookupHolidayScheme.json";
     this.inputPagingObjHolidayScheme.isRequired = false;
-    this.inputPagingObjHolidayDetail = new InputSearchObj();
     this.inputPagingObjHolidayDetail._url = "./assets/ucpaging/searchHolidayDetail.json";
-    this.inputPagingObjHolidayDetail.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObjHolidayDetail.apiQryPaging = "/Generic/GetPagingObjectBySQL";
     this.inputPagingObjHolidayDetail.pagingJson = "./assets/ucpaging/searchHolidayDetail.json";
     this.inputPagingObjHolidayDetail.deleteUrl = URLConstant.DeleteHolidaySchmD;
     this.inputPagingObjHolidayDetail.addCritInput = new Array();

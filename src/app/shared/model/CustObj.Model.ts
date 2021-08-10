@@ -1,19 +1,19 @@
 import { CustAddrObj } from "./CustAddrObj.Model";
 
-export class CustObj{
-    CustId : number;
-    CustNo : string;
-    CustName : string;
-    MrCustTypeCode :string;
+export class CustObj {
+    CustId: number;
+    CustNo: string;
+    CustName: string;
+    MrCustTypeCode: string;
     MrCustModelCode: string;
-    MrIdTypeCode : string;
-    IdNo:string;
-    IdExpiredDt:Date;
-    TaxIdNo :string;
-    IsVip : boolean;
-    IsAffiliateWithMf :boolean;
-    VipNotes :string;
-    OriginalOfficeCode:string;
+    MrIdTypeCode: string;
+    IdNo: string;
+    IdExpiredDt: Date;
+    TaxIdNo: string;
+    IsVip: boolean;
+    IsAffiliateWithMf: boolean;
+    VipNotes: string;
+    OriginalOfficeCode: string;
     RowVersion: string;
     CustAddr: CustAddrObj;
     IsCustomer: boolean;
@@ -21,5 +21,14 @@ export class CustObj{
     IsGuarantor: boolean;
     IsShareholder: boolean;
 
-    constructor(){this.CustAddr = new CustAddrObj()}
+    constructor() {
+        this.CustId = 0;
+        this.CustAddr = new CustAddrObj();
+        this.IsCustomer = false;
+        this.IsFamily = false;
+        this.IsGuarantor = false;
+        this.IsShareholder = false;
+        this.CustNo = "";
+        this.RowVersion = "";
+    }
 }

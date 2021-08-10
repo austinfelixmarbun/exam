@@ -1,11 +1,19 @@
 
 export class CommonConstant {
 
+    // REGEX
+    public static regexAPI = "\\/[v,V][1-9]\\d*(\\.[1-9]\\d*)*";
+    public static regexEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
+
     // MODULE
     public static MODULE_LOS = "LOS";
     public static MODULE_LMS = "LMS";
     public static MODULE_AMS = "AMS";
     public static MODULE_CMS = "CMS";
+
+    // MODE
+    public static MODE_ADD = "ADD";
+    public static MODE_EDIT = "EDIT";
 
     // APPLICATION DATA
     public static USER_ACCESS = "UserAccess";
@@ -20,12 +28,25 @@ export class CommonConstant {
     public static LAST_ACCESS_TIME = "LastAccessTime";
     public static MENU = "Menu"
     public static ReturnObj = 'ReturnObject';
+    public static Status = 'Status';
     public static ENVIRONMENT_MODULE = 'EnvironmentModule';
     public static OFFICE_CODE = 'OfficeCode';
+    public static ROLE_CODE = 'RoleCode';
+
+    //CUST MAIN DATA MODE
+    public static CustMainDataModeCust = "CUST";
+    public static CustMainDataModeFamily = "FAMILY";
+    public static CustMainDataModeMgmntShrholder = "SHAREHOLDER";
+    
+    //CUST MAIN Page Type
+    public static CustPageTypeHeader = "HEADER";
+    public static CustPageTypeDupCheck = "DUP_CHECK";
+    public static CustPageTypePaging = "PAGING";
 
     // Customer Type
     public static CustomerPersonal = "PERSONAL";
     public static CustomerCompany = "COMPANY";
+    public static CustomerPublic = "PUBLIC";
 
     public static MR_MARITAL_STAT_CODE_MARRIED = "MARRIED";
     public static MR_MARITAL_STAT_CODE_SINGLE = "SINGLE";
@@ -72,7 +93,7 @@ export class CommonConstant {
     // NOTIFICATION METHOD
     public static NotificationMethodIntLink = "INT_LINK";
     public static NotificationMethodExtLink = "EXT_LINK";
-    
+
     //OFFICE TYPE
     public static HeadOffice = "HO";
     public static CollectionGroup = "CG";
@@ -90,12 +111,14 @@ export class CommonConstant {
     public static RefMasterTypeCodeCustPersonalRelationship = "CUST_PERSONAL_RELATIONSHIP";
     public static RefMasterTypeCodeCustRelationship = "CUST_RELATIONSHIP";
     public static RefMasterTypeCodeCustType = "CUST_TYPE";
+    public static RefMasterTypeCodeShareholderCustType = "SHR_TYPE";
     public static RefMasterTypeCodeLegalDocType = "LEGAL_DOC_TYPE";
     public static RefMasterTypeCodeCustAddrType = "CUST_ADDR_TYPE";
     public static RefMasterTypeCodeAddrType = "ADDR_TYPE";
     public static RefMasterTypeCodeJobPosition = "JOB_POSITION";
     public static RefMasterTypeCodeGender = "GENDER";
     public static RefMasterTypeCodeCustModel = "CUST_MODEL"
+    public static RefMasterTypeCodeInvestmentType = "INVESTMENT_TYPE"
     public static RefMasterTypeCodeCompanyType = "COMPANY_TYPE";
     public static RefMasterTypeCodeIdType = "ID_TYPE";
     public static RefMasterTypeCodeNationality = "NATIONALITY";
@@ -142,22 +165,28 @@ export class CommonConstant {
     public static RefMasterTypeCodeEntityTypeSuppl = "SUPPL";
     public static RefMasterTypeCodeEntityTypeOffice = 'OFFICE';
 
+    public static RefMasterTypeCodePublicType = "PUBLIC_TYPE";
+    public static RefMasterTypeCodePositionSlik = "POSITION_SLIK";
     public static RefMasterTypeCodeAppSrcType = "APP_SRC_TYPE";
-    
+
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
-    
+
     // GENERAL SETTING CODE
     public static GSCodeDefLocalNationality = "DEF_LOCAL_NATIONALITY";
     public static GsCodePasswordRegex = "PASSWORD_REGEX";
-    public static GSCodeIsShowCbxBorrow = "IS_SHOW_CBX_BORROW"; 
+    public static GSCodeIsShowCbxBorrow = "IS_SHOW_CBX_BORROW";
     public static GSCodeIsShowCbxPledge = "IS_SHOW_CBX_PLEDGE";
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
-    
+
     // CUST TYPE
     public static CustTypePersonal = "PERSONAL";
     public static CustTypeCompany = "COMPANY";
+    
+    // CUST GENDER
+    public static GENDER_MALE = "MALE";
+    public static GENDER_FEMALE = "FEMALE";
 
     // CUST ADDR TYPE 
     public static CustAddrTypeLegal = "LEGAL";
@@ -168,6 +197,7 @@ export class CommonConstant {
     public static CustAddrTypeJob = "JOB";
     public static CustAddrTypeOthBiz = "OTH_BIZ";
     public static CustAddrTypePreJob = "PREV_JOB";
+    public static CustAddrTypeBiz = "BIZ";
 
     // ADDR TYPE 
     public static AddrTypeLegal = "LEGAL";
@@ -187,6 +217,12 @@ export class CommonConstant {
 
     //Attribute Type Code
     public static AttrTypeCodeMaster = "MASTER";
+
+    //Martial Status
+    public static MasteCodeMartialStatsMarried = "MARRIED";
+
+    //Relationship Code
+    public static MasteCodeRelationshipSpouse = "SPOUSE";
 
     // ID TYPE
     public static MrIdTypeCodeEKTP = "EKTP";
@@ -227,7 +263,22 @@ export class CommonConstant {
     public static CFNEWCAR = "CFNEWCAR";
     public static CFNA = "CFNA";
 
-    //ATTR GROUP
+    //ATTR CODE
+    public static AttrCodeDeptAml = "DEPT_AML";
+    public static AttrCodeAuthAml = "AUTH_AML";
+
+    //outputChange
+    public static CUST_CHANGE_PROFESSION = "PROFESSION";
+    
+    //ATTR Input Type
+    public static AttrInputTypeDate = "D";
+    public static AttrInputTypeNum = "N";
+    public static AttrInputTypeNumPerc = "P";
+    public static AttrInputTypeList = "L";
+    public static AttrInputTypeSearchList = "SL";
+    public static AttrInputTypeText = "T";
+    public static AttrInputTypeTextArea = "TA";
+    public static AttrInputTypeRefMaster = "RM";
 
     public static RefMasterTypeCustAsset = "CUST_ASSET_TYPE";
     //DMS
@@ -268,7 +319,7 @@ export class CommonConstant {
     //Sys Config
     public static ConfigCodeIsUseDms = "IS_USE_DMS";
     public static JOURNAL_STAT_EXE_DESCR = "EXECUTED";
-    public static VENDOR_GRD_SUPPL_BRC_APV_TYPE = "VENDOR_GRD_SUPPL_BRC_APV_TYPE"; 
+    public static VENDOR_GRD_SUPPL_BRC_APV_TYPE = "VENDOR_GRD_SUPPL_BRC_APV_TYPE";
     public static GS_IS_CUST_THIRD_PARTY_CHECK = "IS_CUST_THIRD_PARTY_CHECK";
     public static GS_MAX_DAYS_CUST_THIRD_PARTY_CHECK = "MAX_DAYS_CUST_THIRD_PARTY_CHECK";
 
@@ -277,19 +328,35 @@ export class CommonConstant {
     public static SCHM_CODE_APV_OFR_ACT_SCHM = "APV_OFR_ACT_SCHM";
     public static SCHM_CODE_APV_OFR_DEACT_SCHM = "APV_OFR_DEACT_SCHM";
     public static VENDOR_GRD_SUPPL_BRC_SCHM = "VENDOR_GRD_SUPPL_BRC_SCHM"
-    
+
 
     public static CAT_CODE_PRD_HO_APV = "PRD_HO_APV";
     public static CAT_CODE_PRD_HO_DEACT_APV = "PRD_HO_DEACT_APV";
     public static CAT_CODE_PRD_OFR_APV = "PRD_OFR_APV";
     public static CAT_CODE_VENDOR_GRADING_APV = "VENDOR_GRADING_APV";
-    
+
     public static CAT_CODE_PRD_OFR_DEACT_APV = "PRD_OFR_DEACT_APV";
     public static PRD_HO_APV_TYPE = "PROD_HO_APV_TYPE";
     public static PRD_HO_DEACT_APV_TYPE = "PROD_HO_DEACT_APV_TYPE";
     public static PRD_OFR_APV_TYPE = "PROD_OFR_APV_TYPE";
-    public static PRD_OFR_DEACT_APV_TYPE = "PROD_OFR_DEACT_APV_TYPE";  
+    public static PRD_OFR_DEACT_APV_TYPE = "PROD_OFR_DEACT_APV_TYPE";
 
     //Surveyor
     public static EXTERNAL_SURVEYOR = "EXTERNAL_SURVEYOR";
+
+    // JOURNAL
+    public static RefMasterTypeCodeJournalHeaderFactType = "H_FACT_TYPE";
+
+    // JOIN TYPE
+    public static JOIN_TYPE_INNER = "Inner";
+
+    //WORKFLOW
+    public static WorkflowUploadNegativeAsset = "WF_UPL_NAS";
+    public static WfUploadNegativeAssetReview = "UPLOAD_NAS_REVIEW";
+    public static WorkflowUploadNegativeCustomer = "WF_UPL_NEG_CUST";
+    public static WfUploadNegativeCustomerReview = "UPLOAD_NEG_CUST_REVIEW";
+    public static WorkflowUploadAssetMaster = "WF_UPL_ASM";
+    public static WfUploadAssetMasterReview = "UPLOAD_ASM_REVIEW";
+    public static WF_CODE_UPD_CUST_MANUAL = "WF_UPD_CUST_MANUAL";
+    public static ACT_CODE_UPD_CUST_DATA = "UPD_CUST_DATA";
 }

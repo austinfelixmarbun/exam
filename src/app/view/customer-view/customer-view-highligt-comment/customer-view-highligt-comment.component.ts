@@ -30,7 +30,7 @@ export class CustomerViewHighligtCommentComponent implements OnInit {
   }
 
   GetListCustHighlightComment(CustId){
-    var DealerCustNoObj = { CustId: CustId };
+    var DealerCustNoObj = { Id: CustId };
     this.http.post(URLConstant.GetCustHighlightCommentByCustId, DealerCustNoObj).subscribe(
       response => {
         this.listCustHighlightCommentObj = response["ReturnObject"];

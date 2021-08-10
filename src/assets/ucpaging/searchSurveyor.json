@@ -19,15 +19,15 @@
         },            
         {
             "type": "dropdown",
-            "name": "RO.OFFICE_CODE",
-            "id": "OfficeNameId",
-            "value": "SurveyorGroupName",
+            "name": "CG.CENTER_GRP_CODE",
+            "id": "CenterGrpCodeId",
+            "value": "",
             "placeholder": "Placeholder",
-            "isFromURL": true,            
+            "isFromURL": true,
             "ddlType": "all",
             "isQueryIn" : true,
             "url": "",
-            "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
+            "path": "/CenterGrp/GetListKvpActiveCenterGrpForPaging",
             "label": "Surveyor Group Name",
             "items": [],
             "itemsUrl": [],
@@ -38,8 +38,9 @@
             "name": "RM.MASTER_CODE",
             "id": "MasterCodeId",
             "value": "",
-            "placeholder": "",
-            "isFromURL": true,            
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
             "ddlType": "all",
             "url": "",
             "path": "/RefMaster/GetListKeyValueActiveByCode",
@@ -52,7 +53,7 @@
         },    
         {
             "type": "dropdown",
-            "name": "IS_ACTIVE",
+            "name": "S.IS_ACTIVE",
             "id": "ActiveStatusId",
             "label": "Active Status",
             "value": "",
@@ -88,37 +89,37 @@
             "type": "sort",
             "position": "center",
             "label": "Surveyor No",
-            "name": "SurveyorNo"
+            "name": "S.SURVEYOR_NO"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "Surveyor Name",
-            "name": "SurveyorName"
+            "name": "RE.EMP_NAME"
         },  
         {
             "type": "sort",
             "position": "center",
             "label": "Surveyor Group Name",
-            "name": "SurveyorGroupName"
+            "name": "CG.CENTER_GRP_NAME"
         },  
         {
             "type": "sort",
             "position": "center",
             "label": "Surveyor Type",
-            "name": "SurveyorType"
+            "name": "RM.DESCR"
         },  
         {
             "type": "sort",
             "position": "center",
             "label": "Vendor Name",
-            "name": "VendorName"
+            "name": "V.VENDOR_NAME"
         },       
         {
             "type": "sort",
             "position": "center",
-            "label": "ACTIVE STATUS",
-            "name": "IsActive"
+            "label": "Active Status",
+            "name": "S.IS_ACTIVE"
         },        
         {
             "type": "label",

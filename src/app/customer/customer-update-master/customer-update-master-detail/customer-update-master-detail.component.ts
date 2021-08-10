@@ -2,9 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { ClaimTaskService } from 'app/shared/claimTask.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -28,7 +31,11 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   MrCustTypeCode: string;
   CompanyConstant: string;
   PersonalConstant: string;
-  WfTaskListId: number;
+  WfTaskListId: any;
+  SubjectType: string;
+  IdCust: number = 0;
+  isMarried: boolean = false;
+  currentUserContext : CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
 
   CustPersonalStep = {
     "CUST": 1,
@@ -51,7 +58,8 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private claimTaskService: ClaimTaskService
   ) {
     this.route.queryParams.subscribe(params => {
       if (params["CustDataTrxId"] != null) {
@@ -63,6 +71,9 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
       if (params["WfTaskListId"] != null) {
         this.WfTaskListId = params["WfTaskListId"];
       }
+      if (params["SubjectTypeDescr"] != null) {
+        this.SubjectType = params["SubjectTypeDescr"];
+      }
     });
     this.StepIdx = 1;
     this.PersonalConstant = CommonConstant.CustTypePersonal;
@@ -70,12 +81,14 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     this.ViewGenericObj.viewInput = "./assets/ucviewgeneric/viewUpdateMasterCust.json";
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.claimTask();
+
     this.CustNoObj.CustNo = this.CustNo;
-    this.http.post(URLConstant.GetCustByCustNo, this.CustNoObj).toPromise().then(
+    await this.http.post(URLConstant.GetCustByCustNo, this.CustNoObj).toPromise().then(
       (response: CustObj) => {
         this.MrCustTypeCode = response.MrCustTypeCode;
+        this.IdCust = response.CustId;
         if (response.MrCustTypeCode == CommonConstant.CustTypePersonal) {
           this.PersonalWizard = new Stepper(document.querySelector('#PersonalWizard'), {
             linear: false,
@@ -98,14 +111,22 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
         console.log(error);
       }
     )
+
+    await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).toPromise().then(
+      (response) => {
+        if(response.MrMaritalStatCode == CommonConstant.MasteCodeMartialStatsMarried){
+          this.isMarried = true;
+        }
+      }
+    );
   }
 
   claimTask() {
-    var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    var wfClaimObj = { pWFTaskListID: this.WfTaskListId, pUserID: currentUserContext[CommonConstant.USER_NAME] };
-    this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(
-      (response) => {
-      });
+    if(environment.isCore){
+      this.claimTaskService.ClaimTaskV2(this.WfTaskListId);
+    }else{
+      this.claimTaskService.ClaimTask(this.WfTaskListId);
+    }
   }
 
   EnterTab(step) {

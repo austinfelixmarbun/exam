@@ -26,10 +26,12 @@ import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { OfficeAddXComponent } from 'app/impl/office/office-add-x/office-add-x.component';
+import { AdInsModule } from 'app/components/adins-module/adins.module';
 
 
 @NgModule({
   imports: [
+    AdInsModule,
     OfficeRoutingModule,
     CommonModule,
     FormsModule,

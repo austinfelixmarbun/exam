@@ -184,7 +184,7 @@ export class CoaSchemeDetailComponent implements OnInit {
   }
 
   GetDdlCurr() {
-    this.http.post<any>(environment.FoundationR3Url + '/RefCurr/GetListKvpActiveRefCurr', {}).subscribe
+    this.http.post<any>(URLConstant.GetListKvpActiveRefCurr, {}).subscribe
       (
         (response: any) => {
           this.ListCurr = response.ReturnObject

@@ -17,10 +17,7 @@ export class CustomerViewCoyContactComponent implements OnInit {
 
   ngOnInit() {
     this.viewCustCoyViewContactData.viewInput  =  "./assets/ucviewgeneric/viewCustCoyViewContactData.json";
-    this.viewCustCoyViewContactData.viewEnvironment = environment.FoundationR3Url;
     this.viewCustCoyViewContactInformation.viewInput  = "./assets/ucviewgeneric/viewCustCoyViewContactInformation.json";
-    this.viewCustCoyViewContactInformation.viewEnvironment = environment.FoundationR3Url;
     this.viewCustCoyViewContactAddress.viewInput  =  "./assets/ucviewgeneric/viewCustCoyViewContactAddress.json";
-    this.viewCustCoyViewContactAddress.viewEnvironment = environment.FoundationR3Url;
   }
 }

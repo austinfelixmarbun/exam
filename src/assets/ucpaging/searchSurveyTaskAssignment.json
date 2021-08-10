@@ -13,7 +13,7 @@
             "url": "",
             "environment": "FOU",
             "path":"/RefOffice/GetListKvpActiveRefOfficeForPaging",
-            "label": "Surveyor Group Name",
+            "label": "Office Name",
             "items": [],
             "itemsUrl": []
         },
@@ -77,7 +77,7 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Surveyor Group Name",
+            "label": "Office Name",
             "name": "OfficeName"
         },
         {

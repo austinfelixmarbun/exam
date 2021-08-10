@@ -4,6 +4,7 @@ import { PathConstant } from "./PathConstant";
 
 export class NavigationConstant {
     
+    public static DASHEMPTY = "/" + PathConstant.LR_DASHBOARD + "/" + PathConstant.DASHEMPTY; //'/Dashboard/Dash-Empty'
     public static DASHBOARD = "/" + PathConstant.LR_DASHBOARD + "/" + PathConstant.DASHBOARD; //'/Dashboard/Dash-Board'
     public static BACK_TO_PAGING = '..' + "/" + PathConstant.PAGING; //'../Paging'
     public static BACK_TO_PAGING2 = '..' + "/" + '..' + "/" + PathConstant.PAGING; //'../../Paging'
@@ -60,6 +61,8 @@ export class NavigationConstant {
     public static CS_COA_SCHM_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_COA_SCHM_DETAIL; //'/CommonSetting/CoaScheme/Detail'
     public static CS_CURRENCY_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_CURRENCY_PAGING; //'/CommonSetting/Currency/Paging'
     public static CS_CURRENCY_ADD = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_CURRENCY_ADD; //'/CommonSetting/Currency/Add'
+    public static CS_EXCHANGE_RATE_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_EXCHANGE_RATE_PAGING; //'CommonSetting/ExchangeRate/Paging'
+    public static CS_EXCHANGE_RATE_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_EXCHANGE_RATE_DETAIL; //'CommonSetting/ExchangeRate/Detai'
     public static CS_ECONOMIC_SECTOR_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_ECONOMIC_SECTOR_PAGING; //'/CommonSetting/EconomicSector/Paging'
     public static CS_ECONOMIC_SECTOR_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_ECONOMIC_SECTOR_DETAIL; //'/CommonSetting/EconomicSector/Detail'
     public static CS_GEN_SETTING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING; //'/CommonSetting/GeneralSetting'
@@ -295,6 +298,7 @@ export class NavigationConstant {
     public static CUST_SHRHLDR_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_SHRHLDR_PAGING; //'/Customer/CustShareholder/Paging'
     public static CUST_GUARANTOR_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_GUARANTOR_PAGING; //'/Customer/CustGuarantor/Paging'
     public static CUST_FAMILY_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_FAMILY_PAGING; //'/Customer/CustFamily/Paging'
+    public static CUST_NEW_FORM = "/" + PathConstant.LR_CUST + "/" + PathConstant.NEW_CUST; //'/Customer/NewCustomer'
     //#endregion
 
     //#region Document Management

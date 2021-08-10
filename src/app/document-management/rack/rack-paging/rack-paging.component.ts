@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { CabinetWithListRackObj } from 'app/shared/model/document-management/CabinetWithListRackObj.Model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-rack-paging',
@@ -33,7 +34,7 @@ export class RackPagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post<CabinetWithListRackObj>(environment.FoundationR3Url + "/DocManagement/GetCabinetAndListRackByCabinetCode", {Code: this.Cabinet.CabinetCode}).subscribe(
+    this.http.post<CabinetWithListRackObj>(URLConstant.GetCabinetAndListRackByCabinetCode, {Code: this.Cabinet.CabinetCode}).subscribe(
       (response) => {
         this.Cabinet = response;
       },

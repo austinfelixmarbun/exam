@@ -12,6 +12,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-attribute-detail',
@@ -41,6 +42,7 @@ export class AttributeDetailComponent implements OnInit {
     IsMandatory: [true],
     RowVersion: ['']
   });
+  readonly AttrInputTypeDate = CommonConstant.AttrInputTypeDate;
 
   constructor(
     private router: Router,
@@ -100,7 +102,7 @@ export class AttributeDetailComponent implements OnInit {
           this.patternCodeList = response[3][CommonConstant.ReturnObj];
           this.attributeGroupList = response[4][CommonConstant.ReturnObj];
           switch (refAttr["AttrInputType"]) {
-            case 'L':
+            case CommonConstant.AttrInputTypeList:
               var valueList = refAttr["AttrValue"].split(";");
               console.log("ValueList: " + JSON.stringify(valueList));
               var formArray = this.fb.array([]);
@@ -110,18 +112,18 @@ export class AttributeDetailComponent implements OnInit {
               this.RefAttrForm.addControl("AttrValue", formArray);
               break;
 
-            case 'RM':
+            case CommonConstant.AttrInputTypeRefMaster:
               this.RefAttrForm.addControl("AttrValue", this.fb.control(refAttr["AttrValue"], [Validators.required]));
               this.inputLookupRefMasterType.nameSelect = refAttr["AttrValueDescr"];
               this.inputLookupRefMasterType.jsonSelect = { Descr: refAttr["AttrValueDescr"] };
               this.inputLookupRefMasterType.isRequired = true;
               break;
 
-            case 'T':
+            case CommonConstant.AttrInputTypeText:
               this.isTextBox = true;
               this.RefAttrForm.addControl("PatternCode", this.fb.control(''));
               this.RefAttrForm.addControl("PatternValue", this.fb.control(''));
-              this.RefAttrForm.addControl("AttrLength", this.fb.control('', [Validators.required]));
+              this.RefAttrForm.addControl("AttrLength", this.fb.control('', [Validators.required, Validators.max(4000)]));
               this.RefAttrForm.patchValue({
                 PatternCode: refAttr["PatternCode"],
                 PatternValue: refAttr["PatternValue"],
@@ -147,15 +149,6 @@ export class AttributeDetailComponent implements OnInit {
           this.attrInputTypeList = response[1][CommonConstant.ReturnObj];
           this.patternCodeList = response[2][CommonConstant.ReturnObj];
           this.attributeGroupList = response[3][CommonConstant.ReturnObj];
-          
-          this.RefAttrForm.patchValue({
-            AttrTypeCode: this.attrTypeCodeList[0].AttrTypeCode,
-            AttrInputType: this.attrInputTypeList[0].Key,
-            PatternCode: this.patternCodeList[0].Key,
-            PatternValue: this.patternCodeList[0].Value,
-            AttrGroup: this.attributeGroupList[0].Key,
-            
-          });
         },
         (error) => {
           console.log(error);
@@ -169,35 +162,33 @@ export class AttributeDetailComponent implements OnInit {
     if (this.RefAttrForm.contains("AttrValue")) {
       this.RefAttrForm.removeControl("AttrValue");
     }
-    if (type == 'T') {
+    if (type == CommonConstant.AttrInputTypeText) {
       this.isTextBox = true;
       this.RefAttrForm.addControl("PatternCode", this.fb.control(''));
       this.RefAttrForm.addControl("PatternValue", this.fb.control(''));
-      this.RefAttrForm.addControl("AttrLength", this.fb.control('', [Validators.required]));
-
-      this.RefAttrForm.patchValue({
-        PatternCode: this.patternCodeList[0].Key,
-        PatternValue: this.patternCodeList[0].Value
-      });
+      this.RefAttrForm.addControl("AttrLength", this.fb.control('', [Validators.required,  Validators.max(4000)]));
     }
-    else if (type != 'T') {
+    else if (type != CommonConstant.AttrInputTypeText) {
       this.RefAttrForm.removeControl("AttrLength");
       this.RefAttrForm.removeControl("PatternCode");
       this.RefAttrForm.removeControl("PatternValue");
       this.isTextBox = false;
     }
-    if (type == 'RM') {
+    if (type == CommonConstant.AttrInputTypeRefMaster) {
       this.RefAttrForm.addControl('AttrValue', this.fb.control('', [Validators.required]));
       this.inputLookupRefMasterType.isRequired = true;
     }
-    else if (type != 'RM') {
+    else if (type != CommonConstant.AttrInputTypeRefMaster) {
       this.inputLookupRefMasterType.isRequired = false;
-      this.RefAttrForm.controls.lookupRefMasterType["controls"].value.clearValidators();
-      this.RefAttrForm.controls.lookupRefMasterType["controls"].value.setValue("");
-      this.RefAttrForm.controls.lookupRefMasterType.updateValueAndValidity();
     }
-    if (type == 'L') {
+    if (type == CommonConstant.AttrInputTypeList) {
       this.RefAttrForm.addControl("AttrValue", this.fb.array([]));
+    }
+
+    if(type == this.AttrInputTypeDate){
+      this.RefAttrForm.patchValue({
+        DefaultValue: ''
+      });
     }
   }
 
@@ -215,25 +206,26 @@ export class AttributeDetailComponent implements OnInit {
     AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ATTR_MSTR_PAGING],{});
   }
 
-  Save(enjiForm) {
+  Save() {
     var formValue = this.RefAttrForm.value;
     var url = this.pageType == "add" ? URLConstant.AddRefAttr : URLConstant.EditRefAttr;
 
-    if (formValue["AttrInputType"] == "L") {
+    if (formValue["AttrInputType"] == CommonConstant.AttrInputTypeList) {
       if (formValue["AttrValue"].length < 1) {
-        this.toastr.warningMessage("Minimal 1 Attribute Value");
+        this.toastr.warningMessage(ExceptionConstant.MIN_1_ATTR_VALUE);
         return;
       }
-      var attrValue = "";
-      for (let index = 0; index < formValue["AttrValue"].length; index++) {
-        if (index < formValue["AttrValue"].length - 1) {
-          attrValue += formValue["AttrValue"][index] + ";";
-        }
-        else {
-          attrValue += formValue["AttrValue"][index];
-        }
+
+      var duplicates = formValue["AttrValue"].reduce(function(acc, el, i, arr) {
+        if (arr.indexOf(el) !== i && acc.indexOf(el) < 0) acc.push(el); return acc;
+      }, []);
+
+      if(duplicates.length > 0){
+        this.toastr.warningMessage(ExceptionConstant.DUPL_ATTR_VALUE);
+        return;
       }
-      formValue["AttrValue"] = attrValue;
+
+      formValue["AttrValue"] = formValue["AttrValue"].join(";");
     }
 
     this.httpClient.post(url, formValue).subscribe(
@@ -249,9 +241,16 @@ export class AttributeDetailComponent implements OnInit {
   patternCodeChange(e) {
     this.RefAttrForm.controls.PatternCode
     var temp = this.patternCodeList.find(x => x.Key == e.target.value)
-    this.RefAttrForm.patchValue({
-      PatternValue: temp.Value
-    });
+
+    if(temp != undefined){
+      this.RefAttrForm.patchValue({
+        PatternValue: temp.Value
+      });
+    }else{
+      this.RefAttrForm.patchValue({
+        PatternValue: ""
+      });
+    }
   }
   getLookupAttrValue(e) {
     this.RefAttrForm.patchValue({

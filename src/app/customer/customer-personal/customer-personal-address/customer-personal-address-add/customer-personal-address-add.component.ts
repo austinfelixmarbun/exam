@@ -4,17 +4,17 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { HttpClient } from '@angular/common/http';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AddrObj } from 'app/shared/model/AddrObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 
 @Component({
   selector: 'app-customer-personal-address-add',
@@ -36,7 +36,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   inputFieldAddressObj: InputFieldObj;
 
   custObj: CustObj;
-  addressObj: AddrObj;
+  addressObj: UcAddressObj;
   custAddrObj: GenericObj = new GenericObj();
   addressType: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
   custAddressObj: CustAddrObj;
@@ -60,6 +60,12 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   CustModelDesc: string;
   MrIdTypeCodeDesc: string;
   MotherMaidenName: string;
+
+  listAddrRequiredOwnership: Array<string> = [
+    CommonConstant.CustAddrTypeLegal,
+    CommonConstant.CustAddrTypeResidence,
+    CommonConstant.CustAddrTypeOthBiz
+  ]
 
   CustDataPersonalForm = this.fb.group({
     Notes: [''],
@@ -146,21 +152,35 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           if (this.getCustomerAddr.MrCustAddrTypeCode == 'RESIDENCE' || this.getCustomerAddr.MrCustAddrTypeCode == 'LEGAL') {
             this.inputAddressObj.showStayLength = true;
           }
+          this.setOwnership(this.CustDataPersonalForm.controls.MrCustAddrTypeCode.value);
         });
     }
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
     this.inputAddressObj.showOwnership = true;
+    this.setOwnership(this.CustDataPersonalForm.controls.MrCustAddrTypeCode.value);
+  }
+
+  setOwnership(MrCustAddrTypeCode: string) {
+    if(this.listAddrRequiredOwnership.find(addrType => addrType == MrCustAddrTypeCode)){
+      this.inputAddressObj.requiredOwnership = true;
+      return
+    }
+    this.inputAddressObj.requiredOwnership = false;
   }
 
   checkCustAddrType() {
     if (this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value == 'RESIDENCE' || this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value == 'LEGAL') {
       this.inputAddressObj.showStayLength = true;
+      this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.setValidators([Validators.required]); //solusi sementara sampai perbaikan pada lib-ucaddress
     }
     else {
       this.inputAddressObj.showStayLength = false;
+      this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.clearValidators(); //solusi sementara sampai perbaikan pada lib-ucaddress
     }
+    this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.updateValueAndValidity(); //solusi sementara sampai perbaikan pada lib-ucaddress
+    this.setOwnership(this.CustDataPersonalForm.controls.MrCustAddrTypeCode.value);
   }
 
   copyAddress() {

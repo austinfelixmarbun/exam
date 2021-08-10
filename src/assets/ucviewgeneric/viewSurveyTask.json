@@ -3,14 +3,9 @@
   "subsection": [
     {
       "subSectionId": "SurveyTaskId",
-      "subSectionTitle": "Main Information",
+      "subSectionTitle": "Main Info",
       "mainInfoPath": "/Generic/GetDataViewBySQL",
       "mainInfo": [
-        {
-          "type": "text",
-          "label": "Office Name",
-          "property": "OfficeName"
-        },
         {
           "type": "text",
           "label": "Survey Task No",
@@ -18,8 +13,8 @@
         },
         {
           "type": "text",
-          "label": "Survey Initial",
-          "property": "SurveyInitial"
+          "label": "Surveyor",
+          "property": "SurveyorName"
         },
         {
           "type": "text",
@@ -28,53 +23,13 @@
         },
         {
           "type": "text",
-          "label": "Resurvey Ref",
-          "property": "ResurveyRef"
+          "label": "Reviewer",
+          "property": "ReviewedBy"
         },
         {
           "type": "text",
-          "label": "Surveyee Model",
-          "property": "SurveyeeModel"
-        },
-        {
-          "type": "text",
-          "label": "Surveyee Object",
-          "property": "SurveyeeObj"
-        },
-        {
-          "type": "text",
-          "label": "Surveyee Name",
-          "property": "CustName"
-        },
-        {
-          "type": "text",
-          "label": "Address",
-          "property": "CustAddr"
-        },
-        {
-          "type": "text",
-          "label": "Survey Type",
-          "property": "SrvyTypeCode"
-        },
-        {
-          "type": "text",
-          "label": "Surveyor Name",
-          "property": "SurveyorName"
-        },
-        {
-          "type": "text",
-          "label": "Status",
-          "property": "Status"
-        },
-        {
-          "type": "date",
-          "label": "Request Date",
-          "property": "ReqDate"
-        },
-        {
-          "type": "text",
-          "label": "Request By",
-          "property": "RequestBy"
+          "label": "Survey Initial",
+          "property": "SurveyInitial"
         },
         {
           "type": "date",
@@ -83,8 +38,8 @@
         },
         {
           "type": "text",
-          "label": "Assign By",
-          "property": "AssignBy"
+          "label": "Survey Type",
+          "property": "SrvyTypeCode"
         },
         {
           "type": "date",
@@ -93,23 +48,13 @@
         },
         {
           "type": "text",
-          "label": "Submitted By",
-          "property": "SubmittedBy"
+          "label": "Status",
+          "property": "Status"
         },
         {
           "type": "date",
           "label": "Review Date",
           "property": "ReviewDate"
-        },
-        {
-          "type": "text",
-          "label": "Reviewed By",
-          "property": "ReviewedBy"
-        },
-        {
-          "type": "text",
-          "label": "Notes",
-          "property": "Notes"
         }
         
       ],

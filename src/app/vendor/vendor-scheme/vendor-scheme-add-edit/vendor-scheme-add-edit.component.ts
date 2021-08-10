@@ -17,99 +17,95 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class VendorSchemeAddEditComponent implements OnInit {
   vendorSchemeObj: VendorSchemeObj;
   VendorSchmId: any;
-  pageType:any;
+  pageType: any;
   result: any;
-  title:string;
+  title: string;
   mode: string = "add";
-  apiUrl: any;
   isActive: boolean = true;
-  foundationUrl: string = environment.FoundationR3Url;
-  editUrl: any;
   itemCategoryType: any;
-  item
-    MrVendorCategoryCode: string;
+  MrVendorCategoryCode: string;
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
-      this.route.queryParams.subscribe(params => {
-          this.VendorSchmId = params["VendorSchmId"];
-          this.MrVendorCategoryCode =  params["MrVendorCategoryCode"];
-          this.mode = params["mode"];
-      })
+    this.route.queryParams.subscribe(params => {
+      this.VendorSchmId = params["VendorSchmId"];
+      this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      this.mode = params["mode"];
+    })
   }
 
   VendorSchmForm = this.fb.group({
-    VendorSchmCode:  ['', Validators.required],
-    VendorSchmName:  ['', Validators.required],
+    VendorSchmCode: ['', Validators.required],
+    VendorSchmName: ['', Validators.required],
     VendorSchmDesc: [''],
     MrVendorCategoryCode: [{ value: '', disabled: true }],
-    IsActive:  [false],
-    RowVersion: ['']    
+    IsActive: [false],
+    RowVersion: ['']
   })
 
 
 
   ngOnInit() {
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: "VENDOR_CATEGORY"}).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: "VENDOR_CATEGORY" }).subscribe(
       (response) => {
         this.itemCategoryType = response[CommonConstant.ReturnObj];
-        if(this.itemCategoryType.length > 0){
+        if (this.itemCategoryType.length > 0) {
           this.VendorSchmForm.patchValue({
             MrVendorCategoryCode: this.MrVendorCategoryCode
           });
         }
-      } 
-    );
-    
-      if (this.mode == "edit") {
-          this.vendorSchemeObj = new VendorSchemeObj();
-          this.vendorSchemeObj.VendorSchmId = this.VendorSchmId;
-          this.VendorSchmForm.controls.MrVendorCategoryCode.disable();
-          this.VendorSchmForm.controls.VendorSchmCode.disable();
-          this.http.post(URLConstant.GetVendorSchmByVendorSchmId, {Id : this.VendorSchmId}).subscribe(
-              (response) => {
-                  this.result = response;
-                  this.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
-                  this.VendorSchmForm.patchValue({
-                      VendorSchmCode: this.result.VendorSchmCode,
-                      VendorSchmName: this.result.VendorSchmName,
-                      VendorSchmDesc: this.result.VendorSchmDesc,
-                      MrVendorCategoryCode: this.result.MrVendorCategoryCode,
-                      IsActive: this.result.IsActive,
-                      RowVersion: this.result.RowVersion,
-                  });
-              }
-          );
-      }else{
-        if(this.MrVendorCategoryCode == CommonConstant.SUPPLIER){
-          this.checkIsAutoFormNoFromSetting('SS');
-        }
       }
+    );
+
+    if (this.mode == "edit") {
+      this.vendorSchemeObj = new VendorSchemeObj();
+      this.vendorSchemeObj.VendorSchmId = this.VendorSchmId;
+      this.VendorSchmForm.controls.MrVendorCategoryCode.disable();
+      this.VendorSchmForm.controls.VendorSchmCode.disable();
+      this.http.post(URLConstant.GetVendorSchmByVendorSchmId, { Id: this.VendorSchmId }).subscribe(
+        (response) => {
+          this.result = response;
+          this.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
+          this.VendorSchmForm.patchValue({
+            VendorSchmCode: this.result.VendorSchmCode,
+            VendorSchmName: this.result.VendorSchmName,
+            VendorSchmDesc: this.result.VendorSchmDesc,
+            MrVendorCategoryCode: this.result.MrVendorCategoryCode,
+            IsActive: this.result.IsActive,
+            RowVersion: this.result.RowVersion,
+          });
+        }
+      );
+    } else {
+      if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
+        this.checkIsAutoFormNoFromSetting('SS');
+      }
+    }
   }
 
-  SaveForm(){
-      this.vendorSchemeObj = new VendorSchemeObj();
+  SaveForm() {
+    this.vendorSchemeObj = new VendorSchemeObj();
 
-      this.vendorSchemeObj = this.VendorSchmForm.value;
-      this.vendorSchemeObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
-      if (this.mode == "edit") {
-          this.vendorSchemeObj.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
-          this.vendorSchemeObj.VendorSchmCode = this.result.VendorSchmCode;
-          this.vendorSchemeObj.VendorSchmId = this.VendorSchmId;
-          
-          this.http.post(URLConstant.EditVendorSchm, this.vendorSchemeObj).subscribe(
-              (response) => {
-                  this.toastr.successMessage(response["message"]);
-                  AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "Type" : "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
-              });
-      }
-      else {
-          this.vendorSchemeObj.VendorSchmId = "0";
-          this.http.post(URLConstant.AddVendorSchm, this.vendorSchemeObj).subscribe(
-              (response) => {
-                  this.toastr.successMessage(response["message"]);
-                  AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "Type" : "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
-              });
-      }
+    this.vendorSchemeObj = this.VendorSchmForm.value;
+    this.vendorSchemeObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
+    if (this.mode == "edit") {
+      this.vendorSchemeObj.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
+      this.vendorSchemeObj.VendorSchmCode = this.result.VendorSchmCode;
+      this.vendorSchemeObj.VendorSchmId = this.VendorSchmId;
+
+      this.http.post(URLConstant.EditVendorSchm, this.vendorSchemeObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["message"]);
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "Type": "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
+        });
+    }
+    else {
+      this.vendorSchemeObj.VendorSchmId = "0";
+      this.http.post(URLConstant.AddVendorSchm, this.vendorSchemeObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["message"]);
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "Type": "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
+        });
+    }
   }
 
   //check is automatic/not form no 4

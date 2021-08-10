@@ -12,6 +12,7 @@ import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-customer-view-address',
@@ -31,7 +32,7 @@ export class CustomerViewAddressComponent implements OnInit {
   CustForm = this.fb.group({
     DdlAddress: ['']
   });
-  viewCustFinData: any;
+  viewCustFinData: UcViewGenericObj = new UcViewGenericObj();
   CustType: any;
   constructor(
     private http: HttpClient,
@@ -48,8 +49,6 @@ export class CustomerViewAddressComponent implements OnInit {
       }
     });
     this.viewCustFinData.viewInput = "./assets/ucviewgeneric/viewCustFinData.json";
-    this.viewCustFinData.viewEnvironment = environment.FoundationR3Url;
-    var custAddrObj = { "CustId": this.CustId };
     this.http.post(URLConstant.GetListCustAddrByCustIdForCustomerPersonalView, { Id: this.CustId }).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {

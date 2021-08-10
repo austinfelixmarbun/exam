@@ -110,7 +110,7 @@ export class EditCompanyComponent implements OnInit {
         refCoyObj.refCoyId = this.param;
 
         if (this.mode == "edit") {
-            this.editUrl = this.foundationUrl + URLConstant.EditRefCoy;
+            this.editUrl = this.foundationUrl + "/v1" + URLConstant.EditRefCoy;
             refCoyObj.refCoyId = this.param;
             refCoyObj.RowVersion = this.result.RowVersion;
             this.http.post(this.editUrl, refCoyObj).subscribe(
@@ -119,7 +119,7 @@ export class EditCompanyComponent implements OnInit {
                 });
         }
         else {
-            this.editUrl = this.foundationUrl + URLConstant.AddCoyCommissioner;
+            this.editUrl = this.foundationUrl + "/v1" + URLConstant.AddCoyCommissioner;
             this.http.post(this.editUrl, refCoyObj).subscribe(
                 (response) => {
                     AdInsHelper.RedirectUrl(this.router,[NavigationConstant.COY],{ });

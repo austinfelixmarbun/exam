@@ -25,7 +25,8 @@ import { SafePipe } from './pipe/safepipe';
         ToggleFullscreenDirective,
         NgbModule,
         TranslateModule,
-        DmsIframeComponent
+        DmsIframeComponent,
+        SafePipe
     ],
     imports: [
         RouterModule,

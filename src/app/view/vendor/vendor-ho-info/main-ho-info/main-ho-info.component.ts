@@ -32,9 +32,7 @@ export class MainHoInfoComponent implements OnInit {
     )
     
     this.viewCObj.viewInput = "./assets/ucviewgeneric/viewHOInfoCompany.json";
-    this.viewCObj.viewEnvironment = environment.FoundationR3Url;
     this.viewPObj.viewInput = "./assets/ucviewgeneric/viewHOInfoPersonal.json";
-    this.viewPObj.viewEnvironment = environment.FoundationR3Url;
 
   }
 

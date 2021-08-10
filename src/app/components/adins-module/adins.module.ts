@@ -18,9 +18,11 @@ import { MatCheckboxModule } from '@angular/material';
 import { UcuploadModule } from '@adins/ucupload';
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
+import { UcDirectiveUpperCaseModule } from '@adins/uc-directive-upper-case';
 
 @NgModule({
     exports: [
+        UcDirectiveUpperCaseModule,
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
@@ -57,7 +59,8 @@ import { UcaddtotempModule } from '@adins/ucaddtotemp';
         MatCheckboxModule,
         UcuploadModule,
         UcdropdownlistModule,
-        UcaddtotempModule
+        UcaddtotempModule,
+        UcDirectiveUpperCaseModule
     ],
     declarations: [
     ]

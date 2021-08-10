@@ -19,27 +19,23 @@ export class AdInsConstant {
   public static RestrictionGTE = "GTE";
   public static RestrictionLTE = "LTE";
 
-  public static ApvHoldTaskUrl = environment.ApprovalURL + "/ApprovalInstance/HoldUnholdTask";
-  public static ApvTakeBackTaskUrl = environment.ApprovalURL + "/ApprovalInstance/TakeBackTask";
-  // public static ApvHoldTaskUrl = environment.FoundationR3Url + "/Approval/Hold";
-  // public static ApvTakeBackTaskUrl = environment.FoundationR3Url + "/Approval/TakeBack";
+  // public static ApvHoldTaskUrl = environment.ApprovalURL + "/ApprovalInstance/HoldUnholdTask";
+  // public static ApvTakeBackTaskUrl = environment.ApprovalURL + "/ApprovalInstance/TakeBackTask";
+  public static ApvHoldTaskUrl = environment.FoundationR3Url + "/Approval/Hold";
+  public static ApvTakeBackTaskUrl = environment.FoundationR3Url + "/Approval/TakeBack";
 
   public static showData = "10,50,100";
   public static TimeoutSession = 6000000;
   public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
-  public static Login = "/Authenticate/Login";
-  public static LoginWithToken = environment.FoundationR3Url+"/Authenticate/LoginWithToken";
-  public static LoginToken = "/UserManagement/HTML6Login";
-  public static Logout = "/UserManagement/LogOut"
-  public static GetListOffice = "/RefOffice/GetRefOfficePaging";
-  public static GetProvince = "/los/v1/get_provinsi";
-  public static GetCityByProvince = "/los/v1/get_kota";
-  public static getProspectByProspectNo = "/api/MobileProspectTask/GetProspectByProspectNo";
-  public static submitNCProspect = "/api/MobileProspectTask/submitNCProspect";
-  public static addCustPersonal = "";
+  public static Login = environment.FoundationR3Url + '/v1' + "/Authenticate/Login";
+  public static LoginWithToken = environment.FoundationR3Url + '/v1' + "/Authenticate/LoginWithToken";
+  public static Logout = environment.FoundationR3Url + "/v1" + "/UserManagement/LogOut"
   public static FormDefault = "dashboard/dash-board";
-
-  //#region 
-  public static RefMasterTypeCodeJournalHeaderFactType = "H_FACT_TYPE";
-  //#endregion
+  public static JoinTypeInner = "INNER";
+  public static LoginByRole = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByRole";
+  public static LoginByToken = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByToken";
+  public static UpdateToken = environment.FoundationR3Url + "/v1" + "/Authenticate/UpdateRole";
+  public static GetThingsToDoByRole = environment.FoundationR3Url + "/v1" + "/ThingsToDo/GetThingsToDoByRole";
+  public static GetDashboardAccessToken = environment.FoundationR3Url + "/v2" + "/Dashboard/GetDashboardAccessToken";
+  
 }

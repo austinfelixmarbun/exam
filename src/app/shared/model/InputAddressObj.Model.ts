@@ -2,9 +2,10 @@
 import {FormGroup} from '@angular/forms';
 import { environment } from 'environments/environment';
 import { InputFieldObj } from './InputFieldObj.Model';
+import { UcAddressObj } from './UcAddressObj.Model';
 
 export class InputAddressObj {
-    default: any;
+    default: UcAddressObj;
     title : string;
     inputField: InputFieldObj;
     showAllPhn: boolean;
@@ -19,6 +20,7 @@ export class InputAddressObj {
     requiredPhnExt3: boolean;
     showFax: boolean;
     showOwnership: boolean;
+    requiredOwnership: boolean;
     showSubsection: boolean;
     showStayLength: boolean;
     isRequired: boolean;
@@ -26,6 +28,7 @@ export class InputAddressObj {
     isReadonly: boolean;
 
     constructor() {
+        this.default = new UcAddressObj();
         this.title = "Address Information";
         this.inputField = new InputFieldObj();
         this.showAllPhn = true;
@@ -40,10 +43,11 @@ export class InputAddressObj {
         this.requiredPhnExt3 = false;
         this.showFax = true;
         this.showOwnership = false;
+        this.requiredOwnership = false;
         this.showSubsection = true;
         this.showStayLength = false;
         this.isRequired = true;
-        this.environmentUrl = environment.FoundationR3Url;
+        this.environmentUrl = environment.FoundationR3Url + "/v1";
         this.isReadonly = false;
     }
 }

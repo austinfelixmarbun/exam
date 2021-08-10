@@ -9,6 +9,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { String } from 'typescript-string-operations';
+
 
 @Component({
   selector: 'app-cust-legal-doc',
@@ -62,6 +64,7 @@ export class CustLegalDocComponent implements OnInit {
   openCustLegalDocDetail() {
     const modalCustLegalDoc = this.modalService.open(CustLegalDocDetailComponent);
     modalCustLegalDoc.componentInstance.CustCompanyId = this.CustCompanyId;
+    modalCustLegalDoc.componentInstance.CustLegalDocs = this.custLegalDocs;
     modalCustLegalDoc.result.then(
       (response) => {
         this.spinner.show();
@@ -97,15 +100,29 @@ export class CustLegalDocComponent implements OnInit {
     }
   }
   next() {    
+    var groupedCustLegalDoc = this.groupBy(this.custLegalDocs, function (item) {
+      return [item.MrLegalDocTypeCode, item.DocNo];
+    });
+
+    var duplCustLegalDoc = groupedCustLegalDoc.find(x => x.length > 1);
+
+    if(duplCustLegalDoc != undefined){
+      this.toastr.warningMessage(String.Format(ExceptionConstant.DUPLICATE_LEGAL_DOC, duplCustLegalDoc[0].MrLegalDocTypeCode, duplCustLegalDoc[0].DocNo));
+      return;
+    }
+
     this.outputTab.emit({ stepMode: 'next'});
-    // this.router.navigate(['/Customer/Paging']);
-    // if (this.Page != null) {
-    //   this.router.navigate(["/Customer/EditMainData/Paging"]);
-    // } else {
-    //   this.router.navigate(["/Customer/Paging"]);
-    // }
   }
-  // back(){
-  //   this.outputTab.emit({ stepMode: 'previous'});
-  // }
+
+  groupBy(array, f) {
+    let groups = {};
+    array.forEach(function (o) {
+      var group = JSON.stringify(f(o));
+      groups[group] = groups[group] || [];
+      groups[group].push(o);
+    });
+    return Object.keys(groups).map(function (group) {
+      return groups[group];
+    })
+  }
 }

@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
 import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
 import { EmpPositionObj } from 'app/shared/model/EmpPositionObj.Model';
 import { OrgJobTitleObj } from 'app/shared/model/OrgJobTitleObj.Model';
-import { environment } from 'environments/environment';
 import { formatDate } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -45,15 +43,6 @@ export class OfficeEmpPosAddComponent implements OnInit {
   refOfficeObj: RefOfficeObj;
   empPositionObj: EmpPositionObj;
   orgJobTitleObj: OrgJobTitleObj;
-  addUrl: any;
-  getEditUrl: any;
-  editUrl: any;
-  getUrl: any;
-  refOfficeUrl: any;
-  supervisorUrl: any;
-  bizUrl: any;
-  orgJobTitleUrl: any;
-  foundationUrl: string = environment.FoundationR3Url;
   empPositionVisible: boolean = true;
   addEditVisible: boolean = false;
   pageNow: any;
@@ -66,15 +55,6 @@ export class OfficeEmpPosAddComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.OFFICE_EMP_POS;
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
-    this.getUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
-    this.addUrl = this.foundationUrl + URLConstant.AddEmpPosition;
-    this.refOfficeUrl = this.foundationUrl + URLConstant.GetAllRefOffice;
-    this.supervisorUrl = this.foundationUrl + URLConstant.GetEmpListByOfficeIdAndIsActive;
-    this.bizUrl = this.foundationUrl + URLConstant.GetRefBizUnitByOffice;
-    this.orgJobTitleUrl = this.foundationUrl + URLConstant.GetOrgJobTitleByMdlStruc;
-    this.getEditUrl = this.foundationUrl + URLConstant.GetEmpByEmpPositionId;
-    this.editUrl = this.foundationUrl + URLConstant.EditEmpPosition;
-
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
         this.pageType = params['param'];
@@ -110,16 +90,16 @@ export class OfficeEmpPosAddComponent implements OnInit {
     const getuserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.refOfficeId = getuserAccess.refOfficeId
     this.refOfficeObj = new RefOfficeObj()
-    this.httpClient.post(this.refOfficeUrl, null).subscribe(
+    this.httpClient.post(URLConstant.GetAllRefOffice, null).subscribe(
       (response) => {
         this.allRefOffice = response['returnObject']
       })
     this.refOfficeObj.RefOfficeId = this.refOfficeId
-    this.httpClient.post(this.supervisorUrl, this.refOfficeObj).subscribe(
+    this.httpClient.post(URLConstant.GetEmpListByOfficeIdAndIsActive, this.refOfficeObj).subscribe(
       (response) => {
         this.allSupervisor = response['returnObject']
       })
-    this.httpClient.post(this.bizUrl, this.refOfficeObj).subscribe(
+    this.httpClient.post(URLConstant.GetRefBizUnitByOffice, this.refOfficeObj).subscribe(
       (response) => {
         this.allBiz = response['returnObject']
       })
@@ -127,7 +107,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
       this.empPositionObj = new EmpPositionObj();
       this.empPositionObj.empPositionId = this.empPositionId
       this.onChangeBiz(this.refBizUnitId)
-      this.httpClient.post(this.getEditUrl, this.empPositionObj).subscribe(
+      this.httpClient.post(URLConstant.GetEmpByEmpPositionId, this.empPositionObj).subscribe(
         (response) => {
           this.resultData = response['returnObject'];
           this.refOfficeId = response['returnObject']['refOfficeId']
@@ -152,7 +132,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
       bizValue = 0
     }
     this.orgJobTitleObj.orgMdlStrucId = bizValue
-    this.httpClient.post(this.orgJobTitleUrl, this.orgJobTitleObj).subscribe(
+    this.httpClient.post(URLConstant.GetOrgJobTitleByMdlStruc, this.orgJobTitleObj).subscribe(
       (response) => {
         this.allOrgJobTitle = response['returnObject']
       })
@@ -170,11 +150,11 @@ export class OfficeEmpPosAddComponent implements OnInit {
         this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
       }
 
-      this.httpClient.post(this.addUrl, this.empPositionObj).subscribe(
+      this.httpClient.post(URLConstant.AddEmpPosition, this.empPositionObj).subscribe(
         (response) => {
           if (response['isError'] != true) {
             this.toastr.successMessage(response['message']);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP],{});
+            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.EMP], {});
           }
         }
       );
@@ -189,10 +169,10 @@ export class OfficeEmpPosAddComponent implements OnInit {
       else {
         this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
       }
-      this.httpClient.post(this.editUrl, this.empPositionObj).subscribe(
+      this.httpClient.post(URLConstant.EditEmpPosition, this.empPositionObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE],{});
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.OFFICE], {});
         }
       );
 
