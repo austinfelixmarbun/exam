@@ -14,6 +14,7 @@ import { CustAttrFormComponent } from '../sharing-component/new-cust-component/c
 import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { CustAttrContentObj } from 'app/shared/model/NewCust/CustAttrContentObj.Model';
+import { CustAttrListComponent } from '../cust-attr-list/cust-attr-list.component';
 
 @Component({
   selector: 'app-cust-attr-section',
@@ -24,6 +25,7 @@ import { CustAttrContentObj } from 'app/shared/model/NewCust/CustAttrContentObj.
 export class CustAttrSectionComponent implements OnInit {
   
   @ViewChild('CustAttrForm') custAttrForm: CustAttrFormComponent;
+  @ViewChild('CustAttrFormOld') custAttrFormOld: CustAttrListComponent;
   @Input() CustId: number;
   @Input() MrCustTypeCode: string;
   @Output() outputTab: EventEmitter<Object> = new EventEmitter<Object>();
@@ -139,7 +141,8 @@ export class CustAttrSectionComponent implements OnInit {
         if (!response.RefProfessionId) return;
         await this.httpClient.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
           (response: RefProfessionObj) => {
-            this.custAttrForm.SetSearchListInputType(CommonConstant.AttrCodeDeptAml, response.ProfessionCode);
+            if(this.custAttrForm) this.custAttrForm.SetSearchListInputType(CommonConstant.AttrCodeDeptAml, response.ProfessionCode);
+            if(this.custAttrFormOld) this.custAttrFormOld.SetSearchListInputType(CommonConstant.AttrCodeDeptAml, response.ProfessionCode);
           });
       }
     )
@@ -154,7 +157,7 @@ export class CustAttrSectionComponent implements OnInit {
       custOtherInfo.CustId = this.CustId;
 
       let RequestAppCustOtherInfoObj = {
-        CustAttrContentObjs: this.SetCustAttrContent(),
+        CustAttrContentObjs: this.custAttrFormOld != undefined ? this.SetCustAttrContentOld() : this.SetCustAttrContent(),
         RCustOtherInfoObj: custOtherInfo
       };
 
@@ -172,6 +175,23 @@ export class CustAttrSectionComponent implements OnInit {
     }
 
     this.toastr.errorMessage("No Attribute To Save");    
+  }
+
+  SetCustAttrContentOld(): Array<Object> {
+    let formValue = this.OtherInformationForm.get(this.identifierCustAttr).value;
+    let custAttrRequest = new Array<Object>();
+    for (const key in formValue) {
+      if (formValue[key]["AttrValue"] != null) {
+        let custAttr = {
+          CustId: this.CustId,
+          RefAttrId: formValue[key]["RefAttrId"],
+          AttrValue: formValue[key]["AttrValue"],
+          AttrGroup: this.attrGroup
+        };
+        custAttrRequest.push(custAttr);
+      }
+    }
+    return custAttrRequest;
   }
 
   SetCustAttrContent(): Array<CustAttrContentObj> {
