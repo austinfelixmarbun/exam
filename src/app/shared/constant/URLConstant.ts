@@ -32,6 +32,7 @@ export class URLConstant {
     public static GetRefOfficeObj = environment.FoundationR3Url + "/v1" + "/RefOffice/GetRefOfficeObj";
     public static GetRefOfficeByRefOfficeId = environment.FoundationR3Url + "/v1" + "/RefOffice/GetRefOfficeByRefOfficeId"
     public static GetAllRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/GetAllRefOffice";
+    public static GetListUpperHierarchyRefOfficeByRefOrgId = environment.FoundationR3Url + "/v1" + "/RefOffice/GetListUpperHierarchyRefOfficeByRefOrgId";
     public static AddRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/AddRefOffice";
     public static AddRefOfficeAreaMember = environment.FoundationR3Url + "/v1" + "/RefOffice/AddRefOfficeAreaMember";
     public static UpdateRefOfficeAreaId = "/RefOffice/UpdateRefOfficeAreaId";
