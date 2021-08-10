@@ -4,6 +4,7 @@ export class CustCompanyMgmntShrholderObj {
     MrJobPositionCode: string;
     MrPositionSlikCode: string;
     MrShrholderTypeCode: string;
+    RowVersion: string;
     IsActive: boolean;
     IsOwner: boolean;
     IsSigner: boolean;
@@ -20,5 +21,6 @@ export class CustCompanyMgmntShrholderObj {
         this.MrJobPositionCode = "";
         this.MrPositionSlikCode = "";
         this.MrShrholderTypeCode = "";
+        this.RowVersion = "";
     }
 }

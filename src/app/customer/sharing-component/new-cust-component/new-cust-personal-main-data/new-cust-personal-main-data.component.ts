@@ -663,8 +663,12 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
     tempReqObj.RefProfessionId = tempForm["RefProfessionId"] != 0 ? tempForm["RefProfessionId"] : null;
     tempReqObj.MrJobPositionCode = tempForm["MrJobPositionCode"];
-    if (this.CustDataMode == this.CustDataModeFamily) tempReqObj.EmploymentEstablishmentDt = tempForm["EmploymentEstablishmentDt"];
-    if (!tempReqObj.RefProfessionId && !tempReqObj.MrJobPositionCode) tempReqObj = null;
+    if (this.CustDataMode == this.CustDataModeFamily) {
+      tempReqObj.EmploymentEstablishmentDt = tempForm["EmploymentEstablishmentDt"];
+      if (!tempReqObj.RefProfessionId && !tempReqObj.MrJobPositionCode && !tempReqObj.EmploymentEstablishmentDt) tempReqObj = null;
+    } else {
+      if (!tempReqObj.RefProfessionId && !tempReqObj.MrJobPositionCode) tempReqObj = null;
+    }
     return tempReqObj
   }
 
