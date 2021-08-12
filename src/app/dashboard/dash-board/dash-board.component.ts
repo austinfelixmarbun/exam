@@ -25,14 +25,14 @@ export class DashBoardComponent implements OnInit {
     this.Item = {Url : AdInsConstant.GetThingsToDoByRole, Module : "FOU"};
 
     let UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    this.http.post<ResDashboardObj>(AdInsConstant.GetDashboardAccessToken, {UserName: UserAccess[CommonConstant.USER_NAME]}).subscribe(
-        (response) => {
-          if (response.dashboardUrl != null && response.dashboardUrl != "") {
-            this.urlLink = response.dashboardUrl;
-            this.isReady = true;
-          }
-        }
-    );
+    // this.http.post<ResDashboardObj>(AdInsConstant.GetDashboardAccessToken, {UserName: UserAccess[CommonConstant.USER_NAME]}).subscribe(
+    //     (response) => {
+    //       if (response.dashboardUrl != null && response.dashboardUrl != "") {
+    //         this.urlLink = response.dashboardUrl;
+    //         this.isReady = true;
+    //       }
+    //     }
+    // );
   }
   
   showMessage(message: any) {

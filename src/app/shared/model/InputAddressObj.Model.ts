@@ -2,9 +2,10 @@
 import {FormGroup} from '@angular/forms';
 import { environment } from 'environments/environment';
 import { InputFieldObj } from './InputFieldObj.Model';
+import { UcAddressObj } from './UcAddressObj.Model';
 
 export class InputAddressObj {
-    default: any;
+    default: UcAddressObj;
     title : string;
     inputField: InputFieldObj;
     showAllPhn: boolean;
@@ -27,6 +28,7 @@ export class InputAddressObj {
     isReadonly: boolean;
 
     constructor() {
+        this.default = new UcAddressObj();
         this.title = "Address Information";
         this.inputField = new InputFieldObj();
         this.showAllPhn = true;

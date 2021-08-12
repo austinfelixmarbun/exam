@@ -1,12 +1,10 @@
 export class ReqCustAttrContentByCustIdAndAttrGroupObj {
     CustId: number;
     AttrGroup: string;
-    RowVersion: string;
 
     constructor() {
         this.CustId = 0;
         this.AttrGroup = "";
-        this.RowVersion = "";
     }
 }
 
@@ -15,5 +13,15 @@ export class ReqCustAttrContentByCustIdAndAttrGroupAndListAttrCodeObj extends Re
     constructor() {
         super();
         this.AttrCodes = new Array<string>();
+    }
+}
+
+export class ReqCustAttrContentByCustIdAndListAttrGroupObj {
+    CustId: number;
+    AttrGroups: Array<string>;
+
+    constructor() {
+        this.CustId = 0;
+        this.AttrGroups = new Array();
     }
 }

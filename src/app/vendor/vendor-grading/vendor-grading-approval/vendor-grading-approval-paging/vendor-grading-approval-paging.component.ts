@@ -7,9 +7,12 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 import { String } from 'typescript-string-operations';
 
@@ -22,15 +25,19 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
 
   inputPagingObj: UcPagingObj = new UcPagingObj();
   arrCrit: any;
-  userContext: any;
+  userContext: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));;
 
   constructor(private toastr: NGXToastrService, private httpClient: HttpClient, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit() {
-    this.userContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));;
     this.inputPagingObj._url = "./assets/ucpaging/dealer-grading/searchDealerGradingApproval.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/dealer-grading/searchDealerGradingApproval.json";
 
+    if(environment.isCore){
+      this.inputPagingObj._url = "./assets/ucpaging/dealer-grading/V2/searchDealerGradingApprovalV2.json";
+      this.inputPagingObj.pagingJson = "./assets/ucpaging/dealer-grading/V2/searchDealerGradingApprovalV2.json";
+    }
+    
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
     critObj.DataType = 'text';
@@ -45,7 +52,6 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
     critObj.propName = 'CURRENT_USER_ID';
     critObj.value = this.userContext.UserName;
     this.arrCrit.push(critObj);
-
 
     critObj = new CriteriaObj();
     critObj.DataType = 'text';

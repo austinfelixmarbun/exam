@@ -12,6 +12,9 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { CustObj } from 'app/shared/model/CustObj.Model';
+import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-customer-company-detail',
@@ -36,6 +39,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
   CustomerDetailForm = this.fb.group({
     NumOfEmp: ['', [Validators.maxLength(100), Validators.required, Validators.pattern("^[0-9]+$")]],
     EstablishmentDt: ['', [Validators.required]],
+    MrCustModelCode: [''],
     IsSkt: [false],
     IsVip: [false],
     VipNotes: [''],
@@ -57,6 +61,8 @@ export class CustomerCompanyDetailComponent implements OnInit {
     });
   }
 
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
+  readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
     this.lookUpObj = new InputLookupObj();
@@ -64,10 +70,12 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.lookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
 
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
+
     this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
       (response: CustObj) => {
-        console.log(response);
         this.CustomerDetailForm.patchValue({
+          MrCustModelCode: response.MrCustModelCode,
           IsVip: response.IsVip,
           VipNotes: response.VipNotes,
           IsAffiliateWithMf: response.IsAffiliateWithMf,
@@ -108,6 +116,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.custCompanyObj.IsVip = this.CustomerDetailForm.controls["IsVip"].value;
     this.custCompanyObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
     this.custCompanyObj.IsAffiliateWithMf = this.CustomerDetailForm.controls["IsAffiliateWithMf"].value;
+    this.custCompanyObj.MrCustModelCode = this.CustomerDetailForm.controls["MrCustModelCode"].value;
 
     if (this.tempRefIndustryObj != null && this.tempRefIndustryTypeId === null) {
       this.custCompanyObj.RefIndustryTypeId = this.custCompanyObj.RefIndustryTypeId;

@@ -52,7 +52,7 @@
                 </div>
               </div>
               <div class="form-group row adins-required">
-                <label class="col-md-3 adInsLabel" for="AttrTypeCode" translate>Attribute Type Code</label>
+                <label class="col-md-3 adInsLabel" for="AttrTypeCode" translate>Attribute Type</label>
                 <div class="col-md-9">
                   <select formControlName="AttrTypeCode" class="form-control"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.AttrTypeCode.invalid }">
@@ -76,15 +76,6 @@
                     </option>
                   </select>
                   <lib-uc-show-errors [control]="RefAttrForm.controls.AttrInputType" [submit]="enjiForm.submitted">
-                  </lib-uc-show-errors>
-                </div>
-              </div>
-              <div *ngIf="RefAttrForm.value.AttrInputType != AttrInputTypeDate" class="form-group row">
-                <label class="col-md-3 adInsLabel" for="DefaultValue" translate>Default Value</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="DefaultValue"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.DefaultValue.invalid }" />
-                  <lib-uc-show-errors [control]="RefAttrForm.controls.DefaultValue" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
               </div>
@@ -115,8 +106,7 @@
                 <div class="form-group row">
                   <label class="col-md-3 adInsLabel " for="PatternValue" translate>Pattern Value</label>
                   <div class="col-md-9">
-                    <label class="adInsLabel form-control"
-                      style="height: 2.5rem; border:none; text-transform: none !important ">{{RefAttrForm.controls.PatternValue.value}}</label>
+                    <input type="text" class="form-control adInsInput" formControlName="PatternValue" disabled />
                   </div>
                 </div>
               </div>
@@ -151,10 +141,19 @@
                     </div>
                     <div class="col-md-1" style="padding-top: 8px;">
                       <a (click)="RemoveAttrValueRow(i)">
-                        <i class="fas fa-times"></i>
+                        <i class="ft-trash-2"></i>
                       </a>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div *ngIf="RefAttrForm.value.AttrInputType != AttrInputTypeDate" class="form-group row">
+                <label class="col-md-3 adInsLabel" for="DefaultValue" translate>Default Value</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput" formControlName="DefaultValue"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && RefAttrForm.controls.DefaultValue.invalid }" />
+                  <lib-uc-show-errors [control]="RefAttrForm.controls.DefaultValue" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
               <div class="form-group row">

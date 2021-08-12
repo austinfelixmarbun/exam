@@ -26,7 +26,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adins-label" translate>Customer Relationship</label>
+    <label class="col-md-2 adins-required-label" translate>Customer Relationship</label>
     <div class="col-md-4">
       <label>{{appCustRelationship}}</label>
     </div>
@@ -35,9 +35,7 @@
     </div>
     <div class="col-md-4">
       <lib-ucdropdownlist [dropdownListObj]="ddlMrCustRelationshipCode" [parentForm]="CustomerEmergencyForm" [enjiForm]="enjiForm"
-            [identifier]="'CustRelation'"></lib-ucdropdownlist>	
-      <lib-uc-show-errors [control]="CustomerEmergencyForm.controls.CustRelation" [submit]="enjiForm.submitted">
-      </lib-uc-show-errors>
+      [identifier]="'CustRelation'"></lib-ucdropdownlist>
     </div>
   </div>
   <div class="form-group row">
@@ -101,7 +99,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-md-2 adInsLabel adins-label" translate>Gender</label>
+    <label class="col-md-2 adInsLabel adins-required-label" translate>Gender</label>
     <div class="col-md-4">
       <label>{{appGender}}</label>
     </div>
@@ -110,9 +108,7 @@
     </div>
     <div class="col-md-4">
       <lib-ucdropdownlist [dropdownListObj]="ddlGender" [parentForm]="CustomerEmergencyForm" [enjiForm]="enjiForm"
-            [identifier]="'Gender'"></lib-ucdropdownlist>
-      <lib-uc-show-errors [control]="CustomerEmergencyForm.controls.Gender" [submit]="enjiForm.submitted">
-      </lib-uc-show-errors>
+      [identifier]="'Gender'"></lib-ucdropdownlist>
     </div>
   </div>
   <div class="form-group row">
