@@ -22,6 +22,7 @@ import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
 import { CookieService } from 'ngx-cookie';
+import { NewCustSetData } from '../new-cust-component/NewCustSetData.Service';
 import { JobAddrSectionComponent } from './job-addr-section/job-addr-section.component';
 
 @Component({
@@ -61,16 +62,17 @@ export class CustPersonalJobDataComponent implements OnInit {
 
   //#region Get
   businessDtMin: Date;
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   InitData() {
     this.BindLookupProfession();
     this.BindLookupCompany();
     this.BindLookupIndustry();
     this.BindLookupJobPosition();
 
-    this.initDdlRefMaster(this.RefMasterTypeCodeJobStat);
-    this.initDdlRefMaster(this.RefMasterTypeCodeCoyScale);
-    this.initDdlRefMaster(this.RefMasterTypeCodeInvestmentType);
-    this.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeJobStat] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeJobStat);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCoyScale] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCoyScale);
+    this.DictUcDDLObj[this.RefMasterTypeCodeInvestmentType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeInvestmentType);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel].ddlType = UcDropdownListConstant.DDL_TYPE_BLANK;
 
     this.ResetForm();
@@ -157,22 +159,6 @@ export class CustPersonalJobDataComponent implements OnInit {
     this.jobPositionLookupObj.genericJson = "./assets/uclookup/Customer/lookupJobPosition.json";
   }
   //#endregion
-
-  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
-  initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false) {
-    let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
-    let refMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: refMasterTypeCode,
-      MappingCode: mappingCode
-    };
-    tempDdlObj.apiUrl = URLConstant.GetListActiveRefMaster;
-    tempDdlObj.requestObj = refMasterObj;
-    tempDdlObj.customObjName = CommonConstant.ReturnObj;
-    tempDdlObj.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
-    tempDdlObj.isSelectOutput = isSelectOutput;
-    tempDdlObj.isReady = true;
-    this.DictUcDDLObj[refMasterTypeCode] = tempDdlObj;
-  }
   //#endregion
 
   tempCustPersonalJobDataObj: CustPersonalJobDataObj = new CustPersonalJobDataObj();

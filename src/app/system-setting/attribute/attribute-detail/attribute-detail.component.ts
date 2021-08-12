@@ -123,7 +123,7 @@ export class AttributeDetailComponent implements OnInit {
               this.isTextBox = true;
               this.RefAttrForm.addControl("PatternCode", this.fb.control(''));
               this.RefAttrForm.addControl("PatternValue", this.fb.control(''));
-              this.RefAttrForm.addControl("AttrLength", this.fb.control('', [Validators.required]));
+              this.RefAttrForm.addControl("AttrLength", this.fb.control('', [Validators.required, Validators.max(4000)]));
               this.RefAttrForm.patchValue({
                 PatternCode: refAttr["PatternCode"],
                 PatternValue: refAttr["PatternValue"],
@@ -166,7 +166,7 @@ export class AttributeDetailComponent implements OnInit {
       this.isTextBox = true;
       this.RefAttrForm.addControl("PatternCode", this.fb.control(''));
       this.RefAttrForm.addControl("PatternValue", this.fb.control(''));
-      this.RefAttrForm.addControl("AttrLength", this.fb.control('', [Validators.required]));
+      this.RefAttrForm.addControl("AttrLength", this.fb.control('', [Validators.required,  Validators.max(4000)]));
     }
     else if (type != CommonConstant.AttrInputTypeText) {
       this.RefAttrForm.removeControl("AttrLength");

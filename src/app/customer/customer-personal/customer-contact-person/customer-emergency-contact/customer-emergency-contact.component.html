@@ -13,12 +13,10 @@
               [enjiForm]="enjiForm" [identifier]="'ExistingCustomer'" (lookup)=getLookUpCustomer($event) (inputtedValue)="onTypeName($event)">
             </lib-uclookupgeneric>
           </div>
-          <label class="col-md-2 adins-label" translate>Gender</label>
+          <label class="col-md-2 adins-required-label" translate>Gender</label>
           <div class="col-md-4">
             <lib-ucdropdownlist [dropdownListObj]="ddlMrGenderCode" [parentForm]="CustomerContactForm" [enjiForm]="enjiForm"
-                                      [identifier]="'MrGenderCode'"></lib-ucdropdownlist>
-            <lib-uc-show-errors [control]="CustomerContactForm.controls.MrGenderCode" [submit]="enjiForm.submitted">
-            </lib-uc-show-errors>
+            [identifier]="'MrGenderCode'"></lib-ucdropdownlist>
           </div>
         </div>
 
@@ -67,13 +65,10 @@
             <lib-uc-show-errors [control]="CustomerContactForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
             </lib-uc-show-errors>
           </div>
-          <label class="col-md-2  adins-label" translate>Customer Relationship</label>
+          <label class="col-md-2  adins-required-label" translate>Customer Relationship</label>
           <div class="col-md-4">
             <lib-ucdropdownlist [dropdownListObj]="ddlMrCustRelationshipCode" [parentForm]="CustomerContactForm" [enjiForm]="enjiForm"
             [identifier]="'MrCustRelationshipCode'"></lib-ucdropdownlist>
-            <lib-uc-show-errors [control]="CustomerContactForm.controls.MrCustRelationshipCode"
-              [submit]="enjiForm.submitted">
-            </lib-uc-show-errors>
           </div>
         </div>
         <div class="form-group row">

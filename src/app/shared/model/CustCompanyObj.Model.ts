@@ -21,6 +21,7 @@ export class CustCompanyObj {
   IsSkt: boolean;
   IsVip: boolean;
   VipNotes: string;
+  MrCustModelCode: string;
   IsAffiliateWithMf: boolean;
   RefSectorEconomySlikId: number;
 }

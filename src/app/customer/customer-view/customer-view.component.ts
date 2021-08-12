@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { environment } from 'environments/environment';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-customer-view',
@@ -17,13 +15,9 @@ export class CustomerViewComponent implements OnInit {
   viewCustCoyMainInfoHeader: UcViewGenericObj= new UcViewGenericObj();
 
   CustId: number;
-
-  
-
   custType: string;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private location: Location) { 
-    this.location.replaceState(environment.FoundationR3Web + "/View/Customer/");
+  constructor(private http: HttpClient, private route: ActivatedRoute) { 
   }
 
   ngOnInit() {

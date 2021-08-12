@@ -83,8 +83,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
     IdNo: [''],
     BirthPlace: [''],
     BirthDt: [''],
-    MrGenderCode: [''],
-    MrCustRelationshipCode: [''],
+    MrGenderCode: ['', Validators.required],
+    MrCustRelationshipCode: ['', Validators.required],
     MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     MobilePhnNo2: ['', [Validators.pattern("^[0-9]+$")]],
     Email: ['', [Validators.pattern(CommonConstant.regexEmail)]],
@@ -215,7 +215,6 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.default = UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = true;
     this.inputAddressObj.showFax = false;
