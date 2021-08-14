@@ -1,5 +1,5 @@
 {
-    "title": "Survey Task Assignment",
+    "title": "Survey Task Result",
     "component": [
         {
             "type": "dropdown",
@@ -19,38 +19,26 @@
         },
         {
             "type": "textbox",
-            "name": "SO.MR_SURVEY_INITIAL_CODE",
-            "id": "MrSurveyInitialCodeId",
+            "name": "ST.SRVY_TASK_NO",
+            "id": "SrvyTaskNoId",
             "value": "",
-            "label": "Survey Initial",
+            "label": "Survey Task No",
             "placeholder": ""
-        },
-        {
-            "type": "datepicker",
-            "datatype": "date",
-            "name": "SO.REQ_DT",
-            "id": "reqDtGte",
-            "value": "",
-            "restriction": "Gte",
-            "label": "Request Date >=",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "datepicker",
-            "datatype": "date",
-            "name": "SO.REQ_DT",
-            "id": "reqDtLte",
-            "value": "",
-            "restriction": "Lte",
-            "label": "Request Date <=",
-            "placeholder": "Placeholder"
         },
         {
             "type": "textbox",
             "name": "SO.TRX_REF_NO",
             "id": "TrxRefNoId",
             "value": "",
-            "label": "Transaction Reference No",
+            "label": "Reference No",
+            "placeholder": ""
+        },
+        {
+            "type": "textbox",
+            "name": "SO.MR_SURVEY_INITIAL_CODE",
+            "id": "MrSurveyInitialCodeId",
+            "value": "",
+            "label": "Survey Initial",
             "placeholder": ""
         },
         {
@@ -63,15 +51,23 @@
         },
         {
             "type": "textbox",
-            "name": "RU.USERNAME",
-            "id": "UsernameId",
+            "name": "SS.SUBJECT_NAME",
+            "id": "SubjectNameId",
             "value": "",
-            "label": "Request By",
+            "label": "Subject Name",
+            "placeholder": ""
+        },
+        {
+            "type": "textbox",
+            "name": "RUS.USERNAME",
+            "id": "UsernameSurveyorId",
+            "value": "",
+            "label": "Surveyor",
             "placeholder": ""
         }
     ],
     "querystring": {
-        "name": "searchSurveyTaskAssignment"
+        "name": "searchSurveyTaskResult"
     },
     "headerList": [
         {
@@ -79,6 +75,12 @@
             "position": "center",
             "label": "Office Name",
             "name": "OfficeName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Survey Task No",
+            "name": "SrvyTaskNo"
         },
         {
             "type": "sort",
@@ -101,26 +103,26 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Request Date",
-            "name": "RequestDate"
+            "label": "Subject Name",
+            "name": "SubjectName"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Subject Type",
+            "name": "SubjectType"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "Order Information",
-            "name": "OrderInfo"
+            "label": "Addr",
+            "name": "Addr"
         },
         {
             "type": "sort",
             "position": "center",
-            "label": "Credit Score",
-            "name": "CreditScore"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "Customer Rating",
-            "name": "CustRating"
+            "label": "Surveyor",
+            "name": "SurveyorName"
         },
         {
             "type": "label",
@@ -137,6 +139,11 @@
         {
             "type": "text",
             "position": "center",
+            "property": "SrvyTaskNo"
+        },
+        {
+            "type": "text",
+            "position": "center",
             "property": "SurveyInitial"
         },
         {
@@ -149,24 +156,24 @@
             "property": "CustName"
         },
         {
-            "type": "date",
+            "type": "text",
             "position": "center",
-            "property": "RequestDate"
+            "property": "SubjectName"
         },
         {
             "type": "text",
             "position": "center",
-            "property": "OrderInfo"
+            "property": "SubjectType"
         },
         {
             "type": "text",
             "position": "center",
-            "property": "CreditScore"
+            "property": "Addr"
         },
         {
             "type": "text",
             "position": "center",
-            "property": "CustRating"
+            "property": "SurveyorName"
         },
         {
             "type": "action",
@@ -174,12 +181,24 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "SURVEY_TASK_ASSIGNMENT_DETAIL",
+                    "path": "SURVEY_TASK_RESULT_PAGE",
                     "param": [
                         {
-                            "type": "SurveyOrderId",
-                            "property": "SurveyOrderId"
-                        }                        
+                            "type": "SrvyTaskId",
+                            "property": "SrvyTaskId"
+                        },
+                        {
+                            "type": "SrvyOrderId",
+                            "property": "SrvyOrderId"
+                        },
+                        {
+                            "type": "SurveyorName",
+                            "property": "SurveyorName"
+                        },
+                        {
+                            "type": "Type",
+                            "property": "SubjectType"
+                        }                     
                     ]
                 }
             ]

@@ -178,6 +178,7 @@ export const ROUTES: RouteInfo[] = [
       { Path: NavigationConstant.SRVY_TASK, Title: 'Survey Task Inquiry', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.SURVEYOR_PAGING, Title: 'Surveyor', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.SURVEY_TASK_ASSIGNMENT_PAGING, Title: 'Survey Task Assignment', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.SURVEY_TASK_RESULT_PAGING, Title: 'Survey Task Result', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.SURVEY_RESULT_REVIEW_PAGING, Title: 'Survey Result Review', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] }
 
     ], Params: []
