@@ -11,6 +11,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { ReqSrvyTaskAndSendToMobileObj } from 'app/shared/model/Request/ReqSrvyTaskAndSendToMobileObj.Model';
+import { ReqSrvyTaskIdAndUsername } from 'app/shared/model/Request/SrvyTask/ReqSrvyTaskIdAndUsernameObj.model';
 import { SrvyTaskObj } from 'app/shared/model/SrvyTaskObj.Model';
 import { WhereValueObj } from 'app/shared/model/UcPagingObj.Model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
@@ -34,6 +35,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   lookupSurveyorObj: InputLookupObj = new InputLookupObj();
   lookupSurveyorNationNoObj: InputLookupObj = new InputLookupObj();
   surveyOrderId: number;
+  reqByIdAndUsername: ReqSrvyTaskIdAndUsername = new ReqSrvyTaskIdAndUsername();
   parentForm: FormGroup;
   refUserId: number;
   surveyFormSchmId: number;
@@ -249,7 +251,10 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   CancelSurveyTask(surveyTaskId) {
     var result = confirm("Are you sure to cancel?");
     if (result) {
-        this.httpClient.post(URLConstant.CancelSurveyTaskBySurveyTaskId, { Id: surveyTaskId }).subscribe(
+      const getuserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+      this.reqByIdAndUsername.SrvyTaskId = surveyTaskId;
+      this.reqByIdAndUsername.Username = getuserAccess.UserName;
+        this.httpClient.post(URLConstant.CancelSurveyTaskBySurveyTaskId, this.reqByIdAndUsername).subscribe(
           (response) => {
             this.toastr.successMessage("Survey Task has been cancelled!");
             window.location.reload();
