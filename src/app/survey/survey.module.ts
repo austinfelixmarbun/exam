@@ -28,7 +28,6 @@ import { SurveyResultReviewDetailComponent } from './survey-result-review-detail
 import { SurveyTaskResultDetailComponent } from './survey-task-result-detail/survey-task-result-detail.component';
 import { SurveyTaskResultPagingComponent } from './survey-task-result-paging/survey-task-result-paging.component';
 import { SurveyTaskResultPageComponent } from './survey-task-result-page/survey-task-result-page.component';
-import { SurveyTaskResultUploadComponent } from './survey-task-result-upload/survey-task-result-upload.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { ArchwizardModule } from 'angular-archwizard';
 import { MatTabsModule } from '@angular/material';
@@ -69,8 +68,7 @@ import { MatTabsModule } from '@angular/material';
     SurveyResultReviewDetailComponent,
     SurveyTaskResultDetailComponent,
     SurveyTaskResultPagingComponent,
-    SurveyTaskResultPageComponent,
-    SurveyTaskResultUploadComponent
+    SurveyTaskResultPageComponent
   ],
   providers: [
     NGXToastrService
