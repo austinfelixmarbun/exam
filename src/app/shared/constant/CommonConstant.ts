@@ -178,6 +178,7 @@ export class CommonConstant {
     public static GsCodePasswordRegex = "PASSWORD_REGEX";
     public static GSCodeIsShowCbxBorrow = "IS_SHOW_CBX_BORROW";
     public static GSCodeIsShowCbxPledge = "IS_SHOW_CBX_PLEDGE";
+    public static GSCodeIsDoubleLegalDocAllowed = "IS_DOUBLE_LEGAL_DOC_ALLOWED";
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
 
