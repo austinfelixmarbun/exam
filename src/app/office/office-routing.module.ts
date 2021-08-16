@@ -13,14 +13,15 @@ import { OfficeAreaMemberAddComponent } from './office-area/office-area-member/o
 import { PathConstant } from 'app/shared/PathConstant';
 import { PathConstantX } from 'app/impl/shared/PathConstantX';
 import { OfficeAddXComponent } from 'app/impl/office/office-add-x/office-add-x.component';
+import { OfficeXComponent } from 'app/impl/office/office-x.component';
 
 const routes: Routes = [
   {
     path: '',
     children: [
       {
-        path: PathConstant.PAGING,
-        component: OfficeComponent,
+        path: PathConstantX.PAGING,
+        component: OfficeXComponent,
         data: {
           title: 'Office'
         },

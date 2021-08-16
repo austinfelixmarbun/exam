@@ -31,6 +31,9 @@ import { CustomerUpdateMasterComponent } from './customer-update-master/customer
 import { CustomerUpdateMasterDetailComponent } from './customer-update-master/customer-update-master-detail/customer-update-master-detail.component';
 import { PathConstant } from 'app/shared/PathConstant';
 import { NewCustHeaderComponent } from './sharing-component/new-cust-header/new-cust-header.component';
+import { PathConstantX } from 'app/impl/shared/PathConstantX';
+import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header-x/new-cust-header-x.component';
+import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page-x/customer-personal-page-x.component';
 
 const routes: Routes = [
   {
@@ -114,8 +117,8 @@ const routes: Routes = [
       },
 
       {
-        path: PathConstant.CUST_PERSONAL_PAGE,
-        component: CustomerPersonalPageComponent,
+        path: PathConstantX.CUST_PERSONAL_PAGE,
+        component: CustomerPersonalPageXComponent,
         data: {
           title: 'Customer Personal DuplicateCheck  '
         }
@@ -233,8 +236,8 @@ const routes: Routes = [
         }
       },
       {
-        path: PathConstant.NEW_CUST,
-        component: NewCustHeaderComponent,
+        path: PathConstantX.NEW_CUST,
+        component: NewCustHeaderXComponent,
         data: {
           title: 'New Cust'
         }

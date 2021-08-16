@@ -106,7 +106,7 @@ export class OfficeAddXComponent implements OnInit {
     MrCenterGrpTypeCode: ['', Validators.required],
     CntctPersonName: ['', Validators.required],
     CntctPersonJobTitle: ['', Validators.required],
-    CntctPersonEmail1: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    CntctPersonEmail1: ['', Validators.pattern('^[A-Z0-9._%+-]+@[a-z0-9.-]+\.[A-Z]{2,4}$')],
     CntctPersonEmail2: ['', Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')],
     CntctPersonMobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     CntctPersonMobilePhnNo2: ['', [Validators.pattern('^[0-9]+$')]],
@@ -288,13 +288,14 @@ export class OfficeAddXComponent implements OnInit {
             AllowAppCreated: this.resultData.IsAllowAppCreated,
             CntctPersonName: this.resultData.CntctPersonName,
             CntctPersonJobTitle: this.resultData.CntctPersonJobTitle,
-            CntctPersonEmail1: this.resultData.CntctPersonEmail1,
+            CntctPersonEmail1: this.resultData.CntctPersonEmail1==null || this.resultData.CntctPersonEmail1=="" ? "-" : this.resultData.CntctPersonEmail1,
             CntctPersonEmail2: this.resultData.CntctPersonEmail2,
             CntctPersonMobilePhnNo1: this.resultData.CntctPersonMobilePhnNo1,
             CntctPersonMobilePhnNo2: this.resultData.CntctPersonMobilePhnNo2,
             // TaxOffice: this.resultData.RefTaxOfficeXId,
             // IsNationalCourt: this.resultData.IsNationalCourt,
             // NationalCourtOffice: this.resultData.NationalCourtOffice
+            
           })
           this.checkType();
           this.addressObj.Addr = this.resultData.OfficeAddr;
@@ -464,7 +465,7 @@ export class OfficeAddXComponent implements OnInit {
       this.officeObj.MrCenterGrpTypeCode = "";
     }
 
-    this.officeObj.CntctPersonEmail1 = this.OfficeForm.value.CntctPersonEmail1;
+    this.officeObj.CntctPersonEmail1 = this.OfficeForm.value.CntctPersonEmail1==null || this.OfficeForm.value.CntctPersonEmail1=="" ? "-" : this.OfficeForm.value.CntctPersonEmail1;
     this.officeObj.CntctPersonEmail2 = this.OfficeForm.value.CntctPersonEmail2;
     this.officeObj.CntctPersonMobilePhnNo1 = this.OfficeForm.value.CntctPersonMobilePhnNo1;
     this.officeObj.CntctPersonMobilePhnNo2 = this.OfficeForm.value.CntctPersonMobilePhnNo2;

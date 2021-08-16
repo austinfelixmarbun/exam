@@ -123,6 +123,7 @@ import { NewCustomerSharingModule } from './sharing-component/new-cust-sharing.m
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page-x/customer-personal-page-x.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -261,7 +262,8 @@ export const customCurrencyMaskConfig = {
     UpdateCustomerCompanyLegalDocComponent,
     CustBankAccComponent,
     CustAssetComponent,
-    CustomerViewCustomerAssetComponent
+    CustomerViewCustomerAssetComponent,
+    CustomerPersonalPageXComponent
   ],
   providers: [
     CustAssetComponent,

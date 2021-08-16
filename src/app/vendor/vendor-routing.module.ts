@@ -38,6 +38,13 @@ import { VendorGradingRequestDetailComponent } from "./vendor-grading/vendor-gra
 import { VendorGradingApprovalPagingComponent } from "./vendor-grading/vendor-grading-approval/vendor-grading-approval-paging/vendor-grading-approval-paging.component";
 import { VendorGradingApprovalDetailComponent } from "./vendor-grading/vendor-grading-approval/vendor-grading-approval-detail/vendor-grading-approval-detail.component";
 import { VendorGradingInquiryPagingComponent } from "./vendor-grading/vendor-grading-inquiry-paging/vendor-grading-inquiry-paging.component";
+import { PathConstantX } from 'app/impl/shared/PathConstantX';
+import { VendorBranchAddEditXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-add-edit-x/vendor-branch-add-edit-x.component';
+import { VendorHoldingAddEditXComponent } from 'app/impl/vendor/vendor-holding-add-edit-x/vendor-holding-add-edit-x.component';
+import { VendorHoAddEditXComponent } from 'app/impl/vendor/vendor-ho/vendor-ho-add-edit-x/vendor-ho-add-edit-x.component';
+import { VendorBranchEmployeeAddEditXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-employee-add-edit-x/vendor-branch-employee-add-edit-x.component';
+import { VendorAtpmAddEditXComponent } from 'app/impl/vendor/vendor-ATPM/vendor-atpm-add-edit-x/vendor-atpm-add-edit-x.component';
+import { VendorBranchEmployeePagingXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-employee-paging-x/vendor-branch-employee-paging-x.component';
 
 const routes: Routes = [
   {
@@ -51,8 +58,8 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.VENDOR_BRANCH_ADD,
-        component: VendorBranchAddEditComponent,
+        path: PathConstantX.VENDOR_BRANCH_ADD,
+        component: VendorBranchAddEditXComponent,
         data: {
           title: 'Vendor Branch Add'
         },
@@ -100,8 +107,8 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.VENDOR_HOLDING_DETAIL,
-        component: VendorHoldingAddEditComponent,
+        path: PathConstantX.VENDOR_HOLDING_DETAIL,
+        component: VendorHoldingAddEditXComponent,
         data: {
           title: 'Vendor Holding Add Edit'
         },
@@ -177,8 +184,8 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.VENDOR_HO_DETAIL,
-        component: VendorHoAddEditComponent,
+        path: PathConstantX.VENDOR_HO_DETAIL,
+        component: VendorHoAddEditXComponent,
         data: {
           title: 'Vendor HO Detail'
         },
@@ -213,15 +220,15 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.VENDOR_BRANCH_EMP_PAGING,
-        component: VendorBranchEmployeePagingComponent,
+        path: PathConstantX.VENDOR_BRANCH_EMP_PAGING,
+        component: VendorBranchEmployeePagingXComponent,
         data: {
           title: 'Vendor Branch Employee Paging'
         },
       },
       {
-        path: PathConstant.VENDOR_BRANCH_EMP_DETAIL,
-        component: VendorBranchEmployeeAddEditComponent,
+        path: PathConstantX.VENDOR_BRANCH_EMP_DETAIL,
+        component: VendorBranchEmployeeAddEditXComponent,
         data: {
           title: 'Vendor Branch Employee Detail'
         },
@@ -241,8 +248,8 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.VENDOR_ATPM_DETAIL,
-        component: VendorATPMAddEditComponent,
+        path: PathConstantX.VENDOR_ATPM_DETAIL,
+        component: VendorAtpmAddEditXComponent,
         data: {
           title: 'Vendor ATPM Detail'
         },
