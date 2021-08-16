@@ -123,6 +123,14 @@ import { NewCustomerSharingModule } from './sharing-component/new-cust-sharing.m
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page-x/customer-personal-page-x.component';
+import { CustomerPersonalJobDataXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/customer-personal-job-data-x.component';
+import { JobDataEmployeeXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-employee-x/job-data-employee-x.component';
+import { JobDataNonProfessionalXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-non-professional-x/job-data-non-professional-x.component';
+import { JobDataProfessionalXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-professional-x/job-data-professional-x.component';
+import { JobDataSmeXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-small-medium-enterprise-x/job-data-small-medium-enterprise-x.component';
+import { CustomerCompanyPageXComponent } from 'app/impl/customer/customer-company/customer-company-page-x/customer-company-page-x.component';
+import { CustomerCompanyDetailXComponent } from 'app/impl/customer/customer-company/customer-company-detail-x/customer-company-detail-x.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -185,6 +193,7 @@ export const customCurrencyMaskConfig = {
     CustomerCompanyAddressComponent,
     CustomerCompanyAddressAddComponent,
     CustomerPersonalJobDataComponent,
+    CustomerPersonalJobDataXComponent,
     JobDataNonProfessionalComponent,
     JobDataProfessionalComponent,
     JobDataEmployeeComponent,
@@ -261,12 +270,20 @@ export const customCurrencyMaskConfig = {
     UpdateCustomerCompanyLegalDocComponent,
     CustBankAccComponent,
     CustAssetComponent,
-    CustomerViewCustomerAssetComponent
+    CustomerViewCustomerAssetComponent,
+    CustomerPersonalPageXComponent,
+    JobDataEmployeeXComponent,
+    JobDataNonProfessionalXComponent,
+    JobDataProfessionalXComponent,
+    JobDataSmeXComponent,
+    CustomerCompanyPageXComponent,
+    CustomerCompanyDetailXComponent
   ],
   providers: [
     CustAssetComponent,
     CustAssetDetailComponent,
     CustomerPersonalJobDataComponent,
+    CustomerPersonalJobDataXComponent,
     RegexService
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent, CustAssetDetailComponent]
