@@ -115,10 +115,9 @@ const routes: Routes = [
           title: 'Review Upload Negative Customer Detail'
         }
       },
-
       {
-        path: PathConstantX.CUST_PERSONAL_PAGE,
-        component: CustomerPersonalPageXComponent,
+        path: PathConstant.CUST_PERSONAL_PAGE,
+        component: CustomerPersonalPageComponent,
         data: {
           title: 'Customer Personal DuplicateCheck  '
         }
@@ -236,12 +235,26 @@ const routes: Routes = [
         }
       },
       {
+        path: PathConstant.NEW_CUST,
+        component: NewCustHeaderComponent,
+        data: {
+          title: 'New Cust'
+        }
+      },
+      {
+        path: PathConstantX.CUST_PERSONAL_PAGE,
+        component: CustomerPersonalPageXComponent,
+        data: {
+          title: 'Customer Personal DuplicateCheck  '
+        }
+      },
+      {
         path: PathConstantX.NEW_CUST,
         component: NewCustHeaderXComponent,
         data: {
           title: 'New Cust'
         }
-      }
+      },
     ]
   }
 ];
