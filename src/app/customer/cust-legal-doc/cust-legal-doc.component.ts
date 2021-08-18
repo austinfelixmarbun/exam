@@ -24,7 +24,8 @@ export class CustLegalDocComponent implements OnInit {
 
   custLegalDocs: any;
   IdCust: number;
-  IsDoubleLegalDocAllowed: string = "";
+  ListLegalDocCantDuplicate: Array<string> = new Array<string>();
+  ListTempLegalCheck: Array<any> = new Array<any>();
   Page: string;
   ReqByCodeObj: GenericObj = new GenericObj();
   
@@ -66,10 +67,12 @@ export class CustLegalDocComponent implements OnInit {
   }
 
   async checkGSLegalDoc(){
-    this.ReqByCodeObj.Code = CommonConstant.GSCodeIsDoubleLegalDocAllowed;
+    this.ReqByCodeObj.Code = CommonConstant.GSCodeListLegalDocCantDuplicate;
     await this.httpClient.post(URLConstant.GetGeneralSettingValueByCode, this.ReqByCodeObj).toPromise().then(
       (response) => {
-        this.IsDoubleLegalDocAllowed = response["GsValue"];
+        if (response["GsValue"] != undefined && response["GsValue"] != "") {
+          this.ListLegalDocCantDuplicate = response["GsValue"].split('|')
+        }
       }
     );
   }
@@ -78,7 +81,7 @@ export class CustLegalDocComponent implements OnInit {
     const modalCustLegalDoc = this.modalService.open(CustLegalDocDetailComponent);
     modalCustLegalDoc.componentInstance.CustCompanyId = this.CustCompanyId;
     modalCustLegalDoc.componentInstance.CustLegalDocs = this.custLegalDocs;
-    modalCustLegalDoc.componentInstance.IsDoubleLegalDocAllowed = this.IsDoubleLegalDocAllowed;
+    modalCustLegalDoc.componentInstance.ListLegalDocCantDuplicate = this.ListLegalDocCantDuplicate;
     modalCustLegalDoc.result.then(
       (response) => {
         this.spinner.show();
@@ -115,18 +118,21 @@ export class CustLegalDocComponent implements OnInit {
   }
 
   async next() { 
-    if(this.IsDoubleLegalDocAllowed != "1"){
       var groupedCustLegalDoc = this.groupBy(this.custLegalDocs, function (item) {
         return [item.MrLegalDocTypeCode, item.DocNo];
       });
   
-      var duplCustLegalDoc = groupedCustLegalDoc.find(x => x.length > 1);
-  
+      var duplCustLegalDoc = groupedCustLegalDoc.filter(x => x.length > 1);
       if(duplCustLegalDoc != undefined){
-        this.toastr.warningMessage(String.Format(ExceptionConstant.DUPLICATE_LEGAL_DOC, duplCustLegalDoc[0].MrLegalDocTypeCode, duplCustLegalDoc[0].DocNo));
-        return;
+        for(var i = 0; i < duplCustLegalDoc.length ; i++){
+          this.ListTempLegalCheck = duplCustLegalDoc[i];
+          var checkGSValue = this.ListLegalDocCantDuplicate.find(x => x == this.ListTempLegalCheck[0].MrLegalDocTypeCode);
+          if(checkGSValue != null){
+            this.toastr.warningMessage(String.Format(ExceptionConstant.DUPLICATE_LEGAL_DOC, duplCustLegalDoc[0].MrLegalDocTypeCode, duplCustLegalDoc[0].DocNo));
+            return;
+          }
+        }
       }
-    }
 
     this.outputTab.emit({ stepMode: 'next'});
   }

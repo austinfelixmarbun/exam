@@ -22,7 +22,7 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 export class CustLegalDocDetailComponent implements OnInit {
   @Input() CustCompanyId: number;
   @Input() CustLegalDocs: Array<CustCompanyLegalDocObj>;
-  @Input() IsDoubleLegalDocAllowed: string;
+  @Input() ListLegalDocCantDuplicate: Array<string>;
 
   legalDocTypeList: any;
   businessDtMin: Date;
@@ -90,10 +90,13 @@ export class CustLegalDocDetailComponent implements OnInit {
       return;
     }
 
-    if(existCustLegalDoc != null && this.IsDoubleLegalDocAllowed != "1"){
-      var errorOutput = this.legalDocTypeList.ReturnObject.find(x => x.Key == this.CustCompanyLegalDocForm.value.MrLegalDocTypeCode);
-      this.toastr.warningMessage(String.Format(ExceptionConstant.DUPLICATE_LEGAL_DOC, errorOutput.Value, this.CustCompanyLegalDocForm.value.DocNo));
-      return;
+    if(existCustLegalDoc != null){
+      var checkGSValue = this.ListLegalDocCantDuplicate.find(x => x == existCustLegalDoc.MrLegalDocTypeCode);
+      if(checkGSValue != null){
+        var errorOutput = this.legalDocTypeList.ReturnObject.find(x => x.Key == this.CustCompanyLegalDocForm.value.MrLegalDocTypeCode);
+        this.toastr.warningMessage(String.Format(ExceptionConstant.DUPLICATE_LEGAL_DOC, errorOutput.Value, this.CustCompanyLegalDocForm.value.DocNo));
+        return;
+      }
     }
 
     this.httpClient.post(URLConstant.AddCustCompanyLegalDoc, custCompanyLegalDocData).subscribe(
