@@ -238,6 +238,20 @@ const routes: Routes = [
         }
       },
       {
+        path: PathConstant.NEW_CUST,
+        component: NewCustHeaderComponent,
+        data: {
+          title: 'New Cust'
+        }
+      },
+      {
+        path: PathConstantX.CUST_PERSONAL_PAGE,
+        component: CustomerPersonalPageXComponent,
+        data: {
+          title: 'Customer Personal DuplicateCheck  '
+        }
+      },
+      {
         path: PathConstantX.NEW_CUST,
         component: NewCustHeaderXComponent,
         data: {

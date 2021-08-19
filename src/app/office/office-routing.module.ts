@@ -20,15 +20,15 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: PathConstantX.PAGING,
-        component: OfficeXComponent,
+        path: PathConstant.PAGING,
+        component: OfficeComponent,
         data: {
           title: 'Office'
         },
       },
       {
-        path: PathConstantX.ADD,
-        component: OfficeAddXComponent,
+        path: PathConstant.ADD,
+        component: OfficeAddComponent,
         data: {
           title: 'Add Office'
         }
@@ -87,6 +87,20 @@ const routes: Routes = [
         component: OfficeAreaMemberAddComponent,
         data: {
           title: 'Office Area Member Add'
+        }
+      },
+      {
+        path: PathConstantX.PAGING,
+        component: OfficeXComponent,
+        data: {
+          title: 'Office'
+        },
+      },
+      {
+        path: PathConstantX.ADD,
+        component: OfficeAddXComponent,
+        data: {
+          title: 'Add Office'
         }
       }
     ]

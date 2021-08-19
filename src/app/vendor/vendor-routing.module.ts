@@ -58,8 +58,8 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstantX.VENDOR_BRANCH_ADD,
-        component: VendorBranchAddEditXComponent,
+        path: PathConstant.VENDOR_BRANCH_ADD,
+        component: VendorBranchAddEditComponent,
         data: {
           title: 'Vendor Branch Add'
         },
@@ -107,8 +107,8 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstantX.VENDOR_HOLDING_DETAIL,
-        component: VendorHoldingAddEditXComponent,
+        path: PathConstant.VENDOR_HOLDING_DETAIL,
+        component: VendorHoldingAddEditComponent,
         data: {
           title: 'Vendor Holding Add Edit'
         },
@@ -184,8 +184,8 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstantX.VENDOR_HO_DETAIL,
-        component: VendorHoAddEditXComponent,
+        path: PathConstant.VENDOR_HO_DETAIL,
+        component: VendorHoAddEditComponent,
         data: {
           title: 'Vendor HO Detail'
         },
@@ -220,15 +220,15 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstantX.VENDOR_BRANCH_EMP_PAGING,
-        component: VendorBranchEmployeePagingXComponent,
+        path: PathConstant.VENDOR_BRANCH_EMP_PAGING,
+        component: VendorBranchEmployeePagingComponent,
         data: {
           title: 'Vendor Branch Employee Paging'
         },
       },
       {
-        path: PathConstantX.VENDOR_BRANCH_EMP_DETAIL,
-        component: VendorBranchEmployeeAddEditXComponent,
+        path: PathConstant.VENDOR_BRANCH_EMP_DETAIL,
+        component: VendorBranchEmployeeAddEditComponent,
         data: {
           title: 'Vendor Branch Employee Detail'
         },
@@ -248,8 +248,8 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstantX.VENDOR_ATPM_DETAIL,
-        component: VendorAtpmAddEditXComponent,
+        path: PathConstant.VENDOR_ATPM_DETAIL,
+        component: VendorATPMAddEditComponent,
         data: {
           title: 'Vendor ATPM Detail'
         },
@@ -309,7 +309,49 @@ const routes: Routes = [
         data: {
           title: 'Auction Company Addedit'
         },
-      }
+      },
+      {
+        path: PathConstantX.VENDOR_BRANCH_ADD,
+        component: VendorBranchAddEditXComponent,
+        data: {
+          title: 'Vendor Branch Add'
+        },
+      },
+      {
+        path: PathConstantX.VENDOR_HOLDING_DETAIL,
+        component: VendorHoldingAddEditXComponent,
+        data: {
+          title: 'Vendor Holding Add Edit'
+        },
+      },
+      {
+        path: PathConstantX.VENDOR_HO_DETAIL,
+        component: VendorHoAddEditXComponent,
+        data: {
+          title: 'Vendor HO Detail'
+        },
+      },
+      {
+        path: PathConstantX.VENDOR_BRANCH_EMP_PAGING,
+        component: VendorBranchEmployeePagingXComponent,
+        data: {
+          title: 'Vendor Branch Employee Paging'
+        },
+      },
+      {
+        path: PathConstantX.VENDOR_BRANCH_EMP_DETAIL,
+        component: VendorBranchEmployeeAddEditXComponent,
+        data: {
+          title: 'Vendor Branch Employee Detail'
+        },
+      },
+      {
+        path: PathConstantX.VENDOR_ATPM_DETAIL,
+        component: VendorAtpmAddEditXComponent,
+        data: {
+          title: 'Vendor ATPM Detail'
+        },
+      },
     ]
 
   }
