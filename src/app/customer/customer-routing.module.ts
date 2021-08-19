@@ -117,10 +117,9 @@ const routes: Routes = [
           title: 'Review Upload Negative Customer Detail'
         }
       },
-
       {
-        path: PathConstantX.CUST_PERSONAL_PAGE,
-        component: CustomerPersonalPageXComponent,
+        path: PathConstant.CUST_PERSONAL_PAGE,
+        component: CustomerPersonalPageComponent,
         data: {
           title: 'Customer Personal DuplicateCheck  '
         }
