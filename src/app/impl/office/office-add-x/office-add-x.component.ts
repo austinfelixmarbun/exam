@@ -16,7 +16,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
-import { RefOfficeXObj } from 'app/impl/shared/model/RefOfficeX.model';
+import { RefOfficeObjX } from 'app/impl/shared/model/RefOfficeObjX.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -82,6 +82,7 @@ export class OfficeAddXComponent implements OnInit {
   refMasterCgType: RefMasterObj;
   orgMdlObj: OrgMdlObj
   arrCrit: any;
+  OfficeXId: number=0;
 
   refMasterKonsyaType: RefMasterObj;
   konSyaUrl: any;
@@ -124,7 +125,7 @@ export class OfficeAddXComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.OFFICE_PAGING;
   responseRefOfficeX: any;
-  officeXObj: RefOfficeXObj;
+  officeXObj: RefOfficeObjX;
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.apiUrl = URLConstant.GetRefOfficeByRefOfficeId;
@@ -403,13 +404,14 @@ export class OfficeAddXComponent implements OnInit {
 
   getRefOfficeXByOfficeCode(RefOfficeCode: string) {
     var obj = {
-      RefOfficeCode: RefOfficeCode
+      Code: RefOfficeCode
     };
     this.httpClient.post<any>(URLConstantX.GetRefOfficeXByRefOfficeCode, obj).subscribe(
       (response) => {
         this.responseRefOfficeX = response
         if (this.responseRefOfficeX.RefOfficeXId !== 0) 
         {
+          this.OfficeXId = this.responseRefOfficeX.RefOfficeXId;
           this.OfficeForm.patchValue({
             IsNationalCourt: this.responseRefOfficeX.IsNationalCourt,
             NationalCourtOffice: this.responseRefOfficeX.NationalCourtOffice
@@ -489,11 +491,23 @@ export class OfficeAddXComponent implements OnInit {
     this.officeObj.FaxArea = this.OfficeForm.value.UcAddress.FaxArea;
     this.officeObj.Fax = this.OfficeForm.value.UcAddress.Fax;
 
+    this.officeXObj = new RefOfficeObjX();
+
+    this.officeXObj.RefOfficeXId = this.OfficeXId;
+    this.officeXObj.IsNationalCourt = this.OfficeForm.controls["IsNationalCourt"].value;
+    this.officeXObj.RefOfficeCode = this.OfficeForm.controls["OfficeCode"].value;
+    this.officeXObj.RefTaxOfficeXId = this.OfficeForm.controls["TaxOffice"].value;
+    this.officeXObj.NationalCourtOffice = this.OfficeForm.controls["NationalCourtOffice"].value;
+
+
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
+      var obj = {
+        RefOfficeObj: this.officeObj,
+        RefOfficeObjX: this.officeXObj
+      }
+      this.httpClient.post(URLConstantX.AddRefOfficeX, obj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          this.saveRefOfficeX();
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
         }
       );
@@ -503,14 +517,16 @@ export class OfficeAddXComponent implements OnInit {
       this.officeObj.MrOfficeTypeCode = this.resultData.MrOfficeTypeCode
       this.officeObj.RefOfficeId = this.resultData.RefOfficeId;
       this.officeObj.RowVersion = this.resultData.RowVersion;
-      this.httpClient.post(URLConstant.EditRefOffice, this.officeObj).subscribe(
+      var obj = {
+        RefOfficeObj: this.officeObj,
+        RefOfficeObjX: this.officeXObj
+      }
+      this.httpClient.post(URLConstantX.EditRefOfficeX, obj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          this.saveRefOfficeX();
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
         }
       );
-
     }
   }
   checkType() {
@@ -553,18 +569,6 @@ export class OfficeAddXComponent implements OnInit {
       this.OfficeForm.controls.NationalCourtOffice.clearValidators();
     }
     this.OfficeForm.controls.NationalCourtOffice.updateValueAndValidity();
-  }
-
-  saveRefOfficeX() {
-    this.officeXObj = new RefOfficeXObj();
-
-    this.officeXObj.IsNationalCourt = this.OfficeForm.controls["IsNationalCourt"].value;
-    this.officeXObj.RefOfficeCode = this.OfficeForm.controls["OfficeCode"].value;
-    this.officeXObj.RefTaxOfficeXId = this.OfficeForm.controls["TaxOffice"].value;
-    this.officeXObj.NationalCourtOffice = this.OfficeForm.controls["NationalCourtOffice"].value;
-    this.httpClient.post<RefOfficeXObj>(URLConstantX.AddEditRefOfficeX, this.officeXObj).subscribe(
-      (response) => {}
-    );
   }
 
 }

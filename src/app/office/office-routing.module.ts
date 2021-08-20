@@ -34,6 +34,13 @@ const routes: Routes = [
         }
       },
       {
+        path: PathConstant.ADD,
+        component: OfficeAddComponent,
+        data: {
+          title: 'Add Office'
+        }
+      },
+      {
         path: PathConstant.OFFICE_EMP_POS,
         component: OfficeEmpPosComponent,
         data: {
