@@ -51,7 +51,7 @@
             <tr *ngFor="let item of AppShareholder; let i = index">
               <td style="text-align: left;">{{item.CustName}}</td>
               <td style="text-align: left;">{{item.MrCustTypeCodeDescr}}</td>
-              <td style="text-align: left;">{{item.SharePrcnt}}</td>
+              <td style="text-align: left;">{{item.SharePrcnt | number:'.6':'en-US'}} %</td>
               <td style="text-align: left;">{{item.IsOwner ? 'Yes' : 'No'}}</td>
               <td style="text-align: center; padding-left: 0;">
                 <a (click)="addShareholderHandler(i)" *ngIf="!item.IsMasterData">
@@ -102,7 +102,7 @@
             <tr *ngFor="let item of MasterShareholder; let i = index">
               <td style="text-align: left;">{{item.CustName}}</td>
               <td style="text-align: left;">{{item.MrCustTypeCodeDescr}}</td>
-              <td style="text-align: left;">{{item.SharePrcnt}}</td>
+              <td style="text-align: left;">{{item.SharePrcnt | number:'.6':'en-US'}} %</td>
               <td style="text-align: left;">{{item.IsOwner ? 'Yes' : 'No'}}</td>
               <td style="text-align: center; padding-left: 0;">
                 <a (click)="cancelShareholderHandler(i)" *ngIf="!item.IsMasterData">

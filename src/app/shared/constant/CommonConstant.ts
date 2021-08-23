@@ -360,4 +360,6 @@ export class CommonConstant {
     public static WfUploadAssetMasterReview = "UPLOAD_ASM_REVIEW";
     public static WF_CODE_UPD_CUST_MANUAL = "WF_UPD_CUST_MANUAL";
     public static ACT_CODE_UPD_CUST_DATA = "UPD_CUST_DATA";
+
+    public static CurrencyMaskPrct = { suffix: ' %', thousands: ',', decimal: '.', align: 'right', allowNegative: false, allowZero: true, precision: 6, nullable: false };
 }

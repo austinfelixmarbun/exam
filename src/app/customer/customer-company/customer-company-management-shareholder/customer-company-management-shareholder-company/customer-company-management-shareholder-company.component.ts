@@ -58,6 +58,7 @@ export class CustomerCompanyManagementShareholderCompanyComponent implements OnI
   MaxDate: any;
   UserAccess: any;
 
+  readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.isExistingCust = false;
   }
