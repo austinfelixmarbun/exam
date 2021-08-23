@@ -49,6 +49,10 @@
 								</mat-tab>
 							</div>
 
+							<div *ngIf="IsUseDigitalization">
+								<mat-tab label="Trusting Social">
+								</mat-tab>
+							</div>
 							<mat-tab label="Other Info">
 							</mat-tab>
 						</mat-tab-group>
@@ -73,7 +77,6 @@
 							<mat-tab label="Legal Document">
 							</mat-tab>
 							<mat-tab label="Highlight Comment"></mat-tab>
-
 							<!-- <div *ngIf="SysConfigResultObj?.ConfigValue == '1'"> -->
 							<div *ngIf="IsUseDms">
 								<mat-tab label="Document">
@@ -86,7 +89,10 @@
 									</app-customer-view-iframe-generic>
 								</mat-tab>
 							</div>
-							
+							<div *ngIf="IsUseDigitalization">
+								<mat-tab label="Trusting Social">
+								</mat-tab>
+							</div>
 							<mat-tab label="Other Info">
 							</mat-tab>
 						</mat-tab-group>

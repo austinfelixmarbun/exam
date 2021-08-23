@@ -37,7 +37,8 @@ import { CookieService } from 'ngx-cookie';
 import { CustAttrFormComponent } from '../component/cust-attr-form/cust-attr-form.component';
 import { FamilyFormComponent } from '../component/family-form/family-form.component';
 import { ShareholderFormComponent } from '../component/shareholder-form/shareholder-form.component';
-import { TrustingSocialReqHeaderComponent } from '../component/trusting-social-req-form/trusting-social-req-header.component';
+import { TrustingSocialReqHeaderComponent } from '../component/trusting-social/request/trusting-social-req-header.component';
+import { TrustingSocialViewHeaderComponent } from '../component/trusting-social/view/trusting-social-view-header.component';
 import { NewCustSetData } from '../NewCustSetData.Service';
 
 @Component({
@@ -73,7 +74,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   inputLookupObj: InputLookupObj = new InputLookupObj();
   IsUseDigitalization: string = "0";
   officeCode: string;
-  thirdPartyTrxNo: string = "";
+  thirdPartyTrxNo: string = null;
 
   constructor(private regexService: RegexService, private toastr: NGXToastrService,
     private http: HttpClient, private fb: FormBuilder,
@@ -719,31 +720,26 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
   //#endregion
 
-  ReqPefindo(){
+  async ReqPefindo(){
     this.markFormGroupTouched(this.CustomerForm);
     if(!this.CustomerForm.valid){
       return;
     }
 
-    this.checkThirdPartyTrxNo();
+    await this.checkThirdPartyTrxNo();
   }
 
   ViewPefindo(){
-    this.markFormGroupTouched(this.CustomerForm);
-    if(!this.CustomerForm.valid){
-      return;
-    }  
+    
   }
 
-  TrustingSocialPersonalObj: ReqPersonalObj;
-
-  ReqTrustingSocial(){
+  async ReqTrustingSocial(){
     this.markFormGroupTouched(this.CustomerForm);
     if(!this.CustomerForm.valid){
       return;
     }
     
-    this.checkThirdPartyTrxNo();
+    await this.checkThirdPartyTrxNo();
 
     let tempForm = this.CustomerForm.getRawValue();
     let custObj: CustObj = new CustObj();
@@ -754,7 +750,15 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     custObj.ThirdPartyTrxNo = this.thirdPartyTrxNo;
     custObj.MrCustTypeCode = CommonConstant.MR_CUST_TYPE_CODE_PERSONAL;
     custObj.MrIdTypeCode = tempForm["MrIdTypeCode"];
-    custObj.IdNo = tempForm["IdNo"];
+
+    if(tempForm["MrIdTypeCode"] == CommonConstant.MrIdTypeCodeEKTP){
+      custObj.MrIdTypeCode = tempForm["MrIdTypeCode"];
+      custObj.IdNo = tempForm["IdNo"];
+    }else{
+      custObj.MrIdTypeCode = CommonConstant.TrustingSocialDummyIdType;
+      custObj.IdNo = CommonConstant.TrustingSocialDummyIdNo;
+    }
+
     custPersonalObj.MobilePhnNo1 = tempForm["MobilePhnNo1"];
 
     const modalRef = this.modalService.open(TrustingSocialReqHeaderComponent);
@@ -763,20 +767,18 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
 
-  ViewTrustingSocial(){
-    this.markFormGroupTouched(this.CustomerForm);
-    if(!this.CustomerForm.valid){
-      return;
-    }  
+  ViewTrustingSocial(){    
+    const modalRef = this.modalService.open(TrustingSocialViewHeaderComponent);
+    modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
   }
 
-  checkThirdPartyTrxNo(){
+  async checkThirdPartyTrxNo(){
     if(this.thirdPartyTrxNo == null || this.thirdPartyTrxNo == ""){
       var reqGenerateTrxNoObj = new ReqGenerateTrxNoObj();
       reqGenerateTrxNoObj.MasterSeqCode = CommonConstant.MasterSequenceCodeCustomerThirdParty;
       reqGenerateTrxNoObj.OfficeCode = this.officeCode;
 
-      this.http.post(URLConstant.GenerateTransactionNoFromRedis, reqGenerateTrxNoObj).subscribe(
+      await this.http.post(URLConstant.GenerateTransactionNoFromRedis, reqGenerateTrxNoObj).toPromise().then(
         (response: ResGenerateTrxNoObj) => {
           this.thirdPartyTrxNo = response.TrxNo;
         }

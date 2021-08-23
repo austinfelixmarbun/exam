@@ -61,8 +61,8 @@
               <lib-uc-show-errors [control]="DetailForm.controls['ThirdPartyTrustsocRslts']['controls'][i]['controls'].Name" [submit]="enjiForm.submitted"></lib-uc-show-errors>            
             </td>
             <td [formGroupName]="i" class="text-center">
-              <label *ngIf="i == 0" class="adInsLabel">{{DetailForm.value.ThirdPartyTrustsocRslts[i].MobilePhnNo}}</label>
-              <input *ngIf="i > 0" type="text" class="form-control adInsInput" formControlName="MobilePhnNo"
+              <label *ngIf="i == 0 && CustObj.MrCustTypeCode == CustTypePersonal" class="adInsLabel">{{DetailForm.value.ThirdPartyTrustsocRslts[i].MobilePhnNo}}</label>
+              <input *ngIf="i > 0 || CustObj.MrCustTypeCode != CustTypePersonal" type="text" class="form-control adInsInput" formControlName="MobilePhnNo"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && DetailForm.controls['ThirdPartyTrustsocRslts']['controls'][i]['controls'].MobilePhnNo.invalid }">
               <lib-uc-show-errors [control]="DetailForm.controls['ThirdPartyTrustsocRslts']['controls'][i]['controls'].MobilePhnNo" [submit]="enjiForm.submitted"></lib-uc-show-errors>            
             </td>

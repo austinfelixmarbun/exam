@@ -1065,6 +1065,7 @@ export class URLConstant {
     public static GetFirstRequestedThirdPartyRsltHByTrxNo = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetFirstRequestedThirdPartyRsltHByTrxNo";
     public static GetThirdPartyTrustsocRsltByThirdPartyRsltHId = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetThirdPartyTrustsocRsltByThirdPartyRsltHId";
     public static UploadConsentTrustingSocial = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/UploadConsentTrustingSocial";
+    public static GetListThirdPartyTrustingSocialByTrxNo = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetListThirdPartyTrustingSocialByTrxNo";
 
     //DIGITALIZATION
     public static AddTrxSrcDataForTrustingSocial = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForTrustingSocial";

@@ -369,4 +369,6 @@ export class CommonConstant {
 
     //TRUSTING SOCIAL
     public static TrustingSocialRelationCust = "Customer";
+    public static TrustingSocialDummyIdType = "DUMMY";
+    public static TrustingSocialDummyIdNo = "1234567890123456"
 }
