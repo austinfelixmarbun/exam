@@ -120,6 +120,9 @@ export class PathConstant {
     public static CS_CURRENCY = "Currency";
     public static CS_CURRENCY_PAGING = PathConstant.CS_CURRENCY + "/" + PathConstant.PAGING;
     public static CS_CURRENCY_ADD = PathConstant.CS_CURRENCY + "/" + PathConstant.ADD;
+    public static CS_EXCHANGE_RATE = "ExchangeRate";
+    public static CS_EXCHANGE_RATE_PAGING = PathConstant.CS_EXCHANGE_RATE + "/" + PathConstant.PAGING;
+    public static CS_EXCHANGE_RATE_DETAIL = PathConstant.CS_EXCHANGE_RATE + "/" + PathConstant.DETAIL;
     public static CS_WORKING_HOUR = "WorkingHour";
     public static CS_WORKING_HOUR_ADD = PathConstant.CS_WORKING_HOUR + "/" + PathConstant.ADD;
     public static CS_WORKING_HOUR_DETAIL = PathConstant.CS_WORKING_HOUR + "/" + PathConstant.DETAIL;
@@ -228,6 +231,7 @@ export class PathConstant {
     public static CUST_NEG_RVW_UPLOAD_DETAIL = PathConstant.CUST_NEG + "/" + PathConstant.RVW_UPLOAD_DETAIL;
     public static CUST_VIEW = "CustomerView";
     public static CUST_VIEW_PAGE = PathConstant.CUST_VIEW + "/" + PathConstant.CUST_PAGE;
+    public static NEW_CUST = "NewCustomer";
     //#endregion
     
     //#region COY
@@ -241,6 +245,7 @@ export class PathConstant {
     public static DASHBOARD1 = "DashBoard1";
     public static DASHBOARD2 = "DashBoard2";
     public static DASHBOARD = "Dash-Board";
+    public static DASHEMPTY = "Dash-Empty";
     //#endregion
     
     //#region Document-Management-Module

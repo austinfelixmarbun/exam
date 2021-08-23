@@ -2,81 +2,55 @@
   <form class="form form-horizontal" [formGroup]="CustomerContactForm"
     (ngSubmit)="CustomerContactForm.valid && SaveValue()  " #enjiForm="ngForm">
     <div class="form-body">
-      <lib-ucSubsection [id]="'MainInfo'" [title]="'Main Info'" [panel]="'MainInfoId'">
+      <lib-ucSubsection [id]="'emergencyContact'" [title]="'Emergency Contact'" [panel]="'emergencyContactId'">
       </lib-ucSubsection>
-      <div id="MainInfoId">
-
-        <div class="form-group row  ">
-          <label class="col-md-2 adInsLabel" translate>Find Existing Customer</label>
-          <div class="col-md-4">
-            <lib-uclookupgeneric [lookupInput]="existingCustomerLookUpObj" [parentForm]="CustomerContactForm"
-              [enjiForm]="enjiForm" [identifier]="'ExistingCustomer'" (lookup)=getLookUpCustomer($event)>
-            </lib-uclookupgeneric>
-          </div>
-        </div>
+      <div id="emergencyContactId">
 
         <div class="form-group row">
-          <label class="col-md-2 adins-required-label" translate>Name</label>
-          <div class="col-md-4">
-            <input type="text" class="form-control adInsInput" formControlName="ContactPersonName"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.ContactPersonName.invalid}">
-            <lib-uc-show-errors [control]="CustomerContactForm.controls.ContactPersonName"
-              [submit]="enjiForm.submitted">
-            </lib-uc-show-errors>
+          <label class="col-md-2 adins-required-label" translate>Contact Person Name</label>
+          <div class="col-md-4" *ngIf="existingCustomerLookUpObj.isReady == true">
+            <lib-uclookupgeneric [lookupInput]="existingCustomerLookUpObj" [parentForm]="CustomerContactForm"
+              [enjiForm]="enjiForm" [identifier]="'ExistingCustomer'" (lookup)=getLookUpCustomer($event) (inputtedValue)="onTypeName($event)">
+            </lib-uclookupgeneric>
           </div>
-          <label class="col-md-2 adInsLabel" translate>Mother Maiden Name</label>
+          <label class="col-md-2 adins-required-label" translate>Gender</label>
           <div class="col-md-4">
-            <input type="text" class="form-control adInsInput" formControlName="MotherMaidenName"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MotherMaidenName.invalid}">
-            <lib-uc-show-errors [control]="CustomerContactForm .controls.MotherMaidenName"
-              [submit]="enjiForm.submitted">
-            </lib-uc-show-errors>
+            <lib-ucdropdownlist [dropdownListObj]="ddlMrGenderCode" [parentForm]="CustomerContactForm" [enjiForm]="enjiForm"
+            [identifier]="'MrGenderCode'"></lib-ucdropdownlist>
           </div>
         </div>
 
         <div class="form-group row  ">
-          <label class="col-md-2 adins-required-label" translate>ID Type </label>
+          <label class="col-md-2 adins-label" translate>ID Type </label>
           <div class="col-md-4">
-            <select class="form-control adInsInput" (change)="onOptionIdTypeSelected($event)"
-              style="width: auto" formControlName="MrIdTypeCode"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrIdTypeCode.invalid }">
-              <option *ngFor="let it of tempIdType" [value]="it.Key">
-                {{it.Value}}</option>
-            </select>
+            <lib-ucdropdownlist [dropdownListObj]="ddlIdType" [parentForm]="CustomerContactForm" [enjiForm]="enjiForm"
+            [identifier]="'MrIdTypeCode'" (callback)="onOptionIdTypeSelected($event)"></lib-ucdropdownlist>
             <lib-uc-show-errors [control]="CustomerContactForm.controls.MrIdTypeCode" [submit]="enjiForm.submitted">
             </lib-uc-show-errors>
           </div>
-          <label class="col-md-2  adins-required-label" translate>Nationality</label>
+          <label class="col-md-2 adins-label" translate>Birth Place </label>
           <div class="col-md-4">
-            <select (change)="onOptionsNationalitySelected($event)" class="form-control adInsInput"
-              style="width: auto" formControlName="MrNationalityCode"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrNationalityCode.invalid }">
-              <option *ngFor="let it of tempNationality" [value]="it.MasterCode">
-                {{it.Descr}}</option>
-            </select>
-            <lib-uc-show-errors [control]="CustomerContactForm.controls.MrNationalityCode"
-              [submit]="enjiForm.submitted">
+            <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.BirthPlace.invalid}">
+            <lib-uc-show-errors [control]="CustomerContactForm.controls.BirthPlace" [submit]="enjiForm.submitted">
             </lib-uc-show-errors>
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-md-2 adInsLabel" translate>ID Number</label>
+          <label class="col-md-2 adInsLabel" translate>ID No</label>
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="IdNo"
             [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.IdNo.invalid}">
           <lib-uc-show-errors [customPattern]="customPattern"  [control]="CustomerContactForm.controls.IdNo" [submit]="enjiForm.submitted">
           </lib-uc-show-errors>
           </div>
-          <label class="col-md-2 adInsLabel" translate>Country</label>
+          <label class="col-md-2 adins-label" translate>Birth Date</label>
           <div class="col-md-4">
-            <div *ngIf="flag">
-              {{this.LocalCountry?.CountryName}}
-            </div>
-            <div [hidden]="flag" *ngIf="lookUpObj != undefined">
-              <lib-uclookupgeneric [lookupInput]="lookUpObj" [parentForm]="CustomerContactForm"
-                [enjiForm]="enjiForm" [identifier]="'NationalityCountryCode'" (lookup)=getLookUpCountry($event)>
-              </lib-uclookupgeneric>
-            </div>
+            <input type="date" class="form-control adInsInput" formControlName="BirthDt"
+              [max]="businessDtMin | date: 'yyyy-MM-dd'"
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.BirthDt.invalid}">
+            <lib-uc-show-errors [control]="CustomerContactForm.controls.BirthDt " [submit]="enjiForm.submitted">
+            </lib-uc-show-errors>
           </div>
         </div>
 
@@ -91,112 +65,20 @@
             <lib-uc-show-errors [control]="CustomerContactForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
             </lib-uc-show-errors>
           </div>
-          <label class="col-md-2 adInsLabel" translate>Education</label>
-          <div class="col-md-4">
-            <select class="form-control adInsInput" style="width: auto" formControlName="MrEducationCode"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrEducationCode.invalid }">
-              <option *ngFor="let it of tempMrEducationCode" [value]="it.Key">
-                {{it.Value}}</option>
-            </select>
-            <lib-uc-show-errors [control]="CustomerContactForm.controls.MrEducationCode" [submit]="enjiForm.submitted">
-            </lib-uc-show-errors>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-2 adins-required-label" translate>Gender</label>
-          <div class="col-md-4">
-            <select class="form-control adInsInput" style="width: auto" formControlName="MrGenderCode"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrGenderCode.invalid }">
-              <option *ngFor="let it of tempMrGenderCode" [value]="it.Key">
-                {{it.Value}}</option>
-            </select>
-            <lib-uc-show-errors [control]="CustomerContactForm.controls.MrGenderCode" [submit]="enjiForm.submitted">
-            </lib-uc-show-errors>
-          </div>
-          <label class="col-md-2 adins-required-label" translate>Religion</label>
-          <div class="col-md-4">
-            <select class="form-control adInsInput" style="width: auto" formControlName="MrReligionCode"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrReligionCode.invalid }">
-              <option *ngFor="let it of tempMrReligionCode" [value]="it.Key">
-                {{it.Value}}</option>
-            </select>
-            <lib-uc-show-errors [control]="CustomerContactForm.controls.MrReligionCode" [submit]="enjiForm.submitted">
-            </lib-uc-show-errors>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-2 adInsLabel" translate>Birth Place </label>
-          <div class="col-md-4">
-            <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.BirthPlace.invalid}">
-            <lib-uc-show-errors [control]="CustomerContactForm.controls.BirthPlace" [submit]="enjiForm.submitted">
-            </lib-uc-show-errors>
-          </div>
-          <label class="col-md-2 adInsLabel" translate>Marital Status </label>
-          <div class="col-md-4">
-            <select class="form-control adInsInput" style="width: auto" formControlName="MrMaritalStatCode"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrMaritalStatCode.invalid }">
-              <option *ngFor="let it of tempMrMaritalStatCode " [value]="it.Key">
-                {{it.Value}}</option>
-            </select>
-            <lib-uc-show-errors [control]="CustomerContactForm.controls.MrMaritalStatCode"
-              [submit]="enjiForm.submitted">
-            </lib-uc-show-errors>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-2 adins-required-label" translate>Birth Date</label>
-          <div class="col-md-4">
-            <input type="date" class="form-control adInsInput" formControlName="BirthDt"
-              [max]="businessDtMin | date: 'yyyy-MM-dd'"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.BirthDt.invalid}">
-            <lib-uc-show-errors [control]="CustomerContactForm.controls.BirthDt " [submit]="enjiForm.submitted">
-            </lib-uc-show-errors>
-          </div>
-          <label class="col-md-2 adInsLabel" translate>Profession Name</label>
-          <div class="col-md-4">
-
-            <lib-uclookupgeneric [lookupInput]="professionLookUpObj" [parentForm]="CustomerContactForm"
-              [enjiForm]="enjiForm" [identifier]="'MrJobProfessionCode'" (lookup)=getLookUpProfession($event)>
-            </lib-uclookupgeneric>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-2 adInsLabel" translate>Tax Id No</label>
-          <div class="col-md-4">
-            <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.TaxIdNo.invalid}">
-            <lib-uc-show-errors [control]="CustomerContactForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
-            </lib-uc-show-errors>
-          </div>
           <label class="col-md-2  adins-required-label" translate>Customer Relationship</label>
           <div class="col-md-4">
-            <select class="form-control adInsInput" style="width: auto" formControlName="MrCustRelationshipCode"
-              [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MrCustRelationshipCode.invalid }"  (change)="Check()"> 
-              <option *ngFor="let it of tempMrCustRelationshipCode " [value]="it.Key">
-                {{it.Value}}</option>
-            </select>
-            <lib-uc-show-errors [control]="CustomerContactForm.controls.MrCustRelationshipCode"
-              [submit]="enjiForm.submitted">
-            </lib-uc-show-errors>
+            <lib-ucdropdownlist [dropdownListObj]="ddlMrCustRelationshipCode" [parentForm]="CustomerContactForm" [enjiForm]="enjiForm"
+            [identifier]="'MrCustRelationshipCode'"></lib-ucdropdownlist>
           </div>
         </div>
-      </div>
-      <!-- Contact Information -->
-      <lib-ucSubsection [id]="'ContactInformation'" [title]="'Contact Information'"
-        [panel]="'ContactInfromationId'">
-      </lib-ucSubsection>
-      <div id="ContactInfromationId">
         <div class="form-group row">
-          <label class="col-md-2 adins-required-label" translate [ngClass]="{'adins-required-label' : tempMobilePhone1==true} " >Mobile Phone 1 </label>
+          <label class="col-md-2 adins-required-label" translate>Mobile Phone 1 </label>
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="MobilePhnNo1"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerContactForm.controls.MobilePhnNo1.invalid}">
             <lib-uc-show-errors [control]="CustomerContactForm.controls.MobilePhnNo1" [submit]="enjiForm.submitted">
             </lib-uc-show-errors>
           </div>
-        </div>
-        <div class="form-group row ">
           <label class="col-md-2 adInsLabel" translate>Mobile Phone 2 </label>
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="MobilePhnNo2"
@@ -205,7 +87,7 @@
             </lib-uc-show-errors>
           </div>
         </div>
-        <div class="form-group row  ">
+        <div class="form-group row">
           <label class="col-md-2 adInsLabel" translate>Email</label>
           <div class="col-md-4">
             <input type="text" class="form-control adInsInput" formControlName="Email"
@@ -214,8 +96,11 @@
             </lib-uc-show-errors>
           </div>
         </div> 
-      </div>  
-
+      </div>
+      <!-- Address Information -->
+      <lib-ucSubsection [id]="'ContactPersonAddressInformation'" [title]="'Contact Address'"
+        [panel]="'ContactPersonAddressId'">
+      </lib-ucSubsection>
       <div id="ContactPersonAddressId">
         <div class="form-group row">
           <label class="col-md-2" translate>Copy Address From</label>
@@ -238,7 +123,7 @@
         </div>
         <!-- <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerContactForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'">
         </lib-ucaddress>  -->
-        <lib-ucaddress [UCAddrForm]="CustomerContactForm" [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'UcAddress'">
+        <lib-ucaddress  [UCAddrForm]="CustomerContactForm" [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'UcAddress'">
         </lib-ucaddress> 
       </div> 
     </div>

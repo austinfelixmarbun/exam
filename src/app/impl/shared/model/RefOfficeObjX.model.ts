@@ -1,4 +1,4 @@
-export class RefOfficeXObj {
+export class RefOfficeObjX {
     RefOfficeXId: any
     RefOfficeCode: any
     IsNationalCourt: any;

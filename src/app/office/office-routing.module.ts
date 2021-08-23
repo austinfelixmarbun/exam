@@ -13,6 +13,7 @@ import { OfficeAreaMemberAddComponent } from './office-area/office-area-member/o
 import { PathConstant } from 'app/shared/PathConstant';
 import { PathConstantX } from 'app/impl/shared/PathConstantX';
 import { OfficeAddXComponent } from 'app/impl/office/office-add-x/office-add-x.component';
+import { OfficeXComponent } from 'app/impl/office/office-x.component';
 
 const routes: Routes = [
   {
@@ -26,8 +27,15 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstantX.ADD,
-        component: OfficeAddXComponent,
+        path: PathConstant.ADD,
+        component: OfficeAddComponent,
+        data: {
+          title: 'Add Office'
+        }
+      },
+      {
+        path: PathConstant.ADD,
+        component: OfficeAddComponent,
         data: {
           title: 'Add Office'
         }
@@ -86,6 +94,20 @@ const routes: Routes = [
         component: OfficeAreaMemberAddComponent,
         data: {
           title: 'Office Area Member Add'
+        }
+      },
+      {
+        path: PathConstantX.PAGING,
+        component: OfficeXComponent,
+        data: {
+          title: 'Office'
+        },
+      },
+      {
+        path: PathConstantX.ADD,
+        component: OfficeAddXComponent,
+        data: {
+          title: 'Add Office'
         }
       }
     ]

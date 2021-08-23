@@ -78,9 +78,24 @@ import { GeneralSettingAdminComponent } from './general-setting-admin/general-se
 import { GeneralSettingAdminDetailComponent } from './general-setting-admin/general-setting-admin-detail/general-setting-admin-detail.component';
 import { IndustryTypeCategoryPagingComponent } from './industry-type-category/industry-type-category-paging/industry-type-category-paging.component';
 import { IndustryTypeCategoryDetailComponent } from './industry-type-category/industry-type-category-detail/industry-type-category-detail.component';
+import { ExchangeRateDetailComponent } from './exchange-rate/exchange-rate-detail/exchange-rate-detail.component';
+import { ExchangeRatePagingComponent } from './exchange-rate/exchange-rate-paging/exchange-rate-paging.component';
+import { CurrencyMaskInputMode, NgxCurrencyModule } from 'ngx-currency';
 import { EconomicSectorSlikPagingXComponent } from 'app/impl/common-setting/economic-sector-slik-x/economic-sector-slik-paging-x/economic-sector-slik-paging-x.component';
 import { EconomicSectorSlikAddEditXComponent } from 'app/impl/common-setting/economic-sector-slik-x/economic-sector-slik-add-edit-x/economic-sector-slik-add-edit-x.component';
 
+export const customCurrencyMaskConfig = {     
+  align: "right",     
+  allowNegative: true,     
+  allowZero: true,     
+  decimal: ".",     
+  precision: 2,     
+  prefix: "",     
+  suffix: "",     
+  thousands: ",",     
+  nullable: false,
+  inputMode: CurrencyMaskInputMode.NATURAL
+};
 
 @NgModule({
   imports: [
@@ -102,7 +117,8 @@ import { EconomicSectorSlikAddEditXComponent } from 'app/impl/common-setting/eco
     UcSubsectionModule,
     ColorPickerModule,
     UcaddressModule,
-    AdInsModule
+    AdInsModule,
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
   ],
   declarations: [
     MasterPagingComponent,
@@ -165,6 +181,8 @@ import { EconomicSectorSlikAddEditXComponent } from 'app/impl/common-setting/eco
     GeneralSettingAdminDetailComponent,
     IndustryTypeCategoryPagingComponent,
     IndustryTypeCategoryDetailComponent,
+    ExchangeRateDetailComponent,
+    ExchangeRatePagingComponent,
     EconomicSectorSlikPagingXComponent,
     EconomicSectorSlikAddEditXComponent
   ],

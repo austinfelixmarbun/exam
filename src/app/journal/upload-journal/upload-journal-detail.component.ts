@@ -38,6 +38,7 @@ export class UploadJournalDetailComponent implements OnInit {
   uploadMsg = false;
   afterUpload = false;
   uploadClick = true;
+  cancelBtn = true
   uploadMsgText: string;
   uploadMsgClass: string;
   isDownloadTmplt: boolean;
@@ -65,7 +66,7 @@ export class UploadJournalDetailComponent implements OnInit {
 
   UploadJournalFileForm = this.fb.group({
     IsImmediately: [''],
-    Date:  ['',[Validators.required]]
+    Date: ['', [Validators.required]]
   });
 
   constructor(private toastr: NGXToastrService,
@@ -89,14 +90,14 @@ export class UploadJournalDetailComponent implements OnInit {
     );
 
     this.userAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    
+
     this.http.post(URLConstant.GetJrSourceFileByJrSourceFileId, { Id: this.JrSourceFileId }).subscribe(
-         (response: any) => {
-          this.businessDt = formatDate(response['StartDate'], 'yyyy-MM-dd', 'en-US')
-         }
-       );
+      (response: any) => {
+        this.businessDt = formatDate(response['StartDate'], 'yyyy-MM-dd', 'en-US')
+      }
+    );
     //this.businessDt = new Date(this.userAccess[CommonConstant.BUSINESS_DT]);
-    
+
     this.uploadObj = {
       title: 'Journal - Upload Files', // Title Paging dan Upload Page
       subsectionId: 'UcUploadFile', // Ga perlu diubah
@@ -110,7 +111,7 @@ export class UploadJournalDetailComponent implements OnInit {
       environmentUrl: environment.FoundationR3Url,
       apiQryPaging: "/Generic/GetPagingObjectBySQL",
       // pagingJson: "./assets/ucpaging/accmnt/billing/general/upload-billing-vat-no/search-upload-billing-vat-no.json",
-      url: environment.FoundationR3Url + "/Journal/UploadJournalFile",
+      url: URLConstant.UploadJournalFile,
       isDownloadTmplt: false,
       ddlEnvironments: []
     }
@@ -153,16 +154,16 @@ export class UploadJournalDetailComponent implements OnInit {
     }
   }
 
-  isEffectImmediately(event: any){
+  isEffectImmediately(event: any) {
     console.log(event)
     console.log('masuk checkbox')
     console.log(this.businessDt)
-    if(event){
+    if (event) {
       this.UploadJournalFileForm.patchValue({
         Date: formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US')
       })
       this.UploadJournalFileForm.controls["Date"].disable();
-    }else{
+    } else {
       this.UploadJournalFileForm.controls["Date"].enable();
     }
     console.log(this.UploadJournalFileForm)
@@ -265,8 +266,7 @@ export class UploadJournalDetailComponent implements OnInit {
   }
 
   uploadFiles() {
-    if(this.UploadJournalFileForm.controls["Date"].value == "")
-    {
+    if (this.UploadJournalFileForm.controls["Date"].value == "") {
       this.toastr.errorMessage("Please select Start Date first");
     }
     let i: any;
@@ -278,6 +278,7 @@ export class UploadJournalDetailComponent implements OnInit {
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
 
+    xhr.open('POST', this.uploadAPI, true);
     for (i = 0; i < this.selectedFiles.length; i++) {
       if (this.Caption[i] == undefined) {
         this.Caption[i] = 'file' + i;
@@ -314,7 +315,7 @@ export class UploadJournalDetailComponent implements OnInit {
           var response = JSON.parse(xhr.response);
           this.ListResultInfo = response["ListResultInfo"];
           this.FullPath = response["FullPath"];
-          if (response.StatusCode == '998' || response.StatusCode.StatusCode == '999') {
+          if (response.StatusCode == '998' || response.StatusCode == '999') {
             isError = true;
             this.progressBarShow = false;
             this.uploadBtn = false;
@@ -329,6 +330,7 @@ export class UploadJournalDetailComponent implements OnInit {
     };
 
     xhr.upload.onprogress = evnt => {
+      this.cancelBtn = false;
       this.uploadBtn = false; // button should be disabled by process uploading
       if (evnt.lengthComputable) {
         this.percentComplete = Math.round((evnt.loaded / evnt.total) * 100);
@@ -339,15 +341,15 @@ export class UploadJournalDetailComponent implements OnInit {
     xhr.onload = evnt => {
       // console.log("onload");
       // console.log(evnt);
-      this.progressBarShow = false;
-      this.uploadBtn = false;
-      this.uploadMsg = true;
-      this.afterUpload = true;
-      if (!isError) {
-        this.uploadMsgText = this.replaceTexts.afterUploadMsg_success;
-        this.uploadMsgClass = 'text-success lead';
-        // console.log(this.uploadMsgText + " " + this.selectedFiles.length + " file");
-      }
+      // this.progressBarShow = false;
+      // this.uploadBtn = false;
+      // this.uploadMsg = true;
+      // this.afterUpload = true;
+      // if (!isError) {
+      //   this.uploadMsgText = this.replaceTexts.afterUploadMsg_success;
+      //   this.uploadMsgClass = 'text-success lead';
+      //   console.log(this.uploadMsgText + " " + this.selectedFiles.length + " file");
+      // }
     };
 
     xhr.onerror = evnt => {
@@ -355,7 +357,7 @@ export class UploadJournalDetailComponent implements OnInit {
       // console.log(evnt);
     };
 
-    xhr.open('POST', this.uploadAPI, true);
+
     for (const key of Object.keys(this.headers)) {
       // Object.keys will give an Array of keys
       xhr.setRequestHeader(key, this.headers[key]);
@@ -368,12 +370,39 @@ export class UploadJournalDetailComponent implements OnInit {
     formData.append('JrSourceFileId', this.JrSourceFileId.toString())
     formData.append('StartDate', this.UploadJournalFileForm.controls['Date'].value)
     //formData.append('OfficeBankAccId', this.UploadForm.controls['OfficeBankAccBalanceId'].value)
+
+    xhr.onload = evnt => {
+      // console.log("onload");
+      // console.log(evnt);
+      this.progressBarShow = false;
+      this.uploadBtn = false;
+      this.cancelBtn = true;
+      this.uploadMsg = true;
+      this.afterUpload = true;
+      if (!isError) {
+        this.uploadMsgText = this.replaceTexts.afterUploadMsg_success;
+        this.uploadMsgClass = 'text-success lead';
+        // console.log(this.uploadMsgText + " " + this.selectedFiles.length + " file");
+      }
+
+      console.log(xhr.responseText)
+      if (xhr.responseText.indexOf("Error:") >= 0) {
+        var errMessage = JSON.parse(xhr.responseText)
+        this.toastr.errorMessage(errMessage)
+      }
+      else if (xhr.responseText.indexOf("Success") >= 0) {
+        this.toastr.successMessage('File was uploaded successfully');
+        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.UPLOAD_JOURNAL_FILE_PAGING], {})
+      }
+    };
     xhr.send(formData);
 
     this.isUpload = true;
     //this.setList(this.ListResultInfo);
-    this.toastr.successMessage('File was uploaded successfully');
-    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.UPLOAD_JOURNAL_FILE_PAGING], {})
+    //at first redirect to paging was here
+    // if(xhr.responseText.includes("Error")){
+    //   this.toastr.errorMessage(xhr.responseText);
+    // }
   }
 
   private DecryptString(chipperText: string, chipperKey: string) {
@@ -411,6 +440,10 @@ export class UploadJournalDetailComponent implements OnInit {
     }
   }
 
+  downloadTemplate() {
+
+  }
+
   // setResult() {
   //   this.http.post(URLConstant.CheckAccount, null).subscribe(
   //     (response: any) => {
@@ -426,7 +459,6 @@ export class UploadJournalDetailComponent implements OnInit {
   //     }
   //   );
   // }
-
 }
 
 interface ReplaceTexts {

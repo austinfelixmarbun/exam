@@ -97,7 +97,7 @@ export class CustomerContactAddComponent implements OnInit {
     IsFamily: [true],
     MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     MobilePhnNo2: ['', [Validators.pattern("^[0-9]+$")]],
-    Email: ['', [Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+    Email: ['', [Validators.pattern(CommonConstant.regexEmail)]],
     ContactPersonCustNo: [''],
     CopyFromContactPerson: [''],
   });
@@ -367,7 +367,6 @@ export class CustomerContactAddComponent implements OnInit {
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.default = UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
 

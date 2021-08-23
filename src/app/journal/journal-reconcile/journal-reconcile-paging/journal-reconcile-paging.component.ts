@@ -28,9 +28,8 @@ export class JournalReconcilePagingComponent implements OnInit {
 
   ngOnInit() {
     this.ucTempPagingObj.urlJson = "./assets/ucpaging/journal/paging-journal-reconcile.json";
-    this.ucTempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.ucTempPagingObj.apiQryPaging = URLConstant.GetJournalResultPagingObjectBySQL;
     this.ucTempPagingObj.pagingJson = "./assets/ucpaging/journal/paging-journal-reconcile.json";
+    this.ucTempPagingObj.apiQryPaging = URLConstant.GetJournalResultPagingObjectBySQL;
   }
 
   CallBack(ev: any) {

@@ -1,19 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AttrContent } from 'app/shared/model/AttrContent.model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { GenericListObj } from 'app/shared/model/Generic/GenericListObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { RefAttr } from 'app/shared/model/RefAttr.Model';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
 import { ReqCustAttrContentByCustIdAndAttrGroupObj } from 'app/shared/model/Request/CustAttrContent/ReqCustAttrContentByCustIdAndAttrGroupObj.model';
 import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/Request/RefAttr/ReqRefAttrByAttrGroupObj.model';
-import { environment } from 'environments/environment';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-cust-attr-list',
@@ -39,6 +40,19 @@ export class CustAttrListComponent implements OnInit {
   isFormReady: boolean = false;
   AttrContent: AttrContent;
   AmountList: Array<{Index: number, Amount: number}> = new Array<{Index: number, Amount: number}>();
+
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 5,
+    allowSearchFilter: true
+  };
+  
+  dictMultiOptions: { [key: string]: Array<{ item_id: string, item_text: string }>; } = {};
+  selectedMultiDDLItems: { [key: string]: Array<{ item_id: string, item_text: string }>; } = {};
 
   constructor(private httpClient: HttpClient,
     private fb: FormBuilder,
@@ -137,6 +151,7 @@ export class CustAttrListComponent implements OnInit {
     });
   }
 
+  readonly AttrInputTypeSearchList: string = CommonConstant.AttrInputTypeSearchList;
   setFormGroupValue(refAttr: RefAttr, formGroupObject: object, parentFormGroup, isUpdateValue: boolean) {
     if (isUpdateValue == false) {
       if (refAttr.AttrInputType == 'T' && refAttr.PatternValue != "" && refAttr.PatternValue != null) {
@@ -182,12 +197,13 @@ export class CustAttrListComponent implements OnInit {
     if (refAttr["IsMandatory"] == true && refAttr["AttrInputType"] != 'T') {
       formGroupObject["AttrValue"].push(Validators.required);
     }
+    if (refAttr.AttrInputType == this.AttrInputTypeSearchList) {
+      this.setAttrInputTypeSearchList(refAttr.AttrCode, refAttr.AttrValue);
+    }
     parentFormGroup[refAttr.AttrCode] = this.fb.group(formGroupObject);
     if (refAttr["AttrInputType"] == 'RM') {
       this.tempLookup[refAttr["AttrCode"]] = new InputLookupObj();
       this.tempLookup[refAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-      this.tempLookup[refAttr["AttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-      this.tempLookup[refAttr["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
       this.tempLookup[refAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].title = refAttr.AttrName;
@@ -269,12 +285,13 @@ export class CustAttrListComponent implements OnInit {
     if (refAttr["IsMandatory"] == true && refAttr["AttrInputType"] != 'T') {
       formGroupObject["AttrValue"].push(Validators.required)
     }
+    if (refAttr.AttrInputType == this.AttrInputTypeSearchList) {
+      this.setAttrInputTypeSearchList(refAttr.AttrCode, refAttr.AttrValue);
+    }
     parentFormGroup[refAttr.AttrCode] = this.fb.group(formGroupObject);
     if (refAttr["AttrInputType"] == 'RM') {
       this.tempLookup[refAttr["AttrCode"]] = new InputLookupObj();
       this.tempLookup[refAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-      this.tempLookup[refAttr["AttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-      this.tempLookup[refAttr["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
       this.tempLookup[refAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].title = refAttr.AttrName;
@@ -307,6 +324,48 @@ export class CustAttrListComponent implements OnInit {
       isUpdateValue == false ? critAssetObj.value = refAttr.AttrValue : critAssetObj.value = this.AttrContent.MasterCode;
       arrAddCrit.push(critAssetObj);
       this.tempLookup[refAttr["AttrCode"]].addCritInput = arrAddCrit;
+    }
+  }
+
+  dictRuleSetName: { [Id: string]: string } = {};
+  tempExistingValueSelected: { [Id: string]: string } = {};
+  setAttrInputTypeSearchList(AttrCode: string, ruleSetName: string) {
+    this.dictRuleSetName[AttrCode] = ruleSetName;
+    this.selectedMultiDDLItems[AttrCode] = new Array();
+    this.tempExistingValueSelected[AttrCode] = "";
+    if (this.AttrContent.AttrValue) {
+      this.tempExistingValueSelected[AttrCode] = this.AttrContent.AttrValue;
+    }
+  }
+
+  SetSearchListInputType(attrCode: string, ProfessionCode: string) {
+    this.httpClient.post(URLConstant.GetRuleForAttrContent, { RuleSetName: this.dictRuleSetName[attrCode], Code: ProfessionCode }).subscribe(
+      (response: GenericListObj) => {
+        let tempList: Array<KeyValueObj> = response.ReturnObject;
+        this.dictMultiOptions[attrCode] = new Array();
+        if (tempList) {
+          for (let index = 0; index < tempList.length; index++) {
+            const element = tempList[index];
+            if (element.Key == this.tempExistingValueSelected[attrCode]) {
+              this.selectedMultiDDLItems[attrCode] = new Array();
+              this.selectedMultiDDLItems[attrCode].push({ item_id: element.Key, item_text: element.Value });
+              this.onMultiDDLChangeEvent(attrCode);
+              this.tempExistingValueSelected[attrCode] = "";
+            }
+            this.dictMultiOptions[attrCode].push({ item_id: element.Key, item_text: element.Value });
+          }
+        }
+      }
+    )
+  }
+
+  onMultiDDLChangeEvent(attrCode: string) {
+    if (this.selectedMultiDDLItems[attrCode] && this.selectedMultiDDLItems[attrCode].length > 0) {
+      let selectedId = this.selectedMultiDDLItems[attrCode].map(x => x.item_id);
+      // let selectedText = this.selectedMultiDDLItems[attrCode].map(x => x.item_text);
+      let tempArray = this.parentForm.get(this.identifier) as FormArray;
+      let tempFb = tempArray.get(attrCode) as FormGroup;
+      tempFb.get("AttrValue").patchValue(selectedId[0]);
     }
   }
 

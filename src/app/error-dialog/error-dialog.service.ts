@@ -15,9 +15,7 @@ export class ErrorDialogService {
         //Ini Logout jadi panggil Service untuk Call Logoutnya
         if(data.status=="001" && AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_NAME) != undefined)
         {   
-
-            var url = environment.FoundationR3Url+AdInsConstant.Logout;
-            this.http.post(url,"");
+            this.http.post(AdInsConstant.Logout,"");
         }
         const dialogRef = this.dialog.open(ErrorDialogComponent, {
             width: '300px',

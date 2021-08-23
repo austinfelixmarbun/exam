@@ -74,6 +74,10 @@
       "querystring": {
         "name": "searchWorkingHourSchm"
         },
+        "orderby": {
+          "key": "A.WORKING_HOUR_SCHM_CODE", 
+          "value": "true"
+      },
       "bodyList": [
         {
           "type": "text",

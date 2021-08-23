@@ -11,4 +11,5 @@ export class RefMasterConstant {
     public static KITAS = "KITAS";
     public static SIM = "SIM";
     public static AKTA = "AKTA";
+    public static PAY_ALLOC_GRP = "PAY_ALLOC_GRP";
 }

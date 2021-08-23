@@ -41,8 +41,6 @@ export class VendorAtpmSelectComponent implements OnInit {
   setLookup()
   {
       this.inputLookupATPMObj.urlJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-      this.inputLookupATPMObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-      this.inputLookupATPMObj.urlEnviPaging = environment.FoundationR3Url;
       this.inputLookupATPMObj.pagingJson = "./assets/uclookup/vendor/lookupVendorParent.json";
       this.inputLookupATPMObj.genericJson = "./assets/uclookup/vendor/lookupVendorParent.json";
       this.inputLookupATPMObj.isRequired = false;

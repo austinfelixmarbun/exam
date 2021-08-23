@@ -1,3 +1,4 @@
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { CriteriaObj } from '../CriteriaObj.Model';
@@ -16,14 +17,14 @@ export class UcTempPagingObj {
 
     constructor() {
         this.urlJson = "";
-        this.enviromentUrl = "";
-        this.apiQryPaging = "";
+        this.enviromentUrl = environment.FoundationR3Url + "/v1";
+        this.apiQryPaging = URLConstant.GetPagingObjectBySQL;
         this.pagingJson = "";
         this.isReady = false;
         this.addCritInput = new Array<CriteriaObj>();
         this.ddlEnvironments = new Array<EnviObj>();
         this.listEnvironments = new Array<EnvisObj>();
-        this.listEnvironments.push({ environment: "FOU", url: environment.FoundationR3Url });
+        this.listEnvironments.push({ environment: "FOU", url: environment.FoundationR3Url + "/v1" });
         this.listEnvironments.push({ environment: "FOU_WEB", url: environment.FoundationR3Web });
         this.whereValue = new Array<WhereValueObj>();
         this.navigationConst = NavigationConstant;

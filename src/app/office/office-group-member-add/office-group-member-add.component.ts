@@ -34,10 +34,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewOfficeCenterGrpMbr.json";
-
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/officeGrpMbrTempPaging.json";
-    this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/officeGrpMbrTempPaging.json";
 
     this.GetListCenterGrpMemberByRefOfficeId();

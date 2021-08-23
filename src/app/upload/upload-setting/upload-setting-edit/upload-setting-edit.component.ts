@@ -103,8 +103,6 @@ export class UploadSettingEditComponent implements OnInit {
       this.pageSize = 10;
       this.inputLookupObj = new InputLookupObj();
       this.inputLookupObj.urlJson = "./assets/lookup/lookupRole.json";
-      this.inputLookupObj.urlQryPaging = URLConstant.GetPagingObjectBySQL;
-      this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
       this.inputLookupObj.pagingJson = "./assets/lookup/lookupRole.json";
       this.inputLookupObj.genericJson = "./assets/lookup/lookupRole.json";
 

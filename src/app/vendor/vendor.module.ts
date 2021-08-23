@@ -74,6 +74,14 @@ import { UcapprovalcreateModule } from '@adins/ucapprovalcreate';
 import { UcapprovalR3Module } from '@adins/ucapproval-r3';
 import { UcapprovalHistoryModule } from "@adins/ucapproval-history";
 import { UcapprovalgeneralinfoModule } from "@adins/ucapprovalgeneralinfo";
+import { AdInsModule } from 'app/components/adins-module/adins.module';
+import { VendorAtpmAddEditXComponent } from 'app/impl/vendor/vendor-ATPM/vendor-atpm-add-edit-x/vendor-atpm-add-edit-x.component';
+import { VendorHoAddEditXComponent } from 'app/impl/vendor/vendor-ho/vendor-ho-add-edit-x/vendor-ho-add-edit-x.component';
+import { VendorBranchAddEditXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-add-edit-x/vendor-branch-add-edit-x.component';
+import { VendorHoldingAddEditXComponent } from 'app/impl/vendor/vendor-holding-add-edit-x/vendor-holding-add-edit-x.component';
+import { VendorEmployeeXComponent } from 'app/impl/vendor/component/vendor-employee-x/vendor-employee-x.component';
+import { VendorBranchEmployeePagingXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-employee-paging-x/vendor-branch-employee-paging-x.component';
+import { VendorBranchEmployeeAddEditXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-employee-add-edit-x/vendor-branch-employee-add-edit-x.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -85,11 +93,12 @@ export const customCurrencyMaskConfig = {
   suffix: "",     
   thousands: ",",     
   nullable: false,
-  inputMode: CurrencyMaskInputMode.FINANCIAL
+  inputMode: CurrencyMaskInputMode.NATURAL
 };
 
 @NgModule({
   imports: [
+    AdInsModule,
     VendorRoutingModule,
     CommonModule,
     FormsModule,
@@ -166,7 +175,14 @@ export const customCurrencyMaskConfig = {
     VendorGradingApprovalDetailComponent,
     VendorGradingInquiryPagingComponent,
     AuctionCompanyPagingComponent,
-    AuctionCompanyAddeditComponent
+    AuctionCompanyAddeditComponent,
+    VendorAtpmAddEditXComponent,
+    VendorHoAddEditXComponent,
+    VendorBranchAddEditXComponent,
+    VendorHoldingAddEditXComponent,
+    VendorEmployeeXComponent,
+    VendorBranchEmployeePagingXComponent,
+    VendorBranchEmployeeAddEditXComponent
   ],
   entryComponents : [UcviewgenericComponent, VendorAtpmSelectComponent],
   providers: [

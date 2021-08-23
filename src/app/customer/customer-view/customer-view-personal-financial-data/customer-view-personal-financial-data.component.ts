@@ -5,6 +5,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
 @Component({
   selector: 'app-customer-view-personal-financial-data',
@@ -13,7 +14,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class CustomerViewPersonalFinancialDataComponent implements OnInit {
   CustId: number;
   GetCBAForCustFinDataByCustIdUrl = URLConstant.GetCBAForCustFinDataByCustId;
-  viewCustFinData: any;
+  viewCustFinData: UcViewGenericObj = new UcViewGenericObj();
   responseCBAObj: any;
   allBankStmntList : any;
 
@@ -30,9 +31,7 @@ export class CustomerViewPersonalFinancialDataComponent implements OnInit {
       }
     });
     this.viewCustFinData.viewInput =   "./assets/ucviewgeneric/viewCustFinData.json";
-    this.viewCustFinData.viewEnvironment = environment.FoundationR3Url;
     
-    var custAddrObj = { "CustId": this.CustId };
     this.http.post(this.GetCBAForCustFinDataByCustIdUrl, { Id: this.CustId }).subscribe(
       response => {
         this.responseCBAObj = response['ListCBAForCustFinData'];

@@ -28,6 +28,9 @@ import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { GrowlModule } from 'primeng/primeng';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CookieModule } from 'ngx-cookie';
+import { StorageService } from './shared/services/StorageService';
+import { NGXToastrService } from './components/extra/toastr/toastr.service';
+import { ClaimTaskService } from './shared/claimTask.service';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -72,6 +75,9 @@ export function createTranslateLoader(http: HttpClient) {
         AuthGuard,
         ErrorDialogService,
         RolePickService,
+        StorageService,
+        NGXToastrService,
+        ClaimTaskService,
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
     bootstrap: [AppComponent],

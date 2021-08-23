@@ -69,7 +69,7 @@
               <div class="form-group row">
                 <label class="col-md-3" [ngClass]="{'adins-required-label' : checkClass}" translate>Path</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput name" formControlName="Path"
+                  <input type="text" [IsUpperCase]="false" class="form-control adInsInput name" formControlName="Path"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefForm.controls.Path.invalid }">
                   <lib-uc-show-errors [control]="RefForm.controls.Path" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
@@ -131,14 +131,14 @@
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Parameter Attribute</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="ParameterAttribute"
+                  <input type="text"  [IsUpperCase]="false" class="form-control adInsInput width-50-per" formControlName="ParameterAttribute"
                     [ngClass]="{ 'is-invalid': enjiForm2.submitted && ParamForm.controls.ParameterAttribute.invalid }">
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3  adInsLabel" translate>Parameter Value</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput width-50-per" formControlName="ParameterValue"
+                  <input type="text"  [IsUpperCase]="false" class="form-control adInsInput width-50-per" formControlName="ParameterValue"
                     [ngClass]="{ 'is-invalid': enjiForm2.submitted && ParamForm.controls.ParameterValue.invalid }">
                     
                   <button type="submit" class="btn btn-raised btn-primary">

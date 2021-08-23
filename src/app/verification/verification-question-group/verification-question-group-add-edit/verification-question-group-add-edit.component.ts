@@ -18,7 +18,6 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
   VerfQuestionGrpHId: number;
   mode: string = "add";
   isActive: boolean = true;
-  foundationUrl: string = environment.FoundationR3Url;
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_GRP_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {

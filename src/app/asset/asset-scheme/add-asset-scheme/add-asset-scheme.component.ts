@@ -59,8 +59,6 @@ export class AddAssetSchemeComponent implements OnInit {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewAssetSchemeMember.json";
 
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/assetSchmMbrTempPaging.json";
-    this.tempPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.tempPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/assetSchmMbrTempPaging.json";
     this.tempPagingObj.isReady = true;
 

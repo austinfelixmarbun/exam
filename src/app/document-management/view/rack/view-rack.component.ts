@@ -13,6 +13,7 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 })
 export class ViewRackComponent implements OnInit {
   RackCode: string;
+  CabinetCode: string;
   responseFiling: Array<any> = new Array();
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
@@ -26,13 +27,14 @@ export class ViewRackComponent implements OnInit {
       if (params['RackCode'] != null) {
         this.RackCode = params['RackCode'];
       }
+      if (params['CabinetCode'] != null) {
+        this.CabinetCode = params['CabinetCode'];
+      }
     });
 
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/document-management/viewRack.json";
 
-    var filingObj: GenericObj = new GenericObj();
-    filingObj.Code = this.RackCode;
-    this.http.post(URLConstant.GetListFilingByRackCode, filingObj).subscribe(
+    this.http.post(URLConstant.GetListFilingByRackCodeAndCabinetCode, {RackCode: this.RackCode, CabinetCode: this.CabinetCode}).subscribe(
       response => {
         this.responseFiling = response['ReturnObject'];
       },

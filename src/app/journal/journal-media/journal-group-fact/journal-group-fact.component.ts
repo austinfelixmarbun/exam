@@ -4,12 +4,12 @@ import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-journal-group-fact',
@@ -58,7 +58,7 @@ export class JournalGroupFactComponent implements OnInit {
     );
 
     this.http.post<any>(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, {
-      code: AdInsConstant.RefMasterTypeCodeJournalHeaderFactType
+      code: CommonConstant.RefMasterTypeCodeJournalHeaderFactType
     }).subscribe(
       (response) => {
         this.ddlFactTypeObj = new UcDropdownListObj;
@@ -127,7 +127,7 @@ export class JournalGroupFactComponent implements OnInit {
 
   getData() {
     if (this.JrMGroupId != null) {
-      this.http.post<any>(environment.FoundationR3Url + '/Journal/GetJrMGroupAndJrMGroupDFactByJrMGroupId', { JrMGroupId: this.JrMGroupId }).subscribe(
+      this.http.post<any>(URLConstant.GetJrMGroupAndJrMGroupDFactByJrMGroupId, { JrMGroupId: this.JrMGroupId }).subscribe(
         response => {
           this.JrMHeaderId = response.JrMHeaderId
           this.SubsystemDesc = response.SubSystem
@@ -168,7 +168,7 @@ export class JournalGroupFactComponent implements OnInit {
     }
 
     if (this.JrMGroupId != null) {
-      this.http.post<any>(environment.FoundationR3Url + '/Journal/SaveJrMGroupDFact', request).subscribe(
+      this.http.post<any>(URLConstant.SaveJrMGroupDFact, request).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_GROUP], { JrMHeaderId: this.JrMHeaderId })

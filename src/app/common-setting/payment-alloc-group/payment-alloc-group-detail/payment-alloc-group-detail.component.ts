@@ -8,7 +8,7 @@ import { PaymentAllocGrpObj } from 'app/shared/model/common-setting/PaymentAlloc
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-payment-alloc-group-detail',
@@ -56,7 +56,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
     this.inputLookUpPaymentAllocObj.genericJson = "./assets/uclookup/payment-alloc/lookup-payment-alloc.json";
     this.inputLookUpPaymentAllocObj.isRequired = true
 
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { refMasterTypeCode: 'PAY_ALLOC_GRP_CODE' }).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { refMasterTypeCode: RefMasterConstant.PAY_ALLOC_GRP }).subscribe(
       (response) => {
         this.ListPayAllocGrp = response["ReturnObject"]
       },
@@ -76,7 +76,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
           });
 
           
-          this.http.post(environment.FoundationR3Url + '/RefPaymentAlloc/GetRefPaymentAllocById', {Id : response['RefPaymentAllocId'] }).subscribe(
+          this.http.post(URLConstant.GetRefPaymentAllocByID, {Id : response['RefPaymentAllocId'] }).subscribe(
             (response) => {
               this.inputLookUpPaymentAllocObj.idSelect = response["RefPaymentAllocId"]
               this.inputLookUpPaymentAllocObj.nameSelect = response["PaymentAllocCode"]

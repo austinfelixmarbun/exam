@@ -61,6 +61,8 @@ import { GeneralSettingAdminComponent } from './general-setting-admin/general-se
 import { GeneralSettingAdminDetailComponent } from './general-setting-admin/general-setting-admin-detail/general-setting-admin-detail.component';
 import { IndustryTypeCategoryDetailComponent } from './industry-type-category/industry-type-category-detail/industry-type-category-detail.component';
 import { IndustryTypeCategoryPagingComponent } from './industry-type-category/industry-type-category-paging/industry-type-category-paging.component';
+import { ExchangeRateDetailComponent } from './exchange-rate/exchange-rate-detail/exchange-rate-detail.component';
+import { ExchangeRatePagingComponent } from './exchange-rate/exchange-rate-paging/exchange-rate-paging.component';
 import { PathConstantX } from 'app/impl/shared/PathConstantX';
 import { EconomicSectorSlikPagingXComponent } from 'app/impl/common-setting/economic-sector-slik-x/economic-sector-slik-paging-x/economic-sector-slik-paging-x.component';
 import { EconomicSectorSlikAddEditXComponent } from 'app/impl/common-setting/economic-sector-slik-x/economic-sector-slik-add-edit-x/economic-sector-slik-add-edit-x.component';
@@ -137,6 +139,20 @@ const routes: Routes = [
         component: CurrencyAddComponent,
         data: {
           title: 'Currency add'
+        },
+      },
+      {
+        path: PathConstant.CS_EXCHANGE_RATE_DETAIL,
+        component: ExchangeRateDetailComponent,
+        data: {
+          title: 'Exchange Rate Detail'
+        },
+      },
+      {
+        path: PathConstant.CS_EXCHANGE_RATE_PAGING,
+        component: ExchangeRatePagingComponent,
+        data: {
+          title: 'Exchange Rate Paging'
         },
       },
       {

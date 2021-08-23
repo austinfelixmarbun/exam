@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -19,7 +19,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   templateUrl: './notification-approval-detail.component.html'
 })
 export class NotificationApprovalDetailComponent implements OnInit {
-  inputPagingObj:any;
+  inputPagingObj: UcPagingObj = new UcPagingObj();
   arrCrit: any;
   settingUrl: string = environment.FoundationR3Url;
   notificationHObj: NotificationHObj;
@@ -30,9 +30,9 @@ export class NotificationApprovalDetailComponent implements OnInit {
   deleteUrl: any;
   resultData: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
-  
+
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) { 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       if (params["NotificationHId"] != null) {
         this.NotificationHId = params["NotificationHId"];
@@ -46,16 +46,13 @@ export class NotificationApprovalDetailComponent implements OnInit {
 
     this.notificationHObj = new NotificationHObj();
     this.notificationHObj.NotificationHId = this.NotificationHId;
-    this.http.post(URLConstant.GetNotificationHByNotificationHId, {Id: this.NotificationHId}).subscribe(
+    this.http.post(URLConstant.GetNotificationHByNotificationHId, { Id: this.NotificationHId }).subscribe(
       response => {
         this.resultData = response;
       }
     );
 
-    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchNotificationDOnApproval.json";
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url;
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchNotificationDOnApproval.json";
 
     this.arrCrit = new Array();
@@ -67,8 +64,7 @@ export class NotificationApprovalDetailComponent implements OnInit {
     this.inputPagingObj.addCritInput = this.arrCrit;
   }
 
-  SaveForm(event: any)
-  {
+  SaveForm(event: any) {
     var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     var notificationResultStat;
     var resultForMsg;
@@ -88,17 +84,17 @@ export class NotificationApprovalDetailComponent implements OnInit {
       notificationResultStat = "RTN";
       resultForMsg = "Return ";
     }
-    
+
     this.notificationHObj = this.resultData;
     this.notificationHObj.Status = notificationResultStat;
     this.notificationHObj.ApproveBy = currentUserContext.UserName;
-    
-      this.http.post(URLConstant.EditNotificationH, this.notificationHObj).subscribe(
-        response => {
-          this.toastr.successMessage(resultForMsg + " " + response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV],{ });
-        }
-      );
+
+    this.http.post(URLConstant.EditNotificationH, this.notificationHObj).subscribe(
+      response => {
+        this.toastr.successMessage(resultForMsg + " " + response["Message"]);
+        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV], {});
+      }
+    );
   }
 
 }

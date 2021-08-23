@@ -27,6 +27,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { GenericListObj } from 'app/shared/model/Generic/GenericListObj.Model';
+import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 
 @Component({
   selector: 'app-customer-family-detail',
@@ -38,6 +39,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
   @Input() listCustIdToExclude: Array<string>;
   @Input() customerPersonalFamilyId: number = 0;
   @Input() custIdInput: number = 0;
+  @Input() isMarried: boolean = false;
   @Output() ResponseSaveFamily: EventEmitter<any> = new EventEmitter<any>();
   custPersonalFamilyObj: any;
   isExistingCust: boolean;
@@ -49,11 +51,24 @@ export class CustomerFamilyDetailComponent implements OnInit {
   inputAddressObj: InputAddressObj = new InputAddressObj();
   inputFieldObj: InputFieldObj = new InputFieldObj();
   UcAddressObj: UcAddressObj;
-  CustRelationshipList: Array<KeyValueObj>;
+  // CustRelationshipList: Array<KeyValueObj>;
+  IdTypeObj: Array<KeyValueObj> = new Array<KeyValueObj>();
+  DictRefMaster: Array<KeyValueObj> = new Array<KeyValueObj>();
+  MrCustRelationshipObj: Array<KeyValueObj> = new Array<KeyValueObj>();
+  ddlIdTypeObj: UcDropdownListObj = new UcDropdownListObj();
+  ddlGenderObj: UcDropdownListObj = new UcDropdownListObj();
+  ddlMaritalStatObj: UcDropdownListObj = new UcDropdownListObj();
+  ddlMrCustRelationshipObj: UcDropdownListObj = new UcDropdownListObj();
+
+  isDdlMrCustRelationshipReady: boolean = false;
+  isDdlMrGenderReady: boolean = false;
+  isDdlMaritalStatReady: boolean = false;
+  isDdlIdTypeReady: boolean = false;
+
+  readonly MasterGender = CommonConstant.RefMasterTypeCodeGender;
+  readonly MasterMaritalStat = CommonConstant.RefMasterTypeCodeMaritalStat;
 
   Gender: any;
-  tempGender: any;
-  tempIdType: any;
   tempCustModel: any;
 
   custPersonalObj: CustPersonalObj;
@@ -79,7 +94,6 @@ export class CustomerFamilyDetailComponent implements OnInit {
   MotherMaidenName: string;
   IsAffiliateWithMf: string;
   MrMaritalStatCode: string;
-  tempMrMaritalStatCode: Array<KeyValueObj> = new Array<KeyValueObj>();
 
   CustomerFamilyForm: FormGroup = this.fb.group({
     CustPersonalFamilyId: [0],
@@ -95,10 +109,10 @@ export class CustomerFamilyDetailComponent implements OnInit {
     IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)]],
     TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     IdExpiredDt: [''],
-    MrMaritalStatCode: [''],
+    MrMaritalStatCode: ['', [Validators.required]],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-    Email1: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+    Email1: ['', [Validators.pattern(CommonConstant.regexEmail)]],
     RowVersion: [''],
     RowVersionCust: [''],
     RowVersionCustPersonal: ['']
@@ -114,7 +128,6 @@ export class CustomerFamilyDetailComponent implements OnInit {
     this.KTP = RefMasterConstant.EKtp;
     this.isExistingCust = false;
     this.isEditCustFamily = false;
-    this.CustRelationshipList = new Array();
     this.custDataToCheckDuplicate = new Object();
     this.UcAddressObj = new UcAddressObj();
     this.inputFieldObj = new InputFieldObj();
@@ -137,17 +150,19 @@ export class CustomerFamilyDetailComponent implements OnInit {
       IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)]],
       TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
       IdExpiredDt: [''],
-      MrMaritalStatCode: [''],
+      MrMaritalStatCode: ['',[Validators.required]],
       MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
       MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-      Email1: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
+      Email1: ['', [Validators.pattern(CommonConstant.regexEmail)]],
       RowVersion: [''],
       RowVersionCust: [''],
       RowVersionCustPersonal: ['']
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.ddlMrCustRelationshipObj.isSelectOutput = true;
+    this.ddlIdTypeObj.isSelectOutput = true;
     this.initData();
     console.log("ameng");
     this.addrData = new CustAddrObj();;
@@ -182,7 +197,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
       var criteriaCustObj = new CriteriaObj();
       criteriaCustObj.DataType = "text";
       criteriaCustObj.restriction = AdInsConstant.RestrictionNotIn;
-      criteriaCustObj.propName = 'CUST_NO';
+      criteriaCustObj.propName = 'C.CUST_NO';
       criteriaCustObj.listValue = this.listCustIdToExclude;
       criteriaListCust.push(criteriaCustObj);
     }
@@ -190,7 +205,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
       var criteriaCustObj = new CriteriaObj();
       criteriaCustObj.DataType = "text";
       criteriaCustObj.restriction = AdInsConstant.RestrictionNeq;
-      criteriaCustObj.propName = 'CUST_ID';
+      criteriaCustObj.propName = 'C.CUST_ID';
       criteriaCustObj.value = this.custIdInput.toString();
       criteriaListCust.push(criteriaCustObj);
     }
@@ -199,7 +214,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
     this.criteriaExistingList = new Array();
     this.criteriaExistingObj = new CriteriaObj();
     this.criteriaExistingObj.restriction = AdInsConstant.RestrictionEq;
-    this.criteriaExistingObj.propName = 'MR_CUST_TYPE_CODE';
+    this.criteriaExistingObj.propName = 'C.MR_CUST_TYPE_CODE';
     this.criteriaExistingObj.value = CommonConstant.CustomerPersonal;
     this.criteriaExistingList.push(this.criteriaExistingObj);
     if (this.existingCustomerLookUpObj.addCritInput) {
@@ -233,6 +248,18 @@ export class CustomerFamilyDetailComponent implements OnInit {
           console.log("CustAddrData: " + JSON.stringify(custAddrData));
           this.existingCustomerLookUpObj.nameSelect = custData.CustName;
           this.disableInput();
+          
+          this.inputFieldObj.inputLookupObj.nameSelect = custAddrData.Zipcode;
+          this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: custAddrData.Zipcode };
+          this.UcAddressObj.AreaCode1 = custAddrData.AreaCode1;
+          this.UcAddressObj.AreaCode2 = custAddrData.AreaCode2;
+          this.UcAddressObj.AreaCode3 = custAddrData.AreaCode3;
+          this.UcAddressObj.AreaCode4 = custAddrData.AreaCode4;
+          this.UcAddressObj.Addr = custAddrData.Addr;
+          this.UcAddressObj.City = custAddrData.City;
+          this.inputAddressObj.default = this.UcAddressObj;
+          this.inputAddressObj.inputField = this.inputFieldObj;
+
           this.CustomerFamilyForm.patchValue({
             CustPersonalFamilyId: this.custPersonalFamilyObj["CustPersonalFamilyId"],
             CustId: this.custPersonalFamilyObj["CustId"],
@@ -260,7 +287,8 @@ export class CustomerFamilyDetailComponent implements OnInit {
             RowVersionCust: custData.RowVersion,
             RowVersionCustPersonal: custPersonalData.RowVersion
           });
-          this.onChangeIdType();
+          this.RelationshipChange(this.custPersonalFamilyObj["MrCustRelationship"]);
+          this.setValidatorPattern();
           // this.CustomerFamilyForm.controls.Gender.disable();
           // this.CustomerFamilyForm.controls.MrIdTypeCode.disable();
           // this.CustomerFamilyForm.controls.BirthPlace.disable();
@@ -272,18 +300,6 @@ export class CustomerFamilyDetailComponent implements OnInit {
           // this.CustomerFamilyForm.controls.MotherMaidenName.disable();
           // this.CustomerFamilyForm.controls.MobilePhnNo1.disable();
           // this.CustomerFamilyForm.controls.Email1.disable();
-
-
-          this.inputFieldObj.inputLookupObj.nameSelect = custAddrData.Zipcode;
-          this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: custAddrData.Zipcode };
-          this.UcAddressObj.AreaCode1 = custAddrData.AreaCode1;
-          this.UcAddressObj.AreaCode2 = custAddrData.AreaCode2;
-          this.UcAddressObj.AreaCode3 = custAddrData.AreaCode3;
-          this.UcAddressObj.AreaCode4 = custAddrData.AreaCode4;
-          this.UcAddressObj.Addr = custAddrData.Addr;
-          this.UcAddressObj.City = custAddrData.City;
-          this.inputAddressObj.default = this.UcAddressObj;
-          this.inputAddressObj.inputField = this.inputFieldObj;
         }
       ).catch(
         (error) => {
@@ -297,67 +313,35 @@ export class CustomerFamilyDetailComponent implements OnInit {
       });
     }
 
-    var refMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
-      MappingCode: null
-    }
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObj).subscribe(
-      (response) => {
-        this.tempGender = response[CommonConstant.ReturnObj];
-        this.CustomerFamilyForm.patchValue({
-          Gender: this.tempGender[0].Key
-        });
-      }
-    );
+    await this.GetListActiveRefMaster(this.MasterGender);
+    this.isDdlMrGenderReady = true;
+    await this.GetListActiveRefMaster(this.MasterMaritalStat);
+    this.isDdlMaritalStatReady = true;
+
     var refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
       MappingCode: null
     }
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).toPromise().then(
       (response) => {
-        this.tempIdType = response[CommonConstant.ReturnObj];
-        this.CustomerFamilyForm.patchValue({
-          MrIdTypeCode: this.tempIdType[0].Key
-        });
-        this.onChangeIdType();
-        if (this.tempIdType[0].Key == this.KTP) {
-          this.tempKTPCheck = true;
-
-        } else {
-          this.tempKTPCheck = false;
-          this.CustomerFamilyForm.controls.IdExpiredDt.setValidators(Validators.required);
-          this.CustomerFamilyForm.controls.IdExpiredDt.updateValueAndValidity();
-        }
-
-        if (this.tempIdType != undefined) {
+        this.IdTypeObj = response[CommonConstant.ReturnObj];
+        this.isDdlIdTypeReady = true;
+        this.setValidatorPattern();
+        if (this.IdTypeObj != undefined) {
           this.getInitPattern();
         }
       }
     );
 
-    var refMasterObjMrMaritalStatCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat,
-      MappingCode: null
-    }
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrMaritalStatCode).toPromise().then(
-      (response) => {
-        this.tempMrMaritalStatCode = response[CommonConstant.ReturnObj];
-        this.CustomerFamilyForm.patchValue({
-          MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
-        });
-      }
-    );
 
     var refMasterObjMrCustRelationshipCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustPersonalRelationship,
       MappingCode: null
     };
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCustRelationshipCode).subscribe(
-      (response: GenericListObj) => {
-        this.CustRelationshipList = response.ReturnObject;
-        this.CustomerFamilyForm.patchValue({
-          MrCustRelationship: this.CustRelationshipList[0].Key
-        });
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCustRelationshipCode).toPromise().then(
+      async (response: GenericListObj) => {
+        this.MrCustRelationshipObj = response.ReturnObject;
+        this.isDdlMrCustRelationshipReady = true;
       });
   }
 
@@ -410,7 +394,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
           Email1: custPersonalData.Email1
         });
 
-        this.onChangeIdType();
+        this.setValidatorPattern();
         var addrForm = this.CustomerFamilyForm.get("UcAddress");
         addrForm.patchValue({
           Addr: custAddrData.Addr,
@@ -571,9 +555,9 @@ export class CustomerFamilyDetailComponent implements OnInit {
     // this.CustName = this.CustomerFamilyForm.controls["CustName"].value;
     // this.router.navigate(["/Customer/CustomerPersonal/DuplicateCheck"], { queryParams: { "CustName": this.CustName, "Gender": this.Gender, "MrIdTypeCode": this.MrIdTypeCode, "CustModel": this.CustModel, "BirthPlace": this.BirthPlace, "BirthDt": this.BirthDt, "IdNo": this.IdNo, "TaxIdNo": this.TaxIdNo, "IdExpiredDt": this.IdExpiredDt, "MotherMaidenName": this.MotherMaidenName, "IsVip": this.IsVip, "IsAffiliateWithMf": this.IsAffiliateWithMf, "VipNotes": this.VipNotes, "MrMaritalStatCode": this.MrMaritalStatCode } });
   }
-  onOptionsSelected(event) {
+  onOptionsSelected(event : string) {
     let noExpDate = [CommonConstant.MrIdTypeCodeEKTP, CommonConstant.MrIdTypeCodeNPWP, CommonConstant.MrIdTypeCodeAKTA];
-    if (noExpDate.includes(event.target.value)) {
+    if (noExpDate.includes(event)) {
       this.CustomerFamilyForm.controls.IdExpiredDt.clearValidators();
       this.CustomerFamilyForm.patchValue({
         IdExpiredDt: ''
@@ -584,21 +568,9 @@ export class CustomerFamilyDetailComponent implements OnInit {
       this.tempKTPCheck = false;
     }
     this.CustomerFamilyForm.controls.IdExpiredDt.updateValueAndValidity();
-    this.onChangeIdType();
-  }
-
-  onChangeIdType() {
-    let idType: string = this.CustomerFamilyForm.get("MrIdTypeCode").value;
-
-    this.CustomerFamilyForm.get("IdNo").clearValidators();
-    if (idType == CommonConstant.MrIdTypeCodeEKTP) {
-      this.CustomerFamilyForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)]);
-    } else {
-      this.CustomerFamilyForm.get("IdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
-    }
-    this.CustomerFamilyForm.get("IdNo").updateValueAndValidity();
     this.setValidatorPattern();
   }
+
 
   back() {
     this.ResponseSaveFamily.emit({ StatusCode: 200 });
@@ -648,7 +620,7 @@ export class CustomerFamilyDetailComponent implements OnInit {
 
   setValidatorPattern() {
     let idTypeValue: string;
-    idTypeValue = this.CustomerFamilyForm.controls[this.controlNameIdType].value;
+    idTypeValue = this.CustomerFamilyForm.get("MrIdTypeCode").value;
     var pattern: string = '';
     if (idTypeValue != undefined) {
       if (this.resultPattern != undefined) {
@@ -663,9 +635,30 @@ export class CustomerFamilyDetailComponent implements OnInit {
 
   setValidator(pattern: string) {
     if (pattern != undefined) {
-      this.CustomerFamilyForm.controls[this.controlNameIdNo].setValidators([Validators.required, Validators.pattern(pattern)]);
-      this.CustomerFamilyForm.controls[this.controlNameIdNo].updateValueAndValidity();
+      this.CustomerFamilyForm.controls.IdNo.setValidators([Validators.required, Validators.pattern(pattern)]);
+      this.CustomerFamilyForm.controls.IdNo.updateValueAndValidity();
     }
   }
   //END OF URS-LOS-041
+
+  RelationshipChange(relationship: string) {
+    let idxMarried = this.DictRefMaster[this.MasterMaritalStat].findIndex(x => x.Key == CommonConstant.MasteCodeMartialStatsMarried);
+
+    if (relationship == CommonConstant.MasteCodeRelationshipSpouse) {
+      this.CustomerFamilyForm.controls.MrMaritalStatCode.patchValue(this.DictRefMaster[this.MasterMaritalStat][idxMarried].Key);
+      this.CustomerFamilyForm.controls.MrMaritalStatCode.disable();
+    } else {
+      this.CustomerFamilyForm.controls.MrMaritalStatCode.enable();
+    }
+    this.CustomerFamilyForm.controls.MrMaritalStatCode.updateValueAndValidity();
+  }
+
+  async GetListActiveRefMaster(RefMasterTypeCode: string) {
+    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: RefMasterTypeCode, MappingCode: null };
+    await this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, tempReq).toPromise().then(
+      (response) => {
+        this.DictRefMaster[RefMasterTypeCode] = response[CommonConstant.ReturnObj];
+      });
+  }
+
 }

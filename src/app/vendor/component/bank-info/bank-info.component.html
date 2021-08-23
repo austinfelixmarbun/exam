@@ -66,7 +66,7 @@
                 <div class="px-3">
                   <form class="form form-horizontal" #enjiForm="ngForm" [formGroup]="BankRegisForm"
                     (ngSubmit)="BankRegisForm.valid && SaveForm(enjiForm)">
-                    <lib-ucSubsection [id]="'addBankAccountId'" [title]="'Add Bank Account'" [panel]="'addBankAccount'">
+                    <lib-ucSubsection [id]="'addBankAccountId'" [title]="mode === 'edit' ? 'Edit Bank Account' : 'Add Bank Account'" [panel]="'addBankAccount'">
                     </lib-ucSubsection>
                     <div id="addBankAccount">
                       <div class="form-group row" *ngIf="inputLookupBankObj.isReady">

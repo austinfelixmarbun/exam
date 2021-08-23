@@ -110,6 +110,10 @@
                             "property": "CustNo"
                         },
                         {
+                            "type": "SubjectTypeDescr",
+                            "property": "SubjectTypeDescr"
+                        },
+                        {
                             "type": "WfTaskListId",
                             "property": "WfTaskListId"
                         }

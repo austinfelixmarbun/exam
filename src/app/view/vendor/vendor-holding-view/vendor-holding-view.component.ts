@@ -41,19 +41,10 @@ export class VendorHoldingViewComponent implements OnInit {
   HoListObj: VendorObj;
   Vendor: any;
   vendorContactPerson: Object;
-  pageNow: any;
-  pageSize: any;
-  totalData: any;
-  apiUrl: any;
-  resultData: any;
-  orderByValue: any;
-  orderByKey: any;
   tempData: any[];
   tempListId: any[];
   listSelectedId: any[];
   MrVendorTypeObj: any;
-
-
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
 
@@ -75,28 +66,18 @@ export class VendorHoldingViewComponent implements OnInit {
     )
 
     this.viewVendorHoldingObj.viewInput = "./assets/ucviewgeneric/viewVendorHolding.json";
-    this.viewVendorHoldingObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorHoldingMainPObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingMainP.json";
-    this.viewVendorHoldingMainPObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorHoldingMainCObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingMainC.json";
-    this.viewVendorHoldingMainCObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorHoldingTaxObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingTax.json";
-    this.viewVendorHoldingTaxObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorHoldingTaxAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingTaxAddr.json";
-    this.viewVendorHoldingTaxAddrObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorHoldingAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingAddr.json";
-    this.viewVendorHoldingAddrObj.viewEnvironment = environment.FoundationR3Url;
     this.viewVendorHoldingLtLgObj.viewInput = "./assets/ucviewgeneric/viewVendorHoldingLtLg.json";
-    this.viewVendorHoldingLtLgObj.viewEnvironment = environment.FoundationR3Url;
     
     this.GetListVendorContactPersonByVendorId();
 
     this.listSelectedId = new Array();
     this.tempListId = new Array();
     this.tempData = new Array();
-    this.pageNow = 1;
-    this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + URLConstant.GetPagingObjectBySQL;
 
     this.GroupListObj = new VendorGroupObj();
     this.GroupListObj.VendorId = this.VendorId;
@@ -117,33 +98,6 @@ export class VendorHoldingViewComponent implements OnInit {
 
       }
     )
-  }
-
-  searchPagination(event: number) {
-    this.pageNow = event;
-    let order = null;
-    if (this.orderByKey != null) {
-      order = {
-        key: this.orderByKey,
-        value: this.orderByValue
-      }
-    }
-    this.UCSearchComponent.search(this.apiUrl, this.pageNow, this.pageSize, order)
-  }
-
-  getResult(event) {
-    this.resultData = event.response;
-    this.totalData = event.response.Count;
-    this.UCGridFooter.pageNow = event.pageNow;
-    this.UCGridFooter.totalData = this.totalData;
-    this.UCGridFooter.resultData = this.resultData;
-  }
-
-  onSelect(event) {
-    this.pageNow = event.pageNow;
-    this.pageSize = event.pageSize;
-    this.totalData = event.Count;
-    this.searchPagination(this.pageNow);
   }
 
   GetListVendorContactPersonByVendorId() {

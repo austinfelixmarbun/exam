@@ -116,15 +116,20 @@ import { UpdateCustomerCompanyLegalDocComponent } from './customer-update-master
 import { RegexService } from './regex.service';
 import { CustAssetComponent } from './cust-asset/cust-asset.component';
 import { CustAssetDetailComponent } from './cust-asset/cust-asset-detail/cust-asset-detail.component';
-import { UcgridviewModule } from '@adins/ucgridview';
 import { SharedModule } from 'app/shared/shared.module';
-import { DmsIframeComponent } from 'app/shared/dms-iframe/dms-iframe.component';
 import { CustBankAccComponent } from './cust-bank-acc/cust-bank-acc.component';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { createTranslateLoader } from 'app/app.module';
-import { HttpClient } from '@angular/common/http';
 import { CustomerViewCustomerAssetComponent } from './customer-view/customer-view-customer-asset/customer-view-customer-asset.component';
+import { NewCustomerSharingModule } from './sharing-component/new-cust-sharing.model';
+import { UcdropdownlistModule } from '@adins/ucdropdownlist';
+import { AdInsModule } from 'app/components/adins-module/adins.module';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page-x/customer-personal-page-x.component';
+import { CustomerPersonalJobDataXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/customer-personal-job-data-x.component';
+import { JobDataEmployeeXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-employee-x/job-data-employee-x.component';
+import { JobDataProfessionalXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-professional-x/job-data-professional-x.component';
+import { JobDataSmeXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-sme-x/job-data-sme-x.component';
+import { CustomerCompanyPageXComponent } from 'app/impl/customer/customer-company/customer-company-page-x/customer-company-page-x.component';
+import { CustomerCompanyDetailXComponent } from 'app/impl/customer/customer-company/customer-company-detail-x/customer-company-detail-x.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -142,6 +147,7 @@ export const customCurrencyMaskConfig = {
  @NgModule({
   exports: [],
   imports: [
+    AdInsModule,
     CustomerRoutingModule,
     CommonModule,
     ReactiveFormsModule,
@@ -163,8 +169,10 @@ export const customCurrencyMaskConfig = {
     UcShowErrorsModule,
     MatTabsModule,
     UcuploadModule,
+    NgMultiSelectDropDownModule,
+    NewCustomerSharingModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
-    
+    UcdropdownlistModule
   ],
   declarations: [
     CustomerPagingComponent, CustAssetDetailComponent,
@@ -260,13 +268,20 @@ export const customCurrencyMaskConfig = {
     UpdateCustomerCompanyLegalDocComponent,
     CustBankAccComponent,
     CustAssetComponent,
-    CustomerViewCustomerAssetComponent
+    CustomerViewCustomerAssetComponent,
+    CustomerPersonalPageXComponent,
+    CustomerPersonalJobDataXComponent,
+    JobDataEmployeeXComponent,
+    JobDataProfessionalXComponent,
+    JobDataSmeXComponent,
+    CustomerCompanyPageXComponent,
+    CustomerCompanyDetailXComponent
   ],
   providers: [
-    NGXToastrService, 
     CustAssetComponent,
     CustAssetDetailComponent,
     CustomerPersonalJobDataComponent,
+    CustomerPersonalJobDataXComponent,
     RegexService
   ],
   entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent, CustAssetDetailComponent]

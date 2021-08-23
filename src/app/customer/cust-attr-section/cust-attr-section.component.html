@@ -42,8 +42,9 @@
       </div>
     </div>
   </div>
-  <app-cust-attr-list [title]="'Attribute List'" [CustId]="this.CustId" [enjiForm]="enjiForm"
-    [parentForm]="OtherInformationForm" [identifier]="'AttrList'" [attrGroup]="attrGroup"></app-cust-attr-list>
+  <!-- <app-cust-attr-list [title]="'Attribute List'" [CustId]="this.CustId" [enjiForm]="enjiForm"
+    [parentForm]="OtherInformationForm" [identifier]="identifierCustAttr" [attrGroup]="attrGroup" #CustAttrFormOld></app-cust-attr-list> -->
+  <app-cust-attr-form [Label]="'List'" [CustId]="CustId" [AttrGroup]="attrGroup" [parentForm]="OtherInformationForm" [identifier]="identifierCustAttr" [enjiForm]="enjiForm" [IsVertical]="true" #CustAttrForm></app-cust-attr-form>
 
   <div class="form-group row">
     <div class="col-md-12" style="text-align: right">

@@ -30,6 +30,12 @@ import { CustomerGuarantorMenuComponent } from './customer-guarantor-menu/custom
 import { CustomerUpdateMasterComponent } from './customer-update-master/customer-update-master.component';
 import { CustomerUpdateMasterDetailComponent } from './customer-update-master/customer-update-master-detail/customer-update-master-detail.component';
 import { PathConstant } from 'app/shared/PathConstant';
+import { NewCustHeaderComponent } from './sharing-component/new-cust-header/new-cust-header.component';
+import { PathConstantX } from 'app/impl/shared/PathConstantX';
+import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header-x/new-cust-header-x.component';
+import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page-x/customer-personal-page-x.component';
+import { CustomerPersonalJobDataXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/customer-personal-job-data-x.component';
+import { CustomerCompanyPageXComponent } from 'app/impl/customer/customer-company/customer-company-page-x/customer-company-page-x.component';
 
 const routes: Routes = [
   {
@@ -111,7 +117,6 @@ const routes: Routes = [
           title: 'Review Upload Negative Customer Detail'
         }
       },
-
       {
         path: PathConstant.CUST_PERSONAL_PAGE,
         component: CustomerPersonalPageComponent,
@@ -230,7 +235,42 @@ const routes: Routes = [
         data: {
           title: 'Update Data Customer Detail'
         }
-      }
+      },
+      {
+        path: PathConstant.NEW_CUST,
+        component: NewCustHeaderComponent,
+        data: {
+          title: 'New Cust'
+        }
+      },
+      {
+        path: PathConstantX.CUST_PERSONAL_PAGE,
+        component: CustomerPersonalPageXComponent,
+        data: {
+          title: 'Customer Personal DuplicateCheck  '
+        }
+      },
+      {
+        path: PathConstantX.NEW_CUST,
+        component: NewCustHeaderXComponent,
+        data: {
+          title: 'New Cust'
+        }
+      },
+      {
+        path: PathConstantX.CUST_PERSONAL_JOB_DATA,
+        component: CustomerPersonalJobDataXComponent,
+        data: {
+          title: 'Customer Personal Job Data X'
+        }
+      },
+      {
+        path: PathConstantX.CUST_COY_PAGE,
+        component: CustomerCompanyPageXComponent,
+        data: {
+          title: 'Customer Company Page X'
+        }
+      },
     ]
   }
 ];

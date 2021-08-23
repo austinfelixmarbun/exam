@@ -2,6 +2,7 @@ import { environment } from "environments/environment";
 import { URLConstant } from "../constant/URLConstant";
 import { NavigationConstant } from "../NavigationConstant";
 import { CriteriaObj } from "./CriteriaObj.Model";
+import { IntegrationObj } from "./library/IntegrationObj.model";
 
 export class UcPagingObj {
     _url: string;
@@ -19,11 +20,13 @@ export class UcPagingObj {
     delay: number;
     navigationConst: any;
     listEnvironments: Array<EnvisObj>;
+    isJoinExAPI: boolean;
+    integrationObj: IntegrationObj;
 
     constructor() {
         this._url = "";
         this.title = "";
-        this.enviromentUrl = environment.FoundationR3Url;
+        this.enviromentUrl = environment.FoundationR3Url + '/v1';
         this.apiQryPaging = URLConstant.GetPagingObjectBySQL;
         this.deleteUrl = "";
         this.pagingJson = "";
@@ -31,13 +34,15 @@ export class UcPagingObj {
         this.addCritInput = new Array<CriteriaObj>();
         this.ddlEnvironments = new Array<EnviObj>();
         this.listEnvironments = new Array<EnvisObj>();
-        this.listEnvironments.push({ environment: "FOU", url: environment.FoundationR3Url });
+        this.listEnvironments.push({ environment: "FOU", url: environment.FoundationR3Url + '/v1' });
         this.listEnvironments.push({ environment: "FOU_WEB", url: environment.FoundationR3Web });
         this.whereValue = new Array<WhereValueObj>();
         this.isHideSearch = false;
         this.delay = 0;
         this.isSearched = false;
         this.navigationConst = NavigationConstant;
+        this.isJoinExAPI = false;
+        this.integrationObj = new IntegrationObj();
     }
 }
 

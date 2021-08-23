@@ -4,9 +4,6 @@ import { SearchComponent } from 'app/shared/search/search.component';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { ActivatedRoute } from '@angular/router';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
 import { Observable } from 'rxjs';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -42,15 +39,11 @@ export class UploadSettingPagingComponent implements OnInit {
   exportData: any;
 
   readonly CancelLink: string = NavigationConstant.UPLOAD_SETTING_EDIT;
-  constructor(private http: HttpClient,
-    private spinner: NgxSpinnerService,
-    private toastr: NGXToastrService,
-    private route: ActivatedRoute) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = './assets/search/searchUploadTypePaging.json';
-    this.inputObj.enviromentUrl = this.foundationUrl;
     this.inputObj.apiQryPaging = URLConstant.GetUploadTypePaging;
     this.pageNow = 1;
     this.pageSize = 10;

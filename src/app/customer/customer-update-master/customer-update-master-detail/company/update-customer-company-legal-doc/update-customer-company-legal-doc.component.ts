@@ -8,6 +8,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { UpdateCustLegalDocObj } from 'app/shared/model/UpdateMasterCust/UpdateCustLegalDocObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-update-customer-company-legal-doc',
@@ -17,7 +18,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
   @Input() CustDataTrxId: number;
-  @Input() WfTaskListId: number;
+  @Input() WfTaskListId: any;
   @Output() ResponseTab: EventEmitter<any>;
   AppLegalDoc: Array<UpdateCustLegalDocObj>;
   MasterLegalDoc: Array<UpdateCustLegalDocObj>;
@@ -85,7 +86,9 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
         request.push(item);
       }
     }
-    this.http.post(URLConstant.UpdateMasterCustCompanyLegalDoc, { CustCompanyId: this.CustCompanyId, TaskListId: this.WfTaskListId, LegalDocList: request }).toPromise().then(
+
+    let UpdateMasterCustCompanyLegalDocUrl = environment.isCore ? URLConstant.UpdateMasterCustCompanyLegalDocv2 : URLConstant.UpdateMasterCustCompanyLegalDoc;
+    this.http.post(UpdateMasterCustCompanyLegalDocUrl, { CustCompanyId: this.CustCompanyId, TaskListId: this.WfTaskListId, LegalDocList: request }).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -21,6 +22,7 @@ import { BehaviorSubject, forkJoin, Subject } from 'rxjs';
 })
 export class UpdateCustomerAddressComponent implements OnInit {
   @Input() CustDataTrxId: number;
+  @Input() SubjectType: string;
   @Output() ResponseTab: EventEmitter<any>;
   CustId: number;
   ZipcodeLookupObj: InputLookupObj;

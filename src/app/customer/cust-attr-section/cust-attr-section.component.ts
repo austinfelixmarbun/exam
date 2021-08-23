@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
@@ -11,6 +10,11 @@ import { CustOtherInfoObj } from 'app/shared/model/CustOtherInfoObj.Model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { CustAttrFormComponent } from '../sharing-component/new-cust-component/component/cust-attr-form/cust-attr-form.component';
+import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
+import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
+import { CustAttrContentObj } from 'app/shared/model/NewCust/CustAttrContentObj.Model';
+import { CustAttrListComponent } from '../cust-attr-list/cust-attr-list.component';
 
 @Component({
   selector: 'app-cust-attr-section',
@@ -19,6 +23,9 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
   providers: [NGXToastrService]
 })
 export class CustAttrSectionComponent implements OnInit {
+  
+  @ViewChild('CustAttrForm') custAttrForm: CustAttrFormComponent;
+  @ViewChild('CustAttrFormOld') custAttrFormOld: CustAttrListComponent;
   @Input() CustId: number;
   @Input() MrCustTypeCode: string;
   @Output() outputTab: EventEmitter<Object> = new EventEmitter<Object>();
@@ -27,14 +34,12 @@ export class CustAttrSectionComponent implements OnInit {
   attrGroup: string;
   From: string;
   CustOtherInfo: any;
-  constructor(
-    private router: Router,
+
+  constructor(private router: Router,
     private route: ActivatedRoute,
-    private location: Location,
     private httpClient: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder
-  ) {
+    private fb: FormBuilder) {
     this.pageType = "add";
     this.isLookupReady = false;
     this.route.queryParams.subscribe(params => {
@@ -102,6 +107,7 @@ export class CustAttrSectionComponent implements OnInit {
       });
     }
     this.isLookupReady = true;
+    await this.GetExistingProfession();
     // this.httpClient.post(URLConstant.GetListCustAttrContentByCustIdForCust, { CustId: this.CustId }).pipe(first()).subscribe(
     //   (response) => {
     //     var parentFormGroup = new Object();
@@ -127,45 +133,80 @@ export class CustAttrSectionComponent implements OnInit {
     // );
   }
 
-  SaveForm() {
-    var formValue = this.OtherInformationForm['controls']['AttrList'].value;
-    var custAttrRequest = new Array<Object>();
-    if (Object.keys(formValue).length > 0 && formValue.constructor === Object) {
-      for (const key in formValue) {
-        if (formValue[key]["AttrValue"] != null) {
-          var custAttr = {
-            CustId: this.CustId,
-            RefAttrId: formValue[key]["RefAttrId"],
-            AttrValue: formValue[key]["AttrValue"],
-            AttrGroup: this.attrGroup
-          };
-          custAttrRequest.push(custAttr);
-        }
+  
+  async GetExistingProfession(custId: number = this.CustId) {
+    if (this.MrCustTypeCode != CommonConstant.CustTypePersonal || custId == 0) return;
+    await this.httpClient.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: custId }).toPromise().then(
+      async (response: CustPersonalJobDataObj) => {
+        if (!response.RefProfessionId) return;
+        await this.httpClient.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
+          (response: RefProfessionObj) => {
+            if(this.custAttrForm) this.custAttrForm.SetSearchListInputType(CommonConstant.AttrCodeDeptAml, response.ProfessionCode);
+            if(this.custAttrFormOld) this.custAttrFormOld.SetSearchListInputType(CommonConstant.AttrCodeDeptAml, response.ProfessionCode);
+          });
       }
-      var custOtherInfo = new CustOtherInfoObj();
-      custOtherInfo = this.OtherInformationForm.value;
+    )
+  }
+
+  identifierCustAttr: string = "CustAttrForm";
+  SaveForm() {
+    let formValue = this.OtherInformationForm.get(this.identifierCustAttr).value;
+    if (Object.keys(formValue).length > 0) {
+      let custOtherInfo = new CustOtherInfoObj();
+      custOtherInfo = this.OtherInformationForm.getRawValue();
       custOtherInfo.CustId = this.CustId;
 
-      var RequestAppCustOtherInfoObj = {
-        CustAttrContentObjs: custAttrRequest,
+      let RequestAppCustOtherInfoObj = {
+        CustAttrContentObjs: this.custAttrFormOld != undefined ? this.SetCustAttrContentOld() : this.SetCustAttrContent(),
         RCustOtherInfoObj: custOtherInfo
       };
 
-      let url: string = this.getUrlSave();
-      this.httpClient.post(url, RequestAppCustOtherInfoObj).subscribe(
+      this.httpClient.post(this.getUrlSave(), RequestAppCustOtherInfoObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          if (this.From == 'CustPaging') {
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
-          } else {
+          if (this.From === "EditMainData") {
             AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
-
+          }
+          else {
+            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
           }
         });
+      return; 
     }
-    else {
-      this.toastr.errorMessage("No Attribute To Save");
+
+    this.toastr.errorMessage("No Attribute To Save");    
+  }
+
+  SetCustAttrContentOld(): Array<Object> {
+    let formValue = this.OtherInformationForm.get(this.identifierCustAttr).value;
+    let custAttrRequest = new Array<Object>();
+    for (const key in formValue) {
+      if (formValue[key]["AttrValue"] != null) {
+        let custAttr = {
+          CustId: this.CustId,
+          RefAttrId: formValue[key]["RefAttrId"],
+          AttrValue: formValue[key]["AttrValue"],
+          AttrGroup: this.attrGroup
+        };
+        custAttrRequest.push(custAttr);
+      }
     }
+    return custAttrRequest;
+  }
+
+  SetCustAttrContent(): Array<CustAttrContentObj> {
+    let tempAttr: Array<CustAttrContentObj> = new Array();
+    let tempFormArray = this.OtherInformationForm.get(this.identifierCustAttr) as FormArray;
+    for (let index = 0; index < tempFormArray.length; index++) {
+      const element = tempFormArray.get(index.toString()).value;
+      let tempAttrToPush: CustAttrContentObj = new CustAttrContentObj();
+      tempAttrToPush.RefAttrId = element["RefAttrId"];
+      tempAttrToPush.CustId = element["CustId"];
+      tempAttrToPush.AttrValue = element["AttrValue"];
+      tempAttrToPush.AttrGroup = this.attrGroup;
+      tempAttr.push(tempAttrToPush);
+    }
+    return tempAttr;
   }
 
   getUrlSave(): string {
@@ -186,16 +227,16 @@ export class CustAttrSectionComponent implements OnInit {
       LbppmsBizSclId: e.LbppmsBizSclId
     });
   }
+
   getLookupCounterpartCategory(e) {
     this.OtherInformationForm.patchValue({
       LbppmsCntrprtId: e.LbppmsCntrprtId
     });
-
   }
+
   getLookupSustainableFinancialBusiness(e) {
     this.OtherInformationForm.patchValue({
       LbppmsBizSustainId: e.LbppmsBizSustainId
     });
   }
-
 }

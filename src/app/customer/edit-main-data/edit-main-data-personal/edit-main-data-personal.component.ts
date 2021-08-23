@@ -42,7 +42,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     IdNo: ['', [Validators.required]],
     TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     IdExpiredDt: [''],
-    MrMaritalStatCode: [''],
+    MrMaritalStatCode: ['', [Validators.required]],
     MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
     IsVip: [true],
     IsAffiliateWithMf: [true],
@@ -128,7 +128,6 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.default = UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
   
@@ -139,11 +138,6 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjGender).subscribe(
       (response) => {
         this.tempGender = response[CommonConstant.ReturnObj];
-        if (this.tempGender.length > 0) {
-          this.CustomerPersonalForm.patchValue({
-            Gender: this.tempGender[0].Key
-          });
-        }
       }
     );
     var refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
@@ -248,10 +242,6 @@ export class EditMainDataPersonalComponent implements OnInit {
           this.CustomerPersonalForm.patchValue({
             MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode
           });
-        } else {
-          this.CustomerPersonalForm.patchValue({
-            MrMaritalStatCode: response[CommonConstant.ReturnObj][0]['Key']
-          });
         }
       }
     );
@@ -327,7 +317,6 @@ export class EditMainDataPersonalComponent implements OnInit {
     this.custPersonalObj.MrMaritalStatCode = this.CustomerPersonalForm.controls["MrMaritalStatCode"].value;
 
     var formValue = this.CustomerPersonalForm.value;
-    this.custObj.CustAddr = this.tempCustAddr;
     this.custObj.CustAddr.CustId = this.CustId;
     this.custObj.CustAddr.Addr = formValue["UcAddress"]["Addr"];
     this.custObj.CustAddr.AreaCode1 = formValue["UcAddress"]["AreaCode1"];
@@ -341,7 +330,7 @@ export class EditMainDataPersonalComponent implements OnInit {
     var reqEditObj = {
       CustObj: this.custObj,
       CustPersonalObj: this.custPersonalObj,
-      CustAddrObj: this.custObj.CustAddr
+      CustAddr: this.custObj.CustAddr
     };
     this.http.post(URLConstant.EditCustPersonalMainData, reqEditObj).subscribe(
       (response) => {
@@ -360,7 +349,7 @@ export class EditMainDataPersonalComponent implements OnInit {
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": this.CustId, Page: 'Edit', From: 'CustGuarantor' });
         }
         else {
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": this.CustId, From: 'CustPaging' });
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], { "IdCust": this.CustId });
         }
       }
     );

@@ -22,9 +22,7 @@ export class VerificationQuestionGroupMemberEditComponent implements OnInit {
   result: any;
   title: string;
   mode: string = "add";
-  apiUrl: any;
   isActive: boolean = true;
-  foundationUrl: string = environment.FoundationR3Url;
   verfQuestionGroup: any;
   answerTypeValue: any = "DDL";
 
