@@ -1057,5 +1057,16 @@ export class URLConstant {
 
     // LIST IFRAME VIEW
     public static GetCustListIframeView = environment.FoundationR3Url + "/v1" + "/Cust/GetCustListIframeView";
+
+    // MASTER SEQUENCE
+    public static GenerateTransactionNoFromRedis = environment.FoundationR3Url + "/v1" + "/MasterSequence/GenerateTransactionNoFromRedis";
+
+    // THIRD PARTY RSLT
+    public static GetFirstRequestedThirdPartyRsltHByTrxNo = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetFirstRequestedThirdPartyRsltHByTrxNo";
+    public static GetThirdPartyTrustsocRsltByThirdPartyRsltHId = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetThirdPartyTrustsocRsltByThirdPartyRsltHId";
+    public static UploadConsentTrustingSocial = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/UploadConsentTrustingSocial";
+
+    //DIGITALIZATION
+    public static AddTrxSrcDataForTrustingSocial = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForTrustingSocial";
 }
 

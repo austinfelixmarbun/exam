@@ -178,6 +178,8 @@ export class CommonConstant {
     public static GsCodePasswordRegex = "PASSWORD_REGEX";
     public static GSCodeIsShowCbxBorrow = "IS_SHOW_CBX_BORROW";
     public static GSCodeIsShowCbxPledge = "IS_SHOW_CBX_PLEDGE";
+    public static GSCodeIsUseDigitalization = "IS_USE_DIGITALIZATION";
+
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
 
@@ -360,4 +362,11 @@ export class CommonConstant {
     public static WfUploadAssetMasterReview = "UPLOAD_ASM_REVIEW";
     public static WF_CODE_UPD_CUST_MANUAL = "WF_UPD_CUST_MANUAL";
     public static ACT_CODE_UPD_CUST_DATA = "UPD_CUST_DATA";
+
+    //MASTER SEQUENCE
+
+    public static MasterSequenceCodeCustomerThirdParty = "CTP";
+
+    //TRUSTING SOCIAL
+    public static TrustingSocialRelationCust = "Customer";
 }

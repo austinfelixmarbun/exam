@@ -25,6 +25,9 @@ import { FamilyFormComponent } from './new-cust-component/component/family-form/
 import { CustPersonalJobDataComponent } from './cust-personal-job-data/cust-personal-job-data.component';
 import { JobAddrSectionComponent } from './cust-personal-job-data/job-addr-section/job-addr-section.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { TrustingSocialReqHeaderComponent } from './new-cust-component/component/trusting-social-req-form/trusting-social-req-header.component';
+import { TrustingSocialReqConsentComponent } from './new-cust-component/component/trusting-social-req-form/consent/trusting-social-req-consent.component';
+import { TrustingSocialReqDetailComponent } from './new-cust-component/component/trusting-social-req-form/detail/trusting-social-req-detail.component';
 
 export const customCurrencyMaskConfig = {
     align: "right",
@@ -54,7 +57,10 @@ export const customCurrencyMaskConfig = {
         CustAttrFormComponent,
         FamilyFormComponent,
         CustPersonalJobDataComponent,
-        JobAddrSectionComponent
+        JobAddrSectionComponent,
+        TrustingSocialReqHeaderComponent,
+        TrustingSocialReqConsentComponent,
+        TrustingSocialReqDetailComponent
     ],
     imports: [
         CommonModule,
@@ -85,13 +91,16 @@ export const customCurrencyMaskConfig = {
         FamilyFormComponent,
         CustPersonalJobDataComponent,
         JobAddrSectionComponent,
+        TrustingSocialReqHeaderComponent,
+        TrustingSocialReqConsentComponent,
+        TrustingSocialReqDetailComponent
     ],
 
     providers: [
         NGXToastrService,
         RegexService
     ],
-    entryComponents: []
+    entryComponents: [TrustingSocialReqHeaderComponent]
 })
 export class NewCustomerSharingModule {
     constructor() {
