@@ -9,10 +9,13 @@ export class PathConstantX{
 
     //#region Cust
     public static CUST_PAGE = "PageX";
+    public static CUST_JOB_DATA = "JobDataX";
     public static LR_CUST = "Customer";
     public static CUST_PERSONAL = "CustomerPersonal";
     public static NEW_CUST = "NewCustomerX";
     public static CUST_PERSONAL_PAGE = PathConstant.CUST_PERSONAL + "/" + PathConstantX.CUST_PAGE;
+    public static CUST_COY_PAGE = PathConstant.CUST_COY + "/" + PathConstantX.CUST_PAGE;
+    public static CUST_PERSONAL_JOB_DATA = PathConstant.CUST_PERSONAL + "/" + PathConstantX.CUST_JOB_DATA;
     //#endregion
 
     //#region Vendor-Module

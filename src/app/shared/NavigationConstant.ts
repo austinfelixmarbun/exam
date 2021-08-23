@@ -289,7 +289,7 @@ export class NavigationConstant {
     public static CUST_EDIT_MAIN_DATA_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_EDIT_MAIN_DATA_PAGING; //'/Customer/EditMainData/Paging'
     public static CUST_EDIT_MAIN_DATA_PERSONAL = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_EDIT_MAIN_DATA_PERSONAL; //'/Customer/EditMainData/Personal'
     public static CUST_EDIT_MAIN_DATA_COY = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_EDIT_MAIN_DATA_COY; //'/Customer/EditMainData/Company'
-    public static CUST_COY_PAGE = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_COY_PAGE; //'/Customer/CustomerCompany/Page'
+    public static CUST_COY_PAGE = "/" + PathConstant.LR_CUST + "/" + PathConstantX.CUST_COY_PAGE; //'/Customer/CustomerCompany/PageX'
     public static CUST_COY_DUP_CHECK = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_COY_DUP_CHECK; //'/Customer/CustomerCompany/DuplicateCheck'
     public static CUST_PERSONAL_PAGE = "/" + PathConstant.LR_CUST + "/" + PathConstantX.CUST_PERSONAL_PAGE; //'/Customer/CustomerPersonal/PageX'
     public static CUST_PERSONAL_DUP_CHECK = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_PERSONAL_DUP_CHECK; //'/Customer/CustomerPersonal/DuplicateCheck'
