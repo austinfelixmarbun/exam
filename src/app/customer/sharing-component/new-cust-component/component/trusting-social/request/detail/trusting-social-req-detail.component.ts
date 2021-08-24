@@ -65,6 +65,10 @@ export class TrustingSocialReqDetailComponent implements OnInit {
   }
 
   AddNewData(){
+    if(!this.validateMaxSubj()){
+      return;
+    }
+
     var form = this.DetailForm.controls['ThirdPartyTrustsocRslts'] as FormArray;
     form.push(this.fb.group({
       Relation: ['', [Validators.required, Validators.maxLength(200)]],
@@ -80,7 +84,12 @@ export class TrustingSocialReqDetailComponent implements OnInit {
     }  
   }
 
-  SaveForm(){  
+  SaveForm(){ 
+
+    if(!this.validateMaxSubj()){
+      return;
+    }
+
     var reqAddTrxSrcDataForTsObj = new ReqAddTrxSrcDataForTsObj();
 
     reqAddTrxSrcDataForTsObj.TrxNo = this.CustObj.ThirdPartyTrxNo;
@@ -88,6 +97,7 @@ export class TrustingSocialReqDetailComponent implements OnInit {
     reqAddTrxSrcDataForTsObj.IdType = this.CustObj.MrIdTypeCode;
     reqAddTrxSrcDataForTsObj.CustType = this.CustObj.MrCustTypeCode;
 
+    
     for (let i = 0; i < this.DetailForm.controls["ThirdPartyTrustsocRslts"].value.length; i++) {
       var thirdPartyTrustsocObj = new ThirdPartyTrustsocRsltObj();
       thirdPartyTrustsocObj.Relation = this.DetailForm.controls["ThirdPartyTrustsocRslts"].value[i].Relation;
@@ -96,11 +106,60 @@ export class TrustingSocialReqDetailComponent implements OnInit {
       reqAddTrxSrcDataForTsObj.ThirdPartyTrustsocRsltObjs.push(thirdPartyTrustsocObj);
     }
 
+    if(!this.validateSubj(reqAddTrxSrcDataForTsObj.ThirdPartyTrustsocRsltObjs)){
+      return;
+    }
+    
     this.http.post(URLConstant.AddTrxSrcDataForTrustingSocial, reqAddTrxSrcDataForTsObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);
         this.activeModal.dismiss('Cross click');
       }
     );
+  }
+
+  validateMaxSubj(){
+    if(this.DetailForm.controls["ThirdPartyTrustsocRslts"].value.length >= 8){
+      this.toastr.warningMessage(ExceptionConstant.TRUSTING_SOCIAL_MAX_SUBJECT);
+      return false;
+    }
+    return true;
+  }
+
+  validateSubj(thirdPartyTrustsocRsltObjs : Array<ThirdPartyTrustsocRsltObj>){
+    var duplCustRelationObjs = thirdPartyTrustsocRsltObjs.filter(x => x.Relation.toLowerCase() == CommonConstant.TrustingSocialRelationCust.toLowerCase());
+
+    if(duplCustRelationObjs.length > 1){
+      this.toastr.warningMessage(ExceptionConstant.TRUSTING_SOCIAL_DUPL_RELATION_CUST);
+      return false;
+    }
+
+    var groupedMobilePhnNo = this.groupBy(thirdPartyTrustsocRsltObjs, function (item) {
+      return [item.MobilePhnNo];
+    });
+
+    var duplMobilePhnNo = groupedMobilePhnNo.filter(x => x.length > 1);
+    if(duplMobilePhnNo.length > 0){
+      this.toastr.warningMessage(ExceptionConstant.TRUSTING_SOCIAL_DUPL_MOBILE_PHN_NO);
+      return false;
+    }
+
+    var groupedMobilePhnNo = this.groupBy(thirdPartyTrustsocRsltObjs, function (item) {
+      return [item.MobilePhnNo];
+    });
+
+    return true;
+  }
+
+  groupBy(array, f) {
+    let groups = {};
+    array.forEach(function (o) {
+      var group = JSON.stringify(f(o));
+      groups[group] = groups[group] || [];
+      groups[group].push(o);
+    });
+    return Object.keys(groups).map(function (group) {
+      return groups[group];
+    })
   }
 }

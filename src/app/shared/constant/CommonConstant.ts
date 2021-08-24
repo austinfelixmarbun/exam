@@ -373,4 +373,9 @@ export class CommonConstant {
     public static TrustingSocialRelationCust = "Customer";
     public static TrustingSocialDummyIdType = "DUMMY";
     public static TrustingSocialDummyIdNo = "1234567890123456"
+
+    //FILE EXTENSION
+    public static FileExtensionDoc = ".doc";
+    public static FileExtensionDocx = ".docx";
+    public static FileExtensionPdf = ".pdf";
 }

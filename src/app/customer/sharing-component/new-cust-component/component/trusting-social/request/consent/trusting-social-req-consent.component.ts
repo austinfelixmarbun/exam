@@ -13,6 +13,9 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { ReqUploadConsentTsObj } from 'app/shared/model/ThirdPartyRslt/ReqUploadConsentTsObj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ThirdPartyRsltHObj } from 'app/shared/model/ThirdPartyRslt/ThirdPartyRsltHObj.model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { String, StringBuilder } from 'typescript-string-operations';
+
 
 
 @Component({
@@ -27,6 +30,7 @@ export class TrustingSocialReqConsentComponent implements OnInit {
 
 
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
+  readonly FileExtAllowed: Array<string> = [CommonConstant.FileExtensionDoc, CommonConstant.FileExtensionDocx, CommonConstant.FileExtensionPdf]
 
   CustTypeName: string;
 
@@ -60,6 +64,17 @@ export class TrustingSocialReqConsentComponent implements OnInit {
   }
 
   UploadConsent(){
+    var lastDotIndex = this.FileToUpload.name.lastIndexOf('.');
+    var ext = "." + this.FileToUpload.name.substring(lastDotIndex + 1);
+
+    var extValid = this.FileExtAllowed.find(x => x == ext);
+
+    if(extValid == undefined){
+      var listExtStr = String.Join(", ", this.FileExtAllowed);
+      this.toastr.warningMessage(String.Format(ExceptionConstant.TRUSTING_SOCIAL_INVALID_FILE_FORMAT, listExtStr));
+      return;
+    }
+
     var reqUploadConsentTsObj = new ReqUploadConsentTsObj();
     reqUploadConsentTsObj.TrxNo = this.CustObj.ThirdPartyTrxNo;
     reqUploadConsentTsObj.CustName = this.CustObj.CustName;
@@ -70,6 +85,8 @@ export class TrustingSocialReqConsentComponent implements OnInit {
       reqUploadConsentTsObj.MobilePhnNo = this.CustPersonalObj.MobilePhnNo1;
     }
     reqUploadConsentTsObj.FileName = this.FileToUpload.name;
+
+
 
     let reader = new FileReader();
     reader.readAsDataURL(this.FileToUpload);
@@ -87,6 +104,7 @@ export class TrustingSocialReqConsentComponent implements OnInit {
 
   HandleFileInput(files: FileList){
     this.FileToUpload = files.item(0);
+    console.log(this.FileToUpload);
   }
 
   ConvertSize(fileSize: number) {
