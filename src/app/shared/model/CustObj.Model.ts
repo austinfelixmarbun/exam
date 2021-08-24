@@ -20,6 +20,7 @@ export class CustObj {
     IsFamily: boolean;
     IsGuarantor: boolean;
     IsShareholder: boolean;
+    ThirdPartyTrxNo: string;
 
     constructor() {
         this.CustId = 0;
@@ -29,6 +30,7 @@ export class CustObj {
         this.IsGuarantor = false;
         this.IsShareholder = false;
         this.CustNo = "";
+        this.ThirdPartyTrxNo = "";
         this.RowVersion = "";
     }
 }

@@ -178,6 +178,8 @@ export class CommonConstant {
     public static GsCodePasswordRegex = "PASSWORD_REGEX";
     public static GSCodeIsShowCbxBorrow = "IS_SHOW_CBX_BORROW";
     public static GSCodeIsShowCbxPledge = "IS_SHOW_CBX_PLEDGE";
+    public static GSCodeIsUseDigitalization = "IS_USE_DIGITALIZATION";
+
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
 
@@ -362,4 +364,12 @@ export class CommonConstant {
     public static ACT_CODE_UPD_CUST_DATA = "UPD_CUST_DATA";
 
     public static CurrencyMaskPrct = { suffix: ' %', thousands: ',', decimal: '.', align: 'right', allowNegative: false, allowZero: true, precision: 6, nullable: false };
+    //MASTER SEQUENCE
+
+    public static MasterSequenceCodeCustomerThirdParty = "CTP";
+
+    //TRUSTING SOCIAL
+    public static TrustingSocialRelationCust = "Customer";
+    public static TrustingSocialDummyIdType = "DUMMY";
+    public static TrustingSocialDummyIdNo = "1234567890123456"
 }
