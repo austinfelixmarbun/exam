@@ -5,6 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { UpdateCustCompanyFinDataObj } from 'app/shared/model/UpdateMasterCust/UpdateCustCompanyFinDataObj.Model';
@@ -34,15 +35,15 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
     CustCompanyId: [0],
     GrossMonthlyIncomeAmt: [0, [Validators.required]],
     GrossProfitAmt: [0],
-    ReturnOfInvestmentPrcnt: [0],
-    ReturnOfEquityPrcnt: [0],
-    ReturnOfAssetPrcnt: [0],
-    ProfitMarginPrcnt: [0],
-    CurrentRatioPrcnt: [0],
-    DebtEquityRatioPrcnt: [0],
-    InvTurnOverPrcnt: [0],
-    ArTurnOverPrcnt: [0],
-    GrowthPrcnt: [0],
+    ReturnOfInvestmentPrcnt: [0, [Validators.min(0.00), Validators.max(100.00)]],
+    ReturnOfEquityPrcnt: [0, [Validators.min(0.00), Validators.max(100.00)]],
+    ReturnOfAssetPrcnt: [0, [Validators.min(0.00), Validators.max(100.00)]],
+    ProfitMarginPrcnt: [0, [Validators.min(0.00), Validators.max(100.00)]],
+    CurrentRatioPrcnt: [0, [Validators.min(0.00), Validators.max(100.00)]],
+    DebtEquityRatioPrcnt: [0, [Validators.min(0.00), Validators.max(100.00)]],
+    InvTurnOverPrcnt: [0, [Validators.min(0.00), Validators.max(100.00)]],
+    ArTurnOverPrcnt: [0, [Validators.min(0.00), Validators.max(100.00)]],
+    GrowthPrcnt: [0, [Validators.min(0.00), Validators.max(100.00)]],
     WorkingCapitalAmt: [0],
     OthMonthlyInstAmt: [0],
     DateAsOf: [''],
@@ -59,6 +60,7 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
     RowVersion: ['']
   });
   
+  readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
   constructor(
     private http: HttpClient, 
     private toastr: NGXToastrService, 
