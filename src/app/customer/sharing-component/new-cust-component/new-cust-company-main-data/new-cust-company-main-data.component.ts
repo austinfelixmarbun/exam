@@ -1,18 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { ReqGenerateTrxNoObj } from 'app/shared/model/MasterSequence/ReqGenerateTrxNoObj.model';
+import { ResGenerateTrxNoObj } from 'app/shared/model/MasterSequence/ResGenerateTrxNoObj.model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/NewCust/CustCompanyMgmntShrholderObj.Model';
 import { ReqCoyObj } from 'app/shared/model/NewCust/ReqCoyObj.Model';
 import { CustFormExistingObj } from 'app/shared/model/NewCust/Shareholder/ShareholderFormExistingObj.Model';
@@ -20,7 +26,11 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMas
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
+import { CustomerViewTrustingSocialComponent } from 'app/view/customer-view/customer-view-trusting-social/customer-view-trusting-social.component';
+import { CookieService } from 'ngx-cookie';
 import { ShareholderFormComponent } from '../component/shareholder-form/shareholder-form.component';
+import { TrustingSocialReqHeaderComponent } from '../component/trusting-social/request/trusting-social-req-header.component';
+import { TrustingSocialViewHeaderComponent } from '../component/trusting-social/view/trusting-social-view-header.component';
 import { NewCustSetData } from '../NewCustSetData.Service';
 
 @Component({
@@ -43,10 +53,14 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   inputAddressObj: InputAddressObj = new InputAddressObj();
   inputFieldObj: InputFieldObj = new InputFieldObj();
   inputLookupObj: InputLookupObj = new InputLookupObj();
+  IsUseDigitalization: string = "0";
+  officeCode: string;
+  thirdPartyTrxNo: string = "";
 
   custObj: CustObj = new CustObj();
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService,
+    private modalService: NgbModal, private cookieService: CookieService) { }
 
   //#region Readonly
   readonly RefMasterTypeCodeCompanyType: string = CommonConstant.RefMasterTypeCodeCompanyType;
@@ -60,6 +74,8 @@ export class NewCustCompanyMainDataComponent implements OnInit {
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
+    let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.officeCode = context[CommonConstant.OFFICE_CODE];
     this.ClearCustForm();
     this.BindLookupExistingCust();
     this.InitCustMainDataMode();
@@ -70,6 +86,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     await this.GetExistingData();
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
+    this.getIsUseDigitalization();
   }
   //#region Set Data
   //#region UcLookup
@@ -237,6 +254,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     await this.http.post(URLConstant.GetCustByCustId, { Id: custId }).toPromise().then(
       (response: CustObj) => {
         this.custObj = response;
+        this.thirdPartyTrxNo = this.custObj.ThirdPartyTrxNo;
         this.CustomerForm.patchValue({
           CustName: this.custObj.CustName,
           MrCustTypeCode: this.custObj.MrCustTypeCode,
@@ -306,6 +324,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     reqSubmitObj.CustObj.IdNo = tempForm["TaxIdNo"];
     reqSubmitObj.CustObj.MrCustModelCode = tempForm["MrCustModelCode"];
     reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustTypeCompany;
+    reqSubmitObj.CustObj.ThirdPartyTrxNo = this.thirdPartyTrxNo;
 
     reqSubmitObj.CustCompanyObj = this.tempCustCompanyObj;
     reqSubmitObj.CustCompanyObj.MrCompanyTypeCode = tempForm["MrCompanyTypeCode"];
@@ -364,5 +383,80 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     tempReqObj.IsOwner = tempForm["IsOwner"];
 
     return tempReqObj
+  }
+
+  getIsUseDigitalization(){
+    this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeIsUseDigitalization}).subscribe(
+      (response) => {
+        this.IsUseDigitalization = response["GsValue"];
+      }
+    );
+  }
+
+  async ReqPefindo(){
+    this.markFormGroupTouched(this.CustomerForm);
+    if(!this.CustomerForm.valid){
+      return;
+    }
+
+    await this.checkThirdPartyTrxNo();
+  }
+
+  ViewPefindo(){
+    
+  }
+
+  async ReqTrustingSocial(){
+    this.markFormGroupTouched(this.CustomerForm);
+    if(!this.CustomerForm.valid){
+      return;
+    }
+    
+    await this.checkThirdPartyTrxNo();
+
+    let tempForm = this.CustomerForm.getRawValue();
+    let custObj: CustObj = new CustObj();
+    let custPersonalObj: CustPersonalObj = new CustPersonalObj();
+    custObj.CustName = tempForm["CustName"];
+    custObj.CustNo = this.custObj.CustNo;
+    custObj.TaxIdNo = tempForm["TaxIdNo"];
+    custObj.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+    custObj.MrCustTypeCode = CommonConstant.MR_CUST_TYPE_CODE_COMPANY;
+    custObj.MrIdTypeCode = CommonConstant.TrustingSocialDummyIdType;
+    custObj.IdNo = CommonConstant.TrustingSocialDummyIdNo;
+
+    const modalRef = this.modalService.open(TrustingSocialReqHeaderComponent);
+    modalRef.componentInstance.CustObj = custObj;
+    modalRef.componentInstance.CustPersonalObj = custPersonalObj;
+  }
+
+
+  ViewTrustingSocial(){   
+    const modalRef = this.modalService.open(TrustingSocialViewHeaderComponent);
+    modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+  }
+
+  async checkThirdPartyTrxNo(){
+    if(this.thirdPartyTrxNo == null || this.thirdPartyTrxNo == ""){
+      var reqGenerateTrxNoObj = new ReqGenerateTrxNoObj();
+      reqGenerateTrxNoObj.MasterSeqCode = CommonConstant.MasterSequenceCodeCustomerThirdParty;
+      reqGenerateTrxNoObj.OfficeCode = this.officeCode;
+
+      await this.http.post(URLConstant.GenerateTransactionNoFromRedis, reqGenerateTrxNoObj).toPromise().then(
+        (response: ResGenerateTrxNoObj) => {
+          this.thirdPartyTrxNo = response.TrxNo;
+        }
+      );
+    }
+  }
+
+   markFormGroupTouched(formGroup: FormGroup) {
+    (<any>Object).values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+
+      if (control.controls) {
+        this.markFormGroupTouched(control);
+      }
+    });
   }
 }

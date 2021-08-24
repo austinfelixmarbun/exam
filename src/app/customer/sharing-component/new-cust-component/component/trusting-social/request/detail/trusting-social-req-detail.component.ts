@@ -1,0 +1,106 @@
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
+import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { ReqUploadConsentTsObj } from 'app/shared/model/ThirdPartyRslt/ReqUploadConsentTsObj.model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { ThirdPartyRsltHObj } from 'app/shared/model/ThirdPartyRslt/ThirdPartyRsltHObj.model';
+import { ThirdPartyTrustsocRsltObj } from 'app/shared/model/ThirdPartyRslt/ThirdPartyTrustsocRsltObj.model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { ReqAddTrxSrcDataForTsObj } from 'app/shared/model/Digitalization/ReqAddTrxSrcDataForTsObj.model';
+
+
+@Component({
+  selector: 'app-trusting-social-req-detail',
+  templateUrl: './trusting-social-req-detail.component.html'
+})
+export class TrustingSocialReqDetailComponent implements OnInit {
+  @Input() CustObj: CustObj;
+  @Input() CustPersonalObj: CustPersonalObj;
+
+  readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
+
+  CustTypeName: string;
+
+  DetailForm = this.fb.group({
+    ThirdPartyTrustsocRslts: new FormArray([]),
+  });
+
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    public activeModal: NgbActiveModal,
+    private toastr: NGXToastrService
+  ) { }
+
+  ngOnInit() {
+    this.getCustTypeDescr();
+    this.initGrid();
+  }
+
+  getCustTypeDescr(){
+    var refMasterObj = new ReqRefMasterByTypeCodeAndMasterCodeObj();
+    refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustType;
+    refMasterObj.MasterCode = this.CustObj.MrCustTypeCode;
+    this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMasterObj).subscribe(
+      (response) => {
+        this.CustTypeName = response["Descr"];
+      }
+    );
+  }
+
+  initGrid(){
+    var form = this.DetailForm.controls['ThirdPartyTrustsocRslts'] as FormArray;
+    form.push(this.fb.group({
+      Relation: [CommonConstant.TrustingSocialRelationCust, [Validators.required, Validators.maxLength(200)]],
+      Name: [this.CustObj.CustName, [Validators.required, Validators.maxLength(200)]],
+      MobilePhnNo: [this.CustObj.MrCustTypeCode == CommonConstant.MR_CUST_TYPE_CODE_PERSONAL ? this.CustPersonalObj.MobilePhnNo1 : "",
+                  [Validators.required, Validators.maxLength(50), Validators.pattern("^[0-9]+$")]]
+    }));
+  }
+
+  AddNewData(){
+    var form = this.DetailForm.controls['ThirdPartyTrustsocRslts'] as FormArray;
+    form.push(this.fb.group({
+      Relation: ['', [Validators.required, Validators.maxLength(200)]],
+      Name: ['', [Validators.required, Validators.maxLength(200)]],
+      MobilePhnNo: ['', [Validators.required, Validators.maxLength(50), Validators.pattern("^[0-9]+$")]]
+    }));
+  }
+
+  DeleteData(i){
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
+      var form = this.DetailForm.controls['ThirdPartyTrustsocRslts'] as FormArray;
+      form.removeAt(i);
+    }  
+  }
+
+  SaveForm(){  
+    var reqAddTrxSrcDataForTsObj = new ReqAddTrxSrcDataForTsObj();
+
+    reqAddTrxSrcDataForTsObj.TrxNo = this.CustObj.ThirdPartyTrxNo;
+    reqAddTrxSrcDataForTsObj.IdNo = this.CustObj.IdNo;
+    reqAddTrxSrcDataForTsObj.IdType = this.CustObj.MrIdTypeCode;
+    reqAddTrxSrcDataForTsObj.CustType = this.CustObj.MrCustTypeCode;
+
+    for (let i = 0; i < this.DetailForm.controls["ThirdPartyTrustsocRslts"].value.length; i++) {
+      var thirdPartyTrustsocObj = new ThirdPartyTrustsocRsltObj();
+      thirdPartyTrustsocObj.Relation = this.DetailForm.controls["ThirdPartyTrustsocRslts"].value[i].Relation;
+      thirdPartyTrustsocObj.Name = this.DetailForm.controls["ThirdPartyTrustsocRslts"].value[i].Name;
+      thirdPartyTrustsocObj.MobilePhnNo = this.DetailForm.controls["ThirdPartyTrustsocRslts"].value[i].MobilePhnNo;
+      reqAddTrxSrcDataForTsObj.ThirdPartyTrustsocRsltObjs.push(thirdPartyTrustsocObj);
+    }
+
+    this.http.post(URLConstant.AddTrxSrcDataForTrustingSocial, reqAddTrxSrcDataForTsObj).subscribe(
+      (response) => {
+        this.toastr.successMessage(response["Message"]);
+        this.activeModal.dismiss('Cross click');
+      }
+    );
+  }
+}

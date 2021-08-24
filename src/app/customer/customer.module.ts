@@ -123,6 +123,7 @@ import { NewCustomerSharingModule } from './sharing-component/new-cust-sharing.m
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CustomerViewChildModule } from 'app/view/customer-view/customer-view-child.module';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
