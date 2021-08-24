@@ -131,6 +131,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
       });
       if (this.mode == "edit") {
         this.setLookup();
+        this.LoadGradingRule(this.result.VendorRating);
       }
     });
   }
