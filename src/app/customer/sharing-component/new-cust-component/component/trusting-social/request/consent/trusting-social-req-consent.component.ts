@@ -104,7 +104,6 @@ export class TrustingSocialReqConsentComponent implements OnInit {
 
   HandleFileInput(files: FileList){
     this.FileToUpload = files.item(0);
-    console.log(this.FileToUpload);
   }
 
   ConvertSize(fileSize: number) {

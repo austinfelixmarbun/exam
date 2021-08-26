@@ -378,4 +378,8 @@ export class CommonConstant {
     public static FileExtensionDoc = ".doc";
     public static FileExtensionDocx = ".docx";
     public static FileExtensionPdf = ".pdf";
+
+    //DIGITALIZATION SVC TYPE CODE
+
+    public static DigitalizationSvcTypeTrustingSocial = "TS";
 }

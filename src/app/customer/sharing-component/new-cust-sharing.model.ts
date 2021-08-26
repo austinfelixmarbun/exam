@@ -30,6 +30,7 @@ import { TrustingSocialReqConsentComponent } from './new-cust-component/componen
 import { TrustingSocialReqDetailComponent } from './new-cust-component/component/trusting-social/request/detail/trusting-social-req-detail.component';
 import { TrustingSocialViewHeaderComponent } from './new-cust-component/component/trusting-social/view/trusting-social-view-header.component';
 import { CustomerViewTrustingSocialModule } from 'app/view/customer-view/customer-view-trusting-social/customer-view-trusting-social.module';
+import { PefindoReqComponent } from './new-cust-component/component/pefindo/request/pefindo-req.component';
 
 export const customCurrencyMaskConfig = {
     align: "right",
@@ -63,7 +64,8 @@ export const customCurrencyMaskConfig = {
         TrustingSocialReqHeaderComponent,
         TrustingSocialReqConsentComponent,
         TrustingSocialReqDetailComponent,
-        TrustingSocialViewHeaderComponent
+        TrustingSocialViewHeaderComponent,
+        PefindoReqComponent
     ],
     imports: [
         CommonModule,
@@ -97,14 +99,15 @@ export const customCurrencyMaskConfig = {
         TrustingSocialReqHeaderComponent,
         TrustingSocialReqConsentComponent,
         TrustingSocialReqDetailComponent,
-        TrustingSocialViewHeaderComponent
+        TrustingSocialViewHeaderComponent,
+        PefindoReqComponent
     ],
 
     providers: [
         NGXToastrService,
         RegexService
     ],
-    entryComponents: [TrustingSocialReqHeaderComponent, TrustingSocialViewHeaderComponent]
+    entryComponents: [TrustingSocialReqHeaderComponent, TrustingSocialViewHeaderComponent, PefindoReqComponent]
 })
 export class NewCustomerSharingModule {
     constructor() {

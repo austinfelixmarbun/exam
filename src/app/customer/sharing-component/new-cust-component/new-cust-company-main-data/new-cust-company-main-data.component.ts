@@ -12,6 +12,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { ReqPefindoSmartSearchObj } from 'app/shared/model/Digitalization/ReqPefindoSmartSearchObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
@@ -28,6 +29,7 @@ import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { CustomerViewTrustingSocialComponent } from 'app/view/customer-view/customer-view-trusting-social/customer-view-trusting-social.component';
 import { CookieService } from 'ngx-cookie';
+import { PefindoReqComponent } from '../component/pefindo/request/pefindo-req.component';
 import { ShareholderFormComponent } from '../component/shareholder-form/shareholder-form.component';
 import { TrustingSocialReqHeaderComponent } from '../component/trusting-social/request/trusting-social-req-header.component';
 import { TrustingSocialViewHeaderComponent } from '../component/trusting-social/view/trusting-social-view-header.component';
@@ -400,6 +402,19 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     }
 
     await this.checkThirdPartyTrxNo();
+
+    let tempForm = this.CustomerForm.getRawValue();
+
+    let reqPefindoSmartSearchObj = new ReqPefindoSmartSearchObj();
+    reqPefindoSmartSearchObj.CustName = tempForm["CustName"];
+    reqPefindoSmartSearchObj.CustType = CommonConstant.MR_CUST_TYPE_CODE_COMPANY;
+    reqPefindoSmartSearchObj.BirthDt = tempForm["BirthDt"];
+    reqPefindoSmartSearchObj.IdNo = tempForm["TaxIdNo"];
+    reqPefindoSmartSearchObj.IdType = CommonConstant.MrIdTypeCodeNPWP;
+
+    const modalRef = this.modalService.open(PefindoReqComponent);
+    modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
+    modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
   }
 
   ViewPefindo(){
