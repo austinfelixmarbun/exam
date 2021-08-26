@@ -96,6 +96,7 @@ export class CommonConstant {
 
     //OFFICE TYPE
     public static HeadOffice = "HO";
+    public static SuperUser = "SUPUSR";
     public static CollectionGroup = "CG";
     public static ATPM = "ATPM";
     public static Holding = "HOLDING";
@@ -177,6 +178,9 @@ export class CommonConstant {
     public static GsCodePasswordRegex = "PASSWORD_REGEX";
     public static GSCodeIsShowCbxBorrow = "IS_SHOW_CBX_BORROW";
     public static GSCodeIsShowCbxPledge = "IS_SHOW_CBX_PLEDGE";
+    public static GSCodeListLegalDocCantDuplicate = "LIST_LEGAL_DOC_CANNOT_DUPLICATE";
+    public static GSCodeIsUseDigitalization = "IS_USE_DIGITALIZATION";
+
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
 
@@ -372,4 +376,18 @@ export class CommonConstant {
 
     //VERF RESULT
     public static VerfResultPhnTypeMobile = "MOBILEPHN";
+    public static CurrencyMaskPrct = { suffix: ' %', thousands: ',', decimal: '.', align: 'right', allowNegative: false, allowZero: true, precision: 6, nullable: false };
+    //MASTER SEQUENCE
+
+    public static MasterSequenceCodeCustomerThirdParty = "CTP";
+
+    //TRUSTING SOCIAL
+    public static TrustingSocialRelationCust = "Customer";
+    public static TrustingSocialDummyIdType = "DUMMY";
+    public static TrustingSocialDummyIdNo = "1234567890123456"
+
+    //FILE EXTENSION
+    public static FileExtensionDoc = ".doc";
+    public static FileExtensionDocx = ".docx";
+    public static FileExtensionPdf = ".pdf";
 }

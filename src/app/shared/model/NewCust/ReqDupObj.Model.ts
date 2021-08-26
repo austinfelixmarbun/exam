@@ -12,6 +12,7 @@ export class ReqDupObj {
     CustCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
     CustPersonalJobObj: CustPersonalJobDataObj;
     CustAttrContentObjs: Array<CustAttrContentObj>;
+    ThirdPartyTrxNo: string;
 
     constructor() {
         this.CustNo = "";
@@ -20,5 +21,6 @@ export class ReqDupObj {
         this.CustCompanyMgmntShrholderObj = null;
         this.CustPersonalJobObj = null;
         this.CustAttrContentObjs = null;
+        this.ThirdPartyTrxNo = "";
     }
 }

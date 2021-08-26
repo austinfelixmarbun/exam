@@ -11,6 +11,7 @@ export class ReqNegDupObj {
     CustCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
     CustPersonalJobObj: CustPersonalJobDataObj;
     CustAttrContentObjs: Array<CustAttrContentObj>;
+    ThirdPartyTrxNo: string;
 
     constructor() {
         this.NegativeCustId = 0;

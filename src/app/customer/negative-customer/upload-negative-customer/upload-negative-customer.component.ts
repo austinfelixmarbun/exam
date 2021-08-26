@@ -42,7 +42,7 @@ export class UploadNegativeCustomerComponent implements OnInit {
       this.uploadObj = {
         title: 'Upload Negative Customer',
         subsectionId: 'UcUploadFile',
-        formatsAllowed: '.xls, .xlsx',
+        formatsAllowed: '.xls, .xlsx, .txt, .TXT',
         UploadTypeCode: 'UPL_NEG_CUST',
         ErrorDownloadUrl: URLConstant.GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType,
         TemplateUrl: URLConstant.DownloadTemplate,

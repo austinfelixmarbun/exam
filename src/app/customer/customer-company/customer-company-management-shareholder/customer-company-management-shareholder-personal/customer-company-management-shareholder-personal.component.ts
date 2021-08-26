@@ -71,6 +71,7 @@ export class CustomerCompanyManagementShareholderPersonalComponent implements On
   });
   tempShareholderCustId: number;
 
+  readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
   constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.KTP = RefMasterConstant.EKtp;
     this.isExistingCust = false;

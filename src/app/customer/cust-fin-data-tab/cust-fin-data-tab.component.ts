@@ -103,6 +103,7 @@ export class CustFinDataTabComponent implements OnInit {
 
   BusinessDt: string;
 
+  readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
   constructor(
     private httpClient: HttpClient,
     private toastr: NGXToastrService,

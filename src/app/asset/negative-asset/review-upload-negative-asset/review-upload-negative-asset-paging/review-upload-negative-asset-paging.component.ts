@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
-import { WorkflowApiObj, WorkflowApiV2Obj } from 'app/shared/model/WorkflowApiObj.Model';
+import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -34,10 +34,11 @@ export class ReviewUploadNegativeAssetPagingComponent implements OnInit {
 
       this.inputPagingObj.isJoinExAPI = true;
 
-      this.requestTaskModel.ProcessKey = CommonConstant.WorkflowUploadNegativeAsset,
-      this.requestTaskModel.OfficeCode = UserAccess[CommonConstant.OFFICE_CODE],
-      this.requestTaskModel.TaskDefinitionKey = CommonConstant.WfUploadNegativeAssetReview,
-      this.requestTaskModel.RoleCode = UserAccess[CommonConstant.ROLE_CODE],
+      this.requestTaskModel.ProcessKey = CommonConstant.WorkflowUploadNegativeAsset;
+      this.requestTaskModel.OfficeCode = UserAccess[CommonConstant.OFFICE_CODE];
+      this.requestTaskModel.TaskDefinitionKey = CommonConstant.WfUploadNegativeAssetReview;
+      this.requestTaskModel.RoleCode = UserAccess[CommonConstant.ROLE_CODE];
+      this.requestTaskModel.OfficeRoleCodes = [UserAccess[CommonConstant.ROLE_CODE]];
       
       this.IntegrationObj.baseUrl = URLConstant.GetAllTaskWorkflow;
       this.IntegrationObj.requestObj = this.requestTaskModel;
@@ -54,34 +55,18 @@ export class ReviewUploadNegativeAssetPagingComponent implements OnInit {
     
   }
   cancel(ev) {
-    if(environment.isCore){
-      var newWfObj = new WorkflowApiV2Obj();
-      newWfObj.TaskListId = ev.RowObj.ExecutionId;
-      newWfObj.TransactionNo = ev.RowObj.UploadNo;
-      newWfObj.ListValue = { "Status": "RJC" };
-      this.http.post(URLConstant.CancelUploadV2, newWfObj).subscribe(
-        response => {
-          this.toastr.successMessage(response["Message"]);
-          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_NEG_RVW_UPLOAD_PAGING],{});
-          });
-        }
-      );
-    }
-    else{
-      var wfObj = new WorkflowApiObj();
-      wfObj.TaskListId = ev.RowObj.TaskListId;
-      wfObj.TransactionNo = ev.RowObj.UploadNo;
-      wfObj.ListValue = { "Status": "RJC" };
-      this.http.post(URLConstant.CancelUpload, wfObj).subscribe(
-        response => {
-          this.toastr.successMessage(response["Message"]);
-          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_NEG_RVW_UPLOAD_PAGING],{});
-          });
-        }
-      );
-    }
-    
+    let CancelUrl = environment.isCore? URLConstant.CancelUploadV2 : URLConstant.CancelUpload;
+    var wfObj = new WorkflowApiObj();
+    wfObj.TaskListId =  environment.isCore? ev.RowObj.ExecutionId : ev.RowObj.TaskListId;
+    wfObj.TransactionNo = ev.RowObj.UploadNo;
+    wfObj.ListValue = { "Status": "RJC" };
+    this.http.post(CancelUrl, wfObj).subscribe(
+      response => {
+        this.toastr.successMessage(response["Message"]);
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_NEG_RVW_UPLOAD_PAGING],{});
+        });
+      }
+    );    
   }
 }

@@ -470,6 +470,8 @@ export class PathConstant {
     public static VIEW_CUST_DOC = "CustDocument";
     public static VIEW_CUST_OTH_INFO = "CustOthInfo";
     public static VIEW_CUST_HIGHLIGHT_COMMENT = "HighligtComment";
+    public static VIEW_CUST_TRUSTING_SOCIAL = "CustTrustSoc";
+
     //#endregion
 
      //#region JOURNAL
