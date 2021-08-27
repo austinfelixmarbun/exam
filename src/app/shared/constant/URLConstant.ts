@@ -1063,7 +1063,7 @@ export class URLConstant {
     public static GenerateTransactionNoFromRedis = environment.FoundationR3Url + "/v1" + "/MasterSequence/GenerateTransactionNoFromRedis";
 
     // THIRD PARTY RSLT
-    public static GetFirstRequestedThirdPartyRsltHByTrxNo = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetFirstRequestedThirdPartyRsltHByTrxNo";
+    public static GetFirstRequestedThirdPartyRsltHByTrxNoAndSvcTypeCode = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetFirstRequestedThirdPartyRsltHByTrxNoAndSvcTypeCode";
     public static GetThirdPartyTrustsocRsltByThirdPartyRsltHId = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetThirdPartyTrustsocRsltByThirdPartyRsltHId";
     public static UploadConsentTrustingSocial = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/UploadConsentTrustingSocial";
     public static GetListThirdPartyTrustingSocialByTrxNo = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetListThirdPartyTrustingSocialByTrxNo";
@@ -1076,6 +1076,8 @@ export class URLConstant {
     public static HandleViewPefindoScore = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewPefindoScore";
     public static HandleViewSubjectInfoPersonal = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewSubjectInfoPersonal";
     public static HandleViewSubjectInfoCompany = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewSubjectInfoCompany";
+    public static AddTrxSrcDataForPefindo = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindo";
+    public static PefindoSmartSearch = environment.FoundationR3Url + "/v1" + "/Digitalization/PefindoSmartSearch";
 
 }
 
