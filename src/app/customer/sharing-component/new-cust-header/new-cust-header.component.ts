@@ -325,6 +325,7 @@ export class NewCustHeaderComponent implements OnInit {
     let reqEditDupCheck: ReqDupObj = new ReqDupObj();
     reqEditDupCheck.CustNo = item.CustNo;
     reqEditDupCheck.CustDataMode = this.CustDataMode;
+    reqEditDupCheck.ThirdPartyTrxNo = this.DupCheckCoyObj.CustObj.ThirdPartyTrxNo;
 
     if (this.CustDataMode == CommonConstant.CustMainDataModeMgmntShrholder) {
       reqEditDupCheck.CustCompanyMgmntShrholderObj = this.DupCheckCoyObj.CustCompanyMgmntShrholderObj;
@@ -370,6 +371,7 @@ export class NewCustHeaderComponent implements OnInit {
     NegativeCustObj.NegativeCustId = item.NegativeCustId;
     NegativeCustObj.CustDataMode = this.CustDataMode;
     NegativeCustObj.MrCompanyTypeCode = this.DupCheckCoyObj.CustCompanyObj.MrCompanyTypeCode;
+    NegativeCustObj.ThirdPartyTrxNo = this.DupCheckCoyObj.CustObj.ThirdPartyTrxNo;
 
     if (this.CustDataMode == CommonConstant.CustMainDataModeMgmntShrholder) {
       NegativeCustObj.CustCompanyMgmntShrholderObj = this.DupCheckCoyObj.CustCompanyMgmntShrholderObj;

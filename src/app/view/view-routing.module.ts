@@ -29,6 +29,10 @@ const routes: Routes = [
         path: PathConstant.VIEW_SRVY_TASK,
         loadChildren: './survey-task-view/survey-task-view.module#SurveyTaskViewModule'
       },
+      {
+        path: PathConstant.VIEW_PEFINDO,
+        loadChildren: './pefindo-view/pefindo-view.module#PefindoViewModule'
+      }
     ]
   }
 ];

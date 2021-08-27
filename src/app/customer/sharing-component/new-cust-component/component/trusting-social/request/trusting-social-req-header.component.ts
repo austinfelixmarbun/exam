@@ -33,7 +33,7 @@ export class TrustingSocialReqHeaderComponent implements OnInit {
   }
 
   checkConsent(){
-    this.http.post(URLConstant.GetFirstRequestedThirdPartyRsltHByTrxNo, { TrxNo: this.CustObj.ThirdPartyTrxNo }).subscribe(
+    this.http.post(URLConstant.GetFirstRequestedThirdPartyRsltHByTrxNoAndSvcTypeCode, { TrxNo: this.CustObj.ThirdPartyTrxNo, SvcTypeCode: CommonConstant.DigitalizationSvcTypeTrustingSocial }).subscribe(
       (response: ThirdPartyRsltHObj) => {
         this.ThirdPartyRsltHObj = response;
       }

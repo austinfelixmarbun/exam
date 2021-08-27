@@ -15,6 +15,7 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { ReqPefindoSmartSearchObj } from 'app/shared/model/Digitalization/ReqPefindoSmartSearchObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
@@ -36,6 +37,7 @@ import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { CookieService } from 'ngx-cookie';
 import { CustAttrFormComponent } from '../component/cust-attr-form/cust-attr-form.component';
 import { FamilyFormComponent } from '../component/family-form/family-form.component';
+import { PefindoReqComponent } from '../component/pefindo/request/pefindo-req.component';
 import { ShareholderFormComponent } from '../component/shareholder-form/shareholder-form.component';
 import { TrustingSocialReqHeaderComponent } from '../component/trusting-social/request/trusting-social-req-header.component';
 import { TrustingSocialViewHeaderComponent } from '../component/trusting-social/view/trusting-social-view-header.component';
@@ -727,10 +729,29 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     }
 
     await this.checkThirdPartyTrxNo();
+
+    let tempForm = this.CustomerForm.getRawValue();
+
+    let reqPefindoSmartSearchObj = new ReqPefindoSmartSearchObj();
+    if(this.CustDataMode == this.CustDataModeMain){
+      reqPefindoSmartSearchObj.CustName = tempForm["CustName"];
+    }else{
+      reqPefindoSmartSearchObj.CustName = tempForm["ExistingCustName"]["value"];
+    }
+    reqPefindoSmartSearchObj.CustType = CommonConstant.MR_CUST_TYPE_CODE_PERSONAL;
+    reqPefindoSmartSearchObj.BirthDt = tempForm["BirthDt"];
+    reqPefindoSmartSearchObj.IdNo = tempForm["IdNo"];
+    reqPefindoSmartSearchObj.IdType = tempForm["MrIdTypeCode"];
+
+    const modalRef = this.modalService.open(PefindoReqComponent);
+    modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
+    modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+
   }
 
   ViewPefindo(){
-    
+    let TrxNo = this.thirdPartyTrxNo;
+    AdInsHelper.OpenPefindoView(TrxNo, CommonConstant.CustTypePersonal);
   }
 
   async ReqTrustingSocial(){
@@ -744,7 +765,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     let tempForm = this.CustomerForm.getRawValue();
     let custObj: CustObj = new CustObj();
     let custPersonalObj = new CustPersonalObj();
-    custObj.CustName = tempForm["CustName"];
+    if(this.CustDataMode == this.CustDataModeMain){
+      custObj.CustName = tempForm["CustName"];
+    }else{
+      custObj.CustName = tempForm["ExistingCustName"]["value"];
+    }
     custObj.CustNo = this.custObj.CustNo;
     custObj.TaxIdNo = tempForm["TaxIdNo"];
     custObj.ThirdPartyTrxNo = this.thirdPartyTrxNo;

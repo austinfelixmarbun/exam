@@ -1,0 +1,29 @@
+<lib-ucSubsection [id]="'MOSummaryId'" [title]="'MO Summary Dummy'" [panel]="'MOSummary'">
+</lib-ucSubsection>
+<div id="MOSummary" *ngIf="IsReady">
+  <div class="card-body">
+    <table class="table table-responsive-md text-center table-hover">
+      <thead>
+        <tr class="table-header">
+          <th style="text-align: center;">
+            <span  name='No' translate>No</span>
+          </th>
+          <th style="text-align: left;">
+            <span  name='Summary' translate>Summary</span>
+          </th>
+          <th style="text-align: left;">
+            <span  name='Value' translate></span>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of ListMOSummaryObj; let i = index">
+          <td style="text-align: center;">{{ i+1 }}</td>
+          <td style="text-align: left;">{{ item.Label }}</td>
+          <td style="text-align: left;">{{ item.Value }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
