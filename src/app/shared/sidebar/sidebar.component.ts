@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -7,11 +7,11 @@ import { ContextMenuComponent } from 'ngx-contextmenu';
 import { ROUTES } from './sidebar-routes.config';
 import { environment } from 'environments/environment';
 import { CommonConstant } from '../constant/CommonConstant';
-import { URLConstant } from '../constant/URLConstant';
 import { AdInsHelper } from '../AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from '../NavigationConstant';
 import { AdInsConstant } from '../AdInstConstant';
+import { StorageService } from '../services/StorageService';
 
 declare var $: any;
 
@@ -28,7 +28,7 @@ export class SidebarComponent implements OnInit {
     @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
 
     constructor(private router: Router,
-        private route: ActivatedRoute, public translate: TranslateService, private http: HttpClient, private cookieService: CookieService) {
+        private strService: StorageService, public translate: TranslateService, private http: HttpClient, private cookieService: CookieService) {
         this.version = localStorage.getItem(CommonConstant.VERSION);
 
     }
@@ -76,6 +76,12 @@ export class SidebarComponent implements OnInit {
             console.log(this.menuItems);
         }
     }
+    
+    setMenu(){
+        this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
+        this.strService.set(AdInsConstant.WatchRoleState, false);
+    }
+
     genParam(params: [{ 'Attr': string, 'Value': string }]) {
         var arrList = {};
         if (params != undefined) {
