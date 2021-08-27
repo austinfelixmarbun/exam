@@ -28,6 +28,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header-x/new-cust-header-x.component';
 import { FamilyListingXComponent } from 'app/impl/customer/sharing-component/family-listing-x/family-listing-x.component';
 import { NewCustPersonalMainDataXComponent } from 'app/impl/customer/sharing-component/new-cust-component/new-cust-personal-main-data-x/new-cust-personal-main-data-x.component';
+import { ShareholderListingXComponent } from 'app/impl/customer/sharing-component/shareholder-listing-x/shareholder-listing-x.component';
 
 export const customCurrencyMaskConfig = {
     align: "right",
@@ -60,6 +61,7 @@ export const customCurrencyMaskConfig = {
         JobAddrSectionComponent,
         FamilyListingXComponent,
         NewCustHeaderXComponent,
+        ShareholderListingXComponent
         // NewCustPersonalMainDataXComponent,
     ],
     imports: [
@@ -92,6 +94,7 @@ export const customCurrencyMaskConfig = {
         CustPersonalJobDataComponent,
         JobAddrSectionComponent,
         FamilyListingXComponent,
+        ShareholderListingXComponent,
         NewCustHeaderXComponent,
         NewCustPersonalMainDataXComponent
     ],
