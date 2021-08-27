@@ -1070,5 +1070,12 @@ export class URLConstant {
 
     //DIGITALIZATION
     public static AddTrxSrcDataForTrustingSocial = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForTrustingSocial";
+
+    //PEFINDO
+    public static HandleViewMOSummary = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewMOSummary";
+    public static HandleViewPefindoScore = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewPefindoScore";
+    public static HandleViewSubjectInfoPersonal = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewSubjectInfoPersonal";
+    public static HandleViewSubjectInfoCompany = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewSubjectInfoCompany";
+
 }
 

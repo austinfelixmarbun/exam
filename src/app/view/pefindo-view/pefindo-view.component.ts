@@ -18,6 +18,7 @@ export class PefindoViewComponent implements OnInit {
   TrxNo: string;
   Param: string;
   CustObj: CustObj = new CustObj();
+  MrCustTypeCode: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
@@ -28,20 +29,23 @@ export class PefindoViewComponent implements OnInit {
       if (params["TrxNo"] != null) {
         this.TrxNo = params["TrxNo"];
       }
+
+      if (params["MrCustTypeCode"] != null) {
+        this.MrCustTypeCode = params["MrCustTypeCode"];
+      }
     });
   }
-  // http://localhost:4200/View/Pefindo?CustNo=0002CUST20210802922
+
   async ngOnInit() {
-    // this.CustNo = '0002CUST20210802921';
     this.Param = this.TrxNo;
     let reqByCustNo: GenericObj = new GenericObj();
     reqByCustNo.CustNo = this.CustNo;
     if(this.CustNo != null){
       await this.http.post(URLConstant.GetCustByCustNo, reqByCustNo).toPromise().then(
         (response: CustObj) => {
-          console.log(response);
           this.CustObj = response;
           this.Param = response.ThirdPartyTrxNo;
+          this.MrCustTypeCode = this.CustObj.MrCustTypeCode;
         }
       )
     }
@@ -49,12 +53,10 @@ export class PefindoViewComponent implements OnInit {
   }
 
   mencuba(ev) {
-    if (ev == 0) { // Subject Info Personal
-      console.log("Subject Info Personal");
-
-      let url: string = "/View/Pefindo/SubjectInfoPersonal";
-      if(this.CustObj.MrCustTypeCode == CommonConstant.CustTypeCompany){
-        url = "/View/Pefindo/SubjectInfoCompany"
+    if (ev == 0) { // Subject Info Personal / Company
+      let url: string = NavigationConstant.PEFINDO_SUBJECT_INFO_PERSONAL;
+      if(this.MrCustTypeCode == CommonConstant.CustTypeCompany){
+        url = NavigationConstant.PEFINDO_SUBJECT_INFO_COMPANY
       }
 
       this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
@@ -62,15 +64,13 @@ export class PefindoViewComponent implements OnInit {
       });
     }
     else if (ev == 1) { // MO Summary
-      console.log("MO Summary");
       this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
-        AdInsHelper.RedirectUrl(this.router,["/View/Pefindo/MoSummary"],{ "TrxNo": this.Param });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_MO_SUMMARY],{ "TrxNo": this.Param });
       });
     }
     else if (ev == 2) { // PEFINDO Score
-      console.log("PEFINDO Score");
       this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
-        AdInsHelper.RedirectUrl(this.router,["/View/Pefindo/PefindoScore"],{ "TrxNo": this.Param });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_PEFINDO_SCORE],{ "TrxNo": this.Param });
       });
     }
   }

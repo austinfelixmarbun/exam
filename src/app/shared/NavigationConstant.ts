@@ -331,4 +331,12 @@ export class NavigationConstant {
     public static UPLOAD_LICENSE = "/"+ PathConstant.LR_LICENSE + "/" + PathConstant.UPLOAD_LICENSE;
     public static DETAIL_LICENSE = "/"+ PathConstant.LR_LICENSE + "/" + PathConstant.DETAIL_LICENSE;
     //#endregion
+
+    //#region PEFINDO View
+    public static VIEW_PEFINDO = PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO; //'/View/Pefindo'
+    public static PEFINDO_SUBJECT_INFO_PERSONAL = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_SUBJECT_INFO_PERSONAL;  //'/View/Pefindo/SubjectInfoPersonal'
+    public static PEFINDO_SUBJECT_INFO_COMPANY = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_SUBJECT_INFO_COMPANY;  //'/View/Pefindo/SubjectInfoCompany'
+    public static PEFINDO_MO_SUMMARY = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_MO_SUMMARY;  //'/View/Pefindo/MoSummary'
+    public static PEFINDO_PEFINDO_SCORE = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_PEFINDO_SCORE;  //'/View/Pefindo/PefindoScore'
+    //#endregion
 }

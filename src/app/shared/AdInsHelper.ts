@@ -149,8 +149,8 @@ export class AdInsHelper {
         window.open(url, "_blank");
     }
 
-    public static OpenPefindoView(TrxNo: string) {
-        var url = environment.FoundationR3Web + "/View/Pefindo?TrxNo=" + TrxNo;
+    public static OpenPefindoView(TrxNo: string, MrCustTypeCode: string) {
+        var url = environment.FoundationR3Web + "/View/Pefindo?TrxNo=" + TrxNo + "&MrCustTypeCode=" + MrCustTypeCode;
         window.open(url, "_blank");
     }
 

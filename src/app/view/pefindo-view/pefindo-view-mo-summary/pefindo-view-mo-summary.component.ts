@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { ResLabelValueMOSummaryObj } from 'app/shared/model/Response/Pefindo/ResLabelValueMOSummaryObj.model';
 import { environment } from 'environments/environment';
@@ -11,7 +12,6 @@ import { environment } from 'environments/environment';
   templateUrl: './pefindo-view-mo-summary.component.html'
 })
 export class PefindoViewMoSummaryComponent implements OnInit {
-  CustNo: string;
   TrxNo: string;
   ListMOSummaryObj: Array<ResLabelValueMOSummaryObj> = new Array<ResLabelValueMOSummaryObj>();
   IsReady: boolean = false;
@@ -27,7 +27,7 @@ export class PefindoViewMoSummaryComponent implements OnInit {
   ngOnInit() {
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
-    this.http.post(environment.FoundationR3Url + '/v1' + '/Digitalization/HandleViewMOSummary', reqByTrxNo).subscribe(
+    this.http.post(URLConstant.HandleViewMOSummary, reqByTrxNo).subscribe(
       (response) => {
         console.log(response[CommonConstant.ReturnObj]);
         if(response[CommonConstant.ReturnObj] != null) {
