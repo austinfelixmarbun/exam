@@ -25,6 +25,10 @@ const routes: Routes = [
         path: PathConstant.VIEW_CUST_EXPSR,
         loadChildren: './cust-exposure-view/cust-exposure-view.module#CustExposureViewModule'
       },
+      {
+        path: PathConstant.VIEW_PEFINDO,
+        loadChildren: './pefindo-view/pefindo-view.module#PefindoViewModule'
+      }
     ]
   }
 ];

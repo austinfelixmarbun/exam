@@ -429,6 +429,7 @@ export class PathConstant {
     public static VIEW_NEG_CUST = "NegativeCustomer";
     public static VIEW_SRVY = "Survey";
     public static VIEW_CUST_EXPSR = "CustExposureView";
+    public static VIEW_PEFINDO = "Pefindo";
     //#endregion
 
     //#region View-Vendor-Module
@@ -498,4 +499,11 @@ export class PathConstant {
     public static UPLOAD_LICENSE = PathConstant.LICENSE_MASTER + "/" + PathConstant.UPLOAD;
     public static DETAIL_LICENSE = PathConstant.LICENSE_MASTER + "/" + PathConstant.DETAIL;
     //#endRegion
+
+    //#region PEFINDO view
+    public static VIEW_SUBJECT_INFO_PERSONAL = "SubjectInfoPersonal";
+    public static VIEW_SUBJECT_INFO_COMPANY = "SubjectInfoCompany";
+    public static VIEW_MO_SUMMARY = "MoSummary";
+    public static VIEW_PEFINDO_SCORE = "PefindoScore";
+    //#endregion
 }
