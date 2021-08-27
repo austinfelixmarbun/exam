@@ -28,8 +28,7 @@ export class ShareholderListingXComponent implements OnInit {
 
   selectedCustId: number = 0;
   selectedCustCompanyMgmntShrholderId: number = 0;
-  ngOnInit() {
-    console.log("sparta");
+  ngOnInit() {    
     this.BindGridViewObj();
     this.GetListPaging();
   }

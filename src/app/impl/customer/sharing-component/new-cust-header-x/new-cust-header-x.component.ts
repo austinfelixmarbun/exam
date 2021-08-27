@@ -64,8 +64,7 @@ export class NewCustHeaderXComponent implements OnInit {
     });
   }
 
-  async ngOnInit() {
-    console.log("spartak moskow", this.isFamily);
+  async ngOnInit() {    
     this.SetTitleLabel();
     await this.GetListCustType();
   }
