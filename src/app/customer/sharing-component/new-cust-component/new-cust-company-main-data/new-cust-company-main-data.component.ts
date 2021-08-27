@@ -419,8 +419,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
 
   ViewPefindo(){
     let TrxNo = this.thirdPartyTrxNo;
-    let tempForm = this.CustomerForm.getRawValue();
-    AdInsHelper.OpenPefindoView(TrxNo, tempForm["MrCustTypeCode"]);
+    AdInsHelper.OpenPefindoView(TrxNo, CommonConstant.CustomerCompany);
   }
 
   async ReqTrustingSocial(){
