@@ -302,12 +302,17 @@ export class PathConstant {
     public static SRVY_TASK = "SurveyTask";
     public static SRVY_ORDER = "SurveyOrder";
     public static SRVY_RESULT_REVIEW = "SurveyResultReview";
+    public static SRVY_TASK_RESULT = "SurveyTaskResult";
+    public static SRVY_TASK_PAGE = "Page";
     public static SRVY_TASK_PAGING = PathConstant.SRVY_TASK + "/" + PathConstant.PAGING;
     public static SRVY_ORDER_PAGING = PathConstant.SRVY_ORDER + "/" + PathConstant.PAGING;
     public static SRVY_VIEW_TASK = PathConstant.VIEW + "/" + PathConstant.SRVY_TASK;
     public static VIEW_ORDER_EXT = "ViewOrderExternal";
     public static SRVY_RESULT_REVIEW_PAGING = PathConstant.SRVY_RESULT_REVIEW + "/" + PathConstant.PAGING;
     public static SRVY_RESULT_REVIEW_DETAIL = PathConstant.SRVY_RESULT_REVIEW + "/" + PathConstant.DETAIL;
+    public static SRVY_TASK_RESULT_PAGING = PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.PAGING;
+    public static SRVY_TASK_RESULT_PAGE = PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.SRVY_TASK_PAGE;
+    public static SRVY_TASK_RESULT_DETAIL = PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region 
@@ -429,6 +434,7 @@ export class PathConstant {
     public static VIEW_NEG_CUST = "NegativeCustomer";
     public static VIEW_SRVY = "Survey";
     public static VIEW_CUST_EXPSR = "CustExposureView";
+    public static VIEW_SRVY_TASK = "SurveyTask";
     public static VIEW_PEFINDO = "Pefindo";
     //#endregion
 
@@ -440,7 +446,6 @@ export class PathConstant {
 
     //#region View-Survey-Module
     public static VIEW_SRVY_ORDER = "SurveyOrder";
-    public static VIEW_SRVY_TASK = "SurveyTask";
     //#endregion
 
     //#region View-Cust-Module

@@ -302,6 +302,9 @@ export class CommonConstant {
     public static DmsViewCodeAgr = "ConfinsAgr";
     public static DmsViewCodeMou = "ConfinsMou";
     public static DmsViewCodeLead = "ConfinsLead";
+    public static DmsViewCodeSurvey = "Survey";
+    public static DmsSurveyId = "Survey Id";
+    public static DmsTaskId = "Task Id";
 
     // Cust Type  
     public static WhiteIndicator = "WHITE";
@@ -364,6 +367,18 @@ export class CommonConstant {
     public static WF_CODE_UPD_CUST_MANUAL = "WF_UPD_CUST_MANUAL";
     public static ACT_CODE_UPD_CUST_DATA = "UPD_CUST_DATA";
 
+    //STATUS GRP
+    public static StatusGrpVerfResultStat = "VERF_RESULT_STAT";
+    public static VerfResultStatSuccess = "SCS";
+    public static VerfTrxTypeCodeSurvey = "SURVEY_VERIF";
+    public static VerfResultStatCodeNew = "NEW";
+
+    //REF VERF ANSWER_TYPE
+    public static VerfAnswerTypeCodeDdl = "DDL";
+    public static VerfAnswerTypeCodeUcInputNumber = "UC_INPUT_NUMBER";
+
+    //VERF RESULT
+    public static VerfResultPhnTypeMobile = "MOBILEPHN";
     public static CurrencyMaskPrct = { suffix: ' %', thousands: ',', decimal: '.', align: 'right', allowNegative: false, allowZero: true, precision: 6, nullable: false };
     //MASTER SEQUENCE
 

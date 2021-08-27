@@ -1,0 +1,81 @@
+import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { ReqGetVerfResultHObj } from 'app/shared/model/Request/VerfResultH/ReqVerfResultHObj.model';
+import { ResSrvyTaskObj } from 'app/shared/model/Response/SrvyTask/ResSrvyTask.model';
+import { ResVerfResultHCustomObj } from 'app/shared/model/Response/VerfResultH/ResVerfResultHCustomObj.model';
+
+@Component({
+  selector: 'app-view-survey-task-detail',
+  templateUrl: './view-survey-task-detail.component.html'
+})
+export class ViewSurveyTaskDetailComponent implements OnInit {
+
+  @Input() SrvyTaskId: number;
+  isMobile: boolean = false;
+  ListResVerfResultHCustomObj: Array<ResVerfResultHCustomObj> = new Array<ResVerfResultHCustomObj>();
+  ResSrvyTaskObj: ResSrvyTaskObj = new ResSrvyTaskObj();
+  ReqVerfResultHObj: ReqGetVerfResultHObj = new ReqGetVerfResultHObj();
+  ReqByIdObj: GenericObj = new GenericObj();
+  ReqByCodeObj: GenericObj = new GenericObj();
+  htmlCode: string;
+  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+
+  async ngOnInit() {
+    await this.getSrvyTask();
+
+    if(this.ResSrvyTaskObj.MobileAssignmentId != null && this.ResSrvyTaskObj.MobileAssignmentId != 0){
+      await this.getHtmlCodeFromMobile();
+      this.isMobile = true;
+    }else{
+      await this.getVerfResult();
+      this.isMobile = false;
+    }
+  }
+
+  async getVerfResult(){
+    this.ReqVerfResultHObj.MrAddrTypeCode = this.ResSrvyTaskObj.MrSrvyObjTypeCode;
+    this.ReqVerfResultHObj.TrxRefNo = this.ResSrvyTaskObj.SrvyTaskNo;
+    await this.http.post(URLConstant.GetVerfResultHByTrxRefNoAndMrAddrTypeCode, this.ReqVerfResultHObj).toPromise().then(
+      (response)=>{
+        if(response["VerfResultHId"] !=null || response["VerfResultId"] != 0){
+          this.ReqByIdObj = new GenericObj();
+          this.ReqByIdObj.Id = response["VerfResultHId"];
+
+          this.http.post(URLConstant.GetListVerfResultDInQuestionGrp, this.ReqByIdObj).toPromise().then(
+            (response)=>{
+              if(response != null){
+                this.ListResVerfResultHCustomObj = response[CommonConstant.ReturnObj];
+                console.log(this.ListResVerfResultHCustomObj);
+              }
+            }
+          )
+        }
+      }
+    )
+  }
+
+  async getSrvyTask(){
+    this.ReqByIdObj.Id = this.SrvyTaskId;
+    await this.http.post(URLConstant.GetSrvyTaskBySrvyTaskId, this.ReqByIdObj).toPromise().then(
+      (response : ResSrvyTaskObj)=>{
+        // this.MobileAssignmentId = response["MobileAssignmentId"];
+        // this.Result = response["Result"];
+        // this.Notes = response["Notes"];
+        // this.SrvyTaskNo = response["SrvyTaskNo"];
+        this.ResSrvyTaskObj = response;
+      }
+    )
+  }
+
+  async getHtmlCodeFromMobile(){
+    await this.http.post(URLConstant.GetHtmlCodeFromMobile, this.ReqByIdObj).toPromise().then(
+      (response) => {
+        this.htmlCode = response["HtmlCode"];
+      }
+    );
+  }
+}

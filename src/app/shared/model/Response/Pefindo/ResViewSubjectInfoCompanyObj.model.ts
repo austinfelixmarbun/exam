@@ -2,7 +2,7 @@ export class ResViewSubjectInfoCompanyObj {
   CoyName: string;
   CoyNameLocal: string;
   GrpName: string;
-  LegalrForm: string;
+  LegalForm: string;
   EstDt: Date;
   EstLoc: string;
   EconomicSector: string;
@@ -24,7 +24,7 @@ export class ResViewSubjectInfoCompanyObj {
     this.CoyName = "";
     this.CoyNameLocal = "";
     this.GrpName = "";
-    this.LegalrForm = "";
+    this.LegalForm = "";
     this.EstDt = new Date();
     this.EstLoc = "";
     this.EconomicSector = "";

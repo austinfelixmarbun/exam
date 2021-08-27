@@ -4,7 +4,7 @@ export class ResViewSubjectInfoPersonalObj {
   Gender: string;
   DateOfBirth: Date;
   Citizenship: string;
-  MotherMaidernName: string;
+  MotherMaidenName: string;
   SocialStat: string;
   Employment: string;
   Employer: string;
@@ -24,7 +24,7 @@ export class ResViewSubjectInfoPersonalObj {
     this.Gender = "";
     this.DateOfBirth = new Date();
     this.Citizenship = "";
-    this.MotherMaidernName = "";
+    this.MotherMaidenName = "";
     this.SocialStat = "";
     this.Employment = "";
     this.Employer = "";

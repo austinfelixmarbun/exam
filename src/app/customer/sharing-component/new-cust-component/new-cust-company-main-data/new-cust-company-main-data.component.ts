@@ -406,6 +406,11 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     let tempForm = this.CustomerForm.getRawValue();
 
     let reqPefindoSmartSearchObj = new ReqPefindoSmartSearchObj();
+    if(this.CustDataMode == this.CustDataModeMain){
+      reqPefindoSmartSearchObj.CustName = tempForm["CustName"];
+    }else{
+      reqPefindoSmartSearchObj.CustName = tempForm["ExistingCustName"]["value"];
+    }
     reqPefindoSmartSearchObj.CustName = tempForm["CustName"];
     reqPefindoSmartSearchObj.CustType = CommonConstant.MR_CUST_TYPE_CODE_COMPANY;
     reqPefindoSmartSearchObj.BirthDt = tempForm["BirthDt"];
@@ -433,7 +438,11 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     let tempForm = this.CustomerForm.getRawValue();
     let custObj: CustObj = new CustObj();
     let custPersonalObj: CustPersonalObj = new CustPersonalObj();
-    custObj.CustName = tempForm["CustName"];
+    if(this.CustDataMode == this.CustDataModeMain){
+      custObj.CustName = tempForm["CustName"];
+    }else{
+      custObj.CustName = tempForm["ExistingCustName"]["value"];
+    }    
     custObj.CustNo = this.custObj.CustNo;
     custObj.TaxIdNo = tempForm["TaxIdNo"];
     custObj.ThirdPartyTrxNo = this.thirdPartyTrxNo;

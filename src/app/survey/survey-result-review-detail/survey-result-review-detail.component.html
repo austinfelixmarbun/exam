@@ -21,7 +21,6 @@
                   <thead>
                     <tr class="table-header">
                       <th><span translate class="thead-header text-center">Survey Task No / Resurvey Ref</span></th>
-                      <th><span translate class="thead-header text-left">Surveyee Model</span></th>
                       <th><span translate class="thead-header text-center">Survey Object</span></th>
                       <th><span translate class="thead-header text-center">Surveyee Name</span></th>
                       <th><span translate class="thead-header text-center">Address</span></th>
@@ -50,14 +49,10 @@
                         </div>                        
                       </td>
                       <td [formGroupName]="i" class="text-center">
-                        {{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["SurveyeeModel"].value}}
-                      </td>
-                      <td [formGroupName]="i" class="text-center">
                         {{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["SurveyObject"].value}}
                       </td>
                       <td [formGroupName]="i" class="text-center">
-                        <a target="_blank" [routerLink]="[ViewCustLink]" skipLocationChange
-                          [queryParams]="{ CustId: SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']['CustId'].value}">{{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["SurveyeeName"].value}}</a>
+                        {{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["SurveyeeName"].value}}
                       </td>
                       <td [formGroupName]="i" class="text-center">
                         {{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["Address"].value}}

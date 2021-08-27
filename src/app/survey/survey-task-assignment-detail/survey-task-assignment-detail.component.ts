@@ -11,7 +11,9 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { ReqSrvyTaskAndSendToMobileObj } from 'app/shared/model/Request/ReqSrvyTaskAndSendToMobileObj.Model';
+import { ReqSrvyTaskIdAndUsername } from 'app/shared/model/Request/SrvyTask/ReqSrvyTaskIdAndUsernameObj.model';
 import { SrvyTaskObj } from 'app/shared/model/SrvyTaskObj.Model';
+import { WhereValueObj } from 'app/shared/model/UcPagingObj.Model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CookieService } from 'ngx-cookie';
@@ -31,7 +33,9 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   reqSrvyTaskAndSendToMobile: ReqSrvyTaskAndSendToMobileObj = new ReqSrvyTaskAndSendToMobileObj();
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   lookupSurveyorObj: InputLookupObj = new InputLookupObj();
+  lookupSurveyorNationNoObj: InputLookupObj = new InputLookupObj();
   surveyOrderId: number;
+  reqByIdAndUsername: ReqSrvyTaskIdAndUsername = new ReqSrvyTaskIdAndUsername();
   parentForm: FormGroup;
   refUserId: number;
   surveyFormSchmId: number;
@@ -39,6 +43,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   reqListSrvyTaskObj: Array<SrvyTaskObj>;
   refOfficeId: any;
   username: string;
+  isNational: Array<boolean> = new Array<boolean>();
 
   //Dropdowns
   dropdownSurveyType: any;
@@ -47,8 +52,11 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   //Lookup
   lookupObj: any;
   InputLookupSurveyorObj: any;
+  InputLookupSurveyorNationNoObj: any;
   InputLookupSurveyorObjs: Array<InputLookupObj> = new Array<InputLookupObj>();
+  InputLookupSurveyorNationNoObjs: Array<InputLookupObj> = new Array<InputLookupObj>();
   surveyorNumber: { [key: string]: any; } = {};
+  surveyorNumberNationNo: { [key: string]: any; } = {};
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
@@ -101,7 +109,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
                   SurveyorName: response['ReturnObject'][i].SurveyorName,
                   CustId: response['ReturnObject'][i].CustId
                 }
-
+                this.isNational[i] = true;
                 this.addSurveyTaskToList(surveyTask);
               }
             )
@@ -134,7 +142,6 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
     })
 
     var temp = this.UclookupgenericComponents.toArray();
-    
     if (event['target'].value == "No") {
       var assetCrit = new Array();
       var critAssetObj = new CriteriaObj();
@@ -144,18 +151,27 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
       critAssetObj.value = refOfficeId;
       assetCrit.push(critAssetObj);
 
-      temp[i].lookupInput.addCritInput = assetCrit;
-      temp[i].setAddCritInput();
-      
+      temp[(i*2)+1].lookupInput.addCritInput = assetCrit;
+      temp[(i*2)+1].setAddCritInput();
+
+      temp[i*2].lookupInput['isRequired'] = false;
+      temp[(i*2)+1].lookupInput['isRequired'] = true;
+
+      temp[i*2].lookupInput.nameSelect = "";
+      temp[i*2].lookupInput.jsonSelect = "";
+      this.isNational[i] = false;
     }
     else {     
       var assetCrit = new Array();
-      temp[i].lookupInput.addCritInput = assetCrit;
-      temp[i].setAddCritInput();
-    }
+      temp[i*2].lookupInput.addCritInput = assetCrit;
+      temp[i*2].setAddCritInput();
+      temp[i*2].lookupInput['isRequired'] = true;
+      temp[(i*2)+1].lookupInput['isRequired'] = false;
 
-    temp[i].lookupInput['isRequired'] = !temp[i].lookupInput['isRequired'];
-    temp[i].initiateForm();
+      temp[(i*2)+1].lookupInput.nameSelect = "";
+      temp[(i*2)+1].lookupInput.jsonSelect = "";
+      this.isNational[i] = true;
+    }
   }
 
   addSurveyTaskToList(x) {
@@ -172,6 +188,11 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
       this.InputLookupSurveyorObjs.push(InputLookupSurveyorObj);
 
       this.surveyorNumber[max + 1] = InputLookupSurveyorObj;
+
+      var InputLookupSurveyorObjNationNo = this.initLookupSurveyorForNationalNo(x);
+      this.InputLookupSurveyorNationNoObjs.push(InputLookupSurveyorObjNationNo);
+
+      this.surveyorNumberNationNo[max + 1] = InputLookupSurveyorObjNationNo;
     }
   }
 
@@ -188,6 +209,21 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
     this.InputLookupSurveyorObj.jsonSelect = x;
 
     return this.InputLookupSurveyorObj;
+  }
+
+  initLookupSurveyorForNationalNo(x) {
+    let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.refOfficeId = currentUserContext['OfficeId'];
+    this.InputLookupSurveyorNationNoObj = new InputLookupObj();
+    this.InputLookupSurveyorNationNoObj.urlJson = "./assets/lookup/lookupSurveyorForSurveyTaskNationalNo.json";
+    this.InputLookupSurveyorNationNoObj.pagingJson = "./assets/lookup/lookupSurveyorForSurveyTaskNationalNo.json";
+    this.InputLookupSurveyorNationNoObj.genericJson = "./assets/lookup/lookupSurveyorForSurveyTaskNationalNo.json";
+    this.InputLookupSurveyorNationNoObj.isRequired = false;
+
+    this.InputLookupSurveyorNationNoObj.nameSelect = x.SurveyorName;
+    this.InputLookupSurveyorNationNoObj.jsonSelect = x;
+    
+    return this.InputLookupSurveyorNationNoObj;
   }
 
   addGroupAsset(surveyTaskObj, i) {
@@ -213,12 +249,19 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   }
 
   CancelSurveyTask(surveyTaskId) {
-    this.httpClient.post(URLConstant.CancelSurveyTaskBySurveyTaskId, { Id: surveyTaskId }).subscribe(
-      (response) => {
-        this.toastr.successMessage("Survey Task has been cancelled!");
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEY_TASK_ASSIGNMENT_DETAIL], { SurveyOrderId: this.surveyOrderId });
-      }
-    )
+    var result = confirm("Are you sure to cancel?");
+    if (result) {
+      const getuserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+      this.reqByIdAndUsername.SrvyTaskId = surveyTaskId;
+      this.reqByIdAndUsername.Username = getuserAccess.UserName;
+        this.httpClient.post(URLConstant.CancelSurveyTaskBySurveyTaskId, this.reqByIdAndUsername).subscribe(
+          (response) => {
+            this.toastr.successMessage("Survey Task has been cancelled!");
+            window.location.reload();
+            // this.getSurveyTaskListData();
+          }
+        )
+    }
   }
 
   SaveForm() {
@@ -246,6 +289,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
     const getuserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.reqSrvyTaskAndSendToMobile.Username = getuserAccess.UserName;
     this.reqSrvyTaskAndSendToMobile.ReqListSrvyTaskObjs = this.reqListSrvyTaskObj;
+    this.reqSrvyTaskAndSendToMobile.SrvyOrderId = this.surveyOrderId;
 
     this.httpClient.post(URLConstant.EditSrvyTaskAndSendToMobile, this.reqSrvyTaskAndSendToMobile).subscribe(
       (response) => {
