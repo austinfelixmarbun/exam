@@ -58,6 +58,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   @Input() ParentCustId: number = 0;
   @Input() tempTotalSharePrct: number = 0;
   @Input() isMarried: boolean = false;
+  @Input() isFamily: boolean =false;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust; // Cust Mode
   @Output() outputAfterSave: EventEmitter<ReqPersonalObj> = new EventEmitter();
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
@@ -188,15 +189,15 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
       IdExpiredDt: [''],
       MrMaritalStatCode: ['', Validators.required],
-      MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
+      MotherMaidenName: ['', this.isFamily ? [Validators.required, Validators.maxLength(100)] : [ Validators.maxLength(100)]],
       IsSupplier: [false],
       SupplCode: [''],
       SupplName: [''],
       SupplId: [''],
       MrCustRelationship: [''],
       MrCustModelCode: [''],
-      MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-      Email1: ['', Validators.pattern(CommonConstant.regexEmail)]
+      MobilePhnNo1: ['', this.isFamily ? [Validators.required, Validators.pattern("^[0-9]+$")] : [Validators.pattern("^[0-9]+$")]],
+      Email1: ['', this.isFamily ? [Validators.pattern(CommonConstant.regexEmail)] : [Validators.required, Validators.pattern(CommonConstant.regexEmail)]]  
     });
 
     if (this.CustDataMode != this.CustDataModeMain) {

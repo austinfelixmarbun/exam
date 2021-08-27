@@ -101,7 +101,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-md-4 adins-required-label" translate>Mobile Phone </label>
+                <label class="col-md-4 {{ isFamily ? 'adins-required-label' : ''}}" translate>Mobile Phone </label>
                 <div class="col-md-8">
                   <input type="text" class="form-control adInsInput" formControlName="MobilePhnNo1"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MobilePhnNo1.invalid}">
@@ -153,7 +153,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-md-4 adins-required-label" translate>Mother Maiden Name</label>
+                <label class="col-md-4 {{ isFamily ? 'adins-required-label' : ''}}" translate>Mother Maiden Name</label>
                 <div class="col-md-8">
                   <input type="text" class="form-control adInsInput" formControlName="MotherMaidenName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MotherMaidenName.invalid}">
@@ -172,7 +172,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-md-4" translate>Email </label>
+                <label class="col-md-4 {{ isFamily ? '' : 'adins-required-label'}}" translate>Email </label>
                 <div class="col-md-8">
                   <input type="text" class="form-control adInsInput" formControlName="Email1"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.Email1.invalid}">
