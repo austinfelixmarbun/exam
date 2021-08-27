@@ -302,6 +302,9 @@ export class CommonConstant {
     public static DmsViewCodeAgr = "ConfinsAgr";
     public static DmsViewCodeMou = "ConfinsMou";
     public static DmsViewCodeLead = "ConfinsLead";
+    public static DmsViewCodeSurvey = "Survey";
+    public static DmsSurveyId = "Survey Id";
+    public static DmsTaskId = "Task Id";
 
     // Cust Type  
     public static WhiteIndicator = "WHITE";

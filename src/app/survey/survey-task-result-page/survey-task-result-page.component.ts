@@ -22,6 +22,8 @@ export class SurveyTaskResultPageComponent implements OnInit {
   ReqGenericObj: GenericObj = new GenericObj();
   SrvyTaskId: number;
   SrvyOrderId: number;
+  SrvyTaskNo: string;
+  SrvyOrderNo: string;
   SurveyorName: string;
   Type: string;
   CustStepIndex: number;
@@ -57,6 +59,8 @@ export class SurveyTaskResultPageComponent implements OnInit {
   }
  
   async ngOnInit() {
+    await this.GetSrvyOrderNo();
+    await this.GetSrvyTaskNo();
 
     // check DMS
     await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms}).toPromise().then(
@@ -64,21 +68,16 @@ export class SurveyTaskResultPageComponent implements OnInit {
         this.SysConfigResultObj = response;
     });
 
-    this.ReqGenericObj.Id = this.SrvyOrderId;
-    await this.http.post(URLConstant.GetSrvyOrderBySrvyOrderId, this.ReqGenericObj).toPromise().then(
-      (response) => {
-        let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-        if (this.SysConfigResultObj.ConfigValue == '1') {
-          this.dmsObj = new DMSObj();
-          this.dmsObj.User = currentUserContext.UserName;
-          this.dmsObj.Role = currentUserContext.RoleCode;
-          this.dmsObj.ViewCode = CommonConstant.DmsViewCodeApp;
-          this.dmsObj.MetadataParent.push(new DMSLabelValueObj(CommonConstant.DmsNoApp, response["TrxRefNo"]));
-          this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoApp, response["TrxRefNo"]));
-          this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
-          this.isDmsReady = true;
-        }
-      });
+    if (this.SysConfigResultObj.ConfigValue == '1') {
+      let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+      this.dmsObj = new DMSObj();
+      this.dmsObj.User = currentUserContext.UserName;
+      this.dmsObj.Role = currentUserContext.RoleCode;
+      this.dmsObj.ViewCode = CommonConstant.DmsViewCodeSurvey;
+      this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsSurveyId, this.SrvyOrderNo), new DMSLabelValueObj(CommonConstant.DmsTaskId, this.SrvyTaskNo));
+      this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
+      this.isDmsReady = true;
+    }
 
     this.stepper = new Stepper(document.querySelector('#stepperSrvy'), {
       linear: false,
@@ -87,6 +86,22 @@ export class SurveyTaskResultPageComponent implements OnInit {
     this.EnterTab("Detail");
     this.CustStepIndex = 1;
     this.stepper.to(this.CustStepIndex);
+  }
+
+  async GetSrvyTaskNo(){
+    this.ReqGenericObj.Id = this.SrvyTaskId;
+    await this.http.post(URLConstant.GetSrvyTaskBySrvyTaskId, this.ReqGenericObj).toPromise().then(
+      (response) => {
+        this.SrvyTaskNo = response["SrvyTaskNo"];
+      });
+  }
+
+  async GetSrvyOrderNo(){
+    this.ReqGenericObj.Id = this.SrvyOrderId;
+    await this.http.post(URLConstant.GetSrvyOrderBySrvyOrderId, this.ReqGenericObj).toPromise().then(
+      (response) => {
+        this.SrvyOrderNo = response["SrvyOrderNo"];
+      });
   }
 
   EnterTab(type) {
