@@ -48,6 +48,7 @@ export class NewCustHeaderXComponent implements OnInit {
   @Input() listCustNoToExclude: Array<string> = new Array();
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
   @Input() isFamily: boolean = false;
+  @Input() isShareholder: boolean =false;
 
   constructor(
     private http: HttpClient, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService) {

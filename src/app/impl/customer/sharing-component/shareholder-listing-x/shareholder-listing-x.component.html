@@ -18,6 +18,6 @@
       </div>
     </div>
 </div>
-<app-new-cust-header-x [isFamily]="false" *ngIf="PageType == CustPageTypeHeader" [CustId]="selectedCustId" [CustType]="CustType" [ParentCustId]="CustId" [CustCompanyMgmntShrholderId]="selectedCustCompanyMgmntShrholderId" [listCustNoToExclude]="listCustNoToExclude" [CustDataMode]="CustDataModeShareholder" [tempTotalSharePrct]="tempTotalSharePrct" (outputCancel)="ReloadPaging()"></app-new-cust-header-x>
+<app-new-cust-header-x [isShareholder]="true" *ngIf="PageType == CustPageTypeHeader" [CustId]="selectedCustId" [CustType]="CustType" [ParentCustId]="CustId" [CustCompanyMgmntShrholderId]="selectedCustCompanyMgmntShrholderId" [listCustNoToExclude]="listCustNoToExclude" [CustDataMode]="CustDataModeShareholder" [tempTotalSharePrct]="tempTotalSharePrct" (outputCancel)="ReloadPaging()"></app-new-cust-header-x>
 
  
