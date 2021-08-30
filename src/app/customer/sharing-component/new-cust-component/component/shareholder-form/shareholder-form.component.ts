@@ -46,6 +46,7 @@ export class ShareholderFormComponent implements OnInit {
       this.ucLookupProfession = content;
     }
   }
+  readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
   constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
 
   tempExisting: CustFormExistingObj = new CustFormExistingObj();

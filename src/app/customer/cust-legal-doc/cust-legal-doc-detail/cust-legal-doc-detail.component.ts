@@ -12,6 +12,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { DatePipe } from '@angular/common';
 import { CustCompanyLegalDocObj } from 'app/shared/model/CustCompanyLegalDocObj.Model';
 import { String } from 'typescript-string-operations';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 
 @Component({
@@ -21,6 +22,8 @@ import { String } from 'typescript-string-operations';
 export class CustLegalDocDetailComponent implements OnInit {
   @Input() CustCompanyId: number;
   @Input() CustLegalDocs: Array<CustCompanyLegalDocObj>;
+  @Input() ListLegalDocCantDuplicate: Array<string>;
+
   legalDocTypeList: any;
   businessDtMin: Date;
   businessDtMax: Date;
@@ -66,7 +69,7 @@ export class CustLegalDocDetailComponent implements OnInit {
     );
   }
 
-  Save() {
+  async Save() {
     let datePipe = new DatePipe("en-US");
     var custCompanyLegalDocData = this.CustCompanyLegalDocForm.value;
     let docDt = new Date(custCompanyLegalDocData.DocDt);
@@ -88,9 +91,12 @@ export class CustLegalDocDetailComponent implements OnInit {
     }
 
     if(existCustLegalDoc != null){
-      var errorOutput = this.legalDocTypeList.ReturnObject.find(x => x.Key == this.CustCompanyLegalDocForm.value.MrLegalDocTypeCode);
-      this.toastr.warningMessage(String.Format(ExceptionConstant.DUPLICATE_LEGAL_DOC, errorOutput.Value, this.CustCompanyLegalDocForm.value.DocNo));
-      return;
+      var checkGSValue = this.ListLegalDocCantDuplicate.find(x => x == existCustLegalDoc.MrLegalDocTypeCode);
+      if(checkGSValue != null){
+        var errorOutput = this.legalDocTypeList.ReturnObject.find(x => x.Key == this.CustCompanyLegalDocForm.value.MrLegalDocTypeCode);
+        this.toastr.warningMessage(String.Format(ExceptionConstant.DUPLICATE_LEGAL_DOC, errorOutput.Value, this.CustCompanyLegalDocForm.value.DocNo));
+        return;
+      }
     }
 
     this.httpClient.post(URLConstant.AddCustCompanyLegalDoc, custCompanyLegalDocData).subscribe(

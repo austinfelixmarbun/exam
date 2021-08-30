@@ -416,7 +416,8 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.Fax = this.OfficeForm.value.UcAddress.Fax;
 
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.AddRefOffice, this.officeObj).subscribe(
+      let addRefOfficeUrl = environment.isCore? URLConstant.AddRefOfficeV2 : URLConstant.AddRefOffice;
+      this.httpClient.post(addRefOfficeUrl, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           

@@ -10,6 +10,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { String } from 'typescript-string-operations';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 
 @Component({
@@ -23,7 +24,11 @@ export class CustLegalDocComponent implements OnInit {
 
   custLegalDocs: any;
   IdCust: number;
+  ListLegalDocCantDuplicate: Array<string> = new Array<string>();
+  ListTempLegalCheck: Array<any> = new Array<any>();
   Page: string;
+  ReqByCodeObj: GenericObj = new GenericObj();
+  
   constructor(
     private router: Router,
     private httpClient: HttpClient,
@@ -43,7 +48,7 @@ export class CustLegalDocComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    
     var custObj = { CustId: this.IdCust };
     this.httpClient.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust}).subscribe(
       (response: any) => {
@@ -58,13 +63,25 @@ export class CustLegalDocComponent implements OnInit {
         );
       }
     );
+    this.checkGSLegalDoc();
+  }
 
+  async checkGSLegalDoc(){
+    this.ReqByCodeObj.Code = CommonConstant.GSCodeListLegalDocCantDuplicate;
+    await this.httpClient.post(URLConstant.GetGeneralSettingValueByCode, this.ReqByCodeObj).toPromise().then(
+      (response) => {
+        if (response["GsValue"] != undefined && response["GsValue"] != "") {
+          this.ListLegalDocCantDuplicate = response["GsValue"].split('|')
+        }
+      }
+    );
   }
 
   openCustLegalDocDetail() {
     const modalCustLegalDoc = this.modalService.open(CustLegalDocDetailComponent);
     modalCustLegalDoc.componentInstance.CustCompanyId = this.CustCompanyId;
     modalCustLegalDoc.componentInstance.CustLegalDocs = this.custLegalDocs;
+    modalCustLegalDoc.componentInstance.ListLegalDocCantDuplicate = this.ListLegalDocCantDuplicate;
     modalCustLegalDoc.result.then(
       (response) => {
         this.spinner.show();
@@ -99,17 +116,23 @@ export class CustLegalDocComponent implements OnInit {
       );
     }
   }
-  next() {    
-    var groupedCustLegalDoc = this.groupBy(this.custLegalDocs, function (item) {
-      return [item.MrLegalDocTypeCode, item.DocNo];
-    });
 
-    var duplCustLegalDoc = groupedCustLegalDoc.find(x => x.length > 1);
-
-    if(duplCustLegalDoc != undefined){
-      this.toastr.warningMessage(String.Format(ExceptionConstant.DUPLICATE_LEGAL_DOC, duplCustLegalDoc[0].MrLegalDocTypeCode, duplCustLegalDoc[0].DocNo));
-      return;
-    }
+  async next() { 
+      var groupedCustLegalDoc = this.groupBy(this.custLegalDocs, function (item) {
+        return [item.MrLegalDocTypeCode, item.DocNo];
+      });
+  
+      var duplCustLegalDoc = groupedCustLegalDoc.filter(x => x.length > 1);
+      if(duplCustLegalDoc != undefined){
+        for(var i = 0; i < duplCustLegalDoc.length ; i++){
+          this.ListTempLegalCheck = duplCustLegalDoc[i];
+          var checkGSValue = this.ListLegalDocCantDuplicate.find(x => x == this.ListTempLegalCheck[0].MrLegalDocTypeCode);
+          if(checkGSValue != null){
+            this.toastr.warningMessage(String.Format(ExceptionConstant.DUPLICATE_LEGAL_DOC, duplCustLegalDoc[0].MrLegalDocTypeCode, duplCustLegalDoc[0].DocNo));
+            return;
+          }
+        }
+      }
 
     this.outputTab.emit({ stepMode: 'next'});
   }

@@ -145,7 +145,7 @@ export class CustomerCompanyPageXComponent implements OnInit {
         this.CustStepIndex++;
 
         //skip dms
-        if (this.CustStepIndex == 8 && this.SysConfigResultObj.ConfigValue != '1') {
+        if (this.CustStepIndex == 9 && this.SysConfigResultObj.ConfigValue != '1') {
           this.stepper.next();
           this.CustStepIndex++;
         }

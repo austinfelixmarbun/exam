@@ -34,6 +34,7 @@ export class URLConstant {
     public static GetAllRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/GetAllRefOffice";
     public static GetListUpperHierarchyRefOfficeByRefOrgId = environment.FoundationR3Url + "/v1" + "/RefOffice/GetListUpperHierarchyRefOfficeByRefOrgId";
     public static AddRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/AddRefOffice";
+    public static AddRefOfficeV2 = environment.FoundationR3Url + "/v2" + "/RefOffice/AddRefOffice";
     public static AddRefOfficeAreaMember = environment.FoundationR3Url + "/v1" + "/RefOffice/AddRefOfficeAreaMember";
     public static UpdateRefOfficeAreaId = "/RefOffice/UpdateRefOfficeAreaId";
     public static EditRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/EditRefOffice";
@@ -611,6 +612,8 @@ export class URLConstant {
     public static EditVerfQuestionAnswer = environment.FoundationR3Url + "/v1" + "/VerfQuestionAnswer/EditVerfQuestionAnswer";
     public static GetVerfQuestionAnswerByRefVerfAnswerTypeId = environment.FoundationR3Url + "/v1" + "/VerfQuestionAnswer/GetVerfQuestionAnswerByRefVerfAnswerTypeId";
     public static GetVerfQuestionAnswerForUpdateById = environment.FoundationR3Url + "/v1" + "/VerfQuestionAnswer/GetVerfQuestionAnswerForUpdateById";
+    public static GetVerfQuestionAnswerListByVerfSchemeCode = environment.FoundationR3Url + "/v1" + "/VerfQuestionAnswer/GetVerfQuestionAnswerListByVerfSchemeCode";
+    public static GetVerfQuestionAnswerListByVerfSchemeHId = environment.FoundationR3Url + "/v1" + "/VerfQuestionAnswer/GetVerfQuestionAnswerListByVerfSchemeHId";
 
     // VERF QUESTION GRP H
     public static AddVerfQuestionGrpH = environment.FoundationR3Url + "/v1" + "/VerfQuestionGrpH/AddVerfQuestionGrpH";
@@ -635,16 +638,22 @@ export class URLConstant {
     public static GetVerfResultsByTrxRefNo = environment.FoundationR3Url + "/v1" + "/VerfResult/GetVerfResultsByTrxRefNo";
     public static GetVerfResultById = environment.FoundationR3Url + "/v1" + "/VerfResult/GetVerfResultById";
     public static GetVerfResultByResultNo = environment.FoundationR3Url + "/v1" + "/VerfResult/GetVerfResultByResultNo";
+    public static GetVerfResultByTrxRefNoAndVerfTrxTypeCode = environment.FoundationR3Url + "/v1" + "/VerfResult/GetVerfResultByTrxRefNoAndVerfTrxTypeCode";
+    public static AddVerfResult = environment.FoundationR3Url + "/v1" + "/VerfResult/AddVerfResult";
+    public static AddVerfResultHeaderAndVerfResultDetailForSurveyVerif = environment.FoundationR3Url + "/v1" + "/VerfResultH/AddVerfResultHeaderAndVerfResultDetailForSurveyVerif";
 
     // VERF RESULT H
     public static GetVerfResultHsByVerfResultId = environment.FoundationR3Url + "/v1" + "/VerfResultH/GetVerfResultHsByVerfResultId";
     public static GetVerfResultHById = environment.FoundationR3Url + "/v1" + "/VerfResultH/GetVerfResultHById";
+    public static GetVerfResultHsByTrxRefNo = environment.FoundationR3Url + "/v1" + "/VerfResultH/GetVerfResultHsByTrxRefNo";
+    public static GetVerfResultHByTrxRefNoAndMrAddrTypeCode = environment.FoundationR3Url + "/v1" + "/VerfResultH/GetVerfResultHByTrxRefNoAndMrAddrTypeCode";
 
     // VERF RESULT D
     public static EditVerfResultD = environment.FoundationR3Url + "/v1" + "/VerfResultD/EditVerfResultD";
     public static GetVerfResultDsByVerfResultHId = environment.FoundationR3Url + "/v1" + "/VerfResultD/GetVerfResultDsByVerfResultHId";
     public static GetVerfResultDById = environment.FoundationR3Url + "/v1" + "/VerfResultD/GetVerfResultDById";
-
+    public static GetListVerfResultDInQuestionGrp = environment.FoundationR3Url + "/v1" + "/VerfResultD/GetListVerfResultDInQuestionGrp";
+    
     // VERF SCHEME H
     public static AddVerfSchemeH = environment.FoundationR3Url + "/v1" + "/VerfSchemeH/AddVerfSchemeH";
     public static EditVerfSchemeH = environment.FoundationR3Url + "/v1" + "/VerfSchemeH/EditVerfSchemeH";
@@ -845,12 +854,14 @@ export class URLConstant {
     public static GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview = environment.FoundationR3Url + "/v1" + "/SrvyTask/GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview";
     public static ReviewSurveyResult = environment.FoundationR3Url + "/v1" + "/SrvyTask/ReviewSurveyResult";
     public static GetHtmlCodeFromMobile = environment.FoundationR3Url + "/v1" + "/SrvyTask/GetHtmlCodeFromMobile";
+    public static UpdateSrvyTaskAndAddVerfResultH = environment.FoundationR3Url + "/v1" + "/SrvyTask/UpdateSrvyTaskAndAddVerfResultH";
 
     // SURVEY ORDER
     public static GetSrvyOrderBySrvyOrderId = environment.FoundationR3Url + "/v1" + "/SrvyOrder/GetSrvyOrderBySrvyOrderId";
     public static GetSrvyOrderByTrxRefNo = environment.FoundationR3Url + "/v1" + "/SrvyOrder/GetSrvyOrderByTrxRefNo";
     public static GetListSryvObject = environment.FoundationR3Url + "/v1" + "/SrvyOrder/GetListSryvObject";
     public static SendSrvyOrder = environment.FoundationR3Url + "/v1" + "/SrvyOrder/SendSrvyOrder";
+    public static GetSrvyOrderDataBySrvyOrderId = environment.FoundationR3Url + "/v1" + "/SrvyOrder/GetSrvyOrderDataBySrvyOrderId";
 
     // SURVEY FORM SCHM
     public static GetListAllSrvyFormSchm = environment.FoundationR3Url + "/v1" + "/SrvyFormSchm/GetListAllSrvyFormSchm";
@@ -1058,5 +1069,28 @@ export class URLConstant {
 
     // LIST IFRAME VIEW
     public static GetCustListIframeView = environment.FoundationR3Url + "/v1" + "/Cust/GetCustListIframeView";
+
+    //REF STATUS
+    public static GetListActiveRefStatusByStatusGrpCode = environment.FoundationR3Url + "/v1" + "/RefStatus/GetListKeyValueActiveGrpCodeByCode";
+    // MASTER SEQUENCE
+    public static GenerateTransactionNoFromRedis = environment.FoundationR3Url + "/v1" + "/MasterSequence/GenerateTransactionNoFromRedis";
+
+    // THIRD PARTY RSLT
+    public static GetFirstRequestedThirdPartyRsltHByTrxNoAndSvcTypeCode = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetFirstRequestedThirdPartyRsltHByTrxNoAndSvcTypeCode";
+    public static GetThirdPartyTrustsocRsltByThirdPartyRsltHId = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetThirdPartyTrustsocRsltByThirdPartyRsltHId";
+    public static UploadConsentTrustingSocial = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/UploadConsentTrustingSocial";
+    public static GetListThirdPartyTrustingSocialByTrxNo = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetListThirdPartyTrustingSocialByTrxNo";
+
+    //DIGITALIZATION
+    public static AddTrxSrcDataForTrustingSocial = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForTrustingSocial";
+
+    //PEFINDO
+    public static HandleViewMOSummary = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewMOSummary";
+    public static HandleViewPefindoScore = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewPefindoScore";
+    public static HandleViewSubjectInfoPersonal = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewSubjectInfoPersonal";
+    public static HandleViewSubjectInfoCompany = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewSubjectInfoCompany";
+    public static AddTrxSrcDataForPefindo = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindo";
+    public static PefindoSmartSearch = environment.FoundationR3Url + "/v1" + "/Digitalization/PefindoSmartSearch";
+
 }
 

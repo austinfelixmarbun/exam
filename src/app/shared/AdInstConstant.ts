@@ -38,4 +38,6 @@ export class AdInsConstant {
   public static GetThingsToDoByRole = environment.FoundationR3Url + "/v1" + "/ThingsToDo/GetThingsToDoByRole";
   public static GetDashboardAccessToken = environment.FoundationR3Url + "/v2" + "/Dashboard/GetDashboardAccessToken";
   
+  // Storage Watch Key
+  public static WatchRoleState = "RoleState";
 }
