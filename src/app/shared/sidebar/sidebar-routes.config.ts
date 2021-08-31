@@ -36,6 +36,7 @@ export const ROUTES: RouteInfo[] = [
       { Path: NavigationConstant.CS_INDUSTRY_TYPE_PAGING, Title: 'Industry Type', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.CS_INDUSTRY_TYPE_CAT_PAGING, Title: 'Industry Type Category', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.CS_ECONOMIC_SECTOR_PAGING, Title: 'Economic Sector', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.CS_ECONOMIC_SECTOR_SLIK_PAGING, Title: 'Economic Sector SLIK', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.CS_CURRENCY_PAGING, Title: 'Currency', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.CS_PROFESSION_PAGING, Title: 'Profession', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.CS_REASON_PAGING, Title: 'Reason', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },

@@ -20,4 +20,6 @@ export class URLConstantX{
 
     //REF SECTOR ECONOMY SLIK X
     public static GetRefSectorEconomySlikXById = environment.FoundationR3Url + "/v1" + "/RefSectorEconomySlikX/GetRefSectorEconomySlikXById"
+    public static AddRefSectorEconomySlikX = environment.FoundationR3Url + "/v1" + "/RefSectorEconomySlikX/AddRefSectorEconomySlikX";
+    public static EditRefSectorEconomySlikX = environment.FoundationR3Url + "/v1" + "/RefSectorEconomySlikX/EditRefSectorEconomySlikX";
 }

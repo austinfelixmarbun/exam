@@ -1,11 +1,17 @@
 import { PathConstant } from "app/shared/PathConstant";
 
 export class PathConstantX{
-    //region Common Path
+    //#region Common Path
     public static ADD = "AddX";
     public static DETAIL = "DetailX";
     public static PAGING = "PagingX";
+    public static EDIT = "EditX";
     //#endregion
+    
+    //#region Common-Setting
+    public static CS_ECONOMIC_SECTOR_SLIK = "EconomicSectorSlik";
+    public static CS_ECONOMIC_SECTOR_SLIK_PAGING = PathConstantX.CS_ECONOMIC_SECTOR_SLIK + "/" + PathConstantX.PAGING;
+    public static CS_ECONOMIC_SECTOR_SLIK_DETAIL = PathConstantX.CS_ECONOMIC_SECTOR_SLIK + "/" + PathConstantX.DETAIL;
 
     //#region Cust
     public static CUST_PAGE = "PageX";
