@@ -31,6 +31,8 @@ export class PathConstantX{
     public static VENDOR_HOLDING_DETAIL = PathConstant.VENDOR_HOLDING + "/" + PathConstantX.DETAIL;
     public static VENDOR_BRANCH_EMP_PAGING = PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_EMP + "/" + PathConstantX.PAGING;
     public static VENDOR_BRANCH_EMP_DETAIL = PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_EMP + "/" + PathConstantX.DETAIL;
+    public static VENDOR_GRADING_REQUEST_PAGING = PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstantX.PAGING;
+    public static VENDOR_GRADING_REQUEST_DETAIL = PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstantX.DETAIL;
     //#endregion
 
 }

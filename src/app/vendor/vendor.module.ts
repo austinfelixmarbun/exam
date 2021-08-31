@@ -82,6 +82,8 @@ import { VendorHoldingAddEditXComponent } from 'app/impl/vendor/vendor-holding-a
 import { VendorEmployeeXComponent } from 'app/impl/vendor/component/vendor-employee-x/vendor-employee-x.component';
 import { VendorBranchEmployeePagingXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-employee-paging-x/vendor-branch-employee-paging-x.component';
 import { VendorBranchEmployeeAddEditXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-employee-add-edit-x/vendor-branch-employee-add-edit-x.component';
+import { VendorGradingRequestDetailXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-request/vendor-grading-request-detail-x/vendor-grading-request-detail-x.component';
+import { VendorGradingRequestPagingXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-request/vendor-grading-request-paging-x/vendor-grading-request-paging-x.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -182,7 +184,9 @@ export const customCurrencyMaskConfig = {
     VendorHoldingAddEditXComponent,
     VendorEmployeeXComponent,
     VendorBranchEmployeePagingXComponent,
-    VendorBranchEmployeeAddEditXComponent
+    VendorBranchEmployeeAddEditXComponent,
+    VendorGradingRequestPagingXComponent,
+    VendorGradingRequestDetailXComponent
   ],
   entryComponents : [UcviewgenericComponent, VendorAtpmSelectComponent],
   providers: [
