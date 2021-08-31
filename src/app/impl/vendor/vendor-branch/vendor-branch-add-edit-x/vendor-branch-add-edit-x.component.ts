@@ -170,6 +170,8 @@ export class VendorBranchAddEditXComponent implements OnInit {
     else {
       if(this.MrVendorCategoryCode == "SUPPLIER"){
         this.checkIsAutoFormNoFromSetting("SB");
+        this.VendorForm.controls.ReservedField5.setValidators([Validators.required]);
+        this.VendorForm.controls.ReservedField5.updateValueAndValidity();
       }
       this.bindText()
       await this.setDropdown();
@@ -215,8 +217,6 @@ export class VendorBranchAddEditXComponent implements OnInit {
                   if (vendorAttr["VendorAttrType"] == 'RM') {
                     tempLookup[vendorAttr["VendorAttrCode"]] = new InputLookupObj();
                     tempLookup[vendorAttr["VendorAttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                    tempLookup[vendorAttr["VendorAttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-                    tempLookup[vendorAttr["VendorAttrCode"]].urlEnviPaging = environment.FoundationR3Url;
                     tempLookup[vendorAttr["VendorAttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                     tempLookup[vendorAttr["VendorAttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                     tempLookup[vendorAttr["VendorAttrCode"]].title = vendorAttr.VendorAttrName;
@@ -262,8 +262,6 @@ export class VendorBranchAddEditXComponent implements OnInit {
                     if (vendorAttr["VendorAttrType"] == 'RM') {
                       tempLookup[vendorAttr["VendorAttrCode"]] = new InputLookupObj();
                       tempLookup[vendorAttr["VendorAttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                      tempLookup[vendorAttr["VendorAttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-                      tempLookup[vendorAttr["VendorAttrCode"]].urlEnviPaging = environment.FoundationR3Url;
                       tempLookup[vendorAttr["VendorAttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                       tempLookup[vendorAttr["VendorAttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                       tempLookup[vendorAttr["VendorAttrCode"]].title = vendorAttr.AttrName;
@@ -291,8 +289,6 @@ export class VendorBranchAddEditXComponent implements OnInit {
                     else if (vendorAttr["VendorAttrType"] == 'RM') {
                       tempLookup[vendorAttr["VendorAttrCode"]] = new InputLookupObj();
                       tempLookup[vendorAttr["VendorAttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                      tempLookup[vendorAttr["VendorAttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-                      tempLookup[vendorAttr["VendorAttrCode"]].urlEnviPaging = environment.FoundationR3Url;
                       tempLookup[vendorAttr["VendorAttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                       tempLookup[vendorAttr["VendorAttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                       tempLookup[vendorAttr["VendorAttrCode"]].title = vendorAttr.AttrName;
@@ -645,7 +641,7 @@ export class VendorBranchAddEditXComponent implements OnInit {
 
       this.VendorForm.controls.ReservedField3.setValidators(Validators.required);
       this.VendorForm.controls.ReservedField4.setValidators(Validators.required);
-
+      this.VendorForm.controls.ReservedField5.setValidators(Validators.required);
       this.UpdateValueAndValidity();
     }
     if (this.MrVendorCategoryCode == "SURVEYOR_BRANCH") {
@@ -764,7 +760,9 @@ export class VendorBranchAddEditXComponent implements OnInit {
       this.vendorBranchObj.VendorObj.ReservedField3 = this.VendorForm.controls.ReservedField3.value;
       this.vendorBranchObj.VendorObj.ReservedField4 = this.VendorForm.controls.ReservedField4.value;
       this.vendorBranchObj.VendorObj.ReservedField5 = this.VendorForm.controls.ReservedField5.value;
-      this.vendorBranchObj.VendorObj.ReservedField6 = this.VendorForm.controls.VendorAttrList['controls'].AP_DUE_AFTER_GLV.controls.VendorAttrValue.value;
+      if (this.VendorForm.controls.VendorAttrList['controls'].AP_DUE_AFTER_GLV != null) {
+        this.vendorBranchObj.VendorObj.ReservedField6 = this.VendorForm.controls.VendorAttrList['controls'].AP_DUE_AFTER_GLV.controls.VendorAttrValue.value;
+      }
     }
     if (this.vendorBranchObj.VendorObj.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH) {
       this.vendorBranchObj.VendorObj.ReservedField2 = this.VendorForm.controls.ReservedField2.value;
