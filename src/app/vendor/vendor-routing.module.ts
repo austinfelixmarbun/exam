@@ -45,6 +45,8 @@ import { VendorHoAddEditXComponent } from 'app/impl/vendor/vendor-ho/vendor-ho-a
 import { VendorBranchEmployeeAddEditXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-employee-add-edit-x/vendor-branch-employee-add-edit-x.component';
 import { VendorAtpmAddEditXComponent } from 'app/impl/vendor/vendor-ATPM/vendor-atpm-add-edit-x/vendor-atpm-add-edit-x.component';
 import { VendorBranchEmployeePagingXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-employee-paging-x/vendor-branch-employee-paging-x.component';
+import { VendorGradingRequestDetailXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-request/vendor-grading-request-detail-x/vendor-grading-request-detail-x.component';
+import { VendorGradingRequestPagingXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-request/vendor-grading-request-paging-x/vendor-grading-request-paging-x.component';
 
 const routes: Routes = [
   {
@@ -269,8 +271,22 @@ const routes: Routes = [
         },
       },
       {
+        path: "VendorGrading/Request/PagingX",
+        component: VendorGradingRequestPagingXComponent,
+        data: {
+          title: "Vendor Grading Request Paging",
+        },
+      },
+      {
         path: "VendorGrading/Request/Detail",
         component: VendorGradingRequestDetailComponent,
+        data: {
+          title: "Vendor Grading Request Detail",
+        },
+      },
+      {
+        path: "VendorGrading/Request/DetailX",
+        component: VendorGradingRequestDetailXComponent,
         data: {
           title: "Vendor Grading Request Detail",
         },
