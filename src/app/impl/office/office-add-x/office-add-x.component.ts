@@ -61,18 +61,6 @@ export class OfficeAddXComponent implements OnInit {
   officeName: any;
   officeShortName: any;
   resultData: any;
-  apiUrl: any;
-  addUrl: any;
-  officeClassUrl: any;
-  refOrgUrl: any;
-  getRefOrgUrl: any;
-  orgMdlUrl: any;
-  addEditUrl: any;
-  areaUrl: any;
-  officeParentUrl: any;
-  holidaySchmUrl: any;
-  workingHourSchmUrl: any;
-  foundationUrl: string = environment.FoundationR3Url;
   isActive: boolean = true;
   isAllowAppCreated: boolean = true;
   officeClose: boolean = true;
@@ -82,11 +70,8 @@ export class OfficeAddXComponent implements OnInit {
   refMasterCgType: RefMasterObj;
   orgMdlObj: OrgMdlObj
   arrCrit: any;
-  OfficeXId: number=0;
-
+  OfficeXId: number=0; 
   refMasterKonsyaType: RefMasterObj;
-  konSyaUrl: any;
-  officeTypeUrl: any;
   officeparentId: any;
 
   resultDataLawCourt: any;
@@ -128,19 +113,6 @@ export class OfficeAddXComponent implements OnInit {
   officeXObj: RefOfficeObjX;
 
   constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.apiUrl = URLConstant.GetRefOfficeByRefOfficeId;
-    this.addUrl = URLConstant.AddRefOffice;
-    this.officeClassUrl = URLConstant.GetRefMasterListKeyValueActiveByCode;
-    this.refOrgUrl = this.foundationUrl + URLConstant.GetListAllRefOrg;
-    this.orgMdlUrl = this.foundationUrl + URLConstant.GetAllActiveOrgMdlByRefOrgId;
-    this.officeParentUrl = URLConstant.GetListUpperHierarchyRefOfficeByRefOrgId;
-    this.areaUrl = this.foundationUrl + URLConstant.GetAllListArea;
-    this.holidaySchmUrl = URLConstant.GetListActiveHolidaySchemeH;
-    this.workingHourSchmUrl = URLConstant.GetListActiveWorkingSchmH;
-    this.getRefOrgUrl = this.foundationUrl + URLConstant.GetRefOrg;
-    this.konSyaUrl = URLConstant.GetRefMasterListKeyValueActiveByCode
-    this.officeTypeUrl = URLConstant.GetRefMasterListKeyValueActiveByCode
-
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
         this.pageType = params['mode'];
@@ -238,7 +210,7 @@ export class OfficeAddXComponent implements OnInit {
           }
         })
 
-      this.httpClient.post(this.holidaySchmUrl, null).subscribe(
+      this.httpClient.post(URLConstant.GetListActiveHolidaySchemeH, null).subscribe(
         (response) => {
           if (response[CommonConstant.ReturnObj].length > 0) {
             this.allHolidaySchm = response[CommonConstant.ReturnObj];
@@ -247,7 +219,7 @@ export class OfficeAddXComponent implements OnInit {
             });
           }
         })
-      this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
+      this.httpClient.post(URLConstant.GetListActiveWorkingSchmH, null).subscribe(
         (response) => {
           if (response[CommonConstant.ReturnObj].length > 0) {
             this.allWorkingHourSchm = response[CommonConstant.ReturnObj];
@@ -339,7 +311,7 @@ export class OfficeAddXComponent implements OnInit {
                 });
               }
             })
-          this.httpClient.post(this.officeTypeUrl, this.refMasterOfficeType).subscribe(
+          this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterOfficeType).subscribe(
             (response) => {
               if (response[CommonConstant.ReturnObj].length > 0) {
                 this.allOfficeType = response[CommonConstant.ReturnObj];
@@ -348,7 +320,7 @@ export class OfficeAddXComponent implements OnInit {
                 });
               }
             })
-          this.httpClient.post(this.konSyaUrl, this.refMasterKonsyaType).subscribe(
+          this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterKonsyaType).subscribe(
             (response) => {
               if (response[CommonConstant.ReturnObj].length > 0) {
                 this.allKonSya = response[CommonConstant.ReturnObj];
@@ -358,7 +330,7 @@ export class OfficeAddXComponent implements OnInit {
                 });
               }
             })
-          this.httpClient.post(this.holidaySchmUrl, null).subscribe(
+          this.httpClient.post(URLConstant.GetListActiveHolidaySchemeH, null).subscribe(
             (response) => {
               if (response[CommonConstant.ReturnObj].length > 0) {
                 this.allHolidaySchm = response[CommonConstant.ReturnObj];
@@ -367,7 +339,7 @@ export class OfficeAddXComponent implements OnInit {
                 });
               }
             })
-          this.httpClient.post(this.workingHourSchmUrl, null).subscribe(
+          this.httpClient.post(URLConstant.GetListActiveWorkingSchmH, null).subscribe(
             (response) => {
               if (response[CommonConstant.ReturnObj].length > 0) {
                 this.allWorkingHourSchm = response[CommonConstant.ReturnObj];
@@ -501,11 +473,14 @@ export class OfficeAddXComponent implements OnInit {
 
 
     if (this.pageType == "add") {
+      let addRefOfficeUrl = environment.isCore? URLConstant.AddRefOfficeV2 : URLConstantX.AddRefOfficeX;
+
       var obj = {
         RefOfficeObj: this.officeObj,
         RefOfficeObjX: this.officeXObj
       }
-      this.httpClient.post(URLConstantX.AddRefOfficeX, obj).subscribe(
+      
+      this.httpClient.post(addRefOfficeUrl, obj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
