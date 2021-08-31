@@ -73,6 +73,51 @@ export class PefindoViewComponent implements OnInit {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_PEFINDO_SCORE],{ "TrxNo": this.Param });
       });
     }
+    else if (ev == 3) { // Contracts
+      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_CONTRACTS],{ "TrxNo": this.Param });
+      });
+    }
+    else if (ev == 4) { // PEFINDO Alert Quest
+      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_PEFINDO_ALERT_QUEST],{ "TrxNo": this.Param });
+      });
+    }
+    else if (ev == 5) { // Securities
+      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_SECURITIES],{ "TrxNo": this.Param });
+      });
+    }
+    else if (ev == 6) { // Other Liabilities
+      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_OTHER_LIABILITIES],{ "TrxNo": this.Param });
+      });
+    }
+    else if (ev == 7) { // Involvements
+      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_INVOLVEMENTS],{ "TrxNo": this.Param });
+      });
+    }
+    else if (ev == 8) { // Relations
+      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_RELATIONS],{ "TrxNo": this.Param });
+      });
+    }
+    else if (ev == 9) { // Inquiries
+      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_INQUIRIES],{ "TrxNo": this.Param });
+      });
+    }
+    else if (ev == 10) { // Disputes
+      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_DISPUTES],{ "TrxNo": this.Param });
+      });
+    }
+    else if (ev == 11) { // Financial Statements
+      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_FINANCIAL_STATEMENTS],{ "TrxNo": this.Param });
+      });
+    }
   }
 
 }

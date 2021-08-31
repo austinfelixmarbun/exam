@@ -1088,6 +1088,15 @@ export class URLConstant {
     public static HandleViewPefindoScore = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewPefindoScore";
     public static HandleViewSubjectInfoPersonal = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewSubjectInfoPersonal";
     public static HandleViewSubjectInfoCompany = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewSubjectInfoCompany";
+    public static HandleViewContracts = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewContracts";
+    public static HandleViewPefindoAlertQuest = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewPefindoAlertQuest";
+    public static HandleViewSecurities = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewSecurities";
+    public static HandleViewOtherLiabilities = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewOtherLiabilities";
+    public static HandleViewInvolvements = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewInvolvements";
+    public static HandleViewRelations = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewRelations";
+    public static HandleViewInquiries = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewInquiries";
+    public static HandleViewDisputes = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewDisputes";
+    public static HandleViewFinancialStatements = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewFinancialStatements";
     public static AddTrxSrcDataForPefindo = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindo";
     public static PefindoSmartSearch = environment.FoundationR3Url + "/v1" + "/Digitalization/PefindoSmartSearch";
 

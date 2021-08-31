@@ -1,0 +1,20 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { PefindoViewDisputesRoutingModule } from './pefindo-view-disputes-routing.module';
+import { PefindoViewDisputesComponent } from './pefindo-view-disputes.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharingModule } from 'app/shared/sharing.module';
+import { UcSubsectionModule } from '@adins/uc-subsection';
+
+@NgModule({
+  declarations: [PefindoViewDisputesComponent],
+  imports: [
+    CommonModule,
+    PefindoViewDisputesRoutingModule,
+    NgbModule,
+    SharingModule,
+    UcSubsectionModule
+  ]
+})
+export class PefindoViewDisputesModule { }

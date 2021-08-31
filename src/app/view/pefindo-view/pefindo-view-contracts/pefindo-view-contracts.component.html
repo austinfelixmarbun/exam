@@ -1,0 +1,271 @@
+<div class="col-md-12 mt-3">
+	<div class="card">
+		<div class="card-body">
+			<div class="px-3">
+				<div class="form-body mt-1">
+
+          <lib-ucSubsection [id]="'ContractDebtorId'" [title]="'Contract List, Debtor'" [panel]="'ContractDebtor'">
+          </lib-ucSubsection>
+          <div id="ContractDebtor">
+            <div class="card-body">
+              <table class="table table-responsive-md text-center table-hover">
+                <thead>
+                  <tr class="table-header">
+                    <th style="text-align: left;">
+                      <span  name='Sector' translate> Sector </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Type' translate> Type </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Opened' translate> Opened </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Status' translate> Status </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Total' translate> Total </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Balance' translate> Balance </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Past Due' translate> Past Due </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Arreas' translate> Arreas </span>
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody *ngIf = "ResViewContractsObj.ListCntrctDebtor.length == 0">
+                  <tr>
+                    <td colspan="100%">No Data Available</td>
+                  </tr>
+                </tbody>
+          
+                <tbody *ngIf="ResViewContractsObj.ListCntrctDebtor.length > 0">
+                  <tr *ngFor="let item of ResViewContractsObj.ListCntrctDebtor">
+                    <td style="text-align: left;">{{ item.Sector }}</td>
+                    <td style="text-align: left;">{{ item.CntrctType }}</td>
+                    <td style="text-align: left;">{{ item.StartDt | date: 'dd-MM-yyyy' }}</td>
+                    <td style="text-align: left;">{{ item.CntrctStat }}</td>
+                    <td style="text-align: left;">{{ item.TtlAmt | number: '.2':'en-US' }}</td>
+                    <td style="text-align: left;">{{ item.OsAmt | number: '.2':'en-US' }}</td>
+                    <td style="text-align: left;">{{ item.PastDueAmt | number: '.2':'en-US' }}</td>
+                    <td style="text-align: left;">{{ item.PastDueDays }}</td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+          
+          <lib-ucSubsection [id]="'ContractGuarantorId'" [title]="'Contract List, Guarantor'" [panel]="'ContractGuarantor'">
+          </lib-ucSubsection>
+          <div id="ContractGuarantor">
+            <div class="card-body">
+              <table class="table table-responsive-md text-center table-hover">
+                <thead>
+                  <tr class="table-header">
+                    <th style="text-align: left;">
+                      <span  name='Sector' translate> Sector </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Type' translate> Type </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Opened' translate> Opened </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Status' translate> Status </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Total' translate> Total </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Balance' translate> Balance </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Past Due' translate> Past Due </span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Arreas' translate> Arreas </span>
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody *ngIf = "ResViewContractsObj.ListCntrctGuarantor.length == 0">
+                  <tr>
+                    <td colspan="100%">No Data Available</td>
+                  </tr>
+                </tbody>
+          
+                <tbody *ngIf="ResViewContractsObj.ListCntrctGuarantor.length > 0">
+                  <tr *ngFor="let item of ResViewContractsObj.ListCntrctGuarantor">
+                    <td style="text-align: left;">{{ item.Sector }}</td>
+                    <td style="text-align: left;">{{ item.CntrctType }}</td>
+                    <td style="text-align: left;">{{ item.StartDt | date: 'dd-MM-yyyy' }}</td>
+                    <td style="text-align: left;">{{ item.CntrctStat }}</td>
+                    <td style="text-align: left;">{{ item.TtlAmt | number: '.2':'en-US' }}</td>
+                    <td style="text-align: left;">{{ item.OsAmt | number: '.2':'en-US' }}</td>
+                    <td style="text-align: left;">{{ item.PastDueAmt | number: '.2':'en-US' }}</td>
+                    <td style="text-align: left;">{{ item.PastDueDays }}</td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+
+          <lib-ucSubsection [id]="'ContractsSummaryId'" [title]="'Contracts Summary'" [panel]="'ContractsSummary'">
+          </lib-ucSubsection>
+          <div class="row" id="ContractsSummary">
+
+            <!-- Summary Of All Contracts -->
+            <div class="col-md-12 px-4">
+              <lib-ucSubsection [id]="'SummaryAllContractsId'" [title]="'Summary Of All Contracts'" [panel]="'SummaryAllContracts'">
+              </lib-ucSubsection>
+              <div class="row" id="SummaryAllContracts">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="label-control" translate> Worst Past Due Amount </label>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="label-control" translate> IDR {{ ResViewContractsObj.WorstPastDueAmt | number: '.2':'en-US' }} </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="label-control" translate> Worst No. of Due Days </label>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="label-control" translate> {{ ResViewContractsObj.WorstPastDueDays }} </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="label-control" translate> Last Delinquency (90+ days in due) </label>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="label-control" translate> {{ ResViewContractsObj.LastDlq90Days | date: 'dd-MM-yyyy' }} </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!--As Main Debtor / Co-Debtor - Open Contracts-->
+            <div class="col-md-12 px-4">
+              <lib-ucSubsection [id]="'MainDebtorOpenContractsId'" [title]="'As Main Debtor / Co-Debtor - Open Contracts'" [panel]="'MainDebtorOpenContracts'">
+              </lib-ucSubsection>
+              <div class="row" id="MainDebtorOpenContracts">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="label-control" translate> Total Amount Sum </label>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="label-control" translate> IDR {{ ResViewContractsObj.TtlAmtSumDbtr | number: '.2':'en-US' }} </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="label-control" translate> Past Due Amount Sum </label>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="label-control" translate> IDR {{ ResViewContractsObj.PastDueAmtSumDbtr | number: '.2':'en-US' }} </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="label-control" translate> Outstanding Amount Sum </label>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="label-control" translate> IDR {{ ResViewContractsObj.OsAmtSumDbtr | number: '.2':'en-US' }} </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="label-control" translate> No. of Open Contracts </label>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="label-control" translate> {{ ResViewContractsObj.OpenCntrctNumDbtr }} </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="label-control" translate> No. of Closed Contracts </label>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="label-control" translate> {{ ResViewContractsObj.ClsdCntrctNumDbtr }} </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--As Guarantor - Open Contracts-->
+            <div class="col-md-12 px-4">
+              <lib-ucSubsection [id]="'GuarantorOpenContractsId'" [title]="'As Guarantor - Open Contracts'" [panel]="'GuarantorOpenContracts'">
+              </lib-ucSubsection>
+              <div class="row" id="GuarantorOpenContracts">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="label-control" translate> Total Amount Sum </label>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="label-control" translate> IDR {{ ResViewContractsObj.TtlAmtSumGuar | number: '.2':'en-US' }}</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="label-control" translate> Past Due Amount Sum </label>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="label-control" translate> IDR {{ ResViewContractsObj.PastDueAmtSumGuar | number: '.2':'en-US' }} </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="label-control" translate> Outstanding Amount Sum </label>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="label-control" translate> IDR {{ ResViewContractsObj.OsAmtSumGuar | number: '.2':'en-US' }} </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="label-control" translate> No. of Open Contracts </label>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="label-control" translate> {{ ResViewContractsObj.OpenCntrctNumGuar }} </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="label-control" translate> No. of Closed Contracts </label>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="label-control" translate> {{ ResViewContractsObj.ClsdCntrctNumGuar }} </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
