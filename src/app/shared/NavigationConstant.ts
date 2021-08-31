@@ -65,6 +65,8 @@ export class NavigationConstant {
     public static CS_EXCHANGE_RATE_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_EXCHANGE_RATE_DETAIL; //'CommonSetting/ExchangeRate/Detai'
     public static CS_ECONOMIC_SECTOR_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_ECONOMIC_SECTOR_PAGING; //'/CommonSetting/EconomicSector/Paging'
     public static CS_ECONOMIC_SECTOR_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_ECONOMIC_SECTOR_DETAIL; //'/CommonSetting/EconomicSector/Detail'
+    public static CS_ECONOMIC_SECTOR_SLIK_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstantX.CS_ECONOMIC_SECTOR_SLIK_PAGING; //'/CommonSetting/EconomicSectorSlik/PagingX'
+    public static CS_ECONOMIC_SECTOR_SLIK_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstantX.CS_ECONOMIC_SECTOR_SLIK_DETAIL; //'/CommonSetting/EconomicSectorSlik/DetailX'
     public static CS_GEN_SETTING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING; //'/CommonSetting/GeneralSetting'
     public static CS_GEN_SETTING_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING_DETAIL; //'/CommonSetting/GeneralSetting/Detail'
     public static CS_GEN_SETTING_ADMIN = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_GEN_SETTING_ADMIN; //'/CommonSetting/GeneralSetting'
@@ -127,7 +129,7 @@ export class NavigationConstant {
 
     //#region View
     public static VIEW_APP = "/" + PathConstant.VIEW + "/" + PathConstant.VIEW_APP; 
-    public static VIEW_SRVY_TASK = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_SRVY + "/" + PathConstant.VIEW_SRVY_TASK; //'/View/Survey/SurveyTask'
+    public static VIEW_SRVY_TASK = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_SRVY_TASK; //'/View/Survey/SurveyTask'
     public static VIEW_SRVY_ORDER = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_SRVY + "/" + PathConstant.VIEW_SRVY_ORDER; //'/View/Survey/SurveyOrder'
     public static VIEW_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_CUST; //'View/Customer'
     public static VIEW_CUST_ADDR = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_ADDR; //'/View/Customer/Address'
@@ -148,6 +150,7 @@ export class NavigationConstant {
     public static VIEW_CUST_COY_CONTACT = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_CONTACT; //'/View/Customer/CoyContact'
     public static VIEW_CUST_COY_FINANCIAL = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_FINANCIAL; //'/View/Customer/CoyFinancial'
     public static VIEW_CUST_COY_LEGAL = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_LEGAL; //'/View/Customer/CoyLegal'
+    public static VIEW_CUST_TRUSTING_SOCIAL = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_TRUSTING_SOCIAL; //'/View/Customer/TrustSoc'
     public static VIEW_NEG_CUST = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_NEG_CUST; //'/View/NegativeCustomer'
     public static VIEW_CUST_OTH_INFO = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_OTH_INFO; //'/View/Customer/CustOthInfo'
     public static VIEW_VENDOR = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_VENDOR; //'/View/Vendor'
@@ -172,17 +175,17 @@ export class NavigationConstant {
     public static VENDOR_GRP_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRP_ADD; //'/Vendor/Group/Add'
     public static VENDOR_GRP_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRP_VIEW; //'/Vendor/Group/View'
     public static VENDOR_GRP_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRP_MBR_ADD; //'/Vendor/GroupMbr/Add
-    public static VENDOR_HO_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HO_DETAIL; //'/Vendor/HO/Detail'
+    public static VENDOR_HO_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_HO_DETAIL; //'/Vendor/HO/DetailX'
     public static VENDOR_HO_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HO_REG; //'/Vendor/HO/Registration'
-    public static VENDOR_HOLDING_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HOLDING_DETAIL; //'/Vendor/Holding/Detail'
+    public static VENDOR_HOLDING_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_HOLDING_DETAIL; //'/Vendor/Holding/DetailX'
     public static VENDOR_HOLDING_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HOLDING_REG; //'/Vendor/Holding/Registration'
     public static VENDOR_AUCTION_COY_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_AUCTION_COY_PAGING; //'/Vendor/AuctionCompany/Paging'
     public static VENDOR_AUCTION_COY_ADD_EDIT = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_AUCTION_COY_ADD_EDIT; //'/Vendor/AuctionCompany/AddEdit'
-    public static VENDOR_ATPM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_ATPM_DETAIL; //'/Vendor/ATPM/Detail'
+    public static VENDOR_ATPM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_ATPM_DETAIL; //'/Vendor/ATPM/DetailX'
     public static VENDOR_ATPM_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_ATPM_REG; //'/Vendor/ATPM/Registration'
-    public static VENDOR_BRANCH_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_BRANCH_ADD; //'/Vendor/Branch/Add'
-    public static VENDOR_BRANCH_EMP_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_BRANCH_EMP_PAGING; //'/Vendor/Branch/Employee/Paging'
-    public static VENDOR_BRANCH_EMP_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_BRANCH_EMP_DETAIL; //'/Vendor/Branch/Employee/Detail'
+    public static VENDOR_BRANCH_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_BRANCH_ADD; //'/Vendor/Branch/AddX'
+    public static VENDOR_BRANCH_EMP_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_BRANCH_EMP_PAGING; //'/Vendor/Branch/Employee/PagingX'
+    public static VENDOR_BRANCH_EMP_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_BRANCH_EMP_DETAIL; //'/Vendor/Branch/Employee/DetailX'
     public static VENDOR_BRANCH_MBR_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_BRANCH_MBR_PAGING; //'/Vendor/Branch/Member/Paging'
     public static VENDOR_BRANCH_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_BRANCH_MBR_ADD; //'/Vendor/Branch/Member/Add'
     public static VENDOR_BRANCH_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_BRANCH_REG; //'/Vendor/Branch/Registration'
@@ -244,7 +247,7 @@ export class NavigationConstant {
 
     //#region Office
     public static OFFICE = "/" + PathConstant.LR_OFFICE; //'/Office'
-    public static OFFICE_PAGING = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.PAGING; //'/Office/Paging'
+    public static OFFICE_PAGING = "/" + PathConstant.LR_OFFICE + "/" + PathConstantX.PAGING; //'/Office/PagingX'
     public static OFFICE_ADD = "/" + PathConstant.LR_OFFICE + "/" + PathConstantX.ADD; //'/Office/AddX'
     public static OFFICE_AREA = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_AREA; //'/Office/OfficeArea'
     public static OFFICE_AREA_DETAIL = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_AREA_DETAIL; //'/Office/OfficeArea/Detail'
@@ -274,7 +277,8 @@ export class NavigationConstant {
     public static SURVEY_TASK_ASSIGNMENT_DETAIL = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.DETAIL;
     public static SURVEY_RESULT_REVIEW_PAGING = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_RESULT_REVIEW + "/" + PathConstant.PAGING;
     public static SURVEY_RESULT_REVIEW_DETAIL = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_RESULT_REVIEW + "/" + PathConstant.DETAIL;
-
+    public static SURVEY_TASK_RESULT_PAGING = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.PAGING;
+    public static SURVEY_TASK_RESULT_PAGE = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.SRVY_TASK_PAGE;
     //#endregion
     
     //#region Cust
@@ -298,7 +302,7 @@ export class NavigationConstant {
     public static CUST_SHRHLDR_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_SHRHLDR_PAGING; //'/Customer/CustShareholder/Paging'
     public static CUST_GUARANTOR_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_GUARANTOR_PAGING; //'/Customer/CustGuarantor/Paging'
     public static CUST_FAMILY_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_FAMILY_PAGING; //'/Customer/CustFamily/Paging'
-    public static CUST_NEW_FORM = "/" + PathConstant.LR_CUST + "/" + PathConstant.NEW_CUST; //'/Customer/NewCustomer'
+    public static CUST_NEW_FORM = "/" + PathConstant.LR_CUST + "/" + PathConstantX.NEW_CUST; //'/Customer/NewCustomerX'
     //#endregion
 
     //#region Document Management
@@ -330,5 +334,13 @@ export class NavigationConstant {
     public static LICENSE_PAGING = "/" + PathConstant.LR_LICENSE + "/" + PathConstant.PAGING;
     public static UPLOAD_LICENSE = "/"+ PathConstant.LR_LICENSE + "/" + PathConstant.UPLOAD_LICENSE;
     public static DETAIL_LICENSE = "/"+ PathConstant.LR_LICENSE + "/" + PathConstant.DETAIL_LICENSE;
+    //#endregion
+
+    //#region PEFINDO View
+    public static VIEW_PEFINDO = PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO; //'/View/Pefindo'
+    public static PEFINDO_SUBJECT_INFO_PERSONAL = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_SUBJECT_INFO_PERSONAL;  //'/View/Pefindo/SubjectInfoPersonal'
+    public static PEFINDO_SUBJECT_INFO_COMPANY = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_SUBJECT_INFO_COMPANY;  //'/View/Pefindo/SubjectInfoCompany'
+    public static PEFINDO_MO_SUMMARY = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_MO_SUMMARY;  //'/View/Pefindo/MoSummary'
+    public static PEFINDO_PEFINDO_SCORE = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_PEFINDO_SCORE;  //'/View/Pefindo/PefindoScore'
     //#endregion
 }

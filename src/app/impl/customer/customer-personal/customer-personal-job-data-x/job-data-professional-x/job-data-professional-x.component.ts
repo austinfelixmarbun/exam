@@ -39,8 +39,9 @@ export class JobDataProfessionalXComponent implements OnInit {
   inputFieldAddressObj: InputFieldObj;
   tempProfession: any;
   tempRefIndustryType: any;
+  tempRefSectorEconomySlik: any;
   professionLookUpObj: InputLookupObj;
-  industryLookUpObj: InputLookupObj;
+  economicSectorSlikLookUpObj: InputLookupObj;
   inputLookupCommodityObj: InputLookupObj;
   custPersonalJobDataObj: CustPersonalJobDataObj;
   custJobDataObj: CustPersonalJobDataObj;
@@ -55,6 +56,7 @@ export class JobDataProfessionalXComponent implements OnInit {
   returnRefProfessionObj: any;
   refIndustryTypeObj: RefIndustryTypeObj;
   returnIndustryTypeObj: any;
+  returnSectorEconomySlikObj: any;
   custAddrObj: CustAddrObj;
   preJobAddrObj: CustAddrObj;
   getCustomerAddr: any;
@@ -111,7 +113,8 @@ export class JobDataProfessionalXComponent implements OnInit {
     this.tempProfession = event.RefProfessionId;
   }
 
-  getLookUpIndustry(event) {
+  getLookUpEconomicSectorSlik(event) {
+    this.tempRefSectorEconomySlik = event.RefSectorEconomySlikXId;
     this.tempRefIndustryType = event.RefIndustryTypeId;
     this.EconomicSectorName = event.EconomicSectorName;
     this.IndustryTypeCategoryName = event.RefIndustryTypeCategoryName;
@@ -151,11 +154,11 @@ export class JobDataProfessionalXComponent implements OnInit {
     this.professionLookUpObj.addCritInput = listCriteriaObj;
 
 
-    this.industryLookUpObj = new InputLookupObj();
-    this.industryLookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
-    this.industryLookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
-    this.industryLookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
-    this.industryLookUpObj.isRequired = true;
+    this.economicSectorSlikLookUpObj = new InputLookupObj();
+    this.economicSectorSlikLookUpObj.urlJson = "./assets/lookup/lookupRefSectorEconomySlikX.json";
+    this.economicSectorSlikLookUpObj.pagingJson = "./assets/lookup/lookupRefSectorEconomySlikX.json";
+    this.economicSectorSlikLookUpObj.genericJson = "./assets/lookup/lookupRefSectorEconomySlikX.json";
+    this.economicSectorSlikLookUpObj.isRequired = true;
 
     this.inputOthBizAddressObj = new InputAddressObj();
     this.inputOthBizAddressObj.showSubsection = false;
@@ -170,9 +173,10 @@ export class JobDataProfessionalXComponent implements OnInit {
 
     this.custJobDataObj = new CustPersonalJobDataObj();
     this.custJobDataObj.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).subscribe(
+    this.http.post(URLConstantX.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).subscribe(
       (response: any) => {
-        this.returnCustJobDataObj = response;
+        this.returnCustJobDataObj = response['responseCustPersonalJobDataObj'];
+        this.tempRefSectorEconomySlik = response['RefSectorEconomySlikXId'];
 
         if (this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
           this.JobDataProForm.patchValue({
@@ -195,19 +199,20 @@ export class JobDataProfessionalXComponent implements OnInit {
               this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
               this.professionLookUpObj.jsonSelect = this.returnRefProfessionObj;
               this.tempProfession = this.returnRefProfessionObj.RefProfessionId;
-            });
+            }
+          );
 
-          if (this.returnCustJobDataObj.RefIndustryTypeId != null) {
-            this.http.post(URLConstant.GetRefIndustryTypeById, { Id: this.returnCustJobDataObj.RefIndustryTypeId }).subscribe(
+          if (this.returnCustJobDataObj.RefIndustryTypeId != null && this.tempRefSectorEconomySlik != null &&
+            this.returnCustJobDataObj.RefIndustryTypeId != 0 && this.tempRefSectorEconomySlik != 0) {
+            this.http.post(URLConstantX.GetRefSectorEconomySlikXById, {Id: this.tempRefSectorEconomySlik}).subscribe(
               (response) => {
-                this.returnIndustryTypeObj = response;
-
-                this.industryLookUpObj.nameSelect = this.returnIndustryTypeObj.IndustryTypeName;
-                this.industryLookUpObj.jsonSelect = this.returnIndustryTypeObj;
-                this.tempRefIndustryType = this.returnIndustryTypeObj.RefIndustryTypeId;
-              });
+                this.returnSectorEconomySlikObj = response;
+                this.economicSectorSlikLookUpObj.nameSelect = this.returnSectorEconomySlikObj.SectorEconomySlikName;
+                this.economicSectorSlikLookUpObj.jsonSelect = this.returnSectorEconomySlikObj;
+                this.tempRefIndustryType = this.returnSectorEconomySlikObj.RefIndustryTypeId;
+              }
+            );
           }
-
 
           if (this.returnCustJobDataObj.JobAddrId != null) {
             this.custAddrObj = new CustAddrObj();
@@ -346,7 +351,9 @@ export class JobDataProfessionalXComponent implements OnInit {
           this.rowVersion = this.returnCustJobDataObj.RowVersion;
           this.typePage = "edit";
         }
-      });
+      }
+    );
+
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Job Address";
@@ -500,12 +507,18 @@ export class JobDataProfessionalXComponent implements OnInit {
         MrCommodityCode: this.JobDataProForm.controls.CommodityCode.value,
       };
 
-      let obj = {
+      let CustPersonalJobDataObjX = {
+        CustId: this.IdCust,
+        RefSectorEconomySlikXId: this.tempRefSectorEconomySlik
+      }
+
+      let reqObj = {
         CustPersonalJobDataObj: this.reqCustPersonalJobDataObj,
+        CustPersonalJobDataObjX: CustPersonalJobDataObjX,
         CustXObj: custXObj
       }
 
-      this.http.post(URLConstantX.EditCustPersonalJobData, obj).subscribe(
+      this.http.post(URLConstantX.EditCustPersonalJobData, reqObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputTab.emit({ stepMode: "next" });
@@ -538,7 +551,18 @@ export class JobDataProfessionalXComponent implements OnInit {
         CustXObj: custXObj
       }
 
-      this.http.post(URLConstantX.AddCustPersonalJobData, obj).subscribe(
+      let CustPersonalJobDataObjX = {
+        CustId: this.IdCust,
+        RefSectorEconomySlikXId: this.tempRefSectorEconomySlik
+      }
+
+      let reqObj = {
+        CustPersonalJobDataObj: this.reqCustPersonalJobDataObj,
+        CustPersonalJobDataObjX: CustPersonalJobDataObjX,
+        CustXObj: custXObj
+      }
+
+      this.http.post(URLConstantX.AddCustPersonalJobData, reqObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputTab.emit({ stepMode: "next" });

@@ -12,14 +12,18 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { PathConstant } from 'app/shared/PathConstant';
 import Stepper from 'bs-stepper';
 import { CookieService } from 'ngx-cookie';
+import { environment } from 'environments/environment';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CustObj } from 'app/shared/model/CustObj.Model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-customer-personal-page-x',
   templateUrl: './customer-personal-page-x.component.html',
-  styleUrls: ['./customer-personal-page-x.component.css']
+  styleUrls: ['./customer-personal-page-x.component.css'],
+  providers: [NGXToastrService],
 })
 export class CustomerPersonalPageXComponent implements OnInit {
-
   private stepper: Stepper;
 
   IdCust: number;
@@ -51,6 +55,7 @@ export class CustomerPersonalPageXComponent implements OnInit {
       }
     });
   }
+  
 
   CustStep = {
     "Detail": 1,
@@ -185,5 +190,4 @@ export class CustomerPersonalPageXComponent implements OnInit {
       AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
     }
   }
-
 }

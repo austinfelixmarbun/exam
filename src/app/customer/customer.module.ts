@@ -131,6 +131,7 @@ import { JobDataProfessionalXComponent } from 'app/impl/customer/customer-person
 import { JobDataSmeXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-small-medium-enterprise-x/job-data-small-medium-enterprise-x.component';
 import { CustomerCompanyPageXComponent } from 'app/impl/customer/customer-company/customer-company-page-x/customer-company-page-x.component';
 import { CustomerCompanyDetailXComponent } from 'app/impl/customer/customer-company/customer-company-detail-x/customer-company-detail-x.component';
+import { CustomerViewChildModule } from 'app/view/customer-view/customer-view-child.module';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -274,6 +275,8 @@ export const customCurrencyMaskConfig = {
     CustomerPersonalPageXComponent,
     JobDataEmployeeXComponent,
     JobDataNonProfessionalXComponent,
+    CustomerPersonalJobDataXComponent,
+    JobDataEmployeeXComponent,
     JobDataProfessionalXComponent,
     JobDataSmeXComponent,
     CustomerCompanyPageXComponent,

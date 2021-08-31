@@ -31,7 +31,7 @@
                 <td class="text-left">{{item.Type}}</td>
                 <td class="text-left">{{item.CustModel}}</td>
                 <td class="text-left">{{item.TaxIdNo}}</td>
-                <td class="text-right">{{item.SharePrcnt| number:'.6':'en-US'}}</td>
+                <td class="text-right">{{item.SharePrcnt| number:'.6':'en-US'}} %</td>
                 <td *ngIf="item.IsSigner == true" class="text-center">Yes</td>
                 <td *ngIf="item.IsSigner == false" class="text-center">No</td>
                 <td *ngIf="item.IsOwner == true" class="text-center">Yes</td>

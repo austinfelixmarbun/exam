@@ -140,6 +140,11 @@ const routes: Routes = [
       {
         path: PathConstant.VIEW_CUST_OTH_INFO,
         loadChildren: './customer-view-other-info/customer-view-other-info.module#CustomerViewOtherInfoModule'
+      },
+      // Trusting Social
+      {
+        path: PathConstant.VIEW_CUST_TRUSTING_SOCIAL,
+        loadChildren: './customer-view-trusting-social/customer-view-trusting-social.module#CustomerViewTrustingSocialModule'
       }
     ]
   }

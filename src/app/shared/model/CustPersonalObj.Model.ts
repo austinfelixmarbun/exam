@@ -29,4 +29,37 @@ export class CustPersonalObj {
   VipNotes: string;
   IsAffiliateWithMf: boolean;
   RowVersion: string;
+
+  constructor() {
+    this.CustPersonalId = 0;
+    this.CustId = 0;
+    this.CustFullName = "";
+    this.CustPrefixName = "";
+    this.CustSuffixName = "";
+    this.NickName = "";
+    this.BirthPlace = "";
+    this.BirthDt = new Date();
+    this.MotherMaidenName = "";
+    this.MrGenderCode = "";
+    this.MrReligionCode = "";
+    this.MrEducationCode = "";
+    this.MrNationalityCode = "";
+    this.WnaCountryCode = "";
+    this.MrMaritalStatCode = "";
+    this.MobilePhnNo1 = "";
+    this.MobilePhnNo2 = "";
+    this.MobilePhnNo3 = "";
+    this.Email1 = "";
+    this.Email2 = "";
+    this.Email3 = "";
+    this.FamilyCardNo = "";
+    this.NoOfDependents = "";
+    this.NoOfResidence = "";
+    this.IsRestInPeace = false;
+    this.MrSalutationCode = "";
+    this.IsVip = false;
+    this.VipNotes = "";
+    this.IsAffiliateWithMf = false;
+    this.RowVersion = "";
+  }
 }

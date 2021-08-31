@@ -13,6 +13,9 @@ import { SurveyTaskAssignmentDetailComponent } from './survey-task-assignment-de
 import { SurveyTaskComponent } from './survey-task/survey-task.component';
 import { SurveyResultReviewPagingComponent } from './survey-result-review-paging/survey-result-review-paging.component';
 import { SurveyResultReviewDetailComponent } from './survey-result-review-detail/survey-result-review-detail.component';
+import { SurveyTaskResultDetailComponent } from './survey-task-result-detail/survey-task-result-detail.component';
+import { SurveyTaskResultPagingComponent } from './survey-task-result-paging/survey-task-result-paging.component';
+import { SurveyTaskResultPageComponent } from './survey-task-result-page/survey-task-result-page.component';
 
 
 const routes: Routes = [
@@ -102,7 +105,21 @@ const routes: Routes = [
         data:{
           title: 'Survey Result Review Detail'
         }
-      }      
+      },
+      {
+        path: PathConstant.SRVY_TASK_RESULT_PAGING,
+        component: SurveyTaskResultPagingComponent,
+        data:{
+          title: 'Survey Task Result Paging'
+        }
+      },
+      {
+        path: PathConstant.SRVY_TASK_RESULT_PAGE,
+        component: SurveyTaskResultPageComponent,
+        data:{
+          title: 'Survey Task Result Detail'
+        }
+      }   
     ]
   }
 ];

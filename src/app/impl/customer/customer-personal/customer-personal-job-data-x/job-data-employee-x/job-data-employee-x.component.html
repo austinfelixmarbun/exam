@@ -80,10 +80,10 @@
           </div>
 
           <div class="form-group row adins-required">
-            <label class="col-md-2 adInsLabel adins-required-label" translate>Industry Type Name </label>
+            <label class="col-md-2 adInsLabel adins-required-label" translate>Economic Sector Slik </label>
             <div class="col-md-4">
-              <lib-uclookupgeneric [lookupInput]="industryLookUpObj" [parentForm]="JobDataEmpForm"
-                [enjiForm]="enjiForm" [identifier]="'IndustryTypeCode'" (lookup)=getLookUpIndustry($event)>
+              <lib-uclookupgeneric [lookupInput]="economicSectorSlikLookUpObj" [parentForm]="JobDataEmpForm"
+                [enjiForm]="enjiForm" [identifier]="'EconomicSectorCode'" (lookup)="getLookUpEconomicSectorSlik($event)">
               </lib-uclookupgeneric>
             </div>
           </div>

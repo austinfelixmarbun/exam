@@ -34,6 +34,10 @@ export class CustomerCompanyDetailXComponent implements OnInit {
   custCompanyObj: CustCompanyObj;
   refIndustryTypeObj: RefIndustryTypeObj;
 
+  tempRefSectorEconomySlik: any;
+
+  returnSectorEconomySlikObj: any;
+
   IdCust: number;
   tempRefIndustryTypeId: number = 0;
   Page: String;
@@ -70,9 +74,6 @@ export class CustomerCompanyDetailXComponent implements OnInit {
   async ngOnInit() {
     var datePipe = new DatePipe("en-US");
     this.lookUpObj = new InputLookupObj();
-    this.lookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
-    this.lookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
-    this.lookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
 
     //Lookup Commodity
     this.inputLookupCommodityObj = new InputLookupObj();
@@ -80,6 +81,10 @@ export class CustomerCompanyDetailXComponent implements OnInit {
     this.inputLookupCommodityObj.pagingJson = "./assets/impl/uclookup/lookupCommodity.json";
     this.inputLookupCommodityObj.genericJson = "./assets/impl/uclookup/lookupCommodity.json";
     this.inputLookupCommodityObj.isRequired = true;
+
+    this.lookUpObj.urlJson = "./assets/lookup/lookupRefSectorEconomySlikX.json";
+    this.lookUpObj.pagingJson = "./assets/lookup/lookupRefSectorEconomySlikX.json";
+    this.lookUpObj.genericJson = "./assets/lookup/lookupRefSectorEconomySlikX.json";
 
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
 
@@ -94,26 +99,30 @@ export class CustomerCompanyDetailXComponent implements OnInit {
         this.checkState();
       }
     );
-    this.http.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
+
+
+    this.http.post(URLConstantX.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
       (response) => {
-        this.tempCustCompanyObj = response;
+        this.tempCustCompanyObj = response['responseCustCompanyObj'];
+        this.tempRefSectorEconomySlik = response['RefSectorEconomySlikXId'];
+
         this.CustomerDetailForm.patchValue({
           NumOfEmp: this.tempCustCompanyObj.NumOfEmp,
           EstablishmentDt: datePipe.transform(this.tempCustCompanyObj.EstablishmentDt, 'yyyy-MM-dd'),
           IsSkt: this.tempCustCompanyObj.IsSkt
         });
 
-        if (this.tempCustCompanyObj.RefIndustryTypeId != null) {
-          this.refIndustryTypeObj = new RefIndustryTypeObj();
-          this.refIndustryTypeObj.RefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
-          this.http.post(URLConstant.GetRefIndustryTypeById, { Id: this.tempCustCompanyObj.RefIndustryTypeId }).subscribe(
-              (response) => {
-                this.tempRefIndustryObj = response; 
-                this.tempRefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
-                this.lookUpObj.nameSelect = this.tempRefIndustryObj.IndustryTypeName; 
-                this.lookUpObj.jsonSelect = response;
-              });
-        }
+        // if (this.tempCustCompanyObj.RefIndustryTypeId != null) {
+        //   this.refIndustryTypeObj = new RefIndustryTypeObj();
+        //   this.refIndustryTypeObj.RefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
+        //   this.http.post(URLConstant.GetRefIndustryTypeById, { Id: this.tempCustCompanyObj.RefIndustryTypeId }).subscribe(
+        //       (response) => {
+        //         this.tempRefIndustryObj = response; 
+        //         this.tempRefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
+        //         this.lookUpObj.nameSelect = this.tempRefIndustryObj.IndustryTypeName; 
+        //         this.lookUpObj.jsonSelect = response;
+        //       });
+        // }
       }
     );
     await this.getCustXData();
@@ -129,6 +138,18 @@ export class CustomerCompanyDetailXComponent implements OnInit {
           });
           this.inputLookupCommodityObj.nameSelect = response["CommodityName"];
           this.inputLookupCommodityObj.jsonSelect = { Descr: response["CommodityName"] };
+        }
+
+        if (this.tempCustCompanyObj.RefIndustryTypeId != null && this.tempRefSectorEconomySlik != null &&
+          this.tempCustCompanyObj.RefIndustryTypeId != 0 && this.tempRefSectorEconomySlik != 0) {
+          this.http.post(URLConstantX.GetRefSectorEconomySlikXById, {Id: this.tempRefSectorEconomySlik}).subscribe(
+            (response) => {
+              this.returnSectorEconomySlikObj = response;
+              this.lookUpObj.nameSelect = this.returnSectorEconomySlikObj.SectorEconomySlikName;
+              this.lookUpObj.jsonSelect = this.returnSectorEconomySlikObj;
+              this.tempRefIndustryTypeId = this.returnSectorEconomySlikObj.RefIndustryTypeId;
+            }
+          );
         }
       }
     );
@@ -146,7 +167,7 @@ export class CustomerCompanyDetailXComponent implements OnInit {
     this.custCompanyObj.IsAffiliateWithMf = this.CustomerDetailForm.controls["IsAffiliateWithMf"].value;
     this.custCompanyObj.MrCustModelCode = this.CustomerDetailForm.controls["MrCustModelCode"].value;
 
-    if (this.tempRefIndustryObj != null && this.tempRefIndustryTypeId === null) {
+    if (this.returnSectorEconomySlikObj != null && this.tempRefIndustryTypeId === null) {
       this.custCompanyObj.RefIndustryTypeId = this.custCompanyObj.RefIndustryTypeId;
     }
     else {
@@ -158,12 +179,18 @@ export class CustomerCompanyDetailXComponent implements OnInit {
       MrCommodityCode: this.CustomerDetailForm.controls.CommodityCode.value,
     };
 
-    let obj = {
-      CustCompanyObj: this.custCompanyObj,
-      CustXObj: custXObj
+    let CustCompanyObjX = {
+      CustId: this.IdCust,
+      RefSectorEconomySlikXId: this.tempRefSectorEconomySlik
     }
 
-    this.http.post(URLConstantX.EditCustCompany, obj).subscribe(
+    let reqObj = {
+      CustCompanyObj: this.custCompanyObj,
+      CustXObj: custXObj,
+      CustCompanyObjX: CustCompanyObjX
+    }
+
+    this.http.post(URLConstantX.EditCustCompany, reqObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);
         this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next' });
@@ -172,6 +199,7 @@ export class CustomerCompanyDetailXComponent implements OnInit {
   }
 
   getLookUp(event) {
+    this.tempRefSectorEconomySlik = event.RefSectorEconomySlikXId;
     this.tempRefIndustryTypeId = event.RefIndustryTypeId;
   }
 

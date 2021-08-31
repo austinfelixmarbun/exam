@@ -2,7 +2,7 @@ import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -14,10 +14,9 @@ import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
 import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 import { CustFormExistingObj } from 'app/shared/model/NewCust/Shareholder/ShareholderFormExistingObj.Model';
 import { RefCountry } from 'app/shared/model/RefCountry.Model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
@@ -35,7 +34,7 @@ export class FamilyFormComponent implements OnInit {
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
   @Output() outputExisting: EventEmitter<CustFormExistingObj> = new EventEmitter();
-  @Output() outputChange: EventEmitter<{Key: string, Code: string}> = new EventEmitter();
+  @Output() outputChange: EventEmitter<{ Key: string, Code: string }> = new EventEmitter();
 
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
   readonly RefMasterTypeCodeNationality: string = CommonConstant.RefMasterTypeCodeNationality;
@@ -95,6 +94,14 @@ export class FamilyFormComponent implements OnInit {
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
+    let listCriteriaObj: Array<CriteriaObj> = new Array();
+    let criteriaCustObj = new CriteriaObj();
+    criteriaCustObj.DataType = "text";
+    criteriaCustObj.restriction = AdInsConstant.RestrictionEq;
+    criteriaCustObj.propName = 'MR_CUST_MODEL_CODE';
+    criteriaCustObj.value = "";
+    listCriteriaObj.push(criteriaCustObj);
+    this.professionLookUpObj.addCritInput = listCriteriaObj;
   }
 
   lookUpObjCountry: InputLookupObj = new InputLookupObj();
@@ -167,7 +174,7 @@ export class FamilyFormComponent implements OnInit {
         if (!response.RefProfessionId) return;
         await this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
           (response: RefProfessionObj) => {
-            this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: response.ProfessionCode});
+            this.outputChange.emit({ Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: response.ProfessionCode });
             this.professionLookUpObj.nameSelect = response.ProfessionName;
             this.professionLookUpObj.jsonSelect = response;
           });
@@ -201,7 +208,7 @@ export class FamilyFormComponent implements OnInit {
     this.parentForm.patchValue({
       RefProfessionId: event.RefProfessionId,
     });
-    this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: event.ProfessionCode});
+    this.outputChange.emit({ Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: event.ProfessionCode });
   }
 
   getLookUpJobPosition(ev) {
@@ -222,18 +229,16 @@ export class FamilyFormComponent implements OnInit {
   PatchCriteriaLookupProfession() {
     let tempCustModel: string = this.parentForm.get("MrCustModelCode").value;
 
-    if (tempCustModel != "") {
-      let listCriteriaObj: Array<CriteriaObj> = new Array();
-      let criteriaCustObj = new CriteriaObj();
-      criteriaCustObj.DataType = "text";
-      criteriaCustObj.restriction = AdInsConstant.RestrictionEq;
-      criteriaCustObj.propName = 'MR_CUST_MODEL_CODE';
-      criteriaCustObj.value = tempCustModel;
-      listCriteriaObj.push(criteriaCustObj);
+    let listCriteriaObj: Array<CriteriaObj> = new Array();
+    let criteriaCustObj = new CriteriaObj();
+    criteriaCustObj.DataType = "text";
+    criteriaCustObj.restriction = AdInsConstant.RestrictionEq;
+    criteriaCustObj.propName = 'MR_CUST_MODEL_CODE';
+    criteriaCustObj.value = tempCustModel;
+    listCriteriaObj.push(criteriaCustObj);
 
-      this.professionLookUpObj.addCritInput = listCriteriaObj;
-      this.ucLookupProfession.setAddCritInput();
-    }
+    this.professionLookUpObj.addCritInput = listCriteriaObj;
+    this.ucLookupProfession.setAddCritInput();
   }
 
   getLookUpCountry(ev) {
@@ -244,9 +249,9 @@ export class FamilyFormComponent implements OnInit {
 
   changeCustModel() {
     this.ResetLookupProfession();
-    this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: ""});
+    this.outputChange.emit({ Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: "" });
   }
-  
+
   IsLocal: boolean = true;
   onOptionsSelected(event: { selectedIndex: number, selectedObj: KeyValueObj, selectedValue: string }) {
     if (event.selectedValue == CommonConstant.NationalityCodeLocal) {

@@ -23,13 +23,14 @@ import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
 import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
 import { CookieService } from 'ngx-cookie';
 
+
 @Component({
   selector: 'app-job-data-employee-x',
   templateUrl: './job-data-employee-x.component.html',
   styleUrls: ['./job-data-employee-x.component.css']
 })
-export class JobDataEmployeeXComponent implements OnInit {
 
+export class JobDataEmployeeXComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
 
   jobAddrId: number;
@@ -56,8 +57,9 @@ export class JobDataEmployeeXComponent implements OnInit {
   listCompanyScale: any;
   tempProfession: any;
   tempRefIndustryType: any;
+  tempRefSectorEconomySlik: any;
   professionLookUpObj: InputLookupObj;
-  industryLookUpObj: InputLookupObj;
+  economicSectorSlikLookUpObj: InputLookupObj;
   companyLookupObj: InputLookupObj;
   inputLookupCommodityObj: InputLookupObj;
   custPersonalJobDataObj: CustPersonalJobDataObj;
@@ -66,8 +68,7 @@ export class JobDataEmployeeXComponent implements OnInit {
   refProfessionObj: RefProfessionObj;
   returnRefProfessionObj: any;
   reqCustPersonalJobDataObj: RequestCustPersonalJobDataObj;
-  refIndustryTypeObj: RefIndustryTypeObj;
-  returnIndustryTypeObj: any;
+  returnSectorEconomySlikObj: any;
   custJobAddrObj: CustAddrObj;
   custOthBizAddrObj: CustAddrObj;
   getJobAddr: any;
@@ -140,7 +141,8 @@ export class JobDataEmployeeXComponent implements OnInit {
     this.tempProfession = event.RefProfessionId;
   }
 
-  getLookUpIndustry(event) {
+  getLookUpEconomicSectorSlik(event) {
+    this.tempRefSectorEconomySlik = event.RefSectorEconomySlikXId;
     this.tempRefIndustryType = event.RefIndustryTypeId;
     this.IndustryTypeCategoryName = event.RefIndustryTypeCategoryName;
     this.EconomicSectorName =  event.EconomicSectorName;
@@ -197,11 +199,11 @@ export class JobDataEmployeeXComponent implements OnInit {
     listCriteriaObj.push(criteriaCustObj);
     this.professionLookUpObj.addCritInput = listCriteriaObj;
 
-    this.industryLookUpObj = new InputLookupObj();
-    this.industryLookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
-    this.industryLookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
-    this.industryLookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
-    this.industryLookUpObj.isRequired = false;
+    this.economicSectorSlikLookUpObj = new InputLookupObj();
+    this.economicSectorSlikLookUpObj.urlJson = "./assets/lookup/lookupRefSectorEconomySlikX.json";
+    this.economicSectorSlikLookUpObj.pagingJson = "./assets/lookup/lookupRefSectorEconomySlikX.json";
+    this.economicSectorSlikLookUpObj.genericJson = "./assets/lookup/lookupRefSectorEconomySlikX.json";
+    this.economicSectorSlikLookUpObj.isRequired = false;
 
     this.companyLookupObj = new InputLookupObj();
     this.companyLookupObj.urlJson = "./assets/uclookup/Customer/lookupCompany.json";
@@ -272,9 +274,10 @@ export class JobDataEmployeeXComponent implements OnInit {
 
     this.custJobDataObj = new CustPersonalJobDataObj();
     this.custJobDataObj.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustPersonalJobDataByCustId, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstantX.GetCustPersonalJobDataByCustId, {Id : this.IdCust}).subscribe(
       (response: any) => {
-        this.returnCustJobDataObj = response;
+        this.returnCustJobDataObj = response['responseCustPersonalJobDataObj'];
+        this.tempRefSectorEconomySlik = response['RefSectorEconomySlikXId'];
 
         if (this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
           this.JobDataEmpForm.patchValue({
@@ -313,15 +316,14 @@ export class JobDataEmployeeXComponent implements OnInit {
             );
           }
 
-          if (this.returnCustJobDataObj.RefIndustryTypeId != null) {
-            this.refIndustryTypeObj = new RefIndustryTypeObj();
-            this.refIndustryTypeObj.RefIndustryTypeId = this.returnCustJobDataObj.RefIndustryTypeId;
-            this.http.post(URLConstant.GetRefIndustryTypeById, {Id: this.returnCustJobDataObj.RefIndustryTypeId}).subscribe(
+          if (this.returnCustJobDataObj.RefIndustryTypeId != null && this.tempRefSectorEconomySlik != null &&
+            this.returnCustJobDataObj.RefIndustryTypeId != 0 && this.tempRefSectorEconomySlik != 0) {
+            this.http.post(URLConstantX.GetRefSectorEconomySlikXById, {Id: this.tempRefSectorEconomySlik}).subscribe(
               (response) => {
-                this.returnIndustryTypeObj = response;
-                this.industryLookUpObj.nameSelect = this.returnIndustryTypeObj.IndustryTypeName;
-                this.industryLookUpObj.jsonSelect = this.returnIndustryTypeObj;
-                this.tempRefIndustryType = this.returnIndustryTypeObj.RefIndustryTypeId;
+                this.returnSectorEconomySlikObj = response;
+                this.economicSectorSlikLookUpObj.nameSelect = this.returnSectorEconomySlikObj.SectorEconomySlikName;
+                this.economicSectorSlikLookUpObj.jsonSelect = this.returnSectorEconomySlikObj;
+                this.tempRefIndustryType = this.returnSectorEconomySlikObj.RefIndustryTypeId;
               }
             );
           }
@@ -617,12 +619,18 @@ export class JobDataEmployeeXComponent implements OnInit {
         MrCommodityCode: this.JobDataEmpForm.controls.CommodityCode.value,
       };
 
-      let obj = {
+      let CustPersonalJobDataObjX = {
+        CustId: this.IdCust,
+        RefSectorEconomySlikXId: this.tempRefSectorEconomySlik
+      }
+
+      let reqObj = {
         CustPersonalJobDataObj: this.reqCustPersonalJobDataObj,
+        CustPersonalJobDataObjX: CustPersonalJobDataObjX,
         CustXObj: custXObj
       }
 
-      this.http.post(URLConstantX.EditCustPersonalJobData, obj).subscribe(
+      this.http.post(URLConstantX.EditCustPersonalJobData, reqObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputTab.emit({ stepMode: "next" });
@@ -650,12 +658,18 @@ export class JobDataEmployeeXComponent implements OnInit {
         MrCommodityCode: this.JobDataEmpForm.controls.CommodityCode.value,
       };
 
-      let obj = {
+      let CustPersonalJobDataObjX = {
+        CustId: this.IdCust,
+        RefSectorEconomySlikXId: this.tempRefSectorEconomySlik
+      }
+
+      let reqObj = {
         CustPersonalJobDataObj: this.reqCustPersonalJobDataObj,
+        CustPersonalJobDataObjX: CustPersonalJobDataObjX,
         CustXObj: custXObj
       }
 
-      this.http.post(URLConstantX.AddCustPersonalJobData, obj).subscribe(
+      this.http.post(URLConstantX.AddCustPersonalJobData, reqObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputTab.emit({ stepMode: "next" });

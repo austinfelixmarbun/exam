@@ -9,8 +9,7 @@
   <div class="card-body">
     <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
     <div class="px-3">
-      <form class="form form-horizontal" [formGroup]="SurveyTaskForm" (ngSubmit)="SurveyTaskForm.valid && SaveForm()"
-        #enjiForm="ngForm">
+      <form class="form form-horizontal" [formGroup]="SurveyTaskForm" (ngSubmit)="SurveyTaskForm.valid && SaveForm()" #enjiForm="ngForm">
         <lib-ucSubsection [id]="'SurveyTaskListId'" [title]="'Survey Task List'" [panel]="'SurveyTaskList'">
         </lib-ucSubsection>
         <div id="SurveyTaskList">
@@ -24,9 +23,9 @@
                 <th><span translate class="thead-header text-center">Address</span></th>
                 <th><span translate class="thead-header text-center">Survey Task Status</span></th>
                 <th><span translate class="thead-header text-center">Survey Type</span></th>
+                <th><span translate class="thead-header text-center">National</span></th>
                 <th><span translate class="thead-header text-center">Surveyor</span></th>
                 <th><span translate class="thead-header text-center">Survey Form</span></th>
-                <th><span translate class="thead-header text-center">National</span></th>
                 <th><span translate class="thead-header text-center">Cancel</span></th>
               </tr>
             </thead>
@@ -45,9 +44,8 @@
                 <td [formGroupName]="i" class="text-center">
                   {{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["SurveyObject"].value}}
                 </td>
-                <td [formGroupName]="i" class="text-center">                  
-                  <a target="_blank" [routerLink]="[ViewCustLink]" skipLocationChange
-                    [queryParams]="{ CustId: SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']['CustId'].value}">{{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["SurveyeeName"].value}}</a>
+                <td [formGroupName]="i" class="text-center">
+                  {{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["SurveyeeName"].value}}
                 </td>
                 <td [formGroupName]="i" class="text-center">
                   {{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["Address"].value}}
@@ -62,20 +60,6 @@
                     </option>
                   </select>
                 </td>
-                <td [formGroupName]="i" class="text-center">
-                  <lib-uclookupgeneric
-                    [lookupInput]="surveyorNumber[SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls'].No.value]"
-                    [parentForm]='SurveyTaskForm' [enjiForm]='enjiForm'
-                    [identifier]="'lookupSurveyorObj' + SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls'].No.value"
-                    (lookup)="getLookupSurveyor(i,$event)" #dyna></lib-uclookupgeneric>
-                </td>
-                <td [formGroupName]="i" class="text-center">
-                  <select formControlName="SurveyForm" class="form-control" name="SurveyForm">
-                    <option value="">--Select--</option>
-                    <option *ngFor="let surveyForm of dropdownSurveyFormSchm" [value]="surveyForm.Key">
-                      {{surveyForm.Value}}</option>
-                  </select>
-                </td>
                 <td [formGroupName]="i">
                   <div>
                     <label class="radio-inline">
@@ -86,7 +70,29 @@
                       <input type="radio" value="No" formControlName="National" (change)="onNationalSelect(i,$event)">No
                     </label>
                   </div>
-
+                </td>
+                <td [formGroupName]="i" class="text-center">
+                  <div [hidden]="!isNational[i]">
+                    <lib-uclookupgeneric
+                      [lookupInput]="surveyorNumber[SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls'].No.value]"
+                      [parentForm]='SurveyTaskForm' [enjiForm]='enjiForm'
+                      [identifier]="'lookupSurveyorObj' + SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls'].No.value"
+                      (lookup)="getLookupSurveyor(i,$event)" #dyna></lib-uclookupgeneric>
+                  </div>
+                  <div [hidden]="isNational[i]">
+                    <lib-uclookupgeneric
+                      [lookupInput]="surveyorNumberNationNo[SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls'].No.value]"
+                      [parentForm]='SurveyTaskForm' [enjiForm]='enjiForm'
+                      [identifier]="'lookupSurveyorNationNoObj' + SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls'].No.value"
+                      (lookup)="getLookupSurveyor(i,$event)" #dyna></lib-uclookupgeneric>
+                  </div>
+                </td>
+                <td [formGroupName]="i" class="text-center">
+                  <select formControlName="SurveyForm" class="form-control" name="SurveyForm">
+                    <option value="">--Select--</option>
+                    <option *ngFor="let surveyForm of dropdownSurveyFormSchm" [value]="surveyForm.Key">
+                      {{surveyForm.Value}}</option>
+                  </select>
                 </td>
                 <td>
                   <i *ngIf="SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']['SurveyTaskStatus'].value != 'CANCELLED'"

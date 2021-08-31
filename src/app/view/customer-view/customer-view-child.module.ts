@@ -26,6 +26,7 @@ import { CustomerViewCoyAddressComponent } from "./customer-view-coy-address/cus
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { createTranslateLoader } from "app/app.module";
 import { HttpClient } from "@angular/common/http";
+import { CustomerViewTrustingSocialComponent } from "./customer-view-trusting-social/customer-view-trusting-social.component";
 
 
 @NgModule({
