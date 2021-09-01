@@ -121,6 +121,16 @@
             </div>
         </div>
 
+        <div class="form-group row adins-required">
+          <label class="col-md-2 adInsLabel adins-required-label" translate>Commodity</label>
+          <div class="col-md-4">
+            <lib-uclookupgeneric [lookupInput]="inputLookupCommodityObj" [parentForm]='JobDataEmpForm' 
+              [enjiForm]='enjiForm' [identifier]="'commodityIdentifier'"
+              (lookup)="setLookupCommodityData($event)">
+            </lib-uclookupgeneric>
+          </div>
+        </div>
+
           <div class="form-group row adins-required">
             <label class="col-md-2 adInsLabel adins-required-label" translate>Employment Establishment Date </label>
             <div class="col-md-4">
@@ -145,6 +155,7 @@
         <div id="jobAddr">
           <div id="CustMainDataPersonal"> 
             <lib-ucaddress #UcAddrGrp [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [UCAddrForm]="JobDataEmpForm"></lib-ucaddress> 
+            <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Job Address'" [UCAddrForm]="JobDataEmpForm" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [default]="addressObj" [inputField]="inputJobAddressObj" [showOwnership]="true"></lib-ucaddress> -->
           </div>
           <div class="form-group row">
             <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
@@ -181,6 +192,7 @@
         </lib-ucSubsection>
         <div id="prejobAddr">
           <lib-ucaddress #UcAddrGrp [addressObj]="inputPreviousAddressObj" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [UCAddrForm]="JobDataEmpForm"></lib-ucaddress> 
+          <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Previous Job Address'" [UCAddrForm]="JobDataEmpForm" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [default]="preJobAddrObj" [inputField]="inputPreJobAddressObj" [showOwnership]="true"></lib-ucaddress> -->
           <div class="form-group row">
               <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
               <div class="col-md-4">

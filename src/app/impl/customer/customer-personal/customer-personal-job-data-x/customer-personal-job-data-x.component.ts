@@ -1,20 +1,22 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute } from '@angular/router';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CustObj } from 'app/shared/model/CustObj.Model';
 import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 
 @Component({
   selector: 'app-customer-personal-job-data-x',
-  templateUrl: './customer-personal-job-data-x.component.html'
+  templateUrl: './customer-personal-job-data-x.component.html',
+  styleUrls: ['./customer-personal-job-data-x.component.css']
 })
 export class CustomerPersonalJobDataXComponent implements OnInit {
+
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
   tempCustModel: Array<KeyValueObj> = new Array<KeyValueObj>();
 
@@ -60,4 +62,5 @@ export class CustomerPersonalJobDataXComponent implements OnInit {
   getValue(ev) {
     this.outputTab.emit({ stepMode: ev.stepMode })
   }
+
 }

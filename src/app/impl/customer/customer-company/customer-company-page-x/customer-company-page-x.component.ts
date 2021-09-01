@@ -1,21 +1,23 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { DMSObj } from 'app/shared/model/DMS/DMSObj.model';
-import { DMSLabelValueObj } from 'app/shared/model/DMS/DMSLabelValueObj.Model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { CookieService } from 'ngx-cookie';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { DMSLabelValueObj } from 'app/shared/model/DMS/DMSLabelValueObj.Model';
+import { DMSObj } from 'app/shared/model/DMS/DMSObj.model';
+import { ResSysConfigResultObj } from 'app/shared/model/Response/ResSysConfigResultObj,model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { PathConstant } from 'app/shared/PathConstant';
-import { ResSysConfigResultObj } from 'app/shared/model/Response/ResSysConfigResultObj,model';
 import Stepper from 'bs-stepper';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-customer-company-page-x',
-  templateUrl: './customer-company-page-x.component.html'
+  templateUrl: './customer-company-page-x.component.html',
+  styleUrls: ['./customer-company-page-x.component.css']
 })
+
 export class CustomerCompanyPageXComponent implements OnInit {
   private stepper: Stepper;
 
@@ -162,4 +164,5 @@ export class CustomerCompanyPageXComponent implements OnInit {
       }
     }
   }
+
 }

@@ -1,31 +1,35 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { ActivatedRoute } from '@angular/router';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
 import { formatDate } from '@angular/common';
-import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { CookieService } from 'ngx-cookie';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
+import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
+import { CookieService } from 'ngx-cookie';
+
 
 @Component({
   selector: 'app-job-data-employee-x',
-  templateUrl: './job-data-employee-x.component.html'
+  templateUrl: './job-data-employee-x.component.html',
+  styleUrls: ['./job-data-employee-x.component.css']
 })
+
 export class JobDataEmployeeXComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
 
@@ -57,6 +61,7 @@ export class JobDataEmployeeXComponent implements OnInit {
   professionLookUpObj: InputLookupObj;
   economicSectorSlikLookUpObj: InputLookupObj;
   companyLookupObj: InputLookupObj;
+  inputLookupCommodityObj: InputLookupObj;
   custPersonalJobDataObj: CustPersonalJobDataObj;
   custJobDataObj: CustPersonalJobDataObj;
   returnCustJobDataObj: any;
@@ -78,6 +83,7 @@ export class JobDataEmployeeXComponent implements OnInit {
   IndustryTypeCategoryName : string;
   IndustryTypeName: string;
   IsShowData : boolean =false;
+
   JobDataEmpForm = this.fb.group({
     JobDataType: [''],
     ProfessionName: [''],
@@ -107,7 +113,8 @@ export class JobDataEmployeeXComponent implements OnInit {
     PreviIndustryName: [''],
     PreviEmploymentDate: [''],
     NotesPreJob: [''],
-    NoOfEmploy: ['']
+    NoOfEmploy: [''],
+    CommodityCode: ['']
   });
   businessDtMin: Date;
   inputAddressObj: InputAddressObj;
@@ -143,7 +150,7 @@ export class JobDataEmployeeXComponent implements OnInit {
     this.IsShowData = true;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Job Address";
@@ -203,6 +210,15 @@ export class JobDataEmployeeXComponent implements OnInit {
     this.companyLookupObj.pagingJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.genericJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.isRequired = true;
+
+
+    //Lookup Commodity
+    this.inputLookupCommodityObj = new InputLookupObj();
+    this.inputLookupCommodityObj.urlJson = "./assets/impl/uclookup/lookupCommodity.json";
+    this.inputLookupCommodityObj.pagingJson = "./assets/impl/uclookup/lookupCommodity.json";
+    this.inputLookupCommodityObj.genericJson = "./assets/impl/uclookup/lookupCommodity.json";
+    this.inputLookupCommodityObj.isRequired = true;
+
 
     this.companyLookupObj.addCritInput = new Array();
     this.ArrAddCritCoy = new Array<CriteriaObj>();
@@ -447,6 +463,22 @@ export class JobDataEmployeeXComponent implements OnInit {
         }
       }
     );
+    await this.getCustXData();
+  }
+
+  async getCustXData()
+  {
+    await this.http.post(URLConstantX.GetCustXByCustId, {Id: this.IdCust}).toPromise().then(
+      (response) => {
+        if(response["CustXId"] != 0){
+          this.JobDataEmpForm.patchValue({
+            CommodityCode: response["MrCommodityCode"]
+          });
+          this.inputLookupCommodityObj.nameSelect = response["CommodityName"];
+          this.inputLookupCommodityObj.jsonSelect = { Descr: response["CommodityName"] };
+        }
+      }
+    );
   }
 
   setJobAddr() {
@@ -582,6 +614,11 @@ export class JobDataEmployeeXComponent implements OnInit {
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_EMP;
       
+      let custXObj = {
+        CustId: this.IdCust,
+        MrCommodityCode: this.JobDataEmpForm.controls.CommodityCode.value,
+      };
+
       let CustPersonalJobDataObjX = {
         CustId: this.IdCust,
         RefSectorEconomySlikXId: this.tempRefSectorEconomySlik
@@ -589,7 +626,8 @@ export class JobDataEmployeeXComponent implements OnInit {
 
       let reqObj = {
         CustPersonalJobDataObj: this.reqCustPersonalJobDataObj,
-        CustPersonalJobDataObjX: CustPersonalJobDataObjX
+        CustPersonalJobDataObjX: CustPersonalJobDataObjX,
+        CustXObj: custXObj
       }
 
       this.http.post(URLConstantX.EditCustPersonalJobData, reqObj).subscribe(
@@ -615,6 +653,11 @@ export class JobDataEmployeeXComponent implements OnInit {
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_EMP;
 
+      let custXObj = {
+        CustId: this.IdCust,
+        MrCommodityCode: this.JobDataEmpForm.controls.CommodityCode.value,
+      };
+
       let CustPersonalJobDataObjX = {
         CustId: this.IdCust,
         RefSectorEconomySlikXId: this.tempRefSectorEconomySlik
@@ -622,7 +665,8 @@ export class JobDataEmployeeXComponent implements OnInit {
 
       let reqObj = {
         CustPersonalJobDataObj: this.reqCustPersonalJobDataObj,
-        CustPersonalJobDataObjX: CustPersonalJobDataObjX
+        CustPersonalJobDataObjX: CustPersonalJobDataObjX,
+        CustXObj: custXObj
       }
 
       this.http.post(URLConstantX.AddCustPersonalJobData, reqObj).subscribe(
@@ -644,4 +688,11 @@ export class JobDataEmployeeXComponent implements OnInit {
       IndustryName: event.Descr
     });
   }
+
+  setLookupCommodityData(ev){
+    this.JobDataEmpForm.patchValue({
+      CommodityCode: ev.MasterCode
+    });
+  }
+
 }

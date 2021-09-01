@@ -1,25 +1,26 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { DMSLabelValueObj } from 'app/shared/model/DMS/DMSLabelValueObj.Model';
+import { DMSObj } from 'app/shared/model/DMS/DMSObj.model';
+import { ResSysConfigResultObj } from 'app/shared/model/Response/ResSysConfigResultObj,model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { PathConstant } from 'app/shared/PathConstant';
+import Stepper from 'bs-stepper';
+import { CookieService } from 'ngx-cookie';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
-import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import Stepper from 'bs-stepper';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { DMSObj } from 'app/shared/model/DMS/DMSObj.model';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { DMSLabelValueObj } from 'app/shared/model/DMS/DMSLabelValueObj.Model';
-import { CookieService } from 'ngx-cookie';
-import { PathConstant } from 'app/shared/PathConstant';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ResSysConfigResultObj } from 'app/shared/model/Response/ResSysConfigResultObj,model';
-import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+
 @Component({
   selector: 'app-customer-personal-page-x',
   templateUrl: './customer-personal-page-x.component.html',
-  styleUrls: [],
+  styleUrls: ['./customer-personal-page-x.component.css'],
   providers: [NGXToastrService],
 })
 export class CustomerPersonalPageXComponent implements OnInit {
