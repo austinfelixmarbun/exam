@@ -126,8 +126,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page-x/customer-personal-page-x.component';
 import { CustomerPersonalJobDataXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/customer-personal-job-data-x.component';
 import { JobDataEmployeeXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-employee-x/job-data-employee-x.component';
+import { JobDataNonProfessionalXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-non-professional-x/job-data-non-professional-x.component';
 import { JobDataProfessionalXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-professional-x/job-data-professional-x.component';
-import { JobDataSmeXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-sme-x/job-data-sme-x.component';
+import { JobDataSmeXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-small-medium-enterprise-x/job-data-small-medium-enterprise-x.component';
 import { CustomerCompanyPageXComponent } from 'app/impl/customer/customer-company/customer-company-page-x/customer-company-page-x.component';
 import { CustomerCompanyDetailXComponent } from 'app/impl/customer/customer-company/customer-company-detail-x/customer-company-detail-x.component';
 import { CustomerViewChildModule } from 'app/view/customer-view/customer-view-child.module';
@@ -193,6 +194,7 @@ export const customCurrencyMaskConfig = {
     CustomerCompanyAddressComponent,
     CustomerCompanyAddressAddComponent,
     CustomerPersonalJobDataComponent,
+    CustomerPersonalJobDataXComponent,
     JobDataNonProfessionalComponent,
     JobDataProfessionalComponent,
     JobDataEmployeeComponent,
@@ -271,6 +273,8 @@ export const customCurrencyMaskConfig = {
     CustAssetComponent,
     CustomerViewCustomerAssetComponent,
     CustomerPersonalPageXComponent,
+    JobDataEmployeeXComponent,
+    JobDataNonProfessionalXComponent,
     CustomerPersonalJobDataXComponent,
     JobDataEmployeeXComponent,
     JobDataProfessionalXComponent,

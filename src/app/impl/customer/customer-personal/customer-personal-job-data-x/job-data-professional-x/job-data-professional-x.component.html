@@ -52,6 +52,16 @@
               </label>
             </div>
           </div>
+          <div class="form-group row adins-required">
+            <label class="col-md-2 adInsLabel adins-required-label" translate>Commodity</label>
+            <div class="col-md-4">
+              <lib-uclookupgeneric [lookupInput]="inputLookupCommodityObj" [parentForm]='JobDataProForm' 
+                [enjiForm]='enjiForm' [identifier]="'commodityIdentifier'"
+                (lookup)="setLookupCommodityData($event)">
+              </lib-uclookupgeneric>
+            </div>
+          </div>
+
           <div class="form-group row">
               <label class="col-md-2 adInsLabel adins-required-label" translate>Establishment Date </label>
               <div class="col-md-4">
@@ -61,11 +71,13 @@
               </div>
           </div>
         </div>
-          <lib-ucSubsection [id]="'custAddrId'" [title]="'Address'" [panel]="'jobAddress'">
+
+          <lib-ucSubsection [id]="'jobAddrId'" [title]="'Address'" [panel]="'jobAddress'">
           </lib-ucSubsection>
           <div id="jobAddress">
               <div id="CustMainDataPersonal"> 
                 <lib-ucaddress #UcAddrGrp [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [UCAddrForm]="JobDataProForm"></lib-ucaddress>
+                  <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Job Address'" [UCAddrForm]="JobDataProForm" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [default]="addressObj" [inputField]="inputFieldAddressObj" [showOwnership]="true"></lib-ucaddress> -->
               </div>
               <div class="form-group row">
                   <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
@@ -94,13 +106,15 @@
                 [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.PreviEmploymentDate.invalid }">
               <lib-uc-show-errors [control]="JobDataProForm.controls.PreviEmploymentDate" [submit]="enjiForm.submitted"></lib-uc-show-errors>
             </div>
-        </div>
           </div>
+        </div>
+        
           <lib-ucSubsection [id]="'prejobAddrId'" [title]="'Previous Job Address'" [panel]="'prejobAddr'">
           </lib-ucSubsection>
           <div id="prejobAddr">
               <div> 
                 <lib-ucaddress #UcAddrGrp [addressObj]="inputPreviousAddressObj" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [UCAddrForm]="JobDataProForm"></lib-ucaddress>
+                  <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Previous Job Address'" [UCAddrForm]="JobDataProForm" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [default]="preJobAddrObj" [inputField]="inputPreJobAddressObj" [showOwnership]="true"></lib-ucaddress> -->
               </div>
               <div class="form-group row">
                   <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
@@ -160,6 +174,7 @@
           <div id="otherBusinessAddr">
               <div id="CustMainDataPersonal">
                 <lib-ucaddress [addressObj]="inputOthBizAddressObj" [enjiForm]="enjiForm" [identifier]="'otherBusinessAddress'" [UCAddrForm]="JobDataProForm"></lib-ucaddress>
+                  <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Other Business Address'" [UCAddrForm]="JobDataProForm" [enjiForm]="enjiForm" [identifier]="'otherBusinessAddress'" [default]="otherAddrObj" [inputField]="inputOtherAddressObj" [showOwnership]="true"></lib-ucaddress> -->
               </div>
               <div class="form-group row">
                   <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>

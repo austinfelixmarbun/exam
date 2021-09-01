@@ -19,6 +19,8 @@ export class PathConstantX{
     public static LR_CUST = "Customer";
     public static CUST_PERSONAL = "CustomerPersonal";
     public static NEW_CUST = "NewCustomerX";
+    public static CUST_NON_PRO = "NonProX";
+    public static CUST_PERSONAL_JOB_DATA_NON_PRO = PathConstant.CUST_PERSONAL + "/" + PathConstant.CUST_JOB_DATA + "/" + PathConstantX.CUST_NON_PRO;
     public static CUST_PERSONAL_PAGE = PathConstant.CUST_PERSONAL + "/" + PathConstantX.CUST_PAGE;
     public static CUST_COY_PAGE = PathConstant.CUST_COY + "/" + PathConstantX.CUST_PAGE;
     public static CUST_PERSONAL_JOB_DATA = PathConstant.CUST_PERSONAL + "/" + PathConstantX.CUST_JOB_DATA;
@@ -31,6 +33,8 @@ export class PathConstantX{
     public static VENDOR_HOLDING_DETAIL = PathConstant.VENDOR_HOLDING + "/" + PathConstantX.DETAIL;
     public static VENDOR_BRANCH_EMP_PAGING = PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_EMP + "/" + PathConstantX.PAGING;
     public static VENDOR_BRANCH_EMP_DETAIL = PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_EMP + "/" + PathConstantX.DETAIL;
+    public static VENDOR_GRADING_REQUEST_PAGING = PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstantX.PAGING;
+    public static VENDOR_GRADING_REQUEST_DETAIL = PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstantX.DETAIL;
     //#endregion
 
 }

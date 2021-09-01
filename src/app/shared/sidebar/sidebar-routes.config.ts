@@ -90,7 +90,7 @@ export const ROUTES: RouteInfo[] = [
         IsExternalLink: false,
         Submenu: [
           {
-            Path: "/Vendor/VendorGrading/Request/Paging",
+            Path: NavigationConstant.VENDOR_GRD_REQ_PAGING,
             Title: "Vendor Grading Request",
             Icon: "",
             Class: "",

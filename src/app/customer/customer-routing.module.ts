@@ -32,9 +32,10 @@ import { CustomerUpdateMasterDetailComponent } from './customer-update-master/cu
 import { PathConstant } from 'app/shared/PathConstant';
 import { NewCustHeaderComponent } from './sharing-component/new-cust-header/new-cust-header.component';
 import { PathConstantX } from 'app/impl/shared/PathConstantX';
-import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header-x/new-cust-header-x.component';
 import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page-x/customer-personal-page-x.component';
 import { CustomerPersonalJobDataXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/customer-personal-job-data-x.component';
+import { JobDataNonProfessionalXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-non-professional-x/job-data-non-professional-x.component';
+import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header-x/new-cust-header-x.component';
 import { CustomerCompanyPageXComponent } from 'app/impl/customer/customer-company/customer-company-page-x/customer-company-page-x.component';
 
 const routes: Routes = [
@@ -125,6 +126,13 @@ const routes: Routes = [
         }
       },
       {
+        path: PathConstantX.CUST_PERSONAL_PAGE,
+        component: CustomerPersonalPageXComponent,
+        data: {
+          title: 'Customer Personal DuplicateCheck  '
+        }
+      },
+      {
         path: PathConstant.CUST_VIEW_PAGE,
         component: CustomerViewComponent,
         data: {
@@ -167,6 +175,13 @@ const routes: Routes = [
         }
       },
       {
+        path: PathConstantX.CUST_PERSONAL_JOB_DATA,
+        component: CustomerPersonalJobDataXComponent,
+        data: {
+          title: 'Customer Personal Job Data'
+        }
+      },
+      {
         path: PathConstant.CUST_PERSONAL_JOB_DATA_NON_PRO,
         component: JobDataNonProfessionalComponent,
         data: {
@@ -174,8 +189,22 @@ const routes: Routes = [
         }
       },
       {
+        path: PathConstantX.CUST_PERSONAL_JOB_DATA_NON_PRO,
+        component: JobDataNonProfessionalXComponent,
+        data: {
+          title: 'Customer Personal Job Data'
+        }
+      },
+      {
         path: PathConstant.CUST_COY_PAGE,
         component: CustomerCompanyPageComponent,
+        data: {
+          title: 'Customer Company Page'
+        }
+      },
+      {
+        path: PathConstantX.CUST_COY_PAGE,
+        component: CustomerCompanyPageXComponent,
         data: {
           title: 'Customer Company Page'
         }
