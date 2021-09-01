@@ -303,6 +303,7 @@ export class NewCustHeaderXComponent implements OnInit {
     let reqEditDupCheck: ReqDupObj = new ReqDupObj();
     reqEditDupCheck.CustNo = item.CustNo;
     reqEditDupCheck.CustDataMode = this.CustDataMode;
+    reqEditDupCheck.ThirdPartyTrxNo = this.DupCheckPersonalObj.CustObj.ThirdPartyTrxNo;
 
     if (this.CustDataMode == this.CustDataModeFamily) {
       reqEditDupCheck.CustPersonalFamilyObj = this.DupCheckPersonalObj.CustPersonalFamilyObj;
@@ -323,6 +324,7 @@ export class NewCustHeaderXComponent implements OnInit {
     let reqEditDupCheck: ReqDupObj = new ReqDupObj();
     reqEditDupCheck.CustNo = item.CustNo;
     reqEditDupCheck.CustDataMode = this.CustDataMode;
+    reqEditDupCheck.ThirdPartyTrxNo = this.DupCheckCoyObj.CustObj.ThirdPartyTrxNo;
 
     if (this.CustDataMode == CommonConstant.CustMainDataModeMgmntShrholder) {
       reqEditDupCheck.CustCompanyMgmntShrholderObj = this.DupCheckCoyObj.CustCompanyMgmntShrholderObj;
@@ -346,6 +348,7 @@ export class NewCustHeaderXComponent implements OnInit {
     let NegativeCustObj: ReqNegDupObj = new ReqNegDupObj();
     NegativeCustObj.NegativeCustId = item.NegativeCustId;
     NegativeCustObj.CustDataMode = this.CustDataMode;
+    NegativeCustObj.ThirdPartyTrxNo = this.DupCheckPersonalObj.CustObj.ThirdPartyTrxNo;
 
     if (this.CustDataMode == this.CustDataModeFamily) {
       NegativeCustObj.CustPersonalFamilyObj = this.DupCheckPersonalObj.CustPersonalFamilyObj;
@@ -367,7 +370,8 @@ export class NewCustHeaderXComponent implements OnInit {
     NegativeCustObj.NegativeCustId = item.NegativeCustId;
     NegativeCustObj.CustDataMode = this.CustDataMode;
     NegativeCustObj.MrCompanyTypeCode = this.DupCheckCoyObj.CustCompanyObj.MrCompanyTypeCode;
-
+    NegativeCustObj.ThirdPartyTrxNo = this.DupCheckCoyObj.CustObj.ThirdPartyTrxNo;
+    
     if (this.CustDataMode == CommonConstant.CustMainDataModeMgmntShrholder) {
       NegativeCustObj.CustCompanyMgmntShrholderObj = this.DupCheckCoyObj.CustCompanyMgmntShrholderObj;
     }

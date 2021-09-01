@@ -24,6 +24,7 @@ export class CustomerPersonalJobDataXComponent implements OnInit {
   objCust: CustObj;
   IdCust: number;
   CustModel: string;
+  IsReset: boolean = false;
   custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -52,6 +53,7 @@ export class CustomerPersonalJobDataXComponent implements OnInit {
             this.tempCustModel = response[CommonConstant.ReturnObj];
             if(!this.CustModel){
               this.CustModel = this.tempCustModel[0]["Key"];
+              this.IsReset = true;
             }
           }
         );
@@ -63,4 +65,7 @@ export class CustomerPersonalJobDataXComponent implements OnInit {
     this.outputTab.emit({ stepMode: ev.stepMode })
   }
 
+  ResetRefProf(){
+    this.IsReset = true;
+  }
 }

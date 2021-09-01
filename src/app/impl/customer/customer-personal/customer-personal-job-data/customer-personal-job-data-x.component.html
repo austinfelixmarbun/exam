@@ -4,7 +4,7 @@
       <div class="form-group row">
         <label class="col-md-2 adInsLabel" translate>Customer Model</label>
         <div class="col-md-4">
-          <select class="form-control adInsInput" [(ngModel)]="CustModel" [ngModelOptions]="{standalone: true}">
+          <select class="form-control adInsInput" [(ngModel)]="CustModel" [ngModelOptions]="{standalone: true}" (change)="ResetRefProf()">
             <option *ngFor="let it of tempCustModel" [value]="it.Key">
               {{it.Value}}
             </option>
@@ -12,16 +12,16 @@
         </div>
       </div>
       <div *ngIf="this.CustModel == 'EMP'">
-        <app-job-data-employee-x (outputTab)="getValue($event)"></app-job-data-employee-x>
+        <app-job-data-employee-x [IsReset]="IsReset" (outputTab)="getValue($event)"></app-job-data-employee-x>
       </div>
       <div *ngIf="this.CustModel == 'NONPROF'">
-        <app-job-data-non-professional-x (outputTab)="getValue($event)"></app-job-data-non-professional-x>
+        <app-job-data-non-professional-x [IsReset]="IsReset" (outputTab)="getValue($event)"></app-job-data-non-professional-x>
       </div>
       <div *ngIf="this.CustModel == 'PROF'">
-        <app-job-data-professional-x (outputTab)="getValue($event)"></app-job-data-professional-x>
+        <app-job-data-professional-x [IsReset]="IsReset" (outputTab)="getValue($event)"></app-job-data-professional-x>
       </div>
       <div *ngIf="this.CustModel == 'SME'">
-        <app-job-data-sme-x (outputTab)="getValue($event)"></app-job-data-sme-x>
+        <app-job-data-sme-x [IsReset]="IsReset" (outputTab)="getValue($event)"></app-job-data-sme-x>
       </div>
     </div>
   </form>

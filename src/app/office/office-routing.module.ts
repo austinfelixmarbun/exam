@@ -12,7 +12,7 @@ import { OfficeAreaMemberPagingComponent } from './office-area/office-area-membe
 import { OfficeAreaMemberAddComponent } from './office-area/office-area-member/office-area-member-add/office-area-member-add.component';
 import { PathConstant } from 'app/shared/PathConstant';
 import { PathConstantX } from 'app/impl/shared/PathConstantX';
-import { OfficeAddXComponent } from 'app/impl/office/office-add-x/office-add-x.component';
+import { OfficeAddXComponent } from 'app/impl/office/office-add/office-add-x.component';
 import { OfficeXComponent } from 'app/impl/office/office-x.component';
 
 const routes: Routes = [

@@ -64,8 +64,8 @@ import { IndustryTypeCategoryPagingComponent } from './industry-type-category/in
 import { ExchangeRateDetailComponent } from './exchange-rate/exchange-rate-detail/exchange-rate-detail.component';
 import { ExchangeRatePagingComponent } from './exchange-rate/exchange-rate-paging/exchange-rate-paging.component';
 import { PathConstantX } from 'app/impl/shared/PathConstantX';
-import { EconomicSectorSlikPagingXComponent } from 'app/impl/common-setting/economic-sector-slik-x/economic-sector-slik-paging-x/economic-sector-slik-paging-x.component';
-import { EconomicSectorSlikAddEditXComponent } from 'app/impl/common-setting/economic-sector-slik-x/economic-sector-slik-add-edit-x/economic-sector-slik-add-edit-x.component';
+import { EconomicSectorSlikPagingXComponent } from 'app/impl/common-setting/economic-sector-slik/economic-sector-slik-paging/economic-sector-slik-paging-x.component';
+import { EconomicSectorSlikAddEditXComponent } from 'app/impl/common-setting/economic-sector-slik/economic-sector-slik-add-edit/economic-sector-slik-add-edit-x.component';
 
 const routes: Routes = [
   {

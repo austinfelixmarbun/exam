@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -20,7 +20,7 @@ import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPerso
   styleUrls: ['./job-data-non-professional-x.component.css']
 })
 export class JobDataNonProfessionalXComponent implements OnInit {
-
+  @Input() IsReset: boolean = false;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
 
   jobDataId: any;
@@ -30,14 +30,12 @@ export class JobDataNonProfessionalXComponent implements OnInit {
   IdCustPersonal: number;
   custObj: any;
   objCust: CustObj;
-  tempProfession: any;
+  tempProfession: number;
   professionLookUpObj: InputLookupObj;
   inputLookupCommodityObj: InputLookupObj;
   custPersonalJobDataObj: CustPersonalJobDataObj;
-  custJobDataObj: CustPersonalJobDataObj;
   returnCustJobDataObj: any;
   reqCustPersonalJobDataObj: RequestCustPersonalJobDataObj;
-  refProfessionObj: RefProfessionObj;
   returnRefProfessionObj: any;
   JobDataNonProForm = this.fb.group({
     JobDataType: [''],
@@ -93,8 +91,6 @@ export class JobDataNonProfessionalXComponent implements OnInit {
         this.custObj = response;
       });
 
-    this.custJobDataObj = new CustPersonalJobDataObj();
-    this.custJobDataObj.CustId = this.IdCust;
     this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).subscribe(
       (response: any) => {
         this.returnCustJobDataObj = response;
@@ -104,21 +100,21 @@ export class JobDataNonProfessionalXComponent implements OnInit {
             JobTitleName: this.returnCustJobDataObj.JobTitleName,
           });
 
-          this.refProfessionObj = new RefProfessionObj();
-          this.refProfessionObj.RefProfessionId = this.returnCustJobDataObj.RefProfessionId;
-          this.http.post(URLConstant.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).subscribe(
-            (response) => {
-              this.returnRefProfessionObj = response;
+          if (!this.IsReset) {
+            this.http.post(URLConstant.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).subscribe(
+              (response) => {
+                this.returnRefProfessionObj = response;
 
-              this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
-              this.professionLookUpObj.jsonSelect = this.returnRefProfessionObj;
-              this.tempProfession = this.returnRefProfessionObj.RefProfessionId;
-            });
-
-            this.jobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
-            this.rowVersion = this.returnCustJobDataObj.RowVersion;
-            this.typePage = "edit";
+                this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
+                this.professionLookUpObj.jsonSelect = this.returnRefProfessionObj;
+                this.tempProfession = this.returnRefProfessionObj.RefProfessionId;
+              });
           }
+
+          this.jobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
+          this.rowVersion = this.returnCustJobDataObj.RowVersion;
+          this.typePage = "edit";
+        }
     });
 
     await this.getCustXData();

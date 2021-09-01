@@ -1,6 +1,6 @@
 import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -28,7 +28,7 @@ import { CookieService } from 'ngx-cookie';
   styleUrls: ['./job-data-small-medium-enterprise-x.component.css']
 })
 export class JobDataSmeXComponent implements OnInit {
-
+  @Input() IsReset: boolean = false;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
   othBizAddrId: number;
   jobAddrId: number;
@@ -39,7 +39,7 @@ export class JobDataSmeXComponent implements OnInit {
   IdCust: number;
   IdCustPersonal: number;
   custObj: any;
-  objCust : CustObj;
+  objCust: CustObj;
   jobAddressObj: CustAddrObj;
   otherAddressObj: CustAddrObj;
   inputJobAddressObj: InputFieldObj;
@@ -49,7 +49,7 @@ export class JobDataSmeXComponent implements OnInit {
   listJobPosition: any;
   companyScale: ReqRefMasterByTypeCodeAndMappingCodeObj;
   listCompanyScale: any;
-  tempProfession: any;  
+  tempProfession: number;
   tempRefIndustryType: any;
   professionLookUpObj: InputLookupObj;
   tempRefSectorEconomySlik: any;
@@ -57,7 +57,6 @@ export class JobDataSmeXComponent implements OnInit {
   companyLookupObj: InputLookupObj;
   inputLookupCommodityObj: InputLookupObj;
   custPersonalJobDataObj: CustPersonalJobDataObj;
-  custJobDataObj: CustPersonalJobDataObj;
   returnCustJobDataObj: any;
   custJobAddrObj: CustAddrObj;
   addressObj: CustAddrObj;
@@ -68,7 +67,6 @@ export class JobDataSmeXComponent implements OnInit {
   getPreJobAddr: any;
   otherAddrObj: CustAddrObj;
   reqCustPersonalJobDataObj: RequestCustPersonalJobDataObj;
-  refProfessionObj: RefProfessionObj;
   returnRefProfessionObj: any;
   returnSectorEconomySlikObj: any;
   returnIndustryTypeObj: any;
@@ -76,9 +74,9 @@ export class JobDataSmeXComponent implements OnInit {
   preJobAddrObj: CustAddrObj;
   IsWellknownCoy: boolean = false;
   ArrAddCritCoy: Array<CriteriaObj> = new Array<CriteriaObj>();
-  EconomicSectorName : string;
-  IndustryTypeCategoryName : string;
-  IsShowData : boolean =false;
+  EconomicSectorName: string;
+  IndustryTypeCategoryName: string;
+  IsShowData: boolean = false;
   JobDataSmeForm = this.fb.group({
     JobDataType: [''],
     ProfessionName: [''],
@@ -107,7 +105,7 @@ export class JobDataSmeXComponent implements OnInit {
     IsWellknownCoy: [false],
     MrWellknownCoyCode: [''],
     MrInvestmentTypeCode: [''],
-    CommodityCode:['']
+    CommodityCode: ['']
   });
   businessDtMin: Date;
   inputAddressObjForJobAddr: any;
@@ -118,14 +116,14 @@ export class JobDataSmeXComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private cookieService: CookieService) { 
+    private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
-        if (params["IdCust"] != null) {
-          this.IdCust = params["IdCust"];
-        }
-        if (params["IdCustPersonal"] != null) {
-          this.IdCustPersonal = params["IdCustPersonal"];
-        }
+      if (params["IdCust"] != null) {
+        this.IdCust = params["IdCust"];
+      }
+      if (params["IdCustPersonal"] != null) {
+        this.IdCustPersonal = params["IdCustPersonal"];
+      }
     });
   }
 
@@ -146,7 +144,7 @@ export class JobDataSmeXComponent implements OnInit {
     this.inputAddressObjForJobAddr.showSubsection = false;
     this.inputAddressObjForJobAddr.title = "Job Address";
     this.inputAddressObjForJobAddr.showOwnership = true;
-    
+
     this.inputAddressObjForOthBiz = new InputAddressObj();
     this.inputAddressObjForOthBiz.showSubsection = false;
     this.inputAddressObjForOthBiz.isRequired = false;
@@ -172,10 +170,10 @@ export class JobDataSmeXComponent implements OnInit {
     this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
     this.inputOtherAddressObj.inputLookupObj.isRequired = false;
     this.inputPreviousAddressObj.inputField = this.inputOtherAddressObj;
-    this.inputPreJobAddressObj =  new InputFieldObj();
+    this.inputPreJobAddressObj = new InputFieldObj();
     this.inputPreJobAddressObj.inputLookupObj = new InputLookupObj();
     this.inputPreJobAddressObj.inputLookupObj.isRequired = false;
-    
+
     this.professionLookUpObj = new InputLookupObj();
     this.professionLookUpObj.isRequired = true;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
@@ -251,36 +249,34 @@ export class JobDataSmeXComponent implements OnInit {
         this.InvestmentTypeObj = response[CommonConstant.ReturnObj];
       }
     );
-    
+
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         this.custObj = response;
       }
     );
 
-    this.custJobDataObj = new CustPersonalJobDataObj();
-    this.custJobDataObj.CustId = this.IdCust;
     await this.getCustXData();
-    this.http.post(URLConstantX.GetCustPersonalJobDataByCustId, {Id : this.IdCust}).subscribe(
+    this.http.post(URLConstantX.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).subscribe(
       (response: any) => {
         this.returnCustJobDataObj = response['responseCustPersonalJobDataObj'];
         this.tempRefSectorEconomySlik = response['RefSectorEconomySlikXId'];
 
-        if(this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
-          this.JobDataSmeForm.patchValue({ 
+        if (this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
+          this.JobDataSmeForm.patchValue({
             JobPosition: this.returnCustJobDataObj.MrJobPositionCode,
             JobTitleName: this.returnCustJobDataObj.JobTitleName,
             IndustryName: this.returnCustJobDataObj.CoyName,
             CompanyScale: this.returnCustJobDataObj.MrCoyScaleCode,
             NumberEmployee: this.returnCustJobDataObj.NoOfEmploy,
-            EmpEstablishmentDate: formatDate(this.returnCustJobDataObj.EmploymentEstablishmentDt,  'yyyy-MM-dd', 'en-US'),
+            EmpEstablishmentDate: formatDate(this.returnCustJobDataObj.EmploymentEstablishmentDt, 'yyyy-MM-dd', 'en-US'),
             OtherBusinessName: this.returnCustJobDataObj.OthBizName,
             OtherBusinessType: this.returnCustJobDataObj.OthBizType,
             OtherBusinessIndustry: this.returnCustJobDataObj.OthBizIndustryTypeCode,
             OtherJobPosition: this.returnCustJobDataObj.OthBizJobPosition,
-            EstablishmentDate: formatDate(this.returnCustJobDataObj.OthBizEstablishmentDt,  'yyyy-MM-dd', 'en-US'),
+            EstablishmentDate: formatDate(this.returnCustJobDataObj.OthBizEstablishmentDt, 'yyyy-MM-dd', 'en-US'),
             PreviIndustryName: this.returnCustJobDataObj.PrevCoyName,
             PreviEmploymentDate: formatDate(this.returnCustJobDataObj.PrevEmploymentDt, 'yyyy-MM-dd', 'en-US'),
             IsWellknownCoy: this.returnCustJobDataObj.IsWellknownCoy,
@@ -291,24 +287,23 @@ export class JobDataSmeXComponent implements OnInit {
           this.companyLookupObj.nameSelect = this.returnCustJobDataObj.CoyName;
           this.companyLookupObj.jsonSelect = { Descr: this.returnCustJobDataObj.CoyName };
           this.tempRefIndustryType = this.returnCustJobDataObj.RefIndustryTypeId;
-         
-          if(this.returnCustJobDataObj.RefProfessionId != null)
-          {
-              this.refProfessionObj = new RefProfessionObj();
-            this.refProfessionObj.RefProfessionId = this.returnCustJobDataObj.RefProfessionId;
-            this.http.post(URLConstant.GetRefProfessionById, {Id : this.returnCustJobDataObj.RefProfessionId}).subscribe(
-              (response) => {
-                this.returnRefProfessionObj = response;
-                this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
-                this.professionLookUpObj.jsonSelect = this.returnRefProfessionObj;
-                this.tempProfession = this.returnRefProfessionObj.RefProfessionId;
-              }
-            );
+
+          if (!this.IsReset) {
+            if (this.returnCustJobDataObj.RefProfessionId != null) {
+              this.http.post(URLConstant.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).subscribe(
+                (response) => {
+                  this.returnRefProfessionObj = response;
+                  this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
+                  this.professionLookUpObj.jsonSelect = this.returnRefProfessionObj;
+                  this.tempProfession = this.returnRefProfessionObj.RefProfessionId;
+                }
+              );
+            }
           }
-          
+
           if (this.returnCustJobDataObj.RefIndustryTypeId != null && this.tempRefSectorEconomySlik != null &&
             this.returnCustJobDataObj.RefIndustryTypeId != 0 && this.tempRefSectorEconomySlik != 0) {
-            this.http.post(URLConstantX.GetRefSectorEconomySlikXById, {Id: this.tempRefSectorEconomySlik}).subscribe(
+            this.http.post(URLConstantX.GetRefSectorEconomySlikXById, { Id: this.tempRefSectorEconomySlik }).subscribe(
               (response) => {
                 this.returnSectorEconomySlikObj = response;
                 this.economicSectorSlikLookUpObj.nameSelect = this.returnSectorEconomySlikObj.SectorEconomySlikName;
@@ -317,61 +312,61 @@ export class JobDataSmeXComponent implements OnInit {
               }
             );
           }
-        
-              
-            if(this.returnCustJobDataObj.JobAddrId != null) {
-              this.custJobAddrObj = new CustAddrObj();
-              this.custJobAddrObj.CustAddrId = this.returnCustJobDataObj.JobAddrId;
-              this.http.post(URLConstant.GetCustAddr, {Id : this.custJobAddrObj.CustAddrId}).subscribe(
-                (response) => {
-                    this.getJobAddr = response;
-                    this.JobDataSmeForm.patchValue({
-                      NotesJob: this.getJobAddr.Notes
-                    });
-                    
-                    this.addressObj = new CustAddrObj();
-                    this.addressObj.Addr = this.getJobAddr.Addr;
-                    this.addressObj.AreaCode3 = this.getJobAddr.AreaCode3;
-                    this.addressObj.AreaCode4 = this.getJobAddr.AreaCode4;
-                    this.addressObj.AreaCode1 = this.getJobAddr.AreaCode1;
-                    this.addressObj.AreaCode2 = this.getJobAddr.AreaCode2;
-                    this.addressObj.City = this.getJobAddr.City;
-                    this.addressObj.PhnArea1 = this.getJobAddr.PhnArea1;
-                    this.addressObj.Phn1 = this.getJobAddr.Phn1;
-                    this.addressObj.PhnExt1 = this.getJobAddr.PhnExt1;
-                    this.addressObj.PhnArea2 = this.getJobAddr.PhnArea2;
-                    this.addressObj.Phn2 = this.getJobAddr.Phn2;
-                    this.addressObj.PhnExt2 = this.getJobAddr.PhnExt2;
-                    this.addressObj.PhnArea3 = this.getJobAddr.PhnArea3;
-                    this.addressObj.Phn3 = this.getJobAddr.Phn3;
-                    this.addressObj.PhnExt3 = this.getJobAddr.PhnExt3;
-                    this.addressObj.FaxArea = this.getJobAddr.FaxArea;
-                    this.addressObj.Fax = this.getJobAddr.Fax;
-                    this.addressObj.MrHouseOwnershipCode = this.getJobAddr.MrBuildingOwnershipCode;
-      
-                    this.inputJobAddressObj = new InputFieldObj();
-                    this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
-                    this.inputJobAddressObj.inputLookupObj.nameSelect = this.getJobAddr.Zipcode;
-                    this.inputJobAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.getJobAddr.Zipcode};
-                    this.inputAddressObjForJobAddr.default = this.addressObj;
-                    this.inputAddressObjForJobAddr.inputField = this.inputJobAddressObj;
-                });
-            }
 
-          if(this.returnCustJobDataObj.OthBizAddrId == null){
+
+          if (this.returnCustJobDataObj.JobAddrId != null) {
+            this.custJobAddrObj = new CustAddrObj();
+            this.custJobAddrObj.CustAddrId = this.returnCustJobDataObj.JobAddrId;
+            this.http.post(URLConstant.GetCustAddr, { Id: this.custJobAddrObj.CustAddrId }).subscribe(
+              (response) => {
+                this.getJobAddr = response;
+                this.JobDataSmeForm.patchValue({
+                  NotesJob: this.getJobAddr.Notes
+                });
+
+                this.addressObj = new CustAddrObj();
+                this.addressObj.Addr = this.getJobAddr.Addr;
+                this.addressObj.AreaCode3 = this.getJobAddr.AreaCode3;
+                this.addressObj.AreaCode4 = this.getJobAddr.AreaCode4;
+                this.addressObj.AreaCode1 = this.getJobAddr.AreaCode1;
+                this.addressObj.AreaCode2 = this.getJobAddr.AreaCode2;
+                this.addressObj.City = this.getJobAddr.City;
+                this.addressObj.PhnArea1 = this.getJobAddr.PhnArea1;
+                this.addressObj.Phn1 = this.getJobAddr.Phn1;
+                this.addressObj.PhnExt1 = this.getJobAddr.PhnExt1;
+                this.addressObj.PhnArea2 = this.getJobAddr.PhnArea2;
+                this.addressObj.Phn2 = this.getJobAddr.Phn2;
+                this.addressObj.PhnExt2 = this.getJobAddr.PhnExt2;
+                this.addressObj.PhnArea3 = this.getJobAddr.PhnArea3;
+                this.addressObj.Phn3 = this.getJobAddr.Phn3;
+                this.addressObj.PhnExt3 = this.getJobAddr.PhnExt3;
+                this.addressObj.FaxArea = this.getJobAddr.FaxArea;
+                this.addressObj.Fax = this.getJobAddr.Fax;
+                this.addressObj.MrHouseOwnershipCode = this.getJobAddr.MrBuildingOwnershipCode;
+
+                this.inputJobAddressObj = new InputFieldObj();
+                this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
+                this.inputJobAddressObj.inputLookupObj.nameSelect = this.getJobAddr.Zipcode;
+                this.inputJobAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getJobAddr.Zipcode };
+                this.inputAddressObjForJobAddr.default = this.addressObj;
+                this.inputAddressObjForJobAddr.inputField = this.inputJobAddressObj;
+              });
+          }
+
+          if (this.returnCustJobDataObj.OthBizAddrId == null) {
             this.returnCustJobDataObj.OthBizAddrId = 0;
           }
 
-          if(this.returnCustJobDataObj.OthBizAddrId != null) {
+          if (this.returnCustJobDataObj.OthBizAddrId != null) {
             this.custOthBizAddrObj = new CustAddrObj();
             this.custOthBizAddrObj.CustAddrId = this.returnCustJobDataObj.OthBizAddrId;
-            this.http.post(URLConstant.GetCustAddr, {Id : this.custOthBizAddrObj.CustAddrId}).subscribe(
+            this.http.post(URLConstant.GetCustAddr, { Id: this.custOthBizAddrObj.CustAddrId }).subscribe(
               (response) => {
                 this.getOthBizAddr = response;
                 this.JobDataSmeForm.patchValue({
                   NotesOther: this.getOthBizAddr.Notes
                 });
-                
+
                 this.otherAddrObj = new CustAddrObj();
                 this.otherAddrObj.Addr = this.getOthBizAddr.Addr;
                 this.otherAddrObj.AreaCode3 = this.getOthBizAddr.AreaCode3;
@@ -391,12 +386,12 @@ export class JobDataSmeXComponent implements OnInit {
                 this.otherAddrObj.FaxArea = this.getOthBizAddr.FaxArea;
                 this.otherAddrObj.Fax = this.getOthBizAddr.Fax;
                 this.otherAddrObj.MrHouseOwnershipCode = this.getOthBizAddr.MrBuildingOwnershipCode;
-  
+
                 this.inputOtherAddressObj = new InputFieldObj();
                 this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
                 this.inputOtherAddressObj.inputLookupObj.isRequired = false;
                 this.inputOtherAddressObj.inputLookupObj.nameSelect = this.getOthBizAddr.Zipcode;
-                this.inputOtherAddressObj.inputLookupObj.jsonSelect = {Zipcode: this.getOthBizAddr.Zipcode};
+                this.inputOtherAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getOthBizAddr.Zipcode };
                 this.inputOtherAddressObj.inputLookupObj.isReadonly = false;
                 this.inputAddressObjForOthBiz.default = this.otherAddrObj;
                 this.inputAddressObjForOthBiz.inputField = this.inputOtherAddressObj;
@@ -404,14 +399,14 @@ export class JobDataSmeXComponent implements OnInit {
             );
           }
 
-          if(this.returnCustJobDataObj.PrevJobAddrId == null){
+          if (this.returnCustJobDataObj.PrevJobAddrId == null) {
             this.returnCustJobDataObj.PrevJobAddrId = 0;
           }
 
           if (this.returnCustJobDataObj.PrevJobAddrId != null) {
             this.preJobAddrObj = new CustAddrObj();
             this.preJobAddrObj.CustAddrId = this.returnCustJobDataObj.PrevJobAddrId;
-            this.http.post(URLConstant.GetCustAddr, {Id : this.preJobAddrObj.CustAddrId}).subscribe(
+            this.http.post(URLConstant.GetCustAddr, { Id: this.preJobAddrObj.CustAddrId }).subscribe(
               (response) => {
                 this.getPreJobAddr = response;
                 this.JobDataSmeForm.patchValue({
@@ -450,13 +445,13 @@ export class JobDataSmeXComponent implements OnInit {
             );
           }
 
-          if(this.returnCustJobDataObj.JobAddrId !=0 && this.returnCustJobDataObj.JobAddrId != null){
+          if (this.returnCustJobDataObj.JobAddrId != 0 && this.returnCustJobDataObj.JobAddrId != null) {
             this.jobAddrId = this.returnCustJobDataObj.JobAddrId;
           }
-          if(this.returnCustJobDataObj.OthBizAddrId !=0 && this.returnCustJobDataObj.OthBizAddrId != null){
+          if (this.returnCustJobDataObj.OthBizAddrId != 0 && this.returnCustJobDataObj.OthBizAddrId != null) {
             this.othBizAddrId = this.returnCustJobDataObj.OthBizAddrId;
           }
-          if(this.returnCustJobDataObj.PrevJobAddrId !=0 && this.returnCustJobDataObj.PrevJobAddrId != null){
+          if (this.returnCustJobDataObj.PrevJobAddrId != 0 && this.returnCustJobDataObj.PrevJobAddrId != null) {
             this.preJobAddrId = this.returnCustJobDataObj.PrevJobAddrId;
           }
 
@@ -474,8 +469,8 @@ export class JobDataSmeXComponent implements OnInit {
   setJobAddr() {
     this.jobAddressObj.CustId = this.IdCust;
     this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
-    this.jobAddressObj.Addr = this.JobDataSmeForm.controls["jobAddress"]["controls"].Addr.value; 
-    this.jobAddressObj.FullAddr = this.JobDataSmeForm.controls["jobAddress"]["controls"].Addr.value + " RT: " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode3.value + " " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode1.value + " " + this.JobDataSmeForm.controls["jobAddressZipcode"]["controls"].value.value;  
+    this.jobAddressObj.Addr = this.JobDataSmeForm.controls["jobAddress"]["controls"].Addr.value;
+    this.jobAddressObj.FullAddr = this.JobDataSmeForm.controls["jobAddress"]["controls"].Addr.value + " RT: " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode3.value + " " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode1.value + " " + this.JobDataSmeForm.controls["jobAddressZipcode"]["controls"].value.value;
     this.jobAddressObj.AreaCode3 = this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode3.value;
     this.jobAddressObj.AreaCode4 = this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode4.value;
     this.jobAddressObj.Zipcode = this.JobDataSmeForm.controls["jobAddressZipcode"]["controls"].value.value;
@@ -501,7 +496,7 @@ export class JobDataSmeXComponent implements OnInit {
     this.otherAddressObj.CustId = this.IdCust;
     this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
     this.otherAddressObj.Addr = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].Addr.value;
-    this.otherAddressObj.FullAddr = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].Addr.value + " RT: " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode3.value + " " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode2.value + ", " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode1.value + " " + this.JobDataSmeForm.controls["otherBusinessAddressZipcode"]["controls"].value.value; 
+    this.otherAddressObj.FullAddr = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].Addr.value + " RT: " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode3.value + " " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode2.value + ", " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode1.value + " " + this.JobDataSmeForm.controls["otherBusinessAddressZipcode"]["controls"].value.value;
     this.otherAddressObj.AreaCode3 = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode3.value;
     this.otherAddressObj.AreaCode4 = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode4.value;
     this.otherAddressObj.Zipcode = this.JobDataSmeForm.controls["otherBusinessAddressZipcode"]["controls"].value.value;
@@ -573,7 +568,7 @@ export class JobDataSmeXComponent implements OnInit {
 
 
   SaveForm() {
-    if(this.typePage == "edit") {
+    if (this.typePage == "edit") {
       this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
       this.custPersonalJobDataObj = new CustPersonalJobDataObj();
       this.jobAddressObj = new CustAddrObj;
@@ -619,7 +614,7 @@ export class JobDataSmeXComponent implements OnInit {
       this.http.post(URLConstantX.EditCustPersonalJobData, reqObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.outputTab.emit({ stepMode: "next"});
+          this.outputTab.emit({ stepMode: "next" });
         }
       );
     }
@@ -658,7 +653,7 @@ export class JobDataSmeXComponent implements OnInit {
       this.http.post(URLConstantX.AddCustPersonalJobData, reqObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.outputTab.emit({ stepMode: "next"});
+          this.outputTab.emit({ stepMode: "next" });
         }
       );
     }
@@ -675,11 +670,10 @@ export class JobDataSmeXComponent implements OnInit {
     });
   }
 
-  async getCustXData()
-  {
-    await this.http.post(URLConstantX.GetCustXByCustId, {Id: this.IdCust}).toPromise().then(
+  async getCustXData() {
+    await this.http.post(URLConstantX.GetCustXByCustId, { Id: this.IdCust }).toPromise().then(
       (response) => {
-        if(response["CustXId"] != 0){
+        if (response["CustXId"] != 0) {
           this.JobDataSmeForm.patchValue({
             CommodityCode: response["MrCommodityCode"]
           });
@@ -690,7 +684,7 @@ export class JobDataSmeXComponent implements OnInit {
     );
   }
 
-  setLookupCommodityData(ev){
+  setLookupCommodityData(ev) {
     this.JobDataSmeForm.patchValue({
       CommodityCode: ev.MasterCode
     });

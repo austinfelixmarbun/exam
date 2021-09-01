@@ -130,8 +130,8 @@ import { JobDataNonProfessionalXComponent } from 'app/impl/customer/customer-per
 import { JobDataProfessionalXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-professional/job-data-professional-x.component';
 import { CustomerCompanyPageXComponent } from 'app/impl/customer/customer-company/customer-company-page/customer-company-page-x.component';
 import { CustomerCompanyDetailXComponent } from 'app/impl/customer/customer-company/customer-company-detail/customer-company-detail-x.component';
-import { CustomerViewChildModule } from 'app/view/customer-view/customer-view-child.module';
 import { JobDataSmeXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-small-medium-enterprise/job-data-small-medium-enterprise-x.component';
+import { JobDataSmallMediumEnterpriseXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-sme/job-data-sme-x.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -280,7 +280,8 @@ export const customCurrencyMaskConfig = {
     JobDataProfessionalXComponent,
     JobDataSmeXComponent,
     CustomerCompanyPageXComponent,
-    CustomerCompanyDetailXComponent
+    CustomerCompanyDetailXComponent,
+    JobDataSmallMediumEnterpriseXComponent
   ],
   providers: [
     CustAssetComponent,
