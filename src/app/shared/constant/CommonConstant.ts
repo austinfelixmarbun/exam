@@ -6,6 +6,7 @@ export class CommonConstant {
     public static regexEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
 
     // MODULE
+    public static MODULE_FOU = "FOU";
     public static MODULE_LOS = "LOS";
     public static MODULE_LMS = "LMS";
     public static MODULE_AMS = "AMS";
