@@ -1091,5 +1091,8 @@ export class URLConstant {
     public static AddTrxSrcDataForPefindo = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindo";
     public static PefindoSmartSearch = environment.FoundationR3Url + "/v1" + "/Digitalization/PefindoSmartSearch";
 
+    // THINGS TO DO
+  public static GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo = "ServiceTask/GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo";
+  public static GetThingsToDoByRole = environment.FoundationR3Url + "/v1" + "/ThingsToDo/GetThingsToDoByRole";
 }
 
