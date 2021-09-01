@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { JobDataSmallMediumEnterpriseXComponent } from './job-data-small-medium-enterprise-x.component';
+import { JobDataSmallMediumEnterpriseXComponent } from '../job-data-sme/job-data-sme-x.component';
 
 describe('JobDataSmallMediumEnterpriseXComponent', () => {
   let component: JobDataSmallMediumEnterpriseXComponent;

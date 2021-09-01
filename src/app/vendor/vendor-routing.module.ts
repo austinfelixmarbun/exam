@@ -39,14 +39,14 @@ import { VendorGradingApprovalPagingComponent } from "./vendor-grading/vendor-gr
 import { VendorGradingApprovalDetailComponent } from "./vendor-grading/vendor-grading-approval/vendor-grading-approval-detail/vendor-grading-approval-detail.component";
 import { VendorGradingInquiryPagingComponent } from "./vendor-grading/vendor-grading-inquiry-paging/vendor-grading-inquiry-paging.component";
 import { PathConstantX } from 'app/impl/shared/PathConstantX';
-import { VendorBranchAddEditXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-add-edit-x/vendor-branch-add-edit-x.component';
-import { VendorHoldingAddEditXComponent } from 'app/impl/vendor/vendor-holding-add-edit-x/vendor-holding-add-edit-x.component';
-import { VendorHoAddEditXComponent } from 'app/impl/vendor/vendor-ho/vendor-ho-add-edit-x/vendor-ho-add-edit-x.component';
-import { VendorBranchEmployeeAddEditXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-employee-add-edit-x/vendor-branch-employee-add-edit-x.component';
-import { VendorAtpmAddEditXComponent } from 'app/impl/vendor/vendor-ATPM/vendor-atpm-add-edit-x/vendor-atpm-add-edit-x.component';
-import { VendorBranchEmployeePagingXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-employee-paging-x/vendor-branch-employee-paging-x.component';
-import { VendorGradingRequestDetailXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-request/vendor-grading-request-detail-x/vendor-grading-request-detail-x.component';
-import { VendorGradingRequestPagingXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-request/vendor-grading-request-paging-x/vendor-grading-request-paging-x.component';
+import { VendorBranchAddEditXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit-x.component';
+import { VendorHoldingAddEditXComponent } from 'app/impl/vendor/vendor-holding-add-edit/vendor-holding-add-edit-x.component';
+import { VendorHoAddEditXComponent } from 'app/impl/vendor/vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit-x.component';
+import { VendorBranchEmployeeAddEditXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-employee-add-edit/vendor-branch-employee-add-edit-x.component';
+import { VendorAtpmAddEditXComponent } from 'app/impl/vendor/vendor-ATPM/vendor-atpm-add-edit/vendor-atpm-add-edit-x.component';
+import { VendorBranchEmployeePagingXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-employee-paging/vendor-branch-employee-paging-x.component';
+import { VendorGradingRequestDetailXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-request/vendor-grading-request-detail/vendor-grading-request-detail-x.component';
+import { VendorGradingRequestPagingXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-request/vendor-grading-request-paging/vendor-grading-request-paging-x.component';
 
 const routes: Routes = [
   {
