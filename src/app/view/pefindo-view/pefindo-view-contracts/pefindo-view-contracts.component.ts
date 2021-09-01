@@ -11,7 +11,7 @@ import { ResViewContractsObj } from 'app/shared/model/Response/Pefindo/ResViewCo
 })
 export class PefindoViewContractsComponent implements OnInit {
   TrxNo: string;
-  ResViewContractsObj: ResViewContractsObj = new ResViewContractsObj()
+  ResViewContractsObj: ResViewContractsObj = new ResViewContractsObj();
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {

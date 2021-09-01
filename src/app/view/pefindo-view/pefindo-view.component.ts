@@ -17,6 +17,7 @@ export class PefindoViewComponent implements OnInit {
   CustNo: string;
   TrxNo: string;
   Param: string;
+  IsLos: boolean;
   CustObj: CustObj = new CustObj();
   MrCustTypeCode: string;
 
@@ -32,6 +33,10 @@ export class PefindoViewComponent implements OnInit {
 
       if (params["MrCustTypeCode"] != null) {
         this.MrCustTypeCode = params["MrCustTypeCode"];
+      }
+
+      if (params["IsLos"] != null) {
+        this.IsLos = JSON.parse(params["IsLos"]);
       }
     });
   }

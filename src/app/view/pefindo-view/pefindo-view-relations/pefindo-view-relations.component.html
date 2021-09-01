@@ -23,7 +23,7 @@
                   </tr>
                 </thead>
           
-                <tbody *ngIf = "ResViewRelationsObj.ListRltdParty.length == 0">
+                <tbody *ngIf = "ResViewRelationsObj.ListRltdParty?.length == 0">
                   <tr>
                     <td colspan="100%">No Data Available</td>
                   </tr>
@@ -60,7 +60,7 @@
                   </tr>
                 </thead>
           
-                <tbody *ngIf = "ResViewRelationsObj.ListCntrctRltd.length == 0">
+                <tbody *ngIf = "ResViewRelationsObj.ListCntrctRltd?.length == 0">
                   <tr>
                     <td colspan="100%">No Data Available</td>
                   </tr>

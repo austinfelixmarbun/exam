@@ -38,13 +38,13 @@
                   </tr>
                 </thead>
 
-                <tbody *ngIf = "ResViewContractsObj.ListCntrctDebtor.length == 0">
+                <tbody *ngIf = "ResViewContractsObj.ListCntrctDebtor?.length == 0">
                   <tr>
                     <td colspan="100%">No Data Available</td>
                   </tr>
                 </tbody>
           
-                <tbody *ngIf="ResViewContractsObj.ListCntrctDebtor.length > 0">
+                <tbody *ngIf="ResViewContractsObj.ListCntrctDebtor?.length > 0">
                   <tr *ngFor="let item of ResViewContractsObj.ListCntrctDebtor">
                     <td style="text-align: left;">{{ item.Sector }}</td>
                     <td style="text-align: left;">{{ item.CntrctType }}</td>
@@ -95,13 +95,13 @@
                   </tr>
                 </thead>
 
-                <tbody *ngIf = "ResViewContractsObj.ListCntrctGuarantor.length == 0">
+                <tbody *ngIf = "ResViewContractsObj.ListCntrctGuarantor?.length == 0">
                   <tr>
                     <td colspan="100%">No Data Available</td>
                   </tr>
                 </tbody>
           
-                <tbody *ngIf="ResViewContractsObj.ListCntrctGuarantor.length > 0">
+                <tbody *ngIf="ResViewContractsObj.ListCntrctGuarantor?.length > 0">
                   <tr *ngFor="let item of ResViewContractsObj.ListCntrctGuarantor">
                     <td style="text-align: left;">{{ item.Sector }}</td>
                     <td style="text-align: left;">{{ item.CntrctType }}</td>

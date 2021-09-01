@@ -5,7 +5,6 @@
 				<div class="form-body">
 					<h4 class="form-section card-title"  translate>PEFINDO</h4>
 					<div>
-						<!-- <app-customer-view-header-company></app-customer-view-header-company> -->
 						<mat-tab-group (selectedIndexChange)="mencuba($event)">
 							<mat-tab [label]="MrCustTypeCode == 'PERSONAL' ? 'Subject Info Personal' : 'Subject Info Company' ">
 							</mat-tab>
@@ -13,23 +12,23 @@
 							</mat-tab>
 							<mat-tab label="PEFINDO Score">
 							</mat-tab>
-							<mat-tab label="Contracts">
+							<mat-tab *ngIf="IsLos" label="Contracts">
 							</mat-tab>
-							<mat-tab label="PEFINDO Alert Quest">
+							<mat-tab *ngIf="IsLos" label="PEFINDO Alert Quest">
 							</mat-tab>
-							<mat-tab label="Securities">
+							<mat-tab *ngIf="IsLos" label="Securities">
 							</mat-tab>
-							<mat-tab label="Other Liabilities">
+							<mat-tab *ngIf="IsLos" label="Other Liabilities">
 							</mat-tab>
-							<mat-tab label="Involvements">
+							<mat-tab *ngIf="IsLos" label="Involvements">
 							</mat-tab>
-							<mat-tab label="Relations">
+							<mat-tab *ngIf="IsLos" label="Relations">
 							</mat-tab>
-							<mat-tab label="Inquiries">
+							<mat-tab *ngIf="IsLos" label="Inquiries">
 							</mat-tab>
-							<mat-tab label="Disputes">
+							<mat-tab *ngIf="IsLos" label="Disputes">
 							</mat-tab>
-							<mat-tab label="Financial Statements">
+							<mat-tab *ngIf="MrCustTypeCode == 'COMPANY' && IsLos" label="Financial Statements">
 							</mat-tab>
 						</mat-tab-group>
 					</div>
