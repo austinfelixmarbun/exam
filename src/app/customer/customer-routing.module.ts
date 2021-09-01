@@ -35,7 +35,7 @@ import { PathConstantX } from 'app/impl/shared/PathConstantX';
 import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page/customer-personal-page-x.component';
 import { CustomerPersonalJobDataXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/customer-personal-job-data-x.component';
 import { JobDataNonProfessionalXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-non-professional/job-data-non-professional-x.component';
-import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header-x/new-cust-header-x.component';
+import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header/new-cust-header-x.component';
 import { CustomerCompanyPageXComponent } from 'app/impl/customer/customer-company/customer-company-page/customer-company-page-x.component';
 
 const routes: Routes = [

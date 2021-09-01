@@ -25,9 +25,9 @@ import { FamilyFormComponent } from './new-cust-component/component/family-form/
 import { CustPersonalJobDataComponent } from './cust-personal-job-data/cust-personal-job-data.component';
 import { JobAddrSectionComponent } from './cust-personal-job-data/job-addr-section/job-addr-section.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header-x/new-cust-header-x.component';
-import { FamilyListingXComponent } from 'app/impl/customer/sharing-component/family-listing-x/family-listing-x.component';
-import { NewCustPersonalMainDataXComponent } from 'app/impl/customer/sharing-component/new-cust-component/new-cust-personal-main-data-x/new-cust-personal-main-data-x.component';
+import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header/new-cust-header-x.component';
+import { FamilyListingXComponent } from 'app/impl/customer/sharing-component/family-listing/family-listing-x.component';
+import { NewCustPersonalMainDataXComponent } from 'app/impl/customer/sharing-component/new-cust-component/new-cust-personal-main-data/new-cust-personal-main-data-x.component';
 import { TrustingSocialReqHeaderComponent } from './new-cust-component/component/trusting-social/request/trusting-social-req-header.component';
 import { TrustingSocialReqConsentComponent } from './new-cust-component/component/trusting-social/request/consent/trusting-social-req-consent.component';
 import { TrustingSocialReqDetailComponent } from './new-cust-component/component/trusting-social/request/detail/trusting-social-req-detail.component';
