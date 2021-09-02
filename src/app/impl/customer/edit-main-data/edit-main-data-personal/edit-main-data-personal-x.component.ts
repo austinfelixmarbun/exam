@@ -237,7 +237,7 @@ export class EditMainDataPersonalXComponent implements OnInit {
         );
       }
     );
-    await this.http.post<CustPersonalObj>(URLConstantX.GetCustPersonalbyCustIdX, { Id: this.custPersonalObj.CustId }).toPromise().then(
+    await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: this.custPersonalObj.CustId }).toPromise().then(
       (response) => {
         this.tempCustPersonalObj = response;
         
@@ -369,7 +369,7 @@ export class EditMainDataPersonalXComponent implements OnInit {
     
     console.log(reqEditObj.CustAddrObj);
 
-    this.http.post(URLConstantX.EditCustPersonalMainDataX, reqEditObj).subscribe(
+    this.http.post(URLConstant.EditCustPersonalMainData, reqEditObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);
 
