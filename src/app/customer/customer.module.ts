@@ -132,6 +132,10 @@ import { CustomerCompanyPageXComponent } from 'app/impl/customer/customer-compan
 import { CustomerCompanyDetailXComponent } from 'app/impl/customer/customer-company/customer-company-detail/customer-company-detail-x.component';
 import { JobDataSmeXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-small-medium-enterprise/job-data-small-medium-enterprise-x.component';
 import { JobDataSmallMediumEnterpriseXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-sme/job-data-sme-x.component';
+import { CustFinDataTabXComponent } from 'app/impl/customer/cust-fin-data-tab/cust-fin-data-tab-x.component';
+import { CustBankAccSectionFindataXComponent } from 'app/impl/customer/cust-bank-acc-section-findata/cust-bank-acc-section-findata.component';
+import { CustBankAccDetailSectionFindataXComponent } from 'app/impl/customer/cust-bank-acc-detail-section-findata/cust-bank-acc-detail-section-findata-x.component';
+import { CustomerPersonalDetailXComponent } from 'app/impl/customer/customer-personal/customer-personal-detail/customer-personal-detail-x.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -275,13 +279,15 @@ export const customCurrencyMaskConfig = {
     CustomerPersonalPageXComponent,
     JobDataEmployeeXComponent,
     JobDataNonProfessionalXComponent,
-    CustomerPersonalJobDataXComponent,
-    JobDataEmployeeXComponent,
     JobDataProfessionalXComponent,
     JobDataSmeXComponent,
     CustomerCompanyPageXComponent,
     CustomerCompanyDetailXComponent,
-    JobDataSmallMediumEnterpriseXComponent
+    JobDataSmallMediumEnterpriseXComponent,
+    CustFinDataTabXComponent,
+    CustBankAccSectionFindataXComponent,
+    CustBankAccDetailSectionFindataXComponent,
+    CustomerPersonalDetailXComponent
   ],
   providers: [
     CustAssetComponent,

@@ -14,8 +14,7 @@ import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-customer-company-page-x',
-  templateUrl: './customer-company-page-x.component.html',
-  styleUrls: ['./customer-company-page-x.component.css']
+  templateUrl: './customer-company-page-x.component.html'
 })
 
 export class CustomerCompanyPageXComponent implements OnInit {

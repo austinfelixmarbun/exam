@@ -129,9 +129,9 @@
             </app-customer-company-contact-information>
           </div>
           <div id="financial-tab" class="content" role="tabpanel" aria-labelledby="financial-tab-trigger">
-            <app-cust-fin-data-tab *ngIf="CustStepIndex == 6" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'"
+            <app-cust-fin-data-tab-x *ngIf="CustStepIndex == 6" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'"
               (outputTab)="getValue($event)">
-            </app-cust-fin-data-tab>
+            </app-cust-fin-data-tab-x>
           </div>
           <div id="CustAsset-tab" class="content" role="tabpanel" aria-labelledby="CustAsset-tab-trigger">
             <app-cust-asset *ngIf="CustStepIndex == 7" [CustId]="IdCust" (ResponseCustAsset)="getValue($event)">

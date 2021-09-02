@@ -20,7 +20,6 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 @Component({
   selector: 'app-customer-personal-page-x',
   templateUrl: './customer-personal-page-x.component.html',
-  styleUrls: ['./customer-personal-page-x.component.css'],
   providers: [NGXToastrService],
 })
 export class CustomerPersonalPageXComponent implements OnInit {
@@ -165,7 +164,7 @@ export class CustomerPersonalPageXComponent implements OnInit {
         this.CustStepIndex++;
 
         //skip dms
-        if(this.CustStepIndex == 8 && this.SysConfigResultObj.ConfigValue != '1'){
+        if(this.CustStepIndex == 9 && this.SysConfigResultObj.ConfigValue != '1'){
           this.stepper.next();
           this.CustStepIndex++;
         }

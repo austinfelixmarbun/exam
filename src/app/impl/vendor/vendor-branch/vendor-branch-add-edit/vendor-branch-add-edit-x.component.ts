@@ -21,10 +21,11 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { GenericObj} from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 
 import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
+import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
 
 @Component({
   selector: 'app-vendor-branch-add-edit-x',
@@ -166,9 +167,9 @@ export class VendorBranchAddEditXComponent implements OnInit {
     if (this.mode == "edit") {
       this.VendorForm.controls.VendorCode.disable();
       await this.getData();
-    } 
+    }
     else {
-      if(this.MrVendorCategoryCode == "SUPPLIER"){
+      if (this.MrVendorCategoryCode == "SUPPLIER") {
         this.checkIsAutoFormNoFromSetting("SB");
         this.VendorForm.controls.ReservedField5.setValidators([Validators.required]);
         this.VendorForm.controls.ReservedField5.updateValueAndValidity();
@@ -191,8 +192,7 @@ export class VendorBranchAddEditXComponent implements OnInit {
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
 
                 let tempLookup = {};
-                for (const vendorAttr of this.VendorAttrList) 
-                {
+                for (const vendorAttr of this.VendorAttrList) {
                   var formGroupObject = new Object();
                   formGroupObject["VendorAttrContentId"] = [0];
                   formGroupObject["VendorAttrId"] = [vendorAttr["VendorAttrId"]];
@@ -208,7 +208,7 @@ export class VendorBranchAddEditXComponent implements OnInit {
                     formGroupObject["VendorAttrValue"] = [''];
                   }
 
-                  if(vendorAttr["VendorAttrCode"] == "AP_DUE_AFTER_GLV"){
+                  if (vendorAttr["VendorAttrCode"] == "AP_DUE_AFTER_GLV") {
                     formGroupObject["VendorAttrValue"] = this.DaysAPDuePaymentAfterGoLiveDefaultVal;
                   }
 
@@ -613,9 +613,9 @@ export class VendorBranchAddEditXComponent implements OnInit {
     this.setValidatorPattern();
   }
 
-  onOptionsSelected(event){ 
-    if(this.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_PERSONAL)
-    this.setValidatorPattern();
+  onOptionsSelected(event) {
+    if (this.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_PERSONAL)
+      this.setValidatorPattern();
   }
 
   setLookup() {
@@ -724,12 +724,12 @@ export class VendorBranchAddEditXComponent implements OnInit {
       this.vendorBranchObj.VendorObj.VendorCode = this.VendorForm.controls.VendorCode.value;
       this.vendorBranchObj.VendorObj.VendorName = this.VendorForm.controls.VendorName.value;
       this.vendorBranchObj.VendorObj.MrVendorTypeCode = this.VendorForm.controls.MrVendorTypeCode.value;
-      if(this.vendorBranchObj.VendorObj.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_PERSONAL){
+      if (this.vendorBranchObj.VendorObj.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_PERSONAL) {
         this.vendorBranchObj.VendorObj.IdNo = this.VendorForm.controls.IdNo.value;
         this.vendorBranchObj.VendorObj.RegistrationNo = "";
         this.vendorBranchObj.VendorObj.LicenseNo = "";
       }
-      else{
+      else {
         this.vendorBranchObj.VendorObj.IdNo = "";
         this.vendorBranchObj.VendorObj.RegistrationNo = this.VendorForm.controls.RegistrationNo.value;
         this.vendorBranchObj.VendorObj.LicenseNo = this.VendorForm.controls.LicenseNo.value;
@@ -826,8 +826,7 @@ export class VendorBranchAddEditXComponent implements OnInit {
         });
     }
     else {
-
-      this.http.post<GenericObj>(URLConstant.AddVendorBranch, this.vendorBranchObj).subscribe(
+      this.http.post<GenericObj>(URLConstantX.AddVendorBranch, this.vendorBranchObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_BRANCH_REG], { "VendorId": response.Id });
@@ -895,12 +894,11 @@ export class VendorBranchAddEditXComponent implements OnInit {
     this.regexService.getListPattern().subscribe(
       response => {
         this.resultPattern = response[CommonConstant.ReturnObj];
-        if(this.resultPattern != undefined)
-        {
+        if (this.resultPattern != undefined) {
           for (let i = 0; i < this.resultPattern.length; i++) {
             let patternObj: CustomPatternObj = new CustomPatternObj();
             let pattern: string = this.resultPattern[i].Value;
-    
+
             patternObj.pattern = pattern;
             patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
             this.customPattern.push(patternObj);
@@ -944,10 +942,10 @@ export class VendorBranchAddEditXComponent implements OnInit {
 
   setValidator(pattern: string) {
     if (this.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_COMPANY) {
-        this.VendorForm.controls.MrIdTypeCode.clearValidators();
-        this.VendorForm.controls.IdNo.clearValidators();
-        this.VendorForm.controls.RegistrationNo.setValidators(Validators.required);
-        this.VendorForm.controls.LicenseNo.setValidators(Validators.required);
+      this.VendorForm.controls.MrIdTypeCode.clearValidators();
+      this.VendorForm.controls.IdNo.clearValidators();
+      this.VendorForm.controls.RegistrationNo.setValidators(Validators.required);
+      this.VendorForm.controls.LicenseNo.setValidators(Validators.required);
     } else {
       if (pattern != undefined) {
         if (pattern != "") {
@@ -983,7 +981,7 @@ export class VendorBranchAddEditXComponent implements OnInit {
   // }
   //END OF URS-LOS-041
 
-  settingDefaultValue(){
+  settingDefaultValue() {
     var generalSettingObj: GenericObj = new GenericObj();
     generalSettingObj.Codes = ["DEFAULT_BPKB_AGING", "DEFAULT_APDUEAFTGLV"];
     this.http.post(URLConstant.GetListGeneralSettingByListGsCode, generalSettingObj).subscribe(
@@ -991,20 +989,16 @@ export class VendorBranchAddEditXComponent implements OnInit {
         var tempResponse = response['ResGetListGeneralSettingObj'];
         let GSBpkpAgingDefaultValue = tempResponse.find(x => x.GsCode == "DEFAULT_BPKB_AGING");
         let GSDaysAPDuePaymentAfterGoLive = tempResponse.find(x => x.GsCode == "DEFAULT_APDUEAFTGLV");
-        if (GSBpkpAgingDefaultValue != undefined || GSBpkpAgingDefaultValue != null)
-        {
-          if(GSBpkpAgingDefaultValue != "")
-          {
+        if (GSBpkpAgingDefaultValue != undefined || GSBpkpAgingDefaultValue != null) {
+          if (GSBpkpAgingDefaultValue != "") {
             this.BpbkAgingDefaultVal = Number(GSBpkpAgingDefaultValue["GsValue"]);
             this.VendorForm.patchValue({
               ReservedField5: this.BpbkAgingDefaultVal,
             });
           }
         }
-        if (GSDaysAPDuePaymentAfterGoLive != undefined || GSDaysAPDuePaymentAfterGoLive != null)
-        {
-          if(GSDaysAPDuePaymentAfterGoLive != "")
-          {
+        if (GSDaysAPDuePaymentAfterGoLive != undefined || GSDaysAPDuePaymentAfterGoLive != null) {
+          if (GSDaysAPDuePaymentAfterGoLive != "") {
             this.DaysAPDuePaymentAfterGoLiveDefaultVal = Number(GSDaysAPDuePaymentAfterGoLive["GsValue"]);
             this.VendorForm.patchValue({
               ReserveField6: this.DaysAPDuePaymentAfterGoLiveDefaultVal

@@ -104,8 +104,8 @@
           <br><br>
           <div class="bs-stepper-content">
             <div id="customer-detail-tab" class="content" role="tabpanel" aria-labelledby="customer-detail-tab-trigger">
-              <app-customer-personal-detail (outputTab)="getValue($event)" *ngIf="CustStepIndex == 1">
-              </app-customer-personal-detail>
+              <app-customer-personal-detail-x (outputTab)="getValue($event)" *ngIf="CustStepIndex == 1">
+              </app-customer-personal-detail-x>
             </div>
             <div id="address-tab" class="content" role="tabpanel" aria-labelledby="address-tab-trigger">
               <app-customer-personal-address (outputTab)="getValue($event)" *ngIf="CustStepIndex == 2">
@@ -126,8 +126,8 @@
               <app-customer-personal-job-data-x (outputTab)="getValue($event)" *ngIf="CustStepIndex == 6"></app-customer-personal-job-data-x>
             </div>
             <div id="financial-tab" class="content" role="tabpanel" aria-labelledby="financial-tab-trigger">
-              <app-cust-fin-data-tab [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 7">
-              </app-cust-fin-data-tab>
+              <app-cust-fin-data-tab-x [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 7">
+              </app-cust-fin-data-tab-x>
             </div>
             <div id="CustAsset-tab" class="content" role="tabpanel" aria-labelledby="CustAsset-tab-trigger">
               <app-cust-asset [CustId]="IdCust" (ResponseCustAsset)="getValue($event)" *ngIf="CustStepIndex == 8">

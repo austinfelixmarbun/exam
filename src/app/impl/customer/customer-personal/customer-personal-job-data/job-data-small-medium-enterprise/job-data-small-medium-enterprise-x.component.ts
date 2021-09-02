@@ -24,8 +24,7 @@ import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPerso
 import { CookieService } from 'ngx-cookie';
 @Component({
   selector: 'app-job-data-sme-x',
-  templateUrl: './job-data-small-medium-enterprise-x.component.html',
-  styleUrls: ['./job-data-small-medium-enterprise-x.component.css']
+  templateUrl: './job-data-small-medium-enterprise-x.component.html'
 })
 export class JobDataSmeXComponent implements OnInit {
   @Input() IsReset: boolean = false;

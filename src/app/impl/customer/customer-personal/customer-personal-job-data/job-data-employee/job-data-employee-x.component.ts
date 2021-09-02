@@ -26,8 +26,7 @@ import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-job-data-employee-x',
-  templateUrl: './job-data-employee-x.component.html',
-  styleUrls: ['./job-data-employee-x.component.css']
+  templateUrl: './job-data-employee-x.component.html'
 })
 
 export class JobDataEmployeeXComponent implements OnInit {

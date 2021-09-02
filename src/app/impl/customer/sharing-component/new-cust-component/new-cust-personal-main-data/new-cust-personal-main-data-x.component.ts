@@ -73,6 +73,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   CustomerForm: FormGroup = this.fb.group({});
   inputAddressObj: InputAddressObj = new InputAddressObj();
   inputLookupObj: InputLookupObj = new InputLookupObj();
+  checkIsAddressKnown: boolean;
   IsUseDigitalization: string = "0";
   officeCode: string;
   thirdPartyTrxNo: string = null;
@@ -99,6 +100,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
+    this.checkIsAddressKnown = false;
     this.InitData();
     this.InitCustMainDataMode();
     this.BindLookupSupplier();
@@ -114,7 +116,55 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     await this.GetExistingData();
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
+    this.isAddressIsNull();
     this.getIsUseDigitalization();
+  }
+
+
+  OnCheckIsAddressKnown(isChecked: boolean) {
+    this.checkIsAddressKnown = isChecked;
+    // this.ClearCustForm();
+    this.setAddressValidator();
+    console.log(this.CustomerForm);
+  }
+
+  setAddressValidator() {
+    if (this.checkIsAddressKnown == true) {
+    } else {
+      this.CustomerForm.get('UcAddress.Addr').clearValidators();
+      this.CustomerForm.get('UcAddress.AreaCode1').clearValidators();
+      this.CustomerForm.get('UcAddress.AreaCode2').clearValidators();
+      this.CustomerForm.get('UcAddress.AreaCode3').clearValidators();
+      this.CustomerForm.get('UcAddress.AreaCode4').clearValidators();
+      this.CustomerForm.get('UcAddress.City').clearValidators();
+      this.CustomerForm.get('UcAddress.MrHouseOwnershipCode').clearValidators();
+      this.CustomerForm.get('UcAddressZipcode.value').clearValidators();
+
+      this.CustomerForm.get('UcAddress.Addr').updateValueAndValidity();
+      this.CustomerForm.get('UcAddress.AreaCode1').updateValueAndValidity();
+      this.CustomerForm.get('UcAddress.AreaCode2').updateValueAndValidity();
+      this.CustomerForm.get('UcAddress.AreaCode3').updateValueAndValidity();
+      this.CustomerForm.get('UcAddress.AreaCode4').updateValueAndValidity();
+      this.CustomerForm.get('UcAddress.City').updateValueAndValidity();
+      this.CustomerForm.get('UcAddress.MrHouseOwnershipCode').updateValueAndValidity();
+      this.CustomerForm.get('UcAddressZipcode.value').updateValueAndValidity();
+    }
+  }
+
+  isAddressIsNull() {
+    if (
+      (this.inputAddressObj.default.Addr == "" || this.inputAddressObj.default.Addr == null) &&
+      (this.inputAddressObj.default.AreaCode1 == "" || this.inputAddressObj.default.AreaCode1 == null) &&
+      (this.inputAddressObj.default.AreaCode2 == "" || this.inputAddressObj.default.AreaCode2 == null) &&
+      (this.inputAddressObj.default.AreaCode3 == "" || this.inputAddressObj.default.AreaCode3 == null) &&
+      (this.inputAddressObj.default.AreaCode4 == "" || this.inputAddressObj.default.AreaCode4 == null) &&
+      (this.inputAddressObj.default.City == "" || this.inputAddressObj.default.City == null) &&
+      (this.inputAddressObj.default.MrHouseOwnershipCode == null || this.inputAddressObj.default.MrHouseOwnershipCode == "")
+    ) {
+      this.checkIsAddressKnown = false;
+    } else {
+      this.checkIsAddressKnown = true;
+    }
   }
 
   //#region Set Data
@@ -207,7 +257,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
       IdExpiredDt: [''],
       MrMaritalStatCode: ['', Validators.required],
-      MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
+      MotherMaidenName: ['', [Validators.maxLength(100)]],
       IsSupplier: [false],
       SupplCode: [''],
       SupplName: [''],
@@ -215,8 +265,32 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       MrCustRelationship: [''],
       MrCustModelCode: [''],
       MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-      Email1: ['', Validators.pattern(CommonConstant.regexEmail)]
+      Email1: ['', Validators.pattern(CommonConstant.regexEmail)],
+      UcAddress: this.fb.group({
+        Addr: [''],
+        AreaCode1: [''],
+        AreaCode2: [''],
+        AreaCode3: [''],
+        AreaCode4: [''],
+        City: [''],
+        MrHouseOwnershipCode: [''],
+      }),
+      UcAddressZipcode: this.fb.group({
+        value: [''],
+      })
     });
+    this.CustomerForm.addControl('UcAddress', this.fb.group({
+      Addr: [''],
+      AreaCode1: [''],
+      AreaCode2: [''],
+      AreaCode3: [''],
+      AreaCode4: [''],
+      City: [''],
+      MrHouseOwnershipCode: [''],
+    }));
+    this.CustomerForm.addControl('UcAddressZipcode', this.fb.group({
+      value: [''],
+    }));
 
     if (this.CustDataMode != this.CustDataModeMain) {
       this.CustomerForm.get("CustName").disable();
@@ -315,7 +389,19 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
         tempUcAddObj.MrHouseOwnershipCode = response.MrBuildingOwnershipCode;
         this.inputAddressObj.default = tempUcAddObj;
         this.inputAddressObj.inputField = inputFieldObj;
-
+        if (
+          (response.AreaCode1 == "" || response.AreaCode1 == null) &&
+          (response.AreaCode2 == "" || response.AreaCode2 == null) &&
+          (response.AreaCode3 == "" || response.AreaCode3 == null) &&
+          (response.AreaCode4 == "" || response.AreaCode1 == null) &&
+          (response.Addr == "" || response.Addr == null) &&
+          (response.City == "" || response.City == null) &&
+          (response.MrHouseOwnershipCode == "" || response.MrHouseOwnershipCode == null)
+        ) {
+          this.checkIsAddressKnown = false;
+        } else {
+          this.checkIsAddressKnown = true;
+        }
         if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
           this.inputAddressObj.inputField.inputLookupObj.isReadonly = false;
         }
@@ -513,9 +599,9 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
 
   IsLockEdit() {
     this.existingCustomerLookUpObj.isReadonly = true;
-    this.inputAddressObj.isReadonly = true;
-    this.inputAddressObj.inputField.inputLookupObj.isReadonly = true;
-    this.inputAddressObj.inputField.inputLookupObj.isDisable = true;
+    // this.inputAddressObj.isReadonly = true;
+    // this.inputAddressObj.inputField.inputLookupObj.isReadonly = true;
+    // this.inputAddressObj.inputField.inputLookupObj.isDisable = true;
 
     this.CustomerForm.get("CustName").disable();
     this.CustomerForm.get("MrGenderCode").disable();
@@ -583,6 +669,27 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   }
 
   SaveForm() {
+
+    if (this.checkIsAddressKnown == true) {
+      console.log(true)
+    } else {
+      console.log(false)
+      this.CustomerForm.patchValue({
+        UcAddress: {
+          Addr: "",
+          AreaCode1: "",
+          AreaCode2: "",
+          AreaCode3: "",
+          AreaCode4: "",
+          City: "",
+          MrBuildingOwnershipCode: ""
+        },
+        UcAddressZipcode: {
+          value: ""
+        }
+      });
+    }
+
     let tempForm = this.CustomerForm.getRawValue();
     let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
     reqSubmitObj.CustObj = this.custObj;
@@ -816,5 +923,5 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       }
     });
   }
-  
+
 }

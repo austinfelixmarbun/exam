@@ -2,16 +2,32 @@ import { environment } from "environments/environment";
 
 export class URLConstantX{
     //REF OFFICE X 
-    public static GetRefOfficeXByRefOfficeCode = environment.FoundationR3Url + "/RefOfficeX/GetRefOfficeXByRefOfficeCode";
-    public static AddRefOfficeX = environment.FoundationR3Url + "/RefOfficeX/AddRefOfficeX";  
-    public static EditRefOfficeX = environment.FoundationR3Url + "/RefOfficeX/EditRefOfficeX";  
+    public static GetRefOfficeXByRefOfficeCode = environment.FoundationR3Url + "/v1" + "/RefOfficeX/GetRefOfficeXByRefOfficeCode";
+    public static AddRefOfficeX = environment.FoundationR3Url + "/v1" + "/RefOfficeX/AddRefOfficeX";  
+    public static EditRefOfficeX = environment.FoundationR3Url + "/v1" + "/RefOfficeX/EditRefOfficeX";  
 
     //REF TAX OFFICE X
-    public static GetListTaxOfficeName = environment.FoundationR3Url + "/RefTaxOfficeX/GetListTaxOfficeName";
+    public static GetListTaxOfficeName = environment.FoundationR3Url + "/v1" + "/RefTaxOfficeX/GetListTaxOfficeName";
+
+    // CUSTOMER FIN DATA
+    public static AddCustBankAcc = environment.FoundationR3Url + "/v1" + "/CustBankAccX/AddCustBankAccX";
+
+    // CUSTOMER FIN DATA
+    public static GetCBAForCustFinDataByCustId = environment.FoundationR3Url + "/v1" + "/CustBankAccX/GetCBAForCustFinDataByCustIdX";
+    public static GetCustBankAccByCustBankAccIdWithRefBank = environment.FoundationR3Url + "/v1" + "/CustBankAccX/GetCustBankAccByCustBankAccIdWithRefBankX";
+    public static GetCBAForCustFinDataEditModeByCustBankAccId = environment.FoundationR3Url + "/v1" + "/CustBankAccX/GetCBAForCustFinDataEditModeByCustBankAccIdX";
+    public static EditCustBankAcc = environment.FoundationR3Url + "/v1" + "/CustBankAccX/EditCustBankAccX";
+    public static DeleteCustBankAccAndStmnt = environment.FoundationR3Url + "/v1" + "/CustBankAccX/DeleteCustBankAccAndStmntX";
 
     //VENDOR
     public static GetAttrContentByVendorCodeAndVendorAttrCode = environment.FoundationR3Url + "/v1" + "/VendorAttrContentX/GetAttrContentByVendorCodeAndVendorAttrCode";
     
+    // VENDOR BRANCH X
+    public static AddVendorBranch = environment.FoundationR3Url + "/v1" + "/VendorX/AddVendorBranch"
+
+    // VENDOR GRADING X
+    public static GetRuleVendorGrading = environment.FoundationR3Url + "/v1" + "/VendorGradingX/GetRuleVendorGrading";
+
     //CUSTOMER JOB DATA X
     public static AddCustPersonalJobData = environment.FoundationR3Url + "/v1" + "/CustPersonalJobDataX/AddCustPersonalJobData";
     public static EditCustPersonalJobData = environment.FoundationR3Url + "/v1" + "/CustPersonalJobDataX/EditCustPersonalJobData";

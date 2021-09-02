@@ -22,9 +22,9 @@ import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
 
 @Component({
   selector: 'app-job-data-professional-x',
-  templateUrl: './job-data-professional-x.component.html',
-  styleUrls: ['./job-data-professional-x.component.css']
+  templateUrl: './job-data-professional-x.component.html'
 })
+
 export class JobDataProfessionalXComponent implements OnInit {
   @Input() IsReset: boolean = false;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();

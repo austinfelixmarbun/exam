@@ -12,8 +12,7 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMas
 
 @Component({
   selector: 'app-customer-personal-job-data-x',
-  templateUrl: './customer-personal-job-data-x.component.html',
-  styleUrls: ['./customer-personal-job-data-x.component.css']
+  templateUrl: './customer-personal-job-data-x.component.html'
 })
 export class CustomerPersonalJobDataXComponent implements OnInit {
 

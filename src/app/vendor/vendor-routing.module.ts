@@ -285,7 +285,7 @@ const routes: Routes = [
         },
       },
       {
-        path: "VendorGrading/Request/DetailX",
+        path: PathConstantX.VENDOR_GRADING_REQUEST_DETAIL,
         component: VendorGradingRequestDetailXComponent,
         data: {
           title: "Vendor Grading Request Detail",

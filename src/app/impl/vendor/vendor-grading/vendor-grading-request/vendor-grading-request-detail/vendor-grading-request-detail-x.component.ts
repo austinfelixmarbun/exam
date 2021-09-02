@@ -15,13 +15,14 @@ import { UcInputRFAObj } from 'app/shared/model/UcInputRFAObj.Model';
 import { VendorGradingHistObj } from 'app/shared/model/VendorGradingHistObj.model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-vendor-grading-request-detail-x',
-  templateUrl: './vendor-grading-request-detail-x.component.html',
-  styleUrls: ['./vendor-grading-request-detail-x.component.css']
+  templateUrl: './vendor-grading-request-detail-x.component.html'
 })
+
 export class VendorGradingRequestDetailXComponent implements OnInit {
 
   inputLookupParentObj: InputLookupObj = new InputLookupObj();
@@ -137,6 +138,7 @@ export class VendorGradingRequestDetailXComponent implements OnInit {
       });
       if (this.mode == "edit") {
         this.setLookup();
+        this.LoadGradingRule(this.result.VendorRating);
       }
     });
 
@@ -146,8 +148,7 @@ export class VendorGradingRequestDetailXComponent implements OnInit {
     }
     await this.http.post(URLConstantX.GetAttrContentByVendorCodeAndVendorAttrCode, obj).toPromise().then(
       (response) => {
-        if(response["Code"] != "")
-        {
+        if (response["Code"] != "") {
           this.supplierType = response["Code"];
         }
       }
@@ -177,7 +178,7 @@ export class VendorGradingRequestDetailXComponent implements OnInit {
   }
 
   async LoadGradingRule(vendorRating: number) {
-    await this.http.post(URLConstant.GetRuleVendorGrading, { VendorRating: vendorRating }).subscribe(
+    await this.http.post(URLConstantX.GetRuleVendorGrading, { VendorRating: vendorRating, SupplierType: this.supplierType }).subscribe(
       (response) => {
 
         this.gradeCode = response["VendorGrade"];
@@ -231,7 +232,9 @@ export class VendorGradingRequestDetailXComponent implements OnInit {
       RequestRFAObj: rfaInfo
 
     }
-    this.http.post(URLConstant.SubmitRequestVendorGrading, submitVendorGradingReqObj).subscribe(
+
+    let SubmitRequestVendorGradingUrl = environment.isCore ? URLConstant.SubmitRequestVendorGradingV2 : URLConstant.SubmitRequestVendorGrading;
+    this.http.post(SubmitRequestVendorGradingUrl, submitVendorGradingReqObj).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_PAGING]);
@@ -257,21 +260,18 @@ export class VendorGradingRequestDetailXComponent implements OnInit {
 
     this.InputObj.ApvTypecodes = [TypeCode];
     this.InputObj.CategoryCode = CommonConstant.VENDOR_GRADING_APV;
-    
+
     this.InputObj.Reason = this.listReason;
     this.InputObj.TrxNo = " ";
 
     console.log(this.supplierType)
-    if(this.supplierType == CommonConstantX.VENDOR_ATTR_CONT_SUPPL_TYPE_FACTORING)
-    {
+    if (this.supplierType == CommonConstantX.VENDOR_ATTR_CONT_SUPPL_TYPE_FACTORING) {
       this.InputObj.SchemeCode = CommonConstantX.SCHM_CODE_VENDOR_GRD_SUPPL_BRC_SCHM_FCTR;
     }
-    else if (this.supplierType == CommonConstantX.VENDOR_ATTR_CONT_SUPPL_TYPE_DEALER_FINANCING)
-    {
+    else if (this.supplierType == CommonConstantX.VENDOR_ATTR_CONT_SUPPL_TYPE_DEALER_FINANCING) {
       this.InputObj.SchemeCode = CommonConstantX.SCHM_CODE_VENDOR_GRD_SUPPL_BRC_SCHM_DLFN;
     }
-    else
-    {
+    else {
       this.InputObj.SchemeCode = CommonConstantX.SCHM_CODE_VENDOR_GRD_SUPPL_BRC_SCHM;
     }
 
