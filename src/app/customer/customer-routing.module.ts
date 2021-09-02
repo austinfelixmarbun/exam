@@ -32,7 +32,14 @@ import { CustomerUpdateMasterDetailComponent } from './customer-update-master/cu
 import { PathConstant } from 'app/shared/PathConstant';
 import { NewCustHeaderComponent } from './sharing-component/new-cust-header/new-cust-header.component';
 import { PathConstantX } from 'app/impl/shared/PathConstantX';
-import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page/customer-personal-page-x.component';
+import { CustomerPersonalMainInfoXComponent } from 'app/impl/customer/customer-personal/customer-personal-main-info-x/customer-personal-main-info-x.component';
+import { CustomerPersonalDuplicateCheckXComponent } from 'app/impl/customer/customer-personal/customer-personal-duplicate-check-x/customer-personal-duplicate-check-x.component';
+import { CustomerPersonalPagingXComponent } from 'app/impl/customer/customer-personal-paging-x/customer-personal-paging-x.component';
+import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page-x/customer-personal-page-x.component';
+import { CustomerPersonalDetailXComponent } from 'app/impl/customer/customer-personal-detail-x/customer-personal-detail-x.component';
+import { EditMainDataPersonalXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-personal-x/edit-main-data-personal-x.component';
+import { EditMainDataPagingXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-paging-x/edit-main-data-paging-x.component';
+import { CustomerFamilyMenuXComponent } from 'app/impl/customer/customer-family-menu-x/customer-family-menu-x.component';
 import { CustomerPersonalJobDataXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/customer-personal-job-data-x.component';
 import { JobDataNonProfessionalXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-non-professional/job-data-non-professional-x.component';
 import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header/new-cust-header-x.component';
@@ -263,6 +270,62 @@ const routes: Routes = [
         component: CustomerUpdateMasterDetailComponent,
         data: {
           title: 'Update Data Customer Detail'
+        }
+      },
+      {
+        path: PathConstantX.CUST_PERSONAL_MAIN_INFO_X,
+        component: CustomerPersonalMainInfoXComponent,
+        data: {
+          title: 'Customer Personal Main Info X'
+        },
+      },
+      {
+        path: PathConstantX.CUST_PERSONAL_DUP_CHECK_X,
+        component: CustomerPersonalDuplicateCheckXComponent,
+        data: {
+          title: 'Customer Personal Duplicate Check'
+        },
+      },
+      {
+        path: PathConstantX.CUST_PAGING_X,
+        component: CustomerPersonalPagingXComponent,
+        data: {
+          title: 'Customer Paging X'
+        }
+      },
+      {
+        path: PathConstantX.CUST_PERSONAL_PAGE_X,
+        component: CustomerPersonalPageXComponent,
+        data: {
+          title: 'Customer Personal DuplicateCheck X'
+        }
+      },
+      {
+        path: PathConstantX.CUST_PERSONAL_PAGE_X,
+        component: CustomerPersonalDetailXComponent,
+        data: {
+          title: 'Customer Personal Detail X'
+        }
+      },
+      {
+        path: PathConstantX.CUST_EDIT_MAIN_DATA_PERSONAL_X,
+        component: EditMainDataPersonalXComponent,
+        data: {
+          title: 'Edit Main Data Personal Page X'
+        }
+      },
+      {
+        path: PathConstantX.CUST_EDIT_MAIN_DATA_PAGING_X,
+        component: EditMainDataPagingXComponent,
+        data: {
+          title: 'Customer Personal Detail X'
+        }
+      },
+      {
+        path: PathConstantX.CUST_FAMILY_PAGING_X,
+        component: CustomerFamilyMenuXComponent,
+        data: {
+          title: 'Customer Family X'
         }
       },
       {

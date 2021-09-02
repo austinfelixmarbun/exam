@@ -23,7 +23,7 @@ export class URLConstantX{
     public static GetAttrContentByVendorCodeAndVendorAttrCode = environment.FoundationR3Url + "/v1" + "/VendorAttrContentX/GetAttrContentByVendorCodeAndVendorAttrCode";
     
     // VENDOR BRANCH X
-    public static AddVendorBranch = environment.FoundationR3Url + "/v1" + "/VendorX/AddVendorBranch"
+    public static AddVendorBranch = environment.FoundationR3Url + "/v1" + "/VendorX/AddVendorBranch";
 
     // VENDOR GRADING X
     public static GetRuleVendorGrading = environment.FoundationR3Url + "/v1" + "/VendorGradingX/GetRuleVendorGrading";
@@ -39,10 +39,19 @@ export class URLConstantX{
     
     //CUSTOMER JOB DATA X
     public static GetCustPersonalJobDataByCustId = environment.FoundationR3Url + "/v1" + "/CustPersonalJobDataX/GetCustPersonalJobDataByCustIdX";
-    
+
+    public static AddVendorBranchX = environment.FoundationR3Url + "/VendorX/AddVendorBranchX";
+    public static GetRuleVendorGradingX = environment.FoundationR3Url + "/VendorX/GetRuleVendorGradingX";
 
     //REF SECTOR ECONOMY SLIK X
     public static GetRefSectorEconomySlikXById = environment.FoundationR3Url + "/v1" + "/RefSectorEconomySlikX/GetRefSectorEconomySlikXById"
     public static AddRefSectorEconomySlikX = environment.FoundationR3Url + "/v1" + "/RefSectorEconomySlikX/AddRefSectorEconomySlikX";
     public static EditRefSectorEconomySlikX = environment.FoundationR3Url + "/v1" + "/RefSectorEconomySlikX/EditRefSectorEconomySlikX";
+
+    //Customer
+    public static GetListCustAddrByCustIdForCustomerPersonalView = environment.FoundationR3Url +  "/v1" + "/CustX/GetListCustAddrByCustIdForCustomerPersonalView";
+    public static AddCustPersonalMainDataX = environment.FoundationR3Url + "/v1" + "/CustX/AddCustPersonalMainData";
+    public static GetCustomerDuplicateCheckX = environment.FoundationR3Url + "/v1" + "/CustDuplicateCheckX/GetCustomerDuplicateCheckX";
+    public static GetCustPersonalbyCustIdX = environment.FoundationR3Url + "/v1" + "/CustX/GetCustByCustId";//"/CustPersonalX/GetCustPersonalByCustId"
+    public static EditCustPersonalMainDataX = environment.FoundationR3Url + "/v1" + "/CustX/EditCustPersonalMainData";
 }

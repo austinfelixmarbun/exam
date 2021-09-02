@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { Location } from '@angular/common';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ResSysConfigResultObj } from 'app/shared/model/Response/ResSysConfigResultObj,model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { ResCustListIframeViewObj } from 'app/shared/model/Response/CustListIframeView/ResCustListIframeViewObj.model';
 
 @Component({
-  selector: 'app-customer-view',
-  templateUrl: './customer-view.component.html'
+  selector: 'app-customer-view-x',
+  templateUrl: './customer-view-x.component.html',
+  styleUrls: ['./customer-view-x.component.css']
 })
-export class CustomerViewComponent implements OnInit {
+export class CustomerViewXComponent implements OnInit {
   custResultData: any;
 
   viewCustMainInfoHeaderObj: UcViewGenericObj = new UcViewGenericObj();
@@ -36,10 +36,6 @@ export class CustomerViewComponent implements OnInit {
   IsLms: boolean = false;
   IsUseDms: boolean = false;
 
-  IsIframe: boolean = false;
-  IsUseDigitalization: boolean = false;
-  listIframe: Array<ResCustListIframeViewObj> = new Array<ResCustListIframeViewObj>();
-
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj();
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {
@@ -52,9 +48,12 @@ export class CustomerViewComponent implements OnInit {
   }
 
   async ngOnInit() : Promise<void> {
+    alert("test");
     this.viewCustMainInfoHeaderObj.viewInput = "./assets/ucviewgeneric/viewCustMainInfoHeader.json";
+    this.viewCustMainInfoHeaderObj.viewEnvironment = environment.FoundationR3Url;
 
     this.viewCustCoyMainInfoHeader.viewInput = "./assets/ucviewgeneric/viewCustCoyMainInfoHeader.json";
+    this.viewCustCoyMainInfoHeader.viewEnvironment = environment.FoundationR3Url;
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
@@ -75,7 +74,7 @@ export class CustomerViewComponent implements OnInit {
 
     let reqGetSysConfigResultLOSObj = new GenericObj();
     reqGetSysConfigResultLOSObj.Code  = CommonConstant.MODULE_LOS;
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, {ConfigCode : reqGetSysConfigResultLOSObj.Code}).toPromise().then(
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, reqGetSysConfigResultLOSObj).toPromise().then(
       (response) => {
         if(response.ConfigValue === "1") {
           this.IsLos = true;
@@ -88,7 +87,7 @@ export class CustomerViewComponent implements OnInit {
 
     let reqGetSysConfigResultLMSObj = new GenericObj();
     reqGetSysConfigResultLMSObj.Code  = CommonConstant.MODULE_LMS;
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, {ConfigCode : reqGetSysConfigResultLMSObj.Code}).toPromise().then(
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, reqGetSysConfigResultLMSObj).toPromise().then(
       (response) => {
         if(response.ConfigValue === "1") {
           this.IsLms = true;
@@ -109,18 +108,6 @@ export class CustomerViewComponent implements OnInit {
         else {
           this.IsUseDms = false;
         }
-      }
-    );
-
-    await this.GetCustListIframeView();
-    await this.getIsUseDigitalization();
-  }
-
-  async GetCustListIframeView() {
-    await this.http.post(URLConstant.GetCustListIframeView, {}).toPromise().then(
-      (response) => {
-        this.listIframe = response[CommonConstant.ReturnObj];
-        this.IsIframe = true;
       }
     );
   }
@@ -200,146 +187,87 @@ export class CustomerViewComponent implements OnInit {
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_DOC],{ "CustId": this.CustId });
           });
-          return;
         }
-
-        // if(this.IsLos) { // Application List
-        //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-        //     window.open(environment.losR3Web + "/View/AppList?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
-        //   });
-        //   return;
-        // }
-
-        // if(this.IsLms) { // Agreement list
-        //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-        //     window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
-        //   });
-        //   return;
-        // }
-
-        if(this.IsIframe) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
+        else {
+          if(this.IsLos) { // Application List
+            this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+              window.open(environment.losR3Web + "/View/AppList?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
+            });
+          }
+          else if(this.IsLms) { // Agreement list
+            this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+              window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
+            });
+          }
+          else { // Other Info
+            this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
+            });
+          }
         }
-
-        if(this.IsUseDigitalization) { // Trusting Social
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
-          });
-          return;
-        }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
       }
       else if (ev == 10) {
-        // if(this.IsLos) { // Application List
-        //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-        //     window.open(environment.losR3Web + "/View/AppList?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
-        //   });
-        //   return;
-        // }
-
-        // if(this.IsLms) { // Agreement list
-        //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-        //     window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
-        //   });
-        //   return;
-        // }
-
-        if(this.IsIframe) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
+        if(this.IsUseDms) {
+          if(this.IsLos) { // Application List
+            this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+              window.open(environment.losR3Web + "/View/AppList?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
+            });
+          }
+          else {
+            if(this.IsLms) { // Agreement list
+              this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+                window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
+              });
+            }
+            else { // Other Info
+              this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+                AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
+              });
+            }
+          }
         }
-
-        if(this.IsUseDigitalization) { // Trusting Social
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
-          });
-          return;
+        else {
+          if(this.IsLms) { // Agreement List
+            this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+              window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
+            });
+          }
+          else { // Other Info
+            this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
+            });
+          }
         }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
       }
       else if (ev == 11) {
-        // if(this.IsLms) { // Agreement List
-        //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-        //     window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
-        //   });
-        //   return;
-        // }
-
-        if(this.IsIframe) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
+        if(this.IsUseDms) {
+          if(this.IsLos) {
+            if(this.IsLms) { // Agreement List
+              this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+                window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
+              });
+            }
+            else { // Other Info
+              this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+                AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
+              });
+            }
+          }
+          else { // Other Info
+            this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
+            });
+          }
         }
-
-        if(this.IsUseDigitalization) { // Trusting Social
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
-          });
-          return;
+        else {
+          if(this.IsLos) { // Other Info
+            this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+              AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
+            });
+          }
         }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
       }
-      else if (ev == 12) {
-        if(this.IsIframe && this.IsLms) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
-        }
-
-        if(this.IsUseDigitalization) { // Trusting Social
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
-          });
-          return;
-        }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
-      }
-      else if (ev == 13) {
-        if(this.IsIframe && (this.IsLos && this.IsLms)) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
-        }
-
-        if(this.IsUseDigitalization) { // Trusting Social
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
-          });
-          return;
-        }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
-      }
-      else if (ev == 14) {
-        if(this.IsUseDigitalization) { // Trusting Social
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
-          });
-          return;
-        }
-
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
-      }
-      else if (ev == 15) { // Other Info      
+      else if (ev == 12) { // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
         });
@@ -396,98 +324,23 @@ export class CustomerViewComponent implements OnInit {
       //     AdInsHelper.RedirectUrl(this.router,["/View/Customer/CoyOther"],{ "CustId": this.CustId });
       //   });
       // }
-      else if (ev == 9) {        
+      else if (ev == 9) {
         if(this.IsUseDms) { // Document
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_DOC],{ "CustId": this.CustId });
           });
-          return;
         }
-
-        if(this.IsIframe) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
-        }
-
-        if(this.IsUseDigitalization) { // Trusting Social
+        else { // Other Info
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
           });
-          return;
         }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
       }
-      else if (ev == 10) {
-        if(this.IsIframe) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
-        }
-
-        if(this.IsUseDigitalization) { // Trusting Social
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
-          });
-          return;
-        }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
-      }
-      else if (ev == 11) {
-        if(this.IsIframe && this.IsUseDms) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
-        }
-
-        if(this.IsUseDigitalization) { // Trusting Social
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
-          });
-          return;
-        }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
-      }
-      else if (ev == 12) { 
-        if(this.IsUseDigitalization) { // Trusting Social
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
-          });
-          return;
-        }
-
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
-      }
-
-      else if (ev == 13) { // Other Info
+      else if (ev == 10) { // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
         });
       }
     }
-  }
-
-  async getIsUseDigitalization(){
-    await this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeIsUseDigitalization}).toPromise().then(
-      (response) => {
-        if(response["GsValue"] === "1") {
-          this.IsUseDigitalization = true;
-        }
-        else {
-          this.IsUseDigitalization = false;
-        }
-      }
-    );
   }
 }

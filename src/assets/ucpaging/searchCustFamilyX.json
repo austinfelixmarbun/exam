@@ -101,7 +101,7 @@
         }
     ],
     "querystring": {
-        "name": "searchCustFamily"
+        "name": "searchCustFamilyX"
     },
     "bodyList": [
         {
@@ -136,7 +136,7 @@
             "type": "link",
             "position": "left",
             "property": "CustNo",
-            "path": "VIEW_CUST_PERSONAL_DETAIL_X",
+            "path": "VIEW_CUST_PERSONAL_DETAIL",
             "target": "_blank",
             "param": [
                 {

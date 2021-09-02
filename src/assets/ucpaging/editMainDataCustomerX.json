@@ -1,6 +1,6 @@
 {
-    "title": "Customer",
-    "exportExcel": false,
+    "title": "Edit Main Data Customer",
+    "exportExcel": true,
     "component": [
         {
             "type": "textbox",
@@ -73,67 +73,23 @@
         {
             "type": "label",
             "position": "center",
-            "label": "EDIT  "
+            "label": "EDIT"
         }
     ],
     "querystring": {
-        "name": "searchCustomer"
+        "name": "editMainDataCustomerX"
     },
     "bodyList": [
         {
-            "type": "action",
-            "position": "center",
-            "action": [
+            "type": "link",
+            "position": "left",
+            "property": "CustNo",
+            "path": "VIEW_CUST_PERSONAL_DETAIL_X",
+            "target": "_blank",
+            "param": [
                 {
-                    "type": "switch",
-                    "case": [
-                        {
-                            "conditions": [
-                                {
-                                    "property": "MrCustTypeCode",
-                                    "value": "PERSONAL",
-                                    "restriction": "EQ"
-                                }
-                            ],
-                            "result": {
-                                "type": "link",
-                                "position": "left",
-                                "property": "CustNo",
-                                "path": "VIEW_CUST_PERSONAL_DETAIL_X",
-                                "target": "_blank",
-                                "param": [
-                                    {
-                                        "type": "CustId",
-                                        "property": "CustId"
-                                    }
-                                ]
-                            },
-                            "isHide": false
-                        },
-                        {
-                            "conditions": [
-                                {
-                                    "property": "MrCustTypeCode",
-                                    "value": "COMPANY",
-                                    "restriction": "EQ"
-                                }
-                            ],
-                            "result": {
-                                "type": "link",
-                                "position": "left",
-                                "property": "CustNo",
-                                "path": "VIEW_CUST_COY_DETAIL",
-                                "target": "_blank",
-                                "param": [
-                                    {
-                                        "type": "CustId",
-                                        "property": "CustId"
-                                    }
-                                ]
-                            },
-                            "isHide": false
-                        }
-                    ]
+                    "type": "CustId",
+                    "property": "CustId"
                 }
             ]
         },
@@ -146,7 +102,7 @@
             "type": "text",
             "position": "left",
             "property": "MrCustTypeCode"
-        },
+        }, 
         {
             "type": "text",
             "position": "left",
@@ -169,12 +125,20 @@
                             ],
                             "result": {
                                 "type": "url",
-                                "path": "CUST_PERSONAL_PAGE_X",
+                                "path": "CUST_EDIT_MAIN_DATA_PERSONAL_X",
                                 "icon": "ft-edit-2",
                                 "param": [
                                     {
-                                        "type": "IdCust",
+                                        "type": "CustId",
                                         "property": "CustId"
+                                    },
+                                    {
+                                        "type": "CustNo",
+                                        "property" : "CustNo"
+                                    },
+                                    {
+                                        "type": "From",
+                                        "property": "EditMainData"
                                     }
                                 ]
                             },
@@ -190,12 +154,20 @@
                             ],
                             "result": {
                                 "type": "url",
-                                "path": "CUST_COY_PAGE",
+                                "path": "CUST_EDIT_MAIN_DATA_COY",
                                 "icon": "ft-edit-2",
                                 "param": [
                                     {
-                                        "type": "IdCust",
+                                        "type": "CustId",
                                         "property": "CustId"
+                                    },
+                                    {
+                                        "type": "CustNo",
+                                        "property" : "CustNo"
+                                    },
+                                    {
+                                        "type": "From",
+                                        "property": "EditMainData"
                                     }
                                 ]
                             },
@@ -205,5 +177,6 @@
                 }
             ]
         }
+                
     ]
 }

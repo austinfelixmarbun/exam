@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PathConstant } from 'app/shared/PathConstant';
+import { CustomerViewPersonalDetailXComponent } from 'app/impl/customer/customer-view/customer-view-personal-detail-x/customer-view-personal-detail-x.component';
+import { PathConstantX } from 'app/impl/shared/PathConstantX';
 
 
 const routes: Routes = [
@@ -65,6 +67,10 @@ const routes: Routes = [
         path: 'PersonalOther',
         loadChildren: './customer-view-personal-other-attr/customer-view-personal-other-attr.module#CustomerViewPersonalOtherModule'
 
+      },
+      {
+        path: PathConstantX.VIEW_CUST_PERSONAL_DETAIL_X,
+        component: CustomerViewPersonalDetailXComponent
       },
       ///Cust Type Company
       {

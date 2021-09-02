@@ -15,7 +15,7 @@
         "name": "V.VENDOR_CODE",
         "id": "VendorCode",
         "value": "",
-        "label": "Supplier Branch Code",
+        "label": "Vendor Supplier Code",
         "placeholder": "Placeholder"
       },
       {
@@ -23,7 +23,7 @@
         "name": "V.VENDOR_NAME",
         "id": "VendorName",
         "value": "",
-        "label": "Supplier Branch Name",
+        "label": "Vendor Supplier Name",
         "placeholder": "Placeholder"
       }
     ],

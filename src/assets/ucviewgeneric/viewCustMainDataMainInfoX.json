@@ -28,18 +28,8 @@
           },
           {
             "type": "text",
-            "label": "Gelar Depan",
-            "property": "CustPrefixName"
-          },
-          {
-            "type": "text",
             "label": "Num Of Dependents",
             "property": "NoOfDependents"
-          },
-          {
-            "type": "text",
-            "label": "Gelar Belakang",
-            "property": "CustSuffixName"
           },
           {
             "type": "text",

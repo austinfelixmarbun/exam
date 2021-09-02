@@ -12,7 +12,7 @@
                 "position": "left",
                 "property": "CustNo",
                 "target": "_blank",
-                "path": "VIEW_CUST_PERSONAL_DETAIL",
+                "path": "VIEW_CUST_PERSONAL_DETAIL_X",
                 "param": [
                     {
                         "type": "CustId",
@@ -86,7 +86,7 @@
             "property": "VipNotes"
           },
           {
-            "type": "text",
+            "type": "boolean",
             "label": "Gelar Depan",
             "property": "GelarDepan"
           },
@@ -97,7 +97,7 @@
           }
         ],
         "querystring": {
-          "name": "viewCustPersonalHeader"
+          "name": "viewCustPersonalHeaderX"
         }
       }
     ]

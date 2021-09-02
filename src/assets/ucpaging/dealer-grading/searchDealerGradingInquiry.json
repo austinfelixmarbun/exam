@@ -6,7 +6,7 @@
       "name": "vdr.VENDOR_CODE",
       "id": "VendorCodeId",
       "value": "",
-      "label": "Branch Code",
+      "label": "Vendor Supplier Code",
       "placeholder": "Placeholder"
     },
     {
@@ -14,7 +14,7 @@
       "name": "vdr.VENDOR_NAME",
       "id": "VendorNameId",
       "value": "",
-      "label": "Branch Name",
+      "label": "Vendor Supplier Name",
       "placeholder": "Placeholder"
     },
     {
@@ -44,37 +44,20 @@
       "restriction": "gte",
       "placeholder": "",
       "datatype": "date"
-    },
+    },     
     {
-      "type": "dropdown",
-      "name": "grading.attr_content",
-      "id": "GradeDescr",
+      "type": "textbox",
+      "name": "hist.NEW_GRADE",
+      "id": "Grade",
       "label": "Grade",
       "value": "",
-      "placeholder": "Placeholder",
-      "isFromUrl": false,
-      "isSelectOne": false,
-      "items": [
-        {
-          "key": "Good",
-          "value": "Good"
-        },
-        {
-          "key": "Excellent",
-          "value": "Excellent"
-        },
-        {
-          "key": "Bad",
-          "value": "Bad"
-        }
-      ],
-      "itemsUrl": []
+      "placeholder": "Placeholder"
     },
     {
       "type": "dropdown",
       "name": "vdr.IS_ACTIVE",
       "id": "IsActiveId",
-      "label": "Active",
+      "label": "Vendor Supplier Active",
       "value": "",
       "placeholder": "Placeholder",
       "isFromUrl": false,
@@ -93,29 +76,20 @@
     },
     {
       "type": "dropdown",
-      "name": "hist.status",
+      "name": "hist.status", 
       "id": "GradingStatus",
-      "label": "Status",
       "value": "",
       "placeholder": "Placeholder",
-      "isFromUrl": false,
-      "isSelectOne": false,
-      "items": [
-        {
-          "key": "REQ",
-          "value": "Request"
-        },
-        {
-          "key": "APV",
-          "value": "Approve"
-        },
-        {
-          "key": "EXE",
-          "value": "Execute"
-        }
-      ],
-      "itemsUrl": []
-    }
+      "datatype": "text",
+      "isFromURL": true,
+      "ddlType": "all",
+      "url": "",
+      "path": "/VendorGradingHistX/GetListRefMasterVendorGrade",
+      "label": "Status",
+      "items": [],
+      "itemsUrl": [],
+      "environment": "FOU"
+    }    
   ],
   "querystring": {
     "name": "searchInquirySupplBranchGrading"
@@ -160,8 +134,8 @@
     {
       "type": "sort",
       "position": "center",
-      "label": "Grade Status",
-      "name": "grading.attr_content"
+      "label": "Grade",
+      "name": "hist.NEW_GRADE"
     },
     {
       "type": "sort",

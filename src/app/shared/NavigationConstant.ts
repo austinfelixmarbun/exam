@@ -159,6 +159,8 @@ export class NavigationConstant {
     public static VIEW_VENDOR_HOLDING = "/" + NavigationConstant.VIEW_VENDOR + "/" + PathConstant.VIEW_VENDOR_HOLDING; //'/View/Vendor/VendorHolding'
     //#endregion
 
+    public static VIEW_CUST_PERSONAL_DETAIL_X = "/" + NavigationConstant.VIEW_CUST + "/" +PathConstantX.VIEW_CUST_PERSONAL_DETAIL_X; //'/View/Customer/PersonalDetail'
+
     //#region Upload
     public static UPLOAD_SETTING_EDIT = "/" + PathConstant.LR_UPLOAD + "/" + PathConstant.UPLOAD_SETTING_EDIT; //'/Upload/UploadSettingEdit'
     public static UPLOAD_SETTING_PAGING = "/" + PathConstant.LR_UPLOAD + "/" + PathConstant.UPLOAD_SETTING_PAGING; //'/Upload/UploadSettingPaging'
@@ -344,4 +346,13 @@ export class NavigationConstant {
     public static PEFINDO_MO_SUMMARY = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_MO_SUMMARY;  //'/View/Pefindo/MoSummary'
     public static PEFINDO_PEFINDO_SCORE = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_PEFINDO_SCORE;  //'/View/Pefindo/PefindoScore'
     //#endregion
+
+    public static CUST_PERSONAL_MAIN_INFO_X = '..' + "/" + PathConstantX.CUST_PERSONAL_MAIN_INFO_X; //'../CustomerPersonal/MainInfo'
+    public static CUST_MAIN_VIEW_INFO_X = '..' + "/" + PathConstantX.CUST_MAIN_VIEW_X; //'../CustomerCompany/MainInfo'
+    public static CUST_PERSONAL_DUP_CHECK_X = "/" + PathConstant.LR_CUST + "/" + PathConstantX.CUST_PERSONAL_DUP_CHECK_X; //'/Customer/CustomerPersonal/DuplicateCheck'
+    public static CUST_PAGING_X = "/" + PathConstant.LR_CUST+ "/" + PathConstantX.CUST_PAGING_X; //'/Customer/Paging'
+    public static CUST_PERSONAL_PAGE_X = "/" + PathConstant.LR_CUST + "/" + PathConstantX.CUST_PERSONAL_PAGE_X;
+    public static CUST_EDIT_MAIN_DATA_PERSONAL_X = "/" + PathConstant.LR_CUST + "/" + PathConstantX.CUST_EDIT_MAIN_DATA_PERSONAL_X; //'/Customer/EditMainData/Personal'
+    public static CUST_EDIT_MAIN_DATA_PAGING_X = "/" + PathConstant.LR_CUST + "/" + PathConstantX.CUST_EDIT_MAIN_DATA_PAGING_X; //'/Customer/EditMainData/Paging'
+    public static CUST_FAMILY_PAGING_X = "/" + PathConstant.LR_CUST + "/" + PathConstantX.CUST_FAMILY_PAGING_X; //'/Customer/CustFamily/Paging'
 }
