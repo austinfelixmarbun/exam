@@ -29,8 +29,7 @@ import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValue
 
 @Component({
   selector: 'app-customer-personal-main-info-x',
-  templateUrl: './customer-personal-main-info-x.component.html',
-  styleUrls: ['./customer-personal-main-info-x.component.css']
+  templateUrl: './customer-personal-main-info-x.component.html'
 })
 export class CustomerPersonalMainInfoXComponent implements OnInit {
 

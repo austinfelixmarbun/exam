@@ -3,8 +3,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 
 @Component({
   selector: 'app-vendor-grading-request-paging-x',
-  templateUrl: './vendor-grading-request-paging-x.component.html',
-  styleUrls: ['./vendor-grading-request-paging-x.component.css']
+  templateUrl: './vendor-grading-request-paging-x.component.html'
 })
 export class VendorGradingRequestPagingXComponent implements OnInit {
 

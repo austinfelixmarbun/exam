@@ -32,18 +32,18 @@ import { CustomerUpdateMasterDetailComponent } from './customer-update-master/cu
 import { PathConstant } from 'app/shared/PathConstant';
 import { NewCustHeaderComponent } from './sharing-component/new-cust-header/new-cust-header.component';
 import { PathConstantX } from 'app/impl/shared/PathConstantX';
-import { CustomerPersonalMainInfoXComponent } from 'app/impl/customer/customer-personal/customer-personal-main-info-x/customer-personal-main-info-x.component';
-import { CustomerPersonalDuplicateCheckXComponent } from 'app/impl/customer/customer-personal/customer-personal-duplicate-check-x/customer-personal-duplicate-check-x.component';
-import { CustomerPersonalPagingXComponent } from 'app/impl/customer/customer-personal-paging-x/customer-personal-paging-x.component';
-import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page-x/customer-personal-page-x.component';
-import { CustomerPersonalDetailXComponent } from 'app/impl/customer/customer-personal-detail-x/customer-personal-detail-x.component';
-import { EditMainDataPersonalXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-personal-x/edit-main-data-personal-x.component';
-import { EditMainDataPagingXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-paging-x/edit-main-data-paging-x.component';
-import { CustomerFamilyMenuXComponent } from 'app/impl/customer/customer-family-menu-x/customer-family-menu-x.component';
+import { CustomerPersonalPagingXComponent } from 'app/impl/customer/customer-personal-paging/customer-personal-paging-x.component';
+import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page/customer-personal-page-x.component';
+import { EditMainDataPersonalXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-personal/edit-main-data-personal-x.component';
+import { EditMainDataPagingXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-paging/edit-main-data-paging-x.component';
+import { CustomerFamilyMenuXComponent } from 'app/impl/customer/customer-family-menu/customer-family-menu-x.component';
 import { CustomerPersonalJobDataXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/customer-personal-job-data-x.component';
 import { JobDataNonProfessionalXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-non-professional/job-data-non-professional-x.component';
 import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header/new-cust-header-x.component';
 import { CustomerCompanyPageXComponent } from 'app/impl/customer/customer-company/customer-company-page/customer-company-page-x.component';
+import { CustomerPersonalMainInfoXComponent } from 'app/impl/customer/customer-personal/customer-personal-main-info/customer-personal-main-info-x.component';
+import { CustomerPersonalDuplicateCheckXComponent } from 'app/impl/customer/customer-personal/customer-personal-duplicate-check/customer-personal-duplicate-check-x.component';
+import { CustomerPersonalDetailXComponent } from 'app/impl/customer/customer-personal/customer-personal-detail/customer-personal-detail-x.component';
 
 const routes: Routes = [
   {

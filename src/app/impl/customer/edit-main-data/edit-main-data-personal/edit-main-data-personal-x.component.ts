@@ -32,8 +32,7 @@ import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
 
 @Component({
   selector: 'app-edit-main-data-personal-x',
-  templateUrl: './edit-main-data-personal-x.component.html',
-  styleUrls: ['./edit-main-data-personal-x.component.css']
+  templateUrl: './edit-main-data-personal-x.component.html'
 })
 export class EditMainDataPersonalXComponent implements OnInit {
   @ViewChild('LookupSupplier') ucLookupSupplier: UclookupgenericComponent;
@@ -136,7 +135,7 @@ export class EditMainDataPersonalXComponent implements OnInit {
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.default = UcAddressObj;
+    this.inputAddressObj.default = new UcAddressObj();
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
   

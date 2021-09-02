@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PathConstant } from 'app/shared/PathConstant';
-import { CustomerViewPersonalDetailXComponent } from 'app/impl/customer/customer-view/customer-view-personal-detail-x/customer-view-personal-detail-x.component';
+import { CustomerViewPersonalDetailXComponent } from 'app/impl/customer/customer-view/customer-view-personal-detail/customer-view-personal-detail-x.component';
 import { PathConstantX } from 'app/impl/shared/PathConstantX';
 
 

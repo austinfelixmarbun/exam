@@ -14,8 +14,7 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-view-x',
-  templateUrl: './customer-view-x.component.html',
-  styleUrls: ['./customer-view-x.component.css']
+  templateUrl: './customer-view-x.component.html'
 })
 export class CustomerViewXComponent implements OnInit {
   custResultData: any;

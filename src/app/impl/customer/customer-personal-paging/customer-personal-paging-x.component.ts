@@ -8,8 +8,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-customer-personal-paging-x',
-  templateUrl: './customer-personal-paging-x.component.html',
-  styleUrls: ['./customer-personal-paging-x.component.css']
+  templateUrl: './customer-personal-paging-x.component.html'
 })
 export class CustomerPersonalPagingXComponent implements OnInit {
 

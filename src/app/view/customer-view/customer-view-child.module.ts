@@ -27,8 +27,8 @@ import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { createTranslateLoader } from "app/app.module";
 import { HttpClient } from "@angular/common/http";
 import { CustomerViewTrustingSocialComponent } from "./customer-view-trusting-social/customer-view-trusting-social.component";
-import { CustomerViewPersonalDetailXComponent } from "app/impl/customer/customer-view/customer-view-personal-detail-x/customer-view-personal-detail-x.component";
-import { CustomerViewXComponent } from "app/impl/customer/customer-view/customer-view-x/customer-view-x.component";
+import { CustomerViewPersonalDetailXComponent } from "app/impl/customer/customer-view/customer-view-personal-detail/customer-view-personal-detail-x.component";
+import { CustomerViewXComponent } from "app/impl/customer/customer-view/customer-view/customer-view-x.component";
 
 @NgModule({
   imports: [

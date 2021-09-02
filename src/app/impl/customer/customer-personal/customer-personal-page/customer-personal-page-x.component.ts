@@ -16,6 +16,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { PathConstantX } from 'app/impl/shared/PathConstantX';
 
 @Component({
   selector: 'app-customer-personal-page-x',
@@ -71,9 +72,9 @@ export class CustomerPersonalPageXComponent implements OnInit {
 
   back() {
     if (this.Page != null) {
-      AdInsHelper.RedirectUrl(this.router, ["/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstant.PAGING], {});
+      AdInsHelper.RedirectUrl(this.router, ["/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstantX.CUST_PAGING_X], {});
     } else {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
+      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING_X],{});
     }
   }
  

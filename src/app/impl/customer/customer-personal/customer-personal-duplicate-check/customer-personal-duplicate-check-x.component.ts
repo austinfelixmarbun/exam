@@ -24,7 +24,6 @@ import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
 @Component({
   selector: 'app-customer-personal-duplicate-check-x',
   templateUrl: './customer-personal-duplicate-check-x.component.html',
-  styleUrls: ['./customer-personal-duplicate-check-x.component.css'],
   providers: [NGXToastrService]
 })
 export class CustomerPersonalDuplicateCheckXComponent implements OnInit {

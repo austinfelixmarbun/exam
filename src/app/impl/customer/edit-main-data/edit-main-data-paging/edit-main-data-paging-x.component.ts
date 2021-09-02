@@ -7,8 +7,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 
 @Component({
   selector: 'app-edit-main-data-paging-x',
-  templateUrl: './edit-main-data-paging-x.component.html',
-  styleUrls: ['./edit-main-data-paging-x.component.css']
+  templateUrl: './edit-main-data-paging-x.component.html'
 })
 export class EditMainDataPagingXComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();

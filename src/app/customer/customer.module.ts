@@ -136,6 +136,13 @@ import { CustFinDataTabXComponent } from 'app/impl/customer/cust-fin-data-tab/cu
 import { CustBankAccSectionFindataXComponent } from 'app/impl/customer/cust-bank-acc-section-findata/cust-bank-acc-section-findata.component';
 import { CustBankAccDetailSectionFindataXComponent } from 'app/impl/customer/cust-bank-acc-detail-section-findata/cust-bank-acc-detail-section-findata-x.component';
 import { CustomerPersonalDetailXComponent } from 'app/impl/customer/customer-personal/customer-personal-detail/customer-personal-detail-x.component';
+import { CustomerPersonalDuplicateCheckXComponent } from 'app/impl/customer/customer-personal/customer-personal-duplicate-check/customer-personal-duplicate-check-x.component';
+import { CustomerPersonalPagingXComponent } from 'app/impl/customer/customer-personal-paging/customer-personal-paging-x.component';
+import { EditMainDataPersonalXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-personal/edit-main-data-personal-x.component';
+import { CustomerPersonalMainInfoXComponent } from 'app/impl/customer/customer-personal/customer-personal-main-info/customer-personal-main-info-x.component';
+import { CustomerViewHeaderPersonalXComponent } from 'app/impl/customer/customer-view/customer-view/customer-view-header-personal/customer-view-header-personal-x.component';
+import { CustomerFamilyMenuXComponent } from 'app/impl/customer/customer-family-menu/customer-family-menu-x.component';
+import { EditMainDataPagingXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-paging/edit-main-data-paging-x.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -287,7 +294,14 @@ export const customCurrencyMaskConfig = {
     CustFinDataTabXComponent,
     CustBankAccSectionFindataXComponent,
     CustBankAccDetailSectionFindataXComponent,
-    CustomerPersonalDetailXComponent
+    CustomerPersonalDuplicateCheckXComponent,
+    CustomerPersonalPagingXComponent,
+    CustomerPersonalDetailXComponent,
+    CustomerPersonalMainInfoXComponent,
+    EditMainDataPersonalXComponent,
+    EditMainDataPagingXComponent,
+    CustomerViewHeaderPersonalXComponent,
+    CustomerFamilyMenuXComponent
   ],
   providers: [
     CustAssetComponent,

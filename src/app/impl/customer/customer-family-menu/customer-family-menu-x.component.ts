@@ -4,8 +4,7 @@ import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 
 @Component({
   selector: 'app-customer-family-menu-x',
-  templateUrl: './customer-family-menu-x.component.html',
-  styleUrls: ['./customer-family-menu-x.component.css']
+  templateUrl: './customer-family-menu-x.component.html'
 })
 export class CustomerFamilyMenuXComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();
