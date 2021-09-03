@@ -47,9 +47,9 @@ export class URLConstantX{
     public static EditRefSectorEconomySlikX = environment.FoundationR3Url + "/v1" + "/RefSectorEconomySlikX/EditRefSectorEconomySlikX";
 
     //Customer
-    public static GetListCustAddrByCustIdForCustomerPersonalView = environment.FoundationR3Url +  "/v1" + "/CustX/GetListCustAddrByCustIdForCustomerPersonalView";
+    //public static GetListCustAddrByCustIdForCustomerPersonalView = environment.FoundationR3Url +  "/v1" + "/CustX/GetListCustAddrByCustIdForCustomerPersonalView";
     public static AddCustPersonalMainDataX = environment.FoundationR3Url + "/v1" + "/CustX/AddCustPersonalMainData";
-    public static GetCustomerDuplicateCheckX = environment.FoundationR3Url + "/v1" + "/CustDuplicateCheckX/GetCustomerDuplicateCheckX";
-    public static GetCustPersonalbyCustIdX = environment.FoundationR3Url + "/v1" + "/CustX/GetCustByCustId";//"/CustPersonalX/GetCustPersonalByCustId"
+    //public static GetCustomerDuplicateCheckX = environment.FoundationR3Url + "/v1" + "/CustDuplicateCheckX/GetCustomerDuplicateCheckX";
+    //public static GetCustPersonalbyCustIdX = environment.FoundationR3Url + "/v1" + "/CustX/GetCustByCustId";//"/CustPersonalX/GetCustPersonalByCustId"
     public static EditCustPersonalMainDataX = environment.FoundationR3Url + "/v1" + "/CustX/EditCustPersonalMainData";
 }
