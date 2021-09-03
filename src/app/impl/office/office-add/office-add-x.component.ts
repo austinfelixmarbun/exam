@@ -473,7 +473,7 @@ export class OfficeAddXComponent implements OnInit {
 
 
     if (this.pageType == "add") {
-      let addRefOfficeUrl = environment.isCore? URLConstant.AddRefOfficeV2 : URLConstantX.AddRefOfficeX;
+      let addRefOfficeUrl = environment.isCore? URLConstantX.AddRefOfficeXV2 : URLConstantX.AddRefOfficeX;
 
       var obj = {
         RefOfficeObj: this.officeObj,

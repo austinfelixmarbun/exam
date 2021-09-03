@@ -3,7 +3,8 @@ import { environment } from "environments/environment";
 export class URLConstantX{
     //REF OFFICE X 
     public static GetRefOfficeXByRefOfficeCode = environment.FoundationR3Url + "/v1" + "/RefOfficeX/GetRefOfficeXByRefOfficeCode";
-    public static AddRefOfficeX = environment.FoundationR3Url + "/v1" + "/RefOfficeX/AddRefOfficeX";  
+    public static AddRefOfficeX = environment.FoundationR3Url + "/v1" + "/RefOfficeX/AddRefOfficeX";
+    public static AddRefOfficeXV2 = environment.FoundationR3Url + "/v2" + "/RefOfficeX/AddRefOfficeX";  
     public static EditRefOfficeX = environment.FoundationR3Url + "/v1" + "/RefOfficeX/EditRefOfficeX";  
 
     //REF TAX OFFICE X
