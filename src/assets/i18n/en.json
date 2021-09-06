@@ -131,5 +131,7 @@
   "Maintenance": "Maintenance",
   "Gallery": "Gallery",
   "Documentation": "Documentation",
-  "Support": "Support"
+  "Support": "Support",  
+  "F_Bank_Name": "Bank Names",
+  "BI Code": "BI Code"
 }

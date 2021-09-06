@@ -48,7 +48,7 @@ import { CustomerViewTrustingSocialComponent } from "./customer-view-trusting-so
     UcSubsectionModule,
     SharingComponentModule,
     UcShowErrorsModule,
-    TranslateModule.forRoot({
+    TranslateModule.forChild({
       loader: {
           provide: TranslateLoader,
           useFactory: (createTranslateLoader),

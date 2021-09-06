@@ -15,7 +15,10 @@ import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewAddressComponent } from "./customer-view-address.component";
 import { CustomerViewAddressRoutingModule } from "./customer-view-address-routing.module";
-
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { createTranslateLoader } from "app/app.module";
+import { HttpClient } from "@angular/common/http";
 
 
 @NgModule({
@@ -36,9 +39,10 @@ import { CustomerViewAddressRoutingModule } from "./customer-view-address-routin
     UcSubsectionModule,
     SharingComponentModule,
     UcShowErrorsModule,
+    TranslateModule
   ],
   declarations: [
-   CustomerViewAddressComponent
+    CustomerViewAddressComponent
 
   ],
   entryComponents: [
