@@ -717,7 +717,7 @@ export class URLConstant {
     // CUSTOMER GROUP
     public static AddCustGrpBothWays = environment.FoundationR3Url + "/v1" + "/CustGrp/AddCustGrpBothWays";
     public static AddCustGrp = environment.FoundationR3Url + "/v1" + "/CustGrp/AddCustGrp";
-    public static DeleteCustGrp = "/CustGrp/DeleteCustGrp";
+    public static DeleteCustGrp = environment.FoundationR3Url + "/v1" + "/CustGrp/DeleteCustGrp";
 
     // CUSTOMER FIN DATA
     public static GetCBAForCustFinDataByCustId = environment.FoundationR3Url + "/v1" + "/CustBankAcc/GetCBAForCustFinDataByCustId";
