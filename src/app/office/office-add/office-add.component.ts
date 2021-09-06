@@ -430,7 +430,8 @@ export class OfficeAddComponent implements OnInit {
       this.officeObj.MrOfficeTypeCode = this.resultData.MrOfficeTypeCode
       this.officeObj.RefOfficeId = this.resultData.RefOfficeId;
       this.officeObj.RowVersion = this.resultData.RowVersion;
-      this.httpClient.post(URLConstant.EditRefOffice, this.officeObj).subscribe(
+      let editRefOfficeUrl = environment.isCore? URLConstant.EditRefOfficeV2 : URLConstant.EditRefOffice;
+      this.httpClient.post(editRefOfficeUrl, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           
