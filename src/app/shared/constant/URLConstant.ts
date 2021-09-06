@@ -192,7 +192,9 @@ export class URLConstant {
     public static GetRefZipCode = environment.FoundationR3Url + "/v1" + "/RefZipcode/GetRefZipcode";
     public static GetRefProvDistrictObj = environment.FoundationR3Url + "/v1" + "/RefProvDistrict/GetRefProvDistrict";
     public static EditRefZipcode = environment.FoundationR3Url + "/v1" + "/RefZipcode/EditRefZipcode";
+    public static EditRefZipcodeV2 = environment.FoundationR3Url + "/v2" + "/RefZipcode/EditRefZipcode";
     public static AddRefZipcode = environment.FoundationR3Url + "/v1" + "/RefZipcode/AddRefZipcode";
+    public static AddRefZipcodeV2 = environment.FoundationR3Url + "/v2" + "/RefZipcode/AddRefZipcode";
     public static GetOfficeZipcodeMemberAddPaging = environment.FoundationR3Url + "/v1" + "/RefZipcode/GetOfficeZipcodeMemberAddPaging";
     public static GetRefZipCodeById = environment.FoundationR3Url + "/v1" + "/RefZipcode/GetRefZipcodeById";
     public static GetZipcodeDataByZipCode = environment.FoundationR3Url + "/v1" + "/RefZipcode/GetZipcodeDataByZipCode";
