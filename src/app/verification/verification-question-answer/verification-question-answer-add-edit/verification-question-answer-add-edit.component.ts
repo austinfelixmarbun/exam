@@ -10,6 +10,10 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
+import { RegexService } from 'app/customer/regex.service';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { String } from 'typescript-string-operations';
 
 @Component({
   selector: 'app-verification-question-answer-add-edit',
@@ -27,7 +31,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
   dropdownListObj: UcDropdownListObj = new UcDropdownListObj();
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private regexService: RegexService) {
     this.route.queryParams.subscribe(params => {
       this.VerfQuestionAnswerId = params["VerfQuestionAnswerId"];
       this.mode = params["mode"];
@@ -45,13 +49,18 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     RowVersion: ['']
   })
 
-  ngOnInit() {
+  customPattern: Array<CustomPatternObj> = new Array<CustomPatternObj>();
+  pattern: string;
+  separator: string = ';';
+
+  async ngOnInit() {
     this.dropdownListObj.apiUrl = URLConstant.GetActiveRefVerfAnswerTypes;
     this.dropdownListObj.requestObj = {};
     this.dropdownListObj.customKey = "RefVerfAnswerTypeId";
     this.dropdownListObj.customValue = "VerfAnswerTypeDescr";
     this.dropdownListObj.ddlType = "blank";
     this.dropdownListObj.isSelectOutput = true;
+    await this.GetGsValue();
     this.GetListActiveRefAnswerType();
     
     var refAnswerObj = {}
@@ -88,7 +97,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
       this.isHidden = true;
     }
     else {
-      this.QuestionAnswerForm.controls.VerfAnswer.setValidators([Validators.required]);
+      this.QuestionAnswerForm.controls.VerfAnswer.setValidators([Validators.required,Validators.pattern(this.pattern)]);
       this.isHidden = false;
     }
     this.QuestionAnswerForm.controls.VerfAnswer.updateValueAndValidity();
@@ -109,6 +118,39 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
         }
       }
     );
+  }
+
+  async GetGsValue(){
+    let reqByCode: GenericObj = new GenericObj();
+    reqByCode.Code = CommonConstant.GSCodeDefSeparatorDDLVerfQuest;
+    await this.http.post(URLConstant.GetGeneralSettingValueByCode, reqByCode).toPromise().then(
+      (response) => {
+        if(response != null){
+          this.separator = response["GsValue"];
+        }
+      }
+    );
+
+    reqByCode.Code = CommonConstant.GSCodeRegexDDLSeparator;
+    await this.http.post(URLConstant.GetGeneralSettingValueByCode, reqByCode).toPromise().then(
+      (response) => {
+        if(response != null){
+          this.pattern = response["GsValue"];
+        }
+      }
+    );
+
+    this.setPatternFromGsValue(this.separator, this.pattern);
+  }
+
+  setPatternFromGsValue(separator: string, regex: string){
+    let patternObj: CustomPatternObj = new CustomPatternObj();
+    let pattern = String.Format(regex, separator);
+
+    patternObj.pattern = pattern;
+    patternObj.invalidMsg = "must use " + separator + " as separator (second or more option)";
+    this.customPattern.push(patternObj);
+    this.pattern = pattern;
   }
 
   selectedValueHandler(ev){

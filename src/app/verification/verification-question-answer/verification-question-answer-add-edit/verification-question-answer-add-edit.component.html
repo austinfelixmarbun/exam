@@ -48,7 +48,7 @@
                 <label class="col-md-3  adInsLabel" translate>Verification Answer </label>
                 <div class="col-md-3">
                   <input type="text" class="form-control adInsInput width-75-per" formControlName="VerfAnswer">
-                  <lib-uc-show-errors [control]="QuestionAnswerForm.controls.VerfAnswer" [submit]="enjiForm.submitted">
+                  <lib-uc-show-errors [customPattern]="customPattern" [control]="QuestionAnswerForm.controls.VerfAnswer" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
               </div>
