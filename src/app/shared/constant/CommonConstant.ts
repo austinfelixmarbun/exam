@@ -181,6 +181,8 @@ export class CommonConstant {
     public static GSCodeIsShowCbxPledge = "IS_SHOW_CBX_PLEDGE";
     public static GSCodeListLegalDocCantDuplicate = "LIST_LEGAL_DOC_CANNOT_DUPLICATE";
     public static GSCodeIsUseDigitalization = "IS_USE_DIGITALIZATION";
+    public static GSCodeDefSeparatorDDLVerfQuest = "DEF_SEPARATOR_DDL_VERF_QUEST";
+    public static GSCodeRegexDDLSeparator = "REGEX_DDL_SEPARATOR";
 
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
