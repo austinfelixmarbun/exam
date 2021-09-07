@@ -32,7 +32,6 @@ import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { CookieService } from 'ngx-cookie';
 import { CustAttrFormComponent } from 'app/customer/sharing-component/new-cust-component/component/cust-attr-form/cust-attr-form.component';
-import { FamilyFormComponent } from 'app/customer/sharing-component/new-cust-component/component/family-form/family-form.component';
 import { ShareholderFormComponent } from 'app/customer/sharing-component/new-cust-component/component/shareholder-form/shareholder-form.component';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -42,6 +41,7 @@ import { ReqGenerateTrxNoObj } from 'app/shared/model/MasterSequence/ReqGenerate
 import { ResGenerateTrxNoObj } from 'app/shared/model/MasterSequence/ResGenerateTrxNoObj.model';
 import { ReqPefindoSmartSearchObj } from 'app/shared/model/Digitalization/ReqPefindoSmartSearchObj.model';
 import { PefindoReqComponent } from 'app/customer/sharing-component/new-cust-component/component/pefindo/request/pefindo-req.component';
+import { FamilyFormXComponent } from '../component/family-form/family-form-x.component';
 
 @Component({
   selector: 'app-new-cust-personal-main-data-x',
@@ -50,7 +50,7 @@ import { PefindoReqComponent } from 'app/customer/sharing-component/new-cust-com
 export class NewCustPersonalMainDataXComponent implements OnInit {
 
   @ViewChild('ShareholderForm') shareholderForm: ShareholderFormComponent;
-  @ViewChild('FamilyForm') familyForm: FamilyFormComponent;
+  @ViewChild('FamilyForm') familyForm: FamilyFormXComponent;
   @ViewChild('CustAttrForm') custAttrForm: CustAttrFormComponent;
   private ucLookupExistingCust: UclookupgenericComponent;
   @ViewChild('LookupExistingCust') set content(content: UclookupgenericComponent) {

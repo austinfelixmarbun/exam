@@ -35,6 +35,7 @@ import { TrustingSocialReqDetailComponent } from './new-cust-component/component
 import { TrustingSocialViewHeaderComponent } from './new-cust-component/component/trusting-social/view/trusting-social-view-header.component';
 import { CustomerViewTrustingSocialModule } from 'app/view/customer-view/customer-view-trusting-social/customer-view-trusting-social.module';
 import { PefindoReqComponent } from './new-cust-component/component/pefindo/request/pefindo-req.component';
+import { FamilyFormXComponent } from 'app/impl/customer/sharing-component/new-cust-component/component/family-form/family-form-x.component';
 
 export const customCurrencyMaskConfig = {
     align: "right",
@@ -63,6 +64,7 @@ export const customCurrencyMaskConfig = {
         ShareholderFormComponent,
         CustAttrFormComponent,
         FamilyFormComponent,
+        FamilyFormXComponent,
         CustPersonalJobDataComponent,
         JobAddrSectionComponent,
         FamilyListingXComponent,
@@ -102,6 +104,7 @@ export const customCurrencyMaskConfig = {
         ShareholderFormComponent,
         CustAttrFormComponent,
         FamilyFormComponent,
+        FamilyFormXComponent,
         CustPersonalJobDataComponent,
         JobAddrSectionComponent,
         FamilyListingXComponent,

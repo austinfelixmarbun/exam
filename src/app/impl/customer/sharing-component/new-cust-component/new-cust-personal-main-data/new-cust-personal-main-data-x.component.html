@@ -187,9 +187,9 @@
             [enjiForm]="enjiForm" [CustId]="CustId" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId"
             [CustType]="CustTypePersonal" (outputExisting)=GetExistingFormObj($event)
             (outputChange)="outputChangeReceived($event)" #ShareholderForm></app-shareholder-form>
-          <app-family-form *ngIf="CustDataMode == CustDataModeFamily" [parentForm]="CustomerForm" [enjiForm]="enjiForm"
+          <app-family-form-x *ngIf="CustDataMode == CustDataModeFamily" [parentForm]="CustomerForm" [enjiForm]="enjiForm"
             [CustId]="CustId" (outputExisting)=GetExistingFormObj($event) (outputChange)="outputChangeReceived($event)"
-            #FamilyForm></app-family-form>
+            #FamilyForm></app-family-form-x>
           <app-cust-attr-form *ngIf="CustDataMode != CustDataModeMain" [Label]="CustDataMode" [CustId]="CustId"
             [AttrGroup]="AttrGroupCustPersonalOther" [AttrCodes]="listAttrCodes" [parentForm]="CustomerForm"
             [enjiForm]="enjiForm" #CustAttrForm></app-cust-attr-form>
