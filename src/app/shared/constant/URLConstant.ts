@@ -701,7 +701,7 @@ export class URLConstant {
     public static GetListCustGrpByMemberCustIdForCustGrpTab = environment.FoundationR3Url + "/v1" + "/CustGrp/GetListCustGrpByMemberCustIdForCustGrpTab";
     public static GetCustByCustNo = environment.FoundationR3Url + "/v1" + "/Cust/GetCustByCustNo";
     public static AddCustAsset = environment.FoundationR3Url + "/v1" + "/CustAsset/AddCustAsset";
-    public static DeleteCustAsset = "/CustAsset/DeleteCustAsset";
+    public static DeleteCustAsset = environment.FoundationR3Url + "/v1" + "/CustAsset/DeleteCustAsset";
     public static EditCustAsset = environment.FoundationR3Url + "/v1" + "/CustAsset/EditCustAsset";
     public static GetCustAssetByCustAssetId = environment.FoundationR3Url + "/v1" + "/CustAsset/GetCustAssetByCustAssetId";
     public static GetListCustAssetByCustId = environment.FoundationR3Url + "/v1" + "/CustAsset/GetListCustAssetByCustId";
