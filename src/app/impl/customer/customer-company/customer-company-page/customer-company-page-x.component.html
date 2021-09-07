@@ -113,10 +113,7 @@
             </div>
           </div>
           <div id="shareholder-tab" class="content" role="tabpanel" aria-labelledby="shareholder-tab-trigger">
-            <!-- <app-customer-company-management-shareholder *ngIf="CustStepIndex == 3" [custCompanyId]="IdCust"
-              (outputTab)="getValue($event)">
-            </app-customer-company-management-shareholder> -->
-            <app-shareholder-listing *ngIf="CustStepIndex == 3" [CustId]="IdCust" (outputTab)="getValue($event)"></app-shareholder-listing>
+            <app-shareholder-listing-x *ngIf="CustStepIndex == 3" [CustId]="IdCust" (outputTab)="getValue($event)"></app-shareholder-listing-x>           
           </div>
           <div id="group-tab" class="content" role="tabpanel" aria-labelledby="group-tab-trigger">
             <app-cust-group-tab *ngIf="CustStepIndex == 4" [MrCustTypeCode]="'COMPANY'" [CustId]="IdCust"

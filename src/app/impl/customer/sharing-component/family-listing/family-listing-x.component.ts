@@ -16,6 +16,7 @@ export class FamilyListingXComponent implements OnInit {
   @Input() CustId: number = 0;
   @Input() isMarried: boolean = false;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
+  
 
   PageType: string = CommonConstant.CustPageTypePaging;
 

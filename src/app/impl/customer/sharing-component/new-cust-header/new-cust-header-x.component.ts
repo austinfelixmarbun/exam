@@ -22,7 +22,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   selector: 'app-new-cust-header-x',
   templateUrl: './new-cust-header-x.component.html'
 })
-export class NewCustHeaderXComponent implements OnInit {
+export class NewCustHeaderXComponent implements OnInit {  
   //#region Readonly
   readonly CustDataModeFamily: string = CommonConstant.CustMainDataModeFamily;
 
@@ -47,6 +47,8 @@ export class NewCustHeaderXComponent implements OnInit {
   @Input() isMarried: boolean = false;
   @Input() listCustNoToExclude: Array<string> = new Array();
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
+  @Input() isFamily: boolean = false;
+  @Input() isShareholder: boolean =false;
 
   constructor(
     private http: HttpClient, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService) {
@@ -63,7 +65,7 @@ export class NewCustHeaderXComponent implements OnInit {
     });
   }
 
-  async ngOnInit() {
+  async ngOnInit() {    
     this.SetTitleLabel();
     await this.GetListCustType();
   }

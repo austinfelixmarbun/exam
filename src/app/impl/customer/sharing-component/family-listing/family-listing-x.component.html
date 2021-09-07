@@ -18,6 +18,6 @@
     </div>
   </div>
 </div>
-<app-new-cust-header-x *ngIf="PageType == CustPageTypeHeader" [CustId]="selectedCustId" [CustType]="CustTypePersonal" [ParentCustId]="CustId" [CustDataMode]="CustDataModeFamily" (outputCancel)="ReloadPaging()" [isMarried]="isMarried" [CustPersonalFamilyId]="selectedCustPersonalFamilyId"></app-new-cust-header-x>
+<app-new-cust-header-x [isFamily]="true" *ngIf="PageType == CustPageTypeHeader" [CustId]="selectedCustId" [CustType]="CustTypePersonal" [ParentCustId]="CustId" [CustDataMode]="CustDataModeFamily" (outputCancel)="ReloadPaging()" [isMarried]="isMarried" [CustPersonalFamilyId]="selectedCustPersonalFamilyId"></app-new-cust-header-x>
 
  
