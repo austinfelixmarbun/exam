@@ -1,0 +1,64 @@
+<div class="form-body">
+  <div class="row text-left">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <br>
+          <div class="px-3" *ngIf= "isMobile">
+            <lib-ucSubsection [id]="'MobileId'" [title]="'Survey Result'" [panel]="'ResultMobile'">
+            </lib-ucSubsection>
+            <div id="ResultMobile" [innerHTML]="htmlCode"></div>
+          </div>
+          <div class="px-3" *ngIf="!isMobile">
+            <div>
+              <div class="form-body"> 
+                <lib-ucSubsection [id]="'srvyResultId'" [title]="'Survey Result Information'" [panel]="'srvyResultInfo'">
+                </lib-ucSubsection>
+                <div id="srvyResultInfo">
+                  <div class="form-group row">
+                    <label class="col-md-2" translate>Result</label>
+                    <div class="col-md-4">
+                      <label>{{ResSrvyTaskObj.Result}}</label>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-2" translate>Notes</label>
+                    <div class="col-md-4">
+                      {{ResSrvyTaskObj.Notes}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div
+                  *ngFor="let QuestionGrpList of ListResVerfResultHCustomObj; let i = index">
+                  <lib-ucSubsection [id]="'grpName'+i+'id'" [title]="QuestionGrpList.VerfQuestionGrpName"
+                    [panel]="'grpName'+i">
+                  </lib-ucSubsection>
+                  <div id="grpName{{i}}">
+                    <span>
+                      <div class= "row">
+                        <label class="col-md-3" translate><h4 class="modal-title">Question</h4></label>
+                        <label class="col-md-4" translate><h4 class="modal-title">Answer</h4></label>
+                        <label class="col-md-5" translate><h4 class="modal-title">Notes</h4></label>
+                      </div>
+                      <div
+                        *ngFor="let QRList of QuestionGrpList.VerResultList; let j = index">
+                        <label class="col-md-3 adInsLabel"
+                          translate>{{QRList.VerfQuestionText}} </label>
+                          <label class="col-md-4 adInsLabel"
+                          translate>{{QRList.Answer}} </label>
+                          <label class="col-md-5 adInsLabel"
+                          translate>{{QRList.Notes}} </label>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

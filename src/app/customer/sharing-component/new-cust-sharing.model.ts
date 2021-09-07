@@ -25,10 +25,16 @@ import { FamilyFormComponent } from './new-cust-component/component/family-form/
 import { CustPersonalJobDataComponent } from './cust-personal-job-data/cust-personal-job-data.component';
 import { JobAddrSectionComponent } from './cust-personal-job-data/job-addr-section/job-addr-section.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header-x/new-cust-header-x.component';
-import { FamilyListingXComponent } from 'app/impl/customer/sharing-component/family-listing-x/family-listing-x.component';
-import { NewCustPersonalMainDataXComponent } from 'app/impl/customer/sharing-component/new-cust-component/new-cust-personal-main-data-x/new-cust-personal-main-data-x.component';
+import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header/new-cust-header-x.component';
+import { FamilyListingXComponent } from 'app/impl/customer/sharing-component/family-listing/family-listing-x.component';
+import { NewCustPersonalMainDataXComponent } from 'app/impl/customer/sharing-component/new-cust-component/new-cust-personal-main-data/new-cust-personal-main-data-x.component';
 import { ShareholderListingXComponent } from 'app/impl/customer/sharing-component/shareholder-listing-x/shareholder-listing-x.component';
+import { TrustingSocialReqHeaderComponent } from './new-cust-component/component/trusting-social/request/trusting-social-req-header.component';
+import { TrustingSocialReqConsentComponent } from './new-cust-component/component/trusting-social/request/consent/trusting-social-req-consent.component';
+import { TrustingSocialReqDetailComponent } from './new-cust-component/component/trusting-social/request/detail/trusting-social-req-detail.component';
+import { TrustingSocialViewHeaderComponent } from './new-cust-component/component/trusting-social/view/trusting-social-view-header.component';
+import { CustomerViewTrustingSocialModule } from 'app/view/customer-view/customer-view-trusting-social/customer-view-trusting-social.module';
+import { PefindoReqComponent } from './new-cust-component/component/pefindo/request/pefindo-req.component';
 
 export const customCurrencyMaskConfig = {
     align: "right",
@@ -61,8 +67,13 @@ export const customCurrencyMaskConfig = {
         JobAddrSectionComponent,
         FamilyListingXComponent,
         NewCustHeaderXComponent,
-        ShareholderListingXComponent
+        ShareholderListingXComponent,
         // NewCustPersonalMainDataXComponent,
+        TrustingSocialReqHeaderComponent,
+        TrustingSocialReqConsentComponent,
+        TrustingSocialReqDetailComponent,
+        TrustingSocialViewHeaderComponent,
+        PefindoReqComponent
     ],
     imports: [
         CommonModule,
@@ -76,7 +87,7 @@ export const customCurrencyMaskConfig = {
         AdInsModule,        
         NgMultiSelectDropDownModule,
         NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
-
+        CustomerViewTrustingSocialModule
     ],
     declarations: [
         NewCustPersonalMainDataComponent,
@@ -96,14 +107,19 @@ export const customCurrencyMaskConfig = {
         FamilyListingXComponent,
         ShareholderListingXComponent,
         NewCustHeaderXComponent,
-        NewCustPersonalMainDataXComponent
+        NewCustPersonalMainDataXComponent,
+        TrustingSocialReqHeaderComponent,
+        TrustingSocialReqConsentComponent,
+        TrustingSocialReqDetailComponent,
+        TrustingSocialViewHeaderComponent,
+        PefindoReqComponent
     ],
 
     providers: [
         NGXToastrService,
         RegexService
     ],
-    entryComponents: []
+    entryComponents: [TrustingSocialReqHeaderComponent, TrustingSocialViewHeaderComponent, PefindoReqComponent]
 })
 export class NewCustomerSharingModule {
     constructor() {

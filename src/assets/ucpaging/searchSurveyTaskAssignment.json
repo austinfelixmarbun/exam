@@ -107,12 +107,6 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Request By",
-            "name": "RequestBy"
-        },
-        {
-            "type": "sort",
-            "position": "center",
             "label": "Order Information",
             "name": "OrderInfo"
         },
@@ -150,27 +144,14 @@
             "property":"TransactionRefNo"
         },    
         {
-            "type": "link",
+            "type": "text",
             "position": "center",
-            "property": "CustName",
-            "path": "VIEW_CUST_PERSONAL_DETAIL",
-            "target": "_blank",
-            "param": [
-                {
-                    "type": "CustId",
-                    "property": "CustId"
-                }
-            ]
+            "property": "CustName"
         },
         {
             "type": "date",
             "position": "center",
             "property": "RequestDate"
-        },
-        {
-            "type": "text",
-            "position": "center",
-            "property": "RequestBy"
         },
         {
             "type": "text",

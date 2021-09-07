@@ -149,6 +149,11 @@ export class AdInsHelper {
         window.open(url, "_blank");
     }
 
+    public static OpenPefindoView(TrxNo: string, MrCustTypeCode: string) {
+        var url = environment.FoundationR3Web + "/View/Pefindo?TrxNo=" + TrxNo + "&MrCustTypeCode=" + MrCustTypeCode;
+        window.open(url, "_blank");
+    }
+
     public static RedirectUrl(router: Router, url: Array<string>, queryParams: {}) {
         router.navigate(url, { queryParams: queryParams, skipLocationChange: false });
     }

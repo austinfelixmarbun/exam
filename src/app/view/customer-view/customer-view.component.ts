@@ -37,6 +37,7 @@ export class CustomerViewComponent implements OnInit {
   IsUseDms: boolean = false;
 
   IsIframe: boolean = false;
+  IsUseDigitalization: boolean = false;
   listIframe: Array<ResCustListIframeViewObj> = new Array<ResCustListIframeViewObj>();
 
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj();
@@ -112,6 +113,7 @@ export class CustomerViewComponent implements OnInit {
     );
 
     await this.GetCustListIframeView();
+    await this.getIsUseDigitalization();
   }
 
   async GetCustListIframeView() {
@@ -127,7 +129,7 @@ export class CustomerViewComponent implements OnInit {
     if (this.custType == CommonConstant.CustomerPersonal) {
       if (ev == 0) { // Main Data
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_DETAIL],{ "CustId": this.CustId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_DETAIL_X],{ "CustId": this.CustId });
         });
       }
       else if (ev == 1) { // Address
@@ -220,6 +222,13 @@ export class CustomerViewComponent implements OnInit {
           return;
         }
 
+        if(this.IsUseDigitalization) { // Trusting Social
+          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
+          });
+          return;
+        }
+
         // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
@@ -245,6 +254,13 @@ export class CustomerViewComponent implements OnInit {
           return;
         }
 
+        if(this.IsUseDigitalization) { // Trusting Social
+          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
+          });
+          return;
+        }
+
         // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
@@ -263,6 +279,13 @@ export class CustomerViewComponent implements OnInit {
           return;
         }
 
+        if(this.IsUseDigitalization) { // Trusting Social
+          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
+          });
+          return;
+        }
+
         // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
@@ -271,6 +294,13 @@ export class CustomerViewComponent implements OnInit {
       else if (ev == 12) {
         if(this.IsIframe && this.IsLms) { // Iframe View
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
+          return;
+        }
+
+        if(this.IsUseDigitalization) { // Trusting Social
+          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
+          });
           return;
         }
 
@@ -285,12 +315,31 @@ export class CustomerViewComponent implements OnInit {
           return;
         }
 
+        if(this.IsUseDigitalization) { // Trusting Social
+          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
+          });
+          return;
+        }
+
         // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
         });
       }
-      else if (ev == 14) { // Other Info
+      else if (ev == 14) {
+        if(this.IsUseDigitalization) { // Trusting Social
+          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
+          });
+          return;
+        }
+
+        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
+        });
+      }
+      else if (ev == 15) { // Other Info      
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
         });
@@ -347,7 +396,7 @@ export class CustomerViewComponent implements OnInit {
       //     AdInsHelper.RedirectUrl(this.router,["/View/Customer/CoyOther"],{ "CustId": this.CustId });
       //   });
       // }
-      else if (ev == 9) {
+      else if (ev == 9) {        
         if(this.IsUseDms) { // Document
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_DOC],{ "CustId": this.CustId });
@@ -357,6 +406,13 @@ export class CustomerViewComponent implements OnInit {
 
         if(this.IsIframe) { // Iframe View
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
+          return;
+        }
+
+        if(this.IsUseDigitalization) { // Trusting Social
+          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
+          });
           return;
         }
 
@@ -371,6 +427,13 @@ export class CustomerViewComponent implements OnInit {
           return;
         }
 
+        if(this.IsUseDigitalization) { // Trusting Social
+          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
+          });
+          return;
+        }
+
         // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
@@ -382,16 +445,49 @@ export class CustomerViewComponent implements OnInit {
           return;
         }
 
+        if(this.IsUseDigitalization) { // Trusting Social
+          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
+          });
+          return;
+        }
+
         // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
         });
       }
-      else if (ev == 12) { // Other Info
+      else if (ev == 12) { 
+        if(this.IsUseDigitalization) { // Trusting Social
+          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
+          });
+          return;
+        }
+
+        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
+        });
+      }
+
+      else if (ev == 13) { // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
         });
       }
     }
+  }
+
+  async getIsUseDigitalization(){
+    await this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeIsUseDigitalization}).toPromise().then(
+      (response) => {
+        if(response["GsValue"] === "1") {
+          this.IsUseDigitalization = true;
+        }
+        else {
+          this.IsUseDigitalization = false;
+        }
+      }
+    );
   }
 }

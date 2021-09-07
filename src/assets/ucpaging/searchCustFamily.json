@@ -108,7 +108,7 @@
             "type": "link",
             "position": "left",
             "property": "FamilyCustNo",
-            "path": "VIEW_CUST_PERSONAL_DETAIL",
+            "path": "VIEW_CUST_PERSONAL_DETAIL_X",
             "target": "_blank",
             "param": [
                 {
@@ -136,7 +136,7 @@
             "type": "link",
             "position": "left",
             "property": "CustNo",
-            "path": "VIEW_CUST_PERSONAL_DETAIL",
+            "path": "VIEW_CUST_PERSONAL_DETAIL_X",
             "target": "_blank",
             "param": [
                 {
@@ -161,16 +161,12 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "CUST_NEW_FORM",
+                    "path": "CUST_EDIT_MAIN_DATA_PERSONAL_X",
                     "icon": "ft-edit-2",
                     "param": [
                         {
                             "type": "CustId",
                             "property": "FamilyId"
-                        },
-                        {
-                            "type": "CustType",
-                            "property" : "PERSONAL"
                         },
                         {
                             "type": "From",

@@ -45,7 +45,7 @@ export class NegativeAssetUploadComponent implements OnInit {
       this.uploadObj = {
         title: 'Upload Negative Asset', // Title Paging dan Upload Page
         subsectionId: 'UcUploadFile', // Ga perlu diubah
-        formatsAllowed: '.xls, .xlsx', // File yang bisa di upload
+        formatsAllowed: '.xls, .xlsx, .txt, .Txt', // File yang bisa di upload
         UploadTypeCode: 'UPL_NAS', // UploadTypeCode berdasarkan keperluan
         ErrorDownloadUrl: URLConstant.GetUploadAssetNegativeByUploadMonitoringNoAndTrxType, // URL untuk Download Error File
         TemplateUrl: URLConstant.DownloadTemplate, // URL untuk Download Template File

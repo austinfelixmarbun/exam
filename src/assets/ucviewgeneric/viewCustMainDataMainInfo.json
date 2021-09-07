@@ -28,7 +28,7 @@
           },
           {
             "type": "text",
-            "label": "Gelar Depan Nama",
+            "label": "Gelar Depan",
             "property": "CustPrefixName"
           },
           {
@@ -38,7 +38,7 @@
           },
           {
             "type": "text",
-            "label": "Gelar Belakang Nama",
+            "label": "Gelar Belakang",
             "property": "CustSuffixName"
           },
           {

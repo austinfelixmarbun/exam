@@ -123,13 +123,26 @@ import { NewCustomerSharingModule } from './sharing-component/new-cust-sharing.m
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page-x/customer-personal-page-x.component';
-import { CustomerPersonalJobDataXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/customer-personal-job-data-x.component';
-import { JobDataEmployeeXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-employee-x/job-data-employee-x.component';
-import { JobDataProfessionalXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-professional-x/job-data-professional-x.component';
-import { JobDataSmeXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/job-data-sme-x/job-data-sme-x.component';
-import { CustomerCompanyPageXComponent } from 'app/impl/customer/customer-company/customer-company-page-x/customer-company-page-x.component';
-import { CustomerCompanyDetailXComponent } from 'app/impl/customer/customer-company/customer-company-detail-x/customer-company-detail-x.component';
+import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page/customer-personal-page-x.component';
+import { CustomerPersonalJobDataXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/customer-personal-job-data-x.component';
+import { JobDataEmployeeXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-employee/job-data-employee-x.component';
+import { JobDataNonProfessionalXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-non-professional/job-data-non-professional-x.component';
+import { JobDataProfessionalXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-professional/job-data-professional-x.component';
+import { CustomerCompanyPageXComponent } from 'app/impl/customer/customer-company/customer-company-page/customer-company-page-x.component';
+import { CustomerCompanyDetailXComponent } from 'app/impl/customer/customer-company/customer-company-detail/customer-company-detail-x.component';
+import { JobDataSmeXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-small-medium-enterprise/job-data-small-medium-enterprise-x.component';
+import { JobDataSmallMediumEnterpriseXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-sme/job-data-sme-x.component';
+import { CustFinDataTabXComponent } from 'app/impl/customer/cust-fin-data-tab/cust-fin-data-tab-x.component';
+import { CustBankAccSectionFindataXComponent } from 'app/impl/customer/cust-bank-acc-section-findata/cust-bank-acc-section-findata.component';
+import { CustBankAccDetailSectionFindataXComponent } from 'app/impl/customer/cust-bank-acc-detail-section-findata/cust-bank-acc-detail-section-findata-x.component';
+import { CustomerPersonalDetailXComponent } from 'app/impl/customer/customer-personal/customer-personal-detail/customer-personal-detail-x.component';
+import { CustomerPersonalDuplicateCheckXComponent } from 'app/impl/customer/customer-personal/customer-personal-duplicate-check/customer-personal-duplicate-check-x.component';
+import { CustomerPersonalPagingXComponent } from 'app/impl/customer/customer-personal-paging/customer-personal-paging-x.component';
+import { EditMainDataPersonalXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-personal/edit-main-data-personal-x.component';
+import { CustomerPersonalMainInfoXComponent } from 'app/impl/customer/customer-personal/customer-personal-main-info/customer-personal-main-info-x.component';
+import { CustomerViewHeaderPersonalXComponent } from 'app/impl/customer/customer-view/customer-view/customer-view-header-personal/customer-view-header-personal-x.component';
+import { CustomerFamilyMenuXComponent } from 'app/impl/customer/customer-family-menu/customer-family-menu-x.component';
+import { EditMainDataPagingXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-paging/edit-main-data-paging-x.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -192,6 +205,7 @@ export const customCurrencyMaskConfig = {
     CustomerCompanyAddressComponent,
     CustomerCompanyAddressAddComponent,
     CustomerPersonalJobDataComponent,
+    CustomerPersonalJobDataXComponent,
     JobDataNonProfessionalComponent,
     JobDataProfessionalComponent,
     JobDataEmployeeComponent,
@@ -270,12 +284,24 @@ export const customCurrencyMaskConfig = {
     CustAssetComponent,
     CustomerViewCustomerAssetComponent,
     CustomerPersonalPageXComponent,
-    CustomerPersonalJobDataXComponent,
     JobDataEmployeeXComponent,
+    JobDataNonProfessionalXComponent,
     JobDataProfessionalXComponent,
     JobDataSmeXComponent,
     CustomerCompanyPageXComponent,
-    CustomerCompanyDetailXComponent
+    CustomerCompanyDetailXComponent,
+    JobDataSmallMediumEnterpriseXComponent,
+    CustFinDataTabXComponent,
+    CustBankAccSectionFindataXComponent,
+    CustBankAccDetailSectionFindataXComponent,
+    CustomerPersonalDuplicateCheckXComponent,
+    CustomerPersonalPagingXComponent,
+    CustomerPersonalDetailXComponent,
+    CustomerPersonalMainInfoXComponent,
+    EditMainDataPersonalXComponent,
+    EditMainDataPagingXComponent,
+    CustomerViewHeaderPersonalXComponent,
+    CustomerFamilyMenuXComponent
   ],
   providers: [
     CustAssetComponent,

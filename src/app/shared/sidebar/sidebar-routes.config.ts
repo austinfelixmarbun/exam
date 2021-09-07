@@ -36,6 +36,7 @@ export const ROUTES: RouteInfo[] = [
       { Path: NavigationConstant.CS_INDUSTRY_TYPE_PAGING, Title: 'Industry Type', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.CS_INDUSTRY_TYPE_CAT_PAGING, Title: 'Industry Type Category', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.CS_ECONOMIC_SECTOR_PAGING, Title: 'Economic Sector', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.CS_ECONOMIC_SECTOR_SLIK_PAGING, Title: 'Economic Sector SLIK', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.CS_CURRENCY_PAGING, Title: 'Currency', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.CS_PROFESSION_PAGING, Title: 'Profession', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.CS_REASON_PAGING, Title: 'Reason', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
@@ -89,7 +90,7 @@ export const ROUTES: RouteInfo[] = [
         IsExternalLink: false,
         Submenu: [
           {
-            Path: "/Vendor/VendorGrading/Request/Paging",
+            Path: NavigationConstant.VENDOR_GRD_REQ_PAGING,
             Title: "Vendor Grading Request",
             Icon: "",
             Class: "",
@@ -178,6 +179,7 @@ export const ROUTES: RouteInfo[] = [
       { Path: NavigationConstant.SRVY_TASK, Title: 'Survey Task Inquiry', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.SURVEYOR_PAGING, Title: 'Surveyor', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.SURVEY_TASK_ASSIGNMENT_PAGING, Title: 'Survey Task Assignment', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.SURVEY_TASK_RESULT_PAGING, Title: 'Survey Task Result', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.SURVEY_RESULT_REVIEW_PAGING, Title: 'Survey Result Review', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] }
 
     ], Params: []

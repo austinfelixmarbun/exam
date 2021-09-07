@@ -1,3 +1,5 @@
+import { NullAstVisitor } from "@angular/compiler";
+
 export class CustPersonalJobDataObj {
   CustPersonalJobDataId: number;
   CustId: number;
@@ -33,10 +35,10 @@ export class CustPersonalJobDataObj {
   constructor() {
     this.CustPersonalJobDataId = 0;
     this.CustId = 0;
-    this.RefProfessionId = 0;
+    this.RefProfessionId = null;
     this.CoyName = "";
     this.MrJobPositionCode = "";
-    this.RefIndustryTypeId = 0;
+    this.RefIndustryTypeId = null;
     this.MrJobStatCode = "";
     this.ProfessionalNo = "";
     this.JobTitleName = "";
@@ -47,17 +49,17 @@ export class CustPersonalJobDataObj {
     this.MrCoyScaleCode = "";
     this.NoOfEmploy = 0;
     this.MrInvestmentTypeCode = "";
-    this.JobAddrId = 0;
+    this.JobAddrId = null;
     this.PrevCoyName = "";
     this.PrevEmploymentDt = null;
-    this.PrevJobAddrId = 0;
+    this.PrevJobAddrId = null;
     this.EmpNo = "";
     this.OthBizName = "";
     this.OthBizType = "";
     this.OthBizIndustryTypeCode = "";
     this.OthBizJobPosition = "";
     this.OthBizEstablishmentDt = null;
-    this.OthBizAddrId = 0;
+    this.OthBizAddrId = null;
     this.MrCustModelCode = "";
     this.RowVersion = "";
     this.RefSectorEconomySlikId = 0;

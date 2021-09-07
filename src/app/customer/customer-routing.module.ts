@@ -32,10 +32,18 @@ import { CustomerUpdateMasterDetailComponent } from './customer-update-master/cu
 import { PathConstant } from 'app/shared/PathConstant';
 import { NewCustHeaderComponent } from './sharing-component/new-cust-header/new-cust-header.component';
 import { PathConstantX } from 'app/impl/shared/PathConstantX';
-import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header-x/new-cust-header-x.component';
-import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page-x/customer-personal-page-x.component';
-import { CustomerPersonalJobDataXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data-x/customer-personal-job-data-x.component';
-import { CustomerCompanyPageXComponent } from 'app/impl/customer/customer-company/customer-company-page-x/customer-company-page-x.component';
+import { CustomerPersonalPagingXComponent } from 'app/impl/customer/customer-personal-paging/customer-personal-paging-x.component';
+import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page/customer-personal-page-x.component';
+import { EditMainDataPersonalXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-personal/edit-main-data-personal-x.component';
+import { EditMainDataPagingXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-paging/edit-main-data-paging-x.component';
+import { CustomerFamilyMenuXComponent } from 'app/impl/customer/customer-family-menu/customer-family-menu-x.component';
+import { CustomerPersonalJobDataXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/customer-personal-job-data-x.component';
+import { JobDataNonProfessionalXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-non-professional/job-data-non-professional-x.component';
+import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header/new-cust-header-x.component';
+import { CustomerCompanyPageXComponent } from 'app/impl/customer/customer-company/customer-company-page/customer-company-page-x.component';
+import { CustomerPersonalMainInfoXComponent } from 'app/impl/customer/customer-personal/customer-personal-main-info/customer-personal-main-info-x.component';
+import { CustomerPersonalDuplicateCheckXComponent } from 'app/impl/customer/customer-personal/customer-personal-duplicate-check/customer-personal-duplicate-check-x.component';
+import { CustomerPersonalDetailXComponent } from 'app/impl/customer/customer-personal/customer-personal-detail/customer-personal-detail-x.component';
 
 const routes: Routes = [
   {
@@ -125,6 +133,13 @@ const routes: Routes = [
         }
       },
       {
+        path: PathConstantX.CUST_PERSONAL_PAGE,
+        component: CustomerPersonalPageXComponent,
+        data: {
+          title: 'Customer Personal DuplicateCheck  '
+        }
+      },
+      {
         path: PathConstant.CUST_VIEW_PAGE,
         component: CustomerViewComponent,
         data: {
@@ -167,6 +182,13 @@ const routes: Routes = [
         }
       },
       {
+        path: PathConstantX.CUST_PERSONAL_JOB_DATA,
+        component: CustomerPersonalJobDataXComponent,
+        data: {
+          title: 'Customer Personal Job Data'
+        }
+      },
+      {
         path: PathConstant.CUST_PERSONAL_JOB_DATA_NON_PRO,
         component: JobDataNonProfessionalComponent,
         data: {
@@ -174,8 +196,22 @@ const routes: Routes = [
         }
       },
       {
+        path: PathConstantX.CUST_PERSONAL_JOB_DATA_NON_PRO,
+        component: JobDataNonProfessionalXComponent,
+        data: {
+          title: 'Customer Personal Job Data'
+        }
+      },
+      {
         path: PathConstant.CUST_COY_PAGE,
         component: CustomerCompanyPageComponent,
+        data: {
+          title: 'Customer Company Page'
+        }
+      },
+      {
+        path: PathConstantX.CUST_COY_PAGE,
+        component: CustomerCompanyPageXComponent,
         data: {
           title: 'Customer Company Page'
         }
@@ -234,6 +270,62 @@ const routes: Routes = [
         component: CustomerUpdateMasterDetailComponent,
         data: {
           title: 'Update Data Customer Detail'
+        }
+      },
+      {
+        path: PathConstantX.CUST_PERSONAL_MAIN_INFO_X,
+        component: CustomerPersonalMainInfoXComponent,
+        data: {
+          title: 'Customer Personal Main Info X'
+        },
+      },
+      {
+        path: PathConstantX.CUST_PERSONAL_DUP_CHECK_X,
+        component: CustomerPersonalDuplicateCheckXComponent,
+        data: {
+          title: 'Customer Personal Duplicate Check'
+        },
+      },
+      {
+        path: PathConstantX.CUST_PAGING_X,
+        component: CustomerPersonalPagingXComponent,
+        data: {
+          title: 'Customer Paging X'
+        }
+      },
+      {
+        path: PathConstantX.CUST_PERSONAL_PAGE_X,
+        component: CustomerPersonalPageXComponent,
+        data: {
+          title: 'Customer Personal DuplicateCheck X'
+        }
+      },
+      {
+        path: PathConstantX.CUST_PERSONAL_PAGE_X,
+        component: CustomerPersonalDetailXComponent,
+        data: {
+          title: 'Customer Personal Detail X'
+        }
+      },
+      {
+        path: PathConstantX.CUST_EDIT_MAIN_DATA_PERSONAL_X,
+        component: EditMainDataPersonalXComponent,
+        data: {
+          title: 'Edit Main Data Personal Page X'
+        }
+      },
+      {
+        path: PathConstantX.CUST_EDIT_MAIN_DATA_PAGING_X,
+        component: EditMainDataPagingXComponent,
+        data: {
+          title: 'Customer Personal Detail X'
+        }
+      },
+      {
+        path: PathConstantX.CUST_FAMILY_PAGING_X,
+        component: CustomerFamilyMenuXComponent,
+        data: {
+          title: 'Customer Family X'
         }
       },
       {

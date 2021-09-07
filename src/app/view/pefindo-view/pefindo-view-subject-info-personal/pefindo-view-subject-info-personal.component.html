@@ -1,0 +1,203 @@
+<div class="col-md-12 mt-3">
+	<div class="card">
+		<div class="card-body">
+			<div class="px-3">
+				<div class="form-body mt-1">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control"> Name </label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control"> {{ ResViewSubjectInfoPersonalObj.FullName == null ? '-' : ResViewSubjectInfoPersonalObj.FullName }} </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control"> Alias </label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control"> {{ ResViewSubjectInfoPersonalObj.Alias == null ? '-' : ResViewSubjectInfoPersonalObj.Alias }} </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control"> Gender </label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control"> {{ ResViewSubjectInfoPersonalObj.Gender == null ? '-' : ResViewSubjectInfoPersonalObj.Gender }} </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <lib-ucSubsection [id]="'MainPersonalDataId'" [title]="'Main Personal Data'" [panel]="'MainPersonalData'">
+          </lib-ucSubsection>
+          <div class="row" id="MainPersonalData">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate>Date of Birth</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate> {{ ResViewSubjectInfoPersonalObj.DateOfBirth == null ? '-' : ResViewSubjectInfoPersonalObj.DateOfBirth | date: 'dd-MM-yyy' }} </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate>Citizenship</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate>{{ ResViewSubjectInfoPersonalObj.Citizenship == null ? '-' : ResViewSubjectInfoPersonalObj.Citizenship }}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate>Mother Maiden Name</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate>{{ ResViewSubjectInfoPersonalObj.MotherMaidenName == null ? '-' : ResViewSubjectInfoPersonalObj.MotherMaidenName }}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate>Social Status</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate>{{ ResViewSubjectInfoPersonalObj.SocialStat == null ? '-' : ResViewSubjectInfoPersonalObj.SocialStat }}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate>Profession</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate>{{ ResViewSubjectInfoPersonalObj.Employment == null ? '-' : ResViewSubjectInfoPersonalObj.Employment }}</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate>Place of Birth</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate>{{ ResViewSubjectInfoPersonalObj.PlaceOfBirth == null ? '-' : ResViewSubjectInfoPersonalObj.PlaceOfBirth }}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate>Marital Status</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate>{{ ResViewSubjectInfoPersonalObj.MaritalStat == null ? '-' : ResViewSubjectInfoPersonalObj.MaritalStat }}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate>Education</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate>{{ ResViewSubjectInfoPersonalObj.Education == null ? '-' : ResViewSubjectInfoPersonalObj.Education }}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate></label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate></label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate>Employer</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate>{{ ResViewSubjectInfoPersonalObj.Employer == null ? '-' : ResViewSubjectInfoPersonalObj.Employer }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <lib-ucSubsection [id]="'AddressId'" [title]="'Address'" [panel]="'Address'">
+          </lib-ucSubsection>
+          <div class="row" id="Address">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate>Contact Address</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate>{{ ResViewSubjectInfoPersonalObj.Addr == null ? '-' : ResViewSubjectInfoPersonalObj.Addr }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <lib-ucSubsection [id]="'ContacsId'" [title]="'Contacs'" [panel]="'Contacs'">
+          </lib-ucSubsection>
+          <div class="row" id="Contacs">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate>Mobile Phone No</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate>{{ ResViewSubjectInfoPersonalObj.MobilePhnNo == null ? '-' : ResViewSubjectInfoPersonalObj.MobilePhnNo }}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate>Fixed Line No</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate>{{ ResViewSubjectInfoPersonalObj.FixedLineNo == null ? '-' : ResViewSubjectInfoPersonalObj.FixedLineNo }}</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate>Email</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate>{{ ResViewSubjectInfoPersonalObj.Email == null ? '-' : ResViewSubjectInfoPersonalObj.Email }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <lib-ucSubsection [id]="'DisputesId'" [title]="'Disputes'" [panel]="'Disputes'">
+          </lib-ucSubsection>
+          <div class="row mb-1" id="Disputes">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate>No. of Closed Disputes</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate>{{ ResViewSubjectInfoPersonalObj.ClsdDsptsSbjctNum == null ? '-' : ResViewSubjectInfoPersonalObj.ClsdDsptsSbjctNum }}</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="label-control" translate>No. of False Disputes</label>
+                </div>
+                <div class="col-md-6">
+                  <label class="label-control" translate>{{ ResViewSubjectInfoPersonalObj.FalseDsptsNum == null ? '-' : ResViewSubjectInfoPersonalObj.FalseDsptsNum }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

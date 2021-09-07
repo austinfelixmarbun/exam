@@ -1,15 +1,15 @@
-import { Component, OnInit, AfterViewInit, Inject, Injector } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from '../AdInsHelper';
-import { URLConstant } from '../constant/URLConstant';
 import { CookieOptions, CookieService } from 'ngx-cookie';
 import { formatDate } from '@angular/common';
 import { CommonConstant } from '../constant/CommonConstant';
 import { NavigationConstant } from '../NavigationConstant';
 import { AdInsConstant } from '../AdInstConstant';
+import { StorageService } from '../services/StorageService';
 
 @Component({
   selector: 'app-rolepick',
@@ -23,7 +23,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   }
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-    private http: HttpClient, private router: Router, public dialog: MatDialog, private cookieService: CookieService) {
+    private http: HttpClient, private router: Router, public dialog: MatDialog, private cookieService: CookieService, private strService: StorageService) {
     this.listRole = data["response"];
   }
 
@@ -54,6 +54,9 @@ export class RolepickComponent implements OnInit, AfterViewInit {
 
           AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
           AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
+          
+          this.strService.set(AdInsConstant.WatchRoleState, true);
+          
           this.router.navigate([NavigationConstant.DASHBOARD]);
           this.dialog.closeAll();
         }

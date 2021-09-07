@@ -34,10 +34,10 @@ export class ShareholderFormComponent implements OnInit {
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
   @Output() outputExisting: EventEmitter<CustFormExistingObj> = new EventEmitter();
-  @Output() outputChange: EventEmitter<{Key: string, Code: string}> = new EventEmitter();
+  @Output() outputChange: EventEmitter<{ Key: string, Code: string }> = new EventEmitter();
 
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
-  
+
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
 
   private ucLookupProfession: UclookupgenericComponent;
@@ -46,6 +46,7 @@ export class ShareholderFormComponent implements OnInit {
       this.ucLookupProfession = content;
     }
   }
+  readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
   constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
 
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
@@ -103,6 +104,15 @@ export class ShareholderFormComponent implements OnInit {
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
+    
+    let listCriteriaObj: Array<CriteriaObj> = new Array();
+    let criteriaCustObj = new CriteriaObj();
+    criteriaCustObj.DataType = "text";
+    criteriaCustObj.restriction = AdInsConstant.RestrictionEq;
+    criteriaCustObj.propName = 'MR_CUST_MODEL_CODE';
+    criteriaCustObj.value = "";
+    listCriteriaObj.push(criteriaCustObj);
+    this.professionLookUpObj.addCritInput = listCriteriaObj;
   }
 
   async GetExistingShareholder(custCompanyMgmntShrholderId: number = this.CustCompanyMgmntShrholderId) {
@@ -146,7 +156,7 @@ export class ShareholderFormComponent implements OnInit {
         if (!response.RefProfessionId) return;
         await this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
           (response: RefProfessionObj) => {
-            this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: response.ProfessionCode});
+            this.outputChange.emit({ Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: response.ProfessionCode });
             this.professionLookUpObj.nameSelect = response.ProfessionName;
             this.professionLookUpObj.jsonSelect = response;
           });
@@ -177,21 +187,21 @@ export class ShareholderFormComponent implements OnInit {
     this.parentForm.patchValue({
       RefProfessionId: event.RefProfessionId,
     });
-    this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: event.ProfessionCode});
+    this.outputChange.emit({ Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: event.ProfessionCode });
   }
-  
+
   getLookUpJobPosition(ev) {
     this.parentForm.patchValue({
       MrJobPositionCode: ev.JobCode,
     });
   }
-  
+
   changeCustModel() {
     this.ResetLookupProfession();
-    this.outputChange.emit({Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: ""});
+    this.outputChange.emit({ Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: "" });
   }
-  
-  ResetLookupProfession(valueCode: string = null, valueDesc: string = ""){
+
+  ResetLookupProfession(valueCode: string = null, valueDesc: string = "") {
     this.parentForm.patchValue({
       RefProfessionId: valueCode,
     });
@@ -199,21 +209,19 @@ export class ShareholderFormComponent implements OnInit {
     this.professionLookUpObj.jsonSelect = { JobDesc: valueDesc };
     this.PatchCriteriaLookupProfession();
   }
-  
+
   PatchCriteriaLookupProfession() {
     let tempCustModel: string = this.parentForm.get("MrCustModelCode").value;
 
-    if (tempCustModel != "") {
-      let listCriteriaObj: Array<CriteriaObj> = new Array();
-      let criteriaCustObj = new CriteriaObj();
-      criteriaCustObj.DataType = "text";
-      criteriaCustObj.restriction = AdInsConstant.RestrictionEq;
-      criteriaCustObj.propName = 'MR_CUST_MODEL_CODE';
-      criteriaCustObj.value = tempCustModel;
-      listCriteriaObj.push(criteriaCustObj);
+    let listCriteriaObj: Array<CriteriaObj> = new Array();
+    let criteriaCustObj = new CriteriaObj();
+    criteriaCustObj.DataType = "text";
+    criteriaCustObj.restriction = AdInsConstant.RestrictionEq;
+    criteriaCustObj.propName = 'MR_CUST_MODEL_CODE';
+    criteriaCustObj.value = tempCustModel;
+    listCriteriaObj.push(criteriaCustObj);
 
-      this.professionLookUpObj.addCritInput = listCriteriaObj;
-      this.ucLookupProfession.setAddCritInput();
-    }
+    this.professionLookUpObj.addCritInput = listCriteriaObj;
+    this.ucLookupProfession.setAddCritInput();
   }
 }

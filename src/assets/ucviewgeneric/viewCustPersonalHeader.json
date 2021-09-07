@@ -84,6 +84,16 @@
             "type": "text",
             "label": "VIP Notes",
             "property": "VipNotes"
+          },
+          {
+            "type": "text",
+            "label": "Gelar Depan",
+            "property": "GelarDepan"
+          },
+          {
+            "type": "text",
+            "label": "Gelar Belakang",
+            "property": "GelarBelakang"
           }
         ],
         "querystring": {

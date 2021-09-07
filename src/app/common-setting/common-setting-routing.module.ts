@@ -63,6 +63,9 @@ import { IndustryTypeCategoryDetailComponent } from './industry-type-category/in
 import { IndustryTypeCategoryPagingComponent } from './industry-type-category/industry-type-category-paging/industry-type-category-paging.component';
 import { ExchangeRateDetailComponent } from './exchange-rate/exchange-rate-detail/exchange-rate-detail.component';
 import { ExchangeRatePagingComponent } from './exchange-rate/exchange-rate-paging/exchange-rate-paging.component';
+import { PathConstantX } from 'app/impl/shared/PathConstantX';
+import { EconomicSectorSlikPagingXComponent } from 'app/impl/common-setting/economic-sector-slik/economic-sector-slik-paging/economic-sector-slik-paging-x.component';
+import { EconomicSectorSlikAddEditXComponent } from 'app/impl/common-setting/economic-sector-slik/economic-sector-slik-add-edit/economic-sector-slik-add-edit-x.component';
 
 const routes: Routes = [
   {
@@ -500,6 +503,21 @@ const routes: Routes = [
         component: IndustryTypeCategoryDetailComponent,
         data: {
           title: 'Industry Type Category'
+        },
+      },
+      {
+        path: PathConstantX.CS_ECONOMIC_SECTOR_SLIK_PAGING,
+        component: EconomicSectorSlikPagingXComponent,
+        data: {
+          title: 'Economic Sector SLIK Paging'
+        },
+      },
+      
+      {
+        path: PathConstantX.CS_ECONOMIC_SECTOR_SLIK_DETAIL,
+        component: EconomicSectorSlikAddEditXComponent,
+        data: {
+          title: 'Economic Sector SLIK Add Edit'
         },
       }
     ]

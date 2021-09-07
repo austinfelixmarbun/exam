@@ -54,5 +54,10 @@ export class ExceptionConstant {
     public static ISSUE_DT_MUST_LESS_EQ_THAN_BD = "Issue Date must be <= Business Date";
     public static EXP_DT_MUST_HIGHER_THAN_BD = "Expired Date must be > Business Date";
     public static DUPLICATE_LEGAL_DOC = "Document with Legal Document Type {0} and Document No {1} already exists";
+    public static TRUSTING_SOCIAL_MAX_SUBJECT = "Subject cannot be more than 8";    
+    public static TRUSTING_SOCIAL_DUPL_RELATION_CUST = "Cannot add another subject with Relation: Customer";
+    public static TRUSTING_SOCIAL_DUPL_MOBILE_PHN_NO = "Duplicate Mobile Phone No";
+    public static TRUSTING_SOCIAL_INVALID_FILE_FORMAT = "File format must be {0}";
+
 
 }
