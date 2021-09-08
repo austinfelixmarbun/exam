@@ -18,9 +18,6 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { SharedModule } from 'app/shared/shared.module';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { createTranslateLoader } from 'app/app.module';
-import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [PefindoViewComponent],
@@ -43,13 +40,6 @@ import { HttpClient } from '@angular/common/http';
     SharingComponentModule,
     UcShowErrorsModule,
     SharedModule,
-    TranslateModule.forRoot({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
-    }),
   ]
 })
 export class PefindoViewModule { }

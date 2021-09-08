@@ -82,7 +82,6 @@ import { ExchangeRateDetailComponent } from './exchange-rate/exchange-rate-detai
 import { ExchangeRatePagingComponent } from './exchange-rate/exchange-rate-paging/exchange-rate-paging.component';
 import { CurrencyMaskInputMode, NgxCurrencyModule } from 'ngx-currency';
 import { SharedModule } from 'app/shared/shared.module';
-import { TranslateModule } from '@ngx-translate/core';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -118,7 +117,7 @@ export const customCurrencyMaskConfig = {
     ColorPickerModule,
     UcaddressModule,
     AdInsModule,
-    TranslateModule,
+    SharedModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
   ],
   declarations: [

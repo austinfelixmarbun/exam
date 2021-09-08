@@ -23,10 +23,7 @@ import { CustomerViewChildRoutingModule } from "./customer-view-child-routing.mo
 import { CustomerViewPersonalAddressComponent } from "./customer-view-personal-address/customer-view-personal-address.component";
 import { CustomerViewPersonalCustomerGroupComponent } from "./customer-view-personal-customer-group/customer-view-personal-customer-group.component";
 import { CustomerViewCoyAddressComponent } from "./customer-view-coy-address/customer-view-coy-address.component";
-import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
-import { createTranslateLoader } from "app/app.module";
-import { HttpClient } from "@angular/common/http";
-import { CustomerViewTrustingSocialComponent } from "./customer-view-trusting-social/customer-view-trusting-social.component";
+import { SharedModule } from "app/shared/shared.module";
 
 
 @NgModule({
@@ -48,14 +45,7 @@ import { CustomerViewTrustingSocialComponent } from "./customer-view-trusting-so
     UcSubsectionModule,
     SharingComponentModule,
     UcShowErrorsModule,
-    TranslateModule.forChild({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
-  }),
-    
+    SharedModule
   ],
   declarations: [
     CustomerViewCoyAppListingComponent,

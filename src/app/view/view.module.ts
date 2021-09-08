@@ -14,6 +14,7 @@ import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { createTranslateLoader } from "app/app.module";
 import { HttpClient } from "@angular/common/http";
 import { SurveyTaskViewModule } from "./survey-task-view/survey-task-view.module";
+import { SharedModule } from "app/shared/shared.module";
 @NgModule({
   imports: [
     ViewRoutingModule,
@@ -28,13 +29,14 @@ import { SurveyTaskViewModule } from "./survey-task-view/survey-task-view.module
     FormsModule,
     ReactiveFormsModule,
     SurveyTaskViewModule,
-    TranslateModule.forRoot({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
-  }),
+    SharedModule
+  //   TranslateModule.forRoot({
+  //     loader: {
+  //         provide: TranslateLoader,
+  //         useFactory: (createTranslateLoader),
+  //         deps: [HttpClient]
+  //     }
+  // }),
     
   ],
   declarations: [],

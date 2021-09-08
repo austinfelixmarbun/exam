@@ -19,11 +19,6 @@ import { UcuploadModule } from '@adins/ucupload';
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { UcDirectiveUpperCaseModule } from '@adins/uc-directive-upper-case';
-
-import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
-import { createTranslateLoader } from "app/app.module";
-import { HttpClient } from "@angular/common/http";
-
 @NgModule({
     exports: [
         UcDirectiveUpperCaseModule,
@@ -65,14 +60,6 @@ import { HttpClient } from "@angular/common/http";
         UcdropdownlistModule,
         UcaddtotempModule,
         UcDirectiveUpperCaseModule,
-
-        // TranslateModule.forRoot({
-        //     loader: {
-        //         provide: TranslateLoader,
-        //         useFactory: (createTranslateLoader),
-        //         deps: [HttpClient]
-        //     }
-        // }),
     ],
     declarations: [
     ]

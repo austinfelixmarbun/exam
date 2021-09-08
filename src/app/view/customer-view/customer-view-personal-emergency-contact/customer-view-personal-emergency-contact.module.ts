@@ -16,6 +16,7 @@ import { UcapprovalhistModule, UcapprovalhistComponent } from "@adins/ucapproval
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewPersonalEmergencyContactComponent } from "./customer-view-personal-emergency-contact.component";
 import { CustomerViewPersonalEmergencyContactRoutingModule } from "./customer-view-personal-emergency-contact-routing.module";
+import { SharedModule } from "app/shared/shared.module";
 
 
 
@@ -37,6 +38,7 @@ import { CustomerViewPersonalEmergencyContactRoutingModule } from "./customer-vi
     SharingComponentModule,
     UcapprovalhistModule,
     UcShowErrorsModule,
+    SharedModule
   ],
   declarations: [
     ///customer

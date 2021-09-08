@@ -12,22 +12,32 @@ import { StorageService } from 'app/shared/services/StorageService';
 export class ContentLayoutComponent implements OnInit {  
     
     unsubscribe: any;
-    constructor(private translate: TranslateService, private strService: StorageService) {
+    constructor(public translate: TranslateService, private strService: StorageService) {
         const browserLang: string = translate.getBrowserLang();
-        translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
+        let langUse: string = 'en';
+        this.unsubscribe = this.strService.watch(AdInsConstant.WatchRoleLang).subscribe(
+            (response) => {
+                console.log(response);
+                if (response) {
+                    langUse = response;
+                    this.translate.use(response);
+                }
+            }
+        );
+        translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : langUse);
     }
 
     ngOnInit() {
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements OnInit' to the class.
-        this.unsubscribe = this.strService.watch(AdInsConstant.WatchRoleLang).subscribe(
-            (response) => {
-                console.log(response);
-                if (response) {
-                    this.translate.use(response);
-                }
-            }
-        );
+        // this.unsubscribe = this.strService.watch(AdInsConstant.WatchRoleLang).subscribe(
+        //     (response) => {
+        //         console.log(response);
+        //         if (response) {
+        //             this.translate.use(response);
+        //         }
+        //     }
+        // );
     }
     
     ChangeLanguage(language: string) {

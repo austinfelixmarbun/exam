@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { FooterComponent } from "app/shared/footer/footer.component";
 import { NavbarComponent } from "app/shared/navbar/navbar.component";
 import { SidebarComponent } from "app/shared/sidebar/sidebar.component";
@@ -13,7 +13,12 @@ import { ContextMenuModule } from 'ngx-contextmenu';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DmsIframeComponent } from './dms-iframe/dms-iframe.component';
 import { SafePipe } from './pipe/safepipe';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+export function createTranslateLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 @NgModule({
     exports: [
         CommonModule,
@@ -32,7 +37,13 @@ import { SafePipe } from './pipe/safepipe';
         RouterModule,
         CommonModule,
         NgbModule,
-        TranslateModule,
+        TranslateModule.forChild({
+          loader: {
+              provide: TranslateLoader,
+              useFactory: createTranslateLoader,
+              deps: [HttpClient]
+          }
+        }),
         ContextMenuModule.forRoot(),
         NgMultiSelectDropDownModule
     ],
