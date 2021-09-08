@@ -25,8 +25,9 @@ export class PathConstantX{
     public static CUST_COY_PAGE = PathConstant.CUST_COY + "/" + PathConstantX.CUST_PAGE;
     public static CUST_PERSONAL_JOB_DATA = PathConstant.CUST_PERSONAL + "/" + PathConstantX.CUST_JOB_DATA;
     //#endregion
-
+    
     //#region Vendor-Module
+    public static VENDOR_REG = "RegistrationX";
     public static VENDOR_ATPM_DETAIL = PathConstant.VENDOR_ATPM + "/" + PathConstantX.DETAIL;
     public static VENDOR_HO_DETAIL = PathConstant.VENDOR_HO + "/" + PathConstantX.DETAIL;
     public static VENDOR_BRANCH_ADD = PathConstant.VENDOR_BRANCH + "/" + PathConstantX.ADD;
@@ -35,6 +36,7 @@ export class PathConstantX{
     public static VENDOR_BRANCH_EMP_DETAIL = PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_EMP + "/" + PathConstantX.DETAIL;
     public static VENDOR_GRADING_REQUEST_PAGING = PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstantX.PAGING;
     public static VENDOR_GRADING_REQUEST_DETAIL = PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstantX.DETAIL;
+    public static VENDOR_HOLDING_REG = PathConstant.VENDOR_HOLDING + "/" + PathConstantX.VENDOR_REG;
     //#endregion
 
     public static CUST_PAGE_X ="PageX";
