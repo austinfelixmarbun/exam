@@ -1012,6 +1012,7 @@ export class URLConstant {
     // Cust Exposure
     public static GetCustExpsrInfoByCustId = environment.FoundationR3Url + "/v1" + "/CustExpsrInfo/GetCustExpsrInfoByCustId";
     public static RequestExposure = environment.FoundationR3Url + "/v1" + "/CustExpsrInfo/RequestExposure";
+    public static RequestExposureV2 = environment.FoundationR3Url + "/v2" + "/CustExpsrInfo/RequestExposure";
     public static GetListCustExpsrBucketByCustExpsrDId = environment.FoundationR3Url + "/v1" + "/CustExpsrInfo/GetListCustExpsrBucketByCustExpsrDId";
     public static GetListCustExpsrAppAgrHistByCustExpsrHId = environment.FoundationR3Url + "/v1" + "/CustExpsrInfo/GetListCustExpsrAppAgrHistByCustExpsrHId";
 
