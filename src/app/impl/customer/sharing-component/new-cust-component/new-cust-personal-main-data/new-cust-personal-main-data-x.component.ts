@@ -42,6 +42,7 @@ import { ReqGenerateTrxNoObj } from 'app/shared/model/MasterSequence/ReqGenerate
 import { ResGenerateTrxNoObj } from 'app/shared/model/MasterSequence/ResGenerateTrxNoObj.model';
 import { ReqPefindoSmartSearchObj } from 'app/shared/model/Digitalization/ReqPefindoSmartSearchObj.model';
 import { PefindoReqComponent } from 'app/customer/sharing-component/new-cust-component/component/pefindo/request/pefindo-req.component';
+import { ShareholderFormXComponent } from '../component/shareholder-form/shareholder-form-x.component';
 
 @Component({
   selector: 'app-new-cust-personal-main-data-x',
@@ -49,7 +50,7 @@ import { PefindoReqComponent } from 'app/customer/sharing-component/new-cust-com
 })
 export class NewCustPersonalMainDataXComponent implements OnInit {
 
-  @ViewChild('ShareholderForm') shareholderForm: ShareholderFormComponent;
+  @ViewChild('ShareholderFormX') shareholderForm: ShareholderFormXComponent;
   @ViewChild('FamilyForm') familyForm: FamilyFormComponent;
   @ViewChild('CustAttrForm') custAttrForm: CustAttrFormComponent;
   private ucLookupExistingCust: UclookupgenericComponent;
