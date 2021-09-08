@@ -1,0 +1,487 @@
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { PefindoReqComponent } from 'app/customer/sharing-component/new-cust-component/component/pefindo/request/pefindo-req.component';
+import { ShareholderFormComponent } from 'app/customer/sharing-component/new-cust-component/component/shareholder-form/shareholder-form.component';
+import { TrustingSocialReqHeaderComponent } from 'app/customer/sharing-component/new-cust-component/component/trusting-social/request/trusting-social-req-header.component';
+import { TrustingSocialViewHeaderComponent } from 'app/customer/sharing-component/new-cust-component/component/trusting-social/view/trusting-social-view-header.component';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
+import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
+import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { ReqPefindoSmartSearchObj } from 'app/shared/model/Digitalization/ReqPefindoSmartSearchObj.model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { ReqGenerateTrxNoObj } from 'app/shared/model/MasterSequence/ReqGenerateTrxNoObj.model';
+import { ResGenerateTrxNoObj } from 'app/shared/model/MasterSequence/ResGenerateTrxNoObj.model';
+import { CustCompanyMgmntShrholderObj } from 'app/shared/model/NewCust/CustCompanyMgmntShrholderObj.Model';
+import { ReqCoyObj } from 'app/shared/model/NewCust/ReqCoyObj.Model';
+import { CustFormExistingObj } from 'app/shared/model/NewCust/Shareholder/ShareholderFormExistingObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
+import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
+import { VendorObj } from 'app/shared/model/VendorObj.Model';
+import { CustomerViewTrustingSocialComponent } from 'app/view/customer-view/customer-view-trusting-social/customer-view-trusting-social.component';
+import { CookieService } from 'ngx-cookie';
+
+@Component({
+  selector: 'app-new-cust-company-main-data-x',
+  templateUrl: './new-cust-company-main-data-x.component.html',
+})
+export class NewCustCompanyMainDataXComponent implements OnInit {
+
+  @ViewChild('ShareholderForm') shareholderForm: ShareholderFormComponent;
+  @Input() listCustNoToExclude: Array<string> = new Array();
+  @Input() CustId: number = 0; // if 0 mode Add else mode Edit.
+  @Input() CustCompanyMgmntShrholderId: number = 0;
+  @Input() ParentCustId: number = 0;
+  @Input() tempTotalSharePrct: number = 0;
+  @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust; // Cust Mode
+  @Output() outputAfterSave: EventEmitter<ReqCoyObj> = new EventEmitter();
+  @Output() outputCancel: EventEmitter<string> = new EventEmitter();
+
+  CustomerForm: FormGroup = this.fb.group({});
+  inputAddressObj: InputAddressObj = new InputAddressObj();
+  inputFieldObj: InputFieldObj = new InputFieldObj();
+  inputLookupObj: InputLookupObj = new InputLookupObj();
+  IsUseDigitalization: string = "0";
+  officeCode: string;
+  thirdPartyTrxNo: string = "";
+
+  custObj: CustObj = new CustObj();
+
+  constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService,
+    private modalService: NgbModal, private cookieService: CookieService) { }
+
+  //#region Readonly
+  readonly RefMasterTypeCodeCompanyType: string = CommonConstant.RefMasterTypeCodeCompanyType;
+  readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
+
+  readonly CustTypeCoy: string = CommonConstant.CustomerCompany;
+
+  readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
+  readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
+  //#endregion
+
+  DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
+  async ngOnInit() {
+    let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.officeCode = context[CommonConstant.OFFICE_CODE];
+    this.ClearCustForm();
+    this.BindLookupExistingCust();
+    this.InitCustMainDataMode();
+    this.inputAddressObj = NewCustSetData.BindSetLegalAddr();
+    this.BindLookupSupplier();
+    this.DictUcDDLObj[this.RefMasterTypeCodeCompanyType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCompanyType);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
+    await this.GetExistingData();
+    this.GetCustAddrToCopy();
+    this.existingCustomerLookUpObj.isReady = true;
+    this.getIsUseDigitalization();
+  }
+  //#region Set Data
+  //#region UcLookup
+  BindLookupSupplier() {
+    this.inputLookupObj = new InputLookupObj();
+    this.inputLookupObj.isReady = false;
+    this.inputLookupObj.urlJson = "./assets/lookup/lookupSupplierCoy.json";
+    this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupplierCoy.json";
+    this.inputLookupObj.genericJson = "./assets/lookup/lookupSupplierCoy.json";
+    this.inputLookupObj.isReady = true;
+    this.inputLookupObj.isRequired = false;
+  }
+  //#endregion
+
+  CustNameLabel: string = "Customer";
+  InitCustMainDataMode() {
+    switch (this.CustDataMode) {
+      case this.CustDataModeMain:
+        this.CustNameLabel = "Customer";
+        break;
+      case this.CustDataModeShareholder:
+        this.CustNameLabel = "Share Legal";
+        break;
+      default:
+    }
+  }
+
+  existingCustomerLookUpObj: InputLookupObj = new InputLookupObj();
+  BindLookupExistingCust() {
+    if (this.CustDataMode == this.CustDataModeMain) return;
+    this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerCompany);
+    if (this.CustId != 0) this.existingCustomerLookUpObj.isDisable = true;
+  }
+
+  ClearCustForm() {
+    this.CustomerForm = this.fb.group({
+      MrCustModelCode: [''],
+      CustName: ['', [Validators.required]],
+      MrCompanyTypeCode: ['', [Validators.required]],
+      TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
+
+      IsSupplier: [false],
+      SupplCode: [''],
+      SupplName: [''],
+      SupplId: ['']
+    });
+    if (this.CustDataMode != this.CustDataModeMain) {
+      this.CustomerForm.get("CustName").disable();
+    }
+  }
+  //#endregion
+
+  //#region Change
+
+  SetSupplier(e: VendorObj) {
+    this.CustomerForm.patchValue({
+      SupplCode: e.VendorCode,
+      SupplName: e.VendorName,
+      SupplId: e.VendorId
+    });
+
+    this.http.post(URLConstant.GetVendorByVendorCode, { Code: e.VendorCode }).subscribe(
+      (response: VendorObj) => {
+        this.CustomerForm.patchValue({
+          CustName: e.VendorName,
+          MrIdTypeCode: response.MrIdTypeCode,
+          IdNo: response.IdNo,
+          TaxIdNo: response.TaxIdNo,
+        });
+      });
+
+    this.http.post(URLConstant.GetVendorAddrByVendorCodeAndMrAddrTypeCode, { VendorCode: e.VendorCode, MrAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
+      (response: VendorAddrObj) => {
+        this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
+        this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
+        let tempUcAddObj: UcAddressObj = new UcAddressObj();
+        tempUcAddObj.AreaCode1 = response.AreaCode1;
+        tempUcAddObj.AreaCode2 = response.AreaCode2;
+        tempUcAddObj.AreaCode3 = response.AreaCode3;
+        tempUcAddObj.AreaCode4 = response.AreaCode4;
+        tempUcAddObj.Addr = response.Addr;
+        tempUcAddObj.City = response.City;
+        this.inputAddressObj.default = tempUcAddObj;
+        this.inputAddressObj.inputField = this.inputFieldObj;
+      }
+    );
+  }
+
+  ExistingShareholderObj: CustFormExistingObj = new CustFormExistingObj();
+  GetExistingShareholder(ev: CustFormExistingObj) {
+    this.ExistingShareholderObj = ev;
+  }
+
+  async getLookUpCustomer(ev: { CustId: number, CustCompanyMgmntShrholderId: number }) {
+    await this.GetCustData(ev.CustId);
+    this.GetCustAddr(ev.CustId);
+    await this.GetCustCompanyData(ev.CustId);
+    if (ev.CustCompanyMgmntShrholderId) this.shareholderForm.GetExistingShareholder(ev.CustCompanyMgmntShrholderId);
+
+    this.IsLockEdit();
+  }
+
+  IsLockEdit() {
+    this.existingCustomerLookUpObj.isReadonly = true;
+    this.inputAddressObj.isReadonly = true;
+    this.inputAddressObj.inputField.inputLookupObj.isReadonly = true;
+    this.inputAddressObj.inputField.inputLookupObj.isDisable = true;
+
+    this.CustomerForm.get("CustName").disable();
+    this.CustomerForm.get("MrCustModelCode").disable();
+    this.CustomerForm.get("MrCompanyTypeCode").disable();
+    this.CustomerForm.get("TaxIdNo").disable();
+    this.IsLockCopyAddrBtn = true;
+  }
+
+  CopyLegalAddr() {
+    let inputFieldObj = new InputFieldObj();
+    inputFieldObj.inputLookupObj = new InputLookupObj();
+    inputFieldObj.inputLookupObj.isReadonly = false;
+    inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrToCopy.Zipcode;
+    inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrToCopy.Zipcode };
+    let tempUcAddObj: UcAddressObj = new UcAddressObj();
+    tempUcAddObj.AreaCode1 = this.tempCustAddrToCopy.AreaCode1;
+    tempUcAddObj.AreaCode2 = this.tempCustAddrToCopy.AreaCode2;
+    tempUcAddObj.AreaCode3 = this.tempCustAddrToCopy.AreaCode3;
+    tempUcAddObj.AreaCode4 = this.tempCustAddrToCopy.AreaCode4;
+    tempUcAddObj.Addr = this.tempCustAddrToCopy.Addr;
+    tempUcAddObj.City = this.tempCustAddrToCopy.City;
+    tempUcAddObj.MrHouseOwnershipCode = this.tempCustAddrToCopy.MrBuildingOwnershipCode;
+    this.inputAddressObj.default = tempUcAddObj;
+    this.inputAddressObj.inputField = inputFieldObj;
+  }
+  //#endregion
+
+  //#region Get
+
+  tempCustAddrToCopy: CustAddrObj = new CustAddrObj();
+  async GetCustAddrToCopy() {
+    if (this.CustDataMode == this.CustDataModeMain) return;
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = this.ParentCustId;
+    reqObj.Code = CommonConstant.CustAddrTypeLegal;
+    await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+      (response: CustAddrObj) => {
+        this.tempCustAddrToCopy = response;
+      }
+    );
+  }
+
+  //#region GetExisting / mode edit
+  IsLockCopyAddrBtn: boolean = false;
+  async GetExistingData() {
+    if (this.CustId == 0) return;
+    await this.GetCustData();
+    this.GetCustAddr();
+    this.GetCustCompanyData();
+
+    if (this.CustDataMode != CommonConstant.CustMainDataModeCust) {
+      this.IsLockEdit();
+    }
+    this.IsLockCopyAddrBtn = true;
+  }
+
+  async GetCustData(custId: number = this.CustId) {
+    await this.http.post(URLConstant.GetCustByCustId, { Id: custId }).toPromise().then(
+      (response: CustObj) => {
+        this.custObj = response;
+        this.thirdPartyTrxNo = this.custObj.ThirdPartyTrxNo;
+        this.CustomerForm.patchValue({
+          CustName: this.custObj.CustName,
+          MrCustTypeCode: this.custObj.MrCustTypeCode,
+          TaxIdNo: this.custObj.TaxIdNo,
+          MrCustModelCode: this.custObj.MrCustModelCode,
+        });
+        this.existingCustomerLookUpObj.nameSelect = response.CustName;
+        this.existingCustomerLookUpObj.jsonSelect = { CustName: response.CustName };
+        this.existingCustomerLookUpObj.isReady = true;
+      }
+    );
+  }
+
+  tempCustAddr: CustAddrObj = new CustAddrObj();
+  async GetCustAddr(custId: number = this.CustId) {
+    let reqObj: GenericObj = new GenericObj();
+    reqObj.Id = custId;
+    reqObj.Code = CommonConstant.CustAddrTypeLegal;
+    await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+      (response: CustAddrObj) => {
+        this.tempCustAddr = response;
+        this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
+        this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
+        let tempUcAddObj: UcAddressObj = new UcAddressObj();
+        tempUcAddObj.AreaCode1 = response.AreaCode1;
+        tempUcAddObj.AreaCode2 = response.AreaCode2;
+        tempUcAddObj.AreaCode3 = response.AreaCode3;
+        tempUcAddObj.AreaCode4 = response.AreaCode4;
+        tempUcAddObj.Addr = response.Addr;
+        tempUcAddObj.City = response.City;
+        tempUcAddObj.MrHouseOwnershipCode = response.MrBuildingOwnershipCode;
+        this.inputAddressObj.default = tempUcAddObj;
+        this.inputAddressObj.inputField = this.inputFieldObj;
+
+        if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
+          this.inputAddressObj.inputField.inputLookupObj.isReadonly = false;
+        }
+      }
+    );
+  }
+
+  tempCustCompanyObj: CustCompanyObj = new CustCompanyObj();
+  GetCustCompanyData(custId: number = this.CustId) {
+    this.http.post(URLConstant.GetCustCompanyByCustId, { Id: custId }).subscribe(
+      (response: CustCompanyObj) => {
+        this.tempCustCompanyObj = response;
+        this.CustomerForm.patchValue({
+          MrCompanyTypeCode: response.MrCompanyTypeCode
+        });
+      }
+    );
+  }
+
+  //#endregion
+  //#endregion
+  Cancel() {
+    this.outputCancel.emit();
+  }
+
+  SaveForm() {
+    let tempForm = this.CustomerForm.getRawValue();
+    let reqSubmitObj: ReqCoyObj = new ReqCoyObj();
+
+    reqSubmitObj.CustObj = this.custObj;
+    reqSubmitObj.CustObj.CustName = tempForm["CustName"];
+    reqSubmitObj.CustObj.TaxIdNo = tempForm["TaxIdNo"];
+    reqSubmitObj.CustObj.IdNo = tempForm["TaxIdNo"];
+    reqSubmitObj.CustObj.MrCustModelCode = tempForm["MrCustModelCode"];
+    reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustTypeCompany;
+    reqSubmitObj.CustObj.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+
+    reqSubmitObj.CustCompanyObj = this.tempCustCompanyObj;
+    reqSubmitObj.CustCompanyObj.MrCompanyTypeCode = tempForm["MrCompanyTypeCode"];
+
+    reqSubmitObj.CustAddr = this.tempCustAddr;
+    reqSubmitObj.CustAddr.CustId = this.CustId;
+    reqSubmitObj.CustAddr.Addr = tempForm["UcAddress"]["Addr"];
+    reqSubmitObj.CustAddr.AreaCode1 = tempForm["UcAddress"]["AreaCode1"];
+    reqSubmitObj.CustAddr.AreaCode2 = tempForm["UcAddress"]["AreaCode2"];
+    reqSubmitObj.CustAddr.AreaCode3 = tempForm["UcAddress"]["AreaCode3"];
+    reqSubmitObj.CustAddr.AreaCode4 = tempForm["UcAddress"]["AreaCode4"];
+    reqSubmitObj.CustAddr.City = tempForm["UcAddress"]["City"];
+    reqSubmitObj.CustAddr.MrBuildingOwnershipCode = tempForm["UcAddress"]["MrHouseOwnershipCode"];
+    reqSubmitObj.CustAddr.Zipcode = tempForm["UcAddressZipcode"]["value"];
+    reqSubmitObj.CustAddr.SubZipcode = tempForm["UcAddressZipcode"]["value"];
+    reqSubmitObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
+
+    if (this.CustDataMode == this.CustDataModeShareholder) {
+      reqSubmitObj.CustObj.CustName = tempForm["ExistingCustName"].value;
+      reqSubmitObj.CustCompanyMgmntShrholderObj = this.SetCustMgmntShareholder();
+
+      if (reqSubmitObj.CustCompanyMgmntShrholderObj.IsActive) {
+        let tempTotalSharePrctTobeAdd = this.tempTotalSharePrct + reqSubmitObj.CustCompanyMgmntShrholderObj.SharePrcnt;
+        if (tempTotalSharePrctTobeAdd > 100) {
+          this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_CAN_NOT_100);
+          this.toastr.warningMessage("Total Share now is " + this.tempTotalSharePrct + "%");
+          return;
+        }
+      }
+    }
+
+    reqSubmitObj = this.SetCustomerDataMode(reqSubmitObj);
+    this.outputAfterSave.emit(reqSubmitObj);
+  }
+  private SetCustomerDataMode(reqSubmitObj: ReqCoyObj) {
+    switch (this.CustDataMode) {
+      case this.CustDataModeMain:
+        reqSubmitObj.CustObj.IsCustomer = true;
+        break;
+      case this.CustDataModeShareholder:
+        reqSubmitObj.CustObj.IsShareholder = true;
+        break;
+    }
+    return reqSubmitObj;
+  }
+
+  SetCustMgmntShareholder(): CustCompanyMgmntShrholderObj {
+    let tempForm = this.CustomerForm.getRawValue();
+    let tempReqObj: CustCompanyMgmntShrholderObj = this.ExistingShareholderObj.CustCompanyMgmntShrholder;
+    tempReqObj.CustId = this.ParentCustId;
+    tempReqObj.ShareholderId = this.CustId;
+
+    tempReqObj.SharePrcnt = tempForm["SharePrcnt"];
+    tempReqObj.MrPositionSlikCode = tempForm["MrPositionSlikCode"];
+    tempReqObj.IsActive = tempForm["IsActive"];
+    tempReqObj.IsOwner = tempForm["IsOwner"];
+
+    return tempReqObj
+  }
+
+  getIsUseDigitalization(){
+    this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeIsUseDigitalization}).subscribe(
+      (response) => {
+        this.IsUseDigitalization = response["GsValue"];
+      }
+    );
+  }
+
+  async ReqPefindo(){
+    this.markFormGroupTouched(this.CustomerForm);
+    if(!this.CustomerForm.valid){
+      return;
+    }
+
+    await this.checkThirdPartyTrxNo();
+
+    let tempForm = this.CustomerForm.getRawValue();
+
+    let reqPefindoSmartSearchObj = new ReqPefindoSmartSearchObj();
+    if(this.CustDataMode == this.CustDataModeMain){
+      reqPefindoSmartSearchObj.CustName = tempForm["CustName"];
+    }else{
+      reqPefindoSmartSearchObj.CustName = tempForm["ExistingCustName"]["value"];
+    }
+    reqPefindoSmartSearchObj.CustName = tempForm["CustName"];
+    reqPefindoSmartSearchObj.CustType = CommonConstant.MR_CUST_TYPE_CODE_COMPANY;
+    reqPefindoSmartSearchObj.BirthDt = tempForm["BirthDt"];
+    reqPefindoSmartSearchObj.IdNo = tempForm["TaxIdNo"];
+    reqPefindoSmartSearchObj.IdType = CommonConstant.MrIdTypeCodeNPWP;
+
+    const modalRef = this.modalService.open(PefindoReqComponent);
+    modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
+    modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+  }
+
+  ViewPefindo(){
+    let TrxNo = this.thirdPartyTrxNo;
+    AdInsHelper.OpenPefindoView(TrxNo, CommonConstant.CustomerCompany);
+  }
+
+  async ReqTrustingSocial(){
+    this.markFormGroupTouched(this.CustomerForm);
+    if(!this.CustomerForm.valid){
+      return;
+    }
+    
+    await this.checkThirdPartyTrxNo();
+
+    let tempForm = this.CustomerForm.getRawValue();
+    let custObj: CustObj = new CustObj();
+    let custPersonalObj: CustPersonalObj = new CustPersonalObj();
+    if(this.CustDataMode == this.CustDataModeMain){
+      custObj.CustName = tempForm["CustName"];
+    }else{
+      custObj.CustName = tempForm["ExistingCustName"]["value"];
+    }    
+    custObj.CustNo = this.custObj.CustNo;
+    custObj.TaxIdNo = tempForm["TaxIdNo"];
+    custObj.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+    custObj.MrCustTypeCode = CommonConstant.MR_CUST_TYPE_CODE_COMPANY;
+    custObj.MrIdTypeCode = CommonConstant.TrustingSocialDummyIdType;
+    custObj.IdNo = CommonConstant.TrustingSocialDummyIdNo;
+
+    const modalRef = this.modalService.open(TrustingSocialReqHeaderComponent);
+    modalRef.componentInstance.CustObj = custObj;
+    modalRef.componentInstance.CustPersonalObj = custPersonalObj;
+  }
+
+
+  ViewTrustingSocial(){   
+    const modalRef = this.modalService.open(TrustingSocialViewHeaderComponent);
+    modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+  }
+
+  async checkThirdPartyTrxNo(){
+    if(this.thirdPartyTrxNo == null || this.thirdPartyTrxNo == ""){
+      var reqGenerateTrxNoObj = new ReqGenerateTrxNoObj();
+      reqGenerateTrxNoObj.MasterSeqCode = CommonConstant.MasterSequenceCodeCustomerThirdParty;
+      reqGenerateTrxNoObj.OfficeCode = this.officeCode;
+
+      await this.http.post(URLConstant.GenerateTransactionNoFromRedis, reqGenerateTrxNoObj).toPromise().then(
+        (response: ResGenerateTrxNoObj) => {
+          this.thirdPartyTrxNo = response.TrxNo;
+        }
+      );
+    }
+  }
+
+   markFormGroupTouched(formGroup: FormGroup) {
+    (<any>Object).values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+
+      if (control.controls) {
+        this.markFormGroupTouched(control);
+      }
+    });
+  }
+}
