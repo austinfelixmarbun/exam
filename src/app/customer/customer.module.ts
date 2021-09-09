@@ -310,7 +310,12 @@ export const customCurrencyMaskConfig = {
     CustomerPersonalJobDataXComponent,
     RegexService
   ],
-  entryComponents: [CustGroupTabDetailComponent, CustBankAccDetailSectionFindataComponent, CustLegalDocDetailComponent, CustAssetDetailComponent]
+  entryComponents: [
+    CustGroupTabDetailComponent, 
+    CustBankAccDetailSectionFindataComponent, 
+    CustLegalDocDetailComponent, 
+    CustAssetDetailComponent,
+    CustBankAccDetailSectionFindataXComponent]
 })
 export class CustomerModule {
   constructor() {

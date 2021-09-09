@@ -180,7 +180,7 @@ export class NavigationConstant {
     public static VENDOR_HO_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_HO_DETAIL; //'/Vendor/HO/DetailX'
     public static VENDOR_HO_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HO_REG; //'/Vendor/HO/Registration'
     public static VENDOR_HOLDING_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_HOLDING_DETAIL; //'/Vendor/Holding/DetailX'
-    public static VENDOR_HOLDING_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HOLDING_REG; //'/Vendor/Holding/Registration'
+    public static VENDOR_HOLDING_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_HOLDING_REG; //'/Vendor/Holding/RegistrationX'
     public static VENDOR_AUCTION_COY_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_AUCTION_COY_PAGING; //'/Vendor/AuctionCompany/Paging'
     public static VENDOR_AUCTION_COY_ADD_EDIT = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_AUCTION_COY_ADD_EDIT; //'/Vendor/AuctionCompany/AddEdit'
     public static VENDOR_ATPM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_ATPM_DETAIL; //'/Vendor/ATPM/DetailX'

@@ -47,6 +47,7 @@ import { VendorAtpmAddEditXComponent } from 'app/impl/vendor/vendor-ATPM/vendor-
 import { VendorBranchEmployeePagingXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-employee-paging/vendor-branch-employee-paging-x.component';
 import { VendorGradingRequestDetailXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-request/vendor-grading-request-detail/vendor-grading-request-detail-x.component';
 import { VendorGradingRequestPagingXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-request/vendor-grading-request-paging/vendor-grading-request-paging-x.component';
+import { VendorHoldingRegistrationXComponent } from 'app/impl/vendor/vendor-holding-registration/vendor-holding-registration-x.component';
 
 const routes: Routes = [
   {
@@ -368,6 +369,13 @@ const routes: Routes = [
           title: 'Vendor ATPM Detail'
         },
       },
+      {
+        path: PathConstantX.VENDOR_HOLDING_REG,
+        component: VendorHoldingRegistrationXComponent,
+        data: {
+          title: 'Vendor Registration'
+        },
+      }
     ]
 
   }

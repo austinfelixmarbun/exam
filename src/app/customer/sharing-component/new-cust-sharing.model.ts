@@ -36,6 +36,8 @@ import { TrustingSocialViewHeaderComponent } from './new-cust-component/componen
 import { CustomerViewTrustingSocialModule } from 'app/view/customer-view/customer-view-trusting-social/customer-view-trusting-social.module';
 import { PefindoReqComponent } from './new-cust-component/component/pefindo/request/pefindo-req.component';
 import { FamilyFormXComponent } from 'app/impl/customer/sharing-component/new-cust-component/component/family-form/family-form-x.component';
+import { NewCustCompanyMainDataXComponent } from 'app/impl/customer/sharing-component/new-cust-component/new-cust-company-main-data/new-cust-company-main-data-x.component';
+import { ShareholderFormXComponent } from 'app/impl/customer/sharing-component/new-cust-component/component/shareholder-form/shareholder-form-x.component';
 
 export const customCurrencyMaskConfig = {
     align: "right",
@@ -75,7 +77,9 @@ export const customCurrencyMaskConfig = {
         TrustingSocialReqConsentComponent,
         TrustingSocialReqDetailComponent,
         TrustingSocialViewHeaderComponent,
-        PefindoReqComponent
+        PefindoReqComponent,
+        NewCustCompanyMainDataXComponent,
+        ShareholderFormXComponent
     ],
     imports: [
         CommonModule,
@@ -115,7 +119,9 @@ export const customCurrencyMaskConfig = {
         TrustingSocialReqConsentComponent,
         TrustingSocialReqDetailComponent,
         TrustingSocialViewHeaderComponent,
-        PefindoReqComponent
+        PefindoReqComponent,
+        NewCustCompanyMainDataXComponent,
+        ShareholderFormXComponent
     ],
 
     providers: [

@@ -183,10 +183,10 @@
 
             </div>
           </div>
-          <app-shareholder-form *ngIf="CustDataMode == CustDataModeShareholder" [parentForm]="CustomerForm"
+          <app-shareholder-form-x *ngIf="CustDataMode == CustDataModeShareholder" [parentForm]="CustomerForm"
             [enjiForm]="enjiForm" [CustId]="CustId" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId"
             [CustType]="CustTypePersonal" (outputExisting)=GetExistingFormObj($event)
-            (outputChange)="outputChangeReceived($event)" #ShareholderForm></app-shareholder-form>
+            (outputChange)="outputChangeReceived($event)" #ShareholderFormX></app-shareholder-form-x>
           <app-family-form-x *ngIf="CustDataMode == CustDataModeFamily" [parentForm]="CustomerForm" [enjiForm]="enjiForm"
             [CustId]="CustId" (outputExisting)=GetExistingFormObj($event) (outputChange)="outputChangeReceived($event)"
             #FamilyForm></app-family-form-x>

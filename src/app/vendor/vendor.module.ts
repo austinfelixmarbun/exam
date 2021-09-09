@@ -84,6 +84,8 @@ import { VendorBranchEmployeePagingXComponent } from 'app/impl/vendor/vendor-bra
 import { VendorBranchEmployeeAddEditXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-employee-add-edit/vendor-branch-employee-add-edit-x.component';
 import { VendorGradingRequestDetailXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-request/vendor-grading-request-detail/vendor-grading-request-detail-x.component';
 import { VendorGradingRequestPagingXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-request/vendor-grading-request-paging/vendor-grading-request-paging-x.component';
+import { ContactPersonAddEditXComponent } from 'app/impl/vendor/component/contact-person-add-edit/contact-person-add-edit-x.component';
+import { VendorHoldingRegistrationXComponent } from 'app/impl/vendor/vendor-holding-registration/vendor-holding-registration-x.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -186,7 +188,9 @@ export const customCurrencyMaskConfig = {
     VendorBranchEmployeePagingXComponent,
     VendorBranchEmployeeAddEditXComponent,
     VendorGradingRequestPagingXComponent,
-    VendorGradingRequestDetailXComponent
+    VendorGradingRequestDetailXComponent,
+    ContactPersonAddEditXComponent,
+    VendorHoldingRegistrationXComponent
   ],
   entryComponents : [UcviewgenericComponent, VendorAtpmSelectComponent],
   providers: [
