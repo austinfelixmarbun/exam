@@ -5,6 +5,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ResDashboardObj } from 'app/shared/model/Dashboard/ResDashboardObj.model';
+import { ThingsToDoIntegrationObj, ThingsToDoIntegrationV2Obj, UcThingsToDoObj } from 'app/shared/model/library/UcThingsToDoObj.model';
 import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 
@@ -14,17 +15,19 @@ import { CookieService } from 'ngx-cookie';
   styleUrls: ['./dash-board.component.scss']
 })
 export class DashBoardComponent implements OnInit {
-  Item : any;
-  url: ResDashboardObj = new ResDashboardObj();
-  urlLink: string = "";
-  isReady: boolean = false;
+  Item: UcThingsToDoObj = new UcThingsToDoObj();
 
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
+  username: string;
+  url: string;
+  officeCode: string;
+  roleCode: string;
+
+  constructor(private cookieService: CookieService) { }
 
   ngOnInit() {
-    this.Item = {Url : AdInsConstant.GetThingsToDoByRole, Module : "FOU"};
+    // this.Item = {Url : AdInsConstant.GetThingsToDoByRole, Module : "FOU"};
 
-    let UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    // let UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     // this.http.post<ResDashboardObj>(AdInsConstant.GetDashboardAccessToken, {UserName: UserAccess[CommonConstant.USER_NAME]}).subscribe(
     //     (response) => {
     //       if (response.dashboardUrl != null && response.dashboardUrl != "") {
@@ -33,6 +36,31 @@ export class DashBoardComponent implements OnInit {
     //       }
     //     }
     // );
+    let context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.username = context[CommonConstant.USER_NAME];
+    this.url = environment.DashboardURL;
+    this.officeCode = context[CommonConstant.OFFICE_CODE];
+    this.roleCode = context[CommonConstant.ROLE_CODE];
+    this.Item.Url = environment.isCore ? AdInsConstant.GetThingsToDoByRoleV2 : AdInsConstant.GetThingsToDoByRole;
+    this.Item.RequestObj.ModuleCode = CommonConstant.MODULE_FOU;
+
+    let integrationObj;
+
+    if(environment.isCore){
+      integrationObj = new ThingsToDoIntegrationV2Obj();
+      integrationObj.BaseUrl = AdInsConstant.GetThingsToDoCamunda;
+      integrationObj.ApiPath = "";
+      integrationObj.RequestObj.OfficeCode = this.officeCode;
+      integrationObj.RequestObj.UserName = this.username;
+      integrationObj.RequestObj.OfficeRoleCodes = [this.roleCode, this.roleCode + "-" + this.officeCode, this.officeCode];
+    }else{
+      integrationObj = new ThingsToDoIntegrationObj();
+      integrationObj.RequestObj.Office = this.officeCode;
+      integrationObj.RequestObj.Role = this.roleCode;
+      integrationObj.RequestObj.UserName = this.username;
+      
+    }
+    this.Item.RequestObj.IntegrationObj.push(integrationObj);
   }
   
   showMessage(message: any) {

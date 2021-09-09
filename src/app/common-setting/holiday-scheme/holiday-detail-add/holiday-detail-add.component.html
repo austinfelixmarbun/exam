@@ -14,7 +14,7 @@
           (ngSubmit)="HolidayListForm.valid && SaveForm()">
           <lib-ucSubsection [id]="'HolidayListFormId'" [title]="title" [panel]="'HolidayListForm'"></lib-ucSubsection>
           <div class="form-body" id="HolidayListForm">
-            <div class="form-group row adins-required">
+            <div class="form-group row">
               <label class="col-md-3 adInsLabel" for="IsPublicHoliday" translate>Public Holiday</label>
               <div class="col-md-9">
                 <input type="checkbox" id="IsPublicHoliday" formControlName="IsPublicHoliday" (click)="Checkbox()">

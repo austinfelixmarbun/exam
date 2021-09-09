@@ -133,5 +133,11 @@
   "Documentation": "Documentation",
   "Support": "Support",
   "Full Name": "Nama Tanpa Gelar",
-  "Customer Name": "Legal Name"
+  "Customer Name": "Legal Name",
+  "Debtor Group": "Debtor Group",
+  "Debtor Business Scale": "Debtor Business Scale",
+  "Debtor Group Code": "Debtor Group Code",
+  "Debtor Group Name": "Debtor Group Name",
+  "Debtor Business Scale Name": "Debtor Business Scale Name",
+  "Debtor Business Scale Description": "Debtor Business Scale Description"
 }

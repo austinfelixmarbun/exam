@@ -404,3 +404,7 @@ input[type=date].form-control.is-invalid {
 .breakword {
     word-break: break-word;
 }
+
+.app-sidebar .navigation li a, .off-canvas-sidebar .navigation li a {
+    white-space: pre-wrap;
+}

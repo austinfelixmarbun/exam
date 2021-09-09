@@ -510,5 +510,14 @@ export class PathConstant {
     public static VIEW_SUBJECT_INFO_COMPANY = "SubjectInfoCompany";
     public static VIEW_MO_SUMMARY = "MoSummary";
     public static VIEW_PEFINDO_SCORE = "PefindoScore";
+    public static VIEW_CONTRACTS = "Contracts";
+    public static VIEW_PEFINDO_ALERT_QUEST = "PefindoAlertQuest";
+    public static VIEW_SECURITIES = "Securities";
+    public static VIEW_OTHER_LIABILITIES = "OtherLiabilities";
+    public static VIEW_INVOLVEMENTS = "Involvements";
+    public static VIEW_RELATIONS = "Relations";
+    public static VIEW_INQUIRIES = "Inquiries";
+    public static VIEW_DISPUTES = "Disputes";
+    public static VIEW_FINANCIAL_STATEMENTS = "FinancialStatements";
     //#endregion
 }

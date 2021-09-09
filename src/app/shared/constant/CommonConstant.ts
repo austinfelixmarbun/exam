@@ -6,6 +6,7 @@ export class CommonConstant {
     public static regexEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
 
     // MODULE
+    public static MODULE_FOU = "FOU";
     public static MODULE_LOS = "LOS";
     public static MODULE_LMS = "LMS";
     public static MODULE_AMS = "AMS";
@@ -180,6 +181,8 @@ export class CommonConstant {
     public static GSCodeIsShowCbxPledge = "IS_SHOW_CBX_PLEDGE";
     public static GSCodeListLegalDocCantDuplicate = "LIST_LEGAL_DOC_CANNOT_DUPLICATE";
     public static GSCodeIsUseDigitalization = "IS_USE_DIGITALIZATION";
+    public static GSCodeDefSeparatorDDLVerfQuest = "DEF_SEPARATOR_DDL_VERF_QUEST";
+    public static GSCodeRegexDDLSeparator = "REGEX_DDL_SEPARATOR";
 
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";

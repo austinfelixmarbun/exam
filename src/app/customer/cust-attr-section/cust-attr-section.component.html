@@ -6,7 +6,7 @@
   <div id="OtherInformationSection">
     <div class="form-body" *ngIf="isLookupReady">
       <div class="form-group row">
-        <label class="col-md-3 adInsLabel adins-required-label" translate>Debitor Group</label>
+        <label class="col-md-3 adInsLabel adins-required-label" translate>Debtor Group</label>
         <div class="col-md-9">
           <lib-uclookupgeneric [lookupInput]="inputDebitorGroupLookupObj" [identifier]="'DebitorGroup'"
             [enjiForm]='enjiForm' [parentForm]='OtherInformationForm' (lookup)="getLookupDebitorGroup($event)">
@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-md-3 adInsLabel adins-required-label" translate>Debitor Business Scale</label>
+        <label class="col-md-3 adInsLabel adins-required-label" translate>Debtor Business Scale</label>
         <div class="col-md-9">
           <lib-uclookupgeneric [lookupInput]="inputDebitorBusinessScaleLookupObj" [identifier]="'DebitorBusinessScale'"
             [enjiForm]='enjiForm' [parentForm]='OtherInformationForm' (lookup)="getLookupDebitorBusinessScale($event)">

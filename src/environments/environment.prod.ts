@@ -10,11 +10,13 @@ export const environment = {
     FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
     //FoundationR3Url: 'https://localhost:5001',
     WebSocketURL : 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
+    DashboardURL: 'http://r3app-server.ad-ins.com/Dashboard',
     Module:"FOU",
     losR3Web: 'http://r3web-server.ad-ins.com/LOSR3',
     lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS',
     ApprovalURL : 'http://r3app-server/APPROVAL',
     FoundationR3Web:'http://r3web-server.ad-ins.com/Foundation',
+    WFThingsToDoUrl: 'http://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL/',
     ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
     ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
     DMSUrl: "http://sky.ad-ins.com/LiteDMS_POC/Integration/ViewDoc.aspx",

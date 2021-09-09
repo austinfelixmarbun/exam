@@ -1,0 +1,34 @@
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { ResViewFinancialStatementsObj } from 'app/shared/model/Response/Pefindo/ResViewFinancialStatementsObj.model';
+
+@Component({
+  selector: 'app-pefindo-view-financial-statements',
+  templateUrl: './pefindo-view-financial-statements.component.html'
+})
+export class PefindoViewFinancialStatementsComponent implements OnInit {
+  TrxNo: string;
+  ResViewFinancialStatementsObj: ResViewFinancialStatementsObj = new ResViewFinancialStatementsObj();
+
+  constructor(private route: ActivatedRoute, private http: HttpClient) {
+    this.route.queryParams.subscribe(params => {
+      if (params["TrxNo"] != null) {
+        this.TrxNo = params["TrxNo"];
+      }
+    });
+  }
+
+  ngOnInit() {
+    let reqByTrxNo: GenericObj = new GenericObj();
+    reqByTrxNo.TrxNo = this.TrxNo;
+    this.http.post(URLConstant.HandleViewFinancialStatements, reqByTrxNo).subscribe(
+      (response: ResViewFinancialStatementsObj) => {
+        this.ResViewFinancialStatementsObj = response;
+      }
+    )
+  }
+
+}

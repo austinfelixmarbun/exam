@@ -345,6 +345,15 @@ export class NavigationConstant {
     public static PEFINDO_SUBJECT_INFO_COMPANY = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_SUBJECT_INFO_COMPANY;  //'/View/Pefindo/SubjectInfoCompany'
     public static PEFINDO_MO_SUMMARY = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_MO_SUMMARY;  //'/View/Pefindo/MoSummary'
     public static PEFINDO_PEFINDO_SCORE = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_PEFINDO_SCORE;  //'/View/Pefindo/PefindoScore'
+    public static PEFINDO_CONTRACTS = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_CONTRACTS; //'/View/Pefindo/Contracts'
+    public static PEFINDO_PEFINDO_ALERT_QUEST = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_PEFINDO_ALERT_QUEST; //'/View/Pefindo/PefindoAlertQuest'
+    public static PEFINDO_SECURITIES = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_SECURITIES; //'/View/Pefindo/Securities'
+    public static PEFINDO_OTHER_LIABILITIES = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_OTHER_LIABILITIES; //'/View/Pefindo/OtherLiabilities'
+    public static PEFINDO_INVOLVEMENTS = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_INVOLVEMENTS; //'/View/Pefindo/Involvements'
+    public static PEFINDO_RELATIONS = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_RELATIONS; //'/View/Pefindo/Relations'
+    public static PEFINDO_INQUIRIES = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_INQUIRIES; //'/View/Pefindo/Inquiries'
+    public static PEFINDO_DISPUTES = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_DISPUTES; //'/View/Pefindo/Disputes'
+    public static PEFINDO_FINANCIAL_STATEMENTS = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_FINANCIAL_STATEMENTS; //'/View/Pefindo/FinancialStatements'
     //#endregion
 
     public static CUST_PERSONAL_MAIN_INFO_X = '..' + "/" + PathConstantX.CUST_PERSONAL_MAIN_INFO_X; //'../CustomerPersonal/MainInfo'
