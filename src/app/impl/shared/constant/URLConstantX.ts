@@ -5,7 +5,8 @@ export class URLConstantX{
     public static GetRefOfficeXByRefOfficeCode = environment.FoundationR3Url + "/v1" + "/RefOfficeX/GetRefOfficeXByRefOfficeCode";
     public static AddRefOfficeX = environment.FoundationR3Url + "/v1" + "/RefOfficeX/AddRefOfficeX";
     public static AddRefOfficeXV2 = environment.FoundationR3Url + "/v2" + "/RefOfficeX/AddRefOfficeX";  
-    public static EditRefOfficeX = environment.FoundationR3Url + "/v1" + "/RefOfficeX/EditRefOfficeX";  
+    public static EditRefOfficeX = environment.FoundationR3Url + "/v1" + "/RefOfficeX/EditRefOfficeX";
+    public static EditRefOfficeXV2 = environment.FoundationR3Url + "/v2" + "/RefOfficeX/EditRefOfficeX";
 
     //REF TAX OFFICE X
     public static GetListTaxOfficeName = environment.FoundationR3Url + "/v1" + "/RefTaxOfficeX/GetListTaxOfficeName";

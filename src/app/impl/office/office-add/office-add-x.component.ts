@@ -1,6 +1,10 @@
+import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { HttpClient } from '@angular/common/http';
 import { OfficeObj } from 'app/shared/model/OfficeObj.model';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
 import { OrgMdlObj } from 'app/shared/model/OrgMdlObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -17,10 +21,6 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
 import { RefOfficeObjX } from 'app/impl/shared/model/RefOfficeObjX.model';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-office-add-x',
@@ -122,7 +122,6 @@ export class OfficeAddXComponent implements OnInit {
       }
     });
   }
-
   ngOnInit() {
     this.InputLookupObj.urlJson = "./assets/lookup/lookupOfficeParent.json";
     this.InputLookupObj.isRequired = true;
@@ -268,7 +267,6 @@ export class OfficeAddXComponent implements OnInit {
             // TaxOffice: this.resultData.RefTaxOfficeXId,
             // IsNationalCourt: this.resultData.IsNationalCourt,
             // NationalCourtOffice: this.resultData.NationalCourtOffice
-            
           })
           this.checkType();
           this.addressObj.Addr = this.resultData.OfficeAddr;
@@ -483,6 +481,7 @@ export class OfficeAddXComponent implements OnInit {
       this.httpClient.post(addRefOfficeUrl, obj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
+          
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
         }
       );
@@ -496,12 +495,15 @@ export class OfficeAddXComponent implements OnInit {
         RefOfficeObj: this.officeObj,
         RefOfficeObjX: this.officeXObj
       }
-      this.httpClient.post(URLConstantX.EditRefOfficeX, obj).subscribe(
+      let editRefOfficeUrl = environment.isCore? URLConstantX.EditRefOfficeXV2 : URLConstantX.EditRefOfficeX;
+      this.httpClient.post(editRefOfficeUrl, obj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
+          
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
         }
       );
+
     }
   }
   checkType() {
@@ -532,8 +534,7 @@ export class OfficeAddXComponent implements OnInit {
     })
   }
 
-  IsNationalCourtChange() 
-  {
+  IsNationalCourtChange() {
     if (this.cbIsNationalCourt === true) {
       this.OfficeForm.controls.NationalCourtOffice.enable()
       this.OfficeForm.controls.NationalCourtOffice.clearValidators();
@@ -545,5 +546,6 @@ export class OfficeAddXComponent implements OnInit {
     }
     this.OfficeForm.controls.NationalCourtOffice.updateValueAndValidity();
   }
+
 
 }
