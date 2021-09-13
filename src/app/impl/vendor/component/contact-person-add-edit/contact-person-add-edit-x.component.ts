@@ -88,7 +88,7 @@ export class ContactPersonAddEditXComponent implements OnInit {
             JobPosition: this.result.MrEmployeePosition,
             Phn1: this.result.Phone1,
             Phn2: this.result.Phone2,
-            Email: this.result.Email,
+            Email: this.result.Email == "-" ? "" : this.result.Email,
             JoinDt: formatDate(this.result.JoinDate, 'yyyy-MM-dd', 'en-US'),
             IsOwner: this.result.IsOwner,
             Addr: this.result.Addr,
