@@ -533,6 +533,8 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
           MrIdTypeCode: response.MrIdTypeCode,
           IdNo: response.IdNo,
           TaxIdNo: response.TaxIdNo,
+          MobilePhnNo1: response.MobilePhnNo1,
+          Email1: response.Email
         });
 
         // ini kondisi apaan?
