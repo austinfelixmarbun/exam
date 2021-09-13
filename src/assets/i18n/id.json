@@ -193,6 +193,11 @@
     "Gallery": "Gallery",
 
   "Documentation": "Documentation",
-  "Support": "Support"
-
+  "Support": "Support",
+  "Debtor Group": "Grup Debitor",
+  "Debtor Business Scale": "Skala Bisnis Debitor",
+  "Debtor Group Code": "Kode Grup Debitor",
+  "Debtor Group Name": "Nama Grup Debitor",
+  "Debtor Business Scale Name": "Nama Skala Bisnis Debitor",
+  "Debtor Business Scale Description": "Deskripsi Skala Bisnis Debitor"
 }

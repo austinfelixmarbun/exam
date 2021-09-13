@@ -138,6 +138,8 @@ export class CustAttrFormComponent implements OnInit {
         if (QA.AttrValue) {
           this.tempExistingValueSelected[QA.AttrCode] = QA.AttrValue;
         }
+        tempFormGroup.get("AttrValue").setValue("");
+        tempFormGroup = this.SetValidator(tempFormGroup, null, QA.IsMandatory);
         break;
       case this.AttrInputTypeList:
         this.SetDictListItem(QA.AttrCode, QA.MasterCode);

@@ -131,5 +131,11 @@
   "Maintenance": "Maintenance",
   "Gallery": "Gallery",
   "Documentation": "Documentation",
-  "Support": "Support"
+  "Support": "Support",
+  "Debtor Group": "Debtor Group",
+  "Debtor Business Scale": "Debtor Business Scale",
+  "Debtor Group Code": "Debtor Group Code",
+  "Debtor Group Name": "Debtor Group Name",
+  "Debtor Business Scale Name": "Debtor Business Scale Name",
+  "Debtor Business Scale Description": "Debtor Business Scale Description"
 }
