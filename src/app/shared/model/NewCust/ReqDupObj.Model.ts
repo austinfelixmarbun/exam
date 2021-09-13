@@ -1,5 +1,6 @@
 
 import { CommonConstant } from "app/shared/constant/CommonConstant";
+import { CustDocFileObj } from "../CustDocFile/CustDocFileObj.Model";
 import { CustPersonalJobDataObj } from "../CustPersonalJobDataObj.Model";
 import { CustAttrContentObj } from "./CustAttrContentObj.Model";
 import { CustCompanyMgmntShrholderObj } from "./CustCompanyMgmntShrholderObj.Model";
@@ -12,6 +13,7 @@ export class ReqDupObj {
     CustCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
     CustPersonalJobObj: CustPersonalJobDataObj;
     CustAttrContentObjs: Array<CustAttrContentObj>;
+    CustDocFileObjs: Array<CustDocFileObj>;
     ThirdPartyTrxNo: string;
 
     constructor() {

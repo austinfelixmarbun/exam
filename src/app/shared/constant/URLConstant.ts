@@ -688,10 +688,14 @@ export class URLConstant {
     // CUSTOMER
     public static AddNewCust = environment.FoundationR3Url + "/v1" + "/Cust/AddCust";
     public static AddCustPersonalMainData = environment.FoundationR3Url + "/v1" + "/Cust/AddCustPersonalMainData";
+    public static AddCustPersonalMainDataV2 = environment.FoundationR3Url + "/v2" + "/Cust/AddCustPersonalMainData";
     public static AddCustCompanyMainData = environment.FoundationR3Url + "/v1" + "/Cust/AddCustCompanyMainData";
+    public static AddCustCompanyMainDataV2 = environment.FoundationR3Url + "/v2" + "/Cust/AddCustCompanyMainData";
     public static EditCust = environment.FoundationR3Url + "/v1" + "/Cust/EditCust";
     public static EditCustPersonalMainData = environment.FoundationR3Url + "/v1" + "/Cust/EditCustPersonalMainData";
+    public static EditCustPersonalMainDataV2 = environment.FoundationR3Url + "/v2" + "/Cust/EditCustPersonalMainData";
     public static EditCustCompanyMainData = environment.FoundationR3Url + "/v1" + "/Cust/EditCustCompanyMainData";
+    public static EditCustCompanyMainDataV2 = environment.FoundationR3Url + "/v2" + "/Cust/EditCustCompanyMainData";
     public static EditDuplicateCust = environment.FoundationR3Url + "/v1" + "/Cust/EditDuplicateCust";
     public static EditNegativeDuplicateCust = environment.FoundationR3Url + "/v1" + "/Cust/EditNegativeDuplicateCust";
     public static GetCustByCustId = environment.FoundationR3Url + "/v1" + "/Cust/GetCustByCustId";
@@ -707,9 +711,15 @@ export class URLConstant {
     public static GetListCustAssetByCustId = environment.FoundationR3Url + "/v1" + "/CustAsset/GetListCustAssetByCustId";
 
     public static SaveCustPersonalShareholderMainData = environment.FoundationR3Url  + '/v1' + "/Cust/SaveCustPersonalShareholderMainData";
+    public static SaveCustPersonalShareholderMainDataV2 = environment.FoundationR3Url  + '/v2' + "/Cust/SaveCustPersonalShareholderMainData";
     public static SaveCustCompanyShareholderMainData = environment.FoundationR3Url  + '/v1' + "/Cust/SaveCustCompanyShareholderMainData";
+    public static SaveCustCompanyShareholderMainDataV2 = environment.FoundationR3Url  + '/v2' + "/Cust/SaveCustCompanyShareholderMainData";
     public static SaveCustPersonalFamilyMainData = environment.FoundationR3Url  + '/v1' + "/Cust/SaveCustPersonalFamilyMainData";
+    public static SaveCustPersonalFamilyMainDataV2 = environment.FoundationR3Url  + '/v2' + "/Cust/SaveCustPersonalFamilyMainData";
+
     public static NewEditDuplicateCust = environment.FoundationR3Url  + '/v1' + "/Cust/NewEditDuplicateCust";
+    public static NewEditDuplicateCustV2 = environment.FoundationR3Url  + '/v2' + "/Cust/NewEditDuplicateCust";
+
     
     public static GetCustHighlightCommentByCustId = environment.FoundationR3Url + "/v1" + "/Cust/GetCustHighlightCommentByCustId";
     // CUSTOMER COMPANY
@@ -813,6 +823,7 @@ export class URLConstant {
     public static AddNegativeCustomer = environment.FoundationR3Url + "/v1" + "/NegativeCust/AddNegativeCust";
     public static EditNegativeCustomer = environment.FoundationR3Url + "/v1" + "/NegativeCust/EditNegativeCust";
     public static EditDuplicateNegativeCust = environment.FoundationR3Url + "/v1" + "/NegativeCust/EditDuplicateNegativeCust";
+    public static EditDuplicateNegativeCustV2 = environment.FoundationR3Url + "/v2" + "/NegativeCust/EditDuplicateNegativeCust";
     public static GetNegativeCustByNegativeCustId = environment.FoundationR3Url + "/v1" + "/NegativeCust/GetNegativeCustByNegativeCustId";
     public static AddNegativeCustChangeTrx = environment.FoundationR3Url + "/v1" + "/NegativeCustChangeTrx/AddNegativeCustChangeTrx";
     public static EditNegativeCustChangeTrx = environment.FoundationR3Url + "/v1" + "/NegativeCustChangeTrx/EditNegativeCustChangeTrx";
@@ -1106,5 +1117,9 @@ export class URLConstant {
     // THINGS TO DO
   public static GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo = "ServiceTask/GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo";
   public static GetThingsToDoByRole = environment.FoundationR3Url + "/v1" + "/ThingsToDo/GetThingsToDoByRole";
+
+  // CUST DOC FILE
+  public static GetListCustDocFileByCustId = environment.FoundationR3Url + "/v1" + "/CustDocFile/GetListCustDocFileByCustId";
+
 }
 

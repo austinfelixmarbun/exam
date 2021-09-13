@@ -170,6 +170,8 @@ export class CommonConstant {
     public static RefMasterTypeCodePublicType = "PUBLIC_TYPE";
     public static RefMasterTypeCodePositionSlik = "POSITION_SLIK";
     public static RefMasterTypeCodeAppSrcType = "APP_SRC_TYPE";
+    public static RefMasterTypeCodeCustDocType = "CUST_DOC_TYPE";
+
 
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"
@@ -396,6 +398,10 @@ export class CommonConstant {
     public static FileExtensionDoc = ".doc";
     public static FileExtensionDocx = ".docx";
     public static FileExtensionPdf = ".pdf";
+    public static FileExtensionJpg = ".jpg";
+    public static FileExtensionJpeg = ".jpeg";
+    public static FileExtensionGif = ".gif";
+    public static FileExtensionPng = ".png";
 
     //DIGITALIZATION SVC TYPE CODE
 
