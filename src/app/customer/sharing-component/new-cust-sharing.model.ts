@@ -25,12 +25,14 @@ import { FamilyFormComponent } from './new-cust-component/component/family-form/
 import { CustPersonalJobDataComponent } from './cust-personal-job-data/cust-personal-job-data.component';
 import { JobAddrSectionComponent } from './cust-personal-job-data/job-addr-section/job-addr-section.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { TrustingSocialReqHeaderComponent } from './new-cust-component/component/trusting-social/request/trusting-social-req-header.component';
-import { TrustingSocialReqConsentComponent } from './new-cust-component/component/trusting-social/request/consent/trusting-social-req-consent.component';
-import { TrustingSocialReqDetailComponent } from './new-cust-component/component/trusting-social/request/detail/trusting-social-req-detail.component';
-import { TrustingSocialViewHeaderComponent } from './new-cust-component/component/trusting-social/view/trusting-social-view-header.component';
+import { TrustingSocialReqHeaderComponent } from './new-cust-component/component/third-party-form/trusting-social/request/trusting-social-req-header.component';
+import { TrustingSocialReqConsentComponent } from './new-cust-component/component/third-party-form/trusting-social/request/consent/trusting-social-req-consent.component';
+import { TrustingSocialReqDetailComponent } from './new-cust-component/component/third-party-form/trusting-social/request/detail/trusting-social-req-detail.component';
+import { TrustingSocialViewHeaderComponent } from './new-cust-component/component/third-party-form/trusting-social/view/trusting-social-view-header.component';
 import { CustomerViewTrustingSocialModule } from 'app/view/customer-view/customer-view-trusting-social/customer-view-trusting-social.module';
-import { PefindoReqComponent } from './new-cust-component/component/pefindo/request/pefindo-req.component';
+import { PefindoReqComponent } from './new-cust-component/component/third-party-form/pefindo/request/pefindo-req.component';
+import { ThirdPartyFormComponent } from './new-cust-component/component/third-party-form/third-party-form.component';
+import { ThirdPartyUploadService } from './new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
 
 export const customCurrencyMaskConfig = {
     align: "right",
@@ -65,7 +67,8 @@ export const customCurrencyMaskConfig = {
         TrustingSocialReqConsentComponent,
         TrustingSocialReqDetailComponent,
         TrustingSocialViewHeaderComponent,
-        PefindoReqComponent
+        PefindoReqComponent,
+        ThirdPartyFormComponent
     ],
     imports: [
         CommonModule,
@@ -100,12 +103,14 @@ export const customCurrencyMaskConfig = {
         TrustingSocialReqConsentComponent,
         TrustingSocialReqDetailComponent,
         TrustingSocialViewHeaderComponent,
-        PefindoReqComponent
+        PefindoReqComponent,
+        ThirdPartyFormComponent
     ],
 
     providers: [
         NGXToastrService,
-        RegexService
+        RegexService,
+        ThirdPartyUploadService
     ],
     entryComponents: [TrustingSocialReqHeaderComponent, TrustingSocialViewHeaderComponent, PefindoReqComponent]
 })
