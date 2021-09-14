@@ -34,6 +34,7 @@ export class URLConstantX{
     public static AddCustPersonalJobData = environment.FoundationR3Url + "/v1" + "/CustPersonalJobDataX/AddCustPersonalJobData";
     public static EditCustPersonalJobData = environment.FoundationR3Url + "/v1" + "/CustPersonalJobDataX/EditCustPersonalJobData";
     public static GetCustXByCustId = environment.FoundationR3Url + "/v1" + "/CustX/GetCustXByCustId";
+    public static GetCustXDataByCustId = environment.FoundationR3Url + "/v1" + "/CustX/GetCustXDataByCustId";
 
     //Customer Company
     public static EditCustCompany = environment.FoundationR3Url + "/v1" + "/CustCompanyX/EditCustCompany"

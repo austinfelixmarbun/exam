@@ -365,7 +365,7 @@ export class JobDataProfessionalXComponent implements OnInit {
   }
 
   getCustXData() {
-    this.http.post(URLConstantX.GetCustXByCustId, { Id: this.IdCust }).subscribe(
+    this.http.post(URLConstantX.GetCustXDataByCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         if (response["CustXId"] != 0) {
           this.JobDataProForm.patchValue({

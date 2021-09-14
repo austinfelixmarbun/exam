@@ -670,7 +670,7 @@ export class JobDataSmeXComponent implements OnInit {
   }
 
   async getCustXData() {
-    await this.http.post(URLConstantX.GetCustXByCustId, { Id: this.IdCust }).toPromise().then(
+    await this.http.post(URLConstantX.GetCustXDataByCustId, { Id: this.IdCust }).toPromise().then(
       (response) => {
         if (response["CustXId"] != 0) {
           this.JobDataSmeForm.patchValue({
