@@ -13,6 +13,7 @@ import { ThirdPartyRsltHObj } from 'app/shared/model/ThirdPartyRslt/ThirdPartyRs
 import { ThirdPartyTrustsocRsltObj } from 'app/shared/model/ThirdPartyRslt/ThirdPartyTrustsocRsltObj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { ReqAddTrxSrcDataForTsObj } from 'app/shared/model/Digitalization/ReqAddTrxSrcDataForTsObj.model';
+import { environment } from 'environments/environment';
 
 
 @Component({
@@ -109,13 +110,21 @@ export class TrustingSocialReqDetailComponent implements OnInit {
     if(!this.validateSubj(reqAddTrxSrcDataForTsObj.ThirdPartyTrustsocRsltObjs)){
       return;
     }
-    
-    this.http.post(URLConstant.AddTrxSrcDataForTrustingSocial, reqAddTrxSrcDataForTsObj).subscribe(
-      (response) => {
-        this.toastr.successMessage(response["Message"]);
-        this.activeModal.dismiss('Cross click');
-      }
-    );
+    if(environment.isCore){
+      this.http.post(URLConstant.AddTrxSrcDataForTrustingSocialV2, reqAddTrxSrcDataForTsObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          this.activeModal.dismiss('Cross click');
+        }
+      );
+    }else{
+      this.http.post(URLConstant.AddTrxSrcDataForTrustingSocial, reqAddTrxSrcDataForTsObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          this.activeModal.dismiss('Cross click');
+        }
+      );
+    }
   }
 
   validateMaxSubj(){
