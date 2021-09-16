@@ -1097,6 +1097,7 @@ export class URLConstant {
 
     //DIGITALIZATION
     public static AddTrxSrcDataForTrustingSocial = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForTrustingSocial";
+    public static AddTrxSrcDataForTrustingSocialV2 = environment.FoundationR3Url + "/v2" + "/Digitalization/AddTrxSrcDataForTrustingSocial";
 
     //PEFINDO
     public static HandleViewMOSummary = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewMOSummary";
@@ -1113,6 +1114,7 @@ export class URLConstant {
     public static HandleViewDisputes = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewDisputes";
     public static HandleViewFinancialStatements = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewFinancialStatements";
     public static AddTrxSrcDataForPefindo = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindo";
+    public static AddTrxSrcDataForPefindoV2 = environment.FoundationR3Url + "/v2" + "/Digitalization/AddTrxSrcDataForPefindo";
     public static PefindoSmartSearch = environment.FoundationR3Url + "/v1" + "/Digitalization/PefindoSmartSearch";
 
     // THINGS TO DO
