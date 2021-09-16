@@ -24,7 +24,7 @@ export class PefindoViewSecuritiesComponent implements OnInit {
   ngOnInit() {
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
-    this.http.post(URLConstant.HandleViewSecurities, reqByTrxNo).subscribe(
+    this.http.post(URLConstant.GetViewSecurities, reqByTrxNo).subscribe(
       (response: ResViewSecuritiesObj) => {
         this.ResViewSecuritiesObj = response;
       }

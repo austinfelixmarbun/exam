@@ -28,7 +28,7 @@ export class PefindoViewPefindoScoreComponent implements OnInit {
   ngOnInit() {
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
-    this.http.post(URLConstant.HandleViewPefindoScore, reqByTrxNo).subscribe(
+    this.http.post(URLConstant.GetViewPefindoScore, reqByTrxNo).subscribe(
       (response) => {
         console.log(response[CommonConstant.ReturnObj]);
         if(response[CommonConstant.ReturnObj] != null) {

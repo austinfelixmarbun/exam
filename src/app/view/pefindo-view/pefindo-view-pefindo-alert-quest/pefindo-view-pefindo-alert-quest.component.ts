@@ -24,7 +24,7 @@ export class PefindoViewPefindoAlertQuestComponent implements OnInit {
   ngOnInit() {
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
-    this.http.post(URLConstant.HandleViewPefindoAlertQuest, reqByTrxNo).subscribe(
+    this.http.post(URLConstant.GetViewPefindoAlertQuest, reqByTrxNo).subscribe(
       (response: ResViewPefindoAlertQuestObj) => {
         this.ResViewPefindoAlertQuestObj = response;
       }
