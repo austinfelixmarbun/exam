@@ -15,16 +15,13 @@ import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
-import { ReqPefindoSmartSearchObj } from 'app/shared/model/Digitalization/ReqPefindoSmartSearchObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
-import { ReqGenerateTrxNoObj } from 'app/shared/model/MasterSequence/ReqGenerateTrxNoObj.model';
-import { ResGenerateTrxNoObj } from 'app/shared/model/MasterSequence/ResGenerateTrxNoObj.model';
 import { CustAttrContentObj } from 'app/shared/model/NewCust/CustAttrContentObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/NewCust/CustCompanyMgmntShrholderObj.Model';
 import { CustPersonalFamilyObj } from 'app/shared/model/NewCust/CustPersonalFamilyObj.Model';
@@ -37,14 +34,10 @@ import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { CookieService } from 'ngx-cookie';
 import { CustAttrFormComponent } from '../component/cust-attr-form/cust-attr-form.component';
 import { FamilyFormComponent } from '../component/family-form/family-form.component';
-import { PefindoReqComponent } from '../component/third-party-form/pefindo/request/pefindo-req.component';
 import { ShareholderFormComponent } from '../component/shareholder-form/shareholder-form.component';
-import { TrustingSocialReqHeaderComponent } from '../component/third-party-form/trusting-social/request/trusting-social-req-header.component';
-import { TrustingSocialViewHeaderComponent } from '../component/third-party-form/trusting-social/view/trusting-social-view-header.component';
 import { NewCustSetData } from '../NewCustSetData.Service';
 import { CustDocFileFormObj } from 'app/shared/model/CustDocFile/CustDocFileFormObj.Model';
 import { ThirdPartyUploadService } from '../component/third-party-form/services/ThirdPartyUpload.Service';
-import { CustDocFileObj } from 'app/shared/model/CustDocFile/CustDocFileObj.Model';
 
 @Component({
   selector: 'app-new-cust-personal-main-data',
