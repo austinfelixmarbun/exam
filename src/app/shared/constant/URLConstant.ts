@@ -1097,7 +1097,9 @@ export class URLConstant {
 
     //DIGITALIZATION
     public static AddTrxSrcDataForTrustingSocial = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForTrustingSocial";
+    public static AddTrxSrcDataForTrustingSocialV2 = environment.FoundationR3Url + "/v2" + "/Digitalization/AddTrxSrcDataForTrustingSocial";
     public static AddTrxSrcDataForPefindo = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindo";
+    public static AddTrxSrcDataForPefindoV2 = environment.FoundationR3Url + "/v2" + "/Digitalization/AddTrxSrcDataForPefindo";
 
     //PEFINDO
     public static GetViewMOSummary = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewMOSummary";
