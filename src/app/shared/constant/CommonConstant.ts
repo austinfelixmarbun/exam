@@ -330,6 +330,7 @@ export class CommonConstant {
 
     //Sys Config
     public static ConfigCodeIsUseDms = "IS_USE_DMS";
+    public static ConfigCodeDigitalizationSvcType = "DIGITALIZATION_SVC_TYPE";
     public static JOURNAL_STAT_EXE_DESCR = "EXECUTED";
     public static VENDOR_GRD_SUPPL_BRC_APV_TYPE = "VENDOR_GRD_SUPPL_BRC_APV_TYPE";
     public static GS_IS_CUST_THIRD_PARTY_CHECK = "IS_CUST_THIRD_PARTY_CHECK";
@@ -404,6 +405,7 @@ export class CommonConstant {
     public static FileExtensionPng = ".png";
 
     //DIGITALIZATION SVC TYPE CODE
-
     public static DigitalizationSvcTypeTrustingSocial = "TS";
+    public static DigitalizationSvcTypePefindo = "PEFINDO";
+
 }
