@@ -3,11 +3,6 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { PefindoReqComponent } from 'app/customer/sharing-component/new-cust-component/component/pefindo/request/pefindo-req.component';
-import { ShareholderFormComponent } from 'app/customer/sharing-component/new-cust-component/component/shareholder-form/shareholder-form.component';
-import { TrustingSocialReqHeaderComponent } from 'app/customer/sharing-component/new-cust-component/component/trusting-social/request/trusting-social-req-header.component';
-import { TrustingSocialViewHeaderComponent } from 'app/customer/sharing-component/new-cust-component/component/trusting-social/view/trusting-social-view-header.component';
-import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
@@ -34,6 +29,10 @@ import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
 import { CustomerViewTrustingSocialComponent } from 'app/view/customer-view/customer-view-trusting-social/customer-view-trusting-social.component';
 import { CookieService } from 'ngx-cookie';
+import { ShareholderFormComponent } from 'app/customer/sharing-component/new-cust-component/component/shareholder-form/shareholder-form.component';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { CustDocFileFormObj } from 'app/shared/model/CustDocFile/CustDocFileFormObj.Model';
+import { ThirdPartyUploadService } from 'app/customer/sharing-component/new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
 
 @Component({
   selector: 'app-new-cust-company-main-data-x',
@@ -55,14 +54,14 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
   inputAddressObj: InputAddressObj = new InputAddressObj();
   inputFieldObj: InputFieldObj = new InputFieldObj();
   inputLookupObj: InputLookupObj = new InputLookupObj();
-  IsUseDigitalization: string = "0";
-  officeCode: string;
-  thirdPartyTrxNo: string = "";
+  thirdPartyTrxNo: string = null;
+  CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
+
 
   custObj: CustObj = new CustObj();
 
   constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService,
-    private modalService: NgbModal, private cookieService: CookieService) { }
+    private cookieService: CookieService, private thirdPartyUploadService: ThirdPartyUploadService) { }
 
   //#region Readonly
   readonly RefMasterTypeCodeCompanyType: string = CommonConstant.RefMasterTypeCodeCompanyType;
@@ -77,7 +76,6 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    this.officeCode = context[CommonConstant.OFFICE_CODE];
     this.ClearCustForm();
     this.BindLookupExistingCust();
     this.InitCustMainDataMode();
@@ -88,7 +86,6 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
     await this.GetExistingData();
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
-    this.getIsUseDigitalization();
   }
   //#region Set Data
   //#region UcLookup
@@ -240,8 +237,12 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
 
   //#region GetExisting / mode edit
   IsLockCopyAddrBtn: boolean = false;
+  IsCustLoaded: boolean = false;
   async GetExistingData() {
-    if (this.CustId == 0) return;
+    if (this.CustId == 0){
+      this.IsCustLoaded = true;
+      return;
+    }     
     await this.GetCustData();
     this.GetCustAddr();
     this.GetCustCompanyData();
@@ -257,6 +258,7 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
       (response: CustObj) => {
         this.custObj = response;
         this.thirdPartyTrxNo = this.custObj.ThirdPartyTrxNo;
+        this.IsCustLoaded = true;
         this.CustomerForm.patchValue({
           CustName: this.custObj.CustName,
           MrCustTypeCode: this.custObj.MrCustTypeCode,
@@ -316,7 +318,11 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
     this.outputCancel.emit();
   }
 
-  SaveForm() {
+  async SaveForm() {
+    if(this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)){
+      return;
+    }
+
     let tempForm = this.CustomerForm.getRawValue();
     let reqSubmitObj: ReqCoyObj = new ReqCoyObj();
 
@@ -359,6 +365,8 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
     }
 
     reqSubmitObj = this.SetCustomerDataMode(reqSubmitObj);
+
+    reqSubmitObj.CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
     this.outputAfterSave.emit(reqSubmitObj);
   }
   private SetCustomerDataMode(reqSubmitObj: ReqCoyObj) {
@@ -387,101 +395,11 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
     return tempReqObj
   }
 
-  getIsUseDigitalization(){
-    this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeIsUseDigitalization}).subscribe(
-      (response) => {
-        this.IsUseDigitalization = response["GsValue"];
-      }
-    );
+  SetThirdPartyTrxNo(e){
+    this.thirdPartyTrxNo = e;
   }
 
-  async ReqPefindo(){
-    this.markFormGroupTouched(this.CustomerForm);
-    if(!this.CustomerForm.valid){
-      return;
-    }
-
-    await this.checkThirdPartyTrxNo();
-
-    let tempForm = this.CustomerForm.getRawValue();
-
-    let reqPefindoSmartSearchObj = new ReqPefindoSmartSearchObj();
-    if(this.CustDataMode == this.CustDataModeMain){
-      reqPefindoSmartSearchObj.CustName = tempForm["CustName"];
-    }else{
-      reqPefindoSmartSearchObj.CustName = tempForm["ExistingCustName"]["value"];
-    }
-    reqPefindoSmartSearchObj.CustName = tempForm["CustName"];
-    reqPefindoSmartSearchObj.CustType = CommonConstant.MR_CUST_TYPE_CODE_COMPANY;
-    reqPefindoSmartSearchObj.BirthDt = tempForm["BirthDt"];
-    reqPefindoSmartSearchObj.IdNo = tempForm["TaxIdNo"];
-    reqPefindoSmartSearchObj.IdType = CommonConstant.MrIdTypeCodeNPWP;
-
-    const modalRef = this.modalService.open(PefindoReqComponent);
-    modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
-    modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
-  }
-
-  ViewPefindo(){
-    let TrxNo = this.thirdPartyTrxNo;
-    AdInsHelper.OpenPefindoView(TrxNo, CommonConstant.CustomerCompany);
-  }
-
-  async ReqTrustingSocial(){
-    this.markFormGroupTouched(this.CustomerForm);
-    if(!this.CustomerForm.valid){
-      return;
-    }
-    
-    await this.checkThirdPartyTrxNo();
-
-    let tempForm = this.CustomerForm.getRawValue();
-    let custObj: CustObj = new CustObj();
-    let custPersonalObj: CustPersonalObj = new CustPersonalObj();
-    if(this.CustDataMode == this.CustDataModeMain){
-      custObj.CustName = tempForm["CustName"];
-    }else{
-      custObj.CustName = tempForm["ExistingCustName"]["value"];
-    }    
-    custObj.CustNo = this.custObj.CustNo;
-    custObj.TaxIdNo = tempForm["TaxIdNo"];
-    custObj.ThirdPartyTrxNo = this.thirdPartyTrxNo;
-    custObj.MrCustTypeCode = CommonConstant.MR_CUST_TYPE_CODE_COMPANY;
-    custObj.MrIdTypeCode = CommonConstant.TrustingSocialDummyIdType;
-    custObj.IdNo = CommonConstant.TrustingSocialDummyIdNo;
-
-    const modalRef = this.modalService.open(TrustingSocialReqHeaderComponent);
-    modalRef.componentInstance.CustObj = custObj;
-    modalRef.componentInstance.CustPersonalObj = custPersonalObj;
-  }
-
-
-  ViewTrustingSocial(){   
-    const modalRef = this.modalService.open(TrustingSocialViewHeaderComponent);
-    modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
-  }
-
-  async checkThirdPartyTrxNo(){
-    if(this.thirdPartyTrxNo == null || this.thirdPartyTrxNo == ""){
-      var reqGenerateTrxNoObj = new ReqGenerateTrxNoObj();
-      reqGenerateTrxNoObj.MasterSeqCode = CommonConstant.MasterSequenceCodeCustomerThirdParty;
-      reqGenerateTrxNoObj.OfficeCode = this.officeCode;
-
-      await this.http.post(URLConstant.GenerateTransactionNoFromRedis, reqGenerateTrxNoObj).toPromise().then(
-        (response: ResGenerateTrxNoObj) => {
-          this.thirdPartyTrxNo = response.TrxNo;
-        }
-      );
-    }
-  }
-
-   markFormGroupTouched(formGroup: FormGroup) {
-    (<any>Object).values(formGroup.controls).forEach(control => {
-      control.markAsTouched();
-
-      if (control.controls) {
-        this.markFormGroupTouched(control);
-      }
-    });
+  SetCustFileFormObjs(e){
+    this.CustDocFileFormObjs = e;
   }
 }
