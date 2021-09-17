@@ -70,8 +70,8 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
       this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
         (response : ResGetListCustAddrObj) => {
             this.listCustAddr = response[CommonConstant.ReturnObj];
-            let idxEmergency = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode == CommonConstant.CustAddrTypeEmergency);
-            if(idxEmergency != -1) this.listCustAddr.splice(idxEmergency, 1)
+            let idxEmergency = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode.toLowerCase() == CommonConstant.CustAddrTypeEmergency.toLowerCase());
+            if(idxEmergency != -1) this.listCustAddr.splice(idxEmergency, 1);
         });
   }
 

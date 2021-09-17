@@ -38,8 +38,10 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
     this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
       (response: ResGetListCustAddrObj) => {
         this.listCustAddr = response["ReturnObject"];
-        let idxCompany = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode == CommonConstant.CustAddrTypeCompany);
+        let idxCompany = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode.toLowerCase() == CommonConstant.CustAddrTypeCompany.toLowerCase());
         if (idxCompany != -1) this.listCustAddr.splice(idxCompany, 1);
+        let idxEmergency = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode.toLowerCase() == CommonConstant.CustAddrTypeEmergency.toLowerCase());
+        if (idxEmergency != -1) this.listCustAddr.splice(idxEmergency, 1);
       });
   }
 
