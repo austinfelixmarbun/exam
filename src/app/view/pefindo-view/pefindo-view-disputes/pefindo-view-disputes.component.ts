@@ -24,7 +24,7 @@ export class PefindoViewDisputesComponent implements OnInit {
   ngOnInit() {
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
-    this.http.post(URLConstant.HandleViewDisputes, reqByTrxNo).subscribe(
+    this.http.post(URLConstant.GetViewDisputes, reqByTrxNo).subscribe(
       (response: ResViewDisputesObj) => {
         this.ResViewDisputesObj = response;
       }

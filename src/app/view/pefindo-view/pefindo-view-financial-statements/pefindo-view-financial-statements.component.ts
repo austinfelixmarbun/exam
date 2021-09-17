@@ -24,7 +24,7 @@ export class PefindoViewFinancialStatementsComponent implements OnInit {
   ngOnInit() {
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
-    this.http.post(URLConstant.HandleViewFinancialStatements, reqByTrxNo).subscribe(
+    this.http.post(URLConstant.GetViewFinancialStatements, reqByTrxNo).subscribe(
       (response: ResViewFinancialStatementsObj) => {
         this.ResViewFinancialStatementsObj = response;
       }
