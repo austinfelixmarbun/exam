@@ -1,3 +1,4 @@
+import { CustDocFileObj } from "../CustDocFile/CustDocFileObj.Model";
 import { CustPersonalJobDataObj } from "../CustPersonalJobDataObj.Model";
 import { CustAttrContentObj } from "./CustAttrContentObj.Model";
 import { CustCompanyMgmntShrholderObj } from "./CustCompanyMgmntShrholderObj.Model";
@@ -12,6 +13,7 @@ export class ReqNegDupObj {
     CustPersonalJobObj: CustPersonalJobDataObj;
     CustAttrContentObjs: Array<CustAttrContentObj>;
     ThirdPartyTrxNo: string;
+    CustDocFileObjs: Array<CustDocFileObj>;
 
     constructor() {
         this.NegativeCustId = 0;

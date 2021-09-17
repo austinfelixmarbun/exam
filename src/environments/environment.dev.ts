@@ -22,7 +22,7 @@ export const environment = {
   WorkflowR3Url: 'http://r3impl-appsvr.ad-ins.com/WORKFLOW_DSF_IMPL',
   WebSocketURL: 'http://r3impl-appsvr.ad-ins.com/FOU_DSF_IMPL',
   DashboardURL: 'http://r3app-server.ad-ins.com/Dashboard',
-  dmsURL: 'http://kfx-svr/LITEDMS_OPL/LiteDMS/pageconfins.aspx',
+  dmsURL: 'http://kfx-svr/LITEDMS_POC/LiteDMS/pageconfins.aspx',
   WFThingsToDoUrl: 'http://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL/',
   ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
   ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
