@@ -239,10 +239,10 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
   IsLockCopyAddrBtn: boolean = false;
   IsCustLoaded: boolean = false;
   async GetExistingData() {
-    if (this.CustId == 0){
+    if (this.CustId == 0) {
       this.IsCustLoaded = true;
       return;
-    }     
+    }
     await this.GetCustData();
     this.GetCustAddr();
     this.GetCustCompanyData();
@@ -268,6 +268,10 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
         this.existingCustomerLookUpObj.nameSelect = response.CustName;
         this.existingCustomerLookUpObj.jsonSelect = { CustName: response.CustName };
         this.existingCustomerLookUpObj.isReady = true;
+        if(this.existingCustomerLookUpObj.isReady){
+          this.CustomerForm.get("CustName").disable();
+          this.CustomerForm.get("TaxIdNo").disable();
+        }
       }
     );
   }
@@ -319,7 +323,7 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
   }
 
   async SaveForm() {
-    if(this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)){
+    if (this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)) {
       return;
     }
 
@@ -395,11 +399,11 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
     return tempReqObj
   }
 
-  SetThirdPartyTrxNo(e){
+  SetThirdPartyTrxNo(e) {
     this.thirdPartyTrxNo = e;
   }
 
-  SetCustFileFormObjs(e){
+  SetCustFileFormObjs(e) {
     this.CustDocFileFormObjs = e;
   }
 }
