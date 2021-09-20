@@ -161,9 +161,9 @@ export class CustomerPersonalDetailXComponent implements OnInit {
         this.CustomerDetailForm.patchValue({
           NickName: this.tempCustPersonalObj.NickName,
           MrNationalityCode: this.tempCustPersonalObj.MrNationalityCode,
-          MrEducationCode: this.tempCustPersonalObj.MrEducationCode,
-          MrReligionCode: this.tempCustPersonalObj.MrReligionCode,
-          MrSalutationCode: this.tempCustPersonalObj.MrSalutationCode,
+          MrEducationCode: this.tempCustPersonalObj.MrEducationCode ? this.tempCustPersonalObj.MrEducationCode:"",
+          MrReligionCode: this.tempCustPersonalObj.MrReligionCode ? this.tempCustPersonalObj.MrReligionCode:"",
+          MrSalutationCode: this.tempCustPersonalObj.MrNationalityCode ? this.tempCustPersonalObj.MrSalutationCode:"",
           CustSuffixName: this.tempCustPersonalObj.CustSuffixName,
           CustPrefixName: this.tempCustPersonalObj.CustPrefixName,
           NoOfDependents: this.tempCustPersonalObj.NoOfDependents,
