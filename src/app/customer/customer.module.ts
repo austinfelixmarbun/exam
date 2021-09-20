@@ -133,7 +133,6 @@ import { CustomerCompanyDetailXComponent } from 'app/impl/customer/customer-comp
 import { JobDataSmeXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-small-medium-enterprise/job-data-small-medium-enterprise-x.component';
 import { JobDataSmallMediumEnterpriseXComponent } from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-sme/job-data-sme-x.component';
 import { CustFinDataTabXComponent } from 'app/impl/customer/cust-fin-data-tab/cust-fin-data-tab-x.component';
-import { CustBankAccSectionFindataXComponent } from 'app/impl/customer/cust-bank-acc-section-findata/cust-bank-acc-section-findata.component';
 import { CustBankAccDetailSectionFindataXComponent } from 'app/impl/customer/cust-bank-acc-detail-section-findata/cust-bank-acc-detail-section-findata-x.component';
 import { CustomerPersonalDetailXComponent } from 'app/impl/customer/customer-personal/customer-personal-detail/customer-personal-detail-x.component';
 import { CustomerPersonalDuplicateCheckXComponent } from 'app/impl/customer/customer-personal/customer-personal-duplicate-check/customer-personal-duplicate-check-x.component';
@@ -143,6 +142,7 @@ import { CustomerPersonalMainInfoXComponent } from 'app/impl/customer/customer-p
 import { CustomerViewHeaderPersonalXComponent } from 'app/impl/customer/customer-view/customer-view/customer-view-header-personal/customer-view-header-personal-x.component';
 import { CustomerFamilyMenuXComponent } from 'app/impl/customer/customer-family-menu/customer-family-menu-x.component';
 import { EditMainDataPagingXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-paging/edit-main-data-paging-x.component';
+import { CustBankAccSectionFindataXComponent } from 'app/impl/customer/cust-bank-acc-section-findata/cust-bank-acc-section-findata-x.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     

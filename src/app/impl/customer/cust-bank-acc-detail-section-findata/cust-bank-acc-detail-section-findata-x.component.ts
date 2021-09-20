@@ -333,7 +333,7 @@ export class CustBankAccDetailSectionFindataXComponent implements OnInit {
     custBankAccObj.BalanceAmt = parseFloat(formData.BalanceAmt);
     custBankAccObj.IsDefault = formData.IsDefault;
     custBankAccObj.RowVersion = formData.RowVersion;
-    custBankAccObj.IsActive = this.IsActive;
+    custBankAccObj.IsActive = formData.IsActive;
     custBankAccObj.BegBalanceAmt = formData.BegBalanceAmt;
     this.custBankAccObjX = new CustBankAccObjX();
     this.custBankAccObjX.CustBankAccObj = custBankAccObj;
@@ -411,11 +411,9 @@ export class CustBankAccDetailSectionFindataXComponent implements OnInit {
       this.CustBankAccForm.patchValue({
         IsActive: true
       });
-      this.IsActive = true;
       this.CustBankAccForm.controls.IsActive.disable();
     }
     else {
-      this.IsActive = false;
       this.CustBankAccForm.controls.IsActive.enable();
     }
   }

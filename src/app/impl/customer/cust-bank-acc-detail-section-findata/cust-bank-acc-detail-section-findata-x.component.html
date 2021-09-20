@@ -51,6 +51,21 @@
                   </div>
                 </div>
                 <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" translate  for="MrPlafonFromBank">Plafon from Bank</label>
+                  <div class="col-md-4">               
+                    <select  class="form-control" formControlName="MrPlafonFromBank" style="width: auto" class="form-control" name="MrPlafonFromBank"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.MrPlafonFromBank.invalid }"
+                      [attr.disabled]="pageType == 'editStmnt' ? '' : null"
+                    >
+                      <option value="">--Select One--</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                    <lib-uc-show-errors [control]="CustBankAccForm.controls.MrPlafonFromBank" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
                   <label class="col-md-3 adInsLabel" for="IsDefault" translate>Is Default</label>
                   <div class="col-md-9">
                     <input type="checkbox" formControlName="IsDefault" (change)="CheckDefault()" [attr.disabled]="pageType == 'editStmnt' ? '' : null" />
@@ -59,7 +74,8 @@
                 <div class="form-group row">
                   <label class="col-md-3 adInsLabel" for="IsActive" translate>Is Active</label>
                   <div class="col-md-9">
-                    <input type="checkbox" formControlName="IsActive" [attr.disabled]="pageType == 'editStmnt' ? '' : null" />
+                    <input type="checkbox" formControlName="IsActive"
+                      [attr.disabled]="pageType == 'editStmnt' ? '' : CustBankAccForm.controls.IsDefault.value? '' : null"/>
                   </div>
                 </div>
                 <div class="form-group row" *ngIf="isAddBankStatement"> 
