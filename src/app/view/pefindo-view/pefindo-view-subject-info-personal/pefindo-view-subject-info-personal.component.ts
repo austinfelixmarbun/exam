@@ -25,7 +25,7 @@ export class PefindoViewSubjectInfoPersonalComponent implements OnInit {
   ngOnInit() {
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
-    this.http.post(URLConstant.HandleViewSubjectInfoPersonal, reqByTrxNo).subscribe(
+    this.http.post(URLConstant.GetViewSubjectInfoPersonal, reqByTrxNo).subscribe(
       (response: ResViewSubjectInfoPersonalObj) => {
         this.ResViewSubjectInfoPersonalObj = response;
       }

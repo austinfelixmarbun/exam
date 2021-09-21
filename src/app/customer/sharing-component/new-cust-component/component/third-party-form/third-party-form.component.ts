@@ -24,6 +24,7 @@ import { String } from 'typescript-string-operations';
 import { CustDocFileFormObj } from 'app/shared/model/CustDocFile/CustDocFileFormObj.Model';
 import { CustDocFileObj } from 'app/shared/model/CustDocFile/CustDocFileObj.Model';
 import { ThirdPartyUploadService } from './services/ThirdPartyUpload.Service';
+import { ResSysConfigResultObj } from 'app/shared/model/Response/ResSysConfigResultObj,model';
 
 @Component({
   selector: 'app-third-party-form',
@@ -50,11 +51,13 @@ export class ThirdPartyFormComponent implements OnInit {
 
   officeCode: string;
   IsUseDigitalization: string = "0";
+  IsUseTs: Boolean = false;
+  IsUsePefindo: Boolean = false;
   ListDocumentKeyValueObj: Array<KeyValueObj> = new Array<KeyValueObj>();
 
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   CustDocFileObjs: Array<CustDocFileObj> = new Array<CustDocFileObj>();
-
+  sysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj();
 
   readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
   readonly FileExtAllowed: Array<string> = [CommonConstant.FileExtensionPdf, CommonConstant.FileExtensionJpg, CommonConstant.FileExtensionJpeg, CommonConstant.FileExtensionGif, CommonConstant.FileExtensionPng]
@@ -66,6 +69,7 @@ export class ThirdPartyFormComponent implements OnInit {
     this.officeCode = context[CommonConstant.OFFICE_CODE];
     await this.getIsUseDigitalization();
     if(this.IsUseDigitalization == CommonConstant.TRUE_CONDITION){
+      await this.getDigitalizationSvcType();
       if(this.custObj.CustId > 0){
         await this.getCustDocFiles();
       }
@@ -79,6 +83,29 @@ export class ThirdPartyFormComponent implements OnInit {
         this.IsUseDigitalization = response["GsValue"];
       }
     );
+  }
+
+  async getDigitalizationSvcType(){
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeDigitalizationSvcType}).toPromise().then(
+      (response) => {
+        this.sysConfigResultObj = response;
+      });
+
+    if(this.sysConfigResultObj.ConfigValue != null){
+      var listSvcType = this.sysConfigResultObj.ConfigValue.split("|");
+
+      var svcTypeTs = listSvcType.find(x => x == CommonConstant.DigitalizationSvcTypeTrustingSocial);
+
+      if(svcTypeTs != null){
+        this.IsUseTs = true;
+      }
+
+      var svcTypePefindo = listSvcType.find(x => x == CommonConstant.DigitalizationSvcTypePefindo);
+
+      if(svcTypePefindo != null){
+        this.IsUsePefindo = true;
+      }
+    }
   }
 
   async getListDocumentToBeUpload(){

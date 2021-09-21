@@ -24,7 +24,7 @@ export class PefindoViewInvolvementsComponent implements OnInit {
   ngOnInit() {
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
-    this.http.post(URLConstant.HandleViewInvolvements, reqByTrxNo).subscribe(
+    this.http.post(URLConstant.GetViewInvolvements, reqByTrxNo).subscribe(
       (response: ResViewInvolvementsObj) => {
         this.ResViewInvolvementsObj = response;
       }

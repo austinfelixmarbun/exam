@@ -11,23 +11,17 @@ import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
-import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
-import { ReqPefindoSmartSearchObj } from 'app/shared/model/Digitalization/ReqPefindoSmartSearchObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
-import { ReqGenerateTrxNoObj } from 'app/shared/model/MasterSequence/ReqGenerateTrxNoObj.model';
-import { ResGenerateTrxNoObj } from 'app/shared/model/MasterSequence/ResGenerateTrxNoObj.model';
+import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/NewCust/CustCompanyMgmntShrholderObj.Model';
 import { ReqCoyObj } from 'app/shared/model/NewCust/ReqCoyObj.Model';
 import { CustFormExistingObj } from 'app/shared/model/NewCust/Shareholder/ShareholderFormExistingObj.Model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
 import { VendorObj } from 'app/shared/model/VendorObj.Model';
-import { CustomerViewTrustingSocialComponent } from 'app/view/customer-view/customer-view-trusting-social/customer-view-trusting-social.component';
 import { CookieService } from 'ngx-cookie';
 import { ShareholderFormComponent } from 'app/customer/sharing-component/new-cust-component/component/shareholder-form/shareholder-form.component';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
@@ -239,10 +233,10 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
   IsLockCopyAddrBtn: boolean = false;
   IsCustLoaded: boolean = false;
   async GetExistingData() {
-    if (this.CustId == 0) {
+    if (this.CustId == 0){
       this.IsCustLoaded = true;
       return;
-    }
+    }     
     await this.GetCustData();
     this.GetCustAddr();
     this.GetCustCompanyData();
@@ -323,7 +317,7 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
   }
 
   async SaveForm() {
-    if (this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)) {
+    if(this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)){
       return;
     }
 
@@ -399,11 +393,11 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
     return tempReqObj
   }
 
-  SetThirdPartyTrxNo(e) {
+  SetThirdPartyTrxNo(e){
     this.thirdPartyTrxNo = e;
   }
 
-  SetCustFileFormObjs(e) {
+  SetCustFileFormObjs(e){
     this.CustDocFileFormObjs = e;
   }
 }

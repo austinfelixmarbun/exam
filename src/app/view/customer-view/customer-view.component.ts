@@ -38,9 +38,11 @@ export class CustomerViewComponent implements OnInit {
 
   IsIframe: boolean = false;
   IsUseDigitalization: boolean = false;
+  IsUseTs: boolean = false;
   listIframe: Array<ResCustListIframeViewObj> = new Array<ResCustListIframeViewObj>();
 
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj();
+  digitalizationSysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj();
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {
     this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
@@ -130,7 +132,7 @@ export class CustomerViewComponent implements OnInit {
     if (this.custType == CommonConstant.CustomerPersonal) {
       if (ev == 0) { // Main Data
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_DETAIL_X],{ "CustId": this.CustId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_DETAIL],{ "CustId": this.CustId });
         });
       }
       else if (ev == 1) { // Address
@@ -217,7 +219,7 @@ export class CustomerViewComponent implements OnInit {
         //   });
         //   return;
         // }
-        if(this.IsUseDigitalization) { // Trusting Social
+        if(this.IsUseDigitalization && this.IsUseTs) { // Trusting Social
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
           });
@@ -249,7 +251,7 @@ export class CustomerViewComponent implements OnInit {
         //   return;
         // }
 
-        if(this.IsUseDigitalization) { // Trusting Social
+        if(this.IsUseDigitalization && this.IsUseTs) { // Trusting Social
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
           });
@@ -371,7 +373,7 @@ export class CustomerViewComponent implements OnInit {
           return;
         }
 
-        if(this.IsUseDigitalization) { // Trusting Social
+        if(this.IsUseDigitalization && this.IsUseTs) { // Trusting Social
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
           });
@@ -382,20 +384,13 @@ export class CustomerViewComponent implements OnInit {
           return;
         }
 
-        if(this.IsUseDigitalization) { // Trusting Social
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
-          });
-          return;
-        }
-
         // Other Info
         this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
         });
       }
       else if (ev == 10) {
-        if(this.IsUseDigitalization) { // Trusting Social
+        if(this.IsUseDigitalization && this.IsUseTs) { // Trusting Social
           this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
           });
@@ -434,13 +429,31 @@ export class CustomerViewComponent implements OnInit {
   async getIsUseDigitalization(){
     await this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeIsUseDigitalization}).toPromise().then(
       (response) => {
-        if(response["GsValue"] === "1") {
+        if(response["GsValue"] === CommonConstant.TRUE_CONDITION) {
           this.IsUseDigitalization = true;
+          this.getDigitalizationSvcType();
         }
         else {
           this.IsUseDigitalization = false;
         }
       }
     );
+  }
+
+  async getDigitalizationSvcType(){
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeDigitalizationSvcType}).toPromise().then(
+      (response) => {
+        this.digitalizationSysConfigResultObj = response;
+      });
+
+    if(this.digitalizationSysConfigResultObj.ConfigValue != null){
+      var listSvcType = this.digitalizationSysConfigResultObj.ConfigValue.split("|");
+
+      var svcTypeTs = listSvcType.find(x => x == CommonConstant.DigitalizationSvcTypeTrustingSocial);
+
+      if(svcTypeTs != null){
+        this.IsUseTs = true;
+      }
+    }
   }
 }
