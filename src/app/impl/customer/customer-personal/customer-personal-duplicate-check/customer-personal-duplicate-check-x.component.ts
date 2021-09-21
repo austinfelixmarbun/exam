@@ -349,9 +349,6 @@ export class CustomerPersonalDuplicateCheckXComponent implements OnInit {
       this.addCustObj.CustPersonalObj.CustPrefixName = this.CustPrefixName;
       this.addCustObj.CustPersonalObj.CustSuffixName = this.CustSuffixName;
 
-      alert(this.CustPrefixName);
-      alert(this.CustSuffixName);
-
       var custAddr = JSON.parse(sessionStorage.getItem("CustAddr"));
       this.addCustObj.CustAddr.Addr = custAddr["Addr"];
       this.addCustObj.CustAddr.AreaCode1 = custAddr["AreaCode1"];

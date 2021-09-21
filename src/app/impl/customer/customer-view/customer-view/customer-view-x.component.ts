@@ -46,8 +46,7 @@ export class CustomerViewXComponent implements OnInit {
     setTimeout(() => AdInsHelper.RedirectUrl(this.router,[url],{ }));
   }
 
-  async ngOnInit() : Promise<void> {
-    alert("test");
+  async ngOnInit() : Promise<void> {  
     this.viewCustMainInfoHeaderObj.viewInput = "./assets/ucviewgeneric/viewCustMainInfoHeader.json";
     this.viewCustMainInfoHeaderObj.viewEnvironment = environment.FoundationR3Url;
 
