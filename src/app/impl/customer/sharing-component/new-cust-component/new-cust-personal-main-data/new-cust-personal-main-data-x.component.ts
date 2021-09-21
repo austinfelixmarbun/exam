@@ -19,7 +19,7 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
 import { CustAttrContentObj } from 'app/shared/model/NewCust/CustAttrContentObj.Model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/NewCust/CustCompanyMgmntShrholderObj.Model';
