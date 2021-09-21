@@ -24,7 +24,7 @@ export class PefindoViewRelationsComponent implements OnInit {
   ngOnInit() {
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
-    this.http.post(URLConstant.HandleViewRelations, reqByTrxNo).subscribe(
+    this.http.post(URLConstant.GetViewRelations, reqByTrxNo).subscribe(
       (response: ResViewRelationsObj) => {
         this.ResViewRelationsObj = response;
       }

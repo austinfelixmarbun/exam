@@ -1098,23 +1098,25 @@ export class URLConstant {
 
     //DIGITALIZATION
     public static AddTrxSrcDataForTrustingSocial = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForTrustingSocial";
+    public static AddTrxSrcDataForTrustingSocialV2 = environment.FoundationR3Url + "/v2" + "/Digitalization/AddTrxSrcDataForTrustingSocial";
+    public static AddTrxSrcDataForPefindo = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindo";
+    public static AddTrxSrcDataForPefindoV2 = environment.FoundationR3Url + "/v2" + "/Digitalization/AddTrxSrcDataForPefindo";
 
     //PEFINDO
-    public static HandleViewMOSummary = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewMOSummary";
-    public static HandleViewPefindoScore = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewPefindoScore";
-    public static HandleViewSubjectInfoPersonal = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewSubjectInfoPersonal";
-    public static HandleViewSubjectInfoCompany = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewSubjectInfoCompany";
-    public static HandleViewContracts = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewContracts";
-    public static HandleViewPefindoAlertQuest = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewPefindoAlertQuest";
-    public static HandleViewSecurities = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewSecurities";
-    public static HandleViewOtherLiabilities = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewOtherLiabilities";
-    public static HandleViewInvolvements = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewInvolvements";
-    public static HandleViewRelations = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewRelations";
-    public static HandleViewInquiries = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewInquiries";
-    public static HandleViewDisputes = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewDisputes";
-    public static HandleViewFinancialStatements = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewFinancialStatements";
-    public static AddTrxSrcDataForPefindo = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindo";
-    public static PefindoSmartSearch = environment.FoundationR3Url + "/v1" + "/Digitalization/PefindoSmartSearch";
+    public static GetViewMOSummary = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewMOSummary";
+    public static GetViewPefindoScore = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewPefindoScore";
+    public static GetViewSubjectInfoPersonal = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewSubjectInfoPersonal";
+    public static GetViewSubjectInfoCompany = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewSubjectInfoCompany";
+    public static GetViewContracts = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewContracts";
+    public static GetViewPefindoAlertQuest = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewPefindoAlertQuest";
+    public static GetViewSecurities = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewSecurities";
+    public static GetViewOtherLiabilities = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewOtherLiabilities";
+    public static GetViewInvolvements = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewInvolvements";
+    public static GetViewRelations = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewRelations";
+    public static GetViewInquiries = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewInquiries";
+    public static GetViewDisputes = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewDisputes";
+    public static GetViewFinancialStatements = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewFinancialStatements";
+    public static PefindoSmartSearch = environment.FoundationR3Url + "/v1" + "/Pefindo/PefindoSmartSearch";
 
     // THINGS TO DO
   public static GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo = "ServiceTask/GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo";

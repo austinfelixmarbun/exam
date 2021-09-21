@@ -24,7 +24,7 @@ export class PefindoViewOtherLiabilitiesComponent implements OnInit {
   ngOnInit() {
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
-    this.http.post(URLConstant.HandleViewOtherLiabilities, reqByTrxNo).subscribe(
+    this.http.post(URLConstant.GetViewOtherLiabilities, reqByTrxNo).subscribe(
       (response: ResViewOtherLiabilitiesObj) => {
         this.ResViewOtherLiabilitiesObj = response;
       }
