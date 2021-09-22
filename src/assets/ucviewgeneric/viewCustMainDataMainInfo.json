@@ -18,6 +18,16 @@
           },
           {
             "type": "text",
+            "label": "Gelar Depan",
+            "property": "CustPrefixName"
+          },
+          {
+            "type": "text",
+            "label": "Gelar Belakang",
+            "property": "CustSuffixName"
+          },
+          {
+            "type": "text",
             "label": "Salutation",
             "property": "MrSalutationCode"
           },
@@ -25,22 +35,12 @@
             "type": "text",
             "label": "Marital Status",
             "property": "MrMaritalStatCode"
-          },
-          {
-            "type": "text",
-            "label": "Gelar Depan",
-            "property": "CustPrefixName"
-          },
+          },         
           {
             "type": "text",
             "label": "Num Of Dependents",
             "property": "NoOfDependents"
-          },
-          {
-            "type": "text",
-            "label": "Gelar Belakang",
-            "property": "CustSuffixName"
-          },
+          },          
           {
             "type": "text",
             "label": "Num Of Residence (Last 3 Years)",
