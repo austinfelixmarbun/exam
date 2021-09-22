@@ -71,7 +71,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   CustomerForm: FormGroup = this.fb.group({});
   inputAddressObj: InputAddressObj = new InputAddressObj();
   inputLookupObj: InputLookupObj = new InputLookupObj();
-  checkIsAddressKnown: boolean;
+  checkIsAddressKnown: boolean = false;;
   thirdPartyTrxNo: string = null;
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
 
@@ -118,6 +118,9 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
     this.isAddressIsNull();
+    if (this.CustDataMode != this.CustDataModeFamily) {
+      this.checkIsAddressKnown = true;
+    }  
   }
 
 
@@ -272,18 +275,6 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
         value: [''],
       })
     });
-    this.CustomerForm.addControl('UcAddress', this.fb.group({
-      Addr: [''],
-      AreaCode1: [''],
-      AreaCode2: [''],
-      AreaCode3: [''],
-      AreaCode4: [''],
-      City: [''],
-      MrHouseOwnershipCode: [''],
-    }));
-    this.CustomerForm.addControl('UcAddressZipcode', this.fb.group({
-      value: [''],
-    }));
 
     if (this.CustDataMode != this.CustDataModeMain) {
       this.CustomerForm.get("CustName").disable();
@@ -672,9 +663,12 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     if(this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)){
       return;
     }
-    if (this.checkIsAddressKnown == true) {
-      console.log(true)
-    } else {
+
+    if (this.CustDataMode != this.CustDataModeFamily) {
+      this.checkIsAddressKnown = true;
+    }
+
+    if (this.checkIsAddressKnown == false) {    
       console.log(false)
       this.CustomerForm.patchValue({
         UcAddress: {
@@ -684,7 +678,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
           AreaCode3: "",
           AreaCode4: "",
           City: "",
-          MrBuildingOwnershipCode: ""
+          MrHouseOwnershipCode: ""
         },
         UcAddressZipcode: {
           value: ""

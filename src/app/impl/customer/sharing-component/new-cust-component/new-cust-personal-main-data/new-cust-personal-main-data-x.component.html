@@ -197,7 +197,7 @@
         <lib-ucSubsection [id]="'LegalAddr'" [title]="'Legal Address'" [panel]="'LegalAddrSection'">
         </lib-ucSubsection>
         <div class="form-body" id="LegalAddrSection">
-          <div class="form-group row">
+          <div class="form-group row" *ngIf="(CustDataMode == CustDataModeFamily)">
             <label class="col-md-2 adInsLabel" for="IsAddressKnown" translate>Is Address Known</label>
             <div class="col-md-9">
               <input type="checkbox" [checked]="checkIsAddressKnown"
