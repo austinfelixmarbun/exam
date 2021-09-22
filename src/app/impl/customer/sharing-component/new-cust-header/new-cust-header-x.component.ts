@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -287,7 +288,7 @@ export class NewCustHeaderXComponent implements OnInit {
     if(environment.isCore){
       switch (this.CustDataMode) {
         case CommonConstant.CustMainDataModeCust:
-          urlAdd = URLConstant.AddCustPersonalMainDataV2;
+          urlAdd = URLConstantX.AddCustPersonalMainDataXV2;
           break;
         case this.CustDataModeFamily:
           urlAdd = URLConstant.SaveCustPersonalFamilyMainDataV2;
@@ -299,7 +300,7 @@ export class NewCustHeaderXComponent implements OnInit {
     }else{
       switch (this.CustDataMode) {
         case CommonConstant.CustMainDataModeCust:
-          urlAdd = URLConstant.AddCustPersonalMainData;
+          urlAdd = URLConstantX.AddCustPersonalMainDataX;
           break;
         case this.CustDataModeFamily:
           urlAdd = URLConstant.SaveCustPersonalFamilyMainData;
@@ -317,7 +318,7 @@ export class NewCustHeaderXComponent implements OnInit {
     if(environment.isCore){
       switch (this.CustDataMode) {
         case CommonConstant.CustMainDataModeCust:
-          urlAdd = URLConstant.EditCustPersonalMainDataV2;
+          urlAdd = URLConstantX.EditCustPersonalMainDataXV2;
           break;
         case this.CustDataModeFamily:
           urlAdd = URLConstant.SaveCustPersonalFamilyMainDataV2;
@@ -329,7 +330,7 @@ export class NewCustHeaderXComponent implements OnInit {
     }else{
       switch (this.CustDataMode) {
         case CommonConstant.CustMainDataModeCust:
-          urlAdd = URLConstant.EditCustPersonalMainData;
+          urlAdd = URLConstantX.EditCustPersonalMainDataX;
           break;
         case this.CustDataModeFamily:
           urlAdd = URLConstant.SaveCustPersonalFamilyMainData;

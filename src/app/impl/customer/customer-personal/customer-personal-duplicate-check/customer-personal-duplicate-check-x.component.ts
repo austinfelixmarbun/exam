@@ -364,7 +364,7 @@ export class CustomerPersonalDuplicateCheckXComponent implements OnInit {
       this.addCustObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
       
       //disini
-      this.http.post(URLConstantX.AddCustPersonalMainDataX, this.addCustObj).subscribe(
+      this.http.post(URLConstantX.AddCustPersonalMainDataXV2, this.addCustObj).subscribe(
         (response: GenericObj) => {
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE_X], { "IdCust": response.Id, "From": 'CustPaging' });
         }
