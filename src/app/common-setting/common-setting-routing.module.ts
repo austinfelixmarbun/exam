@@ -63,6 +63,8 @@ import { IndustryTypeCategoryDetailComponent } from './industry-type-category/in
 import { IndustryTypeCategoryPagingComponent } from './industry-type-category/industry-type-category-paging/industry-type-category-paging.component';
 import { ExchangeRateDetailComponent } from './exchange-rate/exchange-rate-detail/exchange-rate-detail.component';
 import { ExchangeRatePagingComponent } from './exchange-rate/exchange-rate-paging/exchange-rate-paging.component';
+import { RefTcComponent } from './ref-tc/ref-tc-paging/ref-tc.component';
+import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.component';
 
 const routes: Routes = [
   {
@@ -501,7 +503,23 @@ const routes: Routes = [
         data: {
           title: 'Industry Type Category'
         },
-      }
+      },
+
+      //REF TC
+      {
+        path: PathConstant.CS_REF_TC_PAGING,
+        component: RefTcComponent,
+        data: {
+          title: 'Ref TC'
+        },
+      },
+      {
+        path: PathConstant.CS_REF_TC_DETAIL,
+        component: RefTcAddEditComponent,
+        data: {
+          title: 'Ref TC Add Edit'
+        },
+      },
     ]
   }
 ];
