@@ -245,6 +245,8 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   ClearCustForm() {
     this.CustomerForm = this.fb.group({
       CustName: ['', [Validators.required, Validators.maxLength(100)]],
+      CustPrefixName: [''],
+      CustSuffixName: [''],
       MrGenderCode: ['', [Validators.required]],
       MrIdTypeCode: ['', [Validators.required, Validators.maxLength(100)]],
       BirthPlace: ['', [Validators.required]],
@@ -332,6 +334,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     let datePipe = new DatePipe("en-US");
     await this.http.post(URLConstant.GetCustByCustId, { Id: custId }).toPromise().then(
       (response: CustObj) => {
+        console.log('CustData', response);
         this.custObj = response;
         this.thirdPartyTrxNo = this.custObj.ThirdPartyTrxNo;
         this.IsCustLoaded = true;
@@ -416,8 +419,11 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     let datePipe = new DatePipe("en-US");
     await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: custId }).toPromise().then(
       (response) => {
+        console.log('CustPersonal', response);
         this.tempCustPersonalObj = response;
         this.CustomerForm.patchValue({
+          CustPrefixName: response.CustPrefixName,
+          CustSuffixName: response.CustSuffixName,
           MrGenderCode: response.MrGenderCode,
           BirthPlace: response.BirthPlace,
           BirthDt: datePipe.transform(response.BirthDt, 'yyyy-MM-dd'),
@@ -699,6 +705,8 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
 
     reqSubmitObj.CustPersonalObj = this.tempCustPersonalObj;
     reqSubmitObj.CustPersonalObj.CustFullName = tempForm["CustName"];
+    reqSubmitObj.CustPersonalObj.CustPrefixName = tempForm["CustPrefixName"];
+    reqSubmitObj.CustPersonalObj.CustSuffixName = tempForm["CustSuffixName"];
     reqSubmitObj.CustPersonalObj.MrGenderCode = tempForm["MrGenderCode"];
     reqSubmitObj.CustPersonalObj.BirthPlace = tempForm["BirthPlace"];
     reqSubmitObj.CustPersonalObj.BirthDt = tempForm["BirthDt"];

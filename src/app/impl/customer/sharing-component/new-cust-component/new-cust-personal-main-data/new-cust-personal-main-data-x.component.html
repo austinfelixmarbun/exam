@@ -56,6 +56,16 @@
               </div>
 
               <div class="form-group row">
+                <label class="col-md-4" translate>Gelar Depan </label>
+                <div class="col-md-8" *ngIf="CustDataMode == CustDataModeMain">
+                  <input type="text" class="form-control adInsInput" formControlName="CustPrefixName"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.CustPrefixName.invalid}">
+                  <lib-uc-show-errors [control]="CustomerForm.controls.CustPrefixName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
+              <div class="form-group row">
                 <label class="col-md-4 adins-required-label" translate>Birth Place</label>
                 <div class="col-md-8">
                   <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
@@ -128,6 +138,16 @@
                   <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeGender]"
                     [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrGenderCode'">
                   </lib-ucdropdownlist>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-4" translate>Gelar Belakang </label>
+                <div class="col-md-8" *ngIf="CustDataMode == CustDataModeMain">
+                  <input type="text" class="form-control adInsInput" formControlName="CustSuffixName"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.CustSuffixName.invalid}">
+                  <lib-uc-show-errors [control]="CustomerForm.controls.CustSuffixName" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
                 </div>
               </div>
 
