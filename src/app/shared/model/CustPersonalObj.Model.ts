@@ -28,6 +28,7 @@ export class CustPersonalObj {
   IsVip: boolean;
   VipNotes: string;
   IsAffiliateWithMf: boolean;
+  ParentCustId: number;
   RowVersion: string;
 
   constructor() {
@@ -60,6 +61,7 @@ export class CustPersonalObj {
     this.IsVip = false;
     this.VipNotes = "";
     this.IsAffiliateWithMf = false;
+    this.ParentCustId = 0;
     this.RowVersion = "";
   }
 }
