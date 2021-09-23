@@ -7,18 +7,19 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
-  selector: 'app-customer-personal-paging-x',
-  templateUrl: './customer-personal-paging-x.component.html'
+  selector: 'app-customer-paging-x',
+  templateUrl: './customer-paging-x.component.html',
+  styleUrls: []
 })
-export class CustomerPersonalPagingXComponent implements OnInit {
+export class CustomerPagingXComponent implements OnInit {
 
   inputPagingObj: UcPagingObj = new UcPagingObj();
   readonly AddLinkPersonal: string = NavigationConstant.CUST_PERSONAL_MAIN_INFO_X;
   readonly AddLinkCoy: string = NavigationConstant.CUST_COY_MAIN_INFO;
+  readonly AddLinkNewCust: string = NavigationConstant.CUST_NEW_FORM;
   constructor() { }
 
   ngOnInit() {
-    
     this.inputPagingObj._url = "./assets/ucpaging/searchCustomer.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCustomer.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
@@ -29,6 +30,6 @@ export class CustomerPersonalPagingXComponent implements OnInit {
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.value = '1';
     this.inputPagingObj.addCritInput.push(critObj);
-    
   }
+
 }

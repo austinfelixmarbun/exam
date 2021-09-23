@@ -32,7 +32,6 @@ import { CustomerUpdateMasterDetailComponent } from './customer-update-master/cu
 import { PathConstant } from 'app/shared/PathConstant';
 import { NewCustHeaderComponent } from './sharing-component/new-cust-header/new-cust-header.component';
 import { PathConstantX } from 'app/impl/shared/PathConstantX';
-import { CustomerPersonalPagingXComponent } from 'app/impl/customer/customer-personal-paging/customer-personal-paging-x.component';
 import { CustomerPersonalPageXComponent } from 'app/impl/customer/customer-personal/customer-personal-page/customer-personal-page-x.component';
 import { EditMainDataPersonalXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-personal/edit-main-data-personal-x.component';
 import { EditMainDataPagingXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-paging/edit-main-data-paging-x.component';
@@ -44,6 +43,7 @@ import { CustomerCompanyPageXComponent } from 'app/impl/customer/customer-compan
 import { CustomerPersonalMainInfoXComponent } from 'app/impl/customer/customer-personal/customer-personal-main-info/customer-personal-main-info-x.component';
 import { CustomerPersonalDuplicateCheckXComponent } from 'app/impl/customer/customer-personal/customer-personal-duplicate-check/customer-personal-duplicate-check-x.component';
 import { CustomerPersonalDetailXComponent } from 'app/impl/customer/customer-personal/customer-personal-detail/customer-personal-detail-x.component';
+import { CustomerPagingXComponent } from 'app/impl/customer/customer-paging/customer-paging-x.component';
 
 const routes: Routes = [
   {
@@ -288,7 +288,7 @@ const routes: Routes = [
       },
       {
         path: PathConstantX.CUST_PAGING_X,
-        component: CustomerPersonalPagingXComponent,
+        component: CustomerPagingXComponent,
         data: {
           title: 'Customer Paging X'
         }
