@@ -54,10 +54,10 @@ export class PefindoViewComponent implements OnInit {
         }
       )
     }
-    this.mencuba(0);
+    this.redirectTab(0);
   }
 
-  mencuba(ev) {
+  redirectTab(ev) {
     if (ev == 0) { // Subject Info Personal / Company
       let url: string = NavigationConstant.PEFINDO_SUBJECT_INFO_PERSONAL;
       if(this.MrCustTypeCode == CommonConstant.CustTypeCompany){
