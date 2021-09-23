@@ -688,10 +688,14 @@ export class URLConstant {
     // CUSTOMER
     public static AddNewCust = environment.FoundationR3Url + "/v1" + "/Cust/AddCust";
     public static AddCustPersonalMainData = environment.FoundationR3Url + "/v1" + "/Cust/AddCustPersonalMainData";
+    public static AddCustPersonalMainDataV2 = environment.FoundationR3Url + "/v2" + "/Cust/AddCustPersonalMainData";
     public static AddCustCompanyMainData = environment.FoundationR3Url + "/v1" + "/Cust/AddCustCompanyMainData";
+    public static AddCustCompanyMainDataV2 = environment.FoundationR3Url + "/v2" + "/Cust/AddCustCompanyMainData";
     public static EditCust = environment.FoundationR3Url + "/v1" + "/Cust/EditCust";
     public static EditCustPersonalMainData = environment.FoundationR3Url + "/v1" + "/Cust/EditCustPersonalMainData";
+    public static EditCustPersonalMainDataV2 = environment.FoundationR3Url + "/v2" + "/Cust/EditCustPersonalMainData";
     public static EditCustCompanyMainData = environment.FoundationR3Url + "/v1" + "/Cust/EditCustCompanyMainData";
+    public static EditCustCompanyMainDataV2 = environment.FoundationR3Url + "/v2" + "/Cust/EditCustCompanyMainData";
     public static EditDuplicateCust = environment.FoundationR3Url + "/v1" + "/Cust/EditDuplicateCust";
     public static EditNegativeDuplicateCust = environment.FoundationR3Url + "/v1" + "/Cust/EditNegativeDuplicateCust";
     public static GetCustByCustId = environment.FoundationR3Url + "/v1" + "/Cust/GetCustByCustId";
@@ -707,9 +711,15 @@ export class URLConstant {
     public static GetListCustAssetByCustId = environment.FoundationR3Url + "/v1" + "/CustAsset/GetListCustAssetByCustId";
 
     public static SaveCustPersonalShareholderMainData = environment.FoundationR3Url  + '/v1' + "/Cust/SaveCustPersonalShareholderMainData";
+    public static SaveCustPersonalShareholderMainDataV2 = environment.FoundationR3Url  + '/v2' + "/Cust/SaveCustPersonalShareholderMainData";
     public static SaveCustCompanyShareholderMainData = environment.FoundationR3Url  + '/v1' + "/Cust/SaveCustCompanyShareholderMainData";
+    public static SaveCustCompanyShareholderMainDataV2 = environment.FoundationR3Url  + '/v2' + "/Cust/SaveCustCompanyShareholderMainData";
     public static SaveCustPersonalFamilyMainData = environment.FoundationR3Url  + '/v1' + "/Cust/SaveCustPersonalFamilyMainData";
+    public static SaveCustPersonalFamilyMainDataV2 = environment.FoundationR3Url  + '/v2' + "/Cust/SaveCustPersonalFamilyMainData";
+
     public static NewEditDuplicateCust = environment.FoundationR3Url  + '/v1' + "/Cust/NewEditDuplicateCust";
+    public static NewEditDuplicateCustV2 = environment.FoundationR3Url  + '/v2' + "/Cust/NewEditDuplicateCust";
+
     
     public static GetCustHighlightCommentByCustId = environment.FoundationR3Url + "/v1" + "/Cust/GetCustHighlightCommentByCustId";
     // CUSTOMER COMPANY
@@ -736,7 +746,7 @@ export class URLConstant {
     public static GetListCustCompanyFinDataByCustId = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinData/GetListCustCompanyFinDataByCustId";
     public static AddCustCompanyFinData = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinData/AddCustCompanyFinData";
     public static EditCustCompanyFinData = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinData/EditCustCompanyFinData";
-    public static DeleteCustCompanyFinData = "/CustomerCompanyFinData/DeleteCustCompanyFinData";
+    public static DeleteCustCompanyFinData =  environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinData/DeleteCustCompanyFinData";
     public static AddCustPersonalFinData = environment.FoundationR3Url + "/v1" + "/CustPersonalFinData/AddCustPersonalFinData";
     public static EditCustPersonalFinData = environment.FoundationR3Url + "/v1" + "/CustPersonalFinData/EditCustPersonalFinData";
     public static DeleteCustPersonalFinData = environment.FoundationR3Url + "/v1" + "/CustPersonalFinData/DeleteCustPersonalFinData";
@@ -813,6 +823,7 @@ export class URLConstant {
     public static AddNegativeCustomer = environment.FoundationR3Url + "/v1" + "/NegativeCust/AddNegativeCust";
     public static EditNegativeCustomer = environment.FoundationR3Url + "/v1" + "/NegativeCust/EditNegativeCust";
     public static EditDuplicateNegativeCust = environment.FoundationR3Url + "/v1" + "/NegativeCust/EditDuplicateNegativeCust";
+    public static EditDuplicateNegativeCustV2 = environment.FoundationR3Url + "/v2" + "/NegativeCust/EditDuplicateNegativeCust";
     public static GetNegativeCustByNegativeCustId = environment.FoundationR3Url + "/v1" + "/NegativeCust/GetNegativeCustByNegativeCustId";
     public static AddNegativeCustChangeTrx = environment.FoundationR3Url + "/v1" + "/NegativeCustChangeTrx/AddNegativeCustChangeTrx";
     public static EditNegativeCustChangeTrx = environment.FoundationR3Url + "/v1" + "/NegativeCustChangeTrx/EditNegativeCustChangeTrx";
@@ -1012,6 +1023,7 @@ export class URLConstant {
     // Cust Exposure
     public static GetCustExpsrInfoByCustId = environment.FoundationR3Url + "/v1" + "/CustExpsrInfo/GetCustExpsrInfoByCustId";
     public static RequestExposure = environment.FoundationR3Url + "/v1" + "/CustExpsrInfo/RequestExposure";
+    public static RequestExposureV2 = environment.FoundationR3Url + "/v2" + "/CustExpsrInfo/RequestExposure";
     public static GetListCustExpsrBucketByCustExpsrDId = environment.FoundationR3Url + "/v1" + "/CustExpsrInfo/GetListCustExpsrBucketByCustExpsrDId";
     public static GetListCustExpsrAppAgrHistByCustExpsrHId = environment.FoundationR3Url + "/v1" + "/CustExpsrInfo/GetListCustExpsrAppAgrHistByCustExpsrHId";
 
@@ -1085,26 +1097,36 @@ export class URLConstant {
 
     //DIGITALIZATION
     public static AddTrxSrcDataForTrustingSocial = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForTrustingSocial";
+    public static AddTrxSrcDataForTrustingSocialV2 = environment.FoundationR3Url + "/v2" + "/Digitalization/AddTrxSrcDataForTrustingSocial";
+    public static AddTrxSrcDataForPefindo = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindo";
+    public static AddTrxSrcDataForPefindoV2 = environment.FoundationR3Url + "/v2" + "/Digitalization/AddTrxSrcDataForPefindo";
 
     //PEFINDO
-    public static HandleViewMOSummary = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewMOSummary";
-    public static HandleViewPefindoScore = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewPefindoScore";
-    public static HandleViewSubjectInfoPersonal = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewSubjectInfoPersonal";
-    public static HandleViewSubjectInfoCompany = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewSubjectInfoCompany";
-    public static HandleViewContracts = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewContracts";
-    public static HandleViewPefindoAlertQuest = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewPefindoAlertQuest";
-    public static HandleViewSecurities = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewSecurities";
-    public static HandleViewOtherLiabilities = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewOtherLiabilities";
-    public static HandleViewInvolvements = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewInvolvements";
-    public static HandleViewRelations = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewRelations";
-    public static HandleViewInquiries = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewInquiries";
-    public static HandleViewDisputes = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewDisputes";
-    public static HandleViewFinancialStatements = environment.FoundationR3Url + "/v1" + "/Digitalization/HandleViewFinancialStatements";
-    public static AddTrxSrcDataForPefindo = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindo";
-    public static PefindoSmartSearch = environment.FoundationR3Url + "/v1" + "/Digitalization/PefindoSmartSearch";
+    public static GetViewMOSummary = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewMOSummary";
+    public static GetViewPefindoScore = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewPefindoScore";
+    public static GetViewSubjectInfoPersonal = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewSubjectInfoPersonal";
+    public static GetViewSubjectInfoCompany = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewSubjectInfoCompany";
+    public static GetViewContracts = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewContracts";
+    public static GetViewPefindoAlertQuest = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewPefindoAlertQuest";
+    public static GetViewSecurities = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewSecurities";
+    public static GetViewOtherLiabilities = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewOtherLiabilities";
+    public static GetViewInvolvements = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewInvolvements";
+    public static GetViewRelations = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewRelations";
+    public static GetViewInquiries = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewInquiries";
+    public static GetViewDisputes = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewDisputes";
+    public static GetViewFinancialStatements = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewFinancialStatements";
+    public static PefindoSmartSearch = environment.FoundationR3Url + "/v1" + "/Pefindo/PefindoSmartSearch";
 
     // THINGS TO DO
   public static GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo = "ServiceTask/GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo";
   public static GetThingsToDoByRole = environment.FoundationR3Url + "/v1" + "/ThingsToDo/GetThingsToDoByRole";
+
+  // CUST DOC FILE
+  public static GetListCustDocFileByCustId = environment.FoundationR3Url + "/v1" + "/CustDocFile/GetListCustDocFileByCustId";
+
+  // REF TC
+  public static AddRefTc = environment.FoundationR3Url + "/v1" + "/RefTc/AddRefTc";
+  public static EditRefTc = environment.FoundationR3Url + "/v1" + "/RefTc/EditRefTc";
+  public static GetRefTcById = environment.FoundationR3Url + "/v1" + "/RefTc/GetRefTcById";
 }
 

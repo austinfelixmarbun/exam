@@ -7,7 +7,7 @@
             "name": "CS.CUST_NO",
             "id": "ShareholderCustNo",
             "value": "",
-            "label": "Mgmnt / Shareholder No.",
+            "label": "Management / Shareholder No.",
             "placeholder": "Placeholder"
         },
         {
@@ -23,7 +23,7 @@
             "name": "CS.CUST_NAME",
             "id": "ShareholderCustName",
             "value": "",
-            "label": "Mgmnt / Shareholder Name",
+            "label": "Management / Shareholder Name",
             "placeholder": "Placeholder"
         },
         {
@@ -39,7 +39,7 @@
             "name": "CS.ID_NO",
             "id": "ShareholderIdNo",
             "value": "",
-            "label": "Mgmnt / Shareholder ID No.",
+            "label": "Management / Shareholder ID No.",
             "placeholder": "Placeholder"
         },
         {
@@ -61,7 +61,7 @@
             "ddlType": "all",
             "url": "",
             "path": "/RefMaster/GetListKeyValueActiveByCode",
-            "label": "Mgmnt / Shareholder Type",
+            "label": "Management / Shareholder Type",
             "criteriaPropName": "RefMasterTypeCode",
             "criteriaPropValue": "CUST_TYPE",
             "items": [],
@@ -73,25 +73,25 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "MGMNT / SHAREHOLDER NO.",
+            "label": "MANAGEMENT / SHAREHOLDER NO.",
             "name": "CS.CUST_NO"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "MGMNT / SHAREHOLDER NAME",
+            "label": "MANAGEMENT / SHAREHOLDER NAME",
             "name": "CS.CUST_NAME"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "MGMNT / SHAREHOLDER ID NO.",
+            "label": "MANAGEMENT / SHAREHOLDER ID NO.",
             "name": "CS.ID_NO"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "MGMNT / SHAREHOLDER TYPE",
+            "label": "MANAGEMENT / SHAREHOLDER TYPE",
             "name": "CS.MR_CUST_TYPE_CODE"
         },
         {

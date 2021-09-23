@@ -57,7 +57,9 @@ export class ExceptionConstant {
     public static TRUSTING_SOCIAL_MAX_SUBJECT = "Subject cannot be more than 8";    
     public static TRUSTING_SOCIAL_DUPL_RELATION_CUST = "Cannot add another subject with Relation: Customer";
     public static TRUSTING_SOCIAL_DUPL_MOBILE_PHN_NO = "Duplicate Mobile Phone No";
-    public static TRUSTING_SOCIAL_INVALID_FILE_FORMAT = "File format must be {0}";
+    public static INVALID_FILE_FORMAT = "File format must be {0}";
+    public static DOCUMENT_REQUIRED = "Document Type {0} is required";
+    public static INVALID_FILE_FORMAT_FOR_DOC = "File format for Document Type {0} must be {1}";
 
 
 }

@@ -3,11 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { CustObj } from 'app/shared/model/CustObj.Model';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { ThirdPartyTsObj } from 'app/shared/model/ThirdPartyRslt/ThirdPartyTsObj.model';
 
 @Component({
@@ -18,6 +14,7 @@ export class CustomerViewTrustingSocialComponent implements OnInit {
 
   @Input() ThirdPartyTrxNo: string = null;
   CustId: number;
+  CustNo: string;
   ThirdPartyTsObjs: Array<ThirdPartyTsObj> = new Array<ThirdPartyTsObj>();
 
   constructor(
@@ -30,20 +27,28 @@ export class CustomerViewTrustingSocialComponent implements OnInit {
       if (params['CustId'] != null) {
         this.CustId = params['CustId'];
       }
+      if (params['CustNo'] != null) {
+        this.CustNo = params['CustNo'];
+      }
     });
   }
 
   ngOnInit() {
-    if(this.ThirdPartyTrxNo != null){
-      this.getThirdPartyTsObj(this.ThirdPartyTrxNo);
-    }  
+    if (this.CustNo) {
+      this.getCustByCustNoAndThirdPartyTsObj();
+      return;
+    }
 
-    if(this.ThirdPartyTrxNo == null && this.CustId != null){
+    if (this.ThirdPartyTrxNo != null) {
+      this.getThirdPartyTsObj(this.ThirdPartyTrxNo);
+    }
+
+    if (this.ThirdPartyTrxNo == null && this.CustId != null) {
       this.getCustAndThirdPartyTsObj();
-    } 
+    }
   }
 
-  getCustAndThirdPartyTsObj(){
+  getCustAndThirdPartyTsObj() {
     var custObj = new CustObj();
     custObj.CustId = this.CustId;
 
@@ -53,7 +58,14 @@ export class CustomerViewTrustingSocialComponent implements OnInit {
       });
   }
 
-  getThirdPartyTsObj(thirdPartyTrxNo){
+  getCustByCustNoAndThirdPartyTsObj() {
+    this.http.post(URLConstant.GetCustByCustNo, { CustNo: this.CustNo }).subscribe(
+      responseCust => {
+        this.getThirdPartyTsObj(responseCust["ThirdPartyTrxNo"]);
+      });
+  }
+
+  getThirdPartyTsObj(thirdPartyTrxNo) {
     this.http.post(URLConstant.GetListThirdPartyTrustingSocialByTrxNo, { TrxNo: thirdPartyTrxNo }).subscribe(
       responseThirdParty => {
         this.ThirdPartyTsObjs = responseThirdParty["ReturnObject"];

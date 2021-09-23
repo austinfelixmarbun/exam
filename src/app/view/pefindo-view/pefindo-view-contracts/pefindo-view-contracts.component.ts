@@ -24,7 +24,7 @@ export class PefindoViewContractsComponent implements OnInit {
   ngOnInit() {
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
-    this.http.post(URLConstant.HandleViewContracts, reqByTrxNo).subscribe(
+    this.http.post(URLConstant.GetViewContracts, reqByTrxNo).subscribe(
       (response: ResViewContractsObj) => {
         this.ResViewContractsObj = response;
       }

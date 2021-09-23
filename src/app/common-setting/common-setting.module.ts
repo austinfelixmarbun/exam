@@ -82,6 +82,8 @@ import { ExchangeRateDetailComponent } from './exchange-rate/exchange-rate-detai
 import { ExchangeRatePagingComponent } from './exchange-rate/exchange-rate-paging/exchange-rate-paging.component';
 import { CurrencyMaskInputMode, NgxCurrencyModule } from 'ngx-currency';
 import { SharedModule } from 'app/shared/shared.module';
+import { RefTcComponent } from './ref-tc/ref-tc-paging/ref-tc.component';
+import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -182,7 +184,9 @@ export const customCurrencyMaskConfig = {
     IndustryTypeCategoryPagingComponent,
     IndustryTypeCategoryDetailComponent,
     ExchangeRateDetailComponent,
-    ExchangeRatePagingComponent
+    ExchangeRatePagingComponent,
+    RefTcComponent,
+    RefTcAddEditComponent
   ],
   providers: [
     NGXToastrService

@@ -1,4 +1,5 @@
 import { CustAddrObj } from "../CustAddrObj.Model";
+import { CustDocFileObj } from "../CustDocFile/CustDocFileObj.Model";
 import { CustObj } from "../CustObj.Model";
 import { CustPersonalJobDataObj } from "../CustPersonalJobDataObj.Model";
 import { CustPersonalObj } from "../CustPersonalObj.Model";
@@ -14,6 +15,7 @@ export class ReqPersonalObj {
     CustCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
     CustPersonalJobObj: CustPersonalJobDataObj;
     CustAttrContentObjs: Array<CustAttrContentObj>;
+    CustDocFileObjs: Array<CustDocFileObj>;
 
     constructor() {
 

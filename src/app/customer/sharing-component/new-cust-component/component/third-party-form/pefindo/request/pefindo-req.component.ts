@@ -63,12 +63,22 @@ export class PefindoReqComponent implements OnInit {
     reqAddTrxSrcDataForPefindoObj.IdType = this.ReqPefindoSmartSearchObj.IdType;
     reqAddTrxSrcDataForPefindoObj.PefindoId = pefindoSmartSearchPersonalObj.PefindoId;
 
-    this.http.post(URLConstant.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj).subscribe(
-      (response) => {
-        this.toastr.successMessage(response["Message"]);
-        this.activeModal.dismiss('Cross click');
-      }
-    );
+    if(environment.isCore){
+      this.http.post(URLConstant.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          this.activeModal.dismiss('Cross click');
+        }
+      );
+    }else{
+      this.http.post(URLConstant.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          this.activeModal.dismiss('Cross click');
+        }
+      );
+    }
+
   }
 
   RequestCompany(pefindoSmartSearchCoyObj: PefindoSmartSearchCoyObj){
@@ -82,11 +92,21 @@ export class PefindoReqComponent implements OnInit {
     reqAddTrxSrcDataForPefindoObj.IdType = CommonConstant.MrIdTypeCodeNPWP;
     reqAddTrxSrcDataForPefindoObj.PefindoId = pefindoSmartSearchCoyObj.PefindoId;
 
-    this.http.post(URLConstant.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj).subscribe(
-      (response) => {
-        this.toastr.successMessage(response["Message"]);
-        this.activeModal.dismiss('Cross click');
-      }
-    );
+    if(environment.isCore){
+      this.http.post(URLConstant.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          this.activeModal.dismiss('Cross click');
+        }
+      );
+    }else{
+      this.http.post(URLConstant.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          this.activeModal.dismiss('Cross click');
+        }
+      );
+    }
+
   }
 }

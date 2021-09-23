@@ -71,7 +71,7 @@ export class TrustingSocialReqConsentComponent implements OnInit {
 
     if(extValid == undefined){
       var listExtStr = String.Join(", ", this.FileExtAllowed);
-      this.toastr.warningMessage(String.Format(ExceptionConstant.TRUSTING_SOCIAL_INVALID_FILE_FORMAT, listExtStr));
+      this.toastr.warningMessage(String.Format(ExceptionConstant.INVALID_FILE_FORMAT, listExtStr));
       return;
     }
 
@@ -107,7 +107,6 @@ export class TrustingSocialReqConsentComponent implements OnInit {
   }
 
   ConvertSize(fileSize: number) {
-    // console.log(fileSize + " - "+ str);
     return fileSize < 1024000
       ? (fileSize / 1024).toFixed(2) + ' KB'
       : (fileSize / 1024000).toFixed(2) + ' MB';

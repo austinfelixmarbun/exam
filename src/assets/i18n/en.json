@@ -133,5 +133,11 @@
   "Documentation": "Documentation",
   "Support": "Support",  
   "F_Bank_Name": "Bank Names",
-  "BI Code": "BI Code"
+  "BI Code": "BI Code",
+  "Debtor Group": "Debtor Group",
+  "Debtor Business Scale": "Debtor Business Scale",
+  "Debtor Group Code": "Debtor Group Code",
+  "Debtor Group Name": "Debtor Group Name",
+  "Debtor Business Scale Name": "Debtor Business Scale Name",
+  "Debtor Business Scale Description": "Debtor Business Scale Description"
 }
