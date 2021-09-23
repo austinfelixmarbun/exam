@@ -61,12 +61,11 @@ export class CustomerPersonalPageComponent implements OnInit {
     "Address": 2,
     "Family": 3,
     "Contact": 4,
-    "Group": 5,
-    "Job": 6,
-    "Financial": 7,
-    "CustAsset": 8,
-    "Upload": 9,
-    "CustAttr": 10
+    "Job": 5,
+    "Financial": 6,
+    "CustAsset": 7,
+    "Upload": 8,
+    "CustAttr": 9
   }
 
   back() {
@@ -136,23 +135,20 @@ export class CustomerPersonalPageComponent implements OnInit {
     if (type == "Contact") {
       this.CustStepIndex = 4;
     }
-    if (type == "Group") {
+    if (type == "Job") {
       this.CustStepIndex = 5;
     }
-    if (type == "Job") {
+    if (type == "Financial") {
       this.CustStepIndex = 6;
     }
-    if (type == "Financial") {
+    if (type == "CustAsset") {
       this.CustStepIndex = 7;
     }
-    if (type == "CustAsset") {
+    if (type == "Upload") {
       this.CustStepIndex = 8;
     }
-    if (type == "Upload") {
-      this.CustStepIndex = 9;
-    }
     if (type == "CustAttr") {
-      this.CustStepIndex = 10;
+      this.CustStepIndex = 9;
     }
     this.stepper.to(this.CustStepIndex);
   }
