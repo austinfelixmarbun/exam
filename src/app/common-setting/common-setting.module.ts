@@ -81,6 +81,8 @@ import { IndustryTypeCategoryDetailComponent } from './industry-type-category/in
 import { ExchangeRateDetailComponent } from './exchange-rate/exchange-rate-detail/exchange-rate-detail.component';
 import { ExchangeRatePagingComponent } from './exchange-rate/exchange-rate-paging/exchange-rate-paging.component';
 import { CurrencyMaskInputMode, NgxCurrencyModule } from 'ngx-currency';
+import { RefTcComponent } from './ref-tc/ref-tc-paging/ref-tc.component';
+import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -180,7 +182,9 @@ export const customCurrencyMaskConfig = {
     IndustryTypeCategoryPagingComponent,
     IndustryTypeCategoryDetailComponent,
     ExchangeRateDetailComponent,
-    ExchangeRatePagingComponent
+    ExchangeRatePagingComponent,
+    RefTcComponent,
+    RefTcAddEditComponent
   ],
   providers: [
     NGXToastrService

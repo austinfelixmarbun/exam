@@ -185,6 +185,9 @@ export class PathConstant {
     public static CS_COA_SCHM_PAGING = PathConstant.CS_COA_SCHM + "/" + PathConstant.PAGING;
     public static CS_COA_SCHM_DETAIL = PathConstant.CS_COA_SCHM + "/" + PathConstant.DETAIL;
     public static CS_COA_SCHM_VIEW = PathConstant.CS_COA_SCHM + "/" + PathConstant.VIEW;
+    public static CS_REF_TC = "RefTc";
+    public static CS_REF_TC_PAGING = PathConstant.CS_REF_TC + "/" + PathConstant.PAGING;
+    public static CS_REF_TC_DETAIL = PathConstant.CS_REF_TC + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region Cust

@@ -1124,5 +1124,9 @@ export class URLConstant {
   // CUST DOC FILE
   public static GetListCustDocFileByCustId = environment.FoundationR3Url + "/v1" + "/CustDocFile/GetListCustDocFileByCustId";
 
+  // REF TC
+  public static AddRefTc = environment.FoundationR3Url + "/v1" + "/RefTc/AddRefTc";
+  public static EditRefTc = environment.FoundationR3Url + "/v1" + "/RefTc/EditRefTc";
+  public static GetRefTcById = environment.FoundationR3Url + "/v1" + "/RefTc/GetRefTcById";
 }
 
