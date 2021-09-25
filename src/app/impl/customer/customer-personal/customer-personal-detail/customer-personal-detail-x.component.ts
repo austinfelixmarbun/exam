@@ -159,6 +159,7 @@ export class CustomerPersonalDetailXComponent implements OnInit {
         this.DictUcDDLObj[this.RefMasterTypeCodeNationality] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
 
         this.CustomerDetailForm.patchValue({
+          CustFullName: this.tempCustPersonalObj.CustFullName,
           NickName: this.tempCustPersonalObj.NickName,
           MrNationalityCode: this.tempCustPersonalObj.MrNationalityCode,
           MrEducationCode: this.tempCustPersonalObj.MrEducationCode ? this.tempCustPersonalObj.MrEducationCode:"",
@@ -193,7 +194,7 @@ export class CustomerPersonalDetailXComponent implements OnInit {
   async SaveValue() {
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj = this.tempCustPersonalObj;
-    this.custPersonalObj.CustFullName = this.tempCustObj.CustName;
+    this.custPersonalObj.CustFullName = this.CustomerDetailForm.controls["CustFullName"].value;//this.tempCustObj.CustName;
     this.custPersonalObj.NickName = this.CustomerDetailForm.controls["NickName"].value;
     this.custPersonalObj.MrSalutationCode = this.CustomerDetailForm.controls["MrSalutationCode"].value;
     this.custPersonalObj.MrMaritalStatCode = this.tempCustPersonalObj.MrMaritalStatCode;

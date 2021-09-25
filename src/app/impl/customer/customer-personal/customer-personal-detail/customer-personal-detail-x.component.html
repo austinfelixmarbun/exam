@@ -10,7 +10,17 @@
             <div class="form-group row">
               <label class="col-md-4 adInsLabel" translate>Full Name </label>
               <div class="col-md-8">
-                <label>{{this.tempCustObj?.CustName}}</label>
+                <!--<label>{{this.tempCustObj?.CustName}}</label>-->
+                <input type="text" class="form-control adInsInput" formControlName="CustFullName"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.CustFullName.invalid}">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 adInsLabel" translate>Gelar Depan</label>
+              <div class="col-md-8">
+                <input type="text" class="form-control adInsInput" formControlName="CustPrefixName"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.CustPrefixName.invalid}">                
               </div>
             </div>
 
@@ -87,18 +97,7 @@
                 <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeSalutation]"
                   [parentForm]="CustomerDetailForm" [enjiForm]="enjiForm" [identifier]="'MrSalutationCode'"></lib-ucdropdownlist>
               </div>
-            </div>
-
-            <div class="form-group row">
-              <label class="col-md-4 adInsLabel" translate>Gelar Depan</label>
-              <div class="col-md-8">
-                <input type="text" class="form-control adInsInput" formControlName="CustPrefixName"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.CustPrefixName.invalid}" readonly>
-                <lib-uc-show-errors [control]="CustomerDetailForm.controls.CustPrefixName"
-                  [submit]="enjiForm.submitted">
-                </lib-uc-show-errors>
-              </div>
-            </div>
+            </div>            
 
             <div class="form-group row">
               <label class="col-md-4 adInsLabel" translate>Gelar Belakang</label>
