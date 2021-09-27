@@ -114,26 +114,23 @@ export class CustomerCompanyPageComponent implements OnInit {
     if (type == "Management") {
       this.CustStepIndex = 3;
     }
-    if (type == "Group") {
+    if (type == "Contact") {
       this.CustStepIndex = 4;
     }
-    if (type == "Contact") {
+    if (type == "Financial") {
       this.CustStepIndex = 5;
     }
-    if (type == "Financial") {
+    if (type == "CustAsset") {
       this.CustStepIndex = 6;
     }
-    if (type == "CustAsset") {
+    if (type == "Legal") {
       this.CustStepIndex = 7;
     }
-    if (type == "Legal") {
+    if (type == "UploadData") {
       this.CustStepIndex = 8;
     }
-    if (type == "UploadData") {
-      this.CustStepIndex = 9;
-    }
     if (type == "CustAttr") {
-      this.CustStepIndex = 10;
+      this.CustStepIndex = 9;
     }
 
     this.stepper.to(this.CustStepIndex);

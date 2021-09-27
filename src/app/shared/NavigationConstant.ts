@@ -103,6 +103,8 @@ export class NavigationConstant {
     public static CS_ZIPCODE_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_ZIPCODE_PAGING; //'/CommonSetting/Zipcode/Paging'
     public static CS_ZIPCODE_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_ZIPCODE_DETAIL; //'/CommonSetting/Zipcode/Detail'
     public static CS_REF_STATUS_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_STATUS_PAGING; //'/CommonSetting/RefStatus/Paging'
+    public static CS_REF_TC_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TC_PAGING; //'/CommonSetting/RefTc/Paging'
+    public static CS_REF_TC_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TC_DETAIL; //'/CommonSetting/RefTc/Detail'
     //#endregion
 
     //#region System Setting
