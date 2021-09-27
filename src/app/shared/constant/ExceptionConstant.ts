@@ -61,5 +61,5 @@ export class ExceptionConstant {
     public static DOCUMENT_REQUIRED = "Document Type {0} is required";
     public static INVALID_FILE_FORMAT_FOR_DOC = "File format for Document Type {0} must be {1}";
 
-
+    public static  EST_DATE_CANNOT_BE_MORE_THAN_BIZ_DATE = "Establishment Date Cannot Be More Than Business Date";
 }

@@ -12,7 +12,7 @@
             <div class="form-group row">
               <label class="col-md-4 adins-required-label" translate>Establishment Date</label>
               <div class="col-md-8">
-                <input type="date" class="form-control adInsInput" formControlName="EstablishmentDt"
+                <input type="date" max="{{ MaxDate | date:'yyyy-MM-dd' }}" class="form-control adInsInput" formControlName="EstablishmentDt" (focusout)="onFocusOutEstDate($event)"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerDetailForm.controls.EstablishmentDt.invalid}">
                 <lib-uc-show-errors [control]="CustomerDetailForm.controls.EstablishmentDt"
                   [submit]="enjiForm.submitted">
