@@ -49,6 +49,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
   Page: String;
   UserAccess: CurrentUserContext;
   MaxDate: Date;
+  MaxDtValidate: string;
 
   CustomerDetailForm = this.fb.group({
     NumOfEmp: ['', [Validators.maxLength(100), Validators.required, Validators.pattern("^[0-9]+$")]],
@@ -85,7 +86,10 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.lookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
     this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    this.MaxDate = this.UserAccess.BusinessDt;
+
+    this.MaxDate = new Date(this.UserAccess.BusinessDt);
+    this.MaxDate.setDate(this.MaxDate.getDate() - 1);
+    this.MaxDtValidate = datePipe.transform(this.MaxDate, "yyyy-MM-dd");
 
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
 
@@ -161,8 +165,8 @@ export class CustomerCompanyDetailComponent implements OnInit {
   }
 
   onFocusOutEstDate(event){
-    if(event.target.value > this.MaxDate){
-      this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_CANNOT_BE_MORE_THAN_BIZ_DATE));
+    if(event.target.value > this.MaxDtValidate){
+      this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
       return;
     }
   }
@@ -180,8 +184,8 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.custCompanyObj.MrCustModelCode = this.CustomerDetailForm.controls["MrCustModelCode"].value;
     this.custCompanyObj.ParentCustId = this.CustGrpObj.CustId;
 
-    if(this.CustomerDetailForm.controls["EstablishmentDt"].value > this.MaxDate){
-      this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_CANNOT_BE_MORE_THAN_BIZ_DATE));
+    if(this.CustomerDetailForm.controls["EstablishmentDt"].value > this.MaxDtValidate){
+      this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
       return;
     }
 
