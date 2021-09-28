@@ -50,10 +50,11 @@ export class CustomerViewComponent implements OnInit {
 
   changeRoute(url) {
     this.router.navigateByUrl('', { skipLocationChange: true });
-    setTimeout(() => AdInsHelper.RedirectUrl(this.router,[url],{ }));
+    setTimeout(() => AdInsHelper.RedirectUrl(this.router, [url], {}));
   }
 
-  async ngOnInit() : Promise<void> {
+  dictIdxAt: { [Id: string]: number } = {};
+  async ngOnInit(): Promise<void> {
     this.viewCustMainInfoHeaderObj.viewInput = "./assets/ucviewgeneric/viewCustMainInfoHeader.json";
 
     this.viewCustCoyMainInfoHeader.viewInput = "./assets/ucviewgeneric/viewCustCoyMainInfoHeader.json";
@@ -66,7 +67,7 @@ export class CustomerViewComponent implements OnInit {
     var custObj = {
       CustId: this.CustId
     }
-    await this.http.post(this.getCustByCustIdUrl, {Id : this.CustId}).toPromise().then(
+    await this.http.post(this.getCustByCustIdUrl, { Id: this.CustId }).toPromise().then(
       (response) => {
         this.custResultData = response;
         this.CustNo = this.custResultData['CustNo'];
@@ -76,10 +77,10 @@ export class CustomerViewComponent implements OnInit {
     );
 
     let reqGetSysConfigResultLOSObj = new GenericObj();
-    reqGetSysConfigResultLOSObj.Code  = CommonConstant.MODULE_LOS;
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, {ConfigCode : reqGetSysConfigResultLOSObj.Code}).toPromise().then(
+    reqGetSysConfigResultLOSObj.Code = CommonConstant.MODULE_LOS;
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, { ConfigCode: reqGetSysConfigResultLOSObj.Code }).toPromise().then(
       (response) => {
-        if(response.ConfigValue === "1") {
+        if (response.ConfigValue === "1") {
           this.IsLos = true;
         }
         else {
@@ -89,10 +90,10 @@ export class CustomerViewComponent implements OnInit {
     );
 
     let reqGetSysConfigResultLMSObj = new GenericObj();
-    reqGetSysConfigResultLMSObj.Code  = CommonConstant.MODULE_LMS;
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, {ConfigCode : reqGetSysConfigResultLMSObj.Code}).toPromise().then(
+    reqGetSysConfigResultLMSObj.Code = CommonConstant.MODULE_LMS;
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, { ConfigCode: reqGetSysConfigResultLMSObj.Code }).toPromise().then(
       (response) => {
-        if(response.ConfigValue === "1") {
+        if (response.ConfigValue === "1") {
           this.IsLms = true;
         }
         else {
@@ -105,7 +106,7 @@ export class CustomerViewComponent implements OnInit {
     await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms }).toPromise().then(
       (response) => {
         this.SysConfigResultObj = response;
-        if(response.ConfigValue === "1") {
+        if (response.ConfigValue === "1") {
           this.IsUseDms = true;
         }
         else {
@@ -116,6 +117,23 @@ export class CustomerViewComponent implements OnInit {
 
     await this.GetCustListIframeView();
     await this.getIsUseDigitalization();
+    this.setDictIdxAt();
+  }
+
+  setDictIdxAt() {
+    let idxAt: number = 8;
+    if (this.IsUseDms) this.dictIdxAt["DMS"] = ++idxAt;
+    if (this.custType == 'PERSONAL') {
+      if (this.IsUseDigitalization && this.IsUseTs) this.dictIdxAt["TrustSocial"] = ++idxAt;
+    } else {
+      if (this.IsUseDigitalization) this.dictIdxAt["TrustSocial"] = ++idxAt;
+    }
+    if (this.IsIframe) {
+      let totalListIframe: number = this.listIframe.length;
+      idxAt += totalListIframe;
+    }
+    this.dictIdxAt["OTH"] = ++idxAt;
+    console.log(this.dictIdxAt);
   }
 
   async GetCustListIframeView() {
@@ -127,311 +145,101 @@ export class CustomerViewComponent implements OnInit {
     );
   }
 
-  mencuba(ev) {
+  mencuba(ev: number) {
     console.log(ev);
+    let linkUrl: string = "";
     if (this.custType == CommonConstant.CustomerPersonal) {
-      if (ev == 0) { // Main Data
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_DETAIL],{ "CustId": this.CustId });
-        });
+      if (ev == 0) { 
+        linkUrl = NavigationConstant.VIEW_CUST_PERSONAL_DETAIL;
       }
-      else if (ev == 1) { // Address
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_ADDR],{ "CustId": this.CustId });
-        });
+      else if (ev == 1) { 
+        linkUrl = NavigationConstant.VIEW_CUST_ADDR;
       }
       else if (ev == 2) { // Family
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_FAMILY],{ "CustId": this.CustId });
-        });
+        linkUrl = NavigationConstant.VIEW_CUST_PERSONAL_FAMILY;
       }
       else if (ev == 3) { // Contact Person
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_CONTACT_PERSON],{ "CustId": this.CustId });
-        });
+        linkUrl = NavigationConstant.VIEW_CUST_PERSONAL_CONTACT_PERSON;
       }
       else if (ev == 4) { // Customer Group
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_GRP],{ "CustId": this.CustId });
-        });
+        linkUrl = NavigationConstant.VIEW_CUST_GRP;
       }
       else if (ev == 5) { // Job Data
-        if (this.custModel == "PROF")
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_JOB_DATA],{ "CustId": this.CustId });
-          });
-        else if (this.custModel == "NONPROF")
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_JOB_DATA_NON_PROF],{ "CustId": this.CustId });
-          });
-        else if (this.custModel == "EMP")
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_JOB_DATA_EMP],{ "CustId": this.CustId });
-          });
-        else if (this.custModel == "SME")
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_JOB_DATA_SME],{ "CustId": this.CustId });
-          });
+        switch(this.custModel){
+          case CommonConstant.CUST_MODEL_PROF:
+            linkUrl = NavigationConstant.VIEW_CUST_PERSONAL_JOB_DATA;
+            break;
+          case CommonConstant.CUST_MODEL_NONPROF:
+            linkUrl = NavigationConstant.VIEW_CUST_PERSONAL_JOB_DATA_NON_PROF;
+            break;
+          case CommonConstant.CUST_MODEL_EMP:
+            linkUrl = NavigationConstant.VIEW_CUST_PERSONAL_JOB_DATA_EMP;
+            break;
+          case CommonConstant.CUST_MODEL_SME:
+            linkUrl = NavigationConstant.VIEW_CUST_PERSONAL_JOB_DATA_SME;
+            break;
+        }
       }
       else if (ev == 6) { // Financial Data
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_PERSONAL_FINANCIAL_DATA],{ "CustId": this.CustId });
-        });
+        linkUrl = NavigationConstant.VIEW_CUST_PERSONAL_FINANCIAL_DATA;
       }
       else if (ev == 7) { // Customer Asset
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_ASSET_DATA],{ "CustId": this.CustId });
-        });
+        linkUrl = NavigationConstant.VIEW_CUST_ASSET_DATA;
       }
       else if (ev == 8) { // Highlight Comment
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VIEW_CUST_HIGHLIGHT_COMMENT], { "CustId": this.CustId });
-        });
+        linkUrl = NavigationConstant.VIEW_CUST_HIGHLIGHT_COMMENT;
       }
-      // else if (ev == 6) {
-      //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-      //     AdInsHelper.RedirectUrl(this.router,["/View/Customer/CoyOther"],{ "CustId": this.CustId });
-      //   });
-      // }
-      // else if (ev == 7) {
-      //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-      //     AdInsHelper.RedirectUrl(this.router,["/View/Customer/PersonalAppListing"],{ "CustId": this.CustId });
-      //   });
-      // }
-      else if (ev == 9) {
-        if(this.IsUseDms) { // Document
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_DOC],{ "CustId": this.CustId });
-          });
-          return;
-        }
-
-        // if(this.IsLos) { // Application List
-        //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-        //     window.open(environment.losR3Web + "/View/AppList?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
-        //   });
-        //   return;
-        // }
-
-        // if(this.IsLms) { // Agreement list
-        //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-        //     window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
-        //   });
-        //   return;
-        // }
-        if(this.IsUseDigitalization && this.IsUseTs) { // Trusting Social
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
-          });
-          return;
-        }
-
-        if(this.IsIframe) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
-        }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
-      }
-      else if (ev == 10) {
-        // if(this.IsLos) { // Application List
-        //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-        //     window.open(environment.losR3Web + "/View/AppList?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
-        //   });
-        //   return;
-        // }
-
-        // if(this.IsLms) { // Agreement list
-        //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-        //     window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
-        //   });
-        //   return;
-        // }
-
-        if(this.IsUseDigitalization && this.IsUseTs) { // Trusting Social
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
-          });
-          return;
-        }
-
-        if(this.IsIframe) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
-        }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
-      }
-      else if (ev == 11) {
-        // if(this.IsLms) { // Agreement List
-        //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-        //     window.open(environment.lmsWeb + "/view/agrmntlist?CustId=" + this.CustId + "&CustNo=" + this.CustNo, "_blank");
-        //   });
-        //   return;
-        // }
-
-        if(this.IsIframe) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
-        }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
-      }
-      else if (ev == 12) {
-        if(this.IsIframe && this.IsLms) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
-        }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
-      }
-      else if (ev == 13) {
-        if(this.IsIframe && (this.IsLos && this.IsLms)) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
-        }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
-      }
-      else if (ev == 14) {// Other Info  
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
+      else {
+        linkUrl = NavigationConstant.VIEW_CUST;
+        if(ev == this.dictIdxAt["DMS"]) linkUrl = NavigationConstant.VIEW_CUST_DOC;
+        else if(ev == this.dictIdxAt["TrustSocial"]) linkUrl = NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL;
+        else if(ev == this.dictIdxAt["OTH"]) linkUrl = NavigationConstant.VIEW_CUST_OTH_INFO;
       }
     }
     else if (this.custType == CommonConstant.CustomerCompany) {
       if (ev == 0) { // Main Data
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_COY_DETAIL],{ "CustId": this.CustId });
-        });
+        linkUrl = NavigationConstant.VIEW_CUST_COY_DETAIL;
       }
       else if (ev == 1) { // Address
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_ADDR],{ "CustId": this.CustId });
-        });
+        linkUrl = NavigationConstant.VIEW_CUST_ADDR;
       }
       else if (ev == 2) { // Management / Shareholder
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_COY_MNGMNT],{ "CustId": this.CustId });
-        });
+        linkUrl = NavigationConstant.VIEW_CUST_COY_MNGMNT;
       }
       else if (ev == 3) { // Customer Group
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_GRP],{ "CustId": this.CustId });
-        });
+        linkUrl = NavigationConstant.VIEW_CUST_GRP;
       }
       else if (ev == 4) { // Contact Information
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_COY_CONTACT],{ "CustId": this.CustId });
-        });
+        linkUrl = NavigationConstant.VIEW_CUST_COY_CONTACT;
       }
       else if (ev == 5) { // Financial Data
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_COY_FINANCIAL],{ "CustId": this.CustId });
-        });
+        linkUrl = NavigationConstant.VIEW_CUST_COY_FINANCIAL;
       }
       else if (ev == 6) { // Customer Asset
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_ASSET_DATA],{ "CustId": this.CustId });
-        });
+        linkUrl = NavigationConstant.VIEW_CUST_ASSET_DATA;
       }
       else if (ev == 7) { // Legal Document
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_COY_LEGAL],{ "CustId": this.CustId });
-        });
+        linkUrl = NavigationConstant.VIEW_CUST_COY_LEGAL;
       }
       else if (ev == 8) { // Highlight Comment
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_HIGHLIGHT_COMMENT],{ "CustId": this.CustId });
-        });
+        linkUrl = NavigationConstant.VIEW_CUST_HIGHLIGHT_COMMENT;
       }
-      // else if (ev == 7) {
-      //   this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-      //     AdInsHelper.RedirectUrl(this.router,["/View/Customer/CoyOther"],{ "CustId": this.CustId });
-      //   });
-      // }
-      else if (ev == 9) {        
-        if(this.IsUseDms) { // Document
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_DOC],{ "CustId": this.CustId });
-          });
-          return;
-        }
-
-        if(this.IsUseDigitalization && this.IsUseTs) { // Trusting Social
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
-          });
-          return;
-        }
-        if(this.IsIframe) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
-        }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
-      }
-      else if (ev == 10) {
-        if(this.IsUseDigitalization && this.IsUseTs) { // Trusting Social
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL],{ "CustId": this.CustId });
-          });
-          return;
-        }
-
-        if(this.IsIframe) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
-        }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
-      }
-      else if (ev == 11) {
-        if(this.IsIframe && this.IsUseDms) { // Iframe View
-          this.router.navigateByUrl(NavigationConstant.VIEW_CUST, {});
-          return;
-        }
-
-        // Other Info
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
-      }
-      else if (ev == 12) { 
-        this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VIEW_CUST_OTH_INFO],{ "CustId": this.CustId });
-        });
+      else {
+        linkUrl = NavigationConstant.VIEW_CUST;
+        if(ev == this.dictIdxAt["DMS"]) linkUrl = NavigationConstant.VIEW_CUST_DOC;
+        else if(ev == this.dictIdxAt["TrustSocial"]) linkUrl = NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL;
+        else if(ev == this.dictIdxAt["OTH"]) linkUrl = NavigationConstant.VIEW_CUST_OTH_INFO;
       }
     }
+    AdInsHelper.RedirectUrl(this.router, [linkUrl], { "CustId": this.CustId }, true);
   }
 
-  async getIsUseDigitalization(){
-    await this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeIsUseDigitalization}).toPromise().then(
-      (response) => {
-        if(response["GsValue"] === CommonConstant.TRUE_CONDITION) {
+  async getIsUseDigitalization() {
+    await this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeIsUseDigitalization }).toPromise().then(
+      async (response) => {
+        if (response["GsValue"] === CommonConstant.TRUE_CONDITION) {
           this.IsUseDigitalization = true;
-          this.getDigitalizationSvcType();
+          await this.getDigitalizationSvcType();
         }
         else {
           this.IsUseDigitalization = false;
@@ -440,18 +248,18 @@ export class CustomerViewComponent implements OnInit {
     );
   }
 
-  async getDigitalizationSvcType(){
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeDigitalizationSvcType}).toPromise().then(
+  async getDigitalizationSvcType() {
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeDigitalizationSvcType }).toPromise().then(
       (response) => {
         this.digitalizationSysConfigResultObj = response;
       });
 
-    if(this.digitalizationSysConfigResultObj.ConfigValue != null){
+    if (this.digitalizationSysConfigResultObj.ConfigValue != null) {
       var listSvcType = this.digitalizationSysConfigResultObj.ConfigValue.split("|");
 
       var svcTypeTs = listSvcType.find(x => x == CommonConstant.DigitalizationSvcTypeTrustingSocial);
 
-      if(svcTypeTs != null){
+      if (svcTypeTs != null) {
         this.IsUseTs = true;
       }
     }

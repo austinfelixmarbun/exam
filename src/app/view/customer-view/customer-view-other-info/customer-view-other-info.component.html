@@ -34,7 +34,12 @@
             <div class="form-body" id="AttrList">
               <div class="form-group row" *ngFor="let item of CustAttrContentObj">
                 <label class="col-md-3 adins-label">{{item.AttrName}}</label>
-                <label class="col-md-9 adins-label">{{item.AttrValue}}</label>
+                <label class="col-md-9 adins-label" [ngSwitch]="item.AttrInputType" >
+                  <span *ngSwitchCase="AttrInputTypeDate">{{item.AttrValue | date: 'dd-MM-yyyy'}}</span>
+                  <span *ngSwitchCase="AttrInputTypeNum">{{item.AttrValue | number:'.2':'en-US'}}</span>
+                  <span *ngSwitchCase="AttrInputTypeNumPerc">{{item.AttrValue | number:'.6':'en-US'}}</span>
+                  <span *ngSwitchDefault>{{item.AttrValue}}</span>
+                </label>
               </div>
             </div>
           </div>
