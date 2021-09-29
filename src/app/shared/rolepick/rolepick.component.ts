@@ -82,7 +82,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
 
           this.http.post(AdInsConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: item.RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).subscribe(
             (response) => {
-              AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
+              AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
               this.router.navigate([NavigationConstant.DASHBOARD]);
               this.dialog.closeAll();
             });
