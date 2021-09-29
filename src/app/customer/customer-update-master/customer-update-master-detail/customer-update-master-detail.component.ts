@@ -203,7 +203,4 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     }
   }
 
-  GetCallback(e) {
-    AdInsHelper.OpenProdOfferingViewByCodeAndVersion(e.ViewObj.ProdOfferingCode, e.ViewObj.ProdOfferingVersion);
-  }
 }
