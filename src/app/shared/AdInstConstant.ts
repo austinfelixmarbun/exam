@@ -35,10 +35,12 @@ export class AdInsConstant {
   public static LoginByRole = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByRole";
   public static LoginByToken = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByToken";
   public static UpdateToken = environment.FoundationR3Url + "/v1" + "/Authenticate/UpdateRole";
+  public static GetAllActiveRefFormByRoleCodeAndModuleCode = environment.FoundationR3Url + "/v1" + "/RefForm/GetAllActiveRefFormByRoleCodeAndModuleCode";
   public static GetThingsToDoByRole = environment.FoundationR3Url + "/v1" + "/ThingsToDo/GetThingsToDoByRole";
   public static GetDashboardAccessToken = environment.FoundationR3Url + "/v2" + "/Dashboard/GetDashboardAccessToken";
   public static GetThingsToDoByRoleV2 = environment.FoundationR3Url + "/v2" + "/ThingsToDo/GetThingsToDoByRole";
   public static GetThingsToDoCamunda = environment.FoundationR3Url + "/v2" + "/ThingsToDo/GetThingsToDoCamunda";
+  public static GetListApvTaskListByUsernameAndRoleCodeForThingsToDo = environment.ApprovalR3Url + "/Generic/GetListApvTaskListByUsernameAndRoleCodeForThingsToDo";
   
   // Storage Watch Key
   public static WatchRoleState = "RoleState";
