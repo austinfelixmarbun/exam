@@ -1,10 +1,10 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
     <button type="button" class="backButton" [routerLink]="[BackLink]" skipLocationChange>
-      <i class="fa fa-arrow-left"> </i> Back 
+      <i class="fa fa-arrow-left"></i>&nbsp;<span translate>Back</span>
     </button>
     <button type="button" class="addButton" (click)="AddNavigate()">
-      <i class="ft-plus-circle"></i> Add
+      <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
     </button>
   </span>
 </div>
@@ -31,7 +31,7 @@
                   (lookup)="getHolidaySchmHId($event)"></lib-uclookupgeneric>
               </div>
               <button type="button" class="btn btn-raised btn-primary" (click)="Copy()">
-                <i class="far fa-check-square"></i> Copy
+                <i class="far fa-check-square"></i>&nbsp;<span translate>Copy</span>
               </button>
             </div>
           </div>

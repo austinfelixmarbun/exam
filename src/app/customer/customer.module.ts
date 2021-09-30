@@ -124,6 +124,7 @@ import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CustomerViewChildModule } from 'app/view/customer-view/customer-view-child.module';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -151,6 +152,7 @@ export const customCurrencyMaskConfig = {
     UcpagingModule,
     SharingComponentModule,
     SharedModule,
+    AdInsSharedModule,
     UCSearchModule,
     UcgridfooterModule,
     UcpagingModule,

@@ -3,12 +3,12 @@
     <div class="px-3">
         <div class="ucSearch-Button-Right" >
             <span class="mr-1" >
-                    <button type="button" class="backButton"  (click)="Back()" translate>
-                    <i class="fa fa-arrow-left"> </i> Back </button></span>
+                    <button type="button" class="backButton"  (click)="Back()">
+                    <i class="fa fa-arrow-left"> </i>&nbsp;<span translate>Back</span> </button></span>
             <span class="mr-1" >
                 <button type="button" class="btn btn-raised btn-primary mr-1 btn-sm" [queryParams]="{refOrgId:refOrgId, mode:'add'}" [routerLink]="['/organization/model/Detail']" skipLocationChange
                 translate>
-                <i class="ft-plus-circle"></i> Add
+                <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
               </button>
             </span>
           </div>
