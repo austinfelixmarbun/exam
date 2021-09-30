@@ -14,8 +14,7 @@ import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-survey-result-review-detail',
-  templateUrl: './survey-result-review-detail.component.html',
-  styleUrls: ['./survey-result-review-detail.component.css']
+  templateUrl: './survey-result-review-detail.component.html'
 })
 export class SurveyResultReviewDetailComponent implements OnInit {
 
