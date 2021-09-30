@@ -747,7 +747,7 @@ export class URLConstant {
     public static GetListCustCompanyFinDataByCustId = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinData/GetListCustCompanyFinDataByCustId";
     public static AddCustCompanyFinData = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinData/AddCustCompanyFinData";
     public static EditCustCompanyFinData = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinData/EditCustCompanyFinData";
-    public static DeleteCustCompanyFinData = "/CustomerCompanyFinData/DeleteCustCompanyFinData";
+    public static DeleteCustCompanyFinData = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinData/DeleteCustCompanyFinData";
     public static AddCustPersonalFinData = environment.FoundationR3Url + "/v1" + "/CustPersonalFinData/AddCustPersonalFinData";
     public static EditCustPersonalFinData = environment.FoundationR3Url + "/v1" + "/CustPersonalFinData/EditCustPersonalFinData";
     public static DeleteCustPersonalFinData = environment.FoundationR3Url + "/v1" + "/CustPersonalFinData/DeleteCustPersonalFinData";
