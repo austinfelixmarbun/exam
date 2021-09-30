@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 
@@ -11,7 +12,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   IdCust: number;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(public Translate: TranslateService, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -20,6 +21,7 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
         this.IdCust = params["CustId"];
       }
     });
+    console.log(Translate);
   }
 
   ngOnInit() {

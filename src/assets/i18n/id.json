@@ -1,13 +1,19 @@
 {
 
   "_comment":"BAGIAN A",
-  "Customer No":"Nomor Customer",
-  "Customer Name":"Nama Customer",
-  "CUSTOMER NO": "Nomor Customer",
+  "Customer No":"Nomor pelanggan",
+  "Customer Name":"Nama pelanggan",
+  "CUSTOMER NAME":"Nama pelanggan",
+  "CUSTOMER NO": "Nomor pelanggan",
+  "Customer Type": "Tipe pelanggan",
+  "Name":"Nama",
   "Action":"Aksi",
   "Gender":"Jenis Kelamin",
   "Address":"Alamat",
+  "ADDRESS":"Alamat",
+  "Address Type":"Tipe Alamat",
   "Active Status":"Status Aktif",
+  "ACTIVE STATUS":"Status Aktif",
   "Description":"Deskripsi",
   "Employee List":"List Karyawan",
   "Employee":"Karyawan",
@@ -61,6 +67,12 @@
   "Email 1":"Email 1",
   "Email 2":"Email 2",
   "Tax Office":"Kantor Pajak",
+  "F_Bank_Name": "Bank Nama",
+  "BI Code":"Kode BI",
+  "Religion":"Agama",
+  "Date":"Tanggal",
+  "DATE":"Tanggal",
+  "ACTION":"Aksi",
 
 
 

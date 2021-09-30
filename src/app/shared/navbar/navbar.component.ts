@@ -13,6 +13,7 @@ import { URLConstant } from '../constant/URLConstant';
 import { CommonConstant } from '../constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from '../NavigationConstant';
+import { StorageService } from '../services/StorageService';
 
 @Component({
     selector: 'app-navbar',
@@ -40,7 +41,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     readonly ChangeLink: string = NavigationConstant.PAGES_CHANGE_PASSWORD;
     constructor(public translate: TranslateService,
-        private router: Router, private cookieService: CookieService,
+        private router: Router, private cookieService: CookieService, private strService: StorageService,
         private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService) {
         const browserLang: string = translate.getBrowserLang();
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
@@ -103,6 +104,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     ChangeLanguage(language: string) {
         localStorage.setItem('lang',language);
+        this.strService.set('lang', language);
         this.translate.use(language);
     }
 
