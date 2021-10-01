@@ -34,6 +34,7 @@ export class SurveyResultReviewDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient, private fb: FormBuilder, private cookieService: CookieService, private toastr: NGXToastrService, private router: Router) {
     this.route.queryParams.subscribe(params => {
+      /* istanbul ignore next */
       if (params["SrvyOrderId"] != null) {
         this.SrvyOrderId = params["SrvyOrderId"];
       }
@@ -43,12 +44,13 @@ export class SurveyResultReviewDetailComponent implements OnInit {
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyOrder.json";
 
-    this.getSurveyTaskListData();
+    // this.getSurveyTaskListData();
   }
 
   async getSurveyTaskListData() {
     await this.httpClient.post(URLConstant.GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview, { Id: this.SrvyOrderId }).toPromise().then(
       (response) => {
+        /* istanbul ignore next */
         if (response['ReturnObject'].length > 0) {
           this.SurveyTaskForm.controls['ListSurveyTask'] = this.fb.array([]);
           for (let i = 0; i < response['ReturnObject'].length; i++) {

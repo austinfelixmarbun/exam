@@ -21,14 +21,9 @@ export class SurveyResultReviewPagingComponent implements OnInit {
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSurveyResultReview.json";
   }
 
-  viewApp(event: any){    
-    console.log(event);
+  viewApp(event: any){
     this.AppNo = event['RowObj']['TrxRefNo'];
-    this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-      window.open(environment.losR3Web + "/View/AppView?AppId=" + this.AppId + "&AppNo=" + this.AppNo, "_blank");
-    });
-
-    this.router.navigateByUrl(NavigationConstant.SURVEY_RESULT_REVIEW_PAGING, {skipLocationChange: true});
+    window.open(environment.losR3Web + "/View/AppView?AppId=" + this.AppId + "&AppNo=" + this.AppNo, "_blank");
   }
 
 }

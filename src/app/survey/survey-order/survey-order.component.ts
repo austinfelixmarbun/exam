@@ -16,8 +16,7 @@ export class SurveyOrderComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();
   SrvyOrderId: number;
 
-  constructor(private http: HttpClient, private toastr: NGXToastrService) {
-
+  constructor() {
   }
 
   ngOnInit() {
@@ -28,6 +27,5 @@ export class SurveyOrderComponent implements OnInit {
   getCallback(event){
     this.SrvyOrderId = event['RowObj']['SrvyOrderId']
     AdInsHelper.OpenSurveyOrderViewBySrvyOrderId(this.SrvyOrderId);
-    console.log(event);
   }
 }
