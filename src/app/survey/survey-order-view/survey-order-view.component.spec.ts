@@ -4,11 +4,19 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, NavigationExtras } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { SurveyOrderViewComponent } from './survey-order-view.component';
+import { formatDate } from '@angular/common';
+import { of } from 'rxjs/observable/of';
+
+const routeSpy: any = {
+  queryParams: of({
+    SrvyTaskId: 10
+  })
+};
 
 describe('SurveyOrderViewComponent', () => {
   let component: SurveyOrderViewComponent;
   let fixture: ComponentFixture<SurveyOrderViewComponent>;
-  let httpSpy, routeSpy;
+  let httpSpy;
 
   beforeEach(async () => {
     httpSpy = {
@@ -23,47 +31,47 @@ describe('SurveyOrderViewComponent', () => {
         let response: Object;
         if (url == URLConstant.GetListSrvyTaskBySrvyOrderId) {
           response = {
-              Addr: '',
-              City: '',
-              AssignDt: '',
-              CustAddr: '',
-              CustName: '',
-              CustNo: '',
-              CustPhone: '',
-              IsAddtReq: '',
-              Kecamatan: '',
-              Kelurahan: '',
-              MobileAssignmentId: '',
-              MrCustModelCode: '',
-              MrSrvyObjTypeCode: '',
-              MrSurveyTaskStatCode: '',
-              MrSurveyTypeCode: '',
-              Notes: '',
-              PrevSurveyorId: '',
-              PrevSurveyTaskNo: '',
-              RefNo: '',
-              RefReasonId: '',
-              ResultDt: '',
-              Result: '',
-              RetrieveDt: '',
-              ReviewByRefUserId: '',
-              ReviewDt: '',
-              ReviewNotes: '',
-              RT: '',
-              RW: '',
-              SrvyFormSchmId: '',
-              SrvyOrderId: '',
-              SrvyTaskId: '',
-              SrvyTaskNo: '',
-              SurveyorId: '',
-              Zipcode: ''
+            ReturnObject: [
+              {
+                Addr: '',
+                City: '',
+                AssignDt: formatDate('2021-10-01', 'yyyy-MM-dd', 'en-US'),
+                CustAddr: '',
+                CustName: '',
+                CustNo: '',
+                CustPhone: '',
+                IsAddtReq: formatDate('2021-10-01', 'yyyy-MM-dd', 'en-US'),
+                Kecamatan: '',
+                Kelurahan: '',
+                MobileAssignmentId: 10,
+                MrCustModelCode: '',
+                MrSrvyObjTypeCode: '',
+                MrSurveyTaskStatCode: '',
+                MrSurveyTypeCode: '',
+                Notes: '',
+                PrevSurveyorId: 10,
+                PrevSurveyTaskNo: '',
+                RefNo: '',
+                RefReasonId: 10,
+                ResultDt: formatDate('2021-10-01', 'yyyy-MM-dd', 'en-US'),
+                Result: '',
+                RetrieveDt: formatDate('2021-10-01', 'yyyy-MM-dd', 'en-US'),
+                ReviewByRefUserId: 10,
+                ReviewDt: formatDate('2021-10-01', 'yyyy-MM-dd', 'en-US'),
+                ReviewNotes: '',
+                RT: '',
+                RW: '',
+                SrvyFormSchmId: 10,
+                SrvyOrderId: 10,
+                SrvyTaskId: 10,
+                SrvyTaskNo: '',
+                SurveyorId: 10,
+                Zipcode: ''
+              }
+            ]
           }
         }
-      }
-    };
-    routeSpy = {
-      navigate: (commands: any[], extras?: NavigationExtras) => {
-        return new Promise<boolean>(resolve => resolve(true));
+        return of(response);
       }
     };
 
