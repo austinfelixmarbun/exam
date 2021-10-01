@@ -7,16 +7,10 @@ import { SurveyOrderViewComponent } from './survey-order-view.component';
 import { formatDate } from '@angular/common';
 import { of } from 'rxjs/observable/of';
 
-const routeSpy: any = {
-  queryParams: of({
-    SrvyTaskId: 10
-  })
-};
-
 describe('SurveyOrderViewComponent', () => {
   let component: SurveyOrderViewComponent;
   let fixture: ComponentFixture<SurveyOrderViewComponent>;
-  let httpSpy;
+  let httpSpy, routeSpy;
 
   beforeEach(async () => {
     httpSpy = {
@@ -73,6 +67,11 @@ describe('SurveyOrderViewComponent', () => {
         }
         return of(response);
       }
+    };
+    routeSpy = {
+      queryParams: of({
+        SrvyTaskId: 'srvyTaskId'
+      })
     };
 
     const conf = TestBed.configureTestingModule({

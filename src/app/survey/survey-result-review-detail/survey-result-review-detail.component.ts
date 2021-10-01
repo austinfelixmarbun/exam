@@ -9,7 +9,6 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { SrvyTaskObj } from 'app/shared/model/SrvyTaskObj.Model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 
 @Component({
@@ -92,8 +91,6 @@ export class SurveyResultReviewDetailComponent implements OnInit {
     }
     if (x != undefined) {
       surveyTaskObj.push(this.addGroupAsset(x, max + 1));
-
-
     }
   }
 

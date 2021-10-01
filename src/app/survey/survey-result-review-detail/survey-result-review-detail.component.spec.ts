@@ -10,14 +10,14 @@ import { SurveyResultReviewDetailComponent } from './survey-result-review-detail
 describe('SurveyResultReviewDetailComponent', () => {
   let component: SurveyResultReviewDetailComponent;
   let fixture: ComponentFixture<SurveyResultReviewDetailComponent>;
-  let httpSpy, toastrSpy, routeSpy, cookieServiceSpy, fbSpy;
+  let httpSpy, toastrSpy, routeSpy, cookieServiceSpy, fbSpy, routerSpy;
 
   beforeEach(async () => {
     httpSpy = {
     };
     toastrSpy = {
     };
-    routeSpy = {
+    routerSpy = {
       navigate: (commands: any[], extras?: NavigationExtras) => {
         return new Promise<boolean>(resolve => resolve(true));
       }
@@ -32,8 +32,8 @@ describe('SurveyResultReviewDetailComponent', () => {
       providers: [
         {provide: HttpClient, useValue: httpSpy},
         {provide: NGXToastrService, useValue: toastrSpy},
-        FormBuilder,
-        {provide: Router, useValue: routeSpy},
+        {provide: FormBuilder, useValue: fbSpy},
+        {provide: Router, useValue: routerSpy},
         {provide: ActivatedRoute, useValue: routeSpy},
         {provide: CookieService, useValue: cookieServiceSpy}
       ]
