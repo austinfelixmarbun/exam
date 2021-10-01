@@ -24,6 +24,7 @@ import { CustomerViewPersonalAddressComponent } from "./customer-view-personal-a
 import { CustomerViewPersonalCustomerGroupComponent } from "./customer-view-personal-customer-group/customer-view-personal-customer-group.component";
 import { CustomerViewCoyAddressComponent } from "./customer-view-coy-address/customer-view-coy-address.component";
 import { SharedModule } from "app/shared/shared.module";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { SharedModule } from "app/shared/shared.module";
     UcSubsectionModule,
     SharingComponentModule,
     UcShowErrorsModule,
-    SharedModule
+    SharedModule,
+    AdInsSharedModule
   ],
   declarations: [
     CustomerViewCoyAppListingComponent,

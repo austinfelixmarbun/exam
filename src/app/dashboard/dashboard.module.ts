@@ -14,6 +14,7 @@ import { ContextMenuModule } from '@progress/kendo-angular-menu';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { SharedModule } from 'app/shared/shared.module';
 import { DashEmptyComponent } from './dash-empty/dash-empty.component';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import { DashEmptyComponent } from './dash-empty/dash-empty.component';
         TreeViewModule,
         ContextMenuModule,
         SharingComponentModule,
-        SharedModule
+        SharedModule,
+        AdInsSharedModule
     ],
     exports: [],
     declarations: [

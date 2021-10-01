@@ -33,6 +33,7 @@ import { CustomerViewTrustingSocialModule } from 'app/view/customer-view/custome
 import { PefindoReqComponent } from './new-cust-component/component/third-party-form/pefindo/request/pefindo-req.component';
 import { ThirdPartyFormComponent } from './new-cust-component/component/third-party-form/third-party-form.component';
 import { ThirdPartyUploadService } from './new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 export const customCurrencyMaskConfig = {
     align: "right",
@@ -77,6 +78,7 @@ export const customCurrencyMaskConfig = {
         NgbModule,
         SharingComponentModule,
         SharedModule,
+        AdInsSharedModule,
         ArchwizardModule,
         MatTabsModule,
         AdInsModule,        

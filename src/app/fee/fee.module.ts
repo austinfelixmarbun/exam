@@ -7,6 +7,7 @@ import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { FeeAddEditComponent } from './fee-add-edit/fee-add-edit.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     CommonModule,
     FeeRoutingModule,
     AdInsModule,
+    AdInsSharedModule,
     NgMultiSelectDropDownModule
   ],
   providers: [

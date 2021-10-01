@@ -15,6 +15,7 @@ import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewPersonalJobDataEmpComponent } from "./customer-view-personal-job-data-emp.component";
 import { CustomerViewPersonalJobDataEmpRoutingModule } from "./customer-view-personal-job-data-emp-routing.module";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 
 
@@ -30,6 +31,7 @@ import { CustomerViewPersonalJobDataEmpRoutingModule } from "./customer-view-per
     UcviewgenericModule,
     UcgridviewModule,
     NgbModule,
+    AdInsSharedModule,
     SharingModule,
     ArchwizardModule,
     ReactiveFormsModule,
