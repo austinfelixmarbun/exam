@@ -20,12 +20,6 @@
             "type": "text",
             "label": "Customer Name",
             "property": "CustName"
-          },
-          {
-            "type": "callback",
-            "key": "ViewProdOffering",
-            "label": "Product Offering",
-            "property": "ProdOfferingName"
           }
         ],
         "querystring": {

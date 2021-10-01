@@ -57,10 +57,10 @@ export class RolePickService {
                     RequestDateTime: item.BusinessDt,
                     RowVersion: "",
                     Ip: "",
-                    ModuleCode:environment.Module
+                    ModuleCode: environment.Module
 
                 };
-                this.http.post(AdInsConstant.LoginByRole, roleObject, { withCredentials: true}).subscribe(
+                this.http.post(AdInsConstant.LoginByRole, roleObject, { withCredentials: true }).subscribe(
                     (response) => {
                         //Cookie sudah diambil dari BE (Di set manual dulu)
 
@@ -71,12 +71,14 @@ export class RolePickService {
                         AdInsHelper.SetCookie(this.cookieService, "BusinessDate", DateParse);
                         AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
                         AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
-                        
-                        AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.MENU]));
                         AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
-                        this.router.navigate([NavigationConstant.DASHBOARD]);
-                    }
-                )
+
+                        this.http.post(AdInsConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, {RoleCode: item.RoleCode, ModuleCode: environment.Module}, { withCredentials: true }).subscribe(
+                            (response) => {
+                                AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
+                                this.router.navigate([NavigationConstant.DASHBOARD]);
+                            });
+                    });
             }
             //Ini kalau dia ada lebih dari 1 Role, maka buka modal
             else {

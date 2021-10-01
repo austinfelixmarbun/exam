@@ -15,7 +15,6 @@ import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneri
 import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcapprovalhistModule, UcapprovalhistComponent } from "@adins/ucapprovalhist";
 import { SharedModule } from "app/shared/shared.module";
-import { TranslateModule } from "@ngx-translate/core";
 
 import { SurveyTaskViewRoutingModule } from './survey-task-view-routing.module';
 import { SurveyTaskViewComponent } from './survey-task-view.component';
@@ -44,7 +43,6 @@ import { ViewSurveyTaskDetailComponent } from './view-survey-task-detail/view-su
         SharingComponentModule,
         UcapprovalhistModule,
         UcShowErrorsModule,
-        TranslateModule,
         SharedModule
   ],
   entryComponents: [
@@ -54,7 +52,6 @@ import { ViewSurveyTaskDetailComponent } from './view-survey-task-detail/view-su
       UcapprovalhistComponent,
   ],
   exports: [
-      TranslateModule
   ]
 })
 export class SurveyTaskViewModule { }

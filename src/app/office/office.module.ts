@@ -24,7 +24,6 @@ import { OfficeAreaMemberPagingComponent } from './office-area/office-area-membe
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { TranslateModule } from '@ngx-translate/core';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 
 
@@ -45,8 +44,7 @@ import { AdInsModule } from 'app/components/adins-module/adins.module';
     UclookupgenericModule,
     UcShowErrorsModule,
     UcviewgenericModule,
-    UcaddtotempModule,
-    TranslateModule
+    UcaddtotempModule
   ],
   declarations: [
     OfficeComponent,

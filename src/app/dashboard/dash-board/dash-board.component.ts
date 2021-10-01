@@ -45,17 +45,26 @@ export class DashBoardComponent implements OnInit {
     this.Item.RequestObj.ModuleCode = CommonConstant.MODULE_FOU;
 
     let integrationObj;
+    let integrationObj2;
 
     if(environment.isCore){
       integrationObj = new ThingsToDoIntegrationV2Obj();
       integrationObj.BaseUrl = AdInsConstant.GetThingsToDoCamunda;
       integrationObj.ApiPath = "";
-      integrationObj.RequestObj.OfficeCode = this.officeCode;
+      integrationObj.RequestObj.OfficeCode = "";
       integrationObj.RequestObj.UserName = this.username;
       integrationObj.RequestObj.OfficeRoleCodes = [this.roleCode, this.roleCode + "-" + this.officeCode, this.officeCode];
+      
+      integrationObj2 = new ThingsToDoIntegrationV2Obj();
+      integrationObj2.BaseUrl = AdInsConstant.GetListApvTaskListByUsernameAndRoleCodeForThingsToDo;
+      integrationObj2.ApiPath = "";
+      integrationObj2.RequestObj.OfficeCode = this.officeCode;
+      integrationObj2.RequestObj.UserName = this.username;
+      integrationObj2.RequestObj.RoleCode = this.roleCode;
+      this.Item.RequestObj.IntegrationObj.push(integrationObj2);
     }else{
       integrationObj = new ThingsToDoIntegrationObj();
-      integrationObj.RequestObj.Office = this.officeCode;
+      integrationObj.RequestObj.Office = "";
       integrationObj.RequestObj.Role = this.roleCode;
       integrationObj.RequestObj.UserName = this.username;
       
