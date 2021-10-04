@@ -6,8 +6,7 @@ import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-survey-task',
-  templateUrl: './survey-task.component.html',
-  styleUrls: ['./survey-task.component.css']
+  templateUrl: './survey-task.component.html'
 })
 export class SurveyTaskComponent implements OnInit {
 
@@ -25,7 +24,5 @@ export class SurveyTaskComponent implements OnInit {
   getCallback(event){
     this.srvyTaskId = event['RowObj']['SrvyTaskId'];
     AdInsHelper.OpenSurveyTaskViewBySrvyTaskId(this.srvyTaskId);
-    
   }
-
 }
