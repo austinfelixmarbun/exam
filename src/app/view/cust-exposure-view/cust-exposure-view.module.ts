@@ -17,6 +17,7 @@ import { CustExposureViewRoutingModule } from "./cust-exposure-view-routing.modu
 import { CustExposureViewComponent } from "./cust-exposure-view.component";
 import { ObligorExposureComponent } from './obligor-exposure/obligor-exposure.component';
 import { CustExposureComponent } from './cust-exposure/cust-exposure.component';
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 @NgModule({
     imports: [
         CustExposureViewRoutingModule,
@@ -30,6 +31,7 @@ import { CustExposureComponent } from './cust-exposure/cust-exposure.component';
         UcviewgenericModule,
         UcgridviewModule,
         NgbModule,
+        AdInsSharedModule,
         SharingModule,
         ArchwizardModule,
         ReactiveFormsModule,

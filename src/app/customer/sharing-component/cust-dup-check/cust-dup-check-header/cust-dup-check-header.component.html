@@ -9,11 +9,11 @@
                 {{CustType}} </h4>
             </div>
             <div class="col-md-4" style="text-align-last: right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Back()" translate>
-                <i class="fa fa-arrow-left"></i> Back
+              <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Back()">
+                <i class="fa fa-arrow-left"></i>&nbsp;<span translate>Back</span>
               </button>
-              <button [hidden]="IsLock" type="button" class="btn btn-raised btn-primary" (click)="SaveForm()" translate>
-                <i class="far fa-check-square"></i> New Customer
+              <button [hidden]="IsLock" type="button" class="btn btn-raised btn-primary" (click)="SaveForm()">
+                <i class="far fa-check-square"></i>&nbsp;<span translate>New Customer</span>
               </button>
             </div>
           </div>

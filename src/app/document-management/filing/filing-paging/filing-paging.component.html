@@ -6,12 +6,12 @@
         <div class="form-actions right">
           <span style="display: block; float:right;">
             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" 
-            [queryParams]="{CabinetCode: Cabinet.CabinetCode}" translate>
-              <i class="fa fa-arrow-circle-left"></i> Back
+            [queryParams]="{CabinetCode: Cabinet.CabinetCode}">
+              <i class="fa fa-arrow-circle-left"></i>&nbsp;<span translate>Back</span>
             </button>
             <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="[AddLink]" 
-            [queryParams]="{ Mode: 'Add', CabinetCode: Cabinet.CabinetCode, RackCode: Rack.RackCode}" translate>
-              <i class="ft-plus-circle"></i> Add
+            [queryParams]="{ Mode: 'Add', CabinetCode: Cabinet.CabinetCode, RackCode: Rack.RackCode}">
+              <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
             </button>
           </span>
         </div>
@@ -64,16 +64,16 @@
               <thead>
                 <tr class="table-header">
                   <th>
-                    <span class="thead-header" translate>Filing Code </span>
+                    <span class="thead-header" translate>Filing Code</span>
                   </th>
                   <th>
-                    <span class="thead-header" translate>Filing Name </span>
+                    <span class="thead-header" translate>Filing Name</span>
                   </th>
                   <th>
-                    <span class="thead-header" translate>Active </span>
+                    <span class="thead-header" translate>Active</span>
                   </th>
                   <th>
-                    <span class="thead-header" translate>Edit </span>
+                    <span class="thead-header" translate>Edit</span>
                   </th>
                 </tr>
               </thead>

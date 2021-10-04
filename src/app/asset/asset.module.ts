@@ -34,6 +34,7 @@ import { UcaddtotempModule } from "@adins/ucaddtotemp";
 import { AssetAttributeComponent } from './asset-attribute/asset-attribute.component';
 import { AssetAttributeDetailComponent } from './asset-attribute/asset-attribute-detail/asset-attribute-detail.component';
 import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -53,6 +54,7 @@ export const customCurrencyMaskConfig = {
     CommonModule,
     AssetRoutingComponent,
     AdInsModule,
+    AdInsSharedModule,
     SharingComponentModule,
     UcaddtotempModule,    
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),

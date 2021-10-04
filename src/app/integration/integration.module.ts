@@ -6,12 +6,14 @@ import { MatRadioModule } from "@angular/material";
 import { UcSubsectionModule } from "@adins/uc-subsection";
 import { IntegrationRoutingModule } from "./integration-routing.module";
 import { DailyMasterContinuousFormComponent } from './daily-master-continuous-form/daily-master-continuous-form.component';
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 @NgModule({
     imports: [
         CommonModule,
         MatRadioModule,
         AdInsModule,
+        AdInsSharedModule,
         UcSubsectionModule,
         IntegrationRoutingModule,
     ],

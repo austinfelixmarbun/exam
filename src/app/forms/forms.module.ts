@@ -26,6 +26,7 @@ import { CustomerModule } from 'app/customer/customer.module';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
     imports: [
@@ -33,6 +34,7 @@ import { UcgridfooterModule } from '@adins/ucgridfooter';
         FormsRoutingModule,
         ReactiveFormsModule,
         FormsModule,
+        AdInsSharedModule,
         NGXFormWizardModule,
         ArchwizardModule,
         CustomFormsModule,

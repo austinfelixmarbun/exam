@@ -20,6 +20,7 @@ import { CustomerViewHeaderCompanyComponent } from "./customer-view-header-compa
 import { CustomerViewRoutingModule } from "./customer-view-routing.module";
 import { CustomerViewIframeGenericComponent } from "./customer-view-iframe-generic/customer-view-iframe-generic.component";
 import { SharedModule } from "app/shared/shared.module";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import { SharedModule } from "app/shared/shared.module";
     SharingComponentModule,
     UcShowErrorsModule,
     SharedModule,
-    
+    AdInsSharedModule
     
   ],
   declarations: [

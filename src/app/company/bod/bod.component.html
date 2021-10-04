@@ -1,11 +1,10 @@
 <div class="ucSearch-Button-Right" >
         <span class="mr-1" >
-                <button type="button" class="backButton"  [routerLink]="[CancelLink]" skipLocationChange translate>
-                <i class="fa fa-arrow-left"> </i> Back </button></span>
+                <button type="button" class="backButton"  [routerLink]="[CancelLink]" skipLocationChange>
+                <i class="fa fa-arrow-left"> </i>&nbsp;<span translate>Back</span> </button></span>
     <span class="mr-1" >
-            <button type="button" class="btn btn-raised btn-primary mr-1 btn-sm" [queryParams]="{refCoyId:refCoyId}" [routerLink]="[AddLink]" skipLocationChange
-            translate>
-            <i class="ft-plus-circle"></i> Add
+            <button type="button" class="btn btn-raised btn-primary mr-1 btn-sm" [queryParams]="{refCoyId:refCoyId}" [routerLink]="[AddLink]" skipLocationChange>
+            <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
           </button>
         </span>
       </div>

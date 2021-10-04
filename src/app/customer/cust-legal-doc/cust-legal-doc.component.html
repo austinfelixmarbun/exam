@@ -1,6 +1,6 @@
 <span class="mr-1 pull-right">
-  <button type="button" class="addButton" (click)="openCustLegalDocDetail()" translate>
-    <i class="ft-plus-circle"></i> Add
+  <button type="button" class="addButton" (click)="openCustLegalDocDetail()">
+    <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
   </button>
 </span>
 <lib-ucSubsection [id]="'CustLegalDocSectionId'" [title]="'Legal Doc Listing'" [panel]="'CustLegalDocSection'">
@@ -74,7 +74,7 @@
   <!-- <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" translate>
     <i class="far fa-window-close"></i> Cancel
   </button> -->
-  <button type="button" class="btn btn-raised btn-primary" (click)="next()" translate>
-    <i class="far fa-check-square"></i> Save and Continue
+  <button type="button" class="btn btn-raised btn-primary" (click)="next()">
+    <i class="far fa-check-square"></i>&nbsp;<span translate>Save and Continue</span>
   </button>
 </div>

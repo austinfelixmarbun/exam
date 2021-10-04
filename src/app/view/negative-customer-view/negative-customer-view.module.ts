@@ -16,6 +16,7 @@ import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { NegativeCustomerViewComponent } from "./negative-customer-view.component";
 import { NegativeCustomerViewRoutingModule } from "./negative-customer-view-routing.module";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { NegativeCustomerViewRoutingModule } from "./negative-customer-view-rout
     UcviewgenericModule,
     UcgridviewModule,
     NgbModule,
+    AdInsSharedModule,
     SharingModule,
     ArchwizardModule,
     ReactiveFormsModule,

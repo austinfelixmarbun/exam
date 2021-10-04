@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharingModule } from 'app/shared/sharing.module';
 import { ArchwizardModule } from 'angular-archwizard';
 import { UcSubsectionModule } from '@adins/uc-subsection';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
   declarations: [PefindoViewOtherLiabilitiesComponent],
@@ -16,6 +17,7 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
     PefindoViewOtherLiabilitiesRoutingModule,
     HttpModule,
     NgbModule,
+    AdInsSharedModule,
     SharingModule,
     ArchwizardModule,
     UcSubsectionModule

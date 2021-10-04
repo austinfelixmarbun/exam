@@ -9,6 +9,7 @@ import { UploadLicenseComponent } from './upload-license/upload-license.componen
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { DetailLicenseComponent } from './detail-license/detail-license.component';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
   declarations: [LicenseComponent, UploadLicenseComponent, DetailLicenseComponent],
@@ -16,6 +17,7 @@ import { DetailLicenseComponent } from './detail-license/detail-license.componen
     CommonModule,
     LicenseRoutingModule,
     AdInsModule,
+    AdInsSharedModule,
     UcSubsectionModule,
     UcShowErrorsModule
   ],

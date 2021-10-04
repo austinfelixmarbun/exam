@@ -39,6 +39,12 @@
   "Organization Name":"Nama Organisasi",
   "Virtual Office":"Kantor Maya",
   "Search":"Cari",
+  "Reset": "Hapus",
+  "Save": "Simpan",
+  "Add": "Tambah",
+  "Edit": "Edit",
+  "Back": "Kembali",
+  "Delete": "Hapus",
   "Cancel":"Batalkan",
   "Product Type":"Tipe Produk",
   "Product Name":"Nama Produk",
@@ -73,6 +79,7 @@
   "Date":"Tanggal",
   "DATE":"Tanggal",
   "ACTION":"Aksi",
+  "Select":"Pilih",
 
 
 

@@ -16,6 +16,7 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewComponent } from "../customer-view.component";
 import { CustomerViewCustomerGroupComponent } from "./customer-view-customer-group.component";
 import { CustomerViewGroupRoutingModule } from "./customer-view-group-routing.module";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 
 
@@ -31,6 +32,7 @@ import { CustomerViewGroupRoutingModule } from "./customer-view-group-routing.mo
     UcviewgenericModule,
     UcgridviewModule,
     NgbModule,
+    AdInsSharedModule,
     SharingModule,
     ArchwizardModule,
     ReactiveFormsModule,

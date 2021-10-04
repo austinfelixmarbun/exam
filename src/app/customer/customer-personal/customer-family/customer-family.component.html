@@ -2,7 +2,7 @@
 <app-customer-family-detail *ngIf="Mode != 'Paging' && Mode != 'DuplicateChecking'" [listCustIdToExclude]="FamilyIdToExclude" [customerPersonalFamilyId]="CustPersonalFamilyId" [custIdInput]="CustId" [isMarried]="isMarried" (ResponseSaveFamily)="DetailToPagingHandler($event)"></app-customer-family-detail>
 <app-customer-personal-duplicate-check *ngIf="Mode == 'DuplicateChecking'" [IsFromCustFamilyTab]="IsFromFamily" [CustFamilyTabData]="FamilyData" [IsFromCustMgmntShareholder]="IsFromShareholder" [CustMgmntShareholderData]="ShareholderObject" (ResponseSaveData)="DetailToPagingHandler($event)"></app-customer-personal-duplicate-check>
 <div *ngIf="Mode == 'Paging'" class="form-actions right" style="text-align: right;">
-  <button type="button" class="btn btn-raised btn-primary" (click)="next()" translate>
-    <i class="far fa-check-square"></i> Save and Continue
+  <button type="button" class="btn btn-raised btn-primary" (click)="next()">
+    <i class="far fa-check-square"></i>&nbsp;<span translate>Save and Continue</span>
   </button>
 </div>

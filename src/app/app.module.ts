@@ -31,6 +31,7 @@ import { CookieModule } from 'ngx-cookie';
 import { StorageService } from './shared/services/StorageService';
 import { NGXToastrService } from './components/extra/toastr/toastr.service';
 import { ClaimTaskService } from './shared/claimTask.service';
+import { AdInsSharedModule } from './components/adins-module/adins-shared.module';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -50,6 +51,7 @@ export function createTranslateLoader(http: HttpClient) {
         AppRoutingModule,
         NgxSpinnerModule,
         SharedModule,
+        AdInsSharedModule,
         HttpClientModule,
         ToastrModule.forRoot(),
         NgbModule.forRoot(),

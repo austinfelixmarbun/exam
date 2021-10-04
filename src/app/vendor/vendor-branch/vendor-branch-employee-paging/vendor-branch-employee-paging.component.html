@@ -11,11 +11,11 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
     <button type="button" class="backButton" [routerLink]="[CancelLink]" skipLocationChange [queryParams]= "{ MrVendorCategoryCode: this.MrVendorCategoryCode  }"   translate>
-      <i class="fa fa-arrow-left"> </i> Back 
+      <i class="fa fa-arrow-left"> </i>&nbsp;<span translate>Back</span>
     </button>
     <button type="button" class="addButton" [routerLink]="[AddLink]" skipLocationChange
-      [queryParams]="{VendorId: VendorId}" translate>
-      <i class="ft-plus-circle"></i> Add
+      [queryParams]="{VendorId: VendorId}">
+      <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
     </button>
   </span>
 </div>

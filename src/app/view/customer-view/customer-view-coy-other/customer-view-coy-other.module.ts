@@ -15,6 +15,7 @@ import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewCoyOtherRoutingModule } from "./customer-view-coy-other-routing.module";
 import { CustomerViewCoyOtherComponent } from "./customer-view-coy-other.component";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 
 
@@ -30,6 +31,7 @@ import { CustomerViewCoyOtherComponent } from "./customer-view-coy-other.compone
     UcviewgenericModule,
     UcgridviewModule,
     NgbModule,
+    AdInsSharedModule,
     SharingModule,
     ArchwizardModule,
     ReactiveFormsModule,

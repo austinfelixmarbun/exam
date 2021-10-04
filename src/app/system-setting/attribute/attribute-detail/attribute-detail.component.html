@@ -128,7 +128,7 @@
                 <div class="col-md-9" *ngIf="RefAttrForm.controls.AttrInputType.value == 'L'" formArrayName="AttrValue">
                   <div class="col-md-12" style="padding: 0;">
                     <button type="button" class="btn btn-raised btn-primary" (click)="AttrValueRowHandler()">
-                      <i class="fas fa-plus"></i> Add Value
+                      <i class="fas fa-plus"></i>&nbsp;<span translate>Add Value</span>
                     </button>
                   </div>
                   <div class="col-md-12 row" *ngFor="let valueRow of RefAttrForm.get('AttrValue').controls; index as i"
@@ -173,10 +173,10 @@
           <div class="form-actions right">
             <span class="mr-1">
               <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Back()">
-                <i class="far fa-window-close"></i> Cancel
+                <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
               </button>
-              <button type="submit" class="btn btn-raised btn-primary" translate>
-                <i class="far fa-check-square"></i> Save
+              <button type="submit" class="btn btn-raised btn-primary">
+                <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
               </button>
             </span>
           </div>

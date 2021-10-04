@@ -5,12 +5,12 @@
 
         <div class="form-actions right">
           <span style="display: block; float:right;">
-            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" translate>
-              <i class="fa fa-arrow-circle-left"></i> Back
+            <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]">
+              <i class="fa fa-arrow-circle-left"></i>&nbsp;<span translate>Back</span>
             </button>
             <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="[AddLink]" 
-            [queryParams]="{ Mode: 'Add', CabinetCode: Cabinet.CabinetCode}" translate>
-              <i class="ft-plus-circle"></i> Add
+            [queryParams]="{ Mode: 'Add', CabinetCode: Cabinet.CabinetCode}">
+              <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
             </button>
           </span>
         </div>
@@ -47,19 +47,19 @@
               <thead>
                 <tr class="table-header">
                   <th>
-                    <span class="thead-header" translate>Rack Code </span>
+                    <span class="thead-header" translate>Rack Code</span>
                   </th>
                   <th>
-                    <span class="thead-header" translate>Rack Name </span>
+                    <span class="thead-header" translate>Rack Name</span>
                   </th>
                   <th>
-                    <span class="thead-header" translate>Active </span>
+                    <span class="thead-header" translate>Active</span>
                   </th>
                   <th>
-                    <span class="thead-header" translate>Filing </span>
+                    <span class="thead-header" translate>Filing</span>
                   </th>
                   <th>
-                    <span class="thead-header" translate>Edit </span>
+                    <span class="thead-header" translate>Edit</span>
                   </th>
                 </tr>
               </thead>

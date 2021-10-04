@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { FooterComponent } from "app/shared/footer/footer.component";
 import { NavbarComponent } from "app/shared/navbar/navbar.component";
 import { SidebarComponent } from "app/shared/sidebar/sidebar.component";
@@ -15,6 +14,7 @@ import { DmsIframeComponent } from './dms-iframe/dms-iframe.component';
 import { SafePipe } from './pipe/safepipe';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -29,7 +29,6 @@ export function createTranslateLoader(http: HttpClient) {
         NotificationSidebarComponent,
         ToggleFullscreenDirective,
         NgbModule,
-        TranslateModule,
         DmsIframeComponent,
         SafePipe
     ],
@@ -37,13 +36,7 @@ export function createTranslateLoader(http: HttpClient) {
         RouterModule,
         CommonModule,
         NgbModule,
-        TranslateModule.forChild({
-          loader: {
-              provide: TranslateLoader,
-              useFactory: createTranslateLoader,
-              deps: [HttpClient]
-          }
-        }),
+        AdInsSharedModule,
         ContextMenuModule.forRoot(),
         NgMultiSelectDropDownModule
     ],
