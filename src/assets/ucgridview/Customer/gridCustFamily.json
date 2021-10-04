@@ -38,9 +38,14 @@
             "name": "BirthDt"
         },
         {
-            "type": "sort",
+            "type": "label",
             "position": "center",
             "label": "Action"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Delete"
         }
     ],
     "bodyList": [
@@ -84,7 +89,6 @@
                         {
                             "conditions": [
                                 {
-                                    "isUser": false,
                                     "property": "MrCustRelationship",
                                     "value": "",
                                     "restriction": "NEQ"
@@ -100,6 +104,31 @@
                                         "property": "FamilyId"
                                     }
                                 ]
+                            },
+                            "isHide": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "MrCustRelationship",
+                                    "value": "",
+                                    "restriction": "NEQ"
+                                }
+                            ],
+                            "result": {
+                                "type" : "delete",
+                                "property" : "CustPersonalFamilyId"
                             },
                             "isHide": false
                         }

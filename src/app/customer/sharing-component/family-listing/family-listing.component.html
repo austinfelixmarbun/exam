@@ -9,7 +9,7 @@
   <lib-ucSubsection [id]="'FamilyListingId'" [title]="'Family Listing'" [panel]="'FamilyListing'">
   </lib-ucSubsection>
   <div id="FamilyListing">
-    <lib-ucgridview [gridInput]="inputGridObj" (callback)="event($event)"></lib-ucgridview>
+    <lib-ucgridview [gridInput]="inputGridObj" (callback)="event($event)" (isRefresh)="GetListPaging()"></lib-ucgridview>
    
     <div class="form-actions right" style="text-align: right;">
         <button type="submit" class="btn btn-raised btn-primary" (click)="next()" translate>
