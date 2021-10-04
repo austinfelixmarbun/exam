@@ -58,7 +58,7 @@ export class FamilyListingComponent implements OnInit {
   BindGridViewObj() {
     this.inputGridObj = new InputGridObj();
     this.inputGridObj.pagingJson = "./assets/ucgridview/Customer/gridCustFamily.json";
-
+    this.inputGridObj.deleteUrl = URLConstant.DeleteCustPersonalFamily;
     this.inputGridObj.resultData = { Data: [] };
   }
 
@@ -73,10 +73,12 @@ export class FamilyListingComponent implements OnInit {
   }
 
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
-  event(ev: { Key: string, RowObj: FamilyListingObj }) {
-    this.selectedCustId = ev.RowObj.FamilyId;
-    this.selectedCustPersonalFamilyId = ev.RowObj.CustPersonalFamilyId;
-    this.addCustFamily(false);
+  event(ev) {
+    if(ev.Key = 'Edit'){
+      this.selectedCustId = ev.RowObj.FamilyId;
+      this.selectedCustPersonalFamilyId = ev.RowObj.CustPersonalFamilyId;
+      this.addCustFamily(false);
+    }
   }
 
   ReloadPaging() {
