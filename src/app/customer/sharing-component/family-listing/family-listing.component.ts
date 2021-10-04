@@ -78,8 +78,6 @@ export class FamilyListingComponent implements OnInit {
       this.selectedCustId = ev.RowObj.FamilyId;
       this.selectedCustPersonalFamilyId = ev.RowObj.CustPersonalFamilyId;
       this.addCustFamily(false);
-      console.log('edit');
-      console.log(ev);
     }
   }
 
