@@ -33,7 +33,6 @@ export class SurveyResultReviewDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient, private fb: FormBuilder, private cookieService: CookieService, private toastr: NGXToastrService, private router: Router) {
     this.route.queryParams.subscribe(params => {
-      /* istanbul ignore next */
       if (params["SrvyOrderId"] != null) {
         this.SrvyOrderId = params["SrvyOrderId"];
       }

@@ -15,8 +15,11 @@ import { createTranslateLoader } from "app/app.module";
 import { HttpClient } from "@angular/common/http";
 import { SurveyTaskViewModule } from "./survey-task-view/survey-task-view.module";
 import { SharedModule } from "app/shared/shared.module";
+import { AdInsModule } from "app/components/adins-module/adins.module";
+
 @NgModule({
   imports: [
+    AdInsModule,
     ViewRoutingModule,
     CommonModule,
     HttpModule,
