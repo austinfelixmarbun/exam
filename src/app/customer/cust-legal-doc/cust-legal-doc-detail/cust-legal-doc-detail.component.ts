@@ -9,7 +9,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { DatePipe } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import { CustCompanyLegalDocObj } from 'app/shared/model/CustCompanyLegalDocObj.Model';
 import { String } from 'typescript-string-operations';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
@@ -23,6 +23,8 @@ export class CustLegalDocDetailComponent implements OnInit {
   @Input() CustCompanyId: number;
   @Input() CustLegalDocs: Array<CustCompanyLegalDocObj>;
   @Input() ListLegalDocCantDuplicate: Array<string>;
+  @Input() CustCompanyLegalDocId: number;
+  @Input() Mode: string = "Add";
 
   legalDocTypeList: any;
   businessDtMin: Date;
@@ -67,6 +69,25 @@ export class CustLegalDocDetailComponent implements OnInit {
         });
       }
     );
+
+    if(this.Mode == "Edit"){
+      this.httpClient.post(URLConstant.GetCustCompanyLegalDocByCustCompanyLegalDocId, {Id : this.CustCompanyLegalDocId}).subscribe(
+        (response: CustCompanyLegalDocObj) => {
+          this.CustCompanyLegalDocForm.patchValue({
+            CustCompanyLegalDocId: response.CustCompanyLegalDocId,
+            CustCompanyId: response.CustCompanyId,
+            MrLegalDocTypeCode: response.MrLegalDocTypeCode,
+            DocNo: response.DocNo,
+            DocDt: formatDate(response.DocDt, 'yyyy-MM-dd', 'en-US'),
+            DocExpiredDt: formatDate(response.DocExpiredDt, 'yyyy-MM-dd', 'en-US'),
+            DocNotes: response.DocNotes,
+            NotaryName: response.NotaryName,
+            NotaryLocation: response.NotaryLocation,
+            RowVersion: response.RowVersion
+          });
+        }
+      );
+    }
   }
 
   async Save() {
@@ -78,8 +99,9 @@ export class CustLegalDocDetailComponent implements OnInit {
     let expDtValidate = datePipe.transform(expDt, "yyyy-MM-dd");
     let businessDtValidate = datePipe.transform(this.businessDtMin, "yyyy-MM-dd");
     let existCustLegalDoc = this.CustLegalDocs.find(x => x.MrLegalDocTypeCode == this.CustCompanyLegalDocForm.value.MrLegalDocTypeCode
-                                                && x.DocNo == this.CustCompanyLegalDocForm.value.DocNo);
-    
+                                                && x.DocNo == this.CustCompanyLegalDocForm.value.DocNo
+                                                && x.CustCompanyLegalDocId != this.CustCompanyLegalDocForm.value.CustCompanyLegalDocId);
+
     if(expDtValidate <= businessDtValidate){
       this.toastr.warningMessage(ExceptionConstant.EXP_DT_MUST_HIGHER_THAN_BD);
       return;
@@ -99,10 +121,18 @@ export class CustLegalDocDetailComponent implements OnInit {
       }
     }
 
-    this.httpClient.post(URLConstant.AddCustCompanyLegalDoc, custCompanyLegalDocData).subscribe(
-      (response) => {
-        this.activeModal.close(response);
-      }
-    );
+    if(this.Mode == "Add"){
+      this.httpClient.post(URLConstant.AddCustCompanyLegalDoc, custCompanyLegalDocData).subscribe(
+        (response) => {
+          this.activeModal.close(response);
+        }
+      );
+    }else{
+      this.httpClient.post(URLConstant.EditCustCompanyLegalDoc, custCompanyLegalDocData).subscribe(
+        (response) => {
+          this.activeModal.close(response);
+        }
+      );
+    }
   }
 }

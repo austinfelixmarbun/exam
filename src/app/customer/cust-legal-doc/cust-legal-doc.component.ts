@@ -104,6 +104,34 @@ export class CustLegalDocComponent implements OnInit {
     );
   }
 
+  editCustLegalDocDetail(CustCompanyLegalDocId: number) {
+    const modalCustLegalDoc = this.modalService.open(CustLegalDocDetailComponent);
+    modalCustLegalDoc.componentInstance.CustCompanyLegalDocId = CustCompanyLegalDocId;
+    modalCustLegalDoc.componentInstance.Mode = "Edit";
+    modalCustLegalDoc.componentInstance.CustLegalDocs = this.custLegalDocs;
+    modalCustLegalDoc.componentInstance.ListLegalDocCantDuplicate = this.ListLegalDocCantDuplicate;
+    modalCustLegalDoc.result.then(
+      (response) => {
+        this.spinner.show();
+        var custCompanyLegalDoc = new CustCompanyLegalDocObj();
+        custCompanyLegalDoc.CustCompanyId = this.CustCompanyId;
+        this.httpClient.post(URLConstant.GetListViewCustCompanyLegalDocByCustCompanyId, {Id : this.CustCompanyId}).subscribe(
+          (response: any) => {
+            this.custLegalDocs = response.ListCustCompanyLegalDoc;
+          }
+        );
+        this.spinner.hide();
+        this.toastr.successMessage(response["message"]);
+      }
+    ).catch(
+      (error) => {
+        if (error != 0) {
+          console.log(error);
+        }
+      }
+    );
+  }
+
   deleteCustLegalDoc(custCompanyLegalDocId: number, idx: number) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       let reqObj: GenericObj = new GenericObj();
