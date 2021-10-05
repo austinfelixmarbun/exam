@@ -116,7 +116,7 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
 
   ClearCustForm() {
     this.CustomerForm = this.fb.group({
-      MrCustModelCode: [''],
+      MrCustModelCode: ['', [Validators.required]],
       CustName: ['', [Validators.required]],
       MrCompanyTypeCode: ['', [Validators.required]],
       TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
