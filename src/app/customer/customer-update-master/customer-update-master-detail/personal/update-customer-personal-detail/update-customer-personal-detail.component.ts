@@ -40,6 +40,8 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
   appEducationDescr: string;
   appReligionDescr: string;
   ReqCustDataTrxIdObj: GenericObj = new GenericObj();
+  CountryCode: string = "";
+  CountryName: string = "";
 
   CustomerDetailForm = this.fb.group({
     CustId: [0],
@@ -124,14 +126,17 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
         this.CustomerDetailForm.patchValue({ ...detailData["MasterCustDetail"] });
 
         var country = response[5];
+        let splitCodeDesc = country["GsValue"].split(';');
+        this.CountryCode = splitCodeDesc[0];
+        this.CountryName = splitCodeDesc[1];
         var criteriaList = new Array();
         var criteriaObj = new CriteriaObj();
         criteriaObj.restriction = AdInsConstant.RestrictionNeq;
         criteriaObj.propName = 'COUNTRY_CODE';
-        criteriaObj.value = country["GsValue"];
+        criteriaObj.value = this.CountryCode;
         criteriaList.push(criteriaObj);
         this.lookUpObj.addCritInput = criteriaList;
-        detailData["GsValueCountry"] = country["GsValue"];
+        detailData["GsValueCountry"] = this.CountryCode;
 
         criteriaList = new Array();
         criteriaObj = new CriteriaObj();
