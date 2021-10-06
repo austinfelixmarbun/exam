@@ -14,17 +14,17 @@ import { formatDate } from '@angular/common';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
     count = 0;
-    constructor(public errorDialogService: ErrorDialogService, private spinner: NgxSpinnerService, private router: Router, public toastr: ToastrService, private cookieService: CookieService) { }
+    constructor(public errorDialogService: ErrorDialogService, private spinner: NgxSpinnerService, private router: Router, private toastr: NGXToastrService, private cookieService: CookieService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log(request);
         if (request.method == "POST" && (request.body == null || request.body.isLoading == undefined || request.body.isLoading == true)) {
@@ -123,7 +123,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
                             if (event.body.HeaderObj.StatusCode == '400' && event.body.HeaderObj.ErrorMessages != undefined) { //DTO
                                 for (var i = 0; i < event.body.HeaderObj.ErrorMessages.length; i++) {
-                                    this.toastr.error(event.body.HeaderObj.ErrorMessages[i].Message, 'Status: ' + event.body.HeaderObj.StatusCode, { "tapToDismiss": true, "disableTimeOut": true, "closeButton": true });
+                                    this.toastr.typeErrorCopyOnClick(event.body.HeaderObj.ErrorMessages[i].Message, 'Status: ' + event.body.HeaderObj.StatusCode);
                                 }
                             } else {
                                 let data = {};
@@ -131,7 +131,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                                     reason: event.body.HeaderObj.Message ? event.body.HeaderObj.Message : '',
                                     status: event.body.HeaderObj.StatusCode
                                 };
-                                this.toastr.error(data['reason'], 'Status: ' + data['status'], { "tapToDismiss": true, "disableTimeOut": true, "closeButton": true });
+                                this.toastr.typeErrorCopyOnClick(data['reason'], 'Status: ' + data['status']);
                                 console.log(event.body);
                             }
 
@@ -147,16 +147,16 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 if (error.error != null) {
                     if (error.error.ErrorMessages != null) {
                         for (var i = 0; i < error.error.ErrorMessages.length; i++) {
-                            this.toastr.error(error.error.ErrorMessages[i].Message, 'Status: ' + error.error.StatusCode, { "tapToDismiss": true, "disableTimeOut": true, "closeButton": true });
+                            this.toastr.typeErrorCopyOnClick(error.error.ErrorMessages[i].Message, 'Status: ' + error.error.StatusCode);
                         }
                     } else if (error.error.Message != null) {
-                        this.toastr.error(error.error.Message, 'Status: ' + error.error.StatusCode, { "tapToDismiss": true, "disableTimeOut": true, "closeButton": true });
+                        this.toastr.typeErrorCopyOnClick(error.error.Message, 'Status: ' + error.error.StatusCode);
                     }else {
-                        this.toastr.error(error.url, 'Status: ' + error.status, { "tapToDismiss": true, "disableTimeOut": true, "closeButton": true });
+                        this.toastr.typeErrorCopyOnClick(error.url, 'Status: ' + error.status);
                     }
                 }
                 else {
-                    this.toastr.error(error.message, 'Status: ' + error.status, { "tapToDismiss": true, "disableTimeOut": true, "closeButton": true });
+                    this.toastr.typeErrorCopyOnClick(error.message, 'Status: ' + error.status);
                 }
 
                 console.log(JSON.stringify(request.body));

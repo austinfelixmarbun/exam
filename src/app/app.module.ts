@@ -35,6 +35,7 @@ import { AdInsSharedModule } from './components/adins-module/adins-shared.module
 import { EnviConfigService } from './shared/services/enviConfig.service';
 import { UrlConstantService } from './shared/services/urlConstant.service';
 import { UrlConstantNew } from './shared/constant/URLConstantNew';
+import { ClipboardModule } from 'ngx-clipboard'
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -86,6 +87,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         MatDialogModule,
         BrowserAnimationsModule,
         GrowlModule,
+        ClipboardModule,
         NgMultiSelectDropDownModule.forRoot()
     ],
     providers: [
