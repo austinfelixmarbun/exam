@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
 import { PathConstant } from 'app/shared/PathConstant';
 import { SurveyOrderViewComponent } from './survey-order-view/survey-order-view.component';
+import { RouterModule, Routes } from "@angular/router";
 const routes: Routes = [
   {
     path: '',

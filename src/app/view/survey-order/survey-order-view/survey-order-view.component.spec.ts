@@ -6,13 +6,14 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { SurveyOrderViewComponent } from './survey-order-view.component';
 import { formatDate } from '@angular/common';
 import { of } from 'rxjs/observable/of';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SurveyOrderViewComponent', () => {
   let component: SurveyOrderViewComponent;
   let fixture: ComponentFixture<SurveyOrderViewComponent>;
   let httpSpy, routeSpy;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     httpSpy = {
       post: (url: string, body: any | null, options?: {
         headers?: HttpHeaders | { [header: string]: string | string[]; };
@@ -77,13 +78,12 @@ describe('SurveyOrderViewComponent', () => {
     const conf = TestBed.configureTestingModule({
       declarations: [SurveyOrderViewComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [RouterTestingModule],
       providers: [
         { provide: HttpClient, useValue: httpSpy },
         { provide: ActivatedRoute, useValue: routeSpy }
       ]
-    });
-
-    await conf.compileComponents();
+    }).compileComponents();
     fixture = TestBed.createComponent(SurveyOrderViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -91,6 +91,10 @@ describe('SurveyOrderViewComponent', () => {
 
   afterAll(() => {
     fixture.destroy();
+  });
+
+  afterEach(() => {      
+    TestBed.resetTestingModule();
   });
 
   it('should be created', function () {

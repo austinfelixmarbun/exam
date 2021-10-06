@@ -35,7 +35,5 @@ export class SurveyOrderViewComponent implements OnInit {
         this.TaskList = response[CommonConstant.ReturnObj];
       }
     );
-
   }
-
 }

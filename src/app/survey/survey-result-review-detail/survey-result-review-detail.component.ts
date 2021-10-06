@@ -33,7 +33,6 @@ export class SurveyResultReviewDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private httpClient: HttpClient, private fb: FormBuilder, private cookieService: CookieService, private toastr: NGXToastrService, private router: Router) {
     this.route.queryParams.subscribe(params => {
-      /* istanbul ignore next */
       if (params["SrvyOrderId"] != null) {
         this.SrvyOrderId = params["SrvyOrderId"];
       }
@@ -49,7 +48,6 @@ export class SurveyResultReviewDetailComponent implements OnInit {
   async getSurveyTaskListData() {
     await this.httpClient.post(URLConstant.GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview, { Id: this.SrvyOrderId }).toPromise().then(
       (response) => {
-        /* istanbul ignore next */
         if (response['ReturnObject'].length > 0) {
           this.SurveyTaskForm.controls['ListSurveyTask'] = this.fb.array([]);
           for (let i = 0; i < response['ReturnObject'].length; i++) {
@@ -120,7 +118,6 @@ export class SurveyResultReviewDetailComponent implements OnInit {
       CustId: [surveyTaskObj.CustId],
       ResultDate: [surveyTaskObj.ResultDate],
       ReviewComment: [surveyTaskObj.ReviewComment]
-
     })
   }
 
@@ -155,8 +152,10 @@ export class SurveyResultReviewDetailComponent implements OnInit {
       this.reqListSrvyTaskObj.push(this.srvyTaskObj);
     }
 
+    /* istanbul ignore next */
     this.httpClient.post(URLConstant.ReviewSurveyResult, { reqListSrvyTaskObjs: this.reqListSrvyTaskObj }).subscribe(
       (response) => {
+        /* istanbul ignore next */
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEY_RESULT_REVIEW_PAGING], {});
       }
