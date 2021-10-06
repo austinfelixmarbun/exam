@@ -8,6 +8,10 @@ import { NewCustSetData } from 'app/customer/sharing-component/new-cust-componen
 import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
+import { CookieService } from 'ngx-cookie';
+import { String } from 'typescript-string-operations';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
 import { CustObj } from 'app/shared/model/CustObj.Model';
@@ -49,6 +53,9 @@ export class CustomerCompanyDetailXComponent implements OnInit {
   IdCust: number;
   tempRefIndustryTypeId: number = 0;
   Page: String;
+  UserAccess: CurrentUserContext;
+  MaxDate: Date;
+  MaxDtValidate: string;
 
   CustomerDetailForm = this.fb.group({
     NumOfEmp: ['', [Validators.maxLength(100), Validators.required, Validators.pattern("^[0-9]+$")]],
@@ -65,7 +72,8 @@ export class CustomerCompanyDetailXComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -82,6 +90,9 @@ export class CustomerCompanyDetailXComponent implements OnInit {
   async ngOnInit() {
     var datePipe = new DatePipe("en-US");
     this.lookUpObj = new InputLookupObj();
+    this.MaxDate = new Date(this.UserAccess.BusinessDt);
+    this.MaxDate.setDate(this.MaxDate.getDate() - 1);
+    this.MaxDtValidate = datePipe.transform(this.MaxDate, "yyyy-MM-dd");
 
     //Lookup Commodity
     this.inputLookupCommodityObj = new InputLookupObj();
@@ -200,6 +211,13 @@ export class CustomerCompanyDetailXComponent implements OnInit {
     );
   }
 
+  onFocusOutEstDate(event){
+    if(event.target.value > this.MaxDtValidate){
+      this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+      return;
+    }
+  }
+
   SaveValue() {
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj = this.tempCustCompanyObj;
@@ -213,6 +231,11 @@ export class CustomerCompanyDetailXComponent implements OnInit {
     this.custCompanyObj.MrCustModelCode = this.CustomerDetailForm.controls["MrCustModelCode"].value;
     this.custCompanyObj.ParentCustId = this.CustGrpObj.CustId;
 
+    if(this.CustomerDetailForm.controls["EstablishmentDt"].value > this.MaxDtValidate){
+      this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+      return;
+    }
+    
     if (this.returnSectorEconomySlikObj != null && this.tempRefIndustryTypeId === null) {
       this.custCompanyObj.RefIndustryTypeId = this.custCompanyObj.RefIndustryTypeId;
     }
