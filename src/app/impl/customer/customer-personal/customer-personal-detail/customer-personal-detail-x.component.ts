@@ -15,6 +15,8 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { CustGrpObj } from 'app/shared/model/CustGrpObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-personal-detail-x',
@@ -31,6 +33,8 @@ export class CustomerPersonalDetailXComponent implements OnInit {
   criteriaObj: CriteriaObj;
   lookUpObj: InputLookupObj;
   criteriaList: Array<CriteriaObj>;
+  lookupCustGrpObj: InputLookupObj = new InputLookupObj();
+  CustGrpObj: CustGrpObj = new CustGrpObj();
 
   custObj: CustObj;
   custPersonalObj: CustPersonalObj;
@@ -117,6 +121,7 @@ export class CustomerPersonalDetailXComponent implements OnInit {
           IsAffiliateWithMf: response.IsAffiliateWithMf,
         });
         this.checkState();
+        this.setLookupCustGrp();
       });
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj.CustId = this.IdCust;
@@ -173,8 +178,43 @@ export class CustomerPersonalDetailXComponent implements OnInit {
           IsRestInPeace: this.tempCustPersonalObj.IsRestInPeace,
         });
       });
+    this.http.post(URLConstant.GetListCustGrpByMemberCustId, { Id: this.IdCust }).subscribe(
+      (response) => {
+        if(response[CommonConstant.ReturnObj].length > 0){
+          let reqById: GenericObj = new GenericObj();
+          reqById.Id = response[CommonConstant.ReturnObj][0].CustId;
+          this.http.post(URLConstant.GetCustByCustId, reqById).subscribe(
+            (responseCustGrp) => {
+              this.lookupCustGrpObj.nameSelect = responseCustGrp["CustName"];
+              this.lookupCustGrpObj.jsonSelect = { CustName: responseCustGrp["CustName"] };
+              this.lookupCustGrpObj.isReady = true;
+              this.CustGrpObj.CustId = responseCustGrp["CustId"];
+            });
+        }
+      }
+    );
   }
 
+  GetCustGrpData(event) {
+    this.CustGrpObj.CustId = event.CustId;
+  }
+
+  setLookupCustGrp() {
+    this.lookupCustGrpObj.urlJson = "./assets/lookup/lookupCustomer.json";
+    this.lookupCustGrpObj.pagingJson = "./assets/lookup/lookupCustomer.json";
+    this.lookupCustGrpObj.genericJson = "./assets/lookup/lookupCustomer.json";
+    this.lookupCustGrpObj.isRequired = false;
+    this.lookupCustGrpObj.isReady = true;
+
+    this.criteriaList = new Array();
+    this.criteriaObj = new CriteriaObj();
+    this.criteriaObj.restriction = AdInsConstant.RestrictionNeq;
+    this.criteriaObj.propName = 'C.CUST_NO';
+    this.criteriaObj.value = this.tempCustObj.CustNo;
+    this.criteriaList.push(this.criteriaObj);
+    this.lookupCustGrpObj.addCritInput = this.criteriaList;
+  }
+  
   checkState() {
     if (!this.CustomerDetailForm.controls.IsVip.value) {
       this.CustomerDetailForm.patchValue({
@@ -205,6 +245,8 @@ export class CustomerPersonalDetailXComponent implements OnInit {
     this.custPersonalObj.MrGenderCode = this.tempCustPersonalObj.MrGenderCode;
     this.custPersonalObj.MrNationalityCode = this.CustomerDetailForm.controls["MrNationalityCode"].value;
     this.custPersonalObj.NoOfResidence = this.CustomerDetailForm.controls["NoOfResidence"].value;
+    this.custPersonalObj.ParentCustId = this.CustGrpObj.CustId;
+    this.custPersonalObj.CustId = this.IdCust;
 
     if (this.custPersonalObj.MrNationalityCode == CommonConstant.NationalityCodeLocal) {
       this.custPersonalObj.WnaCountryCode = CommonConstant.WnaCountryCodeIdn;

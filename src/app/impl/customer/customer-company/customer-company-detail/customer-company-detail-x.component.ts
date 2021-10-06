@@ -15,6 +15,10 @@ import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { CustGrpObj } from 'app/shared/model/CustGrpObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-customer-company-detail-x',
@@ -24,10 +28,14 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class CustomerCompanyDetailXComponent implements OnInit {
 
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
+  lookupCustGrpObj: InputLookupObj = new InputLookupObj();
   lookUpObj: InputLookupObj;
+  CustGrpObj: CustGrpObj = new CustGrpObj();
+  criteriaObj: CriteriaObj;
+  criteriaList: Array<CriteriaObj>;
   inputLookupCommodityObj: InputLookupObj;
 
-  tempCustObj: any;
+  tempCustObj: CustObj;
   tempCustCompanyObj: any;
   tempRefIndustryObj: any;
 
@@ -90,6 +98,7 @@ export class CustomerCompanyDetailXComponent implements OnInit {
 
     this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
       (response: CustObj) => {
+        this.tempCustObj = response
         this.CustomerDetailForm.patchValue({
           MrCustModelCode: response.MrCustModelCode,
           IsVip: response.IsVip,
@@ -97,6 +106,7 @@ export class CustomerCompanyDetailXComponent implements OnInit {
           IsAffiliateWithMf: response.IsAffiliateWithMf,
         });
         this.checkState();
+        this.setLookupCustGrp();
       }
     );
 
@@ -125,9 +135,44 @@ export class CustomerCompanyDetailXComponent implements OnInit {
         // }
       }
     );
+    this.http.post(URLConstant.GetListCustGrpByMemberCustId, { Id: this.IdCust }).subscribe(
+      (response) => {
+        if(response[CommonConstant.ReturnObj].length > 0){
+          let reqById: GenericObj = new GenericObj();
+          reqById.Id = response[CommonConstant.ReturnObj][0].CustId;
+          this.http.post(URLConstant.GetCustByCustId, reqById).subscribe(
+            (responseCustGrp) => {
+              this.lookupCustGrpObj.nameSelect = responseCustGrp["CustName"];
+              this.lookupCustGrpObj.jsonSelect = { CustName: responseCustGrp["CustName"] };
+              this.lookupCustGrpObj.isReady = true;
+              this.CustGrpObj.CustId = responseCustGrp["CustId"];
+            });
+        }
+      }
+    );
     await this.getCustXData();
+
   }
 
+  GetCustGrpData(event) {
+    this.CustGrpObj.CustId = event.CustId;
+  }
+
+  setLookupCustGrp() {
+    this.lookupCustGrpObj.urlJson = "./assets/lookup/lookupCustomer.json";
+    this.lookupCustGrpObj.pagingJson = "./assets/lookup/lookupCustomer.json";
+    this.lookupCustGrpObj.genericJson = "./assets/lookup/lookupCustomer.json";
+    this.lookupCustGrpObj.isRequired = false;
+    this.lookupCustGrpObj.isReady = true;
+
+    this.criteriaList = new Array();
+    this.criteriaObj = new CriteriaObj();
+    this.criteriaObj.restriction = AdInsConstant.RestrictionNeq;
+    this.criteriaObj.propName = 'C.CUST_NO';
+    this.criteriaObj.value = this.tempCustObj.CustNo;
+    this.criteriaList.push(this.criteriaObj);
+    this.lookupCustGrpObj.addCritInput = this.criteriaList;
+  }
   async getCustXData()
   {
     await this.http.post(URLConstantX.GetCustXDataByCustId, {Id: this.IdCust}).toPromise().then(
@@ -166,6 +211,7 @@ export class CustomerCompanyDetailXComponent implements OnInit {
     this.custCompanyObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
     this.custCompanyObj.IsAffiliateWithMf = this.CustomerDetailForm.controls["IsAffiliateWithMf"].value;
     this.custCompanyObj.MrCustModelCode = this.CustomerDetailForm.controls["MrCustModelCode"].value;
+    this.custCompanyObj.ParentCustId = this.CustGrpObj.CustId;
 
     if (this.returnSectorEconomySlikObj != null && this.tempRefIndustryTypeId === null) {
       this.custCompanyObj.RefIndustryTypeId = this.custCompanyObj.RefIndustryTypeId;

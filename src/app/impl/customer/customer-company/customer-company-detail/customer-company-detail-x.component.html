@@ -31,6 +31,16 @@
             </div>
 
             <div class="form-group row">
+              <label class="col-md-4" translate>Customer Group</label>
+              <div class="col-md-8">
+                <lib-uclookupgeneric [enjiForm]="enjiForm" [lookupInput]="lookupCustGrpObj"
+                  *ngIf="lookupCustGrpObj.isReady" [parentForm]="CustomerDetailForm" [identifier]="'CustomerGrp'"
+                  (lookup)="GetCustGrpData($event)">
+                </lib-uclookupgeneric>
+              </div>
+            </div>
+
+            <div class="form-group row">
               <label class="col-md-4 adInsLabel" translate>VIP</label>
               <div class="col-md-8">
                 <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsVip"
