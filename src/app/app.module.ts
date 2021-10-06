@@ -32,6 +32,7 @@ import { StorageService } from './shared/services/StorageService';
 import { NGXToastrService } from './components/extra/toastr/toastr.service';
 import { ClaimTaskService } from './shared/claimTask.service';
 import { AdInsSharedModule } from './components/adins-module/adins-shared.module';
+import { ClipboardModule } from 'ngx-clipboard'
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -70,6 +71,7 @@ export function createTranslateLoader(http: HttpClient) {
         MatDialogModule,
         BrowserAnimationsModule,
         GrowlModule,
+        ClipboardModule,
         NgMultiSelectDropDownModule.forRoot()
     ],
     providers: [
