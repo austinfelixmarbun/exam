@@ -47,8 +47,7 @@ import { OfficeXComponent } from 'app/impl/office/office-x.component';
     UclookupgenericModule,
     UcShowErrorsModule,
     UcviewgenericModule,
-    UcaddtotempModule,
-    TranslateModule
+    UcaddtotempModule
   ],
   declarations: [
     OfficeComponent,

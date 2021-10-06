@@ -29,13 +29,8 @@ export class SurveyorTaskAssignmentPagingComponent implements OnInit {
   }
 
   viewApp(event: any) {
-    console.log(event);
     this.AppNo = event['RowObj'].TransactionRefNo;
-    this.router.navigateByUrl(NavigationConstant.VIEW_CUST, { skipLocationChange: true }).then(() => {
-      window.open(environment.losR3Web + "/View/AppView?AppId=" + this.AppId + "&AppNo=" + this.AppNo, "_blank");
-    });
-
-    this.router.navigateByUrl(NavigationConstant.SURVEY_TASK_ASSIGNMENT_PAGING, { skipLocationChange: true });
+    window.open(environment.losR3Web + "/View/AppView?AppId=" + this.AppId + "&AppNo=" + this.AppNo, "_blank");
   }
 
 }

@@ -11,16 +11,12 @@ import { UcSubsectionModule } from "@adins/uc-subsection";
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UcgridfooterModule } from "@adins/ucgridfooter";
 import { UclookupgenericModule } from "@adins/uclookupgeneric";
-import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneric";
-import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
+import { UcviewgenericModule } from "@adins/ucviewgeneric";
+import { UcgridviewModule } from "@adins/ucgridview";
 import { CustExposureViewRoutingModule } from "./cust-exposure-view-routing.module";
 import { CustExposureViewComponent } from "./cust-exposure-view.component";
 import { ObligorExposureComponent } from './obligor-exposure/obligor-exposure.component';
 import { CustExposureComponent } from './cust-exposure/cust-exposure.component';
-import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
-import { createTranslateLoader } from "app/app.module";
-import { HttpClient } from "@angular/common/http";
-
 @NgModule({
     imports: [
         CustExposureViewRoutingModule,
@@ -39,13 +35,6 @@ import { HttpClient } from "@angular/common/http";
         ReactiveFormsModule,
         UcSubsectionModule,
         SharingComponentModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: (createTranslateLoader),
-                deps: [HttpClient]
-            }
-        }),
 
         
     ],

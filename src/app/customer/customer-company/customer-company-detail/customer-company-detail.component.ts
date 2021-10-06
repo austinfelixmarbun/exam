@@ -15,6 +15,10 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
+import { CookieService } from 'ngx-cookie';
+import { String } from 'typescript-string-operations';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { CustGrpObj } from 'app/shared/model/CustGrpObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
@@ -43,6 +47,9 @@ export class CustomerCompanyDetailComponent implements OnInit {
   IdCust: number;
   tempRefIndustryTypeId: number = 0;
   Page: String;
+  UserAccess: CurrentUserContext;
+  MaxDate: Date;
+  MaxDtValidate: string;
 
   CustomerDetailForm = this.fb.group({
     NumOfEmp: ['', [Validators.maxLength(100), Validators.required, Validators.pattern("^[0-9]+$")]],
@@ -58,7 +65,8 @@ export class CustomerCompanyDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -77,6 +85,11 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.lookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
+    this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+
+    this.MaxDate = new Date(this.UserAccess.BusinessDt);
+    this.MaxDate.setDate(this.MaxDate.getDate() - 1);
+    this.MaxDtValidate = datePipe.transform(this.MaxDate, "yyyy-MM-dd");
 
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
 
@@ -151,6 +164,13 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.lookupCustGrpObj.addCritInput = this.criteriaList;
   }
 
+  onFocusOutEstDate(event){
+    if(event.target.value > this.MaxDtValidate){
+      this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+      return;
+    }
+  }
+
   SaveValue() {
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj = this.tempCustCompanyObj;
@@ -163,6 +183,11 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.custCompanyObj.IsAffiliateWithMf = this.CustomerDetailForm.controls["IsAffiliateWithMf"].value;
     this.custCompanyObj.MrCustModelCode = this.CustomerDetailForm.controls["MrCustModelCode"].value;
     this.custCompanyObj.ParentCustId = this.CustGrpObj.CustId;
+
+    if(this.CustomerDetailForm.controls["EstablishmentDt"].value > this.MaxDtValidate){
+      this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+      return;
+    }
 
     if (this.tempRefIndustryObj != null && this.tempRefIndustryTypeId === null) {
       this.custCompanyObj.RefIndustryTypeId = this.custCompanyObj.RefIndustryTypeId;

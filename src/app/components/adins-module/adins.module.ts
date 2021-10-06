@@ -19,7 +19,6 @@ import { UcuploadModule } from '@adins/ucupload';
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { UcDirectiveUpperCaseModule } from '@adins/uc-directive-upper-case';
-
 @NgModule({
     exports: [
         UcDirectiveUpperCaseModule,
@@ -60,7 +59,7 @@ import { UcDirectiveUpperCaseModule } from '@adins/uc-directive-upper-case';
         UcuploadModule,
         UcdropdownlistModule,
         UcaddtotempModule,
-        UcDirectiveUpperCaseModule
+        UcDirectiveUpperCaseModule,
     ],
     declarations: [
     ]

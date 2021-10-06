@@ -29,6 +29,8 @@ import { HttpClient } from "@angular/common/http";
 import { CustomerViewTrustingSocialComponent } from "./customer-view-trusting-social/customer-view-trusting-social.component";
 import { CustomerViewPersonalDetailXComponent } from "app/impl/customer/customer-view/customer-view-personal-detail/customer-view-personal-detail-x.component";
 import { CustomerViewXComponent } from "app/impl/customer/customer-view/customer-view/customer-view-x.component";
+import { SharedModule } from "app/shared/shared.module";
+
 
 @NgModule({
   imports: [
@@ -49,14 +51,7 @@ import { CustomerViewXComponent } from "app/impl/customer/customer-view/customer
     UcSubsectionModule,
     SharingComponentModule,
     UcShowErrorsModule,
-    TranslateModule.forRoot({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
-  }),
-    
+    SharedModule
   ],
   declarations: [
     CustomerViewCoyAppListingComponent,

@@ -15,7 +15,7 @@ import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewAddressComponent } from "./customer-view-address.component";
 import { CustomerViewAddressRoutingModule } from "./customer-view-address-routing.module";
-
+import { SharedModule } from "app/shared/shared.module";
 
 
 @NgModule({
@@ -36,9 +36,10 @@ import { CustomerViewAddressRoutingModule } from "./customer-view-address-routin
     UcSubsectionModule,
     SharingComponentModule,
     UcShowErrorsModule,
+    SharedModule
   ],
   declarations: [
-   CustomerViewAddressComponent
+    CustomerViewAddressComponent
 
   ],
   entryComponents: [

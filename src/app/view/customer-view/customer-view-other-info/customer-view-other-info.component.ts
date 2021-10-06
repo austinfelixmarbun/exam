@@ -24,6 +24,9 @@ export class CustomerViewOtherInfoComponent implements OnInit {
     });
   }
 
+  readonly AttrInputTypeDate: string = CommonConstant.AttrInputTypeDate;
+  readonly AttrInputTypeNum: string = CommonConstant.AttrInputTypeNum;
+  readonly AttrInputTypeNumPerc: string = CommonConstant.AttrInputTypeNumPerc;
   ngOnInit() {
     this.http.post(URLConstant.GetCustOtherInfoByCustId, { Id : this.CustId }).subscribe(
       (response: any) => { 
