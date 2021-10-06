@@ -66,6 +66,8 @@ import { ExchangeRatePagingComponent } from './exchange-rate/exchange-rate-pagin
 import { PathConstantX } from 'app/impl/shared/PathConstantX';
 import { EconomicSectorSlikPagingXComponent } from 'app/impl/common-setting/economic-sector-slik/economic-sector-slik-paging/economic-sector-slik-paging-x.component';
 import { EconomicSectorSlikAddEditXComponent } from 'app/impl/common-setting/economic-sector-slik/economic-sector-slik-add-edit/economic-sector-slik-add-edit-x.component';
+import { RefTcComponent } from './ref-tc/ref-tc-paging/ref-tc.component';
+import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.component';
 
 const routes: Routes = [
   {
@@ -519,7 +521,23 @@ const routes: Routes = [
         data: {
           title: 'Economic Sector SLIK Add Edit'
         },
-      }
+      },
+
+      //REF TC
+      {
+        path: PathConstant.CS_REF_TC_PAGING,
+        component: RefTcComponent,
+        data: {
+          title: 'Ref TC'
+        },
+      },
+      {
+        path: PathConstant.CS_REF_TC_DETAIL,
+        component: RefTcAddEditComponent,
+        data: {
+          title: 'Ref TC Add Edit'
+        },
+      },
     ]
   }
 ];

@@ -83,6 +83,8 @@ import { ExchangeRatePagingComponent } from './exchange-rate/exchange-rate-pagin
 import { CurrencyMaskInputMode, NgxCurrencyModule } from 'ngx-currency';
 import { EconomicSectorSlikPagingXComponent } from 'app/impl/common-setting/economic-sector-slik/economic-sector-slik-paging/economic-sector-slik-paging-x.component';
 import { EconomicSectorSlikAddEditXComponent } from 'app/impl/common-setting/economic-sector-slik/economic-sector-slik-add-edit/economic-sector-slik-add-edit-x.component';
+import { RefTcComponent } from './ref-tc/ref-tc-paging/ref-tc.component';
+import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -184,7 +186,9 @@ export const customCurrencyMaskConfig = {
     ExchangeRateDetailComponent,
     ExchangeRatePagingComponent,
     EconomicSectorSlikPagingXComponent,
-    EconomicSectorSlikAddEditXComponent
+    EconomicSectorSlikAddEditXComponent,
+    RefTcComponent,
+    RefTcAddEditComponent
   ],
   providers: [
     NGXToastrService

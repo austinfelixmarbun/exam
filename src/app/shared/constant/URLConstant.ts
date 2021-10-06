@@ -706,6 +706,7 @@ export class URLConstant {
     public static GetCustCompanyForUpdateByCustNo = environment.FoundationR3Url + "/v1" + "/Cust/GetCustCompanyForUpdateByCustNo";
     public static DeleteNegativeCustomer = "/NegativeCust/DeleteNegativeCust";
     public static GetListCustGrpByMemberCustIdForCustGrpTab = environment.FoundationR3Url + "/v1" + "/CustGrp/GetListCustGrpByMemberCustIdForCustGrpTab";
+    public static GetListCustGrpByMemberCustId = environment.FoundationR3Url + "/v1" + "/CustGrp/GetListCustGrpByMemberCustId";
     public static GetCustByCustNo = environment.FoundationR3Url + "/v1" + "/Cust/GetCustByCustNo";
     public static AddCustAsset = environment.FoundationR3Url + "/v1" + "/CustAsset/AddCustAsset";
     public static DeleteCustAsset = environment.FoundationR3Url + "/v1" + "/CustAsset/DeleteCustAsset";
@@ -733,6 +734,7 @@ export class URLConstant {
     // CUSTOMER GROUP
     public static AddCustGrpBothWays = environment.FoundationR3Url + "/v1" + "/CustGrp/AddCustGrpBothWays";
     public static AddCustGrp = environment.FoundationR3Url + "/v1" + "/CustGrp/AddCustGrp";
+    public static EditCustGrp = environment.FoundationR3Url + "/v1" + "/CustGrp/EditCustGrp";
     public static DeleteCustGrp = environment.FoundationR3Url + "/v1" + "/CustGrp/DeleteCustGrp";
 
     // CUSTOMER FIN DATA
@@ -749,7 +751,7 @@ export class URLConstant {
     public static GetListCustCompanyFinDataByCustId = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinData/GetListCustCompanyFinDataByCustId";
     public static AddCustCompanyFinData = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinData/AddCustCompanyFinData";
     public static EditCustCompanyFinData = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinData/EditCustCompanyFinData";
-    public static DeleteCustCompanyFinData = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinData/DeleteCustCompanyFinData";
+    public static DeleteCustCompanyFinData =  environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinData/DeleteCustCompanyFinData";
     public static AddCustPersonalFinData = environment.FoundationR3Url + "/v1" + "/CustPersonalFinData/AddCustPersonalFinData";
     public static EditCustPersonalFinData = environment.FoundationR3Url + "/v1" + "/CustPersonalFinData/EditCustPersonalFinData";
     public static DeleteCustPersonalFinData = environment.FoundationR3Url + "/v1" + "/CustPersonalFinData/DeleteCustPersonalFinData";
@@ -1127,5 +1129,9 @@ export class URLConstant {
   // CUST DOC FILE
   public static GetListCustDocFileByCustId = environment.FoundationR3Url + "/v1" + "/CustDocFile/GetListCustDocFileByCustId";
 
+  // REF TC
+  public static AddRefTc = environment.FoundationR3Url + "/v1" + "/RefTc/AddRefTc";
+  public static EditRefTc = environment.FoundationR3Url + "/v1" + "/RefTc/EditRefTc";
+  public static GetRefTcById = environment.FoundationR3Url + "/v1" + "/RefTc/GetRefTcById";
 }
 

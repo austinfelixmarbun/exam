@@ -15,6 +15,10 @@ import { CustObj } from 'app/shared/model/CustObj.Model';
 import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CustGrpObj } from 'app/shared/model/CustGrpObj.Model';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-customer-company-detail',
@@ -23,9 +27,13 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 })
 export class CustomerCompanyDetailComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
+  lookupCustGrpObj: InputLookupObj = new InputLookupObj();
   lookUpObj: InputLookupObj;
+  CustGrpObj: CustGrpObj = new CustGrpObj();
+  criteriaObj: CriteriaObj;
+  criteriaList: Array<CriteriaObj>;
 
-  tempCustObj: any;
+  tempCustObj: CustObj;
   tempCustCompanyObj: any;
   tempRefIndustryObj: any;
 
@@ -74,6 +82,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
 
     this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
       (response: CustObj) => {
+        this.tempCustObj = response
         this.CustomerDetailForm.patchValue({
           MrCustModelCode: response.MrCustModelCode,
           IsVip: response.IsVip,
@@ -81,6 +90,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
           IsAffiliateWithMf: response.IsAffiliateWithMf,
         });
         this.checkState();
+        this.setLookupCustGrp();
       }
     );
     this.http.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
@@ -104,6 +114,41 @@ export class CustomerCompanyDetailComponent implements OnInit {
               });
           }
         });
+    this.http.post(URLConstant.GetListCustGrpByMemberCustId, { Id: this.IdCust }).subscribe(
+      (response) => {
+        if(response[CommonConstant.ReturnObj].length > 0){
+          let reqById: GenericObj = new GenericObj();
+          reqById.Id = response[CommonConstant.ReturnObj][0].CustId;
+          this.http.post(URLConstant.GetCustByCustId, reqById).subscribe(
+            (responseCustGrp) => {
+              this.lookupCustGrpObj.nameSelect = responseCustGrp["CustName"];
+              this.lookupCustGrpObj.jsonSelect = { CustName: responseCustGrp["CustName"] };
+              this.lookupCustGrpObj.isReady = true;
+              this.CustGrpObj.CustId = responseCustGrp["CustId"];
+            });
+        }
+      }
+    );
+  }
+
+  GetCustGrpData(event) {
+    this.CustGrpObj.CustId = event.CustId;
+  }
+
+  setLookupCustGrp() {
+    this.lookupCustGrpObj.urlJson = "./assets/lookup/lookupCustomer.json";
+    this.lookupCustGrpObj.pagingJson = "./assets/lookup/lookupCustomer.json";
+    this.lookupCustGrpObj.genericJson = "./assets/lookup/lookupCustomer.json";
+    this.lookupCustGrpObj.isRequired = false;
+    this.lookupCustGrpObj.isReady = true;
+
+    this.criteriaList = new Array();
+    this.criteriaObj = new CriteriaObj();
+    this.criteriaObj.restriction = AdInsConstant.RestrictionNeq;
+    this.criteriaObj.propName = 'C.CUST_NO';
+    this.criteriaObj.value = this.tempCustObj.CustNo;
+    this.criteriaList.push(this.criteriaObj);
+    this.lookupCustGrpObj.addCritInput = this.criteriaList;
   }
 
   SaveValue() {
@@ -117,6 +162,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.custCompanyObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
     this.custCompanyObj.IsAffiliateWithMf = this.CustomerDetailForm.controls["IsAffiliateWithMf"].value;
     this.custCompanyObj.MrCustModelCode = this.CustomerDetailForm.controls["MrCustModelCode"].value;
+    this.custCompanyObj.ParentCustId = this.CustGrpObj.CustId;
 
     if (this.tempRefIndustryObj != null && this.tempRefIndustryTypeId === null) {
       this.custCompanyObj.RefIndustryTypeId = this.custCompanyObj.RefIndustryTypeId;

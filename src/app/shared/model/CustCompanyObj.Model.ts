@@ -24,4 +24,5 @@ export class CustCompanyObj {
   MrCustModelCode: string;
   IsAffiliateWithMf: boolean;
   RefSectorEconomySlikId: number;
+  ParentCustId: number;
 }
