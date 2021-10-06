@@ -17,6 +17,7 @@ import { UcApprovalsummaryComponent } from './uc-approvalsummary/uc-approvalsumm
 import { UcApprovalComponent } from './uc-approval/uc-approval.component';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
   declarations: [ApprovalScreenComponent,UcProdCompComponent, TestComponent, LookupTestComponent, 
@@ -27,6 +28,7 @@ import { AdInsModule } from 'app/components/adins-module/adins.module';
     ApprovalScreenRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    AdInsSharedModule,
     SharingComponentModule,
     UcShowErrorsModule,
     UcSubsectionModule

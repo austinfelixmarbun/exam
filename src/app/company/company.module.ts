@@ -14,10 +14,12 @@ import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
   imports: [
     AdInsModule,
+    AdInsSharedModule,
     CompanyRoutingComponent,
     CommonModule,
     FormsModule,

@@ -48,7 +48,6 @@ export class SurveyResultReviewDetailComponent implements OnInit {
   async getSurveyTaskListData() {
     await this.httpClient.post(URLConstant.GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview, { Id: this.SrvyOrderId }).toPromise().then(
       (response) => {
-        /* istanbul ignore next */
         if (response['ReturnObject'].length > 0) {
           this.SurveyTaskForm.controls['ListSurveyTask'] = this.fb.array([]);
           for (let i = 0; i < response['ReturnObject'].length; i++) {
@@ -119,7 +118,6 @@ export class SurveyResultReviewDetailComponent implements OnInit {
       CustId: [surveyTaskObj.CustId],
       ResultDate: [surveyTaskObj.ResultDate],
       ReviewComment: [surveyTaskObj.ReviewComment]
-
     })
   }
 
@@ -154,8 +152,10 @@ export class SurveyResultReviewDetailComponent implements OnInit {
       this.reqListSrvyTaskObj.push(this.srvyTaskObj);
     }
 
+    /* istanbul ignore next */
     this.httpClient.post(URLConstant.ReviewSurveyResult, { reqListSrvyTaskObjs: this.reqListSrvyTaskObj }).subscribe(
       (response) => {
+        /* istanbul ignore next */
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEY_RESULT_REVIEW_PAGING], {});
       }

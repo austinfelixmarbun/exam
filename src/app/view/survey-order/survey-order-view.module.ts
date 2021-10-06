@@ -17,6 +17,7 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { SurveyOrderViewComponent } from "./survey-order-view/survey-order-view.component";
 import { SurveyOrderViewRoutingModule } from "./survey-order-routing.module";
 import { AdInsModule } from "app/components/adins-module/adins.module"; 
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AdInsModule } from "app/components/adins-module/adins.module";
     UcviewgenericModule,
     UcgridviewModule,
     NgbModule,
+    AdInsSharedModule,
     SharingModule,
     ArchwizardModule,
     ReactiveFormsModule,

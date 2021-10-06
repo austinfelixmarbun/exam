@@ -8,6 +8,7 @@ import { AdInsModule } from "app/components/adins-module/adins.module";
 import { ArchwizardComponent } from "app/forms/archwizard/archwizard.component";
 import { ArchwizardModule } from "angular-archwizard";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
         FormsModule,
         HttpModule,
         NgbModule,
+        AdInsSharedModule,
         TestRoutingModule,
         AdInsModule
     ],

@@ -727,6 +727,7 @@ export class URLConstant {
     public static GetListViewCustCompanyLegalDocByCustCompanyId = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/GetListViewCustCompanyLegalDocByCustCompanyId";
     public static DeleteCustCompanyLegalDoc = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/DeleteCustCompanyLegalDoc";
     public static AddCustCompanyLegalDoc = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/AddCustCompanyLegalDoc";
+    public static EditCustCompanyLegalDoc = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/EditCustCompanyLegalDoc";
 
     // CUSTOMER GROUP
     public static AddCustGrpBothWays = environment.FoundationR3Url + "/v1" + "/CustGrp/AddCustGrpBothWays";
@@ -1130,5 +1131,7 @@ export class URLConstant {
   public static AddRefTc = environment.FoundationR3Url + "/v1" + "/RefTc/AddRefTc";
   public static EditRefTc = environment.FoundationR3Url + "/v1" + "/RefTc/EditRefTc";
   public static GetRefTcById = environment.FoundationR3Url + "/v1" + "/RefTc/GetRefTcById";
+
+  public static GetCustCompanyLegalDocByCustCompanyLegalDocId = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/GetCustCompanyLegalDocByCustCompanyLegalDocId";
 }
 

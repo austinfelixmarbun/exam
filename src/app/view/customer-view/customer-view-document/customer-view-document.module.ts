@@ -16,6 +16,7 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewDocumentComponent } from "./customer-view-document.component";
 import { CustomerViewDocumentRoutingModule } from "./customer-view-document-routing.module";
 import { SharedModule } from "app/shared/shared.module";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 
 
@@ -37,7 +38,8 @@ import { SharedModule } from "app/shared/shared.module";
     UcSubsectionModule,
     SharingComponentModule,
     UcShowErrorsModule,
-    SharedModule
+    SharedModule,
+    AdInsSharedModule
   ],
   declarations: [
     CustomerViewDocumentComponent

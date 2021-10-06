@@ -95,7 +95,7 @@ describe('SurveyOrderViewComponent', () => {
 
   afterEach(() => {      
     TestBed.resetTestingModule();
-  })
+  });
 
   it('should be created', function () {
     expect(component).toBeTruthy();

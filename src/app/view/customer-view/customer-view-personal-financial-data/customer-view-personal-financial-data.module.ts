@@ -16,6 +16,7 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewPersonalFinancialDataComponent } from "./customer-view-personal-financial-data.component";
 import { CustomerViewPersonalFinancialDataRoutingModule } from "./customer-view-personal-financial-data-routing.module";
 import { CustomerViewPersonalFinancialSectionComponent } from "../customer-view-personal-financial-section/customer-view-personal-financial-section.component";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 
 
@@ -31,6 +32,7 @@ import { CustomerViewPersonalFinancialSectionComponent } from "../customer-view-
     UcviewgenericModule,
     UcgridviewModule,
     NgbModule,
+    AdInsSharedModule,
     SharingModule,
     ArchwizardModule,
     ReactiveFormsModule,

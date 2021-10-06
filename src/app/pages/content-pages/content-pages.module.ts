@@ -8,6 +8,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { PagesComponent } from './pages/pages.component';
 import { RequestNewPasswordComponent } from './request-new-password/request-new-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
         CommonModule,
         ContentPagesRoutingModule,
         FormsModule,
+        AdInsSharedModule,
         ReactiveFormsModule,
         UcShowErrorsModule
     ],

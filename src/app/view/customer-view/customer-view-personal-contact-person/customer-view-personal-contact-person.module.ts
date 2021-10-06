@@ -15,6 +15,7 @@ import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewPersonalContactPersonComponent } from "./customer-view-personal-contact-person.component";
 import { CustomerViewPersonalContactPersonRoutingModule } from "./customer-view-personal-contact-person-routing.module";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 
 
@@ -30,6 +31,7 @@ import { CustomerViewPersonalContactPersonRoutingModule } from "./customer-view-
     UcviewgenericModule,
     UcgridviewModule,
     NgbModule,
+    AdInsSharedModule,
     SharingModule,
     ArchwizardModule,
     ReactiveFormsModule,

@@ -26,7 +26,7 @@ export class SurveyTaskResultPageComponent implements OnInit {
   SrvyOrderNo: string;
   SurveyorName: string;
   Type: string;
-  CustStepIndex: number;
+  CustStepIndex: number = 1;
   isDmsReady: boolean = false;
   dmsObj: DMSObj;
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()
@@ -78,14 +78,15 @@ export class SurveyTaskResultPageComponent implements OnInit {
       this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
       this.isDmsReady = true;
     }
+    this.MakeStepper();
+  }
 
+  MakeStepper(){
     this.stepper = new Stepper(document.querySelector('#stepperSrvy'), {
       linear: false,
       animation: true
     })
-    this.EnterTab("Detail");
-    this.CustStepIndex = 1;
-    this.stepper.to(this.CustStepIndex);
+    document.getElementById('stepperSrvy').style.display = 'block';
   }
 
   async GetSrvyTaskNo(){

@@ -5,8 +5,8 @@
   <div class="ucSearch-Button-Right">
     <span class="mr-1">
       <button type="button" class="backButton" [routerLink]="[CancelLink]" skipLocationChange
-        [queryParams]="{VendorGrpId: VendorGrpId,MrVendorCategoryCode:MrVendorCategoryCode}" translate>
-        <i class="fa fa-arrow-left"> </i> Back 
+        [queryParams]="{VendorGrpId: VendorGrpId,MrVendorCategoryCode:MrVendorCategoryCode}">
+        <i class="fa fa-arrow-left"> </i>&nbsp;<span translate>Back</span>
       </button>
     </span>
   </div>
@@ -15,8 +15,8 @@
     </lib-ucaddtotemp>
     <div class="card-header" *ngIf="listSelectedId.length > 0">
       <div class="text-right">
-        <button type="submit" (click)="SaveVendorGroupMember()" class="btn btn-raised btn-primary" translate>
-          <i class="far fa-check-square"></i> Save
+        <button type="submit" (click)="SaveVendorGroupMember()" class="btn btn-raised btn-primary">
+          <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
         </button>
       </div>
     </div>

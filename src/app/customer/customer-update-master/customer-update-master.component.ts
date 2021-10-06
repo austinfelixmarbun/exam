@@ -29,7 +29,7 @@ export class CustomerUpdateMasterComponent implements OnInit {
     if(environment.isCore){
       this.inputPagingObj._url = "./assets/ucpaging/V2/searchUpdateMasterCustV2.json";
       this.inputPagingObj.pagingJson = "./assets/ucpaging/V2/searchUpdateMasterCustV2.json";
-      this.inputPagingObj.isJoinExAPI = true
+      this.inputPagingObj.isJoinExAPI = true;
       
       this.RequestTaskModel.ProcessKey = CommonConstant.WF_CODE_UPD_CUST_MANUAL;
       this.RequestTaskModel.TaskDefinitionKey = CommonConstant.ACT_CODE_UPD_CUST_DATA;
@@ -39,7 +39,7 @@ export class CustomerUpdateMasterComponent implements OnInit {
       
       this.IntegrationObj.baseUrl = URLConstant.GetAllTaskWorkflow;
       this.IntegrationObj.requestObj = this.RequestTaskModel;
-      this.IntegrationObj.leftColumnToJoin = "CustNo";
+      this.IntegrationObj.leftColumnToJoin = "RefNo";
       this.IntegrationObj.rightColumnToJoin = "ProcessInstanceBusinessKey";
       this.inputPagingObj.integrationObj = this.IntegrationObj;
     }

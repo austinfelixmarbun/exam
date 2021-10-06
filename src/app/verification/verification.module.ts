@@ -23,6 +23,7 @@ import { VerificationQuestionSchemeMemberAddComponent } from './verification-que
 import { VerificationQuestionSchemeMemberEditComponent } from './verification-question-scheme-member/verification-question-scheme-member-edit/verification-question-scheme-member-edit.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { AdInsModule } from 'app/components/adins-module/adins.module';
     CommonModule,
     HttpModule,
     NgbModule,
+    AdInsSharedModule,
     SharingComponentModule,
     TreeViewModule,
     NgbDropdownModule,

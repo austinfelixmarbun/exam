@@ -1,12 +1,12 @@
 
 <div class="ucSearch-Button-Right" style="margin-top:20px">
   <span class="mr-1">
-      <button type="button" class="backButton" [routerLink]="[CancelLink]" skipLocationChange translate>
-        <i class="far fa-window-close"></i> Cancel
+      <button type="button" class="backButton" [routerLink]="[CancelLink]" skipLocationChange>
+        <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
       </button>
       <button type="button" class="addButton" [routerLink]="[AddLink]" skipLocationChange
-      [queryParams]="{refEmpId:refEmpId,empNo:empNo,empName:empName}" translate>
-          <i class="ft-plus-circle"></i> Add
+      [queryParams]="{refEmpId:refEmpId,empNo:empNo,empName:empName}">
+          <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
       </button>
   </span>
 </div>

@@ -15,6 +15,7 @@ import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewPersonalFamilyComponent } from "./customer-view-personal-family.component";
 import { CustomerViewPersonalFamilyRoutingModule } from "./customer-view-personal-family-routing.module";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { CustomerViewPersonalFamilyRoutingModule } from "./customer-view-persona
     UcviewgenericModule,
     UcgridviewModule,
     NgbModule,
+    AdInsSharedModule,
     SharingModule,
     ArchwizardModule,
     ReactiveFormsModule,

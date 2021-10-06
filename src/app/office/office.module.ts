@@ -25,6 +25,7 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { AdInsModule } from 'app/components/adins-module/adins.module';
     CommonModule,
     FormsModule,
     NgbModule,
+    AdInsSharedModule,
     UCSearchModule,
     UcgridfooterModule,
     UcpagingModule,
