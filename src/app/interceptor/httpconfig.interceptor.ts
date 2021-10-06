@@ -123,7 +123,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
                             if (event.body.HeaderObj.StatusCode == '400' && event.body.HeaderObj.ErrorMessages != undefined) { //DTO
                                 for (var i = 0; i < event.body.HeaderObj.ErrorMessages.length; i++) {
-                                    this.toastr.error(event.body.HeaderObj.ErrorMessages[i].Message, 'Status: ' + event.body.HeaderObj.StatusCode, { "tapToDismiss": true });
+                                    this.toastr.error(event.body.HeaderObj.ErrorMessages[i].Message, 'Status: ' + event.body.HeaderObj.StatusCode, { "tapToDismiss": true, "disableTimeOut": true, "closeButton": true });
                                 }
                             } else {
                                 let data = {};
@@ -131,7 +131,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                                     reason: event.body.HeaderObj.Message ? event.body.HeaderObj.Message : '',
                                     status: event.body.HeaderObj.StatusCode
                                 };
-                                this.toastr.error(data['reason'], 'Status: ' + data['status'], { "tapToDismiss": true });
+                                this.toastr.error(data['reason'], 'Status: ' + data['status'], { "tapToDismiss": true, "disableTimeOut": true, "closeButton": true });
                                 console.log(event.body);
                             }
 
@@ -147,16 +147,16 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 if (error.error != null) {
                     if (error.error.ErrorMessages != null) {
                         for (var i = 0; i < error.error.ErrorMessages.length; i++) {
-                            this.toastr.error(error.error.ErrorMessages[i].Message, 'Status: ' + error.error.StatusCode, { "tapToDismiss": true });
+                            this.toastr.error(error.error.ErrorMessages[i].Message, 'Status: ' + error.error.StatusCode, { "tapToDismiss": true, "disableTimeOut": true, "closeButton": true });
                         }
                     } else if (error.error.Message != null) {
-                        this.toastr.error(error.error.Message, 'Status: ' + error.error.StatusCode, { "tapToDismiss": true });
+                        this.toastr.error(error.error.Message, 'Status: ' + error.error.StatusCode, { "tapToDismiss": true, "disableTimeOut": true, "closeButton": true });
                     }else {
-                        this.toastr.error(error.url, 'Status: ' + error.status, { "tapToDismiss": true });
+                        this.toastr.error(error.url, 'Status: ' + error.status, { "tapToDismiss": true, "disableTimeOut": true, "closeButton": true });
                     }
                 }
                 else {
-                    this.toastr.error(error.message, 'Status: ' + error.status, { "tapToDismiss": true });
+                    this.toastr.error(error.message, 'Status: ' + error.status, { "tapToDismiss": true, "disableTimeOut": true, "closeButton": true });
                 }
 
                 console.log(JSON.stringify(request.body));

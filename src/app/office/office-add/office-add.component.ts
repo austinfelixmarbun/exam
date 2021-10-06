@@ -416,8 +416,7 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.Fax = this.OfficeForm.value.UcAddress.Fax;
 
     if (this.pageType == "add") {
-      let addRefOfficeUrl = environment.isCore? URLConstant.AddRefOfficeV2 : URLConstant.AddRefOffice;
-      this.httpClient.post(addRefOfficeUrl, this.officeObj).subscribe(
+      this.httpClient.post(URLConstant.AddRefOfficeV2, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           
@@ -430,8 +429,7 @@ export class OfficeAddComponent implements OnInit {
       this.officeObj.MrOfficeTypeCode = this.resultData.MrOfficeTypeCode
       this.officeObj.RefOfficeId = this.resultData.RefOfficeId;
       this.officeObj.RowVersion = this.resultData.RowVersion;
-      let editRefOfficeUrl = environment.isCore? URLConstant.EditRefOfficeV2 : URLConstant.EditRefOffice;
-      this.httpClient.post(editRefOfficeUrl, this.officeObj).subscribe(
+      this.httpClient.post(URLConstant.EditRefOfficeV2, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           

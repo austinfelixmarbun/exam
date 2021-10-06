@@ -570,10 +570,12 @@ export class URLConstant {
     public static EditVendorBranch = environment.FoundationR3Url + "/v1" + "/Vendor/EditVendorBranch";
 
     // VENDOR EMP
-    public static AddVendorBranchEmp = environment.FoundationR3Url + "/v1" + "/VendorEmp/AddVendorBranchEmp"
-    public static GetVendorEmpByVendorEmpId = environment.FoundationR3Url + "/v1" + "/VendorEmp/GetVendorEmpByVendorEmpId"
-    public static GetVendorEmpAndVendorTaxAddrByVendorEmpId = environment.FoundationR3Url + "/v1" + "/VendorEmp/GetVendorEmpAndVendorTaxAddrByVendorEmpId"
+    public static AddVendorBranchEmp = environment.FoundationR3Url + "/v1" + "/VendorEmp/AddVendorBranchEmp";
+    public static AddVendorBranchEmpV2 = environment.FoundationR3Url + "/v2" + "/VendorEmp/AddVendorBranchEmp";
+    public static GetVendorEmpByVendorEmpId = environment.FoundationR3Url + "/v1" + "/VendorEmp/GetVendorEmpByVendorEmpId";
+    public static GetVendorEmpAndVendorTaxAddrByVendorEmpId = environment.FoundationR3Url + "/v1" + "/VendorEmp/GetVendorEmpAndVendorTaxAddrByVendorEmpId";
     public static EditVendorBranchEmp = environment.FoundationR3Url + "/v1" + "/VendorEmp/EditVendorBranchEmp";
+    public static EditVendorBranchEmpV2 = environment.FoundationR3Url + "/v2" + "/VendorEmp/EditVendorBranchEmp";
     public static GetListVendorEmpByVendorId = environment.FoundationR3Url + "/v1" + "/VendorEmp/GetListVendorEmpByVendorId";
 
     // VENDOR ADDR
