@@ -15,6 +15,7 @@ import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { IntegrationObj } from 'app/shared/model/library/IntegrationObj.model';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ApprovalTaskService } from 'app/shared/services/ApprovalTask.service';
 import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 import { String } from 'typescript-string-operations';
@@ -32,7 +33,7 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
   arrCrit: any;
   userContext: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));;
 
-  constructor(private toastr: NGXToastrService, private httpClient: HttpClient, private router: Router, private cookieService: CookieService) { }
+  constructor(private toastr: NGXToastrService, private httpClient: HttpClient, private router: Router, private cookieService: CookieService, private apvTaskService: ApprovalTaskService) { }
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/dealer-grading/searchDealerGradingApproval.json";
@@ -57,7 +58,6 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
   }
 
   CallBackHandler(ev) {
-    var ApvReqObj = new ApprovalObj();
     var isRoleAssignment = ev.RowObj.IsRoleAssignment.toString();
 
     if (ev.Key == "Process") {
@@ -70,18 +70,8 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
       }
       else{
         if (ev.RowObj.CurrentUser == "-") {
-          var claimTaskObj = new ApvClaimTaskObj();
-          claimTaskObj.TaskId = ev.RowObj.TaskId;
-          claimTaskObj.Username = this.userContext.UserName;
-          this.httpClient.post(URLConstant.ApvClaimTask, claimTaskObj).subscribe(
-            (response) => {
-              this.toastr.successMessage(response["Message"]);
-              this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_APV_DETAIL], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "VendorGradingHistNo": ev.RowObj.VendorGradingHistNo ,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId} });
-            },
-            error => {
-              console.log(error);
-            }
-          )
+          this.apvTaskService.ClaimApvTask(ev.RowObj.TaskId);
+          this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_APV_DETAIL], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "VendorGradingHistNo": ev.RowObj.VendorGradingHistNo ,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId} });
         } else {
           this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_APV_DETAIL], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "VendorGradingHistNo": ev.RowObj.VendorGradingHistNo ,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId} });
         }
@@ -91,37 +81,21 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
       if (String.Format("{0:L}", ev.RowObj.CurrentUser) != String.Format("{0:L}", this.userContext.UserName)) {
         this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_HOLD);
       } else {
-        ApvReqObj.TaskId = ev.RowObj.TaskId
-        this.httpClient.post(AdInsConstant.ApvHoldTaskUrl, ApvReqObj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response["Message"]);
-          }
-        )
+        this.apvTaskService.HoldApvTask(ev.RowObj.TaskId);
       }
     }
     else if (ev.Key == "TakeBack") {
       if (String.Format("{0:L}", ev.RowObj.MainUser) != String.Format("{0:L}", this.userContext.UserName)) {
         this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_TAKE_BACK);
       } else {
-        ApvReqObj.TaskId = ev.RowObj.TaskId;
-        ApvReqObj.Username = ev.RowObj.MainUser;
-        this.httpClient.post(AdInsConstant.ApvTakeBackTaskUrl, ApvReqObj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response["Message"]);
-          }
-        )
+        this.apvTaskService.TakeBackApvTask(ev.RowObj.TaskId);
       }
     }
     else if (ev.Key == "UnClaim") {
       if (String.Format("{0:L}", ev.RowObj.CurrentUser) != String.Format("{0:L}", this.userContext.UserName)) {
         this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_UNCLAIM);
       } else {
-        ApvReqObj.TaskId = ev.RowObj.TaskId;
-        this.httpClient.post(AdInsConstant.ApvUnclaimTaskUrl, ApvReqObj).subscribe(
-          (response) => {
-            this.toastr.successMessage(response["Message"]);
-          }
-        )
+        this.apvTaskService.UnclaimApvTask(ev.RowObj.TaskId);
       }
     }
     else {

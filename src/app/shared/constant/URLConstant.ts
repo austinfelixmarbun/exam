@@ -978,7 +978,6 @@ export class URLConstant {
     public static GetTaskHistory = "/Approval/GetTaskHistory";
     public static ReturnLevel = "/Approval/ReturnLevel";
     public static ContinueToLevel = "/Approval/ContinueToLevel";
-    public static ApvClaimTask = environment.FoundationR3Url + "/v1" + "/Approval/ClaimTask";
 
     // Payment Allocation
     public static GetListKeyValueRefPaymentAllocActive = environment.FoundationR3Url + "/v1" + "/RefPaymentAlloc/GetListKeyValueRefPaymentAllocActive";

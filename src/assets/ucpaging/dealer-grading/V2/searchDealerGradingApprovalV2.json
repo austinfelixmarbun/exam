@@ -161,12 +161,29 @@
         ]
       },
       {
-        "type": "action",
-        "position": "center",
-        "action": [
+        "type" : "action",
+        "position" : "center",
+        "action" : [
           {
-            "type": "callback",
-            "key": "UnClaim"
+            "type": "switch",
+            "case": [
+              {
+                "conditions" : [ 
+                  {
+                      "isUser": false,
+                      "property" : "IsRoleAssignment", 
+                      "value" : true, 
+                      "restriction" : "EQ" 
+                  }
+                ],
+                "result" : { 
+                  "type": "callback",
+                  "key": "UnClaim",
+                  "icon" : "ft-edit-2"
+                },
+                "isHide" : false
+              }
+            ]
           }
         ]
       }
