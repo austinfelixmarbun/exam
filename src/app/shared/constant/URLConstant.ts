@@ -428,6 +428,7 @@ export class URLConstant {
     public static GetListUploadSettingDByUploadSettingHId = "/UploadSetting/GetListUploadSettingDByUploadSettingHId";
 
     // GENERIC
+    public static GetListOSApvTaskByCategoryCodeAndCurrentUserIdOrMainUserIdAndRoleCode = environment.ApprovalR3Url + "/Generic/GetListOSApvTaskByCategoryCodeAndCurrentUserIdOrMainUserIdAndRoleCode";
 
     // ASSET TYPE
     public static AddAssetType = environment.FoundationR3Url + "/v1" + "/AssetType/AddAssetType"

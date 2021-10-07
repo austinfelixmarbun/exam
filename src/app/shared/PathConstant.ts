@@ -405,7 +405,8 @@ export class PathConstant {
     public static VENDOR_AUCTION_COY_ADD_EDIT = PathConstant.VENDOR_AUCTION_COY + "/" + PathConstant.ADD_EDIT;
     public static VENDOR_GRADING = "VendorGrading";
     public static REQUEST = "Request";
-    public static VENDOR_GRADING_REQUEST_PAGING = PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstant.PAGING;;
+    public static VENDOR_GRADING_REQUEST_PAGING = PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstant.PAGING;
+    public static VENDOR_GRADING_REQUEST_APPROVAL_DETAIL = PathConstant.VENDOR_GRADING + "/" + PathConstant.APPRV + "/" + PathConstant.DETAIL;
     //#endregion
     
     //#region Verif-Module

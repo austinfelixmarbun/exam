@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
 import { UcInputApprovalGeneralInfoObj } from 'app/shared/model/UcInputApprovalGeneralInfoObj.model';
@@ -22,6 +23,7 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
   taskId: number;
   instanceId: number;
   inputObj: any;
+  IsRoleAssignment: string = "";
   viewVendorBranchObj: UcViewGenericObj = new UcViewGenericObj();
    
   InputApvObj : UcInputApprovalObj;
@@ -55,6 +57,10 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
         this.ApvReqId = params["ApvReqId"];
       }
 
+      if(params["IsRoleAssignment"] != null){
+        this.IsRoleAssignment = params["IsRoleAssignment"];
+      }
+
     });
   }
 
@@ -64,7 +70,9 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
     var ApvHoldObj = new ApprovalObj();
     ApvHoldObj.TaskId = this.taskId
 
-    this.HoldTask(ApvHoldObj);
+    if(this.IsRoleAssignment != CommonConstant.TRUE){
+      this.HoldTask(ApvHoldObj);
+    }
     this.initInputApprovalObj();
   }
 

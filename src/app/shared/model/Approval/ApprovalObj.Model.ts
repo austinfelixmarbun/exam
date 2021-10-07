@@ -1,11 +1,11 @@
 export class ApprovalObj {
     TaskId: number;
-    UsernameMemberId: number;
+    Username: string;
     IsHold: boolean;
 
     constructor() {
         this.TaskId = -999
-        this.UsernameMemberId = 0;
+        this.Username = "";
         this.IsHold = true;
     }
 }
