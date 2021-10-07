@@ -98,15 +98,15 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         StorageService,
         NGXToastrService,
         ClaimTaskService,
-        UrlConstantNew,
-        EnviConfigService,
-        {
-            provide: APP_INITIALIZER, useFactory: appConfig, multi: true, deps: [EnviConfigService]
-        },
-        UrlConstantService,
-        {
-            provide: APP_INITIALIZER, useFactory: urlConstantConfig, multi: true, deps: [UrlConstantService]
-        },
+        // UrlConstantNew,
+        // EnviConfigService,
+        // {
+        //     provide: APP_INITIALIZER, useFactory: appConfig, multi: true, deps: [EnviConfigService]
+        // },
+        // UrlConstantService,
+        // {
+        //     provide: APP_INITIALIZER, useFactory: urlConstantConfig, multi: true, deps: [UrlConstantService]
+        // },
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
     bootstrap: [AppComponent],
