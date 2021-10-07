@@ -823,6 +823,7 @@ export class URLConstant {
     // CUST GROUP
     public static GetListCustGrpForCustViewByCustId = environment.FoundationR3Url + "/v1" + "/CustGrp/GetListCustGrpForCustViewByCustId";
     public static GetListCustGrpForCustViewByMemberCustId = environment.FoundationR3Url + "/v1" + "/CustGrp/GetListCustGrpForCustViewByMemberCustId";
+    public static GetListCustGrpForCustViewById = environment.FoundationR3Url + "/v1" + "/CustGrp/GetListCustGrpForCustViewById"
 
     // NEGATIVE CUSTOMER
     public static AddNegativeCustomer = environment.FoundationR3Url + "/v1" + "/NegativeCust/AddNegativeCust";
