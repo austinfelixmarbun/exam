@@ -41,7 +41,7 @@ export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-const appConfig = (config: EnviConfigService) => {
+const enviConfig = (config: EnviConfigService) => {
     return () => {
         return config.loadConfig();
     }
