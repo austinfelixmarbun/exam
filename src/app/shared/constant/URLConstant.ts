@@ -12,7 +12,7 @@ export class URLConstant {
     public static GetSysConfigResultByCode = environment.FoundationR3Url + "/v1" + "/SysConfigResult/GetSysConfigResultByCode";
 
     // DOWNLOAD
-    public static DownloadTemplate = environment.FoundationR3Url + "/v1" + "/Download/DownloadTemplate";
+    public static DownloadTemplate = environment.FoundationR3Url + "/v2" + "/Download/DownloadTemplate";
 
     // WEB SOCKET
     public static WebSocketUrl = environment.WebSocketURL + "/Notificationhub";
@@ -347,7 +347,7 @@ export class URLConstant {
     public static GetListAssetSchmH = environment.FoundationR3Url + "/v1" + "/AssetSchmH/GetListAssetSchmHByAssetMasterId";
     public static GetListAssetMasterByAssetSchmHId = environment.FoundationR3Url + "/v1" + "/AssetMaster/GetListAssetMasterByAssetSchmHId";
     public static EditListAssetSchmDByAssetMasterId = environment.FoundationR3Url + "/v1" + "/AssetSchmD/EditListAssetSchmDByAssetMasterId";
-    public static GetUploadAssetMasterByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + "/v1" + "/AssetMaster/GetUploadAssetMasterByUploadMonitoringNoAndTrxType";
+    public static GetUploadAssetMasterByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + "/v2" + "/AssetMaster/GetUploadAssetMasterByUploadMonitoringNoAndTrxType";
     public static AddAssetMasterAttrContent = environment.FoundationR3Url + "/v1" + "/AssetMasterAttrContent/AddAssetMasterAttrContent";
     public static GetAssetMasterAttrContentForAssetMaster = environment.FoundationR3Url + "/v1" + "/AssetMasterAttrContent/GetAssetMasterAttrContentForAssetMaster";
     public static GetAssetMasterAttrContentForAssetMasterByAttrTypeCode = environment.FoundationR3Url + "/v1" + "/AssetMasterAttrContent/GetAssetMasterAttrContentForAssetMasterByAttrTypeCode";
@@ -500,7 +500,7 @@ export class URLConstant {
     public static AddAssetNegative = environment.FoundationR3Url + "/v1" + "/AssetNegative/AddAssetNegative";
     public static EditAssetNegative = environment.FoundationR3Url + "/v1" + "/AssetNegative/EditAssetNegative";
     public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/v1" + "/AssetNegative/GetAssetNegativeByIdEditPage";
-    public static GetUploadAssetNegativeByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + "/v1" + "/AssetNegative/GetUploadAssetNegativeByUploadMonitoringNoAndTrxType";
+    public static GetUploadAssetNegativeByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + "/v2" + "/AssetNegative/GetUploadAssetNegativeByUploadMonitoringNoAndTrxType";
 
     // VENDOR
     public static AddVendorHO = environment.FoundationR3Url + "/v1" + "/Vendor/AddVendorHO";
@@ -834,7 +834,7 @@ export class URLConstant {
     public static EditNegativeCustChangeTrx = environment.FoundationR3Url + "/v1" + "/NegativeCustChangeTrx/EditNegativeCustChangeTrx";
     public static GetNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/v1" + "/NegativeCustChangeTrx/GetNegativeCustChangeTrxByNegativeCustId";
     public static GetListNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/v1" + "/NegativeCustChangeTrx/GetListNegativeCustChangeTrxByNegativeCustId";
-    public static GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + "/v1" + "/NegativeCust/GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType";
+    public static GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + "/v2" + "/NegativeCust/GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType";
     public static GetNegativeCustByNegativeCustNameAndCustType = environment.FoundationR3Url + "/v1" + "/NegativeCust/GetNegativeCustByNegativeCustNameAndCustType";
 
     // CUSTOMER OTHER INFO
