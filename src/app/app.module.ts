@@ -36,6 +36,7 @@ import { EnviConfigService } from './shared/services/enviConfig.service';
 import { UrlConstantService } from './shared/services/urlConstant.service';
 import { UrlConstantNew } from './shared/constant/URLConstantNew';
 import { ClipboardModule } from 'ngx-clipboard'
+import { ApprovalTaskService } from './shared/services/ApprovalTask.service';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -98,6 +99,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         StorageService,
         NGXToastrService,
         ClaimTaskService,
+        ApprovalTaskService,
         // UrlConstantNew,
         // EnviConfigService,
         // {
