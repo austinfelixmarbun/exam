@@ -122,7 +122,7 @@ export class CustomerCompanyDetailXComponent implements OnInit {
         this.setLookupCustGrp();
       }
     );
-    this.http.post(URLConstantX.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
+    await this.http.post(URLConstantX.GetCustCompanyByCustId, { Id: this.IdCust }).toPromise().then(
       (response) => {
         this.tempCustCompanyObj = response['responseCustCompanyObj'];
         this.tempRefSectorEconomySlik = response['RefSectorEconomySlikXId'];
