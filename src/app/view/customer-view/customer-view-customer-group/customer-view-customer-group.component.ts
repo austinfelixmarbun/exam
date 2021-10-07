@@ -6,6 +6,7 @@ import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 
 @Component({
   selector: 'app-customer-view-customer-group',
@@ -16,6 +17,7 @@ export class CustomerViewCustomerGroupComponent implements OnInit {
   responseObj: any;
   custViewUrl: string;
   responseMemberCustGrpObj: any;
+  IsReady: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -30,21 +32,14 @@ export class CustomerViewCustomerGroupComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-    let custObj = { "Id": this.CustId };
-    this.http.post(URLConstant.GetListCustGrpForCustViewByCustId, custObj).subscribe(
+    
+    let reqById: GenericObj = new GenericObj();
+    reqById.Id = this.CustId;
+    this.http.post(URLConstant.GetListCustGrpForCustViewById, reqById).subscribe(
       response => {
-        this.responseObj = response['ReturnObject'];
-      },
-      error => {
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.ERROR], {});
-      }
-    );
-    this.http.post(URLConstant.GetListCustGrpForCustViewByMemberCustId, custObj).subscribe(
-      response => {
-        this.responseMemberCustGrpObj = response['ReturnObject'];
-      },
-      error => {
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.ERROR], {});
+        this.responseObj = response['ParentCustGrp'];
+        this.responseMemberCustGrpObj = response['ChildCustGrp'];
+        this.IsReady = true;
       }
     );
   }
