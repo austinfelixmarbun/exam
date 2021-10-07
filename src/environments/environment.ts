@@ -18,6 +18,7 @@ export const environment = {
   lmsWeb: "http://r3impl-websvr.ad-ins.com/LMS", //sementara ku tak tau
   //ApprovalURL: 'http://r3app-server.ad-ins.com/FOUNDATION_R3/Approval',
   ApprovalURL: 'http://r3impl-appsvr.ad-ins.com/APPROVAL_R3_BE_DSF_IMPL_CAMUNDA',
+  ApprovalR3Url: 'http://r3impl-appsvr.ad-ins.com/APPROVAL_R3_BE_DSF_IMPL_CAMUNDA',
   FoundationR3Web: 'http://r3impl-websvr.ad-ins.com/FOU_DSF_IMPL',
   // FoundationR3Url: 'http://localhost:5000',
   losR3Web: 'http://r3impl-websvr.ad-ins.com/LOS_DSF_IMPL',
