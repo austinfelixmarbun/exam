@@ -88,7 +88,7 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
       if (String.Format("{0:L}", ev.RowObj.MainUser) != String.Format("{0:L}", this.userContext.UserName)) {
         this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_TAKE_BACK);
       } else {
-        this.apvTaskService.TakeBackApvTask(ev.RowObj.TaskId);
+        this.apvTaskService.TakeBackApvTask(ev.RowObj.TaskId, ev.RowObj.MainUser);
       }
     }
     else if (ev.Key == "UnClaim") {
