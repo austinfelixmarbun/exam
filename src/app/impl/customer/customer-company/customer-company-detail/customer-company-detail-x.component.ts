@@ -1,24 +1,24 @@
-import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Validators, FormBuilder } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { HttpClient } from '@angular/common/http';
+import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
+import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
+import { DatePipe } from '@angular/common';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { CustObj } from 'app/shared/model/CustObj.Model';
+import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
 import { CookieService } from 'ngx-cookie';
 import { String } from 'typescript-string-operations';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
-import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CustGrpObj } from 'app/shared/model/CustGrpObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
@@ -90,6 +90,8 @@ export class CustomerCompanyDetailXComponent implements OnInit {
   async ngOnInit() {
     var datePipe = new DatePipe("en-US");
     this.lookUpObj = new InputLookupObj();
+    this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+
     this.MaxDate = new Date(this.UserAccess.BusinessDt);
     this.MaxDate.setDate(this.MaxDate.getDate() - 1);
     this.MaxDtValidate = datePipe.transform(this.MaxDate, "yyyy-MM-dd");
@@ -120,8 +122,6 @@ export class CustomerCompanyDetailXComponent implements OnInit {
         this.setLookupCustGrp();
       }
     );
-
-
     this.http.post(URLConstantX.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         this.tempCustCompanyObj = response['responseCustCompanyObj'];

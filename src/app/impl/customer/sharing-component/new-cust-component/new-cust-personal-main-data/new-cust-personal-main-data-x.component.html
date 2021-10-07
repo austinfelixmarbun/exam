@@ -55,9 +55,9 @@
                 </div>
               </div>
 
-              <div class="form-group row">
+              <div class="form-group row" *ngIf="CustDataMode == CustDataModeMain">
                 <label class="col-md-4" translate>Gelar Depan </label>
-                <div class="col-md-8" *ngIf="CustDataMode == CustDataModeMain">
+                <div class="col-md-8">
                   <input type="text" class="form-control adInsInput" formControlName="CustPrefixName"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.CustPrefixName.invalid}">
                   <lib-uc-show-errors [control]="CustomerForm.controls.CustPrefixName" [submit]="enjiForm.submitted">
@@ -141,9 +141,9 @@
                 </div>
               </div>
 
-              <div class="form-group row">
+              <div class="form-group row"  *ngIf="CustDataMode == CustDataModeMain">
                 <label class="col-md-4" translate>Gelar Belakang </label>
-                <div class="col-md-8" *ngIf="CustDataMode == CustDataModeMain">
+                <div class="col-md-8">
                   <input type="text" class="form-control adInsInput" formControlName="CustSuffixName"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.CustSuffixName.invalid}">
                   <lib-uc-show-errors [control]="CustomerForm.controls.CustSuffixName" [submit]="enjiForm.submitted">
