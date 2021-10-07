@@ -9,9 +9,12 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ApprovalObj } from 'app/shared/model/Approval/ApprovalObj.Model';
+import { ApprovalReqObj, ApvClaimTaskObj } from 'app/shared/model/Approval/ApprovalReqObj.model';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
+import { IntegrationObj } from 'app/shared/model/library/IntegrationObj.model';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 import { String } from 'typescript-string-operations';
@@ -24,6 +27,8 @@ import { String } from 'typescript-string-operations';
 export class VendorGradingApprovalPagingComponent implements OnInit {
 
   inputPagingObj: UcPagingObj = new UcPagingObj();
+  apvReqObj: ApprovalReqObj = new ApprovalReqObj();
+  integrationObj: IntegrationObj = new IntegrationObj();
   arrCrit: any;
   userContext: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));;
 
@@ -36,44 +41,54 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
     if(environment.isCore){
       this.inputPagingObj._url = "./assets/ucpaging/dealer-grading/V2/searchDealerGradingApprovalV2.json";
       this.inputPagingObj.pagingJson = "./assets/ucpaging/dealer-grading/V2/searchDealerGradingApprovalV2.json";
+      this.inputPagingObj.isJoinExAPI = true;
+
+      this.apvReqObj.CategoryCode = CommonConstant.VENDOR_GRADING_APV;
+      this.apvReqObj.Username = this.userContext.UserName;
+      this.apvReqObj.RoleCode = this.userContext.RoleCode;
+      this.integrationObj.baseUrl = URLConstant.GetListOSApvTaskByCategoryCodeAndCurrentUserIdOrMainUserIdAndRoleCode;
+      this.integrationObj.requestObj = this.apvReqObj;
+      this.integrationObj.leftColumnToJoin = "VendorGradingHistNo";
+      this.integrationObj.rightColumnToJoin = "TransactionNo";
+      this.integrationObj.joinType = CommonConstant.JOIN_TYPE_INNER;
+      this.inputPagingObj.integrationObj = this.integrationObj; 
     }
     
-    this.arrCrit = new Array();
-    var critObj = new CriteriaObj();
-    critObj.DataType = 'text';
-    critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.propName = 'CATEGORY_CODE';
-    critObj.value = 'VENDOR_GRADING_APV';
-    this.arrCrit.push(critObj);
-
-    critObj = new CriteriaObj();
-    critObj.DataType = 'text';
-    critObj.restriction = AdInsConstant.RestrictionEq;
-    critObj.propName = 'CURRENT_USER_ID';
-    critObj.value = this.userContext.UserName;
-    this.arrCrit.push(critObj);
-
-    critObj = new CriteriaObj();
-    critObj.DataType = 'text';
-    critObj.restriction = AdInsConstant.RestrictionOr;
-    critObj.propName = 'MAIN_USER_ID';
-    critObj.value = this.userContext.UserName;
-    this.arrCrit.push(critObj);
-
-    this.inputPagingObj.addCritInput = this.arrCrit;
   }
 
   CallBackHandler(ev) {
     var ApvReqObj = new ApprovalObj();
+    var isRoleAssignment = ev.RowObj.IsRoleAssignment.toString();
+
     if (ev.Key == "Process") {
-      if (String.Format("{0:L}", ev.RowObj.CURRENT_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
-        this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_PROCESS_TASK);
-      } else {
-        this.router.navigate(["/Vendor/VendorGrading/Approval/Detail"], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "VendorGradingHistNo": ev.RowObj.VendorGradingHistNo ,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId} });
+      if(isRoleAssignment != CommonConstant.TRUE){
+        if (String.Format("{0:L}", ev.RowObj.CurrentUser) != String.Format("{0:L}", this.userContext.UserName)) {
+          this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_PROCESS_TASK);
+        } else {
+          this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_APV_DETAIL], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "VendorGradingHistNo": ev.RowObj.VendorGradingHistNo ,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId} });
+        }
+      }
+      else{
+        if (ev.RowObj.CurrentUser == "-") {
+          var claimTaskObj = new ApvClaimTaskObj();
+          claimTaskObj.TaskId = ev.RowObj.TaskId;
+          claimTaskObj.Username = this.userContext.UserName;
+          this.httpClient.post(URLConstant.ApvClaimTask, claimTaskObj).subscribe(
+            (response) => {
+              this.toastr.successMessage(response["Message"]);
+              this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_APV_DETAIL], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "VendorGradingHistNo": ev.RowObj.VendorGradingHistNo ,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId} });
+            },
+            error => {
+              console.log(error);
+            }
+          )
+        } else {
+          this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_APV_DETAIL], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "VendorGradingHistNo": ev.RowObj.VendorGradingHistNo ,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId} });
+        }
       }
     }
     else if (ev.Key == "HoldTask") {
-      if (String.Format("{0:L}", ev.RowObj.CURRENT_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
+      if (String.Format("{0:L}", ev.RowObj.CurrentUser) != String.Format("{0:L}", this.userContext.UserName)) {
         this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_HOLD);
       } else {
         ApvReqObj.TaskId = ev.RowObj.TaskId
@@ -85,12 +100,24 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
       }
     }
     else if (ev.Key == "TakeBack") {
-      if (String.Format("{0:L}", ev.RowObj.MAIN_USER_ID) != String.Format("{0:L}", this.userContext.UserName)) {
+      if (String.Format("{0:L}", ev.RowObj.MainUser) != String.Format("{0:L}", this.userContext.UserName)) {
         this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_TAKE_BACK);
       } else {
         ApvReqObj.TaskId = ev.RowObj.TaskId;
-        ApvReqObj.UsernameMemberId = ev.RowObj.MainUsernameMemberId;
+        ApvReqObj.Username = ev.RowObj.MainUser;
         this.httpClient.post(AdInsConstant.ApvTakeBackTaskUrl, ApvReqObj).subscribe(
+          (response) => {
+            this.toastr.successMessage(response["Message"]);
+          }
+        )
+      }
+    }
+    else if (ev.Key == "UnClaim") {
+      if (String.Format("{0:L}", ev.RowObj.CurrentUser) != String.Format("{0:L}", this.userContext.UserName)) {
+        this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_TAKE_BACK);
+      } else {
+        ApvReqObj.TaskId = ev.RowObj.TaskId;
+        this.httpClient.post(AdInsConstant.ApvUnclaimTaskUrl, ApvReqObj).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
           }

@@ -57,6 +57,8 @@ export class CommonConstant {
     // BOOLEAN CONDITION
     public static TRUE_CONDITION = "1";
     public static FALSE_CONDITION = "0";
+    public static TRUE = "true";
+    public static FALSE = "false";
 
     // VENDOR CATEGORY    
     public static SUPPLIER = "SUPPLIER"

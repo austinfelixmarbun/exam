@@ -35,7 +35,7 @@
         "type": "sort",
         "position": "center",
         "label": "Trx No",
-        "name": "TRX_NO"
+        "name": "VendorGradingHistNo"
       },
       {
         "type": "sort",
@@ -53,25 +53,25 @@
         "type": "sort",
         "position": "center",
         "label": "Request By",
-        "name": "REQUEST_BY"
+        "name": "RequestBy"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "Request Date",
-        "name": "REQUEST_DATE"
+        "name": "RequestDate"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "Main User Id",
-        "name": "MAIN_USER_ID"
+        "name": "MainUser"
       },
       {
         "type": "sort",
         "position": "center",
         "label": "Current User Id",
-        "name": "CURRENT_USER_ID"
+        "name": "CurrentUser"
       },
       {
         "type": "label",
@@ -87,13 +87,18 @@
         "type": "label",
         "position": "center",
         "label": "Take Back"
+      },
+      {
+        "type": "label",
+        "position": "center",
+        "label": "Unclaim"
       }
     ],
     "bodyList": [
       {
         "type": "text",
         "position": "center",
-        "property": "TRX_NO"
+        "property": "VendorGradingHistNo"
       },
       {
         "type": "text",
@@ -108,22 +113,22 @@
       {
         "type": "text",
         "position": "center",
-        "property": "REQUEST_BY"
+        "property": "RequestBy"
       },
       {
         "type": "date",
         "position": "center",
-        "property": "REQUEST_DATE"
+        "property": "RequestDate"
       },
       {
         "type": "text",
         "position": "center",
-        "property": "MAIN_USER_ID"
+        "property": "MainUser"
       },
       {
         "type": "text",
         "position": "center",
-        "property": "CURRENT_USER_ID"
+        "property": "CurrentUser"
       },
       {
         "type": "action",
@@ -152,6 +157,16 @@
           {
             "type": "callback",
             "key": "TakeBack"
+          }
+        ]
+      },
+      {
+        "type": "action",
+        "position": "center",
+        "action": [
+          {
+            "type": "callback",
+            "key": "UnClaim"
           }
         ]
       }

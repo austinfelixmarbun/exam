@@ -21,8 +21,9 @@ export class AdInsConstant {
 
   // public static ApvHoldTaskUrl = environment.ApprovalURL + "/ApprovalInstance/HoldUnholdTask";
   // public static ApvTakeBackTaskUrl = environment.ApprovalURL + "/ApprovalInstance/TakeBackTask";
-  public static ApvHoldTaskUrl = environment.FoundationR3Url + "/Approval/Hold";
-  public static ApvTakeBackTaskUrl = environment.FoundationR3Url + "/Approval/TakeBack";
+  public static ApvHoldTaskUrl = environment.FoundationR3Url + "/v1" + "/Approval/Hold";
+  public static ApvTakeBackTaskUrl = environment.FoundationR3Url + "/v1" + "/Approval/TakeBack";
+  public static ApvUnclaimTaskUrl = environment.FoundationR3Url + "/v1" + "/Approval/UnClaim";
 
   public static showData = "10,50,100";
   public static TimeoutSession = 6000000;
