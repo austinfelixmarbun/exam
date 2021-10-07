@@ -114,7 +114,7 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
     }
     else if (ev.Key == "UnClaim") {
       if (String.Format("{0:L}", ev.RowObj.CurrentUser) != String.Format("{0:L}", this.userContext.UserName)) {
-        this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_TAKE_BACK);
+        this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_UNCLAIM);
       } else {
         ApvReqObj.TaskId = ev.RowObj.TaskId;
         this.httpClient.post(AdInsConstant.ApvUnclaimTaskUrl, ApvReqObj).subscribe(
