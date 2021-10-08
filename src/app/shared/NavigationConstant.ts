@@ -198,6 +198,7 @@ export class NavigationConstant {
     public static VENDOR_SCHM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_SCHM_DETAIL; //'/Vendor/VendorScheme/Detail'
     public static VENDOR_GRD_REQ_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_GRADING_REQUEST_PAGING; //'/Vendor/VendorGrading/Request/PagingX'
     public static VENDOR_GRD_REQ_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_GRADING_REQUEST_DETAIL; //'/Vendor/VendorGrading/Request/DetailX'
+    public static VENDOR_GRD_INQUIRY = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_GRADING_INQUIRY_X; //'/Vendor/VendorGrading/InquiryX'
     //#endregion
     
     //#region Organization

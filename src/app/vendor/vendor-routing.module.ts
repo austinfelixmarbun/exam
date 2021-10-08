@@ -48,6 +48,7 @@ import { VendorBranchEmployeePagingXComponent } from 'app/impl/vendor/vendor-bra
 import { VendorGradingRequestDetailXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-request/vendor-grading-request-detail/vendor-grading-request-detail-x.component';
 import { VendorGradingRequestPagingXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-request/vendor-grading-request-paging/vendor-grading-request-paging-x.component';
 import { VendorHoldingRegistrationXComponent } from 'app/impl/vendor/vendor-holding-registration/vendor-holding-registration-x.component';
+import { VendorGradingInquiryPagingXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-inquiry-paging/vendor-grading-inquiry-paging-x.component';
 
 const routes: Routes = [
   {
@@ -311,6 +312,13 @@ const routes: Routes = [
         component: VendorGradingInquiryPagingComponent,
         data: {
           title: "Vendor Grading Inquiry", 
+        }
+      },
+      {
+        path: PathConstantX.VENDOR_GRADING_INQUIRY_X,
+        component: VendorGradingInquiryPagingXComponent,
+        data: {
+          title: "Vendor Grading Inquiry X", 
         }
       },
       {
