@@ -86,6 +86,7 @@ import { VendorGradingRequestDetailXComponent } from 'app/impl/vendor/vendor-gra
 import { VendorGradingRequestPagingXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-request/vendor-grading-request-paging/vendor-grading-request-paging-x.component';
 import { ContactPersonAddEditXComponent } from 'app/impl/vendor/component/contact-person-add-edit/contact-person-add-edit-x.component';
 import { VendorHoldingRegistrationXComponent } from 'app/impl/vendor/vendor-holding-registration/vendor-holding-registration-x.component';
+import { VendorGradingInquiryPagingXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-inquiry-paging/vendor-grading-inquiry-paging-x.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -178,6 +179,7 @@ export const customCurrencyMaskConfig = {
     VendorGradingApprovalPagingComponent,
     VendorGradingApprovalDetailComponent,
     VendorGradingInquiryPagingComponent,
+    VendorGradingInquiryPagingXComponent,
     AuctionCompanyPagingComponent,
     AuctionCompanyAddeditComponent,
     VendorAtpmAddEditXComponent,

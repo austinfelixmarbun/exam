@@ -6,6 +6,7 @@ export class PathConstantX{
     public static DETAIL = "DetailX";
     public static PAGING = "PagingX";
     public static EDIT = "EditX";
+    public static INQUIRY_X = 'InquiryX'; 
     //#endregion
     
     //#region Common-Setting
@@ -37,6 +38,7 @@ export class PathConstantX{
     public static VENDOR_GRADING_REQUEST_PAGING = PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstantX.PAGING;
     public static VENDOR_GRADING_REQUEST_DETAIL = PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstantX.DETAIL;
     public static VENDOR_HOLDING_REG = PathConstant.VENDOR_HOLDING + "/" + PathConstantX.VENDOR_REG;
+    public static VENDOR_GRADING_INQUIRY_X = PathConstant.VENDOR_GRADING + "/" + PathConstantX.INQUIRY_X;
     //#endregion
 
     public static CUST_PAGE_X ="PageX";

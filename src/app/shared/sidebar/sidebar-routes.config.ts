@@ -114,7 +114,7 @@ export const ROUTES: RouteInfo[] = [
             Params: [],
           },
           {
-            Path: "/Vendor/VendorGrading/Inquiry",
+            Path: NavigationConstant.VENDOR_GRD_INQUIRY,
             Title: "Vendor Grading Inquiry",
             Icon: "",
             Class: "",
