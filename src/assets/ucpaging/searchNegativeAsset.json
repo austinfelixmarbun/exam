@@ -111,7 +111,7 @@
             "type": "dropdown",
             "name": "A.IS_ACTIVE",
             "id": "isActive",
-            "value": "Active Status",
+            "value": "",
             "placeholder": "Placeholder",
             "isFromURL": false,
             "ddlType": "all",
