@@ -51,7 +51,7 @@ export class OfficeEmpPosComponent implements OnInit {
   readonly EditLink: string = NavigationConstant.OFFICE_EMP_POS_ADD;
   constructor(private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
     this.apiUrl = this.foundationUrl + URLConstant.GetEmpPositionPaging;
-    this.deleteUrl = this.foundationUrl + URLConstant.DeleteEmpPosition;
+    this.deleteUrl = URLConstant.DeleteEmpPosition;
 
     this.route.queryParams.subscribe(params => {
       if (params['refOfficeId'] != null) {

@@ -86,7 +86,7 @@ export class MasterTypePagingComponent implements OnInit {
 
   del(id: any) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
-      this.deleteUrl = this.foundationUrl + URLConstant.DeleteRefRole;
+      this.deleteUrl = URLConstant.DeleteRefRole;
       this.refRoleObj = new RefRoleObj();
       this.refRoleObj.RefRoleId = +id;
       this.https.post(this.deleteUrl, this.refRoleObj).subscribe(

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-cabinet-paging',
@@ -16,7 +17,7 @@ export class CabinetPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/document-management/cabinet/searchCabinet.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/document-management/cabinet/searchCabinet.json";
-    this.inputPagingObj.deleteUrl = "/DocManagement/DeleteCabinet";
+    this.inputPagingObj.deleteUrl = environment.FoundationR3Url + "/v1" + "/DocManagement/DeleteCabinet";
     
     this.isReady = true;
   }

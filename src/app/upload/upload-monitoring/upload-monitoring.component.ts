@@ -56,7 +56,7 @@ export class UploadMonitoringComponent implements OnInit {
 
     this.pageNow = 1;
     this.apiUrl = this.foundationUrl + URLConstant.GetUploadMonitoringPaging;
-    this.deleteUrl = this.foundationUrl + URLConstant.DeleteRefEmpAndEmpBankAcc;
+    this.deleteUrl = URLConstant.DeleteRefEmpAndEmpBankAcc;
     this.initiateForm()
   }
   initiateForm() {
