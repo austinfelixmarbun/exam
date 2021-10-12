@@ -138,7 +138,7 @@ export class VendorBranchViewComponent implements OnInit {
         this.ListVendorAttrContent = response[CommonConstant.ReturnObj];
         if (this.ListVendorAttrContent != null) {
           let reqByAttrGroup: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
-          reqByAttrGroup.AttrGroup = CommonConstant.SUPPLIER;
+          reqByAttrGroup.AttrGroup = this.MrVendorCategoryCode;
           this.http.post(URLConstant.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe( 
             (res) => {
               this.VendorAttrList = res[CommonConstant.ReturnObj];
