@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RegexService } from 'app/customer/regex.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -316,6 +317,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   IsCustLoaded: boolean = false;
   async GetExistingData() {
     if (this.CustId == 0){
+      this.custObj.IsCustomer = true;
       this.IsCustLoaded = true;
       return;
     } 

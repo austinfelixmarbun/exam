@@ -234,6 +234,7 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
   IsCustLoaded: boolean = false;
   async GetExistingData() {
     if (this.CustId == 0){
+      this.custObj.IsCustomer = true;
       this.IsCustLoaded = true;
       return;
     }     

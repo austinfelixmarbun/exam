@@ -81,7 +81,7 @@ export class VendorHoAddEditXComponent implements OnInit {
     IdNo: [''],
     MobilePhnNo1: ['', Validators.pattern("^[0-9]+$")],
     MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
-    Email: ['', [Validators.pattern(CommonConstant.regexEmail)]],
+    Email: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]],
     VendorRating: [''],
     EstablishmentDt: ['', Validators.required],
     PartnershipDt: ['', Validators.required],
@@ -105,6 +105,7 @@ export class VendorHoAddEditXComponent implements OnInit {
   })
 
   HoTitle: string = "";
+  MrVendorCategoryCode_ASSET_INSCO_HO: string = CommonConstant.ASSET_INSCO_HO;  
   SetTitleHoInfo() {
     switch (this.MrVendorCategoryCode) {
       case CommonConstant.SUPPLIER_HO:
@@ -124,6 +125,10 @@ export class VendorHoAddEditXComponent implements OnInit {
         break;
       case CommonConstant.ASSET_INSCO_HO:
         this.HoTitle = "Insurance HO ";
+        this.VendorForm.get("MrTaxCalcMethodCode").clearValidators();
+        this.VendorForm.get("MrTaxCalcMethodCode").updateValueAndValidity();
+        this.VendorForm.get("IsVat").clearValidators();
+        this.VendorForm.get("IsVat").updateValueAndValidity();
         break;
       case CommonConstant.ASSET_INSCO_BRANCH:
         this.HoTitle = "Insurance Branch ";
@@ -536,12 +541,29 @@ export class VendorHoAddEditXComponent implements OnInit {
       AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
   }
-
+  
+	getInputtedValue(event: string) {
+	    this.http.post(URLConstant.GetZipcodeDataByZipCode, { Zipcode: event }).subscribe(
+	      (response) => {
+	        this.VendorForm.patchValue(
+	          {
+	            AreaCode2: response["AreaCode2"],
+	            AreaCode1: response["AreaCode1"],
+	            City: response["City"],
+	            Province: response["ProvDistrictName"]
+	          });
+	        this.inputLookupZipcodeObj.nameSelect = response["Zipcode"];
+	        this.inputLookupZipcodeObj.idSelect = response["Zipcode"];
+	      }
+	    );
+	  }
+  
   setLookup() {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-
+    this.inputLookupZipcodeObj.isReadonly = false;
+    this.inputLookupZipcodeObj.isRequired = false;
 
     this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupSupplierHolding.json";
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupSupplierHolding.json";
@@ -676,6 +698,13 @@ export class VendorHoAddEditXComponent implements OnInit {
       this.vendorHoObj.VendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value;
       this.vendorHoObj.VendorObj.IsOneAffiliate = this.VendorForm.controls.IsOneAffiliate.value;
 
+	  this.vendorHoObj.VendorAddrObj.MrAddrTypeCode = "";
+      this.vendorHoObj.VendorAddrObj.Addr = "";
+      this.vendorHoObj.VendorAddrObj.Zipcode = "";
+      this.vendorHoObj.VendorAddrObj.AreaCode2 = "";
+      this.vendorHoObj.VendorAddrObj.AreaCode1 = "";
+      this.vendorHoObj.VendorAddrObj.City = "";
+      this.vendorHoObj.VendorAddrObj.Province = "";
       if (this.VendorForm.controls.IsNpwpExist.value == true) {
         this.vendorHoObj.VendorObj.TaxIdNo = this.VendorForm.controls.TaxIdNo.value;
         this.vendorHoObj.VendorObj.TaxpayerName = this.VendorForm.controls.TaxpayerName.value;

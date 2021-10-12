@@ -7,11 +7,11 @@ export const environment = {
   production: false,
   navbarColor: 'transparent',
   //losUrl: 'http://localhost:5001',
-  //FoundationR3Url: 'http://localhost:5020',
+  FoundationR3Url: 'http://localhost:5000',
   //LosURL: 'http://r3impl-appsvr.ad-ins.com/LOS_DSF_IMPL',
   //FoundationR3Url: 'http://r3impl-appsvr.ad-ins.com/FOUNDATION_DSF_IMPL',
   LosURL: 'http://trex.ad-ins.com:30001',
-  FoundationR3Url: 'http://trex.ad-ins.com:30002',
+  // FoundationR3Url: 'http://trex.ad-ins.com:30002',
   DMSUrl: "http://sky.ad-ins.com/LiteDMS/Integration/ViewDoc.aspx",
   AMSUrl: "http://r3app-server.ad-ins.com/AMS_DEMO", //OPL dah ada
   LMSUrl: "http://r3app-server.ad-ins.com/LMS_DEMO", //OPL dah ada
