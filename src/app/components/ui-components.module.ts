@@ -18,10 +18,12 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 import { ToastrComponent } from "./extra/toastr/toastr.component";
 import { TypeaheadComponent } from './bootstrap/typeahead/typeahead.component';
+import { AdInsSharedModule } from './adins-module/adins-shared.module';
 
 @NgModule({
     imports: [
         CommonModule,
+        AdInsSharedModule,
         UIComponentsRoutingModule,
         NouisliderModule,
         FileUploadModule,

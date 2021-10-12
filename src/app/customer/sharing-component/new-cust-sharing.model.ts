@@ -33,6 +33,7 @@ import { CustomerViewTrustingSocialModule } from 'app/view/customer-view/custome
 import { PefindoReqComponent } from './new-cust-component/component/third-party-form/pefindo/request/pefindo-req.component';
 import { ThirdPartyFormComponent } from './new-cust-component/component/third-party-form/third-party-form.component';
 import { ThirdPartyUploadService } from './new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header/new-cust-header-x.component';
 import { FamilyListingXComponent } from 'app/impl/customer/sharing-component/family-listing/family-listing-x.component';
 import { NewCustPersonalMainDataXComponent } from 'app/impl/customer/sharing-component/new-cust-component/new-cust-personal-main-data/new-cust-personal-main-data-x.component';
@@ -91,9 +92,10 @@ export const customCurrencyMaskConfig = {
         NgbModule,
         SharingComponentModule,
         SharedModule,
+        AdInsSharedModule,
         ArchwizardModule,
         MatTabsModule,
-        AdInsModule,        
+        AdInsModule,
         NgMultiSelectDropDownModule,
         NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
         CustomerViewTrustingSocialModule

@@ -12,7 +12,7 @@ export class URLConstant {
     public static GetSysConfigResultByCode = environment.FoundationR3Url + "/v1" + "/SysConfigResult/GetSysConfigResultByCode";
 
     // DOWNLOAD
-    public static DownloadTemplate = environment.FoundationR3Url + "/v1" + "/Download/DownloadTemplate";
+    public static DownloadTemplate = environment.FoundationR3Url + "/v2" + "/Download/DownloadTemplate";
 
     // WEB SOCKET
     public static WebSocketUrl = environment.WebSocketURL + "/Notificationhub";
@@ -258,7 +258,7 @@ export class URLConstant {
     public static GetListActiveRefMasterDDL = "/RefMaster/GetListKeyValueActiveByCode";
 
     public static GetListActiveRefMasterDetail = environment.FoundationR3Url + '/v1' + "/RefMaster/GetListActiveRefMaster";
-    
+
     //REF COUNTRY
     public static GetListRefCountry = environment.FoundationR3Url + "/v1" + "/RefCountry/GetListRefCountry";
     public static GetRefCountryByCountryCode = environment.FoundationR3Url + "/v1" + "/RefCountry/GetRefCountryByCountryCode";
@@ -559,7 +559,7 @@ export class URLConstant {
     public static GetVendorGrpForUpdateByVendorGrpId = environment.FoundationR3Url + "/v1" + "VendorGrp/GetVendorGrpForUpdateByVendorGrpId";
     public static GetListVendorGrpByVendorId = environment.FoundationR3Url + "/v1" + "/VendorGrp/GetListVendorGrpByVendorId";
 
-    // VENDOR GROUP MEMBER 
+    // VENDOR GROUP MEMBER
     public static GetListVendorGrpMbrByVendorGrpId = environment.FoundationR3Url + "/v1" + "/VendorGrpMbr/GetListVendorGrpMbrByVendorGrpId";
     public static GetListVendorGrpMbrByVendorId = environment.FoundationR3Url + "/v1" + "/VendorGrpMbr/GetListVendorGrpMbrByVendorId";
     public static AddRangeVendorGrpMbr = environment.FoundationR3Url + "/v1" + "/VendorGrpMbr/AddRangeVendorGrpMbr";
@@ -571,10 +571,10 @@ export class URLConstant {
     public static EditVendorBranch = environment.FoundationR3Url + "/v1" + "/Vendor/EditVendorBranch";
 
     // VENDOR EMP
-    public static AddVendorBranchEmp = environment.FoundationR3Url + "/v1" + "/VendorEmp/AddVendorBranchEmp"
-    public static AddVendorBranchEmpV2 = environment.FoundationR3Url + "/v2" + "/VendorEmp/AddVendorBranchEmp"
-    public static GetVendorEmpByVendorEmpId = environment.FoundationR3Url + "/v1" + "/VendorEmp/GetVendorEmpByVendorEmpId"
-    public static GetVendorEmpAndVendorTaxAddrByVendorEmpId = environment.FoundationR3Url + "/v1" + "/VendorEmp/GetVendorEmpAndVendorTaxAddrByVendorEmpId"
+    public static AddVendorBranchEmp = environment.FoundationR3Url + "/v1" + "/VendorEmp/AddVendorBranchEmp";
+    public static AddVendorBranchEmpV2 = environment.FoundationR3Url + "/v2" + "/VendorEmp/AddVendorBranchEmp";
+    public static GetVendorEmpByVendorEmpId = environment.FoundationR3Url + "/v1" + "/VendorEmp/GetVendorEmpByVendorEmpId";
+    public static GetVendorEmpAndVendorTaxAddrByVendorEmpId = environment.FoundationR3Url + "/v1" + "/VendorEmp/GetVendorEmpAndVendorTaxAddrByVendorEmpId";
     public static EditVendorBranchEmp = environment.FoundationR3Url + "/v1" + "/VendorEmp/EditVendorBranchEmp";
     public static EditVendorBranchEmpV2 = environment.FoundationR3Url + "/v2" + "/VendorEmp/EditVendorBranchEmp";
     public static GetListVendorEmpByVendorId = environment.FoundationR3Url + "/v1" + "/VendorEmp/GetListVendorEmpByVendorId";
@@ -658,7 +658,7 @@ export class URLConstant {
     public static GetVerfResultDsByVerfResultHId = environment.FoundationR3Url + "/v1" + "/VerfResultD/GetVerfResultDsByVerfResultHId";
     public static GetVerfResultDById = environment.FoundationR3Url + "/v1" + "/VerfResultD/GetVerfResultDById";
     public static GetListVerfResultDInQuestionGrp = environment.FoundationR3Url + "/v1" + "/VerfResultD/GetListVerfResultDInQuestionGrp";
-    
+
     // VERF SCHEME H
     public static AddVerfSchemeH = environment.FoundationR3Url + "/v1" + "/VerfSchemeH/AddVerfSchemeH";
     public static EditVerfSchemeH = environment.FoundationR3Url + "/v1" + "/VerfSchemeH/EditVerfSchemeH";
@@ -724,12 +724,13 @@ export class URLConstant {
     public static NewEditDuplicateCust = environment.FoundationR3Url  + '/v1' + "/Cust/NewEditDuplicateCust";
     public static NewEditDuplicateCustV2 = environment.FoundationR3Url  + '/v2' + "/Cust/NewEditDuplicateCust";
 
-    
+
     public static GetCustHighlightCommentByCustId = environment.FoundationR3Url + "/v1" + "/Cust/GetCustHighlightCommentByCustId";
     // CUSTOMER COMPANY
     public static GetListViewCustCompanyLegalDocByCustCompanyId = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/GetListViewCustCompanyLegalDocByCustCompanyId";
     public static DeleteCustCompanyLegalDoc = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/DeleteCustCompanyLegalDoc";
     public static AddCustCompanyLegalDoc = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/AddCustCompanyLegalDoc";
+    public static EditCustCompanyLegalDoc = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/EditCustCompanyLegalDoc";
 
     // CUSTOMER GROUP
     public static AddCustGrpBothWays = environment.FoundationR3Url + "/v1" + "/CustGrp/AddCustGrpBothWays";
@@ -783,7 +784,7 @@ export class URLConstant {
     // CUSTOMER COMPANY LEGAL DOC
     public static GetCustCompanyLegalDocForCustViewByCustId = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/GetCustCompanyLegalDocForCustViewByCustId";
 
-    // CUSTOMER COMPANY 
+    // CUSTOMER COMPANY
     public static GetCustCompanyByCustId = environment.FoundationR3Url + "/v1" + "/CustCompany/GetCustCompanyByCustId"
     public static EditCustCompany = environment.FoundationR3Url + "/v1" + "/CustCompany/EditCustCompany"
 
@@ -823,6 +824,7 @@ export class URLConstant {
     // CUST GROUP
     public static GetListCustGrpForCustViewByCustId = environment.FoundationR3Url + "/v1" + "/CustGrp/GetListCustGrpForCustViewByCustId";
     public static GetListCustGrpForCustViewByMemberCustId = environment.FoundationR3Url + "/v1" + "/CustGrp/GetListCustGrpForCustViewByMemberCustId";
+    public static GetListCustGrpForCustViewById = environment.FoundationR3Url + "/v1" + "/CustGrp/GetListCustGrpForCustViewById"
 
     // NEGATIVE CUSTOMER
     public static AddNegativeCustomer = environment.FoundationR3Url + "/v1" + "/NegativeCust/AddNegativeCust";
@@ -834,7 +836,7 @@ export class URLConstant {
     public static EditNegativeCustChangeTrx = environment.FoundationR3Url + "/v1" + "/NegativeCustChangeTrx/EditNegativeCustChangeTrx";
     public static GetNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/v1" + "/NegativeCustChangeTrx/GetNegativeCustChangeTrxByNegativeCustId";
     public static GetListNegativeCustChangeTrxByNegativeCustId = environment.FoundationR3Url + "/v1" + "/NegativeCustChangeTrx/GetListNegativeCustChangeTrxByNegativeCustId";
-    public static GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + "/v1" + "/NegativeCust/GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType";
+    public static GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + "/v2" + "/NegativeCust/GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType";
     public static GetNegativeCustByNegativeCustNameAndCustType = environment.FoundationR3Url + "/v1" + "/NegativeCust/GetNegativeCustByNegativeCustNameAndCustType";
 
     // CUSTOMER OTHER INFO
@@ -1133,5 +1135,7 @@ export class URLConstant {
   public static AddRefTc = environment.FoundationR3Url + "/v1" + "/RefTc/AddRefTc";
   public static EditRefTc = environment.FoundationR3Url + "/v1" + "/RefTc/EditRefTc";
   public static GetRefTcById = environment.FoundationR3Url + "/v1" + "/RefTc/GetRefTcById";
+
+  public static GetCustCompanyLegalDocByCustCompanyLegalDocId = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/GetCustCompanyLegalDocByCustCompanyLegalDocId";
 }
 

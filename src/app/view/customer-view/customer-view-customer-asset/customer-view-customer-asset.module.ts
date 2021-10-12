@@ -15,6 +15,7 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
     UcviewgenericModule,
     UcgridviewModule,
     NgbModule,
+    AdInsSharedModule,
     SharingModule,
     ArchwizardModule,
     ReactiveFormsModule,

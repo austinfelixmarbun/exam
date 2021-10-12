@@ -19,12 +19,14 @@ import { JournalGroupComponent } from './journal-media/journal-group/journal-gro
 import { JournalReconcilePagingComponent } from "./journal-reconcile/journal-reconcile-paging/journal-reconcile-paging.component";
 import { UploadJournalPagingComponent } from './upload-journal/upload-journal-paging.component';
 import {UploadJournalDetailComponent} from './upload-journal/upload-journal-detail.component';
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 @NgModule({
     imports: [
         JournalRoutingModule,
         CommonModule,
         MatRadioModule,
         AdInsModule,
+        AdInsSharedModule,
         UcSubsectionModule,
         SharingModule,
         UcaddtotempModule,

@@ -1,8 +1,8 @@
 <div class="card">
   <div class="ucSearch-Button-Right">
     <span class="mr-1">
-      <button type="button" class="backButton" [routerLink]="[CancelLink]" [queryParams]="{VerfSchemeHId:VerfSchemeHId}" skipLocationChange translate>
-        <i class="fa fa-arrow-left"> </i> Back
+      <button type="button" class="backButton" [routerLink]="[CancelLink]" [queryParams]="{VerfSchemeHId:VerfSchemeHId}" skipLocationChange>
+        <i class="fa fa-arrow-left"> </i>&nbsp;<span translate>Back</span>
       </button>
     </span>
   </div>
@@ -16,8 +16,8 @@
         [queryParams]="{VerfSchemeHId:VerfSchemeHId}" translate>
           <i class="far fa-window-close"></i> Cancel
         </button> -->
-        <button type="button" (click)="SaveQuestionSchemeMember()" class="btn btn-raised btn-primary" translate>
-          <i class="far fa-check-square"></i> Save
+        <button type="button" (click)="SaveQuestionSchemeMember()" class="btn btn-raised btn-primary">
+          <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
         </button>
       </div>
     </div>

@@ -61,9 +61,12 @@ export class SurveyTaskResultDetailComponent implements OnInit {
   IsDataReady: boolean = false;
   isQuestionLoaded: boolean = true;
 
-
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private router: Router, private cookieService: CookieService) {
-
+  constructor(private route: ActivatedRoute,
+    private http: HttpClient,
+    private toastr: NGXToastrService,
+    private fb: FormBuilder,
+    private router: Router,
+    private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
     });
   }
@@ -82,7 +85,6 @@ export class SurveyTaskResultDetailComponent implements OnInit {
     await this.http.post(URLConstant.GetVerfResultByTrxRefNoAndVerfTrxTypeCode, verfResObj).toPromise().then(
       (response) => {
         this.VerfResultId = response["VerfResultId"];
-
       }
     );
     if (this.VerfResultId == 0) {

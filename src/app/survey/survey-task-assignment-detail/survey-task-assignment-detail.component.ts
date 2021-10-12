@@ -254,13 +254,13 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
       const getuserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
       this.reqByIdAndUsername.SrvyTaskId = surveyTaskId;
       this.reqByIdAndUsername.Username = getuserAccess.UserName;
-        this.httpClient.post(URLConstant.CancelSurveyTaskBySurveyTaskId, this.reqByIdAndUsername).subscribe(
-          (response) => {
-            this.toastr.successMessage("Survey Task has been cancelled!");
-            window.location.reload();
-            // this.getSurveyTaskListData();
-          }
-        )
+      this.httpClient.post(URLConstant.CancelSurveyTaskBySurveyTaskId, this.reqByIdAndUsername).subscribe(
+        (response) => {
+          this.toastr.successMessage("Survey Task has been cancelled!");
+          window.location.reload();
+          // this.getSurveyTaskListData();
+        }
+      )
     }
   }
 

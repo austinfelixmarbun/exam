@@ -75,6 +75,7 @@ import { UcapprovalR3Module } from '@adins/ucapproval-r3';
 import { UcapprovalHistoryModule } from "@adins/ucapproval-history";
 import { UcapprovalgeneralinfoModule } from "@adins/ucapprovalgeneralinfo";
 import { AdInsModule } from 'app/components/adins-module/adins.module';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { VendorAtpmAddEditXComponent } from 'app/impl/vendor/vendor-ATPM/vendor-atpm-add-edit/vendor-atpm-add-edit-x.component';
 import { VendorHoAddEditXComponent } from 'app/impl/vendor/vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit-x.component';
 import { VendorBranchAddEditXComponent } from 'app/impl/vendor/vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit-x.component';
@@ -88,15 +89,15 @@ import { ContactPersonAddEditXComponent } from 'app/impl/vendor/component/contac
 import { VendorHoldingRegistrationXComponent } from 'app/impl/vendor/vendor-holding-registration/vendor-holding-registration-x.component';
 import { VendorGradingInquiryPagingXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-inquiry-paging/vendor-grading-inquiry-paging-x.component';
 
-export const customCurrencyMaskConfig = {     
-  align: "right",     
-  allowNegative: true,     
-  allowZero: true,     
-  decimal: ".",     
-  precision: 2,     
-  prefix: "",     
-  suffix: "",     
-  thousands: ",",     
+export const customCurrencyMaskConfig = {
+  align: "right",
+  allowNegative: true,
+  allowZero: true,
+  decimal: ".",
+  precision: 2,
+  prefix: "",
+  suffix: "",
+  thousands: ",",
   nullable: false,
   inputMode: CurrencyMaskInputMode.NATURAL
 };
@@ -104,6 +105,7 @@ export const customCurrencyMaskConfig = {
 @NgModule({
   imports: [
     AdInsModule,
+    AdInsSharedModule,
     VendorRoutingModule,
     CommonModule,
     FormsModule,
@@ -129,7 +131,7 @@ export const customCurrencyMaskConfig = {
     UcapprovalcreateModule,
     UcapprovalR3Module,
     UcapprovalHistoryModule,
-    UcapprovalgeneralinfoModule 
+    UcapprovalgeneralinfoModule
   ],
   declarations: [
     VendorHoldingPagingComponent,

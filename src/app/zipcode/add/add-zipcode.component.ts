@@ -92,8 +92,7 @@ export class ZipcodeAddComponent implements OnInit {
     }
     if (this.pageType == "add") {
       this.rzcObj.RowVersion = "";
-      let urlAddApi: string = environment.isCore ? URLConstant.AddRefZipcodeV2 : URLConstant.AddRefZipcode;
-      this.http.post(urlAddApi, this.rzcObj).subscribe(
+      this.http.post(URLConstant.AddRefZipcodeV2, this.rzcObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ZIPCODE_PAGING],{});
@@ -102,8 +101,7 @@ export class ZipcodeAddComponent implements OnInit {
     } else {
       this.rzcObj.RefZipcodeId = this.refZipcodeId;
       this.rzcObj.RowVersion = this.resultData.RowVersion;
-      let urlEditApi: string = environment.isCore ? URLConstant.EditRefZipcodeV2 : URLConstant.EditRefZipcode;
-      this.http.post(urlEditApi, this.rzcObj).subscribe(
+      this.http.post(URLConstant.EditRefZipcodeV2, this.rzcObj).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ZIPCODE_PAGING],{});

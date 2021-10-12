@@ -16,9 +16,15 @@ import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { SurveyOrderViewComponent } from "./survey-order-view/survey-order-view.component";
 import { SurveyOrderViewRoutingModule } from "./survey-order-routing.module";
+import { AdInsModule } from "app/components/adins-module/adins.module";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 @NgModule({
+  declarations: [
+    SurveyOrderViewComponent
+  ],
   imports: [
+    AdInsModule,
     SurveyOrderViewRoutingModule,
     CommonModule,
     FormsModule,
@@ -30,22 +36,18 @@ import { SurveyOrderViewRoutingModule } from "./survey-order-routing.module";
     UcviewgenericModule,
     UcgridviewModule,
     NgbModule,
+    AdInsSharedModule,
     SharingModule,
     ArchwizardModule,
     ReactiveFormsModule,
     UcSubsectionModule,
     SharingComponentModule,
-    UcShowErrorsModule,
-  ],
-  declarations: [
-    SurveyOrderViewComponent
-
+    UcShowErrorsModule
   ],
   entryComponents: [
     UclookupgenericComponent,
     UcviewgenericComponent,
     UcgridviewComponent
   ]
-
 })
 export class SurveyOrderViewModule { }

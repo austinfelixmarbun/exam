@@ -27,6 +27,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { OfficeAddXComponent } from 'app/impl/office/office-add/office-add-x.component';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { OfficeXComponent } from 'app/impl/office/office-x.component';
 
 
@@ -37,6 +38,7 @@ import { OfficeXComponent } from 'app/impl/office/office-x.component';
     CommonModule,
     FormsModule,
     NgbModule,
+    AdInsSharedModule,
     UCSearchModule,
     UcgridfooterModule,
     UcpagingModule,
@@ -68,4 +70,3 @@ import { OfficeXComponent } from 'app/impl/office/office-x.component';
   ]
 })
 export class OfficeModule { }
- 

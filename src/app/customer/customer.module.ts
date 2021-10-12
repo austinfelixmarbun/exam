@@ -143,16 +143,18 @@ import { CustomerFamilyMenuXComponent } from 'app/impl/customer/customer-family-
 import { EditMainDataPagingXComponent } from 'app/impl/customer/edit-main-data/edit-main-data-paging/edit-main-data-paging-x.component';
 import { CustBankAccSectionFindataXComponent } from 'app/impl/customer/cust-bank-acc-section-findata/cust-bank-acc-section-findata-x.component';
 import { CustomerPagingXComponent } from 'app/impl/customer/customer-paging/customer-paging-x.component';
+import { CustomerViewChildModule } from 'app/view/customer-view/customer-view-child.module';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
-export const customCurrencyMaskConfig = {     
-  align: "right",     
-  allowNegative: true,     
-  allowZero: true,     
-  decimal: ".",     
-  precision: 2,     
-  prefix: "",     
-  suffix: "",     
-  thousands: ",",     
+export const customCurrencyMaskConfig = {
+  align: "right",
+  allowNegative: true,
+  allowZero: true,
+  decimal: ".",
+  precision: 2,
+  prefix: "",
+  suffix: "",
+  thousands: ",",
   nullable: false,
   inputMode: CurrencyMaskInputMode.NATURAL
 };
@@ -166,10 +168,11 @@ export const customCurrencyMaskConfig = {
     ReactiveFormsModule,
     FormsModule,
     HttpModule,
-    NgbModule, 
+    NgbModule,
     UcpagingModule,
     SharingComponentModule,
     SharedModule,
+    AdInsSharedModule,
     UCSearchModule,
     UcgridfooterModule,
     UcpagingModule,
@@ -243,9 +246,9 @@ export const customCurrencyMaskConfig = {
     EditMainDataPagingComponent,
     EditMainDataCompanyComponent,
     EditMainDataPersonalComponent,
-    CustomerCompanyAddressCheckComponent,  
-    CustomerPersonalAddressCheckComponent, 
-    CustomerViewHeaderPersonalComponent, 
+    CustomerCompanyAddressCheckComponent,
+    CustomerPersonalAddressCheckComponent,
+    CustomerViewHeaderPersonalComponent,
     CustomerViewHeaderCompanyComponent,
     CustomerViewPersonalFinancialSectionComponent,
     CustomerViewCustomerGroupComponent,
@@ -311,9 +314,9 @@ export const customCurrencyMaskConfig = {
     RegexService
   ],
   entryComponents: [
-    CustGroupTabDetailComponent, 
-    CustBankAccDetailSectionFindataComponent, 
-    CustLegalDocDetailComponent, 
+    CustGroupTabDetailComponent,
+    CustBankAccDetailSectionFindataComponent,
+    CustLegalDocDetailComponent,
     CustAssetDetailComponent,
     CustBankAccDetailSectionFindataXComponent]
 })

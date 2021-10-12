@@ -105,8 +105,8 @@
 
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]"
-                [queryParams]="{JrMHeaderId: JrMHeaderId}" translate>
-                <i class="fa fa-arrow-circle-left"></i> Cancel
+                [queryParams]="{JrMHeaderId: JrMHeaderId}">
+                <i class="fa fa-arrow-circle-left"></i>&nbsp;<span translate>Cancel</span>
               </button>
               <button type="button" (click)="onSubmit()" class="btn btn-raised btn-primary" translate>
                 Submit

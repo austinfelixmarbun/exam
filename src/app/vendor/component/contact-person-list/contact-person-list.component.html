@@ -6,8 +6,8 @@
           <div class="px-3">
             <div class="ucSearch-Button-Right">
               <span class="mr-1">
-                <button type="button" (click)="HiddenCheck()" class="btn btn-raised btn-primary" translate>
-                  <i class="ft-plus-circle"></i> Add
+                <button type="button" (click)="HiddenCheck()" class="btn btn-raised btn-primary">
+                  <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
                 </button>
               </span>
             </div>
@@ -19,17 +19,13 @@
                   <tr class="table-header">
                     <th class="text-left"><span class="thead-header" name='Name' translate>Name</span>
                     </th>
-                    <th class="text-left"><span class="thead-header" name='Position' translate>Position
-                      </span>
+                    <th class="text-left"><span class="thead-header" name='Position' translate>Position</span>
                     </th>
-                    <th class="text-left"><span class="thead-header" name='Phone 1' translate>Phone 1
-                      </span>
+                    <th class="text-left"><span class="thead-header" name='Phone 1' translate>Phone 1</span>
                     </th>
-                    <th class="text-left"><span class="thead-header" name='Owner' translate>Owner
-                      </span>
+                    <th class="text-left"><span class="thead-header" name='Owner' translate>Owner</span>
                     </th>
-                    <th class=""><span class="thead-header" name='Action' translate>Action
-                      </span>
+                    <th class=""><span class="thead-header" name='Action' translate>Action</span>
                     </th>
                   </tr>
                 </thead>
@@ -55,7 +51,7 @@
               </table>
               <div class="form-actions right" *ngIf="show">
                 <button type="submit" class="btn btn-raised btn-primary" (click)="NextStep()">
-                  <i class="fa fa-arrow-right"></i> Save and Continue
+                  <i class="fa fa-arrow-right"></i>&nbsp;<span translate>Save and Continue</span>
                 </button>
               </div>
             </form>

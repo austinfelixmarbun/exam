@@ -9,13 +9,11 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { SrvyTaskObj } from 'app/shared/model/SrvyTaskObj.Model';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-survey-result-review-detail',
-  templateUrl: './survey-result-review-detail.component.html',
-  styleUrls: ['./survey-result-review-detail.component.css']
+  templateUrl: './survey-result-review-detail.component.html'
 })
 export class SurveyResultReviewDetailComponent implements OnInit {
 
@@ -44,7 +42,7 @@ export class SurveyResultReviewDetailComponent implements OnInit {
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyOrder.json";
 
-    this.getSurveyTaskListData();
+    // this.getSurveyTaskListData();
   }
 
   async getSurveyTaskListData() {
@@ -91,8 +89,6 @@ export class SurveyResultReviewDetailComponent implements OnInit {
     }
     if (x != undefined) {
       surveyTaskObj.push(this.addGroupAsset(x, max + 1));
-
-
     }
   }
 
@@ -122,7 +118,6 @@ export class SurveyResultReviewDetailComponent implements OnInit {
       CustId: [surveyTaskObj.CustId],
       ResultDate: [surveyTaskObj.ResultDate],
       ReviewComment: [surveyTaskObj.ReviewComment]
-
     })
   }
 
@@ -157,8 +152,10 @@ export class SurveyResultReviewDetailComponent implements OnInit {
       this.reqListSrvyTaskObj.push(this.srvyTaskObj);
     }
 
+    /* istanbul ignore next */
     this.httpClient.post(URLConstant.ReviewSurveyResult, { reqListSrvyTaskObjs: this.reqListSrvyTaskObj }).subscribe(
       (response) => {
+        /* istanbul ignore next */
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEY_RESULT_REVIEW_PAGING], {});
       }

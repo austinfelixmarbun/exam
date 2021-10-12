@@ -86,6 +86,7 @@ import { EconomicSectorSlikAddEditXComponent } from 'app/impl/common-setting/eco
 import { SharedModule } from 'app/shared/shared.module';
 import { RefTcComponent } from './ref-tc/ref-tc-paging/ref-tc.component';
 import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.component';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -122,6 +123,7 @@ export const customCurrencyMaskConfig = {
     UcaddressModule,
     AdInsModule,
     SharedModule,
+    AdInsSharedModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
   ],
   declarations: [

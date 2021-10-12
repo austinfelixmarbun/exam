@@ -1,6 +1,6 @@
 <span class="mr-1 pull-right">
-  <button type="button" class="addButton" (click)="openModalAddCustGroup()" translate *ngIf = "CustGrpList.length == 0">
-    <i class="ft-plus-circle"></i> Add
+  <button type="button" class="addButton" (click)="openModalAddCustGroup()" *ngIf = "CustGrpList.length == 0">
+    <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
   </button>
 </span>
 <lib-ucSubsection [id]="'CustGrpSectionId'" [title]="'Customer Group'" [panel]="'CustGrpSection'"></lib-ucSubsection>
@@ -48,7 +48,7 @@
 <br>
 <br>
 <div class="form-actions right" style="text-align: right;">
-  <button type="submit" class="btn btn-raised btn-primary" (click)="next()" translate>
-    <i class="far fa-check-square"></i> Save and Continue
+  <button type="submit" class="btn btn-raised btn-primary" (click)="next()">
+    <i class="far fa-check-square"></i>&nbsp;<span translate>Save and Continue</span>
   </button>
 </div>

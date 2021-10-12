@@ -28,6 +28,7 @@ import { HoTaxInfoComponent } from "./vendor-ho-info/ho-tax-info/ho-tax-info.com
 import { MainHoInfoComponent } from "./vendor-ho-info/main-ho-info/main-ho-info.component";
 import { MainInfoViewComponent } from "./vendor-ho-info/main-info-view/main-info-view.component";
 import { HoAtpmInfoComponent } from "./vendor-ho-info/ho-atpm-info/ho-atpm-info.component";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { HoAtpmInfoComponent } from "./vendor-ho-info/ho-atpm-info/ho-atpm-info.
     UcviewgenericModule,
     UcgridviewModule,
     NgbModule,
+    AdInsSharedModule,
     SharingModule,
     ArchwizardModule,
     ReactiveFormsModule,

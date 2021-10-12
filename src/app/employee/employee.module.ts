@@ -15,6 +15,7 @@ import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { EmployeeBusinessunitAddComponent } from './employee-businessunit-add/employee-businessunit-add.component';
 import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-paging/employee-businessunit-paging.component';
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
     FormsModule,
     HttpModule,
     NgbModule,
+    AdInsSharedModule,
     SharingComponentModule,
     AdInsModule
   ],

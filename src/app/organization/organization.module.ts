@@ -26,10 +26,12 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
   imports: [
     AdInsModule,
+    AdInsSharedModule,
     OrganizationRoutingModule,
     CommonModule,
     FormsModule,

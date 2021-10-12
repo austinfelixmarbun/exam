@@ -1,8 +1,8 @@
 <div class="ucSearch-Button-Right">
     <span class="mr-1">
         <button type="button" class="addButton" style="margin-top:15px;" [routerLink]="[AddLink]" skipLocationChange
-        [queryParams]="{refEmpId:refEmpId,empNo:empNo,empName:empName}" translate>
-            <i class="ft-plus-circle"></i> Add
+        [queryParams]="{refEmpId:refEmpId,empNo:empNo,empName:empName}">
+            <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
         </button>
     </span>
   </div>
@@ -38,8 +38,7 @@
       <tr class="table-header">
         <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='officeName'
             translate>Employee Name</span></th>
-        <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='jobTitleName' translate>Job
-            Title Name</span></th>
+        <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='jobTitleName' translate>Job Title Name</span></th>
         <th class="text-left"><span class="thead-header" (click)="searchSort($event)" name='bizUnitName'
             translate>Business Unit Name</span></th>
         <th><span class="thead-header" (click)="searchSort($event)" name='isActive' translate>Active Status</span></th>

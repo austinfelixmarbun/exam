@@ -18,6 +18,7 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { SharedModule } from 'app/shared/shared.module';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
   declarations: [PefindoViewComponent],
@@ -40,6 +41,7 @@ import { SharedModule } from 'app/shared/shared.module';
     SharingComponentModule,
     UcShowErrorsModule,
     SharedModule,
+    AdInsSharedModule
   ]
 })
 export class PefindoViewModule { }

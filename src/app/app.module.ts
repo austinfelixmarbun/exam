@@ -1,5 +1,5 @@
 
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from 'app/app-routing.module';
@@ -31,10 +31,29 @@ import { CookieModule } from 'ngx-cookie';
 import { StorageService } from './shared/services/StorageService';
 import { NGXToastrService } from './components/extra/toastr/toastr.service';
 import { ClaimTaskService } from './shared/claimTask.service';
+import { AdInsSharedModule } from './components/adins-module/adins-shared.module';
+import { EnviConfigService } from './shared/services/enviConfig.service';
+import { UrlConstantService } from './shared/services/urlConstant.service';
+import { UrlConstantNew } from './shared/constant/URLConstantNew';
+import { ClipboardModule } from 'ngx-clipboard'
+import { ApprovalTaskService } from './shared/services/ApprovalTask.service';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
+const enviConfig = (config: EnviConfigService) => {
+    return () => {
+        return config.loadConfig();
+    }
+}
+
+const urlConstantConfig = (urlConfig: UrlConstantService) => {
+    return () => {
+        return urlConfig.loadConfig();
+    }
+}
+
 
 @NgModule({
     declarations: [
@@ -50,6 +69,7 @@ export function createTranslateLoader(http: HttpClient) {
         AppRoutingModule,
         NgxSpinnerModule,
         SharedModule,
+        AdInsSharedModule,
         HttpClientModule,
         ToastrModule.forRoot(),
         NgbModule.forRoot(),
@@ -68,6 +88,7 @@ export function createTranslateLoader(http: HttpClient) {
         MatDialogModule,
         BrowserAnimationsModule,
         GrowlModule,
+        ClipboardModule,
         NgMultiSelectDropDownModule.forRoot()
     ],
     providers: [
@@ -78,6 +99,16 @@ export function createTranslateLoader(http: HttpClient) {
         StorageService,
         NGXToastrService,
         ClaimTaskService,
+        ApprovalTaskService,
+        // UrlConstantNew,
+        // EnviConfigService,
+        // {
+        //     provide: APP_INITIALIZER, useFactory: appConfig, multi: true, deps: [EnviConfigService]
+        // },
+        // UrlConstantService,
+        // {
+        //     provide: APP_INITIALIZER, useFactory: urlConstantConfig, multi: true, deps: [UrlConstantService]
+        // },
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
     bootstrap: [AppComponent],

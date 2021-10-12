@@ -16,6 +16,7 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewOtherInfoComponent } from "./customer-view-other-info.component";
 import { CustomerViewOtherInfoRoutingModule } from "./customer-view-other-info-routing.module";
 import { SharedModule } from "app/shared/shared.module";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { SharedModule } from "app/shared/shared.module";
     UcSubsectionModule,
     SharingComponentModule,
     UcShowErrorsModule,
-    SharedModule
+    SharedModule,
+    AdInsSharedModule
   ],
   declarations: [
     CustomerViewOtherInfoComponent

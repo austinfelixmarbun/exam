@@ -23,6 +23,7 @@ import { UcthingstodoModule } from '@adins/ucthingstodo';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
     exports: [
@@ -45,6 +46,7 @@ import { UcaddtotempModule } from '@adins/ucaddtotemp';
         RouterModule,
         HttpModule,
         CommonModule,
+        AdInsSharedModule,
         UCSearchModule,
         UcgridfooterModule,
         UcSubsectionModule,

@@ -13,7 +13,7 @@
           <div class="form-group row">
             <label class="col-md-3 adInsLabel" for="MrCustTypeCode" translate>Customer Type</label>
             <div class="col-md-9">
-              {{response.MrCustTypeCode == 'PERSONAL' ? 'Personal' : 'Company'}}
+              {{response.MrCustTypeCode.toUpperCase() == 'PERSONAL' ? 'Personal' : 'Company'}}
             </div>
           </div>
           <lib-ucSubsection [id]="'MainInformationId'" [title]="'Main Information'" [panel]="'MainInformationPersonal'">

@@ -81,8 +81,8 @@
               <div class="form-group row" *ngIf="!IsLockCopyAddrBtn">
                 <label class="col-md-2 adInsLabel" translate>Copy Address From Legal Customer</label>
                 <div class="col-md-4">
-                  <button type="button" class="btn btn-raised btn-primary" (click)="CopyLegalAddr()" translate>
-                    <i class="far"></i> Copy
+                  <button type="button" class="btn btn-raised btn-primary" (click)="CopyLegalAddr()">
+                    <i class="far"></i>&nbsp;<span translate>Copy</span>
                   </button>
                 </div>
               </div>
@@ -92,11 +92,11 @@
             </div>
 
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Cancel()" translate>
-                <i class="far fa-window-close"></i> Cancel
+              <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Cancel()">
+                <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
               </button>
-              <button type="submit" class="btn btn-raised btn-primary" translate>
-                <i class="far fa-check-square"></i> Save
+              <button type="submit" class="btn btn-raised btn-primary">
+                <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
               </button>
             </div>
           </form>

@@ -30,6 +30,7 @@ import { CustomerViewTrustingSocialComponent } from "./customer-view-trusting-so
 import { CustomerViewPersonalDetailXComponent } from "app/impl/customer/customer-view/customer-view-personal-detail/customer-view-personal-detail-x.component";
 import { CustomerViewXComponent } from "app/impl/customer/customer-view/customer-view/customer-view-x.component";
 import { SharedModule } from "app/shared/shared.module";
+import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { SharedModule } from "app/shared/shared.module";
     UcSubsectionModule,
     SharingComponentModule,
     UcShowErrorsModule,
-    SharedModule
+    SharedModule,
+    AdInsSharedModule
   ],
   declarations: [
     CustomerViewCoyAppListingComponent,
