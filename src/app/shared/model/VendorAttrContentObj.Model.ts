@@ -1,7 +1,7 @@
 export class VendorAttrContentObj{
     AttrContent : string;
-    VendorAttrId :number;
     VendorId : number;
     VendorAttrContentId : number;
+    AttrCode: string;
     constructor() { this.VendorId = 0; }
 }
