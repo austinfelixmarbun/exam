@@ -50,7 +50,7 @@ export class SurveyorAddComponent implements OnInit {
     UserId: ['', Validators.required],
     SurveyorGroupId: ['', Validators.required],
     VendorGroupId: [''],
-    SurveyorNo: ['Test', Validators.required],
+    SurveyorNo: ['', Validators.required],
     Workload: ['', Validators.required],
     CurrWorkloadAmt: ['', Validators.required],
     IsActive: [false]
@@ -133,7 +133,7 @@ export class SurveyorAddComponent implements OnInit {
     this.SurveyorForm.patchValue({
       VendorGroupId: event.VendorId
     });
-    this.lookupVendorObj.nameSelect = event.RefrantorCode;
+    this.lookupVendorObj.nameSelect = event.ReferantorCode;
   }
 
   ngOnInit() {
