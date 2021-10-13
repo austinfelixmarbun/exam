@@ -1,7 +1,7 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
     <button type="button" class="btn btn-raised btn-primary mr-1" [routerLink]="[EditLink]" skipLocationChange
-      [queryParams]="{VendorId: this.VendorId, mode:'edit'}">
+      [queryParams]="{VendorId: this.VendorId, mode:'edit', MrVendorCategoryCode: this.MrVendorCategoryCode}">
       <i class="ft-plus-circle"></i>&nbsp;<span translate>Edit Main Info</span>
     </button>
     <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Back()">
