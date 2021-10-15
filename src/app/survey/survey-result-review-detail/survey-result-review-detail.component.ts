@@ -42,7 +42,8 @@ export class SurveyResultReviewDetailComponent implements OnInit {
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyOrder.json";
 
-    // this.getSurveyTaskListData();
+    this.getSurveyTaskListData();
+    
   }
 
   async getSurveyTaskListData() {

@@ -652,6 +652,7 @@ export class URLConstant {
     public static GetVerfResultHById = environment.FoundationR3Url + "/v1" + "/VerfResultH/GetVerfResultHById";
     public static GetVerfResultHsByTrxRefNo = environment.FoundationR3Url + "/v1" + "/VerfResultH/GetVerfResultHsByTrxRefNo";
     public static GetVerfResultHByTrxRefNoAndMrAddrTypeCode = environment.FoundationR3Url + "/v1" + "/VerfResultH/GetVerfResultHByTrxRefNoAndMrAddrTypeCode";
+    public static GetVerfResultHDsByTrxRefNoAndMrAddrTypeCode = environment.FoundationR3Url + "/v1" + "/VerfResultH/GetVerfResultHDsByTrxRefNoAndMrAddrTypeCode";
 
     // VERF RESULT D
     public static EditVerfResultD = environment.FoundationR3Url + "/v1" + "/VerfResultD/EditVerfResultD";
@@ -875,7 +876,9 @@ export class URLConstant {
     public static ReviewSurveyResult = environment.FoundationR3Url + "/v1" + "/SrvyTask/ReviewSurveyResult";
     public static GetHtmlCodeFromMobile = environment.FoundationR3Url + "/v1" + "/SrvyTask/GetHtmlCodeFromMobile";
     public static UpdateSrvyTaskAndAddVerfResultH = environment.FoundationR3Url + "/v1" + "/SrvyTask/UpdateSrvyTaskAndAddVerfResultH";
-
+    public static UpdateSrvyTaskAndEditVerfResultH = environment.FoundationR3Url + "/v1" + "/SrvyTask/UpdateSrvyTaskAndEditVerfResultH";
+    public static UpdateMrSurveyTaskStatCode = environment.FoundationR3Url + "/v1" + "/SrvyTask/UpdateMrSurveyTaskStatCode";
+   
     // SURVEY ORDER
     public static GetSrvyOrderBySrvyOrderId = environment.FoundationR3Url + "/v1" + "/SrvyOrder/GetSrvyOrderBySrvyOrderId";
     public static GetSrvyOrderByTrxRefNo = environment.FoundationR3Url + "/v1" + "/SrvyOrder/GetSrvyOrderByTrxRefNo";
