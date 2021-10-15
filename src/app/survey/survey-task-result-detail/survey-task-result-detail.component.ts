@@ -11,8 +11,9 @@ import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
 import { ReqUpdateSrvyTaskAndAddVerfResultHDObj } from 'app/shared/model/Request/SrvyTask/ReqUpdateSrvyTaskAndAddVerfResultHDObj.model';
 import { ReqGetVerfResultObj } from 'app/shared/model/Request/VerfResult/ReqGetVerfResultObj.model';
+import { ReqGetVerfResultHObj } from 'app/shared/model/Request/VerfResultH/ReqVerfResultHObj.model';
 import { ResSrvyTaskObj } from 'app/shared/model/Response/SrvyTask/ResSrvyTask.model';
-import { ScoringResultHObj } from 'app/shared/model/ScoringResultHObj.model';
+import { ResVerfResultHByTrxRefNoAndMrAddrTypeCodeObj } from 'app/shared/model/Response/VerfResultH/ResVerfResultHByTrxRefNoAndMrAddrTypeCodeObj.model';
 import { VerfQuestionAnswerCustomObj } from 'app/shared/model/VerfQuestionAnswer/VerfQuestionAnswerCustom.model';
 import { VerfResultDObj } from 'app/shared/model/VerfResultD/VerfResultD.model';
 import { VerifResulHDetailObj } from 'app/shared/model/VerfResultH/VerfResultHDetailObj.model';
@@ -32,12 +33,16 @@ export class SurveyTaskResultDetailComponent implements OnInit {
   @Input() Type: string;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
   ResultObj: Array<KeyValueObj>;
+  ResVerfResultHObj: ResVerfResultHByTrxRefNoAndMrAddrTypeCodeObj = new ResVerfResultHByTrxRefNoAndMrAddrTypeCodeObj();
+  ResVerfResultDObj: any;
   ResSrvyTaskObj: ResSrvyTaskObj = new ResSrvyTaskObj();
   ReqGenericObj: GenericObj = new GenericObj();
   QuestionObj: VerfQuestionAnswerCustomObj;
   VerfResultHD: VerifResulHDetailObj;
   ReqSrvyTaskAndAddVerfResultHDObj: ReqUpdateSrvyTaskAndAddVerfResultHDObj = new ReqUpdateSrvyTaskAndAddVerfResultHDObj();
   addVerifResultObj: VerfResultObj;
+  ReqGetVerfResultHObj: ReqGetVerfResultHObj = new ReqGetVerfResultHObj();
+  PageType: string = "Add";
 
   SrvyTaskForm = this.fb.group({
     MrVerfResultHStatCode: ['', [Validators.required, Validators.maxLength(50)]],
@@ -48,15 +53,10 @@ export class SurveyTaskResultDetailComponent implements OnInit {
 
   ListVerfAnswer = [];
   SrvyOrderNo: string = "";
-  // SrvyTaskNo: string = "";
-  // SrvyFormSchmId: number = 0;
   VerfSchemeHId: number = 0;
   VerfResultId: number = 0;
-  // SubjectName: string = "";
-  // SubjectPhone: string = "";
   LobCode: string = "";
   CustName: string ="";
-  // CustAddr: string = "";
   TrxRefNo: string = "";
   IsDataReady: boolean = false;
   isQuestionLoaded: boolean = true;
@@ -78,6 +78,46 @@ export class SurveyTaskResultDetailComponent implements OnInit {
     await this.GetVerfResultData();
     await this.getSrvyTask();
     await this.getQuestion();
+    await this.getData();
+  }
+
+  dictAnswer: { [id: string]: string } = {};
+  dictNotes: { [id: string]: string } = {};
+  async getData(){
+    this.ReqGetVerfResultHObj.TrxRefNo = this.ResSrvyTaskObj.SrvyTaskNo;
+    this.ReqGetVerfResultHObj.MrAddrTypeCode = this.ResSrvyTaskObj.MrSrvyObjTypeCode;
+    await this.http.post(URLConstant.GetVerfResultHDsByTrxRefNoAndMrAddrTypeCode, this.ReqGetVerfResultHObj).toPromise().then(
+      (response) => {
+        if(response["VerfResultH"] != null){
+          this.ResVerfResultHObj = response["VerfResultH"];
+          this.ResVerfResultDObj = response["VerfResultD"];
+
+          for(let a=0;a<this.ResVerfResultDObj.length;a++){
+            const element = this.ResVerfResultDObj[a];
+            this.dictAnswer[element.VerfQuestionText] = element.Answer;
+            this.dictNotes[element.VerfQuestionText] = element.Notes;
+          }
+
+          this.SrvyTaskForm.patchValue({
+            MrVerfResultHStatCode: this.ResVerfResultHObj.MrVerfResultHStatCode,
+            Notes: this.ResVerfResultHObj.Notes
+          })
+
+          for (let i = 0; i < this.SrvyTaskForm.controls["QuestionObjs"]["controls"].length; i++) {
+            for (let j = 0; j < this.SrvyTaskForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"].length; j++) {
+              var checkName = this.SrvyTaskForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"][j]["controls"]["ResultGrp"]["controls"]["VerfQuestionText"].value;
+              
+              this.SrvyTaskForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"][j]["controls"]["ResultGrp"].patchValue({
+                Answer: this.dictAnswer[checkName],
+                Notes: this.dictNotes[checkName]
+              })
+            }
+          }
+
+          this.PageType = "Edit";
+        }
+      }
+    );
   }
 
   async GetVerfResultData() {
@@ -313,17 +353,33 @@ export class SurveyTaskResultDetailComponent implements OnInit {
       this.toastr.warningMessage("Can't process further because questions are not loaded");
     }
     else {
-      this.setSurveyVerifData();
-      this.ReqSrvyTaskAndAddVerfResultHDObj.SrvyTaskId = this.SrvyTaskId;
-      this.ReqSrvyTaskAndAddVerfResultHDObj.VerfResultHD = this.VerfResultHD;
-      this.http.post(URLConstant.UpdateSrvyTaskAndAddVerfResultH, this.ReqSrvyTaskAndAddVerfResultHDObj).subscribe(
-        async (response) => {
-          this.toastr.successMessage(response["message"]);
+      if(this.PageType == "Add"){
+        this.setSurveyVerifData();
+        this.ReqSrvyTaskAndAddVerfResultHDObj.SrvyTaskId = this.SrvyTaskId;
+        this.ReqSrvyTaskAndAddVerfResultHDObj.VerfResultHD = this.VerfResultHD;
+        this.http.post(URLConstant.UpdateSrvyTaskAndAddVerfResultH, this.ReqSrvyTaskAndAddVerfResultHDObj).subscribe(
+          (response) => {
+            this.toastr.successMessage(response["message"]);
 
-          if(response["StatusCode"] == '200'){
-            this.outputTab.emit({ stepMode: "next" });
-          }
-        });
+            if(response["StatusCode"] == '200'){
+              this.outputTab.emit({ stepMode: "next" });
+            }
+          });
+
+      }else if(this.PageType == "Edit"){
+        this.setSurveyVerifData();
+        this.ReqSrvyTaskAndAddVerfResultHDObj.SrvyTaskId = this.SrvyTaskId;
+        this.ReqSrvyTaskAndAddVerfResultHDObj.VerfResultHD = this.VerfResultHD;
+        this.ReqSrvyTaskAndAddVerfResultHDObj.VerfResultHD.VerfResultHId = this.ResVerfResultHObj.VerfResultHId;
+        this.http.post(URLConstant.UpdateSrvyTaskAndEditVerfResultH, this.ReqSrvyTaskAndAddVerfResultHDObj).subscribe(
+          (response) => {
+            this.toastr.successMessage(response["message"]);
+
+            if(response["StatusCode"] == '200'){
+              this.outputTab.emit({ stepMode: "next" });
+            }
+          });
+      }
     }
   }
 
