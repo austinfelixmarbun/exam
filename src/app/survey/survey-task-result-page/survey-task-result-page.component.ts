@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -31,7 +32,7 @@ export class SurveyTaskResultPageComponent implements OnInit {
   dmsObj: DMSObj;
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private cookieService: CookieService) { 
+  constructor(private route: ActivatedRoute, private toastr: NGXToastrService,private router: Router, private http: HttpClient, private cookieService: CookieService) { 
     this.route.queryParams.subscribe(params => {
       if(params["SrvyTaskId"] != null){
         this.SrvyTaskId = params["SrvyTaskId"];
@@ -141,7 +142,12 @@ export class SurveyTaskResultPageComponent implements OnInit {
   }
   
   endStepper(){
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SURVEY_TASK_RESULT_PAGING],{});
+    this.ReqGenericObj.Id = this.SrvyTaskId;
+    this.http.post(URLConstant.UpdateMrSurveyTaskStatCode, this.ReqGenericObj).subscribe(
+      (response) => {
+        this.toastr.successMessage(response["Message"]);
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SURVEY_TASK_RESULT_PAGING],{});
+      });
   }
 
 }

@@ -59,6 +59,8 @@
                     <option *ngFor="let surveyType of dropdownSurveyType" [value]="surveyType.Key">{{surveyType.Value}}
                     </option>
                   </select>
+                  <lib-uc-show-errors [control]="SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls'].SurveyType"
+                  [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </td>
                 <td [formGroupName]="i">
                   <div>
@@ -93,6 +95,8 @@
                     <option *ngFor="let surveyForm of dropdownSurveyFormSchm" [value]="surveyForm.Key">
                       {{surveyForm.Value}}</option>
                   </select>
+                  <lib-uc-show-errors [control]="SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls'].SurveyForm"
+                  [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </td>
                 <td>
                   <i *ngIf="SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']['SurveyTaskStatus'].value != 'CANCELLED'"
