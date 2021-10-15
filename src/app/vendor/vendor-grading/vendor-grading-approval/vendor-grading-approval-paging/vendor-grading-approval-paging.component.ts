@@ -69,7 +69,6 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
       else if (ev.RowObj.CurrentUser == "-") {
         this.apvTaskService.ClaimApvTask(ev.RowObj.TaskId);
       } 
-
       this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_APV_DETAIL], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "VendorGradingHistNo": ev.RowObj.VendorGradingHistNo ,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId, "IsRoleAssignment": ev.RowObj.IsRoleAssignment.toString()} });
     }
     else if (ev.Key == "HoldTask") {
