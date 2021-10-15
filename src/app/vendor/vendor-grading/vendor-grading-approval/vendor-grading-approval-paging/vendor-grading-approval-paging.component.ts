@@ -64,18 +64,13 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
       if(isRoleAssignment != CommonConstant.TRUE){
         if (String.Format("{0:L}", ev.RowObj.CurrentUser) != String.Format("{0:L}", this.userContext.UserName)) {
           this.toastr.warningMessage(ExceptionConstant.NOT_ELIGIBLE_FOR_PROCESS_TASK);
-        } else {
-          this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_APV_DETAIL], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "VendorGradingHistNo": ev.RowObj.VendorGradingHistNo ,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId, "IsRoleAssignment": ev.RowObj.IsRoleAssignment.toString()} });
         }
       }
-      else{
-        if (ev.RowObj.CurrentUser == "-") {
-          this.apvTaskService.ClaimApvTask(ev.RowObj.TaskId);
-          this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_APV_DETAIL], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "VendorGradingHistNo": ev.RowObj.VendorGradingHistNo ,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId, "IsRoleAssignment": ev.RowObj.IsRoleAssignment.toString()} });
-        } else {
-          this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_APV_DETAIL], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "VendorGradingHistNo": ev.RowObj.VendorGradingHistNo ,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId, "IsRoleAssignment": ev.RowObj.IsRoleAssignment.toString()} });
-        }
-      }
+      else if (ev.RowObj.CurrentUser == "-") {
+        this.apvTaskService.ClaimApvTask(ev.RowObj.TaskId);
+      } 
+
+      this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_APV_DETAIL], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "VendorGradingHistNo": ev.RowObj.VendorGradingHistNo ,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId, "IsRoleAssignment": ev.RowObj.IsRoleAssignment.toString()} });
     }
     else if (ev.Key == "HoldTask") {
       if (String.Format("{0:L}", ev.RowObj.CurrentUser) != String.Format("{0:L}", this.userContext.UserName)) {
