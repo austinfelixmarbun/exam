@@ -6,7 +6,7 @@
             "type": "dropdown",
             "name": "isPublicHoliday",
             "id": "isPublicHoliday",
-            "value": "Public Holiday",
+            "value": "",
             "placeholder": "Placeholder",
             "isFromURL": false,
             "ddlType": "all",

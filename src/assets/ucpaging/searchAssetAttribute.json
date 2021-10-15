@@ -44,7 +44,7 @@
             "type": "dropdown",
             "name": "AST.IS_EDITABLE_AFTER_GO_LIVE",
             "id": "isActive",
-            "value": "Editable After Go Live",
+            "value": "",
             "placeholder": "Placeholder",
             "isFromURL": false,
             "ddlType": "all",

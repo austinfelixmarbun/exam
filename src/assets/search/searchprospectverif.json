@@ -13,7 +13,7 @@
       "type": "dropdown",
       "name": "CustModel",
       "id": "CustModel",
-      "value": "All",
+      "value": "",
       "placeholder": "Placeholder",
       "isFromURL":false,
       "url":"https://api.myjson.com/bins/ld6e8",

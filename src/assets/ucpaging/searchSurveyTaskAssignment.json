@@ -5,7 +5,7 @@
             "type": "dropdown",
             "name": "RO.OFFICE_CODE",
             "id": "OfficeNameId",
-            "value": "Surveyor Group Name",
+            "value": "",
             "placeholder": "Placeholder",
             "isFromURL": true,
             "ddlType": "all",
