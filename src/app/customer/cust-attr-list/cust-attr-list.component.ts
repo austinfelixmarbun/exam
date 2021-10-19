@@ -50,7 +50,7 @@ export class CustAttrListComponent implements OnInit {
     itemsShowLimit: 5,
     allowSearchFilter: true
   };
-  
+
   dictMultiOptions: { [key: string]: Array<{ item_id: string, item_text: string }>; } = {};
   selectedMultiDDLItems: { [key: string]: Array<{ item_id: string, item_text: string }>; } = {};
 
@@ -79,7 +79,6 @@ export class CustAttrListComponent implements OnInit {
           this.httpClient.post<Array<RefAttr>>(URLConstant.GetListActiveRefAttrByAttrGroup, custGrp).subscribe(
             async (response: any) => {
               this.RefAttrList = response[CommonConstant.ReturnObj];
-
               if(this.RefAttrList != null) {
                 for (const refAttr of this.RefAttrList) {
                   this.AttrContent = new AttrContent();
@@ -87,17 +86,17 @@ export class CustAttrListComponent implements OnInit {
                   if (this.ListAttrContent.find(x => x.RefAttrId == refAttr.RefAttrId)) {
                     this.AttrContent = this.ListAttrContent.find(x => x.RefAttrId == refAttr.RefAttrId);
                     isUpdateValue = true;
-                  } 
+                  }
                   var formGroupObject = new Object();
                   formGroupObject["RefAttrId"] = [refAttr.RefAttrId];
                   formGroupObject["IsMandatory"] = [refAttr.IsMandatory];
                   formGroupObject["AttrGroup"] = this.attrGroup;
                   this.setFormGroupValue(refAttr, formGroupObject, parentFormGroup, isUpdateValue);
-                } 
-                this.ListInputLookUpObj.push(this.tempLookup);
-                this.parentForm.addControl(this.identifier, this.fb.group(parentFormGroup));
-                this.isFormReady = true;
+                }
               }
+              this.ListInputLookUpObj.push(this.tempLookup);
+              this.parentForm.addControl(this.identifier, this.fb.group(parentFormGroup));
+              this.isFormReady = true;
             }
           );
         }
@@ -122,18 +121,18 @@ export class CustAttrListComponent implements OnInit {
                   if (findListAttrContentObj !== undefined) {
                     this.AttrContent = findListAttrContentObj;
                     isUpdateValue = true;
-                  } 
+                  }
                   var formGroupObject = new Object();
                   formGroupObject["RefAttrId"] = [refAttr.RefAttrId];
                   formGroupObject["IsMandatory"] = [refAttr.IsMandatory];
                   formGroupObject["AttrGroup"] = [refAttr.AttrGroup];
                   this.setFormGroupValueForAttrGroups(refAttr, formGroupObject, parentFormGroup, isUpdateValue, index);
                   index++;
-                } 
-                this.ListInputLookUpObj.push(this.tempLookup);
-                this.parentForm.addControl(this.identifier, this.fb.group(parentFormGroup));
-                this.isFormReady = true;
+                }
               }
+              this.ListInputLookUpObj.push(this.tempLookup);
+              this.parentForm.addControl(this.identifier, this.fb.group(parentFormGroup));
+              this.isFormReady = true;
             }
           );
         }
