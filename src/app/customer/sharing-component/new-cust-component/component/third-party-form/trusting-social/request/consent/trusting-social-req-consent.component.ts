@@ -15,6 +15,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ThirdPartyRsltHObj } from 'app/shared/model/ThirdPartyRslt/ThirdPartyRsltHObj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { String, StringBuilder } from 'typescript-string-operations';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
 
 
 
@@ -33,10 +35,10 @@ export class TrustingSocialReqConsentComponent implements OnInit {
   readonly FileExtAllowed: Array<string> = [CommonConstant.FileExtensionDoc, CommonConstant.FileExtensionDocx, CommonConstant.FileExtensionPdf]
 
   CustTypeName: string;
-
+  FPP : string; 
   FileToUpload: File;
   Consent: any;
-
+  businessDt: Date;
   ConsentForm = this.fb.group({
     Consent: ['', [Validators.required]]
   });
@@ -45,10 +47,13 @@ export class TrustingSocialReqConsentComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     public activeModal: NgbActiveModal,
-    private toastr: NGXToastrService
+    private toastr: NGXToastrService,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit() {
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     this.getCustTypeDescr();
   }
 
@@ -84,9 +89,17 @@ export class TrustingSocialReqConsentComponent implements OnInit {
     if(this.CustObj.MrCustTypeCode == CommonConstant.MR_CUST_TYPE_CODE_PERSONAL){
       reqUploadConsentTsObj.MobilePhnNo = this.CustPersonalObj.MobilePhnNo1;
     }
-    reqUploadConsentTsObj.FileName = this.FileToUpload.name;
 
+    if (this.CustObj.CustNo == "") {
+      this.FPP = this.CustObj.ThirdPartyTrxNo; 
+    } else {
+      this.FPP = this.CustObj.CustNo; 
+    }
 
+    var month = ("0" + (this.businessDt.getMonth() + 1)).slice(-2);
+    var date = ("0" + this.businessDt.getDate()).slice(-2);
+
+    reqUploadConsentTsObj.FileName = 'CONSENT_' + date + month + this.businessDt.getFullYear() + '_' + this.CustPersonalObj.MobilePhnNo1 + '_' + this.FPP; 
 
     let reader = new FileReader();
     reader.readAsDataURL(this.FileToUpload);

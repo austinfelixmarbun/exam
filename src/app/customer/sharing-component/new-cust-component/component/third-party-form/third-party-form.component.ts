@@ -25,6 +25,7 @@ import { CustDocFileFormObj } from 'app/shared/model/CustDocFile/CustDocFileForm
 import { CustDocFileObj } from 'app/shared/model/CustDocFile/CustDocFileObj.Model';
 import { ThirdPartyUploadService } from './services/ThirdPartyUpload.Service';
 import { ResSysConfigResultObj } from 'app/shared/model/Response/ResSysConfigResultObj,model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-third-party-form',
@@ -64,66 +65,66 @@ export class ThirdPartyFormComponent implements OnInit {
   readonly ExtStr: string = String.Join(", ", this.FileExtAllowed);
 
 
-  async ngOnInit() : Promise<void> {
+  async ngOnInit(): Promise<void> {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.officeCode = context[CommonConstant.OFFICE_CODE];
     await this.getIsUseDigitalization();
-    if(this.IsUseDigitalization == CommonConstant.TRUE_CONDITION){
+    if (this.IsUseDigitalization == CommonConstant.TRUE_CONDITION) {
       await this.getDigitalizationSvcType();
-      if(this.custObj.CustId > 0){
+      if (this.custObj.CustId > 0) {
         await this.getCustDocFiles();
       }
       await this.getListDocumentToBeUpload();
     }
   }
 
-  async getIsUseDigitalization(){
-    await this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeIsUseDigitalization}).toPromise().then(
+  async getIsUseDigitalization() {
+    await this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeIsUseDigitalization }).toPromise().then(
       (response) => {
         this.IsUseDigitalization = response["GsValue"];
       }
     );
   }
 
-  async getDigitalizationSvcType(){
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeDigitalizationSvcType}).toPromise().then(
+  async getDigitalizationSvcType() {
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeDigitalizationSvcType }).toPromise().then(
       (response) => {
         this.sysConfigResultObj = response;
       });
 
-    if(this.sysConfigResultObj.ConfigValue != null){
+    if (this.sysConfigResultObj.ConfigValue != null) {
       var listSvcType = this.sysConfigResultObj.ConfigValue.split("|");
 
       var svcTypeTs = listSvcType.find(x => x == CommonConstant.DigitalizationSvcTypeTrustingSocial);
 
-      if(svcTypeTs != null){
+      if (svcTypeTs != null) {
         this.IsUseTs = true;
       }
 
       var svcTypePefindo = listSvcType.find(x => x == CommonConstant.DigitalizationSvcTypePefindo);
 
-      if(svcTypePefindo != null){
+      if (svcTypePefindo != null) {
         this.IsUsePefindo = true;
       }
     }
   }
 
-  async getListDocumentToBeUpload(){
+  async getListDocumentToBeUpload() {
     let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     tempReq.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustDocType;
     tempReq.MappingCode = this.MrCustTypeCode;
     await this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, tempReq).toPromise().then(
       async (response) => {
         this.ListDocumentKeyValueObj = response[CommonConstant.ReturnObj];
-        for(let i = 0; i < this.ListDocumentKeyValueObj.length; i++){
+        for (let i = 0; i < this.ListDocumentKeyValueObj.length; i++) {
           var custDocFileFormObj = new CustDocFileFormObj();
 
           custDocFileFormObj.MrCustDocTypeCode = this.ListDocumentKeyValueObj[i].Key;
           custDocFileFormObj.DocTypeName = this.ListDocumentKeyValueObj[i].Value;
           var existingCustDocFile = this.CustDocFileObjs.find(x => x.MrCustDocTypeCode == this.ListDocumentKeyValueObj[i].Key);
-          if(this.custObj.CustId == 0 || existingCustDocFile == undefined){
+          if (this.custObj.CustId == 0 || existingCustDocFile == undefined) {
             custDocFileFormObj.IsRequired = true;
-          }else{
+          } else {
             custDocFileFormObj.IsRequired = false;
           }
           custDocFileFormObj.File = null;
@@ -135,8 +136,8 @@ export class ThirdPartyFormComponent implements OnInit {
     );
   }
 
-  async getCustDocFiles(){
-    var reqByIdObj = {Id: this.custObj.CustId};
+  async getCustDocFiles() {
+    var reqByIdObj = { Id: this.custObj.CustId };
     await this.http.post(URLConstant.GetListCustDocFileByCustId, reqByIdObj).toPromise().then(
       async (response) => {
         this.CustDocFileObjs = response[CommonConstant.ReturnObj];
@@ -144,13 +145,13 @@ export class ThirdPartyFormComponent implements OnInit {
     );
   }
 
-  async ReqPefindo(){
+  async ReqPefindo() {
     this.markFormGroupTouched(this.parentForm);
-    if(!this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)){
+    if (!this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)) {
       return;
     }
 
-    if(!this.parentForm.valid){
+    if (!this.parentForm.valid) {
       return;
     }
 
@@ -160,18 +161,18 @@ export class ThirdPartyFormComponent implements OnInit {
     let tempForm = this.parentForm.getRawValue();
 
     let reqPefindoSmartSearchObj = new ReqPefindoSmartSearchObj();
-    if(this.CustDataMode == this.CustDataModeMain){
+    if (this.CustDataMode == this.CustDataModeMain) {
       reqPefindoSmartSearchObj.CustName = tempForm["CustName"];
-    }else{
+    } else {
       reqPefindoSmartSearchObj.CustName = tempForm["ExistingCustName"]["value"];
     }
     reqPefindoSmartSearchObj.CustType = this.MrCustTypeCode;
     reqPefindoSmartSearchObj.BirthDt = tempForm["BirthDt"];
 
-    if(this.MrCustTypeCode == CommonConstant.MR_CUST_TYPE_CODE_PERSONAL){
+    if (this.MrCustTypeCode == CommonConstant.MR_CUST_TYPE_CODE_PERSONAL) {
       reqPefindoSmartSearchObj.IdType = tempForm["MrIdTypeCode"];
       reqPefindoSmartSearchObj.IdNo = tempForm["IdNo"];
-    }else{
+    } else {
       reqPefindoSmartSearchObj.IdType = CommonConstant.MrIdTypeCodeNPWP;
       reqPefindoSmartSearchObj.IdNo = tempForm["TaxIdNo"];
     }
@@ -182,30 +183,40 @@ export class ThirdPartyFormComponent implements OnInit {
 
   }
 
-  ViewPefindo(){
+  ViewPefindo() {
     let TrxNo = this.thirdPartyTrxNo;
     AdInsHelper.OpenPefindoView(TrxNo, this.MrCustTypeCode);
   }
 
-  async ReqTrustingSocial(){
+  async ReqTrustingSocial() {
     this.markFormGroupTouched(this.parentForm);
 
-    if(!this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)){
+    if (!this.parentForm.valid) {
       return;
     }
-
-    if(!this.parentForm.valid){
-      return;
-    }
-    
-    await this.checkThirdPartyTrxNo();
 
     let tempForm = this.parentForm.getRawValue();
     let custObj: CustObj = new CustObj();
     let custPersonalObj = new CustPersonalObj();
-    if(this.CustDataMode == this.CustDataModeMain){
+
+    // cek nomor telepon valid atau gak 
+    if (this.MrCustTypeCode == CommonConstant.MR_CUST_TYPE_CODE_PERSONAL) {
+      let MobilePhnNo = tempForm["MobilePhnNo1"];
+      if (MobilePhnNo.substring(0,2) != '62') {
+        this.toastr.warningMessage(ExceptionConstant.MOBILE_PHN_NO_INVALID);
+        return;
+      }
+    }
+
+    if (!this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)) {
+      return;
+    }
+
+    await this.checkThirdPartyTrxNo();
+
+    if (this.CustDataMode == this.CustDataModeMain) {
       custObj.CustName = tempForm["CustName"];
-    }else{
+    } else {
       custObj.CustName = tempForm["ExistingCustName"]["value"];
     }
     custObj.CustNo = this.custObj.CustNo;
@@ -213,15 +224,15 @@ export class ThirdPartyFormComponent implements OnInit {
     custObj.ThirdPartyTrxNo = this.thirdPartyTrxNo;
     custObj.MrCustTypeCode = this.MrCustTypeCode;
 
-    if(tempForm["MrIdTypeCode"] == CommonConstant.MrIdTypeCodeEKTP){
+    if (tempForm["MrIdTypeCode"] == CommonConstant.MrIdTypeCodeEKTP) {
       custObj.MrIdTypeCode = tempForm["MrIdTypeCode"];
       custObj.IdNo = tempForm["IdNo"];
-    }else{
+    } else {
       custObj.MrIdTypeCode = CommonConstant.TrustingSocialDummyIdType;
       custObj.IdNo = CommonConstant.TrustingSocialDummyIdNo;
     }
 
-    if(this.MrCustTypeCode == CommonConstant.MR_CUST_TYPE_CODE_PERSONAL){
+    if (this.MrCustTypeCode == CommonConstant.MR_CUST_TYPE_CODE_PERSONAL) {
       custPersonalObj.MobilePhnNo1 = tempForm["MobilePhnNo1"];
     }
 
@@ -231,13 +242,13 @@ export class ThirdPartyFormComponent implements OnInit {
   }
 
 
-  ViewTrustingSocial(){    
+  ViewTrustingSocial() {
     const modalRef = this.modalService.open(TrustingSocialViewHeaderComponent);
     modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
   }
 
-  async checkThirdPartyTrxNo(){
-    if(this.thirdPartyTrxNo == null || this.thirdPartyTrxNo == ""){
+  async checkThirdPartyTrxNo() {
+    if (this.thirdPartyTrxNo == null || this.thirdPartyTrxNo == "") {
       var reqGenerateTrxNoObj = new ReqGenerateTrxNoObj();
       reqGenerateTrxNoObj.MasterSeqCode = CommonConstant.MasterSequenceCodeCustomerThirdParty;
       reqGenerateTrxNoObj.OfficeCode = this.officeCode;
@@ -251,7 +262,7 @@ export class ThirdPartyFormComponent implements OnInit {
     }
   }
 
-   markFormGroupTouched(formGroup: FormGroup) {
+  markFormGroupTouched(formGroup: FormGroup) {
     (<any>Object).values(formGroup.controls).forEach(control => {
       control.markAsTouched();
 
@@ -261,7 +272,7 @@ export class ThirdPartyFormComponent implements OnInit {
     });
   }
 
-  HandleFileInput(files: FileList, i){
+  HandleFileInput(files: FileList, i) {
     this.CustDocFileFormObjs[i].File = files.item(0);
     this.OutputUploadFile.emit(this.CustDocFileFormObjs);
   }

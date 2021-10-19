@@ -44,7 +44,7 @@ export class TrustingSocialReqDetailComponent implements OnInit {
     this.initGrid();
   }
 
-  getCustTypeDescr(){
+  getCustTypeDescr() {
     var refMasterObj = new ReqRefMasterByTypeCodeAndMasterCodeObj();
     refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustType;
     refMasterObj.MasterCode = this.CustObj.MrCustTypeCode;
@@ -55,18 +55,18 @@ export class TrustingSocialReqDetailComponent implements OnInit {
     );
   }
 
-  initGrid(){
+  initGrid() {
     var form = this.DetailForm.controls['ThirdPartyTrustsocRslts'] as FormArray;
     form.push(this.fb.group({
       Relation: [CommonConstant.TrustingSocialRelationCust, [Validators.required, Validators.maxLength(200)]],
       Name: [this.CustObj.CustName, [Validators.required, Validators.maxLength(200)]],
       MobilePhnNo: [this.CustObj.MrCustTypeCode == CommonConstant.MR_CUST_TYPE_CODE_PERSONAL ? this.CustPersonalObj.MobilePhnNo1 : "",
-                  [Validators.required, Validators.maxLength(50), Validators.pattern("^[0-9]+$")]]
+      [Validators.required, Validators.maxLength(50), Validators.pattern("^[0-9]+$")]]
     }));
   }
 
-  AddNewData(){
-    if(!this.validateMaxSubj()){
+  AddNewData() {
+    if (!this.validateMaxSubj()) {
       return;
     }
 
@@ -78,16 +78,16 @@ export class TrustingSocialReqDetailComponent implements OnInit {
     }));
   }
 
-  DeleteData(i){
+  DeleteData(i) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       var form = this.DetailForm.controls['ThirdPartyTrustsocRslts'] as FormArray;
       form.removeAt(i);
-    }  
+    }
   }
 
-  SaveForm(){ 
+  SaveForm() {
 
-    if(!this.validateMaxSubj()){
+    if (!this.validateMaxSubj()) {
       return;
     }
 
@@ -98,26 +98,30 @@ export class TrustingSocialReqDetailComponent implements OnInit {
     reqAddTrxSrcDataForTsObj.IdType = this.CustObj.MrIdTypeCode;
     reqAddTrxSrcDataForTsObj.CustType = this.CustObj.MrCustTypeCode;
 
-    
+
     for (let i = 0; i < this.DetailForm.controls["ThirdPartyTrustsocRslts"].value.length; i++) {
       var thirdPartyTrustsocObj = new ThirdPartyTrustsocRsltObj();
       thirdPartyTrustsocObj.Relation = this.DetailForm.controls["ThirdPartyTrustsocRslts"].value[i].Relation;
       thirdPartyTrustsocObj.Name = this.DetailForm.controls["ThirdPartyTrustsocRslts"].value[i].Name;
       thirdPartyTrustsocObj.MobilePhnNo = this.DetailForm.controls["ThirdPartyTrustsocRslts"].value[i].MobilePhnNo;
+      if (thirdPartyTrustsocObj.MobilePhnNo.substring(0,2) != '62') {
+        this.toastr.warningMessage(ExceptionConstant.MOBILE_PHN_NO_INVALID);
+        return;
+      }
       reqAddTrxSrcDataForTsObj.ThirdPartyTrustsocRsltObjs.push(thirdPartyTrustsocObj);
     }
 
-    if(!this.validateSubj(reqAddTrxSrcDataForTsObj.ThirdPartyTrustsocRsltObjs)){
+    if (!this.validateSubj(reqAddTrxSrcDataForTsObj.ThirdPartyTrustsocRsltObjs)) {
       return;
     }
-    if(environment.isCore){
+    if (environment.isCore) {
       this.http.post(URLConstant.AddTrxSrcDataForTrustingSocialV2, reqAddTrxSrcDataForTsObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.activeModal.dismiss('Cross click');
         }
       );
-    }else{
+    } else {
       this.http.post(URLConstant.AddTrxSrcDataForTrustingSocial, reqAddTrxSrcDataForTsObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
@@ -127,18 +131,18 @@ export class TrustingSocialReqDetailComponent implements OnInit {
     }
   }
 
-  validateMaxSubj(){
-    if(this.DetailForm.controls["ThirdPartyTrustsocRslts"].value.length >= 8){
+  validateMaxSubj() {
+    if (this.DetailForm.controls["ThirdPartyTrustsocRslts"].value.length >= 8) {
       this.toastr.warningMessage(ExceptionConstant.TRUSTING_SOCIAL_MAX_SUBJECT);
       return false;
     }
     return true;
   }
 
-  validateSubj(thirdPartyTrustsocRsltObjs : Array<ThirdPartyTrustsocRsltObj>){
+  validateSubj(thirdPartyTrustsocRsltObjs: Array<ThirdPartyTrustsocRsltObj>) {
     var duplCustRelationObjs = thirdPartyTrustsocRsltObjs.filter(x => x.Relation.toLowerCase() == CommonConstant.TrustingSocialRelationCust.toLowerCase());
 
-    if(duplCustRelationObjs.length > 1){
+    if (duplCustRelationObjs.length > 1) {
       this.toastr.warningMessage(ExceptionConstant.TRUSTING_SOCIAL_DUPL_RELATION_CUST);
       return false;
     }
@@ -148,7 +152,7 @@ export class TrustingSocialReqDetailComponent implements OnInit {
     });
 
     var duplMobilePhnNo = groupedMobilePhnNo.filter(x => x.length > 1);
-    if(duplMobilePhnNo.length > 0){
+    if (duplMobilePhnNo.length > 0) {
       this.toastr.warningMessage(ExceptionConstant.TRUSTING_SOCIAL_DUPL_MOBILE_PHN_NO);
       return false;
     }
