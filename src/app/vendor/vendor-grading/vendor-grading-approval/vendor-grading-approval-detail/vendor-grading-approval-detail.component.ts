@@ -23,7 +23,6 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
   taskId: number;
   instanceId: number;
   inputObj: any;
-  IsRoleAssignment: string = "";
   viewVendorBranchObj: UcViewGenericObj = new UcViewGenericObj();
    
   InputApvObj : UcInputApprovalObj;
@@ -56,11 +55,6 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
       if(params["ApvReqId"] != null){
         this.ApvReqId = params["ApvReqId"];
       }
-
-      if(params["IsRoleAssignment"] != null){
-        this.IsRoleAssignment = params["IsRoleAssignment"];
-      }
-
     });
   }
 
@@ -70,15 +64,16 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
     var ApvHoldObj = new ApprovalObj();
     ApvHoldObj.TaskId = this.taskId
 
-    if(this.IsRoleAssignment != CommonConstant.TRUE){
-      this.HoldTask(ApvHoldObj);
-    }
+    this.HoldTask(ApvHoldObj);
     this.initInputApprovalObj();
   }
 
   HoldTask(obj : any){
     this.http.post(URLConstant.ApvHoldTaskUrl, obj).subscribe(
       (response)=>{
+      },
+      (error) => {
+        this.router.navigate(["/Vendor/VendorGrading/Approval/Paging"]);
       }
     )
   }
