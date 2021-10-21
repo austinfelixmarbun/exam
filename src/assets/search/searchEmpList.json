@@ -5,7 +5,7 @@
             "type": "dropdown",
             "name": "refOfficeId",
             "id": "refOfficeId",
-            "value": "Office Name",
+            "value": "",
             "placeholder": "Placeholder",
             "datatype": "numeric",
             "isFromURL": true,

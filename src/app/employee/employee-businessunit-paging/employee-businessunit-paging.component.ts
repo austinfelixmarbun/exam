@@ -6,6 +6,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-employee-businessunit-paging',
@@ -30,7 +31,7 @@ export class EmployeeBusinessunitPagingComponent implements OnInit {
 
     this.inputPagingObj._url = "./assets/ucpaging/searchEmployeeBusinessUnit.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchEmployeeBusinessUnit.json";
-    this.inputPagingObj.deleteUrl = "/RefUserRole/DeleteRefUserRole";
+    this.inputPagingObj.deleteUrl = environment.FoundationR3Url + "/v1" + "/RefUserRole/DeleteRefUserRole";
 
     var critInput = new CriteriaObj();
     critInput.propName = "usr.REF_USER_ID";

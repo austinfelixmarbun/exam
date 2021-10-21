@@ -33,7 +33,7 @@
       "type": "dropdown",
       "name": "IS_ACTIVE",
       "id": "IsActive",
-      "value": "Active Status",
+      "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
       "ddlType": "all",

@@ -38,6 +38,7 @@ import { ShareholderFormComponent } from '../component/shareholder-form/sharehol
 import { NewCustSetData } from '../NewCustSetData.Service';
 import { CustDocFileFormObj } from 'app/shared/model/CustDocFile/CustDocFileFormObj.Model';
 import { ThirdPartyUploadService } from '../component/third-party-form/services/ThirdPartyUpload.Service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-cust-personal-main-data',
@@ -72,11 +73,18 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   inputLookupObj: InputLookupObj = new InputLookupObj();
   thirdPartyTrxNo: string = null;
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
+  pageFrom: string = CommonConstant.CustFromEditMainData;
 
   constructor(private regexService: RegexService, private toastr: NGXToastrService,
     private http: HttpClient, private fb: FormBuilder,
     private cookieService: CookieService,
-    private thirdPartyUploadService: ThirdPartyUploadService) {
+    private thirdPartyUploadService: ThirdPartyUploadService,
+    private route: ActivatedRoute) {
+      this.route.queryParams.subscribe(params => {
+        if (params["From"] != null) {        
+          this.pageFrom = params["From"];
+        }
+      });
   }
 
   //#region Readonly
@@ -95,6 +103,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   readonly FileExtAllowed: Array<string> = [CommonConstant.FileExtensionPdf, CommonConstant.FileExtensionJpg, CommonConstant.FileExtensionJpeg, CommonConstant.FileExtensionGif, CommonConstant.FileExtensionPng]
 
+  readonly CustFromEditMainData: string = CommonConstant.CustFromEditMainData;
   //#endregion
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};

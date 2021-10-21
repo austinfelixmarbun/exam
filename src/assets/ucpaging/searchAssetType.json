@@ -24,11 +24,10 @@
         "type": "dropdown",
         "name": "is_Active",
         "id": "IsActive",
-        "value": "Active Status",
+        "value": "",
         "placeholder": "Placeholder",
         "isFromURL": false,
         "ddlType": "all",
-        "url": "https://api.myjson.com/bins/ld6e8",
         "label": "Active Status",
         "items": [
           {

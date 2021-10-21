@@ -30,7 +30,7 @@ export class VendorBranchOfficeMemberComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorOfficeMember.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorOfficeMember.json";
-    this.inputPagingObj.deleteUrl = "/VendorOfficeMbr/DeleteVendorOfficeMember";
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteVendorOfficeMember;
 
     this.inputPagingObj.addCritInput = new Array();
     var critObj = new CriteriaObj();

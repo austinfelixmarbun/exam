@@ -113,7 +113,7 @@ export class OrganizationModelPagingComponent implements OnInit {
 
   del(id: any) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
-      this.deleteUrl = this.foundationUrl + URLConstant.DeleteOrgMdl;
+      this.deleteUrl = URLConstant.DeleteOrgMdl;
       this.orgModelObj = new OrgMdlObj();
       this.orgModelObj.orgMdlId = +id;
       this.https.post(this.deleteUrl, this.orgModelObj).subscribe(

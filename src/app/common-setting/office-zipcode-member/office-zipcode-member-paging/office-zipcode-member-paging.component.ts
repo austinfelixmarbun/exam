@@ -58,7 +58,7 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
     this.pageSize = 10;
     this.apiUrl = this.foundationUrl + URLConstant.GetRefOfficeZipcodePaging;
     this.officeUrl = this.foundationUrl + URLConstant.GetRefOfficeObj;
-    this.deleteUrl = this.foundationUrl + URLConstant.DeleteOfficeZipcodeMember;
+    this.deleteUrl = URLConstant.DeleteOfficeZipcodeMember;
 
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();

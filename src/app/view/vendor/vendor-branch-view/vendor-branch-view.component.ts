@@ -16,6 +16,7 @@ import { VendorOfficeMbrObj } from 'app/shared/model/VendorOfficeMbrObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/Request/RefAttr/ReqRefAttrByAttrGroupObj.model';
 
 @Component({
   selector: 'app-vendor-branch-view',
@@ -136,13 +137,13 @@ export class VendorBranchViewComponent implements OnInit {
       (response) => {
         this.ListVendorAttrContent = response[CommonConstant.ReturnObj];
         if (this.ListVendorAttrContent != null) {
-          this.http.post(URLConstant.GetListActiveVendorAttrByVendorCategoryCode, { Code: CommonConstant.SUPPLIER }).subscribe( 
+          let reqByAttrGroup: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
+          reqByAttrGroup.AttrGroup = this.MrVendorCategoryCode;
+          this.http.post(URLConstant.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe( 
             (res) => {
               this.VendorAttrList = res[CommonConstant.ReturnObj];
-              this.ListVendorAttrContent.sort((x, y) => x.VendorAttrId - y.VendorAttrId);
-              this.VendorAttrList.sort((x, y) => x.VendorAttrId - y.VendorAttrId);
               this.VendorAttrList.forEach((x, index) => {
-                if(!this.ListVendorAttrContent.find(({VendorAttrId}) => VendorAttrId == x.VendorAttrId)){
+                if(!this.ListVendorAttrContent.find(({AttrCode}) => AttrCode == x.AttrCode)){
                   this.ListVendorAttrContent.splice(index,0,{'AttrContent':''});
                 }
               });

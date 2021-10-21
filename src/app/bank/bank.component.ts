@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -12,7 +13,7 @@ export class BankComponent implements OnInit {
   readonly AddLink: string = NavigationConstant.CS_BANK_DETAIL;
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchBank.json";
-    this.inputPagingObj.deleteUrl = "/RefBank/DeleteRefBank";
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefBank;
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBank.json";
   }
 
