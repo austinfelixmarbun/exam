@@ -38,6 +38,7 @@ import { ShareholderFormXComponent } from '../component/shareholder-form/shareho
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { CustDocFileFormObj } from 'app/shared/model/CustDocFile/CustDocFileFormObj.Model';
 import { ThirdPartyUploadService } from 'app/customer/sharing-component/new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-cust-personal-main-data-x',
@@ -75,11 +76,18 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   checkIsAddressKnown: boolean = false;;
   thirdPartyTrxNo: string = null;
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
-
+  pageFrom: string = CommonConstant.CustFromEditMainData;
+  
   constructor(private regexService: RegexService, private toastr: NGXToastrService,
     private http: HttpClient, private fb: FormBuilder,
     private cookieService: CookieService,
-    private thirdPartyUploadService: ThirdPartyUploadService) {
+    private thirdPartyUploadService: ThirdPartyUploadService,
+	private route: ActivatedRoute) {
+      this.route.queryParams.subscribe(params => {
+        if (params["From"] != null) {        
+          this.pageFrom = params["From"];
+        }
+      });
   }
 
   //#region Readonly
@@ -98,6 +106,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
 
   readonly FileExtAllowed: Array<string> = [CommonConstant.FileExtensionPdf, CommonConstant.FileExtensionJpg, CommonConstant.FileExtensionJpeg, CommonConstant.FileExtensionGif, CommonConstant.FileExtensionPng]
 
+  readonly CustFromEditMainData: string = CommonConstant.CustFromEditMainData;
   //#endregion
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};

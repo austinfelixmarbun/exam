@@ -6,7 +6,7 @@
       "type": "dropdown",
       "name": "ref_Master_Type_Code",
       "id": "refMasterTypeCodeId",
-      "value": "refMasterTypeCode",
+      "value": "",
       "placeholder": "Placeholder",
       "datatype": "text",
       "isFromURL": true,

@@ -126,7 +126,7 @@ export class OrgMdlStrucPagingComponent implements OnInit {
 
   del(id: any) {
     if (confirm("Are you sure to delete this record?")) {
-      this.deleteUrl = this.foundationUrl + URLConstant.DeleteOrgMdlStruc;
+      this.deleteUrl = URLConstant.DeleteOrgMdlStruc;
       this.orgMdlStrucObj = new OrgMdlStrucObj();
       this.orgMdlStrucObj.orgMdlStrucId = +id;
 

@@ -209,7 +209,9 @@
             [identifier]="'UcAddress'">
           </lib-ucaddress>
         </div>
-        <app-third-party-form *ngIf="IsCustLoaded && custObj.IsCustomer" [parentForm]="CustomerForm" [thirdPartyTrxNo]="thirdPartyTrxNo" [custObj]="custObj" [CustDataMode]="CustDataMode" [MrCustTypeCode]="CustTypePersonal" (OutputThirdPartyTrxNo)="SetThirdPartyTrxNo($event)" (OutputUploadFile)="SetCustFileFormObjs($event)"></app-third-party-form>
+        <div *ngIf="pageFrom == CustFromEditMainData && CustDataMode == CustDataModeMain">
+          <app-third-party-form *ngIf="IsCustLoaded" [parentForm]="CustomerForm" [thirdPartyTrxNo]="thirdPartyTrxNo" [custObj]="custObj" [CustDataMode]="CustDataMode" [MrCustTypeCode]="CustTypePersonal" (OutputThirdPartyTrxNo)="SetThirdPartyTrxNo($event)" (OutputUploadFile)="SetCustFileFormObjs($event)"></app-third-party-form>
+        </div>
         <div class="form-actions right">
           <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Cancel()">
             <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span> </button>

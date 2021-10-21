@@ -14,7 +14,7 @@
       "type": "dropdown",
       "name": "A.IS_PASSED",
       "id": "isPassedId",
-      "value": "Passed",
+      "value": "",
       "placeholder": "Placeholder",
       "isFromURL": false,
       "ddlType": "all",

@@ -1,7 +1,7 @@
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -106,8 +106,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
                   RefNo: response['ReturnObject'][i].RefNo,
                   Zipcode: response['ReturnObject'][i].Zipcode,
                   CustNo: response['ReturnObject'][i].CustNo,
-                  SurveyorName: response['ReturnObject'][i].SurveyorName,
-                  CustId: response['ReturnObject'][i].CustId
+                  SurveyorName: response['ReturnObject'][i].SurveyorName
                 }
                 this.isNational[i] = true;
                 this.addSurveyTaskToList(surveyTask);
@@ -236,15 +235,14 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
       SurveyeeName: [surveyTaskObj.SurveyeeName],
       Address: [surveyTaskObj.Address],
       SurveyTaskStatus: [surveyTaskObj.SurveyTaskStatus],
-      SurveyType: [surveyTaskObj.SurveyType],
+      SurveyType: [surveyTaskObj.SurveyType, Validators.required],
       Surveyor: [surveyTaskObj.Surveyor],
-      SurveyForm: [surveyTaskObj.SurveyForm],
+      SurveyForm: [surveyTaskObj.SurveyForm, Validators.required],
       National: [surveyTaskObj.National],
       RefNo: [surveyTaskObj.RefNo],
       Zipcode: [surveyTaskObj.Zipcode],
       CustNo: [surveyTaskObj.CustNo],
-      SurveyorName: [surveyTaskObj.SurveyorName],
-      CustId: [surveyTaskObj.CustId]
+      SurveyorName: [surveyTaskObj.SurveyorName]
     });
   }
 

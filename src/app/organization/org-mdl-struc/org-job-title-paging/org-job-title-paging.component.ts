@@ -117,7 +117,7 @@ export class OrgJobTitlePagingComponent implements OnInit {
 
   del(id: any) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
-      this.deleteUrl = environment.FoundationR3Url + URLConstant.DeleteOrgJobTitle;
+      this.deleteUrl = URLConstant.DeleteOrgJobTitle;
       this.orgJobTitleObj = new OrgJobTitleObj();
       this.orgJobTitleObj.orgJobTitleId = +id;
 

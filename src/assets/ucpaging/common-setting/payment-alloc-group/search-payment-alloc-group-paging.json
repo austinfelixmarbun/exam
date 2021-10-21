@@ -7,7 +7,7 @@
             "name": "RPAG.MR_PAY_ALLOC_GRP_CODE",
             "datatype": "text",
             "id": "MrPayAllocGrpCode",
-            "value": "MrPayAllocGrpCode",
+            "value": "",
             "placeholder": "Placeholder",
             "isFromURL": true,
             "ddlType": "all",

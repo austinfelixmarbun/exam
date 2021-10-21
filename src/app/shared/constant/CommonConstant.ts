@@ -38,6 +38,11 @@ export class CommonConstant {
     public static CustMainDataModeCust = "CUST";
     public static CustMainDataModeFamily = "FAMILY";
     public static CustMainDataModeMgmntShrholder = "SHAREHOLDER";
+
+    //CUST PAGE FROM
+    public static CustFromEditMainData = "EditMainData";
+    public static CustFromCustFamily = "CustFamily";
+    public static CustFromCustShareholder = "CustShareholder";
     
     //CUST MAIN Page Type
     public static CustPageTypeHeader = "HEADER";

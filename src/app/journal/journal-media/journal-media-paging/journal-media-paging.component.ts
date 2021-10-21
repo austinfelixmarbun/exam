@@ -20,7 +20,7 @@ export class JournalMediaPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/journal/paging-journal-media.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/journal/paging-journal-media.json";
-    this.inputPagingObj.deleteUrl = "/Journal/DeleteJrMHeader";
+    this.inputPagingObj.deleteUrl = environment.FoundationR3Url + "/v1" + "/Journal/DeleteJrMHeader";
   }
 
   onCallback(ev) {

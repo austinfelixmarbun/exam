@@ -36,7 +36,7 @@
               <div class="form-group row adins-required">
                 <label class="col-md-3  adInsLabel" for="gsValue">General Setting Value</label>
                 <div class="col-md-9">
-                  <input type="text" class="form-control adInsInput" formControlName="GsValue"
+                  <input type="text" [IsUpperCase]="false" class="form-control adInsInput" formControlName="GsValue"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && GeneralSettingForm.controls.GsValue.invalid }">
                   <lib-uc-show-errors [control]="GeneralSettingForm.controls.GsValue" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
