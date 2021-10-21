@@ -171,7 +171,7 @@ export class JobDataProfessionalComponent implements OnInit {
             PreviEmploymentDate: formatDate(this.returnCustJobDataObj.PrevEmploymentDt, 'yyyy-MM-dd', 'en-US'),
           });
 
-          if (!this.IsReset) {
+          if (!this.IsReset && this.returnCustJobDataObj.RefProfessionId) {
             this.http.post(URLConstant.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).subscribe(
               (response) => {
                 this.returnRefProfessionObj = response;
