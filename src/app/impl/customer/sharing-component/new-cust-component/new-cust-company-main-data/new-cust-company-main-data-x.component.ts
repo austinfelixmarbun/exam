@@ -27,6 +27,7 @@ import { ShareholderFormComponent } from 'app/customer/sharing-component/new-cus
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { CustDocFileFormObj } from 'app/shared/model/CustDocFile/CustDocFileFormObj.Model';
 import { ThirdPartyUploadService } from 'app/customer/sharing-component/new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-cust-company-main-data-x',
@@ -50,12 +51,19 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
   inputLookupObj: InputLookupObj = new InputLookupObj();
   thirdPartyTrxNo: string = null;
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
-
+  pageFrom: string = CommonConstant.CustFromEditMainData;
 
   custObj: CustObj = new CustObj();
 
   constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService,
-    private cookieService: CookieService, private thirdPartyUploadService: ThirdPartyUploadService) { }
+    private cookieService: CookieService, private thirdPartyUploadService: ThirdPartyUploadService,
+    private route: ActivatedRoute) { 
+      this.route.queryParams.subscribe(params => {
+        if (params["From"] != null) {        
+          this.pageFrom = params["From"];
+        }
+      });
+    }
 
   //#region Readonly
   readonly RefMasterTypeCodeCompanyType: string = CommonConstant.RefMasterTypeCodeCompanyType;
@@ -65,6 +73,8 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
 
   readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
   readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
+
+  readonly CustFromEditMainData: string = CommonConstant.CustFromEditMainData;
   //#endregion
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
