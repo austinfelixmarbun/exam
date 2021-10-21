@@ -100,7 +100,7 @@ export class JobDataNonProfessionalXComponent implements OnInit {
             JobTitleName: this.returnCustJobDataObj.JobTitleName,
           });
 
-          if (!this.IsReset) {
+          if (!this.IsReset && this.returnCustJobDataObj.RefProfessionId) {
             this.http.post(URLConstant.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).subscribe(
               (response) => {
                 this.returnRefProfessionObj = response;
