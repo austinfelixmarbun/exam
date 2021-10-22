@@ -143,7 +143,7 @@ export class EditMainDataPersonalXComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       MappingCode: null
     }
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjGender).subscribe(
+    await this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjGender).toPromise().then(
       (response) => {
         this.tempGender = response[CommonConstant.ReturnObj];
         if (this.tempGender.length > 0) {
@@ -157,7 +157,7 @@ export class EditMainDataPersonalXComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
       MappingCode: null
     }
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
+    await this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).toPromise().then(
       (response) => {
         this.tempIdType = response[CommonConstant.ReturnObj];
         if (this.tempIdType.length > 0) {
@@ -177,7 +177,7 @@ export class EditMainDataPersonalXComponent implements OnInit {
     this.custObj.CustId = this.CustId;
     this.custPersonalObj.CustId = this.CustId;
     var datePipe = new DatePipe("en-US");
-    this.http.post(URLConstant.GetCustByCustId, { Id: this.CustId }).subscribe(
+    await this.http.post(URLConstant.GetCustByCustId, { Id: this.CustId }).toPromise().then(
       (response) => {
         this.tempCustObj = response;
         console.log(this.tempCustObj);
