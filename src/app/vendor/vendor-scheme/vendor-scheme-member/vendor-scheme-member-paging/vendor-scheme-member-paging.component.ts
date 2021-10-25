@@ -6,7 +6,7 @@ import { CriteriaObj } from "app/shared/model/CriteriaObj.model";
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from "environments/environment";
+
 
 @Component({
   selector: 'app-vendor-scheme-member-paging',
@@ -34,7 +34,7 @@ export class VendorSchemeMemberPagingComponent implements OnInit {
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorSchemeMember.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorSchemeMember.json";
     this.inputPagingObj.deleteUrl = URLConstant.DeleteVendorSchmMember;
-    this.inputPagingObj.enviromentUrl = environment.FoundationR3Url + '/v1';
+
     var critInput = new CriteriaObj();
     critInput.propName = "vsm.VENDOR_SCHM_ID";
     critInput.restriction = AdInsConstant.RestrictionEq;

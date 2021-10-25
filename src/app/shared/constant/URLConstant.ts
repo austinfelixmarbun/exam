@@ -588,7 +588,7 @@ export class URLConstant {
     public static EditVendorSchm = environment.FoundationR3Url + "/v1" + "/VendorSchm/EditVendorSchm";
     public static GetVendorSchmByVendorSchmId = environment.FoundationR3Url + "/v1" + "/VendorSchm/GetVendorSchmByVendorSchmId";
     public static AddVendorSchmMember = environment.FoundationR3Url + "/v1" + "/VendorSchmMbr/AddVendorSchmMember";
-    public static DeleteVendorSchmMember = "/VendorSchmMbr/DeleteVendorSchmMember"
+    public static DeleteVendorSchmMember = environment.FoundationR3Url + '/v1'+ "/VendorSchmMbr/DeleteVendorSchmMember"
     public static GetListVendorSchmMemberByVendorSchmId = environment.FoundationR3Url + "/v1" + "/VendorSchmMbr/GetListVendorSchmMemberByVendorSchmId"
 
     // VENDOR ATTR
