@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { FromValueObj, UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { ToastrService } from 'ngx-toastr';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
@@ -41,31 +41,11 @@ export class VendorSchemeMemberAddComponent implements OnInit {
     addCritTypeCode.value = this.MrVendorCategoryCode;
     this.tempPagingObj.addCritInput.push(addCritTypeCode);
 
-    this.GetListVendorSchmMemberByVendorSchmId();
-  }
-
-  GetListVendorSchmMemberByVendorSchmId() {
-    this.http.post(URLConstant.GetListVendorSchmMemberByVendorSchmId, { Id: this.VendorSchmId }).subscribe(
-      (response) => {
-        var arrMemberList = new Array();
-        if(response["ListVendorSchmMbr"] != null){
-          for (let index = 0; index < response["ListVendorSchmMbr"].length; index++) {
-          arrMemberList.push(response["ListVendorSchmMbr"][index].VendorId)
-          }
-        }
-        
-
-        if (arrMemberList.length != 0) {
-          const addCritListVendorId = new CriteriaObj();
-          addCritListVendorId.DataType = "numeric";
-          addCritListVendorId.propName = "VENDOR_ID";
-          addCritListVendorId.restriction = AdInsConstant.RestrictionNotIn;
-          addCritListVendorId.listValue = arrMemberList;
-          this.tempPagingObj.addCritInput.push(addCritListVendorId);
-        }
-        this.tempPagingObj.isReady = true;
-      }
-    );
+    let fromValueObj = new FromValueObj();
+    fromValueObj.property = 'VendorSchmId';
+    fromValueObj.value = this.VendorSchmId;
+    this.tempPagingObj.fromValue.push(fromValueObj);
+    this.tempPagingObj.isReady = true;
   }
 
   getListTemp(ev) {
