@@ -89,7 +89,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
           });
 
 
-          if (!this.IsReset) {
+          if (!this.IsReset && this.returnCustJobDataObj.RefProfessionId) {
             this.http.post(URLConstant.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).subscribe(
               (response) => {
                 this.returnRefProfessionObj = response;

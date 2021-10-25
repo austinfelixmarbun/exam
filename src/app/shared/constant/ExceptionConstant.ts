@@ -63,4 +63,5 @@ export class ExceptionConstant {
     public static INVALID_FILE_FORMAT_FOR_DOC = "File format for Document Type {0} must be {1}";
 
     public static  EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE = "Establishment Date Must Be Less Than Business Date";
+    public static MOBILE_PHN_NO_INVALID = "Mobile Phone No Must be Started With 62XXXXXXXXX"; 
 }

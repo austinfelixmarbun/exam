@@ -57,7 +57,7 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
     
   }
 
-  CallBackHandler(ev) {
+  async CallBackHandler(ev) {
     var isRoleAssignment = ev.RowObj.IsRoleAssignment.toString();
 
     if (ev.Key == "Process") {
@@ -68,9 +68,9 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
         }
       }
       else if (ev.RowObj.CurrentUser == "-") {
-        this.apvTaskService.ClaimApvTask(ev.RowObj.TaskId);
+        await this.apvTaskService.ClaimApvTask(ev.RowObj.TaskId);
       } 
-      this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_APV_DETAIL], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "VendorGradingHistNo": ev.RowObj.VendorGradingHistNo ,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId, "IsRoleAssignment": ev.RowObj.IsRoleAssignment.toString()} });
+      this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_APV_DETAIL], { queryParams: { "VendorGradingHistId": ev.RowObj.VendorGradingHistId, "VendorGradingHistNo": ev.RowObj.VendorGradingHistNo ,"TaskId": ev.RowObj.TaskId, "InstanceId": ev.RowObj.InstanceId, "ApvReqId": ev.RowObj.ApvReqId } });
     }
     else if (ev.Key == "HoldTask") {
       if (String.Format("{0:L}", ev.RowObj.CurrentUser) != String.Format("{0:L}", this.userContext.UserName)) {
