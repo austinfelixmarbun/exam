@@ -4,8 +4,8 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { FromValueObj, UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
@@ -66,29 +66,11 @@ export class VendorGroupmemberComponent implements OnInit {
       this.tempPagingObj.addCritInput.push(crit2Obj);
     }
 
-    this.GetListVendorGrpMbrByVendorGrpId();
-  }
-
-  GetListVendorGrpMbrByVendorGrpId() {
-    this.http.post(URLConstant.GetListVendorGrpMbrByVendorGrpId, { Id: this.VendorGrpId }).subscribe(
-      (response) => {
-        var arrMemberList = new Array();
-        if(response[CommonConstant.ReturnObj] != null){
-          for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
-          arrMemberList.push(response[CommonConstant.ReturnObj][index].VendorId)
-          }
-        }
-        if (arrMemberList.length != 0) {
-          const addCritListVendorGrp = new CriteriaObj();
-          addCritListVendorGrp.DataType = 'numeric';
-          addCritListVendorGrp.propName = 'VENDOR_ID';
-          addCritListVendorGrp.restriction = AdInsConstant.RestrictionNotIn;
-          addCritListVendorGrp.listValue = arrMemberList;
-          this.tempPagingObj.addCritInput.push(addCritListVendorGrp);
-        }
-        this.tempPagingObj.isReady = true;
-      }
-    );
+    let fromValueObj = new FromValueObj();
+    fromValueObj.property = 'VendorGrpId';
+    fromValueObj.value = this.VendorGrpId;
+    this.tempPagingObj.fromValue.push(fromValueObj);
+    this.tempPagingObj.isReady = true;
   }
 
   getListTemp(ev) {

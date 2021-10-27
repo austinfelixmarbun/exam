@@ -320,6 +320,11 @@
                           </th>
                         </tr>
                       </thead>
+                      <tbody *ngIf="vendorAtpmList.length == 0">
+                        <tr>
+                          <td colspan="100%">No Data Available</td>
+                        </tr>
+                      </tbody>
                       <tbody>
                         <tr *ngFor="let item of vendorAtpmList; let i = index">
                           <td style="text-align: center;">{{item.VendorAtpmCode}}</td>
