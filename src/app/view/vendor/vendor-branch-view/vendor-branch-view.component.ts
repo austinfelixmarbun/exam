@@ -11,7 +11,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { VendorBankAccObj } from 'app/shared/model/VendorBankAccObj.Model';
 import { VendorEmpObj } from 'app/shared/model/VendorEmpObj.Model';
-import { OfficeObj } from 'app/shared/model/OfficeObj.model';
+import { OfficeObj } from 'app/shared/model/OfficeObj.Model';
 import { VendorOfficeMbrObj } from 'app/shared/model/VendorOfficeMbrObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';

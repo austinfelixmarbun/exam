@@ -12,7 +12,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { IntegrationObj } from 'app/shared/model/library/IntegrationObj.model';
 import { RequestTaskModelObj } from 'app/shared/model/V2/RequestTaskModelObj.model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
