@@ -42,7 +42,8 @@ export class CustomerPersonalDetailXComponent implements OnInit {
   Country: any;
   tempCustObj: any;
   tempCountry: any;
-  LocalCountry: any;
+  LocalCountry: string;
+  LocalCountryCode: string;
   tempCountryCode: any;
   tempNationality: any;
   tempCustPersonalObj: CustPersonalObj = new CustPersonalObj();
@@ -90,6 +91,9 @@ export class CustomerPersonalDetailXComponent implements OnInit {
     this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
       (response) => {
         this.Country = response;
+        let splitCodeDesc = this.Country.GsValue.split(';');
+        this.LocalCountryCode = splitCodeDesc[0];
+        this.LocalCountry = splitCodeDesc[1];
         this.lookUpObj = new InputLookupObj();
         this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
@@ -98,15 +102,9 @@ export class CustomerPersonalDetailXComponent implements OnInit {
         this.criteriaObj = new CriteriaObj();
         this.criteriaObj.restriction = AdInsConstant.RestrictionNeq;
         this.criteriaObj.propName = 'COUNTRY_CODE';
-        this.criteriaObj.value = this.Country.GsValue;
+        this.criteriaObj.value = this.LocalCountryCode;
         this.criteriaList.push(this.criteriaObj);
         this.lookUpObj.addCritInput = this.criteriaList;
-
-        this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: this.Country.GsValue }).subscribe(
-          (response) => {
-            this.LocalCountry = response;
-          });
-
       });
 
     this.custObj = new CustObj()
@@ -214,7 +212,7 @@ export class CustomerPersonalDetailXComponent implements OnInit {
     this.criteriaList.push(this.criteriaObj);
     this.lookupCustGrpObj.addCritInput = this.criteriaList;
   }
-  
+
   checkState() {
     if (!this.CustomerDetailForm.controls.IsVip.value) {
       this.CustomerDetailForm.patchValue({
