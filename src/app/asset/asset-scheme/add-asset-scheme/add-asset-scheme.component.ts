@@ -9,7 +9,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { AssetSchmDObj } from 'app/shared/model/AssetSchmDObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
-import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { FromValueObj, UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -60,40 +60,24 @@ export class AddAssetSchemeComponent implements OnInit {
 
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/assetSchmMbrTempPaging.json";
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/assetSchmMbrTempPaging.json";
-    this.tempPagingObj.isReady = true;
 
-    var arr = [0];
-    var temp;
-    this.http.post(URLConstant.GetListAssetSchmDByAssetSchmHId, { Id: this.AssetSchmHId}).subscribe(
-      response => {
-        temp = response[CommonConstant.ReturnObj];
+    let fromValueObj = new FromValueObj();
+    fromValueObj.property = 'AssetSchmHId';
+    fromValueObj.value = this.AssetSchmHId;
+    this.tempPagingObj.fromValue.push(fromValueObj);
+    
 
-        for (var i = 0; i < temp.length; i++) {
-          arr.push(temp[i]['AssetMasterId']);
-        }
+    this.http.post(URLConstant.GetAssetSchmHById, { Id: this.AssetSchmHId}).subscribe(
+      (response: AssetSchemeHObj) => {
+        this.responseResultData = response;
+        this.AssetTypeId = this.responseResultData.AssetTypeId;
 
-        this.http.post(URLConstant.GetAssetSchmHById, { Id: this.AssetSchmHId}).subscribe(
-          (response: AssetSchemeHObj) => {
-            this.responseResultData = response;
-            this.AssetTypeId = this.responseResultData.AssetTypeId;
+        let whereValueObj = new FromValueObj();
+        whereValueObj.property = 'AssetTypeId';
+        whereValueObj.value = this.AssetTypeId;
+        this.tempPagingObj.whereValue.push(whereValueObj);
 
-            const addCritAssetMasterId = new CriteriaObj();
-            addCritAssetMasterId.DataType = 'numeric';
-            addCritAssetMasterId.propName = 'AM.ASSET_MASTER_ID';
-            addCritAssetMasterId.restriction = AdInsConstant.RestrictionNotIn;
-            addCritAssetMasterId.listValue = arr;
-            this.tempPagingObj.addCritInput.push(addCritAssetMasterId);
-
-            const addCritAssetType = new CriteriaObj();
-            addCritAssetType.DataType = 'numeric';
-            addCritAssetType.propName = 'AM.ASSET_TYPE_ID';
-            addCritAssetType.restriction = AdInsConstant.RestrictionEq;
-            addCritAssetType.value = this.AssetTypeId.toString();
-            this.tempPagingObj.addCritInput.push(addCritAssetType);
-          });
-      },
-      error => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+        this.tempPagingObj.isReady = true;
       }
     );
   }

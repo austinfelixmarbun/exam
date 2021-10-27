@@ -8,7 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { FromValueObj, UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -34,29 +34,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   ngOnInit() {
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/officeAreaMbrTempPaging.json";
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/officeAreaMbrTempPaging.json";
-
-    this.GetListOfficeAreaMbrByRefOfficeAreaId();
-  }
-
-  GetListOfficeAreaMbrByRefOfficeAreaId(){
-    this.http.post(URLConstant.GetListRefOfficeByRefOfficeAreaId, { Id: this.RefOfficeAreaId }).subscribe(
-      (response) => {
-        var arrMemberList = new Array();
-        for (let index = 0; index < response["RefOfficeObjs"].length; index++) {
-          arrMemberList.push(response["RefOfficeObjs"][index].RefOfficeId)
-        }
-
-        if (arrMemberList.length != 0) {
-          const addCritListVendorGrp = new CriteriaObj();
-          addCritListVendorGrp.DataType = 'numeric';
-          addCritListVendorGrp.propName = 'REF_OFFICE_ID';
-          addCritListVendorGrp.restriction = AdInsConstant.RestrictionNotIn;
-          addCritListVendorGrp.listValue = arrMemberList;
-          this.tempPagingObj.addCritInput.push(addCritListVendorGrp);
-        }
-        this.tempPagingObj.isReady = true;
-      }
-    );
+    this.tempPagingObj.isReady = true;
   }
 
   getListTemp(ev) {

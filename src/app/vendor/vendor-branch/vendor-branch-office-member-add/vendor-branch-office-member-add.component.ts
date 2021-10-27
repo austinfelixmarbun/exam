@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { FromValueObj, UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
@@ -42,28 +42,11 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
     addCritIsActive.value = "true";
     this.tempPagingObj.addCritInput.push(addCritIsActive);
 
-    this.GetListVendorOfficeMbrByVendorId();
-  }
-
-  GetListVendorOfficeMbrByVendorId() {
-    this.http.post(URLConstant.GetListVendorOfficeMbrByVendorId, { Id: this.VendorId }).subscribe(
-      (response) => {
-        var arrMemberList = new Array();
-        for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
-          arrMemberList.push(response[CommonConstant.ReturnObj][index].RefOfficeId)
-        }
-
-        if (arrMemberList.length != 0) {
-          const addCritListRefOfficeId = new CriteriaObj();
-          addCritListRefOfficeId.DataType = "numeric";
-          addCritListRefOfficeId.propName = "RO.REF_OFFICE_ID";
-          addCritListRefOfficeId.restriction = AdInsConstant.RestrictionNotIn;
-          addCritListRefOfficeId.listValue = arrMemberList;
-          this.tempPagingObj.addCritInput.push(addCritListRefOfficeId);
-        }
-        this.tempPagingObj.isReady = true;
-      }
-    );
+    let fromValueObj = new FromValueObj();
+    fromValueObj.property = 'VendorId';
+    fromValueObj.value = this.VendorId;
+    this.tempPagingObj.fromValue.push(fromValueObj);
+    this.tempPagingObj.isReady = true;
   }
 
   getListTemp(ev) {

@@ -10,7 +10,7 @@ import { AuthFormObj } from "app/shared/model/AuthFormObj.Model";
 import { ListAuthFormObj } from "app/shared/model/ListAuthFormObj.Model";
 import { URLConstant } from "app/shared/constant/URLConstant";
 import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
-import { UcTempPagingObj } from "app/shared/model/TempPaging/UcTempPagingObj.model";
+import { FromValueObj, UcTempPagingObj } from "app/shared/model/TempPaging/UcTempPagingObj.model";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
 import { AdInsHelper } from "app/shared/AdInsHelper";
@@ -43,29 +43,11 @@ export class RoleFormComponent implements OnInit {
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/roleRefFormTempPaging.json";
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/roleRefFormTempPaging.json";
 
-    this.GetListRefFormRoleByRefRoleId();
-  }
-
-  GetListRefFormRoleByRefRoleId() {
-    this.http.post<Array<AuthFormObj>>(URLConstant.GetListAuthFormByRefRoleId, {Id: this.RefRoleId }).subscribe(
-      (response) => {
-        var arrMemberList = new Array();
-
-        for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
-          arrMemberList.push(response[CommonConstant.ReturnObj][index].RefFormId)
-        }
-
-        if (response[CommonConstant.ReturnObj].length != 0) {
-          var addCritListRefFormId = new CriteriaObj();
-          addCritListRefFormId.DataType = "numeric";
-          addCritListRefFormId.propName = "REF_FORM_ID";
-          addCritListRefFormId.restriction = AdInsConstant.RestrictionNotIn;
-          addCritListRefFormId.listValue = arrMemberList;
-          this.tempPagingObj.addCritInput.push(addCritListRefFormId);
-        }
-        this.tempPagingObj.isReady = true;
-      }
-    );
+    let fromValueObj = new FromValueObj();
+    fromValueObj.property = 'RefRoleId';
+    fromValueObj.value = this.RefRoleId;
+    this.tempPagingObj.fromValue.push(fromValueObj);
+    this.tempPagingObj.isReady = true;
   }
 
   getListTemp(ev) {
