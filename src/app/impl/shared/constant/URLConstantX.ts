@@ -56,4 +56,5 @@ export class URLConstantX{
     //public static GetCustPersonalbyCustIdX = environment.FoundationR3Url + "/v1" + "/CustX/GetCustByCustId";//"/CustPersonalX/GetCustPersonalByCustId"
     public static EditCustPersonalMainDataX = environment.FoundationR3Url + "/v1" + "/CustX/EditCustPersonalMainData";
     public static EditCustPersonalMainDataXV2 = environment.FoundationR3Url + "/v2" + "/CustX/EditCustPersonalMainData";
+    public static SendCustomerDataToRabbitMq = environment.FoundationR3Url + "/v1" + "/Cust/SendCustomerDataToRabbitMq";
 }
