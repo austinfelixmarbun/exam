@@ -99,8 +99,8 @@ export class TrustingSocialReqConsentComponent implements OnInit {
     var month = ("0" + (this.businessDt.getMonth() + 1)).slice(-2);
     var date = ("0" + this.businessDt.getDate()).slice(-2);
 
-    reqUploadConsentTsObj.FileName = 'CONSENT_' + date + month + this.businessDt.getFullYear() + '_' + this.CustPersonalObj.MobilePhnNo1 + '_' + this.FPP; 
-
+    reqUploadConsentTsObj.FileName = 'CONSENT_' + date + month + this.businessDt.getFullYear() + '_' + this.CustPersonalObj.MobilePhnNo1 + '_' + this.FPP + ext; 
+    //reqUploadConsentTsObj.FileName = this.FileToUpload.name;
     let reader = new FileReader();
     reader.readAsDataURL(this.FileToUpload);
     reader.onload = () => {
