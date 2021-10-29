@@ -221,6 +221,8 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.inputAddressObj.default = this.UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showPhn3 = false;
+    this.inputAddressObj.isRequired = false;
+    this.inputAddressObj.inputField.inputLookupObj.isRequired = false;
   }
 
   ChangeIdType(FirstInit: boolean = false) {
