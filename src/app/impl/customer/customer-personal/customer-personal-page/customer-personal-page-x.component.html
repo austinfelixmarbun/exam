@@ -1,7 +1,7 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-body">
-      <div class="px-3">
+      <div class="px-3 pt-2">
         <div class="addEdit">
           <form class="form form-horizontal">
             <div class="form-body">
@@ -10,8 +10,13 @@
                   <h4 class="card-title" id="horz-layout-colored-controls" translate> Customer Personal</h4>
                 </div>
                 <div class="col-md-4" style="text-align-last: right">
+                  <!-- START X-DSF INTEGRASI-CUST : 2021-10-29, Udin - Integrasi Cust FOU ke R2 -->
+                  <button type="button" class="btn btn-raised btn-success mr-2" (click)="submitToLmsX()" >
+                    <i class="fa fa-save"></i> &nbsp;<span translate>Submit To LMS</span>
+                  </button>
+                  <!-- END X-DSF INTEGRASI-CUST -->
                   <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" >
-                    <i class="fa fa-arrow-left"></i> <span translate>Back</span>
+                    <i class="fa fa-arrow-left"></i> &nbsp;<span translate>Back</span>
                   </button>
                 </div>
               </div>

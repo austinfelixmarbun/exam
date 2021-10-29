@@ -17,6 +17,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/CustObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { PathConstantX } from 'app/impl/shared/PathConstantX';
+import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
 
 @Component({
   selector: 'app-customer-personal-page-x',
@@ -42,7 +43,7 @@ export class CustomerPersonalPageXComponent implements OnInit {
   dmsObj: DMSObj;
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private cookieService: CookieService) { 
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private cookieService: CookieService, private toastr: NGXToastrService) { 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -186,4 +187,18 @@ export class CustomerPersonalPageXComponent implements OnInit {
       AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
     }
   }
+
+  //START X-DSF INTEGRASI-CUST : 2021-10-29, Udin - Integrasi Cust FOU ke R2
+  submitToLmsX() {
+    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
+      (response: CustObj) => {
+        this.http.post(URLConstantX.SendCustomerDataToRabbitMq, { CustNo: response.CustNo }).subscribe(
+          (response) => {
+            this.toastr.successMessage(response["Message"]);
+          }
+        )
+      }
+    );
+  }
+  //END X-DSF INTEGRASI-CUST
 }
