@@ -15,6 +15,9 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMas
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
+import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 @Component({
   selector: 'app-customer-personal-address-add',
@@ -29,7 +32,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   resultData: any;
   tempCustObj: any;
   listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
-  listAddressType: any;
+  listAddressType: Array<KeyValueObj> = new Array();
   getCustomerAddr: any;
   copyCustomerAddr: any;
 
@@ -80,7 +83,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   });
   inputAddressObj: InputAddressObj;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private CustSetData: NewCustSetData) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -96,10 +99,11 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
     this.addressType.MappingCode = CommonConstant.CustTypePersonal;
     this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).subscribe(
-      (response) => {
+      async (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
         let idxEmergency = this.listAddressType.findIndex(x => x.Key == CommonConstant.CustAddrTypeEmergency);
-        if (idxEmergency != -1) this.listAddressType.splice(idxEmergency, 1)
+        if (idxEmergency != -1) this.listAddressType.splice(idxEmergency, 1);
+        this.listAddressType = await this.CustSetData.FilterAddr(this.listAddressType);
         this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response[CommonConstant.ReturnObj][0]['Key'] });
       });
 

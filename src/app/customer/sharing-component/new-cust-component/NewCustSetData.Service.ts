@@ -1,14 +1,23 @@
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { URLConstant } from "app/shared/constant/URLConstant";
 import { CriteriaObj } from "app/shared/model/CriteriaObj.Model";
+import { GeneralSettingObj } from "app/shared/model/GeneralSettingObj.Model";
 import { InputAddressObj } from "app/shared/model/InputAddressObj.Model";
 import { InputFieldObj } from "app/shared/model/InputFieldObj.Model";
 import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
+import { KeyValueObj } from "app/shared/model/KeyValue/KeyValueObj.Model";
 import { UcDropdownListObj } from "app/shared/model/library/UcDropdownListObj.model";
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from "app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model";
 
+@Injectable({
+  providedIn: 'root'
+})
 export class NewCustSetData {
+
+  constructor(private http: HttpClient) { }
 
   public static BindSetLegalAddr(): InputAddressObj {
     let inputFieldObj = new InputFieldObj();
@@ -105,5 +114,21 @@ export class NewCustSetData {
     }
     tempDdlObj.isReady = true;
     return tempDdlObj;
+  }
+
+  public async FilterAddr(listAddr: Array<KeyValueObj>): Promise<Array<KeyValueObj>>{
+    await this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeFilterAddr }).toPromise().then(
+      (result: GeneralSettingObj) => {
+        if (result.GsValue) {
+          let listAddrToFilter: Array<string> = result.GsValue.split(';');
+          for (let index = 0; index < listAddrToFilter.length; index++) {
+            const element = listAddrToFilter[index];
+            let idxFound = listAddr.findIndex(x => x.Key == element);
+            if (idxFound >= 0) listAddr.splice(idxFound, 1);
+          }
+        }
+      }
+    );
+    return listAddr;
   }
 }
