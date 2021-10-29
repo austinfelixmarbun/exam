@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
@@ -111,7 +111,7 @@ export class JobDataEmployeeXComponent implements OnInit {
     PreviIndustryName: [''],
     PreviEmploymentDate: [''],
     NotesPreJob: [''],
-    NoOfEmploy: [0, Validators.min(1)],
+    NoOfEmploy: [''],
     CommodityCode: ['']
   });
   businessDtMin: Date;
