@@ -20,6 +20,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 @Component({
   selector: 'app-job-data-employee',
@@ -562,7 +563,11 @@ export class JobDataEmployeeComponent implements OnInit {
     this.custPersonalJobDataObj.PrevEmploymentDt = this.JobDataEmpForm.controls["PreviEmploymentDate"].value;
   }
 
-  SaveForm() {
+  async SaveForm(IsParent: boolean = false): Promise<boolean> {
+    if (this.JobDataEmpForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.JobDataEmpForm);
+      return false;
+    }
     if (this.typePage == "edit") {
       this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
       this.setCustJobData();
@@ -580,10 +585,10 @@ export class JobDataEmployeeComponent implements OnInit {
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_EMP;
 
-      this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
+      await this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.outputTab.emit({ stepMode: "next" });
+          if (!IsParent) this.outputTab.emit({ stepMode: "next" });
         }
       );
     }
@@ -599,17 +604,18 @@ export class JobDataEmployeeComponent implements OnInit {
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_EMP;
 
-      this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
+      await this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          this.outputTab.emit({ stepMode: "next" });
+          if (!IsParent) this.outputTab.emit({ stepMode: "next" });
         }
       );
     }
+    return true;
   }
 
   isWellknownCoyChecked(event: any) {

@@ -1,5 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { Router } from "@angular/router";
+import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
+import { AdInsHelper } from "app/shared/AdInsHelper";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { URLConstant } from "app/shared/constant/URLConstant";
@@ -11,13 +15,14 @@ import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
 import { KeyValueObj } from "app/shared/model/KeyValue/KeyValueObj.Model";
 import { UcDropdownListObj } from "app/shared/model/library/UcDropdownListObj.model";
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from "app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model";
+import { NavigationConstant } from "app/shared/NavigationConstant";
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewCustSetData {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService, private router: Router) { }
 
   public static BindSetLegalAddr(): InputAddressObj {
     let inputFieldObj = new InputFieldObj();
@@ -116,7 +121,7 @@ export class NewCustSetData {
     return tempDdlObj;
   }
 
-  public async FilterAddr(listAddr: Array<KeyValueObj>): Promise<Array<KeyValueObj>>{
+  public async FilterAddr(listAddr: Array<KeyValueObj>): Promise<Array<KeyValueObj>> {
     await this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeFilterAddr }).toPromise().then(
       (result: GeneralSettingObj) => {
         if (result.GsValue) {
@@ -130,5 +135,25 @@ export class NewCustSetData {
       }
     );
     return listAddr;
+  }
+
+  public async SendCustomerDataToRabbitMq(CustNo: string, UrlBack: string = NavigationConstant.CUST_PAGING) {
+    await this.http.post(URLConstant.SendCustomerDataToRabbitMq, { CustNo: CustNo }).toPromise().then(
+      (response) => {
+        if (response["StatusCode"] == 200) {
+          this.toastr.successMessage("Sync Customer Succses");
+          AdInsHelper.RedirectUrl(this.router, [UrlBack], {});
+        }
+      }
+    )
+  }
+  
+  public static markFormGroupTouched(formGroup: FormGroup) {
+    (<any>Object).values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+      if (control.controls) {
+        this.markFormGroupTouched(control);
+      }
+    });
   }
 }

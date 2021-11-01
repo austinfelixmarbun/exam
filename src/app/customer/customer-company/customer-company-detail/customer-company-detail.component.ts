@@ -171,7 +171,11 @@ export class CustomerCompanyDetailComponent implements OnInit {
     }
   }
 
-  SaveValue() {
+  async SaveValue(IsParent: boolean = false): Promise<boolean> {
+    if (this.CustomerDetailForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.CustomerDetailForm);
+      return false;
+    }
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj = this.tempCustCompanyObj;
 
@@ -186,7 +190,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
 
     if(this.CustomerDetailForm.controls["EstablishmentDt"].value > this.MaxDtValidate){
       this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
-      return;
+      return false;
     }
 
     if (this.tempRefIndustryObj != null && this.tempRefIndustryTypeId === null) {
@@ -196,12 +200,13 @@ export class CustomerCompanyDetailComponent implements OnInit {
       this.custCompanyObj.RefIndustryTypeId = this.tempRefIndustryTypeId;
     }
 
-    this.http.post(URLConstant.EditCustCompany, this.custCompanyObj).subscribe(
+    await this.http.post(URLConstant.EditCustCompany, this.custCompanyObj).toPromise().then(
       (response) => {
         this.toastr.successMessage(response["Message"]);
-        this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next' });
+        if(!IsParent) this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next' });
       }
     );
+    return true;
   }
 
   getLookUp(event) {

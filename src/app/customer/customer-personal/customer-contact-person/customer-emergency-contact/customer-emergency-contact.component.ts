@@ -27,6 +27,7 @@ import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Resp
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
 import { UcDropdownListCallbackObj, UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 @Component({
   selector: 'app-customer-emergency-contact',
@@ -268,7 +269,11 @@ export class CustomerEmergencyContactComponent implements OnInit {
       });
   }
 
-  SaveValue() {
+  async SaveValue(IsParent: boolean = false): Promise<boolean> {
+    if (this.CustomerContactForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.CustomerContactForm);
+      return false;
+    }
     console.log("ameng");
     if(this.checkEmergencyCustContactPerson() == false){
       return;
@@ -315,27 +320,28 @@ export class CustomerEmergencyContactComponent implements OnInit {
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.tempCustPersonalContactPerson.CustPersonalContactPersonId;
 
       this.custPersonalContactPersonObj.RowVersion = this.tempCustPersonalContactPerson.RowVersion;
-      this.http.post(URLConstant.EditCustPersonalEmergencyContact, this.custPersonalContactPersonObj).subscribe(
+      await this.http.post(URLConstant.EditCustPersonalEmergencyContact, this.custPersonalContactPersonObj).toPromise().then(
         response => {
           this.toastr.successMessage(response["Message"]);
           // this.wizard.goToNextStep();
           this.isAdd = false;
           // this.outputTab.emit({ isAdd: this.isAdd });
-          this.outputTab.emit({ stepMode: "next" });
+          if (!IsParent) this.outputTab.emit({ stepMode: "next" });
         }
       );
     } else {
-      this.http.post(URLConstant.AddCustPersonalEmergencyContact, this.custPersonalContactPersonObj).subscribe(
+      await this.http.post(URLConstant.AddCustPersonalEmergencyContact, this.custPersonalContactPersonObj).toPromise().then(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.isAdd = false;
           // this.outputTab.emit({ isAdd: this.isAdd });
           // this.wizard.goToNextStep();
-          this.outputTab.emit({ stepMode: "next" });
+          if (!IsParent) this.outputTab.emit({ stepMode: "next" });
         }
       );
 
     }
+    return true;
   }
 
   getLookUpCustomer(event) {

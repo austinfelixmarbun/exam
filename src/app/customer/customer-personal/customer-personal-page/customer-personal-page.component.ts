@@ -16,6 +16,12 @@ import { PathConstant } from 'app/shared/PathConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ResSysConfigResultObj } from 'app/shared/model/Response/ResSysConfigResultObj,model';
 import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { CustomerPersonalDetailComponent } from '../customer-personal-detail/customer-personal-detail.component';
+import { CustomerEmergencyContactComponent } from '../customer-contact-person/customer-emergency-contact/customer-emergency-contact.component';
+import { CustFinDataTabComponent } from 'app/customer/cust-fin-data-tab/cust-fin-data-tab.component';
+import { CustomerPersonalJobDataComponent } from '../customer-personal-job-data/customer-personal-job-data.component';
+import { CustAttrSectionComponent } from 'app/customer/cust-attr-section/cust-attr-section.component';
 @Component({
   selector: 'app-customer-personal-page',
   templateUrl: './customer-personal-page.component.html',
@@ -27,7 +33,7 @@ export class CustomerPersonalPageComponent implements OnInit {
 
   IdCust: number;
   CustPersonalId: number;
-  CustStepIndex: number;
+  CustStepIndex: number = 1;
   isMarried: boolean = false;
   isJob: boolean;
   isGroup: boolean;
@@ -38,10 +44,11 @@ export class CustomerPersonalPageComponent implements OnInit {
   isFinancial: boolean;
   Page: string;
   From: string;
+  CustNo: string = "";
   dmsObj: DMSObj;
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private cookieService: CookieService) { 
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private cookieService: CookieService, private CustSetData: NewCustSetData) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -54,7 +61,7 @@ export class CustomerPersonalPageComponent implements OnInit {
       }
     });
   }
-  
+
 
   CustStep = {
     "Detail": 1,
@@ -68,50 +75,53 @@ export class CustomerPersonalPageComponent implements OnInit {
     "CustAttr": 9
   }
 
-  back() {
-    if (this.Page != null) {
-      AdInsHelper.RedirectUrl(this.router, ["/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstant.PAGING], {});
-    } else {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
-    }
+  SetUrlBack(): string {
+    let urlBack: string = NavigationConstant.CUST_PAGING;
+    if (this.From) urlBack = "/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstant.PAGING;
+    return urlBack;
   }
- 
-  async ngOnInit() : Promise<void> {
-    await this.http.post(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).toPromise().then(
+
+  back() {
+    AdInsHelper.RedirectUrl(this.router, [this.SetUrlBack()], {});
+  }
+
+  async ngOnInit(): Promise<void> {
+    await this.http.post(URLConstant.GetCustPersonalbyCustId, { Id: this.IdCust }).toPromise().then(
       (response: any) => {
         this.CustPersonalId = response['CustPersonalId'];
       }
     );
 
     //check DMS
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms}).toPromise().then(
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms }).toPromise().then(
       (response) => {
         this.SysConfigResultObj = response;
-    });
+      });
+    await this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).toPromise().then(
+      (response: CustObj) => {
+        this.CustNo = response.CustNo;
+      }
+    );
 
-    if(this.SysConfigResultObj.ConfigValue == '1'){
-      await this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).toPromise().then(
-        (response: any) => {
-          let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-          this.dmsObj = new DMSObj();
-          this.dmsObj.User = currentUserContext.UserName;
-          this.dmsObj.Role = currentUserContext.RoleCode;
-          this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
-          this.dmsObj.MetadataParent = null;
-          this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, response["CustNo"]));
-          this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));   
-        }
-      );
+    if (this.SysConfigResultObj.ConfigValue == '1') {
+      let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+      this.dmsObj = new DMSObj();
+      this.dmsObj.User = currentUserContext.UserName;
+      this.dmsObj.Role = currentUserContext.RoleCode;
+      this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
+      this.dmsObj.MetadataParent = null;
+      this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, this.CustNo));
+      this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
 
-      await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).toPromise().then(
+      await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: this.IdCust }).toPromise().then(
         (response) => {
-          if(response.MrMaritalStatCode == CommonConstant.MasteCodeMartialStatsMarried){
+          if (response.MrMaritalStatCode == CommonConstant.MasteCodeMartialStatsMarried) {
             this.isMarried = true;
           }
         }
       );
     }
-    
+
     this.stepper = new Stepper(document.querySelector('#stepper1'), {
       linear: false,
       animation: true
@@ -155,34 +165,66 @@ export class CustomerPersonalPageComponent implements OnInit {
 
   getValue(ev: any) {
     if (ev.stepMode != undefined) {
-      if (ev.stepMode == "next"){
+      if (ev.stepMode == "next") {
         this.stepper.next();
         this.CustStepIndex++;
 
         //skip dms
-        if(this.CustStepIndex == 8 && this.SysConfigResultObj.ConfigValue != '1'){
+        if (this.CustStepIndex == 8 && this.SysConfigResultObj.ConfigValue != '1') {
           this.stepper.next();
           this.CustStepIndex++;
         }
       }
-      else{
+      else {
         this.stepper.previous();
         this.CustStepIndex--;
 
         //skip dms
-        if(this.CustStepIndex == 8 && this.SysConfigResultObj.ConfigValue != '1'){
+        if (this.CustStepIndex == 8 && this.SysConfigResultObj.ConfigValue != '1') {
           this.stepper.previous();
           this.CustStepIndex--;
         }
       }
     }
   }
-  
-  endStepper(ev:any){
+
+  endStepper(ev: any) {
     if (this.From) {
       AdInsHelper.RedirectUrl(this.router, ["/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstant.PAGING], {});
     } else {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_PAGING],{});
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
     }
+  }
+
+  @ViewChild('CustPersDetail') private CustPersDetail: CustomerPersonalDetailComponent;
+  @ViewChild('CustEmrgcyCtc') private CustEmrgcyCtc: CustomerEmergencyContactComponent;
+  @ViewChild('CustFinData') private CustFinData: CustFinDataTabComponent;
+  @ViewChild('CustJobData') private CustJobData: CustomerPersonalJobDataComponent;
+  @ViewChild('CustAttrData') private CustAttrData: CustAttrSectionComponent;
+  async SendToR2() {
+    console.log(this.CustStepIndex);
+    if(!await this.SaveData(this.CustStepIndex)) return;
+    await this.CustSetData.SendCustomerDataToRabbitMq(this.CustNo, this.SetUrlBack());
+  }
+  async SaveData(stepIdx: number): Promise<boolean> {
+    let flag: boolean = true;
+    switch (stepIdx) {
+      case 1:
+        flag = await this.CustPersDetail.SaveValue(true);
+        break;
+      case 4:
+        flag = await this.CustEmrgcyCtc.SaveValue(true);
+        break;
+      case 6:
+        flag = await this.CustFinData.saveCustAttrContentAndNext(true);
+        break;
+      case 5:
+        flag = await this.CustJobData.SaveData();
+        break;
+      case 9:
+        flag = await this.CustAttrData.SaveForm();
+        break;
+    }
+    return flag;
   }
 }

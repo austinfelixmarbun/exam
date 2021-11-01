@@ -17,6 +17,7 @@ import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 @Component({
   selector: 'app-job-data-professional',
@@ -437,7 +438,11 @@ export class JobDataProfessionalComponent implements OnInit {
     this.otherAddressObj.MrBuildingOwnershipCode = this.JobDataProForm.controls["otherBusinessAddress"]["controls"].MrHouseOwnershipCode.value;
     this.otherAddressObj.Notes = this.JobDataProForm.controls["NotesOther"].value;
   }
-  SaveForm() {
+  async SaveForm(IsParent: boolean = false): Promise<boolean> {
+    if (this.JobDataProForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.JobDataProForm);
+      return false;
+    }
     if (this.typePage == "edit") {
       this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
       this.custPersonalJobDataObj = new CustPersonalJobDataObj;
@@ -463,10 +468,10 @@ export class JobDataProfessionalComponent implements OnInit {
       this.reqCustPersonalJobDataObj.OthBizAddr = this.otherAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_PROF;
 
-      this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
+      await this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.outputTab.emit({ stepMode: "next" });
+          if (!IsParent) this.outputTab.emit({ stepMode: "next" });
         }
       );
     } else {
@@ -486,12 +491,13 @@ export class JobDataProfessionalComponent implements OnInit {
       this.reqCustPersonalJobDataObj.OthBizAddr = this.otherAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_PROF;
 
-      this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
+      await this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.outputTab.emit({ stepMode: "next" });
+          if (!IsParent) this.outputTab.emit({ stepMode: "next" });
         }
       );
     }
+    return true;
   }
 }
