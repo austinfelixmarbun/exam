@@ -13,6 +13,8 @@ import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 @Component({
   selector: 'app-customer-company-address-add',
@@ -25,7 +27,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
 
   listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
-  listAddressType: any;
+  listAddressType: Array<KeyValueObj> = new Array();
   copyCustomerAddr: any;
   copyCustomerAddrFrom: any;
 
@@ -59,7 +61,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
-    private fb: FormBuilder,
+    private fb: FormBuilder, private CustSetData: NewCustSetData,
     private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -78,10 +80,11 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.addressType.MappingCode = CommonConstant.CustTypeCompany;
 
     this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).subscribe(
-      (response) => {
+      async (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
         let idxCompany = this.listAddressType.findIndex(x => x.Key == CommonConstant.CustAddrTypeCompany);
-        this.listAddressType.splice(idxCompany, 1)
+        this.listAddressType.splice(idxCompany, 1);        
+        this.listAddressType = await this.CustSetData.FilterAddr(this.listAddressType);
         this.CustDataCompanyForm.patchValue({
           MrCustAddrTypeCode: this.listAddressType[0].Key
         })
