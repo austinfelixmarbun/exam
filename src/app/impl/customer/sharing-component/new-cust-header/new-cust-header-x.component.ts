@@ -63,6 +63,18 @@ export class NewCustHeaderXComponent implements OnInit {
       }
       if (params["From"] != null) {
         this.From = params["From"];
+
+        //START Issue Non Jira X, Udin: perbaikan jika  halaman dibuka dari menu "CUSTOMER FAMILY" atau "CUSTOMER SHAREHOLDER"
+        if(this.From == CommonConstant.CustFromCustShareholder) 
+        {
+          this.isShareholder = true;
+          this.CustDataMode = CommonConstant.CustMainDataModeMgmntShrholder;
+        }
+        else if(this.From == CommonConstant.CustFromCustFamily) {
+          this.isFamily = true;
+          this.CustDataMode = CommonConstant.CustMainDataModeFamily;
+        }
+        //END Issue Non Jira X, Udin
       }
     });
   }
