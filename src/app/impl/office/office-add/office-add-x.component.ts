@@ -471,14 +471,14 @@ export class OfficeAddXComponent implements OnInit {
 
 
     if (this.pageType == "add") {
-      let addRefOfficeUrl = environment.isCore? URLConstantX.AddRefOfficeXV2 : URLConstantX.AddRefOfficeX;
+      const addRefOfficeUrl = environment.isCore? URLConstantX.AddRefOfficeXV2 : URLConstantX.AddRefOfficeX;
 
-      var obj = {
+      const addobj = {
         RefOfficeObj: this.officeObj,
         RefOfficeObjX: this.officeXObj
       }
       
-      this.httpClient.post(addRefOfficeUrl, obj).subscribe(
+      this.httpClient.post(addRefOfficeUrl, addobj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           
@@ -491,12 +491,12 @@ export class OfficeAddXComponent implements OnInit {
       this.officeObj.MrOfficeTypeCode = this.resultData.MrOfficeTypeCode
       this.officeObj.RefOfficeId = this.resultData.RefOfficeId;
       this.officeObj.RowVersion = this.resultData.RowVersion;
-      var obj = {
+      const editobj = {
         RefOfficeObj: this.officeObj,
         RefOfficeObjX: this.officeXObj
       }
       let editRefOfficeUrl = environment.isCore? URLConstantX.EditRefOfficeXV2 : URLConstantX.EditRefOfficeX;
-      this.httpClient.post(editRefOfficeUrl, obj).subscribe(
+      this.httpClient.post(editRefOfficeUrl, editobj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           

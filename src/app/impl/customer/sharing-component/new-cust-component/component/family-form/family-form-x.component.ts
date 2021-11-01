@@ -115,16 +115,17 @@ export class FamilyFormXComponent implements OnInit {
         this.lookUpObjCountry.genericJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObjCountry.isRequired = false;
 
-        this.CountryCode = response.GsValue;
+        let splitCodeDesc = response.GsValue.split(';');
+        this.CountryCode = splitCodeDesc[0];
+        this.CountryName = splitCodeDesc[1];
         let criteriaList = new Array();
         let criteriaObj = new CriteriaObj();
         criteriaObj.restriction = AdInsConstant.RestrictionNeq;
         criteriaObj.propName = 'COUNTRY_CODE';
-        criteriaObj.value = response.GsValue;
+        criteriaObj.value = this.CountryCode;
         criteriaList.push(criteriaObj);
         this.lookUpObjCountry.addCritInput = criteriaList;
-
-        this.GetRefCountry(response.GsValue, true);
+		this.IsLocal = true;
       }
     );
   }
