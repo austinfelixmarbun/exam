@@ -101,8 +101,6 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).subscribe(
       async (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
-        let idxEmergency = this.listAddressType.findIndex(x => x.Key == CommonConstant.CustAddrTypeEmergency);
-        if (idxEmergency != -1) this.listAddressType.splice(idxEmergency, 1);
         this.listAddressType = await this.CustSetData.FilterAddr(this.listAddressType);
         this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response[CommonConstant.ReturnObj][0]['Key'] });
       });

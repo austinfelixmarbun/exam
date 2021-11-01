@@ -82,8 +82,6 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).subscribe(
       async (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
-        let idxCompany = this.listAddressType.findIndex(x => x.Key == CommonConstant.CustAddrTypeCompany);
-        this.listAddressType.splice(idxCompany, 1);        
         this.listAddressType = await this.CustSetData.FilterAddr(this.listAddressType);
         this.CustDataCompanyForm.patchValue({
           MrCustAddrTypeCode: this.listAddressType[0].Key
