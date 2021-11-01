@@ -1,6 +1,6 @@
 {
     "keyProperty": "VendorId",
-    "keyPropCriteria": "VENDOR_ID",
+    "keyPropCriteria": "VDR.VENDOR_ID",
     "component": [
         {
             "type": "textbox",
@@ -20,7 +20,7 @@
         },
         {
             "type": "dropdown",
-            "name": "IS_ACTIVE",
+            "name": "VDR.IS_ACTIVE",
             "id": "ActiveStatusId",
             "label": "Active Status",
             "value": "",

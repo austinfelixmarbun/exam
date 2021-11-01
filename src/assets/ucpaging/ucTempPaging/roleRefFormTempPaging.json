@@ -1,10 +1,10 @@
 {
     "keyProperty": "RefFormId",
-    "keyPropCriteria": "REF_FORM_ID",
+    "keyPropCriteria": "RF.REF_FORM_ID",
     "component": [
         {
             "type": "textbox",
-            "name": "FORM_CODE",
+            "name": "RF.FORM_CODE",
             "id": "FormCodeId",
             "value": "",
             "label": "Form Code",
@@ -12,7 +12,7 @@
         },
         {
             "type": "textbox",
-            "name": "TITLE",
+            "name": "RF.TITLE",
             "id": "TitleId",
             "value": "",
             "label": "Title",
@@ -27,13 +27,13 @@
             "type": "sort",
             "position": "center",
             "label": "Form Code",
-            "name": "FORM_CODE"
+            "name": "RF.FORM_CODE"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Title",
-            "name": "TITLE"
+            "name": "RF.TITLE"
         }
     ],
     "bodyList": [

@@ -21,7 +21,7 @@ import { String } from 'typescript-string-operations';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { CustGrpObj } from 'app/shared/model/CustGrpObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({

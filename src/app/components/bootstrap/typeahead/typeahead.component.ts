@@ -6,7 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { RequestCriteriaObj } from 'app/shared/model/RequestCriteriaObj.model';
 import { NullTemplateVisitor } from '@angular/compiler';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 
 // State constant declaration
