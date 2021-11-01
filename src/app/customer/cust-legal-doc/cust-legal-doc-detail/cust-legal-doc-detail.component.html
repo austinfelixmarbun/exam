@@ -45,7 +45,7 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 adInsLabel adins-required-label" for="DocExpiredDt" translate>Expired Date</label>
+                  <label class="col-md-3 adInsLabel" for="DocExpiredDt" translate>Expired Date</label>
                   <div class="col-md-9">
                     <input type="date" class="form-control adInsInput" formControlName="DocExpiredDt" [min]="businessDtMax | date: 'yyyy-MM-dd'"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustCompanyLegalDocForm.controls.DocExpiredDt.invalid }">
