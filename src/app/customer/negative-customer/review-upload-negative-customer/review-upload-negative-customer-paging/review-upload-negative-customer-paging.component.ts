@@ -56,7 +56,7 @@ export class ReviewUploadNegativeCustomerPagingComponent implements OnInit {
   cancel(ev) {
     let CancelUrl = environment.isCore? URLConstant.CancelUploadV2 : URLConstant.CancelUpload;
     var wfObj = new WorkflowApiObj();
-    wfObj.TaskListId = environment.isCore? ev.RowObj.ExecutionId : ev.RowObj.TaskListId;
+    wfObj.TaskListId = environment.isCore? ev.RowObj.ProcessInstanceId : ev.RowObj.TaskListId;
     wfObj.TransactionNo = ev.RowObj.UploadNo;
     wfObj.ListValue = { "Status": "RJC" };
     this.http.post(CancelUrl, wfObj).subscribe(
