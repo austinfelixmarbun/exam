@@ -1,5 +1,5 @@
 import { environment } from "environments/environment";
-import { CriteriaObj } from "./CriteriaObj.model";
+import { CriteriaObj } from "./CriteriaObj.Model";
 
 export class InputSearchObj {
     _url: string;

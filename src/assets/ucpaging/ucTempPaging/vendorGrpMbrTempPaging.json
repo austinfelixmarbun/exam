@@ -1,10 +1,10 @@
 {
     "keyProperty": "VendorId",
-    "keyPropCriteria": "VENDOR_ID",
+    "keyPropCriteria": "V.VENDOR_ID",
     "component": [
         {
             "type": "textbox",
-            "name": "VENDOR_CODE",
+            "name": "V.VENDOR_CODE",
             "id": "VendorCodeId",
             "value": "",
             "label": "Vendor Code",
@@ -12,7 +12,7 @@
         },
         {
             "type": "textbox",
-            "name": "VENDOR_NAME",
+            "name": "V.VENDOR_NAME",
             "id": "VendorNameId",
             "value": "",
             "label": "Vendor Name",
@@ -20,7 +20,7 @@
         },
         {
             "type": "dropdown",
-            "name": "IS_ACTIVE",
+            "name": "V.IS_ACTIVE",
             "id": "ActiveStatusId",
             "label": "Active Status",
             "value": "",
@@ -48,19 +48,19 @@
             "type": "sort",
             "position": "left",
             "label": "Vendor Code",
-            "name": "VENDOR_CODE"
+            "name": "V.VENDOR_CODE"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Vendor Name",
-            "name": "VENDOR_NAME"
+            "name": "V.VENDOR_NAME"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "ACTIVE STATUS",
-            "name": "IS_ACTIVE"
+            "name": "V.IS_ACTIVE"
         }
     ],
     "bodyList": [

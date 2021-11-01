@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Output,EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -7,8 +7,10 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
 import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
 import { environment } from 'environments/environment';
+import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
 
 @Component({
   selector: 'app-vendor-atpm-select',
@@ -18,67 +20,81 @@ import { environment } from 'environments/environment';
 export class VendorAtpmSelectComponent implements OnInit {
 
   inputLookupATPMObj: InputLookupObj = new InputLookupObj();
+  inputAddressObj: InputAddressObj = new InputAddressObj();
   @Input() listExistingAtpmCode: Array<string> = new Array<string>();
   @Output() emitData: EventEmitter<object> = new EventEmitter();
 
   VendorAtpmForm = this.fb.group({
-    VendorId:[''],
+    VendorId: [''],
     VendorAtpmCode: ['', [Validators.required]],
-    VendorName:[''],
+    VendorName: [''],
     VendorLegalAddr: ['']
   });
-  
+
   constructor(private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     public activeModal: NgbActiveModal,) { }
 
-  ngOnInit() 
-  {
+  ngOnInit() {
     this.setLookup();
+    this.setUcAddress();
   }
 
-  setLookup()
-  {
-      this.inputLookupATPMObj.urlJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-      this.inputLookupATPMObj.pagingJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-      this.inputLookupATPMObj.genericJson = "./assets/uclookup/vendor/lookupVendorParent.json";
-      this.inputLookupATPMObj.isRequired = false;
-      this.inputLookupATPMObj.addCritInput = new Array();
+  setUcAddress() {
+    this.inputAddressObj.inputField.inputLookupObj.isDisable = true;
+    this.inputAddressObj.showSubsection = false;
+    this.inputAddressObj.showAllPhn = false;
+    this.inputAddressObj.isRequired = false;
+    this.inputAddressObj.isReadonly = true;
+  }
+  setLookup() {
+    this.inputLookupATPMObj.urlJson = "./assets/uclookup/vendor/lookupVendorParent.json";
+    this.inputLookupATPMObj.pagingJson = "./assets/uclookup/vendor/lookupVendorParent.json";
+    this.inputLookupATPMObj.genericJson = "./assets/uclookup/vendor/lookupVendorParent.json";
+    this.inputLookupATPMObj.isRequired = false;
+    this.inputLookupATPMObj.addCritInput = new Array();
 
-      var critInput = new CriteriaObj();
-      critInput.propName = "V.MR_VENDOR_CATEGORY_CODE";
-      critInput.restriction = AdInsConstant.RestrictionEq;
-      critInput.value = CommonConstant.SUPPLIER_ATPM;
-      this.inputLookupATPMObj.addCritInput.push(critInput);
+    let critInput = new CriteriaObj();
+    critInput.propName = "V.MR_VENDOR_CATEGORY_CODE";
+    critInput.restriction = AdInsConstant.RestrictionEq;
+    critInput.value = CommonConstant.SUPPLIER_ATPM;
+    this.inputLookupATPMObj.addCritInput.push(critInput);
 
-      if(this.listExistingAtpmCode.length > 0)
-      {
-        var critInput2 = new CriteriaObj();
-        critInput2.DataType = "string";
-        critInput2.propName = "V.VENDOR_CODE";
-        critInput2.restriction = AdInsConstant.RestrictionNotIn;
-        critInput2.listValue = this.listExistingAtpmCode;
-        this.inputLookupATPMObj.addCritInput.push(critInput2);
-      }
+    if (this.listExistingAtpmCode.length > 0) {
+      let critInput2 = new CriteriaObj();
+      critInput2.DataType = "string";
+      critInput2.propName = "V.VENDOR_CODE";
+      critInput2.restriction = AdInsConstant.RestrictionNotIn;
+      critInput2.listValue = this.listExistingAtpmCode;
+      this.inputLookupATPMObj.addCritInput.push(critInput2);
+    }
 
-      this.inputLookupATPMObj.title = CommonConstant.TITLE_SUPPLIER_ATPM;
-      this.inputLookupATPMObj.isReady = true;//Perlu tambain criteria yg uda kepilih ga muncul di lookup
+    this.inputLookupATPMObj.title = CommonConstant.TITLE_SUPPLIER_ATPM;
+    this.inputLookupATPMObj.isReady = true;//Perlu tambain criteria yg uda kepilih ga muncul di lookup
   }
 
-  getLookupATPM(ev)
-  {
+  getLookupATPM(ev) {
     this.VendorAtpmForm.patchValue({
       VendorId: ev.VendorId,
       VendorAtpmCode: ev.VendorCode,
       VendorName: ev.VendorName,
       VendorLegalAddr: ev.VendorLegalAddr
     });
+    let AddressObj: UcAddressObj = new UcAddressObj();
+    AddressObj.AreaCode1 = ev.VendorAreaCode1;
+    AddressObj.AreaCode2 = ev.VendorAreaCode2;
+    AddressObj.AreaCode3 = ev.VendorAreaCode3;
+    AddressObj.AreaCode4 = ev.VendorAreaCode4;
+    AddressObj.Addr = ev.VendorLegalAddr;
+    AddressObj.City = ev.VendorCity;
+    this.inputAddressObj.default = AddressObj;
+    this.inputAddressObj.inputField.inputLookupObj.nameSelect = ev.VendorZipcode;
+    this.inputAddressObj.inputField.inputLookupObj.jsonSelect = { Zipcode: ev.VendorZipcode };
   }
 
-  Save(enjiForm)
-  {
-    var obj = 
+  Save(enjiForm) {
+    let obj =
     {
       VendorId: this.VendorAtpmForm.controls.VendorId.value,
       VendorCode: this.VendorAtpmForm.controls.VendorAtpmCode.value,

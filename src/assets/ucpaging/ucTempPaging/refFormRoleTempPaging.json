@@ -1,10 +1,10 @@
 {
     "keyProperty": "RefRoleId",
-    "keyPropCriteria": "REF_ROLE_ID",
+    "keyPropCriteria": "RF.REF_ROLE_ID",
     "component": [
         {
             "type": "textbox",
-            "name": "ROLE_CODE",
+            "name": "RF.ROLE_CODE",
             "id": "RoleCodeId",
             "value": "",
             "label": "Role Code",
@@ -12,7 +12,7 @@
         },
         {
             "type": "textbox",
-            "name": "ROLE_NAME",
+            "name": "RF.ROLE_NAME",
             "id": "RoleNameId",
             "value": "",
             "label": "Role Name",
@@ -20,7 +20,7 @@
         },
         {
             "type": "dropdown",
-            "name": "IS_ACTIVE",
+            "name": "RF.IS_ACTIVE",
             "id": "ActiveStatusId",
             "label": "Active Status",
             "value": "",
@@ -48,19 +48,19 @@
             "type": "sort",
             "position": "center",
             "label": "Role Code",
-            "name": "ROLE_CODE"
+            "name": "RF.ROLE_CODE"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "Role Name",
-            "name": "ROLE_NAME"
+            "name": "RF.ROLE_NAME"
         },
         {
             "type": "sort",
             "position": "center",
             "label": "Active Status",
-            "name": "IS_ACTIVE"
+            "name": "RF.IS_ACTIVE"
         }
     ],
     "bodyList": [

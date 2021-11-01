@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import 'rxjs/add/operator/map';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { RequestCriteriaObj } from 'app/shared/model/RequestCriteriaObj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { DOCUMENT } from '@angular/platform-browser';

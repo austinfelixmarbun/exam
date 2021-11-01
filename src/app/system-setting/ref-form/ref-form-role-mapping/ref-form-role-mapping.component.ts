@@ -5,11 +5,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
+import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { ListAuthFormObj } from 'app/shared/model/ListAuthFormObj.Model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
-import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { FromValueObj, UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -41,29 +41,11 @@ export class RefFormRoleMappingComponent implements OnInit {
     this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/refFormRoleTempPaging.json";
     this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/refFormRoleTempPaging.json";
 
-    this.GetListRefFormRoleByRefFormId();
-  }
-
-  GetListRefFormRoleByRefFormId() {
-    this.http.post(URLConstant.GetListAuthFormByRefFormId, {Id: this.RefFormId }).subscribe(
-      (response) => {
-        var arrMemberList = new Array();
-
-        for (let index = 0; index < response[CommonConstant.ReturnObj].length; index++) {
-          arrMemberList.push(response[CommonConstant.ReturnObj][index].RefRoleId)
-        }
-
-        if (arrMemberList.length != 0) {
-          var addCritListRefRoleId = new CriteriaObj();
-          addCritListRefRoleId.DataType = "numeric";
-          addCritListRefRoleId.propName = "REF_ROLE_ID";
-          addCritListRefRoleId.restriction = AdInsConstant.RestrictionNotIn;
-          addCritListRefRoleId.listValue = arrMemberList;
-          this.tempPagingObj.addCritInput.push(addCritListRefRoleId);
-        }
-        this.tempPagingObj.isReady = true;
-      }
-    );
+    let fromValueObj = new FromValueObj();
+    fromValueObj.property = 'RefFormId';
+    fromValueObj.value = this.RefFormId;
+    this.tempPagingObj.fromValue.push(fromValueObj);
+    this.tempPagingObj.isReady = true;
   }
 
   getListTemp(ev) {
