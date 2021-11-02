@@ -19,6 +19,7 @@ import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 
 @Component({
@@ -255,7 +256,11 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   //   this.outputTab.emit({ stepMode: 'previous' });
   // }
 
-  SaveValue() {
+  async SaveValue(IsParent: boolean = false): Promise<boolean> {
+    if (this.ContactInformationForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.ContactInformationForm);
+      return false;
+    }
     this.custCompanyContactPersonObj = new CustCompanyContactPersonObj();
     this.custAddrObj = new CustAddrObj();
     if (this.tempCustAddrObj.CustAddrId != null) {
@@ -305,20 +310,21 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       this.custCompanyContactPersonObj = this.tempCustCompanyContactPersonObj;
       this.custCompanyContactPersonObj.RowVersion = this.tempCustCompanyContactPersonObj.RowVersion;
 
-      this.http.post(URLConstant.EditCustCompanyContactPersonByCustCompanyId, this.custCompanyContactPersonObj).subscribe(
+      await this.http.post(URLConstant.EditCustCompanyContactPersonByCustCompanyId, this.custCompanyContactPersonObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.outputTab.emit({ stepMode: 'next' });
+          if(!IsParent) this.outputTab.emit({ stepMode: 'next' });
         }
       );
     } else {
-      this.http.post(URLConstant.AddCustCompanyContactPerson, this.custCompanyContactPersonObj).subscribe(
+      await this.http.post(URLConstant.AddCustCompanyContactPerson, this.custCompanyContactPersonObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.outputTab.emit({ stepMode: 'next' });
+          if(!IsParent) this.outputTab.emit({ stepMode: 'next' });
         }
       );
     }
+    return true;
   }
 
   //START URS-LOS-041

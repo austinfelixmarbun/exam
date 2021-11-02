@@ -11,6 +11,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 @Component({
   selector: 'app-job-data-non-professional',
@@ -111,7 +112,11 @@ export class JobDataNonProfessionalComponent implements OnInit {
   //   this.outputTab.emit({ stepMode: "previous"});
   // }
 
-  SaveForm() {
+  async SaveForm(IsParent: boolean = false): Promise<boolean> {
+    if (this.JobDataNonProForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.JobDataNonProForm);
+      return false;
+    }
     if (this.typePage == "edit") {
       this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
       this.custPersonalJobDataObj = new CustPersonalJobDataObj;
@@ -123,14 +128,14 @@ export class JobDataNonProfessionalComponent implements OnInit {
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_NONPROF;
 
-      this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
+      await this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          this.outputTab.emit({ stepMode: "next" });
+          if (!IsParent) this.outputTab.emit({ stepMode: "next" });
         }
       );
     } else {
@@ -142,16 +147,17 @@ export class JobDataNonProfessionalComponent implements OnInit {
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_NONPROF;
 
-      this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
+      await this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(
           //   ["/Customer/CustomerPersonal/Address"], 
           //   { queryParams: { "IdCust": this.IdCust }}
           //   );
-          this.outputTab.emit({ stepMode: "next" });
+          if (!IsParent) this.outputTab.emit({ stepMode: "next" });
         }
       );
     }
+    return true;
   }
 }

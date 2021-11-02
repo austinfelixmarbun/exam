@@ -20,6 +20,7 @@ import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
 import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 @Component({
   selector: 'app-job-data-sme',
@@ -555,7 +556,11 @@ export class JobDataSmeComponent implements OnInit {
   }
 
 
-  SaveForm() {
+  async SaveForm(IsParent: boolean = false): Promise<boolean> {
+    if (this.JobDataSmeForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.JobDataSmeForm);
+      return false;
+    }
     if (this.typePage == "edit") {
       this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
       this.custPersonalJobDataObj = new CustPersonalJobDataObj();
@@ -583,10 +588,10 @@ export class JobDataSmeComponent implements OnInit {
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_SME;
 
-      this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
+      await this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.outputTab.emit({ stepMode: "next" });
+          if (!IsParent) this.outputTab.emit({ stepMode: "next" });
         }
       );
     }
@@ -606,13 +611,14 @@ export class JobDataSmeComponent implements OnInit {
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_SME;
 
-      this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).subscribe(
+      await this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.outputTab.emit({ stepMode: "next" });
+          if (!IsParent) this.outputTab.emit({ stepMode: "next" });
         }
       );
     }
+    return true;
   }
 
   isWellknownCoyChecked(event: any) {

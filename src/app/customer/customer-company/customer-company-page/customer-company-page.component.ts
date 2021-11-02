@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import Stepper from 'bs-stepper';
@@ -11,6 +11,12 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { PathConstant } from 'app/shared/PathConstant';
 import { ResSysConfigResultObj } from 'app/shared/model/Response/ResSysConfigResultObj,model';
+import { CustObj } from 'app/shared/model/CustObj.Model';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { CustomerCompanyDetailComponent } from '../customer-company-detail/customer-company-detail.component';
+import { CustomerCompanyContactInformationComponent } from '../customer-company-contact-information/customer-company-contact-information.component';
+import { CustFinDataTabComponent } from 'app/customer/cust-fin-data-tab/cust-fin-data-tab.component';
+import { CustAttrSectionComponent } from 'app/customer/cust-attr-section/cust-attr-section.component';
 
 @Component({
   selector: 'app-customer-company-page',
@@ -35,11 +41,12 @@ export class CustomerCompanyPageComponent implements OnInit {
 
   Page: string;
   From: string;
+  CustNo: string = "";
   dmsObj: DMSObj;
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService, private CustSetData: NewCustSetData) {
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -54,12 +61,14 @@ export class CustomerCompanyPageComponent implements OnInit {
     });
   }
 
+  SetUrlBack(): string{
+    let urlBack: string = NavigationConstant.CUST_PAGING;
+    if (this.From) urlBack = "/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstant.PAGING;
+    return urlBack;
+  }
+
   back() {
-    if (this.From) {
-      AdInsHelper.RedirectUrl(this.router, ["/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstant.PAGING], {});
-    } else {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
-    }
+    AdInsHelper.RedirectUrl(this.router, [this.SetUrlBack()], {});
   }
 
   async ngOnInit(): Promise<void> {
@@ -74,24 +83,25 @@ export class CustomerCompanyPageComponent implements OnInit {
         }
       );
 
+      await this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).toPromise().then(
+        (response: CustObj) => {
+          this.CustNo = response.CustNo;
+        }
+      );
       //check DMS
       await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms}).toPromise().then(
         (response) => {
           this.SysConfigResultObj = response;
         });
       if (this.SysConfigResultObj.ConfigValue == '1') {
-        await this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).toPromise().then(
-          (response: any) => {
-            let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-            this.dmsObj = new DMSObj();
-            this.dmsObj.User = currentUserContext.UserName;
-            this.dmsObj.Role = currentUserContext.RoleCode;
-            this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
-            this.dmsObj.MetadataParent = null;
-            this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, response["CustNo"]));
-            this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
-          }
-        );
+        let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+        this.dmsObj = new DMSObj();
+        this.dmsObj.User = currentUserContext.UserName;
+        this.dmsObj.Role = currentUserContext.RoleCode;
+        this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
+        this.dmsObj.MetadataParent = null;
+        this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, this.CustNo));
+        this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
       }
 
       this.stepper = new Stepper(document.querySelector('#stepper1'), {
@@ -159,5 +169,33 @@ export class CustomerCompanyPageComponent implements OnInit {
         }
       }
     }
+  }
+
+  @ViewChild('CustCoyDetail') private CustCoyDetail: CustomerCompanyDetailComponent;
+  @ViewChild('CustCoyContact') private CustCoyContact: CustomerCompanyContactInformationComponent;
+  @ViewChild('CustFinData') private CustFinData: CustFinDataTabComponent;
+  @ViewChild('CustAttrData') private CustAttrData: CustAttrSectionComponent;
+  async SendToR2() {
+    console.log(this.CustStepIndex);
+    if(!await this.SaveData(this.CustStepIndex)) return;
+    await this.CustSetData.SendCustomerDataToRabbitMq(this.CustNo, this.SetUrlBack());
+  }
+  async SaveData(stepIdx: number): Promise<boolean> {
+    let flag: boolean = true;
+    switch (stepIdx) {
+      case 1:
+        flag = await this.CustCoyDetail.SaveValue(true);
+        break;
+      case 4:
+        flag = await this.CustCoyContact.SaveValue(true);
+        break;
+      case 5:
+        flag = await this.CustFinData.saveCustAttrContentAndNext(true);
+        break;
+      case 9:
+        flag = await this.CustAttrData.SaveForm();
+        break;
+    }
+    return flag;
   }
 }
