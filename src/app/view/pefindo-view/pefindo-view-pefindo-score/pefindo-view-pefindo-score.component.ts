@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { ViewPefindoScoreObj } from 'app/shared/model/Pefindo/ViewPefindoScoreObj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { ViewPefindoScoreObj } from 'app/shared/model/pefindo/view-pefindo-score-obj.model';
 import { environment } from 'environments/environment';
 
 @Component({

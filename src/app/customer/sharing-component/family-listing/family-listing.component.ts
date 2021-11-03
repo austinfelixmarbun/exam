@@ -4,8 +4,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { InputGridObj } from 'app/shared/model/InputGridObj.Model';
-import { FamilyListingObj } from 'app/shared/model/NewCust/Family/FamilyListingObj.Model';
+import { InputGridObj } from 'app/shared/model/input-grid-obj.model';
+import { FamilyListingObj } from 'app/shared/model/new-cust/family/family-listing-obj.model';
 
 @Component({
   selector: 'app-family-listing',

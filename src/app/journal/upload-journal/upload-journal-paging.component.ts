@@ -4,13 +4,13 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { String } from 'typescript-string-operations';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { saveAs } from 'file-saver'; 
 import { base64StringToBlob } from 'blob-util';
 

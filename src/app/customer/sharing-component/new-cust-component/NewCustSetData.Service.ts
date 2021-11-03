@@ -7,14 +7,14 @@ import { AdInsHelper } from "app/shared/AdInsHelper";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { URLConstant } from "app/shared/constant/URLConstant";
-import { CriteriaObj } from "app/shared/model/CriteriaObj.Model";
-import { GeneralSettingObj } from "app/shared/model/GeneralSettingObj.Model";
-import { InputAddressObj } from "app/shared/model/InputAddressObj.Model";
-import { InputFieldObj } from "app/shared/model/InputFieldObj.Model";
-import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
-import { KeyValueObj } from "app/shared/model/KeyValue/KeyValueObj.Model";
-import { UcDropdownListObj } from "app/shared/model/library/UcDropdownListObj.model";
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from "app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model";
+import { CriteriaObj } from "app/shared/model/criteria-obj.model";
+import { GeneralSettingObj } from "app/shared/model/general-setting-obj.model";
+import { InputAddressObj } from "app/shared/model/input-address-obj.model";
+import { InputFieldObj } from "app/shared/model/input-field-obj.model";
+import { InputLookupObj } from "app/shared/model/input-lookup-obj.model";
+import { KeyValueObj } from "app/shared/model/key-value/key-value-obj.model";
+import { UcDropdownListObj } from "app/shared/model/library/uc-dropdown-list-obj.model";
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from "app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model";
 import { NavigationConstant } from "app/shared/NavigationConstant";
 
 @Injectable({

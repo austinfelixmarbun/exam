@@ -5,22 +5,22 @@ import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
+import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
+import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
+import { CustCompanyObj } from 'app/shared/model/cust-company-obj.model';
 import { environment } from 'environments/environment';
 // import { CustThirdPartyCheckingObj } from 'app/shared/model/CustThirdPartyCheckingObj.Model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { GenericKeyValueListObj } from 'app/shared/model/generic/generic-key-value-list-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 @Component({
   selector: 'app-customer-company-main-info',

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
-import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
-import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
+import { CustCompanyObj } from 'app/shared/model/cust-company-obj.model';
+import { CustCompanyMgmntShrholderObj } from 'app/shared/model/cust-company-mgmnt-shrholder-obj.model';
 import { ActivatedRoute } from '@angular/router';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';

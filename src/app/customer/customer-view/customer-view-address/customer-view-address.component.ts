@@ -3,16 +3,16 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsService } from 'app/shared/services/adIns.service';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
+import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { FormBuilder } from '@angular/forms';
-import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 
 @Component({
   selector: 'app-customer-view-address',

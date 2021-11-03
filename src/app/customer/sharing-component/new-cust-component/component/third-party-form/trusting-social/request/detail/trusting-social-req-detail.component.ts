@@ -4,15 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
-import { ReqUploadConsentTsObj } from 'app/shared/model/ThirdPartyRslt/ReqUploadConsentTsObj.model';
+import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
+import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
+import { ReqUploadConsentTsObj } from 'app/shared/model/third-party-rslt/req-upload-consent-ts-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { ThirdPartyRsltHObj } from 'app/shared/model/ThirdPartyRslt/ThirdPartyRsltHObj.model';
-import { ThirdPartyTrustsocRsltObj } from 'app/shared/model/ThirdPartyRslt/ThirdPartyTrustsocRsltObj.model';
+import { ThirdPartyRsltHObj } from 'app/shared/model/third-party-rslt/third-party-rslt-h-obj.model';
+import { ThirdPartyTrustsocRsltObj } from 'app/shared/model/third-party-rslt/third-party-trustsoc-rslt-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { ReqAddTrxSrcDataForTsObj } from 'app/shared/model/Digitalization/ReqAddTrxSrcDataForTsObj.model';
+import { ReqAddTrxSrcDataForTsObj } from 'app/shared/model/digitalization/req-add-trx-src-data-for-ts-obj.model';
 import { environment } from 'environments/environment';
 
 

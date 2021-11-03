@@ -1,5 +1,5 @@
 
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
+import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Validators, FormBuilder } from '@angular/forms';
@@ -10,7 +10,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 
 
 @Component({

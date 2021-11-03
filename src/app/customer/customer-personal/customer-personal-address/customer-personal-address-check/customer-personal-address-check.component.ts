@@ -4,12 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
+import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/response/res-get-list-cust-addr-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 @Component({
   selector: 'app-customer-personal-address-check',

@@ -3,12 +3,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
-import { CustCompanyLegalDocObj } from 'app/shared/model/CustCompanyLegalDocObj.Model';
+import { CustCompanyLegalDocObj } from 'app/shared/model/cust-company-legal-doc-obj.model';
 import { CustLegalDocDetailComponent } from './cust-legal-doc-detail/cust-legal-doc-detail.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { String } from 'typescript-string-operations';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 

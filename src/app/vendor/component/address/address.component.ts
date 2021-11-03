@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { FormBuilder, Validators } from '@angular/forms';
-import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
+import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { WizardComponent } from 'angular-archwizard';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 @Component({
   selector: 'app-address',

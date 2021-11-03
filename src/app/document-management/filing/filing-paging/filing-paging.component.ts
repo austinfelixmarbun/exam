@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { CabinetWithListRackObj } from 'app/shared/model/document-management/CabinetWithListRackObj.Model';
-import { RackWithListFilingObj } from 'app/shared/model/document-management/RackWithListFilingObj.Model';
+import { CabinetWithListRackObj } from 'app/shared/model/document-management/cabinet-with-list-rack-obj.model';
+import { RackWithListFilingObj } from 'app/shared/model/document-management/rack-with-list-filing-obj.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 @Component({
   selector: 'app-filing-paging',

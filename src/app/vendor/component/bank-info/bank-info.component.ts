@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Validators, FormBuilder, NgForm } from '@angular/forms';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { VendorBankAccObj } from 'app/shared/model/VendorBankAccObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { VendorBankAccObj } from 'app/shared/model/vendor-bank-acc-obj.model';
 import { VendorService } from 'app/vendor/vendor.service';
 import { ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 @Component({
   selector: 'app-bank-info',

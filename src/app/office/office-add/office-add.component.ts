@@ -2,22 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
-import { OfficeObj } from 'app/shared/model/OfficeObj.Model';
+import { OfficeObj } from 'app/shared/model/office-obj.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
-import { OrgMdlObj } from 'app/shared/model/OrgMdlObj.Model';
+import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
+import { OrgMdlObj } from 'app/shared/model/org-mdl-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 
 @Component({

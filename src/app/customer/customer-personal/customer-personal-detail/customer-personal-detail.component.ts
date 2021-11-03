@@ -2,21 +2,21 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
-import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { CustGrpObj } from 'app/shared/model/CustGrpObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { CustGrpObj } from 'app/shared/model/cust-grp-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 @Component({
   selector: 'app-customer-personal-detail',

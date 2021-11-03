@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { RefReasonObj } from 'app/shared/model/RefReasonObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { RefReasonObj } from 'app/shared/model/ref-reason-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 

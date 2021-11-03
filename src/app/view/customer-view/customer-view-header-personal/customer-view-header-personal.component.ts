@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 
 @Component({
   selector: 'app-customer-view-header-personal',

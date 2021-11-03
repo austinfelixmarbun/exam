@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { CabinetWithListRackObj } from 'app/shared/model/document-management/CabinetWithListRackObj.Model';
+import { CabinetWithListRackObj } from 'app/shared/model/document-management/cabinet-with-list-rack-obj.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';

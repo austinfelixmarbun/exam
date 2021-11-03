@@ -5,11 +5,11 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { CoyBodObj } from 'app/shared/model/CoyBodObj.Model';
+import { CoyBodObj } from 'app/shared/model/coy-bod-obj.model';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { DecimalPipe } from '@angular/common';
-import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 

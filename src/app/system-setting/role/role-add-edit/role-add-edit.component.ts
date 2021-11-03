@@ -1,5 +1,5 @@
 
-import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
+import { RefRoleObj } from 'app/shared/model/ref-role-obj.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'environments/environment';

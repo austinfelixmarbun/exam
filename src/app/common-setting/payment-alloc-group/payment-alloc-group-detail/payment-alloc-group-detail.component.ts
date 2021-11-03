@@ -4,9 +4,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { PaymentAllocGrpObj } from 'app/shared/model/common-setting/PaymentAllocGrpObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { PaymentAllocGrpObj } from 'app/shared/model/common-setting/payment-alloc-grp-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 

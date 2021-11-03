@@ -5,8 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { IndustryTypeCategoryObj } from 'app/shared/model/IndustryTypeCategoryObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { IndustryTypeCategoryObj } from 'app/shared/model/industry-type-category-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { environment } from 'environments/environment';
 
 @Component({

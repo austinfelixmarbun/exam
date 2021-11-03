@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { VerfQuestionGrpHObj } from 'app/shared/model/VerfQuestionGrpHObj.Model';
+import { VerfQuestionGrpHObj } from 'app/shared/model/verf-question-grp-h-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -65,7 +65,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
         });
     }
     else {
-      this.verfQuestionGrpHObj.VerfQuestionGrpHId = "0";
+      this.verfQuestionGrpHObj.VerfQuestionGrpHId = 0;
       this.http.post(URLConstant.AddVerfQuestionGrpH, this.verfQuestionGrpHObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);

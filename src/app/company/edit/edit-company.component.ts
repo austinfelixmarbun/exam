@@ -6,7 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RefCoyObj } from 'app/shared/model/RefCoyObj.Model';
+import { RefCoyObj } from 'app/shared/model/ref-coy-obj.model';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
 import { URLConstant } from 'app/shared/constant/URLConstant';

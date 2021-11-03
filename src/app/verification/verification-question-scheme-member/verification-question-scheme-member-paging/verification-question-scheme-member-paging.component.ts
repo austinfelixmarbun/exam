@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { VerfSchemeHObj } from 'app/shared/model/VerfSchemeHObj.Model';
+import { VerfSchemeHObj } from 'app/shared/model/verf-scheme-h-obj.model';
 import { ToastrService } from 'ngx-toastr';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';

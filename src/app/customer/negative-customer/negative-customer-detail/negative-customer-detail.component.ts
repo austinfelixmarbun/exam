@@ -8,20 +8,20 @@ import { Location, DatePipe } from '@angular/common';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { map, mergeMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { NegativeCustObj } from 'app/shared/model/NegativeCustObj.Model';
-import { NegativeCustChangeTrxObj } from 'app/shared/model/NegativeCustChangeTrxObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { NegativeCustObj } from 'app/shared/model/negative-cust-obj.model';
+import { NegativeCustChangeTrxObj } from 'app/shared/model/negative-cust-change-trx-obj.model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { RegexService } from 'app/customer/regex.service';
-import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
+import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 @Component({
   selector: 'app-negative-customer-detail',

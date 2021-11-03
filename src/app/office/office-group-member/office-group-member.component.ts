@@ -1,11 +1,11 @@
 import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
-import { CriteriaObj } from "app/shared/model/CriteriaObj.Model";
+import { CriteriaObj } from "app/shared/model/criteria-obj.model";
 import { environment } from "environments/environment";
-import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
+import { UcPagingObj } from "app/shared/model/uc-paging-obj.model";
 import { URLConstant } from "app/shared/constant/URLConstant";
-import { UcViewGenericObj } from "app/shared/model/UcViewGenericObj.model";
+import { UcViewGenericObj } from "app/shared/model/uc-view-generic-obj.model";
 import { NavigationConstant } from "app/shared/NavigationConstant";
 
 @Component({

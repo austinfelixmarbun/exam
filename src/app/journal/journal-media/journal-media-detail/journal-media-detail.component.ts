@@ -6,7 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 
 @Component({
   selector: 'app-journal-media-detail',

@@ -5,7 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { environment } from 'environments/environment';
-import { CurrentUserContextService } from 'app/shared/CurrentUserContext/current-user-context.service';
+import { CurrentUserContextService } from 'app/shared/current-user-context/current-user-context.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';

@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { RequestDateObj } from 'app/shared/model/Integration/RequestDateObj.Model';
+import { RequestDateObj } from 'app/shared/model/integration/request-date-obj.model';
 
 @Component({
   selector: 'app-daily-master-continuous-form',

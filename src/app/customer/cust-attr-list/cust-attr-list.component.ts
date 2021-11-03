@@ -5,15 +5,15 @@ import { ActivatedRoute } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { AttrContent } from 'app/shared/model/AttrContent.model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { GenericListObj } from 'app/shared/model/Generic/GenericListObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { RefAttr } from 'app/shared/model/RefAttr.Model';
-import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
-import { ReqCustAttrContentByCustIdAndAttrGroupObj } from 'app/shared/model/Request/CustAttrContent/ReqCustAttrContentByCustIdAndAttrGroupObj.model';
-import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/Request/RefAttr/ReqRefAttrByAttrGroupObj.model';
+import { AttrContent } from 'app/shared/model/attr-content.model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { GenericListObj } from 'app/shared/model/generic/generic-list-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { RefAttr } from 'app/shared/model/ref-attr.model';
+import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
+import { ReqCustAttrContentByCustIdAndAttrGroupObj } from 'app/shared/model/request/cust-attr-content/req-cust-attr-content-by-cust-id-and-attr-group-obj.model';
+import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/request/ref-attr/req-ref-attr-by-attr-group-obj.model';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({

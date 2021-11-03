@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { HttpClient } from '@angular/common/http';
-import { AssetSchemeHObj } from 'app/shared/model/AssetSchemeHObj.Model';
+import { AssetSchemeHObj } from 'app/shared/model/asset-scheme-h-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({

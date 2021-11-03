@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { DecimalPipe } from "@angular/common";
-import { UcPagingObj } from "app/shared/model/UcPagingObj.Model";
+import { UcPagingObj } from "app/shared/model/uc-paging-obj.model";
 
 @Component({
   selector: "app-ref-status-paging",

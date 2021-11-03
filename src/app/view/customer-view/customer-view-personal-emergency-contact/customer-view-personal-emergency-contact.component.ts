@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CustPersonalContactPersonObj } from 'app/shared/model/CustPersonalContactPerson.Obj.Model';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { CustPersonalContactPersonObj } from 'app/shared/model/cust-personal-contact-person-obj.model';
+import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { environment } from 'environments/environment';
 
 @Component({

@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { RefBankObj } from 'app/shared/model/ref-bank-obj.model';
 import { FormBuilder, Validators } from '@angular/forms';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -24,7 +23,7 @@ export class BankAddComponent implements OnInit {
         IsActive : [false]
     });
 
-    refBankId: string;
+    refBankId: number = 0;
     result: any;
     mode: string;
     title : string = "Add Bank";
@@ -86,7 +85,7 @@ export class BankAddComponent implements OnInit {
         else {
             this.bankObj = new RefBankObj();
             this.bankObj = this.BankAddForm.value;
-            this.bankObj.RefBankId = "0";
+            this.bankObj.RefBankId = 0;
             this.bankObj.RowVersion = "";
 
             this.http.post(URLConstant.AddRefBankAsync, this.bankObj).subscribe((response) => {

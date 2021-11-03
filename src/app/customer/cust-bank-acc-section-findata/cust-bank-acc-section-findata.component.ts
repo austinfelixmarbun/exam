@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
+import { CustBankAccObj } from 'app/shared/model/cust-bank-acc-obj.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustBankAccDetailSectionFindataComponent } from '../cust-bank-acc-detail-section-findata/cust-bank-acc-detail-section-findata.component';

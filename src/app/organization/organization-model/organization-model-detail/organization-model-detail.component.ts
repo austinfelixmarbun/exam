@@ -1,5 +1,5 @@
-import { OrgMdlObj } from 'app/shared/model/OrgMdlObj.Model';
-import { OrganizationObj } from 'app/shared/model/OrganizationObj.Model';
+import { OrgMdlObj } from 'app/shared/model/org-mdl-obj.model';
+import { OrganizationObj } from 'app/shared/model/organization-obj.model';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';

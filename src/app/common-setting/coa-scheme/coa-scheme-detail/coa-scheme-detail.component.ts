@@ -4,10 +4,10 @@ import { FormBuilder, Validators, FormControl, FormArray, FormGroup } from '@ang
 import { Router, ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CoaSchmObj } from 'app/shared/model/common-setting/CoaSchmObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { CoaSchmObj } from 'app/shared/model/common-setting/coa-schm-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { environment } from 'environments/environment';
-import { RefCoaObj } from 'app/shared/model/common-setting/RefCoaObj.Model';
+import { RefCoaObj } from 'app/shared/model/common-setting/ref-coa-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({

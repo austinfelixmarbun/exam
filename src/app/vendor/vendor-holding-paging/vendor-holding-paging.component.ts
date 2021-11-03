@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UcPagingObj, WhereValueObj } from 'app/shared/model/UcPagingObj.Model';
+import { UcPagingObj, WhereValueObj } from 'app/shared/model/uc-paging-obj.model';
 import { environment } from 'environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({

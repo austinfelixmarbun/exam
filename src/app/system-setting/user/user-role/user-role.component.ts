@@ -5,9 +5,9 @@ import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
-import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
+import { RefEmpObj } from 'app/shared/model/ref-emp-obj.model';
 import { environment } from 'environments/environment';
-import { RefUserObj } from 'app/shared/model/RefUserObj.Model';
+import { RefUserObj } from 'app/shared/model/ref-user-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 
 

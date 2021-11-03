@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
-import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { CustPersonalJobDataObj } from 'app/shared/model/cust-personal-job-data-obj.model';
+import { RequestCustPersonalJobDataObj } from 'app/shared/model/request-cust-personal-job-data-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
