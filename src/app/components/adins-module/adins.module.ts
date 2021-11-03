@@ -19,7 +19,6 @@ import { UcuploadModule } from '@adins/ucupload';
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { UcDirectiveUpperCaseModule } from '@adins/uc-directive-upper-case';
-import {UpperCaseTextAreaDirective} from './uppercaseDirective/uppercase.directive'
 @NgModule({
     exports: [
         UcDirectiveUpperCaseModule,
@@ -38,8 +37,7 @@ import {UpperCaseTextAreaDirective} from './uppercaseDirective/uppercase.directi
         MatCheckboxModule,
         UcuploadModule,
         UcdropdownlistModule,
-        UcaddtotempModule,
-        UpperCaseTextAreaDirective
+        UcaddtotempModule
     ],
     imports: [
         CommonModule,
@@ -64,7 +62,6 @@ import {UpperCaseTextAreaDirective} from './uppercaseDirective/uppercase.directi
         UcDirectiveUpperCaseModule,
     ],
     declarations: [
-        UpperCaseTextAreaDirective
     ]
 })
 
