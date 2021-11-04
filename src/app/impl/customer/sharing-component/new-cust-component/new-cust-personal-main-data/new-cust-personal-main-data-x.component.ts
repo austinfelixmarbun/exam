@@ -73,18 +73,18 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   CustomerForm: FormGroup = this.fb.group({});
   inputAddressObj: InputAddressObj = new InputAddressObj();
   inputLookupObj: InputLookupObj = new InputLookupObj();
-  checkIsAddressKnown: boolean = false;;
+  checkIsAddressKnown: boolean = false;
   thirdPartyTrxNo: string = null;
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   pageFrom: string = CommonConstant.CustFromEditMainData;
-  
+
   constructor(private regexService: RegexService, private toastr: NGXToastrService,
     private http: HttpClient, private fb: FormBuilder,
     private cookieService: CookieService,
     private thirdPartyUploadService: ThirdPartyUploadService,
 	private route: ActivatedRoute) {
       this.route.queryParams.subscribe(params => {
-        if (params["From"] != null) {        
+        if (params["From"] != null) {
           this.pageFrom = params["From"];
         }
       });
@@ -130,7 +130,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     this.isAddressIsNull();
     if (this.CustDataMode != this.CustDataModeFamily) {
       this.checkIsAddressKnown = true;
-    }  
+    }
   }
 
 
@@ -329,7 +329,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       this.custObj.IsCustomer = true;
       this.IsCustLoaded = true;
       return;
-    } 
+    }
     await this.GetCustData();
     this.GetCustAddr();
     await this.GetCustPersonalData();
@@ -690,7 +690,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       this.checkIsAddressKnown = true;
     }
 
-    if (this.checkIsAddressKnown == false) {    
+    if (this.checkIsAddressKnown == false) {
       console.log(false)
       this.CustomerForm.patchValue({
         UcAddress: {
