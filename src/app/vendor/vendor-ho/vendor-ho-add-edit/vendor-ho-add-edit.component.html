@@ -189,8 +189,7 @@
               <div id="HOInformation">
                 <div class="form-body" formGroupName="VendorAttrList" *ngIf="isFormReady">
                   <ng-container *ngFor="let attr of VendorAttrList">
-                    <div class="form-group row" *ngIf="attr.AttrInputType == 'T'"
-                      [formGroupName]="attr.AttrCode">
+                    <div class="form-group row" *ngIf="attr.AttrInputType == 'T'" [formGroupName]="attr.AttrCode">
                       <label class="col-md-3 adInsLabel ">{{attr.AttrName}}</label>
                       <div class="col-md-9">
                         <input type="text" class="form-control adInsInput  width-50-per"
@@ -201,8 +200,7 @@
                           [submit]="enjiForm.submitted"></lib-uc-show-errors>
                       </div>
                     </div>
-                    <div class="form-group row" *ngIf="attr.AttrInputType == 'N'"
-                      [formGroupName]="attr.AttrCode">
+                    <div class="form-group row" *ngIf="attr.AttrInputType == 'N'" [formGroupName]="attr.AttrCode">
                       <label class="col-md-3 adInsLabel ">{{attr.AttrName}}</label>
                       <div class="col-md-9">
                         <input type="number" class="form-control adInsInput width-50-per"
@@ -213,14 +211,12 @@
                           [submit]="enjiForm.submitted"></lib-uc-show-errors>
                       </div>
                     </div>
-                    <div class="form-group row" *ngIf="attr.AttrInputType == 'L'"
-                      [formGroupName]="attr.AttrCode">
+                    <div class="form-group row" *ngIf="attr.AttrInputType == 'L'" [formGroupName]="attr.AttrCode">
                       <label class="col-md-3 adInsLabel ">{{attr.AttrName}}</label>
                       <div class="col-md-9">
                         <select class="form-control adInsInput width-50-per" formControlName="VendorAttrValue"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls['VendorAttrList']['controls'][attr['AttrCode']].controls.AttrValue.invalid }">
-                          <option *ngFor="let valueItem of DictDDLVendorAttr[attr.AttrCode]"
-                            [value]="valueItem">
+                          <option *ngFor="let valueItem of DictDDLVendorAttr[attr.AttrCode]" [value]="valueItem">
                             {{valueItem}}
                           </option>
                         </select>
@@ -229,8 +225,7 @@
                           [submit]="enjiForm.submitted"></lib-uc-show-errors>
                       </div>
                     </div>
-                    <div class="form-group row" *ngIf="attr.AttrInputType == 'TA'"
-                      [formGroupName]="attr.AttrCode">
+                    <div class="form-group row" *ngIf="attr.AttrInputType == 'TA'" [formGroupName]="attr.AttrCode">
                       <label class="col-md-3 adInsLabel">{{attr.AttrName}}</label>
                       <div class="col-md-9">
                         <textarea class="form-control adInsInput width-50-per" formControlName="VendorAttrValue"
@@ -240,8 +235,7 @@
                           [submit]="enjiForm.submitted"></lib-uc-show-errors>
                       </div>
                     </div>
-                    <div class="form-group row" *ngIf="attr.AttrType == 'D'"
-                      [formGroupName]="attr.AttrCode">
+                    <div class="form-group row" *ngIf="attr.AttrType == 'D'" [formGroupName]="attr.AttrCode">
                       <label class="col-md-3 adInsLabel ">{{attr.AttrName}}</label>
                       <div class="col-md-9">
                         <input type="date" class="form-control adInsInput width-50-per"
@@ -252,8 +246,7 @@
                           [submit]="enjiForm.submitted"></lib-uc-show-errors>
                       </div>
                     </div>
-                    <div class="form-group row" *ngIf="attr.AttrInputType == 'P'"
-                      [formGroupName]="attr.AttrCode">
+                    <div class="form-group row" *ngIf="attr.AttrInputType == 'P'" [formGroupName]="attr.AttrCode">
                       <label class="col-md-3 adInsLabel ">{{attr.AttrName}}</label>
                       <div class="col-md-9">
                         <input type="" currencyMask class="form-control adInsInput width-50-per"
@@ -265,8 +258,7 @@
                           [submit]="enjiForm.submitted"></lib-uc-show-errors>
                       </div>
                     </div>
-                    <div class="form-group row" *ngIf="attr.AttrInputType == 'RM'"
-                      [formGroupName]="attr.AttrCode">
+                    <div class="form-group row" *ngIf="attr.AttrInputType == 'RM'" [formGroupName]="attr.AttrCode">
                       <label class="col-md-3 adInsLabel ">{{attr.AttrName}}</label>
                       <div class="col-md-9">
                         <lib-uclookupgeneric [lookupInput]="ListInputLookUpObj[0][attr['AttrCode']]"
@@ -294,7 +286,8 @@
             </div>
             <div *ngIf="MrVendorCategoryCode == 'SUPPLIER_HO' && VendorForm.controls.MrVendorTypeCode.value == 'C'">
               <span class="mr-1 pull-right">
-                <button type="button" class="addButton" (click)="AddAtpmClick()" style="margin-right: 0!important;"><!--(click)="custBankHandler('add', '0')"-->
+                <button type="button" class="addButton" (click)="AddAtpmClick()" style="margin-right: 0!important;">
+                  <!--(click)="custBankHandler('add', '0')"-->
                   <i class="ft-plus-circle"></i>&nbsp;<span translate>Add ATPM</span>
                 </button>
               </span>
@@ -348,8 +341,7 @@
               <div id="HOInformation">
                 <div class="form-body" formGroupName="VendorAttrList" *ngIf="isFormReady">
                   <ng-container *ngFor="let attr of VendorAttrList">
-                    <div class="form-group row" *ngIf="attr.AttrInputType == 'T'"
-                      [formGroupName]="attr.AttrCode">
+                    <div class="form-group row" *ngIf="attr.AttrInputType == 'T'" [formGroupName]="attr.AttrCode">
                       <label class="col-md-3 adInsLabel ">{{attr.AttrName}}</label>
                       <div class="col-md-9">
                         <input type="text" class="form-control adInsInput  width-50-per"
@@ -360,8 +352,7 @@
                           [submit]="enjiForm.submitted"></lib-uc-show-errors>
                       </div>
                     </div>
-                    <div class="form-group row" *ngIf="attr.AttrInputType == 'N'"
-                      [formGroupName]="attr.AttrCode">
+                    <div class="form-group row" *ngIf="attr.AttrInputType == 'N'" [formGroupName]="attr.AttrCode">
                       <label class="col-md-3 adInsLabel ">{{attr.AttrName}}</label>
                       <div class="col-md-9">
                         <input type="number" class="form-control adInsInput width-50-per"
@@ -372,14 +363,12 @@
                           [submit]="enjiForm.submitted"></lib-uc-show-errors>
                       </div>
                     </div>
-                    <div class="form-group row" *ngIf="attr.AttrInputType == 'L'"
-                      [formGroupName]="attr.AttrCode">
+                    <div class="form-group row" *ngIf="attr.AttrInputType == 'L'" [formGroupName]="attr.AttrCode">
                       <label class="col-md-3 adInsLabel ">{{attr.AttrName}}</label>
                       <div class="col-md-9">
                         <select class="form-control adInsInput width-50-per" formControlName="VendorAttrValue"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls['VendorAttrList']['controls'][attr['AttrCode']].controls.AttrValue.invalid }">
-                          <option *ngFor="let valueItem of DictDDLVendorAttr[attr.AttrCode]"
-                            [value]="valueItem">
+                          <option *ngFor="let valueItem of DictDDLVendorAttr[attr.AttrCode]" [value]="valueItem">
                             {{valueItem}}
                           </option>
                         </select>
@@ -388,8 +377,7 @@
                           [submit]="enjiForm.submitted"></lib-uc-show-errors>
                       </div>
                     </div>
-                    <div class="form-group row" *ngIf="attr.AttrInputType == 'TA'"
-                      [formGroupName]="attr.AttrCode">
+                    <div class="form-group row" *ngIf="attr.AttrInputType == 'TA'" [formGroupName]="attr.AttrCode">
                       <label class="col-md-3 adInsLabel">{{attr.AttrName}}</label>
                       <div class="col-md-9">
                         <textarea class="form-control adInsInput width-50-per" formControlName="VendorAttrValue"
@@ -399,8 +387,7 @@
                           [submit]="enjiForm.submitted"></lib-uc-show-errors>
                       </div>
                     </div>
-                    <div class="form-group row" *ngIf="attr.AttrType == 'D'"
-                      [formGroupName]="attr.AttrCode">
+                    <div class="form-group row" *ngIf="attr.AttrType == 'D'" [formGroupName]="attr.AttrCode">
                       <label class="col-md-3 adInsLabel ">{{attr.AttrName}}</label>
                       <div class="col-md-9">
                         <input type="date" class="form-control adInsInput width-50-per"
@@ -411,8 +398,7 @@
                           [submit]="enjiForm.submitted"></lib-uc-show-errors>
                       </div>
                     </div>
-                    <div class="form-group row" *ngIf="attr.AttrInputType == 'P'"
-                      [formGroupName]="attr.AttrCode">
+                    <div class="form-group row" *ngIf="attr.AttrInputType == 'P'" [formGroupName]="attr.AttrCode">
                       <label class="col-md-3 adInsLabel ">{{attr.AttrName}}</label>
                       <div class="col-md-9">
                         <input type="" currencyMask class="form-control adInsInput width-50-per"
@@ -424,8 +410,7 @@
                           [submit]="enjiForm.submitted"></lib-uc-show-errors>
                       </div>
                     </div>
-                    <div class="form-group row" *ngIf="attr.AttrInputType == 'RM'"
-                      [formGroupName]="attr.AttrCode">
+                    <div class="form-group row" *ngIf="attr.AttrInputType == 'RM'" [formGroupName]="attr.AttrCode">
                       <label class="col-md-3 adInsLabel ">{{attr.AttrName}}</label>
                       <div class="col-md-9">
                         <lib-uclookupgeneric [lookupInput]="ListInputLookUpObj[0][attr['AttrCode']]"
@@ -466,14 +451,14 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3">NPWP Exist</label>
+                <label class="col-md-3">Tax Id No Exist</label>
                 <div class="col-md-9">
                   <input type="checkbox" formControlName="IsNpwpExist" (change)="NpwpCheck()">
                 </div>
               </div>
               <div [hidden]="isHidden">
                 <div class="form-group row">
-                  <label class="col-md-3  adins-required-label" translate>Tax Payer Number</label>
+                  <label class="col-md-3  adins-required-label" translate>Tax Id No</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxIdNo"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.TaxIdNo.invalid}">
@@ -490,52 +475,55 @@
                     </lib-uc-show-errors>
                   </div>
                 </div>
-                <div class="form-group row">
-                  <label class="col-md-3  adInsLabel" translate>Tax Address</label>
-                  <div class="col-md-9">
-                    <textarea class="form-control adInsInput width-50-per" formControlName="Addr"> </textarea>
-                    <lib-uc-show-errors [control]="VendorForm.controls.Addr" [submit]="enjiForm.submitted">
-                    </lib-uc-show-errors>
+                <div [hidden]="MrVendorCategoryCode == MrVendorCategoryCode_ASSET_INSCO_HO">
+                  <div class="form-group row">
+                    <label class="col-md-3  adInsLabel" translate>Tax Address</label>
+                    <div class="col-md-9">
+                      <textarea class="form-control adInsInput width-50-per" formControlName="Addr"> </textarea>
+                      <lib-uc-show-errors [control]="VendorForm.controls.Addr" [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group row" *ngIf="inputLookupZipcodeObj.isReady">
-                  <label class="col-md-3 adInsLabel">Zip Code</label>
-                  <div class="col-md-3">
-                    <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="VendorForm" (inputtedValue)="getInputtedValue($event)"
-                      [enjiForm]="enjiForm" [identifier]="'Zipcode'" (lookup)="getLookupZipcode($event)">
-                    </lib-uclookupgeneric>
+                  <div class="form-group row" *ngIf="inputLookupZipcodeObj.isReady">
+                    <label class="col-md-3 adInsLabel">Zip Code</label>
+                    <div class="col-md-3">
+                      <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="VendorForm"
+                        (inputtedValue)="getInputtedValue($event)" [enjiForm]="enjiForm" [identifier]="'Zipcode'"
+                        (lookup)="getLookupZipcode($event)">
+                      </lib-uclookupgeneric>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-3  adInsLabel" translate>Kelurahan</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode2">
-                    <lib-uc-show-errors [control]="VendorForm.controls.AreaCode2" [submit]="enjiForm.submitted">
-                    </lib-uc-show-errors>
+                  <div class="form-group row">
+                    <label class="col-md-3  adInsLabel" translate>Kelurahan</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode2">
+                      <lib-uc-show-errors [control]="VendorForm.controls.AreaCode2" [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-3  adInsLabel" translate>Kecamatan</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode1">
-                    <lib-uc-show-errors [control]="VendorForm.controls.AreaCode1" [submit]="enjiForm.submitted">
-                    </lib-uc-show-errors>
+                  <div class="form-group row">
+                    <label class="col-md-3  adInsLabel" translate>Kecamatan</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode1">
+                      <lib-uc-show-errors [control]="VendorForm.controls.AreaCode1" [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-3  adInsLabel" translate>City</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput width-50-per" formControlName="City">
-                    <lib-uc-show-errors [control]="VendorForm.controls.City" [submit]="enjiForm.submitted">
-                    </lib-uc-show-errors>
+                  <div class="form-group row">
+                    <label class="col-md-3  adInsLabel" translate>City</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control adInsInput width-50-per" formControlName="City">
+                      <lib-uc-show-errors [control]="VendorForm.controls.City" [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-md-3  adInsLabel" translate>Province</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput width-50-per" formControlName="Province">
-                    <lib-uc-show-errors [control]="VendorForm.controls.Province" [submit]="enjiForm.submitted">
-                    </lib-uc-show-errors>
+                  <div class="form-group row">
+                    <label class="col-md-3  adInsLabel" translate>Province</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control adInsInput width-50-per" formControlName="Province">
+                      <lib-uc-show-errors [control]="VendorForm.controls.Province" [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
+                    </div>
                   </div>
                 </div>
               </div>
