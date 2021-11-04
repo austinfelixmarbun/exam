@@ -83,7 +83,7 @@ export class JobDataProfessionalComponent implements OnInit {
     NotesOther: [''],
   });
   businessDtMin: Date;
-  inputAddressObj: any;
+  inputAddressObj: InputAddressObj;
   inputPreviousAddressObj: InputAddressObj;
   inputOtherAddressObj: InputFieldObj;
   inputOthBizAddressObj: InputAddressObj;
@@ -336,7 +336,6 @@ export class JobDataProfessionalComponent implements OnInit {
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Job Address";
-    this.inputAddressObj.showOwnership = true;
 
     this.inputPreviousAddressObj = new InputAddressObj();
     this.inputPreviousAddressObj.showSubsection = false;

@@ -146,7 +146,6 @@ export class JobDataEmployeeComponent implements OnInit {
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Job Address";
-    this.inputAddressObj.showOwnership = true;
 
     this.inputPreviousAddressObj = new InputAddressObj();
     this.inputPreviousAddressObj.showSubsection = false;
