@@ -151,8 +151,11 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getCustomerAddr.Zipcode };
           this.inputAddressObj.default = this.addressObj;
           this.inputAddressObj.inputField = this.inputFieldAddressObj;
-          if (this.getCustomerAddr.MrCustAddrTypeCode == 'RESIDENCE' || this.getCustomerAddr.MrCustAddrTypeCode == 'LEGAL') {
+          if (this.getCustomerAddr.MrCustAddrTypeCode == CommonConstant.CustAddrTypeResidence || this.getCustomerAddr.MrCustAddrTypeCode == CommonConstant.CustAddrTypeLegal) {
             this.inputAddressObj.showStayLength = true;
+          }
+          if (this.getCustomerAddr.MrCustAddrTypeCode == CommonConstant.CustAddrTypeJob) {
+            this.inputAddressObj.showOwnership = false;
           }
           this.setOwnership(this.CustDataPersonalForm.controls.MrCustAddrTypeCode.value);
         });
@@ -173,7 +176,13 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   }
 
   checkCustAddrType() {
-    if (this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value == 'RESIDENCE' || this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value == 'LEGAL') {
+    let addrType: string = this.CustDataPersonalForm.get('MrCustAddrTypeCode').value;
+    this.inputAddressObj.showOwnership = true;
+
+    if (addrType == CommonConstant.CustAddrTypeJob) {
+      this.inputAddressObj.showOwnership = false;
+    }
+    if (addrType == CommonConstant.CustAddrTypeResidence || addrType == CommonConstant.CustAddrTypeLegal) {
       this.inputAddressObj.showStayLength = true;
       this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.setValidators([Validators.required]); //solusi sementara sampai perbaikan pada lib-ucaddress
     }
