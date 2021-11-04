@@ -735,7 +735,7 @@ export class VendorHoAddEditXComponent implements OnInit {
         this.vendorHoObj.VendorAddrObj.City = this.result.VendorAddrObj.City;
         this.vendorHoObj.VendorAddrObj.Province = this.result.VendorAddrObj.Province;
       }
-
+      this.vendorAttrRequest = new Array<VendorAttrContentObj>();
       if (this.VendorForm['controls']['VendorAttrList'] != undefined) {
         var formValue = this.VendorForm['controls']['VendorAttrList'].value;
 

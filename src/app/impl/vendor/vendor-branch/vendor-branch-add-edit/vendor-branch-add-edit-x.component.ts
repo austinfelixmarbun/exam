@@ -801,7 +801,7 @@ export class VendorBranchAddEditXComponent implements OnInit {
       this.vendorBranchObj.VendorAddrObj.City = this.result.VendorAddrObj.City;
       this.vendorBranchObj.VendorAddrObj.Province = this.result.VendorAddrObj.Province;
     }
-
+    this.vendorAttrRequest = new Array<VendorAttrContentObj>();
     if (this.VendorForm['controls']['VendorAttrList'] != undefined) {
       var formValue = this.VendorForm['controls']['VendorAttrList'].value;
 
