@@ -151,8 +151,11 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getCustomerAddr.Zipcode };
           this.inputAddressObj.default = this.addressObj;
           this.inputAddressObj.inputField = this.inputFieldAddressObj;
-          if (this.getCustomerAddr.MrCustAddrTypeCode == 'RESIDENCE' || this.getCustomerAddr.MrCustAddrTypeCode == 'LEGAL') {
+          if (this.getCustomerAddr.MrCustAddrTypeCode == CommonConstant.CustAddrTypeResidence || this.getCustomerAddr.MrCustAddrTypeCode == CommonConstant.CustAddrTypeLegal) {
             this.inputAddressObj.showStayLength = true;
+          }
+          if (this.getCustomerAddr.MrCustAddrTypeCode == CommonConstant.CustAddrTypeJob) {
+            this.inputAddressObj.showOwnership = false;
           }
           this.setOwnership(this.CustDataPersonalForm.controls.MrCustAddrTypeCode.value);
         });
