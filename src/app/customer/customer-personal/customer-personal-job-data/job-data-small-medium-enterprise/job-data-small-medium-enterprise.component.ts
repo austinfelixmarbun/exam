@@ -105,7 +105,7 @@ export class JobDataSmeComponent implements OnInit {
     MrInvestmentTypeCode: [''],
   });
   businessDtMin: Date;
-  inputAddressObjForJobAddr: any;
+  inputAddressObjForJobAddr: InputAddressObj;
   inputAddressObjForOthBiz: InputAddressObj;
   inputPreviousAddressObj: InputAddressObj;
 
@@ -139,7 +139,6 @@ export class JobDataSmeComponent implements OnInit {
     this.inputAddressObjForJobAddr = new InputAddressObj();
     this.inputAddressObjForJobAddr.showSubsection = false;
     this.inputAddressObjForJobAddr.title = "Job Address";
-    this.inputAddressObjForJobAddr.showOwnership = true;
 
     this.inputAddressObjForOthBiz = new InputAddressObj();
     this.inputAddressObjForOthBiz.showSubsection = false;

@@ -173,7 +173,13 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   }
 
   checkCustAddrType() {
-    if (this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value == 'RESIDENCE' || this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value == 'LEGAL') {
+    let addrType: string = this.CustDataPersonalForm.get('MrCustAddrTypeCode').value;
+    this.inputAddressObj.showOwnership = true;
+
+    if (addrType == CommonConstant.CustAddrTypeJob) {
+      this.inputAddressObj.showOwnership = false;
+    }
+    if (addrType == CommonConstant.CustAddrTypeResidence || addrType == CommonConstant.CustAddrTypeLegal) {
       this.inputAddressObj.showStayLength = true;
       this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.setValidators([Validators.required]); //solusi sementara sampai perbaikan pada lib-ucaddress
     }
