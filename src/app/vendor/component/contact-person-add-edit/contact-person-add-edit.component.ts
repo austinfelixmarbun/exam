@@ -1,15 +1,15 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.Model';
+import { VendorContactPersonObj } from 'app/shared/model/vendor-contact-person-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 
 @Component({
   selector: 'app-contact-person-add-edit',
@@ -189,7 +189,7 @@ export class ContactPersonAddEditComponent implements OnInit {
       this.contactPersonObj.Province = this.ContactPersonForm.controls.ProvDistrictName.value;
       this.contactPersonObj.Zipcode = this.zipcode;
 
-      this.contactPersonObj.VendorContactPersonId = "0";
+      this.contactPersonObj.VendorContactPersonId = 0;
       this.contactPersonObj.RowVersion = "";
       this.http.post(URLConstant.AddVendorContactPerson, this.contactPersonObj).subscribe((response) => {
         this.toastr.successMessage(response['message']);

@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
-import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { ThirdPartyTsObj } from 'app/shared/model/ThirdPartyRslt/ThirdPartyTsObj.model';
+import { ThirdPartyTsObj } from 'app/shared/model/third-party-rslt/third-party-ts-obj.model';
 
 @Component({
   selector: 'app-customer-view-trusting-social',

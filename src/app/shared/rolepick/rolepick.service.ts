@@ -4,7 +4,7 @@ import { RolepickComponent } from 'app/shared/rolepick/rolepick.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { Router } from '@angular/router';
-import { CurrentUserContextService } from 'app/shared/CurrentUserContext/current-user-context.service';
+import { CurrentUserContextService } from 'app/shared/current-user-context/current-user-context.service';
 import { AdInsHelper } from '../AdInsHelper';
 import { CommonConstant } from '../constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';

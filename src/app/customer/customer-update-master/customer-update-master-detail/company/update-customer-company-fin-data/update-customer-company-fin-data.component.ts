@@ -7,8 +7,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { UpdateCustCompanyFinDataObj } from 'app/shared/model/UpdateMasterCust/UpdateCustCompanyFinDataObj.Model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { UpdateCustCompanyFinDataObj } from 'app/shared/model/update-master-cust/update-cust-company-fin-data-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({

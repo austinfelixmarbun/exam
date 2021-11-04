@@ -6,11 +6,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { CoyCommissionerObj } from 'app/shared/model/CoyCommissionerObj.Model';
+import { CoyCommissionerObj } from 'app/shared/model/coy-commissioner-obj.model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from '@angular/common';
-import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 

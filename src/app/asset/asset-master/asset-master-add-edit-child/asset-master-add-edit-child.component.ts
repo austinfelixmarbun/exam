@@ -4,25 +4,25 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AssetMasterObj } from 'app/shared/model/AssetMasterObj.Model';
-import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { ListRequestCriteriaObj } from 'app/shared/model/ListRequestCriteriaObj.model';
-import { AssetCategoryObj } from 'app/shared/model/AssetCategoryObj.Model';
-import { AssetSchmListObj, ReqGetListAssetSchmHObj } from 'app/shared/model/AssetSchmListObj.Model';
-import { ListAssetSchmDObj } from 'app/shared/model/ListAssetSchmDObj.Model';
+import { AssetMasterObj } from 'app/shared/model/asset-master-obj.model';
+import { AssetTypeObj } from 'app/shared/model/asset-type-obj.model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { ListRequestCriteriaObj } from 'app/shared/model/list-request-criteria-obj.model';
+import { AssetCategoryObj } from 'app/shared/model/asset-category-obj.model';
+import { AssetSchmListObj, ReqGetListAssetSchmHObj } from 'app/shared/model/asset-schm-list-obj.model';
+import { ListAssetSchmDObj } from 'app/shared/model/list-asset-schm-d-obj.model';
 import { map, mergeMap, first } from 'rxjs/operators';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { forkJoin } from 'rxjs';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { GenericByIdObj } from 'app/shared/model/Generic/GenericByIdObj.model';
-import { ResGetAssetMasterAttrContentByIdObj } from 'app/shared/model/Response/AssetMaster/ResGetAssetMasterAttrContentObj.model';
-import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { ListAssetSchemeHObj, ResGetListAssetSchemeHObj } from 'app/shared/model/Response/AssetMaster/ResGetListAssetSchemeHObj.model';
-import { AssetMasterAttrObj } from 'app/shared/model/AssetMasterAttr/AssetMasterAttrObj.model';
+import { GenericByIdObj } from 'app/shared/model/generic/generic-by-id-obj.model';
+import { ResGetAssetMasterAttrContentByIdObj } from 'app/shared/model/response/asset-master/res-get-asset-master-attr-content-obj.model';
+import { GenericKeyValueListObj } from 'app/shared/model/generic/generic-key-value-list-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { ListAssetSchemeHObj, ResGetListAssetSchemeHObj } from 'app/shared/model/response/asset-master/res-get-list-asset-scheme-h-obj.model';
+import { AssetMasterAttrObj } from 'app/shared/model/asset-master-attr/asset-master-attr-obj.model';
 
 @Component({
   selector: 'app-asset-master-add-edit-child',

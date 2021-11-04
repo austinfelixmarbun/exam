@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.Model';
+import { VendorContactPersonObj } from 'app/shared/model/vendor-contact-person-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';

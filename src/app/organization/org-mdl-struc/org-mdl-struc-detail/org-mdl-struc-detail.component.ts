@@ -1,7 +1,7 @@
-import { BusinessUnitObj } from "app/shared/model/BusinessUnitObj.Model";
-import { CriteriaObj } from "app/shared/model/CriteriaObj.Model";
-import { OrgMdlStrucObj } from "app/shared/model/OrgMdlStrucObj";
-import { OrgMdlObj } from "app/shared/model/OrgMdlObj.Model";
+import { BusinessUnitObj } from "app/shared/model/business-unit-obj.model";
+import { CriteriaObj } from "app/shared/model/criteria-obj.model";
+import { OrgMdlStrucObj } from "app/shared/model/org-mdl-struc-obj";
+import { OrgMdlObj } from "app/shared/model/org-mdl-obj.model";
 import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { NgForm } from "@angular/forms";
@@ -11,7 +11,7 @@ import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
-import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
+import { InputLookupObj } from "app/shared/model/input-lookup-obj.model";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { URLConstant } from "app/shared/constant/URLConstant";
 

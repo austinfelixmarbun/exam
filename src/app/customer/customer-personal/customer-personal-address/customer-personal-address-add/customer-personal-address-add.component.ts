@@ -1,22 +1,22 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
 import { HttpClient } from '@angular/common/http';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { FormBuilder, Validators } from '@angular/forms';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
+import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
+import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
-import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/response/res-get-list-cust-addr-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 @Component({

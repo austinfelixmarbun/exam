@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
-import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
+import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
+import { WorkflowApiObj } from 'app/shared/model/workflow-api-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -10,9 +10,9 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
-import { IntegrationObj } from 'app/shared/model/library/IntegrationObj.model';
-import { RequestTaskModelObj } from 'app/shared/model/V2/RequestTaskModelObj.model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { IntegrationObj } from 'app/shared/model/library/integration-obj.model';
+import { RequestTaskModelObj } from 'app/shared/model/v2/request-task-model-obj.model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({

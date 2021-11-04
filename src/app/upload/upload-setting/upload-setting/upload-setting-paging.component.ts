@@ -4,7 +4,7 @@ import { SearchComponent } from 'app/shared/search/search.component';
 import { UCGridFooterComponent } from 'app/shared/UserControl/ucgrid-footer/ucgrid-footer.component';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { Observable } from 'rxjs';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';

@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { ResViewInquiriesObj } from 'app/shared/model/Response/Pefindo/ResViewInquiriesObj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { ResViewInquiriesObj } from 'app/shared/model/response/pefindo/res-view-inquiries-obj.model';
 
 @Component({
   selector: 'app-pefindo-view-inquiries',

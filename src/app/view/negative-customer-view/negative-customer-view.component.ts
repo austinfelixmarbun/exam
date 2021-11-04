@@ -3,12 +3,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe, Location } from '@angular/common';
-import { NegativeCustObj } from 'app/shared/model/NegativeCustObj.Model';
+import { NegativeCustObj } from 'app/shared/model/negative-cust-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { map, mergeMap } from 'rxjs/operators';
-import { NegativeCustChangeTrxObj } from 'app/shared/model/NegativeCustChangeTrxObj.Model';
+import { NegativeCustChangeTrxObj } from 'app/shared/model/negative-cust-change-trx-obj.model';
 import { forkJoin } from 'rxjs';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
+import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({

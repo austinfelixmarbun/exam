@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
+import { RefIndustryTypeObj } from 'app/shared/model/ref-industry-type-obj.model';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { map, mergeMap } from 'rxjs/operators';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -19,7 +19,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
   refIndustryType: RefIndustryTypeObj;
   industryTypeCategoryObj: any;
   type: String = 'add';
-  RefIndustryTypeId: Number;
+  RefIndustryTypeId: number = 0;
   resultData: any;
   inputLookupObj: InputLookupObj;
 

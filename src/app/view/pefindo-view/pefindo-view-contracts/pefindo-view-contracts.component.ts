@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { ResViewContractsObj } from 'app/shared/model/Response/Pefindo/ResViewContractsObj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { ResViewContractsObj } from 'app/shared/model/response/pefindo/res-view-contracts-obj.model';
 
 @Component({
   selector: 'app-pefindo-view-contracts',

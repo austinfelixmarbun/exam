@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UcViewGenericObj, WhereValueObj } from 'app/shared/model/UcViewGenericObj.model';
+import { UcViewGenericObj, WhereValueObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { environment } from 'environments/environment';
 
 

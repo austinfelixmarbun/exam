@@ -1,24 +1,24 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { environment } from 'environments/environment';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { VendorBranchEmpObj } from 'app/shared/model/VendorBranchEmpObj.Model';
+import { VendorBranchEmpObj } from 'app/shared/model/vendor-branch-emp-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { VendorEmpObj } from 'app/shared/model/VendorEmpObj.Model';
+import { VendorEmpObj } from 'app/shared/model/vendor-emp-obj.model';
 import { formatDate } from '@angular/common';
 import { WizardComponent } from 'angular-archwizard';
-import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
+import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { RegexService } from 'app/customer/regex.service';
-import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
+import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { GenericObj} from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericObj} from 'app/shared/model/generic/generic-obj.model';
 
 @Component({
   selector: 'app-vendor-employee',

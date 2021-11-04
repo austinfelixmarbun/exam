@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from './AdInstConstant';
 import { environment } from 'environments/environment';
-import { CurrentUserContextService } from './CurrentUserContext/current-user-context.service';
-import { CurrentUserContext } from './model/CurrentUserContext.model';
+import { CurrentUserContextService } from './current-user-context/current-user-context.service';
 import { formatDate } from '@angular/common';
 
 @Injectable({

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ResCustListIframeViewObj } from 'app/shared/model/Response/CustListIframeView/ResCustListIframeViewObj.model';
+import { ResCustListIframeViewObj } from 'app/shared/model/response/cust-list-iframe-View/res-cust-list-iframe-view-obj.model';
 
 @Component({
   selector: 'app-customer-view-iframe-generic',
