@@ -80,6 +80,7 @@ export class AddressComponent implements OnInit {
       this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.vendorAddrObj.Zipcode };
     }
 
+    this.inputLookupZipcodeObj.isRequired = false;
     this.inputLookupZipcodeObj.isReady = true;
   }
 
