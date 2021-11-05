@@ -11,7 +11,7 @@
               <div class="form-group row">
                 <label class="col-md-3  adins-required-label" translate>Address</label>
                 <div class="col-md-5">
-                  <textarea class="form-control" formControlName="Addr"> </textarea>
+                  <textarea autoUpperCase class="form-control" formControlName="Addr"> </textarea>
                   <lib-uc-show-errors [control]="AddressForm.controls.Addr" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
