@@ -5,8 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { RefTcObj } from 'app/shared/model/RefTcModel';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { RefTcObj } from 'app/shared/model/ref-tc.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({

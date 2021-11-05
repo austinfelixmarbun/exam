@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AssetAccessoryObj } from 'app/shared/model/AssetAccesorryObj.Model';
+import { AssetAccessoryObj } from 'app/shared/model/asset-accesorry-obj.model';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';

@@ -3,7 +3,7 @@ import { DecimalPipe } from '@angular/common';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 @Component({
   selector: 'app-ucAddress',

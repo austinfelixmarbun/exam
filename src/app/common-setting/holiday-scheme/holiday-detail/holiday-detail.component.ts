@@ -5,16 +5,16 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { FormBuilder } from '@angular/forms';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { HolidayCopyObj } from 'app/shared/model/HolidayCopy.Model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { HolidayCopyObj } from 'app/shared/model/holiday-copy.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 
 @Component({
   selector: 'app-holiday-detail',

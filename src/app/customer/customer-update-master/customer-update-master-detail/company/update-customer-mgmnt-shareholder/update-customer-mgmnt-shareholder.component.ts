@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { UpdateCustCompanyShareholderObj } from 'app/shared/model/UpdateMasterCust/UpdateCustCompanyShareholderObj.Model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { UpdateCustCompanyShareholderObj } from 'app/shared/model/update-master-cust/update-cust-company-shareholder-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({

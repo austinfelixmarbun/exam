@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({

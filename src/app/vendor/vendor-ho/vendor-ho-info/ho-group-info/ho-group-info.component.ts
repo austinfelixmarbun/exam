@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VendorGroupObj } from 'app/shared/model/VendorGroupObj.Model';
+import { VendorGroupObj } from 'app/shared/model/vendor-group-obj.model';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';

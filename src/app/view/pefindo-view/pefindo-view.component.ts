@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { PathConstant } from 'app/shared/PathConstant';
 

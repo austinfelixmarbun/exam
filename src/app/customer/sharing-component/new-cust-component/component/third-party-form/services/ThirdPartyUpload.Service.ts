@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
-import { CustDocFileFormObj } from "app/shared/model/CustDocFile/CustDocFileFormObj.Model";
-import { CustDocFileObj } from "app/shared/model/CustDocFile/CustDocFileObj.Model";
+import { CustDocFileFormObj } from "app/shared/model/cust-doc-file/cust-doc-file-form-obj.model";
+import { CustDocFileObj } from "app/shared/model/cust-doc-file/cust-doc-file-obj.model";
 import { Observable } from "rxjs";
 import { String } from 'typescript-string-operations';
 

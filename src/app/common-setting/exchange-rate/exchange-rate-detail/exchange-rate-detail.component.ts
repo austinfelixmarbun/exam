@@ -8,8 +8,8 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { ReqExchangeRateObj } from 'app/shared/model/Request/ExchangeRate/ReqExchangeRateObj.model';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { ReqExchangeRateObj } from 'app/shared/model/request/exchange-rate/req-exchange-rate-obj.model';
+import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CookieService } from 'ngx-cookie';
 

@@ -5,9 +5,9 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CustExpsrHObj } from 'app/shared/model/CreditReview/CustExpsrHObj.Model';
-import { CustExpsrInfoObj } from 'app/shared/model/CreditReview/CustExpsrInfoObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { CustExpsrHObj } from 'app/shared/model/credit-review/cust-expsr-h-obj.model';
+import { CustExpsrInfoObj } from 'app/shared/model/credit-review/cust-expsr-info-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { environment } from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
 

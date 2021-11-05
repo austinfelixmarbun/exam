@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { ResViewSubjectInfoCompanyObj } from 'app/shared/model/Response/Pefindo/ResViewSubjectInfoCompanyObj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { ResViewSubjectInfoCompanyObj } from 'app/shared/model/response/pefindo/res-view-subject-info-company-obj.model';
 import { environment } from 'environments/environment';
 
 @Component({

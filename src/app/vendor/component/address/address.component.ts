@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { FormBuilder, Validators } from '@angular/forms';
-import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
+import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { WizardComponent } from 'angular-archwizard';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 @Component({
   selector: 'app-address',
@@ -36,6 +36,8 @@ export class AddressComponent implements OnInit {
     Zipcode: [''],
     AreaCode2: [''], //kelurahan
     AreaCode1: [''], //kecamatan
+    AreaCode3: [''], //RW
+    AreaCode4: [''], //RT
     City: [''],
     Province: [''],
     Latitude: [''],
@@ -94,6 +96,8 @@ export class AddressComponent implements OnInit {
     this.vendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeLegal;
     this.vendorAddrObj.AreaCode2 = this.AddressForm.controls.AreaCode2.value;
     this.vendorAddrObj.AreaCode1 = this.AddressForm.controls.AreaCode1.value;
+    this.vendorAddrObj.AreaCode3 = this.AddressForm.controls.AreaCode3.value;
+    this.vendorAddrObj.AreaCode4 = this.AddressForm.controls.AreaCode4.value;
     this.vendorAddrObj.City = this.AddressForm.controls.City.value;
     this.vendorAddrObj.Zipcode = this.AddressForm.controls["lookupZipcode"]["controls"].value.value;
     this.vendorAddrObj.Addr = this.AddressForm.controls.Addr.value;
@@ -144,6 +148,8 @@ export class AddressComponent implements OnInit {
           Addr: this.vendorAddrObj.Addr,
           AreaCode2: this.vendorAddrObj.AreaCode2,
           AreaCode1: this.vendorAddrObj.AreaCode1,
+          AreaCode3: this.vendorAddrObj.AreaCode3,
+          AreaCode4: this.vendorAddrObj.AreaCode4,
           City: this.vendorAddrObj.City,
           Province: this.vendorAddrObj.Province,
           Latitude: this.vendorAddrObj.Latitude,

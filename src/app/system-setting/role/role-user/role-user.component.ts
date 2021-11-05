@@ -5,15 +5,15 @@ import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Http } from "@angular/http";
 import { HttpClient } from "@angular/common/http";
-import { RefRoleObj } from "app/shared/model/RefRoleObj.Model";
+import { RefRoleObj } from "app/shared/model/ref-role-obj.model";
 import { Location, DecimalPipe } from "@angular/common";
 import { NgForm, FormBuilder, FormGroup } from "@angular/forms";
 import { ExcelService } from "app/shared/excel-service/excel-service";
 import { environment } from "environments/environment";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
-import { InputSearchObj } from "app/shared/model/InputSearchObj.Model";
-import { CriteriaObj } from "app/shared/model/CriteriaObj.Model";
+import { InputSearchObj } from "app/shared/model/input-search-obj.model";
+import { CriteriaObj } from "app/shared/model/criteria-obj.model";
 import { URLConstant } from "app/shared/constant/URLConstant";
 @Component({
   selector: "app-role-user",

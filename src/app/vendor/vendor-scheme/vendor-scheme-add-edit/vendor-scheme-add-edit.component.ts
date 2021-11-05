@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VendorSchemeObj } from 'app/shared/model/VendorSchemeObj.Model';
-import { environment } from 'environments/environment';
+import { VendorSchemeObj } from 'app/shared/model/vendor-scheme-obj.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -99,7 +98,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
         });
     }
     else {
-      this.vendorSchemeObj.VendorSchmId = "0";
+      this.vendorSchemeObj.VendorSchmId = 0;
       this.http.post(URLConstant.AddVendorSchm, this.vendorSchemeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);

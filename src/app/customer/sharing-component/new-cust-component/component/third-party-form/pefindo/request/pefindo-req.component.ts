@@ -5,10 +5,10 @@ import { environment } from 'environments/environment';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ReqPefindoSmartSearchObj } from 'app/shared/model/Digitalization/ReqPefindoSmartSearchObj.model';
-import { PefindoSmartSearchCoyObj } from 'app/shared/model/Digitalization/PefindoSmartSearchCoyObj.model';
-import { PefindoSmartSearchPersonalObj } from 'app/shared/model/Digitalization/PefindoSmartSearchPersonalObj.model';
-import { ReqAddTrxSrcDataForPefindoObj } from 'app/shared/model/Digitalization/ReqAddTrxSrcDataForPefindoObj.model';
+import { ReqPefindoSmartSearchObj } from 'app/shared/model/digitalization/req-pefindo-smart-search-obj.model';
+import { PefindoSmartSearchCoyObj } from 'app/shared/model/digitalization/pefindo-smart-search-coy-obj.model';
+import { PefindoSmartSearchPersonalObj } from 'app/shared/model/digitalization/pefindo-smart-search-personal-obj.model';
+import { ReqAddTrxSrcDataForPefindoObj } from 'app/shared/model/digitalization/req-add-trx-src-data-for-pefindo-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 

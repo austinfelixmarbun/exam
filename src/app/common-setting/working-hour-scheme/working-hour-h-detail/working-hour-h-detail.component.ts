@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NgForm, FormBuilder, Validators } from '@angular/forms';
-import { WorkingHourSchmHObj } from 'app/shared/model/WorkingHourSchmHObj.Model';
+import { WorkingHourSchmHObj } from 'app/shared/model/working-hour-schm-h-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';

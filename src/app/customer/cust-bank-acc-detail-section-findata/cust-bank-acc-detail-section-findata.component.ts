@@ -4,15 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
+import { CustBankAccObj } from 'app/shared/model/cust-bank-acc-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
-import { CustBankStmntObj } from 'app/shared/model/CustBankStmntObj.Model';
+import { CustBankStmntObj } from 'app/shared/model/cust-bank-stmnt-obj.model';
 
 @Component({
   selector: 'app-cust-bank-acc-detail-section-findata',

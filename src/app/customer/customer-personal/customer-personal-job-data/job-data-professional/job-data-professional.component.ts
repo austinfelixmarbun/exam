@@ -3,19 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { CustPersonalJobDataObj } from 'app/shared/model/cust-personal-job-data-obj.model';
+import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
+import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
+import { RequestCustPersonalJobDataObj } from 'app/shared/model/request-cust-personal-job-data-obj.model';
 import { formatDate } from '@angular/common';
-import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
+import { RefIndustryTypeObj } from 'app/shared/model/ref-industry-type-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
@@ -83,7 +83,7 @@ export class JobDataProfessionalComponent implements OnInit {
     NotesOther: [''],
   });
   businessDtMin: Date;
-  inputAddressObj: any;
+  inputAddressObj: InputAddressObj;
   inputPreviousAddressObj: InputAddressObj;
   inputOtherAddressObj: InputFieldObj;
   inputOthBizAddressObj: InputAddressObj;
@@ -336,7 +336,6 @@ export class JobDataProfessionalComponent implements OnInit {
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Job Address";
-    this.inputAddressObj.showOwnership = true;
 
     this.inputPreviousAddressObj = new InputAddressObj();
     this.inputPreviousAddressObj.showSubsection = false;

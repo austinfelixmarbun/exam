@@ -1,22 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { VendorObj } from 'app/shared/model/VendorObj.Model';
-import { VendorGroupObj } from 'app/shared/model/VendorGroupObj.Model';
-import { environment } from 'environments/environment';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
-import { UCSearchComponent } from '@adins/ucsearch';
-import { UcgridfooterComponent } from '@adins/ucgridfooter';
-import { VendorBankAccObj } from 'app/shared/model/VendorBankAccObj.Model';
-import { VendorEmpObj } from 'app/shared/model/VendorEmpObj.Model';
-import { OfficeObj } from 'app/shared/model/OfficeObj.Model';
-import { VendorOfficeMbrObj } from 'app/shared/model/VendorOfficeMbrObj.Model';
+import { VendorHoObj } from 'app/shared/model/vendor-ho-obj.model';
+import { VendorBankAccObj } from 'app/shared/model/vendor-bank-acc-obj.model';
+import { VendorEmpObj } from 'app/shared/model/vendor-emp-obj.model';
+import { VendorOfficeMbrObj } from 'app/shared/model/vendor-office-mbr-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/Request/RefAttr/ReqRefAttrByAttrGroupObj.model';
+import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/request/ref-attr/req-ref-attr-by-attr-group-obj.model';
 
 @Component({
   selector: 'app-vendor-branch-view',

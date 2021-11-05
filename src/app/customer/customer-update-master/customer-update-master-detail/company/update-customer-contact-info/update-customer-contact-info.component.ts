@@ -6,10 +6,10 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { UpdateCustContactInfoObj } from 'app/shared/model/UpdateMasterCust/UpdateCustContactInfoObj.Model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { UpdateCustContactInfoObj } from 'app/shared/model/update-master-cust/update-cust-contact-info-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { forkJoin } from 'rxjs';
 

@@ -4,10 +4,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { RefOfficeObj } from 'app/shared/model/RefOfficeObj.model';
-import { RefCurrObj } from 'app/shared/model/RefCurrObj.Model';
-import { OfficeBankAccObj } from 'app/shared/model/common-setting/OfficeBankAcc.Model';
-import { RefBankObj } from 'app/shared/model/RefBankObj.Model';
+import { RefOfficeObj } from 'app/shared/model/ref-office-obj.model';
+import { RefCurrObj } from 'app/shared/model/ref-curr-obj.model';
+import { OfficeBankAccObj } from 'app/shared/model/common-setting/office-bank-acc.model';
+import { RefBankObj } from 'app/shared/model/ref-bank-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({

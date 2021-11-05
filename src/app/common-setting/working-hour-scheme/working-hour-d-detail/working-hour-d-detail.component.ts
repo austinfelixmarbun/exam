@@ -5,10 +5,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NgForm, FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
-import { WorkingHourSchmHObj } from 'app/shared/model/WorkingHourSchmHObj.Model';
-import { WorkingHourSchmDObj } from 'app/shared/model/WorkingHourSchmDObj.Model';
-import { ListWorkingHourSchmDObj } from 'app/shared/model/ListWorkingHourSchmDObj.Model';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { WorkingHourSchmHObj } from 'app/shared/model/working-hour-schm-h-obj.model';
+import { WorkingHourSchmDObj } from 'app/shared/model/working-hour-schm-d-obj.model';
+import { ListWorkingHourSchmDObj } from 'app/shared/model/list-working-hour-schm-d-obj.model';
+import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 
 
 import { String, StringBuilder } from 'typescript-string-operations';

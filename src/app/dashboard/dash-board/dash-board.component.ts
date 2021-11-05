@@ -4,8 +4,8 @@ import { ContextMenuComponent } from '@progress/kendo-angular-menu';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ResDashboardObj } from 'app/shared/model/Dashboard/ResDashboardObj.model';
-import { ThingsToDoIntegrationObj, ThingsToDoIntegrationV2Obj, UcThingsToDoObj } from 'app/shared/model/library/UcThingsToDoObj.model';
+import { ResDashboardObj } from 'app/shared/model/dashboard/res-dashboard-obj.model';
+import { ThingsToDoIntegrationObj, ThingsToDoIntegrationV2Obj, UcThingsToDoObj } from 'app/shared/model/library/uc-things-to-do-obj.model';
 import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 

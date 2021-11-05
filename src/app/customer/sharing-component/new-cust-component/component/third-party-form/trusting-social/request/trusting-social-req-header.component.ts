@@ -5,11 +5,11 @@ import { environment } from 'environments/environment';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ReqPersonalObj } from 'app/shared/model/NewCust/ReqPersonalObj.Model';
-import { ReqCoyObj } from 'app/shared/model/NewCust/ReqCoyObj.Model';
-import { ThirdPartyRsltHObj } from 'app/shared/model/ThirdPartyRslt/ThirdPartyRsltHObj.model';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { ReqPersonalObj } from 'app/shared/model/new-cust/req-personal-obj.model';
+import { ReqCoyObj } from 'app/shared/model/new-cust/req-coy-obj.model';
+import { ThirdPartyRsltHObj } from 'app/shared/model/third-party-rslt/third-party-rslt-h-obj.model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
+import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
 
 
 @Component({

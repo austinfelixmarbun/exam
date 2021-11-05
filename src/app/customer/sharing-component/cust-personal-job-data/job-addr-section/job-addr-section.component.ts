@@ -5,13 +5,13 @@ import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm } 
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
+import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
+import { CustPersonalJobDataObj } from 'app/shared/model/cust-personal-job-data-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
+import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { CookieService } from 'ngx-cookie';
 
 @Component({

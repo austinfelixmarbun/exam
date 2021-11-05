@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { URLConstant } from "app/shared/constant/URLConstant";
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from "app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model";
-import { GenericByIdObj } from "app/shared/model/Generic/GenericByIdObj.model";
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from "app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model";
+import { GenericByIdObj } from "app/shared/model/generic/generic-by-id-obj.model";
 
 @Injectable({
     providedIn: 'root'

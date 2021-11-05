@@ -1,4 +1,4 @@
-import { OrganizationObj } from "app/shared/model/OrganizationObj.Model";
+import { OrganizationObj } from "app/shared/model/organization-obj.model";
 import { environment } from "environments/environment";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Component, OnInit } from "@angular/core";

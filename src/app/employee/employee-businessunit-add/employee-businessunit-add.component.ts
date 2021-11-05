@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { RefUserRole } from 'app/shared/model/RefUserRoleObj.Model';
+import { RefUserRole } from 'app/shared/model/ref-user-role-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { BusinessUnitObj } from 'app/shared/model/BusinessUnitObj.Model';
-import { RefJobTitleObj } from 'app/shared/model/RefJobTitleObj.Model';
-import { RefUserObj } from 'app/shared/model/RefUserObj.Model';
-import { OfficeObj } from 'app/shared/model/OfficeObj.Model';
-import { RefRoleObj } from 'app/shared/model/RefRoleObj.Model';
+import { BusinessUnitObj } from 'app/shared/model/business-unit-obj.model';
+import { RefJobTitleObj } from 'app/shared/model/ref-job-title-obj.model';
+import { RefUserObj } from 'app/shared/model/ref-user-obj.model';
+import { OfficeObj } from 'app/shared/model/office-obj.model';
+import { RefRoleObj } from 'app/shared/model/ref-role-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
