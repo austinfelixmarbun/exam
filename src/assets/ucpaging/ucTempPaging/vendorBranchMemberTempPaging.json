@@ -1,6 +1,6 @@
 {
     "keyProperty": "RefOfficeId",
-    "keyPropCriteria": "REF_OFFICE_ID",
+    "keyPropCriteria": "RO.REF_OFFICE_ID",
     "component": [
         {
             "type": "textbox",
