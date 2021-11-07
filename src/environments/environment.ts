@@ -15,7 +15,7 @@ export const environment = {
   LMSUrl: "http://r3app-server.ad-ins.com/LMS_DEMO", //OPL dah ada
   lmsWeb: "http://r3impl-websvr.ad-ins.com/LMS", //sementara ku tak tau
   //ApprovalURL: 'http://r3app-server.ad-ins.com/FOUNDATION_R3/Approval',
-  ApprovalR3Url: 'http://r3app-server.ad-ins.com/Approval_R3_BE_SPRINGBOOT/',
+  ApprovalR3Url: 'http://r3app-server.ad-ins.com/Approval_R3_BE_SPRINGBOOT',
   ApprovalURL: 'http://r3impl-appsvr.ad-ins.com/APPROVAL_DSF_R3_SIT',
   FoundationR3Web: 'http://r3web-server.ad-ins.com/Foundation',
   losR3Web: 'http://r3web-server.ad-ins.com/LOSR3',
