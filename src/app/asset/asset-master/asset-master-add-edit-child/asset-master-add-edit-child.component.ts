@@ -286,8 +286,8 @@ export class AssetMasterAddEditChildComponent implements OnInit {
     }
   }
 
-  SplitAttrListValue(value) {
-    return value.split(";");
+  SplitAttrListValue(value: string) {
+    return value.split(";").sort();
   }
 
 

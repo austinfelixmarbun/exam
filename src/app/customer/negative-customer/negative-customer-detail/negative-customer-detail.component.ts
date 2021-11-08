@@ -230,7 +230,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
       });
 
 
-    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterTypeCodeGender).subscribe(
+    this.httpClient.post(URLConstant.GetListKeyValueActiveByCodeOrderBySeqNo, RefMasterTypeCodeGender).subscribe(
       (response) => {
         this.TempGender = response[CommonConstant.ReturnObj];
         if (this.TempGender.length > 0) {

@@ -244,6 +244,7 @@ export class URLConstant {
     public static GetRefMasterPaging = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterPaging";
     public static GetRefMasterListDesc = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterListDesc";
     public static GetRefMasterListKeyValueActiveByCode = environment.FoundationR3Url + "/v1" + "/RefMaster/GetListKeyValueActiveByCode";
+    public static GetListKeyValueActiveByCodeOrderBySeqNo = environment.FoundationR3Url + "/v1" + "/RefMaster/GetListKeyValueActiveByCodeOrderBySeqNo";
     public static GetListActiveRefMasterType = environment.FoundationR3Url + "/v1" + "/RefMasterType/GetListKeyValueActiveByCode";
     public static GetListActiveRefMasterTypeForDdl = "/RefMasterType/GetListKeyValueActiveByCode";
     public static GetRefMasterByRefMasterId = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterByRefMasterId";

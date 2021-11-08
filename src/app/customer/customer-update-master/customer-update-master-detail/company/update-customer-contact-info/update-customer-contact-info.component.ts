@@ -74,7 +74,7 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
     let tempReqJob: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition, MappingCode: null };
     let tempReqGender: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender, MappingCode: null };
     let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, tempReqJob);
-    let getGender = this.http.post(URLConstant.GetListActiveRefMaster, tempReqGender);
+    let getGender = this.http.post(URLConstant.GetListKeyValueActiveByCodeOrderBySeqNo, tempReqGender);
     this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
     let getDetail = this.http.post(URLConstant.GetContactInfoForUpdateMasterCustCompanyContactInfo, this.ReqCustDataTrxIdObj);
     forkJoin([getDetail, getJobPosition, getGender]).toPromise().then(

@@ -103,7 +103,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       MappingCode: null
     }
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrGenderCode).subscribe(
+    this.http.post(URLConstant.GetListKeyValueActiveByCodeOrderBySeqNo, refMasterObjMrGenderCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrGenderCode = response[CommonConstant.ReturnObj];
