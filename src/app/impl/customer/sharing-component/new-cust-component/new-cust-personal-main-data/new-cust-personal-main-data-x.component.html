@@ -173,7 +173,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-md-4 {{ isFamily ? 'adins-required-label' : isShareholder ? '' : 'adins-required-label'}}" translate>Mother Maiden Name</label>
+                <label class="col-md-4 {{ isFamily ? '' : isShareholder ? '' : 'adins-required-label'}}" translate>Mother Maiden Name</label>
                 <div class="col-md-8">
                   <input type="text" class="form-control adInsInput" formControlName="MotherMaidenName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MotherMaidenName.invalid}">

@@ -100,7 +100,7 @@ export class EditMainDataPersonalXComponent implements OnInit {
   isCheckFraudTempReg: boolean = false;
   tempFraud: any;
   tempCustAddr: any;
-
+  isMainCust: boolean = true;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, 
     private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal, 
     private ref: ApplicationRef) {
@@ -124,6 +124,11 @@ export class EditMainDataPersonalXComponent implements OnInit {
   }
 
   async ngOnInit() {
+    if(this.From == "CustFamily"){
+      this.isMainCust = false;
+      this.CustomerPersonalForm.controls.MotherMaidenName.setValidators(Validators.maxLength(100));
+      this.CustomerPersonalForm.controls.MotherMaidenName.updateValueAndValidity();
+    }
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);

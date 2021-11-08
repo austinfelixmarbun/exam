@@ -265,7 +265,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
       IdExpiredDt: [''],
       MrMaritalStatCode: ['', Validators.required],
-      MotherMaidenName: ['', this.isFamily ? [Validators.required, Validators.maxLength(100)] : this.isShareholder ? [ Validators.maxLength(100)] : [Validators.required, Validators.maxLength(100)]] ,
+      MotherMaidenName: ['', this.isFamily ? [Validators.maxLength(100)] : this.isShareholder ? [ Validators.maxLength(100)] : [Validators.required, Validators.maxLength(100)]] ,
       IsSupplier: [false],
       SupplCode: [''],
       SupplName: [''],
