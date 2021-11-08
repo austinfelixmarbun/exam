@@ -467,7 +467,8 @@
             <lib-ucSubsection [id]="'TaxInfo'" [title]="'Tax Info'" [panel]="'TaxInformation'">
             </lib-ucSubsection>
             <div id="TaxInformation">
-              <div class="form-group row" [hidden]="MrVendorCategoryCode == MrVendorCategoryCode_ASSET_INSCO_BRANCH || MrVendorCategoryCode == MrVendorCategoryCode_LIFE_INSCO_BRANCH">
+              <div class="form-group row"
+                [hidden]="MrVendorCategoryCode == MrVendorCategoryCode_ASSET_INSCO_BRANCH || MrVendorCategoryCode == MrVendorCategoryCode_LIFE_INSCO_BRANCH">
                 <label class="col-md-3  adins-required-label" translate>Tax Calculation Method</label>
                 <div class="col-md-9">
                   <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
@@ -479,7 +480,8 @@
                   </lib-uc-show-errors>
                 </div>
               </div>
-              <div class="form-group row" [hidden]="MrVendorCategoryCode == MrVendorCategoryCode_ASSET_INSCO_BRANCH || MrVendorCategoryCode == MrVendorCategoryCode_LIFE_INSCO_BRANCH">
+              <div class="form-group row"
+                [hidden]="MrVendorCategoryCode == MrVendorCategoryCode_ASSET_INSCO_BRANCH || MrVendorCategoryCode == MrVendorCategoryCode_LIFE_INSCO_BRANCH">
                 <label class="col-md-3  adins-required-label">VAT</label>
                 <div class="col-md-9">
                   <select class="form-control" formControlName="IsVat">
@@ -513,57 +515,56 @@
                     </lib-uc-show-errors>
                   </div>
                 </div>
-                <div [hidden]="MrVendorCategoryCode == MrVendorCategoryCode_ASSET_INSCO_BRANCH || MrVendorCategoryCode == MrVendorCategoryCode_LIFE_INSCO_BRANCH">
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Tax Address</label>
+                  <div class="col-md-9">
+                    <textarea autoUpperCase class="form-control adInsInput width-50-per"
+                      formControlName="Addr"> </textarea>
+                    <lib-uc-show-errors [control]="VendorForm.controls.Addr" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-body">
                   <div class="form-group row">
-                    <label class="col-md-3  adInsLabel" translate>Tax Address</label>
-                    <div class="col-md-9">
-                      <textarea autoUpperCase class="form-control adInsInput width-50-per" formControlName="Addr"> </textarea>
-                      <lib-uc-show-errors [control]="VendorForm.controls.Addr" [submit]="enjiForm.submitted">
-                      </lib-uc-show-errors>
+                    <label class="col-md-3">Zip Code</label>
+                    <div class="col-md-3" *ngIf="inputLookupParentObj.isReady">
+                      <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="VendorForm"
+                        *ngIf="inputLookupZipcodeObj.isReady" [enjiForm]="enjiForm" [identifier]="'Zipcode'"
+                        (lookup)="getLookupZipcode($event)">
+                      </lib-uclookupgeneric>
                     </div>
                   </div>
-                  <div class="form-body">
-                    <div class="form-group row">
-                      <label class="col-md-3">Zip Code</label>
-                      <div class="col-md-3" *ngIf="inputLookupParentObj.isReady">
-                        <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="VendorForm"
-                          *ngIf="inputLookupZipcodeObj.isReady" [enjiForm]="enjiForm" [identifier]="'Zipcode'"
-                          (lookup)="getLookupZipcode($event)">
-                        </lib-uclookupgeneric>
-                      </div>
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Kelurahan</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode2">
+                    <lib-uc-show-errors [control]="VendorForm.controls.AreaCode2" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
-                  <div class="form-group row">
-                    <label class="col-md-3  adInsLabel" translate>Kelurahan</label>
-                    <div class="col-md-9">
-                      <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode2">
-                      <lib-uc-show-errors [control]="VendorForm.controls.AreaCode2" [submit]="enjiForm.submitted">
-                      </lib-uc-show-errors>
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Kecamatan</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode1">
+                    <lib-uc-show-errors [control]="VendorForm.controls.AreaCode1" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
-                  <div class="form-group row">
-                    <label class="col-md-3  adInsLabel" translate>Kecamatan</label>
-                    <div class="col-md-9">
-                      <input type="text" class="form-control adInsInput width-50-per" formControlName="AreaCode1">
-                      <lib-uc-show-errors [control]="VendorForm.controls.AreaCode1" [submit]="enjiForm.submitted">
-                      </lib-uc-show-errors>
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>City</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="City">
+                    <lib-uc-show-errors [control]="VendorForm.controls.City" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
-                  <div class="form-group row">
-                    <label class="col-md-3  adInsLabel" translate>City</label>
-                    <div class="col-md-9">
-                      <input type="text" class="form-control adInsInput width-50-per" formControlName="City">
-                      <lib-uc-show-errors [control]="VendorForm.controls.City" [submit]="enjiForm.submitted">
-                      </lib-uc-show-errors>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-md-3  adInsLabel" translate>Province</label>
-                    <div class="col-md-9">
-                      <input type="text" class="form-control adInsInput width-50-per" formControlName="Province">
-                      <lib-uc-show-errors [control]="VendorForm.controls.Province" [submit]="enjiForm.submitted">
-                      </lib-uc-show-errors>
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>Province</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per" formControlName="Province">
+                    <lib-uc-show-errors [control]="VendorForm.controls.Province" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
                   </div>
                 </div>
               </div>
