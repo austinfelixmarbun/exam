@@ -331,7 +331,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       MappingCode: null
     };
     this.ddlGender = new UcDropdownListObj();
-    this.ddlGender.apiPath = URLConstant.GetListKeyValueActiveByCodeOrderBySeqNo;
+    this.ddlGender.apiPath = URLConstant.GetListKeyValueActiveByCodeOrderBySeqNoDDL;
     this.ddlGender.ddlType = "one";
     this.ddlGender.requestObj = refMasterObjGender;
     this.ddlGender.isObject = true;
