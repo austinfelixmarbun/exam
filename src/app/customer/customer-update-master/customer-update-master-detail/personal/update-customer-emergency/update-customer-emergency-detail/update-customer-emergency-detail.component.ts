@@ -308,7 +308,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       MappingCode: null
     };
     this.ddlMrCustRelationshipCode = new UcDropdownListObj;
-    this.ddlMrCustRelationshipCode.apiPath = URLConstant.GetListActiveRefMasterDDL;
+    this.ddlMrCustRelationshipCode.apiPath = URLConstant.GetListActiveRefMasterOrderSeqNoDDL;
     this.ddlMrCustRelationshipCode.ddlType = "one";
     this.ddlMrCustRelationshipCode.requestObj = refMasterObjMrIdTypeCode;
     this.ddlMrCustRelationshipCode.isObject = true;
