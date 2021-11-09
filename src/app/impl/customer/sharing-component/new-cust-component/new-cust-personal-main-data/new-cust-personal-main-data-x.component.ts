@@ -112,12 +112,12 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     this.checkIsAddressKnown = false;
+    this.ClearCustForm();
     this.InitData();
     this.InitCustMainDataMode();
     this.BindLookupSupplier();
     this.BindLookupExistingCust();
-    this.GetCustRelationship();
-    this.ClearCustForm();
+    await this.GetCustRelationship();
     this.getInitPattern();
     this.DictUcDDLObj[this.RefMasterTypeCodeIdType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
     this.onOptionsSelected();
@@ -125,7 +125,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     await this.GetExistingData();
-    this.GetCustAddrToCopy();
+    await this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
     this.isAddressIsNull();
     if (this.CustDataMode != this.CustDataModeFamily) {
@@ -236,7 +236,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     this.DictUcDDLObj[this.RefMasterTypeCodeCustPersonalRelationship].isSelectOutput = true;
     let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     tempReq.RefMasterTypeCode = this.RefMasterTypeCodeCustPersonalRelationship;
-    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, tempReq).subscribe(
+    await this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, tempReq).toPromise().then(
       async (response) => {
         this.MrCustRelationshipCodeObj = response[CommonConstant.ReturnObj];
         if (!this.isMarried) await this.removeSpouse();
@@ -331,9 +331,10 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       return;
     }
     await this.GetCustData();
-    this.GetCustAddr();
+
+    await this.GetCustAddr();
     await this.GetCustPersonalData();
-    this.GetMrRelationship();
+    await this.GetMrRelationship();
 
     if (this.CustDataMode != CommonConstant.CustMainDataModeCust) {
       this.IsLockEdit();
@@ -423,7 +424,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = this.ParentCustId;
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
-    await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+    await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).toPromise().then(
       (response: CustAddrObj) => {
         this.tempCustAddrToCopy = response;
       }
@@ -455,9 +456,9 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   }
 
   tempCustPersonalFamilyObj: CustPersonalFamilyObj = new CustPersonalFamilyObj();
-  GetMrRelationship(custPersonalFamilyId: number = this.CustPersonalFamilyId) {
+  async GetMrRelationship(custPersonalFamilyId: number = this.CustPersonalFamilyId) {
     if (this.CustDataMode != this.CustDataModeFamily) return;
-    this.http.post(URLConstant.GetCustPersonalFamilyByCustPersonalFamilyId, { Id: custPersonalFamilyId }).subscribe(
+    await this.http.post(URLConstant.GetCustPersonalFamilyByCustPersonalFamilyId, { Id: custPersonalFamilyId }).toPromise().then(
       (response: CustPersonalFamilyObj) => {
         this.tempCustPersonalFamilyObj = response;
         this.CustomerForm.patchValue({
