@@ -1,33 +1,32 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
-import { CustCompanyMgmntShrholderObj } from 'app/shared/model/NewCust/CustCompanyMgmntShrholderObj.Model';
-import { ReqCoyObj } from 'app/shared/model/NewCust/ReqCoyObj.Model';
-import { CustFormExistingObj } from 'app/shared/model/NewCust/Shareholder/ShareholderFormExistingObj.Model';
-import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
-import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
-import { VendorObj } from 'app/shared/model/VendorObj.Model';
-import { CookieService } from 'ngx-cookie';
-import { ShareholderFormComponent } from 'app/customer/sharing-component/new-cust-component/component/shareholder-form/shareholder-form.component';
-import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
-import { CustDocFileFormObj } from 'app/shared/model/CustDocFile/CustDocFileFormObj.Model';
-import { ThirdPartyUploadService } from 'app/customer/sharing-component/new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
-import { ActivatedRoute } from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {ExceptionConstant} from 'app/shared/constant/ExceptionConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {CookieService} from 'ngx-cookie';
+import {ShareholderFormComponent} from 'app/customer/sharing-component/new-cust-component/component/shareholder-form/shareholder-form.component';
+import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import {ThirdPartyUploadService} from 'app/customer/sharing-component/new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
+import {ActivatedRoute} from '@angular/router';
+import {ReqCoyObj} from 'app/shared/model/new-cust/req-coy-obj.model';
+import {InputAddressObj} from 'app/shared/model/input-address-obj.model';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import {CustDocFileFormObj} from 'app/shared/model/cust-doc-file/cust-doc-file-form-obj.model';
+import {InputFieldObj} from 'app/shared/model/input-field-obj.model';
+import {CustObj} from 'app/shared/model/cust-obj.model';
+import {UcAddressObj} from 'app/shared/model/uc-address-obj.model';
+import {VendorAddrObj} from 'app/shared/model/vendor-addr-obj.model';
+import {CustFormExistingObj} from 'app/shared/model/new-cust/shareholder/shareholder-form-existing-obj.model';
+import {CustAddrObj} from 'app/shared/model/cust-addr-obj.model';
+import {GenericObj} from 'app/shared/model/Generic/generic-obj.model';
+import {UcDropdownListObj} from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import {CurrentUserContext} from 'app/shared/model/current-user-context.model';
+import {CustCompanyObj} from 'app/shared/model/cust-company-obj.model';
+import {CustCompanyMgmntShrholderObj} from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
+import {VendorObj} from 'app/shared/model/vendor-obj.model';
 
 @Component({
   selector: 'app-new-cust-company-main-data-x',
@@ -57,9 +56,9 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
 
   constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService,
     private cookieService: CookieService, private thirdPartyUploadService: ThirdPartyUploadService,
-    private route: ActivatedRoute) { 
+    private route: ActivatedRoute) {
       this.route.queryParams.subscribe(params => {
-        if (params["From"] != null) {        
+        if (params["From"] != null) {
           this.pageFrom = params["From"];
         }
       });
@@ -247,7 +246,7 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
       this.custObj.IsCustomer = true;
       this.IsCustLoaded = true;
       return;
-    }     
+    }
     await this.GetCustData();
     this.GetCustAddr();
     this.GetCustCompanyData();

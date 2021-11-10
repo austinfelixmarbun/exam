@@ -511,9 +511,9 @@
                 </div>
                 <div class="form-body">
                   <div class="form-group row">
-                    <label class="col-md-3 adins-required-label">Zip Code</label>
+                    <label class="col-md-3">Zip Code</label>
                     <div class="col-md-3" *ngIf="inputLookupParentObj.isReady">
-                      <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="VendorForm"
+                      <lib-uclookupgeneric [lookupInput]="inputLookupZipcodeObj" [parentForm]="VendorForm" *ngIf="inputLookupZipcodeObj.isReady"
                         [enjiForm]="enjiForm" [identifier]="'Zipcode'" (lookup)="getLookupZipcode($event)">
                       </lib-uclookupgeneric>
                     </div>

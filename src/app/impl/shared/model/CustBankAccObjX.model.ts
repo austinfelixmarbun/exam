@@ -1,4 +1,5 @@
-import { CustBankAccObj } from "app/shared/model/CustBankAccObj.Model";
+import {CustBankAccObj} from 'app/shared/model/cust-bank-acc-obj.model';
+
 
 export class CustBankAccObjX {
     CustBankAccObj: CustBankAccObj;

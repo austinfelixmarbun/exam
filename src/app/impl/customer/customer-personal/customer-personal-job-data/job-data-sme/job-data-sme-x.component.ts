@@ -1,26 +1,26 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { ActivatedRoute } from '@angular/router';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
-import { formatDate } from '@angular/common';
-import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { CookieService } from 'ngx-cookie';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {FormBuilder} from '@angular/forms';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {ActivatedRoute} from '@angular/router';
+import {formatDate} from '@angular/common';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {CookieService} from 'ngx-cookie';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {AdInsConstant} from 'app/shared/AdInstConstant';
+import {URLConstantX} from 'app/impl/shared/constant/URLConstantX';
+import {InputFieldObj} from 'app/shared/model/input-field-obj.model';
+import {CustAddrObj} from 'app/shared/model/cust-addr-obj.model';
+import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import {CustPersonalJobDataObj} from 'app/shared/model/cust-personal-job-data-obj.model';
+import {RefProfessionObj} from 'app/shared/model/ref-profession-obj.model';
+import {RequestCustPersonalJobDataObj} from 'app/shared/model/request-cust-personal-job-data-obj.model';
+import {KeyValueObj} from 'app/shared/model/key-value/key-value-obj.model';
+import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
+import {InputAddressObj} from 'app/shared/model/input-address-obj.model';
+import {CustObj} from 'app/shared/model/cust-obj.model';
 
 @Component({
   selector: 'app-job-data-small-medium-enterprise-x',
@@ -47,7 +47,7 @@ export class JobDataSmallMediumEnterpriseXComponent implements OnInit {
   listJobPosition: any;
   companyScale: ReqRefMasterByTypeCodeAndMappingCodeObj;
   listCompanyScale: any;
-  tempProfession: any;  
+  tempProfession: any;
   tempRefIndustryType: any;
   tempRefSectorEconomySlik: any;
   professionLookUpObj: InputLookupObj;
@@ -114,7 +114,7 @@ export class JobDataSmallMediumEnterpriseXComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private cookieService: CookieService) { 
+    private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
         if (params["IdCust"] != null) {
           this.IdCust = params["IdCust"];
@@ -142,7 +142,7 @@ export class JobDataSmallMediumEnterpriseXComponent implements OnInit {
     this.inputAddressObjForJobAddr.showSubsection = false;
     this.inputAddressObjForJobAddr.title = "Job Address";
     this.inputAddressObjForJobAddr.showOwnership = true;
-    
+
     this.inputAddressObjForOthBiz = new InputAddressObj();
     this.inputAddressObjForOthBiz.showSubsection = false;
     this.inputAddressObjForOthBiz.isRequired = false;
@@ -171,7 +171,7 @@ export class JobDataSmallMediumEnterpriseXComponent implements OnInit {
     this.inputPreJobAddressObj =  new InputFieldObj();
     this.inputPreJobAddressObj.inputLookupObj = new InputLookupObj();
     this.inputPreJobAddressObj.inputLookupObj.isRequired = false;
-    
+
     this.professionLookUpObj = new InputLookupObj();
     this.professionLookUpObj.isRequired = true;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
@@ -239,7 +239,7 @@ export class JobDataSmallMediumEnterpriseXComponent implements OnInit {
         this.InvestmentTypeObj = response[CommonConstant.ReturnObj];
       }
     );
-    
+
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
     this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
@@ -256,7 +256,7 @@ export class JobDataSmallMediumEnterpriseXComponent implements OnInit {
         this.tempRefSectorEconomySlik = response['RefSectorEconomySlikXId'];
 
         if(this.returnCustJobDataObj.CustPersonalJobDataId != 0) {
-          this.JobDataSmeForm.patchValue({ 
+          this.JobDataSmeForm.patchValue({
             JobPosition: this.returnCustJobDataObj.MrJobPositionCode,
             JobTitleName: this.returnCustJobDataObj.JobTitleName,
             IndustryName: this.returnCustJobDataObj.CoyName,
@@ -278,7 +278,7 @@ export class JobDataSmallMediumEnterpriseXComponent implements OnInit {
           this.companyLookupObj.nameSelect = this.returnCustJobDataObj.CoyName;
           this.companyLookupObj.jsonSelect = { Descr: this.returnCustJobDataObj.CoyName };
           this.tempRefIndustryType = this.returnCustJobDataObj.RefIndustryTypeId;
-         
+
           if(this.returnCustJobDataObj.RefProfessionId != null)
           {
               this.refProfessionObj = new RefProfessionObj();
@@ -292,7 +292,7 @@ export class JobDataSmallMediumEnterpriseXComponent implements OnInit {
               }
             );
           }
-          
+
           if (this.returnCustJobDataObj.RefIndustryTypeId != null && this.tempRefSectorEconomySlik != null &&
             this.returnCustJobDataObj.RefIndustryTypeId != 0 && this.tempRefSectorEconomySlik != 0) {
             this.http.post(URLConstantX.GetRefSectorEconomySlikXById, {Id: this.tempRefSectorEconomySlik}).subscribe(
@@ -304,7 +304,7 @@ export class JobDataSmallMediumEnterpriseXComponent implements OnInit {
               }
             );
           }
-        
+
             if(this.returnCustJobDataObj.JobAddrId != null) {
               this.custJobAddrObj = new CustAddrObj();
               this.custJobAddrObj.CustAddrId = this.returnCustJobDataObj.JobAddrId;
@@ -314,7 +314,7 @@ export class JobDataSmallMediumEnterpriseXComponent implements OnInit {
                     this.JobDataSmeForm.patchValue({
                       NotesJob: this.getJobAddr.Notes
                     });
-                    
+
                     this.addressObj = new CustAddrObj();
                     this.addressObj.Addr = this.getJobAddr.Addr;
                     this.addressObj.AreaCode3 = this.getJobAddr.AreaCode3;
@@ -334,7 +334,7 @@ export class JobDataSmallMediumEnterpriseXComponent implements OnInit {
                     this.addressObj.FaxArea = this.getJobAddr.FaxArea;
                     this.addressObj.Fax = this.getJobAddr.Fax;
                     this.addressObj.MrHouseOwnershipCode = this.getJobAddr.MrBuildingOwnershipCode;
-      
+
                     this.inputJobAddressObj = new InputFieldObj();
                     this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
                     this.inputJobAddressObj.inputLookupObj.nameSelect = this.getJobAddr.Zipcode;
@@ -357,7 +357,7 @@ export class JobDataSmallMediumEnterpriseXComponent implements OnInit {
                 this.JobDataSmeForm.patchValue({
                   NotesOther: this.getOthBizAddr.Notes
                 });
-                
+
                 this.otherAddrObj = new CustAddrObj();
                 this.otherAddrObj.Addr = this.getOthBizAddr.Addr;
                 this.otherAddrObj.AreaCode3 = this.getOthBizAddr.AreaCode3;
@@ -377,7 +377,7 @@ export class JobDataSmallMediumEnterpriseXComponent implements OnInit {
                 this.otherAddrObj.FaxArea = this.getOthBizAddr.FaxArea;
                 this.otherAddrObj.Fax = this.getOthBizAddr.Fax;
                 this.otherAddrObj.MrHouseOwnershipCode = this.getOthBizAddr.MrBuildingOwnershipCode;
-  
+
                 this.inputOtherAddressObj = new InputFieldObj();
                 this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
                 this.inputOtherAddressObj.inputLookupObj.isRequired = false;
@@ -460,8 +460,8 @@ export class JobDataSmallMediumEnterpriseXComponent implements OnInit {
   setJobAddr() {
     this.jobAddressObj.CustId = this.IdCust;
     this.jobAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeJob;
-    this.jobAddressObj.Addr = this.JobDataSmeForm.controls["jobAddress"]["controls"].Addr.value; 
-    this.jobAddressObj.FullAddr = this.JobDataSmeForm.controls["jobAddress"]["controls"].Addr.value + " RT: " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode3.value + " " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode1.value + " " + this.JobDataSmeForm.controls["jobAddressZipcode"]["controls"].value.value;  
+    this.jobAddressObj.Addr = this.JobDataSmeForm.controls["jobAddress"]["controls"].Addr.value;
+    this.jobAddressObj.FullAddr = this.JobDataSmeForm.controls["jobAddress"]["controls"].Addr.value + " RT: " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode3.value + " " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode2.value + ", " + this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode1.value + " " + this.JobDataSmeForm.controls["jobAddressZipcode"]["controls"].value.value;
     this.jobAddressObj.AreaCode3 = this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode3.value;
     this.jobAddressObj.AreaCode4 = this.JobDataSmeForm.controls["jobAddress"]["controls"].AreaCode4.value;
     this.jobAddressObj.Zipcode = this.JobDataSmeForm.controls["jobAddressZipcode"]["controls"].value.value;
@@ -487,7 +487,7 @@ export class JobDataSmallMediumEnterpriseXComponent implements OnInit {
     this.otherAddressObj.CustId = this.IdCust;
     this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
     this.otherAddressObj.Addr = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].Addr.value;
-    this.otherAddressObj.FullAddr = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].Addr.value + " RT: " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode3.value + " " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode2.value + ", " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode1.value + " " + this.JobDataSmeForm.controls["otherBusinessAddressZipcode"]["controls"].value.value; 
+    this.otherAddressObj.FullAddr = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].Addr.value + " RT: " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode4.value + " RW: " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode3.value + " " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode2.value + ", " + this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode1.value + " " + this.JobDataSmeForm.controls["otherBusinessAddressZipcode"]["controls"].value.value;
     this.otherAddressObj.AreaCode3 = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode3.value;
     this.otherAddressObj.AreaCode4 = this.JobDataSmeForm.controls["otherBusinessAddress"]["controls"].AreaCode4.value;
     this.otherAddressObj.Zipcode = this.JobDataSmeForm.controls["otherBusinessAddressZipcode"]["controls"].value.value;

@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { formatDate } from '@angular/common';
-import { VendorObj } from 'app/shared/model/VendorObj.Model';
-import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
-import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { VendorService } from 'app/vendor/vendor.service';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { CookieService } from 'ngx-cookie';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { GenericObj} from 'app/shared/model/Generic/GenericObj.Model';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {formatDate} from '@angular/common';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {VendorService} from 'app/vendor/vendor.service';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {CookieService} from 'ngx-cookie';
+import {NavigationConstant} from 'app/shared/NavigationConstant';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import {VendorHoObj} from 'app/shared/model/vendor-ho-obj.model';
+import {GenericObj} from 'app/shared/model/Generic/generic-obj.model';
+import {VendorObj} from 'app/shared/model/vendor/vendor-obj.model';
+import {VendorAddrObj} from 'app/shared/model/vendor/vendor-addr-obj.model';
 
 @Component({
   selector: 'app-vendor-atpm-add-edit-x',

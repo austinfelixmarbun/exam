@@ -1,11 +1,11 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { InputGridObj } from 'app/shared/model/InputGridObj.Model';
-import { FamilyListingObj } from 'app/shared/model/NewCust/Family/FamilyListingObj.Model';
+import {HttpClient} from '@angular/common/http';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {ExceptionConstant} from 'app/shared/constant/ExceptionConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {FamilyListingObj} from 'app/shared/model/new-cust/family/family-listing-obj.model';
+import {InputGridObj} from 'app/shared/model/input-grid-obj.model';
 
 @Component({
   selector: 'app-family-listing-x',
@@ -16,7 +16,7 @@ export class FamilyListingXComponent implements OnInit {
   @Input() CustId: number = 0;
   @Input() isMarried: boolean = false;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
-  
+
 
   PageType: string = CommonConstant.CustPageTypePaging;
 
@@ -75,7 +75,7 @@ export class FamilyListingXComponent implements OnInit {
 
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
   event(ev: { Key: string, RowObj: FamilyListingObj }) {
-	if(ev.Key = 'Edit'){
+	if(ev.Key == 'Edit'){
       this.selectedCustId = ev.RowObj.FamilyId;
       this.selectedCustPersonalFamilyId = ev.RowObj.CustPersonalFamilyId;
       this.addCustFamily(false);

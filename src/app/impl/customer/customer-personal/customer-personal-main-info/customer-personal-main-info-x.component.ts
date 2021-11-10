@@ -1,30 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { RefMasterConstant } from 'app/shared/RefMasterConstant';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { DatePipe, formatDate } from '@angular/common';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
-import { RegexService } from 'app/customer/regex.service';
-import { CookieService } from 'ngx-cookie';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { environment } from 'environments/environment';
-import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
-// import { CustThirdPartyCheckingObj } from 'app/shared/model/CustThirdPartyCheckingObj.Model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {RefMasterConstant} from 'app/shared/RefMasterConstant';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {formatDate} from '@angular/common';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {RegexService} from 'app/customer/regex.service';
+import {CookieService} from 'ngx-cookie';
+import {NavigationConstant} from 'app/shared/NavigationConstant';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {environment} from 'environments/environment';
+import {KeyValueObj} from 'app/shared/model/key-value/key-value-obj.model';
+import {CustPersonalObj} from 'app/shared/model/cust-personal-obj.model';
+import {CustObj} from 'app/shared/model/cust-obj.model';
+import {UcAddressObj} from 'app/shared/model/uc-address-obj.model';
+import {InputFieldObj} from 'app/shared/model/input-field-obj.model';
+import {InputAddressObj} from 'app/shared/model/input-address-obj.model';
+import {CustBankAccObj} from 'app/shared/model/cust-bank-acc-obj.model';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import {CustomPatternObj} from 'app/shared/model/library-obj/custom-pattern-obj.model';
+import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import {GenericKeyValueListObj} from 'app/shared/model/Generic/generic-key-value-list-obj.model';
 
 
 @Component({
@@ -33,7 +32,7 @@ import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValue
 })
 export class CustomerPersonalMainInfoXComponent implements OnInit {
 
-  
+
   Gender: any;
   tempGender: any;
   tempIdType: any;
@@ -185,7 +184,7 @@ export class CustomerPersonalMainInfoXComponent implements OnInit {
         }
       }
     );
-    
+
     this.custModelReqObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.custModelReqObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
     this.custModelReqObj.MappingCode = CommonConstant.CustTypePersonal;
@@ -512,10 +511,10 @@ export class CustomerPersonalMainInfoXComponent implements OnInit {
     this.MrMaritalStatCode = this.CustomerPersonalForm.controls["MrMaritalStatCode"].value;
     this.IsVip = this.CustomerPersonalForm.controls["IsVip"].value;
     this.IsAffiliateWithMf = this.CustomerPersonalForm.controls["IsAffiliateWithMf"].value;
-	
+
     this.CustPrefixName = this.CustomerPersonalForm.controls["CustPrefixName"].value;
     this.CustSuffixName = this.CustomerPersonalForm.controls["CustSuffixName"].value;
-	
+
     if (this.IsVip) {
       this.VipNotes = this.CustomerPersonalForm.controls["VipNotes"].value;
     }
@@ -531,7 +530,7 @@ export class CustomerPersonalMainInfoXComponent implements OnInit {
     custAddr["Zipcode"] = formValue["UcAddressZipcode"]["value"];
     custAddr["SubZipcode"] = formValue["UcAddressZipcode"]["value"];
     sessionStorage.setItem("CustAddr", JSON.stringify(custAddr));
-	
+
     AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_DUP_CHECK_X],
       {
         "CustName": this.CustName,

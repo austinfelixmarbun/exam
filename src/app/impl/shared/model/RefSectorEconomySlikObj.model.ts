@@ -1,4 +1,3 @@
-import { RefIndustryTypeObj } from "app/shared/model/RefIndustryTypeObj.Model";
 
 export class RefSectorEconomySlikObj {
   RefSectorEconomySlikXId: any;
@@ -8,7 +7,7 @@ export class RefSectorEconomySlikObj {
   IsActive: any;
   RowVersion: any;
   constructor() {
-    this.RefSectorEconomySlikXId = 0, 
-    this.RowVersion = "" 
+    this.RefSectorEconomySlikXId = 0;
+    this.RowVersion = "";
   }
 }

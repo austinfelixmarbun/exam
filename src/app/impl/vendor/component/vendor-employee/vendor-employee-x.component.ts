@@ -1,23 +1,22 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { VendorBranchEmpObj } from 'app/shared/model/VendorBranchEmpObj.Model';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { VendorEmpObj } from 'app/shared/model/VendorEmpObj.Model';
-import { formatDate } from '@angular/common';
-import { WizardComponent } from 'angular-archwizard';
-import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { RegexService } from 'app/customer/regex.service';
-import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
-import { CookieService } from 'ngx-cookie';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { GenericObj} from 'app/shared/model/Generic/GenericObj.Model';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {AdInsConstant} from 'app/shared/AdInstConstant';
+import {HttpClient} from '@angular/common/http';
+import {ActivatedRoute} from '@angular/router';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {formatDate} from '@angular/common';
+import {WizardComponent} from 'angular-archwizard';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {RegexService} from 'app/customer/regex.service';
+import {CookieService} from 'ngx-cookie';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {VendorBranchEmpObj} from 'app/shared/model/vendor-branch-emp-obj.model';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
+import {GenericObj} from 'app/shared/model/Generic/generic-obj.model';
+import {VendorEmpObj} from 'app/shared/model/vendor-emp-obj.model';
+import {CustomPatternObj} from 'app/shared/model/library-obj/custom-pattern-obj.model';
 
 @Component({
   selector: 'app-vendor-employee-x',
@@ -164,7 +163,7 @@ export class VendorEmployeeXComponent implements OnInit {
       }
     );
 
-   
+
     this.http.post(URLConstant.GetVendorByVendorId, {Id : this.objInput.VendorId}).subscribe(
       (response) => {
         this.result = response;
@@ -192,7 +191,7 @@ export class VendorEmployeeXComponent implements OnInit {
     this.inputLookupSpvObj.addCritInput.push(critObj);
 
     if (this.mode == "edit") {
-      var critObj = new CriteriaObj();
+      critObj = new CriteriaObj();
       critObj.propName = 'VENDOR_EMP_ID';
       critObj.restriction = AdInsConstant.RestrictionNeq;
       critObj.value = this.VendorEmpId + '';
@@ -320,7 +319,6 @@ export class VendorEmployeeXComponent implements OnInit {
     this.VendorBranchEmpObj.VendorEmpObj.RowVersion = "";
     this.VendorBranchEmpObj.VendorEmpObj.MrTaxCalcMethodCode = this.VendorEmpForm.controls.MrTaxCalcMethodCode.value;
     this.VendorBranchEmpObj.VendorEmpObj.IsNpwpExist = this.VendorEmpForm.controls.IsNpwpExist.value;
-    this.VendorBranchEmpObj.VendorEmpObj.SupervisorId = this.VendorBranchEmpObj.VendorEmpObj.SupervisorId;
     this.VendorBranchEmpObj.VendorEmpObj.IsOwner = this.VendorEmpForm.controls.IsOwner.value;
 
     if (this.VendorEmpForm.controls.IsNpwpExist.value == true) {
@@ -328,7 +326,6 @@ export class VendorEmployeeXComponent implements OnInit {
       this.VendorBranchEmpObj.VendorEmpObj.TaxpayerName = this.VendorEmpForm.controls.TaxpayerName.value;
 
       this.VendorBranchEmpObj.VendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeTax;
-      this.VendorBranchEmpObj.VendorAddrObj.Zipcode = this.VendorBranchEmpObj.VendorAddrObj.Zipcode;
       this.VendorBranchEmpObj.VendorAddrObj.Addr = this.VendorEmpForm.controls.Addr.value;
       this.VendorBranchEmpObj.VendorAddrObj.AreaCode2 = this.VendorEmpForm.controls.AreaCode2.value;
       this.VendorBranchEmpObj.VendorAddrObj.AreaCode1 = this.VendorEmpForm.controls.AreaCode1.value;
@@ -371,7 +368,7 @@ export class VendorEmployeeXComponent implements OnInit {
 
   //START URS-LOS-041
 
-  onOptionsSelected(event){  
+  onOptionsSelected(event){
     this.setValidatorPattern();
   }
 
@@ -390,7 +387,7 @@ export class VendorEmployeeXComponent implements OnInit {
           for (let i = 0; i < this.resultPattern.length; i++) {
             let patternObj: CustomPatternObj = new CustomPatternObj();
             let pattern: string = this.resultPattern[i].Value;
-    
+
             patternObj.pattern = pattern;
             patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
             this.customPattern.push(patternObj);

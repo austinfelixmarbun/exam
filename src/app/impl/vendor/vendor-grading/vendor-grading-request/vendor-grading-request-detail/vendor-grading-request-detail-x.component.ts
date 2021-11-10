@@ -1,22 +1,22 @@
-import { UcapprovalcreateComponent } from '@adins/ucapprovalcreate';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { CommonConstantX } from 'app/impl/shared/constant/CommonConstantX';
-import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { RFAInfoObj } from 'app/shared/model/Approval/RFAInfoObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { UcInputRFAObj } from 'app/shared/model/UcInputRFAObj.Model';
-import { VendorGradingHistObj } from 'app/shared/model/VendorGradingHistObj.model';
-import { VendorObj } from 'app/shared/model/VendorObj.Model';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
-import { CookieService } from 'ngx-cookie';
+import {UcapprovalcreateComponent} from '@adins/ucapprovalcreate';
+import {HttpClient} from '@angular/common/http';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {CommonConstantX} from 'app/impl/shared/constant/CommonConstantX';
+import {URLConstantX} from 'app/impl/shared/constant/URLConstantX';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {NavigationConstant} from 'app/shared/NavigationConstant';
+import {environment} from 'environments/environment';
+import {CookieService} from 'ngx-cookie';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import {VendorObj} from 'app/shared/model/vendor-obj.model';
+import {RFAInfoObj} from 'app/shared/model/Approval/rfa-info-obj.model';
+import {VendorGradingHistObj} from 'app/shared/model/vendor-grading-hist-obj.model';
+import {UcInputRFAObj} from 'app/shared/model/uc-input-rfa-obj.model';
 
 @Component({
   selector: 'app-vendor-grading-request-detail-x',

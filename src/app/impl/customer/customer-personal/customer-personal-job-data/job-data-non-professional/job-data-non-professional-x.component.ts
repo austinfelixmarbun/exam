@@ -1,18 +1,18 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
-import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
+import {HttpClient} from '@angular/common/http';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {URLConstantX} from 'app/impl/shared/constant/URLConstantX';
+import {AdInsConstant} from 'app/shared/AdInstConstant';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {CustObj} from 'app/shared/model/cust-obj.model';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import {CustPersonalJobDataObj} from 'app/shared/model/cust-personal-job-data-obj.model';
+import {RequestCustPersonalJobDataObj} from 'app/shared/model/request-cust-personal-job-data-obj.model';
+import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
+import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 @Component({
   selector: 'app-job-data-non-professional-x',
@@ -22,7 +22,6 @@ import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPerso
 export class JobDataNonProfessionalXComponent implements OnInit {
   @Input() IsReset: boolean = false;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
-
   jobDataId: any;
   typePage: string;
   rowVersion: string
@@ -46,11 +45,11 @@ export class JobDataNonProfessionalXComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      if (params['IdCust'] != null) {
+        this.IdCust = params['IdCust'];
       }
-      if (params["IdCustPersonal"] != null) {
-        this.IdCustPersonal = params["IdCustPersonal"];
+      if (params['IdCustPersonal'] != null) {
+        this.IdCustPersonal = params['IdCustPersonal'];
       }
     });
   }
@@ -63,20 +62,20 @@ export class JobDataNonProfessionalXComponent implements OnInit {
   async ngOnInit() {
     this.professionLookUpObj = new InputLookupObj();
     this.professionLookUpObj.isRequired = false;
-    this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
-    this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
-    this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
-    
+    this.professionLookUpObj.urlJson = './assets/lookup/lookupCustomerProfession.json';
+    this.professionLookUpObj.pagingJson = './assets/lookup/lookupCustomerProfession.json';
+    this.professionLookUpObj.genericJson = './assets/lookup/lookupCustomerProfession.json';
+
     //Lookup Commodity
     this.inputLookupCommodityObj = new InputLookupObj();
-    this.inputLookupCommodityObj.urlJson = "./assets/impl/uclookup/lookupCommodity.json";
-    this.inputLookupCommodityObj.pagingJson = "./assets/impl/uclookup/lookupCommodity.json";
-    this.inputLookupCommodityObj.genericJson = "./assets/impl/uclookup/lookupCommodity.json";
+    this.inputLookupCommodityObj.urlJson = './assets/impl/uclookup/lookupCommodity.json';
+    this.inputLookupCommodityObj.pagingJson = './assets/impl/uclookup/lookupCommodity.json';
+    this.inputLookupCommodityObj.genericJson = './assets/impl/uclookup/lookupCommodity.json';
     this.inputLookupCommodityObj.isRequired = true;
 
     let listCriteriaObj: Array<CriteriaObj> = new Array();
     let criteriaCustObj = new CriteriaObj();
-    criteriaCustObj.DataType = "text";
+    criteriaCustObj.DataType = 'text';
     criteriaCustObj.restriction = AdInsConstant.RestrictionEq;
     criteriaCustObj.propName = 'MR_CUST_MODEL_CODE';
     criteriaCustObj.value = CommonConstant.CUST_MODEL_NONPROF;
@@ -86,12 +85,12 @@ export class JobDataNonProfessionalXComponent implements OnInit {
 
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, {Id: this.IdCust}).subscribe(
       (response) => {
         this.custObj = response;
       });
 
-    this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).subscribe(
+    this.http.post(URLConstant.GetCustPersonalJobDataByCustId, {Id: this.IdCust}).subscribe(
       (response: any) => {
         this.returnCustJobDataObj = response;
 
@@ -101,7 +100,7 @@ export class JobDataNonProfessionalXComponent implements OnInit {
           });
 
           if (!this.IsReset && this.returnCustJobDataObj.RefProfessionId) {
-            this.http.post(URLConstant.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).subscribe(
+            this.http.post(URLConstant.GetRefProfessionById, {Id: this.returnCustJobDataObj.RefProfessionId}).subscribe(
               (response) => {
                 this.returnRefProfessionObj = response;
 
@@ -113,42 +112,45 @@ export class JobDataNonProfessionalXComponent implements OnInit {
 
           this.jobDataId = this.returnCustJobDataObj.CustPersonalJobDataId;
           this.rowVersion = this.returnCustJobDataObj.RowVersion;
-          this.typePage = "edit";
+          this.typePage = 'edit';
         }
-    });
+      });
 
     await this.getCustXData();
   }
 
-  async getCustXData()
-  {
+  async getCustXData() {
     await this.http.post(URLConstantX.GetCustXDataByCustId, {Id: this.IdCust}).toPromise().then(
       (response) => {
-        if(response["CustXId"] != 0){
+        if (response['CustXId'] != 0) {
           this.JobDataNonProForm.patchValue({
-            CommodityCode: response["MrCommodityCode"]
+            CommodityCode: response['MrCommodityCode']
           });
-          this.inputLookupCommodityObj.nameSelect = response["CommodityName"];
-          this.inputLookupCommodityObj.jsonSelect = { Descr: response["CommodityName"] };
+          this.inputLookupCommodityObj.nameSelect = response['CommodityName'];
+          this.inputLookupCommodityObj.jsonSelect = {Descr: response['CommodityName']};
         }
       }
     );
   }
 
-  setLookupCommodityData(ev){
+  setLookupCommodityData(ev) {
     this.JobDataNonProForm.patchValue({
       CommodityCode: ev.MasterCode
     });
   }
 
-  SaveForm() {
-    if (this.typePage == "edit") {
+  async SaveForm(IsParent: boolean = false): Promise<boolean> {
+    if (this.JobDataNonProForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.JobDataNonProForm);
+      return false;
+    }
+    if (this.typePage == 'edit') {
       this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
       this.custPersonalJobDataObj = new CustPersonalJobDataObj;
       this.custPersonalJobDataObj.CustPersonalJobDataId = this.jobDataId;
       this.custPersonalJobDataObj.CustId = this.IdCust;
       this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
-      this.custPersonalJobDataObj.JobTitleName = this.JobDataNonProForm.controls["JobTitleName"].value;
+      this.custPersonalJobDataObj.JobTitleName = this.JobDataNonProForm.controls['JobTitleName'].value;
       this.custPersonalJobDataObj.RowVersion = this.rowVersion;
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_NONPROF;
@@ -162,11 +164,13 @@ export class JobDataNonProfessionalXComponent implements OnInit {
         CustPersonalJobDataObj: this.reqCustPersonalJobDataObj,
         CustXObj: custXObj
       }
-      this.http.post(URLConstantX.EditCustPersonalJobData, obj).subscribe(
+      await this.http.post(URLConstantX.EditCustPersonalJobData, obj).toPromise().then(
         (response) => {
-          this.toastr.successMessage(response["message"]);
+          this.toastr.successMessage(response['message']);
 
-          this.outputTab.emit({ stepMode: "next" });
+          if (!IsParent) {
+            this.outputTab.emit({stepMode: 'next'});
+          }
         }
       );
     } else {
@@ -174,7 +178,7 @@ export class JobDataNonProfessionalXComponent implements OnInit {
       this.custPersonalJobDataObj = new CustPersonalJobDataObj;
       this.custPersonalJobDataObj.CustId = this.IdCust;
       this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
-      this.custPersonalJobDataObj.JobTitleName = this.JobDataNonProForm.controls["JobTitleName"].value;
+      this.custPersonalJobDataObj.JobTitleName = this.JobDataNonProForm.controls['JobTitleName'].value;
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_NONPROF;
 
@@ -187,13 +191,16 @@ export class JobDataNonProfessionalXComponent implements OnInit {
         CustPersonalJobDataObj: this.reqCustPersonalJobDataObj,
         CustXObj: custXObj
       }
-      this.http.post(URLConstantX.AddCustPersonalJobData, obj).subscribe(
+      await this.http.post(URLConstantX.AddCustPersonalJobData, obj).toPromise().then(
         (response) => {
-          this.toastr.successMessage(response["message"]);
-          this.outputTab.emit({ stepMode: "next" });
+          this.toastr.successMessage(response['message']);
+          if (!IsParent) {
+            this.outputTab.emit({stepMode: 'next'});
+          }
         }
       );
     }
+    return true;
   }
 
 }

@@ -18,6 +18,9 @@
                   <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" >
                     <i class="fa fa-arrow-left"></i> &nbsp;<span translate>Back</span>
                   </button>
+                  <button type="button" class="btn btn-raised btn-primary" (click)="SendToR2()">
+                    <i class="far fa-check-square"></i>&nbsp;<span translate>Save And Sync</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -86,7 +89,7 @@
               <button type="button" class="step-trigger" role="tab" aria-controls="CustAsset-tab"
                 id="CustAsset-tab-trigger" (click)="EnterTab('CustAsset')">
                 <span class="bs-stepper-circle">7</span>
-                <span class="bs-stepper-label">Customer Asset</span>
+                <span class="bs-stepper-label">List of Asset in Operation</span>
               </button>
             </div>
             <div class="line" *ngIf="SysConfigResultObj?.ConfigValue == '1'"></div>
@@ -109,7 +112,7 @@
           <br><br>
           <div class="bs-stepper-content">
             <div id="customer-detail-tab" class="content" role="tabpanel" aria-labelledby="customer-detail-tab-trigger">
-              <app-customer-personal-detail-x (outputTab)="getValue($event)" *ngIf="CustStepIndex == 1">
+              <app-customer-personal-detail-x #CustPersDetail (outputTab)="getValue($event)" *ngIf="CustStepIndex == 1">
               </app-customer-personal-detail-x>
             </div>
             <div id="address-tab" class="content" role="tabpanel" aria-labelledby="address-tab-trigger">
@@ -120,7 +123,7 @@
               <app-family-listing-x [CustId]="IdCust" [isMarried]="isMarried" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 3"></app-family-listing-x>
             </div>
             <div id="contact-tab" class="content" role="tabpanel" aria-labelledby="contact-tab-trigger">
-              <app-customer-emergency-contact *ngIf="CustStepIndex == 4" [custId]="IdCust" (outputTab)="getValue($event)" > 
+              <app-customer-emergency-contact #CustEmrgcyCtc *ngIf="CustStepIndex == 4" [custId]="IdCust" (outputTab)="getValue($event)" > 
               </app-customer-emergency-contact>
             </div>
             <!-- <div id="group-tab" class="content" role="tabpanel" aria-labelledby="group-tab-trigger">
@@ -128,10 +131,10 @@
               </app-cust-group-tab>
             </div> -->
             <div id="job-data-tab" class="content" role="tabpanel" aria-labelledby="job-data-tab-trigger">
-              <app-customer-personal-job-data-x (outputTab)="getValue($event)" *ngIf="CustStepIndex == 5"></app-customer-personal-job-data-x>
+              <app-customer-personal-job-data-x #CustJobData (outputTab)="getValue($event)" *ngIf="CustStepIndex == 5"></app-customer-personal-job-data-x>
             </div>
             <div id="financial-tab" class="content" role="tabpanel" aria-labelledby="financial-tab-trigger">
-              <app-cust-fin-data-tab-x [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 6">
+              <app-cust-fin-data-tab-x #CustFinData [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 6">
               </app-cust-fin-data-tab-x>
             </div>
             <div id="CustAsset-tab" class="content" role="tabpanel" aria-labelledby="CustAsset-tab-trigger">
@@ -142,7 +145,7 @@
               <app-dms-iframe *ngIf="CustStepIndex == 8 && SysConfigResultObj?.ConfigValue == '1'" [dmsObj]="dmsObj" [showButton]="true" (outputTab)="getValue($event)" (outputCancel)="getValue($event)"></app-dms-iframe>
             </div>
             <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
-              <app-cust-attr-section  [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" *ngIf="CustStepIndex == 9">
+              <app-cust-attr-section #CustAttrData [CustId]="IdCust" [MrCustTypeCode]="'PERSONAL'" *ngIf="CustStepIndex == 9">
               </app-cust-attr-section>
             </div>
           </div>

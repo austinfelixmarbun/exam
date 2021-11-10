@@ -1,4 +1,4 @@
-import { VendorBranchObj } from "app/shared/model/VendorBranchObj.Model";
+import {VendorBranchObj} from 'app/shared/model/vendor-branch-obj.model';
 
 export class VendorBranchObjX{
     VendorBranchObj: VendorBranchObj;

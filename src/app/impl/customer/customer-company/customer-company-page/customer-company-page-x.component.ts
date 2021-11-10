@@ -1,19 +1,24 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { DMSLabelValueObj } from 'app/shared/model/DMS/DMSLabelValueObj.Model';
-import { DMSObj } from 'app/shared/model/DMS/DMSObj.model';
-import { ResSysConfigResultObj } from 'app/shared/model/Response/ResSysConfigResultObj,model';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { PathConstant } from 'app/shared/PathConstant';
+import {HttpClient} from '@angular/common/http';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {URLConstantX} from 'app/impl/shared/constant/URLConstantX';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {CustObj} from 'app/shared/model/cust-obj.model';
+import {DMSLabelValueObj} from 'app/shared/model/DMS/dms-label-value-obj.model';
+import {DMSObj} from 'app/shared/model/DMS/dms-obj.model';
+import {ResSysConfigResultObj} from 'app/shared/model/Response/res-sys-config-result-obj,model';
+import {NavigationConstant} from 'app/shared/NavigationConstant';
+import {PathConstant} from 'app/shared/PathConstant';
 import Stepper from 'bs-stepper';
-import { CookieService } from 'ngx-cookie';
+import {CookieService} from 'ngx-cookie';
+import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import {CustomerCompanyContactInformationComponent} from 'app/customer/customer-company/customer-company-contact-information/customer-company-contact-information.component';
+import {CustAttrSectionComponent} from 'app/customer/cust-attr-section/cust-attr-section.component';
+import {CustomerCompanyDetailXComponent} from 'app/impl/customer/customer-company/customer-company-detail/customer-company-detail-x.component';
+import {CustFinDataTabXComponent} from 'app/impl/customer/cust-fin-data-tab/cust-fin-data-tab-x.component';
 
 @Component({
   selector: 'app-customer-company-page-x',
@@ -38,11 +43,12 @@ export class CustomerCompanyPageXComponent implements OnInit {
 
   Page: string;
   From: string;
+  CustNo: string = "";
   dmsObj: DMSObj;
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService, private toastr: NGXToastrService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService, private toastr: NGXToastrService, private CustSetData: NewCustSetData) {
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -57,12 +63,14 @@ export class CustomerCompanyPageXComponent implements OnInit {
     });
   }
 
+  SetUrlBack(): string{
+    let urlBack: string = NavigationConstant.CUST_PAGING;
+    if (this.From) urlBack = "/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstant.PAGING;
+    return urlBack;
+  }
+
   back() {
-    if (this.From) {
-      AdInsHelper.RedirectUrl(this.router, ["/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstant.PAGING], {});
-    } else {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
-    }
+    AdInsHelper.RedirectUrl(this.router, [this.SetUrlBack()], {});
   }
 
   async ngOnInit(): Promise<void> {
@@ -77,24 +85,25 @@ export class CustomerCompanyPageXComponent implements OnInit {
         }
       );
 
+      await this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).toPromise().then(
+        (response: CustObj) => {
+          this.CustNo = response.CustNo;
+        }
+      );
       //check DMS
       await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms}).toPromise().then(
         (response) => {
           this.SysConfigResultObj = response;
         });
       if (this.SysConfigResultObj.ConfigValue == '1') {
-        await this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).toPromise().then(
-          (response: any) => {
-            let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-            this.dmsObj = new DMSObj();
-            this.dmsObj.User = currentUserContext.UserName;
-            this.dmsObj.Role = currentUserContext.RoleCode;
-            this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
-            this.dmsObj.MetadataParent = null;
-            this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, response["CustNo"]));
-            this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
-          }
-        );
+        let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+        this.dmsObj = new DMSObj();
+        this.dmsObj.User = currentUserContext.UserName;
+        this.dmsObj.Role = currentUserContext.RoleCode;
+        this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
+        this.dmsObj.MetadataParent = null;
+        this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, this.CustNo));
+        this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
       }
 
       this.stepper = new Stepper(document.querySelector('#stepper1'), {
@@ -162,6 +171,34 @@ export class CustomerCompanyPageXComponent implements OnInit {
         }
       }
     }
+  }
+
+  @ViewChild('CustCoyDetail') private CustCoyDetail: CustomerCompanyDetailXComponent;
+  @ViewChild('CustCoyContact') private CustCoyContact: CustomerCompanyContactInformationComponent;
+  @ViewChild('CustFinData') private CustFinData: CustFinDataTabXComponent;
+  @ViewChild('CustAttrData') private CustAttrData: CustAttrSectionComponent;
+  async SendToR2() {
+    console.log(this.CustStepIndex);
+    if(!await this.SaveData(this.CustStepIndex)) return;
+    await this.CustSetData.SendCustomerDataToRabbitMq(this.CustNo, this.SetUrlBack());
+  }
+  async SaveData(stepIdx: number): Promise<boolean> {
+    let flag: boolean = true;
+    switch (stepIdx) {
+      case 1:
+        flag = await this.CustCoyDetail.SaveValue(true);
+        break;
+      case 4:
+        flag = await this.CustCoyContact.SaveValue(true);
+        break;
+      case 5:
+        flag = await this.CustFinData.saveCustAttrContentAndNext(true);
+        break;
+      case 9:
+        flag = await this.CustAttrData.SaveForm();
+        break;
+    }
+    return flag;
   }
 
   //START X-DSF INTEGRASI-CUST : 2021-10-29, Udin - Integrasi Cust FOU ke R2

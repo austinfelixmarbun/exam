@@ -1,22 +1,21 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import * as moment from 'moment';
-import { HttpClient } from '@angular/common/http';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { FormBuilder, Validators, FormArray } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { CookieService } from 'ngx-cookie';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { CustBankStmntObj } from 'app/shared/model/CustBankStmntObj.Model';
-import { CustBankStmntHObj } from 'app/shared/model/CustBankStmntHObj.Model';
-import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
-import { CustBankAccObjX } from 'app/impl/shared/model/CustBankAccObjX.model';
+import {HttpClient} from '@angular/common/http';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {FormArray, FormBuilder, Validators} from '@angular/forms';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {AdInsConstant} from 'app/shared/AdInstConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {ExceptionConstant} from 'app/shared/constant/ExceptionConstant';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {CookieService} from 'ngx-cookie';
+import {URLConstantX} from 'app/impl/shared/constant/URLConstantX';
+import {CustBankAccObjX} from 'app/impl/shared/model/CustBankAccObjX.model';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import {CustBankStmntObj} from '../../../shared/model/cust-bank-stmnt-obj.model';
+import {CustBankStmntHObj} from 'app/shared/model/cust-bank-stmnt-h-obj.model';
+import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
+import {CustBankAccObj} from 'app/shared/model/cust-bank-acc-obj.model';
 
 
 @Component({
@@ -152,12 +151,12 @@ export class CustBankAccDetailSectionFindataXComponent implements OnInit {
           if (response.CustBankAccObj.IsBankStmnt) {
             // if(response.CustBankStmntObjs != undefined){ //perubahan cara baca ke cust bank stmnt obj bukan dari H&D
             //   if(response.CustBankStmntObjs.length > 0)
-            //   {  
+            //   {
             //     //get min year
             //     let listyear = response.CustBankStmntObjs.map(function(a){
             //       return a.Year;
             //     });
-            //     let minyear = listyear.reduce(function (a, b) { return a < b ? a : b; }); 
+            //     let minyear = listyear.reduce(function (a, b) { return a < b ? a : b; });
             //     //get min month in year
 
             //     let listmonth = response.CustBankStmntObjs.filter(x => x.Year == minyear).map(function(a){

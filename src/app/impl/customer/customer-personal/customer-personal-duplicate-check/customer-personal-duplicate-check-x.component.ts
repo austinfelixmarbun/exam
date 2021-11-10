@@ -1,25 +1,25 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
-import { AddCustObj } from 'app/shared/model/AddCustObj.Model';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { DuplicateCustObj } from 'app/shared/model/DuplicateCust.Model';
-import { RefMasterConstant } from 'app/shared/RefMasterConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { map, mergeMap } from 'rxjs/operators';
-import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { ReqGetNegativeCustByNegativeCustNameAndCustTypeObj } from 'app/shared/model/Request/NegativeCust/ReqGetNegativeCustObj.model';
-import { ResNegativeCustObj } from 'app/shared/model/Response/NegativeCust/ResNegativeCustObj.model';
-import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
-import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {RefMasterConstant} from 'app/shared/RefMasterConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {map, mergeMap} from 'rxjs/operators';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {NavigationConstant} from 'app/shared/NavigationConstant';
+import {URLConstantX} from 'app/impl/shared/constant/URLConstantX';
+import {CustCompanyMgmntShrholderObj} from 'app/shared/model/cust-company-mgmnt-shrholder-obj.model';
+import {AddCustObj} from 'app/shared/model/add-cust-obj.model';
+import {ResNegativeCustObj} from 'app/shared/model/Response/negative-cust/res-negative-cust-obj.model';
+import {DuplicateCustObj} from 'app/shared/model/duplicate-cust.model';
+import {CustObj} from 'app/shared/model/cust-obj.model';
+import {CustPersonalObj} from 'app/shared/model/cust-personal-obj.model';
+import {GenericObj} from 'app/shared/model/Generic/generic-obj.model';
+import {CustAddrObj} from 'app/shared/model/cust-addr-obj.model';
+import {ReqGetNegativeCustByNegativeCustNameAndCustTypeObj} from 'app/shared/model/Request/negative-cust/req-get-negative-cust-obj.model';
+import {ReqRefMasterByTypeCodeAndMasterCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
 
 @Component({
   selector: 'app-customer-personal-duplicate-check-x',
@@ -359,7 +359,7 @@ export class CustomerPersonalDuplicateCheckXComponent implements OnInit {
       this.addCustObj.CustAddr.Zipcode = custAddr["Zipcode"];
       this.addCustObj.CustAddr.SubZipcode = custAddr["SubZipcode"];
       this.addCustObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
-      
+
       //disini
       this.http.post(URLConstantX.AddCustPersonalMainDataXV2, this.addCustObj).subscribe(
         (response: GenericObj) => {

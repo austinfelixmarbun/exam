@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
-import { HttpClient } from '@angular/common/http';
-import { VendorService } from 'app/vendor/vendor.service';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {VendorService} from 'app/vendor/vendor.service';
+import {NavigationConstant} from 'app/shared/NavigationConstant';
+import {UcViewGenericObj} from 'app/shared/model/uc-view-generic-obj.model';
 
 @Component({
   selector: 'app-vendor-holding-registration-x',
@@ -20,7 +20,7 @@ export class VendorHoldingRegistrationXComponent implements OnInit {
   ButtonText : string = "Back";
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   MrVendorCategoryCode: string = "";
-  
+
   readonly EditLink: string = NavigationConstant.VENDOR_HOLDING_DETAIL;
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   constructor(private route: ActivatedRoute, private http : HttpClient, private vendorService: VendorService) {

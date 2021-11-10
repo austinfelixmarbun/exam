@@ -1,15 +1,15 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { FormBuilder, Validators } from '@angular/forms';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { RefSectorEconomySlikObj } from 'app/impl/shared/model/RefSectorEconomySlikObj.model';
-import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
+import {HttpClient} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {FormBuilder, Validators} from '@angular/forms';
+import {NavigationConstant} from 'app/shared/NavigationConstant';
+import {RefSectorEconomySlikObj} from 'app/impl/shared/model/RefSectorEconomySlikObj.model';
+import {URLConstantX} from 'app/impl/shared/constant/URLConstantX';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import {RefIndustryTypeObj} from 'app/shared/model/ref-industry-type-obj.model';
 
 @Component({
   selector: 'app-economic-sector-slik-add-edit-x',
@@ -32,8 +32,8 @@ export class EconomicSectorSlikAddEditXComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.CS_ECONOMIC_SECTOR_SLIK_PAGING;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
-    private toastr: NGXToastrService, private fb: FormBuilder) { 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient,
+    private toastr: NGXToastrService, private fb: FormBuilder) {
       this.route.queryParams.subscribe(params => {
         if (params["mode"] != null) {
           this.pageType = params["mode"];
@@ -69,9 +69,9 @@ export class EconomicSectorSlikAddEditXComponent implements OnInit {
             this.refIndustryTypeObj.RefIndustryTypeId = this.tempRefSectorEconomySlikObj.RefIndustryTypeId;
             this.http.post(URLConstant.GetRefIndustryTypeById, { Id: this.tempRefSectorEconomySlikObj.RefIndustryTypeId }).subscribe(
               response => {
-                this.tempRefIndustryObj = response; 
+                this.tempRefIndustryObj = response;
                 console.log(this.tempRefIndustryObj);
-                this.lookUpObj.nameSelect = this.tempRefIndustryObj.IndustryTypeName; 
+                this.lookUpObj.nameSelect = this.tempRefIndustryObj.IndustryTypeName;
                 this.lookUpObj.jsonSelect = response;
               }
             );
@@ -91,7 +91,7 @@ export class EconomicSectorSlikAddEditXComponent implements OnInit {
       this.http.post(URLConstantX.AddRefSectorEconomySlikX, this.refSectorEconomySlikObj).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ECONOMIC_SECTOR_SLIK_PAGING],{});         
+            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ECONOMIC_SECTOR_SLIK_PAGING],{});
         }
       );
     } else {
@@ -103,7 +103,7 @@ export class EconomicSectorSlikAddEditXComponent implements OnInit {
       this.http.post(URLConstantX.EditRefSectorEconomySlikX, this.refSectorEconomySlikObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ECONOMIC_SECTOR_SLIK_PAGING],{});  
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ECONOMIC_SECTOR_SLIK_PAGING],{});
         }
       );
     }

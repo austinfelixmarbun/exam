@@ -1,4 +1,4 @@
-import { CustAddrObj } from "app/shared/model/CustAddrObj.Model";
+import {CustAddrObj} from 'app/shared/model/cust-addr-obj.model';
 
 export class CustObjX{
     CustId : number;
