@@ -88,7 +88,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
   ngOnInit() {
     if (this.pageType == "edit") {
       this.AssetMasterChildForm.controls["AssetCode"].disable();
-      this.AssetMasterChildForm.controls["AssetName"].disable();
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
       this.http.post(URLConstant.GetAssetMasterById, {Id : this.AssetMasterId}).subscribe(
