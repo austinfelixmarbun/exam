@@ -369,7 +369,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
           }
           else if (this.custType.toUpperCase() == CommonConstant.CustomerCompany.toUpperCase()) {
             if (this.NegativeCustForm.controls.IdExpiredDt.value == '' || this.NegativeCustForm.controls.IdExpiredDt.value == null)
-              this.NegativeCustForm.controls.IdExpiredDt.enable();
+              this.NegativeCustForm.controls.IdExpiredDt.disable();
           }
 
           if (this.NegativeCustForm.controls.TaxIdNo.value == '' || this.NegativeCustForm.controls.TaxIdNo.value == null)
