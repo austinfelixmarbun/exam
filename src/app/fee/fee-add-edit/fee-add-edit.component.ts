@@ -4,10 +4,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { RefFeeObj } from 'app/shared/model/RefFeeObj.Model';
+import { RefFeeObj } from 'app/shared/model/ref-fee-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { RefLobObj } from 'app/shared/model/RefLobObj.Model';
+import { RefLobObj } from 'app/shared/model/ref-lob-obj.model';
 
 @Component({
   selector: 'app-fee-add-edit',

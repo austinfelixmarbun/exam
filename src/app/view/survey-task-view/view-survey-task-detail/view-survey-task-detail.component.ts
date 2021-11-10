@@ -3,10 +3,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { ReqGetVerfResultHObj } from 'app/shared/model/Request/VerfResultH/ReqVerfResultHObj.model';
-import { ResSrvyTaskObj } from 'app/shared/model/Response/SrvyTask/ResSrvyTask.model';
-import { ResVerfResultHCustomObj } from 'app/shared/model/Response/VerfResultH/ResVerfResultHCustomObj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { ReqGetVerfResultHObj } from 'app/shared/model/request/verf-result-h/req-verf-result-h-obj.model';
+import { ResSrvyTaskObj } from 'app/shared/model/response/srvy-task/res-srvy-task.model';
+import { ResVerfResultHCustomObj } from 'app/shared/model/response/verf-result-h/res-verf-result-h-custom-obj.model';
 
 @Component({
   selector: 'app-view-survey-task-detail',

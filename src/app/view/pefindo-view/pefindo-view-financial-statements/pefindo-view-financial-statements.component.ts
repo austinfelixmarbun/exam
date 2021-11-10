@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { ResViewFinancialStatementsObj } from 'app/shared/model/Response/Pefindo/ResViewFinancialStatementsObj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { ResViewFinancialStatementsObj } from 'app/shared/model/response/pefindo/res-view-financial-statements-obj.model';
 
 @Component({
   selector: 'app-pefindo-view-financial-statements',

@@ -5,9 +5,9 @@ import { CookieService } from "ngx-cookie";
 import { AdInsHelper } from "./AdInsHelper";
 import { CommonConstant } from "./constant/CommonConstant";
 import { URLConstant } from "./constant/URLConstant";
-import { ClaimWorkflowObj } from "./model/ClaimWorkflowObj.model";
-import { CurrentUserContext } from "./model/CurrentUserContext.model";
-import { ClaimTaskModelObj } from "./model/V2/ClaimTaskModelObj.model";
+import { ClaimWorkflowObj } from "./model/claim-workflow-obj.model";
+import { CurrentUserContext } from "./model/current-user-context.model";
+import { ClaimTaskModelObj } from "./model/v2/claim-task-model-obj.model";
 
 @Injectable()
 export class ClaimTaskService{

@@ -5,17 +5,17 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
-import { ShareholderPublicObj } from 'app/shared/model/NewCust/Shareholder/ShareholderPublicObj.Model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
-import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
+import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
+import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import { ShareholderPublicObj } from 'app/shared/model/new-cust/shareholder/shareholder-public-obj.model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
+import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
+import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
 import { NewCustSetData } from '../NewCustSetData.Service';
 
 @Component({

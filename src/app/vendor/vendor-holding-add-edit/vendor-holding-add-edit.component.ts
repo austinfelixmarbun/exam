@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { VendorService } from '../vendor.service';
 import { formatDate } from '@angular/common';
-import { VendorObj } from 'app/shared/model/VendorObj.Model';
-import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
-import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
+import { VendorObj } from 'app/shared/model/vendor-obj.model';
+import { VendorHoObj } from 'app/shared/model/vendor-ho-obj.model';
+import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { GenericObj} from 'app/shared/model/Generic/GenericObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { GenericObj} from 'app/shared/model/generic/generic-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 
@@ -234,12 +234,9 @@ export class VendorHoldingAddEditComponent implements OnInit {
   NpwpCheck(isGetData: boolean = false) {
     if (this.VendorForm.controls.IsNpwpExist.value == true) {
       this.isHidden = false;
-      this.inputLookupZipcodeObj.isRequired = true;
       this.VendorForm.controls.TaxIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
       this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
     } else {
-      this.inputLookupZipcodeObj.isRequired = false;
-      if (!isGetData) this.VendorForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
       this.VendorForm.controls.TaxIdNo.setValidators([Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
       this.VendorForm.controls.TaxpayerName.clearValidators();
       this.isHidden = true;
@@ -360,8 +357,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-
-
+    this.inputLookupZipcodeObj.isRequired = false;
 
     if (this.result != null) {
       this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.result["VendorAddrObj"].Zipcode };

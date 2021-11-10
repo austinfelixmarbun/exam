@@ -5,16 +5,17 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CustOtherInfoObj } from 'app/shared/model/CustOtherInfoObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { CustOtherInfoObj } from 'app/shared/model/cust-other-info-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { CustAttrFormComponent } from '../sharing-component/new-cust-component/component/cust-attr-form/cust-attr-form.component';
-import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
-import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
-import { CustAttrContentObj } from 'app/shared/model/NewCust/CustAttrContentObj.Model';
+import { CustPersonalJobDataObj } from 'app/shared/model/cust-personal-job-data-obj.model';
+import { RefProfessionObj } from 'app/shared/model/ref-profession-obj.model';
+import { CustAttrContentObj } from 'app/shared/model/new-cust/cust-attr-content-obj.model';
 import { CustAttrListComponent } from '../cust-attr-list/cust-attr-list.component';
+import { NewCustSetData } from '../sharing-component/new-cust-component/NewCustSetData.Service';
 
 @Component({
   selector: 'app-cust-attr-section',
@@ -23,7 +24,7 @@ import { CustAttrListComponent } from '../cust-attr-list/cust-attr-list.componen
   providers: [NGXToastrService]
 })
 export class CustAttrSectionComponent implements OnInit {
-  
+
   @ViewChild('CustAttrForm') custAttrForm: CustAttrFormComponent;
   @ViewChild('CustAttrFormOld') custAttrFormOld: CustAttrListComponent;
   @Input() CustId: number;
@@ -133,7 +134,7 @@ export class CustAttrSectionComponent implements OnInit {
     // );
   }
 
-  
+
   async GetExistingProfession(custId: number = this.CustId) {
     if (this.MrCustTypeCode != CommonConstant.CustTypePersonal || custId == 0) return;
     await this.httpClient.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: custId }).toPromise().then(
@@ -141,15 +142,19 @@ export class CustAttrSectionComponent implements OnInit {
         if (!response.RefProfessionId) return;
         await this.httpClient.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
           (response: RefProfessionObj) => {
-            if(this.custAttrForm) this.custAttrForm.SetSearchListInputType(CommonConstant.AttrCodeDeptAml, response.ProfessionCode);
-            if(this.custAttrFormOld) this.custAttrFormOld.SetSearchListInputType(CommonConstant.AttrCodeDeptAml, response.ProfessionCode);
+            if (this.custAttrForm) this.custAttrForm.SetSearchListInputType(CommonConstant.AttrCodeDeptAml, response.ProfessionCode);
+            if (this.custAttrFormOld) this.custAttrFormOld.SetSearchListInputType(CommonConstant.AttrCodeDeptAml, response.ProfessionCode);
           });
       }
     )
   }
 
   identifierCustAttr: string = "CustAttrForm";
-  SaveForm() {
+  async SaveForm(): Promise<boolean> {
+    if (this.OtherInformationForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.OtherInformationForm);
+      return false;
+    }
     let formValue = this.OtherInformationForm.get(this.identifierCustAttr).value;
     if (Object.keys(formValue).length > 0) {
       let custOtherInfo = new CustOtherInfoObj();
@@ -161,20 +166,15 @@ export class CustAttrSectionComponent implements OnInit {
         RCustOtherInfoObj: custOtherInfo
       };
 
-      this.httpClient.post(this.getUrlSave(), RequestAppCustOtherInfoObj).subscribe(
+      await this.httpClient.post(this.getUrlSave(), RequestAppCustOtherInfoObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          if (this.From === "EditMainData") {
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
-          }
-          else {
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
-          }
         });
-      return; 
+      return true;
     }
 
-    this.toastr.errorMessage("No Attribute To Save");    
+    this.toastr.errorMessage("No Attribute To Save");
+    return false;
   }
 
   SetCustAttrContentOld(): Array<Object> {

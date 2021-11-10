@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe, Location } from '@angular/common';
-import { NegativeCustObj } from 'app/shared/model/NegativeCustObj.Model';
+import { NegativeCustObj } from 'app/shared/model/negative-cust-obj.model';
 import { map, mergeMap } from 'rxjs/operators';
-import { NegativeCustChangeTrxObj } from 'app/shared/model/NegativeCustChangeTrxObj.Model';
+import { NegativeCustChangeTrxObj } from 'app/shared/model/negative-cust-change-trx-obj.model';
 import { forkJoin } from 'rxjs';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 

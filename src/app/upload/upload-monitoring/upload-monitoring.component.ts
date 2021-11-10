@@ -3,10 +3,10 @@ import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { RefEmpObj } from 'app/shared/model/RefEmpObj.Model';
+import { RefEmpObj } from 'app/shared/model/ref-emp-obj.model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
-import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 

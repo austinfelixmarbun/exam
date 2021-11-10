@@ -4,7 +4,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
+import { RefAssetDocObj } from 'app/shared/model/ref-asset-doc-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';

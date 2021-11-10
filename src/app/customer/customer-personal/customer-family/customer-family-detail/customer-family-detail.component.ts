@@ -1,33 +1,33 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { DatePipe } from '@angular/common';
-import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
 import { forkJoin } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
+import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
+import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
+import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
+import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NullViewportScroller } from '@angular/common/src/viewport_scroller';
-import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
+import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { RegexService } from 'app/customer/regex.service';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { GenericListObj } from 'app/shared/model/Generic/GenericListObj.Model';
-import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { GenericListObj } from 'app/shared/model/generic/generic-list-obj.model';
+import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 
 @Component({
   selector: 'app-customer-family-detail',

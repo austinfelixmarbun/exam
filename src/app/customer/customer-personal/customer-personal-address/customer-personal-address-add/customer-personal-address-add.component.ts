@@ -1,20 +1,23 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
 import { HttpClient } from '@angular/common/http';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { FormBuilder, Validators } from '@angular/forms';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
+import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
+import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
+import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/response/res-get-list-cust-addr-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 @Component({
   selector: 'app-customer-personal-address-add',
@@ -29,7 +32,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   resultData: any;
   tempCustObj: any;
   listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
-  listAddressType: any;
+  listAddressType: Array<KeyValueObj> = new Array();
   getCustomerAddr: any;
   copyCustomerAddr: any;
 
@@ -80,7 +83,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   });
   inputAddressObj: InputAddressObj;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private CustSetData: NewCustSetData) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -96,10 +99,9 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
     this.addressType.MappingCode = CommonConstant.CustTypePersonal;
     this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).subscribe(
-      (response) => {
+      async (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
-        let idxEmergency = this.listAddressType.findIndex(x => x.Key == CommonConstant.CustAddrTypeEmergency);
-        if (idxEmergency != -1) this.listAddressType.splice(idxEmergency, 1)
+        this.listAddressType = await this.CustSetData.FilterAddr(this.listAddressType);
         this.CustDataPersonalForm.patchValue({ MrCustAddrTypeCode: response[CommonConstant.ReturnObj][0]['Key'] });
       });
 
@@ -149,8 +151,11 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getCustomerAddr.Zipcode };
           this.inputAddressObj.default = this.addressObj;
           this.inputAddressObj.inputField = this.inputFieldAddressObj;
-          if (this.getCustomerAddr.MrCustAddrTypeCode == 'RESIDENCE' || this.getCustomerAddr.MrCustAddrTypeCode == 'LEGAL') {
+          if (this.getCustomerAddr.MrCustAddrTypeCode == CommonConstant.CustAddrTypeResidence || this.getCustomerAddr.MrCustAddrTypeCode == CommonConstant.CustAddrTypeLegal) {
             this.inputAddressObj.showStayLength = true;
+          }
+          if (this.getCustomerAddr.MrCustAddrTypeCode == CommonConstant.CustAddrTypeJob) {
+            this.inputAddressObj.showOwnership = false;
           }
           this.setOwnership(this.CustDataPersonalForm.controls.MrCustAddrTypeCode.value);
         });
@@ -171,7 +176,13 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   }
 
   checkCustAddrType() {
-    if (this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value == 'RESIDENCE' || this.CustDataPersonalForm.controls['MrCustAddrTypeCode'].value == 'LEGAL') {
+    let addrType: string = this.CustDataPersonalForm.get('MrCustAddrTypeCode').value;
+    this.inputAddressObj.showOwnership = true;
+
+    if (addrType == CommonConstant.CustAddrTypeJob) {
+      this.inputAddressObj.showOwnership = false;
+    }
+    if (addrType == CommonConstant.CustAddrTypeResidence || addrType == CommonConstant.CustAddrTypeLegal) {
       this.inputAddressObj.showStayLength = true;
       this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.setValidators([Validators.required]); //solusi sementara sampai perbaikan pada lib-ucaddress
     }

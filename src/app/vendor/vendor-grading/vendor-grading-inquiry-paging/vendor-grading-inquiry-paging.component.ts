@@ -1,4 +1,4 @@
-import { UcPagingObj, WhereValueObj } from "app/shared/model/UcPagingObj.Model";
+import { UcPagingObj, WhereValueObj } from "app/shared/model/uc-paging-obj.model";
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';

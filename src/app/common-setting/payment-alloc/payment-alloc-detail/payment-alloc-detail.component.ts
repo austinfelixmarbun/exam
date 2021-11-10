@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { RefPaymentAllocObj } from 'app/shared/model/common-setting/RefPaymentAllocObj.Model';
+import { RefPaymentAllocObj } from 'app/shared/model/common-setting/ref-payment-alloc-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({

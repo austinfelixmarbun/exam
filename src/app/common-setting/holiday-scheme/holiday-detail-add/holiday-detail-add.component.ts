@@ -3,10 +3,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { HolidayDObj } from 'app/shared/model/HolidayDObj.Model';
-import { HolidayDByYearObj } from 'app/shared/model/HolidayDByYearObj.Model';
+import { HolidayDObj } from 'app/shared/model/holiday-d-obj.model';
+import { HolidayDByYearObj } from 'app/shared/model/holiday-d-by-year-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -16,7 +16,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class HolidayDetailAddComponent implements OnInit {
 
-  HolidaySchmHId: string;
+  HolidaySchmHId: number = 0;
   title: string = "Holiday Detail";
   holidayDetailObj: HolidayDObj;
   holidayDetailByYearObj: HolidayDByYearObj;

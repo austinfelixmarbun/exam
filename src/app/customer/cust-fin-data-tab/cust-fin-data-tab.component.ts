@@ -2,19 +2,20 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild  } from '@ang
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { CustPersonalFinDataObj } from 'app/shared/model/CustPersonalFinDataObj.Model';
-import { CustCompanyFinDataObj } from 'app/shared/model/CustCompanyFinDataObj.Model';
-import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { CustPersonalFinDataObj } from 'app/shared/model/cust-personal-fin-data-obj.model';
+import { CustCompanyFinDataObj } from 'app/shared/model/cust-company-fin-data-obj.model';
+import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
 import { map, mergeMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
-import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
+import { CustCompanyObj } from 'app/shared/model/cust-company-obj.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe, formatDate} from '@angular/common';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { NewCustSetData } from '../sharing-component/new-cust-component/NewCustSetData.Service';
 
 @Component({
   selector: 'app-cust-fin-data-tab',
@@ -553,12 +554,16 @@ export class CustFinDataTabComponent implements OnInit {
     await this.getListCustCoyFinData();
   }
 
-  saveCustAttrContentAndNext() {
-    if (!this.CustAttrListForm.get('AttrList')) return;
+  async saveCustAttrContentAndNext(IsParent: boolean = false): Promise<boolean> {
+    if (this.CustAttrListForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.CustAttrListForm);
+      return false;
+    }
+    if (!this.CustAttrListForm.get('AttrList')) return false;
 
     if (!this.ListCustPersonalFinData.length && !this.ListCustCoyFinData.length) {
       this.toastr.warningMessage(ExceptionConstant.PLEASE_INPUT_FIN_DATA);
-      return;
+      return false;
     }
 
     var custAttrRequest = new Array<Object>();
@@ -583,12 +588,13 @@ export class CustFinDataTabComponent implements OnInit {
       CustAttrContentObjs: custAttrRequest,
     }
 
-    this.httpClient.post(URLConstant.AddCustFinDataAttrContent, CustFinDataCustomObj).subscribe(
+    await this.httpClient.post(URLConstant.AddCustFinDataAttrContent, CustFinDataCustomObj).toPromise().then(
       (response) => {
         this.toastr.successMessage(response["Message"]);
-        this.outputTab.emit({ stepMode: "next" });
+        if (!IsParent) this.outputTab.emit({ stepMode: "next" });
       }
     );
+    return true;
   }
 
   // END Data DSF =================================

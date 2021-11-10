@@ -4,11 +4,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { OfficeBankAccObj } from 'app/shared/model/common-setting/OfficeBankAcc.Model';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { OfficeBankAccObj } from 'app/shared/model/common-setting/office-bank-acc.model';
+import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
+import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
+import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({

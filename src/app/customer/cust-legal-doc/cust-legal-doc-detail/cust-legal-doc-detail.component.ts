@@ -6,13 +6,13 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { DatePipe, formatDate } from '@angular/common';
-import { CustCompanyLegalDocObj } from 'app/shared/model/CustCompanyLegalDocObj.Model';
+import { CustCompanyLegalDocObj } from 'app/shared/model/cust-company-legal-doc-obj.model';
 import { String } from 'typescript-string-operations';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 
 @Component({
@@ -36,7 +36,7 @@ export class CustLegalDocDetailComponent implements OnInit {
     MrLegalDocTypeCode: ['', [Validators.required]],
     DocNo: ['', [Validators.required]],
     DocDt: ['', [Validators.required]],
-    DocExpiredDt: ['', [Validators.required]],
+    DocExpiredDt: [''],
     DocNotes: ['', [Validators.required]],
     NotaryName: ['', [Validators.required]],
     NotaryLocation: ['', [Validators.required]],
@@ -79,7 +79,7 @@ export class CustLegalDocDetailComponent implements OnInit {
             MrLegalDocTypeCode: response.MrLegalDocTypeCode,
             DocNo: response.DocNo,
             DocDt: formatDate(response.DocDt, 'yyyy-MM-dd', 'en-US'),
-            DocExpiredDt: formatDate(response.DocExpiredDt, 'yyyy-MM-dd', 'en-US'),
+            DocExpiredDt: response.DocExpiredDt != null ? formatDate(response.DocExpiredDt, 'yyyy-MM-dd', 'en-US') : '',
             DocNotes: response.DocNotes,
             NotaryName: response.NotaryName,
             NotaryLocation: response.NotaryLocation,
@@ -95,14 +95,14 @@ export class CustLegalDocDetailComponent implements OnInit {
     var custCompanyLegalDocData = this.CustCompanyLegalDocForm.value;
     let docDt = new Date(custCompanyLegalDocData.DocDt);
     let docDtValidate = datePipe.transform(docDt, "yyyy-MM-dd");
-    let expDt = new Date(custCompanyLegalDocData.DocExpiredDt);
+    let expDt = custCompanyLegalDocData.DocExpiredDt != '' ? new Date(custCompanyLegalDocData.DocExpiredDt) : null;
     let expDtValidate = datePipe.transform(expDt, "yyyy-MM-dd");
     let businessDtValidate = datePipe.transform(this.businessDtMin, "yyyy-MM-dd");
     let existCustLegalDoc = this.CustLegalDocs.find(x => x.MrLegalDocTypeCode == this.CustCompanyLegalDocForm.value.MrLegalDocTypeCode
                                                 && x.DocNo == this.CustCompanyLegalDocForm.value.DocNo
                                                 && x.CustCompanyLegalDocId != this.CustCompanyLegalDocForm.value.CustCompanyLegalDocId);
 
-    if(expDtValidate <= businessDtValidate){
+    if(expDtValidate != null && expDtValidate <= businessDtValidate){
       this.toastr.warningMessage(ExceptionConstant.EXP_DT_MUST_HIGHER_THAN_BD);
       return;
     }

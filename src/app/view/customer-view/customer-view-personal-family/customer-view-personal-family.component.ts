@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { InputGridObj } from 'app/shared/model/InputGridObj.Model';
-import { CustPersonalFamilyObj, ResponseListCustPersonalFamilyObj } from 'app/shared/model/Response/Customer/View/ResponseListCustPersonalFamilyObj.model';
+import { InputGridObj } from 'app/shared/model/input-grid-obj.model';
+import { CustPersonalFamilyObj, ResponseListCustPersonalFamilyObj } from 'app/shared/model/response/customer/view/response-list-cust-personal-family-obj.model';
 
 @Component({
   selector: 'app-customer-view-personal-family',

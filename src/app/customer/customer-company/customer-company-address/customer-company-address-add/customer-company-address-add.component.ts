@@ -1,18 +1,20 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { FormBuilder } from '@angular/forms';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { RefMasterObj } from 'app/shared/model/RefMasterObj.Model';
+import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
+import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/Response/ResGetListCustAddrObj.model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/response/res-get-list-cust-addr-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 @Component({
   selector: 'app-customer-company-address-add',
@@ -25,7 +27,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
 
   listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
-  listAddressType: any;
+  listAddressType: Array<KeyValueObj> = new Array();
   copyCustomerAddr: any;
   copyCustomerAddrFrom: any;
 
@@ -59,7 +61,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
-    private fb: FormBuilder,
+    private fb: FormBuilder, private CustSetData: NewCustSetData,
     private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -78,10 +80,9 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.addressType.MappingCode = CommonConstant.CustTypeCompany;
 
     this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).subscribe(
-      (response) => {
+      async (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
-        let idxCompany = this.listAddressType.findIndex(x => x.Key == CommonConstant.CustAddrTypeCompany);
-        this.listAddressType.splice(idxCompany, 1)
+        this.listAddressType = await this.CustSetData.FilterAddr(this.listAddressType);
         this.CustDataCompanyForm.patchValue({
           MrCustAddrTypeCode: this.listAddressType[0].Key
         })

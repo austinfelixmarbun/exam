@@ -1,4 +1,4 @@
-import { RefUserObj } from "app/shared/model/RefUserObj.Model";
+import { RefUserObj } from "app/shared/model/ref-user-obj.model";
 import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { NgForm } from "@angular/forms";
@@ -8,7 +8,7 @@ import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
-import { RefEmpObj } from "app/shared/model/RefEmpObj.Model";
+import { RefEmpObj } from "app/shared/model/ref-emp-obj.model";
 import { URLConstant } from "app/shared/constant/URLConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { AdInsHelper } from "app/shared/AdInsHelper";

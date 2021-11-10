@@ -5,13 +5,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { VerfSchemeDObj } from 'app/shared/model/VerfSchemeDObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { VerfSchemeDObj } from 'app/shared/model/verf-scheme-d-obj.model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
