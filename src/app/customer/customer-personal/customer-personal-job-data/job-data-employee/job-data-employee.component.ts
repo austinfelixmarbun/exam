@@ -176,7 +176,6 @@ export class JobDataEmployeeComponent implements OnInit {
     this.inputPreviousAddressObj.inputField = this.inputPreJobAddressObj;
 
     this.professionLookUpObj = new InputLookupObj();
-    this.professionLookUpObj.isRequired = false;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
@@ -194,7 +193,6 @@ export class JobDataEmployeeComponent implements OnInit {
     this.industryLookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
-    this.industryLookUpObj.isRequired = false;
 
     this.companyLookupObj = new InputLookupObj();
     this.companyLookupObj.urlJson = "./assets/uclookup/Customer/lookupCompany.json";
