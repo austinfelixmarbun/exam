@@ -38,6 +38,7 @@
                 <div class="col-md-7">
                   <select class="form-control adInsInput" formControlName="TotalSerialNo" (change)="totalSerialNoHandler()"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetTypeForm.controls.TotalSerialNo.invalid }">
+                    <option value = "">Select One</option>
                     <option *ngFor="let serialItem of serialNoOptions" [value]="serialItem">{{serialItem}}</option>
                   </select>
                   <lib-uc-show-errors [control]="AssetTypeForm.controls.TotalSerialNo" [submit]="enjiForm.submitted"></lib-uc-show-errors>
