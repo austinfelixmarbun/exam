@@ -57,7 +57,7 @@
                 <div class="col-md-5">
                   <input type="text" class="form-control adInsInput" formControlName="AssetName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetName.invalid }">
-                  <lib-uc-show-errors [control]="AssetMasterChildForm.controls.AssetName" [submit]="enjiForm.submitted" [attr.disabled]="pageType == 'edit' ? true : null">
+                  <lib-uc-show-errors [control]="AssetMasterChildForm.controls.AssetName" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
               </div>
@@ -65,7 +65,7 @@
                 <div class="form-group row">
                   <label class="col-md-3  adInsLabel adins-required-label" translate>Asset Category </label>
                   <div class="col-md-9">
-                    <select class="form-control adInsInput" formControlName="AssetCategoryId" [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetCategoryId.invalid }" [attr.disabled]="pageType == 'edit' ? true : null">
+                    <select class="form-control adInsInput" formControlName="AssetCategoryId" [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetCategoryId.invalid }">
                       <option *ngFor="let ram of resultAssetCategory" [value]="ram.Key">
                         {{ram.Value}}
                       </option>
