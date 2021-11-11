@@ -16,11 +16,8 @@ export class UploadAssetMasterComponent implements OnInit {
     this.uploadObj.subsectionId = "UcUploadFile";
     this.uploadObj.UploadTypeCode = "UPL_ASM";
     this.uploadObj.ErrorDownloadUrl = URLConstant.GetUploadAssetMasterByUploadMonitoringNoAndTrxType;
-    this.uploadObj.TemplateUrl = URLConstant.DownloadTemplate;
     this.uploadObj.TemplateName = "Upload_Asset_Master_Template";
     this.uploadObj.FileErrorName = "Upload_Asset_Master_ErrorDownload";
-    this.uploadObj.environmentUrl = environment.FoundationR3Url + "/v1";
-    this.uploadObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
     this.uploadObj.pagingJson = "./assets/ucpaging/searchAssetMasterMonitoring.json";
     if (!environment.isCore) {
       this.uploadObj.formatsAllowed = ".xls, .xlsx";

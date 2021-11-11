@@ -16,7 +16,8 @@
             "label": "Office Name",
             "isQueryIn": true,
             "items": [],
-            "itemsUrl": []
+            "itemsUrl": [],
+            "environment": "FOU"
         },
         {
             "type": "textbox",
@@ -49,7 +50,8 @@
             "items": [],
             "itemsUrl": [],
             "criteriaPropName": "Code",
-            "criteriaPropValue": "UPLOAD"
+            "criteriaPropValue": "UPLOAD",
+            "environment": "FOU"
         }
     ],
     "querystring": {
