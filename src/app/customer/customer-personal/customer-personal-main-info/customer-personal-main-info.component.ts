@@ -148,7 +148,7 @@ export class CustomerPersonalMainInfoComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       MappingCode: null
     }
-    this.http.post(URLConstant.GetListKeyValueActiveByCodeOrderBySeqNo, refMasterObj).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObj).subscribe(
       (response) => {
         this.tempGender = response[CommonConstant.ReturnObj];
       }
