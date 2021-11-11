@@ -68,11 +68,11 @@ export class NewCustHeaderXComponent implements OnInit {
         if(this.From == CommonConstant.CustFromCustShareholder) 
         {
           this.isShareholder = true;
-          this.CustDataMode = CommonConstant.CustMainDataModeMgmntShrholder;
+          //this.CustDataMode = CommonConstant.CustMainDataModeMgmntShrholder;
         }
         else if(this.From == CommonConstant.CustFromCustFamily) {
           this.isFamily = true;
-          this.CustDataMode = CommonConstant.CustMainDataModeFamily;
+          //this.CustDataMode = CommonConstant.CustMainDataModeFamily;
         }
         //END Issue Non Jira X, Udin
       }

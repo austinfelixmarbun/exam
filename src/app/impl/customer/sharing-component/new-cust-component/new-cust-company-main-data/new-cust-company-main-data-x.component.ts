@@ -273,7 +273,7 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
         this.existingCustomerLookUpObj.nameSelect = response.CustName;
         this.existingCustomerLookUpObj.jsonSelect = { CustName: response.CustName };
         this.existingCustomerLookUpObj.isReady = true;
-        if(this.existingCustomerLookUpObj.isReady){
+        if(this.existingCustomerLookUpObj.isReady && this.CustDataMode != this.CustDataModeMain){
           this.CustomerForm.get("CustName").disable();
           this.CustomerForm.get("TaxIdNo").disable();
         }

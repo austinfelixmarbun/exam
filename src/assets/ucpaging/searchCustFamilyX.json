@@ -101,14 +101,14 @@
         }
     ],
     "querystring": {
-        "name": "searchCustFamilyX"
+        "name": "searchCustFamily"
     },
     "bodyList": [
         {
             "type": "link",
             "position": "left",
             "property": "FamilyCustNo",
-            "path": "VIEW_CUST_PERSONAL_DETAIL_X",
+            "path": "VIEW_CUST_PERSONAL_DETAIL",
             "target": "_blank",
             "param": [
                 {
@@ -161,12 +161,16 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "CUST_EDIT_MAIN_DATA_PERSONAL_X",
+                    "path": "CUST_NEW_FORM",
                     "icon": "ft-edit-2",
                     "param": [
                         {
                             "type": "CustId",
                             "property": "FamilyId"
+                        },
+                        {
+                            "type": "CustType",
+                            "property" : "PERSONAL"
                         },
                         {
                             "type": "From",

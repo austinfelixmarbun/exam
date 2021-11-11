@@ -339,11 +339,13 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       this.IsLockEdit();
     }
     this.IsLockCopyAddrBtn = true;
-    this.CustomerForm.get("CustName").disable();
-    this.CustomerForm.get("BirthDt").disable();
-    this.CustomerForm.get("IdNo").disable();
-    this.CustomerForm.get("TaxIdNo").disable();
-    this.CustomerForm.get("MotherMaidenName").disable();
+    if(this.pageFrom == "EditMainData"){
+      this.CustomerForm.get("CustName").disable();
+      this.CustomerForm.get("BirthDt").disable();
+      this.CustomerForm.get("IdNo").disable();
+      this.CustomerForm.get("TaxIdNo").disable();
+      this.CustomerForm.get("MotherMaidenName").disable();
+    }
   }
 
   async GetCustData(custId: number = this.CustId) {
@@ -412,6 +414,11 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
         }
         if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
           this.inputAddressObj.inputField.inputLookupObj.isReadonly = false;
+        }
+        if(this.pageFrom == "CustFamily"){
+          this.inputAddressObj.isRequired = false;
+          this.inputAddressObj.inputField.inputLookupObj.isRequired = false;
+          this.inputAddressObj.requiredOwnership = false;
         }
       }
     );

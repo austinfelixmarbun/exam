@@ -51,7 +51,7 @@ export class EditMainDataPersonalXComponent implements OnInit {
     VipNotes: [''],
     CustPrefixName: [''],
     CustSuffixName: [''],
-
+    MobilePhnNo1: [Validators.pattern("^[0-9]+$")] ,
     Gender: ['', [Validators.required]],
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', [Validators.required]],
@@ -129,6 +129,12 @@ export class EditMainDataPersonalXComponent implements OnInit {
       this.CustomerPersonalForm.controls.MotherMaidenName.setValidators(Validators.maxLength(100));
       this.CustomerPersonalForm.controls.MotherMaidenName.updateValueAndValidity();
     }
+    else if(this.From == "EditMainData"){
+      this.CustomerPersonalForm.controls.IdNo.disable();
+      this.CustomerPersonalForm.controls.BirthDt.disable();
+      this.CustomerPersonalForm.controls.MotherMaidenName.disable();
+      this.CustomerPersonalForm.controls.TaxIdNo.disable();
+    }
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -143,6 +149,8 @@ export class EditMainDataPersonalXComponent implements OnInit {
     this.inputAddressObj.default = new UcAddressObj();
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showAllPhn = false;
+    this.inputAddressObj.isRequired = false;
+    this.inputAddressObj.inputField.inputLookupObj.isRequired = false;
   
     var refMasterObjGender: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
@@ -255,7 +263,8 @@ export class EditMainDataPersonalXComponent implements OnInit {
           IsRestInPeace: this.tempCustPersonalObj.IsRestInPeace,
           MrMaritalStatCode: this.tempCustPersonalObj.MrMaritalStatCode,
           CustPrefixName: this.tempCustPersonalObj.CustPrefixName,
-          CustSuffixName: this.tempCustPersonalObj.CustSuffixName
+          CustSuffixName: this.tempCustPersonalObj.CustSuffixName,
+          MobilePhnNo1 : this.tempCustPersonalObj.MobilePhnNo1
         });
       }
     );
@@ -352,7 +361,7 @@ export class EditMainDataPersonalXComponent implements OnInit {
   
     this.custPersonalObj.CustPrefixName = this.CustomerPersonalForm.controls["CustPrefixName"].value;
     this.custPersonalObj.CustPrefixName = this.CustomerPersonalForm.controls["CustPrefixName"].value;
-    
+    this.custPersonalObj.MobilePhnNo1 = this.CustomerPersonalForm.controls["MobilePhnNo1"].value;
     var formValue = this.CustomerPersonalForm.value;
     this.custObj.CustAddr = this.tempCustAddr;
     this.custObj.CustAddr.CustId = this.CustId;
