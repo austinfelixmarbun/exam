@@ -13,6 +13,9 @@
                   <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()">
                     <i class="fa fa-arrow-left"></i>&nbsp;<span translate>Back</span>
                   </button>
+                  <button type="button" class="btn btn-raised btn-primary" (click)="SendToR2()">
+                    <i class="far fa-check-square"></i>&nbsp;<span translate>Save And Sync</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -73,7 +76,7 @@
               <button type="button" class="step-trigger" role="tab" aria-controls="CustAsset-tab"
                 id="CustAsset-tab-trigger" (click)="EnterTab('CustAsset')">
                 <span class="bs-stepper-circle">6</span>
-                <span class="bs-stepper-label">Customer Asset</span>
+                <span class="bs-stepper-label">List of Asset in Operation</span>
               </button>
             </div>
             <div class="line"></div>
@@ -104,7 +107,7 @@
           <br><br>
           <div class="bs-stepper-content">
             <div id="customer-detail-tab" class="content" role="tabpanel" aria-labelledby="customer-detail-tab-trigger">
-              <app-customer-company-detail *ngIf="CustStepIndex == 1" (outputTab)="getValue($event)">
+              <app-customer-company-detail #CustCoyDetail *ngIf="CustStepIndex == 1" (outputTab)="getValue($event)">
               </app-customer-company-detail>
             </div>
             <div id="address-tab" class="content" role="tabpanel" aria-labelledby="address-tab-trigger">
@@ -124,12 +127,12 @@
             </app-cust-group-tab>
           </div> -->
           <div id="contact-tab" class="content" role="tabpanel" aria-labelledby="contact-tab-trigger">
-            <app-customer-company-contact-information *ngIf="CustStepIndex == 4" [custCompanyId]="this.CustCompanyId"
+            <app-customer-company-contact-information #CustCoyContact *ngIf="CustStepIndex == 4" [custCompanyId]="this.CustCompanyId"
               (outputTab)="getValue($event)">
             </app-customer-company-contact-information>
           </div>
           <div id="financial-tab" class="content" role="tabpanel" aria-labelledby="financial-tab-trigger">
-            <app-cust-fin-data-tab *ngIf="CustStepIndex == 5" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'"
+            <app-cust-fin-data-tab #CustFinData *ngIf="CustStepIndex == 5" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'"
               (outputTab)="getValue($event)">
             </app-cust-fin-data-tab>
           </div>
@@ -148,7 +151,7 @@
               (outputTab)="getValue($event)" (outputCancel)="getValue($event)"></app-dms-iframe> -->
           </div>
           <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
-            <app-cust-attr-section *ngIf="CustStepIndex == 9" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'">
+            <app-cust-attr-section #CustAttrData *ngIf="CustStepIndex == 9" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'">
             </app-cust-attr-section>
           </div>
         </div>

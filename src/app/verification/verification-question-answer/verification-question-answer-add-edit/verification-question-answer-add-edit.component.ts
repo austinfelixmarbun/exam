@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { VerfQuestionAnswerObj } from 'app/shared/model/VerfQuestionAnswerObj.Model';
+import { VerfQuestionAnswerObj } from 'app/shared/model/verf-question-answer-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
-import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
+import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { RegexService } from 'app/customer/regex.service';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { String } from 'typescript-string-operations';
 
 @Component({
@@ -178,7 +177,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
         });
     }
     else {
-      this.verfQuestionAnswerObj.VerfQuestionAnswerId = "0";
+      this.verfQuestionAnswerObj.VerfQuestionAnswerId = 0;
       this.http.post(URLConstant.AddVerfQuestionAnswer, this.verfQuestionAnswerObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);

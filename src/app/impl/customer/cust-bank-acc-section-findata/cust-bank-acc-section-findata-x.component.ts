@@ -1,13 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
-import { CustBankAccDetailSectionFindataXComponent } from '../cust-bank-acc-detail-section-findata/cust-bank-acc-detail-section-findata-x.component';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {ExceptionConstant} from 'app/shared/constant/ExceptionConstant';
+import {URLConstantX} from 'app/impl/shared/constant/URLConstantX';
+import {CustBankAccDetailSectionFindataXComponent} from '../cust-bank-acc-detail-section-findata/cust-bank-acc-detail-section-findata-x.component';
+import {CustBankAccObj} from '../../../shared/model/cust-bank-acc-obj.model';
 
 @Component({
   selector: 'app-cust-bank-acc-section-findata-x',
@@ -26,7 +26,7 @@ export class CustBankAccSectionFindataXComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    var custBankAccObj = new CustBankAccObj();
+    let custBankAccObj = new CustBankAccObj();
     custBankAccObj.CustId = this.CustId;
     this.httpClient.post(URLConstantX.GetCBAForCustFinDataByCustId, { id: this.CustId }).subscribe(
       (response: any) => {
@@ -61,7 +61,7 @@ export class CustBankAccSectionFindataXComponent implements OnInit {
     modalCustBank.componentInstance.CustId = this.CustId;
     modalCustBank.componentInstance.pageType = type;
     modalCustBank.componentInstance.CustBankAccId = custBankAccId;
-    modalCustBank.componentInstance.isAddBankStatement = type == "editStmnt" ? true : false;
+    modalCustBank.componentInstance.isAddBankStatement = type == "editStmnt";
     switch (type) {
       case "add":
         modalCustBank.componentInstance.modalTitle = "Add New Customer Bank Account";

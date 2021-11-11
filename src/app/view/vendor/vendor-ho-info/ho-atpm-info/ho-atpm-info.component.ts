@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericListObj } from 'app/shared/model/Generic/GenericListObj.Model';
-import { VendorAtpmMappingObj } from 'app/shared/model/VendorAtpmMappingObj.Model';
+import { GenericListObj } from 'app/shared/model/generic/generic-list-obj.model';
+import { VendorAtpmMappingObj } from 'app/shared/model/vendor-atpm-mapping-obj.model';
 
 @Component({
     selector: 'app-ho-atpm-info',

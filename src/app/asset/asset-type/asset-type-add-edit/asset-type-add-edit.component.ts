@@ -4,7 +4,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { AssetTypeObj } from 'app/shared/model/AssetTypeObj.Model';
+import { AssetTypeObj } from 'app/shared/model/asset-type-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';

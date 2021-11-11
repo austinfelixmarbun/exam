@@ -1,14 +1,18 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import {HttpClient} from '@angular/common/http';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {KeyValueObj} from 'app/shared/model/key-value/key-value-obj.model';
+import {CustObj} from 'app/shared/model/cust-obj.model';
+import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import {GenericKeyValueListObj} from 'app/shared/model/Generic/generic-key-value-list-obj.model';
+import {JobDataSmeXComponent} from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-small-medium-enterprise/job-data-small-medium-enterprise-x.component';
+import {JobDataProfessionalXComponent} from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-professional/job-data-professional-x.component';
+import {JobDataEmployeeXComponent} from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-employee/job-data-employee-x.component';
+import {JobDataNonProfessionalXComponent} from 'app/impl/customer/customer-personal/customer-personal-job-data/job-data-non-professional/job-data-non-professional-x.component';
 
 @Component({
   selector: 'app-customer-personal-job-data-x',
@@ -66,5 +70,32 @@ export class CustomerPersonalJobDataXComponent implements OnInit {
 
   ResetRefProf(){
     this.IsReset = true;
+  }
+
+  @ViewChild('JobEmp') private JobEmp: JobDataEmployeeXComponent;
+  @ViewChild('JobProf') private JobProf: JobDataProfessionalXComponent;
+  @ViewChild('JobSme') private JobSme: JobDataSmeXComponent;
+  @ViewChild('JobNonProf') private JobNonProf: JobDataNonProfessionalXComponent;
+  readonly modelEmp: string = CommonConstant.CUST_MODEL_EMP;
+  readonly modelProf: string = CommonConstant.CUST_MODEL_PROF;
+  readonly modelSme: string = CommonConstant.CUST_MODEL_SME;
+  readonly modelNonProf: string = CommonConstant.CUST_MODEL_NONPROF;
+  async SaveData(): Promise<boolean> {
+    let flag: boolean = true;
+    switch (this.CustModel) {
+      case this.modelEmp:
+        flag = await this.JobEmp.SaveForm(false);
+        break;
+      case this.modelProf:
+        flag = await this.JobProf.SaveForm(false);
+        break;
+      case this.modelSme:
+        flag = await this.JobSme.SaveForm(false);
+        break;
+      case this.modelNonProf:
+        flag = await this.JobNonProf.SaveForm(false);
+        break;
+    }
+    return flag;
   }
 }

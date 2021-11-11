@@ -6,11 +6,11 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { environment } from 'environments/environment';
-import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
+import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
 
 @Component({
   selector: 'app-vendor-atpm-select',

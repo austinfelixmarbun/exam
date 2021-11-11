@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { NgForm } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { NotificationObj } from 'app/shared/model/NotificationObj.Model';
+import { NotificationObj } from 'app/shared/model/notification-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';

@@ -3,22 +3,23 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CustCompanyContactPersonObj } from 'app/shared/model/CustCompanyContactPersonObj.model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
+import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { CustCompanyContactPersonObj } from 'app/shared/model/cust-company-contact-person-obj.model';
+import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { formatDate } from '@angular/common';
 import { RegexService } from 'app/customer/regex.service';
-import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
+import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 
 @Component({
@@ -221,6 +222,8 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.inputAddressObj.default = this.UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showPhn3 = false;
+    this.inputAddressObj.isRequired = false;
+    this.inputAddressObj.inputField.inputLookupObj.isRequired = false;
   }
 
   ChangeIdType(FirstInit: boolean = false) {
@@ -253,7 +256,11 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   //   this.outputTab.emit({ stepMode: 'previous' });
   // }
 
-  SaveValue() {
+  async SaveValue(IsParent: boolean = false): Promise<boolean> {
+    if (this.ContactInformationForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.ContactInformationForm);
+      return false;
+    }
     this.custCompanyContactPersonObj = new CustCompanyContactPersonObj();
     this.custAddrObj = new CustAddrObj();
     if (this.tempCustAddrObj.CustAddrId != null) {
@@ -303,20 +310,21 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       this.custCompanyContactPersonObj = this.tempCustCompanyContactPersonObj;
       this.custCompanyContactPersonObj.RowVersion = this.tempCustCompanyContactPersonObj.RowVersion;
 
-      this.http.post(URLConstant.EditCustCompanyContactPersonByCustCompanyId, this.custCompanyContactPersonObj).subscribe(
+      await this.http.post(URLConstant.EditCustCompanyContactPersonByCustCompanyId, this.custCompanyContactPersonObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.outputTab.emit({ stepMode: 'next' });
+          if(!IsParent) this.outputTab.emit({ stepMode: 'next' });
         }
       );
     } else {
-      this.http.post(URLConstant.AddCustCompanyContactPerson, this.custCompanyContactPersonObj).subscribe(
+      await this.http.post(URLConstant.AddCustCompanyContactPerson, this.custCompanyContactPersonObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.outputTab.emit({ stepMode: 'next' });
+          if(!IsParent) this.outputTab.emit({ stepMode: 'next' });
         }
       );
     }
+    return true;
   }
 
   //START URS-LOS-041

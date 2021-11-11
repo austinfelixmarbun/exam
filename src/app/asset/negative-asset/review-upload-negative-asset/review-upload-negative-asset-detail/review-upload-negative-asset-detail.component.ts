@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { UploadReviewCustomObj } from 'app/shared/model/UploadReviewCustomObj.Model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { UploadReviewCustomObj } from 'app/shared/model/upload-review-custom-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
-import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
+import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { ClaimTaskService } from 'app/shared/claimTask.service';
-import { WorkflowApiObj } from 'app/shared/model/WorkflowApiObj.Model';
+import { WorkflowApiObj } from 'app/shared/model/workflow-api-obj.model';
 
 @Component({
   selector: 'app-review-upload-negative-asset-detail',

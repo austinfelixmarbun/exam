@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { CustObj } from 'app/shared/model/CustObj.Model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
+import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({

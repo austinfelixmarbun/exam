@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { AssetDocListObj } from 'app/shared/model/AssetDocListObj.Model';
+import { AssetDocListObj } from 'app/shared/model/asset-doc-list-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { RefAssetDocObj } from 'app/shared/model/RefAssetDocObj.Model';
-import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
+import { RefAssetDocObj } from 'app/shared/model/ref-asset-doc-obj.model';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { GenericListByCodeObj } from 'app/shared/model/Generic/GenericListByCodeObj.model';
-import { ResGeneralSettingObj, ResListGeneralSettingObj } from 'app/shared/model/Response/GeneralSetting/ResGeneralSettingObj.model';
+import { GenericListByCodeObj } from 'app/shared/model/generic/generic-list-by-code-obj.model';
+import { ResGeneralSettingObj, ResListGeneralSettingObj } from 'app/shared/model/response/general-setting/res-general-setting-obj.model';
 import { CommonModule } from '@angular/common';
 
 @Component({

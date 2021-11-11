@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CrdExpsrAppAgrHistObj } from 'app/shared/model/CreditReview/CrdExpsrAppAgrHistObj.Model';
-import { CustExpsrBucketObj } from 'app/shared/model/CreditReview/CustExpsrBucketObj.Model';
-import { CustExpsrDObj } from 'app/shared/model/CreditReview/CustExpsrDObj.Model';
-import { CustExpsrHObj } from 'app/shared/model/CreditReview/CustExpsrHObj.Model';
+import { CrdExpsrAppAgrHistObj } from 'app/shared/model/credit-review/crd-expsr-app-agr-hist-obj.model';
+import { CustExpsrBucketObj } from 'app/shared/model/credit-review/cust-expsr-bucket-obj.model';
+import { CustExpsrDObj } from 'app/shared/model/credit-review/cust-expsr-d-obj.model';
+import { CustExpsrHObj } from 'app/shared/model/credit-review/cust-expsr-h-obj.model';
 
 @Component({
   selector: 'app-obligor-exposure',

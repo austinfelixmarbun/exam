@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { HttpClient } from '@angular/common/http';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {AdInsConstant} from 'app/shared/AdInstConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {HttpClient} from '@angular/common/http';
+import {NavigationConstant} from 'app/shared/NavigationConstant';
+import {UcPagingObj} from 'app/shared/model/uc-paging-obj.model';
+import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
 
 @Component({
   selector: 'app-vendor-branch-employee-paging-x',
@@ -20,7 +20,7 @@ export class VendorBranchEmployeePagingXComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   readonly AddLink: string = NavigationConstant.VENDOR_BRANCH_EMP_DETAIL;
-  constructor(private route: ActivatedRoute, private http : HttpClient) { 
+  constructor(private route: ActivatedRoute, private http : HttpClient) {
     this.route.queryParams.subscribe(params => {
       if (params["VendorId"] != null) {
         this.VendorId = params["VendorId"];
@@ -38,7 +38,7 @@ export class VendorBranchEmployeePagingXComponent implements OnInit {
     critObj.value = this.VendorId;
     this.inputPagingObj.addCritInput.push(critObj);
 
-    
+
     this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).subscribe(
       (response) => {
         this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"];

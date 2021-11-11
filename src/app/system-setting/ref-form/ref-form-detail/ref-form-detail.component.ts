@@ -4,17 +4,17 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { RefFormObj } from 'app/shared/model/RefFormObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { RefFormObj } from 'app/shared/model/ref-form-obj.model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ParameterObj } from 'app/shared/model/ParameterObj.Model';
+import { ParameterObj } from 'app/shared/model/parameter-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 
 @Component({
   selector: 'app-ref-form-detail',

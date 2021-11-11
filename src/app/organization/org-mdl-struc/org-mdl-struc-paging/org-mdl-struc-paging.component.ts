@@ -1,5 +1,5 @@
-import { OrgMdlStrucObj } from 'app/shared/model/OrgMdlStrucObj';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { OrgMdlStrucObj } from 'app/shared/model/org-mdl-struc-obj';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { ExcelService } from 'app/shared/excel-service/excel-service';
 import { environment } from 'environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -7,12 +7,12 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
-import { OrgMdlObj } from 'app/shared/model/OrgMdlObj.Model';
+import { OrgMdlObj } from 'app/shared/model/org-mdl-obj.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location, DecimalPipe } from "@angular/common";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
-import { InputSearchObj } from 'app/shared/model/InputSearchObj.Model';
+import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({

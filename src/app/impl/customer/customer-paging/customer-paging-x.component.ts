@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
-import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
+import {Component, OnInit} from '@angular/core';
+import {AdInsConstant} from 'app/shared/AdInstConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {NavigationConstant} from 'app/shared/NavigationConstant';
+import {UcPagingObj} from 'app/shared/model/uc-paging-obj.model';
+import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
 
 @Component({
   selector: 'app-customer-paging-x',
@@ -25,7 +24,7 @@ export class CustomerPagingXComponent implements OnInit {
     this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
 
     this.inputPagingObj.addCritInput = [];
-    var critObj = new CriteriaObj();
+    let critObj = new CriteriaObj();
     critObj.propName = "C.IS_CUSTOMER";
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.value = '1';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RefJobTitleObj } from 'app/shared/model/RefJobTitleObj.Model';
+import { RefJobTitleObj } from 'app/shared/model/ref-job-title-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';

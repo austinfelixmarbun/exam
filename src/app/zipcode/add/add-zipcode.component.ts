@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { RefZipcodeObj } from 'app/shared/model/RefZipcodeObj.Model';
-import { RefProvDistrictObj } from 'app/shared/model/RefProvDistrictObj.Model'
+import { RefZipcodeObj } from 'app/shared/model/ref-zipcode-obj.model';
+import { RefProvDistrictObj } from 'app/shared/model/ref-prov-district-obj.model'
 import { Validators, FormBuilder } from '@angular/forms';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';

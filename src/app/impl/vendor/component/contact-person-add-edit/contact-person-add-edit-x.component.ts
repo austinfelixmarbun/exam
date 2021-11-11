@@ -1,19 +1,20 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { formatDate } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.Model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { CookieService } from 'ngx-cookie';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {formatDate} from '@angular/common';
+import {HttpClient} from '@angular/common/http';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {CookieService} from 'ngx-cookie';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+// import { VendorContactPersonObj } from 'app/shared/model/vendor-contact-person-obj.model';
+import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import {VendorContactPersonObj} from 'app/shared/model/vendor/vendor-contact-person-obj.model';
 
 @Component({
   selector: 'app-contact-person-add-edit-x',
-  templateUrl: './contact-person-add-edit-x.component.html'  
+  templateUrl: './contact-person-add-edit-x.component.html'
 })
 export class ContactPersonAddEditXComponent implements OnInit {
   @Input() objInput: any;
@@ -48,7 +49,7 @@ export class ContactPersonAddEditXComponent implements OnInit {
   zipcode: any;
 
   constructor(private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
-  
+
   }
 
   async ngOnInit() {
@@ -145,13 +146,13 @@ export class ContactPersonAddEditXComponent implements OnInit {
     this.zipcode = ev.Zipcode;
   }
 
-  SaveForm() {    
+  SaveForm() {
     if (this.mode == "edit") {
       this.contactPersonObj = new VendorContactPersonObj();
       this.contactPersonObj.VendorContactPersonId = this.VendorContactPersonId;
       this.contactPersonObj.VendorId = this.objInput["VendorId"];
       this.contactPersonObj.Name = this.ContactPersonForm.controls.Name.value;
-      this.contactPersonObj.MrEmployeePosition = this.ContactPersonForm.controls.JobPosition.value;      
+      this.contactPersonObj.MrEmployeePosition = this.ContactPersonForm.controls.JobPosition.value;
       this.contactPersonObj.Email =  this.ContactPersonForm.controls.Email.value ? this.ContactPersonForm.controls.Email.value : "-"
       this.contactPersonObj.Phone1 = this.ContactPersonForm.controls.Phn1.value;
       this.contactPersonObj.Phone2 = this.ContactPersonForm.controls.Phn2.value;
@@ -164,7 +165,7 @@ export class ContactPersonAddEditXComponent implements OnInit {
       this.contactPersonObj.Province = this.ContactPersonForm.controls.ProvDistrictName.value;
       this.contactPersonObj.Zipcode = this.zipcode;
       this.contactPersonObj.RowVersion = this.result.RowVersion;
-      
+
       this.http.post(URLConstant.EditVendorContactPerson, this.contactPersonObj).subscribe(
         (response) => {
           this.HiddenCheck();

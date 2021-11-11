@@ -1,36 +1,30 @@
-import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
-import { UCSearchModule } from "@adins/ucsearch";
-import { UcpagingModule } from "@adins/ucpaging";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { SharingModule } from 'app/shared/sharing.module';
-import { ArchwizardModule } from 'angular-archwizard';
-import { UcSubsectionModule } from "@adins/uc-subsection";
-import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
-import { UcgridfooterModule } from "@adins/ucgridfooter";
-import { UclookupgenericModule } from "@adins/uclookupgeneric";
-import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneric";
-import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
-import { UcShowErrorsModule } from "@adins/uc-show-errors";
-import { CustomerViewPersonalOtherAttrComponent } from "./customer-view-personal-other-attr/customer-view-personal-other-attr.component";
-import { CustomerViewCoyAppListingComponent } from "./customer-view-coy-app-listing/customer-view-coy-app-listing.component";
-import { CustomerViewCoyExposureComponent } from "./customer-view-coy-exposure/customer-view-coy-exposure.component";
-import { CustomerViewCoyCustScoreComponent } from "./customer-view-coy-cust-score/customer-view-coy-cust-score.component";
-import { CustomerViewCoyCustAddColateralComponent } from "./customer-view-coy-cust-add-colateral/customer-view-coy-cust-add-colateral.component";
-import { CustomerViewChildRoutingModule } from "./customer-view-child-routing.module";
-import { CustomerViewPersonalAddressComponent } from "./customer-view-personal-address/customer-view-personal-address.component";
-import { CustomerViewPersonalCustomerGroupComponent } from "./customer-view-personal-customer-group/customer-view-personal-customer-group.component";
-import { CustomerViewCoyAddressComponent } from "./customer-view-coy-address/customer-view-coy-address.component";
-import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
-import { createTranslateLoader } from "app/app.module";
-import { HttpClient } from "@angular/common/http";
-import { CustomerViewTrustingSocialComponent } from "./customer-view-trusting-social/customer-view-trusting-social.component";
-import { CustomerViewPersonalDetailXComponent } from "app/impl/customer/customer-view/customer-view-personal-detail/customer-view-personal-detail-x.component";
-import { CustomerViewXComponent } from "app/impl/customer/customer-view/customer-view/customer-view-x.component";
-import { SharedModule } from "app/shared/shared.module";
-import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http';
+import {UCSearchModule} from '@adins/ucsearch';
+import {UcpagingModule} from '@adins/ucpaging';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SharingModule} from 'app/shared/sharing.module';
+import {ArchwizardModule} from 'angular-archwizard';
+import {UcSubsectionModule} from '@adins/uc-subsection';
+import {SharingComponentModule} from 'app/shared/sharingcomponent.module';
+import {UcgridfooterModule} from '@adins/ucgridfooter';
+import {UclookupgenericModule} from '@adins/uclookupgeneric';
+import {UcviewgenericComponent, UcviewgenericModule} from '@adins/ucviewgeneric';
+import {UcgridviewComponent, UcgridviewModule} from '@adins/ucgridview';
+import {UcShowErrorsModule} from '@adins/uc-show-errors';
+import {CustomerViewCoyAppListingComponent} from './customer-view-coy-app-listing/customer-view-coy-app-listing.component';
+import {CustomerViewCoyExposureComponent} from './customer-view-coy-exposure/customer-view-coy-exposure.component';
+import {CustomerViewCoyCustScoreComponent} from './customer-view-coy-cust-score/customer-view-coy-cust-score.component';
+import {CustomerViewCoyCustAddColateralComponent} from './customer-view-coy-cust-add-colateral/customer-view-coy-cust-add-colateral.component';
+import {CustomerViewChildRoutingModule} from './customer-view-child-routing.module';
+import {CustomerViewPersonalAddressComponent} from './customer-view-personal-address/customer-view-personal-address.component';
+import {CustomerViewPersonalCustomerGroupComponent} from './customer-view-personal-customer-group/customer-view-personal-customer-group.component';
+import {CustomerViewCoyAddressComponent} from './customer-view-coy-address/customer-view-coy-address.component';
+import {CustomerViewPersonalDetailXComponent} from 'app/impl/customer/customer-view/customer-view-personal-detail/customer-view-personal-detail-x.component';
+import {SharedModule} from 'app/shared/shared.module';
+import {AdInsSharedModule} from 'app/components/adins-module/adins-shared.module';
 
 
 @NgModule({
@@ -64,7 +58,6 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     CustomerViewCoyAddressComponent,
     CustomerViewPersonalCustomerGroupComponent,
     CustomerViewPersonalDetailXComponent,
-    CustomerViewXComponent
   ],
   entryComponents: [
     UcviewgenericComponent,

@@ -3,16 +3,16 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
-import { VendorGroupObj } from 'app/shared/model/VendorGroupObj.Model';
-import { VendorObj } from 'app/shared/model/VendorObj.Model';
+import { VendorHoObj } from 'app/shared/model/vendor-ho-obj.model';
+import { VendorGroupObj } from 'app/shared/model/vendor-group-obj.model';
+import { VendorObj } from 'app/shared/model/vendor-obj.model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 @Component({
   selector: 'app-vendor-holding-view',

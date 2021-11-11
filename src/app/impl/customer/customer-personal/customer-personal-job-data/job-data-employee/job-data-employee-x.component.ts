@@ -1,27 +1,26 @@
-import { formatDate } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { RefProfessionObj } from 'app/shared/model/RefProfessionObj.Model';
-import { RequestCustPersonalJobDataObj } from 'app/shared/model/RequestCustPersonalJobDataObj.Model';
-import { CookieService } from 'ngx-cookie';
+import {formatDate} from '@angular/common';
+import {HttpClient} from '@angular/common/http';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {URLConstantX} from 'app/impl/shared/constant/URLConstantX';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {AdInsConstant} from 'app/shared/AdInstConstant';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {CookieService} from 'ngx-cookie';
+import {CustObj} from 'app/shared/model/cust-obj.model';
+import {CustAddrObj} from 'app/shared/model/cust-addr-obj.model';
+import {InputFieldObj} from 'app/shared/model/input-field-obj.model';
+import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import {CustPersonalJobDataObj} from 'app/shared/model/cust-personal-job-data-obj.model';
+import {RequestCustPersonalJobDataObj} from 'app/shared/model/request-cust-personal-job-data-obj.model';
+import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
+import {InputAddressObj} from 'app/shared/model/input-address-obj.model';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {GenericObj} from 'app/shared/model/Generic/generic-obj.model';
+import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 
 @Component({
@@ -152,7 +151,6 @@ export class JobDataEmployeeXComponent implements OnInit {
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Job Address";
-    this.inputAddressObj.showOwnership = true;
 
     this.inputPreviousAddressObj = new InputAddressObj();
     this.inputPreviousAddressObj.showSubsection = false;
@@ -593,7 +591,11 @@ export class JobDataEmployeeXComponent implements OnInit {
     this.custPersonalJobDataObj.PrevEmploymentDt = this.JobDataEmpForm.controls["PreviEmploymentDate"].value;
   }
 
-  SaveForm() {
+  async SaveForm(IsParent: boolean = false): Promise<boolean> {
+    if (this.JobDataEmpForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.JobDataEmpForm);
+      return false;
+    }
     if (this.typePage == "edit") {
       this.reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj;
       this.setCustJobData();
@@ -627,10 +629,10 @@ export class JobDataEmployeeXComponent implements OnInit {
         CustXObj: custXObj
       }
 
-      this.http.post(URLConstantX.EditCustPersonalJobData, reqObj).subscribe(
+      await this.http.post(URLConstantX.EditCustPersonalJobData, reqObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.outputTab.emit({ stepMode: "next" });
+          if (!IsParent) this.outputTab.emit({ stepMode: "next" });
         }
       );
     }
@@ -662,13 +664,14 @@ export class JobDataEmployeeXComponent implements OnInit {
         CustXObj: custXObj
       }
 
-      this.http.post(URLConstantX.AddCustPersonalJobData, reqObj).subscribe(
+      await this.http.post(URLConstantX.AddCustPersonalJobData, reqObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          this.outputTab.emit({ stepMode: "next" });
+          if (!IsParent) this.outputTab.emit({ stepMode: "next" });
         }
       );
     }
+    return true;
   }
 
   isWellknownCoyChecked(event: any) {

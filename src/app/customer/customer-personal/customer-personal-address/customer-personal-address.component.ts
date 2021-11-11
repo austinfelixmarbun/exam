@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angu
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 
 @Component({

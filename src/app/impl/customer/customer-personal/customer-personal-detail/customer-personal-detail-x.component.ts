@@ -1,30 +1,29 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
-import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
-import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { CustGrpObj } from 'app/shared/model/CustGrpObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {FormBuilder, Validators} from '@angular/forms';
+import {CustPersonalObj} from 'app/shared/model/cust-personal-obj.model';
+import {AdInsConstant} from 'app/shared/AdInstConstant';
+import {CustObj} from 'app/shared/model/cust-obj.model';
+import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {NavigationConstant} from 'app/shared/NavigationConstant';
+import {UcDropdownListObj} from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import {KeyValueObj} from 'app/shared/model/key-value/key-value-obj.model';
+import {CustGrpObj} from 'app/shared/model/cust-grp-obj.model';
+import {GenericObj} from 'app/shared/model/Generic/generic-obj.model';
 
 @Component({
   selector: 'app-customer-personal-detail-x',
   templateUrl: './customer-personal-detail-x.component.html'
+
 })
-
 export class CustomerPersonalDetailXComponent implements OnInit {
-
   @Output() outputTab: EventEmitter<any> = new EventEmitter();
 
   IdCust: number;
@@ -87,8 +86,8 @@ export class CustomerPersonalDetailXComponent implements OnInit {
   readonly RefMasterTypeCodeNationality: string = CommonConstant.RefMasterTypeCodeNationality;
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
-  ngOnInit() {
-    this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
+  async ngOnInit() {
+    await this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeDefLocalNationality }).toPromise().then(
       (response) => {
         this.Country = response;
         let splitCodeDesc = this.Country.GsValue.split(';');
@@ -110,7 +109,7 @@ export class CustomerPersonalDetailXComponent implements OnInit {
     this.custObj = new CustObj()
     this.custObj.CustId = this.IdCust;
 
-    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
+    await this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).toPromise().then(
       (response: CustObj) => {
         this.tempCustObj = response;
         this.CustomerDetailForm.patchValue({
@@ -123,11 +122,11 @@ export class CustomerPersonalDetailXComponent implements OnInit {
       });
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj.CustId = this.IdCust;
-    this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: this.IdCust }).subscribe(
-      (response) => {
+    await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: this.IdCust }).toPromise().then(
+      async (response) => {
         this.tempCustPersonalObj = response;
-        this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, { Code: CommonConstant.RefMasterTypeCodeNationality }).subscribe(
-          (response) => {
+        await this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, { Code: CommonConstant.RefMasterTypeCodeNationality }).toPromise().then(
+          async (response) => {
             this.tempNationality = response["RefMasterObjs"];
 
             if (this.tempCustPersonalObj.MrNationalityCode != null) {
@@ -138,7 +137,7 @@ export class CustomerPersonalDetailXComponent implements OnInit {
                 this.flag = true;
                 this.lookUpObj.isRequired = false;
               } else {
-                this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: this.tempCustPersonalObj.WnaCountryCode }).subscribe(
+                await this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: this.tempCustPersonalObj.WnaCountryCode }).toPromise().then(
                   (response) => {
                     this.tempCountry = response;
                     this.lookUpObj.nameSelect = this.tempCountry.CountryName;
@@ -164,10 +163,11 @@ export class CustomerPersonalDetailXComponent implements OnInit {
         this.CustomerDetailForm.patchValue({
           CustFullName: this.tempCustPersonalObj.CustFullName,
           NickName: this.tempCustPersonalObj.NickName,
-          MrNationalityCode: this.tempCustPersonalObj.MrNationalityCode,
+          //DSF X : Sengaja dikomen, karena request2 diatas sudah dibuat async, biar ga rebutan update form
+          //MrNationalityCode: this.tempCustPersonalObj.MrNationalityCode,
           MrEducationCode: this.tempCustPersonalObj.MrEducationCode ? this.tempCustPersonalObj.MrEducationCode:"",
           MrReligionCode: this.tempCustPersonalObj.MrReligionCode ? this.tempCustPersonalObj.MrReligionCode:"",
-          MrSalutationCode: this.tempCustPersonalObj.MrNationalityCode ? this.tempCustPersonalObj.MrSalutationCode:"",
+          MrSalutationCode: this.tempCustPersonalObj.MrSalutationCode ? this.tempCustPersonalObj.MrSalutationCode:"",
           CustSuffixName: this.tempCustPersonalObj.CustSuffixName,
           CustPrefixName: this.tempCustPersonalObj.CustPrefixName,
           NoOfDependents: this.tempCustPersonalObj.NoOfDependents,
@@ -176,7 +176,7 @@ export class CustomerPersonalDetailXComponent implements OnInit {
           IsRestInPeace: this.tempCustPersonalObj.IsRestInPeace,
         });
       });
-    this.http.post(URLConstant.GetListCustGrpByMemberCustId, { Id: this.IdCust }).subscribe(
+    await this.http.post(URLConstant.GetListCustGrpByMemberCustId, { Id: this.IdCust }).toPromise().then(
       (response) => {
         if(response[CommonConstant.ReturnObj].length > 0){
           let reqById: GenericObj = new GenericObj();
@@ -229,7 +229,11 @@ export class CustomerPersonalDetailXComponent implements OnInit {
     this.CustomerDetailForm.controls.VipNotes.updateValueAndValidity();
   }
 
-  async SaveValue() {
+  async SaveValue(IsParent: boolean = false): Promise<boolean> {
+    if (this.CustomerDetailForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.CustomerDetailForm);
+      return false;
+    }
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj = this.tempCustPersonalObj;
     this.custPersonalObj.CustFullName = this.CustomerDetailForm.controls["CustFullName"].value;//this.tempCustObj.CustName;
@@ -264,13 +268,14 @@ export class CustomerPersonalDetailXComponent implements OnInit {
     this.custPersonalObj.IsVip = this.CustomerDetailForm.controls["IsVip"].value;
     this.custPersonalObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
     this.custPersonalObj.IsAffiliateWithMf = this.CustomerDetailForm.controls["IsAffiliateWithMf"].value;
-    this.http.post(URLConstant.EditCustPersonal, this.custPersonalObj).subscribe(
+    await this.http.post(URLConstant.EditCustPersonal, this.custPersonalObj).toPromise().then(
       response => {
         this.toastr.successMessage(response["Message"]);
         // this.wizard.goToNextStep();
-        this.outputTab.emit({ CustPersonalId: this.tempCustPersonalObj.CustPersonalId, stepMode: "next" });
+        if (!IsParent) this.outputTab.emit({ CustPersonalId: this.tempCustPersonalObj.CustPersonalId, stepMode: "next" });
       }
     );
+    return true;
   }
   onOptionsSelected(event: { selectedIndex: number, selectedObj: KeyValueObj, selectedValue: string }) {
     if (event.selectedValue == CommonConstant.NationalityCodeLocal) {
@@ -296,5 +301,4 @@ export class CustomerPersonalDetailXComponent implements OnInit {
       AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
     }
   }
-
 }

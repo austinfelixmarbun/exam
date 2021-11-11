@@ -1,28 +1,28 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { HttpClient } from '@angular/common/http';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
-import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
-import { DatePipe } from '@angular/common';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
-import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
-import { CookieService } from 'ngx-cookie';
-import { String } from 'typescript-string-operations';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { CustGrpObj } from 'app/shared/model/CustGrpObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {HttpClient} from '@angular/common/http';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import {CustCompanyObj} from 'app/shared/model/cust-company-obj.model';
+import {RefIndustryTypeObj} from 'app/shared/model/ref-industry-type-obj.model';
+import {DatePipe} from '@angular/common';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {URLConstantX} from 'app/impl/shared/constant/URLConstantX';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {NavigationConstant} from 'app/shared/NavigationConstant';
+import {CustObj} from 'app/shared/model/cust-obj.model';
+import {UcDropdownListObj} from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {CurrentUserContext} from 'app/shared/model/current-user-context.model';
+import {CookieService} from 'ngx-cookie';
+import {String} from 'typescript-string-operations';
+import {ExceptionConstant} from 'app/shared/constant/ExceptionConstant';
+import {GenericObj} from 'app/shared/model/Generic/generic-obj.model';
+import {CustGrpObj} from 'app/shared/model/cust-grp-obj.model';
+import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
+import {AdInsConstant} from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-customer-company-detail-x',
@@ -138,9 +138,9 @@ export class CustomerCompanyDetailXComponent implements OnInit {
         //   this.refIndustryTypeObj.RefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
         //   this.http.post(URLConstant.GetRefIndustryTypeById, { Id: this.tempCustCompanyObj.RefIndustryTypeId }).subscribe(
         //       (response) => {
-        //         this.tempRefIndustryObj = response; 
+        //         this.tempRefIndustryObj = response;
         //         this.tempRefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
-        //         this.lookUpObj.nameSelect = this.tempRefIndustryObj.IndustryTypeName; 
+        //         this.lookUpObj.nameSelect = this.tempRefIndustryObj.IndustryTypeName;
         //         this.lookUpObj.jsonSelect = response;
         //       });
         // }
@@ -218,8 +218,12 @@ export class CustomerCompanyDetailXComponent implements OnInit {
     }
   }
 
-  SaveValue() {
-    this.custCompanyObj = new CustCompanyObj();
+  async SaveValue(IsParent: boolean = false): Promise<boolean> {
+    if (this.CustomerDetailForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.CustomerDetailForm);
+      return false;
+    }
+	this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj = this.tempCustCompanyObj;
 
     this.custCompanyObj.NumOfEmp = this.CustomerDetailForm.controls["NumOfEmp"].value;
@@ -233,9 +237,9 @@ export class CustomerCompanyDetailXComponent implements OnInit {
 
     if(this.CustomerDetailForm.controls["EstablishmentDt"].value > this.MaxDtValidate){
       this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
-      return;
+      return false;
     }
-    
+
     if (this.returnSectorEconomySlikObj != null && this.tempRefIndustryTypeId === null) {
       this.custCompanyObj.RefIndustryTypeId = this.custCompanyObj.RefIndustryTypeId;
     }
@@ -259,12 +263,13 @@ export class CustomerCompanyDetailXComponent implements OnInit {
       CustCompanyObjX: CustCompanyObjX
     }
 
-    this.http.post(URLConstantX.EditCustCompany, reqObj).subscribe(
+    await this.http.post(URLConstantX.EditCustCompany, reqObj).toPromise().then(
       (response) => {
         this.toastr.successMessage(response["Message"]);
-        this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next' });
+        if(!IsParent) this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next' });
       }
     );
+    return true;
   }
 
   getLookUp(event) {

@@ -1,25 +1,25 @@
 import { ApplicationRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
+import { CustCompanyObj } from 'app/shared/model/cust-company-obj.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
+import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
+import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
+import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { GenericKeyValueListObj } from 'app/shared/model/generic/generic-key-value-list-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 //import { CustThirdPartyCheckingObj } from 'app/shared/model/CustThirdPartyCheckingObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 
 @Component({
   selector: 'app-edit-main-data-company',

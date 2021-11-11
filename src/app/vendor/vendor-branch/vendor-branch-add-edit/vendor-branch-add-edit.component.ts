@@ -1,31 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { Validators, FormBuilder } from '@angular/forms';
-import { VendorObj } from 'app/shared/model/VendorObj.Model';
+import { VendorObj } from 'app/shared/model/vendor-obj.model';
 import { formatDate } from '@angular/common';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { environment } from 'environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { VendorBranchObj } from 'app/shared/model/VendorBranchObj.Model';
-import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
+import { VendorBranchObj } from 'app/shared/model/vendor-branch-obj.model';
+import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { VendorAttrContentObj } from 'app/shared/model/VendorAttrContentObj.Model';
+import { VendorAttrContentObj } from 'app/shared/model/vendor-attr-content-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { RegexService } from 'app/customer/regex.service';
-import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
+import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 
-import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
-import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/Request/RefAttr/ReqRefAttrByAttrGroupObj.model';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/request/ref-attr/req-ref-attr-by-attr-group-obj.model';
 
 @Component({
   selector: 'app-vendor-branch-add-edit',
@@ -547,12 +547,9 @@ export class VendorBranchAddEditComponent implements OnInit {
   NpwpCheck(isGetData: boolean = false) {
     if (this.VendorForm.controls.IsNpwpExist.value == true) {
       this.isHidden = false;
-      this.inputLookupZipcodeObj.isRequired = true;
       this.VendorForm.controls.TaxIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
       this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
     } else {
-      this.inputLookupZipcodeObj.isRequired = false;
-      if (!isGetData) this.VendorForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
       this.VendorForm.controls.TaxIdNo.setValidators([Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
       this.VendorForm.controls.TaxpayerName.clearValidators();
       this.isHidden = true;
@@ -629,6 +626,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+    this.inputLookupZipcodeObj.isRequired = false;
 
     this.inputLookupParentObj.isRequired = false;
     this.inputLookupParentObj.addCritInput = new Array();

@@ -6,8 +6,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { CustAssetObj } from 'app/shared/model/CustAssetObj.Model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { CustAssetObj } from 'app/shared/model/cust-asset-obj.model';
 
 @Component({
   selector: 'app-cust-asset-detail',

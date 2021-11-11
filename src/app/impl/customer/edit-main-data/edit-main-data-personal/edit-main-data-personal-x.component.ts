@@ -1,34 +1,29 @@
-import { ApplicationRef, Component, OnInit, ViewChild } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { CustObjX } from 'app/impl/shared/model/CustObjX.Model';
-import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
-import { DatePipe } from '@angular/common';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { RefMasterConstant } from 'app/shared/RefMasterConstant';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { UclookupgenericComponent } from '@adins/uclookupgeneric';
-import { environment } from 'environments/environment';
-import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
-import { CookieService } from 'ngx-cookie';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { GenericKeyValueListObj } from 'app/shared/model/Generic/GenericKeyValueListObj.model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-// import { CustThirdPartyCheckingObj } from 'app/shared/model/CustThirdPartyCheckingObj.Model';
-import { map, mergeMap } from 'rxjs/operators';
-import { forkJoin } from 'rxjs';
-import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
+import {ApplicationRef, Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {CustObjX} from 'app/impl/shared/model/CustObjX.Model';
+import {DatePipe} from '@angular/common';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {RefMasterConstant} from 'app/shared/RefMasterConstant';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {UclookupgenericComponent} from '@adins/uclookupgeneric';
+import {CookieService} from 'ngx-cookie';
+import {NavigationConstant} from 'app/shared/NavigationConstant';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {URLConstantX} from 'app/impl/shared/constant/URLConstantX';
+import {KeyValueObj} from 'app/shared/model/key-value/key-value-obj.model';
+import {CustPersonalObj} from 'app/shared/model/cust-personal-obj.model';
+import {UcAddressObj} from 'app/shared/model/uc-address-obj.model';
+import {CustBankAccObj} from 'app/shared/model/cust-bank-acc-obj.model';
+import {InputAddressObj} from 'app/shared/model/input-address-obj.model';
+import {InputFieldObj} from 'app/shared/model/input-field-obj.model';
+import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import {GenericObj} from '../../../../shared/model/Generic/generic-obj.model';
+import {CustAddrObj} from 'app/shared/model/cust-addr-obj.model';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
 
 @Component({
   selector: 'app-edit-main-data-personal-x',
@@ -101,8 +96,8 @@ export class EditMainDataPersonalXComponent implements OnInit {
   tempFraud: any;
   tempCustAddr: any;
   isMainCust: boolean = true;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, 
-    private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal, 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder,
+    private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal,
     private ref: ApplicationRef) {
 
     this.getCustPersonalByCustIdUrl = URLConstant.GetCustPersonalbyCustId;
@@ -152,6 +147,7 @@ export class EditMainDataPersonalXComponent implements OnInit {
     this.inputAddressObj.isRequired = false;
     this.inputAddressObj.inputField.inputLookupObj.isRequired = false;
   
+
     var refMasterObjGender: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       MappingCode: null
@@ -194,7 +190,7 @@ export class EditMainDataPersonalXComponent implements OnInit {
       (response) => {
         this.tempCustObj = response;
         console.log(this.tempCustObj);
-        this.CustomerPersonalForm.patchValue({          
+        this.CustomerPersonalForm.patchValue({
           CustPersonalId: this.tempCustObj.CustPersonalId,
           CustName: this.tempCustObj.CustName,
           MrCustTypeCode: this.tempCustObj.MrCustTypeCode,
@@ -253,7 +249,7 @@ export class EditMainDataPersonalXComponent implements OnInit {
     await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: this.custPersonalObj.CustId }).toPromise().then(
       (response) => {
         this.tempCustPersonalObj = response;
-        
+
         this.CustomerPersonalForm.patchValue({
           CustPersonalId: this.tempCustPersonalObj.CustPersonalId,
           Gender: this.tempCustPersonalObj.MrGenderCode,
@@ -335,7 +331,7 @@ export class EditMainDataPersonalXComponent implements OnInit {
   SaveValue() {
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj = this.tempCustPersonalObj;
-   
+
     this.custObj.CustName = this.CustomerPersonalForm.controls["CustName"].value;
     this.custObj.MrIdTypeCode = this.CustomerPersonalForm.controls["MrIdTypeCode"].value;
     this.custObj.IdNo = this.CustomerPersonalForm.controls["IdNo"].value;
@@ -358,10 +354,11 @@ export class EditMainDataPersonalXComponent implements OnInit {
     this.custPersonalObj.BirthDt = this.CustomerPersonalForm.controls["BirthDt"].value;
     this.custPersonalObj.MotherMaidenName = this.CustomerPersonalForm.controls["MotherMaidenName"].value;
     this.custPersonalObj.MrMaritalStatCode = this.CustomerPersonalForm.controls["MrMaritalStatCode"].value;
-  
+
     this.custPersonalObj.CustPrefixName = this.CustomerPersonalForm.controls["CustPrefixName"].value;
     this.custPersonalObj.CustPrefixName = this.CustomerPersonalForm.controls["CustPrefixName"].value;
     this.custPersonalObj.MobilePhnNo1 = this.CustomerPersonalForm.controls["MobilePhnNo1"].value;
+
     var formValue = this.CustomerPersonalForm.value;
     this.custObj.CustAddr = this.tempCustAddr;
     this.custObj.CustAddr.CustId = this.CustId;
@@ -374,13 +371,13 @@ export class EditMainDataPersonalXComponent implements OnInit {
     this.custObj.CustAddr.Zipcode = formValue["UcAddressZipcode"]["value"];
     this.custObj.CustAddr.SubZipcode = formValue["UcAddressZipcode"]["value"];
     this.custObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
-    
+
     var reqEditObj = {
       CustObj: this.custObj,
       CustPersonalObj: this.custPersonalObj,
       CustAddr: this.custObj.CustAddr
     };
-    
+
     console.log(reqEditObj.CustAddr);
 
     this.http.post(URLConstantX.EditCustPersonalMainDataXV2, reqEditObj).subscribe(

@@ -4,14 +4,14 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { SurveyorObj } from 'app/shared/model/SurveyorObj.Model';
+import { SurveyorObj } from 'app/shared/model/surveyor-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({

@@ -1,4 +1,4 @@
-import { GeneralSettingObj } from 'app/shared/model/GeneralSettingObj.Model';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';

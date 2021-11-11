@@ -5,14 +5,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { VerfQuestionGrpHObj } from 'app/shared/model/VerfQuestionGrpHObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { VerfQuestionGrpDObj } from 'app/shared/model/VerfQuestionGrpDObj.Model';
+import { VerfQuestionGrpHObj } from 'app/shared/model/verf-question-grp-h-obj.model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { VerfQuestionGrpDObj } from 'app/shared/model/verf-question-grp-d-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { UcTempPagingObj } from 'app/shared/model/TempPaging/UcTempPagingObj.model';
+import { UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { UcViewGenericObj } from 'app/shared/model/UcViewGenericObj.model';
+import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -81,7 +81,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
 
     this.verfQuestionGrpDObj = new VerfQuestionGrpDObj();
     this.verfQuestionGrpDObj.VerfQuestionGrpHId = this.VerfQuestionGrpHId;
-    this.verfQuestionGrpDObj.VerfQuestionGrpDId = "0";
+    this.verfQuestionGrpDObj.VerfQuestionGrpDId = 0;
     this.verfQuestionGrpDObj.ListVerfQuestionAnswerId = this.listSelectedId;
 
     this.http.post(URLConstant.AddListVerfQuestionGrpD, this.verfQuestionGrpDObj).subscribe(

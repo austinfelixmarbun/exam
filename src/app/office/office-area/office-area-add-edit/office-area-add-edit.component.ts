@@ -6,7 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { RefOfficeAreaObj } from 'app/shared/model/RefOfficeAreaObj.model';
+import { RefOfficeAreaObj } from 'app/shared/model/ref-office-area-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -18,7 +18,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class OfficeAreaAddEditComponent implements OnInit {
   refOfficeAreaObj: RefOfficeAreaObj;
-  RefOfficeAreaId: string;
+  RefOfficeAreaId: number = 0;
   pageType: any;
   result: any;
   title: string = "Area-Add"
@@ -74,7 +74,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
         });
     }
     else {
-      this.refOfficeAreaObj.RefOfficeAreaId = "0";
+      this.refOfficeAreaObj.RefOfficeAreaId = 0;
       this.http.post(URLConstant.AddRefOfficeArea, this.refOfficeAreaObj).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);

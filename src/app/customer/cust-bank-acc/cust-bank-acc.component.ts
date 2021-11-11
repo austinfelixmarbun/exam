@@ -5,13 +5,13 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CustBankStmntObj } from 'app/shared/model/CustBankStmntObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
+import { CustBankStmntObj } from 'app/shared/model/cust-bank-stmnt-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
-import { CustBankAccObj } from 'app/shared/model/CustBankAccObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
+import { CustBankAccObj } from 'app/shared/model/cust-bank-acc-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 @Component({
   selector: 'app-cust-bank-acc',

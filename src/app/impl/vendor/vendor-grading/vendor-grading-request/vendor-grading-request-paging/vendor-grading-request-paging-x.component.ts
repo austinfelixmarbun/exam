@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { UcPagingObj } from 'app/shared/model/UcPagingObj.Model';
+import {Component, OnInit} from '@angular/core';
+import {UcPagingObj} from 'app/shared/model/uc-paging-obj.model';
 
 @Component({
   selector: 'app-vendor-grading-request-paging-x',
@@ -11,7 +11,7 @@ export class VendorGradingRequestPagingXComponent implements OnInit {
   mode: string;
   constructor() {
   }
- 
+
   ngOnInit(): void {
 
     this.inputPagingObj.pagingJson = "./assets/impl/ucpaging/dealer-grading/searchDealerGradingRequestX.json";

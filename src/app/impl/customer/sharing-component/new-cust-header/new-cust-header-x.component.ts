@@ -1,30 +1,30 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { DuplicateCustObj } from 'app/shared/model/DuplicateCust.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { CustDuplicateObj } from 'app/shared/model/NewCust/CustDuplicateObj.Model';
-import { DupCheckOutputSaveObj } from 'app/shared/model/NewCust/DupCheckOutputSaveObj.Model';
-import { NegCustDuplicateObj } from 'app/shared/model/NewCust/NegCustDuplicateObj.Model';
-import { ReqCoyObj } from 'app/shared/model/NewCust/ReqCoyObj.Model';
-import { ReqDupObj } from 'app/shared/model/NewCust/ReqDupObj.Model';
-import { ReqNegDupObj } from 'app/shared/model/NewCust/ReqNegDupObj.Model';
-import { ReqPersonalObj } from 'app/shared/model/NewCust/ReqPersonalObj.Model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {URLConstantX} from 'app/impl/shared/constant/URLConstantX';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {NavigationConstant} from 'app/shared/NavigationConstant';
+import {environment} from 'environments/environment';
+import {KeyValueObj} from 'app/shared/model/key-value/key-value-obj.model';
+import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import {ReqCoyObj} from 'app/shared/model/new-cust/req-coy-obj.model';
+import {ReqPersonalObj} from 'app/shared/model/new-cust/req-personal-obj.model';
+import {CustDuplicateObj} from 'app/shared/model/new-cust/cust-duplicate-obj.model';
+import {NegCustDuplicateObj} from 'app/shared/model/new-cust/neg-cust-duplicate-obj.model';
+import {DuplicateCustObj} from 'app/shared/model/duplicate-cust.model';
+import {ReqDupObj} from 'app/shared/model/new-cust/req-dup-obj.model';
+import {GenericObj} from 'app/shared/model/Generic/generic-obj.model';
+import {ReqNegDupObj} from 'app/shared/model/new-cust/req-neg-dup-obj.model';
+import {DupCheckOutputSaveObj} from 'app/shared/model/new-cust/dup-check-output-save-obj.model';
 
 @Component({
   selector: 'app-new-cust-header-x',
   templateUrl: './new-cust-header-x.component.html'
 })
-export class NewCustHeaderXComponent implements OnInit {  
+export class NewCustHeaderXComponent implements OnInit {
   //#region Readonly
   readonly CustDataModeFamily: string = CommonConstant.CustMainDataModeFamily;
 
@@ -65,7 +65,7 @@ export class NewCustHeaderXComponent implements OnInit {
         this.From = params["From"];
 
         //START Issue Non Jira X, Udin: perbaikan jika  halaman dibuka dari menu "CUSTOMER FAMILY" atau "CUSTOMER SHAREHOLDER"
-        if(this.From == CommonConstant.CustFromCustShareholder) 
+        if(this.From == CommonConstant.CustFromCustShareholder)
         {
           this.isShareholder = true;
           //this.CustDataMode = CommonConstant.CustMainDataModeMgmntShrholder;
@@ -352,7 +352,7 @@ export class NewCustHeaderXComponent implements OnInit {
           break;
       }
     }
-    
+
     return urlAdd;
   }
   //#endregion

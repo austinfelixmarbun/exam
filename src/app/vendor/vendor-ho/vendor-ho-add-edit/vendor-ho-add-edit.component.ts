@@ -1,33 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
-import { VendorHoObj } from 'app/shared/model/VendorHoObj.Model';
-import { VendorObj } from 'app/shared/model/VendorObj.Model';
-import { formatDate } from '@angular/common';
-import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { VendorAttrContentObj } from 'app/shared/model/VendorAttrContentObj.Model';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { VendorAtpmSelectComponent } from 'app/vendor/vendor-ATPM/vendor-atpm-select/vendor-atpm-select.component';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { VendorAtpmMappingObj } from "app/shared/model/VendorAtpmMappingObj.Model";
-import { CookieService } from 'ngx-cookie';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { GenericObj} from 'app/shared/model/Generic/GenericObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { GenericListObj } from 'app/shared/model/Generic/GenericListObj.Model';
-import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/Request/RefAttr/ReqRefAttrByAttrGroupObj.model';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import {environment} from 'environments/environment';
+import {AdInsConstant} from 'app/shared/AdInstConstant';
+import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
+import {VendorHoObj} from 'app/shared/model/vendor-ho-obj.model';
+import {VendorObj} from 'app/shared/model/vendor-obj.model';
+import {VendorAddrObj} from 'app/shared/model/vendor-addr-obj.model';
+import {formatDate} from '@angular/common';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {VendorAttrContentObj} from 'app/shared/model/vendor-attr-content-obj.model';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {VendorAtpmSelectComponent} from 'app/vendor/vendor-ATPM/vendor-atpm-select/vendor-atpm-select.component';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {ExceptionConstant} from 'app/shared/constant/ExceptionConstant';
+import {VendorAtpmMappingObj} from 'app/shared/model/vendor-atpm-mapping-obj.model';
+import {CookieService} from 'ngx-cookie';
+import {NavigationConstant} from 'app/shared/NavigationConstant';
+import {ReqRefMasterByTypeCodeAndMasterCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
+import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import {GenericObj} from 'app/shared/model/generic/generic-obj.model';
+import {KeyValueObj} from 'app/shared/model/key-value/key-value-obj.model';
+import {GenericListObj} from 'app/shared/model/generic/generic-list-obj.model';
+import {ReqRefAttrByAttrGroupObj} from 'app/shared/model/request/ref-attr/req-ref-attr-by-attr-group-obj.model';
 
 @Component({
   selector: 'app-vendor-ho-add-edit',
@@ -193,7 +193,7 @@ export class VendorHoAddEditComponent implements OnInit {
                       formGroupObject["VendorAttrValue"] = [''];
                     }
                     parentFormGroup[vendorAttr["AttrCode"]] = this.fb.group(formGroupObject);
-  
+
                     if (vendorAttr["AttrInputType"] == 'RM') {
                       tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj();
                       tempLookup[vendorAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -233,7 +233,7 @@ export class VendorHoAddEditComponent implements OnInit {
                       var formGroupObject = new Object();
                       formGroupObject["VendorAttrContentId"] = [0];
                       formGroupObject["AttrCode"] = [vendorAttr["AttrCode"]];
-  
+
                       if (vendorAttr["AttrInputType"] == 'L') {
                         var temp = vendorAttr["AttrValue"].split(";");
                         this.DictDDLVendorAttr[vendorAttr["AttrCode"]] = temp;
@@ -242,7 +242,7 @@ export class VendorHoAddEditComponent implements OnInit {
                         formGroupObject["VendorAttrValue"] = [''];
                       }
                       parentFormGroup[vendorAttr["AttrCode"]] = this.fb.group(formGroupObject);
-  
+
                       if (vendorAttr["AttrInputType"] == 'RM') {
                         tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj();
                         tempLookup[vendorAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -253,7 +253,7 @@ export class VendorHoAddEditComponent implements OnInit {
                         tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
                         tempLookup[vendorAttr["AttrCode"]].isRequired = false;
                         tempLookup[vendorAttr["AttrCode"]].jsonSelect = vendorAttr["AttrCode"];
-  
+
                         var arrAddCrit = new Array();
                         var critAssetObj = new CriteriaObj();
                         critAssetObj.DataType = 'text';
@@ -268,7 +268,7 @@ export class VendorHoAddEditComponent implements OnInit {
                       var formGroupObject = new Object();
                       formGroupObject["VendorAttrContentId"] = [0];
                       formGroupObject["AttrCode"] = [vendorAttr["AttrCode"]];
-  
+
                       if (vendorAttr["AttrInputType"] == 'T') {
                         formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
                       }
@@ -310,7 +310,7 @@ export class VendorHoAddEditComponent implements OnInit {
                       parentFormGroup[vendorAttr["AttrCode"]] = this.fb.group(formGroupObject);
                     }
                   }
-  
+
                   this.ListInputLookUpObj.push(tempLookup);
                   this.VendorForm.addControl("VendorAttrList", this.fb.group(parentFormGroup));
                   this.isFormReady = true;
@@ -364,7 +364,7 @@ export class VendorHoAddEditComponent implements OnInit {
           IsOneAffiliate: this.result.VendorObj.IsOneAffiliate,
         });
 
-        
+
 
         this.setLookup();
         this.checkType();
@@ -639,7 +639,7 @@ export class VendorHoAddEditComponent implements OnInit {
     modalAddAtpm.result.then(
       (response) => {
         this.spinner.show();
-        
+
         this.spinner.hide();
         this.toastr.successMessage(response["message"]);
       }
@@ -652,7 +652,7 @@ export class VendorHoAddEditComponent implements OnInit {
     );
 
     modalAddAtpm.componentInstance.emitData.subscribe(($e) => {
-      var obj = 
+      var obj =
       {
         VendorAtpmId: $e.VendorId,
         VendorAtpmCode: $e.VendorCode,

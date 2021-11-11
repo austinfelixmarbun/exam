@@ -1,14 +1,28 @@
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { Router } from "@angular/router";
+import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
+import { AdInsHelper } from "app/shared/AdInsHelper";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { URLConstant } from "app/shared/constant/URLConstant";
-import { CriteriaObj } from "app/shared/model/CriteriaObj.Model";
-import { InputAddressObj } from "app/shared/model/InputAddressObj.Model";
-import { InputFieldObj } from "app/shared/model/InputFieldObj.Model";
-import { InputLookupObj } from "app/shared/model/InputLookupObj.Model";
-import { UcDropdownListObj } from "app/shared/model/library/UcDropdownListObj.model";
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from "app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model";
+import { CriteriaObj } from "app/shared/model/criteria-obj.model";
+import { GeneralSettingObj } from "app/shared/model/general-setting-obj.model";
+import { InputAddressObj } from "app/shared/model/input-address-obj.model";
+import { InputFieldObj } from "app/shared/model/input-field-obj.model";
+import { InputLookupObj } from "app/shared/model/input-lookup-obj.model";
+import { KeyValueObj } from "app/shared/model/key-value/key-value-obj.model";
+import { UcDropdownListObj } from "app/shared/model/library/uc-dropdown-list-obj.model";
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from "app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model";
+import { NavigationConstant } from "app/shared/NavigationConstant";
 
+@Injectable({
+  providedIn: 'root'
+})
 export class NewCustSetData {
+
+  constructor(private http: HttpClient, private toastr: NGXToastrService, private router: Router) { }
 
   public static BindSetLegalAddr(): InputAddressObj {
     let inputFieldObj = new InputFieldObj();
@@ -105,5 +119,41 @@ export class NewCustSetData {
     }
     tempDdlObj.isReady = true;
     return tempDdlObj;
+  }
+
+  public async FilterAddr(listAddr: Array<KeyValueObj>): Promise<Array<KeyValueObj>> {
+    await this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeFilterAddr }).toPromise().then(
+      (result: GeneralSettingObj) => {
+        if (result.GsValue) {
+          let listAddrToFilter: Array<string> = result.GsValue.split(';');
+          for (let index = 0; index < listAddrToFilter.length; index++) {
+            const element = listAddrToFilter[index];
+            let idxFound = listAddr.findIndex(x => x.Key == element);
+            if (idxFound >= 0) listAddr.splice(idxFound, 1);
+          }
+        }
+      }
+    );
+    return listAddr;
+  }
+
+  public async SendCustomerDataToRabbitMq(CustNo: string, UrlBack: string = NavigationConstant.CUST_PAGING) {
+    await this.http.post(URLConstant.SendCustomerDataToRabbitMq, { CustNo: CustNo }).toPromise().then(
+      (response) => {
+        if (response["StatusCode"] == 200) {
+          this.toastr.successMessage("Sync Customer Succses");
+          AdInsHelper.RedirectUrl(this.router, [UrlBack], {});
+        }
+      }
+    )
+  }
+  
+  public static markFormGroupTouched(formGroup: FormGroup) {
+    (<any>Object).values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+      if (control.controls) {
+        this.markFormGroupTouched(control);
+      }
+    });
   }
 }

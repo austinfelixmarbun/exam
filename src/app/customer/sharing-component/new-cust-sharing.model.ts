@@ -34,6 +34,7 @@ import { PefindoReqComponent } from './new-cust-component/component/third-party-
 import { ThirdPartyFormComponent } from './new-cust-component/component/third-party-form/third-party-form.component';
 import { ThirdPartyUploadService } from './new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { NewCustSetData } from './new-cust-component/NewCustSetData.Service';
 import { NewCustHeaderXComponent } from 'app/impl/customer/sharing-component/new-cust-header/new-cust-header-x.component';
 import { FamilyListingXComponent } from 'app/impl/customer/sharing-component/family-listing/family-listing-x.component';
 import { NewCustPersonalMainDataXComponent } from 'app/impl/customer/sharing-component/new-cust-component/new-cust-personal-main-data/new-cust-personal-main-data-x.component';
@@ -133,6 +134,7 @@ export const customCurrencyMaskConfig = {
     providers: [
         NGXToastrService,
         RegexService,
+        NewCustSetData,
         ThirdPartyUploadService
     ],
     entryComponents: [TrustingSocialReqHeaderComponent, TrustingSocialViewHeaderComponent, PefindoReqComponent]

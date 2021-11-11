@@ -11,17 +11,17 @@
           </select>
         </div>
       </div>
-      <div *ngIf="this.CustModel == 'EMP'">
-        <app-job-data-employee-x [IsReset]="IsReset" (outputTab)="getValue($event)"></app-job-data-employee-x>
+      <div *ngIf="this.CustModel == modelEmp">
+        <app-job-data-employee-x #JobEmp [IsReset]="IsReset" (outputTab)="getValue($event)"></app-job-data-employee-x>
       </div>
-      <div *ngIf="this.CustModel == 'NONPROF'">
-        <app-job-data-non-professional-x [IsReset]="IsReset" (outputTab)="getValue($event)"></app-job-data-non-professional-x>
+      <div *ngIf="this.CustModel == modelNonProf">
+        <app-job-data-non-professional-x #JobNonProf [IsReset]="IsReset" (outputTab)="getValue($event)"></app-job-data-non-professional-x>
       </div>
-      <div *ngIf="this.CustModel == 'PROF'">
-        <app-job-data-professional-x [IsReset]="IsReset" (outputTab)="getValue($event)"></app-job-data-professional-x>
+      <div *ngIf="this.CustModel == modelProf">
+        <app-job-data-professional-x #JobProf [IsReset]="IsReset" (outputTab)="getValue($event)"></app-job-data-professional-x>
       </div>
-      <div *ngIf="this.CustModel == 'SME'">
-        <app-job-data-sme-x [IsReset]="IsReset" (outputTab)="getValue($event)"></app-job-data-sme-x>
+      <div *ngIf="this.CustModel == modelSme">
+        <app-job-data-sme-x #JobSme [IsReset]="IsReset" (outputTab)="getValue($event)"></app-job-data-sme-x>
       </div>
     </div>
   </form>

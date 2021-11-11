@@ -3,25 +3,25 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
-import { RefIndustryTypeObj } from 'app/shared/model/RefIndustryTypeObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { CustCompanyObj } from 'app/shared/model/cust-company-obj.model';
+import { RefIndustryTypeObj } from 'app/shared/model/ref-industry-type-obj.model';
 import { DatePipe } from '@angular/common';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
+import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
+import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { CookieService } from 'ngx-cookie';
 import { String } from 'typescript-string-operations';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { CustGrpObj } from 'app/shared/model/CustGrpObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { CriteriaObj } from 'app/shared/model/CriteriaObj.Model';
+import { CustGrpObj } from 'app/shared/model/cust-grp-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
@@ -171,7 +171,11 @@ export class CustomerCompanyDetailComponent implements OnInit {
     }
   }
 
-  SaveValue() {
+  async SaveValue(IsParent: boolean = false): Promise<boolean> {
+    if (this.CustomerDetailForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.CustomerDetailForm);
+      return false;
+    }
     this.custCompanyObj = new CustCompanyObj();
     this.custCompanyObj = this.tempCustCompanyObj;
 
@@ -186,7 +190,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
 
     if(this.CustomerDetailForm.controls["EstablishmentDt"].value > this.MaxDtValidate){
       this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
-      return;
+      return false;
     }
 
     if (this.tempRefIndustryObj != null && this.tempRefIndustryTypeId === null) {
@@ -196,12 +200,13 @@ export class CustomerCompanyDetailComponent implements OnInit {
       this.custCompanyObj.RefIndustryTypeId = this.tempRefIndustryTypeId;
     }
 
-    this.http.post(URLConstant.EditCustCompany, this.custCompanyObj).subscribe(
+    await this.http.post(URLConstant.EditCustCompany, this.custCompanyObj).toPromise().then(
       (response) => {
         this.toastr.successMessage(response["Message"]);
-        this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next' });
+        if(!IsParent) this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next' });
       }
     );
+    return true;
   }
 
   getLookUp(event) {

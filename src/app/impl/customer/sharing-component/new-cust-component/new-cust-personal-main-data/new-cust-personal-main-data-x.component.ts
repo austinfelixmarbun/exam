@@ -1,44 +1,44 @@
-import { UclookupgenericComponent } from '@adins/uclookupgeneric';
-import { DatePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { RegexService } from 'app/customer/regex.service';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CurrentUserContext } from 'app/shared/model/CurrentUserContext.model';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { CustPersonalJobDataObj } from 'app/shared/model/CustPersonalJobDataObj.Model';
-import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { InputAddressObj } from 'app/shared/model/InputAddressObj.Model';
-import { InputFieldObj } from 'app/shared/model/InputFieldObj.Model';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { KeyValueObj } from 'app/shared/model/KeyValue/KeyValueObj.Model';
-import { UcDropdownListObj } from 'app/shared/model/library/UcDropdownListObj.model';
-import { CustomPatternObj } from 'app/shared/model/LibraryObj/CustomPatternObj.model';
-import { CustAttrContentObj } from 'app/shared/model/NewCust/CustAttrContentObj.Model';
-import { CustCompanyMgmntShrholderObj } from 'app/shared/model/NewCust/CustCompanyMgmntShrholderObj.Model';
-import { CustPersonalFamilyObj } from 'app/shared/model/NewCust/CustPersonalFamilyObj.Model';
-import { ReqPersonalObj } from 'app/shared/model/NewCust/ReqPersonalObj.Model';
-import { CustFormExistingObj } from 'app/shared/model/NewCust/Shareholder/ShareholderFormExistingObj.Model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
-import { UcAddressObj } from 'app/shared/model/UcAddressObj.Model';
-import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
-import { VendorObj } from 'app/shared/model/VendorObj.Model';
-import { CookieService } from 'ngx-cookie';
-import { CustAttrFormComponent } from 'app/customer/sharing-component/new-cust-component/component/cust-attr-form/cust-attr-form.component';
-import { FamilyFormXComponent } from '../component/family-form/family-form-x.component';
-import { ShareholderFormXComponent } from '../component/shareholder-form/shareholder-form-x.component';
-import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
-import { CustDocFileFormObj } from 'app/shared/model/CustDocFile/CustDocFileFormObj.Model';
-import { ThirdPartyUploadService } from 'app/customer/sharing-component/new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
-import { ActivatedRoute } from '@angular/router';
+import {UclookupgenericComponent} from '@adins/uclookupgeneric';
+import {DatePipe} from '@angular/common';
+import {HttpClient} from '@angular/common/http';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {RegexService} from 'app/customer/regex.service';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {ExceptionConstant} from 'app/shared/constant/ExceptionConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {CookieService} from 'ngx-cookie';
+import {CustAttrFormComponent} from 'app/customer/sharing-component/new-cust-component/component/cust-attr-form/cust-attr-form.component';
+import {FamilyFormXComponent} from '../component/family-form/family-form-x.component';
+import {ShareholderFormXComponent} from '../component/shareholder-form/shareholder-form-x.component';
+import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import {ThirdPartyUploadService} from 'app/customer/sharing-component/new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
+import {ActivatedRoute} from '@angular/router';
+import {CustObj} from 'app/shared/model/cust-obj.model';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import {InputAddressObj} from 'app/shared/model/input-address-obj.model';
+import {CustDocFileFormObj} from 'app/shared/model/cust-doc-file/cust-doc-file-form-obj.model';
+import {KeyValueObj} from 'app/shared/model/key-value/key-value-obj.model';
+import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import {UcDropdownListObj} from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import {CustomPatternObj} from 'app/shared/model/library-obj/custom-pattern-obj.model';
+import {GenericObj} from 'app/shared/model/Generic/generic-obj.model';
+import {CustAddrObj} from 'app/shared/model/cust-addr-obj.model';
+import {InputFieldObj} from 'app/shared/model/input-field-obj.model';
+import {CustPersonalObj} from 'app/shared/model/cust-personal-obj.model';
+import {CustPersonalFamilyObj} from 'app/shared/model/new-cust/cust-personal-family-obj.model';
+import {CurrentUserContext} from 'app/shared/model/current-user-context.model';
+import {UcAddressObj} from 'app/shared/model/uc-address-obj.model';
+import {VendorAddrObj} from 'app/shared/model/vendor-addr-obj.model';
+import {VendorObj} from 'app/shared/model/vendor-obj.model';
+import {CustFormExistingObj} from 'app/shared/model/new-cust/shareholder/shareholder-form-existing-obj.model';
+import {CustCompanyMgmntShrholderObj} from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
+import {ReqPersonalObj} from 'app/shared/model/new-cust/req-personal-obj.model';
+import {CustPersonalJobDataObj} from 'app/shared/model/cust-personal-job-data-obj.model';
+import {CustAttrContentObj} from 'app/shared/model/new-cust/cust-attr-content-obj.model';
+
 
 @Component({
   selector: 'app-new-cust-personal-main-data-x',
@@ -112,12 +112,12 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     this.checkIsAddressKnown = false;
+    this.ClearCustForm();
     this.InitData();
     this.InitCustMainDataMode();
     this.BindLookupSupplier();
     this.BindLookupExistingCust();
-    this.GetCustRelationship();
-    this.ClearCustForm();
+    await this.GetCustRelationship();
     this.getInitPattern();
     this.DictUcDDLObj[this.RefMasterTypeCodeIdType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
     this.onOptionsSelected();
@@ -125,7 +125,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     await this.GetExistingData();
-    this.GetCustAddrToCopy();
+    await this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
     this.isAddressIsNull();
     if (this.CustDataMode != this.CustDataModeFamily) {
@@ -236,7 +236,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     this.DictUcDDLObj[this.RefMasterTypeCodeCustPersonalRelationship].isSelectOutput = true;
     let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     tempReq.RefMasterTypeCode = this.RefMasterTypeCodeCustPersonalRelationship;
-    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, tempReq).subscribe(
+    await this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, tempReq).toPromise().then(
       async (response) => {
         this.MrCustRelationshipCodeObj = response[CommonConstant.ReturnObj];
         if (!this.isMarried) await this.removeSpouse();
@@ -331,9 +331,10 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       return;
     }
     await this.GetCustData();
-    this.GetCustAddr();
+
+    await this.GetCustAddr();
     await this.GetCustPersonalData();
-    this.GetMrRelationship();
+    await this.GetMrRelationship();
 
     if (this.CustDataMode != CommonConstant.CustMainDataModeCust) {
       this.IsLockEdit();
@@ -430,7 +431,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = this.ParentCustId;
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
-    await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+    await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).toPromise().then(
       (response: CustAddrObj) => {
         this.tempCustAddrToCopy = response;
       }
@@ -462,9 +463,9 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   }
 
   tempCustPersonalFamilyObj: CustPersonalFamilyObj = new CustPersonalFamilyObj();
-  GetMrRelationship(custPersonalFamilyId: number = this.CustPersonalFamilyId) {
+  async GetMrRelationship(custPersonalFamilyId: number = this.CustPersonalFamilyId) {
     if (this.CustDataMode != this.CustDataModeFamily) return;
-    this.http.post(URLConstant.GetCustPersonalFamilyByCustPersonalFamilyId, { Id: custPersonalFamilyId }).subscribe(
+    await this.http.post(URLConstant.GetCustPersonalFamilyByCustPersonalFamilyId, { Id: custPersonalFamilyId }).toPromise().then(
       (response: CustPersonalFamilyObj) => {
         this.tempCustPersonalFamilyObj = response;
         this.CustomerForm.patchValue({

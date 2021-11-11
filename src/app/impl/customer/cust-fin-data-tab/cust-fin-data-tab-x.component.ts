@@ -1,20 +1,21 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild  } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { FormBuilder, Validators } from '@angular/forms';
-import { CustPersonalFinDataObj } from 'app/shared/model/CustPersonalFinDataObj.Model';
-import { CustCompanyFinDataObj } from 'app/shared/model/CustCompanyFinDataObj.Model';
-import { CustPersonalObj } from 'app/shared/model/CustPersonalObj.Model';
-import { map, mergeMap } from 'rxjs/operators';
-import { forkJoin } from 'rxjs';
-import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
-import { Router, ActivatedRoute } from '@angular/router';
-import { DatePipe, formatDate} from '@angular/common';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {FormBuilder, Validators} from '@angular/forms';
+import {CustPersonalFinDataObj} from 'app/shared/model/cust-personal-fin-data-obj.model';
+import {CustCompanyFinDataObj} from 'app/shared/model/cust-company-fin-data-obj.model';
+import {CustPersonalObj} from 'app/shared/model/cust-personal-obj.model';
+import {map, mergeMap} from 'rxjs/operators';
+import {forkJoin} from 'rxjs';
+import {CustCompanyObj} from 'app/shared/model/cust-company-obj.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {DatePipe, formatDate} from '@angular/common';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {ExceptionConstant} from 'app/shared/constant/ExceptionConstant';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 
 @Component({
   selector: 'app-cust-fin-data-tab-x',
@@ -422,7 +423,7 @@ export class CustFinDataTabXComponent implements OnInit {
         totalAmt = monthlyIncomeAmt + totalIncomeAmt + nettIncomeAmt + nettProfitMonthlyAmt + otherIncomeAmt;
       }
       var netIncomeAmt = totalAmt - (monthlyExpenseAmt + monthlyInstallmentAmt + otherMonthlyInstAmt);
-      
+
       this.CustPersonalFinDataForm.patchValue({
         TotalIncomeAmt: totalAmt,
         NettIncomeAmt: netIncomeAmt
@@ -431,7 +432,7 @@ export class CustFinDataTabXComponent implements OnInit {
       this.spouseMonthlyIncomeAmt = this.CustPersonalFinDataForm.controls["SpouseMonthlyIncomeAmt"].value;
     }
   }
-    
+
   calculateFinData() {
     var formData = this.CustPersonalFinDataForm.value;
     var monthlyIncomeAmt = formData.MonthlyIncomeAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.MonthlyIncomeAmt.toString()));
@@ -465,7 +466,7 @@ export class CustFinDataTabXComponent implements OnInit {
   currencyToNumber(value: string) {
     return value.replace(/,/g, "");
   }
-  
+
   async saveCustPersonalFinData() {
     if (!this.CustPersonalFinDataForm.valid) return;
 
@@ -553,12 +554,16 @@ export class CustFinDataTabXComponent implements OnInit {
     await this.getListCustCoyFinData();
   }
 
-  saveCustAttrContentAndNext() {
-    if (!this.CustAttrListForm.get('AttrList')) return;
+  async saveCustAttrContentAndNext(IsParent: boolean = false): Promise<boolean> {
+    if (this.CustAttrListForm.invalid) {
+      NewCustSetData.markFormGroupTouched(this.CustAttrListForm);
+      return false;
+    }
+    if (!this.CustAttrListForm.get('AttrList')) return false;
 
     if (!this.ListCustPersonalFinData.length && !this.ListCustCoyFinData.length) {
       this.toastr.warningMessage(ExceptionConstant.PLEASE_INPUT_FIN_DATA);
-      return;
+      return false;
     }
 
     var custAttrRequest = new Array<Object>();
@@ -583,10 +588,10 @@ export class CustFinDataTabXComponent implements OnInit {
       CustAttrContentObjs: custAttrRequest,
     }
 
-    this.httpClient.post(URLConstant.AddCustFinDataAttrContent, CustFinDataCustomObj).subscribe(
+    await this.httpClient.post(URLConstant.AddCustFinDataAttrContent, CustFinDataCustomObj).toPromise().then(
       (response) => {
         this.toastr.successMessage(response["Message"]);
-        this.outputTab.emit({ stepMode: "next" });
+        if (!IsParent) this.outputTab.emit({ stepMode: "next" });
       }
     );
   }

@@ -1,22 +1,22 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AddCustObj } from 'app/shared/model/AddCustObj.Model';
-import { CustObj } from 'app/shared/model/CustObj.Model';
-import { CustCompanyObj } from 'app/shared/model/CustCompanyObj.Model';
-import { DuplicateCustObj } from 'app/shared/model/DuplicateCust.Model';
+import { AddCustObj } from 'app/shared/model/add-cust-obj.model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
+import { CustCompanyObj } from 'app/shared/model/cust-company-obj.model';
+import { DuplicateCustObj } from 'app/shared/model/duplicate-cust.model';
 import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { map, mergeMap } from 'rxjs/operators';
-import { CustAddrObj } from 'app/shared/model/CustAddrObj.Model';
-import { CustCompanyMgmntShrholderObj } from 'app/shared/model/CustCompanyMgmntShrholderObj.Model';
+import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
+import { CustCompanyMgmntShrholderObj } from 'app/shared/model/cust-company-mgmnt-shrholder-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { GenericObj } from 'app/shared/model/Generic/GenericObj.Model';
-import { ReqGetNegativeCustByNegativeCustNameAndCustTypeObj } from 'app/shared/model/Request/NegativeCust/ReqGetNegativeCustObj.model';
-import { ResNegativeCustObj } from 'app/shared/model/Response/NegativeCust/ResNegativeCustObj.model';
-import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMasterCodeObj.Model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { ReqGetNegativeCustByNegativeCustNameAndCustTypeObj } from 'app/shared/model/request/negative-cust/req-get-negative-cust-obj.model';
+import { ResNegativeCustObj } from 'app/shared/model/response/negative-cust/res-negative-cust-obj.model';
+import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
 
 @Component({
   selector: 'app-customer-company-duplicate-check',

@@ -1,16 +1,16 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { GenericListObj } from 'app/shared/model/Generic/GenericListObj.Model';
-import { InputGridObj } from 'app/shared/model/InputGridObj.Model';
-import { ShareholderListingObj } from 'app/shared/model/NewCust/Shareholder/ShareholderListingObj.Model';
+import {HttpClient} from '@angular/common/http';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {ExceptionConstant} from 'app/shared/constant/ExceptionConstant';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {GenericListObj} from 'app/shared/model/Generic/generic-list-obj.model';
+import {InputGridObj} from 'app/shared/model/input-grid-obj.model';
+import {ShareholderListingObj} from 'app/shared/model/new-cust/shareholder/shareholder-listing-obj.model';
 
 @Component({
   selector: 'app-shareholder-listing-x',
-  templateUrl: './shareholder-listing-x.component.html'  
+  templateUrl: './shareholder-listing-x.component.html'
 })
 export class ShareholderListingXComponent implements OnInit {
 
@@ -28,7 +28,7 @@ export class ShareholderListingXComponent implements OnInit {
 
   selectedCustId: number = 0;
   selectedCustCompanyMgmntShrholderId: number = 0;
-  ngOnInit() {    
+  ngOnInit() {
     this.BindGridViewObj();
     this.GetListPaging();
   }

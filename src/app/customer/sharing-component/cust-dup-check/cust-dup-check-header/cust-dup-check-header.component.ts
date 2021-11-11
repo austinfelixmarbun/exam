@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { CustDuplicateObj } from 'app/shared/model/NewCust/CustDuplicateObj.Model';
-import { DupCheckOutputSaveObj } from 'app/shared/model/NewCust/DupCheckOutputSaveObj.Model';
-import { NegCustDuplicateObj } from 'app/shared/model/NewCust/NegCustDuplicateObj.Model';
-import { ReqCoyObj } from 'app/shared/model/NewCust/ReqCoyObj.Model';
-import { ReqPersonalObj } from 'app/shared/model/NewCust/ReqPersonalObj.Model';
+import { CustDuplicateObj } from 'app/shared/model/new-cust/cust-duplicate-obj.model';
+import { DupCheckOutputSaveObj } from 'app/shared/model/new-cust/dup-check-output-save-obj.model';
+import { NegCustDuplicateObj } from 'app/shared/model/new-cust/neg-cust-duplicate-obj.model';
+import { ReqCoyObj } from 'app/shared/model/new-cust/req-coy-obj.model';
+import { ReqPersonalObj } from 'app/shared/model/new-cust/req-personal-obj.model';
 
 @Component({
   selector: 'app-cust-dup-check-header',

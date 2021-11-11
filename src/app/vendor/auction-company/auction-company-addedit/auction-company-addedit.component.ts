@@ -4,16 +4,16 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { InputLookupObj } from 'app/shared/model/InputLookupObj.Model';
-import { VendorObj } from 'app/shared/model/VendorObj.Model';
-import { VendorAddrObj } from 'app/shared/model/VendorAddrObj.Model';
-import { AuctionCompanyObj } from 'app/shared/model/vendor/AuctionCompany.Model';
-import { VendorContactPersonObj } from 'app/shared/model/VendorContactPersonObj.Model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { VendorObj } from 'app/shared/model/vendor-obj.model';
+import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
+import { AuctionCompanyObj } from 'app/shared/model/vendor/auction-company.model';
+import { VendorContactPersonObj } from 'app/shared/model/vendor-contact-person-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { VendorService } from 'app/vendor/vendor.service';
 import { formatDate } from '@angular/common';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/RefMaster/ReqRefMasterByTypeCodeAndMappingCodeObj.Model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 
 @Component({
   selector: 'app-auction-company-addedit',

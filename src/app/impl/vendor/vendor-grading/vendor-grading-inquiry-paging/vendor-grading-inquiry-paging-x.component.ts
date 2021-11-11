@@ -1,8 +1,8 @@
-import { UcPagingObj, WhereValueObj } from "app/shared/model/UcPagingObj.Model";
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import {HttpClient} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {UcPagingObj} from 'app/shared/model/uc-paging-obj.model';
 
 @Component({
   selector: 'app-vendor-grading-inquiry-paging-x',
