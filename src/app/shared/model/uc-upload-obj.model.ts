@@ -35,10 +35,10 @@ export class UcUploadObj {
         this.formatsAllowed = "";
         this.UploadTypeCode = "";
         this.ErrorDownloadUrl = "";
-        this.TemplateUrl = "";
+        this.TemplateUrl = URLConstant.DownloadTemplate;
         this.TemplateName = "";
         this.FileErrorName = "";
-        this.environmentUrl = environment.FoundationR3Url + '/v1';
+        this.environmentUrl = environment.isCore ? environment.FoundationR3Url + '/v2' : environment.FoundationR3Url + '/v1';
         this.apiQryPaging = URLConstant.GetPagingObjectBySQL;
         this.pagingJson = "";
         this.SheetName = "";

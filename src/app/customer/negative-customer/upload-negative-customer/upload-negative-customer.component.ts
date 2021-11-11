@@ -1,69 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UcUploadObj } from 'app/shared/model/uc-upload-obj.model';
 
 @Component({
   selector: 'app-upload-negative-customer',
   templateUrl: './upload-negative-customer.component.html',
 })
 export class UploadNegativeCustomerComponent implements OnInit {
-  uploadObj: Object;
+  uploadObj: UcUploadObj = new UcUploadObj;
   constructor() { }
 
   ngOnInit() {
-    if(!environment.isCore){
-      this.uploadObj = {
-        title: 'Upload Negative Customer',
-        subsectionId: 'UcUploadFile',
-        formatsAllowed: '.xls, .xlsx',
-        UploadTypeCode: 'UPL_NEG_CUST',
-        ErrorDownloadUrl: URLConstant.GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType,
-        TemplateUrl: URLConstant.DownloadTemplate,
-        TemplateName: 'Upload_Negative_Customer_Template',
-        FileErrorName: "Upload_Negative_Customer_ErrorDownload",
-        environmentUrl: environment.FoundationR3Url + "/v1",
-        apiQryPaging: URLConstant.GetPagingObjectBySQL,
-        pagingJson: "./assets/ucpaging/searchNegativeCustomerMonitoring.json",
-        ddlEnvironments: [
-          {
-            name: "UMH.UPLOAD_STATUS",
-            environment: environment.FoundationR3Url + "/v1"
-          },
-          {
-            name: "UMH.OFFICE_CODE",
-            environment: environment.FoundationR3Url + "/v1"
-          }
-        ],
-        url: URLConstant.UploadFile
-      }
+    this.uploadObj.title = "Upload Negative Customer";
+    this.uploadObj.subsectionId = "UcUploadFile";
+    this.uploadObj.UploadTypeCode = "UPL_NEG_CUST";
+    this.uploadObj.ErrorDownloadUrl = URLConstant.GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType;
+    this.uploadObj.TemplateName = "Upload_Negative_Customer_Template";
+    this.uploadObj.FileErrorName = "Upload_Negative_Customer_ErrorDownload";
+    this.uploadObj.pagingJson = "./assets/ucpaging/searchNegativeCustomerMonitoring.json";
+    if (!environment.isCore) {
+      this.uploadObj.formatsAllowed = ".xls, .xlsx";
+      this.uploadObj.url = URLConstant.UploadFile;
     }
-    else{
-      this.uploadObj = {
-        title: 'Upload Negative Customer',
-        subsectionId: 'UcUploadFile',
-        formatsAllowed: '.xls, .xlsx, .txt, .TXT',
-        UploadTypeCode: 'UPL_NEG_CUST',
-        ErrorDownloadUrl: URLConstant.GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType,
-        TemplateUrl: URLConstant.DownloadTemplate,
-        TemplateName: 'Upload_Negative_Customer_Template',
-        FileErrorName: "Upload_Negative_Customer_ErrorDownload",
-        environmentUrl: environment.FoundationR3Url + "/v1",
-        apiQryPaging: URLConstant.GetPagingObjectBySQL,
-        pagingJson: "./assets/ucpaging/searchNegativeCustomerMonitoring.json",
-        ddlEnvironments: [
-          {
-            name: "UMH.UPLOAD_STATUS",
-            environment: environment.FoundationR3Url + "/v1"
-          },
-          {
-            name: "UMH.OFFICE_CODE",
-            environment: environment.FoundationR3Url + "/v1"
-          }
-        ],
-        url: URLConstant.UploadFileV2
-      }
+    else {
+      this.uploadObj.formatsAllowed = ".xls, .xlsx, .txt, .TXT";
+      this.uploadObj.url = URLConstant.UploadFileV2;
     }
-    
   }
 }
