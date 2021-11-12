@@ -13,7 +13,6 @@ export class UploadNegativeCustomerComponent implements OnInit {
 
   ngOnInit() {
     this.uploadObj.title = "Upload Negative Customer";
-    this.uploadObj.subsectionId = "UcUploadFile";
     this.uploadObj.UploadTypeCode = "UPL_NEG_CUST";
     this.uploadObj.ErrorDownloadUrl = URLConstant.GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType;
     this.uploadObj.TemplateName = "Upload_Negative_Customer_Template";
@@ -22,10 +21,6 @@ export class UploadNegativeCustomerComponent implements OnInit {
     if (!environment.isCore) {
       this.uploadObj.formatsAllowed = ".xls, .xlsx";
       this.uploadObj.url = URLConstant.UploadFile;
-    }
-    else {
-      this.uploadObj.formatsAllowed = ".xls, .xlsx, .txt, .TXT";
-      this.uploadObj.url = URLConstant.UploadFileV2;
     }
   }
 }

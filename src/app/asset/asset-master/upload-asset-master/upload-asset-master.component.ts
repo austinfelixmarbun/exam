@@ -13,7 +13,6 @@ export class UploadAssetMasterComponent implements OnInit {
 
   ngOnInit() {
     this.uploadObj.title = "Upload Asset Master";
-    this.uploadObj.subsectionId = "UcUploadFile";
     this.uploadObj.UploadTypeCode = "UPL_ASM";
     this.uploadObj.ErrorDownloadUrl = URLConstant.GetUploadAssetMasterByUploadMonitoringNoAndTrxType;
     this.uploadObj.TemplateName = "Upload_Asset_Master_Template";
@@ -22,10 +21,6 @@ export class UploadAssetMasterComponent implements OnInit {
     if (!environment.isCore) {
       this.uploadObj.formatsAllowed = ".xls, .xlsx";
       this.uploadObj.url = URLConstant.UploadFile;
-    }
-    else {
-      this.uploadObj.formatsAllowed = ".xls, .xlsx, .txt, .TXT";
-      this.uploadObj.url = URLConstant.UploadFileV2;
     }
   }
 }

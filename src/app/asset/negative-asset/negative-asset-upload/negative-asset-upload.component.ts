@@ -13,7 +13,6 @@ export class NegativeAssetUploadComponent implements OnInit {
 
   ngOnInit() {
     this.uploadObj.title = "Upload Negative Asset";
-    this.uploadObj.subsectionId = "UcUploadFile";
     this.uploadObj.UploadTypeCode = "UPL_NAS";
     this.uploadObj.ErrorDownloadUrl = URLConstant.GetUploadAssetNegativeByUploadMonitoringNoAndTrxType;
     this.uploadObj.TemplateName = "Upload_Negative_Asset_Template";
@@ -22,10 +21,6 @@ export class NegativeAssetUploadComponent implements OnInit {
     if (!environment.isCore) {
       this.uploadObj.formatsAllowed = ".xls, .xlsx";
       this.uploadObj.url = URLConstant.UploadFile;
-    }
-    else {
-      this.uploadObj.formatsAllowed = ".xls, .xlsx, .txt, .TXT";
-      this.uploadObj.url = URLConstant.UploadFileV2;
     }
   }
 }
