@@ -455,7 +455,8 @@
             <lib-ucSubsection [id]="'TaxInfo'" [title]="'Tax Info'" [panel]="'TaxInformation'">
             </lib-ucSubsection>
             <div id="TaxInformation">
-              <div class="form-group row">
+              <div class="form-group row"
+              [hidden]="MrVendorCategoryCode == MrVendorCategoryCode_ASSET_INSCO_BRANCH || MrVendorCategoryCode == MrVendorCategoryCode_LIFE_INSCO_BRANCH">
                 <label class="col-md-3  adins-required-label" translate>Tax Calculation Method</label>
                 <div class="col-md-9">
                   <select class="form-control adInsInput" style="width: auto" formControlName="MrTaxCalcMethodCode"
@@ -467,7 +468,8 @@
                   </lib-uc-show-errors>
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row"
+              [hidden]="MrVendorCategoryCode == MrVendorCategoryCode_ASSET_INSCO_BRANCH || MrVendorCategoryCode == MrVendorCategoryCode_LIFE_INSCO_BRANCH">
                 <label class="col-md-3  adins-required-label">VAT</label>
                 <div class="col-md-9">
                   <select class="form-control" formControlName="IsVat">
@@ -477,14 +479,14 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3">NPWP Exist</label>
+                <label class="col-md-3">Tax Id No Exist</label>
                 <div class="col-md-9">
                   <input type="checkbox" formControlName="IsNpwpExist" (change)="NpwpCheck()">
                 </div>
               </div>
               <div [hidden]="isHidden">
                 <div class="form-group row">
-                  <label class="col-md-3  adins-required-label" translate>Tax Payer Number</label>
+                  <label class="col-md-3  adins-required-label" translate>Tax Id No</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput width-50-per" formControlName="TaxIdNo"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorForm.controls.TaxIdNo.invalid}">
@@ -504,7 +506,7 @@
                 <div class="form-group row">
                   <label class="col-md-3  adInsLabel" translate>Tax Address</label>
                   <div class="col-md-9">
-                    <textarea class="form-control adInsInput width-50-per" formControlName="Addr"> </textarea>
+                    <textarea autoUpperCase class="form-control adInsInput width-50-per" formControlName="Addr"> </textarea>
                     <lib-uc-show-errors [control]="VendorForm.controls.Addr" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>

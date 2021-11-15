@@ -126,6 +126,8 @@ export class VendorBranchAddEditXComponent implements OnInit {
     VendorRatingAlias: ['']
   })
 
+  MrVendorCategoryCode_ASSET_INSCO_BRANCH: string = CommonConstant.ASSET_INSCO_BRANCH;
+  MrVendorCategoryCode_LIFE_INSCO_BRANCH: string = CommonConstant.LIFE_INSCO_BRANCH;
   HoTitle: string = "";
   SetTitleHoInfo() {
     switch (this.MrVendorCategoryCode) {
@@ -146,12 +148,31 @@ export class VendorBranchAddEditXComponent implements OnInit {
         break;
       case CommonConstant.ASSET_INSCO_HO:
         this.HoTitle = "Insurance HO ";
+        this.VendorForm.get("MrTaxCalcMethodCode").clearValidators();
+        this.VendorForm.get("MrTaxCalcMethodCode").updateValueAndValidity();
+        this.VendorForm.get("IsVat").clearValidators();
+        this.VendorForm.get("IsVat").updateValueAndValidity();
         break;
       case CommonConstant.ASSET_INSCO_BRANCH:
         this.HoTitle = "Insurance Branch ";
+        this.VendorForm.get("MrTaxCalcMethodCode").clearValidators();
+        this.VendorForm.get("MrTaxCalcMethodCode").updateValueAndValidity();
+        this.VendorForm.get("IsVat").clearValidators();
+        this.VendorForm.get("IsVat").updateValueAndValidity();
+        break;
+      case CommonConstant.LIFE_INSCO_HO:
+        this.HoTitle = "Life Insurance HO ";
+        this.VendorForm.get("MrTaxCalcMethodCode").clearValidators();
+        this.VendorForm.get("MrTaxCalcMethodCode").updateValueAndValidity();
+        this.VendorForm.get("IsVat").clearValidators();
+        this.VendorForm.get("IsVat").updateValueAndValidity();
         break;
       case CommonConstant.LIFE_INSCO_BRANCH:
         this.HoTitle = "Life Insurance Branch ";
+        this.VendorForm.get("MrTaxCalcMethodCode").clearValidators();
+        this.VendorForm.get("MrTaxCalcMethodCode").updateValueAndValidity();
+        this.VendorForm.get("IsVat").clearValidators();
+        this.VendorForm.get("IsVat").updateValueAndValidity();
         break;
     }
   }

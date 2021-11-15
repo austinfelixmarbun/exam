@@ -102,8 +102,8 @@ export class ShareholderListingXComponent implements OnInit {
   }
 
   next() {
-    if (this.tempShareholderListingObj.length == 0) {
-      this.toastr.warningMessage(ExceptionConstant.ADD_MIN_1_DATA);
+    if (this.tempTotalSharePrct != 100) {
+      this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_MUST_100);
       return;
     }
     if (!this.tempIsOwner) {
@@ -112,10 +112,6 @@ export class ShareholderListingXComponent implements OnInit {
     }
     if (!this.tempIsSigner) {
       this.toastr.warningMessage(ExceptionConstant.Add_Min_1_Active_Signer);
-      return;
-    }
-    if (this.tempTotalSharePrct != 100) {
-      this.toastr.warningMessage(ExceptionConstant.TOTAL_SHARE_MUST_100);
       return;
     }
 

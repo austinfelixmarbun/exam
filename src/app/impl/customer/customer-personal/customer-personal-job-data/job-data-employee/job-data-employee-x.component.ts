@@ -181,7 +181,6 @@ export class JobDataEmployeeXComponent implements OnInit {
     this.inputPreviousAddressObj.inputField = this.inputPreJobAddressObj;
 
     this.professionLookUpObj = new InputLookupObj();
-    this.professionLookUpObj.isRequired = false;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
@@ -199,7 +198,6 @@ export class JobDataEmployeeXComponent implements OnInit {
     this.economicSectorSlikLookUpObj.urlJson = "./assets/lookup/lookupRefSectorEconomySlikX.json";
     this.economicSectorSlikLookUpObj.pagingJson = "./assets/lookup/lookupRefSectorEconomySlikX.json";
     this.economicSectorSlikLookUpObj.genericJson = "./assets/lookup/lookupRefSectorEconomySlikX.json";
-    this.economicSectorSlikLookUpObj.isRequired = false;
 
     this.companyLookupObj = new InputLookupObj();
     this.companyLookupObj.urlJson = "./assets/uclookup/Customer/lookupCompany.json";

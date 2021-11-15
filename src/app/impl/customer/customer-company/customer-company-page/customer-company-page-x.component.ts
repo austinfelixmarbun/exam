@@ -78,8 +78,7 @@ export class CustomerCompanyPageXComponent implements OnInit {
       AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
     }
     else {
-      var custObj = { CustId: this.IdCust };
-      this.http.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
+      await this.http.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust }).toPromise().then(
         (response: any) => {
           this.CustCompanyId = response['CustCompanyId'];
         }
@@ -94,25 +93,27 @@ export class CustomerCompanyPageXComponent implements OnInit {
       await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms}).toPromise().then(
         (response) => {
           this.SysConfigResultObj = response;
+          if (this.SysConfigResultObj.ConfigValue == '1') {
+            let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+            this.dmsObj = new DMSObj();
+            this.dmsObj.User = currentUserContext.UserName;
+            this.dmsObj.Role = currentUserContext.RoleCode;
+            this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
+            this.dmsObj.MetadataParent = null;
+            this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, this.CustNo));
+            this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
+          }
         });
-      if (this.SysConfigResultObj.ConfigValue == '1') {
-        let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-        this.dmsObj = new DMSObj();
-        this.dmsObj.User = currentUserContext.UserName;
-        this.dmsObj.Role = currentUserContext.RoleCode;
-        this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
-        this.dmsObj.MetadataParent = null;
-        this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, this.CustNo));
-        this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
-      }
 
-      this.stepper = new Stepper(document.querySelector('#stepper1'), {
-        linear: false,
-        animation: true
-      });
-      this.EnterTab("Detail");
-      this.CustStepIndex = 1;
-      this.stepper.to(this.CustStepIndex);
+      setTimeout(() => {
+        this.stepper = new Stepper(document.querySelector('#stepper1'), {
+          linear: false,
+          animation: true
+        });
+        this.EnterTab("Detail");
+        this.CustStepIndex = 1;
+        this.stepper.to(this.CustStepIndex);
+      }, 500)
     }
   }
 
