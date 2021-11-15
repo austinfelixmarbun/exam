@@ -57,7 +57,7 @@
                 <div class="col-md-5">
                   <input type="text" class="form-control adInsInput" formControlName="AssetName"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetName.invalid }">
-                  <lib-uc-show-errors [control]="AssetMasterChildForm.controls.AssetName" [submit]="enjiForm.submitted" [attr.disabled]="pageType == 'edit' ? true : null">
+                  <lib-uc-show-errors [control]="AssetMasterChildForm.controls.AssetName" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
               </div>
@@ -65,7 +65,7 @@
                 <div class="form-group row">
                   <label class="col-md-3  adInsLabel adins-required-label" translate>Asset Category </label>
                   <div class="col-md-9">
-                    <select class="form-control adInsInput" formControlName="AssetCategoryId" [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetCategoryId.invalid }" [attr.disabled]="pageType == 'edit' ? true : null">
+                    <select class="form-control adInsInput" formControlName="AssetCategoryId" [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetCategoryId.invalid }">
                       <option *ngFor="let ram of resultAssetCategory" [value]="ram.Key">
                         {{ram.Value}}
                       </option>
@@ -121,7 +121,7 @@
             </div>
             <lib-ucSubsection [id]="'AssetMasterAttrSectionId'" [title]="'Asset Master Attribute'"
               [panel]="'AssetMasterAttrSection'" *ngIf="isReadyAssetMasterAttr"></lib-ucSubsection>
-            <div id="AssetMasterAttrSection" class="col-md-12" style="padding: 0;" *ngIf="isReadyAssetMasterAttr"
+            <div id="AssetMasterAttrSection" *ngIf="isReadyAssetMasterAttr"
               formGroupName="AssetMasterAttrContent">
               <div *ngIf="this.listAssetMasterAttrContent?.length == 0" class="col-md-12">
                 <div class="form-group row">
@@ -129,11 +129,11 @@
                     translate>No Data Found</label>
                 </div>
               </div>
-              <div class="form-group row" *ngFor="let attr of listAssetMasterAttrContent">
-                <div class="col-md-12" *ngIf="attr.AttrInputType == 'T'">
-                  <label class="col-md-3 adInsLabel adins-required-label" style="padding-left: 0;"
+              <div *ngFor="let attr of listAssetMasterAttrContent">
+                <div class="form-group row" *ngIf="attr.AttrInputType == 'T'">
+                  <label class="col-md-3 adInsLabel adins-required-label"
                     translate>{{attr.AttrName}}</label>
-                  <div class="col-md-9" style="padding-right: 0; display: inline-block;">
+                  <div class="col-md-9">
                     <input type="text" class="form-control adInsInput" formControlName="{{attr.AssetAttrId}}"
                       maxlength="{{attr.AttrLength}}"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetMasterAttrContent['controls'][attr.AssetAttrId].invalid }" />
@@ -142,10 +142,10 @@
                       [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
                 </div>
-                <div class="col-md-12" *ngIf="attr.AttrInputType == 'N'">
-                  <label class="col-md-3 adInsLabel adins-required-label" style="padding-left: 0"
+                <div class="form-group row" *ngIf="attr.AttrInputType == 'N'">
+                  <label class="col-md-3 adInsLabel adins-required-label"
                     translate>{{attr.AttrName}}</label>
-                  <div class="col-md-9" style="padding-right: 0; display: inline-block;">
+                  <div class="col-md-9">
                     <input type="number" class="form-control adInsInput" formControlName="{{attr.AssetAttrId}}"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetMasterAttrContent['controls'][attr.AssetAttrId].invalid }" />
                     <lib-uc-show-errors
@@ -153,12 +153,13 @@
                       [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
                 </div>
-                <div class="col-md-12" *ngIf="attr.AttrInputType == 'L'">
-                  <label class="col-md-3 adInsLabel adins-required-label" style="padding-left: 0;"
+                <div class="form-group row" *ngIf="attr.AttrInputType == 'L'">
+                  <label class="col-md-3 adInsLabel adins-required-label"
                     translate>{{attr.AttrName}}</label>
-                  <div class="col-md-9" style="padding-right: 0; display: inline-block;">
+                  <div class="col-md-9">
                     <select class="form-control adInsInput" formControlName="{{attr.AssetAttrId}}"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetMasterAttrContent['controls'][attr.AssetAttrId].invalid }">
+                      <option value = "">Select One</option>
                       <option *ngFor="let valueItem of SplitAttrListValue(attr.AttrValue)" [value]="valueItem">
                         {{valueItem}}
                       </option>
@@ -168,10 +169,10 @@
                       [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
                 </div>
-                <div class="col-md-12" *ngIf="attr.AttrInputType == 'P'">
+                <div class="form-group row" *ngIf="attr.AttrInputType == 'P'">
                   <label class="col-md-3 adInsLabel adins-required-label" style="padding-left: 0;"
                     translate>{{attr.AttrName}}</label>
-                  <div class="col-md-9" style="padding-right: 0; display: inline-block;">
+                  <div class="col-md-9">
                     <textarea class="form-control adInsInput" formControlName="{{attr.AssetAttrId}}"
                       maxlength="{{attr.AttrLength}}"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetMasterAttrContent['controls'][attr.AssetAttrId].invalid }"></textarea>
@@ -180,10 +181,10 @@
                       [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
                 </div>
-                <div class="col-md-12" *ngIf="attr.AttrInputType == 'D'">
+                <div class="form-group row" *ngIf="attr.AttrInputType == 'D'">
                   <label class="col-md-3 adInsLabel adins-required-label" style="padding-left: 0;"
                     translate>{{attr.AttrName}}</label>
-                  <div class="col-md-9" style="padding-right: 0; display: inline-block;">
+                  <div class="col-md-9">
                     <input type="date" class="form-control adInsInput" formControlName="{{attr.AssetAttrId}}"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetMasterAttrContent['controls'][attr.AssetAttrId].invalid }" />
                     <lib-uc-show-errors
@@ -191,10 +192,10 @@
                       [submit]="enjiForm.submitted"></lib-uc-show-errors>
                   </div>
                 </div>
-                <div class="col-md-12" *ngIf="attr.AttrInputType == 'A'">
+                <div class="form-group row" *ngIf="attr.AttrInputType == 'A'">
                   <label class="col-md-3 adInsLabel adins-required-label" style="padding-left: 0;"
                     translate>{{attr.AttrName}}</label>
-                  <div class="col-md-9" style="padding-right: 0; display: inline-block;">
+                  <div class="col-md-9">
                     <input type="" currencyMask class="form-control adInsInput" formControlName="{{attr.AssetAttrId}}"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetMasterAttrContent['controls'][attr.AssetAttrId].invalid }" />
                     <lib-uc-show-errors

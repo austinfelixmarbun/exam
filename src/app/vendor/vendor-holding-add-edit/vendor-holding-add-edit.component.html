@@ -218,7 +218,7 @@
                 <div class="form-group row">
                   <label class="col-md-3  adInsLabel" translate>Tax Address</label>
                   <div class="col-md-9">
-                    <textarea class="form-control adInsInput width-50-per" formControlName="Addr"> </textarea>
+                    <textarea autoUpperCase class="form-control adInsInput width-50-per" formControlName="Addr"> </textarea>
                     <lib-uc-show-errors [control]="VendorForm.controls.Addr" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>

@@ -245,6 +245,7 @@ export class URLConstant {
     public static GetRefMasterPaging = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterPaging";
     public static GetRefMasterListDesc = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterListDesc";
     public static GetRefMasterListKeyValueActiveByCode = environment.FoundationR3Url + "/v1" + "/RefMaster/GetListKeyValueActiveByCode";
+    public static GetListKeyValueActiveByCodeOrderBySeqNo = environment.FoundationR3Url + "/v1" + "/RefMaster/GetListKeyValueActiveByCodeOrderBySeqNo";
     public static GetListActiveRefMasterType = environment.FoundationR3Url + "/v1" + "/RefMasterType/GetListKeyValueActiveByCode";
     public static GetListActiveRefMasterTypeForDdl = "/RefMasterType/GetListKeyValueActiveByCode";
     public static GetRefMasterByRefMasterId = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterByRefMasterId";
@@ -256,6 +257,8 @@ export class URLConstant {
     public static GetKvpRefMasterByRefMasterTypeCodeAndMasterCode = environment.FoundationR3Url + "/v1" + "/RefMaster/GetKvpRefMasterByRefMasterTypeCodeAndMasterCode";
     public static GetRefMasterByRefMasterTypeCode = environment.FoundationR3Url + "/v1" + "/RefMaster/GetRefMasterByRefMasterTypeCode";
     public static GetListActiveRefMasterDDL = "/RefMaster/GetListKeyValueActiveByCode";
+    public static GetListActiveRefMasterOrderSeqNoDDL = "/RefMaster/GetListKeyValueActiveByCodeOrderBySeqNo";
+    public static GetListKeyValueActiveByCodeOrderBySeqNoDDL = "/RefMaster/GetListKeyValueActiveByCodeOrderBySeqNo";
 
     public static GetListActiveRefMasterDetail = environment.FoundationR3Url + '/v1' + "/RefMaster/GetListActiveRefMaster";
 

@@ -540,7 +540,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       MappingCode: null
     };
     this.ddlMrGenderCode = new UcDropdownListObj;
-    this.ddlMrGenderCode.apiPath = URLConstant.GetListActiveRefMasterDDL;
+    this.ddlMrGenderCode.apiPath = URLConstant.GetListActiveRefMasterOrderSeqNoDDL;
     this.ddlMrGenderCode.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
     this.ddlMrGenderCode.requestObj = refMasterObjMrGenderCode;
     this.ddlMrGenderCode.isObject = true;

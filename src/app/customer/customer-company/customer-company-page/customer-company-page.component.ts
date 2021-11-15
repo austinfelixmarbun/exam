@@ -104,13 +104,15 @@ export class CustomerCompanyPageComponent implements OnInit {
         this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
       }
 
-      this.stepper = new Stepper(document.querySelector('#stepper1'), {
-        linear: false,
-        animation: true
-      });
-      this.EnterTab("Detail");
-      this.CustStepIndex = 1;
-      this.stepper.to(this.CustStepIndex);
+      setTimeout(() => {
+        this.stepper = new Stepper(document.querySelector('#stepper1'), {
+          linear: false,
+          animation: true
+        });
+        this.EnterTab("Detail");
+        this.CustStepIndex = 1;
+        this.stepper.to(this.CustStepIndex);
+      }, 500)
     }
   }
 

@@ -308,7 +308,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       MappingCode: null
     };
     this.ddlMrCustRelationshipCode = new UcDropdownListObj;
-    this.ddlMrCustRelationshipCode.apiPath = "/RefMaster/GetListKeyValueActiveByCode";
+    this.ddlMrCustRelationshipCode.apiPath = URLConstant.GetListActiveRefMasterDDL;
     this.ddlMrCustRelationshipCode.ddlType = "one";
     this.ddlMrCustRelationshipCode.requestObj = refMasterObjMrIdTypeCode;
     this.ddlMrCustRelationshipCode.isObject = true;
@@ -319,7 +319,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       MappingCode: null
     };
     this.ddlIdType = new UcDropdownListObj;
-    this.ddlIdType.apiPath = "/RefMaster/GetListKeyValueActiveByCode";
+    this.ddlIdType.apiPath = URLConstant.GetListActiveRefMasterDDL;
     this.ddlIdType.ddlType = "one";
     this.ddlIdType.requestObj = refMasterObjIdType;
     this.ddlIdType.isObject = true;
@@ -331,7 +331,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       MappingCode: null
     };
     this.ddlGender = new UcDropdownListObj();
-    this.ddlGender.apiPath = "/RefMaster/GetListKeyValueActiveByCode";
+    this.ddlGender.apiPath = URLConstant.GetListActiveRefMasterDDL;
     this.ddlGender.ddlType = "one";
     this.ddlGender.requestObj = refMasterObjGender;
     this.ddlGender.isObject = true;

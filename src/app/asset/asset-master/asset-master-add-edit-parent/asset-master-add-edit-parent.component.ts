@@ -300,9 +300,6 @@ export class AssetMasterAddEditParentComponent implements OnInit {
             this.toastr.successMessage(response[response.length - 1]["Message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});
           });
-  
-
-
 
       }else{
         this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj).subscribe(
@@ -314,16 +311,6 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         );
       }
 
-    
-
-
-  
-
-
-
-
-
-      
     } else {
       this.assetMasterObj = this.resultData;
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
@@ -332,7 +319,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       this.assetMasterObj.AssetName = this.AssetMasterParentForm.controls["AssetName"].value;
       this.assetMasterObj.HierarchyLvl = this.AssetMasterParentForm.controls["HierarchyLvl"].value;
       this.assetMasterObj.FullAssetCode = this.AssetMasterParentForm.controls["FullAssetCode"].value;
-      this.assetMasterObj.FullAssetName = this.AssetMasterParentForm.controls["FullAssetName"].value;
+      this.assetMasterObj.FullAssetName = this.AssetMasterParentForm.controls["AssetName"].value;
       this.assetMasterObj.ParentId = this.AssetMasterParentForm.controls["ParentId"].value;
       this.assetMasterObj.IsFinal = this.AssetMasterParentForm.controls["IsFinal"].value;
       this.assetMasterObj.IsActive = this.AssetMasterParentForm.controls["IsActive"].value;
@@ -386,8 +373,6 @@ export class AssetMasterAddEditParentComponent implements OnInit {
         );
          
       }
-        
-    
 
     }
   }

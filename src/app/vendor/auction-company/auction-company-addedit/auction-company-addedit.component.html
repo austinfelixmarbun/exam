@@ -342,7 +342,7 @@
                 <div class="form-group row">
                   <label class="col-md-3 adins-required-label">Tax Address</label>
                   <div class="col-md-4">
-                    <textarea class="form-control" formControlName="TaxAddr"> </textarea>
+                    <textarea autoUpperCase class="form-control" formControlName="TaxAddr"> </textarea>
                     <lib-uc-show-errors [control]="AuctionCompanyForm.controls.TaxAddr" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>

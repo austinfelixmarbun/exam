@@ -88,7 +88,6 @@ export class AssetMasterAddEditChildComponent implements OnInit {
   ngOnInit() {
     if (this.pageType == "edit") {
       this.AssetMasterChildForm.controls["AssetCode"].disable();
-      this.AssetMasterChildForm.controls["AssetName"].disable();
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.AssetMasterId;
       this.http.post(URLConstant.GetAssetMasterById, {Id : this.AssetMasterId}).subscribe(
@@ -168,7 +167,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                     this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
                     var formGroupObject = new Object();
                     for (const masterAttr of this.listAssetMasterAttrContent) {
-                      formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AttrContent"], [Validators.required]];
+                      formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AttrContent"] == null ? "" : masterAttr["AttrContent"], [Validators.required]];
                     }
                     this.AssetMasterChildForm.addControl("AssetMasterAttrContent", this.fb.group(formGroupObject));
                     this.isReadyAssetMasterAttr = true;
@@ -258,7 +257,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                     this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
                     var formGroupObject = new Object();
                     for (const masterAttr of this.listAssetMasterAttrContent) {
-                      formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AttrAssetAttrIdContent"], [Validators.required]];
+                      formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AttrAssetAttrIdContent"] == null ? "" : masterAttr["AttrAssetAttrIdContent"], [Validators.required]];
                     }
                     this.AssetMasterChildForm.addControl("AssetMasterAttrContent", this.fb.group(formGroupObject));
                     this.isReadyAssetMasterAttr = true;
@@ -286,8 +285,8 @@ export class AssetMasterAddEditChildComponent implements OnInit {
     }
   }
 
-  SplitAttrListValue(value) {
-    return value.split(";");
+  SplitAttrListValue(value: string) {
+    return value.split(";").sort();
   }
 
 
