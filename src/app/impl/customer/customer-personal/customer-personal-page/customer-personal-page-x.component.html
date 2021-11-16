@@ -11,16 +11,18 @@
                 </div>
                 <div class="col-md-4" style="text-align-last: right">
                   <!-- START X-DSF INTEGRASI-CUST : 2021-10-29, Udin - Integrasi Cust FOU ke R2 -->
-                  <button type="button" class="btn btn-raised btn-success mr-2" (click)="submitToLmsX()" >
+                  <button type="button" class="btn btn-raised btn-success mr-2" (click)="SendToR2()" >
                     <i class="fa fa-save"></i> &nbsp;<span translate>Submit To LMS</span>
                   </button>
                   <!-- END X-DSF INTEGRASI-CUST -->
                   <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()" >
                     <i class="fa fa-arrow-left"></i> &nbsp;<span translate>Back</span>
                   </button>
+                  <!-- START X-DSF INTEGRASI-CUST : 2021-11-16, Udin - Fungsi tombol ini dialihkan ke tombol "Submit To LMS", dikarenakan tombol tersebut duluan ada di X
                   <button type="button" class="btn btn-raised btn-primary" (click)="SendToR2()">
                     <i class="far fa-check-square"></i>&nbsp;<span translate>Save And Sync</span>
                   </button>
+                  <-- END X-DSF INTEGRASI-CUST -->
                 </div>
               </div>
             </div>
