@@ -1107,6 +1107,7 @@ export class URLConstant {
     public static GetFirstRequestedThirdPartyRsltHByTrxNoAndSvcTypeCode = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetFirstRequestedThirdPartyRsltHByTrxNoAndSvcTypeCode";
     public static GetThirdPartyTrustsocRsltByThirdPartyRsltHId = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetThirdPartyTrustsocRsltByThirdPartyRsltHId";
     public static UploadConsentTrustingSocial = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/UploadConsentTrustingSocial";
+    public static UploadConsentTrustingSocialV2 = environment.FoundationR3Url + "/v2" + "/ThirdPartyRslt/UploadConsentTrustingSocial";
     public static GetListThirdPartyTrustingSocialByTrxNo = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetListThirdPartyTrustingSocialByTrxNo";
 
     //DIGITALIZATION
