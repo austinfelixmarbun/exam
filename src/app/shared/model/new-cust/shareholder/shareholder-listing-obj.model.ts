@@ -12,6 +12,8 @@ export class ShareholderListingObj{
     IsSigner: boolean;
     IsOwner: boolean;
     IsActive: boolean;
+    NegCustTypeCode: string;
+    NegCustTypeCodeDesc: string;
     constructor(){
         
     }

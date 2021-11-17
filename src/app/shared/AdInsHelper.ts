@@ -143,9 +143,14 @@ export class AdInsHelper {
             padding: CryptoJS.pad.Pkcs7
           });
         return encrypted
-      }
+    }
     public static OpenCustomerViewByCustId(CustId) {
-        var url = environment.FoundationR3Web + "/View/Customer/PersonalDetail?CustId=" + CustId;
+        let url = environment.FoundationR3Web + NavigationConstant.VIEW_CUST_PERSONAL_DETAIL + "?CustId=" + CustId;
+        window.open(url, "_blank");
+    }
+
+    public static OpenCustomerCoyViewByCustId(CustId) {
+        let url = environment.FoundationR3Web + NavigationConstant.VIEW_CUST_COY_DETAIL + "?CustId=" + CustId;
         window.open(url, "_blank");
     }
 
