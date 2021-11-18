@@ -8,6 +8,7 @@
     "large-serve": "node --max_old_space_size=2048 ./node_modules/@angular/cli/bin/ng serve",
     "build": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --aot --base-href /Foundation/",
     "dev": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=dev --base-href /FOUNDATION_DEV/",
+    "devTest": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=devTest --base-href /FOUNDATION_DEV_TEST/",
     "sit": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=sit --base-href /FOUNDATION_SIT_CY6/",
     "demo": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=demo_env --base-href /FOUNDATION_DEMO/",
     "integration": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=integration_env --base-href /FOUNDATION_INTEGRATION/",
