@@ -56,6 +56,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     CustRelation: ['', [Validators.required]],
     IdType: [''],
     IdNo: [''],
+    IdExpiredDt: [''],
     BirthPlace: [''],
     BirthDate: [''],
     Gender: ['', [Validators.required]],
@@ -115,15 +116,23 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     forkJoin([getDetail, getCustRelationship, getIdType, getGender]).pipe(
       map((response) => {
         this.AppEmergencyData = response[0]["AppCustEmergency"];
+        console.log(this.AppEmergencyData);
         this.MasterCustEmergencyData = response[0]["MasterCustEmergency"];
+        console.log(this.MasterCustEmergencyData);
         this.CustRelationList = response[1][CommonConstant.ReturnObj];
         this.IdTypeList = response[2][CommonConstant.ReturnObj];
         this.GenderList = response[3][CommonConstant.ReturnObj];
         if (response[0]["MasterCustEmergency"]["BirthDate"]) {
           response[0]["MasterCustEmergency"]["BirthDate"] = datePipe.transform(response[0]["MasterCustEmergency"]["BirthDate"], 'yyyy-MM-dd');
         }
+        if (response[0]["MasterCustEmergency"]["IdExpiredDt"]) {
+          response[0]["MasterCustEmergency"]["IdExpiredDt"] = datePipe.transform(response[0]["MasterCustEmergency"]["IdExpiredDt"], 'yyyy-MM-dd');
+        }
         if (this.AppEmergencyData["BirthDate"]) {
           this.AppEmergencyData["BirthDate"] = datePipe.transform(this.AppEmergencyData["BirthDate"], 'yyyy-MM-dd');
+        }
+        if (this.AppEmergencyData["IdExpiredDt"]) {
+          this.AppEmergencyData["IdExpiredDt"] = datePipe.transform(this.AppEmergencyData["IdExpiredDt"], 'yyyy-MM-dd');
         }
         this.CustomerEmergencyForm.patchValue({
           CustId: this.MasterCustEmergencyData.CustId,
@@ -131,6 +140,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
           CustRelation: this.MasterCustEmergencyData.CustRelation,
           IdType: this.MasterCustEmergencyData.IdType,
           IdNo: this.MasterCustEmergencyData.IdNo,
+          IdExpiredDt: this.MasterCustEmergencyData.IdExpiredDt,
           BirthPlace: this.MasterCustEmergencyData.BirthPlace,
           BirthDate: this.MasterCustEmergencyData.BirthDate,
           Gender: this.MasterCustEmergencyData.Gender,
