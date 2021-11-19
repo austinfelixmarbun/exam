@@ -415,5 +415,8 @@ export class CommonConstant {
     //DIGITALIZATION SVC TYPE CODE
     public static DigitalizationSvcTypeTrustingSocial = "TS";
     public static DigitalizationSvcTypePefindo = "PEFINDO";
-
+    
+    public static NegCustTypeGood = "GOOD";
+    public static NegCustTypeBad = "BAD";
+    public static NegCustTypeWarning = "WARNING";
 }

@@ -1,5 +1,5 @@
 {
-  "title": "Supplier Branch Grading Inquiry",
+  "title": "Supplier Grading Inquiry",
   "component": [
     {
       "type": "textbox",
@@ -44,7 +44,7 @@
       "restriction": "gte",
       "placeholder": "",
       "datatype": "date"
-    },     
+    },
     {
       "type": "textbox",
       "name": "hist.NEW_GRADE",
@@ -76,7 +76,7 @@
     },
     {
       "type": "dropdown",
-      "name": "hist.status", 
+      "name": "hist.status",
       "id": "GradingStatus",
       "value": "",
       "placeholder": "Placeholder",
@@ -89,7 +89,7 @@
       "items": [],
       "itemsUrl": [],
       "environment": "FOU"
-    }    
+    }
   ],
   "querystring": {
     "name": "searchInquirySupplBranchGrading"
@@ -98,13 +98,13 @@
     {
       "type": "sort",
       "position": "center",
-      "label": "BRANCH CODE",
+      "label": "SUPPLIER CODE",
       "name": "vdr.VENDOR_CODE"
     },
     {
       "type": "sort",
       "position": "center",
-      "label": "BRANCH NAME",
+      "label": "SUPPLIER NAME",
       "name": "vdr.VENDOR_NAME"
     },
     {

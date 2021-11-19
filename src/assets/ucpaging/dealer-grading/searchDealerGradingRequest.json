@@ -1,5 +1,5 @@
 {
-  "title": "Supplier Branch Grading Request",
+  "title": "Supplier Grading Request",
   "component": [
     {
       "type": "textbox",
@@ -45,13 +45,13 @@
     {
       "type": "sort",
       "position": "center",
-      "label": "BRANCH CODE",
+      "label": "SUPPLIER CODE",
       "name": "vdr.VENDOR_CODE"
     },
     {
       "type": "sort",
       "position": "center",
-      "label": "BRANCH NAME",
+      "label": "SUPPLIER NAME",
       "name": "vdr.VENDOR_NAME"
     },
     {

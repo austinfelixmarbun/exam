@@ -74,8 +74,8 @@ export class VendorGradingRequestDetailComponent implements OnInit {
   currentUserContext: any;
   async ngOnInit() {
     this.currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    if (this.mode == "edit") { this.title = "Detail Supplier Branch Grading Request" }
-    else { this.title = "Add Supplier Branch Grading Request" }
+    if (this.mode == "edit") { this.title = "Detail Supplier Grading Request" }
+    else { this.title = "Add Supplier Grading Request" }
 
     this.VendorForm = this.fb.group({
       VendorId: [""],

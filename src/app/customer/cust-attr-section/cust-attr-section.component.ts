@@ -150,7 +150,7 @@ export class CustAttrSectionComponent implements OnInit {
   }
 
   identifierCustAttr: string = "CustAttrForm";
-  async SaveForm(): Promise<boolean> {
+  async SaveForm(isRedirectAfterSuccess:boolean = false): Promise<boolean> {
     if (this.OtherInformationForm.invalid) {
       NewCustSetData.markFormGroupTouched(this.OtherInformationForm);
       return false;
@@ -169,6 +169,21 @@ export class CustAttrSectionComponent implements OnInit {
       await this.httpClient.post(this.getUrlSave(), RequestAppCustOtherInfoObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["Message"]);
+
+          if(isRedirectAfterSuccess)
+          {
+            if (this.From === "EditMainData") {
+              AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
+            }
+            else if (this.From === "CustFamily") {
+              AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_FAMILY_PAGING], {});
+            }
+            else if (this.From === "CustShareholder") {
+              AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_SHRHLDR_PAGING], {});
+            } else {
+              AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
+            }
+          }
         });
       return true;
     }

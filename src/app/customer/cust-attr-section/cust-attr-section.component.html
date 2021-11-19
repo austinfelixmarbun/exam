@@ -1,5 +1,5 @@
 <form class="form form-horizontal" [formGroup]="OtherInformationForm" #enjiForm="ngForm" novalidate
-  (ngSubmit)="enjiForm.form.valid && SaveForm()">
+  (ngSubmit)="enjiForm.form.valid && SaveForm(true)">
   <lib-ucSubsection [id]="'OtherInformationId'" [title]="'Other Information'" [panel]="'OtherInformationSection'">
   </lib-ucSubsection>
 
