@@ -19,14 +19,14 @@
             </lib-ucSubsection>
             <div class="form-body" id="VendorInformation">
               <div [hidden]="mode === 'add'" class="form-group row">
-                <label class="col-md-3 adInsLabel">Supplier Branch Code</label>
+                <label class="col-md-3 adInsLabel">Supplier Code</label>
                 <div class="col-md-9">
                   <label class="adInsLabel" translate>{{vendorCode}}</label>
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-md-3 adInsLabel">Supplier Branch Name</label>
+                <label class="col-md-3 adInsLabel">Supplier Name</label>
                 <div [hidden]="mode === 'edit'" class="col-md-3" *ngIf="inputLookupParentObj.isReady">
                   <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
                     [enjiForm]="enjiForm" [identifier]="'lookupVendor'" (lookup)="getLookupParent($event)">
@@ -84,11 +84,11 @@
 
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1"
-                [routerLink]="['/Vendor/VendorGrading/Request/PagingX']" translate>
-                <i class="ft-x"></i> Cancel
+                [routerLink]="['/Vendor/VendorGrading/Request/PagingX']">
+                <i class="ft-x"></i> <span translate>Cancel</span>
               </button>
-              <button type="submit" class="btn btn-raised btn-primary" translate>
-                <i class="fa fa-check"></i> Submit
+              <button type="submit" class="btn btn-raised btn-primary">
+                <i class="fa fa-check"></i> <span translate>Submit</span>
               </button>
             </div>
           </form>
