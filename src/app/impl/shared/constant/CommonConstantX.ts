@@ -18,4 +18,7 @@ export class CommonConstantX {
     public static CAT_CODE_VENDOR_VERIF_APV = "VENDOR_VERIF_APV_BY_X";
     public static SCHM_CODE_VENDOR_VERIF_APV_SCHM = "VENDOR_VERIF_APV_SCHM_BY_X";
     public static REASON_TYPE_VENDOR_VERIF_APVM = "VENDOR_VERIF_APV";
+
+    //GS Code
+    public static GSCodePefindoBasicRole = "PEFINDO_BASIC_ROLE";
 }
