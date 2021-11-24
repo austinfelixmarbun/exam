@@ -95,6 +95,26 @@
               "vendorChunk": false,
               "buildOptimizer": false
             },
+            "devTest": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "showCircularDependencies": false,
+              "aot": true,
+              "extractLicenses": true,
+              "statsJson": false,
+              "progress": false,
+              "vendorChunk": false,
+              "buildOptimizer": false
+            },
             "sit": {
               "fileReplacements": [
                 {

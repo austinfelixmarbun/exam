@@ -50,5 +50,6 @@ export class OfficeObj {
     ParentOfficeCode: string;
     MrCenterGrpTypeCode: string;
     IsHaveCashier : boolean;
+    HierarchyLvl : number;
     constructor() { this.RefOfficeId = 0, this.RowVersion = "" }
 }

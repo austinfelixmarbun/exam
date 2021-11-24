@@ -30,7 +30,7 @@
             "items": [],
             "itemsUrl": [],
             "criteriaPropName": "RefMasterTypeCode",
-            "criteriaPropValue": "SURVEY_INITIAL",
+            "criteriaPropValue": "SRVY_SOURCE_CODE",
             "environment":"FOU"
         },
         {

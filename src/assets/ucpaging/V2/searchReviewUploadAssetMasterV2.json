@@ -3,9 +3,9 @@
     "exportExcel": false,
     "component": [
       {
-        "type": "dropdown",
-        "name": "UMH.OFFICE_CODE",
-        "id": "OriOfficeNameId",
+        "type": "officeRoleCodes",
+        "name": "TaskOfficeCode",
+        "id": "OfficeCodeId",
         "value": "",
         "placeholder": "Placeholder",
         "datatype": "text",
