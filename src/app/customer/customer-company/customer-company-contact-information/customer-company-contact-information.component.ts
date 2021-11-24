@@ -197,7 +197,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
 
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = this.IdCust;
-    reqObj.Code = CommonConstant.CustAddrTypeCompany;
+    reqObj.Code = CommonConstant.CustAddrTypeContact;
     this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response) => {
         this.tempCustAddrObj = response;
@@ -285,7 +285,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custCompanyContactPersonObj.MrCustRelationshipCode = this.ContactInformationForm.controls["MrCustRelationshipCode"].value;
 
     this.custAddrObj.CustId = this.IdCust;
-    this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeCompany;
+    this.custAddrObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeContact;
     this.custAddrObj.Addr = this.ContactInformationForm.value.UcAddress.Addr;
     this.custAddrObj.AreaCode1 = this.ContactInformationForm.value.UcAddress.AreaCode1;
     this.custAddrObj.AreaCode2 = this.ContactInformationForm.value.UcAddress.AreaCode2;
