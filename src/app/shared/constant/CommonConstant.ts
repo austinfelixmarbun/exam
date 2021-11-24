@@ -193,6 +193,7 @@ export class CommonConstant {
     public static GSCodeDefSeparatorDDLVerfQuest = "DEF_SEPARATOR_DDL_VERF_QUEST";
     public static GSCodeRegexDDLSeparator = "REGEX_DDL_SEPARATOR";
     public static GSCodeFilterAddr = "FILTER_ADDR";
+    public static GSCodeMaxHierarchyLvlOffice = "MAX_HIERARCHY_LVL_OFFICE";
 
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
