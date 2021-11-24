@@ -106,7 +106,7 @@ export class TrustingSocialReqConsentComponent implements OnInit {
     reader.onload = () => {
         reqUploadConsentTsObj.ConsentBase64 = reader.result;
         reqUploadConsentTsObj.ConsentBase64 = reqUploadConsentTsObj.ConsentBase64.substring(reqUploadConsentTsObj.ConsentBase64.lastIndexOf(',') + 1)
-        this.http.post(URLConstant.UploadConsentTrustingSocialV2, reqUploadConsentTsObj).subscribe(
+        this.http.post(URLConstant.UploadConsentTrustingSocial, reqUploadConsentTsObj).subscribe(
           (response: ThirdPartyRsltHObj) => {
             this.toastr.successMessage(response["Message"]);
             this.outUpload.emit(response);
