@@ -8,6 +8,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-currency-add',
@@ -26,12 +27,14 @@ export class CurrencyAddComponent implements OnInit {
     RegRptCode: ['', [Validators.required, Validators.maxLength(100)]],
     UCNumber: [''],
     UCNumber2: [''],
-    IsActive: [true]
+    IsActive: [true],
+    RoundedAmt: ['', Validators.required]
   });
 
   UcNumber: any;
   UcNumber2: any;
   UcNumber3: any;
+  isInvalid: boolean = false;
 
   readonly CancelLink: string = NavigationConstant.CS_CURRENCY_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
@@ -50,14 +53,15 @@ export class CurrencyAddComponent implements OnInit {
       this.RefCurrForm.controls["CurrCode"].disable();
       this.currObj = new CurrObj();
       this.currObj.RefCurrId = this.refCurrId;
-      this.http.post(URLConstant.GetRefCurrById, {Id: this.refCurrId}).subscribe(
+      this.http.post(URLConstant.GetRefCurrById, { Id: this.refCurrId }).subscribe(
         response => {
           this.resultData = response;
           this.RefCurrForm.patchValue({
             CurrCode: this.resultData.CurrCode,
             CurrName: this.resultData.CurrName,
             RegRptCode: this.resultData.RegRptCode,
-            IsActive: this.resultData.IsActive
+            IsActive: this.resultData.IsActive,
+            RoundedAmt: this.resultData.RoundedAmt
           });
 
         }
@@ -86,16 +90,21 @@ export class CurrencyAddComponent implements OnInit {
   }
 
   SaveForm() {
+    this.CheckRoundedAmt(this.RefCurrForm.controls["RoundedAmt"].value);
+
+    if (this.isInvalid) return;
+
     if (this.pageType == "add") {
       this.currObj = new CurrObj();
       this.currObj.CurrCode = this.RefCurrForm.controls["CurrCode"].value
       this.currObj.CurrName = this.RefCurrForm.controls["CurrName"].value;
       this.currObj.RegRptCode = this.RefCurrForm.controls["RegRptCode"].value;
       this.currObj.IsActive = this.RefCurrForm.controls["IsActive"].value;
+      this.currObj.RoundedAmt = this.RefCurrForm.controls["RoundedAmt"].value;
       this.http.post(URLConstant.AddRefCurr, this.currObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_CURRENCY_PAGING],{});
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CS_CURRENCY_PAGING], {});
         }
       );
     } else {
@@ -104,13 +113,20 @@ export class CurrencyAddComponent implements OnInit {
       this.currObj.CurrName = this.RefCurrForm.controls["CurrName"].value;
       this.currObj.RegRptCode = this.RefCurrForm.controls["RegRptCode"].value;
       this.currObj.IsActive = this.RefCurrForm.controls["IsActive"].value;
+      this.currObj.RoundedAmt = this.RefCurrForm.controls["RoundedAmt"].value;
       this.http.post(URLConstant.EditRefCurr, this.currObj).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_CURRENCY_PAGING],{});
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CS_CURRENCY_PAGING], {});
         }
       );
     }
   }
 
+  CheckRoundedAmt(RoundedAmt: number) {
+    if (RoundedAmt < 0 || RoundedAmt > 2) {
+      this.toastr.warningMessage(ExceptionConstant.ROUNDED_AMT_INVALID);
+      this.isInvalid = true
+    }
+  }
 }
