@@ -37,9 +37,9 @@ export class CustLegalDocDetailComponent implements OnInit {
     DocNo: ['', [Validators.required]],
     DocDt: ['', [Validators.required]],
     DocExpiredDt: [''],
-    DocNotes: ['', [Validators.required]],
-    NotaryName: ['', [Validators.required]],
-    NotaryLocation: ['', [Validators.required]],
+    DocNotes: [''],
+    NotaryName: [''],
+    NotaryLocation: [''],
     //IsExpDtMandatory: [false],
     RowVersion: ['']
   });
