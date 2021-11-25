@@ -113,7 +113,7 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Transaction Reference No",
+            "label": "Reference No",
             "name": "SO.TRX_REF_NO"
         },
         {
