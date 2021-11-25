@@ -33,6 +33,7 @@ import { AdInsHelperX } from 'app/impl/shared/AdInsHelperX';
 @Component({
   selector: 'app-third-party-form-x',
   templateUrl: './third-party-form-x.component.html',
+  styleUrls: ['./third-party-form-x.component.css'],
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class ThirdPartyFormXComponent implements OnInit {
