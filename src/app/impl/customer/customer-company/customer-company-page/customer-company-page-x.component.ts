@@ -202,18 +202,4 @@ export class CustomerCompanyPageXComponent implements OnInit {
     return flag;
   }
 
-  //START X-DSF INTEGRASI-CUST : 2021-10-29, Udin - Integrasi Cust FOU ke R2
-  submitToLmsX() {
-    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
-      (response: CustObj) => {
-        this.http.post(URLConstantX.SendCustomerDataToRabbitMq, { CustNo: response.CustNo }).subscribe(
-          (response) => {
-            this.toastr.successMessage(response["Message"]);
-          }
-        )
-      }
-    );
-  }
-  //END X-DSF INTEGRASI-CUST
-
 }
