@@ -1,12 +1,12 @@
 {
-  "title": "Supplier Branch Grading Inquiry",
+  "title": "Supplier Grading Inquiry",
   "component": [
     {
       "type": "textbox",
       "name": "vdr.VENDOR_CODE",
       "id": "VendorCodeId",
       "value": "",
-      "label": "Vendor Supplier Code",
+      "label": "Supplier Code",
       "placeholder": "Placeholder"
     },
     {
@@ -14,7 +14,7 @@
       "name": "vdr.VENDOR_NAME",
       "id": "VendorNameId",
       "value": "",
-      "label": "Vendor Supplier Name",
+      "label": "Supplier Name",
       "placeholder": "Placeholder"
     },
     {
@@ -44,20 +44,37 @@
       "restriction": "gte",
       "placeholder": "",
       "datatype": "date"
-    },     
+    },
     {
-      "type": "textbox",
-      "name": "hist.NEW_GRADE",
-      "id": "Grade",
+      "type": "dropdown",
+      "name": "grading.attr_content",
+      "id": "GradeDescr",
       "label": "Grade",
       "value": "",
-      "placeholder": "Placeholder"
+      "placeholder": "Placeholder",
+      "isFromUrl": false,
+      "isSelectOne": false,
+      "items": [
+        {
+          "key": "Good",
+          "value": "Good"
+        },
+        {
+          "key": "Excellent",
+          "value": "Excellent"
+        },
+        {
+          "key": "Bad",
+          "value": "Bad"
+        }
+      ],
+      "itemsUrl": []
     },
     {
       "type": "dropdown",
       "name": "vdr.IS_ACTIVE",
       "id": "IsActiveId",
-      "label": "Vendor Supplier Active",
+      "label": "Active",
       "value": "",
       "placeholder": "Placeholder",
       "isFromUrl": false,
@@ -76,20 +93,29 @@
     },
     {
       "type": "dropdown",
-      "name": "hist.status", 
+      "name": "hist.status",
       "id": "GradingStatus",
+      "label": "Status",
       "value": "",
       "placeholder": "Placeholder",
-      "datatype": "text",
-      "isFromURL": true,
-      "ddlType": "all",
-      "url": "",
-      "path": "/VendorGradingHistX/GetListRefMasterVendorGrade",
-      "label": "Status",
-      "items": [],
-      "itemsUrl": [],
-      "environment": "FOU"
-    }    
+      "isFromUrl": false,
+      "isSelectOne": false,
+      "items": [
+        {
+          "key": "REQ",
+          "value": "Request"
+        },
+        {
+          "key": "APV",
+          "value": "Approve"
+        },
+        {
+          "key": "EXE",
+          "value": "Execute"
+        }
+      ],
+      "itemsUrl": []
+    }
   ],
   "querystring": {
     "name": "searchInquirySupplBranchGrading"
@@ -98,13 +124,13 @@
     {
       "type": "sort",
       "position": "center",
-      "label": "BRANCH CODE",
+      "label": "SUPPLIER CODE",
       "name": "vdr.VENDOR_CODE"
     },
     {
       "type": "sort",
       "position": "center",
-      "label": "BRANCH NAME",
+      "label": "SUPPLIER NAME",
       "name": "vdr.VENDOR_NAME"
     },
     {
@@ -134,8 +160,8 @@
     {
       "type": "sort",
       "position": "center",
-      "label": "Grade",
-      "name": "hist.NEW_GRADE"
+      "label": "Grade Status",
+      "name": "grading.attr_content"
     },
     {
       "type": "sort",

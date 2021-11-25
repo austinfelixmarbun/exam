@@ -1,12 +1,12 @@
 {
-  "title": "Supplier Branch Grading Inquiry",
+  "title": "Supplier Grading Inquiry",
   "component": [
     {
       "type": "textbox",
       "name": "vdr.VENDOR_CODE",
       "id": "VendorCodeId",
       "value": "",
-      "label": "Vendor Supplier Code",
+      "label": "Supplier Code",
       "placeholder": "Placeholder"
     },
     {
@@ -14,7 +14,7 @@
       "name": "vdr.VENDOR_NAME",
       "id": "VendorNameId",
       "value": "",
-      "label": "Vendor Supplier Name",
+      "label": "Supplier Name",
       "placeholder": "Placeholder"
     },
     {
@@ -44,7 +44,7 @@
       "restriction": "gte",
       "placeholder": "",
       "datatype": "date"
-    },     
+    },
     {
       "type": "textbox",
       "name": "hist.NEW_GRADE",

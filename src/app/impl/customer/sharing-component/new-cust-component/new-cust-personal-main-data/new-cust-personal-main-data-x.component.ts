@@ -273,7 +273,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       MrCustRelationship: [''],
       MrCustModelCode: ['', this.CustDataMode == this.CustDataModeMain ? [Validators.required] : []],
       MobilePhnNo1: ['', this.isFamily ? [Validators.required, Validators.pattern("^[0-9]+$")] : this.isShareholder ? [Validators.pattern("^[0-9]+$")] : [Validators.required, Validators.pattern("^[0-9]+$")]],
-      Email1: ['', this.isFamily ? [Validators.pattern(CommonConstant.regexEmail)] : this.isShareholder ?  [Validators.required, Validators.pattern(CommonConstant.regexEmail)] : [Validators.pattern(CommonConstant.regexEmail)]],
+      Email1: ['', Validators.pattern(CommonConstant.regexEmail)],
       UcAddress: this.fb.group({
         Addr: [''],
         AreaCode1: [''],

@@ -1,12 +1,12 @@
 {
-    "title": "Supplier Branch Grading Request",
+    "title": "Supplier Grading Request",
     "component": [
       {
         "type": "textbox",
         "name": "vdr.VENDOR_CODE",
         "id": "VendorCodeId",
         "value": "",
-        "label": "Branch Code",
+        "label": "Supplier Code",
         "placeholder": "Placeholder"
       },
       {
@@ -14,7 +14,7 @@
         "name": "vdr.VENDOR_NAME",
         "id": "VendorNameId",
         "value": "",
-        "label": "Branch Name",
+        "label": "Supplier Name",
         "placeholder": "Placeholder"
       },
       {
@@ -45,13 +45,13 @@
       {
         "type": "sort",
         "position": "center",
-        "label": "BRANCH CODE",
+        "label": "SUPPLIER CODE",
         "name": "vdr.VENDOR_CODE"
       },
       {
         "type": "sort",
         "position": "center",
-        "label": "BRANCH NAME",
+        "label": "SUPPLIER NAME",
         "name": "vdr.VENDOR_NAME"
       },
       {

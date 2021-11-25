@@ -8,12 +8,12 @@
         "mainInfo": [
           {
             "type": "text",
-            "label": "Supplier Branch Code",
+            "label": "Supplier Code",
             "property": "VendorCode"
           },
           {
             "type": "text",
-            "label": "Supplier Branch Name",
+            "label": "Supplier Name",
             "property": "VendorName"
           },
           {

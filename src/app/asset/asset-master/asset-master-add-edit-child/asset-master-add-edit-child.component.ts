@@ -162,7 +162,11 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 });
 
               if (this.isFinal) {
-                this.http.post(URLConstant.GetAssetMasterAttrContentForAssetMaster, { Id: this.AssetMasterId }).pipe(first()).subscribe(
+                let reqGetAssetMasterAttrContentObj = {
+                  AssetMasterId : this.AssetMasterId,
+                  AttrTypeCode : CommonConstant.AttrTypeCodeMaster
+                };
+                this.http.post(URLConstant.GetAssetMasterAttrContentForAssetMasterByAttrTypeCode, reqGetAssetMasterAttrContentObj).pipe(first()).subscribe(
                   (response) => {
                     this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
                     var formGroupObject = new Object();
@@ -250,9 +254,11 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                 });
 
               if (this.isFinal) {
-                let GetAssetMasterAttrContentById: GenericByIdObj = new GenericByIdObj();
-                GetAssetMasterAttrContentById.Id = this.AssetMasterId;
-                this.http.post<ResGetAssetMasterAttrContentByIdObj>(URLConstant.GetAssetMasterAttrContentForAssetMaster, GetAssetMasterAttrContentById).pipe(first()).subscribe(
+                let reqGetAssetMasterAttrContentObj = {
+                  AssetMasterId : this.AssetMasterId,
+                  AttrTypeCode : CommonConstant.AttrTypeCodeMaster
+                };
+                this.http.post<ResGetAssetMasterAttrContentByIdObj>(URLConstant.GetAssetMasterAttrContentForAssetMasterByAttrTypeCode, reqGetAssetMasterAttrContentObj).pipe(first()).subscribe(
                   (response) => {
                     this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
                     var formGroupObject = new Object();
