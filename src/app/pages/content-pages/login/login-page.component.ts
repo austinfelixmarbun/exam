@@ -60,19 +60,19 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.token != null) {
-      this.http.post(AdInsConstant.LoginWithToken, {ModuleCode: environment.Module},  {withCredentials: true}).subscribe(
-        (response) => {
+      await this.http.post(AdInsConstant.LoginWithToken, {ModuleCode: environment.Module},  {withCredentials: true}).toPromise().then(
+        async (response) => {
           var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
-          AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, response['Token']);
           AdInsHelper.SetCookie(this.cookieService, "BusinessDateRaw", formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US'));
           AdInsHelper.SetCookie(this.cookieService, "BusinessDate", DateParse);
           AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
           AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
+          AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, response['Token']);
           AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
 
-          this.http.post(AdInsConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: response["Identity"].RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).subscribe(
+          await this.http.post(AdInsConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: response["Identity"].RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).toPromise().then(
             (response) => {
               AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
               AdInsHelper.RedirectUrl(this.router, [NavigationConstant.DASHBOARD], {});
