@@ -78,7 +78,7 @@
             "name": "ST.REF_NO",
             "id": "TrxRefNoId",
             "value": "",
-            "label": "Transaction Reference No",
+            "label": "Reference No",
             "placeholder": "Placeholder"
         },
         {
@@ -165,7 +165,7 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Transaction Reference No",
+            "label": "Reference No",
             "name": "ST.REF_NO"
         },
         {
