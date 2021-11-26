@@ -59,7 +59,7 @@
             "name": "SO.TRX_REF_NO",
             "id": "TrxRefNoId",
             "value": "",
-            "label": "Transaction Reference No",
+            "label": "Reference No",
             "placeholder": ""
         },
         {
@@ -98,7 +98,7 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Transaction Reference No",
+            "label": "Reference No",
             "name": "TransactionRefNo"
         },
         {
