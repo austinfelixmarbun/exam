@@ -392,9 +392,6 @@ export class OfficeAddComponent implements OnInit {
       if (selectedLvl == 2) critObj.listValue.push(CommonConstant.HeadOffice);
       else critObj.listValue.push(CommonConstant.Branch);
     }
-    // this.lookupOfficeType.forEach(element => {
-    //   critObj.listValue.push(element.MasterCode);
-    // });
     listTempCritObj.push(critObj);
     //#endregion
 
