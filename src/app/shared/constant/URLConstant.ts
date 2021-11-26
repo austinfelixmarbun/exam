@@ -1146,5 +1146,8 @@ export class URLConstant {
   public static GetRefTcById = environment.FoundationR3Url + "/v1" + "/RefTc/GetRefTcById";
 
   public static GetCustCompanyLegalDocByCustCompanyLegalDocId = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/GetCustCompanyLegalDocByCustCompanyLegalDocId";
+
+  //SAVE THIRDPARTYTRXNO
+  public static SaveCustThirdPartyTrxNo = environment.FoundationR3Url + "/v2" + "/Cust/SaveCustThirdPartyTrxNo";
 }
 
