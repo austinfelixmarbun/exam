@@ -21,6 +21,7 @@ import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { UcDropdownListCallbackObj, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
+import { GenericKeyValueListObj } from 'app/shared/model/generic/generic-key-value-list-obj.model';
 
 
 @Component({
@@ -38,7 +39,7 @@ export class OfficeAddComponent implements OnInit {
   mrKonvenSyariah = 'KON';
   isDisabledState: boolean = false;
   isHO: boolean = true;
-  RefOfficeId: number;
+  RefOfficeId: number = 0;
   allOfficeType: any;
   allOfficeClass: any;
   allRefOrg: any;
@@ -102,7 +103,6 @@ export class OfficeAddComponent implements OnInit {
     TaxOffice: ['']
   })
   InputLookupObj: InputLookupObj = new InputLookupObj();
-  listCriteriaTemp: Array<CriteriaObj> = new Array();
   addressObj: UcAddressObj = new UcAddressObj();
   inputAddressObj: InputAddressObj = new InputAddressObj();
 
@@ -125,14 +125,6 @@ export class OfficeAddComponent implements OnInit {
     this.InputLookupObj.addCritInput = new Array();
 
     await this.GetGsMaxHierarchyLvl();
-    if (this.RefOfficeId != undefined && this.RefOfficeId != 0) {
-      let critRefOfficeIdObj = new CriteriaObj();
-      critRefOfficeIdObj.restriction = AdInsConstant.RestrictionNeq;
-      critRefOfficeIdObj.propName = 'A.REF_OFFICE_ID';
-      critRefOfficeIdObj.value = this.RefOfficeId.toString();
-      this.listCriteriaTemp.push(critRefOfficeIdObj);
-      this.InputLookupObj.addCritInput.push(critRefOfficeIdObj);
-    }
 
     await this.GetMasterData();
     if (this.pageType == "edit") {
@@ -176,11 +168,6 @@ export class OfficeAddComponent implements OnInit {
             // IsNationalCourt: this.resultData.IsNationalCourt,
             // NationalCourtOffice: this.resultData.NationalCourtOffice
           });
-          let critObj = new CriteriaObj();
-          critObj.restriction = AdInsConstant.RestrictionEq;
-          critObj.propName = 'A.HIERARCHY_LVL';
-          critObj.value = this.resultData.HierarchyLvl - 1;
-          this.InputLookupObj.addCritInput.push(critObj);
 
           this.addressObj.Addr = this.resultData.OfficeAddr;
           this.addressObj.AreaCode4 = this.resultData.AreaCode4;
@@ -216,7 +203,6 @@ export class OfficeAddComponent implements OnInit {
           this.OfficeForm.controls.NationalCourtOffice.updateValueAndValidity();
         })
     }
-    this.checkType();
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.default = this.addressObj;
     this.inputAddressObj.inputField = this.inputFieldAddr;
@@ -225,6 +211,15 @@ export class OfficeAddComponent implements OnInit {
     this.HierarchyLvlDdl.isSelectOutput = true;
     this.HierarchyLvlDdl.isReady = true;
     this.InputLookupObj.isReady = true;
+    this.checkType();
+    if (this.pageType == "edit") {
+      setTimeout(() => {
+        let tempObj: KeyValueObj = new KeyValueObj();
+        tempObj.Key = this.resultData.HierarchyLvl;
+        tempObj.Value = this.resultData.HierarchyLvl;
+        this.changeHierarchy(tempObj);
+      }, 500);
+    }
   }
 
   async GetMasterData() {
@@ -234,15 +229,6 @@ export class OfficeAddComponent implements OnInit {
       (response) => {
         if (response['RefMasterObjs'].length > 0) {
           this.lookupOfficeType = response['RefMasterObjs'];
-          let critObj = new CriteriaObj();
-          critObj.restriction = AdInsConstant.RestrictionIn;
-          critObj.propName = 'MR_OFFICE_TYPE_CODE';
-          critObj.listValue = new Array();
-          this.lookupOfficeType.forEach(element => {
-            critObj.listValue.push(element.MasterCode);
-          });
-          this.listCriteriaTemp.push(critObj);
-          this.InputLookupObj.addCritInput.push(critObj);
         }
       });
     this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeOfficeClass}).subscribe(
@@ -331,6 +317,7 @@ export class OfficeAddComponent implements OnInit {
     let isHo: boolean = this.OfficeForm.get("OfficeType").value == CommonConstant.HeadOffice;
     this.listMaxHierarchyLvl = new Array();
     let tempHierarchyLvl: AbstractControl = this.OfficeForm.get("HierarchyLvl");
+    if (this.CekCgHierarchyLvl(tempHierarchyLvl)) return;
     if (isHo) {
       this.listMaxHierarchyLvl.push(this.SetKeyValueObjHierarchyLvl(1));
       if (this.pageType != "edit") setTimeout(() => {
@@ -342,6 +329,20 @@ export class OfficeAddComponent implements OnInit {
       this.listMaxHierarchyLvl.push(this.SetKeyValueObjHierarchyLvl(index));
     }
     if (this.pageType != "edit") tempHierarchyLvl.setValue("");
+  }
+
+  CekCgHierarchyLvl(tempHierarchyLvl: AbstractControl): boolean {
+    if (this.OfficeForm.get("OfficeType").value != CommonConstant.CollectionGroup) return false;
+    this.listMaxHierarchyLvl.push(this.SetKeyValueObjHierarchyLvl(2));
+    if (this.pageType != "edit") setTimeout(() => {
+      tempHierarchyLvl.setValue("2");
+      
+      let tempObj: KeyValueObj = new KeyValueObj();
+      tempObj.Key = "2";
+      tempObj.Value = "2";
+      this.changeHierarchy(tempObj);
+    }, 500);
+    return true;
   }
 
   SetKeyValueObjHierarchyLvl(HierarchyLvl: number): KeyValueObj {
@@ -358,24 +359,53 @@ export class OfficeAddComponent implements OnInit {
     }
   }
 
-  changeHierarchy(ev: UcDropdownListCallbackObj) {
-    let selectedValue = ev.selectedObj;
+  changeHierarchy(ev: KeyValueObj) {
+    let selectedLvl: number = +ev.Key;
     let listTempCritObj: Array<CriteriaObj> = new Array();
-    for (let index = 0; index < this.listCriteriaTemp.length; index++) {
-      const element = this.listCriteriaTemp[index];
-      listTempCritObj.push(element);
+    
+    //#region REF_OFFICE_ID criteria
+    if (this.RefOfficeId != 0) {
+      let critRefOfficeIdObj = new CriteriaObj();
+      critRefOfficeIdObj.restriction = AdInsConstant.RestrictionNeq;
+      critRefOfficeIdObj.propName = 'A.REF_OFFICE_ID';
+      critRefOfficeIdObj.value = this.RefOfficeId.toString();
+      listTempCritObj.push(critRefOfficeIdObj);
+    } else {
+      //#region resetValue parent
+      this.InputLookupObj.nameSelect = "";
+      this.InputLookupObj.jsonSelect = { OfficeCode: "" };
+      this.OfficeForm.patchValue({ OfficeParent: 0 });
+      //#endregion
     }
-    //#region resetValue parent
-    this.InputLookupObj.jsonSelect = { OfficeCode: "", RefOfficeId: 0 };
-    this.InputLookupObj.nameSelect = "";
-    this.InputLookupObj.jsonSelect = { OfficeCode: "" };
-    this.OfficeForm.patchValue({ OfficeParent: 0 });
     //#endregion
+
+    //#region MR_OFFICE_TYPE_CODE criteria
     let critObj = new CriteriaObj();
+    critObj.restriction = AdInsConstant.RestrictionIn;
+    critObj.propName = 'MR_OFFICE_TYPE_CODE';
+    critObj.listValue = new Array();
+    let officeType: string = this.OfficeForm.get("OfficeType").value;
+    if (officeType == CommonConstant.CollectionGroup) {
+      critObj.listValue.push(CommonConstant.HeadOffice);
+    }
+    if (officeType == CommonConstant.Branch) {
+      if (selectedLvl == 2) critObj.listValue.push(CommonConstant.HeadOffice);
+      else critObj.listValue.push(CommonConstant.Branch);
+    }
+    // this.lookupOfficeType.forEach(element => {
+    //   critObj.listValue.push(element.MasterCode);
+    // });
+    listTempCritObj.push(critObj);
+    //#endregion
+
+    //#region HIERARCHY_LVL criteria
+    critObj = new CriteriaObj();
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.propName = 'A.HIERARCHY_LVL';
-    critObj.value = +selectedValue["Key"] - 1;
+    critObj.value = selectedLvl - 1;
     listTempCritObj.push(critObj);
+    //#endregion
+
     this.InputLookupObj.addCritInput = listTempCritObj;
     this.ucLookupParent.setAddCritInput();
   }

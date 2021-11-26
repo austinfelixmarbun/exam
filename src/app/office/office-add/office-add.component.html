@@ -76,14 +76,16 @@
             <label class="col-md-3  adInsLabel" translate>Hierarchy Level </label>
             <div class="col-md-4" *ngIf="HierarchyLvlDdl.isReady">
               <lib-ucdropdownlist [dropdownListObj]="HierarchyLvlDdl" [genericList]="listMaxHierarchyLvl" [isDisabled]="isDisabledHierarchyLvlDdl"
-                [parentForm]="OfficeForm" [enjiForm]="enjiForm" [identifier]="'HierarchyLvl'" (callback)="changeHierarchy($event)">
+                [parentForm]="OfficeForm" [enjiForm]="enjiForm" [identifier]="'HierarchyLvl'" (callback)="changeHierarchy($event.selectedObj)">
               </lib-ucdropdownlist>
             </div>
           </div>
           <div [hidden]="OfficeForm.controls.OfficeType.value == 'HO'">
-            <div class="form-group row adins-required">
-              <label class="col-md-3  adInsLabel" translate>Office Parent </label>
-              <div class="col-md-4">
+            <div class="form-group row">
+              <div class="col-md-3 adins-required">
+                <label class=" adInsLabel" translate>Office Parent </label>
+              </div>
+              <div class="col-md-4" [hidden]="OfficeForm.controls.HierarchyLvl.value == ''">
                 <lib-uclookupgeneric [lookupInput]="InputLookupObj" [parentForm]='OfficeForm' [enjiForm]="enjiForm"
                   [identifier]="'lookupOfficeParent'" (lookup)="getLookUp($event)" *ngIf="InputLookupObj.isReady" #LookupParent>
                 </lib-uclookupgeneric>
