@@ -2,9 +2,9 @@
   <div class="card">
     <div class="card-body">
       <form class="form form-horizontal" [formGroup]="CustomerForm" (ngSubmit)="CustomerForm.valid && SaveForm()"
-        #enjiForm="ngForm">
+            #enjiForm="ngForm">
         <lib-ucSubsection [id]="'MainInfoPersId'" [title]="CustNameLabel + ' Main Information'"
-          [panel]="'MainInfoPers'">
+                          [panel]="'MainInfoPers'">
         </lib-ucSubsection>
         <div class="form-body" id="MainInfoPers">
           <div class="form-group row" *ngIf="CustDataMode == CustDataModeMain && CustId == 0">
@@ -21,8 +21,8 @@
                 <label class="col-md-4 adins-required-label" for="LinkSupplier" translate>Link Supplier </label>
                 <div class="col-md-8">
                   <lib-uclookupgeneric *ngIf="inputLookupObj?.isReady" [lookupInput]="inputLookupObj"
-                    [parentForm]='CustomerForm' [enjiForm]='enjiForm' [identifier]="'lookupSupp'" #LookupSupplier
-                    (lookup)="SetSupplier($event)">
+                                       [parentForm]='CustomerForm' [enjiForm]='enjiForm' [identifier]="'lookupSupp'" #LookupSupplier
+                                       (lookup)="SetSupplier($event)">
                   </lib-uclookupgeneric>
                 </div>
               </div>
@@ -32,8 +32,8 @@
             <label class="col-md-2 adins-required-label" translate>Family Relationship </label>
             <div class="col-md-4" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustPersonalRelationship]?.isReady">
               <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustPersonalRelationship]"
-                [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrCustRelationship'"
-                [genericList]="MrCustRelationshipCodeObj" (callback)="RelationshipChange($event.selectedValue)">
+                                  [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrCustRelationship'"
+                                  [genericList]="MrCustRelationshipCodeObj" (callback)="RelationshipChange($event.selectedValue)">
               </lib-ucdropdownlist>
             </div>
           </div>
@@ -43,13 +43,13 @@
                 <label class="col-md-4 adins-required-label" translate>{{CustNameLabel}} Name </label>
                 <div class="col-md-8" *ngIf="CustDataMode != CustDataModeMain && existingCustomerLookUpObj.isReady">
                   <lib-uclookupgeneric [lookupInput]="existingCustomerLookUpObj" [parentForm]="CustomerForm"
-                    [enjiForm]="enjiForm" [identifier]="'ExistingCustName'" (lookup)=getLookUpCustomer($event)
-                    #LookupExistingCust>
+                                       [enjiForm]="enjiForm" [identifier]="'ExistingCustName'" (lookup)=getLookUpCustomer($event)
+                                       #LookupExistingCust>
                   </lib-uclookupgeneric>
                 </div>
                 <div class="col-md-8" *ngIf="CustDataMode == CustDataModeMain">
                   <input type="text" class="form-control adInsInput" formControlName="CustName"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.CustName.invalid}">
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.CustName.invalid}">
                   <lib-uc-show-errors [control]="CustomerForm.controls.CustName" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -69,7 +69,7 @@
                 <label class="col-md-4 adins-required-label" translate>Birth Place</label>
                 <div class="col-md-8">
                   <input type="text" class="form-control adInsInput" formControlName="BirthPlace"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.BirthPlace.invalid}">
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.BirthPlace.invalid}">
                   <lib-uc-show-errors [control]="CustomerForm.controls.BirthPlace" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -79,8 +79,8 @@
                 <label class="col-md-4 adins-required-label" translate>ID Type </label>
                 <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeIdType]?.isReady">
                   <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeIdType]"
-                    [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrIdTypeCode'"
-                    (callback)="onOptionsSelected()"></lib-ucdropdownlist>
+                                      [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrIdTypeCode'"
+                                      (callback)="onOptionsSelected()"></lib-ucdropdownlist>
                 </div>
               </div>
 
@@ -88,9 +88,9 @@
                 <label class="col-md-4 adins-required-label" translate>ID Number </label>
                 <div class="col-md-8">
                   <input type="text" class="form-control adInsInput" formControlName="IdNo"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.IdNo.invalid}">
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.IdNo.invalid}">
                   <lib-uc-show-errors [customPattern]="customPattern" [control]="CustomerForm.controls.IdNo"
-                    [submit]="enjiForm.submitted">
+                                      [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
               </div>
@@ -100,11 +100,11 @@
                   Expired Date</label>
                 <div class="col-md-8">
                   <input *ngIf="noExpDate.includes(CustomerForm.controls.MrIdTypeCode.value)" readonly type="date"
-                    class="form-control" id="idExpDt" formControlName="IdExpiredDt">
+                         class="form-control" id="idExpDt" formControlName="IdExpiredDt">
                   <input *ngIf="!noExpDate.includes(CustomerForm.controls.MrIdTypeCode.value)" type="date"
-                    class="form-control adInsInput" formControlName="IdExpiredDt"
-                    [min]="businessDtMax | date: 'yyyy-MM-dd'"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.IdExpiredDt.invalid } ">
+                         class="form-control adInsInput" formControlName="IdExpiredDt"
+                         [min]="businessDtMax | date: 'yyyy-MM-dd'"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.IdExpiredDt.invalid } ">
                   <lib-uc-show-errors [control]="CustomerForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -114,7 +114,7 @@
                 <label class="col-md-4 {{ isFamily ? 'adins-required-label' : isShareholder ? '' : 'adins-required-label'}}" translate>Mobile Phone </label>
                 <div class="col-md-8">
                   <input type="text" class="form-control adInsInput" formControlName="MobilePhnNo1"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MobilePhnNo1.invalid}">
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MobilePhnNo1.invalid}">
                   <lib-uc-show-errors [control]="CustomerForm.controls.MobilePhnNo1" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -124,7 +124,7 @@
                 <label class="col-md-4 adins-required-label" translate>Customer Model </label>
                 <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustModel]?.isReady">
                   <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustModel]"
-                    [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrCustModelCode'" (callback)="changeCustModel()"></lib-ucdropdownlist>
+                                      [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrCustModelCode'" (callback)="changeCustModel()"></lib-ucdropdownlist>
                 </div>
               </div>
 
@@ -136,7 +136,7 @@
                 <label class="col-md-4 adins-required-label" translate>Gender </label>
                 <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeGender]?.isReady">
                   <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeGender]"
-                    [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrGenderCode'">
+                                      [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrGenderCode'">
                   </lib-ucdropdownlist>
                 </div>
               </div>
@@ -155,8 +155,8 @@
                 <label class="col-md-4 adins-required-label" translate>Birth Date</label>
                 <div class="col-md-8">
                   <input type="date" class="form-control adInsInput" formControlName="BirthDt"
-                    [max]="businessDtMin | date: 'yyyy-MM-dd'"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.BirthDt.invalid}">
+                         [max]="businessDtMin | date: 'yyyy-MM-dd'"
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.BirthDt.invalid}">
                   <lib-uc-show-errors [control]="CustomerForm.controls.BirthDt" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -166,7 +166,7 @@
                 <label class="col-md-4 adInsLabel" translate>Tax Id No</label>
                 <div class="col-md-8">
                   <input type="text" class="form-control adInsInput" formControlName="TaxIdNo"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.TaxIdNo.invalid}">
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.TaxIdNo.invalid}">
                   <lib-uc-show-errors [control]="CustomerForm.controls.TaxIdNo" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -176,7 +176,7 @@
                 <label class="col-md-4 {{ isFamily ? '' : isShareholder ? '' : 'adins-required-label'}}" translate>Mother Maiden Name</label>
                 <div class="col-md-8">
                   <input type="text" class="form-control adInsInput" formControlName="MotherMaidenName"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MotherMaidenName.invalid}">
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MotherMaidenName.invalid}">
                   <lib-uc-show-errors [control]="CustomerForm.controls.MotherMaidenName" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -186,16 +186,16 @@
                 <label class="col-md-4 adins-required-label" translate>Marital Status</label>
                 <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeMaritalStat]?.isReady">
                   <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeMaritalStat]"
-                    [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrMaritalStatCode'">
+                                      [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrMaritalStatCode'">
                   </lib-ucdropdownlist>
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-md-4" translate>Email </label>
+                <label class="col-md-4" [ngClass]="{ 'adins-required-label' : CustDataMode != CustDataModeShareholder}" translate>Email </label>
                 <div class="col-md-8">
                   <input type="text" class="form-control adInsInput" formControlName="Email1"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.Email1.invalid}">
+                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.Email1.invalid}">
                   <lib-uc-show-errors [control]="CustomerForm.controls.Email1" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
@@ -204,15 +204,15 @@
             </div>
           </div>
           <app-shareholder-form-x *ngIf="CustDataMode == CustDataModeShareholder" [parentForm]="CustomerForm"
-            [enjiForm]="enjiForm" [CustId]="CustId" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId"
-            [CustType]="CustTypePersonal" (outputExisting)=GetExistingFormObj($event)
-            (outputChange)="outputChangeReceived($event)" #ShareholderFormX></app-shareholder-form-x>
+                                  [enjiForm]="enjiForm" [CustId]="CustId" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId"
+                                  [CustType]="CustTypePersonal" (outputExisting)=GetExistingFormObj($event)
+                                  (outputChange)="outputChangeReceived($event)" #ShareholderFormX></app-shareholder-form-x>
           <app-family-form-x *ngIf="CustDataMode == CustDataModeFamily" [parentForm]="CustomerForm" [enjiForm]="enjiForm"
-            [CustId]="CustId" (outputExisting)=GetExistingFormObj($event) (outputChange)="outputChangeReceived($event)"
-            #FamilyForm></app-family-form-x>
+                             [CustId]="CustId" (outputExisting)=GetExistingFormObj($event) (outputChange)="outputChangeReceived($event)"
+                             #FamilyForm></app-family-form-x>
           <app-cust-attr-form *ngIf="CustDataMode != CustDataModeMain" [Label]="CustDataMode" [CustId]="CustId"
-            [AttrGroup]="AttrGroupCustPersonalOther" [AttrCodes]="listAttrCodes" [parentForm]="CustomerForm"
-            [enjiForm]="enjiForm" #CustAttrForm></app-cust-attr-form>
+                              [AttrGroup]="AttrGroupCustPersonalOther" [AttrCodes]="listAttrCodes" [parentForm]="CustomerForm"
+                              [enjiForm]="enjiForm" #CustAttrForm></app-cust-attr-form>
         </div>
         <lib-ucSubsection [id]="'LegalAddr'" [title]="'Legal Address'" [panel]="'LegalAddrSection'">
         </lib-ucSubsection>
@@ -221,7 +221,7 @@
             <label class="col-md-2 adInsLabel" for="IsAddressKnown" translate>Is Address Known</label>
             <div class="col-md-9">
               <input type="checkbox" [checked]="checkIsAddressKnown"
-                (change)="OnCheckIsAddressKnown($event.target.checked)" />
+                     (change)="OnCheckIsAddressKnown($event.target.checked)" />
             </div>
           </div>
           <div class="form-group row" *ngIf=" checkIsAddressKnown && !IsLockCopyAddrBtn && CustDataMode != CustDataModeMain">
@@ -233,7 +233,7 @@
             </div>
           </div>
           <lib-ucaddress *ngIf="checkIsAddressKnown"  [addressObj]="inputAddressObj" [UCAddrForm]="CustomerForm" [enjiForm]="enjiForm"
-            [identifier]="'UcAddress'">
+                         [identifier]="'UcAddress'">
           </lib-ucaddress>
         </div>
         <div *ngIf="CustDataMode == CustDataModeMain">

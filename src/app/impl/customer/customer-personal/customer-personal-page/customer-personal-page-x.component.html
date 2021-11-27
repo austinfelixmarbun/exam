@@ -125,13 +125,9 @@
               <app-family-listing-x [CustId]="IdCust" [isMarried]="isMarried" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 3"></app-family-listing-x>
             </div>
             <div id="contact-tab" class="content" role="tabpanel" aria-labelledby="contact-tab-trigger">
-              <app-customer-emergency-contact #CustEmrgcyCtc *ngIf="CustStepIndex == 4" [custId]="IdCust" (outputTab)="getValue($event)" > 
+              <app-customer-emergency-contact #CustEmrgcyCtc *ngIf="CustStepIndex == 4" [custId]="IdCust" (outputTab)="getValue($event)" >
               </app-customer-emergency-contact>
             </div>
-            <!-- <div id="group-tab" class="content" role="tabpanel" aria-labelledby="group-tab-trigger">
-              <app-cust-group-tab [MrCustTypeCode]="'PERSONAL'" [CustId]="IdCust" (outputTab)="getValue($event)" *ngIf="CustStepIndex == 5">
-              </app-cust-group-tab>
-            </div> -->
             <div id="job-data-tab" class="content" role="tabpanel" aria-labelledby="job-data-tab-trigger">
               <app-customer-personal-job-data-x #CustJobData (outputTab)="getValue($event)" *ngIf="CustStepIndex == 5"></app-customer-personal-job-data-x>
             </div>

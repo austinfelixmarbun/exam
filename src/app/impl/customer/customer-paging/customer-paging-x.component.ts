@@ -13,8 +13,6 @@ import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
 export class CustomerPagingXComponent implements OnInit {
 
   inputPagingObj: UcPagingObj = new UcPagingObj();
-  readonly AddLinkPersonal: string = NavigationConstant.CUST_PERSONAL_MAIN_INFO_X;
-  readonly AddLinkCoy: string = NavigationConstant.CUST_COY_MAIN_INFO;
   readonly AddLinkNewCust: string = NavigationConstant.CUST_NEW_FORM;
   constructor() { }
 
