@@ -35,9 +35,7 @@ export class ReviewUploadNegativeAssetPagingComponent implements OnInit {
       this.inputPagingObj.isJoinExAPI = true;
 
       this.requestTaskModel.ProcessKey = CommonConstant.WorkflowUploadNegativeAsset;
-      this.requestTaskModel.OfficeCode = UserAccess[CommonConstant.OFFICE_CODE];
       this.requestTaskModel.TaskDefinitionKey = CommonConstant.WfUploadNegativeAssetReview;
-      this.requestTaskModel.RoleCode = UserAccess[CommonConstant.ROLE_CODE];
       this.requestTaskModel.OfficeRoleCodes = [UserAccess[CommonConstant.ROLE_CODE],
                                                UserAccess[CommonConstant.OFFICE_CODE],
                                                UserAccess[CommonConstant.ROLE_CODE] + "-" + UserAccess[CommonConstant.OFFICE_CODE]];

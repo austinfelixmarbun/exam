@@ -34,12 +34,21 @@
             "placeholder": ""
         },
         {
-            "type": "textbox",
-            "name": "SO.MR_SURVEY_INITIAL_CODE",
-            "id": "MrSurveyInitialCodeId",
+            "type": "dropdown",
+            "name": "RM.MASTER_CODE",
+            "id": "MasterCodeId",
             "value": "",
+            "placeholder": "",
+            "isFromURL": true,
+            "ddlType": "all",
+            "url": "",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
             "label": "Survey Initial",
-            "placeholder": ""
+            "items": [],
+            "itemsUrl": [],
+            "criteriaPropName": "RefMasterTypeCode",
+            "criteriaPropValue": "SRVY_SOURCE_CODE",
+            "environment":"FOU"
         },
         {
             "type": "textbox",
@@ -91,7 +100,7 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Transaction Reference No",
+            "label": "Reference No",
             "name": "TransactionRefNo"
         },
         {
@@ -115,7 +124,7 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Addr",
+            "label": "Address",
             "name": "Addr"
         },
         {

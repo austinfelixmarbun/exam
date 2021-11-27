@@ -4,10 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { NegativeCustomerComponent } from './negative-customer/negative-customer.component';
 import { NegativeCustomerDetailComponent } from './negative-customer/negative-customer-detail/negative-customer-detail.component';
 import { CustomerPagingComponent } from './customer-paging/customer-paging.component';
-import { CustomerPersonalMainInfoComponent } from './customer-personal/customer-personal-main-info/customer-personal-main-info.component';
-import { CustomerPersonalDuplicateCheckComponent } from './customer-personal/customer-personal-duplicate-check/customer-personal-duplicate-check.component';
-import { CustomerCompanyMainInfoComponent } from './customer-company/customer-company-main-info/customer-company-main-info.component';
-import { CustomerCompanyDuplicateCheckComponent } from './customer-company/customer-company-duplicate-check/customer-company-duplicate-check.component';
 import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
 import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
 import { CustomerPersonalAddressComponent } from './customer-personal/customer-personal-address/customer-personal-address.component';
@@ -19,8 +15,6 @@ import { JobDataNonProfessionalComponent } from './customer-personal/customer-pe
 import { CustomerViewComponent } from './customer-view/customer-view.component';
 import { CustomerCompanyPageComponent } from './customer-company/customer-company-page/customer-company-page.component';
 import { EditMainDataPagingComponent } from './edit-main-data/edit-main-data-paging/edit-main-data-paging.component';
-import { EditMainDataPersonalComponent } from './edit-main-data/edit-main-data-personal/edit-main-data-personal.component';
-import { EditMainDataCompanyComponent } from './edit-main-data/edit-main-data-company/edit-main-data-company.component';
 import { UploadNegativeCustomerComponent } from './negative-customer/upload-negative-customer/upload-negative-customer.component';
 import { ReviewUploadNegativeCustomerPagingComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-paging/review-upload-negative-customer-paging.component';
 import { ReviewUploadNegativeCustomerDetailComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-detail/review-upload-negative-customer-detail.component';
@@ -54,33 +48,6 @@ const routes: Routes = [
         component: CustomerPagingComponent,
         data: {
           title: 'Customer Paging'
-        }
-      }, {
-        path: PathConstant.CUST_PERSONAL_MAIN_INFO,
-        component: CustomerPersonalMainInfoComponent,
-        data: {
-          title: 'Customer Personal Main Info'
-        }
-      },
-      {
-        path: PathConstant.CUST_PERSONAL_DUP_CHECK,
-        component: CustomerPersonalDuplicateCheckComponent,
-        data: {
-          title: 'Customer Personal Duplicate Check'
-        }
-      },
-      {
-        path: PathConstant.CUST_COY_MAIN_INFO,
-        component: CustomerCompanyMainInfoComponent,
-        data: {
-          title: 'Customer Company Main Info'
-        }
-      },
-      {
-        path: PathConstant.CUST_COY_DUP_CHECK,
-        component: CustomerCompanyDuplicateCheckComponent,
-        data: {
-          title: 'Customer Company DuplicateCheck  '
         }
       },
       {
@@ -221,20 +188,6 @@ const routes: Routes = [
         component: EditMainDataPagingComponent,
         data: {
           title: 'Edit Main Data Page'
-        }
-      },
-      {
-        path: PathConstant.CUST_EDIT_MAIN_DATA_PERSONAL,
-        component: EditMainDataPersonalComponent,
-        data: {
-          title: 'Edit Main Data Personal Page'
-        }
-      },
-      {
-        path: PathConstant.CUST_EDIT_MAIN_DATA_COY,
-        component: EditMainDataCompanyComponent,
-        data: {
-          title: 'Edit Main Data Company Page'
         }
       },
       {

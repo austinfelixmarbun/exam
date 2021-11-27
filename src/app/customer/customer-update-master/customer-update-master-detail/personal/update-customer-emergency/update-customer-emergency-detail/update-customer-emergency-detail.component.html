@@ -84,9 +84,25 @@
     </div>
   </div>
   <div class="form-group row">
+    <label class="col-md-2 adins-label" translate>Id Expired Date</label>
+    <div class="col-md-4" *ngIf="AppEmergencyData.IdExpiredDt">
+      {{AppEmergencyData.IdExpiredDt | date: 'dd-MMM-yyyy'}}
+    </div>
+    <div class="col-md-4" *ngIf="!AppEmergencyData.IdExpiredDt"> - </div>
+    <div class="col-md-2">
+      <button *ngIf="CustomerEmergencyForm.controls.IdExpiredDt.value != AppEmergencyData.IdExpiredDt" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('IdExpiredDt', '')">Copy</button>
+    </div>
+    <div class="col-md-4">
+      <input type="date" class="form-control adInsInput" formControlName="IdExpiredDt"
+      [min]="businessDtMin | date: 'yyyy-MM-dd'" [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerEmergencyForm.controls.IdExpiredDt.invalid}">
+      <lib-uc-show-errors [control]="CustomerEmergencyForm.controls.IdExpiredDt" [submit]="enjiForm.submitted">
+      </lib-uc-show-errors>
+    </div>
+  </div>
+  <div class="form-group row">
     <label class="col-md-2 adins-label" translate>Birth Date</label>
     <div class="col-md-4">
-      {{AppEmergencyData.BirthDate}}
+      {{AppEmergencyData.BirthDate | date: 'dd-MMM-yyyy'}}
     </div>
     <div class="col-md-2">
       <button *ngIf="CustomerEmergencyForm.controls.BirthDate.value != AppEmergencyData.BirthDate" type="button" class="btn btn-raised btn-primary" (click)="CopyHandler('BirthDate', '')">Copy</button>

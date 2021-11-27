@@ -26,6 +26,8 @@ import { CustDocFileObj } from 'app/shared/model/cust-doc-file/cust-doc-file-obj
 import { ThirdPartyUploadService } from './services/ThirdPartyUpload.Service';
 import { ResSysConfigResultObj } from 'app/shared/model/response/res-sys-config-result-obj,model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { ReqCustDocFileObj } from 'app/shared/model/cust-doc-file/req-cust-doc-file-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 @Component({
   selector: 'app-third-party-form',
@@ -156,6 +158,8 @@ export class ThirdPartyFormComponent implements OnInit {
     }
 
     await this.checkThirdPartyTrxNo();
+    await this.saveThirdPartyTrxNo();
+    console.log(this.thirdPartyTrxNo);
 
 
     let tempForm = this.parentForm.getRawValue();
@@ -177,9 +181,23 @@ export class ThirdPartyFormComponent implements OnInit {
       reqPefindoSmartSearchObj.IdNo = tempForm["TaxIdNo"];
     }
 
-    const modalRef = this.modalService.open(PefindoReqComponent);
-    modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
-    modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+    if(this.custObj.CustId > 0) {
+      var custDocFileObjs: ReqCustDocFileObj = new ReqCustDocFileObj();
+      custDocFileObjs.CustId = this.custObj.CustId;
+      custDocFileObjs.CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
+      this.http.post(URLConstant.SaveCustDocFile, custDocFileObjs).subscribe(
+        (response) => {
+          const modalRef = this.modalService.open(PefindoReqComponent);
+          modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
+          modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+        }
+      );
+    }
+    else {
+      const modalRef = this.modalService.open(PefindoReqComponent);
+      modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
+      modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+    }
 
   }
 
@@ -202,7 +220,7 @@ export class ThirdPartyFormComponent implements OnInit {
     // cek nomor telepon valid atau gak 
     if (this.MrCustTypeCode == CommonConstant.MR_CUST_TYPE_CODE_PERSONAL) {
       let MobilePhnNo = tempForm["MobilePhnNo1"];
-      if (MobilePhnNo.substring(0,2) != '62') {
+      if (MobilePhnNo.substring(0, 2) != '62') {
         this.toastr.warningMessage(ExceptionConstant.MOBILE_PHN_NO_INVALID);
         return;
       }
@@ -213,6 +231,7 @@ export class ThirdPartyFormComponent implements OnInit {
     }
 
     await this.checkThirdPartyTrxNo();
+    await this.saveThirdPartyTrxNo();
 
     if (this.CustDataMode == this.CustDataModeMain) {
       custObj.CustName = tempForm["CustName"];
@@ -236,9 +255,24 @@ export class ThirdPartyFormComponent implements OnInit {
       custPersonalObj.MobilePhnNo1 = tempForm["MobilePhnNo1"];
     }
 
-    const modalRef = this.modalService.open(TrustingSocialReqHeaderComponent);
-    modalRef.componentInstance.CustObj = custObj;
-    modalRef.componentInstance.CustPersonalObj = custPersonalObj;
+    if(this.custObj.CustId > 0) {
+      var custDocFileObjs: ReqCustDocFileObj = new ReqCustDocFileObj();
+      custDocFileObjs.CustId = this.custObj.CustId;
+      custDocFileObjs.CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
+      this.http.post(URLConstant.SaveCustDocFile, custDocFileObjs).subscribe(
+        (response) => {
+          const modalRef = this.modalService.open(TrustingSocialReqHeaderComponent);
+          modalRef.componentInstance.CustObj = custObj;
+          modalRef.componentInstance.CustPersonalObj = custPersonalObj;
+        }
+      );
+    }
+    else {
+      const modalRef = this.modalService.open(TrustingSocialReqHeaderComponent);
+      modalRef.componentInstance.CustObj = custObj;
+      modalRef.componentInstance.CustPersonalObj = custPersonalObj;
+    }
+    
   }
 
 
@@ -260,6 +294,18 @@ export class ThirdPartyFormComponent implements OnInit {
         }
       );
     }
+  }
+
+  async saveThirdPartyTrxNo() {
+    let reqByIdAndCode: GenericObj = new GenericObj();
+    reqByIdAndCode.Id = this.custObj.CustId;
+    reqByIdAndCode.Code = this.thirdPartyTrxNo;
+
+    await this.http.post(URLConstant.SaveCustThirdPartyTrxNo, reqByIdAndCode).toPromise().then(
+      response => {
+
+      }
+    )
   }
 
   markFormGroupTouched(formGroup: FormGroup) {

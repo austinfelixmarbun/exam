@@ -30,7 +30,7 @@
             "items": [],
             "itemsUrl": [],
             "criteriaPropName": "RefMasterTypeCode",
-            "criteriaPropValue": "SURVEY_INITIAL",
+            "criteriaPropValue": "SRVY_SOURCE_CODE",
             "environment":"FOU"
         },
         {
@@ -58,7 +58,7 @@
             "name": "SO.TRX_REF_NO",
             "id": "TrxRefNoId",
             "value": "",
-            "label": "Transaction Number",
+            "label": "Reference No",
             "placeholder": "Placeholder"
         },
         {
@@ -119,7 +119,7 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Transaction Reference No",
+            "label": "Reference No",
             "name": "SO.TRX_REF_NO"
         },
         {

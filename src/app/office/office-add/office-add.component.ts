@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { OfficeObj } from 'app/shared/model/office-obj.model';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { OrgMdlObj } from 'app/shared/model/org-mdl-obj.model';
@@ -18,6 +18,10 @@ import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { UcDropdownListCallbackObj, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import { UclookupgenericComponent } from '@adins/uclookupgeneric';
+import { GenericKeyValueListObj } from 'app/shared/model/generic/generic-key-value-list-obj.model';
 
 
 @Component({
@@ -35,7 +39,7 @@ export class OfficeAddComponent implements OnInit {
   mrKonvenSyariah = 'KON';
   isDisabledState: boolean = false;
   isHO: boolean = true;
-  RefOfficeId: number;
+  RefOfficeId: number = 0;
   allOfficeType: any;
   allOfficeClass: any;
   allRefOrg: any;
@@ -64,17 +68,10 @@ export class OfficeAddComponent implements OnInit {
   resultData: any;
   isActive: boolean = true;
   isAllowAppCreated: boolean = true;
-  officeClose: boolean = true;
   officeObj: OfficeObj;
-  refMasterObj: RefMasterObj;
-  refMasterOfficeType: RefMasterObj;
-  refMasterCgType: RefMasterObj;
-  orgMdlObj: OrgMdlObj
   arrCrit: any;
 
-  refMasterKonsyaType: RefMasterObj;
-  officeparentId: any;
-
+  
   resultDataLawCourt: any;
 
   cbIsNationalCourt: boolean;
@@ -96,6 +93,7 @@ export class OfficeAddComponent implements OnInit {
     CntctPersonEmail2: ['', Validators.pattern(CommonConstant.regexEmail)],
     CntctPersonMobilePhnNo1: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     CntctPersonMobilePhnNo2: ['', [Validators.pattern('^[0-9]+$')]],
+    HierarchyLvl: ['', Validators.required],
     IsActive: false,
     IsHaveCashier: false,
     OfficeClose: false,
@@ -105,8 +103,8 @@ export class OfficeAddComponent implements OnInit {
     TaxOffice: ['']
   })
   InputLookupObj: InputLookupObj = new InputLookupObj();
-  addressObj: UcAddressObj;
-  inputAddressObj: InputAddressObj;
+  addressObj: UcAddressObj = new UcAddressObj();
+  inputAddressObj: InputAddressObj = new InputAddressObj();
 
   readonly CancelLink: string = NavigationConstant.OFFICE_PAGING;
   responseRefOfficeX: any;
@@ -121,118 +119,23 @@ export class OfficeAddComponent implements OnInit {
       }
     });
   }
-  ngOnInit() {
+  async ngOnInit() {
     this.InputLookupObj.urlJson = "./assets/lookup/lookupOfficeParent.json";
     this.InputLookupObj.isRequired = true;
     this.InputLookupObj.addCritInput = new Array();
 
-    if(this.RefOfficeId != undefined && this.RefOfficeId != 0){
-      var critRefOfficeIdObj = new CriteriaObj();
-      critRefOfficeIdObj.restriction = AdInsConstant.RestrictionNeq;
-      critRefOfficeIdObj.propName = 'A.REF_OFFICE_ID';
-      critRefOfficeIdObj.value = this.RefOfficeId.toString();
-      this.InputLookupObj.addCritInput.push(critRefOfficeIdObj);
-    }
+    await this.GetGsMaxHierarchyLvl();
 
-    this.refMasterObj = new RefMasterObj();
-    this.refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeOfficeClass;
-    this.refMasterOfficeType = new RefMasterObj();
-    this.refMasterOfficeType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeOfficeType;
-    this.refMasterCgType = new RefMasterObj();
-    this.refMasterCgType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCenterGrpType;
-    this.refMasterKonsyaType = new RefMasterObj();
-    this.refMasterKonsyaType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeKonvenSyariah;
-
-    let tempReq: GenericObj = new GenericObj();
-    tempReq.Code = CommonConstant.RefMasterTypeCodeOfficeType;
-    this.httpClient.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, tempReq).subscribe(
-      (response) => {
-        if (response['RefMasterObjs'].length > 0) {
-          this.lookupOfficeType = response['RefMasterObjs'];
-          this.arrCrit = new Array();
-          var critObj = new CriteriaObj();
-          critObj.restriction = AdInsConstant.RestrictionIn;
-          critObj.propName = 'MR_OFFICE_TYPE_CODE';
-          critObj.listValue = new Array();
-          this.lookupOfficeType.forEach(element => {
-            critObj.listValue.push(element.MasterCode);
-          });
-
-          this.InputLookupObj.addCritInput.push(critObj);
-        }
-        this.InputLookupObj.isReady = true;
-
-      });
-
-    if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
-        (response) => {
-          if (response[CommonConstant.ReturnObj].length > 0) {
-            this.allOfficeClass = response[CommonConstant.ReturnObj];
-            this.OfficeForm.patchValue({
-              MrOfficeClassCode: this.allOfficeClass[0].Key
-            });
-          }
-        });
-
-      this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
-        (response) => {
-          if (response[CommonConstant.ReturnObj].length > 0) {
-            this.allCgType = response[CommonConstant.ReturnObj];
-            this.OfficeForm.patchValue({
-              MrCenterGrpTypeCode: this.allCgType[0].Key
-            });
-          }
-
-        });
-      this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterKonsyaType).subscribe(
-        (response) => {
-          if (response[CommonConstant.ReturnObj].length > 0) {
-            this.allKonSya = response[CommonConstant.ReturnObj];
-            this.OfficeForm.patchValue({
-              KonSya: this.allKonSya[0].Key
-            });
-          }
-        })
-      this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterOfficeType).subscribe(
-        (response) => {
-          if (response[CommonConstant.ReturnObj].length > 0) {
-            this.allOfficeType = response[CommonConstant.ReturnObj];
-            this.OfficeForm.patchValue({
-              OfficeType: this.allOfficeType[0].Key
-            });
-          }
-        })
-
-      this.httpClient.post(URLConstant.GetListActiveHolidaySchemeH, null).subscribe(
-        (response) => {
-          if (response[CommonConstant.ReturnObj].length > 0) {
-            this.allHolidaySchm = response[CommonConstant.ReturnObj];
-            this.OfficeForm.patchValue({
-              HolidayScheme: this.allHolidaySchm[0].HolidaySchmHId
-            });
-          }
-        })
-      this.httpClient.post(URLConstant.GetListActiveWorkingSchmH, null).subscribe(
-        (response) => {
-          if (response[CommonConstant.ReturnObj].length > 0) {
-            this.allWorkingHourSchm = response[CommonConstant.ReturnObj];
-            this.OfficeForm.patchValue({
-              WorkingHourScheme: this.allWorkingHourSchm[0].WorkingHourSchmHId
-            });
-          }
-        })
-
-
-    }
-    else if (this.pageType == "edit") {
+    await this.GetMasterData();
+    if (this.pageType == "edit") {
       this.OfficeForm.controls["OfficeCode"].disable();
       this.OfficeForm.controls["OfficeType"].disable();
       this.OfficeForm.controls["MrCenterGrpTypeCode"].disable();
+      this.isDisabledHierarchyLvlDdl = "true";
       this.officeObj = new OfficeObj();
       this.addressObj = new UcAddressObj();
       this.officeObj.RefOfficeId = this.RefOfficeId;
-      this.httpClient.post(URLConstant.GetRefOfficeByRefOfficeId, {Id : this.RefOfficeId}).subscribe(
+      await this.httpClient.post(URLConstant.GetRefOfficeByRefOfficeId, { Id: this.RefOfficeId }).toPromise().then(
         (response) => {
           this.resultData = response;
           
@@ -245,6 +148,7 @@ export class OfficeAddComponent implements OnInit {
             OfficeParent: this.resultData.ParentId,
             OfficeType: this.resultData.MrOfficeTypeCode,
             OfficeShortName: this.resultData.OfficeShortName,
+            MrCenterGrpTypeCode: this.resultData.MrCenterGrpTypeCode,
             MrOfficeClassCode: this.resultData.MrOfficeClassCode,
             KonSya: this.resultData.MrKonvenSyariahCode,
             HolidayScheme: this.resultData.HolidaySchmHId,
@@ -259,11 +163,12 @@ export class OfficeAddComponent implements OnInit {
             CntctPersonEmail2: this.resultData.CntctPersonEmail2,
             CntctPersonMobilePhnNo1: this.resultData.CntctPersonMobilePhnNo1,
             CntctPersonMobilePhnNo2: this.resultData.CntctPersonMobilePhnNo2,
+            HierarchyLvl: this.resultData.HierarchyLvl.toString(),
             // TaxOffice: this.resultData.RefTaxOfficeXId,
             // IsNationalCourt: this.resultData.IsNationalCourt,
             // NationalCourtOffice: this.resultData.NationalCourtOffice
-          })
-          this.checkType();
+          });
+
           this.addressObj.Addr = this.resultData.OfficeAddr;
           this.addressObj.AreaCode4 = this.resultData.AreaCode4;
           this.addressObj.AreaCode3 = this.resultData.AreaCode3;
@@ -284,63 +189,6 @@ export class OfficeAddComponent implements OnInit {
           this.inputFieldAddr.inputLookupObj = new InputLookupObj();
           this.inputFieldAddr.inputLookupObj.jsonSelect = { Zipcode: this.resultData.Zipcode };
           this.inputFieldAddr.inputLookupObj.nameSelect = this.resultData.Zipcode;
-          this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterCgType).subscribe(
-            (response) => {
-              if (response[CommonConstant.ReturnObj].length > 0) {
-                this.allCgType = response[CommonConstant.ReturnObj];
-                this.OfficeForm.patchValue({
-                  MrCenterGrpTypeCode: this.resultData.MrCenterGrpTypeCode
-                });
-              }
-
-            })
-
-          this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
-            (response) => {
-              if (response[CommonConstant.ReturnObj].length > 0) {
-                this.allOfficeClass = response[CommonConstant.ReturnObj];
-                this.OfficeForm.patchValue({
-                  MrOfficeClassCode: this.resultData.MrOfficeClassCode
-                });
-              }
-            })
-          this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterOfficeType).subscribe(
-            (response) => {
-              if (response[CommonConstant.ReturnObj].length > 0) {
-                this.allOfficeType = response[CommonConstant.ReturnObj];
-                this.OfficeForm.patchValue({
-                  OfficeType: this.resultData.MrOfficeTypeCode
-                });
-              }
-            })
-          this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterKonsyaType).subscribe(
-            (response) => {
-              if (response[CommonConstant.ReturnObj].length > 0) {
-                this.allKonSya = response[CommonConstant.ReturnObj];
-
-                this.OfficeForm.patchValue({
-                  KonSya: this.resultData.MrKonvenSyariahCode
-                });
-              }
-            })
-          this.httpClient.post(URLConstant.GetListActiveHolidaySchemeH, null).subscribe(
-            (response) => {
-              if (response[CommonConstant.ReturnObj].length > 0) {
-                this.allHolidaySchm = response[CommonConstant.ReturnObj];
-                this.OfficeForm.patchValue({
-                  HolidayScheme: this.resultData.HolidaySchmHId
-                });
-              }
-            })
-          this.httpClient.post(URLConstant.GetListActiveWorkingSchmH, null).subscribe(
-            (response) => {
-              if (response[CommonConstant.ReturnObj].length > 0) {
-                this.allWorkingHourSchm = response[CommonConstant.ReturnObj];
-                this.OfficeForm.patchValue({
-                  WorkingHourScheme: this.resultData.WorkingHourSchmHId
-                });
-              }
-            })
 
           this.cbIsNationalCourt = this.resultData.IsNationalCourt;
 
@@ -358,69 +206,269 @@ export class OfficeAddComponent implements OnInit {
     this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.default = this.addressObj;
     this.inputAddressObj.inputField = this.inputFieldAddr;
+    this.inputAddressObj.inputField.inputLookupObj.isReadonly = false;
+    this.HierarchyLvlDdl.isCustomList = true;
+    this.HierarchyLvlDdl.isSelectOutput = true;
+    this.HierarchyLvlDdl.isReady = true;
+    this.InputLookupObj.isReady = true;
+    this.checkType();
+    if (this.pageType == "edit") {
+      setTimeout(() => {
+        let tempObj: KeyValueObj = new KeyValueObj();
+        tempObj.Key = this.resultData.HierarchyLvl;
+        tempObj.Value = this.resultData.HierarchyLvl;
+        this.changeHierarchy(tempObj);
+      }, 500);
+    }
   }
+
+  async GetMasterData() {
+    let isAdd: boolean = this.pageType == "add";
+
+    await this.httpClient.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, { Code: CommonConstant.RefMasterTypeCodeOfficeType }).toPromise().then(
+      (response) => {
+        if (response['RefMasterObjs'].length > 0) {
+          this.lookupOfficeType = response['RefMasterObjs'];
+        }
+      });
+    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeOfficeClass}).subscribe(
+      (response) => {
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.allOfficeClass = response[CommonConstant.ReturnObj];
+          if (isAdd) {
+            this.OfficeForm.patchValue({
+              MrOfficeClassCode: this.allOfficeClass[0].Key
+            });
+          }
+        }
+      });
+
+    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCenterGrpType}).subscribe(
+      (response) => {
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.allCgType = response[CommonConstant.ReturnObj];
+          if (isAdd) {
+            this.OfficeForm.patchValue({
+              MrCenterGrpTypeCode: this.allCgType[0].Key
+            });
+          }
+        }
+
+      });
+    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeKonvenSyariah}).subscribe(
+      (response) => {
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.allKonSya = response[CommonConstant.ReturnObj];
+          if (isAdd) {
+            this.OfficeForm.patchValue({
+              KonSya: this.allKonSya[0].Key
+            });
+          }
+        }
+      });
+    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeOfficeType}).subscribe(
+      (response) => {
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.allOfficeType = response[CommonConstant.ReturnObj];
+          if (isAdd) {
+            this.OfficeForm.patchValue({
+              OfficeType: this.allOfficeType[0].Key
+            });
+          }
+        }
+      });
+    this.httpClient.post(URLConstant.GetListActiveHolidaySchemeH, null).subscribe(
+      (response) => {
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.allHolidaySchm = response[CommonConstant.ReturnObj];
+          if (isAdd) {
+            this.OfficeForm.patchValue({
+              HolidayScheme: this.allHolidaySchm[0].HolidaySchmHId
+            });
+          }
+        }
+      });
+    this.httpClient.post(URLConstant.GetListActiveWorkingSchmH, null).subscribe(
+      (response) => {
+        if (response[CommonConstant.ReturnObj].length > 0) {
+          this.allWorkingHourSchm = response[CommonConstant.ReturnObj];
+          if (isAdd) {
+            this.OfficeForm.patchValue({
+              WorkingHourScheme: this.allWorkingHourSchm[0].WorkingHourSchmHId
+            });
+          }
+        }
+      });
+  }
+
+  MaxHierarchyLvl: number = 0;
+  HierarchyLvlDdl: UcDropdownListObj = new UcDropdownListObj();
+  isDisabledHierarchyLvlDdl: string = '';
+  listMaxHierarchyLvl: Array<KeyValueObj> = new Array();
+  async GetGsMaxHierarchyLvl() {
+    await this.httpClient.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeMaxHierarchyLvlOffice }).toPromise().then(
+      (response: {GsValue: string}) => {
+        this.MaxHierarchyLvl = +response.GsValue;
+      }
+    )
+  }
+
+  SetListMaxHierarchyLvl() {
+    let isHo: boolean = this.OfficeForm.get("OfficeType").value == CommonConstant.HeadOffice;
+    this.listMaxHierarchyLvl = new Array();
+    let tempHierarchyLvl: AbstractControl = this.OfficeForm.get("HierarchyLvl");
+    if (this.CekCgHierarchyLvl(tempHierarchyLvl)) return;
+    if (isHo) {
+      this.listMaxHierarchyLvl.push(this.SetKeyValueObjHierarchyLvl(1));
+      if (this.pageType != "edit") setTimeout(() => {
+        tempHierarchyLvl.setValue("1");
+      }, 500);
+      return;
+    }
+    for (let index = 2; index <= this.MaxHierarchyLvl; index++) {
+      this.listMaxHierarchyLvl.push(this.SetKeyValueObjHierarchyLvl(index));
+    }
+    if (this.pageType != "edit") tempHierarchyLvl.setValue("");
+  }
+
+  CekCgHierarchyLvl(tempHierarchyLvl: AbstractControl): boolean {
+    if (this.OfficeForm.get("OfficeType").value != CommonConstant.CollectionGroup) return false;
+    this.listMaxHierarchyLvl.push(this.SetKeyValueObjHierarchyLvl(2));
+    if (this.pageType != "edit") setTimeout(() => {
+      tempHierarchyLvl.setValue("2");
+      
+      let tempObj: KeyValueObj = new KeyValueObj();
+      tempObj.Key = "2";
+      tempObj.Value = "2";
+      this.changeHierarchy(tempObj);
+    }, 500);
+    return true;
+  }
+
+  SetKeyValueObjHierarchyLvl(HierarchyLvl: number): KeyValueObj {
+    let tempKeyValueObj: KeyValueObj = new KeyValueObj();
+    tempKeyValueObj.Key = HierarchyLvl.toString();
+    tempKeyValueObj.Value = HierarchyLvl.toString();
+    return tempKeyValueObj;
+  }
+  
+  private ucLookupParent: UclookupgenericComponent;
+  @ViewChild('LookupParent') set content(content: UclookupgenericComponent) {
+    if (content) { // initially setter gets called with undefined
+      this.ucLookupParent = content;
+    }
+  }
+
+  changeHierarchy(ev: KeyValueObj) {
+    let selectedLvl: number = +ev.Key;
+    let listTempCritObj: Array<CriteriaObj> = new Array();
+    
+    //#region REF_OFFICE_ID criteria
+    if (this.RefOfficeId != 0) {
+      let critRefOfficeIdObj = new CriteriaObj();
+      critRefOfficeIdObj.restriction = AdInsConstant.RestrictionNeq;
+      critRefOfficeIdObj.propName = 'A.REF_OFFICE_ID';
+      critRefOfficeIdObj.value = this.RefOfficeId.toString();
+      listTempCritObj.push(critRefOfficeIdObj);
+    } else {
+      //#region resetValue parent
+      this.InputLookupObj.nameSelect = "";
+      this.InputLookupObj.jsonSelect = { OfficeCode: "" };
+      this.OfficeForm.patchValue({ OfficeParent: 0 });
+      //#endregion
+    }
+    //#endregion
+
+    //#region MR_OFFICE_TYPE_CODE criteria
+    let critObj = new CriteriaObj();
+    critObj.restriction = AdInsConstant.RestrictionIn;
+    critObj.propName = 'MR_OFFICE_TYPE_CODE';
+    critObj.listValue = new Array();
+    let officeType: string = this.OfficeForm.get("OfficeType").value;
+    if (officeType == CommonConstant.CollectionGroup) {
+      critObj.listValue.push(CommonConstant.HeadOffice);
+    }
+    if (officeType == CommonConstant.Branch) {
+      if (selectedLvl == 2) critObj.listValue.push(CommonConstant.HeadOffice);
+      else critObj.listValue.push(CommonConstant.Branch);
+    }
+    listTempCritObj.push(critObj);
+    //#endregion
+
+    //#region HIERARCHY_LVL criteria
+    critObj = new CriteriaObj();
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.propName = 'A.HIERARCHY_LVL';
+    critObj.value = selectedLvl - 1;
+    listTempCritObj.push(critObj);
+    //#endregion
+
+    this.InputLookupObj.addCritInput = listTempCritObj;
+    this.ucLookupParent.setAddCritInput();
+  }
+
   SaveForm(): void {
     this.officeObj = new OfficeObj();
     this.officeObj.RowVersion = "";
 
-    this.officeObj.OfficeCode = this.OfficeForm.value.OfficeCode;
-    this.officeObj.OfficeShortName = this.OfficeForm.value.OfficeShortName;
-    this.officeObj.OfficeName = this.OfficeForm.value.OfficeName;
-    this.officeObj.MrOfficeClassCode = this.OfficeForm.value.MrOfficeClassCode;
-    this.officeObj.IsActive = this.OfficeForm.value.IsActive;
-    this.officeObj.IsHaveCashier = this.OfficeForm.value.IsHaveCashier;
-    this.officeObj.IsAllowAppCreated = this.OfficeForm.value.AllowAppCreated;
-    this.officeObj.HolidaySchmHId = this.OfficeForm.value.HolidayScheme;
-    this.officeObj.WorkingHourSchmHId = this.OfficeForm.value.WorkingHourScheme;
-    this.officeObj.MrKonvenSyariahCode = this.OfficeForm.value.KonSya;
-    this.officeObj.MrOfficeTypeCode = this.OfficeForm.value.OfficeType;
-    this.officeObj.IsOfficeClose = this.OfficeForm.value.OfficeClose;
-    this.officeObj.CntctPersonName = this.OfficeForm.value.CntctPersonName;
-    this.officeObj.CntctPersonJobTitle = this.OfficeForm.value.CntctPersonJobTitle;
-
-    if (this.OfficeForm.controls.OfficeType.value == CommonConstant.HeadOffice) {
+    let tempOfficeForm = this.OfficeForm.getRawValue();
+    this.officeObj.OfficeCode = tempOfficeForm.OfficeCode;
+    this.officeObj.OfficeShortName = tempOfficeForm.OfficeShortName;
+    this.officeObj.OfficeName = tempOfficeForm.OfficeName;
+    this.officeObj.MrOfficeClassCode = tempOfficeForm.MrOfficeClassCode;
+    this.officeObj.IsActive = tempOfficeForm.IsActive;
+    this.officeObj.IsHaveCashier = tempOfficeForm.IsHaveCashier;
+    this.officeObj.IsAllowAppCreated = tempOfficeForm.AllowAppCreated;
+    this.officeObj.HolidaySchmHId = tempOfficeForm.HolidayScheme;
+    this.officeObj.WorkingHourSchmHId = tempOfficeForm.WorkingHourScheme;
+    this.officeObj.MrKonvenSyariahCode = tempOfficeForm.KonSya;
+    this.officeObj.MrOfficeTypeCode = tempOfficeForm.OfficeType;
+    this.officeObj.IsOfficeClose = tempOfficeForm.OfficeClose;
+    this.officeObj.CntctPersonName = tempOfficeForm.CntctPersonName;
+    this.officeObj.CntctPersonJobTitle = tempOfficeForm.CntctPersonJobTitle;
+    
+    this.officeObj.ParentId = tempOfficeForm.OfficeParent;
+    this.officeObj.HierarchyLvl = tempOfficeForm.HierarchyLvl;
+    if (this.officeObj.MrOfficeTypeCode == CommonConstant.HeadOffice) {
       this.officeObj.ParentId = null;
-    }
-    if (this.OfficeForm.controls.OfficeType.value != CommonConstant.HeadOffice) {
-      this.officeObj.ParentId = this.OfficeForm.value.OfficeParent;
+      this.officeObj.HierarchyLvl = 1;
     }
 
+    this.officeObj.MrCenterGrpTypeCode = "";
     if (this.officeObj.MrOfficeTypeCode == CommonConstant.CollectionGroup) {
-      this.officeObj.MrCenterGrpTypeCode = this.OfficeForm.value.MrCenterGrpTypeCode;
-    } else {
-      this.officeObj.MrCenterGrpTypeCode = "";
+      this.officeObj.MrCenterGrpTypeCode = tempOfficeForm.MrCenterGrpTypeCode;
     }
 
-    this.officeObj.CntctPersonEmail1 = this.OfficeForm.value.CntctPersonEmail1;
-    this.officeObj.CntctPersonEmail2 = this.OfficeForm.value.CntctPersonEmail2;
-    this.officeObj.CntctPersonMobilePhnNo1 = this.OfficeForm.value.CntctPersonMobilePhnNo1;
-    this.officeObj.CntctPersonMobilePhnNo2 = this.OfficeForm.value.CntctPersonMobilePhnNo2;
+    this.officeObj.CntctPersonEmail1 = tempOfficeForm.CntctPersonEmail1;
+    this.officeObj.CntctPersonEmail2 = tempOfficeForm.CntctPersonEmail2;
+    this.officeObj.CntctPersonMobilePhnNo1 = tempOfficeForm.CntctPersonMobilePhnNo1;
+    this.officeObj.CntctPersonMobilePhnNo2 = tempOfficeForm.CntctPersonMobilePhnNo2;
 
-    this.officeObj.OfficeAddr = this.OfficeForm.value.UcAddress.Addr;
-    this.officeObj.AreaCode4 = this.OfficeForm.value.UcAddress.AreaCode4;
-    this.officeObj.AreaCode3 = this.OfficeForm.value.UcAddress.AreaCode3;
-    this.officeObj.AreaCode2 = this.OfficeForm.value.UcAddress.AreaCode2;
-    this.officeObj.AreaCode1 = this.OfficeForm.value.UcAddress.AreaCode1;
-    this.officeObj.City = this.OfficeForm.value.UcAddress.City;
-    this.officeObj.ZipCode = this.OfficeForm.value.UcAddressZipcode.value;
-    this.officeObj.PhnArea1 = this.OfficeForm.value.UcAddress.PhnArea1;
-    this.officeObj.Phn1 = this.OfficeForm.value.UcAddress.Phn1;
-    this.officeObj.PhnExt1 = this.OfficeForm.value.UcAddress.PhnExt1;
-    this.officeObj.PhnArea2 = this.OfficeForm.value.UcAddress.PhnArea2;
-    this.officeObj.Phn2 = this.OfficeForm.value.UcAddress.Phn2;
-    this.officeObj.PhnExt2 = this.OfficeForm.value.UcAddress.PhnExt2;
-    this.officeObj.PhnArea3 = this.OfficeForm.value.UcAddress.PhnArea3;
-    this.officeObj.Phn3 = this.OfficeForm.value.UcAddress.Phn2;
-    this.officeObj.PhnExt2 = this.OfficeForm.value.UcAddress.PhnExt3;
-    this.officeObj.FaxArea = this.OfficeForm.value.UcAddress.FaxArea;
-    this.officeObj.Fax = this.OfficeForm.value.UcAddress.Fax;
+    this.officeObj.OfficeAddr = tempOfficeForm.UcAddress.Addr;
+    this.officeObj.AreaCode4 = tempOfficeForm.UcAddress.AreaCode4;
+    this.officeObj.AreaCode3 = tempOfficeForm.UcAddress.AreaCode3;
+    this.officeObj.AreaCode2 = tempOfficeForm.UcAddress.AreaCode2;
+    this.officeObj.AreaCode1 = tempOfficeForm.UcAddress.AreaCode1;
+    this.officeObj.City = tempOfficeForm.UcAddress.City;
+    this.officeObj.ZipCode = tempOfficeForm.UcAddressZipcode.value;
+    this.officeObj.PhnArea1 = tempOfficeForm.UcAddress.PhnArea1;
+    this.officeObj.Phn1 = tempOfficeForm.UcAddress.Phn1;
+    this.officeObj.PhnExt1 = tempOfficeForm.UcAddress.PhnExt1;
+    this.officeObj.PhnArea2 = tempOfficeForm.UcAddress.PhnArea2;
+    this.officeObj.Phn2 = tempOfficeForm.UcAddress.Phn2;
+    this.officeObj.PhnExt2 = tempOfficeForm.UcAddress.PhnExt2;
+    this.officeObj.PhnArea3 = tempOfficeForm.UcAddress.PhnArea3;
+    this.officeObj.Phn3 = tempOfficeForm.UcAddress.Phn2;
+    this.officeObj.PhnExt2 = tempOfficeForm.UcAddress.PhnExt3;
+    this.officeObj.FaxArea = tempOfficeForm.UcAddress.FaxArea;
+    this.officeObj.Fax = tempOfficeForm.UcAddress.Fax;
 
     if (this.pageType == "add") {
       this.httpClient.post(URLConstant.AddRefOfficeV2, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
+
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.OFFICE_PAGING], {});
         }
       );
     }
@@ -432,8 +480,8 @@ export class OfficeAddComponent implements OnInit {
       this.httpClient.post(URLConstant.EditRefOfficeV2, this.officeObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_PAGING],{});
+
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.OFFICE_PAGING], {});
         }
       );
 
@@ -453,6 +501,7 @@ export class OfficeAddComponent implements OnInit {
       this.OfficeForm.controls.OfficeParent.setValidators([Validators.required]);
       this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
     }
+    this.SetListMaxHierarchyLvl();
   }
   toggleActive(e) {
     this.isActive = e.target.checked;
