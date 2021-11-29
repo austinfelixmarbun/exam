@@ -58,71 +58,47 @@ export class PefindoViewComponent implements OnInit {
   }
 
   redirectTab(ev) {
+    let url: string = "";
     if (ev == 0) { // Subject Info Personal / Company
-      let url: string = NavigationConstant.PEFINDO_SUBJECT_INFO_PERSONAL;
-      if(this.MrCustTypeCode == CommonConstant.CustTypeCompany){
+      url = NavigationConstant.PEFINDO_SUBJECT_INFO_PERSONAL;
+      if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
         url = NavigationConstant.PEFINDO_SUBJECT_INFO_COMPANY
       }
-
-      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
-        AdInsHelper.RedirectUrl(this.router,[url],{ "TrxNo": this.Param }, true);
-      });
     }
     else if (ev == 1) { // MO Summary
-      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_MO_SUMMARY],{ "TrxNo": this.Param }, true);
-      });
+      url = NavigationConstant.PEFINDO_MO_SUMMARY;
     }
     else if (ev == 2) { // PEFINDO Score
-      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_PEFINDO_SCORE],{ "TrxNo": this.Param }, true);
-      });
+      url = NavigationConstant.PEFINDO_PEFINDO_SCORE;
     }
     else if (ev == 3) { // Contracts
-      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_CONTRACTS],{ "TrxNo": this.Param }, true);
-      });
+      url = NavigationConstant.PEFINDO_CONTRACTS;
     }
     else if (ev == 4) { // PEFINDO Alert Quest
-      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_PEFINDO_ALERT_QUEST],{ "TrxNo": this.Param }, true);
-      });
+      url = NavigationConstant.PEFINDO_PEFINDO_ALERT_QUEST;
     }
     else if (ev == 5) { // Securities
-      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_SECURITIES],{ "TrxNo": this.Param }, true);
-      });
+      url = NavigationConstant.PEFINDO_SECURITIES;
     }
     else if (ev == 6) { // Other Liabilities
-      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_OTHER_LIABILITIES],{ "TrxNo": this.Param }, true);
-      });
+      url = NavigationConstant.PEFINDO_OTHER_LIABILITIES;
     }
     else if (ev == 7) { // Involvements
-      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_INVOLVEMENTS],{ "TrxNo": this.Param }, true);
-      });
+      url = NavigationConstant.PEFINDO_INVOLVEMENTS;
     }
     else if (ev == 8) { // Relations
-      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_RELATIONS],{ "TrxNo": this.Param }, true);
-      });
+      url = NavigationConstant.PEFINDO_RELATIONS;
     }
     else if (ev == 9) { // Inquiries
-      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_INQUIRIES],{ "TrxNo": this.Param }, true);
-      });
+      url = NavigationConstant.PEFINDO_INQUIRIES;
     }
     else if (ev == 10) { // Disputes
-      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_DISPUTES],{ "TrxNo": this.Param }, true);
-      });
+      url = NavigationConstant.PEFINDO_DISPUTES;
     }
     else if (ev == 11) { // Financial Statements
-      this.router.navigateByUrl("/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_PEFINDO, { skipLocationChange: true }).then(() => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.PEFINDO_FINANCIAL_STATEMENTS],{ "TrxNo": this.Param }, true);
-      });
+      url = NavigationConstant.PEFINDO_FINANCIAL_STATEMENTS;
     }
+    AdInsHelper.RedirectUrlView(this.router, [url], { "TrxNo": this.Param }, true);
   }
 
 }
