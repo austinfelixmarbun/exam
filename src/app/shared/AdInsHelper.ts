@@ -159,18 +159,18 @@ export class AdInsHelper {
         window.open(url, "_blank");
     }
 
-    public static RedirectUrl(router: Router, url: Array<string>, queryParams: {} = {}, isSkipLocation: boolean = false) {
+    public static RedirectUrl(router: Router, url: Array<string>, queryParams: {} = {}, isSkipLocation: boolean = false, isReuseRoute: boolean = false) {
         // Ngebuat bisa jalanin Constructor dan NgOnInit lagi
         router.routeReuseStrategy.shouldReuseRoute = () => {
-            return false;
+          return isReuseRoute;
         }
-
+    
         router.navigateByUrl(
-            router.createUrlTree(
-                [url.toString()], { queryParams: queryParams, skipLocationChange: isSkipLocation }
-            )
+          router.createUrlTree(
+            [url.toString()], { queryParams: queryParams }
+          ), { skipLocationChange: isSkipLocation }
         );
-    }
+      }
       
     public static OpenProdOfferingViewByCodeAndVersion(Code, Version) {
         window.open(environment.FoundationR3Web + "/View/Offering?prodOfferingHId=0&prodOfferingCode=" + Code + "&prodOfferingVersion=" + Version, "_blank");
