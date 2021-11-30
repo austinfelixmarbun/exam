@@ -67,20 +67,22 @@
       </div>
   
       <div class="form-group row">
-        <label class="col-md-4 adInsLabel" translate> Share(%) </label>
+        <label class="col-md-4 {{ isShareOwnerMandatory ? 'adins-required-label' : 'adInsLabel'}}" translate> Share(%) </label>
         <div class="col-md-8">
           <input type="" currencyMask min="0" max="100" class="form-control" formControlName="SharePrcnt"
             [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.SharePrcnt.invalid}"
-            [options]="CurrencyMaskPrct">
+            [options]="CurrencyMaskPrct" (focusout)="ChangeValidityShareOwner()">
           <lib-uc-show-errors [control]="parentForm.controls.SharePrcnt" [submit]="enjiForm.submitted">
           </lib-uc-show-errors>
         </div>
       </div>
   
       <div class="form-group row">
-        <label class="col-md-4 adInsLabel" translate>Is Owner</label>
+        <label class="col-md-4 {{ isShareOwnerMandatory ? 'adins-required-label' : 'adInsLabel'}}" translate>Is Owner</label>
         <div class="col-md-8">
-          <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsOwner" />
+          <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsOwner" (change)="ChangeValidityShareOwner()" />
+          <lib-uc-show-errors [control]="parentForm.controls.IsOwner" [submit]="enjiForm.submitted">
+          </lib-uc-show-errors>
         </div>
       </div>
   

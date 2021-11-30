@@ -1,32 +1,32 @@
-import {HttpClient} from '@angular/common/http';
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
-import {AdInsHelper} from 'app/shared/AdInsHelper';
-import {CommonConstant} from 'app/shared/constant/CommonConstant';
-import {ExceptionConstant} from 'app/shared/constant/ExceptionConstant';
-import {URLConstant} from 'app/shared/constant/URLConstant';
-import {CookieService} from 'ngx-cookie';
-import {ShareholderFormComponent} from 'app/customer/sharing-component/new-cust-component/component/shareholder-form/shareholder-form.component';
-import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
-import {ThirdPartyUploadService} from 'app/customer/sharing-component/new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
-import {ActivatedRoute} from '@angular/router';
-import {ReqCoyObj} from 'app/shared/model/new-cust/req-coy-obj.model';
-import {InputAddressObj} from 'app/shared/model/input-address-obj.model';
-import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
-import {CustDocFileFormObj} from 'app/shared/model/cust-doc-file/cust-doc-file-form-obj.model';
-import {InputFieldObj} from 'app/shared/model/input-field-obj.model';
-import {CustObj} from 'app/shared/model/cust-obj.model';
-import {UcAddressObj} from 'app/shared/model/uc-address-obj.model';
-import {VendorAddrObj} from 'app/shared/model/vendor-addr-obj.model';
-import {CustFormExistingObj} from 'app/shared/model/new-cust/shareholder/shareholder-form-existing-obj.model';
-import {CustAddrObj} from 'app/shared/model/cust-addr-obj.model';
-import {GenericObj} from 'app/shared/model/Generic/generic-obj.model';
-import {UcDropdownListObj} from 'app/shared/model/library/uc-dropdown-list-obj.model';
-import {CurrentUserContext} from 'app/shared/model/current-user-context.model';
-import {CustCompanyObj} from 'app/shared/model/cust-company-obj.model';
-import {CustCompanyMgmntShrholderObj} from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
-import {VendorObj} from 'app/shared/model/vendor-obj.model';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CookieService } from 'ngx-cookie';
+import { ShareholderFormComponent } from 'app/customer/sharing-component/new-cust-component/component/shareholder-form/shareholder-form.component';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { ThirdPartyUploadService } from 'app/customer/sharing-component/new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
+import { ActivatedRoute } from '@angular/router';
+import { ReqCoyObj } from 'app/shared/model/new-cust/req-coy-obj.model';
+import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { CustDocFileFormObj } from 'app/shared/model/cust-doc-file/cust-doc-file-form-obj.model';
+import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
+import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
+import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
+import { CustFormExistingObj } from 'app/shared/model/new-cust/shareholder/shareholder-form-existing-obj.model';
+import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
+import { GenericObj } from 'app/shared/model/Generic/generic-obj.model';
+import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
+import { CustCompanyObj } from 'app/shared/model/cust-company-obj.model';
+import { CustCompanyMgmntShrholderObj } from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
+import { VendorObj } from 'app/shared/model/vendor-obj.model';
 
 @Component({
   selector: 'app-new-cust-company-main-data-x',
@@ -57,12 +57,12 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
   constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService,
     private cookieService: CookieService, private thirdPartyUploadService: ThirdPartyUploadService,
     private route: ActivatedRoute) {
-      this.route.queryParams.subscribe(params => {
-        if (params["From"] != null) {
-          this.pageFrom = params["From"];
-        }
-      });
-    }
+    this.route.queryParams.subscribe(params => {
+      if (params["From"] != null) {
+        this.pageFrom = params["From"];
+      }
+    });
+  }
 
   //#region Readonly
   readonly RefMasterTypeCodeCompanyType: string = CommonConstant.RefMasterTypeCodeCompanyType;
@@ -133,7 +133,8 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
       IsSupplier: [false],
       SupplCode: [''],
       SupplName: [''],
-      SupplId: ['']
+      SupplId: [''],
+      isForeigner: [false]
     });
     if (this.CustDataMode != this.CustDataModeMain) {
       this.CustomerForm.get("CustName").disable();
@@ -201,6 +202,8 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
     this.CustomerForm.get("MrCustModelCode").disable();
     this.CustomerForm.get("MrCompanyTypeCode").disable();
     this.CustomerForm.get("TaxIdNo").disable();
+    this.CheckTaxIdFormat();
+    this.CustomerForm.get("isForeigner").disable();
     this.IsLockCopyAddrBtn = true;
   }
 
@@ -242,7 +245,7 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
   IsLockCopyAddrBtn: boolean = false;
   IsCustLoaded: boolean = false;
   async GetExistingData() {
-    if (this.CustId == 0){
+    if (this.CustId == 0) {
       this.custObj.IsCustomer = true;
       this.IsCustLoaded = true;
       return;
@@ -272,7 +275,9 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
         this.existingCustomerLookUpObj.nameSelect = response.CustName;
         this.existingCustomerLookUpObj.jsonSelect = { CustName: response.CustName };
         this.existingCustomerLookUpObj.isReady = true;
-        if(this.existingCustomerLookUpObj.isReady && this.CustDataMode != this.CustDataModeMain){
+        this.CheckTaxIdFormat();
+        if (this.existingCustomerLookUpObj.isReady && this.CustDataMode != this.CustDataModeMain) {
+          this.CustomerForm.get("isForeigner").disable();
           this.CustomerForm.get("CustName").disable();
           this.CustomerForm.get("TaxIdNo").disable();
         }
@@ -327,7 +332,7 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
   }
 
   async SaveForm() {
-    if(this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)){
+    if (this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)) {
       return;
     }
 
@@ -403,11 +408,30 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
     return tempReqObj
   }
 
-  SetThirdPartyTrxNo(e){
+  SetThirdPartyTrxNo(e) {
     this.thirdPartyTrxNo = e;
   }
 
-  SetCustFileFormObjs(e){
+  SetCustFileFormObjs(e) {
     this.CustDocFileFormObjs = e;
+  }
+
+  CheckTaxIdFormat() {
+    if (isNaN(this.CustomerForm.controls.TaxIdNo.value)) {
+      this.CustomerForm.patchValue({
+        isForeigner: true
+      });
+    }
+    this.ChangeTaxIdValidity();
+  }
+
+  ChangeTaxIdValidity() {
+    if (this.CustomerForm.controls.isForeigner.value == true) {
+      this.CustomerForm.get("TaxIdNo").setValidators([Validators.required]);
+    }
+    else {
+      this.CustomerForm.get("TaxIdNo").setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
+    }
+    this.CustomerForm.get("TaxIdNo").updateValueAndValidity();
   }
 }

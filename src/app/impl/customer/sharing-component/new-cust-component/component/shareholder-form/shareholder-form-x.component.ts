@@ -1,24 +1,24 @@
-import {UclookupgenericComponent} from '@adins/uclookupgeneric';
-import {DatePipe} from '@angular/common';
-import {HttpClient} from '@angular/common/http';
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {AdInsHelper} from 'app/shared/AdInsHelper';
-import {AdInsConstant} from 'app/shared/AdInstConstant';
-import {CommonConstant} from 'app/shared/constant/CommonConstant';
-import {URLConstant} from 'app/shared/constant/URLConstant';
-import {CookieService} from 'ngx-cookie';
-import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
-import {CustFormExistingObj} from 'app/shared/model/new-cust/shareholder/shareholder-form-existing-obj.model';
-import {UcDropdownListObj} from 'app/shared/model/library/uc-dropdown-list-obj.model';
-import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
-import {CurrentUserContext} from 'app/shared/model/current-user-context.model';
-import {CustCompanyMgmntShrholderObj} from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
-import {RefProfessionObj} from 'app/shared/model/ref-profession-obj.model';
-import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
-import {ReqRefMasterByTypeCodeAndMasterCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
-import {CustPersonalJobDataObj} from 'app/shared/model/cust-personal-job-data-obj.model';
-import {RefMasterObj} from 'app/shared/model/ref-master-obj.model';
+import { UclookupgenericComponent } from '@adins/uclookupgeneric';
+import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CookieService } from 'ngx-cookie';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { CustFormExistingObj } from 'app/shared/model/new-cust/shareholder/shareholder-form-existing-obj.model';
+import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
+import { CustCompanyMgmntShrholderObj } from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
+import { RefProfessionObj } from 'app/shared/model/ref-profession-obj.model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
+import { CustPersonalJobDataObj } from 'app/shared/model/cust-personal-job-data-obj.model';
+import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 
 @Component({
   selector: 'app-shareholder-form-x',
@@ -135,6 +135,7 @@ export class ShareholderFormXComponent implements OnInit {
           });
         }
         this.tempExisting.CustCompanyMgmntShrholder = response;
+        this.ChangeValidityShareOwner();
       }
     )
   }
@@ -222,5 +223,23 @@ export class ShareholderFormXComponent implements OnInit {
 
     this.professionLookUpObj.addCritInput = listCriteriaObj;
     this.ucLookupProfession.setAddCritInput();
+  }
+
+  isShareOwnerMandatory : boolean = false;
+  ChangeValidityShareOwner() {
+    console.log("nyan cat")
+    if (this.parentForm.controls.SharePrcnt.value == 0 && this.parentForm.controls.IsOwner.value == false) {
+      this.parentForm.get("SharePrcnt").setValidators([Validators.min(0), Validators.max(100)]);
+      this.parentForm.get("IsOwner").clearValidators();
+      this.isShareOwnerMandatory = false;
+    }
+    else{
+      this.parentForm.get("SharePrcnt").setValidators([Validators.min(0.000001), Validators.max(100)]);
+      this.parentForm.get("IsOwner").setValidators([Validators.requiredTrue]);
+      this.isShareOwnerMandatory = true;
+      
+    }
+    this.parentForm.get("SharePrcnt").updateValueAndValidity();
+    this.parentForm.get("IsOwner").updateValueAndValidity();
   }
 }
