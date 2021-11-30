@@ -407,7 +407,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
           (response.AreaCode4 == "" || response.AreaCode1 == null) &&
           (response.Addr == "" || response.Addr == null) &&
           (response.City == "" || response.City == null) &&
-          (response.MrHouseOwnershipCode == "" || response.MrHouseOwnershipCode == null)
+          (response.MrHouseOwnershipCode == "" || response.MrHouseOwnershipCode == null) 
         ) {
           this.checkIsAddressKnown = false;
         } else {
@@ -715,6 +715,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
         }
       });
     }
+    
     let tempForm = this.CustomerForm.getRawValue();
     let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
     reqSubmitObj.CustObj = this.custObj;
@@ -744,6 +745,10 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       reqSubmitObj.CustPersonalFamilyObj = this.SetCustPersonalFamilyData();
     }
 
+    if (this.tempCustAddr.RowVersion === null) {
+      this.tempCustAddr.RowVersion = ""; 
+    }
+
     reqSubmitObj.CustAddr = this.tempCustAddr;
     reqSubmitObj.CustAddr.CustId = this.CustId;
     reqSubmitObj.CustAddr.Addr = tempForm["UcAddress"]["Addr"];
@@ -756,7 +761,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     reqSubmitObj.CustAddr.Zipcode = tempForm["UcAddressZipcode"]["value"];
     reqSubmitObj.CustAddr.SubZipcode = tempForm["UcAddressZipcode"]["value"];
     reqSubmitObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
-
+    
     if (this.CustDataMode != this.CustDataModeMain) {
       reqSubmitObj.CustObj.CustName = tempForm["ExistingCustName"].value;
       reqSubmitObj.CustPersonalObj.CustFullName = tempForm["ExistingCustName"].value;
