@@ -44,6 +44,7 @@ export class BankInfoComponent implements OnInit {
 
   open(content) {
     this.mode = "add";
+    this.title = "Add Bank Account";
     this.setLookup();
     this.BankRegisForm.patchValue({
       AccNumber: "",
@@ -152,8 +153,10 @@ export class BankInfoComponent implements OnInit {
     }
   }
 
+  title: string = "";
   async editBank(id, content) {
     this.mode = "edit";
+    this.title = "Edit Bank Account";
     this.VendorBankAccId = id;
     await this.vendorService.GetVendorBankAccByVendorBankAccId({Id: this.VendorBankAccId}).toPromise().then(response => {
       this.objEdit = response;
