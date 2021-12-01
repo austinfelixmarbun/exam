@@ -26,18 +26,16 @@
       "placeholder": "Placeholder"
     },
     {
-      "type": "datepicker",
-      "label": "Request Dt <=",
-      "name": "hist.REQ_DT",
-      "id": "ReqDtLte",
-      "value": "2100-01-01",
-      "restriction": "lte",
-      "placeholder": "",
-      "datatype": "date"
+      "type": "textbox",
+      "name": "hist.NEW_GRADE",
+      "id": "Grade",
+      "label": "Grade",
+      "value": "",
+      "placeholder": "Placeholder"
     },
     {
       "type": "datepicker",
-      "label": "Request Dt >=",
+      "label": "Request Date >=",
       "name": "hist.REQ_DT",
       "id": "ReqDtGte",
       "value": "1999-01-01",
@@ -46,29 +44,14 @@
       "datatype": "date"
     },
     {
-      "type": "dropdown",
-      "name": "grading.attr_content",
-      "id": "GradeDescr",
-      "label": "Grade",
-      "value": "",
-      "placeholder": "Placeholder",
-      "isFromUrl": false,
-      "isSelectOne": false,
-      "items": [
-        {
-          "key": "Good",
-          "value": "Good"
-        },
-        {
-          "key": "Excellent",
-          "value": "Excellent"
-        },
-        {
-          "key": "Bad",
-          "value": "Bad"
-        }
-      ],
-      "itemsUrl": []
+      "type": "datepicker",
+      "label": "Request Date <=",
+      "name": "hist.REQ_DT",
+      "id": "ReqDtLte",
+      "value": "2100-01-01",
+      "restriction": "lte",
+      "placeholder": "",
+      "datatype": "date"
     },
     {
       "type": "dropdown",
@@ -78,7 +61,7 @@
       "value": "",
       "placeholder": "Placeholder",
       "isFromUrl": false,
-      "isSelectOne": false,
+      "ddlType": "all",
       "items": [
         {
           "key": "1",
@@ -98,23 +81,14 @@
       "label": "Status",
       "value": "",
       "placeholder": "Placeholder",
-      "isFromUrl": false,
-      "isSelectOne": false,
-      "items": [
-        {
-          "key": "REQ",
-          "value": "Request"
-        },
-        {
-          "key": "APV",
-          "value": "Approve"
-        },
-        {
-          "key": "EXE",
-          "value": "Execute"
-        }
-      ],
-      "itemsUrl": []
+      "ddlType": "all",
+      "itemsUrl": [],
+      "isFromURL": true,
+      "url": "",
+      "environment": "FOU",
+      "path": "/RefMaster/GetListKeyValueActiveByCode",
+      "criteriaPropName": "RefMasterTypeCode",
+      "criteriaPropValue": "VENDOR_GRADING_STATUS"
     }
   ],
   "querystring": {
@@ -161,19 +135,19 @@
       "type": "sort",
       "position": "center",
       "label": "Grade Status",
-      "name": "grading.attr_content"
+      "name": "hist.NEW_GRADE"
     },
     {
       "type": "sort",
       "position": "center",
       "label": "Status",
-      "name": "hist.status"
+      "name": "rm.DESCR"
     },
     {
       "type": "sort",
       "position": "center",
       "label": "Is Active",
-      "name": "vdr.IsActive"
+      "name": "vdr.IS_ACTIVE"
     }
   ],
   "bodyList": [
@@ -223,7 +197,7 @@
     {
       "type": "text",
       "position": "center",
-      "property": "Status"
+      "property": "descr"
     },
     {
       "type": "boolean",

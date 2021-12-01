@@ -231,7 +231,7 @@ export class CustomerViewComponent implements OnInit {
         else if(ev == this.dictIdxAt["OTH"]) linkUrl = NavigationConstant.VIEW_CUST_OTH_INFO;
       }
     }
-    AdInsHelper.RedirectUrl(this.router, [linkUrl], { "CustId": this.CustId }, true);
+    AdInsHelper.RedirectUrlView(this.router, [linkUrl], { "CustId": this.CustId }, true);
   }
 
   async getIsUseDigitalization() {

@@ -48,7 +48,7 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "left",
+            "position": "center",
             "label": "CUSTOMER NO",
             "name": "C.CUST_NO"
         },

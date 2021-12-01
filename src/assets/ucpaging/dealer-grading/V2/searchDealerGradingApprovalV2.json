@@ -4,11 +4,12 @@
     "component": [
       {
         "type": "textbox",
-        "name": "TL.TRX_NO",
+        "name": "TransactionNo",
         "id": "TrxNo",
         "value": "",
         "label": "Transaction No",
-        "placeholder": "Placeholder"
+        "placeholder": "Placeholder",
+        "isCriteriaDataTable" : true
       },
       {
         "type": "textbox",
