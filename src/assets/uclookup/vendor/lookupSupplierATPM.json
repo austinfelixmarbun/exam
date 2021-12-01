@@ -1,4 +1,6 @@
 {
+    "title": "Lookup - Supplier ATPM",
+    "sectionTitle": "Search",
     "component": [
         {
             "type": "textbox",

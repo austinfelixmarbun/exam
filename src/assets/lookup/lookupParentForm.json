@@ -1,6 +1,7 @@
 {
     "url": "http://getParentForm",
-    "sectionTitle":"Lookup Parent Form",
+    "title":"Lookup - Parent Form",
+    "sectionTitle": "Search",
     "component": [
       {
         "type": "textbox",

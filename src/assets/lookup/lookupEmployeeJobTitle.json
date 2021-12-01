@@ -1,5 +1,6 @@
 {
-    "sectionTitle": "LOOK UP - JOB TITLE",
+    "title": "LOOK UP - JOB TITLE",
+    "sectionTitle": "Search",
     "exportExcel": false,
     "component": [
         {

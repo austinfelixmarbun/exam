@@ -1,4 +1,6 @@
 {
+    "title": "Lookup - Username",
+    "sectionTitle": "Search",
     "component": [
         {
             "type": "textbox",
