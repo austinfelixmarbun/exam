@@ -16,6 +16,7 @@ import {ExceptionConstant} from 'app/shared/constant/ExceptionConstant';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { UcDropdownListCallbackObj, UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 
 @Component({
   selector: 'app-cust-fin-data-tab-x',
@@ -29,6 +30,8 @@ export class CustFinDataTabXComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
   @ViewChild('ModalPersonalFinData') ModalPersonalFinData;
   @ViewChild('ModalCoyFinData') ModalCoyFinData;
+
+  dropdownListObj: UcDropdownListObj = new UcDropdownListObj();
 
   sourceOfIncomeList: any;
   isCalculated: boolean = true;
@@ -247,6 +250,12 @@ export class CustFinDataTabXComponent implements OnInit {
     }
   }
 
+  ChangeValueSourceOfIncome(ev: UcDropdownListCallbackObj) {
+    this.CustPersonalFinDataForm.patchValue({
+      MrSourceOfIncomeCode: ev.selectedObj["Key"]
+    });
+  }
+
   // Data DSF =================================
 
   initRefMaster() {
@@ -287,7 +296,16 @@ export class CustFinDataTabXComponent implements OnInit {
 
   showModalCustFinData(FinDataIndex: number) {
     this.isCalculated = false;
-    this.initRefMaster();
+    // this.initRefMaster();
+
+    this.dropdownListObj.apiUrl = URLConstant.GetRefMasterListKeyValueActiveByCode;
+    this.dropdownListObj.requestObj = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSourceIncome
+    };
+    this.dropdownListObj.isSelectOutput = true;
+    this.dropdownListObj.customObjName = "ReturnObject";
+    this.dropdownListObj.ddlType = UcDropdownListConstant.DDL_TYPE_BLANK;
+
     if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
       this.getSingleCustPersonalFinData(FinDataIndex);
       this.currentModal = this.modalService.open(this.ModalPersonalFinData, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
