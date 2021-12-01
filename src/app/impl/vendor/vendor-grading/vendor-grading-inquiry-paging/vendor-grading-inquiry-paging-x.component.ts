@@ -23,8 +23,8 @@ export class VendorGradingInquiryPagingXComponent implements OnInit {
   ngOnInit(): void {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj.pagingJson =
-      "./assets/impl/ucpaging/dealer-grading/searchDealerGradingInquiryX.json";
+      "./assets/ucpaging/dealer-grading/searchDealerGradingInquiry.json";
     this.inputPagingObj._url =
-      "./assets/impl/ucpaging/dealer-grading/searchDealerGradingInquiryX.json";
+      "./assets/ucpaging/dealer-grading/searchDealerGradingInquiry.json";
   }
 }
