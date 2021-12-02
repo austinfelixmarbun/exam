@@ -58,7 +58,7 @@
             "name": "SO.TRX_REF_NO",
             "id": "TrxRefNoId",
             "value": "",
-            "label": "Transaction Number",
+            "label": "Reference No",
             "placeholder": "Placeholder"
         },
         {

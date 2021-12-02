@@ -1,5 +1,6 @@
 {
-    "sectionTitle": "Office Parent",
+    "title": "Lookup - Office Parent",
+    "sectionTitle": "Search",
     "component": [
         {
             "type": "textbox",

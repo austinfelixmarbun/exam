@@ -1,5 +1,6 @@
 {
-    "sectionTitle": "Asset Master Attribute",
+    "title": "Lookup - Asset Master Attribute",
+    "sectionTitle": "Search",
     "component": [
       {
         "type": "textbox",

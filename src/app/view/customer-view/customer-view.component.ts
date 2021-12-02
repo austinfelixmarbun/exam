@@ -146,7 +146,6 @@ export class CustomerViewComponent implements OnInit {
   }
 
   mencuba(ev: number) {
-    console.log(ev);
     let linkUrl: string = "";
     if (this.custType == CommonConstant.CustomerPersonal) {
       if (ev == 0) { 
@@ -231,7 +230,7 @@ export class CustomerViewComponent implements OnInit {
         else if(ev == this.dictIdxAt["OTH"]) linkUrl = NavigationConstant.VIEW_CUST_OTH_INFO;
       }
     }
-    AdInsHelper.RedirectUrl(this.router, [linkUrl], { "CustId": this.CustId }, true);
+    AdInsHelper.RedirectUrlView(this.router, [linkUrl], { "CustId": this.CustId }, true);
   }
 
   async getIsUseDigitalization() {
