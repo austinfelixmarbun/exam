@@ -5,7 +5,6 @@ import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { FormBuilder } from '@angular/forms';
 import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
-import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -70,8 +69,15 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.pageType = this.mode;
+
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.showSubsection = false;
+    this.inputAddressObj.title = "Customer Address";
+    this.inputAddressObj.showOwnership = true;
+    this.inputAddressObj.requiredPhn1 = true;
+
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
 
@@ -79,14 +85,13 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
     this.addressType.MappingCode = CommonConstant.CustTypeCompany;
 
-    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).subscribe(
+    await this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).toPromise().then(
       async (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
         this.listAddressType = await this.CustSetData.FilterAddr(this.listAddressType);
         this.CustDataCompanyForm.patchValue({
           MrCustAddrTypeCode: this.listAddressType[0].Key
-        })
-        this.setOwnership(this.CustDataCompanyForm.controls.MrCustAddrTypeCode.value);
+        });
       }
     );
 
@@ -103,7 +108,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     if (this.pageType == "edit") {
       this.custAddrObj = new GenericObj();
       this.custAddrObj.Id = this.AddrId;
-      this.http.post(URLConstant.GetCustAddr, this.custAddrObj).subscribe(
+      await this.http.post(URLConstant.GetCustAddr, this.custAddrObj).toPromise().then(
         (response) => {
           this.copyCustomerAddr = response;
           this.CustDataCompanyForm.patchValue({
@@ -138,16 +143,10 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
           this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.copyCustomerAddr.Zipcode };
           this.inputAddressObj.default = this.addressObj;
           this.inputAddressObj.inputField = this.inputFieldAddressObj;
-          this.setOwnership(this.CustDataCompanyForm.controls.MrCustAddrTypeCode.value);
         }
       );
     }
-
-    this.inputAddressObj = new InputAddressObj();
-    this.inputAddressObj.showSubsection = false;
-    this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.showOwnership = true;
-    this.inputAddressObj.requiredPhn1 = true;
+    this.setOwnership(this.CustDataCompanyForm.controls.MrCustAddrTypeCode.value);
   }
 
   checkCustAddrType() {
