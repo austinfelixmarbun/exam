@@ -695,6 +695,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     tempReqObj.IsOwner = tempForm["IsOwner"];
     tempReqObj.IsSigner = tempForm["IsSigner"];
     tempReqObj.EstablishmentDt = tempForm["EstablishmentDt"];
+    tempReqObj.MrJobPositionCode = tempForm["MrJobPositionCode"];
 
     return tempReqObj
   }
