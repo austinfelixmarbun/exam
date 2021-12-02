@@ -1,6 +1,7 @@
 {
   "url": "http://getBizUnit",
-  "sectionTitle":"Lookup Business Unit",
+  "title":"Lookup - Business Unit",
+  "sectionTitle": "Search",
   "component": [
     {
       "type": "textbox",

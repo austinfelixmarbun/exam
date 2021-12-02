@@ -1,5 +1,6 @@
 {
-  "sectionTitle": "Lookup District",
+  "title": "Lookup - District",
+  "sectionTitle": "Search",
   "component": [
     {
       "type": "textbox",

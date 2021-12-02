@@ -1,5 +1,6 @@
 {
-    "sectionTitle": "LOOK UP - Payment Allocation Lookup",
+    "title": "Lookup - Payment Allocation Lookup",
+    "sectionTitle": "Search",
     "component": [
         {
             "type": "textbox",

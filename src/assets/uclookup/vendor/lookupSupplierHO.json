@@ -1,4 +1,6 @@
 {
+    "title": "Lookup - Supplier HO",
+    "sectionTitle": "Search",
     "component": [
         {
             "type": "textbox",

@@ -1,4 +1,6 @@
 {
+    "title": "Lookup - Supplier Holding",
+    "sectionTitle": "Search",
     "component": [
         {
             "type": "textbox",

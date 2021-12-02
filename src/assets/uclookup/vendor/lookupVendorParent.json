@@ -1,4 +1,6 @@
 {
+    "title": "Lookup - Vendor Parent",
+    "sectionTitle": "Search",
     "component": [
         {
             "type": "textbox",
