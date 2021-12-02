@@ -4,6 +4,14 @@
     "component": [
         {
             "type": "textbox",
+            "name": "BANK_CODE",
+            "id": "BankCodeId",
+            "value": "",
+            "label": "Bank Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
             "name": "bank_Name",
             "id": "BankName",
             "value": "",
@@ -18,6 +26,12 @@
         {
             "type": "sort",
             "position": "left",
+            "label": "Bank Code",
+            "name": "BANK_CODE"
+        },
+        {
+            "type": "sort",
+            "position": "left",
             "label": "Bank Name",
             "name": "BANK_NAME"
         },
@@ -28,6 +42,11 @@
         }
     ],
     "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "BankCode"
+        },
         {
             "type": "text",
             "position": "left",
