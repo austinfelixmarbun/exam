@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Validators, FormBuilder, NgForm } from '@angular/forms';
+import { Validators, FormBuilder, NgForm, AbstractControl } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { VendorBankAccObj } from 'app/shared/model/vendor-bank-acc-obj.model';
 import { VendorService } from 'app/vendor/vendor.service';
@@ -28,12 +28,13 @@ export class BankInfoComponent implements OnInit {
     AccNumber: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     AccName: ['', [Validators.required]],
     IsDefault: [false],
+    IsActive: [false],
     RefBankId: [],
     BankBranchRegCode: [],
-    BankBranch:['', [Validators.required]],
-    Notes:['']
+    BankBranch: ['', [Validators.required]],
+    Notes: ['']
   });
-  objEdit: any;
+  objEdit: VendorBankAccObj;
 
   constructor(private toastr: NGXToastrService, private route: ActivatedRoute, private modalService: NgbModal, private fb: FormBuilder, private vendorService: VendorService) { }
 
@@ -46,17 +47,7 @@ export class BankInfoComponent implements OnInit {
     this.mode = "add";
     this.title = "Add Bank Account";
     this.setLookup();
-    this.BankRegisForm.patchValue({
-      AccNumber: "",
-      AccName: "",
-      RefBankId: "",
-      IsDefault: false,
-      BankBranch :"",
-      Notes:""
-    });
-    this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
-    this.BankRegisForm.controls.AccName.updateValueAndValidity();
-    this.BankRegisForm.controls.BankBranch.updateValueAndValidity();
+    this.ResetValue();
 
     this.modal = this.modalService.open(content);
     this.modal.result.then((result) => {
@@ -98,6 +89,7 @@ export class BankInfoComponent implements OnInit {
     this.VendorBankAcc.BankAccountNo = this.BankRegisForm.controls.AccNumber.value;
     this.VendorBankAcc.BankAccountName = this.BankRegisForm.controls.AccName.value;
     this.VendorBankAcc.IsDefault = this.BankRegisForm.controls.IsDefault.value;
+    this.VendorBankAcc.IsActive = this.BankRegisForm.controls.IsActive.value;
     this.VendorBankAcc.Notes = this.BankRegisForm.controls.Notes.value;
     this.VendorBankAcc.BankBranch = this.BankRegisForm.controls.BankBranch.value;
 
@@ -109,20 +101,7 @@ export class BankInfoComponent implements OnInit {
           this.setLookup();
           this.toastr.successMessage(response["Message"]);
           this.modal.close();
-          this.BankRegisForm.patchValue({
-            AccNumber: "",
-            AccName: "",
-            RefBankId: "",
-            IsDefault: false,
-            BankBranch:"",
-            Notes:""
-          });
-          this.inputLookupBankObj.jsonSelect = { bankName: "" };
-          this.inputLookupBankObj.nameSelect = { bankName: "" };
-          this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
-          this.BankRegisForm.controls.AccName.updateValueAndValidity();
-          this.BankRegisForm.controls.BankBranch.updateValueAndValidity();
-          enjiForm.reset();
+          this.ResetValueForm(enjiForm);
         }
       );
     } else {
@@ -134,23 +113,32 @@ export class BankInfoComponent implements OnInit {
           this.setLookup();
           this.toastr.successMessage(response["Message"]);
           this.modal.close();
-          this.BankRegisForm.patchValue({
-            AccNumber: "",
-            AccName: "",
-            RefBankId: "",
-            IsDefault: false,
-            BankBranch:"",
-            Notes:""
-          });
-          this.inputLookupBankObj.jsonSelect = { bankName: "" };
-          this.inputLookupBankObj.nameSelect = { bankName: "" };
-          this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
-          this.BankRegisForm.controls.AccName.updateValueAndValidity();
-          this.BankRegisForm.controls.BankBranch.updateValueAndValidity();
-          enjiForm.reset();
+          this.ResetValueForm(enjiForm);
         }
       );
     }
+  }
+
+  ResetValue() {
+    this.BankRegisForm.patchValue({
+      AccNumber: "",
+      AccName: "",
+      RefBankId: "",
+      IsDefault: false,
+      IsActive: false,
+      BankBranch: "",
+      Notes: ""
+    });
+    this.SetDefault();
+    this.inputLookupBankObj.jsonSelect = { bankName: "" };
+    this.inputLookupBankObj.nameSelect = { bankName: "" };
+    this.BankRegisForm.controls.AccNumber.updateValueAndValidity();
+    this.BankRegisForm.controls.AccName.updateValueAndValidity();
+    this.BankRegisForm.controls.BankBranch.updateValueAndValidity();
+  }
+  ResetValueForm(enjiForm: NgForm) {
+    this.ResetValue();
+    enjiForm.reset();
   }
 
   title: string = "";
@@ -158,17 +146,19 @@ export class BankInfoComponent implements OnInit {
     this.mode = "edit";
     this.title = "Edit Bank Account";
     this.VendorBankAccId = id;
-    await this.vendorService.GetVendorBankAccByVendorBankAccId({Id: this.VendorBankAccId}).toPromise().then(response => {
+    await this.vendorService.GetVendorBankAccByVendorBankAccId({ Id: this.VendorBankAccId }).toPromise().then((response: VendorBankAccObj) => {
       this.objEdit = response;
       this.BankRegisForm.patchValue({
-        AccNumber: response["BankAccountNo"],
-        AccName: response["BankAccountName"],
-        RefBankId: response["RefBankId"],
-        IsDefault: response["IsDefault"],
-        BankBranch: response["BankBranch"],
-        Notes:response["Notes"],
-        RowVersion: response["RowVersion"]
+        AccNumber: response.BankAccountNo,
+        AccName: response.BankAccountName,
+        RefBankId: response.RefBankId,
+        IsDefault: response.IsDefault,
+        IsActive: response.IsActive,
+        BankBranch: response.BankBranch,
+        Notes: response.Notes,
+        RowVersion: response.RowVersion
       });
+      this.SetDefault();
       this.setLookup();
     })
 
@@ -195,7 +185,7 @@ export class BankInfoComponent implements OnInit {
 
   deleteBank(vendorBankAccId) {
     if (confirm("Are you sure to delete this record?")) {
-      this.vendorService.DeleteVendorBankAcc({Id: vendorBankAccId}).subscribe(response => {
+      this.vendorService.DeleteVendorBankAcc({ Id: vendorBankAccId }).subscribe(response => {
         this.toastr.successMessage(response["Message"]);
         this.getListData();
       });
@@ -205,7 +195,7 @@ export class BankInfoComponent implements OnInit {
   getListData() {
     if (this.objInput.Type == "Vendor") {
       if (this.objInput.VendorId != undefined && this.objInput.VendorId != null) {
-        this.vendorService.GetListVendorBankAccByVendorId({Id: this.objInput.VendorId}).subscribe(
+        this.vendorService.GetListVendorBankAccByVendorId({ Id: this.objInput.VendorId }).subscribe(
           response => {
             this.ListData = response[CommonConstant.ReturnObj];
           }
@@ -213,7 +203,7 @@ export class BankInfoComponent implements OnInit {
       }
     } else if (this.objInput.Type == "VendorEmployee") {
       if (this.objInput.VendorEmpId != undefined && this.objInput.VendorEmpId != null) {
-        let ReqGetListVendorBankAccByVendorEmpId : GenericObj = new GenericObj();
+        let ReqGetListVendorBankAccByVendorEmpId: GenericObj = new GenericObj();
         ReqGetListVendorBankAccByVendorEmpId.Id = this.objInput.VendorEmpId;
         this.vendorService.GetListVendorBankAccByVendorEmpId(ReqGetListVendorBankAccByVendorEmpId).subscribe(
           response => {
@@ -222,6 +212,17 @@ export class BankInfoComponent implements OnInit {
         );
       }
     }
+  }
+
+  SetDefault() {
+    let isDefault: boolean = this.BankRegisForm.get("IsDefault").value;
+    let tempIsActive: AbstractControl = this.BankRegisForm.get("IsActive");
+    tempIsActive.enable();
+    if (isDefault) {
+      tempIsActive.setValue(true);
+      tempIsActive.disable();
+    }
+    tempIsActive.updateValueAndValidity();
   }
 
   setLookup() {

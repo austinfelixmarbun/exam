@@ -1,5 +1,6 @@
 {
-    "sectionTitle": "Supervisor",
+    "title": "Lookup - Supervisor",
+    "sectionTitle": "Search",
     "exportExcel": false,
     "component": [
       {

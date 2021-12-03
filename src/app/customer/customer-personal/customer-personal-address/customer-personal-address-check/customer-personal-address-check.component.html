@@ -38,7 +38,7 @@
         <td style="text-align: left;">{{item.Notes}}</td>
 
         <td style="text-align: center;">
-          <a [hidden]="item.MrCustAddrTypeCode == 'Legal'" (click)="editItem(item)" style="cursor: pointer">
+          <a [hidden]="CheckListToBeEdit(item.MrCustAddrTypeCode)" (click)="editItem(item)" style="cursor: pointer">
             <i class="fa fa-edit"></i>
           </a>
         </td>

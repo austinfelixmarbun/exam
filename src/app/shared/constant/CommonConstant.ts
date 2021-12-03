@@ -210,6 +210,7 @@ export class CommonConstant {
     // CUST ADDR TYPE 
     public static CustAddrTypeLegal = "LEGAL";
     public static CustAddrTypeContact = "CONTACT";
+    public static CustAddrTypeContactInfo = "Contact Info";
     public static CustAddrTypeCompany = "COMPANY";
     public static CustAddrTypeResidence = "RESIDENCE";
     public static CustAddrTypeEmergency = "EMERGENCY";

@@ -1,4 +1,6 @@
 {
+    "title": "Lookup - Office Center Group",
+    "sectionTitle": "Search",
     "component": [
         {
             "type": "textbox",

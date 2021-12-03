@@ -384,13 +384,17 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   private SetCustomerDataMode(reqSubmitObj: ReqCoyObj) {
     switch (this.CustDataMode) {
       case this.CustDataModeMain:
-        reqSubmitObj.CustObj.IsCustomer = true;
+        this.SetIsTypeDataMode(reqSubmitObj);
         break;
       case this.CustDataModeShareholder:
         reqSubmitObj.CustObj.IsShareholder = true;
         break;
     }
     return reqSubmitObj;
+  }
+  private SetIsTypeDataMode(reqSubmitObj: ReqCoyObj) {
+    if (this.pageFrom == CommonConstant.CustFromEditMainData) reqSubmitObj.CustObj.IsCustomer = true;
+    if (this.pageFrom == CommonConstant.CustFromCustShareholder) reqSubmitObj.CustObj.IsShareholder = true;
   }
 
   SetCustMgmntShareholder(): CustCompanyMgmntShrholderObj {

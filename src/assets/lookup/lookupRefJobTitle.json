@@ -1,6 +1,7 @@
 {
   "url": "",
-  "sectionTitle":"Lookup Job Title",
+  "title":"Lookup - Job Title",
+  "sectionTitle": "Search",
   "component": [
     {
       "type": "textbox",

@@ -667,7 +667,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   private SetCustomerDataMode(reqSubmitObj: ReqPersonalObj) {
     switch (this.CustDataMode) {
       case this.CustDataModeMain:
-        reqSubmitObj.CustObj.IsCustomer = true;
+        this.SetIsTypeDataMode(reqSubmitObj);
         break;
       case this.CustDataModeFamily:
         reqSubmitObj.CustObj.IsFamily = true;
@@ -677,6 +677,12 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         break;
     }
     return reqSubmitObj;
+  }
+
+  private SetIsTypeDataMode(reqSubmitObj: ReqPersonalObj) {
+    if (this.pageFrom == CommonConstant.CustFromEditMainData) reqSubmitObj.CustObj.IsCustomer = true;
+    if (this.pageFrom == CommonConstant.CustFromCustFamily) reqSubmitObj.CustObj.IsFamily = true;
+    if (this.pageFrom == CommonConstant.CustFromCustShareholder) reqSubmitObj.CustObj.IsShareholder = true;
   }
 
   SetCustMgmntShareholder(): CustCompanyMgmntShrholderObj {
@@ -691,6 +697,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     tempReqObj.IsOwner = tempForm["IsOwner"];
     tempReqObj.IsSigner = tempForm["IsSigner"];
     tempReqObj.EstablishmentDt = tempForm["EstablishmentDt"];
+    tempReqObj.MrJobPositionCode = tempForm["MrJobPositionCode"];
 
     return tempReqObj
   }
