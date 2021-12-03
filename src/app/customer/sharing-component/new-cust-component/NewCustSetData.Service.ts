@@ -16,15 +16,16 @@ import { KeyValueObj } from "app/shared/model/key-value/key-value-obj.model";
 import { UcDropdownListObj } from "app/shared/model/library/uc-dropdown-list-obj.model";
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from "app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model";
 import { NavigationConstant } from "app/shared/NavigationConstant";
+import { AddressService } from "app/shared/services/custAddr.service";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class NewCustSetData {
 
-  constructor(private http: HttpClient, private toastr: NGXToastrService, private router: Router) { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService, private router: Router, private addressService: AddressService) { }
 
-  public static BindSetLegalAddr(): InputAddressObj {
+  public async BindSetLegalAddr(): Promise<InputAddressObj> {
+    let listAddrRequiredOwnership: Array<string> = new Array();
+    listAddrRequiredOwnership = await this.addressService.GetListAddrTypeOwnershipMandatory();
     let inputFieldObj = new InputFieldObj();
     inputFieldObj.inputLookupObj = new InputLookupObj();
     let inputAddressObj = new InputAddressObj();
@@ -33,8 +34,8 @@ export class NewCustSetData {
     inputAddressObj.inputField = inputFieldObj;
     inputAddressObj.showAllPhn = false;
     inputAddressObj.showOwnership = true;
-    inputAddressObj.requiredOwnership = true;
-
+    inputAddressObj.requiredOwnership = listAddrRequiredOwnership.find(addrType => addrType == CommonConstant.CustAddrTypeLegal)? true : false;
+    
     return inputAddressObj;
   }
 
@@ -147,7 +148,7 @@ export class NewCustSetData {
       }
     )
   }
-  
+
   public static markFormGroupTouched(formGroup: FormGroup) {
     (<any>Object).values(formGroup.controls).forEach(control => {
       control.markAsTouched();
