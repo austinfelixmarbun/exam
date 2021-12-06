@@ -14,6 +14,7 @@ import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/resp
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { AddressService } from 'app/shared/services/custAddr.service';
 
 @Component({
   selector: 'app-customer-company-address-add',
@@ -35,15 +36,10 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   addressType: ReqRefMasterByTypeCodeAndMappingCodeObj;
   custAddressObj: CustAddrObj;
   inputFieldAddressObj: InputFieldObj;
-
+  isReady: boolean = false;
   IdCust: number;
   pageType: string;
-
-  listAddrRequiredOwnership: Array<string> = [
-    CommonConstant.CustAddrTypeBiz,
-    CommonConstant.CustAddrTypeCompany,
-    CommonConstant.CustAddrTypeLegal
-  ]
+  listAddrRequiredOwnership: Array<string> = new Array();
 
   CustDataCompanyForm = this.fb.group({
     Notes: [''],
@@ -61,7 +57,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
     private fb: FormBuilder, private CustSetData: NewCustSetData,
-    private toastr: NGXToastrService) {
+    private toastr: NGXToastrService, private addressService: AddressService) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -85,18 +81,21 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
     this.addressType.MappingCode = CommonConstant.CustTypeCompany;
 
-    await this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).toPromise().then(
+    await this.getAddrTypeOwnershipRequired();
+
+    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).toPromise().then(
       async (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
         this.listAddressType = await this.CustSetData.FilterAddr(this.listAddressType);
         this.CustDataCompanyForm.patchValue({
           MrCustAddrTypeCode: this.listAddressType[0].Key
-        });
+        })
+        this.setOwnership(this.CustDataCompanyForm.controls.MrCustAddrTypeCode.value);
       }
     );
 
     this.custAddrObj.Id = this.IdCust;
-    this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
+    this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).toPromise().then(
       (response : ResGetListCustAddrObj) => {
         this.listCustAddr = response[CommonConstant.ReturnObj];
         if (this.listCustAddr.length > 0) {
@@ -143,12 +142,24 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
           this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.copyCustomerAddr.Zipcode };
           this.inputAddressObj.default = this.addressObj;
           this.inputAddressObj.inputField = this.inputFieldAddressObj;
+          this.setOwnership(this.CustDataCompanyForm.controls.MrCustAddrTypeCode.value);
         }
       );
     }
-    this.setOwnership(this.CustDataCompanyForm.controls.MrCustAddrTypeCode.value);
+
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.showSubsection = false;
+    this.inputAddressObj.title = "Customer Address";
+    this.inputAddressObj.showOwnership = true;
+    this.inputAddressObj.requiredPhn1 = true;
+
+    this.isReady = true;
   }
 
+  async getAddrTypeOwnershipRequired(){
+    this.listAddrRequiredOwnership = await this.addressService.GetListAddrTypeOwnershipMandatory();
+  }
+  
   checkCustAddrType() {
     this.setOwnership(this.CustDataCompanyForm.controls.MrCustAddrTypeCode.value);
   }

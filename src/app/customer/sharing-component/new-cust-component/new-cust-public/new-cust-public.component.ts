@@ -32,14 +32,14 @@ export class NewCustPublicComponent implements OnInit {
   CustomerForm: FormGroup = this.fb.group({});
   inputAddressObj: InputAddressObj = new InputAddressObj();
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
-  constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService,) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private newCustService: NewCustSetData) { }
 
   readonly RefMasterTypeCodePublicType: string = CommonConstant.RefMasterTypeCodePublicType;
 
   IsReady: boolean = false;
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
-    this.InitData();
+    await this.InitData();
     this.DictUcDDLObj[this.RefMasterTypeCodePublicType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodePublicType, null, true, URLConstant.GetListActiveRefMasterDetail);
     this.GetCustAddrToCopy();
     await this.GetExisting();
@@ -92,9 +92,9 @@ export class NewCustPublicComponent implements OnInit {
     }
   }
 
-  InitData() {
+  async InitData() {
     this.ClearForm();
-    this.inputAddressObj = NewCustSetData.BindSetLegalAddr();
+    this.inputAddressObj = await this.newCustService.BindSetLegalAddr();
     this.inputAddressObj.showOwnership = false;
     this.inputAddressObj.requiredOwnership = false;
     this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();

@@ -206,7 +206,7 @@
             </div>
           </div>
           <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerForm" [enjiForm]="enjiForm"
-            [identifier]="'UcAddress'">
+            [identifier]="'UcAddress'" *ngIf="isReady">
           </lib-ucaddress>
         </div>
         <div *ngIf="pageFrom == CustFromEditMainData && CustDataMode == CustDataModeMain">
