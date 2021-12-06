@@ -86,7 +86,7 @@ export class VendorATPMAddEditComponent implements OnInit {
   });
 
 
-  ngOnInit() {
+  async ngOnInit() {
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     this.getInitPattern();
@@ -94,7 +94,7 @@ export class VendorATPMAddEditComponent implements OnInit {
       this.VendorForm.controls.VendorCode.disable();
       this.getData();
     } else {
-      this.setDropdown();
+      await this.setDropdown();
       this.setLookup();
       this.checkType();
     }
@@ -148,12 +148,12 @@ export class VendorATPMAddEditComponent implements OnInit {
     );
   }
 
-  setDropdown() {
+  async setDropdown() {
     var refMasterCategoryObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCategory,
       MappingCode: CommonConstant.ATPM
     }
-    this.vendorService.GetRefMasterListKeyValuePair(refMasterCategoryObj).subscribe(
+    await this.vendorService.GetRefMasterListKeyValuePair(refMasterCategoryObj).toPromise().then(
       (response) => {
         this.itemCategoryType = response[CommonConstant.ReturnObj];
         if (this.itemCategoryType.length > 0) {
@@ -167,8 +167,8 @@ export class VendorATPMAddEditComponent implements OnInit {
     var refMasterTypeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorType,
     }
-    this.vendorService.GetRefMasterListKeyValuePair(refMasterTypeObj).subscribe(
-      (response) => {
+    await this.vendorService.GetRefMasterListKeyValuePair(refMasterTypeObj).toPromise().then(
+      async (response) => {
         this.itemType = response[CommonConstant.ReturnObj];
         if (this.itemType.length > 0) {
           if (this.mode != "edit") {
@@ -192,7 +192,7 @@ export class VendorATPMAddEditComponent implements OnInit {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
             MappingCode: this.RsvField,
           }
-          this.vendorService.GetListActiveRefMasterWithMappingCodeAll(refMasterIdObj).subscribe(
+          await this.vendorService.GetListActiveRefMasterWithMappingCodeAll(refMasterIdObj).toPromise().then(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -211,7 +211,7 @@ export class VendorATPMAddEditComponent implements OnInit {
     var refMasterCalcMethodObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeTaxCalcMethod,
     }
-    this.vendorService.GetRefMasterListKeyValuePair(refMasterCalcMethodObj).subscribe(
+    await this.vendorService.GetRefMasterListKeyValuePair(refMasterCalcMethodObj).toPromise().then(
       (response) => {
         this.itemCalcMethodType = response[CommonConstant.ReturnObj];
         if (this.itemCalcMethodType.length > 0) {
