@@ -50,7 +50,7 @@
     "@adins/ucdropdownlist": "^1.0.27",
     "@adins/ucgridfooter": "^1.0.2",
     "@adins/ucgridview": "^2.0.82",
-    "@adins/uclookupgeneric": "^2.1.1",
+    "@adins/uclookupgeneric": "^2.2.0",
     "@adins/ucpaging": "^2.0.41",
     "@adins/ucreport": "^1.0.10",
     "@adins/ucsearch": "^2.4.1",

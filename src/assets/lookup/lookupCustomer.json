@@ -105,6 +105,6 @@
             ]
         }
     ],
-    "propertyId": "CustNo",
+    "propertyId": "CustId",
     "propertyName": "CustName"
 }
