@@ -1149,5 +1149,9 @@ export class URLConstant {
 
   //SAVE THIRDPARTYTRXNO
   public static SaveCustThirdPartyTrxNo = environment.FoundationR3Url + "/v2" + "/Cust/SaveCustThirdPartyTrxNo";
+
+  //Generate
+  public static GenerateAPIKey = environment.FoundationR3Url + "/v1" + "/Authenticate/GenerateAPIKey";
+  public static RevokeAPIKey = environment.FoundationR3Url + "/v1" + "/Authenticate/RevokeAPIKey";
 }
 

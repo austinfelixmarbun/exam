@@ -99,5 +99,9 @@ export const Full_ROUTES: Routes = [
   {
     path: PathConstant.LR_LICENSE,
     loadChildren: './license/license.module#LicenseModule'
+  },
+  {
+    path: PathConstant.LR_SYS_USER,
+    loadChildren: './system-user/./system-user.module#SystemUserModule'
   }
 ];

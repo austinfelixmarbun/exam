@@ -28,6 +28,7 @@ export class PathConstant {
     public static LR_JOURNAL = "journal"
     public static LR_FEE = "Fee";
     public static LR_LICENSE = "License";
+    public static LR_SYS_USER = "SystemUser";
     //#endregion
 
     //#region content-routes

@@ -352,4 +352,10 @@ export class NavigationConstant {
     public static PEFINDO_DISPUTES = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_DISPUTES; //'/View/Pefindo/Disputes'
     public static PEFINDO_FINANCIAL_STATEMENTS = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_FINANCIAL_STATEMENTS; //'/View/Pefindo/FinancialStatements'
     //#endregion
+
+    //#region System User
+    public static SYS_USER = "/" + PathConstant.LR_SYS_USER; //'SystemUser/
+    public static SYS_USER_PAGING =  "/" + PathConstant.LR_SYS_USER + "/" + PathConstant.PAGING;
+    public static SYS_DETAIL = "/" + PathConstant.LR_SYS_USER + "/" + PathConstant.DETAIL; //'/Employee/Detail'
+    //#endregion
 }
