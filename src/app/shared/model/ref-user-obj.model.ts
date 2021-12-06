@@ -16,6 +16,8 @@ export class RefUserObj {
   Token: any;
   LockedOutReason: any;
   LockedUntil: any;
+  IsSystemUser: boolean;
+  APIKey : any;
   RowVersion: string;
   constructor() { this.RefUserId = 0, this.RowVersion = "" }
 }

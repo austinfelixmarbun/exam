@@ -16,7 +16,8 @@ export const ROUTES: RouteInfo[] = [
       { Path: NavigationConstant.ORG_JOB_TITLE, Title: 'Job Title', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.EMP_PAGING, Title: 'Employee', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.EMP_LEAVE_PAGING, Title: 'Employee Leave', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
-      { Path: NavigationConstant.SYSTEM_SETTING_ROLE, Title: 'Role', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] }
+      { Path: NavigationConstant.SYSTEM_SETTING_ROLE, Title: 'Role', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.SYS_USER_PAGING, Title: 'System User', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] }
 
     ], Params: []
   },
