@@ -145,7 +145,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
   }
 
   GetCustGrpData(event) {
-    this.CustGrpObj.CustId = event.CustId;
+    this.CustGrpObj.CustId = event.CustId != "" ? event.CustId : 0;
   }
 
   setLookupCustGrp() {
@@ -154,6 +154,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.lookupCustGrpObj.genericJson = "./assets/lookup/lookupCustomer.json";
     this.lookupCustGrpObj.isRequired = false;
     this.lookupCustGrpObj.isReady = true;
+    this.lookupCustGrpObj.isClear = true;
 
     this.criteriaList = new Array();
     this.criteriaObj = new CriteriaObj();
