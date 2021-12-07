@@ -251,7 +251,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.CustId = this.IdCust;
 
     if (this.custPersonalObj.MrNationalityCode == CommonConstant.NationalityCodeLocal) {
-      this.custPersonalObj.WnaCountryCode = CommonConstant.WnaCountryCodeIdn;
+      this.custPersonalObj.WnaCountryCode = this.LocalCountryCode;
     }
     else {
       if (this.tempCustPersonalObj.WnaCountryCode != null && this.tempCountryCode == null) {
