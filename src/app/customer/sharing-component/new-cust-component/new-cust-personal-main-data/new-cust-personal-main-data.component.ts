@@ -109,7 +109,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
-    await this.InitData();
+    this.InitData();
     this.InitCustMainDataMode();
     this.BindLookupSupplier();
     this.BindLookupExistingCust();
