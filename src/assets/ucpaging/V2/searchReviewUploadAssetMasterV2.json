@@ -4,7 +4,7 @@
     "component": [
       {
         "type": "officeRoleCodes",
-        "name": "TaskOfficeCode",
+        "name": "UMH.OFFICE_CODE",
         "id": "OfficeCodeId",
         "value": "",
         "placeholder": "Placeholder",
