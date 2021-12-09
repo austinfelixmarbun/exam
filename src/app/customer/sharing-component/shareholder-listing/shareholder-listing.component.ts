@@ -49,7 +49,7 @@ export class ShareholderListingComponent implements OnInit {
         for (let index = 0; index < this.tempShareholderListingObj.length; index++) {
           const element = this.tempShareholderListingObj[index];
           if (element.IsActive) {
-            tempTotalSharePrct += element.SharePrcnt;
+            tempTotalSharePrct = Math.round((tempTotalSharePrct + element.SharePrcnt) * 1000000) / 1000000;
           }
           if (element.IsOwner) {
             tempIsOwner = true;
@@ -92,7 +92,7 @@ export class ShareholderListingComponent implements OnInit {
     this.selectedCustCompanyMgmntShrholderId = ev.RowObj.CustCompanyMgmntShrholderId;
     this.selectedCustId = ev.RowObj.ShareholderId;
     this.CustType = ev.RowObj.ShareholderType;
-    this.tempTotalSharePrct -= ev.RowObj.SharePrcnt;
+    this.tempTotalSharePrct = Math.round((this.tempTotalSharePrct - ev.RowObj.SharePrcnt) * 1000000) / 1000000;
     this.addCustShareHolder(false);
   }
 
