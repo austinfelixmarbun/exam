@@ -1,6 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
 import {CommonConstant} from 'app/shared/constant/CommonConstant';
 import {ExceptionConstant} from 'app/shared/constant/ExceptionConstant';
 import {URLConstant} from 'app/shared/constant/URLConstant';
@@ -39,7 +40,7 @@ export class ShareholderListingXComponent implements OnInit {
   tempIsSigner: boolean = false;
   listCustNoToExclude: Array<string> = new Array();
   GetListPaging() {
-    this.http.post(URLConstant.GetListManagementShareholderForListPagingByCustId, { Id: this.CustId }).subscribe(
+    this.http.post(URLConstantX.GetListManagementShareholderForListPagingByCustId, { Id: this.CustId }).subscribe(
       (response: GenericListObj) => {
         this.tempShareholderListingObj = response.ReturnObject;
         let tempTotalSharePrct: number = 0;
@@ -73,7 +74,7 @@ export class ShareholderListingXComponent implements OnInit {
   inputGridObj: InputGridObj = new InputGridObj();
   BindGridViewObj() {
     this.inputGridObj = new InputGridObj();
-    this.inputGridObj.pagingJson = "./assets/ucgridview/Customer/gridCustShareholder.json";
+    this.inputGridObj.pagingJson = "./assets/impl/ucgridview/Customer/gridCustShareholderX.json";
 
     this.inputGridObj.resultData = { Data: [] };
   }

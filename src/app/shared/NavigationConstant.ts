@@ -148,7 +148,7 @@ export class NavigationConstant {
     public static VIEW_CUST_DOC = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_DOC; //'/View/Customer/CustDocument'
     public static VIEW_CUST_HIGHLIGHT_COMMENT = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_HIGHLIGHT_COMMENT; //'/View/Customer/HighligtComment'
     public static VIEW_CUST_COY_DETAIL = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_DETAIL; //'/View/Customer/CoyDetail'
-    public static VIEW_CUST_COY_MNGMNT = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_MNGMNT; //'/View/Customer/CoyManagement'
+    public static VIEW_CUST_COY_MNGMNT = NavigationConstant.VIEW_CUST + "/" + PathConstantX.VIEW_CUST_COY_MNGMNT_X; //'/View/Customer/CoyManagement/X'
     public static VIEW_CUST_COY_CONTACT = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_CONTACT; //'/View/Customer/CoyContact'
     public static VIEW_CUST_COY_FINANCIAL = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_FINANCIAL; //'/View/Customer/CoyFinancial'
     public static VIEW_CUST_COY_LEGAL = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_LEGAL; //'/View/Customer/CoyLegal'

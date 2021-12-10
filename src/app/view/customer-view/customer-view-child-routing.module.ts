@@ -86,6 +86,10 @@ const routes: Routes = [
         loadChildren: './customer-view-coy-management/customer-view-coy-management.module#CustomerViewCoyManagementModule'
       },
       {
+        path: 'CoyManagement/X',
+        loadChildren: './customer-view-coy-management/customer-view-coy-management.module#CustomerViewCoyManagementModule'
+      },
+      {
         path: 'CoyContact',
         loadChildren: './customer-view-coy-contact/customer-view-coy-contact.module#CustomerViewCoyContactModule'
       },
@@ -118,6 +122,10 @@ const routes: Routes = [
       },
       {
         path: PathConstant.VIEW_CUST_COY_MNGMNT,
+        loadChildren: './customer-view-coy-management/customer-view-coy-management.module#CustomerViewCoyManagementModule'
+      },
+      {
+        path: PathConstantX.VIEW_CUST_COY_MNGMNT_X,
         loadChildren: './customer-view-coy-management/customer-view-coy-management.module#CustomerViewCoyManagementModule'
       },
       {

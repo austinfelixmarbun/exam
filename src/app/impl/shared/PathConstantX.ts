@@ -41,6 +41,9 @@ export class PathConstantX{
     public static VENDOR_GRADING_INQUIRY_X = PathConstant.VENDOR_GRADING + "/" + PathConstantX.INQUIRY_X;
     //#endregion
 
+    //#region View-Cust-Module
+    public static VIEW_CUST_COY_MNGMNT_X = "CoyManagement/X";
+
     public static CUST_PAGE_X ="PageX";
     public static VENDOR_BRANCH ="BranchX";
     public static PAGING_X = "PagingX";

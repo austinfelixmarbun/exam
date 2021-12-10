@@ -82,7 +82,7 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
     this.ClearCustForm();
     this.BindLookupExistingCust();
     this.InitCustMainDataMode();
-    this.inputAddressObj = NewCustSetData.BindSetLegalAddr();
+    this.inputAddressObj = this.BindSetLegalAddr();
     this.BindLookupSupplier();
     this.DictUcDDLObj[this.RefMasterTypeCodeCompanyType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCompanyType);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
@@ -90,6 +90,21 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
   }
+
+  BindSetLegalAddr(): InputAddressObj {
+    let inputFieldObj = new InputFieldObj();
+    inputFieldObj.inputLookupObj = new InputLookupObj();
+    let inputAddressObj = new InputAddressObj();
+    inputAddressObj.showSubsection = false;
+    inputAddressObj.title = "Customer Address";
+    inputAddressObj.inputField = inputFieldObj;
+    inputAddressObj.showAllPhn = false;
+    inputAddressObj.showOwnership = true;
+    inputAddressObj.requiredOwnership = false;
+
+    return inputAddressObj;
+  }
+  
   //#region Set Data
   //#region UcLookup
   BindLookupSupplier() {
