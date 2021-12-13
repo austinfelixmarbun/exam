@@ -18,6 +18,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { AddressService } from 'app/shared/services/custAddr.service';
 
 @Component({
   selector: 'app-job-data-professional',
@@ -91,7 +92,10 @@ export class JobDataProfessionalComponent implements OnInit {
   custOthBizAddrObj: CustAddrObj;
   otherAddressObj: CustAddrObj;
   getOthBizAddr: any;
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
+  listAddrRequiredOwnership: Array<string> = new Array();
+  isReady: boolean = false;
+
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private addressService: AddressService) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -113,7 +117,9 @@ export class JobDataProfessionalComponent implements OnInit {
     this.IsShowData = true;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.getAddrTypeOwnershipRequired();
+
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
@@ -149,13 +155,15 @@ export class JobDataProfessionalComponent implements OnInit {
     this.inputOthBizAddressObj.isRequired = false;
     this.inputOthBizAddressObj.title = "Other Business Address";
     this.inputOthBizAddressObj.showOwnership = true;
+    this.inputOthBizAddressObj.requiredOwnership = this.setOwnership(CommonConstant.CustAddrTypeOthBiz);
+    
 
     this.inputOtherAddressObj = new InputFieldObj();
     this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
     this.inputOtherAddressObj.inputLookupObj.isRequired = false;
     this.inputOthBizAddressObj.inputField = this.inputOtherAddressObj;
 
-    this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).subscribe(
+    this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).toPromise().then(
       (response: any) => {
         this.returnCustJobDataObj = response;
 
@@ -173,7 +181,7 @@ export class JobDataProfessionalComponent implements OnInit {
           });
 
           if (!this.IsReset && this.returnCustJobDataObj.RefProfessionId) {
-            this.http.post(URLConstant.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).subscribe(
+            this.http.post(URLConstant.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).toPromise().then(
               (response) => {
                 this.returnRefProfessionObj = response;
                 this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
@@ -184,7 +192,7 @@ export class JobDataProfessionalComponent implements OnInit {
 
 
           if (this.returnCustJobDataObj.RefIndustryTypeId != null) {
-            this.http.post(URLConstant.GetRefIndustryTypeById, { Id: this.returnCustJobDataObj.RefIndustryTypeId }).subscribe(
+            this.http.post(URLConstant.GetRefIndustryTypeById, { Id: this.returnCustJobDataObj.RefIndustryTypeId }).toPromise().then(
               (response) => {
                 this.returnIndustryTypeObj = response;
 
@@ -198,7 +206,7 @@ export class JobDataProfessionalComponent implements OnInit {
           if (this.returnCustJobDataObj.JobAddrId != null) {
             this.custAddrObj = new CustAddrObj();
             this.custAddrObj.CustAddrId = this.returnCustJobDataObj.JobAddrId;
-            this.http.post(URLConstant.GetCustAddr, { Id: this.custAddrObj.CustAddrId }).subscribe(
+            this.http.post(URLConstant.GetCustAddr, { Id: this.custAddrObj.CustAddrId }).toPromise().then(
               (response) => {
                 this.getCustomerAddr = response;
                 this.JobDataProForm.patchValue({
@@ -236,7 +244,7 @@ export class JobDataProfessionalComponent implements OnInit {
           if (this.returnCustJobDataObj.PrevJobAddrId != null) {
             this.preJobAddrObj = new CustAddrObj();
             this.preJobAddrObj.CustAddrId = this.returnCustJobDataObj.PrevJobAddrId;
-            this.http.post(URLConstant.GetCustAddr, { Id: this.preJobAddrObj.CustAddrId }).subscribe(
+            this.http.post(URLConstant.GetCustAddr, { Id: this.preJobAddrObj.CustAddrId }).toPromise().then(
               (response) => {
                 this.getPreJobAddr = response;
                 this.JobDataProForm.patchValue({
@@ -278,7 +286,7 @@ export class JobDataProfessionalComponent implements OnInit {
           if (this.returnCustJobDataObj.OthBizAddrId != null) {
             this.custOthBizAddrObj = new CustAddrObj();
             this.custOthBizAddrObj.CustAddrId = this.returnCustJobDataObj.OthBizAddrId;
-            this.http.post(URLConstant.GetCustAddr, { Id: this.custOthBizAddrObj.CustAddrId }).subscribe(
+            this.http.post(URLConstant.GetCustAddr, { Id: this.custOthBizAddrObj.CustAddrId }).toPromise().then(
               (response) => {
                 this.getOthBizAddr = response;
                 this.JobDataProForm.patchValue({
@@ -342,7 +350,21 @@ export class JobDataProfessionalComponent implements OnInit {
     this.inputPreviousAddressObj.isRequired = false;
     this.inputPreviousAddressObj.title = "Previous Job Address";
     this.inputPreviousAddressObj.showOwnership = true;
+    this.inputPreviousAddressObj.requiredOwnership = this.setOwnership(CommonConstant.CustAddrTypePreJob);
     this.inputPreviousAddressObj.inputField = this.inputPreJobAddressObj;
+
+    this.isReady = true;
+  }
+
+  async getAddrTypeOwnershipRequired(){
+    this.listAddrRequiredOwnership = await this.addressService.GetListAddrTypeOwnershipMandatory();
+  }
+
+  setOwnership(MrCustAddrTypeCode: string) : boolean {
+    if(this.listAddrRequiredOwnership.find(addrType => addrType == MrCustAddrTypeCode)){
+      return true;
+    }
+    return false;
   }
 
   setJobAddr() {

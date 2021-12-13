@@ -1,6 +1,7 @@
 {
     "url": "",
     "title":"Lookup - Customer",
+    "sectionTitle": "Search",
     "component": [
       {
         "type": "textbox",
@@ -104,6 +105,6 @@
             ]
         }
     ],
-    "propertyId": "CustNo",
+    "propertyId": "CustId",
     "propertyName": "CustName"
 }

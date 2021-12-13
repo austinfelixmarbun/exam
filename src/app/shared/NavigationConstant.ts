@@ -368,4 +368,10 @@ export class NavigationConstant {
     public static CUST_EDIT_MAIN_DATA_PERSONAL_X = "/" + PathConstant.LR_CUST + "/" + PathConstantX.CUST_EDIT_MAIN_DATA_PERSONAL_X; //'/Customer/EditMainData/Personal'
     public static CUST_EDIT_MAIN_DATA_PAGING_X = "/" + PathConstant.LR_CUST + "/" + PathConstantX.CUST_EDIT_MAIN_DATA_PAGING_X; //'/Customer/EditMainData/Paging'
     public static CUST_FAMILY_PAGING_X = "/" + PathConstant.LR_CUST + "/" + PathConstantX.CUST_FAMILY_PAGING_X; //'/Customer/CustFamily/Paging'
+
+    //#region System User
+    public static SYS_USER = "/" + PathConstant.LR_SYS_USER; //'SystemUser/
+    public static SYS_USER_PAGING =  "/" + PathConstant.LR_SYS_USER + "/" + PathConstant.PAGING;
+    public static SYS_DETAIL = "/" + PathConstant.LR_SYS_USER + "/" + PathConstant.DETAIL; //'/Employee/Detail'
+    //#endregion
 }

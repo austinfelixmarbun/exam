@@ -3,12 +3,11 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
-import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
-import { CustObj } from 'app/shared/model/cust-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/response/res-get-list-cust-addr-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 
 @Component({
   selector: 'app-customer-company-address-check',
@@ -34,6 +33,7 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.GetListToBeEdit();
     this.custAddrObj.Id = this.IdCust;
     this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
       (response: ResGetListCustAddrObj) => {
@@ -43,6 +43,26 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
         let idxEmergency = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode == CommonConstant.CustAddrTypeEmergency);
         if (idxEmergency != -1) this.listCustAddr.splice(idxEmergency, 1);
       });
+  }
+
+  listAddressType: Array<string> = new Array();
+  GetListToBeEdit() {
+    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeFilterAddr }).toPromise().then(
+      (result: GeneralSettingObj) => {
+        if (result.GsValue) {
+          let listAddrToFilter: Array<string> = result.GsValue.split(';');
+          this.listAddressType = listAddrToFilter;
+          this.listAddressType.push(CommonConstant.AddrTypeLegal);
+          this.listAddressType.push(CommonConstant.CustAddrTypeContactInfo);
+        }
+      }
+    );
+  }
+
+  CheckListToBeEdit(MrCustAddrTypeCode: string): boolean {
+    let idx: number = this.listAddressType.findIndex(x => x.toLowerCase() == MrCustAddrTypeCode.toLowerCase());
+    if (idx >= 0) return true;
+    return false;
   }
 
   editItem(custAddrObj: any) {

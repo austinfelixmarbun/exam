@@ -15,6 +15,9 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { GenericObj} from 'app/shared/model/generic/generic-obj.model';
+import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { RegexService } from 'app/customer/regex.service';
 
 @Component({
   selector: 'app-vendor-atpm-add-edit',
@@ -40,7 +43,7 @@ export class VendorATPMAddEditComponent implements OnInit {
   isHidden: boolean = true;
   RsvField: string;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private vendorService: VendorService, private cookieService: CookieService) {
+  constructor(private regexService: RegexService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private vendorService: VendorService, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
       this.VendorId = params['VendorId'];
@@ -83,14 +86,15 @@ export class VendorATPMAddEditComponent implements OnInit {
   });
 
 
-  ngOnInit() {
+  async ngOnInit() {
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
+    this.getInitPattern();
     if (this.mode == "edit") {
       this.VendorForm.controls.VendorCode.disable();
       this.getData();
     } else {
-      this.setDropdown();
+      await this.setDropdown();
       this.setLookup();
       this.checkType();
     }
@@ -144,12 +148,12 @@ export class VendorATPMAddEditComponent implements OnInit {
     );
   }
 
-  setDropdown() {
+  async setDropdown() {
     var refMasterCategoryObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCategory,
       MappingCode: CommonConstant.ATPM
     }
-    this.vendorService.GetRefMasterListKeyValuePair(refMasterCategoryObj).subscribe(
+    await this.vendorService.GetRefMasterListKeyValuePair(refMasterCategoryObj).toPromise().then(
       (response) => {
         this.itemCategoryType = response[CommonConstant.ReturnObj];
         if (this.itemCategoryType.length > 0) {
@@ -163,8 +167,8 @@ export class VendorATPMAddEditComponent implements OnInit {
     var refMasterTypeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorType,
     }
-    this.vendorService.GetRefMasterListKeyValuePair(refMasterTypeObj).subscribe(
-      (response) => {
+    await this.vendorService.GetRefMasterListKeyValuePair(refMasterTypeObj).toPromise().then(
+      async (response) => {
         this.itemType = response[CommonConstant.ReturnObj];
         if (this.itemType.length > 0) {
           if (this.mode != "edit") {
@@ -188,7 +192,7 @@ export class VendorATPMAddEditComponent implements OnInit {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
             MappingCode: this.RsvField,
           }
-          this.vendorService.GetListActiveRefMasterWithMappingCodeAll(refMasterIdObj).subscribe(
+          await this.vendorService.GetListActiveRefMasterWithMappingCodeAll(refMasterIdObj).toPromise().then(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -207,7 +211,7 @@ export class VendorATPMAddEditComponent implements OnInit {
     var refMasterCalcMethodObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeTaxCalcMethod,
     }
-    this.vendorService.GetRefMasterListKeyValuePair(refMasterCalcMethodObj).subscribe(
+    await this.vendorService.GetRefMasterListKeyValuePair(refMasterCalcMethodObj).toPromise().then(
       (response) => {
         this.itemCalcMethodType = response[CommonConstant.ReturnObj];
         if (this.itemCalcMethodType.length > 0) {
@@ -387,12 +391,61 @@ export class VendorATPMAddEditComponent implements OnInit {
               MrIdTypeCode: this.itemIdType[0].Key
             });
           } else {
-            this.VendorForm.patchValue({
-              MrIdTypeCode: this.result.VendorObj.MrIdTypeCode
-            });
+            if (this.VendorForm.controls.MrVendorTypeCode.value != this.result.VendorObj.MrVendorTypeCode) {
+              this.VendorForm.patchValue({
+                MrIdTypeCode: this.itemIdType[0].Key
+              });
+            } else {
+              this.VendorForm.patchValue({
+                MrIdTypeCode: this.result.VendorObj.MrIdTypeCode
+              });
+            }
           }
         }
+        this.setValidatorPattern();
       }
     );
+  }
+  
+  getInitPattern() {
+    this.regexService.getListPattern().subscribe(
+      (response) => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if (this.resultPattern != undefined) {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+          }
+          this.setValidatorPattern();
+        }
+      }
+    )
+  }
+
+  resultPattern: Array<KeyValueObj> = new Array();
+  setValidatorPattern() {
+    let idTypeValue: string = this.VendorForm.get("MrIdTypeCode").value;
+    let pattern: string = '';
+    if (idTypeValue != undefined) {
+      let result = this.resultPattern.find(x => x.Key == idTypeValue);
+      if (result != undefined) {
+        pattern = result.Value;
+      }
+    }
+    this.setValidator(pattern);
+  }
+
+  setValidator(pattern: string) {
+    let tempIdNo = this.VendorForm.get("IdNo");
+    let vendorTypeCode: string = this.VendorForm.get("MrVendorTypeCode").value;
+    tempIdNo.clearValidators();
+    if (vendorTypeCode == CommonConstant.VENDOR_TYPE_COMPANY) return;
+    if (pattern != undefined) {
+      tempIdNo.setValidators([Validators.required, Validators.pattern(pattern)]);
+      tempIdNo.updateValueAndValidity();
+    }
   }
 }

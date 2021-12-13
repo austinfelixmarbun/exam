@@ -1,4 +1,6 @@
 {
+    "title": "Lookup - Surveyor HO",
+    "sectionTitle": "Search",
     "component": [
         {
             "type": "textbox",

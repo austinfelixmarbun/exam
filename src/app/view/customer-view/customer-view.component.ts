@@ -146,7 +146,6 @@ export class CustomerViewComponent implements OnInit {
   }
 
   mencuba(ev: number) {
-    console.log(ev);
     let linkUrl: string = "";
     if (this.custType == CommonConstant.CustomerPersonal) {
       if (ev == 0) { 

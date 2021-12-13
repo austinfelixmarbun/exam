@@ -74,12 +74,13 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   thirdPartyTrxNo: string = null;
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   pageFrom: string = CommonConstant.CustFromEditMainData;
+  isReady: boolean = false;
 
   constructor(private regexService: RegexService, private toastr: NGXToastrService,
     private http: HttpClient, private fb: FormBuilder,
     private cookieService: CookieService,
     private thirdPartyUploadService: ThirdPartyUploadService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute, private newCustService: NewCustSetData) {
       this.route.queryParams.subscribe(params => {
         if (params["From"] != null) {        
           this.pageFrom = params["From"];
@@ -128,14 +129,15 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   //#region Set Data
   businessDtMin: Date;
   businessDtMax: Date;
-  InitData() {
+  async InitData() {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setFullYear(this.businessDtMin.getFullYear() - 17);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
 
-    this.inputAddressObj = NewCustSetData.BindSetLegalAddr();
+    this.inputAddressObj = await this.newCustService.BindSetLegalAddr();
+    this.isReady = true;
   }
 
   CustNameLabel: string = "Customer";
@@ -665,7 +667,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   private SetCustomerDataMode(reqSubmitObj: ReqPersonalObj) {
     switch (this.CustDataMode) {
       case this.CustDataModeMain:
-        reqSubmitObj.CustObj.IsCustomer = true;
+        this.SetIsTypeDataMode(reqSubmitObj);
         break;
       case this.CustDataModeFamily:
         reqSubmitObj.CustObj.IsFamily = true;
@@ -675,6 +677,12 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         break;
     }
     return reqSubmitObj;
+  }
+
+  private SetIsTypeDataMode(reqSubmitObj: ReqPersonalObj) {
+    if (this.pageFrom == CommonConstant.CustFromEditMainData) reqSubmitObj.CustObj.IsCustomer = true;
+    if (this.pageFrom == CommonConstant.CustFromCustFamily) reqSubmitObj.CustObj.IsFamily = true;
+    if (this.pageFrom == CommonConstant.CustFromCustShareholder) reqSubmitObj.CustObj.IsShareholder = true;
   }
 
   SetCustMgmntShareholder(): CustCompanyMgmntShrholderObj {
@@ -689,6 +697,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     tempReqObj.IsOwner = tempForm["IsOwner"];
     tempReqObj.IsSigner = tempForm["IsSigner"];
     tempReqObj.EstablishmentDt = tempForm["EstablishmentDt"];
+    tempReqObj.MrJobPositionCode = tempForm["MrJobPositionCode"];
 
     return tempReqObj
   }

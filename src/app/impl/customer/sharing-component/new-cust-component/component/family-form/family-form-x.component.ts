@@ -48,6 +48,8 @@ export class FamilyFormXComponent implements OnInit {
   constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
 
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
+  CountryCode: string = "";
+  CountryName: string = "";
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     await this.InitData();
@@ -125,18 +127,21 @@ export class FamilyFormXComponent implements OnInit {
         criteriaObj.value = this.CountryCode;
         criteriaList.push(criteriaObj);
         this.lookUpObjCountry.addCritInput = criteriaList;
-		this.IsLocal = true;
+        this.parentForm.patchValue({
+          WnaCountryCode: this.CountryCode
+        });
+        this.IsLocal = true;
       }
     );
   }
 
-  CountryCode: string = "";
-  CountryName: string = "";
+  
+
   GetRefCountry(code: string, isLocal: boolean = false) {
     this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: code }).subscribe(
       (response: RefCountry) => {
         if (isLocal) {
-          this.CountryName = response.CountryName;
+          this.CountryName = this.CountryName;
           this.IsLocal = true;
         }
         else {
@@ -189,7 +194,7 @@ export class FamilyFormXComponent implements OnInit {
       WnaCountryCode: tempData.WnaCountryCode,
       MrNationalityCode: tempData.MrNationalityCode ? tempData.MrNationalityCode : "",
     });
-    if (tempData.WnaCountryCode) this.GetRefCountry(tempData.WnaCountryCode, tempData.WnaCountryCode == CommonConstant.WnaCountryCodeIdn);
+    if (tempData.WnaCountryCode) this.GetRefCountry(tempData.WnaCountryCode, tempData.WnaCountryCode == this.CountryCode);
   }
 
   async PatchValueDesc(MasterCode: string, refMasterTypeCode: string) {
@@ -259,7 +264,9 @@ export class FamilyFormXComponent implements OnInit {
     if (event.selectedValue == CommonConstant.NationalityCodeLocal) {
       this.IsLocal = true;
       this.lookUpObjCountry.isRequired = false;
-      this.parentForm.get("WnaCountryCode").patchValue(this.CountryCode);
+      this.parentForm.patchValue({
+        WnaCountryCode: this.CountryCode
+      });
     } else {
       this.IsLocal = false;
       let foreign = this.ListNationality.find(x => x.MasterCode == event.selectedValue);

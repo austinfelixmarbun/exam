@@ -1,0 +1,31 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { SystemUserRoutingModule } from './system-user-routing.module';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
+import { AdInsModule } from 'app/components/adins-module/adins.module';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { SystemUserComponent } from './system-user.component';
+import { SystemUserAddComponent } from './system-user-add/system-user-add.component';
+
+@NgModule({
+  declarations: [SystemUserComponent, SystemUserAddComponent],
+  imports: [
+    CommonModule,
+    SystemUserRoutingModule,
+    FormsModule,
+    HttpModule,
+    NgbModule,
+    AdInsSharedModule,
+    SharingComponentModule,
+    AdInsModule
+  ],
+  providers: [
+    NGXToastrService
+  ]
+})
+export class SystemUserModule { }

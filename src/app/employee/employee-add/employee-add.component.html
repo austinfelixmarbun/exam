@@ -15,7 +15,7 @@
             <div class="form-group row adins-required">
               <label class="col-md-2  adInsLabel" for="Username">Username</label>
               <div class="col-md-9">
-                <input type="text" class="form-control adInsInput code" formControlName="Username" required
+                <input type="text" class="form-control adInsInput code" formControlName="Username" required [IsUpperCase]="false"
                   [attr.disabled]="pageType == 'edit' ? true : null" [ngClass]="{ 'is-invalid': enjiForm.submitted && RefEmpForm.controls.Username.invalid }">
                 <lib-uc-show-errors [control]="RefEmpForm.controls.Username" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>

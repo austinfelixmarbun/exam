@@ -1,5 +1,6 @@
 {
-    "sectionTitle": "Industry Type",
+    "title": "Lookup - Industry Type",
+    "sectionTitle": "Search",
     "component": [
       {
         "type": "textbox",

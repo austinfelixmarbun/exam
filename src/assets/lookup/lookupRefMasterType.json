@@ -1,5 +1,6 @@
 {
-    "sectionTitle": "Ref Master Type",
+    "title": "Lookup - Ref Master Type",
+    "sectionTitle": "Search",
     "component": [
       {
         "type": "textbox",

@@ -123,13 +123,13 @@ export class NewCustHeaderXComponent implements OnInit {
       return;
     }
     switch (this.From) {
-      case "EditMainData":
+      case CommonConstant.CustFromEditMainData:
         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
         break;
-      case "CustFamily":
+      case CommonConstant.CustFromCustFamily:
         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_FAMILY_PAGING], {});
         break;
-      case "CustShareholder":
+      case CommonConstant.CustFromCustShareholder:
         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_SHRHLDR_PAGING], {});
         break;
       case "CustGuarantor":

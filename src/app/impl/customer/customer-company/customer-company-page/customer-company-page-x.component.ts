@@ -19,6 +19,7 @@ import {CustomerCompanyContactInformationComponent} from 'app/customer/customer-
 import {CustAttrSectionComponent} from 'app/customer/cust-attr-section/cust-attr-section.component';
 import {CustomerCompanyDetailXComponent} from 'app/impl/customer/customer-company/customer-company-detail/customer-company-detail-x.component';
 import {CustFinDataTabXComponent} from 'app/impl/customer/cust-fin-data-tab/cust-fin-data-tab-x.component';
+import { CustomerViewHeaderCompanyComponent } from 'app/customer/customer-view/customer-view-header-company/customer-view-header-company.component';
 
 @Component({
   selector: 'app-customer-company-page-x',
@@ -28,6 +29,7 @@ import {CustFinDataTabXComponent} from 'app/impl/customer/cust-fin-data-tab/cust
 export class CustomerCompanyPageXComponent implements OnInit {
   private stepper: Stepper;
 
+  @ViewChild('viewCustCoy') viewCustCoy: CustomerViewHeaderCompanyComponent;
   IdCust: number;
   CustCompanyId: number;
   CustStepIndex: number;
@@ -171,6 +173,7 @@ export class CustomerCompanyPageXComponent implements OnInit {
           this.CustStepIndex--;
         }
       }
+      this.viewCustCoy.ReloadUcViewGeneric();
     }
   }
 

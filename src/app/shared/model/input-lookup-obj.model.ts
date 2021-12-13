@@ -1,7 +1,7 @@
 import { URLConstant } from "../constant/URLConstant"
 import { environment } from "environments/environment"
 
-export class InputLookupObj{
+export class InputLookupObj {
     urlJson: string;
     urlQryPaging: string;
     urlEnviPaging: string;
@@ -19,9 +19,9 @@ export class InputLookupObj{
     ddlEnvironments: Array<EnviObj>;
     listEnvironments: Array<EnvisObj>;
     title: any;
+    isClear : boolean;
     
-    constructor()
-    {
+    constructor() {
         this.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
         this.urlQryPaging = URLConstant.GetPagingObjectBySQL;
         this.urlEnviPaging = environment.FoundationR3Url + "/v1";
@@ -38,6 +38,7 @@ export class InputLookupObj{
         this.isReady = false;
         this.title = "";
         this.isDisable = false;
+        this.isClear = false;
     }
 }
 

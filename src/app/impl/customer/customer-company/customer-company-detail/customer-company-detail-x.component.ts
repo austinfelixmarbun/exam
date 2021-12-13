@@ -166,7 +166,7 @@ export class CustomerCompanyDetailXComponent implements OnInit {
   }
 
   GetCustGrpData(event) {
-    this.CustGrpObj.CustId = event.CustId;
+    this.CustGrpObj.CustId = event.CustId != "" ? event.CustId : 0;
   }
 
   setLookupCustGrp() {
