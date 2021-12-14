@@ -65,4 +65,6 @@ export class ExceptionConstant {
     public static  EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE = "Establishment Date Must Be Less Than Business Date";
     public static MOBILE_PHN_NO_INVALID = "Mobile Phone No Must be Started With 62XXXXXXXXX"; 
     public static ROUNDED_AMT_INVALID = "Rounded Amount must be between 0-2"; 
+    public static EXP_PASSWORD = "Password has expired. Please change your password.";
+    public static PWD_EXCEPTION = "Minimum 8 characters, at least 1 letter, 1 number and 1 special character.";
 }

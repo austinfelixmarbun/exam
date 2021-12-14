@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { formatDate } from '@angular/common';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-login-page',
@@ -120,6 +121,7 @@ export class LoginPageComponent implements OnInit {
             (response) => {
               this.result = response;
               if (this.result.IsNeedUpdatePassword) {
+                this.toastr.warningMessage(ExceptionConstant.EXP_PASSWORD);
                 this.router.navigate([NavigationConstant.PAGES_CHANGE_PASSWORD], { queryParams: { "Username": username } });
               }
               else {
