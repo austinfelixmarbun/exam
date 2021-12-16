@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { DatePipe } from '@angular/common';
-import { environment } from 'environments/environment';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 
 
@@ -30,6 +29,8 @@ export class ResetPasswordComponent implements OnInit {
   isLoaded: boolean = false;
   code: string = "";
   RefUserObj: any;
+  customPattern = new Array<CustomPatternObj>();
+  
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private router: Router) {
     this.version = localStorage.getItem(CommonConstant.VERSION);
     this.code = this.route.snapshot.paramMap.get('code');
@@ -40,6 +41,16 @@ export class ResetPasswordComponent implements OnInit {
       this.getRefUser();
     }
 
+    this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GsCodePasswordRegex }).subscribe(
+      (response: { GsValue }) => {
+        let patternObj: CustomPatternObj = new CustomPatternObj();
+        patternObj.pattern = response.GsValue;
+        patternObj.invalidMsg = ExceptionConstant.PWD_EXCEPTION;
+        this.customPattern.push(patternObj);
+        this.ResetPassForm.controls.NewPassword.setValidators([Validators.required, Validators.pattern(response.GsValue)]);
+        this.ResetPassForm.controls.NewPassword.updateValueAndValidity();
+      }
+    );
   }
 
   SaveForm() {
