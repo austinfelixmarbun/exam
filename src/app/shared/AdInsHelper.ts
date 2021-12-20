@@ -161,13 +161,13 @@ export class AdInsHelper {
 
     public static RedirectUrl(router: Router, url: Array<string>, queryParams: {} = {}, isSkipLocation: boolean = false) {
         // Ngebuat bisa jalanin Constructor dan NgOnInit lagi
-        router.routeReuseStrategy.shouldReuseRoute = () => {
-            return false;
-        }
+        // router.routeReuseStrategy.shouldReuseRoute = () => {
+        //     return false;
+        // }
 
         router.navigateByUrl(
             router.createUrlTree(
-                [url.toString()], { queryParams: queryParams, skipLocationChange: isSkipLocation }
+                [url.toString()], { queryParams: queryParams, skipLocationChange: true }
             )
         );
     }

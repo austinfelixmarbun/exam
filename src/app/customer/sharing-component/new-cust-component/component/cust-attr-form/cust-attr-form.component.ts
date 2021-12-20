@@ -198,7 +198,7 @@ export class CustAttrFormComponent implements OnInit {
   }
 
   SetSearchListInputType(attrCode: string, ProfessionCode: string) {
-    this.http.post(URLConstant.GetRuleForAttrContent, { RuleSetName: this.dictRuleSetName[attrCode], Code: ProfessionCode }).subscribe(
+    this.http.post(URLConstant.GetRuleForAttrContent, { RuleSetName: attrCode, Code: ProfessionCode }).subscribe(
       (response: GenericListObj) => {
         let tempList: Array<KeyValueObj> = response.ReturnObject;
         this.dictMultiOptions[attrCode] = new Array();

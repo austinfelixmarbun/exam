@@ -21,6 +21,7 @@ export class UcPagingObj {
     navigationConst: any;
     listEnvironments: Array<EnvisObj>;
     isJoinExAPI: boolean;
+    isGetAllData: boolean;
     integrationObj: IntegrationObj;
 
     constructor() {
@@ -42,6 +43,7 @@ export class UcPagingObj {
         this.isSearched = false;
         this.navigationConst = NavigationConstant;
         this.isJoinExAPI = false;
+        this.isGetAllData = false;
         this.integrationObj = new IntegrationObj();
     }
 }

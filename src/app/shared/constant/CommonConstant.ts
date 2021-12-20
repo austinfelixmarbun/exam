@@ -284,7 +284,7 @@ export class CommonConstant {
     public static CFNA = "CFNA";
 
     //ATTR CODE
-    public static AttrCodeDeptAml = "DEPT_AML";
+    public static AttrCodeDeptAml = "RS.DEPT_AML";
     public static AttrCodeAuthAml = "AUTH_AML";
 
     //outputChange
