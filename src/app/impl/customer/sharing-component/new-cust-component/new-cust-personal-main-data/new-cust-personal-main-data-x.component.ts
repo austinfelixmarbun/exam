@@ -191,8 +191,22 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
 
-    this.inputAddressObj = await this.newCustService.BindSetLegalAddr();
+    this.inputAddressObj = this.BindSetLegalAddr();
     this.isReady = true;
+  }
+
+  BindSetLegalAddr(): InputAddressObj {
+    let inputFieldObj = new InputFieldObj();
+    inputFieldObj.inputLookupObj = new InputLookupObj();
+    let inputAddressObj = new InputAddressObj();
+    inputAddressObj.showSubsection = false;
+    inputAddressObj.title = "Customer Address";
+    inputAddressObj.inputField = inputFieldObj;
+    inputAddressObj.showAllPhn = false;
+    inputAddressObj.showOwnership = true;
+    inputAddressObj.requiredOwnership = false;
+    
+    return inputAddressObj;
   }
 
   CustNameLabel: string = "Customer";
