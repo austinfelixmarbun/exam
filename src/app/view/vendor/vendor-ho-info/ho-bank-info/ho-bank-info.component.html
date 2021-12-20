@@ -11,12 +11,14 @@
                 <table class="table table-responsive-md text-center table-hover">
                   <thead>
                     <tr class="table-header">
-                      <th><span translate class="thead-header">Bank</span></th>
-                      <th><span translate class="thead-header" name='AccountNo'>Account No</span>
+                      <th class="text-left"><span translate class="thead-header">Bank</span></th>
+                      <th class="text-left"><span translate class="thead-header" name='AccountNo'>Account No</span>
                       </th>
-                      <th><span translate class="thead-header" name='AccountName'>Account Name</span>
+                      <th class="text-left"><span translate class="thead-header" name='AccountName'>Account Name</span>
                       </th>
-                      <th><span translate class="thead-header" name='IsDefault'>Default</span>
+                      <th class="text-center"><span translate class="thead-header" name='IsDefault'>Default</span>
+                      </th>
+                      <th class="text-center"><span translate class="thead-header" name='IsActive'>Active</span>
                       </th>
                     </tr>
                   </thead>
@@ -27,10 +29,13 @@
                   </tbody>
                   <tbody>
                     <tr *ngFor="let item of ListData; let i = index">
-                      <td>{{item.BankName}}</td>
-                      <td>{{item.BankAccountNo}}</td>
-                      <td>{{item.BankAccountName}}</td>
-                      <td>{{item.IsDefault}}</td>
+                      <td class="text-left">{{item.BankName}}</td>
+                      <td class="text-left">{{item.BankAccountNo}}</td>
+                      <td class="text-left">{{item.BankAccountName}}</td>
+                      <td class="text-center" *ngIf="item.IsDefault">Yes</td>
+                      <td class="text-center" *ngIf="!item.IsDefault">No</td>
+                      <td class="text-center" *ngIf="item.IsActive">Yes</td>
+                      <td class="text-center" *ngIf="!item.IsActive">No</td>
                     </tr>
                   </tbody>
                 </table>
