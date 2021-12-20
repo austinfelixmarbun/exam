@@ -118,7 +118,6 @@ import {JobDataSmeXComponent} from '../impl/customer/customer-personal/customer-
 import {CustBankAccSectionFindataXComponent} from '../impl/customer/cust-bank-acc-section-findata/cust-bank-acc-section-findata-x.component';
 import {CustomerPersonalMainInfoXComponent} from '../impl/customer/customer-personal/customer-personal-main-info/customer-personal-main-info-x.component';
 import {CustomerPersonalJobDataXComponent} from '../impl/customer/customer-personal/customer-personal-job-data/customer-personal-job-data-x.component';
-import { CustomerViewCoyManagementXComponent } from 'app/impl/view/customer-view/customer-view-coy-management/customer-view-coy-management-x.component';
 
 export const customCurrencyMaskConfig = {
   align: "right",
@@ -193,7 +192,6 @@ export const customCurrencyMaskConfig = {
     CustomerViewPersonalJobDataSmeComponent,
     CustomerViewPersonalOtherAttrComponent,
     CustomerViewCoyManagementComponent,
-    CustomerViewCoyManagementXComponent,
     CustomerViewCoyContactComponent,
     CustomerViewCoyFinancialComponent,
     CustomerViewCoyLegalComponent,
