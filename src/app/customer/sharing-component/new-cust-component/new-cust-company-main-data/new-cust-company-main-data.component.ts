@@ -54,10 +54,11 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   pageFrom: string = CommonConstant.CustFromEditMainData;
 
   custObj: CustObj = new CustObj();
+  isReady: boolean = false;
 
   constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService,
     private cookieService: CookieService, private thirdPartyUploadService: ThirdPartyUploadService,
-    private route: ActivatedRoute) { 
+    private route: ActivatedRoute, private newCustService: NewCustSetData) { 
       this.route.queryParams.subscribe(params => {
         if (params["From"] != null) {        
           this.pageFrom = params["From"];
@@ -83,7 +84,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     this.ClearCustForm();
     this.BindLookupExistingCust();
     this.InitCustMainDataMode();
-    this.inputAddressObj = NewCustSetData.BindSetLegalAddr();
+    await this.InitCustAddr();
     this.BindLookupSupplier();
     this.DictUcDDLObj[this.RefMasterTypeCodeCompanyType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCompanyType);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
@@ -91,6 +92,12 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
   }
+
+  async InitCustAddr(){
+    this.inputAddressObj = await this.newCustService.BindSetLegalAddr();
+    this.isReady = true;
+  }
+
   //#region Set Data
   //#region UcLookup
   BindLookupSupplier() {
@@ -377,13 +384,17 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   private SetCustomerDataMode(reqSubmitObj: ReqCoyObj) {
     switch (this.CustDataMode) {
       case this.CustDataModeMain:
-        reqSubmitObj.CustObj.IsCustomer = true;
+        this.SetIsTypeDataMode(reqSubmitObj);
         break;
       case this.CustDataModeShareholder:
         reqSubmitObj.CustObj.IsShareholder = true;
         break;
     }
     return reqSubmitObj;
+  }
+  private SetIsTypeDataMode(reqSubmitObj: ReqCoyObj) {
+    if (this.pageFrom == CommonConstant.CustFromEditMainData) reqSubmitObj.CustObj.IsCustomer = true;
+    if (this.pageFrom == CommonConstant.CustFromCustShareholder) reqSubmitObj.CustObj.IsShareholder = true;
   }
 
   SetCustMgmntShareholder(): CustCompanyMgmntShrholderObj {

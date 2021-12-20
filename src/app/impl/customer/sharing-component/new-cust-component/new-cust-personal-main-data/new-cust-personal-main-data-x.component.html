@@ -232,7 +232,7 @@
               </button>
             </div>
           </div>
-          <lib-ucaddress *ngIf="checkIsAddressKnown"  [addressObj]="inputAddressObj" [UCAddrForm]="CustomerForm" [enjiForm]="enjiForm"
+          <lib-ucaddress *ngIf="checkIsAddressKnown && isReady"  [addressObj]="inputAddressObj" [UCAddrForm]="CustomerForm" [enjiForm]="enjiForm"
                          [identifier]="'UcAddress'">
           </lib-ucaddress>
         </div>

@@ -21,6 +21,7 @@ import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
 import {InputAddressObj} from 'app/shared/model/input-address-obj.model';
 import {CookieService} from 'ngx-cookie';
 import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { AddressService } from 'app/shared/services/custAddr.service';
 
 @Component({
   selector: 'app-job-data-sme-x',
@@ -110,12 +111,15 @@ export class JobDataSmeXComponent implements OnInit {
   inputAddressObjForJobAddr: InputAddressObj;
   inputAddressObjForOthBiz: InputAddressObj;
   inputPreviousAddressObj: InputAddressObj;
+  isReady: boolean = false;
+  listAddrRequiredOwnership: Array<string> = new Array();
 
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private cookieService: CookieService) {
+    private cookieService: CookieService,
+    private addressService: AddressService) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -139,6 +143,8 @@ export class JobDataSmeXComponent implements OnInit {
   }
 
   async ngOnInit() {
+    await this.getAddrTypeOwnershipRequired();
+
     this.inputAddressObjForJobAddr = new InputAddressObj();
     this.inputAddressObjForJobAddr.showSubsection = false;
     this.inputAddressObjForJobAddr.title = "Job Address";
@@ -148,6 +154,7 @@ export class JobDataSmeXComponent implements OnInit {
     this.inputAddressObjForOthBiz.isRequired = false;
     this.inputAddressObjForOthBiz.title = "Other Business Address";
     this.inputAddressObjForOthBiz.showOwnership = true;
+    this.inputAddressObjForOthBiz.requiredOwnership = this.setOwnership(CommonConstant.CustAddrTypeOthBiz);
     this.inputAddressObjForOthBiz.inputField.inputLookupObj.isRequired = false;
 
     this.inputPreviousAddressObj = new InputAddressObj();
@@ -155,6 +162,7 @@ export class JobDataSmeXComponent implements OnInit {
     this.inputPreviousAddressObj.isRequired = false;
     this.inputPreviousAddressObj.title = "Previous Job Address";
     this.inputPreviousAddressObj.showOwnership = true;
+    this.inputPreviousAddressObj.requiredOwnership = this.setOwnership(CommonConstant.CustAddrTypePreJob);
     this.inputPreviousAddressObj.inputField.inputLookupObj.isRequired = false;
 
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -226,7 +234,7 @@ export class JobDataSmeXComponent implements OnInit {
 
     this.jobPosition = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.jobPosition.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobPosition;
-    this.http.post(URLConstant.GetListActiveRefMaster, this.jobPosition).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, this.jobPosition).toPromise().then(
       (response) => {
         this.listJobPosition = response[CommonConstant.ReturnObj];
         this.JobDataSmeForm.patchValue({ JobPosition: response[CommonConstant.ReturnObj][0]['Key'] });
@@ -235,14 +243,14 @@ export class JobDataSmeXComponent implements OnInit {
 
     this.companyScale = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.companyScale.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCoyScale;
-    this.http.post(URLConstant.GetListActiveRefMaster, this.companyScale).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, this.companyScale).toPromise().then(
       (response) => {
         this.listCompanyScale = response[CommonConstant.ReturnObj];
         this.JobDataSmeForm.patchValue({ CompanyScale: response[CommonConstant.ReturnObj][0]['Key'] });
       }
     );
 
-    this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeInvestmentType }).subscribe(
+    this.http.post(URLConstant.GetListActiveRefMaster, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeInvestmentType }).toPromise().then(
       (response) => {
         this.InvestmentTypeObj = response[CommonConstant.ReturnObj];
       }
@@ -250,14 +258,15 @@ export class JobDataSmeXComponent implements OnInit {
 
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
+    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).toPromise().then(
       (response) => {
         this.custObj = response;
       }
     );
 
     await this.getCustXData();
-    this.http.post(URLConstantX.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).subscribe(
+    this.http.post(URLConstantX.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).toPromise().then(
+
       (response: any) => {
         this.returnCustJobDataObj = response['responseCustPersonalJobDataObj'];
         this.tempRefSectorEconomySlik = response['RefSectorEconomySlikXId'];
@@ -288,7 +297,7 @@ export class JobDataSmeXComponent implements OnInit {
 
           if (!this.IsReset) {
             if (this.returnCustJobDataObj.RefProfessionId != null) {
-              this.http.post(URLConstant.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).subscribe(
+              this.http.post(URLConstant.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).toPromise().then(
                 (response) => {
                   this.returnRefProfessionObj = response;
                   this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
@@ -301,7 +310,7 @@ export class JobDataSmeXComponent implements OnInit {
 
           if (this.returnCustJobDataObj.RefIndustryTypeId != null && this.tempRefSectorEconomySlik != null &&
             this.returnCustJobDataObj.RefIndustryTypeId != 0 && this.tempRefSectorEconomySlik != 0) {
-            this.http.post(URLConstantX.GetRefSectorEconomySlikXById, { Id: this.tempRefSectorEconomySlik }).subscribe(
+            this.http.post(URLConstantX.GetRefSectorEconomySlikXById, { Id: this.tempRefSectorEconomySlik }).toPromise().then(
               (response) => {
                 this.returnSectorEconomySlikObj = response;
                 this.economicSectorSlikLookUpObj.nameSelect = this.returnSectorEconomySlikObj.SectorEconomySlikName;
@@ -315,7 +324,7 @@ export class JobDataSmeXComponent implements OnInit {
           if (this.returnCustJobDataObj.JobAddrId != null) {
             this.custJobAddrObj = new CustAddrObj();
             this.custJobAddrObj.CustAddrId = this.returnCustJobDataObj.JobAddrId;
-            this.http.post(URLConstant.GetCustAddr, { Id: this.custJobAddrObj.CustAddrId }).subscribe(
+            this.http.post(URLConstant.GetCustAddr, { Id: this.custJobAddrObj.CustAddrId }).toPromise().then(
               (response) => {
                 this.getJobAddr = response;
                 this.JobDataSmeForm.patchValue({
@@ -358,7 +367,7 @@ export class JobDataSmeXComponent implements OnInit {
           if (this.returnCustJobDataObj.OthBizAddrId != null) {
             this.custOthBizAddrObj = new CustAddrObj();
             this.custOthBizAddrObj.CustAddrId = this.returnCustJobDataObj.OthBizAddrId;
-            this.http.post(URLConstant.GetCustAddr, { Id: this.custOthBizAddrObj.CustAddrId }).subscribe(
+            this.http.post(URLConstant.GetCustAddr, { Id: this.custOthBizAddrObj.CustAddrId }).toPromise().then(
               (response) => {
                 this.getOthBizAddr = response;
                 this.JobDataSmeForm.patchValue({
@@ -404,7 +413,7 @@ export class JobDataSmeXComponent implements OnInit {
           if (this.returnCustJobDataObj.PrevJobAddrId != null) {
             this.preJobAddrObj = new CustAddrObj();
             this.preJobAddrObj.CustAddrId = this.returnCustJobDataObj.PrevJobAddrId;
-            this.http.post(URLConstant.GetCustAddr, { Id: this.preJobAddrObj.CustAddrId }).subscribe(
+            this.http.post(URLConstant.GetCustAddr, { Id: this.preJobAddrObj.CustAddrId }).toPromise().then(
               (response) => {
                 this.getPreJobAddr = response;
                 this.JobDataSmeForm.patchValue({
@@ -462,6 +471,19 @@ export class JobDataSmeXComponent implements OnInit {
         }
       }
     );
+
+    this.isReady = true;
+  }
+
+  async getAddrTypeOwnershipRequired(){
+    this.listAddrRequiredOwnership = await this.addressService.GetListAddrTypeOwnershipMandatory();
+  }
+
+  setOwnership(MrCustAddrTypeCode: string) : boolean {
+    if(this.listAddrRequiredOwnership.find(addrType => addrType == MrCustAddrTypeCode)){
+      return true;
+    }
+    return false;
   }
 
   setJobAddr() {

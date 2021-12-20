@@ -1,4 +1,6 @@
 {
+    "title": "Lookup - Asset Insurance HO",
+    "sectionTitle": "Search",
     "component": [
         {
             "type": "textbox",

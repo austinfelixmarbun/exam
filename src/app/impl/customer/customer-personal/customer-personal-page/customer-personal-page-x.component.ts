@@ -21,6 +21,7 @@ import {CustomerEmergencyContactComponent} from 'app/customer/customer-personal/
 import {CustFinDataTabXComponent} from 'app/impl/customer/cust-fin-data-tab/cust-fin-data-tab-x.component';
 import {CustAttrSectionComponent} from 'app/customer/cust-attr-section/cust-attr-section.component';
 import {CustomerPersonalJobDataXComponent} from 'app/impl/customer/customer-personal/customer-personal-job-data/customer-personal-job-data-x.component';
+import { CustomerViewHeaderPersonalXComponent } from '../../customer-view/customer-view-header-personal/customer-view-header-personal-x.component';
 
 
 @Component({
@@ -31,6 +32,7 @@ import {CustomerPersonalJobDataXComponent} from 'app/impl/customer/customer-pers
 export class CustomerPersonalPageXComponent implements OnInit {
   private stepper: Stepper;
 
+  @ViewChild('viewCustPers') viewCustPers: CustomerViewHeaderPersonalXComponent;
   IdCust: number;
   CustPersonalId: number;
   CustStepIndex: number = 1;
@@ -192,6 +194,7 @@ export class CustomerPersonalPageXComponent implements OnInit {
           this.CustStepIndex--;
         }
       }
+      this.viewCustPers.ReloadUcViewGeneric();
     }
   }
 

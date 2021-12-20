@@ -1,4 +1,4 @@
-<div class="customerData">
+<div class="customerData" *ngIf="isReady">
   <form class="form form-horizontal" [formGroup]="JobDataEmpForm"
     (ngSubmit)="JobDataEmpForm.valid && SaveForm()" #enjiForm="ngForm">
     <div class="form-body">

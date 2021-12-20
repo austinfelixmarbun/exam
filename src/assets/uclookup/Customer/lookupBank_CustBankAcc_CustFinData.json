@@ -1,5 +1,6 @@
 {
-    "sectionTitle": "Lookup - Bank",
+    "title": "Lookup - Bank",
+    "sectionTitle": "Search",
     "component": [
         {
             "type": "textbox",
@@ -24,13 +25,13 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "Bank Code",
             "name": "BANK_CODE"
         },
         {
             "type": "sort",
-            "position": "center",
+            "position": "left",
             "label": "Bank Name",
             "name": "BANK_NAME"
         },
@@ -43,7 +44,7 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "BankCode"
         },
         {

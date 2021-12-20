@@ -1,6 +1,7 @@
 {
   "url": "",
-  "sectionTitle":"LOOK UP - Industry Type Category",
+  "title":"Lookup - Industry Type Category",
+  "sectionTitle": "Search",
   "component": [
     {
       "type": "textbox",

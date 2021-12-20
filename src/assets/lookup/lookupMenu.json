@@ -1,5 +1,6 @@
 {
-    "sectionTitle": "Lookup Holiday Scheme",
+    "title": "Lookup - Holiday Scheme",
+    "sectionTitle": "Search",
     "component": [
       {
         "type": "textbox",

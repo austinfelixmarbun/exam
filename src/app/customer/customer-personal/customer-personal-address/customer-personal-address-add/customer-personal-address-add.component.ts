@@ -6,7 +6,6 @@ import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
-import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -15,9 +14,9 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-ma
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/response/res-get-list-cust-addr-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
-import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { AddressService } from 'app/shared/services/custAddr.service';
 
 @Component({
   selector: 'app-customer-personal-address-add',
@@ -63,12 +62,8 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   CustModelDesc: string;
   MrIdTypeCodeDesc: string;
   MotherMaidenName: string;
-
-  listAddrRequiredOwnership: Array<string> = [
-    CommonConstant.CustAddrTypeLegal,
-    CommonConstant.CustAddrTypeResidence,
-    CommonConstant.CustAddrTypeOthBiz
-  ]
+  isReady: boolean = false;
+  listAddrRequiredOwnership: Array<string> = new Array();
 
   CustDataPersonalForm = this.fb.group({
     Notes: [''],
@@ -83,7 +78,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   });
   inputAddressObj: InputAddressObj;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private CustSetData: NewCustSetData) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private CustSetData: NewCustSetData, private addressService: AddressService) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -91,14 +86,21 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.pageType = this.mode;
+    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj.showSubsection = false;
+    this.inputAddressObj.title = "Customer Address";
+    this.inputAddressObj.showOwnership = true;
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
 
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
     this.addressType.MappingCode = CommonConstant.CustTypePersonal;
-    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).subscribe(
+
+    await this.getAddrTypeOwnershipRequired();
+
+    await this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.addressType).toPromise().then(
       async (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
         this.listAddressType = await this.CustSetData.FilterAddr(this.listAddressType);
@@ -106,7 +108,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
       });
 
     this.custAddrObj.Id = this.IdCust;
-    this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
+    await this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).toPromise().then(
       (response : ResGetListCustAddrObj) => {
         this.listCustAddr = response[CommonConstant.ReturnObj];
         this.CustDataPersonalForm.patchValue({ CopyAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'] });
@@ -116,7 +118,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     if (this.pageType == "edit") {
       this.custAddrObj = new GenericObj();
       this.custAddrObj.Id = this.AddrId;
-      this.http.post(URLConstant.GetCustAddr, this.custAddrObj).subscribe(
+      await this.http.post(URLConstant.GetCustAddr, this.custAddrObj).toPromise().then(
         (response) => {
           this.getCustomerAddr = response;
           this.CustDataPersonalForm.patchValue({
@@ -157,14 +159,14 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           if (this.getCustomerAddr.MrCustAddrTypeCode == CommonConstant.CustAddrTypeJob) {
             this.inputAddressObj.showOwnership = false;
           }
-          this.setOwnership(this.CustDataPersonalForm.controls.MrCustAddrTypeCode.value);
         });
     }
-    this.inputAddressObj = new InputAddressObj();
-    this.inputAddressObj.showSubsection = false;
-    this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.showOwnership = true;
     this.setOwnership(this.CustDataPersonalForm.controls.MrCustAddrTypeCode.value);
+    this.isReady = true;
+  }
+
+  async getAddrTypeOwnershipRequired(){
+    this.listAddrRequiredOwnership = await this.addressService.GetListAddrTypeOwnershipMandatory();
   }
 
   setOwnership(MrCustAddrTypeCode: string) {

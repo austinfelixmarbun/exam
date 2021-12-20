@@ -30,12 +30,14 @@ export class AdInsConstant {
   public static TimeoutSession = 6000000;
   public static GetListProduct = "http://creator_websvr:7272/NEW_FINANCING/api/Catalog/getPopularViewByCriteria";
   public static Login = environment.FoundationR3Url + '/v1' + "/Authenticate/Login";
+  public static LoginV2 = environment.FoundationR3Url + '/v2' + "/Authenticate/Login";
   public static LoginWithToken = environment.FoundationR3Url + '/v1' + "/Authenticate/LoginWithToken";
   public static Logout = environment.FoundationR3Url + "/v1" + "/UserManagement/LogOut"
   public static FormDefault = "dashboard/dash-board";
   public static JoinTypeInner = "INNER";
   public static LoginByRole = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByRole";
   public static LoginByToken = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByToken";
+  public static LoginByTokenV2 = environment.FoundationR3Url + "/v2" + "/Authenticate/LoginByToken";
   public static UpdateToken = environment.FoundationR3Url + "/v1" + "/Authenticate/UpdateRole";
   public static GetAllActiveRefFormByRoleCodeAndModuleCode = environment.FoundationR3Url + "/v1" + "/RefForm/GetAllActiveRefFormByRoleCodeAndModuleCode";
   public static GetThingsToDoByRole = environment.FoundationR3Url + "/v1" + "/ThingsToDo/GetThingsToDoByRole";
@@ -43,7 +45,8 @@ export class AdInsConstant {
   public static GetThingsToDoByRoleV2 = environment.FoundationR3Url + "/v2" + "/ThingsToDo/GetThingsToDoByRole";
   public static GetThingsToDoCamunda = environment.FoundationR3Url + "/v2" + "/ThingsToDo/GetThingsToDoCamunda";
   public static GetListApvTaskListByUsernameAndRoleCodeForThingsToDo = environment.ApprovalR3Url + "/Generic/GetListApvTaskListByUsernameAndRoleCodeForThingsToDo";
-  
+  public static GetListJobTitleByUsernameAndModule = environment.FoundationR3Url + "/v1" + "/Authenticate/GetListJobTitleByUsernameAndModule";
+
   // Storage Watch Key
   public static WatchRoleState = "RoleState";
   public static WatchRoleLang = "lang";

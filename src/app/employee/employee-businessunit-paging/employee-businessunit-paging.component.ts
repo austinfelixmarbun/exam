@@ -13,19 +13,24 @@ import { environment } from 'environments/environment';
 })
 export class EmployeeBusinessunitPagingComponent implements OnInit {
 
+  pageType: string ="emp";
   RefUserId : string;
   inputPagingObj : UcPagingObj = new UcPagingObj();
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
-  readonly CancelLink: string = NavigationConstant.EMP_PAGING;
+  CancelLink: string = NavigationConstant.EMP_PAGING;
   readonly AddLink: string = NavigationConstant.EMP_BZ_UNIT_ADD;
   constructor(private route: ActivatedRoute) { 
     this.route.queryParams.subscribe(params => {
       this.RefUserId = params["RefUserId"];
+      this.pageType = params["mode"];
     })
   }
 
   ngOnInit() {
+    if(this.pageType == "systemUser"){
+      this.CancelLink = NavigationConstant.SYS_USER_PAGING;
+    }
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewEmployeeBusinessUnitMember.json";
 
     this.inputPagingObj._url = "./assets/ucpaging/searchEmployeeBusinessUnit.json";

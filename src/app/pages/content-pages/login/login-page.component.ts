@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { formatDate } from '@angular/common';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-login-page',
@@ -95,22 +96,32 @@ export class LoginPageComponent implements OnInit {
     const password = this.userPassRef.nativeElement.value;
     var requestObj = { "Username": username, "Password": password };
     //this.rolePickService.openDialog(data.returnObject);
-    this.http.post(AdInsConstant.Login, requestObj).subscribe(
-      (response) => {
+
+    let LoginURL = environment.isCore ? AdInsConstant.LoginV2 : AdInsConstant.Login;
+    this.http.post(LoginURL, requestObj).subscribe(
+      async (response) => {
         if (response["StatusCode"] == CommonConstant.STATUS_CODE_USER_LOCKED) {
           this.mode = "locked";
         }
         else {
           //this.cookieService.put("username", username);
-          this.loginObj = {
-            response: response[CommonConstant.ReturnObj],
-            user: username,
-            pwd: password
-          };
-          this.http.post<any>(URLConstant.GetUserEmpByUsername, requestObj).subscribe(
+
+          if(environment.isCore){
+            await this.http.post(AdInsConstant.GetListJobTitleByUsernameAndModule, {UserName : username, Module : environment.Module}).toPromise().then(
+              (response) => {
+                this.loginObj.response = response["ListOfficeRoleJobTitle"]
+              });
+          }else{
+            this.loginObj.response = response[CommonConstant.ReturnObj];
+          }
+          this.loginObj.user = username;
+          this.loginObj.pwd = password;
+          
+          await this.http.post<any>(URLConstant.GetUserEmpByUsername, requestObj).toPromise().then(
             (response) => {
               this.result = response;
               if (this.result.IsNeedUpdatePassword) {
+                this.toastr.warningMessage(ExceptionConstant.EXP_PASSWORD);
                 this.router.navigate([NavigationConstant.PAGES_CHANGE_PASSWORD], { queryParams: { "Username": username } });
               }
               else {

@@ -171,7 +171,7 @@ export class AdInsHelper {
             )
         );
     }
-      
+
     public static RedirectUrlView(router: Router, url: Array<string>, queryParams: {}, isSkipLocation: boolean = false) {
         router.navigate(url, { queryParams: queryParams, skipLocationChange: isSkipLocation });
     }

@@ -24,7 +24,8 @@ export class RolePickService {
                 RowVersion: ""
             };
 
-            this.http.post(AdInsConstant.LoginByToken, roleObject2).subscribe(
+            let LoginByTokenURL = environment.isCore ? AdInsConstant.LoginByTokenV2 : AdInsConstant.LoginByToken;
+            this.http.post(LoginByTokenURL, roleObject2).subscribe(
                 (response) => {
                     const object = {
                         response: response[CommonConstant.ReturnObj]

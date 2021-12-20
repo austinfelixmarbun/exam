@@ -1,5 +1,6 @@
 {
-    "sectionTitle": "Ref Form",
+    "title": "Lookup - Ref Form",
+    "sectionTitle": "Search",
     "component": [
         {
             "type": "textbox",

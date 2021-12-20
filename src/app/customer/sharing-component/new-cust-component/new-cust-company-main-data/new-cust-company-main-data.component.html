@@ -94,7 +94,7 @@
               </button>
             </div>
           </div>
-          <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerForm" [enjiForm]="enjiForm"
+          <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerForm" [enjiForm]="enjiForm" *ngIf="isReady"
             [identifier]="'UcAddress'">
           </lib-ucaddress>
         </div>

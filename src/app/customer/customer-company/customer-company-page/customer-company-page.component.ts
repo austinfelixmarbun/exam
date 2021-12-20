@@ -17,6 +17,7 @@ import { CustomerCompanyDetailComponent } from '../customer-company-detail/custo
 import { CustomerCompanyContactInformationComponent } from '../customer-company-contact-information/customer-company-contact-information.component';
 import { CustFinDataTabComponent } from 'app/customer/cust-fin-data-tab/cust-fin-data-tab.component';
 import { CustAttrSectionComponent } from 'app/customer/cust-attr-section/cust-attr-section.component';
+import { CustomerViewHeaderCompanyComponent } from 'app/customer/customer-view/customer-view-header-company/customer-view-header-company.component';
 
 @Component({
   selector: 'app-customer-company-page',
@@ -26,6 +27,7 @@ import { CustAttrSectionComponent } from 'app/customer/cust-attr-section/cust-at
 export class CustomerCompanyPageComponent implements OnInit {
   private stepper: Stepper;
 
+  @ViewChild('viewCustCoy') viewCustCoy: CustomerViewHeaderCompanyComponent;
   IdCust: number;
   CustCompanyId: number;
   CustStepIndex: number;
@@ -170,6 +172,7 @@ export class CustomerCompanyPageComponent implements OnInit {
           this.CustStepIndex--;
         }
       }
+      this.viewCustCoy.ReloadUcViewGeneric();
     }
   }
 

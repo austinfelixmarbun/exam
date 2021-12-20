@@ -194,7 +194,7 @@ export class CustomerPersonalDetailXComponent implements OnInit {
   }
 
   GetCustGrpData(event) {
-    this.CustGrpObj.CustId = event.CustId;
+    this.CustGrpObj.CustId = event.CustId != "" ? event.CustId : 0;
   }
 
   setLookupCustGrp() {
@@ -203,6 +203,7 @@ export class CustomerPersonalDetailXComponent implements OnInit {
     this.lookupCustGrpObj.genericJson = "./assets/lookup/lookupCustomer.json";
     this.lookupCustGrpObj.isRequired = false;
     this.lookupCustGrpObj.isReady = true;
+    this.lookupCustGrpObj.isClear = true;
 
     this.criteriaList = new Array();
     this.criteriaObj = new CriteriaObj();
@@ -251,7 +252,7 @@ export class CustomerPersonalDetailXComponent implements OnInit {
     this.custPersonalObj.CustId = this.IdCust;
 
     if (this.custPersonalObj.MrNationalityCode == CommonConstant.NationalityCodeLocal) {
-      this.custPersonalObj.WnaCountryCode = CommonConstant.WnaCountryCodeIdn;
+      this.custPersonalObj.WnaCountryCode = this.LocalCountryCode;
     }
     else {
       if (this.tempCustPersonalObj.WnaCountryCode != null && this.tempCountryCode == null) {
