@@ -45,7 +45,7 @@ export class CustomerViewDocumentComponent implements OnInit {
         this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
         this.dmsObj.MetadataParent = null;
         this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, response["CustNo"]));
-        this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideView));
+        this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideViewDownload));
         this.isReady = true;
       }
     );
