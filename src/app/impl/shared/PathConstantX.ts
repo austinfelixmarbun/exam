@@ -6,9 +6,9 @@ export class PathConstantX{
     public static DETAIL = "DetailX";
     public static PAGING = "PagingX";
     public static EDIT = "EditX";
-    public static INQUIRY_X = 'InquiryX'; 
+    public static INQUIRY_X = 'InquiryX';
     //#endregion
-    
+
     //#region Common-Setting
     public static CS_ECONOMIC_SECTOR_SLIK = "EconomicSectorSlik";
     public static CS_ECONOMIC_SECTOR_SLIK_PAGING = PathConstantX.CS_ECONOMIC_SECTOR_SLIK + "/" + PathConstantX.PAGING;
@@ -26,7 +26,7 @@ export class PathConstantX{
     public static CUST_COY_PAGE = PathConstant.CUST_COY + "/" + PathConstantX.CUST_PAGE;
     public static CUST_PERSONAL_JOB_DATA = PathConstant.CUST_PERSONAL + "/" + PathConstantX.CUST_JOB_DATA;
     //#endregion
-    
+
     //#region Vendor-Module
     public static VENDOR_REG = "RegistrationX";
     public static VENDOR_ATPM_DETAIL = PathConstant.VENDOR_ATPM + "/" + PathConstantX.DETAIL;
@@ -43,6 +43,7 @@ export class PathConstantX{
 
     //#region View-Cust-Module
     public static VIEW_CUST_COY_MNGMNT_X = "CoyManagement/X";
+    public static VIEW_CUST_COY_FINANCIAL_X = "CoyFinancial/x";
 
     public static CUST_PAGE_X ="PageX";
     public static VENDOR_BRANCH ="BranchX";
