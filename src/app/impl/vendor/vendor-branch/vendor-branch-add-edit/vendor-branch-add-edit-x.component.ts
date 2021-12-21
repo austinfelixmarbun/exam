@@ -111,7 +111,7 @@ export class VendorBranchAddEditXComponent implements OnInit {
     ReservedField9: [''], //ASSGMNT_TYPE tele, field
     MrTaxCalcMethodCode: ['', Validators.required],
     IsVat: [true, Validators.required],
-    TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
+    TaxIdNo: ['', [Validators.required]],
     TaxpayerName: ['', Validators.required],
     MrAddrTypeCode: [''],
     Addr: [''],
@@ -566,10 +566,10 @@ export class VendorBranchAddEditXComponent implements OnInit {
   NpwpCheck(isGetData: boolean = false) {
     if (this.VendorForm.controls.IsNpwpExist.value == true) {
       this.isHidden = false;
-      this.VendorForm.controls.TaxIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
+      this.VendorForm.controls.TaxIdNo.setValidators([Validators.required]);
       this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
     } else {
-      this.VendorForm.controls.TaxIdNo.setValidators([Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
+      this.VendorForm.controls.TaxIdNo.clearValidators();
       this.VendorForm.controls.TaxpayerName.clearValidators();
       this.isHidden = true;
     }

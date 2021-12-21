@@ -64,7 +64,7 @@ export class VendorEmployeeXComponent implements OnInit {
     IsActive: [false],
     IsContactPerson: [false],
     IsOwner: [false],
-    TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
+    TaxIdNo: ['', [Validators.required]],
     TaxpayerName: [''],
     MrTaxCalcMethodCode: [''],
     IsNpwpExist: [false]
@@ -284,11 +284,14 @@ export class VendorEmployeeXComponent implements OnInit {
     if (this.VendorEmpForm.controls.IsNpwpExist.value == true) {
       this.isHidden = false;
       this.inputLookupZipcodeObj.isRequired = true;
+      this.VendorEmpForm.controls.TaxIdNo.setValidators([Validators.required]);
     } else {
       this.inputLookupZipcodeObj.isRequired = false;
+      this.VendorEmpForm.controls.TaxIdNo.clearValidators();
       if (!isGetData) this.VendorEmpForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
       this.isHidden = true;
     }
+    this.VendorEmpForm.controls.TaxIdNo.updateValueAndValidity();
   }
 
   SaveForm() {
