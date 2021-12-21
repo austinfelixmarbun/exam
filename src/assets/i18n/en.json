@@ -131,7 +131,7 @@
   "Maintenance": "Maintenance",
   "Gallery": "Gallery",
   "Documentation": "Documentation",
-  "Support": "Support",  
+  "Support": "Support",
   "F_Bank_Name": "Bank Names",
   "BI Code": "BI Code",
   "Reset": "Reset",
@@ -141,5 +141,10 @@
   "Debtor Group Code": "Debtor Group Code",
   "Debtor Group Name": "Debtor Group Name",
   "Debtor Business Scale Name": "Debtor Business Scale Name",
-  "Debtor Business Scale Description": "Debtor Business Scale Description"
+  "Debtor Business Scale Description": "Debtor Business Scale Description",
+  "Monthly Installment Amount": "Total Monthly Installment (DSF + Other)",
+  "Gross Monthly Income Amount" : "Monthly Sales / Revenue",
+  "Other Monthly Installment Amount": "Total Monthly Installment (DSF + Other)",
+  "Operational Cost" : "Total Monthly Expense",
+  "Operation Cost": "Total Monthly Expense"
 }
