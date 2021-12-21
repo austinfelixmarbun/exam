@@ -93,8 +93,22 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
   }
 
   async InitCustAddr(){
-    this.inputAddressObj = await this.newCustService.BindSetLegalAddr();
+    this.inputAddressObj = await this.BindSetLegalAddr();
     this.isReady = true;
+  }
+
+  BindSetLegalAddr(): InputAddressObj {
+    let inputFieldObj = new InputFieldObj();
+    inputFieldObj.inputLookupObj = new InputLookupObj();
+    let inputAddressObj = new InputAddressObj();
+    inputAddressObj.showSubsection = false;
+    inputAddressObj.title = "Customer Address";
+    inputAddressObj.inputField = inputFieldObj;
+    inputAddressObj.showAllPhn = false;
+    inputAddressObj.showOwnership = true;
+    inputAddressObj.requiredOwnership = false;
+    
+    return inputAddressObj;
   }
 
   //#region Set Data
