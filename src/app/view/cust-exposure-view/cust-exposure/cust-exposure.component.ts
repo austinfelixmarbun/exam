@@ -16,6 +16,7 @@ export class CustExposureComponent implements OnInit {
 
   @Input() exposureHObj: CustExpsrHObj = new CustExpsrHObj();
   @Input() exposureType: string = CommonConstant.ExposureCustTypeCode;
+  @Input() custNo: string = "";
 
   //#region Role Type
   readonly RoleCust: string = CommonConstant.RoleCustData;
@@ -23,6 +24,8 @@ export class CustExposureComponent implements OnInit {
   readonly RoleGuarantor: string = CommonConstant.RoleGuarantorData;
   readonly RoleShareholder: string = CommonConstant.RoleShareholder;
   //#endregion
+
+  TotalInstallmentDsf: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +37,7 @@ export class CustExposureComponent implements OnInit {
   IsReady: boolean = false;
   async ngOnInit() {
     this.SetExposureDObj();
+    this.GetTotalMonthlyInstallmentDSF();
     await this.GetListCustExpsrBucketByCustExpsrDId();
     await this.GetListCustExpsrAppAgrHistByCustExpsrHId();
     this.IsReady = true;
@@ -76,4 +80,22 @@ export class CustExposureComponent implements OnInit {
     );
   }
 
+  GetTotalMonthlyInstallmentDSF(){
+    if(this.custNo != ""){
+      let getExposureR2Url = "";
+      if(this.exposureType == CommonConstant.ExposureCustTypeCode){
+        getExposureR2Url = URLConstant.GetR2CustExposureByCustNo;
+      }
+      else if(this.exposureType == CommonConstant.ExposureCustGroupTypeCode){
+        getExposureR2Url = URLConstant.GetR2CustGroupExposureByCustNo;
+      }
+      if(getExposureR2Url != ""){
+        this.http.post<any>(getExposureR2Url, { Code : this.custNo }).subscribe(
+          (response) => {
+            this.TotalInstallmentDsf = response.TotalInstAmount;
+          }
+        );
+      }
+    }
+  }
 }
