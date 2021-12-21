@@ -38,7 +38,7 @@
               <label class="label-control"> Total Monthly Installment DSF </label>
             </div>
             <div class="col-md-6" style="text-align: right;">
-              <label class="label-control"> {{TotalInstallmentDsf == null || TotalInstallmentDsf == undefined ? '-' : TotalInstallmentDsf | number:'.2':'en-US'}} </label>
+              <label class="label-control"> {{TotalInstallmentDsf == null || TotalInstallmentDsf == undefined ? 0 | number:'.2':'en-US': TotalInstallmentDsf | number:'.2':'en-US'}} </label>
             </div>
           </div>
         </div>
