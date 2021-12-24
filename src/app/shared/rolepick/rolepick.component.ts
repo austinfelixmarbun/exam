@@ -28,6 +28,27 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   }
 
   chooseRole(item) {
+    var UserIdentityObj = {
+      RefUserId: item.RefUserId,
+      UserName: item.UserName,
+      EmpNo: item.EmpNo,
+      EmpName: item.EmpName,
+      OfficeId: item.RefOfficeId,
+      OfficeCode: item.OfficeCode,
+      OfficeName: item.OfficeName,
+      MrOfficeTypeCode: item.MrOfficeTypeCode,
+      RoleId: item.RefRoleId,
+      RoleCode: item.RoleCode,
+      RoleName: item.RoleName,
+      JobTitleId: item.RefJobTitleId,
+      JobTitleCode: item.JobTitleCode,
+      JobTitleName: item.JobTitleName,
+      BusinessDt: item.BusinessDt,
+      BusinessDtStr: item.BusinessDtStr,
+      Email: item.Email1,
+      CoyName: item.CoyName
+    }
+
     var roleObject = {
       UserName: this.data.user,
       Password: this.data.pwd,
@@ -36,11 +57,12 @@ export class RolepickComponent implements OnInit, AfterViewInit {
       JobTitleCode: item.JobTitleCode,
       RequestDateTime: item.BusinessDt,
       ModuleCode: environment.Module,
-      RowVersion: ""
-
+      RowVersion: "",
+      UserIdentityObj: UserIdentityObj
     };
+
     if (this.data.pwd == null) {
-      this.http.post(AdInsConstant.UpdateToken, roleObject, { withCredentials: true }).subscribe(
+      this.http.post(AdInsConstant.UpdateTokenV2, roleObject, { withCredentials: true }).subscribe(
         (response) => {
           //Cookie sudah diambil dari BE (Di set manual dulu)
 
@@ -67,10 +89,13 @@ export class RolepickComponent implements OnInit, AfterViewInit {
 
     }
     else {
-      this.http.post(AdInsConstant.LoginByRole, roleObject, { withCredentials: true }).subscribe(
+      this.http.post(AdInsConstant.LoginByRoleV2, roleObject, { withCredentials: true }).subscribe(
         (response) => {
           //Cookie sudah diambil dari BE (Di set manual dulu)
 
+          this.http.post(AdInsConstant.CheckUserSessionLog, roleObject, { withCredentials: true }).subscribe(
+            (response) => {});
+          
           var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
           AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, response['Token']);
           AdInsHelper.SetCookie(this.cookieService, "XSRF-TOKEN", response['Token']);

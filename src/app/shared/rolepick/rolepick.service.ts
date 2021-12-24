@@ -24,8 +24,7 @@ export class RolePickService {
                 RowVersion: ""
             };
 
-            let LoginByTokenURL = environment.isCore ? AdInsConstant.LoginByTokenV2 : AdInsConstant.LoginByToken;
-            this.http.post(LoginByTokenURL, roleObject2).subscribe(
+            this.http.post(AdInsConstant.LoginByTokenV2, roleObject2).subscribe(
                 (response) => {
                     const object = {
                         response: response[CommonConstant.ReturnObj]
@@ -49,6 +48,27 @@ export class RolePickService {
         } else {
             if (data.response.length == 1 && type == "") {
                 var item = data.response[0];
+                var UserIdentityObj = {
+                    RefUserId: item.RefUserId,
+                    UserName: item.UserName,
+                    EmpNo: item.EmpNo,
+                    EmpName: item.EmpName,
+                    OfficeId: item.RefOfficeId,
+                    OfficeCode: item.OfficeCode,
+                    OfficeName: item.OfficeName,
+                    MrOfficeTypeCode: item.MrOfficeTypeCode,
+                    RoleId: item.RefRoleId,
+                    RoleCode: item.RoleCode,
+                    RoleName: item.RoleName,
+                    JobTitleId: item.RefJobTitleId,
+                    JobTitleCode: item.JobTitleCode,
+                    JobTitleName: item.JobTitleName,
+                    BusinessDt: item.BusinessDt,
+                    BusinessDtStr: item.BusinessDtStr,
+                    Email: item.Email1,
+                    CoyName: item.CoyName
+                  }
+
                 var roleObject = {
                     UserName: data.user,
                     Password: data.pwd,
@@ -58,10 +78,10 @@ export class RolePickService {
                     RequestDateTime: item.BusinessDt,
                     RowVersion: "",
                     Ip: "",
-                    ModuleCode: environment.Module
-
+                    ModuleCode: environment.Module,
+                    UserIdentityObj: UserIdentityObj
                 };
-                this.http.post(AdInsConstant.LoginByRole, roleObject, { withCredentials: true }).subscribe(
+                this.http.post(AdInsConstant.LoginByRoleV2, roleObject, { withCredentials: true }).subscribe(
                     (response) => {
                         //Cookie sudah diambil dari BE (Di set manual dulu)
 
