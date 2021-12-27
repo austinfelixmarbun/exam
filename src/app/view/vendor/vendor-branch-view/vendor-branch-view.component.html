@@ -101,9 +101,10 @@
         <thead>
           <tr class="table-header">
             <th class="text-left" translate>BANK</th>
-            <th class="text-center" translate>ACCOUNT NUMBER</th>
+            <th class="text-left" translate>ACCOUNT NUMBER</th>
             <th class="text-left" translate>ACCOUNT NAME</th>
             <th class="text-center" translate>DEFAULT</th>
+            <th class="text-center" translate>ACTIVE</th>
           </tr>
         </thead>
         <tbody *ngIf = "VendorBankAcc?.length == 0">
@@ -114,10 +115,12 @@
         <tbody>
           <tr *ngFor="let item of VendorBankAcc">
             <td class="text-left">{{item.BankName}}</td>
-            <td class="text-center">{{item.BankAccountNo}}</td>
+            <td class="text-left">{{item.BankAccountNo}}</td>
             <td class="text-left">{{item.BankAccountName}}</td>
             <td class="text-center" *ngIf="item.IsDefault == true">Yes</td>
             <td class="text-center" *ngIf="item.IsDefault == false">No</td>
+            <td class="text-center" *ngIf="item.IsActive">Yes</td>
+            <td class="text-center" *ngIf="!item.IsActive">No</td>
           </tr>
         </tbody>
       </table>

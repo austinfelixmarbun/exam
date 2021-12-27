@@ -113,7 +113,7 @@ export class CustomerPersonalPageComponent implements OnInit {
       this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
       this.dmsObj.MetadataParent = null;
       this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, this.CustNo));
-      this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
+      this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadDownloadView));
 
       await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: this.IdCust }).toPromise().then(
         (response) => {
