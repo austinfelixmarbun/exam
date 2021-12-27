@@ -103,7 +103,7 @@ export class CustomerCompanyPageXComponent implements OnInit {
             this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
             this.dmsObj.MetadataParent = null;
             this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, this.CustNo));
-            this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
+            this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadDownloadView));
           }
         });
 

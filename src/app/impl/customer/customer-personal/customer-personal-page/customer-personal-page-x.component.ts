@@ -112,15 +112,15 @@ export class CustomerPersonalPageXComponent implements OnInit {
       }
     );
 
-    if(this.SysConfigResultObj.ConfigValue == '1'){
-          let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-          this.dmsObj = new DMSObj();
-          this.dmsObj.User = currentUserContext.UserName;
-          this.dmsObj.Role = currentUserContext.RoleCode;
-          this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
-          this.dmsObj.MetadataParent = null;
-      	  this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, this.CustNo));
-          this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadView));
+    if (this.SysConfigResultObj.ConfigValue == '1') {
+      let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+      this.dmsObj = new DMSObj();
+      this.dmsObj.User = currentUserContext.UserName;
+      this.dmsObj.Role = currentUserContext.RoleCode;
+      this.dmsObj.ViewCode = CommonConstant.DmsViewCodeCust;
+      this.dmsObj.MetadataParent = null;
+      this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, this.CustNo));
+      this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadDownloadView));
 
       await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).toPromise().then(
         (response) => {
