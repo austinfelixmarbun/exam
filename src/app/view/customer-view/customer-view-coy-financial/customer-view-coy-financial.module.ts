@@ -17,12 +17,6 @@ import { CustomerViewCoyFinancialComponent } from "./customer-view-coy-financial
 import { CustomerViewCoyFinancialRoutingModule } from "./customer-view-coy-financial-routing.module";
 import { CustomerViewCoyFinancialSectionComponent } from "../customer-view-coy-financial-section/customer-view-coy-financial-section.component";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
-import {
-  CustomerViewCoyFinancialSectionXComponent
-} from '../../../impl/view/customer-view/customer-view-coy-financial-section/customer-view-coy-financial-section-x.component';
-import {
-  CustomerViewCoyFinancialXComponent
-} from '../../../impl/view/customer-view/customer-view-coy-financial/customer-view-coy-financial-x.component';
 
 
 
@@ -48,9 +42,7 @@ import {
   ],
   declarations: [
     CustomerViewCoyFinancialComponent,
-    CustomerViewCoyFinancialSectionComponent,
-    CustomerViewCoyFinancialXComponent,
-    CustomerViewCoyFinancialSectionXComponent
+    CustomerViewCoyFinancialSectionComponent
   ],
   entryComponents: [
     UcviewgenericComponent,
