@@ -82,5 +82,6 @@ export class SidebarComponent implements OnInit {
         //problem : ketika di 'click' halaman memasuki halaman /dashboard/dash-empty terlebih dahulu
         AdInsHelper.RedirectUrl(this.router, [ev.Path], this.genParam(ev.Params));
     }
+    // comment
 
 }
