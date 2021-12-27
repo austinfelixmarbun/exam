@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ContextMenuComponent } from 'ngx-contextmenu';
-import { ROUTES } from './sidebar-routes.config';
 import { environment } from 'environments/environment';
 import { CommonConstant } from '../constant/CommonConstant';
 import { AdInsHelper } from '../AdInsHelper';
@@ -80,8 +79,8 @@ export class SidebarComponent implements OnInit {
     navigateSkipLocationChange(ev) {
         //sementara Sementara begini dulu, belum ketemu solusi lain
         //problem : ketika di 'click' halaman memasuki halaman /dashboard/dash-empty terlebih dahulu
-        AdInsHelper.RedirectUrl(this.router, [ev.Path], this.genParam(ev.Params));
+        this.router.navigateByUrl(NavigationConstant.DASHEMPTY, { skipLocationChange: true }).then(() => {
+            AdInsHelper.RedirectUrl(this.router, [ev.Path], this.genParam(ev.Params), false);
+        });
     }
-    // comment
-
 }
