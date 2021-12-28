@@ -43,6 +43,7 @@ export class PathConstantX{
 
     //#region View-Cust-Module
     public static VIEW_CUST_COY_MNGMNT_X = "CoyManagement/X";
+    public static VIEW_CUST_COY_FINANCIAL_X = "CoyFinancial/x";
 
     public static CUST_PAGE_X ="PageX";
     public static VENDOR_BRANCH ="BranchX";
