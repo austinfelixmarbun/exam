@@ -17,6 +17,7 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-ma
 import { GenericObj} from 'app/shared/model/generic/generic-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 
 @Component({
   selector: 'app-vendor-holding-add-edit',
@@ -42,8 +43,10 @@ export class VendorHoldingAddEditComponent implements OnInit {
   businessDt: Date;
   isHidden: boolean = true;
   RsvField: string;
+  VatForPersonal: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private vendorService: VendorService, private cookieService: CookieService, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, 
+              private vendorService: VendorService, private cookieService: CookieService, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
       this.VendorId = params['VendorId'];
@@ -88,6 +91,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
 
   ngOnInit() {
+    this.GetGeneralSetting();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     if (this.mode == "edit") {
@@ -405,6 +409,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         }
       }
     );
+    this.setVAT();
   }
 
   //check is automatic/not form no 4
@@ -430,4 +435,27 @@ export class VendorHoldingAddEditComponent implements OnInit {
       });
   }
   //check is automatic/not form no 4
+  setVAT(){
+    if (this.VatForPersonal){
+      if(this.VendorForm.controls.MrVendorTypeCode.value == CommonConstant.VENDOR_TYPE_PERSONAL){
+        this.VendorForm.controls.IsVat.disable();
+        this.VendorForm.patchValue({
+          IsVat : false
+        });
+      }else{
+        this.VendorForm.controls.IsVat.enable();
+      }
+      this.VendorForm.controls.IsVat.updateValueAndValidity();
+    }
+  }
+
+  GetGeneralSetting(){
+    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
+      (result: GeneralSettingObj) => {
+        if (result.GeneralSettingId == 0 || result.GsValue == '1') {
+          this.VatForPersonal = true;
+        }
+      }
+    );
+  }
 }

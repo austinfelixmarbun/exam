@@ -75,6 +75,7 @@ export class VendorBranchAddEditComponent implements OnInit {
 
   BpbkAgingDefaultVal: number;
   DaysAPDuePaymentAfterGoLiveDefaultVal: number;
+  VatForPersonal: boolean = false;
 
   constructor(private regexService: RegexService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
@@ -177,6 +178,7 @@ export class VendorBranchAddEditComponent implements OnInit {
         this.VendorForm.get("IsVat").updateValueAndValidity();
         break;
     }
+    this.GetGeneralSetting();
   }
 
   DictDDLVendorAttr: { [id: string]: Array<any> } = {};
@@ -410,6 +412,7 @@ export class VendorBranchAddEditComponent implements OnInit {
           IsNpwpExist: this.result.VendorObj.IsNpwpExist,
           IsOneAffiliate: this.result.VendorObj.IsOneAffiliate,
         });
+        this.setVAT();
         this.setLookup();
       }
     );
@@ -636,6 +639,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       }
     );
     this.setValidatorPattern();
+    this.setVAT();
   }
 
   onOptionsSelected(event) {
@@ -1031,6 +1035,30 @@ export class VendorBranchAddEditComponent implements OnInit {
               ReserveField6: this.DaysAPDuePaymentAfterGoLiveDefaultVal
             });
           }
+        }
+      }
+    );
+  }
+
+  setVAT(){
+    if (this.VatForPersonal){
+      if(this.VendorForm.controls.MrVendorTypeCode.value == CommonConstant.VENDOR_TYPE_PERSONAL){
+        this.VendorForm.controls.IsVat.disable();
+        this.VendorForm.patchValue({
+          IsVat : false
+        });
+      }else{
+        this.VendorForm.controls.IsVat.enable();
+      }
+      this.VendorForm.controls.IsVat.updateValueAndValidity();
+    }
+  }
+
+  GetGeneralSetting(){
+    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
+      (result: GeneralSettingObj) => {
+        if (result.GeneralSettingId == 0 || result.GsValue == '1') {
+          this.VatForPersonal = true;
         }
       }
     );

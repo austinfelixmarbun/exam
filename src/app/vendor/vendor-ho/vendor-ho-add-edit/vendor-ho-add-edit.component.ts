@@ -28,6 +28,7 @@ import { GenericObj} from 'app/shared/model/generic/generic-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { GenericListObj } from 'app/shared/model/generic/generic-list-obj.model';
 import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/request/ref-attr/req-ref-attr-by-attr-group-obj.model';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 
 @Component({
   selector: 'app-vendor-ho-add-edit',
@@ -60,6 +61,7 @@ export class VendorHoAddEditComponent implements OnInit {
   VendorAttrList = new Array<any>();
   vendorAttrRequest = new Array<VendorAttrContentObj>();
   vendorAtpmList = new Array();
+  VatForPersonal: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal,private spinner: NgxSpinnerService) {
     this.route.queryParams.subscribe(params => {
@@ -157,6 +159,7 @@ export class VendorHoAddEditComponent implements OnInit {
         this.VendorForm.get("IsVat").updateValueAndValidity();
         break;
     }
+    this.GetGeneralSetting();
   }
 
   DictDDLVendorAttr: { [id: string]: Array<any> } = {};
@@ -556,6 +559,8 @@ export class VendorHoAddEditComponent implements OnInit {
         }
       }
     );
+
+    this.setVAT();
   }
 
   Back() {
@@ -837,4 +842,28 @@ export class VendorHoAddEditComponent implements OnInit {
       });
   }
   //check is automatic/not form no 4
+  
+  setVAT(){
+    if (this.VatForPersonal){
+      if(this.VendorForm.controls.MrVendorTypeCode.value == CommonConstant.VENDOR_TYPE_PERSONAL){
+        this.VendorForm.controls.IsVat.disable();
+        this.VendorForm.patchValue({
+          IsVat : false
+        });
+      }else{
+        this.VendorForm.controls.IsVat.enable();
+      }
+      this.VendorForm.controls.IsVat.updateValueAndValidity();
+    }
+  }
+
+  GetGeneralSetting(){
+    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
+      (result: GeneralSettingObj) => {
+        if (result.GeneralSettingId == 0 || result.GsValue == '1') {
+          this.VatForPersonal = true;
+        }
+      }
+    );
+  }
 }
