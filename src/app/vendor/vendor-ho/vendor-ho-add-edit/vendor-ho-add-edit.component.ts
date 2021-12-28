@@ -94,7 +94,7 @@ export class VendorHoAddEditComponent implements OnInit {
     IsActive: [true],
     VendorParentId: [''],
     MrTaxCalcMethodCode: ['', Validators.required],
-    IsVat: [true, Validators.required],
+    IsVat: [false, Validators.required],
     TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     TaxpayerName: ['', Validators.required],
     MrAddrTypeCode: [''],
@@ -844,7 +844,7 @@ export class VendorHoAddEditComponent implements OnInit {
   //check is automatic/not form no 4
   
   setVAT(){
-    if (this.VatForPersonal){
+    if (!this.VatForPersonal){
       if(this.VendorForm.controls.MrVendorTypeCode.value == CommonConstant.VENDOR_TYPE_PERSONAL){
         this.VendorForm.controls.IsVat.disable();
         this.VendorForm.patchValue({
