@@ -52,7 +52,7 @@
     "@adins/ucgridview": "^2.0.82",
     "@adins/uclookupgeneric": "^2.2.0",
     "@adins/ucpaging": "^2.2.2",
-    "@adins/ucreport": "^1.0.10",
+    "@adins/ucreport": "^2.2.1",
     "@adins/ucsearch": "^2.6.0",
     "@adins/ucthingstodo": "^1.0.6",
     "@adins/ucupload": "^1.9.1",
