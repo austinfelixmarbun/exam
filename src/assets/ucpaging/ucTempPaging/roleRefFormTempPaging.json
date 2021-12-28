@@ -3,12 +3,29 @@
     "keyPropCriteria": "RF.REF_FORM_ID",
     "component": [
         {
-            "type": "textbox",
-            "name": "RF.FORM_CODE",
-            "id": "FormCodeId",
+            "type": "dropdown",
+            "name": "RF.REF_MODULE_ID",
+            "id": "ModuleNameId",
             "value": "",
-            "label": "Form Code",
-            "placeholder": "Placeholder"
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "ddlType": "all",
+            "isQueryIn": true,
+            "url": "",
+            "path": "/RefModule/GetListRefModuleKeyValue",
+            "label": "Module",
+            "items": [],
+            "itemsUrl": [],
+            "environment": "FOU"
+        },
+        {
+            "type": "textbox",
+            "name": "RFF.TITLE",
+            "id": "ParentId",
+            "value": "",
+            "label": "Parent",
+            "placeholder": "Parent"
         },
         {
             "type": "textbox",
@@ -16,6 +33,14 @@
             "id": "TitleId",
             "value": "",
             "label": "Title",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "RF.FORM_CODE",
+            "id": "FormCodeId",
+            "value": "",
+            "label": "Form Code",
             "placeholder": "Placeholder"
         }
     ],
@@ -31,9 +56,27 @@
         },
         {
             "type": "sort",
-            "position": "left",
+            "position": "center",
+            "label": "Module",
+            "name": "RM.MODULE_NAME"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Parent",
+            "name": "RFF.TITLE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
             "label": "Title",
             "name": "RF.TITLE"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Hierarchy No",
+            "name": "RF.HIERARCHY_NO"
         }
     ],
     "bodyList": [
@@ -44,8 +87,23 @@
         },
         {
             "type": "text",
-            "position": "left",
+            "position": "center",
+            "property": "ModuleName"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "Parent"
+        },
+        {
+            "type": "text",
+            "position": "center",
             "property": "Title"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "HierarchyNo"
         }
     ]
 }
