@@ -227,6 +227,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     if (this.CustDataMode == this.CustDataModeShareholder) {
       this.CustomerForm.get("Email1").setValidators(Validators.pattern(CommonConstant.regexEmail));
       this.CustomerForm.get("Email1").updateValueAndValidity();
+      this.CustomerForm.get("MrMaritalStatCode").clearValidators();
+      this.CustomerForm.get("MrMaritalStatCode").updateValueAndValidity();
     }
     if (this.CustDataMode == this.CustDataModeFamily) {
       this.CustomerForm.get("MrCustRelationship").setValidators(Validators.required);

@@ -36,9 +36,11 @@ export class AdInsConstant {
   public static FormDefault = "dashboard/dash-board";
   public static JoinTypeInner = "INNER";
   public static LoginByRole = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByRole";
+  public static LoginByRoleV2 = environment.FoundationR3Url + "/v2" + "/Authenticate/LoginByRole";
   public static LoginByToken = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByToken";
   public static LoginByTokenV2 = environment.FoundationR3Url + "/v2" + "/Authenticate/LoginByToken";
   public static UpdateToken = environment.FoundationR3Url + "/v1" + "/Authenticate/UpdateRole";
+  public static UpdateTokenV2 = environment.FoundationR3Url + "/v2" + "/Authenticate/UpdateRole";
   public static GetAllActiveRefFormByRoleCodeAndModuleCode = environment.FoundationR3Url + "/v1" + "/RefForm/GetAllActiveRefFormByRoleCodeAndModuleCode";
   public static GetThingsToDoByRole = environment.FoundationR3Url + "/v1" + "/ThingsToDo/GetThingsToDoByRole";
   public static GetDashboardAccessToken = environment.FoundationR3Url + "/v2" + "/Dashboard/GetDashboardAccessToken";
@@ -46,6 +48,7 @@ export class AdInsConstant {
   public static GetThingsToDoCamunda = environment.FoundationR3Url + "/v2" + "/ThingsToDo/GetThingsToDoCamunda";
   public static GetListApvTaskListByUsernameAndRoleCodeForThingsToDo = environment.ApprovalR3Url + "/Generic/GetListApvTaskListByUsernameAndRoleCodeForThingsToDo";
   public static GetListJobTitleByUsernameAndModule = environment.FoundationR3Url + "/v1" + "/Authenticate/GetListJobTitleByUsernameAndModule";
+  public static CheckUserSessionLog = environment.FoundationR3Url + "/v1" + "/Authenticate/CheckUserSessionLog";
 
   // Storage Watch Key
   public static WatchRoleState = "RoleState";

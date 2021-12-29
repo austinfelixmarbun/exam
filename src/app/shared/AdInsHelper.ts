@@ -134,14 +134,14 @@ export class AdInsHelper {
     public static Encrypt128CBC(plain: string, k: string, i: string) {
         var key = CryptoJS.enc.Utf8.parse(k);
         var iv = CryptoJS.enc.Utf8.parse(i);
-    
+
         var encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(plain), key,
-          {
-            keySize: 128 / 8,
-            iv: iv,
-            mode: CryptoJS.mode.CBC,
-            padding: CryptoJS.pad.Pkcs7
-          });
+            {
+                keySize: 128 / 8,
+                iv: iv,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            });
         return encrypted
     }
     public static OpenCustomerViewByCustId(CustId) {
@@ -164,12 +164,12 @@ export class AdInsHelper {
         // router.routeReuseStrategy.shouldReuseRoute = () => {
         //     return false;
         // }
-
-        router.navigateByUrl(
-            router.createUrlTree(
-                [url.toString()], { queryParams: queryParams, skipLocationChange: true }
-            )
-        );
+        // router.navigateByUrl(
+        //   router.createUrlTree(
+        //     [url.toString()], { queryParams: queryParams }
+        //   ), { skipLocationChange: isSkipLocation }
+        // );
+        router.navigate(url, { queryParams: queryParams, skipLocationChange: isSkipLocation });
     }
 
     public static RedirectUrlView(router: Router, url: Array<string>, queryParams: {}, isSkipLocation: boolean = false) {
@@ -184,54 +184,49 @@ export class AdInsHelper {
         window.open(environment.FoundationR3Web + "/View/CustExposureView?CustId=" + CustId);
     }
 
-    public static OpenSurveyOrderViewBySrvyOrderId(SrvyOrderId: number){
+    public static OpenSurveyOrderViewBySrvyOrderId(SrvyOrderId: number) {
         window.open(environment.FoundationR3Web + NavigationConstant.VIEW_SRVY_ORDER + "?SrvyOrderId=" + SrvyOrderId, '_blank');
     }
 
-    public static OpenSurveyTaskViewBySrvyTaskId(SrvyTaskId: number){
+    public static OpenSurveyTaskViewBySrvyTaskId(SrvyTaskId: number) {
         window.open(environment.FoundationR3Web + NavigationConstant.VIEW_SRVY_TASK + "?SrvyTaskId=" + SrvyTaskId, "_blank");
     }
-    public static SetLocalStorage(key:string, value:string)
-    {
+    public static SetLocalStorage(key: string, value: string) {
         return localStorage.setItem(key, this.EncryptString(value, environment.ChipperKeyLocalStorage));
     }
 
-    public static GetLocalStorage(key:string)
-    {
+    public static GetLocalStorage(key: string) {
         return this.DecryptString(localStorage.getItem(key), environment.ChipperKeyLocalStorage);
     }
 
-    public static SetCookie(cookieService: CookieService, key:string, value:string)
-    {
+    public static SetCookie(cookieService: CookieService, key: string, value: string) {
         cookieService.put(key, this.EncryptString(value, environment.ChipperKeyCookie));
     }
 
-    public static GetCookie(cookieService: CookieService, key:string)
-    {
+    public static GetCookie(cookieService: CookieService, key: string) {
         var value = cookieService.get(key);
-        if(value == undefined || value.trim() == '') return null;
+        if (value == undefined || value.trim() == '') return null;
         return this.DecryptString(value, environment.ChipperKeyCookie);
     }
 
-    private static EncryptString(plaintext: string, chipperKey:string="")
-    {
-        if(chipperKey == undefined || chipperKey.trim() == '') return plaintext;
+    private static EncryptString(plaintext: string, chipperKey: string = "") {
+        if (chipperKey == undefined || chipperKey.trim() == '') return plaintext;
         var chipperKeyArr = CryptoJS.enc.Utf8.parse(chipperKey);
         var iv = CryptoJS.lib.WordArray.create([0x00, 0x00, 0x00, 0x00]);
-        var encrypted = CryptoJS.AES.encrypt(plaintext, chipperKeyArr, { iv: iv});
+        var encrypted = CryptoJS.AES.encrypt(plaintext, chipperKeyArr, { iv: iv });
         var result = CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
         return result;
     }
 
-    private static DecryptString(chipperText: string, chipperKey:string){
-        if(
+    private static DecryptString(chipperText: string, chipperKey: string) {
+        if (
             chipperKey == undefined || chipperKey.trim() == '' ||
             chipperText == undefined || chipperText.trim() == ''
         ) return chipperText;
         var chipperKeyArr = CryptoJS.enc.Utf8.parse(chipperKey);
-        var iv = CryptoJS.lib.WordArray.create([0x00, 0x00, 0x00, 0x00]);  
-        var decrypted = CryptoJS.AES.decrypt(chipperText, chipperKeyArr, {iv: iv}); 
-        var plainText =  decrypted.toString(CryptoJS.enc.Utf8);   
+        var iv = CryptoJS.lib.WordArray.create([0x00, 0x00, 0x00, 0x00]);
+        var decrypted = CryptoJS.AES.decrypt(chipperText, chipperKeyArr, { iv: iv });
+        var plainText = decrypted.toString(CryptoJS.enc.Utf8);
         return plainText;
     }
 }
