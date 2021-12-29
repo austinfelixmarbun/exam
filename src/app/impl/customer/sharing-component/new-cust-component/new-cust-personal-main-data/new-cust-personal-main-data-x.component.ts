@@ -307,6 +307,11 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     if (this.CustDataMode != this.CustDataModeMain) {
       this.CustomerForm.get("CustName").disable();
     }
+
+    if (this.CustDataMode == this.CustDataModeShareholder) {
+      this.CustomerForm.get("MrMaritalStatCode").clearValidators();
+      this.CustomerForm.get("MrMaritalStatCode").updateValueAndValidity();
+    }
     if (this.CustDataMode == this.CustDataModeFamily) {
       this.CustomerForm.get("MrCustRelationship").setValidators(Validators.required);
       this.CustomerForm.get("MrCustRelationship").updateValueAndValidity();

@@ -183,7 +183,7 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-md-4 adins-required-label" translate>Marital Status</label>
+                <label class="col-md-4" [ngClass]="{ 'adins-required-label' : CustDataMode != CustDataModeShareholder}" translate>Marital Status</label>
                 <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeMaritalStat]?.isReady">
                   <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeMaritalStat]"
                                       [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrMaritalStatCode'">
