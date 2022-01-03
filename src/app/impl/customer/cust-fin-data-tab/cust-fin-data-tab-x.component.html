@@ -208,7 +208,8 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control" formControlName="GrossMonthlyIncomeAmt"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.GrossMonthlyIncomeAmt.invalid }"
-                [options]="{align: 'right', allowNegative: false}" />
+                [options]="{align: 'right', allowNegative: false}"
+                (ngModelChange)="onChangeCustFinInput()"/>
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.GrossMonthlyIncomeAmt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -331,7 +332,8 @@
             <label class="col-md-2 adInsLabel" for="OthMonthlyInstAmt" translate>Other Monthly Installment Amount</label>
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="OthMonthlyInstAmt"
-                [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.OthMonthlyInstAmt.invalid }" />
+                [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.OthMonthlyInstAmt.invalid }"
+                (ngModelChange)="onChangeCustFinInput()"/>
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.OthMonthlyInstAmt"
                 [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
@@ -352,7 +354,8 @@
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="OprCost"
                 [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.OprCost.invalid }"
-                [options]="{align: 'right', allowNegative: false}" />
+                [options]="{align: 'right', allowNegative: false}"
+                (ngModelChange)="onChangeCustFinInput()"/>
               <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.OprCost"
                 [submit]="CustFinDataForm.submitted">
               </lib-uc-show-errors>
@@ -446,6 +449,20 @@
 <!--              </lib-uc-show-errors>-->
 <!--            </div>-->
 <!--          </div>-->
+          <div class="form-group row">
+            <label class="col-md-2 adInsLabel" for="NettIncomeAmt" translate>Net Income Amount</label>
+            <div class="col-md-6" *ngIf = "isCalculated">
+              {{NettIncomeAmtCoy | number:'.2':'en-US'}}
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-12" style="text-align: right">
+              <button class="btn btn-raised btn-primary" type="button" (click)="calculateCompanyFinData()">
+                Calculate
+              </button>
+            </div>
+          </div>
         </div>
 
       </div>

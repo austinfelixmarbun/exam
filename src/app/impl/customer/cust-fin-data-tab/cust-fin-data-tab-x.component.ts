@@ -34,7 +34,7 @@ export class CustFinDataTabXComponent implements OnInit {
   dropdownListObj: UcDropdownListObj = new UcDropdownListObj();
 
   sourceOfIncomeList: any;
-  isCalculated: boolean = true;
+  isCalculated: boolean = false;
   spouseMonthlyIncomeAmt: number;
   mrMaritalStatCode: string;
   maritalConstant: string = CommonConstant.MR_MARITAL_STAT_CODE_MARRIED;
@@ -106,6 +106,7 @@ export class CustFinDataTabXComponent implements OnInit {
   currentModal: any;
 
   BusinessDt: string;
+  NettIncomeAmtCoy: number;
 
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
   constructor(
@@ -116,12 +117,6 @@ export class CustFinDataTabXComponent implements OnInit {
     private route: ActivatedRoute,
     private modalService: NgbModal
   ) {
-    if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
-      this.isCalculated = false;
-    }
-    else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
-      this.isCalculated = true;
-    }
     this.route.queryParams.subscribe(params => {
       if (params["Page"] != null) {
         this.Page = params["Page"];
@@ -451,6 +446,13 @@ export class CustFinDataTabXComponent implements OnInit {
     }
   }
 
+  calculateCompanyFinData(){
+    this.NettIncomeAmtCoy = this.CustCompanyFinDataForm.controls.GrossMonthlyIncomeAmt.value - 
+                            this.CustCompanyFinDataForm.controls.OthMonthlyInstAmt.value - 
+                            this.CustCompanyFinDataForm.controls.OprCost.value;
+    this.isCalculated = true;
+  }
+
   calculateFinData() {
     var formData = this.CustPersonalFinDataForm.value;
     var monthlyIncomeAmt = formData.MonthlyIncomeAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.MonthlyIncomeAmt.toString()));
@@ -527,6 +529,11 @@ export class CustFinDataTabXComponent implements OnInit {
 
   async saveCustCoyFinData() {
     if (!this.CustCompanyFinDataForm.valid) return;
+
+    if (!this.isCalculated) {
+      this.toastr.warningMessage("Please Calculate First");
+      return;
+    }
 
     let custFinData: CustCompanyFinDataObj = {
       CustCompanyFinDataId: this.CustCompanyFinDataForm.controls['CustCompanyFinDataId'].value,
