@@ -175,6 +175,7 @@ export class CustomerCompanyDetailXComponent implements OnInit {
     this.lookupCustGrpObj.genericJson = "./assets/lookup/lookupCustomer.json";
     this.lookupCustGrpObj.isRequired = false;
     this.lookupCustGrpObj.isReady = true;
+    this.lookupCustGrpObj.isClear = true;
 
     this.criteriaList = new Array();
     this.criteriaObj = new CriteriaObj();
