@@ -1,29 +1,30 @@
-import {Component, OnInit} from '@angular/core';
-import {AdInsConstant} from 'app/shared/AdInstConstant';
-import {FormBuilder, Validators} from '@angular/forms';
-import {VendorObj} from 'app/shared/model/vendor-obj.model';
-import {formatDate} from '@angular/common';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
-import {VendorBranchObj} from 'app/shared/model/vendor-branch-obj.model';
-import {VendorAddrObj} from 'app/shared/model/vendor-addr-obj.model';
-import {URLConstant} from 'app/shared/constant/URLConstant';
-import {CommonConstant} from 'app/shared/constant/CommonConstant';
-import {AdInsHelper} from 'app/shared/AdInsHelper';
-import {RegexService} from 'app/customer/regex.service';
-import {CookieService} from 'ngx-cookie';
-import {NavigationConstant} from 'app/shared/NavigationConstant';
-import {URLConstantX} from 'app/impl/shared/constant/URLConstantX';
-import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
-import {CustomPatternObj} from 'app/shared/model/library-obj/custom-pattern-obj.model';
-import {ReqRefAttrByAttrGroupObj} from 'app/shared/model/Request/ref-attr/req-ref-attr-by-attr-group-obj.model';
-import {VendorAttrContentObj} from 'app/shared/model/vendor-attr-content-obj.model';
-import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
-import {ReqRefMasterByTypeCodeAndMasterCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
-import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
-import {KeyValueObj} from 'app/shared/model/key-value/key-value-obj.model';
-import {GenericObj} from 'app/shared/model/Generic/generic-obj.model';
+import { Component, OnInit } from '@angular/core';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { FormBuilder, Validators } from '@angular/forms';
+import { VendorObj } from 'app/shared/model/vendor-obj.model';
+import { formatDate } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { VendorBranchObj } from 'app/shared/model/vendor-branch-obj.model';
+import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { RegexService } from 'app/customer/regex.service';
+import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
+import { VendorAttrContentObj } from 'app/shared/model/vendor-attr-content-obj.model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { GenericObj } from 'app/shared/model/Generic/generic-obj.model';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/request/ref-attr/req-ref-attr-by-attr-group-obj.model';
 
 @Component({
   selector: 'app-vendor-branch-add-edit-x',
@@ -73,6 +74,7 @@ export class VendorBranchAddEditXComponent implements OnInit {
 
   BpbkAgingDefaultVal: number;
   DaysAPDuePaymentAfterGoLiveDefaultVal: number;
+  VatForPersonal: boolean = false;
 
   constructor(private regexService: RegexService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
@@ -110,7 +112,7 @@ export class VendorBranchAddEditXComponent implements OnInit {
     ReservedField6: [''], //DaysPAfterGolive
     ReservedField9: [''], //ASSGMNT_TYPE tele, field
     MrTaxCalcMethodCode: ['', Validators.required],
-    IsVat: [true, Validators.required],
+    IsVat: [false, Validators.required],
     TaxIdNo: ['', [Validators.required]],
     TaxpayerName: ['', Validators.required],
     MrAddrTypeCode: [''],
@@ -175,6 +177,7 @@ export class VendorBranchAddEditXComponent implements OnInit {
         this.VendorForm.get("IsVat").updateValueAndValidity();
         break;
     }
+    this.GetGeneralSetting();
   }
 
   DictDDLVendorAttr: { [id: string]: Array<any> } = {};
@@ -212,7 +215,7 @@ export class VendorBranchAddEditXComponent implements OnInit {
                 var parentFormGroup = new Object();
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
                 let tempLookup = {};
-                if(this.VendorAttrList != null){
+                if (this.VendorAttrList != null) {
                   for (const vendorAttr of this.VendorAttrList) {
                     var formGroupObject = new Object();
                     formGroupObject["VendorAttrContentId"] = [0];
@@ -267,7 +270,7 @@ export class VendorBranchAddEditXComponent implements OnInit {
                 var parentFormGroup = new Object();
                 let tempLookup = {};
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
-                if(this.VendorAttrList != null){
+                if (this.VendorAttrList != null) {
                   for (const vendorAttr of this.VendorAttrList) {
                     var item = this.ListVendorAttrContent.find(x => x.AttrCode == vendorAttr.AttrCode);
                     if (item == undefined) {
@@ -408,6 +411,7 @@ export class VendorBranchAddEditXComponent implements OnInit {
           IsNpwpExist: this.result.VendorObj.IsNpwpExist,
           IsOneAffiliate: this.result.VendorObj.IsOneAffiliate,
         });
+        this.setVAT();
         this.setLookup();
       }
     );
@@ -634,6 +638,7 @@ export class VendorBranchAddEditXComponent implements OnInit {
       }
     );
     this.setValidatorPattern();
+    this.setVAT();
   }
 
   onOptionsSelected(event) {
@@ -785,7 +790,7 @@ export class VendorBranchAddEditXComponent implements OnInit {
       this.vendorBranchObj.VendorObj.ReservedField3 = this.VendorForm.controls.ReservedField3.value;
       this.vendorBranchObj.VendorObj.ReservedField4 = this.VendorForm.controls.ReservedField4.value;
       this.vendorBranchObj.VendorObj.ReservedField5 = this.VendorForm.controls.ReservedField5.value;
-      if(this.VendorForm['controls']['VendorAttrList'] != undefined){
+      if (this.VendorForm['controls']['VendorAttrList'] != undefined) {
         if (this.VendorForm.controls.VendorAttrList['controls'].AP_DUE_AFTER_GLV != null) {
           this.vendorBranchObj.VendorObj.ReservedField6 = this.VendorForm.controls.VendorAttrList['controls'].AP_DUE_AFTER_GLV.controls.VendorAttrValue.value;
         }
@@ -1031,6 +1036,30 @@ export class VendorBranchAddEditXComponent implements OnInit {
               ReserveField6: this.DaysAPDuePaymentAfterGoLiveDefaultVal
             });
           }
+        }
+      }
+    );
+  }
+
+  setVAT() {
+    if (!this.VatForPersonal) {
+      if (this.VendorForm.controls.MrVendorTypeCode.value == CommonConstant.VENDOR_TYPE_PERSONAL) {
+        this.VendorForm.controls.IsVat.disable();
+        this.VendorForm.patchValue({
+          IsVat: false
+        });
+      } else {
+        this.VendorForm.controls.IsVat.enable();
+      }
+      this.VendorForm.controls.IsVat.updateValueAndValidity();
+    }
+  }
+
+  GetGeneralSetting() {
+    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
+      (result: GeneralSettingObj) => {
+        if (result.GeneralSettingId == 0 || result.GsValue == '1') {
+          this.VatForPersonal = true;
         }
       }
     );

@@ -17,6 +17,9 @@ import {VendorAddrObj} from 'app/shared/model/vendor/vendor-addr-obj.model';
 import { RegexService } from 'app/customer/regex.service';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { HttpClient } from '@angular/common/http';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 
 @Component({
   selector: 'app-vendor-atpm-add-edit-x',
@@ -41,8 +44,11 @@ export class VendorAtpmAddEditXComponent implements OnInit {
   businessDt: Date;
   isHidden: boolean = true;
   RsvField: string;
+  VatForPersonal: boolean = false;
 
-  constructor(private regexService: RegexService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, private vendorService: VendorService, private cookieService: CookieService) {
+  constructor(private regexService: RegexService, private fb: FormBuilder, private router: Router, 
+              private route: ActivatedRoute, private toastr: NGXToastrService, private vendorService: VendorService, 
+              private cookieService: CookieService, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
       this.VendorId = params['VendorId'];
@@ -70,7 +76,7 @@ export class VendorAtpmAddEditXComponent implements OnInit {
     ReservedField1: [''],
     ReservedField2: [''],
     MrTaxCalcMethodCode: ['', Validators.required],
-    IsVat: [true, Validators.required],
+    IsVat: [false, Validators.required],
     TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     TaxpayerName: [''],
     MrAddrTypeCode: [''],
@@ -86,6 +92,7 @@ export class VendorAtpmAddEditXComponent implements OnInit {
 
 
   async ngOnInit() {
+    this.GetGeneralSetting();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     this.getInitPattern();
@@ -404,6 +411,8 @@ export class VendorAtpmAddEditXComponent implements OnInit {
         this.setValidatorPattern();
       }
     );
+
+    this.setVAT();
   }
   
   getInitPattern() {
@@ -446,5 +455,29 @@ export class VendorAtpmAddEditXComponent implements OnInit {
       tempIdNo.setValidators([Validators.required, Validators.pattern(pattern)]);
       tempIdNo.updateValueAndValidity();
     }
+  }
+  
+  setVAT(){
+    if (!this.VatForPersonal){
+      if(this.VendorForm.controls.MrVendorTypeCode.value == CommonConstant.VENDOR_TYPE_PERSONAL){
+        this.VendorForm.controls.IsVat.disable();
+        this.VendorForm.patchValue({
+          IsVat : false
+        });
+      }else{
+        this.VendorForm.controls.IsVat.enable();
+      }
+      this.VendorForm.controls.IsVat.updateValueAndValidity();
+    }
+  }
+
+  GetGeneralSetting(){
+    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
+      (result: GeneralSettingObj) => {
+        if (result.GeneralSettingId == 0 || result.GsValue == '1') {
+          this.VatForPersonal = true;
+        }
+      }
+    );
   }
 }

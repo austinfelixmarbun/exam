@@ -28,6 +28,7 @@ import {VendorAddrObj} from 'app/shared/model/vendor-addr-obj.model';
 import {KeyValueObj} from 'app/shared/model/key-value/key-value-obj.model';
 import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import {VendorHoObj} from 'app/shared/model/vendor-ho-obj.model';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 
 @Component({
   selector: 'app-vendor-ho-add-edit-x',
@@ -60,6 +61,7 @@ export class VendorHoAddEditXComponent implements OnInit {
   VendorAttrList = new Array<any>();
   vendorAttrRequest = new Array<VendorAttrContentObj>();
   vendorAtpmList = new Array();
+  VatForPersonal: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal,private spinner: NgxSpinnerService) {
     this.route.queryParams.subscribe(params => {
@@ -92,7 +94,7 @@ export class VendorHoAddEditXComponent implements OnInit {
     IsActive: [true],
     VendorParentId: [''],
     MrTaxCalcMethodCode: ['', Validators.required],
-    IsVat: [true, Validators.required],
+    IsVat: [false, Validators.required],
     TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     TaxpayerName: ['', Validators.required],
     MrAddrTypeCode: [''],
@@ -157,6 +159,7 @@ export class VendorHoAddEditXComponent implements OnInit {
         this.VendorForm.get("IsVat").updateValueAndValidity();
         break;
     }
+    this.GetGeneralSetting();
   }
 
   DictDDLVendorAttr: { [id: string]: Array<any> } = {};
@@ -558,6 +561,8 @@ export class VendorHoAddEditXComponent implements OnInit {
         }
       }
     );
+
+    this.setVAT();
   }
 
   Back() {
@@ -838,4 +843,28 @@ export class VendorHoAddEditXComponent implements OnInit {
       });
   }
   //check is automatic/not form no 4
+
+  setVAT() {
+    if (!this.VatForPersonal) {
+      if (this.VendorForm.controls.MrVendorTypeCode.value == CommonConstant.VENDOR_TYPE_PERSONAL) {
+        this.VendorForm.controls.IsVat.disable();
+        this.VendorForm.patchValue({
+          IsVat: false
+        });
+      } else {
+        this.VendorForm.controls.IsVat.enable();
+      }
+      this.VendorForm.controls.IsVat.updateValueAndValidity();
+    }
+  }
+
+  GetGeneralSetting() {
+    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
+      (result: GeneralSettingObj) => {
+        if (result.GeneralSettingId == 0 || result.GsValue == '1') {
+          this.VatForPersonal = true;
+        }
+      }
+    );
+  }
 }
