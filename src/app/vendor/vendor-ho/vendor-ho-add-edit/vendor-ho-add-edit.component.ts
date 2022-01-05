@@ -1,33 +1,34 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
-import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
-import {environment} from 'environments/environment';
-import {AdInsConstant} from 'app/shared/AdInstConstant';
-import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
-import {VendorHoObj} from 'app/shared/model/vendor-ho-obj.model';
-import {VendorObj} from 'app/shared/model/vendor-obj.model';
-import {VendorAddrObj} from 'app/shared/model/vendor-addr-obj.model';
-import {formatDate} from '@angular/common';
-import {URLConstant} from 'app/shared/constant/URLConstant';
-import {CommonConstant} from 'app/shared/constant/CommonConstant';
-import {VendorAttrContentObj} from 'app/shared/model/vendor-attr-content-obj.model';
-import {AdInsHelper} from 'app/shared/AdInsHelper';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {VendorAtpmSelectComponent} from 'app/vendor/vendor-ATPM/vendor-atpm-select/vendor-atpm-select.component';
-import {NgxSpinnerService} from 'ngx-spinner';
-import {ExceptionConstant} from 'app/shared/constant/ExceptionConstant';
-import {VendorAtpmMappingObj} from 'app/shared/model/vendor-atpm-mapping-obj.model';
-import {CookieService} from 'ngx-cookie';
-import {NavigationConstant} from 'app/shared/NavigationConstant';
-import {ReqRefMasterByTypeCodeAndMasterCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
-import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
-import {GenericObj} from 'app/shared/model/generic/generic-obj.model';
-import {KeyValueObj} from 'app/shared/model/key-value/key-value-obj.model';
-import {GenericListObj} from 'app/shared/model/generic/generic-list-obj.model';
-import {ReqRefAttrByAttrGroupObj} from 'app/shared/model/request/ref-attr/req-ref-attr-by-attr-group-obj.model';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { environment } from 'environments/environment';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { VendorHoObj } from 'app/shared/model/vendor-ho-obj.model';
+import { VendorObj } from 'app/shared/model/vendor-obj.model';
+import { formatDate } from '@angular/common';
+import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { VendorAttrContentObj } from 'app/shared/model/vendor-attr-content-obj.model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { VendorAtpmSelectComponent } from 'app/vendor/vendor-ATPM/vendor-atpm-select/vendor-atpm-select.component';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { VendorAtpmMappingObj } from "app/shared/model/vendor-atpm-mapping-obj.model";
+import { CookieService } from 'ngx-cookie';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { GenericObj} from 'app/shared/model/generic/generic-obj.model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { GenericListObj } from 'app/shared/model/generic/generic-list-obj.model';
+import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/request/ref-attr/req-ref-attr-by-attr-group-obj.model';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 
 @Component({
   selector: 'app-vendor-ho-add-edit',
@@ -60,8 +61,9 @@ export class VendorHoAddEditComponent implements OnInit {
   VendorAttrList = new Array<any>();
   vendorAttrRequest = new Array<VendorAttrContentObj>();
   vendorAtpmList = new Array();
+  VatForPersonal: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal,private spinner: NgxSpinnerService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal, private spinner: NgxSpinnerService) {
     this.route.queryParams.subscribe(params => {
       if (params["MrVendorCategoryCode"] != null) {
         this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
@@ -92,7 +94,7 @@ export class VendorHoAddEditComponent implements OnInit {
     IsActive: [true],
     VendorParentId: [''],
     MrTaxCalcMethodCode: ['', Validators.required],
-    IsVat: [true, Validators.required],
+    IsVat: [false, Validators.required],
     TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
     TaxpayerName: ['', Validators.required],
     MrAddrTypeCode: [''],
@@ -157,6 +159,7 @@ export class VendorHoAddEditComponent implements OnInit {
         this.VendorForm.get("IsVat").updateValueAndValidity();
         break;
     }
+    this.GetGeneralSetting();
   }
 
   DictDDLVendorAttr: { [id: string]: Array<any> } = {};
@@ -171,7 +174,7 @@ export class VendorHoAddEditComponent implements OnInit {
       this.VendorForm.controls.VendorCode.disable();
       this.getData();
     } else {
-      if(this.MrVendorCategoryCode == "SUPPLIER_HO"){
+      if (this.MrVendorCategoryCode == "SUPPLIER_HO") {
         this.checkIsAutoFormNoFromSetting("SU");
       }
       this.setDropdown();
@@ -192,7 +195,7 @@ export class VendorHoAddEditComponent implements OnInit {
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
 
                 let tempLookup = {};
-                if(this.VendorAttrList != null){
+                if (this.VendorAttrList != null) {
                   for (const vendorAttr of this.VendorAttrList) {
                     var formGroupObject = new Object();
                     formGroupObject["VendorAttrContentId"] = [0];
@@ -242,7 +245,7 @@ export class VendorHoAddEditComponent implements OnInit {
                 var parentFormGroup = new Object();
                 let tempLookup = {};
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
-                if(this.VendorAttrList != null){
+                if (this.VendorAttrList != null) {
                   for (const vendorAttr of this.VendorAttrList) {
                     var item = this.ListVendorAttrContent.find(x => x.AttrCode == vendorAttr.AttrCode);
                     if (item == undefined) {
@@ -339,7 +342,7 @@ export class VendorHoAddEditComponent implements OnInit {
   }
 
   getData() {
-    let ReqGetVendorAndVendorAddr : GenericObj = new GenericObj();
+    let ReqGetVendorAndVendorAddr: GenericObj = new GenericObj();
     ReqGetVendorAndVendorAddr.Id = this.VendorId;
     this.http.post(URLConstant.GetVendorAndVendorAddr, ReqGetVendorAndVendorAddr).subscribe(
       (response) => {
@@ -556,6 +559,8 @@ export class VendorHoAddEditComponent implements OnInit {
         }
       }
     );
+
+    this.setVAT();
   }
 
   Back() {
@@ -645,11 +650,10 @@ export class VendorHoAddEditComponent implements OnInit {
     this.NpwpCheck(true);
   }
 
-  AddAtpmClick()
-  {
+  AddAtpmClick() {
     const modalAddAtpm = this.modalService.open(VendorAtpmSelectComponent);
 
-    if(this.vendorAtpmList.length > 0)
+    if (this.vendorAtpmList.length > 0)
       modalAddAtpm.componentInstance.listExistingAtpmCode = this.vendorAtpmList.map(a => a.VendorAtpmCode);
 
     modalAddAtpm.result.then(
@@ -661,7 +665,7 @@ export class VendorHoAddEditComponent implements OnInit {
       }
     ).catch(
       (error) => {
-        if(error != 0){
+        if (error != 0) {
           console.log(error);
         }
       }
@@ -680,12 +684,10 @@ export class VendorHoAddEditComponent implements OnInit {
     })
   }
 
-  deleteAtpm(item)
-  {
-    if (confirm(ExceptionConstant.DELETE_CONFIRMATION))
-    {
-      let index = this.vendorAtpmList.map(function(e) { return e.VendorAtpmCode; }).indexOf(item.VendorAtpmCode);
-      this.vendorAtpmList.splice(index,1);
+  deleteAtpm(item) {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
+      let index = this.vendorAtpmList.map(function (e) { return e.VendorAtpmCode; }).indexOf(item.VendorAtpmCode);
+      this.vendorAtpmList.splice(index, 1);
     }
   }
 
@@ -769,8 +771,7 @@ export class VendorHoAddEditComponent implements OnInit {
         }
       }
 
-      if(this.vendorAtpmList.length > 0)
-      {
+      if (this.vendorAtpmList.length > 0) {
         this.vendorHoObj.VendorAtpmMappingObjs = new Array<VendorAtpmMappingObj>();
 
         for (let i = 0; i < this.vendorAtpmList.length; i++) {
@@ -837,4 +838,28 @@ export class VendorHoAddEditComponent implements OnInit {
       });
   }
   //check is automatic/not form no 4
+
+  setVAT() {
+    if (!this.VatForPersonal) {
+      if (this.VendorForm.controls.MrVendorTypeCode.value == CommonConstant.VENDOR_TYPE_PERSONAL) {
+        this.VendorForm.controls.IsVat.disable();
+        this.VendorForm.patchValue({
+          IsVat: false
+        });
+      } else {
+        this.VendorForm.controls.IsVat.enable();
+      }
+      this.VendorForm.controls.IsVat.updateValueAndValidity();
+    }
+  }
+
+  GetGeneralSetting() {
+    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
+      (result: GeneralSettingObj) => {
+        if (result.GeneralSettingId == 0 || result.GsValue == '1') {
+          this.VatForPersonal = true;
+        }
+      }
+    );
+  }
 }

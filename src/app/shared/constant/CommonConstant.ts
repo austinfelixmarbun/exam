@@ -195,6 +195,7 @@ export class CommonConstant {
     public static GSCodeFilterAddr = "FILTER_ADDR";
     public static GSCodeMaxHierarchyLvlOffice = "MAX_HIERARCHY_LVL_OFFICE";
     public static GSCodeOwnershipMandatoryAddrType = "OWNERSHIP_MANDATORY_BY_ADDR_TYPE";
+    public static GSCodeVATForPersonal = "VAT_FOR_PERSONAL";
 
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
