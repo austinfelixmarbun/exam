@@ -65,6 +65,8 @@ import { ExchangeRateDetailComponent } from './exchange-rate/exchange-rate-detai
 import { ExchangeRatePagingComponent } from './exchange-rate/exchange-rate-paging/exchange-rate-paging.component';
 import { RefTcComponent } from './ref-tc/ref-tc-paging/ref-tc.component';
 import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.component';
+import { TaxOfficeDetailComponent } from './tax-office/tax-office-detail/tax-office-detail.component';
+import { TaxOfficePagingComponent } from './tax-office/tax-office-paging/tax-office-paging.component';
 
 const routes: Routes = [
   {
@@ -518,6 +520,22 @@ const routes: Routes = [
         component: RefTcAddEditComponent,
         data: {
           title: 'Ref TC Add Edit'
+        },
+      },
+
+      //TAX OFFICE
+      {
+        path: PathConstant.CS_REF_TAX_OFFICE_DETAIL,
+        component: TaxOfficeDetailComponent,
+        data: {
+          title: 'Tax Office Detail'
+        },
+      },
+      {
+        path: PathConstant.CS_REF_TAX_OFFICE_PAGING,
+        component: TaxOfficePagingComponent,
+        data: {
+          title: 'Tax Office Paging'
         },
       },
     ]

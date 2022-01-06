@@ -1153,5 +1153,12 @@ export class URLConstant {
   //Generate
   public static GenerateAPIKey = environment.FoundationR3Url + "/v1" + "/Authenticate/GenerateAPIKey";
   public static RevokeAPIKey = environment.FoundationR3Url + "/v1" + "/Authenticate/RevokeAPIKey";
+
+  //REF TAX OFFICE
+  public static AddRefTaxOffice = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/AddRefTaxOffice";
+  public static EditRefTaxOffice = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/EditRefTaxOffice";
+  public static DeleteRefTaxOffice = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/DeleteRefTaxOffice";
+  public static GetRefTaxOfficeDetailById = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/GetRefTaxOfficeDetailById";
+  public static GetListRefTaxOfficeActive = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/GetListRefTaxOfficeActive";
 }
 

@@ -1,12 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { OfficeObj } from 'app/shared/model/office-obj.model';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
-import { OrgMdlObj } from 'app/shared/model/org-mdl-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
@@ -17,11 +14,9 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
-import { UcDropdownListCallbackObj, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
-import { GenericKeyValueListObj } from 'app/shared/model/generic/generic-key-value-list-obj.model';
 
 
 @Component({
@@ -70,6 +65,7 @@ export class OfficeAddComponent implements OnInit {
   isAllowAppCreated: boolean = true;
   officeObj: OfficeObj;
   arrCrit: any;
+  ucDDLTaxOfficeObj: UcDropdownListObj = new UcDropdownListObj
 
   
   resultDataLawCourt: any;
@@ -100,7 +96,7 @@ export class OfficeAddComponent implements OnInit {
     AllowAppCreated: false,
     IsNationalCourt: false,
     NationalCourtOffice: [''],
-    TaxOffice: ['']
+    RefTaxOfficeId: [0]
   })
   InputLookupObj: InputLookupObj = new InputLookupObj();
   addressObj: UcAddressObj = new UcAddressObj();
@@ -124,6 +120,12 @@ export class OfficeAddComponent implements OnInit {
     this.InputLookupObj.isRequired = true;
     this.InputLookupObj.addCritInput = new Array();
 
+    this.ucDDLTaxOfficeObj.apiUrl = URLConstant.GetListRefTaxOfficeActive;
+    this.ucDDLTaxOfficeObj.isObject = true;
+    this.ucDDLTaxOfficeObj.customKey = "RefTaxOfficeId";
+    this.ucDDLTaxOfficeObj.customValue = "TaxOfficeName";
+    this.ucDDLTaxOfficeObj.ddlType = UcDropdownListConstant.DDL_TYPE_NONE;
+    
     await this.GetGsMaxHierarchyLvl();
 
     await this.GetMasterData();
@@ -164,7 +166,7 @@ export class OfficeAddComponent implements OnInit {
             CntctPersonMobilePhnNo1: this.resultData.CntctPersonMobilePhnNo1,
             CntctPersonMobilePhnNo2: this.resultData.CntctPersonMobilePhnNo2,
             HierarchyLvl: this.resultData.HierarchyLvl.toString(),
-            // TaxOffice: this.resultData.RefTaxOfficeXId,
+            RefTaxOfficeId: this.resultData.RefTaxOfficeId,
             // IsNationalCourt: this.resultData.IsNationalCourt,
             // NationalCourtOffice: this.resultData.NationalCourtOffice
           });
@@ -415,6 +417,7 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.RowVersion = "";
 
     let tempOfficeForm = this.OfficeForm.getRawValue();
+    console.log(tempOfficeForm);
     this.officeObj.OfficeCode = tempOfficeForm.OfficeCode;
     this.officeObj.OfficeShortName = tempOfficeForm.OfficeShortName;
     this.officeObj.OfficeName = tempOfficeForm.OfficeName;
@@ -465,6 +468,7 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.PhnExt2 = tempOfficeForm.UcAddress.PhnExt3;
     this.officeObj.FaxArea = tempOfficeForm.UcAddress.FaxArea;
     this.officeObj.Fax = tempOfficeForm.UcAddress.Fax;
+    this.officeObj.RefTaxOfficeId = tempOfficeForm.RefTaxOfficeId;
 
     if (this.pageType == "add") {
       this.httpClient.post(URLConstant.AddRefOfficeV2, this.officeObj).subscribe(
