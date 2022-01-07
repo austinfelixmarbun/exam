@@ -206,7 +206,7 @@ export class JobDataEmployeeComponent implements OnInit {
     this.companyLookupObj.urlJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.pagingJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.genericJson = "./assets/uclookup/Customer/lookupCompany.json";
-    this.companyLookupObj.isRequired = true;
+    this.companyLookupObj.isRequired = false;
 
     this.companyLookupObj.addCritInput = new Array();
     this.ArrAddCritCoy = new Array<CriteriaObj>();
@@ -637,6 +637,12 @@ export class JobDataEmployeeComponent implements OnInit {
 
   isWellknownCoyChecked(event: any) {
     this.IsWellknownCoy = event.target.checked;
+    if(event.target.checked == true){
+      this.companyLookupObj.isRequired = true;
+    }
+    else{
+      this.companyLookupObj.isRequired = false;
+    }
   }
 
   getCoy(event: any) {
