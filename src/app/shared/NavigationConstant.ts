@@ -105,6 +105,8 @@ export class NavigationConstant {
     public static CS_REF_STATUS_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_STATUS_PAGING; //'/CommonSetting/RefStatus/Paging'
     public static CS_REF_TC_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TC_PAGING; //'/CommonSetting/RefTc/Paging'
     public static CS_REF_TC_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TC_DETAIL; //'/CommonSetting/RefTc/Detail'
+    public static CS_REF_TAX_OFFICE_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.PAGING; //'/CommonSetting/TaxOffice/Paging'
+    public static CS_REF_TAX_OFFICE_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.DETAIL; //'/CommonSetting/TaxOffice/Detail'
     //#endregion
 
     //#region System Setting
