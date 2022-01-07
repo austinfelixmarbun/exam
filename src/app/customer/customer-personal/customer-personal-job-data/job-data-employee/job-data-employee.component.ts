@@ -452,11 +452,6 @@ export class JobDataEmployeeComponent implements OnInit {
     this.isReady = true;
   }
 
-  print(){
-    console.log(this.JobDataEmpForm.controls["CompanyLookupObj"]["controls"].value.valid);
-    console.log(this.companyLookupObj.isRequired);
-  }
-
   async getAddrTypeOwnershipRequired(){
     this.listAddrRequiredOwnership = await this.addressService.GetListAddrTypeOwnershipMandatory();
   }
