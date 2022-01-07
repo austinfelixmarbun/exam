@@ -206,7 +206,7 @@ export class JobDataEmployeeComponent implements OnInit {
     this.companyLookupObj.urlJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.pagingJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.genericJson = "./assets/uclookup/Customer/lookupCompany.json";
-    this.companyLookupObj.isRequired = false;
+    this.companyLookupObj.isRequired = true;
 
     this.companyLookupObj.addCritInput = new Array();
     this.ArrAddCritCoy = new Array<CriteriaObj>();
@@ -450,6 +450,11 @@ export class JobDataEmployeeComponent implements OnInit {
       }
     );
     this.isReady = true;
+  }
+
+  print(){
+    console.log(this.JobDataEmpForm.controls["CompanyLookupObj"]["controls"].value.valid);
+    console.log(this.companyLookupObj.isRequired);
   }
 
   async getAddrTypeOwnershipRequired(){
