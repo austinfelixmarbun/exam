@@ -31,13 +31,16 @@ export class URLConstant {
     public static GetListKvpActiveRefOfficeForPaging = environment.FoundationR3Url + "/v1" + "/RefOffice/GetListKvpActiveRefOfficeForPaging";
     public static GetRefOfficeObj = environment.FoundationR3Url + "/v1" + "/RefOffice/GetRefOfficeObj";
     public static GetRefOfficeByRefOfficeId = environment.FoundationR3Url + "/v1" + "/RefOffice/GetRefOfficeByRefOfficeId"
+    public static GetRefOfficeByRefOfficeIdV2_1 = environment.FoundationR3Url + "/v2.1" + "/RefOffice/GetRefOfficeByRefOfficeId"
     public static GetAllRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/GetAllRefOffice";
     public static AddRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/AddRefOffice";
     public static AddRefOfficeV2 = environment.FoundationR3Url + "/v2" + "/RefOffice/AddRefOffice";
+    public static AddRefOfficeV2_1 = environment.FoundationR3Url + "/v2.1" + "/RefOffice/AddRefOffice";
     public static AddRefOfficeAreaMember = environment.FoundationR3Url + "/v1" + "/RefOffice/AddRefOfficeAreaMember";
     public static UpdateRefOfficeAreaId = environment.FoundationR3Url + "/v1" + "/RefOffice/UpdateRefOfficeAreaId";
     public static EditRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/EditRefOffice";
     public static EditRefOfficeV2 = environment.FoundationR3Url + "/v2" + "/RefOffice/EditRefOffice";
+    public static EditRefOfficeV2_1 = environment.FoundationR3Url + "/v2.1" + "/RefOffice/EditRefOffice";
     public static GetCenterGrpByCenterGrpTypeCode = "/v1" + "/RefOffice/GetCenterGrpByCenterGrpCode";
     public static GetListOfficeCenterGrp = "/v1" + "/RefOffice/GetListOfficeCenterGrp";
     public static AddCenterGroupOfficeMember = "/v1" + "RefOffice/AddCenterGroupOfficeMember";
