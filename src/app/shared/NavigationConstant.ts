@@ -154,6 +154,7 @@ export class NavigationConstant {
     public static VIEW_CUST_TRUSTING_SOCIAL = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_TRUSTING_SOCIAL; //'/View/Customer/TrustSoc'
     public static VIEW_NEG_CUST = PathConstant.CR_VIEW + "/" + PathConstant.VIEW_NEG_CUST; //'/View/NegativeCustomer'
     public static VIEW_CUST_OTH_INFO = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_OTH_INFO; //'/View/Customer/CustOthInfo'
+    public static VIEW_CUST_EXPOSURE = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_CUST_EXPOSURE; //'/View/CustExposureView'
     //#endregion
 
     //#region Upload

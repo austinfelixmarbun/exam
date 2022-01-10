@@ -181,7 +181,7 @@ export class AdInsHelper {
     }
 
     public static OpenCustExposure(CustId: number) {
-        window.open(environment.FoundationR3Web + "/View/CustExposureView?CustId=" + CustId);
+        window.open(environment.FoundationR3Web + NavigationConstant.VIEW_CUST_EXPOSURE + "?CustId=" + CustId);
     }
 
     public static OpenSurveyOrderViewBySrvyOrderId(SrvyOrderId: number) {
