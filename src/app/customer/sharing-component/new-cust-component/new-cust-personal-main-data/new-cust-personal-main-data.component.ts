@@ -105,6 +105,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   readonly FileExtAllowed: Array<string> = [CommonConstant.FileExtensionPdf, CommonConstant.FileExtensionJpg, CommonConstant.FileExtensionJpeg, CommonConstant.FileExtensionGif, CommonConstant.FileExtensionPng]
 
   readonly CustFromEditMainData: string = CommonConstant.CustFromEditMainData;
+  readonly CustFromCustShareholder: string = CommonConstant.CustFromCustShareholder;
   //#endregion
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
@@ -224,7 +225,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     if (this.CustDataMode != this.CustDataModeMain) {
       this.CustomerForm.get("CustName").disable();
     }
-    if (this.CustDataMode == this.CustDataModeShareholder) {
+    if (this.CustDataMode == this.CustDataModeShareholder || this.pageFrom == CommonConstant.CustFromCustShareholder) {
       this.CustomerForm.get("Email1").setValidators(Validators.pattern(CommonConstant.regexEmail));
       this.CustomerForm.get("Email1").updateValueAndValidity();
       this.CustomerForm.get("MrMaritalStatCode").clearValidators();
