@@ -11,23 +11,26 @@
       <div class="px-3">
         <form class="form form-horizontal" [formGroup]="TaxOfficeForm" #enjiForm="ngForm" novalidate
           (ngSubmit)="enjiForm.form.valid && SaveForm()">
-          <lib-ucSubsection [id]="'TaxOfficeInfoId'" [title]="'Tax Office ' + type" [panel]="'TaxOfficeInfo'"></lib-ucSubsection>
+          <lib-ucSubsection [id]="'TaxOfficeInfoId'" [title]="'Tax Office ' + type" [panel]="'TaxOfficeInfo'">
+          </lib-ucSubsection>
           <div id="TaxOfficeInfo">
             <div class="form-group row">
               <label class="col-md-3 adins-required-label" for="TaxOfficeCode">Tax Office Code</label>
               <div class="col-md-4">
-                <input type="text" class="form-control" formControlName="TaxOfficeCode" 
+                <input type="text" class="form-control" formControlName="TaxOfficeCode"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && TaxOfficeForm.controls.TaxOfficeCode.invalid }"
                   [attr.disabled]="type == 'edit' ? true : null">
-                  <lib-uc-show-errors [control]="TaxOfficeForm.controls.TaxOfficeCode" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                <lib-uc-show-errors [control]="TaxOfficeForm.controls.TaxOfficeCode" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3 adins-required-label" for="TaxOfficeName">Tax Office Name</label>
               <div class="col-md-4">
-                <input type="text" class="form-control" formControlName="TaxOfficeName" 
+                <input type="text" class="form-control" formControlName="TaxOfficeName"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && TaxOfficeForm.controls.TaxOfficeName.invalid }">
-                  <lib-uc-show-errors [control]="TaxOfficeForm.controls.TaxOfficeName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                <lib-uc-show-errors [control]="TaxOfficeForm.controls.TaxOfficeName" [submit]="enjiForm.submitted">
+                </lib-uc-show-errors>
               </div>
             </div>
             <div class="form-group row">
@@ -36,6 +39,10 @@
                 <input type="checkbox" value="1" id="isActive" formControlName="IsActive">
               </div>
             </div>
+          </div>
+          <lib-ucSubsection [id]="'BankInfoId'" [title]="'Bank Information'" [panel]="'BankInfo'">
+          </lib-ucSubsection>
+          <div id="BankInfo">
             <div class="form-group row">
               <label class="col-md-3 adins-required-label" translate>Bank Name</label>
               <div class="col-md-4">
@@ -64,20 +71,19 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 adins-label">Bank Branch BI Code</label>
+              <label class="col-md-3 adins-required-label">Bank Branch BI Code</label>
               <div class="col-md-4">
                 <input type="text" class="form-control" formControlName="BankBranchBiCode" disabled
                   [ngClass]="{ 'border-danger': enjiForm.submitted && TaxOfficeForm.controls.BankBranchBiCode.invalid }">
-                <lib-uc-show-errors [control]="TaxOfficeForm.controls.BankBranchBiCode"
-                  [submit]="enjiForm.submitted">
+                <lib-uc-show-errors [control]="TaxOfficeForm.controls.BankBranchBiCode" [submit]="enjiForm.submitted">
                 </lib-uc-show-errors>
               </div>
             </div>
           </div>
           <div class="form-actions right">
             <button type="button" class="btn btn-raised btn-warning mr-1" (click)="RedirectPaging()">
-                <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
-              </button>
+              <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
+            </button>
             <button type="submit" class="btn btn-raised btn-primary">
               <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
             </button>

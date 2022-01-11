@@ -31,7 +31,6 @@ export class URLConstant {
     public static GetListKvpActiveRefOfficeForPaging = environment.FoundationR3Url + "/v1" + "/RefOffice/GetListKvpActiveRefOfficeForPaging";
     public static GetRefOfficeObj = environment.FoundationR3Url + "/v1" + "/RefOffice/GetRefOfficeObj";
     public static GetRefOfficeByRefOfficeId = environment.FoundationR3Url + "/v1" + "/RefOffice/GetRefOfficeByRefOfficeId"
-    public static GetRefOfficeByRefOfficeIdV2_1 = environment.FoundationR3Url + "/v2.1" + "/RefOffice/GetRefOfficeByRefOfficeId"
     public static GetAllRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/GetAllRefOffice";
     public static AddRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/AddRefOffice";
     public static AddRefOfficeV2 = environment.FoundationR3Url + "/v2" + "/RefOffice/AddRefOffice";
@@ -50,6 +49,7 @@ export class URLConstant {
     public static GetListActiveRefOffice = "/v1" + "/RefOffice/GetListActiveRefOffice";
     public static GetListRefOfficeByRefOfficeAreaId = environment.FoundationR3Url + "/v1" + "/RefOffice/GetListRefOfficeByRefOfficeAreaId";
     public static GetListKvpActiveRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/GetListKvpActiveRefOffice";
+    public static GetRefOfficeDetailByRefOfficeId = environment.FoundationR3Url + "/v1" + "/RefOffice/GetRefOfficeDetailByRefOfficeId"
 
     //CENTER GROUP
     public static GetCenterGrpByCode = environment.FoundationR3Url + "/v1" + "/CenterGrp/GetCenterGrpByCode";

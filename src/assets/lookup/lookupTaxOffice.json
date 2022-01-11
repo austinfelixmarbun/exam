@@ -1,5 +1,5 @@
 {
-    "title": "Tax Office",
+    "title": "Lookup - Tax Office",
     "exportExcel": false,
     "component": [
         {
@@ -19,33 +19,10 @@
             "label": "Tax Office Name",
             "placeholder": "Placeholder",
             "datatype": "text"
-        },
-        {
-            "type": "dropdown",
-            "name": "IS_ACTIVE",
-            "datatype": "text",
-            "id": "IsActiveId",
-            "value": "",
-            "placeholder": "Placeholder",
-            "isFromURL": false,
-            "ddlType": "all",
-            "url": "",
-            "label": "Active Status",
-            "items": [
-                {
-                    "key": "1",
-                    "value": "Yes"
-                },
-                {
-                    "key": "0",
-                    "value": "No"
-                }
-            ],
-            "itemsUrl": []
         }
     ],
     "querystring": {
-        "name": "searchTaxOffice"
+        "name": "lookupTaxOffice"
     },
     "headerList": [
         {
@@ -59,12 +36,6 @@
             "position": "left",
             "label": "Tax Office Name",
             "name": "TaxOfficeName"
-        },
-        {
-            "type": "sort",
-            "position": "center",
-            "label": "Active Status",
-            "name": "IsActive"
         },
         {
             "type": "label",
@@ -84,29 +55,16 @@
             "property": "TaxOfficeName"
         },
         {
-            "type": "boolean",
-            "position": "center",
-            "property": "IsActive"
-        },
-        {
             "type": "action",
             "position": "center",
             "action": [
                 {
-                    "type": "edit",
-                    "path": "CS_REF_TAX_OFFICE_DETAIL",
-                    "param": [
-                        {
-                            "type": "RefTaxOfficeId",
-                            "property": "RefTaxOfficeId"
-                        },
-                        {
-                            "type": "mode",
-                            "property": "edit"
-                        }
-                    ]
+                    "type": "select",
+                    "property": "RefTaxOfficeId"
                 }
             ]
         }
-    ]
+    ],
+    "propertyId": "RefTaxOfficeId",
+    "propertyName": "TaxOfficeName"  
 }

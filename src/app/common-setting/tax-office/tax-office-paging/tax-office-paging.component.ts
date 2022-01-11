@@ -16,7 +16,6 @@ export class TaxOfficePagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/search/searchTaxOffice.json";
     this.inputPagingObj.pagingJson = "./assets/search/searchTaxOffice.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefTaxOffice;
   }
 
 }
