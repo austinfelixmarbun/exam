@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -29,8 +29,10 @@ export class ChangePasswordComponent implements OnInit {
   });
   customPattern = new Array<CustomPatternObj>();
 
-  constructor(private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
-
+  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
+    this.route.queryParams.subscribe(params => {
+      this.username = params['Username'];
+    });
   }
 
   ngOnInit() {
@@ -61,7 +63,9 @@ export class ChangePasswordComponent implements OnInit {
       const newpassword = this.ResetPassForm.value.NewPassword;
 
       let context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-      this.username = context[CommonConstant.USER_NAME];
+      if (context != null) {
+        this.username = context[CommonConstant.USER_NAME];
+      }
       var requestObj = { "Username": this.username, "Password": password, "NewPassword": newpassword };
       this.http.post(URLConstant.ChangePasswordRefUserByUsername, requestObj).subscribe(
         (response) => {
