@@ -23,7 +23,7 @@ export class TaxOfficeDetailComponent implements OnInit {
   TaxOfficeForm = this.fb.group({
     TaxOfficeCode: ['', Validators.required],
     TaxOfficeName: ['', Validators.required],
-    IsActive: [false],
+    IsActive: [true],
     RefBankId: [0, Validators.required],
     BankAccNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
     BankAccName: ['', Validators.required],
