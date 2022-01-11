@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PathConstantX } from 'app/impl/shared/PathConstantX';
 import { PathConstant } from 'app/shared/PathConstant';
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
       },
       {
         path: PathConstant.VIEW_CUST_EXPSR,
+        loadChildren: './cust-exposure-view/cust-exposure-view.module#CustExposureViewModule'
+      },
+      {
+        path: PathConstantX.VIEW_CUST_EXPSR_X,
         loadChildren: './cust-exposure-view/cust-exposure-view.module#CustExposureViewModule'
       },
       {
