@@ -694,6 +694,12 @@ export class JobDataEmployeeXComponent implements OnInit {
 
   isWellknownCoyChecked(event: any) {
     this.IsWellknownCoy = event.target.checked;
+    if(event.target.checked == true){
+      this.companyLookupObj.isRequired = true;
+    }
+    else{
+      this.companyLookupObj.isRequired = false;
+    }
   }
 
   getCoy(event: any) {
