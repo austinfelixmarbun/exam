@@ -8,6 +8,7 @@ import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
     selector: 'add-bank',
@@ -76,7 +77,7 @@ export class BankAddComponent implements OnInit {
             this.bankObj.RefBankId = this.refBankId;
             this.bankObj.RowVersion  = this.result.RowVersion;
 
-            this.http.post(URLConstant.EditRefBank, this.bankObj).subscribe(
+            this.http.post(URLConstant.EditRefBank, this.bankObj, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_BANK_PAGING],{});
                     this.toastr.successMessage(response['message']);
@@ -88,7 +89,7 @@ export class BankAddComponent implements OnInit {
             this.bankObj.RefBankId = 0;
             this.bankObj.RowVersion = "";
 
-            this.http.post(URLConstant.AddRefBankAsync, this.bankObj).subscribe((response) => {
+            this.http.post(URLConstant.AddRefBankAsync, this.bankObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
                 this.toastr.successMessage(response['message']);
                 AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_BANK_PAGING],{});
             });
