@@ -17,7 +17,8 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
+  templateUrl: './login-page-new.component.html',
+  styleUrls: ['./login-page.component.scss'],
   providers: [RolePickService, NGXToastrService]
 })
 
@@ -42,6 +43,7 @@ export class LoginPageComponent implements OnInit {
     pwd: ""
   };
   isInvalidOtp: boolean = false;
+  showPass: boolean = false;
 
   constructor(private router: Router, private http: HttpClient, public rolePickService: RolePickService,
     private route: ActivatedRoute, private currentUserContextService: CurrentUserContextService, private cookieService: CookieService,
@@ -218,5 +220,9 @@ export class LoginPageComponent implements OnInit {
     clearInterval(this.timer);
     this.onGoingTimer = 0
     this.startTimer();
+  }
+
+  onClickShowPass() {
+    this.showPass = !this.showPass;
   }
 }
