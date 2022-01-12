@@ -189,6 +189,9 @@ export class PathConstant {
     public static CS_REF_TC = "RefTc";
     public static CS_REF_TC_PAGING = PathConstant.CS_REF_TC + "/" + PathConstant.PAGING;
     public static CS_REF_TC_DETAIL = PathConstant.CS_REF_TC + "/" + PathConstant.DETAIL;
+    public static CS_REF_TAX_OFFICE = "TaxOffice";
+    public static CS_REF_TAX_OFFICE_PAGING = PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.PAGING;
+    public static CS_REF_TAX_OFFICE_DETAIL = PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region Cust
@@ -477,6 +480,7 @@ export class PathConstant {
     public static VIEW_CUST_OTH_INFO = "CustOthInfo";
     public static VIEW_CUST_HIGHLIGHT_COMMENT = "HighligtComment";
     public static VIEW_CUST_TRUSTING_SOCIAL = "CustTrustSoc";
+    public static VIEW_CUST_EXPOSURE = "CustExposureView";
 
     //#endregion
 

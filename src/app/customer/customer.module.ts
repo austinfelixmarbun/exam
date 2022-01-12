@@ -119,15 +119,15 @@ import {CustBankAccSectionFindataXComponent} from '../impl/customer/cust-bank-ac
 import {CustomerPersonalMainInfoXComponent} from '../impl/customer/customer-personal/customer-personal-main-info/customer-personal-main-info-x.component';
 import {CustomerPersonalJobDataXComponent} from '../impl/customer/customer-personal/customer-personal-job-data/customer-personal-job-data-x.component';
 
-export const customCurrencyMaskConfig = {
-  align: "right",
-  allowNegative: true,
-  allowZero: true,
-  decimal: ".",
-  precision: 2,
-  prefix: "",
-  suffix: "",
-  thousands: ",",
+export const customCurrencyMaskConfig = {     
+  align: "right",     
+  allowNegative: true,     
+  allowZero: true,     
+  decimal: ".",        
+  precision: 0,
+  prefix: "",     
+  suffix: "",     
+  thousands: ",",     
   nullable: false,
   inputMode: CurrencyMaskInputMode.NATURAL
 };

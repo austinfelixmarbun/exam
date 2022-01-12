@@ -87,13 +87,15 @@ import { SharedModule } from 'app/shared/shared.module';
 import { RefTcComponent } from './ref-tc/ref-tc-paging/ref-tc.component';
 import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.component';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { TaxOfficeDetailComponent } from './tax-office/tax-office-detail/tax-office-detail.component';
+import { TaxOfficePagingComponent } from './tax-office/tax-office-paging/tax-office-paging.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
   allowNegative: true,     
   allowZero: true,     
   decimal: ".",     
-  precision: 2,     
+  precision: 0,  
   prefix: "",     
   suffix: "",     
   thousands: ",",     
@@ -192,7 +194,9 @@ export const customCurrencyMaskConfig = {
     EconomicSectorSlikPagingXComponent,
     EconomicSectorSlikAddEditXComponent,
     RefTcComponent,
-    RefTcAddEditComponent
+    RefTcAddEditComponent,
+    TaxOfficeDetailComponent,
+    TaxOfficePagingComponent
   ],
   providers: [
     NGXToastrService

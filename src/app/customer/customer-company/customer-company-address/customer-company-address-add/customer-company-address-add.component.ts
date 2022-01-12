@@ -147,12 +147,6 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
       );
     }
 
-    this.inputAddressObj = new InputAddressObj();
-    this.inputAddressObj.showSubsection = false;
-    this.inputAddressObj.title = "Customer Address";
-    this.inputAddressObj.showOwnership = true;
-    this.inputAddressObj.requiredPhn1 = true;
-
     this.isReady = true;
   }
 

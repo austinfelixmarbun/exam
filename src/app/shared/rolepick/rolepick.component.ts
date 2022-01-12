@@ -79,7 +79,9 @@ export class RolepickComponent implements OnInit, AfterViewInit {
             (response) => {
               AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
               this.strService.set(AdInsConstant.WatchRoleState, true);
-              this.router.navigate([NavigationConstant.DASHBOARD]);
+              this.router.navigateByUrl(NavigationConstant.DASHEMPTY, { skipLocationChange: true }).then(() => {
+                AdInsHelper.RedirectUrl(this.router, [NavigationConstant.DASHBOARD], {}, true);
+              });
               this.dialog.closeAll();
             });
 

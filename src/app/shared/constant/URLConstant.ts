@@ -35,10 +35,12 @@ export class URLConstant {
     public static GetListUpperHierarchyRefOfficeByRefOrgId = environment.FoundationR3Url + "/v1" + "/RefOffice/GetListUpperHierarchyRefOfficeByRefOrgId";
     public static AddRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/AddRefOffice";
     public static AddRefOfficeV2 = environment.FoundationR3Url + "/v2" + "/RefOffice/AddRefOffice";
+    public static AddRefOfficeV2_1 = environment.FoundationR3Url + "/v2.1" + "/RefOffice/AddRefOffice";
     public static AddRefOfficeAreaMember = environment.FoundationR3Url + "/v1" + "/RefOffice/AddRefOfficeAreaMember";
     public static UpdateRefOfficeAreaId = environment.FoundationR3Url + "/v1" + "/RefOffice/UpdateRefOfficeAreaId";
     public static EditRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/EditRefOffice";
     public static EditRefOfficeV2 = environment.FoundationR3Url + "/v2" + "/RefOffice/EditRefOffice";
+    public static EditRefOfficeV2_1 = environment.FoundationR3Url + "/v2.1" + "/RefOffice/EditRefOffice";
     public static GetCenterGrpByCenterGrpTypeCode = "/v1" + "/RefOffice/GetCenterGrpByCenterGrpCode";
     public static GetListOfficeCenterGrp = "/v1" + "/RefOffice/GetListOfficeCenterGrp";
     public static AddCenterGroupOfficeMember = "/v1" + "RefOffice/AddCenterGroupOfficeMember";
@@ -48,6 +50,7 @@ export class URLConstant {
     public static GetListActiveRefOffice = "/v1" + "/RefOffice/GetListActiveRefOffice";
     public static GetListRefOfficeByRefOfficeAreaId = environment.FoundationR3Url + "/v1" + "/RefOffice/GetListRefOfficeByRefOfficeAreaId";
     public static GetListKvpActiveRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/GetListKvpActiveRefOffice";
+    public static GetRefOfficeDetailByRefOfficeId = environment.FoundationR3Url + "/v1" + "/RefOffice/GetRefOfficeDetailByRefOfficeId"
 
     //CENTER GROUP
     public static GetCenterGrpByCode = environment.FoundationR3Url + "/v1" + "/CenterGrp/GetCenterGrpByCode";
@@ -1156,5 +1159,12 @@ export class URLConstant {
   //Generate
   public static GenerateAPIKey = environment.FoundationR3Url + "/v1" + "/Authenticate/GenerateAPIKey";
   public static RevokeAPIKey = environment.FoundationR3Url + "/v1" + "/Authenticate/RevokeAPIKey";
+
+  //REF TAX OFFICE
+  public static AddRefTaxOffice = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/AddRefTaxOffice";
+  public static EditRefTaxOffice = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/EditRefTaxOffice";
+  public static DeleteRefTaxOffice = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/DeleteRefTaxOffice";
+  public static GetRefTaxOfficeDetailById = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/GetRefTaxOfficeDetailById";
+  public static GetListRefTaxOfficeActive = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/GetListRefTaxOfficeActive";
 }
 

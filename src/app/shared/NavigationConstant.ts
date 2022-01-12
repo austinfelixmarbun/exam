@@ -108,6 +108,8 @@ export class NavigationConstant {
     public static CS_REF_STATUS_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_STATUS_PAGING; //'/CommonSetting/RefStatus/Paging'
     public static CS_REF_TC_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TC_PAGING; //'/CommonSetting/RefTc/Paging'
     public static CS_REF_TC_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TC_DETAIL; //'/CommonSetting/RefTc/Detail'
+    public static CS_REF_TAX_OFFICE_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.PAGING; //'/CommonSetting/TaxOffice/Paging'
+    public static CS_REF_TAX_OFFICE_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.DETAIL; //'/CommonSetting/TaxOffice/Detail'
     //#endregion
 
     //#region System Setting
@@ -136,7 +138,7 @@ export class NavigationConstant {
     public static VIEW_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_CUST; //'View/Customer'
     public static VIEW_CUST_ADDR = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_ADDR; //'/View/Customer/Address'
     public static VIEW_CUST_GRP = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_GRP; //'/View/Customer/CustomerGroup'
-    public static VIEW_CUST_PERSONAL_DETAIL = NavigationConstant.VIEW_CUST + "/" +PathConstant.VIEW_CUST_PERSONAL_DETAIL; //'/View/Customer/PersonalDetail'
+    public static VIEW_CUST_PERSONAL_DETAIL = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_DETAIL; //'/View/Customer/PersonalDetail'
     public static VIEW_CUST_PERSONAL_CONTACT_PERSON = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_CONTACT_PERSON; //'/View/Customer/PersonalContactPerson'
     public static VIEW_CUST_PERSONAL_JOB_DATA = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_JOB_DATA; //'/View/Customer/PersonalJobData'
     public static VIEW_CUST_PERSONAL_JOB_DATA_NON_PROF = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_JOB_DATA_NON_PROF; //'/View/Customer/PersonalJobDataNonProf'
@@ -158,7 +160,7 @@ export class NavigationConstant {
     public static VIEW_CUST_EXPOSURE = "/" + PathConstant.CR_VIEW + "/" + PathConstantX.VIEW_CUST_EXPSR_X; //'/View/CustExposureView/X'
     //#endregion
 
-    public static VIEW_CUST_PERSONAL_DETAIL_X = "/" + NavigationConstant.VIEW_CUST + "/" +PathConstantX.VIEW_CUST_PERSONAL_DETAIL_X; //'/View/Customer/PersonalDetail'
+    public static VIEW_CUST_PERSONAL_DETAIL_X = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstantX.VIEW_CUST_PERSONAL_DETAIL_X; //'/View/Customer/PersonalDetail'
 
     //#region Upload
     public static UPLOAD_SETTING_EDIT = "/" + PathConstant.LR_UPLOAD + "/" + PathConstant.UPLOAD_SETTING_EDIT; //'/Upload/UploadSettingEdit'
@@ -197,7 +199,7 @@ export class NavigationConstant {
     public static VENDOR_SCHM_MBR = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_SCHM_MBR; //'/Vendor/VendorScheme/Member'
     public static VENDOR_SCHM_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_SCHM_MBR_ADD; //'/Vendor/VendorScheme/Member/Add'
     public static VENDOR_SCHM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_SCHM_DETAIL; //'/Vendor/VendorScheme/Detail'
-  public static VENDOR_GRD_REQ_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_GRADING_REQUEST_PAGING; //'/Vendor/VendorGrading/Request/PagingX'
+    public static VENDOR_GRD_REQ_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_GRADING_REQUEST_PAGING; //'/Vendor/VendorGrading/Request/PagingX'
     public static VENDOR_GRD_REQ_APV_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRADING_REQUEST_APPROVAL_DETAIL; //'/Vendor/VendorGrading/Request/Paging'
     public static VENDOR_GRD_REQ_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_GRADING_REQUEST_DETAIL; //'/Vendor/VendorGrading/Request/DetailX'
     public static VENDOR_GRD_INQUIRY = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_GRADING_INQUIRY_X; //'/Vendor/VendorGrading/InquiryX'
@@ -340,8 +342,8 @@ export class NavigationConstant {
 
     //#region License
     public static LICENSE_PAGING = "/" + PathConstant.LR_LICENSE + "/" + PathConstant.PAGING;
-    public static UPLOAD_LICENSE = "/"+ PathConstant.LR_LICENSE + "/" + PathConstant.UPLOAD_LICENSE;
-    public static DETAIL_LICENSE = "/"+ PathConstant.LR_LICENSE + "/" + PathConstant.DETAIL_LICENSE;
+    public static UPLOAD_LICENSE = "/" + PathConstant.LR_LICENSE + "/" + PathConstant.UPLOAD_LICENSE;
+    public static DETAIL_LICENSE = "/" + PathConstant.LR_LICENSE + "/" + PathConstant.DETAIL_LICENSE;
     //#endregion
 
     //#region PEFINDO View
@@ -364,7 +366,7 @@ export class NavigationConstant {
     public static CUST_PERSONAL_MAIN_INFO_X = '..' + "/" + PathConstantX.CUST_PERSONAL_MAIN_INFO_X; //'../CustomerPersonal/MainInfo'
     public static CUST_MAIN_VIEW_INFO_X = '..' + "/" + PathConstantX.CUST_MAIN_VIEW_X; //'../CustomerCompany/MainInfo'
     public static CUST_PERSONAL_DUP_CHECK_X = "/" + PathConstant.LR_CUST + "/" + PathConstantX.CUST_PERSONAL_DUP_CHECK_X; //'/Customer/CustomerPersonal/DuplicateCheck'
-    public static CUST_PAGING_X = "/" + PathConstant.LR_CUST+ "/" + PathConstantX.CUST_PAGING_X; //'/Customer/Paging'
+    public static CUST_PAGING_X = "/" + PathConstant.LR_CUST + "/" + PathConstantX.CUST_PAGING_X; //'/Customer/Paging'
     public static CUST_PERSONAL_PAGE_X = "/" + PathConstant.LR_CUST + "/" + PathConstantX.CUST_PERSONAL_PAGE_X;
     public static CUST_EDIT_MAIN_DATA_PERSONAL_X = "/" + PathConstant.LR_CUST + "/" + PathConstantX.CUST_EDIT_MAIN_DATA_PERSONAL_X; //'/Customer/EditMainData/Personal'
     public static CUST_EDIT_MAIN_DATA_PAGING_X = "/" + PathConstant.LR_CUST + "/" + PathConstantX.CUST_EDIT_MAIN_DATA_PAGING_X; //'/Customer/EditMainData/Paging'
@@ -372,7 +374,7 @@ export class NavigationConstant {
 
     //#region System User
     public static SYS_USER = "/" + PathConstant.LR_SYS_USER; //'SystemUser/
-    public static SYS_USER_PAGING =  "/" + PathConstant.LR_SYS_USER + "/" + PathConstant.PAGING;
+    public static SYS_USER_PAGING = "/" + PathConstant.LR_SYS_USER + "/" + PathConstant.PAGING;
     public static SYS_DETAIL = "/" + PathConstant.LR_SYS_USER + "/" + PathConstant.DETAIL; //'/Employee/Detail'
     //#endregion
 }

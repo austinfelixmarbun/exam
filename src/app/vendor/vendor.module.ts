@@ -89,15 +89,15 @@ import { ContactPersonAddEditXComponent } from 'app/impl/vendor/component/contac
 import { VendorHoldingRegistrationXComponent } from 'app/impl/vendor/vendor-holding-registration/vendor-holding-registration-x.component';
 import { VendorGradingInquiryPagingXComponent } from 'app/impl/vendor/vendor-grading/vendor-grading-inquiry-paging/vendor-grading-inquiry-paging-x.component';
 
-export const customCurrencyMaskConfig = {
-  align: "right",
-  allowNegative: true,
-  allowZero: true,
-  decimal: ".",
-  precision: 2,
-  prefix: "",
-  suffix: "",
-  thousands: ",",
+export const customCurrencyMaskConfig = {     
+  align: "right",     
+  allowNegative: true,     
+  allowZero: true,     
+  decimal: ".",      
+  precision: 0,  
+  prefix: "",     
+  suffix: "",     
+  thousands: ",",     
   nullable: false,
   inputMode: CurrencyMaskInputMode.NATURAL
 };
