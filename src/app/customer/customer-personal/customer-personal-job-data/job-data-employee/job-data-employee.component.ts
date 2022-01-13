@@ -206,7 +206,7 @@ export class JobDataEmployeeComponent implements OnInit {
     this.companyLookupObj.urlJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.pagingJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.genericJson = "./assets/uclookup/Customer/lookupCompany.json";
-    this.companyLookupObj.isRequired = true;
+    this.companyLookupObj.isRequired = false;
 
     this.companyLookupObj.addCritInput = new Array();
     this.ArrAddCritCoy = new Array<CriteriaObj>();
@@ -260,7 +260,7 @@ export class JobDataEmployeeComponent implements OnInit {
       }
     );
 
-    this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).toPromise().then(
+    await this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).toPromise().then(
       (response: any) => {
         this.returnCustJobDataObj = response;
 
@@ -449,6 +449,8 @@ export class JobDataEmployeeComponent implements OnInit {
         }
       }
     );
+
+    this.isWellknownCoyChecked(this.JobDataEmpForm.controls.IsWellknownCoy.value);
     this.isReady = true;
   }
 
@@ -635,9 +637,9 @@ export class JobDataEmployeeComponent implements OnInit {
     return true;
   }
 
-  isWellknownCoyChecked(event: any) {
-    this.IsWellknownCoy = event.target.checked;
-    if(event.target.checked == true){
+  isWellknownCoyChecked(checked: boolean) {
+    this.IsWellknownCoy = checked;
+    if(checked){
       this.companyLookupObj.isRequired = true;
     }
     else{
