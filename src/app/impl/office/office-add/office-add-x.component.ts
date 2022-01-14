@@ -104,12 +104,13 @@ export class OfficeAddXComponent implements OnInit {
     AllowAppCreated: false,
     IsNationalCourt: false,
     NationalCourtOffice: [''],
+    RefTaxOfficeId: [null],
     TaxOffice: ['']
   })
   InputLookupObj: InputLookupObj = new InputLookupObj();
   addressObj: UcAddressObj = new UcAddressObj();
   inputAddressObj: InputAddressObj = new InputAddressObj();
-
+  InputLookupTaxOfficeObj: InputLookupObj = new InputLookupObj();
   readonly CancelLink: string = NavigationConstant.OFFICE_PAGING;
   responseRefOfficeX: any;
   officeXObj: RefOfficeObjX;
@@ -129,6 +130,8 @@ export class OfficeAddXComponent implements OnInit {
     this.InputLookupObj.isRequired = true;
     this.InputLookupObj.addCritInput = new Array();
 
+    this.InputLookupTaxOfficeObj.urlJson = "./assets/lookup/lookupTaxOffice.json";
+    this.InputLookupTaxOfficeObj.addCritInput = new Array();
     this.cbIsNationalCourt = false;
     this.IsNationalCourtChange();
     this.getListTaxOffice();
@@ -144,13 +147,17 @@ export class OfficeAddXComponent implements OnInit {
       this.officeObj = new OfficeObj();
       this.addressObj = new UcAddressObj();
       this.officeObj.RefOfficeId = this.RefOfficeId;
-      await this.httpClient.post(URLConstant.GetRefOfficeByRefOfficeId, { Id: this.RefOfficeId }).toPromise().then(
+      await this.httpClient.post(URLConstant.GetRefOfficeDetailByRefOfficeId, { Id: this.RefOfficeId }).toPromise().then(
         (response) => {
           this.resultData = response;
           this.getRefOfficeXByOfficeCode(this.resultData.OfficeCode);
           this.InputLookupObj.jsonSelect = { OfficeCode: this.resultData.ParentOfficeCode, RefOfficeId: this.resultData.ParentId };
           this.InputLookupObj.nameSelect = this.resultData["ParentOfficeCode"];
           this.InputLookupObj.jsonSelect = { OfficeCode: this.resultData["ParentOfficeCode"] };
+          
+          this.InputLookupTaxOfficeObj.jsonSelect = { TaxOfficeName: this.resultData.TaxOfficeName};
+          this.InputLookupTaxOfficeObj.nameSelect = this.resultData.TaxOfficeName;
+
           this.OfficeForm.patchValue({
             OfficeCode: this.resultData.OfficeCode,
             OfficeName: this.resultData.OfficeName,
@@ -173,7 +180,7 @@ export class OfficeAddXComponent implements OnInit {
             CntctPersonMobilePhnNo1: this.resultData.CntctPersonMobilePhnNo1,
             CntctPersonMobilePhnNo2: this.resultData.CntctPersonMobilePhnNo2,
             HierarchyLvl: this.resultData.HierarchyLvl.toString(),
-            // TaxOffice: this.resultData.RefTaxOfficeXId,
+            RefTaxOfficeId: this.resultData.RefTaxOfficeId,
             // IsNationalCourt: this.resultData.IsNationalCourt,
             // NationalCourtOffice: this.resultData.NationalCourtOffice
           });
@@ -240,7 +247,8 @@ export class OfficeAddXComponent implements OnInit {
           this.lookupOfficeType = response['RefMasterObjs'];
         }
       });
-    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeOfficeClass}).subscribe(
+
+    await this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeOfficeClass}).toPromise().then(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.allOfficeClass = response[CommonConstant.ReturnObj];
@@ -252,7 +260,7 @@ export class OfficeAddXComponent implements OnInit {
         }
       });
 
-    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCenterGrpType}).subscribe(
+    await this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCenterGrpType}).toPromise().then(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.allCgType = response[CommonConstant.ReturnObj];
@@ -264,7 +272,8 @@ export class OfficeAddXComponent implements OnInit {
         }
 
       });
-    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeKonvenSyariah}).subscribe(
+
+    await this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeKonvenSyariah}).toPromise().then(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.allKonSya = response[CommonConstant.ReturnObj];
@@ -275,7 +284,8 @@ export class OfficeAddXComponent implements OnInit {
           }
         }
       });
-    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeOfficeType}).subscribe(
+
+    await this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, {RefMasterTypeCode: CommonConstant.RefMasterTypeCodeOfficeType}).toPromise().then(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.allOfficeType = response[CommonConstant.ReturnObj];
@@ -286,7 +296,8 @@ export class OfficeAddXComponent implements OnInit {
           }
         }
       });
-    this.httpClient.post(URLConstant.GetListActiveHolidaySchemeH, null).subscribe(
+
+    await this.httpClient.post(URLConstant.GetListActiveHolidaySchemeH, null).toPromise().then(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.allHolidaySchm = response[CommonConstant.ReturnObj];
@@ -297,7 +308,8 @@ export class OfficeAddXComponent implements OnInit {
           }
         }
       });
-    this.httpClient.post(URLConstant.GetListActiveWorkingSchmH, null).subscribe(
+
+    await this.httpClient.post(URLConstant.GetListActiveWorkingSchmH, null).toPromise().then(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.allWorkingHourSchm = response[CommonConstant.ReturnObj];
@@ -345,7 +357,7 @@ export class OfficeAddXComponent implements OnInit {
     this.listMaxHierarchyLvl.push(this.SetKeyValueObjHierarchyLvl(2));
     if (this.pageType != "edit") setTimeout(() => {
       tempHierarchyLvl.setValue("2");
-
+      
       let tempObj: KeyValueObj = new KeyValueObj();
       tempObj.Key = "2";
       tempObj.Value = "2";
@@ -360,7 +372,7 @@ export class OfficeAddXComponent implements OnInit {
     tempKeyValueObj.Value = HierarchyLvl.toString();
     return tempKeyValueObj;
   }
-
+  
   private ucLookupParent: UclookupgenericComponent;
   @ViewChild('LookupParent') set content(content: UclookupgenericComponent) {
     if (content) { // initially setter gets called with undefined
@@ -371,7 +383,7 @@ export class OfficeAddXComponent implements OnInit {
   changeHierarchy(ev: KeyValueObj) {
     let selectedLvl: number = +ev.Key;
     let listTempCritObj: Array<CriteriaObj> = new Array();
-
+    
     //#region REF_OFFICE_ID criteria
     if (this.RefOfficeId != 0) {
       let critRefOfficeIdObj = new CriteriaObj();
@@ -475,7 +487,7 @@ export class OfficeAddXComponent implements OnInit {
     this.officeObj.IsOfficeClose = tempOfficeForm.OfficeClose;
     this.officeObj.CntctPersonName = tempOfficeForm.CntctPersonName;
     this.officeObj.CntctPersonJobTitle = tempOfficeForm.CntctPersonJobTitle;
-
+    
     this.officeObj.ParentId = tempOfficeForm.OfficeParent;
     this.officeObj.HierarchyLvl = tempOfficeForm.HierarchyLvl;
     if (this.officeObj.MrOfficeTypeCode == CommonConstant.HeadOffice) {
@@ -510,6 +522,7 @@ export class OfficeAddXComponent implements OnInit {
     this.officeObj.PhnExt2 = tempOfficeForm.UcAddress.PhnExt3;
     this.officeObj.FaxArea = tempOfficeForm.UcAddress.FaxArea;
     this.officeObj.Fax = tempOfficeForm.UcAddress.Fax;
+    this.officeObj.RefTaxOfficeId = tempOfficeForm.RefTaxOfficeId;
     this.officeXObj = new RefOfficeObjX();
 
     this.officeXObj.RefOfficeXId = this.OfficeXId;
@@ -555,20 +568,29 @@ export class OfficeAddXComponent implements OnInit {
     }
   }
   checkType() {
+    this.InputLookupTaxOfficeObj.isReady = false;
     if (this.OfficeForm.controls.OfficeType.value == CommonConstant.HeadOffice) {
       this.OfficeForm.patchValue({
         OfficeParent: null
       });
       this.InputLookupObj.isRequired = false;
+      this.InputLookupTaxOfficeObj.isRequired = true;
       this.OfficeForm.controls.OfficeParent.clearValidators();
       this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
     }
     else {
       this.InputLookupObj.isRequired = true;
+      if(this.OfficeForm.controls.OfficeType.value == CommonConstant.Branch){
+        this.InputLookupTaxOfficeObj.isRequired = true;
+      }else if(this.OfficeForm.controls.OfficeType.value == CommonConstant.CollectionGroup) {
+        this.InputLookupTaxOfficeObj.isRequired = false;
+      }
       this.OfficeForm.controls.OfficeParent.setValidators([Validators.required]);
       this.OfficeForm.controls.OfficeParent.updateValueAndValidity();
     }
+    
     this.SetListMaxHierarchyLvl();
+    this.InputLookupTaxOfficeObj.isReady = true;
   }
   toggleActive(e) {
     this.isActive = e.target.checked;
@@ -596,5 +618,10 @@ export class OfficeAddXComponent implements OnInit {
     this.OfficeForm.controls.NationalCourtOffice.updateValueAndValidity();
   }
 
+  getLookUpTaxOffice(ev) {
+    this.OfficeForm.patchValue({
+      RefTaxOfficeId: ev.RefTaxOfficeId
+    })
+  }
 
 }

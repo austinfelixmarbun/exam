@@ -239,19 +239,17 @@
             </div>
           </div>
         </div>
-
-        <lib-ucSubsection [id]="'TaxId'" [title]="'Tax'" [panel]="'Tax'">
+        <lib-ucSubsection [id]="'TaxOfficeId'" [title]="'Tax Office'" [panel]="'TaxOffice'">
         </lib-ucSubsection>
-        <div id="Tax">
+        <div id="TaxOffice">
           <div class="form-group row">
-            <label class="col-md-3 adInsLabel" translate>Tax Office </label>
+            <div class="col-md-3">
+              <label [ngClass]="{ 'adins-required-label': OfficeForm.controls.OfficeType.value == 'HO' || OfficeForm.controls.OfficeType.value == 'BRANCH'}" translate>Tax Office</label>
+            </div>
             <div class="col-md-4">
-              <select class="form-control adInsInput" style="width: 50%" formControlName="TaxOffice">
-                <option value="">Select One</option>
-                <option *ngFor="let item of listTaxOfficeName" [ngValue]="item.Key">
-                  {{item.Value}}
-                </option>
-              </select>
+              <lib-uclookupgeneric [lookupInput]="InputLookupTaxOfficeObj" [parentForm]='OfficeForm' [enjiForm]="enjiForm"
+                [identifier]="'lookupTaxOffice'" (lookup)="getLookUpTaxOffice($event)" *ngIf="InputLookupTaxOfficeObj.isReady">
+              </lib-uclookupgeneric>
             </div>
           </div>
         </div>
@@ -283,10 +281,10 @@
 
         <div class="form-actions right">
           <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" skipLocationChange>
-            <i class="far fa-window-close"></i> <span translate>Cancel</span>
+            <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
           </button>
           <button type="submit" class="btn btn-raised btn-primary">
-            <i class="far fa-check-square"></i> <span translate>Save</span>
+            <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
           </button>
         </div>
       </form>
