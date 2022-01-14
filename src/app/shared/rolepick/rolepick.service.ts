@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { RolepickComponent } from 'app/shared/rolepick/rolepick.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
@@ -33,9 +33,9 @@ export class RolePickService {
                     const dialogRef = this.dialog.open(RolepickComponent, {
                         id: 'role-modal',
                         width: '85%',
-                        position: {
-                            top: '12px'
-                        },
+                        // position: {
+                        //     top: '12px'
+                        // },
                         data: object
                     });
 
@@ -103,14 +103,12 @@ export class RolePickService {
             }
             //Ini kalau dia ada lebih dari 1 Role, maka buka modal
             else {
-                const dialogRef = this.dialog.open(RolepickComponent, {
-                    id: 'role-modal',
-                    width: '85%',
-                    position: {
-                        top: '12px'
-                    },
-                    data: data
-                });
+                const dialogConfig = new MatDialogConfig();
+                // dialogConfig.disableClose = true;
+                dialogConfig.id = 'role-modal';
+                dialogConfig.width = '85%';
+                dialogConfig.data = data;
+                const dialogRef = this.dialog.open(RolepickComponent, dialogConfig);
 
                 dialogRef.afterClosed().subscribe(result => {
                 });
