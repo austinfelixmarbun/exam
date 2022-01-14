@@ -38,7 +38,7 @@ export class UcDropdownSearchObj {
     }
 }
 
-export class UcDropdownListCallbackObj {
+export class UcDropdownSearchCallbackObj {
     selectedValue: string;
     selectedObj: Object;
 
