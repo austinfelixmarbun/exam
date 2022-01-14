@@ -10,19 +10,46 @@ import { CommonConstant } from '../constant/CommonConstant';
 import { NavigationConstant } from '../NavigationConstant';
 import { AdInsConstant } from '../AdInstConstant';
 import { StorageService } from '../services/StorageService';
+import { UcDropdownSearchConstant, UcDropdownSearchObj } from '../model/library/uc-dropdown-search-obj.model';
+import { FormBuilder, Validators } from '@angular/forms';
+import { URLConstant } from '../constant/URLConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from '../model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 
 @Component({
   selector: 'app-rolepick',
-  templateUrl: './rolepick.component.html'
+  templateUrl: './rolepick.component.html',
+  styleUrls: ['./rolepick.component.css'],
 })
 export class RolepickComponent implements OnInit, AfterViewInit {
   listRole: any;
   cookieOptions: CookieOptions;
+  dropdownSearchObj: UcDropdownSearchObj = new UcDropdownSearchObj();
 
-  ngAfterViewInit(): void {
+  RolepickForm = this.fb.group({
+    Office: ['', [Validators.required]],
+    Role: ['', [Validators.required]],
+  });
+
+  ngOnInit() {
+    let refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+      RefMasterTypeCode: "INST_SCHM",
+      MappingCode: null
+    };
+    this.dropdownSearchObj.apiPath = URLConstant.GetListActiveRefMasterTypeForDdl;
+    this.dropdownSearchObj.requestObj = {};
+    this.dropdownSearchObj.ddlType = UcDropdownSearchConstant.DDL_TYPE_ONE;
+    this.dropdownSearchObj.requestObj = refMasterObjMrIdTypeCode;
+    this.dropdownSearchObj.isObject = true;
+    this.dropdownSearchObj.customObjName = "ReturnObject";
+    this.dropdownSearchObj.placeholder = "Choose your office";
   }
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+  ngAfterViewInit(): void {
+    
+
+  }
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder,
     private http: HttpClient, private router: Router, public dialog: MatDialog, private cookieService: CookieService, private strService: StorageService) {
     this.listRole = data["response"];
   }
@@ -118,6 +145,4 @@ export class RolepickComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngOnInit() {
-  }
 }

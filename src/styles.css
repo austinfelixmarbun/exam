@@ -435,6 +435,7 @@ mat-dialog-container#role-modal {
     border-radius: 10%;
     padding: 1.5rem 3rem;
     background: white;
+    width: 34.33rem;
 }
 
 .text-user {

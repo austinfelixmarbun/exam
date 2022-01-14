@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row full-height-vh">
       <div class="col-12 d-flex align-items-center justify-content-center">
-        <div class="text-center width-440 custom-card">
+        <div class="text-center custom-card">
           <div class="card-img">
             <img alt="element 06" class="mb-1" src="assets/img/logo-01.png" width="190" style="margin-top: 5px;">
           </div>
@@ -28,14 +28,14 @@
                   <p class="text-user">Password</p>
                 </div>
                 <div class="col-md-12 mt-2 input-field">
-                  <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path id="custom-stroke-red" d="M9 13V15V13ZM3 19H15C15.5304 19 16.0391 18.7893 16.4142 18.4142C16.7893 18.0391 17 17.5304 17 17V11C17 10.4696 16.7893 9.96086 16.4142 9.58579C16.0391 9.21071 15.5304 9 15 9H3C2.46957 9 1.96086 9.21071 1.58579 9.58579C1.21071 9.96086 1 10.4696 1 11V17C1 17.5304 1.21071 18.0391 1.58579 18.4142C1.96086 18.7893 2.46957 19 3 19ZM13 9V5C13 3.93913 12.5786 2.92172 11.8284 2.17157C11.0783 1.42143 10.0609 1 9 1C7.93913 1 6.92172 1.42143 6.17157 2.17157C5.42143 2.92172 5 3.93913 5 5V9H13Z" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>                  
-                  <input size="35" class="align-middle" [type]="showPass ? 'text' : 'password'" name="inputPass" id="inputPass" placeholder="Enter your password" ngModel required #pass>
-                  <svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg" (click)="onClickShowPass()" style="cursor: pointer;">
-                    <path id="custom-stroke-red" d="M12.8296 7.23077C12.8296 7.93898 12.5315 8.61819 12.0008 9.11898C11.4702 9.61976 10.7504 9.9011 9.99999 9.9011C9.24954 9.9011 8.52982 9.61976 7.99917 9.11898C7.46851 8.61819 7.1704 7.93898 7.1704 7.23077C7.1704 6.52255 7.46851 5.84334 7.99917 5.34256C8.52982 4.84178 9.24954 4.56044 9.99999 4.56044C10.7504 4.56044 11.4702 4.84178 12.0008 5.34256C12.5315 5.84334 12.8296 6.52255 12.8296 7.23077Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path id="custom-stroke-red" d="M1 7.23077C2.20163 3.61959 5.7773 1 10 1C14.2236 1 17.7984 3.61959 19 7.23077C17.7984 10.8419 14.2236 13.4615 10 13.4615C5.7773 13.4615 2.20163 10.8419 1 7.23077Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+                  <div class="row">
+                    <div class="svg-password"></div>
+                    <input size="33" class="align-middle" [type]="showPass ? 'text' : 'password'" name="inputPass" id="inputPass" placeholder="Enter your password" ngModel required #pass>
+                    <div class="mt-1 ml-2">
+                      <span *ngIf="!showPass" class="show-hide-pass" style="font-weight: bold;" (click)="onClickShowPass()">show</span>
+                      <span *ngIf="showPass" class="show-hide-pass" style="font-weight: bold;" (click)="onClickShowPass()">hide</span>  
+                    </div>
+                  </div>
                 </div>
               </div>
   

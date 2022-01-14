@@ -1,0 +1,25 @@
+<div class="white-background text-center">
+  <div class="card-img">
+      <img alt="element 06" class="mb-1" src="assets/img/rolepick-red.png" width="70" style="margin-top: 10px;">
+  </div>
+  <h2 class="text-title">Choose Your Role </h2>
+  <form class="form form-horizontal" name="enjiForm" [formGroup]="RolepickForm" #enjiForm="ngForm" novalidate
+    (ngSubmit)="enjiForm.form.valid && Save()">
+
+    <div class="text-left">
+      <p class="text-user">Office</p>
+    </div>
+    <div class="row mt-3 input-field">
+      <lib-ucdropdownsearch [dropdownSearchObj]="dropdownSearchObj" [parentForm]="RolepickForm"
+          [enjiForm]="enjiForm" [identifier]="'Office'"></lib-ucdropdownsearch>
+    </div>
+
+    <div class="form-group row mt-3">
+      <div class=" col-md-12">
+        <button type="submit" class="custom-pill-button">Choose Role</button>
+      </div>
+    </div>
+  </form>
+  <div class="form-group" class="mt-3">
+</div>
+  
