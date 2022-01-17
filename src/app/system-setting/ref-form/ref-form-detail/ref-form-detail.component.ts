@@ -284,14 +284,14 @@ export class RefFormDetailComponent implements OnInit {
 
     if (this.mode == "edit") {
       this.refFormObj.RowVersion = this.RefForm.controls.RowVersion.value;
-      this.http.post(URLConstant.EditRefFormData, this.refFormObj).subscribe(
+      this.http.post(URLConstant.EditRefFormData, this.refFormObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING], {});
 
         });
     } else {
-      this.http.post(URLConstant.AddRefFormData, this.refFormObj).subscribe(
+      this.http.post(URLConstant.AddRefFormData, this.refFormObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING], {});

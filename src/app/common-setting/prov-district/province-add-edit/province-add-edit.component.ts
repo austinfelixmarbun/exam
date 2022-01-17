@@ -8,6 +8,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-province-add-edit',
@@ -66,7 +67,7 @@ export class ProvinceAddEditComponent implements OnInit {
       this.refProvDistrictObj.ProvDistrictName = this.ProvinceForm.controls["ProvDistrictName"].value;
       this.refProvDistrictObj.IsActive = this.ProvinceForm.controls["IsActive"].value;
       this.refProvDistrictObj.Type = CommonConstant.RefProvDistrictTypePrv;
-      this.http.post(URLConstant.AddRefProvDistrict, this.refProvDistrictObj).subscribe(
+      this.http.post(URLConstant.AddRefProvDistrict, this.refProvDistrictObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REF_PROVINCE_PAGING],{});     
@@ -77,7 +78,7 @@ export class ProvinceAddEditComponent implements OnInit {
       this.refProvDistrictObj.RefProvDistrictId = this.refProvDistrictId;
       this.refProvDistrictObj.ProvDistrictName = this.ProvinceForm.controls["ProvDistrictName"].value;
       this.refProvDistrictObj.IsActive = this.ProvinceForm.controls["IsActive"].value;
-      this.http.post(URLConstant.EditRefProvDistrict, this.refProvDistrictObj).subscribe(
+      this.http.post(URLConstant.EditRefProvDistrict, this.refProvDistrictObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REF_PROVINCE_PAGING],{});   

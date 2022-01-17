@@ -849,7 +849,7 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
       this.vendorBranchObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
-      this.http.post<GenericObj>(URLConstant.EditVendorBranch, this.vendorBranchObj).subscribe(
+      this.http.post<GenericObj>(URLConstant.EditVendorBranch, this.vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_BRANCH_REG], { "VendorId": response.Id, "mode": "edit" });
@@ -857,7 +857,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     }
     else {
 
-      this.http.post<GenericObj>(URLConstant.AddVendorBranch, this.vendorBranchObj).subscribe(
+      this.http.post<GenericObj>(URLConstant.AddVendorBranch, this.vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_BRANCH_REG], { "VendorId": response.Id });

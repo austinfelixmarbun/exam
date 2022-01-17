@@ -91,7 +91,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
     }
     if (this.pageType == "add") {
       this.assetSchmHObj.RowVersion = "";
-      this.http.post(URLConstant.AddAssetSchmH, this.assetSchmHObj).subscribe(
+      this.http.post(URLConstant.AddAssetSchmH, this.assetSchmHObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_SCHM_PAGING],{});
@@ -102,7 +102,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
       this.assetSchmHObj.RowVersion = this.RowVersion;
       this.assetSchmHObj.AssetSchmCode = this.AssetSchmCode;
-      this.http.post(URLConstant.EditAssetSchmH, this.assetSchmHObj).subscribe(
+      this.http.post(URLConstant.EditAssetSchmH, this.assetSchmHObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_SCHM_PAGING],{});

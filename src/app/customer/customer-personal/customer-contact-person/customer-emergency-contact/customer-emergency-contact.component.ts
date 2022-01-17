@@ -320,7 +320,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.tempCustPersonalContactPerson.CustPersonalContactPersonId;
 
       this.custPersonalContactPersonObj.RowVersion = this.tempCustPersonalContactPerson.RowVersion;
-      await this.http.post(URLConstant.EditCustPersonalEmergencyContact, this.custPersonalContactPersonObj).toPromise().then(
+      await this.http.post(URLConstant.EditCustPersonalEmergencyContact, this.custPersonalContactPersonObj, AdInsConstant.SpinnerOptions).toPromise().then(
         response => {
           this.toastr.successMessage(response["Message"]);
           // this.wizard.goToNextStep();
@@ -330,7 +330,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
         }
       );
     } else {
-      await this.http.post(URLConstant.AddCustPersonalEmergencyContact, this.custPersonalContactPersonObj).toPromise().then(
+      await this.http.post(URLConstant.AddCustPersonalEmergencyContact, this.custPersonalContactPersonObj, AdInsConstant.SpinnerOptions).toPromise().then(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.isAdd = false;

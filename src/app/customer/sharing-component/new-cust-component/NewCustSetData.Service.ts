@@ -139,7 +139,7 @@ export class NewCustSetData {
   }
 
   public async SendCustomerDataToRabbitMq(CustNo: string, UrlBack: string = NavigationConstant.CUST_PAGING) {
-    await this.http.post(URLConstant.SendCustomerDataToRabbitMq, { CustNo: CustNo }).toPromise().then(
+    await this.http.post(URLConstant.SendCustomerDataToRabbitMq, { CustNo: CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (response["StatusCode"] == 200) {
           this.toastr.successMessage("Sync Customer Succses");

@@ -62,7 +62,7 @@ export class ReviewUploadAssetMasterPagingComponent implements OnInit {
     wfObj.TaskListId = environment.isCore? ev.RowObj.ProcessInstanceId : ev.RowObj.TaskListId;
     wfObj.TransactionNo = ev.RowObj.UploadNo;
     wfObj.ListValue = { "Status": "RJC" };
-    this.http.post(CancelUrl, wfObj).subscribe(
+    this.http.post(CancelUrl, wfObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

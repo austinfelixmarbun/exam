@@ -10,6 +10,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-journal-group-fact',
@@ -168,7 +169,7 @@ export class JournalGroupFactComponent implements OnInit {
     }
 
     if (this.JrMGroupId != null) {
-      this.http.post<any>(URLConstant.SaveJrMGroupDFact, request).subscribe(
+      this.http.post<any>(URLConstant.SaveJrMGroupDFact, request, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_GROUP], { JrMHeaderId: this.JrMHeaderId })

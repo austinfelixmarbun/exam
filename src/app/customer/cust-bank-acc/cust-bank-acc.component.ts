@@ -12,6 +12,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { CustBankAccObj } from 'app/shared/model/cust-bank-acc-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-cust-bank-acc',
@@ -234,7 +235,7 @@ export class CustBankAccComponent implements OnInit {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       let reqObj: GenericObj = new GenericObj();
       reqObj.Id = CustBankAccId;
-      this.http.post(URLConstant.DeleteCustBankAccAndStmnt, reqObj).subscribe(
+      this.http.post(URLConstant.DeleteCustBankAccAndStmnt, reqObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.GetCustBankAccList();
@@ -269,7 +270,7 @@ export class CustBankAccComponent implements OnInit {
     }
 
     if (this.Mode != "Edit") {
-      this.http.post(URLConstant.AddCustBankAcc, this.BankAccObj).subscribe(
+      this.http.post(URLConstant.AddCustBankAcc, this.BankAccObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.OutputObj.emit({ Key: 'IsDetail', Value: false });
@@ -277,7 +278,7 @@ export class CustBankAccComponent implements OnInit {
           enjiForm.resetForm();
         });
     } else {
-      this.http.post(URLConstant.EditCustBankAcc, this.BankAccObj).subscribe(
+      this.http.post(URLConstant.EditCustBankAcc, this.BankAccObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.OutputObj.emit({ Key: 'IsDetail', Value: false });

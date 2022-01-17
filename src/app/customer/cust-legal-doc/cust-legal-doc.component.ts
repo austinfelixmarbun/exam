@@ -11,6 +11,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { String } from 'typescript-string-operations';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 @Component({
@@ -136,7 +137,7 @@ export class CustLegalDocComponent implements OnInit {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       let reqObj: GenericObj = new GenericObj();
       reqObj.Id = custCompanyLegalDocId
-      this.httpClient.post(URLConstant.DeleteCustCompanyLegalDoc, reqObj).subscribe(
+      this.httpClient.post(URLConstant.DeleteCustCompanyLegalDoc, reqObj, AdInsConstant.SpinnerOptions).subscribe(
         (response: any) => {
           this.custLegalDocs.splice(idx, 1);
           this.toastr.successMessage(response["message"]);

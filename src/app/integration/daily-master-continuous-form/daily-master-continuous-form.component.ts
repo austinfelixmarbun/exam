@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { RequestDateObj } from 'app/shared/model/integration/request-date-obj.model';
@@ -45,7 +46,7 @@ export class DailyMasterContinuousFormComponent implements OnInit {
   ReqForm() {
     var reqDt: RequestDateObj = this.DateForm.getRawValue();
 
-    this.http.post(URLConstant.SendMasterDailyToRabbitMq, reqDt).subscribe(
+    this.http.post(URLConstant.SendMasterDailyToRabbitMq, reqDt, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
       this.toastr.successMessage(response['message']);
     });

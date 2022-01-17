@@ -8,6 +8,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-district-add-edit',
@@ -86,7 +87,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.refProvDistrictObj.PhnArea = this.DistrictForm.controls["PhnArea"].value;
       this.refProvDistrictObj.ParentId = this.parentId;
       this.refProvDistrictObj.Type = CommonConstant.RefProvDistrictTypeDis;
-      this.http.post(URLConstant.AddRefProvDistrict, this.refProvDistrictObj).subscribe(
+      this.http.post(URLConstant.AddRefProvDistrict, this.refProvDistrictObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);  
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_DISTRICT_PAGING],{"refProvDistrictId": this.parentId});     
@@ -100,7 +101,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.refProvDistrictObj.IsActive = this.DistrictForm.controls["IsActive"].value;
       this.refProvDistrictObj.PhnArea = this.DistrictForm.controls["PhnArea"].value;
       this.refProvDistrictObj.Type =  CommonConstant.RefProvDistrictTypeDis;
-      this.http.post(URLConstant.EditRefProvDistrict, this.refProvDistrictObj).subscribe(
+      this.http.post(URLConstant.EditRefProvDistrict, this.refProvDistrictObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);  
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_DISTRICT_PAGING],{"refProvDistrictId": this.parentId});       

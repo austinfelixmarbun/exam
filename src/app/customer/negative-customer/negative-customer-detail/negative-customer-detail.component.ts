@@ -617,7 +617,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
 
     // This Code Is Temporary Due to Negative Customer Approval Is Not Ready At The Moment
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.AddNegativeCustomer, negativeCustFormData).pipe(
+      this.httpClient.post(URLConstant.AddNegativeCustomer, negativeCustFormData, AdInsConstant.SpinnerOptions).pipe(
         map((response) => {
           return response;
         }),
@@ -635,7 +635,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
           negativeCustChangeTrxObj.ApvDt = new Date();
           negativeCustChangeTrxObj.ExeDt = new Date();
 
-          const addNegativeCustChangeTrx = this.httpClient.post(URLConstant.AddNegativeCustChangeTrx, negativeCustChangeTrxObj);
+          const addNegativeCustChangeTrx = this.httpClient.post(URLConstant.AddNegativeCustChangeTrx, negativeCustChangeTrxObj, AdInsConstant.SpinnerOptions);
           var tempResponse = [response];
           return forkJoin([tempResponse, addNegativeCustChangeTrx]);
         })
@@ -648,7 +648,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
       );
     }
     else if (this.pageType == "edit") {
-      this.httpClient.post(URLConstant.EditNegativeCustomer, negativeCustFormData).pipe(
+      this.httpClient.post(URLConstant.EditNegativeCustomer, negativeCustFormData, AdInsConstant.SpinnerOptions).pipe(
         map((response) => {
           return response;
         }),
@@ -666,7 +666,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
           negativeCustChangeTrxObj.ApvDt = new Date();
           negativeCustChangeTrxObj.ExeDt = new Date();
 
-          const addNegativeCustChangeTrx = this.httpClient.post(URLConstant.AddNegativeCustChangeTrx, negativeCustChangeTrxObj);
+          const addNegativeCustChangeTrx = this.httpClient.post(URLConstant.AddNegativeCustChangeTrx, negativeCustChangeTrxObj, AdInsConstant.SpinnerOptions);
           var tempResponse = [response];
           return forkJoin([tempResponse, addNegativeCustChangeTrx]);
         })

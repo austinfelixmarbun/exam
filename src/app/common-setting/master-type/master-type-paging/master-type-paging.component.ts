@@ -89,7 +89,7 @@ export class MasterTypePagingComponent implements OnInit {
       this.deleteUrl = URLConstant.DeleteRefRole;
       this.refRoleObj = new RefRoleObj();
       this.refRoleObj.RefRoleId = +id;
-      this.https.post(this.deleteUrl, this.refRoleObj).subscribe(
+      this.https.post(this.deleteUrl, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.service.successMessage(response['message']);
           var order = null;

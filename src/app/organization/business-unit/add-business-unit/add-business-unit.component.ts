@@ -7,6 +7,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
     selector: 'add-app-business-unit',
@@ -68,14 +69,14 @@ export class AddBusinessUnitComponent implements OnInit {
             this.bizUnitObj.BizUnitCode = this.result.BizUnitCode;
             this.bizUnitObj.RefBizUnitId = this.RefBizUnitId;
 
-            this.http.post(URLConstant.EditRefBizUnit, this.bizUnitObj).subscribe(
+            this.http.post(URLConstant.EditRefBizUnit, this.bizUnitObj, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     this.toastr.successMessage(response["message"]);
                     AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ORG_BZ_UNIT],{});
                 });
         }
         else {
-            this.http.post(URLConstant.AddRefBizUnit, this.bizUnitObj).subscribe(
+            this.http.post(URLConstant.AddRefBizUnit, this.bizUnitObj, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     this.toastr.successMessage(response["message"]);
                     AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ORG_BZ_UNIT],{});

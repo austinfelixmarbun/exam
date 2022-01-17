@@ -7,6 +7,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-journal-group',
@@ -123,7 +124,7 @@ export class JournalGroupComponent implements OnInit {
     }
 
     if (this.JrMHeaderId != null) {
-      this.http.post<any>(URLConstant.SaveJrMGroup, request).subscribe(
+      this.http.post<any>(URLConstant.SaveJrMGroup, request, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})

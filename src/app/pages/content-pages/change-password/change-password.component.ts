@@ -10,6 +10,7 @@ import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-ob
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-change-password',
@@ -67,7 +68,7 @@ export class ChangePasswordComponent implements OnInit {
         this.username = context[CommonConstant.USER_NAME];
       }
       var requestObj = { "Username": this.username, "Password": password, "NewPassword": newpassword };
-      this.http.post(URLConstant.ChangePasswordRefUserByUsername, requestObj).subscribe(
+      this.http.post(URLConstant.ChangePasswordRefUserByUsername, requestObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           if (response["Message"] == "Success") {
             this.toastr.successMessage(response["message"]);

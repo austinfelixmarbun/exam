@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-ucgridview',
@@ -106,7 +107,7 @@ export class UcgridviewComponent implements OnInit {
     if (confirm("Are you sure to delete this record?")) {
       var delId = {};
       delId[key] = value;
-      this.http.post(this.gridInput.deleteUrl, delId).subscribe(
+      this.http.post(this.gridInput.deleteUrl, delId, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.success(response['message'], 'Success!');
           this.searchPagination(this.pageNow);

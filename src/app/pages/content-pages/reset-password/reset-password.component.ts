@@ -8,6 +8,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 
@@ -61,7 +62,7 @@ export class ResetPasswordComponent implements OnInit {
         NewPassword: this.ResetPassForm.controls["NewPassword"].value,
         Password: "-",
       };
-      this.http.post(URLConstant.ResetPasswordByUsername, requestObj).subscribe(
+      this.http.post(URLConstant.ResetPasswordByUsername, requestObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.isCompleted = true;

@@ -5,6 +5,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { RefTaxOfficeObj } from 'app/shared/model/common-setting/ref-tax-office-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
@@ -92,7 +93,7 @@ export class TaxOfficeDetailComponent implements OnInit {
       this.refTaxOfficeObj.RefTaxOfficeId = this.refTaxOfficeId;
     }
 
-    this.http.post(urlAddEdit, this.refTaxOfficeObj).subscribe(
+    this.http.post(urlAddEdit, this.refTaxOfficeObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.RedirectPaging();

@@ -10,6 +10,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-contact-person-add-edit',
@@ -166,7 +167,7 @@ export class ContactPersonAddEditComponent implements OnInit {
       this.contactPersonObj.Zipcode = this.zipcode;
       this.contactPersonObj.RowVersion = this.result.RowVersion;
       
-      this.http.post(URLConstant.EditVendorContactPerson, this.contactPersonObj).subscribe(
+      this.http.post(URLConstant.EditVendorContactPerson, this.contactPersonObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.HiddenCheck();
           this.toastr.successMessage(response['message']);
@@ -191,7 +192,7 @@ export class ContactPersonAddEditComponent implements OnInit {
 
       this.contactPersonObj.VendorContactPersonId = 0;
       this.contactPersonObj.RowVersion = "";
-      this.http.post(URLConstant.AddVendorContactPerson, this.contactPersonObj).subscribe((response) => {
+      this.http.post(URLConstant.AddVendorContactPerson, this.contactPersonObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
         this.toastr.successMessage(response['message']);
         this.HiddenCheck();
       });

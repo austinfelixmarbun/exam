@@ -8,6 +8,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { RefAppSrcObj } from 'app/shared/model/ref-app-src-obj.model';
 import { formatDate } from '@angular/common';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-app-source-add-edit',
@@ -94,7 +95,7 @@ export class AppSourceAddEditComponent implements OnInit {
       this.rasObj.PeriodTo = this.AppSourceForm.controls["PeriodTo"].value;
       this.rasObj.MaxApvDt = this.AppSourceForm.controls["MaxApvDt"].value;
       this.rasObj.IsActive = this.AppSourceForm.controls["IsActive"].value;
-      this.http.post(URLConstant.AddRefAppSrc, this.rasObj).subscribe(
+      this.http.post(URLConstant.AddRefAppSrc, this.rasObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           //this.router.navigate(["/CommonSetting/AppSource/Paging"], { queryParams: { "RefAppSrcId": this.rasObj.RefAppSrcId } });
@@ -110,7 +111,7 @@ export class AppSourceAddEditComponent implements OnInit {
       this.rasObj.PeriodTo = this.AppSourceForm.controls["PeriodTo"].value;
       this.rasObj.MaxApvDt = this.AppSourceForm.controls["MaxApvDt"].value;
       this.rasObj.IsActive = this.AppSourceForm.controls["IsActive"].value;
-      this.http.post(URLConstant.EditRefAppSrc, this.rasObj).subscribe(
+      this.http.post(URLConstant.EditRefAppSrc, this.rasObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           //this.router.navigate(["/CommonSetting/AppSource/Paging"], { queryParams: { "RefAppSrcId": this.rasObj.RefAppSrcId } });

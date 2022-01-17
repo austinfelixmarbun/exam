@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { environment } from 'environments/environment';
 import { CurrentUserContextService } from 'app/shared/current-user-context/current-user-context.service';
@@ -63,9 +63,13 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+  SpinnerHeaders = new HttpHeaders({
+    'IsLoading': "true"
+  });
+  SpinnerOptions = { headers: this.SpinnerHeaders, withCredentials: true };
   async ngOnInit() {
     if (this.token != null) {
-      await this.http.post(AdInsConstant.LoginWithToken, {ModuleCode: environment.Module},  {withCredentials: true}).toPromise().then(
+      await this.http.post(AdInsConstant.LoginWithToken, { ModuleCode: environment.Module }, this.SpinnerOptions).toPromise().then(
         async (response) => {
           var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
           AdInsHelper.SetCookie(this.cookieService, "BusinessDateRaw", formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US'));
@@ -83,7 +87,7 @@ export class LoginPageComponent implements OnInit {
         }
       );
     }
-    else{
+    else {
       this.http.post(URLConstant.GetOtpProperties, {}).subscribe(
         (response) => {
           this.otpProperties = response;
@@ -99,7 +103,7 @@ export class LoginPageComponent implements OnInit {
     var requestObj = { "Username": username, "Password": password };
     //this.rolePickService.openDialog(data.returnObject);
 
-    this.http.post(AdInsConstant.LoginV2, requestObj).subscribe(
+    this.http.post(AdInsConstant.LoginV2, requestObj, AdInsConstant.SpinnerOptions).subscribe(
       async (response) => {
         if (response["StatusCode"] == CommonConstant.STATUS_CODE_USER_LOCKED) {
           this.mode = "locked";
@@ -107,13 +111,13 @@ export class LoginPageComponent implements OnInit {
         else {
           //this.cookieService.put("username", username);
 
-          await this.http.post(AdInsConstant.GetListJobTitleByUsernameAndModule, {UserName : username, Module : environment.Module}).toPromise().then(
+          await this.http.post(AdInsConstant.GetListJobTitleByUsernameAndModule, { UserName: username, Module: environment.Module }).toPromise().then(
             (response) => {
               this.loginObj.response = response["ListOfficeRoleJobTitle"];
             });
           this.loginObj.user = username;
           this.loginObj.pwd = password;
-          
+
           await this.http.post<any>(URLConstant.GetUserEmpByUsername, requestObj).toPromise().then(
             (response) => {
               this.result = response;
@@ -122,10 +126,10 @@ export class LoginPageComponent implements OnInit {
                 this.router.navigate([NavigationConstant.PAGES_CHANGE_PASSWORD], { queryParams: { "Username": username } });
               }
               else {
-                if(this.otpProperties['IsUseOtp']){
+                if (this.otpProperties['IsUseOtp']) {
                   this.sendOtp();
                 }
-                else{
+                else {
                   this.selectRole();
                 }
               }
@@ -136,25 +140,25 @@ export class LoginPageComponent implements OnInit {
     );
   }
 
-  onSubmitOtp(){
-    if(this.onGoingTimer >= this.otpProperties.ExpiredTimeOTP){
-      this.toastr.errorMessage("OTP code has expired, please regenerate OTP code!"); 
+  onSubmitOtp() {
+    if (this.onGoingTimer >= this.otpProperties.ExpiredTimeOTP) {
+      this.toastr.errorMessage("OTP code has expired, please regenerate OTP code!");
     }
-    else if(this.otpInputRef.nativeElement.value != ""){
+    else if (this.otpInputRef.nativeElement.value != "") {
       let reqConfirmOtpObj = {
-        Username:this.result.Username, 
+        Username: this.result.Username,
         Counter: this.counterOtp,
         InputOtp: this.otpInputRef.nativeElement.value,
         IsLastAttempt: this.otpConfirmCount >= this.otpProperties['MaxAttempOTP'] ? true : false
       }
 
-      this.http.post<any>(URLConstant.ConfirmOtp, reqConfirmOtpObj).subscribe(
+      this.http.post<any>(URLConstant.ConfirmOtp, reqConfirmOtpObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
-          if(response.IsOtpMatch){
+          if (response.IsOtpMatch) {
             this.selectRole();
           }
-          else{
-            this.isInvalidOtp = true;       
+          else {
+            this.isInvalidOtp = true;
           }
           this.otpConfirmCount++;
         },
@@ -165,7 +169,7 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
-  onRegenerateClick(){
+  onRegenerateClick() {
     this.counterOtp = -1;
     this.sendOtp();
     this.isInvalidOtp = false;
@@ -180,13 +184,13 @@ export class LoginPageComponent implements OnInit {
     this.router.navigate(['register'], { relativeTo: this.route.parent });
   }
 
-  sendOtp(){
-    this.http.post<any>(URLConstant.SendOtp, {Counter: this.counterOtp, Username: this.result.Username}).subscribe(
+  sendOtp() {
+    this.http.post<any>(URLConstant.SendOtp, { Counter: this.counterOtp, Username: this.result.Username }, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response.msg);
         this.counterOtp = response.Counter;
         this.resetTimer();
-        if(this.mode != "otp"){
+        if (this.mode != "otp") {
           this.mode = "otp";
         }
       },
@@ -196,7 +200,7 @@ export class LoginPageComponent implements OnInit {
     );
   }
 
-  selectRole(){
+  selectRole() {
     this.rolePickService.openDialog(this.loginObj);
     let object2 = {
       Usernames: [
@@ -207,16 +211,16 @@ export class LoginPageComponent implements OnInit {
       Title: "Password Expiration",
       Type: "Notification"
     };
-    this.http.post(URLConstant.SendNotificationRemainingPasswordExpirationDaysToUser, object2).subscribe();    
+    this.http.post(URLConstant.SendNotificationRemainingPasswordExpirationDaysToUser, object2, AdInsConstant.SpinnerOptions).subscribe();
   }
 
   startTimer() {
     this.timer = setInterval(() => {
       this.onGoingTimer++
-    },1000)
+    }, 1000)
   }
 
-  resetTimer(){
+  resetTimer() {
     clearInterval(this.timer);
     this.onGoingTimer = 0
     this.startTimer();

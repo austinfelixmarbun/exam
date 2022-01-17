@@ -15,6 +15,7 @@ import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { AddressService } from 'app/shared/services/custAddr.service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-customer-company-address-add',
@@ -240,7 +241,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     this.custAddressObj = new CustAddrObj();
     this.setCustAddr();
     if (this.pageType == "add") {
-      this.http.post(URLConstant.AddCustAddr, this.custAddressObj).subscribe(
+      this.http.post(URLConstant.AddCustAddr, this.custAddressObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputValue.emit({ mode: 'check' });
@@ -250,7 +251,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     else {
       this.custAddressObj.CustAddrId = this.AddrId;
       this.custAddressObj.RowVersion = this.copyCustomerAddr.RowVersion;
-      this.http.post(URLConstant.EditCustAddr, this.custAddressObj).subscribe(
+      this.http.post(URLConstant.EditCustAddr, this.custAddressObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.outputValue.emit({ mode: 'check' });

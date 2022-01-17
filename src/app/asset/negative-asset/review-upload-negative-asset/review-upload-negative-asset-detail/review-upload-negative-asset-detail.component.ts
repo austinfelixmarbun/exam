@@ -64,7 +64,7 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
     wfObj.ListValue["Status"] = "RJC";
     wfObj.ListValue["WfCode"] = CommonConstant.WorkflowUploadNegativeAsset;
     wfObj.ListValue["TaskId"] = this.taskListId;
-    this.http.post(CancelUrl, wfObj).subscribe(
+    this.http.post(CancelUrl, wfObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -81,7 +81,7 @@ export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
     uploadObj.MrUploadStatusCode = status;
     uploadObj.TaskListId = this.taskListId;
     uploadObj.UploadMonitoringNo = this.uploadNo;
-    this.http.post(urlPost, uploadObj).subscribe(
+    this.http.post(urlPost, uploadObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_NEG_RVW_UPLOAD_PAGING],{});

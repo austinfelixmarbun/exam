@@ -118,7 +118,7 @@ export class UploadMonitoringComponent implements OnInit {
     if (confirm('Are you sure to delete this record?')) {
       this.empObj = new RefEmpObj();
       // this.empObj.refEmpId = refEmpId;
-      this.http.post(this.deleteUrl, this.empObj).subscribe(
+      this.http.post(this.deleteUrl, this.empObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           this.searchPagination(this.pageNow);

@@ -9,6 +9,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-holiday-detail-add',
@@ -58,7 +59,7 @@ export class HolidayDetailAddComponent implements OnInit {
       this.holidayDetailObj.HolidayDt = this.HolidayListForm.controls.Date.value;
       this.holidayDetailObj.Descr = this.HolidayListForm.controls.Descr.value;
 
-      this.http.post(URLConstant.AddHolidaySchmD, this.holidayDetailObj).subscribe((response) => {
+      this.http.post(URLConstant.AddHolidaySchmD, this.holidayDetailObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId });
         this.toastr.successMessage(response['message']);
       });
@@ -91,7 +92,7 @@ export class HolidayDetailAddComponent implements OnInit {
       if (this.HolidayListForm.controls.Saturday.value) {
         this.holidayDetailByYearObj.DictOfDays.push("Saturday");
       }
-      this.http.post(URLConstant.AddHolidaySchmDUntilYear, this.holidayDetailByYearObj).subscribe((response) => {
+      this.http.post(URLConstant.AddHolidaySchmDUntilYear, this.holidayDetailByYearObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
         this.toastr.successMessage(response['message']);
       });

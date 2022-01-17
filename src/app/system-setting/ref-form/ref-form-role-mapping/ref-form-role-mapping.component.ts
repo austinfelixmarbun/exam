@@ -70,7 +70,7 @@ export class RefFormRoleMappingComponent implements OnInit {
       this.listAuthFormObj.ListAuthFormObj.push(this.AuthFormObj);
     }
 
-    this.http.post(URLConstant.AddListAuthForm, this.listAuthFormObj).subscribe(
+    this.http.post(URLConstant.AddListAuthForm, this.listAuthFormObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_REF_FORM_ROLE_MAP],{ "RefFormId": this.RefFormId });

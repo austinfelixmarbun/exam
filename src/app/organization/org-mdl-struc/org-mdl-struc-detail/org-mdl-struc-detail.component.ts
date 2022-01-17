@@ -186,7 +186,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
                   this.orgMdlStrucObj.isActive = CommonConstant.FALSE_CONDITION;
                 }
 
-                this.httpClient.post(this.apiUrl, this.orgMdlStrucObj).subscribe(
+                this.httpClient.post(this.apiUrl, this.orgMdlStrucObj, AdInsConstant.SpinnerOptions).subscribe(
                   response => {
                     this.service.typeSave(response["message"]);
                     this.location.back();
@@ -209,7 +209,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
                 } else {
                   this.orgMdlStrucObj.isActive = CommonConstant.FALSE_CONDITION;
                 }
-                this.httpClient.post(this.apiUrl, this.orgMdlStrucObj).subscribe(
+                this.httpClient.post(this.apiUrl, this.orgMdlStrucObj, AdInsConstant.SpinnerOptions).subscribe(
                   response => {
                     this.service.typeSave(response["message"]);
                     this.location.back();
@@ -240,7 +240,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
             this.orgMdlStrucObj.isActive = CommonConstant.FALSE_CONDITION;
           }
 
-          this.httpClient.post(this.apiUrl, this.orgMdlStrucObj).subscribe(
+          this.httpClient.post(this.apiUrl, this.orgMdlStrucObj, AdInsConstant.SpinnerOptions).subscribe(
             response => {
               this.service.typeSave(response["message"]);
               this.location.back();
@@ -262,7 +262,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
           } else {
             this.orgMdlStrucObj.isActive = CommonConstant.FALSE_CONDITION;
           }
-          this.httpClient.post(this.apiUrl, this.orgMdlStrucObj).subscribe(
+          this.httpClient.post(this.apiUrl, this.orgMdlStrucObj, AdInsConstant.SpinnerOptions).subscribe(
             response => {
               this.service.typeSave(response["message"]);
               this.location.back();

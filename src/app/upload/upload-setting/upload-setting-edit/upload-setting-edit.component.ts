@@ -150,7 +150,7 @@ export class UploadSettingEditComponent implements OnInit {
     this.spinner.show();
 
     this.apiUrl = this.foundationUrl + URLConstant.AssignRoleToUploadSetting;
-    this.httpClient.post(this.apiUrl, assignRoleToUpload).subscribe(
+    this.httpClient.post(this.apiUrl, assignRoleToUpload, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
 
         this.service.typeSave('Assign Role to Upload Setting Success');

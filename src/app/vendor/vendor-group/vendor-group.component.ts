@@ -104,7 +104,7 @@ export class VendorGroupComponent implements OnInit {
     this.vendorGrpObj.RowVersion = "";
 
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.AddVendorGrp, this.vendorGrpObj).subscribe(
+      this.httpClient.post(URLConstant.AddVendorGrp, this.vendorGrpObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode });
@@ -115,7 +115,7 @@ export class VendorGroupComponent implements OnInit {
       this.vendorGrpObj.VendorGrpId = this.resultData.VendorGrpId;
       this.vendorGrpObj.RowVersion = this.resultData.RowVersion;
 
-      this.httpClient.post(URLConstant.EditVendorGrp, this.vendorGrpObj).subscribe(
+      this.httpClient.post(URLConstant.EditVendorGrp, this.vendorGrpObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode });

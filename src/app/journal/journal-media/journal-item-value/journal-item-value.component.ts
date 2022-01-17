@@ -7,6 +7,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-journal-item-value',
@@ -111,7 +112,7 @@ export class JournalItemValueComponent implements OnInit {
     }
 
     if (this.JrMGroupId != null) {
-      this.http.post<any>(URLConstant.SaveJrMItemValue, request).subscribe(
+      this.http.post<any>(URLConstant.SaveJrMItemValue, request, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_GROUP], { JrMHeaderId: this.JrMHeaderId })

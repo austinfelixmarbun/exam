@@ -39,7 +39,7 @@ export class RequestNewPasswordComponent implements OnInit {
     {
       UserName: this.ReqPassForm.controls["Username"].value
     };
-    this.http.post(URLConstant.RequestNewPassword, requestObj).subscribe(
+    this.http.post(URLConstant.RequestNewPassword, requestObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.censoredEmail = response["CensoredEmail"];
         this.isRequested = true;

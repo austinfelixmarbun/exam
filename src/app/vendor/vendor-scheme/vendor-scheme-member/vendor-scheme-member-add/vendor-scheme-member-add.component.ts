@@ -62,7 +62,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
       VendorId: this.listSelectedId
     }
 
-    this.http.post(URLConstant.AddVendorSchmMember, obj).subscribe(
+    this.http.post(URLConstant.AddVendorSchmMember, obj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.success(response["message"], 'Success!');
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_SCHM_MBR],{ "VendorSchmId" : this.VendorSchmId, "MrVendorCategoryCode": this.MrVendorCategoryCode });

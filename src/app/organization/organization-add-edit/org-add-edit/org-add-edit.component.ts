@@ -9,6 +9,7 @@ import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { URLConstant } from "app/shared/constant/URLConstant";
 import { AdInsHelper } from "app/shared/AdInsHelper";
+import { AdInsConstant } from "app/shared/AdInstConstant";
 
 @Component({
   selector: "app-org-add-edit",
@@ -84,7 +85,7 @@ export class OrgAddEditComponent implements OnInit {
           response => {
             this.orgObj.hierarchyNo = +response["returnObject"].hierarchyNo + 1;
             //SAVE
-            this.http.post(this.apiUrl, this.orgObj).subscribe(
+            this.http.post(this.apiUrl, this.orgObj, AdInsConstant.SpinnerOptions).subscribe(
               response => {
                 this.service.successMessage(response["message"]);
                 AdInsHelper.RedirectUrl(this.router,["/organization/organization"],{});
@@ -118,7 +119,7 @@ export class OrgAddEditComponent implements OnInit {
             this.orgObj.hierarchyNo = +response["returnObject"].hierarchyNo + 1;
 
             //SAVE
-            this.http.post(this.apiUrl, this.orgObj).subscribe(
+            this.http.post(this.apiUrl, this.orgObj, AdInsConstant.SpinnerOptions).subscribe(
               response => {
                 this.service.typeSave(response["message"]);
                 AdInsHelper.RedirectUrl(this.router,["/organization/organization"],{});
@@ -144,7 +145,7 @@ export class OrgAddEditComponent implements OnInit {
     this.orgObj = new OrganizationObj();
     this.orgObj.refOrgId = +this.param;
 
-    this.http.post(this.apiUrl, this.orgObj).subscribe(
+    this.http.post(this.apiUrl, this.orgObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.orgObj = response["returnObject"];
 

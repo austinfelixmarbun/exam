@@ -16,6 +16,7 @@ import { RefProfessionObj } from 'app/shared/model/ref-profession-obj.model';
 import { CustAttrContentObj } from 'app/shared/model/new-cust/cust-attr-content-obj.model';
 import { CustAttrListComponent } from '../cust-attr-list/cust-attr-list.component';
 import { NewCustSetData } from '../sharing-component/new-cust-component/NewCustSetData.Service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-cust-attr-section',
@@ -166,7 +167,7 @@ export class CustAttrSectionComponent implements OnInit {
         RCustOtherInfoObj: custOtherInfo
       };
 
-      await this.httpClient.post(this.getUrlSave(), RequestAppCustOtherInfoObj).toPromise().then(
+      await this.httpClient.post(this.getUrlSave(), RequestAppCustOtherInfoObj, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["Message"]);
 

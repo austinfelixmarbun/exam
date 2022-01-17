@@ -10,6 +10,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'add-zipcode',
@@ -92,7 +93,7 @@ export class ZipcodeAddComponent implements OnInit {
     }
     if (this.pageType == "add") {
       this.rzcObj.RowVersion = "";
-      this.http.post(URLConstant.AddRefZipcodeV2, this.rzcObj).subscribe(
+      this.http.post(URLConstant.AddRefZipcodeV2, this.rzcObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ZIPCODE_PAGING],{});
@@ -101,7 +102,7 @@ export class ZipcodeAddComponent implements OnInit {
     } else {
       this.rzcObj.RefZipcodeId = this.refZipcodeId;
       this.rzcObj.RowVersion = this.resultData.RowVersion;
-      this.http.post(URLConstant.EditRefZipcodeV2, this.rzcObj).subscribe(
+      this.http.post(URLConstant.EditRefZipcodeV2, this.rzcObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ZIPCODE_PAGING],{});

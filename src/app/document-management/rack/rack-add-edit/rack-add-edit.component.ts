@@ -9,6 +9,7 @@ import { environment } from 'environments/environment';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CabinetObj } from 'app/shared/model/document-management/cabinet-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-rack-add-edit',
@@ -93,7 +94,7 @@ export class RackAddEditComponent implements OnInit {
     if(this.Mode === 'Edit'){
       this.rack.CabinetId = this.cabinetWithRackObj.CabinetId;
       this.rack.CurrentRackCode = this.RackCode;
-      this.http.post(URLConstant.EditRack, this.rack).subscribe(
+      this.http.post(URLConstant.EditRack, this.rack, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");
           this.router.navigate([NavigationConstant.DOC_MNGMNT_RACK_PAGING], { queryParams: { CabinetCode: this.CabinetCode } });
@@ -106,7 +107,7 @@ export class RackAddEditComponent implements OnInit {
     else {
       this.rack.CabinetCode = this.CabinetCode;
       this.rack.CabinetId = this.Cabinet.CabinetId;
-      this.http.post(URLConstant.AddRack, this.rack).subscribe(
+      this.http.post(URLConstant.AddRack, this.rack, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");
           this.router.navigate([NavigationConstant.DOC_MNGMNT_RACK_PAGING], { queryParams: { CabinetCode: this.CabinetCode } });

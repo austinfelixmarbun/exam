@@ -21,6 +21,7 @@ import { VerfResultHObj } from 'app/shared/model/verf-result-h-obj.model';
 import { VerfResultObj } from 'app/shared/model/verf-result-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CookieService } from 'ngx-cookie';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-survey-task-result-detail',
@@ -144,7 +145,7 @@ export class SurveyTaskResultDetailComponent implements OnInit {
       this.addVerifResultObj.LobName = this.LobCode;
       this.addVerifResultObj.Notes = "-";
 
-      await this.http.post(URLConstant.AddVerfResult, this.addVerifResultObj).toPromise().then(
+      await this.http.post(URLConstant.AddVerfResult, this.addVerifResultObj, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           this.VerfResultId = response["Id"];
         }
@@ -357,7 +358,7 @@ export class SurveyTaskResultDetailComponent implements OnInit {
         this.setSurveyVerifData();
         this.ReqSrvyTaskAndAddVerfResultHDObj.SrvyTaskId = this.SrvyTaskId;
         this.ReqSrvyTaskAndAddVerfResultHDObj.VerfResultHD = this.VerfResultHD;
-        this.http.post(URLConstant.UpdateSrvyTaskAndAddVerfResultH, this.ReqSrvyTaskAndAddVerfResultHDObj).subscribe(
+        this.http.post(URLConstant.UpdateSrvyTaskAndAddVerfResultH, this.ReqSrvyTaskAndAddVerfResultHDObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
 
@@ -371,7 +372,7 @@ export class SurveyTaskResultDetailComponent implements OnInit {
         this.ReqSrvyTaskAndAddVerfResultHDObj.SrvyTaskId = this.SrvyTaskId;
         this.ReqSrvyTaskAndAddVerfResultHDObj.VerfResultHD = this.VerfResultHD;
         this.ReqSrvyTaskAndAddVerfResultHDObj.VerfResultHD.VerfResultHId = this.ResVerfResultHObj.VerfResultHId;
-        this.http.post(URLConstant.UpdateSrvyTaskAndEditVerfResultH, this.ReqSrvyTaskAndAddVerfResultHDObj).subscribe(
+        this.http.post(URLConstant.UpdateSrvyTaskAndEditVerfResultH, this.ReqSrvyTaskAndAddVerfResultHDObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
 

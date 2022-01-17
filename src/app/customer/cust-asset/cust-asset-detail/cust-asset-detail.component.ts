@@ -8,6 +8,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { CustAssetObj } from 'app/shared/model/cust-asset-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-cust-asset-detail',
@@ -90,7 +91,7 @@ export class CustAssetDetailComponent implements OnInit {
     else{
       url = URLConstant.AddCustAsset;
     }
-    this.httpClient.post(url, formValue).toPromise().then(
+    this.httpClient.post(url, formValue, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.activeModal.close(response);
       }

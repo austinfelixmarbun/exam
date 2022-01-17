@@ -86,7 +86,7 @@ export class MasterTypeAddEditComponent implements OnInit {
             this.refRoleObj.IsActive = RoleAddEditForm.value.isActive;
 
             //SAVE
-            this.httpClient.post(URLConstant.AddRefRole, this.refRoleObj).subscribe(
+            this.httpClient.post(URLConstant.AddRefRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
               (response) => {
                 this.service.typeSave(ExceptionConstant.SAVE_SUCCESSED);
                 this.location.back();
@@ -115,7 +115,7 @@ export class MasterTypeAddEditComponent implements OnInit {
       this.refRoleObj.IsActive = RoleAddEditForm.value.isActive;
 
       //SAVE
-      this.httpClient.post(URLConstant.EditRefRole, this.refRoleObj).subscribe(
+      this.httpClient.post(URLConstant.EditRefRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.service.typeSave(ExceptionConstant.EDIT_SUCCESSED);
           this.location.back();

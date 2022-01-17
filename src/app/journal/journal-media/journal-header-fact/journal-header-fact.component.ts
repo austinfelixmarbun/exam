@@ -10,6 +10,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-journal-header-fact',
@@ -171,7 +172,7 @@ console.log(this.ddlFactTypeGenericList);
     }
 
     if (this.JrMHeaderId != null) {
-      this.http.post<any>(URLConstant.SaveJrMHeaderFact, request).subscribe(
+      this.http.post<any>(URLConstant.SaveJrMHeaderFact, request, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})

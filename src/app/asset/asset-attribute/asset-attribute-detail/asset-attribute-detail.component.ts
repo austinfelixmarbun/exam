@@ -132,7 +132,7 @@ export class AssetAttributeDetailComponent implements OnInit {
     this.assetAttrObj.RefAttrId = this.AssetAttrForm.controls["RefAttrId"].value;
 
     if (this.pageType == "add") {
-      this.http.post(URLConstant.AddAssetAttr, this.assetAttrObj).subscribe(
+      this.http.post(URLConstant.AddAssetAttr, this.assetAttrObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ATTR_PAGING],{ "AssetTypeId": this.AssetTypeId });
@@ -141,7 +141,7 @@ export class AssetAttributeDetailComponent implements OnInit {
     else if (this.pageType == "edit") {
       this.assetAttrObj.AssetAttrId = this.AssetAttrId;
       this.assetAttrObj.RowVersion = this.RowVersion;
-      this.http.post(URLConstant.EditAssetAttr, this.assetAttrObj).subscribe(
+      this.http.post(URLConstant.EditAssetAttr, this.assetAttrObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ATTR_PAGING],{ "AssetTypeId": this.AssetTypeId });

@@ -8,6 +8,7 @@ import { CustBankAccDetailSectionFindataComponent } from '../cust-bank-acc-detai
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-cust-bank-acc-section-findata',
@@ -43,7 +44,7 @@ export class CustBankAccSectionFindataComponent implements OnInit {
         let reqObj = {
           Id: custBankAccId
         };
-        this.httpClient.post(URLConstant.DeleteCustBankAccAndStmnt, reqObj).subscribe(
+        this.httpClient.post(URLConstant.DeleteCustBankAccAndStmnt, reqObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.httpClient.post(URLConstant.GetCBAForCustFinDataByCustId, { id: this.CustId }).subscribe(
               (response: any) => {

@@ -65,7 +65,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
       RefOfficeId: this.listSelectedId
     }
 
-    this.http.post(URLConstant.AddListVendorOfficeMember, obj).subscribe(
+    this.http.post(URLConstant.AddListVendorOfficeMember, obj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_MBR_PAGING],{ "VendorId": this.VendorId });

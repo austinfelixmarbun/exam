@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CookieService } from 'ngx-cookie';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-upload-license',
@@ -72,7 +73,7 @@ export class UploadLicenseComponent implements OnInit {
     var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     var LicenseObj = { LicenseFileContent : this.LicenseForm.controls['LicenseFile'].value, LicenseStateFileContent :this.LicenseForm.controls['LicenseStateFile'].value, Username : currentUserContext[CommonConstant.USER_NAME] };
     
-    this.httpClient.post(URLConstant.UploadLicense, LicenseObj).subscribe(
+    this.httpClient.post(URLConstant.UploadLicense, LicenseObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.LICENSE_PAGING],{});

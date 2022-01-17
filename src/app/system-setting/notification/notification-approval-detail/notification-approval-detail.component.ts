@@ -89,7 +89,7 @@ export class NotificationApprovalDetailComponent implements OnInit {
     this.notificationHObj.Status = notificationResultStat;
     this.notificationHObj.ApproveBy = currentUserContext.UserName;
 
-    this.http.post(URLConstant.EditNotificationH, this.notificationHObj).subscribe(
+    this.http.post(URLConstant.EditNotificationH, this.notificationHObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(resultForMsg + " " + response["Message"]);
         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV], {});

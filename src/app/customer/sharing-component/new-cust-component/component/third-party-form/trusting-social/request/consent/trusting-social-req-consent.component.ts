@@ -17,6 +17,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { String, StringBuilder } from 'typescript-string-operations';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 
@@ -106,7 +107,7 @@ export class TrustingSocialReqConsentComponent implements OnInit {
     reader.onload = () => {
         reqUploadConsentTsObj.ConsentBase64 = reader.result;
         reqUploadConsentTsObj.ConsentBase64 = reqUploadConsentTsObj.ConsentBase64.substring(reqUploadConsentTsObj.ConsentBase64.lastIndexOf(',') + 1)
-        this.http.post(URLConstant.UploadConsentTrustingSocialV2, reqUploadConsentTsObj).subscribe(
+        this.http.post(URLConstant.UploadConsentTrustingSocialV2, reqUploadConsentTsObj, AdInsConstant.SpinnerOptions).subscribe(
           (response: ThirdPartyRsltHObj) => {
             this.toastr.successMessage(response["Message"]);
             this.outUpload.emit(response);

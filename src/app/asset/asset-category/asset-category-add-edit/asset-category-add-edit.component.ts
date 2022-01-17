@@ -73,7 +73,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
       this.acObj.AssetCategoryName = this.AssetCategoryForm.controls["AssetCategoryName"].value;
       this.acObj.IsActive = this.AssetCategoryForm.controls["IsActive"].value;
       this.acObj.AssetTypeId = this.AssetTypeId;
-      this.http.post(URLConstant.AddNewAssetCategory, this.acObj).subscribe(
+      this.http.post(URLConstant.AddNewAssetCategory, this.acObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_CATEGORY_PAGING],{ "AssetTypeId": this.acObj.AssetTypeId });
@@ -84,7 +84,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
       this.acObj.AssetCategoryName = this.AssetCategoryForm.controls["AssetCategoryName"].value;
       this.acObj.IsActive = this.AssetCategoryForm.controls["IsActive"].value;
 
-      this.http.post(URLConstant.EditAssetCategory, this.acObj).subscribe(
+      this.http.post(URLConstant.EditAssetCategory, this.acObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_CATEGORY_PAGING],{ "AssetTypeId": this.acObj.AssetTypeId });

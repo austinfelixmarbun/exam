@@ -126,7 +126,7 @@ export class EmployeePositionComponent implements OnInit {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       this.empPositionObj = new EmpPositionObj();
       this.empPositionObj.empPositionId = empPositionId;
-      this.httpClient.post(this.deleteUrl, this.empPositionObj).subscribe(
+      this.httpClient.post(this.deleteUrl, this.empPositionObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           this.searchPagination(this.pageNow);

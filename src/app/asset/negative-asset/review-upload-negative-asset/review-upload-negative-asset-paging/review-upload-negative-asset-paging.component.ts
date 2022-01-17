@@ -12,6 +12,7 @@ import { environment } from 'environments/environment';
 import { IntegrationObj } from 'app/shared/model/library/integration-obj.model';
 import { RequestTaskModelObj } from 'app/shared/model/v2/request-task-model-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-review-upload-negative-asset-paging',
@@ -60,7 +61,7 @@ export class ReviewUploadNegativeAssetPagingComponent implements OnInit {
     wfObj.TaskListId =  environment.isCore? ev.RowObj.ProcessInstanceId : ev.RowObj.TaskListId;
     wfObj.TransactionNo = ev.RowObj.UploadNo;
     wfObj.ListValue = { "Status": "RJC" };
-    this.http.post(CancelUrl, wfObj).subscribe(
+    this.http.post(CancelUrl, wfObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

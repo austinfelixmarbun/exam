@@ -7,6 +7,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-journal-media-detail',
@@ -73,7 +74,7 @@ export class JournalMediaDetailComponent implements OnInit {
     }
 
     if (this.mode == 'edit' && this.JrMHeaderId != null) {
-      this.http.post<any>(URLConstant.SaveJrMEntity, { ...request, JrMHeaderId: this.JrMHeaderId }).subscribe(
+      this.http.post<any>(URLConstant.SaveJrMEntity, { ...request, JrMHeaderId: this.JrMHeaderId }, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})
@@ -83,7 +84,7 @@ export class JournalMediaDetailComponent implements OnInit {
         }
       )
     } else {
-      this.http.post<any>(URLConstant.AddJrMHeader, request).subscribe(
+      this.http.post<any>(URLConstant.AddJrMHeader, request, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})

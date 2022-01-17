@@ -4,6 +4,7 @@ import { FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { SrvyTaskObj } from 'app/shared/model/srvy-task-obj.model';
@@ -154,7 +155,7 @@ export class SurveyResultReviewDetailComponent implements OnInit {
     }
 
     /* istanbul ignore next */
-    this.httpClient.post(URLConstant.ReviewSurveyResult, { reqListSrvyTaskObjs: this.reqListSrvyTaskObj }).subscribe(
+    this.httpClient.post(URLConstant.ReviewSurveyResult, { reqListSrvyTaskObjs: this.reqListSrvyTaskObj }, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         /* istanbul ignore next */
         this.toastr.successMessage(response['message']);

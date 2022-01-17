@@ -72,7 +72,7 @@ export class HolidayAddComponent implements OnInit {
             this.holidayObj.HolidaySchmHId = this.HolidaySchmId;
             this.holidayObj.HolidaySchmCode = this.result.HolidaySchmCode;
             this.holidayObj.RowVersion = this.result.RowVersion;
-            this.http.post(URLConstant.EditHolidaySchmH, this.holidayObj).subscribe(
+            this.http.post(URLConstant.EditHolidaySchmH, this.holidayObj, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY],{})
                     this.toastr.successMessage(response['message']);
@@ -84,7 +84,7 @@ export class HolidayAddComponent implements OnInit {
             this.holidayObj.HolidaySchmHId = "0";
             this.holidayObj.RowVersion = "";
 
-            this.http.post(URLConstant.AddHolidaySchmH, this.holidayObj).subscribe((response) => {
+            this.http.post(URLConstant.AddHolidaySchmH, this.holidayObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
                 AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY],{})
                 this.toastr.successMessage(response['message']);
             });

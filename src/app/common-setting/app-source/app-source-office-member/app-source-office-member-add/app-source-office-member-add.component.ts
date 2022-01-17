@@ -57,7 +57,7 @@ export class AppSourceOfficeMemberAddComponent implements OnInit {
       RefAppSrcId : this.RefAppSrcId,
       RefOfficeIds: this.listSelectedId
     }
-    this.http.post(URLConstant.AddRefAppSrcOfficeMbr, RequestItem).subscribe(
+    this.http.post(URLConstant.AddRefAppSrcOfficeMbr, RequestItem, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,["/CommonSetting/AppSource/OfficeMember/Paging"],{ "RefAppSrcId": this.RefAppSrcId });

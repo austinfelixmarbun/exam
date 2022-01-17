@@ -321,7 +321,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     custBankAccObj.BegBalanceAmt = formData.BegBalanceAmt;
 
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.AddCustBankAcc, custBankAccObj).subscribe(
+      this.httpClient.post(URLConstant.AddCustBankAcc, custBankAccObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.activeModal.close(response);
         }
@@ -330,7 +330,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     else {
       if (this.pageType == "edit") {
         let custBankData = this.CustBankAccForm.getRawValue();
-        this.httpClient.post(URLConstant.EditCustBankAcc, custBankData).subscribe(
+        this.httpClient.post(URLConstant.EditCustBankAcc, custBankData, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.activeModal.close(response);
           }
@@ -380,7 +380,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
         custBankAccObj.EndPeriod = "";
 
         let reqObj = { "custBankAccObj": custBankAccObj, "custBankStmntObjs": listCustBankStmnt };
-        this.httpClient.post(URLConstant.EditCBAForCustFinData, reqObj).subscribe(
+        this.httpClient.post(URLConstant.EditCBAForCustFinData, reqObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.activeModal.close(response);
           }

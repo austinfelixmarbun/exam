@@ -150,7 +150,7 @@ export class ScoreCategoryScoringComponent implements OnInit {
       }
     }
 
-    this.httpClient.post(URLConstant.AddRangeScoreCategorySchmD, this.listScoreCategorySchmDObj).subscribe(
+    this.httpClient.post(URLConstant.AddRangeScoreCategorySchmD, this.listScoreCategorySchmDObj, AdInsConstant.SpinnerOptions).subscribe(
       //SAVE
       (response) => {
         this.toastr.successMessage(response["Message"]);

@@ -84,7 +84,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
     this.verfQuestionGrpDObj.VerfQuestionGrpDId = 0;
     this.verfQuestionGrpDObj.ListVerfQuestionAnswerId = this.listSelectedId;
 
-    this.http.post(URLConstant.AddListVerfQuestionGrpD, this.verfQuestionGrpDObj).subscribe(
+    this.http.post(URLConstant.AddListVerfQuestionGrpD, this.verfQuestionGrpDObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_GRP_MBR_PAGING],{ "VerfQuestionGrpHId": this.VerfQuestionGrpHId });

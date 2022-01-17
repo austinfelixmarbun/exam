@@ -115,7 +115,7 @@ export class CommissionerComponent implements OnInit {
       this.editUrl = this.foundationUrl + URLConstant.DeleteCoyCommissioner;
       this.commissionerObj = new CoyCommissionerObj();
       this.commissionerObj.coyCommissionerId = coyCommissionerId;
-      this.http.post(this.editUrl, this.commissionerObj).subscribe(
+      this.http.post(this.editUrl, this.commissionerObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.searchPagination(1);
         });

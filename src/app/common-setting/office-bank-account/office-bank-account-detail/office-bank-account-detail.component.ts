@@ -9,6 +9,7 @@ import { RefCurrObj } from 'app/shared/model/ref-curr-obj.model';
 import { OfficeBankAccObj } from 'app/shared/model/common-setting/office-bank-acc.model';
 import { RefBankObj } from 'app/shared/model/ref-bank-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-office-bank-account-detail',
@@ -266,7 +267,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
           this.OfficeBankAccObj.RefOfficeId = response.RefOfficeId;
           this.OfficeBankAccObj.IsActive = true;
 
-          this.http.post(URLConstant.AddOfficeBankAcc, this.OfficeBankAccObj).subscribe(
+          this.http.post(URLConstant.AddOfficeBankAcc, this.OfficeBankAccObj, AdInsConstant.SpinnerOptions).subscribe(
             (response) => {
               this.toastr.successMessage("Add Success!");
               this.router.navigateByUrl(NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING);
@@ -287,7 +288,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
       this.OfficeBankAccObj.RefOfficeId = this.RefOfficeId;
       this.OfficeBankAccObj.RowVersion = this.OfficeBankRowVersion;
 
-      this.http.post(URLConstant.EditOfficeBankAcc, this.OfficeBankAccObj).subscribe(
+      this.http.post(URLConstant.EditOfficeBankAcc, this.OfficeBankAccObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage("Edit Success!");
           this.router.navigateByUrl(NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING);

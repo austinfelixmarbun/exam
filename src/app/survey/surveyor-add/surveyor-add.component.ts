@@ -211,7 +211,7 @@ export class SurveyorAddComponent implements OnInit {
     this.surveyorObj.IsActive = this.SurveyorForm.value.IsActive;
 
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.AddSurveyor, this.surveyorObj).subscribe(
+      this.httpClient.post(URLConstant.AddSurveyor, this.surveyorObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEYOR_PAGING], {});
@@ -221,7 +221,7 @@ export class SurveyorAddComponent implements OnInit {
     else {
       this.surveyorObj.SurveyorId = this.surveyorId;
       this.surveyorObj.RowVersion = '';
-      this.httpClient.post(URLConstant.EditSurveyor, this.surveyorObj).subscribe(
+      this.httpClient.post(URLConstant.EditSurveyor, this.surveyorObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEYOR_PAGING], {});

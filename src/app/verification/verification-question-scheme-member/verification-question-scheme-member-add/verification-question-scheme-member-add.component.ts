@@ -81,7 +81,7 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
     this.verfSchemeDObj.VerfSchemeDId = "0";
     this.verfSchemeDObj.ListVerfQuestionGrpHId = this.listSelectedId;
 
-    this.http.post(URLConstant.AddListVerfSchemeD, this.verfSchemeDObj).subscribe(
+    this.http.post(URLConstant.AddListVerfSchemeD, this.verfSchemeDObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_SCHM_MBR_PAGING],{ "VerfSchemeHId": this.VerfSchemeHId });

@@ -28,6 +28,7 @@ import { ResSysConfigResultObj } from 'app/shared/model/response/res-sys-config-
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { ReqCustDocFileObj } from 'app/shared/model/cust-doc-file/req-cust-doc-file-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-third-party-form',
@@ -185,7 +186,7 @@ export class ThirdPartyFormComponent implements OnInit {
       var custDocFileObjs: ReqCustDocFileObj = new ReqCustDocFileObj();
       custDocFileObjs.CustId = this.custObj.CustId;
       custDocFileObjs.CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
-      this.http.post(URLConstant.SaveCustDocFile, custDocFileObjs).subscribe(
+      this.http.post(URLConstant.SaveCustDocFile, custDocFileObjs, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           const modalRef = this.modalService.open(PefindoReqComponent);
           modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
@@ -259,7 +260,7 @@ export class ThirdPartyFormComponent implements OnInit {
       var custDocFileObjs: ReqCustDocFileObj = new ReqCustDocFileObj();
       custDocFileObjs.CustId = this.custObj.CustId;
       custDocFileObjs.CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
-      this.http.post(URLConstant.SaveCustDocFile, custDocFileObjs).subscribe(
+      this.http.post(URLConstant.SaveCustDocFile, custDocFileObjs, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           const modalRef = this.modalService.open(TrustingSocialReqHeaderComponent);
           modalRef.componentInstance.CustObj = custObj;
@@ -287,7 +288,7 @@ export class ThirdPartyFormComponent implements OnInit {
       reqGenerateTrxNoObj.MasterSeqCode = CommonConstant.MasterSequenceCodeCustomerThirdParty;
       reqGenerateTrxNoObj.OfficeCode = this.officeCode;
 
-      await this.http.post(URLConstant.GenerateTransactionNoFromRedis, reqGenerateTrxNoObj).toPromise().then(
+      await this.http.post(URLConstant.GenerateTransactionNoFromRedis, reqGenerateTrxNoObj, AdInsConstant.SpinnerOptions).toPromise().then(
         (response: ResGenerateTrxNoObj) => {
           this.thirdPartyTrxNo = response.TrxNo;
           this.OutputThirdPartyTrxNo.emit(this.thirdPartyTrxNo);
@@ -301,7 +302,7 @@ export class ThirdPartyFormComponent implements OnInit {
     reqByIdAndCode.Id = this.custObj.CustId;
     reqByIdAndCode.Code = this.thirdPartyTrxNo;
 
-    await this.http.post(URLConstant.SaveCustThirdPartyTrxNo, reqByIdAndCode).toPromise().then(
+    await this.http.post(URLConstant.SaveCustThirdPartyTrxNo, reqByIdAndCode, AdInsConstant.SpinnerOptions).toPromise().then(
       response => {
 
       }

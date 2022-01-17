@@ -258,7 +258,7 @@ export class NegativeAssetDetailComponent implements OnInit {
   Save() {
     var assetNegativeObj = this.AssetNegativeForm.value;
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.AddAssetNegative, assetNegativeObj).subscribe(
+      this.httpClient.post(URLConstant.AddAssetNegative, assetNegativeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_NEG_PAGING],{});
@@ -266,7 +266,7 @@ export class NegativeAssetDetailComponent implements OnInit {
       );
     }
     else {
-      this.httpClient.post(URLConstant.EditAssetNegative, assetNegativeObj).subscribe(
+      this.httpClient.post(URLConstant.EditAssetNegative, assetNegativeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_NEG_PAGING],{});

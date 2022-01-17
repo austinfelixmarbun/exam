@@ -100,7 +100,7 @@ export class OrganizationComponent implements OnInit {
       var organizObj: OrganizationObj;
       organizObj = new OrganizationObj();
       organizObj.refOrgId = id;
-      this.http.post(url, organizObj).subscribe(
+      this.http.post(url, organizObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           var order = null;
           if (this.orderByKey != null) {

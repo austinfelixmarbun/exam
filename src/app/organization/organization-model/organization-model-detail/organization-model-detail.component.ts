@@ -10,6 +10,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 @Component({
@@ -102,7 +103,7 @@ export class OrganizationModelDetailComponent implements OnInit {
             if (OrgMdlForm.value.isActive) { this.orgModelObj.isActive = '1' } else { this.orgModelObj.isActive = '0' };
 
             //SAVE
-            this.httpClient.post(this.apiUrl, this.orgModelObj).subscribe(
+            this.httpClient.post(this.apiUrl, this.orgModelObj, AdInsConstant.SpinnerOptions).subscribe(
               (response) => {
                 this.service.typeSave(response['message']);
                 this.location.back();
@@ -129,7 +130,7 @@ export class OrganizationModelDetailComponent implements OnInit {
       if (OrgMdlForm.value.isActive) { this.orgModelObj.isActive = '1' } else { this.orgModelObj.isActive = '0' };
 
       //SAVE
-      this.httpClient.post(this.apiUrl, this.orgModelObj).subscribe(
+      this.httpClient.post(this.apiUrl, this.orgModelObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.service.typeSave(response['message']);
           this.location.back();

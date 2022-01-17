@@ -85,7 +85,7 @@ export class UserChangePasswordComponent implements OnInit {
       // this.refUserObj.newPassVerif = UserAddEditForm.value.NewRePassword;
       //SAVE
       this.apiUrl = this.foundationUrl + URLConstant.ChangePassword;
-      this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
+      this.httpClient.post(this.apiUrl, this.refUserObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.service.typeSave(response["message"]);
           this.router.navigateByUrl(NavigationConstant.SYSTEM_SETTING_REF_USER, { skipLocationChange: true })

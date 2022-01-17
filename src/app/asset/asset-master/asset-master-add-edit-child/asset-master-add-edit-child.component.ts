@@ -378,7 +378,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
             this.listAssetScheme[i].AssetMasterId = null;
           }
         }
-        this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj).pipe(
+        this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj, AdInsConstant.SpinnerOptions).pipe(
           map((response) => {
             return response;
           }),
@@ -389,10 +389,10 @@ export class AssetMasterAddEditChildComponent implements OnInit {
               assetMasterAttrValues.forEach(x => {
                 x.AssetMasterId = this.listAssetSchmDObj.AssetMasterId;
               })
-              let addAssetMasterAttr = this.http.post(URLConstant.AddAssetMasterAttrContent, { AssetMasterAttrContentObjs: assetMasterAttrValues });
+              let addAssetMasterAttr = this.http.post(URLConstant.AddAssetMasterAttrContent, { AssetMasterAttrContentObjs: assetMasterAttrValues }, AdInsConstant.SpinnerOptions);
               observableBatch.push(addAssetMasterAttr);
             }
-            let editListAssetSchm = this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj);
+            let editListAssetSchm = this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj, AdInsConstant.SpinnerOptions);
             observableBatch.push(editListAssetSchm);
             return forkJoin(observableBatch);
           })
@@ -403,7 +403,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           });
       }
       else {
-        this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj).subscribe(
+        this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});
@@ -451,11 +451,11 @@ export class AssetMasterAddEditChildComponent implements OnInit {
         }
 
         // Reynard: add / edit kok response ny beda ??
-        let editAssetMaster = this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj);
-        let editAssetSchm = this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj);
+        let editAssetMaster = this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj, AdInsConstant.SpinnerOptions);
+        let editAssetSchm = this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj, AdInsConstant.SpinnerOptions);
         let observableBatch = [editAssetMaster, editAssetSchm];
         if (assetMasterAttrValues.length > 0) {
-          let addAssetMasterAttr = this.http.post(URLConstant.AddAssetMasterAttrContent, { AssetMasterAttrContentObjs: assetMasterAttrValues });
+          let addAssetMasterAttr = this.http.post(URLConstant.AddAssetMasterAttrContent, { AssetMasterAttrContentObjs: assetMasterAttrValues }, AdInsConstant.SpinnerOptions);
           observableBatch.push(addAssetMasterAttr);
         }
 
@@ -470,7 +470,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
         );
       }
       else {
-        this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj).subscribe(
+        this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj, AdInsConstant.SpinnerOptions).subscribe(
           response => {
             this.toastr.successMessage(response["Message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});

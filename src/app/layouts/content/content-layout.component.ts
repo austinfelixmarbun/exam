@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,8 +16,8 @@ import { CookieService } from 'ngx-cookie';
     styleUrls: ['./content-layout.component.scss']
 })
 
-export class ContentLayoutComponent implements OnInit {  
-    
+export class ContentLayoutComponent implements OnInit {
+
     unsubscribe: any;
     token: string = null;
     constructor(public translate: TranslateService, private strService: StorageService, private route: ActivatedRoute, private cookieService: CookieService, private http: HttpClient) {
@@ -58,9 +58,12 @@ export class ContentLayoutComponent implements OnInit {
         //     }
         // );
     }
-
+    SpinnerHeaders = new HttpHeaders({
+        'IsLoading': "true"
+    });
+    SpinnerOptions = { headers: this.SpinnerHeaders, withCredentials: true };
     async LoginWithToken() {
-        await this.http.post(AdInsConstant.LoginWithToken, {ModuleCode: environment.Module},  {withCredentials: true}).toPromise().then(
+        await this.http.post(AdInsConstant.LoginWithToken, { ModuleCode: environment.Module }, this.SpinnerOptions).toPromise().then(
             async (response) => {
                 var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
                 AdInsHelper.SetCookie(this.cookieService, "BusinessDateRaw", formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US'));
@@ -69,17 +72,17 @@ export class ContentLayoutComponent implements OnInit {
                 AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
                 AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, response['Token']);
                 AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
-        
-                await this.http.post(AdInsConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: response["Identity"].RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).toPromise().then(
+
+                await this.http.post(AdInsConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: response["Identity"].RoleCode, ModuleCode: environment.Module }, this.SpinnerOptions).toPromise().then(
                     (response) => {
                         AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
                     });
             }
         );
     }
-    
+
     ChangeLanguage(language: string) {
-        localStorage.setItem('lang',language);
+        localStorage.setItem('lang', language);
         this.strService.set('lang', language);
         this.translate.use(language);
     }

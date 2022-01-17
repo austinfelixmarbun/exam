@@ -15,6 +15,7 @@ import { UcInputRFAObj } from "app/shared/model/uc-input-rfa-obj.model";
 import { CookieService } from "ngx-cookie";
 import { AdInsHelper } from "app/shared/AdInsHelper";
 import { NavigationConstant } from "app/shared/NavigationConstant";
+import { AdInsConstant } from "app/shared/AdInstConstant";
 @Component({
   selector: "app-vendor-grading-request-detail",
   templateUrl: "./vendor-grading-request-detail.component.html",
@@ -213,7 +214,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     }
     
     let SubmitRequestVendorGradingUrl = environment.isCore ? URLConstant.SubmitRequestVendorGradingV2 : URLConstant.SubmitRequestVendorGrading;
-    this.http.post(SubmitRequestVendorGradingUrl, submitVendorGradingReqObj).subscribe(
+    this.http.post(SubmitRequestVendorGradingUrl, submitVendorGradingReqObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_PAGING]);
