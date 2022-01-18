@@ -14,7 +14,7 @@ export const environment = {
     Module:"FOU",
     losR3Web: 'http://r3web-server.ad-ins.com/LOSR3',
     lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS',
-    ApprovalR3Url: 'http://r3app-server.ad-ins.com/APPROVAL_R3_BE_DEV',
+    ApprovalR3Url: 'http://r3app-server.ad-ins.com/Approval_R3_BE_SPRINGBOOT',
     ApprovalURL : 'http://r3app-server/APPROVAL',
     FoundationR3Web:'http://r3web-server.ad-ins.com/Foundation',
     WFThingsToDoUrl: 'http://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL/',
