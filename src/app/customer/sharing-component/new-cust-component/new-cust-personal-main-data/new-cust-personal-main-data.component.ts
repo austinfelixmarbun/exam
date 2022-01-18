@@ -39,6 +39,7 @@ import { NewCustSetData } from '../NewCustSetData.Service';
 import { CustDocFileFormObj } from 'app/shared/model/cust-doc-file/cust-doc-file-form-obj.model';
 import { ThirdPartyUploadService } from '../component/third-party-form/services/ThirdPartyUpload.Service';
 import { ActivatedRoute } from '@angular/router';
+import { ThirdPartyFormComponent } from '../component/third-party-form/third-party-form.component';
 
 @Component({
   selector: 'app-new-cust-personal-main-data',
@@ -75,6 +76,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   pageFrom: string = CommonConstant.CustFromEditMainData;
   isReady: boolean = false;
+  @ViewChild(ThirdPartyFormComponent) child : ThirdPartyFormComponent;
 
   constructor(private regexService: RegexService, private toastr: NGXToastrService,
     private http: HttpClient, private fb: FormBuilder,
@@ -120,7 +122,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.DictUcDDLObj[this.RefMasterTypeCodeIdType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
     this.onOptionsSelected();
     this.DictUcDDLObj[this.RefMasterTypeCodeGender] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeGender);
-    this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat);
+    this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat, null, true);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     await this.GetExistingData();
     this.GetCustAddrToCopy();
@@ -582,6 +584,10 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       this.familyForm.ResetLookupProfession();
     }
     this.ChangeProfession("");
+  }
+
+  changeCustMaritalStat(){
+    this.child.setDocFormCustMaritalTypeChanged();
   }
 
   //profession
