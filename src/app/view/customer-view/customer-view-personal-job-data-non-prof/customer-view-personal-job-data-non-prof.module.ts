@@ -16,6 +16,7 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewPersonalJobDataNonProfComponent } from "./customer-view-personal-job-data-non-prof.component";
 import { CustomerViewPersonalJobDataNonProfRoutingModule } from "./customer-view-personal-job-data-non-prof-routing.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { CustomerViewPersonalJobDataNonProfXComponent } from "app/impl/view/customer-view/customer-view-personal-job-data-non-prof/customer-view-personal-job-data-non-prof-x.component";
 
 
 
@@ -40,7 +41,8 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     UcShowErrorsModule,
   ],
   declarations: [
-    CustomerViewPersonalJobDataNonProfComponent
+    CustomerViewPersonalJobDataNonProfComponent,
+    CustomerViewPersonalJobDataNonProfXComponent
 
   ],
   entryComponents: [

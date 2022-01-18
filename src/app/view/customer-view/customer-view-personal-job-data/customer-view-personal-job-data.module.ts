@@ -16,6 +16,7 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewPersonalJobDataComponent } from "./customer-view-personal-job-data.component";
 import { CustomerViewPersonalJobDataRoutingModule } from "./customer-view-personal-job-data-routing.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { CustomerViewPersonalJobDataXComponent } from "app/impl/view/customer-view/customer-view-personal-job-data/customer-view-personal-job-data-x.component";
 
 
 
@@ -40,7 +41,8 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     UcShowErrorsModule,
   ],
   declarations: [
-   CustomerViewPersonalJobDataComponent
+   CustomerViewPersonalJobDataComponent,
+   CustomerViewPersonalJobDataXComponent
 
   ],
   entryComponents: [

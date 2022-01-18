@@ -77,4 +77,10 @@ export class PathConstantX{
     public static CUST_FAMILY_PAGING_X = PathConstant.CUST_FAMILY + "/" + PathConstantX.PAGING_X;
     public static CUST_VIEW_PAGE_X = PathConstant.CUST_VIEW + "/" + PathConstantX.CUST_PAGE_X;
 
+    public static VIEW_CUST_PERSONAL_JOB_DATA_X = "PersonalJobData/X";
+    public static VIEW_CUST_PERSONAL_JOB_DATA_NON_PROF_X = "PersonalJobDataNonProf/X";
+    public static VIEW_CUST_PERSONAL_JOB_DATA_EMP_X = "PersonalJobDataEmp/X";
+    public static VIEW_CUST_PERSONAL_JOB_DATA_SME_X = "PersonalJobDataSme/X";
+    public static VIEW_CUST_COY_DETAIL_X = "CoyDetail/X";
+
 }

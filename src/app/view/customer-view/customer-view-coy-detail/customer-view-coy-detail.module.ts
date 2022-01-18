@@ -16,6 +16,7 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewCoyDetailComponent } from "./customer-view-coy-detail.component";
 import { CustomerViewCoyDetailRoutingModule } from "./customer-view-coy-detail-routing.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { CustomerViewCoyDetailXComponent } from "app/impl/view/customer-view/customer-view-coy-detail/customer-view-coy-detail-x.component";
 
 
 
@@ -40,7 +41,8 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     UcShowErrorsModule,
   ],
   declarations: [
-    CustomerViewCoyDetailComponent
+    CustomerViewCoyDetailComponent,
+    CustomerViewCoyDetailXComponent
 
   ],
   entryComponents: [

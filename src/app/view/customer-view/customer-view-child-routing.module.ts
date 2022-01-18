@@ -159,7 +159,11 @@ const routes: Routes = [
       {
         path: PathConstant.VIEW_CUST_TRUSTING_SOCIAL,
         loadChildren: './customer-view-trusting-social/customer-view-trusting-social.module#CustomerViewTrustingSocialModule'
-      }
+      },
+      {
+        path: PathConstantX.VIEW_CUST_PERSONAL_DETAIL_X,
+        component: CustomerViewPersonalDetailXComponent
+      },
     ]
   }
 ];
