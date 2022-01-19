@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { UCGridFooterComponent } from './ucgrid-footer.component';
 
@@ -6,7 +6,7 @@ describe('UCGridFooterComponent', () => {
   let component: UCGridFooterComponent;
   let fixture: ComponentFixture<UCGridFooterComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ UCGridFooterComponent ]
     })
