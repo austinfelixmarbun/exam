@@ -35,7 +35,7 @@ export class RefFormDetailComponent implements OnInit {
   // IsTextMode: boolean = false;
 
   private ucLookupParentForm: UclookupgenericComponent;
-  @ViewChild('LookupExistingParent') set content(content: UclookupgenericComponent) {
+  @ViewChild('LookupExistingParent', {static: false}) set content(content: UclookupgenericComponent) {
     if (content) { // initially setter gets called with undefined
       this.ucLookupParentForm = content;
     }

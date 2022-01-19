@@ -359,7 +359,7 @@ export class OfficeAddComponent implements OnInit {
   }
   
   private ucLookupParent: UclookupgenericComponent;
-  @ViewChild('LookupParent') set content(content: UclookupgenericComponent) {
+  @ViewChild('LookupParent', {static: false}) set content(content: UclookupgenericComponent) {
     if (content) { // initially setter gets called with undefined
       this.ucLookupParent = content;
     }

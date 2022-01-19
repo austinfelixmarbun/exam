@@ -20,8 +20,8 @@ import { NavigationConstant } from "app/shared/NavigationConstant";
   providers: [NGXToastrService, ExcelService, DecimalPipe]
 })
 export class UserPagingComponent implements OnInit {
-  @ViewChild(UCSearchComponent) searchComponent;
-  @ViewChild(UcgridfooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent, {static: false}) searchComponent;
+  @ViewChild(UcgridfooterComponent, {static: false}) ucgridFooter;
   inputObj: any;
   resultData: any;
   pageNow: any;

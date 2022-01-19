@@ -32,7 +32,7 @@ import { CustomerViewHeaderPersonalComponent } from 'app/customer/customer-view/
 export class CustomerPersonalPageComponent implements OnInit {
   private stepper: Stepper;
 
-  @ViewChild('viewCustPers') viewCustPers: CustomerViewHeaderPersonalComponent;
+  @ViewChild('viewCustPers', {static: false}) viewCustPers: CustomerViewHeaderPersonalComponent;
   IdCust: number;
   CustPersonalId: number;
   CustStepIndex: number = 1;
@@ -199,11 +199,11 @@ export class CustomerPersonalPageComponent implements OnInit {
     }
   }
 
-  @ViewChild('CustPersDetail') private CustPersDetail: CustomerPersonalDetailComponent;
-  @ViewChild('CustEmrgcyCtc') private CustEmrgcyCtc: CustomerEmergencyContactComponent;
-  @ViewChild('CustFinData') private CustFinData: CustFinDataTabComponent;
-  @ViewChild('CustJobData') private CustJobData: CustomerPersonalJobDataComponent;
-  @ViewChild('CustAttrData') private CustAttrData: CustAttrSectionComponent;
+  @ViewChild('CustPersDetail', {static: false}) private CustPersDetail: CustomerPersonalDetailComponent;
+  @ViewChild('CustEmrgcyCtc', {static: false}) private CustEmrgcyCtc: CustomerEmergencyContactComponent;
+  @ViewChild('CustFinData', {static: false}) private CustFinData: CustFinDataTabComponent;
+  @ViewChild('CustJobData', {static: false}) private CustJobData: CustomerPersonalJobDataComponent;
+  @ViewChild('CustAttrData', {static: false}) private CustAttrData: CustAttrSectionComponent;
   async SendToR2() {
     console.log(this.CustStepIndex);
     if(!await this.SaveData(this.CustStepIndex)) return;

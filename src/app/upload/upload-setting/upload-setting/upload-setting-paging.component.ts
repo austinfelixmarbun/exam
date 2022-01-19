@@ -16,8 +16,8 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class UploadSettingPagingComponent implements OnInit {
   // ** Start Query Paging */
-  @ViewChild(SearchComponent) searchComponent;
-  @ViewChild(UCGridFooterComponent) ucgridFooter;
+  @ViewChild(SearchComponent, {static: false}) searchComponent;
+  @ViewChild(UCGridFooterComponent, {static: false}) ucgridFooter;
   urlQryPaging: any;
   urlEnviPaging: any;
   // ** End Query Paging */

@@ -23,10 +23,10 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 })
 
 export class LoginPageComponent implements OnInit {
-  @ViewChild('user') userInputRef: ElementRef;
-  @ViewChild('pass') userPassRef: ElementRef;
-  @ViewChild('otp') otpInputRef: ElementRef;
-  @ViewChild('f') loginForm: NgForm;
+  @ViewChild('user', {static: false}) userInputRef: ElementRef;
+  @ViewChild('pass', {static: false}) userPassRef: ElementRef;
+  @ViewChild('otp', {static: false}) otpInputRef: ElementRef;
+  @ViewChild('f', {static: false}) loginForm: NgForm;
   IsNeedUpdate: boolean;
   token: string;
   version: string;

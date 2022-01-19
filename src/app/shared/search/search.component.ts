@@ -19,7 +19,7 @@ import { AdInsHelper } from '../AdInsHelper';
   providers: [ExcelService]
 })
 export class SearchComponent implements OnInit {
-  @ViewChild('formIdSearch') myForm: ElementRef;
+  @ViewChild('formIdSearch', {static: false}) myForm: ElementRef;
   @Input() searchInput: any;
   @Output() result: EventEmitter<any> = new EventEmitter();
   pageSize: any = 10;

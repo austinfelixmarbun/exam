@@ -20,7 +20,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 })
 export class SurveyorAddComponent implements OnInit {
   private uclookupUsername: UclookupgenericComponent;
-  @ViewChild('lookupUsername') set content(content: UclookupgenericComponent) {
+  @ViewChild('lookupUsername', {static: false}) set content(content: UclookupgenericComponent) {
     if (content) {
       this.uclookupUsername = content;
     }

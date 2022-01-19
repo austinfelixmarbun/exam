@@ -27,7 +27,7 @@ import { CustomerViewHeaderCompanyComponent } from 'app/customer/customer-view/c
 export class CustomerCompanyPageComponent implements OnInit {
   private stepper: Stepper;
 
-  @ViewChild('viewCustCoy') viewCustCoy: CustomerViewHeaderCompanyComponent;
+  @ViewChild('viewCustCoy', {static: false}) viewCustCoy: CustomerViewHeaderCompanyComponent;
   IdCust: number;
   CustCompanyId: number;
   CustStepIndex: number;
@@ -176,10 +176,10 @@ export class CustomerCompanyPageComponent implements OnInit {
     }
   }
 
-  @ViewChild('CustCoyDetail') private CustCoyDetail: CustomerCompanyDetailComponent;
-  @ViewChild('CustCoyContact') private CustCoyContact: CustomerCompanyContactInformationComponent;
-  @ViewChild('CustFinData') private CustFinData: CustFinDataTabComponent;
-  @ViewChild('CustAttrData') private CustAttrData: CustAttrSectionComponent;
+  @ViewChild('CustCoyDetail', {static: false}) private CustCoyDetail: CustomerCompanyDetailComponent;
+  @ViewChild('CustCoyContact', {static: false}) private CustCoyContact: CustomerCompanyContactInformationComponent;
+  @ViewChild('CustFinData', {static: false}) private CustFinData: CustFinDataTabComponent;
+  @ViewChild('CustAttrData', {static: false}) private CustAttrData: CustAttrSectionComponent;
   async SendToR2() {
     console.log(this.CustStepIndex);
     if(!await this.SaveData(this.CustStepIndex)) return;

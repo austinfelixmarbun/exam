@@ -20,8 +20,8 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 export class CommissionerAddComponent implements OnInit {
 
-    @ViewChild(UcAddressComponent) ucAddr;
-    @ViewChild(UcInfoComponent) ucInfo;
+    @ViewChild(UcAddressComponent, {static: false}) ucAddr;
+    @ViewChild(UcInfoComponent, {static: false}) ucInfo;
     param: string;
     itemIdType: any;
     businessUnitCode: string;

@@ -249,7 +249,6 @@ export class PathConstant {
     //#endregion
 
     //#region Dashboard-Module
-    public static DASHBOARD2 = "DashBoard2";
     public static DASHBOARD = "Dash-Board";
     public static DASHEMPTY = "Dash-Empty";
     //#endregion

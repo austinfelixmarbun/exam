@@ -24,7 +24,7 @@ export class SidebarComponent implements OnInit {
     public menu: any[];
     private url: string;
     version: string;
-    @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
+    @ViewChild(ContextMenuComponent, {static: false}) public basicMenu: ContextMenuComponent;
 
     constructor(private router: Router,
         private strService: StorageService, public translate: TranslateService, private http: HttpClient, private cookieService: CookieService) {

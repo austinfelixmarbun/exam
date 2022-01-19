@@ -39,7 +39,7 @@ export class FamilyFormComponent implements OnInit {
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
   readonly RefMasterTypeCodeNationality: string = CommonConstant.RefMasterTypeCodeNationality;
   private ucLookupProfession: UclookupgenericComponent;
-  @ViewChild('LookupProfession') set content(content: UclookupgenericComponent) {
+  @ViewChild('LookupProfession', {static: false}) set content(content: UclookupgenericComponent) {
     if (content) { // initially setter gets called with undefined
       this.ucLookupProfession = content;
     }

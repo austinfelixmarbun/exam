@@ -27,8 +27,8 @@ export class CustFinDataTabComponent implements OnInit {
   @Input() MrCustTypeCode: string;
   @Input() CustId: number;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
-  @ViewChild('ModalPersonalFinData') ModalPersonalFinData;
-  @ViewChild('ModalCoyFinData') ModalCoyFinData;
+  @ViewChild('ModalPersonalFinData', {static: false}) ModalPersonalFinData;
+  @ViewChild('ModalCoyFinData', {static: false}) ModalCoyFinData;
 
   sourceOfIncomeList: any;
   isCalculated: boolean = true;

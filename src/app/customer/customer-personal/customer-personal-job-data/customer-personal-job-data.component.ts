@@ -72,10 +72,10 @@ export class CustomerPersonalJobDataComponent implements OnInit {
     this.IsReset = true;
   }
 
-  @ViewChild('JobEmp') private JobEmp: JobDataEmployeeComponent;
-  @ViewChild('JobProf') private JobProf: JobDataProfessionalComponent;
-  @ViewChild('JobSme') private JobSme: JobDataSmeComponent;
-  @ViewChild('JobNonProf') private JobNonProf: JobDataNonProfessionalComponent;
+  @ViewChild('JobEmp', {static: false}) private JobEmp: JobDataEmployeeComponent;
+  @ViewChild('JobProf', {static: false}) private JobProf: JobDataProfessionalComponent;
+  @ViewChild('JobSme', {static: false}) private JobSme: JobDataSmeComponent;
+  @ViewChild('JobNonProf', {static: false}) private JobNonProf: JobDataNonProfessionalComponent;
   readonly modelEmp: string = CommonConstant.CUST_MODEL_EMP;
   readonly modelProf: string = CommonConstant.CUST_MODEL_PROF;
   readonly modelSme: string = CommonConstant.CUST_MODEL_SME;

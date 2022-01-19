@@ -21,8 +21,8 @@ import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 })
 export class MasterTypePagingComponent implements OnInit {
 
-  @ViewChild(UCSearchComponent) searchComponent;
-  @ViewChild(UcgridfooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent, {static: false}) searchComponent;
+  @ViewChild(UcgridfooterComponent, {static: false}) ucgridFooter;
   inputObj: UcPagingObj = new UcPagingObj();
   resultData: any;
   pageNow: any;

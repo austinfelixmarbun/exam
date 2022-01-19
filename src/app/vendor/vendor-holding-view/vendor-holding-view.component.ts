@@ -18,8 +18,8 @@ import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
   templateUrl: './vendor-holding-view.component.html'
 })
 export class VendorHoldingViewComponent implements OnInit {
-  @ViewChild(UcgridfooterComponent) UCGridFooter;
-  @ViewChild(UCSearchComponent) UCSearchComponent;
+  @ViewChild(UcgridfooterComponent, {static: false}) UCGridFooter;
+  @ViewChild(UCSearchComponent, {static: false}) UCSearchComponent;
   VendorId: any;
   viewVendorHoldingObj: UcViewGenericObj = new UcViewGenericObj();
   arrCrit: any[];

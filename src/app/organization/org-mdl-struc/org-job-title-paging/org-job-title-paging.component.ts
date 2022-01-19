@@ -21,8 +21,8 @@ import { URLConstant } from "app/shared/constant/URLConstant";
   providers: [ExcelService, DecimalPipe]
 })
 export class OrgJobTitlePagingComponent implements OnInit {
-  @ViewChild(UCSearchComponent) searchComponent;
-  @ViewChild(UcgridfooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent, {static: false}) searchComponent;
+  @ViewChild(UcgridfooterComponent, {static: false}) ucgridFooter;
   inputObj: any;
   resultData: any;
   pageNow: any;

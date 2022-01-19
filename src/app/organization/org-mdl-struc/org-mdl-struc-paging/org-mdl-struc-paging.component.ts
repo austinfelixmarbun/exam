@@ -22,8 +22,8 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 })
 export class OrgMdlStrucPagingComponent implements OnInit {
 
-  @ViewChild(UCSearchComponent) searchComponent;
-  @ViewChild(UcgridfooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent, {static: false}) searchComponent;
+  @ViewChild(UcgridfooterComponent, {static: false}) ucgridFooter;
   inputObj: any;
   resultData: any;
   pageNow: any;

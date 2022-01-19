@@ -23,8 +23,8 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class OfficeEmpPosComponent implements OnInit {
 
-  @ViewChild(UCSearchComponent) searchComponent;
-  @ViewChild(UcgridfooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent, {static: false}) searchComponent;
+  @ViewChild(UcgridfooterComponent, {static: false}) ucgridFooter;
   inputObj: any;
   refOfficeId: any;
   officeCode: any;

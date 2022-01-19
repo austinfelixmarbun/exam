@@ -41,7 +41,7 @@ export class ShareholderFormComponent implements OnInit {
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
 
   private ucLookupProfession: UclookupgenericComponent;
-  @ViewChild('LookupProfession') set content(content: UclookupgenericComponent) {
+  @ViewChild('LookupProfession', {static: false}) set content(content: UclookupgenericComponent) {
     if (content) { // initially setter gets called with undefined
       this.ucLookupProfession = content;
     }

@@ -74,8 +74,6 @@ export class DashBoardComponent implements OnInit {
   showMessage(message: any) {
   }
 
-  @ViewChild('treemenu') public gridContextMenu: ContextMenuComponent;
-
   public data: any[] = [
     {
       text: 'Furniture', items: [
@@ -105,7 +103,6 @@ export class DashBoardComponent implements OnInit {
 
       this.contextItem = e.item.dataItem;
 
-      this.gridContextMenu.show({ left: originalEvent.pageX, top: originalEvent.pageY });
     }
   }
 

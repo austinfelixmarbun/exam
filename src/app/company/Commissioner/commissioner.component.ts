@@ -21,8 +21,8 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class CommissionerComponent implements OnInit {
 
-  @ViewChild(UCSearchComponent) searchComponent;
-  @ViewChild(UcgridfooterComponent) ucgridFooter;
+  @ViewChild(UCSearchComponent, {static: false}) searchComponent;
+  @ViewChild(UcgridfooterComponent, {static: false}) ucgridFooter;
   inputObj: any;
   urlJson: any = "./assets/search/searchCommissioner.json";
   resultData: any;

@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UIComponentsRoutingModule } from "./ui-components-routing.module";
 import { NouisliderModule } from 'ng2-nouislider';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { JsonpModule } from '@angular/http';
 import { QuillModule } from 'ngx-quill'
 import { DragulaModule } from 'ng2-dragula';
 import { MatchHeightModule } from "../shared/directives/match-height.directive";
@@ -25,7 +24,6 @@ import { AdInsSharedModule } from './adins-module/adins-shared.module';
         NouisliderModule,
         FormsModule,
         ReactiveFormsModule,
-        JsonpModule,
         NgbModule,
         QuillModule,
         DragulaModule,
