@@ -2,7 +2,6 @@ import { UserPagingComponent } from 'app/system-setting/user/user-paging/user-pa
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SystemSettingRoutingModule } from 'app/system-setting/system-setting-routing.module';
 import { RoleAddEditComponent } from 'app/system-setting/role/role-add-edit/role-add-edit.component';
@@ -48,7 +47,6 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
     SystemSettingRoutingModule,
     CommonModule,
     FormsModule,
-    HttpModule,
     NgbModule,
     SharingComponentModule,
     UCSearchModule,

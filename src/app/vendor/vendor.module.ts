@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
@@ -97,7 +96,6 @@ export const customCurrencyMaskConfig = {
     VendorRoutingModule,
     CommonModule,
     FormsModule,
-    HttpModule,
     NgbModule,
     SharingComponentModule,
     UCSearchModule,

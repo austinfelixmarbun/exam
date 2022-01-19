@@ -2,7 +2,6 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpModule } from '@angular/http';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { AngularFileUploaderModule } from "angular-file-uploader";
@@ -28,7 +27,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     CommonModule,
     FormsModule,
     NgbModule,
-    HttpModule,
     RouterModule,
     UCSearchModule,
     UcgridfooterModule,

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { ArchwizardModule } from 'angular-archwizard';
@@ -74,7 +73,6 @@ export const customCurrencyMaskConfig = {
     ],
     imports: [
         CommonModule,
-        HttpModule,
         MatRadioModule,
         NgbModule,
         SharingComponentModule,

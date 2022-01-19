@@ -19,7 +19,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatDialogModule } from '@angular/material';
 
 import * as $ from 'jquery';
-import { HttpModule } from '@angular/http';
 import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
 import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 import { ErrorDialogComponent } from 'app/error-dialog/error-dialog.component';
@@ -67,7 +66,6 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         RolepickComponent,
     ],
     imports: [
-        HttpModule,
         BrowserAnimationsModule,
         AppRoutingModule,
         NgxSpinnerModule,
@@ -75,7 +73,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         AdInsSharedModule,
         HttpClientModule,
         ToastrModule.forRoot(),
-        NgbModule.forRoot(),
+        NgbModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

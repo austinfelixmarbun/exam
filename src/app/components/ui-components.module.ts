@@ -12,7 +12,6 @@ import { DragulaModule } from 'ng2-dragula';
 import { MatchHeightModule } from "../shared/directives/match-height.directive";
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { TagInputModule } from 'ngx-chips';
-import { HttpModule } from '@angular/http';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { NgSelectModule } from '@ng-select/ng-select';
 
@@ -36,7 +35,6 @@ import { AdInsSharedModule } from './adins-module/adins-shared.module';
         MatchHeightModule,
         ImageCropperModule,
         TagInputModule,
-        HttpModule,
         UiSwitchModule,
         NgSelectModule
     ],

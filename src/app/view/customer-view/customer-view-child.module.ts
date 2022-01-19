@@ -1,7 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
 import { UCSearchModule } from "@adins/ucsearch";
 import { UcpagingModule } from "@adins/ucpaging";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -32,7 +31,6 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     CustomerViewChildRoutingModule,
     CommonModule,
     FormsModule,
-    HttpModule,
     UCSearchModule,
     UcgridfooterModule,
     UcpagingModule,

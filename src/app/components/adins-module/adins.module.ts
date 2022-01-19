@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router'; 
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { UcpagingModule } from '@adins/ucpaging';
 import { UCSearchModule } from "@adins/ucsearch";
@@ -20,6 +19,9 @@ import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { UcDirectiveUpperCaseModule } from '@adins/uc-directive-upper-case';
 import { UcdropdownsearchModule } from '@adins/ucdropdownsearch';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
+
 @NgModule({
     exports: [
         UcDirectiveUpperCaseModule,
@@ -47,7 +49,7 @@ import { UcdropdownsearchModule } from '@adins/ucdropdownsearch';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        HttpModule,
+        HttpClientModule,
         UcSubsectionModule,
         UcpagingModule,
         UCSearchModule,
@@ -65,6 +67,9 @@ import { UcdropdownsearchModule } from '@adins/ucdropdownsearch';
         UcdropdownsearchModule
     ],
     declarations: [
+    ],
+    providers: [
+      { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ]
 })
 

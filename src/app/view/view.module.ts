@@ -1,6 +1,5 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { HttpModule } from "@angular/http";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { SharingModule } from 'app/shared/sharing.module';
 import { ArchwizardModule } from 'angular-archwizard';
@@ -22,7 +21,6 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     AdInsModule,
     ViewRoutingModule,
     CommonModule,
-    HttpModule,
     UcviewgenericModule,
     NgbModule,
     SharingModule,

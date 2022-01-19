@@ -5,7 +5,6 @@ import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneri
 import { CustomerViewCustomerAssetRoutingModule } from './customer-view-customer-asset-routing.module';
 import { CustomerViewCustomerAssetComponent } from './customer-view-customer-asset.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { UcpagingModule } from '@adins/ucpaging';
@@ -26,7 +25,6 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
     CustomerViewCustomerAssetRoutingModule,
     CommonModule,
     FormsModule,
-    HttpModule,
     UCSearchModule,
     UcgridfooterModule,
     UcpagingModule,

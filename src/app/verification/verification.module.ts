@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
 import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
@@ -29,7 +28,6 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
   imports: [
     VerificationRoutingModule,
     CommonModule,
-    HttpModule,
     NgbModule,
     AdInsSharedModule,
     SharingComponentModule,

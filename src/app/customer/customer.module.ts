@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerRoutingModule } from 'app/customer/customer-routing.module';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
@@ -120,7 +119,6 @@ export const customCurrencyMaskConfig = {
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpModule,
     NgbModule, 
     UcpagingModule,
     SharingComponentModule,

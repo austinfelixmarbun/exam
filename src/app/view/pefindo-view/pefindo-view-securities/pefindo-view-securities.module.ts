@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { PefindoViewSecuritiesRoutingModule } from './pefindo-view-securities-routing.module';
 import { PefindoViewSecuritiesComponent } from './pefindo-view-securities.component';
-import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharingModule } from 'app/shared/sharing.module';
 import { ArchwizardModule } from 'angular-archwizard';
@@ -15,7 +14,6 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
   imports: [
     CommonModule,
     PefindoViewSecuritiesRoutingModule,
-    HttpModule,
     NgbModule,
     AdInsSharedModule,
     SharingModule,
