@@ -18,7 +18,7 @@
                 },
                 {
                     "type": "text",
-                    "label": "Branch Code :",
+                    "label": "Supplier Code :",
                     "property": "BranchCode"
                 },
                 {
@@ -28,7 +28,7 @@
                 },
                 {
                     "type": "text",
-                    "label": "Branch Name :",
+                    "label": "Supplier Name :",
                     "property": "BranchName"
                 },
                 {
