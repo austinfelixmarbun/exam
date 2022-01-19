@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
@@ -104,7 +103,6 @@ export const customCurrencyMaskConfig = {
     UcSubsectionModule,
     UclookupgenericModule,
     ReactiveFormsModule,
-    TreeViewModule,
     UcviewgenericModule,
     NgbDropdownModule,
     ArchwizardModule,

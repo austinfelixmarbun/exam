@@ -10,7 +10,6 @@ import { UserRoleComponent } from 'app/system-setting/user/user-role/user-role.c
 import { RoleUserComponent } from 'app/system-setting/role/role-user/role-user.component';
 import { RoleFormComponent } from 'app/system-setting/role/role-form/role-form.component';
 import { UserChangePasswordComponent } from 'app/system-setting/user/user-change-password/user-change-password.component';
-import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
@@ -54,7 +53,6 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
     UcpagingModule,
     UcSubsectionModule,
     ReactiveFormsModule,
-    TreeViewModule,
     NgMultiSelectDropDownModule,
     UcviewgenericModule,
     UcgridviewModule,

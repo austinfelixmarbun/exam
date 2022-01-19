@@ -4,13 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UIComponentsRoutingModule } from "./ui-components-routing.module";
 import { NouisliderModule } from 'ng2-nouislider';
-import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JsonpModule } from '@angular/http';
 import { QuillModule } from 'ngx-quill'
 import { DragulaModule } from 'ng2-dragula';
 import { MatchHeightModule } from "../shared/directives/match-height.directive";
-import { ImageCropperModule } from 'ng2-img-cropper';
 import { TagInputModule } from 'ngx-chips';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -25,7 +23,6 @@ import { AdInsSharedModule } from './adins-module/adins-shared.module';
         AdInsSharedModule,
         UIComponentsRoutingModule,
         NouisliderModule,
-        FileUploadModule,
         FormsModule,
         ReactiveFormsModule,
         JsonpModule,
@@ -33,7 +30,6 @@ import { AdInsSharedModule } from './adins-module/adins-shared.module';
         QuillModule,
         DragulaModule,
         MatchHeightModule,
-        ImageCropperModule,
         TagInputModule,
         UiSwitchModule,
         NgSelectModule
