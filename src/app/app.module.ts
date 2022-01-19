@@ -16,7 +16,7 @@ import { AuthService } from 'app/shared/auth/auth.service';
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
 import { StorageServiceModule } from 'angular-webstorage-service';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import * as $ from 'jquery';
 import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
