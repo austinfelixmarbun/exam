@@ -30,7 +30,7 @@ import { SurveyTaskResultPagingComponent } from './survey-task-result-paging/sur
 import { SurveyTaskResultPageComponent } from './survey-task-result-page/survey-task-result-page.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { ArchwizardModule } from 'angular-archwizard';
-import { MatTabsModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 

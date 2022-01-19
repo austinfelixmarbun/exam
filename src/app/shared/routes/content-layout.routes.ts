@@ -6,14 +6,14 @@ import { PathConstant } from '../PathConstant';
 export const CONTENT_ROUTES: Routes = [
     {
         path: PathConstant.CR_PAGES,
-        loadChildren: () => import('./pages/content-pages/content-pages.module').then(m => m.ContentPagesModule)
+        loadChildren: () => import('app/pages/content-pages/content-pages.module').then(m => m.ContentPagesModule)
     },
     {
         path: PathConstant.CR_VIEW,
-        loadChildren: () => import('./view/view.module').then(m => m.ViewModule)
+        loadChildren: () => import('app/view/view.module').then(m => m.ViewModule)
     },
     {
         path: PathConstant.CR_DOC_MNGMNT_VIEW,
-        loadChildren: () => import('./document-management/document-management.module').then(m => m.DocumentManagementModule)
+        loadChildren: () => import('app/document-management/document-management.module').then(m => m.DocumentManagementModule)
     }
 ];
