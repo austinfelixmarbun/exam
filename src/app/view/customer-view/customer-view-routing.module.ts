@@ -8,7 +8,7 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                loadChildren: './customer-view-child.module#CustomerViewChildModule'
+                loadChildren: () => import('./customer-view-child.module').then(m => m.CustomerViewChildModule)
             }
         ]}
 ];

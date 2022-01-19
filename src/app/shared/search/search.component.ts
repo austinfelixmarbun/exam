@@ -2,12 +2,12 @@ import { Component, OnInit, Input, ViewChild, ElementRef, Inject, Renderer2, Eve
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-import { formatDate } from '@angular/common';
+import { formatDate, DOCUMENT } from '@angular/common';
 import 'rxjs/add/operator/map';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { RequestCriteriaObj } from 'app/shared/model/request-criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { DOCUMENT } from '@angular/platform-browser';
+
 import { ExcelService } from '../excel-service/excel-service';
 import { CommonConstant } from '../constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';

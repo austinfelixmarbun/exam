@@ -6,102 +6,102 @@ import { PathConstant } from '../PathConstant';
 export const Full_ROUTES: Routes = [
   {
     path: PathConstant.LR_DASHBOARD,
-    loadChildren: './dashboard/dashboard.module#DashboardModule'
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
    {
     path: PathConstant.LR_FORMS,
-    loadChildren: './forms/forms.module#FormModule'
+    loadChildren: () => import('./forms/forms.module').then(m => m.FormModule)
   },
   {
     path: PathConstant.LR_COMPNT,
-    loadChildren: './components/ui-components.module#UIComponentsModule'
+    loadChildren: () => import('./components/ui-components.module').then(m => m.UIComponentsModule)
   },
   {
     path: PathConstant.LR_OFFICE,
-    loadChildren: './office/office.module#OfficeModule'
+    loadChildren: () => import('./office/office.module').then(m => m.OfficeModule)
   },
   {
     path: PathConstant.LR_EMP,
-    loadChildren: './employee/employee.module#EmployeeModule'
+    loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule)
   },
   {
     path : PathConstant.LR_ORG,
-    loadChildren: './organization/organization.module#OrganizationModule'
+    loadChildren: () => import('./organization/organization.module').then(m => m.OrganizationModule)
   },
   {
     path: PathConstant.LR_CUST,
-    loadChildren: './customer/customer.module#CustomerModule'
+    loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule)
   },
   {
     path: PathConstant.LR_SYSTEM_SETTING,
-    loadChildren: './system-setting/system-setting.module#SystemSettingModule'
+    loadChildren: () => import('./system-setting/system-setting.module').then(m => m.SystemSettingModule)
   },
   {
     path: PathConstant.LR_COY,
-    loadChildren: './company/company.module#CompanyModule'
+    loadChildren: () => import('./company/company.module').then(m => m.CompanyModule)
   },
   {
     path: PathConstant.LR_COMMON_SETTING,
-    loadChildren: './common-setting/common-setting.module#CommonSettingModule'
+    loadChildren: () => import('./common-setting/common-setting.module').then(m => m.CommonSettingModule)
   },
   {
     path: PathConstant.LR_NOTIF,
-    loadChildren: './notification/notification.module#NotificationModule'
+    loadChildren: () => import('./notification/notification.module').then(m => m.NotificationModule)
   },
   {
     path: PathConstant.LR_PAGES,
-    loadChildren: './pages/full-pages/full-pages.module#FullPagesModule'
+    loadChildren: () => import('./pages/full-pages/full-pages.module').then(m => m.FullPagesModule)
   },
   {
     path: PathConstant.LR_UPLOAD,
-    loadChildren: './upload/upload.module#UploadModule'
+    loadChildren: () => import('./upload/upload.module').then(m => m.UploadModule)
   },
   {
     path: PathConstant.LR_ASSET,
-    loadChildren: './asset/asset.module#AssetModule'
+    loadChildren: () => import('./asset/asset.module').then(m => m.AssetModule)
   }, 
   {
     path: PathConstant.LR_VENDOR,
-    loadChildren: './vendor/vendor.module#VendorModule'
+    loadChildren: () => import('./vendor/vendor.module').then(m => m.VendorModule)
   },
   {
     path: PathConstant.LR_VERIF,
-    loadChildren: './verification/verification.module#VerificationModule'
+    loadChildren: () => import('./verification/verification.module').then(m => m.VerificationModule)
   },
   {
     path: PathConstant.LR_APPRV_SCRN,
-    loadChildren: './approval-screen/approval-screen.module#ApprovalScreenModule'
+    loadChildren: () => import('./approval-screen/approval-screen.module').then(m => m.ApprovalScreenModule)
   },
   {
     path: PathConstant.LR_ERROR,
-    loadChildren: './error-page/error-page.module#ErrorPageModule'
+    loadChildren: () => import('./error-page/error-page.module').then(m => m.ErrorPageModule)
   },
   {
     path: PathConstant.LR_SRVY,
-    loadChildren: './survey/survey.module#SurveyModule'
+    loadChildren: () => import('./survey/survey.module').then(m => m.SurveyModule)
   },
   {
     path: PathConstant.LR_INTEGRATION,
-    loadChildren: './integration/integration.module#IntegrationModule'
+    loadChildren: () => import('./integration/integration.module').then(m => m.IntegrationModule)
   },
   {
     path: PathConstant.LR_DOC_MNGMNT,
-    loadChildren: './document-management/document-management.module#DocumentManagementModule'
+    loadChildren: () => import('./document-management/document-management.module').then(m => m.DocumentManagementModule)
   },
   {
     path: PathConstant.LR_JOURNAL,
-    loadChildren: './journal/journal.module#JournalModule'
+    loadChildren: () => import('./journal/journal.module').then(m => m.JournalModule)
   },
   {
     path: PathConstant.LR_FEE,
-    loadChildren: './fee/fee.module#FeeModule'
+    loadChildren: () => import('./fee/fee.module').then(m => m.FeeModule)
   },
   {
     path: PathConstant.LR_LICENSE,
-    loadChildren: './license/license.module#LicenseModule'
+    loadChildren: () => import('./license/license.module').then(m => m.LicenseModule)
   },
   {
     path: PathConstant.LR_SYS_USER,
-    loadChildren: './system-user/./system-user.module#SystemUserModule'
+    loadChildren: () => import('./system-user/./system-user.module').then(m => m.SystemUserModule)
   }
 ];
