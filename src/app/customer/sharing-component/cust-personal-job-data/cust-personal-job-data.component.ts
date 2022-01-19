@@ -31,7 +31,7 @@ import { JobAddrSectionComponent } from './job-addr-section/job-addr-section.com
 })
 export class CustPersonalJobDataComponent implements OnInit {
 
-  @ViewChild('JobAddrForm', {static: false}) jobAddrForm: JobAddrSectionComponent;
+  @ViewChild('JobAddrForm') jobAddrForm: JobAddrSectionComponent;
   @Input() CustId: number = 0;
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
   CustomerJobForm: FormGroup = this.fb.group({});
@@ -43,7 +43,7 @@ export class CustPersonalJobDataComponent implements OnInit {
   readonly RefMasterTypeCodeInvestmentType: string = CommonConstant.RefMasterTypeCodeInvestmentType;
 
   private ucLookupProfession: UclookupgenericComponent;
-  @ViewChild('LookupProfession', {static: false}) set content(content: UclookupgenericComponent) {
+  @ViewChild('LookupProfession') set content(content: UclookupgenericComponent) {
     if (content) { // initially setter gets called with undefined
       this.ucLookupProfession = content;
     }

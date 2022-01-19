@@ -25,8 +25,8 @@ import { NewCustSetData } from '../sharing-component/new-cust-component/NewCustS
 })
 export class CustAttrSectionComponent implements OnInit {
 
-  @ViewChild('CustAttrForm', {static: false}) custAttrForm: CustAttrFormComponent;
-  @ViewChild('CustAttrFormOld', {static: false}) custAttrFormOld: CustAttrListComponent;
+  @ViewChild('CustAttrForm') custAttrForm: CustAttrFormComponent;
+  @ViewChild('CustAttrFormOld') custAttrFormOld: CustAttrListComponent;
   @Input() CustId: number;
   @Input() MrCustTypeCode: string;
   @Output() outputTab: EventEmitter<Object> = new EventEmitter<Object>();

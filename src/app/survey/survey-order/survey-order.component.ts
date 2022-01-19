@@ -11,7 +11,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 })
 export class SurveyOrderComponent implements OnInit {
 
-  @ViewChild(UcpagingComponent, {static: false}) ucPaging: UcpagingComponent;
+  @ViewChild(UcpagingComponent) ucPaging: UcpagingComponent;
 
   inputPagingObj: UcPagingObj = new UcPagingObj();
   SrvyOrderId: number;

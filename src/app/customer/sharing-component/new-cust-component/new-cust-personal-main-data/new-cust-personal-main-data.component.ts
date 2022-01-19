@@ -47,11 +47,11 @@ import { ThirdPartyFormComponent } from '../component/third-party-form/third-par
 })
 export class NewCustPersonalMainDataComponent implements OnInit {
 
-  @ViewChild('ShareholderForm', {static: false}) shareholderForm: ShareholderFormComponent;
-  @ViewChild('FamilyForm', {static: false}) familyForm: FamilyFormComponent;
-  @ViewChild('CustAttrForm', {static: false}) custAttrForm: CustAttrFormComponent;
+  @ViewChild('ShareholderForm') shareholderForm: ShareholderFormComponent;
+  @ViewChild('FamilyForm') familyForm: FamilyFormComponent;
+  @ViewChild('CustAttrForm') custAttrForm: CustAttrFormComponent;
   private ucLookupExistingCust: UclookupgenericComponent;
-  @ViewChild('LookupExistingCust', {static: false}) set content(content: UclookupgenericComponent) {
+  @ViewChild('LookupExistingCust') set content(content: UclookupgenericComponent) {
     if (content) { // initially setter gets called with undefined
       this.ucLookupExistingCust = content;
     }
@@ -76,7 +76,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   pageFrom: string = CommonConstant.CustFromEditMainData;
   isReady: boolean = false;
-  @ViewChild(ThirdPartyFormComponent, {static: false}) child : ThirdPartyFormComponent;
+  @ViewChild(ThirdPartyFormComponent) child : ThirdPartyFormComponent;
 
   constructor(private regexService: RegexService, private toastr: NGXToastrService,
     private http: HttpClient, private fb: FormBuilder,

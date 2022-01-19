@@ -23,8 +23,8 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class EmployeePositionComponent implements OnInit {
 
-  @ViewChild(UCSearchComponent, {static: false}) searchComponent;
-  @ViewChild(UcgridfooterComponent, {static: false}) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
   refEmpId: any;
   refOfficeId: any;

@@ -18,9 +18,9 @@ export class LookupgenericComponent implements OnInit {
   @Input() parentForm: any;
   @Input() identifier: any = "lookupGeneric";
   @Output() lookup: EventEmitter<any> = new EventEmitter();
-  @ViewChild(UCSearchComponent, {static: false}) searchComponent;
-  @ViewChild('content', {static: false}) contentTemplate;
-  @ViewChild(UcgridfooterComponent, {static: false}) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild('content') contentTemplate;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
   genericJson: any;
 

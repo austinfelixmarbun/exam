@@ -24,8 +24,8 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   providers: [NGXToastrService]
 })
 export class UploadSettingEditComponent implements OnInit {
-  @ViewChild(SearchComponent, {static: false}) searchComponent;
-  @ViewChild('uclRole', {static: false}) ucLookupRole;
+  @ViewChild(SearchComponent) searchComponent;
+  @ViewChild('uclRole') ucLookupRole;
   inputLookupObj: any;
   resultData: string;
   foundationUrl: string = environment.FoundationR3Url;

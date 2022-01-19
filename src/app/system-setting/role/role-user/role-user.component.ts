@@ -20,8 +20,8 @@ import { URLConstant } from "app/shared/constant/URLConstant";
   providers: [ExcelService, DecimalPipe]
 })
 export class RoleUserComponent implements OnInit {
-  @ViewChild(UCSearchComponent, {static: false}) searchComponent;
-  @ViewChild(UcgridfooterComponent, {static: false}) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
   resultData: any;
   pageNow: any;

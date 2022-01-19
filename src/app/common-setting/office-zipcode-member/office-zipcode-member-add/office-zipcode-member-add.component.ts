@@ -20,8 +20,8 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class OfficeZipcodeMemberAddComponent implements OnInit {
   //** Start UC Search **//
-  @ViewChild(UCSearchComponent, {static: false}) searchComponent;
-  @ViewChild(UcgridfooterComponent, {static: false}) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
   refOfficeId: any;
   officeCode: any;

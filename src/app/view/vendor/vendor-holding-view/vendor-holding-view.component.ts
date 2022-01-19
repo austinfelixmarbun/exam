@@ -20,8 +20,8 @@ import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
   providers: [NGXToastrService]
 })
 export class VendorHoldingViewComponent implements OnInit {
-  @ViewChild(UcgridfooterComponent, {static: false}) UCGridFooter;
-  @ViewChild(UCSearchComponent, {static: false}) UCSearchComponent;
+  @ViewChild(UcgridfooterComponent) UCGridFooter;
+  @ViewChild(UCSearchComponent) UCSearchComponent;
   VendorId: any;
   viewVendorHoldingObj: UcViewGenericObj = new UcViewGenericObj();
   arrCrit: any[];

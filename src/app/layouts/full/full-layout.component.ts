@@ -23,8 +23,8 @@ export class FullLayoutComponent implements OnInit {
         direction: 'ltr'
     };
 
-    @ViewChild(SidebarComponent, {static: false}) sbComp: SidebarComponent;
-    @ViewChild(NavbarComponent, {static: false}) nbComp: NavbarComponent;
+    @ViewChild(SidebarComponent) sbComp: SidebarComponent;
+    @ViewChild(NavbarComponent) nbComp: NavbarComponent;
     subEnd: any;
     unsubscribe: any;
 

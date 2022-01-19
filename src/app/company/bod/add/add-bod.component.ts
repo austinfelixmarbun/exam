@@ -22,8 +22,8 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 export class BodAddComponent implements OnInit {
 
-    @ViewChild(UcAddressComponent, {static: false}) ucAddr;
-    @ViewChild(UcInfoComponent, {static: false}) ucInfo;
+    @ViewChild(UcAddressComponent) ucAddr;
+    @ViewChild(UcInfoComponent) ucInfo;
     param: string;
     itemIdType: any;
     businessUnitCode: string;

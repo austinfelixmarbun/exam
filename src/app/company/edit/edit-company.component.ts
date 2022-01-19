@@ -20,8 +20,8 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class EditCompanyComponent implements OnInit {
 
-    @ViewChild(UcAddressComponent, {static: false}) ucAddr;
-    @ViewChild(UcContactInfoComponent, {static: false}) ucContact;
+    @ViewChild(UcAddressComponent) ucAddr;
+    @ViewChild(UcContactInfoComponent) ucContact;
     param: string;
     result: any;
     mode: string = "add";

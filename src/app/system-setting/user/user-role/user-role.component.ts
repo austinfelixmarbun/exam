@@ -18,7 +18,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 })
 export class UserRoleComponent implements OnInit {
 
-  @ViewChild(SearchComponent, {static: false}) searchComponent;
+  @ViewChild(SearchComponent) searchComponent;
   resultData: any;
   foundationUrl: string = environment.FoundationR3Url;
   apiUrl: any;

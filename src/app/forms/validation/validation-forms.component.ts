@@ -8,8 +8,8 @@ import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
 })
 
 export class ValidationFormsComponent implements OnInit {
-    @ViewChild('f', {static: false}) floatingLabelForm: NgForm;
-    @ViewChild('vform', {static: false}) validationForm: FormGroup;
+    @ViewChild('f') floatingLabelForm: NgForm;
+    @ViewChild('vform') validationForm: FormGroup;
     regularForm: FormGroup;
 
     ngOnInit() {

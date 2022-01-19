@@ -45,7 +45,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
   oldGradeCode: String;
   oldVendorRating: number;
   private createComponent: UcapprovalcreateComponent;
-  @ViewChild('ApprovalComponent', {static: false}) set content(content: UcapprovalcreateComponent) {
+  @ViewChild('ApprovalComponent') set content(content: UcapprovalcreateComponent) {
     if (content) {
       // initially setter gets called with undefined
       this.createComponent = content;

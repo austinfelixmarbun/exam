@@ -35,7 +35,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class NewCustCompanyMainDataComponent implements OnInit {
 
-  @ViewChild('ShareholderForm', {static: false}) shareholderForm: ShareholderFormComponent;
+  @ViewChild('ShareholderForm') shareholderForm: ShareholderFormComponent;
   @Input() listCustNoToExclude: Array<string> = new Array();
   @Input() CustId: number = 0; // if 0 mode Add else mode Edit.
   @Input() CustCompanyMgmntShrholderId: number = 0;

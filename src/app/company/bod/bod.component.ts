@@ -20,8 +20,8 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class BODComponent implements OnInit {
 
-  @ViewChild(UCSearchComponent, {static: false}) searchComponent;
-  @ViewChild(UcgridfooterComponent, {static: false}) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
   resultData: any;
   pageNow: any;

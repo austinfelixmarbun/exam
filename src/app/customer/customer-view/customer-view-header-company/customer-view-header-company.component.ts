@@ -10,7 +10,7 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   private viewGeneric: UcviewgenericComponent;
-  @ViewChild('viewGeneric', {static: false}) set content(content: UcviewgenericComponent) {
+  @ViewChild('viewGeneric') set content(content: UcviewgenericComponent) {
     if (content) { // initially setter gets called with undefined
       this.viewGeneric = content;
     }

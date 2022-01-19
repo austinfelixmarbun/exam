@@ -19,8 +19,8 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 export class UploadMonitoringComponent implements OnInit {
 
   // ** Start Query Paging */
-  @ViewChild(UCSearchComponent, {static: false}) searchComponent;
-  @ViewChild(UcgridfooterComponent, {static: false}) ucgridFooter;
+  @ViewChild(UCSearchComponent) searchComponent;
+  @ViewChild(UcgridfooterComponent) ucgridFooter;
   inputObj: any;
   // ** End Query Paging */
 

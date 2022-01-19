@@ -36,7 +36,7 @@ export class AssetAttributeDetailComponent implements OnInit {
   criteriaObj: any;
   reqGetListObj: any;
   RowVersion: any;
-  @ViewChild('LookupAssetAttr', {static: false}) ucLookupAssetAttr: UclookupgenericComponent;
+  @ViewChild('LookupAssetAttr') ucLookupAssetAttr: UclookupgenericComponent;
 
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
