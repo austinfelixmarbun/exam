@@ -102,7 +102,6 @@ export class VendorEmployeeComponent implements OnInit {
 
     if (this.mode == "edit") {
       this.VendorEmpForm.controls["VendorEmpCode"].disable();
-      this.VendorEmpForm.controls["VendorEmpName"].disable();
       await this.getData();
       this.setLookup();
     } else {
