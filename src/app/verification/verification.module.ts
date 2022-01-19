@@ -24,35 +24,34 @@ import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
-  imports: [
-    VerificationRoutingModule,
-    CommonModule,
-    NgbModule,
-    AdInsSharedModule,
-    SharingComponentModule,
-    NgbDropdownModule,
-    ArchwizardModule,
-    AdInsModule
-  ],
-  declarations: [
-    VerificationComponent,
-    VerificationQuestionAnswerPagingComponent,
-    VerificationQuestionAnswerAddEditComponent,
-    VerificationQuestionGroupAddEditComponent,
-    VerificationQuestionGroupPagingComponent,
-    VerificationQuestionGroupMemberPagingComponent,
-    VerificationQuestionGroupMemberEditComponent,
-    VerificationQuestionGroupMemberAddComponent,
-    VerificationQuestionSchemePagingComponent,
-    VerificationQuestionSchemeAddEditComponent,
-    VerificationQuestionSchemeMemberPagingComponent,
-    VerificationQuestionSchemeMemberAddComponent,
-    VerificationQuestionSchemeMemberEditComponent,
-  ],
-  entryComponents : [UcviewgenericComponent],
-  providers: [
-    NGXToastrService,
-    VerificationService
-  ]
+    imports: [
+        VerificationRoutingModule,
+        CommonModule,
+        NgbModule,
+        AdInsSharedModule,
+        SharingComponentModule,
+        NgbDropdownModule,
+        ArchwizardModule,
+        AdInsModule
+    ],
+    declarations: [
+        VerificationComponent,
+        VerificationQuestionAnswerPagingComponent,
+        VerificationQuestionAnswerAddEditComponent,
+        VerificationQuestionGroupAddEditComponent,
+        VerificationQuestionGroupPagingComponent,
+        VerificationQuestionGroupMemberPagingComponent,
+        VerificationQuestionGroupMemberEditComponent,
+        VerificationQuestionGroupMemberAddComponent,
+        VerificationQuestionSchemePagingComponent,
+        VerificationQuestionSchemeAddEditComponent,
+        VerificationQuestionSchemeMemberPagingComponent,
+        VerificationQuestionSchemeMemberAddComponent,
+        VerificationQuestionSchemeMemberEditComponent,
+    ],
+    providers: [
+        NGXToastrService,
+        VerificationService
+    ]
 })
 export class VerificationModule { }

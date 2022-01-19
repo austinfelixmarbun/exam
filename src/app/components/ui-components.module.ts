@@ -35,7 +35,6 @@ import { AdInsSharedModule } from './adins-module/adins-shared.module';
     declarations: [
         ToastrComponent,
         TypeaheadComponent
-    ],
-    entryComponents: []
+    ]
 })
 export class UIComponentsModule { }

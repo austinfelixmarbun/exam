@@ -21,36 +21,29 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
 
 
 @NgModule({
-  imports: [
-    CustomerViewPersonalEmergencyContactRoutingModule,
-    CommonModule,
-    FormsModule,
-    UCSearchModule,
-    UcgridfooterModule,
-    UcpagingModule,
-    UcviewgenericModule,
-    UcgridviewModule,
-    NgbModule,
-    SharingModule,
-    ArchwizardModule,
-    ReactiveFormsModule,
-    UcSubsectionModule,
-    SharingComponentModule,
-    UcapprovalhistModule,
-    UcShowErrorsModule,
-    SharedModule,
-    AdInsSharedModule
-  ],
-  declarations: [
-    ///customer
-    CustomerViewPersonalEmergencyContactComponent
-
-  ],
-  entryComponents: [
-    UcviewgenericComponent,
-    UcgridviewComponent,
-    UcapprovalhistComponent
-  ]
-
+    imports: [
+        CustomerViewPersonalEmergencyContactRoutingModule,
+        CommonModule,
+        FormsModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        UcpagingModule,
+        UcviewgenericModule,
+        UcgridviewModule,
+        NgbModule,
+        SharingModule,
+        ArchwizardModule,
+        ReactiveFormsModule,
+        UcSubsectionModule,
+        SharingComponentModule,
+        UcapprovalhistModule,
+        UcShowErrorsModule,
+        SharedModule,
+        AdInsSharedModule
+    ],
+    declarations: [
+        ///customer
+        CustomerViewPersonalEmergencyContactComponent
+    ]
 })
 export class CustomerViewPersonalEmergencyContactModule { }

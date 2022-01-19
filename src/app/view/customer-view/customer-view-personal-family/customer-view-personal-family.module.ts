@@ -17,31 +17,26 @@ import { CustomerViewPersonalFamilyRoutingModule } from "./customer-view-persona
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 @NgModule({
-  imports: [
-    CustomerViewPersonalFamilyRoutingModule,
-    CommonModule,
-    FormsModule,
-    UCSearchModule,
-    UcgridfooterModule,
-    UcpagingModule,
-    UcviewgenericModule,
-    UcgridviewModule,
-    NgbModule,
-    AdInsSharedModule,
-    SharingModule,
-    ArchwizardModule,
-    ReactiveFormsModule,
-    UcSubsectionModule,
-    SharingComponentModule,
-    UcShowErrorsModule,
-  ],
-  declarations: [
-    CustomerViewPersonalFamilyComponent
-  ],
-  entryComponents: [
-    UcviewgenericComponent,
-    UcgridviewComponent
-  ]
-
+    imports: [
+        CustomerViewPersonalFamilyRoutingModule,
+        CommonModule,
+        FormsModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        UcpagingModule,
+        UcviewgenericModule,
+        UcgridviewModule,
+        NgbModule,
+        AdInsSharedModule,
+        SharingModule,
+        ArchwizardModule,
+        ReactiveFormsModule,
+        UcSubsectionModule,
+        SharingComponentModule,
+        UcShowErrorsModule,
+    ],
+    declarations: [
+        CustomerViewPersonalFamilyComponent
+    ]
 })
 export class CustomerViewPersonalFamilyModule { }

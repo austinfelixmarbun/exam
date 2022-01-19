@@ -19,32 +19,26 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
 
 
 @NgModule({
-  imports: [
-    CustomerViewCoyManagementRoutingModule,
-    CommonModule,
-    FormsModule,
-    UCSearchModule,
-    UcgridfooterModule,
-    UcpagingModule,
-    UcviewgenericModule,
-    UcgridviewModule,
-    NgbModule,
-    SharingModule,
-    AdInsSharedModule,
-    ArchwizardModule,
-    ReactiveFormsModule,
-    UcSubsectionModule,
-    SharingComponentModule,
-    UcShowErrorsModule,
-  ],
-  declarations: [
-    CustomerViewCoyManagementComponent
-
-  ],
-  entryComponents: [
-    UcviewgenericComponent,
-    UcgridviewComponent
-  ]
-
+    imports: [
+        CustomerViewCoyManagementRoutingModule,
+        CommonModule,
+        FormsModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        UcpagingModule,
+        UcviewgenericModule,
+        UcgridviewModule,
+        NgbModule,
+        SharingModule,
+        AdInsSharedModule,
+        ArchwizardModule,
+        ReactiveFormsModule,
+        UcSubsectionModule,
+        SharingComponentModule,
+        UcShowErrorsModule,
+    ],
+    declarations: [
+        CustomerViewCoyManagementComponent
+    ]
 })
 export class CustomerViewCoyManagementModule { }

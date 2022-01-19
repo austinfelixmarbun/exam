@@ -17,30 +17,27 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
-  declarations: [
-    CustomerViewCustomerAssetComponent
-  ],
-  imports: [
-    CommonModule,
-    CustomerViewCustomerAssetRoutingModule,
-    CommonModule,
-    FormsModule,
-    UCSearchModule,
-    UcgridfooterModule,
-    UcpagingModule,
-    UcviewgenericModule,
-    UcgridviewModule,
-    NgbModule,
-    AdInsSharedModule,
-    SharingModule,
-    ArchwizardModule,
-    ReactiveFormsModule,
-    UcSubsectionModule,
-    SharingComponentModule,
-    UcShowErrorsModule,
-  ],entryComponents: [
-    UcviewgenericComponent,
-    UcgridviewComponent
-  ]
+    declarations: [
+        CustomerViewCustomerAssetComponent
+    ],
+    imports: [
+        CommonModule,
+        CustomerViewCustomerAssetRoutingModule,
+        CommonModule,
+        FormsModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        UcpagingModule,
+        UcviewgenericModule,
+        UcgridviewModule,
+        NgbModule,
+        AdInsSharedModule,
+        SharingModule,
+        ArchwizardModule,
+        ReactiveFormsModule,
+        UcSubsectionModule,
+        SharingComponentModule,
+        UcShowErrorsModule,
+    ]
 })
 export class CustomerViewCustomerAssetModule { }

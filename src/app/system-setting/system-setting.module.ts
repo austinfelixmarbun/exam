@@ -40,51 +40,50 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
 
 
 @NgModule({
-  imports: [
-    AdInsModule,
-    AdInsSharedModule,
-    SystemSettingRoutingModule,
-    CommonModule,
-    FormsModule,
-    NgbModule,
-    SharingComponentModule,
-    UCSearchModule,
-    UcgridfooterModule,
-    UcpagingModule,
-    UcSubsectionModule,
-    ReactiveFormsModule,
-    NgMultiSelectDropDownModule,
-    UcviewgenericModule,
-    UcgridviewModule,
-    UclookupgenericModule,
-    UcShowErrorsModule,
-    UcaddtotempModule,
-    MatSlideToggleModule,
-    UcdropdownlistModule
-  ],
-  declarations: [
-    UserPagingComponent,
-    RoleAddEditComponent,
-    RolePagingComponent,
-    UserRoleComponent,
-    RoleUserComponent,
-    RoleFormComponent,
-    UserChangePasswordComponent,
-    NotificationPagingComponent,
-    NotificationAddEditComponent,
-    NotificationApprovalPagingComponent,
-    NotificationApprovalDetailComponent,
-    RefFormPagingComponent,
-    RefFormDetailComponent,
-    RefFormRoleMappingComponent,
-    RefFormRolePagingComponent,
-    RoleFormPagingComponent,
-    AttributeComponent,
-    AttributeDetailComponent
-  ],
-  entryComponents : [UcviewgenericComponent],
-  providers: [
-    NGXToastrService
-  ]
+    imports: [
+        AdInsModule,
+        AdInsSharedModule,
+        SystemSettingRoutingModule,
+        CommonModule,
+        FormsModule,
+        NgbModule,
+        SharingComponentModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        UcpagingModule,
+        UcSubsectionModule,
+        ReactiveFormsModule,
+        NgMultiSelectDropDownModule,
+        UcviewgenericModule,
+        UcgridviewModule,
+        UclookupgenericModule,
+        UcShowErrorsModule,
+        UcaddtotempModule,
+        MatSlideToggleModule,
+        UcdropdownlistModule
+    ],
+    declarations: [
+        UserPagingComponent,
+        RoleAddEditComponent,
+        RolePagingComponent,
+        UserRoleComponent,
+        RoleUserComponent,
+        RoleFormComponent,
+        UserChangePasswordComponent,
+        NotificationPagingComponent,
+        NotificationAddEditComponent,
+        NotificationApprovalPagingComponent,
+        NotificationApprovalDetailComponent,
+        RefFormPagingComponent,
+        RefFormDetailComponent,
+        RefFormRoleMappingComponent,
+        RefFormRolePagingComponent,
+        RoleFormPagingComponent,
+        AttributeComponent,
+        AttributeDetailComponent
+    ],
+    providers: [
+        NGXToastrService
+    ]
 })
 export class SystemSettingModule { }

@@ -35,16 +35,11 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
         ReactiveFormsModule,
         UcSubsectionModule,
         SharingComponentModule,
-
-        
     ],
     declarations: [
         CustExposureViewComponent,
         ObligorExposureComponent,
         CustExposureComponent
-    ],
-    entryComponents: [
     ]
-
 })
 export class CustExposureViewModule { }

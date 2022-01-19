@@ -110,8 +110,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         // },
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
-    bootstrap: [AppComponent],
-    entryComponents: [ErrorDialogComponent, RolepickComponent]
+    bootstrap: [AppComponent]
 })
 export class AppModule {
     constructor() {

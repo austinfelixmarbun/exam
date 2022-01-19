@@ -17,35 +17,29 @@ import { SharedModule } from "app/shared/shared.module";
 import { AdInsModule } from "app/components/adins-module/adins.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 @NgModule({
-  imports: [
-    AdInsModule,
-    ViewRoutingModule,
-    CommonModule,
-    UcviewgenericModule,
-    NgbModule,
-    SharingModule,
-    ArchwizardModule,
-    UcSubsectionModule,
-    SharingComponentModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SurveyTaskViewModule,
-    SharedModule,
-    AdInsSharedModule
-  //   TranslateModule.forRoot({
-  //     loader: {
-  //         provide: TranslateLoader,
-  //         useFactory: (createTranslateLoader),
-  //         deps: [HttpClient]
-  //     }
-  // }),
-    
-  ],
-  declarations: [],
-  entryComponents: [
-    UcgridviewComponent,
-    UcSubsectionComponent
-  ]
-
+    imports: [
+        AdInsModule,
+        ViewRoutingModule,
+        CommonModule,
+        UcviewgenericModule,
+        NgbModule,
+        SharingModule,
+        ArchwizardModule,
+        UcSubsectionModule,
+        SharingComponentModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SurveyTaskViewModule,
+        SharedModule,
+        AdInsSharedModule
+        //   TranslateModule.forRoot({
+        //     loader: {
+        //         provide: TranslateLoader,
+        //         useFactory: (createTranslateLoader),
+        //         deps: [HttpClient]
+        //     }
+        // }),
+    ],
+    declarations: []
 })
 export class ViewModule { }

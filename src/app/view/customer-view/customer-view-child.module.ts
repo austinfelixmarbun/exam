@@ -27,38 +27,34 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
 
 
 @NgModule({
-  imports: [
-    CustomerViewChildRoutingModule,
-    CommonModule,
-    FormsModule,
-    UCSearchModule,
-    UcgridfooterModule,
-    UcpagingModule,
-    UclookupgenericModule,
-    UcviewgenericModule,
-    UcgridviewModule,
-    NgbModule,
-    SharingModule,
-    ArchwizardModule,
-    ReactiveFormsModule,
-    UcSubsectionModule,
-    SharingComponentModule,
-    UcShowErrorsModule,
-    SharedModule,
-    AdInsSharedModule
-  ],
-  declarations: [
-    CustomerViewCoyAppListingComponent,
-    CustomerViewCoyExposureComponent,
-    CustomerViewCoyCustScoreComponent,
-    CustomerViewCoyCustAddColateralComponent,
-    CustomerViewPersonalAddressComponent,
-    CustomerViewCoyAddressComponent,
-    CustomerViewPersonalCustomerGroupComponent
-  ],
-  entryComponents: [
-    UcviewgenericComponent,
-    UcgridviewComponent
-  ]
+    imports: [
+        CustomerViewChildRoutingModule,
+        CommonModule,
+        FormsModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        UcpagingModule,
+        UclookupgenericModule,
+        UcviewgenericModule,
+        UcgridviewModule,
+        NgbModule,
+        SharingModule,
+        ArchwizardModule,
+        ReactiveFormsModule,
+        UcSubsectionModule,
+        SharingComponentModule,
+        UcShowErrorsModule,
+        SharedModule,
+        AdInsSharedModule
+    ],
+    declarations: [
+        CustomerViewCoyAppListingComponent,
+        CustomerViewCoyExposureComponent,
+        CustomerViewCoyCustScoreComponent,
+        CustomerViewCoyCustAddColateralComponent,
+        CustomerViewPersonalAddressComponent,
+        CustomerViewCoyAddressComponent,
+        CustomerViewPersonalCustomerGroupComponent
+    ]
 })
 export class CustomerViewChildModule { }

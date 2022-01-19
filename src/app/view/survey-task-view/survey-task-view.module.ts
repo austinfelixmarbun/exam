@@ -22,11 +22,11 @@ import { ViewSurveyTaskDetailComponent } from './view-survey-task-detail/view-su
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
-  declarations: [SurveyTaskViewComponent,
-    ViewSurveyTaskDetailComponent],
-  imports: [
-    CommonModule,
-    SurveyTaskViewRoutingModule,
+    declarations: [SurveyTaskViewComponent,
+        ViewSurveyTaskDetailComponent],
+    imports: [
+        CommonModule,
+        SurveyTaskViewRoutingModule,
         FormsModule,
         UCSearchModule,
         UcgridfooterModule,
@@ -44,14 +44,7 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
         UcShowErrorsModule,
         SharedModule,
         AdInsSharedModule
-  ],
-  entryComponents: [
-      UclookupgenericComponent,
-      UcviewgenericComponent,
-      UcgridviewComponent,
-      UcapprovalhistComponent,
-  ],
-  exports: [
-  ]
+    ],
+    exports: []
 })
 export class SurveyTaskViewModule { }

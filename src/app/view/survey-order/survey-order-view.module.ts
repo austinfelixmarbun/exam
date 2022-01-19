@@ -19,33 +19,28 @@ import { AdInsModule } from "app/components/adins-module/adins.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 @NgModule({
-  declarations: [
-    SurveyOrderViewComponent
-  ],
-  imports: [
-    AdInsModule,
-    SurveyOrderViewRoutingModule,
-    CommonModule,
-    FormsModule,
-    UCSearchModule,
-    UcgridfooterModule,
-    UcpagingModule,
-    UclookupgenericModule,
-    UcviewgenericModule,
-    UcgridviewModule,
-    NgbModule,
-    AdInsSharedModule,
-    SharingModule,
-    ArchwizardModule,
-    ReactiveFormsModule,
-    UcSubsectionModule,
-    SharingComponentModule,
-    UcShowErrorsModule
-  ],
-  entryComponents: [
-    UclookupgenericComponent,
-    UcviewgenericComponent,
-    UcgridviewComponent
-  ]
+    declarations: [
+        SurveyOrderViewComponent
+    ],
+    imports: [
+        AdInsModule,
+        SurveyOrderViewRoutingModule,
+        CommonModule,
+        FormsModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        UcpagingModule,
+        UclookupgenericModule,
+        UcviewgenericModule,
+        UcgridviewModule,
+        NgbModule,
+        AdInsSharedModule,
+        SharingModule,
+        ArchwizardModule,
+        ReactiveFormsModule,
+        UcSubsectionModule,
+        SharingComponentModule,
+        UcShowErrorsModule
+    ]
 })
 export class SurveyOrderViewModule { }

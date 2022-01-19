@@ -81,7 +81,7 @@ export const customCurrencyMaskConfig = {
         AdInsSharedModule,
         ArchwizardModule,
         MatTabsModule,
-        AdInsModule,        
+        AdInsModule,
         NgMultiSelectDropDownModule,
         NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
         CustomerViewTrustingSocialModule
@@ -108,14 +108,12 @@ export const customCurrencyMaskConfig = {
         PefindoReqComponent,
         ThirdPartyFormComponent
     ],
-
     providers: [
         NGXToastrService,
         RegexService,
         NewCustSetData,
         ThirdPartyUploadService
-    ],
-    entryComponents: [TrustingSocialReqHeaderComponent, TrustingSocialViewHeaderComponent, PefindoReqComponent]
+    ]
 })
 export class NewCustomerSharingModule {
     constructor() {
