@@ -9,6 +9,7 @@ import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { environment } from 'environments/environment';
 import { RefCoaObj } from 'app/shared/model/common-setting/ref-coa-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-coa-scheme-detail',
@@ -172,7 +173,7 @@ export class CoaSchemeDetailComponent implements OnInit {
     }
     this.coaSchmObj.ListRefCoa = this.ListRefCoaObj;
 
-    this.http.post(URLConstant.SubmitCoaSchm, this.coaSchmObj).subscribe(
+    this.http.post(URLConstant.SubmitCoaSchm, this.coaSchmObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.router.navigate([NavigationConstant.CS_COA_SCHM_PAGING]);
         this.toastr.successMessage(response["Message"]);

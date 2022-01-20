@@ -18,7 +18,7 @@ export class ApprovalTaskService{
         var claimTaskObj = new ApvClaimTaskObj();
         claimTaskObj.TaskId = TaskId;
         claimTaskObj.Username = currentUserContext[CommonConstant.USER_NAME];
-        await this.http.post(AdInsConstant.ApvClaimTask, claimTaskObj).toPromise().then(
+        await this.http.post(AdInsConstant.ApvClaimTask, claimTaskObj, AdInsConstant.SpinnerOptions).toPromise().then(
             (response) => {
                 if (response["StatusCode"] != 200) {
                     this.toastr.errorMessage(response["Message"]);
@@ -30,7 +30,7 @@ export class ApprovalTaskService{
     HoldApvTask(TaskId: number){
         let ApvReqObj = new ApprovalObj();
         ApvReqObj.TaskId = TaskId;
-        this.http.post(AdInsConstant.ApvHoldTaskUrl, ApvReqObj).subscribe(
+        this.http.post(AdInsConstant.ApvHoldTaskUrl, ApvReqObj, AdInsConstant.SpinnerOptions).subscribe(
             (response) => {
                 this.toastr.successMessage(response["Message"]);
             }
@@ -41,7 +41,7 @@ export class ApprovalTaskService{
         let ApvReqObj = new ApprovalObj();
         ApvReqObj.TaskId = TaskId;
         ApvReqObj.Username = Username;
-        this.http.post(AdInsConstant.ApvTakeBackTaskUrl, ApvReqObj).subscribe(
+        this.http.post(AdInsConstant.ApvTakeBackTaskUrl, ApvReqObj, AdInsConstant.SpinnerOptions).subscribe(
             (response) => {
                this.toastr.successMessage(response["Message"]);
             }
@@ -51,7 +51,7 @@ export class ApprovalTaskService{
     UnclaimApvTask(TaskId: number){
         let ApvReqObj = new ApprovalObj();
         ApvReqObj.TaskId = TaskId;
-        this.http.post(AdInsConstant.ApvUnclaimTaskUrl, ApvReqObj).subscribe(
+        this.http.post(AdInsConstant.ApvUnclaimTaskUrl, ApvReqObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
           }

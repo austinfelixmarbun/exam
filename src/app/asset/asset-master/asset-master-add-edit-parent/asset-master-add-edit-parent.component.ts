@@ -284,14 +284,14 @@ export class AssetMasterAddEditParentComponent implements OnInit {
             this.listAssetScheme[i].AssetMasterId = null;
           }
         }
-        this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj).pipe(
+        this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj, AdInsConstant.SpinnerOptions).pipe(
           map((response) => {
             return response;
           }),
           mergeMap((response) => {
             this.listAssetSchmDObj.AssetMasterId = response["AssetMasterId"];
             let observableBatch = []; 
-            let editListAssetSchm = this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj);
+            let editListAssetSchm = this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj, AdInsConstant.SpinnerOptions);
             observableBatch.push(editListAssetSchm);
             return forkJoin(observableBatch);
           })
@@ -302,7 +302,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
           });
 
       }else{
-        this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj).subscribe(
+        this.http.post(URLConstant.AddAssetMaster, this.assetMasterObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});
@@ -350,8 +350,8 @@ export class AssetMasterAddEditParentComponent implements OnInit {
           }
         } 
   
-        let editAssetMaster = this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj);
-        let editAssetSchm = this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj);
+        let editAssetMaster = this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj, AdInsConstant.SpinnerOptions);
+        let editAssetSchm = this.http.post(URLConstant.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj, AdInsConstant.SpinnerOptions);
         let observableBatch = [editAssetMaster, editAssetSchm];
       
 
@@ -365,7 +365,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
           }
         );
       }else{
-        this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj).subscribe(
+        this.http.post(URLConstant.EditAssetMaster, this.assetMasterObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});

@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-coa-detail',
@@ -169,7 +170,7 @@ export class CoaDetailComponent implements OnInit {
     var RequestListRefCoa = {
       ListRequestRefCoaObjs: this.ListRefCoaObj
     }
-    this.http.post(URLConstant.SubmitListCoa, RequestListRefCoa).subscribe(
+    this.http.post(URLConstant.SubmitListCoa, RequestListRefCoa, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.router.navigate([NavigationConstant.CS_COA_PAGING]);
         this.toastr.successMessage(response["Message"]);

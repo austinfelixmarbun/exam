@@ -14,6 +14,7 @@ import { VendorService } from 'app/vendor/vendor.service';
 import { formatDate } from '@angular/common';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-auction-company-addedit',
@@ -327,7 +328,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
           });
       }
       else{
-        this.http.post(URLConstant.AddAuctionCompany , this.AuctionCompanyObj).subscribe(
+        this.http.post(URLConstant.AddAuctionCompany , this.AuctionCompanyObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage("Success!");
             this.router.navigateByUrl(NavigationConstant.VENDOR_AUCTION_COY_PAGING);

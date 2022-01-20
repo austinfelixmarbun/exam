@@ -20,6 +20,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 @Component({
@@ -310,14 +311,14 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       this.custCompanyContactPersonObj = this.tempCustCompanyContactPersonObj;
       this.custCompanyContactPersonObj.RowVersion = this.tempCustCompanyContactPersonObj.RowVersion;
 
-      await this.http.post(URLConstant.EditCustCompanyContactPersonByCustCompanyId, this.custCompanyContactPersonObj).toPromise().then(
+      await this.http.post(URLConstant.EditCustCompanyContactPersonByCustCompanyId, this.custCompanyContactPersonObj, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           if(!IsParent) this.outputTab.emit({ stepMode: 'next' });
         }
       );
     } else {
-      await this.http.post(URLConstant.AddCustCompanyContactPerson, this.custCompanyContactPersonObj).toPromise().then(
+      await this.http.post(URLConstant.AddCustCompanyContactPerson, this.custCompanyContactPersonObj, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           if(!IsParent) this.outputTab.emit({ stepMode: 'next' });

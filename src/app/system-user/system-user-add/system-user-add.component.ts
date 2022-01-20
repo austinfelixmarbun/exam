@@ -23,6 +23,7 @@ import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
 import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { HttpClient } from '@angular/common/http';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-system-user-add',
@@ -339,7 +340,7 @@ export class SystemUserAddComponent implements OnInit {
     refEmpData.EmpBankAccObj.RefEmpId = refEmpFormData.RefEmpId;
 
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.AddRefEmp, refEmpData).subscribe(
+      this.httpClient.post(URLConstant.AddRefEmp, refEmpData, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYS_USER_PAGING],{});
@@ -349,7 +350,7 @@ export class SystemUserAddComponent implements OnInit {
     else {
       refEmpData.EmpBankAccObj.RowVersion = this.empBankAccObj.RowVersion;
       refEmpData.RefUserObj.RowVersion = this.refUserObj.RowVersion;
-      this.httpClient.post(URLConstant.EditRefEmp, refEmpData).subscribe(
+      this.httpClient.post(URLConstant.EditRefEmp, refEmpData, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYS_USER_PAGING],{});
@@ -414,7 +415,7 @@ export class SystemUserAddComponent implements OnInit {
   regenetate(){
     var refEmpFormData = this.RefEmpForm.value;
     
-    this.httpClient.post(URLConstant.GenerateAPIKey, {Username : refEmpFormData.Username, TimeToLive : 365}).subscribe(
+    this.httpClient.post(URLConstant.GenerateAPIKey, {Username : refEmpFormData.Username, TimeToLive : 365}, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         window.location.reload();
@@ -424,7 +425,7 @@ export class SystemUserAddComponent implements OnInit {
 
   revoke(){
     var refEmpFormData = this.RefEmpForm.value;
-    this.httpClient.post(URLConstant.RevokeAPIKey, {UserName : refEmpFormData.Username}).subscribe(
+    this.httpClient.post(URLConstant.RevokeAPIKey, {UserName : refEmpFormData.Username}, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         window.location.reload();

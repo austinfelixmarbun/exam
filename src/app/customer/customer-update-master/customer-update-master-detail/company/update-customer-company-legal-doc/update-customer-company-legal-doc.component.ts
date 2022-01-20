@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { UpdateCustLegalDocObj } from 'app/shared/model/update-master-cust/update-cust-legal-doc-obj.model';
@@ -88,7 +89,7 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
     }
 
     let UpdateMasterCustCompanyLegalDocUrl = environment.isCore ? URLConstant.UpdateMasterCustCompanyLegalDocv2 : URLConstant.UpdateMasterCustCompanyLegalDoc;
-    this.http.post(UpdateMasterCustCompanyLegalDocUrl, { CustCompanyId: this.CustCompanyId, TaskListId: this.WfTaskListId, LegalDocList: request }).toPromise().then(
+    this.http.post(UpdateMasterCustCompanyLegalDocUrl, { CustCompanyId: this.CustCompanyId, TaskListId: this.WfTaskListId, LegalDocList: request }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

@@ -16,7 +16,7 @@ export class LogintokenService {
   }
 
   LoginWithToken(token: string) {
-    this.http.post(AdInsConstant.LoginWithToken, { ModuleCode: environment.Module }).subscribe(
+    this.http.post(AdInsConstant.LoginWithToken, { ModuleCode: environment.Module }, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
         //window.location.href = url;

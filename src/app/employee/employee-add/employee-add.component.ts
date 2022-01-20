@@ -24,6 +24,7 @@ import { CookieService } from "ngx-cookie";
 import { NavigationConstant } from "app/shared/NavigationConstant";
 import { RefEmployeeObj } from "app/shared/model/ref-employee-obj";
 import { ReqRefEmployeeObj } from "app/shared/model/request/user-organization/ref-emp/req-ref-employee.model";
+import { AdInsConstant } from "app/shared/AdInstConstant";
 
 @Component({
   selector: "app-employee-add",
@@ -334,7 +335,7 @@ export class EmployeeAddComponent implements OnInit {
     refEmpData.EmpBankAccObj.RefEmpId = refEmpFormData.RefEmpId;
 
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.AddRefEmp, refEmpData).subscribe(
+      this.httpClient.post(URLConstant.AddRefEmp, refEmpData, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_PAGING],{});
@@ -344,7 +345,7 @@ export class EmployeeAddComponent implements OnInit {
     else {
       refEmpData.EmpBankAccObj.RowVersion = this.empBankAccObj.RowVersion;
       refEmpData.RefUserObj.RowVersion = this.refUserObj.RowVersion;
-      this.httpClient.post(URLConstant.EditRefEmp, refEmpData).subscribe(
+      this.httpClient.post(URLConstant.EditRefEmp, refEmpData, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_PAGING],{});

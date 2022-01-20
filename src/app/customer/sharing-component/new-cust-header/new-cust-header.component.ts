@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { DuplicateCustObj } from 'app/shared/model/duplicate-cust.model';
@@ -135,7 +136,7 @@ export class NewCustHeaderComponent implements OnInit {
   DupCheckPersonalObj: ReqPersonalObj = new ReqPersonalObj();
   ClickSavePersonal(ev: ReqPersonalObj) {
     if (ev.CustObj.CustId != 0) {
-      this.http.post(this.SetUrlEditPersonal(), ev).subscribe(
+      this.http.post(this.SetUrlEditPersonal(), ev, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.redirectSaveEditMainData(ev.CustObj.CustId);
@@ -150,7 +151,7 @@ export class NewCustHeaderComponent implements OnInit {
   DupCheckCoyObj: ReqCoyObj = new ReqCoyObj();
   ClickSaveCoy(ev: ReqCoyObj) {
     if (ev.CustObj.CustId != 0) {
-      this.http.post(this.SetUrlEditCoy(), ev).subscribe(
+      this.http.post(this.SetUrlEditCoy(), ev, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.redirectSaveEditMainData(ev.CustObj.CustId);
@@ -218,7 +219,7 @@ export class NewCustHeaderComponent implements OnInit {
 
   SaveCoyData() {
     let urlAdd: string = this.SetUrlAddCoy();
-    this.http.post(urlAdd, this.DupCheckCoyObj).subscribe(
+    this.http.post(urlAdd, this.DupCheckCoyObj, AdInsConstant.SpinnerOptions).subscribe(
       (response: GenericObj) => {
         this.redirectSaveEditMainData(response.Id);
       }
@@ -227,7 +228,7 @@ export class NewCustHeaderComponent implements OnInit {
 
   SavePersonalData() {
     let urlAdd: string = this.SetUrlAddPersonal();
-    this.http.post(urlAdd, this.DupCheckPersonalObj).subscribe(
+    this.http.post(urlAdd, this.DupCheckPersonalObj, AdInsConstant.SpinnerOptions).subscribe(
       (response: GenericObj) => {
         this.redirectSaveEditMainData(response.Id);
       }
@@ -368,13 +369,13 @@ export class NewCustHeaderComponent implements OnInit {
     reqEditDupCheck.CustAttrContentObjs = this.DupCheckPersonalObj.CustAttrContentObjs;
     reqEditDupCheck.CustDocFileObjs = this.DupCheckPersonalObj.CustDocFileObjs;
     if(environment.isCore){
-      this.http.post(URLConstant.NewEditDuplicateCustV2, reqEditDupCheck).subscribe(
+      this.http.post(URLConstant.NewEditDuplicateCustV2, reqEditDupCheck, AdInsConstant.SpinnerOptions).subscribe(
         (response: GenericObj) => {
           this.redirectSaveEditMainData(response.Id);
         }
       );
     }else{
-      this.http.post(URLConstant.NewEditDuplicateCust, reqEditDupCheck).subscribe(
+      this.http.post(URLConstant.NewEditDuplicateCust, reqEditDupCheck, AdInsConstant.SpinnerOptions).subscribe(
         (response: GenericObj) => {
           this.redirectSaveEditMainData(response.Id);
         }
@@ -394,13 +395,13 @@ export class NewCustHeaderComponent implements OnInit {
     reqEditDupCheck.CustDocFileObjs = this.DupCheckCoyObj.CustDocFileObjs;
 
     if(environment.isCore){
-      this.http.post(URLConstant.NewEditDuplicateCustV2, reqEditDupCheck).subscribe(
+      this.http.post(URLConstant.NewEditDuplicateCustV2, reqEditDupCheck, AdInsConstant.SpinnerOptions).subscribe(
         (response: GenericObj) => {
           this.redirectSaveEditMainData(response.Id);
         }
       );
     }else{
-      this.http.post(URLConstant.NewEditDuplicateCust, reqEditDupCheck).subscribe(
+      this.http.post(URLConstant.NewEditDuplicateCust, reqEditDupCheck, AdInsConstant.SpinnerOptions).subscribe(
         (response: GenericObj) => {
           this.redirectSaveEditMainData(response.Id);
         }
@@ -433,13 +434,13 @@ export class NewCustHeaderComponent implements OnInit {
     NegativeCustObj.CustDocFileObjs = this.DupCheckPersonalObj.CustDocFileObjs;
 
     if(environment.isCore){
-      this.http.post<GenericObj>(URLConstant.EditDuplicateNegativeCustV2, NegativeCustObj).subscribe(
+      this.http.post<GenericObj>(URLConstant.EditDuplicateNegativeCustV2, NegativeCustObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.redirectSaveEditMainData(response.Id);
         }
       );
     }else{
-      this.http.post<GenericObj>(URLConstant.EditDuplicateNegativeCust, NegativeCustObj).subscribe(
+      this.http.post<GenericObj>(URLConstant.EditDuplicateNegativeCust, NegativeCustObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.redirectSaveEditMainData(response.Id);
         }

@@ -8,6 +8,7 @@ import { WizardComponent } from 'angular-archwizard';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-address',
@@ -120,7 +121,7 @@ export class AddressComponent implements OnInit {
 
     if (this.mode == "edit") {
       this.vendorAddrObj.RowVersion = this.AddressForm.controls.RowVersion.value;
-      this.http.post(URLConstant.EditVendorAddr, this.vendorAddrObj).subscribe(
+      this.http.post(URLConstant.EditVendorAddr, this.vendorAddrObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.wizard.goToNextStep();
@@ -128,7 +129,7 @@ export class AddressComponent implements OnInit {
         });
     }
     else {
-      this.http.post<VendorAddrObj>(URLConstant.AddVendorAddr, this.vendorAddrObj).subscribe(
+      this.http.post<VendorAddrObj>(URLConstant.AddVendorAddr, this.vendorAddrObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.vendorAddrObj = response;
           this.mode = "edit";

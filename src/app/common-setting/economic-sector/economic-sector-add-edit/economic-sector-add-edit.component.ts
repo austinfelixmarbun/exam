@@ -68,7 +68,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.refEconomicSectorObj.EconomicSectorName = this.RefEconomicSectorForm.controls["EconomicSectorName"].value;
       this.refEconomicSectorObj.RegRptCode = this.RefEconomicSectorForm.controls["RegRptCode"].value;
       this.refEconomicSectorObj.IsActive = this.RefEconomicSectorForm.controls["IsActive"].value;
-      this.http.post(URLConstant.AddRefEconomicSector, this.refEconomicSectorObj).subscribe(
+      this.http.post(URLConstant.AddRefEconomicSector, this.refEconomicSectorObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ECONOMIC_SECTOR_PAGING],{});         
@@ -80,7 +80,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.refEconomicSectorObj.EconomicSectorName = this.RefEconomicSectorForm.controls["EconomicSectorName"].value;
       this.refEconomicSectorObj.RegRptCode = this.RefEconomicSectorForm.controls["RegRptCode"].value;
       this.refEconomicSectorObj.IsActive = this.RefEconomicSectorForm.controls["IsActive"].value;
-      this.http.post(URLConstant.EditRefEconomicSector, this.refEconomicSectorObj).subscribe(
+      this.http.post(URLConstant.EditRefEconomicSector, this.refEconomicSectorObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ECONOMIC_SECTOR_PAGING],{});  

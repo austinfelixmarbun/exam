@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { RefCoaObj } from 'app/shared/model/common-setting/ref-coa-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -56,7 +57,7 @@ export class CoaEditDetailComponent implements OnInit {
   Submit() {
     this.refCoaObj.Coa = this.CoaForm.controls["Coa"].value
 
-    this.http.post(URLConstant.SubmitCoa, this.refCoaObj).subscribe(
+    this.http.post(URLConstant.SubmitCoa, this.refCoaObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.router.navigate([NavigationConstant.CS_COA_PAGING]);
         this.toastr.successMessage(response["Message"]);

@@ -11,6 +11,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 @Component({
@@ -93,7 +94,7 @@ export class MasterAddEditComponent implements OnInit {
     //MODE-ADD
     if (this.type != 'edit') {
 
-      this.httpClient.post(URLConstant.AddRefMaster, this.refMasterObj).subscribe(
+      this.httpClient.post(URLConstant.AddRefMaster, this.refMasterObj, AdInsConstant.SpinnerOptions).subscribe(
         //SAVE
         (response) => {
           this.toastr.successMessage(response["Message"]);
@@ -108,7 +109,7 @@ export class MasterAddEditComponent implements OnInit {
     else {
 
       //SAVE
-      this.httpClient.post(URLConstant.EditRefMaster, this.refMasterObj).subscribe(
+      this.httpClient.post(URLConstant.EditRefMaster, this.refMasterObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           //this.location.back();

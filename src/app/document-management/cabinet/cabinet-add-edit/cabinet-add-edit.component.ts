@@ -10,6 +10,7 @@ import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-cabinet-add-edit',
@@ -72,7 +73,7 @@ export class CabinetAddEditComponent implements OnInit {
     this.Cabinet.IsActive = this.CabinetForm.controls['IsActive'].value;
 
     if(this.CabinetCode !== undefined) {
-      this.http.post<CabinetObj>(URLConstant.EditCabinet, this.Cabinet).subscribe(
+      this.http.post<CabinetObj>(URLConstant.EditCabinet, this.Cabinet, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage("Success!");
           this.router.navigateByUrl(NavigationConstant.DOC_MNGMNT_CABINET_PAGING);
@@ -84,7 +85,7 @@ export class CabinetAddEditComponent implements OnInit {
     }
     else {
       this.Cabinet.RefOfficeId = this.user.OfficeId;
-      this.http.post<CabinetObj>(URLConstant.AddCabinet, this.Cabinet).subscribe(
+      this.http.post<CabinetObj>(URLConstant.AddCabinet, this.Cabinet, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage("Success!");
           this.router.navigateByUrl(NavigationConstant.DOC_MNGMNT_CABINET_PAGING);

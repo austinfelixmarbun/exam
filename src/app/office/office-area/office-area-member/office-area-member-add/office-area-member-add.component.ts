@@ -52,7 +52,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
       RefOfficeAreaId : this.RefOfficeAreaId,
       RefOfficeId: this.listSelectedId
     }
-    this.http.post(URLConstant.AddRefOfficeAreaMember, RequestItem).subscribe(
+    this.http.post(URLConstant.AddRefOfficeAreaMember, RequestItem, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_AREA_MEMBER],{ "RefOfficeAreaId": this.RefOfficeAreaId });

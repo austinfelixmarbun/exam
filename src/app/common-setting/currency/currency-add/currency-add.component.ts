@@ -101,7 +101,7 @@ export class CurrencyAddComponent implements OnInit {
       this.currObj.RegRptCode = this.RefCurrForm.controls["RegRptCode"].value;
       this.currObj.IsActive = this.RefCurrForm.controls["IsActive"].value;
       this.currObj.RoundedAmt = this.RefCurrForm.controls["RoundedAmt"].value;
-      this.http.post(URLConstant.AddRefCurr, this.currObj).subscribe(
+      this.http.post(URLConstant.AddRefCurr, this.currObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CS_CURRENCY_PAGING], {});
@@ -114,7 +114,7 @@ export class CurrencyAddComponent implements OnInit {
       this.currObj.RegRptCode = this.RefCurrForm.controls["RegRptCode"].value;
       this.currObj.IsActive = this.RefCurrForm.controls["IsActive"].value;
       this.currObj.RoundedAmt = this.RefCurrForm.controls["RoundedAmt"].value;
-      this.http.post(URLConstant.EditRefCurr, this.currObj).subscribe(
+      this.http.post(URLConstant.EditRefCurr, this.currObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CS_CURRENCY_PAGING], {});

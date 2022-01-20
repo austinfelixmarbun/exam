@@ -13,6 +13,7 @@ import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-attribute-detail',
@@ -228,7 +229,7 @@ export class AttributeDetailComponent implements OnInit {
       formValue["AttrValue"] = formValue["AttrValue"].join(";");
     }
 
-    this.httpClient.post(url, formValue).subscribe(
+    this.httpClient.post(url, formValue, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ATTR_PAGING],{ });

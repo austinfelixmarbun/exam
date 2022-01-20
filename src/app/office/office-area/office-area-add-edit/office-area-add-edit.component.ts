@@ -67,7 +67,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
       this.refOfficeAreaObj.AreaCode = this.result.AreaCode;
       this.refOfficeAreaObj.RefOfficeAreaId = this.RefOfficeAreaId;
 
-      this.http.post(URLConstant.EditRefOfficeArea, this.refOfficeAreaObj).subscribe(
+      this.http.post(URLConstant.EditRefOfficeArea, this.refOfficeAreaObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_AREA],{});
@@ -75,7 +75,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
     }
     else {
       this.refOfficeAreaObj.RefOfficeAreaId = 0;
-      this.http.post(URLConstant.AddRefOfficeArea, this.refOfficeAreaObj).subscribe(
+      this.http.post(URLConstant.AddRefOfficeArea, this.refOfficeAreaObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_AREA],{});

@@ -15,6 +15,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
     selector: 'app-employee-position',
@@ -198,7 +199,7 @@ export class EmployeePositionAddComponent implements OnInit {
                 this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
             }
 
-            this.httpClient.post(this.addUrl, this.empPositionObj).subscribe(
+            this.httpClient.post(this.addUrl, this.empPositionObj, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     if (response['isError'] != true) {
                         this.toastr.successMessage(response['message']);
@@ -218,7 +219,7 @@ export class EmployeePositionAddComponent implements OnInit {
             else {
                 this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
             }
-            this.httpClient.post(this.editUrl, this.empPositionObj).subscribe(
+            this.httpClient.post(this.editUrl, this.empPositionObj, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     this.toastr.successMessage(response['message']);
                     AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_POS],{ "refEmpId": this.refEmpId });

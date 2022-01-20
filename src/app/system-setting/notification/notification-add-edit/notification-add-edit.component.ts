@@ -13,6 +13,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-notification-add-edit',
@@ -178,7 +179,7 @@ export class NotificationAddEditComponent implements OnInit {
         this.notificationHObj.listTargetRefOfficeId = this.selectedItemsOffice.map(x => x.item_id);
         this.notificationHObj.listTargetRefRoleId = this.selectedItemsRole.map(x => x.item_id);
 
-        this.http.post(this.addUrl, this.notificationHObj).subscribe(
+        this.http.post(this.addUrl, this.notificationHObj, AdInsConstant.SpinnerOptions).subscribe(
           response => {
             this.toastr.successMessage(response["Message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_NOTIF],{ });

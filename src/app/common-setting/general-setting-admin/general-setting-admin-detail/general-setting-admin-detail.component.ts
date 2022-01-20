@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -64,7 +65,7 @@ export class GeneralSettingAdminDetailComponent implements OnInit {
     this.gsObj.GsName = this.GeneralSettingForm.controls["GsName"].value;
     this.gsObj.GsValue = this.GeneralSettingForm.controls["GsValue"].value;
     this.gsObj.GsDescr = this.GeneralSettingForm.controls["GsDescr"].value;
-    this.httpClient.post(URLConstant.EditGeneralSetting, this.gsObj).subscribe(
+    this.httpClient.post(URLConstant.EditGeneralSetting, this.gsObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.service.successMessage(response["Message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_GEN_SETTING_ADMIN],{});

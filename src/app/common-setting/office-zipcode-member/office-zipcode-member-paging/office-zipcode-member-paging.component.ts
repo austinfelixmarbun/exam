@@ -137,7 +137,7 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
   delete(officeZipcodeMemberId: any) {
     if (confirm("Are you sure to delete this record?")) {
       var officeZipcodeMemberObj = {officeZipcodeMemberId : officeZipcodeMemberId};
-      this.http.post(this.deleteUrl, officeZipcodeMemberObj).subscribe(
+      this.http.post(this.deleteUrl, officeZipcodeMemberObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           this.searchPagination(this.pageNow);

@@ -126,7 +126,7 @@ export class CommissionerAddComponent implements OnInit {
             if (this.mode == "edit") {
                 this.editUrl = this.foundationUrl + URLConstant.EditCoyCommissioner;
                 coyCommisionerObj.coyCommissionerId = this.param;
-                this.http.post(this.editUrl, coyCommisionerObj).subscribe(
+                this.http.post(this.editUrl, coyCommisionerObj, AdInsConstant.SpinnerOptions).subscribe(
                     (response) => {
                         this.toastr.successMessage(response['message']);
                         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.COY_COMMISSIONER],{ "refCoyId": this.refCoyId });
@@ -134,7 +134,7 @@ export class CommissionerAddComponent implements OnInit {
             }
             else {
                 this.editUrl = this.foundationUrl + URLConstant.AddCoyCommissioner;
-                this.http.post(this.editUrl, coyCommisionerObj).subscribe(
+                this.http.post(this.editUrl, coyCommisionerObj, AdInsConstant.SpinnerOptions).subscribe(
                     (response) => {
                         this.toastr.successMessage(response['message']);
                         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.COY_COMMISSIONER],{ "refCoyId": this.refCoyId });

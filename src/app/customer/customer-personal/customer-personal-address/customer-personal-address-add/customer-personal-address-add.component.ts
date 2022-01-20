@@ -17,6 +17,7 @@ import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { AddressService } from 'app/shared/services/custAddr.service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-customer-personal-address-add',
@@ -273,7 +274,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.setCustAddr();
 
     if (this.pageType == "add") {
-      this.http.post(URLConstant.AddCustAddr, this.custAddressObj).subscribe(
+      this.http.post(URLConstant.AddCustAddr, this.custAddressObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(
@@ -286,7 +287,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     } else {
       this.custAddressObj.CustAddrId = this.AddrId;
       this.custAddressObj.RowVersion = this.getCustomerAddr.RowVersion;
-      this.http.post(URLConstant.EditCustAddr, this.custAddressObj).subscribe(
+      this.http.post(URLConstant.EditCustAddr, this.custAddressObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(

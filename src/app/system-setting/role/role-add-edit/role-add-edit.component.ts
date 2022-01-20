@@ -9,6 +9,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 @Component({
@@ -74,7 +75,7 @@ export class RoleAddEditComponent implements OnInit {
       this.refRoleObj.RoleCode = this.RefRoleForm.controls["RoleCode"].value
       this.refRoleObj.RoleName = this.RefRoleForm.controls["RoleName"].value;
       this.refRoleObj.IsActive = this.RefRoleForm.controls["IsActive"].value;
-      this.httpClient.post(URLConstant.AddRefRole, this.refRoleObj).subscribe(
+      this.httpClient.post(URLConstant.AddRefRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
             this.service.successMessage(response["Message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ROLE],{ });
@@ -86,7 +87,7 @@ export class RoleAddEditComponent implements OnInit {
       this.refRoleObj.RoleCode = this.RefRoleForm.controls["RoleCode"].value;
       this.refRoleObj.RoleName = this.RefRoleForm.controls["RoleName"].value;
       this.refRoleObj.IsActive = this.RefRoleForm.controls["IsActive"].value;
-      this.httpClient.post(URLConstant.EditRefRole, this.refRoleObj).subscribe(
+      this.httpClient.post(URLConstant.EditRefRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.service.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ROLE],{ });

@@ -10,6 +10,7 @@ import { FromValueObj, UcTempPagingObj } from 'app/shared/model/temp-paging/uc-t
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-add-asset-scheme',
@@ -99,7 +100,7 @@ export class AddAssetSchemeComponent implements OnInit {
       AssetSchmH: this.assetSchmHObj,
       AssetSchmDObjs: this.arrAssetSchmD
     }
-    this.http.post(URLConstant.AddRangeAssetSchmD, AssetSchmObj).subscribe(
+    this.http.post(URLConstant.AddRangeAssetSchmD, AssetSchmObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_SCHM_MBR_DETAIL],{ "AssetSchmHId": this.AssetSchmHId });

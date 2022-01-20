@@ -7,6 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-ref-job-title-add',
@@ -70,7 +71,7 @@ export class RefJobTitleAddComponent implements OnInit {
     this.rjtObj = this.RefJobTitleForm.value;
     if (this.pageType == "add") {
       this.rjtObj.RowVersion = "";
-      this.http.post(this.addUrl, this.rjtObj).subscribe(
+      this.http.post(this.addUrl, this.rjtObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ORG_JOB_TITLE],{});
@@ -79,7 +80,7 @@ export class RefJobTitleAddComponent implements OnInit {
     } else {
       this.rjtObj.RefJobTitleId = this.refJobTitleId;
       this.rjtObj.RowVersion = this.resultData.RowVersion;
-      this.http.post(this.editUrl, this.rjtObj).subscribe(
+      this.http.post(this.editUrl, this.rjtObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ORG_JOB_TITLE],{});

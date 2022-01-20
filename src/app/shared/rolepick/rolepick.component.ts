@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from '../AdInsHelper';
 import { CookieOptions, CookieService } from 'ngx-cookie';
@@ -54,6 +54,10 @@ export class RolepickComponent implements OnInit, AfterViewInit {
     this.listRole = data["response"];
   }
 
+  SpinnerHeaders = new HttpHeaders({
+    'IsLoading': "true"
+  });
+  SpinnerOptions = { headers: this.SpinnerHeaders, withCredentials: true };
   chooseRole(item) {
     var UserIdentityObj = {
       RefUserId: item.RefUserId,
@@ -89,7 +93,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
     };
 
     if (this.data.pwd == null) {
-      this.http.post(AdInsConstant.UpdateTokenV2, roleObject, { withCredentials: true }).subscribe(
+      this.http.post(AdInsConstant.UpdateTokenV2, roleObject, this.SpinnerOptions).subscribe(
         (response) => {
           //Cookie sudah diambil dari BE (Di set manual dulu)
 
@@ -118,11 +122,11 @@ export class RolepickComponent implements OnInit, AfterViewInit {
 
     }
     else {
-      this.http.post(AdInsConstant.LoginByRoleV2, roleObject, { withCredentials: true }).subscribe(
+      this.http.post(AdInsConstant.LoginByRoleV2, roleObject, this.SpinnerOptions).subscribe(
         (response) => {
           //Cookie sudah diambil dari BE (Di set manual dulu)
 
-          this.http.post(AdInsConstant.CheckUserSessionLog, roleObject, { withCredentials: true }).subscribe(
+          this.http.post(AdInsConstant.CheckUserSessionLog, roleObject, this.SpinnerOptions).subscribe(
             (response) => {});
           
           var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');

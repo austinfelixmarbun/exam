@@ -13,6 +13,7 @@ import { DatePipe, formatDate } from '@angular/common';
 import { CustCompanyLegalDocObj } from 'app/shared/model/cust-company-legal-doc-obj.model';
 import { String } from 'typescript-string-operations';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 @Component({
@@ -122,13 +123,13 @@ export class CustLegalDocDetailComponent implements OnInit {
     }
 
     if(this.Mode == "Add"){
-      this.httpClient.post(URLConstant.AddCustCompanyLegalDoc, custCompanyLegalDocData).subscribe(
+      this.httpClient.post(URLConstant.AddCustCompanyLegalDoc, custCompanyLegalDocData, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.activeModal.close(response);
         }
       );
     }else{
-      this.httpClient.post(URLConstant.EditCustCompanyLegalDoc, custCompanyLegalDocData).subscribe(
+      this.httpClient.post(URLConstant.EditCustCompanyLegalDoc, custCompanyLegalDocData, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.activeModal.close(response);
         }

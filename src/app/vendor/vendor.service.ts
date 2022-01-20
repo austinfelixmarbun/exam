@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { URLConstant } from "app/shared/constant/URLConstant";
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from "app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model";
 import { GenericByIdObj } from "app/shared/model/generic/generic-by-id-obj.model";
+import { AdInsConstant } from "app/shared/AdInstConstant";
 
 @Injectable({
     providedIn: 'root'
@@ -16,11 +17,11 @@ export class VendorService {
     }
 
     AddVendorBankAcc(Obj: any): Observable<Object> {
-        return this.http.post(URLConstant.AddVendorBankAcc, Obj);
+        return this.http.post(URLConstant.AddVendorBankAcc, Obj, AdInsConstant.SpinnerOptions);
     }
 
     EditVendorBankAcc(Obj: any): Observable<Object> {
-        return this.http.post(URLConstant.EditVendorBankAcc, Obj);
+        return this.http.post(URLConstant.EditVendorBankAcc, Obj, AdInsConstant.SpinnerOptions);
     }
 
     GetVendorBankAccByVendorBankAccId(Obj: any): Observable<Object> {
@@ -28,7 +29,7 @@ export class VendorService {
     }
 
     DeleteVendorBankAcc(Obj: any): Observable<Object> {
-        return this.http.post(URLConstant.DeleteVendorBankAcc, Obj);
+        return this.http.post(URLConstant.DeleteVendorBankAcc, Obj, AdInsConstant.SpinnerOptions);
     }
 
     GetRefMasterListKeyValuePair(Obj: any): Observable<Object> {
@@ -44,19 +45,19 @@ export class VendorService {
     }
 
     EditVendorHolding(Obj: any): Observable<Object> {
-        return this.http.post(URLConstant.EditVendorHolding, Obj);
+        return this.http.post(URLConstant.EditVendorHolding, Obj, AdInsConstant.SpinnerOptions);
     }
 
     AddVendorHolding(Obj: any): Observable<Object> {
-        return this.http.post(URLConstant.AddVendorHolding, Obj);
+        return this.http.post(URLConstant.AddVendorHolding, Obj, AdInsConstant.SpinnerOptions);
     }
 
     EditVendorATPM(Obj: any): Observable<Object> {
-        return this.http.post(URLConstant.EditVendorATPM, Obj);
+        return this.http.post(URLConstant.EditVendorATPM, Obj, AdInsConstant.SpinnerOptions);
     }
 
     AddVendorATPM(Obj: any): Observable<Object> {
-        return this.http.post(URLConstant.AddVendorATPM, Obj);
+        return this.http.post(URLConstant.AddVendorATPM, Obj, AdInsConstant.SpinnerOptions);
     }
 
     GetListVendorBankAccByVendorEmpId(Obj: any): Observable<Object> {
@@ -68,6 +69,6 @@ export class VendorService {
     }
 
     EditAuctionCompany(Obj: any): Observable<Object> {
-        return this.http.post(URLConstant.EditAuctionCompany, Obj);
+        return this.http.post(URLConstant.EditAuctionCompany, Obj, AdInsConstant.SpinnerOptions);
     }
 }

@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
@@ -219,7 +220,7 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
   }
 
   SaveValue(){
-    this.http.post(URLConstant.UpdateMasterCustCompanyContactInfo, this.CustomerContactInfoForm.value).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustCompanyContactInfo, this.CustomerContactInfoForm.value, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

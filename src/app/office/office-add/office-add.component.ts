@@ -475,7 +475,7 @@ export class OfficeAddComponent implements OnInit {
     this.officeObj.RefTaxOfficeId = tempOfficeForm.RefTaxOfficeId;
 
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.AddRefOfficeV2_1, this.officeObj).subscribe(
+      this.httpClient.post(URLConstant.AddRefOfficeV2_1, this.officeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
 
@@ -488,7 +488,7 @@ export class OfficeAddComponent implements OnInit {
       this.officeObj.MrOfficeTypeCode = this.resultData.MrOfficeTypeCode
       this.officeObj.RefOfficeId = this.resultData.RefOfficeId;
       this.officeObj.RowVersion = this.resultData.RowVersion;
-      this.httpClient.post(URLConstant.EditRefOfficeV2_1, this.officeObj).subscribe(
+      this.httpClient.post(URLConstant.EditRefOfficeV2_1, this.officeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
 

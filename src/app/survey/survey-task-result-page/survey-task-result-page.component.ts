@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { DMSLabelValueObj } from 'app/shared/model/dms/dms-label-value-obj.model';
@@ -143,7 +144,7 @@ export class SurveyTaskResultPageComponent implements OnInit {
   
   endStepper(){
     this.ReqGenericObj.Id = this.SrvyTaskId;
-    this.http.post(URLConstant.UpdateMrSurveyTaskStatCode, this.ReqGenericObj).subscribe(
+    this.http.post(URLConstant.UpdateMrSurveyTaskStatCode, this.ReqGenericObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SURVEY_TASK_RESULT_PAGING],{});

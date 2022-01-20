@@ -201,7 +201,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
       this.custCompanyObj.RefIndustryTypeId = this.tempRefIndustryTypeId;
     }
 
-    await this.http.post(URLConstant.EditCustCompany, this.custCompanyObj).toPromise().then(
+    await this.http.post(URLConstant.EditCustCompany, this.custCompanyObj, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.toastr.successMessage(response["Message"]);
         if(!IsParent) this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next' });

@@ -8,6 +8,7 @@ import { RefFeeObj } from 'app/shared/model/ref-fee-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { RefLobObj } from 'app/shared/model/ref-lob-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-fee-add-edit',
@@ -122,7 +123,7 @@ export class FeeAddEditComponent implements OnInit {
 
     if (this.pageType == "add") {
       
-      this.httpClient.post(URLConstant.AddRefFee, this.refFeeObj).subscribe(
+      this.httpClient.post(URLConstant.AddRefFee, this.refFeeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.FEE_PAGING], {});
@@ -130,7 +131,7 @@ export class FeeAddEditComponent implements OnInit {
       )
     } else {
       this.refFeeObj.RefFeeId = this.refFeeId;
-      this.httpClient.post(URLConstant.EditRefFee, this.refFeeObj).subscribe(
+      this.httpClient.post(URLConstant.EditRefFee, this.refFeeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.FEE_PAGING], {});

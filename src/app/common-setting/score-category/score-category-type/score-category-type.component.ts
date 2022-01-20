@@ -11,6 +11,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-score-category-type',
@@ -90,7 +91,7 @@ export class ScoreCategoryTypeComponent implements OnInit {
     this.scoreCategorySchmHObj.RowVersion = this.ScoreCategorySchmHForm.controls.RowVersion.value;
     //MODE-ADD
     if (this.type == 'add') {
-      this.httpClient.post(URLConstant.AddScoreCategorySchmH, this.scoreCategorySchmHObj).subscribe(
+      this.httpClient.post(URLConstant.AddScoreCategorySchmH, this.scoreCategorySchmHObj, AdInsConstant.SpinnerOptions).subscribe(
         //SAVE
         (response) => {
           this.service.successMessage(response["Message"]);
@@ -104,7 +105,7 @@ export class ScoreCategoryTypeComponent implements OnInit {
     //MODE-EDIT
     else {
       //SAVE
-      this.httpClient.post(URLConstant.EditScoreCategorySchmH, this.scoreCategorySchmHObj).subscribe(
+      this.httpClient.post(URLConstant.EditScoreCategorySchmH, this.scoreCategorySchmHObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.service.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_SCORE_CATEGORY_PAGING],{});

@@ -8,6 +8,7 @@ import { VerfSchemeHObj } from 'app/shared/model/verf-scheme-h-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-verification-question-scheme-add-edit',
@@ -63,7 +64,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
     this.verfSchemeHObj = this.QuestionSchemeForm.value;
     if (this.mode == "edit") {
       this.verfSchemeHObj.RowVersion = this.verfSchemeHObj.RowVersion;
-      this.http.post(URLConstant.EditVerfSchemeH, this.verfSchemeHObj).subscribe(
+      this.http.post(URLConstant.EditVerfSchemeH, this.verfSchemeHObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_SCHM_PAGING],{ });
@@ -71,7 +72,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
     }
     else {
       this.verfSchemeHObj.VerfSchemeHId = "0";
-      this.http.post(URLConstant.AddVerfSchemeH, this.verfSchemeHObj).subscribe(
+      this.http.post(URLConstant.AddVerfSchemeH, this.verfSchemeHObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_SCHM_PAGING],{ });

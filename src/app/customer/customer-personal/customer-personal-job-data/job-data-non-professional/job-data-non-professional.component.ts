@@ -128,7 +128,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_NONPROF;
 
-      await this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
+      await this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(
@@ -147,7 +147,7 @@ export class JobDataNonProfessionalComponent implements OnInit {
       this.reqCustPersonalJobDataObj.CustPersonalJobData = this.custPersonalJobDataObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_NONPROF;
 
-      await this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
+      await this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(

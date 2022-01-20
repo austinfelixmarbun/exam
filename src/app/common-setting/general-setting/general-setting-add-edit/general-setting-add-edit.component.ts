@@ -68,7 +68,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
     this.gsObj.GsName = this.GeneralSettingForm.controls["GsName"].value;
     this.gsObj.GsValue = this.GeneralSettingForm.controls["GsValue"].value;
     this.gsObj.GsDescr = this.GeneralSettingForm.controls["GsDescr"].value;
-    this.httpClient.post(URLConstant.EditGeneralSetting, this.gsObj).subscribe(
+    this.httpClient.post(URLConstant.EditGeneralSetting, this.gsObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.service.successMessage(response["Message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_GEN_SETTING],{});

@@ -122,7 +122,7 @@ export class OrgJobTitlePagingComponent implements OnInit {
       this.orgJobTitleObj.orgJobTitleId = +id;
 
       this.https
-        .post(this.deleteUrl, this.orgJobTitleObj)
+        .post(this.deleteUrl, this.orgJobTitleObj, AdInsConstant.SpinnerOptions)
         .subscribe(response => {
           this.service.successMessage(response["message"]);
           var order = null;

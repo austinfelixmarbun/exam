@@ -9,6 +9,7 @@ import { RefReasonObj } from 'app/shared/model/ref-reason-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-reason-add-edit',
@@ -77,7 +78,7 @@ export class ReasonAddEditComponent implements OnInit {
       refReasonObj.IsActive = this.RefReasonForm.controls["IsActive"].value;
       refReasonObj.IsSystem = false;
 
-      this.http.post(URLConstant.AddRefReason, refReasonObj).subscribe(
+      this.http.post(URLConstant.AddRefReason, refReasonObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REASON_PAGING],{});
@@ -88,7 +89,7 @@ export class ReasonAddEditComponent implements OnInit {
       refReasonObj.ReasonDescr = this.RefReasonForm.controls["ReasonDescr"].value;
       refReasonObj.RefReasonTypeCode = this.RefReasonForm.controls["RefReasonTypeCode"].value;
       refReasonObj.IsActive = this.RefReasonForm.controls["IsActive"].value;
-      this.http.post(URLConstant.EditRefReason, refReasonObj).subscribe(
+      this.http.post(URLConstant.EditRefReason, refReasonObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REASON_PAGING],{});

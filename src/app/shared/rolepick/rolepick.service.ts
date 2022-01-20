@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { RolepickComponent } from 'app/shared/rolepick/rolepick.component';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { Router } from '@angular/router';
 import { CurrentUserContextService } from 'app/shared/current-user-context/current-user-context.service';
@@ -24,7 +24,7 @@ export class RolePickService {
                 RowVersion: ""
             };
 
-            this.http.post(AdInsConstant.LoginByTokenV2, roleObject2).subscribe(
+            this.http.post(AdInsConstant.LoginByTokenV2, roleObject2, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     const object = {
                         response: response[CommonConstant.ReturnObj]
@@ -47,8 +47,8 @@ export class RolePickService {
 
         } else {
             if (data.response.length == 1 && type == "") {
-                var item = data.response[0];
-                var UserIdentityObj = {
+                let item = data.response[0];
+                let UserIdentityObj = {
                     RefUserId: item.RefUserId,
                     UserName: item.UserName,
                     EmpNo: item.EmpNo,
@@ -69,7 +69,7 @@ export class RolePickService {
                     CoyName: item.CoyName
                   }
 
-                var roleObject = {
+                let roleObject = {
                     UserName: data.user,
                     Password: data.pwd,
                     OfficeCode: item.OfficeCode,
@@ -81,7 +81,11 @@ export class RolePickService {
                     ModuleCode: environment.Module,
                     UserIdentityObj: UserIdentityObj
                 };
-                this.http.post(AdInsConstant.LoginByRoleV2, roleObject, { withCredentials: true }).subscribe(
+                let SpinnerHeaders = new HttpHeaders({
+                  'IsLoading': "true"
+                });
+                let SpinnerOptions = { headers: SpinnerHeaders, withCredentials: true };
+                this.http.post(AdInsConstant.LoginByRoleV2, roleObject, SpinnerOptions).subscribe(
                     (response) => {
                         //Cookie sudah diambil dari BE (Di set manual dulu)
 

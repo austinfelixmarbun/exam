@@ -14,6 +14,7 @@ import { ThirdPartyTrustsocRsltObj } from 'app/shared/model/third-party-rslt/thi
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { ReqAddTrxSrcDataForTsObj } from 'app/shared/model/digitalization/req-add-trx-src-data-for-ts-obj.model';
 import { environment } from 'environments/environment';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 @Component({
@@ -115,14 +116,14 @@ export class TrustingSocialReqDetailComponent implements OnInit {
       return;
     }
     if (environment.isCore) {
-      this.http.post(URLConstant.AddTrxSrcDataForTrustingSocialV2, reqAddTrxSrcDataForTsObj).subscribe(
+      this.http.post(URLConstant.AddTrxSrcDataForTrustingSocialV2, reqAddTrxSrcDataForTsObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.activeModal.dismiss('Cross click');
         }
       );
     } else {
-      this.http.post(URLConstant.AddTrxSrcDataForTrustingSocial, reqAddTrxSrcDataForTsObj).subscribe(
+      this.http.post(URLConstant.AddTrxSrcDataForTrustingSocial, reqAddTrxSrcDataForTsObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.activeModal.dismiss('Cross click');

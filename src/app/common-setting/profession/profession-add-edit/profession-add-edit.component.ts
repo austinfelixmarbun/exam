@@ -9,6 +9,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-profession-add-edit',
@@ -80,7 +81,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.refProfessionObj.ProfessionName = this.RefProfessionForm.controls["ProfessionName"].value;
       this.refProfessionObj.MrCustModelCode = this.RefProfessionForm.controls["MrCustModelCode"].value;
       this.refProfessionObj.RegRptCode = this.RefProfessionForm.controls["RegRptCode"].value;
-      this.http.post(URLConstant.AddRefProfession, this.refProfessionObj).subscribe(
+      this.http.post(URLConstant.AddRefProfession, this.refProfessionObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_PROFESSION_PAGING],{});
@@ -92,7 +93,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.refProfessionObj.ProfessionName = this.RefProfessionForm.controls["ProfessionName"].value;
       this.refProfessionObj.MrCustModelCode = this.RefProfessionForm.controls["MrCustModelCode"].value;
       this.refProfessionObj.RegRptCode = this.RefProfessionForm.controls["RegRptCode"].value;
-      this.http.post(URLConstant.EditRefProfession, this.refProfessionObj).subscribe(
+      this.http.post(URLConstant.EditRefProfession, this.refProfessionObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_PROFESSION_PAGING],{});

@@ -268,7 +268,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.IsVip = this.CustomerDetailForm.controls["IsVip"].value;
     this.custPersonalObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
     this.custPersonalObj.IsAffiliateWithMf = this.CustomerDetailForm.controls["IsAffiliateWithMf"].value;
-    await this.http.post(URLConstant.EditCustPersonal, this.custPersonalObj).toPromise().then(
+    await this.http.post(URLConstant.EditCustPersonal, this.custPersonalObj, AdInsConstant.SpinnerOptions).toPromise().then(
       response => {
         this.toastr.successMessage(response["Message"]);
         // this.wizard.goToNextStep();

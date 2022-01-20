@@ -161,7 +161,7 @@ export class RoleUserComponent implements OnInit {
     this.refRoleObj.RefRoleId = this.refRoleId;
     // this.refRoleObj.listAddEmpPositionId = this.listSelectedId;
     // this.refRoleObj.listDelEmpPositionId = this.listDeletedId;
-    this.httpClient.post(urlAssignRole, this.refRoleObj).subscribe(
+    this.httpClient.post(urlAssignRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.service.typeSave(response['message']);
         this.location.back();

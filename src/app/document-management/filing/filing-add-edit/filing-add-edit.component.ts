@@ -11,6 +11,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { RackObj } from 'app/shared/model/document-management/rack-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-filing-add-edit',
@@ -130,7 +131,7 @@ export class FilingAddEditComponent implements OnInit {
     if(this.Mode === 'Edit'){
       this.filing.RackId = this.rackWithListFilling.RackId;
       this.filing.CurrentFilingCode = this.FilingCode;
-      this.http.post(URLConstant.EditFiling, this.filing).subscribe(
+      this.http.post(URLConstant.EditFiling, this.filing, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");
           this.router.navigate([NavigationConstant.DOC_MNGMNT_FILING_PAGING], { queryParams: { CabinetCode: this.Cabinet.CabinetCode, RackCode: this.rackWithListFilling.RackCode } });
@@ -144,7 +145,7 @@ export class FilingAddEditComponent implements OnInit {
       this.filing.RackCode = this.rackWithListFilling.RackCode;
       this.filing.RackId = this.Rack.RackId;
       console.log(this.filing);
-      this.http.post(URLConstant.AddFiling, this.filing).subscribe(
+      this.http.post(URLConstant.AddFiling, this.filing, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");
           this.router.navigate([NavigationConstant.DOC_MNGMNT_FILING_PAGING], { queryParams: { CabinetCode: this.Cabinet.CabinetCode, RackCode: this.rackWithListFilling.RackCode } });

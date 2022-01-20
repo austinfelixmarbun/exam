@@ -40,7 +40,6 @@ export class AssetDocumentAddEditComponent implements OnInit {
   AssetDocListId: number;
   result: AssetDocListObj = new AssetDocListObj();
   assetDocListObj: AssetDocListObj = new AssetDocListObj();
-  getRefAssetDocUrl: string;
   tempAssetName: any;
   temp: RefAssetDocObj = new RefAssetDocObj();
   isShowCbxBorrow: boolean;
@@ -93,12 +92,10 @@ export class AssetDocumentAddEditComponent implements OnInit {
     );
 
     if (this.pageType == "edit") {
-      this.getRefAssetDocUrl = URLConstant.GetRefAssetDocByRefAssetDocId;
-
       this.http.post(URLConstant.GetAssetDocListByAssetDocListId, { Id: this.AssetDocListId }).subscribe(
         (response: AssetDocListObj) => {
           this.result = response;
-          this.http.post(this.getRefAssetDocUrl, {Id: this.result.RefAssetDocId }).subscribe(
+          this.http.post(URLConstant.GetRefAssetDocByRefAssetDocId, {Id: this.result.RefAssetDocId }).subscribe(
             (response: RefAssetDocObj) => {
               this.temp = response;
               this.assetDocName = this.temp.AssetDocName;
@@ -132,7 +129,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.assetDocListObj.IsExpDtMandatory = this.AssetDocumentForm.controls["IsExpDtMandatory"].value;
       this.assetDocListObj.AssetTypeId = this.AssetTypeId;
 
-      this.http.post(URLConstant.AddNewAssetDocList, this.assetDocListObj).subscribe(
+      this.http.post(URLConstant.AddNewAssetDocList, this.assetDocListObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_PAGING],{ "AssetTypeId": this.assetDocListObj.AssetTypeId });
@@ -150,7 +147,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.assetDocListObj.IsActive = this.AssetDocumentForm.controls["IsActive"].value;
       this.assetDocListObj.IsExpDtMandatory = this.AssetDocumentForm.controls["IsExpDtMandatory"].value;
 
-      this.http.post(URLConstant.EditAssetDocList, this.assetDocListObj).subscribe(
+      this.http.post(URLConstant.EditAssetDocList, this.assetDocListObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_PAGING],{ "AssetTypeId": this.assetDocListObj.AssetTypeId });

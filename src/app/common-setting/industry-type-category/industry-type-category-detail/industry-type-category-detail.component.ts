@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { IndustryTypeCategoryObj } from 'app/shared/model/industry-type-category-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
@@ -89,7 +90,7 @@ export class IndustryTypeCategoryDetailComponent implements OnInit {
       this.industryTypeCategoryObj.IsActive = this.RefIndustryTypeCategoryForm.controls["IsActive"].value;
     }
 
-    this.http.post(URLConstant.AddEditIndustryTypeCategory, this.industryTypeCategoryObj).subscribe(
+    this.http.post(URLConstant.AddEditIndustryTypeCategory, this.industryTypeCategoryObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,["/CommonSetting/IndustryTypeCategory/Paging"],{});         

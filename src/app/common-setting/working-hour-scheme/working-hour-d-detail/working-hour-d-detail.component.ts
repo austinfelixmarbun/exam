@@ -206,7 +206,7 @@ export class WorkingHourDDetailComponent implements OnInit {
     if (this.isEdit) {
       this.postUrl = URLConstant.EditListWorkingHourSchmD;
     }
-    this.http.post(this.postUrl, this.listWorkingHourSchmDObj).subscribe(
+    this.http.post(this.postUrl, this.listWorkingHourSchmDObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_WORKING_HOUR],{});

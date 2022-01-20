@@ -63,7 +63,7 @@ export class HolidayDetailEditComponent implements OnInit {
     HolidayObj.HolidaySchmDId = this.result.HolidaySchmDId;
     HolidayObj.RowVersion = this.result.RowVersion;
 
-    this.http.post(URLConstant.EditHolidaySchmD, HolidayObj).subscribe(
+    this.http.post(URLConstant.EditHolidaySchmD, HolidayObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
         this.toastr.successMessage(response['message']);

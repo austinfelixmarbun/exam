@@ -161,7 +161,7 @@ export class WorkingHourHDetailComponent implements OnInit {
       this.workingHourSchmHObj.WorkingHourSchmCode = this.WorkingHourSchmHForm.controls["WorkingHourSchmCode"].value;
       this.workingHourSchmHObj.WorkingHourSchmName = this.WorkingHourSchmHForm.controls["WorkingHourSchmName"].value;
       this.workingHourSchmHObj.IsActive = this.WorkingHourSchmHForm.controls["IsActive"].value;
-      this.http.post(URLConstant.AddWorkingHourSchmH, this.workingHourSchmHObj).subscribe(
+      this.http.post(URLConstant.AddWorkingHourSchmH, this.workingHourSchmHObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_WORKING_HOUR],{});
@@ -171,7 +171,7 @@ export class WorkingHourHDetailComponent implements OnInit {
       this.workingHourSchmHObj = this.resultData;
       this.workingHourSchmHObj.WorkingHourSchmName = this.WorkingHourSchmHForm.controls["WorkingHourSchmName"].value;
       this.workingHourSchmHObj.IsActive = this.WorkingHourSchmHForm.controls["IsActive"].value;
-      this.http.post(URLConstant.EditWorkingHourSchmH, this.workingHourSchmHObj).subscribe(
+      this.http.post(URLConstant.EditWorkingHourSchmH, this.workingHourSchmHObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_WORKING_HOUR],{});

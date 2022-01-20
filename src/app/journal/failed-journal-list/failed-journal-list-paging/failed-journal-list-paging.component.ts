@@ -49,7 +49,7 @@ export class FailedJournalListPagingComponent implements OnInit {
 
     this.http.post<any>(environment.FoundationR3Url + URLConstant.RerunJournal, {
       ListTransactionNo: req
-    }).subscribe(
+    }, AdInsConstant.SpinnerOptions).subscribe(
       res => {
         this.toastr.warningMessage('Rerun journal success, Process may take several time');
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

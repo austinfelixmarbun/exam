@@ -54,7 +54,7 @@ export class ContactPersonListComponent implements OnInit {
   deleteVendorContactPerson(vendorContactPersonId) {
     if (confirm("Are you sure you want to delete this record ?")) {
       
-      this.http.post(URLConstant.DeleteVendorContactPerson, {Id: vendorContactPersonId}).subscribe((response) => {
+      this.http.post(URLConstant.DeleteVendorContactPerson, {Id: vendorContactPersonId}, AdInsConstant.SpinnerOptions).subscribe((response) => {
         this.toastr.successMessage(response['message']);
         this.loadTableListData();
       });

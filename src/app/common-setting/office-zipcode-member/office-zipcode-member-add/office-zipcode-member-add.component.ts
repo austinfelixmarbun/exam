@@ -193,7 +193,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
     }
     var zipCodeMemberList = { listOfOfficeZipcodeMember: listObj };
 
-    this.http.post(URLConstant.AddOfficeZipcodeMember, zipCodeMemberList).subscribe(
+    this.http.post(URLConstant.AddOfficeZipcodeMember, zipCodeMemberList, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_OFFICE_ZIPCODE_MBR_PAGING],{ "refOfficeId": this.refOfficeId });

@@ -8,6 +8,7 @@ import { VerfQuestionGrpHObj } from 'app/shared/model/verf-question-grp-h-obj.mo
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-verification-question-group-add-edit',
@@ -58,7 +59,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
     this.verfQuestionGrpHObj.VerfQuestionGrpName = this.QuestionGroupForm.value.VerfQuestionGrpName;
     this.verfQuestionGrpHObj.IsActive = this.QuestionGroupForm.value.IsActive;
     if (this.mode == "edit") {
-      this.http.post(URLConstant.EditVerfQuestionGrpH, this.verfQuestionGrpHObj).subscribe(
+      this.http.post(URLConstant.EditVerfQuestionGrpH, this.verfQuestionGrpHObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_GRP_PAGING],{});
@@ -66,7 +67,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
     }
     else {
       this.verfQuestionGrpHObj.VerfQuestionGrpHId = 0;
-      this.http.post(URLConstant.AddVerfQuestionGrpH, this.verfQuestionGrpHObj).subscribe(
+      this.http.post(URLConstant.AddVerfQuestionGrpH, this.verfQuestionGrpHObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_GRP_PAGING],{});

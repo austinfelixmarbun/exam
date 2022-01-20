@@ -113,14 +113,14 @@ export class EditCompanyComponent implements OnInit {
             this.editUrl = this.foundationUrl + "/v1" + URLConstant.EditRefCoy;
             refCoyObj.refCoyId = this.param;
             refCoyObj.RowVersion = this.result.RowVersion;
-            this.http.post(this.editUrl, refCoyObj).subscribe(
+            this.http.post(this.editUrl, refCoyObj, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     AdInsHelper.RedirectUrl(this.router,[NavigationConstant.COY],{ });
                 });
         }
         else {
             this.editUrl = this.foundationUrl + "/v1" + URLConstant.AddCoyCommissioner;
-            this.http.post(this.editUrl, refCoyObj).subscribe(
+            this.http.post(this.editUrl, refCoyObj, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     AdInsHelper.RedirectUrl(this.router,[NavigationConstant.COY],{ });
                 });

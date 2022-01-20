@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { RefPaymentAllocObj } from 'app/shared/model/common-setting/ref-payment-alloc-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -71,7 +72,7 @@ export class PaymentAllocDetailComponent implements OnInit {
 
     if (this.mode === "add") {
       this.RefPaymentAllocObj.RowVersion = "";
-      this.http.post(URLConstant.SubmitRefPaymentAlloc, this.RefPaymentAllocObj).subscribe(
+      this.http.post(URLConstant.SubmitRefPaymentAlloc, this.RefPaymentAllocObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           this.router.navigateByUrl(NavigationConstant.CS_PAYMENT_ALLOC_PAGING);
@@ -82,7 +83,7 @@ export class PaymentAllocDetailComponent implements OnInit {
       )
     }
     else if (this.mode === "edit") {
-      this.http.post(URLConstant.SubmitRefPaymentAlloc, this.RefPaymentAllocObj).subscribe(
+      this.http.post(URLConstant.SubmitRefPaymentAlloc, this.RefPaymentAllocObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           this.router.navigateByUrl(NavigationConstant.CS_PAYMENT_ALLOC_PAGING);

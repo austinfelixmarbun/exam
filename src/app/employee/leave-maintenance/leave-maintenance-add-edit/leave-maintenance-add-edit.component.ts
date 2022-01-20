@@ -13,6 +13,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-leave-maintenance-add-edit',
@@ -111,7 +112,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
    
       if (this.pageType == "add") {
         this.relmObj.RefEmpId = this.inputEmpLookupObj.jsonSelect.refEmpId;
-        this.http.post(URLConstant.AddRefEmpLeaveMngmnt, this.relmObj).subscribe(
+        this.http.post(URLConstant.AddRefEmpLeaveMngmnt, this.relmObj, AdInsConstant.SpinnerOptions).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_LEAVE_PAGING],{});
@@ -121,7 +122,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         this.relmObj.RefEmpId = this.RefEmpId;
         this.relmObj.RefEmpLeaveMngmntId = this.refEmpLeaveMngmntId;
         this.relmObj.RowVersion = this.resultData.RowVersion;
-        this.http.post(URLConstant.EditRefEmpLeaveMngmnt, this.relmObj).subscribe(
+        this.http.post(URLConstant.EditRefEmpLeaveMngmnt, this.relmObj, AdInsConstant.SpinnerOptions).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_LEAVE_PAGING],{});

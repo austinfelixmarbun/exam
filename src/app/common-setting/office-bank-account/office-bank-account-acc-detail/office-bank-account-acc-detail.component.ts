@@ -10,6 +10,7 @@ import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
 import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-office-bank-account-acc-detail',
@@ -119,7 +120,7 @@ export class OfficeBankAccountAccDetailComponent implements OnInit {
     this.OfficeBankAccObj.BankPhnExt2 = this.AccDetailForm.value.UcAddress.PhnExt2;
     this.OfficeBankAccObj.RowVersion = "";
 
-    this.http.post(URLConstant.EditDetailOfficeBankAcc, this.OfficeBankAccObj).subscribe(
+    this.http.post(URLConstant.EditDetailOfficeBankAcc, this.OfficeBankAccObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage("Update Account Detail Success!");
         this.router.navigateByUrl(NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING);

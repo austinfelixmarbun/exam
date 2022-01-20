@@ -10,6 +10,7 @@ import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-survey-order-task-wf',
@@ -107,7 +108,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
   }
 
   SendSrvyOrder() {
-    this.http.post(URLConstant.SendSrvyOrder, this.SrvyOrderObj).subscribe(
+    this.http.post(URLConstant.SendSrvyOrder, this.SrvyOrderObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SRVY_PAGING],{ });
@@ -191,7 +192,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
       var TaskObj = {
         SrvyTaskId: ev
       }
-      this.http.post(URLConstant.DeleteSrvyTask, TaskObj).subscribe(
+      this.http.post(URLConstant.DeleteSrvyTask, TaskObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.generateSurveyTaskList();
@@ -209,7 +210,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
     if (this.SurveyTaskForm.controls["SrvyTaskId"].value == "") {
       this.SrvyTaskObj.SrvyTaskNo = "";
 
-      this.http.post(URLConstant.AddSrvyTask, this.SrvyTaskObj).subscribe(
+      this.http.post(URLConstant.AddSrvyTask, this.SrvyTaskObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.generateSurveyTaskList();
@@ -221,7 +222,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
       this.SrvyTaskObj.SrvyTaskNo = this.SurveyTaskForm.controls["SrvyTaskNo"].value;
       this.SrvyTaskObj.RowVersion = this.SrvyTaskObj.RowVersion;
 
-      this.http.post(URLConstant.EditSrvyTask, this.SrvyTaskObj).subscribe(
+      this.http.post(URLConstant.EditSrvyTask, this.SrvyTaskObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.generateSurveyTaskList();

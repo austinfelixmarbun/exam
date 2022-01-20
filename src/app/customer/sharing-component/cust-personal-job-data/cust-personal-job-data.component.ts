@@ -411,7 +411,7 @@ export class CustPersonalJobDataComponent implements OnInit {
     // console.log(reqObjSave);
     let urlSave: string = URLConstant.AddCustPersonalJobData;
     if (this.tempCustPersonalJobDataObj.CustPersonalJobDataId != 0) urlSave = URLConstant.EditCustPersonalJobData;
-    this.http.post(urlSave, reqObjSave).subscribe(
+    this.http.post(urlSave, reqObjSave, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.outputTab.emit({ stepMode: "next" });

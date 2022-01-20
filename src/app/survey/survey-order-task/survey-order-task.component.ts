@@ -9,6 +9,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-survey-order-task',
@@ -85,7 +86,7 @@ export class SurveyOrderTaskComponent implements OnInit {
   }
 
   SendSrvyOrder() {
-    this.http.post(URLConstant.SendSrvyOrder, this.SrvyOrderObj).subscribe(
+    this.http.post(URLConstant.SendSrvyOrder, this.SrvyOrderObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SRVY_PAGING],{ });
@@ -168,7 +169,7 @@ export class SurveyOrderTaskComponent implements OnInit {
       var TaskObj = {
         SrvyTaskId: ev
       }
-      this.http.post(URLConstant.DeleteSrvyTask, TaskObj).subscribe(
+      this.http.post(URLConstant.DeleteSrvyTask, TaskObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.generateSurveyTaskList();

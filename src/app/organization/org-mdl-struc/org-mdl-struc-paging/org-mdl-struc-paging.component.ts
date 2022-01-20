@@ -130,7 +130,7 @@ export class OrgMdlStrucPagingComponent implements OnInit {
       this.orgMdlStrucObj = new OrgMdlStrucObj();
       this.orgMdlStrucObj.orgMdlStrucId = +id;
 
-      this.https.post(this.deleteUrl, this.orgMdlStrucObj).subscribe(
+      this.https.post(this.deleteUrl, this.orgMdlStrucObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.service.successMessage(response['message']);
           var order = null;

@@ -9,6 +9,7 @@ import { map, mergeMap } from 'rxjs/operators';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-ref-industry-type-detail',
@@ -108,7 +109,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
 
     //MODE-ADD
     if (this.type != 'edit') {
-      this.httpClient.post(URLConstant.AddRefIndustryType, refIndustryTypeObj).subscribe(
+      this.httpClient.post(URLConstant.AddRefIndustryType, refIndustryTypeObj, AdInsConstant.SpinnerOptions).subscribe(
         //SAVE
         (response) => {
           this.service.successMessage(response["Message"]);
@@ -122,7 +123,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     //MODE-EDIT
     else {
       //SAVE
-      this.httpClient.post(URLConstant.EditRefIndustryType, refIndustryTypeObj).subscribe(
+      this.httpClient.post(URLConstant.EditRefIndustryType, refIndustryTypeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.service.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_INDUSTRY_TYPE_PAGING],{});

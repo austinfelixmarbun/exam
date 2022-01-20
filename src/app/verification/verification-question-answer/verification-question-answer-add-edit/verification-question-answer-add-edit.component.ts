@@ -13,6 +13,7 @@ import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-ob
 import { RegexService } from 'app/customer/regex.service';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { String } from 'typescript-string-operations';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-verification-question-answer-add-edit',
@@ -170,7 +171,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     if (this.mode == "edit") {
       this.verfQuestionAnswerObj.VerfQuestionAnswerId = this.VerfQuestionAnswerId;
       this.verfQuestionAnswerObj.RowVersion = this.verfQuestionAnswerObj.RowVersion;
-      this.http.post(URLConstant.EditVerfQuestionAnswer, this.verfQuestionAnswerObj).subscribe(
+      this.http.post(URLConstant.EditVerfQuestionAnswer, this.verfQuestionAnswerObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_PAGING],{});
@@ -178,7 +179,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     }
     else {
       this.verfQuestionAnswerObj.VerfQuestionAnswerId = 0;
-      this.http.post(URLConstant.AddVerfQuestionAnswer, this.verfQuestionAnswerObj).subscribe(
+      this.http.post(URLConstant.AddVerfQuestionAnswer, this.verfQuestionAnswerObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_PAGING],{});

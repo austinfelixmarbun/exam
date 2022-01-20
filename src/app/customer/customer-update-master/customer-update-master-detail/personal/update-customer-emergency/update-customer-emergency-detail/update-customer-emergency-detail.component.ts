@@ -20,6 +20,7 @@ import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 import { forkJoin } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-update-customer-emergency-detail',
@@ -279,7 +280,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     if(this.checkEmergencyContact() == false){
       return;
     }
-    this.http.post(URLConstant.UpdateMasterCustEmergency, this.CustomerEmergencyForm.value).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustEmergency, this.CustomerEmergencyForm.value, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

@@ -8,6 +8,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-verification-question-scheme-member-paging',
@@ -60,7 +61,7 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
       var VerfSchemeDObj = {
         Id: VerfSchemeDId
       };
-      this.http.post(URLConstant.DeleteVerfSchemeD, VerfSchemeDObj).subscribe(
+      this.http.post(URLConstant.DeleteVerfSchemeD, VerfSchemeDObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.success(response['message'], 'Success!');
           this.GetListVerfSchmD();

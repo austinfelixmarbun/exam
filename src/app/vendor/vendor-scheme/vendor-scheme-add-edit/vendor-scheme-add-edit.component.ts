@@ -8,6 +8,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-vendor-scheme-add-edit',
@@ -91,7 +92,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
       this.vendorSchemeObj.VendorSchmCode = this.result.VendorSchmCode;
       this.vendorSchemeObj.VendorSchmId = this.VendorSchmId;
 
-      this.http.post(URLConstant.EditVendorSchm, this.vendorSchemeObj).subscribe(
+      this.http.post(URLConstant.EditVendorSchm, this.vendorSchemeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "Type": "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
@@ -99,7 +100,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
     }
     else {
       this.vendorSchemeObj.VendorSchmId = 0;
-      this.http.post(URLConstant.AddVendorSchm, this.vendorSchemeObj).subscribe(
+      this.http.post(URLConstant.AddVendorSchm, this.vendorSchemeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "Type": "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });

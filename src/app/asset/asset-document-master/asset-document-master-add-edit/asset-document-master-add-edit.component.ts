@@ -62,7 +62,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
       this.refAssetObj.AssetDocName = this.RefAssetDocForm.controls["AssetDocName"].value;
       this.refAssetObj.IsActive = this.RefAssetDocForm.controls["IsActive"].value;
 
-      this.http.post(URLConstant.AddNewRefAssetDocData, this.refAssetObj).subscribe(
+      this.http.post(URLConstant.AddNewRefAssetDocData, this.refAssetObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_MASTER_PAGING],{});
@@ -75,7 +75,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
       this.refAssetObj.AssetDocName = this.RefAssetDocForm.controls["AssetDocName"].value;
       this.refAssetObj.IsActive = this.RefAssetDocForm.controls["IsActive"].value;
 
-      this.http.post(URLConstant.EditRefAssetDocData, this.refAssetObj).subscribe(
+      this.http.post(URLConstant.EditRefAssetDocData, this.refAssetObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_MASTER_PAGING],{});

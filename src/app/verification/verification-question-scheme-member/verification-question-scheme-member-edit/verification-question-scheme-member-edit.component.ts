@@ -9,6 +9,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-verification-question-scheme-member-edit',
@@ -74,7 +75,7 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
     this.verfSchemeDObj = this.QuestionGroupForm.value;
     this.verfSchemeDObj.VerfSchemeHId = this.VerfSchemeHId;
     this.verfSchemeDObj.VerfSchemeDId = this.VerfSchemeDId;
-    this.http.post(URLConstant.EditVerfSchemeD, this.verfSchemeDObj).subscribe(
+    this.http.post(URLConstant.EditVerfSchemeD, this.verfSchemeDObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_SCHM_MBR_PAGING],{ "VerfSchemeHId": this.VerfSchemeHId });

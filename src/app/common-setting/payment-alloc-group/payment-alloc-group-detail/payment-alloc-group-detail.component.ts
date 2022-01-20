@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { PaymentAllocGrpObj } from 'app/shared/model/common-setting/payment-alloc-grp-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
@@ -105,7 +106,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
     this.PaymentAllocGrpObj.IsActive = this.PaymentAllocGrpForm.controls["IsActive"].value;
 
     if (this.mode == 'add') {
-      this.http.post(URLConstant.AddRefPaymentAllocGrp, this.PaymentAllocGrpObj).subscribe(
+      this.http.post(URLConstant.AddRefPaymentAllocGrp, this.PaymentAllocGrpObj, AdInsConstant.SpinnerOptions).subscribe(
         //SAVE
         (response) => {
           this.router.navigate([NavigationConstant.CS_PAYMENT_ALLOC_GRP_PAGING]);
@@ -117,7 +118,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
       );
     }
     else {
-      this.http.post(URLConstant.EditRefPaymentAllocGrp, this.PaymentAllocGrpObj).subscribe(
+      this.http.post(URLConstant.EditRefPaymentAllocGrp, this.PaymentAllocGrpObj, AdInsConstant.SpinnerOptions).subscribe(
         //EDIT
         (response) => {
           this.router.navigate([NavigationConstant.CS_PAYMENT_ALLOC_GRP_PAGING]);

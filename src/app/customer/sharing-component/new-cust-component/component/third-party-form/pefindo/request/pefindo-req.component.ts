@@ -10,6 +10,7 @@ import { PefindoSmartSearchCoyObj } from 'app/shared/model/digitalization/pefind
 import { PefindoSmartSearchPersonalObj } from 'app/shared/model/digitalization/pefindo-smart-search-personal-obj.model';
 import { ReqAddTrxSrcDataForPefindoObj } from 'app/shared/model/digitalization/req-add-trx-src-data-for-pefindo-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 @Component({
@@ -64,14 +65,14 @@ export class PefindoReqComponent implements OnInit {
     reqAddTrxSrcDataForPefindoObj.PefindoId = pefindoSmartSearchPersonalObj.PefindoId;
 
     if(environment.isCore){
-      this.http.post(URLConstant.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj).subscribe(
+      this.http.post(URLConstant.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.activeModal.dismiss('Cross click');
         }
       );
     }else{
-      this.http.post(URLConstant.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj).subscribe(
+      this.http.post(URLConstant.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.activeModal.dismiss('Cross click');
@@ -93,14 +94,14 @@ export class PefindoReqComponent implements OnInit {
     reqAddTrxSrcDataForPefindoObj.PefindoId = pefindoSmartSearchCoyObj.PefindoId;
 
     if(environment.isCore){
-      this.http.post(URLConstant.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj).subscribe(
+      this.http.post(URLConstant.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.activeModal.dismiss('Cross click');
         }
       );
     }else{
-      this.http.post(URLConstant.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj).subscribe(
+      this.http.post(URLConstant.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.activeModal.dismiss('Cross click');

@@ -81,7 +81,7 @@ export class HolidayDetailComponent implements OnInit {
       this.copyHoliday.HolidaySchmHId = this.HolidaySchmHId;
       this.copyHoliday.HolidaySchmHIdCopy = this.HolidaySchmHIdCopy;
 
-      this.http.post(URLConstant.CopyHolidaySchmH, this.copyHoliday).subscribe(
+      this.http.post(URLConstant.CopyHolidaySchmH, this.copyHoliday, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ HolidaySchmHId: this.HolidaySchmHId })
           this.toastr.successMessage(response['message']);

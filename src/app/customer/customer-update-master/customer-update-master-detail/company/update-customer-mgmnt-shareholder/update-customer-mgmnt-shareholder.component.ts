@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { UpdateCustCompanyShareholderObj } from 'app/shared/model/update-master-cust/update-cust-company-shareholder-obj.model';
@@ -86,7 +87,7 @@ export class UpdateCustomerMgmntShareholderComponent implements OnInit {
         request.push(item);
       }
     }
-    this.http.post(URLConstant.UpdateMasterCustCompanyShareholder, { CustId: this.CustId, ShareholderList: request }).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustCompanyShareholder, { CustId: this.CustId, ShareholderList: request }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

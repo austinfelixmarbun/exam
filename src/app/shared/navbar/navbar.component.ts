@@ -90,7 +90,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     logout() {
-        this.http.post(AdInsConstant.Logout, "");
+        this.http.post(AdInsConstant.Logout, "", AdInsConstant.SpinnerOptions);
         AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();
         this.router.navigate([NavigationConstant.PAGES_LOGIN]);

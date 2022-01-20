@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -307,7 +308,7 @@ export class UpdateCustomerAddressComponent implements OnInit {
       }
       requestList.push(masterData);
     }
-    this.http.post(URLConstant.UpdateMasterCustAddr, { CustAddrList: requestList, CustId: this.CustId }).toPromise().then(
+    this.http.post(URLConstant.UpdateMasterCustAddr, { CustAddrList: requestList, CustId: this.CustId }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

@@ -101,7 +101,7 @@ export class UserPagingComponent implements OnInit {
       var resetPassUrl = this.foundationUrl + URLConstant.ResetPassword;
       var refUser = new RefUserObj();
       // refUser.refUserId = id;
-      this.https.post(resetPassUrl, refUser).subscribe(
+      this.https.post(resetPassUrl, refUser, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.service.successMessage(response["message"]);
           this.router

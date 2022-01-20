@@ -254,7 +254,7 @@ export class AssetTypeAddEditComponent implements OnInit {
     }
     if (this.pageType == "add") {
       this.assetTypeObj.RowVersion = "";
-      this.http.post(URLConstant.AddAssetType, this.assetTypeObj).subscribe(
+      this.http.post(URLConstant.AddAssetType, this.assetTypeObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_TYPE_PAGING],{});
@@ -263,7 +263,7 @@ export class AssetTypeAddEditComponent implements OnInit {
       this.assetTypeObj.AssetTypeCode = this.assetTypeCode;
       this.assetTypeObj.RowVersion = this.RowVersion;
       this.assetTypeObj.AssetTypeId = this.assetTypeId;
-      this.http.post(URLConstant.EditAssetType, this.assetTypeObj).subscribe(
+      this.http.post(URLConstant.EditAssetType, this.assetTypeObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_TYPE_PAGING],{});

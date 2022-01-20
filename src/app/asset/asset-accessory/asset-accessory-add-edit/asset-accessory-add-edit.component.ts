@@ -75,7 +75,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.acObj.AssetAccessoryName = this.AssetAccessoryForm.controls["AssetAccessoryName"].value;
       this.acObj.IsActive = this.AssetAccessoryForm.controls["IsActive"].value;
       this.acObj.AssetTypeId = this.AssetTypeId;
-      this.http.post(URLConstant.AddNewAssetAccesory, this.acObj).subscribe(
+      this.http.post(URLConstant.AddNewAssetAccesory, this.acObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ACC_PAGING],{ "AssetTypeId": this.acObj.AssetTypeId });
@@ -86,7 +86,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.acObj.AssetAccessoryCode = this.AssetAccessoryForm.controls["AssetAccessoryCode"].value;
       this.acObj.AssetAccessoryName = this.AssetAccessoryForm.controls["AssetAccessoryName"].value;
       this.acObj.IsActive = this.AssetAccessoryForm.controls["IsActive"].value;
-      this.http.post(URLConstant.EditAssetAccessory, this.acObj).subscribe(
+      this.http.post(URLConstant.EditAssetAccessory, this.acObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ACC_PAGING],{ "AssetTypeId": this.acObj.AssetTypeId });

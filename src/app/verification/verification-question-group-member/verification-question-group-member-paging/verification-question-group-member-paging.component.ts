@@ -8,6 +8,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-verification-question-group-member-paging',
@@ -56,7 +57,7 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
   Delete(verfQuestionGrpDId){
     if (confirm("Are you sure to delete this record?")) {
       var verfGroupDIdObj = {Id: verfQuestionGrpDId};
-      this.http.post(URLConstant.DeleteVerfQuestionGroupDById, verfGroupDIdObj).subscribe(
+      this.http.post(URLConstant.DeleteVerfQuestionGroupDById, verfGroupDIdObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.GetVerfQuestionGrpDByGrpHId();

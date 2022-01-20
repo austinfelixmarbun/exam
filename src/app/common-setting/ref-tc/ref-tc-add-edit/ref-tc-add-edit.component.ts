@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { RefTcObj } from 'app/shared/model/ref-tc.model';
@@ -70,7 +71,7 @@ export class RefTcAddEditComponent implements OnInit {
       this.refTcObj.TcType = this.RefTcForm.controls["TcType"].value;
       this.refTcObj.IsMandatory = this.RefTcForm.controls["IsMandatory"].value;
       this.refTcObj.IsActive = this.RefTcForm.controls["IsActive"].value;
-      this.http.post(URLConstant.AddRefTc, this.refTcObj).subscribe(
+      this.http.post(URLConstant.AddRefTc, this.refTcObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REF_TC_PAGING],{});
@@ -84,7 +85,7 @@ export class RefTcAddEditComponent implements OnInit {
       this.refTcObj.TcType = this.RefTcForm.controls["TcType"].value;
       this.refTcObj.IsMandatory = this.RefTcForm.controls["IsMandatory"].value;
       this.refTcObj.IsActive = this.RefTcForm.controls["IsActive"].value;
-      this.http.post(URLConstant.EditRefTc, this.refTcObj).subscribe(
+      this.http.post(URLConstant.EditRefTc, this.refTcObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REF_TC_PAGING],{});

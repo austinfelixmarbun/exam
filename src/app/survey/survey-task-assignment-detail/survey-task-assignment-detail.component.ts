@@ -252,7 +252,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
       const getuserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
       this.reqByIdAndUsername.SrvyTaskId = surveyTaskId;
       this.reqByIdAndUsername.Username = getuserAccess.UserName;
-      this.httpClient.post(URLConstant.CancelSurveyTaskBySurveyTaskId, this.reqByIdAndUsername).subscribe(
+      this.httpClient.post(URLConstant.CancelSurveyTaskBySurveyTaskId, this.reqByIdAndUsername, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage("Survey Task has been cancelled!");
           window.location.reload();
@@ -289,7 +289,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
     this.reqSrvyTaskAndSendToMobile.ReqListSrvyTaskObjs = this.reqListSrvyTaskObj;
     this.reqSrvyTaskAndSendToMobile.SrvyOrderId = this.surveyOrderId;
 
-    this.httpClient.post(URLConstant.EditSrvyTaskAndSendToMobile, this.reqSrvyTaskAndSendToMobile).subscribe(
+    this.httpClient.post(URLConstant.EditSrvyTaskAndSendToMobile, this.reqSrvyTaskAndSendToMobile, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEY_TASK_ASSIGNMENT_PAGING], {});

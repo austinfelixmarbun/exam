@@ -186,7 +186,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.userRole.RefUserId = this.RefUserId;
       this.userRole.RowVersion = this.result["RowVersion"];
 
-      this.http.post(URLConstant.EditRefUserRole, this.userRole).subscribe(
+      this.http.post(URLConstant.EditRefUserRole, this.userRole, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_BZ_UNIT_PAGING],{ "RefUserId": this.RefUserId });
@@ -197,7 +197,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.userRole.IsActive = this.EmployeeBusinessUnitForm.controls.IsActive.value;
       this.userRole.RowVersion = "";
       this.userRole.RefUserId = this.RefUserId;
-      this.http.post(URLConstant.AddRefUserRole, this.userRole).subscribe((response) => {
+      this.http.post(URLConstant.AddRefUserRole, this.userRole, AdInsConstant.SpinnerOptions).subscribe((response) => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_BZ_UNIT_PAGING],{ "RefUserId": this.RefUserId });
       });

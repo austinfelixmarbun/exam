@@ -16,6 +16,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { NewCustSetData } from '../sharing-component/new-cust-component/NewCustSetData.Service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-cust-fin-data-tab',
@@ -302,7 +303,7 @@ export class CustFinDataTabComponent implements OnInit {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
         var CustPersonalFinDataCustomObj = { Id: this.ListCustPersonalFinData[FinDataIndex].CustPersonalFinDataId };
-        await this.httpClient.post(URLConstant.DeleteCustPersonalFinData, CustPersonalFinDataCustomObj).toPromise().then(
+        await this.httpClient.post(URLConstant.DeleteCustPersonalFinData, CustPersonalFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
           (response) => {
             this.ListCustPersonalFinData.splice(FinDataIndex, 1);
           }
@@ -310,7 +311,7 @@ export class CustFinDataTabComponent implements OnInit {
       }
       else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
         var CustCoyFinDataCustomObj = { Id: this.ListCustCoyFinData[FinDataIndex].CustCompanyFinDataId };
-        await this.httpClient.post(URLConstant.DeleteCustCompanyFinData, CustCoyFinDataCustomObj).toPromise().then(
+        await this.httpClient.post(URLConstant.DeleteCustCompanyFinData, CustCoyFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
           (response) => {
             this.ListCustCoyFinData.splice(FinDataIndex, 1);
           }
@@ -498,7 +499,7 @@ export class CustFinDataTabComponent implements OnInit {
       CustFinDataObj: custFinData
     }
 
-    await this.httpClient.post(url, CustFinDataCustomObj).toPromise().then(
+    await this.httpClient.post(url, CustFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (this.currentModal) this.currentModal.close();
       }
@@ -545,7 +546,7 @@ export class CustFinDataTabComponent implements OnInit {
       CustFinDataObj: custFinData
     }
 
-    await this.httpClient.post(url, CustFinDataCustomObj).toPromise().then(
+    await this.httpClient.post(url, CustFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (this.currentModal) this.currentModal.close();
       }
@@ -588,7 +589,7 @@ export class CustFinDataTabComponent implements OnInit {
       CustAttrContentObjs: custAttrRequest,
     }
 
-    await this.httpClient.post(URLConstant.AddCustFinDataAttrContent, CustFinDataCustomObj).toPromise().then(
+    await this.httpClient.post(URLConstant.AddCustFinDataAttrContent, CustFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.toastr.successMessage(response["Message"]);
         if (!IsParent) this.outputTab.emit({ stepMode: "next" });

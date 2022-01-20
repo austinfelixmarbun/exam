@@ -17,6 +17,7 @@ import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-mas
 import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
 import { NewCustSetData } from '../NewCustSetData.Service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-new-cust-public',
@@ -153,7 +154,7 @@ export class NewCustPublicComponent implements OnInit {
     reqSubmitObj.PublicCity = tempForm["UcAddress"]["City"];
     reqSubmitObj.PublicZipcode = tempForm["UcAddressZipcode"]["value"];
 
-    this.http.post(this.SetUrlApi(), reqSubmitObj).subscribe(
+    this.http.post(this.SetUrlApi(), reqSubmitObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.Cancel();
       }
