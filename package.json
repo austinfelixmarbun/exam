@@ -48,7 +48,7 @@
     "@adins/ucapprovalgeneralinfo": "^1.0.8",
     "@adins/ucapprovalhist": "^1.0.16",
     "@adins/ucdropdownlist": "^1.1.0",
-    "@adins/ucdropdownsearch": "^1.0.7",
+    "@adins/ucdropdownsearch": "^1.0.9",
     "@adins/ucgridfooter": "^1.0.2",
     "@adins/ucgridview": "^2.2.0",
     "@adins/uclookupgeneric": "^2.3.3",
