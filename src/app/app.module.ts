@@ -22,7 +22,6 @@ import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 import { ErrorDialogComponent } from 'app/error-dialog/error-dialog.component';
 import { RolepickComponent } from 'app/shared/rolepick/rolepick.component';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
-import { GrowlModule } from 'primeng/primeng';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CookieModule } from 'ngx-cookie';
 import { StorageService } from './shared/services/StorageService';
@@ -82,7 +81,6 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         CookieModule.forRoot(),
         MatDialogModule,
         BrowserAnimationsModule,
-        GrowlModule,
         ClipboardModule,
         FormsModule,
         ReactiveFormsModule,

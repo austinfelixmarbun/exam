@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { formatDate, DOCUMENT } from '@angular/common';
-import 'rxjs/add/operator/map';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { RequestCriteriaObj } from 'app/shared/model/request-criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';

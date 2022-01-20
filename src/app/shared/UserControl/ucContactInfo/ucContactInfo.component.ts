@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import 'rxjs/add/operator/map';
 import { NgForm, ControlContainer } from '@angular/forms';
 @Component({
   selector: 'app-ucContactInfo',

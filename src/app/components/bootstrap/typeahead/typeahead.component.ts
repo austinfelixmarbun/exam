@@ -5,7 +5,6 @@ import { catchError, debounceTime, distinctUntilChanged, map, tap, switchMap, me
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { RequestCriteriaObj } from 'app/shared/model/request-criteria-obj.model';
-import { NullTemplateVisitor } from '@angular/compiler';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 
@@ -160,7 +159,7 @@ export class TypeaheadComponent {
     request.isLoading = false;
     request.pageNo = 1;
     request.rowPerPage = 20;
-    request.orderBy = NullTemplateVisitor;
+    // request.orderBy = NullTemplateVisitor;
     var critObj = new CriteriaObj();
     critObj.DataType = "text";
     critObj.restriction = AdInsConstant.RestrictionLike;
