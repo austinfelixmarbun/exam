@@ -24,45 +24,43 @@ export class RolePickService {
                 RowVersion: ""
             };
 
-            this.http.post(AdInsConstant.LoginByTokenV2, roleObject2, AdInsConstant.SpinnerOptions).subscribe(
+            let UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+            this.http.post(AdInsConstant.GetListJobTitleByUsernameAndModuleV2, {UserName : UserAccess['UserName'], Module : environment.Module}, AdInsConstant.SpinnerOptions).toPromise().then(
                 (response) => {
                     const object = {
-                        response: response[CommonConstant.ReturnObj]
-                    };
+                        response: response
+                    };  
 
-                    const dialogRef = this.dialog.open(RolepickComponent, {
-                        id: 'role-modal',
-                        width: '85%',
-                        // position: {
-                        //     top: '12px'
-                        // },
-                        data: object
-                    });
+                    const dialogConfig = new MatDialogConfig();
+                    dialogConfig.id = 'role-modal';
+                    dialogConfig.width = '45%';
+                    dialogConfig.data = object;
+                    dialogConfig.backdropClass = "blur-bg";
+
+                    const dialogRef = this.dialog.open(RolepickComponent, dialogConfig);
 
                     dialogRef.afterClosed().subscribe(result => {
                     });
-                }
-            );
-
+                });
 
         } else {
-            if (data.response.length == 1 && type == "") {
-                let item = data.response[0];
-                let UserIdentityObj = {
+            if (data.response.RefUserRoles.length == 1 && type == "") {
+                var item = data.response;
+                var UserIdentityObj = {
                     RefUserId: item.RefUserId,
-                    UserName: item.UserName,
+                    UserName: item.Username,
                     EmpNo: item.EmpNo,
                     EmpName: item.EmpName,
-                    OfficeId: item.RefOfficeId,
-                    OfficeCode: item.OfficeCode,
-                    OfficeName: item.OfficeName,
-                    MrOfficeTypeCode: item.MrOfficeTypeCode,
-                    RoleId: item.RefRoleId,
-                    RoleCode: item.RoleCode,
-                    RoleName: item.RoleName,
-                    JobTitleId: item.RefJobTitleId,
-                    JobTitleCode: item.JobTitleCode,
-                    JobTitleName: item.JobTitleName,
+                    OfficeId: item.RefUserRoles[0].RefOfficeId,
+                    OfficeCode: item.RefUserRoles[0].OfficeCode,
+                    OfficeName: item.RefUserRoles[0].OfficeName,
+                    MrOfficeTypeCode: item.RefUserRoles[0].MrOfficeTypeCode,
+                    RoleId: item.RefUserRoles[0].Roles[0].RefRoleId,
+                    RoleCode: item.RefUserRoles[0].Roles[0].RoleCode,
+                    RoleName: item.RefUserRoles[0].Roles[0].RoleName,
+                    JobTitleId: item.RefUserRoles[0].Roles[0].RefJobTitleId,
+                    JobTitleCode: item.RefUserRoles[0].Roles[0].JobTitleCode,
+                    JobTitleName: item.RefUserRoles[0].Roles[0].JobTitleName,
                     BusinessDt: item.BusinessDt,
                     BusinessDtStr: item.BusinessDtStr,
                     Email: item.Email1,
@@ -108,10 +106,11 @@ export class RolePickService {
             //Ini kalau dia ada lebih dari 1 Role, maka buka modal
             else {
                 const dialogConfig = new MatDialogConfig();
-                // dialogConfig.disableClose = true;
+                dialogConfig.disableClose = true;
                 dialogConfig.id = 'role-modal';
-                dialogConfig.width = '85%';
+                dialogConfig.width = '45%';
                 dialogConfig.data = data;
+                dialogConfig.backdropClass = "blur-bg";
                 const dialogRef = this.dialog.open(RolepickComponent, dialogConfig);
 
                 dialogRef.afterClosed().subscribe(result => {
