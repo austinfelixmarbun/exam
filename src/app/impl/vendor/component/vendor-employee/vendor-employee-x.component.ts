@@ -100,7 +100,6 @@ export class VendorEmployeeXComponent implements OnInit {
 
     if (this.mode == "edit") {
       this.VendorEmpForm.controls["VendorEmpCode"].disable();
-      this.VendorEmpForm.controls["VendorEmpName"].disable();
       await this.getData();
       this.setLookup();
     } else {
@@ -163,7 +162,7 @@ export class VendorEmployeeXComponent implements OnInit {
       }
     );
 
-
+   
     this.http.post(URLConstant.GetVendorByVendorId, {Id : this.objInput.VendorId}).subscribe(
       (response) => {
         this.result = response;
@@ -371,7 +370,7 @@ export class VendorEmployeeXComponent implements OnInit {
 
   //START URS-LOS-041
 
-  onOptionsSelected(event){
+  onOptionsSelected(event){  
     this.setValidatorPattern();
   }
 
@@ -390,7 +389,7 @@ export class VendorEmployeeXComponent implements OnInit {
           for (let i = 0; i < this.resultPattern.length; i++) {
             let patternObj: CustomPatternObj = new CustomPatternObj();
             let pattern: string = this.resultPattern[i].Value;
-
+    
             patternObj.pattern = pattern;
             patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
             this.customPattern.push(patternObj);
