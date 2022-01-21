@@ -78,6 +78,7 @@ export class CommonConstant {
     public static SURVEYOR_HO = "SURVEYOR_HO";
     public static SUPPLIER_HOLDING = "SUPPLIER_HOLDING";
     public static SUPPLIER_ATPM = "SUPPLIER_ATPM";
+    public static COLL_COMPANY = "COLL_COMPANY";
 
     public static TITLE_SUPPLIER_ATPM = "Supplier ATPM";
     public static TITLE_SUPPLIER_BRANCH = "Supplier";
@@ -86,6 +87,7 @@ export class CommonConstant {
     public static TITLE_SURVEYOR_BRANCH = "Surveyor Branch";
     public static TITLE_AGENCY_COMPANY = "Agency Company";
     public static TITLE_AGENCY_PERSONAL = "Agency Personal";
+    public static TITLE_COLL_COMPANY = "Collection Company";
 
     // VENDOR TYPE
     public static VENDOR_TYPE_COMPANY = "C";
@@ -178,7 +180,7 @@ export class CommonConstant {
     public static RefMasterTypeCodePositionSlik = "POSITION_SLIK";
     public static RefMasterTypeCodeAppSrcType = "APP_SRC_TYPE";
     public static RefMasterTypeCodeCustDocType = "CUST_DOC_TYPE";
-
+    public static RefMasterTypeCodeVendorCollCompanyPosition = "VENDOR_COLL_COMPANY_POSITION";
 
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"

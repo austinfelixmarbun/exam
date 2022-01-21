@@ -369,6 +369,7 @@ export class PathConstant {
     public static VENDOR_EMP = "Employee";
     public static VENDOR_LIST = "List";
     public static VENDOR_BRANCH = "Branch";
+    public static VENDOR_COLL_COMPANY = "CollectionCompany";
     public static VENDOR_BRANCH_PAGING = PathConstant.VENDOR_BRANCH + "/" + PathConstant.PAGING;
     public static VENDOR_BRANCH_ADD = PathConstant.VENDOR_BRANCH + "/" + PathConstant.ADD;
     public static VENDOR_BRANCH_REG = PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_REG;
@@ -377,6 +378,13 @@ export class PathConstant {
     public static VENDOR_BRANCH_EMP_DETAIL = PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_EMP + "/" + PathConstant.DETAIL;
     public static VENDOR_BRANCH_MBR_PAGING = PathConstant.VENDOR_BRANCH + "/" + PathConstant.MEMBER + "/" + PathConstant.PAGING;
     public static VENDOR_BRANCH_MBR_ADD = PathConstant.VENDOR_BRANCH + "/" + PathConstant.MEMBER + "/" + PathConstant.ADD;
+    public static VENDOR_COLL_COMPANY_ADD = PathConstant.VENDOR_COLL_COMPANY + "/" + PathConstant.ADD;
+    public static VENDOR_COLL_COMPANY_REG = PathConstant.VENDOR_COLL_COMPANY + "/" + PathConstant.VENDOR_REG;
+    public static VENDOR_COLL_COMPANY_EMP_PAGING = PathConstant.VENDOR_COLL_COMPANY + "/" + PathConstant.VENDOR_EMP + "/" + PathConstant.PAGING;
+    public static VENDOR_COLL_COMPANY_EMP_DETAIL = PathConstant.VENDOR_COLL_COMPANY + "/" + PathConstant.VENDOR_EMP + "/" + PathConstant.DETAIL;
+    public static VENDOR_COLL_COMPANY_MBR_PAGING = PathConstant.VENDOR_COLL_COMPANY + "/" + PathConstant.MEMBER + "/" + PathConstant.PAGING;
+    public static VENDOR_COLL_COMPANY_MBR_ADD = PathConstant.VENDOR_COLL_COMPANY + "/" + PathConstant.MEMBER + "/" + PathConstant.ADD;
+    public static VENDOR_COLL_COMPANY_VIEW = PathConstant.VENDOR_COLL_COMPANY + "/" + PathConstant.VIEW;
     public static VENDOR_CONTACT_PERSON = "ContactPerson";
     public static VENDOR_CONTACT_PERSON_ADD = PathConstant.VENDOR_CONTACT_PERSON + "/" + PathConstant.ADD;
     public static VENDOR_CONTACT_PERSON_EDIT = PathConstant.VENDOR_CONTACT_PERSON + "/" + PathConstant.EDIT;
@@ -450,6 +458,7 @@ export class PathConstant {
     public static VIEW_VENDOR_BRANCH = "VendorBranch";
     public static VIEW_VENDOR_HOLDING = "VendorHolding";
     public static VIEW_VENDOR_HO = "VendorHO";
+    public static VIEW_VENDOR_COLL_COMPANY = "VendorCollCompany";
     //#endregion
 
     //#region View-Survey-Module

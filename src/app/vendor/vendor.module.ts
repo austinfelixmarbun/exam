@@ -76,6 +76,13 @@ import { UcapprovalHistoryModule } from "@adins/ucapproval-history";
 import { UcapprovalgeneralinfoModule } from "@adins/ucapprovalgeneralinfo";
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { VendorCollCompanyRegistrationComponent } from './vendor-coll-company/vendor-coll-company-registration/vendor-coll-company-registration.component';
+import { VendorCollCompanyAddEditComponent } from './vendor-coll-company/vendor-coll-company-add-edit/vendor-coll-company-add-edit.component';
+import { VendorCollCompanyEmployeeAddEditComponent } from './vendor-coll-company/vendor-coll-company-employee-add-edit/vendor-coll-company-employee-add-edit.component';
+import { VendorCollCompanyEmployeePagingComponent } from './vendor-coll-company/vendor-coll-company-employee-paging/vendor-coll-company-employee-paging.component';
+import { VendorCollCompanyOfficeMemberComponent } from './vendor-coll-company/vendor-coll-company-office-member/vendor-coll-company-office-member.component';
+import { VendorCollCompanyOfficeMemberAddComponent } from './vendor-coll-company/vendor-coll-company-office-member-add/vendor-coll-company-office-member-add.component';
+import { VendorCollCompanyViewComponent } from './vendor-coll-company/vendor-coll-company-view/vendor-coll-company-view.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -170,7 +177,14 @@ export const customCurrencyMaskConfig = {
     VendorGradingApprovalDetailComponent,
     VendorGradingInquiryPagingComponent,
     AuctionCompanyPagingComponent,
-    AuctionCompanyAddeditComponent
+    AuctionCompanyAddeditComponent,
+    VendorCollCompanyRegistrationComponent,
+    VendorCollCompanyAddEditComponent,
+    VendorCollCompanyEmployeeAddEditComponent,
+    VendorCollCompanyEmployeePagingComponent,
+    VendorCollCompanyOfficeMemberComponent,
+    VendorCollCompanyOfficeMemberAddComponent,
+    VendorCollCompanyViewComponent
   ],
   entryComponents : [UcviewgenericComponent, VendorAtpmSelectComponent],
   providers: [

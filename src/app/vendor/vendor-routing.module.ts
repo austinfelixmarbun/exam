@@ -38,6 +38,13 @@ import { VendorGradingRequestDetailComponent } from "./vendor-grading/vendor-gra
 import { VendorGradingApprovalPagingComponent } from "./vendor-grading/vendor-grading-approval/vendor-grading-approval-paging/vendor-grading-approval-paging.component";
 import { VendorGradingApprovalDetailComponent } from "./vendor-grading/vendor-grading-approval/vendor-grading-approval-detail/vendor-grading-approval-detail.component";
 import { VendorGradingInquiryPagingComponent } from "./vendor-grading/vendor-grading-inquiry-paging/vendor-grading-inquiry-paging.component";
+import { VendorCollCompanyAddEditComponent } from './vendor-coll-company/vendor-coll-company-add-edit/vendor-coll-company-add-edit.component';
+import { VendorCollCompanyEmployeeAddEditComponent } from './vendor-coll-company/vendor-coll-company-employee-add-edit/vendor-coll-company-employee-add-edit.component';
+import { VendorCollCompanyEmployeePagingComponent } from './vendor-coll-company/vendor-coll-company-employee-paging/vendor-coll-company-employee-paging.component';
+import { VendorCollCompanyOfficeMemberAddComponent } from './vendor-coll-company/vendor-coll-company-office-member-add/vendor-coll-company-office-member-add.component';
+import { VendorCollCompanyOfficeMemberComponent } from './vendor-coll-company/vendor-coll-company-office-member/vendor-coll-company-office-member.component';
+import { VendorCollCompanyRegistrationComponent } from './vendor-coll-company/vendor-coll-company-registration/vendor-coll-company-registration.component';
+import { VendorCollCompanyViewComponent } from './vendor-coll-company/vendor-coll-company-view/vendor-coll-company-view.component';
 
 const routes: Routes = [
   {
@@ -301,6 +308,55 @@ const routes: Routes = [
         component: AuctionCompanyAddeditComponent,
         data: {
           title: 'Auction Company Addedit'
+        },
+      },
+      {
+        path: PathConstant.VENDOR_COLL_COMPANY_ADD,
+        component: VendorCollCompanyAddEditComponent,
+        data: {
+          title: 'Vendor Collection Company Registration'
+        },
+      },
+      {
+        path: PathConstant.VENDOR_COLL_COMPANY_EMP_DETAIL,
+        component: VendorCollCompanyEmployeeAddEditComponent,
+        data: {
+          title: 'Vendor Collection Company Registration'
+        },
+      },
+      {
+        path: PathConstant.VENDOR_COLL_COMPANY_EMP_PAGING,
+        component: VendorCollCompanyEmployeePagingComponent,
+        data: {
+          title: 'Vendor Collection Company Registration'
+        },
+      },
+      {
+        path: PathConstant.VENDOR_COLL_COMPANY_MBR_ADD,
+        component: VendorCollCompanyOfficeMemberAddComponent,
+        data: {
+          title: 'Vendor Collection Company Registration'
+        },
+      },
+      {
+        path: PathConstant.VENDOR_COLL_COMPANY_MBR_PAGING,
+        component: VendorCollCompanyOfficeMemberComponent,
+        data: {
+          title: 'Vendor Collection Company Registration'
+        },
+      },
+      {
+        path: PathConstant.VENDOR_COLL_COMPANY_REG,
+        component: VendorCollCompanyRegistrationComponent,
+        data: {
+          title: 'Vendor Collection Company Registration'
+        },
+      },
+      {
+        path: PathConstant.VENDOR_COLL_COMPANY_VIEW,
+        component: VendorCollCompanyViewComponent,
+        data: {
+          title: 'Vendor Collection Company View'
         },
       }
     ]

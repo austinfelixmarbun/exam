@@ -27,6 +27,7 @@ import { GenericObj} from 'app/shared/model/generic/generic-obj.model';
 })
 export class VendorEmployeeComponent implements OnInit {
   @Input() objInput: any;
+  @Input() isVendorCollCompany: boolean = false;
   @Output() objOutput: EventEmitter<any> = new EventEmitter();
   VendorEmpId: number;
   VendorId: number;
@@ -116,9 +117,16 @@ export class VendorEmployeeComponent implements OnInit {
   }
 
   setDropdown() {
-    var RefMasterVendorPosition = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorPosition,
+    if(this.isVendorCollCompany){
+      var RefMasterVendorPosition = {
+        RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCollCompanyPosition,
+      }
+    }else{
+      var RefMasterVendorPosition = {
+        RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorPosition,
+      }
     }
+
     this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterVendorPosition).subscribe(
       (response) => {
         this.VendorPositionList = response[CommonConstant.ReturnObj];
