@@ -34,8 +34,8 @@ export class VendorCollCompanyOfficeMemberAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/vendorBranchMemberTempPaging.json";
-    this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/vendorBranchMemberTempPaging.json";
+    this.tempPagingObj.urlJson = "./assets/ucpaging/ucTempPaging/vendorCollCompanyMemberTempPaging.json";
+    this.tempPagingObj.pagingJson = "./assets/ucpaging/ucTempPaging/vendorCollCompanyMemberTempPaging.json";
 
     var addCritCg = new CriteriaObj();
     addCritCg.propName = 'RO.MR_OFFICE_TYPE_CODE';
