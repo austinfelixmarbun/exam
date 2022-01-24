@@ -58,6 +58,7 @@ export class ThirdPartyFormComponent implements OnInit {
   IsUseTs: Boolean = false;
   IsUsePefindo: Boolean = false;
   ListDocumentKeyValueObj: Array<KeyValueObj> = new Array<KeyValueObj>();
+  SpouseIdCode : string = "";
 
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   CustDocFileObjs: Array<CustDocFileObj> = new Array<CustDocFileObj>();
@@ -137,6 +138,16 @@ export class ThirdPartyFormComponent implements OnInit {
         this.OutputUploadFile.emit(this.CustDocFileFormObjs);
       }
     );
+  }
+
+  setDocFormCustMaritalTypeChanged(){
+    let idxObj = this.CustDocFileFormObjs.findIndex(x => x.MrCustDocTypeCode == CommonConstant.MasterCodeCustDocTypeSpouseId);
+    if(this.parentForm.controls.MrMaritalStatCode.value == CommonConstant.MR_MARITAL_STAT_CODE_SINGLE){
+      this.CustDocFileFormObjs[idxObj].IsRequired = false;
+    }
+    else{
+      this.CustDocFileFormObjs[idxObj].IsRequired = true;
+    }
   }
 
   async getCustDocFiles() {

@@ -181,6 +181,9 @@ export class CommonConstant {
     public static RefMasterTypeCodeAppSrcType = "APP_SRC_TYPE";
     public static RefMasterTypeCodeCustDocType = "CUST_DOC_TYPE";
     public static RefMasterTypeCodeVendorCollCompanyPosition = "VENDOR_COLL_COMPANY_POSITION";
+    
+    //MASTER CODE
+    public static MasterCodeCustDocTypeSpouseId = "APGEN03";
 
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"

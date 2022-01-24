@@ -22,7 +22,7 @@ import { ResGetAssetMasterAttrContentByIdObj } from 'app/shared/model/response/a
 import { GenericKeyValueListObj } from 'app/shared/model/generic/generic-key-value-list-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { ListAssetSchemeHObj, ResGetListAssetSchemeHObj } from 'app/shared/model/response/asset-master/res-get-list-asset-scheme-h-obj.model';
-import { AssetMasterAttrObj } from 'app/shared/model/asset-master-attr/asset-master-attr-obj.model';
+import { AssetMasterAttrContentObj, AssetMasterAttrObj } from 'app/shared/model/asset-master-attr/asset-master-attr-obj.model';
 
 @Component({
   selector: 'app-asset-master-add-edit-child',
@@ -167,13 +167,19 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                   AttrTypeCode : CommonConstant.AttrTypeCodeMaster
                 };
                 this.http.post(URLConstant.GetAssetMasterAttrContentForAssetMasterByAttrTypeCode, reqGetAssetMasterAttrContentObj).pipe(first()).subscribe(
-                  (response) => {
+                  async (response) => {
                     this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
-                    var formGroupObject = new Object();
+                    var parentFormGroup = new Object();
                     for (const masterAttr of this.listAssetMasterAttrContent) {
-                      formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AttrContent"] == null ? "" : masterAttr["AttrContent"], [Validators.required]];
+
+                      var formGroupObject = new Object();
+                      formGroupObject["AssetAttrId"] = [masterAttr["AssetAttrId"]];
+                      formGroupObject["IsMandatory"] = [masterAttr["IsMandatory"]];
+                      formGroupObject["AttrLength"] = [masterAttr["AttrLength"]];
+
+                      await this.setFormGroupValue(masterAttr, formGroupObject, parentFormGroup);
                     }
-                    this.AssetMasterChildForm.addControl("AssetMasterAttrContent", this.fb.group(formGroupObject));
+                    this.AssetMasterChildForm.addControl("AssetMasterAttrContent", this.fb.group(parentFormGroup));
                     this.isReadyAssetMasterAttr = true;
                   },
                   (error) => {
@@ -259,13 +265,19 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                   AttrTypeCode : CommonConstant.AttrTypeCodeMaster
                 };
                 this.http.post<ResGetAssetMasterAttrContentByIdObj>(URLConstant.GetAssetMasterAttrContentForAssetMasterByAttrTypeCode, reqGetAssetMasterAttrContentObj).pipe(first()).subscribe(
-                  (response) => {
+                  async (response) => {
                     this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
-                    var formGroupObject = new Object();
+                    var parentFormGroup = new Object();
                     for (const masterAttr of this.listAssetMasterAttrContent) {
-                      formGroupObject[masterAttr["AssetAttrId"]] = [masterAttr["AttrAssetAttrIdContent"] == null ? "" : masterAttr["AttrAssetAttrIdContent"], [Validators.required]];
+                      
+                      var formGroupObject = new Object();
+                      formGroupObject["AssetAttrId"] = [masterAttr["AssetAttrId"]];
+                      formGroupObject["IsMandatory"] = [masterAttr["IsMandatory"]];
+                      formGroupObject["AttrLength"] = [masterAttr["AttrLength"]];
+
+                      await this.setFormGroupValue(masterAttr, formGroupObject, parentFormGroup);
                     }
-                    this.AssetMasterChildForm.addControl("AssetMasterAttrContent", this.fb.group(formGroupObject));
+                    this.AssetMasterChildForm.addControl("AssetMasterAttrContent", this.fb.group(parentFormGroup));
                     this.isReadyAssetMasterAttr = true;
                   },
                   (error) => {
@@ -295,6 +307,16 @@ export class AssetMasterAddEditChildComponent implements OnInit {
     return value.split(";").sort();
   }
 
+  async setFormGroupValue(masterAttr: AssetMasterAttrContentObj, formGroupObject: object, parentFormGroup){
+    if (masterAttr.IsMandatory == true) {
+      formGroupObject["AttrValue"] = [masterAttr.AttrContent == null ? "" : masterAttr.AttrContent, [Validators.required, Validators.maxLength(masterAttr.AttrLength)]];
+    }
+    else{
+      formGroupObject["AttrValue"] = [masterAttr.AttrContent == null ? "" : masterAttr.AttrContent, [Validators.maxLength(masterAttr.AttrLength)]];
+    }
+    
+    parentFormGroup[masterAttr.AssetAttrId] = this.fb.group(formGroupObject);
+  }
 
   SelectAll(condition) {
     this.checkboxAll = condition;
@@ -334,7 +356,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           var assetMasterAttr: AssetMasterAttrObj = {
             AssetMasterId: this.AssetMasterId,
             AssetAttrId: key,
-            AttrContent: formValue["AssetMasterAttrContent"][key]
+            AttrContent: formValue["AssetMasterAttrContent"][key]["AttrValue"] == null ? "" : formValue["AssetMasterAttrContent"][key]["AttrValue"]
           };
           assetMasterAttrValues.push(assetMasterAttr);
         }

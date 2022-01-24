@@ -21,15 +21,17 @@
       {
         "type" : "dropdown",
         "label" : "Asset Type Name",
-        "name" : "asset_Type_Name",
+        "name" : "ASSET_TYPE_CODE",
         "id" : "assetTypeName",
         "value" : "",
         "datatype" : "text",
         "ddlType": "all",
         "items" : [],
         "path": "/AssetType/GetListKeyValueActiveByCode",
-        "isFromURL" : true, 
-        "url" : "", 
+        "criteriaPropName" : "assetTypeCode",
+        "criteriaPropValue" : "ASSET_TYPE_CODE",
+        "isFromURL" : true,
+        "url" : "",
         "itemsUrl" : [],
         "environment": "FOU"
       }
@@ -81,4 +83,3 @@
     "propertyId": "assetMasterId",
     "propertyName": "fullAssetName"
   }
-  
