@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CompanyComponent } from 'app/company/company.component';
 import { CompanyRoutingComponent } from 'app/company/company-routing.component';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BODComponent } from 'app/company/bod/bod.component';
 import { BodAddComponent } from 'app/company/bod/add/add-bod.component';
@@ -23,7 +22,6 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
     CompanyRoutingComponent,
     CommonModule,
     FormsModule,
-    HttpModule,
     NgbModule,
     SharingComponentModule,
     UCSearchModule,

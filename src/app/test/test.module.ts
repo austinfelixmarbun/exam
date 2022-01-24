@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { HttpModule } from "@angular/http";
 import { CommonModule } from "@angular/common";
 import { TestRoutingModule } from "./test-routing.module";
 import { AdInsModule } from "app/components/adins-module/adins.module";
@@ -14,7 +13,6 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     imports: [
         CommonModule,
         FormsModule,
-        HttpModule,
         NgbModule,
         AdInsSharedModule,
         TestRoutingModule,

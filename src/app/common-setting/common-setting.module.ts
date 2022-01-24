@@ -6,7 +6,6 @@ import { CommonSettingRoutingModule } from 'app/common-setting/common-setting-ro
 import { NgModule, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GeneralSettingAddEditComponent } from 'app/common-setting/general-setting/general-setting-add-edit/general-setting-add-edit.component';
 import { GeneralSettingPagingComponent } from 'app/common-setting/general-setting/general-setting-paging/general-setting-paging.component';
@@ -106,7 +105,6 @@ export const customCurrencyMaskConfig = {
     CommonSettingRoutingModule,
     CommonModule,
     FormsModule,
-    HttpModule,
     NgbModule,
     UCSearchModule,
     UcgridfooterModule,

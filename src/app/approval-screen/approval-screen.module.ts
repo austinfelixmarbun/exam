@@ -20,22 +20,21 @@ import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
-  declarations: [ApprovalScreenComponent,UcProdCompComponent, TestComponent, LookupTestComponent, 
-    UcApprovebyComponent, UcApprovalhistComponent, UcApprovalrecommendationComponent, UcApprovalsummaryComponent,UcApprovalComponent],
-  imports: [
-    AdInsModule,
-    CommonModule,
-    ApprovalScreenRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    AdInsSharedModule,
-    SharingComponentModule,
-    UcShowErrorsModule,
-    UcSubsectionModule
-  ],
-  entryComponents : [TestComponent,LookupTestComponent],
-  providers: [
-    NgbActiveModal
-  ]
+    declarations: [ApprovalScreenComponent, UcProdCompComponent, TestComponent, LookupTestComponent,
+        UcApprovebyComponent, UcApprovalhistComponent, UcApprovalrecommendationComponent, UcApprovalsummaryComponent, UcApprovalComponent],
+    imports: [
+        AdInsModule,
+        CommonModule,
+        ApprovalScreenRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        AdInsSharedModule,
+        SharingComponentModule,
+        UcShowErrorsModule,
+        UcSubsectionModule
+    ],
+    providers: [
+        NgbActiveModal
+    ]
 })
 export class ApprovalScreenModule { }

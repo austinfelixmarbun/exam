@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({

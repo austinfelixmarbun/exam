@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { ArchwizardModule } from 'angular-archwizard';
-import { MatRadioModule, MatTabsModule } from '@angular/material';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTabsModule } from '@angular/material/tabs';
 import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
 import { SharedModule } from 'app/shared/shared.module';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -74,7 +74,6 @@ export const customCurrencyMaskConfig = {
     ],
     imports: [
         CommonModule,
-        HttpModule,
         MatRadioModule,
         NgbModule,
         SharingComponentModule,
@@ -82,7 +81,7 @@ export const customCurrencyMaskConfig = {
         AdInsSharedModule,
         ArchwizardModule,
         MatTabsModule,
-        AdInsModule,        
+        AdInsModule,
         NgMultiSelectDropDownModule,
         NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
         CustomerViewTrustingSocialModule
@@ -109,14 +108,12 @@ export const customCurrencyMaskConfig = {
         PefindoReqComponent,
         ThirdPartyFormComponent
     ],
-
     providers: [
         NGXToastrService,
         RegexService,
         NewCustSetData,
         ThirdPartyUploadService
-    ],
-    entryComponents: [TrustingSocialReqHeaderComponent, TrustingSocialViewHeaderComponent, PefindoReqComponent]
+    ]
 })
 export class NewCustomerSharingModule {
     constructor() {

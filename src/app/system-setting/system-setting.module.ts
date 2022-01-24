@@ -2,7 +2,6 @@ import { UserPagingComponent } from 'app/system-setting/user/user-paging/user-pa
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SystemSettingRoutingModule } from 'app/system-setting/system-setting-routing.module';
 import { RoleAddEditComponent } from 'app/system-setting/role/role-add-edit/role-add-edit.component';
@@ -11,7 +10,6 @@ import { UserRoleComponent } from 'app/system-setting/user/user-role/user-role.c
 import { RoleUserComponent } from 'app/system-setting/role/role-user/role-user.component';
 import { RoleFormComponent } from 'app/system-setting/role/role-form/role-form.component';
 import { UserChangePasswordComponent } from 'app/system-setting/user/user-change-password/user-change-password.component';
-import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
@@ -42,53 +40,50 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
 
 
 @NgModule({
-  imports: [
-    AdInsModule,
-    AdInsSharedModule,
-    SystemSettingRoutingModule,
-    CommonModule,
-    FormsModule,
-    HttpModule,
-    NgbModule,
-    SharingComponentModule,
-    UCSearchModule,
-    UcgridfooterModule,
-    UcpagingModule,
-    UcSubsectionModule,
-    ReactiveFormsModule,
-    TreeViewModule,
-    NgMultiSelectDropDownModule,
-    UcviewgenericModule,
-    UcgridviewModule,
-    UclookupgenericModule,
-    UcShowErrorsModule,
-    UcaddtotempModule,
-    MatSlideToggleModule,
-    UcdropdownlistModule
-  ],
-  declarations: [
-    UserPagingComponent,
-    RoleAddEditComponent,
-    RolePagingComponent,
-    UserRoleComponent,
-    RoleUserComponent,
-    RoleFormComponent,
-    UserChangePasswordComponent,
-    NotificationPagingComponent,
-    NotificationAddEditComponent,
-    NotificationApprovalPagingComponent,
-    NotificationApprovalDetailComponent,
-    RefFormPagingComponent,
-    RefFormDetailComponent,
-    RefFormRoleMappingComponent,
-    RefFormRolePagingComponent,
-    RoleFormPagingComponent,
-    AttributeComponent,
-    AttributeDetailComponent
-  ],
-  entryComponents : [UcviewgenericComponent],
-  providers: [
-    NGXToastrService
-  ]
+    imports: [
+        AdInsModule,
+        AdInsSharedModule,
+        SystemSettingRoutingModule,
+        CommonModule,
+        FormsModule,
+        NgbModule,
+        SharingComponentModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        UcpagingModule,
+        UcSubsectionModule,
+        ReactiveFormsModule,
+        NgMultiSelectDropDownModule,
+        UcviewgenericModule,
+        UcgridviewModule,
+        UclookupgenericModule,
+        UcShowErrorsModule,
+        UcaddtotempModule,
+        MatSlideToggleModule,
+        UcdropdownlistModule
+    ],
+    declarations: [
+        UserPagingComponent,
+        RoleAddEditComponent,
+        RolePagingComponent,
+        UserRoleComponent,
+        RoleUserComponent,
+        RoleFormComponent,
+        UserChangePasswordComponent,
+        NotificationPagingComponent,
+        NotificationAddEditComponent,
+        NotificationApprovalPagingComponent,
+        NotificationApprovalDetailComponent,
+        RefFormPagingComponent,
+        RefFormDetailComponent,
+        RefFormRoleMappingComponent,
+        RefFormRolePagingComponent,
+        RoleFormPagingComponent,
+        AttributeComponent,
+        AttributeDetailComponent
+    ],
+    providers: [
+        NGXToastrService
+    ]
 })
 export class SystemSettingModule { }

@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { PefindoViewRoutingModule } from './pefindo-view-routing.module';
 import { PefindoViewComponent } from './pefindo-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { UcpagingModule } from '@adins/ucpaging';
@@ -26,7 +25,6 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
     CommonModule,
     PefindoViewRoutingModule,
     FormsModule,
-    HttpModule,
     UCSearchModule,
     UcgridfooterModule,
     UcpagingModule,

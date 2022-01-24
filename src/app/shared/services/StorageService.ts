@@ -1,9 +1,11 @@
 import { Observable, ReplaySubject } from "rxjs";
+import { Injectable } from "@angular/core";
 
 /**
  * Storage service
  * used for persist application data in observable key value pair
  */
+@Injectable()
 export class StorageService {
     private subjects: Map<string, ReplaySubject<any>>;
     private watched = {};

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
 import { UCSearchModule } from "@adins/ucsearch";
 import { UcpagingModule } from "@adins/ucpaging";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -23,13 +22,12 @@ import { ViewSurveyTaskDetailComponent } from './view-survey-task-detail/view-su
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
-  declarations: [SurveyTaskViewComponent,
-    ViewSurveyTaskDetailComponent],
-  imports: [
-    CommonModule,
-    SurveyTaskViewRoutingModule,
+    declarations: [SurveyTaskViewComponent,
+        ViewSurveyTaskDetailComponent],
+    imports: [
+        CommonModule,
+        SurveyTaskViewRoutingModule,
         FormsModule,
-        HttpModule,
         UCSearchModule,
         UcgridfooterModule,
         UcpagingModule,
@@ -46,14 +44,7 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
         UcShowErrorsModule,
         SharedModule,
         AdInsSharedModule
-  ],
-  entryComponents: [
-      UclookupgenericComponent,
-      UcviewgenericComponent,
-      UcgridviewComponent,
-      UcapprovalhistComponent,
-  ],
-  exports: [
-  ]
+    ],
+    exports: []
 })
 export class SurveyTaskViewModule { }

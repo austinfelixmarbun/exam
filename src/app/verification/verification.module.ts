@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
 import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { VerificationComponent } from './verification.component';
 import { VerificationRoutingModule } from './verification-routing.module';
@@ -26,37 +24,34 @@ import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
-  imports: [
-    VerificationRoutingModule,
-    CommonModule,
-    HttpModule,
-    NgbModule,
-    AdInsSharedModule,
-    SharingComponentModule,
-    TreeViewModule,
-    NgbDropdownModule,
-    ArchwizardModule,
-    AdInsModule
-  ],
-  declarations: [
-    VerificationComponent,
-    VerificationQuestionAnswerPagingComponent,
-    VerificationQuestionAnswerAddEditComponent,
-    VerificationQuestionGroupAddEditComponent,
-    VerificationQuestionGroupPagingComponent,
-    VerificationQuestionGroupMemberPagingComponent,
-    VerificationQuestionGroupMemberEditComponent,
-    VerificationQuestionGroupMemberAddComponent,
-    VerificationQuestionSchemePagingComponent,
-    VerificationQuestionSchemeAddEditComponent,
-    VerificationQuestionSchemeMemberPagingComponent,
-    VerificationQuestionSchemeMemberAddComponent,
-    VerificationQuestionSchemeMemberEditComponent,
-  ],
-  entryComponents : [UcviewgenericComponent],
-  providers: [
-    NGXToastrService,
-    VerificationService
-  ]
+    imports: [
+        VerificationRoutingModule,
+        CommonModule,
+        NgbModule,
+        AdInsSharedModule,
+        SharingComponentModule,
+        NgbDropdownModule,
+        ArchwizardModule,
+        AdInsModule
+    ],
+    declarations: [
+        VerificationComponent,
+        VerificationQuestionAnswerPagingComponent,
+        VerificationQuestionAnswerAddEditComponent,
+        VerificationQuestionGroupAddEditComponent,
+        VerificationQuestionGroupPagingComponent,
+        VerificationQuestionGroupMemberPagingComponent,
+        VerificationQuestionGroupMemberEditComponent,
+        VerificationQuestionGroupMemberAddComponent,
+        VerificationQuestionSchemePagingComponent,
+        VerificationQuestionSchemeAddEditComponent,
+        VerificationQuestionSchemeMemberPagingComponent,
+        VerificationQuestionSchemeMemberAddComponent,
+        VerificationQuestionSchemeMemberEditComponent,
+    ],
+    providers: [
+        NGXToastrService,
+        VerificationService
+    ]
 })
 export class VerificationModule { }

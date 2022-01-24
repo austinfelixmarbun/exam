@@ -9,7 +9,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './pefindo-view-child.module#PefindoViewChildModule'
+        loadChildren: () => import('./pefindo-view-child.module').then(m => m.PefindoViewChildModule)
       }
     ]
   }

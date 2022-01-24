@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ContextMenuComponent } from '@progress/kendo-angular-menu';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -75,8 +74,6 @@ export class DashBoardComponent implements OnInit {
   showMessage(message: any) {
   }
 
-  @ViewChild('treemenu') public gridContextMenu: ContextMenuComponent;
-
   public data: any[] = [
     {
       text: 'Furniture', items: [
@@ -106,7 +103,6 @@ export class DashBoardComponent implements OnInit {
 
       this.contextItem = e.item.dataItem;
 
-      this.gridContextMenu.show({ left: originalEvent.pageX, top: originalEvent.pageY });
     }
   }
 

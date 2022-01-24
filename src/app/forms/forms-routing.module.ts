@@ -97,7 +97,7 @@ const routes: Routes = [
       },
       {
         path: 'ngx',
-        loadChildren: './ngx-wizard/ngx-wizard.module#NGXFormWizardModule'
+        loadChildren: () => import('./ngx-wizard/ngx-wizard.module').then(m => m.NGXFormWizardModule)
       },
       {
         path: 'archwizard',

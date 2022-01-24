@@ -36,7 +36,7 @@ export class PersonalComponent implements OnInit {
         let firstState = this.workflowService.getFirstInvalidStep(STEPS.work);
         if (firstState.length > 0) {          
         };       
-        this.router.navigateByUrl('/forms/ngx/work', { relativeTo: this.route.parent, skipLocationChange: true });
+        this.router.navigateByUrl('/forms/ngx/work', { /* Removed unsupported properties by Angular migration: relativeTo. */ skipLocationChange: true });
     }
     //Save button event Ends
 }

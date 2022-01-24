@@ -5,7 +5,6 @@ import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucC
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpModule } from '@angular/http';
 import { UcInfoComponent } from './UserControl/uc-info/uc-info.component';
 import { SearchComponent } from './search/search.component';
 import { UCGridFooterComponent } from './UserControl/ucgrid-footer/ucgrid-footer.component';
@@ -44,7 +43,6 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
         FormsModule,
         NgbModule,
         RouterModule,
-        HttpModule,
         CommonModule,
         AdInsSharedModule,
         UCSearchModule,

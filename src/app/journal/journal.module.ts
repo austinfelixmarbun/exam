@@ -3,7 +3,7 @@ import { UcaddtotempModule } from "@adins/ucaddtotemp";
 import { UcdropdownlistModule } from "@adins/ucdropdownlist";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { MatRadioModule } from "@angular/material";
+import { MatRadioModule } from "@angular/material/radio";
 import { AdInsModule } from "app/components/adins-module/adins.module";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { SharingModule } from "app/shared/sharing.module";
