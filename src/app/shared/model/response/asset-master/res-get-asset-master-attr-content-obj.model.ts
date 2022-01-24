@@ -9,6 +9,7 @@ export class ResGetAssetMasterAttrContentByIdObj {
     AttrTypeCode: string;
     AttrInputType: string;
     AttrValue: string;
+    IsMandatory : boolean;
 
     constructor() {
         this.AssetMasterAttrContentId = 0;
@@ -21,5 +22,6 @@ export class ResGetAssetMasterAttrContentByIdObj {
         this.AttrTypeCode = "";
         this.AttrInputType = "";
         this.AttrValue = "";
+        this.IsMandatory = false;
     }
 }
