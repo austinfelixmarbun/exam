@@ -44,7 +44,6 @@ import { VendorCollCompanyEmployeePagingComponent } from './vendor-coll-company/
 import { VendorCollCompanyOfficeMemberAddComponent } from './vendor-coll-company/vendor-coll-company-office-member-add/vendor-coll-company-office-member-add.component';
 import { VendorCollCompanyOfficeMemberComponent } from './vendor-coll-company/vendor-coll-company-office-member/vendor-coll-company-office-member.component';
 import { VendorCollCompanyRegistrationComponent } from './vendor-coll-company/vendor-coll-company-registration/vendor-coll-company-registration.component';
-import { VendorCollCompanyViewComponent } from './vendor-coll-company/vendor-coll-company-view/vendor-coll-company-view.component';
 
 const routes: Routes = [
   {
@@ -350,13 +349,6 @@ const routes: Routes = [
         component: VendorCollCompanyRegistrationComponent,
         data: {
           title: 'Vendor Collection Company Registration'
-        },
-      },
-      {
-        path: PathConstant.VENDOR_COLL_COMPANY_VIEW,
-        component: VendorCollCompanyViewComponent,
-        data: {
-          title: 'Vendor Collection Company View'
         },
       }
     ]

@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 // import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { AdInsConstant } from './shared/AdInstConstant';
