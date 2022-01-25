@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RefFormPagingComponent } from './ref-form-paging.component';
 
@@ -6,7 +6,7 @@ describe('RefFormPagingComponent', () => {
   let component: RefFormPagingComponent;
   let fixture: ComponentFixture<RefFormPagingComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RefFormPagingComponent ]
     })

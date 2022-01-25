@@ -7,31 +7,31 @@ const routes: Routes = [
     children: [
       {
         path: PathConstant.VIEW_CUST,
-        loadChildren: './customer-view/customer-view.module#CustomerViewModule'
+        loadChildren: () => import('./customer-view/customer-view.module').then(m => m.CustomerViewModule)
       },
       {
         path: PathConstant.VIEW_VENDOR,
-        loadChildren: './vendor/vendor-view.module#VendorViewModule'
+        loadChildren: () => import('./vendor/vendor-view.module').then(m => m.VendorViewModule)
       },
       {
         path: PathConstant.VIEW_NEG_CUST,
-        loadChildren: './negative-customer-view/negative-customer-view.module#NegativeCustomerViewModule'
+        loadChildren: () => import('./negative-customer-view/negative-customer-view.module').then(m => m.NegativeCustomerViewModule)
       },
       {
         path: PathConstant.VIEW_SRVY,
-        loadChildren: './survey-order/survey-order-view.module#SurveyOrderViewModule'
+        loadChildren: () => import('./survey-order/survey-order-view.module').then(m => m.SurveyOrderViewModule)
       },
       {
         path: PathConstant.VIEW_CUST_EXPSR,
-        loadChildren: './cust-exposure-view/cust-exposure-view.module#CustExposureViewModule'
+        loadChildren: () => import('./cust-exposure-view/cust-exposure-view.module').then(m => m.CustExposureViewModule)
       },
       {
         path: PathConstant.VIEW_SRVY_TASK,
-        loadChildren: './survey-task-view/survey-task-view.module#SurveyTaskViewModule'
+        loadChildren: () => import('./survey-task-view/survey-task-view.module').then(m => m.SurveyTaskViewModule)
       },
       {
         path: PathConstant.VIEW_PEFINDO,
-        loadChildren: './pefindo-view/pefindo-view.module#PefindoViewModule'
+        loadChildren: () => import('./pefindo-view/pefindo-view.module').then(m => m.PefindoViewModule)
       }
     ]
   }

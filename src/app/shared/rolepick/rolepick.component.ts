@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'environments/environment';

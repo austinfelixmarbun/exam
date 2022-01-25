@@ -7,7 +7,6 @@ import { EmployeePositionAddComponent } from 'app/employee/employee-position/emp
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LeaveMaintenanceComponent } from './leave-maintenance/leave-maintenance/leave-maintenance.component';
 import { LeaveMaintenanceAddEditComponent } from './leave-maintenance/leave-maintenance-add-edit/leave-maintenance-add-edit.component';
@@ -22,7 +21,6 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     EmployeeRoutingModule,
     CommonModule,
     FormsModule,
-    HttpModule,
     NgbModule,
     AdInsSharedModule,
     SharingComponentModule,

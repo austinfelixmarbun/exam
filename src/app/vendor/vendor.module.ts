@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { TreeViewModule } from '@progress/kendo-angular-treeview';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
@@ -36,7 +34,7 @@ import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registratio
 import { VendorService } from './vendor.service';
 import { VendorHoInfoComponent } from './vendor-ho/vendor-ho-info/vendor-ho-info.component';
 import { MainHoInfoComponent } from './vendor-ho/vendor-ho-info/main-ho-info/main-ho-info.component';
-import { MatTabsModule } from '@angular/material';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MainInfoViewComponent } from './component/main-info-view/main-info-view.component';
 import { VendorBranchEmployeePagingComponent } from './vendor-branch/vendor-branch-employee-paging/vendor-branch-employee-paging.component';
 import { VendorBranchEmployeeAddEditComponent } from './vendor-branch/vendor-branch-employee-add-edit/vendor-branch-employee-add-edit.component';
@@ -76,6 +74,13 @@ import { UcapprovalHistoryModule } from "@adins/ucapproval-history";
 import { UcapprovalgeneralinfoModule } from "@adins/ucapprovalgeneralinfo";
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { VendorCollCompanyRegistrationComponent } from './vendor-coll-company/vendor-coll-company-registration/vendor-coll-company-registration.component';
+import { VendorCollCompanyAddEditComponent } from './vendor-coll-company/vendor-coll-company-add-edit/vendor-coll-company-add-edit.component';
+import { VendorCollCompanyEmployeeAddEditComponent } from './vendor-coll-company/vendor-coll-company-employee-add-edit/vendor-coll-company-employee-add-edit.component';
+import { VendorCollCompanyEmployeePagingComponent } from './vendor-coll-company/vendor-coll-company-employee-paging/vendor-coll-company-employee-paging.component';
+import { VendorCollCompanyOfficeMemberComponent } from './vendor-coll-company/vendor-coll-company-office-member/vendor-coll-company-office-member.component';
+import { VendorCollCompanyOfficeMemberAddComponent } from './vendor-coll-company/vendor-coll-company-office-member-add/vendor-coll-company-office-member-add.component';
+import { VendorCollCompanyViewComponent } from './vendor-coll-company/vendor-coll-company-view/vendor-coll-company-view.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -91,91 +96,95 @@ export const customCurrencyMaskConfig = {
 };
 
 @NgModule({
-  imports: [
-    AdInsModule,
-    AdInsSharedModule,
-    VendorRoutingModule,
-    CommonModule,
-    FormsModule,
-    HttpModule,
-    NgbModule,
-    SharingComponentModule,
-    UCSearchModule,
-    UcgridfooterModule,
-    UcpagingModule,
-    UcSubsectionModule,
-    UclookupgenericModule,
-    ReactiveFormsModule,
-    TreeViewModule,
-    UcviewgenericModule,
-    NgbDropdownModule,
-    ArchwizardModule,
-    MatTabsModule,
-    UcShowErrorsModule,
-    UcaddressModule,
-    UcaddtotempModule,
-    UcapprovalModule,
-    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
-    UcapprovalcreateModule,
-    UcapprovalR3Module,
-    UcapprovalHistoryModule,
-    UcapprovalgeneralinfoModule 
-  ],
-  declarations: [
-    VendorHoldingPagingComponent,
-    VendorHoldingAddEditComponent,
-   BankInfoComponent,
-    VendorGroupComponent,
-    VendorGroupPagingComponent,
-    VendorGroupViewComponent,
-    VendorGroupmemberComponent,
-    VendorSchemeAddEditComponent,
-    VendorSchemePagingComponent,
-    VendorSchemeMemberAddComponent,
-    VendorSchemeMemberPagingComponent,
-    VendorHoAddEditComponent,
-    VendorHoPagingComponent,
-    VendorHoldingViewComponent,
-    VendorBranchPagingComponent,
-    VendorBranchAddEditComponent,
-    ContactPersonListComponent,
-    ContactPersonAddEditComponent,
-    AddressComponent,
-    VendorHoRegistrationComponent,
-    VendorHoInfoComponent,
-    MainHoInfoComponent,
-    MainInfoViewComponent,
-    VendorBranchEmployeePagingComponent,
-    VendorBranchEmployeeAddEditComponent,
-    VendorEmployeeComponent,
-    VendorHoldingRegistrationComponent,
-    HoInfoComponent,
-    HoTaxInfoComponent,
-    HoAddressInfoComponent,
-    HoBankInfoComponent,
-    VendorBranchRegistrationComponent,
-    VendorBranchOfficeMemberAddComponent,
-    VendorBranchOfficeMemberComponent,
-    VendorBranchViewComponent,
-    HoContactPersonInfoComponent,
-    HoGroupInfoComponent,
-    HoBranchInfoComponent,
-    VendorPagingComponent,
-    VendorATPMAddEditComponent,
-    VendorATPMRegistrationComponent,
-    VendorAtpmSelectComponent,
-    VendorGradingRequestPagingComponent,
-    VendorGradingRequestDetailComponent,
-    VendorGradingApprovalPagingComponent,
-    VendorGradingApprovalDetailComponent,
-    VendorGradingInquiryPagingComponent,
-    AuctionCompanyPagingComponent,
-    AuctionCompanyAddeditComponent
-  ],
-  entryComponents : [UcviewgenericComponent, VendorAtpmSelectComponent],
-  providers: [
-    VendorService,
-    NGXToastrService
-  ]
+    imports: [
+        AdInsModule,
+        AdInsSharedModule,
+        VendorRoutingModule,
+        CommonModule,
+        FormsModule,
+        NgbModule,
+        SharingComponentModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        UcpagingModule,
+        UcSubsectionModule,
+        UclookupgenericModule,
+        ReactiveFormsModule,
+        UcviewgenericModule,
+        NgbDropdownModule,
+        ArchwizardModule,
+        MatTabsModule,
+        UcShowErrorsModule,
+        UcaddressModule,
+        UcaddtotempModule,
+        UcapprovalModule,
+        NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+        UcapprovalcreateModule,
+        UcapprovalR3Module,
+        UcapprovalHistoryModule,
+        UcapprovalgeneralinfoModule
+    ],
+    declarations: [
+        VendorHoldingPagingComponent,
+        VendorHoldingAddEditComponent,
+        BankInfoComponent,
+        VendorGroupComponent,
+        VendorGroupPagingComponent,
+        VendorGroupViewComponent,
+        VendorGroupmemberComponent,
+        VendorSchemeAddEditComponent,
+        VendorSchemePagingComponent,
+        VendorSchemeMemberAddComponent,
+        VendorSchemeMemberPagingComponent,
+        VendorHoAddEditComponent,
+        VendorHoPagingComponent,
+        VendorHoldingViewComponent,
+        VendorBranchPagingComponent,
+        VendorBranchAddEditComponent,
+        ContactPersonListComponent,
+        ContactPersonAddEditComponent,
+        AddressComponent,
+        VendorHoRegistrationComponent,
+        VendorHoInfoComponent,
+        MainHoInfoComponent,
+        MainInfoViewComponent,
+        VendorBranchEmployeePagingComponent,
+        VendorBranchEmployeeAddEditComponent,
+        VendorEmployeeComponent,
+        VendorHoldingRegistrationComponent,
+        HoInfoComponent,
+        HoTaxInfoComponent,
+        HoAddressInfoComponent,
+        HoBankInfoComponent,
+        VendorBranchRegistrationComponent,
+        VendorBranchOfficeMemberAddComponent,
+        VendorBranchOfficeMemberComponent,
+        VendorBranchViewComponent,
+        HoContactPersonInfoComponent,
+        HoGroupInfoComponent,
+        HoBranchInfoComponent,
+        VendorPagingComponent,
+        VendorATPMAddEditComponent,
+        VendorATPMRegistrationComponent,
+        VendorAtpmSelectComponent,
+        VendorGradingRequestPagingComponent,
+        VendorGradingRequestDetailComponent,
+        VendorGradingApprovalPagingComponent,
+        VendorGradingApprovalDetailComponent,
+        VendorGradingInquiryPagingComponent,
+        AuctionCompanyPagingComponent,
+        AuctionCompanyAddeditComponent,
+        VendorCollCompanyRegistrationComponent,
+        VendorCollCompanyAddEditComponent,
+        VendorCollCompanyEmployeeAddEditComponent,
+        VendorCollCompanyEmployeePagingComponent,
+        VendorCollCompanyOfficeMemberComponent,
+        VendorCollCompanyOfficeMemberAddComponent,
+        VendorCollCompanyViewComponent
+    ],
+    providers: [
+        VendorService,
+        NGXToastrService
+    ]
 })
 export class VendorModule { }

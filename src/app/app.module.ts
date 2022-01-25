@@ -5,7 +5,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from 'app/app-routing.module';
 import { SharedModule } from "app/shared/shared.module";
 import { ToastrModule } from 'ngx-toastr';
-import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -14,18 +13,15 @@ import { ContentLayoutComponent } from "app/layouts/content/content-layout.compo
 import { FullLayoutComponent } from "app/layouts/full/full-layout.component";
 import { AuthService } from 'app/shared/auth/auth.service';
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
-import { StorageServiceModule } from 'angular-webstorage-service';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import * as $ from 'jquery';
-import { HttpModule } from '@angular/http';
 import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
 import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 import { ErrorDialogComponent } from 'app/error-dialog/error-dialog.component';
 import { RolepickComponent } from 'app/shared/rolepick/rolepick.component';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
-import { GrowlModule } from 'primeng/primeng';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CookieModule } from 'ngx-cookie';
 import { StorageService } from './shared/services/StorageService';
@@ -67,7 +63,6 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         RolepickComponent,
     ],
     imports: [
-        HttpModule,
         BrowserAnimationsModule,
         AppRoutingModule,
         NgxSpinnerModule,
@@ -75,7 +70,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         AdInsSharedModule,
         HttpClientModule,
         ToastrModule.forRoot(),
-        NgbModule.forRoot(),
+        NgbModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -83,14 +78,9 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
                 deps: [HttpClient]
             }
         }),
-        AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyBr5_picK8YJK7fFR2CPzTVMj6GG1TtRGo'
-        }),
         CookieModule.forRoot(),
-        StorageServiceModule,
         MatDialogModule,
         BrowserAnimationsModule,
-        GrowlModule,
         ClipboardModule,
         FormsModule,
         ReactiveFormsModule,
@@ -118,8 +108,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         // },
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
-    bootstrap: [AppComponent],
-    entryComponents: [ErrorDialogComponent, RolepickComponent]
+    bootstrap: [AppComponent]
 })
 export class AppModule {
     constructor() {

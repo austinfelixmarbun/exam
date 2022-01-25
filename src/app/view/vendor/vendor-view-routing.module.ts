@@ -4,6 +4,7 @@ import { VendorBranchViewComponent } from './vendor-branch-view/vendor-branch-vi
 import { VendorHoldingViewComponent } from './vendor-holding-view/vendor-holding-view.component';
 import { VendorHoInfoComponent } from './vendor-ho-info/vendor-ho-info.component';
 import { PathConstant } from 'app/shared/PathConstant';
+import { VendorCollCompanyViewComponent } from 'app/vendor/vendor-coll-company/vendor-coll-company-view/vendor-coll-company-view.component';
 const routes: Routes = [
   {
     path: '',
@@ -27,6 +28,13 @@ const routes: Routes = [
         component: VendorHoInfoComponent,
         data: {
           title: 'Vendor HO View'
+        }
+      }, 
+      {
+        path: PathConstant.VIEW_VENDOR_COLL_COMPANY,
+        component: VendorCollCompanyViewComponent,
+        data: {
+          title: 'Vendor Coll Company View'
         }
       }, 
     ]

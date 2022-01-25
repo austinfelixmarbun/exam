@@ -1,7 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
 import { UCSearchModule } from "@adins/ucsearch";
 import { UcpagingModule } from "@adins/ucpaging";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -19,36 +18,27 @@ import { NegativeCustomerViewRoutingModule } from "./negative-customer-view-rout
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 @NgModule({
-  imports: [
-    NegativeCustomerViewRoutingModule,
-    CommonModule,
-    FormsModule,
-    HttpModule,
-    UCSearchModule,
-    UcgridfooterModule,
-    UcpagingModule,
-    UclookupgenericModule,
-    UcviewgenericModule,
-    UcgridviewModule,
-    NgbModule,
-    AdInsSharedModule,
-    SharingModule,
-    ArchwizardModule,
-    ReactiveFormsModule,
-    UcSubsectionModule,
-    SharingComponentModule,
-    UcShowErrorsModule,
-    
-  ],
-  declarations: [
-    NegativeCustomerViewComponent
-
-  ],
-  entryComponents: [
-    UclookupgenericComponent,
-    UcviewgenericComponent,
-    UcgridviewComponent
-  ]
-
+    imports: [
+        NegativeCustomerViewRoutingModule,
+        CommonModule,
+        FormsModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        UcpagingModule,
+        UclookupgenericModule,
+        UcviewgenericModule,
+        UcgridviewModule,
+        NgbModule,
+        AdInsSharedModule,
+        SharingModule,
+        ArchwizardModule,
+        ReactiveFormsModule,
+        UcSubsectionModule,
+        SharingComponentModule,
+        UcShowErrorsModule,
+    ],
+    declarations: [
+        NegativeCustomerViewComponent
+    ]
 })
 export class NegativeCustomerViewModule { }

@@ -173,6 +173,7 @@ export class NavigationConstant {
     public static VIEW_VENDOR_BRANCH = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.VIEW_VENDOR_BRANCH; //'/View/Vendor/VendorBranch'
     public static VIEW_VENDOR_HO = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.VIEW_VENDOR_HO; //'/View/Vendor/VendorHO'
     public static VIEW_VENDOR_HOLDING = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.VIEW_VENDOR_HOLDING; //'/View/Vendor/VendorHolding'
+    public static VIEW_VENDOR_COLL_COMPANY = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.VIEW_VENDOR_COLL_COMPANY; //'/View/Vendor/VendorCollCompany'
     public static VENDOR_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.PAGING; //'/Vendor/Paging'
     public static VENDOR_GRP_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRP_ADD; //'/Vendor/Group/Add'
     public static VENDOR_GRP_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRP_VIEW; //'/Vendor/Group/View'
@@ -196,6 +197,13 @@ export class NavigationConstant {
     public static VENDOR_SCHM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_SCHM_DETAIL; //'/Vendor/VendorScheme/Detail'
     public static VENDOR_GRD_REQ_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRADING_REQUEST_PAGING; //'/Vendor/VendorGrading/Request/Paging'
     public static VENDOR_GRD_REQ_APV_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRADING_REQUEST_APPROVAL_DETAIL; //'/Vendor/VendorGrading/Request/Paging'
+    public static VENDOR_COLL_COMPANY_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_COLL_COMPANY_ADD; //'/Vendor/CollectionCompany/Add'
+    public static VENDOR_COLL_COMPANY_EMP_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_COLL_COMPANY_EMP_PAGING; //'/Vendor/CollectionCompany/Employee/Paging'
+    public static VENDOR_COLL_COMPANY_EMP_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_COLL_COMPANY_EMP_DETAIL; //'/Vendor/CollectionCompany/Employee/Detail'
+    public static VENDOR_COLL_COMPANY_MBR_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_COLL_COMPANY_MBR_PAGING; //'/Vendor/CollectionCompany/Member/Paging'
+    public static VENDOR_COLL_COMPANY_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_COLL_COMPANY_MBR_ADD; //'/Vendor/CollectionCompany/Member/Add'
+    public static VENDOR_COLL_COMPANY_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_COLL_COMPANY_REG; //'/Vendor/CollectionCompany/Registration'
+    public static VENDOR_COLL_COMPANY_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_COLL_COMPANY_VIEW; //'/Vendor/CollectionCompany/View'
     //#endregion
     
     //#region Organization

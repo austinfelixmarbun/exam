@@ -5,7 +5,6 @@ import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneri
 import { CustomerViewCustomerAssetRoutingModule } from './customer-view-customer-asset-routing.module';
 import { CustomerViewCustomerAssetComponent } from './customer-view-customer-asset.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { UcpagingModule } from '@adins/ucpaging';
@@ -18,31 +17,27 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 @NgModule({
-  declarations: [
-    CustomerViewCustomerAssetComponent
-  ],
-  imports: [
-    CommonModule,
-    CustomerViewCustomerAssetRoutingModule,
-    CommonModule,
-    FormsModule,
-    HttpModule,
-    UCSearchModule,
-    UcgridfooterModule,
-    UcpagingModule,
-    UcviewgenericModule,
-    UcgridviewModule,
-    NgbModule,
-    AdInsSharedModule,
-    SharingModule,
-    ArchwizardModule,
-    ReactiveFormsModule,
-    UcSubsectionModule,
-    SharingComponentModule,
-    UcShowErrorsModule,
-  ],entryComponents: [
-    UcviewgenericComponent,
-    UcgridviewComponent
-  ]
+    declarations: [
+        CustomerViewCustomerAssetComponent
+    ],
+    imports: [
+        CommonModule,
+        CustomerViewCustomerAssetRoutingModule,
+        CommonModule,
+        FormsModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        UcpagingModule,
+        UcviewgenericModule,
+        UcgridviewModule,
+        NgbModule,
+        AdInsSharedModule,
+        SharingModule,
+        ArchwizardModule,
+        ReactiveFormsModule,
+        UcSubsectionModule,
+        SharingComponentModule,
+        UcShowErrorsModule,
+    ]
 })
 export class CustomerViewCustomerAssetModule { }

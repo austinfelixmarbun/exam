@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import 'rxjs/add/operator/map';
 import { NgForm, ControlContainer } from '@angular/forms';
 @Component({
   selector: 'app-uc-info',

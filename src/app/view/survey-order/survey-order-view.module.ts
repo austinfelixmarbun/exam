@@ -1,7 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
 import { UCSearchModule } from "@adins/ucsearch";
 import { UcpagingModule } from "@adins/ucpaging";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -20,34 +19,28 @@ import { AdInsModule } from "app/components/adins-module/adins.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
 @NgModule({
-  declarations: [
-    SurveyOrderViewComponent
-  ],
-  imports: [
-    AdInsModule,
-    SurveyOrderViewRoutingModule,
-    CommonModule,
-    FormsModule,
-    HttpModule,
-    UCSearchModule,
-    UcgridfooterModule,
-    UcpagingModule,
-    UclookupgenericModule,
-    UcviewgenericModule,
-    UcgridviewModule,
-    NgbModule,
-    AdInsSharedModule,
-    SharingModule,
-    ArchwizardModule,
-    ReactiveFormsModule,
-    UcSubsectionModule,
-    SharingComponentModule,
-    UcShowErrorsModule
-  ],
-  entryComponents: [
-    UclookupgenericComponent,
-    UcviewgenericComponent,
-    UcgridviewComponent
-  ]
+    declarations: [
+        SurveyOrderViewComponent
+    ],
+    imports: [
+        AdInsModule,
+        SurveyOrderViewRoutingModule,
+        CommonModule,
+        FormsModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        UcpagingModule,
+        UclookupgenericModule,
+        UcviewgenericModule,
+        UcgridviewModule,
+        NgbModule,
+        AdInsSharedModule,
+        SharingModule,
+        ArchwizardModule,
+        ReactiveFormsModule,
+        UcSubsectionModule,
+        SharingComponentModule,
+        UcShowErrorsModule
+    ]
 })
 export class SurveyOrderViewModule { }

@@ -1,5 +1,3 @@
-import { NullAstVisitor } from "@angular/compiler";
-
 export class CustPersonalJobDataObj {
   CustPersonalJobDataId: number;
   CustId: number;

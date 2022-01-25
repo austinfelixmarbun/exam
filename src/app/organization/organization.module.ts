@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrganizationRoutingModule } from 'app/organization/organization-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RefJobTitleComponent } from 'app/organization/ref-job-title/ref-job-title.component';
 import { BusinessUnitComponent } from 'app/organization/business-unit/business-unit.component';
@@ -35,7 +34,6 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
     OrganizationRoutingModule,
     CommonModule,
     FormsModule,
-    HttpModule,
     NgbModule,
     SharingComponentModule,
     UCSearchModule,

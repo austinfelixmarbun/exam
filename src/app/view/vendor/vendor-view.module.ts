@@ -1,7 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
 import { UCSearchModule } from "@adins/ucsearch";
 import { UcpagingModule } from "@adins/ucpaging";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -29,50 +28,44 @@ import { MainHoInfoComponent } from "./vendor-ho-info/main-ho-info/main-ho-info.
 import { MainInfoViewComponent } from "./vendor-ho-info/main-info-view/main-info-view.component";
 import { HoAtpmInfoComponent } from "./vendor-ho-info/ho-atpm-info/ho-atpm-info.component";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { VendorCollCompanyViewComponent } from "app/vendor/vendor-coll-company/vendor-coll-company-view/vendor-coll-company-view.component";
 
 
 @NgModule({
-  imports: [
-    VendorViewRoutingModule,
-    CommonModule,
-    FormsModule,
-    HttpModule,
-    UCSearchModule,
-    UcgridfooterModule,
-    UcpagingModule,
-    UclookupgenericModule,
-    UcviewgenericModule,
-    UcgridviewModule,
-    NgbModule,
-    AdInsSharedModule,
-    SharingModule,
-    ArchwizardModule,
-    ReactiveFormsModule,
-    UcSubsectionModule,
-    SharingComponentModule,
-    UcShowErrorsModule,
-    
-  ],
-  declarations: [
-     VendorBranchViewComponent,
-     VendorHoldingViewComponent,
-     VendorHoInfoComponent,
-     HoAddressInfoComponent,
-     HoBankInfoComponent,
-     HoBranchInfoComponent,
-     HoContactPersonInfoComponent,
-     HoGroupInfoComponent,
-     HoInfoComponent,
-     HoTaxInfoComponent,
-     MainHoInfoComponent,
-     MainInfoViewComponent,
-     HoAtpmInfoComponent,
-  ],
-  entryComponents: [
-    UclookupgenericComponent,
-    UcviewgenericComponent,
-    UcgridviewComponent,
-  ]
-
+    imports: [
+        VendorViewRoutingModule,
+        CommonModule,
+        FormsModule,
+        UCSearchModule,
+        UcgridfooterModule,
+        UcpagingModule,
+        UclookupgenericModule,
+        UcviewgenericModule,
+        UcgridviewModule,
+        NgbModule,
+        AdInsSharedModule,
+        SharingModule,
+        ArchwizardModule,
+        ReactiveFormsModule,
+        UcSubsectionModule,
+        SharingComponentModule,
+        UcShowErrorsModule,
+    ],
+    declarations: [
+        VendorBranchViewComponent,
+        VendorHoldingViewComponent,
+        VendorHoInfoComponent,
+        HoAddressInfoComponent,
+        HoBankInfoComponent,
+        HoBranchInfoComponent,
+        HoContactPersonInfoComponent,
+        HoGroupInfoComponent,
+        HoInfoComponent,
+        HoTaxInfoComponent,
+        MainHoInfoComponent,
+        MainInfoViewComponent,
+        HoAtpmInfoComponent,
+        VendorCollCompanyViewComponent
+    ]
 })
 export class VendorViewModule { }

@@ -478,3 +478,11 @@ mat-dialog-container#role-modal {
 .link-text:hover {
     filter: brightness(80%);
 }
+
+.show-hide-pass {
+    cursor: pointer;
+    color: #B42317;
+}
+.show-hide-pass:hover {
+    filter: brightness(75%);
+}

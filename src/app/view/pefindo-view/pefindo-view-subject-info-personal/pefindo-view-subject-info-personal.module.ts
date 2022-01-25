@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { PefindoViewSubjectInfoPersonalRoutingModule } from './pefindo-view-subject-info-personal-routing.module';
 import { PefindoViewSubjectInfoPersonalComponent } from './pefindo-view-subject-info-personal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { UcpagingModule } from '@adins/ucpaging';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -21,7 +20,6 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
     CommonModule,
     PefindoViewSubjectInfoPersonalRoutingModule,
     FormsModule,
-    HttpModule,
     UcgridfooterModule,
     UcpagingModule,
     NgbModule,
