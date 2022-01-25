@@ -19,13 +19,8 @@ export class RolePickService {
         private router: Router, private cookieService: CookieService) { }
     openDialog(data, type = ""): void {
         if (type == "modal") {
-            var roleObject2 = {
-                RequestDateTime: AdInsHelper.GetCookie(this.cookieService, CommonConstant.BUSINESS_DATE_RAW),
-                RowVersion: ""
-            };
-
             let UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-            this.http.post(AdInsConstant.GetListJobTitleByUsernameAndModuleV2, {UserName : UserAccess['UserName'], Module : environment.Module}, AdInsConstant.SpinnerOptions).toPromise().then(
+            this.http.post(AdInsConstant.GetListJobTitleByUsernameAndModuleV2, {UserName : UserAccess['UserName'], Module : environment.Module}, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     const object = {
                         response: response

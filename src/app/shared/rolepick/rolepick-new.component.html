@@ -10,16 +10,16 @@
       <div class="text-left">
         <p class="text-user">Office</p>
       </div>
-      <div class="">
+      <div class="text-left">
         <lib-ucdropdownsearch [dropdownSearchObj]="officeDropdownSearchObj" [parentForm]="RolepickForm"
             [enjiForm]="enjiForm" [identifier]="'Office'" [genericList]="listRole" (callback)="setOffice($event)"></lib-ucdropdownsearch>
       </div>
     
 
       <div class="text-left mt-3">
-        <p class="text-user">Role</p>
+        <p class="text-user">Job Title - Role</p>
       </div>
-      <div class="">
+      <div class="text-left">
         <lib-ucdropdownsearch [dropdownSearchObj]="rolesDropdownSearchObj" [parentForm]="RolepickForm"
             [enjiForm]="enjiForm" [identifier]="'Role'" [genericList]="selectedOffice == -1 ? tempList : listRole[selectedOffice]?.Roles" (callback)="setRole($event)"></lib-ucdropdownsearch>
       </div>

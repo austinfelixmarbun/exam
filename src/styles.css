@@ -469,10 +469,12 @@ mat-dialog-container#role-modal {
     border: 1px solid #ff8290 !important;
 }
 
-.show-hide-pass {
+.link-text {
     cursor: pointer;
-    color: #B42317;
+    color: #089ea3;
+    font-weight: 400;
 }
-.show-hide-pass:hover {
-    filter: brightness(75%);
+
+.link-text:hover {
+    filter: brightness(80%);
 }

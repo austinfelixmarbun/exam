@@ -21,11 +21,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class RolepickComponent implements OnInit, AfterViewInit {
   listRole: any;
   refUser: any;
-  listOffice: any;
   cookieOptions: CookieOptions;
   officeDropdownSearchObj: UcDropdownSearchObj = new UcDropdownSearchObj();
   rolesDropdownSearchObj: UcDropdownSearchObj = new UcDropdownSearchObj();
-  isFocus: boolean = true;
   selectedOffice: number = -1;
   selectedRole: number= -1;
   tempList: Array<any> = new Array<any>();
@@ -65,12 +63,10 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   }
 
   setRole(event) {
-    console.log(event);
     this.selectedRole = event.selectedObj.Index;
   }
 
   setOffice(event) {
-    console.log(event);
     this.selectedOffice = event.selectedObj.Index;
     this.selectedRole = 0;
     this.rolesDropdownSearchObj.size = (this.listRole[event.selectedObj.Index].Roles.length) + 1;
@@ -86,7 +82,6 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   });
   SpinnerOptions = { headers: this.SpinnerHeaders, withCredentials: true };
   chooseRole() {
-    console.log(this.RolepickForm);
     var UserIdentityObj = {
       RefUserId: this.refUser.RefUserId,
       UserName: this.refUser.Username,
@@ -120,7 +115,6 @@ export class RolepickComponent implements OnInit, AfterViewInit {
     };
 
     if (this.data.pwd == null) {
-      // this.http.post(AdInsConstant.UpdateTokenV2, roleObject, this.SpinnerOptions).subscribe(
       this.http.post(AdInsConstant.UpdateTokenV2_1, roleObject, this.SpinnerOptions).subscribe(
         (response) => {
           //Cookie sudah diambil dari BE (Di set manual dulu)
