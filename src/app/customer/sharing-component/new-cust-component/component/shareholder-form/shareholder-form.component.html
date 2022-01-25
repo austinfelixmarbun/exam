@@ -3,7 +3,7 @@
   <div class="col-md-6">
 
     <div class="form-group row" *ngIf="CustType == CustTypePersonal">
-      <label class="col-md-4 adInsLabel" translate>Job Position </label>
+      <label class="col-md-4 adins-required-label" translate>Job Position </label>
       <div class="col-md-8" *ngIf="jobPositionLookupObj?.isReady">
         <lib-uclookupgeneric [lookupInput]="jobPositionLookupObj" [parentForm]="parentForm"
           [enjiForm]="enjiForm" [identifier]="'JobPosition'" (lookup)=getLookUpJobPosition($event)>
