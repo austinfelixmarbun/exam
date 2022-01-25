@@ -468,3 +468,13 @@ mat-dialog-container#role-modal {
 .is-invalid-input-field {
     border: 1px solid #ff8290 !important;
 }
+
+.link-text {
+    cursor: pointer;
+    color: #089ea3;
+    font-weight: 400;
+}
+
+.link-text:hover {
+    filter: brightness(80%);
+}
