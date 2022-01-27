@@ -70,11 +70,10 @@ export class RolepickComponent implements OnInit, AfterViewInit {
     this.selectedOffice = event.selectedObj.Index;
     this.selectedRole = 0;
     this.rolesDropdownSearchObj.size = (this.listRole[event.selectedObj.Index].Roles.length) + 1;
-    if(this.listRole[event.selectedObj.Index].Roles.length == 1) {
-      this.RolepickForm.patchValue({
-        Role: this.listRole[event.selectedObj.Index].Roles[0].JobTitleAndRoleName
-      });
-    }
+    this.RolepickForm.patchValue({
+      Role: this.listRole[event.selectedObj.Index].Roles[0].JobTitleAndRoleName
+    });
+    this.rolesDropdownSearchObj.ddsValue = this.listRole[event.selectedObj.Index].Roles[0].JobTitleAndRoleName;
   }
 
   SpinnerHeaders = new HttpHeaders({
