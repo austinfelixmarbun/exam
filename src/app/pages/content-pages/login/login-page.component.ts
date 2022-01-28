@@ -38,7 +38,7 @@ export class LoginPageComponent implements OnInit {
   counterOtp: number = -1;
   otpConfirmCount: number = 0;
   loginObj = {
-    response: "",
+    response: {},
     user: "",
     pwd: ""
   };
@@ -99,7 +99,8 @@ export class LoginPageComponent implements OnInit {
     var requestObj = { "Username": username, "Password": password };
     //this.rolePickService.openDialog(data.returnObject);
 
-    this.http.post(AdInsConstant.LoginV2, requestObj).subscribe(
+    // this.http.post(AdInsConstant.LoginV2, requestObj).subscribe(
+    this.http.post(AdInsConstant.Login, requestObj, AdInsConstant.SpinnerOptions).subscribe(
       async (response) => {
         if (response["StatusCode"] == CommonConstant.STATUS_CODE_USER_LOCKED) {
           this.mode = "locked";
@@ -107,9 +108,9 @@ export class LoginPageComponent implements OnInit {
         else {
           //this.cookieService.put("username", username);
 
-          await this.http.post(AdInsConstant.GetListJobTitleByUsernameAndModule, {UserName : username, Module : environment.Module}).toPromise().then(
+          await this.http.post(AdInsConstant.GetListJobTitleByUsernameAndModuleV2, {UserName : username, Module : environment.Module}, AdInsConstant.SpinnerOptions).toPromise().then(
             (response) => {
-              this.loginObj.response = response["ListOfficeRoleJobTitle"];
+              this.loginObj.response = response;
             });
           this.loginObj.user = username;
           this.loginObj.pwd = password;
