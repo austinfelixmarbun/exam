@@ -11,4 +11,14 @@ if (environment.production) {
   // }
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+function bootstrap() {
+     platformBrowserDynamic().bootstrapModule(AppModule);
+   };
+
+
+if (document.readyState === 'complete') {
+  bootstrap();
+} else {
+  document.addEventListener('DOMContentLoaded', bootstrap);
+}
+
