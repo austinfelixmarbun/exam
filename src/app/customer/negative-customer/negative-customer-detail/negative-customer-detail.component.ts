@@ -427,7 +427,8 @@ export class NegativeCustomerDetailComponent implements OnInit {
   }
 
   Back(): void {
-    this.location.back();
+    // this.location.back();
+    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_NEG_PAGING], {});
   }
 
   custTypeHandler(e) {

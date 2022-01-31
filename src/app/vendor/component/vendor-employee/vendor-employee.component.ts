@@ -62,6 +62,8 @@ export class VendorEmployeeComponent implements OnInit {
     Addr: [''],
     AreaCode1: [''],
     AreaCode2: [''],
+    AreaCode3: [''],
+    AreaCode4: [''],
     City: [''],
     Province: [''],
     IsActive: [false],
@@ -275,6 +277,8 @@ export class VendorEmployeeComponent implements OnInit {
           Addr: this.resultVendorEmpAndAddr.VendorAddrObj.Addr,
           AreaCode1: this.resultVendorEmpAndAddr.VendorAddrObj.AreaCode1,
           AreaCode2: this.resultVendorEmpAndAddr.VendorAddrObj.AreaCode2,
+          AreaCode3: this.resultVendorEmpAndAddr.VendorAddrObj.AreaCode3,
+          AreaCode4: this.resultVendorEmpAndAddr.VendorAddrObj.AreaCode4,
           City: this.resultVendorEmpAndAddr.VendorAddrObj.City,
           Province: this.resultVendorEmpAndAddr.VendorAddrObj.Province,
           IsActive: this.resultVendorEmpAndAddr.VendorEmpObj.IsActive,
@@ -340,6 +344,8 @@ export class VendorEmployeeComponent implements OnInit {
       this.VendorBranchEmpObj.VendorAddrObj.Addr = this.VendorEmpForm.controls.Addr.value;
       this.VendorBranchEmpObj.VendorAddrObj.AreaCode2 = this.VendorEmpForm.controls.AreaCode2.value;
       this.VendorBranchEmpObj.VendorAddrObj.AreaCode1 = this.VendorEmpForm.controls.AreaCode1.value;
+      this.VendorBranchEmpObj.VendorAddrObj.AreaCode3 = this.VendorEmpForm.controls.AreaCode3.value;
+      this.VendorBranchEmpObj.VendorAddrObj.AreaCode4 = this.VendorEmpForm.controls.AreaCode4.value;
       this.VendorBranchEmpObj.VendorAddrObj.City = this.VendorEmpForm.controls.City.value;
       this.VendorBranchEmpObj.VendorAddrObj.Province = this.VendorEmpForm.controls.Province.value;
       this.VendorBranchEmpObj.VendorAddrObj.RowVersion = "";
@@ -349,6 +355,8 @@ export class VendorEmployeeComponent implements OnInit {
       this.VendorBranchEmpObj.VendorAddrObj.Zipcode = this.resultVendorEmpAndAddr.VendorAddrObj.Zipcode;
       this.VendorBranchEmpObj.VendorAddrObj.AreaCode2 = this.resultVendorEmpAndAddr.VendorAddrObj.AreaCode2;
       this.VendorBranchEmpObj.VendorAddrObj.AreaCode1 = this.resultVendorEmpAndAddr.VendorAddrObj.AreaCode1;
+      this.VendorBranchEmpObj.VendorAddrObj.AreaCode3 = this.resultVendorEmpAndAddr.VendorAddrObj.AreaCode3;
+      this.VendorBranchEmpObj.VendorAddrObj.AreaCode4 = this.resultVendorEmpAndAddr.VendorAddrObj.AreaCode4;
       this.VendorBranchEmpObj.VendorAddrObj.City = this.resultVendorEmpAndAddr.VendorAddrObj.City;
       this.VendorBranchEmpObj.VendorAddrObj.Province = this.resultVendorEmpAndAddr.VendorAddrObj.Province;
     }

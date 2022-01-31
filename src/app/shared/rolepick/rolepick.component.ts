@@ -52,8 +52,6 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    
-
   }
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder,
@@ -135,8 +133,6 @@ export class RolepickComponent implements OnInit, AfterViewInit {
               });
               this.dialog.closeAll();
             });
-
-
         }
       );
 

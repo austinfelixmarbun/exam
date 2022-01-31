@@ -429,6 +429,7 @@ mat-dialog-container#role-modal {
 .text-title {
     font-style: normal;
     font-weight: 700;
+    font-size: 17px;
     line-height: 44px;
     text-align: center;
     letter-spacing: 0.04em;
@@ -437,9 +438,8 @@ mat-dialog-container#role-modal {
 
 .input-field {
     text-align: left;
+    border: 0.5px solid rgb(202, 202, 202);
     padding: 1rem;
-    border: 1px solid #b4241721;
-    border-radius: 8px;
 }
 
 .input-field i {
