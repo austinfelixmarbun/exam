@@ -112,7 +112,7 @@ export class RolePickService {
                 });
             }
         }
-    
+    }
         closeDialog() {
             this.dialog.closeAll;
         }
