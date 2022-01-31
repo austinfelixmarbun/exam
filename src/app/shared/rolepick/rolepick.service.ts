@@ -91,7 +91,7 @@ export class RolePickService {
                         AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
                         AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
 
-                        this.http.post(AdInsConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, {RoleCode: item.RoleCode, ModuleCode: environment.Module}, { withCredentials: true }).subscribe(
+                        this.http.post(AdInsConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, {RoleCode: item.RefUserRoles[0].Roles[0].RoleCode, ModuleCode: environment.Module}, { withCredentials: true }).subscribe(
                             (response) => {
                                 AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
                                 this.router.navigate([NavigationConstant.DASHBOARD]);
