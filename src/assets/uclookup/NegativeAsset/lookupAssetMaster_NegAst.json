@@ -1,85 +1,85 @@
 {
-    "title": "Lookup - Asset Master",
-    "sectionTitle": "Search",
-    "component": [
-      {
-        "type": "textbox",
-        "name": "A.full_Asset_Code",
-        "id": "fullAssetCode",
-        "value": "",
-        "label": "Full Asset Code",
-        "placeholder": "Full Asset Code"
-      },
-      {
-        "type": "textbox",
-        "name": "A.full_Asset_Name",
-        "id": "fullAssetName",
-        "value": "",
-        "label": "Full Asset Name",
-        "placeholder": "Full Asset Name"
-      },
-      {
-        "type" : "dropdown",
-        "name" : "ASSET_TYPE_CODE",
-        "id" : "assetTypeName",
-        "label" : "Asset Type Name",
-        "value" : "",
-        "datatype" : "text",
-        "ddlType": "all",
-        "items" : [],
-        "path": "/AssetType/GetListKeyValueActiveByCode",
-        "criteriaPropName" : "assetTypeCode",
-        "criteriaPropValue" : "ASSET_TYPE_CODE",
-        "isFromURL" : true,
-        "url" : "",
-        "itemsUrl" : [],
-        "environment": "FOU"
-      }
-    ],
-    "querystring": {
-      "name": "lookupAssetMaster_NegAst"
+  "title": "Lookup - Asset Master",
+  "sectionTitle": "Search",
+  "component": [
+    {
+      "type": "textbox",
+      "name": "A.full_Asset_Code",
+      "id": "fullAssetCode",
+      "value": "",
+      "label": "Full Asset Code",
+      "placeholder": "Full Asset Code"
     },
-    "headerList": [
-        {
-          "type": "sort",
-          "position": "left",
-          "label": "Full Asset Code",
-          "name": "fullAssetCode"
-        },
-        {
-          "type": "sort",
-          "position": "left",
-          "label": "Full Asset Name",
-          "name": "fullAssetName"
-        },
-        {
-          "type": "label",
-          "position": "center",
-          "label": "Action"
-        }
-    ],
-    "bodyList": [
+    {
+      "type": "textbox",
+      "name": "A.full_Asset_Name",
+      "id": "fullAssetName",
+      "value": "",
+      "label": "Full Asset Name",
+      "placeholder": "Full Asset Name"
+    },
+    {
+      "type" : "dropdown",
+      "label" : "Asset Type Name",
+      "name" : "ASSET_TYPE_CODE",
+      "id" : "assetTypeName",
+      "value" : "",
+      "datatype" : "text",
+      "ddlType": "all",
+      "items" : [],
+      "path": "/AssetType/GetListKeyValueActiveByCode",
+      "criteriaPropName" : "assetTypeCode",
+      "criteriaPropValue" : "ASSET_TYPE_CODE",
+      "isFromURL" : true,
+      "url" : "",
+      "itemsUrl" : [],
+      "environment": "FOU"
+    }
+  ],
+  "querystring": {
+    "name": "lookupAssetMaster_NegAst"
+  },
+  "headerList": [
       {
-        "type": "text",
+        "type": "sort",
         "position": "left",
-        "property": "fullAssetCode"
+        "label": "Full Asset Code",
+        "name": "fullAssetCode"
       },
       {
-        "type": "text",
+        "type": "sort",
         "position": "left",
-        "property": "fullAssetName"
+        "label": "Full Asset Name",
+        "name": "fullAssetName"
       },
       {
-        "type": "action",
+        "type": "label",
         "position": "center",
-        "action": [
-          {
-            "type": "select",
-            "property": "assetMasterId"
-          }
-        ]
+        "label": "Action"
       }
-    ],
-    "propertyId": "assetMasterId",
-    "propertyName": "fullAssetName"
-  }
+  ],
+  "bodyList": [
+    {
+      "type": "text",
+      "position": "left",
+      "property": "fullAssetCode"
+    },
+    {
+      "type": "text",
+      "position": "left",
+      "property": "fullAssetName"
+    },
+    {
+      "type": "action",
+      "position": "center",
+      "action": [
+        {
+          "type": "select",
+          "property": "assetMasterId"
+        }
+      ]
+    }
+  ],
+  "propertyId": "assetMasterId",
+  "propertyName": "fullAssetName"
+}
