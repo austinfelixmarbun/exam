@@ -115,6 +115,11 @@
         {
             "type": "label",
             "position": "center",
+            "label": "Update to Main Customer"
+        },
+        {
+            "type": "label",
+            "position": "center",
             "label": "ACTION"
         }
     ],
@@ -271,6 +276,31 @@
                         {
                             "conditions": [
                                 {
+                                    "property": "IsCustomer",
+                                    "value": false,
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "callback",
+                                "key": "UpdateIsCustomer",
+                                "icon": "ft-check-square"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
                                     "property": "ShareholderMrCustTypeCode",
                                     "value": "PERSONAL",
                                     "restriction": "EQ"
@@ -330,6 +360,5 @@
                 }
             ]
         }
-                
     ]
 }

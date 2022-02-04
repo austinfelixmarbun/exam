@@ -97,6 +97,11 @@
         {
             "type": "label",
             "position": "center",
+            "label": "Update to Main Customer"
+        },
+        {
+            "type": "label",
+            "position": "center",
             "label": "ACTION"
         }
     ],
@@ -154,6 +159,31 @@
             "type": "text",
             "position": "left",
             "property": "IdNo"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "IsCustomer",
+                                    "value": false,
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "callback",
+                                "key": "UpdateIsCustomer",
+                                "icon": "ft-check-square"
+                            }
+                        }
+                    ]
+                }
+            ]
         },
         {
             "type": "action",
