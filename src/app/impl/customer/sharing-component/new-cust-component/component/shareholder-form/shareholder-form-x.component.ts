@@ -90,7 +90,7 @@ export class ShareholderFormXComponent implements OnInit {
   jobPositionLookupObj: InputLookupObj = new InputLookupObj();
   BindLookupJobPosition() {
     this.jobPositionLookupObj = new InputLookupObj();
-    this.jobPositionLookupObj.isRequired = false;
+    this.jobPositionLookupObj.isRequired = true;
     this.jobPositionLookupObj.urlJson = "./assets/uclookup/Customer/lookupJobPosition.json";
     this.jobPositionLookupObj.pagingJson = "./assets/uclookup/Customer/lookupJobPosition.json";
     this.jobPositionLookupObj.genericJson = "./assets/uclookup/Customer/lookupJobPosition.json";
@@ -103,7 +103,7 @@ export class ShareholderFormXComponent implements OnInit {
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
-
+    
     let listCriteriaObj: Array<CriteriaObj> = new Array();
     let criteriaCustObj = new CriteriaObj();
     criteriaCustObj.DataType = "text";
@@ -225,7 +225,7 @@ export class ShareholderFormXComponent implements OnInit {
     this.ucLookupProfession.setAddCritInput();
   }
 
-  isShareOwnerMandatory : boolean = false;
+  isShareOwnerMandatory: boolean = false;
   ChangeValidityShareOwner() {
     console.log("nyan cat")
     if (this.parentForm.controls.SharePrcnt.value == 0 && this.parentForm.controls.IsOwner.value == false) {
@@ -233,11 +233,11 @@ export class ShareholderFormXComponent implements OnInit {
       this.parentForm.get("IsOwner").clearValidators();
       this.isShareOwnerMandatory = false;
     }
-    else{
+    else {
       this.parentForm.get("SharePrcnt").setValidators([Validators.min(0.000001), Validators.max(100)]);
       this.parentForm.get("IsOwner").setValidators([Validators.requiredTrue]);
       this.isShareOwnerMandatory = true;
-      
+
     }
     this.parentForm.get("SharePrcnt").updateValueAndValidity();
     this.parentForm.get("IsOwner").updateValueAndValidity();

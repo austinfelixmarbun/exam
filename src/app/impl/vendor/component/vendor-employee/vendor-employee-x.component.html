@@ -56,7 +56,8 @@
             <div class="form-group row">
               <label class="col-md-3 adins-required-label" translate>ID Type </label>
               <div class="col-md-9">
-                <select (change)="onOptionsSelected($event)" class="form-control" style="width: auto" formControlName="MrIdTypeCode"
+                <select (change)="onOptionsSelected($event)" class="form-control" style="width: auto"
+                  formControlName="MrIdTypeCode"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorEmpForm.controls.MrIdTypeCode.invalid }">
                   <option *ngFor="let vp of IdTypeList" [value]="vp.Key">
                     {{vp.Value}}
@@ -69,7 +70,8 @@
               <div class="col-md-9">
                 <input type="text" class="form-control" formControlName="IdNo"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorEmpForm.controls.IdNo.invalid }">
-                <lib-uc-show-errors [customPattern]="customPattern" [control]="VendorEmpForm.controls.IdNo" [submit]="enjiForm.submitted">
+                <lib-uc-show-errors [customPattern]="customPattern" [control]="VendorEmpForm.controls.IdNo"
+                  [submit]="enjiForm.submitted">
                 </lib-uc-show-errors>
               </div>
             </div>
@@ -163,15 +165,15 @@
                   <option *ngFor="let it of itemCalcMethodType" value="{{it.Key}}">
                     {{it.Value}}</option>
                 </select>
-                <lib-uc-show-errors [control]="VendorEmpForm.controls.MrTaxCalcMethodCode" [submit]="enjiForm.submitted">
+                <lib-uc-show-errors [control]="VendorEmpForm.controls.MrTaxCalcMethodCode"
+                  [submit]="enjiForm.submitted">
                 </lib-uc-show-errors>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-md-3">NPWP Exist</label>
               <div class="col-md-9">
-                <input type="checkbox" formControlName="IsNpwpExist"
-                  (change)="NpwpCheck()">
+                <input type="checkbox" formControlName="IsNpwpExist" (change)="NpwpCheck()">
               </div>
             </div>
             <div [hidden]="isHidden">
@@ -201,6 +203,23 @@
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorEmpForm.controls.Addr.invalid }"></textarea>
                     <lib-uc-show-errors [control]="VendorEmpForm.controls.Addr" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3  adInsLabel" translate>RT / RW</label>
+                  <div class="col-md-9">
+                    <div class="row">
+                      <div class="col-md-6" style="border-right: 1px solid grey">
+                        <input type="text" class="form-control" formControlName="AreaCode4">
+                        <lib-uc-show-errors [control]="VendorEmpForm.controls.AreaCode4" [submit]="enjiForm.submitted">
+                        </lib-uc-show-errors>
+                      </div>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" formControlName="AreaCode3">
+                        <lib-uc-show-errors [control]="VendorEmpForm.controls.AreaCode3" [submit]="enjiForm.submitted">
+                        </lib-uc-show-errors>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group row" *ngIf="inputLookupZipcodeObj.isReady">
