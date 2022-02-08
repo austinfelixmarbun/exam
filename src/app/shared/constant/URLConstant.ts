@@ -404,10 +404,10 @@ export class URLConstant {
 
     //REF EMP LEAVE MANAGEMENT
     public static GetRefEmpLeaveMngmntPaging = environment.FoundationR3Url + "/v1" + "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
-    public static DeleteRefEmpLeaveMngmnt = environment.FoundationR3Url + "/v1" + "/RefEmpLeaveMngmnt/DeleteRefEmpLeaveMngmnt";
+    public static DeleteRefEmpLeaveMngmnt = environment.FoundationR3Url + "/v2" + "/RefEmpLeaveMngmnt/DeleteRefEmpLeaveMngmnt";
     public static GetRefEmpLeaveMngmntById = environment.FoundationR3Url + "/v1" + "/RefEmpLeaveMngmnt/GetRefEmpLeaveByRefEmpLeaveId";
-    public static EditRefEmpLeaveMngmnt = environment.FoundationR3Url + "/v1" + "/RefEmpLeaveMngmnt/EditRefEmpLeaveMngmnt";
-    public static AddRefEmpLeaveMngmnt = environment.FoundationR3Url + "/v1" + "/RefEmpLeaveMngmnt/AddRefEmpLeaveMngmnt";
+    public static EditRefEmpLeaveMngmnt = environment.FoundationR3Url + "/v2" + "/RefEmpLeaveMngmnt/EditRefEmpLeaveMngmnt";
+    public static AddRefEmpLeaveMngmnt = environment.FoundationR3Url + "/v2" + "/RefEmpLeaveMngmnt/AddRefEmpLeaveMngmnt";
 
     //UPLOAD
     public static UploadReview = environment.FoundationR3Url + "/v1" + "/Upload/UploadReview";
