@@ -16,6 +16,7 @@ export class NavigationConstant {
     public static PAGES_CONTENT = "/" + PathConstant.LR_PAGES + "/" + PathConstant.CONTENT; //'/Pages/Content'
     public static ERROR = "/" + PathConstant.LR_ERROR; //'/Error'
     public static NOTIF = "/" + PathConstant.LR_NOTIF; //'/Notification'
+    public static PAGES_MODULE_SELECTION = "/" + PathConstant.LR_PAGES + "/" + PathConstant.SELECT_MODULE; //'/Pages/SelectModule'
     
     //#region Asset
     public static ASSET_CONFIG_PAGING = '..' + "/" + '..' + "/" + PathConstant.ASSET_CONFIG_PAGING; //'../../Configuration/Paging'
