@@ -9,6 +9,8 @@ import { PagesComponent } from './pages/pages.component';
 import { RequestNewPasswordComponent } from './request-new-password/request-new-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { UcmoduleselectionModule } from '@adins/ucmoduleselection';
+import { ModuleSelectionComponent } from './module-selection/module-selection.component';
 
 
 @NgModule({
@@ -18,14 +20,16 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
         FormsModule,
         AdInsSharedModule,
         ReactiveFormsModule,
-        UcShowErrorsModule
+        UcShowErrorsModule,
+        UcmoduleselectionModule
     ],
     declarations: [
         LoginPageComponent,
         ChangePasswordComponent,
         PagesComponent,
         RequestNewPasswordComponent,
-        ResetPasswordComponent
+        ResetPasswordComponent,
+        ModuleSelectionComponent
     ]
 })
 export class ContentPagesModule { }

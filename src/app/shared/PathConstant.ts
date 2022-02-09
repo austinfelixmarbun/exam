@@ -42,6 +42,7 @@ export class PathConstant {
     public static CONTENT = "Content";
     public static REQ_PASSWORD = "RequestPassword";
     public static RESET_PASSWORD = "ResetPassword/:code";
+    public static SELECT_MODULE = "SelectModule";
     //#endregion
 
     //#region Common-Path
