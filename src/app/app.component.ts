@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-// import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import { AdInsConstant } from './shared/AdInstConstant';
-import { environment } from 'environments/environment';
+import { AdInsHelper } from './shared/AdInsHelper';
+import { HttpClient } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie';
+import { Router } from '@angular/router';
+import { CommonConstant } from './shared/constant/CommonConstant';
+import { URLConstant } from './shared/constant/URLConstant';
+import { NavigationConstant } from './shared/NavigationConstant';
 // import * as signalR from '@aspnet/signalr';
 
 @Component({
@@ -14,32 +18,52 @@ export class AppComponent implements OnInit {
 
     private _hubConnection: HubConnection;
     //TEST PUSH MASTER 5
-    constructor() { }
+    constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) { }
  
     ngOnInit(): void {
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
+
+        if (AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS) != null) {
+            this.checkisEODforlogout();
+            this.validateIp();
+        }
         const appVersion = require('../../package.json').version;
         localStorage.setItem("Version", appVersion);
-        //this._hubConnection = new HubConnectionBuilder().withUrl(environment.FoundationR3Url+"/NotificationHub").build();
-        // this._hubConnection
-        //     .start()
-        //     .then(() => console.log('Connection started!'))
-        //     .catch(err => console.log('Error while establishing connection :('));
+    }
 
-        // this._hubConnection.on('BroadcastMessage', (type: string, payload: string, user: string) => {
-        //     var currentUser = JSON.parse(AdInsHelper.GetCookie(this.cookieService, 'UserAccess'));
-        //     var userId = currentUser['refUserId'].toString();
-        //     if (userId == user) {
-        //         this.msgs.push({ severity: type, summary: payload });
-        //     }
-        // });
-        // this._hubConnection.on('SendPrivateMessage', (user: string, message: string, payload: string) => {
-        //     console.log(user)
-        //     console.log(message)
-        // });
-        // this._hubConnection.on('SendMessageToClient', (title, user, message) => {
-        //     const received = `title: ${title}, name: ${user}, message: ${message}`;
-        //     console.log(received);
-        // });
+    checkisEODforlogout(){
+        this.http.post(URLConstant.GetSysCtrlCoyBySysKey, {Code: CommonConstant.IsEodRun}).subscribe(
+            (response) => {
+              if(response["SysValue"] == '1')
+              {
+                localStorage.setItem("IsEod",response["SysValue"] );
+                this.logout();
+              }
+            }
+          );
+    }
+
+    validateIp(){
+        let context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+        this.http.post(URLConstant.GetRefUserByUsername, {Username: context[CommonConstant.USER_NAME]}).subscribe(
+            (response) => {
+              if(response["LastIpAddress"] != localStorage.getItem("LocalIp"))
+              {        
+                let version = localStorage.getItem(CommonConstant.VERSION);
+                localStorage.clear();
+                localStorage.setItem("Version", version);
+                this.cookieService.removeAll();
+                window.location.reload();
+              }
+            }
+          );
+    }
+
+    logout() {
+        var url = URLConstant.LogoutAuth;
+        this.http.post(url, {}).subscribe();
+        AdInsHelper.ClearAllLog(this.cookieService);
+        this.cookieService.removeAll();
+        this.router.navigate([NavigationConstant.PAGES_LOGIN]);
     }
 }

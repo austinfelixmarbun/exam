@@ -9,8 +9,8 @@ import { PagesComponent } from './pages/pages.component';
 import { RequestNewPasswordComponent } from './request-new-password/request-new-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
-import { ModuleSelectionComponent } from './module-selection/module-selection.component';
 import { UcmoduleselectionModule } from '@adins/ucmoduleselection';
+import { ModuleSelectionComponent } from './module-selection/module-selection.component';
 
 
 @NgModule({

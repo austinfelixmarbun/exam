@@ -82,6 +82,11 @@ export class NGXToastrService {
         this.toastr.info(msg,title);
     }
 
+    infoMessageTitleTimeout(title,msg,timeouts)
+    {
+        this.toastr.info(msg,title,{ timeOut: timeouts });
+    }
+
     errorMessageTitle(title,msg) {
         this.toastr.error(msg,title);
     }

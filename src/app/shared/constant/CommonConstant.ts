@@ -33,6 +33,9 @@ export class CommonConstant {
     public static ENVIRONMENT_MODULE = 'EnvironmentModule';
     public static OFFICE_CODE = 'OfficeCode';
     public static ROLE_CODE = 'RoleCode';
+    
+    //SYS CTRL COY KEY
+    public static IsEodRun = "IsEodRun";
 
     //CUST MAIN DATA MODE
     public static CustMainDataModeCust = "CUST";
