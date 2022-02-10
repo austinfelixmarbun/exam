@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginPageComponent } from "app/pages/content-pages/login/login-page.component";
 import { PathConstant } from 'app/shared/PathConstant';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { ModuleSelectionComponent } from './module-selection/module-selection.component';
 import { PagesComponent } from './pages/pages.component';
 import { RequestNewPasswordComponent } from './request-new-password/request-new-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
