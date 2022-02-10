@@ -52,6 +52,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         this.GetListNotifH();
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
         
+        this.setUser();
         console.log(this.userAccess.UserName);
         var _hubConnection = new HubConnectionBuilder()
             .withUrl(URLConstant.WebSocketUrl)
@@ -87,7 +88,6 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
             }
             //this.notifications.push({ title: response, desc: "User " + response });
         });
-        this.setUser();
     }
     
     setUser(){
