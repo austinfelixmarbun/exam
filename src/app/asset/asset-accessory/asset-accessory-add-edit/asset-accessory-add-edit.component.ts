@@ -15,7 +15,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class AssetAccessoryAddEditComponent implements OnInit {
   AssetAccessoryForm = this.fb.group({
-    AssetAccessoryName: ['', [Validators.required, Validators.maxLength(100)]],
+    AssetAccessoryName: ['', [Validators.required, Validators.maxLength(1000)]],
     AssetAccessoryCode: ['', [Validators.required, Validators.maxLength(50)]],
     IsActive: [true]
   });

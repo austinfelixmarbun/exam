@@ -56,7 +56,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
   AuctionCompanyForm = this.fb.group({
     Category : ['', [Validators.required]],
     VendorCode  : ['', [Validators.required]],
-    VendorName  :  ['', [Validators.required]],
+    VendorName  :  ['', [Validators.required, Validators.maxLength(500)]],
     MrIdTypeCode: [''],
     RegistrationNo: ['', Validators.required],
     Addr  :  ['', [Validators.required]],
@@ -87,7 +87,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
     IsVat: [true, Validators.required],
     IsNpwpExist : [false],
     TaxIdNo: [''],
-    TaxpayerName: [''],
+    TaxpayerName: ['', [Validators.maxLength(500)]],
     AddrContactPerson  :  ['', [Validators.required]],
     CityContactPerson : ['', [Validators.required]],
     ProvinceContactPerson : ['',[Validators.required]],
@@ -414,7 +414,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
       this.inputLookupZipcodeTaxObj.isReady = false;
 
       this.AuctionCompanyForm.controls.TaxIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
-      this.AuctionCompanyForm.controls.TaxpayerName.setValidators(Validators.required);
+      this.AuctionCompanyForm.controls.TaxpayerName.setValidators([Validators.required, Validators.maxLength(500)]);
       this.AuctionCompanyForm.controls.TaxAddr.setValidators(Validators.required);
       this.AuctionCompanyForm.controls.TaxRT.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(1), Validators.maxLength(3)]);
       this.AuctionCompanyForm.controls.TaxRW.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(1), Validators.maxLength(3)]);

@@ -60,7 +60,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
     AssetCategoryId: [''],
     AssetTypeId: [0, [Validators.required]],
     AssetCode: ['', [Validators.required, Validators.maxLength(50)]],
-    AssetName: ['', [Validators.required, Validators.maxLength(100)]],
+    AssetName: ['', [Validators.required, Validators.maxLength(1000)]],
     HierarchyLvl: [''],
     FullAssetCode: [''],
     FullAssetName: [''],
