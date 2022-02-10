@@ -6,6 +6,8 @@ import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie";
 import * as CryptoJS from 'crypto-js';
 import { NavigationConstant } from "./NavigationConstant";
+import { HttpClient } from "@angular/common/http";
+import { URLConstant } from "./constant/URLConstant";
 
 export class AdInsHelper {
 
@@ -44,11 +46,24 @@ export class AdInsHelper {
         localStorage.setItem('PageAccess', JSON.stringify(pageAccess));
     }
 
-    public static ForceLogOut(cookieService: CookieService, timeLeft, toastr) {
+    public static ForceLogOut(cookieService: CookieService, timeLeft, toastr, http: HttpClient) {
         let interval = setInterval(() => {
             if (timeLeft > 0) {
                 console.log("Time Left : " + timeLeft)
-                toastr.errorMessage("Automatic Log out at : " + timeLeft);
+                toastr.warningMessage("Automatic Log out at : " + timeLeft);
+                timeLeft--;
+            } else {
+                this.ClearAllLogAndRemoveToken(cookieService, http);
+                window.location.reload();
+            }
+        }, 1000)
+    }
+
+    public static ForceLogOutClearCookie(cookieService: CookieService, timeLeft, toastr, http: HttpClient) {
+        let interval = setInterval(() => {
+            if (timeLeft > 0) {
+                console.log("Time Left : " + timeLeft)
+                toastr.warningMessage("Automatic Log out at : " + timeLeft);
                 timeLeft--;
             } else {
                 this.ClearAllLog(cookieService);
@@ -58,6 +73,15 @@ export class AdInsHelper {
     }
 
     public static ClearAllLog(cookieService: CookieService) {
+        let version = localStorage.getItem(CommonConstant.VERSION);
+        localStorage.clear();
+        localStorage.setItem("Version", version);
+        cookieService.removeAll();
+    }
+
+    public static ClearAllLogAndRemoveToken(cookieService: CookieService, http: HttpClient) {
+        var url = URLConstant.LogoutAuth;
+        http.post(url, {}).subscribe();
         let version = localStorage.getItem(CommonConstant.VERSION);
         localStorage.clear();
         localStorage.setItem("Version", version);

@@ -11,6 +11,9 @@ export class URLConstant {
     // SYS CONFIG RESULT
     public static GetSysConfigResultByCode = environment.FoundationR3Url + "/v1" + "/SysConfigResult/GetSysConfigResultByCode";
 
+    //SYS CTRL COY
+    public static GetSysCtrlCoyBySysKey = environment.FoundationR3Url + "/v1" + "/SysCtrlCoy/GetSysCtrlCoyByKey"
+
     // DOWNLOAD
     public static DownloadTemplate = environment.FoundationR3Url + "/v2" + "/Download/DownloadTemplate";
 
@@ -294,6 +297,7 @@ export class URLConstant {
     public static LoginByRole = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByRole";
     public static LoginByToken = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByToken";
     public static UpdateToken = environment.FoundationR3Url + "/v1" + "/Authenticate/UpdateRole";
+    public static LogoutAuth = environment.FoundationR3Url + "/v1" + "/Authenticate/Logout";
 
     //FORM FEATURE
     public static GetListRefFeature = environment.FoundationR3Url + "/v1" + "/RefFeature/GetListRefFeature";
