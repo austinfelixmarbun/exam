@@ -727,13 +727,12 @@ export class URLConstant {
     public static SaveCustCompanyShareholderMainDataV2 = environment.FoundationR3Url  + '/v2' + "/Cust/SaveCustCompanyShareholderMainData";
     public static SaveCustPersonalFamilyMainData = environment.FoundationR3Url  + '/v1' + "/Cust/SaveCustPersonalFamilyMainData";
     public static SaveCustPersonalFamilyMainDataV2 = environment.FoundationR3Url  + '/v2' + "/Cust/SaveCustPersonalFamilyMainData";
-
     public static NewEditDuplicateCust = environment.FoundationR3Url  + '/v1' + "/Cust/NewEditDuplicateCust";
-    public static NewEditDuplicateCustV2 = environment.FoundationR3Url  + '/v2' + "/Cust/NewEditDuplicateCust";
-
-    
+    public static NewEditDuplicateCustV2 = environment.FoundationR3Url  + '/v2' + "/Cust/NewEditDuplicateCust";    
     public static GetCustHighlightCommentByCustId = environment.FoundationR3Url + "/v1" + "/Cust/GetCustHighlightCommentByCustId";
     public static SendCustomerDataToRabbitMq = environment.FoundationR3Url + "/v1" + "/Cust/SendCustomerDataToRabbitMq";
+    public static UpdateToMainCustomer = environment.FoundationR3Url + "/v1" + "/Cust/UpdateToMainCustomer";
+    
     // CUSTOMER COMPANY
     public static GetListViewCustCompanyLegalDocByCustCompanyId = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/GetListViewCustCompanyLegalDocByCustCompanyId";
     public static DeleteCustCompanyLegalDoc = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/DeleteCustCompanyLegalDoc";
