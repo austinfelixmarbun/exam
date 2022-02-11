@@ -3,7 +3,6 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RegexService } from 'app/customer/regex.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -40,6 +39,7 @@ import { CustDocFileFormObj } from 'app/shared/model/cust-doc-file/cust-doc-file
 import { ThirdPartyUploadService } from '../component/third-party-form/services/ThirdPartyUpload.Service';
 import { ActivatedRoute } from '@angular/router';
 import { ThirdPartyFormComponent } from '../component/third-party-form/third-party-form.component';
+import { String } from 'typescript-string-operations';
 
 @Component({
   selector: 'app-new-cust-personal-main-data',
@@ -132,12 +132,18 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   //#region Set Data
   businessDtMin: Date;
   businessDtMax: Date;
+  MaxDate: Date;
+  MaxDtValidate: string;
   async InitData() {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setFullYear(this.businessDtMin.getFullYear() - 17);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
+    this.MaxDate = new Date(context.BusinessDt);
+    this.MaxDate.setDate(this.MaxDate.getDate() - 1);
+    var datePipe = new DatePipe("en-US");
+    this.MaxDtValidate = datePipe.transform(this.MaxDate, "yyyy-MM-dd");
 
     this.inputAddressObj = await this.newCustService.BindSetLegalAddr();
     this.isReady = true;
@@ -664,6 +670,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           this.toastr.warningMessage("Total Share now is " + this.tempTotalSharePrct + "%");
           return;
         }
+      }
+
+      if(reqSubmitObj.CustCompanyMgmntShrholderObj.EstablishmentDt.toString() > this.MaxDtValidate){
+        this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+        return false;
       }
     }
 

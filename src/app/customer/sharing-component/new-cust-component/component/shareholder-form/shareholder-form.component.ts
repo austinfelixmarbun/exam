@@ -11,10 +11,9 @@ import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { CustPersonalJobDataObj } from 'app/shared/model/cust-personal-job-data-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
-import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
 import { CustFormExistingObj as CustFormExistingObj } from 'app/shared/model/new-cust/shareholder/shareholder-form-existing-obj.model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
 import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { RefProfessionObj } from 'app/shared/model/ref-profession-obj.model';
@@ -49,6 +48,8 @@ export class ShareholderFormComponent implements OnInit {
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
   constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
 
+  UserAccess: CurrentUserContext;
+  MaxDate: Date;
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
@@ -63,7 +64,6 @@ export class ShareholderFormComponent implements OnInit {
   }
 
   positionSlikLookUpObj: InputLookupObj = new InputLookupObj();
-  businessDtMin: Date;
   InitData() {
     this.parentForm.addControl("MrPositionSlikCode", this.fb.control(''));
     this.parentForm.get("MrPositionSlikCode").setValidators([Validators.required]);
@@ -83,9 +83,10 @@ export class ShareholderFormComponent implements OnInit {
     this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();
     this.BindLookupProfession();
     this.BindLookupJobPosition();
-    let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
-    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
+
+    this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.MaxDate = new Date(this.UserAccess.BusinessDt);
+    this.MaxDate.setDate(this.MaxDate.getDate() - 1);
   }
 
   jobPositionLookupObj: InputLookupObj = new InputLookupObj();
