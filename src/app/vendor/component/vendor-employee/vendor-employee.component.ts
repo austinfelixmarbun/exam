@@ -47,7 +47,7 @@ export class VendorEmployeeComponent implements OnInit {
 
   VendorEmpForm = this.fb.group({
     VendorEmpCode: ['', [Validators.required]],
-    VendorEmpName: ['', [Validators.required]],
+    VendorEmpName: ['', [Validators.required, Validators.maxLength(500)]],
     MrVendorEmpPositionCode: ['', [Validators.required]],
     MrIdTypeCode: ['', [Validators.required]],
     IdNo: ['', [Validators.required]],
@@ -69,7 +69,7 @@ export class VendorEmployeeComponent implements OnInit {
     IsContactPerson: [false],
     IsOwner: [false],
     TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
-    TaxpayerName: [''],
+    TaxpayerName: ['', [Validators.maxLength(500)]],
     MrTaxCalcMethodCode: [''],
     IsNpwpExist: [false]
   });

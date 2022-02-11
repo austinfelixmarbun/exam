@@ -204,7 +204,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   ClearCustForm() {
     this.CustomerForm = this.fb.group({
-      CustName: ['', [Validators.required, Validators.maxLength(100)]],
+      CustName: ['', [Validators.required, Validators.maxLength(500)]],
       MrGenderCode: ['', [Validators.required]],
       MrIdTypeCode: ['', [Validators.required, Validators.maxLength(100)]],
       BirthPlace: ['', [Validators.required]],
@@ -213,7 +213,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
       IdExpiredDt: [''],
       MrMaritalStatCode: ['', Validators.required],
-      MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
+      MotherMaidenName: ['', [Validators.required, Validators.maxLength(500)]],
       IsSupplier: [false],
       SupplCode: [''],
       SupplName: [''],

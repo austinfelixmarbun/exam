@@ -92,7 +92,7 @@ export class VendorBranchAddEditComponent implements OnInit {
   VendorForm = this.fb.group({
     MrVendorCategoryCode: [{ value: '', disabled: true }],
     VendorCode: ['', Validators.required],
-    VendorName: ['', Validators.required],
+    VendorName: ['', [Validators.required,Validators.maxLength(500)]],
     MrVendorTypeCode: ['', Validators.required],
     RegistrationNo: ['', Validators.required],
     LicenseNo: ['', Validators.required],
@@ -115,7 +115,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     MrTaxCalcMethodCode: ['', Validators.required],
     IsVat: [false, Validators.required],
     TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
-    TaxpayerName: ['', Validators.required],
+    TaxpayerName: ['', [Validators.required,Validators.maxLength(500)]],
     MrAddrTypeCode: [''],
     Addr: [''],
     AreaCode2: [{ value: '', disabled: true }], //kelurahan
@@ -572,7 +572,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     if (this.VendorForm.controls.IsNpwpExist.value == true) {
       this.isHidden = false;
       this.VendorForm.controls.TaxIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
-      this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
+      this.VendorForm.controls.TaxpayerName.setValidators([Validators.required, Validators.maxLength(500)]);
     } else {
       this.VendorForm.controls.TaxIdNo.setValidators([Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
       this.VendorForm.controls.TaxpayerName.clearValidators();

@@ -64,7 +64,7 @@ export class OfficeBankAccountDetailComponent implements OnInit {
     BankBranch: ['', [Validators.required, Validators.maxLength(100)]],
     BankBranchBiCode: ['', [Validators.maxLength(100)]],
     AccNo: ['', [Validators.required, Validators.maxLength(200)]],
-    OfficeName: ['', [Validators.required]],
+    OfficeName: ['', [Validators.required, Validators.maxLength(100)]],
     BankName: ['', [Validators.required]],
     BankAccType: ['', [Validators.required]],
     CurrCode: ['', [Validators.required]],

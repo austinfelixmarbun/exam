@@ -45,12 +45,12 @@ export class SystemUserAddComponent implements OnInit {
 
   RefEmpForm = this.fb.group({
     RefUserId: [0, [Validators.required]],
-    Username: ['', [Validators.required]],
+    Username: ['', [Validators.required, Validators.maxLength(500)]],
     IsLockedOut: [false],
     LoggedInMethod: ['DB'],
     RefEmpId: [0, [Validators.required]],
     EmpNo: ['', [Validators.required]],
-    EmpName: ['', [Validators.required]],
+    EmpName: ['', [Validators.required, Validators.maxLength(500)]],
     JoinDt: ['', [Validators.required]],
     MrIdTypeCode: ['', [Validators.required]],
     IdNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
