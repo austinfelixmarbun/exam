@@ -62,7 +62,10 @@ export class ExceptionConstant {
     public static DOCUMENT_REQUIRED = "Document Type {0} is required";
     public static INVALID_FILE_FORMAT_FOR_DOC = "File format for Document Type {0} must be {1}";
 
-    public static  EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE = "Establishment Date Must Be Less Than Business Date";
+    public static EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE = "Establishment Date Must Be Less Than Business Date";
+    public static OTHER_BIZ_EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE = "Other Business Establishment Date Must Be Less Than Business Date";
+    public static EMP_EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE = "Employee Start Working Date Date Must Be Less Than Business Date";
+    public static START_WORKING_DATE_MUST_BE_LESS_THAN_BIZ_DATE = "Start Working Date Date Must Be Less Than Business Date";
     public static MOBILE_PHN_NO_INVALID = "Mobile Phone No Must be Started With 62XXXXXXXXX"; 
     public static ROUNDED_AMT_INVALID = "Rounded Amount must be between 0-2"; 
     public static EXP_PASSWORD = "Password has expired. Please change your password.";

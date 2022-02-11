@@ -129,7 +129,7 @@
           <div class="form-group row adins-required">
             <label class="col-md-2 adInsLabel adins-required-label" translate>Start Working Date </label>
             <div class="col-md-4">
-              <input type="date" id="empEstablishmentDt" class="form-control adInsInput" formControlName="EmpEstablishmentDate" [max]="businessDtMin | date: 'yyyy-MM-dd'" required
+              <input type="date" id="empEstablishmentDt" class="form-control adInsInput" formControlName="EmpEstablishmentDate" max = "{{ MaxDate | date: 'yyyy-MM-dd'}}" required
                 [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.EmpEstablishmentDate.invalid }">
               <lib-uc-show-errors [control]="JobDataEmpForm.controls.EmpEstablishmentDate" [submit]="enjiForm.submitted"></lib-uc-show-errors>
             </div>
@@ -176,7 +176,7 @@
           <div class="form-group row">
             <label class="col-md-2 adInsLabel" translate>Previous Employment Date </label>
             <div class="col-md-4">
-              <input type="date" id="previEmploymentDate" class="form-control adInsInput" formControlName="PreviEmploymentDate" [max]="businessDtMin | date: 'yyyy-MM-dd'"
+              <input type="date" id="previEmploymentDate" class="form-control adInsInput" formControlName="PreviEmploymentDate"  max = "{{ MaxDate | date: 'yyyy-MM-dd' }}"
                 [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.PreviEmploymentDate.invalid }">
               <lib-uc-show-errors [control]="JobDataEmpForm.controls.PreviEmploymentDate" [submit]="enjiForm.submitted"></lib-uc-show-errors>
             </div>
@@ -265,8 +265,8 @@
             <div class="form-group row">
                 <label class="col-md-2 adInsLabel adins-required" translate>Establishment Date </label>
                 <div class="col-md-4">
-                  <input type="date" id="establishmentDt" class="form-control adInsInput" formControlName="EstablishmentDate" [max]="businessDtMin | date: 'yyyy-MM-dd'"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.EstablishmentDate.invalid }">
+                  <input type="date" id="establishmentDt" class="form-control adInsInput" formControlName="EstablishmentDate" max = "{{ MaxDate | date: 'yyyy-MM-dd' }}"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataEmpForm.controls.EstablishmentDate.invalid }" (focusout)="onFocusOutEstDate($event)">
                   <lib-uc-show-errors [control]="JobDataEmpForm.controls.EstablishmentDate" [submit]="enjiForm.submitted"></lib-uc-show-errors>
                 </div>
             </div>
