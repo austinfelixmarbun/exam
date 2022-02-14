@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
 
         if (AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS) != null) {
             this.checkisEODforlogout();
-            this.validateIp();
+            // this.validateIp(); // force logout saat ada yg login di IP berbeda
         }
         const appVersion = require('../../package.json').version;
         localStorage.setItem("Version", appVersion);
