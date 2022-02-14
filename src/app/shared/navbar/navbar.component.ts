@@ -50,6 +50,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     ngOnInit() {
         this.GetListNotifH();
+        this.setUser();
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
         
         console.log(this.userAccess.UserName);
@@ -87,7 +88,6 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
             }
             //this.notifications.push({ title: response, desc: "User " + response });
         });
-        this.setUser();
     }
     
     setUser(){
