@@ -814,6 +814,7 @@ export class URLConstant {
     public static AddCustCompanyMgmntShrholderPublic = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderPublic";
     public static EditCustCompanyMgmntShrholderPublic = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholderPublic";
     public static GetListManagementShareholderForListPagingByCustId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/GetListManagementShareholderForListPagingByCustId";
+    public static GetCustCompanyMgmntShrholderByCustIdAndShrholderId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustIdAndShrholderId";
 
     // CUST ATTR CONTENT
     public static GetCustAttrContentForCustViewByCustId = environment.FoundationR3Url + '/v1' + "/CustAttrContent/GetCustAttrContentForCustViewByCustId";
