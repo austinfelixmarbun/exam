@@ -22,7 +22,7 @@ import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { CustAttrContentObj } from 'app/shared/model/new-cust/cust-attr-content-obj.model';
-import { CustCompanyMgmntShrholderObj } from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
+import { CustCompanyMgmntShrholderObj, ResCustCompanyMgmntShrholderObj } from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
 import { CustPersonalFamilyObj } from 'app/shared/model/new-cust/cust-personal-family-obj.model';
 import { ReqPersonalObj } from 'app/shared/model/new-cust/req-personal-obj.model';
 import { CustFormExistingObj } from 'app/shared/model/new-cust/shareholder/shareholder-form-existing-obj.model';
@@ -519,12 +519,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.inputAddressObj.inputField = inputFieldObj;
   }
 
-  async getLookUpCustomer(ev: { CustId: number, CustCompanyMgmntShrholderId: number }) {
+  async getLookUpCustomer(ev: { CustId: number}) {
     await this.GetCustData(ev.CustId);
     this.GetCustAddr(ev.CustId);
     await this.GetCustPersonalData(ev.CustId);
     if (this.CustDataMode == this.CustDataModeShareholder) {
-      if (ev.CustCompanyMgmntShrholderId) this.shareholderForm.GetExistingShareholder(ev.CustCompanyMgmntShrholderId);
       this.shareholderForm.GetExistingJobData(ev.CustId);
     }
     if (this.CustDataMode == this.CustDataModeFamily) {
@@ -661,7 +660,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       reqSubmitObj.CustAttrContentObjs = this.SetCustAttrContent();
     }
     if (this.CustDataMode == this.CustDataModeShareholder) {
-      reqSubmitObj.CustCompanyMgmntShrholderObj = this.SetCustMgmntShareholder();
+      reqSubmitObj.CustCompanyMgmntShrholderObj = await this.SetCustMgmntShareholder();
 
       if (reqSubmitObj.CustCompanyMgmntShrholderObj.IsActive) {
         let tempTotalSharePrctTobeAdd = this.tempTotalSharePrct + reqSubmitObj.CustCompanyMgmntShrholderObj.SharePrcnt;
@@ -672,10 +671,13 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         }
       }
 
-      if(reqSubmitObj.CustCompanyMgmntShrholderObj.EstablishmentDt.toString() > this.MaxDtValidate){
-        this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
-        return false;
+      if(reqSubmitObj.CustCompanyMgmntShrholderObj.EstablishmentDt != null){
+        if(reqSubmitObj.CustCompanyMgmntShrholderObj.EstablishmentDt.toString() > this.MaxDtValidate){
+          this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+          return false;
+        }
       }
+      
     }
 
     reqSubmitObj = this.SetCustomerDataMode(reqSubmitObj);
@@ -705,9 +707,15 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     if (this.pageFrom == CommonConstant.CustFromCustShareholder) reqSubmitObj.CustObj.IsShareholder = true;
   }
 
-  SetCustMgmntShareholder(): CustCompanyMgmntShrholderObj {
+  async SetCustMgmntShareholder(): Promise<CustCompanyMgmntShrholderObj>  {
+    let CustCompanyMgmntShrholder : ResCustCompanyMgmntShrholderObj = new ResCustCompanyMgmntShrholderObj();
+    await this.http.post<ResCustCompanyMgmntShrholderObj>(URLConstant.GetCustCompanyMgmntShrholderByCustIdAndShrholderId, { CustId: this.ParentCustId, ShrholderId: this.CustId }).toPromise().then(
+      async (response) => {
+        CustCompanyMgmntShrholder = response;
+      }
+    )
     let tempForm = this.CustomerForm.getRawValue();
-    let tempReqObj: CustCompanyMgmntShrholderObj = this.ExistingFormObj.CustCompanyMgmntShrholder;
+    let tempReqObj: CustCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
     tempReqObj.CustId = this.ParentCustId;
     tempReqObj.ShareholderId = this.CustId;
 
@@ -718,6 +726,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     tempReqObj.IsSigner = tempForm["IsSigner"];
     tempReqObj.EstablishmentDt = tempForm["EstablishmentDt"];
     tempReqObj.MrJobPositionCode = tempForm["MrJobPositionCode"];
+    tempReqObj.RowVersion = CustCompanyMgmntShrholder.RowVersion;
 
     return tempReqObj
   }
