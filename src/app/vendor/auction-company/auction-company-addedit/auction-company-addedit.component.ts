@@ -56,7 +56,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
   AuctionCompanyForm = this.fb.group({
     Category : ['', [Validators.required]],
     VendorCode  : ['', [Validators.required]],
-    VendorName  :  ['', [Validators.required, Validators.maxLength(500)]],
+    VendorName  :  ['', [Validators.required]],
     MrIdTypeCode: [''],
     RegistrationNo: ['', Validators.required],
     Addr  :  ['', [Validators.required]],
@@ -87,7 +87,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
     IsVat: [true, Validators.required],
     IsNpwpExist : [false],
     TaxIdNo: [''],
-    TaxpayerName: ['', [Validators.maxLength(500)]],
+    TaxpayerName: [''],
     AddrContactPerson  :  ['', [Validators.required]],
     CityContactPerson : ['', [Validators.required]],
     ProvinceContactPerson : ['',[Validators.required]],

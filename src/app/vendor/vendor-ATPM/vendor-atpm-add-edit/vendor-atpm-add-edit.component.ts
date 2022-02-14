@@ -60,7 +60,7 @@ export class VendorATPMAddEditComponent implements OnInit {
   VendorForm = this.fb.group({
     MrVendorCategoryCode: [{ value: '', disabled: true }],
     VendorCode: ['', Validators.required],
-    VendorName: ['', Validators.required, Validators.maxLength(500)],
+    VendorName: ['', Validators.required],
     MrVendorTypeCode: ['', Validators.required],
     RegistrationNo: ['', Validators.required],
     LicenseNo: ['', Validators.required],
@@ -79,7 +79,7 @@ export class VendorATPMAddEditComponent implements OnInit {
     MrTaxCalcMethodCode: ['', Validators.required],
     IsVat: [false, Validators.required],
     TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
-    TaxpayerName: ['', [Validators.maxLength(500)]],
+    TaxpayerName: [''],
     MrAddrTypeCode: [''],
     Addr: [''],
     AreaCode2: [{ value: '', disabled: true }], //kelurahan
@@ -237,7 +237,7 @@ export class VendorATPMAddEditComponent implements OnInit {
       this.isHidden = false;
       this.inputLookupZipcodeObj.isRequired = true;
       this.VendorForm.controls.TaxIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
-      this.VendorForm.controls.TaxpayerName.setValidators([Validators.required,Validators.maxLength(500)]);
+      this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
     } else {
       this.inputLookupZipcodeObj.isRequired = false;
       if (!isGetData) this.VendorForm.controls['Zipcode']['controls'].value.updateValueAndValidity();

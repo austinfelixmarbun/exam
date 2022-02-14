@@ -20,7 +20,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class RequestNewPasswordComponent implements OnInit {
 
   ReqPassForm = this.fb.group({
-    Username: ['', [Validators.required, Validators.maxLength(500)]],
+    Username: ['', [Validators.required, Validators.maxLength(50)]],
   });
   version: string;
   isRequested: boolean = false;
