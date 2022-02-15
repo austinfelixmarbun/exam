@@ -354,7 +354,7 @@ export class VendorEmployeeXComponent implements OnInit {
     }
 
     if (this.mode == "add") {
-      this.http.post<GenericObj>(URLConstant.AddVendorBranchEmpV2, this.VendorBranchEmpObj).subscribe(
+      this.http.post<GenericObj>(URLConstant.AddVendorBranchEmpV2, this.VendorBranchEmpObj).toPromise().then(
         (response) => {
           this.mode = "edit";
           this.objInput.VendorEmpId = response.Id;
@@ -369,7 +369,7 @@ export class VendorEmployeeXComponent implements OnInit {
       this.VendorBranchEmpObj.VendorAddrObj.RowVersion = this.resultVendorEmpAndAddr.VendorAddrObj.RowVersion;
       this.VendorBranchEmpObj.VendorEmpObj.TaxpayerNo = this.resultVendorEmpAndAddr.VendorEmpObj.TaxpayerNo;
 
-      this.http.post(URLConstant.EditVendorBranchEmpV2, this.VendorBranchEmpObj).subscribe(
+      this.http.post(URLConstant.EditVendorBranchEmpV2, this.VendorBranchEmpObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.wizard.goToNextStep();

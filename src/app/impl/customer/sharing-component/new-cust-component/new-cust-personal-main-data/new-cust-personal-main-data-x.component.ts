@@ -34,11 +34,12 @@ import {UcAddressObj} from 'app/shared/model/uc-address-obj.model';
 import {VendorAddrObj} from 'app/shared/model/vendor-addr-obj.model';
 import {VendorObj} from 'app/shared/model/vendor-obj.model';
 import {CustFormExistingObj} from 'app/shared/model/new-cust/shareholder/shareholder-form-existing-obj.model';
-import {CustCompanyMgmntShrholderObj} from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
+import { CustCompanyMgmntShrholderObj, ResCustCompanyMgmntShrholderObj } from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
 import {ReqPersonalObj} from 'app/shared/model/new-cust/req-personal-obj.model';
 import {CustPersonalJobDataObj} from 'app/shared/model/cust-personal-job-data-obj.model';
 import {CustAttrContentObj} from 'app/shared/model/new-cust/cust-attr-content-obj.model';
-
+import { String } from 'typescript-string-operations';
+import { ThirdPartyFormComponent } from 'app/customer/sharing-component/new-cust-component/component/third-party-form/third-party-form.component';
 
 @Component({
   selector: 'app-new-cust-personal-main-data-x',
@@ -78,17 +79,18 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   pageFrom: string = CommonConstant.CustFromEditMainData;
   isReady: boolean = false;
+  @ViewChild(ThirdPartyFormComponent) child : ThirdPartyFormComponent;
 
   constructor(private regexService: RegexService, private toastr: NGXToastrService,
-    private http: HttpClient, private fb: FormBuilder,
-    private cookieService: CookieService,
-    private thirdPartyUploadService: ThirdPartyUploadService,
-	private route: ActivatedRoute, private newCustService: NewCustSetData) {
-      this.route.queryParams.subscribe(params => {
-        if (params["From"] != null) {
-          this.pageFrom = params["From"];
-        }
-      });
+              private http: HttpClient, private fb: FormBuilder,
+              private cookieService: CookieService,
+              private thirdPartyUploadService: ThirdPartyUploadService,
+              private route: ActivatedRoute, private newCustService: NewCustSetData) {
+    this.route.queryParams.subscribe(params => {
+      if (params["From"] != null) {
+        this.pageFrom = params["From"];
+      }
+    });
   }
 
   //#region Readonly
@@ -108,6 +110,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   readonly FileExtAllowed: Array<string> = [CommonConstant.FileExtensionPdf, CommonConstant.FileExtensionJpg, CommonConstant.FileExtensionJpeg, CommonConstant.FileExtensionGif, CommonConstant.FileExtensionPng]
 
   readonly CustFromEditMainData: string = CommonConstant.CustFromEditMainData;
+  readonly CustFromCustShareholder: string = CommonConstant.CustFromCustShareholder;
   //#endregion
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
@@ -123,7 +126,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     this.DictUcDDLObj[this.RefMasterTypeCodeIdType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
     this.onOptionsSelected();
     this.DictUcDDLObj[this.RefMasterTypeCodeGender] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeGender);
-    this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat);
+    this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat, null, true);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     await this.GetExistingData();
     await this.GetCustAddrToCopy();
@@ -184,12 +187,18 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   //#region Set Data
   businessDtMin: Date;
   businessDtMax: Date;
+  MaxDate: Date;
+  MaxDtValidate: string;
   async InitData() {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setFullYear(this.businessDtMin.getFullYear() - 17);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
+    this.MaxDate = new Date(context.BusinessDt);
+    this.MaxDate.setDate(this.MaxDate.getDate() - 1);
+    var datePipe = new DatePipe("en-US");
+    this.MaxDtValidate = datePipe.transform(this.MaxDate, "yyyy-MM-dd");
 
     this.inputAddressObj = this.BindSetLegalAddr();
     this.isReady = true;
@@ -205,7 +214,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     inputAddressObj.showAllPhn = false;
     inputAddressObj.showOwnership = true;
     inputAddressObj.requiredOwnership = false;
-    
+
     return inputAddressObj;
   }
 
@@ -270,7 +279,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
 
   ClearCustForm() {
     this.CustomerForm = this.fb.group({
-      CustName: ['', [Validators.required, Validators.maxLength(100)]],
+      CustName: ['', [Validators.required, Validators.maxLength(500)]],
       CustPrefixName: [''],
       CustSuffixName: [''],
       MrGenderCode: ['', [Validators.required]],
@@ -281,7 +290,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
       IdExpiredDt: [''],
       MrMaritalStatCode: ['', Validators.required],
-      MotherMaidenName: ['', this.isFamily ? [Validators.maxLength(100)] : this.isShareholder ? [ Validators.maxLength(100)] : [Validators.required, Validators.maxLength(100)]] ,
+      MotherMaidenName: ['', this.isFamily ? [Validators.maxLength(500)] : this.isShareholder ? [ Validators.maxLength(100)] : [Validators.required, Validators.maxLength(100)]] ,
       IsSupplier: [false],
       SupplCode: [''],
       SupplName: [''],
@@ -308,7 +317,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       this.CustomerForm.get("CustName").disable();
     }
 
-    if (this.CustDataMode == this.CustDataModeShareholder) {
+    if (this.CustDataMode == this.CustDataModeShareholder || this.pageFrom == CommonConstant.CustFromCustShareholder) {
       this.CustomerForm.get("MrMaritalStatCode").clearValidators();
       this.CustomerForm.get("MrMaritalStatCode").updateValueAndValidity();
     }
@@ -428,7 +437,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
           (response.AreaCode4 == "" || response.AreaCode1 == null) &&
           (response.Addr == "" || response.Addr == null) &&
           (response.City == "" || response.City == null) &&
-          (response.MrHouseOwnershipCode == "" || response.MrHouseOwnershipCode == null) 
+          (response.MrHouseOwnershipCode == "" || response.MrHouseOwnershipCode == null)
         ) {
           this.checkIsAddressKnown = false;
         } else {
@@ -623,12 +632,11 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     this.inputAddressObj.inputField = inputFieldObj;
   }
 
-  async getLookUpCustomer(ev: { CustId: number, CustCompanyMgmntShrholderId: number }) {
+  async getLookUpCustomer(ev: { CustId: number}) {
     await this.GetCustData(ev.CustId);
     this.GetCustAddr(ev.CustId);
     await this.GetCustPersonalData(ev.CustId);
     if (this.CustDataMode == this.CustDataModeShareholder) {
-      if (ev.CustCompanyMgmntShrholderId) this.shareholderForm.GetExistingShareholder(ev.CustCompanyMgmntShrholderId);
       this.shareholderForm.GetExistingJobData(ev.CustId);
     }
     if (this.CustDataMode == this.CustDataModeFamily) {
@@ -696,6 +704,10 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     this.ChangeProfession("");
   }
 
+  changeCustMaritalStat(){
+    this.child.setDocFormCustMaritalTypeChanged();
+  }
+
   //profession
   ChangeProfession(code: string) {
     if (this.CustDataMode == this.CustDataModeMain) return;
@@ -736,7 +748,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
         }
       });
     }
-    
+
     let tempForm = this.CustomerForm.getRawValue();
     let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
     reqSubmitObj.CustObj = this.custObj;
@@ -767,7 +779,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     }
 
     if (this.tempCustAddr.RowVersion === null) {
-      this.tempCustAddr.RowVersion = ""; 
+      this.tempCustAddr.RowVersion = "";
     }
 
     reqSubmitObj.CustAddr = this.tempCustAddr;
@@ -782,7 +794,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     reqSubmitObj.CustAddr.Zipcode = tempForm["UcAddressZipcode"]["value"];
     reqSubmitObj.CustAddr.SubZipcode = tempForm["UcAddressZipcode"]["value"];
     reqSubmitObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
-    
+
     if (this.CustDataMode != this.CustDataModeMain) {
       reqSubmitObj.CustObj.CustName = tempForm["ExistingCustName"].value;
       reqSubmitObj.CustPersonalObj.CustFullName = tempForm["ExistingCustName"].value;
@@ -790,7 +802,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       reqSubmitObj.CustAttrContentObjs = this.SetCustAttrContent();
     }
     if (this.CustDataMode == this.CustDataModeShareholder) {
-      reqSubmitObj.CustCompanyMgmntShrholderObj = this.SetCustMgmntShareholder();
+      reqSubmitObj.CustCompanyMgmntShrholderObj = await this.SetCustMgmntShareholder();
 
       if (reqSubmitObj.CustCompanyMgmntShrholderObj.IsActive) {
         let tempTotalSharePrctTobeAdd = this.tempTotalSharePrct + reqSubmitObj.CustCompanyMgmntShrholderObj.SharePrcnt;
@@ -800,6 +812,14 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
           return;
         }
       }
+
+      if(reqSubmitObj.CustCompanyMgmntShrholderObj.EstablishmentDt != null){
+        if(reqSubmitObj.CustCompanyMgmntShrholderObj.EstablishmentDt.toString() > this.MaxDtValidate){
+          this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+          return false;
+        }
+      }
+
     }
 
     reqSubmitObj = this.SetCustomerDataMode(reqSubmitObj);
@@ -822,16 +842,22 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     }
     return reqSubmitObj;
   }
-  
+
   private SetIsTypeDataMode(reqSubmitObj: ReqPersonalObj) {
     if (this.pageFrom == CommonConstant.CustFromEditMainData) reqSubmitObj.CustObj.IsCustomer = true;
     if (this.pageFrom == CommonConstant.CustFromCustFamily) reqSubmitObj.CustObj.IsFamily = true;
     if (this.pageFrom == CommonConstant.CustFromCustShareholder) reqSubmitObj.CustObj.IsShareholder = true;
   }
 
-  SetCustMgmntShareholder(): CustCompanyMgmntShrholderObj {
+  async SetCustMgmntShareholder(): Promise<CustCompanyMgmntShrholderObj>  {
+    let CustCompanyMgmntShrholder : ResCustCompanyMgmntShrholderObj = new ResCustCompanyMgmntShrholderObj();
+    await this.http.post<ResCustCompanyMgmntShrholderObj>(URLConstant.GetCustCompanyMgmntShrholderByCustIdAndShrholderId, { CustId: this.ParentCustId, ShrholderId: this.CustId }).toPromise().then(
+      async (response) => {
+        CustCompanyMgmntShrholder = response;
+      }
+    )
     let tempForm = this.CustomerForm.getRawValue();
-    let tempReqObj: CustCompanyMgmntShrholderObj = this.ExistingFormObj.CustCompanyMgmntShrholder;
+    let tempReqObj: CustCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
     tempReqObj.CustId = this.ParentCustId;
     tempReqObj.ShareholderId = this.CustId;
 
@@ -841,6 +867,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     tempReqObj.IsOwner = tempForm["IsOwner"];
     tempReqObj.IsSigner = tempForm["IsSigner"];
     tempReqObj.EstablishmentDt = tempForm["EstablishmentDt"];
+    tempReqObj.RowVersion = CustCompanyMgmntShrholder.RowVersion;
 
     return tempReqObj
   }

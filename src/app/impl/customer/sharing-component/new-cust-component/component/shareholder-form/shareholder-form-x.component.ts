@@ -48,6 +48,8 @@ export class ShareholderFormXComponent implements OnInit {
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
   constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
 
+  UserAccess: CurrentUserContext;
+  MaxDate: Date;
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
@@ -62,7 +64,6 @@ export class ShareholderFormXComponent implements OnInit {
   }
 
   positionSlikLookUpObj: InputLookupObj = new InputLookupObj();
-  businessDtMin: Date;
   InitData() {
     this.parentForm.addControl("MrPositionSlikCode", this.fb.control(''));
     this.parentForm.get("MrPositionSlikCode").setValidators([Validators.required]);
@@ -82,9 +83,10 @@ export class ShareholderFormXComponent implements OnInit {
     this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();
     this.BindLookupProfession();
     this.BindLookupJobPosition();
-    let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
-    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
+
+    this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.MaxDate = new Date(this.UserAccess.BusinessDt);
+    this.MaxDate.setDate(this.MaxDate.getDate() - 1);
   }
 
   jobPositionLookupObj: InputLookupObj = new InputLookupObj();
@@ -103,7 +105,7 @@ export class ShareholderFormXComponent implements OnInit {
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
-    
+
     let listCriteriaObj: Array<CriteriaObj> = new Array();
     let criteriaCustObj = new CriteriaObj();
     criteriaCustObj.DataType = "text";

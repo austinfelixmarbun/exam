@@ -6,7 +6,7 @@
       <label class="col-md-4 adins-required-label" translate>Job Position </label>
       <div class="col-md-8" *ngIf="jobPositionLookupObj?.isReady">
         <lib-uclookupgeneric [lookupInput]="jobPositionLookupObj" [parentForm]="parentForm" [enjiForm]="enjiForm"
-          [identifier]="'JobPosition'" (lookup)=getLookUpJobPosition($event)>
+                             [identifier]="'JobPosition'" (lookup)=getLookUpJobPosition($event)>
         </lib-uclookupgeneric>
       </div>
     </div>
@@ -15,7 +15,7 @@
       <label class="col-md-4 adins-required-label" translate> Position SLIK </label>
       <div class="col-md-8">
         <lib-uclookupgeneric [lookupInput]="positionSlikLookUpObj" [parentForm]="parentForm" [enjiForm]="enjiForm"
-          [identifier]="'PositionSlikCode'" (lookup)=getLookUpSlik($event)>
+                             [identifier]="'PositionSlikCode'" (lookup)=getLookUpSlik($event)>
         </lib-uclookupgeneric>
       </div>
     </div>
@@ -24,8 +24,8 @@
       <label class="col-md-4 adInsLabel" translate>Start Working Date</label>
       <div class="col-md-8">
         <input type="date" class="form-control adInsInput" formControlName="EstablishmentDt"
-          [max]="businessDtMin | date: 'yyyy-MM-dd'"
-          [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.EstablishmentDt.invalid}">
+               max = "{{MaxDate | date: 'yyyy-MM-dd'}}"
+               [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.EstablishmentDt.invalid}">
         <lib-uc-show-errors [control]="parentForm.controls.EstablishmentDt" [submit]="enjiForm.submitted">
         </lib-uc-show-errors>
       </div>
@@ -53,7 +53,7 @@
       <label class="col-md-4 adInsLabel" translate>Customer Model </label>
       <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustModel]?.isReady">
         <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustModel]" [parentForm]="parentForm"
-          [enjiForm]="enjiForm" [identifier]="'MrCustModelCode'" (callback)="changeCustModel()"></lib-ucdropdownlist>
+                            [enjiForm]="enjiForm" [identifier]="'MrCustModelCode'" (callback)="changeCustModel()"></lib-ucdropdownlist>
       </div>
     </div>
 
@@ -61,7 +61,7 @@
       <label class="col-md-4 adInsLabel" translate> Profession Name </label>
       <div class="col-md-8">
         <lib-uclookupgeneric [lookupInput]="professionLookUpObj" [parentForm]="parentForm" [enjiForm]="enjiForm"
-          [identifier]="'JobProfession'" (lookup)=getLookUpProfession($event) #LookupProfession>
+                             [identifier]="'JobProfession'" (lookup)=getLookUpProfession($event) #LookupProfession>
         </lib-uclookupgeneric>
       </div>
     </div>
@@ -71,8 +71,8 @@
       </label>
       <div class="col-md-8">
         <input type="" currencyMask min="0" max="100" class="form-control" formControlName="SharePrcnt"
-          [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.SharePrcnt.invalid}"
-          [options]="CurrencyMaskPrct" (focusout)="ChangeValidityShareOwner()">
+               [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.SharePrcnt.invalid}"
+               [options]="CurrencyMaskPrct" (focusout)="ChangeValidityShareOwner()">
         <lib-uc-show-errors [control]="parentForm.controls.SharePrcnt" [submit]="enjiForm.submitted">
         </lib-uc-show-errors>
       </div>
@@ -83,7 +83,7 @@
         Owner</label>
       <div class="col-md-8">
         <input class="border-primary" type="checkbox" data-md-icheck formControlName="IsOwner"
-          (change)="ChangeValidityShareOwner()" />
+               (change)="ChangeValidityShareOwner()" />
         <lib-uc-show-errors [control]="parentForm.controls.IsOwner" [submit]="enjiForm.submitted">
         </lib-uc-show-errors>
       </div>

@@ -1,4 +1,4 @@
-import {formatDate} from '@angular/common';
+import {DatePipe, formatDate} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
@@ -22,7 +22,9 @@ import {URLConstant} from 'app/shared/constant/URLConstant';
 import {GenericObj} from 'app/shared/model/Generic/generic-obj.model';
 import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { AddressService } from 'app/shared/services/custAddr.service';
-
+import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { String } from 'typescript-string-operations';
 
 @Component({
   selector: 'app-job-data-employee-x',
@@ -114,19 +116,22 @@ export class JobDataEmployeeXComponent implements OnInit {
     NoOfEmploy: [''],
     CommodityCode: ['']
   });
-  businessDtMin: Date;
+
   inputAddressObj: InputAddressObj;
   inputPreviousAddressObj: InputAddressObj;
   inputOthBizAddressObj: InputAddressObj;
   listAddrRequiredOwnership: Array<string> = new Array();
   isReady: boolean = false;
+  UserAccess: CurrentUserContext;
+  MaxDate: Date;
+  MaxDtValidate: string;
 
   constructor(private route: ActivatedRoute,
-    private http: HttpClient,
-    private toastr: NGXToastrService,
-    private fb: FormBuilder,
-    private cookieService: CookieService,
-    private addressService: AddressService) {
+              private http: HttpClient,
+              private toastr: NGXToastrService,
+              private fb: FormBuilder,
+              private cookieService: CookieService,
+              private addressService: AddressService) {
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -172,9 +177,13 @@ export class JobDataEmployeeXComponent implements OnInit {
     this.inputOthBizAddressObj.showOwnership = true;
     this.inputOthBizAddressObj.requiredOwnership = this.setOwnership(CommonConstant.CustAddrTypeOthBiz);
 
-    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
-    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
+    this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+
+    var datePipe = new DatePipe("en-US");
+    this.MaxDate = new Date(this.UserAccess.BusinessDt);
+    this.MaxDate.setDate(this.MaxDate.getDate() - 1);
+    this.MaxDtValidate = datePipe.transform(this.MaxDate, "yyyy-MM-dd");
+
     this.inputJobAddressObj = new InputFieldObj();
     this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
 
@@ -632,6 +641,16 @@ export class JobDataEmployeeXComponent implements OnInit {
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_EMP;
 
+      if(this.custPersonalJobDataObj.OthBizEstablishmentDt.toString() > this.MaxDtValidate){
+        this.toastr.warningMessage(String.Format(ExceptionConstant.OTHER_BIZ_EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+        return false;
+      }
+
+      if(this.custPersonalJobDataObj.EmploymentEstablishmentDt.toString() > this.MaxDtValidate){
+        this.toastr.warningMessage(String.Format(ExceptionConstant.EMP_EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+        return false;
+      }
+
       let custXObj = {
         CustId: this.IdCust,
         MrCommodityCode: this.JobDataEmpForm.controls.CommodityCode.value,
@@ -666,6 +685,16 @@ export class JobDataEmployeeXComponent implements OnInit {
       this.reqCustPersonalJobDataObj.OthBizAddr = this.otherAddressObj;
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_EMP;
+
+      if(this.custPersonalJobDataObj.OthBizEstablishmentDt.toString() > this.MaxDtValidate){
+        this.toastr.warningMessage(String.Format(ExceptionConstant.OTHER_BIZ_EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+        return false;
+      }
+
+      if(this.custPersonalJobDataObj.EmploymentEstablishmentDt.toString() > this.MaxDtValidate){
+        this.toastr.warningMessage(String.Format(ExceptionConstant.EMP_EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+        return false;
+      }
 
       let custXObj = {
         CustId: this.IdCust,
@@ -708,6 +737,13 @@ export class JobDataEmployeeXComponent implements OnInit {
       MrWellknownCoyCode: event.MasterCode,
       IndustryName: event.Descr
     });
+  }
+
+  onFocusOutEstDate(event){
+    if(event.target.value > this.MaxDtValidate){
+      this.toastr.warningMessage(String.Format(ExceptionConstant.OTHER_BIZ_EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+      return;
+    }
   }
 
   setLookupCommodityData(ev) {

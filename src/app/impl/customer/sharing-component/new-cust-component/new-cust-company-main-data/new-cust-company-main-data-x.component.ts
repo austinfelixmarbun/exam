@@ -56,8 +56,8 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
   isReady: boolean = false;
 
   constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService,
-    private cookieService: CookieService, private thirdPartyUploadService: ThirdPartyUploadService,
-    private route: ActivatedRoute, private newCustService: NewCustSetData) {
+              private cookieService: CookieService, private thirdPartyUploadService: ThirdPartyUploadService,
+              private route: ActivatedRoute, private newCustService: NewCustSetData) {
     this.route.queryParams.subscribe(params => {
       if (params["From"] != null) {
         this.pageFrom = params["From"];
@@ -107,7 +107,7 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
     inputAddressObj.showAllPhn = false;
     inputAddressObj.showOwnership = true;
     inputAddressObj.requiredOwnership = false;
-    
+
     return inputAddressObj;
   }
 
@@ -147,7 +147,7 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
   ClearCustForm() {
     this.CustomerForm = this.fb.group({
       MrCustModelCode: ['', [Validators.required]],
-      CustName: ['', [Validators.required]],
+      CustName: ['', [Validators.required, Validators.maxLength(500)]],
       MrCompanyTypeCode: ['', [Validators.required]],
       TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
 
@@ -419,7 +419,7 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
     if (this.pageFrom == CommonConstant.CustFromEditMainData) reqSubmitObj.CustObj.IsCustomer = true;
     if (this.pageFrom == CommonConstant.CustFromCustShareholder) reqSubmitObj.CustObj.IsShareholder = true;
   }
-  
+
   SetCustMgmntShareholder(): CustCompanyMgmntShrholderObj {
     let tempForm = this.CustomerForm.getRawValue();
     let tempReqObj: CustCompanyMgmntShrholderObj = this.ExistingShareholderObj.CustCompanyMgmntShrholder;

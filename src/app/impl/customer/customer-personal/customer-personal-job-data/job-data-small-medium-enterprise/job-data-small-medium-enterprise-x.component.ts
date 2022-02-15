@@ -1,4 +1,4 @@
-import {formatDate} from '@angular/common';
+import {DatePipe, formatDate} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
@@ -22,6 +22,9 @@ import {InputAddressObj} from 'app/shared/model/input-address-obj.model';
 import {CookieService} from 'ngx-cookie';
 import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { AddressService } from 'app/shared/services/custAddr.service';
+import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
+import { String } from 'typescript-string-operations';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-job-data-sme-x',
@@ -77,6 +80,9 @@ export class JobDataSmeXComponent implements OnInit {
   EconomicSectorName: string;
   IndustryTypeCategoryName: string;
   IsShowData: boolean = false;
+  UserAccess: CurrentUserContext;
+  MaxDate: Date;
+  MaxDtValidate: string;
   JobDataSmeForm = this.fb.group({
     JobDataType: [''],
     ProfessionName: [''],
@@ -107,7 +113,6 @@ export class JobDataSmeXComponent implements OnInit {
     MrInvestmentTypeCode: [''],
     CommodityCode: ['']
   });
-  businessDtMin: Date;
   inputAddressObjForJobAddr: InputAddressObj;
   inputAddressObjForOthBiz: InputAddressObj;
   inputPreviousAddressObj: InputAddressObj;
@@ -115,11 +120,11 @@ export class JobDataSmeXComponent implements OnInit {
   listAddrRequiredOwnership: Array<string> = new Array();
 
   constructor(private route: ActivatedRoute,
-    private http: HttpClient,
-    private toastr: NGXToastrService,
-    private fb: FormBuilder,
-    private cookieService: CookieService,
-    private addressService: AddressService) {
+              private http: HttpClient,
+              private toastr: NGXToastrService,
+              private fb: FormBuilder,
+              private cookieService: CookieService,
+              private addressService: AddressService) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -165,9 +170,12 @@ export class JobDataSmeXComponent implements OnInit {
     this.inputPreviousAddressObj.requiredOwnership = this.setOwnership(CommonConstant.CustAddrTypePreJob);
     this.inputPreviousAddressObj.inputField.inputLookupObj.isRequired = false;
 
-    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
-    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
+    this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    var datePipe = new DatePipe("en-US");
+    this.MaxDate = new Date(this.UserAccess.BusinessDt);
+    this.MaxDate.setDate(this.MaxDate.getDate() - 1);
+    this.MaxDtValidate = datePipe.transform(this.MaxDate, "yyyy-MM-dd");
+
     this.inputJobAddressObj = new InputFieldObj();
     this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
     this.inputJobAddressObj.inputLookupObj.isRequired = false;
@@ -619,6 +627,16 @@ export class JobDataSmeXComponent implements OnInit {
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_SME;
 
+      if(this.custPersonalJobDataObj.EmploymentEstablishmentDt.toString() > this.MaxDtValidate){
+        this.toastr.warningMessage(String.Format(ExceptionConstant.START_WORKING_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+        return false;
+      }
+
+      if(this.custPersonalJobDataObj.OthBizEstablishmentDt.toString() > this.MaxDtValidate){
+        this.toastr.warningMessage(String.Format(ExceptionConstant.OTHER_BIZ_EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+        return false;
+      }
+
       let custXObj = {
         CustId: this.IdCust,
         MrCommodityCode: this.JobDataSmeForm.controls.CommodityCode.value,
@@ -658,6 +676,16 @@ export class JobDataSmeXComponent implements OnInit {
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_SME;
 
+      if(this.custPersonalJobDataObj.EmploymentEstablishmentDt.toString() > this.MaxDtValidate){
+        this.toastr.warningMessage(String.Format(ExceptionConstant.START_WORKING_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+        return false;
+      }
+
+      if(this.custPersonalJobDataObj.OthBizEstablishmentDt.toString() > this.MaxDtValidate){
+        this.toastr.warningMessage(String.Format(ExceptionConstant.OTHER_BIZ_EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+        return false;
+      }
+
       let custXObj = {
         CustId: this.IdCust,
         MrCommodityCode: this.JobDataSmeForm.controls.CommodityCode.value,
@@ -693,6 +721,13 @@ export class JobDataSmeXComponent implements OnInit {
       MrWellknownCoyCode: event.MasterCode,
       IndustryName: event.Descr
     });
+  }
+
+  onFocusOutEstDate(event){
+    if(event.target.value > this.MaxDtValidate){
+      this.toastr.warningMessage(String.Format(ExceptionConstant.OTHER_BIZ_EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+      return;
+    }
   }
 
   async getCustXData() {
