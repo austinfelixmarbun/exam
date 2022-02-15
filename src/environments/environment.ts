@@ -19,6 +19,7 @@ export const environment = {
   ApprovalR3Url: 'http://r3impl-appsvr.ad-ins.com/APPROVAL_R3_BE_DSF_IMPL_CAMUNDA',
   FoundationR3Web: 'http://r3impl-websvr.ad-ins.com/FOU_DSF_IMPL',
   losR3Web: 'http://r3impl-websvr.ad-ins.com/LOS_DSF_IMPL',
+  cmsR3Web: 'http://r3web-server.ad-ins.com/CMS',
   WorkflowR3Url: 'http://r3impl-appsvr.ad-ins.com/WORKFLOW_DSF_IMPL',
   WebSocketURL: 'http://r3impl-appsvr.ad-ins.com/FOU_DSF_IMPL',
   DashboardURL: 'http://r3app-server.ad-ins.com/Dashboard',
@@ -27,5 +28,6 @@ export const environment = {
   ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
   ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
   Module: "FOU",
-  isCore: true
+  isCore: true,
+  SpinnerOnHttpPost: false
 };

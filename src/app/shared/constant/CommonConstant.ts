@@ -178,7 +178,9 @@ export class CommonConstant {
     public static RefMasterTypeCodePositionSlik = "POSITION_SLIK";
     public static RefMasterTypeCodeAppSrcType = "APP_SRC_TYPE";
     public static RefMasterTypeCodeCustDocType = "CUST_DOC_TYPE";
-
+    
+    //MASTER CODE
+    public static MasterCodeCustDocTypeSpouseId = "APGEN03";
 
     // NATIONALITY CODE
     public static NationalityCodeLocal = "LOCAL"

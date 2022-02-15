@@ -53,7 +53,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     CustId: [0],
     MrCustTypeCode: [CommonConstant.CustTypePersonal, [Validators.required]],
     CustNo: [''],
-    CustName: ['', [Validators.required]],
+    CustName: ['', [Validators.required, Validators.maxLength(500)]],
     MrIdTypeCode: ['', [Validators.required]],
     IdNo: ['', [Validators.required]],
     IdExpiredDt: [''],
@@ -61,7 +61,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     BirthPlace: ['', [Validators.required]],
     BirthDt: ['', Validators.required],
     MrGenderCode: [''],
-    MotherMaidenName: ['', [Validators.required]],
+    MotherMaidenName: ['', [Validators.required, Validators.maxLength(500)]],
     LegalAddr: ['', [Validators.required]],
     Zipcode: ['', [Validators.required]],
     AreaCode1: ['', [Validators.required]],
@@ -427,7 +427,8 @@ export class NegativeCustomerDetailComponent implements OnInit {
   }
 
   Back(): void {
-    this.location.back();
+    // this.location.back();
+    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_NEG_PAGING], {});
   }
 
   custTypeHandler(e) {

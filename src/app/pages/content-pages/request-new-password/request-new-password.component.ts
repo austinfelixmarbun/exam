@@ -14,7 +14,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: "request-new-password",
-  templateUrl: "./request-new-password.component.html",
+  templateUrl: "./request-new-password-new.component.html",
   providers: [NGXToastrService]
 })
 export class RequestNewPasswordComponent implements OnInit {

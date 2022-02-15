@@ -27,11 +27,18 @@ export class HttpConfigInterceptor implements HttpInterceptor {
     constructor(public errorDialogService: ErrorDialogService, private spinner: NgxSpinnerService, private router: Router, private toastr: NGXToastrService, private cookieService: CookieService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log(request);
-        if (request.method == "POST" && (request.body == null || request.body.isLoading == undefined || request.body.isLoading == true)) {
-            this.spinner.show();
-        }
-        if (request.url != "./assets/i18n/en.json") {
-            this.count++;
+        if (environment.SpinnerOnHttpPost) {
+            if (request.method == "POST" && (request.body == null || request.body.isLoading == undefined || request.body.isLoading == true)) {
+                this.spinner.show();
+            }
+            if (request.url != "./assets/i18n/en.json") {
+                this.count++;
+            }
+        } else {
+            if (request.headers.has('IsLoading') && request.headers.get("IsLoading") == "true") {
+                this.spinner.show();
+                this.count++;
+            }
         }
 
         var currentUserContext = AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS) ? JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS)) : null;
@@ -104,7 +111,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             if (environment["isCore"] == undefined || !environment["isCore"]) {
                 newUrl = request.url;
                 newUrl = newUrl.replace(apiVers[0], "/v1");
-                request = request.clone({ url: newUrl});
+                request = request.clone({ url: newUrl });
             }
             vers = apiVers[0].substring(2);
             request = request.clone({ headers: request.headers.set('X-Version', vers) });
@@ -113,7 +120,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         request = request.clone({ body: myObj });
         AdInsHelper.InsertLog(this.cookieService, request.url, "API", request.body);
         console.log(JSON.stringify(request.body));
-        
+
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
@@ -151,7 +158,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                         }
                     } else if (error.error.Message != null) {
                         this.toastr.typeErrorCopyOnClick(error.error.Message, 'Status: ' + error.error.StatusCode);
-                    }else {
+                    } else {
                         this.toastr.typeErrorCopyOnClick(error.url, 'Status: ' + error.status);
                     }
                 }
@@ -162,8 +169,18 @@ export class HttpConfigInterceptor implements HttpInterceptor {
                 console.log(JSON.stringify(request.body));
                 return throwError(error);
             }), finalize(() => {
-                if (request.url != "./assets/i18n/en.json") {
-                    this.count--;
+
+                if (environment.SpinnerOnHttpPost) {
+                    if (request.url != "./assets/i18n/en.json") {
+                        this.count--;
+                    }
+                } else {
+                    if (request.headers.has('IsLoading') && request.headers.get("IsLoading") == "true") {
+                        this.count--;
+                    }
+                    // if (request.body.isLoading != undefined && request.body.isLoading == true) {
+                    //     this.count--;
+                    // }
                 }
 
                 if (request.method == "POST") {

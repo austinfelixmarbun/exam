@@ -3,7 +3,6 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RegexService } from 'app/customer/regex.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -23,7 +22,7 @@ import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { CustAttrContentObj } from 'app/shared/model/new-cust/cust-attr-content-obj.model';
-import { CustCompanyMgmntShrholderObj } from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
+import { CustCompanyMgmntShrholderObj, ResCustCompanyMgmntShrholderObj } from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
 import { CustPersonalFamilyObj } from 'app/shared/model/new-cust/cust-personal-family-obj.model';
 import { ReqPersonalObj } from 'app/shared/model/new-cust/req-personal-obj.model';
 import { CustFormExistingObj } from 'app/shared/model/new-cust/shareholder/shareholder-form-existing-obj.model';
@@ -39,6 +38,8 @@ import { NewCustSetData } from '../NewCustSetData.Service';
 import { CustDocFileFormObj } from 'app/shared/model/cust-doc-file/cust-doc-file-form-obj.model';
 import { ThirdPartyUploadService } from '../component/third-party-form/services/ThirdPartyUpload.Service';
 import { ActivatedRoute } from '@angular/router';
+import { ThirdPartyFormComponent } from '../component/third-party-form/third-party-form.component';
+import { String } from 'typescript-string-operations';
 
 @Component({
   selector: 'app-new-cust-personal-main-data',
@@ -75,6 +76,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   pageFrom: string = CommonConstant.CustFromEditMainData;
   isReady: boolean = false;
+  @ViewChild(ThirdPartyFormComponent) child : ThirdPartyFormComponent;
 
   constructor(private regexService: RegexService, private toastr: NGXToastrService,
     private http: HttpClient, private fb: FormBuilder,
@@ -105,6 +107,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   readonly FileExtAllowed: Array<string> = [CommonConstant.FileExtensionPdf, CommonConstant.FileExtensionJpg, CommonConstant.FileExtensionJpeg, CommonConstant.FileExtensionGif, CommonConstant.FileExtensionPng]
 
   readonly CustFromEditMainData: string = CommonConstant.CustFromEditMainData;
+  readonly CustFromCustShareholder: string = CommonConstant.CustFromCustShareholder;
   //#endregion
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
@@ -119,7 +122,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.DictUcDDLObj[this.RefMasterTypeCodeIdType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
     this.onOptionsSelected();
     this.DictUcDDLObj[this.RefMasterTypeCodeGender] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeGender);
-    this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat);
+    this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat, null, true);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     await this.GetExistingData();
     this.GetCustAddrToCopy();
@@ -129,12 +132,18 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   //#region Set Data
   businessDtMin: Date;
   businessDtMax: Date;
+  MaxDate: Date;
+  MaxDtValidate: string;
   async InitData() {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setFullYear(this.businessDtMin.getFullYear() - 17);
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
+    this.MaxDate = new Date(context.BusinessDt);
+    this.MaxDate.setDate(this.MaxDate.getDate() - 1);
+    var datePipe = new DatePipe("en-US");
+    this.MaxDtValidate = datePipe.transform(this.MaxDate, "yyyy-MM-dd");
 
     this.inputAddressObj = await this.newCustService.BindSetLegalAddr();
     this.isReady = true;
@@ -201,7 +210,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   ClearCustForm() {
     this.CustomerForm = this.fb.group({
-      CustName: ['', [Validators.required, Validators.maxLength(100)]],
+      CustName: ['', [Validators.required, Validators.maxLength(500)]],
       MrGenderCode: ['', [Validators.required]],
       MrIdTypeCode: ['', [Validators.required, Validators.maxLength(100)]],
       BirthPlace: ['', [Validators.required]],
@@ -210,7 +219,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
       IdExpiredDt: [''],
       MrMaritalStatCode: ['', Validators.required],
-      MotherMaidenName: ['', [Validators.required, Validators.maxLength(100)]],
+      MotherMaidenName: ['', [Validators.required, Validators.maxLength(500)]],
       IsSupplier: [false],
       SupplCode: [''],
       SupplName: [''],
@@ -224,7 +233,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     if (this.CustDataMode != this.CustDataModeMain) {
       this.CustomerForm.get("CustName").disable();
     }
-    if (this.CustDataMode == this.CustDataModeShareholder) {
+    if (this.CustDataMode == this.CustDataModeShareholder || this.pageFrom == CommonConstant.CustFromCustShareholder) {
       this.CustomerForm.get("Email1").setValidators(Validators.pattern(CommonConstant.regexEmail));
       this.CustomerForm.get("Email1").updateValueAndValidity();
       this.CustomerForm.get("MrMaritalStatCode").clearValidators();
@@ -510,12 +519,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.inputAddressObj.inputField = inputFieldObj;
   }
 
-  async getLookUpCustomer(ev: { CustId: number, CustCompanyMgmntShrholderId: number }) {
+  async getLookUpCustomer(ev: { CustId: number}) {
     await this.GetCustData(ev.CustId);
     this.GetCustAddr(ev.CustId);
     await this.GetCustPersonalData(ev.CustId);
     if (this.CustDataMode == this.CustDataModeShareholder) {
-      if (ev.CustCompanyMgmntShrholderId) this.shareholderForm.GetExistingShareholder(ev.CustCompanyMgmntShrholderId);
       this.shareholderForm.GetExistingJobData(ev.CustId);
     }
     if (this.CustDataMode == this.CustDataModeFamily) {
@@ -583,6 +591,10 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.ChangeProfession("");
   }
 
+  changeCustMaritalStat(){
+    this.child.setDocFormCustMaritalTypeChanged();
+  }
+
   //profession
   ChangeProfession(code: string) {
     if (this.CustDataMode == this.CustDataModeMain) return;
@@ -648,7 +660,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       reqSubmitObj.CustAttrContentObjs = this.SetCustAttrContent();
     }
     if (this.CustDataMode == this.CustDataModeShareholder) {
-      reqSubmitObj.CustCompanyMgmntShrholderObj = this.SetCustMgmntShareholder();
+      reqSubmitObj.CustCompanyMgmntShrholderObj = await this.SetCustMgmntShareholder();
 
       if (reqSubmitObj.CustCompanyMgmntShrholderObj.IsActive) {
         let tempTotalSharePrctTobeAdd = this.tempTotalSharePrct + reqSubmitObj.CustCompanyMgmntShrholderObj.SharePrcnt;
@@ -658,6 +670,14 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           return;
         }
       }
+
+      if(reqSubmitObj.CustCompanyMgmntShrholderObj.EstablishmentDt != null){
+        if(reqSubmitObj.CustCompanyMgmntShrholderObj.EstablishmentDt.toString() > this.MaxDtValidate){
+          this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+          return false;
+        }
+      }
+      
     }
 
     reqSubmitObj = this.SetCustomerDataMode(reqSubmitObj);
@@ -687,9 +707,15 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     if (this.pageFrom == CommonConstant.CustFromCustShareholder) reqSubmitObj.CustObj.IsShareholder = true;
   }
 
-  SetCustMgmntShareholder(): CustCompanyMgmntShrholderObj {
+  async SetCustMgmntShareholder(): Promise<CustCompanyMgmntShrholderObj>  {
+    let CustCompanyMgmntShrholder : ResCustCompanyMgmntShrholderObj = new ResCustCompanyMgmntShrholderObj();
+    await this.http.post<ResCustCompanyMgmntShrholderObj>(URLConstant.GetCustCompanyMgmntShrholderByCustIdAndShrholderId, { CustId: this.ParentCustId, ShrholderId: this.CustId }).toPromise().then(
+      async (response) => {
+        CustCompanyMgmntShrholder = response;
+      }
+    )
     let tempForm = this.CustomerForm.getRawValue();
-    let tempReqObj: CustCompanyMgmntShrholderObj = this.ExistingFormObj.CustCompanyMgmntShrholder;
+    let tempReqObj: CustCompanyMgmntShrholderObj = new CustCompanyMgmntShrholderObj();
     tempReqObj.CustId = this.ParentCustId;
     tempReqObj.ShareholderId = this.CustId;
 
@@ -700,6 +726,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     tempReqObj.IsSigner = tempForm["IsSigner"];
     tempReqObj.EstablishmentDt = tempForm["EstablishmentDt"];
     tempReqObj.MrJobPositionCode = tempForm["MrJobPositionCode"];
+    tempReqObj.RowVersion = CustCompanyMgmntShrholder.RowVersion;
 
     return tempReqObj
   }

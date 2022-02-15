@@ -17,6 +17,7 @@ export class NavigationConstant {
     public static PAGES_CONTENT = "/" + PathConstant.LR_PAGES + "/" + PathConstant.CONTENT; //'/Pages/Content'
     public static ERROR = "/" + PathConstant.LR_ERROR; //'/Error'
     public static NOTIF = "/" + PathConstant.LR_NOTIF; //'/Notification'
+    public static PAGES_MODULE_SELECTION = "/" + PathConstant.LR_PAGES + "/" + PathConstant.SELECT_MODULE; //'/Pages/SelectModule'
 
     //#region Asset
     public static ASSET_CONFIG_PAGING = '..' + "/" + '..' + "/" + PathConstant.ASSET_CONFIG_PAGING; //'../../Configuration/Paging'
@@ -155,7 +156,7 @@ export class NavigationConstant {
     public static VIEW_CUST_COY_FINANCIAL = NavigationConstant.VIEW_CUST + "/" + PathConstantX.VIEW_CUST_COY_FINANCIAL_X; //'/View/Customer/CoyFinancial'
     public static VIEW_CUST_COY_LEGAL = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_LEGAL; //'/View/Customer/CoyLegal'
     public static VIEW_CUST_TRUSTING_SOCIAL = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_TRUSTING_SOCIAL; //'/View/Customer/TrustSoc'
-    public static VIEW_NEG_CUST = PathConstant.CR_VIEW + "/" + PathConstant.VIEW_NEG_CUST; //'/View/NegativeCustomer'
+    public static VIEW_NEG_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_NEG_CUST; //'/View/NegativeCustomer'
     public static VIEW_CUST_OTH_INFO = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_OTH_INFO; //'/View/Customer/CustOthInfo'
     public static VIEW_CUST_EXPOSURE = "/" + PathConstant.CR_VIEW + "/" + PathConstantX.VIEW_CUST_EXPSR_X; //'/View/CustExposureView/X'
     //#endregion

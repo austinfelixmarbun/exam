@@ -354,7 +354,7 @@ export class URLConstant {
     public static GetListAssetSchmH = environment.FoundationR3Url + "/v1" + "/AssetSchmH/GetListAssetSchmHByAssetMasterId";
     public static GetListAssetMasterByAssetSchmHId = environment.FoundationR3Url + "/v1" + "/AssetMaster/GetListAssetMasterByAssetSchmHId";
     public static EditListAssetSchmDByAssetMasterId = environment.FoundationR3Url + "/v1" + "/AssetSchmD/EditListAssetSchmDByAssetMasterId";
-    public static GetUploadAssetMasterByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + "/v1" + "/AssetMaster/GetUploadAssetMasterByUploadMonitoringNoAndTrxType";
+    public static GetUploadAssetMasterByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + "/v2" + "/AssetMaster/GetUploadAssetMasterByUploadMonitoringNoAndTrxType";
     public static AddAssetMasterAttrContent = environment.FoundationR3Url + "/v1" + "/AssetMasterAttrContent/AddAssetMasterAttrContent";
     public static GetAssetMasterAttrContentForAssetMaster = environment.FoundationR3Url + "/v1" + "/AssetMasterAttrContent/GetAssetMasterAttrContentForAssetMaster";
     public static GetAssetMasterAttrContentForAssetMasterByAttrTypeCode = environment.FoundationR3Url + "/v1" + "/AssetMasterAttrContent/GetAssetMasterAttrContentForAssetMasterByAttrTypeCode";
@@ -508,7 +508,7 @@ export class URLConstant {
     public static AddAssetNegative = environment.FoundationR3Url + "/v1" + "/AssetNegative/AddAssetNegative";
     public static EditAssetNegative = environment.FoundationR3Url + "/v1" + "/AssetNegative/EditAssetNegative";
     public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/v1" + "/AssetNegative/GetAssetNegativeByIdEditPage";
-    public static GetUploadAssetNegativeByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + "/v1" + "/AssetNegative/GetUploadAssetNegativeByUploadMonitoringNoAndTrxType";
+    public static GetUploadAssetNegativeByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + "/v2" + "/AssetNegative/GetUploadAssetNegativeByUploadMonitoringNoAndTrxType";
 
     // VENDOR
     public static AddVendorHO = environment.FoundationR3Url + "/v1" + "/Vendor/AddVendorHO";
@@ -594,7 +594,7 @@ export class URLConstant {
     public static EditVendorSchm = environment.FoundationR3Url + "/v1" + "/VendorSchm/EditVendorSchm";
     public static GetVendorSchmByVendorSchmId = environment.FoundationR3Url + "/v1" + "/VendorSchm/GetVendorSchmByVendorSchmId";
     public static AddVendorSchmMember = environment.FoundationR3Url + "/v1" + "/VendorSchmMbr/AddVendorSchmMember";
-    public static DeleteVendorSchmMember = environment.FoundationR3Url + '/v1'+ "/VendorSchmMbr/DeleteVendorSchmMember"
+    public static DeleteVendorSchmMember = environment.FoundationR3Url + "/v1" + "/VendorSchmMbr/DeleteVendorSchmMember"
     public static GetListVendorSchmMemberByVendorSchmId = environment.FoundationR3Url + "/v1" + "/VendorSchmMbr/GetListVendorSchmMemberByVendorSchmId"
 
     // VENDOR ATTR
@@ -735,6 +735,8 @@ export class URLConstant {
 
     public static GetCustHighlightCommentByCustId = environment.FoundationR3Url + "/v1" + "/Cust/GetCustHighlightCommentByCustId";
     public static SendCustomerDataToRabbitMq = environment.FoundationR3Url + "/v1" + "/Cust/SendCustomerDataToRabbitMq";
+    public static UpdateToMainCustomer = environment.FoundationR3Url + "/v1" + "/Cust/UpdateToMainCustomer";
+
     // CUSTOMER COMPANY
     public static GetListViewCustCompanyLegalDocByCustCompanyId = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/GetListViewCustCompanyLegalDocByCustCompanyId";
     public static DeleteCustCompanyLegalDoc = environment.FoundationR3Url + "/v1" + "/CustCompanyLegalDoc/DeleteCustCompanyLegalDoc";
@@ -816,6 +818,7 @@ export class URLConstant {
     public static AddCustCompanyMgmntShrholderPublic = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/AddCustCompanyMgmntShrholderPublic";
     public static EditCustCompanyMgmntShrholderPublic = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/EditCustCompanyMgmntShrholderPublic";
     public static GetListManagementShareholderForListPagingByCustId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/GetListManagementShareholderForListPagingByCustId";
+    public static GetCustCompanyMgmntShrholderByCustIdAndShrholderId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustIdAndShrholderId";
 
     // CUST ATTR CONTENT
     public static GetCustAttrContentForCustViewByCustId = environment.FoundationR3Url + '/v1' + "/CustAttrContent/GetCustAttrContentForCustViewByCustId";
@@ -886,7 +889,7 @@ export class URLConstant {
     public static UpdateSrvyTaskAndAddVerfResultH = environment.FoundationR3Url + "/v1" + "/SrvyTask/UpdateSrvyTaskAndAddVerfResultH";
     public static UpdateSrvyTaskAndEditVerfResultH = environment.FoundationR3Url + "/v1" + "/SrvyTask/UpdateSrvyTaskAndEditVerfResultH";
     public static UpdateMrSurveyTaskStatCode = environment.FoundationR3Url + "/v1" + "/SrvyTask/UpdateMrSurveyTaskStatCode";
-   
+
     // SURVEY ORDER
     public static GetSrvyOrderBySrvyOrderId = environment.FoundationR3Url + "/v1" + "/SrvyOrder/GetSrvyOrderBySrvyOrderId";
     public static GetSrvyOrderByTrxRefNo = environment.FoundationR3Url + "/v1" + "/SrvyOrder/GetSrvyOrderByTrxRefNo";
