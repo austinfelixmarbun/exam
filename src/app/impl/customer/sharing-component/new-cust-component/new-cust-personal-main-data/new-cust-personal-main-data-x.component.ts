@@ -867,6 +867,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     tempReqObj.IsOwner = tempForm["IsOwner"];
     tempReqObj.IsSigner = tempForm["IsSigner"];
     tempReqObj.EstablishmentDt = tempForm["EstablishmentDt"];
+    tempReqObj.MrJobPositionCode = tempForm["MrJobPositionCode"];
     tempReqObj.RowVersion = CustCompanyMgmntShrholder.RowVersion;
 
     return tempReqObj
