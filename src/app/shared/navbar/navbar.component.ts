@@ -50,6 +50,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     ngOnInit() {
         this.GetListNotifH();
+        this.setUser();
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
         
         this.setUser();
