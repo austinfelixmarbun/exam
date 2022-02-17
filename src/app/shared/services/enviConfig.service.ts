@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { firstValueFrom } from "rxjs";
+import { Observable } from "rxjs";
 
 
 @Injectable()
@@ -9,14 +9,8 @@ export class EnviConfigService {
     private appConfig: any;
     constructor(private _http: HttpClient){ }
 
-    loadConfig() {
-        // return this._http.get('./assets/enviConfig.json')
-        // .toPromise()
-        // .then(res => {
-        //     this.appConfig = res;
-        // });
-
-        let temp = this._http.get('../../../assets/enviConfig.json').subscribe({
+    loadConfig(): Observable<any> {
+        this._http.get('../../../assets/enviConfig.json').subscribe({
             next: (response) => {
                 console.log(response);
                 this.appConfig = response;
@@ -27,8 +21,6 @@ export class EnviConfigService {
             }
         });;
         return this.appConfig;
-
-        // return firstValueFrom('../../assets/enviConfig.json')
     }
 
     getConfig() {
