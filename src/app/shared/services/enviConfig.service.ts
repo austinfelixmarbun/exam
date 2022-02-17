@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { firstValueFrom, Observable } from "rxjs";
 
 
 @Injectable()
@@ -9,18 +9,18 @@ export class EnviConfigService {
     private appConfig: any;
     constructor(private _http: HttpClient){ }
 
-    loadConfig(): Observable<any> {
-        this._http.get('../../../assets/enviConfig.json').subscribe({
+    loadConfig(): Observable<any>{
+         this._http.get('../../../assets/enviConfig.json').subscribe({
             next: (response) => {
-                console.log(response);
-                this.appConfig = response;
-                // use `response`
+              console.log(response);
+              this.appConfig = response;
+              // use `response`
             },
             error: (error) => {
-                // handle HTTP errors
+              // handle HTTP errors
             }
-        });;
-        return this.appConfig;
+          });;
+         return this.appConfig;
     }
 
     getConfig() {
