@@ -1,9 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ResDashboardObj } from 'app/shared/model/dashboard/res-dashboard-obj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ThingsToDoIntegrationObj, ThingsToDoIntegrationV2Obj, UcThingsToDoObj } from 'app/shared/model/library/uc-things-to-do-obj.model';
 import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
@@ -21,9 +20,10 @@ export class DashBoardComponent implements OnInit {
   officeCode: string;
   roleCode: string;
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService, private urlasd: URLConstant) { }
 
   ngOnInit() {
+    console.log(this.urlasd.asd)
     // this.Item = {Url : AdInsConstant.GetThingsToDoByRole, Module : "FOU"};
 
     // let UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));

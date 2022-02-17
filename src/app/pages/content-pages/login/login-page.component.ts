@@ -14,6 +14,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { formatDate } from '@angular/common';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-login-page',
@@ -47,7 +48,7 @@ export class LoginPageComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient, public rolePickService: RolePickService,
     private route: ActivatedRoute, private currentUserContextService: CurrentUserContextService, private cookieService: CookieService,
-    private toastr: NGXToastrService) {
+    private toastr: NGXToastrService, private url: UrlConstantNew) {
     //Ini buat check klo misal udah login jadi lgsg lempar ke tempat laennya lagi
 
     this.version = localStorage.getItem(CommonConstant.VERSION);
@@ -68,6 +69,7 @@ export class LoginPageComponent implements OnInit {
   });
   SpinnerOptions = { headers: this.SpinnerHeaders, withCredentials: true };
   async ngOnInit() {
+    console.log(this.url.LoginV2);
     if (this.token != null) {
       await this.http.post(AdInsConstant.LoginWithToken, { ModuleCode: environment.Module }, this.SpinnerOptions).toPromise().then(
         async (response) => {
@@ -103,7 +105,7 @@ export class LoginPageComponent implements OnInit {
     var requestObj = { "Username": username, "Password": password };
     //this.rolePickService.openDialog(data.returnObject);
 
-    this.http.post(AdInsConstant.LoginV2, requestObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.url.LoginV2, requestObj, AdInsConstant.SpinnerOptions).subscribe(
       async (response) => {
         if (response["StatusCode"] == CommonConstant.STATUS_CODE_USER_LOCKED) {
           this.mode = "locked";

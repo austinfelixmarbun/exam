@@ -12,4 +12,5 @@ export class UrlConstantNew{
     private url = this.urlConfig.getConfig();
 
     public GetListActiveRefMasterWithMappingCodeAll = this.env.FoundationR3Url + this.url.GetListActiveRefMasterWithMappingCodeAll;
+    public LoginV2 = this.env.FoundationR3Url + this.url.loginV2;
 }

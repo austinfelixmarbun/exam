@@ -1,10 +1,21 @@
+import { Injectable } from "@angular/core";
 import { environment } from "environments/environment";
+import { EnviConfigService } from "../services/enviConfig.service";
+import { UrlConstantService } from "../services/urlConstant.service";
 
 // URL" API di concat dengan environment url + version + api path
 // KECUALI: API" yang di pakai di UC". contoh: GetPagingObjectBySQL, DeleteFromPaging, Approval CreateNewRFA
-
+@Injectable()
 export class URLConstant {
+
+  constructor(private configEnv: EnviConfigService, private configUrl: UrlConstantService){
+
+  }
+
+    public env  = this.configEnv.getConfig();
+    public url  = this.configUrl.getConfig();
     // FRAMEWORK
+    public asd = this.env.FoundationR3Url + this.url.GetListActiveRefMasterWithMappingCodeAll;
     public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL" // UCPaging
     public static GetJournalResultPagingObjectBySQL = "/Generic/GetJournalResultPagingObjectBySQL";
 

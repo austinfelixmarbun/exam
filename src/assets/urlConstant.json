@@ -1,3 +1,4 @@
 {
-    "GetListActiveRefMasterWithMappingCodeAll": "/v1/RefMaster/GetListActiveRefMasterWithMappingCodeAll"
+    "GetListActiveRefMasterWithMappingCodeAll": "/v1/RefMaster/GetListActiveRefMasterWithMappingCodeAll",
+    "loginV2": "/v2/Authenticate/Login"
 }
